@@ -120,7 +120,7 @@ def create(s,from_confirm=False):
     deadline=time.monotonic()+65
     while True:
         es=cap();t=text(es)
-        if re.search(r'Ad account created successfully|Ad account created',t):break
+        if re.search(r'Ad account created successfully|Ad account created|The 001 ad account has been created and added to the Digital Trust business portfolio\.',t):break
         if re.search(r'Unable to add ad account|maximum number of ad accounts|Network request timed out|Error performing query|unusual activity|security check',t,re.I):raise RuntimeError('meta_error_popup')
         if time.monotonic()>deadline:raise RuntimeError('creation_outcome_not_confirmed')
         time.sleep(2)

@@ -67,9 +67,9 @@ Conta ausente ou ambígua não autoriza procurar o número em todas as contas ou
 
 ### Estado real de implementação
 
-- Já disponíveis: modos técnicos, budget da fonte, NOW, source setup/tracking, QA global e ACTIVE final padrão.
-- Pendentes: escolhas de bid_strategy/bid_amount diferentes da referência por campo de pedido. Nomenclatura completa e modelo do quiz por rota corporativa verificada estão implementados no formatter; rotas não reconhecidas bloqueiam, não são adivinhadas.
-- Salvar o padrão não instala essas pendências nem renomeia campanhas existentes. Não prometer suporte integral, não tratar campos como implementados e não executar canário por causa desta aprovação documental.
+- Já disponíveis: modos técnicos, budget da fonte, NOW, source setup/tracking, QA global, ACTIVE final padrão e delta expresso de estratégia/valor de lance pela rota comum.
+- Duplicar uma MAXVOL e pedir COCAP/BIDCAP com valor é duplicação com delta explícito: somente o alvo novo muda estratégia/cap; fonte fica intacta; nome usa a estratégia alvo. Sem delta, herdar o lance real. COCAP/BIDCAP exigem valor exato; MAXVOL limpa cap/constraints herdados no alvo e não recebe valor de lance.
+- Nomenclatura e modelo do quiz por rota corporativa verificada estão implementados; rotas não reconhecidas bloqueiam. O delta foi validado offline em `test_shein_bid_channel_rules.py`; cada execução exige readback live e isso não autoriza canário, renomeação ou alteração de campanhas existentes.
 
 ## Histórico supersedido — formulários 1.0
 
@@ -86,8 +86,8 @@ Em novos pedidos SHEIN, criar → validar todas as campanhas do pedido → ativa
 - Modo: duplicar igual; clonar com criativos novos; criar do zero.
 - Vocabulário SHEIN confirmado por Rodolfo: MAXVOL = Highest volume or value (nesta operação Add to Wishlist, volume sem cap); COCAP = Cost per result goal; BIDCAP = Bid cap. Preservar o alias COCAP literalmente no pedido humano, sem substituir por outro nome.
 - MAXVOL não exige valor de lance. COCAP exige a meta de custo por resultado e moeda; BIDCAP exige o teto de lance e moeda, que não é um custo por resultado garantido. Budget diário é um valor separado.
-- Duplicar igual herda a estratégia e o valor efetivos da fonte por API, não do nome da campanha. Se o pedido escolher outra estratégia ou outro valor, não chamar de duplicação igual nem executar silenciosamente como pure_clone.
-- O runner atual herda estratégia/valor da referência; escolher uma estratégia diferente por campo de pedido ainda não está implementado. O novo pedido humano contém esse campo aprovado, mas sua implementação técnica continua pendente.
+- Duplicar igual herda estratégia e valor efetivos por API, não pelo nome da campanha. Quando o pedido escolher outra estratégia/valor, descrever como duplicação com delta explícito, não como literalmente idêntica. A rota `pure_clone` com `bid_override=true` é a exceção SHEIN aprovada: preservar mídia/copy/público e demais campos, alterar somente o lance solicitado no alvo novo, além de numbering/tracking e outros deltas expressos.
+- O runner comum aceita `bid_strategy=MAXVOL|COCAP|BIDCAP` e `bid_usd` exato positivo para cap, convertendo USD em centavos sem arredondar. MAXVOL não usa valor de cap e limpa cap/constraints. QA/readback e pré-ativação conferem estratégia e valor/reset. Esta regra supersede a pendência histórica do override; não é campanha canário nem autorização para editar a fonte.
 
 Estes são os três modelos humanos históricos supersedidos. Validações internas de conta, compatibilidade site/idioma e evento da fonte continuam obrigatórias no preflight do Ares, mas não devem ser acrescentadas ao texto que o gestor precisa preencher.
 

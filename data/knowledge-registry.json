@@ -3020,6 +3020,66 @@
       "updated_at": "2026-10-09T00:24:33+00:00"
     },
     {
+      "canonical_key": "ares.operation.shein_us_direct.contract",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:20:24+00:00",
+      "id": "ARES-SHEIN-CHANNEL-PARTICIPANTS-CONTRACT-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN contrato vigente: solicitantes autorizados por permissoes do canal",
+      "updated_at": "2026-10-09T15:20:24+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.request-execution-parity",
+      "canonical_source": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:20:24+00:00",
+      "id": "ARES-SHEIN-CHANNEL-PARTICIPANTS-PARITY-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pipeline equivalente para participantes autorizados em cada canal SHEIN",
+      "updated_at": "2026-10-09T15:20:24+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.channel-authority",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:20:24+00:00",
+      "id": "ARES-SHEIN-CHANNEL-PERMISSION-AUTHORITY-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Participantes com permissao efetiva solicitam campanhas nas contas do canal",
+      "updated_at": "2026-10-09T15:20:24+00:00"
+    },
+    {
       "canonical_key": "ares.shein.creation-thread.1558127274073788488",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -3216,6 +3276,26 @@
       "superseded_by": null,
       "title": "SHEIN inicio omitido 00:00 proximo dia no timezone da conta",
       "updated_at": "2026-10-09T00:44:34+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.bid-strategy-change",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:20:24+00:00",
+      "id": "ARES-SHEIN-EXPLICIT-BID-DELTA-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Duplicacao SHEIN aceita delta explicito MAXVOL COCAP BIDCAP com cap exato",
+      "updated_at": "2026-10-09T15:20:24+00:00"
     },
     {
       "canonical_key": "ares.shein.flexible-media-qa-recovery",
@@ -3613,10 +3693,10 @@
       "kind": "policy",
       "owner": "ares",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-CHANNEL-PARTICIPANTS-PARITY-20261009",
       "title": "Mesmo pipeline para pedidos equivalentes de Rodolfo e seis gestores SHEIN",
-      "updated_at": "2026-10-08T02:24:49+00:00"
+      "updated_at": "2026-10-09T15:20:24+00:00"
     },
     {
       "canonical_key": "ares.shein.independent-page-catalog",
@@ -3840,10 +3920,30 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-STANDARD-REQUESTS-V3-BID-DELTA-20261009",
+      "title": "SHEIN usa três pedidos-padrão oficiais com identidade e lineage explícitas",
+      "updated_at": "2026-10-09T15:20:24+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.standard-campaign-requests",
+      "canonical_source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:20:24+00:00",
+      "id": "ARES-SHEIN-STANDARD-REQUESTS-V3-BID-DELTA-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "SHEIN usa três pedidos-padrão oficiais com identidade e lineage explícitas",
-      "updated_at": "2026-09-14T23:21:30+00:00"
+      "title": "Pedidos SHEIN v3 com delta de lance e estado offline validado",
+      "updated_at": "2026-10-09T15:20:24+00:00"
     },
     {
       "canonical_key": "ares.discord.thread.1558127160831508623.account-scope",
@@ -3932,10 +4032,10 @@
       "kind": "strategy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-CHANNEL-PARTICIPANTS-CONTRACT-20261009",
       "title": "SHEIN US direct traffic manager-channel operating contract",
-      "updated_at": "2026-09-12T02:18:24+00:00"
+      "updated_at": "2026-10-09T15:20:24+00:00"
     },
     {
       "canonical_key": "growth.shein.yolo.health-report-fastpath",
@@ -11252,5 +11352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:11:59+00:00"
+  "updated_at": "2026-10-09T15:20:24+00:00"
 }

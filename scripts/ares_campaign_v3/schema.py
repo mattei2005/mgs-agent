@@ -343,7 +343,7 @@ class CampaignSpec:
         if not isinstance(bid_override, bool):
             raise ManifestError('bid_override must be an explicit boolean')
         if bid_override:
-            if (mode not in {'pure_clone','clone_prestaged'}
+            if (mode not in {'pure_clone','clone_prestaged'} or not ads or not source_adset_id or not adset_name
                     or set(adset_updates) != {'bid_amount','bid_constraints'}
                     or adset_updates['bid_constraints'] != {}):
                 raise ManifestError('explicit bid override permits only exact bid amount and constraint reset')

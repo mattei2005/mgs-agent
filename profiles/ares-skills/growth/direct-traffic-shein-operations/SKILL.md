@@ -66,7 +66,9 @@ Conclusão: o canal continua ativo para conversas naturais de criação sem recr
 
 ## Autoridade por canal
 
-O gestor atribuído pode autorizar por pedido, somente no próprio canal e sobre suas contas/perfis:
+Por decisão vigente de Rodolfo, qualquer pessoa humana com permissão efetiva de comunicação em `shein-g001`…`shein-g006` pode solicitar e autorizar Campaign Ops no respectivo canal e nas suas threads, sobre as contas/perfis vinculados àquele canal. O gestor titular identifica a partição das contas, não o único solicitante permitido. Geizian não deve ser recusado por ser nominalmente G002 quando tem permissão no canal da conta. A regra é `SHEIN-US-DIRECT.json#/channel_authorization_policy`; validar ID real do remetente, canal pai, permissões efetivas e origem da thread, nunca display name, mera presença na thread ou flag fornecida no pedido. O runner usa `shein_channel_authority` read-only e relê a autorização antes da criação/ativação; não altera o cadastro global de usuários nem permissões Discord.
+
+Dentro desse recorte, continuam disponíveis por pedido explícito:
 
 - criar, duplicar e clonar campanhas;
 - pedir relatórios e organizar threads;
@@ -77,7 +79,7 @@ O gestor atribuído pode autorizar por pedido, somente no próprio canal e sobre
 
 Budget não exige uma segunda aprovação de Rodolfo dentro desse escopo, mas exige valor e moeda exatos, pre-read do estado atual, menor write possível e GET/readback.
 
-Continuam fora da delegação: billing, `account_spend_limit`, credenciais, ownership, permissões de app, pixel/CAPI estrutural, WordPress, quiz, SMS Funnel, ChatPion, acesso cruzado entre gestores e automação recorrente sem política própria.
+Continuam fora da delegação: billing, `account_spend_limit`, credenciais, ownership, permissões de app, pixel/CAPI estrutural, WordPress, quiz, SMS Funnel, ChatPion, contas/perfis fora da partição do canal de origem e automação recorrente sem política própria. O fato de o solicitante ter outro código de gestor não é acesso cruzado quando a conta pertence ao canal do pedido.
 
 Conclusão: solicitante, canal, conta e ação estão dentro da mesma faixa de autoridade.
 
@@ -120,6 +122,14 @@ fonte de clone         campanha/conta exatas quando houver
 Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Nos modelos visíveis ao gestor, apresente domínio e idioma juntos em uma única linha no formato exato `Site/idioma: dominio.com - EN|ES`. Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
 
 Conclusão: o manifest pode ser materializado sem inventar campos.
+
+## Estratégia de lance e delta explícito
+
+Use os aliases exatos MAXVOL → `LOWEST_COST_WITHOUT_CAP`, COCAP → `COST_CAP`, BIDCAP → `LOWEST_COST_WITH_BID_CAP`. MAXVOL prioriza volume Add to Wishlist nesta operação, não otimização por valor/ROAS. COCAP é meta de custo médio por resultado, não CPA máximo garantido. BIDCAP é teto de lance por leilão, não teto de CPA. Orçamento, custo por resultado e lance são campos distintos.
+
+“Duplicar a MAXVOL e trocar para COCAP com bid X” é duplicação com delta explícito: preservar mídia, copy, público e demais configurações não alteradas; aplicar estratégia e cap somente ao alvo novo; manter a fonte intacta. Sem delta, herdar estratégia e valor reais da API. Pedir somente o valor/moeda ausente que bloqueia COCAP/BIDCAP; MAXVOL não recebe valor de cap e limpa o cap herdado no alvo. O alias do nome novo vem da estratégia resolvida do alvo, nunca do rótulo da fonte. Dropdown aberto/hover não comprova seleção salva.
+
+Na rota comum, materializar `bid_strategy` com o alias e `bid_usd` com decimal USD exato, conforme a moeda live. O compiler converte em unidades menores, marca `bid_override=true` e limita `adset_updates` exclusivamente a `bid_amount` + reset de `bid_constraints`. Esse delta SHEIN usa o mesmo Engine v3, sem writer paralelo. QA/readback e pré-ativação comparam estratégia e valor/reset; alteração de targeting ou outro campo não cabe na exceção. Implementação validada offline; serving e aceitação Meta de cada pedido exigem o readback live daquele pedido, sem canário implícito.
 
 ## Criação, duplicação e clone
 

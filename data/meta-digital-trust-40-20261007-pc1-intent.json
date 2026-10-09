@@ -1,7 +1,7 @@
 {
   "request_id": "meta-digital-trust-40-1557475850310393879",
   "seq": 29,
-  "status": "submitted_unconfirmed",
+  "status": "confirmed_popup",
   "at": "2026-10-09T15:15:55.733984+00:00",
   "backend": "pc1_native",
   "business_id": "155263197283282",
@@ -10,5 +10,26 @@
     "timezone": "America/Los_Angeles",
     "currency": "USD",
     "usage": "My business"
-  }
+  },
+  "result": {
+    "kind": "created_confirmation",
+    "confirmation": "meta_success_popup",
+    "backend": "pc1_native",
+    "evidence_screenshot": "/root/.hermes/profiles/zeus/cache/images/computer_use_8b855f9d14c9406abb5227142cb4cc7f.png",
+    "account": {
+      "id": "2357329635103368",
+      "selected_asset_id": "120256243295890321",
+      "owner": "Digital Trust",
+      "owner_verified": true,
+      "assigned_people": null,
+      "rodolfo_full_access": null,
+      "people_readback": "unverified",
+      "name": "001",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "usage": "My business",
+      "payment_method_added": false
+    }
+  },
+  "recovery": "visible_success_popup_and_exact_account_id_readback_no_replayed_create"
 }
