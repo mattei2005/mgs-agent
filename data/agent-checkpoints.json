@@ -4901,6 +4901,16 @@
       "updated_at": "2026-09-23T16:45:24+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-g005-c88-cocap060-budget75-1791559741",
+      "next_step": "Obter autorizacao de horario atual/futuro. Recovery somente na camada de shell/anuncios ausentes, pelos mesmos IDs e Engine v3: CBO exige bid_strategy COST_CAP junto com adset_bid_amounts mapping {120250166908140331:60} na campanha; nao definir estrategia no adset. Nao editar runner nem criar writer paralelo no hot path. Reconciliar capacidades do executor/owner antes de retomar; QA de midia e readback completos antes de ativar.",
+      "objective": "Duplicar C88 uma vez em Yolokfx-US-SHEIN-EN-03-G005, USD75/dia, COST_CAP USD0.60, 09/10/2026 11:30 ET",
+      "source": "data/ares/meta-ads/state/shein-campaigns/single-clone/shein-g005-c88-cocap060-budget75-1791559741/state.json",
+      "state": "recovery_pending: campaign 120250166906720331 e adset 120250166908140331 confirmados paused; zero ads. atualizacao de shell rejeitada com meta100/1885924 e 1885742; budget real ainda usd50 herdado, lance maxvol. fonte c88 intacta. inicio humano 11:30 venceu durante execucao; nao alterar para now sem autorizacao. request/manifest/ids preservados.",
+      "thread_id": "1558126286826774711",
+      "updated_at": "2026-10-09T15:31:44+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-growpowerhub-escalatepower-v2v3-1556503439406534777",
       "next_step": "Operação normal: utilizar sh2-g001..g006 e sh3-g001..g006 em cada domínio; não criar V1 ou alterar REC sem novo pedido.",
@@ -5412,5 +5422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:24:56+00:00"
+  "updated_at": "2026-10-09T15:31:44+00:00"
 }

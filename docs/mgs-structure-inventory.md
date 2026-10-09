@@ -7,6 +7,12 @@
 
 ---
 
+## Atualização operacional — thread de relatórios YOLO G002 retirada (2026-10-09)
+
+- Pedido explícito de Rodolfo na thread `1557274000680288307`: deletar somente `1558138059344576593` (`Yolokfx Conta 01 Intraday`, pai G002 `1548149300826079333`). DELETE 200 e GET posterior 404 confirmados.
+- Rota retirada em `context/ares-operational-map.md`; registro de escopo anterior supersedido por `ARES-THREAD-1558138059344576593-DELETED-BY-RODOLFO`. Histórico canônico preservado; não recriar/publicar na thread. Rodolfo criará o canal substituto; ID ainda não informado.
+- Evidência: `data/ares/discord/thread-deletions/1558138059344576593.json`. Sem novo canal, alterações Meta, gateway, cron ou permissões Discord; nenhum job do profile Ares aponta para o ID retirado.
+
 ## Atualização operacional — SHEIN lance e autorização por canal (2026-10-09)
 
 - Autoridade: Rodolfo, confirmação explícita na thread `1557274000680288307`; nenhum pedido de campanha ou replay autorizado nesta mudança.

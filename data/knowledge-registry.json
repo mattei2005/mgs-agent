@@ -4062,15 +4062,33 @@
         "zeus"
       ],
       "domain": "growth",
+      "effective_at": "2026-10-09T15:30:32+00:00",
+      "id": "ARES-THREAD-1558138059344576593-DELETED-BY-RODOLFO",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread de relatorios Yolokfx G002 deletada por Rodolfo; destino retirado sem substituto",
+      "updated_at": "2026-10-09T15:30:32+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558138059344576593.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
       "effective_at": "2026-10-09T15:25:17+00:00",
       "id": "ARES-THREAD-1558138059344576593-REPORTING-SCOPE",
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-THREAD-1558138059344576593-DELETED-BY-RODOLFO",
       "title": "Thread exclusiva de relatorios Yolokfx-US-SHEIN-EN-01-G002",
-      "updated_at": "2026-10-09T15:25:17+00:00"
+      "updated_at": "2026-10-09T15:30:32+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.yolo-g001.reporting.health-layout",
@@ -11388,5 +11406,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:25:17+00:00"
+  "updated_at": "2026-10-09T15:30:32+00:00"
 }
