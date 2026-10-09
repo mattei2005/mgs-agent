@@ -489,7 +489,7 @@ def _prepare(request, config, common, token):
     raw = _batch(common, token, [
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
-        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
+        {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     if len(sets) != 1 or not 1 <= len(ads) <= 5:
@@ -584,7 +584,7 @@ def _readback(common, token, campaign_id):
     live = _batch(common, token, [
         {'name': 'campaign', 'path': campaign_id, 'params': {'fields': 'id,account_id,name,status,effective_status,daily_budget,bid_strategy,start_time'}},
         {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
-        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,url_tags}', 'limit': 50}}])
+        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags}', 'limit': 50}}])
     for key in ['adsets', 'ads']:
         _complete_edge(live[key])
     return live

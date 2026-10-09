@@ -44,12 +44,13 @@ def full_creative(creative, story, tags, name, degrees):
 
 def creative_body(payload):
     if payload.get('asset_feed_spec') or payload.get('object_story_spec'):
-        return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_spec','asset_feed_spec','url_tags','degrees_of_freedom_spec','media_sourcing_spec'] if k in payload}
-    return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_id','url_tags','degrees_of_freedom_spec'] if k in payload}
+        return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_spec','asset_feed_spec','url_tags','degrees_of_freedom_spec','media_sourcing_spec','contextual_multi_ads'] if k in payload}
+    return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_id','url_tags','degrees_of_freedom_spec','contextual_multi_ads'] if k in payload}
 
 
 def matches(actual, expected):
     if str(actual.get('url_tags') or '') != str(expected.get('url_tags') or ''):return False
+    if 'contextual_multi_ads' in expected and actual.get('contextual_multi_ads') != expected['contextual_multi_ads']:return False
     if expected.get('object_story_spec') and not expected.get('asset_feed_spec'):
         def semantic_story(value):
             out=stable(value)
@@ -119,4 +120,5 @@ def definition_creative(creative, story, tags, name):
     if feed:result['asset_feed_spec']=feed
     if degrees:result['degrees_of_freedom_spec']=degrees
     if creative.get('media_sourcing_spec'):result['media_sourcing_spec']=strip_output(copy.deepcopy(creative['media_sourcing_spec']))
+    if creative.get('contextual_multi_ads') is not None:result['contextual_multi_ads']=copy.deepcopy(creative['contextual_multi_ads'])
     return result

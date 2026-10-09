@@ -85,6 +85,11 @@ def _build_one(request, source, number, account_config):
         name += f' COPY C{sn}'
     elif request.get('product_label'):
         name = f'{number} - {request["product_label"]} - US-{p["language"]} ({new}) {start:%d/%m} event_add_to_wishlist'
+    naming = account_config.get('shein_naming') or {}
+    if naming.get('enabled') is True:
+        from .shein_naming import product_label, campaign_name
+        chosen_product = request.get('product_label') if mode != 'pure_clone' and request.get('product_label') else product_label(campaign['name'])
+        name = campaign_name(number, start.isoformat(), p['timezone'], p['destination_base'], chosen_product, campaign['bid_strategy'], new, naming)
     source_ads = sorted(source['ads'], key=lambda a: str(a.get('name', '')))
     if not 1 <= len(source_ads) <= 5:
         raise ValueError('source requires 1..5 ads')
