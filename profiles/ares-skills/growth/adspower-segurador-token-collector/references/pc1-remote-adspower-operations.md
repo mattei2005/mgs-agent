@@ -46,6 +46,16 @@ The named pipe, SSH, AdsPower MCP, CDP/WebSocket endpoints, and Local API must n
 - Opening a profile authorizes only the visible operation requested. Do not infer authorization to close profiles, edit profile configuration, extract cookies, generate tokens, change Meta assets, or alter campaign state.
 - A request from a user is still limited by that user's active Ares permission scope and the MGS Critical Subset.
 
+## AdsPower request queue — single active task
+
+For every AdsPower operation, including inventory, opening, inspection and GUI input, check the shared PC1 lease and the live/resumable AdsPower requests before starting. A browser being open alone does not prove another agent task is running; conversely a gap between tool calls does not mean a running task has finished.
+
+If an earlier authorized request is running or already queued for the resource, preserve the new request in `data/agent-checkpoints.json` with `state=waiting_resource`, its original source/thread, exact scope, queue dependency and next action. Do not start a second AdsPower task, bypass a live lease, spawn parallel profile workers, or retry the contested action. Resume the next queued request only after readback confirms the predecessor finished or was explicitly released/cancelled and the shared lease is free. Future scheduled tasks outside their execution window and historical completed checkpoints are not active resource owners.
+
+Process multi-profile audits sequentially and preserve profile IDs plus partial results for resume. After an uncertain open, re-read active state before any second launch. Never close user-owned or audit-opened profiles unless closure is explicitly authorized. Opening successfully and reaching Facebook are separate checks; verify Account Status before claiming absence of visible restrictions, and do not interpret notifications being disabled as an account restriction.
+
+The existing cross-agent lease prevents simultaneous inputs; the request checkpoint queue preserves whole-task ordering. Do not claim a new automatic global scheduler was installed merely because this operating rule was persisted. If enforcement requires shared infrastructure changes, route that separately to Zeus instead of altering production transport/config during an audit.
+
 ## Mandatory cross-agent lease
 
 Zeus and Ares share one physical desktop. Concurrent inputs can click or type into the wrong window. Acquire the PC1 lease before the first `computer_use` input and release it after the last validation.

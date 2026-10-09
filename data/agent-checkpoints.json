@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
-      "next_step": "Revalidar candidatos atuais e auditar sequencialmente, sem alterar ou fechar perfis; se recurso ocupado colocar request em waiting_resource e retomar somente apos liberar",
-      "objective": "Auditar abertura e restricoes visiveis dos perfis BACKUP nos grupos SHEIN; serializar todos os usos AdsPower",
-      "source": "discord:1558159385694576661; /root/.hermes/profiles/ares/cache/scratch/adspower-shein-profiles.json",
-      "state": "preflight: nenhuma lease de outra tarefa ativa; 25 candidatos por inventario anterior; mcp inventario e status falharam por timeout; ssh e computer use doctor saudaveis; fallback gui sob lease unica",
+      "next_step": "Auditar 15 IDs ainda nao iniciados, revisar inconclusivos sem relancar Active, reconciliar 25 e reportar apenas problemas reais ou falhas de verificacao",
+      "objective": "Abrir todos os 25 BACKUP SHEIN e reportar somente os problemas, conforme reforco de Rodolfo",
+      "source": "/root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
+      "state": "running_resumed: rodolfo pediu abrir todos e somente reportar problemas; nenhuma lease concorrente; preservar 10 abertos; proximos abrem sem restaurar abas antigas para limitar carga, sem fechamento ou alteracoes de perfil/credencial",
       "thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T17:10:10+00:00"
+      "updated_at": "2026-10-09T17:58:26+00:00"
     },
     {
       "agent": "ares",
@@ -5492,5 +5492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T17:22:19+00:00"
+  "updated_at": "2026-10-09T17:58:26+00:00"
 }

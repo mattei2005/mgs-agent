@@ -745,6 +745,31 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-auto-push-ares-pc1-reference-1558180018130255893",
+      "agent": "zeus",
+      "type": "script-test-guardrail-recovery",
+      "source_alert_id": "1558180018130255893",
+      "status": "tested_pending_native_flush",
+      "paths": [
+        "/root/mgs-agent/scripts/auto-commit-watcher.sh",
+        "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
+        "/root/mgs-agent/data/auto-push-monitor.json"
+      ],
+      "reason": "False positive on reviewed Ares PC1 queue reference due to token in parent directory. One exact path exception; global sensitive regex unchanged. No Ares skill or credential modified.",
+      "validation": {
+        "guard_tests_passed": 3,
+        "pending_files_scanned": 12,
+        "secret_or_unclassified_hits": 0,
+        "benign_authorization_source_id_hits": 8,
+        "canonical_mirror_equal": true,
+        "bash_syntax": "PASS",
+        "diff_check": "PASS",
+        "concurrent_origin": "Knowledge registry ARES-ADSPOWER-SINGLE-TASK-QUEUE-1558159385694576661; canonical and mirror identical. Excluded historical snapshot deletions remain untouched."
+      },
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1558180018130255893",
+      "report_infra_status": "pending_validation"
+    },
+    {
       "id": "ares-shein-self-recovery-1558157403021643967",
       "agent": "ares",
       "type": "campaign-recovery-maintenance",
@@ -44374,8 +44399,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 12034,
-      "modified_at": "2026-10-06T21:43:27-04:00"
+      "size_bytes": 12364,
+      "modified_at": "2026-10-09T14:17:19-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",

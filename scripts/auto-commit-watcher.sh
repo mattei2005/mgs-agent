@@ -35,6 +35,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/zeus-skills/gr
 # This exact documentation path contains no credential; sibling paths stay blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/ares-skills/growth/adspower-segurador-token-collector/SKILL\.md$"
 
+# Reviewed Ares PC1 queue documentation; canonical/mirror parity and secret scan
+# validated. Exact reference only; no other Ares skill or token path is exempt.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/ares-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations\.md$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

@@ -35,6 +35,24 @@
       "updated_at": "2026-10-08T14:22:31+00:00"
     },
     {
+      "canonical_key": "growth.adspower.request-serialization",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth.adspower",
+      "effective_at": "2026-10-09T17:33:38+00:00",
+      "id": "ARES-ADSPOWER-SINGLE-TASK-QUEUE-1558159385694576661",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "AdsPower: uma tarefa ativa, fila para pedidos concorrentes",
+      "updated_at": "2026-10-09T17:33:38+00:00"
+    },
+    {
       "canonical_key": "ares.strategy-family.chatpion-bot-messenger.credential-page-model",
       "canonical_source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
       "consumers": [
@@ -11497,5 +11515,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T16:58:58+00:00"
+  "updated_at": "2026-10-09T17:33:38+00:00"
 }
