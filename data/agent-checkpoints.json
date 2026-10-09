@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
-      "next_step": "Informar Zeus da nova autorizacao de fechamento total e regra max5; apos readback de recuperacao/release, reconciliar e fechar todas instancias AdsPower via close+poll Inactive; iniciar pass novo preservando historico, lotes max5 com close verificado antes do proximo; reportar somente problemas da nova verificacao",
-      "objective": "Fechar todas as instancias AdsPower, reauditar 25 BACKUP SHEIN em lotes de ate cinco e reportar somente problemas",
-      "source": "discord:1558159385694576661; /root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
-      "state": "waiting_resource: rodolfo autorizou fechar todas as instancias e reiniciar verificacao; nova regra global max5 por lote registrada; lease zeus recovery identificada e respeitada; nenhum novo open/close realizado pelo ares nesta retomada",
+      "next_step": "Aguardar Zeus confirmar recuperacao/release; fechar instancias remanescentes autorizadas com GET Inactive; refrescar BACKUP em grupos SHEIN; iniciar novo pass sem resultados antigos, lotes <=5 com fechamento/drain antes do proximo; concluir contagem e publicar somente problemas",
+      "objective": "Fechar todas instancias AdsPower e reauditar BACKUP SHEIN em lotes max5, somente problemas",
+      "source": "discord:1558159385694576661; discord:1558189820960964669:1558194826422386749; /root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
+      "state": "waiting_resource: nova autoridade rodolfo fechar todas instancias + regra global max5 aplicada; handoff zeus 1558194826422386749 get confirmado; report-infra 1558194828301574165 get confirmado; skill/registry readback e testes 5x5 pass; nenhum novo open/close concorrente",
       "thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T19:06:23+00:00"
+      "updated_at": "2026-10-09T19:10:27+00:00"
     },
     {
       "agent": "ares",
@@ -5522,5 +5522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T19:06:47+00:00"
+  "updated_at": "2026-10-09T19:10:27+00:00"
 }

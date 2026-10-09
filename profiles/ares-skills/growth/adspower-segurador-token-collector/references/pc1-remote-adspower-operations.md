@@ -58,6 +58,16 @@ On shared host memory pressure, `Page Unresponsive`, Local API connection refusa
 
 The existing cross-agent lease prevents simultaneous inputs; the request checkpoint queue preserves whole-task ordering. Do not claim a new automatic global scheduler was installed merely because this operating rule was persisted. If enforcement requires shared infrastructure changes, route that separately to Zeus instead of altering production transport/config during an audit.
 
+## Batch lifecycle — maximum five simultaneous profiles
+
+Rodolfo's active rule applies to every kind of AdsPower request that requires opening more than five profiles, not just SHEIN audits. Process sequential batches of at most **five** profiles. Five is a concurrency ceiling, not five concurrent workers: keep profile actions sequential under the single-task resource queue.
+
+Before opening a batch, read current active instances and reconcile ownership. Do not open a sixth instance for the task. Account for pre-existing open profiles in the PC1 capacity ceiling; preserve user-owned or another task's instances and queue/coordinate instead of closing them without authority. Opening fewer than five is allowed when memory or responsiveness requires it.
+
+Inspect every profile in the batch, persist safe per-profile results, then close the task-owned batch as part of this explicitly approved batch lifecycle. Verify each closure with `get-browser-active` until `Inactive`/`Closed`, and require the previous batch drained before opening the next. Do not clear cache, reset sessions, change proxies/fingerprints/credentials, or force-kill uncertain instances as a substitute for verified closure. A failed closure blocks progression to the next batch and requires scoped recovery.
+
+An explicit request to close **all** current AdsPower instances authorizes that cleanup for that request after confirming no other agent task is operating them; it is not permission to close unrelated Chrome windows or to restart a gateway. If another authorized task is using PC1, queue the cleanup and send the new closure authority to that task's owner; do not bypass the lease. Start a fresh audit pass after cleanup, preserve prior results as historical, and derive the final problems-only report from the new pass with all targets accounted for.
+
 ## Mandatory cross-agent lease
 
 Zeus and Ares share one physical desktop. Concurrent inputs can click or type into the wrong window. Acquire the PC1 lease before the first `computer_use` input and release it after the last validation.
