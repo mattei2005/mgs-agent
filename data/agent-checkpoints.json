@@ -483,12 +483,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C45M-2X-20261008-0900",
-      "next_step": "One-shot 08/10 09:04 SP revalida fonte e slots, executa bundle puro v3 C46M/C47M e confirma igualdade/ACTIVE por GET; recovery missing-only; nenhum outro cron retomado",
-      "objective": "Duplicar C45M igual para C46M/C47M 2x e ativar imediatamente em 08/10 09:04 no horário da conta",
-      "source": "discord:thread:1539832402744975450;data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json;cron:f20eeb23e4ad",
-      "state": "scheduled_verified: rodolfo aprovou 09:04 e c46m/c47m; meta atual confirmou c45m active usd58.06 e c46 antiga deleted, nenhum alvo vivo; job one-shot enabled/local e prompt account-scoped confirmado; budget herdado live no momento; audit global pré/pós sem conflito operacional",
+      "next_step": "Concluído; acompanhar D1 canônico, sem cron novo, replay ou handoff.",
+      "objective": "Duplicar C45M para C46M/C47M: conclusão recuperada nos mesmos IDs",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c46m-c47m-activate-d1-20261009-rodolfo.json",
+      "state": "complete_activated: tarefa originalmente agendada foi recuperada no mesmo request. meta final confirmou active em duas campanhas, dois conjuntos e seis anúncios; novos creative ids preservam posts/afs/utms, 12 vídeos reconciliados e d1 operacional 09/10 registrado. budgets usd58.06/dia preservados.",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-07T23:47:19+00:00"
+      "updated_at": "2026-10-09T16:47:57+00:00"
     },
     {
       "agent": "zeus",
@@ -3843,22 +3843,22 @@
     {
       "agent": "ares",
       "id": "cpv13-c45m-2x-immediate-20261008-0900-rodolfo",
-      "next_step": "Zeus/Rodolfo: autorizar correção estrutural central para recuperação de creative dinâmico preservando post e tracking; retomar o mesmo request e IDs, sem recopiar shells. Validar parity antes de ativar.",
-      "objective": "Duplicar C45M exatamente duas vezes em C46M/C47M e ativar imediatamente, preservando post, vídeos, copy e settings",
+      "next_step": "Concluído; monitorar novo D1. Checkpoint anterior de bloqueio supersedido por readback real.",
+      "objective": "Duplicação C45M para C46M/C47M, recuperada nos mesmos IDs",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
-      "state": "postprocess_pending: central engine criou c46m/c47m paused; qa live confirmou perda do asset_feed_spec de vídeos/variantes e contextual_multi_ads não exposto; ativação vetada, fonte intacta. ids e checkpoint preservados.",
+      "state": "complete_activated: recovery foreground pelo ares sob continuação de rodolfo; mesmos campaign/adset/ad ids, seis creatives reparados preservam posts, afs e utms; pai e filhos active por get; novo d1 09/10 pelo request cpv13-c46m-c47m-activate-d1-20261009-rodolfo.",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-08T12:14:10+00:00"
+      "updated_at": "2026-10-09T16:46:28+00:00"
     },
     {
       "agent": "ares",
       "id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-      "next_step": "Corrigir preservação post+AFS no executor central fora do hot path, regressão offline, manifest repair selado e recovery missing-only; QA live, ativação e commit D1.",
-      "objective": "Corrigir a camada de creative das C46M/C47M existentes, ativar e iniciar novo D1 operacional",
+      "next_step": "Monitorar D1 pelos relatórios e ações canônicos; nenhum replay ou rearm de first-delivery.",
+      "objective": "Ativar C46M/C47M e reiniciar D1 operacional com budgets preservados",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c46m-c47m-activate-d1-20261009-rodolfo.json",
-      "state": "recovery_required; campanhas sem writes novos; rodolfo vetou encaminhamento ao zeus e determinou recuperação foreground pelo ares. validação meta normal adcreative validate_only passou ao adicionar is_default/use_existing_post ao fallback afs; nenhum id criado. execução de campanha suspensa durante manutenção técnica separada do executor central.",
+      "state": "complete_activated: meta get confirmou duas campanhas active, dois conjuntos e seis anúncios configurados active; usd58.06/dia cada; d1 09/10 sp, histórico preservado e checkpoints matinais vazios. reparo central completou seis creatives com mesmos posts, vídeos/variantes/utms; 12/12 primeiros frames pixel-idênticos. três linhagens e seis usos conciliados; sem zeus handoff.",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-09T16:28:22+00:00"
+      "updated_at": "2026-10-09T16:46:28+00:00"
     },
     {
       "agent": "zeus",
@@ -4463,12 +4463,12 @@
     {
       "agent": "zeus",
       "id": "meta-digital-trust-40-1557475850310393879",
-      "next_step": "Cron script-only executa uma conta por 30min ate40, avisos30/35/40. Proximo tick11:57 ET, manter PC1 ligado e Chrome autenticado. Erro Meta/auth/intent sem confirmacao para imediatamente sem repetir; targetguard evita41.",
-      "objective": "Concluir mesmo lote de 40 contas Digital Trust, uma por 30 minutos, sem pagamento",
-      "source": "discord:1544113212075548683;message:1558127924660539525;state:/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json;runner:/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
-      "state": "retomado no pc1 por autorizacao 1558127924660539525. 29/40 confirmadas; conta29 2357329635103368 asset120256243295890321: popup sucesso + id/owner live. conta1969322040402478 excluida da contagem. backend nativo canario validado e preflight completo details/usage/confirm pass sem writes; titulo de popup ausente em ax corrigido com corpo exato, sem replay. cron ad67a766690d 88/105 habilitado, mesmo schedule27/57; proxima criacao11:57 et. primeiro tick natural pc1 ainda pendente; pc1/chrome preservados e lease liberada.",
+      "next_step": "À primeira janela2026-10-10T00:03:20-04:00, wrapper canônico cria no máximo1 e valida popup/ID/owner; manter30min e parar40. Primeiro tick mutante após correção pendente.",
+      "objective": "Concluir exatamente40 contas001 na Digital Trust155263197283282, sem billing/permissões novas, a cada30min; retomar à meia-noite ET autorizada1558155693205364737.",
+      "source": "discord:1544113212075548683:1558155693205364737",
+      "state": "31/40 confirmadas; seq31popup foi persistido antes de timeout240s; id1067159546089745/owner live reconciliados sem replay. criação suspensa até2026-10-10t00:00-04:00, primeira janela00:03+20s;03/33 primeiro par sem conflitos operacionais,7 baselines inevitáveis. transportepc1480/lease600, preflight completopass0writes; gates23:59:59/00:02:59passsem browser/stdout e hashinalterado. alvo/defaults/ids/exclusões preservados.",
       "thread_id": "1544113212075548683",
-      "updated_at": "2026-10-09T15:43:05+00:00"
+      "updated_at": "2026-10-09T16:47:27+00:00"
     },
     {
       "agent": "zeus",
@@ -4919,6 +4919,16 @@
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
       "updated_at": "2026-10-08T10:32:28+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-1558157403021643967",
+      "next_step": "Zeus corrigir paginacao/recovery central; GET primeiro e retomada mesmo request/IDs somente camada faltante; QA integral e bid/budget/tracking/readback antes de ativacao",
+      "objective": "Duplicar C112 duas vezes Yolokfx-US-SHEIN-EN-01-G002 USD75/dia cada COCAP0.80 inicio NOW09/10; fonte intacta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1558157403021643967/state.json",
+      "state": "recovery_escalated_to_zeus: c130/c131 shells e6ads persistidos; 4/6 creatives confirmados; falha100/1487390 nos slots1.2/2.2; retomada bloqueada invalid creative inventory pagination; sem ativacao concluida",
+      "thread_id": "1557917403822956698",
+      "updated_at": "2026-10-09T16:50:08+00:00"
     },
     {
       "agent": "zeus",
@@ -5462,5 +5472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T16:28:22+00:00"
+  "updated_at": "2026-10-09T16:50:08+00:00"
 }

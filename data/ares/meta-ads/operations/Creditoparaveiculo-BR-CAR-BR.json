@@ -2858,7 +2858,7 @@
         "C46M",
         "C47M"
       ],
-      "state": "SCHEDULED",
+      "state": "complete_activated",
       "scheduled_for": "2026-10-08T09:04:00-03:00",
       "authorized_by": "Rodolfo Mattei",
       "authorization_source": "discord:thread:1539832402744975450",
@@ -2868,7 +2868,10 @@
       "cron_job_id": "f20eeb23e4ad",
       "deliver": "local",
       "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
-      "override_scope": "this request only; do not resume recurring creation/other holds"
+      "override_scope": "this request only; do not resume recurring creation/other holds",
+      "resolved_by_request": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
+      "operational_d1_start_date": "2026-10-09",
+      "post_write_readback": true
     },
     "cpv13-c46m-c47m-activate-d1-20261009-rodolfo": {
       "request_id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",

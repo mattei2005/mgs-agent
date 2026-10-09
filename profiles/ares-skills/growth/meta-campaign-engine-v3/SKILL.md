@@ -46,6 +46,7 @@ State/lanes      /root/mgs-agent/data/ares/meta-ads/engine-v3/state/
 2. Contrato do manifest e comandos → `references/manifest-and-commands.md`.
 3. Migração e rollback v2→v3 → `references/migration-v2-to-v3.md`.
 4. Pesquisa da Meta → `references/official-meta-sources.md`.
+5. Recuperar post existente com vídeos/variantes AFS → `references/existing-post-afs-recovery.md`.
 
 Carregue somente a referência do branch atual.
 

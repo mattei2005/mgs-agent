@@ -41900,7 +41900,7 @@
       "business_id": "155263197283282",
       "request_id": "meta-digital-trust-40-1557475850310393879",
       "target": 40,
-      "status": "in_progress_pc1_native_29_of_40",
+      "status": "scheduled_midnight_pc1_31_of_40",
       "state_path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
       "scripts": [
         "/root/mgs-agent/scripts/meta-digital-trust-create-one.js",
@@ -41911,31 +41911,34 @@
       "backup": "/root/mgs-agent/backups/meta40-1557475850310393879",
       "cron": {
         "id": "ad67a766690d",
-        "schedule": "27,57 * * * *",
+        "schedule": "3,33 * * * *",
         "cadence_minutes": 30,
-        "repeat": 105,
+        "repeat": 126,
         "no_agent": true,
-        "deliver": "discord:1544113212075548683"
+        "deliver": "discord:1544113212075548683",
+        "enabled": true
       },
       "validation": {
         "reauth_totp": "PASS",
         "identity": "Rodolfo Mattei via /me",
         "preflight": "PASS",
         "predue_gate_zero_stdout_unchanged_state": "PASS",
-        "eight_day_schedule_audit": "PASS",
-        "old_batch_unchanged": true
+        "eight_day_schedule_audit": "PASS03/33 no operational conflicts,7 baseline overlaps",
+        "old_batch_unchanged": true,
+        "midnight_gate": "PASS235959 and000259 no browser/write/stdout"
       },
       "skill_updated": "meta-ads-api-operations/references/meta-business-ad-account-browser-creation.md",
       "report_infra_pending": false,
-      "updated_at": "2026-10-09T11:43:05.982900-04:00",
-      "confirmed_created": 29,
-      "remaining": 11,
+      "updated_at": "2026-10-09T12:48:19.148590-04:00",
+      "confirmed_created": 31,
+      "remaining": 9,
       "latest_recovery": {
-        "at": "2026-10-09T11:43:05.982900-04:00",
-        "authorization_message_id": "1558127924660539525",
-        "result": "pc1_resume_canary_validated",
-        "created": 29,
-        "remaining": 11
+        "at": "2026-10-09T12:48:19.148590-04:00",
+        "authorization_message_id": "1558155693205364737",
+        "result": "midnight_reschedule_timeout_reconciled",
+        "created": 31,
+        "remaining": 9,
+        "new_meta_writes": 0
       },
       "report_infra": {
         "message_id": "1557482695888732232",
@@ -41956,13 +41959,13 @@
       },
       "reconciliation_pending": null,
       "last_recovery_report": {
-        "message_id": "1558143006081548361",
+        "message_id": "1558159287451127830",
         "channel_id": "1498132022634483894",
         "readback": true,
         "content_empty": true
       },
-      "next_due_at": "2026-10-09T11:57:00-04:00",
-      "resume_authorization_message_id": "1558127924660539525",
+      "next_due_at": "2026-10-10T00:03:00-04:00",
+      "resume_authorization_message_id": "1558155693205364737",
       "excluded_live_account_ids": [
         "1109191818427759",
         "1969322040402478"
@@ -41995,9 +41998,36 @@
         "meta_writes_in_preflight": 0,
         "synthetic_regressions": 4,
         "eight_day_schedule_audit": "PASS",
-        "first_natural_pc1_tick": "pending",
+        "first_natural_pc1_tick": "seq30 popup+ID/owner confirmed; first post-timeout-fix mutation pending",
         "shared_lease": "released",
-        "backup": "/root/mgs-agent/backups/meta-digital-trust-pc1-resume-20261009T111304"
+        "backup": "/root/mgs-agent/backups/meta-digital-trust-pc1-resume-20261009T111304",
+        "native_transport_timeout_seconds": 480,
+        "lease_seconds": 600,
+        "replay_guard": "PASS receipt31 no write; submitted_unconfirmed blocked",
+        "backups": "/root/mgs-agent/backups/meta40-midnight-20261009T124101"
+      },
+      "not_before": "2026-10-10T00:00:00-04:00",
+      "artifact_readback": {
+        "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py": {
+          "size_bytes": 14706,
+          "sha256": "a81ce0b5743f73995ff9b03e3526d937d3a73699fa1cd5ee9abe3368fda68654",
+          "modified_at": "2026-10-09T12:48:19.148590-04:00"
+        },
+        "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py": {
+          "size_bytes": 11133,
+          "sha256": "19701ba58905e01e1b21392539fcbc1ac3538881e85b42bc4f697a3905e1ed15",
+          "modified_at": "2026-10-09T12:48:19.148590-04:00"
+        },
+        "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json": {
+          "size_bytes": 30583,
+          "sha256": "0db527837e2d2bbb27f3c82a719a4971c8b0fb52c92ed50904a05a5f8eab76d4",
+          "modified_at": "2026-10-09T12:48:19.148590-04:00"
+        },
+        "/root/mgs-agent/data/meta-digital-trust-40-20261007-pc1-intent.json": {
+          "size_bytes": 1484,
+          "sha256": "fee5331a01f026a957bece73f5e45542ab90e9953edbfbfd3d2b0dae9b98c08c",
+          "modified_at": "2026-10-09T12:48:19.148590-04:00"
+        }
       }
     },
     {
@@ -44588,13 +44618,15 @@
     },
     {
       "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
-      "size_bytes": 14456,
-      "modified_at": "2026-10-09T11:36:15-04:00"
+      "size_bytes": 14706,
+      "modified_at": "2026-10-09T12:48:19.148590-04:00",
+      "sha256": "a81ce0b5743f73995ff9b03e3526d937d3a73699fa1cd5ee9abe3368fda68654"
     },
     {
       "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
       "size_bytes": 11133,
-      "modified_at": "2026-10-09T11:27:24-04:00"
+      "modified_at": "2026-10-09T12:48:19.148590-04:00",
+      "sha256": "19701ba58905e01e1b21392539fcbc1ac3538881e85b42bc4f697a3905e1ed15"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-adspower-warming-support.py",
@@ -48757,9 +48789,10 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-pc1-intent.json",
-      "size_bytes": 1053,
+      "size_bytes": 1484,
       "md5": "07ead168969036c6cef1cd1679e6b68a",
-      "modified_at": "2026-10-09T12:01:33-04:00"
+      "modified_at": "2026-10-09T12:48:19.148590-04:00",
+      "sha256": "fee5331a01f026a957bece73f5e45542ab90e9953edbfbfd3d2b0dae9b98c08c"
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-schedule-post.json",
@@ -48775,9 +48808,10 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
-      "size_bytes": 29046,
+      "size_bytes": 30583,
       "md5": "bdbeb6e2761f1647869a5153916aa06f",
-      "modified_at": "2026-10-09T12:01:39-04:00"
+      "modified_at": "2026-10-09T12:48:19.148590-04:00",
+      "sha256": "0db527837e2d2bbb27f3c82a719a4971c8b0fb52c92ed50904a05a5f8eab76d4"
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-cadence30-20260906-cron-postwrite.json",

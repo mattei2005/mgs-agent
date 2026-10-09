@@ -79,7 +79,7 @@ def run_node(preflight: bool = False) -> dict:
     if preflight:
         command.append('--preflight')
     # Native SSH/AX calls plus best-effort readback exceed the old browser budget.
-    # Keep this bounded below the PC1 lease and scheduler's 600-second limit.
+    # Keep this bounded below the PC1 lease's 600-second limit.
     timeout_seconds = 480 if route_state.get('execution_backend') == 'pc1_native' else 240
     result = subprocess.run(command, capture_output=True, text=True, timeout=timeout_seconds, env=load_env())
     lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
