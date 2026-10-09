@@ -42507,6 +42507,28 @@
       "report_infra_readback": true,
       "report_infra_status": "sent_verified",
       "manager_closure_message_id": "1558148161661567057"
+    },
+    {
+      "id": "SHEIN-REPORT-GATEWAY-1558252008467734678",
+      "agent": "zeus",
+      "authority_message_id": "1558252008467734678",
+      "source_thread_id": "1557274000680288307",
+      "path": "/root/mgs-agent/data/discord-shein-report-gateway-routing.json",
+      "paths": [
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/mgs-agent/scripts/mgs-shein-report-gateway-routing.py",
+        "/root/mgs-agent/scripts/mgs-shein-report-routing-closure.py"
+      ],
+      "purpose": "Scoped Ares response routing for six SHEIN report channels and 36 Intraday threads; no campaign/cron/credential/whitelist change",
+      "status": "configured_restart_pending",
+      "updated_at": "2026-10-09T23:00:53.019462+00:00",
+      "validation": {
+        "mentionless_thread_gate_tests": 36,
+        "unknown_channel_rejected": true,
+        "zeus_mention_gate_preserved": true,
+        "account_routes": 36
+      }
     }
   ],
   "profile_skill_references": [
