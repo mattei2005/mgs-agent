@@ -1643,32 +1643,32 @@
     {
       "agent": "ares",
       "id": "SHEIN-G002-1557917403822956698-C104-Q5",
-      "next_step": "Concluido. Preservar IDs/estado; nenhuma nova criacao ou reativacao sem novo pedido.",
-      "objective": "Duplicar C104 cinco vezes com USD50/dia em Yolokfx-US-SHEIN-EN-01-G002",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-g002-1557917403822956698-c104-q5-20261008-224955/state.json",
-      "state": "complete_future_active: c125-c129, 5 campanhas e 10 anuncios active; usd50 cada, delta usd250/dia; inicio 09/10/2026 00:00 eastern; qa semantico midia multi advertiser completo. validador naming antigo corrigido somente na conta exata; posts novos; flags opcionais de sugestao normalizadas pela meta.",
+      "next_step": "Usar checkpointSHEIN-G002-C120-C129-0400-20261009-RODOLFO e mapa final de novos IDs. Nenhuma acao pendente.",
+      "objective": "Lote C125-C129 original substituido por pedido Rodolfo de inicio04:00",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/reschedule-c120-c129-20261009-0400/final-verification.json",
+      "state": "superseded_by_reschedule: ids originais deleted; cinco substitutas125-129 active para09/10 04:00 eastern usd50/dia cada, fonte104. historico inicial preservado; nao retomar request antigo.",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-10-09T02:57:56+00:00"
+      "updated_at": "2026-10-09T04:15:22+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-G002-1557917403822956698-C67-Q5",
-      "next_step": "Manter budget/inicio/status atuais; comunicado1557936707947602012 confirmado. Novos pedidos naming canonico e contextual multi ads obrigatório; sem nova criacao. Camposforaescopo intactos.",
-      "objective": "Lote C120-C124 corrigido nomenclatura e Multi advertiser source parity",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/rename-multi-advertiser-c120-c124-20261008/completion-verification.json",
-      "state": "corrected_all_five_ten_ads_verified_communicated",
+      "next_step": "Usar checkpointSHEIN-G002-C120-C129-0400-20261009-RODOLFO e mapa final de novos IDs. Nenhuma acao pendente.",
+      "objective": "Lote C120-C124 original substituido por pedido Rodolfo de inicio04:00",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/reschedule-c120-c129-20261009-0400/final-verification.json",
+      "state": "superseded_by_reschedule: ids originais deleted; cinco substitutas120-124 active para09/10 04:00 eastern usd50/dia cada, fonte67. historico inicial preservado; nao retomar request antigo.",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-10-09T02:13:37+00:00"
+      "updated_at": "2026-10-09T04:15:22+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-G002-C120-C129-0400-20261009-RODOLFO",
-      "next_step": "Validar update start_time no adset existente; se permitido aplicar, readback e habilitar para novo horario; se rejeitado executar fallback autorizado via Engine v3",
-      "objective": "Inicio C120-C129 em 09/10 04:00 Eastern mantendo USD50 cada; alterar existentes primeiro, replacement somente se necessario",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-g002-c120-c129-0400-20261009-rodolfo.json",
-      "state": "autorizacao explicita rodolfo; preflight meta confirmou 10 paused usd50 e sem insights de hoje; ids congelados; preferencia por update minima",
+      "next_step": "Concluido e validado. Nao retomar criacoes antigas nem reativar IDs deletados; novos IDs e auditoria final sao a continuidade atual.",
+      "objective": "C120-C129 substituidas para iniciar09/10 04:00 Eastern, USD50/dia cada",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/reschedule-c120-c129-20261009-0400/final-verification.json",
+      "state": "complete_replaced_future_active: update rejeitado100/1487057; 10 antigas deleted por get; 10 substitutas active para04:00, numeros120-129 preservados,20ads,usd500/dia lote,qa completo das10 paused antes de ativacao,zero duplicidade viva; fontes67 e104 preservadas; sem mudanca de budget/estrategia",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-10-09T04:06:28+00:00"
+      "updated_at": "2026-10-09T04:14:57+00:00"
     },
     {
       "agent": "zeus",
@@ -5382,5 +5382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T04:07:42+00:00"
+  "updated_at": "2026-10-09T04:15:22+00:00"
 }
