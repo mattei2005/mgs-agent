@@ -3128,6 +3128,60 @@
       "updated_at": "2026-10-09T15:08:02+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.thread.1558134405313200150.creation-scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T15:10:39+00:00",
+      "id": "ARES-SHEIN-CREATION-SCOPE-1558134405313200150",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva para criação Escalatepower-US-SHEIN-EN-06-G006",
+      "updated_at": "2026-10-09T15:10:39+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.creation-thread.1558134489748611163",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:10:59+00:00",
+      "id": "ARES-SHEIN-CREATION-SCOPE-1558134489748611163",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva para criação Growpowerhub-US-SHEIN-EN-06-G006",
+      "updated_at": "2026-10-09T15:10:59+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.creation-thread.1558134653242703935",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:11:30+00:00",
+      "id": "ARES-SHEIN-CREATION-SCOPE-1558134653242703935",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva para criação Vizioid-US-SHEIN-EN-06-G006",
+      "updated_at": "2026-10-09T15:11:30+00:00"
+    },
+    {
       "canonical_key": "ares.shein.request-default-final-status",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -3512,6 +3566,25 @@
       "updated_at": "2026-10-09T14:38:44+00:00"
     },
     {
+      "canonical_key": "ares.shein.thread.1558134703565967394.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558134703565967394.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:11:59+00:00",
+      "id": "ARES-SHEIN-G006-MAVROA06-CREATION-SCOPE-1558134703565967394",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criação Mavroa-US-SHEIN-ES-06-G006",
+      "updated_at": "2026-10-09T15:11:59+00:00"
+    },
+    {
       "canonical_key": "ares.shein.g002.single-clone-route",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
       "consumers": [
@@ -3790,6 +3863,24 @@
       "superseded_by": null,
       "title": "Thread Escalatepower G003 exclusiva para criação de campanhas da conta 03",
       "updated_at": "2026-10-09T14:41:54+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.thread.1558134359557415045.creation-scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:10:28+00:00",
+      "id": "ARES-SHEIN-THREAD-1558134359557415045-CREATION-SCOPE",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva para criação Boostingecon-US-SHEIN-ES-06-G006",
+      "updated_at": "2026-10-09T15:10:28+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.engine",
@@ -11072,6 +11163,24 @@
       "updated_at": "2026-10-05T03:48:43+00:00"
     },
     {
+      "canonical_key": "discord.thread.1558134300325716050.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:10:17+00:00",
+      "id": "shein-thread-1558134300325716050-creation",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva: Yolokfx-US-SHEIN-EN-02-G006 criação",
+      "updated_at": "2026-10-09T15:10:17+00:00"
+    },
+    {
       "canonical_key": "acquisition.direct_shein.yolokfx.landings",
       "canonical_source": "context/acquisition.md",
       "consumers": [
@@ -11143,5 +11252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:08:48+00:00"
+  "updated_at": "2026-10-09T15:11:59+00:00"
 }

@@ -8,17 +8,17 @@
   "authorization_source_thread_id": "1557274000680288307",
   "authorization_source_message_id": "1557563792328626179",
   "rule": "Equivalent authorized SHEIN campaign requests use the same skills, route, shared Engine v3, deterministic adapter, guards, recovery and readback regardless of requester. There is no Rodolfo-only fast lane.",
-  "manager_scope": "G001-G006: each canonical assigned manager only in their own parent channel and on their own catalog-bound accounts; exact sender ID and parent channel are mandatory runtime metadata",
+  "manager_scope": "G001-G006: exact sender with verified effective permission in the account-bound canonical parent channel and originating thread; no titular-manager-only check. Account/profile remains within that channel partition. Policy: SHEIN-US-DIRECT.json#/channel_authorization_policy.",
   "rodolfo_scope": "Authorized global SHEIN requests; same executor and validation pipeline",
   "supported_intents": [
     "from_zero_prestaged",
     "clone_prestaged",
     "pure_clone"
   ],
-  "delivery_status": "Explicit request PAUSED or ACTIVE with explicit valid schedule; never infer activation",
+  "delivery_status": "Resolve by SHEIN-US-DIRECT.json#/request_defaults; explicit PAUSED/schedule/NOW override defaults; QA barrier required.",
   "material_input_differences": "New media processing, empty accounts without approved Page/pixel/destination/copy, live account restrictions, quota and missing asset eligibility remain real prerequisites, not requester-dependent procedures.",
   "prohibited_changes": [
-    "cross-manager fallback",
+    "account/profile outside origin channel partition",
     "billing",
     "account_spend_limit",
     "credential mutation",

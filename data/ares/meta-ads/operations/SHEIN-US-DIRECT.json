@@ -17,7 +17,7 @@
     "budget_authority": {
       "manager_may_define_or_change_campaign_budget": true,
       "required_controls": [
-        "explicit request from the assigned manager in their own SHEIN channel",
+        "explicit request from a live-permission-authorized human in the account-bound SHEIN channel/thread",
         "exact budget and currency",
         "live Meta account and current-budget pre-read",
         "smallest scoped write",
@@ -43,11 +43,12 @@
       "app permission changes",
       "pixel or CAPI structural changes",
       "WordPress, quiz, SMS Funnel or ChatPion configuration",
-      "cross-manager account access",
+      "accounts/profiles outside the request channel partition",
       "automatic recurring optimization without a separately approved policy"
     ],
-    "scope": "the assigned manager may request and authorize Campaign Ops for their own SHEIN channel, accounts and advertiser profiles",
-    "standing_campaign_authority": true
+    "scope": "Any human with verified communication permissions in a listed SHEIN parent channel or its originating thread may request and authorize Campaign Ops on that channel-bound accounts/profiles; manager_code identifies the account partition, not the only allowed requester.",
+    "standing_campaign_authority": true,
+    "channel_authorization_policy": "SHEIN-US-DIRECT.json#/channel_authorization_policy"
   },
   "authorization_source": "discord:thread:1548151961499734066",
   "authorized_at_et": "2026-09-11",
@@ -74,6 +75,21 @@
       "meaning": "auction bid ceiling, not cost-per-result guarantee",
       "bid_value_required": true
     }
+  },
+  "bid_strategy_change_policy": {
+    "approved_by": "344196393512075265",
+    "source_thread_id": "1557274000680288307",
+    "scope": "new targets from SHEIN duplicate/clone/create requests; never mutate source",
+    "default": "inherit actual source strategy and bid when no delta was requested",
+    "explicit_delta": "requested MAXVOL/COCAP/BIDCAP and exact cap override only the new target; preserve all other configuration except canonical numbering/tracking and other explicit deltas",
+    "COCAP": "COST_CAP; target average cost per result; exact positive cap required",
+    "BIDCAP": "LOWEST_COST_WITH_BID_CAP; auction bid ceiling; exact positive cap required",
+    "MAXVOL": "LOWEST_COST_WITHOUT_CAP; no cap; clear inherited target bid and constraints",
+    "currency": "live ad-account currency USD verified by preflight",
+    "naming": "derive alias from the resolved target bid_strategy, not the source label",
+    "readback": "strategy and exact cap/reset required before QA/activation",
+    "implementation": "ares_campaign_v3.shein_general.bid_delta + shared Engine v3",
+    "validation_status": "OFFLINE_REGRESSION_PASSED; no Meta canary authorized"
   },
   "campaign_event_policy": {
     "campaign_objective": "OUTCOME_SALES",
@@ -244,6 +260,25 @@
     "purpose": "general SHEIN-US-DIRECT coordination, shared questions and common rules; campaign writes remain manager/account-scoped",
     "source_thread": "discord:thread:1549404994816708690",
     "status": "ACTIVE"
+  },
+  "channel_authorization_policy": {
+    "enabled": true,
+    "approved_by": "344196393512075265",
+    "source_thread_id": "1557274000680288307",
+    "channel_ids": [
+      "1548149087206121613",
+      "1548149300826079333",
+      "1548149483039236137",
+      "1548149654926135486",
+      "1548150015275438220",
+      "1548150155184701440"
+    ],
+    "eligibility": "human sender with live effective communication permission in the canonical parent channel and actual originating thread",
+    "account_scope": "account and advertiser profile bound to the channel; requester need not be the assigned manager",
+    "global_user_registry_mutated": false,
+    "other_agents_and_channels_unchanged": true,
+    "verification": "exact sender ID, guild/channel/parent identities, roles and member overwrites; private thread membership; refresh before creation and activation",
+    "implementation": "ares_campaign_v3.shein_channel_authority"
   },
   "manager_channels": [
     {
@@ -429,9 +464,7 @@
     "status": "ACTIVE_DOCUMENT_APPROVED_RUNTIME_PARTIAL",
     "version": "3.0",
     "supersedes_version": "2.0",
-    "runtime_pending": [
-      "bid_strategy_and_amount_override"
-    ],
+    "runtime_pending": [],
     "title": "Suba essa campanha",
     "human_fields": [
       "Conta",
@@ -454,7 +487,8 @@
       "new_drive_media": "clone_prestaged",
       "from_zero": "explicit initial phrase required"
     },
-    "quiz_destination": "inherit actual source URL; no new quiz setup"
+    "quiz_destination": "inherit actual source URL; no new quiz setup",
+    "bid_override_implementation": "shein_general.bid_delta; shared v3 bid-only delta; offline-tested, live readback mandatory"
   },
   "operation_id": "SHEIN-US-DIRECT",
   "recovery": {

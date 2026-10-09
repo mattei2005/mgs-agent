@@ -237,7 +237,7 @@ class CampaignEngine:
         for index, campaign_id in enumerate(campaign_ids, 1):
             operations.extend([
                 BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
-                BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_strategy,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50", kind="readback"),
+                BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_constraints,bid_strategy,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50", kind="readback"),
                 BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,effective_object_story_id}}&limit=50", kind="readback"),
             ])
         return operations
@@ -1284,7 +1284,7 @@ class CampaignEngine:
         adset_reads = self._batch(bundle, transport, [
             BatchOperation(
                 f"recovery_adsets_{ci}", "GET",
-                f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time&limit=50",
+                f"{campaign_id}/adsets?fields=id,name,bid_amount,bid_constraints,bid_strategy,status,effective_status,configured_status,start_time&limit=50",
                 kind="readback",
             )
             for ci, campaign_id in enumerate(resolved_campaign_ids, 1)

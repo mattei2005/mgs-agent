@@ -204,6 +204,34 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Boostingecon Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134359557415045`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-06-G006`, gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134405313200150`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-06-G006` (`1498990138663094` no catálogo SHEIN), gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134489748611163`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-06-G006`, gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Vizioid Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134653242703935`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Vizioid-US-SHEIN-EN-06-G006` (`869857549542755` no catálogo SHEIN), gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura; o catálogo não prova acesso ou saúde atuais.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.

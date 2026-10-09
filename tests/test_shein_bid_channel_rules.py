@@ -79,15 +79,21 @@ class BidDeltaTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);p=prevalidate_payload(p,MediaRegistry(root/'media.json'))
             config={'enabled':True,'write_enabled':True,'accounts':{a['shein_profile']['account_id']:a},'state_root':str(root/'state'),'audit_root':str(root/'audit')}
-            transports=[]
+            transports=[];operations=[]
+            class Capture(FakeBatchTransport):
+                def execute(self, ops, stage):
+                    operations.extend(ops)
+                    return super().execute(ops,stage)
             def factory(aid):
-                t=FakeBatchTransport(aid);transports.append(t);return t
+                t=Capture(aid);transports.append(t);return t
             engine=CampaignEngine(config,transport_factory=factory);m=Manifest.from_dict(p)
             plan=engine.dry_run(m)
             result=engine.execute(m)
             self.assertEqual(result['status'],'COMPLETE_PAUSED')
             self.assertEqual(result['campaign_ids'],engine.execute(m)['campaign_ids'])
-            self.assertIn('125',str(plan))
+            self.assertTrue(any(op.kind=='adset_update' and op.body.get('bid_amount')=='125' for op in operations))
+            self.assertEqual(plan['writes'],0)
+            self.assertEqual(sum(op.kind=='campaign_copy' for op in operations),1)
 
     def test_request_accepts_explicit_bid_fields(self):
         r,_,_,_=case(4);r.update(bid_strategy='COCAP',bid_usd='1.25')

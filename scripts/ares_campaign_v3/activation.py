@@ -65,7 +65,17 @@ def validate_live(live, expected, spec):
             for field in ['name','adset_id','source_ad_id','promoted_object']:
                 if row.get(field)!=original.get(field):raise ValueError('activation child ownership/lineage/identity drift')
             if row.get('issues_info'):raise ValueError('activation child has platform issues')
-            if kind=='adsets' and not same_time(row['start_time'],spec.start_time):raise ValueError('activation adset schedule drift')
+            if kind=='adsets':
+                if not same_time(row['start_time'],spec.start_time):raise ValueError('activation adset schedule drift')
+                for field in ['bid_amount','bid_constraints']:
+                    if field in original:
+                        observed = str(row.get(field) or '0') if field=='bid_amount' else row.get(field) or {}
+                        previous = str(original[field] or '0') if field=='bid_amount' else original[field] or {}
+                        if observed != previous:raise ValueError('activation adset bid drift')
+                if spec.bid_override:
+                    if (str(row.get('bid_amount') or '0') != spec.adset_updates['bid_amount']
+                            or (row.get('bid_constraints') or {}) != spec.adset_updates['bid_constraints']):
+                        raise ValueError('activation requested bid delta mismatch')
             if kind=='ads':
                 cr=row.get('creative') or {};ocr=original.get('creative') or {}
                 for field in ['id','object_story_id','effective_object_story_id','url_tags','contextual_multi_ads']:
@@ -80,7 +90,7 @@ def validate_live(live, expected, spec):
 
 def read_tree(engine,bundle,transport,cid,stage):
     operations=[BatchOperation('campaign','GET',cid+'?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time',kind='readback'),
-        BatchOperation('adsets','GET',cid+'/adsets?fields=id,name,status,configured_status,start_time,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50',kind='readback'),
+        BatchOperation('adsets','GET',cid+'/adsets?fields=id,name,bid_amount,bid_constraints,bid_strategy,status,configured_status,start_time,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50',kind='readback'),
         BatchOperation('ads','GET',cid+'/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags}&limit=50',kind='readback')]
     rows=engine._batch(bundle,transport,operations,stage)
     if len(rows)!=3 or any(r.code!=200 for r in rows):raise ValueError('activation readback incomplete')

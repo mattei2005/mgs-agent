@@ -599,7 +599,7 @@ def _engine_tree(config, request_id, campaign_id):
 def _readback(common, token, campaign_id):
     live = _batch(common, token, [
         {'name': 'campaign', 'path': campaign_id, 'params': {'fields': 'id,account_id,name,status,effective_status,daily_budget,bid_strategy,start_time'}},
-        {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
+        {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,bid_amount,bid_constraints,bid_strategy,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
         {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags}', 'limit': 50}}])
     for key in ['adsets', 'ads']:
         _complete_edge(live[key])
