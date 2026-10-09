@@ -20442,6 +20442,33 @@
       }
     },
     {
+      "id": "finance-quotes-recovery-1557980239546552380",
+      "agent": "zeus",
+      "type": "finance_quote_monitor_recovery",
+      "status": "recovered_verified",
+      "updated_at": "2026-10-09T05:06:32.809864+00:00",
+      "source_alert_id": "1557980239546552380",
+      "job_id": "685397627b29",
+      "authorization": "Rodolfo authorized safe recovery of alerts-infra failures; existing provisional FX collection scope",
+      "evidence_path": "/root/mgs-agent/reports/finance-quotes-recovery-1557980239546552380.json",
+      "scope": {
+        "canonical_wrapper_retry": true,
+        "production_code_changed": false,
+        "cron_changed": false,
+        "google_writes": 0,
+        "quote_sync_ok": true,
+        "consecutive_failures": 0,
+        "alert_open": false,
+        "fixed_rates_preserved": true,
+        "non_fx_inputs_preserved": true,
+        "ledger_preserved": true,
+        "history_preserved": true,
+        "database_audit_ids": ["3514", "3515"],
+        "python_tests_passed": 6,
+        "node_tests_passed": 4
+      }
+    },
+    {
       "id": "finance-account-links-1546752274989191230",
       "agent": "zeus",
       "authorization_message_ids": [
