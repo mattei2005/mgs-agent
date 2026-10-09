@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-GEIZIAN-AUTHORITY-FIX-1558217596346835120",
-      "next_step": "Zeus auditoria independente e refresh seguro/verificacao dos seis prompts no processo apos turno, sem self-restart Ares dentro da sessao",
+      "next_step": "Sem pendência. Zeus validou independentemente a correção, 167 testes, live Meta e refresh Ares-only. prompt_pin do turno real G002 corresponde ao YAML normalizado; autoridade SHEIN e late_recovery_review consumidos; não repetir criação/ativação.",
       "objective": "Corrigir bloqueio de autoridade SHEIN Geizian e validar retomada C007 sem nova copia",
-      "source": "data/ares/meta-ads/audit/shein/geizian-authority-1558217596346835120/verification-final.json;discord:message:1558231052504408150",
-      "state": "campanha e permissao corrigidas, 167 testes pass, c007/conjunto/2ads active; seis prompts confirmados em disco/restante config intacto; adapter usa snapshot config.extra, refresh runtime nao declarado validado",
+      "source": "data/ares/meta-ads/audit/shein/zeus-geizian-authority-1558231569976787076/final-closure.json;data/ares/meta-ads/audit/shein/geizian-authority-1558217596346835120/verification-final.json",
+      "state": "completed",
       "thread_id": "1558159785843499109",
-      "updated_at": "2026-10-09T21:35:18+00:00"
+      "updated_at": "2026-10-09T21:53:06+00:00"
     },
     {
       "agent": "ares",
@@ -5542,5 +5542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T21:52:08+00:00"
+  "updated_at": "2026-10-09T21:53:06+00:00"
 }
