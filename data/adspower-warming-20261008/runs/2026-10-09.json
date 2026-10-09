@@ -19,7 +19,17 @@
         {
           "post_url": "https://www.facebook.com/photo/?fbid=3110062139197914",
           "intent_at": "2026-10-09T09:35:48.409311-04:00",
-          "status": "intended"
+          "status": "confirmed",
+          "confirmed_at": "2026-10-09T09:38:11.329566-04:00",
+          "evidence": "Remove Like on exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10243969233187916",
+          "intent_at": "2026-10-09T09:38:36.593037-04:00",
+          "status": "confirmed",
+          "selection_reason": "Dog birthday, everyday pet post",
+          "confirmed_at": "2026-10-09T09:39:45.843785-04:00",
+          "evidence": "Remove Like exact fbid"
         }
       ],
       "comments": [],
@@ -81,5 +91,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-09T09:35:48.409326-04:00"
+  "updated_at": "2026-10-09T09:39:45.843808-04:00"
 }
