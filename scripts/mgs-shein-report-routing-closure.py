@@ -114,14 +114,16 @@ def run(args):
             raise RuntimeError('safe restart finalizer failed, exit=' + str(cp.returncode))
         pid = subprocess.check_output(['systemctl', 'show', 'ares-gateway', '-p', 'MainPID', '--value'], text=True).strip()
         assert pid.isdigit() and int(pid) > 0
-        env = dict(row.split(b'=', 1) for row in Path('/proc/' + pid + '/environ').read_bytes().split(b'\0') if b'=' in row)
-        active_channels = set(env.get(b'DISCORD_ALLOWED_CHANNELS', b'').decode().split(','))
-        assert set(state['channels']) <= active_channels, 'live allowed channel env not activated'
+        # /proc/PID/environ is the initial exec environment, not Python's later
+        # YAML->env bridge. Do not mistake absence there for a failed activation.
+        before, after, routes = routing.load_plan()
+        assert before == after
+        assert set(state['channels']) <= set(before['discord']['allowed_channels'].split(','))
         # Verify exact target access with the Ares credential, not just Zeus.
         for route in state['routes']:
             ch = api('ares', '/channels/' + route['thread_id'])
             assert ch['parent_id'] == route['channel_id'] and not ch['thread_metadata']['archived']
-        state['live_validation'] = dict(pid=int(pid), active_allowed_channels=6, ares_thread_readbacks=36, **evidence)
+        state['live_validation'] = dict(pid=int(pid), configured_channels=6, ares_thread_readbacks=36, **evidence)
         # Bounded technical smoke, never replay a campaign command or add authority.
         text = '<@' + ARES + '> Verificação técnica Zeus autorizada por Rodolfo (1558252008467734678): o roteamento desta thread foi corrigido. A mensagem humana 1558251056868102207 dizia que ele vai elaborar a configuração Intraday. Leia essa mensagem e apenas reconheça aqui que está acompanhando e aguardando as regras dele. Não configure relatório, cron, campanhas ou outros writes neste teste. Responda normalmente nesta thread; não mencione Zeus.'
         test = post(TEST_THREAD, text, reply_to='1558251056868102207', allowed_mentions={'parse': [], 'users': [ARES], 'replied_user': False})
