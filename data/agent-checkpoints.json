@@ -1092,6 +1092,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-BID-CHANNEL-RULES-20261009",
+      "next_step": "Persistir regras, reconciliar guards e validar offline; nenhum canario Meta autorizado.",
+      "objective": "Aplicar regras aprovadas de lance e solicitantes autorizados nos seis canais SHEIN",
+      "source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "contrato e skill identificados; runtime restringe solicitante ao gestor titular e override de lance consta pendente. sem writes meta.",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-09T15:05:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-CLOSURE-1557950769817452645",
       "next_step": "Responsavel pela execucao existente valida todas as pendencias e publica somente entao o fechamento nesta thread. Preservar mesmos requests e IDs; nao iniciar nova execucao por este encaminhamento.",
       "objective": "Registrar destino do fechamento da execucao existente conforme encaminhamento Zeus do pedido Rodolfo",
@@ -5402,5 +5412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T14:29:28+00:00"
+  "updated_at": "2026-10-09T15:05:32+00:00"
 }
