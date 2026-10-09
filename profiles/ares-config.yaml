@@ -1119,7 +1119,7 @@ approvals:
   mode: 'off'
   timeout: 60
   cron_mode: deny
-  mcp_reload_confirm: true
+  mcp_reload_confirm: false
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
