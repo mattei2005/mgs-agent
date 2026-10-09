@@ -35,33 +35,6 @@ def schedule_matches(expected, observed):
     return bool(preserved and str(expected)==approved and b==datetime.fromisoformat(preserved).astimezone(timezone.utc) and 0 <= (b-a).total_seconds() <= 1)
 
 
-def _late_review_context(account_id):
-    operation=json.loads((BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
-    profiles=json.loads((BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
-    return operation, copy.deepcopy(profiles[str(account_id)])
-
-
-def _authorize_late_reviewer(descriptor, original, reviewer):
-    # CEO review remains valid; channel delegates use the same live authority as activation.
-    if reviewer == '344196393512075265':
-        return {'sender_id':reviewer,'source':'executive_review_message'}
-    operation,profile=_late_review_context(descriptor['account_id'])
-    policy=operation.get('channel_authorization_policy') or {}
-    late_policy=policy.get('late_recovery_review') or {}
-    if (operation.get('operation_id')!='SHEIN-US-DIRECT' or policy.get('enabled') is not True
-            or policy.get('approved_by')!='344196393512075265' or late_policy.get('enabled') is not True
-            or str(profile.get('channel_id')) not in policy.get('channel_ids',[])):
-        raise ValueError('approved SHEIN late recovery authority unavailable')
-    if str(descriptor['recovery_review_thread_id']) != str(original['source_thread_id']):
-        raise ValueError('delegated late review must originate in the original account thread/channel')
-    profile['channel_authorization_policy']=policy
-    review_request={**original,'authorized_by':reviewer}
-    from .shein_general import authorize
-    authorize(review_request,profile,force=True)
-    return {'sender_id':reviewer,'parent_channel_id':original['source_channel_id'],
-            'origin_id':original['source_thread_id'],'source':'live_discord_effective_permissions'}
-
-
 def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
     from .shein_channel_authority import _get
     get_message = get_message or _get
