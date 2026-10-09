@@ -207,7 +207,8 @@ def main() -> int:
             account_id = str(account.get('id') or '')
             asset_id = str(account.get('selected_asset_id') or '')
             known = set(state.get('preexisting_ids', [])) | {str(x.get('id')) for x in state.get('completed', []) if x.get('id')}
-            identity_verified = bool(account_id.isdigit() and len(account_id) >= 10 and asset_id and account_id not in known)
+            native_id_readback = result.get('backend') == 'pc1_native' and account.get('owner_verified') is True
+            identity_verified = bool(account_id.isdigit() and len(account_id) >= 10 and (asset_id or native_id_readback) and account_id not in known)
             if not identity_verified:
                 account_id = ''
                 account['id'] = None
