@@ -239,7 +239,11 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura; o catálogo não prova acesso ou saúde atuais.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
-### Escopo exclusivo — Yolokfx Conta 01 G002 Relatórios
+### Destino retirado — Yolokfx Conta 01 G002 Relatórios
+
+- **RETIRADO / THREAD DELETADA:** Rodolfo solicitou a exclusão da thread `1558138059344576593` na conversa `1557274000680288307` para substituir a organização de relatórios por um canal normal que ele criará. DELETE Discord confirmado por GET posterior HTTP 404; título anterior `Yolokfx Conta 01 Intraday`, pai `shein-g002` (`1548149300826079333`).
+- Não publicar nem recriar essa thread como destino de relatórios. Novo canal/destino ainda não foi fornecido: não inferir ID, criar canal, migrar histórico nem ativar automação por essa declaração. Campanhas, conta, canal pai e thread de criação permanecem inalterados.
+- Evidência: `data/ares/discord/thread-deletions/1558138059344576593.json`. A definição abaixo fica preservada apenas como histórico supersedido, não como rota ativa.
 
 - Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558138059344576593`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para relatórios de campanhas da conta `Yolokfx-US-SHEIN-EN-01-G002`, gestor Geizian/G002.
 - O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem substitui a thread de criação da mesma conta. Não incluir outras contas nem executar criação, clone ou otimização nesta conversa.

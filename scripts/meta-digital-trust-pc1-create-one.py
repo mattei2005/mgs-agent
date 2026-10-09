@@ -81,16 +81,10 @@ def navigate():
         time.sleep(2)
     return es
 
-def preflight():
-    navigate();click('Add');click('Create a new ad account','DataItem')
-    es=cap();t=text(es)
-    if 'maximum number of ad accounts' in t.lower():raise RuntimeError('maximum_account_gate')
-    match(es,'Ad account name','Edit')
-    if not any(e['role']=='ComboBox' and e['label'].startswith('Time zone ') for e in es):raise RuntimeError('details_form_mismatch')
-    click('Cancel')
-    return {'kind':'preflight_ok','business_id':'155263197283282','business_name':'Digital Trust','create_form':True,'maximum_gate':False,'backend':'pc1_native','meta_writes':0}
+def preflight(s):
+    return create(s,dry_run=True)
 
-def create(s,from_confirm=False):
+def create(s,from_confirm=False,dry_run=False):
     global mutation
     if intent_path.exists():
         old=json.loads(intent_path.read_text())
@@ -115,6 +109,10 @@ def create(s,from_confirm=False):
     if not any(e['label']=='001' and e['role']=='Text' for e in es):raise RuntimeError('confirmation_name_missing')
     terms=[e for e in es if e['role']=='CheckBox']
     if len(terms)!=1 or 'Meta Commercial Terms' not in t:raise RuntimeError('terms_scope_mismatch')
+    if dry_run:
+        evidence=last_capture.get('screenshot_path')
+        navigate()
+        return {'kind':'preflight_ok','business_id':'155263197283282','business_name':'Digital Trust','create_form':True,'confirmation_stage':True,'defaults_verified':s['account_defaults'],'maximum_gate':False,'backend':'pc1_native','meta_writes':0,'evidence_screenshot':evidence}
     click(terms[0]['label'],'CheckBox')
     match(cap(),'Create ad account','Button')
     # Intent reaches durable storage BEFORE the only non-idempotent action.
@@ -166,7 +164,7 @@ def main():
         matches=[w for w in ws if 'chrome' in str(w.get('app_name','')).lower() and 'Meta Business Suite' in str(w.get('title','')) and not w.get('minimized')]
         if len(matches)!=1:raise RuntimeError('visible_meta_chrome_nonunique')
         pid=matches[0]['pid'];wid=matches[0]['window_id']
-        return preflight() if a.preflight else create(s,a.from_confirm)
+        return preflight(s) if a.preflight else create(s,a.from_confirm)
     except Exception as e:
         return {'kind':'blocked' if mutation else 'failed_prewrite_or_validation','reason':str(e)[:180],'side_effect':'unknown' if mutation else 'none'}
     finally:
