@@ -361,7 +361,7 @@
   },
   "campaign_naming_policy": {
     "status": "APPROVED_DOCUMENT_PENDING_RUNTIME",
-    "format": "DATA - Nº CAMPANHA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist",
+    "format": "Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist",
     "date": "configured start date DD/MM in ad-account timezone",
     "quiz_versions": [
       "v1",
@@ -384,8 +384,10 @@
     "source_thread_id": "1557274000680288307",
     "runtime_pending": [
       "quiz_version_url_mapping",
-      "date_first_campaign_number_parser"
-    ]
+      "number_date_quiz_bid_naming_generator"
+    ],
+    "version": "3.0",
+    "supersedes_format": "DATA - Nº CAMPANHA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist"
   },
   "request_templates": {
     "approved_at_et": "2026-09-14T19:19:25-04:00",
@@ -402,7 +404,7 @@
     "supersedes_version": "2.0",
     "runtime_pending": [
       "quiz_version_url_mapping",
-      "date_first_campaign_number_parser",
+      "number_date_quiz_bid_naming_generator",
       "bid_strategy_and_amount_override"
     ],
     "title": "Suba essa campanha",
