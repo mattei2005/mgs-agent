@@ -3881,6 +3881,16 @@
       "updated_at": "2026-10-09T16:46:28+00:00"
     },
     {
+      "agent": "ares",
+      "id": "cpv13-d1-provenance-report-recovery-20261009",
+      "next_step": "Concluído; agenda original preservada. Novos reinícios devem exercitar validador de proveniência e relatório read-only antes de fechamento.",
+      "objective": "Restaurar Intraday após novo D1 de C46M/C47M e explicar falha",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20261009T182038Z.json",
+      "state": "complete: origem rodolfo_explicit_operational_d1_restart antes não reconhecida pelo validador; faltavam pointers separados de criação engine complete_paused e ativação complete_activated. ligação canônica corrigida com checagem estrita de ids/conta/data/autoridade/hierarquia, 79 testes pass. intraday report-only publicado 09/10 15:20 sp em 3 mensagens, hashes/get verificados; c46m/c47m active/d1/usd58.06 preservados e actions=[].",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-09T18:22:07+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "devday-2026-followup",
       "next_step": "Canário editorial/skill de outro agente exige confirmação crítica; source-proof manual vs standing e dispatcher/offer/media compatibility permanecem gate, não promover bloco indiscriminado; nenhuma campanha/credencial/budget foi alterada; continuar somente thread1555572634228490283",
@@ -5492,5 +5502,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T17:58:26+00:00"
+  "updated_at": "2026-10-09T18:22:07+00:00"
 }

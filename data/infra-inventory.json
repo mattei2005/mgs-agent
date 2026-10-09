@@ -749,7 +749,7 @@
       "agent": "zeus",
       "type": "script-test-guardrail-recovery",
       "source_alert_id": "1558180018130255893",
-      "status": "tested_pending_native_flush",
+      "status": "native_auto_commit_push_recovered_verified",
       "paths": [
         "/root/mgs-agent/scripts/auto-commit-watcher.sh",
         "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
@@ -761,13 +761,22 @@
         "pending_files_scanned": 12,
         "secret_or_unclassified_hits": 0,
         "benign_authorization_source_id_hits": 8,
+        "validated_commit": "6d5e9b2b127ce20945c0264efd224529da630840",
+        "remote_main_equals_head": true,
+        "monitor_dry_run_failures": 0,
+        "monitor_consecutive_failures": 0,
+        "monitor_recovery_transport": "MGS_DRY_RUN=1; no direct recovery message; final reply delegated to resolver",
+        "native_flush_paths": 12,
+        "service": "active; PID 3142434; NRestarts 0",
         "canonical_mirror_equal": true,
         "bash_syntax": "PASS",
         "diff_check": "PASS",
         "concurrent_origin": "Knowledge registry ARES-ADSPOWER-SINGLE-TASK-QUEUE-1558159385694576661; canonical and mirror identical. Excluded historical snapshot deletions remain untouched."
       },
       "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1558180018130255893",
-      "report_infra_status": "pending_validation"
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1558183059650781235",
+      "report_readback_verified": true
     },
     {
       "id": "ares-shein-self-recovery-1558157403021643967",
