@@ -752,7 +752,7 @@
       "source_thread_id": "1557274000680288307",
       "path": "/root/mgs-agent/data/discord-shein-report-channel-structure.json",
       "category_id": "1522474237238050858",
-      "status": "structure_verified",
+      "status": "completed_verified",
       "updated_at": "2026-10-09T16:03:58.741957+00:00",
       "channels": [
         {
@@ -885,7 +885,9 @@
       "category_reconfirmed_authority": "1558147843930198158",
       "ares_access_verified": 6,
       "monitor_six_day_simulation_covered": 36,
-      "report_infra_status": "pending",
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1558148421125406851",
+      "report_infra_readback": true,
       "no_meta_or_campaign_core_changes": true,
       "no_report_rerouting": true
     },
@@ -42262,10 +42264,10 @@
       "id": "ZEUS-ARES-RECOVERY-DELEGATION-1558142033774776411",
       "agent": "zeus",
       "type": "limited-recovery-delegation-and-central-cbo-runtime",
-      "status": "policy_verified_runtime_handed_off",
+      "status": "complete_verified",
       "authority_message_id": "1558142033774776411",
       "source_thread_id": "1558141425541980203",
-      "updated_at": "2026-10-09T16:03:21.568349+00:00",
+      "updated_at": "2026-10-09T16:07:25.305881+00:00",
       "paths": [
         "/root/mgs-agent/context/routes.md",
         "/root/mgs-agent/data/authorized-users.json",
@@ -42300,8 +42302,12 @@
         "no_zeus_writer_active_at_handoff": true,
         "handoff_message_id": "1558147245264601200",
         "ares_ack_message_id": "1558147370351464479",
-        "activation_status": "pending_Ares",
-        "cpv_test_debt": "separate wider legacy CPV suite: 50 passed, 2 unrelated stale expectations; not claimed green"
+        "activation_status": "ACTIVE_verified_by_Zeus_readonly_after_Ares_execution",
+        "cpv_test_debt": "separate wider legacy CPV suite: 50 passed, 2 unrelated stale expectations; not claimed green",
+        "ads_configured_active": 2,
+        "ads_effective_active": 2,
+        "source_name_budget_bid_preserved": true,
+        "final_readback_path": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-g005-c88-cocap060-budget75-1791559741/zeus-final-readonly-verification.json"
       },
       "changed_scope_note": "SHEIN intake expired-time change belongs to concurrent Ares action; Zeus only changed _same_time comparator in shein_single_clone.py. No further runtime/Meta changes after handoff.",
       "backup_path": "/root/mgs-agent/backups/ares-zeus-recovery-delegation-1558142033774776411",
@@ -42321,7 +42327,11 @@
         "tests/test_shein_authorized_continuation.py": "42d8d6ce922efc4032f69c7d1321f97b8d4c75ce3be3a7ff22fc51d033d77226",
         "tests/test_shein_bid_channel_rules.py": "f6fd1e9b3f1791c5ace111533e982820aa3b9de92a179abc4411aeee57b7e437",
         "profiles/zeus-skills/growth/meta-ads-api-operations/references/meta-campaign-engine-v3-validated-pattern.md": "5995944348ce1b4fe48f821c49a31a7bfc3401d698e57eb88faa3b9b1cfabe94"
-      }
+      },
+      "report_infra_message_id": "1558148064475353153",
+      "report_infra_readback": true,
+      "report_infra_status": "sent_verified",
+      "manager_closure_message_id": "1558148161661567057"
     }
   ],
   "profile_skill_references": [

@@ -1753,12 +1753,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-RECOVERY-DELEGATION-1558142033774776411",
-      "next_step": "Ares retoma continuação auditada para barreira QA/ativação/readback; Zeus somente inventário, auditoria e REPORT-INFRA",
+      "next_step": "Nenhum retry/ativação pendente; aplicar delegação limitada nos próximos handoffs autorizados",
       "objective": "Corrigir delegação e recovery técnico SHEIN G005 C106, sem execução concorrente",
-      "source": "scripts/ares-shein-recovery.py",
-      "state": "regra persistida; cbo usd75/cap60 e 2 ads paused recuperados no core; mídia qa validada; runtime congelado após 141 testes; condução exclusiva transferida ao ares",
+      "source": "context/routes.md",
+      "state": "concluído: regra persistida/readback; 141 testes shein; ares concluiu execução e avisou geizian; zeus confirmou por get independente c106/conjunto/2ads active, usd75/cost_cap60; fonte/ids/manifests/relógio preservados; report-infra verificado",
       "thread_id": "1558141425541980203",
-      "updated_at": "2026-10-09T16:00:52+00:00"
+      "updated_at": "2026-10-09T16:07:25+00:00"
     },
     {
       "agent": "zeus",
@@ -5452,5 +5452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T16:05:54+00:00"
+  "updated_at": "2026-10-09T16:07:25+00:00"
 }
