@@ -137,6 +137,10 @@ Antes de retomar, fazer readback e reconciliar efeitos parciais; não repetir PO
 
 Conclusão: o manifest pode ser materializado sem inventar campos.
 
+## Numeração visível obrigatória
+
+Toda campanha SHEIN nova começa com **três dígitos**, preenchidos com zeros à esquerda: `001`, `007`, `099`, `100` — nunca `1`, `7` ou `99`. Gerar pelo formatter central `shein_naming.campaign_name` e validar o prefixo nos account policies antes de write, em criação do zero, duplicação e clone. Aceitar nomes legados somente como fonte; não exigir renomear a origem. Padding do prefixo não altera tracking/UTMs nem `COPY C<fonte>`. Ao atingir número fora de `001–999`, bloquear antes de write, sem truncar, reciclar ou reiniciar sequência. Pedido de corrigir campanha existente altera somente `name` no ID exato e exige GET/readback de status, budget, lance, início e filhos inalterados. Preservar manifests históricos; registrar recibo separado da correção. Fonte: `SHEIN-US-DIRECT.json#/campaign_naming_policy/visible_campaign_number`. Regressão: `test_shein_number_padding.py`.
+
 ## Estratégia de lance e delta explícito
 
 Use os aliases exatos MAXVOL → `LOWEST_COST_WITHOUT_CAP`, COCAP → `COST_CAP`, BIDCAP → `LOWEST_COST_WITH_BID_CAP`. MAXVOL prioriza volume Add to Wishlist nesta operação, não otimização por valor/ROAS. COCAP é meta de custo médio por resultado, não CPA máximo garantido. BIDCAP é teto de lance por leilão, não teto de CPA. Orçamento, custo por resultado e lance são campos distintos.

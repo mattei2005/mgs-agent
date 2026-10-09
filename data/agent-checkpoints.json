@@ -1193,12 +1193,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-NUMBER-PADDING-120249566052890724",
-      "next_step": "Concluir regressao, inventario, audit e REPORT-INFRA sem recriar campanha",
+      "next_step": "Proximos pedidos usam NNN via formatter e policy; nao renomear outras campanhas nem reexecutar request historico. Renderer integration error registrado para auditoria tecnica propria",
       "objective": "Corrigir prefixo 7 para 007 na C007 e prevenir em campanhas futuras SHEIN",
-      "source": "data/ares/meta-ads/audit/shein/number-padding-120249566052890724/name-correction.json",
-      "state": "rename only name confirmado live; formatter/policy/36 validators e skill atualizados; regressao em validacao",
+      "source": "data/ares/meta-ads/audit/shein/number-padding-120249566052890724/name-correction.json;data/ares/meta-ads/audit/shein/number-padding-120249566052890724/tests.json",
+      "state": "concluido rename name-only por get; formatter3dig e 36validators scoped; contrato/registry/skill/inventario atualizados; 5tests naming pass. suite ampla teve um erro no renderer chromium nao alterado; registrado separado, sem remover gate",
       "thread_id": "1558159785843499109",
-      "updated_at": "2026-10-09T22:27:07+00:00"
+      "updated_at": "2026-10-09T22:28:06+00:00"
     },
     {
       "agent": "ares",
@@ -5552,5 +5552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T22:27:07+00:00"
+  "updated_at": "2026-10-09T22:28:06+00:00"
 }
