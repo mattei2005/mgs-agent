@@ -16,6 +16,10 @@ Fluxo:
 
 Pitfall validado no Ares: pedido ao Zeus sobre capacidade de leitura de threads foi enviado para `#alerts-infra` após `#zeus` retornar 403; Rodolfo corrigiu que isso não fazia sentido porque abriu thread no canal de alertas.
 
+### Atualização scoped de channel_prompts
+
+Reconciliar prompts de canal quando a regra canônica mudar; autorização correta no contrato não elimina uma instrução antiga restritiva no prompt. Alterar pelo `hermes --profile <perfil> config set --force discord.channel_prompts.<ID> <valor>` somente no perfil próprio e no recorte autorizado. Serializar texto multilinha com `json.dumps(text, ensure_ascii=False)` antes de passá-lo como um único argumento: o CLI interpreta literais YAML/JSON e texto bruto com `:` pode ser rejeitado como mapping inválido. Fazer backup, readback dos IDs exatos e comparação estrutural de todo o restante inalterado. Não reiniciar dentro do turno. O adapter Discord pode conservar `config.extra` em memória: persistência em disco não comprova que o prompt novo foi carregado no processo ativo; validar a resolução runtime ou encaminhar refresh seguro ao responsável, sem declarar reload não realizado. Testar o texto lido como string e os mesmos seis IDs antes de concluir.
+
 ### Drift de canais Discord entre `.env` e `config.yaml`
 
 Se um canal consta em `discord.allowed_channels` e `discord.free_response_channels` no `config.yaml`, mas mensagens humanas não geram sequer `inbound message`, confira o ambiente efetivo do processo antes de culpar permissões ou intents. O adaptador Discord preserva precedência legada de `DISCORD_ALLOWED_CHANNELS` sobre `config.extra.allowed_channels`; uma lista antiga na `.env` pode bloquear canais novos antes do processamento, mesmo quando `allow_from`, prompts e permissões Discord estão corretos.

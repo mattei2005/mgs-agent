@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-GEIZIAN-AUTHORITY-FIX-1558217596346835120",
-      "next_step": "Auditoria independente Zeus, verificar ativacao/readback/contrato/prompts/skills/registry/REPORT-INFRA sem writer paralelo",
-      "objective": "Corrigir bloqueio de autoridade SHEIN Geizian na continuacao tardia e reconciliar prompts",
-      "source": "data/ares/meta-ads/audit/shein/geizian-authority-1558217596346835120/final-readback.json;discord:message:1558230486122373191",
-      "state": "correcao aplicada: 167 testes pass; seis prompts reconciliados com restante config inalterado; autoridade live 6/6; continuacao central da c007 concluida active, mesmos ids, usd100/cost_cap80; c006 preservada; sla clock original mantido e exceeded registrado",
+      "next_step": "Zeus auditoria independente e refresh seguro/verificacao dos seis prompts no processo apos turno, sem self-restart Ares dentro da sessao",
+      "objective": "Corrigir bloqueio de autoridade SHEIN Geizian e validar retomada C007 sem nova copia",
+      "source": "data/ares/meta-ads/audit/shein/geizian-authority-1558217596346835120/verification-final.json;discord:message:1558231052504408150",
+      "state": "campanha e permissao corrigidas, 167 testes pass, c007/conjunto/2ads active; seis prompts confirmados em disco/restante config intacto; adapter usa snapshot config.extra, refresh runtime nao declarado validado",
       "thread_id": "1558159785843499109",
-      "updated_at": "2026-10-09T21:33:13+00:00"
+      "updated_at": "2026-10-09T21:35:18+00:00"
     },
     {
       "agent": "ares",
@@ -5542,5 +5542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T21:33:13+00:00"
+  "updated_at": "2026-10-09T21:35:18+00:00"
 }

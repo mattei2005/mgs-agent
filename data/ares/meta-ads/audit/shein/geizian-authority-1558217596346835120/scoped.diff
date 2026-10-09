@@ -1,0 +1,199 @@
+--- before/scripts/ares_campaign_v3/shein_continuation.py
++++ after/scripts/ares_campaign_v3/shein_continuation.py
+@@ -35,6 +35,35 @@
+     return bool(preserved and str(expected)==approved and b==datetime.fromisoformat(preserved).astimezone(timezone.utc) and 0 <= (b-a).total_seconds() <= 1)
+ 
+ 
++def _late_review_context(account_id):
++    operation=json.loads((BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
++    profiles=json.loads((BASE/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
++    return operation, copy.deepcopy(profiles[str(account_id)])
++
++
++def _authorize_late_reviewer(descriptor, original, reviewer):
++    # CEO review remains valid; channel delegates use the same live authority as activation.
++    if reviewer == '344196393512075265':
++        return {'sender_id':reviewer,'source':'executive_review_message'}
++    operation,profile=_late_review_context(descriptor['account_id'])
++    policy=operation.get('channel_authorization_policy') or {}
++    late_policy=policy.get('late_recovery_review') or {}
++    if (operation.get('operation_id')!='SHEIN-US-DIRECT' or policy.get('enabled') is not True
++            or policy.get('approved_by')!='344196393512075265' or late_policy.get('enabled') is not True
++            or late_policy.get('approved_by')!='344196393512075265'
++            or str(profile.get('account_id')) != str(descriptor['account_id'])
++            or str(profile.get('channel_id')) not in policy.get('channel_ids',[])):
++        raise ValueError('approved SHEIN late recovery authority unavailable')
++    if str(descriptor['recovery_review_thread_id']) != str(original['source_thread_id']):
++        raise ValueError('delegated late review must originate in the original account thread/channel')
++    profile['channel_authorization_policy']=policy
++    review_request={**original,'authorized_by':reviewer}
++    from .shein_general import authorize
++    authorize(review_request,profile,force=True)
++    return {'sender_id':reviewer,'parent_channel_id':original['source_channel_id'],
++            'origin_id':original['source_thread_id'],'source':'live_discord_effective_permissions'}
++
++
+ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
+     from .shein_channel_authority import _get
+     get_message = get_message or _get
+@@ -68,21 +97,25 @@
+         or message.get('content') != descriptor['source_message_content']):
+         raise ValueError('continuation source message identity/content unconfirmed')
+     late = descriptor.get('late_activation_authorized') is True
++    review_authority = None
+     if late:
+         review_mid = str(descriptor.get('recovery_review_message_id') or '')
+         review_thread = str(descriptor.get('recovery_review_thread_id') or '')
+         if not all(re.fullmatch(r'[0-9]{17,20}',v) for v in [review_mid,review_thread]) or not descriptor.get('recovery_review_content'):
+-            raise ValueError('late recovery requires exact executive review evidence')
++            raise ValueError('late recovery requires exact authorized human review evidence')
+         review = get_message('/channels/'+review_thread+'/messages/'+review_mid)
++        reviewer = str(review.get('author',{}).get('id') or '')
+         if (str(review.get('id')) != review_mid or str(review.get('channel_id')) != review_thread
+-            or str(review.get('author',{}).get('id')) != '344196393512075265' or review.get('author',{}).get('bot')
++            or not re.fullmatch(r'[0-9]{17,20}',reviewer) or review.get('author',{}).get('bot')
+             or review.get('content') != descriptor['recovery_review_content']):
+-            raise ValueError('late recovery executive review unconfirmed')
++            raise ValueError('late recovery human review identity/content unconfirmed')
++        review_authority = _authorize_late_reviewer(descriptor, original, reviewer)
+     return {'verified':True,'request_id':original['request_id'],'account_id':str(descriptor['account_id']),
+             'campaign_ids':cids,'adset_ids':sids,'source_message_id':mid,'source_thread_id':descriptor['source_thread_id'],
+             'start_now':True,'late_activation_authorized':late,'original_execution_started_at':state.get('execution_started_at'),
+             'creation_payload_digest':content_digest(state['manifest']),'target_payload_digest':content_digest(state['target_manifest']),
+-            'review_message_id':descriptor.get('recovery_review_message_id'),'descriptor_digest':content_digest(descriptor)}
++            'review_message_id':descriptor.get('recovery_review_message_id'),'review_authority':review_authority,
++            'descriptor_digest':content_digest(descriptor)}
+ 
+ 
+ def activation_authorization(target, creation, proof):
+--- before/tests/test_shein_authorized_continuation.py
++++ after/tests/test_shein_authorized_continuation.py
+@@ -67,4 +67,90 @@
+         m,d,s,c,g=self.fixture();d['start_now']=False
+         with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
+ 
++class DelegatedLateReviewTests(ContinuationTests):
++    def delegated_fixture(self, channel='1548150015275438220', parent_origin=False):
++        m,d,s,c,g=self.fixture()
++        s['request']['source_channel_id']=channel;d['source_channel_id']=channel
++        if parent_origin:
++            s['request']['source_thread_id']=channel;d['source_thread_id']=channel
++        d['recovery_review_thread_id']=d['source_thread_id']
++        d['recovery_review_content']='Pode ativar a campanha!'
++        def messages(path):
++            row=g(path)
++            if path.endswith(d['recovery_review_message_id']):
++                row['author']['id']=d['authorized_by']
++            return row
++        policy={'enabled':True,'approved_by':'344196393512075265','channel_ids':[channel],
++                'late_recovery_review':{'enabled':True,'approved_by':'344196393512075265'}}
++        op={'operation_id':'SHEIN-US-DIRECT','channel_authorization_policy':policy}
++        profile={'account_id':'999','channel_id':channel,'manager_discord_id':'1291113428982693940'}
++        return m,d,s,c,messages,op,profile
++
++    def test_geizian_late_review_all_six_parents_and_threads(self):
++        from unittest.mock import patch
++        channels=['1548149087206121613','1548149300826079333','1548149483039236137',
++                  '1548149654926135486','1548150015275438220','1548150155184701440']
++        for channel in channels:
++            for parent_origin in [False,True]:
++                with self.subTest(channel=channel,parent_origin=parent_origin):
++                    m,d,s,c,g,op,p=self.delegated_fixture(channel,parent_origin)
++                    before=copy.deepcopy(s)
++                    with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify',return_value={'verified':True}) as v:
++                        proof=m.validate_descriptor(d,s,c,get_message=g)
++                        self.assertTrue(proof['late_activation_authorized'])
++                        self.assertEqual(proof['review_authority']['sender_id'],'321263240782807040')
++                        self.assertEqual(proof['original_execution_started_at'],s['execution_started_at'])
++                        self.assertEqual(s,before)
++                        self.assertIs(v.call_args.kwargs['force'],True)
++
++    def test_revoked_permission_denies_late_review(self):
++        from unittest.mock import patch
++        m,d,s,c,g,op,p=self.delegated_fixture()
++        with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify',side_effect=ValueError('revoked')):
++            with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
++
++    def test_cross_thread_review_denied_before_permission_lookup(self):
++        from unittest.mock import patch
++        m,d,s,c,g,op,p=self.delegated_fixture();d['recovery_review_thread_id']='1558141425541980203'
++        with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify') as v:
++            with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
++            v.assert_not_called()
++
++    def test_wrong_account_parent_policy_and_operation_denied(self):
++        from unittest.mock import patch
++        for change in ['parent','account','disabled','unapproved','operation','channel_not_listed','late_disabled','late_unapproved']:
++            with self.subTest(change=change):
++                m,d,s,c,g,op,p=self.delegated_fixture()
++                if change=='parent':p['channel_id']='1548149300826079333';op['channel_authorization_policy']['channel_ids'].append(p['channel_id'])
++                elif change=='account':p['account_id']='998'
++                elif change=='disabled':op['channel_authorization_policy']['enabled']=False
++                elif change=='unapproved':op['channel_authorization_policy']['approved_by']='other'
++                elif change=='operation':op['operation_id']='OTHER'
++                elif change=='channel_not_listed':op['channel_authorization_policy']['channel_ids']=[]
++                elif change=='late_disabled':op['channel_authorization_policy']['late_recovery_review']['enabled']=False
++                elif change=='late_unapproved':op['channel_authorization_policy']['late_recovery_review']['approved_by']='other'
++                with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify') as v:
++                    with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
++                    v.assert_not_called()
++
++    def test_bot_and_tampered_review_denied(self):
++        for change in ['bot','content','id','channel','actor']:
++            with self.subTest(change=change):
++                m,d,s,c,g,op,p=self.delegated_fixture()
++                def bad(path):
++                    row=g(path)
++                    if path.endswith(d['recovery_review_message_id']):
++                        if change=='bot':row['author']['bot']=True
++                        elif change=='actor':row['author']['id']='invalid'
++                        elif change=='content':row['content']='different'
++                        elif change=='id':row['id']='wrong'
++                        elif change=='channel':row['channel_id']='wrong'
++                    return row
++                with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=bad)
++
++    def test_no_late_authorization_keeps_sla_path(self):
++        m,d,s,c,g,op,p=self.delegated_fixture();d['late_activation_authorized']=False
++        proof=m.validate_descriptor(d,s,c,get_message=g)
++        self.assertFalse(proof['late_activation_authorized']);self.assertIsNone(proof['review_authority'])
++
+ if __name__=='__main__':unittest.main()
+--- before/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json
++++ after/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json
+@@ -278,7 +278,24 @@
+     "global_user_registry_mutated": false,
+     "other_agents_and_channels_unchanged": true,
+     "verification": "exact sender ID, guild/channel/parent identities, roles and member overwrites; private thread membership; refresh before creation and activation",
+-    "implementation": "ares_campaign_v3.shein_channel_authority"
++    "implementation": "ares_campaign_v3.shein_channel_authority",
++    "late_recovery_review": {
++      "enabled": true,
++      "approved_by": "344196393512075265",
++      "authority_message_id": "1558225355930861649",
++      "source_thread_id": "1558159785843499109",
++      "clarified_delegate_id": "321263240782807040",
++      "eligible_reviewers": "Rodolfo or a human with forced live channel/thread communication proof under this same policy; Geizian is authorized across all six SHEIN channels and their threads",
++      "delegate_review_origin": "original request thread/channel, account-bound canonical parent",
++      "requirements": [
++        "exact live human activation/recovery approval message",
++        "same original request, immutable manifests, campaign/adset/ad IDs, budget and bid",
++        "fresh authority check before activation",
++        "complete semantic/media QA and live pre-read/readback",
++        "original E2E clock and SLA breach preserved; explicit reviewed continuation only"
++      ],
++      "excluded_and_critical_subset_unchanged": true
++    }
+   },
+   "manager_channels": [
+     {
+--- before/context/permissions-matrix.md
++++ after/context/permissions-matrix.md
+@@ -51,6 +51,7 @@
+ 
+ - **Eggbev-US-CC-EN-BOT / Eggbev-US-CC-EN-01-G006:** por decisões explícitas de Rodolfo em 30/08/2026 e 31/08/2026, Nicolas pode definir, reduzir ou aumentar budgets de campanha — inclusive a baseline de USD45 — e autorizar, por pedido, início imediato sem schedule para criação ou clone, sem nova aprovação do Rodolfo. Cada write continua exigindo instrução explícita do Nicolas ou política operacional aprovada, resumo final/OK do pedido, pré-leitura e readback Meta. O início padrão permanece no próximo dia às 00:00 ET; pedidos imediatos exigem request ID allowlisted e horário Meta-safe atualizado no execute. A delegação não autoriza billing, `account_spend_limit`, credenciais, automação recorrente nem escala automática sem regra própria aprovada.
+ - **SHEIN-US-DIRECT / `shein-g001`…`shein-g006`:** a decisão vigente de Rodolfo na thread `1557274000680288307` supersede a restrição de 11/09/2026 ao gestor titular como único solicitante. Toda pessoa humana com permissão efetiva de comunicação no canal pai listado e na thread de origem pode conversar, solicitar e autorizar Campaign Ops sobre as contas/perfis vinculados àquele canal: criação, duplicação, clone, relatórios, organização de threads, otimização, pausa/reativação, exclusão/arquivamento, definição/alteração de budget, schedule e ativação. O G00N identifica a partição da conta; não restringe o remetente ao titular. Geizian, por exemplo, não deve ser recusado no G005 por ser titular do G002, se a permissão do canal/da thread estiver confirmada. Fonte única da elegibilidade: `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/channel_authorization_policy`. Validar ID real, canal pai real e permissões live (roles + overwrites por membro, acesso a thread privada), relendo antes de criação/ativação; não aceitar nome exibido ou autodeclaração como prova. A regra é restrita aos seis canais e suas threads; não promove usuários globalmente nem altera `authorized-users.json`/permissões Discord/outros agentes. O pedido deve trazer valor/moeda exatos quando houver budget e identificar os objetos dependentes; Ares faz pre-read, menor write e GET. Não é exigida nova aprovação de Rodolfo para o budget de campanha dentro desse recorte delegado. Billing, `account_spend_limit`, credenciais, ownership, permissões de app, pixel/CAPI, automação recorrente sem política própria e contas/perfis fora da partição do canal continuam excluídos; Critical Subset permanece.
++ Geizian (`321263240782807040`) tem autoridade integral de Campaign Ops nos seis canais SHEIN e nas threads deles, reafirmada por Rodolfo na mensagem `1558225355930861649`; não exigir aprovação exclusiva do CEO para uma retomada/ativação tardia explicitamente autorizada por ele. O review de atraso segue a mesma elegibilidade live do canal, na origem do pedido, via `channel_authorization_policy.late_recovery_review`, preservando SLA/relógio original, QA, request, IDs, budget, lance e todos os limites críticos.
+ 
+ ## Dash financeira e Dash do Router — autorização exclusiva de Rodolfo
+ 
