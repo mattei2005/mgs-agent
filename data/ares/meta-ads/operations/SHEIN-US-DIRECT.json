@@ -438,7 +438,20 @@
   },
   "campaign_naming_policy": {
     "status": "ACTIVE_RUNTIME_IMPLEMENTED",
-    "format": "Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - [COPY C<FONTE> -] event_add_to_wishlist",
+    "format": "NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - [COPY C<FONTE> -] event_add_to_wishlist",
+    "visible_campaign_number": {
+      "digits": 3,
+      "zero_padded": true,
+      "range": "001-999",
+      "examples": ["001", "007", "099", "100"],
+      "scope": "visible prefix of every new SHEIN campaign, all modes and channels",
+      "legacy_source_names_accepted": true,
+      "tracking_and_copy_source_unchanged": true,
+      "overflow": "block before write; never truncate, wrap or recycle",
+      "approved_by": "344196393512075265",
+      "source_thread_id": "1558159785843499109",
+      "existing_rename_scope": ["120249566052890724"]
+    },
     "date": "configured start date DD/MM in ad-account timezone",
     "quiz_versions": [
       "v1",

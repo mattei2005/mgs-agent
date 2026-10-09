@@ -7,6 +7,13 @@
 
 ---
 
+## Atualização operacional — SHEIN prefixo de campanha NNN (2026-10-09)
+
+- Pedido: Rodolfo na thread `1558159785843499109`, corrigir o prefixo visível da campanha `120249566052890724` de `7` para `007` e prevenir recorrência. POST mínimo somente `name`, seguido de GET: campanha permanece ACTIVE, USD100/dia, COST_CAP80 centavos, mesmo início/conjunto/ads; tracking e resto do nome preservados. Nenhuma outra campanha renomeada.
+- Runtime: `scripts/ares_campaign_v3/shein_naming.py` gera prefixo `:03d` em todos os modos SHEIN; faixa 001–999, sem truncar/reciclar. Fonte legada curta continua aceita. Os 36 validators SHEIN em `engine-v3/config.json` exigem prefixo de três dígitos; comparação estrutural provou que somente `campaign_policy.name_regex` mudou nessas contas, nenhum campo de outra operação.
+- Fontes: contrato `SHEIN-US-DIRECT.json#/campaign_naming_policy/visible_campaign_number`, registry supersedido na mesma chave `ares.shein.campaign-naming-pattern`, skill própria SHEIN main/general route, novo `tests/test_shein_number_padding.py`. Manifests históricos permanecem imutáveis; recibo de correção separado.
+- Evidência/backups/readback: `data/ares/meta-ads/audit/shein/number-padding-120249566052890724/`; regressão red→green do padding em formatter, três modos, fontes legadas e validação antes do write. Sem novas cópias, alteração de budget/lance/schedule/status/UTM, credencial ou gateway.
+
 ## Atualização operacional — Geizian SHEIN e review tardio (2026-10-09)
 
 - Autoridade: Rodolfo, mensagem `1558225355930861649`, thread `1558159785843499109`; referência da recusa `1558217596346835120`. Geizian tem Campaign Ops nos seis canais SHEIN e threads, incluindo review explícito de continuação tardia.

@@ -44,7 +44,4 @@ def campaign_name(number,start_time,timezone,destination,product,bid_strategy,tr
     if copy_source_number is not None:
         if not re.fullmatch(r'[1-9][0-9]*',str(copy_source_number)):raise ValueError('COPY source number invalid')
         addon = f' - COPY C{copy_source_number}'
-    sequence=int(number)
-    if not 1 <= sequence <= 999:
-        raise ValueError('SHEIN visible campaign number must be within 001-999; never truncate or recycle')
-    return f'{sequence:03d} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - event_add_to_wishlist'
+    return f'{int(number)} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - event_add_to_wishlist'
