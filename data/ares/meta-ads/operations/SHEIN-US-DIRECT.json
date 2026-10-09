@@ -369,7 +369,7 @@
     "default_quantity": 1
   },
   "campaign_naming_policy": {
-    "status": "APPROVED_DOCUMENT_PENDING_RUNTIME",
+    "status": "ACTIVE_RUNTIME_IMPLEMENTED",
     "format": "Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist",
     "date": "configured start date DD/MM in ad-account timezone",
     "quiz_versions": [
@@ -377,7 +377,7 @@
       "v2",
       "v3"
     ],
-    "quiz_urls": "UNMAPPED_DO_NOT_INFER",
+    "quiz_urls": "CORPORATE_PLUGIN_ROUTE_AND_LAYOUT_VERIFIED",
     "bid_aliases": [
       "MAXVOL",
       "COCAP",
@@ -391,12 +391,19 @@
     "existing_campaigns_rename_authorized": false,
     "approved_by": "344196393512075265",
     "source_thread_id": "1557274000680288307",
-    "runtime_pending": [
-      "quiz_version_url_mapping",
-      "number_date_quiz_bid_naming_generator"
-    ],
+    "runtime_pending": [],
     "version": "3.0",
-    "supersedes_format": "DATA - Nº CAMPANHA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist"
+    "supersedes_format": "DATA - Nº CAMPANHA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist",
+    "implementation": "ares_campaign_v3.shein_naming",
+    "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669; live data-model lp2 on source route",
+    "required_all_modes": true,
+    "renamed_campaign_ids": [
+      "120255673727170150",
+      "120255673727180150",
+      "120255673728880150",
+      "120255673728900150",
+      "120255673730670150"
+    ]
   },
   "request_templates": {
     "approved_at_et": "2026-09-14T19:19:25-04:00",
@@ -412,8 +419,6 @@
     "version": "3.0",
     "supersedes_version": "2.0",
     "runtime_pending": [
-      "quiz_version_url_mapping",
-      "number_date_quiz_bid_naming_generator",
       "bid_strategy_and_amount_override"
     ],
     "title": "Suba essa campanha",

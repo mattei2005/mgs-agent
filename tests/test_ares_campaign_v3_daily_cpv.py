@@ -971,7 +971,7 @@ def test_car_request_templates_are_registered_and_preserve_three_distinct_modes(
 
 
 def test_campaign_engine_release_is_synchronized_across_runtime_and_governance():
-    expected = "3.6.6"
+    expected = "3.6.7"
     engine = (ROOT / "scripts/ares_campaign_v3/engine.py").read_text()
     config = json.loads((ROOT / "data/ares/meta-ads/engine-v3/config.json").read_text())
     operation_v3 = json.loads((ROOT / "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR-v3.json").read_text())

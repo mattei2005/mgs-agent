@@ -11,7 +11,7 @@ Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist
 ```
 
 - DATA é o início configurado no timezone da conta, em DD/MM.
-- Nº CAMPANHA é o sequencial resolvido por conta e vem primeiro; DATA vem depois. Essa ordem supersede a proposta anterior de data primeiro.
+- Nº CAMPANHA é o sequencial resolvido por conta e vem primeiro; DATA vem depois. Essa ordem supersede a proposta anterior de data primeiro. O novo nome é sempre gerado neste padrão, inclusive quando o pedido diz duplicar/clonar igual; nunca copiar o nome da fonte como exceção.
 - QUIZ é v1, v2 ou v3 ligado à URL real, nunca deduzido por substring do caminho. Sem mapa canônico, não inventar versão nem destino.
 - PRODUTO é o produto real, coerente com mídia e copy.
 - LANCE é somente MAXVOL, COCAP ou BIDCAP. Não incluir valor de cap nem USD no nome: valores podem mudar intraday.
@@ -66,7 +66,7 @@ Conta ausente ou ambígua não autoriza procurar o número em todas as contas ou
 ### Estado real de implementação
 
 - Já disponíveis: modos técnicos, budget da fonte, NOW, source setup/tracking, QA global e ACTIVE final padrão.
-- Pendentes: mapa URLs v1/v2/v3, gerador do layout número-data-quiz-produto-lance e escolhas de bid_strategy/bid_amount diferentes da referência por campo de pedido.
+- Pendentes: escolhas de bid_strategy/bid_amount diferentes da referência por campo de pedido. Nomenclatura completa e modelo do quiz por rota corporativa verificada estão implementados no formatter; rotas não reconhecidas bloqueiam, não são adivinhadas.
 - Salvar o padrão não instala essas pendências nem renomeia campanhas existentes. Não prometer suporte integral, não tratar campos como implementados e não executar canário por causa desta aprovação documental.
 
 ## Histórico supersedido — formulários 1.0
