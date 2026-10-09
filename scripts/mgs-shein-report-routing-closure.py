@@ -97,17 +97,20 @@ def preflight(state):
 
 def run(args):
     state = json.loads(routing.STATE.read_text())
-    evidence = preflight(state)
     if args.preflight:
+        evidence = preflight(state)
         print(json.dumps(dict(status='closure_preflight_pass', **evidence)))
         return
     assert args.finalizer and Path(args.finalizer).is_file()
     assert state['status'] == 'configured_restart_pending', 'closure already running/completed'
-    state['status'] = 'activating_detached'
-    state['activation_started_at'] = routing.now()
-    routing.save_json(routing.STATE, state)
-    routing.audit('shein_report_gateway_detached_activation_started', finalizer=args.finalizer)
     try:
+        # Include dependency/config checks in the monitored failure boundary.
+        # A preflight exception must produce a durable blocker and user closure.
+        evidence = preflight(state)
+        state['status'] = 'activating_detached'
+        state['activation_started_at'] = routing.now()
+        routing.save_json(routing.STATE, state)
+        routing.audit('shein_report_gateway_detached_activation_started', finalizer=args.finalizer)
         # Execute only the prepared canonical finalizer, outside the active agent tool chain.
         cp = subprocess.run(['bash', args.finalizer], text=True, capture_output=True, timeout=450, cwd=str(routing.repo_path()))
         if cp.returncode:
@@ -153,7 +156,7 @@ def run(args):
         report(state, True)
         routing.save_json(routing.STATE, state)
         routing.audit('shein_report_gateway_routing_active_verified', validation=state['live_validation'], report_infra_message_id=state['report_infra_message_id'])
-        final = 'Correção **concluída e validada**.\n\n1. **Problema:** Ares estava presente nas threads, mas ignorava as mensagens.\n2. **Causa confirmada:** os seis canais de relatórios não estavam cadastrados nos canais aceitos pelo gateway dele — falha minha na criação.\n3. **Solução:** cadastrei os seis canais e vinculei as 36 threads às contas corretas, com resposta aos usuários autorizados **sem precisar marcar @Ares**. O reinício seguro foi exclusivo do Ares.\n\nAres já respondeu na [thread Yolokfx Conta 01](https://discord.com/channels/1185714635991679006/' + TEST_THREAD + '/' + actual['id'] + '), reconhecendo sua mensagem e aguardando as regras do Intraday.\n\n**Campanhas, permissões de usuários, crons e destinos dos relatórios automáticos não foram alterados.** Procedimento corrigido na skill `discord-ops`; configuração, inventário e REPORT-INFRA validados.'
+        final = 'Correção **concluída e validada nos seis canais e 36 threads**.\n\nA primeira ativação não chegou a executar: o processo externo não herdou as dependências Python do terminal. Corrigi o ambiente e validei o executor externo antes de reativar.\n\n1. **Problema:** Ares estava presente nas threads, mas ignorava as mensagens.\n2. **Causa confirmada:** os seis canais de relatórios não estavam cadastrados nos canais aceitos pelo gateway dele — falha minha na criação.\n3. **Solução:** cadastrei os seis canais e vinculei as 36 threads às contas corretas, com resposta aos usuários autorizados **sem precisar marcar @Ares**. O reinício seguro foi exclusivo do Ares.\n\nAres já respondeu na [thread Yolokfx Conta 01](https://discord.com/channels/1185714635991679006/' + TEST_THREAD + '/' + actual['id'] + '), reconhecendo sua mensagem e aguardando as regras do Intraday.\n\n**Campanhas, permissões de usuários, crons e destinos dos relatórios automáticos não foram alterados.** Procedimento corrigido na skill `discord-ops`; configuração, inventário e REPORT-INFRA validados.'
         delivered = post(ORIGIN, final, reply_to=routing.AUTHORITY)
         state['closure_message_id'] = delivered['id']
         routing.save_json(routing.STATE, state)
