@@ -42,7 +42,7 @@ Valor do lance: [valor para COCAP/BIDCAP / igual ao da fonte / não se aplica pa
 Budget: [valor por campanha / igual ao da fonte]
 
 Criativos: [manter os da fonte / novos do Drive — produto e quantidade por campanha]
-Hora/Data início: [agora / data e hora no timezone da conta]
+Hora/Data início: [agora / data e hora no timezone da conta / omitir para 00:00 do dia seguinte]
 ```
 
 - Valores SHEIN em USD, mantendo conferência da moeda real da conta antes do write. Budget diário por campanha é separado do valor de lance.
@@ -52,6 +52,16 @@ Hora/Data início: [agora / data e hora no timezone da conta]
 - Para criar campanha/conjunto realmente do zero, a frase inicial deve dizer `Criar do zero`; uma referência pode servir de template/configuração/copy, mas não autoriza inferir esse modo somente por haver criativos novos. Não exigir IDs técnicos ao gestor.
 - Conservar Ad setup e localização original do tracking; Create ad não vira post existente para preservar social proof automaticamente.
 - Início `agora` autoriza o intent IMMEDIATE; datas humanas agendadas permanecem literais. Não usar `Preparar agora` como sinônimo silencioso de revisão PAUSED.
+
+### Atalho de duplicação e início padrão
+
+Com a conta resolvida por nome explícito ou contexto canônico inequívoco, `Duplicar a campanha 72` / `Clonar igual a campanha 72` é pedido suficiente: uma nova campanha, mesmas mídia/copy/estrutura/público/posicionamentos/pixel/evento/lance/valor de lance/budget/Ad setup/local do tracking/destino da fonte. Não pedir que o gestor repita esses valores. Nenhuma menção a mídia nova significa manter os criativos; não selecionar assets do Drive por conta própria.
+
+Horário omitido usa **00:00 do próximo dia civil no timezone verificado da conta**, não do VPS. Resolver uma vez no preflight e preservar o início resolvido entre retomadas; não reagendar ao cruzar meia-noite. Data/hora ou `agora` expressos prevalecem. ACTIVE depois do QA habilita para a data agendada, não entrega antes dela. PAUSED/revisão expresso continua exceção.
+
+`Igual` não é identidade dos objetos: novo número/nome/IDs/UTMs da campanha nova, com URL/CTA atualizadas para o novo tracking e mesma localização dos parâmetros. Não reaproveitar UTMs da fonte. Normalizações inevitáveis da Meta são declaradas, nunca chamar de literalmente idêntico se houver divergência. Estrutura não suportada é bloqueada/diagnosticada, não achatada silenciosamente.
+
+Conta ausente ou ambígua não autoriza procurar o número em todas as contas ou cruzar gestores. Perguntar somente qual conta quando o contexto não a resolver. Este atalho é para nova duplicação, não altera campanhas existentes nem agenda recorrente.
 
 ### Estado real de implementação
 

@@ -2,6 +2,10 @@
 
 ## Regra ativa
 
+### Horário e herança de referência padrão
+
+Na duplicação SHEIN sem parâmetros extras, manter a configuração e mídia/copy reais da fonte; budget ausente em pure_clone ativa `budget_from_reference=true`. Horário ausente ativa o marcador estável `start_next_midnight=true`, resolvido uma única vez em 00:00 do próximo dia civil da conta. Não regenerar a data no pedido original nem usar timezone do VPS. NOW/data/budget/PAUSED expressos prevalecem; nenhum default autoriza novo budget adicional ou mídia nova. Conta deve estar explícita ou resolvida em contexto canônico; ambiguidade pergunta somente a conta.
+
 ### Status final padrão aprovado por Rodolfo
 
 Em novos pedidos SHEIN, omissão de status final materializa `ACTIVE` pela política canônica `SHEIN-US-DIRECT.json#/request_defaults`. O operador não precisa repetir `Execução: ativar após validação` ou `Status final: ativa`: isso já faz parte do pedido padrão autorizado. O runner continua criando PAUSED e fecha QA semântico, mídia e pós-processamento de **todas** as campanhas solicitadas antes de ativar; não é validação por amostragem. Data futura fornecida é preservada: ACTIVE habilita para o horário aprovado, não entrega antes dele. Pedido expresso para deixar PAUSED/revisão prevalece. Esta decisão vale para novas criações SHEIN, não autoriza reativar C114 ou outras campanhas já pausadas, nem muda defaults CAR/BOT/billing/autoridade financeira.
