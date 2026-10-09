@@ -9074,6 +9074,42 @@
       "updated_at": "2026-10-09T15:22:39+00:00"
     },
     {
+      "canonical_key": "ares.shein.central-same-id-now-recovery",
+      "canonical_source": "scripts/ares-shein-recovery.py",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T16:02:06+00:00",
+      "id": "SHEIN-CBO-SAME-ID-CONTINUATION-20261009",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Central SHEIN CBO cap mapping e recovery NOW no mesmo request/IDs, com manifests e relógio preservados",
+      "updated_at": "2026-10-09T16:02:06+00:00"
+    },
+    {
+      "canonical_key": "discord.shein.report_structure",
+      "canonical_source": "data/discord-shein-report-channel-structure.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "discord",
+      "effective_at": "2026-10-09T16:04:41+00:00",
+      "id": "SHEIN-DISCORD-REPORT-STRUCTURE-20261009",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Estrutura SHEIN: canais privados de relatórios e threads Intraday por conta; emojis sem espaço",
+      "updated_at": "2026-10-09T16:04:41+00:00"
+    },
+    {
       "canonical_key": "sites.ownership.spaziokitchensandbaths",
       "canonical_source": "context/sites.md",
       "consumers": [
@@ -11444,5 +11480,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:51:38+00:00"
+  "updated_at": "2026-10-09T16:04:41+00:00"
 }

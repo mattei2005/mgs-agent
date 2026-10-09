@@ -1,0 +1,39 @@
+{
+  "status": "COMPLETE_FUTURE_ACTIVE",
+  "request_id": "shein-g005-c88-cocap060-budget75-1791559741",
+  "account_id": "2429758060563333",
+  "number": 106,
+  "campaign_id": "120250166906720331",
+  "name": "106 - 09/10 - v2 - BAGS - AUDIO NOVO - COCAP - (b01fb03c106) - COPY C88 - event_add_to_wishlist",
+  "source_campaign_id": "120250053234140331",
+  "budget_usd": 75.0,
+  "start_time": "2026-10-09T11:30:01-0400",
+  "ads": 2,
+  "campaigns": [
+    {
+      "campaign_id": "120250166906720331",
+      "name": "106 - 09/10 - v2 - BAGS - AUDIO NOVO - COCAP - (b01fb03c106) - COPY C88 - event_add_to_wishlist",
+      "ads": 2
+    }
+  ],
+  "posts_preserved": false,
+  "social": [],
+  "warnings": [
+    "Meta omitted source optional age/gender suggestion flags; copy is not literally identical"
+  ],
+  "account_active_daily_budget_usd": 2140.0,
+  "request_active_budget_delta_usd": 75.0,
+  "timings": {
+    "preparation_ms": 190.533,
+    "postprocess_ms": 13160.398,
+    "runner_total_ms": 14231.755,
+    "original_request_e2e_ms": 1945590.654,
+    "e2e_target_seconds": 144,
+    "e2e_target_met": false,
+    "request_to_readback_ms": null
+  },
+  "read_http_requests": 3,
+  "logical_gets": 6,
+  "engine_replayed": false,
+  "timing_basis": "runner start to readback; message timestamp unavailable"
+}

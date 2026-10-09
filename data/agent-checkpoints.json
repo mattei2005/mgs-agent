@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-TODAY-EXPIRED-SCHEDULE-20261009",
-      "next_step": "Zeus conclui recovery central CBO/continuidade auditada; Ares retoma o mesmo request e IDs na thread1558126286826774711 com QA/readback antes de ativar. Nao exigir novo OK de Rodolfo dentro do escopo autorizado.",
-      "objective": "Aplicar horario vencido do dia como NOW e incorporar dispensa de reaprovacao para recovery Ares/Zeus",
-      "source": "data/ares/meta-ads/audit/shein/schedule-and-recovery-permission-20261009/verification-final.json",
-      "state": "correcoes de politica/intake concluidas: contrato/skill/runtime validados offline, registry readback/validate ok; gestor avisado e zeus informado. sem write meta nesta tarefa nem alteracao dos manifests/ids da c106.",
+      "next_step": "Nao reabrir ou repetir o pedido concluido; Zeus apenas revisao documental. Aplicar regras aos proximos pedidos autorizados.",
+      "objective": "Aplicar horario vencido do dia e recovery sem reautorizacao mantendo Ares como dono funcional",
+      "source": "data/ares/meta-ads/audit/shein/ownership-single-writer-20261009/final-meta-readback.json",
+      "state": "correcoes aplicadas e recovery c106 concluido pelo ares: meta budget75/cap0.60/two ads active, fonte preservada e mesmo request/ids. gestor e zeus receberam fechamento confirmado; nao ha recovery pendente deste caso.",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-09T15:53:52+00:00"
+      "updated_at": "2026-10-09T16:05:11+00:00"
     },
     {
       "agent": "ares",
@@ -1673,12 +1673,12 @@
     {
       "agent": "zeus",
       "id": "SHEIN-DISCORD-REPORTS-1558144762618585159",
-      "next_step": "Complete remaining groups and validate full structure",
+      "next_step": "No structural work pending. Report scheduling/rerouting is not included; Ares owns the campaign recovery separately.",
       "objective": "Create six private SHEIN report channels, 36 Intraday threads, add requested members and prefix 36 campaign threads",
       "source": "data/discord-shein-report-channel-structure.json",
-      "state": "verified g001,g002,g003",
+      "state": "completed_verified: 6 report channels, 36 intraday threads, 36 🎯 renames, requested membership and category readbacks confirmed",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-09T15:59:22+00:00"
+      "updated_at": "2026-10-09T16:05:54+00:00"
     },
     {
       "agent": "ares",
@@ -1753,12 +1753,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-RECOVERY-DELEGATION-1558142033774776411",
-      "next_step": "Executar recovery central nos IDs existentes; QA/readback completo; handoff Ares e REPORT-INFRA",
-      "objective": "Corrigir delegação e recovery técnico do mesmo pedido SHEIN G005 C106",
+      "next_step": "Ares retoma continuação auditada para barreira QA/ativação/readback; Zeus somente inventário, auditoria e REPORT-INFRA",
+      "objective": "Corrigir delegação e recovery técnico SHEIN G005 C106, sem execução concorrente",
       "source": "scripts/ares-shein-recovery.py",
-      "state": "regra persistida e gestor avisado por ares; cbo/continuação central passaram 139 testes e dry-run live, origem/ids confirmados paused",
+      "state": "regra persistida; cbo usd75/cap60 e 2 ads paused recuperados no core; mídia qa validada; runtime congelado após 141 testes; condução exclusiva transferida ao ares",
       "thread_id": "1558141425541980203",
-      "updated_at": "2026-10-09T15:53:09+00:00"
+      "updated_at": "2026-10-09T16:00:52+00:00"
     },
     {
       "agent": "zeus",
@@ -4933,12 +4933,12 @@
     {
       "agent": "ares",
       "id": "shein-g005-c88-cocap060-budget75-1791559741",
-      "next_step": "Zeus/owner deve disponibilizar recovery auditado no mesmo core para CBO bid_strategy+adset_bid_amounts e continuacao de schedule→NOW pelos IDs existentes; preservar request/manifest/clock, nao repetir campaign/adset copies nem editar guards. Retomar somente shell e ads ausentes, QA e readback, depois ativar conforme autorizacao vigente. Responder na thread1558126286826774711.",
-      "objective": "Concluir a mesma duplicacao de C88 em Yolokfx-US-SHEIN-EN-03-G005: USD75/dia, COST_CAP USD0.60 e inicio AGORA autorizado por Geizian",
-      "source": "data/ares/meta-ads/requests/shein-g005-c88-cocap060-budget75-1791559741-continuation-1791560165.json",
-      "state": "blocked_central_runtime_capability. permissoes live geizian/canal/thread confirmadas. get atual: campaign120250166906720331 e adset120250166908140331 paused, zero ads, budget herdado5000/maxvol. continuidade now registrada sem sobrescrever manifest original. escalacao tecnica enviada ao canal zeus1496267442899521627; message1558141425541980203 confirmado por readback. sem novo write meta ou nova copia.",
+      "next_step": "Nenhum write/reativacao adicional deste request. Zeus confere documentacao sem versao concorrente; performance/primeira entrega somente por consulta autorizada.",
+      "objective": "Concluir a mesma duplicacao de C88 em Yolokfx-US-SHEIN-EN-03-G005: USD75/dia, COST_CAP USD0.60 e inicio imediato autorizado",
+      "source": "data/ares/meta-ads/audit/shein/ownership-single-writer-20261009/final-meta-readback.json",
+      "state": "concluido pelo ares na rota central de recovery: c106 campaign120250166906720331/adset120250166908140331 e ads120250167452970331/120250167452990331 active por get independente. budget7500 e bid60 usd minor units; fontec88 intacta nos campos baseline, media qa verified. mesmo request/ids, nenhuma copia adicional. gestor e zeus avisados com readback.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-10-09T15:38:06+00:00"
+      "updated_at": "2026-10-09T16:05:11+00:00"
     },
     {
       "agent": "zeus",
@@ -5452,5 +5452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:59:22+00:00"
+  "updated_at": "2026-10-09T16:05:54+00:00"
 }

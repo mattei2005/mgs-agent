@@ -1,0 +1,41 @@
+{
+  "status": "DRY_RUN_OK",
+  "request_id": "shein-g005-c88-cocap060-budget75-1791559741",
+  "account_id": "2429758060563333",
+  "source_campaign_id": "120250053234140331",
+  "number": 106,
+  "name": "106 - 09/10 - v2 - BAGS - AUDIO NOVO - COCAP - (b01fb03c106) - COPY C88 - event_add_to_wishlist",
+  "budget_usd": 75.0,
+  "start_time": "2026-10-09T11:30:00-04:00",
+  "delivery_status": "ACTIVE",
+  "plan": {
+    "request_id": "shein-g005-c88-cocap060-budget75-1791559741",
+    "lane_count": 1,
+    "global_wave_count": 1,
+    "campaigns_per_global_wave": [
+      1
+    ],
+    "lanes": {
+      "2429758060563333": [
+        {
+          "bundle": 1,
+          "campaigns": 1,
+          "modes": [
+            "pure_clone"
+          ],
+          "outer_write_calls": 5,
+          "outer_readback_calls": 1,
+          "intermediate_get_calls": 0
+        }
+      ]
+    }
+  },
+  "timings": {
+    "preparation_ms": 78.787
+  },
+  "campaign_writes": 0,
+  "creation_status": "PAUSED",
+  "batch_qa_before_activation": true,
+  "read_http_requests": 0,
+  "logical_gets": 0
+}

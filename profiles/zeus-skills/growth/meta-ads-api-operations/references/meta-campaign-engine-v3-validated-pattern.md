@@ -24,6 +24,16 @@ source/template read-only refresh
 
 Keep the old executor frozen as rollback until live canaries pass.
 
+## Same-ID SHEIN CBO recovery and explicit NOW continuation
+
+- In CBO cap changes, build a campaign-atomic `bid_strategy` + `adset_bid_amounts={confirmed_adset_id: integer_minor_units}` through the central `cbo_bid.shell_payloads`; do not send the cap again as an independent adset bid update. Use the same builder for initial execution and shell recovery. Confirm account/parent identities and live cap/budget before filling missing ads; never repeat campaign/adset copies when their IDs are already confirmed.
+- Resume an explicitly approved NOW continuation through `scripts/ares-shein-recovery.py --continuation <descriptor.json> --confirm-execute`, which delegates to the existing runner/Engine and locks. Never rewrite the original request/sealed manifests, change request identity, reset the original E2E clock or create a parallel writer to bypass an immutable-request guard.
+- Bind the descriptor to the exact human message and live sender permissions, original account/channel/quantity/budget/strategy, persisted campaign/adset IDs and original manifest digests. A reviewed late recovery remains request-scoped; it does not disable the global SLA or authorize late activation of another request. Record the missed original SLA honestly.
+- If Meta normalized the already-created copy's schedule by one second, prove both original live shell times before recovery and bind that exact preserved time to the authenticated continuation. Only that request may reconcile the bounded normalization; ordinary schedules remain exact, and no start_time write is implied. A later ACTIVE-target parse can also reject an elapsed schedule before activation: allow only the exact original target inside the verified continuation, never a global future-time bypass.
+- `COMPLETE_PAUSED` plus runner `POSTPROCESS_PENDING` means creation is finished but QA/activation is not. Read the persisted core result first; retry only QA/proof/status/readback. Compact readbacks are not full creative-definition evidence. Rendered-media proof, semantic QA, status-only activation and exact final readback remain mandatory.
+- Keep one execution owner. At handoff, prove no active writer, freeze runtime patches, name exact remaining QA gates and entry point, and transfer operational execution to Ares. Zeus may close inventory/audit/documentation but must not retry Meta concurrently.
+- Zeus accepts authentic technical handoffs derived from already-authorized manager/operator commands without another Rodolfo OK under `context/routes.md#delegação-permanente-de-recovery-ares-zeus`. This is limited recovery delegation, not Full bot access; Critical Subset, credential/billing and changed-scope gates remain unchanged.
+
 ## Independent executor audit gates
 
 - Exercise HTTP-200 readbacks containing a wrong campaign identity/budget and missing children. Require semantic rejection against the sealed manifest; recording a response count or HTTP success is not QA. Distinguish engine completion from the runner's independent semantic acceptance.

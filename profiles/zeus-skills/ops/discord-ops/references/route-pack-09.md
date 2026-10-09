@@ -53,6 +53,14 @@ Pitfall: avoid rewriting full `config.yaml` with PyYAML for small profile edits 
 
 Session reference: `references/discord-thread-member-autonomy-ares-legacy-agent-2026-06-16.md`.
 
+### Estrutura fixa em lote: canais privados com threads por conta
+
+Para uma árvore autorizada de canais de relatórios e threads por conta, usar canais privados com overwrite explícito negando `VIEW_CHANNEL` ao `@everyone` e permitindo somente os participantes pedidos. Threads públicas dentro desses pais privados continuam limitadas pela visibilidade do pai; adicionar explicitamente também os bots pedidos como membros, pois permissão do canal não equivale à participação na thread. Administradores do servidor continuam tendo bypass nativo.
+
+Persistir o plano, a autorização humana, IDs antes/depois e cada resultado de POST antes da próxima escrita. Em retomada, reconciliar nomes/IDs já criados antes de qualquer novo POST; nunca repetir criação após timeout ambíguo. Fazer canário de um canal e suas threads, depois executar grupos pequenos. Respeitar `Retry-After` e os headers `X-RateLimit-Remaining`/`X-RateLimit-Reset-After`; não disparar varredura de membros sem controle de rate limit.
+
+Validar nomes exatos, categoria, conjunto inteiro de overwrites, duração de arquivo, pai de cada thread e conjunto inteiro de membros por GET. Contar/deduplicar em código. Criar canais e adicionar bots não configura o gateway para responder nem redireciona relatórios/crons existentes: esses fluxos exigem escopo autorizado separado. Usar checkpoint e fonte `data/` próprios, sem editar o contrato/core de campanhas durante uma tarefa de estrutura Discord.
+
 ### Separar canal privado/diretoria e canal de equipe
 
 Use quando um agente atende liderança e gestores, mas Rodolfo precisa abrir conversas que não incluam automaticamente toda a equipe. Não criar outro agente apenas para resolver membership/visibilidade: um único profile pode atender vários canais com sessões separadas e o mesmo estado operacional.
