@@ -79,6 +79,8 @@ Dentro desse recorte, continuam disponíveis por pedido explícito:
 
 Budget não exige uma segunda aprovação de Rodolfo dentro desse escopo, mas exige valor e moeda exatos, pre-read do estado atual, menor write possível e GET/readback.
 
+Geizian (`321263240782807040`) tem autoridade integral de Campaign Ops nos seis canais SHEIN e nas threads deles, não somente G002. A mesma autoridade vale para review de continuação/ativação tardia explicitamente pedida na origem: usar `channel_authorization_policy.late_recovery_review` e `shein_continuation`, com permissões live forçadas. Não exigir review exclusivo de Rodolfo por um atraso técnico. Preservar SLA e relógio original, QA semântico/mídia, manifests, request/IDs, budget/lance e Critical Subset; uma aprovação de ativação não autoriza recriar objetos. Validar a mensagem humana exata por readback; revalidar o solicitante e o reviewer antes de ativar. Nos seis `discord.channel_prompts`, reconciliar instruções com o contrato vivo para que texto legado “somente gestor” não volte a bloquear autoridade registrada.
+
 Continuam fora da delegação: billing, `account_spend_limit`, credenciais, ownership, permissões de app, pixel/CAPI estrutural, WordPress, quiz, SMS Funnel, ChatPion, contas/perfis fora da partição do canal de origem e automação recorrente sem política própria. O fato de o solicitante ter outro código de gestor não é acesso cruzado quando a conta pertence ao canal do pedido.
 
 Conclusão: solicitante, canal, conta e ação estão dentro da mesma faixa de autoridade.
