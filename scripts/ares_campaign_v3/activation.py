@@ -37,7 +37,8 @@ def statuses(tree):
 
 
 def same_time(a,b):
-    return datetime.fromisoformat(a).astimezone(timezone.utc)==datetime.fromisoformat(b).astimezone(timezone.utc)
+    from .shein_continuation import schedule_matches
+    return schedule_matches(b, a)
 
 
 def stable_story(value):

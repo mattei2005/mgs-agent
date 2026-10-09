@@ -5,6 +5,10 @@ Política correta tem dois estágios:
 1. **Thread nova auto-criada pelo bot:** pode nascer com título provisório/determinístico e receber **um único rename semântico pós-primeira resposta** estilo ChatGPT, quando o título LLM ficar disponível.
 2. **Thread já aberta/renomeada:** deve manter o nome até ser finalizada. Não renomear por follow-up, pausa longa, session reset, reply curto, pergunta nova dentro da mesma thread ou novo auto-title interno da sessão Hermes.
 
+#### Prefixos de emoji pedidos por Rodolfo
+
+Quando Rodolfo solicitar emoji no início do nome de canal ou thread, concatenar o emoji diretamente ao texto, sem espaço separador, preservando o restante do nome. Exemplos: `🎯Yolokfx Conta 05 Criar Camp`, `📊shein-g001-relatorios`, `📈Yolokfx Conta 05 Intraday`. Essa preferência de formatação não autoriza criação/renomeação antecipada quando Rodolfo pediu apenas confirmação de entendimento; aguardar a aprovação do escopo.
+
 #### Sufixo do autor sem alterar o padrão aprovado
 
 Quando Rodolfo pedir para acrescentar o nome de quem abriu a thread, preservar 100% da lógica de título existente e aplicar apenas um pós-processamento final: `Título Base - PrimeiroNome`. Não mexer em heurística, prompt, idioma, tamanho-alvo, guardrails, nem regra de thread antiga. O sufixo deve usar só o primeiro nome humano (`display_name`/`source.user_name`), sem ID/mention/sobrenome, truncando somente a base se necessário para respeitar o limite de 100 caracteres do Discord. Detalhe e checklist: `references/discord-thread-title-author-suffix-2026-06-17.md`.

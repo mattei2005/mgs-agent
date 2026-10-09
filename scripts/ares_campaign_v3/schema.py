@@ -211,7 +211,9 @@ class CampaignSpec:
             raise ManifestError("invalid start_intent")
         start = _iso(str(value["start_time"]), "start_time")
         if status == "ACTIVE" and start_intent == "SCHEDULED" and start <= datetime.now(timezone.utc):
-            raise ManifestError("ACTIVE requires future start_time")
+            from .shein_continuation import allows_elapsed_campaign
+            if not allows_elapsed_campaign(value):
+                raise ManifestError("ACTIVE requires future start_time")
         tracking_aware_pure_clone = mode == "pure_clone" and bool(value.get("ads"))
         ads = tuple(
             AdSpec.from_dict(

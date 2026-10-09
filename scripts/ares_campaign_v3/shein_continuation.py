@@ -6,6 +6,7 @@ import json
 import re
 from contextvars import ContextVar
 from pathlib import Path
+from datetime import datetime, timezone
 
 APPROVED_RESUME: ContextVar[dict | None] = ContextVar('shein_approved_same_id_resume', default=None)
 BASE = Path('/root/mgs-agent')
@@ -13,6 +14,25 @@ BASE = Path('/root/mgs-agent')
 
 def content_digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def allows_elapsed_campaign(value):
+    context=APPROVED_RESUME.get()
+    if not context or (context.get('verified') or {}).get('verified') is not True:return False
+    candidates=context['state']['target_manifest'].get('campaigns') or []
+    return (context['descriptor'].get('start_now') is True and len(candidates)==1 and value==candidates[0]
+            and value.get('account_id')==context['descriptor']['account_id'] and value.get('status')=='ACTIVE')
+
+
+def schedule_matches(expected, observed):
+    a=datetime.fromisoformat(str(expected)).astimezone(timezone.utc)
+    b=datetime.fromisoformat(str(observed)).astimezone(timezone.utc)
+    if a==b:return True
+    context=APPROVED_RESUME.get()
+    if not context or (context.get('verified') or {}).get('verified') is not True:return False
+    preserved=context['descriptor'].get('preserved_start_time')
+    approved=context['state']['manifest']['campaigns'][0]['start_time']
+    return bool(preserved and str(expected)==approved and b==datetime.fromisoformat(preserved).astimezone(timezone.utc) and 0 <= (b-a).total_seconds() <= 1)
 
 
 def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
@@ -34,6 +54,11 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
     sids = [str(sid) for b in bundles for sid in b.get('adset_ids',[])]
     if cids != [str(descriptor.get('existing_campaign_id'))] or sids != [str(descriptor.get('existing_adset_id'))]:
         raise ValueError('continuation does not match existing confirmed shell IDs')
+    if descriptor.get('preserved_start_time'):
+        expected=datetime.fromisoformat(state['manifest']['campaigns'][0]['start_time']).astimezone(timezone.utc)
+        preserved=datetime.fromisoformat(descriptor['preserved_start_time']).astimezone(timezone.utc)
+        if not 0 <= (preserved-expected).total_seconds() <= 1:
+            raise ValueError('continuation schedule normalization exceeds original copy one-second bound')
     mid = str(descriptor.get('source_message_id') or '')
     if not re.fullmatch(r'[0-9]{17,20}',mid) or not descriptor.get('source_message_content'):
         raise ValueError('continuation human message evidence is missing')
@@ -91,7 +116,7 @@ def run(path, *, confirm_execute=False):
     authorize(state['request'],profile,force=True)
     verified=validate_descriptor(descriptor,state,checkpoint)
     route.atomic_json(state_path.parent/'continuation-authorization-verified.json',verified)
-    marker=APPROVED_RESUME.set({'descriptor':descriptor,'state':state,'checkpoint':checkpoint})
+    marker=APPROVED_RESUME.set({'descriptor':descriptor,'state':state,'checkpoint':checkpoint,'verified':verified})
     try:
         return route.run_request(state['request'],confirm_execute=confirm_execute)
     finally:

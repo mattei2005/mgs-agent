@@ -39,6 +39,30 @@ class ContinuationTests(unittest.TestCase):
             if p.endswith(d['recovery_review_message_id']):row['author']['id']='other'
             return row
         with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=wrong)
+    def test_copy_normalization_is_accepted_only_in_verified_same_id_resume(self):
+        m,d,s,c,g=self.fixture()
+        self.assertTrue(callable(getattr(m,'schedule_matches',None)), 'scoped normalization comparator is missing')
+        expected='2026-10-09T11:30:00-04:00';observed='2026-10-09T11:30:01-0400'
+        d['preserved_start_time']=observed;s['manifest']['campaigns']=[{'start_time':expected}]
+        self.assertFalse(m.schedule_matches(expected,observed))
+        p=m.validate_descriptor(d,s,c,get_message=g)
+        marker=m.APPROVED_RESUME.set({'descriptor':d,'state':s,'checkpoint':c,'verified':p})
+        try:
+            self.assertTrue(m.schedule_matches(expected,observed))
+            self.assertFalse(m.schedule_matches(expected,'2026-10-09T11:30:02-04:00'))
+        finally:m.APPROVED_RESUME.reset(marker)
+    def test_elapsed_active_parse_is_scoped_to_exact_original_target(self):
+        m,d,s,c,g=self.fixture()
+        self.assertTrue(callable(getattr(m,'allows_elapsed_campaign',None)), 'scoped elapsed target capability is missing')
+        target={'idempotency_key':'same','account_id':'999','status':'ACTIVE','start_time':'2026-10-09T11:30:00-04:00'}
+        s['target_manifest']['campaigns']=[target]
+        self.assertFalse(m.allows_elapsed_campaign(target))
+        p=m.validate_descriptor(d,s,c,get_message=g)
+        marker=m.APPROVED_RESUME.set({'descriptor':d,'state':s,'checkpoint':c,'verified':p})
+        try:
+            self.assertTrue(m.allows_elapsed_campaign(target))
+            self.assertFalse(m.allows_elapsed_campaign({**target,'account_id':'other'}))
+        finally:m.APPROVED_RESUME.reset(marker)
     def test_no_explicit_now_is_blocked(self):
         m,d,s,c,g=self.fixture();d['start_now']=False
         with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)

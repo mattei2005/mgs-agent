@@ -257,7 +257,8 @@ def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
 
 
 def _same_time(a: Any, b: Any) -> bool:
-    return aware_time(a).astimezone(timezone.utc) == aware_time(b).astimezone(timezone.utc)
+    from .shein_continuation import schedule_matches
+    return schedule_matches(b, a)
 
 
 def verify_media_ads(desired, source, live, warnings):
