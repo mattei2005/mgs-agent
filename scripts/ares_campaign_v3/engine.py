@@ -749,8 +749,11 @@ class CampaignEngine:
         needs_inventory = any(
             not known_creatives.get(f"{ci}.{ai}") for ci, ai in ordered_slots
         )
+        # Reconcile the complete account edge using compact identity pages.
+        # Full definitions for old unrelated creatives make pagination slow and
+        # hit the 100-page guard before recent request objects are reached.
         creative_inventory_path = (
-            f"act_{bundle.account_id}/adcreatives?fields={creative_fields}&limit=50"
+            f"act_{bundle.account_id}/adcreatives?fields=id,name&limit=5000"
         )
         if needs_inventory:
             inventory_ops.append(BatchOperation(

@@ -42,6 +42,14 @@ Pitfalls:
 - Não confundir com `approvals.cron_mode`; cron continua separado e deve permanecer `deny` salvo pedido explícito.
 - Não usar `/yolo` como solução permanente para agente MGS; `/yolo` é sessão/processo. Config de profile é a correção durável.
 
+## 5.0.0 Gate MCP independente — AdsPower já autorizado
+
+- Distinguir o gate de comandos do gate MCP: `approvals.mode: 'off'` não elimina a aprovação independente de ferramentas write-capable em `mcp_servers.<server>.trust: untrusted`. A ausência de `readOnlyHint=true` faz até `get-browser-list` passar por esse gate. Não marcar ferramentas de escrita como read-only nem ampliar a allowlist para contornar o aviso.
+- Quando Rodolfo pedir corrigir prompts repetidos em AdsPower já autorizado, reconciliar a rota/registry, mudar somente `mcp_servers.adspower-pc1.trust` de `untrusted` para `full` no agente afetado e no mirror, com backup e writer nativo. Preservar usuários autorizados, credenciais, allowlist, lease e Critical Subset. `full` remove a confirmação técnica por RPC, não autoriza ações fora do pedido humano.
+- A confiança é capturada na descoberta e fica em cache no processo. Validar o YAML sozinho não ativa a correção. Preferir o comando nativo `/reload-mcp` em vez de reiniciar o gateway. Em handoff Discord explicitamente autorizado por Rodolfo, Zeus pode enviá-lo como `/reload-mcp <@BOT_ID>` na thread do executor. Se houver confirmação nativa pendente, aprovar somente o reload autorizado; não alterar outros gates por associação. Verificar se houve clique concorrente e reler a configuração antes de reenviar `/approve`.
+- Exigir readback de `MCP Servers Reloaded`, servidor correto e allowlist preservada, seguido de chamada real do executor sem prompt e resultado sanitizado. Só então declarar recuperação; pedir ao executor retomar automaticamente o pedido original, sem nova autorização. Não abrir/fechar um perfil arbitrário apenas para smoke quando a solicitação pendente é somente leitura.
+- Para importar helpers locais, usar o ambiente de dependências já ativado no shell e comprovar `sys.executable` e `hermes_cli.config.__file__`. O shebang legado pode apontar para `.venv` sem as dependências atuais; chamar `activate_dependencies` com uma árvore diferente do workspace instalado pode remover o `site-packages` correto. Não instalar pacotes nem mudar runtime para corrigir esse erro de intérprete.
+
 ## 5.0.1 Caixas interativas `Hermes needs your input` / ferramenta `clarify`
 
 Essas caixas não são o gate técnico de `approvals.mode`. Elas aparecem quando o modelo chama a ferramenta `clarify`. Portanto, mudar somente `approvals.mode` ou escrever “não use caixas” no SOUL não garante a remoção: a ferramenta ainda pode estar exposta por `hermes-discord` ou por uma lista explícita em `platform_toolsets.discord`, e instruções de sistema da ferramenta podem vencer a preferência comportamental do SOUL.

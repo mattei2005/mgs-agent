@@ -2899,6 +2899,23 @@
       "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
+      "canonical_key": "ares.recovery.ownership-no-routine-handoff",
+      "canonical_source": "context/routes.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T16:58:58+00:00",
+      "id": "ARES-SELF-RECOVERY-NO-ROUTINE-HANDOFF-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares resolve recovery e comunica na origem sem menção/handoff rotineiro ao Zeus",
+      "updated_at": "2026-10-09T16:58:58+00:00"
+    },
+    {
       "canonical_key": "ares.shein.account-lookup-catalog",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json",
       "consumers": [
@@ -11480,5 +11497,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T16:04:41+00:00"
+  "updated_at": "2026-10-09T16:58:58+00:00"
 }

@@ -127,9 +127,11 @@ Na política `SHEIN-US-DIRECT.json#/request_defaults/expired_explicit_start_poli
 
 Essa normalização é do intake/preflight antes do write; jamais regenerar campanha, sobrescrever manifest selado ou trocar IDs depois de efeito parcial. Se já há objetos, reconciliar e continuar o mesmo request/IDs pela recuperação central. O estado da execução e o relógio E2E original são preservados; a regra não remove QA, quotas ou outros gates.
 
-### Recovery com Zeus sem reaprovação do CEO
+### Recovery de responsabilidade do Ares
 
-A delegação vigente em `context/routes.md#Delegação-permanente-de-recovery-Ares--Zeus` / chave `zeus.ares.manager-authorized-technical-recovery` permite ao Ares acionar Zeus para corrigir tecnicamente e recuperar um pedido humano de gestor/operador já autorizado, sem exigir novo OK de Rodolfo por causa da intervenção do Zeus. Zeus valida comando/continuação, conta/canal e parâmetros; Ares avisa o gestor e mantém a responsabilidade por continuar pela rota canônica, com QA/readback. Preservar request, IDs, fonte e escopo, sem writer concorrente ou cópia/exclusão implícita. Critical Subset, credenciais, billing e ampliação de escopo continuam com gates próprios.
+Ares diagnostica e resolve falhas de pedidos já autorizados, preservando request, IDs, fonte, parâmetros, QA e readback. Não mencionar/acionar Zeus nem transferir o reparo para ele como fallback rotineiro. A delegação histórica de recovery não é obrigação de handoff nem motivo para abandonar a execução; seguir `context/routes.md#Recovery-operacional-do-Ares`. Rodolfo pode solicitar expressamente uma intervenção separada, mas erro técnico por si só não autoriza essa transferência.
+
+Antes de retomar, fazer readback e reconciliar efeitos parciais; não repetir POST não idempotente, criar writer paralelo, novas cópias ou exclusões implícitas. Correção técnica autorizada é etapa de manutenção separada do hot path; retomar somente pela rota central depois da validação. Se existir bloqueio externo incontornável ou gate crítico, preservar checkpoint resumível e informar a Rodolfo causa comprovada e próxima decisão exata na thread de origem, sem menção automática ao Zeus. Critical Subset, credenciais, billing e ampliação de escopo continuam com gates próprios.
 
 Conclusão: o manifest pode ser materializado sem inventar campos.
 

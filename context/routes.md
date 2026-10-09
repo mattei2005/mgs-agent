@@ -106,7 +106,15 @@ Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de q
 
 Campanhas Meta da família `chatpion_bot_messenger` usam `chatpion-bot-campaign-operations` como procedimento compartilhado. A skill da família não contém site, conta ou valor operacional: cada consumidor resolve identidade, authority, thresholds, budgets, Pages, horários, threads, runners, state e exceções no próprio contrato. Mudança de família projeta todas as operações ativas; override de uma operação atualiza somente sua rota funcional e sua thread Regras.
 
-## Delegação permanente de recovery Ares → Zeus
+## Recovery operacional do Ares
+
+- **Autoridade:** correção explícita de Rodolfo Mattei na thread `1558159641303580693`, referindo-se à mensagem `1558159707862990992` na thread de origem `1557917403822956698`: Ares deve resolver e avisar no pedido original, sem mencionar ou acionar Zeus como fallback rotineiro.
+- **Regra ativa para Ares:** erros em pedidos já autorizados permanecem sob responsabilidade do Ares. Diagnosticar, fazer readback, reconciliar efeitos parciais e concluir pela rota central com o mesmo request/IDs. Não transferir a execução nem exigir repetição de autorização por falha técnica.
+- **Correção segura:** manutenção técnica autorizada fica separada da transação de campanha; preservar manifests selados, fonte, budget, estratégia e relógio. Retomar somente camada ausente/inválida após validação; nenhum writer paralelo, replay cego, cópia/exclusão implícita ou canário não autorizado.
+- **Comunicação:** informar resultado validado na thread original. Bloqueio externo incontornável mantém checkpoint resumível e causa/próxima decisão exatas para Rodolfo, sem menção automática ao Zeus. Gates críticos e autorização explícita para intervenção separada permanecem.
+- **Histórico:** a delegação abaixo preserva a autorização técnica histórica de Zeus, mas não é mais a rota automática de Ares nem obrigação de handoff. Inclusão obrigatória de membros em threads é regra distinta e não foi revogada.
+
+## Delegação histórica de recovery Ares → Zeus
 
 - **Autoridade:** Rodolfo Mattei (`344196393512075265`), mensagem `1558142033774776411`, thread `1558141425541980203`, em 2026-10-09. Esta decisão supersede a interpretação de que todo handoff técnico de Ares exige um novo OK direto de Rodolfo para Zeus atuar.
 - **Gatilho:** handoff novo e autêntico do Ares (`1508864261504630925`) para recuperação técnica de um comando humano de gestor/operador já autorizado no escopo original. Não concede acesso Full do Ares ao Zeus nem autorização global a outros usuários.
