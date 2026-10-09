@@ -452,6 +452,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C10-D1-20261009",
+      "next_step": "Acompanhar C10 como D1 em 09/10 nos relatórios existentes; não rearmar first-delivery nem repetir writes concluídos",
+      "objective": "Reiniciar C10 como D1 operacional de 09/10 preservando ativação e budget live",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c10-d1-20261009-rodolfo.json",
+      "state": "complete: campanha e filhos active confirmados meta; nome 09-10; cycle_start_date 2026-10-09; histórico anterior preservado; checkpoints matinais vazios e contador pós-escala zero; usd30/dia intacto; nenhum cron ou outra campanha alterado",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-09T05:32:19+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-C12-C44M-C46M-ACTIVATE-20260930",
       "next_step": "Às 00:10 SP o script determinístico faz novo pre-read, lock da lane, status ACTIVE idempotente e GET final; stdout curto retorna nesta thread",
       "objective": "Ativar C12, C44M e C46M da conta CPV13 às 00:10 America/Sao_Paulo, preservando budgets",
@@ -5382,5 +5392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T04:15:22+00:00"
+  "updated_at": "2026-10-09T05:32:19+00:00"
 }
