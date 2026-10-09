@@ -115,7 +115,7 @@
       "post_video_wait_seconds": 72,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=1834549705110253",
@@ -194,14 +194,18 @@
         "completed_at": "2026-10-09T09:44:48.291767-04:00",
         "evidence": "progress samples through near-end and loop restart"
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-09T09:43:05.297296-04:00",
       "opened_at": "2026-10-09T09:43:09.298271-04:00",
       "identity_verified": "Mhd Aldy",
       "wait": {
         "started_at": "2026-10-09T09:44:48.292036-04:00",
-        "target_seconds": 72
-      }
+        "target_seconds": 72,
+        "ended_at": "2026-10-09T09:46:00.292473-04:00",
+        "actual_seconds": 72.0
+      },
+      "close_intent_at": "2026-10-09T09:46:00.293131-04:00",
+      "closed_at": "2026-10-09T09:46:05.778015-04:00"
     },
     {
       "profile_id": "k1f7o4i7",
@@ -212,13 +216,20 @@
       "likes_target": 5,
       "comments_target": 0,
       "post_video_wait_seconds": 77,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "blocked",
       "likes": [],
       "comments": [],
       "video": {},
-      "closed_verified": false
+      "closed_verified": true,
+      "open_intent_at": "2026-10-09T09:46:13.806706-04:00",
+      "opened_at": "2026-10-09T09:46:17.502622-04:00",
+      "blocker": "Facebook requires ownership confirmation; account restricted on 2026-08-28 as potentially compromised",
+      "identity_observed": "Kelly",
+      "blocked_at": "2026-10-09T09:46:37.467822-04:00",
+      "close_intent_at": "2026-10-09T09:46:37.468367-04:00",
+      "closed_at": "2026-10-09T09:46:40.823411-04:00"
     },
     {
       "profile_id": "k1f7o4im",
@@ -229,14 +240,33 @@
       "likes_target": 5,
       "comments_target": 0,
       "post_video_wait_seconds": 41,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "running",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10239574212965811",
+          "intent_at": "2026-10-09T09:48:13.687661-04:00",
+          "status": "confirmed",
+          "selection_reason": "Sunrise beach nature photography",
+          "confirmed_at": "2026-10-09T09:48:36.600319-04:00",
+          "evidence": "Remover Curtir exact fbid"
+        }
+      ],
       "comments": [],
       "video": {},
-      "closed_verified": false
+      "closed_verified": false,
+      "open_intent_at": "2026-10-09T09:46:40.998885-04:00",
+      "opened_at": "2026-10-09T09:46:45.038935-04:00",
+      "technical_recoveries": [
+        {
+          "at": "2026-10-09T09:47:41.636158-04:00",
+          "stage": "attach",
+          "result": "reconnected after startup timeout"
+        }
+      ],
+      "identity_verified": "Giselle Santos"
     }
   ],
-  "updated_at": "2026-10-09T09:44:48.292044-04:00"
+  "updated_at": "2026-10-09T09:48:36.600347-04:00"
 }
