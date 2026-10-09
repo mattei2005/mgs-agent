@@ -69,7 +69,13 @@ def load_env() -> dict[str, str]:
 
 
 def run_node(preflight: bool = False) -> dict:
-    command = ['node', str(NODE_HELPER)]
+    route_state = json.loads(STATE_PATH.read_text())
+    if route_state.get('execution_backend') == 'pc1_native':
+        if STATE_PATH.name != 'meta-digital-trust-40-20261007-state.json' or route_state.get('request_id') != 'meta-digital-trust-40-1557475850310393879':
+            return {'kind': 'blocked', 'reason': 'pc1_backend_scope_mismatch'}
+        command = ['/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python', str(ROOT / 'scripts/meta-digital-trust-pc1-create-one.py')]
+    else:
+        command = ['node', str(NODE_HELPER)]
     if preflight:
         command.append('--preflight')
     result = subprocess.run(command, capture_output=True, text=True, timeout=240, env=load_env())

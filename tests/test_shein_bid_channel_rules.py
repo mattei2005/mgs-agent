@@ -95,6 +95,19 @@ class BidDeltaTests(unittest.TestCase):
             self.assertEqual(plan['writes'],0)
             self.assertEqual(sum(op.kind=='campaign_copy' for op in operations),1)
 
+    def test_bid_drift_blocks_readback_and_activation(self):
+        from test_shein_single_clone_route import live_fixture
+        from ares_campaign_v3.activation import validate_live
+        p,s,a=self.build('COCAP','1.25');live=live_fixture(p,s)
+        c=p['campaigns'][0];live['campaign']['account_id']=c['account_id']
+        live['adsets']['data'][0].update(c['adset_updates'])
+        self.assertEqual(route.verify_readback(p,s,live),[])
+        spec=Manifest.from_dict(p).campaigns[0]
+        validate_live(live,copy.deepcopy(live),spec)
+        before=copy.deepcopy(live);live['adsets']['data'][0]['bid_amount']='126'
+        with self.assertRaises(ValueError):route.verify_readback(p,s,live)
+        with self.assertRaises(ValueError):validate_live(live,before,spec)
+
     def test_request_accepts_explicit_bid_fields(self):
         r,_,_,_=case(4);r.update(bid_strategy='COCAP',bid_usd='1.25')
         route.validate_request(r)

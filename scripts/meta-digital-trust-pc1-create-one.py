@@ -28,6 +28,7 @@ def atomic(path,data):
     os.replace(tmp,path)
 
 def call(a):
+    if handler is None:raise RuntimeError('native_handler_not_initialized')
     d=handler(a,session_id=SESSION)
     d=json.loads(d) if isinstance(d,str) else d
     if not isinstance(d,dict):raise RuntimeError('invalid_cua_result')
@@ -90,6 +91,9 @@ def create(s,from_confirm=False):
     if intent_path.exists():
         old=json.loads(intent_path.read_text())
         if old.get('status')=='submitted_unconfirmed':raise RuntimeError('prior_native_intent_unconfirmed')
+        if old.get('status')=='confirmed_popup' and old.get('seq')==len(s['completed'])+1:
+            return old['result']
+        if int(old.get('seq',0))>len(s['completed'])+1:raise RuntimeError('native_intent_sequence_conflict')
     if not from_confirm:
         navigate();click('Add');click('Create a new ad account','DataItem')
         type_field('Ad account name','001')

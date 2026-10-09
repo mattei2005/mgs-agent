@@ -1,0 +1,32 @@
+........................................................................ [ 34%]
+......................................................................................... [ 77%]
+.............................................FF       [100%]
+=================================== FAILURES ===================================
+________ test_shein_standard_campaign_request_templates_are_registered _________
+
+    def test_shein_standard_campaign_request_templates_are_registered():
+        operation = json.loads(OPERATION.read_text(encoding="utf-8"))
+        templates = operation["request_templates"]
+    
+>       assert templates["status"] == "ACTIVE"
+E       AssertionError: assert 'ACTIVE_DOCUM...NTIME_PARTIAL' == 'ACTIVE'
+E         
+E         - ACTIVE
+E         + ACTIVE_DOCUMENT_APPROVED_RUNTIME_PARTIAL
+
+mgs-agent/tests/test_shein_standard_campaign_requests.py:14: AssertionError
+____ test_shein_standard_campaign_request_templates_preserve_mode_identity _____
+
+    def test_shein_standard_campaign_request_templates_preserve_mode_identity():
+        text = REFERENCE.read_text(encoding="utf-8")
+    
+        assert text.count("PEDIDO DE CAMPANHA — SHEIN") == 3
+        assert "Modo: Criar do zero com criativos novos" in text
+>       assert "Não reutilizar source_campaign_id, source_adset_id ou source_ad_id" in text
+E       AssertionError: assert 'Não reutilizar source_campaign_id, source_adset_id ou source_ad_id' in '# Padrões oficiais de nome e pedido — SHEIN-US-DIRECT\n\n## Versão humana compacta 3.0 — aprovada por Rodolfo\n\nA ve...ar UTMs, budget, início, status e readback completo\n- Medir preparação, Engine/API, readback e tempo total E2E\n```\n'
+
+mgs-agent/tests/test_shein_standard_campaign_requests.py:29: AssertionError
+=========================== short test summary info ============================
+FAILED mgs-agent/tests/test_shein_standard_campaign_requests.py::test_shein_standard_campaign_request_templates_are_registered
+FAILED mgs-agent/tests/test_shein_standard_campaign_requests.py::test_shein_standard_campaign_request_templates_preserve_mode_identity
+2 failed, 206 passed, 74 subtests passed in 9.53s
