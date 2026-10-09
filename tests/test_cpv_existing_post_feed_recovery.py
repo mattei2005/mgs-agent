@@ -46,3 +46,12 @@ def test_old_post_only_payload_is_unchanged():
     p={'name':'old','object_story_id':'page_post','url_tags':'utm_campaign=c46'}
     assert creative_body(p)==p
     assert matches(p,p)
+
+
+def test_materialized_thumbnail_hash_does_not_replace_media_qa():
+    p=package();actual=copy.deepcopy(p)
+    actual['asset_feed_spec']['videos'][0]['video_id']='derived-v1'
+    actual['asset_feed_spec']['videos'][0]['thumbnail_hash']='generated-poster'
+    assert matches(actual,p)
+    actual['asset_feed_spec']['videos'][0]['adlabels']=[{'name':'wrong-slot'}]
+    assert not matches(actual,p)
