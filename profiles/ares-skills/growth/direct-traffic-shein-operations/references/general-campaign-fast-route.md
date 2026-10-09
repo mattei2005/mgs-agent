@@ -85,6 +85,12 @@ Depois de readback Meta completo, o mesmo pipeline valida vídeo final por linea
 
 ## Prova, limites e recovery
 
+### Reconciliação em contas com inventário grande
+
+Quando a retomada atingir `invalid creative inventory pagination`, distinguir cursor ausente/repetido do limite de páginas antes de repetir. A rota central usa páginas compactas `id,name` de até 5000 itens e percorre a conta inteira com deduplicação e guard de cursor; nomes apenas selecionam candidatos do request. Antes de reutilizar qualquer candidato, obter GET completo e comparar conta, mídia/copy/tracking e identidade; IDs já persistidos continuam preferenciais e são relidos diretamente. Nunca encerrar ao encontrar o primeiro nome nem tratar 100 páginas de 50 itens como inventário completo. Se a API não aceitar o tamanho pedido, respeitar a página efetiva e diagnosticar a cobertura, sem criar objetos às cegas. Teste offline: `test_ares_existing_post_recovery.py`; evidência live de manutenção mede cobertura completa separadamente do write.
+
+Se o core concluiu `COMPLETE_PAUSED` e a pós-validação acusa mismatch somente por snapshot compacto, ler definição completa; retomar apenas QA/pós-processamento pelo mesmo runner, sem recriar. Toda falha continua sob responsabilidade do Ares; a delegação histórica não autoriza menção/handoff rotineiro ao Zeus.
+
 - Fonte na mesma conta, evento fixo Add to Wishlist, Page/pixel/task vivos, URL de destino autorizada, moeda e timezone vivos.
 - Tokens históricos válidos como `c01`/`c0101` são capturados literalmente; números/tracking canônicos novos não reescrevem a fonte. Nome antigo US-EN não prova idioma de mídia; novo nome usa idioma do catálogo, preservando posts/copy no pure clone. Qualidade/compatibilidade de mídia continua exigindo evidência no intake criativo.
 - Budget/intenção de início explícitos; status final omitido é resolvido pelo default ACTIVE aprovado, não por suposição do agente. PAUSED expresso prevalece. SCHEDULED ACTIVE exige horário futuro válido; horário explícito vencido do próprio dia é resolvido em IMMEDIATE_AFTER_QA pela política aprovada, preservando o literal original no audit. IMMEDIATE usa `start_now=true` e a fase central depois do QA; somente essa intenção permite o início técnico já passado. Guardrails, quotas e bloqueios reais permanecem.

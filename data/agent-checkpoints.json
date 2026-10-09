@@ -1092,6 +1092,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
+      "next_step": "Revalidar candidatos atuais e auditar sequencialmente, sem alterar ou fechar perfis; se recurso ocupado colocar request em waiting_resource e retomar somente apos liberar",
+      "objective": "Auditar abertura e restricoes visiveis dos perfis BACKUP nos grupos SHEIN; serializar todos os usos AdsPower",
+      "source": "discord:1558159385694576661; /root/.hermes/profiles/ares/cache/scratch/adspower-shein-profiles.json",
+      "state": "preflight: nenhuma lease de outra tarefa ativa; 25 candidatos por inventario anterior; mcp inventario e status falharam por timeout; ssh e computer use doctor saudaveis; fallback gui sob lease unica",
+      "thread_id": "1558159385694576661",
+      "updated_at": "2026-10-09T17:10:10+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-BID-CHANNEL-RULES-20261009",
       "next_step": "Aplicar no proximo pedido real; estrategia e cap exigem readback Meta antes de ativacao. Zeus: atualizar regressao global KR-014 stale (3.6.1 vs 3.6.8), sem downgrade; nao bloqueia esta operacao.",
       "objective": "Aplicar regras aprovadas de lance e solicitantes autorizados nos seis canais SHEIN",
@@ -1199,6 +1209,16 @@
       "state": "rodolfo superseded the personal user access token architecture for shein-us-direct: direct traffic will use business integration system user token(s); bot/messenger remains on user access tokens. facebook login for business config mgs advertiser oauth was created and read back as general, system-user, never, pages and ad accounts required, pixels optional, task permissions advertise/analyze/draft/manage, 15 app permissions. app minibot is present in client business portfolio digital trust and owned by growth network inc; connected assets currently shows none.",
       "thread_id": "1548177588063703112",
       "updated_at": "2026-09-12T04:47:06+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SMS-D1-COPY-1558154555617841294",
+      "next_step": "Confirmar substanciacao da aprovacao; se nao houver aprovacao individual real, obter copy nao enganosa. Confirmar grafia se desejarem corrigi-la. Depois pre-read, backup seguro, alteracao somente text por ID, readback e cutoff para comparar 7 dias completos. Zeus reconcilia candidato de delegacao KCI-43ce633abb3bf180 nas fontes de permissoes.",
+      "objective": "Alterar somente o texto de todas as automacoes Disparo 1 e preservar marco para comparacao de ROI SMS antes/depois.",
+      "source": "discord:1558154555617841294",
+      "state": "preflight read-only concluido: 12 automacoes, 12 sequencias sms ativas, carro/moto g001-g006; nenhuma alteracao no sms funnel. rodolfo autorizou execucao do pedido de geizian e declarou delegacao futura. aguarda confirmacao de que financiamento aprovado e real para destinatarios; grafia financiameno recebida deve ser preservada ate correcao expressa.",
+      "thread_id": "1558154555617841294",
+      "updated_at": "2026-10-09T17:11:02+00:00"
     },
     {
       "agent": "ares",
@@ -5472,5 +5492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T17:06:58+00:00"
+  "updated_at": "2026-10-09T17:11:02+00:00"
 }
