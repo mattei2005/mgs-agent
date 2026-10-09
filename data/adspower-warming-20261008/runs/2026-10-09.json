@@ -1,7 +1,7 @@
 {
   "date": "2026-10-09",
   "timezone": "America/New_York",
-  "state": "planned",
+  "state": "partial",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -242,7 +242,7 @@
       "post_video_wait_seconds": 41,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10239574212965811",
@@ -251,11 +251,106 @@
           "selection_reason": "Sunrise beach nature photography",
           "confirmed_at": "2026-10-09T09:48:36.600319-04:00",
           "evidence": "Remover Curtir exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10236463946685577",
+          "intent_at": "2026-10-09T09:48:37.161025-04:00",
+          "status": "confirmed",
+          "selection_reason": "Everyday kitten photograph",
+          "confirmed_at": "2026-10-09T09:48:40.499964-04:00",
+          "evidence": "Remove Like/Remover Curtir exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10118919651857823",
+          "intent_at": "2026-10-09T09:48:50.347846-04:00",
+          "status": "confirmed",
+          "selection_reason": "Road and fog street photography",
+          "confirmed_at": "2026-10-09T09:48:53.722736-04:00",
+          "evidence": "Remove Like/Remover Curtir exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=3472214242959808",
+          "intent_at": "2026-10-09T09:49:03.095829-04:00",
+          "status": "confirmed",
+          "selection_reason": "Everyday pizza food photo; user review, not sponsored",
+          "confirmed_at": "2026-10-09T09:49:06.492605-04:00",
+          "evidence": "Remove Like/Remover Curtir exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=4447304882174258",
+          "intent_at": "2026-10-09T09:49:16.658466-04:00",
+          "status": "confirmed",
+          "selection_reason": "House photograph in Walton NY",
+          "confirmed_at": "2026-10-09T09:49:20.171246-04:00",
+          "evidence": "Remove Like/Remover Curtir exact fbid"
         }
       ],
       "comments": [],
-      "video": {},
-      "closed_verified": false,
+      "video": {
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "navigation_intent_at": "2026-10-09T09:49:20.755566-04:00",
+        "samples": [
+          {
+            "at": "2026-10-09T09:49:38.202130-04:00",
+            "value": 1.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:39.498680-04:00",
+            "value": 3.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:40.802353-04:00",
+            "value": 4.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:42.107157-04:00",
+            "value": 5.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:43.429772-04:00",
+            "value": 7.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:44.724774-04:00",
+            "value": 8.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:46.021045-04:00",
+            "value": 9.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:47.310310-04:00",
+            "value": 10.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:48.660657-04:00",
+            "value": 12.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:49.956388-04:00",
+            "value": 13.0,
+            "max": 13.0
+          },
+          {
+            "at": "2026-10-09T09:49:51.267146-04:00",
+            "value": 1.0,
+            "max": 13.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-09T09:49:51.267847-04:00",
+        "evidence": "progress samples through near-end and loop restart"
+      },
+      "closed_verified": true,
       "open_intent_at": "2026-10-09T09:46:40.998885-04:00",
       "opened_at": "2026-10-09T09:46:45.038935-04:00",
       "technical_recoveries": [
@@ -265,8 +360,74 @@
           "result": "reconnected after startup timeout"
         }
       ],
-      "identity_verified": "Giselle Santos"
+      "identity_verified": "Giselle Santos",
+      "wait": {
+        "started_at": "2026-10-09T09:49:51.268214-04:00",
+        "target_seconds": 41,
+        "ended_at": "2026-10-09T09:50:32.268655-04:00",
+        "actual_seconds": 41.0
+      },
+      "close_intent_at": "2026-10-09T09:50:32.269355-04:00",
+      "closed_at": "2026-10-09T09:50:38.105644-04:00"
     }
   ],
-  "updated_at": "2026-10-09T09:48:36.600347-04:00"
+  "updated_at": "2026-10-09T09:51:09.825770-04:00",
+  "summary": [
+    {
+      "profile_id": "k13him2j",
+      "profile_no": "894",
+      "likes_confirmed": 5,
+      "likes_target": 5,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 70.0,
+      "closed_verified": true,
+      "complete": true,
+      "blocker": null
+    },
+    {
+      "profile_id": "k1d71895",
+      "profile_no": "1130",
+      "likes_confirmed": 2,
+      "likes_target": 2,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 72.0,
+      "closed_verified": true,
+      "complete": true,
+      "blocker": null
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "profile_no": "1177",
+      "likes_confirmed": 0,
+      "likes_target": 5,
+      "new_comments": 0,
+      "video_complete": false,
+      "wait_seconds": 0,
+      "closed_verified": true,
+      "complete": false,
+      "blocker": "Facebook requires ownership confirmation; account restricted on 2026-08-28 as potentially compromised"
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "likes_confirmed": 5,
+      "likes_target": 5,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 41.0,
+      "closed_verified": true,
+      "complete": true,
+      "blocker": null
+    }
+  ],
+  "finished_at": "2026-10-09T09:51:09.825753-04:00",
+  "next_cycle": "2026-10-12T09:32:00-04:00",
+  "new_comments": 0,
+  "technical_recoveries": [
+    "Missing optional bs4 avoided using stdlib HTMLParser",
+    "Reaction choice locator timeouts recovered with fresh DOM and sibling reaction-menu selector; no duplicate likes",
+    "1190 MCP attach timeout recovered after verifying Active and reconnecting"
+  ]
 }
