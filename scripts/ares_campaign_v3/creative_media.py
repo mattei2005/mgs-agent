@@ -45,6 +45,12 @@ def full_creative(creative, story, tags, name, degrees):
 
 
 def creative_body(payload):
+    if payload.get('object_story_id') and payload.get('asset_feed_spec'):
+        rules = payload['asset_feed_spec'].get('asset_customization_rules') or []
+        defaults = [r for r in rules if r.get('is_default') is True]
+        if len(defaults) != 1 or defaults[0].get('use_existing_post') is not True:
+            raise ValueError('existing post AFS requires one explicit default use_existing_post=true rule')
+        return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_id','asset_feed_spec','url_tags','degrees_of_freedom_spec','contextual_multi_ads'] if k in payload}
     if payload.get('asset_feed_spec') or payload.get('object_story_spec'):
         return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_spec','asset_feed_spec','url_tags','degrees_of_freedom_spec','media_sourcing_spec','contextual_multi_ads'] if k in payload}
     return {k:copy.deepcopy(payload[k]) for k in ['name','object_story_id','url_tags','degrees_of_freedom_spec','contextual_multi_ads'] if k in payload}
@@ -66,11 +72,21 @@ def matches(actual, expected):
         return semantic_story(observed)==semantic_story(wanted)
     if not expected.get('asset_feed_spec'):
         return (actual.get('object_story_id') or actual.get('effective_object_story_id'))==expected.get('object_story_id')
-    actual_story=actual.get('object_story_spec') or {};wanted_story=expected.get('object_story_spec') or {}
-    if actual_story.get('page_id')!=wanted_story.get('page_id'):return False
-    if (actual.get('instagram_user_id') or actual_story.get('instagram_user_id'))!=wanted_story.get('instagram_user_id'):return False
+    existing_post = bool(expected.get('object_story_id'))
+    if existing_post:
+        if (actual.get('object_story_id') or actual.get('effective_object_story_id')) != expected['object_story_id']:return False
+    else:
+        actual_story=actual.get('object_story_spec') or {};wanted_story=expected.get('object_story_spec') or {}
+        if actual_story.get('page_id')!=wanted_story.get('page_id'):return False
+        if (actual.get('instagram_user_id') or actual_story.get('instagram_user_id'))!=wanted_story.get('instagram_user_id'):return False
     af=actual.get('asset_feed_spec') or {};ef=expected['asset_feed_spec']
     for key in set(ef)-{'videos','images'}:
+        if existing_post and key == 'asset_customization_rules':
+            # Graph readback may omit the two existing-post transport flags.
+            def without_transport_flags(rules):
+                return [{k:v for k,v in r.items() if k not in {'is_default','use_existing_post'}} for r in rules]
+            if stable(without_transport_flags(af.get(key) or [])) != stable(without_transport_flags(ef[key])):return False
+            continue
         if stable(af.get(key))!=stable(ef.get(key)):return False
     for kind in ['videos','images']:
         ar=af.get(kind) or [];er=ef.get(kind) or []
