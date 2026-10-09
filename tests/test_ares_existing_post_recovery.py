@@ -46,7 +46,16 @@ def recovery_case(tmp_path, *, known=False, duplicate=False, repeated=False, mis
                             body['account_id'] = 'different-account'
                         if wrong_tags:
                             body['url_tags'] = 'utm_campaign=wrong'
+                    elif op.name.startswith('existing_post_recovery_candidate_'):
+                        cid = op.relative_url.split('?', 1)[0]
+                        if cid == 'duplicate-id':
+                            body = {**creatives[0], 'id': cid}
+                        else:
+                            body = dict(next(c for c in creatives if c['id'] == cid))
                     elif '/adcreatives?' in op.relative_url:
+                        query = parse_qs(urlsplit(op.relative_url).query)
+                        assert query['fields'] == ['id,name']
+                        assert query['limit'] == ['5000']
                         assert not known, 'known IDs must avoid account-wide creative inventory'
                         after = parse_qs(urlsplit(op.relative_url).query).get('after')
                         self.pages += 1
@@ -66,7 +75,7 @@ def recovery_case(tmp_path, *, known=False, duplicate=False, repeated=False, mis
                             rows = list(creatives)
                             if duplicate:
                                 rows.append({**creatives[0], 'id': 'duplicate-id'})
-                            body = {'data': rows}
+                            body = {'data': [{k: row[k] for k in ('id', 'name')} for row in rows]}
                     else:
                         raise AssertionError(op.relative_url)
                     results.append(BatchResult(op.name, 200, body))

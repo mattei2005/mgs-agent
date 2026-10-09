@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-09T12:03:21-04:00",
+    "updated_at": "2026-10-09T17:02:45.551962+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -744,6 +744,37 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "ares-adspower-mcp-trust-remediation-20261009",
+      "kind": "config-and-native-mcp-reload",
+      "scope": "ares-adspower-pc1",
+      "status": "reloaded_pending_executor_smoke",
+      "requested_by": "344196393512075265",
+      "source_thread_id": "1558159785843499109",
+      "source_message_id": "1558159785843499109",
+      "target_thread_id": "1558159385694576661",
+      "updated_at": "2026-10-09T17:02:45.551962+00:00",
+      "artifacts": [
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/gateway-approvals-busy-input.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/gateway-approvals-busy-input.md"
+      ],
+      "changes": [
+        "adspower-pc1 trust untrusted -> full; existing 20-tool allowlist, lease, credentials and user authorization preserved",
+        "Native /reload-mcp; gateway not restarted",
+        "Zeus approval runbook records separate MCP trust gate and discovery-cache activation"
+      ],
+      "backup": "/root/.hermes/profiles/zeus/cache/scratch/ares-adspower-trust-20261009T165754Z",
+      "validation": {
+        "yaml_live_mirror": "PASS trust=full; approvals.mode=off string; allowlist 20",
+        "native_reload_message_id": "1558161692830081105",
+        "native_reload": "PASS adspower-pc1 reconnected; 20 tools",
+        "handoff_message_id": "1558161830130614283",
+        "skill_readback": "PASS source == versioned mirror"
+      },
+      "report_infra_status": "pending"
+    },
     {
       "id": "SHEIN-DISCORD-REPORTS-1558144762618585159",
       "agent": "zeus",

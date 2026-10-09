@@ -797,6 +797,31 @@ class CampaignEngine:
                             raise ExecutionFailed("creative inventory changed during pagination")
                 unique[creative_id] = creative
             creative_inventory = list(unique.values())
+            expected_names = [
+                str(bundle.campaigns[ci - 1].ads[ai - 1].creative_payload.get("name") or "")
+                for ci, ai in ordered_slots
+                if not known_creatives.get(f"{ci}.{ai}")
+            ]
+            candidates = [row for row in creative_inventory if any(
+                name and (str(row.get("name") or "") == name
+                          or str(row.get("name") or "").startswith(name + " "))
+                for name in expected_names
+            )]
+            # A name only selects a candidate. Account/media/copy/tracking must
+            # still be proven by a full GET before reusing any creative ID.
+            creative_inventory = []
+            for offset in range(0, len(candidates), 50):
+                ops = [BatchOperation(
+                    f"existing_post_recovery_candidate_{offset + i}", "GET",
+                    f"{row['id']}?fields={creative_fields}", kind="readback",
+                ) for i, row in enumerate(candidates[offset:offset + 50])]
+                results = self._batch(bundle, transport, ops,
+                                      "existing_post_recovery_inventory_candidates")
+                for original, result in zip(candidates[offset:offset + 50], results):
+                    if (str(result.body.get("id") or "") != str(original["id"])
+                            or str(result.body.get("account_id") or "") != bundle.account_id):
+                        raise ExecutionFailed("candidate creative identity mismatch")
+                    creative_inventory.append(result.body)
         self._timed_finish(timing, started)
         live_by_campaign = {
             ci: list(
