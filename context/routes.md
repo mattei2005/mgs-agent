@@ -106,6 +106,16 @@ Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de q
 
 Campanhas Meta da família `chatpion_bot_messenger` usam `chatpion-bot-campaign-operations` como procedimento compartilhado. A skill da família não contém site, conta ou valor operacional: cada consumidor resolve identidade, authority, thresholds, budgets, Pages, horários, threads, runners, state e exceções no próprio contrato. Mudança de família projeta todas as operações ativas; override de uma operação atualiza somente sua rota funcional e sua thread Regras.
 
+## Delegação permanente de recovery Ares → Zeus
+
+- **Autoridade:** Rodolfo Mattei (`344196393512075265`), mensagem `1558142033774776411`, thread `1558141425541980203`, em 2026-10-09. Esta decisão supersede a interpretação de que todo handoff técnico de Ares exige um novo OK direto de Rodolfo para Zeus atuar.
+- **Gatilho:** handoff novo e autêntico do Ares (`1508864261504630925`) para recuperação técnica de um comando humano de gestor/operador já autorizado no escopo original. Não concede acesso Full do Ares ao Zeus nem autorização global a outros usuários.
+- **Validação obrigatória:** ler comando humano e eventuais continuações na thread de origem; conferir identidade, autorização vigente, conta/canal, budget, estratégia, status, schedule e checkpoint antes de qualquer write. Para SHEIN, aplicar a autoridade live por canal/partição definida em `SHEIN-US-DIRECT.json#/channel_authorization_policy`.
+- **Execução:** Zeus investiga, corrige com segurança a infraestrutura/rota central e recupera o mesmo pedido sem cobrar nova autorização de Rodolfo ou repetir o OK de orçamento já aprovado. Preservar IDs e escopo; sem writer paralelo, cópias adicionais, exclusões implícitas ou modificação da fonte. Novo início exige a continuação humana explícita, não é inferido do horário vencido.
+- **Dono funcional e comunicação:** Ares informa o gestor e continua o pedido na thread de origem pela rota canônica, após a correção técnica e com QA/readback completo antes da ativação. Zeus não se torna dono de estratégia/performance.
+- **Exceções preservadas:** mudança de escopo, autorização humana não comprovada, conta fora da partição, credenciais, billing, operações destrutivas e demais itens do Critical Subset continuam sujeitos às confirmações próprias. Essa delegação não autoriza alterar skills de outro agente sem o gate vigente.
+- **Registro:** `authorized-users.json#/agents/zeus/delegated_handoff_policy`; registrar execução, inventário, checkpoint e REPORT-INFRA quando aplicável.
+
 ## Gestores e rastreamento por UTM_medium
 
 ```text

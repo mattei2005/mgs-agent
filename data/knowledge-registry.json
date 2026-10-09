@@ -9164,6 +9164,24 @@
       "updated_at": "2026-09-08T13:03:36+00:00"
     },
     {
+      "canonical_key": "zeus.ares.manager-authorized-technical-recovery",
+      "canonical_source": "context/routes.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:42:02+00:00",
+      "id": "ZEUS-ARES-MANAGER-RECOVERY-DELEGATION-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Recovery técnico Ares→Zeus herda autoridade do comando autorizado do gestor, sem novo OK Rodolfo",
+      "updated_at": "2026-10-09T15:43:07+00:00"
+    },
+    {
       "canonical_key": "procedure.meta.b013-alert-profile-metadata",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -11406,5 +11424,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:30:32+00:00"
+  "updated_at": "2026-10-09T15:43:07+00:00"
 }

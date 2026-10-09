@@ -16,6 +16,22 @@
       "type": "Admin Agent",
       "discord_channel_id": "1496267442899521627",
       "discord_channel_name": "zeus-admin-agent",
+      "delegated_handoff_policy": {
+        "status": "active",
+        "source_agent": "ares",
+        "source_agent_discord_id": "1508864261504630925",
+        "access_level": "limited",
+        "scope": "technical_recovery_of_existing_manager_authorized_request",
+        "require_original_human_authority": true,
+        "require_scope_and_checkpoint_reconciliation": true,
+        "new_rodolfo_approval_required": false,
+        "critical_subset_unchanged": true,
+        "canonical_source": "context/routes.md#delegacao-permanente-de-recovery-ares-zeus",
+        "authorized_by_discord_id": "344196393512075265",
+        "authority_message_id": "1558142033774776411",
+        "source_thread_id": "1558141425541980203",
+        "effective_date": "2026-10-09"
+      },
       "authorized_user_discord_ids": [
         "344196393512075265",
         "321263240782807040"

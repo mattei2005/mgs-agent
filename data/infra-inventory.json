@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-09T10:31:38-04:00",
+    "updated_at": "2026-10-09T11:43:05.982900-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -41753,19 +41753,20 @@
       "business_id": "155263197283282",
       "request_id": "meta-digital-trust-40-1557475850310393879",
       "target": 40,
-      "status": "blocked_28_of_40_reauth_and_ambiguous_mutation_reconciliation",
+      "status": "in_progress_pc1_native_29_of_40",
       "state_path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
       "scripts": [
         "/root/mgs-agent/scripts/meta-digital-trust-create-one.js",
         "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
-        "/root/.hermes/profiles/zeus/scripts/meta-digital-trust-40-20261007.sh"
+        "/root/.hermes/profiles/zeus/scripts/meta-digital-trust-40-20261007.sh",
+        "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py"
       ],
       "backup": "/root/mgs-agent/backups/meta40-1557475850310393879",
       "cron": {
         "id": "ad67a766690d",
         "schedule": "27,57 * * * *",
         "cadence_minutes": 30,
-        "repeat": 100,
+        "repeat": 105,
         "no_agent": true,
         "deliver": "discord:1544113212075548683"
       },
@@ -41778,27 +41779,16 @@
         "old_batch_unchanged": true
       },
       "skill_updated": "meta-ads-api-operations/references/meta-business-1password-totp-reauth-2026-09-08.md",
-      "report_infra_pending": false,
-      "updated_at": "2026-10-08T08:12:19.193586-04:00",
-      "confirmed_created": 28,
-      "remaining": 12,
+      "report_infra_pending": true,
+      "updated_at": "2026-10-09T11:43:05.982900-04:00",
+      "confirmed_created": 29,
+      "remaining": 11,
       "latest_recovery": {
-        "authorization_message_id": "1557988564845723681",
-        "preflight": "reauth_required",
-        "meta_writes": 0,
-        "ambiguous_mutation_reconciliation": "pending_after_authentication",
-        "novnc_loopback_http200": true,
-        "process_session_id": "proc_06521086e1d0",
-        "pc1_test": {
-          "authorization_message_id": "1558004839059820657",
-          "transport_verified": true,
-          "existing_Rodolfo_Chrome_session": true,
-          "result": "meta_new_device_security_block",
-          "retry_after_seconds": 300,
-          "retry_result": "same_security_block",
-          "meta_writes": 0,
-          "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/references/interactive-browser-authentication.md"
-        }
+        "at": "2026-10-09T11:43:05.982900-04:00",
+        "authorization_message_id": "1558127924660539525",
+        "result": "pc1_resume_canary_validated",
+        "created": 29,
+        "remaining": 11
       },
       "report_infra": {
         "message_id": "1557482695888732232",
@@ -41823,11 +41813,44 @@
         "channel_id": "1498132022634483894",
         "readback": true
       },
-      "next_due_at": "2026-10-08T08:27:00-04:00",
-      "resume_authorization_message_id": "1557726924422381590",
+      "next_due_at": "2026-10-09T11:57:00-04:00",
+      "resume_authorization_message_id": "1558127924660539525",
       "excluded_live_account_ids": [
-        "1109191818427759"
-      ]
+        "1109191818427759",
+        "1969322040402478"
+      ],
+      "latest_recovery_history": [
+        {
+          "authorization_message_id": "1557988564845723681",
+          "preflight": "reauth_required",
+          "meta_writes": 0,
+          "ambiguous_mutation_reconciliation": "pending_after_authentication",
+          "novnc_loopback_http200": true,
+          "process_session_id": "proc_06521086e1d0",
+          "pc1_test": {
+            "authorization_message_id": "1558004839059820657",
+            "transport_verified": true,
+            "existing_Rodolfo_Chrome_session": true,
+            "result": "meta_new_device_security_block",
+            "retry_after_seconds": 300,
+            "retry_result": "same_security_block",
+            "meta_writes": 0,
+            "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/references/interactive-browser-authentication.md"
+          }
+        }
+      ],
+      "execution_backend": "pc1_native",
+      "pc1_validation": {
+        "canary_account_id": "2357329635103368",
+        "success_popup_and_id_owner_readback": true,
+        "form_preflight_through_confirm": "PASS",
+        "meta_writes_in_preflight": 0,
+        "synthetic_regressions": 4,
+        "eight_day_schedule_audit": "PASS",
+        "first_natural_pc1_tick": "pending",
+        "shared_lease": "released",
+        "backup": "/root/mgs-agent/backups/meta-digital-trust-pc1-resume-20261009T111304"
+      }
     },
     {
       "id": "cpv13-c12-delete-c08-d1-20261008-rodolfo",
@@ -44319,8 +44342,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/meta-digital-trust-hourly40-run.py",
-      "size_bytes": 13808,
-      "modified_at": "2026-10-07T15:50:24-04:00"
+      "size_bytes": 14456,
+      "modified_at": "2026-10-09T11:36:15.741898-04:00",
+      "sha256": "4fddba0765ac346dd2d9b1156e9276f80c70f1a896a615e0205449ca5408a9ad"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-adspower-warming-support.py",
@@ -45056,6 +45080,12 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/meta-digital-trust-pc1-create-one.py",
+      "size_bytes": 11133,
+      "modified_at": "2026-10-09T11:27:24.143346-04:00",
+      "sha256": "53c3cd5103e70bdf6d101bfed193212cbee660d15f852f8ae6a3eff22b649ab5"
     }
   ],
   "skills_mgs": [
@@ -47973,9 +48003,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 480459,
-      "md5": "916b5e25180f6255b7d72167b54db535",
-      "modified_at": "2026-10-09T10:29:28-04:00"
+      "size_bytes": 483285,
+      "modified_at": "2026-10-09T11:43:05.810935-04:00",
+      "sha256": "f57738ea5bce6627b53323b956164bacea793e14a0a1dbf5bdc30ceb7c414049"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -48483,9 +48513,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-state.json",
-      "size_bytes": 26692,
-      "md5": "d8d38f80d8d82e6a8179f1faaddd3e42",
-      "modified_at": "2026-10-09T02:49:07-04:00"
+      "size_bytes": 28420,
+      "modified_at": "2026-10-09T11:19:58.170594-04:00",
+      "sha256": "4cb7e16c1e44a0d55f734c6aa2743f3af0f80a42250b2c40dcc23a2650644ace"
     },
     {
       "path": "/root/mgs-agent/data/meta-digital-trust-cadence30-20260906-cron-postwrite.json",
@@ -49170,6 +49200,12 @@
       "size_bytes": 12689,
       "md5": "90aa094d62e1cd6d3975c01d0b68a086",
       "modified_at": "2026-09-13T11:17:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-digital-trust-40-20261007-pc1-intent.json",
+      "size_bytes": 1103,
+      "modified_at": "2026-10-09T11:19:58.168594-04:00",
+      "sha256": "2ddbb97d7e8f0ebe5716ec0e19429297ed4d98cd64f6b9ab542ba9f0b505f3d0"
     }
   ],
   "mu_plugin_canonical": {
