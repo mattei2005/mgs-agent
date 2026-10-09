@@ -311,10 +311,66 @@
       "account_status_checked": true,
       "restriction_assessment": "no_visible_restriction_account_status",
       "ended_at": "2026-10-09T17:28:39.201707+00:00"
+    },
+    {
+      "profile_id": "kphniam",
+      "profile_no": "489",
+      "name": "02 - ANUNCIANTE BACKUP - nome - VIZIOID SHEIN - G004",
+      "group_id": "10857996",
+      "group_name": "[SHEIN] VIZIOID - G004",
+      "audit_complete": true,
+      "opened_by_audit": true,
+      "started_at": "2026-10-09T17:28:39.202227+00:00",
+      "initial_active": false,
+      "browser_open": "confirmed_api_ws",
+      "facebook_visible_signals": [],
+      "status": "facebook_logged_in_no_visible_block_on_home",
+      "visible_text_length": 3433,
+      "restriction_scope": "Facebook homepage; account status",
+      "account_status_signals": [],
+      "account_status_positive_markers": [
+        "no issues"
+      ],
+      "account_status_checked": true,
+      "restriction_assessment": "no_visible_restriction_account_status",
+      "ended_at": "2026-10-09T17:28:51.740066+00:00"
+    },
+    {
+      "profile_id": "kr3qhpc",
+      "profile_no": "516",
+      "name": "02 - ANUNCIANTE BACKUP - Risha Reddy - YOLOKFX SHEIN - G003",
+      "group_id": "10576992",
+      "group_name": "[SHEIN] YOLOKFX - G003",
+      "audit_complete": true,
+      "opened_by_audit": true,
+      "started_at": "2026-10-09T17:28:51.740639+00:00",
+      "initial_active": false,
+      "browser_open": "confirmed_api_ws",
+      "facebook_visible_signals": [],
+      "status": "needs_manual_review",
+      "visible_text_length": 22,
+      "restriction_scope": "Facebook homepage; account status",
+      "ended_at": "2026-10-09T17:29:30.661776+00:00"
+    },
+    {
+      "profile_id": "kr3qhpo",
+      "profile_no": "519",
+      "name": "02 - ANUNCIANTE BACKUP - Ubah Madu - VIZIOID SHEIN - G001",
+      "group_id": "10857994",
+      "group_name": "[SHEIN] VIZIOID - G001",
+      "audit_complete": false,
+      "opened_by_audit": true,
+      "started_at": "2026-10-09T17:29:30.662391+00:00",
+      "initial_active": false,
+      "browser_open": "confirmed_api_ws",
+      "status": "technical_failure",
+      "error_type": "TimeoutError",
+      "safe_reason": "MCP_RESPONSE_TIMEOUT",
+      "ended_at": "2026-10-09T17:31:05.595557+00:00"
     }
   ],
   "status": "running",
   "inventory_verified_count": 25,
   "guardrail": "one shared resource; sequential; no profile edits/closures/credentials",
-  "updated_at": "2026-10-09T17:28:39.201777+00:00"
+  "updated_at": "2026-10-09T17:31:05.595647+00:00"
 }
