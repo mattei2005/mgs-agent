@@ -56,8 +56,8 @@ At the password page:
 1. Confirm the page origin is the intended site.
 2. Open the password-manager extension.
 3. If it is already unlocked, select the exact site/identifier item and let the extension fill the page; never reveal the password field.
-4. If it asks for the manager's master password, stop. Leave the site and popup open, release the shared desktop lease, and ask the user to unlock the extension through their Remote Desktop session. Never ask for the master password in chat or type it through CUA.
-5. After the user confirms the unlock, reacquire the lease, rediscover the Chrome PID/window ID, recapture, and continue from the current page.
+4. If the manager asks for its master password or Windows Security asks for a Windows Hello PIN to unlock it, stop. Leave the site and popup open, release the shared desktop lease, and ask the user to unlock it directly through their Remote Desktop session. Never ask for either secret in chat, reveal a saved unlock item, or relay the secret through CUA. Explain this as the protected human-unlock workflow, not an untested claim that the field is technically undrivable.
+5. Treat the user's completion acknowledgement as the trigger for immediate read-only validation, not proof of recovery. Reacquire the lease, rediscover the Chrome PID/window ID, and inspect the current target page first. If the requested account area is already authenticated, proceed to its readback without reopening the extension or provoking another challenge. Validate manager unlock, website authentication and any device-security hold separately; completing one does not prove the others cleared.
 
 A server-side 1Password Service Account may safely confirm item metadata, but it does not authorize or justify carrying the resolved password into a different remote browser through SSH, shell variables, clipboard injection, MCP arguments, or synthetic typing. The fill must remain inside the password manager's protected browser path.
 

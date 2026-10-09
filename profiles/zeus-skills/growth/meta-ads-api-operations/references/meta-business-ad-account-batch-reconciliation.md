@@ -8,18 +8,18 @@ A successful creation modal can update the URL to a new internal `selected_asset
 
 `ad_accounts?business_id=<BM>&selected_asset_id=<ASSET>&selected_asset_type=ad-account`
 
-Read the real `ID:` and `Owned by:` there. Never classify the stale prior ID as a duplicate creation.
+Read the real `ID:` and `Owned by:` there. Never classify the stale prior ID as a duplicate creation. Compare identifiers within their own namespace: the URL's internal `selected_asset_id` need not equal the panel's real Ad Account ID, so numerical inequality alone is not a mismatch. If navigation to a captured success asset still displays a pre-existing account, record that association as unresolved; do not infer the created account from row position or assign a different unknown ID to it without evidence.
 
 ## Blank page or timeout after Create
 
-A blank page, timeout, or visual error after the mutation click does not prove failure. Do not retry immediately. Reload the canonical BM account list and compare real ad-account IDs with the durable checkpoint. If exactly one unknown ID appears, confirm name/owner, record it as committed, and continue without retry. Zero IDs permits one controlled retry after the fixed interval; more than one requires stopping for concurrent-state reconciliation.
+A blank page, timeout, or visual error after the mutation click does not prove failure. Do not retry immediately. Reload the canonical BM account list and compare real ad-account IDs with the durable checkpoint. Attribute exactly one unknown ID to the mutation only when a complete before/after set and the mutation evidence establish its origin; then confirm name/owner, record it as committed, and continue without retry. After a human-authentication pause or a change of computer, revalidate the target and resolve popup-confirmed entries whose real IDs remain unknown before attribution. A single unfamiliar account in a virtualized list is not proof that the failed attempt created it. When evidence remains insufficient, preserve the confirmed count, block new writes, and ask only for that account's unresolved origin and inclusion in the batch. Under the default acceptance contract, a complete readback proving zero new IDs permits one controlled retry after the fixed interval; an explicit no-retry contract still wins. More than one new ID requires stopping for concurrent-state reconciliation.
 
 ## Repeated generic create rejection
 
 A generic `Unable to add ad account` after the mutation click is not proof of a quota or security restriction when the UI still exposes `Add` and `Create a new ad account`. Reconcile side effects first against the union of: all IDs known before the run, IDs discovered in the latest preflight payload, and every ID already checkpointed by the batch. A virtualized payload can show only the newest window, so its visible count is not the Business total.
 
-- If the canonical reload shows exactly one unknown ID, treat the mutation as committed and do not retry.
-- If it shows zero unknown IDs, wait the fixed cadence and allow exactly one controlled retry.
+- If the canonical reload shows exactly one unknown ID, apply the attribution gates above before treating the mutation as committed; do not replay the write while origin remains ambiguous.
+- If a complete readback proves zero unknown IDs, wait the fixed cadence and allow exactly one controlled retry only when the active acceptance contract permits it.
 - If the same generic rejection repeats and a second reload again proves zero side effect, stop the batch. Do not keep retrying and do not label it a maximum-account limit unless Meta actually displays that gate.
 - On stop, report `Criadas X/Y`, `Faltam Z`, the repeated error text, and that both failed attempts had no side effect. Preserve the remaining count in the checkpoint so a later authorized resume starts only after fresh live reconciliation.
 
