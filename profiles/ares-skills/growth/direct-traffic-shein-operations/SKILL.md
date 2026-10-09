@@ -121,6 +121,16 @@ fonte de clone         campanha/conta exatas quando houver
 
 Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Nos modelos visíveis ao gestor, apresente domínio e idioma juntos em uma única linha no formato exato `Site/idioma: dominio.com - EN|ES`. Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
 
+### Horário explícito do dia já vencido
+
+Na política `SHEIN-US-DIRECT.json#/request_defaults/expired_explicit_start_policy`, horário explícito que já passou no próprio dia civil do timezone verificado da conta vira início imediato após QA, sem pedir nova autorização ao gestor/CEO somente por esse atraso. Usar o horário atual com o buffer técnico normal de NOW; guardar o horário solicitado literalmente e o motivo no audit/resolved_request. Data/horário futuros permanecem literais; não transferir implicitamente para o dia seguinte. PAUSED expresso continua PAUSED. Horário omitido mantém a próxima meia-noite; data anterior a hoje não entra nessa conversão automática.
+
+Essa normalização é do intake/preflight antes do write; jamais regenerar campanha, sobrescrever manifest selado ou trocar IDs depois de efeito parcial. Se já há objetos, reconciliar e continuar o mesmo request/IDs pela recuperação central. O estado da execução e o relógio E2E original são preservados; a regra não remove QA, quotas ou outros gates.
+
+### Recovery com Zeus sem reaprovação do CEO
+
+A delegação vigente em `context/routes.md#Delegação-permanente-de-recovery-Ares--Zeus` / chave `zeus.ares.manager-authorized-technical-recovery` permite ao Ares acionar Zeus para corrigir tecnicamente e recuperar um pedido humano de gestor/operador já autorizado, sem exigir novo OK de Rodolfo por causa da intervenção do Zeus. Zeus valida comando/continuação, conta/canal e parâmetros; Ares avisa o gestor e mantém a responsabilidade por continuar pela rota canônica, com QA/readback. Preservar request, IDs, fonte e escopo, sem writer concorrente ou cópia/exclusão implícita. Critical Subset, credenciais, billing e ampliação de escopo continuam com gates próprios.
+
 Conclusão: o manifest pode ser materializado sem inventar campos.
 
 ## Estratégia de lance e delta explícito

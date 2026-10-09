@@ -401,7 +401,23 @@
     "reference_bid_default": "KEEP_ACTUAL_SOURCE_STRATEGY_AND_AMOUNT",
     "reference_destination_default": "KEEP_ACTUAL_SOURCE_URL",
     "account_resolution": "explicit account or unambiguous canonical context; never guess",
-    "default_quantity": 1
+    "default_quantity": 1,
+    "expired_explicit_start_policy": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_thread_id": "1557274000680288307",
+      "source_message_id": "1558142161659105342",
+      "scope": "explicit_start_same_account_day_only",
+      "when_elapsed": "IMMEDIATE_AFTER_QA",
+      "account_timezone": "verified_ad_account_timezone",
+      "preserve_future_schedule": true,
+      "preserve_explicit_paused": true,
+      "preserve_original_requested_time_in_audit": true,
+      "implicit_next_day_rollover": false,
+      "already_created_objects": "readback-first continuation of same request and IDs, never a new copy or silent manifest rewrite",
+      "implementation": "ares_campaign_v3.shein_schedule + shein_single_clone.resolve_intent",
+      "verification": "offline-tested; Meta and media QA gates unchanged"
+    }
   },
   "campaign_naming_policy": {
     "status": "ACTIVE_RUNTIME_IMPLEMENTED",

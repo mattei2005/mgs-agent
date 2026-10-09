@@ -53,7 +53,7 @@ Hora/Data início: [agora / data e hora no timezone da conta / omitir para 00:00
 - Não exigir campos Modo ou Quiz neste pedido com referência. `Criativos: manter os da fonte` resolve pure_clone; `novos do Drive` resolve clone_prestaged, conservando copy/configurações e exigindo mídia aprovada/compatível. Herdar destino/quiz pela URL real da fonte sem pedir versão humana. Identificar v1/v2/v3 no nome somente com correspondência comprovada; não adivinhar a versão a partir do caminho.
 - Para criar campanha/conjunto realmente do zero, a frase inicial deve dizer `Criar do zero`; uma referência pode servir de template/configuração/copy, mas não autoriza inferir esse modo somente por haver criativos novos. Não exigir IDs técnicos ao gestor.
 - Conservar Ad setup e localização original do tracking; Create ad não vira post existente para preservar social proof automaticamente.
-- Início `agora` autoriza o intent IMMEDIATE; datas humanas agendadas permanecem literais. Não usar `Preparar agora` como sinônimo silencioso de revisão PAUSED.
+- Início `agora` autoriza IMMEDIATE; data/horário futuros permanecem literais. Horário explícito já vencido do próprio dia no timezone da conta resolve início imediato após QA, com horário solicitado preservado no audit e sem nova autorização apenas pelo atraso, conforme `request_defaults.expired_explicit_start_policy`. Não empurrar para amanhã nem alterar datas antigas fora desse recorte. `Preparar agora` não significa revisão PAUSED silenciosamente.
 
 ### Atalho de duplicação e início padrão
 

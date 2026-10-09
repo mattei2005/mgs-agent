@@ -746,7 +746,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 from .shein_schedule import elapsed_start_is_immediate
                 # PREPARED is pre-write; expire only an unexecuted scheduled snapshot.
                 # Existing ENGINE/RECOVERY states keep their original manifests/IDs.
-                if not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at):
+                already_immediate = all(c.get('start_intent') == 'IMMEDIATE' for c in state['manifest']['campaigns'])
+                if already_immediate or not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at):
                     resume_phases.add('PREPARED')
         if not state or state.get('phase') not in resume_phases:
             if request.get('start_now') is not True and request.get('start_next_midnight') is not True and aware_time(request['start_time']) <= started_at:
@@ -754,7 +755,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 if not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at):
                     raise RouteBlocked('requested schedule is outside the approved elapsed-same-day policy')
             prepared, page_token = _prepare(request, config, common, token)
-            state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), 'execution_started_at': (received or started_at).isoformat(), **prepared}
+            original_clock = (old or {}).get('execution_started_at') or (received or started_at).isoformat()
+            state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), 'execution_started_at': original_clock, **prepared}
             atomic_json(state_path, state)
             atomic_json(state_dir / 'manifest-sealed.json', state['manifest'])
         resolved_request = state.get('resolved_request') or request

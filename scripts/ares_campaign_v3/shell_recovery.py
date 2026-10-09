@@ -27,16 +27,29 @@ def reconcile(engine,bundle,transport,record):
             results=engine._batch(bundle,transport,missing,'recovery_shell_adset_copy')
             for row in results:ids[int(row.name.rsplit('_',1)[1])-1]=str(row.body['copied_adset_id'])
         record['adset_ids']=ids
+    from .cbo_bid import shell_payloads, cap_matches
     ops=[]
     for i,(spec,cid,setid) in enumerate(zip(bundle.campaigns,campaigns,record['adset_ids']),1):
-        ops.extend([BatchOperation('shell_campaign_'+str(i),'GET',cid+'?fields=id,name,status,daily_budget,bid_strategy,start_time',kind='readback'),BatchOperation('shell_adset_'+str(i),'GET',setid+'?fields=id,name,status,start_time,bid_amount,bid_constraints',kind='readback')])
+        ops.extend([BatchOperation('shell_campaign_'+str(i),'GET',cid+'?fields=id,account_id,name,status,daily_budget,bid_strategy,start_time',kind='readback'),BatchOperation('shell_adset_'+str(i),'GET',setid+'?fields=id,campaign_id,name,status,start_time,bid_amount,bid_constraints',kind='readback')])
     read=engine._batch(bundle,transport,ops,'recovery_shell_readback');byname={r.name:r.body for r in read};updates=[]
     for i,(spec,cid,setid) in enumerate(zip(bundle.campaigns,campaigns,record['adset_ids']),1):
-        desired={'name':spec.name,**spec.campaign_updates,'status':spec.status,'start_time':spec.start_time}
-        observed=byname['shell_campaign_'+str(i)]
-        if any(str(observed.get(k))!=str(v) for k,v in desired.items()):updates.append(BatchOperation('shell_campaign_update_'+str(i),'POST',cid,body=desired,kind='campaign_update'))
-        desired={'name':spec.adset_name,'status':spec.status,**spec.adset_updates}
-        observed=byname['shell_adset_'+str(i)]
-        if any((str(observed.get(k) or '0')!=str(v) if k=='bid_amount' else (observed.get(k) or {})!=v if k=='bid_constraints' else observed.get(k)!=v) for k,v in desired.items()):updates.append(BatchOperation('shell_adset_update_'+str(i),'POST',setid,body=desired,kind='adset_update'))
-    if updates:engine._batch(bundle,transport,updates,'recovery_shell_normalize')
+        campaign_observed=byname['shell_campaign_'+str(i)]
+        adset_observed=byname['shell_adset_'+str(i)]
+        if getattr(spec,'bid_override',False):
+            if str(campaign_observed.get('id'))!=str(cid) or str(campaign_observed.get('account_id'))!=str(bundle.account_id) or str(adset_observed.get('id'))!=str(setid) or str(adset_observed.get('campaign_id'))!=str(cid):
+                raise ValueError('CBO recovery shell account/parent identity mismatch')
+        desired,set_desired=shell_payloads(spec,setid)
+        if any(str(campaign_observed.get(k))!=str(v) for k,v in desired.items() if k!='adset_bid_amounts') or not cap_matches(spec,adset_observed):
+            updates.append(BatchOperation('shell_campaign_update_'+str(i),'POST',cid,body=desired,kind='campaign_update'))
+        if any((str(adset_observed.get(k) or '0')!=str(v) if k=='bid_amount' else (adset_observed.get(k) or {})!=v if k=='bid_constraints' else adset_observed.get(k)!=v) for k,v in set_desired.items()):
+            updates.append(BatchOperation('shell_adset_update_'+str(i),'POST',setid,body=set_desired,kind='adset_update'))
+    if updates:
+        engine._batch(bundle,transport,updates,'recovery_shell_normalize')
+        # Do not create missing ads until the atomic CBO delta is confirmed live.
+        if any(getattr(spec,'bid_override',False) for spec in bundle.campaigns):
+            after=engine._batch(bundle,transport,ops,'recovery_shell_bid_verification');verified={r.name:r.body for r in after}
+            for i,spec in enumerate(bundle.campaigns,1):
+                c=verified['shell_campaign_'+str(i)];a=verified['shell_adset_'+str(i)]
+                if getattr(spec,'bid_override',False) and (c.get('bid_strategy')!=spec.campaign_updates['bid_strategy'] or str(c.get('daily_budget'))!=str(spec.campaign_updates.get('daily_budget')) or not cap_matches(spec,a)):
+                    raise ValueError('CBO bid/budget recovery not confirmed; preserve shells PAUSED')
     record['stage']='shells_normalized'

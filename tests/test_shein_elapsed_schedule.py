@@ -50,6 +50,19 @@ class ElapsedScheduleTests(unittest.TestCase):
         out=self.resolve('2030-10-09T00:00:00-04:00',start_next_midnight=True)
         self.assertNotIn('start_now',out)
 
+    def test_elapsed_intake_builds_immediate_target_without_mutating_source(self):
+        sys.path.insert(0,str(Path(__file__).resolve().parent))
+        from test_shein_general_runtime import case
+        from ares_campaign_v3 import shein_general as general
+        from ares_campaign_v3.schema import Manifest
+        r,s,a,_=case(4,status='ACTIVE');r['start_time']='2030-10-09T11:30:00-04:00'
+        before=copy.deepcopy(s)
+        resolved=route.resolve_intent(r,s,now=NOW,profile=PROFILE)
+        payload=general.build(resolved,s,114,a)
+        self.assertEqual(payload['campaigns'][0]['start_intent'],'IMMEDIATE')
+        self.assertEqual(Manifest.from_dict(payload).campaigns[0].start_intent,'IMMEDIATE')
+        self.assertEqual(r['start_time'],'2030-10-09T11:30:00-04:00');self.assertEqual(s,before)
+
     def test_account_timezone_defines_calendar_day(self):
         p={'timezone':'America/Los_Angeles','expired_schedule_policy':POLICY}
         # Still yesterday in Los Angeles although UTC date is today.

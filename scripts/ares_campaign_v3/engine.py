@@ -370,23 +370,15 @@ class CampaignEngine:
         record["adset_ids"] = adset_ids
         record["stage"] = "adsets_created"
 
+        from .cbo_bid import shell_payloads
         shell_update_ops: list[BatchOperation] = []
         for index, (campaign, campaign_id, adset_id) in enumerate(zip(bundle.campaigns, campaign_ids, adset_ids), 1):
+            campaign_body, adset_body = shell_payloads(campaign, adset_id)
             shell_update_ops.extend([
-                BatchOperation(
-                    f"campaign_update_{index}", "POST", campaign_id,
-                    body={"name": campaign.name, "status": campaign.status, "start_time": campaign.start_time, **campaign.campaign_updates},
-                    kind="campaign_update",
-                ),
-                BatchOperation(
-                    f"adset_update_{index}", "POST", adset_id,
-                    body={
-                        "name": campaign.adset_name or campaign.name,
-                        "status": campaign.status,
-                        **campaign.adset_updates,
-                    },
-                    kind="adset_update",
-                ),
+                BatchOperation(f"campaign_update_{index}", "POST", campaign_id,
+                               body=campaign_body, kind="campaign_update"),
+                BatchOperation(f"adset_update_{index}", "POST", adset_id,
+                               body=adset_body, kind="adset_update"),
             ])
         timing, started = self._timed_start()
         record["timings"]["shell_normalize"] = timing

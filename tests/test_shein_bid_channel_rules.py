@@ -86,6 +86,9 @@ class BidDeltaTests(unittest.TestCase):
             config={'enabled':True,'write_enabled':True,'accounts':{a['shein_profile']['account_id']:a},'state_root':str(root/'state'),'audit_root':str(root/'audit')}
             transports=[];operations=[]
             class Capture(FakeBatchTransport):
+                def _id(self, kind):
+                    self._sequence += 1
+                    return str(900000000000000 + self._sequence)
                 def execute(self, ops, stage):
                     operations.extend(ops)
                     return super().execute(ops,stage)
@@ -96,7 +99,8 @@ class BidDeltaTests(unittest.TestCase):
             result=engine.execute(m)
             self.assertEqual(result['status'],'COMPLETE_PAUSED')
             self.assertEqual(result['campaign_ids'],engine.execute(m)['campaign_ids'])
-            self.assertTrue(any(op.kind=='adset_update' and op.body.get('bid_amount')=='125' for op in operations))
+            self.assertTrue(any(op.kind=='campaign_update' and list((op.body.get('adset_bid_amounts') or {}).values())==[125] for op in operations))
+            self.assertFalse(any(op.kind=='adset_update' and 'bid_amount' in op.body for op in operations))
             self.assertEqual(plan['writes'],0)
             self.assertEqual(sum(op.kind=='campaign_copy' for op in operations),1)
 
