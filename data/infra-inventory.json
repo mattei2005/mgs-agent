@@ -41762,7 +41762,17 @@
         "meta_writes": 0,
         "ambiguous_mutation_reconciliation": "pending_after_authentication",
         "novnc_loopback_http200": true,
-        "process_session_id": "proc_06521086e1d0"
+        "process_session_id": "proc_06521086e1d0",
+        "pc1_test": {
+          "authorization_message_id": "1558004839059820657",
+          "transport_verified": true,
+          "existing_Rodolfo_Chrome_session": true,
+          "result": "meta_new_device_security_block",
+          "retry_after_seconds": 300,
+          "retry_result": "same_security_block",
+          "meta_writes": 0,
+          "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/secure-remote-windows-automation/references/interactive-browser-authentication.md"
+        }
       },
       "report_infra": {
         "message_id": "1557482695888732232",

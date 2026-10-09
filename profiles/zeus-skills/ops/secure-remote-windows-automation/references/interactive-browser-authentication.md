@@ -65,7 +65,12 @@ A server-side 1Password Service Account may safely confirm item metadata, but it
 
 Do not declare success from a click or from a filled password field. Require the site to show an authenticated state, then navigate to the requested account area and read back the exact artifact (for example, the account-level referral link rather than a product deep link). If 2FA, passkey approval, or a site checkpoint appears, use the approved human handoff and keep verification pending.
 
-### 6. Cleanup
+### 6. Temporary device-security block is not a vault unlock
+
+- Classify a real Meta Business `/security/block/` page saying `We are running additional checks on this new device. Please retry in 5 minutes` as a device/session security hold, not as missing password, OTP or passkey. Do not open/reveal vault entries when the page offers no authentication control. Respect the displayed cooldown for one bounded read-only navigation retry; if the same gate remains, preserve the user's logged-in session, release the desktop lease and report the exact persistent blocker. Never replay a previously ambiguous account-creation mutation from the alternate computer.
+- When the active Hermes Computer Use call cannot load an already-installed dependency generation, use the canonical `pm.environments.activate_dependencies(repo_root)` boot path in a scoped subprocess before importing the handler; do not install packages, enable lazy installs or restart the gateway as a shortcut. `execute_code` may replace stdout/stderr with streams lacking `fileno`, making Cua session startup fail even after dependency activation; use normal subprocess file descriptors and reduce its output in process. Keep indexed captures and actions in the same worker/session and terminate the worker at the end.
+
+### 7. Cleanup
 
 - Confirm the ephemeral scheduled task no longer exists.
 - Preserve the user's Chrome window and unrelated tabs unless closure was authorized.
