@@ -1772,6 +1772,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SHEIN-REPORT-GATEWAY-1558252008467734678",
+      "next_step": "Aplicar roteamento scoped, validar gates e ativar exclusivamente Ares pelo finalizer seguro",
+      "objective": "Recuperar respostas Ares nos 6 canais e 36 threads SHEIN de relatorios sem alterar campanhas",
+      "source": "discord:1558252008467734678",
+      "state": "diagnosed_missing_gateway_allowlist",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-09T22:59:35+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ALERT-AUDIT-1555741952656539649",
       "next_step": "Aguardar decisão Rodolfo para executar pacote de correções/proteções; manter cadências críticas,credenciais e canal canônico. Não atualizar Hermes/reiniciar/excluir mensagens por este pedido.",
       "objective": "Auditar alertas infra/VPS recentes, reconciliar estado real e propor melhorias pós-upgrades",
@@ -5552,5 +5562,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T22:28:06+00:00"
+  "updated_at": "2026-10-09T22:59:35+00:00"
 }
