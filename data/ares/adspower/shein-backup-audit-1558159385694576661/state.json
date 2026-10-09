@@ -195,7 +195,16 @@
       "status": "needs_manual_review",
       "visible_text_length": 620,
       "restriction_scope": "Facebook homepage; account status",
-      "ended_at": "2026-10-09T17:23:49.565402+00:00"
+      "ended_at": "2026-10-09T17:23:49.565402+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "j40ss4i",
+        "browser_pid": 533840,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "j40sswb",
@@ -216,7 +225,17 @@
       "account_status_positive_markers": [],
       "account_status_checked": true,
       "restriction_assessment": "not_conclusive_account_status",
-      "ended_at": "2026-10-09T17:24:02.512021+00:00"
+      "ended_at": "2026-10-09T17:24:02.512021+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "j40sswb",
+        "browser_pid": 542484,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "visible_length": 1410,
+        "status_markers": [],
+        "status": "facebook_logged_in",
+        "facebook_tab_found": true
+      }
     },
     {
       "profile_id": "j4735ph",
@@ -239,7 +258,8 @@
       ],
       "account_status_checked": true,
       "restriction_assessment": "no_visible_restriction_account_status",
-      "ended_at": "2026-10-09T17:24:13.049851+00:00"
+      "ended_at": "2026-10-09T17:24:13.049851+00:00",
+      "live_process_confirmed": false
     },
     {
       "profile_id": "jbqbsf2",
@@ -260,7 +280,15 @@
       "account_status_positive_markers": [],
       "account_status_checked": true,
       "restriction_assessment": "not_conclusive_account_status",
-      "ended_at": "2026-10-09T17:28:11.628804+00:00"
+      "ended_at": "2026-10-09T17:28:11.628804+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "jbqbsf2",
+        "browser_pid": 545596,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_PAGES_UNAVAILABLE"
+      }
     },
     {
       "profile_id": "kolthe6",
@@ -282,8 +310,22 @@
         "no issues"
       ],
       "account_status_checked": true,
-      "restriction_assessment": "no_visible_restriction_account_status",
-      "ended_at": "2026-10-09T17:28:22.516885+00:00"
+      "restriction_assessment": "page_status_only_personal_profile_unverified",
+      "ended_at": "2026-10-09T17:28:22.516885+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kolthe6",
+        "browser_pid": 542200,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "visible_length": 917,
+        "status_markers": [
+          "Ofertas Selectas Page has no issues",
+          "Page has no issues"
+        ],
+        "status": "page_status_only_not_profile_clearance",
+        "facebook_tab_found": true
+      },
+      "supersession_note": "Prior generic no issues marker belonged to a Page; it is not personal-profile clearance."
     },
     {
       "profile_id": "komfcyn",
@@ -306,7 +348,8 @@
       ],
       "account_status_checked": true,
       "restriction_assessment": "no_visible_restriction_account_status",
-      "ended_at": "2026-10-09T17:28:39.201707+00:00"
+      "ended_at": "2026-10-09T17:28:39.201707+00:00",
+      "live_process_confirmed": false
     },
     {
       "profile_id": "kphniam",
@@ -328,8 +371,22 @@
         "no issues"
       ],
       "account_status_checked": true,
-      "restriction_assessment": "no_visible_restriction_account_status",
-      "ended_at": "2026-10-09T17:28:51.740066+00:00"
+      "restriction_assessment": "page_status_only_personal_profile_unverified",
+      "ended_at": "2026-10-09T17:28:51.740066+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kphniam",
+        "browser_pid": 545044,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "visible_length": 916,
+        "status_markers": [
+          "Super Offers Page has no issues",
+          "Page has no issues"
+        ],
+        "status": "page_status_only_not_profile_clearance",
+        "facebook_tab_found": true
+      },
+      "supersession_note": "Prior generic no issues marker belonged to a Page; it is not personal-profile clearance."
     },
     {
       "profile_id": "kr3qhpc",
@@ -346,7 +403,18 @@
       "status": "needs_manual_review",
       "visible_text_length": 22,
       "restriction_scope": "Facebook homepage; account status",
-      "ended_at": "2026-10-09T17:29:30.661776+00:00"
+      "ended_at": "2026-10-09T17:29:30.661776+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kr3qhpc",
+        "browser_pid": 552336,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "visible_length": 8,
+        "status_markers": [],
+        "status": "inconclusive",
+        "facebook_tab_found": true
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kr3qhpo",
@@ -362,7 +430,16 @@
       "status": "technical_failure",
       "error_type": "TimeoutError",
       "safe_reason": "MCP_RESPONSE_TIMEOUT",
-      "ended_at": "2026-10-09T17:31:05.595557+00:00"
+      "ended_at": "2026-10-09T17:31:05.595557+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kr3qhpo",
+        "browser_pid": 547116,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kskwlph",
@@ -378,7 +455,16 @@
       "status": "technical_failure",
       "error_type": "TimeoutError",
       "safe_reason": "MCP_RESPONSE_TIMEOUT",
-      "ended_at": "2026-10-09T17:33:16.348311+00:00"
+      "ended_at": "2026-10-09T17:33:16.348311+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kskwlph",
+        "browser_pid": 547468,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "ksltmba",
@@ -395,15 +481,21 @@
       "status": "facebook_logged_in_no_visible_block_on_home",
       "visible_text_length": 3627,
       "restriction_scope": "Facebook homepage; account status",
-      "account_status_signals": [
-        "g against the rules too many times can cause restrictions on your account."
-      ],
+      "account_status_signals": [],
       "account_status_positive_markers": [
         "no issues"
       ],
       "account_status_checked": true,
-      "restriction_assessment": "visible_status_notice_needs_review",
-      "ended_at": "2026-10-09T17:58:40.917811+00:00"
+      "restriction_assessment": "entity_unverified_not_profile_clearance",
+      "ended_at": "2026-10-09T17:58:40.917811+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "ksltmba",
+        "browser_pid": 550476,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_PAGES_UNAVAILABLE"
+      }
     },
     {
       "profile_id": "ksnw6sn",
@@ -419,7 +511,16 @@
       "status": "technical_failure",
       "error_type": "RuntimeError",
       "safe_reason": "MCP_TOOL_FAILURE_navigate",
-      "ended_at": "2026-10-09T17:59:15.110734+00:00"
+      "ended_at": "2026-10-09T17:59:15.110734+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "ksnw6sn",
+        "browser_pid": 556784,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_PAGES_UNAVAILABLE"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kspm7hd",
@@ -435,7 +536,16 @@
       "status": "technical_failure",
       "error_type": "RuntimeError",
       "safe_reason": "MCP_TOOL_FAILURE_navigate",
-      "ended_at": "2026-10-09T17:59:49.200982+00:00"
+      "ended_at": "2026-10-09T17:59:49.200982+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kspm7hd",
+        "browser_pid": 556344,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_PAGES_UNAVAILABLE"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kspnlxh",
@@ -451,7 +561,16 @@
       "status": "technical_failure",
       "error_type": "RuntimeError",
       "safe_reason": "MCP_TOOL_FAILURE_navigate",
-      "ended_at": "2026-10-09T18:00:23.821924+00:00"
+      "ended_at": "2026-10-09T18:00:23.821924+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kspnlxh",
+        "browser_pid": 527500,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kswegu9",
@@ -467,7 +586,16 @@
       "status": "technical_failure",
       "error_type": "RuntimeError",
       "safe_reason": "MCP_TOOL_FAILURE_navigate",
-      "ended_at": "2026-10-09T18:00:58.050888+00:00"
+      "ended_at": "2026-10-09T18:00:58.050888+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kswegu9",
+        "browser_pid": 558912,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kt5uv02",
@@ -485,7 +613,16 @@
       "status": "technical_failure",
       "error_type": "TimeoutError",
       "safe_reason": "MCP_RESPONSE_TIMEOUT",
-      "ended_at": "2026-10-09T18:13:04.954161+00:00"
+      "ended_at": "2026-10-09T18:13:04.954161+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kt5uv02",
+        "browser_pid": 557104,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kt7185n",
@@ -499,7 +636,16 @@
       "initial_active": false,
       "browser_open": "confirmed_api_ws",
       "status": "opened_pending_facebook_check",
-      "ended_at": "2026-10-09T18:17:09.972283+00:00"
+      "ended_at": "2026-10-09T18:17:09.972283+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kt7185n",
+        "browser_pid": 545068,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_PAGES_UNAVAILABLE"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "kta286j",
@@ -513,7 +659,16 @@
       "initial_active": false,
       "browser_open": "confirmed_api_ws",
       "status": "opened_pending_facebook_check",
-      "ended_at": "2026-10-09T18:17:14.889461+00:00"
+      "ended_at": "2026-10-09T18:17:14.889461+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "kta286j",
+        "browser_pid": 557476,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "ktexcb3",
@@ -527,7 +682,16 @@
       "initial_active": false,
       "browser_open": "confirmed_api_ws",
       "status": "opened_pending_facebook_check",
-      "ended_at": "2026-10-09T18:17:19.480390+00:00"
+      "ended_at": "2026-10-09T18:17:19.480390+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "ktexcb3",
+        "browser_pid": 560996,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "k17vg18q",
@@ -541,7 +705,16 @@
       "initial_active": false,
       "browser_open": "confirmed_api_ws",
       "status": "opened_pending_facebook_check",
-      "ended_at": "2026-10-09T18:17:23.371820+00:00"
+      "ended_at": "2026-10-09T18:17:23.371820+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "k17vg18q",
+        "browser_pid": 561696,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "k1bric6d",
@@ -555,7 +728,16 @@
       "initial_active": false,
       "browser_open": "confirmed_api_ws",
       "status": "opened_pending_facebook_check",
-      "ended_at": "2026-10-09T18:17:29.684878+00:00"
+      "ended_at": "2026-10-09T18:17:29.684878+00:00",
+      "live_process_confirmed": true,
+      "latest_cdp_review": {
+        "profile_id": "k1bric6d",
+        "browser_pid": 561488,
+        "source": "read_only_CDP_accessibility_with_facebook_navigation",
+        "status": "verification_failure",
+        "safe_reason": "CDP_COMMAND_TIMEOUT"
+      },
+      "account_status_signals": []
     },
     {
       "profile_id": "k1f7o4i5",
@@ -570,7 +752,9 @@
       "status": "open_failure",
       "error_type": "TimeoutError",
       "safe_reason": "MCP_RESPONSE_TIMEOUT",
-      "ended_at": "2026-10-09T18:18:31.315873+00:00"
+      "ended_at": "2026-10-09T18:18:31.315873+00:00",
+      "live_process_confirmed": false,
+      "account_status_signals": []
     },
     {
       "profile_id": "k1f7o4ih",
@@ -584,7 +768,9 @@
       "status": "open_failure",
       "error_type": "RuntimeError",
       "safe_reason": "OPEN_FAILED",
-      "ended_at": "2026-10-09T18:18:34.856089+00:00"
+      "ended_at": "2026-10-09T18:18:34.856089+00:00",
+      "live_process_confirmed": false,
+      "account_status_signals": []
     },
     {
       "profile_id": "k1gey1c3",
@@ -598,7 +784,9 @@
       "status": "open_failure",
       "error_type": "RuntimeError",
       "safe_reason": "OPEN_FAILED",
-      "ended_at": "2026-10-09T18:18:36.026382+00:00"
+      "ended_at": "2026-10-09T18:18:36.026382+00:00",
+      "live_process_confirmed": false,
+      "account_status_signals": []
     },
     {
       "profile_id": "k1ggy89v",
@@ -612,10 +800,12 @@
       "status": "open_failure",
       "error_type": "RuntimeError",
       "safe_reason": "OPEN_FAILED",
-      "ended_at": "2026-10-09T18:18:37.204256+00:00"
+      "ended_at": "2026-10-09T18:18:37.204256+00:00",
+      "live_process_confirmed": false,
+      "account_status_signals": []
     }
   ],
-  "status": "running_open_all_requested",
+  "status": "waiting_scoped_runtime_recovery",
   "resource_readback": {
     "opened_count": 10,
     "baseline_opened_count": 0,
@@ -623,8 +813,68 @@
     "total_memory_kb": 32629704,
     "unresponsive_browser_processes": 0
   },
-  "next_step": "Aguardar autorizacao de Rodolfo para fechar somente as dez instancias abertas pela auditoria; apos cada fechamento validar Inactive e memoria; retomar IDs pendentes e revisar inconclusivos uma instancia por vez; nao fechar browser do usuario nem alterar login/credenciais.",
+  "next_step": "Zeus recuperar Local API/GUI AdsPower preservando instancias e sessoes; nenhuma closure/restart de gateway autorizado. Apos recuperacao reconciliar 25 IDs, abrir apenas os nao Active e concluir restricoes pessoais via evidencia especifica, sem chamar Page has no issues de perfil limpo.",
   "inventory_verified_count": 25,
   "guardrail": "one shared resource; sequential; no profile edits/closures/credentials",
-  "updated_at": "2026-10-09T18:18:37.204324+00:00"
+  "updated_at": "2026-10-09T18:46:12.184404+00:00",
+  "report_scope": "Only problems; distinguish shared host/runtime failure from personal Facebook restriction.",
+  "personal_restrictions_confirmed": [],
+  "final_reconciliation": {
+    "target_count": 25,
+    "attempted_count": 25,
+    "api_open_confirmed_count": 21,
+    "live_process_count": 19,
+    "not_running_in_readback": [
+      {
+        "profile_id": "j4735ph",
+        "profile_no": "51",
+        "name": "02 - ANUNCIANTE BACKUP - Karolayne Vitòria - VIZIOID SHEIN - G003",
+        "group_id": "10857995",
+        "group_name": "[SHEIN] VIZIOID - G003"
+      },
+      {
+        "profile_id": "komfcyn",
+        "profile_no": "448",
+        "name": "02 - ANUNCIANTE BACKUP - Sandy Riandy - ESCALATEPOWER - G006",
+        "group_id": "10910376",
+        "group_name": "[SHEIN] ESCALATEPOWER - G006"
+      },
+      {
+        "profile_id": "k1f7o4i5",
+        "profile_no": "1175",
+        "name": "02 - ANUNCIANTE BACKUP [BLOCK] - YOLOKFX SHEIN - Silvania Santos - G002",
+        "group_id": "10419185",
+        "group_name": "[SHEIN] YOLOKFX - G002"
+      },
+      {
+        "profile_id": "k1f7o4ih",
+        "profile_no": "1185",
+        "name": "02 - ANUNCIANTE BACKUP  - Claudia Farias - YOLOKFX SHEIN G001",
+        "group_id": "10576991",
+        "group_name": "[SHEIN] YOLOKFX - G001"
+      },
+      {
+        "profile_id": "k1gey1c3",
+        "profile_no": "1202",
+        "name": "02 - ANUNCIANTE BACKUP - Beatriz Ribeiro - YOLOKFX SHEIN G005",
+        "group_id": "10419626",
+        "group_name": "[SHEIN] YOLOKFX - G005"
+      },
+      {
+        "profile_id": "k1ggy89v",
+        "profile_no": "1213",
+        "name": "02 - ANUNCIANTE BACKUP - Alexandra Gomes - YOLKFX SHEIN G004",
+        "group_id": "10419768",
+        "group_name": "[SHEIN] YOLOKFX - G004"
+      }
+    ],
+    "cdp_profiles_reviewed": 19,
+    "cdp_verification_failures": 15
+  },
+  "tests_passed": [
+    "25 unique targets reconciled",
+    "generic warning not restriction",
+    "push notification not restriction",
+    "Page status not personal profile clearance"
+  ]
 }

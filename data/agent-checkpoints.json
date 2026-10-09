@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
-      "next_step": "Auditar 15 IDs ainda nao iniciados, revisar inconclusivos sem relancar Active, reconciliar 25 e reportar apenas problemas reais ou falhas de verificacao",
-      "objective": "Abrir todos os 25 BACKUP SHEIN e reportar somente os problemas, conforme reforco de Rodolfo",
+      "next_step": "Zeus recuperar AdsPower API/GUI preservando instancias/sessoes, sem restart gateway ou fechamento nao autorizado. Apos liberar recurso, retomar mesmo request/IDs: reconciliar Active, abrir apenas ausentes e concluir verificacao de restricao pessoal; nao repetir open incerto nem promover template/Page status a bloqueio/limpeza pessoal.",
+      "objective": "Abrir todos os 25 BACKUP SHEIN e reportar somente problemas",
       "source": "/root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
-      "state": "running_resumed: rodolfo pediu abrir todos e somente reportar problemas; nenhuma lease concorrente; preservar 10 abertos; proximos abrem sem restaurar abas antigas para limitar carga, sem fechamento ou alteracoes de perfil/credencial",
+      "state": "waiting_scoped_runtime_recovery: 25 ids tentados/reconciliados; adspower local api econnrefused e gui uia sem resposta; page unresponsive visual; 19 sunbrowser ativos no readback, 21 aberturas confirmadas antes da falha; quatro aberturas nao confirmadas e dois perfis antes abertos nao mais presentes; nenhuma closure pelo ares; restricoes pessoais nao certificadas; status sem problemas de page nao valida perfil pessoal; lease liberada",
       "thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T17:58:26+00:00"
+      "updated_at": "2026-10-09T18:46:12+00:00"
     },
     {
       "agent": "ares",
@@ -5512,5 +5512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T18:36:26+00:00"
+  "updated_at": "2026-10-09T18:46:12+00:00"
 }
