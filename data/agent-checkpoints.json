@@ -1622,6 +1622,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-G002-1557917403822956698-C104-Q5",
+      "next_step": "Preflight vivo dry-run, Engine v3, QA do lote inteiro e readback final",
+      "objective": "Duplicar C104 cinco vezes na conta Yolokfx-US-SHEIN-EN-01-G002 com USD50 diarios por campanha",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/shein-g002-1557917403822956698-c104-q5-20261008/request.json",
+      "state": "novo pedido autorizado; intent independente do lote c67 anterior; dominio e binding g002 validados",
+      "thread_id": "1557917403822956698",
+      "updated_at": "2026-10-09T02:53:23+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-G002-1557917403822956698-C67-Q5",
       "next_step": "Manter budget/inicio/status atuais; comunicado1557936707947602012 confirmado. Novos pedidos naming canonico e contextual multi ads obrigatório; sem nova criacao. Camposforaescopo intactos.",
       "objective": "Lote C120-C124 corrigido nomenclatura e Multi advertiser source parity",
@@ -5342,5 +5352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T02:13:37+00:00"
+  "updated_at": "2026-10-09T02:53:23+00:00"
 }
