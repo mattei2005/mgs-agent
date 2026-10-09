@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 BIDS={'LOWEST_COST_WITHOUT_CAP':'MAXVOL','COST_CAP':'COCAP','LOWEST_COST_WITH_BID_CAP':'BIDCAP'}
-NEW_NAME=re.compile(r'^([0-9]+) - ([0-9]{2}/[0-9]{2}) - (v[123]) - (.+?) - (MAXVOL|COCAP|BIDCAP) - \(([^()]+)\)(?: - COPY C([0-9]+))? - add_to_wishlist$')
+NEW_NAME=re.compile(r'^([0-9]+) - ([0-9]{2}/[0-9]{2}) - (v[123]) - (.+?) - (MAXVOL|COCAP|BIDCAP) - \(([^()]+)\)(?: - COPY C([0-9]+))? - (?:event_)?add_to_wishlist$')
 
 
 def product_label(source_name):
@@ -44,4 +44,4 @@ def campaign_name(number,start_time,timezone,destination,product,bid_strategy,tr
     if copy_source_number is not None:
         if not re.fullmatch(r'[1-9][0-9]*',str(copy_source_number)):raise ValueError('COPY source number invalid')
         addon = f' - COPY C{copy_source_number}'
-    return f'{int(number)} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - add_to_wishlist'
+    return f'{int(number)} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - event_add_to_wishlist'
