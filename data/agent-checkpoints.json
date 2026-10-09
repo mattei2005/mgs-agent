@@ -4923,12 +4923,12 @@
     {
       "agent": "ares",
       "id": "shein-1558157403021643967",
-      "next_step": "Zeus corrigir paginacao/recovery central; GET primeiro e retomada mesmo request/IDs somente camada faltante; QA integral e bid/budget/tracking/readback antes de ativacao",
-      "objective": "Duplicar C112 duas vezes Yolokfx-US-SHEIN-EN-01-G002 USD75/dia cada COCAP0.80 inicio NOW09/10; fonte intacta",
+      "next_step": "Validar estado live e corrigir somente camada faltante pela continuação central; QA integral e readback; comunicar na thread original",
+      "objective": "Concluir duas duplicações C112 C130/C131 na mesma conta, USD75/dia cada, COCAP USD0.80, NOW, fonte intacta",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1558157403021643967/state.json",
-      "state": "recovery_escalated_to_zeus: c130/c131 shells e6ads persistidos; 4/6 creatives confirmados; falha100/1487390 nos slots1.2/2.2; retomada bloqueada invalid creative inventory pagination; sem ativacao concluida",
+      "state": "ares assumiu recovery por pedido de rodolfo; readback-first obrigatório, sem menção/handoff ao zeus e sem replay dos shells/ads",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-10-09T16:50:08+00:00"
+      "updated_at": "2026-10-09T16:55:32+00:00"
     },
     {
       "agent": "zeus",
@@ -5472,5 +5472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T16:50:08+00:00"
+  "updated_at": "2026-10-09T16:55:32+00:00"
 }
