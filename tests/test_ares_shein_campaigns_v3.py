@@ -24,6 +24,16 @@ from ares_campaign_v3.shein import (
 )
 
 
+def isolated_legacy_smoke_config(path):
+    """Rollback-builder fixtures use an isolated legacy naming policy, not live production."""
+    config=json.loads((ROOT/'data/ares/meta-ads/engine-v3/config.json').read_text())
+    for account in config.get('accounts',{}).values():
+        if account.get('operation')=='SHEIN-US-DIRECT':
+            account.get('campaign_policy',{}).pop('name_regex',None)
+    path.write_text(json.dumps(config))
+    return path
+
+
 def future_start() -> str:
     return (datetime.now(timezone.utc) + timedelta(days=1)).astimezone(
         timezone(timedelta(hours=-4))
@@ -389,6 +399,7 @@ class SheinRunnerTests(unittest.TestCase):
         spec.loader.exec_module(runner)
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / 'smoke.json'
+            runner.CONFIG_PATH = isolated_legacy_smoke_config(Path(tmp)/'legacy-config.json')
             result = runner.offline_smoke(output)
             self.assertEqual(result['status'], 'OFFLINE_SMOKE_OK')
             self.assertEqual(result['engine_version'], 3)
@@ -457,6 +468,7 @@ class SheinRunnerTests(unittest.TestCase):
                 request,
                 work / 'manifests',
                 registry_path=registry_path,
+                config_path=isolated_legacy_smoke_config(work/'legacy-config.json'),
             )
             self.assertEqual(result['status'], 'AWAITING_FINAL_APPROVAL')
             self.assertEqual(result['summary']['numbers'], [41, 42, 43])
