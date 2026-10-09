@@ -14,7 +14,7 @@
       "post_video_wait_seconds": 70,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=3110062139197914",
@@ -30,14 +30,79 @@
           "selection_reason": "Dog birthday, everyday pet post",
           "confirmed_at": "2026-10-09T09:39:45.843785-04:00",
           "evidence": "Remove Like exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10164993499955726",
+          "intent_at": "2026-10-09T09:40:09.639456-04:00",
+          "status": "confirmed",
+          "selection_reason": "Everyday pet dog photo",
+          "confirmed_at": "2026-10-09T09:40:16.207310-04:00",
+          "evidence": "Remove Like on exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=28568601702833381",
+          "intent_at": "2026-10-09T09:40:18.167986-04:00",
+          "status": "confirmed",
+          "selection_reason": "Hummingbird visit photo, nature",
+          "confirmed_at": "2026-10-09T09:40:24.902371-04:00",
+          "evidence": "Remove Like on exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=2957581041256284",
+          "intent_at": "2026-10-09T09:40:49.887136-04:00",
+          "status": "confirmed",
+          "selection_reason": "Greek island landscape photo",
+          "confirmed_at": "2026-10-09T09:40:56.320422-04:00",
+          "evidence": "Remove Like on exact fbid"
         }
       ],
       "comments": [],
-      "video": {},
-      "closed_verified": false,
+      "video": {
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "navigation_intent_at": "2026-10-09T09:40:58.485977-04:00",
+        "samples": [
+          {
+            "at": "2026-10-09T09:41:24.721809-04:00",
+            "value": 5.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:41:27.411650-04:00",
+            "value": 8.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:41:30.278226-04:00",
+            "value": 10.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:41:32.923753-04:00",
+            "value": 13.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:41:35.846654-04:00",
+            "value": 1.0,
+            "max": 15.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-09T09:41:35.847273-04:00",
+        "evidence": "progress samples through near-end and loop restart"
+      },
+      "closed_verified": true,
       "open_intent_at": "2026-10-09T09:34:25.498688-04:00",
       "opened_at": "2026-10-09T09:34:29.649566-04:00",
-      "identity_verified": "Emgai Datquang"
+      "identity_verified": "Emgai Datquang",
+      "wait": {
+        "started_at": "2026-10-09T09:41:35.847543-04:00",
+        "target_seconds": 70,
+        "ended_at": "2026-10-09T09:42:45.847882-04:00",
+        "actual_seconds": 70.0
+      },
+      "close_intent_at": "2026-10-09T09:42:45.848528-04:00",
+      "closed_at": "2026-10-09T09:42:51.655884-04:00"
     },
     {
       "profile_id": "k1d71895",
@@ -48,13 +113,95 @@
       "likes_target": 2,
       "comments_target": 0,
       "post_video_wait_seconds": 72,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "running",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1834549705110253",
+          "intent_at": "2026-10-09T09:44:08.953371-04:00",
+          "status": "confirmed",
+          "selection_reason": "Autumn landscape in Lisbon NH",
+          "confirmed_at": "2026-10-09T09:44:12.470148-04:00",
+          "evidence": "Remove Like on exact fbid"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1429156782663201",
+          "intent_at": "2026-10-09T09:44:26.813518-04:00",
+          "status": "confirmed",
+          "selection_reason": "Blue Jay bird everyday nature photo",
+          "confirmed_at": "2026-10-09T09:44:30.186794-04:00",
+          "evidence": "Remove Like on exact fbid"
+        }
+      ],
       "comments": [],
-      "video": {},
-      "closed_verified": false
+      "video": {
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "navigation_intent_at": "2026-10-09T09:44:30.764809-04:00",
+        "samples": [
+          {
+            "at": "2026-10-09T09:44:36.210937-04:00",
+            "value": 3.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:37.541532-04:00",
+            "value": 4.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:38.864069-04:00",
+            "value": 6.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:40.297404-04:00",
+            "value": 7.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:41.624436-04:00",
+            "value": 8.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:42.957616-04:00",
+            "value": 10.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:44.291652-04:00",
+            "value": 11.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:45.623539-04:00",
+            "value": 12.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:46.956305-04:00",
+            "value": 14.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-09T09:44:48.291234-04:00",
+            "value": 0.0,
+            "max": 15.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-09T09:44:48.291767-04:00",
+        "evidence": "progress samples through near-end and loop restart"
+      },
+      "closed_verified": false,
+      "open_intent_at": "2026-10-09T09:43:05.297296-04:00",
+      "opened_at": "2026-10-09T09:43:09.298271-04:00",
+      "identity_verified": "Mhd Aldy",
+      "wait": {
+        "started_at": "2026-10-09T09:44:48.292036-04:00",
+        "target_seconds": 72
+      }
     },
     {
       "profile_id": "k1f7o4i7",
@@ -91,5 +238,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-09T09:39:45.843808-04:00"
+  "updated_at": "2026-10-09T09:44:48.292044-04:00"
 }
