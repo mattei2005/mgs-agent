@@ -384,10 +384,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CAMPAIGN-ENGINE-V3-6-8-20261008",
+      "title": "Engine3.6.7 nome canonico SHEIN e contextual multi ads preservado",
+      "updated_at": "2026-10-09T04:00:14+00:00"
+    },
+    {
+      "canonical_key": "ares.campaign_engine.version",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T04:00:14+00:00",
+      "id": "ARES-CAMPAIGN-ENGINE-V3-6-8-20261008",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Engine3.6.7 nome canonico SHEIN e contextual multi ads preservado",
-      "updated_at": "2026-10-09T02:13:36+00:00"
+      "title": "Engine3.6.8 COPY source addon e event_add_to_wishlist em nomes novos",
+      "updated_at": "2026-10-09T04:00:14+00:00"
     },
     {
       "canonical_key": "ares.resource-isolation.campaign-parallel-meta-library-queue",
@@ -2979,10 +2997,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-NAMING-COPY-EVENT-PREFIX-20261008",
       "title": "Nome SHEIN numero antes data quiz produto lance tracking evento",
-      "updated_at": "2026-10-09T00:24:33+00:00"
+      "updated_at": "2026-10-09T04:00:14+00:00"
     },
     {
       "canonical_key": "ares.shein.campaign-naming-pattern",
@@ -3172,6 +3190,23 @@
       "superseded_by": null,
       "title": "Preservar Multi advertiser ads em todo criativo e bloquear QA divergente",
       "updated_at": "2026-10-09T02:13:37+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.campaign-naming-pattern",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T04:00:14+00:00",
+      "id": "ARES-SHEIN-NAMING-COPY-EVENT-PREFIX-20261008",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Nomenclatura SHEIN COPY Cfonte antes event_add_to_wishlist",
+      "updated_at": "2026-10-09T04:00:14+00:00"
     },
     {
       "canonical_key": "ares.shein.quiz-model-route-map",
@@ -10594,5 +10629,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T02:13:37+00:00"
+  "updated_at": "2026-10-09T04:00:14+00:00"
 }
