@@ -88,6 +88,17 @@ Only execute this branch when Rodolfo explicitly authorizes the automation URL c
 - Compare non-target field fingerprints through the same response surface before and after the update. A direct `/sequences/{id}` response can contain `call4u_audio` while the campaign inventory embeds `interval_type`; these relation keys are not configuration drift. Validate overlapping fields between surfaces and separately require direct-to-direct fingerprint equality.
 - Re-read the complete campaign inventory after the batch and prove all unrelated sequences and campaign settings remained unchanged. Probe long URLs without phones again; HTTP/query validation does not prove lead entry or SMS delivery.
 
+## Authorized text-only sequence updates
+
+Use this branch only after SMS Funnel write authority and the exact target text are resolved. Preserve the requested text literally, including spelling, capitalization, spaces and template placeholders; never silently correct an operator-supplied token or word.
+
+1. Enumerate all campaign pages, select the exact requested automation class/stage, and assert unique campaign/sequence IDs plus the complete manager/vehicle topology. Do not include CHAT or other stages by shared host alone.
+2. Read each sequence directly and fingerprint every non-text field, ignoring only `updated_at`. Keep full objects in process memory. For resumable rollback, persist only protected operator template text, stable IDs and fingerprints with mode `0600`; never persist customer message rows, PII, tokens or shortened links.
+3. Use the full UI-shaped PUT payload from fresh state, including existing `text`, `url`, `short_url`, active/binding/interval/type/phone fields and Call4U/Voxuy/retry/AC fields. Change only `text`; for an existing SMS sequence with `is_ac=false`, retain false and `ac_tags=[]`.
+4. After PUT, always GET the exact sequence, even after HTTP errors. Require literal text equality and non-text fingerprint equality. A text-only change must preserve both the long and shortened URLs; do not assume URL regeneration is acceptable.
+5. On resume, skip PUT when the target text and original non-text fingerprint already match. On mismatch, restore only changed targets from the saved original template and in-memory state, then verify rollback; never replay the whole batch blindly.
+6. Re-read the complete campaign inventory and all target sequences. Require target text equality, all non-text fields preserved, and unrelated automations unchanged. Record start/end cutover timestamps in São Paulo and exclude that mixed day from a seven-closed-day before/after ROI comparison.
+
 ## Targeted post-correction readback
 
 When the operator fixes a field or renames a list after the routing matrix already passed, verify only the changed surface plus its stable identity:

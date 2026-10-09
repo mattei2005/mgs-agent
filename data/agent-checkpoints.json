@@ -1213,12 +1213,12 @@
     {
       "agent": "ares",
       "id": "ARES-SMS-D1-COPY-1558154555617841294",
-      "next_step": "Alteracao concluida. Quando solicitado, comparar baseline 02-08/10 ROI58.73 com 10-16/10 (sete dias completos pos-troca), excluindo 09/10 misto. Nao foi criada automacao de envio de relatorio. Delegacao futura segue candidato KCI-43ce633abb3bf180 para reconciliacao documental Zeus.",
-      "objective": "Alterar somente text das 12 automacoes Disparo 1 e preservar marco ROI antes/depois.",
-      "source": "data/ares/sms-funnel/audit/creditoparaveiculo/copy-d1-1558154555617841294.json",
-      "state": "complete: 12/12 sequencias sms disparo 1 carro/moto g001-g006 com template literal solicitado; grafia financiameno preservada. put e get de cada alvo e inventario final validados. urls longas/curtas, utms, intervalos, status e todos os campos nao text preservados; outras 30 automacoes intactas. cutover 09/10/2026 14:18:06-14:18:17 sao paulo.",
+      "next_step": "Nenhuma alteracao pendente. Quando solicitado, comparar baseline 02-08/10 ROI58.73 com 10-16/10; excluir 09/10 misto. Sem cron de relatorio criado. Zeus reconcilia delegacao documental KCI-43ce633abb3bf180.",
+      "objective": "Alterar texto das 12 automacoes Disparo 1; corrigir grafia conforme Geizian; preservar baseline ROI.",
+      "source": "data/ares/sms-funnel/audit/creditoparaveiculo/copy-d1-1558154555617841294-spelling.json",
+      "state": "complete: correcao financiameno -> financiamento aplicada e conferida por get em 12/12 sequencias originalmente alteradas, carro/moto g001-g006. demais campos nao text intactos, inclusive links/utms/intervalos/status; outras 30 automacoes intactas. correcao concluida 09/10/2026 14:22:03 sao paulo. audit original permanece historico; spelling audit registra sucessao da copy.",
       "thread_id": "1558154555617841294",
-      "updated_at": "2026-10-09T17:18:51+00:00"
+      "updated_at": "2026-10-09T17:22:19+00:00"
     },
     {
       "agent": "ares",
@@ -5492,5 +5492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T17:18:51+00:00"
+  "updated_at": "2026-10-09T17:22:19+00:00"
 }
