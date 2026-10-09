@@ -78,7 +78,10 @@ def run_node(preflight: bool = False) -> dict:
         command = ['node', str(NODE_HELPER)]
     if preflight:
         command.append('--preflight')
-    result = subprocess.run(command, capture_output=True, text=True, timeout=240, env=load_env())
+    # Native SSH/AX calls plus best-effort readback exceed the old browser budget.
+    # Keep this bounded below the PC1 lease and scheduler's 600-second limit.
+    timeout_seconds = 480 if route_state.get('execution_backend') == 'pc1_native' else 240
+    result = subprocess.run(command, capture_output=True, text=True, timeout=timeout_seconds, env=load_env())
     lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
     if not lines:
         return {'kind': 'runner_transport_failure', 'reason': f'node_exit_{result.returncode}_without_result'}

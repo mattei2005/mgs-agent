@@ -1652,12 +1652,12 @@
           "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
         },
         "46": {
-          "campaign_id": "120251081612670632",
-          "cycle_start_date": "2026-09-06",
-          "source": "campaign_engine_v3_live_readback",
-          "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+          "campaign_id": "120251545171240632",
+          "cycle_start_date": "2026-10-09",
+          "source": "rodolfo_explicit_operational_d1_restart",
+          "request_id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
           "authorized_by": "Rodolfo Mattei",
-          "authorization_source": "discord:thread:1545818515032768593",
+          "authorization_source": "discord:thread:1539832402744975450",
           "status": "active_d1",
           "actions_enabled": true,
           "vehicle_type": "MOTO",
@@ -1665,11 +1665,59 @@
           "planned_budget_usd_on_2026_09_06": 25,
           "first_delivery_override": "immediate_start_no_reentry",
           "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
-          "current_budget_usd": 25,
+          "current_budget_usd": 58.06,
           "planned_budget_usd": 25,
           "pre_d1_delivery_excluded_from_d1": true,
           "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
-          "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+          "d1_start_at_sp": "2026-10-09T13:43:10.175459-03:00",
+          "cycle_history": [
+            {
+              "superseded_by": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
+              "record": {
+                "campaign_id": "120251081612670632",
+                "cycle_start_date": "2026-09-06",
+                "source": "campaign_engine_v3_live_readback",
+                "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
+                "authorized_by": "Rodolfo Mattei",
+                "authorization_source": "discord:thread:1545818515032768593",
+                "status": "active_d1",
+                "actions_enabled": true,
+                "vehicle_type": "MOTO",
+                "initial_budget_usd": 10,
+                "planned_budget_usd_on_2026_09_06": 25,
+                "first_delivery_override": "immediate_start_no_reentry",
+                "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
+                "current_budget_usd": 25,
+                "planned_budget_usd": 25,
+                "pre_d1_delivery_excluded_from_d1": true,
+                "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
+                "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
+              }
+            }
+          ],
+          "cycle_restart_request": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
+          "meta_learning_reset_claim": false
+        },
+        "47": {
+          "cycle_history": [
+            {
+              "superseded_by": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
+              "record": {}
+            }
+          ],
+          "campaign_id": "120251545171010632",
+          "cycle_start_date": "2026-10-09",
+          "d1_start_at_sp": "2026-10-09T13:43:10.175459-03:00",
+          "cycle_restart_request": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
+          "source": "rodolfo_explicit_operational_d1_restart",
+          "authorized_by": "Rodolfo Mattei",
+          "authorization_source": "discord:thread:1539832402744975450",
+          "status": "active_d1",
+          "actions_enabled": true,
+          "vehicle_type": "MOTO",
+          "current_budget_usd": 58.06,
+          "meta_learning_reset_claim": false,
+          "request_id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo"
         }
       },
       "required": [
@@ -2821,6 +2869,26 @@
       "deliver": "local",
       "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
       "override_scope": "this request only; do not resume recurring creation/other holds"
+    },
+    "cpv13-c46m-c47m-activate-d1-20261009-rodolfo": {
+      "request_id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
+      "campaign_ids": [
+        "120251545171240632",
+        "120251545171010632"
+      ],
+      "campaign_numbers": [
+        "46",
+        "47"
+      ],
+      "state": "complete_activated",
+      "d1_start_date": "2026-10-09",
+      "activated_at_sp": "2026-10-09T13:43:10.175459-03:00",
+      "budget_usd_each": 58.06,
+      "mode": "immediate_manual_request",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "post_write_readback": true,
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c46m-c47m-activate-d1-20261009-rodolfo.json"
     }
   },
   "creative_drive_organization": {

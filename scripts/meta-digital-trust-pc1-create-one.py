@@ -150,7 +150,7 @@ def main():
     if s['request_id']!='meta-digital-trust-40-1557475850310393879' or s['business_id']!='155263197283282' or s['target']!=40:raise RuntimeError('contract_identity_mismatch')
     if s['account_defaults']!={'name':'001','timezone':'America/Los_Angeles','currency':'USD','usage':'My business'}:raise RuntimeError('contract_defaults_mismatch')
     if not a.preflight and (len(s['completed'])>=40 or s.get('status') not in {'scheduled','in_progress','retry_pending'}):return {'kind':'blocked','reason':'checkpoint_not_executable'}
-    l=subprocess.run([sys.executable,str(LEASE),'acquire','--agent','zeus','--session-id',SESSION,'--thread-id','1544113212075548683','--ttl','420'],capture_output=True,text=True)
+    l=subprocess.run([sys.executable,str(LEASE),'acquire','--agent','zeus','--session-id',SESSION,'--thread-id','1544113212075548683','--ttl','600'],capture_output=True,text=True)
     if l.returncode:return {'kind':'deferred','reason':'pc1_lease_busy','side_effect':'none'}
     try:
         sys.path.insert(0,str(RUNTIME))
