@@ -96,6 +96,8 @@ def _build_one(request, source, number, account_config):
     source_data = []
     for ad in source_ads:
         cr = ad.get('creative') or {}
+        if account_config.get('require_source_contextual_multi_ads') is True and (cr.get('contextual_multi_ads') or {}).get('enroll_status') not in {'OPT_IN','OPT_OUT'}:
+            raise ValueError('source Multi-advertiser ads state unconfirmed; no default assumption')
         story = cr.get('object_story_spec') or ad.get('_reference_story') or {}
         media = story.get('video_data') or story.get('link_data') or {}
         links = source_links(cr, story)
@@ -164,6 +166,8 @@ def _build_one(request, source, number, account_config):
             ig = cr.get('instagram_user_id') or story.get('instagram_user_id')
             if ig:
                 creative['object_story_spec']['instagram_user_id'] = ig
+            if cr.get('contextual_multi_ads') is not None:
+                creative['contextual_multi_ads'] = copy.deepcopy(cr['contextual_multi_ads'])
             if mode == 'clone_prestaged':
                 creative['media_sourcing_spec'] = {'titles': [{'text': vd['title']}], 'bodies': [{'text': vd['message']}], 'videos': [{
                     'video_id': asset['vertical_video_id'], 'original_video_id': asset['vertical_video_id'], 'source': 'multi_media',
