@@ -7,6 +7,13 @@
 
 ---
 
+## Atualização operacional — Geizian SHEIN e review tardio (2026-10-09)
+
+- Autoridade: Rodolfo, mensagem `1558225355930861649`, thread `1558159785843499109`; referência da recusa `1558217596346835120`. Geizian tem Campaign Ops nos seis canais SHEIN e threads, incluindo review explícito de continuação tardia.
+- Correção scoped: `shein_continuation.py` usa a mesma autorização live/forçada do canal para review humano na origem, em vez de somente CEO; contrato `channel_authorization_policy.late_recovery_review`, matriz, registry supersedido e duas skills próprias atualizados. SLA/relógio E2E, QA/mídia, manifests/IDs, budget/bid e Critical Subset preservados; zero alteração em `activation.py`/SLA.
+- Config Ares: somente os seis `discord.channel_prompts` SHEIN reconciliados via CLI canônica, com readback e comparação do restante inalterado. Removidos drift de solicitante exclusivo, bloqueio de relatório on-demand pela fase e arquitetura histórica de tokens; sem mudanças de credencial/Discord overwrites/cron ou restart.
+- Evidência: `data/ares/meta-ads/audit/shein/geizian-authority-1558217596346835120/`; regressão de 167 testes offline aprovada, incluindo permissão revogada, origem/conta/policy errada, bot e mensagem adulterada. Geizian confirmado live em 6/6 canais e origem G002. Retomada central do request `shein-1558212072054071429` concluída: C007 `120249566052890724`, conjunto `120249566055190724`, anúncios `120249566058720724` e `120249566058710724`, todos ACTIVE por GET; USD100/dia, COST_CAP80 centavos, mesmos IDs, QA completo. C006 `120249530169740724` preservada por comparação semântica completa (somente URLs de imagem assinadas rotativas ignoradas com image_hash igual). Relógio E2E original preservado e `e2e_target_met=false`; sem nova cópia.
+
 ## Atualização operacional — SHEIN horário vencido e recovery delegado (2026-10-09)
 
 - Autoridade: Rodolfo, mensagem `1558142161659105342` nesta thread `1557274000680288307`; delegação Ares→Zeus aprovada em `1558142033774776411`, thread `1558141425541980203`, já registrada por Zeus em `context/routes.md` / `zeus.ares.manager-authorized-technical-recovery`.

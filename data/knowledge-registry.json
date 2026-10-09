@@ -3127,10 +3127,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-GEIZIAN-LATE-AUTHORITY-20261009",
       "title": "Participantes com permissao efetiva solicitam campanhas nas contas do canal",
-      "updated_at": "2026-10-09T15:20:24+00:00"
+      "updated_at": "2026-10-09T21:31:12+00:00"
     },
     {
       "canonical_key": "ares.shein.creation-thread.1558127274073788488",
@@ -3736,6 +3736,26 @@
       "superseded_by": null,
       "title": "Conversa exclusiva de criação Mavroa-US-SHEIN-ES-06-G006",
       "updated_at": "2026-10-09T15:11:59+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.channel-authority",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T21:31:12+00:00",
+      "id": "ARES-SHEIN-GEIZIAN-LATE-AUTHORITY-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Autoridade SHEIN inclui Geizian nos seis canais e review de continuacao tardia",
+      "updated_at": "2026-10-09T21:31:12+00:00"
     },
     {
       "canonical_key": "ares.shein.g002.single-clone-route",
@@ -11533,5 +11553,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T19:06:23+00:00"
+  "updated_at": "2026-10-09T21:31:12+00:00"
 }

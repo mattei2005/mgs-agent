@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-GEIZIAN-AUTHORITY-FIX-1558217596346835120",
-      "next_step": "Manutencao scoped com regressao, readback original e retomada central same-ID; auditoria independente Zeus",
+      "next_step": "Auditoria independente Zeus, verificar ativacao/readback/contrato/prompts/skills/registry/REPORT-INFRA sem writer paralelo",
       "objective": "Corrigir bloqueio de autoridade SHEIN Geizian na continuacao tardia e reconciliar prompts",
-      "source": "discord:message:1558225355930861649;discord:message:1558225788783038566;scripts/ares_campaign_v3/shein_continuation.py",
-      "state": "diagnostico confirmado: review tardio hardcoded ceo; writer unico ares, sem alteracoes meta nesta etapa",
+      "source": "data/ares/meta-ads/audit/shein/geizian-authority-1558217596346835120/final-readback.json;discord:message:1558230486122373191",
+      "state": "correcao aplicada: 167 testes pass; seis prompts reconciliados com restante config inalterado; autoridade live 6/6; continuacao central da c007 concluida active, mesmos ids, usd100/cost_cap80; c006 preservada; sla clock original mantido e exceeded registrado",
       "thread_id": "1558159785843499109",
-      "updated_at": "2026-10-09T21:13:26+00:00"
+      "updated_at": "2026-10-09T21:33:13+00:00"
     },
     {
       "agent": "ares",
@@ -5542,5 +5542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T21:13:26+00:00"
+  "updated_at": "2026-10-09T21:33:13+00:00"
 }
