@@ -370,7 +370,7 @@
   },
   "campaign_naming_policy": {
     "status": "ACTIVE_RUNTIME_IMPLEMENTED",
-    "format": "Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist",
+    "format": "Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - [COPY C<FONTE> -] event_add_to_wishlist",
     "date": "configured start date DD/MM in ad-account timezone",
     "quiz_versions": [
       "v1",
@@ -385,7 +385,7 @@
     ],
     "include_bid_value": false,
     "include_currency": false,
-    "display_event": "add_to_wishlist",
+    "display_event": "event_add_to_wishlist",
     "api_event_unchanged": "ADD_TO_WISHLIST",
     "tracking_token_unchanged": true,
     "existing_campaigns_rename_authorized": false,
@@ -403,7 +403,18 @@
       "120255673728880150",
       "120255673728900150",
       "120255673730670150"
-    ]
+    ],
+    "copy_source_addon": {
+      "position": "before visible event",
+      "text": "COPY C<direct_source_number>",
+      "modes": [
+        "pure_clone",
+        "clone_prestaged"
+      ],
+      "from_zero_automatic": false
+    },
+    "source_legacy_names_allowed": true,
+    "strict_new_output_only": true
   },
   "request_templates": {
     "approved_at_et": "2026-09-14T19:19:25-04:00",

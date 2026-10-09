@@ -7,7 +7,7 @@ A versão 3.0 foi aprovada por `exato, pode salvar` na thread `15572740006802883
 ### Nome aprovado
 
 ```text
-Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist
+Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - event_add_to_wishlist
 ```
 
 - DATA é o início configurado no timezone da conta, em DD/MM.
@@ -15,17 +15,17 @@ Nº CAMPANHA - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - add_to_wishlist
 - QUIZ é v1, v2 ou v3 ligado à URL real, nunca deduzido por substring do caminho. Sem mapa canônico, não inventar versão nem destino.
 - PRODUTO é o produto real, coerente com mídia e copy.
 - LANCE é somente MAXVOL, COCAP ou BIDCAP. Não incluir valor de cap nem USD no nome: valores podem mudar intraday.
-- Complemento de cópia: duplicação/clonagem de referência acrescenta ` - COPY C<NÚMERO DA FONTE>` entre `(TRACKING)` e `add_to_wishlist`, sempre apontando à fonte direta do pedido. Ex.: `120 - 09/10 - v2 - FREE CLOTHES - MAXVOL - (b01fb01c120) - COPY C67 - add_to_wishlist`. Campanhas novas do zero não recebem COPY por apenas usar referência de configuração/copy. O padrão base permanece igual; COPY é um add-on, não parte do produto nem do tracking.
+- Complemento de cópia: duplicação/clonagem de referência acrescenta ` - COPY C<NÚMERO DA FONTE>` entre `(TRACKING)` e `add_to_wishlist`, sempre apontando à fonte direta do pedido. Ex.: `120 - 09/10 - v2 - FREE CLOTHES - MAXVOL - (b01fb01c120) - COPY C67 - event_add_to_wishlist`. Campanhas novas do zero não recebem COPY por apenas usar referência de configuração/copy. O padrão base permanece igual; COPY é um add-on, não parte do produto nem do tracking.
 - Campanhas fonte existentes podem usar nomenclatura antiga. Não exigir o padrão novo na fonte, não renomear legado para satisfazer o preflight e não bloquear só por ausência de data/quiz/lance no nome antigo. Consultar os campos reais e a identidade necessária; aplicar o validador estrito apenas ao novo nome gerado.
 - TRACKING mantém o identificador técnico entre parênteses; novos utm_campaign/utm_adgroup, nenhuma herança indevida da fonte.
-- O evento visível é `add_to_wishlist` em minúsculas. O valor técnico da API permanece `ADD_TO_WISHLIST`; não alterar pixel/evento por capitalização do nome.
+- O evento visível é `event_add_to_wishlist` em minúsculas, com prefixo event_. Essa decisão posterior de Rodolfo supersede o rótulo anterior sem prefixo. O valor técnico da API permanece `ADD_TO_WISHLIST`; não alterar pixel/evento por capitalização do nome.
 
 Exemplos ilustrativos, não campanhas criadas:
 
 ```text
-115 - 08/10 - v2 - FREE CLOTHES - MAXVOL - (b01fb01c115) - add_to_wishlist
-115 - 08/10 - v2 - FREE CLOTHES - COCAP - (b01fb01c115) - add_to_wishlist
-115 - 08/10 - v2 - FREE CLOTHES - BIDCAP - (b01fb01c115) - add_to_wishlist
+115 - 08/10 - v2 - FREE CLOTHES - MAXVOL - (b01fb01c115) - event_add_to_wishlist
+115 - 08/10 - v2 - FREE CLOTHES - COCAP - (b01fb01c115) - event_add_to_wishlist
+115 - 08/10 - v2 - FREE CLOTHES - BIDCAP - (b01fb01c115) - event_add_to_wishlist
 ```
 
 ### Pedido aprovado
