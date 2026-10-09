@@ -1182,6 +1182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-TODAY-EXPIRED-SCHEDULE-20261009",
+      "next_step": "Persistir política/skill e validar ajuste de intake offline; recuperação parcial permanece com Zeus no mesmo request.",
+      "objective": "Aplicar horário vencido do dia como NOW e incorporar dispensa de reaprovação para recovery Ares/Zeus",
+      "source": "data/ares/meta-ads/audit/shein/schedule-and-recovery-permission-20261009",
+      "state": "referências lidas; falha meta cbo distinta de horário. gestor avisado e zeus coordenado; nenhum writer concorrente iniciado. ajuste de intake será isolado de manifests e ids da c106.",
+      "thread_id": "1557274000680288307",
+      "updated_at": "2026-10-09T15:43:59+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-US-DIRECT-ONBOARDING-20260911",
       "next_step": "Do not assume asset access from app presence. Confirm the issuance surface supports config_id with Authorization Code exchange, invoke the system-user OAuth flow from a secure callback, explicitly delegate the intended Digital Trust Pages/ad accounts and optional SHEIN pixel, store token only in 1Password, then read back token identity, scopes, expiry, client_business_id, accessible accounts, currency/timezone/health and rate-limit headers before enabling aliases.",
       "objective": "Onboard SHEIN US direct traffic across six manager channels with campaign-creation focus, isolated accounts and no fixed threads.",
@@ -5432,5 +5442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:43:05+00:00"
+  "updated_at": "2026-10-09T15:43:59+00:00"
 }

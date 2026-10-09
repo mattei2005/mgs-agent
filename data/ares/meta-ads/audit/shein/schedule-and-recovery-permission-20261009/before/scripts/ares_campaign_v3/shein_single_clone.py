@@ -459,17 +459,6 @@ def reconcile_number(request, inventory, common, token):
 
 def resolve_intent(request, source, *, now=None, profile=None):
     resolved = copy.deepcopy(request)
-    account_profile = profile or CURRENT_PROFILE.get() or {}
-    instant = now or datetime.now(timezone.utc)
-    from .shein_schedule import elapsed_start_is_immediate
-    if elapsed_start_is_immediate(request, account_profile, now=instant):
-        resolved['start_now'] = True
-        resolved['schedule_adjustment'] = {
-            'requested_start_time': request['start_time'],
-            'resolved_at': instant.isoformat(),
-            'reason': 'EXPLICIT_SAME_ACCOUNT_DAY_ELAPSED',
-            'intent': 'IMMEDIATE_AFTER_QA',
-        }
     if request.get('budget_from_reference') is True:
         raw = str(source['campaign'].get('daily_budget') or '')
         if not re.fullmatch(r'[1-9][0-9]*', raw):
@@ -485,7 +474,7 @@ def resolve_intent(request, source, *, now=None, profile=None):
         local = instant.astimezone(ZoneInfo(account_profile['timezone']))
         next_date = local.date() + timedelta(days=1)
         resolved['start_time'] = datetime.combine(next_date, datetime.min.time(), tzinfo=ZoneInfo(account_profile['timezone'])).isoformat()
-    if resolved.get('start_now') is True:
+    if request.get('start_now') is True:
         instant = now or datetime.now(timezone.utc)
         if instant.tzinfo is None: raise RouteBlocked('NOW resolution requires timezone')
         resolved['start_time'] = (instant.astimezone(timezone.utc) + timedelta(seconds=30)).replace(microsecond=0).isoformat()
@@ -663,7 +652,6 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
         from .shein_general import authorize
         operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
         profile['channel_authorization_policy'] = operation.get('channel_authorization_policy') or {}
-        profile['expired_schedule_policy'] = (operation.get('request_defaults') or {}).get('expired_explicit_start_policy') or {}
         authorize(request, profile)
         request = apply_request_defaults(request, operation)
         if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
@@ -743,16 +731,10 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             prepared_at = state.get('prepared_at') or state['manifest'].get('created_at')
             age = (started_at - aware_time(prepared_at)).total_seconds() if prepared_at else float('inf')
             if 0 <= age <= int((config.get('shein_media_qa') or {}).get('source_snapshot_ttl_seconds', 120)):
-                from .shein_schedule import elapsed_start_is_immediate
-                # PREPARED is pre-write; expire only an unexecuted scheduled snapshot.
-                # Existing ENGINE/RECOVERY states keep their original manifests/IDs.
-                if not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at):
-                    resume_phases.add('PREPARED')
+                resume_phases.add('PREPARED')
         if not state or state.get('phase') not in resume_phases:
             if request.get('start_now') is not True and request.get('start_next_midnight') is not True and aware_time(request['start_time']) <= started_at:
-                from .shein_schedule import elapsed_start_is_immediate
-                if not elapsed_start_is_immediate(request, CURRENT_PROFILE.get() or {}, now=started_at):
-                    raise RouteBlocked('requested schedule is outside the approved elapsed-same-day policy')
+                raise RouteBlocked('requested schedule is no longer future; no implicit date adjustment')
             prepared, page_token = _prepare(request, config, common, token)
             state = {'schema_version': 1, 'request': request, 'phase': 'PREPARED', 'prepared_at': started_at.isoformat(), 'execution_started_at': (received or started_at).isoformat(), **prepared}
             atomic_json(state_path, state)

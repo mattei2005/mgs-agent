@@ -1,0 +1,41 @@
+F.F.F..F
+======================================================================
+FAIL: test_account_timezone_defines_calendar_day (test_shein_elapsed_schedule.ElapsedScheduleTests.test_account_timezone_defines_calendar_day)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_elapsed_schedule.py", line 59, in test_account_timezone_defines_calendar_day
+    self.assertTrue(out.get('start_now'))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not true
+
+======================================================================
+FAIL: test_exact_current_time_also_becomes_now (test_shein_elapsed_schedule.ElapsedScheduleTests.test_exact_current_time_also_becomes_now)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_elapsed_schedule.py", line 30, in test_exact_current_time_also_becomes_now
+    self.assertTrue(self.resolve('2030-10-09T11:32:00-04:00').get('start_now'))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not true
+
+======================================================================
+FAIL: test_expired_today_uses_current_time_with_technical_buffer (test_shein_elapsed_schedule.ElapsedScheduleTests.test_expired_today_uses_current_time_with_technical_buffer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_elapsed_schedule.py", line 24, in test_expired_today_uses_current_time_with_technical_buffer
+    self.assertIs(out.get('start_now'),True)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not True
+
+======================================================================
+FAIL: test_paused_stays_paused (test_shein_elapsed_schedule.ElapsedScheduleTests.test_paused_stays_paused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_elapsed_schedule.py", line 47, in test_paused_stays_paused
+    self.assertTrue(out.get('start_now'));self.assertEqual(out['status'],'PAUSED')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not true
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+FAILED (failures=4)
