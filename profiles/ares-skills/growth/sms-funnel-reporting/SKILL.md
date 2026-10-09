@@ -31,6 +31,10 @@ Produce read-only SMS Funnel reports without changing lists, automations, sequen
 
 ## Source hierarchy
 
+**Canonical override for October 2026 onward:** load `/root/mgs-agent/docs/finance-sms-dashboard-source-policy.md`. The SMS Funnel dashboard is the final quantity/consumption source, including for cost × revenue/ROI reports. Read its actual `/daily-sents?startDate=YYYY-MM-DD` surface: require eight positions and the weekday labels corresponding to eight consecutive dates starting on the requested day; position zero is that day's total. Repeat closed-day reads, require stability, and multiply by the live validated unit cost. The packaged monthly `totals` command below is a diagnostic cross-check, not final authority when it disagrees with the dashboard. Keep Messages Report and consolidated differences only as technical provenance; a residual difference does not create an operational blocker, pending audit, alert or arbitrary manager allocation. This supersedes the precedence/reconciliation criteria below only for October 2026 onward. Test a reporting adaptation against the live dashboard labels, repeated daily quantities and `sum(cost) == sum(sends) × unit_cost` before publishing.
+
+For periods before that override:
+
 1. `/messages-report` is the official monthly send total.
 2. `/analytics/funnel-performance` independently validates total sends and live unit cost when queried with the first day of the next month as the end boundary.
 3. `/messages` daily detail plus `sequence_id → campaign → G001–G006` is the exact manager allocation only while every charged row remains available.

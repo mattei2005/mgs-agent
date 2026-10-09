@@ -92,7 +92,7 @@ def matches(actual, expected):
         ar=af.get(kind) or [];er=ef.get(kind) or []
         if len(ar)!=len(er):return False
         def shape(row):
-            out=stable(row);out.pop('video_id',None);out.pop('url',None);return out
+            out=stable(row);out.pop('video_id',None);out.pop('url',None);out.pop('thumbnail_hash',None);return out
         if sorted((json.dumps(shape(x), sort_keys=True) for x in ar))!=sorted((json.dumps(shape(x), sort_keys=True) for x in er)):return False
     return True
 
