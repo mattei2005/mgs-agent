@@ -357,7 +357,16 @@
     "explicit_paused_exception": true,
     "existing_paused_campaigns_unchanged": true,
     "other_operations_unchanged": true,
-    "source_thread_id": "1557274000680288307"
+    "source_thread_id": "1557274000680288307",
+    "default_start": "NEXT_LOCAL_DAY_MIDNIGHT",
+    "default_start_time": "00:00",
+    "default_start_timezone": "verified_ad_account_timezone",
+    "reference_budget_default": "INHERIT_FOR_PURE_CLONE",
+    "reference_media_default": "KEEP_SOURCE",
+    "reference_bid_default": "KEEP_ACTUAL_SOURCE_STRATEGY_AND_AMOUNT",
+    "reference_destination_default": "KEEP_ACTUAL_SOURCE_URL",
+    "account_resolution": "explicit account or unambiguous canonical context; never guess",
+    "default_quantity": 1
   },
   "campaign_naming_policy": {
     "status": "APPROVED_DOCUMENT_PENDING_RUNTIME",
