@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "continuation_of": "shein-g005-c88-cocap060-budget75-1791559741",
+  "source_thread_id": "1558126286826774711",
+  "source_channel_id": "1548150015275438220",
+  "authorized_by": "321263240782807040",
+  "authorization_scope": "Resume the pending single duplication using existing confirmed IDs; requested start changed to NOW. No additional campaign, deletion, budget or strategy expansion.",
+  "account": "Yolokfx-US-SHEIN-EN-03-G005",
+  "account_id": "2429758060563333",
+  "source_campaign_number": 88,
+  "quantity": 1,
+  "budget_usd": "75",
+  "bid_strategy": "COCAP",
+  "bid_usd": "0.60",
+  "start_now": true,
+  "status": "ACTIVE",
+  "existing_campaign_id": "120250166906720331",
+  "existing_adset_id": "120250166908140331",
+  "existing_ad_ids": [],
+  "live_permission_verified": true,
+  "live_readback": {
+    "campaign_status": "PAUSED",
+    "daily_budget_minor": "5000",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "adset_status": "PAUSED",
+    "ads_count": 0
+  },
+  "execution_status": "BLOCKED_CENTRAL_RUNTIME_CAPABILITY",
+  "required_next_action": "Owner must enable an audited same-ID Engine v3 recovery for atomic campaign bid_strategy plus adset_bid_amounts and approved schedule continuation; preserve original request/manifests, clock, QA and all IDs. Do not repeat campaign/adset copies or create a parallel writer."
+}
