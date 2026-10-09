@@ -64,6 +64,34 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 
 `ares-diretoria` é o canal principal/home do profile. `ares-criativos` é o canal compartilhado de Creative Ops e não recebe novas rotas de Campaign Ops. Os canais privados por operação usam múltiplas contas por alias e threads separadas para criação, relatórios e criativos. Rodolfo (`344196393512075265`) e Zeus (`1496296175014252634`) são membros obrigatórios de toda thread criada pelo Ares em qualquer canal pai, inclusive Diretoria e canais futuros; listas por canal são aditivas. Assim, toda thread iniciada por Nicolas dentro das rotas do Ares inclui Rodolfo automaticamente. `eggbev-us-cc-en-01-g006` cobre a estratégia BOT/Messenger Eggbev US-CC-EN, é gerida por Rodolfo e Nicolas e também auto-adiciona Nicolas (`1055570806945620030`). Threads fixas: regras `1541578622106865815`, Intraday `1541578606076231750`, Diário `1541578596253175858`, criar campanhas `1541578556037927053`, clonar campanhas `1543333373945053184` e limite de leads `1543312825890381865`. A thread de regras `1543280854024060999` foi supersedida por decisão de Rodolfo em 2026-09-01 e permanece apenas como histórico para encerramento manual. Regras de operações anteriores e de tráfego direto não são herdadas automaticamente. `bot-fax-us-cc-en-01-g006` é a rota BOT/Messenger de `financeadx.com`; `bot-lyzmo-us-cc-en-01-g006` é a rota BOT/Messenger de `lyzmo.com`; ambos usam a mesma audiência e os mesmos permission overwrites do canal Eggbev por decisão de Rodolfo em 2026-08-31. `ares-creditoparaveiculo-br-car-br` cobre creditoparaveiculo.com BR-CAR-BR na estratégia de tráfego direto e também auto-adiciona Nicolas e Geizian (`321263240782807040`) em toda thread nova. `shein-geral` é a rota de coordenação comum da operação e auto-adiciona Rodolfo, Zeus, Geizian e os seis gestores; ela não remove o isolamento de contas/perfis nem autoriza write cruzado entre gestores. `shein-g001`…`shein-g006` são a exceção aprovada de canal por gestor: cada rota isola as contas/perfis do gestor correspondente, permite operar simultaneamente `yolokfx.com`/`vizioid.com` em EN e `mavroa.com` em ES, e auto-adiciona Rodolfo, Zeus, Geizian e o gestor correspondente. O contrato vivo é `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`; conta, moeda, timezone, objetivo, bid, estrutura e schedule continuam obrigatoriamente resolvidos por readback/pedido antes do primeiro write. Nenhum outro canal Discord é rota ativa do Ares.
 
+### Escopo exclusivo — Yolokfx Conta 05 Criar Camp
+
+- Por definição explícita de Rodolfo Mattei nesta conversa, a thread `1558123871817965589`, no canal pai `shein-g001` (`1548149087206121613`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-05-G001` (`787796726891306`), gestor Icaro/G001.
+- Este recorte vale somente para esta thread; não restringe todo o canal pai nem altera a autoridade geral SHEIN. Não usar outras contas ou transformar esta conversa em rota de relatórios/otimização.
+- A definição do escopo não é um pedido de criação nem autorização de execução. Rodolfo pediu para aguardar sua explicação; nenhuma campanha deve ser criada até receber o pedido correspondente.
+- Fonte: declaração de Rodolfo na thread acima, após a mensagem `1558124030811447378` de aguardar explicação; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 01 Criar Camp
+
+- Por definição explícita de Rodolfo Mattei nesta conversa, a thread `1558124207517470805`, no canal pai `shein-g001` (`1548149087206121613`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-01-G001` (`1018267074603840` no catálogo SHEIN), gestor Icaro/G001.
+- Este recorte vale somente para esta thread; não restringe todo o canal pai nem altera a autoridade geral SHEIN. Não usar outras contas ou transformar esta conversa em rota de relatórios/otimização. A menção anterior a Growpowerhub foi expressamente desconsiderada por Rodolfo e não constitui binding.
+- A definição do escopo não é um pedido de criação nem autorização de execução. Aguardar o pedido de campanha; nenhum write Meta foi solicitado nesta definição. O catálogo não substitui o preflight/readback Meta antes de uma execução futura.
+- Fonte: declaração de Rodolfo na própria thread; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 01 Criar Camp
+
+- Por definição explícita de Rodolfo Mattei, a thread `1558125107858382899`, no canal pai `shein-g001` (`1548149087206121613`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-01-G001`, gestor Icaro/G001.
+- Este recorte vale somente para esta thread; não restringe todo o canal pai nem altera a autoridade geral SHEIN. Não usar outras contas ou transformar esta conversa em rota de relatórios/otimização.
+- A definição do escopo não é um pedido de criação nem autorização de execução. Rodolfo pediu para aguardar sua explicação; nenhuma campanha deve ser criada até receber o pedido correspondente. Resolver o ID e validar a conta por API no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria thread; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Yolokfx Conta 01 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1557917403822956698`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-01-G002` (`7840111366055613` no catálogo SHEIN), gestor Geizian/G002. Criação inclui os fluxos autorizados de criação do zero, duplicação e clone.
+- O recorte aplica-se à conversa identificada; não ampliar a exclusividade para outras conversas do canal pai nem usar outra conta aqui. Não transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo e não solicita nova campanha, replay de pedidos antigos ou mudança de campanhas existentes. Preflight/readback Meta continua obrigatório antes de execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.

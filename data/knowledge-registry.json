@@ -3073,6 +3073,78 @@
       "updated_at": "2026-10-08T12:29:13+00:00"
     },
     {
+      "canonical_key": "ares.shein.thread.1558124145349370029.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558124145349370029.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:33:12+00:00",
+      "id": "ARES-SHEIN-G001-CREATE-THREAD-1558124145349370029",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva para criação na Boostingecon-US-SHEIN-ES-01-G001",
+      "updated_at": "2026-10-09T14:33:12+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558124207517470805.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T14:33:11+00:00",
+      "id": "ARES-SHEIN-G001-ESCALATEPOWER01-CREATION-SCOPE-1558124207517470805",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva de criação Escalatepower Conta 01 G001",
+      "updated_at": "2026-10-09T14:33:11+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558125107858382899.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T14:33:52+00:00",
+      "id": "ARES-SHEIN-G001-MAVROA01-CREATION-SCOPE-1558125107858382899",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva de criação Mavroa Conta 01 G001",
+      "updated_at": "2026-10-09T14:33:52+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1558123871817965589.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T14:32:27+00:00",
+      "id": "ARES-SHEIN-G001-YOLO05-CREATION-SCOPE-1558123871817965589",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva de criação Yolokfx Conta 05 G001",
+      "updated_at": "2026-10-09T14:32:27+00:00"
+    },
+    {
       "canonical_key": "ares.shein.g002.single-clone-route",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/single-clone-fast-route.md",
       "consumers": [
@@ -3088,6 +3160,25 @@
       "superseded_by": "ARES-SHEIN-GENERAL-FAST-ROUTE",
       "title": "Rota deterministica de duplicacao individual PAUSED SHEIN G002",
       "updated_at": "2026-10-08T02:24:49+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.thread.1558125800346091653.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558125800346091653.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:36:45+00:00",
+      "id": "ARES-SHEIN-G002-VIZIOID02-CREATION-SCOPE-1558125800346091653",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criacao Vizioid-US-SHEIN-EN-02-G002",
+      "updated_at": "2026-10-09T14:36:45+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.g005-bisu-canary",
@@ -8743,6 +8834,24 @@
       "updated_at": "2026-10-05T13:55:13+00:00"
     },
     {
+      "canonical_key": "ares.discord.thread.1557917403822956698.creation-account-scope",
+      "canonical_source": "/root/mgs-agent/context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T14:35:11+00:00",
+      "id": "ares-shein-g002-yolokfx01-creation-scope-1557917403822956698",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criacao Yolokfx-US-SHEIN-EN-01-G002",
+      "updated_at": "2026-10-09T14:35:11+00:00"
+    },
+    {
       "canonical_key": "growth.ares.sms-funnel.readonly-reporting-scope",
       "canonical_source": "context/routes.md",
       "consumers": [
@@ -10629,5 +10738,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T04:00:14+00:00"
+  "updated_at": "2026-10-09T14:36:45+00:00"
 }
