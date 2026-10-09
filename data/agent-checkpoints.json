@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
-      "next_step": "Aguardar Zeus validar recuperacao API/interface e liberar recurso; reconsultar inventario/Active, iniciar novo pass <=5 perfis, fechar e validar Inactive cada lote antes do proximo. Nao iniciar enquanto manager/API indisponiveis nem reiniciar PC1/gateway/Chrome.",
-      "objective": "Reauditar BACKUP SHEIN em lotes max5 e reportar somente problemas apos recuperacao integral AdsPower",
-      "source": "discord:1558159385694576661; authority:1558193585667580046; /root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
-      "state": "waiting_recovery_manager_restart_authority: zeus informou encerramento de sunbrowser e zero dos 25 backup em execucao, memoria recuperada, mas gerenciador travado e api sem listener. ares nao equipara zero processos a inactive api nem inicia auditoria; fechamento global autorizado por rodolfo 1558193585667580046. zeus aguarda autorizacao especifica para reiniciar apenas gerenciador; historico preservado.",
+      "next_step": "Aguardar Rodolfo/Zeus confirmar janela normal e liberar nova auditoria; revalidar estado atual e executar pass novo com <=5 perfis por lote, close+GET Inactive antes do proximo; reportar apenas problemas do pass novo.",
+      "objective": "Reauditar BACKUP SHEIN em lotes max5, somente problemas, apos liberacao da recuperacao",
+      "source": "discord:1558159385694576661; restart-authority:1558210667285192726; /root/mgs-agent/data/ares/adspower/shein-backup-audit-1558159385694576661/state.json",
+      "state": "waiting_gui_confirmation: zeus informou restart gerenciador autorizado 1558210667285192726, api autenticada code0, mcp success, 25/25 inactive e zero sunbrowser; lease liberada. interface ainda branca/starting na captura, validacao direta rodolfo pendente. ares nao iniciou novas acoes pc1 e nao toma api saudavel como liberacao da gui.",
       "thread_id": "1558159385694576661",
-      "updated_at": "2026-10-09T19:45:07+00:00"
+      "updated_at": "2026-10-09T21:06:49+00:00"
     },
     {
       "agent": "ares",
@@ -5522,5 +5522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T19:45:07+00:00"
+  "updated_at": "2026-10-09T21:06:49+00:00"
 }
