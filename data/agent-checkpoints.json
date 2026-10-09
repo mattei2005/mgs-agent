@@ -3003,12 +3003,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SHEIN-GEIZIAN-AUDIT-1558225355930861649",
-      "next_step": "Supervisor refresh-after-turn.py aguarda resposta Zeus e Ares sem leases, executa finalizer canônico Ares-only, valida readiness e dispara canário read-only na thread real G002. Ao receber handoff Ares, ler refresh-result.json e state.db.system_prompts para provar prompt consumido; depois encerrar checkpoint/inventário/report e responder na origem.",
-      "objective": "Auditar correção SHEIN Geizian e refresh real dos seis prompts Ares",
-      "source": "data/ares/meta-ads/audit/shein/zeus-geizian-authority-1558231569976787076/independent-audit.json;data/ares/meta-ads/audit/shein/zeus-geizian-authority-1558231569976787076/refresh-plan.json",
-      "state": "independent_audit_passed_pending_post_turn_runtime_refresh: 167 testes rerodados; live 6 pais e thread; c007/adset/2ads active, usd100 cost_cap80; c006 intacta salvo urls derivadas; zeus normalizou prompts duplamente escapados com writer nativo; mirror igual",
+      "next_step": "Nenhuma pendência deste pedido; não repetir criação/ativação. Autoridade ativa nos seis canais/threads, late_recovery_review verificado, 167 testes PASS, C007 e filhos ACTIVE USD100 COST_CAP80, C006 intacta; Ares PID3443710 readiness confirmado; prompt_pin consumido no canário G002 igual ao YAML normalizado.",
+      "objective": "Auditoria independente concluída da autorização SHEIN Geizian, C007 existente e prompt runtime Ares",
+      "source": "data/ares/meta-ads/audit/shein/zeus-geizian-authority-1558231569976787076/final-closure.json",
+      "state": "completed",
       "thread_id": "1558159785843499109",
-      "updated_at": "2026-10-09T21:45:40+00:00"
+      "updated_at": "2026-10-09T21:52:08+00:00"
     },
     {
       "agent": "zeus",
@@ -5542,5 +5542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T21:45:40+00:00"
+  "updated_at": "2026-10-09T21:52:08+00:00"
 }

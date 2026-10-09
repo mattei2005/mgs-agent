@@ -749,7 +749,7 @@
       "agent": "zeus",
       "authority_message_id": "1558225355930861649",
       "source_thread_id": "1558159785843499109",
-      "status": "independent_audit_passed_refresh_prepared_pending_runtime_proof",
+      "status": "completed_independent_runtime_prompt_proof_verified",
       "purpose": "Auditoria independente da autoridade SHEIN, C007 existente e refresh seguro dos seis prompts após resposta e Ares ocioso",
       "paths": [
         "/root/.hermes/profiles/ares/config.yaml",
@@ -771,7 +771,11 @@
         "mirror_equal": true,
         "six_prompt_real_newlines": true,
         "refresh_check_only_passed": true,
-        "runtime_refresh_verified": false,
+        "runtime_refresh_verified": true,
+        "runtime_prompt_pin_verified": true,
+        "runtime_canary_thread_id": "1558125800346091653",
+        "runtime_canary_message_id": "1558234823120789625",
+        "final_evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/zeus-geizian-authority-1558231569976787076/final-closure.json",
         "meta_writes_by_zeus": 0
       }
     },
