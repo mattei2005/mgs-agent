@@ -1,8 +1,8 @@
 # Padrões oficiais de nome e pedido — SHEIN-US-DIRECT
 
-## Versão humana compacta 2.0 — aprovada por Rodolfo
+## Versão humana compacta 3.0 — aprovada por Rodolfo
 
-Pedido explícito `manda de novo como fica e salva os padrões`, thread `1557274000680288307`. Este modelo substitui os formulários humanos longos 1.0 abaixo; eles permanecem somente como histórico das regras técnicas. Aprovação do texto não prova que novos campos já estejam implementados no runner.
+A versão 3.0 foi aprovada por `exato, pode salvar` na thread `1557274000680288307`. Substitui a 2.0: título `Suba essa campanha`, sem linhas Modo/Quiz, campos e ordem fixos, fonte e escolha de criativos determinam a intenção. Histórico de formulários permanece abaixo, explicitamente supersedido. Aprovação documental não habilita campos ainda pendentes no runner.
 
 ### Nome aprovado
 
@@ -31,26 +31,25 @@ Exemplos ilustrativos, não campanhas criadas:
 Apresentar pedidos e exemplos como blocos `text` com os mesmos campos, rótulos e ordem do modelo abaixo. Variar somente os valores; não substituir por frases corridas, enunciados livres ou um formato diferente por gestor. Não acrescentar linhas de status/execução redundantes. Para múltiplos modelos que serão copiados separadamente no Discord, enviar um bloco por resposta e numerar a sequência.
 
 ```text
-Pedido SHEIN
+Suba essa campanha
 
-Modo: [Duplicar igual / Clonar com criativos novos / Criar do zero]
-Conta: [nome completo]
-Quantidade: [número]
-Campanha fonte: [número ou nome, quando aplicável]
-Quiz: [v1 / v2 / v3 / igual ao da fonte]
+Conta: [nome completo da conta de anúncio]
+Quantidade: [número de campanhas]
 
-Lance: [MAXVOL / COCAP / BIDCAP / igual ao da fonte]
+Campanha fonte: [número ou nome da campanha de referência]
+Lance: Igual ao da fonte — MAXVOL, COCAP ou BIDCAP
 Valor do lance: [valor para COCAP/BIDCAP / igual ao da fonte / não se aplica para MAXVOL]
 Budget: [valor por campanha / igual ao da fonte]
 
-Criativos: [manter os da fonte / novos do Drive + produto e quantidade]
-Início: [agora / data e hora no timezone da conta]
+Criativos: [manter os da fonte / novos do Drive — produto e quantidade por campanha]
+Hora/Data início: [agora / data e hora no timezone da conta]
 ```
 
 - Valores SHEIN em USD, mantendo conferência da moeda real da conta antes do write. Budget diário por campanha é separado do valor de lance.
 - Não exigir linha `Status final` nem `Execução: ativar após validar`: novos pedidos têm ACTIVE final por padrão após QA de todas as campanhas. A construção continua PAUSED. Acrescentar `deixar pausada para revisão` somente quando quiser essa exceção.
 - `Duplicar igual` e `Clonar igual` são sinônimos de pure_clone e mantêm mídia/copy/configurações. A palavra clonar isolada não autoriza mídia nova. `Clonar com criativos novos`/`Duplicar com criativos novos` são clone_prestaged. Criar do zero é from_zero_prestaged; Ares resolve IDs/lineage internamente.
-- Fonte é obrigatória em duplicação/clonagem. Criação do zero pode usar configuração/copy/template aprovado da mesma conta sem copiar shells; não pedir IDs técnicos ao gestor.
+- Não exigir campos Modo ou Quiz neste pedido com referência. `Criativos: manter os da fonte` resolve pure_clone; `novos do Drive` resolve clone_prestaged, conservando copy/configurações e exigindo mídia aprovada/compatível. Herdar destino/quiz pela URL real da fonte sem pedir versão humana. Identificar v1/v2/v3 no nome somente com correspondência comprovada; não adivinhar a versão a partir do caminho.
+- Para criar campanha/conjunto realmente do zero, a frase inicial deve dizer `Criar do zero`; uma referência pode servir de template/configuração/copy, mas não autoriza inferir esse modo somente por haver criativos novos. Não exigir IDs técnicos ao gestor.
 - Conservar Ad setup e localização original do tracking; Create ad não vira post existente para preservar social proof automaticamente.
 - Início `agora` autoriza o intent IMMEDIATE; datas humanas agendadas permanecem literais. Não usar `Preparar agora` como sinônimo silencioso de revisão PAUSED.
 
@@ -64,7 +63,7 @@ Início: [agora / data e hora no timezone da conta]
 
 Os textos seguintes são histórico das especificações anteriores, não o formulário humano vigente.
 
-A base dos três modelos foi aprovada por Rodolfo Mattei em 14/09/2026. As regras técnicas abaixo foram supersedidas nas correções posteriores da thread `1557274000680288307`: preservar Ad setup e localização do tracking, não preservar post/prova social automaticamente, e respeitar a lineage exigida pela conta. Os modelos humanos longos foram substituídos pela versão compacta 2.0 aprovada acima.
+A base dos três modelos foi aprovada por Rodolfo Mattei em 14/09/2026. As regras técnicas abaixo foram supersedidas nas correções posteriores da thread `1557274000680288307`: preservar Ad setup e localização do tracking, não preservar post/prova social automaticamente, e respeitar a lineage exigida pela conta. Os modelos humanos longos foram substituídos pela versão compacta 3.0 aprovada acima; a 2.0 com campos Modo/Quiz também está supersedida.
 
 ## Status padrão — nova decisão de Rodolfo
 

@@ -398,13 +398,36 @@
     "source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
     "source_thread": "discord:thread:1557274000680288307",
     "status": "ACTIVE_DOCUMENT_APPROVED_RUNTIME_PARTIAL",
-    "version": "2.0",
-    "supersedes_version": "1.0",
+    "version": "3.0",
+    "supersedes_version": "2.0",
     "runtime_pending": [
       "quiz_version_url_mapping",
       "date_first_campaign_number_parser",
       "bid_strategy_and_amount_override"
-    ]
+    ],
+    "title": "Suba essa campanha",
+    "human_fields": [
+      "Conta",
+      "Quantidade",
+      "Campanha fonte",
+      "Lance",
+      "Valor do lance",
+      "Budget",
+      "Criativos",
+      "Hora/Data início"
+    ],
+    "removed_human_fields": [
+      "Modo",
+      "Quiz",
+      "Status final",
+      "Execução"
+    ],
+    "intent_resolution": {
+      "source_media": "pure_clone",
+      "new_drive_media": "clone_prestaged",
+      "from_zero": "explicit initial phrase required"
+    },
+    "quiz_destination": "inherit actual source URL; no new quiz setup"
   },
   "operation_id": "SHEIN-US-DIRECT",
   "recovery": {

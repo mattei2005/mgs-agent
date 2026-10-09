@@ -3116,10 +3116,27 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REQUEST-PATTERN-V3-20261008",
+      "title": "Pedido SHEIN compacto v2 aprovado e aliases de modo",
+      "updated_at": "2026-10-09T00:02:30+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.human-request-pattern",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T00:02:30+00:00",
+      "id": "ARES-SHEIN-REQUEST-PATTERN-V3-20261008",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Pedido SHEIN compacto v2 aprovado e aliases de modo",
-      "updated_at": "2026-10-08T21:06:34+00:00"
+      "title": "Pedido SHEIN Suba essa campanha sem campos Modo e Quiz",
+      "updated_at": "2026-10-09T00:02:30+00:00"
     },
     {
       "canonical_key": "ares.shein.single-campaign.e2e-target",
@@ -10455,5 +10472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-08T21:06:34+00:00"
+  "updated_at": "2026-10-09T00:02:30+00:00"
 }
