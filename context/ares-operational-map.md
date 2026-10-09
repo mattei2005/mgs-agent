@@ -239,6 +239,13 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura; o catálogo não prova acesso ou saúde atuais.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Yolokfx Conta 01 G002 Relatórios
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558138059344576593`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para relatórios de campanhas da conta `Yolokfx-US-SHEIN-EN-01-G002`, gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem substitui a thread de criação da mesma conta. Não incluir outras contas nem executar criação, clone ou otimização nesta conversa.
+- A declaração define destino e escopo de relatórios; não solicita relatório imediato, alteração Meta ou automação recorrente. Consultas futuras devem validar a conta exata e informar período, moeda, fonte e limitações.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.

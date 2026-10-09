@@ -7,6 +7,15 @@
 
 ---
 
+## Atualização operacional — SHEIN lance e autorização por canal (2026-10-09)
+
+- Autoridade: Rodolfo, confirmação explícita na thread `1557274000680288307`; nenhum pedido de campanha ou replay autorizado nesta mudança.
+- Regras: `SHEIN-US-DIRECT.json#/bid_strategy_change_policy` e `#/channel_authorization_policy`; matriz, mapa operacional e parity reconciliados. Qualquer participante humano com permissão efetiva de comunicação no canal/thread pode solicitar sobre contas/perfis do canal; gestor titular deixa de ser filtro exclusivo.
+- Runtime: `shein_general.py`, `shein_single_clone.py`, novo `shein_channel_authority.py`, `schema.py`, leitura consolidada `engine.py`, proteção `activation.py` e `shell_recovery.py`. Troca de lance é delta somente no alvo, com cap exato/reset, naming coerente e QA antes de ativação; nenhuma mudança em targeting/credenciais/billing. Permissões Discord consultadas read-only por Ares e relidas antes dos writes.
+- Procedimento: skills próprias `direct-traffic-shein-operations` (main, general fast route e standard requests) e regra 21 de `meta-campaign-engine-v3`. Dois asserts legados de formulários 1.0 foram reconciliados com o modelo 3.0 já aprovado e o estado técnico real, sem restaurar o formulário antigo.
+- Evidência: `data/ares/meta-ads/audit/shein/rules-bid-channel-20261009/` contém backups/inventário, red→green, regressão offline e proof Discord de Geizian nos seis canais e thread `1558126286826774711` (pai G005). Testes offline não provam aceitação Meta/serving; readback live permanece obrigatório no próximo pedido real.
+- Sem writes Meta, sem alterações de permissões Discord/cadastro global de usuários, sem cron/gateway/restart. Histórico dos registros anteriores preservado por supersessão; fontes canônicas e checkpoint registrados pelo controle institucional.
+
 ## Atualização operacional — CPV13 relatórios isolados (2026-10-08)
 
 - Autoridade: Rodolfo, thread `1557763617578033172`; chave `growth.creditoparaveiculo.account13.reporting.read-only-isolation` no contrato CPV.

@@ -1093,12 +1093,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-BID-CHANNEL-RULES-20261009",
-      "next_step": "Persistir regras, reconciliar guards e validar offline; nenhum canario Meta autorizado.",
+      "next_step": "Aplicar no proximo pedido real; estrategia e cap exigem readback Meta antes de ativacao. Zeus: atualizar regressao global KR-014 stale (3.6.1 vs 3.6.8), sem downgrade; nao bloqueia esta operacao.",
       "objective": "Aplicar regras aprovadas de lance e solicitantes autorizados nos seis canais SHEIN",
-      "source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
-      "state": "contrato e skill identificados; runtime restringe solicitante ao gestor titular e override de lance consta pendente. sem writes meta.",
+      "source": "data/ares/meta-ads/audit/shein/rules-bid-channel-20261009/verification-final.json",
+      "state": "concluido: contrato/matriz/mapa/parity/skills/runtime reconciliados; 209 testes offline e 74 subtests; geizian live autorizado nos seis canais e thread g005 indicada; registry validate ok; report-infra confirmado. zero writes meta/permissoes/replays/restart.",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-09T15:05:32+00:00"
+      "updated_at": "2026-10-09T15:24:56+00:00"
     },
     {
       "agent": "ares",
@@ -5412,5 +5412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:05:32+00:00"
+  "updated_at": "2026-10-09T15:24:56+00:00"
 }

@@ -745,6 +745,32 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "shein-account-threads-visible-1558136697424842882",
+      "agent": "zeus",
+      "type": "discord-thread-visibility-data",
+      "authority_message_id": "1558136697424842882",
+      "source_thread_id": "1557274000680288307",
+      "path": "/root/mgs-agent/data/discord-shein-account-thread-visibility.json",
+      "updated_at": "2026-10-09T15:22:38.596224+00:00",
+      "status": "active_verified",
+      "scope_threads": 36,
+      "report_infra_message_id": "1558137729223495692",
+      "report_infra_readback": true,
+      "auto_archive_duration_minutes": 10080,
+      "monitor": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+      "validation": {
+        "threads_verified": 36,
+        "per_channel": 6,
+        "monitor_six_day_simulation_covered": 36,
+        "monitor_dry_run_ok": true,
+        "monitor_last_real_run": "2026-10-09T13:16:01Z",
+        "monitor_last_real_bumped": 2,
+        "monitor_last_real_deleted": 2,
+        "monitor_last_real_errors": []
+      },
+      "report_infra_status": "sent_verified"
+    },
+    {
       "id": "RUNCLOUD-INITIAL-MONITOR-1557826145578127361",
       "tests_passed": 13,
       "logrotate_config": "/root/mgs-agent/config/runcloud-logrotate.conf",

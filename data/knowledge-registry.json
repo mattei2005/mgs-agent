@@ -4055,6 +4055,24 @@
       "updated_at": "2026-10-06T16:05:36+00:00"
     },
     {
+      "canonical_key": "ares.discord.thread.1558138059344576593.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-09T15:25:17+00:00",
+      "id": "ARES-THREAD-1558138059344576593-REPORTING-SCOPE",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread exclusiva de relatorios Yolokfx-US-SHEIN-EN-01-G002",
+      "updated_at": "2026-10-09T15:25:17+00:00"
+    },
+    {
       "canonical_key": "ares.shein-us-direct.yolo-g001.reporting.health-layout",
       "canonical_source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
       "consumers": [
@@ -9000,6 +9018,24 @@
       "updated_at": "2026-08-21T20:37:56+00:00"
     },
     {
+      "canonical_key": "discord.shein.account_threads.visibility",
+      "canonical_source": "data/discord-shein-account-thread-visibility.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "discord",
+      "effective_at": "2026-10-09T15:22:39+00:00",
+      "id": "SHEIN-ACCOUNT-THREAD-VISIBILITY-20261009",
+      "kind": "decision",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Threads fixas de contas SHEIN G001-G006 protegidas contra ocultação por inatividade",
+      "updated_at": "2026-10-09T15:22:39+00:00"
+    },
+    {
       "canonical_key": "sites.ownership.spaziokitchensandbaths",
       "canonical_source": "context/sites.md",
       "consumers": [
@@ -11352,5 +11388,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:20:24+00:00"
+  "updated_at": "2026-10-09T15:25:17+00:00"
 }

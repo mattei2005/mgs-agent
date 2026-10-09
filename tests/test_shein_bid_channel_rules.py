@@ -74,6 +74,11 @@ class BidDeltaTests(unittest.TestCase):
         p,_,_=self.build('COCAP','1.25');p['operation']='Other'
         with self.assertRaises(ManifestError):Manifest.from_dict(p)
 
+    def test_bid_delta_cannot_use_legacy_deep_copy_without_adset_identity(self):
+        p,_,_=self.build('COCAP','1.25')
+        c=p['campaigns'][0];c['ads']=[];c.pop('source_adset_id');c.pop('adset_name')
+        with self.assertRaises(ManifestError):Manifest.from_dict(p)
+
     def test_offline_core_plan_execute_and_idempotent_replay(self):
         p,_,a=self.build('COCAP','1.25')
         with tempfile.TemporaryDirectory() as directory:

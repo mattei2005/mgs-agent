@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT=Path('/root/mgs-agent')
 STATE=ROOT/'data/meta-digital-trust-40-20261007-state.json'
 LEASE=ROOT/'scripts/mgs-pc1-computer-use-lock.py'
-URL='https://business.facebook.com/latest/settings/ad_accounts?business_id=155263197283282'
+URL='https://business.facebook.com/latest/settings/ad_accounts?business_id=155263197283282&selected_asset_id=120252962963100222&selected_asset_type=ad-account'
 RUNTIME=Path('/root/.hermes/hermes-agent-port-main-46904a3b-mgs')
 SESSION=os.environ.get('MGS_PC1_SESSION') or 'pc1-native-'+uuid.uuid4().hex
 mutation=False
@@ -71,10 +71,14 @@ def navigate():
     deadline=time.monotonic()+35
     while True:
         es=cap();t=text(es)
-        if any(e.get('label')=='Add' and e.get('role')=='Button' for e in es):break
+        if any(e.get('label')=='Add' and e.get('role')=='Button' for e in es) and 'Owned by: Digital Trust' in t:break
         if time.monotonic()>deadline:raise RuntimeError('page_render_unavailable')
         time.sleep(2)
-    if 'Owned by: Digital Trust' not in t or 'Rodolfo Mattei (You)' not in t:raise RuntimeError('business_or_actor_readback_missing')
+    click('People','TabItem')
+    deadline=time.monotonic()+20
+    while 'Rodolfo Mattei (You)' not in text(es:=cap()):
+        if time.monotonic()>deadline:raise RuntimeError('business_or_actor_readback_missing')
+        time.sleep(2)
     return es
 
 def preflight():
