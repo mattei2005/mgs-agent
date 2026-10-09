@@ -9,55 +9,14 @@ from .shein import _individual_dof, _campaign_create, _adset_create
 from .creative_media import source_links, full_creative, definition_creative
 
 
-def authorize(request, profile, *, force=False):
+def authorize(request, profile):
     actor = str(request.get('authorized_by') or '')
     if actor == '344196393512075265':
-        return
-    policy = profile.get('channel_authorization_policy') or {}
-    if policy.get('enabled') is True:
-        if (policy.get('approved_by') != '344196393512075265'
-                or str(profile.get('channel_id')) not in policy.get('channel_ids', [])):
-            raise ValueError('approved channel authorization policy unavailable')
-        if str(request.get('source_channel_id') or '') != str(profile.get('channel_id')):
-            raise ValueError('request must originate in the account canonical parent channel')
-        from .shein_channel_authority import verify
-        if verify(request, profile, force=force).get('verified') is not True:
-            raise ValueError('live channel authorization unconfirmed')
         return
     if actor != str(profile.get('manager_discord_id')):
         raise ValueError('requester is not the account-bound manager')
     if str(request.get('source_channel_id') or '') != str(profile.get('channel_id')):
         raise ValueError('manager request must originate in its canonical parent channel')
-
-
-def bid_delta(request, source):
-    from decimal import Decimal, InvalidOperation
-    from .shein_naming import BIDS
-    alias = request.get('bid_strategy')
-    explicit = 'bid_strategy' in request or 'bid_usd' in request
-    if not explicit:
-        return source['campaign']['bid_strategy'], None
-    if 'bid_strategy' in request:
-        if alias not in BIDS.values():
-            raise ValueError('bid strategy must be the exact MAXVOL, COCAP or BIDCAP alias')
-        strategy = next(k for k,v in BIDS.items() if v == alias)
-    else:
-        strategy = source['campaign']['bid_strategy']
-    if strategy == 'LOWEST_COST_WITHOUT_CAP':
-        if 'bid_usd' in request:
-            raise ValueError('MAXVOL does not accept a cap amount')
-        amount = '0'
-    elif strategy in {'COST_CAP','LOWEST_COST_WITH_BID_CAP'}:
-        try:
-            cents = Decimal(str(request.get('bid_usd'))) * 100
-            if not cents.is_finite() or cents <= 0 or cents != cents.to_integral_value():
-                raise ValueError()
-            amount = str(int(cents))
-        except (InvalidOperation, ValueError, TypeError, OverflowError):
-            raise ValueError('COCAP/BIDCAP require an exact positive USD cent cap') from None
-    else:
-        raise ValueError('unsupported source bid strategy')
-    return strategy, {'bid_amount': amount, 'bid_constraints': {}}
 
 
 def build(request, source, number, account_config):
@@ -105,8 +64,7 @@ def _build_one(request, source, number, account_config):
         raise ValueError('source literal tracking token/number mismatch')
     old = literal.group(1)
     new = p['tracking_prefix'] + f'c{number:03d}'
-    campaign = copy.deepcopy(source['campaign'])
-    campaign['bid_strategy'], bid_updates = bid_delta(request, source)
+    campaign = source['campaign']
     label_number = re.match(r'^([0-9]+)\s*-', campaign['name'])
     if not label_number or int(label_number.group(1)) != sn or '(' + old + ')' not in campaign['name']:
         raise ValueError('source numbering/tracking prefix mismatch')
@@ -236,13 +194,9 @@ def _build_one(request, source, number, account_config):
         for field in ['bid_amount', 'bid_constraints']:
             if source['adset'].get(field) is not None:
                 shell['adset_create'][field] = copy.deepcopy(source['adset'][field])
-        if bid_updates is not None:
-            shell['adset_create'].update(bid_updates)
     else:
         shell.update(source_campaign_id=campaign['id'], source_adset_id=source['adset']['id'],
                      campaign_updates={'daily_budget': str(int(budget)), 'bid_strategy': campaign['bid_strategy']})
-        if bid_updates is not None:
-            shell.update(bid_override=True, adset_updates=bid_updates)
         if mode == 'pure_clone':
             if account_config.get('pure_clone_setup_policy') == 'PRESERVE_SOURCE_DEFINITION' and all(ad['creative_payload'].get('object_story_spec') for ad in ads):
                 shell['creative_materialization_route'] = 'source_definition_two_phase'

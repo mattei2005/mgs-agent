@@ -176,34 +176,6 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
-### Escopo exclusivo — Boostingecon Conta 05 G005 Criação
-
-- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558133727748689951`, no canal pai `shein-g005` (`1548150015275438220`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-05-G005` (`766488759094178` no catálogo SHEIN), gestora Kelly/G005.
-- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
-- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
-- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
-
-### Escopo exclusivo — Escalatepower Conta 05 G005 Criação
-
-- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558133789769601135`, no canal pai `shein-g005` (`1548150015275438220`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-05-G005` (`897046653487466` no catálogo SHEIN), gestora Kelly/G005.
-- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
-- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
-- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
-
-### Escopo exclusivo — Growpowerhub Conta 05 G005 Criação
-
-- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558133865028001854`, no canal pai `shein-g005` (`1548150015275438220`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-05-G005` (`1547524853816263` no catálogo SHEIN), gestora Kelly/G005.
-- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
-- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
-- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
-
-### Escopo exclusivo — Yolokfx Conta 02 G006 Criação
-
-- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134300325716050`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-02-G006` (`1583000095650153` no catálogo SHEIN), gestor Nicolas/G006.
-- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
-- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
-- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
-
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.

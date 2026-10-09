@@ -40,7 +40,6 @@ REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
 REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
-REQUEST_FIELDS.update({'bid_strategy', 'bid_usd'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -136,12 +135,6 @@ def validate_request(request: dict[str, Any]) -> None:
         mid = str(request['source_message_id'])
         if not re.fullmatch(r'[0-9]{17,20}', mid) or int(mid) >= 2**64:
             raise RouteBlocked('invalid source message snowflake')
-    if 'bid_strategy' in request or 'bid_usd' in request:
-        from .shein_general import bid_delta
-        if 'bid_strategy' in request:
-            bid_delta(request, {'campaign': {'bid_strategy': 'LOWEST_COST_WITHOUT_CAP'}})
-        else:
-            budget_minor(request['bid_usd'])
 
 
 def request_clock(request: dict[str, Any]):
@@ -307,15 +300,6 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     if not _same_time(target_set.get('start_time'), desired['start_time']):
         raise RouteBlocked('adset schedule mismatch')
     source_set = desired.get('adset_create') or source['adset']
-    bid_expected = desired.get('adset_updates') if desired.get('bid_override') is True else source_set
-    for field in ['bid_amount','bid_constraints']:
-        if field not in bid_expected:
-            continue
-        observed = target_set.get(field)
-        expected = bid_expected[field]
-        equal = str(observed or '0') == str(expected) if field == 'bid_amount' else (observed or {}) == expected
-        if not equal:
-            raise RouteBlocked('target bid readback mismatch: ' + field)
     for field in ['attribution_spec', 'promoted_object', 'billing_event', 'optimization_goal', 'is_dynamic_creative']:
         if target_set.get(field) != source_set.get(field):
             raise RouteBlocked('source versus target adset field mismatch: ' + field)
@@ -504,7 +488,7 @@ def _prepare(request, config, common, token):
     cid = sources[0]['id']
     raw = _batch(common, token, [
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
-        {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,bid_amount,bid_constraints,bid_strategy,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
+        {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
         {'name': 'ads', 'path': cid + '/ads', 'params': {'fields': 'id,name,status,source_ad_id,adset_id,creative{id,name,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     sets = [x for x in _complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
     ads = [x for x in _complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
@@ -627,15 +611,6 @@ def apply_request_defaults(request, operation):
 
 
 def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
-    from .shein_channel_authority import CACHE
-    marker = CACHE.set({})
-    try:
-        return _run_request_scoped(request, confirm_execute=confirm_execute)
-    finally:
-        CACHE.reset(marker)
-
-
-def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
     request = copy.deepcopy(request)
     if request.get('start_now') is True and 'start_time' in request:
         raise RouteBlocked('choose explicit NOW or an exact scheduled time, not both')
@@ -648,11 +623,10 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
     row = lookup_account(request.get('account', ''))
     path = BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json'
     if path.exists():
-        profile = copy.deepcopy(json.loads(path.read_text())['profiles'][row['account_id']])
+        profile = json.loads(path.read_text())['profiles'][row['account_id']]
         from .shein_general import authorize
-        operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
-        profile['channel_authorization_policy'] = operation.get('channel_authorization_policy') or {}
         authorize(request, profile)
+        operation = json.loads((BASE / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
         request = apply_request_defaults(request, operation)
         if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
             if not profile.get('reference_campaign_number'):
@@ -687,10 +661,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
         raise RouteBlocked('operational domain scope rejected')
     auth = json.loads((BASE / 'data/authorized-users.json').read_text())
     if request['authorized_by'] not in auth['agents']['ares']['authorized_user_discord_ids']:
-        if not (CURRENT_PROFILE.get() or {}).get('channel_authorization_policy', {}).get('enabled'):
-            raise RouteBlocked('canonical requester authorization absent')
-        from .shein_general import authorize
-        authorize(request, CURRENT_PROFILE.get())
+        raise RouteBlocked('canonical requester authorization absent')
     config = json.loads((BASE / 'data/ares/meta-ads/engine-v3/config.json').read_text())
     if confirm_execute:
         from .preview_renderer import validate_runtime
@@ -756,8 +727,6 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     'read_http_requests': common.http_requests, 'logical_gets': common.logical_gets}
         # Seal request-scoped authority before the first engine call; crashes resume this exact manifest.
         try:
-            from .shein_general import authorize
-            authorize(request, CURRENT_PROFILE.get() or {}, force=True)
             if not state.get('engine_result'):
                 if state['phase'] == 'PREPARED':
                     http, inventory, _ = common.graph_get('act_' + account_id() + '/campaigns', token,
@@ -840,7 +809,6 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     raise RouteBlocked('required corporate app proof unavailable')
                 activation_engine = CampaignEngine(config, transport_factory=lambda account: GraphBatchTransport(
                     account, manifest.graph_version, token, app_secret=secret))
-                authorize(request, CURRENT_PROFILE.get() or {}, force=True)
                 terminal_result = activation_engine.activate_verified(target_manifest, manifest, state['qa_proof'])
                 state['activation_result'] = terminal_result
                 if terminal_result.get('status') in {'ACTIVATION_DEFERRED', 'E2E_TARGET_EXCEEDED'}:

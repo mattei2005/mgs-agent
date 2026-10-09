@@ -3110,6 +3110,24 @@
       "updated_at": "2026-10-09T14:59:21+00:00"
     },
     {
+      "canonical_key": "ares.shein.creation-thread.1558133727748689951",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:08:02+00:00",
+      "id": "ARES-SHEIN-CREATION-SCOPE-1558133727748689951",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva para criação Boostingecon-US-SHEIN-ES-05-G005",
+      "updated_at": "2026-10-09T15:08:02+00:00"
+    },
+    {
       "canonical_key": "ares.shein.request-default-final-status",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -3399,6 +3417,80 @@
       "superseded_by": "ARES-CAR-SHEIN-SHARED-BISU-CUTOVER-20260915",
       "title": "SHEIN G005 BISU canary validated read-only",
       "updated_at": "2026-09-15T16:38:42+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.thread.1558133789769601135.exclusive-campaign-creation",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:08:08+00:00",
+      "id": "ARES-SHEIN-G005-ESCALATEPOWER05-CREATION-1558133789769601135",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva para criacao Escalatepower-US-SHEIN-EN-05-G005",
+      "updated_at": "2026-10-09T15:08:08+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.thread.1558133865028001854.account-creation-scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:08:28+00:00",
+      "id": "ARES-SHEIN-G005-GROWPOWERHUB05-CREATION-1558133865028001854",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criação Growpowerhub-US-SHEIN-EN-05-G005",
+      "updated_at": "2026-10-09T15:08:28+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.thread.1558133898209394780.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558133898209394780.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:08:48+00:00",
+      "id": "ARES-SHEIN-G005-MAVROA05-CREATION-SCOPE-1558133898209394780",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criacao Mavroa-US-SHEIN-ES-05-G005",
+      "updated_at": "2026-10-09T15:08:48+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.thread.1558133823969955851.scope",
+      "canonical_source": "data/ares/discord/thread-scopes/1558133823969955851.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:08:27+00:00",
+      "id": "ARES-SHEIN-G005-VIZIOID05-CREATION-SCOPE-1558133823969955851",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conversa exclusiva de criação Vizioid-US-SHEIN-EN-05-G005",
+      "updated_at": "2026-10-09T15:08:27+00:00"
     },
     {
       "canonical_key": "ares.shein.thread.1558126286826774711.scope",
@@ -11051,5 +11143,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:01:45+00:00"
+  "updated_at": "2026-10-09T15:08:48+00:00"
 }

@@ -1,0 +1,194 @@
+EE.EFFFFFFFFFFFEEEEE
+======================================================================
+ERROR: test_arbitrary_adset_delta_and_other_operation_still_forbidden (test_shein_bid_channel_rules.BidDeltaTests.test_arbitrary_adset_delta_and_other_operation_still_forbidden)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 72, in test_arbitrary_adset_delta_and_other_operation_still_forbidden
+    p['campaigns'][0]['adset_updates']['targeting']={'age_min':18}
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'adset_updates'
+
+======================================================================
+ERROR: test_cap_to_maxvol_clears_target_cap_not_source (test_shein_bid_channel_rules.BidDeltaTests.test_cap_to_maxvol_clears_target_cap_not_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 50, in test_cap_to_maxvol_clears_target_cap_not_source
+    self.assertEqual(p['campaigns'][0]['adset_updates'],{'bid_amount':'0','bid_constraints':{}})
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'adset_updates'
+
+======================================================================
+ERROR: test_delta_from_zero_and_new_media_clone (test_shein_bid_channel_rules.BidDeltaTests.test_delta_from_zero_and_new_media_clone)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 67, in test_delta_from_zero_and_new_media_clone
+    else:self.assertEqual(c['adset_updates']['bid_amount'],'125')
+                          ~^^^^^^^^^^^^^^^^^
+KeyError: 'adset_updates'
+
+======================================================================
+ERROR: test_request_accepts_explicit_bid_fields (test_shein_bid_channel_rules.BidDeltaTests.test_request_accepts_explicit_bid_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 94, in test_request_accepts_explicit_bid_fields
+    route.validate_request(r)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py", line 101, in validate_request
+    raise RouteBlocked('unknown request field')
+ares_campaign_v3.shein_single_clone.RouteBlocked: unknown request field
+
+======================================================================
+ERROR: test_effective_permissions_respect_member_and_role_deny (test_shein_bid_channel_rules.ChannelRuleTests.test_effective_permissions_respect_member_and_role_deny)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 113, in test_effective_permissions_respect_member_and_role_deny
+    from ares_campaign_v3.shein_channel_authority import effective_permissions
+ModuleNotFoundError: No module named 'ares_campaign_v3.shein_channel_authority'
+
+======================================================================
+ERROR: test_live_permission_failure_not_replaced_by_manager_id (test_shein_bid_channel_rules.ChannelRuleTests.test_live_permission_failure_not_replaced_by_manager_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 109, in test_live_permission_failure_not_replaced_by_manager_id
+    with patch('ares_campaign_v3.shein_channel_authority.verify',side_effect=ValueError('permission denied')):
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/lib/python3.14/unittest/mock.py", line 1494, in __enter__
+    self.target = self.getter()
+                  ~~~~~~~~~~~^^
+  File "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/lib/python3.14/pkgutil.py", line 473, in resolve_name
+    result = getattr(result, p)
+AttributeError: module 'ares_campaign_v3' has no attribute 'shein_channel_authority'
+
+======================================================================
+ERROR: test_non_owner_uses_live_permissions_and_wrong_parent_still_denied (test_shein_bid_channel_rules.ChannelRuleTests.test_non_owner_uses_live_permissions_and_wrong_parent_still_denied)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 101, in test_non_owner_uses_live_permissions_and_wrong_parent_still_denied
+    with patch('ares_campaign_v3.shein_channel_authority.verify',return_value={'verified':True}) as verify:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/lib/python3.14/unittest/mock.py", line 1494, in __enter__
+    self.target = self.getter()
+                  ~~~~~~~~~~~^^
+  File "/root/.hermes/tools/python-3.14.7+20260901-linux-x64/lib/python3.14/pkgutil.py", line 473, in resolve_name
+    result = getattr(result, p)
+AttributeError: module 'ares_campaign_v3' has no attribute 'shein_channel_authority'
+
+======================================================================
+ERROR: test_verifier_checks_parent_and_private_thread_membership (test_shein_bid_channel_rules.ChannelRuleTests.test_verifier_checks_parent_and_private_thread_membership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 122, in test_verifier_checks_parent_and_private_thread_membership
+    from ares_campaign_v3 import shein_channel_authority as auth
+ImportError: cannot import name 'shein_channel_authority' from 'ares_campaign_v3' (/root/mgs-agent/scripts/ares_campaign_v3/__init__.py)
+
+======================================================================
+FAIL: test_maxvol_to_cocap_and_bidcap_set_exact_cap_and_target_name (test_shein_bid_channel_rules.BidDeltaTests.test_maxvol_to_cocap_and_bidcap_set_exact_cap_and_target_name) (alias='COCAP')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 36, in test_maxvol_to_cocap_and_bidcap_set_exact_cap_and_target_name
+    self.assertEqual(c['campaign_updates']['bid_strategy'],strategy)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'LOWEST_COST_WITHOUT_CAP' != 'COST_CAP'
+- LOWEST_COST_WITHOUT_CAP
++ COST_CAP
+
+
+======================================================================
+FAIL: test_maxvol_to_cocap_and_bidcap_set_exact_cap_and_target_name (test_shein_bid_channel_rules.BidDeltaTests.test_maxvol_to_cocap_and_bidcap_set_exact_cap_and_target_name) (alias='BIDCAP')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 36, in test_maxvol_to_cocap_and_bidcap_set_exact_cap_and_target_name
+    self.assertEqual(c['campaign_updates']['bid_strategy'],strategy)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'LOWEST_COST_WITHOUT_CAP' != 'LOWEST_COST_WITH_BID_CAP'
+- LOWEST_COST_WITHOUT_CAP
+?                 ^^^
++ LOWEST_COST_WITH_BID_CAP
+?                 ^^^^
+
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='COCAP', amount=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='BIDCAP', amount=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='COCAP', amount='0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='BIDCAP', amount='-1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='COCAP', amount='1.001')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='COCAP', amount='NaN')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='MAXVOL', amount='1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_invalid_fractional_or_maxvol_amount_rejected (test_shein_bid_channel_rules.BidDeltaTests.test_missing_invalid_fractional_or_maxvol_amount_rejected) (alias='cocap', amount='1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 45, in test_missing_invalid_fractional_or_maxvol_amount_rejected
+    with self.subTest(alias=alias,amount=amount),self.assertRaises(ValueError):self.build(alias,amount)
+                                                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_offline_core_plan_execute_and_idempotent_replay (test_shein_bid_channel_rules.BidDeltaTests.test_offline_core_plan_execute_and_idempotent_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_bid_channel_rules.py", line 90, in test_offline_core_plan_execute_and_idempotent_replay
+    self.assertIn('125',str(plan))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: '125' not found in "{'status': 'DRY_RUN_OK', 'request_id': 'general-offline-G005-pure_clone-PAUSED', 'manifest_digest': '1d8d5f60f82e738870383a3d99298676d7c1f7e31b0485759233fe4007509343', 'campaign_count': 1, 'plan': {'request_id': 'general-offline-G005-pure_clone-PAUSED', 'lane_count': 1, 'global_wave_count': 1, 'campaigns_per_global_wave': [1], 'lanes': {'1000000000000004': [{'bundle': 1, 'campaigns': 1, 'modes': ['pure_clone'], 'outer_write_calls': 5, 'outer_readback_calls': 1, 'intermediate_get_calls': 0}]}}, 'network_calls': 0, 'writes': 0}"
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.049s
+
+FAILED (failures=11, errors=8)

@@ -183,7 +183,6 @@ class CampaignSpec:
     ads: tuple[AdSpec, ...] = field(default_factory=tuple)
     creative_materialization_route: str = "inline_copy"
     start_intent: str = "SCHEDULED"
-    bid_override: bool = False
 
     @property
     def uses_existing_post_two_phase(self) -> bool:
@@ -339,26 +338,7 @@ class CampaignSpec:
             raise ManifestError(
                 f"adset_updates contains engine-owned fields: {','.join(reserved_adset_updates)}"
             )
-        bid_override = value.get('bid_override', False)
-        if not isinstance(bid_override, bool):
-            raise ManifestError('bid_override must be an explicit boolean')
-        if bid_override:
-            if (mode not in {'pure_clone','clone_prestaged'}
-                    or set(adset_updates) != {'bid_amount','bid_constraints'}
-                    or adset_updates['bid_constraints'] != {}):
-                raise ManifestError('explicit bid override permits only exact bid amount and constraint reset')
-            amount = str(adset_updates['bid_amount'])
-            strategy = updates.get('bid_strategy')
-            if not amount.isascii() or not amount.isdigit() or str(int(amount)) != amount:
-                raise ManifestError('bid amount must be exact nonnegative minor units')
-            if strategy == 'LOWEST_COST_WITHOUT_CAP':
-                if amount != '0': raise ManifestError('MAXVOL cannot have a bid cap')
-            elif strategy in {'COST_CAP','LOWEST_COST_WITH_BID_CAP'}:
-                if int(amount) <= 0: raise ManifestError('capped strategies require positive bid amount')
-            else: raise ManifestError('unsupported explicit bid strategy')
-        if mode == 'from_zero_prestaged' and adset_updates:
-            raise ManifestError(f"{mode} forbids adset_updates")
-        if mode == 'pure_clone' and adset_updates and not bid_override:
+        if mode in {"pure_clone", "from_zero_prestaged"} and adset_updates:
             raise ManifestError(f"{mode} forbids adset_updates")
         return cls(
             idempotency_key=str(value["idempotency_key"]),
@@ -378,7 +358,6 @@ class CampaignSpec:
             ads=ads,
             creative_materialization_route=creative_materialization_route,
             start_intent=start_intent,
-            bid_override=bid_override,
         )
 
 
@@ -403,8 +382,6 @@ class Manifest:
             raise ManifestError("request_id, operation and graph_version are required")
         _iso(str(value.get("created_at") or ""), "created_at")
         campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
-        if operation != 'SHEIN-US-DIRECT' and any(c.bid_override for c in campaigns):
-            raise ManifestError('explicit clone bid delta is restricted to SHEIN')
         if str(value.get("operation")) != "SHEIN-US-DIRECT" and any(c.start_intent == "IMMEDIATE" for c in campaigns):
             raise ManifestError("IMMEDIATE intent is restricted to the approved SHEIN lifecycle")
         if not campaigns:

@@ -29,7 +29,7 @@ def reconcile(engine,bundle,transport,record):
         record['adset_ids']=ids
     ops=[]
     for i,(spec,cid,setid) in enumerate(zip(bundle.campaigns,campaigns,record['adset_ids']),1):
-        ops.extend([BatchOperation('shell_campaign_'+str(i),'GET',cid+'?fields=id,name,status,daily_budget,bid_strategy,start_time',kind='readback'),BatchOperation('shell_adset_'+str(i),'GET',setid+'?fields=id,name,status,start_time,bid_amount,bid_constraints',kind='readback')])
+        ops.extend([BatchOperation('shell_campaign_'+str(i),'GET',cid+'?fields=id,name,status,daily_budget,bid_strategy,start_time',kind='readback'),BatchOperation('shell_adset_'+str(i),'GET',setid+'?fields=id,name,status,start_time',kind='readback')])
     read=engine._batch(bundle,transport,ops,'recovery_shell_readback');byname={r.name:r.body for r in read};updates=[]
     for i,(spec,cid,setid) in enumerate(zip(bundle.campaigns,campaigns,record['adset_ids']),1):
         desired={'name':spec.name,**spec.campaign_updates,'status':spec.status,'start_time':spec.start_time}
@@ -37,6 +37,6 @@ def reconcile(engine,bundle,transport,record):
         if any(str(observed.get(k))!=str(v) for k,v in desired.items()):updates.append(BatchOperation('shell_campaign_update_'+str(i),'POST',cid,body=desired,kind='campaign_update'))
         desired={'name':spec.adset_name,'status':spec.status,**spec.adset_updates}
         observed=byname['shell_adset_'+str(i)]
-        if any((str(observed.get(k) or '0')!=str(v) if k=='bid_amount' else (observed.get(k) or {})!=v if k=='bid_constraints' else observed.get(k)!=v) for k,v in desired.items()):updates.append(BatchOperation('shell_adset_update_'+str(i),'POST',setid,body=desired,kind='adset_update'))
+        if any(observed.get(k)!=v for k,v in desired.items()):updates.append(BatchOperation('shell_adset_update_'+str(i),'POST',setid,body=desired,kind='adset_update'))
     if updates:engine._batch(bundle,transport,updates,'recovery_shell_normalize')
     record['stage']='shells_normalized'
