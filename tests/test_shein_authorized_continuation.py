@@ -67,4 +67,90 @@ class ContinuationTests(unittest.TestCase):
         m,d,s,c,g=self.fixture();d['start_now']=False
         with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
 
+class DelegatedLateReviewTests(ContinuationTests):
+    def delegated_fixture(self, channel='1548150015275438220', parent_origin=False):
+        m,d,s,c,g=self.fixture()
+        s['request']['source_channel_id']=channel;d['source_channel_id']=channel
+        if parent_origin:
+            s['request']['source_thread_id']=channel;d['source_thread_id']=channel
+        d['recovery_review_thread_id']=d['source_thread_id']
+        d['recovery_review_content']='Pode ativar a campanha!'
+        def messages(path):
+            row=g(path)
+            if path.endswith(d['recovery_review_message_id']):
+                row['author']['id']=d['authorized_by']
+            return row
+        policy={'enabled':True,'approved_by':'344196393512075265','channel_ids':[channel],
+                'late_recovery_review':{'enabled':True,'approved_by':'344196393512075265'}}
+        op={'operation_id':'SHEIN-US-DIRECT','channel_authorization_policy':policy}
+        profile={'account_id':'999','channel_id':channel,'manager_discord_id':'1291113428982693940'}
+        return m,d,s,c,messages,op,profile
+
+    def test_geizian_late_review_all_six_parents_and_threads(self):
+        from unittest.mock import patch
+        channels=['1548149087206121613','1548149300826079333','1548149483039236137',
+                  '1548149654926135486','1548150015275438220','1548150155184701440']
+        for channel in channels:
+            for parent_origin in [False,True]:
+                with self.subTest(channel=channel,parent_origin=parent_origin):
+                    m,d,s,c,g,op,p=self.delegated_fixture(channel,parent_origin)
+                    before=copy.deepcopy(s)
+                    with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify',return_value={'verified':True}) as v:
+                        proof=m.validate_descriptor(d,s,c,get_message=g)
+                        self.assertTrue(proof['late_activation_authorized'])
+                        self.assertEqual(proof['review_authority']['sender_id'],'321263240782807040')
+                        self.assertEqual(proof['original_execution_started_at'],s['execution_started_at'])
+                        self.assertEqual(s,before)
+                        self.assertIs(v.call_args.kwargs['force'],True)
+
+    def test_revoked_permission_denies_late_review(self):
+        from unittest.mock import patch
+        m,d,s,c,g,op,p=self.delegated_fixture()
+        with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify',side_effect=ValueError('revoked')):
+            with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
+
+    def test_cross_thread_review_denied_before_permission_lookup(self):
+        from unittest.mock import patch
+        m,d,s,c,g,op,p=self.delegated_fixture();d['recovery_review_thread_id']='1558141425541980203'
+        with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify') as v:
+            with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
+            v.assert_not_called()
+
+    def test_wrong_account_parent_policy_and_operation_denied(self):
+        from unittest.mock import patch
+        for change in ['parent','account','disabled','unapproved','operation','channel_not_listed','late_disabled','late_unapproved']:
+            with self.subTest(change=change):
+                m,d,s,c,g,op,p=self.delegated_fixture()
+                if change=='parent':p['channel_id']='1548149300826079333';op['channel_authorization_policy']['channel_ids'].append(p['channel_id'])
+                elif change=='account':p['account_id']='998'
+                elif change=='disabled':op['channel_authorization_policy']['enabled']=False
+                elif change=='unapproved':op['channel_authorization_policy']['approved_by']='other'
+                elif change=='operation':op['operation_id']='OTHER'
+                elif change=='channel_not_listed':op['channel_authorization_policy']['channel_ids']=[]
+                elif change=='late_disabled':op['channel_authorization_policy']['late_recovery_review']['enabled']=False
+                elif change=='late_unapproved':op['channel_authorization_policy']['late_recovery_review']['approved_by']='other'
+                with patch.object(m,'_late_review_context',return_value=(op,p)), patch('ares_campaign_v3.shein_channel_authority.verify') as v:
+                    with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=g)
+                    v.assert_not_called()
+
+    def test_bot_and_tampered_review_denied(self):
+        for change in ['bot','content','id','channel','actor']:
+            with self.subTest(change=change):
+                m,d,s,c,g,op,p=self.delegated_fixture()
+                def bad(path):
+                    row=g(path)
+                    if path.endswith(d['recovery_review_message_id']):
+                        if change=='bot':row['author']['bot']=True
+                        elif change=='actor':row['author']['id']='invalid'
+                        elif change=='content':row['content']='different'
+                        elif change=='id':row['id']='wrong'
+                        elif change=='channel':row['channel_id']='wrong'
+                    return row
+                with self.assertRaises(ValueError):m.validate_descriptor(d,s,c,get_message=bad)
+
+    def test_no_late_authorization_keeps_sla_path(self):
+        m,d,s,c,g,op,p=self.delegated_fixture();d['late_activation_authorized']=False
+        proof=m.validate_descriptor(d,s,c,get_message=g)
+        self.assertFalse(proof['late_activation_authorized']);self.assertIsNone(proof['review_authority'])
+
 if __name__=='__main__':unittest.main()

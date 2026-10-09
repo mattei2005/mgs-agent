@@ -278,7 +278,24 @@
     "global_user_registry_mutated": false,
     "other_agents_and_channels_unchanged": true,
     "verification": "exact sender ID, guild/channel/parent identities, roles and member overwrites; private thread membership; refresh before creation and activation",
-    "implementation": "ares_campaign_v3.shein_channel_authority"
+    "implementation": "ares_campaign_v3.shein_channel_authority",
+    "late_recovery_review": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "authority_message_id": "1558225355930861649",
+      "source_thread_id": "1558159785843499109",
+      "clarified_delegate_id": "321263240782807040",
+      "eligible_reviewers": "Rodolfo or a human with forced live channel/thread communication proof under this same policy; Geizian is authorized across all six SHEIN channels and their threads",
+      "delegate_review_origin": "original request thread/channel, account-bound canonical parent",
+      "requirements": [
+        "exact live human activation/recovery approval message",
+        "same original request, immutable manifests, campaign/adset/ad IDs, budget and bid",
+        "fresh authority check before activation",
+        "complete semantic/media QA and live pre-read/readback",
+        "original E2E clock and SLA breach preserved; explicit reviewed continuation only"
+      ],
+      "excluded_and_critical_subset_unchanged": true
+    }
   },
   "manager_channels": [
     {

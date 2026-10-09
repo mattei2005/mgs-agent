@@ -50,6 +50,8 @@ def _authorize_late_reviewer(descriptor, original, reviewer):
     late_policy=policy.get('late_recovery_review') or {}
     if (operation.get('operation_id')!='SHEIN-US-DIRECT' or policy.get('enabled') is not True
             or policy.get('approved_by')!='344196393512075265' or late_policy.get('enabled') is not True
+            or late_policy.get('approved_by')!='344196393512075265'
+            or str(profile.get('account_id')) != str(descriptor['account_id'])
             or str(profile.get('channel_id')) not in policy.get('channel_ids',[])):
         raise ValueError('approved SHEIN late recovery authority unavailable')
     if str(descriptor['recovery_review_thread_id']) != str(original['source_thread_id']):
@@ -95,21 +97,25 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
         or message.get('content') != descriptor['source_message_content']):
         raise ValueError('continuation source message identity/content unconfirmed')
     late = descriptor.get('late_activation_authorized') is True
+    review_authority = None
     if late:
         review_mid = str(descriptor.get('recovery_review_message_id') or '')
         review_thread = str(descriptor.get('recovery_review_thread_id') or '')
         if not all(re.fullmatch(r'[0-9]{17,20}',v) for v in [review_mid,review_thread]) or not descriptor.get('recovery_review_content'):
-            raise ValueError('late recovery requires exact executive review evidence')
+            raise ValueError('late recovery requires exact authorized human review evidence')
         review = get_message('/channels/'+review_thread+'/messages/'+review_mid)
+        reviewer = str(review.get('author',{}).get('id') or '')
         if (str(review.get('id')) != review_mid or str(review.get('channel_id')) != review_thread
-            or str(review.get('author',{}).get('id')) != '344196393512075265' or review.get('author',{}).get('bot')
+            or not re.fullmatch(r'[0-9]{17,20}',reviewer) or review.get('author',{}).get('bot')
             or review.get('content') != descriptor['recovery_review_content']):
-            raise ValueError('late recovery executive review unconfirmed')
+            raise ValueError('late recovery human review identity/content unconfirmed')
+        review_authority = _authorize_late_reviewer(descriptor, original, reviewer)
     return {'verified':True,'request_id':original['request_id'],'account_id':str(descriptor['account_id']),
             'campaign_ids':cids,'adset_ids':sids,'source_message_id':mid,'source_thread_id':descriptor['source_thread_id'],
             'start_now':True,'late_activation_authorized':late,'original_execution_started_at':state.get('execution_started_at'),
             'creation_payload_digest':content_digest(state['manifest']),'target_payload_digest':content_digest(state['target_manifest']),
-            'review_message_id':descriptor.get('recovery_review_message_id'),'descriptor_digest':content_digest(descriptor)}
+            'review_message_id':descriptor.get('recovery_review_message_id'),'review_authority':review_authority,
+            'descriptor_digest':content_digest(descriptor)}
 
 
 def activation_authorization(target, creation, proof):
