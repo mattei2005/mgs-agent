@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-TODAY-EXPIRED-SCHEDULE-20261009",
-      "next_step": "Persistir política/skill e validar ajuste de intake offline; recuperação parcial permanece com Zeus no mesmo request.",
-      "objective": "Aplicar horário vencido do dia como NOW e incorporar dispensa de reaprovação para recovery Ares/Zeus",
-      "source": "data/ares/meta-ads/audit/shein/schedule-and-recovery-permission-20261009",
-      "state": "referências lidas; falha meta cbo distinta de horário. gestor avisado e zeus coordenado; nenhum writer concorrente iniciado. ajuste de intake será isolado de manifests e ids da c106.",
+      "next_step": "Zeus conclui recovery central CBO/continuidade auditada; Ares retoma o mesmo request e IDs na thread1558126286826774711 com QA/readback antes de ativar. Nao exigir novo OK de Rodolfo dentro do escopo autorizado.",
+      "objective": "Aplicar horario vencido do dia como NOW e incorporar dispensa de reaprovacao para recovery Ares/Zeus",
+      "source": "data/ares/meta-ads/audit/shein/schedule-and-recovery-permission-20261009/verification-final.json",
+      "state": "correcoes de politica/intake concluidas: contrato/skill/runtime validados offline, registry readback/validate ok; gestor avisado e zeus informado. sem write meta nesta tarefa nem alteracao dos manifests/ids da c106.",
       "thread_id": "1557274000680288307",
-      "updated_at": "2026-10-09T15:43:59+00:00"
+      "updated_at": "2026-10-09T15:53:52+00:00"
     },
     {
       "agent": "ares",
@@ -1743,12 +1743,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-RECOVERY-DELEGATION-1558142033774776411",
-      "next_step": "Persistir SOUL/rotas/registry; validar e instruir Ares na thread de origem",
-      "objective": "Corrigir delegação Ares→Zeus para recovery técnico de comandos autorizados dos gestores e encaminhar retomada SHEIN G005",
-      "source": "context/routes.md",
-      "state": "autorização permanente recebida de rodolfo; persistência e handoff em execução",
+      "next_step": "Executar recovery central nos IDs existentes; QA/readback completo; handoff Ares e REPORT-INFRA",
+      "objective": "Corrigir delegação e recovery técnico do mesmo pedido SHEIN G005 C106",
+      "source": "scripts/ares-shein-recovery.py",
+      "state": "regra persistida e gestor avisado por ares; cbo/continuação central passaram 139 testes e dry-run live, origem/ids confirmados paused",
       "thread_id": "1558141425541980203",
-      "updated_at": "2026-10-09T15:42:02+00:00"
+      "updated_at": "2026-10-09T15:53:09+00:00"
     },
     {
       "agent": "zeus",
@@ -5442,5 +5442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:43:59+00:00"
+  "updated_at": "2026-10-09T15:53:53+00:00"
 }

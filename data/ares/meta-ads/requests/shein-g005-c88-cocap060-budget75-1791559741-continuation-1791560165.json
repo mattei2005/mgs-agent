@@ -25,6 +25,12 @@
     "adset_status": "PAUSED",
     "ads_count": 0
   },
-  "execution_status": "BLOCKED_CENTRAL_RUNTIME_CAPABILITY",
-  "required_next_action": "Owner must enable an audited same-ID Engine v3 recovery for atomic campaign bid_strategy plus adset_bid_amounts and approved schedule continuation; preserve original request/manifests, clock, QA and all IDs. Do not repeat campaign/adset copies or create a parallel writer."
+  "execution_status": "READY_CENTRAL_SAME_ID_RECOVERY",
+  "source_message_id": "1558141001216958505",
+  "source_message_content": "Duplicar 1 vez a campanha 88 da conta Yolokfx-US-SHEIN-EN-03-G005, com orçamento de $75 dolares, data 09/10 pra Agora\n\nAjusta a campanha para usar Cost per result goal de $0.60",
+  "late_activation_authorized": true,
+  "recovery_review_message_id": "1558142033774776411",
+  "recovery_review_thread_id": "1558141425541980203",
+  "recovery_review_content": "Zeus seguinte, o ares nao precisa me pedir essa autorizacao, se acontecer de novo pelo comando dos gestores, pode executar sem vir a autorizacao\n\nme confirma quando concluir essa correcao do comportamento, e fale para o Ares avisar o gestor na thread especificada e continue o que ele pediu.",
+  "required_next_action": "Execute the canonical ares-shein-recovery.py --continuation with existing confirmed IDs, original sealed manifests and clock. Apply campaign-atomic CBO cap; create only missing ads; full QA/media/readback before reviewed NOW activation. No shell copies, parallel writer or deletion."
 }

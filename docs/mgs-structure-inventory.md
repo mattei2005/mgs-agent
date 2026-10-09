@@ -7,6 +7,14 @@
 
 ---
 
+## Atualização operacional — SHEIN horário vencido e recovery delegado (2026-10-09)
+
+- Autoridade: Rodolfo, mensagem `1558142161659105342` nesta thread `1557274000680288307`; delegação Ares→Zeus aprovada em `1558142033774776411`, thread `1558141425541980203`, já registrada por Zeus em `context/routes.md` / `zeus.ares.manager-authorized-technical-recovery`.
+- Horário explícito vencido do próprio dia no timezone verificado da conta resolve NOW após QA, com audit do horário original, sem nova autorização apenas pelo atraso; futuro, PAUSED expresso e próxima meia-noite omitida são preservados. Data anterior ao dia da conta não muda automaticamente.
+- Runtime desta correção: novo `scripts/ares_campaign_v3/shein_schedule.py`, hook somente de intake/preflight em `shein_single_clone.py`, testes `test_shein_elapsed_schedule.py`; contrato `SHEIN-US-DIRECT.json#/request_defaults/expired_explicit_start_policy` e skill própria SHEIN (main/general route/standard requests). Snapshots PREPARED vencidos são rematerializados somente antes de write, preservando clock; estados de recovery e manifests/IDs já criados não são reescritos por esta tarefa.
+- Comunicação: Geizian avisado na origem e Zeus coordenado com mention/readback, sem writer concorrente; recuperação parcial de C106/CBO segue com Zeus técnico e Ares funcional. A normalização de tempo não corrige a rejeição Meta de CBO e não comprova conclusão da campanha.
+- Evidência: `data/ares/meta-ads/audit/shein/schedule-and-recovery-permission-20261009/verification-final.json`; red→green e regressão offline registrados. Zero writes Meta/replay/cópias/restart nesta tarefa. Permissão de recovery não altera billing, credenciais ou Critical Subset.
+
 ## Atualização operacional — thread de relatórios YOLO G002 retirada (2026-10-09)
 
 - Pedido explícito de Rodolfo na thread `1557274000680288307`: deletar somente `1558138059344576593` (`Yolokfx Conta 01 Intraday`, pai G002 `1548149300826079333`). DELETE 200 e GET posterior 404 confirmados.

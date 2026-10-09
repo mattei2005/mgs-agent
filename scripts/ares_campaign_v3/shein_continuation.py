@@ -7,7 +7,7 @@ import re
 from contextvars import ContextVar
 from pathlib import Path
 
-APPROVED_RESUME = ContextVar('shein_approved_same_id_resume', default=None)
+APPROVED_RESUME: ContextVar[dict | None] = ContextVar('shein_approved_same_id_resume', default=None)
 BASE = Path('/root/mgs-agent')
 
 

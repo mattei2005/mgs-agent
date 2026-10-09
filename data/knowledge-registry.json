@@ -3278,6 +3278,26 @@
       "updated_at": "2026-10-09T00:44:34+00:00"
     },
     {
+      "canonical_key": "ares.shein.expired-explicit-start",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-09T15:51:38+00:00",
+      "id": "ARES-SHEIN-EXPIRED-SAME-DAY-START-NOW-20261009",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Horario explicito vencido do proprio dia SHEIN resolve NOW apos QA sem reautorizacao",
+      "updated_at": "2026-10-09T15:51:38+00:00"
+    },
+    {
       "canonical_key": "ares.shein.bid-strategy-change",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -11424,5 +11444,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T15:43:07+00:00"
+  "updated_at": "2026-10-09T15:51:38+00:00"
 }

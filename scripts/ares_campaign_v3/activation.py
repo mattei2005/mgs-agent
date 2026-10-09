@@ -134,13 +134,19 @@ def activate(engine,target,creation,proof):
     state=json.loads(state_path.read_text()) if state_path.exists() else {'schema_version':1,'request_id':rid,'attempt':0,'completed_ids':[]}
     descriptor=digest(proof)
     if state.get('proof_digest') not in {None,descriptor}:raise ValueError('activation request/proof changed during resume')
+    from .shein_continuation import activation_authorization
+    continuation=activation_authorization(target,creation,proof)
     state.update(proof_digest=descriptor,target_digest=target.digest,creation_digest=creation.digest,campaign_ids=ids,phase='ACTIVATION_PENDING',attempt=int(state.get('attempt',0))+1)
+    if continuation:state['continuation_authorization']=continuation
     atomic(state_path,state)
     engine.writer_leases.claim(aid,rid,status='ACTIVATION_PENDING')
     engine.quota.seed_access_tier((app,aid),engine.config['accounts'][aid].get('marketing_api_access_tier'),source='engine_activation_account_config')
     transport=engine.transport_factory(aid)
     sla = engine.config.get('shein_execution_sla') or {}
     def deadline_exceeded():
+        # Reviewed recovery is an explicit new continuation, not a reset of E2E.
+        if continuation and continuation.get('late_activation_authorized') is True:
+            return False
         if sla.get('enabled') is not True or len(target.campaigns) != int(sla.get('quantity', 1)):
             return False
         origin = proof.get('execution_started_at')
@@ -164,7 +170,7 @@ def activate(engine,target,creation,proof):
                 return {'status':'ACTIVATION_DEFERRED','request_id':rid,'campaign_ids':ids,'retry_after_seconds':state['retry_after_seconds']}
             cid=tree['campaign']['id'];live=read_tree(engine,bundle,transport,cid,'activation_pre_read');validate_live(live,tree,spec)
             missing=[n for n in statuses(live) if n.get('configured_status',n.get('status'))!='ACTIVE']
-            if missing and spec.start_intent != 'IMMEDIATE' and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc):
+            if missing and not continuation and spec.start_intent != 'IMMEDIATE' and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc):
                 raise ValueError('approved start time elapsed; no silent immediate activation or reschedule')
             if deadline_exceeded(): return hold()
             children=[n for n in missing if n['id']!=cid]
