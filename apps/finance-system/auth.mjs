@@ -28,6 +28,14 @@ const otpauth=(user,secret)=>`otpauth://totp/${encodeURIComponent(`MGS Finance:$
 
 export async function installAuth(app,db,config,root){
  const trustDays=config?.mfa_trust_days??30;
+ // Preview is request/tab-scoped. It never issues another user's session or touches their MFA.
+ app.use((req,res,next)=>{
+  const q=req.query.__preview,h=req.headers['x-mgs-preview-user'];
+  if(q!==undefined&&typeof q!=='string'||h!==undefined&&typeof h!=='string'||q!==undefined&&h!==undefined&&q!==h)return res.status(400).json({error:'Visualização incompatível'});
+  req.previewTarget=q??h;
+  if(req.previewTarget!==undefined&&!['GET','HEAD'].includes(req.method)&&!(req.method==='POST'&&req.path==='/api/auth/preview/end'))return res.status(403).json({error:'Visualização somente leitura. Volte à sua conta para alterar dados.'});
+  next();
+ });
  const pagePaths=new Set(['/','/index.html','/operations','/operations.html','/history','/history.html','/review','/review.html']);
  const unauthenticated=(req,res,error)=>['GET','HEAD'].includes(req.method)&&pagePaths.has(req.path)?res.redirect(303,'/login'):res.status(401).json({error});
  if(!config||config.username!=='rodolfo'||!/^https:\/\//.test(config.origin)||!config.salt||!/^[a-f0-9]{128}$/.test(config.hash)||typeof config.mfa_required!=='undefined'&&typeof config.mfa_required!=='boolean'||config.mfa_required&&!/^[a-f0-9]{64}$/.test(config.mfa_key||'')||!Number.isInteger(trustDays)||trustDays<1||trustDays>30)throw Error('Invalid authentication configuration');
@@ -67,6 +75,29 @@ export async function installAuth(app,db,config,root){
   const b=req.body||{},valid=typeof b.password==='string'&&Buffer.byteLength(b.password)<=1024&&typeof b.username==='string',user=valid?await identity(db,b.username):null,salt=user?.role==='owner'?config.salt:user?.salt||config.salt,hash=user?.role==='owner'?config.hash:user?.password_hash||config.hash,result=await derive(valid?b.password:'invalid',salt,64);if(!valid||!user||!equal(result.toString('hex'),hash)){await event('anonymous','LOGIN_FAILED');return res.status(401).json({error:'Usuário ou senha inválidos'});}if(config.mfa_required)return mfaLogin(req,res,user,b);return finish(req,res,user);
  });
  app.use(async(req,res,next)=>{req.auth=await session(req);if(!req.auth)return unauthenticated(req,res,'Autenticação necessária');if(!['GET','HEAD','OPTIONS'].includes(req.method)&&(req.headers.origin!==config.origin||!equal(req.headers['x-csrf-token'],req.auth.csrf)))return res.status(403).json({error:'Validação de segurança falhou'});const user=await identity(db,req.auth.username);if(!user)return unauthenticated(req,res,'Acesso desativado');req.auth={...req.auth,role:user.role,manager_key:user.manager_key,display_name:user.display_name};req.actor=req.auth.username;if(req.path!=='/api/auth/logout')res.append('Set-Cookie',cookie(token(req)));next();});
- app.get('/api/auth/me',(req,res)=>res.json({username:req.auth.username,csrf:req.auth.csrf,role:req.auth.role,manager_key:req.auth.manager_key,display_name:req.auth.display_name}));
+ async function previewUser(name){
+  if(typeof name!=='string'||!/^[a-z0-9_.-]{3,40}$/.test(name)||name==='rodolfo')return null;
+  const u=await identity(db,name);return u&&u.enabled&&['manager','partner'].includes(u.role)?u:null;
+ }
+ app.use(async(req,res,next)=>{
+  if(req.previewTarget===undefined)return next();
+  if(req.auth.username!=='rodolfo'||req.auth.role!=='owner')return res.status(403).json({error:'Somente Rodolfo pode visualizar outro usuário'});
+  const u=await previewUser(req.previewTarget);if(!u)return res.status(403).json({error:'Usuário indisponível para visualização'});
+  req.auth={...req.auth,username:u.username,display_name:u.display_name,role:u.role,manager_key:u.manager_key,preview:{actor:'rodolfo',username:u.username,read_only:true}};
+  const redirect=res.redirect.bind(res);res.redirect=(status,url)=>{if(typeof status==='string'){url=status;status=302;}const x=new URL(url,config.origin);if(x.origin!==config.origin)return res.status(403).json({error:'Saída da visualização não permitida'});x.searchParams.set('__preview',u.username);return redirect(status,x.pathname+x.search+x.hash);};
+  if(pagePaths.has(req.path)&&req.method==='GET')await event('rodolfo','PREVIEW_VIEWED',{username:u.username,role:u.role,path:req.path,read_only:true});
+  next();
+ });
+ app.post('/api/auth/preview/start',async(req,res)=>{
+  if(req.auth.username!=='rodolfo'||req.auth.role!=='owner'||req.auth.preview)return res.status(403).json({error:'Somente Rodolfo'});
+  const u=await previewUser(req.body?.username);if(!u)return res.status(403).json({error:'Usuário indisponível para visualização'});
+  await event('rodolfo','PREVIEW_STARTED',{username:u.username,role:u.role,read_only:true});
+  return res.json({url:(u.role==='manager'?'/operations?view=manager':'/?view=overview')+'&__preview='+encodeURIComponent(u.username)});
+ });
+ app.post('/api/auth/preview/end',async(req,res)=>{
+  if(!req.auth.preview||req.actor!=='rodolfo')return res.status(403).json({error:'Visualização não iniciada'});
+  await event('rodolfo','PREVIEW_ENDED',{username:req.auth.username,read_only:true});return res.json({url:'/operations?view=users'});
+ });
+ app.get('/api/auth/me',(req,res)=>res.json({username:req.auth.username,csrf:req.auth.csrf,role:req.auth.role,manager_key:req.auth.manager_key,display_name:req.auth.display_name,...(req.auth.preview?{preview:req.auth.preview}:{})}));
  app.post('/api/auth/logout',async(req,res)=>{const b=req.body||{};if(Object.hasOwn(b,'forget_device')&&typeof b.forget_device!=='boolean')return res.status(400).json({error:'Opção de saída inválida'});const forget=b.forget_device===true;await db.query('UPDATE auth_sessions SET revoked=true WHERE token_hash=$1',[req.auth.hash]);const trusted=cookieToken(req,TRUST_COOKIE);if(forget&&trusted){await db.query('UPDATE auth_trusted_devices SET revoked=true WHERE token_hash=$1',[digest(trusted)]);await event(req.auth.username,'MFA_DEVICE_FORGOTTEN');}await event(req.auth.username,'LOGOUT',{trusted_device:forget?'forgotten':trusted?'preserved':'none'});res.append('Set-Cookie',cookie('',true));if(forget)res.append('Set-Cookie',trustCookie('',true));res.json({ok:true,trusted_device:forget?'forgotten':trusted?'preserved':'none'});});
 }

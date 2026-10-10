@@ -1,6 +1,7 @@
 /* Shared shell. Approved manager access uses isolated server-side namespaces. */
 window.MGSExistingPeriod=(periods,requested,current)=>{const ids=periods.map(p=>p.id).sort();if(!ids.length)throw Error('Nenhuma competência disponível');if(ids.includes(requested))return requested;if(!current){const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));current=p.year+'-'+p.month;}return ids.includes(current)?current:ids.filter(x=>x<=current).at(-1)||ids[0];};
 window.MGSNavigation={period(){const explicit=new URLSearchParams(location.search).get('period')||sessionStorage.getItem('financePeriod');if(explicit)return explicit;const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value])),current=parts.year+'-'+parts.month;return current<'2026-08'?'2026-08':current>'2027-12'?'2027-12':current;},setPeriod(period){sessionStorage.setItem('financePeriod',period);const u=new URL(location.href);u.searchParams.set('period',period);history.replaceState(null,'',u);document.querySelectorAll('.sidebar a[href]').forEach(a=>{const x=new URL(a.href,location.origin);if(x.origin===location.origin){x.searchParams.set('period',period);a.href=x;}});},mount(role,selected,operations=false,user={}){
+ window.MGSPreview.mount(user);
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const main=[['overview','Dashboard'],['movement','Relatório Diário'],['annual','Caixa Sintético']],admin=[['sites','Cadastro de Domínios'],['accounts','Contas de Anúncio'],['company','Despesas Gerais'],['personnel','Despesas Funcionários'],['rates','Câmbio e Inválidos'],['payments','Pagamentos',true],['activity','Histórico de Atividades',true],['approvals','Aprovações',true],['users','Usuários',true]],partnerViews=['company','personnel','rates','payments'];
  if(role==='owner'&&user.username==='rodolfo')main.push(['review','Conferência mensal']);
@@ -20,6 +21,33 @@ window.MGSNavigation={period(){const explicit=new URLSearchParams(location.searc
  },select(view){document.querySelectorAll('.nav-item').forEach(a=>a.classList.toggle('selected',new URL(a.href,location.origin).searchParams.get('view')===view));}};
 
 /* Automatic freshness: never refresh an open editor or an in-flight operation. */
+/* Owner-only preview: carry the effective identity across this tab, never cookies. */
+window.MGSPreview=(()=>{
+ const username=new URLSearchParams(location.search).get('__preview'),nativeFetch=window.fetch.bind(window);let me=null;
+ if(username===null)return {mount(){}};
+ for(const key of ['pushState','replaceState']){const original=history[key].bind(history);history[key]=(state,title,url)=>{if(url!==undefined&&url!==null){const next=new URL(url,location.href);if(next.origin===location.origin){next.searchParams.set('__preview',username);url=next.href;}}return original(state,title,url);};}
+ const endPath='/api/auth/preview/end',message='Visualização somente leitura. Volte à sua conta para alterar dados.';
+ window.fetch=(input,init={})=>{
+  const raw=input instanceof Request?input.url:String(input),url=new URL(raw,location.href),method=String(init.method||(input instanceof Request?input.method:'GET')).toUpperCase();
+  if(url.origin!==location.origin)return Promise.reject(Error('Requisição externa indisponível na visualização'));
+  if(!['GET','HEAD'].includes(method)&&!(url.pathname===endPath&&method==='POST'))return Promise.reject(Error(message));
+  const headers=new Headers(init.headers||(input instanceof Request?input.headers:undefined));headers.set('X-MGS-Preview-User',username);
+  return nativeFetch(input,{...init,headers});
+ };
+ const link=a=>{if(!a.hasAttribute('href'))return;const u=new URL(a.href,location.href);if(u.origin!==location.origin)return;if(u.searchParams.get('__preview')!==username){u.searchParams.set('__preview',username);a.href=u.href;}};
+ const update=()=>{document.querySelectorAll('a[href]').forEach(link);document.querySelectorAll('#logout,#logoutMobile,#forgetDevice,button[type=submit],input[type=submit]').forEach(b=>{b.disabled=true;b.title=message;});};
+ document.addEventListener('submit',e=>{e.preventDefault();e.stopImmediatePropagation();const s=document.querySelector('#message,#error');if(s)s.textContent=message;},true);
+ document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(a)link(a);},true);
+ new MutationObserver(update).observe(document.documentElement,{subtree:true,childList:true});
+ function mount(user){
+  if(!user.preview||user.preview.actor!=='rodolfo'||user.preview.username!==username){document.body.inert=true;throw Error('Identidade de visualização não confirmada');}
+  me=user;document.body.classList.add('preview-mode');let b=document.querySelector('#previewBanner');if(b)return;
+  b=document.createElement('section');b.id='previewBanner';b.setAttribute('aria-label','Visualização de usuário');const text=document.createElement('span');text.textContent='Visualizando como '+(user.display_name||username)+' · Somente leitura';const exit=document.createElement('button');exit.type='button';exit.id='previewExit';exit.textContent='Voltar à minha conta';b.append(text,exit);document.body.prepend(b);
+  exit.onclick=async()=>{exit.disabled=true;try{const r=await fetch(endPath,{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':me.csrf},body:'{}'});if(!r.ok)throw Error('Não foi possível encerrar a visualização');const d=await r.json();location.assign(d.url);}catch(e){text.textContent=e.message;exit.disabled=false;}};update();
+ }
+ return {mount};
+})();
+
 window.MGSUpdates=(()=>{
  const key='finance-update-resume-v1',nativeFetch=window.fetch.bind(window),dirtyForms=new Set();
  let adapter=null,current=window.MGSUpdateBoot,pending=null,polling=false,applying=false,requests=0,lastInput=0,ready=false,lastFailure=0;

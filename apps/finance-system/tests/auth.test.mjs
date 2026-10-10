@@ -13,6 +13,37 @@ test('proxy-addr retains legitimate IPv4, mapped IPv4 and native IPv6 trust',()=
  for(const subnet of ['192.0.2.0/24','::ffff:192.0.2.0/120'])for(const ip of ['192.0.2.15','::ffff:192.0.2.15'])assert.equal(proxyaddr.compile(subnet)(ip),true);
  assert.equal(proxyaddr.compile('2001:db8::/32')('2001:db8::1'),true);assert.equal(proxyaddr.compile('::1/128')('::1'),true);assert.equal(proxyaddr.compile('192.0.2.0/24')('203.0.113.8'),false);
 });
+test('owner preview applies target permissions, blocks all writes and preserves identities',{timeout:90000},async()=>{
+ const db=await openDatabase('memory://'),password=randomUUID()+'-TEST-ONLY',salt=randomUUID(),config={username:'rodolfo',salt,hash:scryptSync(password,salt,64).toString('hex'),origin:'https://dash.mgsdigitalcorp.com'};
+ const app=await createApp(db,{auth:config});const server=app.listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));
+ const call=(url,body,headers={},method=body?'POST':'GET')=>new Promise((resolve,reject)=>{const r=request({hostname:'127.0.0.1',port:server.address().port,path:url,method,agent:false,headers:{Host:'dash.mgsdigitalcorp.com',Origin:config.origin,'Content-Type':'application/json',...headers}},res=>{let text='';res.on('data',x=>text+=x);res.on('end',()=>{let data;try{data=JSON.parse(text)}catch{}resolve({status:res.statusCode,headers:res.headers,data,text});});});r.on('error',reject);r.end(body?JSON.stringify(body):undefined);});
+ try{
+ for(const name of ['geizian','icaro','isliago','joe','kelly','nicolas'])await db.query('INSERT INTO finance_users(username,display_name,role,manager_key,enabled,salt,password_hash) VALUES($1,$1,$2,$3,true,$4,$5)',[name,name==='geizian'?'partner':'manager',name==='geizian'?null:name,salt,config.hash]);
+ const login=await call('/api/auth/login',{username:'rodolfo',password}),cookie=login.headers['set-cookie'][0].split(';')[0],h={Cookie:cookie};const owner=(await call('/api/auth/me',null,h)).data;h['X-CSRF-Token']=owner.csrf;
+ assert.equal((await call('/api/auth/preview/start',{username:'nicolas'},{Cookie:cookie})).status,403);
+ for(const name of ['geizian','icaro','isliago','joe','kelly','nicolas']){
+  const start=await call('/api/auth/preview/start',{username:name},h);assert.equal(start.status,200);assert.match(start.data.url,new RegExp('__preview='+name));
+  const ph={...h,'X-MGS-Preview-User':name},me=await call('/api/auth/me',null,ph);assert.equal(me.status,200);assert.equal(me.data.username,name);assert.equal(me.data.preview.actor,'rodolfo');assert.equal(me.data.preview.read_only,true);
+  assert.equal((await call('/api/finance/users',null,ph)).status,403);assert.equal((await call('/api/finance/activity',null,ph)).status,403);
+  assert.equal((await call('/api/finance/profile',null,ph)).data.username,name);
+  for(const method of ['POST','PUT','PATCH','DELETE'])for(const url of ['/api/finance/profile','/api/finance/ledger','/api/scenarios/workspace-2026-10/inputs','/api/auth/logout','/api/auth/login','/api/auth/preview/start'])assert.equal((await call(url,{username:'rodolfo',password},ph,method)).status,403,method+' '+url);
+  assert.equal((await call('/api/auth/preview/end',{},ph)).status,200);
+  assert.equal((await call('/api/auth/me',null,h)).data.username,'rodolfo');
+  const userLogin=await call('/api/auth/login',{username:name,password}),uh={Cookie:userLogin.headers['set-cookie'][0].split(';')[0]},u=(await call('/api/auth/me',null,uh)).data;
+  assert.equal((await call('/api/auth/me?__preview=geizian',null,uh)).status,403);
+  assert.equal((await call('/api/auth/preview/start',{username:'nicolas'},{...uh,'X-CSRF-Token':u.csrf})).status,403);
+  assert.equal((await call('/api/auth/logout',{}, {...uh,'X-CSRF-Token':u.csrf})).status,200);
+ }
+ assert.equal((await call('/api/auth/me?__preview=nicolas',null,{...h,'X-MGS-Preview-User':'joe'})).status,400);
+ for(const name of ['rodolfo','unknown','bad%20name',''])assert.equal((await call('/api/auth/me?__preview='+name,null,h)).status,403);
+ assert.equal((await call('/api/auth/me?__preview=nicolas&__preview=joe',null,h)).status,400);
+ const redirect=await call('/?__preview=nicolas',null,h);assert.equal(redirect.status,303);assert.match(redirect.headers.location,/__preview=nicolas/);
+ await db.query("UPDATE finance_users SET enabled=false WHERE username='nicolas'");assert.equal((await call('/api/auth/me?__preview=nicolas',null,h)).status,403);
+ assert.equal((await call('/api/auth/me?__preview=joe')).status,401);
+ const audit=(await db.query("SELECT actor,action,after_data FROM audit_events WHERE action LIKE 'PREVIEW_%' ORDER BY id")).rows;assert.ok(audit.length>=13);assert.ok(audit.every(x=>x.actor==='rodolfo'&&x.after_data.read_only===true));assert.equal((await db.query('SELECT count(*)::int n FROM auth_mfa')).rows[0].n,0);
+ assert.equal((await call('/api/auth/logout',{},h)).status,200);assert.equal((await call('/api/auth/me?__preview=joe',null,h)).status,401);
+ }finally{await new Promise(r=>server.close(r));await db.close();}
+});
 test('authenticated access, secure sessions, CSRF, revocation and expiry',{timeout:90000},async()=>{
  const db=await openDatabase('memory://');const password=randomUUID()+'-TEST-ONLY';const salt=randomUUID();
  const config={username:'rodolfo',salt,hash:scryptSync(password,salt,64).toString('hex'),origin:'https://dash.mgsdigitalcorp.com'};
