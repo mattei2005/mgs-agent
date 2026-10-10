@@ -2,6 +2,10 @@
 
 Fonte: Rodolfo `1558488813536288789`, thread `1545426987756298340`.
 
+## Supersessão da proposta anual
+
+Rodolfo confirmou explicitamente **os dois valores** em `1558613089752977409`. O escopo ativo, implementação e readback passam a ser governados por `docs/finance-manager-annual-result.md` e checkpoint `ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409`. Os estados de proposta pendente abaixo são o histórico da entrega anterior, não bloqueio atual.
+
 ## Decisão confirmada
 
 - Renomear somente o menu **Minha visão** para **Dashboard** nas contas `manager` e na prévia correspondente.
