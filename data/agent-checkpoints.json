@@ -2462,6 +2462,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-PREVIEW-1558474267975229541",
+      "next_step": "Implementar em candidato, testar autorização/isolamento e interface, publicar com gates/readback",
+      "objective": "Visualizar como usuário, exclusivo Rodolfo, somente leitura, sem alterar MFA/credenciais/sessões alheias",
+      "source": "discord:1545426987756298340/1558474267975229541",
+      "state": "authorized_preparing_isolated_candidate",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-10T13:41:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-PROXY-ADDR-1556897466652037131",
       "next_step": "Operação normal; pendência proxy-addr anterior resolvida. Nenhuma nova atualização de dependência autorizada por inferência",
       "objective": "Atualizar somente proxy-addr2.0.7→2.0.8, testar login/telas e preservar finanças com rollback",
@@ -5572,5 +5582,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T03:18:22+00:00"
+  "updated_at": "2026-10-10T13:41:39+00:00"
 }
