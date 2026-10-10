@@ -206,8 +206,8 @@ def select_candidates(messages: list[dict], state: dict) -> list[dict]:
     processed = state.get('processed') or {}
     candidates = []
     for message in messages:
-        from mgs_security_boundaries import trusted_message
-        if not trusted_message(message):
+        from mgs_security_boundaries import trusted_hermes_news_message
+        if not trusted_hermes_news_message(message):
             continue
         mid = message['id']
         previous = processed.get(mid) or {}

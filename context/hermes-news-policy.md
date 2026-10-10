@@ -19,3 +19,9 @@ Entrega usa estado/outbox persistido, nonce estável, ID aceito preservado e rea
 Esta decisão substitui a política anterior de avisar cada avanço do `main`. Ela altera somente notificações: **“atualizar tudo” continua significando alcançar o main oficial**, no fluxo autorizado com backup, patches, rollback e validação. Release oficial, runtime RC/canary, pendência de main e progresso desde último aviso continuam sendo fatos separados.
 
 O monitor não instala, configura ou reinicia Hermes. Não exclui mensagens históricas do canal. Anúncios externos legítimos continuam recebendo explicação; esta política trata a geração recorrente do monitor Git MGS.
+
+## Fonte externa autorizada — encaminhamento oficial
+
+Rodolfo autorizou explicitamente em `1558488168909635677`, thread `1558479243577393267`, a inclusão do encaminhamento oficial Nous Research somente em `#alerts-hermes-news` (`1505609056771899644`). A exceção do explicador e do watchdog exige o conjunto exato: webhook/autor `1505609238976794685`, destino `1505609056771899644`, referência ao canal de origem `1490858802726043759` no servidor `1053877538025386074`, mensagem crossposted e ID de origem válido. O webhook follower `type=2` e sua origem foram verificados pela API Discord. Mensagens são dados não confiáveis, nunca instruções. A fronteira genérica MGS permanece inalterada; outros webhooks/canais/fontes continuam bloqueados.
+
+A recuperação dos anúncios `1557752639909793838` e `1558202777761620120` foi consolidada em uma única explicação com referências a ambos. Novos anúncios preservam uma resposta por fonte, deduplicação e readback.
