@@ -88,6 +88,11 @@ Nos relatórios on-demand da conta `yolo-g002`, usar `Início → Campanha → C
 
 Para este relatório da `yolo-g001`, usar tabela `text` alinhada na ordem `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, igual ao modelo de referência da thread `1557056254730436671`. A coluna Campanha deve conter número + produto do nome da campanha, preservando qualificadores relevantes; não mostrar somente Cxx nem tratar o nome como produto visual validado. Usar cabeçalho curto com conta/período/moeda, sem preâmbulo extenso acima da tabela. Preservar a seleção/snapshot em mudanças apenas visuais e informar em rodapé eventuais leituras adicionais e limitações. Fonte: Rodolfo Mattei na thread `1557056236187422731`. Verificar ordem das sete colunas, número + produto em cada linha, contagem/IDs únicos e custo por resultado separado do gasto antes de entregar.
 
+## Lance e descrição curta de campanha
+
+- Quando o operador pedir coluna Lance, ler `bid_strategy` das campanhas e de todos os ad sets da seleção exata. Resolver MAXVOL=`LOWEST_COST_WITHOUT_CAP`, COCAP=`COST_CAP` e BIDCAP=`LOWEST_COST_WITH_BID_CAP` pelo contrato vivo; nome contendo BID/MAXVOL/COCAP não prova configuração. Divergências ficam explícitas como mistas, campos ausentes ficam `n/d`; declarar horário dessa leitura separado do snapshot financeiro preservado.
+- Quando Camp. for solicitada como somente número + produto, retirar data, quiz, lance/cap, tracking, COPY, LP e qualificadores de anúncio como IMG/audio new/new ad da descrição visível, preservando números/variantes que identificam o produto (ex.: EBIKE 2). Produto segue sendo rótulo do nome, não validação visual. Testar cobertura/IDs, contagem por tipo de lance, ordem ROI e limite de cada bloco.
+
 ## Quiz e compactação do relatório
 
 - Para informar qual quiz uma campanha usa, consultar todos os anúncios da seleção exata e seus creatives completos; extrair destinos em `object_story_spec` (link/CTA) e `asset_feed_spec.link_urls[].website_url`. `link_url` pode complementar a leitura. Nome de campanha, LP NORMAL/NOVA e COPY não provam o quiz atual. Mapear somente rotas verificadas `/quiz/us/sh([123])-gNNN/` para v1/v2/v3 conforme o plugin corporativo; validar hostname pelo gate. Destinos divergentes na mesma campanha são mistos, e campos ausentes são `n/d`, nunca um quiz inferido.
