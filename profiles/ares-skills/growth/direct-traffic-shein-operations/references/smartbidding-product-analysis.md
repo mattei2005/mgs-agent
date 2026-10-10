@@ -54,6 +54,12 @@ São limites condicionais ao rendimento e à composição atuais, não bids Meta
 - A API pode retornar a action web em `actions` e omiti-la em `cost_per_action_type`. Derivar o custo pelos contadores web; conferir `add_to_wishlist`/`omni_add_to_wishlist` somente se a contagem do alias for idêntica à web, nunca somando aliases. Não abortar o relatório por ausência do custo nativo.
 - Testar a razão em uma linha real, o comportamento sem resultados, unicidade dos IDs e ausência de soma entre aliases antes da entrega. Arredondar valores monetários exibidos com decimal e `ROUND_HALF_UP`, evitando truncar centavos em empates por representação binária.
 
+## ROI normal e ROI estimado separados
+
+- Quando o operador pedir uma coluna adicional de ROI estimado, preservar o ROI normal (`NET_REVENUE`), a seleção, a ordenação solicitada e o snapshot; não duplicar nem renomear o ROI normal como estimado. Usar `REVENUE_ESTIMATED` do mesmo snapshot por `CUSTOMER_ID` + `CAMPAIGN_ID` + `DATE`.
+- Conferir a fórmula no frontend vigente do relatório Adgroup antes de aplicar ajustes: a versão baseada em `defaultMetrics` define ROI normal por `NET_REVENUE` e ROI estimado por `REVENUE_ESTIMATED`, ambos menos investimento e divididos por investimento. O relatório reconciliado MGS mantém gasto Meta como denominador das duas colunas e declara a diferença para `INVESTIMENT` SB. Não aplicar revenue share adicional presumido nem derivar receita estimada de Health; versões legadas do frontend podem possuir outra projeção.
+- Sem receita estimada ou denominador positivo, mostrar `n/d`. Testar uma linha real, unicidade/contagem da seleção, conservação do snapshot e ordem de ROI; adicionar a coluna ao lado de ROI sem mudar as demais colunas por inferência.
+
 ## Modelo provisório vigente — seis canais SHEIN
 
 Decisão explícita de Rodolfo na thread `1557059385417797723`: enquanto ele alinha os próximos pedidos com Geizian, todos os relatórios on-demand nos canais `shein-g001` a `shein-g006` usam o modelo aprovado na thread `1557056254730436671`. Ordem exata: **Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS**. Entregar cabeçalho curto com conta, período/snapshot e moeda, tabela alinhada em bloco `text` e rodapé breve com fontes/limitações, sem cards ou preâmbulo extenso por padrão. Campanha = número + rótulo resumido do produto/nome, mantendo qualificadores importantes; o nome não prova produto visual.
