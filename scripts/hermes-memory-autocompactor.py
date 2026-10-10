@@ -71,9 +71,38 @@ def _resolve_active_hermes_runtime(
         repo = interpreter.parent.parent.parent
         if not interpreter.is_file() or not (repo / "run_agent.py").is_file():
             raise FileNotFoundError("active_runtime_incomplete")
-    except (OSError, ValueError) as exc:
+        # PM installations retain legacy .venv entrypoints, but dependencies
+        # belong to the installation bootstrap, not that retired environment.
+        native_launcher = repo / ".hermes" / "bin" / "hermes"
+        if native_launcher.is_file():
+            interpreter = Path(_native_runtime_command(repo)[0])
+            if not interpreter.is_file():
+                raise FileNotFoundError("active_runtime_interpreter_missing")
+    except (OSError, ValueError, subprocess.SubprocessError) as exc:
         raise CompactionError("active_runtime_unresolvable") from exc
     return repo, interpreter
+
+
+def _native_runtime_command(repo: Path, args: Sequence[str] = ()) -> List[str]:
+    """Use Hermes' machine boundary; never capture a dependency generation."""
+    completed = subprocess.run(
+        [str(repo / ".hermes" / "bin" / "hermes"),
+         "--print-runtime-command", "--module", "runpy", "--", *args],
+        capture_output=True, text=True, timeout=30, check=True,
+    )
+    command = json.loads(completed.stdout)
+    if (not isinstance(command, list) or len(command) < 4
+            or not all(isinstance(value, str) for value in command)
+            or command[1:3] != ["-I", "-c"]):
+        raise ValueError("native_runtime_command_invalid")
+    if args:
+        module_entry = "runpy.run_module('runpy', run_name='__main__', alter_sys=True)"
+        if not command[3].endswith(module_entry):
+            raise ValueError("native_runtime_entry_invalid")
+        command[3] = command[3][:-len(module_entry)] + (
+            "sys.argv = sys.argv[1:]; runpy.run_path(sys.argv[0], run_name='__main__')"
+        )
+    return command
 
 
 def _sha256(text: str) -> str:
@@ -485,7 +514,16 @@ def _run_llm_subprocess(
     env = os.environ.copy()
     env["HERMES_HOME"] = str(model_profile_root)
     env["MGS_HERMES_RUNTIME_ROOT"] = str(hermes_repo)
-    command = [str(hermes_python), str(Path(__file__).resolve()), "--llm-once"]
+    script_args = [str(Path(__file__).resolve()), "--llm-once"]
+    if (hermes_repo / ".hermes" / "bin" / "hermes").is_file():
+        try:
+            command = _native_runtime_command(hermes_repo, script_args)
+        except (OSError, ValueError, subprocess.SubprocessError) as exc:
+            raise CompactionError("active_runtime_unresolvable") from exc
+        if command[0] != str(hermes_python):
+            raise CompactionError("active_runtime_changed")
+    else:
+        command = [str(hermes_python), *script_args]
     try:
         completed = subprocess.run(
             command,

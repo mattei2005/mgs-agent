@@ -61,6 +61,47 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertEqual(resolved_repo, repo)
         self.assertEqual(resolved_python, interpreter)
 
+    def test_native_runtime_supersedes_retired_venv(self):
+        launcher, repo, retired = self.make_launcher_fixture()
+        native = repo / ".hermes" / "bin" / "hermes"
+        native.parent.mkdir(parents=True)
+        native.write_text("fixture")
+        store_python = self.root / "store-python"
+        store_python.write_text("fixture")
+        command = [str(store_python), "-I", "-c", "bootstrap"]
+        completed = subprocess.CompletedProcess([], 0, stdout=json.dumps(command))
+        with mock.patch.object(compactor.subprocess, "run", return_value=completed):
+            resolved_repo, resolved_python = compactor._resolve_active_hermes_runtime(launcher)
+        self.assertEqual(resolved_repo, repo)
+        self.assertEqual(resolved_python, store_python)
+        self.assertNotEqual(resolved_python, retired)
+
+    def test_native_subprocess_uses_bootstrap_and_detects_drift(self):
+        _launcher, repo, interpreter = self.make_launcher_fixture()
+        native = repo / ".hermes" / "bin" / "hermes"
+        native.parent.mkdir(parents=True)
+        native.write_text("fixture")
+        command = [str(interpreter), "-I", "-c", "bootstrap"]
+        completed = subprocess.CompletedProcess([], 0, stdout='{"valid":true}')
+        with mock.patch.object(compactor, "_native_runtime_command", return_value=command), \
+                mock.patch.object(compactor.subprocess, "run", return_value=completed) as run:
+            result = compactor._run_llm_subprocess(
+                "prompt", self.profile, hermes_repo=repo, hermes_python=interpreter)
+        self.assertTrue(result["valid"])
+        self.assertEqual(run.call_args.args[0], command)
+        with mock.patch.object(compactor, "_native_runtime_command",
+                               return_value=["/different/python", "-I", "-c", "bootstrap"]):
+            with self.assertRaises(compactor.CompactionError) as caught:
+                compactor._run_llm_subprocess(
+                    "prompt", self.profile, hermes_repo=repo, hermes_python=interpreter)
+        self.assertEqual(caught.exception.code, "active_runtime_changed")
+
+    def test_native_runtime_command_rejects_malformed_contract(self):
+        completed = subprocess.CompletedProcess([], 0, stdout='["python", "script"]')
+        with mock.patch.object(compactor.subprocess, "run", return_value=completed):
+            with self.assertRaises(ValueError):
+                compactor._native_runtime_command(self.root)
+
     def test_llm_subprocess_uses_frozen_active_runtime(self):
         _launcher, repo, interpreter = self.make_launcher_fixture()
         completed = subprocess.CompletedProcess([], 0, stdout='{"valid":true}\n', stderr="")

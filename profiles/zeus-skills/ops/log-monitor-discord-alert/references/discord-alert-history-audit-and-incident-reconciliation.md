@@ -17,7 +17,7 @@ Use quando Rodolfo pedir para revisar alertas vermelhos de uma janela, separar o
    - uma mensagem verde sozinha não prova saúde atual;
    - um log saudável atual sem resolução registrada prova estado técnico, mas a lacuna de comunicação deve ser indicada.
 6. **Conte incidentes, não apenas mensagens**. Um monitor repetindo o mesmo alerta a cada ciclo é um incidente ativo com spam, não dezenas de falhas independentes.
-7. **Cheque o produtor do alerta**. Resolutores que ignoram mensagens do próprio bot podem deixar alertas Zeus-authored sem tratamento automático; isso deve ser verificado explicitamente.
+7. **Cheque o produtor do alerta**. Resolutores que ignoram mensagens do próprio bot podem deixar alertas Zeus-authored sem tratamento automático; isso deve ser verificado explicitamente. Para anúncios seguidos de outro servidor, leia `webhook_id`, `flags`, `message_reference` e a origem do webhook follower (`type=2`, `source_channel`, `source_guild`); uma allowlist apenas de autores MGS rejeita também a fonte oficial. Reproduza a seleção dos IDs reais no explicador e no watchdog: `candidates=0`/`orphan=0` não comprovam completude quando ambos usam o mesmo filtro. Antes de ampliar a fronteira de confiança, obtenha a autorização exigida para a fonte exata; não desabilite o guard global. Na correção, teste a fonte oficial, webhook desconhecido, canal errado e produtor MGS nos dois consumidores.
 8. **Reporte conclusão primeiro**: incidentes abertos, incidentes resolvidos, evidência atual, risco e ação proposta. Não despeje IDs/logs completos no Discord.
 
 ## Guardrail sensível e auto-push
