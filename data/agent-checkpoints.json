@@ -993,12 +993,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-SHEIN-1558310511236616247",
-      "next_step": "Estabilizar fonte, revisar timelines, reconciliar linhagem e executar com lock",
+      "next_step": "Nenhuma pendência deste lote; sem liberação automática para campanhas",
       "objective": "Tratar lote Kelly SHEIN US EN; READY limpo, RAW em LEGACY e reserva preservada",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1558310511236616247/ready-execution.json",
-      "state": "intake_readonly_48_videos_review_in_progress",
+      "state": "complete: 48 vídeos clean=true; 48 ready e legacy validados por id/checksum; 48 linhagens únicas reservadas kelly; fila sem pendências",
       "thread_id": "1558310511236616247",
-      "updated_at": "2026-10-10T02:56:17+00:00"
+      "updated_at": "2026-10-10T03:18:22+00:00"
     },
     {
       "agent": "ares",
@@ -5572,5 +5572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T02:56:17+00:00"
+  "updated_at": "2026-10-10T03:18:22+00:00"
 }
