@@ -2342,6 +2342,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-MENU-1558488813536288789",
+      "next_step": "Publicar rótulo com gates/readback e apresentar proposta anual sem publicar escopo não definido",
+      "objective": "Renomear Minha visão para Dashboard; preservar Pagamentos; sugerir visão anual individual",
+      "source": "discord:1545426987756298340/1558488813536288789",
+      "state": "authorized_label_change_annual_design_pending",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-10T14:39:04+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-MFA-TRUST-1554979106112806984",
       "next_step": "Operação normal. Monitorar eventos MFA_DEVICE_TRUST_USED/REJECTED/FORGOTTEN; nenhuma pendência desta release.",
       "objective": "Fazer a confiança MFA de 30 dias sobreviver ao logout comum para todos os usuários e criar saída explícita que esquece o dispositivo.",
@@ -5582,5 +5592,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T14:32:15+00:00"
+  "updated_at": "2026-10-10T14:39:04+00:00"
 }

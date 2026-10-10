@@ -6618,6 +6618,24 @@
       "updated_at": "2026-09-08T03:36:08+00:00"
     },
     {
+      "canonical_key": "finance.manager-navigation",
+      "canonical_source": "docs/finance-manager-navigation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-10T14:43:13+00:00",
+      "id": "FINANCE-MANAGER-MENU-1558488813536288789",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Menu do gestor Dashboard, preservando Pagamentos e escopo individual",
+      "updated_at": "2026-10-10T14:43:13+00:00"
+    },
+    {
       "canonical_key": "finance.dashboard.manager.remuneration-current-card",
       "canonical_source": "profiles/zeus-skills/ops/mgs-finance-dashboard/references/current-manager-tabs-reconciliation.md",
       "consumers": [
@@ -11590,5 +11608,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T14:10:55+00:00"
+  "updated_at": "2026-10-10T14:43:13+00:00"
 }
