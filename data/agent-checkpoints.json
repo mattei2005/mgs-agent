@@ -4312,6 +4312,16 @@
     },
     {
       "agent": "zeus",
+      "id": "hermes-news-official-follower-1558488168909635677",
+      "next_step": "Validar readback do REPORT-INFRA e encerrar",
+      "objective": "Restaurar explicações do encaminhamento oficial Nous sem ampliar a fronteira genérica",
+      "source": "reports/hermes-news-official-follower-1558488168909635677.json",
+      "state": "correção implantada; 30 testes; duas fontes recuperadas em resumo único 1558491279132725280; readback e dedupe validados; report-infra em fechamento",
+      "thread_id": "1558479243577393267",
+      "updated_at": "2026-10-10T14:53:09+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "hermes-news-release-only-1556908630278803478",
       "next_step": "Zeus mantém monitoramento na cadência existente; nova release oficial será anunciada uma vez e explicada em PT-BR; main permanece disponível no state para consulta.",
       "objective": "Restaurar alertas Hermes apenas por nova release oficial com explicação PT-BR útil e sem repetição de main",
@@ -5592,5 +5602,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T14:39:04+00:00"
+  "updated_at": "2026-10-10T14:53:09+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-10T10:14:23-04:00",
+    "updated_at": "2026-10-10T14:52:49.703743+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -42646,6 +42646,41 @@
         "message_id": "1558487297241124965",
         "readback": true
       }
+    },
+    {
+      "id": "hermes-news-official-follower-1558488168909635677",
+      "agent": "zeus",
+      "type": "hermes_news_official_follower_recovery",
+      "owner": "Rodolfo / Zeus",
+      "authority_message_id": "1558488168909635677",
+      "thread_id": "1558479243577393267",
+      "status": "completed_verified",
+      "updated_at": "2026-10-10T14:52:49.703743+00:00",
+      "canonical_source": "context/hermes-news-policy.md",
+      "evidence_path": "reports/hermes-news-official-follower-1558488168909635677.json",
+      "paths": [
+        "scripts/mgs_security_boundaries.py",
+        "scripts/hermes-news-explainer.py",
+        "scripts/hermes-news-explainer-watchdog.py",
+        "tests/test_hermes_news_official_follower.py",
+        "context/hermes-news-policy.md",
+        "data/hermes-news-explainer-state.json",
+        "data/hermes-news-explainer-watchdog-state.json"
+      ],
+      "validation": {
+        "regression_tests": 30,
+        "boundary_tests": 14,
+        "production_recheck": {
+          "posted": 0,
+          "watchdog_orphan": 0,
+          "watchdog_failed": 0
+        },
+        "source_count": 2,
+        "consolidated_messages": 1,
+        "reply_id": "1558491279132725280"
+      },
+      "report_infra": "pending",
+      "rollback_backup": "/root/.hermes/profiles/zeus/cache/scratch/hermes-news-source-1558488168909635677/backup"
     }
   ],
   "profile_skill_references": [
@@ -44822,13 +44857,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer-watchdog.py",
-      "size_bytes": 29211,
-      "modified_at": "2026-10-06T02:10:38-04:00"
+      "size_bytes": 29235,
+      "modified_at": "2026-10-10T14:39:36.746893+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
-      "size_bytes": 13227,
-      "modified_at": "2026-10-06T02:10:38-04:00"
+      "size_bytes": 13251,
+      "modified_at": "2026-10-10T14:39:36.748893+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-post-update-restart-finalize.sh",
@@ -45217,8 +45252,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs_security_boundaries.py",
-      "size_bytes": 1316,
-      "modified_at": "2026-10-03T17:59:26-04:00"
+      "size_bytes": 2357,
+      "modified_at": "2026-10-10T14:42:54.704206+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
@@ -49799,5 +49834,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-10T14:32:06.334213+00:00"
+  "last_updated": "2026-10-10T14:52:49.703743+00:00"
 }

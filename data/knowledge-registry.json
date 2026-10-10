@@ -7845,6 +7845,25 @@
       "updated_at": "2026-09-25T13:30:05+00:00"
     },
     {
+      "canonical_key": "hermes.news.external-source-policy",
+      "canonical_source": "context/hermes-news-policy.md",
+      "consumers": [
+        "hermes-agent-operations",
+        "log-monitor-discord-alert",
+        "zeus"
+      ],
+      "domain": "hermes",
+      "effective_at": "2026-10-10T14:53:09+00:00",
+      "id": "HERMES-NEWS-OFFICIAL-FOLLOWER-1558488168909635677",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Hermes News: fonte oficial Nous permitida somente no canal News",
+      "updated_at": "2026-10-10T14:53:09+00:00"
+    },
+    {
       "canonical_key": "hermes.news.notification-policy",
       "canonical_source": "context/hermes-news-policy.md",
       "consumers": [
@@ -11608,5 +11627,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T14:43:13+00:00"
+  "updated_at": "2026-10-10T14:53:09+00:00"
 }
