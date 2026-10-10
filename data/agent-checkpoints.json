@@ -2343,12 +2343,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409",
-      "next_step": "Aguardar gates; check/publish coordenado; canário autenticado, finanças e reporting",
-      "objective": "Publicar Resultado Anual individual com resultado realizado e remuneração separados, preservando Pagamentos e isolamento",
-      "source": "docs/finance-manager-annual-result.md",
-      "state": "isolated_stage_pass36_full_gates_running_backup_verified",
+      "next_step": "Operação normal; nenhuma decisão ou ação técnica pendente; preservar indisponibilidade histórica janeiro/fevereiro sem inventar consolidado",
+      "objective": "Resultado Anual individual: resultado realizado e remuneração separados, preservando Pagamentos e isolamento",
+      "source": "reports/finance-manager-annual-1558613089752977409.md",
+      "state": "published_verified;274node+220python;36stage+12production;quote_refresh_reconciled;report1558623806703140895_readback",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-10T23:09:49+00:00"
+      "updated_at": "2026-10-10T23:34:52+00:00"
     },
     {
       "agent": "zeus",
@@ -2363,12 +2363,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-MENU-1558488813536288789",
-      "next_step": "Apresentar Resultado Anual com lucro gerado e remuneração separados; aguardar composição aprovada",
+      "next_step": "Consultar ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409; nenhuma proposta anual aguardando confirmação",
       "objective": "Renomear Minha visão para Dashboard; preservar Pagamentos; sugerir visão anual individual",
-      "source": "reports/finance-manager-menu-1558488813536288789.md",
-      "state": "label_published_verified_annual_proposal_pending_user_alignment",
+      "source": "docs/finance-manager-annual-result.md",
+      "state": "label_published_verified;annual_alignment_superseded_and_feature_published_under1558613089752977409",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-10T15:03:29+00:00"
+      "updated_at": "2026-10-10T23:34:52+00:00"
     },
     {
       "agent": "zeus",
@@ -5622,5 +5622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T23:09:49+00:00"
+  "updated_at": "2026-10-10T23:34:52+00:00"
 }

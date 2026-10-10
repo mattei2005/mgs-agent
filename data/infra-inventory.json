@@ -42784,6 +42784,158 @@
         "materialized_restore": false
       },
       "release_id": "manager-menu-1558488813536288789"
+    },
+    {
+      "id": "zeus-finance-manager-annual-1558613089752977409",
+      "agent": "zeus",
+      "type": "finance_manager_annual_result",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1558613089752977409",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-10T23:34:32.694745+00:00",
+      "canonical_source": "docs/finance-manager-annual-result.md",
+      "report_path": "reports/finance-manager-annual-1558613089752977409.md",
+      "evidence_path": "apps/finance-system/private/manager-annual-1558613089752977409",
+      "files": {
+        "apps/finance-system/public/navigation.js": "1ae3ed1408b1063ae80318c36018d35fb2005b5e3d630bcc92af3846574f2bca",
+        "apps/finance-system/public/operations.js": "99337dcdca85b610d9e2a7e061f1dc82450517048fa4879144d29ce977808067",
+        "apps/finance-system/public/operations.css": "2963995b51af184193a45496de999b5ca8991ce3c721337a363259de70dbb93c",
+        "apps/finance-system/tests/navigation-profile.test.mjs": "6eda5507e7dd3d78692d5cc698e0a8a56222452d390ce041145381defbfb835e",
+        "docs/finance-manager-annual-result.md": "74553a669be64daac06167208d2584c33550082924908ed69a13e4093b6be1aa",
+        "docs/finance-manager-navigation.md": "c80dff6023ff99d53e43ed41ebe1ebdf3710e7364fa9b775787d30a8747dcf48",
+        "reports/finance-manager-annual-1558613089752977409.md": "58dad833fc29bf1039781f80973e78a310f9b367f246bd1dfac0cd3c2055c719",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "b871617e3bde4649573915d2fa7cc9b0cd70f4cc989c97c7f41271164d13d3e8",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "042d9cebce52371404f7eb54723738870536280fefa05f333cf30ff74ef6c7f9"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "gates": [
+          {
+            "phase": "node",
+            "pass": true,
+            "exit": 0,
+            "counts": {
+              "tests": 274,
+              "pass": 274,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "started_at": "2026-10-10T23:06:53.556305+00:00",
+            "seconds": 369.039524
+          },
+          {
+            "phase": "python",
+            "pass": true,
+            "exit": 0,
+            "counts": {
+              "tests": 220
+            },
+            "started_at": "2026-10-10T23:13:02.595946+00:00",
+            "seconds": 624.511898
+          }
+        ],
+        "stage_checks": 36,
+        "public_checks": 12,
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0,
+        "nonowner_security_preserved": true,
+        "financial_validation": {
+          "pass": true,
+          "cutover_all_six_identical": true,
+          "final_scenarios_identical": false,
+          "concurrent_authorized_quote_refresh_reconciled": [
+            {
+              "scenario": "workspace-2026-09",
+              "before_revision": 1236,
+              "after_revision": 1237,
+              "changed_override_keys": [
+                "principal|Agosto 2026|H1"
+              ],
+              "native_additions_identical": true,
+              "nominal_inputs_preserved": true
+            },
+            {
+              "scenario": "workspace-2026-10",
+              "before_revision": 403,
+              "after_revision": 404,
+              "changed_override_keys": [
+                "principal|Agosto 2026|H1"
+              ],
+              "native_additions_identical": true,
+              "nominal_inputs_preserved": true
+            }
+          ],
+          "quote_audit": [
+            {
+              "id": 3868,
+              "actor": "Zeus / cotação automática",
+              "action": "AUTO_QUOTES_UPDATED",
+              "scenario": "workspace-2026-09",
+              "at": "2026-10-10T23:27:03.319649+00:00",
+              "after": {
+                "keys": [
+                  "principal|CAIXA SINTETICO|J2",
+                  "principal|Agosto 2026|H1"
+                ],
+                "period": "2026-09",
+                "updated_at": "2026-10-10T23:26:49.635680+00:00"
+              }
+            },
+            {
+              "id": 3875,
+              "actor": "Zeus / cotação automática",
+              "action": "AUTO_QUOTES_UPDATED",
+              "scenario": "workspace-2026-10",
+              "at": "2026-10-10T23:27:13.738228+00:00",
+              "after": {
+                "keys": [
+                  "principal|CAIXA SINTETICO|J2",
+                  "principal|Agosto 2026|H1"
+                ],
+                "period": "2026-10",
+                "updated_at": "2026-10-10T23:26:49.635680+00:00"
+              }
+            }
+          ],
+          "final_unchanged_tables": [
+            "finance_users",
+            "finance_ledger",
+            "finance_history",
+            "auth_trusted_devices"
+          ],
+          "security_separate": "security-readback.json",
+          "financial_writes_by_release": 0
+        }
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/manager-annual-1558613089752977409",
+        "files": {
+          "finance-before.dump": {
+            "sha256": "d47167d9223a40299accd316a2fa970e72153c5c7e769187bcd02afa716304a5",
+            "bytes": 117166384
+          },
+          "code-before.tar.gz": {
+            "sha256": "32f8fab5300e1b0e2ccbd67333e3c3397dc6ff907633b5a0aef5459d33c0764f",
+            "bytes": 24665
+          }
+        },
+        "catalog_validated": true,
+        "second_copy_verified": true,
+        "materialized_restore": false
+      },
+      "release_id": "manager-annual-1558613089752977409"
     }
   ],
   "profile_skill_references": [
@@ -49937,5 +50089,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-10T15:03:28.059903+00:00"
+  "last_updated": "2026-10-10T23:34:32.694745+00:00"
 }
