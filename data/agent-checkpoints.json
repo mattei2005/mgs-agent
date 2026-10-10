@@ -2913,12 +2913,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-META40-1557475850310393879",
-      "next_step": "Continuar no próximo tick :27/:57; avisos a cada 5 contas; popup de erro ou auth bloqueia",
-      "objective": "Criar mais 40 contas 001 na BM Digital Trust, uma a cada 30 min, sem pagamento",
-      "source": "discord:1544113212075548683;message:1557726924422381590;state:data/meta-digital-trust-40-20261007-state.json;cron:ad67a766690d",
-      "state": "retomada agendada a partir de 20/40; faltam 20; preflight read-only pass; conta externa excluída da contagem por decisão explícita de rodolfo; primeira criação após retomada ainda pendente",
+      "next_step": "Criar wrapper scheduler substituto contra mesmo checkpoint, validar enabled e gate de intervalo, continuar sem repetir31/32",
+      "objective": "Concluir o mesmo lote de40 contas001 Digital Trust no PC1 sem pagamento, cadência30min",
+      "source": "discord:1544113212075548683;message:1558620837295431782;state:data/meta-digital-trust-40-20261007-state.json",
+      "state": "32/40 confirmadas; canário32 popup meta e id2340284600133059/owner; 8 restantes; preflight completo recuperado; scheduler antigo esgotado126/126",
       "thread_id": "1544113212075548683",
-      "updated_at": "2026-10-08T12:12:19+00:00"
+      "updated_at": "2026-10-10T23:55:32+00:00"
     },
     {
       "agent": "zeus",
@@ -5622,5 +5622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T23:34:52+00:00"
+  "updated_at": "2026-10-10T23:55:32+00:00"
 }
