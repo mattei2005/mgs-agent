@@ -14,4 +14,8 @@ Autoridade: Rodolfo `1558613089752977409`, após confirmação explícita dos do
 
 ## Estado
 
-Implementação iniciada em candidato isolado; ainda não publicado. Checkpoint `ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409`. A confirmação supersede somente o alinhamento pendente da proposta em `docs/finance-manager-navigation.md`; o rótulo Dashboard anteriormente publicado permanece válido.
+**Publicado e validado.** Release `manager-annual-1558613089752977409` committed;274 testes Node +220 Python,36 verificações isoladas e12 finais em produção desktop/mobile, cinco gestores e Geizian como controle. APIs próprias e Pagamentos preservados; nenhum write financeiro da release. Rotina concorrente de câmbio reconciliada nos eventos3868/3875 e canário repetido nas novas revisões. Relatório `reports/finance-manager-annual-1558613089752977409.md`; evidências `apps/finance-system/private/manager-annual-1558613089752977409/`; checkpoint `ZEUS-FINANCE-MANAGER-ANNUAL-1558613089752977409`.
+
+Na cobertura2026 validada: lucro disponível março–outubro (8meses) e remuneração janeiro–outubro (10meses), incluindo outubro parcial. Janeiro/fevereiro não têm o consolidado original no padrão posterior e ficam explicitamente indisponíveis, nunca zero; remuneração histórica preservada. A tela identifica a cobertura do acumulado. Novembro/dezembro futuros não entram na soma.
+
+Esta decisão/publicação supersede somente o alinhamento pendente da proposta em `docs/finance-manager-navigation.md`; o rótulo Dashboard anteriormente publicado permanece válido.
