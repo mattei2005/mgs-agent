@@ -7757,6 +7757,24 @@
       "updated_at": "2026-09-08T04:55:03+00:00"
     },
     {
+      "canonical_key": "finance.user-preview",
+      "canonical_source": "docs/finance-user-preview.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-10T14:10:55+00:00",
+      "id": "FINANCE-USER-PREVIEW-1558474267975229541",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Visualizar como usuário, exclusivo Rodolfo e somente leitura",
+      "updated_at": "2026-10-10T14:10:55+00:00"
+    },
+    {
       "canonical_key": "finance.monthly-review.documentary-vigency-preview",
       "canonical_source": "reports/finance-vigency-release-1551783001678024736.md",
       "consumers": [
@@ -11572,5 +11590,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-09T22:27:06+00:00"
+  "updated_at": "2026-10-10T14:10:55+00:00"
 }

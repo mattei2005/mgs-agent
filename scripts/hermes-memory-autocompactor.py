@@ -66,7 +66,8 @@ def _resolve_active_hermes_runtime(
     """Resolve and freeze the active repo/interpreter from Hermes' launcher."""
     try:
         wrapper = launcher.resolve(strict=True)
-        first_line = wrapper.open("r", encoding="utf-8").readline().strip()
+        with wrapper.open("r", encoding="utf-8") as handle:
+            first_line = handle.readline().strip()
         if not first_line.startswith("#!"):
             raise ValueError("launcher_shebang_missing")
         command = shlex.split(first_line[2:].strip())

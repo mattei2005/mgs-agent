@@ -2463,12 +2463,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-PREVIEW-1558474267975229541",
-      "next_step": "Implementar em candidato, testar autorização/isolamento e interface, publicar com gates/readback",
+      "next_step": "Consumir gates integrais; publicar pelo controller; validar produção e registrar relatório",
       "objective": "Visualizar como usuário, exclusivo Rodolfo, somente leitura, sem alterar MFA/credenciais/sessões alheias",
-      "source": "discord:1545426987756298340/1558474267975229541",
-      "state": "authorized_preparing_isolated_candidate",
+      "source": "docs/finance-user-preview.md",
+      "state": "stage_pass_32_checks_full_gates_running_production_unchanged",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-10T13:41:39+00:00"
+      "updated_at": "2026-10-10T14:10:56+00:00"
     },
     {
       "agent": "zeus",
@@ -5582,5 +5582,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T13:41:39+00:00"
+  "updated_at": "2026-10-10T14:10:56+00:00"
 }

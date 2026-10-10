@@ -96,6 +96,23 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
                     "prompt", self.profile, hermes_repo=repo, hermes_python=interpreter)
         self.assertEqual(caught.exception.code, "active_runtime_changed")
 
+    def test_native_runtime_script_entry_keeps_bootstrap_and_arguments(self):
+        prefix = "import hermes_bootstrap; "
+        entry = "runpy.run_module('runpy', run_name='__main__', alter_sys=True)"
+        command = ["/store/python", "-I", "-c", prefix + entry,
+                   "/script.py", "--llm-once"]
+        completed = subprocess.CompletedProcess([], 0, stdout=json.dumps(command))
+        with mock.patch.object(compactor.subprocess, "run", return_value=completed):
+            result = compactor._native_runtime_command(
+                self.root, ["/script.py", "--llm-once"])
+        self.assertTrue(result[3].startswith(prefix))
+        self.assertIn("runpy.run_path", result[3])
+        self.assertEqual(result[4:], command[4:])
+        completed.stdout = json.dumps(["/store/python", "-I", "-c", "unknown-entry"])
+        with mock.patch.object(compactor.subprocess, "run", return_value=completed):
+            with self.assertRaises(ValueError):
+                compactor._native_runtime_command(self.root, ["/script.py"])
+
     def test_native_runtime_command_rejects_malformed_contract(self):
         completed = subprocess.CompletedProcess([], 0, stdout='["python", "script"]')
         with mock.patch.object(compactor.subprocess, "run", return_value=completed):
