@@ -1003,12 +1003,12 @@
     {
       "agent": "ares",
       "id": "ARES-KELLY-SHEIN-1558495399839404104",
-      "next_step": "Classificar cada imagem, limpar, verificar upload READY, mover RAW para LEGACY e registrar reserva",
+      "next_step": "Nenhuma pendência; 10 READY limpos, 10 originais LEGACY, 10 linhagens reservadas Kelly, entrada vazia; não repetir writes",
       "objective": "Tratar e mover lote Kelly SHEIN US EN em UPLOAD MANUAL",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1558495399839404104/ready-execution.json",
-      "state": "10 png 1080x1920 inventariados; 3 polls estáveis, hashes sem duplicação; revisão visual em andamento; zero writes drive",
+      "state": "completed",
       "thread_id": "1558495399839404104",
-      "updated_at": "2026-10-10T15:12:25+00:00"
+      "updated_at": "2026-10-10T15:19:04+00:00"
     },
     {
       "agent": "ares",
@@ -5612,5 +5612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-10T15:12:25+00:00"
+  "updated_at": "2026-10-10T15:19:04+00:00"
 }
