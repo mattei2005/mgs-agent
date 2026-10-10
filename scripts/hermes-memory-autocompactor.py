@@ -27,7 +27,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Sequence
 
-import yaml
+try:
+    import hermes_yaml as yaml
+except ModuleNotFoundError as exc:
+    if exc.name != "hermes_yaml":
+        raise
+    import yaml
 
 DEFAULT_HERMES_LAUNCHER = Path("/root/.local/bin/hermes")
 DEFAULT_BACKUP_ROOT = Path("/root/.hermes/secure-backups/memory-autocompaction")
