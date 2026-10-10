@@ -1,0 +1,42 @@
+{
+  "authority_message_id": "1558488168909635677",
+  "source_ids": [
+    "1557752639909793838",
+    "1558202777761620120"
+  ],
+  "channel_id": "1505609056771899644",
+  "status": "completed",
+  "started_at": "2026-10-10T14:47:55.271293+00:00",
+  "regression_returncode": 0,
+  "reply_id": "1558491279132725280",
+  "completed_at": "2026-10-10T14:47:56.629966+00:00",
+  "readback_ok": true,
+  "mentions": 0,
+  "artifact_id": "hermes-news-official-follower-1558488168909635677",
+  "regression_tests": 30,
+  "boundary_tests": 14,
+  "production_recheck": {
+    "posted": 0,
+    "watchdog_orphan": 0,
+    "watchdog_failed": 0
+  },
+  "consolidated_messages": 1,
+  "source_count": 2,
+  "final_readback_at": "2026-10-10T14:52:49.703743+00:00",
+  "scope": {
+    "generic_boundary_unchanged": true,
+    "other_channels_blocked": true,
+    "cron_schedule_changed": false,
+    "gateway_restart": false
+  },
+  "paths": [
+    "scripts/mgs_security_boundaries.py",
+    "scripts/hermes-news-explainer.py",
+    "scripts/hermes-news-explainer-watchdog.py",
+    "tests/test_hermes_news_official_follower.py",
+    "context/hermes-news-policy.md",
+    "data/hermes-news-explainer-state.json",
+    "data/hermes-news-explainer-watchdog-state.json"
+  ],
+  "rollback_backup": "/root/.hermes/profiles/zeus/cache/scratch/hermes-news-source-1558488168909635677/backup"
+}
