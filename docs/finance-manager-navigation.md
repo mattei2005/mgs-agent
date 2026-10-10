@@ -24,4 +24,4 @@ Essa proposta não é uma alteração ativa das regras de remuneração nem uma 
 
 ## Execução do rótulo
 
-Checkpoint `ZEUS-FINANCE-MENU-1558488813536288789`; evidências `apps/finance-system/private/manager-menu-1558488813536288789/`. Estado inicial: candidato isolado, teste RED/verde e stage aprovados; gates integrais/publicação pendentes. Atualizar somente após readback produtivo.
+Checkpoint `ZEUS-FINANCE-MENU-1558488813536288789`; evidências `apps/finance-system/private/manager-menu-1558488813536288789/`. **Rótulo publicado e validado**, release `manager-menu-1558488813536288789` committed:270 testes Node +220 Python,32 verificações de stage e14 produtivas desktop/mobile; hashes e fingerprints preservados. Relatório `reports/finance-manager-menu-1558488813536288789.md`. A proposta anual acima permanece pendente de alinhamento, sem novo menu/API publicado.

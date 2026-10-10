@@ -42690,6 +42690,100 @@
         "verified_at": "2026-10-10T14:57:00.048213+00:00"
       },
       "rollback_backup": "/root/.hermes/profiles/zeus/cache/scratch/hermes-news-source-1558488168909635677/backup"
+    },
+    {
+      "id": "zeus-finance-manager-menu-1558488813536288789",
+      "agent": "zeus",
+      "type": "finance_manager_navigation_label",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1558488813536288789",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-10T15:03:28.059903+00:00",
+      "canonical_source": "docs/finance-manager-navigation.md",
+      "report_path": "reports/finance-manager-menu-1558488813536288789.md",
+      "evidence_path": "apps/finance-system/private/manager-menu-1558488813536288789",
+      "files": {
+        "apps/finance-system/public/navigation.js": "05f4bce72930fb6278f334c072488ed902c5697f534019c1fe6c6a95dd350699",
+        "apps/finance-system/tests/navigation-profile.test.mjs": "d3fb1711c72c3331da2e1392fe4e9d1a150d9773ffe7f40f30b26cd2bccbe93e",
+        "docs/finance-manager-navigation.md": "5ce8aadde07663aae334b22c42c4e6b0d5b31e80902bd4f382e47a45f22405e8",
+        "reports/finance-manager-menu-1558488813536288789.md": "04cc4bb7cd1cc19d19295156f189b2e4ef1cb9a6dde04fbaaf6a1b99bd723e57",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "7fa2284d99801b00643f2424f76b605fdc6ad9b5823eb926bf6fb6113690b030",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "042d9cebce52371404f7eb54723738870536280fefa05f333cf30ff74ef6c7f9"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "gates": [
+          {
+            "phase": "node",
+            "pass": true,
+            "exit": 0,
+            "counts": {
+              "tests": 270,
+              "pass": 270,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "started_at": "2026-10-10T14:42:05.287852+00:00",
+            "seconds": 359.132947
+          },
+          {
+            "phase": "python",
+            "pass": true,
+            "exit": 0,
+            "counts": {
+              "tests": 220
+            },
+            "started_at": "2026-10-10T14:48:04.420891+00:00",
+            "seconds": 630.243359
+          }
+        ],
+        "stage_checks": 32,
+        "public_checks": 14,
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0,
+        "nonowner_security_preserved": true,
+        "financial_validation": {
+          "pass": true,
+          "cutover_all_six_tables_unchanged": true,
+          "final_financial_tables_unchanged": [
+            "scenarios",
+            "finance_users",
+            "finance_ledger",
+            "finance_history"
+          ],
+          "nonowner_security_unchanged": true,
+          "financial_writes": 0
+        }
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/manager-menu-1558488813536288789",
+        "files": {
+          "finance-before.dump": {
+            "sha256": "373afad3048609919bec29e45c23d3fe8227f811a62389e573c147f017930200",
+            "bytes": 117163195
+          },
+          "code-before.tar.gz": {
+            "sha256": "e2e97eb386c9e1c8098851957bae801206ca4ef440dd147c08bd08316a1dbd86",
+            "bytes": 5895
+          }
+        },
+        "catalog_validated": true,
+        "second_copy_verified": true,
+        "materialized_restore": false
+      },
+      "release_id": "manager-menu-1558488813536288789"
     }
   ],
   "profile_skill_references": [
@@ -49843,5 +49937,5 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
   },
-  "last_updated": "2026-10-10T14:57:00.048213+00:00"
+  "last_updated": "2026-10-10T15:03:28.059903+00:00"
 }
