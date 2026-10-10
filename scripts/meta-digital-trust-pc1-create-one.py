@@ -75,7 +75,9 @@ def navigate():
         if time.monotonic()>deadline:raise RuntimeError('page_render_unavailable')
         time.sleep(2)
     click('People','TabItem')
-    deadline=time.monotonic()+20
+    # Tab navigation can reload the Business pane; wait for live actor proof.
+    # Never repeat the click solely because the first AX capture is blank.
+    deadline=time.monotonic()+60
     while 'Rodolfo Mattei (You)' not in text(es:=cap()):
         if time.monotonic()>deadline:raise RuntimeError('business_or_actor_readback_missing')
         time.sleep(2)
