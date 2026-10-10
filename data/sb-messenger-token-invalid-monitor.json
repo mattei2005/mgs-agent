@@ -373,7 +373,9 @@
     708985,
     709142,
     709735,
-    710049
+    710049,
+    710650,
+    710686
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2231,9 +2233,9 @@
     "digital-trust|openzed|16|908": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-08T20:08:37.000Z",
+        "created_at": "2026-10-10T00:08:30.000Z",
         "domain": "openzed",
-        "notification_id": 709142,
+        "notification_id": 710686,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -2256,7 +2258,8 @@
       "notification_ids": [
         707343,
         708216,
-        709142
+        709142,
+        710686
       ],
       "opened_at": "2026-10-06T12:12:13-04:00",
       "repeat_count": 0,
@@ -2369,9 +2372,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-09T00:06:19.000Z",
+        "created_at": "2026-10-10T00:08:11.000Z",
         "domain": "spe",
-        "notification_id": 709735,
+        "notification_id": 710650,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2421,7 +2424,8 @@
         707111,
         707730,
         708622,
-        709735
+        709735,
+        710650
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -3035,17 +3039,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-09T19:57:12-04:00",
+  "last_check": "2026-10-09T20:12:13-04:00",
   "last_delivery": {
-    "at": "2026-10-09T12:12:13-04:00",
+    "at": "2026-10-09T20:12:13-04:00",
     "cursor_ids": [
-      710049
+      710650,
+      710686
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 710049,
+  "last_seen_id": 710686,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
