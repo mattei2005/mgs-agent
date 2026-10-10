@@ -375,7 +375,8 @@
     709735,
     710049,
     710650,
-    710686
+    710686,
+    710931
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2465,9 +2466,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-09T16:07:18.000Z",
+        "created_at": "2026-10-10T16:08:12.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 710049,
+        "notification_id": 710931,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2493,7 +2494,8 @@
         707327,
         708201,
         708985,
-        710049
+        710049,
+        710931
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -3039,18 +3041,17 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-10T11:57:12-04:00",
+  "last_check": "2026-10-10T12:12:14-04:00",
   "last_delivery": {
-    "at": "2026-10-09T20:12:13-04:00",
+    "at": "2026-10-10T12:12:14-04:00",
     "cursor_ids": [
-      710650,
-      710686
+      710931
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 710686,
+  "last_seen_id": 710931,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
