@@ -1,0 +1,35 @@
+{
+  "thread_id": "1558479365518655599",
+  "source_message_id": "1558479365518655599",
+  "incident": "ares:user compaction failure",
+  "source_alert_id": "1558475199643652190",
+  "cause": "The autocompactor resolved a surviving legacy .venv launcher and directly invoked its interpreter without the native PM bootstrap. A clean cron-like reproduction failed importing yaml; the inherited interactive PYTHONPATH masked the failure. The current native Hermes environment uses hermes_yaml instead of requiring PyYAML.",
+  "repair": "Resolve the store interpreter via the installation native --print-runtime-command boundary, preserve isolated PM bootstrap, use a validated runpy.run_path script entry, reject interpreter drift, and prefer native hermes_yaml with legacy fallback.",
+  "validation": {
+    "clean_cron_llm_probe": {"returncode": 0, "response": {"ok": true}},
+    "autocompactor_unit_tests": {"passed": 24},
+    "capacity_monitor_unit_tests": {"passed": 8},
+    "production_recovery": {"profiles": ["ares", "atena", "zeus"], "stores_checked": 6, "compacted_count": 1, "failure_count": 0, "delivery_failures": 0},
+    "second_monitor_pass": {"stores_checked": 6, "threshold_count": 0, "failure_count": 0, "delivery_failures": 0},
+    "ares_user_before_chars": 3405,
+    "ares_user_after_chars": 3190,
+    "ares_user_limit": 3600,
+    "ares_user_after_percent": 88.61,
+    "entry_count_before": 17,
+    "entry_count_after": 17,
+    "mode": "semantic_verified",
+    "capacity_report_id": "1558482558390370387",
+    "capacity_report_exact_readback": true,
+    "skill_mirror_equal": true
+  },
+  "backups": [
+    "/root/.hermes/secure-backups/memory-autocompactor-repair-1558479365518655599",
+    "/root/.hermes/secure-backups/memory-autocompaction/20261010T101316872514-0400/ares/USER.md.before"
+  ],
+  "unchanged": ["memory limits", "cron scheduling", "gateway services", "credentials", "campaigns"],
+  "artifacts": [
+    "scripts/hermes-memory-autocompactor.py",
+    "tests/test_hermes_memory_autocompactor.py",
+    "profiles/zeus-skills/ops/hermes-agent-operations/references/memory-skill-autowrite-governance.md"
+  ]
+}
