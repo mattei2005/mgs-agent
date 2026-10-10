@@ -42534,6 +42534,118 @@
         "ares_response_message_id": "1558264553958146060",
         "ares_response_content": "Estou acompanhando, Rodolfo. Aguardo você detalhar as regras do Intraday desta conta; nenhuma configuração será feita por enquanto."
       }
+    },
+    {
+      "id": "zeus-finance-preview-1558474267975229541",
+      "agent": "zeus",
+      "type": "finance_owner_user_preview",
+      "owner": "Rodolfo / Zeus",
+      "authorization_message_id": "1558474267975229541",
+      "thread_id": "1545426987756298340",
+      "status": "published_verified",
+      "updated_at": "2026-10-10T14:32:06.334213+00:00",
+      "canonical_source": "docs/finance-user-preview.md",
+      "report_path": "reports/finance-preview-1558474267975229541.md",
+      "evidence_path": "apps/finance-system/private/preview-1558474267975229541",
+      "files": {
+        "apps/finance-system/auth.mjs": "1aa5cbf27c9d58adcbc08ed78b18ed945905378ce73ddd0df2b46059f2082a1a",
+        "apps/finance-system/server.mjs": "7105f85a1552dc22e79e8da839a0d6f762bce2e8ccfeb7eceb1b80bdae5c76f7",
+        "apps/finance-system/public/navigation.js": "b2c8bb9d636d3314df9c992358287a050da744e96d74fdcb03a0721a88a58a58",
+        "apps/finance-system/public/navigation.css": "d7a5b4e6cfa06f4b7aa57a295285fcfcd94eccb43c760343e64e2078a004aae9",
+        "apps/finance-system/public/operations.js": "45b93eb10980127b32efeaa0f6ead8a5552d8d42e5d1685cff5a6b0149deb22b",
+        "apps/finance-system/tests/auth.test.mjs": "30b1a2eebf34ee531ddc8125ab0fe5938d46e5a40cd5787ee714da817a2f84be",
+        "apps/finance-system/tests/navigation-profile.test.mjs": "2ef0587a7d8ffdb65948b5657ed0d0da8e472fe28c1bfae538b9432775e8c1c5",
+        "docs/finance-user-preview.md": "51a0254c29632bc1371eb3c840327d200275901d72e031be9e820ba39b5a0d08",
+        "reports/finance-preview-1558474267975229541.md": "17bba9ad24b98c36347f4f0b86727b6e91cf9f284fd4d274ab8020af6da8ac84",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "3a42438748bcac8c263e16d7ba2ac7798e6f5802e387026b0f507aa68d6f1826",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "042d9cebce52371404f7eb54723738870536280fefa05f333cf30ff74ef6c7f9"
+      },
+      "runtime": {
+        "host": "MatteiInc01 / 162.55.28.178",
+        "services": [
+          "active",
+          "active",
+          "active"
+        ],
+        "gateway_restarted": false
+      },
+      "validation": {
+        "gates": [
+          {
+            "phase": "node",
+            "pass": true,
+            "exit": 0,
+            "counts": {
+              "tests": 269,
+              "pass": 269,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "started_at": "2026-10-10T14:06:48.024446+00:00",
+            "seconds": 377.915314
+          },
+          {
+            "phase": "python",
+            "pass": true,
+            "exit": 0,
+            "counts": {
+              "tests": 220
+            },
+            "started_at": "2026-10-10T14:13:05.939833+00:00",
+            "seconds": 630.873642
+          }
+        ],
+        "stage_checks": 32,
+        "public_checks": 14,
+        "financial_writes": 0,
+        "js_errors": 0,
+        "same_origin_failures": 0,
+        "nonowner_security_preserved": true,
+        "financial_validation": {
+          "pass": true,
+          "cutover_all_six_tables_unchanged": true,
+          "final_financial_tables_unchanged": [
+            "scenarios",
+            "finance_users",
+            "finance_ledger",
+            "finance_history"
+          ],
+          "nonowner_security_unchanged": true,
+          "normal_owner_mfa_login_counter_advanced": true,
+          "financial_writes": 0
+        },
+        "institutional_validate": "PASS",
+        "institutional_regression": {
+          "passed": 19,
+          "failed": 1,
+          "preexisting_case": "KR-014",
+          "diagnosis": "literal Ares3.6.1 expected; current3.6.8; already inventoried under ares-shein-self-recovery-1558157403021643967; no Ares changes"
+        }
+      },
+      "backup": {
+        "remote": "/home/zeus/mgs-finance-backups/preview-1558474267975229541",
+        "files": {
+          "finance-before.dump": {
+            "sha256": "c186bca318870f3f6b68da778d7d40dbf18870df92718fc80154b868f2b2ac8b",
+            "bytes": 117160125
+          },
+          "code-before.tar.gz": {
+            "sha256": "0419fdf9d62b5596d621ffe067b08967f5181fbe1e2800bd6565c10d02a888d0",
+            "bytes": 33791
+          }
+        },
+        "catalog_validated": true,
+        "second_copy_verified": true,
+        "materialized_restore": false
+      },
+      "release_id": "preview-1558474267975229541",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1558487297241124965",
+        "readback": true
+      }
     }
   ],
   "profile_skill_references": [
@@ -49686,5 +49798,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-10T14:32:06.334213+00:00"
 }
