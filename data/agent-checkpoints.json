@@ -483,12 +483,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C40-ACTIVATE-20261012",
-      "next_step": "Registrar one-shot determinístico, validar scheduler e REPORT-INFRA",
-      "objective": "Programar C40 para 12/10 00:00 America/Sao_Paulo, status somente",
-      "source": "discord:thread:1539832402744975450",
-      "state": "preflight live: c40 paused usd30, conta saudável, 1x1x3 filhos active; nova data supersede ativação pendente de 11/10",
+      "next_step": "One-shot aquece 23:58 SP, aguarda 00:00, faz status ACTIVE único e GET final; nenhum budget/D1/hierarquia write",
+      "objective": "Ativar C40 em 12/10/2026 00:00 America/Sao_Paulo, status somente",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c40-activate-20261012-rodolfo.json",
+      "state": "scheduled: scheduler enabled/no_agent/once confirmado por readback; c40 paused usd30/dia, conta saudável e filhos active; dry-run live zero writes; testes status-only/idempotência/drift aprovados; 8 datas zero colisões operacionais; pedido de 11/10 supersedido só na ativação",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-11T15:18:29+00:00"
+      "updated_at": "2026-10-11T15:25:09+00:00"
     },
     {
       "agent": "ares",
@@ -5632,5 +5632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-11T15:18:29+00:00"
+  "updated_at": "2026-10-11T15:25:09+00:00"
 }
