@@ -2927,10 +2927,33 @@
       "budget_usd_each": 30,
       "authorized_by": "Rodolfo Mattei",
       "authorization_source": "discord:thread:1539832402744975450",
-      "state": "SCHEDULED",
+      "state": "SUPERSEDED_ACTIVATION_DATE",
       "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c46-c47-delete-c40-20261011-rodolfo.json",
       "script": "/root/.hermes/profiles/ares/scripts/cpv13-c46-c47-delete-c40-20261011.py",
       "cron_job_id": "eb41373f7a69",
+      "no_agent": true,
+      "post_write_readback": true,
+      "operational_d1_reset": false,
+      "superseded_by": "cpv13-c40-activate-20261012-rodolfo",
+      "superseded_scope": "C40 activation only; prior deletion/budget evidence preserved"
+    },
+    "cpv13-c40-activate-20261012-rodolfo": {
+      "request_id": "cpv13-c40-activate-20261012-rodolfo",
+      "campaign_ids": [
+        "120250989174530632"
+      ],
+      "campaign_numbers": [
+        "40"
+      ],
+      "scheduled_for": "2026-10-12T00:00:00-03:00",
+      "budget_usd_each": 30,
+      "budget_write": false,
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "state": "SCHEDULE_PENDING",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c40-activate-20261012-rodolfo.json",
+      "script": "/root/.hermes/profiles/ares/scripts/cpv13-c40-activate-20261012.py",
+      "cron_job_id": null,
       "no_agent": true,
       "post_write_readback": true,
       "operational_d1_reset": false

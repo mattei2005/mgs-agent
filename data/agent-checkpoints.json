@@ -482,6 +482,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C40-ACTIVATE-20261012",
+      "next_step": "Registrar one-shot determinístico, validar scheduler e REPORT-INFRA",
+      "objective": "Programar C40 para 12/10 00:00 America/Sao_Paulo, status somente",
+      "source": "discord:thread:1539832402744975450",
+      "state": "preflight live: c40 paused usd30, conta saudável, 1x1x3 filhos active; nova data supersede ativação pendente de 11/10",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-11T15:18:29+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-C45M-2X-20261008-0900",
       "next_step": "Concluído; acompanhar D1 canônico, sem cron novo, replay ou handoff.",
       "objective": "Duplicar C45M para C46M/C47M: conclusão recuperada nos mesmos IDs",
@@ -5622,5 +5632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-11T10:32:24+00:00"
+  "updated_at": "2026-10-11T15:18:29+00:00"
 }
