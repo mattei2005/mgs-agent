@@ -1,19 +1,25 @@
 {
-  "pass": true,
-  "schedule": "3 2 * * *",
+  "pass": false,
+  "schedule": "27 2 * * *",
   "timezone": "America/New_York",
   "cron_timezone_model": "observed_host_timezone",
   "civil_dates": 8,
-  "operational_conflicts": [],
+  "operational_conflicts": [
+    {
+      "source": "zeus",
+      "name": "Digital Trust \u00b7 concluir quatro restantes",
+      "collisions": 8
+    }
+  ],
   "baseline_collisions": [
     {
       "source": "root",
-      "name": "monitor-tool-loops.sh",
+      "name": "monitor_honcho_billing_watch.py",
       "collisions": 8
     },
     {
       "source": "root",
-      "name": "monitor_honcho_billing_watch.py",
+      "name": "alerts-infra-failed-alert-resolver.py",
       "collisions": 8
     },
     {
@@ -29,6 +35,11 @@
     {
       "source": "root",
       "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
       "collisions": 8
     }
   ],
@@ -171,7 +182,7 @@
     },
     {
       "minute": 27,
-      "operational_conflicts": 0,
+      "operational_conflicts": 1,
       "baseline_count": 48
     },
     {
@@ -321,7 +332,7 @@
     },
     {
       "minute": 57,
-      "operational_conflicts": 0,
+      "operational_conflicts": 1,
       "baseline_count": 48
     },
     {
@@ -1064,6 +1075,17 @@
       },
       "baseline": false,
       "expanded_ticks": 0
+    },
+    {
+      "source": "zeus",
+      "name": "Digital Trust \u00b7 concluir quatro restantes",
+      "schedule": {
+        "kind": "cron",
+        "expr": "27,57 * * * *",
+        "display": "27,57 * * * *"
+      },
+      "baseline": false,
+      "expanded_ticks": 384
     },
     {
       "source": "ares",

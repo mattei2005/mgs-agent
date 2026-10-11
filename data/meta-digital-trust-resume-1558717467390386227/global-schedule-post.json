@@ -1,0 +1,43 @@
+{
+  "pass": true,
+  "schedule": "27,57 * * * *",
+  "eight_civil_dates": 8,
+  "operational_conflicts": [],
+  "baselines": [
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "collisions": 384
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch",
+      "collisions": 272
+    }
+  ]
+}
