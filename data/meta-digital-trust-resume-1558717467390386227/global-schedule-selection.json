@@ -1,0 +1,1779 @@
+{
+  "chosen": {
+    "minutes": [
+      27,
+      57
+    ],
+    "operational_conflicts": [],
+    "baseline": [
+      {
+        "source": "root",
+        "name": "monitor_honcho_billing_watch.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "alerts-infra-failed-alert-resolver.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "monitor_hermes_pending_writes.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "finalize-hermes-structural-write.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "hermes-news-explainer-watchdog.py",
+        "collisions": 384
+      },
+      {
+        "source": "root",
+        "name": "monitor-sb-messenger-token-invalid.py",
+        "collisions": 384
+      },
+      {
+        "source": "zeus",
+        "name": "meta-app-roles-watch",
+        "collisions": 272
+      }
+    ],
+    "baseline_count": 2576
+  },
+  "pairs": [
+    {
+      "minutes": [
+        0,
+        30
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "infra-discovery.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "cleanup-zombie-sessions.sh",
+          "collisions": 192
+        },
+        {
+          "source": "root",
+          "name": "pendencia-render-md.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "chat-log.sh",
+          "collisions": 192
+        },
+        {
+          "source": "root",
+          "name": "dtr-sb-page-health-sync.sh",
+          "collisions": 16
+        },
+        {
+          "source": "root",
+          "name": "sync-sb-sms-revenue-daily.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "refresh-sb-restricted-history-sheet.py",
+          "collisions": 24
+        },
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "collisions": 384
+        },
+        {
+          "source": "/etc/cron.d/e2scrub_all",
+          "name": "system",
+          "collisions": 2
+        },
+        {
+          "source": "zeus",
+          "name": "MGS DR monitor SLA",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "SB Utility Candidate Reservoir",
+          "collisions": 8
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch overnight",
+          "collisions": 112
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "track-article-cost.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-cron-stale-logs.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "discord-archive-stale-agent-threads.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        },
+        {
+          "source": "systemd",
+          "name": "apt-daily-upgrade.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "apt-daily.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "dpkg-db-backup.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "fstrim.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "fwupd-refresh.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "logrotate.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "man-db.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "motd-news.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "snapd.snap-repair.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "update-notifier-motd.timer",
+          "collisions": 1
+        }
+      ],
+      "baseline_count": 4122
+    },
+    {
+      "minutes": [
+        1,
+        31
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        },
+        {
+          "source": "ares",
+          "name": "Creditoparaveiculo 13 G006 Diario",
+          "collisions": 192
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 1920
+    },
+    {
+      "minutes": [
+        2,
+        32
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "cron-control-plane.py",
+          "collisions": 8
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch overnight",
+          "collisions": 112
+        },
+        {
+          "source": "zeus",
+          "name": "AdsPower aquecimento 2026-10-12",
+          "collisions": 1
+        },
+        {
+          "source": "zeus",
+          "name": "AdsPower aquecimento 2026-10-13",
+          "collisions": 1
+        },
+        {
+          "source": "zeus",
+          "name": "AdsPower aquecimento 2026-10-15",
+          "collisions": 1
+        },
+        {
+          "source": "zeus",
+          "name": "AdsPower aquecimento 2026-10-16",
+          "collisions": 1
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2056
+    },
+    {
+      "minutes": [
+        3,
+        33
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 4
+        },
+        {
+          "source": "root",
+          "name": "finance_media_spend_sync.py",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2192
+    },
+    {
+      "minutes": [
+        4,
+        34
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "finance-readonly-health.py",
+          "collisions": 192
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-hermes-memory-capacity.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 1920
+    },
+    {
+      "minutes": [
+        5,
+        35
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "dtr-sb-restricted-summary.py",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "monitor-sb-messenger-token-invalid.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "system",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 3072
+    },
+    {
+      "minutes": [
+        6,
+        36
+      ],
+      "operational_conflicts": [
+        {
+          "source": "ares",
+          "name": "Creditoparaveiculo 13 G006 Intraday 2h cont\u00ednuo",
+          "collisions": 192
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2192
+    },
+    {
+      "minutes": [
+        7,
+        37
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-hermes-updates.sh",
+          "collisions": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-webshare-status.sh",
+          "collisions": 24
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "check-pending-reports.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "systemd",
+          "name": "sysstat-summary.timer",
+          "collisions": 1
+        }
+      ],
+      "baseline_count": 2305
+    },
+    {
+      "minutes": [
+        8,
+        38
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "sync-smsfunnel-cost-daily.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 4
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2056
+    },
+    {
+      "minutes": [
+        9,
+        39
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-op-rate-limit.py",
+          "collisions": 192
+        },
+        {
+          "source": "/etc/cron.d/php",
+          "name": "system",
+          "collisions": 384
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        },
+        {
+          "source": "systemd",
+          "name": "phpsessionclean.timer",
+          "collisions": 1
+        }
+      ],
+      "baseline_count": 1809
+    },
+    {
+      "minutes": [
+        10,
+        40
+      ],
+      "operational_conflicts": [
+        {
+          "source": "/etc/cron.d/e2scrub_all",
+          "name": "system",
+          "collisions": 8
+        },
+        {
+          "source": "zeus",
+          "name": "Hermes MGS patch watchdog",
+          "collisions": 32
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch overnight",
+          "collisions": 112
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "systemd",
+          "name": "e2scrub_all.timer",
+          "collisions": 1
+        },
+        {
+          "source": "systemd",
+          "name": "sysstat-collect.timer",
+          "collisions": 1
+        }
+      ],
+      "baseline_count": 2690
+    },
+    {
+      "minutes": [
+        11,
+        41
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "mgs-safety-backup.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-auto-push.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2440
+    },
+    {
+      "minutes": [
+        12,
+        42
+      ],
+      "operational_conflicts": [
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch overnight",
+          "collisions": 112
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-sb-messenger-token-invalid.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2576
+    },
+    {
+      "minutes": [
+        13,
+        43
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 4
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-runcloud.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 2304
+    },
+    {
+      "minutes": [
+        14,
+        44
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "housekeeping-bak-cleanup.sh",
+          "collisions": 2
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "sb-restricted-transition-monitor.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-hermes-memory-capacity.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 2304
+    },
+    {
+      "minutes": [
+        15,
+        45
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "MGS DR backup completo",
+          "collisions": 8
+        },
+        {
+          "source": "zeus",
+          "name": "MGS DR restore semanal",
+          "collisions": 2
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "track-article-cost.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-cron-stale-logs.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "discord-archive-stale-agent-threads.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "system",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 4496
+    },
+    {
+      "minutes": [
+        16,
+        46
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-discord-thread-archive-warnings.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 1920
+    },
+    {
+      "minutes": [
+        17,
+        47
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "hermes-context-cost-audit.py",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "sync-sb-messenger-revenue-sheet.py",
+          "collisions": 8
+        },
+        {
+          "source": "/etc/crontab",
+          "name": "system",
+          "collisions": 192
+        },
+        {
+          "source": "/etc/crontab",
+          "name": "system",
+          "collisions": 2
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2056
+    },
+    {
+      "minutes": [
+        18,
+        48
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 4
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2192
+    },
+    {
+      "minutes": [
+        19,
+        49
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-drive-auth-unified.py",
+          "collisions": 384
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 1536
+    },
+    {
+      "minutes": [
+        20,
+        50
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "dtr-sb-daily-match-audit.sh",
+          "collisions": 8
+        },
+        {
+          "source": "/etc/cron.d/monarx-update",
+          "name": "system",
+          "collisions": 1
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch overnight",
+          "collisions": 112
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2824
+    },
+    {
+      "minutes": [
+        21,
+        51
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "collisions": 192
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2192
+    },
+    {
+      "minutes": [
+        22,
+        52
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch overnight",
+          "collisions": 112
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "check-pending-reports.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 2304
+    },
+    {
+      "minutes": [
+        23,
+        53
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-yoast-health-eggbev.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 4
+        },
+        {
+          "source": "zeus",
+          "name": "MGS DR backup hor\u00e1rio",
+          "collisions": 192
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 1920
+    },
+    {
+      "minutes": [
+        24,
+        54
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-gpt55-oauth-cost.sh",
+          "collisions": 8
+        },
+        {
+          "source": "root",
+          "name": "monitor-honcho-health.sh",
+          "collisions": 32
+        },
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 152
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-hermes-memory-capacity.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2192
+    },
+    {
+      "minutes": [
+        25,
+        55
+      ],
+      "operational_conflicts": [
+        {
+          "source": "/etc/crontab",
+          "name": "system",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "system",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 3072
+    },
+    {
+      "minutes": [
+        26,
+        56
+      ],
+      "operational_conflicts": [
+        {
+          "source": "zeus",
+          "name": "Financeiro \u00b7 c\u00e2mbio autom\u00e1tico",
+          "collisions": 384
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-auto-push.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2440
+    },
+    {
+      "minutes": [
+        27,
+        57
+      ],
+      "operational_conflicts": [],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-sb-messenger-token-invalid.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "collisions": 272
+        }
+      ],
+      "baseline_count": 2576
+    },
+    {
+      "minutes": [
+        28,
+        58
+      ],
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "collisions": 4
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor-runcloud.py",
+          "collisions": 384
+        }
+      ],
+      "baseline_count": 2304
+    },
+    {
+      "minutes": [
+        29,
+        59
+      ],
+      "operational_conflicts": [
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "system",
+          "collisions": 8
+        }
+      ],
+      "baseline": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "sb-restricted-transition-monitor.py",
+          "collisions": 384
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "collisions": 384
+        },
+        {
+          "source": "zeus",
+          "name": "b013-dtr-link-watch",
+          "collisions": 136
+        }
+      ],
+      "baseline_count": 2056
+    }
+  ],
+  "eight_civil_dates": 8
+}

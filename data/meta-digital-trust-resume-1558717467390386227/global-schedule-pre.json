@@ -1,0 +1,63 @@
+{
+  "pass": false,
+  "schedule": "3,33 * * * *",
+  "eight_civil_dates": 8,
+  "operational_conflicts": [
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "collisions": 4
+    },
+    {
+      "source": "root",
+      "name": "finance_media_spend_sync.py",
+      "collisions": 8
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "collisions": 8
+    }
+  ],
+  "baseline": [
+    {
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "collisions": 384
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "collisions": 384
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch",
+      "collisions": 272
+    }
+  ],
+  "self_excluded": "9631194b51ac paused",
+  "locks": [
+    "meta-digital-trust-hourly40.lock",
+    "meta-library-collector.lock",
+    "PC1 shared lease600s"
+  ],
+  "stagger_seconds": 20,
+  "application_schedulers": "Ares jobs and root application wrappers included; PC1 AdsPower/CUA lease shared; no parallel account writer",
+  "at": "2026-10-11T05:52:25.096249+00:00"
+}
