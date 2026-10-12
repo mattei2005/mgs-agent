@@ -171,7 +171,7 @@
       "post_video_wait_seconds": 56,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "opening",
+      "status": "completed",
       "likes": [
         {
           "url": "https://www.facebook.com/photo/?fbid=10163478589172083",
@@ -303,7 +303,7 @@
         "completed_at": "2026-10-12T09:56:14.607406-04:00",
         "evidence": "progress and two observed end/restart crossings; full intervening loop"
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-12T09:55:20.707606-04:00",
       "opened_at": "2026-10-12T09:55:22.839814-04:00",
       "authenticated_identity": {
@@ -311,12 +311,15 @@
         "url": "https://www.facebook.com/mhd.faiz.79025"
       },
       "responsive": true,
-      "close_intent_at": "2026-10-12T09:45:45.466259-04:00",
+      "close_intent_at": "2026-10-12T09:57:10.609154-04:00",
       "last_active_status": "Inactive",
-      "closed_at": "2026-10-12T09:45:51.239251-04:00",
+      "closed_at": "2026-10-12T09:57:16.436289-04:00",
       "post_video_wait": {
         "started_at": "2026-10-12T09:56:14.607785-04:00",
-        "target_seconds": 56
+        "target_seconds": 56,
+        "ended_at": "2026-10-12T09:57:10.608248-04:00",
+        "elapsed_seconds": 56.0,
+        "completed": true
       }
     },
     {
@@ -330,8 +333,41 @@
       "post_video_wait_seconds": 57,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "partial",
-      "likes": [],
+      "status": "opening",
+      "likes": [
+        {
+          "url": "https://www.facebook.com/photo/?fbid=1735465784204528",
+          "author": "Junior Quixada",
+          "at": "2026-10-12T09:57:54.613027-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:57:58.081588-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10248790439640328",
+          "author": "Mark Rosengarten",
+          "at": "2026-10-12T09:57:58.680976-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:58:02.166213-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10168055381054692",
+          "author": "Tom Donovan",
+          "at": "2026-10-12T09:58:13.350414-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:58:16.804598-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10237906666579279",
+          "author": "Sean Smith",
+          "at": "2026-10-12T09:58:17.395597-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:58:20.864543-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        }
+      ],
       "comments": [],
       "video": {
         "navigation_intent_at": "2026-10-12T09:48:38.054583-04:00",
@@ -575,9 +611,9 @@
         ],
         "reason": "complete playback unverified"
       },
-      "closed_verified": true,
-      "open_intent_at": "2026-10-12T09:46:04.903277-04:00",
-      "opened_at": "2026-10-12T09:46:07.942965-04:00",
+      "closed_verified": false,
+      "open_intent_at": "2026-10-12T09:57:16.608289-04:00",
+      "opened_at": "2026-10-12T09:57:18.681386-04:00",
       "authenticated_identity": {
         "name": "Kelly Andrade",
         "profile_id": "61577868723989"
@@ -590,7 +626,13 @@
       },
       "close_intent_at": "2026-10-12T09:50:32.418527-04:00",
       "last_active_status": "Inactive",
-      "closed_at": "2026-10-12T09:50:35.770413-04:00"
+      "closed_at": "2026-10-12T09:50:35.770413-04:00",
+      "like_intent": {
+        "url": "https://www.facebook.com/photo/?fbid=1150997537608962",
+        "author": "New York City 4k",
+        "at": "2026-10-12T09:58:55.366963-04:00",
+        "status": "submitting"
+      }
     },
     {
       "profile_id": "k1f7o4im",
@@ -895,6 +937,6 @@
       "closed_at": "2026-10-12T09:55:03.797758-04:00"
     }
   ],
-  "last_opened_at": "2026-10-12T09:55:22.839840-04:00",
-  "last_opened_epoch": 1791813322.8398468
+  "last_opened_at": "2026-10-12T09:57:18.681405-04:00",
+  "last_opened_epoch": 1791813438.6814098
 }
