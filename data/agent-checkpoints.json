@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Obter confirmação crítica adicional para reboot solicitado depois do plano sem reboot: kernel 6.8.0-146 permanece; preservar launcher/HEAD Hermes; validação externa pós-boot antes de portar Hermes main. Limpeza ainda não executada.",
-      "objective": "VPS primeiro: oito pacotes e três serviços atualizados e validados; novo pedido de reboot antes do Hermes.",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
-      "state": "packages_completed_validated_awaiting_reboot_confirmation",
+      "next_step": "Executor aguarda handoff final entregue e turno encerrado; executa um reboot. Na retomada nativa, consumir post-boot-result.json e aguardar validador externo completo (governance_complete e overall true) antes de preflight Hermes; nunca repetir instalação/reboot já executados. Sem exclusão autorizada.",
+      "objective": "Oito pacotes VPS atualizados; reboot confirmado em 1559210496253624382; Hermes main após VPS integralmente validada.",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-prestate.json",
+      "state": "reboot_prepared_confirmed_pending_detached_dispatch",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T14:11:59+00:00"
+      "updated_at": "2026-10-12T14:38:10+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T14:11:59+00:00"
+  "updated_at": "2026-10-12T14:38:10+00:00"
 }

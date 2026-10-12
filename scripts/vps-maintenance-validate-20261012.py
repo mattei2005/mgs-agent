@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Owner-authorized VPS post-boot validation; no reboot primitive in this verifier."""
-import argparse, datetime, importlib.util, json, os, pathlib, re, subprocess, tempfile, time, urllib.request
+import argparse, datetime, importlib.util, json, os, pathlib, re, stat, subprocess, tempfile, time, urllib.request
 BASE=pathlib.Path('/root/mgs-agent')
 ROOT=pathlib.Path('/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537')
 IDENT='VPS-HERMES-20261012-1559192694096404537'
@@ -126,6 +126,17 @@ def sync_git():
         time.sleep(3)
     raise RuntimeError('remote Git convergence pending')
 
+def seal_final_evidence():
+    excluded={'EVIDENCE-SHA256SUMS','evidence-manifest.json','EVIDENCE-SEAL.sha256'}
+    files=sorted(p for p in ROOT.rglob('*') if stat.S_ISREG(p.lstat().st_mode) and 'rollback-verify' not in p.parts and p.name not in excluded)
+    # Absolute paths keep verification independent of the resumed agent's cwd.
+    text=run(['sha256sum',*[str(p) for p in files]]).stdout
+    (ROOT/'EVIDENCE-SHA256SUMS').write_text(text)
+    atomic(ROOT/'evidence-manifest.json',{'id':IDENT,'sealed_at':now(),'component_count':len(files),'component_manifest':str(ROOT/'EVIDENCE-SHA256SUMS'),'scope':'retained VPS backup plus final post-boot/transport evidence; extracted verification trees excluded'})
+    (ROOT/'EVIDENCE-SEAL.sha256').write_text(run(['sha256sum',str(ROOT/'EVIDENCE-SHA256SUMS'),str(ROOT/'evidence-manifest.json')]).stdout)
+    run(['sha256sum','-c',str(ROOT/'EVIDENCE-SHA256SUMS')]);run(['sha256sum','-c',str(ROOT/'EVIDENCE-SEAL.sha256')])
+    assert len((ROOT/'EVIDENCE-SHA256SUMS').read_text().splitlines())==len(files)
+
 def post_boot():
     result=None
     try:
@@ -162,6 +173,7 @@ def post_boot():
     # Do not send an intermediate success into the operational thread. The native
     # owner-authorized session continuation consumes this receipt and proceeds to Hermes.
     audit('vps_post_boot_closure',overall=result['overall'],result=str(ROOT/'post-boot-result.json'))
+    seal_final_evidence()
     return 0 if result['overall'] else 1
 
 def self_test():
