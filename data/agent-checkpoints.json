@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Confirmar corte SHA 7cc3fb8cb55898747dd1dfa56fda3e16ebba028e, sync bundled skills de Zeus/Atena/Ares preservando específicas/Google SA, e ativação/restart Ares→Atena→Zeus somente após port semântico/snapshots/provas/testes/smokes. Sem exclusão. VPS não deve ser reiniciada novamente.",
-      "objective": "VPS concluída e validada; Hermes main 7cc3fb8c exige port controlado preservando customizações MGS.",
+      "next_step": "Confirmação Critical 1559238059541659689 cobre corte 7cc3fb8cb55898747dd1dfa56fda3e16ebba028e, bundled skills necessárias preservando MGS/Google SA, ativação após provas/testes/smokes e restart Ares→Atena→Zeus. Criar snapshots nativos e candidato inativo. Sem reboot VPS/exclusão.",
+      "objective": "VPS concluída. Hermes main corte 7cc3fb8c confirmado por Rodolfo; port isolado e ativação gated com preservação integral MGS.",
       "source": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/critical-plan.json",
-      "state": "hermes_preflight_validated_awaiting_exact_critical_confirmation",
+      "state": "hermes_exact_cutoff_confirmed_backup_and_semantic_port",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T15:55:13+00:00"
+      "updated_at": "2026-10-12T16:16:23+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T15:55:13+00:00"
+  "updated_at": "2026-10-12T16:16:23+00:00"
 }
