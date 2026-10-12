@@ -84,6 +84,13 @@
         "reboot_executed": false,
         "hermes_started": false,
         "updated_at": "2026-10-12T14:11:15.279294+00:00"
+      },
+      "latest_reboot_20261012": {
+        "authority": "1559210496253624382",
+        "status": "vps_completed_validated_ready_hermes",
+        "kernel": "6.8.0-146-generic",
+        "boot_id": "65c9e070-e147-4c0c-ac39-36a67dd41e81",
+        "result": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-boot-result.json"
       }
     },
     {
@@ -568,6 +575,13 @@
         "reboot_executed": false,
         "hermes_started": false,
         "updated_at": "2026-10-12T14:11:15.287801+00:00"
+      },
+      "latest_reboot_20261012": {
+        "authority": "1559210496253624382",
+        "status": "vps_completed_validated_ready_hermes",
+        "kernel": "6.8.0-146-generic",
+        "boot_id": "65c9e070-e147-4c0c-ac39-36a67dd41e81",
+        "result": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-boot-result.json"
       }
     },
     {
@@ -817,7 +831,7 @@
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",
-      "status": "reboot_retry1_prepared_confirmed",
+      "status": "vps_completed_validated_ready_hermes",
       "thread_id": "1559192694096404537",
       "authority_message_ids": [
         "1559194678350585959",
@@ -827,8 +841,8 @@
       ],
       "checkpoint_id": "VPS-HERMES-20261012-1559192694096404537",
       "preflight_plan": "/root/mgs-agent/reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "vps_phase": "packages_validated; first reboot attempt withheld; primary routing gate fixed; retry prepared",
-      "hermes_phase": "deferred_until_vps_completed_validated",
+      "vps_phase": "vps_completed_validated_ready_hermes",
+      "hermes_phase": "authorized_preflight_pending_after_vps_closure",
       "cleanup_phase": "not_executed_separate_exact_confirmation_required",
       "reboot_required": false,
       "production_mutations": 8,
@@ -854,7 +868,7 @@
       },
       "reboot_requested": true,
       "reboot_confirmed": true,
-      "reboot_executed": false,
+      "reboot_executed": true,
       "reboot_authority_message_id": "1559210496253624382",
       "validator": "/root/mgs-agent/scripts/vps-maintenance-validate-20261012.py",
       "validator_unit": "mgs-vps-maintenance-1559192694096404537.service",
@@ -877,7 +891,7 @@
       },
       "pre_reboot_checks": 46,
       "continuation": "native same-session resume; consume post-boot result and validator exit before Hermes",
-      "updated_at": "2026-10-12T15:15:05.107145+00:00",
+      "updated_at": "2026-10-12T15:20:27.043641+00:00",
       "reboot_recovery": {
         "cause": "legacy JSON mirror stale active-turn token",
         "first_attempt_reboot_executed": false,
@@ -899,6 +913,58 @@
           "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md": "163e12496a29644925e92adbf5c36604c0d2f5d73caed9feb72a3443fae9a067"
         },
         "native_same_session_fixture_primary_verified": true
+      },
+      "reboot_authority": "1559210496253624382",
+      "post_boot_result": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-boot-result.json",
+      "post_boot_checks": {
+        "boot_changed": true,
+        "kernel_expected": true,
+        "reboot_marker_absent": true,
+        "package_libopeniscsiusr": true,
+        "package_open-iscsi": true,
+        "package_libx11-6": true,
+        "package_libx11-xcb1": true,
+        "package_libx11-data": true,
+        "package_monarx-agent": true,
+        "package_sosreport": true,
+        "package_tailscale": true,
+        "dpkg_clean": true,
+        "holds_zero": true,
+        "apt_upgrade_zero": true,
+        "apt_full-upgrade_zero": true,
+        "launcher_unchanged": true,
+        "runtime_head_unchanged": true,
+        "profile_zeus_config.yaml": true,
+        "profile_zeus_SOUL.md": true,
+        "profile_atena_config.yaml": true,
+        "profile_atena_SOUL.md": true,
+        "profile_ares_config.yaml": true,
+        "profile_ares_SOUL.md": true,
+        "service_zeus-gateway.service": true,
+        "runtime_argv_zeus": true,
+        "gateway_pid_zeus": true,
+        "service_atena-gateway.service": true,
+        "runtime_argv_atena": true,
+        "gateway_pid_atena": true,
+        "service_ares-gateway.service": true,
+        "runtime_argv_ares": true,
+        "gateway_pid_ares": true,
+        "service_monarx-agent.service": true,
+        "service_tailscaled.service": true,
+        "service_unattended-upgrades.service": true,
+        "service_cron.service": true,
+        "service_qemu-guest-agent.service": true,
+        "service_mgs-autocommit.service": true,
+        "tool_node": true,
+        "tool_npm": true,
+        "tool_corepack": true,
+        "needrestart_kernel_current": true,
+        "needrestart_services_zero": true,
+        "failed_units_zero": true,
+        "tmp_safe": true,
+        "rollback_hashes": true,
+        "boot_priority_errors_zero": true,
+        "fresh_discord_3_profiles": true
       }
     },
     {
