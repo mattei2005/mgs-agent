@@ -382,7 +382,10 @@
     711705,
     712142,
     712159,
-    712178
+    712178,
+    712356,
+    712377,
+    712389
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2477,9 +2480,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-11T20:04:08.000Z",
+        "created_at": "2026-10-12T20:05:32.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 711705,
+        "notification_id": 712377,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2507,7 +2510,8 @@
         708985,
         710049,
         710931,
-        711705
+        711705,
+        712377
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -2540,6 +2544,39 @@
         692305
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|topfeed|6|294": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-12T20:05:22.000Z",
+        "domain": "topfeed",
+        "notification_id": 712356,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 11,
+          "Broadcast": 32,
+          "On-hold": 51,
+          "Ready": 1
+        },
+        "pages": 95,
+        "segurador_id": "294",
+        "segurador_name": "Alice Prates",
+        "source": "canary",
+        "user_email": "disparosfinancetopfeed@gmail.com",
+        "user_id": "6",
+        "user_name": "Disparos FTF US-CC-EN"
+      },
+      "last_sent_at": "2026-10-12T16:12:14-04:00",
+      "message_ids": [
+        "1559297667950190662"
+      ],
+      "notification_ids": [
+        712356
+      ],
+      "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -2727,9 +2764,9 @@
     "digital-trust|zuout|11|915": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-09-28T12:07:13.000Z",
+        "created_at": "2026-10-12T20:05:35.000Z",
         "domain": "zuout",
-        "notification_id": 701617,
+        "notification_id": 712389,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -2750,7 +2787,8 @@
         "1554103437879283898"
       ],
       "notification_ids": [
-        701617
+        701617,
+        712389
       ],
       "opened_at": "2026-09-28T08:12:13-04:00",
       "repeat_count": 0,
@@ -3053,19 +3091,23 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-12T15:57:13-04:00",
+  "last_check": "2026-10-12T16:12:14-04:00",
   "last_delivery": {
-    "at": "2026-10-12T12:12:15-04:00",
+    "at": "2026-10-12T16:12:14-04:00",
     "cursor_ids": [
-      712142,
-      712159,
-      712178
+      712356,
+      712377,
+      712389
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1559297667950190662"
+    ],
+    "notification_ids": [
+      712356
+    ]
   },
   "last_error": null,
-  "last_seen_id": 712178,
+  "last_seen_id": 712389,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
