@@ -59,6 +59,14 @@ git -C "$repo" rev-list --count "$base..origin/main"
 
 Use `base..origin/main` for upstream commits pending since the installed upstream base, name the base SHA, and never silently substitute the graph of a different checkout because its version banner or tag looks newer.
 
+### Release identity across tag-format migrations
+
+1. After resolving the live checkout and upstream base, list its ancestral tags with `git -C "$repo" tag --merged "$base"`; do not assume official releases have always used the current semantic tag format.
+2. Validate the latest official stable through GitHub's `/repos/NousResearch/hermes-agent/releases/latest`, and validate an ancestral release candidate through `/releases/tags/<tag>`. Check `draft`, `prerelease`, `name` and `tag_name`; a calendar-format tag can identify a release whose public name uses a semantic version.
+3. Report the installed state as a release base plus its exact upstream SHA and subsequent development, not as an unmodified release. Never treat an abandoned RC or the newest tag by creation date as stable-release proof.
+4. If the CLI reports `unknown`, an install-store workspace, or placeholder package metadata, retain the PID/launcher/Git evidence as the identity source and explain the banner discrepancy separately; do not change packaging just to answer the version question.
+5. Require ancestry from the base to each target before `git rev-list --count "$base..$stable_sha"` and `git rev-list --count "$base..$main_sha"`; count local-only port commits separately. Guard empty tag selections before indexing them, because a valid older release may use another naming scheme.
+
 For a read-only MGS patch gate, prefer an explicit check-only wrapper when present. Prove the current canonical patch reverses against the active port, then export `origin/main` to a temporary directory and run a forward `git apply --check` there. A clean reverse check proves the deployed customization matches its artifact; a failed clean-target forward check names a real port requirement without mutating production. Do not run an apply-capable guard merely to answer a status question.
 
 For large ranges, aggregate `name-status`, commit subjects, categories, path intersections, and blocker errors inside a script and return only counts, top domains, bounded samples, and exact blockers. Never serialize the full raw range into tool output; multi-thousand-commit updates can flood the session and obscure the decision.
@@ -157,6 +165,15 @@ For business recommendations, classify capabilities into three states:
 3. **Surface-specific/low priority** — desktop or UI features that do not help a Discord/VPS operation until that surface is adopted.
 
 Tie each recommendation to exact commit subjects or changed code, then rank by company impact: reliability/isolation, cost/context visibility, security/secrets, orchestration, media/channel behavior, and optional UI. A capability present in code is not proof that it is configured, credentialed, or safe to enable. Existing company authorization and Critical Subset rules always outrank upstream “smart approval” or automation features.
+
+### Evidence procedure for prospective benefits
+
+1. Reuse the exact frozen `base..target` range from the preceding status answer; if refreshing upstream, disclose the new target and recalculate instead of silently explaining a different batch.
+2. Aggregate the complete range in Python from `git log --format='%h%x09%s' "$base..$target"` and `git diff --name-only "$base" "$target"`. Group core features, performance, reliability and security separately from catalog, tests and Desktop changes; do not truncate the newest matching subjects before grouping, because that can hide most of a large update window. Call subject-prefix totals commit classifications, not feature counts.
+3. Read the official releases intersecting the range, then inspect selected commits with bounded `git show --format=fuller --stat <sha>` and focused hunks. Release notes may cover changes already present in the installed base; include only changes proven inside the pending range.
+4. Check `git merge-base --is-ancestor <feature_sha> "$stable_sha"` to distinguish stable benefits from main-only additions. Read `git show "$target:<resolved_path>"` and verify the relevant symbol or behavior survives at the target, because an earlier feature commit may have been reverted or moved. Resolve actual changed paths before a symbol probe rather than guessing a filename.
+5. Inspect provider conditions and defaults before translating code into MGS benefits. Keep direct OpenAI API reasoning behavior separate from ChatGPT/Codex OAuth; distinguish request-body compression from context/token reduction; label upstream token benchmarks as upstream measurements until tested against MGS prompts. Do not infer subscription-quota savings from reduced network bytes.
+6. Present each selected benefit as change → practical MGS effect → active after update, opt-in, or outside the operational surface. Before installation, use prospective language and state that no update was applied; source review proves availability, not deployment or realized performance.
 
 ## Final recommendation gate
 

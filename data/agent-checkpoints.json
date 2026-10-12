@@ -1832,6 +1832,16 @@
     },
     {
       "agent": "zeus",
+      "id": "VPS-HERMES-20261012-1559192694096404537",
+      "next_step": "Congelar transação VPS e versões; obter confirmação Critical Subset exata antes de modificar /usr, /etc, /boot ou reboot.",
+      "objective": "Atualizar VPS primeiro, validar integralmente, depois Hermes até main pelo plano controlado; backups e limpeza com gates próprios.",
+      "source": "skill:vps-maintenance-and-backup-governance/references/mgs-vps-hermes-standard-update-and-cleanup.md",
+      "state": "vps preflight em andamento. autorização inicial 1559194678350585959; ordem vps primeiro 1559194715155595337. nenhuma instalação, reboot ou ativação hermes executada. hermes pendente e bloqueado até fechamento vps.",
+      "thread_id": "1559192694096404537",
+      "updated_at": "2026-10-12T13:24:06+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ALERT-AUDIT-1555741952656539649",
       "next_step": "Aguardar decisão Rodolfo para executar pacote de correções/proteções; manter cadências críticas,credenciais e canal canônico. Não atualizar Hermes/reiniciar/excluir mensagens por este pedido.",
       "objective": "Auditar alertas infra/VPS recentes, reconciliar estado real e propor melhorias pós-upgrades",
@@ -5652,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T10:33:05+00:00"
+  "updated_at": "2026-10-12T13:24:06+00:00"
 }
