@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Não repetir updates, reboot, ativação nem bundled sync: Hermes ativo e6ad5053, v0.21.7, guard707 e smokes3/3 pós-ativação. Solicitar somente Monarx 4.3.81-master→4.3.82-master e restart do próprio Monarx; simulação 1 upgrade/0 new/0 removals. Criar rollback .deb antes se confirmado. Sem reboot/gateway/deleções. Root auth ausente é pré-existente fora dos gateways. Corte fixo; 20 commits posteriores observados ficam próximo ciclo.",
-      "objective": "VPS/lote aprovado e Hermes corte 7cc3fb8c concluídos e validados. Nova versão Monarx fora do lote aguarda decisão exata.",
-      "source": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/new-monarx-critical-plan.json",
-      "state": "approved_update_completed_new_monarx_confirmation_pending",
+      "next_step": "Nenhuma ação pendente neste escopo. Hermes v0.21.7, corte main7cc3fb8c/port e6ad5053 já ativo e validado; Monarx 4.3.82-master com24/24 checks, APT zero e gateway PIDs preservados. Snapshots/runtime rollback e deb4.3.81 retidos; nenhuma exclusão. Commits upstream após o corte continuam outro ciclo. Protect5.2.70 preexistia desde cron15/09; inventário corrigido, não atualizado nesta transação.",
+      "objective": "VPS e Hermes concluídos no corte aprovado; Monarx adicional 4.3.82 confirmado e validado, sem reiniciar gateways ou VPS.",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005/post-validation.json",
+      "state": "completed_validated",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T18:03:31+00:00"
+      "updated_at": "2026-10-12T18:16:42+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T18:03:31+00:00"
+  "updated_at": "2026-10-12T18:16:42+00:00"
 }

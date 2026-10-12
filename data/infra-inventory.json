@@ -15,24 +15,25 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "version": "4.3.81-master",
+          "version": "4.3.82-master",
           "status": "installed",
-          "previous_version": "4.3.78-master"
+          "previous_version": "4.3.81-master"
         },
         {
           "name": "monarx-protect",
-          "version": "5.2.60-master",
+          "version": "5.2.70-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect-autodetect",
-          "version": "5.2.60-master",
+          "version": "5.2.70-master",
           "status": "installed"
         }
       ],
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
-      "updated_at": "2026-10-12T14:11:15.279294+00:00",
+      "updated_at": "2026-10-12T18:11:57.740774+00:00",
+      "latest_single_package_maintenance": {"authorization_message_id": "1559266729031635005", "result": "completed_validated", "before": "4.3.81-master", "after": "4.3.82-master", "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005", "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005/post-validation.json", "checks_passed": 24, "gateway_pids_unchanged": true, "host_reboot": false, "deletions": 0, "protect_versions_reconciled": "5.2.70-master installed by existing weekly Monarx cron on 2026-09-15, not changed in this transaction"},
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
         "authorization_message_ids": [
@@ -267,18 +268,18 @@
         },
         {
           "name": "monarx-agent",
-          "version": "4.3.81-master",
+          "version": "4.3.82-master",
           "status": "installed",
-          "previous_version": "4.3.78-master"
+          "previous_version": "4.3.81-master"
         },
         {
           "name": "monarx-protect",
-          "version": "5.2.60-master",
+          "version": "5.2.70-master",
           "status": "installed"
         },
         {
           "name": "monarx-protect-autodetect",
-          "version": "5.2.60-master",
+          "version": "5.2.70-master",
           "status": "installed"
         },
         {
@@ -831,7 +832,7 @@
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",
-      "status": "hermes_completed_validated_new_vendor_candidate_pending_confirmation",
+      "status": "vps_and_hermes_completed_validated",
       "thread_id": "1559192694096404537",
       "authority_message_ids": [
         "1559194678350585959",
@@ -845,7 +846,7 @@
       "hermes_phase": "completed_validated_main_cutoff_7cc3fb8c",
       "hermes_installed_version": "v0.21.7+159.ge6ad505",
       "hermes_postactivation": {"source_clean": true, "launcher_and_running_pid_paths_exact": true, "frozen_inputs_unchanged": 185, "canonical_guard_passed": 707, "real_codex_honcho_smokes_passed": 3, "configs_soul_mirrors_preserved": true, "new_host_reboot": false, "deletions": 0},
-      "new_vendor_package_gate": {"package": "monarx-agent", "installed": "4.3.81-master", "candidate": "4.3.82-master", "status": "new_exact_critical_confirmation_pending", "simulated_packages": 1, "new_packages": 0, "removals": 0, "plan": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/new-monarx-critical-plan.json", "mutation": false},
+      "new_vendor_package_gate": {"package": "monarx-agent", "previous": "4.3.81-master", "installed": "4.3.82-master", "status": "completed_validated", "report_infra_message_id": "1559268596083986443", "report_infra_readback": true, "authorization_message_id": "1559266729031635005", "simulated_packages": 1, "new_packages": 0, "removals": 0, "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005", "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-monarx-1559266729031635005/post-validation.json", "checks_passed": 24, "mutation": true, "protected_gateway_pids_unchanged": true, "host_reboot": false},
       "postactivation_disk": {"used_percent": 85, "free_bytes": 32876322816, "cleanup_executed": false},
       "hermes_authority_message_id": "1559238059541659689",
       "hermes_candidate_repo": "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
