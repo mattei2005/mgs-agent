@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Após resposta entregue e turns canônicos inativos, activation.py troca launcher e executa finalizer seguro Ares→Atena→Zeus com rollback. Na retomada, reconciliar activation-result.json/finalizer antes de qualquer ação; finalizar smokes/guard/invariantes/APT fresco/inventário/audit/Git/REPORT-INFRA e selos. Target 7cc3fb8c, port e6ad5053. Não repetir VPS/port/sync. Root sem auth pré-existente; 20 commits posteriores ao corte observados e fora deste ciclo.",
-      "objective": "VPS concluída; Hermes no corte confirmado 7cc3fb8c portado e validado, pronto para ativação segura sem exclusões.",
-      "source": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/deployment-manifest.json",
-      "state": "hermes_candidate_validated_activation_handoff",
+      "next_step": "Não repetir updates, reboot, ativação nem bundled sync: Hermes ativo e6ad5053, v0.21.7, guard707 e smokes3/3 pós-ativação. Solicitar somente Monarx 4.3.81-master→4.3.82-master e restart do próprio Monarx; simulação 1 upgrade/0 new/0 removals. Criar rollback .deb antes se confirmado. Sem reboot/gateway/deleções. Root auth ausente é pré-existente fora dos gateways. Corte fixo; 20 commits posteriores observados ficam próximo ciclo.",
+      "objective": "VPS/lote aprovado e Hermes corte 7cc3fb8c concluídos e validados. Nova versão Monarx fora do lote aguarda decisão exata.",
+      "source": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/new-monarx-critical-plan.json",
+      "state": "approved_update_completed_new_monarx_confirmation_pending",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T17:47:02+00:00"
+      "updated_at": "2026-10-12T18:03:31+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T17:47:02+00:00"
+  "updated_at": "2026-10-12T18:03:31+00:00"
 }
