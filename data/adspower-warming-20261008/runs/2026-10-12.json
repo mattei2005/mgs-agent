@@ -15,12 +15,144 @@
       "initial_active": "Inactive",
       "opened_by_run": true,
       "status": "opening",
-      "likes": [],
+      "likes": [
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10164919561612641",
+          "author": "Victoria Morehouse",
+          "at": "2026-10-12T09:36:26.783479-04:00",
+          "status": "confirmed",
+          "submitted_at": "2026-10-12T09:36:41.830832-04:00",
+          "confirmed_at": "2026-10-12T09:38:05.545218-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10163794071082989",
+          "author": "Debbie Henderson Barrett",
+          "at": "2026-10-12T09:38:06.746623-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:38:11.165913-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10245101533137974",
+          "author": "Dana Dicke",
+          "at": "2026-10-12T09:38:21.501405-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:38:25.361361-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10175803051290083",
+          "author": "Mahbub Sohag",
+          "at": "2026-10-12T09:38:26.139525-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:38:29.781747-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10163659718071577",
+          "author": "Joy Sinaga",
+          "at": "2026-10-12T09:38:42.753477-04:00",
+          "status": "confirmed",
+          "confirmed_at": "2026-10-12T09:38:46.224505-04:00",
+          "evidence": "exact post Remove Like / Change Like reaction"
+        }
+      ],
       "comments": [],
-      "video": {},
+      "video": {
+        "navigation_intent_at": "2026-10-12T09:38:46.881622-04:00",
+        "observed_href": "/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-12T09:39:15.600653-04:00",
+            "now": 4.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:17.048135-04:00",
+            "now": 6.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:18.519672-04:00",
+            "now": 7.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:20.067527-04:00",
+            "now": 9.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:21.591247-04:00",
+            "now": 10.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:23.079049-04:00",
+            "now": 1.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:24.546128-04:00",
+            "now": 3.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:26.014018-04:00",
+            "now": 4.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:27.471303-04:00",
+            "now": 5.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:28.952280-04:00",
+            "now": 7.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:30.453912-04:00",
+            "now": 9.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:31.966566-04:00",
+            "now": 10.0,
+            "max": 11.0
+          },
+          {
+            "at": "2026-10-12T09:39:33.481830-04:00",
+            "now": 1.0,
+            "max": 11.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-12T09:39:33.482296-04:00",
+        "evidence": "progress and two observed end/restart crossings; full intervening loop"
+      },
       "closed_verified": false,
       "open_intent_at": "2026-10-12T09:34:41.059421-04:00",
-      "opened_at": "2026-10-12T09:34:44.541538-04:00"
+      "opened_at": "2026-10-12T09:34:44.541538-04:00",
+      "authenticated_identity": {
+        "name": "Emgai Datquang",
+        "profile_id": "100006810555555"
+      },
+      "responsive": true,
+      "technical_recoveries": [
+        {
+          "at": "2026-10-12T09:37:38.794053-04:00",
+          "action": "like",
+          "cause": "click selector timeout",
+          "reconciled": "exact post remains unliked"
+        }
+      ],
+      "post_video_wait": {
+        "started_at": "2026-10-12T09:39:33.482699-04:00",
+        "target_seconds": 76
+      }
     },
     {
       "profile_id": "k1d71895",
