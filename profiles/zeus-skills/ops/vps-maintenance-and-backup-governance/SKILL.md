@@ -110,7 +110,7 @@ Avoid making a phased cleanup sound like an endless stream of newly discovered d
 
 When Rodolfo says **“VPS primeiro; Hermes depois”**, treat that as a hard operational boundary, not merely an ordering hint:
 
-1. Complete the VPS phase through package validation, required reboot, and post-boot readback before beginning any Hermes port or deployment work.
+1. Complete the VPS phase through package validation, required or explicitly requested reboot, and post-boot readback before beginning any Hermes port or deployment work. An owner-requested reboot remains a separate acceptance phase even when current and expected kernels already agree; package success does not cancel it.
 2. Before that closure, Hermes activity is limited to proving the currently active launcher/version is unchanged. Do not create or promote a port patch, install a candidate venv, run application builds/smokes, or modify Hermes deployment/guard scripts.
 3. Distinguish status precisely:
    - `packages updated; reboot pending` = VPS maintenance is **not complete**;
