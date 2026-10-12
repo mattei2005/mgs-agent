@@ -187,6 +187,7 @@ When Monarx changes:
 
 - update the existing `monarx-security-agent` inventory entry rather than adding a duplicate;
 - reconcile all Monarx package versions against `dpkg-query`;
+- freeze the live versions of `monarx-agent`, `monarx-protect`, and `monarx-protect-autodetect` before mutation even when only one is an authorized target; an inventory version is not a before-state. If historical inventory is stale, reconcile the other packages from timestamped dpkg/APT history and label the correction separately rather than attributing a previous vendor-cron upgrade to the current transaction;
 - use APT history to attribute versions changed earlier by the weekly vendor cron.
 
 Update the existing VPS runtime baseline with npm/Corepack, rollback path, validation gates, residuals, and authorization IDs. Finish with audit readback and canonical REPORT-INFRA.
