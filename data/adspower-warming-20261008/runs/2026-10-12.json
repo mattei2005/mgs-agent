@@ -1,7 +1,7 @@
 {
   "date": "2026-10-12",
   "timezone": "America/New_York",
-  "state": "running",
+  "state": "completed",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -333,7 +333,7 @@
       "post_video_wait_seconds": 57,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "opening",
+      "status": "completed",
       "likes": [
         {
           "url": "https://www.facebook.com/photo/?fbid=1735465784204528",
@@ -466,7 +466,7 @@
         "completed_at": "2026-10-12T10:03:22.530041-04:00",
         "evidence": "progress and two observed end/restart crossings; full intervening loop"
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-12T09:57:16.608289-04:00",
       "opened_at": "2026-10-12T09:57:18.681386-04:00",
       "authenticated_identity": {
@@ -474,9 +474,9 @@
         "profile_id": "61577868723989"
       },
       "responsive": true,
-      "close_intent_at": "2026-10-12T09:50:32.418527-04:00",
+      "close_intent_at": "2026-10-12T10:04:19.532107-04:00",
       "last_active_status": "Inactive",
-      "closed_at": "2026-10-12T09:50:35.770413-04:00",
+      "closed_at": "2026-10-12T10:04:23.203929-04:00",
       "technical_recoveries": [
         {
           "at": "2026-10-12T10:01:10.392550-04:00",
@@ -486,7 +486,10 @@
       ],
       "post_video_wait": {
         "started_at": "2026-10-12T10:03:22.530649-04:00",
-        "target_seconds": 57
+        "target_seconds": 57,
+        "ended_at": "2026-10-12T10:04:19.531136-04:00",
+        "elapsed_seconds": 57.0,
+        "completed": true
       }
     },
     {
@@ -789,9 +792,69 @@
       },
       "close_intent_at": "2026-10-12T09:54:56.174406-04:00",
       "last_active_status": "Inactive",
-      "closed_at": "2026-10-12T09:55:03.797758-04:00"
+      "closed_at": "2026-10-12T09:55:03.797758-04:00",
+      "technical_error_recovered": true
     }
   ],
   "last_opened_at": "2026-10-12T09:57:18.681405-04:00",
-  "last_opened_epoch": 1791813438.6814098
+  "last_opened_epoch": 1791813438.6814098,
+  "finished_at": "2026-10-12T10:05:01.106092-04:00",
+  "summary": [
+    {
+      "profile_id": "k13him2j",
+      "profile_no": "894",
+      "identity": "Emgai Datquang",
+      "likes_confirmed": 5,
+      "likes_target": 5,
+      "new_comments": 0,
+      "video_completed": true,
+      "video_samples": 13,
+      "wait_target": 76,
+      "wait_actual": 76.0,
+      "closed_verified": true,
+      "passed": true
+    },
+    {
+      "profile_id": "k1d71895",
+      "profile_no": "1130",
+      "identity": "Mhd Aldy",
+      "likes_confirmed": 3,
+      "likes_target": 3,
+      "new_comments": 0,
+      "video_completed": true,
+      "video_samples": 19,
+      "wait_target": 56,
+      "wait_actual": 56.0,
+      "closed_verified": true,
+      "passed": true
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "profile_no": "1177",
+      "identity": "Kelly Andrade",
+      "likes_confirmed": 5,
+      "likes_target": 5,
+      "new_comments": 0,
+      "video_completed": true,
+      "video_samples": 16,
+      "wait_target": 57,
+      "wait_actual": 57.0,
+      "closed_verified": true,
+      "passed": true
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "identity": "Giselle Santos",
+      "likes_confirmed": 2,
+      "likes_target": 2,
+      "new_comments": 0,
+      "video_completed": true,
+      "video_samples": 47,
+      "wait_target": 63,
+      "wait_actual": 63.0,
+      "closed_verified": true,
+      "passed": true
+    }
+  ]
 }
