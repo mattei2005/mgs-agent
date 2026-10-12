@@ -27,6 +27,11 @@ REPO_ALLOWLIST_PREFIXES = (
 HISTORICAL_EVIDENCE_SHA256 = {
     "data/zeus/meta-campaign-rename/1555626535980114000/inventory-before-runtime-entry.json":
         "70d47a6b52bbed213b8558a5fef1b73e294ea896509b7ca0731c24c6e54620d1",
+    # Authorized AdsPower delivery amendment: immutable before-image of the
+    # canonical inventory; its only retired-host hit is removed_validated
+    # firewall history. Audit authority 1559206352956432395. No parent exemption.
+    "data/adspower-warming-20261008/delivery-amendment-1559206352956432395/inventory-before.json":
+        "aebab065306cc85eac7bab53efdf3eae1c4affac46da2d324b371974e543f437",
 }
 
 PROFILE_NAMES = ("zeus", "atena", "ares")

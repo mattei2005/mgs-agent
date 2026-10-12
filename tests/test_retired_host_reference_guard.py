@@ -66,6 +66,11 @@ class HistoricalEvidenceTests(unittest.TestCase):
             guard.scan_tree(target, "profile-zeus", failures)
             self.assertEqual(failures, [f"profile-zeus:{target}"])
 
+    def test_adspower_amendment_snapshot_registration_is_exact(self):
+        relative = "data/adspower-warming-20261008/delivery-amendment-1559206352956432395/inventory-before.json"
+        self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+        self.assertFalse(any(relative.startswith(prefix) for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+
     def test_registered_production_snapshot_hash_matches(self):
         for relative, expected in guard.HISTORICAL_EVIDENCE_SHA256.items():
             with self.subTest(relative=relative):
