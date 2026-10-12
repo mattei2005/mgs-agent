@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Preparar rollback validado; aplicar lote confirmado pela mensagem 1559198227801317547. Reboot é pedido novo e requer gate adicional exato; não ativar Hermes antes do fechamento VPS.",
-      "objective": "VPS primeiro: oito pacotes e três serviços confirmados; reboot solicitado após pacotes. Hermes após novo boot validado.",
-      "source": "reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "state": "vps_rollback_preparation_authorized",
+      "next_step": "Obter confirmação crítica adicional para reboot solicitado depois do plano sem reboot: kernel 6.8.0-146 permanece; preservar launcher/HEAD Hermes; validação externa pós-boot antes de portar Hermes main. Limpeza ainda não executada.",
+      "objective": "VPS primeiro: oito pacotes e três serviços atualizados e validados; novo pedido de reboot antes do Hermes.",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
+      "state": "packages_completed_validated_awaiting_reboot_confirmation",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T13:42:21+00:00"
+      "updated_at": "2026-10-12T14:11:59+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T14:05:42+00:00"
+  "updated_at": "2026-10-12T14:11:59+00:00"
 }

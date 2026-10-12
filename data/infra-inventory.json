@@ -15,9 +15,9 @@
       "packages": [
         {
           "name": "monarx-agent",
-          "version": "4.3.78-master",
+          "version": "4.3.81-master",
           "status": "installed",
-          "previous_version": "4.3.76-master"
+          "previous_version": "4.3.78-master"
         },
         {
           "name": "monarx-protect",
@@ -32,7 +32,7 @@
       ],
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
-      "updated_at": "2026-10-02T23:59:05.816893+00:00",
+      "updated_at": "2026-10-12T14:11:15.279294+00:00",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
         "authorization_message_ids": [
@@ -73,6 +73,17 @@
         "result": "PASS; exact package transaction validated; service active/running with new PID; no reboot",
         "backup": "/root/.hermes/secure-backups/vps-maintenance/20260919T155128Z-vps-hermes-update",
         "validated_at": "2026-09-19T15:58:50.355119+00:00"
+      },
+      "latest_maintenance_20261012": {
+        "authority_message_id": "1559198227801317547",
+        "status": "packages_completed_validated_reboot_confirmation_pending",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
+        "packages": 8,
+        "validation_checks_passed": 26,
+        "reboot_executed": false,
+        "hermes_started": false,
+        "updated_at": "2026-10-12T14:11:15.279294+00:00"
       }
     },
     {
@@ -80,7 +91,7 @@
       "agent": "zeus",
       "manager": "apt/npm",
       "source_report": "VPS controlled package maintenance 2026-07-10",
-      "packages_count": 58,
+      "packages_count": 65,
       "packages": [
         {
           "name": "1password-cli",
@@ -249,9 +260,9 @@
         },
         {
           "name": "monarx-agent",
-          "version": "4.3.78-master",
+          "version": "4.3.81-master",
           "status": "installed",
-          "previous_version": "4.3.76-master"
+          "previous_version": "4.3.78-master"
         },
         {
           "name": "monarx-protect",
@@ -407,11 +418,53 @@
           "version": "25.2.8-0ubuntu0.24.04.4",
           "status": "installed",
           "previous_version": "25.2.8-0ubuntu0.24.04.2"
+        },
+        {
+          "name": "libopeniscsiusr",
+          "version": "2.1.9-3ubuntu5.5",
+          "previous_version": "2.1.9-3ubuntu5.4",
+          "status": "installed"
+        },
+        {
+          "name": "open-iscsi",
+          "version": "2.1.9-3ubuntu5.5",
+          "previous_version": "2.1.9-3ubuntu5.4",
+          "status": "installed"
+        },
+        {
+          "name": "libx11-6",
+          "version": "2:1.8.7-1ubuntu0.1",
+          "previous_version": "2:1.8.7-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libx11-xcb1",
+          "version": "2:1.8.7-1ubuntu0.1",
+          "previous_version": "2:1.8.7-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libx11-data",
+          "version": "2:1.8.7-1ubuntu0.1",
+          "previous_version": "2:1.8.7-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "sosreport",
+          "version": "4.11.2-0ubuntu0~24.04.1",
+          "previous_version": "4.10.2-0ubuntu0~24.04.1",
+          "status": "installed"
+        },
+        {
+          "name": "tailscale",
+          "version": "1.104.1",
+          "previous_version": "1.102.4",
+          "status": "installed"
         }
       ],
       "node_runtime": "v22.23.3",
       "purpose": "Current controlled baseline for Ubuntu security/system packages and global Node package-manager tooling used by MGS.",
-      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260824T192548Z-vps-hermes-update",
+      "rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
       "validation": {
         "apt_upgradable": 1,
         "npm_outdated_global": 0,
@@ -433,7 +486,7 @@
         "journal_errors_since_package_boundary": 0,
         "automatic_service_side_effect": "fwupd restarted by needrestart; active/running; no priority 0..3 errors"
       },
-      "updated_at": "2026-10-02T23:59:05.816942+00:00",
+      "updated_at": "2026-10-12T14:11:15.287801+00:00",
       "previous_rollback_backup": "/root/.hermes/secure-backups/vps-maintenance/20260710-004112/npm-corepack-backup.tar.gz",
       "last_maintenance": {
         "requested_by": "Rodolfo Mattei",
@@ -495,10 +548,26 @@
         "validated_at": "2026-09-19T15:58:50.355119+00:00"
       },
       "latest_maintenance": {
-        "authority": "1555722281093693451",
-        "status": "completed_with_resolved_validator_incident",
-        "backup": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712",
-        "result": "/root/.hermes/secure-backups/vps-maintenance/20261002-vps-1555704911805808712/post-boot-result.json"
+        "authority_message_id": "1559198227801317547",
+        "status": "packages_completed_validated_reboot_confirmation_pending",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
+        "packages": 8,
+        "validation_checks_passed": 26,
+        "reboot_executed": false,
+        "hermes_started": false,
+        "updated_at": "2026-10-12T14:11:15.287801+00:00"
+      },
+      "latest_maintenance_20261012": {
+        "authority_message_id": "1559198227801317547",
+        "status": "packages_completed_validated_reboot_confirmation_pending",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
+        "packages": 8,
+        "validation_checks_passed": 26,
+        "reboot_executed": false,
+        "hermes_started": false,
+        "updated_at": "2026-10-12T14:11:15.287801+00:00"
       }
     },
     {
@@ -748,22 +817,43 @@
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",
-      "status": "awaiting_exact_critical_confirmation_vps",
+      "status": "packages_completed_validated_awaiting_reboot_confirmation",
       "thread_id": "1559192694096404537",
       "authority_message_ids": [
         "1559194678350585959",
-        "1559194715155595337"
+        "1559194715155595337",
+        "1559198227801317547"
       ],
       "checkpoint_id": "VPS-HERMES-20261012-1559192694096404537",
       "preflight_plan": "/root/mgs-agent/reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "vps_phase": "preflight_validated_8_packages_pending",
+      "vps_phase": "packages_completed_validated; new owner-requested reboot pending exact Critical confirmation",
       "hermes_phase": "deferred_until_vps_completed_validated",
       "cleanup_phase": "not_executed_separate_exact_confirmation_required",
       "reboot_required": false,
-      "production_mutations": 0,
+      "production_mutations": 8,
       "report_infra_status": "posted_readback_verified",
-      "report_infra_message_id": "1559195797755531377",
-      "report_infra_channel_id": "1498132022634483894"
+      "report_infra_message_id": "1559207012947067014",
+      "report_infra_channel_id": "1498132022634483894",
+      "skill_learning": {
+        "path": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/controlled-package-and-node-tooling-update.md",
+        "sha256": "f00fe02b14c155446ac915a57523bd25b99c11a260693bafb659a76eaeb95e1c",
+        "mirror_byte_identical": true,
+        "summary": "Strict installed-payload rollback: diversion annotations, empty-value Debian control fields, protected DEBIAN mode and verified extraction roundtrip."
+      },
+      "package_validation": {
+        "authority_message_id": "1559198227801317547",
+        "status": "packages_completed_validated_reboot_confirmation_pending",
+        "backup": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537",
+        "validation": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/post-package-validation.json",
+        "packages": 8,
+        "validation_checks_passed": 26,
+        "reboot_executed": false,
+        "hermes_started": false,
+        "updated_at": "2026-10-12T14:11:15.270004+00:00"
+      },
+      "reboot_requested": true,
+      "reboot_confirmed": false,
+      "reboot_executed": false
     },
     {
       "id": "ZEUS-SHEIN-GEIZIAN-AUDIT-1558231569976787076",
@@ -1201,7 +1291,10 @@
         "149e87b0b179"
       ],
       "repeat_per_job": 1,
-      "delivery": "discord:1496267442899521627:1557593341720526899",
+      "delivery": "discord:1496267442899521627:1557593341720526899,discord:1508853425952133180:1559206239223812127",
+      "status_delivery_thread_ids": ["1557593341720526899", "1559206239223812127"],
+      "delivery_amendment_message_id": "1559206352956432395",
+      "delivery_amendment_validation_path": "/root/mgs-agent/data/adspower-warming-20261008/delivery-amendment-1559206352956432395/validation.json",
       "contract_path": "/root/mgs-agent/data/adspower-warming-20261008/contract.json",
       "support_script": "/root/mgs-agent/scripts/mgs-adspower-warming-support.py",
       "validation_path": "/root/mgs-agent/data/adspower-warming-20261008/validation.json",
