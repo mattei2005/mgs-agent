@@ -1393,12 +1393,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G006-C41-C100-1558134300325716050",
-      "next_step": "Pre-read da conta e alvo; materializar somente pacotes tecnicos de tracking com posts preservados, anexar aos mesmos anuncios, renomear a mesma campanha e comparar readback integral",
+      "next_step": "Nenhum write pendente; nao repetir criacao ou attach. Meta processa automaticamente os tres anuncios ACTIVE configurados. Em consulta futura reler IN_PROCESS/revisao sem alterar status.",
       "objective": "Corrigir nome e tracking da C41 de 10/10 para C100 sem alterar restante nem C41 historica",
-      "source": "data/ares/meta-ads/audit/shein/yolo-g006-c41-to-c100-1558134300325716050/",
-      "state": "preflight_complete_link_preserving_existing_posts_validated",
+      "source": "data/ares/meta-ads/audit/shein/yolo-g006-c41-to-c100-1558134300325716050/receipt.json",
+      "state": "completed_name_and_effective_paid_link_corrected_posts_and_configuration_preserved_meta_processing",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-10-12T05:02:20+00:00"
+      "updated_at": "2026-10-12T05:17:23+00:00"
     },
     {
       "agent": "zeus",
@@ -5652,5 +5652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T05:02:20+00:00"
+  "updated_at": "2026-10-12T05:17:23+00:00"
 }
