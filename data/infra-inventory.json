@@ -831,7 +831,7 @@
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",
-      "status": "vps_completed_validated_ready_hermes",
+      "status": "hermes_preflight_validated_awaiting_exact_critical_confirmation",
       "thread_id": "1559192694096404537",
       "authority_message_ids": [
         "1559194678350585959",
@@ -841,13 +841,13 @@
       ],
       "checkpoint_id": "VPS-HERMES-20261012-1559192694096404537",
       "preflight_plan": "/root/mgs-agent/reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "vps_phase": "vps_completed_validated_ready_hermes",
-      "hermes_phase": "authorized_preflight_pending_after_vps_closure",
+      "vps_phase": "completed_validated_48_of_48",
+      "hermes_phase": "preflight validated; exact cutoff/bundled skills/activation Critical confirmation pending",
       "cleanup_phase": "not_executed_separate_exact_confirmation_required",
       "reboot_required": false,
       "production_mutations": 8,
       "report_infra_status": "posted_readback_verified",
-      "report_infra_message_id": "1559222748020998335",
+      "report_infra_message_id": "1559232988712149023",
       "report_infra_channel_id": "1498132022634483894",
       "skill_learning": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/controlled-package-and-node-tooling-update.md",
@@ -891,7 +891,7 @@
       },
       "pre_reboot_checks": 46,
       "continuation": "native same-session resume; consume post-boot result and validator exit before Hermes",
-      "updated_at": "2026-10-12T15:20:27.043641+00:00",
+      "updated_at": "2026-10-12T15:57:25.497546+00:00",
       "reboot_recovery": {
         "cause": "legacy JSON mirror stale active-turn token",
         "first_attempt_reboot_executed": false,
@@ -965,6 +965,31 @@
         "rollback_hashes": true,
         "boot_priority_errors_zero": true,
         "fresh_discord_3_profiles": true
+      },
+      "hermes_activation_executed": false,
+      "hermes_plan": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/critical-plan.json",
+      "hermes_preflight": {
+        "target": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e",
+        "pending_commits": 3945,
+        "current_baseline_passed": 1137,
+        "current_baseline_skipped": 14,
+        "current_readonly_guard_passed": 609,
+        "custom_paths": 100,
+        "overlaps": 49,
+        "textual_port_files": 15,
+        "evidence": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport",
+        "guard_false_positive_recovered": true,
+        "historical_before_image_authority": "1559206352956432395",
+        "historical_report_readback": {
+          "channel_id": "1498132022634483894",
+          "message_id": "1559207203913863252",
+          "readback": true
+        },
+        "changed_helper_hashes": {
+          "/root/mgs-agent/scripts/check-retired-host-references.py": "9e69178a6b1f4104546e29114383e608844c95f8701385c586b24f1bb7ae8041",
+          "/root/mgs-agent/tests/test_retired_host_reference_guard.py": "1aa26f6e9256b4ecfe8daa79cfff1c5df5f66d8c5af1be0a0bd4928f3bd6ddca",
+          "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/git-update-delta-and-patch-portability.md": "2e9e955b871ab112e1415b7d247a9a1283ead1b563753da3f69f248190c36912"
+        }
       }
     },
     {

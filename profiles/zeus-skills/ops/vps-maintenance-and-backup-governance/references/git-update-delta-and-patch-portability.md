@@ -175,6 +175,10 @@ Tie each recommendation to exact commit subjects or changed code, then rank by c
 5. Inspect provider conditions and defaults before translating code into MGS benefits. Keep direct OpenAI API reasoning behavior separate from ChatGPT/Codex OAuth; distinguish request-body compression from context/token reduction; label upstream token benchmarks as upstream measurements until tested against MGS prompts. Do not infer subscription-quota savings from reduced network bytes.
 6. Present each selected benefit as change → practical MGS effect → active after update, opt-in, or outside the operational surface. Before installation, use prospective language and state that no update was applied; source review proves availability, not deployment or realized performance.
 
+## Pre-port guard findings outside runtime code
+
+If the MGS guard flags a retired host inside a pre-change inventory snapshot, reconcile the producer authorization in audit/inventory/REPORT before classifying the finding. Inspect every matching record: a `removed_validated` firewall-history entry in a byte-frozen before-image is historical evidence, not a live connection target. Register only the exact path plus a shell-generated SHA-256 in the existing historical-evidence registry, prove a red regression first, and require modified snapshots, unregistered siblings and live profile surfaces to keep failing. Never exempt the parent directory or alter an unrelated producer/job as incidental Hermes maintenance. Preserve the original failing guard log and rerun the complete read-only guard before porting.
+
 ## Final recommendation gate
 
 A direct pull/update is inappropriate when any of these is true:
