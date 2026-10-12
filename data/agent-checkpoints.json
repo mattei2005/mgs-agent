@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Confirmar os oito pacotes nas versões exatas do preflight e restarts de Monarx/Tailscale/unattended-upgrades; sem reboot, exclusão ou ativação Hermes. Depois backup validado e execução VPS.",
-      "objective": "Atualizar VPS primeiro, validar integralmente, depois Hermes até main pelo plano controlado; backups e limpeza com gates próprios.",
+      "next_step": "Preparar rollback validado; aplicar lote confirmado pela mensagem 1559198227801317547. Reboot é pedido novo e requer gate adicional exato; não ativar Hermes antes do fechamento VPS.",
+      "objective": "VPS primeiro: oito pacotes e três serviços confirmados; reboot solicitado após pacotes. Hermes após novo boot validado.",
       "source": "reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "state": "awaiting_exact_critical_confirmation_vps",
+      "state": "vps_rollback_preparation_authorized",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T13:27:25+00:00"
+      "updated_at": "2026-10-12T13:42:21+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T13:27:25+00:00"
+  "updated_at": "2026-10-12T13:42:21+00:00"
 }
