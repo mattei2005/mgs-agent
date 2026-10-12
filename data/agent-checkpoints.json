@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Confirmação Critical 1559238059541659689 cobre corte 7cc3fb8cb55898747dd1dfa56fda3e16ebba028e, bundled skills necessárias preservando MGS/Google SA, ativação após provas/testes/smokes e restart Ares→Atena→Zeus. Criar snapshots nativos e candidato inativo. Sem reboot VPS/exclusão.",
-      "objective": "VPS concluída. Hermes main corte 7cc3fb8c confirmado por Rodolfo; port isolado e ativação gated com preservação integral MGS.",
-      "source": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/critical-plan.json",
-      "state": "hermes_exact_cutoff_confirmed_backup_and_semantic_port",
+      "next_step": "Após resposta entregue e turns canônicos inativos, activation.py troca launcher e executa finalizer seguro Ares→Atena→Zeus com rollback. Na retomada, reconciliar activation-result.json/finalizer antes de qualquer ação; finalizar smokes/guard/invariantes/APT fresco/inventário/audit/Git/REPORT-INFRA e selos. Target 7cc3fb8c, port e6ad5053. Não repetir VPS/port/sync. Root sem auth pré-existente; 20 commits posteriores ao corte observados e fora deste ciclo.",
+      "objective": "VPS concluída; Hermes no corte confirmado 7cc3fb8c portado e validado, pronto para ativação segura sem exclusões.",
+      "source": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/deployment-manifest.json",
+      "state": "hermes_candidate_validated_activation_handoff",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T16:16:23+00:00"
+      "updated_at": "2026-10-12T17:47:02+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T16:16:23+00:00"
+  "updated_at": "2026-10-12T17:47:02+00:00"
 }
