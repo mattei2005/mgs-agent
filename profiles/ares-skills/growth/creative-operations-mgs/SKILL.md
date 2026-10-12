@@ -33,7 +33,7 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 - **Vídeo, referência e backend gates** → `references/route-pack-05.md`
 - **Transição Creative Ops → Campaign Ops, reserva e QA** → `references/route-pack-06.md`
 - **Identidade Drive × Meta, download do tratado e reserva de gestor** → `references/drive-meta-asset-identity-and-manager-reservation.md`
-- **Lote misto IMG/VID em UPLOAD MANUAL** → `references/mixed-media-drive-intake-ready-legacy.md`
+- **Lote IMG, VID ou misto em UPLOAD MANUAL, incluindo execução resumível** → `references/mixed-media-drive-intake-ready-legacy.md`
 - **Asset tecnicamente inválido/branco em UPLOAD MANUAL** → `references/upload-manual-technical-rejection-gate.md`
 - **Renomeação segura Drive + local + inventário, com rollback** → `references/safe-rename-and-rollback.md`
 
@@ -55,6 +55,7 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Entrada canônica: `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; `UPLOAD_CANVAS` é apenas histórico e não deve ser recriada.
 - `GEIZIAN` contém cópias de conveniência para upload do gestor e fica fora do pool/inventário canônico.
 - `LIBRARY META` contém referências; nunca é fonte automática de asset final.
+- Persistir o plano completo de um lote antes do primeiro write e retomar pelos mesmos IDs, hashes e nomes reservados; uma interrupção não autoriza recalcular variantes nem repetir uploads já confirmados. Receita e gates: `references/mixed-media-drive-intake-ready-legacy.md`.
 - `P_ORIENT` final aceita somente `PV`, `NV`, `PH`, `NH`; square/feed 1:1 usa `PH/NH`.
 - Para país BR, “Português” sem qualificador usa `LANG=BR`; `LANG=PT` exige português de Portugal explícito.
 - Antes de mudar regras, scripts ou estrutura do Drive, apresentar o plano exato e obter aprovação. Se Rodolfo declarar sua auditoria manual do Drive como final, não aplicar limpeza automática sobre ela.

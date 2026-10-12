@@ -1,6 +1,6 @@
 # Mixed-media Drive intake → READY + LEGACY
 
-Use when an authorized request identifies country, vertical and language and asks Ares to apply rules to a mixed image/video batch in `UPLOAD MANUAL`.
+Use when an authorized request identifies country, vertical and language and asks Ares to apply rules to an image-only, video-only or mixed batch in `UPLOAD MANUAL`.
 
 ## Durable execution pattern
 
@@ -17,8 +17,11 @@ Use when an authorized request identifies country, vertical and language and ask
    - one labeled image contact sheet;
    - for each video, a labeled strip with frames near 20%, 50% and 80%; inspect a final frame separately if the dominant claim remains unclear.
 4. Classify each asset from visible evidence: `IMG|VID`, dominant `ANGLE`, `PV|NV|PH|NH`, placement and exact operation code. Square/feed 1:1 uses `PH|NH` for final naming. For Brasil + CAR + Português without Portugal context, use `CAR_BR_BR`; use `PT` only when Portuguese-Portugal is explicit.
+   - Keep a static promotional card exported as a valid MP4 under `VID`, even when the filename contains `IMAGEM`; repeated frames do not make a decoded video an image or a technical rejection.
+   - Ask visual review for one compact line per numbered asset: exact headline, product, visible language, actual human/body parts and blank/corrupt result. Enlarge an individual frame when text is uncertain; do not force identical claims across a product group because filenames can describe the same product while visible headlines differ.
 5. Before assigning variants, reconcile each source against the existing lineage inventory and live Drive state, then list live READY filenames and calculate the next numeric variant per exact `(FORMAT, ANGLE, P_ORIENT)` group. Use three digits and preserve the real extension. If the exact group has no prior READY asset, start at `001`; an entirely empty READY folder is valid and is not a blocker.
-   - On resume, seed the occupied-name set with live READY, canonical inventory and every filename already reserved in the persisted execution report, including items not yet uploaded. Filter null filename values before regex parsing. Assert final filename uniqueness in addition to Drive-ID uniqueness; otherwise a pre-upload reservation can be reused accidentally after restart.
+   - Before the first write, freeze the complete per-source plan with `source_drive_id`, exact source filename, RAW/clean hashes, final filename, variant and duplicate disposition. Persist each returned destination ID and each destination/LEGACY/inventory verification separately, so an interruption exposes the precise missing layer.
+   - On resume, load frozen assignments first and verify that source/clean hashes still match; do not derive new names from the now-expanded READY inventory or reclassify a completed source as its own duplicate. Seed the occupied-name set with live READY, canonical inventory and every filename already reserved in the persisted plan, including items not yet uploaded. Filter null filename values before regex parsing. Assert final filename uniqueness in addition to Drive-ID uniqueness; otherwise a pre-upload reservation can be reused accidentally after restart.
    - When parsing sanitizer output programmatically, invoke `verify <path> --json`; plain `verify` returns human-readable text, not JSON. Check the process result and `clean=true` before proceeding.
    - Compute the downloaded RAW SHA-256 and compare it with existing `original_checksum` and `clean_checksum` values before creating a new variant. Use perceptual fingerprints as supporting evidence, not as a substitute for an available exact checksum.
    - An equal filename is not proof of duplication: managers can export different creatives under the same Canva-style name. If the checksum/content differs, keep it as a distinct lineage and record the filename collision in notes. If the exact checksum matches an existing lineage, do not create an independent candidate or consume a new variant; attach the re-upload Drive ID to the existing lineage, validate the existing READY asset, and preserve/move the re-upload to the matching LEGACY parent.
@@ -43,6 +46,19 @@ Nome original  →  Nome final em READY
 ```
 
 For large batches, split the map into `IMG` and `VID`, but do not replace the per-file mapping with only a filename range. This response map is mandatory because it is the human lookup key for finding the preserved original in `99_LEGACY`.
+
+## Running a resumable batch efficiently
+
+1. Prefer the canonical executor and current route over copying a historical task runner. If a task-local adapter is necessary, inspect and parameterize its input manifest, operation, thread, expected count, classification source and output/work directories; remove obsolete embedded classification dictionaries because later assignments can silently mask stale code.
+2. Confirm that dry-run performs only reads and local preparation. Resolve existing canonical READY/LEGACY folders without `ensure_path` during dry-run; folder creation is an external write even when no media is uploaded.
+3. Reuse downloaded RAW files and verified clean files across visual review, planning and execution. Validate size/hash before reuse, and keep transient media in the active profile scratch workspace; repeated downloads and sanitization waste batch time without strengthening lineage.
+4. Run a long bounded intake through a tracked background terminal process when it may outlast a foreground tool call. Consume its completion in the same conversation with `process_manage(action='wait', session_id=...)`; do not introduce cron or an agent handoff for routine batch completion. Treat a wait timeout as an observation boundary, not proof that the runner stopped.
+5. If execution is interrupted, inspect runner liveness and the per-item state before launching anything else. Resume only missing writes from the frozen plan; verification of completed items may be repeated without creating another asset.
+6. Do not let generic HTTP retries replay a non-idempotent upload POST. After an uncertain result, read back persisted destination IDs or reconcile the reserved exact filename with downloaded clean SHA and metadata before adopting the target or retrying the missing upload. Filename equality alone is not sufficient evidence.
+7. Paginate every READY/LEGACY listing used for variant allocation, name adoption or final reconciliation, not merely the final audit; a truncated first page can hide a collision before write.
+8. Independently verify every source/destination ID, original/final name, parent, size/hash, `clean=true`, inventory lineage and reservation. Re-scan intake recursively, then remove all task-local RAW, clean, readback and visual-review media only after verification passes; retain compact manifests and audit evidence.
+
+Acceptance checks for a runner: a dry-run creates no remote folders/assets; a resumed partial batch retains the same names and destination IDs; a fully completed replay creates no new assets; pagination does not omit occupied names; uncertain uploads are reconciled before retry; final unique lineage counts match the frozen manifest.
 
 ## Failure discipline
 
