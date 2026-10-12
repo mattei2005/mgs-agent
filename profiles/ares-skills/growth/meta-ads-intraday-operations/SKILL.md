@@ -96,6 +96,16 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Alteração de cron exige readback `enabled/state/schedule/script/deliver/no_agent` e REPORT-INFRA.
 - Cutover de credencial exige percorrer a cadeia completa `job → wrapper → módulo → account/operation contract → item do cofre → cache`. `last_status=ok` não prova uso do token novo quando a credencial antiga ainda existe, pois um hardcode residual pode manter o job verde. Validar cada consumidor ativo por import/readback do item, remover nomes antigos dos caches e executar dry-run live sem postagem/write antes de aposentar o rollback.
 
+## Pausa imediata e ativação pontual agendada
+
+1. Resolva conta e campanhas pelo contrato da conversa e confirme IDs, moeda, timezone e estado pela Meta. Interprete “meia-noite” como a próxima ocorrência de `00:00` no fuso operacional confirmado; informe a data civil explicitamente na conclusão.
+2. Trate o pedido como **status-only** quando não houver outra mudança expressa: preserve o budget live de cada campanha, filhos, nome/data, tracking, mídia, copy e ciclo D1. Reativação não autoriza reinício operacional de D1 nem aplicação de um budget padrão. Valide que os filhos permitem a ativação; se estiverem pausados, não os altere implicitamente.
+3. Faça o preflight mínimo e persista o request antes do write. Execute a pausa imediata solicitada e confirme-a por GET antes de dedicar tempo à auditoria global de agenda; discovery de scheduler não deve prolongar gasto evitável. Campanha já pausada não recebe POST redundante.
+4. Congele o estado preparado por ID, incluindo budget individual, hierarquia, campos materiais e `updated_time`; confirme estabilidade com uma segunda leitura bounded. Reutilize helpers de transporte/readiness validados, sem herdar seus IDs, budgets ou ações históricas. Não reescreva `start_time` de conjunto já iniciado para simular reativação.
+5. Audite a agenda global, faça backup e registre um one-shot determinístico. Se necessário, inicie fisicamente pouco antes do alvo e aguarde dentro do runner, sem adquirir a lane durante a espera. Escolha a menor contenção **dentro da janela compatível** e reserve timeout para espera, lock, API e readback. Não retome crons pausados como efeito lateral.
+6. Teste bloqueio antecipado sem chamadas Meta, rejeição de drift de budget/hierarquia e replay concluído sem write. No horário alvo, adquira a lane account-scoped, faça novo pre-read, persista `in_flight`, aplique somente `status=ACTIVE` e confirme cada alvo por GET. Reconcilie tentativas ambíguas pelos IDs antes de qualquer retry; conclua somente quando todos os alvos estiverem confirmados.
+7. Leia de volta o job exato, incluindo horário com offset, `enabled`, `no_agent`, script e destino/thread; vincule-o ao request e repita a auditoria excluindo somente esse próprio job. Registre checkpoint, inventário e REPORT-INFRA. Na conversa, diferencie **pausada agora**, **ativação agendada** e **ativação confirmada**; use bullets curtos com data, fuso e budgets preservados, sem IDs internos.
+
 ## Onboarding de nova operação
 
 1. Validar solicitante e autoridade.
