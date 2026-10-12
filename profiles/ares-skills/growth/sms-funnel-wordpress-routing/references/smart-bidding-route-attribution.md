@@ -104,12 +104,16 @@ When asked whether the new SMS UTMs are already showing revenue, answer from one
 - Request `currency='BRL'` explicitly when joining against BRL SMS costs. The SMS response may omit a currency field; validate the dashboard currency and, if uncertain, compare a same-date USD query instead of assuming that the default `currency=null` means USD.
 - For a D01-only profitability report, join exact approved `-d01` campaign keys to stage-1 sequence costs. Keep residual D02/D03 revenue and legacy buckets separate even when their new sends are zero. The official account total can include CHAT or other automations outside the 36 Quiz routes and must not replace their scoped cost.
 
-Use SMS Funnel sequence analytics as the cost source:
+Choose the send/cost surface before the join; use `sms-funnel-reporting` for the governing source hierarchy and dashboard alignment guard. Official account quantity/consumption and exact route allocation are distinct claims.
+
+Use per-campaign sequence analytics as an attribution diagnostic:
 
 ```text
 GET /api/analytics/funnel-performance/{campaign_id}/sequences
-cost = sms_sent × validated sms_unit_cost
+cost = verified_scoped_sends × validated sms_unit_cost
 ```
+
+Validate analytics against complete retained `sent=true` detail grouped by exact sequence ID before using it as a route denominator; analytics can omit billable sends. When complete ID/date-validated detail exists, use that exact scoped count for the route CTR/ROI and preserve the official account dashboard quantity separately. Never replace an official account total with partial route analytics or distribute its residual difference across vehicles/managers. Missing historical detail does not authorize calling an undercounted route aggregate exact.
 
 Do not substitute list membership for sends. A lead that receives three stages creates three billable sends. Do not rely on Smart Bidding `TOTAL_MESSAGES`, `SENT` or `INVESTIMENT` unless a same-day reconciliation proves those fields are populated and equal the provider source; fields can exist in the schema while carrying zero.
 
@@ -137,9 +141,18 @@ ROI    = (net_revenue - sms_cost) / sms_cost
 
 Guard division by zero. State timezone, currency, unit cost, revenue source and cutover/legacy limitation in every report.
 
+### Multi-period extraction and copy-effect comparison
+
+1. Materialize each requested interval in the common source calendar. Query a completed month in full; cap the current month at the live snapshot and label it partial. Probe retained `/messages` coverage at the beginning, middle and end before starting a long scan. Nonzero official quantities with absent detail do not permit a zero-send or exact vehicle result.
+2. Retrieve historical campaign-key membership from the attribution contract when the interval spans a UTM cutover. Do not apply current sequence URLs retroactively or use only the newly tagged portion as the full-month numerator. If old keys collide across vehicles/stages and no immutable history resolves them, preserve the verified account total and mark the affected route CTR/ROI `N/D`; specify the missing sequence/day and historical-UTM export rather than substituting partial analytics.
+3. Fetch multi-day Smart Bidding data in the existing authenticated browser context using `initialDate=FIRST_DAY+'T12:00:00.000Z'`, `finalDate=LAST_DAY+'T12:00:00.000Z'`, the exact publisher and `currency='BRL'`. Validate every returned civil date and company/publisher/domain, reject conflicting duplicate source PKs, and collect both `SESSIONS` and `NET_REVENUE` in the same read so adding ROI does not require a separate attribution workflow. Read closed periods twice and require stable accepted aggregates; record the query timestamp separately from the send cutoff for partial periods.
+4. Checkpoint send extraction after each completed closed-day batch. Resume only missing dates/pages after interruption. Reuse a validated closed-day aggregate only when its exact sequence-to-UTM mapping, full-day boundary, complete unique-ID coverage and stability evidence match the requested scope; refresh revenue/session reads independently. Re-read today's sends with a frozen cutoff and keep only aggregate counts, never customer message rows. Validate the collected date set and expected automation-by-day cardinality in code before summing.
+5. Recover the message cutover marker and the baseline window already agreed with the operator. Exclude the mixed-copy transition day; report complete post-change days separately from today's partial snapshot. Add a matching-weekday comparison when calendar mix may explain a change, and report disagreements between that check and the multi-day baseline instead of choosing only the comparison that supports a hypothesis.
+6. Compute vehicle and period CTR from summed sessions divided by summed sends, and ROI from summed net revenue and summed cost. Derive percentage-point and relative changes from unrounded ratios; zero-send groups are undefined, not zero-percent. Validate that comparing a baseline to itself gives zero change. Treat one post-change closed day as preliminary and separate engagement movement from monetization movement; neither a lower CTR nor a higher ROI alone proves an effect caused by the copy.
+
 ## 6. Report shape
 
-Render a compact aligned block, then manager and route totals:
+Follow the requested roll-up. For Carro/Moto-only output, omit manager rows and render `Veículo`, `Disparos`, `Sessions`, `CTR` and `ROI`, followed by cost and net revenue evidence. Keep manager/stage keys internally for reconciliation. For an explicitly requested manager/route breakdown, use a compact aligned block and its corresponding totals:
 
 ```text
 Gestor  Veículo  Rota  Enviados  Custo    Receita líquida  Lucro   ROAS
@@ -148,7 +161,7 @@ G001    Carro     R1    ...       R$ ...   R$ ...            R$ ...  ...
 
 Reconcile these totals before publishing:
 
-- row sends and cost equal the SMS Funnel sequence sum;
+- row sends and cost equal the verified scoped SMS Funnel counts and `sends × live unit cost`; preserve official account totals separately;
 - row revenue equals the Smart Bidding `NET_REVENUE` sum for accepted campaign keys;
 - manager totals equal their vehicle/stage rows;
 - route totals equal their manager/vehicle rows;

@@ -34,6 +34,8 @@ Do not configure SMS Funnel, WordPress, quiz code or production webhooks without
 - Separate facts proved by site/SMS Funnel readback from values merely stated in conversation. Never invent a list, webhook, delivery or successful SMS.
 - When the operator points to an earlier manager report, reproduce its evidence method rather than only its layout: count live `sent=true` message rows and map `sequence_id` to the owning automation/list/manager.
 - Render manager reports as one compact aligned code block (`Gestor`, `Envios`, `Custo`), followed by total, period, São Paulo snapshot time and a short validation list. State that the current day is partial and quantify live header drift when sends continued during extraction.
+- Honor the requested reporting roll-up: for Carro/Moto-only reports, aggregate across managers and omit manager rows while retaining their identities internally for the exact join. Preserve the prior stage scope, include a requested ROI column, and label SMS-only ROI separately from Meta acquisition costs.
+- When evaluating a message change, lead with the measured before/after comparison, exclude the mixed-copy transition day, and separate closed days from partial snapshots. Compare matching weekdays as a sensitivity check; a monthly average or one post-change day does not establish that the copy caused the change.
 - When Rodolfo asks to move “só o front-end” next to another plugin, change only the WordPress admin navigation. Preserve plugin backend, options, runtime hooks and payloads.
 
 ## Functional model
@@ -191,7 +193,7 @@ For authenticated list, automation, sequence and cleanup readback—or any daily
 - [ ] Exact site, every stage-specific Carro/Moto URL, manager namespaces, list names, webhooks, UTMs and final step resolved
 - [ ] Every link omits `vehicle`, loads and preserves its exact pathname, `utm_medium`, `step` and other query values
 - [ ] `utm_medium` remains the literal G attribution key used by the site/GAM and never carries vehicle identity
-- [ ] When route-level profitability is requested, live Smart Bidding schema is inspected and every manager + vehicle + originating SMS stage has a collision-free `utm_campaign`; SMS Funnel sequence analytics remains the cost source
+- [ ] When route-level profitability is requested, live Smart Bidding schema and historical UTM membership support the requested manager/vehicle/stage split; send/cost evidence follows `sms-funnel-reporting`, with complete scoped detail validated separately from the official account total
 - [ ] SMS Funnel appends the phone parameter in every automation
 - [ ] Plugin starts inert with empty endpoints for unconfigured vehicle/manager routes
 - [ ] Route map uses `exact stage URL-derived vehicle + utm_medium + step` and points to the next automation list
