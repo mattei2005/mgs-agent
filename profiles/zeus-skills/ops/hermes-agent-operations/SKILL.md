@@ -35,7 +35,7 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 - For MGS operators, preserve a natural question-and-answer flow: explain the operational judgment in prose and ask a normal chat question only when a real blocker remains. Do not use `clarify` choice boxes/polls merely to present recommendations or low-stakes options. When Rodolfo explicitly asks for an authorized non-critical action, execute it rather than inserting a second technical approval layer; the MGS Critical Subset in `AGENT.md` remains unchanged.
 - Hermes documentation is authoritative for current product behavior. Local runtime/code is authoritative for MGS patches and the deployed version.
 - Never expose tokens, OAuth material, API keys, or credential values.
-- Separate capability, configuration, credential presence, and real smoke-test success.
+- In capability and update-benefit explanations for Rodolfo, group changes by practical MGS outcome, not by a raw changelog. For each group, explain what changed, its effect on Zeus/Atena/Ares, the verified current MGS state, and any adoption requirement, cost or risk. Distinguish native features from third-party plugins, product availability from installation/configuration/real use, and newly shipped capability from an existing feature that merely improved. Treat an explanatory request as read-only, not permission to enable a plugin or change an operating model; use `references/hermes-update-pre-update-review.md` for the evidence workflow.
 - Treat design, approval, implementation, deployment, and active runtime validation as distinct states. An approved design is not an active protection until the code exists, is deployed in the target runtime, and a readback or behavior test proves that the protection is effective.
 - User-requested state changes follow `AGENT.md`; Critical Subset still requires double-confirmation.
 - Never restart Zeus or another MGS gateway from an active foreground tool chain. Use the safe detached finalizer and Zeus last.
@@ -67,7 +67,8 @@ For a combined VPS + Hermes request, first load `vps-maintenance-and-backup-gove
 
 Primary references:
 
-- Read-only review or standard update workflow → `references/hermes-update-core.md`
+- Read-only version review, applied-commit benefits, optional plugins, or enterprise capability opportunities → `references/hermes-update-pre-update-review.md`
+- Standard update execution workflow → `references/hermes-update-core.md`
 - Large customization port, patch-inventory drift, broad-baseline reconciliation, or staged no-restart preservation proof → `references/hermes-update-preport-baseline-and-patch-coverage.md`
 - Large port where a real `hermes -z` smoke prints the answer but exits abnormally, Honcho workers survive one-shot teardown, or the restart snapshot must expand with the patch → `references/hermes-update-2026-07-19-port-lifecycle.md`
 - Failure, drift, ENOSPC, restart collision, stale cache, rollback, or unusual updater behavior → `references/hermes-update-pitfalls.md`
