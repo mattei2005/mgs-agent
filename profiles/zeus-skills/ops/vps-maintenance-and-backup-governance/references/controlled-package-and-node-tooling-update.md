@@ -19,6 +19,15 @@ apt-get -s install --only-upgrade package=exact-candidate
 
 Require the expected package count, zero removals, and no unexpected dependencies. Any candidate or transaction drift changes scope and stops execution.
 
+### Bounded preflight evidence collection
+
+1. Capture `apt-get -s upgrade` and `apt-get -s full-upgrade` with `subprocess.run(..., capture_output=True, text=True)`; check each return code before parsing. Return the transaction summary and rows matching `^(Inst |Remv |Conf |[0-9]+ upgraded)`, not the full automatic-removal advisory. Keep `Remv` rows visible so filtering cannot conceal destructive scope.
+2. Query `apt-cache policy` only for the selected packages and retain installed/candidate versions, selected pocket and phasing. Treat a phased package as actionable only when the ordinary upgrade simulation already selects it on this host; an explicit version install alone can override the deferral and is not proof of routine eligibility.
+3. Parse `pro status --format json` into `attached` and the `name`/`status` of ESM Apps, ESM Infra and Livepatch; omit account, contract and machine identifiers. Parse `pro security-status --format json` into the relevant counters under `summary`, and reduce `canonical-livepatch status --format json` to running kernel, support and patch state. This proves coverage without exposing unrelated identity metadata.
+4. Select canonical inventory rows by known stable IDs. If an ID is unknown, return only candidate IDs/types first, then retrieve the chosen row with an explicit field allowlist; do not print every record whose title broadly matches VPS, maintenance or backup, because historical receipts can dominate the output without answering the live gate.
+5. Freeze service restarts alongside the package transaction: collect `needrestart -b`, resolve affected units, record protected gateway PIDs and read the existing needrestart exclusion configuration. Present the exact restart unit names and any network reconnection impact in the same confirmation question; do not promise a restart-free package update when package scripts may restart their own daemon.
+6. Persist the compact plan/checkpoint with installation, restart, reboot, Hermes activation and deletion states explicitly separated. A completed preflight is evidence for a confirmation gate, not a completed update or permission to execute the critical transaction.
+
 A provider dashboard or control-plane boolean such as `securityUpdate=true` is not a package-security verdict. Freeze `apt-cache policy`, the repository pocket, the source-package changelog, and the matching Ubuntu Security Notice/OVAL result. Classify an update from that evidence: when the candidate is only a normal `jammy-updates`/equivalent bugfix and no advisory maps to it, report it as standard maintenance even if the package name contains words such as `audit` or `security`.
 
 For npm, capture current Node/npm/Corepack **and** the npm `package.json` version, then query the exact target metadata:
