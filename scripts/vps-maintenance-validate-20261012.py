@@ -181,7 +181,13 @@ def self_test():
     p=root/'inventory.json';seed={'runtime_artifacts':[{'id':IDENT,'keep':'unchanged'},{'id':'unrelated','protected':True}],'system_packages':[]};atomic(p,seed)
     inventory_update(p,'fixture_pass',{'overall':True,'checks':{'fixture':True},'kernel':'test','boot_id':'test'})
     d=json.loads(p.read_text());assert d['runtime_artifacts'][1]==seed['runtime_artifacts'][1] and d['runtime_artifacts'][0]['keep']=='unchanged'
-    assert d['runtime_artifacts'][0]['status']=='fixture_pass';print('SELF_TEST_PASS atomic/readback/targeted inventory preservation; artifact '+str(root));return 0
+    assert d['runtime_artifacts'][0]['status']=='fixture_pass'
+    previous=ROOT
+    try:
+        globals()['ROOT']=root;seal_final_evidence()
+        manifest=json.loads((root/'evidence-manifest.json').read_text());assert manifest['component_count']==1
+    finally:globals()['ROOT']=previous
+    print('SELF_TEST_PASS atomic/readback/targeted inventory preservation/two-layer evidence seal; artifact '+str(root));return 0
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--post-boot',action='store_true');p.add_argument('--self-test',action='store_true');a=p.parse_args()

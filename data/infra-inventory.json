@@ -817,22 +817,23 @@
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",
-      "status": "packages_completed_validated_awaiting_reboot_confirmation",
+      "status": "reboot_prepared_confirmed_pending_detached_dispatch",
       "thread_id": "1559192694096404537",
       "authority_message_ids": [
         "1559194678350585959",
         "1559194715155595337",
-        "1559198227801317547"
+        "1559198227801317547",
+        "1559210496253624382"
       ],
       "checkpoint_id": "VPS-HERMES-20261012-1559192694096404537",
       "preflight_plan": "/root/mgs-agent/reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "vps_phase": "packages_completed_validated; new owner-requested reboot pending exact Critical confirmation",
+      "vps_phase": "packages_validated; reboot confirmed, prepared but not executed",
       "hermes_phase": "deferred_until_vps_completed_validated",
       "cleanup_phase": "not_executed_separate_exact_confirmation_required",
       "reboot_required": false,
       "production_mutations": 8,
       "report_infra_status": "posted_readback_verified",
-      "report_infra_message_id": "1559207012947067014",
+      "report_infra_message_id": "1559214390102728775",
       "report_infra_channel_id": "1498132022634483894",
       "skill_learning": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/controlled-package-and-node-tooling-update.md",
@@ -852,8 +853,31 @@
         "updated_at": "2026-10-12T14:11:15.270004+00:00"
       },
       "reboot_requested": true,
-      "reboot_confirmed": false,
-      "reboot_executed": false
+      "reboot_confirmed": true,
+      "reboot_executed": false,
+      "reboot_authority_message_id": "1559210496253624382",
+      "validator": "/root/mgs-agent/scripts/vps-maintenance-validate-20261012.py",
+      "validator_unit": "mgs-vps-maintenance-1559192694096404537.service",
+      "unit_retention": "retained_disabled_after_validation; no deletion authorized",
+      "source_files": [
+        "/root/mgs-agent/scripts/vps-maintenance-validate-20261012.py",
+        "/etc/systemd/system/mgs-vps-maintenance-1559192694096404537.service",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-finalizer.py",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/native-resume.py",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-prestate.json",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/REBOOT-SNAPSHOT.sha256"
+      ],
+      "source_hashes": {
+        "/root/mgs-agent/scripts/vps-maintenance-validate-20261012.py": "800631e21c8a9e616358fea6f6f017d96403705025c07735a1bc11661feb80ac",
+        "/etc/systemd/system/mgs-vps-maintenance-1559192694096404537.service": "96b6c6180efe7d9d8fbbdaeee871794076acc9bf1753c11b5d1f48606b49c5a6",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-finalizer.py": "edd9a9f736a0e5af071d63ef7ab52f51d03fd3637150aa32333ca17bedc7923a",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/native-resume.py": "a8eeed7ec7524d7a6dd37e924fa212f4da63b87493334f2dc5b5be8b6ab0382b",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-prestate.json": "6bd089ed04a656aa684f06835ca33bde6b1a3f944459e8c0297f8aca8e5f124b",
+        "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/REBOOT-SNAPSHOT.sha256": "808e3a2fe93cea4369824ddc870afcb6a8bfbb35db25b57042e8a274df4acfe5"
+      },
+      "pre_reboot_checks": 46,
+      "continuation": "native same-session resume; consume post-boot result and validator exit before Hermes",
+      "updated_at": "2026-10-12T14:41:55.722200+00:00"
     },
     {
       "id": "ZEUS-SHEIN-GEIZIAN-AUDIT-1558231569976787076",
