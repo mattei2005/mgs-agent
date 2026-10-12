@@ -745,6 +745,22 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "VPS-HERMES-20261012-1559192694096404537",
+      "agent": "zeus",
+      "type": "vps_hermes_controlled_update",
+      "status": "awaiting_exact_critical_confirmation_vps",
+      "thread_id": "1559192694096404537",
+      "authority_message_ids": ["1559194678350585959", "1559194715155595337"],
+      "checkpoint_id": "VPS-HERMES-20261012-1559192694096404537",
+      "preflight_plan": "/root/mgs-agent/reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
+      "vps_phase": "preflight_validated_8_packages_pending",
+      "hermes_phase": "deferred_until_vps_completed_validated",
+      "cleanup_phase": "not_executed_separate_exact_confirmation_required",
+      "reboot_required": false,
+      "production_mutations": 0,
+      "report_infra_status": "pending"
+    },
+    {
       "id": "ZEUS-SHEIN-GEIZIAN-AUDIT-1558231569976787076",
       "agent": "zeus",
       "authority_message_id": "1558225355930861649",
