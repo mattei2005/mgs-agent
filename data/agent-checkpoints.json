@@ -1833,12 +1833,12 @@
     {
       "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
-      "next_step": "Executor aguarda handoff final entregue e turno encerrado; executa um reboot. Na retomada nativa, consumir post-boot-result.json e aguardar validador externo completo (governance_complete e overall true) antes de preflight Hermes; nunca repetir instalação/reboot já executados. Sem exclusão autorizada.",
-      "objective": "Oito pacotes VPS atualizados; reboot confirmado em 1559210496253624382; Hermes main após VPS integralmente validada.",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-prestate.json",
-      "state": "reboot_prepared_confirmed_pending_detached_dispatch",
+      "next_step": "Retry1 usa SQLite gateway_routing canônico e aguarda novo handoff final + turno encerrado. Após reboot, consumir post-boot-result.json, confirmar validador exited success, governance_complete, checks e selo de evidência; só depois iniciar preflight Hermes main. Não repetir pacotes e não rebootar novamente se novo boot já foi observado.",
+      "objective": "VPS pacotes concluídos; reboot confirmado; primeira tentativa bloqueada por leitura de mirror legado, corrigida sem ampliar escopo.",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-finalizer-retry1.py",
+      "state": "reboot_retry1_prepared_confirmed",
       "thread_id": "1559192694096404537",
-      "updated_at": "2026-10-12T14:38:10+00:00"
+      "updated_at": "2026-10-12T15:14:05+00:00"
     },
     {
       "agent": "zeus",
@@ -5662,5 +5662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T14:38:10+00:00"
+  "updated_at": "2026-10-12T15:14:05+00:00"
 }

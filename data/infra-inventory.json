@@ -817,7 +817,7 @@
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",
-      "status": "reboot_prepared_confirmed_pending_detached_dispatch",
+      "status": "reboot_retry1_prepared_confirmed",
       "thread_id": "1559192694096404537",
       "authority_message_ids": [
         "1559194678350585959",
@@ -827,13 +827,13 @@
       ],
       "checkpoint_id": "VPS-HERMES-20261012-1559192694096404537",
       "preflight_plan": "/root/mgs-agent/reports/vps-updates/20261012-1559192694096404537/preflight-plan.json",
-      "vps_phase": "packages_validated; reboot confirmed, prepared but not executed",
+      "vps_phase": "packages_validated; first reboot attempt withheld; primary routing gate fixed; retry prepared",
       "hermes_phase": "deferred_until_vps_completed_validated",
       "cleanup_phase": "not_executed_separate_exact_confirmation_required",
       "reboot_required": false,
       "production_mutations": 8,
       "report_infra_status": "posted_readback_verified",
-      "report_infra_message_id": "1559214390102728775",
+      "report_infra_message_id": "1559222748020998335",
       "report_infra_channel_id": "1498132022634483894",
       "skill_learning": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/controlled-package-and-node-tooling-update.md",
@@ -877,7 +877,29 @@
       },
       "pre_reboot_checks": 46,
       "continuation": "native same-session resume; consume post-boot result and validator exit before Hermes",
-      "updated_at": "2026-10-12T14:41:55.722200+00:00"
+      "updated_at": "2026-10-12T15:15:05.107145+00:00",
+      "reboot_recovery": {
+        "cause": "legacy JSON mirror stale active-turn token",
+        "first_attempt_reboot_executed": false,
+        "handoff_delivery_verified": "1559215185724710933",
+        "primary_source": "profile state.db gateway_routing exact scope/key",
+        "regression_tests_passed": 3,
+        "same_scope_authority": "1559210496253624382",
+        "old_artifacts_preserved": true,
+        "retry_paths": [
+          "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-finalizer-retry1.py",
+          "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/native-resume-retry1.py",
+          "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/REBOOT-SNAPSHOT-retry1.sha256",
+          "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md"
+        ],
+        "retry_hashes": {
+          "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/reboot-finalizer-retry1.py": "5428ce6053b72b3594e8bfb7da50074f495dca309501babc7de4ec7d4a72c96b",
+          "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/native-resume-retry1.py": "077d9e83277b1fc8d4a6bc52a4ed72a74148788a2dfb40eabdd6f37818da3339",
+          "/root/.hermes/secure-backups/vps-maintenance/20261012-1559192694096404537/REBOOT-SNAPSHOT-retry1.sha256": "8a4d9b4ff5ed187c15db59a139adb5c6789b4ee8accfff89cfe6c4ef8717226a",
+          "/root/.hermes/profiles/zeus/skills/ops/vps-maintenance-and-backup-governance/references/durable-post-reboot-validator-pattern.md": "163e12496a29644925e92adbf5c36604c0d2f5d73caed9feb72a3443fae9a067"
+        },
+        "native_same_session_fixture_primary_verified": true
+      }
     },
     {
       "id": "ZEUS-SHEIN-GEIZIAN-AUDIT-1558231569976787076",
