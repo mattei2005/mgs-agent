@@ -396,12 +396,10 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Mainline cutoff port (2026-09-28): full reviewed MGS surface on
-# frozen origin/main ad2d4822 (the cutoff policy and start were explicitly
-# confirmed by Rodolfo after a bounded final fetch). This is the preferred
-# three-state artifact: reverse-check on the validated candidate, forward-apply
-# on the frozen clean target, and fallthrough to retained rollback runtimes.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-10-02-main-a510d6c6.patch"
+# Owner-confirmed main cutoff 7cc3fb8c: complete 101-path MGS port with
+# byte-identical clean-target reproduction, reverse-check and broad baseline.
+# Retained older runtimes remain read-only guardable through prior artifacts.
+PRIMARY_PATCH="mgs-runtime-customizations-2026-10-12-main-7cc3fb8c.patch"
 PRIMARY_PATCH_READY=0
 primary_patch_present() {
   local candidate_patch="${1:-$PRIMARY_PATCH}"
@@ -428,6 +426,7 @@ fi
 # Every retained rollback runtime must remain guardable without trying to apply
 # an unrelated historical patch. Newest retained surface wins.
 PRIOR_PRIMARY_PATCHES=(
+  "mgs-runtime-customizations-2026-10-02-main-a510d6c6.patch"
   "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
   "mgs-runtime-customizations-2026-09-24-main-ee5ee84a.patch"
   "mgs-runtime-customizations-2026-09-19-main-005c746d.patch"
