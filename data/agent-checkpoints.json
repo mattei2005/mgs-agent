@@ -1391,6 +1391,16 @@
       "updated_at": "2026-10-08T17:57:20+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-YOLO-G006-C41-C100-1558134300325716050",
+      "next_step": "Pre-read da conta e alvo; materializar somente pacotes tecnicos de tracking com posts preservados, anexar aos mesmos anuncios, renomear a mesma campanha e comparar readback integral",
+      "objective": "Corrigir nome e tracking da C41 de 10/10 para C100 sem alterar restante nem C41 historica",
+      "source": "data/ares/meta-ads/audit/shein/yolo-g006-c41-to-c100-1558134300325716050/",
+      "state": "preflight_complete_link_preserving_existing_posts_validated",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-12T05:02:20+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "DR-RESTORE-RECOVERY-1556244505953574952",
       "next_step": "Consumir executor; validar backup/restauração/cron/monitor; inventário, audit e REPORT-INFRA; final somente pelo resolvedor",
@@ -5642,5 +5652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T02:48:23+00:00"
+  "updated_at": "2026-10-12T05:02:20+00:00"
 }
