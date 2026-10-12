@@ -4023,12 +4023,12 @@
     {
       "agent": "ares",
       "id": "cpv13-c40-c41-activate-20261013-rodolfo",
-      "next_step": "Runner determinístico aguarda meia-noite; pre-read/lock e status ACTIVE com GET final. Drift/erro mantém recovery resumível e escalação.",
-      "objective": "Pausar C40 agora e ativar C40/C41 às 00:00 SP em 13/10, preservando budgets e demais campos",
+      "next_step": "One-shot existente ativa C40/C41 no nível campanha à meia-noite com pre-read, lock e GET final; não modificar D1, nomes, mídia, filhos ou tracking",
+      "objective": "Pausar C40 e ativar C40/C41 às 00:00 SP em 13/10; C41 ajustada para USD30/dia por pedido adicional de Rodolfo",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c40-c41-activate-20261013-rodolfo.json",
-      "state": "scheduled: meta confirmou c40/c41 paused; us$30/us$25 por dia preservados; one-shot enabled/no_agent e destino da thread conferidos",
+      "state": "scheduled: ambas paused com usd30/dia cada por get; orçamento c41 25→30 confirmado e baseline de ativação atualizada; mesmo cron e horário preservados",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-12T20:30:26+00:00"
+      "updated_at": "2026-10-12T20:59:28+00:00"
     },
     {
       "agent": "ares",
@@ -5682,5 +5682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T20:30:26+00:00"
+  "updated_at": "2026-10-12T20:59:28+00:00"
 }

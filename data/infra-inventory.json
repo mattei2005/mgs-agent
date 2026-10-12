@@ -43351,14 +43351,14 @@
       "authorized_by": "Rodolfo Mattei",
       "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c40-c41-activate-20261013-rodolfo.json",
       "script": "/root/.hermes/profiles/ares/scripts/cpv13-c40-c41-activate-20261013.py",
-      "script_sha256": "0c5e797e1c66c4e524dc7185bf8c87d267532fa2e063cb01103933977b3d374f",
+      "script_sha256": "f14cbc303806b0ce3ce19995d4fb612ebf5a6ab4f959a58ea35632d2ea2e46fa",
       "cron_job_id": "881759f4d3ef",
       "no_agent": true,
       "deliver": "origin",
       "enabled": true,
       "scheduler_run_at": "2026-10-12T22:59:00-04:00",
       "activation_at_sp": "2026-10-13T00:00:00-03:00",
-      "budget_write": false,
+      "budget_write": true,
       "operational_d1_reset": false,
       "live_meta_statuses": {
         "40": "PAUSED",
@@ -43366,11 +43366,12 @@
       },
       "budget_minor_preserved": {
         "40": 3000,
-        "41": 2500
+        "41": 3000
       },
       "global_schedule_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c40-c41-activate-20261013-rodolfo/schedule-resource-post-audit.json",
       "operational_collisions": 0,
-      "tests": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c40-c41-activate-20261013-rodolfo/test-results.json"
+      "tests": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c40-c41-activate-20261013-rodolfo/test-results.json",
+      "budget_amendment_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c40-c41-activate-20261013-rodolfo/c41-budget-30-amendment.json"
     }
   ],
   "profile_skill_references": [
