@@ -432,6 +432,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C08-2X-USD50-20261013",
+      "next_step": "Concluir proveniência first-delivery no mesmo request e readback final; não recriar objetos",
+      "objective": "Duplicar C08 duas vezes com USD50 por dia, início 13/10 00:00 São Paulo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c08-2x-usd50-midnight-20261013-rodolfo/request-state.json",
+      "state": "c46/c47 criadas e verificadas, native future active, usd50 cada, filhos active, 6 posts e 12 vídeos validados; enrollment pendente por chave de proveniência da allowlist",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-13T02:19:31+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-C08-C10-D1-20261006",
       "next_step": "One-shot 06/10 00:10 SP aplica ACTIVE no nível campanha com pre-read e GET final; falha escalada para infra com request resumível",
       "objective": "C08 C09 C10: USD30 cada e reativação 06/10 00:10 São Paulo como D1",
@@ -5682,5 +5692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-12T20:59:28+00:00"
+  "updated_at": "2026-10-13T02:19:31+00:00"
 }

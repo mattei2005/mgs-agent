@@ -916,7 +916,7 @@
   "campaign_numbering_policy": {
     "corrected_by": "Rodolfo Mattei",
     "corrected_at_sp": "2026-08-25T17:27:00-03:00",
-    "next_required_campaign_number": 47,
+    "next_required_campaign_number": 48,
     "live_readback_20260825_1713_sp": {
       "live_next_campaign_number": 23,
       "authorized_one_time_scope": [
@@ -1652,90 +1652,16 @@
           "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
         },
         "46": {
-          "campaign_id": "120251545171240632",
-          "cycle_start_date": "2026-10-09",
-          "source": "rodolfo_explicit_operational_d1_restart",
-          "request_id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-          "authorized_by": "Rodolfo Mattei",
-          "authorization_source": "discord:thread:1539832402744975450",
-          "status": "deleted_manual_20261010",
-          "actions_enabled": false,
-          "vehicle_type": "MOTO",
-          "initial_budget_usd": 10,
-          "planned_budget_usd_on_2026_09_06": 25,
-          "first_delivery_override": "immediate_start_no_reentry",
-          "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
-          "current_budget_usd": 58.06,
-          "planned_budget_usd": 25,
-          "pre_d1_delivery_excluded_from_d1": true,
-          "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
-          "d1_start_at_sp": "2026-10-09T13:43:10.175459-03:00",
-          "cycle_history": [
-            {
-              "superseded_by": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-              "record": {
-                "campaign_id": "120251081612670632",
-                "cycle_start_date": "2026-09-06",
-                "source": "campaign_engine_v3_live_readback",
-                "request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
-                "authorized_by": "Rodolfo Mattei",
-                "authorization_source": "discord:thread:1545818515032768593",
-                "status": "active_d1",
-                "actions_enabled": true,
-                "vehicle_type": "MOTO",
-                "initial_budget_usd": 10,
-                "planned_budget_usd_on_2026_09_06": 25,
-                "first_delivery_override": "immediate_start_no_reentry",
-                "d1_planned_start_at_sp": "2026-09-06T00:11:00-03:00",
-                "current_budget_usd": 25,
-                "planned_budget_usd": 25,
-                "pre_d1_delivery_excluded_from_d1": true,
-                "budget_transition_request_id": "cpv13-budget-c41-c46-to25-20260906-rodolfo",
-                "d1_start_at_sp": "2026-09-06T00:11:00-03:00"
-              }
-            }
-          ],
-          "cycle_restart_request": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-          "meta_learning_reset_claim": false,
-          "creation_request_id": "cpv13-c45m-2x-immediate-20261008-0900-rodolfo",
-          "creation_readback_audit": "data/ares/meta-ads/engine-v3/audit/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
-          "activation_readback_audit": "data/ares/meta-ads/state/manual-campaign-actions/cpv13-c46m-c47m-activate-d1-20261009-rodolfo.json",
-          "operator_status": "DELETED",
-          "terminal_request_id": "cpv13-c46-c47-delete-c40-20261011-rodolfo",
-          "terminal_authorized_by": "Rodolfo Mattei",
-          "terminal_authorization_source": "discord:thread:1539832402744975450",
-          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c46-c47-delete-c40-20261011-rodolfo/request.json",
-          "api_raw_status": "DELETED"
+          "campaign_id": "120251608480950632",
+          "cycle_start_date": "2026-10-13",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv13-c08-2x-usd50-midnight-20261013-rodolfo"
         },
         "47": {
-          "cycle_history": [
-            {
-              "superseded_by": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-              "record": {}
-            }
-          ],
-          "campaign_id": "120251545171010632",
-          "cycle_start_date": "2026-10-09",
-          "d1_start_at_sp": "2026-10-09T13:43:10.175459-03:00",
-          "cycle_restart_request": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-          "source": "rodolfo_explicit_operational_d1_restart",
-          "authorized_by": "Rodolfo Mattei",
-          "authorization_source": "discord:thread:1539832402744975450",
-          "status": "deleted_manual_20261010",
-          "actions_enabled": false,
-          "vehicle_type": "MOTO",
-          "current_budget_usd": 58.06,
-          "meta_learning_reset_claim": false,
-          "request_id": "cpv13-c46m-c47m-activate-d1-20261009-rodolfo",
-          "creation_request_id": "cpv13-c45m-2x-immediate-20261008-0900-rodolfo",
-          "creation_readback_audit": "data/ares/meta-ads/engine-v3/audit/cpv13-c45m-2x-immediate-20261008-0900-rodolfo.json",
-          "activation_readback_audit": "data/ares/meta-ads/state/manual-campaign-actions/cpv13-c46m-c47m-activate-d1-20261009-rodolfo.json",
-          "operator_status": "DELETED",
-          "terminal_request_id": "cpv13-c46-c47-delete-c40-20261011-rodolfo",
-          "terminal_authorized_by": "Rodolfo Mattei",
-          "terminal_authorization_source": "discord:thread:1539832402744975450",
-          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c46-c47-delete-c40-20261011-rodolfo/request.json",
-          "api_raw_status": "DELETED"
+          "campaign_id": "120251608480940632",
+          "cycle_start_date": "2026-10-13",
+          "source": "campaign_engine_v3_daily_readback",
+          "request_id": "cpv13-c08-2x-usd50-midnight-20261013-rodolfo"
         }
       },
       "required": [
@@ -2983,6 +2909,25 @@
         "40": 3000,
         "41": 3000
       }
+    },
+    "cpv13-c08-2x-usd50-midnight-20261013-rodolfo": {
+      "request_id": "cpv13-c08-2x-usd50-midnight-20261013-rodolfo",
+      "source_campaign_id": "120250209380780632",
+      "campaign_ids": [
+        "120251608480950632",
+        "120251608480940632"
+      ],
+      "campaign_numbers": [
+        46,
+        47
+      ],
+      "scheduled_for": "2026-10-13T00:00:00-03:00",
+      "budget_usd_each": 50,
+      "state": "NATIVE_FUTURE_ACTIVE_VERIFIED",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "recurring_creation_hold_unchanged": true,
+      "post_write_readback": true
     }
   },
   "creative_drive_organization": {
