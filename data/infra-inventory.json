@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-13T13:31:44-04:00",
+    "updated_at": "2026-10-13T14:52:43-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7786,21 +7786,26 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 112387,
-      "modified_at": "2026-10-13T12:56:27.128920-04:00",
-      "sha256": "917680c4a982441ac99b3a9bcfa9a4692099ba65df03867a9c0928db0dfa5168",
+      "size_bytes": 112592,
+      "modified_at": "2026-10-13T14:37:34.671772-04:00",
+      "sha256": "02c5ee8716c474070e7116b56ab4f80f033b90253c8bbd32a3964ba0a30221d0",
       "description": "Registry-driven B001–B012 monitor with automatic restriction pause, fail-closed Sheet reconciliation and current+predecessor investment-lineage enrichment for standard segurador profile replacements.",
-      "validation": "13 unittest tests PASS; both real production loaders INVEST_3D_OK with 152 profiles; positive/zero/missing renderer branches PASS; B004-8/B006-6/B011-6 pauses preserved.",
-      "updated_at": "2026-10-13T12:58:08-04:00",
+      "validation": "14 tests PASS; full 12-app live and scheduled runtime healthy; SA Sheet parity for replacements; 13 exact live Discord alerts and full 194-row table readback, 151 numeric/43 genuine source-unmatched.",
+      "updated_at": "2026-10-13T14:52:43-04:00",
       "source_report": "discord:#alerts-infra/1546163553298423839",
       "previous_report": "discord:#alerts-infra/1545836604520669265",
-      "last_change": "Investment enrichment parser selects the business JSON contract instead of the last stdout line; ignores merged browser-budget telemetry. No scope/cadence/pause changes.",
-      "backup": "/root/mgs-agent/backups/meta-app-invest-parser-1559609250567684157",
+      "last_change": "Registry pins replacement IDs; exact-title/CLI-alias map preserves trailing-space metadata without phantom app keys. Investment business JSON is isolated from browser telemetry.",
+      "backup": "/root/mgs-agent/backups/meta-app-b0049-all-alerts-1559623511528571003",
       "backup_validation": "Seven pre-change artifacts plus SHA256SUMS preserved; fixture, live Sheet/SB renderer, dry-run delivery guard and scheduled production cycle passed.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before",
       "report_readback": "HTTP 200; exact Discord GET confirmed message 1546163553298423839 in channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero mentions and no thread.",
-      "source_message_id": "1559609250567684157"
+      "source_message_id": "1559609250567684157",
+      "source_message_ids": [
+        "1559623511528571003",
+        "1559628830451171409",
+        "1559637035457716405"
+      ]
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
@@ -43392,6 +43397,192 @@
       "validation": "13 tests PASS, actual helper and both real consumers healthy; read-only revenue audit of 34 current Sheet occurrences joined to 8067 live Messenger Daily rows across 51 publishers.",
       "scope_preserved": true,
       "backup": "/root/mgs-agent/backups/meta-app-invest-parser-1559609250567684157"
+    },
+    {
+      "id": "meta-app-three-cutovers-all-alerts-1559623511528571003",
+      "agent": "zeus",
+      "type": "app_monitor_cutover_and_report_recovery",
+      "updated_at": "2026-10-13T14:52:43-04:00",
+      "source_message_ids": [
+        "1559623511528571003",
+        "1559628830451171409",
+        "1559637035457716405"
+      ],
+      "thread_id": "1559608992307609723",
+      "canonical_source": "data/meta-app-registry.json",
+      "replacements": {
+        "B004-8": "B004-9",
+        "B006-6": "B006-7",
+        "B011-6": "B011-7"
+      },
+      "current_validation": {
+        "B004-9": {
+          "assigned": 9,
+          "roles": 8,
+          "present": 8,
+          "x": 1,
+          "errors": 0
+        },
+        "B006-7": {
+          "assigned": 13,
+          "roles": 12,
+          "present": 12,
+          "x": 1,
+          "errors": 0
+        },
+        "B011-7": {
+          "assigned": 12,
+          "roles": 11,
+          "present": 11,
+          "x": 1,
+          "errors": 0
+        }
+      },
+      "all_alerts": [
+        {
+          "app": "B001-5",
+          "channel_id": "1521251196294135858",
+          "live_embed_id": "1559629191723614430",
+          "table_ids": [
+            "1559629193191366867"
+          ]
+        },
+        {
+          "app": "B002-5",
+          "channel_id": "1521251220130496723",
+          "live_embed_id": "1559629195968250029",
+          "table_ids": [
+            "1559629197876527266"
+          ]
+        },
+        {
+          "app": "B003-3",
+          "channel_id": "1521251246860931223",
+          "live_embed_id": "1559629200242118766",
+          "table_ids": [
+            "1559629202247127211"
+          ]
+        },
+        {
+          "app": "B004-9",
+          "channel_id": "1521251334496456815",
+          "live_embed_id": "1559629205518418070",
+          "table_ids": [
+            "1559629206587969618",
+            "1559629207641002025"
+          ]
+        },
+        {
+          "app": "B005-4",
+          "channel_id": "1521251961662341160",
+          "live_embed_id": "1559629208878063749",
+          "table_ids": [
+            "1559629210824212572",
+            "1559629212753592352"
+          ]
+        },
+        {
+          "app": "B006-7",
+          "channel_id": "1521252068319297666",
+          "live_embed_id": "1559632635641470987",
+          "table_ids": [
+            "1559632637155344545",
+            "1559632638409449554"
+          ]
+        },
+        {
+          "app": "B007-4",
+          "channel_id": "1520510823426949313",
+          "live_embed_id": "1559629213894574145",
+          "table_ids": [
+            "1559629215580688466",
+            "1559629216956547174"
+          ]
+        },
+        {
+          "app": "B008-3",
+          "channel_id": "1521252172929564744",
+          "live_embed_id": "1559629218105524335",
+          "table_ids": [
+            "1559629220265721891"
+          ]
+        },
+        {
+          "app": "B009-5",
+          "channel_id": "1521252284623884288",
+          "live_embed_id": "1559629223214452940",
+          "table_ids": [
+            "1559629224749437029",
+            "1559629225680437443"
+          ]
+        },
+        {
+          "app": "B010-3",
+          "channel_id": "1521252369331916902",
+          "live_embed_id": "1559629226963902495",
+          "table_ids": [
+            "1559629228641755188",
+            "1559629229749182485"
+          ]
+        },
+        {
+          "app": "B011-7",
+          "channel_id": "1537256907373289575",
+          "live_embed_id": "1559637394741923851",
+          "table_ids": [
+            "1559637395618402316",
+            "1559637397422088226",
+            "1559637954249363587",
+            "1559637955440672779"
+          ]
+        },
+        {
+          "app": "B012-2",
+          "channel_id": "1537256951879172136",
+          "live_embed_id": "1559629231066193961",
+          "table_ids": [
+            "1559629232294985864",
+            "1559629233742020639"
+          ]
+        },
+        {
+          "app": "B013-7",
+          "channel_id": "1522830283240505385",
+          "live_embed_id": "1559635690361458822",
+          "table_ids": [
+            "1559635726793056358",
+            "1559635727724314666",
+            "1559635729192067133",
+            "1559635730366472215"
+          ]
+        }
+      ],
+      "table_validation": {
+        "profiles": 194,
+        "numeric": 151,
+        "source_unmatched": 43,
+        "all_rows_parity": "PASS"
+      },
+      "tests": "14 unittest PASS",
+      "backup": "/root/mgs-agent/backups/meta-app-b0049-all-alerts-1559623511528571003",
+      "b013": "Dedicated live run healthy, 49 targets/48 linked/1 unlinked/0 unknown; corrected enrichment INVEST_3D_OK; canonical lock wait recovered without overlapping writers.",
+      "false_alert_resolution": {
+        "message_id": "1559639611377193102",
+        "source_message_id": "1559630873404506173",
+        "channel_id": "1520510823426949313",
+        "readback": "PASS"
+      },
+      "scope_preserved": true,
+      "credential_rotation": false,
+      "gateway_restart": false,
+      "script_paths": [
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh"
+      ],
+      "skill_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
+      "skill_sha256": "20d1253084e34e265d9dfe4237b3de0cefa355ef4055deef3827f49e9a4f67d4",
+      "test_path": "/root/mgs-agent/tests/test_meta_app_invest_3d.py",
+      "source_report": "discord:#alerts-infra/1559640046284316714",
+      "report_readback": "HTTP 200, exact channel/message, empty content, one embed, zero mentions/thread."
     }
   ],
   "profile_skill_references": [
@@ -49807,15 +49998,15 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-registry.json",
-      "size_bytes": 17202,
-      "md5": "71545ac31457ace3b53a77d56326402d",
-      "modified_at": "2026-10-05T11:20:29-04:00"
+      "size_bytes": 17391,
+      "md5": "377e128c23c94b4642ce560dbee7b809",
+      "modified_at": "2026-10-13T14:41:33.439161-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-alert-pause.json",
-      "size_bytes": 1254,
-      "md5": "7800cba131121ba4358db75010219f2f",
-      "modified_at": "2026-10-13T12:40:52-04:00"
+      "size_bytes": 1163,
+      "md5": "f81f734d9a0a2a4cd9aecdd648a5e90c",
+      "modified_at": "2026-10-13T14:41:50.019189-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-identity-baseline.json",
@@ -49831,9 +50022,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 122136,
-      "md5": "d569abd2616a10ac17d2eb284b8981ac",
-      "modified_at": "2026-10-13T13:31:47-04:00"
+      "size_bytes": 121743,
+      "md5": "0333830de99094a9f904aca91cb38f88",
+      "modified_at": "2026-10-13T14:49:54.212890-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
