@@ -1253,12 +1253,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-INTAKE-1559692689111261218",
-      "next_step": "Consumir execução determinística, validar 48 fontes/45 destinos e limpeza local após readback",
+      "next_step": "Nenhuma pendência: 48 originais em LEGACY; 45 READY únicos (29 IMG,16 VID); 3 uploads duplicados vinculados; entrada vazia; reserva Kelly e ares_eligible=false; mídia transitória removida após readback SHA/clean",
       "objective": "Tratar e mover lote Kelly SHEIN US EN preservando originais e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559692689111261218/state.json",
-      "state": "execução parcial conciliada: 45 fontes com destino, legacy e inventário verificados. retomada somente camadas faltantes com mesmos ids e nomes; validação final em andamento",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559692689111261218/final-verification.json",
+      "state": "completed",
       "thread_id": "1559692689111261218",
-      "updated_at": "2026-10-13T22:50:28+00:00"
+      "updated_at": "2026-10-13T22:52:50+00:00"
     },
     {
       "agent": "ares",
@@ -5772,5 +5772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T22:50:28+00:00"
+  "updated_at": "2026-10-13T22:52:50+00:00"
 }

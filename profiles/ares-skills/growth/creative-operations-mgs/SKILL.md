@@ -41,7 +41,8 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 
 Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops ocorre pelo inventário/estado compartilhado, não por handoff entre bots.
 
-- Original e tratado pertencem à mesma linhagem.
+- Original e tratado pertencem à mesma linhagem. Reuploads exatos também se vinculam a ela: contabilizar fontes recebidas separadamente de destinos READY únicos e não consumir uma nova variante para uma duplicata.
+- Toda conclusão de intake inclui contagens verificadas, links READY e o mapa exato `nome original → nome final` de cada fonte, inclusive reuploads duplicados; separar IMG/VID quando o lote for grande, sem anexos não solicitados.
 - Upload de gestor inicia `RESERVADO_PELO_GESTOR` e `ares_eligible=false`.
 - `01_READY` prova prontidão técnica, não ineditismo.
 - Antes de seleção/write, conciliar Drive × Meta.
