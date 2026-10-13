@@ -27,7 +27,21 @@ Use this skill when Rodolfo asks to fix, enable, audit, or explain access to e-m
 - Before touching configs, create timestamped backups under `/root/zeus-<topic>-<timestamp>/` or equivalent.
 - Do not use `curl -k` as proof of public TLS health. For final validation, use certificate-verifying `curl` against the public URL.
 
-## Read-only audit sequence
+## Browser-only panel inspection
+
+For a request to log in and describe the panel, use this narrow path before the server audit below; successful panel access does not require SSH, mailbox access, or service changes.
+
+1. Open the exact requested URL with `browser_exec`, then inspect visible text and input names/types. On Hestia's two-stage login, fill the requested username in `#username`, submit **Next**, and wait for `#password` before requesting a supervised password fill.
+2. Call `browser_vault(action='list')`. Match the requested username as well as the site; same-title 1Password items can represent different accounts. If an authorized Service Account relay is needed, load `onepassword-service-account-vault-operations` and follow its temporary encrypted relay procedure rather than typing a secret through browser automation.
+3. Fill with `browser_vault(action='fill', handle=...)`, submit the login form, and verify both the authenticated account label and the destination page. Do not substitute an admin account when the requested account exists.
+4. Read the landing page and, for an email-oriented request, open `/list/mail/`. Capture the panel product/version, section totals, mail-domain names and account counts, and visible add-domain controls. Distinguish WEB domains/subdomains, DNS zones, mail domains, and mailboxes; they are separate inventories.
+5. Before reporting an exhaustive list, extract rows structurally and reconcile their count and account sum in code against the header. If they disagree, check filtering/pagination rather than choosing one total silently.
+6. Report in concise PT-BR bullets: authenticated user, panel/version, mail domains with account counts, then other relevant section totals. Describe visible controls without invoking add/edit/suspend/delete actions. Column labels for SSL, DKIM, antivirus, or spam filtering do not prove those features are enabled; inspect row indicators separately if status is requested.
+7. Close only after any temporary credential relay has been removed and its absence verified. State that panel configuration was not changed, without treating authenticated access as proof of mail delivery or server health.
+
+## Read-only server audit sequence
+Use this sequence when the request concerns server/mail health or repair, not merely a panel walkthrough.
+
 1. Resolve the target safely:
    - Confirm host/IP from 1Password or user-provided data.
    - SSH with `StrictHostKeyChecking=accept-new` and a dedicated known_hosts file when possible.
