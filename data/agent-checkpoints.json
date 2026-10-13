@@ -4582,6 +4582,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-b0049-all-alerts-1559623511528571003",
+      "next_step": "Preflight exato de B004-9/Sheet, backup, canario e baseline; auditar todos e entregar 13 alertas com readback.",
+      "objective": "Migrar B004-8 para B004-9 e retomar apenas B004; validar gerador/investimento e enviar alerta real para as 13 linhagens mantendo B006/B011 pausados.",
+      "source": "discord:1559608992307609723/1559623511528571003",
+      "state": "discovery; registry ainda b004-8 e pausa b004-8/b006-6/b011-6; parser corrigido no pedido anterior.",
+      "thread_id": "1559608992307609723",
+      "updated_at": "2026-10-13T17:47:46+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-b0062-owner-crislaine-oliveira-20260730",
       "next_step": "Evitar novas chamadas Meta até a janela de quota baixar: X-App-Usage estava em 98% no snapshot live. Pendência separada: App Secret exposto aguarda confirmação crítica.",
       "objective": "Alterar owner do B006-2 para Crislaine Oliveira, preservar suas páginas e validar alerta real com token atualizado.",
@@ -5702,5 +5712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T14:18:45+00:00"
+  "updated_at": "2026-10-13T17:47:46+00:00"
 }
