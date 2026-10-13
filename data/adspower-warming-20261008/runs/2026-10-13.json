@@ -246,26 +246,181 @@
       "post_video_wait_seconds": 40,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10239348075492740&set=a.1010925546024",
           "confirmed_at": "2026-10-13T09:43:09.699282-04:00",
           "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10244047657950568&set=pcb.10244047663750713",
+          "confirmed_at": "2026-10-13T09:43:51.473092-04:00",
+          "evidence": "Remover Curtir on exact post",
+          "recovery": "Enter no-op; unchanged post reconciled; fresh button click"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=4683130505264495&set=gm.4645553459012735&idorvanity=1479228842311895",
+          "confirmed_at": "2026-10-13T09:43:56.857143-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1763834155748963&set=a.165918582207203",
+          "confirmed_at": "2026-10-13T09:44:52.033892-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=122143104717212626&set=a.122128235853212626",
+          "confirmed_at": "2026-10-13T09:44:56.893206-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
         }
       ],
       "comments": [],
-      "video": {},
-      "closed_verified": false,
+      "video": {
+        "navigation_intent_at": "2026-10-13T09:44:57.693694-04:00",
+        "entry_url": "https://www.facebook.com/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-13T09:45:03.997980-04:00",
+            "now": 4.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:06.346642-04:00",
+            "now": 6.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:08.666272-04:00",
+            "now": 9.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:10.994376-04:00",
+            "now": 11.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:13.305903-04:00",
+            "now": 13.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:15.627710-04:00",
+            "now": 16.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:17.942362-04:00",
+            "now": 18.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:20.264397-04:00",
+            "now": 20.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:22.578277-04:00",
+            "now": 23.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:24.887064-04:00",
+            "now": 25.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:27.206572-04:00",
+            "now": 1.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:29.519573-04:00",
+            "now": 3.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:31.822000-04:00",
+            "now": 5.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:34.123341-04:00",
+            "now": 8.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:36.432099-04:00",
+            "now": 10.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:38.735851-04:00",
+            "now": 12.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:41.019523-04:00",
+            "now": 15.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:43.446273-04:00",
+            "now": 17.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:45.712026-04:00",
+            "now": 19.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:47.980948-04:00",
+            "now": 22.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:50.252755-04:00",
+            "now": 24.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:52.611024-04:00",
+            "now": 26.0,
+            "max": 26.0
+          },
+          {
+            "at": "2026-10-13T09:45:54.943418-04:00",
+            "now": 2.0,
+            "max": 26.0
+          }
+        ],
+        "complete": true,
+        "completed_at": "2026-10-13T09:45:54.943967-04:00",
+        "evidence": "successive slider progress; two observed end/restarts",
+        "duration_seconds": 26.0
+      },
+      "closed_verified": true,
       "open_intent_at": "2026-10-13T09:42:37.610629-04:00",
       "opened_at": "2026-10-13T09:42:39.780306-04:00",
       "identity": "Kelly Andrade",
       "authenticated_verified_at": "2026-10-13T09:42:54.301278-04:00",
       "like_intent": {
-        "post_url": "https://www.facebook.com/photo/?fbid=10244047657950568&set=pcb.10244047663750713",
-        "at": "2026-10-13T09:43:22.175442-04:00",
-        "status": "ambiguous"
-      }
+        "post_url": "https://www.facebook.com/photo/?fbid=122143104717212626&set=a.122128235853212626",
+        "at": "2026-10-13T09:44:52.773419-04:00",
+        "status": "confirmed"
+      },
+      "wait": {
+        "started_at": "2026-10-13T09:45:54.944372-04:00",
+        "target_seconds": 40,
+        "ended_at": "2026-10-13T09:46:34.944753-04:00",
+        "elapsed_seconds": 40.0001633399952,
+        "complete": true
+      },
+      "close_intent_at": "2026-10-13T09:46:34.945459-04:00",
+      "closed_at": "2026-10-13T09:46:40.360773-04:00",
+      "closing_status": "Inactive"
     },
     {
       "profile_id": "k1f7o4im",
@@ -276,14 +431,97 @@
       "likes_target": 2,
       "comments_target": 0,
       "post_video_wait_seconds": 75,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "running",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10164635698724475&set=gm.1967528407863520&idorvanity=286866152596429",
+          "confirmed_at": "2026-10-13T09:47:37.055602-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1135623442311406&set=a.180780817795678",
+          "confirmed_at": "2026-10-13T09:47:41.119622-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        }
+      ],
       "comments": [],
-      "video": {},
-      "closed_verified": false
+      "video": {
+        "navigation_intent_at": "2026-10-13T09:47:41.682630-04:00",
+        "entry_url": "https://www.facebook.com/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-13T09:47:47.919992-04:00",
+            "now": 4.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:47:50.162711-04:00",
+            "now": 6.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:47:52.422829-04:00",
+            "now": 8.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:47:54.669692-04:00",
+            "now": 11.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:47:56.923374-04:00",
+            "now": 1.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:47:59.180738-04:00",
+            "now": 3.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:48:01.447018-04:00",
+            "now": 5.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:48:03.788753-04:00",
+            "now": 7.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:48:06.091348-04:00",
+            "now": 10.0,
+            "max": 12.0
+          },
+          {
+            "at": "2026-10-13T09:48:08.409944-04:00",
+            "now": 0.0,
+            "max": 12.0
+          }
+        ],
+        "complete": true,
+        "completed_at": "2026-10-13T09:48:08.410802-04:00",
+        "evidence": "successive slider progress; two observed end/restarts",
+        "duration_seconds": 12.0
+      },
+      "closed_verified": false,
+      "open_intent_at": "2026-10-13T09:46:40.507365-04:00",
+      "opened_at": "2026-10-13T09:46:42.896080-04:00",
+      "identity": "Giselle Santos",
+      "authenticated_verified_at": "2026-10-13T09:46:59.892531-04:00",
+      "like_intent": {
+        "post_url": "https://www.facebook.com/photo/?fbid=1135623442311406&set=a.180780817795678",
+        "at": "2026-10-13T09:47:37.580390-04:00",
+        "status": "confirmed"
+      },
+      "wait": {
+        "started_at": "2026-10-13T09:48:08.411659-04:00",
+        "target_seconds": 75
+      }
     }
   ],
-  "updated_at": "2026-10-13T09:43:26.080972-04:00"
+  "updated_at": "2026-10-13T09:48:08.411673-04:00"
 }
