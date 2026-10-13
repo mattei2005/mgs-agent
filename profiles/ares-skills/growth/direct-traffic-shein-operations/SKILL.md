@@ -274,6 +274,14 @@ Conclusão: resposta, thread e participantes pertencem ao canal/gestor corretos,
 8. Usar o pacote legado G005 `prepare-live/materialize` no intake normal de outros gestores ou criar um fast lane RODO/G002. Todo pedido equivalente usa `campaign --input` e o mesmo core. Resolver perfil/autoridade/conta/canal; não remontar manifest, editar scripts ou redescobrir a BM durante a transação.
 9. Declarar targeting literalmente idêntico após native copy sem comparar GET fonte × alvo. A Meta pode omitir `targeting_automation.individual_setting` mesmo após update com o targeting exato. Preservar `age_range` e `user_age_unknown` expostos pela fonte, reconciliar somente o alvo e registrar qualquer normalização residual; não remover esses campos presumindo que são output-only. Post ID igual comprova preservação do post, mas não substitui contadores sociais quando `pages_read_engagement` estiver indisponível.
 
+## Auditoria read-only de UTM duplicada
+
+- Transcrever o `utm_adgroup` literalmente da evidência e resolver o site pelo contrato antes do gate; não inferir a campanha somente pelo número contido na UTM.
+- Para busca em todas as contas SHEIN autorizadas, usar o catálogo account-scoped, confirmar identidade live e paginar anúncios com campanha, conjunto e creative (`url_tags`, `object_story_spec`, `asset_feed_spec`, `link_url`). Aplicar `url_tags` sobre os parâmetros da URL ao determinar o tracking efetivo; ocorrência somente no nome do conjunto não prova UTM no destino.
+- Incluir uma passagem explicitamente filtrada por `effective_status IN [ARCHIVED, DELETED]`, com paginação completa. A listagem padrão pode omitir origens arquivadas que reutilizam a mesma UTM e produzir falso negativo; informar separadamente duplicidade histórica e campanhas atualmente aptas a entregar.
+- Persistir lotes de evidência sem credenciais, agregar por UTM + campaign ID único e validar cobertura do catálogo. Fazer GET dos IDs exatos antes do resumo; múltiplos anúncios do mesmo conjunto/campanha não são múltiplas campanhas duplicadas. Não alterar tracking por um pedido de localizar.
+- Testar cobertura integral das duas passagens, unicidade dos campaign IDs, precedência de `url_tags`, ocorrência da UTM em destino e igualdade de conta/nome/status no readback. Procedimento exercitado em consulta live com ambas as passagens completas e duplicidade histórica confirmada.
+
 ## Verificação
 
 - [ ] Contrato SHEIN vivo carregado
