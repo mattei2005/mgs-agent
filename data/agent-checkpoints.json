@@ -2993,12 +2993,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-META49-1559685342083153942",
-      "next_step": "Auditar todos schedulers, preparar checkpoint separado/intent isolado, preflight read-only PC1, testar gates e agendar somente após validação",
-      "objective": "Criar 49 novas contas001 na BM Digital Trust a partir de2026-10-13 22:00 ET mantendo defaults e cadência30min do lote anterior, sem billing/permissões novas",
-      "source": "discord:1544113212075548683:1559685342083153942",
-      "state": "setup_in_progress: baseline351 contas próprias verificado; lote anterior40/40 encerrado; nenhum novo write meta; auditoria agenda e backendpc1 pendentes",
+      "next_step": "Rodolfo autentica o mesmo Chrome real no PC1; Zeus revalida formulário/ator/BM read-only, preserva request49/intent isolado e ativa scheduler se saudável; primeira janela22:27+20s,progresso5/fim49",
+      "objective": "Criar49 novas contas001 Digital Trust a partir13/10/2026 22:00 ET,30min,defaults anteriores,sem billing/permissões",
+      "source": "discord:1544113212075548683:1559685342083153942;state:data/meta-digital-trust-49-20261013-state.json;cron:a0d8fedbd7c3",
+      "state": "prepared_paused_auth_required:0/49;baseline351;alvofinal400;cron a0d8fedbd7c3 pausado80ticks;27/57 único par sem colisões operacionais;11 testes pass;preflight meta passkey pc1,0writes",
       "thread_id": "1544113212075548683",
-      "updated_at": "2026-10-13T21:54:02+00:00"
+      "updated_at": "2026-10-13T22:08:28+00:00"
     },
     {
       "agent": "zeus",
@@ -4133,12 +4133,12 @@
     {
       "agent": "zeus",
       "id": "digitaltrustadx-mail-1559682551931736175",
-      "next_step": "Validar acesso alternativo existente e aguardar cache negativo do upstream; repetir navegador sem mudar DNS do website",
-      "objective": "Recuperar acesso do usuario ao webmail; diferenciar SSL MAIL do dominio WEB e cache negativo DNS",
-      "source": "discord:1559679608931098667/1559686744184590408",
-      "state": "reopened_client_dns_investigation",
+      "next_step": "Reaplicar vhost oficial do Hestia E-MAIL e validar browser/TLS sem modificar DNS do site",
+      "objective": "Restaurar webmail apos dominio WEB mail.digitaltrustadx.com mascarar Roundcube; manter DNS correto e arquivos do usuario",
+      "source": "discord:1559679608931098667/1559687557300617359",
+      "state": "recovering_user_web_vhost_collision",
       "thread_id": "1559679608931098667",
-      "updated_at": "2026-10-13T21:59:35+00:00"
+      "updated_at": "2026-10-13T22:07:57+00:00"
     },
     {
       "agent": "zeus",
@@ -5762,5 +5762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T21:59:35+00:00"
+  "updated_at": "2026-10-13T22:08:28+00:00"
 }

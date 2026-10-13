@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "tests": [
+    "before_start",
+    "before_physical_slot",
+    "blocked",
+    "completed",
+    "live_wrapper_predue_no_state_change",
+    "native_adapter_predue_guard",
+    "separate_intent_path",
+    "confirmed_receipt_no_replay",
+    "submitted_stops",
+    "cross_request_stops",
+    "previous_batch_and_new_cardinality"
+  ],
+  "test_count": 11,
+  "meta_writes": 0,
+  "live_state_sha256": "8802c35e3dfe3ab40a3f476099a0d4a31ddf37c939802e4209c1074a2377f368",
+  "preflight": "blocked_by_Meta_passkey_not_a_mutation"
+}

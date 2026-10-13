@@ -1,0 +1,52 @@
+{
+  "id": "a0d8fedbd7c3",
+  "name": "Digital Trust · 49 novas contas",
+  "prompt": "Lote novo autorizado por Rodolfo Mattei344196393512075265 na mensagem1559685342083153942 da thread1544113212075548683. Request meta-digital-trust-49-1559685342083153942,checkpoint /root/mgs-agent/data/meta-digital-trust-49-20261013-state.json, BM Digital Trust155263197283282, alvo rígido49 ADICIONAIS sobre baseline351, expected total400. Preservar mesmo Chrome PC1 Rodolfo,001,America/Los_Angeles,USD,My business, sem pagamento nem novas atribuições/permissões. Início autorizado2026-10-13T22:00:00-04:00 America/New_York; primeira janela física22:27+20s, uma criação por30min nos minutos27/57. Wrapper determinístico somente, sem LLM, lock global+lease600s, intent exclusivo por request antes deCreate, receipt confirmado nunca replay. Popup Meta de sucesso conta uma criação; IDs/owner/access ilegíveis ficam não verificados. Meta error/auth/security/ambiguous outcome interrompe sem replay. Pré-início, blocked e após49 stdout vazio/zero writes. Progresso a cada5 e fim49/49. Job inicia pausado por passkey; não ativar até autenticação humana e preflight completo read-only validado na mesma sessão.",
+  "skills": [],
+  "skill": null,
+  "model": null,
+  "provider": null,
+  "base_url": null,
+  "script": "meta-digital-trust-49-20261013.sh",
+  "no_agent": true,
+  "monitor_script": null,
+  "monitor_url": null,
+  "monitor_state": null,
+  "context_from": null,
+  "schedule": {
+    "kind": "cron",
+    "expr": "27,57 * * * *",
+    "display": "27,57 * * * *"
+  },
+  "schedule_display": "27,57 * * * *",
+  "repeat": {
+    "times": 80,
+    "completed": 0
+  },
+  "enabled": false,
+  "state": "paused",
+  "paused_at": "2026-10-13T18:07:18.625212-04:00",
+  "paused_reason": "Preflight read-only em2026-10-13 bloqueado pela Meta: confirmação de identidade por passkey no Chrome real do PC1.0/49 criadas,0writes. Aguardar Rodolfo autenticar mesma sessão; revalidar antes de ativar.",
+  "created_at": "2026-10-13T18:07:18.625212-04:00",
+  "next_run_at": null,
+  "last_run_at": null,
+  "last_status": null,
+  "last_error": null,
+  "last_delivery_error": null,
+  "last_delivery_unverified": null,
+  "last_failure": null,
+  "failure_streak": 0,
+  "deliver": "discord:1544113212075548683",
+  "origin": {
+    "platform": "discord",
+    "chat_id": "1544113212075548683",
+    "chat_name": "MGS Digital Corp / #⚡zeus / Criar contas de anuncio - Rodolfo",
+    "thread_id": "1544113212075548683",
+    "user_id": "344196393512075265",
+    "scope_id": "1185714635991679006"
+  },
+  "enabled_toolsets": null,
+  "workdir": "/root/mgs-agent",
+  "attach_to_session": false,
+  "failure_deliver": "local"
+}
