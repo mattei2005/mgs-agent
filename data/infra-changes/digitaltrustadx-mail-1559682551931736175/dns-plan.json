@@ -1,0 +1,247 @@
+[
+  {
+    "action": "create",
+    "payload": {
+      "type": "A",
+      "name": "mail.digitaltrustadx.com",
+      "content": "188.34.183.6",
+      "ttl": 300,
+      "proxied": false
+    }
+  },
+  {
+    "action": "create",
+    "payload": {
+      "type": "TXT",
+      "name": "mail._domainkey.digitaltrustadx.com",
+      "content": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIo1tnmWpBqWnXBGVQIdhYjeLo6ycHQQxy20vJvY7VZt7nR4lw5yB1EhMy/v4bb3l28qBAJhJV3bwTmYFrmeOeuAbCcdyJqzsebxs5mxfOhBKYkxFIWTDDnPylqqZMj82aK5vqMxxexvpR2/nGOxoSOmWwhHP0rjd5YE1a7LTvP3A5BF3tw/yL4JxLuPgU58KCiAju5zXvar3zlJ1k78ZtqS7FJA2xG6iBdfrFKYuGaqyhRCEDZf/ZVg2z1XOAOhvcpQdpCs4BTwt63wmxQwUy1LJieMqAZviTQpUxtXfguAK4kgNrj1nHjZVpNsdqprNROAqCRRLnxYmda3Zfu4WQIDAQAB",
+      "ttl": 3600,
+      "proxied": false
+    }
+  },
+  {
+    "action": "create",
+    "payload": {
+      "type": "MX",
+      "name": "digitaltrustadx.com",
+      "content": "mail.digitaltrustadx.com",
+      "priority": 10,
+      "ttl": 300,
+      "proxied": false
+    }
+  },
+  {
+    "action": "update",
+    "id": "f44ca0a7afa3cdedd18ccf418206f49c",
+    "payload": {
+      "type": "TXT",
+      "name": "digitaltrustadx.com",
+      "content": "v=spf1 ip4:188.34.183.6 include:sendgrid.net include:emsd1.com include:_spf.uni5.net include:spf.privateemail.com ~all",
+      "ttl": 1,
+      "proxied": false
+    }
+  },
+  {
+    "action": "delete",
+    "id": "d4f977fa5f51d0d65413cbf05fedbbd1",
+    "before": {
+      "id": "d4f977fa5f51d0d65413cbf05fedbbd1",
+      "name": "zb54109004.digitaltrustadx.com",
+      "type": "CNAME",
+      "content": "zmverify.zoho.com",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 600,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-08-01T23:33:02.460158Z",
+      "modified_on": "2024-08-01T23:33:02.460158Z"
+    }
+  },
+  {
+    "action": "delete",
+    "id": "3b314d99619a3de464ca18289101828e",
+    "before": {
+      "id": "3b314d99619a3de464ca18289101828e",
+      "name": "digitaltrustadx.com",
+      "type": "MX",
+      "content": "mx-vip-01.uni5.net",
+      "priority": 5,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2025-07-10T16:26:23.270948Z",
+      "modified_on": "2025-07-10T16:26:23.270948Z"
+    }
+  },
+  {
+    "action": "delete",
+    "id": "a41aed28b42ccf3d7eec9cfbd7a0b2b7",
+    "before": {
+      "id": "a41aed28b42ccf3d7eec9cfbd7a0b2b7",
+      "name": "digitaltrustadx.com",
+      "type": "MX",
+      "content": "mx-vip-02.uni5.net",
+      "priority": 10,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2025-07-10T16:26:23.270886Z",
+      "modified_on": "2025-07-10T16:26:23.270886Z"
+    }
+  },
+  {
+    "action": "delete",
+    "id": "4ba907139bea481e8d5fa84da6a0912c",
+    "before": {
+      "id": "4ba907139bea481e8d5fa84da6a0912c",
+      "name": "digitaltrustadx.com",
+      "type": "MX",
+      "content": "mx.zoho.com",
+      "priority": 10,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 600,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-08-01T23:33:37.887668Z",
+      "modified_on": "2024-08-01T23:33:37.887668Z"
+    }
+  },
+  {
+    "action": "delete",
+    "id": "2f85bab00b55f1f1b50722c313619770",
+    "before": {
+      "id": "2f85bab00b55f1f1b50722c313619770",
+      "name": "digitaltrustadx.com",
+      "type": "MX",
+      "content": "mx3.zoho.com",
+      "priority": 50,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 600,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-08-01T23:33:37.863588Z",
+      "modified_on": "2024-08-01T23:33:37.863588Z"
+    }
+  },
+  {
+    "action": "delete",
+    "id": "0ca4f49d54a5e0ec724b86bccf27a910",
+    "before": {
+      "id": "0ca4f49d54a5e0ec724b86bccf27a910",
+      "name": "digitaltrustadx.com",
+      "type": "MX",
+      "content": "mx2.zoho.com",
+      "priority": 20,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 600,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-08-01T23:33:37.857747Z",
+      "modified_on": "2024-08-01T23:33:37.857747Z"
+    }
+  },
+  {
+    "action": "update",
+    "id": "11e7694c127aa0f19988e25098de4bae",
+    "payload": {
+      "type": "TXT",
+      "name": "ac01-02.digitaltrustadx.com",
+      "content": "v=spf1 include:emsd1.com include:_spf.uni5.net include:sendgrid.net ~all",
+      "ttl": 3600,
+      "proxied": false
+    }
+  },
+  {
+    "action": "update",
+    "id": "5e291a42435cefc30b9311e43ad0a988",
+    "payload": {
+      "type": "TXT",
+      "name": "ac01-03.digitaltrustadx.com",
+      "content": "v=spf1 include:emsd1.com include:_spf.uni5.net include:sendgrid.net ~all",
+      "ttl": 3600,
+      "proxied": false
+    }
+  },
+  {
+    "action": "update",
+    "id": "ef3ef9e43ef27f9edbff7baec608ceaf",
+    "payload": {
+      "type": "TXT",
+      "name": "ac02-02.digitaltrustadx.com",
+      "content": "v=spf1 include:emsd1.com include:_spf.uni5.net include:sendgrid.net ~all",
+      "ttl": 3600,
+      "proxied": false
+    }
+  },
+  {
+    "action": "update",
+    "id": "b64dd78cd63f4acdb352b0567208e793",
+    "payload": {
+      "type": "TXT",
+      "name": "ac02-03.digitaltrustadx.com",
+      "content": "v=spf1 include:emsd1.com include:_spf.uni5.net include:sendgrid.net ~all",
+      "ttl": 3600,
+      "proxied": false
+    }
+  },
+  {
+    "action": "delete",
+    "id": "a7dbebb3e079a02ea498a4b287a0f0fa",
+    "before": {
+      "id": "a7dbebb3e079a02ea498a4b287a0f0fa",
+      "name": "digitaltrustadx.com",
+      "type": "TXT",
+      "content": "v=spf1 include:spf.privateemail.com include:zohomail.com ~all",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 3600,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-08-01T23:33:37.873735Z",
+      "modified_on": "2024-08-01T23:33:37.873735Z"
+    }
+  },
+  {
+    "action": "delete",
+    "id": "36d73985e19a236f7b73816dbd53377a",
+    "before": {
+      "id": "36d73985e19a236f7b73816dbd53377a",
+      "name": "zmail._domainkey.digitaltrustadx.com",
+      "type": "TXT",
+      "content": "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCOdYLHgloVIHoDgqiffEazhBjPySD+5yqHi+v7wVjcstkoDohda9MxyHCbum6cgRsdmuTumHu22gW3cL/Yty6YqpnMnIq4POPDYsL6OOkXQ7mp2x9Rdmy/IKRklmbLt102WkFMJJzv/q/0620TlPbZzCwDYRKwl+wp8MJE/oc5owIDAQAB",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 600,
+      "settings": {},
+      "meta": {},
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-08-01T23:33:37.999257Z",
+      "modified_on": "2024-08-01T23:33:37.999257Z"
+    }
+  }
+]

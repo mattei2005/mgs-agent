@@ -4122,6 +4122,16 @@
     },
     {
       "agent": "zeus",
+      "id": "digitaltrustadx-mail-1559682551931736175",
+      "next_step": "Emitir certificado TLS no Hestia; validar DNS publico, TLS e servicos",
+      "objective": "DNS e HTTPS de digitaltrustadx.com no Hestia; retirar Zoho e MX uni5 do apex, preservar emissores/subdominios e matteiservicesinc.com",
+      "source": "discord:1559679608931098667/1559682551931736175",
+      "state": "dns_applied_readback_passed",
+      "thread_id": "1559679608931098667",
+      "updated_at": "2026-10-13T21:44:31+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "direct-shein-category-landing-floating-rec-20260911",
       "next_step": "Quando Rodolfo pedir a segunda etapa, implementar o CTA flutuante nos RECs de Vizioid e Yolokfx com detecção de sobreposição de anúncios, CTA final e footer; fazer backup, canário, rollback e mobile QA.",
       "objective": "Criar um novo modelo de landing SHEIN em yolokfx.com e vizioid.com, reutilizando o REC atual e adicionando CTA flutuante seguro no REC",
@@ -5742,5 +5752,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T20:52:35+00:00"
+  "updated_at": "2026-10-13T21:44:31+00:00"
 }
