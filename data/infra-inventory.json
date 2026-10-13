@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-13T15:57:02-04:00",
+    "updated_at": "2026-10-13T16:08:37.699795-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -43884,6 +43884,62 @@
       "alert_delivery": true,
       "source_report": "discord:#alerts-infra/1559654963297386539",
       "report_readback": "HTTP 200; exact message/channel; one embed; empty content; no mentions/thread."
+    },
+    {
+      "id": "ares-local-stt-1559654903226302505",
+      "agent": "ares",
+      "type": "local_stt_recovery",
+      "updated_at": "2026-10-13T16:08:37.699795-04:00",
+      "source_message_id": "1559654903226302505",
+      "thread_id": "1559649827472670820",
+      "original_thread_id": "1559593111624220762",
+      "original_audio_message_id": "1559648005815279750",
+      "provider": "mgs_local",
+      "language": "pt",
+      "model": "base",
+      "cost_model": "local_cpu_no_paid_api",
+      "runtime_path": "/root/.hermes/profiles/ares/stt-runtime/",
+      "python": "3.12.3",
+      "faster_whisper": "1.2.1",
+      "weights_preloaded_offline": true,
+      "shared_gateway_venv_changed": false,
+      "restart": false,
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/mgs-local-stt.py",
+          "size_bytes": 2181,
+          "sha256": "04e5ab09eca3b918ea54700fd6138c6b20179638a1f5ec853245243f3b456b96"
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/config.yaml",
+          "size_bytes": 134235,
+          "sha256": "f3ab84ec59731b2741dd4e78dd92d1b2ea2c2076477dd2157a33ab96b7d88a42"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/ares-config.yaml",
+          "size_bytes": 134235,
+          "sha256": "f3ab84ec59731b2741dd4e78dd92d1b2ea2c2076477dd2157a33ab96b7d88a42"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/portuguese-stt-language.md",
+          "size_bytes": 4289,
+          "sha256": "9d45b199c71bb1f06e9017233a0df1dccaa23df7458afb6e1850515b2b525b2c"
+        }
+      ],
+      "evidence_path": "/root/.hermes/profiles/zeus/cache/scratch/ares-stt-1559654903226302505",
+      "validation": {
+        "preflight_success": true,
+        "hot_reload_same_process": true,
+        "provider_before": "none",
+        "provider_after": "mgs_local",
+        "native_transcribe_success": true,
+        "characters": 511,
+        "restart": false,
+        "config_changes_only_stt": true,
+        "original_message_id": "1559648005815279750"
+      },
+      "rollback": "Restore STT selection from protected live/mirror backups using native config writer; retain isolated runtime as rollback evidence.",
+      "original_message_replayed": false
     }
   ],
   "profile_skill_references": [
@@ -46186,7 +46242,8 @@
     {
       "path": "/root/mgs-agent/scripts/mgs-local-stt.py",
       "size_bytes": 2181,
-      "modified_at": "2026-10-13T15:53:13-04:00"
+      "modified_at": "2026-10-13T16:08:37.699795-04:00",
+      "sha256": "04e5ab09eca3b918ea54700fd6138c6b20179638a1f5ec853245243f3b456b96"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-offsite-backup-full.sh",
