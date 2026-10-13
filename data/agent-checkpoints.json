@@ -5153,12 +5153,12 @@
     {
       "agent": "ares",
       "id": "shein-1559568515030327368",
-      "next_step": "Validar reconciliacao auditada da normalizacao NOW, fechar QA de todas as campanhas e retomar mesmo request pelo runner central.",
+      "next_step": "Pedido concluido; acompanhar entrega pela Meta sem inferir impressoes a partir de ACTIVE. Nenhuma automacao recorrente criada.",
       "objective": "Duplicar C139 tres vezes na conta 781612907182683; USD75/dia e COST_CAP USD0.85; inicio imediato",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1559568515030327368/state.json",
-      "state": "postprocess_pending: tres campanhas existentes 153/154/155 paused; terceira normalizada pela meta de 10:10:08 para 10:10:13 et dentro da janela comprovada do adset copy. manifests e ids preservados. manutencao separada do hot path.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/single-clone/shein-1559568515030327368-final.json",
+      "state": "complete: c153/c154/c155 active por readback meta, 3 campanhas unicas, 6 anuncios active, usd75/dia cada, usd0.85 cost_cap; qa de midia 3/3. mesmos ids preservados, fonte intacta. posts novos. terceiro inicio normalizado pela meta em 5 segundos dentro da janela comprovada de copy, com recibo separado. budget ativo conta usd3635.77, delta usd225/dia.",
       "thread_id": "1558131278589460584",
-      "updated_at": "2026-10-13T14:13:16+00:00"
+      "updated_at": "2026-10-13T14:18:45+00:00"
     },
     {
       "agent": "zeus",
@@ -5702,5 +5702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T14:13:16+00:00"
+  "updated_at": "2026-10-13T14:18:45+00:00"
 }

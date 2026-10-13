@@ -50,11 +50,17 @@ def stable_story(value):
     return value
 
 
-def validate_live(live, expected, spec):
+def validate_live(live, expected, spec, request_id=None):
     campaign=live['campaign'];old=expected['campaign']
+    from .shein_copy_schedule import proven_now_copy_time
+    def schedule_ok(observed):
+        return same_time(observed,spec.start_time) or (
+            request_id is not None and spec.start_intent == 'IMMEDIATE' and proven_now_copy_time(
+                spec.start_time, observed, request_id=request_id, account_id=spec.account_id,
+                campaign_id=campaign['id'], idempotency_key=spec.idempotency_key))
     for field in ['id','account_id','name','daily_budget','bid_strategy']:
         if str(campaign.get(field))!=str(old.get(field)):raise ValueError('activation campaign identity/budget/bid drift')
-    if campaign.get('account_id')!=spec.account_id or campaign.get('name')!=spec.name or not same_time(campaign['start_time'],spec.start_time):
+    if campaign.get('account_id')!=spec.account_id or campaign.get('name')!=spec.name or not schedule_ok(campaign['start_time']):
         raise ValueError('activation account/name/schedule drift')
     for kind in ['adsets','ads']:
         rows=live[kind].get('data') or [];before=expected[kind].get('data') or []
@@ -67,7 +73,7 @@ def validate_live(live, expected, spec):
                 if row.get(field)!=original.get(field):raise ValueError('activation child ownership/lineage/identity drift')
             if row.get('issues_info'):raise ValueError('activation child has platform issues')
             if kind=='adsets':
-                if not same_time(row['start_time'],spec.start_time):raise ValueError('activation adset schedule drift')
+                if not schedule_ok(row['start_time']):raise ValueError('activation adset schedule drift')
                 for field in ['bid_amount','bid_constraints']:
                     if field in original:
                         observed = str(row.get(field) or '0') if field=='bid_amount' else row.get(field) or {}
@@ -169,7 +175,7 @@ def activate(engine,target,creation,proof):
                 state.update(phase='ACTIVATION_DEFERRED',retry_after_seconds=exc.detail.get('retry_after_seconds',300));atomic(state_path,state)
                 engine.writer_leases.mark(aid,rid,'ACTIVATION_DEFERRED')
                 return {'status':'ACTIVATION_DEFERRED','request_id':rid,'campaign_ids':ids,'retry_after_seconds':state['retry_after_seconds']}
-            cid=tree['campaign']['id'];live=read_tree(engine,bundle,transport,cid,'activation_pre_read');validate_live(live,tree,spec)
+            cid=tree['campaign']['id'];live=read_tree(engine,bundle,transport,cid,'activation_pre_read');validate_live(live,tree,spec,rid)
             missing=[n for n in statuses(live) if n.get('configured_status',n.get('status'))!='ACTIVE']
             if missing and not continuation and spec.start_intent != 'IMMEDIATE' and datetime.fromisoformat(spec.start_time).astimezone(timezone.utc)<=datetime.now(timezone.utc):
                 raise ValueError('approved start time elapsed; no silent immediate activation or reschedule')
@@ -182,7 +188,7 @@ def activate(engine,target,creation,proof):
                 if deadline_exceeded(): return hold()
                 state.update(stage='campaign_status_in_flight',pending_ids=[cid]);atomic(state_path,state)
                 engine._batch(bundle,transport,[BatchOperation('activate_campaign','POST',cid,body={'status':'ACTIVE'},kind='activation_status')],'activation_campaign')
-            final=read_tree(engine,bundle,transport,cid,'activation_readback');validate_live(final,tree,spec)
+            final=read_tree(engine,bundle,transport,cid,'activation_readback');validate_live(final,tree,spec,rid)
             if any(n.get('configured_status',n.get('status'))!='ACTIVE' for n in statuses(final)):
                 raise ValueError('activation final configured status mismatch')
             final_trees.append(final)

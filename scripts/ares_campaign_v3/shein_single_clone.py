@@ -297,7 +297,14 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         raise RouteBlocked('campaign readback mismatch')
     if desired['status'] == 'PAUSED' and campaign.get('effective_status') not in {'PAUSED', 'IN_PROCESS', 'PENDING_REVIEW'}:
         raise RouteBlocked('paused campaign effective status mismatch')
-    if not _same_time(campaign.get('start_time'), desired['start_time']):
+    from .shein_copy_schedule import proven_now_copy_time
+    def schedule_ok(observed):
+        return _same_time(observed, desired['start_time']) or (
+            desired.get('start_intent') == 'IMMEDIATE' and proven_now_copy_time(
+                desired['start_time'], observed, request_id=payload['request_id'],
+                account_id=desired['account_id'], campaign_id=campaign['id'],
+                idempotency_key=desired['idempotency_key']))
+    if not schedule_ok(campaign.get('start_time')):
         raise RouteBlocked('campaign schedule mismatch')
     sets, ads = live['adsets'].get('data') or [], live['ads'].get('data') or []
     if len(sets) != 1 or len(ads) != len(desired['ads']):
@@ -305,7 +312,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     target_set = sets[0]
     if target_set.get('status') != desired['status'] or target_set.get('name') != desired['adset_name']:
         raise RouteBlocked('adset name/status mismatch')
-    if not _same_time(target_set.get('start_time'), desired['start_time']):
+    if not schedule_ok(target_set.get('start_time')):
         raise RouteBlocked('adset schedule mismatch')
     source_set = desired.get('adset_create') or source['adset']
     bid_expected = desired.get('adset_updates') if desired.get('bid_override') is True else source_set
