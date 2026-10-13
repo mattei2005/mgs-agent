@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-13T11:25:23-04:00",
+    "updated_at": "2026-10-13T12:58:08-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -7786,20 +7786,21 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 109385,
-      "modified_at": "2026-09-06T10:10:58-04:00",
-      "sha256": "feb00f60d3529abe1eb569827861374139789dd50bd03e8e1257533fe5ca352c",
+      "size_bytes": 112387,
+      "modified_at": "2026-10-13T12:56:27.128920-04:00",
+      "sha256": "917680c4a982441ac99b3a9bcfa9a4692099ba65df03867a9c0928db0dfa5168",
       "description": "Registry-driven B001–B012 monitor with automatic restriction pause, fail-closed Sheet reconciliation and current+predecessor investment-lineage enrichment for standard segurador profile replacements.",
-      "validation": "bash syntax PASS; combined 31/31 tests PASS; Service Account readback parsed Paula Oliveira OBS predecessor as Fernanda Peixoto plus exact ID; live renderer resolved current Sheet fields and preserved R$ 3.472,98 Invest 3D under Paula. Scheduled production cycle 2026-09-06T10:14:07-04:00 completed all 12 apps with errors=0, alerts=0, Sheet updated=false and B007-3 cumulative_removed empty.",
-      "updated_at": "2026-09-06T10:17:14-04:00",
+      "validation": "13 unittest tests PASS; both real production loaders INVEST_3D_OK with 152 profiles; positive/zero/missing renderer branches PASS; B004-8/B006-6/B011-6 pauses preserved.",
+      "updated_at": "2026-10-13T12:58:08-04:00",
       "source_report": "discord:#alerts-infra/1546163553298423839",
       "previous_report": "discord:#alerts-infra/1545836604520669265",
-      "last_change": "2026-09-06: parse OBS Perfil Antigo name and ID separately, suppress the predecessor as planned housekeeping and aggregate Invest Hoje/Invest 3D under the current replacement profile.",
-      "backup": "/root/mgs-agent/backups/meta-app-profile-replacement-invest-20260906T100952-0400/meta-app-roles-watch.sh.before",
+      "last_change": "Investment enrichment parser selects the business JSON contract instead of the last stdout line; ignores merged browser-budget telemetry. No scope/cadence/pause changes.",
+      "backup": "/root/mgs-agent/backups/meta-app-invest-parser-1559609250567684157",
       "backup_validation": "Seven pre-change artifacts plus SHA256SUMS preserved; fixture, live Sheet/SB renderer, dry-run delivery guard and scheduled production cycle passed.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/meta-app-roles-watch.sh.before-b0133-exclusion",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0133-cutover-20260821-105035/b013-dtr-link-monitor-state.json.before",
-      "report_readback": "HTTP 200; exact Discord GET confirmed message 1546163553298423839 in channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero mentions and no thread."
+      "report_readback": "HTTP 200; exact Discord GET confirmed message 1546163553298423839 in channel 1498132022634483894, Zeus author, empty content, one embed with required fields, zero mentions and no thread.",
+      "source_message_id": "1559609250567684157"
     },
     {
       "id": "zeus-meta-app-role-alert-pause-state",
@@ -12080,20 +12081,20 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
-      "size_bytes": 61400,
-      "modified_at": "2026-09-24T15:15:43-04:00",
-      "sha256": "f5d9fd09705d762e8253ef97c2570e1dd4b60cad7e7d24be61e6d8334becd79f",
+      "size_bytes": 62086,
+      "modified_at": "2026-10-13T12:56:27.130920-04:00",
+      "sha256": "9428e1dc283ad873ff3a027410fe8144ab092ae07392d18749e49871f3b57d93",
       "cron_job_id": "498fb0d95e10",
       "schedule": "2-59/9 0,8-23 * * *; 2-59/10 1-7 * * *",
       "description": "Dedicated current B013-7 DTR/ChatPion monitor with fail-closed Sheet reconciliation, healthy-capability suppression of false app-restriction alerts, anti-false-positive confirmation and current+predecessor investment-lineage enrichment from OBS.",
-      "validation": "Exact 18-label B013-6→B013-7 substitution; Bash syntax PASS; app metadata, /roles, /me and debug_token HTTP 200 with token valid/app-bound; isolated dry-run 43 targets and zero side effects; contained production baseline then second-cycle readback; first scheduled cycle at 2026-09-24T15:42:34-04:00 completed 44 targets, 4 linked, 39 confirmed unlinked, 1 inconclusive, healthy capability, 1 accurate Sheet update and one verified four-message change family.",
-      "updated_at": "2026-09-24T15:52:23-04:00",
+      "validation": "13 unittest tests PASS; both real production loaders INVEST_3D_OK with 152 profiles; positive/zero/missing renderer branches PASS; B004-8/B006-6/B011-6 pauses preserved.",
+      "updated_at": "2026-10-13T12:58:08-04:00",
       "source_report": "discord:#alerts-infra/1552768370183508089",
       "report_readback": "Helper HTTP 200; exact Discord fetch returned message 1552768370183508089 in channel 1498132022634483894, authored by Zeus, with empty content and no thread.",
       "invest_split_source_report": "discord:#alerts-infra/1545826494608187404",
       "invest_split_report_readback": "Helper HTTP 200; exact Discord fetch returned message 1545826494608187404 in #alerts-infra, authored by Zeus, with empty content and no thread.",
-      "last_change": "2026-09-24: replaced dedicated B013-6 with B013-7 only after the corrected 1Password access_token passed /me and debug_token app-binding gates; preserved the immutable item ID, channel, Sheet fail-closed behavior and 24-hour cadence.",
-      "backup": "/root/mgs-agent/backups/meta-app-b0136-b0046-b0064-cutovers-20260924-151444/b013-dtr-link-watch.sh.before",
+      "last_change": "Investment enrichment parser selects the business JSON contract instead of the last stdout line; ignores merged browser-budget telemetry. No scope/cadence/pause changes.",
+      "backup": "/root/mgs-agent/backups/meta-app-invest-parser-1559609250567684157",
       "backup_validation": "SHA256SUMS manifest contains four files and sha256sum -c returned 4/4 OK before production writes.",
       "previous_backup": "/root/mgs-agent/backups/meta-app-b0134-to-b0135-cutover-20260904T181435-0400/b013-dtr-link-watch.sh.before",
       "state_backup": "/root/mgs-agent/backups/meta-app-b0136-b0046-b0064-cutovers-20260924-151444/b013-dtr-link-monitor-state.json.before",
@@ -12112,7 +12113,8 @@
         "credential_gate": "/me HTTP 200; debug_token is_valid=true; app_id match; app metadata and /roles HTTP 200.",
         "canary_validation": "One-target and full dry-runs completed without Sheet write, state persistence or Discord alert; first baseline suppressed alerts and second cycle verified canonical state.",
         "production_readback": "Scheduled cycle 2026-09-24T15:42:34-04:00; alerts 1552767220990476431, 1552767255602012221, 1552767256558313473, 1552767257975849153."
-      }
+      },
+      "source_message_id": "1559609250567684157"
     },
     {
       "id": "zeus-meta-app-b013-dtr-cutover-reference-20260806",
@@ -43372,6 +43374,24 @@
       "operational_collisions": 0,
       "tests": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c40-c41-activate-20261013-rodolfo/test-results.json",
       "budget_amendment_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c40-c41-activate-20261013-rodolfo/c41-budget-30-amendment.json"
+    },
+    {
+      "id": "meta-app-invest-parser-recovery-1559609250567684157",
+      "agent": "zeus",
+      "type": "validation_and_recovery",
+      "source_message_id": "1559609250567684157",
+      "thread_id": "1559608992307609723",
+      "updated_at": "2026-10-13T12:58:08-04:00",
+      "paths": [
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+        "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+        "/root/mgs-agent/tests/test_meta_app_invest_3d.py",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md"
+      ],
+      "test_sha256": "ccf5639e986751fcd8af6bc9ba05dca031f6832f643cb95139d02e5c25c2f6b0",
+      "validation": "13 tests PASS, actual helper and both real consumers healthy; read-only revenue audit of 34 current Sheet occurrences joined to 8067 live Messenger Daily rows across 51 publishers.",
+      "scope_preserved": true,
+      "backup": "/root/mgs-agent/backups/meta-app-invest-parser-1559609250567684157"
     }
   ],
   "profile_skill_references": [

@@ -330,6 +330,12 @@ The canonical set lives in `data/meta-app-registry.json` under `verification_ign
 
 Rodolfo authorized in message `1556684020123705426`: when he sends an exact completed app replacement/migration (`old→new`), Zeus must update, validate and reactivate that same existing monitor route without asking again. The new actionable report is the authorization; historical messages never authorize replay. Preserve the same channel, lineage-specific runner, unrelated pauses and current scope. Preflight exact 1Password item/app_name, app-bound valid token, live Graph/roles or B013 DTR capability and canonical SA Sheet; require backup, fresh app-scoped state, silent baseline, clean second cycle and exact readback before reactivation. Escalate only an actual blocker or Critical Subset; this standing permission never authorizes credential rotation, permission/budget changes, deletion, gateway restart or broader migrations.
 
+### Investment-enrichment output contract and `n/d` interpretation
+
+Parse the helper's `INVEST_3D_OK` business JSON by its explicit status/days/map contract, not by `json.loads(lines[-1])`: canonical `xvfb-run` merges browser-admission stderr into stdout, and `BROWSER_BUDGET` events can follow or share the JSON line. Preserve nonzero-exit, duplicate-payload, date-window and nonempty-map gates; test plain JSON, separate/concatenated telemetry, malformed/missing/duplicate payloads in both generic and B013 consumers. Exercise the real loader without unpausing apps or posting manager alerts.
+
+Interpret `INVEST HOJE`/`INVEST 3D` as spend, not revenue. `n/d` means unavailable enrichment or absent exact profile match, never a confirmed zero. Verify revenue separately from live Messenger Daily `REVENUE`, joined to current Service Account Sheet assignments; distinguish a numeric zero from a profile absent in the source, and qualify current-day totals as partial rather than post-restriction evidence.
+
 ### Temporary app-scoped notification pause
 
 When Rodolfo asks to pause only selected app channels, do not pause the whole `meta-app-roles-watch` cron if unaffected apps must remain monitored. Write `/root/mgs-agent/data/meta-app-role-alert-pause.json` with the exact app keys and one of two explicit modes:
