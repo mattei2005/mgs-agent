@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-13T14:52:43-04:00",
+    "updated_at": "2026-10-13T15:51:59-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -43583,6 +43583,307 @@
       "test_path": "/root/mgs-agent/tests/test_meta_app_invest_3d.py",
       "source_report": "discord:#alerts-infra/1559640046284316714",
       "report_readback": "HTTP 200, exact channel/message, empty content, one embed, zero mentions/thread."
+    },
+    {
+      "id": "meta-app-recheck-and-13-alerts-1559647786314637345",
+      "agent": "zeus",
+      "type": "verification_followup",
+      "updated_at": "2026-10-13T15:51:59-04:00",
+      "source_message_ids": [
+        "1559647786314637345",
+        "1559650070348042321"
+      ],
+      "thread_id": "1559608992307609723",
+      "evidence_path": "/root/mgs-agent/reports/meta-app-recheck-1559647786314637345",
+      "tests": "14 PASS; Bash syntax PASS; runtime script hashes match inventory; skill mirror exact",
+      "credential_and_graph_validation": "All 12 generic apps checked fresh; valid app-bound tokens, metadata/roles/me/debug_token HTTP 200 and zero unresolved roles; B013 fresh metadata/me/debug_token PASS plus full fresh dedicated 49-account run.",
+      "cron_validation": "Four existing day/night jobs enabled/scheduled, last status OK; no manual pause.",
+      "investment_and_table_validation": {
+        "channels": 13,
+        "rows": 194,
+        "numeric": 151,
+        "nd": 43,
+        "apps": {
+          "B001-5": {
+            "rows": 15,
+            "numeric": 13,
+            "nd": 2
+          },
+          "B002-5": {
+            "rows": 10,
+            "numeric": 9,
+            "nd": 1
+          },
+          "B003-3": {
+            "rows": 12,
+            "numeric": 10,
+            "nd": 2
+          },
+          "B004-9": {
+            "rows": 9,
+            "numeric": 7,
+            "nd": 2
+          },
+          "B005-4": {
+            "rows": 13,
+            "numeric": 10,
+            "nd": 3
+          },
+          "B006-7": {
+            "rows": 13,
+            "numeric": 13,
+            "nd": 0
+          },
+          "B007-4": {
+            "rows": 17,
+            "numeric": 16,
+            "nd": 1
+          },
+          "B008-3": {
+            "rows": 8,
+            "numeric": 7,
+            "nd": 1
+          },
+          "B009-5": {
+            "rows": 13,
+            "numeric": 10,
+            "nd": 3
+          },
+          "B010-3": {
+            "rows": 13,
+            "numeric": 9,
+            "nd": 4
+          },
+          "B011-7": {
+            "rows": 12,
+            "numeric": 8,
+            "nd": 4
+          },
+          "B012-2": {
+            "rows": 10,
+            "numeric": 8,
+            "nd": 2
+          },
+          "B013-7": {
+            "rows": 49,
+            "numeric": 31,
+            "nd": 18
+          }
+        }
+      },
+      "generic_membership_gaps": {
+        "B004-9": [
+          "Ahyaruel Monyeng"
+        ],
+        "B005-4": [
+          "Alice Prates"
+        ],
+        "B006-7": [
+          "Viviane Moura"
+        ],
+        "B007-4": [
+          "Ameenah Abdullahi"
+        ],
+        "B009-5": [
+          "Marcelo Serbai"
+        ],
+        "B010-3": [
+          "Luana Ferreira Gomes"
+        ],
+        "B011-7": [
+          "Kristo Pratama"
+        ],
+        "B012-2": [
+          "Maribel Tamboon"
+        ]
+      },
+      "b013_nonlinked": [
+        {
+          "name": "Hindawan Pratama",
+          "verdict": "unlinked_confirmed",
+          "error": {
+            "code": null,
+            "type": null,
+            "message": "debug_token did not validate against B013-7"
+          },
+          "user": "disparosfinanzastopfeeduscces@gmail.com"
+        }
+      ],
+      "b013_summary": {
+        "targets": 49,
+        "linked": 48,
+        "unlinked_confirmed": 1,
+        "unknown": 0,
+        "not_linked_or_error": 1,
+        "total_dtr_pages_visible": 355,
+        "total_graph_pages": 343,
+        "total_connected_pages": 339,
+        "linked_debug_valid": 48,
+        "linked_accounts_status_200": 48,
+        "linked_dtr_pages_zero_graph": 0,
+        "planned_scope_removals": 0,
+        "app_capability": {
+          "status": "healthy",
+          "linked_accounts": 48,
+          "debug_valid": 48,
+          "accounts_status_200": 48,
+          "dtr_pages_visible": 355,
+          "graph_pages_visible": 343,
+          "dtr_pages_zero_graph_accounts": 0,
+          "checked_at": "2026-10-13T15:49:45-04:00"
+        },
+        "sheet_sync": {
+          "enabled": true,
+          "checked_rows": 49,
+          "marked": 1,
+          "unknown_preserved": 0,
+          "updates_needed": 0,
+          "updated": false,
+          "checked_at": "2026-10-13T15:49:45-04:00"
+        },
+        "alert_profiles": {
+          "profile": "Giselle Santos",
+          "backup_profile": "Emgai Datquang"
+        },
+        "possible_restriction_gate": {
+          "status": "no_candidate",
+          "persistent_debug_failures": 0,
+          "capability_status": "healthy"
+        },
+        "invest_3d": {
+          "status": "INVEST_3D_OK",
+          "current_date": "2026-10-13",
+          "current_day_partial": true,
+          "period_start": "2026-10-10",
+          "period_end": "2026-10-12",
+          "days": 3,
+          "error": null
+        },
+        "alerts_sent": 1
+      },
+      "new_alerts": [
+        {
+          "app": "B001-5",
+          "channel_id": "1521251196294135858",
+          "live_message_id": "1559652000340254863",
+          "table_ids": [
+            "1559652001183301686"
+          ]
+        },
+        {
+          "app": "B002-5",
+          "channel_id": "1521251220130496723",
+          "live_message_id": "1559652003775520903",
+          "table_ids": [
+            "1559652005088207029"
+          ]
+        },
+        {
+          "app": "B003-3",
+          "channel_id": "1521251246860931223",
+          "live_message_id": "1559652006979964995",
+          "table_ids": [
+            "1559652008305369099"
+          ]
+        },
+        {
+          "app": "B004-9",
+          "channel_id": "1521251334496456815",
+          "live_message_id": "1559652010373021726",
+          "table_ids": [
+            "1559652011576791281",
+            "1559652012683952139"
+          ]
+        },
+        {
+          "app": "B005-4",
+          "channel_id": "1521251961662341160",
+          "live_message_id": "1559652013791383675",
+          "table_ids": [
+            "1559652016127741953",
+            "1559652017117597740"
+          ]
+        },
+        {
+          "app": "B006-7",
+          "channel_id": "1521252068319297666",
+          "live_message_id": "1559652018677620777",
+          "table_ids": [
+            "1559652025095028777",
+            "1559652026625826827"
+          ]
+        },
+        {
+          "app": "B007-4",
+          "channel_id": "1520510823426949313",
+          "live_message_id": "1559652027892629646",
+          "table_ids": [
+            "1559652029222101175",
+            "1559652030912397478"
+          ]
+        },
+        {
+          "app": "B008-3",
+          "channel_id": "1521252172929564744",
+          "live_message_id": "1559652032489717841",
+          "table_ids": [
+            "1559652033475252251"
+          ]
+        },
+        {
+          "app": "B009-5",
+          "channel_id": "1521252284623884288",
+          "live_message_id": "1559652035832324137",
+          "table_ids": [
+            "1559652038143381637",
+            "1559652039804330149"
+          ]
+        },
+        {
+          "app": "B010-3",
+          "channel_id": "1521252369331916902",
+          "live_message_id": "1559652041171800157",
+          "table_ids": [
+            "1559652043453628468",
+            "1559652045110255690"
+          ]
+        },
+        {
+          "app": "B011-7",
+          "channel_id": "1537256907373289575",
+          "live_message_id": "1559652046381125744",
+          "table_ids": [
+            "1559652047802863818",
+            "1559652048851697735"
+          ]
+        },
+        {
+          "app": "B012-2",
+          "channel_id": "1537256951879172136",
+          "live_message_id": "1559652049875116184",
+          "table_ids": [
+            "1559652051011768413",
+            "1559652052454350900"
+          ]
+        },
+        {
+          "app": "B013-7",
+          "channel_id": "1522830283240505385",
+          "live_message_id": "1559654398022393857",
+          "table_ids": [
+            "1559654433414189087",
+            "1559654434752176141",
+            "1559654436077576237",
+            "1559654437440585839"
+          ]
+        }
+      ],
+      "monitor_configuration_changes": false,
+      "credential_changes": false,
+      "scripts_changed": false,
+      "alert_delivery": true,
+      "source_report": "discord:#alerts-infra/1559654963297386539",
+      "report_readback": "HTTP 200; exact message/channel; one embed; empty content; no mentions/thread."
     }
   ],
   "profile_skill_references": [

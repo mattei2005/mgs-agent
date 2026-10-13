@@ -1,0 +1,893 @@
+[
+  {
+    "app": "B001-5",
+    "channel_id": "1521251196294135858",
+    "snapshot": {
+      "item": "BOT B001-5 Token - Debora Monteiro Lima",
+      "app_id": "28152750157707455",
+      "app_name": "B001-5",
+      "roles": [
+        {
+          "id": "28110651685220841",
+          "name": "Aan Supri Adi",
+          "role": "administrators"
+        },
+        {
+          "id": "3430142517163160",
+          "name": "Beatriz Silva",
+          "role": "administrators"
+        },
+        {
+          "id": "122194477562714491",
+          "name": "Debora Monteiro Lima",
+          "role": "administrators"
+        },
+        {
+          "id": "1410529451218922",
+          "name": "Ethan IBet",
+          "role": "administrators"
+        },
+        {
+          "id": "1635507218245385",
+          "name": "Fabio Aleksander",
+          "role": "administrators"
+        },
+        {
+          "id": "122184201704612564",
+          "name": "Iris Rubio",
+          "role": "administrators"
+        },
+        {
+          "id": "1640424964176976",
+          "name": "Jack Smith",
+          "role": "administrators"
+        },
+        {
+          "id": "2281783029330172",
+          "name": "Karla Michelli",
+          "role": "administrators"
+        },
+        {
+          "id": "2133376794282216",
+          "name": "Luis Hoàng",
+          "role": "administrators"
+        },
+        {
+          "id": "122196219140682172",
+          "name": "Ricardo Gabriel Monteiro",
+          "role": "administrators"
+        },
+        {
+          "id": "2120027525573357",
+          "name": "Salsa Billa",
+          "role": "administrators"
+        },
+        {
+          "id": "1071081885570874",
+          "name": "Vije Juemadhic III",
+          "role": "administrators"
+        },
+        {
+          "id": "2858060724562222",
+          "name": "Wah Lan",
+          "role": "administrators"
+        },
+        {
+          "id": "1389984209995758",
+          "name": "Wong Awam",
+          "role": "administrators"
+        },
+        {
+          "id": "3196370947234208",
+          "name": "Yunita Melvianus",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 15,
+      "x_app_usage": "{\"call_count\":1,\"total_cputime\":0,\"total_time\":0}",
+      "usage": {
+        "raw": "{\"call_count\":1,\"total_cputime\":0,\"total_time\":0}",
+        "parsed": {
+          "call_count": 1,
+          "total_cputime": 0,
+          "total_time": 0
+        },
+        "max_pct": 1,
+        "max_metric": "call_count",
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 15,
+          "pages": 1
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 200,
+          "ok": true
+        }
+      },
+      "role_identity_resolution": {
+        "status": 200,
+        "requested_count": 15,
+        "resolved_count": 15,
+        "unresolved_count": 0,
+        "mode": "graph_multi_id_chunked",
+        "source_pages": 1,
+        "chunk_size": 50,
+        "chunks": 1,
+        "chunk_statuses": [
+          500
+        ],
+        "cache_resolved_count": 15,
+        "individual_limit": 20,
+        "individual_requested_count": 0,
+        "individual_resolved_count": 0,
+        "individual_statuses": [],
+        "baseline_applied": false,
+        "role_ids_sha256": "3e78e1828590b1041937c75283b7d21342a39a2879260730b666ed19b6cf4b96"
+      },
+      "token_info": {
+        "present": true,
+        "valid": true,
+        "scopes": [
+          "business_management",
+          "email",
+          "instagram_basic",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "pages_manage_engagement",
+          "pages_manage_metadata",
+          "pages_manage_posts",
+          "pages_messaging",
+          "pages_read_engagement",
+          "pages_read_user_content",
+          "pages_show_list",
+          "pages_utility_messaging",
+          "public_profile",
+          "read_insights"
+        ],
+        "expires_at": 1793632145,
+        "app_id": "28152750157707455",
+        "type": "USER"
+      },
+      "checked_at": "2026-10-13T15:29:18-04:00"
+    }
+  },
+  {
+    "app": "B002-5",
+    "channel_id": "1521251220130496723",
+    "snapshot": {
+      "item": "BOT B002-5 Token - Afonso Araujo",
+      "app_id": "3100369596839174",
+      "app_name": "B002-5",
+      "roles": [
+        {
+          "id": "2111555196901817",
+          "name": "Adalberto Vilela Oliveira",
+          "role": "administrators"
+        },
+        {
+          "id": "122196457010927934",
+          "name": "Adriana Mendes",
+          "role": "administrators"
+        },
+        {
+          "id": "1140648795160483",
+          "name": "Afonso Araujo",
+          "role": "administrators"
+        },
+        {
+          "id": "1806106220395484",
+          "name": "Dân Kbang",
+          "role": "administrators"
+        },
+        {
+          "id": "122192613920920790",
+          "name": "Eduarda Bastos",
+          "role": "administrators"
+        },
+        {
+          "id": "1666206645021956",
+          "name": "Lien Bui",
+          "role": "administrators"
+        },
+        {
+          "id": "1436663361709581",
+          "name": "Marsya Aisya",
+          "role": "administrators"
+        },
+        {
+          "id": "1167219005629417",
+          "name": "Nur Mala Mala",
+          "role": "administrators"
+        },
+        {
+          "id": "122173259006688604",
+          "name": "Selma Aparecido Antunes",
+          "role": "administrators"
+        },
+        {
+          "id": "1740147093878835",
+          "name": "Đời Sống Giả Tạo",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 10,
+      "x_app_usage": "{\"call_count\":3,\"total_cputime\":0,\"total_time\":0}",
+      "usage": {
+        "raw": "{\"call_count\":3,\"total_cputime\":0,\"total_time\":0}",
+        "parsed": {
+          "call_count": 3,
+          "total_cputime": 0,
+          "total_time": 0
+        },
+        "max_pct": 3,
+        "max_metric": "call_count",
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 10,
+          "pages": 1
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 200,
+          "ok": true
+        }
+      },
+      "role_identity_resolution": {
+        "status": 200,
+        "requested_count": 10,
+        "resolved_count": 10,
+        "unresolved_count": 0,
+        "mode": "graph_multi_id_chunked",
+        "source_pages": 1,
+        "chunk_size": 50,
+        "chunks": 1,
+        "chunk_statuses": [
+          500
+        ],
+        "cache_resolved_count": 10,
+        "individual_limit": 20,
+        "individual_requested_count": 0,
+        "individual_resolved_count": 0,
+        "individual_statuses": [],
+        "baseline_applied": false,
+        "role_ids_sha256": "458a97bd4e384627f11339ca5f5ea84baf15615d482992d07c18e76e93382dc6"
+      },
+      "token_info": {
+        "present": true,
+        "valid": true,
+        "scopes": [
+          "business_management",
+          "email",
+          "instagram_basic",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "pages_manage_engagement",
+          "pages_manage_metadata",
+          "pages_manage_posts",
+          "pages_messaging",
+          "pages_read_engagement",
+          "pages_read_user_content",
+          "pages_show_list",
+          "pages_utility_messaging",
+          "public_profile",
+          "read_insights"
+        ],
+        "expires_at": 0,
+        "app_id": "3100369596839174",
+        "type": "USER"
+      },
+      "checked_at": "2026-10-13T15:29:23-04:00"
+    }
+  },
+  {
+    "app": "B003-3",
+    "channel_id": "1521251246860931223",
+    "snapshot": {
+      "item": "BOT B003-3 Token - Dhidin Distro",
+      "app_id": "28443155008630402",
+      "app_name": "B003-3",
+      "roles": [
+        {
+          "id": "2368115050615571",
+          "name": "Ajiwarawiri Ajiwarawiri",
+          "role": "administrators"
+        },
+        {
+          "id": "2125992974979580",
+          "name": "Angela Maria",
+          "role": "administrators"
+        },
+        {
+          "id": "1593087062193988",
+          "name": "Arief",
+          "role": "administrators"
+        },
+        {
+          "id": "1622442986142582",
+          "name": "Cauã Santos",
+          "role": "administrators"
+        },
+        {
+          "id": "1566885905182762",
+          "name": "Choy",
+          "role": "administrators"
+        },
+        {
+          "id": "3618565641635083",
+          "name": "Dhidin Distro",
+          "role": "administrators"
+        },
+        {
+          "id": "1011476228566694",
+          "name": "Giselle Icaro",
+          "role": "administrators"
+        },
+        {
+          "id": "1020496414377449",
+          "name": "John Cesar",
+          "role": "administrators"
+        },
+        {
+          "id": "2246040819519487",
+          "name": "Kurniati Kurniati",
+          "role": "administrators"
+        },
+        {
+          "id": "3442859025874538",
+          "name": "Lisna Lumbantobing",
+          "role": "administrators"
+        },
+        {
+          "id": "122189867558697981",
+          "name": "Manoel Maximiano",
+          "role": "administrators"
+        },
+        {
+          "id": "1836876653973533",
+          "name": "Putra",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 12,
+      "x_app_usage": "{\"call_count\":2,\"total_cputime\":0,\"total_time\":0}",
+      "usage": {
+        "raw": "{\"call_count\":2,\"total_cputime\":0,\"total_time\":0}",
+        "parsed": {
+          "call_count": 2,
+          "total_cputime": 0,
+          "total_time": 0
+        },
+        "max_pct": 2,
+        "max_metric": "call_count",
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 12,
+          "pages": 1
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 200,
+          "ok": true
+        }
+      },
+      "role_identity_resolution": {
+        "status": 200,
+        "requested_count": 12,
+        "resolved_count": 12,
+        "unresolved_count": 0,
+        "mode": "graph_multi_id_chunked",
+        "source_pages": 1,
+        "chunk_size": 50,
+        "chunks": 1,
+        "chunk_statuses": [
+          500
+        ],
+        "cache_resolved_count": 12,
+        "individual_limit": 20,
+        "individual_requested_count": 0,
+        "individual_resolved_count": 0,
+        "individual_statuses": [],
+        "baseline_applied": false,
+        "role_ids_sha256": "6d25246ac74de003f73ed88995e1db46ebe93f965997c2a2ac30a33e57c3beb7"
+      },
+      "token_info": {
+        "present": true,
+        "valid": true,
+        "scopes": [
+          "business_management",
+          "email",
+          "instagram_basic",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "pages_manage_engagement",
+          "pages_manage_metadata",
+          "pages_manage_posts",
+          "pages_messaging",
+          "pages_read_engagement",
+          "pages_read_user_content",
+          "pages_show_list",
+          "pages_utility_messaging",
+          "public_profile",
+          "read_insights"
+        ],
+        "expires_at": 0,
+        "app_id": "28443155008630402",
+        "type": "USER"
+      },
+      "checked_at": "2026-10-13T15:29:28-04:00"
+    }
+  },
+  {
+    "app": "B004-9",
+    "channel_id": "1521251334496456815",
+    "snapshot": {
+      "item": "BOT B004-9 Token - Maria Bari",
+      "app_id": "3606873262821325",
+      "app_name": "B004-9",
+      "roles": [
+        {
+          "id": "122190117110929624",
+          "name": "Adrielly Freitas",
+          "role": "administrators"
+        },
+        {
+          "id": "2023359869068442",
+          "name": "Dono Handoko",
+          "role": "administrators"
+        },
+        {
+          "id": "1648009373576192",
+          "name": "Eldha Sully",
+          "role": "administrators"
+        },
+        {
+          "id": "2862965730742770",
+          "name": "Jeriyanto Jeriyanto",
+          "role": "administrators"
+        },
+        {
+          "id": "1083527434312874",
+          "name": "Maria Bari",
+          "role": "administrators"
+        },
+        {
+          "id": "1586692549810545",
+          "name": "Milla Fernandes",
+          "role": "administrators"
+        },
+        {
+          "id": "1664373445320784",
+          "name": "Pready AS",
+          "role": "administrators"
+        },
+        {
+          "id": "122187190814714493",
+          "name": "Rebeca Rocha Ferreira",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 8,
+      "x_app_usage": "{\"call_count\":29,\"total_cputime\":0,\"total_time\":4}",
+      "usage": {
+        "raw": "{\"call_count\":29,\"total_cputime\":0,\"total_time\":4}",
+        "parsed": {
+          "call_count": 29,
+          "total_cputime": 0,
+          "total_time": 4
+        },
+        "max_pct": 29,
+        "max_metric": "call_count",
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 8,
+          "pages": 1
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 200,
+          "ok": true
+        }
+      },
+      "role_identity_resolution": {
+        "status": 200,
+        "requested_count": 8,
+        "resolved_count": 8,
+        "unresolved_count": 0,
+        "mode": "graph_multi_id_chunked",
+        "source_pages": 1,
+        "chunk_size": 50,
+        "chunks": 1,
+        "chunk_statuses": [
+          500
+        ],
+        "cache_resolved_count": 8,
+        "individual_limit": 20,
+        "individual_requested_count": 0,
+        "individual_resolved_count": 0,
+        "individual_statuses": [],
+        "baseline_applied": false,
+        "role_ids_sha256": "2d89378c3aa48318016b03de1a42e5407add6ff1f1b40ac3a0eae918c6c60f7b"
+      },
+      "token_info": {
+        "present": true,
+        "valid": true,
+        "scopes": [
+          "business_management",
+          "email",
+          "instagram_basic",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "pages_manage_engagement",
+          "pages_manage_metadata",
+          "pages_manage_posts",
+          "pages_messaging",
+          "pages_read_engagement",
+          "pages_read_user_content",
+          "pages_show_list",
+          "pages_utility_messaging",
+          "public_profile",
+          "read_insights"
+        ],
+        "expires_at": 0,
+        "app_id": "3606873262821325",
+        "type": "USER"
+      },
+      "checked_at": "2026-10-13T15:29:33-04:00"
+    }
+  },
+  {
+    "app": "B005-4",
+    "channel_id": "1521251961662341160",
+    "snapshot": {
+      "item": "BOT B005-4 Token - Taina Rocha Silveira",
+      "app_id": "1435923918412022",
+      "app_name": "B005-4",
+      "roles": [
+        {
+          "id": "1764481747892600",
+          "name": "Alessandra Furtado",
+          "role": "administrators"
+        },
+        {
+          "id": "1047813498233530",
+          "name": "Barbara Leticia",
+          "role": "administrators"
+        },
+        {
+          "id": "1745526313442000",
+          "name": "Beatriz Thomaz",
+          "role": "administrators"
+        },
+        {
+          "id": "1780731036692301",
+          "name": "Bernadete Do Socorro Rodrigues",
+          "role": "administrators"
+        },
+        {
+          "id": "1732034827879513",
+          "name": "Ichfla",
+          "role": "administrators"
+        },
+        {
+          "id": "1399082998859519",
+          "name": "Joao Italo",
+          "role": "administrators"
+        },
+        {
+          "id": "1755256069142054",
+          "name": "Jorge Robson",
+          "role": "administrators"
+        },
+        {
+          "id": "1379141767637790",
+          "name": "Muhammad Ishak",
+          "role": "administrators"
+        },
+        {
+          "id": "2105855386694706",
+          "name": "Raj Aryan",
+          "role": "administrators"
+        },
+        {
+          "id": "122169887120714464",
+          "name": "Taina Rocha Silveira",
+          "role": "administrators"
+        },
+        {
+          "id": "1584771060041595",
+          "name": "Vanderlei Evangelista da Silva",
+          "role": "administrators"
+        },
+        {
+          "id": "2752110135184226",
+          "name": "Vitor Melo Barbosa",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 12,
+      "x_app_usage": "{\"call_count\":2,\"total_cputime\":0,\"total_time\":0}",
+      "usage": {
+        "raw": "{\"call_count\":2,\"total_cputime\":0,\"total_time\":0}",
+        "parsed": {
+          "call_count": 2,
+          "total_cputime": 0,
+          "total_time": 0
+        },
+        "max_pct": 2,
+        "max_metric": "call_count",
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 12,
+          "pages": 1
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 200,
+          "ok": true
+        }
+      },
+      "role_identity_resolution": {
+        "status": 200,
+        "requested_count": 12,
+        "resolved_count": 12,
+        "unresolved_count": 0,
+        "mode": "graph_multi_id_chunked",
+        "source_pages": 1,
+        "chunk_size": 50,
+        "chunks": 1,
+        "chunk_statuses": [
+          500
+        ],
+        "cache_resolved_count": 12,
+        "individual_limit": 20,
+        "individual_requested_count": 0,
+        "individual_resolved_count": 0,
+        "individual_statuses": [],
+        "baseline_applied": false,
+        "role_ids_sha256": "5c98714e9f087756a81b5f8608d5c051cde67223dc02e017a0dc248aadcf3624"
+      },
+      "token_info": {
+        "present": true,
+        "valid": true,
+        "scopes": [
+          "business_management",
+          "email",
+          "instagram_basic",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "pages_manage_engagement",
+          "pages_manage_metadata",
+          "pages_manage_posts",
+          "pages_messaging",
+          "pages_read_engagement",
+          "pages_read_user_content",
+          "pages_show_list",
+          "pages_utility_messaging",
+          "public_profile",
+          "read_insights"
+        ],
+        "expires_at": 0,
+        "app_id": "1435923918412022",
+        "type": "USER"
+      },
+      "checked_at": "2026-10-13T15:29:38-04:00"
+    }
+  },
+  {
+    "app": "B006-7",
+    "channel_id": "1521252068319297666",
+    "snapshot": {
+      "item": "BOT B006-7 Token - Tiago De Oliveira Vianna ",
+      "app_id": "4056734171302910",
+      "app_name": "B006-7",
+      "roles": [
+        {
+          "id": "3289408471270144",
+          "name": "Anre Kameza",
+          "role": "administrators"
+        },
+        {
+          "id": "122195668076898293",
+          "name": "Bruna Andrade",
+          "role": "administrators"
+        },
+        {
+          "id": "1137908139190748",
+          "name": "Edleide Gomes",
+          "role": "administrators"
+        },
+        {
+          "id": "1608765524118185",
+          "name": "Gentil Alves Ribeiro",
+          "role": "administrators"
+        },
+        {
+          "id": "122190956042687502",
+          "name": "Isidoro Cristina Barbosa Martins",
+          "role": "administrators"
+        },
+        {
+          "id": "2528307767692104",
+          "name": "Jayadi Thaha Patonangi",
+          "role": "administrators"
+        },
+        {
+          "id": "1106653225086633",
+          "name": "Millena Kelly",
+          "role": "administrators"
+        },
+        {
+          "id": "1137328498631363",
+          "name": "Rori Ginbresil Ginting",
+          "role": "administrators"
+        },
+        {
+          "id": "2246906406099241",
+          "name": "Simone Oliveira",
+          "role": "administrators"
+        },
+        {
+          "id": "28335766052772142",
+          "name": "SobiRin Kemana Mana",
+          "role": "administrators"
+        },
+        {
+          "id": "28417886781217204",
+          "name": "Tiago De Oliveira Vianna",
+          "role": "administrators"
+        },
+        {
+          "id": "2625029967937127",
+          "name": "Valentino Simanjuntak",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 12,
+      "x_app_usage": "{\"call_count\":12,\"total_cputime\":0,\"total_time\":3}",
+      "usage": {
+        "raw": "{\"call_count\":12,\"total_cputime\":0,\"total_time\":3}",
+        "parsed": {
+          "call_count": 12,
+          "total_cputime": 0,
+          "total_time": 3
+        },
+        "max_pct": 12,
+        "max_metric": "call_count",
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 12,
+          "pages": 1
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 200,
+          "ok": true
+        }
+      },
+      "role_identity_resolution": {
+        "status": 200,
+        "requested_count": 12,
+        "resolved_count": 12,
+        "unresolved_count": 0,
+        "mode": "graph_multi_id_chunked",
+        "source_pages": 1,
+        "chunk_size": 50,
+        "chunks": 1,
+        "chunk_statuses": [
+          500
+        ],
+        "cache_resolved_count": 12,
+        "individual_limit": 20,
+        "individual_requested_count": 0,
+        "individual_resolved_count": 0,
+        "individual_statuses": [],
+        "baseline_applied": false,
+        "role_ids_sha256": "7244265f0c4e680b727cb97ab4a38c56b23f77bf291df812257a3c5c1a4cf697"
+      },
+      "token_info": {
+        "present": true,
+        "valid": true,
+        "scopes": [
+          "business_management",
+          "email",
+          "instagram_basic",
+          "instagram_content_publish",
+          "instagram_manage_comments",
+          "instagram_manage_insights",
+          "instagram_manage_messages",
+          "pages_manage_engagement",
+          "pages_manage_metadata",
+          "pages_manage_posts",
+          "pages_messaging",
+          "pages_read_engagement",
+          "pages_read_user_content",
+          "pages_show_list",
+          "pages_utility_messaging",
+          "public_profile",
+          "read_insights"
+        ],
+        "expires_at": 0,
+        "app_id": "4056734171302910",
+        "type": "USER"
+      },
+      "checked_at": "2026-10-13T15:29:43-04:00"
+    }
+  }
+]

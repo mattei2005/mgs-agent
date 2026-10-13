@@ -1,0 +1,156 @@
+{
+  "generic_apps": 12,
+  "b013_graph_ok": true,
+  "source_rows": 194,
+  "numeric": 151,
+  "nd": 43,
+  "generic_sheet_parity_errors": [],
+  "generic_gaps": {
+    "B004-9": [
+      "Ahyaruel Monyeng"
+    ],
+    "B005-4": [
+      "Alice Prates"
+    ],
+    "B006-7": [
+      "Viviane Moura"
+    ],
+    "B007-4": [
+      "Ameenah Abdullahi"
+    ],
+    "B009-5": [
+      "Marcelo Serbai"
+    ],
+    "B010-3": [
+      "Luana Ferreira Gomes"
+    ],
+    "B011-7": [
+      "Kristo Pratama"
+    ],
+    "B012-2": [
+      "Maribel Tamboon"
+    ]
+  },
+  "all_numeric_value_parity": "PASS",
+  "b013_sheet_parity": "PASS",
+  "b013_nonlinked": [
+    {
+      "name": "Hindawan Pratama",
+      "verdict": "unlinked_confirmed",
+      "error": {
+        "code": null,
+        "type": null,
+        "message": "debug_token did not validate against B013-7"
+      },
+      "user": "disparosfinanzastopfeeduscces@gmail.com"
+    }
+  ],
+  "b013_cycle_at": "2026-10-13T15:20:13-04:00",
+  "prior_alerts_verified": [
+    {
+      "app": "B001-5",
+      "message_id": "1559629191723614430",
+      "channel_id": "1521251196294135858"
+    },
+    {
+      "app": "B002-5",
+      "message_id": "1559629195968250029",
+      "channel_id": "1521251220130496723"
+    },
+    {
+      "app": "B003-3",
+      "message_id": "1559629200242118766",
+      "channel_id": "1521251246860931223"
+    },
+    {
+      "app": "B004-9",
+      "message_id": "1559629205518418070",
+      "channel_id": "1521251334496456815"
+    },
+    {
+      "app": "B005-4",
+      "message_id": "1559629208878063749",
+      "channel_id": "1521251961662341160"
+    },
+    {
+      "app": "B006-7",
+      "message_id": "1559632635641470987",
+      "channel_id": "1521252068319297666"
+    },
+    {
+      "app": "B007-4",
+      "message_id": "1559629213894574145",
+      "channel_id": "1520510823426949313"
+    },
+    {
+      "app": "B008-3",
+      "message_id": "1559629218105524335",
+      "channel_id": "1521252172929564744"
+    },
+    {
+      "app": "B009-5",
+      "message_id": "1559629223214452940",
+      "channel_id": "1521252284623884288"
+    },
+    {
+      "app": "B010-3",
+      "message_id": "1559629226963902495",
+      "channel_id": "1521252369331916902"
+    },
+    {
+      "app": "B011-7",
+      "message_id": "1559637394741923851",
+      "channel_id": "1537256907373289575"
+    },
+    {
+      "app": "B012-2",
+      "message_id": "1559629231066193961",
+      "channel_id": "1537256951879172136"
+    },
+    {
+      "app": "B013-7",
+      "message_id": "1559635690361458822",
+      "channel_id": "1522830283240505385"
+    }
+  ],
+  "cron": [
+    {
+      "id": "0cc7ed1e587e",
+      "enabled": true,
+      "state": "scheduled",
+      "last_status": "ok",
+      "last_run_at": "2026-10-13T15:35:14.442243-04:00",
+      "next_run_at": "2026-10-13T15:36:00-04:00",
+      "last_error": null
+    },
+    {
+      "id": "fb40054022fa",
+      "enabled": true,
+      "state": "scheduled",
+      "last_status": "ok",
+      "last_run_at": "2026-10-13T07:52:12.049554-04:00",
+      "next_run_at": "2026-10-14T01:00:00-04:00",
+      "last_error": null
+    },
+    {
+      "id": "498fb0d95e10",
+      "enabled": true,
+      "state": "scheduled",
+      "last_status": "ok",
+      "last_run_at": "2026-10-13T15:20:13.953813-04:00",
+      "next_run_at": "2026-10-13T15:38:00-04:00",
+      "last_error": null
+    },
+    {
+      "id": "f42618f5ced7",
+      "enabled": true,
+      "state": "scheduled",
+      "last_status": "ok",
+      "last_run_at": "2026-10-13T08:00:55.289430-04:00",
+      "next_run_at": "2026-10-14T01:02:00-04:00",
+      "last_error": null
+    }
+  ],
+  "manual_pause_apps": [],
+  "checked_at": "2026-10-13T15:35:15.864530-04:00"
+}
