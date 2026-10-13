@@ -23,5 +23,8 @@
   "evidence_directory": "/root/mgs-agent/data/infra-changes/digitaltrustadx-mail-1559682551931736175",
   "remote_backup": "/root/zeus-digitaltrustadx-mail-1559682551931736175/hestia-mail-before.tar.gz on 188.34.183.6",
   "validation": {"cloudflare_exact_readback": true, "public_dns_cloudflare_google": true, "https_200_roundcube_login": true, "tls_https_imaps_smtps_starttls": true, "contact_local_delivery_route": true, "matteiservicesinc_dns_unchanged_and_https_healthy": true, "end_to_end_external_message_test": false},
-  "known_cache_observation": "Zeus host upstream 153.92.2.6 retained pre-creation NXDOMAIN while authoritative DNS, public resolvers and the mail server public-hostname HTTPS were correct; no resolver configuration changed."
+  "known_cache_observation": "Historical: upstream 153.92.2.6 cached pre-creation NXDOMAIN. On 2026-10-13 the cache expired; default DNS, certificate-validating public HTTPS and the actual browser now resolve and display Roundcube. No resolver configuration changed.",
+  "webmail_vhost_owner": "Hestia E-MAIL digitaltrustadx.com; nginx symlinks must target /home/rodloguda/conf/mail/digitaltrustadx.com/",
+  "overlapping_web_entry_retained": "User-created WEB mail.digitaltrustadx.com and its files were preserved. A future WEB save/rebuild or certificate renewal can shadow Roundcube again; perform webmail SSL maintenance through E-MAIL, not WEB. No implicit deletion authorized.",
+  "last_recovery": {"id": "digitaltrustadx-webmail-recovery-1559686744184590408", "user_action_source": "1559687557300617359", "restored_mail_vhost": true, "browser_roundcube_login_verified": true, "cloudflare_change_needed": false, "evidence_directory": "/root/mgs-agent/data/infra-changes/digitaltrustadx-webmail-recovery-1559686744184590408"}
 }

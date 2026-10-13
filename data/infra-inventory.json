@@ -870,6 +870,18 @@
     },
     {
       "id": "digitaltrustadx-mail-1559682551931736175",
+      "last_recovery": {
+        "id": "digitaltrustadx-webmail-recovery-1559686744184590408",
+        "source_user_action_message_id": "1559687557300617359",
+        "cause": "New authorized WEB mail.digitaltrustadx.com SSL configuration shadowed MAIL Roundcube; earlier resolver also retained NXDOMAIN",
+        "repair": "Restored official MAIL nginx symlinks with v-add-mail-domain-webmail; config test/reload",
+        "cloudflare_mutation": false,
+        "browser_public_roundcube_verified": true,
+        "dns_default_resolver_recovered": true,
+        "user_web_files_preserved": true,
+        "evidence_path": "/root/mgs-agent/data/infra-changes/digitaltrustadx-webmail-recovery-1559686744184590408",
+        "overlapping_web_entry_retained": true
+      },
       "agent": "zeus",
       "type": "email_domain_dns_tls_migration",
       "status": "validated",

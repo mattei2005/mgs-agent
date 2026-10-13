@@ -1,0 +1,32 @@
+{
+  "mail.digitaltrustadx.com": {
+    "status": 200,
+    "roundcube_login": true,
+    "default_DNS": "188.34.183.6",
+    "TLS_valid": true,
+    "cert_SAN": [
+      [
+        "DNS",
+        "mail.digitaltrustadx.com"
+      ]
+    ]
+  },
+  "mail.matteiservicesinc.com": {
+    "status": 200,
+    "roundcube_login": true,
+    "default_DNS": "188.34.183.6",
+    "TLS_valid": true,
+    "cert_SAN": [
+      [
+        "DNS",
+        "mail.matteiservicesinc.com"
+      ]
+    ]
+  },
+  "TLS_993": true,
+  "TLS_465": true,
+  "SMTP_STARTTLS_587": true,
+  "CF_no_change_needed": true,
+  "reference_DNS_unchanged": true,
+  "server_readback": "{\n    \"digitaltrustadx.com\": {\n        \"ANTIVIRUS\": \"yes\",\n        \"ANTISPAM\": \"yes\",\n        \"DKIM\": \"yes\",\n        \"CATCHALL\": \"\",\n        \"ACCOUNTS\": \"1\",\n        \"RATE_LIMIT\": \"200\",\n        \"REJECT\": \"no\",\n        \"U_DISK\": \"0\",\n        \"SSL\": \"yes\",\n        \"LETSENCRYPT\": \"yes\",\n        \"SUSPENDED\": \"no\",\n        \"TIME\": \"21:24:35\",\n        \"DATE\": \"2026-10-13\",\n        \"WEBMAIL_ALIAS\": \"mail.digitaltrustadx.com\",\n        \"WEBMAIL\":\"roundcube\",\n        \"U_SMTP_RELAY\":\"\",\n        \"U_SMTP_RELAY_HOST\":\"\",\n        \"U_SMTP_RELAY_PORT\":\"\",\n        \"U_SMTP_RELAY_USERNAME\":\"\"\n        }\n}\nactive\nactive\nactive\nactive\nactive\ncontact@digitaltrustadx.com\n  router = localuser, transport = local_delivery\n"
+}

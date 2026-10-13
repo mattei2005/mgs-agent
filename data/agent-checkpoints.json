@@ -4133,12 +4133,12 @@
     {
       "agent": "zeus",
       "id": "digitaltrustadx-mail-1559682551931736175",
-      "next_step": "Reaplicar vhost oficial do Hestia E-MAIL e validar browser/TLS sem modificar DNS do site",
-      "objective": "Restaurar webmail apos dominio WEB mail.digitaltrustadx.com mascarar Roundcube; manter DNS correto e arquivos do usuario",
-      "source": "discord:1559679608931098667/1559687557300617359",
-      "state": "recovering_user_web_vhost_collision",
+      "next_step": "Operar SSL do webmail em E-MAIL; entrada WEB sobreposta preservada, sem exclusao implicita",
+      "objective": "Recuperar webmail apos cache DNS negativo e colisao com WEB mail.digitaltrustadx.com",
+      "source": "/root/mgs-agent/data/email-domains/digitaltrustadx.com.json",
+      "state": "completed_recovery_browser_validated",
       "thread_id": "1559679608931098667",
-      "updated_at": "2026-10-13T22:07:57+00:00"
+      "updated_at": "2026-10-13T22:09:23+00:00"
     },
     {
       "agent": "zeus",
@@ -5762,5 +5762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T22:08:28+00:00"
+  "updated_at": "2026-10-13T22:09:23+00:00"
 }
