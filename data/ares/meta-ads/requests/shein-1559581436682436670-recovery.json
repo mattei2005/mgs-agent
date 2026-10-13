@@ -7,9 +7,17 @@
   "source_campaign_id": "120254968463130547",
   "source_campaign_number": 89,
   "objective": "Duplicate source twice; USD100 daily per copy; COST_CAP USD0.75; immediate start on 2026-10-13 after full QA",
-  "status": "WAITING_PAGE_ACCESS_EXTERNAL",
-  "stage": "materialization_before_meta_write",
-  "campaign_ids_created": [],
+  "status": "READBACK_DEFERRED_QUOTA_AFTER_PERMISSION_REPAIR",
+  "stage": "children_created_readback_pending",
+  "campaign_ids_created": ["120254980192490547", "120254980192500547"],
+  "permission_repair": {
+    "authorized_by": "344196393512075265",
+    "authorization_message_id": "1559584807841697793",
+    "corporate_page_readback_http": 200,
+    "tasks_readback": ["ADVERTISE", "ANALYZE"],
+    "source": "shein-1559581436682436670-permission-receipt.json",
+    "original_blocker_resolved": true
+  },
   "source_unchanged": true,
   "page_id": "1165811629958161",
   "evidence": {
@@ -26,7 +34,7 @@
     "system_user_id": "122095869861482193",
     "client_business_id": "155263197283282"
   },
-  "next_action": "Rodolfo or authorized Business Portfolio administrator must verify and delegate the source Page to the existing corporate Campaign Ops integration. Account requester authority does not authorize asset permission writes. After restored access, resume the same request using the central SHEIN runner, preserving the original receipt clock; require reviewed continuation if the activation SLA gate applies.",
+  "next_action": "Page access repaired and confirmed. Resume the same request through the central SHEIN runner after the persisted quota cooldown; reconcile only final readback, semantic/media QA, postprocess and requested activation. Campaign/adset/ad IDs are already persisted; no copy replay. Preserve original receipt clock and all sealed manifests.",
   "resume_input": "/root/mgs-agent/data/ares/meta-ads/requests/shein-1559581436682436670.json",
   "no_alternate_credential_or_page_used": true,
   "no_new_request_or_blind_copy_retry": true
