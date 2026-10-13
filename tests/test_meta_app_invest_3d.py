@@ -164,11 +164,12 @@ class MetaAppInvest3DTests(unittest.TestCase):
         try:
             ns['ACTIVE_APP_CONFIGS'] = {'B006-7': {'onepassword_item_id': 'immutable-id',
                                                 'onepassword_item_title': title + ' '}}
-            ns['APP_ITEM_TO_KEY'] = {title: 'B006-7'}
-            with patch.object(ns['OP_RESOLVER'], 'get_item_json', side_effect=RuntimeError('fixture-stop')) as read:
-                with self.assertRaisesRegex(RuntimeError, 'fixture-stop'):
-                    self.generic.build_app_snapshot(title)
-                read.assert_called_once_with('immutable-id', ns['VAULT'])
+            ns['APP_ITEM_TO_KEY'] = {title: 'B006-7', title + ' ': 'B006-7'}
+            for reference in (title, title + ' '):
+                with patch.object(ns['OP_RESOLVER'], 'get_item_json', side_effect=RuntimeError('fixture-stop')) as read:
+                    with self.assertRaisesRegex(RuntimeError, 'fixture-stop'):
+                        self.generic.build_app_snapshot(reference)
+                    read.assert_called_once_with('immutable-id', ns['VAULT'])
             ns['ACTIVE_APP_CONFIGS']['B006-7'].pop('onepassword_item_id')
             with patch.object(ns['OP_RESOLVER'], 'get_item_json', side_effect=RuntimeError('fixture-stop')) as read:
                 with self.assertRaisesRegex(RuntimeError, 'fixture-stop'):
