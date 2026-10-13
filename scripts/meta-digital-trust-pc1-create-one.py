@@ -158,6 +158,9 @@ def main():
     if not scope or STATE.resolve()!=ROOT/'data'/STATE.name or s['request_id']!=scope[0] or s['business_id']!='155263197283282' or s['target']!=scope[1]:raise RuntimeError('contract_identity_mismatch')
     if s['account_defaults']!={'name':'001','timezone':'America/Los_Angeles','currency':'USD','usage':'My business'}:raise RuntimeError('contract_defaults_mismatch')
     if not a.preflight and (len(s['completed'])>=scope[1] or s.get('status') not in {'scheduled','in_progress','retry_pending'}):return {'kind':'blocked','reason':'checkpoint_not_executable'}
+    if not a.preflight:
+        now=dt.datetime.now(dt.timezone.utc)
+        if now<dt.datetime.fromisoformat(s['start_at']) or now<dt.datetime.fromisoformat(s['next_due_at']):return {'kind':'deferred','reason':'before_authorized_window','side_effect':'none'}
     l=subprocess.run([sys.executable,str(LEASE),'acquire','--agent','zeus','--session-id',SESSION,'--thread-id','1544113212075548683','--ttl','600'],capture_output=True,text=True)
     if l.returncode:return {'kind':'deferred','reason':'pc1_lease_busy','side_effect':'none'}
     try:
