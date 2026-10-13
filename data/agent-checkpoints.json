@@ -433,12 +433,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-C08-2X-USD50-20261013",
-      "next_step": "Concluir proveniência first-delivery no mesmo request e readback final; não recriar objetos",
+      "next_step": "Acompanhar revisão e entrega; sem replay. Guardrail vigente aceita primeiro gasto00:30-02:00; pedido exato meia-noite foi preservado.",
       "objective": "Duplicar C08 duas vezes com USD50 por dia, início 13/10 00:00 São Paulo",
       "source": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c08-2x-usd50-midnight-20261013-rodolfo/request-state.json",
-      "state": "c46/c47 criadas e verificadas, native future active, usd50 cada, filhos active, 6 posts e 12 vídeos validados; enrollment pendente por chave de proveniência da allowlist",
+      "state": "complete_native_schedule_verified: c46 120251608480950632 e c47 120251608480940632, usd50 cada, start_time13/10 00:00 sp, campanhas/conjuntos/anúncios configurados active; source c08 inalterada; 6 posts/12 vídeos equivalentes; watcher armado2; budget ativousd327.58",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-13T02:19:31+00:00"
+      "updated_at": "2026-10-13T02:20:57+00:00"
     },
     {
       "agent": "ares",
@@ -5692,5 +5692,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T02:19:31+00:00"
+  "updated_at": "2026-10-13T02:20:57+00:00"
 }
