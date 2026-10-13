@@ -1,6 +1,17 @@
 ## Production Cron Implementation
 
-### Current B006-6 and B011-6 cutovers — 2026-10-05
+### Current B004-9, B006-7 and B011-7 cutovers — 2026-10-13
+
+The active registry supersedes the historical B004-8/B006-6/B011-6 snapshots below. Rodolfo authorized B004-8→B004-9 in `1559623511528571003`, B006-6→B006-7 in `1559628830451171409`, and B011-6→B011-7 in `1559637035457716405`, preserving their existing channels and shared day/night jobs.
+
+- B004-9: exact item `BOT B004-9 Token - Maria Bari`, pinned ID `hktjckiuh6bkb3s4a67a5ucyim`, channel `1521251334496456815`, nine current Sheet assignments.
+- B006-7: exact source title `BOT B006-7 Token - Tiago De Oliveira Vianna ` (one trailing space), pinned ID `roq46dh6er4aw7exhlzm55menu`, channel `1521252068319297666`, thirteen current Sheet assignments. Preserve the source title; resolve credential content by ID. The generic registry lookup accepts both its exact title and the established CLI-trimmed alias, preventing a scheduled run from creating a phantom profile-suffixed app key.
+- B011-7: exact item `BOT B011-7 Token - Jaqueline Dagostin`, pinned ID `wnmdyqzj2g46av7i4z6cipqgua`, channel `1537256907373289575`, twelve current Sheet assignments.
+- Each passed fresh metadata, paginated roles, me/debug_token, valid app-bound new IDs, fully resolved role identities, an isolated canary, fresh app-scoped production baselines and an unpaused readback. Sheet assignments were already migrated by the operator; no assignment-label write was necessary. Role acceptance kept advancing during onboarding; counts are current runtime evidence, not fixed historical gates.
+- Predecessor role/cooldown/restriction state was not reused. Backups are under `/root/mgs-agent/backups/meta-app-b0049-all-alerts-1559623511528571003`, `meta-app-b0067-all-alerts-1559628830451171409` and `meta-app-b0117-all-alerts-1559637035457716405`.
+- The generator's investment parser correction applies to both generic and B013 routes. The explicit all-app alert request uses live Graph/Sheet data and the dedicated B013 DTR/ChatPion route, preserving legitimate `n/d` where the Smart Bidding source has no profile match rather than fabricating zero.
+
+### Historical B006-6 and B011-6 cutovers — 2026-10-05 (superseded)
 
 Rodolfo authorized B006-5→B006-6 and standing replacement-report execution in `1556684020123705426`, then reported B011-5→B011-6 in `1556684132891754546` under that authority. Current generation lists are resolved from `data/meta-app-registry.json`; later current cutovers supersede older dated snapshots below.
 
@@ -10,7 +21,7 @@ Rodolfo authorized B006-5→B006-6 and standing replacement-report execution in 
 - Isolated canaries, two contained production baselines, exact Sheet marker readbacks and unpaused foreground cycles passed. Predecessor roles/cooldowns/restriction incidents were not reused. Both pause sets are empty. A real full-registry 12-app cycle had zero errors and emitted normal B011-6 addition alerts; the initial 5→7 family was verified at `1556685927466934304`, `1556685928758513737`, `1556685932340449322`. Onboarding remained live; the closure receipt records B006-6 ten present/four X and B011-6 eleven present/one X, not frozen expected role counts.
 - Verified backups: `/root/mgs-agent/backups/meta-app-b0065-to-b0066-cutover-20261005-111107/` and `/root/mgs-agent/backups/meta-app-b0115-to-b0116-cutover-20261005-111126/`, including manifests, Sheet repair where applicable and closure receipts.
 
-### Current B004-8 cutover — 2026-10-05
+### Historical B004-8 cutover — 2026-10-05 (superseded)
 
 Rodolfo reported `B004-7→B004-8` in message `1556675866237468813` and explicitly authorized updating/reactivating the same route in `1556677754899136686`.
 
@@ -332,7 +343,7 @@ Rodolfo authorized in message `1556684020123705426`: when he sends an exact comp
 
 ### Replacement credential identity and concurrent onboarding
 
-Pin each newly validated generic replacement's immutable `onepassword_item_id` in the registry and make `build_app_snapshot` use it, while preserving the exact source title as metadata. Mutable titles may have trailing spaces or be renamed; never repair the supplied token/title or rotate credentials to accommodate a lookup failure. Test ID-pinned reads plus legacy title-only fallback. Re-read live `NO APP` before declaring a missing scope: operators may be migrating another lineage during the task. Preserve unrelated pauses until its new actionable replacement report authorizes that cutover. Role acceptances during baseline are live onboarding, not a fixed-count failure; require complete identity resolution and current Sheet parity, then an immediate clean repeat.
+Pin each newly validated generic replacement's immutable `onepassword_item_id` in the registry and make `build_app_snapshot` use it, while preserving the exact source title as metadata. Keep both the exact registry title and its established CLI-trimmed alias in `APP_ITEM_TO_KEY`; otherwise scheduled discovery can pass a raw trailing-space title that the CLI path trimmed, creating a profile-suffixed phantom key and bypassing the ID pin. Mutable titles may have trailing spaces or be renamed; never repair the supplied token/title or rotate credentials to accommodate a lookup failure. Test ID-pinned reads plus legacy title-only fallback. Re-read live `NO APP` before declaring a missing scope: operators may be migrating another lineage during the task. Preserve unrelated pauses until its new actionable replacement report authorizes that cutover. Role acceptances during baseline are live onboarding, not a fixed-count failure; require complete identity resolution and current Sheet parity, then an immediate clean repeat.
 
 ### Investment-enrichment output contract and `n/d` interpretation
 
