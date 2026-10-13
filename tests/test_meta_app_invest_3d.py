@@ -129,6 +129,33 @@ class MetaAppInvest3DTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'dates missing'):
             self.helper.aggregate_invest_3d(rows, payload)
 
+    def test_helper_output_ignores_browser_budget_events(self):
+        import json
+        from unittest.mock import patch
+        payload = {'status': 'INVEST_3D_OK', 'days': 3,
+                   'by_profile': {'alpha': '12.34'}, 'by_profile_today': {'alpha': '0.00'}}
+        encoded = json.dumps(payload)
+        variants = [encoded, 'BROWSER_BUDGET {}\n' + encoded + '\nBROWSER_BUDGET {}',
+                    'BROWSER_BUDGET {}\n' + encoded + 'BROWSER_BUDGET {}\n']
+        for module in (self.generic, self.b013):
+            namespace = module.load_invest_3d.__globals__
+            saved = {k: namespace.get(k) for k in ('INVEST_3D_DATA', 'INVEST_3D_ERROR')}
+            try:
+                for output in variants:
+                    namespace['INVEST_3D_DATA'] = None
+                    with patch.object(namespace['subprocess'], 'run', return_value=SimpleNamespace(returncode=0, stdout=output)):
+                        self.assertEqual(module.load_invest_3d(), payload)
+                        self.assertIsNone(namespace['INVEST_3D_ERROR'])
+                for output in ('BROWSER_BUDGET {}', encoded + '\n' + encoded,
+                               json.dumps({**payload, 'days': 7}),
+                               json.dumps({**payload, 'by_profile': {}})):
+                    namespace['INVEST_3D_DATA'] = None
+                    with patch.object(namespace['subprocess'], 'run', return_value=SimpleNamespace(returncode=0, stdout=output)):
+                        self.assertEqual(module.load_invest_3d()['status'], 'INVEST_3D_UNAVAILABLE')
+                        self.assertTrue(namespace['INVEST_3D_ERROR'])
+            finally:
+                namespace.update(saved)
+
     def exercise_formatter(self, module):
         payload = {
             'status': 'INVEST_3D_OK',
