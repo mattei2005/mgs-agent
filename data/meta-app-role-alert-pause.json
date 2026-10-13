@@ -1,24 +1,22 @@
 {
   "version": 4,
   "mode": "manual",
-  "apps": [],
-  "monitor_apps": [],
+  "apps": [
+    "B006-6"
+  ],
+  "monitor_apps": [
+    "B006-6"
+  ],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1556684132891754546",
-  "updated_at": "2026-10-05T11:14:50.136744-04:00",
-  "reason": "B011-6 validado e reativado; demais pausas preservadas.",
+  "source_message_id": "1544837470687076454",
+  "updated_at": "2026-10-13T12:29:09-04:00",
+  "reason": "Rotas pausadas automaticamente após restrição confirmada pelo monitor Meta.",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",
-    "resume_condition": "Após validação integral da substituição/recuperação. Reporte novo e exato de migração concluída por Rodolfo autoriza atualizar e reativar a mesma rota sem nova pergunta; Critical Subset permanece separado.",
-    "policy_source_message_id": "1544837470687076454",
-    "replacement_report_authorization": {
-      "authorized_by": "Rodolfo Mattei",
-      "source_message_id": "1556684020123705426",
-      "effective_at": "2026-10-05T11:14:50.136733-04:00",
-      "scope": "Mesma rota/canal do app antigo→novo reportado; validar antes de reativar; sem alteração de credenciais, permissões, budget, exclusões ou restart."
-    }
+    "resume_condition": "Somente após substituição/recuperação validada e pedido explícito de Rodolfo",
+    "policy_source_message_id": "1544837470687076454"
   },
   "source_message_ids": [
     "1545088764530008135",
