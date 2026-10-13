@@ -22,6 +22,8 @@ Rules:
 - Expose only brand and masked suffix; never payment-source IDs or credentials in Discord.
 - `balance`, `amount_spent`, and `spend_cap` use minor currency units; Insights `spend` is already in major units.
 - A user-confirmed relationship such as several masked AMEX suffixes representing one physical card may be consolidated. Never infer that relationship from brand alone.
+- For BM-wide payment-method inventories, paginate owned/client ad accounts with a broad approved BM-admin user token, then verify exact accounts with GET and `user_tasks`. An omitted funding source is not proof of no payment method, especially without `MANAGE`; distinguish identified current cards, inactive card-type records without visible brand/suffix, monthly invoicing, and unavailable details.
+- Do not use the root Graph `ids` query parameter on v26.0+: it returns `code=100` with a deprecation message. Recover with ordinary exact-account GETs or a bounded Graph batch whose children are exclusively `method=GET`; validate every child HTTP/body/account ID and reconcile the collected count. The batch transport POST does not authorize any billing mutation and does not bypass quota.
 
 Official reference: <https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-account>
 
