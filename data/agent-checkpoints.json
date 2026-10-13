@@ -4583,12 +4583,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-b0049-all-alerts-1559623511528571003",
-      "next_step": "Preflight exato de B004-9/Sheet, backup, canario e baseline; auditar todos e entregar 13 alertas com readback.",
+      "next_step": "Auditar enrichment e alertas atuais de todas as 13 linhagens; enviar live sem reativar B006/B011; readback/inventário/report.",
       "objective": "Migrar B004-8 para B004-9 e retomar apenas B004; validar gerador/investimento e enviar alerta real para as 13 linhagens mantendo B006/B011 pausados.",
       "source": "discord:1559608992307609723/1559623511528571003",
-      "state": "discovery; registry ainda b004-8 e pausa b004-8/b006-6/b011-6; parser corrigido no pedido anterior.",
+      "state": "b004-9 preflight/canário/2 baselines e resume pass; 5 roles aceitos, 9 atribuições, 5 presentes/4 x; pausa restante b006-6/b011-6.",
       "thread_id": "1559608992307609723",
-      "updated_at": "2026-10-13T17:47:46+00:00"
+      "updated_at": "2026-10-13T17:57:57+00:00"
     },
     {
       "agent": "zeus",
@@ -5712,5 +5712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T17:47:46+00:00"
+  "updated_at": "2026-10-13T17:57:57+00:00"
 }
