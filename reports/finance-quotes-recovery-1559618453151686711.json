@@ -1,0 +1,312 @@
+{
+  "alert_id": "1559618453151686711",
+  "job_id": "685397627b29",
+  "updated_at": "2026-10-13T17:31:28.051609+00:00",
+  "diagnosis": "Google Sheets HTTP503 on technical quotes read. Canonical same-scope retry recovered; internal Google cause not observable.",
+  "recovery": "canonical Zeus wrapper --now",
+  "checks": {
+    "protected_hash": true,
+    "fixed_hash": true,
+    "ledger_hash": true,
+    "history_hash": true
+  },
+  "state": {
+    "ok": true,
+    "consecutive_failures": 0,
+    "updated_at": "2026-10-13T17:30:07.132737+00:00",
+    "result": {
+      "changed": true,
+      "periods": [
+        {
+          "period": "2026-09",
+          "revision": 1332
+        },
+        {
+          "period": "2026-10",
+          "revision": 510
+        }
+      ],
+      "updated_at": "2026-10-13T17:30:07.132737+00:00"
+    }
+  },
+  "alert_state": {
+    "reported": 0,
+    "open": false
+  },
+  "google_writes": 0,
+  "production_code_changed": false,
+  "cron_changed": false,
+  "tests": {
+    "python_passed": 6,
+    "node_passed": 4
+  },
+  "diagnostic_probe_errors_resolved": [
+    "SSH cd denied before sudo; changed to existing authorized mgsfinance identity",
+    "SQL history uses period/book, not id; corrected read-only probe",
+    "Evidence parsing changed to direct JSON file load after read_file format errors"
+  ],
+  "before": {
+    "protected_hash": "6bb36c01afca866c4fb0f255eedd3e813b4f226a625928934e3225d48ff5a459",
+    "fixed_hash": "dbc9ad9019159e7176d031c9bcb247aca2d827609ebb0dd067bb9e7936454a9a",
+    "fixed_count": 799,
+    "ledger_hash": "4a130fa05baca2143b0e2947ef49aab105dd3492e0423ed2bd7fd47df972a9f5",
+    "history_hash": "942f09bf424684765dca015259fdaad8ad27c779a45f90eb72e132eb9794c949",
+    "quotes": {
+      "updated_at": "2026-10-13T16:56:55.678318+00:00",
+      "source": "Google Sheets / GOOGLEFINANCE",
+      "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+      "values": {
+        "principal|CAIXA SINTETICO|J2": 4.956731237700001,
+        "principal|Agosto 2026|H1": 1.4216499999999999,
+        "principal|Agosto 2026|I1": 1.3244399999999998
+      },
+      "formulas": {
+        "principal|CAIXA SINTETICO|J2": "=GOOGLEFINANCE(\"USDBRL\")*99%",
+        "principal|Agosto 2026|H1": "=GOOGLEFINANCE(\"USDCAD\")",
+        "principal|Agosto 2026|I1": "=GOOGLEFINANCE(\"GBPUSD\")"
+      },
+      "extra_sources": {
+        "principal|CAIXA SINTETICO|J2": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "B1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|H1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "C1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|I1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "A1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote",
+          "periods": [
+            "2026-08"
+          ]
+        }
+      },
+      "google_writes": 0
+    },
+    "workspaces": [
+      {
+        "id": "workspace-2026-08",
+        "state": "draft",
+        "revision": 565,
+        "fx": {
+          "principal|CAIXA SINTETICO|J2": "5.11",
+          "principal|Agosto 2026|H1": "1.41708",
+          "principal|Agosto 2026|I1": "1.3357"
+        }
+      },
+      {
+        "id": "workspace-2026-09",
+        "state": "draft",
+        "revision": 1331,
+        "fx": {
+          "principal|CAIXA SINTETICO|J2": "4.956731237700001",
+          "principal|Agosto 2026|H1": "1.4216499999999999",
+          "principal|Agosto 2026|I1": "1.3395"
+        }
+      },
+      {
+        "id": "workspace-2026-10",
+        "state": "draft",
+        "revision": 509,
+        "fx": {
+          "principal|CAIXA SINTETICO|J2": "4.956731237700001",
+          "principal|Agosto 2026|H1": "1.4216499999999999",
+          "principal|Agosto 2026|I1": "1.3395"
+        }
+      }
+    ],
+    "audits": [
+      {
+        "id": "4183",
+        "scenario_id": "workspace-2026-10",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-10",
+          "updated_at": "2026-10-13T16:56:55.678318+00:00"
+        }
+      },
+      {
+        "id": "4182",
+        "scenario_id": "workspace-2026-09",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-09",
+          "updated_at": "2026-10-13T16:56:55.678318+00:00"
+        }
+      },
+      {
+        "id": "4181",
+        "scenario_id": "workspace-2026-10",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-10",
+          "updated_at": "2026-10-13T16:26:55.381741+00:00"
+        }
+      },
+      {
+        "id": "4180",
+        "scenario_id": "workspace-2026-09",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-09",
+          "updated_at": "2026-10-13T16:26:55.381741+00:00"
+        }
+      }
+    ]
+  },
+  "after": {
+    "protected_hash": "6bb36c01afca866c4fb0f255eedd3e813b4f226a625928934e3225d48ff5a459",
+    "fixed_hash": "dbc9ad9019159e7176d031c9bcb247aca2d827609ebb0dd067bb9e7936454a9a",
+    "fixed_count": 799,
+    "ledger_hash": "4a130fa05baca2143b0e2947ef49aab105dd3492e0423ed2bd7fd47df972a9f5",
+    "history_hash": "942f09bf424684765dca015259fdaad8ad27c779a45f90eb72e132eb9794c949",
+    "quotes": {
+      "updated_at": "2026-10-13T17:30:07.132737+00:00",
+      "source": "Google Sheets / GOOGLEFINANCE",
+      "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+      "values": {
+        "principal|CAIXA SINTETICO|J2": 4.960692,
+        "principal|Agosto 2026|H1": 1.4217899999999999,
+        "principal|Agosto 2026|I1": 1.324585
+      },
+      "formulas": {
+        "principal|CAIXA SINTETICO|J2": "=GOOGLEFINANCE(\"USDBRL\")*99%",
+        "principal|Agosto 2026|H1": "=GOOGLEFINANCE(\"USDCAD\")",
+        "principal|Agosto 2026|I1": "=GOOGLEFINANCE(\"GBPUSD\")"
+      },
+      "extra_sources": {
+        "principal|CAIXA SINTETICO|J2": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "B1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|H1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "C1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|I1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "A1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote",
+          "periods": [
+            "2026-08"
+          ]
+        }
+      },
+      "google_writes": 0
+    },
+    "workspaces": [
+      {
+        "id": "workspace-2026-08",
+        "state": "draft",
+        "revision": 565,
+        "fx": {
+          "principal|CAIXA SINTETICO|J2": "5.11",
+          "principal|Agosto 2026|H1": "1.41708",
+          "principal|Agosto 2026|I1": "1.3357"
+        }
+      },
+      {
+        "id": "workspace-2026-09",
+        "state": "draft",
+        "revision": 1332,
+        "fx": {
+          "principal|CAIXA SINTETICO|J2": "4.960692",
+          "principal|Agosto 2026|H1": "1.4217899999999999",
+          "principal|Agosto 2026|I1": "1.3395"
+        }
+      },
+      {
+        "id": "workspace-2026-10",
+        "state": "draft",
+        "revision": 510,
+        "fx": {
+          "principal|CAIXA SINTETICO|J2": "4.960692",
+          "principal|Agosto 2026|H1": "1.4217899999999999",
+          "principal|Agosto 2026|I1": "1.3395"
+        }
+      }
+    ],
+    "audits": [
+      {
+        "id": "4185",
+        "scenario_id": "workspace-2026-10",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-10",
+          "updated_at": "2026-10-13T17:30:07.132737+00:00"
+        }
+      },
+      {
+        "id": "4184",
+        "scenario_id": "workspace-2026-09",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-09",
+          "updated_at": "2026-10-13T17:30:07.132737+00:00"
+        }
+      },
+      {
+        "id": "4183",
+        "scenario_id": "workspace-2026-10",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-10",
+          "updated_at": "2026-10-13T16:56:55.678318+00:00"
+        }
+      },
+      {
+        "id": "4182",
+        "scenario_id": "workspace-2026-09",
+        "action": "AUTO_QUOTES_UPDATED",
+        "after_data": {
+          "keys": [
+            "principal|CAIXA SINTETICO|J2",
+            "principal|Agosto 2026|H1"
+          ],
+          "period": "2026-09",
+          "updated_at": "2026-10-13T16:56:55.678318+00:00"
+        }
+      }
+    ]
+  }
+}
