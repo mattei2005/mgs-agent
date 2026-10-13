@@ -1,5 +1,7 @@
 ## Referências recentes
 
+- `references/hermes-command-reference-inplace-updates.md` — atualizar uma referência completa de comandos Hermes por edição in-place, com registro/runtime, gates, autoria, cobertura e readback por ID.
+
 - `references/discord-sequential-message-continuity.md` — responder perguntas sequenciais não resolvidas quando o usuário envia `?`, `Oi`, novo ping ou screenshots do contexto perdido, sem transformar contexto read-only em autorização de side effect.
 
 - `references/report-infra-channel-discipline.md` — disciplina de canal para REPORT-INFRA: não postar bloco bruto na thread operacional do Rodolfo; enviar para #alerts-infra via webhook/helper e responder só status limpo.
