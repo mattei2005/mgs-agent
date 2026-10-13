@@ -1,7 +1,7 @@
 {
   "date": "2026-10-13",
   "timezone": "America/New_York",
-  "state": "running",
+  "state": "completed",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -433,7 +433,7 @@
       "post_video_wait_seconds": 75,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=10164635698724475&set=gm.1967528407863520&idorvanity=286866152596429",
@@ -507,7 +507,7 @@
         "evidence": "successive slider progress; two observed end/restarts",
         "duration_seconds": 12.0
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-13T09:46:40.507365-04:00",
       "opened_at": "2026-10-13T09:46:42.896080-04:00",
       "identity": "Giselle Santos",
@@ -519,9 +519,23 @@
       },
       "wait": {
         "started_at": "2026-10-13T09:48:08.411659-04:00",
-        "target_seconds": 75
-      }
+        "target_seconds": 75,
+        "ended_at": "2026-10-13T09:49:23.412431-04:00",
+        "elapsed_seconds": 75.00019267700554,
+        "complete": true
+      },
+      "close_intent_at": "2026-10-13T09:49:23.413154-04:00",
+      "closed_at": "2026-10-13T09:49:29.122209-04:00",
+      "closing_status": "Inactive"
     }
   ],
-  "updated_at": "2026-10-13T09:48:08.411673-04:00"
+  "updated_at": "2026-10-13T09:49:45.301016-04:00",
+  "completed_at": "2026-10-13T09:49:45.300996-04:00",
+  "final_active": {
+    "k13him2j": "Inactive",
+    "k1d71895": "Inactive",
+    "k1f7o4i7": "Inactive",
+    "k1f7o4im": "Inactive"
+  },
+  "total_new_comments": 0
 }
