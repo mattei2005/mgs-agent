@@ -3691,6 +3691,16 @@
       "updated_at": "2026-09-19T20:13:21+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-shein-utm-audit-1559593111624220762",
+      "next_step": "Nenhuma ação Meta pendente. Em nova conferência, separar PAUSED/ACTIVE do histórico ARCHIVED/DELETED e consultar estado live; não promover este encerramento para regra global fora do incidente.",
+      "objective": "Localizar e conferir as duas utm_adgroup duplicadas do alerta SHEIN.",
+      "source": "discord:thread:1559593111624220762; áudio original de Rodolfo transcrito via backend local mgs_local; readback Meta da própria thread",
+      "state": "concluido. rodolfo, no áudio anterior reprocessado a seu pedido nesta thread, orientou manter nomes e links das campanhas pausadas e desconsiderar campanhas deletadas na avaliação de duplicidade atual. a consulta meta já diferenciou registros archived de deleted: as origens encontradas são archived. no último readback, c36 e c42 têm cada uma uma campanha paused e uma archived; two pieces passou a 101 active com b01fb02c101g01 nos quatro anúncios. sem duplicidade das duas utms entre campanhas paused/active verificadas. não executar correção, renomeação ou mudança de links por este incidente.",
+      "thread_id": "1559593111624220762",
+      "updated_at": "2026-10-13T20:52:35+00:00"
+    },
+    {
       "agent": "atena",
       "id": "atena-mgs-wordpress-author-profiles-20260930",
       "next_step": "Nenhum; usar os textos canônicos da referência wordpress-author-profiles em futuras integrações e validar por readback",
@@ -5732,5 +5742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T19:52:35+00:00"
+  "updated_at": "2026-10-13T20:52:35+00:00"
 }
