@@ -123,6 +123,10 @@ fonte de clone         campanha/conta exatas quando houver
 
 Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Nos modelos visíveis ao gestor, apresente domínio e idioma juntos em uma única linha no formato exato `Site/idioma: dominio.com - EN|ES`. Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
 
+### Correções do pedido antes do write
+
+Consolide as mensagens autorizadas mais recentes antes de executar: mudança de quantidade substitui a quantidade anterior; retirada expressa do ajuste de Cost per result goal remove `bid_strategy` e `bid_usd` do JSON de intenção, em vez de reenviar o valor inicialmente citado. Preserve budget, fonte e início que não foram alterados. Herdar o lance significa ler e conservar a estratégia e o cap reais da fonte, não presumir que coincidem com o primeiro valor informado; confira fonte × cada cópia no readback e informe o valor efetivamente preservado no resumo. Aplique essa edição somente enquanto não houver execução/manifest selado; após possível efeito parcial, reconcilie o mesmo request/IDs antes de interpretar a correção como novos writes.
+
 ### Horário explícito do dia já vencido
 
 Na política `SHEIN-US-DIRECT.json#/request_defaults/expired_explicit_start_policy`, horário explícito que já passou no próprio dia civil do timezone verificado da conta vira início imediato após QA, sem pedir nova autorização ao gestor/CEO somente por esse atraso. Usar o horário atual com o buffer técnico normal de NOW; guardar o horário solicitado literalmente e o motivo no audit/resolved_request. Data/horário futuros permanecem literais; não transferir implicitamente para o dia seguinte. PAUSED expresso continua PAUSED. Horário omitido mantém a próxima meia-noite; data anterior a hoje não entra nessa conversão automática.

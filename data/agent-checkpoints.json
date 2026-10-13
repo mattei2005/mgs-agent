@@ -5151,6 +5151,16 @@
       "updated_at": "2026-10-09T17:06:58+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1559568515030327368",
+      "next_step": "Validar reconciliacao auditada da normalizacao NOW, fechar QA de todas as campanhas e retomar mesmo request pelo runner central.",
+      "objective": "Duplicar C139 tres vezes na conta 781612907182683; USD75/dia e COST_CAP USD0.85; inicio imediato",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1559568515030327368/state.json",
+      "state": "postprocess_pending: tres campanhas existentes 153/154/155 paused; terceira normalizada pela meta de 10:10:08 para 10:10:13 et dentro da janela comprovada do adset copy. manifests e ids preservados. manutencao separada do hot path.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-10-13T14:13:16+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -5692,5 +5702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T13:50:23+00:00"
+  "updated_at": "2026-10-13T14:13:16+00:00"
 }
