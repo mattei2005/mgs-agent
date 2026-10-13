@@ -841,6 +841,24 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "digitaltrustadx-mail-1559682551931736175",
+      "agent": "zeus",
+      "type": "email_domain_dns_tls_migration",
+      "status": "validated",
+      "domain": "digitaltrustadx.com",
+      "server_ip": "188.34.183.6",
+      "thread_id": "1559679608931098667",
+      "authority_message_id": "1559682551931736175",
+      "canonical_source": "/root/mgs-agent/data/email-domains/digitaltrustadx.com.json",
+      "evidence_path": "/root/mgs-agent/data/infra-changes/digitaltrustadx-mail-1559682551931736175",
+      "remote_backup": "/root/zeus-digitaltrustadx-mail-1559682551931736175/hestia-mail-before.tar.gz on 188.34.183.6",
+      "webmail_url": "https://mail.digitaltrustadx.com/",
+      "dns_changes": {"created": 3, "updated": 5, "removed": 8},
+      "validation": {"cloudflare_readback": true, "public_dns": true, "https_200_roundcube": true, "TLS_443_993_465_587": true, "contact_local_routing": true, "reference_domain_preserved": true, "external_message_test": false},
+      "learning_skill": "/root/.hermes/profiles/zeus/skills/ops/hosting-control-panel-mail/SKILL.md",
+      "registry_id": "digitaltrustadx-mail-hestia-20261013"
+    },
+    {
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "agent": "zeus",
       "type": "vps_hermes_controlled_update",

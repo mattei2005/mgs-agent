@@ -101,6 +101,16 @@ Why `WEBMAIL_ALIAS=mail` often wins:
 
 If the business explicitly wants `webmail.domain.com`, verify or issue a cert covering `webmail.domain.com` first; otherwise use `mail.domain.com` as the canonical browser URL.
 
+## Mail-domain DNS and Let's Encrypt activation
+
+- Retrieve the domain-specific public DKIM record with `v-list-mail-domain-dkim-dns <user> <domain> json`; strip only the CLI's surrounding single quotes. Never copy DKIM from a reference domain or read/print `dkim.pem`, which is the private signing key.
+- Back up the complete Cloudflare zone and scoped Hestia domain configuration before applying the approved diff. Preserve unrelated DNS records and reconcile them by record ID after mutation. Removing a retired provider means removing its MX/verification/DKIM and its SPF include terms, not deleting whole multi-provider SPF records or sibling sending subdomains.
+- Consolidate duplicate apex SPF records into one policy, preserving approved remaining senders, explicitly authorizing the VPS IP, and recursively checking the live include/redirect lookup budget (maximum ten). Do not copy `a`/`mx` mechanisms blindly from the panel recommendation when the apex website is hosted elsewhere.
+- For mail-only SSL, confirm the deployed command header and use `v-add-letsencrypt-domain <user> <domain> '' yes`; the fourth `yes` selects the mail-domain flow. Inspect `WEBMAIL_ALIAS` first because it determines extra certificate names/DNS prerequisites.
+- A zero issuance exit code and `SSL=yes` do not prove the certificate is live. Probe certificate-validating SNI on HTTPS, IMAPS and SMTPS, plus SMTP STARTTLS. If the generated config/certificate is correct but the old default certificate is still served, investigate Hestia's deferred `updatessl` activation; within approved service authority run `nginx -t` and reload nginx/exim4/dovecot, then repeat all probes rather than issuing duplicate certificates.
+- Diagnose new-hostname NXDOMAIN against authoritative servers, independent public resolvers, the local stub and its active upstream. A local cache flush cannot purge an upstream negative cache. If public DNS is correct, use a certificate-validating explicit-IP/SNI probe and a second host's ordinary public-hostname request as separate evidence; do not alter production resolver configuration or claim the failing local browser recovered.
+- Validate mailbox local routing with `exim4 -bt <mailbox>`. This and a Roundcube login page prove configuration/access, not end-to-end delivery; never claim an external send/receive test unless a real authorized message was delivered.
+
 ## Common Hestia/Roundcube failure ladder
 Handle blockers in order; each fix may reveal the next real error.
 
