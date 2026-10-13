@@ -137,7 +137,7 @@ Lead with:
 5. API coverage and any gap;
 6. explicit statement that no billing change occurred.
 
-Use one compact monospaced comparison block or concise bullets. Do not expose transaction IDs, payment-source IDs, token details, invoice download URLs, or full card data.
+Use one compact monospaced comparison block or concise bullets. For a request asking which accounts use credit cards, default to one consolidated account-first list sorted by exact account name; do not make card groups the primary structure. Group by card only when requested or when card concentration/risk is the subject. If Rodolfo asks to reformat an already validated inventory, reuse that snapshot, preserve account IDs/names and reconcile the count rather than starting a new API audit unnecessarily. Do not expose transaction IDs, payment-source IDs, token details, invoice download URLs, or full card data.
 
 ## Mutation boundary
 
