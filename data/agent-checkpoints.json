@@ -4683,12 +4683,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-recheck-1559647786314637345",
-      "next_step": "Leituras externas fresh, validação completa por app e fonte de investimento; reconciliar discrepâncias antes de corrigir dentro da autoridade.",
-      "objective": "Reauditar as 13 rotas de apps, crons/pausas, credenciais e saúde live, parity Sheets, investimentos e alertas publicados após as 3 substituições.",
-      "source": "discord:1559608992307609723/1559647786314637345",
-      "state": "início: pausas vazias, último ciclo genérico sem erros; b013 último scheduled healthy 48/49; nenhuma alteração funcional autorizada adicional.",
+      "next_step": "Consumir B013 completo, readback dos 13 novos alertas/todas as tabelas; registrar resultado e encerrar.",
+      "objective": "Reauditar as 13 rotas/crons/credenciais/Sheet/investimentos e publicar novos alertas live nos 13 canais conforme novo pedido.",
+      "source": "discord:1559608992307609723/1559647786314637345;1559650070348042321",
+      "state": "12 graph fresh pass e b013 credenciais/graph fresh pass; 194 valores auditados:151 numéricos/43 sem match; sheet parity sem divergências; 4 jobs ativos, zero pausas. 12 novos alertas live enviados com zero erros; b013 fresh full run em fila canônica, silencioso.",
       "thread_id": "1559608992307609723",
-      "updated_at": "2026-10-13T19:24:18+00:00"
+      "updated_at": "2026-10-13T19:40:39+00:00"
     },
     {
       "agent": "zeus",
@@ -5732,5 +5732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T19:35:28+00:00"
+  "updated_at": "2026-10-13T19:40:39+00:00"
 }
