@@ -27,6 +27,20 @@ Um **Business Integration System User** criado pelo Facebook Login for Business 
 
 Ativos novos no Business Portfolio não entram automaticamente no grant existente. Um Admin User ou Admin System User pode atribuir tarefas ao app-scoped System User pelos endpoints `/{AD_ACCOUNT_ID}/assigned_users` e `/{PAGE_ID}/assigned_users`; Business Asset Groups também permitem onboarding programático. Automatizar somente ativos allowlisted e reconciliados por operação/gestor, sempre com pre-read, menor permissão e readback. Não usar Admin System User para Campaign Ops diárias nem autoatribuir todo ativo novo do portfólio. Repetir o OAuth apenas quando o consentimento/grant não puder ser ampliado por atribuição administrativa, quando os scopes mudarem ou quando a conexão tiver sido revogada.
 
+### Reparar delegação de uma Página adicionada ao portfólio
+
+Use esta sequência quando houver autorização explícita para corrigir permissões da Página; o pedido de campanha sozinho não autoriza atribuir ativos.
+
+1. Resolva a Página pelos anúncios da campanha fonte, não por uma Page amostrada no cadastro. Preserve request, manifests e IDs já criados; consulte o estado antes de retomar, porque uma falha de preflight e uma execução parcial exigem ações diferentes.
+2. Com a identidade corporativa vigente, consulte `GET /me/permissions`, `GET /{PAGE_ID}?fields=id,name,access_token` e `GET /{SYSTEM_USER_ID}/assigned_pages?business={BUSINESS_ID}&fields=id,tasks`. Percorra a paginação antes de afirmar ausência da Página. Separe scopes concedidos de delegação do ativo: erro `code=10` com scopes granted não prova necessidade de novo OAuth.
+3. Resolva internamente uma credencial administrativa autorizada no cofre e valide-a por `GET /me`, `GET /{PAGE_ID}?fields=id,name,business` e `GET /{PAGE_ID}/assigned_users?business={BUSINESS_ID}&fields=id,tasks`. Confira Página e portfólio exatos; não escolha credencial por título, antiguidade ou validade isolada. Use essa identidade somente para provisioning, sem mudar o token do runner ou ampliar a consulta para inventário global.
+4. Leia as tarefas atuais do System User e preserve-as. Se faltar a atribuição mínima de anúncios, envie `POST /{PAGE_ID}/assigned_users` com `user={SYSTEM_USER_ID}`, `business={BUSINESS_ID}` e `tasks` como array JSON da união das tarefas existentes com `ADVERTISE` e `ANALYZE`. Não conceda `MANAGE`, publicação, mensagens ou outras tarefas sem necessidade e autorização próprias. Se o resultado do POST for incerto, releia a atribuição antes de repetir.
+5. Faça dois readbacks: confirme as tarefas pelo edge administrativo e repita `GET /{PAGE_ID}?fields=id,name,access_token` com a identidade corporativa original. Exija ID correto e Page token disponível em memória; sucesso administrativo sozinho não prova que o runner terá acesso. Registre somente evidência sanitizada e então retome o mesmo input pela rota central, sem novas cópias implícitas.
+
+Não confunda acesso restaurado com campanha concluída: quota, comparação semântica, renderer QA e ativação continuam sendo etapas independentes. Se surgir outro bloqueio, registre-o separadamente sem repetir a correção de permissões já confirmada.
+
+Fontes oficiais do payload: Meta, [System User Permissions](https://developers.facebook.com/docs/marketing-api/system-users/guides/permissions/) e [Pages — Business Management APIs](https://developers.facebook.com/docs/marketing-api/business-asset-management/guides/pages/).
+
 ## Páginas próprias versus compartilhadas
 
 - Não exija que uma Página externa vire propriedade do Business Portfolio cliente apenas para usar um Business Integration System User token. Ativos próprios **ou compartilhados** podem ser usados, mas o app recebe somente os ativos explicitamente designados na autorização.

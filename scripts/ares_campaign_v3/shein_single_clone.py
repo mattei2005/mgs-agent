@@ -333,7 +333,12 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     if source_target != target_target:
         source_flags = source_target.get('targeting_automation', {}).pop('individual_setting', None)
         target_flags = target_target.get('targeting_automation', {}).pop('individual_setting', None)
-        if source_flags != {'age': 1, 'gender': 1} or target_flags is not None or source_target != target_target:
+        # Recognize only the two observed optional age/gender omissions.
+        # A preserved device suggestion is not a missing targeting constraint.
+        known_source_flags = ({'age': 1, 'gender': 1}, {'age': 1, 'gender': 1, 'device': 1})
+        expected_target_flags = {'device': 1} if source_flags == known_source_flags[1] else None
+        if (source_flags not in known_source_flags or target_flags != expected_target_flags
+                or source_target != target_target):
             raise RouteBlocked('unrecognized targeting divergence')
         warnings.append('Meta omitted source optional age/gender suggestion flags; copy is not literally identical')
     if desired['mode'] != 'pure_clone':
