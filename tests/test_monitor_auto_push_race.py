@@ -101,6 +101,57 @@ class AutoPushRaceTests(unittest.TestCase):
         self.start(age=0, extra=f"[{ts}] auto-push FAIL commit={self.head} branch=main\n")
         self.assertIn("explicit_errors=1", self.run_monitor())
 
+    def test_recovered_explicit_failure_is_reconciled_against_fresh_remote(self):
+        ts = datetime.now(timezone.utc).isoformat()
+        self.start(age=300, extra=f"[{ts}] auto-push FAIL commit={self.head} branch=main\n")
+        self.git("push", "-q", "origin", "HEAD:main")
+        self.git("update-ref", "refs/remotes/origin/main", self.baseline)
+        before = self.state.read_bytes()
+        self.assertIn("total_failures=0", self.run_monitor())
+        self.assertEqual(self.state.read_bytes(), before)
+        self.assertEqual(self.requests, [])
+
+    def test_fetch_failure_preserves_explicit_failure_despite_cached_ancestry(self):
+        ts = datetime.now(timezone.utc).isoformat()
+        self.start(age=300, extra=f"[{ts}] auto-push FAIL commit={self.head} branch=main\n")
+        self.git("push", "-q", "origin", "HEAD:main")
+        self.git("remote", "set-url", "origin", str(self.base / "absent.git"))
+        output = self.run_monitor()
+        self.assertIn("explicit_errors=1", output)
+        self.assertIn("repo_failures=1", output)
+
+    def test_unknown_failure_commit_is_not_suppressed(self):
+        ts = datetime.now(timezone.utc).isoformat()
+        self.start(age=300, extra=f"[{ts}] auto-push FAIL commit=0000000 branch=main\n")
+        self.git("push", "-q", "origin", "HEAD:main")
+        self.assertIn("explicit_errors=1", self.run_monitor())
+
+    def test_generic_error_remains_after_recovered_explicit_failure(self):
+        ts = datetime.now(timezone.utc).isoformat()
+        self.start(age=300, extra=(f"[{ts}] auto-push FAIL commit={self.head} branch=main\n"
+                                  f"[{ts}] error: unrelated current failure\n"))
+        self.git("push", "-q", "origin", "HEAD:main")
+        output = self.run_monitor()
+        self.assertIn("explicit_errors=1", output)
+        self.assertIn("unrelated current failure", output)
+
+    def test_recovered_failure_delivery_retry_clears_open_state(self):
+        ts = datetime.now(timezone.utc).isoformat()
+        self.start(age=300, extra=f"[{ts}] auto-push FAIL commit={self.head} branch=main\n")
+        self.git("push", "-q", "origin", "HEAD:main")
+        self.state.write_text(json.dumps({"consecutive_failures": 3, "last_alert_sent": ts}))
+        before = self.state.read_bytes()
+        self.status = 503
+        self.run_monitor(dry=False, code=2)
+        self.assertEqual(self.state.read_bytes(), before)
+        self.status = 200
+        self.run_monitor(dry=False)
+        state = json.loads(self.state.read_text())
+        self.assertEqual(state["consecutive_failures"], 0)
+        self.assertEqual(state["last_failure_details"], [])
+        self.assertEqual(len(self.requests), 2)
+        self.assertEqual(self.requests[-1]["embeds"][0]["title"], "Auto-push restabelecido")
+
     def test_recent_start_does_not_hide_remote_ahead(self):
         self.git("commit", "-q", "--allow-empty", "-m", "remote ahead")
         self.git("push", "-q", "origin", "HEAD:main")

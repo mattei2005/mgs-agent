@@ -155,6 +155,15 @@ while IFS= read -r line; do
         continue
     fi
     if echo "$line" | grep -qiE "$ERROR_PATTERNS"; then
+        # FAIL histórico não é falha ativa quando o commit já está no GitHub.
+        # Exigir fetch atual bem-sucedido e ancestralidade do commit exato;
+        # manter erros genéricos, fetch falho e commits ainda não publicados.
+        if (( FETCH_OK == 1 )) && [[ "$line" =~ ^\[[^]]+\]\ auto-push\ FAIL\ commit=([a-f0-9]{7,40})\ branch=main([[:space:]]|$) ]]; then
+            failed_commit="${BASH_REMATCH[1]}"
+            if git -C "$BASE_DIR" merge-base --is-ancestor "$failed_commit" origin/main 2>/dev/null; then
+                continue
+            fi
+        fi
         EXPLICIT_ERRORS+=("$line")
     fi
 done <<< "$WINDOW_LINES"
