@@ -4583,12 +4583,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-b0049-all-alerts-1559623511528571003",
-      "next_step": "Auditar enrichment e alertas atuais de todas as 13 linhagens; enviar live sem reativar B006/B011; readback/inventário/report.",
-      "objective": "Migrar B004-8 para B004-9 e retomar apenas B004; validar gerador/investimento e enviar alerta real para as 13 linhagens mantendo B006/B011 pausados.",
-      "source": "discord:1559608992307609723/1559623511528571003",
-      "state": "b004-9 preflight/canário/2 baselines e resume pass; 5 roles aceitos, 9 atribuições, 5 presentes/4 x; pausa restante b006-6/b011-6.",
+      "next_step": "Consumir B013 silent foreground continuation, validar 13 canais; completar B011 após relatório novo de Rodolfo/credencial válida; inventário/audit/report.",
+      "objective": "Retomar replacements B004-9/B006-7 e entregar gerador validado/alertas live para todas as 13 linhagens.",
+      "source": "discord:1559608992307609723/1559623511528571003 + 1559628830451171409",
+      "state": "b004-9 e b006-7 retomados; 11 alertas live genéricos entregues, aguardando readback. b011 sheet mudou para b011-7 mas item segue b011-6: nenhuma publicação obsoleta/reativação. b013 manual em fila sob lock canônico, sem writer paralelo; duas esperas curtas expiraram sem execução.",
       "thread_id": "1559608992307609723",
-      "updated_at": "2026-10-13T17:57:57+00:00"
+      "updated_at": "2026-10-13T18:30:01+00:00"
     },
     {
       "agent": "zeus",
@@ -5712,5 +5712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T17:57:57+00:00"
+  "updated_at": "2026-10-13T18:30:01+00:00"
 }

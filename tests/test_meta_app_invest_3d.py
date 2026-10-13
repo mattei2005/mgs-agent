@@ -156,6 +156,27 @@ class MetaAppInvest3DTests(unittest.TestCase):
             finally:
                 namespace.update(saved)
 
+    def test_snapshot_pins_immutable_registry_item_id(self):
+        from unittest.mock import patch
+        ns = self.generic.build_app_snapshot.__globals__
+        saved_configs, saved_map = ns['ACTIVE_APP_CONFIGS'], ns['APP_ITEM_TO_KEY']
+        title = 'BOT B006-7 Token - Tiago De Oliveira Vianna'
+        try:
+            ns['ACTIVE_APP_CONFIGS'] = {'B006-7': {'onepassword_item_id': 'immutable-id',
+                                                'onepassword_item_title': title + ' '}}
+            ns['APP_ITEM_TO_KEY'] = {title: 'B006-7'}
+            with patch.object(ns['OP_RESOLVER'], 'get_item_json', side_effect=RuntimeError('fixture-stop')) as read:
+                with self.assertRaisesRegex(RuntimeError, 'fixture-stop'):
+                    self.generic.build_app_snapshot(title)
+                read.assert_called_once_with('immutable-id', ns['VAULT'])
+            ns['ACTIVE_APP_CONFIGS']['B006-7'].pop('onepassword_item_id')
+            with patch.object(ns['OP_RESOLVER'], 'get_item_json', side_effect=RuntimeError('fixture-stop')) as read:
+                with self.assertRaisesRegex(RuntimeError, 'fixture-stop'):
+                    self.generic.build_app_snapshot(title)
+                read.assert_called_once_with(title, ns['VAULT'])
+        finally:
+            ns['ACTIVE_APP_CONFIGS'], ns['APP_ITEM_TO_KEY'] = saved_configs, saved_map
+
     def exercise_formatter(self, module):
         payload = {
             'status': 'INVEST_3D_OK',
