@@ -19,6 +19,8 @@ Use this skill when Rodolfo asks to fix, enable, audit, or explain access to e-m
 
 ## Security rules
 - Never print passwords, DB DSNs, tokens, Hestia session tokens, application passwords, or full URL tokens.
+- Sanitize browser link metadata before returning it: Hestia embeds CSRF/session tokens in ordinary account, mail-domain and logout links. Use DOM clicks internally or emit only pathname plus explicitly allowlisted non-secret parameters; never dump raw hrefs or page_info on a token-bearing URL.
+- Filter HTTP response headers before returning or retaining probe output: strip Set-Cookie, Cookie and authentication headers in memory. Retrieve certificate metadata without verification only to diagnose a mismatch, and explicitly distinguish that inspection from certificate-validating final HTTPS proof.
 - 1Password lookups are internal. Report only the item name and `len=N` for secrets when needed.
 - For production VPS changes, follow AGENT.md levels:
   - read-only audit is free;
