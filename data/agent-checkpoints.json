@@ -452,6 +452,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C09-3X-20261014",
+      "next_step": "Resolver fonte viva, próximos números, manifest selado e Engine v3; QA e readback sem replay",
+      "objective": "Duplicar C09 três vezes preservando budget e configurações, início14/10 00:00 SP",
+      "source": "discord:thread:1539832402744975450",
+      "state": "preflight_in_progress; autorização one-request rodolfo, sem liberar criação recorrente",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-13T19:27:04+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-C09-ACTIVATE-20261009",
       "next_step": "One-shot faz pre-read, lock da lane, status ACTIVE e GET final; falha escalada com request resumível; nenhuma outra campanha ou cron é alterado",
       "objective": "Ativar somente C09 da conta 13 em 09/10/2026 00:10 São Paulo",
@@ -4672,6 +4682,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-recheck-1559647786314637345",
+      "next_step": "Leituras externas fresh, validação completa por app e fonte de investimento; reconciliar discrepâncias antes de corrigir dentro da autoridade.",
+      "objective": "Reauditar as 13 rotas de apps, crons/pausas, credenciais e saúde live, parity Sheets, investimentos e alertas publicados após as 3 substituições.",
+      "source": "discord:1559608992307609723/1559647786314637345",
+      "state": "início: pausas vazias, último ciclo genérico sem erros; b013 último scheduled healthy 48/49; nenhuma alteração funcional autorizada adicional.",
+      "thread_id": "1559608992307609723",
+      "updated_at": "2026-10-13T19:24:18+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-shared-admin-alert-policy-20260818",
       "next_step": "Nenhuma ação pendente; cron segue monitorando somente os sinais e perfis operacionais restantes",
       "objective": "Remover alertas e campos de admin específico dos monitores Meta B001–B012 e ignorar perfis de tráfego direto definidos por Rodolfo",
@@ -5712,5 +5732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T18:53:27+00:00"
+  "updated_at": "2026-10-13T19:27:04+00:00"
 }
