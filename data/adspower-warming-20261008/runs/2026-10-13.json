@@ -14,7 +14,7 @@
       "post_video_wait_seconds": 56,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "post_url": "https://www.facebook.com/photo/?fbid=122172999494732084&set=gm.1299902535595167&idorvanity=1158131209772301",
@@ -83,7 +83,7 @@
         "evidence": "successive slider progress; two observed end/restarts",
         "duration_seconds": 14.0
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-13T09:33:42.356037-04:00",
       "opened_at": "2026-10-13T09:33:44.988202-04:00",
       "identity": "Emgai Datquang",
@@ -95,8 +95,14 @@
       },
       "wait": {
         "started_at": "2026-10-13T09:37:16.815629-04:00",
-        "target_seconds": 56
-      }
+        "target_seconds": 56,
+        "ended_at": "2026-10-13T09:38:12.815928-04:00",
+        "elapsed_seconds": 56.00012368999887,
+        "complete": true
+      },
+      "close_intent_at": "2026-10-13T09:38:12.816418-04:00",
+      "closed_at": "2026-10-13T09:38:18.254027-04:00",
+      "closing_status": "Inactive"
     },
     {
       "profile_id": "k1d71895",
@@ -107,13 +113,127 @@
       "likes_target": 4,
       "comments_target": 0,
       "post_video_wait_seconds": 86,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "completed",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/reel/1489965319849605/",
+          "confirmed_at": "2026-10-13T09:39:50.903334-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/1868130621228036/",
+          "confirmed_at": "2026-10-13T09:40:05.519148-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/2500765030447279/",
+          "confirmed_at": "2026-10-13T09:40:09.805701-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        },
+        {
+          "post_url": "https://www.facebook.com/reel/3651346301689592/",
+          "confirmed_at": "2026-10-13T09:40:27.858467-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        }
+      ],
       "comments": [],
-      "video": {},
-      "closed_verified": false
+      "video": {
+        "navigation_intent_at": "2026-10-13T09:40:28.615932-04:00",
+        "entry_url": "https://www.facebook.com/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-13T09:40:35.457911-04:00",
+            "now": 4.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:37.794184-04:00",
+            "now": 7.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:40.136485-04:00",
+            "now": 9.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:42.470948-04:00",
+            "now": 11.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:44.803171-04:00",
+            "now": 13.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:47.144309-04:00",
+            "now": 0.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:49.492537-04:00",
+            "now": 3.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:51.832875-04:00",
+            "now": 5.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:54.175573-04:00",
+            "now": 7.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:56.518461-04:00",
+            "now": 10.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:40:58.857808-04:00",
+            "now": 12.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:41:01.214162-04:00",
+            "now": 15.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-13T09:41:03.556729-04:00",
+            "now": 1.0,
+            "max": 15.0
+          }
+        ],
+        "complete": true,
+        "completed_at": "2026-10-13T09:41:03.557164-04:00",
+        "evidence": "successive slider progress; two observed end/restarts",
+        "duration_seconds": 15.0
+      },
+      "closed_verified": true,
+      "open_intent_at": "2026-10-13T09:38:18.404456-04:00",
+      "opened_at": "2026-10-13T09:38:20.569927-04:00",
+      "identity": "Mhd Aldy",
+      "authenticated_verified_at": "2026-10-13T09:38:42.312578-04:00",
+      "like_intent": {
+        "post_url": "https://www.facebook.com/reel/3651346301689592/",
+        "at": "2026-10-13T09:40:24.228500-04:00",
+        "status": "confirmed"
+      },
+      "wait": {
+        "started_at": "2026-10-13T09:41:03.557392-04:00",
+        "target_seconds": 86,
+        "ended_at": "2026-10-13T09:42:29.557769-04:00",
+        "elapsed_seconds": 86.00015262700617,
+        "complete": true
+      },
+      "close_intent_at": "2026-10-13T09:42:29.558513-04:00",
+      "closed_at": "2026-10-13T09:42:37.453377-04:00",
+      "closing_status": "Inactive"
     },
     {
       "profile_id": "k1f7o4i7",
@@ -124,13 +244,28 @@
       "likes_target": 5,
       "comments_target": 0,
       "post_video_wait_seconds": 40,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "running",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10239348075492740&set=a.1010925546024",
+          "confirmed_at": "2026-10-13T09:43:09.699282-04:00",
+          "evidence": "Remove Like/Change Like reaction on exact post"
+        }
+      ],
       "comments": [],
       "video": {},
-      "closed_verified": false
+      "closed_verified": false,
+      "open_intent_at": "2026-10-13T09:42:37.610629-04:00",
+      "opened_at": "2026-10-13T09:42:39.780306-04:00",
+      "identity": "Kelly Andrade",
+      "authenticated_verified_at": "2026-10-13T09:42:54.301278-04:00",
+      "like_intent": {
+        "post_url": "https://www.facebook.com/photo/?fbid=10244047657950568&set=pcb.10244047663750713",
+        "at": "2026-10-13T09:43:22.175442-04:00",
+        "status": "ambiguous"
+      }
     },
     {
       "profile_id": "k1f7o4im",
@@ -150,5 +285,5 @@
       "closed_verified": false
     }
   ],
-  "updated_at": "2026-10-13T09:37:16.815636-04:00"
+  "updated_at": "2026-10-13T09:43:26.080972-04:00"
 }
