@@ -1,0 +1,83 @@
+{
+  "server_readback": "{\n    \"digitaltrustadx.com\": {\n        \"ANTIVIRUS\": \"yes\",\n        \"ANTISPAM\": \"yes\",\n        \"DKIM\": \"yes\",\n        \"CATCHALL\": \"\",\n        \"ACCOUNTS\": \"1\",\n        \"RATE_LIMIT\": \"200\",\n        \"REJECT\": \"no\",\n        \"U_DISK\": \"0\",\n        \"SSL\": \"yes\",\n        \"LETSENCRYPT\": \"yes\",\n        \"SUSPENDED\": \"no\",\n        \"TIME\": \"21:24:35\",\n        \"DATE\": \"2026-10-13\",\n        \"WEBMAIL_ALIAS\": \"mail.digitaltrustadx.com\",\n        \"WEBMAIL\":\"roundcube\",\n        \"U_SMTP_RELAY\":\"\",\n        \"U_SMTP_RELAY_HOST\":\"\",\n        \"U_SMTP_RELAY_PORT\":\"\",\n        \"U_SMTP_RELAY_USERNAME\":\"\"\n        }\n}\nnginx: the configuration file /etc/nginx/nginx.conf syntax is ok\nnginx: configuration file /etc/nginx/nginx.conf test is successful\nactive\nactive\nactive\nactive\nactive\ncontact@digitaltrustadx.com\n  router = localuser, transport = local_delivery\nNGINX_LINKS [('/etc/nginx/conf.d/domains/mail.digitaltrustadx.com.ssl.conf', '/home/rodloguda/conf/mail/digitaltrustadx.com/nginx.ssl.conf'), ('/etc/nginx/conf.d/domains/mail.digitaltrustadx.com.conf', '/home/rodloguda/conf/mail/digitaltrustadx.com/nginx.conf')]\nCONTACT_MAILBOX_PRESENT True\n",
+  "mail.digitaltrustadx.com": {
+    "http_status": 200,
+    "roundcube_login": true,
+    "TLS_valid": true,
+    "certificate_SAN": [
+      [
+        "DNS",
+        "mail.digitaltrustadx.com"
+      ]
+    ],
+    "certificate_expires": "Jan 11 20:46:20 2027 GMT",
+    "transport": "origin_ip_with_verified_hostname_SNI"
+  },
+  "mail.matteiservicesinc.com": {
+    "http_status": 200,
+    "roundcube_login": true,
+    "TLS_valid": true,
+    "certificate_SAN": [
+      [
+        "DNS",
+        "mail.matteiservicesinc.com"
+      ]
+    ],
+    "certificate_expires": "Nov 11 00:45:47 2026 GMT",
+    "transport": "origin_ip_with_verified_hostname_SNI"
+  },
+  "TLS_port_993": {
+    "valid": true,
+    "certificate_SAN": [
+      [
+        "DNS",
+        "mail.digitaltrustadx.com"
+      ]
+    ]
+  },
+  "TLS_port_465": {
+    "valid": true,
+    "certificate_SAN": [
+      [
+        "DNS",
+        "mail.digitaltrustadx.com"
+      ]
+    ]
+  },
+  "public_hostname_probe": {
+    "hostname": "mail.digitaltrustadx.com",
+    "DNS_IP": "188.34.183.6",
+    "HTTPS_status": 200,
+    "roundcube_login": true,
+    "SMTP_STARTTLS_587": true,
+    "SMTP_AUTH_advertised": true
+  },
+  "DNS_boyd.ns.cloudflare.com": {
+    "A": true,
+    "MX": true,
+    "single_SPF": true,
+    "DKIM_matches_Hestia": true
+  },
+  "DNS_adi.ns.cloudflare.com": {
+    "A": true,
+    "MX": true,
+    "single_SPF": true,
+    "DKIM_matches_Hestia": true
+  },
+  "DNS_1.1.1.1": {
+    "A": true,
+    "MX": true,
+    "single_SPF": true,
+    "DKIM_matches_Hestia": true
+  },
+  "DNS_8.8.8.8": {
+    "A": true,
+    "MX": true,
+    "single_SPF": true,
+    "DKIM_matches_Hestia": true
+  },
+  "SPF_lookup_count": 8,
+  "unrelated_DNS_preserved": true,
+  "matteiservicesinc_DNS_unchanged": true,
+  "mailbox_contact_local_routing": true
+}
