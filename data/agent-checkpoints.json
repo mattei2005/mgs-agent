@@ -1253,12 +1253,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-INTAKE-1559692689111261218",
-      "next_step": "Estabilizar conjunto, baixar e revisar IMG/VID; congelar plano antes do write",
+      "next_step": "Executar plano pelos mesmos IDs/nomes; validar READY por download/SHA e mover originais; reconciliar inventário",
       "objective": "Tratar e mover lote Kelly SHEIN US EN preservando originais e reserva",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/intake-1559692689111261218/discovery",
-      "state": "discovery: 48 arquivos observados; estabilidade, revisão visual e conciliação pendentes; sem write drive",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559692689111261218/plan.json",
+      "state": "48 fontes estáveis e probeadas; revisão visual concluída; clean=true; plano congelado: 45 novos ready e 3 fontes duplicadas; dry-run sem write remoto",
       "thread_id": "1559692689111261218",
-      "updated_at": "2026-10-13T22:22:50+00:00"
+      "updated_at": "2026-10-13T22:40:10+00:00"
     },
     {
       "agent": "ares",
@@ -5772,5 +5772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T22:22:50+00:00"
+  "updated_at": "2026-10-13T22:40:10+00:00"
 }
