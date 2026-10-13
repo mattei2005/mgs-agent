@@ -7,7 +7,11 @@ from __future__ import annotations
 import argparse, datetime as dt, importlib.util, json, os, re, subprocess, sys, time, uuid
 from pathlib import Path
 ROOT=Path('/root/mgs-agent')
-STATE=ROOT/'data/meta-digital-trust-40-20261007-state.json'
+STATE=Path(os.environ.get('MGS_META_HOURLY_STATE',str(ROOT/'data/meta-digital-trust-40-20261007-state.json')))
+SCOPES={
+    'meta-digital-trust-40-20261007-state.json':('meta-digital-trust-40-1557475850310393879',40,'meta-digital-trust-40-20261007-pc1-intent.json'),
+    'meta-digital-trust-49-20261013-state.json':('meta-digital-trust-49-1559685342083153942',49,'meta-digital-trust-49-20261013-pc1-intent.json'),
+}
 LEASE=ROOT/'scripts/mgs-pc1-computer-use-lock.py'
 URL='https://business.facebook.com/latest/settings/ad_accounts?business_id=155263197283282&selected_asset_id=120252962963100222&selected_asset_type=ad-account'
 RUNTIME=Path('/root/.hermes/hermes-agent-port-main-46904a3b-mgs')
@@ -18,7 +22,7 @@ release=None
 pid=None
 wid=None
 last_capture={}
-intent_path=ROOT/'data/meta-digital-trust-40-20261007-pc1-intent.json'
+intent_path=ROOT/'data'/SCOPES.get(STATE.name,('invalid',0,'invalid-pc1-intent.json'))[2]
 
 def atomic(path,data):
     tmp=path.with_name(path.name+'.'+uuid.uuid4().hex+'.tmp')
@@ -90,6 +94,7 @@ def create(s,from_confirm=False,dry_run=False):
     global mutation
     if intent_path.exists():
         old=json.loads(intent_path.read_text())
+        if old.get('request_id')!=s['request_id']:raise RuntimeError('native_intent_request_conflict')
         if old.get('status')=='submitted_unconfirmed':raise RuntimeError('prior_native_intent_unconfirmed')
         if old.get('status')=='confirmed_popup' and old.get('seq')==len(s['completed'])+1:
             return old['result']
@@ -149,9 +154,10 @@ def main():
     global handler,release,pid,wid
     p=argparse.ArgumentParser();p.add_argument('--preflight',action='store_true');p.add_argument('--from-confirm',action='store_true');a=p.parse_args()
     s=json.loads(STATE.read_text())
-    if s['request_id']!='meta-digital-trust-40-1557475850310393879' or s['business_id']!='155263197283282' or s['target']!=40:raise RuntimeError('contract_identity_mismatch')
+    scope=SCOPES.get(STATE.name)
+    if not scope or STATE.resolve()!=ROOT/'data'/STATE.name or s['request_id']!=scope[0] or s['business_id']!='155263197283282' or s['target']!=scope[1]:raise RuntimeError('contract_identity_mismatch')
     if s['account_defaults']!={'name':'001','timezone':'America/Los_Angeles','currency':'USD','usage':'My business'}:raise RuntimeError('contract_defaults_mismatch')
-    if not a.preflight and (len(s['completed'])>=40 or s.get('status') not in {'scheduled','in_progress','retry_pending'}):return {'kind':'blocked','reason':'checkpoint_not_executable'}
+    if not a.preflight and (len(s['completed'])>=scope[1] or s.get('status') not in {'scheduled','in_progress','retry_pending'}):return {'kind':'blocked','reason':'checkpoint_not_executable'}
     l=subprocess.run([sys.executable,str(LEASE),'acquire','--agent','zeus','--session-id',SESSION,'--thread-id','1544113212075548683','--ttl','600'],capture_output=True,text=True)
     if l.returncode:return {'kind':'deferred','reason':'pc1_lease_busy','side_effect':'none'}
     try:

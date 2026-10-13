@@ -71,7 +71,11 @@ def load_env() -> dict[str, str]:
 def run_node(preflight: bool = False) -> dict:
     route_state = json.loads(STATE_PATH.read_text())
     if route_state.get('execution_backend') == 'pc1_native':
-        if STATE_PATH.name != 'meta-digital-trust-40-20261007-state.json' or route_state.get('request_id') != 'meta-digital-trust-40-1557475850310393879':
+        allowed_pc1_scopes = {
+            ('meta-digital-trust-40-20261007-state.json', 'meta-digital-trust-40-1557475850310393879', 40),
+            ('meta-digital-trust-49-20261013-state.json', 'meta-digital-trust-49-1559685342083153942', 49),
+        }
+        if (STATE_PATH.name, route_state.get('request_id'), route_state.get('target')) not in allowed_pc1_scopes or route_state.get('business_id') != '155263197283282':
             return {'kind': 'blocked', 'reason': 'pc1_backend_scope_mismatch'}
         command = ['/root/.hermes/hermes-agent-port-main-46904a3b-mgs/.venv/bin/python', str(ROOT / 'scripts/meta-digital-trust-pc1-create-one.py')]
     else:

@@ -4133,12 +4133,12 @@
     {
       "agent": "zeus",
       "id": "digitaltrustadx-mail-1559682551931736175",
-      "next_step": "Nenhuma acao pendente de configuracao; teste real de mensagem externa nao executado; cache negativo de resolver legado pode expirar naturalmente",
-      "objective": "DNS e HTTPS de digitaltrustadx.com no Hestia; retirar Zoho e MX uni5 do apex, preservar emissores/subdominios e matteiservicesinc.com",
-      "source": "/root/mgs-agent/data/email-domains/digitaltrustadx.com.json",
-      "state": "completed_validated",
+      "next_step": "Validar acesso alternativo existente e aguardar cache negativo do upstream; repetir navegador sem mudar DNS do website",
+      "objective": "Recuperar acesso do usuario ao webmail; diferenciar SSL MAIL do dominio WEB e cache negativo DNS",
+      "source": "discord:1559679608931098667/1559686744184590408",
+      "state": "reopened_client_dns_investigation",
       "thread_id": "1559679608931098667",
-      "updated_at": "2026-10-13T21:48:38+00:00"
+      "updated_at": "2026-10-13T21:59:35+00:00"
     },
     {
       "agent": "zeus",
@@ -5762,5 +5762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-13T21:54:02+00:00"
+  "updated_at": "2026-10-13T21:59:35+00:00"
 }
