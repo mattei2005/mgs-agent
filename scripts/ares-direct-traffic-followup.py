@@ -12,6 +12,7 @@ import time
 import uuid
 from pathlib import Path
 from ares_campaign_v3.landing_followup import Queue, Discord, ROOT, BASE, publish_creation, worker_prompt
+from ares_campaign_v3.landing_intake import Intake, native_busy
 
 
 def require_pc1_lease(session_id):
@@ -47,6 +48,8 @@ def flush(q,discord):
 
 
 def tick(q):
+    # Existing native turns have absolute priority; this adds nothing to them.
+    if native_busy():return {'state':'WAITING_NATIVE_TURN','creation_path_unchanged':True}
     # Independent flock spans the entire local observer subprocess. Losing the
     # scheduler does not authorize a second worker while the first survives.
     with (q.root/'dispatcher.lock').open('a+') as guard:
@@ -105,7 +108,7 @@ def main():
     a=s.add_parser('stage');a.add_argument('--input',type=Path,required=True)
     a=s.add_parser('publish-creation');a.add_argument('--key',required=True);a.add_argument('--message-file',type=Path,required=True)
     a=s.add_parser('show');a.add_argument('--key',required=True)
-    s.add_parser('status');s.add_parser('tick')
+    s.add_parser('status');s.add_parser('tick');s.add_parser('intake');s.add_parser('activate-intake')
     a=s.add_parser('reconcile');a.add_argument('--key',required=True);a.add_argument('--index',type=int,required=True)
     a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
     for command in ('begin','defer','result'):
@@ -117,7 +120,9 @@ def main():
             a.add_argument('--result',choices=['PASS','NO_AD','ERROR'],required=True)
             a.add_argument('--evidence',type=Path,required=True)
     args=p.parse_args();q=Queue(args.root)
-    if args.command in {'stage','tick','publish-creation'}:
+    if args.command in {'stage','publish-creation'}:
+        return {'state':'RETIRED_CREATION_ROUTE_UNCHANGED','side_effect':'none'}
+    if args.command in {'tick','intake','activate-intake'}:
         policy=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text())
         if policy.get('status')!='ACTIVE_FOR_NEW_REQUESTS' or policy.get('approval_message_id')!='1559951763019145247':
             return {'state':'POLICY_DISABLED','side_effect':'none'}
@@ -126,6 +131,8 @@ def main():
     if args.command=='show':return q.job(args.key)
     if args.command=='status':return {'jobs':[dict(x) for x in q.db.execute('SELECT state,count(*) AS count FROM jobs GROUP BY state')], 'pending_notifications':q.db.execute("SELECT count(*) FROM messages WHERE state!='VERIFIED'").fetchone()[0]}
     if args.command=='tick':return tick(q)
+    if args.command=='activate-intake':return {'activation_epoch':Intake(q).activate(),'backfill':False}
+    if args.command=='intake':return Intake(q).tick()
     if args.command in {'begin','result','reconcile'}:require_pc1_lease(args.pc1_session_id)
     if args.command=='reconcile':
         q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()))

@@ -35,7 +35,7 @@ def native_busy(path=NATIVE_DB,now=None):
     # Existing native turn lease: no lock/flag is added to campaign requests.
     try:
         with readonly(path) as c:
-            return bool(c.execute('SELECT 1 FROM session_turn_leases WHERE expires_at>? LIMIT 1',(time.time() if now is None else now,)).fetchone())
+            return bool(c.execute("SELECT 1 FROM session_turn_leases l JOIN sessions s ON s.id=l.conversation_id WHERE l.expires_at>? AND s.source='discord' LIMIT 1",(time.time() if now is None else now,)).fetchone())
     except sqlite3.Error:
         return True  # A busy/unreadable native DB defers only the observer.
 
@@ -79,12 +79,12 @@ def terminal_references(tool_rows):
 
 
 def origin_for_delivery(c,delivery):
-    session=c.execute("SELECT * FROM sessions WHERE session_key=? AND source='discord' ORDER BY started_at DESC LIMIT 1",(delivery['session_key'],)).fetchone()
+    session=c.execute("SELECT s.* FROM sessions s JOIN messages m ON m.session_id=s.id WHERE s.session_key=? AND s.source='discord' AND m.role='assistant' AND m.content=? AND m.finish_reason='stop' AND m.timestamp<=? ORDER BY m.id DESC LIMIT 1",(delivery['session_key'],delivery['content'],delivery['created_at']+1)).fetchone()
     if not session:return None
     thread=str(delivery.get('thread_id') or delivery['chat_id'])
     if thread not in {str(session['thread_id']),str(session['chat_id'])}:return None
     final=c.execute("SELECT * FROM messages WHERE session_id=? AND role='assistant' AND content=? AND (tool_calls IS NULL OR tool_calls='[]') AND finish_reason='stop' AND timestamp<=? ORDER BY id DESC LIMIT 1",(session['id'],delivery['content'],delivery['created_at']+1)).fetchone()
-    if not final:return None
+    if not final or abs(delivery['created_at']-final['timestamp'])>120:return None
     user=c.execute("SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1",(session['id'],final['id'])).fetchone()
     if not user or not user['platform_message_id']:return None
     tools=c.execute("SELECT content FROM messages WHERE session_id=? AND id>? AND id<? AND role='tool' ORDER BY id LIMIT 300",(session['id'],user['id'],final['id'])).fetchall()
@@ -262,6 +262,7 @@ class Intake:
             if existing:return float(existing['value'])
             self.q.db.execute("INSERT INTO intake_settings VALUES('activation_epoch',?)",(str(epoch),))
             self.q.db.execute("INSERT INTO intake_settings VALUES('cursor','0')")
+            self.q.db.execute("INSERT INTO intake_settings VALUES('cursor_key','')")
         return epoch
     def epoch(self):
         row=self.q.db.execute("SELECT value FROM intake_settings WHERE key='activation_epoch'").fetchone()
@@ -271,6 +272,15 @@ class Intake:
         with self.q.tx():
             self.q.db.execute('INSERT INTO native_intake VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET updated=excluded.updated,state=excluded.state,detail=excluded.detail,job_key=excluded.job_key',
                 (key,self.q.now(),state,detail,job))
+    def incident(self,key,rid,reason,url=None):
+        policy=json.loads(POLICY.read_text())
+        safe_url=''
+        if url:
+            scope(url);safe_url='\n'+url
+        with self.q.tx():
+            self.q.prepare_message(key+':intake-incident',policy['all_problem_destination_thread'],
+                f'Acompanhamento pendente — pedido {rid}.{safe_url}\nNão foi possível confirmar o destino/evidência pós-resposta com segurança. O pedido de campanha permanece concluído e intacto; a mesma tarefa será reconciliada, sem repetir criação ou inventar URL.')
+            self.q.event(None,'independent_intake_pending',{'request_id':rid,'reason':reason[:160]})
     def arm(self,payload,receipt):
         if receipt.get('verified') is not True or receipt.get('native_delivery_state')!='delivered':raise ValueError('delivered_native_response_required')
         if receipt['thread_id']!=payload['source_thread_id'] or receipt['parent_id']!=payload['source_channel_id'] or not receipt.get('message_ids'):raise ValueError('native_receipt_partition_mismatch')
@@ -302,12 +312,14 @@ class Intake:
                 self.record(subkey,'PENDING','saved_request_evidence_not_found');return 'PENDING'
             # Deterministic source order; disagreement is an incident, not a guess.
             path=paths[0]
+            if path.stat().st_mtime<self.epoch():
+                self.record(subkey,'IGNORED','historical_request_no_backfill');continue
             try:
                 payload=build_from_source(path,rid,origin,self.q.root,self.meta)
             except ValueError as exc:
                 if str(exc)=='not_registered_direct_traffic':
                     self.record(subkey,'IGNORED');continue
-                self.record(subkey,'PENDING',str(exc));return 'PENDING'
+                self.record(subkey,'PENDING',str(exc));self.incident(subkey,rid,str(exc));return 'PENDING'
             receipt=verify_native_reply(dc(),delivery,origin)
             job=self.arm(payload,receipt);self.record(subkey,'READY',job=job)
         self.record(key,'READY');return 'READY'
@@ -336,8 +348,10 @@ class Intake:
             if client is None:client=self.discord_factory()
             return client
         counts={'ready':0,'ignored':0,'pending':0};cursor=float(self.q.db.execute("SELECT value FROM intake_settings WHERE key='cursor'").fetchone()['value'])
+        cursor_row=self.q.db.execute("SELECT value FROM intake_settings WHERE key='cursor_key'").fetchone()
+        cursor_key=cursor_row['value'] if cursor_row else ''
         with readonly(self.native_db) as c:
-            rows=[dict(r) for r in c.execute("SELECT * FROM delivery_obligations WHERE platform='discord' AND state='delivered' AND created_at>=? AND updated_at>=? ORDER BY updated_at,obligation_id LIMIT 100",(epoch,cursor))]
+            rows=[dict(r) for r in c.execute("SELECT * FROM delivery_obligations WHERE platform='discord' AND state='delivered' AND created_at>=? AND (updated_at>? OR (updated_at=? AND obligation_id>?)) ORDER BY updated_at,obligation_id LIMIT 100",(epoch,cursor,cursor,cursor_key))]
             # Pending events survive cursor advancement and are retried read-only.
             pending=self.q.db.execute("SELECT id FROM native_intake WHERE state='PENDING' AND id LIKE 'native:%' ORDER BY updated LIMIT 20").fetchall()
             ids={r['obligation_id'] for r in rows}
@@ -351,8 +365,10 @@ class Intake:
                 except (ValueError,OSError,sqlite3.Error) as exc:
                     self.record('native:'+delivery['obligation_id'],'PENDING',str(exc)[:160]);state='PENDING'
                 counts[state.lower()]=counts.get(state.lower(),0)+1
-                cursor=max(cursor,float(delivery['updated_at']))
-            with self.q.tx():self.q.db.execute("UPDATE intake_settings SET value=? WHERE key='cursor'",(str(cursor),))
+                cursor,cursor_key=max((cursor,cursor_key),(float(delivery['updated_at']),delivery['obligation_id']))
+            with self.q.tx():
+                self.q.db.execute("UPDATE intake_settings SET value=? WHERE key='cursor'",(str(cursor),))
+                self.q.db.execute("INSERT INTO intake_settings VALUES('cursor_key',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",(cursor_key,))
         try:counts['daily_ready']=self.scan_daily(dc)
         except (ValueError,OSError,sqlite3.Error) as exc:
             self.q.event(None,'independent_daily_intake_pending',{'reason':str(exc)[:160]});self.q.db.commit()

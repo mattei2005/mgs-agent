@@ -230,7 +230,7 @@ class FollowupTests(unittest.TestCase):
             j=self.q.job(self.key);owner=j['owner']
             self.q.begin(self.key,owner,0);self.q.result(self.key,owner,0,'PASS',self.success())
             return SimpleNamespace(returncode=0)
-        with patch.object(cli,'BASE',Path(__file__).resolve().parents[1]),patch.object(cli.subprocess,'run',side_effect=fake_run),patch.object(cli,'Discord',return_value=self.dc):
+        with patch.object(cli,'BASE',Path(__file__).resolve().parents[1]),patch.object(cli,'native_busy',return_value=False),patch.object(cli.subprocess,'run',side_effect=fake_run),patch.object(cli,'Discord',return_value=self.dc):
             result=cli.tick(self.q)
         self.assertEqual(result['state'],'COMPLETE');self.assertEqual(self.dc.posts,2)
         kinds=[x['kind'] for x in self.q.db.execute('SELECT kind FROM events ORDER BY seq')]
