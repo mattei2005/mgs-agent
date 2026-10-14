@@ -58,6 +58,12 @@ A fila transacional não substitui a lease física cross-agent: Zeus, Ares e out
 9. Segunda ausência: NO_AD e incidente somente no destino canônico de problemas. Outros problemas também vão a esse destino, com pedido/URL permitida/diagnóstico, nunca ao gestor. Não marcar link pendente como concluído.
 10. Só TODAS as URLs PASSED liberam a mensagem de sucesso exata do contrato na thread do gestor: `Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 10 segundos em cada uma.` Não mencionar PC1 e nunca afirmar cadastro GAM sem readback próprio do GAM.
 
+### Recuperação e evidência visual: distinções obrigatórias
+
+- Se o transporte falhar antes de qualquer input de navegador, classificar como `no_tab_opened` por evidência da sessão, não como aba incerta. `OPEN_INTENT` sozinho não comprova navegação. Antes de uma retentativa explicitamente autorizada, conferir ações reais da sessão anterior e estado atual; preservar o mesmo job/request e registrar a reclassificação em evento, sem inventar fechamento ou criar outra campanha.
+- Resolver o destino do quiz por leitura da configuração ativa exata do site quando o payload contiver somente a URL de aquisição. Em MGS Direct Quiz, ler somente o item ativo de `mgs_direct_quiz_landings` correspondente ao país/slug e seus destinos; `destination_a_url` e `destination_b_url` divergentes exigem cobertura própria. Usar WP-CLI com plugins/tema pulados para evitar hooks de sincronização, não clicar no quiz e preservar a query original byte a byte.
+- Validar os intervalos reais das screenshots antes de PASS: análise auxiliar e round-trips podem exceder a cadência, mesmo com `wait(5)`. Usar timestamps reais e relógio monotônico, sem retimar arquivos nem somar trechos desconexos. Capture de janela não prova foreground: confirmar também pelo desktop compositado durante as amostras. `GetForegroundWindow` via SSH Windows Session 0 pode retornar zero e não diagnostica o desktop interativo.
+
 ## Comandos e provas do worker
 
 ```text
