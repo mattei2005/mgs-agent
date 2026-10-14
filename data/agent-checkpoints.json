@@ -1493,12 +1493,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Primeiro ciclo visual real sera o pedido natural de gestor que Rodolfo anunciou. Manter pedido normal ate resposta entregue; so depois leitor externo, FIFO PC1,10s e retry60s. Recuperar mesmo evento/request e avisar problemas no destino canonico, sem backfill ou replay de criacao.",
-      "objective": "Pedido intacto ate final/resposta; acompanhamento independente em FIFO global PC1 por10s",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/independent-intake/verification.json;REPORT-INFRA:1559979468997660774;discord:1559932317861158993#1559969789164920903",
-      "state": "concluido tecnicamente e ativo: leitor externo ro de entrega nativa+get, sem callback/wrapper/post da criacao ou quotameta; diario byte-igual a baseline. dois timers enabled/active, limites proprios e defer apenas do worker durante turno nativo. provas reais de get e layouts car3/shein1 sem enfileirar/navegar historico. 208 testes selecionados pass,2 checkscpv antigos separados;72 casos fila+intake; contratos/4skills/mirrors conferidos. report-infra1559979468997660774 get verificado, content vazio e sem mentions. hold tecnico encerrado; nenhum canario/cadastrogam afirmado.",
+      "next_step": "Este request encerrado: não repetir navegação nem criação. Próximas conclusões naturais usam leitor externo/fila existente. GAP automático offline no_tab_opened e sampling auxiliary continuam observações de manutenção, sem alterar estratégia ou rota criação.",
+      "objective": "Pedido intacto até resposta; acompanhamento independente FIFO PC1, anúncio visível 10s",
+      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/retry-shein-1560010597385506986.json;data/ares/meta-ads/landing-followup/queue.sqlite3;discord:1558126133294399569#1560050837798256733",
+      "state": "primeiro ciclo visual real concluído após retry explícito rodolfo: mesmo request shein-1560010597385506986, pc1 online, mapping wordpress ativo read-only, landing rec com utms exatas, anúncios capital one shopping realmente renderizados. seis screenshots desktop compositado cobrem17.198s contínuos, validadorpass; aba e janela guarda próprias fechadas,4abas originais preservadas. job complete; aviso sucesso1560050837798256733 get verificado na origem.0campaignwrites,0quiznavigation,0adclicks. falha anterior transport-only reconciliada por transcript sem input. skill lessons atualizadas e lidas; teste gap11s rejeitado. sem mudanças scripts/config/timers.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-14T17:22:55+00:00"
+      "updated_at": "2026-10-14T22:05:39+00:00"
     },
     {
       "agent": "zeus",
@@ -5872,5 +5872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T21:01:38+00:00"
+  "updated_at": "2026-10-14T22:05:39+00:00"
 }
