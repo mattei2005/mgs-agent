@@ -841,8 +841,10 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     live_one = _engine_tree(config, rid, cid) or _readback(common, token, cid)
                     one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
                     warnings.extend(verify_readback(one_payload, state['source'], live_one))
-                    from .shein_qa import verify_media
-                    media_proof = verify_media(common, token, live_one, one_payload['campaigns'][0], state['source'], config.get('shein_media_qa') or {})
+                    from .shein_qa import verify_media, proof_covers
+                    media_proof = (state.get('media_qa') or {}).get(cid) or {}
+                    if not proof_covers(media_proof, live_one):
+                        media_proof = verify_media(common, token, live_one, one_payload['campaigns'][0], state['source'], config.get('shein_media_qa') or {})
                     state.setdefault('media_qa', {})[cid] = media_proof
                     atomic_json(state_path, state)
                     all_live.append(live_one)

@@ -58,4 +58,16 @@ class GroupTests(unittest.TestCase):
         self.assertTrue(all(c['adset_updates']['bid_amount']=='90' and c['campaign_updates']['bid_strategy']=='COST_CAP' for c in out))
         self.assertEqual(len({c['idempotency_key'] for c in out}),12)
 
+    def test_persisted_rendered_proof_requires_exact_unchanged_ids(self):
+        from ares_campaign_v3.shein_qa import proof_covers
+        proof={'verified':True,'ad_ids':['ad'],'creative_ids':['creative']}
+        live={'ads':{'data':[{'id':'ad','creative':{'id':'creative'}}]}}
+        self.assertTrue(proof_covers(proof,live))
+        self.assertFalse(proof_covers(proof,{'ads':{'data':[]}}))
+        changed=copy.deepcopy(live);changed['ads']['data'][0]['creative']['id']='changed'
+        self.assertFalse(proof_covers(proof,changed))
+        changed=copy.deepcopy(live);changed['ads']['data'][0]['id']='changed'
+        self.assertFalse(proof_covers(proof,changed))
+        self.assertFalse(proof_covers({**proof,'verified':False},live))
+
 if __name__=='__main__':unittest.main()

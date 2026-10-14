@@ -13,6 +13,15 @@ def validate_rendered(row, expect_video):
     if not expect_video and not videos and not row.get('images'):raise ValueError('preview lacks real ad media; activation blocked')
 
 
+def proof_covers(proof, live):
+    """Reuse only this request's real rendered proof for unchanged immutable IDs.
+
+    Caller must first pass fresh semantic readback against the sealed manifest.
+    """
+    ads=live.get('ads',{}).get('data') or []
+    return bool(ads) and proof.get('verified') is True and set(proof.get('ad_ids') or [])=={a['id'] for a in ads} and set(proof.get('creative_ids') or [])=={a['creative']['id'] for a in ads}
+
+
 def verify_media(common, token, live, desired, source, policy):
     if policy.get('enabled') is not True:raise ValueError('SHEIN media QA policy unavailable')
     actual={a.get('name'):a for a in live['ads']['data']}
