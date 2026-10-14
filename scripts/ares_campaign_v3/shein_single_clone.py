@@ -779,6 +779,8 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
             atomic_json(state_path, state)
             atomic_json(state_dir / 'manifest-sealed.json', state['manifest'])
         resolved_request = state.get('resolved_request') or request
+        # Trusted account-scoped source API snapshot, never user-supplied data.
+        config['source_bid_strategies'] = {state['source']['campaign']['id']: state['source']['campaign']['bid_strategy']}
         manifest = Manifest.from_dict(state['manifest'])
         validate_account_policy(manifest, config)
         dry_engine = CampaignEngine(config, transport_factory=lambda account: FakeBatchTransport(account))

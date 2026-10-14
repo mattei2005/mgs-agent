@@ -373,7 +373,7 @@ class CampaignEngine:
         from .cbo_bid import shell_payloads
         shell_update_ops: list[BatchOperation] = []
         for index, (campaign, campaign_id, adset_id) in enumerate(zip(bundle.campaigns, campaign_ids, adset_ids), 1):
-            campaign_body, adset_body = shell_payloads(campaign, adset_id)
+            campaign_body, adset_body = shell_payloads(campaign, adset_id, source_strategy=(self.config.get('source_bid_strategies') or {}).get(campaign.source_campaign_id))
             shell_update_ops.extend([
                 BatchOperation(f"campaign_update_{index}", "POST", campaign_id,
                                body=campaign_body, kind="campaign_update"),
@@ -1091,6 +1091,8 @@ class CampaignEngine:
             "blind_replay_blocked": True,
             "started_at": _utc(),
         }
+        from .cbo_bid import reconcile_shells
+        reconcile_shells(self, bundle, transport, record, campaign_ids, adset_ids)
         recovery_reads = [
             BatchOperation(
                 f"recovery_ads_{index}",
@@ -1121,6 +1123,8 @@ class CampaignEngine:
                     for row in live_rows
                     if str(row.get("adset_id") or "") == adset_id
                     and str(row.get("source_ad_id") or "") == str(ad.source_ad_id)
+                    and (row.get('name') == ad.name or (row.get('creative') or {}).get('name') == ad.creative_payload.get('name')
+                         or sum(str(s.source_ad_id) == str(ad.source_ad_id) for s in campaign.ads) == 1)
                 ]
                 if len(matches) > 1:
                     raise ExecutionFailed(
