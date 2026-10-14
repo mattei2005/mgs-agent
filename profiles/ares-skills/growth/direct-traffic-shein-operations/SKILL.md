@@ -126,6 +126,10 @@ fonte de clone         campanha/conta exatas quando houver
 
 Pergunte somente o campo ausente que bloqueia a ação. Em `SHEIN-US-DIRECT`, o objetivo/evento não é um campo de intake: toda criação, clonagem e duplicação usa `OUTCOME_SALES` com otimização `OFFSITE_CONVERSIONS` e evento `ADD_TO_WISHLIST` (Add to Wishlist). Nos modelos visíveis ao gestor, apresente domínio e idioma juntos em uma única linha no formato exato `Site/idioma: dominio.com - EN|ES`. Pedido vago que mudaria materialmente bid, estrutura, budget, schedule ou destino recebe entendimento curto + pergunta normal; não use formulário obrigatório.
 
+### Pedidos com várias campanhas-fonte
+
+Mantenha o mapa explícito fonte → quantidade → alvos, sem aplicar a configuração da primeira fonte às demais. Quando o intake central aceitar uma fonte por execução, vincule os subpedidos determinísticos à mesma mensagem humana e consolide a conclusão do pedido inteiro; não apresente a primeira execução concluída como sucesso global. Preserve os gates de QA/ativação e o relógio original, sem fracionar um grupo de mídia ou contornar limites. Use a receita `Pedidos com várias fontes na mesma conta` em `references/general-campaign-fast-route.md` para sequenciamento e verificação agregada.
+
 ### Correções do pedido antes do write
 
 Consolide as mensagens autorizadas mais recentes antes de executar: mudança de quantidade substitui a quantidade anterior; retirada expressa do ajuste de Cost per result goal remove `bid_strategy` e `bid_usd` do JSON de intenção, em vez de reenviar o valor inicialmente citado. Preserve budget, fonte e início que não foram alterados. Herdar o lance significa ler e conservar a estratégia e o cap reais da fonte, não presumir que coincidem com o primeiro valor informado; confira fonte × cada cópia no readback e informe o valor efetivamente preservado no resumo. Aplique essa edição somente enquanto não houver execução/manifest selado; após possível efeito parcial, reconcilie o mesmo request/IDs antes de interpretar a correção como novos writes.
