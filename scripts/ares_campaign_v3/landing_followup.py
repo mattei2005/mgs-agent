@@ -75,6 +75,20 @@ def validate_payload(p, check_scope=scope):
         (recorded.get('final') or {}).get('status'),(recorded.get('summary') or {}).get('status')}
     if recorded_request!=p['request_id'] or not recorded_status.intersection(TERMINAL):
         raise ValueError('creation proof is not terminal for this exact request')
+    manifest=recorded.get('manifest') or {}
+    if not manifest and recorded.get('manifest_path'):
+        manifest_path=Path(recorded['manifest_path'])
+        canonical_manifest_roots=(allowed,Path('/root/.hermes/profiles/ares/work'))
+        if not any(manifest_path.resolve().is_relative_to(root.resolve()) for root in canonical_manifest_roots):
+            raise ValueError('manifest outside canonical campaign evidence')
+        manifest=json.loads(manifest_path.read_text())
+    manifest_accounts={str(c['account_id']) for c in manifest.get('campaigns',[])}
+    proof_account=recorded.get('account_id') or (recorded.get('summary') or {}).get('account_id')
+    accounts=manifest_accounts or ({str(proof_account)} if proof_account else set())
+    if accounts!={p['account_id']}:raise ValueError('readback account does not match queue partition')
+    recorded_origin=recorded.get('request') or {}
+    for field in ('source_channel_id','source_thread_id'):
+        if recorded_origin.get(field) and str(recorded_origin[field])!=p[field]:raise ValueError('creation origin does not match queue partition')
     recorded_ids=set(str(x) for x in recorded.get('campaign_ids',[]))
     for field in ('engine_result','activation_result','final','summary'):
         entry=recorded.get(field) or {}
@@ -412,6 +426,10 @@ class Discord:
 
 def publish_creation(q,key,content,discord):
     j=q.job(key)
+    origin=discord.get('/channels/'+j['payload']['source_thread_id'])
+    if (str(origin.get('id'))!=j['payload']['source_thread_id'] or
+        str(origin.get('parent_id') or origin.get('id'))!=j['payload']['source_channel_id']):
+        raise ValueError('creation thread/parent readback does not match request partition')
     with q.tx():q.prepare_message(key+':creation',j['payload']['source_thread_id'],content)
     message=discord.deliver(q,key+':creation')
     q.acknowledge(key,message,discord.bot_id)

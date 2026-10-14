@@ -31,6 +31,8 @@ class FakeDiscord:
         return msg
     def get(self,path):
         if self.fail_get:raise ValueError('simulated GET failure')
+        if '/messages' not in path and path.startswith('/channels/'):
+            return {'id':path.split('/')[-1],'parent_id':'150000000000000003'}
         if '?limit=' in path:return list(self.messages.values())
         return self.messages[path.split('/')[-1]]
     deliver=m.Discord.deliver
@@ -45,7 +47,7 @@ class FollowupTests(unittest.TestCase):
         self.fp=patch.object(m,'file_evidence',side_effect=lambda p:{'path':p,'sha256':'offline-test-only','captured_at':float(Path(p).stem.split('-')[-1]) if Path(p).stem.split('-')[-1].isdigit() else 0});self.fp.start()
         self.pp=patch.object(m,'preserve_evidence',side_effect=lambda e,*a:e);self.pp.start()
         proof=self.root/'data/ares/meta-ads/proof.json';proof.parent.mkdir(parents=True)
-        proof.write_text(json.dumps({'offline_test_fixture':True,'request_id':'offline-fixture','status':'COMPLETE_FUTURE_ACTIVE','campaign_ids':['111111111111112']}))
+        proof.write_text(json.dumps({'offline_test_fixture':True,'request_id':'offline-fixture','account_id':'111111111111111','status':'COMPLETE_FUTURE_ACTIVE','campaign_ids':['111111111111112']}))
         self.payload={'strategy_family':'DIRECT_TRAFFIC','creation_status':'COMPLETE_FUTURE_ACTIVE',
             'account_id':'111111111111111','source_thread_id':'150000000000000002','source_channel_id':'150000000000000003',
             'request_id':'offline-fixture','operation':'TEST-DIRECT','campaign_ids':['111111111111112'],
@@ -168,10 +170,14 @@ class FollowupTests(unittest.TestCase):
     def test_verified_post_replay_is_read_only(self):
         self.arm();self.arm();self.assertEqual(self.dc.posts,1)
     def test_pending_message_id_survives_failed_get(self):
-        self.dc.fail_get=True
-        with self.assertRaises(ValueError):self.arm()
+        original_get=self.dc.get
+        def fail_message_readback(path):
+            if '/messages/' in path:raise ValueError('simulated message GET failure')
+            return original_get(path)
+        with patch.object(self.dc,'get',side_effect=fail_message_readback):
+            with self.assertRaises(ValueError):self.arm()
         row=self.q.db.execute('SELECT * FROM messages').fetchone();self.assertTrue(row['message_id'])
-        self.dc.fail_get=False;self.arm();self.assertEqual(self.dc.posts,1)
+        self.arm();self.assertEqual(self.dc.posts,1)
 
     def test_first_retry_blocks_later_url_of_same_request(self):
         p=copy.deepcopy(self.payload);p['operation']='MULTI-DIRECT';p['links'].append(copy.deepcopy(p['links'][0]))
