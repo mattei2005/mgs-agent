@@ -1,0 +1,585 @@
+{
+  "apps": [
+    {
+      "id": 2179875,
+      "name": "apexwalletde",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://apexwallet.de",
+        "theme": "jbf-server-child"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/apexwalletde_error.log",
+          "start": 90629,
+          "end": 90629,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2995224,
+      "name": "bkp2-ducapes",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://bkp2.ducapes.com",
+        "theme": "companybrs-theme"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/bkp2-ducapes_error.log",
+          "start": 0,
+          "end": 0,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179897,
+      "name": "boostingecon",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://boostingecon.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/boostingecon_error.log",
+          "start": 49890,
+          "end": 49890,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179899,
+      "name": "cephyric",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://cephyric.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/cephyric_error.log",
+          "start": 12221,
+          "end": 12221,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2995198,
+      "name": "ducapes",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://ducapes.com",
+        "theme": "companybrs-theme"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/ducapes_error.log",
+          "start": 2140425,
+          "end": 2140425,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179911,
+      "name": "escalatepower",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://escalatepower.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/escalatepower_error.log",
+          "start": 12773,
+          "end": 12773,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2995277,
+      "name": "finance-ducapes",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://finance.ducapes.com",
+        "theme": "companybrs-theme"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/finance-ducapes_error.log",
+          "start": 3668,
+          "end": 3668,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179925,
+      "name": "FinanceADX",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://financeadx.com",
+        "theme": "jbf-server-child"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/financeadx/logs/nginx/FinanceADX_error.log",
+          "start": 0,
+          "end": 0,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        },
+        {
+          "path": "/home/runcloud/logs/nginx/FinanceADX_error.log",
+          "start": 118919,
+          "end": 118919,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        },
+        {
+          "path": "/home/runcloud/webapps/FinanceADX/error_log",
+          "start": 288976,
+          "end": 288976,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2907397,
+      "name": "FinanceADX_bkp",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://bkps.financeadx.com",
+        "theme": "jbf-server-child"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/FinanceADX_bkp_error.log",
+          "start": 1089,
+          "end": 1089,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        },
+        {
+          "path": "/home/runcloud/webapps/FinanceADX_bkp/error_log",
+          "start": 288976,
+          "end": 288976,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179927,
+      "name": "growpowerhub",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://growpowerhub.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/growpowerhub_error.log",
+          "start": 85711,
+          "end": 85711,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179929,
+      "name": "helixenit",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://helixenit.net",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/helixenit/logs/nginx/helixenit_error.log",
+          "start": 0,
+          "end": 0,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        },
+        {
+          "path": "/home/runcloud/logs/nginx/helixenit_error.log",
+          "start": 31742,
+          "end": 31742,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179932,
+      "name": "infinitynexx",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://infinitynexx.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/infinitynexx_error.log",
+          "start": 99360,
+          "end": 99360,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179934,
+      "name": "jobscana",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://jobscana.com",
+        "theme": "jbf-server"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/jobscana_error.log",
+          "start": 4685,
+          "end": 4685,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179935,
+      "name": "marevelx",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://marevelx.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/marevelx_error.log",
+          "start": 10085,
+          "end": 10085,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179937,
+      "name": "mavroa",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://mavroa.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/mavroa_error.log",
+          "start": 42718,
+          "end": 42718,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179940,
+      "name": "mobileapp",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://mobileapp.com.br",
+        "theme": "jbf-wp-theme-Version-2.4.2"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/mobileapp_error.log",
+          "start": 14989,
+          "end": 14989,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        },
+        {
+          "path": "/home/runcloud/webapps/mobileapp/wp-content/debug.log",
+          "start": 7211088229,
+          "end": 7211088229,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179943,
+      "name": "vizioid",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://vizioid.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/vizioid_error.log",
+          "start": 8899,
+          "end": 8899,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179946,
+      "name": "xyvlov",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://xyvlov.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/xyvlov_error.log",
+          "start": 44499,
+          "end": 44499,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179948,
+      "name": "yolokfx",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://yolokfx.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/yolokfx_error.log",
+          "start": 24392,
+          "end": 24392,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    },
+    {
+      "id": 2179949,
+      "name": "zyclor",
+      "owner": "runcloud",
+      "bootstrap_exit": 0,
+      "runtime": {
+        "php": "8.3.33",
+        "home": "https://zyclor.com",
+        "theme": "jbf-wp-theme-main"
+      },
+      "stderr_categories": {
+        "fatal error": 0,
+        "deprecated": 0,
+        "warning": 0,
+        "parse error": 0
+      },
+      "log_delta": [
+        {
+          "path": "/home/runcloud/logs/nginx/zyclor_error.log",
+          "start": 43922,
+          "end": 43922,
+          "delta_bytes": 0,
+          "fatal_count": 0,
+          "fatal_signals": []
+        }
+      ]
+    }
+  ],
+  "wp_path": "/usr/local/bin/wp"
+}

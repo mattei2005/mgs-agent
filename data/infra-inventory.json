@@ -44016,6 +44016,57 @@
       },
       "rollback": "Restore STT selection from protected live/mirror backups using native config writer; retain isolated runtime as rollback evidence.",
       "original_message_replayed": false
+    },
+    {
+      "id": "php83-post-migration-audit-20261014",
+      "agent": "zeus",
+      "type": "read-only-fleet-audit-and-governance",
+      "updated_at": "2026-10-14T05:54:04.711843+00:00",
+      "source_message_id": "1559785169655697408",
+      "authorization_message_id": "1559601841036198031",
+      "thread_id": "1559601841036198031",
+      "status": "audit_completed_with_findings",
+      "report_path": "/root/mgs-agent/reports/php83-post-migration-20261014/report.md",
+      "summary_path": "/root/mgs-agent/reports/php83-post-migration-20261014/summary.json",
+      "evidence_manifest": "/root/mgs-agent/reports/php83-post-migration-20261014/manifest.json",
+      "checkpoint_id": "php83-smart-routing-20261014",
+      "production_configuration_changed": false,
+      "validated_counts": {
+        "companies": 2,
+        "publishers_enumerated": 54,
+        "publishers_with_pools": 38,
+        "pools": 482,
+        "configured_entries": 4285,
+        "distinct_tested_links": 4284,
+        "first_hop_302": 4283,
+        "initial_transient_404_recovered": 4,
+        "persistent_route404": 1,
+        "final_outcomes": {
+          "200": 3507,
+          "404": 776,
+          "unresolved": 1
+        },
+        "distinct_configured_destinations": 1417,
+        "destination_status": {
+          "200": 1070,
+          "404": 347
+        },
+        "published_landing_parameter_loss_paths": 14,
+        "links_affected_parameter_loss": 33
+      },
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/post-php-migration-routing-audit.md",
+      "skill_reference_sha256": "ce7dcf05df6a512cd228713500c4690296f8d7787643510395c3d32ffa88664a",
+      "skill_router_sha256": "0efa6e6482a04b27c18ff355fdf94d135c8746c79d062bbd5d3d90bd70a356fc",
+      "sensitive_api_payload_incident": "internal tool trace; scratch sanitized and allowlist enforced; Discord progress read back without sensitive values; credentials unchanged; trace not deleted",
+      "report_infra_status": "validated",
+      "report_infra_message_id": "1559806525537788005",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback": {
+        "content_empty": true,
+        "embeds": 1,
+        "mentions": 0,
+        "validated_at": "2026-10-14T05:54:50.167635+00:00"
+      }
     }
   ],
   "profile_skill_references": [

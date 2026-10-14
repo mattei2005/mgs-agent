@@ -1,0 +1,117 @@
+[
+  {
+    "route": "cv-car-br-001",
+    "tests": [
+      {
+        "url": "https://creditoparaveiculo.com/cv-car-br-001/",
+        "status": 404,
+        "location": null,
+        "body_sample": null
+      },
+      {
+        "url": "https://creditoparaveiculo.com/cv-car-br-001",
+        "status": 404,
+        "location": null,
+        "body_sample": null
+      },
+      {
+        "url": "https://creditoparaveiculo.com/cv-car-br-001/?utm_source=facebook&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=php83_audit_missing&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "status": 404,
+        "location": null,
+        "body_sample": null
+      }
+    ]
+  },
+  {
+    "route": "ly-f-us-cc-es-drip-m11-1",
+    "tests": [
+      {
+        "url": "https://finanzas.lyzmo.com/ly-f-us-cc-es-drip-m11-1/",
+        "status": 302,
+        "location": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold/",
+        "body_sample": null
+      },
+      {
+        "url": "https://finanzas.lyzmo.com/ly-f-us-cc-es-drip-m11-1",
+        "status": 302,
+        "location": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold",
+        "body_sample": null
+      },
+      {
+        "url": "https://finanzas.lyzmo.com/ly-f-us-cc-es-drip-m11-1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=php83_audit&utm_content=drip_us_cc_m11-1&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "status": 302,
+        "location": "https://finanzas.lyzmo.com/rec-us-cc-tarjeta-bbva-tarjeta-visa-gold/?utm_source=facebook&utm_medium=g003-d&utm_campaign=php83_audit&utm_content=drip_us_cc_m11-1&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "body_sample": null
+      }
+    ]
+  },
+  {
+    "route": "ftf-f-us-cc-es-mct-012-2",
+    "tests": [
+      {
+        "url": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-012-2/",
+        "status": 302,
+        "location": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional/",
+        "body_sample": null
+      },
+      {
+        "url": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-012-2",
+        "status": 302,
+        "location": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional",
+        "body_sample": null
+      },
+      {
+        "url": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=bd_us_cc_12-2&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "status": 302,
+        "location": "https://finanzas.topfeed.fun/rec-us-cc-tarjeta-de-credito-san-juan-internacional/?utm_source=mct&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=bd_us_cc_12-2&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "body_sample": null
+      }
+    ]
+  },
+  {
+    "route": "ly-us-cc-es-mct-014",
+    "tests": [
+      {
+        "url": "https://lyzmo.com/ly-us-cc-es-mct-014/",
+        "status": 302,
+        "location": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-015-2/",
+        "body_sample": null
+      },
+      {
+        "url": "https://lyzmo.com/ly-us-cc-es-mct-014",
+        "status": 302,
+        "location": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-015-2",
+        "body_sample": null
+      },
+      {
+        "url": "https://lyzmo.com/ly-us-cc-es-mct-014/?utm_source=mct&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=bd_us_cc_14-1&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "status": 302,
+        "location": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-015-2/?utm_source=mct&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=bd_us_cc_14-1&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "body_sample": null
+      }
+    ]
+  },
+  {
+    "route": "zu-f-us-cc-es-mct-013",
+    "tests": [
+      {
+        "url": "https://finanzas.zuout.com/zu-f-us-cc-es-mct-013/",
+        "status": 302,
+        "location": "https://finanzas.zuout.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional/",
+        "body_sample": null
+      },
+      {
+        "url": "https://finanzas.zuout.com/zu-f-us-cc-es-mct-013",
+        "status": 302,
+        "location": "https://finanzas.zuout.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional",
+        "body_sample": null
+      },
+      {
+        "url": "https://finanzas.zuout.com/zu-f-us-cc-es-mct-013/?utm_source=mct&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=bd_us_cc_13-1&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "status": 302,
+        "location": "https://finanzas.zuout.com/rec-us-cc-tarjeta-san-juan-tarjeta-de-credito-internacional/?utm_source=mct&utm_medium=php83_audit&utm_campaign=php83_audit&utm_content=bd_us_cc_13-1&fbclid=mgs_php83_audit&gclid=mgs_php83_audit&mgs_audit=1559785169655697408",
+        "body_sample": null
+      }
+    ]
+  }
+]

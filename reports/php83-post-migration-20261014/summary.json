@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-10-14T05:53:27.048096+00:00",
+  "status": "audit_complete_with_findings",
+  "production_configuration_writes": false,
+  "fleet": {
+    "apps": 109,
+    "php_config": "php83rc",
+    "bootstrap_php": "8.3.33",
+    "bootstrap_pass": 109,
+    "origin_http200": 109,
+    "public_home200": 105,
+    "public_challenge": 3,
+    "public_backup_dns_missing": 1
+  },
+  "routing": {
+    "companies": 2,
+    "publishers_enumerated": 54,
+    "publishers_with_pools": 38,
+    "pools": 482,
+    "configured_entries": 4285,
+    "distinct_tested_links": 4284,
+    "first_hop_302": 4283,
+    "initial_transient_404_recovered": 4,
+    "persistent_route404": 1,
+    "final_outcomes": {
+      "200": 3507,
+      "404": 776,
+      "unresolved": 1
+    },
+    "distinct_configured_destinations": 1417,
+    "destination_status": {
+      "200": 1070,
+      "404": 347
+    },
+    "published_landing_parameter_loss_paths": 14,
+    "links_affected_parameter_loss": 33
+  },
+  "browser": {
+    "home_scenarios": 218,
+    "rec_scenarios": 64,
+    "rec_publishers": 32,
+    "total_scenarios": 282,
+    "challenge_or_dns_not_functionally_certified": 8
+  },
+  "runtime_residual": "Receitas Descomplicada: recurring WP Rocket lazyload timeout fatals; causal PHP regression unproved",
+  "sensitive_api_collection_incident": {
+    "internal_trace_contains_sensitive_response": true,
+    "scratch_company_file_sanitized": true,
+    "discord_progress_readback_values_not_present": true,
+    "credentials_changed": false,
+    "trace_deleted": false
+  },
+  "source_thread": "1559601841036198031",
+  "completion_notice": "1559785169655697408"
+}

@@ -1,0 +1,1801 @@
+{
+  "summary": [
+    {
+      "id": "290075",
+      "name": "MatteiInc01",
+      "all_webapps": 75,
+      "wordpress": 74,
+      "online": true,
+      "connected": true,
+      "services": {
+        "beanstalk": false,
+        "httpd": true,
+        "mariadb": true,
+        "memcached": false,
+        "nginx": true,
+        "redis": false,
+        "supervisor": false
+      }
+    },
+    {
+      "id": "288158",
+      "name": "MatteiInc02",
+      "all_webapps": 15,
+      "wordpress": 15,
+      "online": true,
+      "connected": true,
+      "services": {
+        "beanstalk": false,
+        "httpd": true,
+        "mariadb": true,
+        "memcached": false,
+        "nginx": true,
+        "redis": false,
+        "supervisor": true
+      }
+    },
+    {
+      "id": "310255",
+      "name": "MatteiInc03JBF",
+      "all_webapps": 20,
+      "wordpress": 20,
+      "online": true,
+      "connected": true,
+      "services": {
+        "beanstalk": false,
+        "httpd": true,
+        "mariadb": true,
+        "memcached": false,
+        "nginx": true,
+        "redis": true,
+        "supervisor": false
+      }
+    }
+  ],
+  "apps": [
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790021,
+      "name": "allincraft",
+      "root": "/home/runcloud/webapps/allincraft",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "allincraft.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790018,
+      "name": "amazingxjobs",
+      "root": "/home/runcloud/webapps/amazingxjobs",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "amazingxjobs.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2996530,
+      "name": "app-conectageral",
+      "root": "/home/runcloud/webapps/app-conectageral",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "app.conectageral.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2121416,
+      "name": "app-portalrelevante-com",
+      "root": "/home/runcloud/webapps/app-portalrelevante-com",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "app.portalrelevante.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716439,
+      "name": "bahuye",
+      "root": "/home/runcloud/webapps/bahuye",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "bahuye.net",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2486831,
+      "name": "bkp-folhadaterra",
+      "root": "/home/runcloud/webapps/bkp-folhadaterra",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "bkp.folhadaterra.com.br",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790027,
+      "name": "careersjobsad",
+      "root": "/home/runcloud/webapps/careersjobsad",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "careersjobsad.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2995514,
+      "name": "conectageral",
+      "root": "/home/runcloud/webapps/conectageral",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "conectageral.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716523,
+      "name": "consultarfinanca",
+      "root": "/home/runcloud/webapps/consultarfinanca",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "consultarfinanca.info",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790008,
+      "name": "deolho",
+      "root": "/home/runcloud/webapps/deolho",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "deolhonoworld.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2394148,
+      "name": "dicasfinancas",
+      "root": "/home/runcloud/webapps/dicasfinancas",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "dicasfinancas.info",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790029,
+      "name": "digitaltrustadx",
+      "root": "/home/runcloud/webapps/digitaltrustadx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "digitaltrustadx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790004,
+      "name": "eggbev",
+      "root": "/home/runcloud/webapps/eggbev",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "eggbev.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790000,
+      "name": "eng-wrnoticia",
+      "root": "/home/runcloud/webapps/eng-wrnoticia",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "eng.wrnoticia.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2459505,
+      "name": "es-seuprimeiroempregoam",
+      "root": "/home/runcloud/webapps/es-seuprimeiroempregoam",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "es.seuprimeiroempregoam.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789998,
+      "name": "es-wrnoticia",
+      "root": "/home/runcloud/webapps/es-wrnoticia",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "es.wrnoticia.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789989,
+      "name": "esp-noticiainforme",
+      "root": "/home/runcloud/webapps/esp-noticiainforme",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "esp.noticiainforme.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716484,
+      "name": "everythingtented",
+      "root": "/home/runcloud/webapps/everythingtented",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "everythingtented.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2994275,
+      "name": "finance-topfeed",
+      "root": "/home/runcloud/webapps/finance-topfeed",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finance.topfeed.fun",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2696446,
+      "name": "finance-wantabrand",
+      "root": "/home/runcloud/webapps/finance-wantabrand",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finance.wantabrand.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789985,
+      "name": "financescredit",
+      "root": "/home/runcloud/webapps/financescredit",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "financescredit.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789982,
+      "name": "financespost",
+      "root": "/home/runcloud/webapps/financespost",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "financespost.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2996688,
+      "name": "finanzas-conectageral",
+      "root": "/home/runcloud/webapps/finanzas-conectageral",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.conectageral.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692284,
+      "name": "finanzas-eggbev",
+      "root": "/home/runcloud/webapps/finanzas-eggbev",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.eggbev.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692291,
+      "name": "finanzas-lyzmo",
+      "root": "/home/runcloud/webapps/finanzas-lyzmo",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.lyzmo.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2994332,
+      "name": "finanzas-topfeed",
+      "root": "/home/runcloud/webapps/finanzas-topfeed",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.topfeed.fun",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2696451,
+      "name": "finanzas-wavesbee",
+      "root": "/home/runcloud/webapps/finanzas-wavesbee",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.wavesbee.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789976,
+      "name": "finanzashispano",
+      "root": "/home/runcloud/webapps/finanzashispano",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzashispano.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790030,
+      "name": "folhadaterra",
+      "root": "/home/runcloud/webapps/folhadaterra",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "folhadaterra.com.br",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1847642,
+      "name": "growthnetworkinc",
+      "root": "/home/runcloud/webapps/growthnetworkinc",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "growthnetworkinc.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790038,
+      "name": "informegeral",
+      "root": "/home/runcloud/webapps/informegeral",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "informegeral.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790044,
+      "name": "jislainemattei",
+      "root": "/home/runcloud/webapps/jislainemattei",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "jislainemattei.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2995522,
+      "name": "jobs-conectageral",
+      "root": "/home/runcloud/webapps/jobs-conectageral",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "jobs.conectageral.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2935452,
+      "name": "jobs-deolhonoworld-com",
+      "root": "/home/runcloud2/webapps/jobs-deolhonoworld-com",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "jobs.deolhonoworld.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789932,
+      "name": "kievportal",
+      "root": "/home/runcloud/webapps/kievportal",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "kievportal.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789974,
+      "name": "lyzmo",
+      "root": "/home/runcloud/webapps/lyzmo",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "lyzmo.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789928,
+      "name": "marketingdigitalad",
+      "root": "/home/runcloud/webapps/marketingdigitalad",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "marketingdigitalad.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790045,
+      "name": "matteiservicesinc",
+      "root": "/home/runcloud/webapps/matteiservicesinc",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "matteiservicesinc.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789971,
+      "name": "newsfolha",
+      "root": "/home/runcloud/webapps/newsfolha",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "newsfolha.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2373845,
+      "name": "newsfolha-jobs",
+      "root": "/home/runcloud/webapps/newsfolha-jobs",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "jobs.newsfolha.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789970,
+      "name": "newsoun",
+      "root": "/home/runcloud/webapps/newsoun",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "newsoun.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1858527,
+      "name": "newsoun-de",
+      "root": "/home/runcloud/webapps/newsoun-de",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "de.newsoun.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692293,
+      "name": "newsoun-finanzas",
+      "root": "/home/runcloud/webapps/newsoun-finanzas",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.newsoun.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789967,
+      "name": "noticiainforme",
+      "root": "/home/runcloud/webapps/noticiainforme",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "noticiainforme.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790046,
+      "name": "portalbrasilnews",
+      "root": "/home/runcloud/webapps/portalbrasilnews",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "portalbrasilnews.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790047,
+      "name": "portalFolhadasbd",
+      "root": "/home/runcloud/webapps/portalFolhadasbd",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "portal.folhadaterra.com.br",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2124791,
+      "name": "portalrelevante",
+      "root": "/home/runcloud/webapps/portalrelevante",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "portalrelevante.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692310,
+      "name": "portalrelevante-finanzas",
+      "root": "/home/runcloud/webapps/portalrelevante-finanzas",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.portalrelevante.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790048,
+      "name": "prospectcleaning",
+      "root": "/home/runcloud/webapps/prospectcleaning",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "prospectcleaning.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790049,
+      "name": "prospecth",
+      "root": "/home/runcloud/webapps/prospecth",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "prospecthomeimprovement.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789965,
+      "name": "receitasdescomplicada",
+      "root": "/home/runcloud/webapps/receitasdescomplicada",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "receitasdescomplicada.com.br",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790050,
+      "name": "revistacafe",
+      "root": "/home/runcloud/webapps/revistacafe",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "revistacafe.com.br",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790051,
+      "name": "s4blindsandshades",
+      "root": "/home/runcloud/webapps/s4blindsandshades",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "s4blindsandshades.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789964,
+      "name": "scorexboost",
+      "root": "/home/runcloud/webapps/scorexboost",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "scorexboost.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716426,
+      "name": "seniormenu",
+      "root": "/home/runcloud/webapps/seniormenu",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "seniormenu.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692331,
+      "name": "seuprimeiroempleo",
+      "root": "/home/runcloud/webapps/seuprimeiroempleo",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "empleo.seuprimeiroempregoam.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789961,
+      "name": "seuprimeiroempregoam",
+      "root": "/home/runcloud/webapps/seuprimeiroempregoam",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "seuprimeiroempregoam.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716470,
+      "name": "sotuz",
+      "root": "/home/runcloud/webapps/sotuz",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "sotuz.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2603187,
+      "name": "sscorexboost-jobs",
+      "root": "/home/runcloud/webapps/sscorexboost-jobs",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "jobs.scorexboost.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790052,
+      "name": "sunshinebeautysupplier",
+      "root": "/home/runcloud/webapps/sunshinebeautysupplier",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "sunshinebeautysupplier.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1790053,
+      "name": "tapsaga",
+      "root": "/home/runcloud/webapps/tapsaga",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "tapsaga.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2994339,
+      "name": "topfeed",
+      "root": "/home/runcloud/webapps/topfeed",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "topfeed.fun",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789955,
+      "name": "vagaaqui",
+      "root": "/home/runcloud/webapps/vagaaqui",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "vagaaqui.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2498315,
+      "name": "wantabrand",
+      "root": "/home/runcloud2/webapps/wantabrand",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "wantabrand.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789948,
+      "name": "wavesbee",
+      "root": "/home/runcloud/webapps/wavesbee",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "wavesbee.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789943,
+      "name": "wr-wrnoticia",
+      "root": "/home/runcloud/webapps/wr-wrnoticia",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "wr.wrnoticia.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789942,
+      "name": "wrnoticia-home",
+      "root": "/home/runcloud/webapps/wrnoticia-home",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "wrnoticia.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716430,
+      "name": "zerhu",
+      "root": "/home/runcloud/webapps/zerhu",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "zerhu.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716475,
+      "name": "ziwus",
+      "root": "/home/runcloud/webapps/ziwus",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "ziwus.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789940,
+      "name": "zuout",
+      "root": "/home/runcloud/webapps/zuout",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "zuout.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692314,
+      "name": "zuout-finanzas",
+      "root": "/home/runcloud/webapps/zuout-finanzas",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.zuout.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2716480,
+      "name": "zuploader",
+      "root": "/home/runcloud/webapps/zuploader",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "zuploader.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 1789935,
+      "name": "zytiva",
+      "root": "/home/runcloud/webapps/zytiva",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "zytiva.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "290075",
+      "server": "MatteiInc01",
+      "ip": "162.55.28.178",
+      "id": 2692318,
+      "name": "zytiva-finanzas",
+      "root": "/home/runcloud/webapps/zytiva-finanzas",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finanzas.zytiva.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2736647,
+      "name": "all-autolan",
+      "root": "/home/runcloud/webapps/all-autolan",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "allautolan.matteiservicesinc.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735905,
+      "name": "autocreditadxx",
+      "root": "/home/runcloud2/webapps/autocreditadxx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "autocreditadx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735738,
+      "name": "autolendpro",
+      "root": "/home/runcloud2/webapps/autolendpro",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "autolendpro.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735760,
+      "name": "carcreditad",
+      "root": "/home/runcloud2/webapps/carcreditad",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "carcreditad.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2949320,
+      "name": "cliquetsr",
+      "root": "/home/runcloud/webapps/cliquetsr",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "sr.cliquet.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2949323,
+      "name": "cliquetsrf",
+      "root": "/home/runcloud/webapps/cliquetsrf",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "srf.cliquet.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735775,
+      "name": "creditoparaveiculo",
+      "root": "/home/runcloud2/webapps/creditoparaveiculo",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "creditoparaveiculo.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2773494,
+      "name": "datinghubpro",
+      "root": "/home/runcloud/webapps/datinghubpro",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "datinghubpro.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735771,
+      "name": "financiamentoautoadx",
+      "root": "/home/runcloud2/webapps/financiamentoautoadx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "financiamentoautoadx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2763158,
+      "name": "financiarveiculo",
+      "root": "/home/runcloud2/webapps/financiarveiculo",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "financiarveiculo.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735778,
+      "name": "gamehubad",
+      "root": "/home/runcloud2/webapps/gamehubad",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "gamehubad.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735781,
+      "name": "gamezonead",
+      "root": "/home/runcloud2/webapps/gamezonead",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "gamezonead.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2735782,
+      "name": "gamingadx",
+      "root": "/home/runcloud2/webapps/gamingadx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "gamingadx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2949312,
+      "name": "openzedsr",
+      "root": "/home/runcloud/webapps/openzedsr",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "sr.openzed.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "288158",
+      "server": "MatteiInc02",
+      "ip": "162.55.28.179",
+      "id": 2949319,
+      "name": "openzedsrf",
+      "root": "/home/runcloud/webapps/openzedsrf",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "srf.openzed.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179875,
+      "name": "apexwalletde",
+      "root": "/home/runcloud/webapps/apexwalletde",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "apexwallet.de",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2995224,
+      "name": "bkp2-ducapes",
+      "root": "/home/runcloud/webapps/bkp2-ducapes",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "bkp2.ducapes.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179897,
+      "name": "boostingecon",
+      "root": "/home/runcloud/webapps/boostingecon",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "boostingecon.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179899,
+      "name": "cephyric",
+      "root": "/home/runcloud/webapps/cephyric",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "cephyric.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2995198,
+      "name": "ducapes",
+      "root": "/home/runcloud/webapps/ducapes",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "ducapes.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179911,
+      "name": "escalatepower",
+      "root": "/home/runcloud/webapps/escalatepower",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "escalatepower.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2995277,
+      "name": "finance-ducapes",
+      "root": "/home/runcloud/webapps/finance-ducapes",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "finance.ducapes.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179925,
+      "name": "FinanceADX",
+      "root": "/home/runcloud/webapps/FinanceADX",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "financeadx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2907397,
+      "name": "FinanceADX_bkp",
+      "root": "/home/runcloud/webapps/FinanceADX_bkp",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "bkps.financeadx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179927,
+      "name": "growpowerhub",
+      "root": "/home/runcloud/webapps/growpowerhub",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "growpowerhub.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179929,
+      "name": "helixenit",
+      "root": "/home/runcloud/webapps/helixenit",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "helixenit.net",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179932,
+      "name": "infinitynexx",
+      "root": "/home/runcloud/webapps/infinitynexx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "infinitynexx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179934,
+      "name": "jobscana",
+      "root": "/home/runcloud/webapps/jobscana",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "jobscana.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179935,
+      "name": "marevelx",
+      "root": "/home/runcloud/webapps/marevelx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "marevelx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179937,
+      "name": "mavroa",
+      "root": "/home/runcloud/webapps/mavroa",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "mavroa.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179940,
+      "name": "mobileapp",
+      "root": "/home/runcloud/webapps/mobileapp",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "mobileapp.com.br",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179943,
+      "name": "vizioid",
+      "root": "/home/runcloud/webapps/vizioid",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "vizioid.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179946,
+      "name": "xyvlov",
+      "root": "/home/runcloud/webapps/xyvlov",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "xyvlov.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179948,
+      "name": "yolokfx",
+      "root": "/home/runcloud/webapps/yolokfx",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "yolokfx.com",
+          "type": "primary"
+        }
+      ]
+    },
+    {
+      "server_id": "310255",
+      "server": "MatteiInc03JBF",
+      "ip": "46.4.95.117",
+      "id": 2179949,
+      "name": "zyclor",
+      "root": "/home/runcloud/webapps/zyclor",
+      "user": null,
+      "php": "php83rc",
+      "domains": [
+        {
+          "name": "zyclor.com",
+          "type": "primary"
+        }
+      ]
+    }
+  ]
+}
