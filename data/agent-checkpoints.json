@@ -3783,12 +3783,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Concluir QA, imagens e criação dos 30 drafts; verificar cada objeto por ID; informar nesta thread os links de edição agrupados por portal, com títulos e status reais, sem anexos e sem publicação.",
-      "objective": "Concluir 30 artigos SEO em draft e entregar links de edição para revisão da Raquel",
-      "source": "https://discord.com/channels/1185714635991679006/1559930384852979796/1559939129339289712",
-      "state": "integração dos dez portais validada. pesquisa, análise integral das categorias e redação delegadas em andamento; etapa wordpress de drafts e mídias ainda pendente. raquel pediu aviso de conclusão com links na mensagem1559939129339289712. não interromper execução nem pedir novo ok rotineiro.",
+      "next_step": "Receber QA independente, corrigir bloqueios; gravar um draft por vez via helpers aprovados, ler objeto exato e consolidar30 links com status draft.",
+      "objective": "Entregar 30 drafts SEO e links de edição para revisão da Raquel",
+      "source": "/root/.hermes/profiles/atena/work/seo-mass-1559930384852979796/draft-text-inventory.json",
+      "state": "30 textos recebidos e validados deterministicamente: cada portal tem3, todos >=1000 palavras, idioma e categoria próprios, marcador correto. 30 imagens originais geradas; qa visual reprovou5 originais, cinco regeneradas e aprovadas, alts corrigidos. arquivo image-qa-approved.json confirma30 aprovadas. schema yoast rest registrado nos dez. três revisores independentes em andamento; nenhum post/upload ainda. publisher resumível pronto para executar só após reconciliação editorial.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-14T14:41:24+00:00"
+      "updated_at": "2026-10-14T14:55:01+00:00"
     },
     {
       "agent": "atena",
@@ -5842,5 +5842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T14:48:40+00:00"
+  "updated_at": "2026-10-14T14:55:01+00:00"
 }
