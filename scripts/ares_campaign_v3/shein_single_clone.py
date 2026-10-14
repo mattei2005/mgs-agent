@@ -41,7 +41,7 @@ REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
 REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
 REQUEST_FIELDS.update({'bid_strategy', 'bid_usd', 'campaign_groups', 'manager_media_folder_id'})
-REQUEST_FIELDS.update({'source_account', 'source_campaign_id', 'website_url', 'primary_text'})
+REQUEST_FIELDS.update({'source_account', 'source_campaign_id', 'website_url', 'primary_text', 'target_page_id'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -594,9 +594,9 @@ def _prepare(request, config, common, token, *, reference_only=False):
     if len(pages) != 1:
         raise RouteBlocked('source uses multiple Pages')
     source_page_id = next(iter(pages))
-    # No Page switch was requested: inherit the exact reference identity.
-    # An onboarding Page is a non-exclusive observation, not a silent override.
-    page_id = source_page_id
+    # A new campaign uses the approved target identity; a read-only reference
+    # does not implicitly move its advertiser Page to another account.
+    page_id = str(request.get('target_page_id') or profile['page_id']) if reference else source_page_id
     compiler_config = copy.deepcopy(config['accounts'][account_id()])
     if CURRENT_PROFILE.get():
         # A sampled Page is an observation, not an exclusive site/account binding.
@@ -648,7 +648,14 @@ def _prepare(request, config, common, token, *, reference_only=False):
         identities = {str(x['creative'].get('instagram_user_id') or _story(x).get('instagram_user_id') or '') for x in ads}
         if len(identities) != 1:
             raise RouteBlocked('reference Instagram identity is ambiguous')
-        compiler_config['shein_profile']['instagram_user_id'] = next(iter(identities)) or None
+        if page_id == source_page_id:
+            compiler_config['shein_profile']['instagram_user_id'] = next(iter(identities)) or None
+        else:
+            identity = _batch(common, page_token, [{'name': 'target_instagram', 'path': page_id,
+                'params': {'fields': 'id,instagram_business_account'}}])['target_instagram']
+            if identity.get('id') != page_id:
+                raise RouteBlocked('target Page Instagram read identity mismatch')
+            compiler_config['shein_profile']['instagram_user_id'] = (identity.get('instagram_business_account') or {}).get('id')
     compiled_request = resolve_intent(request, source)
     if reference_only:
         if not reference:

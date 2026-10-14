@@ -201,7 +201,8 @@ class CampaignSpec:
         reference = value.get('reference') or {}
         if reference:
             required_reference = {'account_id', 'campaign_id', 'adset_id', 'ad_ids', 'language', 'page_id', 'access', 'lineage_route'}
-            if (not isinstance(reference, dict) or set(reference) != required_reference
+            if (not isinstance(reference, dict) or not required_reference.issubset(reference)
+                    or set(reference) - required_reference - {'target_page_id'}
                     or mode != 'from_zero_prestaged' or reference['access'] != 'READ_ONLY'
                     or reference['lineage_route'] != 'direct_ad_create_with_source_ad_id'
                     or reference['language'] not in {'EN', 'ES'}
@@ -211,6 +212,8 @@ class CampaignSpec:
                     or any(re.fullmatch(r'[1-9][0-9]+', str(v)) is None for v in
                            [reference['account_id'], reference['campaign_id'], reference['adset_id'], reference['page_id'], *reference['ad_ids']])):
                 raise ManifestError('exact numeric reference identities required')
+            if 'target_page_id' in reference and re.fullmatch(r'[1-9][0-9]+', str(reference['target_page_id'])) is None:
+                raise ManifestError('exact numeric target Page identity required')
         if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
         creative_materialization_route = str(

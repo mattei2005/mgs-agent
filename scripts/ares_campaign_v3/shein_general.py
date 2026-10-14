@@ -282,7 +282,7 @@ def _build_one(request, source, number, account_config):
             shell['adset_create'].update(bid_updates)
         if reference:
             from .shein_reference import receipt
-            shell['reference'] = receipt(source, reference)
+            shell['reference'] = receipt(source, reference, p['page_id'])
             # Preserve the live configuration, not the G005 fallback defaults.
             required = {'billing_event', 'optimization_goal', 'targeting', 'promoted_object',
                         'attribution_spec', 'regional_regulated_categories',
@@ -290,6 +290,8 @@ def _build_one(request, source, number, account_config):
             if not required.issubset(source['adset']):
                 raise ValueError('complete compatible live reference adset required')
             shell['adset_create'].update({k: copy.deepcopy(source['adset'][k]) for k in required})
+            if 'page_id' in shell['adset_create']['promoted_object']:
+                shell['adset_create']['promoted_object']['page_id'] = p['page_id']
             if bid_updates is not None:
                 shell['adset_create'].update(bid_updates)
     else:

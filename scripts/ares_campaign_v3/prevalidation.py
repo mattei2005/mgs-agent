@@ -109,7 +109,7 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                     or campaign.reference['language'] != tp['language']):
                 raise ManifestError('cross-account capability or source/target partition mismatch')
             if (campaign.adset_create.get('promoted_object', {}).get('pixel_id') != tp.get('pixel_id')
-                    or any(a.creative_payload.get('object_story_spec', {}).get('page_id') != campaign.reference['page_id'] for a in campaign.ads)):
+                    or any(a.creative_payload.get('object_story_spec', {}).get('page_id') != campaign.reference.get('target_page_id', campaign.reference['page_id']) for a in campaign.ads)):
                 raise ManifestError('cross-account target Page/pixel mismatch')
             policy['allowed_ad_counts'] = capability.get('allowed_ad_counts') or []
             if set(policy['allowed_ad_counts']) != {1, 2, 3, 4, 5}:

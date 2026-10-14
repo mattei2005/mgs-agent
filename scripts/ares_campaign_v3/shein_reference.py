@@ -26,6 +26,8 @@ def validate_intent(request):
         raise ValueError('new cross-account reference cannot preserve posts or recycle numbers')
     if not isinstance(request.get('website_url'), str) or not request['website_url']:
         raise ValueError('literal requested Website URL required')
+    if 'target_page_id' in request and re.fullmatch(r'[1-9][0-9]+', str(request['target_page_id'])) is None:
+        raise ValueError('exact numeric target Page required')
 
 
 def target_profile(request, target, source, policy):
@@ -55,6 +57,8 @@ def target_profile(request, target, source, policy):
             or params.get('utm_source') != 'facebook' or params.get('utm_medium') != target['manager_code'].lower() + '-s'):
         raise ValueError('literal target tracking invalid')
     result = copy.deepcopy(target)
+    if request.get('target_page_id'):
+        result['page_id'] = str(request['target_page_id'])
     result.update(destination_base=request['website_url'].split('?', 1)[0], tracking_prefix=match[1],
                   utm_medium=params['utm_medium'], reference_target_token=token)
     return result
@@ -113,11 +117,14 @@ def require_binding(request, source, target, reference):
                 raise ValueError('reference effective tracking mismatch')
 
 
-def receipt(source, reference):
-    return {'account_id': source['campaign']['account_id'], 'campaign_id': source['campaign']['id'],
+def receipt(source, reference, target_page_id=None):
+    result = {'account_id': source['campaign']['account_id'], 'campaign_id': source['campaign']['id'],
             'adset_id': source['adset']['id'], 'ad_ids': [str(a['id']) for a in source['ads']],
             'language': reference['language'], 'page_id': reference['page_id'], 'access': 'READ_ONLY',
             'lineage_route': 'direct_ad_create_with_source_ad_id'}
+    if target_page_id and str(target_page_id) != reference['page_id']:
+        result['target_page_id'] = str(target_page_id)
+    return result
 
 
 def creative_degrees(creative):

@@ -9,6 +9,15 @@
     "target_has_existing_campaign_required": false,
     "same_account_reference_required": false,
     "source_campaign_must_remain_unchanged": true,
+    "target_page_policy": {
+      "approved_by": "344196393512075265",
+      "source_message_id": "1560031432968114310",
+      "source_thread_id": "1558126133294399569",
+      "rule": "For new campaigns using an external account only as configuration reference, use the requested/approved target-account advertiser Page, not the reference Page by default. Validate target identity/tasks separately and do not transfer the source Instagram identity to another Page.",
+      "current_request_page_id": "572539232608128",
+      "current_request_page_name": "Savings Spot",
+      "future_similar_requests": "all channel-authorized SHEIN managers may request equivalent creations and target Page selection without renewed Rodolfo approval; access, QA and Critical Subset remain"
+    },
     "account_scope": "Validate source and target access separately under the existing channel/account authorization policy. This decision applies to every manager but does not grant general access or writes outside the originating account partition.",
     "required_controls": [
       "exact reference account and campaign plus exact target account",
