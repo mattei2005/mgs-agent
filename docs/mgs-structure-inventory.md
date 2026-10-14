@@ -7,6 +7,14 @@
 
 ---
 
+## Atualização operacional — Escalatepower contas e Pages (2026-10-14)
+
+- Autoridade: Rodolfo, mensagem `1559929154030276730`, thread `1559928644149841971`, para configurar o mapeamento das seis contas Escalatepower SHEIN e as seis Pages indicadas; sem criar/ativar campanhas.
+- Meta: seis contas saudáveis com ADVERTISE, USD e timezone live `America/New_York`; pixel existente `1049581090103163` associado às seis. As seis Pages estavam na BM mas sem tarefas para o System User corporativo; atribuídos somente ADVERTISE + ANALYZE, com GET administrativo e GET corporativo de cada Page confirmados. Credencial, ownership, billing e campanhas preservados.
+- Dados: contrato `SHEIN-US-DIRECT.json#/escalatepower_asset_onboarding` é fonte da autorização e dos bindings explícitos; catálogo de contas, catálogo independente de Pages, profiles e somente seis registros do Engine reconciliados. `ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED` distingue acesso pronto de parâmetros/fonte da campanha ainda necessários; não autoriza fabricar referência para contas vazias. Nenhum script, cron, gateway ou arquitetura de credencial alterado.
+- Evidência e backups: `data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/`. Observação read-only: campanha existente G006 `120252795396560042` tem token de nome `b01fb06c01`, mas conjunto/destinos `b01fb02c01`; não alterada por este pedido de onboarding.
+- Procedimento: skill própria `direct-traffic-shein-operations`, sem nova autorização por falta de cadastro quando o binding já está aprovado; preservar guards materiais de criação e fonte. Validação scoped: contagem e unicidade dos seis bindings, GETs Meta, lookups do runner, igualdade profile × Engine e isolamento dos demais registros.
+
 ## Atualização operacional — SHEIN prefixo de campanha NNN (2026-10-09)
 
 - Pedido: Rodolfo na thread `1558159785843499109`, corrigir o prefixo visível da campanha `120249566052890724` de `7` para `007` e prevenir recorrência. POST mínimo somente `name`, seguido de GET: campanha permanece ACTIVE, USD100/dia, COST_CAP80 centavos, mesmo início/conjunto/ads; tracking e resto do nome preservados. Nenhuma outra campanha renomeada.
