@@ -1,7 +1,7 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
-  "status": "HELD_FOR_FULL_ASYNC_ISOLATION",
+  "status": "ACTIVE_FOR_NEW_REQUESTS",
   "approved_by": "344196393512075265",
   "approval_message_id": "1559951763019145247",
   "approval_thread_id": "1559932317861158993",
@@ -16,6 +16,19 @@
   "model": "gpt-6.1-sol",
   "queue": "data/ares/meta-ads/landing-followup/queue.sqlite3",
   "integration": "INDEPENDENT_POST_REPLY_OBSERVER_ONLY_NO_CREATION_ROUTE_HOOKS",
+  "independent_intake": {
+    "source": "Ares native delivery_obligations delivered + exact final response of the same session/user turn",
+    "source_database_access": "READ_ONLY_QUERY_ONLY",
+    "external_confirmation": "GET actual Discord response IDs/content/author/thread/parent",
+    "saved_campaign_evidence_only": true,
+    "meta_api_calls": 0,
+    "writes_to_campaign_state_or_native_database": 0,
+    "creation_response_posts": 0,
+    "autonomous_daily_source": "Existing COMPLETE audit plus its unchanged V3 CONCLUIDO native response; no callback",
+    "activation_boundary": "Own SQLite intake_settings.activation_epoch; no historical backfill",
+    "implementation": "ares_campaign_v3.landing_intake",
+    "verification": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/independent-intake/"
+  },
   "creation_path_isolation": {
     "authority": "Rodolfo: correction in approval thread; source message ID not supplied",
     "rule": "Accompaniment is entirely separate; preserve campaign request speed and performance",
@@ -26,7 +39,11 @@
     "synchronous_creation_imports_or_callbacks": false,
     "shared_campaign_lane_or_meta_quota": false,
     "campaign_requests_have_absolute_priority": true,
-    "resume_condition": "Independently verified off-path trigger and resource isolation; never restore creation wrapper/callback"
+    "off_path_trigger_state": "VALIDATED_READ_ONLY_NATIVE_OUTBOX_OBSERVER",
+    "creation_wrapper_and_callback": "PERMANENTLY_RETIRED_DO_NOT_RESTORE",
+    "foreground_priority_gate": "Background worker defers while any existing native Discord turn lease is active; no gate added to creators",
+    "resource_isolation": "Separate low-weight systemd services; intake CPU10percent/256MiB, worker CPU20percent/1GiB, Nice19 and idle IO",
+    "superseded_technical_hold": "HELD_FOR_FULL_ASYNC_ISOLATION was an Ares implementation hold, not a Rodolfo suspension instruction; cleared by external-trigger validation"
   },
   "landing_mapping": "CANONICAL_EVIDENCE_REQUIRED_NEVER_QUIZ",
   "utm_policy": "EXACT_EFFECTIVE_NEW_CAMPAIGN_ADGROUP_AND_ALL_APPROVED_PARAMETERS",

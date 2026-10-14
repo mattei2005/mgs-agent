@@ -281,9 +281,18 @@ class Intake:
         safe_url=''
         if url:
             scope(url);safe_url='\n'+url
+        diagnoses={
+            'source_not_complete_for_request':'A evidência final salva ainda não confirma a conclusão integral do pedido.',
+            'saved_manifest_missing':'O pacote final da campanha não foi localizado na evidência salva.',
+            'saved_destination_evidence_missing':'O destino não pôde ser identificado na evidência salva sem inventar endereço.',
+            'native_reply_not_uniquely_read_back':'A resposta de conclusão ainda não pôde ser reconciliada com uma única entrega no Discord.',
+            'saved_origin_mismatch':'A origem da prova não confere com a conta/canal do pedido.',
+            'native_origin_partition_mismatch':'O canal da resposta não confere com a origem do pedido.',
+        }
+        diagnosis=diagnoses.get(reason,'Falhou a confirmação do destino ou da evidência pós-resposta; a tarefa permanece em reconciliação automática.')
         with self.q.tx():
-            self.q.prepare_message(key+':intake-incident',policy['all_problem_destination_thread'],
-                f'Acompanhamento pendente — pedido {rid}.{safe_url}\nNão foi possível confirmar o destino/evidência pós-resposta com segurança. O pedido de campanha permanece concluído e intacto; a mesma tarefa será reconciliada, sem repetir criação ou inventar URL.')
+            self.q.prepare_message(key+':intake-incident:'+digest(diagnosis)[:12],policy['all_problem_destination_thread'],
+                f'Acompanhamento pendente — pedido {rid}.{safe_url}\n{diagnosis}\nO pedido de campanha permanece intacto; a mesma tarefa será reconciliada, sem repetir criação ou inventar URL.')
             self.q.event(None,'independent_intake_pending',{'request_id':rid,'reason':reason[:160]})
     def arm(self,payload,receipt):
         if receipt.get('verified') is not True or receipt.get('native_delivery_state')!='delivered':raise ValueError('delivered_native_response_required')
@@ -334,8 +343,12 @@ class Intake:
                 if str(exc)=='not_registered_direct_traffic':
                     self.record(subkey,'IGNORED');continue
                 self.record(subkey,'PENDING',str(exc));self.incident(subkey,rid,str(exc));return 'PENDING'
-            receipt=verify_native_reply(dc(),delivery,origin)
-            job=self.arm(payload,receipt);self.record(subkey,'READY',job=job);armed=True
+            try:
+                receipt=verify_native_reply(dc(),delivery,origin)
+                job=self.arm(payload,receipt)
+            except ValueError as exc:
+                self.record(subkey,'PENDING',str(exc));self.incident(subkey,rid,str(exc),payload['links'][0]['effective_campaign_url']);return 'PENDING'
+            self.record(subkey,'READY',job=job);armed=True
         self.record(key,'READY' if armed else 'IGNORED');return 'READY' if armed else 'IGNORED'
     def scan_daily(self,dc):
         count=0
