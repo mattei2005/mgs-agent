@@ -524,6 +524,9 @@ def _prepare(request, config, common, token, *, reference_only=False):
         {'name': 'identity', 'path': 'me', 'params': {'fields': 'id,name,client_business_id'}},
         {'name': 'campaigns', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}]
     if reference:
+        capability = config.get('shein_cross_account_reference') or {}
+        if capability.get('enabled') is not True or capability.get('approved_by') != RODOLFO_ID:
+            raise RouteBlocked('cross-account central capability unavailable before media preparation')
         if config['accounts'][reference['account_id']]['token_item'] != config['accounts'][account_id()]['token_item']:
             raise RouteBlocked('reference requires separately supported corporate credential binding')
         queries.append({'name': 'reference_account', 'path': 'act_' + reference['account_id'], 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}})

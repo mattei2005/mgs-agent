@@ -84,6 +84,33 @@ def require_binding(request, source, target, reference):
         raise ValueError('reference pixel mismatch')
     if target.get('pixel_id') != reference.get('pixel_id'):
         raise ValueError('reference pixel is not the approved target pixel')
+    campaign = source['campaign']; adset = source['adset']
+    if (campaign.get('objective') != 'OUTCOME_SALES' or adset.get('optimization_goal') != 'OFFSITE_CONVERSIONS'
+            or adset.get('promoted_object', {}).get('custom_event_type') != 'ADD_TO_WISHLIST'):
+        raise ValueError('reference fixed SHEIN event mismatch')
+    required_campaign = {'buying_type', 'bid_strategy', 'special_ad_categories'}
+    if campaign.get('special_ad_categories'):
+        required_campaign.add('special_ad_category_country')
+    required_adset = {'billing_event', 'optimization_goal', 'targeting', 'promoted_object', 'attribution_spec',
+                     'regional_regulated_categories', 'regional_regulation_identities', 'is_dynamic_creative'}
+    if not required_campaign.issubset(campaign) or not required_adset.issubset(adset):
+        raise ValueError('complete compatible live reference settings required')
+    match = re.search(r'\((' + re.escape(reference['tracking_prefix']) + r'c([0-9]+))\)', campaign['name'])
+    display = re.match(r'^([0-9]+)\s*-', campaign['name'])
+    if (not match or not display or int(match[2]) != int(request['source_number'])
+            or int(display[1]) != int(request['source_number']) or match[1] + 'g01' not in adset['name']):
+        raise ValueError('reference exact campaign number/tracking mismatch')
+    from .creative_media import source_links
+    for ad in source['ads']:
+        cr = ad.get('creative') or {}; story = cr.get('object_story_spec') or ad.get('_reference_story') or {}
+        if (story.get('page_id') != reference['page_id'] or ad.get('adset_id') != adset['id']
+                or not str(cr.get('effective_object_story_id') or '').startswith(reference['page_id'] + '_')):
+            raise ValueError('reference Page/adset/post identity mismatch')
+        for link in source_links(cr, story):
+            params = dict(parse_qsl(urlparse(link).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
+            if (link.split('?')[0] != reference['destination_base'] or params.get('utm_medium') != reference['utm_medium']
+                    or params.get('utm_campaign') != match[1] or params.get('utm_adgroup') != match[1] + 'g01'):
+                raise ValueError('reference effective tracking mismatch')
 
 
 def receipt(source, reference):

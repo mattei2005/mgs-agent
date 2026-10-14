@@ -88,6 +88,7 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     profile=copy.deepcopy(cfg['accounts'][account['account_id']]['shein_profile'])
     op=json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
     profile['channel_authorization_policy']=op['channel_authorization_policy'];authorize(request,profile,force=True)
+    reference = {}
     if request.get('source_account'):
         from .shein_reference import configure
         profiles = json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
@@ -95,6 +96,9 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         profile['reference_profile'] = reference
     scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',profile['destination_base']],capture_output=True,timeout=20)
     if scope.returncode!=0:raise ValueError('operational domain scope rejected')
+    if request.get('source_account'):
+        scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',reference['destination_base']],capture_output=True,timeout=20)
+        if scope.returncode!=0:raise ValueError('operational domain scope rejected')
     common=driver._load_common();token,_=common.get_token_from_1password(cfg['accounts'][account['account_id']]['token_item'])
     if request.get('source_account'):
         marker = driver.CURRENT_PROFILE.set(profile)

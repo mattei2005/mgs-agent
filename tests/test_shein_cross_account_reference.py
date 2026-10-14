@@ -14,7 +14,7 @@ from ares_campaign_v3.prevalidation import prevalidate_payload, validate_account
 from ares_campaign_v3.media_registry import MediaRegistry
 from ares_campaign_v3.schema import Manifest, ManifestError
 from ares_campaign_v3.engine import CampaignEngine
-from ares_campaign_v3.transport import FakeBatchTransport
+from ares_campaign_v3.transport import FakeBatchTransport, BatchResult
 
 
 def fixture(index=1, count=2):
@@ -161,5 +161,80 @@ class ReferenceTests(unittest.TestCase):
         received,basis=driver.request_clock(r);resolved=driver.resolve_intent(r,s)
         self.assertEqual(resolved['source_message_id'],r['source_message_id']);self.assertLess(received,driver.aware_time(resolved['start_time']))
         self.assertIn('Discord',basis);self.assertEqual(resolved['budget_usd'],'40')
+
+    def test_partial_ad_create_recovers_only_missing_slot(self):
+        class Partial(FakeBatchTransport):
+            failed=False
+            def __init__(self, aid):
+                super().__init__(aid);self.ops=[];self.effects={k:[] for k in ['campaign_create','adset_create','creative_create','ad_create']}
+            def apply(self, operations, stage):
+                results=super().execute(operations,stage)
+                for op,result in zip(operations,results):
+                    if op.kind in self.effects:
+                        self.effects[op.kind].append({**copy.deepcopy(op.body),'id':result.body['id']})
+                return results
+            def execute(self, operations, stage):
+                if stage=='ad_create' and not self.failed:
+                    self.failed=True;self.ops.extend(operations[:1]);self.apply(operations[:1],stage)
+                    raise RuntimeError('offline crash after first ad effect')
+                self.ops.extend(operations)
+                kind={'recovery_campaign_inventory':'campaign_create','recovery_adset_inventory':'adset_create','recovery_ad_inventory':'ad_create','recovery_creative_inventory':'creative_create'}.get(stage)
+                if kind:
+                    self.calls.append({'stage':stage,'operations':len(operations)})
+                    return [BatchResult(o.name,200,{'data':copy.deepcopy(self.effects[kind])}) for o in operations]
+                return self.apply(operations,stage)
+        with tempfile.TemporaryDirectory() as raw:
+            root=Path(raw);r,s,a,assets,cfg=fixture();cfg.update(state_root=str(root/'state'),audit_root=str(root/'audit'))
+            m=sealed(root,r,s,a,assets,cfg);t=Partial(a['shein_profile']['account_id']);e=CampaignEngine(cfg,transport_factory=lambda aid:t)
+            with self.assertRaises(RuntimeError):e.execute(m)
+            before=len(t.ops);result=e.execute(m);new=t.ops[before:]
+            self.assertEqual(result['status'],'COMPLETE_PAUSED')
+            self.assertEqual(len([o for o in new if o.kind=='ad_create']),1)
+            self.assertFalse(any(o.kind in {'campaign_create','adset_create','creative_create'} for o in new))
+            self.assertEqual(len([o for o in t.ops if o.kind=='ad_create']),2)
+
+    def test_read_only_reference_preflight_never_loads_or_reserves_media(self):
+        r,s,a,assets,cfg=fixture();tp=copy.deepcopy(a['shein_profile']);sp=a['shein_reference_profile'];tp['reference_profile']=sp
+        def batch(common, token, queries):
+            result={}
+            for q in queries:
+                name=q['name']
+                if name in {'account','reference_account'}:
+                    p=tp if name=='account' else sp
+                    result[name]={'id':'act_'+p['account_id'],'name':p['account_name'],'currency':'USD','timezone_name':p['timezone'],'account_status':1,'disable_reason':0,'user_tasks':['ADVERTISE','ANALYZE']}
+                elif name=='identity':result[name]={'id':driver.SYSTEM_USER_ID,'client_business_id':driver.BUSINESS_ID}
+                elif name=='campaigns':result[name]={'data':[]}
+                elif name=='campaign':result[name]=copy.deepcopy(s['campaign'])
+                elif name=='adsets':result[name]={'data':[copy.deepcopy(s['adset'])]}
+                elif name=='ads':result[name]={'data':copy.deepcopy(s['ads'])}
+                elif name=='page':result[name]={'id':sp['page_id'],'name':'REFERENCE PAGE','access_token':'offline-test-only-not-real'}
+                elif name=='reference_page':result[name]={'id':sp['page_id']}
+                elif name in {'assignment','reference_assignment'}:result[name]={'data':[{'id':driver.SYSTEM_USER_ID,'tasks':['ADVERTISE']}]}
+                elif name in {'pixels','reference_pixels'}:result[name]={'data':[{'id':sp['pixel_id']}]}
+                else:result[name]={'id':name,'status':'ready','title':'offline source'}
+            return result
+        marker=driver.CURRENT_PROFILE.set(tp)
+        try:
+            with patch.object(driver,'_batch',side_effect=batch),patch('ares_campaign_v3.shein_media_handoff.load_ready_assets') as load:
+                result,_=driver._prepare(r,cfg,None,None,reference_only=True)
+                load.assert_not_called();self.assertNotIn('manifest',result)
+                self.assertEqual(result['campaign_writes'],0);self.assertEqual(result['number'],1)
+                self.assertEqual(result['source']['campaign']['account_id'],sp['account_id'])
+        finally:driver.CURRENT_PROFILE.reset(marker)
+
+    def test_disabled_capability_blocks_before_any_preflight_or_media(self):
+        r,s,a,_,cfg=fixture();p=copy.deepcopy(a['shein_profile']);p['reference_profile']=a['shein_reference_profile'];cfg['shein_cross_account_reference']['enabled']=False
+        marker=driver.CURRENT_PROFILE.set(p)
+        try:
+            with patch.object(driver,'_batch') as batch,self.assertRaises(ValueError):driver._prepare(r,cfg,None,None,reference_only=True)
+            batch.assert_not_called()
+        finally:driver.CURRENT_PROFILE.reset(marker)
+
+    def test_reference_event_and_full_config_required_before_upload(self):
+        for field in ['targeting','attribution_spec','event']:
+            r,s,a,_,_=fixture()
+            if field=='event':s['adset']['promoted_object']['custom_event_type']='PURCHASE'
+            else:s['adset'].pop(field)
+            with self.assertRaises(ValueError):ref.require_binding(r,s,a['shein_profile'],a['shein_reference_profile'])
 
 if __name__=='__main__':unittest.main()
