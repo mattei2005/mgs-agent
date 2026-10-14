@@ -49,6 +49,9 @@ Regras:
 - canal preparado não prova que uma conta já foi onboardada;
 - Pages SHEIN autorizadas podem estar atribuídas no Business Manager; isso não substitui GET ao vivo da Page, tarefas e identidade antes do write;
 - toda conta recebe alias curto somente depois de GET Meta de nome, moeda, timezone, acesso e saúde.
+- Para Escalatepower, carregar `SHEIN-US-DIRECT.json#/escalatepower_asset_onboarding`: a autorização de Rodolfo e os bindings conta → Page → gestor estão persistidos. Não pedir nova autorização só porque um catálogo antigo não mostrava o ativo; reconciliar as fontes apontadas e validar acesso vivo. Esse vínculo aprovado não impõe exclusividade global nem substitui a Page da fonte exata em uma duplicação.
+- Separar prontidão de acesso de especificação da campanha: `ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED` confirma conta/Page/pixel e não é falta de autorização. Conta vazia continua exigindo os parâmetros materiais do pedido e a rota central compatível; não inventar campanha-fonte, tracking, referência de outro gestor ou serving validado. Relatar uma limitação do runner como limitação técnica, nunca como nova aprovação de cadastro.
+- Em onboarding, reler o timezone atual e reconciliar catálogo, profile e registro do Engine somente nas contas exatas. Preservar o snapshot antigo e adicionar evidência scoped; não apresentar atualização parcial como novo inventário global. Validar os seis lookups pelo runner e fazer readback das tarefas e do acesso de Page com a identidade corporativa original após qualquer delegação.
 
 Conclusão: nenhum write depende de conta, perfil ou idioma inferido por semelhança.
 

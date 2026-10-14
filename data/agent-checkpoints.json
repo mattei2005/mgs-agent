@@ -963,12 +963,12 @@
     {
       "agent": "ares",
       "id": "ARES-ESCALATEPOWER-ONBOARDING-1559929154030276730",
-      "next_step": "Readback Meta das seis contas e Pages; reconciliar somente cadastros e delegação mínima se necessária",
+      "next_step": "Receber os pedidos de campanhas sem renovar aprovação por cadastro; validar parâmetros materiais pela rota central. G006 campanha 120252795396560042 tem nome b01fb06c01 e destino/adset b01fb02c01: não usar como fonte sem conciliação, não alterada neste onboarding. Regressão global KR-014 esperava release antiga, preexistente e fora do escopo.",
       "objective": "Mapear e validar as seis Pages e contas Escalatepower SHEIN autorizadas por Rodolfo",
-      "source": "discord:1559928644149841971#1559929154030276730",
-      "state": "em diagnóstico read-only; seis contas catalogadas com pré-requisito de referência; nenhuma campanha solicitada",
+      "source": "data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/verification.json",
+      "state": "concluido acesso/mapeamento: 6 contas saudáveis usd america/new_york, 6 pages com advertise+analyze e get corporativo, pixel existente nas 6; 12 lookups runner ok; contrato/catálogos/profiles/engine/skill e registry reconciliados; report-infra com readback; zero campanha ou credencial alterada",
       "thread_id": "1559928644149841971",
-      "updated_at": "2026-10-14T14:02:50+00:00"
+      "updated_at": "2026-10-14T14:11:45+00:00"
     },
     {
       "agent": "ares",
@@ -3783,12 +3783,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Rodolfo/Zeus autorizar e validar integração mínima dos dez site_keys, com país/idioma/vertical/categoria e identidade verificados; depois retomar corpus completo, temas inéditos e 30 drafts sem publicação.",
-      "objective": "Produzir 30 artigos SEO em draft após confirmar acessos aos dez portais indicados por Raquel.",
-      "source": "/root/.hermes/profiles/atena/cache/scratch/seo-mass-1559930384852979796/access-summary.json",
-      "state": "preflight concluído: dez domínios aprovados no gate; dez credenciais dedicadas válidas; dez smokes posts context=edit http 200; dez identidades atena confirmadas; edit_posts e upload_files verdadeiros nos dez. nenhum alvo possui site_key em data/sites.json. zero artigos criados e zero writes wordpress. produção bloqueada por ativação técnica ausente.",
+      "next_step": "Aguardar decisão de Rodolfo/Zeus sobre integração técnica mínima dos dez portais. Após ativação validada, retomar análise integral das categorias, pesquisa de temas inéditos e criação de 30 drafts.",
+      "objective": "Produzir 30 artigos SEO em draft, três por portal, conforme briefing da Raquel.",
+      "source": "https://discord.com/channels/1185714635991679006/1559930384852979796/1559930814437920942",
+      "state": "acessos confirmados nos dez portais: credenciais dedicadas válidas, identidade atena/editor, edit_posts e upload_files verdadeiros, posts context=edit http 200. nenhum dos dez possui site_key em data/sites.json. zero posts criados, zero uploads e nenhuma configuração alterada. bloqueio encaminhado ao canal zeus na mensagem 1559931612727083071, com readback do embed e autoria atena verificados.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-14T14:10:54+00:00"
+      "updated_at": "2026-10-14T14:11:43+00:00"
     },
     {
       "agent": "atena",
@@ -5113,12 +5113,12 @@
     {
       "agent": "zeus",
       "id": "php83-smart-routing-20261014",
-      "next_step": "Rodolfo decidir correção dos destinos publicados e remediação separada de WP Rocket; não republicar drafts nem retirar pools implicitamente. Incidente de payload sensível no trace interno registrado; arquivo local sanitizado.",
-      "objective": "Validar pós-migração PHP 8.3 dos 109 WordPress Mattei 01/02/03 e todas as rotas Smart Routing SB, destinos e parâmetros.",
-      "source": "/root/mgs-agent/reports/php83-post-migration-20261014/report.md; /root/mgs-agent/reports/php83-post-migration-20261014/summary.json; Discord:1559785169655697408",
-      "state": "audit_completed_with_findings: 109 runtimes/bootstraps/origens ok; 4284 links testados:3507 final200,776 final404,1 rota404;14 caminhos publicados perdem parâmetros em33 links; wp rocket com fatals recorrentes; nenhuma configuração de produção alterada.",
+      "next_step": "Snapshot live completo, validar fonte Openzed e operações por publisher, plano reversível, canário, apply e readback público por rota.",
+      "objective": "Corrigir destinos das 609 rotas dos grupos A e Vizioid B/C para Openzed US-CC-EN; revalidar oito casos isolados e listar pendências sem republicar drafts.",
+      "source": "discord:1559601841036198031/1559931178050527265; work/sb-smart-routing/openzed-cutover-1559931178050527265",
+      "state": "authorized_preflight; rodolfo mensagem1559931178050527265; nenhuma gravação sb iniciada",
       "thread_id": "1559601841036198031",
-      "updated_at": "2026-10-14T05:53:27+00:00"
+      "updated_at": "2026-10-14T14:14:05+00:00"
     },
     {
       "agent": "zeus",
@@ -5842,5 +5842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T14:10:54+00:00"
+  "updated_at": "2026-10-14T14:14:05+00:00"
 }

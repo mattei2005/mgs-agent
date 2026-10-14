@@ -4,18 +4,30 @@
 
 Criar lotes de artigos SEO inéditos que preservem o padrão editorial real de uma categoria existente e permaneçam em `draft` para revisão, com mídia, taxonomia, links e metadados confirmados por readback.
 
-## 1. Ativar o site antes de qualquer write
+## 1. Confirmar acessos e ativação antes da produção
 
-1. Passe o domínio pelo gate canônico de escopo.
-2. Resolva o `site_key` em `data/sites.json`.
-3. Se o key não existir, pare. Depois de autorização explícita do Rodolfo, registre somente quando puder confirmar por fonte/readback: domínio, `wp_url`, país, idioma, vertical, webroot, usuário/ID/role e item/campo exatos da credencial dedicada.
-4. Valide JSON/config e faça smoke REST autenticado somente leitura:
+1. Aplique o gate canônico aos alvos solicitados e retenha somente os aprovados. Carregue o contrato de acesso dedicado de `content-publish-wordpress` antes de consultar credenciais.
+2. Inspecione a estrutura real de `data/sites.json` e resolva cada `site_key` por igualdade do domínio canônico ou de `urlsplit(wp_url).hostname`; não use busca por substring, pois um domínio pai pode coincidir com outro portal ou subdomínio. Não presuma que os registros ficam dentro de uma chave `sites`.
+3. Para o preflight de acesso solicitado, valide o item dedicado sem imprimir segredos: domínio, username, ID real, role e presença da Application Password. Mesmo sem `site_key`, uma verificação autorizada somente leitura pode confirmar autenticação; isso não libera produção nem escrita direta.
+4. Use `wp_curl_auth_http` para o smoke autenticado:
 
 ```text
 GET /wp-json/wp/v2/posts?context=edit&per_page=1&_fields=id,status
 ```
 
-Exija HTTP `200`, array JSON e apenas os campos solicitados. Autenticação válida não substitui o gate do `site_key`.
+Exija HTTP `200`, array JSON e apenas os campos solicitados. Para conferir identidade e capacidades quando a instalação permitir, consulte também:
+
+```text
+GET /wp-json/wp/v2/users/me?context=edit&_fields=id,slug,roles,capabilities
+```
+
+Compare ID/slug com o item dedicado e confira `edit_posts` e `upload_files`. Uma restrição específica de `/users/me` não invalida automaticamente o smoke de posts: reporte a capacidade não confirmada em vez de inventar uma falha geral ou fazer upload de teste. Capacidade declarada pela API não equivale a um upload executado.
+
+5. Em lote, use concorrência limitada para GETs independentes, persista uma linha sanitizada por portal e agregue/deduplique por domínio. Confira cobertura contra o manifesto antes de informar totais. Registre HTTP, identidade validada, capacidades e ativação técnica, nunca o objeto bruto do vault.
+6. Se foi solicitado confirmar acessos antes de produzir, comunique o resultado nesta etapa. Se faltar `site_key`, interrompa a produção e encaminhe a integração mínima conforme autoridade vigente. Não peça novas credenciais quando elas já passaram no teste e não trate autorização editorial genérica como autorização para alterar configuração.
+7. Somente depois da autorização explícita de Rodolfo para a integração, registre o mínimo confirmado por fonte/readback: domínio, `wp_url`, país, idioma, vertical, webroot, usuário/ID/role e referência exata da credencial. Valide a configuração antes de qualquer write editorial.
+
+Autenticação válida, permissão declarada e ativação do `site_key` são resultados distintos. Se houver bloqueio, informe o que foi efetivamente testado, a dependência exata e a ausência de writes; preserve o ponto de retomada sem declarar o lote produzido.
 
 ## 2. Inventariar a categoria completa
 
@@ -48,7 +60,7 @@ Calcule programaticamente, por post e por categoria:
 - SEO title/meta existentes;
 - excerpt raw vazio ou preenchido.
 
-Use mediana e padrão dominante. Mínimo/máximo ajudam a detectar outliers, mas não devem virar a faixa automática do novo lote. Se quase todos os posts usam abertura curta, uma imagem logo depois e 10–13 H2s, replique isso no payload final.
+Use mediana e padrão dominante para os aspectos não definidos no briefing. Mínimo/máximo ajudam a detectar outliers, mas não devem virar a faixa automática do novo lote. Se quase todos os posts usam abertura curta, uma imagem logo depois e 10–13 H2s, replique isso no payload final sem contrariar exigências explícitas de extensão ou layout. Se o usuário pedir priorizar as melhores referências, selecione-as após medir o corpus completo; não confunda o padrão mais frequente com a melhor qualidade editorial.
 
 Pitfall: conte texto do corpo, não alt text, menu, related posts, breadcrumb, sidebar ou comentários de bloco. Esses elementos inflam métricas e produzem um “mesmo padrão” falso.
 
@@ -66,12 +78,12 @@ Inspecione também o trecho final de `content.raw` em várias referências. Card
 
 - Não inclua H1 no corpo quando o tema renderiza o título do post como H1.
 - Reproduza o tamanho observado da abertura; em categorias que usam subtítulo curto, mantenha o primeiro `<p>` conciso e com a focus keyphrase.
-- Posicione `<!-- wp:image ... -->` no mesmo ponto do corpus.
+- Posicione `<!-- wp:image ... -->` conforme o briefing; se não houver instrução, use o ponto observado no corpus. Quando a exigência for logo após a primeira frase, encerre o parágrafo nessa frase e insira o bloco antes da próxima frase, não depois de um parágrafo com várias sentenças.
 - Use parágrafos curtos e o número de H2s medido.
 - Não acrescente lista, tabela ou FAQ se o padrão dominante não usa esses blocos.
 - Deixe `excerpt` explicitamente vazio quando o corpus usa fallback do primeiro parágrafo.
 
-Para imagem interna igual à featured, faça isso somente quando a análise provar que é o padrão daquela categoria. Use o tamanho WordPress `large`, não a URL original, para o bloco do corpo:
+Use a mesma mídia no corpo e em `featured_media` quando o briefing exigir; sem instrução explícita, siga a relação confirmada no corpus. Compare o ID de mídia, não apenas URLs, pois o corpo pode usar uma derivada da mesma imagem. Use o tamanho WordPress `large`, não a URL original, para o bloco do corpo:
 
 ```html
 <!-- wp:image {"id":123,"sizeSlug":"large","linkDestination":"none"} -->

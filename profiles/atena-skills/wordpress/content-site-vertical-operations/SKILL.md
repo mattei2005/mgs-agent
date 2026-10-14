@@ -14,7 +14,7 @@ metadata:
 
 ## When to Use
 
-Use esta skill quando um pedido de conteúdo WordPress exigir publicar em um domínio já existente, mas com **vertical, país ou idioma diferentes** dos registrados no `data/sites.json` ou na configuração técnica ativa.
+Use esta skill para preflight de acesso editorial, lotes SEO por categoria, alterações de autores e mudanças editoriais em WordPress, inclusive quando **vertical, país ou idioma diferirem** dos registrados no `data/sites.json` ou na configuração técnica ativa.
 
 Exemplos:
 
@@ -151,7 +151,11 @@ Use GPT/LLM por padrão para reescrever o contexto de forma profissional e sem p
 
 ## Lotes de artigos SEO por categoria
 
-Quando Rodolfo pedir novos artigos “no mesmo padrão” de uma categoria, trate o arquivo completo da categoria como contrato editorial mensurável:
+Quando Rodolfo ou Raquel pedir verificação de acesso antes da produção, conclua e comunique esse preflight antes de gerar textos ou enviar mídia. Separe no resultado **autenticação editorial**, **permissões verificadas** e **ativação no fluxo técnico**: nenhuma dessas evidências substitui as outras. Não faça escrita de teste para provar acesso. A ausência de `site_key` bloqueia a produção automatizada, mas não transforma um smoke somente leitura bem-sucedido em falha de autenticação; siga o gate independente e a autorização de integração descritos acima.
+
+Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de artigos, mínimo de palavras, posição da imagem, relação entre imagem interna e destacada, fontes externas e status solicitado. Exigências explícitas do briefing prevalecem sobre o padrão inferido do corpus; não reduza um mínimo de palavras nem altere a posição da imagem para imitar referências mais curtas. Não confunda rascunho no WordPress com arquivo local de texto.
+
+Quando Rodolfo ou Raquel pedir novos artigos “no mesmo padrão” de uma categoria, trate o arquivo completo da categoria como contrato editorial mensurável:
 
 1. Resolva o ID e a contagem publicados da categoria e extraia todos os posts por esse ID; pagine quando o total exceder o limite da REST.
 2. Meça no corpo editorial real, sem menu/widgets: palavras visíveis, H2/H3, parágrafos, imagens, listas, tabelas, abertura, fechamento, links, excerpt raw e relação entre featured e imagem interna.
