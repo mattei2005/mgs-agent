@@ -13,4 +13,10 @@ class CboBidTests(unittest.TestCase):
     def test_changed_strategy_remains_campaign_atomic(self):
         c,a=shell_payloads(self.spec(),'123',source_strategy='LOWEST_COST_WITHOUT_CAP')
         self.assertEqual(c['adset_bid_amounts'],{'123':90});self.assertNotIn('bid_amount',a)
+    def test_existing_exact_cap_needs_no_override(self):
+        from ares_campaign_v3.shein_general import bid_delta
+        source={'campaign':{'bid_strategy':'COST_CAP'},'adset':{'bid_amount':90,'bid_constraints':{}}}
+        self.assertEqual(bid_delta({'bid_strategy':'COCAP','bid_usd':'0.90'},source),('COST_CAP',None))
+        source['adset']['bid_amount']=85
+        self.assertEqual(bid_delta({'bid_strategy':'COCAP','bid_usd':'0.90'},source),('COST_CAP',{'bid_amount':'90','bid_constraints':{}}))
 if __name__=='__main__':unittest.main()

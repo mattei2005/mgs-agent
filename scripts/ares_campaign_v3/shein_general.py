@@ -57,6 +57,9 @@ def bid_delta(request, source):
             raise ValueError('COCAP/BIDCAP require an exact positive USD cent cap') from None
     else:
         raise ValueError('unsupported source bid strategy')
+    source_set = source.get('adset') or {}
+    if strategy == source['campaign']['bid_strategy'] and str(source_set.get('bid_amount') or '0') == amount and not source_set.get('bid_constraints'):
+        return strategy, None
     return strategy, {'bid_amount': amount, 'bid_constraints': {}}
 
 

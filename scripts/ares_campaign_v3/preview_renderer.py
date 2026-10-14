@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import os
+import signal
 import subprocess
 import tempfile
 import time
@@ -29,7 +30,7 @@ def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_
     root=Path(os.environ.get('TMPDIR') or '/root/.hermes/profiles/ares/cache/scratch');root.mkdir(parents=True,exist_ok=True)
     results=[]
     with tempfile.TemporaryDirectory(prefix='ares-media-qa-',dir=root) as directory:
-        proc=subprocess.Popen([chrome_path,'--headless=new','--no-sandbox','--disable-dev-shm-usage','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+directory,'about:blank'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        proc=subprocess.Popen([chrome_path,'--headless=new','--no-sandbox','--disable-dev-shm-usage','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+directory,'about:blank'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
         try:
             portfile=Path(directory)/'DevToolsActivePort';deadline=time.monotonic()+timeout
             while not portfile.exists():
@@ -62,9 +63,17 @@ def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_
         except Exception as exc:
             raise ValueError('media preview rendering unavailable; activation remains PAUSED') from exc
         finally:
-            proc.terminate()
+            # The isolated browser's descendants can still write profile files
+            # after the parent exits. Stop only our new process group before
+            # TemporaryDirectory cleanup; otherwise ENOTEMPTY masks valid QA.
+            try:os.killpg(proc.pid,signal.SIGTERM)
+            except ProcessLookupError:pass
             try:proc.wait(timeout=5)
-            except subprocess.TimeoutExpired:proc.kill();proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:pass
+            try:os.killpg(proc.pid,signal.SIGKILL)
+            except ProcessLookupError:pass
+            proc.wait(timeout=5)
+            time.sleep(.1)
     return results
 
 
