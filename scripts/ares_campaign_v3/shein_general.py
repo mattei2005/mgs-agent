@@ -65,6 +65,27 @@ def build(request, source, number, account_config):
         raise ValueError('quantity must be an exact integer from 1 to 100')
     quantity = int(request.get('quantity', 1))
     assets = request.get('_resolved_assets') or []
+    groups = request.get('campaign_groups')
+    if groups is not None:
+        from .shein_grouped_media import validate_groups
+        validate_groups(request)
+        by_filename = {a['canonical_filename']: a for a in assets}
+        filenames = [f for group in groups for f in group['files']]
+        if len(by_filename) != len(assets) or set(by_filename) != set(filenames):
+            raise ValueError('resolved assets do not match exact requested groups')
+        payload = None; campaigns = []
+        for offset, group in enumerate(groups):
+            child = copy.deepcopy(request)
+            child.pop('campaign_groups')
+            child['quantity'] = 1
+            child['request_id'] = request['request_id'] + f'-c{number+offset}'
+            child['_resolved_assets'] = [by_filename[f] for f in group['files']]
+            child['product_label'] = group['product_label']
+            child['_primary_text'] = group['primary_text']
+            one = _build_one(child, source, number+offset, account_config)
+            payload = payload or one; campaigns.extend(one['campaigns'])
+        payload['request_id'] = request['request_id']; payload['campaigns'] = campaigns
+        return payload
     if quantity == 1:
         return _build_one(request, source, number, account_config)
     mode = request.get('mode', 'pure_clone')
@@ -199,7 +220,7 @@ def _build_one(request, source, number, account_config):
                 raise ValueError('asset thumbnail/media incomplete')
             cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = p['destination_base'] + '?' + tags
             vd = {'video_id': asset['vertical_video_id'], 'title': media.get('title') or media.get('name'),
-                  'message': media['message'], 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
+                  'message': request.get('_primary_text', media['message']), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
             if not vd['title']:
                 raise ValueError('copy headline missing')
             if media.get('link_description') or media.get('description'):

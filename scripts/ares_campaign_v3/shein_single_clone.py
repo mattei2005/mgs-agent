@@ -40,7 +40,7 @@ REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start
                   'authorized_by', 'source_thread_id', 'request_received_at', 'source_message_id',
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
 REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
-REQUEST_FIELDS.update({'bid_strategy', 'bid_usd'})
+REQUEST_FIELDS.update({'bid_strategy', 'bid_usd', 'campaign_groups', 'manager_media_folder_id'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -136,6 +136,12 @@ def validate_request(request: dict[str, Any]) -> None:
         mid = str(request['source_message_id'])
         if not re.fullmatch(r'[0-9]{17,20}', mid) or int(mid) >= 2**64:
             raise RouteBlocked('invalid source message snowflake')
+    if request.get('campaign_groups') is not None:
+        from .shein_grouped_media import validate_groups
+        validate_groups(request)
+    if request.get('manager_media_folder_id') is not None:
+        if not re.fullmatch(r'[A-Za-z0-9_-]{10,100}', str(request['manager_media_folder_id'])) or request.get('mode') != 'clone_prestaged' or not request.get('campaign_groups'):
+            raise RouteBlocked('manager media requires exact folder and explicit clone groups')
     if 'bid_strategy' in request or 'bid_usd' in request:
         from .shein_general import bid_delta
         if 'bid_strategy' in request:
