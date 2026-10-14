@@ -1,0 +1,595 @@
+--- scripts/ares_campaign_v3/shein_general.py BEFORE
++++ scripts/ares_campaign_v3/shein_general.py AFTER
+@@ -111,7 +111,14 @@
+     p = account_config['shein_profile']
+     authorize(request, p)
+     aid = str(p['account_id'])
+-    if request['account'] not in {aid, p['account_name']} or source['campaign'].get('account_id') != aid:
++    reference = account_config.get('shein_reference_profile') if request.get('source_account') else None
++    if request.get('source_account') and not reference:
++        raise ValueError('explicit reference requires independently resolved source profile')
++    if reference:
++        from .shein_reference import require_binding
++        require_binding(request, source, p, reference)
++    sp = reference or p
++    if request['account'] not in {aid, p['account_name']} or source['campaign'].get('account_id') != sp['account_id']:
+         raise ValueError('account/source binding mismatch')
+     if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
+         raise ValueError('preserve_posts must be an explicit boolean')
+@@ -124,11 +131,15 @@
+         raise ValueError('explicit delivery status required')
+     start = datetime.fromisoformat(request['start_time']).astimezone(ZoneInfo(p['timezone']))
+     sn = int(request['source_number'])
+-    literal = re.search(r'\((' + re.escape(p['tracking_prefix']) + r'c[0-9]+)\)', source['campaign']['name'])
++    literal = re.search(r'\((' + re.escape(sp['tracking_prefix']) + r'c[0-9]+)\)', source['campaign']['name'])
+     if not literal or int(literal.group(1).split('c')[-1]) != sn:
+         raise ValueError('source literal tracking token/number mismatch')
+     old = literal.group(1)
+     new = p['tracking_prefix'] + f'c{number:03d}'
++    if reference:
++        new = p['reference_target_token']
++        if int(new.split('c')[-1]) != number:
++            raise ValueError('literal tracking does not identify the next free target number')
+     campaign = copy.deepcopy(source['campaign'])
+     campaign['bid_strategy'], bid_updates = bid_delta(request, source)
+     label_number = re.match(r'^([0-9]+)\s*-', campaign['name'])
+@@ -168,14 +179,14 @@
+         media = story.get('video_data') or story.get('link_data') or {}
+         links = source_links(cr, story)
+         link = links[0]
+-        if any(x.split('?')[0] != p['destination_base'] for x in links):
++        if any(x.split('?')[0] != sp['destination_base'] for x in links):
+             raise ValueError('source destination differs from approved account profile')
+         params = dict(parse_qsl(urlparse(link).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
+         for destination in links:
+             params = dict(parse_qsl(urlparse(destination).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
+-            if params.get('utm_medium') != p['utm_medium'] or params.get('utm_campaign') != old or params.get('utm_adgroup') != old + 'g01':
++            if params.get('utm_medium') != sp['utm_medium'] or params.get('utm_campaign') != old or params.get('utm_adgroup') != old + 'g01':
+                 raise ValueError('source effective tracking mismatch')
+-        if story.get('page_id') != p['page_id'] or not cr.get('effective_object_story_id', '').startswith(p['page_id'] + '_') or ad.get('adset_id') != source['adset']['id']:
++        if story.get('page_id') != sp['page_id'] or not cr.get('effective_object_story_id', '').startswith(sp['page_id'] + '_') or ad.get('adset_id') != source['adset']['id']:
+             raise ValueError('Page/adset/post lineage mismatch')
+         tags = dict(parse_qsl(cr.get('url_tags') or ''))
+         tags.update(utm_source='facebook', utm_medium=p['utm_medium'], utm_campaign=new, utm_adgroup=new + 'g01')
+@@ -211,7 +222,7 @@
+             ads.append({'name': ad['name'], 'source_ad_id': str(ad['id']), 'creative_payload': cp})
+     else:
+         assets = request.get('_resolved_assets') or []
+-        if (mode == 'from_zero_prestaged' and len(assets) != 3) or not 1 <= len(assets) <= 5:
++        if (mode == 'from_zero_prestaged' and not reference and len(assets) != 3) or not 1 <= len(assets) <= 5:
+             raise ValueError('from-zero needs three assets; new-media clone needs 1..5')
+         if len({a['asset_id'] for a in assets}) != len(assets):
+             raise ValueError('duplicate asset lineage')
+@@ -221,17 +232,17 @@
+                 raise ValueError('asset language/readiness mismatch')
+             if not asset.get('thumbnail_url') or not asset.get('vertical_video_id'):
+                 raise ValueError('asset thumbnail/media incomplete')
+-            cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = p['destination_base'] + '?' + tags
++            cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = request['website_url'] if reference else p['destination_base'] + '?' + tags
+             vd = {'video_id': asset['vertical_video_id'], 'title': media.get('title') or media.get('name'),
+-                  'message': request.get('_primary_text', media['message']), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
++                  'message': request.get('_primary_text', request.get('primary_text', media['message'])), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
+             if not vd['title']:
+                 raise ValueError('copy headline missing')
+             if media.get('link_description') or media.get('description'):
+                 vd['link_description'] = media.get('link_description') or media['description']
+             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
+                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},
+-                        'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': tags}
+-            ig = cr.get('instagram_user_id') or story.get('instagram_user_id')
++                        'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': '' if reference else tags}
++            ig = p.get('instagram_user_id') if reference else cr.get('instagram_user_id') or story.get('instagram_user_id')
+             if ig:
+                 creative['object_story_spec']['instagram_user_id'] = ig
+             if cr.get('contextual_multi_ads') is not None:
+@@ -262,6 +273,18 @@
+                 shell['adset_create'][field] = copy.deepcopy(source['adset'][field])
+         if bid_updates is not None:
+             shell['adset_create'].update(bid_updates)
++        if reference:
++            from .shein_reference import receipt
++            shell['reference'] = receipt(source, reference)
++            # Preserve the live configuration, not the G005 fallback defaults.
++            required = {'billing_event', 'optimization_goal', 'targeting', 'promoted_object',
++                        'attribution_spec', 'regional_regulated_categories',
++                        'regional_regulation_identities', 'is_dynamic_creative'}
++            if not required.issubset(source['adset']):
++                raise ValueError('complete compatible live reference adset required')
++            shell['adset_create'].update({k: copy.deepcopy(source['adset'][k]) for k in required})
++            if bid_updates is not None:
++                shell['adset_create'].update(bid_updates)
+     else:
+         shell.update(source_campaign_id=campaign['id'], source_adset_id=source['adset']['id'],
+                      campaign_updates={'daily_budget': str(int(budget)), 'bid_strategy': campaign['bid_strategy']})
+
+--- scripts/ares_campaign_v3/shein_single_clone.py BEFORE
++++ scripts/ares_campaign_v3/shein_single_clone.py AFTER
+@@ -41,6 +41,7 @@
+                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
+ REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
+ REQUEST_FIELDS.update({'bid_strategy', 'bid_usd', 'campaign_groups', 'manager_media_folder_id'})
++REQUEST_FIELDS.update({'source_account', 'source_campaign_id', 'website_url', 'primary_text'})
+ CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
+ 
+ 
+@@ -98,6 +99,8 @@
+ 
+ 
+ def validate_request(request: dict[str, Any]) -> None:
++    from .shein_reference import validate_intent
++    validate_intent(request)
+     if set(request) - REQUEST_FIELDS:
+         raise RouteBlocked('unknown request field')
+     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,119}', str(request.get('request_id') or '')):
+@@ -140,7 +143,7 @@
+         from .shein_grouped_media import validate_groups
+         validate_groups(request)
+     if request.get('manager_media_folder_id') is not None:
+-        if not re.fullmatch(r'[A-Za-z0-9_-]{10,100}', str(request['manager_media_folder_id'])) or request.get('mode') != 'clone_prestaged' or not request.get('campaign_groups'):
++        if not re.fullmatch(r'[A-Za-z0-9_-]{10,100}', str(request['manager_media_folder_id'])) or request.get('mode') not in {'clone_prestaged', 'from_zero_prestaged'} or not request.get('campaign_groups'):
+             raise RouteBlocked('manager media requires exact folder and explicit clone groups')
+     if 'bid_strategy' in request or 'bid_usd' in request:
+         from .shein_general import bid_delta
+@@ -462,6 +465,8 @@
+ 
+ def reconcile_number(request, inventory, common, token):
+     if 'target_number' not in request:
++        if request.get('source_account') and not inventory:
++            return 1
+         return next_campaign_numbers(inventory, 1)[0]
+     number = int(request['target_number'])
+     http, old, _ = common.graph_get(str(request['replaces_campaign_id']), token,
+@@ -511,11 +516,21 @@
+     return resolved
+ 
+ 
+-def _prepare(request, config, common, token):
+-    pre = _batch(common, token, [
++def _prepare(request, config, common, token, *, reference_only=False):
++    profile = CURRENT_PROFILE.get() or {}
++    reference = profile.get('reference_profile')
++    queries = [
+         {'name': 'account', 'path': 'act_' + account_id(), 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}},
+         {'name': 'identity', 'path': 'me', 'params': {'fields': 'id,name,client_business_id'}},
+-        {'name': 'campaigns', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}])
++        {'name': 'campaigns', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}]
++    if reference:
++        capability = config.get('shein_cross_account_reference') or {}
++        if capability.get('enabled') is not True or capability.get('approved_by') != RODOLFO_ID:
++            raise RouteBlocked('cross-account central capability unavailable before media preparation')
++        if config['accounts'][reference['account_id']]['token_item'] != config['accounts'][account_id()]['token_item']:
++            raise RouteBlocked('reference requires separately supported corporate credential binding')
++        queries.append({'name': 'reference_account', 'path': 'act_' + reference['account_id'], 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}})
++    pre = _batch(common, token, queries)
+     a = pre['account']
+     if (a.get('id') != 'act_' + account_id() or a.get('name') != account_alias() or a.get('currency') != 'USD'
+             or a.get('timezone_name') != str(account_timezone()) or a.get('account_status') != 1
+@@ -524,14 +539,21 @@
+     if str(pre['identity'].get('id')) != SYSTEM_USER_ID or str(pre['identity'].get('client_business_id')) != BUSINESS_ID:
+         raise RouteBlocked('corporate credential identity mismatch')
+     inventory = _complete_edge(pre['campaigns'])
++    if reference:
++        ra = pre['reference_account']
++        if (ra.get('id') != 'act_' + reference['account_id'] or ra.get('name') != reference['account_name']
++                or ra.get('currency') != reference['currency'] or ra.get('timezone_name') != reference['timezone']
++                or ra.get('account_status') != 1 or ra.get('disable_reason') != 0
++                or not {'ANALYZE', 'ADVERTISE'}.issubset(ra.get('user_tasks') or [])):
++            raise RouteBlocked('live reference account identity, health or access mismatch')
+     sources = []
+     for item in inventory:
+         match = re.match(r'^([0-9]+)\s*-', str(item.get('name') or ''))
+         if match and int(match.group(1)) == int(request['source_number']):
+             sources.append(item)
+-    if len(sources) != 1:
++    if not reference and len(sources) != 1:
+         raise RouteBlocked('source campaign missing or ambiguous')
+-    cid = sources[0]['id']
++    cid = request['source_campaign_id'] if reference else sources[0]['id']
+     raw = _batch(common, token, [
+         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
+         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,bid_amount,bid_constraints,bid_strategy,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
+@@ -557,41 +579,56 @@
+                 ad['creative']['object_story_spec'] = parent['object_story_spec']
+                 ad['creative']['instagram_user_id'] = parent.get('instagram_user_id')
+     source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads}
++    if raw['campaign'].get('status') in {'DELETED', 'ARCHIVED'}:
++        raise RouteBlocked('reference campaign is terminal')
+     source_video_ids = sorted({vid for ad in ads for vid in video_slots({**ad['creative'], 'object_story_spec': _story(ad)}).values()})
+     source['video_metadata'] = {}
+     for offset in range(0, len(source_video_ids), 50):
+         group = source_video_ids[offset:offset+50]
+         source['video_metadata'].update(_batch(common, token, [{'name': vid, 'path': vid, 'params': {'fields': 'id,title,length,status'}} for vid in group]))
+     number = reconcile_number(request, inventory, common, token)
+-    compiled_request = copy.deepcopy(request)
+-    if request.get('mode', 'pure_clone') != 'pure_clone':
+-        from .shein_media_handoff import load_ready_assets
+-        compiled_request['_resolved_assets'] = load_ready_assets(request, CURRENT_PROFILE.get(), BASE, common, token)
+-    compiled_request = resolve_intent(compiled_request, source)
+     pages = {str(_story(x)['page_id']) for x in ads}
+     if len(pages) != 1:
+         raise RouteBlocked('source uses multiple Pages')
+-    page_id = next(iter(pages))
++    source_page_id = next(iter(pages))
++    # No Page switch was requested: inherit the exact reference identity.
++    # An onboarding Page is a non-exclusive observation, not a silent override.
++    page_id = source_page_id
+     compiler_config = copy.deepcopy(config['accounts'][account_id()])
+     if CURRENT_PROFILE.get():
+         # A sampled Page is an observation, not an exclusive site/account binding.
+-        compiler_profile = copy.deepcopy(CURRENT_PROFILE.get())
++        compiler_profile = copy.deepcopy(profile)
+         compiler_profile['page_id'] = page_id
+         links = []
+         for ad in ads:
+             for link in source_links(ad.get('creative') or {}, _story(ad)):
+-                if urlparse(link).hostname != urlparse(compiler_profile['destination_base']).hostname:
++                approved_source = reference or compiler_profile
++                if urlparse(link).hostname != urlparse(approved_source['destination_base']).hostname:
+                     raise RouteBlocked('source destination does not match approved account site')
+                 links.append(link.split('?')[0])
+         if len(set(links)) != 1:
+             raise RouteBlocked('source uses multiple unresolved destination bases')
+-        compiler_profile['destination_base'] = links[0]
++        if reference:
++            reference = copy.deepcopy(reference)
++            reference.update(page_id=source_page_id, destination_base=links[0])
++            compiler_config['shein_reference_profile'] = reference
++            from .shein_reference import require_binding
++            require_binding(request, source, compiler_profile, reference)
++            if int(compiler_profile['reference_target_token'].split('c')[-1]) != number:
++                raise RouteBlocked('literal target tracking does not match next free slot')
++        else:
++            compiler_profile['destination_base'] = links[0]
+         compiler_config['shein_profile'] = compiler_profile
+-    draft = build_manifest(compiled_request, source, number, compiler_config)
+-    gate = _batch(common, token, [
++    gate_queries = [
+         {'name': 'page', 'path': page_id, 'params': {'fields': 'id,name,access_token'}},
+         {'name': 'assignment', 'path': page_id + '/assigned_users', 'params': {'business': BUSINESS_ID, 'fields': 'id,name,tasks', 'limit': 100}},
+-        {'name': 'pixels', 'path': 'act_' + account_id() + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}])
++        {'name': 'pixels', 'path': 'act_' + account_id() + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}]
++    if reference:
++        gate_queries.extend([
++            {'name': 'reference_page', 'path': source_page_id, 'params': {'fields': 'id,name'}},
++            {'name': 'reference_assignment', 'path': source_page_id + '/assigned_users', 'params': {'business': BUSINESS_ID, 'fields': 'id,tasks', 'limit': 100}},
++            {'name': 'reference_pixels', 'path': 'act_' + reference['account_id'] + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}])
++    gate = _batch(common, token, gate_queries)
+     page_token = gate['page'].pop('access_token', None)
+     if gate['page'].get('id') != page_id or not page_token:
+         raise RouteBlocked('Page read identity unavailable')
+@@ -600,6 +637,27 @@
+     pixel = sets[0]['promoted_object']['pixel_id']
+     if not any(str(x.get('id')) == str(pixel) for x in _complete_edge(gate['pixels'])):
+         raise RouteBlocked('source pixel not associated with account')
++    if reference:
++        if (gate['reference_page'].get('id') != source_page_id
++                or not any(str(x.get('id')) == SYSTEM_USER_ID and 'ADVERTISE' in x.get('tasks', []) for x in _complete_edge(gate['reference_assignment']))
++                or not any(str(x.get('id')) == str(pixel) for x in _complete_edge(gate['reference_pixels']))):
++            raise RouteBlocked('reference Page/pixel access unconfirmed')
++        identities = {str(x['creative'].get('instagram_user_id') or _story(x).get('instagram_user_id') or '') for x in ads}
++        if len(identities) != 1:
++            raise RouteBlocked('reference Instagram identity is ambiguous')
++        compiler_config['shein_profile']['instagram_user_id'] = next(iter(identities)) or None
++    compiled_request = resolve_intent(request, source)
++    if reference_only:
++        if not reference:
++            raise RouteBlocked('reference preflight requires explicit cross-account origin')
++        return {'source': source, 'account': a, 'reference_account': pre['reference_account'],
++                'prerequisites': gate, 'number': number, 'page_id': page_id,
++                'compiler_config': compiler_config, 'resolved_request': compiled_request,
++                'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0}, page_token
++    if request.get('mode', 'pure_clone') != 'pure_clone':
++        from .shein_media_handoff import load_ready_assets
++        compiled_request['_resolved_assets'] = load_ready_assets(request, profile, BASE, common, token)
++    draft = build_manifest(compiled_request, source, number, compiler_config)
+     manifest, target_manifest, barrier = seal_creation_pair(draft, config, MediaRegistry(BASE / 'data/ares/meta-ads/engine-v3/media-registry.json'))
+     return {'source': source, 'account': a, 'prerequisites': gate, 'number': number,
+             'page_id': page_id, 'manifest': manifest,
+@@ -656,16 +714,16 @@
+     return resolved
+ 
+ 
+-def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
++def run_request(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
+     from .shein_channel_authority import CACHE
+     marker = CACHE.set({})
+     try:
+-        return _run_request_scoped(request, confirm_execute=confirm_execute)
++        return _run_request_scoped(request, confirm_execute=confirm_execute, reference_only=reference_only)
+     finally:
+         CACHE.reset(marker)
+ 
+ 
+-def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
++def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
+     request = copy.deepcopy(request)
+     if request.get('start_now') is True and 'start_time' in request:
+         raise RouteBlocked('choose explicit NOW or an exact scheduled time, not both')
+@@ -685,6 +743,11 @@
+         profile['expired_schedule_policy'] = (operation.get('request_defaults') or {}).get('expired_explicit_start_policy') or {}
+         authorize(request, profile)
+         request = apply_request_defaults(request, operation)
++        if request.get('source_account'):
++            from .shein_reference import configure
++            profiles = json.loads(path.read_text())['profiles']
++            profile, reference = configure(request, profile, profiles, operation, lookup_account)
++            profile['reference_profile'] = reference
+         if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
+             if not profile.get('reference_campaign_number'):
+                 raise RouteBlocked('empty account requires an approved same-account creation specification')
+@@ -693,12 +756,12 @@
+         raise RouteBlocked('canonical account profile source unavailable for every requester')
+     marker = CURRENT_PROFILE.set(profile)
+     try:
+-        return _run_bound_request(request, confirm_execute=confirm_execute)
++        return _run_bound_request(request, confirm_execute=confirm_execute, reference_only=reference_only)
+     finally:
+         CURRENT_PROFILE.reset(marker)
+ 
+ 
+-def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
++def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
+     import subprocess
+     validate_request(request)
+     catalog_account = lookup_account(request['account'])
+@@ -716,6 +779,11 @@
+                            capture_output=True, text=True, timeout=20)
+     if scope.returncode != 0:
+         raise RouteBlocked('operational domain scope rejected')
++    if request.get('source_account'):
++        ref_domain = (CURRENT_PROFILE.get() or {})['reference_profile']['destination_base']
++        scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', ref_domain], capture_output=True, text=True, timeout=20)
++        if scope.returncode != 0:
++            raise RouteBlocked('operational domain scope rejected')
+     auth = json.loads((BASE / 'data/authorized-users.json').read_text())
+     if request['authorized_by'] not in auth['agents']['ares']['authorized_user_discord_ids']:
+         if not (CURRENT_PROFILE.get() or {}).get('channel_authorization_policy', {}).get('enabled'):
+@@ -734,6 +802,21 @@
+     if operation.get('operation_id') != 'SHEIN-US-DIRECT':
+         raise RouteBlocked('operation contract mismatch')
+     rid = request['request_id']
++    if reference_only:
++        if confirm_execute:
++            raise RouteBlocked('reference preflight never accepts execute confirmation')
++        common_module = _load_common()
++        token, _ = common_module.get_token_from_1password(registered['token_item'])
++        common = ReadOnlyClient(common_module)
++        prepared, _ = _prepare(request, config, common, token, reference_only=True)
++        return {'status': 'REFERENCE_PREFLIGHT_OK', 'request_id': rid,
++                'account_id': account_id(), 'source_account_id': prepared['source']['campaign']['account_id'],
++                'source_campaign_id': prepared['source']['campaign']['id'], 'number': prepared['number'],
++                'budget_usd': prepared['resolved_request']['budget_usd'], 'target_page_id': prepared['page_id'],
++                'pixel_id': prepared['source']['adset']['promoted_object']['pixel_id'],
++                'read_http_requests': common.http_requests, 'logical_gets': common.logical_gets,
++                'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0,
++                'serving_verified': False, 'source_mutations': 0}
+     state_dir = BASE / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid
+     state_dir.mkdir(parents=True, exist_ok=True)
+     state_path = state_dir / 'state.json'
+@@ -940,6 +1023,10 @@
+     campaign.add_argument('--input', type=Path, required=True)
+     campaign.add_argument('--confirm-execute', action='store_true')
+     campaign.add_argument('--dry-run', action='store_true')
++    reference = subparsers.add_parser('reference-preflight', help='Read-only reference/account/Page/pixel checks; no upload, reservation or manifest')
++    reference.add_argument('--input', type=Path, required=True)
++    reference.add_argument('--dry-run', action='store_true')
++    reference.add_argument('--confirm-execute', action='store_true')
+     prepare = subparsers.add_parser('prepare-media', help='Verify and reserve explicit manager-folder groups, then canonical account-scoped pre-stage')
+     prepare.add_argument('--input', type=Path, required=True)
+     prepare.add_argument('--confirm-execute', action='store_true')
+@@ -965,7 +1052,7 @@
+             from .shein_grouped_media import prepare
+             out = prepare(request)
+             return {'status': 'PRESTAGED_GROUPS_READY', 'request_id': out['request_id'], 'assets': len(out['asset_refs']), 'campaigns': len(out['campaign_groups'])}
+-        return run_request(request, confirm_execute=args.confirm_execute)
++        return run_request(request, confirm_execute=args.confirm_execute, reference_only=args.command == 'reference-preflight')
+     except RouteBlocked:
+         raise
+     except ValueError as exc:
+
+--- scripts/ares_campaign_v3/shein_grouped_media.py BEFORE
++++ scripts/ares_campaign_v3/shein_grouped_media.py AFTER
+@@ -20,7 +20,8 @@
+ 
+ def validate_groups(request):
+     groups=request.get('campaign_groups')
+-    if request.get('mode')!='clone_prestaged' or not isinstance(groups,list) or len(groups)!=int(request.get('quantity',1)) or not groups:
++    valid_mode = request.get('mode') == 'clone_prestaged' or (request.get('mode') == 'from_zero_prestaged' and bool(request.get('source_account')))
++    if not valid_mode or not isinstance(groups,list) or len(groups)!=int(request.get('quantity',1)) or not groups:
+         raise ValueError('explicit groups require clone_prestaged and exact quantity')
+     files=[]
+     for g in groups:
+@@ -46,9 +47,23 @@
+     fid=request.get('manager_media_folder_id')
+     folder=ops.drive_file_readback(drive_token,fid)
+     names={str(x.get('manager_name')).casefold() for x in json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json').read_text())['accounts'] if x.get('manager_code')==profile['manager_code']}
++    if request.get('source_account'):
++        names |= {name + ' - usados' for name in names}
+     if folder.get('trashed') or folder.get('driveId')!='0AEwt4Ye690ocUk9PVA' or folder.get('name','').casefold() not in names or len(folder.get('parents') or [])!=1:
+         raise ValueError('manager folder identity, partition or Shared Drive mismatch')
+     parent=ops.drive_file_readback(drive_token,folder['parents'][0])
++    if request.get('source_account') and folder['name'].casefold().endswith(' - usados'):
++        drive = json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json').read_text()).get('drive') or {}
++        vid = (drive.get('folders') or {}).get('VID') or {}
++        if (parent.get('id') != vid.get('folder_id') or parent.get('name') != 'VID'
++                or parent.get('parents') != [drive.get('pool_id')] or parent.get('trashed')
++                or parent.get('driveId') != '0AEwt4Ye690ocUk9PVA'):
++            raise ValueError('manager USED folder must belong to canonical operation VID')
++        pool = ops.drive_file_readback(drive_token, drive['pool_id'])
++        if (pool.get('name') != 'SHEIN_US_' + profile['language'] or pool.get('trashed')
++                or pool.get('driveId') != '0AEwt4Ye690ocUk9PVA' or len(pool.get('parents') or []) != 1):
++            raise ValueError('manager USED pool language/Shared Drive mismatch')
++        parent = ops.drive_file_readback(drive_token, pool['parents'][0])
+     if parent.get('name')!='CRIATIVOS' or parent.get('driveId')!='0AEwt4Ye690ocUk9PVA' or parent.get('trashed'):
+         raise ValueError('manager folder must be direct child of canonical CRIATIVOS')
+     return folder
+@@ -85,9 +100,24 @@
+     profile=copy.deepcopy(cfg['accounts'][account['account_id']]['shein_profile'])
+     op=json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
+     profile['channel_authorization_policy']=op['channel_authorization_policy'];authorize(request,profile,force=True)
++    reference = {}
++    if request.get('source_account'):
++        from .shein_reference import configure
++        profiles = json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
++        profile, reference = configure(request, profile, profiles, op, driver.lookup_account)
++        profile['reference_profile'] = reference
+     scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',profile['destination_base']],capture_output=True,timeout=20)
+     if scope.returncode!=0:raise ValueError('operational domain scope rejected')
++    if request.get('source_account'):
++        scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',reference['destination_base']],capture_output=True,timeout=20)
++        if scope.returncode!=0:raise ValueError('operational domain scope rejected')
+     common=driver._load_common();token,_=common.get_token_from_1password(cfg['accounts'][account['account_id']]['token_item'])
++    if request.get('source_account'):
++        marker = driver.CURRENT_PROFILE.set(profile)
++        try:
++            driver._prepare(request, cfg, driver.ReadOnlyClient(common), token, reference_only=True)
++        finally:
++            driver.CURRENT_PROFILE.reset(marker)
+     h,live,_=common.graph_get('act_'+account['account_id'],token,{'fields':'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'})
+     if h!=200 or live.get('name')!=profile['account_name'] or live.get('currency')!='USD' or live.get('timezone_name')!=profile['timezone'] or live.get('account_status')!=1 or live.get('disable_reason')!=0 or 'ADVERTISE' not in live.get('user_tasks',[]):
+         raise ValueError('exact account live identity/access/health mismatch')
+
+--- scripts/ares_campaign_v3/schema.py BEFORE
++++ scripts/ares_campaign_v3/schema.py AFTER
+@@ -2,6 +2,7 @@
+ 
+ import hashlib
+ import json
++import re
+ from dataclasses import dataclass, field
+ from datetime import datetime, timezone
+ from typing import Any
+@@ -184,6 +185,7 @@
+     creative_materialization_route: str = "inline_copy"
+     start_intent: str = "SCHEDULED"
+     bid_override: bool = False
++    reference: dict[str, Any] = field(default_factory=dict)
+ 
+     @property
+     def uses_existing_post_two_phase(self) -> bool:
+@@ -196,6 +198,19 @@
+         if missing:
+             raise ManifestError(f"campaign missing fields: {','.join(missing)}")
+         mode = str(value["mode"])
++        reference = value.get('reference') or {}
++        if reference:
++            required_reference = {'account_id', 'campaign_id', 'adset_id', 'ad_ids', 'language', 'page_id', 'access', 'lineage_route'}
++            if (not isinstance(reference, dict) or set(reference) != required_reference
++                    or mode != 'from_zero_prestaged' or reference['access'] != 'READ_ONLY'
++                    or reference['lineage_route'] != 'direct_ad_create_with_source_ad_id'
++                    or reference['language'] not in {'EN', 'ES'}
++                    or reference['account_id'] == str(value['account_id']).removeprefix('act_')):
++                raise ManifestError('invalid cross-account read-only reference')
++            if (not isinstance(reference['ad_ids'], list) or not reference['ad_ids']
++                    or any(re.fullmatch(r'[1-9][0-9]+', str(v)) is None for v in
++                           [reference['account_id'], reference['campaign_id'], reference['adset_id'], reference['page_id'], *reference['ad_ids']])):
++                raise ManifestError('exact numeric reference identities required')
+         if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"}:
+             raise ManifestError(f"unsupported mode: {mode}")
+         creative_materialization_route = str(
+@@ -259,7 +274,9 @@
+                 raise ManifestError(f"campaign_create contains engine-owned fields: {','.join(campaign_reserved)}")
+             if adset_reserved:
+                 raise ManifestError(f"adset_create contains engine-owned fields: {','.join(adset_reserved)}")
+-            if len(ads) not in {3, 5}:
++            if reference and (not 1 <= len(ads) <= 5 or any(a.source_ad_id not in reference['ad_ids'] for a in ads)):
++                raise ManifestError('reference requires one through five ads with exact source lineage')
++            if not reference and len(ads) not in {3, 5}:
+                 raise ManifestError("from_zero_prestaged requires exactly three or five ads")
+             if not adset_name:
+                 raise ManifestError("from_zero_prestaged requires adset_name")
+@@ -381,6 +398,7 @@
+             creative_materialization_route=creative_materialization_route,
+             start_intent=start_intent,
+             bid_override=bid_override,
++            reference=reference,
+         )
+ 
+ 
+@@ -405,6 +423,8 @@
+             raise ManifestError("request_id, operation and graph_version are required")
+         _iso(str(value.get("created_at") or ""), "created_at")
+         campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
++        if operation != 'SHEIN-US-DIRECT' and any(c.reference for c in campaigns):
++            raise ManifestError('cross-account reference is restricted to SHEIN')
+         if operation != 'SHEIN-US-DIRECT' and any(c.bid_override for c in campaigns):
+             raise ManifestError('explicit clone bid delta is restricted to SHEIN')
+         if str(value.get("operation")) != "SHEIN-US-DIRECT" and any(c.start_intent == "IMMEDIATE" for c in campaigns):
+
+--- scripts/ares_campaign_v3/prevalidation.py BEFORE
++++ scripts/ares_campaign_v3/prevalidation.py AFTER
+@@ -97,6 +97,24 @@
+         base_policy = dict(account.get("campaign_policy") or {})
+         mode_policies = base_policy.pop("by_mode", {}) or {}
+         policy = {**base_policy, **dict(mode_policies.get(campaign.mode) or {})}
++        if campaign.reference:
++            capability = config.get('shein_cross_account_reference') or {}
++            source_account = accounts.get(campaign.reference['account_id']) or {}
++            tp = account.get('shein_profile') or {}
++            sp = source_account.get('shein_profile') or {}
++            if (capability.get('enabled') is not True or capability.get('approved_by') != '344196393512075265'
++                    or capability.get('lineage_route') != campaign.reference['lineage_route']
++                    or source_account.get('operation') != 'SHEIN-US-DIRECT'
++                    or any(not tp.get(k) or tp[k] != sp.get(k) for k in ['manager_code', 'channel_id', 'language', 'currency'])
++                    or campaign.reference['language'] != tp['language']):
++                raise ManifestError('cross-account capability or source/target partition mismatch')
++            if (campaign.adset_create.get('promoted_object', {}).get('pixel_id') != tp.get('pixel_id')
++                    or campaign.reference['page_id'] != sp.get('page_id')
++                    or any(a.creative_payload.get('object_story_spec', {}).get('page_id') != campaign.reference['page_id'] for a in campaign.ads)):
++                raise ManifestError('cross-account target Page/pixel mismatch')
++            policy['allowed_ad_counts'] = capability.get('allowed_ad_counts') or []
++            if set(policy['allowed_ad_counts']) != {1, 2, 3, 4, 5}:
++                raise ManifestError('cross-account explicit ad-count capability unavailable')
+         required_operation = str(account.get("operation") or "").strip()
+         if required_operation and manifest.operation != required_operation:
+             raise ManifestError(
+
+--- scripts/ares_campaign_v3/planning.py BEFORE
++++ scripts/ares_campaign_v3/planning.py AFTER
+@@ -246,6 +246,7 @@
+                         "adset_id": f"{{adset_id_{ci}}}",
+                         "creative": {"creative_id": f"{{creative_id_{ci}_{ai}}}"},
+                         "status": "ACTIVE",
++                        **({"source_ad_id": ad.source_ad_id} if ad.source_ad_id else {}),
+                     },
+                     kind="ad_create",
+                 ))
+
+--- data/ares/meta-ads/engine-v3/config.json BEFORE
++++ data/ares/meta-ads/engine-v3/config.json AFTER
+@@ -1,5 +1,23 @@
+ {
+   "engine_version": 3,
++  "shein_cross_account_reference": {
++    "enabled": true,
++    "approved_by": "344196393512075265",
++    "source_message_id": "1560012034580414530",
++    "canonical_policy": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/cross_account_reference_policy",
++    "mode": "from_zero_prestaged",
++    "lineage_route": "direct_ad_create_with_source_ad_id",
++    "allowed_ad_counts": [1, 2, 3, 4, 5],
++    "source_access": "READ_ONLY",
++    "target_writes": "existing central Engine direct edges only",
++    "offline_verified": true,
++    "live_read_only_preflight_verified": true,
++    "evidence": "data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef547/acceptance-proof.json",
++    "procedure": "docs/ares-shein-cross-account-reference.md",
++    "live_api_acceptance_verified": false,
++    "serving_verified": false,
++    "maintenance_canary_authorized": false
++  },
+   "shein_batch_activation": {
+     "enabled": true,
+     "operation": "SHEIN-US-DIRECT",
+
+--- scripts/ares-shein-campaigns.py BEFORE
++++ scripts/ares-shein-campaigns.py AFTER
+@@ -1321,7 +1321,7 @@
+             result = prepare_live_request(load_json(args.input), args.output_dir)
+         elif args.command == "status":
+             result = load_json(state_path(args.request_id))
+-        elif args.command in {"single-clone", "campaign", "prepare-media"}:
++        elif args.command in {"single-clone", "campaign", "prepare-media", "reference-preflight"}:
+             from ares_campaign_v3.shein_single_clone import cli_run
+             result = cli_run(args)
+         elif args.command == "account-lookup":

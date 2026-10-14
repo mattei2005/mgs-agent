@@ -10,7 +10,10 @@
     "allowed_ad_counts": [1, 2, 3, 4, 5],
     "source_access": "READ_ONLY",
     "target_writes": "existing central Engine direct edges only",
-    "offline_verified": false,
+    "offline_verified": true,
+    "live_read_only_preflight_verified": true,
+    "evidence": "data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef547/acceptance-proof.json",
+    "procedure": "docs/ares-shein-cross-account-reference.md",
     "live_api_acceptance_verified": false,
     "serving_verified": false,
     "maintenance_canary_authorized": false
