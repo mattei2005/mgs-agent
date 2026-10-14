@@ -388,7 +388,9 @@
     712389,
     712879,
     712902,
-    712917
+    712917,
+    713145,
+    713159
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2519,9 +2521,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-12T20:05:32.000Z",
+        "created_at": "2026-10-14T00:06:23.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 712377,
+        "notification_id": 713159,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2550,7 +2552,8 @@
         710049,
         710931,
         711705,
-        712377
+        712377,
+        713159
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -2590,9 +2593,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-12T20:05:22.000Z",
+        "created_at": "2026-10-14T00:06:14.000Z",
         "domain": "topfeed",
-        "notification_id": 712356,
+        "notification_id": 713145,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -2603,7 +2606,7 @@
         "pages": 95,
         "segurador_id": "294",
         "segurador_name": "Alice Prates",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosfinancetopfeed@gmail.com",
         "user_id": "6",
         "user_name": "Disparos FTF US-CC-EN"
@@ -2613,7 +2616,8 @@
         "1559297667950190662"
       ],
       "notification_ids": [
-        712356
+        712356,
+        713145
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -3130,23 +3134,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-13T19:57:12-04:00",
+  "last_check": "2026-10-13T20:12:15-04:00",
   "last_delivery": {
-    "at": "2026-10-13T12:12:14-04:00",
+    "at": "2026-10-13T20:12:15-04:00",
     "cursor_ids": [
-      712879,
-      712902,
-      712917
+      713145,
+      713159
     ],
-    "message_ids": [
-      "1559599655959003147"
-    ],
-    "notification_ids": [
-      712917
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 712917,
+  "last_seen_id": 713159,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
