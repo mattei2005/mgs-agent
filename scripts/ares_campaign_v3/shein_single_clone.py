@@ -465,6 +465,8 @@ def seal_creation_pair(draft, config, registry):
 
 def reconcile_number(request, inventory, common, token):
     if 'target_number' not in request:
+        if request.get('source_account') and not inventory:
+            return 1
         return next_campaign_numbers(inventory, 1)[0]
     number = int(request['target_number'])
     http, old, _ = common.graph_get(str(request['replaces_campaign_id']), token,
@@ -514,11 +516,18 @@ def resolve_intent(request, source, *, now=None, profile=None):
     return resolved
 
 
-def _prepare(request, config, common, token):
-    pre = _batch(common, token, [
+def _prepare(request, config, common, token, *, reference_only=False):
+    profile = CURRENT_PROFILE.get() or {}
+    reference = profile.get('reference_profile')
+    queries = [
         {'name': 'account', 'path': 'act_' + account_id(), 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}},
         {'name': 'identity', 'path': 'me', 'params': {'fields': 'id,name,client_business_id'}},
-        {'name': 'campaigns', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}])
+        {'name': 'campaigns', 'path': 'act_' + account_id() + '/campaigns', 'params': {'fields': 'id,name,status,daily_budget', 'limit': 500}}]
+    if reference:
+        if config['accounts'][reference['account_id']]['token_item'] != config['accounts'][account_id()]['token_item']:
+            raise RouteBlocked('reference requires separately supported corporate credential binding')
+        queries.append({'name': 'reference_account', 'path': 'act_' + reference['account_id'], 'params': {'fields': 'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'}})
+    pre = _batch(common, token, queries)
     a = pre['account']
     if (a.get('id') != 'act_' + account_id() or a.get('name') != account_alias() or a.get('currency') != 'USD'
             or a.get('timezone_name') != str(account_timezone()) or a.get('account_status') != 1
@@ -527,14 +536,21 @@ def _prepare(request, config, common, token):
     if str(pre['identity'].get('id')) != SYSTEM_USER_ID or str(pre['identity'].get('client_business_id')) != BUSINESS_ID:
         raise RouteBlocked('corporate credential identity mismatch')
     inventory = _complete_edge(pre['campaigns'])
+    if reference:
+        ra = pre['reference_account']
+        if (ra.get('id') != 'act_' + reference['account_id'] or ra.get('name') != reference['account_name']
+                or ra.get('currency') != reference['currency'] or ra.get('timezone_name') != reference['timezone']
+                or ra.get('account_status') != 1 or ra.get('disable_reason') != 0
+                or not {'ANALYZE', 'ADVERTISE'}.issubset(ra.get('user_tasks') or [])):
+            raise RouteBlocked('live reference account identity, health or access mismatch')
     sources = []
     for item in inventory:
         match = re.match(r'^([0-9]+)\s*-', str(item.get('name') or ''))
         if match and int(match.group(1)) == int(request['source_number']):
             sources.append(item)
-    if len(sources) != 1:
+    if not reference and len(sources) != 1:
         raise RouteBlocked('source campaign missing or ambiguous')
-    cid = sources[0]['id']
+    cid = request['source_campaign_id'] if reference else sources[0]['id']
     raw = _batch(common, token, [
         {'name': 'campaign', 'path': cid, 'params': {'fields': 'id,account_id,name,status,objective,daily_budget,bid_strategy,buying_type,special_ad_categories,special_ad_category_country'}},
         {'name': 'adsets', 'path': cid + '/adsets', 'params': {'fields': 'id,name,status,start_time,bid_amount,bid_constraints,bid_strategy,billing_event,optimization_goal,targeting,attribution_spec,promoted_object,is_dynamic_creative,regional_regulated_categories,regional_regulation_identities', 'limit': 50}},
@@ -560,41 +576,54 @@ def _prepare(request, config, common, token):
                 ad['creative']['object_story_spec'] = parent['object_story_spec']
                 ad['creative']['instagram_user_id'] = parent.get('instagram_user_id')
     source = {'campaign': raw['campaign'], 'adset': sets[0], 'ads': ads}
+    if raw['campaign'].get('status') in {'DELETED', 'ARCHIVED'}:
+        raise RouteBlocked('reference campaign is terminal')
     source_video_ids = sorted({vid for ad in ads for vid in video_slots({**ad['creative'], 'object_story_spec': _story(ad)}).values()})
     source['video_metadata'] = {}
     for offset in range(0, len(source_video_ids), 50):
         group = source_video_ids[offset:offset+50]
         source['video_metadata'].update(_batch(common, token, [{'name': vid, 'path': vid, 'params': {'fields': 'id,title,length,status'}} for vid in group]))
     number = reconcile_number(request, inventory, common, token)
-    compiled_request = copy.deepcopy(request)
-    if request.get('mode', 'pure_clone') != 'pure_clone':
-        from .shein_media_handoff import load_ready_assets
-        compiled_request['_resolved_assets'] = load_ready_assets(request, CURRENT_PROFILE.get(), BASE, common, token)
-    compiled_request = resolve_intent(compiled_request, source)
     pages = {str(_story(x)['page_id']) for x in ads}
     if len(pages) != 1:
         raise RouteBlocked('source uses multiple Pages')
-    page_id = next(iter(pages))
+    source_page_id = next(iter(pages))
+    page_id = profile['page_id'] if reference else source_page_id
     compiler_config = copy.deepcopy(config['accounts'][account_id()])
     if CURRENT_PROFILE.get():
         # A sampled Page is an observation, not an exclusive site/account binding.
-        compiler_profile = copy.deepcopy(CURRENT_PROFILE.get())
+        compiler_profile = copy.deepcopy(profile)
         compiler_profile['page_id'] = page_id
         links = []
         for ad in ads:
             for link in source_links(ad.get('creative') or {}, _story(ad)):
-                if urlparse(link).hostname != urlparse(compiler_profile['destination_base']).hostname:
+                approved_source = reference or compiler_profile
+                if urlparse(link).hostname != urlparse(approved_source['destination_base']).hostname:
                     raise RouteBlocked('source destination does not match approved account site')
                 links.append(link.split('?')[0])
         if len(set(links)) != 1:
             raise RouteBlocked('source uses multiple unresolved destination bases')
-        compiler_profile['destination_base'] = links[0]
+        if reference:
+            reference = copy.deepcopy(reference)
+            reference.update(page_id=source_page_id, destination_base=links[0])
+            compiler_config['shein_reference_profile'] = reference
+            from .shein_reference import require_binding
+            require_binding(request, source, compiler_profile, reference)
+            if int(compiler_profile['reference_target_token'].split('c')[-1]) != number:
+                raise RouteBlocked('literal target tracking does not match next free slot')
+        else:
+            compiler_profile['destination_base'] = links[0]
         compiler_config['shein_profile'] = compiler_profile
-    draft = build_manifest(compiled_request, source, number, compiler_config)
-    gate = _batch(common, token, [
+    gate_queries = [
         {'name': 'page', 'path': page_id, 'params': {'fields': 'id,name,access_token'}},
         {'name': 'assignment', 'path': page_id + '/assigned_users', 'params': {'business': BUSINESS_ID, 'fields': 'id,name,tasks', 'limit': 100}},
-        {'name': 'pixels', 'path': 'act_' + account_id() + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}])
+        {'name': 'pixels', 'path': 'act_' + account_id() + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}]
+    if reference:
+        gate_queries.extend([
+            {'name': 'reference_page', 'path': source_page_id, 'params': {'fields': 'id,name'}},
+            {'name': 'reference_assignment', 'path': source_page_id + '/assigned_users', 'params': {'business': BUSINESS_ID, 'fields': 'id,tasks', 'limit': 100}},
+            {'name': 'reference_pixels', 'path': 'act_' + reference['account_id'] + '/adspixels', 'params': {'fields': 'id,name', 'limit': 100}}])
+    gate = _batch(common, token, gate_queries)
     page_token = gate['page'].pop('access_token', None)
     if gate['page'].get('id') != page_id or not page_token:
         raise RouteBlocked('Page read identity unavailable')
@@ -603,6 +632,27 @@ def _prepare(request, config, common, token):
     pixel = sets[0]['promoted_object']['pixel_id']
     if not any(str(x.get('id')) == str(pixel) for x in _complete_edge(gate['pixels'])):
         raise RouteBlocked('source pixel not associated with account')
+    if reference:
+        if (gate['reference_page'].get('id') != source_page_id
+                or not any(str(x.get('id')) == SYSTEM_USER_ID and 'ADVERTISE' in x.get('tasks', []) for x in _complete_edge(gate['reference_assignment']))
+                or not any(str(x.get('id')) == str(pixel) for x in _complete_edge(gate['reference_pixels']))):
+            raise RouteBlocked('reference Page/pixel access unconfirmed')
+        http, ig, _ = common.graph_get(page_id, page_token, {'fields': 'id,page_backed_instagram_account'})
+        if http != 200 or ig.get('id') != page_id:
+            raise RouteBlocked('target Page-backed Instagram identity lookup unavailable')
+        compiler_config['shein_profile']['instagram_user_id'] = (ig.get('page_backed_instagram_account') or {}).get('id')
+    compiled_request = resolve_intent(request, source)
+    if reference_only:
+        if not reference:
+            raise RouteBlocked('reference preflight requires explicit cross-account origin')
+        return {'source': source, 'account': a, 'reference_account': pre['reference_account'],
+                'prerequisites': gate, 'number': number, 'page_id': page_id,
+                'compiler_config': compiler_config, 'resolved_request': compiled_request,
+                'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0}, page_token
+    if request.get('mode', 'pure_clone') != 'pure_clone':
+        from .shein_media_handoff import load_ready_assets
+        compiled_request['_resolved_assets'] = load_ready_assets(request, profile, BASE, common, token)
+    draft = build_manifest(compiled_request, source, number, compiler_config)
     manifest, target_manifest, barrier = seal_creation_pair(draft, config, MediaRegistry(BASE / 'data/ares/meta-ads/engine-v3/media-registry.json'))
     return {'source': source, 'account': a, 'prerequisites': gate, 'number': number,
             'page_id': page_id, 'manifest': manifest,
@@ -659,16 +709,16 @@ def apply_request_defaults(request, operation):
     return resolved
 
 
-def run_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
+def run_request(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
     from .shein_channel_authority import CACHE
     marker = CACHE.set({})
     try:
-        return _run_request_scoped(request, confirm_execute=confirm_execute)
+        return _run_request_scoped(request, confirm_execute=confirm_execute, reference_only=reference_only)
     finally:
         CACHE.reset(marker)
 
 
-def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
+def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
     request = copy.deepcopy(request)
     if request.get('start_now') is True and 'start_time' in request:
         raise RouteBlocked('choose explicit NOW or an exact scheduled time, not both')
@@ -701,12 +751,12 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
         raise RouteBlocked('canonical account profile source unavailable for every requester')
     marker = CURRENT_PROFILE.set(profile)
     try:
-        return _run_bound_request(request, confirm_execute=confirm_execute)
+        return _run_bound_request(request, confirm_execute=confirm_execute, reference_only=reference_only)
     finally:
         CURRENT_PROFILE.reset(marker)
 
 
-def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False) -> dict[str, Any]:
+def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False, reference_only=False) -> dict[str, Any]:
     import subprocess
     validate_request(request)
     catalog_account = lookup_account(request['account'])
@@ -725,7 +775,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
     if scope.returncode != 0:
         raise RouteBlocked('operational domain scope rejected')
     if request.get('source_account'):
-        ref_domain = CURRENT_PROFILE.get()['reference_profile']['destination_base']
+        ref_domain = (CURRENT_PROFILE.get() or {})['reference_profile']['destination_base']
         scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', ref_domain], capture_output=True, text=True, timeout=20)
         if scope.returncode != 0:
             raise RouteBlocked('operational domain scope rejected')
@@ -747,6 +797,21 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
     if operation.get('operation_id') != 'SHEIN-US-DIRECT':
         raise RouteBlocked('operation contract mismatch')
     rid = request['request_id']
+    if reference_only:
+        if confirm_execute:
+            raise RouteBlocked('reference preflight never accepts execute confirmation')
+        common_module = _load_common()
+        token, _ = common_module.get_token_from_1password(registered['token_item'])
+        common = ReadOnlyClient(common_module)
+        prepared, _ = _prepare(request, config, common, token, reference_only=True)
+        return {'status': 'REFERENCE_PREFLIGHT_OK', 'request_id': rid,
+                'account_id': account_id(), 'source_account_id': prepared['source']['campaign']['account_id'],
+                'source_campaign_id': prepared['source']['campaign']['id'], 'number': prepared['number'],
+                'budget_usd': prepared['resolved_request']['budget_usd'], 'target_page_id': prepared['page_id'],
+                'pixel_id': prepared['source']['adset']['promoted_object']['pixel_id'],
+                'read_http_requests': common.http_requests, 'logical_gets': common.logical_gets,
+                'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0,
+                'serving_verified': False, 'source_mutations': 0}
     state_dir = BASE / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid
     state_dir.mkdir(parents=True, exist_ok=True)
     state_path = state_dir / 'state.json'
@@ -953,6 +1018,10 @@ def add_parser(subparsers):
     campaign.add_argument('--input', type=Path, required=True)
     campaign.add_argument('--confirm-execute', action='store_true')
     campaign.add_argument('--dry-run', action='store_true')
+    reference = subparsers.add_parser('reference-preflight', help='Read-only reference/account/Page/pixel checks; no upload, reservation or manifest')
+    reference.add_argument('--input', type=Path, required=True)
+    reference.add_argument('--dry-run', action='store_true')
+    reference.add_argument('--confirm-execute', action='store_true')
     prepare = subparsers.add_parser('prepare-media', help='Verify and reserve explicit manager-folder groups, then canonical account-scoped pre-stage')
     prepare.add_argument('--input', type=Path, required=True)
     prepare.add_argument('--confirm-execute', action='store_true')
@@ -978,7 +1047,7 @@ def cli_run(args):
             from .shein_grouped_media import prepare
             out = prepare(request)
             return {'status': 'PRESTAGED_GROUPS_READY', 'request_id': out['request_id'], 'assets': len(out['asset_refs']), 'campaigns': len(out['campaign_groups'])}
-        return run_request(request, confirm_execute=args.confirm_execute)
+        return run_request(request, confirm_execute=args.confirm_execute, reference_only=args.command == 'reference-preflight')
     except RouteBlocked:
         raise
     except ValueError as exc:

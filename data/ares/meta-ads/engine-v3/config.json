@@ -1,5 +1,20 @@
 {
   "engine_version": 3,
+  "shein_cross_account_reference": {
+    "enabled": true,
+    "approved_by": "344196393512075265",
+    "source_message_id": "1560012034580414530",
+    "canonical_policy": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/cross_account_reference_policy",
+    "mode": "from_zero_prestaged",
+    "lineage_route": "direct_ad_create_with_source_ad_id",
+    "allowed_ad_counts": [1, 2, 3, 4, 5],
+    "source_access": "READ_ONLY",
+    "target_writes": "existing central Engine direct edges only",
+    "offline_verified": false,
+    "live_api_acceptance_verified": false,
+    "serving_verified": false,
+    "maintenance_canary_authorized": false
+  },
   "shein_batch_activation": {
     "enabled": true,
     "operation": "SHEIN-US-DIRECT",
