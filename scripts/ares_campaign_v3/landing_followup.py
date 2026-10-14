@@ -291,6 +291,21 @@ class Queue:
                     f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}.\n{url}\nA execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.")
                 self.event(j['key'],'worker_expired',{'automatic_reopen':False})
 
+    def reconcile(self,key,idx,evidence):
+        # Recovery is readback-first, under the same physical PC1 lease. It
+        # never promotes an unobserved URL to PASSED or replays an uncertain view.
+        validate_closure(evidence)
+        with self.tx():
+            j=self.job(key)
+            if j['state']!='NEEDS_RECONCILIATION':raise ValueError('request is not awaiting reconciliation')
+            row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
+            if not row or row['state'] not in {'OPEN_INTENT','ATTENTION'}:raise ValueError('exact affected URL required')
+            saved=preserve_evidence(evidence,key,idx,row['attempt'])
+            self.db.execute("UPDATE links SET state='ATTENTION',evidence=? WHERE job=? AND idx=?",(json.dumps(saved,ensure_ascii=False),key,idx))
+            pending=self.db.execute("SELECT 1 FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY')",(key,)).fetchone()
+            self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',('READY' if pending else 'ATTENTION',key))
+            self.event(key,'uncertain_tab_closed_by_readback',{'idx':idx,'observation_success':False,'evidence':saved})
+
 
 def file_evidence(path):
     p=Path(path)

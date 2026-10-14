@@ -7,6 +7,15 @@
 
 ---
 
+## Atualização Growth — acompanhamento de landing pós-resposta (2026-10-14)
+
+- Autoridade: Rodolfo `1559951763019145247`, thread `1559932317861158993`, handoff Zeus ao Ares. Escopo: todo tráfego direto CAR/SHEIN/futuros nichos; exclui BOT/Messenger. Fonte única `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`.
+- Runtime novo: `scripts/ares-direct-traffic-followup.py`, módulos `ares_campaign_v3/landing_followup.py` e `landing_followup_adapters.py`, SQLite WAL/FULL em `data/ares/meta-ads/landing-followup/`. Fila imutável/idempotente, barreira de resposta ao gestor com GET de autor/thread/conteúdo, consumidor global limitado, lease PC1 cross-agent obrigatória e verificada por ID real de sessão, outbox com ID/nonce/readback. Evidências revisadas ficam protegidas em artifacts do Ares, sem anexos automáticos.
+- Integração: wrapper comum de conclusão para pedidos naturais CAR/SHEIN/futuros nichos; callback mínimo no `daily_cpv.py` somente após a resposta normal/readback do runner autônomo. Nenhum browser no campaign writer, nenhum write Meta/GAM/Router/WordPress, alteração de orçamento/estratégia/início/credencial ou restart de gateway. Falha do acompanhamento preserva a criação e reporta exclusivamente na thread de autoridade; primeira ausência de anúncio não alerta, espera 60s e tenta em aba nova. Somente o lote integral aprovado visualmente gera o texto de sucesso ao gestor, sem PC1/GAM.
+- Agendamento: `systemd/ares-landing-followup.{service,timer}` instalado em `/etc/systemd/system/`; timer enabled/active, oneshot a cada 15s após inatividade, stdout/journal exclusivamente local. Sem jobs pendentes não abre navegador nem inicia modelo. Não é cron Hermes origin/all e não altera root crontab, gateway, outros profiles ou scheduler de campanhas.
+- Skills próprias atualizadas: `direct-traffic-cbo-operations` + `references/landing-followup.md`, SHEIN, Vehicle Finance e Engine v3 com ponteiros para a fonte comum. Audit/baseline/verificação: `data/ares/meta-ads/audit/landing-followup-1559951763019145247/`. Testes novos e regressão sem writes; duas divergências históricas da suíte diária CPV reproduzidas com o backup anterior (referência de token antiga e reader gate legado), não corrigidas fora do escopo.
+- Validação viva sem campanha/anúncio de teste: consumidor CLI OAuth respondeu ao smoke isolado, timer retornou sucesso/zero, fila de produção vazia, lease PC1 livre; abertura/fechamento de janela técnica confirmados, Chrome original preservado. Observação real de anúncio por 20s e integração do primeiro pedido de gestor permanecem deliberadamente para o teste natural de Rodolfo; nenhuma alegação de cadastro GAM.
+
 ## Atualização editorial — lote SEO multilíngue Raquel (2026-10-14)
 
 - Autoridade: Rodolfo na mensagem `1559935269535486005`, após receber o bloqueio técnico do lote na thread `1559930384852979796`; pedido original de Raquel, exclusivamente 30 rascunhos SEO.

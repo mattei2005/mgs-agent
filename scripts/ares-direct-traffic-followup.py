@@ -106,6 +106,8 @@ def main():
     a=s.add_parser('publish-creation');a.add_argument('--key',required=True);a.add_argument('--message-file',type=Path,required=True)
     a=s.add_parser('show');a.add_argument('--key',required=True)
     s.add_parser('status');s.add_parser('tick')
+    a=s.add_parser('reconcile');a.add_argument('--key',required=True);a.add_argument('--index',type=int,required=True)
+    a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
     for command in ('begin','defer','result'):
         a=s.add_parser(command);a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
         if command!='defer':
@@ -124,7 +126,10 @@ def main():
     if args.command=='show':return q.job(args.key)
     if args.command=='status':return {'jobs':[dict(x) for x in q.db.execute('SELECT state,count(*) AS count FROM jobs GROUP BY state')], 'pending_notifications':q.db.execute("SELECT count(*) FROM messages WHERE state!='VERIFIED'").fetchone()[0]}
     if args.command=='tick':return tick(q)
-    if args.command in {'begin','result'}:require_pc1_lease(args.pc1_session_id)
+    if args.command in {'begin','result','reconcile'}:require_pc1_lease(args.pc1_session_id)
+    if args.command=='reconcile':
+        q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()))
+        return {'state':q.job(args.key)['state'],'observation_success':False}
     if args.command=='begin':q.begin(args.key,args.owner,args.index)
     elif args.command=='defer':q.deferred(args.key,args.owner)
     elif args.command=='result':q.result(args.key,args.owner,args.index,args.result,json.loads(args.evidence.read_text()))

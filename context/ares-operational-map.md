@@ -27,6 +27,7 @@ Meta/Facebook Ad Library                meta-library-reference-intake/SKILL.md
 Aquisição geral                         paid-acquisition-operations/SKILL.md
 Estratégia BOT/Messenger compartilhada  chatpion-bot-campaign-operations/SKILL.md
 Executor Campaign Ops v3                meta-campaign-engine-v3/SKILL.md
+Acompanhamento landing pós-resposta     data/ares/meta-ads/policies/direct-traffic-landing-followup.json
 SHEIN: nome/ID por gestor/canal          data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json
 SHEIN: pipeline comum por gestor/conta   direct-traffic-shein-operations/references/general-campaign-fast-route.md
 Meta intraday + governança consolidada    meta-ads-intraday-operations/SKILL.md

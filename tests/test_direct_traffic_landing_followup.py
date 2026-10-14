@@ -227,5 +227,16 @@ class FollowupTests(unittest.TestCase):
         kinds=[x['kind'] for x in self.q.db.execute('SELECT kind FROM events ORDER BY seq')]
         self.assertLess(kinds.index('creation_reply_verified'),kinds.index('open_intent'))
 
+    def test_reconciliation_never_promotes_uncertain_view_to_success(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        self.q.reconcile(self.key,0,self.closure('reconciled-tab'))
+        self.assertEqual(self.q.job(self.key)['state'],'ATTENTION')
+        self.assertEqual(self.q.job(self.key)['links'][0]['state'],'ATTENTION')
+        self.assertIsNone(self.q.db.execute('SELECT 1 FROM messages WHERE key=?',(self.key+':success',)).fetchone())
+
+    def test_reconciliation_requires_real_closure_proof(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        with self.assertRaises(ValueError):self.q.reconcile(self.key,0,{'tab_closed_verified':False})
+
 
 if __name__=='__main__':unittest.main()
