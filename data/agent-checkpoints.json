@@ -1192,6 +1192,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1560061229643333686",
+      "next_step": "Dry-run e execucao central por fonte; verificar os quinze IDs unicos e QA integral",
+      "objective": "Duplicar C103x7 C112x4 C107x2 C113x2 na Yolokfx02 G006 USD45 por campanha inicio 15/10/2026 00:00 ET",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560061229643333686",
+      "state": "intake registrado; quatro fontes processadas sequencialmente pela mesma lane e engine v3; nenhum write meta ainda",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-14T22:47:25+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
       "next_step": "Aguardar Rodolfo/Zeus confirmar janela normal e liberar nova auditoria; revalidar estado atual e executar pass novo com <=5 perfis por lote, close+GET Inactive antes do proximo; reportar apenas problemas do pass novo.",
       "objective": "Reauditar BACKUP SHEIN em lotes max5, somente problemas, apos liberacao da recuperacao",
@@ -5872,5 +5882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T22:05:39+00:00"
+  "updated_at": "2026-10-14T22:47:25+00:00"
 }
