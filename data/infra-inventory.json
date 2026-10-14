@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-14T10:13:20-04:00",
+    "updated_at": "2026-10-14T14:34:41.715026+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44067,6 +44067,47 @@
         "mentions": 0,
         "validated_at": "2026-10-14T05:54:50.167635+00:00"
       }
+    },
+    {
+      "id": "finance-zytiva-es-1559930340628242484",
+      "type": "finance-gam-classification",
+      "authority": [
+        "1559929556691849267",
+        "1559930340628242484"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-14T14:34:41.715026+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/gam_revenue.py": "87bbeed622e6a550cef332c5f49d03267179adb18db4ef13032e9a095a5c8bb7",
+        "apps/finance-system/gam-revenue-core.mjs": "bd2cac6ce7783f6d7a82414a0ed2e4e3853630cec06230f3b7c2191e6ae71ddb",
+        "apps/finance-system/tests/test_gam_revenue.py": "b69f7ea55770dc4a1b6f19a277ed90a2e22be068a07c29d0ff4ae5d3425777ba",
+        "apps/finance-system/tests/gam-revenue-core.test.mjs": "18c0fd983e8b8fe6b3bfdf6076f5c4c081f90c35b4f117f8ad4dea3ad5b3beb2",
+        "data/finance-gam-revenue-rules.json": "57c9dd1d81164c3b3c68a0eb4628981baecf0a5be48620d0f34bfb1a48270fff",
+        "docs/finance-gam-email-automation.md": "c2199775602fcaab414ce64555c509241f309519fd89ccd1e96dd9880017de41",
+        "reports/finance-zytiva-es-1559930340628242484.md": "e9a601d3af600845efa5ff579fa0dd796ee8714c59bc31ceb145044a1f5f7aec"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "bca3db06de72e63a9046c61b6475ca7b6fb7773cdc8668be0aefb084d357b70b",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/current-security-performance-and-dr.md": "f03e8778b02d97ff9a820fba27315375c67a163b058878458b37326c9c754b2f"
+      },
+      "remote_files": {
+        "gam-revenue-core.mjs": "bd2cac6ce7783f6d7a82414a0ed2e4e3853630cec06230f3b7c2191e6ae71ddb",
+        "finance-gam-revenue-rules.json": "4dfcbfc7b8481b5dfa8924d1194f232cda29f9389d8c3a81330c0022bb00d451"
+      },
+      "report_path": "reports/finance-zytiva-es-1559930340628242484.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/zytiva-es-1559930340628242484",
+      "tests": 496,
+      "placement": "pl_digital-trust_zytivafinanzas_es",
+      "classification": "es-cc-es",
+      "manager": "g003/isliago",
+      "cutoff": "2026-10-13",
+      "financial_revision": 556,
+      "financial_audit": "4279",
+      "idempotent_replay": true,
+      "ui_financial_writes": 0,
+      "rollback": "apps/finance-system/private/releases/zytiva-es-1559930340628242484",
+      "deletions": 0
     }
   ],
   "profile_skill_references": [

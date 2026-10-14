@@ -1,0 +1,23 @@
+{
+  "id": "atena-seo-massa-1559930384852979796",
+  "owner": "Content Operations / Atena",
+  "requester_discord_id": "1496254952501280974",
+  "authority_discord_id": "344196393512075265",
+  "request_message_id": "1559930384852979796",
+  "execute_message_id": "1559930814437920942",
+  "continuation_authority_message_id": "1559935269535486005",
+  "source_thread_id": "1559930384852979796",
+  "scope": "Integrar minimamente dez portais verificados e entregar três artigos SEO novos por portal, exclusivamente em draft, conforme idioma/categoria/briefing da Raquel.",
+  "country_sources": ["/root/mgs-agent/context/sites.md", "/root/mgs-agent/context/acquisition.md"],
+  "onboarding_evidence": "/root/.hermes/profiles/atena/work/seo-mass-1559930384852979796/onboarding-evidence.json",
+  "transport": "WordPress REST API com identidade dedicada Atena/editor; sem SSH nem operações de filesystem remoto. wp_path não será inferido: a configuração mínima deste transporte não precisa de webroot e os registros REST já existentes permitem sua ausência.",
+  "required_article_count": 30,
+  "articles_per_portal": 3,
+  "minimum_visible_words": 1000,
+  "image_position": "imediatamente após a primeira frase",
+  "same_featured_and_inline_media": true,
+  "minimum_relevant_external_links": 1,
+  "post_status": "draft",
+  "excluded": ["publicação", "credenciais", "plugin/runtime", "alterações estruturais WordPress", "dash financeira", "dash Router", "ampliação de escopo"],
+  "standing_authority_candidate": "KCI-9b42b77250e3ba5c; candidato para Zeus, não substitui fontes ativas de permissão."
+}

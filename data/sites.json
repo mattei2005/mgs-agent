@@ -94,5 +94,215 @@
     "hide_rec_from_home": false,
     "hide_p1_from_home": false,
     "wp_path": "/home/runcloud/webapps/yolokfx"
+  },
+  "lyzmo_loans_us": {
+    "name": "Lyzmo",
+    "domain": "lyzmo.com",
+    "wp_url": "https://lyzmo.com",
+    "country": "us",
+    "language": "en-US",
+    "verticals": [
+      "loans"
+    ],
+    "publishing_user": {
+      "id": 14,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - lyzmo.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Loans"
+  },
+  "zytiva_loans_us_es": {
+    "name": "Zytiva",
+    "domain": "finanzas.zytiva.com",
+    "wp_url": "https://finanzas.zytiva.com",
+    "country": "us",
+    "language": "es",
+    "verticals": [
+      "loans"
+    ],
+    "publishing_user": {
+      "id": 15,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - finanzas.zytiva.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Préstamos"
+  },
+  "gamingadx_game_us": {
+    "name": "GamingAdx",
+    "domain": "gamingadx.com",
+    "wp_url": "https://gamingadx.com",
+    "country": "us",
+    "language": "en-US",
+    "verticals": [
+      "game"
+    ],
+    "publishing_user": {
+      "id": 7,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - gamingadx.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Tips"
+  },
+  "gamezonead_game_mx": {
+    "name": "GameZoneAd",
+    "domain": "gamezonead.com",
+    "wp_url": "https://gamezonead.com",
+    "country": "mx",
+    "language": "es",
+    "verticals": [
+      "game"
+    ],
+    "publishing_user": {
+      "id": 8,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - gamezonead.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Consejos"
+  },
+  "creditoparaveiculo_car_br": {
+    "name": "Credito para Veiculo",
+    "domain": "creditoparaveiculo.com",
+    "wp_url": "https://creditoparaveiculo.com",
+    "country": "br",
+    "language": "pt-BR",
+    "verticals": [
+      "car"
+    ],
+    "publishing_user": {
+      "id": 8,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - creditoparaveiculo.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Taxas e Simulações"
+  },
+  "financiamentoautoadx_car_br": {
+    "name": "financiamentoautoadx.com",
+    "domain": "financiamentoautoadx.com",
+    "wp_url": "https://financiamentoautoadx.com",
+    "country": "br",
+    "language": "pt-BR",
+    "verticals": [
+      "car"
+    ],
+    "publishing_user": {
+      "id": 8,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - financiamentoautoadx.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Notícias"
+  },
+  "seuprimeiroempregoam_job_us": {
+    "name": "You First Job",
+    "domain": "seuprimeiroempregoam.com",
+    "wp_url": "https://seuprimeiroempregoam.com",
+    "country": "us",
+    "language": "en-US",
+    "verticals": [
+      "job"
+    ],
+    "publishing_user": {
+      "id": 12,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - seuprimeiroempregoam.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Internship"
+  },
+  "empleo_job_es": {
+    "name": "Tu Primer Trabajo",
+    "domain": "empleo.seuprimeiroempregoam.com",
+    "wp_url": "https://empleo.seuprimeiroempregoam.com",
+    "country": "es",
+    "language": "es",
+    "verticals": [
+      "job"
+    ],
+    "publishing_user": {
+      "id": 12,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - empleo.seuprimeiroempregoam.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Carrera"
+  },
+  "escalatepower_fashion_us": {
+    "name": "Escalate Power",
+    "domain": "escalatepower.com",
+    "wp_url": "https://escalatepower.com",
+    "country": "us",
+    "language": "en-US",
+    "verticals": [
+      "fashion"
+    ],
+    "publishing_user": {
+      "id": 10,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - escalatepower.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Trends"
+  },
+  "mavroa_fashion_us_es": {
+    "name": "Mavroa",
+    "domain": "mavroa.com",
+    "wp_url": "https://mavroa.com",
+    "country": "us",
+    "language": "es",
+    "verticals": [
+      "fashion"
+    ],
+    "publishing_user": {
+      "id": 10,
+      "username": "atena",
+      "display_name": "Atena"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "Atena WordPress - mavroa.com",
+      "field": "wp_app_password"
+    },
+    "default_category": "Tendencias"
   }
 }
