@@ -25,7 +25,7 @@ def require_pc1_lease(session_id):
 
 
 def flush(q,discord):
-    for row in q.db.execute("SELECT key FROM messages WHERE state!='VERIFIED' ORDER BY created").fetchall():
+    for row in q.db.execute("SELECT key FROM messages WHERE state IN ('PREPARED','INTENT') ORDER BY created").fetchall():
         try:
             message=discord.deliver(q,row['key'])
             if row['key'].endswith(':creation'):
@@ -56,7 +56,7 @@ def tick(q):
         try:fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return {'state':'DISPATCHER_BUSY'}
         q.recover_expired()
-        pending=q.db.execute("SELECT 1 FROM messages WHERE state!='VERIFIED'").fetchone()
+        pending=q.db.execute("SELECT 1 FROM messages WHERE state IN ('PREPARED','INTENT')").fetchone()
         waiting=q.db.execute("SELECT 1 FROM jobs WHERE state IN ('WAITING_CREATION_REPLY','OBSERVED')").fetchone()
         if pending or waiting:
             # Do not even resolve the bot token when there is no notification.
@@ -129,7 +129,7 @@ def main():
     if args.command=='stage':return {'key':q.stage(json.loads(args.input.read_text())),'state':'WAITING_CREATION_REPLY'}
     if args.command=='publish-creation':return publish_creation(q,args.key,args.message_file.read_text().strip(),Discord())
     if args.command=='show':return q.job(args.key)
-    if args.command=='status':return {'jobs':[dict(x) for x in q.db.execute('SELECT state,count(*) AS count FROM jobs GROUP BY state')], 'pending_notifications':q.db.execute("SELECT count(*) FROM messages WHERE state!='VERIFIED'").fetchone()[0]}
+    if args.command=='status':return {'jobs':[dict(x) for x in q.db.execute('SELECT state,count(*) AS count FROM jobs GROUP BY state')], 'pending_notifications':q.db.execute("SELECT count(*) FROM messages WHERE state IN ('PREPARED','INTENT')").fetchone()[0]}
     if args.command=='tick':return tick(q)
     if args.command=='activate-intake':return {'activation_epoch':Intake(q).activate(),'backfill':False}
     if args.command=='intake':

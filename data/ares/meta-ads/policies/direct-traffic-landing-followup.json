@@ -16,6 +16,7 @@
   "model": "gpt-6.1-sol",
   "queue": "data/ares/meta-ads/landing-followup/queue.sqlite3",
   "integration": "INDEPENDENT_POST_REPLY_OBSERVER_ONLY_NO_CREATION_ROUTE_HOOKS",
+  "final_boundary_reaffirmation_message_id": "1559969789164920903",
   "independent_intake": {
     "source": "Ares native delivery_obligations delivered + exact final response of the same session/user turn",
     "source_database_access": "READ_ONLY_QUERY_ONLY",

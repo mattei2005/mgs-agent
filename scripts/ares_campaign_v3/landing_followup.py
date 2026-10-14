@@ -405,6 +405,7 @@ class Discord:
     def deliver(self,q,key):
         row=q.db.execute('SELECT * FROM messages WHERE key=?',(key,)).fetchone()
         if not row:raise ValueError('missing durable notification')
+        if row['state']=='CANCELLED_BEFORE_SEND':raise ValueError('notification_cancelled_before_send')
         thread=row['thread'];mid=row['message_id']
         if not mid and row['state']=='INTENT':
             # Ambiguous POST: read back by stable nonce before any retry. Never
@@ -414,7 +415,9 @@ class Discord:
             if len(found)!=1:raise ValueError('notification outcome uncertain; preserve outbox for reconciliation')
             mid=str(found[0]['id'])
         if not mid:
-            with q.tx():q.db.execute("UPDATE messages SET state='INTENT' WHERE key=?",(key,))
+            with q.tx():
+                changed=q.db.execute("UPDATE messages SET state='INTENT' WHERE key=? AND state='PREPARED'",(key,)).rowcount
+                if changed!=1:raise ValueError('notification_intent_changed_reconcile_before_send')
             body=self.request('POST','/channels/'+thread+'/messages',{'content':row['content'],'allowed_mentions':{'parse':[]},'nonce':row['nonce'],'enforce_nonce':True})
             mid=identifier(body['id'])
         with q.tx():q.db.execute("UPDATE messages SET message_id=? WHERE key=?",(mid,key))

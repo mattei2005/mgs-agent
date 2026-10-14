@@ -280,7 +280,7 @@ class Intake:
         policy=json.loads(POLICY.read_text())
         safe_url=''
         if url:
-            scope(url);safe_url='\n'+url
+            self.check_scope(url);safe_url='\n'+url
         diagnoses={
             'source_not_complete_for_request':'A evidência final salva ainda não confirma a conclusão integral do pedido.',
             'saved_manifest_missing':'O pacote final da campanha não foi localizado na evidência salva.',
@@ -318,6 +318,19 @@ class Intake:
             self.q.db.execute("UPDATE jobs SET reply_id=?,state='READY' WHERE key=?",(receipt['message_ids'][0],key))
             self.q.event(key,'native_reply_readback_verified',{'obligation_id':receipt['native_obligation_id'],'message_ids':receipt['message_ids'],'campaign_writes':0,'creation_posts':0})
         return key
+    def resolve_incidents(self,key,rid):
+        prefix=key+':intake-incident:'
+        with self.q.tx():
+            rows=self.q.db.execute('SELECT key,state FROM messages WHERE substr(key,1,?)=?',(len(prefix),prefix)).fetchall()
+            announced=False
+            for row in rows:
+                if row['state']=='PREPARED':self.q.db.execute("UPDATE messages SET state='CANCELLED_BEFORE_SEND' WHERE key=?",(row['key'],))
+                elif row['state'] in {'INTENT','VERIFIED'}:announced=True
+            if announced:
+                policy=json.loads(POLICY.read_text())
+                self.q.prepare_message(key+':intake-resolved',policy['all_problem_destination_thread'],
+                    f'Acompanhamento recuperado — pedido {rid}. A resposta e a evidência foram reconciliadas; a tarefa segue na fila, sem repetir nem alterar a criação das campanhas.')
+            if rows:self.q.event(None,'independent_intake_recovered',{'request_id':rid,'unsent_alerts_cancelled':not announced})
     def process_delivery(self,c,delivery,dc):
         key='native:'+delivery['obligation_id']
         previous=self.q.db.execute('SELECT state FROM native_intake WHERE id=?',(key,)).fetchone()
@@ -332,7 +345,7 @@ class Intake:
             if old and old['state']=='READY':armed=True;continue
             paths=source_paths(rid,self.meta)
             if not paths:
-                self.record(subkey,'PENDING','saved_request_evidence_not_found');return 'PENDING'
+                self.record(subkey,'PENDING','saved_request_evidence_not_found');self.record(key,'PENDING','saved_request_evidence_not_found');return 'PENDING'
             # Deterministic source order; disagreement is an incident, not a guess.
             path=paths[0]
             if path.stat().st_mtime<self.epoch():
@@ -342,13 +355,13 @@ class Intake:
             except ValueError as exc:
                 if str(exc)=='not_registered_direct_traffic':
                     self.record(subkey,'IGNORED');continue
-                self.record(subkey,'PENDING',str(exc));self.incident(subkey,rid,str(exc));return 'PENDING'
+                self.record(subkey,'PENDING',str(exc));self.record(key,'PENDING',str(exc));self.incident(subkey,rid,str(exc));return 'PENDING'
             try:
                 receipt=verify_native_reply(dc(),delivery,origin)
                 job=self.arm(payload,receipt)
             except ValueError as exc:
-                self.record(subkey,'PENDING',str(exc));self.incident(subkey,rid,str(exc),payload['links'][0]['effective_campaign_url']);return 'PENDING'
-            self.record(subkey,'READY',job=job);armed=True
+                self.record(subkey,'PENDING',str(exc));self.record(key,'PENDING',str(exc));self.incident(subkey,rid,str(exc),payload['links'][0]['effective_campaign_url']);return 'PENDING'
+            self.resolve_incidents(subkey,rid);self.record(subkey,'READY',job=job);armed=True
         self.record(key,'READY' if armed else 'IGNORED');return 'READY' if armed else 'IGNORED'
     def scan_daily(self,dc):
         count=0
@@ -370,7 +383,7 @@ class Intake:
                 payload=build_from_source(path,rid,origin,self.q.root,self.meta,self.check_scope)
                 receipt={'verified':True,'native_delivery_state':'delivered','native_obligation_id':key,
                     **origin,'author_id':client.bot_id,'message_ids':[mid],'content_sha256':hashlib.sha256(msg['content'].encode()).hexdigest(),'readback_at':self.q.now()}
-                job=self.arm(payload,receipt);self.record(key,'READY',job=job);count+=1
+                job=self.arm(payload,receipt);self.resolve_incidents(key,rid);self.record(key,'READY',job=job);count+=1
             except (ValueError,OSError,sqlite3.Error,KeyError) as exc:
                 self.record(key,'PENDING',str(exc)[:160])
                 self.incident(key,path.stem,str(exc))

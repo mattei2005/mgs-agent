@@ -171,6 +171,13 @@ class FollowupTests(unittest.TestCase):
         self.arm();self.assertEqual(self.dc.posts,1);self.assertEqual(self.q.job(self.key)['state'],'READY')
     def test_verified_post_replay_is_read_only(self):
         self.arm();self.arm();self.assertEqual(self.dc.posts,1)
+    def test_cancelled_unsent_alert_is_never_posted(self):
+        self.arm()
+        with self.q.tx():
+            self.q.prepare_message('cancelled-alert',m.INCIDENT_THREAD,'offline obsolete alert')
+            self.q.db.execute("UPDATE messages SET state='CANCELLED_BEFORE_SEND' WHERE key='cancelled-alert'")
+        with self.assertRaises(ValueError):self.dc.deliver(self.q,'cancelled-alert')
+        self.assertEqual(self.dc.posts,1)
     def test_pending_message_id_survives_failed_get(self):
         original_get=self.dc.get
         def fail_message_readback(path):

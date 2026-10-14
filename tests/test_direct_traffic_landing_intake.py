@@ -83,6 +83,7 @@ class IntakeTests(unittest.TestCase):
         messages=self.dc.messages;self.dc.messages=[];self.intake.tick()
         self.dc.messages=messages;self.now+=60;self.intake.tick();self.intake.tick()
         self.assertEqual(self.jobs(),1);self.assertEqual(self.dc.posts,0)
+        self.assertEqual(self.q.db.execute("SELECT count(*) FROM messages WHERE state IN ('PREPARED','INTENT')").fetchone()[0],0)
     def test_restart_does_not_duplicate_job(self):
         self.intake.tick();self.q.db.close();self.q=core.Queue(self.meta/'landing-followup',now=lambda:1010)
         restarted=li.Intake(self.q,self.path,self.meta,lambda:self.dc,check_scope=lambda u:True)

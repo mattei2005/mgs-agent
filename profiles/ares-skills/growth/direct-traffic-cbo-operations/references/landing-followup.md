@@ -1,102 +1,82 @@
-# Acompanhamento de landing após criação — contrato comum
+# Landing follow-up — processo independente pós-resposta
 
-## Autoridade e limites
+## Fonte e escopo
 
-Fonte única: `/root/mgs-agent/data/ares/meta-ads/policies/direct-traffic-landing-followup.json`. Ler nessa fonte a autoridade vigente, o destino `all_problem_destination_thread` e a mensagem de sucesso; não copiar IDs de conversa para o procedimento nem interpretar “aqui” como a sessão atual. Aplica-se a TODA estratégia de tráfego direto: CAR, SHEIN e futuros nichos. Não BOT/Messenger. Não herda budget, evento, conta, horário ou lifecycle de outro nicho. Não cria campanhas de teste nem faz backfill sem autorização própria; não escreve GAM, WordPress, Router, financeiro, quiz, credenciais ou Meta.
+Fonte única de autoridade, estado, duração, mensagem de sucesso e destino de incidentes: `/root/mgs-agent/data/ares/meta-ads/policies/direct-traffic-landing-followup.json`. O padrão é de tráfego direto — CAR, SHEIN e futuros nichos com contrato direto registrado — e exclui BOT/Messenger. Não copiar IDs de thread para procedimentos nem interpretar “aqui” como a sessão corrente; resolver `all_problem_destination_thread` no contrato.
 
-A observação é visita técnica pontual autorizada, sem cliques em anúncios e sem tentativas de contornar filtros de tráfego inválido, CAPTCHA ou autenticação. Não trocar proxy/fingerprint/extensões, desativar bloqueadores, usar perfis pessoais como fallback ou gerar impressões adicionais para buscar um resultado. Uma segunda tentativa só cabe na ausência prevista de anúncio; outro erro vai à thread de problemas.
+A autorização original permanece válida. A suspensão técnica anterior foi uma decisão de implementação do Ares, não uma instrução de Rodolfo. O desenho acoplado de stage/publish-creation e callback síncrono está APOSENTADO, não é fallback. Histórico/supersessão: registry e audit da iniciativa apontados pelo contrato.
 
-## Isolamento vigente — prioridade absoluta dos pedidos
+## Fronteira inegociável: pedido inalterado até o final
 
-Rodolfo corrigiu expressamente: o acompanhamento é TOTALMENTE SEPARADO e não pode comprometer velocidade/performance de criação. A rota de pedidos não prepara handoff, não carrega esta referência, não chama fila/PC1, não troca o transporte de resposta e não possui callback síncrono nem etapa adicional, inclusive depois do envio enquanto o runner ainda está retornando. O pedido termina e responde pelo caminho nativo existente. Somente um processo independente posterior pode descobrir/enfileirar a conclusão já entregue, sem disputar lanes/quota Meta nem recursos críticos com campanhas. Falhas desse processo nunca reabrem ou atrasam criação.
+- Na rota de criação/duplicação: NÃO carregar esta referência, preparar fila/handoff/landing, trocar transporte de resposta, chamar acompanhamento, esperar PC1 nem acrescentar callback, mesmo depois do POST da resposta enquanto o runner ainda está retornando. Criar, validar, pós-processar e responder pelo caminho nativo existente, sem etapa nova.
+- Somente DEPOIS da conclusão e da resposta entregue ao gestor, outro processo descobre o resultado já existente e cria sua tarefa em fila própria. Uma falha nesse processo nunca reabre, trava, retoma ou repete criação.
+- O leitor não escreve no banco nativo, no audit/state do criador, em campanha, GAM, WordPress, Router ou financeiro. Não usa quota/lane da Meta e não consulta a Graph para descobrir links: reutiliza provas finais já salvas.
+- Runners, mídia, manifest, orçamento, lance, estratégia, início e isolamento de contas/canais permanecem os originais. O gatilho não depende do início programado da campanha.
 
-Estado atual: consultar `status` no contrato. `HELD_FOR_FULL_ASYNC_ISOLATION` significa somente acompanhamento suspenso, sem hold de campanhas. Não reativar o timer/worker nem restaurar o wrapper até validar gatilho realmente externo e isolamento de recursos. O callback antigo foi removido e a rota do diário comparada byte a byte com a baseline anterior à mudança; isso prova remoção do acréscimo, não um benchmark universal de latência.
+## Gatilho externo implantado
 
-## Fila única PC1 — todos os gestores
+Runtime: `ares_campaign_v3.landing_intake`, CLI `ares-direct-traffic-followup.py intake`, serviço/timer próprio `ares-landing-intake`. O consumidor PC1 continua em outro serviço/timer, `ares-landing-followup`. Nenhum é um job Hermes com entrega origin/all; stdout e logs são locais.
 
-A política `pc1_queue_policy` do contrato, reafirmada por Rodolfo, exige UMA fila FIFO global para G001–G006, contas, canais e futuros gestores; nunca uma fila/worker por gestor. Pedidos G001 e G006 simultâneos preservam a criação paralela existente e geram somente tarefas de acompanhamento em espera. Há no máximo uma tarefa ativa no PC1, protegida também pela lease física comum entre agentes. A tarefa mais antiga mantém a ordem durante os 60s da retentativa e conclui/fecha suas próprias abas antes de liberar a seguinte. Fechamento incerto bloqueia o acompanhamento para readback, não os pedidos de campanha. Validar disputa real de duas conexões de fila simultâneas e ordem FIFO entre duas contas/canais; não inferir exclusão global de um teste com apenas um pedido.
+1. Ler o `state.db` do próprio Ares por SQLite `mode=ro` e `query_only=ON`. Usar o outbox nativo já existente `delivery_obligations`, estado `delivered`; não adicionar hook, coluna, trigger ou write ao gateway.
+2. Reconciliar a resposta final exata com a sessão e o mesmo turno humano; procurar os request IDs terminais nos resultados de ferramentas desse turno. Mensagem local final, status de campanha ou timer ativo, isoladamente, NÃO provam entrega da resposta.
+3. Ler somente os arquivos canônicos desses requests: estado final SHEIN, audit diário ou request-state/manifest/readback final CAR. Exigir família de tráfego direto registrada, status terminal, conta única, campaign IDs completos e origem consistente. Não promover BOT, fonte ambígua, estado parcial ou IDs inferidos.
+4. Fazer GET das mensagens reais de resposta e conferir IDs, autor Ares, thread/pai e conteúdo completo, inclusive chunks. O cursor derivado de tempo é apenas limite de paginação, nunca um message ID observado. Preservar um recibo agregado com os IDs efetivamente retornados; não fabricar resposta API.
+5. Congelar a evidência validada no armazenamento do próprio observador, preservando o hash da fonte, sem escrever nada na fonte da campanha. Deduplicar cada combinação de destino + UTMs exatas. Só a confirmação de entrega/readback libera READY na fila.
+6. No diário autônomo CAR, ler o audit COMPLETE e seu `discord_readback` nativo já existente. Conferir a mensagem final `V3 CONCLUÍDO`; um message ID anterior de resposta PARCIAL não conclui o pedido. Nenhum callback é necessário no diário.
+7. O marco persistido `intake_settings.activation_epoch` exclui mensagens e requests históricos. Não fazer backfill, replay, campanha canário ou navegação histórica porque o leitor foi ligado. Testes com evidência antiga são apenas calibração de parser, sem jobs/navegação.
+8. Cursores, recibos e estados de intake são próprios e duráveis. Erro transitório retoma o mesmo evento; depois de possível stage parcial, reutilizar a prova já congelada e o mesmo job. Nunca repetir o POST da resposta original: o leitor NÃO publica a conclusão da criação.
 
-## Histórico supersedido — NÃO EXECUTAR a integração acoplada
+Comandos administrativos do processo separado:
 
-Os passos e o handoff abaixo são preservados apenas como histórico da versão retirada. NÃO executar stage/publish-creation nem qualquer desses preparativos na rota de pedidos. A ordem de observação e as provas do worker continuam contratadas, mas o gatilho independente ainda precisa ser validado.
-
-1. Execute criação/duplicação pelo Engine v3 da operação; termine TODO o QA/readback/postprocess existente. Guarde os IDs finais e o arquivo de prova canônico imutável. Não mude o hot path nem mantenha lease Meta enquanto observa páginas.
-2. Materialize um handoff local da fila apenas com a conta/canal/thread do pedido atual e todas as combinações únicas de destino + UTMs novas dos conjuntos, a partir dos creatives realmente lidos. A ordem é estável. Parâmetros `url_tags` sobrescrevem duplicados da Website URL conforme o contrato Meta; materialize macros somente com os IDs reais do mesmo anúncio. Nunca use UTMs da fonte, preserve todos os parâmetros aprovados e valide o gate de domínio antes de guardar qualquer URL. Não descubra/globalize outros gestores ou contas.
-3. A landing do acompanhamento é a página com a rede publicitária, nunca a quiz/chat. Registre `landing_url` e `mapping_source` somente quando a relação estiver provada por contrato/runtime read-only. Não infira o slug nem use uma URL parecida. Se o mapeamento ainda não estiver disponível, omita `landing_url`: o worker o resolverá depois da resposta, ou reportará o problema no destino definido pelo contrato. A resolução não pode atrasar a resposta normal de criação.
-4. Stage é local/durável, sem navegador, sem Meta e sem mensagem: `python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py stage --input <handoff.json>`. A fila fica `WAITING_CREATION_REPLY`; ainda é proibido abrir qualquer landing.
-5. Escreva o resumo NORMAL de conclusão do gestor em arquivo de texto, com fonte/quantidade/IDs ou números, budget, status, início e ressalvas reais. Envie essa resposta pela barreira comum: `python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py publish-creation --key <key retornada> --message-file <resumo.txt>`. Ela publica como Ares na thread original, faz GET do ID/conteúdo/autor e SÓ ENTÃO libera a fila. Não publique a conclusão uma segunda vez pela resposta final do chat. Se o ambiente exigir uma resposta final, use apenas uma confirmação curta, sem repetir o relatório.
-6. O timer separado consome a fila após a resposta confirmada. Ares não espera a observação para concluir criação e não relaciona o trigger ao horário de início. Não crie cron Hermes origin/all nem gateway hook ad hoc. Não diga ao gestor que o acompanhamento terminou antes do outbox de sucesso real.
-7. Se staging/integração falhar, preserve a criação validada, entregue seu resumo normal ao gestor e reporte somente a falha do acompanhamento ao destino `all_problem_destination_thread` do contrato, mantendo o handoff resumível. Nunca repita criação para corrigir a fila.
-
-**SUPERSedido por isolamento total:** o wrapper de conclusão e o callback `landing_followup_adapters.after_daily_reply` não integram mais a rota de pedidos. O callback foi retirado do diário CAR/CPV e o comando publish-creation foi bloqueado pelo hold. Este desenho antigo não é modelo para novos runners; nenhum runner de campanha deve usar essa barreira.
-
-### Handoff (campos obrigatórios, dados REAIS)
-
-```json
-{
-  "strategy_family": "DIRECT_TRAFFIC",
-  "creation_status": "COMPLETE_FUTURE_ACTIVE",
-  "request_id": "ID literal do request já concluído",
-  "operation": "operação exata",
-  "account_id": "ID Meta",
-  "source_channel_id": "pai real",
-  "source_thread_id": "thread original do gestor",
-  "campaign_ids": ["IDs confirmados de todas as novas campanhas"],
-  "creation_proof": "/root/mgs-agent/data/ares/meta-ads/.../readback-final.json",
-  "creation_proof_sha256": "SHA256 calculado do arquivo real",
-  "links": [{
-    "campaign_id": "ID confirmado",
-    "effective_campaign_url": "destino efetivo + parâmetros novos lidos",
-    "landing_url": "landing comprovada + query EXATA do link efetivo",
-    "mapping_source": "fonte canônica/runtime read-only da relação",
-    "destination_kind": "LANDING_PAGE"
-  }]
-}
+```text
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py activate-intake
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py intake
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py tick
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py status
 ```
 
-O exemplo acima é schema explicativo, não payload executável. Nunca substitua por IDs ou resultados inventados. `creation_proof` deve ser JSON terminal do mesmo request e conter os IDs alvo; digest errado, estado parcial, UTM duplicada/macros não resolvidas, mudança dos bytes da query, conta/canal incorretos ou quiz como landing bloqueiam o staging. Deduplicate somente combinações idênticas; conjuntos distintos não podem desaparecer. Preserve o original do readback e sua proveniência.
+`activate-intake` inicializa o marco uma única vez e o preserva em reinícios. Os comandos antigos `stage` e `publish-creation` retornam RETIRED e não podem voltar ao atendimento de pedidos.
 
-## Worker de observação (uma tentativa por execução)
+## Prioridade de recursos e fila global
 
-O consumidor é uma sessão CLI limitada do próprio Ares, com resultado técnico SOMENTE local. A fila é determinística; a decisão visual é feita pelo Ares usando capturas reais. Isto não é um detector automático de anúncio baseado apenas em iframe/slot. Provas de visibilidade não podem ser substituídas por flag de script carregado, iframe vazio, GPT inicializado, HTTP200 ou botões da própria página.
+O worker consulta, somente para leitura, a lease de turno nativa já existente. Enquanto houver um turno Discord do Ares ativo, ele aguarda; o criador não recebe nenhuma trava nova. Serviços próprios usam prioridade CPU/IO mínima e limites de recursos declarados no contrato/runtime. Não aplicar essas limitações ao gateway ou às lanes de campanha. Igualdade do código do runner prova remoção do acréscimo síncrono, não é benchmark universal de latência.
 
-1. Primeiro confira o contrato: enquanto `HELD_FOR_FULL_ASYNC_ISOLATION`, encerrar sem PC1, modelo, notificações ou retomada do acompanhamento. Quando o processo independente estiver devidamente liberado, consulte a fila e os checkpoints ativos/resumíveis AdsPower/PC1. Use a fila global já existente: não ultrapasse outro pedido anterior. Antes de qualquer input/captura operacional, adquira a lease comum `mgs-pc1-computer-use-lock.py` como Ares, usando o ID REAL da sessão e a thread de problemas. Renove antes de vencer; libere em `finally`. Se ocupado, `defer` na fila, sem tentativa nem alerta falso.
-2. Carregue `adspower-segurador-token-collector/references/pc1-remote-adspower-operations.md` e `computer-use`. Use Chrome comum no PC1, não abra perfil AdsPower/Facebook para essa visita. Preserve outras abas. Uma janela técnica anônima com uma aba-guarda vazia é permitida; cada URL/tentativa precisa de uma ABA NOVA além da guarda, nunca reutilizada. Não exponha títulos/observações pessoais. Depois de input ambíguo, recapture antes de qualquer retry. Foreground é permitido pela observação com aba ativa, mas somente após sinal de escalação do driver.
-3. Resolva a landing por evidência real antes da navegação. Não clique na quiz para chegar nela; leia sua configuração/destino publicamente ou pela fonte read-only autorizada. Passe domínio pelo gate. Use os parâmetros exatos da URL nova, sem reescrever o wrapper. Se não resolver, registre `begin` + `ERROR` com diagnóstico de mapeamento e nenhuma abertura; o outbox avisará no destino de problemas do contrato.
-4. Antes do único open, persista `begin --key ... --owner ... --index ...` usando o CLI comum. A fila grava `OPEN_INTENT` antes do side effect. Capture a janela alvo e suas abas, abra a URL em ABA NOVA e registre sua identidade real (window/tab e evidência antes/depois). Identifique a URL real e a aba ativa, não somente o texto digitado. Nunca feche aba preexistente, nunca use close-all e nunca restaure browser incerto por restart.
-5. Procure o anúncio renderizado da rede com espera limitada e rolagem de conteúdo se necessário, sem cliques nos anúncios. Se apareceu, comece o cronômetro SÓ ENTÃO. Mantenha a aba ativa e anúncio visível por pelo menos 10 segundos contínuos. Capture screenshots novos em intervalos de até 10 segundos; prefira 5. Use relógio real via ferramenta (`time.monotonic()`), não contagem mental. Se perder visibilidade/foco, reinicie a observação; nunca some trechos desconexos.
-6. Feche APENAS a aba aberta para a tentativa e confirme seu desaparecimento + preservação das outras por nova captura/estado. Só então conclua o resultado. Janela técnica/guarda de propriedade exclusiva da tarefa pode ser fechada após confirmar que nenhuma aba alheia foi incorporada. Se não puder confirmar identidade/fechamento, reporte ERROR e preserve estado para reconciliação; não tente outra URL.
-7. Primeira tentativa SEM anúncio: registre `NO_AD` + fechamento real. A fila aguarda 60 segundos completos e só então permite outra execução da MESMA URL em OUTRA aba nova. Não avise na primeira ausência. Não avance para o próximo link deste pedido durante essa espera.
-8. Segunda ausência: registre `NO_AD` com outra identidade de aba. O outbox avisa SOMENTE o destino `all_problem_destination_thread` do contrato, com pedido, conta, URL e diagnóstico. Outros erros também vão somente a esse destino, nunca à origem do gestor. Não marque como sucesso e não reabra automaticamente um intent incerto. Reconciliar a mesma tarefa/IDs e continuar somente a camada faltante; gates críticos permanecem.
-9. Sucesso de uma URL não é sucesso do lote. O outbox só publica na thread do gestor quando TODAS estiverem PASSED, exatamente: `Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 10 segundos em cada uma.` Não mencione PC1 e nunca declare cadastro GAM sem outro readback específico.
+Há UMA fila FIFO de acompanhamento para todos os gestores, contas, canais e futuros nichos, com no máximo UMA tarefa ativa no PC1; nunca um worker por gestor. A ordem é a de entrada das conclusões elegíveis. G001 e G006 podem criar simultaneamente pelo fluxo normal, mas suas visitas técnicas aguardam na fila única. A tarefa anterior mantém a vez durante o retry de 60s e conclui/fecha suas abas antes da próxima. Fechamento incerto bloqueia somente acompanhamento para readback, não campanhas.
 
-### Comandos internos do consumidor
+A fila transacional não substitui a lease física cross-agent: Zeus, Ares e outras operações autorizadas podem usar o mesmo desktop. Antes do primeiro input, conferir fila/checkpoints PC1/AdsPower e adquirir `mgs-pc1-computer-use-lock.py` com o ID REAL da sessão. Renovar antes de expirar e liberar em finally; nunca contornar dono ativo ou inferir liberdade por ausência momentânea de input.
+
+## Observação: uma tentativa por execução
+
+1. Ler o contrato ativo e o job recebido. Carregar `computer-use` e a referência de operações PC1 da skill AdsPower. Se PC1 estiver ocupado, `defer` sem começar tentativa e sem alerta falso.
+2. Identificar a LANDING PAGE correspondente por fonte canônica/runtime read-only, nunca a quiz/chat. Não inventar slug nem clicar na quiz para chegar nela. Validar domínio antes de guardar/abrir; manter todos os parâmetros exatos da campanha/conjunto novos. `url_tags` tem a precedência validada no link efetivo. Macro não resolvida exige IDs reais da mesma evidência, não valor inventado.
+3. Usar Chrome comum no PC1 sem abrir perfil AdsPower/Facebook para essa visita. Uma janela técnica anônima com aba-guarda vazia pode preservar a identidade das abas. Cada URL e cada retry usam uma ABA NOVA além da guarda; nunca reutilizar a anterior. Preservar janelas/abas alheias e não expor títulos pessoais.
+4. Antes do open, persistir `begin`/OPEN_INTENT. Após entrada ambígua, recapturar antes de qualquer retry; seguir a escalação do driver, nunca repetir um input confirmado. Foreground para aba ativa só após o sinal aplicável do driver.
+5. Confirmar ANÚNCIO DA REDE realmente renderizado. Iframe vazio, script/GPT carregado, HTTP200 e botões da própria página não bastam. Não clicar no anúncio, trocar proxy/fingerprint, desativar bloqueador ou contornar CAPTCHA/IVT/autenticação.
+6. Somente após a confirmação visual iniciar **10 segundos contínuos**, com a aba ativa e anúncio visível. Confirmar que a janela/aba de propriedade da tarefa está efetivamente à frente, não apenas capturável em background. Após o sinal de escalação do driver, o `bring_to_front` autorizado pela observação pode manter esse alvo em foreground; não substituir pela janela pessoal/preexistente. Usar relógio real por ferramenta e pelo menos três screenshots distintos, preferindo amostras em 0/5/10 segundos. Timestamps reais dos arquivos e monotônicos devem cobrir >=10s; não somar trechos desconexos. Se perder visibilidade/foco, não declarar sucesso.
+7. Fechar somente a aba da tentativa e confirmar desaparecimento + preservação das demais. Só então registrar o resultado e liberar outra URL. Fechamento/identidade incertos exigem erro e reconciliação, não outro open. Fechar guarda/janela técnica somente com propriedade exclusiva comprovada.
+8. Primeira ausência de anúncio: NO_AD com fechamento real, sem aviso; fila espera 60s completos e abre a MESMA URL em OUTRA aba nova. Não avançar para o link seguinte durante essa espera.
+9. Segunda ausência: NO_AD e incidente somente no destino canônico de problemas. Outros problemas também vão a esse destino, com pedido/URL permitida/diagnóstico, nunca ao gestor. Não marcar link pendente como concluído.
+10. Só TODAS as URLs PASSED liberam a mensagem de sucesso exata do contrato na thread do gestor: `Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 10 segundos em cada uma.` Não mencionar PC1 e nunca afirmar cadastro GAM sem readback próprio do GAM.
+
+## Comandos e provas do worker
 
 ```text
 python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py show --key <key>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py begin --key <key> --owner <owner do dispatcher> --index <índice> --pc1-session-id <ID real desta sessão>
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py begin --key <key> --owner <owner> --index <índice> --pc1-session-id <ID real desta sessão>
 python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py defer --key <key> --owner <owner>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <índice> --pc1-session-id <ID real desta sessão> --result PASS|NO_AD|ERROR --evidence <arquivo-real.json>
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <índice> --pc1-session-id <ID real desta sessão> --result PASS|NO_AD|ERROR --evidence <JSON real>
 ```
 
-`defer` é somente pré-open, nunca após OPEN_INTENT. Uma execução observa uma única tentativa e sai; timer faz a espera/retry sem sleeper longo na conversa. Não execute publish-creation/result de outro pedido.
+PASS exige `observed_url` exata, `resolved_landing_url` + `mapping_source` se resolvida no worker, `new_tab_identity` real, `tab_closed_verified=true`, `other_tabs_preserved=true`, `closed_screenshot`, `network_ad_confirmed=true`, descrição do anúncio visto e samples novos com `monotonic_seconds`, `ad_visible`, `tab_active`, `screenshot`. O validador confere tempo real, calcula hashes e preserva imagens em artifacts protegidos; não enviar anexos sem pedido.
 
-### Prova de resultado
+NO_AD exige identidade real da aba, fechamento/preservação confirmados e screenshot de fechamento. ERROR exige diagnóstico humano seguro e provas/estado parcial disponíveis. `no_tab_opened=true` só quando realmente nenhum open ocorreu. Não inventar IDs, tempos, visibilidade ou fechamento.
 
-Para PASS: JSON com `observed_url`, opcional `resolved_landing_url` + `mapping_source` se resolvido no worker, `new_tab_identity` real, `tab_closed_verified=true`, `other_tabs_preserved=true`, `closed_screenshot` real, `network_ad_confirmed=true`, `ad_description` descritiva do criativo visto e `samples` de pelo menos três capturas distintas com `monotonic_seconds`, `ad_visible=true`, `tab_active=true`, `screenshot`. Os timestamps reais dos arquivos também precisam abranger >=10s sem lacuna >12s. Não invente observações, identificadores ou tempos. A fila calcula hashes e preserva imagens revisadas em artifacts protegidos; não manda anexos ao chat.
+`begin`, `result` e `reconcile` conferem a lease física e o HERMES_SESSION_ID real. NEEDS_RECONCILIATION impede novos observadores. Após readback e fechamento seguro, usar `reconcile --key ... --index ... --pc1-session-id ... --evidence ...`: libera os demais links, mas nunca transforma a URL incerta em PASSED ou a reabre cegamente.
 
-Para NO_AD: identidade real da aba nova + `tab_closed_verified`, `other_tabs_preserved`, `closed_screenshot`. Para ERROR: diagnóstico humano exato, sem trace/path/credencial, mais quaisquer provas/estado parcial disponíveis; use `no_tab_opened=true` SOMENTE se realmente nenhum open ocorreu. Não afirmar fechamento/URL visibilidade quando incertos.
+## Durabilidade, incidentes e validação
 
-`begin`, `result` e `reconcile` verificam mecanicamente que a lease física pertence ao Ares e ao mesmo `HERMES_SESSION_ID` real. Um estado NEEDS_RECONCILIATION bloqueia novos observadores; após readback e fechamento seguro da aba incerta, usar `reconcile --key ... --index ... --pc1-session-id ... --evidence ...`. Essa recuperação libera as demais URLs, mas mantém a afetada pendente/ATTENTION; nunca converte incerteza em sucesso nem reabre a URL às cegas. Preservar o incidente para recuperar somente a camada comprovadamente faltante.
+SQLite WAL/FULL, job por operação/conta/request, intake/cursor/recibos próprios, OPEN_INTENT antes de input e outbox idempotente com ID/nonce/GET. POST de notificação ambíguo é reconciliado antes de qualquer retry; nunca publicar outra conclusão da criação. Falha do intake retoma o evento após backoff; diagnóstico fica local e aviso curto sai somente no destino de problemas. Antes de enviar um alerta ainda PREPARED, reconciliar o estado: recuperação já confirmada cancela o alerta não enviado por compare-and-set; alerta com POST incerto exige readback e eventual resolução, nunca reenvio cego ou aviso obsoleto. Nenhum Cronjob Response, PID, path interno, trace ou cabeçalho automático chega ao gestor.
 
-## Durabilidade e manutenção
+Testar: entrega antes de READY, origem real da mesma sessão/turno, DB nativo mecanicamente read-only, GET externo, chunks, resets, cursor com timestamps iguais, crash entre stage e recibo, ausência de duplicação/repost, exclusão de BOT/backfill, duas conexões simultâneas na fila global, espera do segundo gestor durante retry, 10s aceitos/9s rejeitados, fechamento incerto e sucesso somente integral.
 
-SQLite WAL + FULL, job imutável por operação/conta/request, links indexados, estados/intent e outbox transacionais. Um consumidor global, lease física cross-agent e IDs de mensagem com GET. POST ambíguo é reconciliado por ID/nonce, nunca repetido cegamente. Crash deixa NEEDS_RECONCILIATION e avisa no destino de problemas do contrato, sem replay de aba ou campanha. Saída CLI/stdout/log é local; nenhum `Cronjob Response`, job_id, PID ou trace chega à conversa. Sem fila pendente, o timer não abre navegador nem inicia modelo.
-
-## Validação e comunicação por camada
-
-1. Exercitar a máquina de estados e o outbox sem rede com `python3 -m unittest discover -s /root/mgs-agent/tests -p test_direct_traffic_landing_followup.py -v`. Cobrir resposta antes de open, tentativa silenciosa, 60s completos, aba diferente no retry, fechamento incerto, crash, POST ambíguo, isolamento de conta/canal e sucesso somente com cobertura integral.
-2. Rodar a regressão dos adapters e do Engine pelo test runner/interpreter declarados pelo projeto. Se uma verificação falhar, comparar o mesmo teste com a baseline anterior à mudança antes de classificá-lo como preexistente. Documentar separadamente aprovados, falhos e desmarcados; excluir um teste da seleção não o transforma em aprovado. Não mudar regra de campanha ou credencial para satisfazer um assert histórico fora do escopo.
-3. Conferir isolamento real do consumidor: nenhum import/callback/wrapper/etapa adicional nos runners de criação e nenhum preparo do acompanhamento na sessão de pedidos. Comparar o runner restaurado com a baseline anterior, testar ausência de dependência e validar separadamente o gatilho externo pós-resposta. Timer ativo, fila vazia e smoke CLI não provam essa integração nem preservação universal de latência. Congelar a prova de criação em arquivo do próprio observador, sem escrever no audit/state da campanha. Não liberar o acompanhamento até provar essa fronteira.
-4. Distinguir o ensaio técnico de navegador da observação produtiva. Abrir/fechar uma aba vazia comprova apenas transporte, propriedade e cleanup; iframe, script carregado e testes com mocks não comprovam anúncio visível. Capturas reais e tempo contínuo sustentam a observação; somente readback próprio do GAM sustenta cadastro das UTMs.
-5. Quando o primeiro teste produtivo tiver sido reservado ao pedido natural de um gestor, concluir a instalação técnica sem criar campanha canário ou abrir links históricos. Informar explicitamente que a validação ponta a ponta permanece para esse pedido, sem apresentar o fluxo inteiro como já observado em produção.
+Conferir quatro camadas separadas: (1) código do criador preservado, (2) intake/timers/limites ativos com readback, (3) observação visual real, (4) cadastro GAM específico. Mocks, timer ativo e parser de prova antiga não comprovam anúncio/GAM. O primeiro teste visual produtivo segue sendo o pedido natural de um gestor anunciado por Rodolfo; não criar canário nem abrir links históricos para adiantar essa etapa.

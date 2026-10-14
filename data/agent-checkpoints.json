@@ -1293,12 +1293,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-INTAKE-1559974994967134289",
-      "next_step": "Estabilizar IDs, baixar, revisar, congelar plano e executar READY/LEGACY com readback",
+      "next_step": "Consumir conclusão do executor, verificar todos IDs/checksums e reserva, limpar mídia transitória após auditoria",
       "objective": "Tratar e mover criativos Kelly SHEIN US EN preservando originais e reserva",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559974994967134289/plan.json",
-      "state": "inventário inicial read-only: 38 png 1080x1920; estabilização e revisão pendentes",
+      "state": "38 png estáveis, revisados e clean=true; plano congelado com ids/hashes/names; zero duplicatas; execução iniciada",
       "thread_id": "1559974994967134289",
-      "updated_at": "2026-10-14T17:05:04+00:00"
+      "updated_at": "2026-10-14T17:12:44+00:00"
     },
     {
       "agent": "ares",
@@ -1483,12 +1483,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Fechar recuperacao e resource limits, validar novamente e ativar apenas intake/consumer separados com marco sem backfill; atualizar contrato, skills e REPORT-INFRA.",
-      "objective": "Concluir leitor externo pos-resposta sem nenhuma mudanca na rota de pedidos",
-      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/independent-intake;data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
-      "state": "implementacao externa em validacao: leitor nativo somente mode=ro observa delivery_obligations delivered e resposta final da mesma sessao/turno, confirma get discord, compila provas ja salvas e alimenta fila propria. 68 testes fila+intake passaram. get real de resposta entregue confirmado; parsers car3/shein1 aprovados em evidencia historica, zero enfileiramento/backfill/navegacao/meta. criadores permanecem byte-iguais a baseline.",
+      "next_step": "Fechar REPORT-INFRA/readback e avisar conclusao aqui. Rodolfo fara primeiro pedido real de gestor para validar anuncios; nao criar canario, nao fazer backfill e nao declarar cadastro GAM. Recuperar mesmo evento/request em falhas sem reabrir criacao.",
+      "objective": "Pedido inalterado ate resposta nativa; depois acompanhamento externo FIFO global PC1 com10s",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/independent-intake/verification.json;discord:1559932317861158993#1559969789164920903",
+      "state": "gatilho externo concluido e ativo: status active_for_new_requests; intake read-only de entrega nativa delivered + get real da resposta, provas salvas car/shein, sem callback/wrapper/post de criacao ou chamadas meta. dois timers enabled/active, limites cpu/memoria/io somente no acompanhamento. worker aguarda turno discord nativo ativo sem adicionar trava ao criador. diario byte-identico a baseline original. get real e parsers car3/shein1 validados sem jobs/navegacao historicos. 208 testes selecionados pass;2 checkscpv anteriores separados; fila real vazia e marco sem backfill. mantidos10s, aba nova, retry60s e incidentes no destino canonico.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-14T16:59:24+00:00"
+      "updated_at": "2026-10-14T17:19:59+00:00"
     },
     {
       "agent": "zeus",
@@ -5862,5 +5862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T17:05:04+00:00"
+  "updated_at": "2026-10-14T17:19:59+00:00"
 }
