@@ -256,6 +256,10 @@ Conclusão: recomendação ou write usa dados do mesmo período, moeda e chave d
 
 ## Discord
 
+### Acompanhamento comum das landing pages
+
+Em toda criação/duplicação concluída SHEIN, carregar `direct-traffic-cbo-operations/references/landing-followup.md` e aplicar a barreira comum: resposta de criação confirmada PRIMEIRO; acompanhamento separado depois, sem esperar horário de início nem atrasar o gestor. Única herança genérica autorizada neste ponto: contrato `data/ares/meta-ads/policies/direct-traffic-landing-followup.json` aprovado por Rodolfo `1559951763019145247`. Não herdar lifecycle/budget/evento CAR. URL de observação é landing comprovada, nunca quiz. Problemas somente `1559932317861158993`; mensagem de sucesso exata ao gestor somente após todas as provas. Não comunicar problemas deste acompanhamento na origem, diferentemente de falhas da própria criação.
+
 ### Fechamento de criação e duplicação
 
 Após validar o lote inteiro, responda com confirmação curta de fonte + quantidade + conta e bullets de números novos, orçamento diário por campanha e total do lote, início no fuso verificado, lance efetivamente herdado/aplicado, status e quantidade real de anúncios validados. Separe a ressalva de posts novos/prova social e qualquer normalização de público comprovada; não declare cópia literalmente idêntica quando houver omissão de flags. Use as árvores finais e a prova de QA como fonte, não os números previstos pelo dry-run nem a cardinalidade do pedido anterior. Data futura com status ACTIVE significa habilitada/programada, não entrega já comprovada.

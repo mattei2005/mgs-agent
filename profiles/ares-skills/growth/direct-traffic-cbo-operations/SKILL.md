@@ -58,6 +58,10 @@ Toda criação/clonagem nova usa exclusivamente o executor central v3. Esta skil
 
 Conclusão antes do hot path: operação, manifest, mídia pre-stageada, source, budget, status e horário estão fechados; durante o hot path não existe `Searching`, patch, teste, criação de cron ou releitura global de portfólio.
 
+## Acompanhamento comum pós-resposta — obrigatório
+
+Em toda criação/duplicação concluída de tráfego direto (CAR, SHEIN e futuros nichos; nunca BOT/Messenger), carregar `references/landing-followup.md`. Fonte única: `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`, aprovação Rodolfo `1559951763019145247`. Responder PRIMEIRO ao gestor pela barreira de conclusão com GET; somente depois liberar a fila durável de observação da LANDING, não quiz, no PC1. Uma URL/aba nova por vez, 20 segundos reais de anúncio visível e aba ativa, fechamento confirmado, primeira ausência silenciosa + 60s + nova aba, segunda ausência/outros problemas exclusivamente na thread `1559932317861158993`. Só todas PASSED liberam o aviso exato ao gestor, sem PC1 ou alegação GAM. Não alterar campaign writer, orçamento, estratégia, início ou isolamento. O wrapper da referência é obrigatório no fluxo comum; não presumir cobertura automática de runners externos sem job/ack na fila.
+
 ## Fluxo operacional
 
 ### 1. Classificar a estratégia

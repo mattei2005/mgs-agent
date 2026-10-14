@@ -302,9 +302,9 @@ def preserve_evidence(e,key,idx,attempt):
     if e.get('closed_screenshot'):paths.append((e,'closed_screenshot'))
     paths.extend((x,'screenshot') for x in e.get('samples',[]))
     if paths:destination.mkdir(parents=True,exist_ok=True,mode=0o700)
-    for container,field in paths:
+    for number,(container,field) in enumerate(paths):
         item=file_evidence(container[field]);original=Path(item['path'])
-        target=destination/(item['sha256']+original.suffix.lower())
+        target=destination/(f'{number:03d}-'+item['sha256']+original.suffix.lower())
         if not target.exists():shutil.copy2(original,target)
         os.chmod(target,0o600)
         if hashlib.sha256(target.read_bytes()).hexdigest()!=item['sha256']:raise ValueError('durable evidence copy mismatch')

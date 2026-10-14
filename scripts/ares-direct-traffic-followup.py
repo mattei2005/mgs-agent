@@ -14,6 +14,15 @@ from pathlib import Path
 from ares_campaign_v3.landing_followup import Queue, Discord, ROOT, BASE, publish_creation, worker_prompt
 
 
+def require_pc1_lease(session_id):
+    if not session_id or session_id!=os.environ.get('HERMES_SESSION_ID'):
+        raise ValueError('real current observer session ID required')
+    r=subprocess.run([sys.executable,str(BASE/'scripts/mgs-pc1-computer-use-lock.py'),'status'],capture_output=True,text=True,timeout=20)
+    state=json.loads(r.stdout) if r.returncode==0 else {}
+    if not state.get('locked') or state.get('agent')!='ares' or state.get('session_id')!=session_id:
+        raise ValueError('exclusive physical PC1 lease not held by this observer')
+
+
 def flush(q,discord):
     for row in q.db.execute("SELECT key FROM messages WHERE state!='VERIFIED' ORDER BY created").fetchall():
         try:
@@ -66,11 +75,14 @@ def tick(q):
             env.pop(name,None)
         env['HERMES_HOME']='/root/.hermes/profiles/ares'
         env['HERMES_CUA_DRIVER_CMD']=str(BASE/'scripts/mgs-pc1-cua-driver-ssh.sh')
+        policy=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text())
+        if policy.get('provider')!='openai-codex':raise ValueError('approved OAuth worker provider unavailable')
         executable=shutil.which('hermes')
         with (directory/'worker.log').open('w') as log:
             try:
                 if not executable:raise RuntimeError('Hermes CLI unavailable')
                 completed=subprocess.run([executable,'-p','ares','chat','--query-file',str(prompt),
+                    '--provider',policy['provider'],'--model',policy['model'],
                     '--source','tool','--max-turns','40','--run-budget','480','--oneshot','-Q','--pass-session-id'],
                     env=env,cwd=BASE,stdout=log,stderr=subprocess.STDOUT,timeout=540)
                 rc=completed.returncode
@@ -96,16 +108,23 @@ def main():
     s.add_parser('status');s.add_parser('tick')
     for command in ('begin','defer','result'):
         a=s.add_parser(command);a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
-        if command!='defer':a.add_argument('--index',type=int,required=True)
+        if command!='defer':
+            a.add_argument('--index',type=int,required=True)
+            a.add_argument('--pc1-session-id',required=True)
         if command=='result':
             a.add_argument('--result',choices=['PASS','NO_AD','ERROR'],required=True)
             a.add_argument('--evidence',type=Path,required=True)
     args=p.parse_args();q=Queue(args.root)
+    if args.command in {'stage','tick'}:
+        policy=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text())
+        if policy.get('status')!='ACTIVE_FOR_NEW_REQUESTS' or policy.get('approval_message_id')!='1559951763019145247':
+            return {'state':'POLICY_DISABLED','side_effect':'none'}
     if args.command=='stage':return {'key':q.stage(json.loads(args.input.read_text())),'state':'WAITING_CREATION_REPLY'}
     if args.command=='publish-creation':return publish_creation(q,args.key,args.message_file.read_text().strip(),Discord())
     if args.command=='show':return q.job(args.key)
     if args.command=='status':return {'jobs':[dict(x) for x in q.db.execute('SELECT state,count(*) AS count FROM jobs GROUP BY state')], 'pending_notifications':q.db.execute("SELECT count(*) FROM messages WHERE state!='VERIFIED'").fetchone()[0]}
     if args.command=='tick':return tick(q)
+    if args.command in {'begin','result'}:require_pc1_lease(args.pc1_session_id)
     if args.command=='begin':q.begin(args.key,args.owner,args.index)
     elif args.command=='defer':q.deferred(args.key,args.owner)
     elif args.command=='result':q.result(args.key,args.owner,args.index,args.result,json.loads(args.evidence.read_text()))

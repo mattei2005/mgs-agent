@@ -31,6 +31,10 @@ Use quando o pedido envolver:
 
 Não use para configurar quiz, SMS Funnel, ChatPion, WordPress, pixel crítico, billing ou credenciais. Esses itens exigem rota e autorização próprias.
 
+## Acompanhamento comum após a resposta
+
+Toda criação/duplicação CAR concluída aplica `direct-traffic-cbo-operations/references/landing-followup.md`, contrato único `data/ares/meta-ads/policies/direct-traffic-landing-followup.json` aprovado por Rodolfo `1559951763019145247`. A resposta de criação com readback vem PRIMEIRO; depois, fila separada observa landing comprovada (nunca quiz), sem depender de 00:30 ou bloquear o gestor. Cada combinação landing+UTMs novas em aba nova, 20s visíveis, fechamento confirmado, primeira ausência silenciosa/60s/nova aba e problemas somente na thread `1559932317861158993`. Só todas PASSED permitem o aviso aprovado ao gestor. Integração pela barreira comum; runners autônomos só estão cobertos quando registram job/ack reais, sem inferir hook em toda chamada do Engine. Não altera first-delivery, budgets, estratégia ou schedule.
+
 ## Executor de campanhas
 
 Toda criação/clone desta vertical materializa o contrato operacional em `meta-campaign-engine-v3`. Esta skill governa a estratégia Vehicle Finance; não cria outro runner. O v3 é a única rota de campanha autorizada sob guards de `development_access`. O Campaign Engine v2 está `RETIRED_DO_NOT_USE`: não é fallback nem rollback; seus arquivos históricos podem permanecer apenas para auditoria, sem cron ou execução.
