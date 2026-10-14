@@ -295,6 +295,9 @@ def verify_media_ads(desired, source, live, warnings):
             raise RouteBlocked('new-media tracking mismatch')
         if desired['mode'] == 'from_zero_prestaged' and vd.get('video_id') != expected['media']['vertical_video_id']:
             raise RouteBlocked('direct creation media ID mismatch')
+        if desired.get('reference') and cp.get('degrees_of_freedom_spec'):
+            from .shein_reference import verify_degrees
+            verify_degrees(cr.get('degrees_of_freedom_spec'), cp['degrees_of_freedom_spec'])
     return warnings
 
 
@@ -688,7 +691,7 @@ def _readback(common, token, campaign_id):
     live = _batch(common, token, [
         {'name': 'campaign', 'path': campaign_id, 'params': {'fields': 'id,account_id,name,status,effective_status,daily_budget,bid_strategy,start_time'}},
         {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,bid_amount,bid_constraints,bid_strategy,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
-        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags}', 'limit': 50}}])
+        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     for key in ['adsets', 'ads']:
         _complete_edge(live[key])
     return live

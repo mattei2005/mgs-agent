@@ -22,6 +22,7 @@ Escopo implementado:
 - Sem pedido de troca de Page, herdar a Page e identidade Instagram da referência exata. Page observada no onboarding não impõe exclusividade. A identidade fonte não é aplicada a outra Page.
 - Configuração compatível viva de público, atribuição e identidade regional é preservada; ausência de configuração material bloqueia. Country de categoria especial ausente com categories=[] é normalizado para [] apenas no alvo.
 - Website URL/copy expressos permanecem literais. URL tags ficam vazios para não sobrepor a Website URL solicitada.
+- Features individuais do creative são preservadas; somente standard_enhancements descontinuado é removido. QA e pré-ativação comparam os campos originais; defaults novos só podem ser OPT_OUT. O GET existente inclui essa evidência, sem adicionar chamadas ou alterar as rotas dos pedidos comuns.
 
 ## Mídia e recuperação
 
@@ -47,7 +48,7 @@ Evidências: `data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef54
 - `acceptance-proof.json`: contas/IDs/configuração e Drive real; execução offline claramente distinguida.
 - `OFFLINE-template-NOT-EXECUTABLE.json`: template não selado com vídeos sintéticos; nunca usar para execute.
 - `verify-acceptance.py`: reprodução de GETs e compiler/core offline, sem writer live.
-- `regressions.log`: 294 testes e 164 subtestes aprovados, incluindo Chromium local isolado e recuperação.
+- `regressions.log`: 295 testes e 164 subtestes aprovados, incluindo Chromium local isolado e recuperação.
 - `meta-capability-notes.md`: fontes Meta e limites da documentação.
 
 ## Retomada operacional — NÃO executada nesta tarefa técnica
@@ -64,6 +65,6 @@ Evidências: `data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef54
 
 ## Revisão/publicação procedural
 
-A execução one-shot proíbe editar skills. Nenhuma skill/memória foi alterada. O revisor deve promover este procedimento para `direct-traffic-shein-operations/references/general-campaign-fast-route.md` e referenciá-lo em `meta-campaign-engine-v3`, substituindo explicitamente o diagnóstico antigo de capacidade ausente e preservando os limites de serving/lineage. O requisito de atualização das skills permanece pendente de revisão; a tarefa não foi marcada como integralmente concluída.
+A execução one-shot não alterou skills/memória e deixou a publicação procedural para a sessão responsável. Essa pendência foi resolvida na revisão foreground: o procedimento foi publicado em `direct-traffic-shein-operations/references/general-campaign-fast-route.md` e `meta-campaign-engine-v3/SKILL.md`, supersedendo explicitamente o diagnóstico de capacidade ausente e preservando os limites de aceitação Meta/serving. Readback das duas skills e 63 testes de regressão/referência passaram na revisão. Prova adicional: `data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef547/foreground-review.json`. A criação/ativação real da campanha continua sendo etapa operacional separada, não executada nesta manutenção.
 
 Não houve commit/push manual; o auto-commit existente versionou parte das alterações durante o trabalho. Nenhum arquivo alheio ao escopo foi revertido.

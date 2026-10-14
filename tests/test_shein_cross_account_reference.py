@@ -239,4 +239,18 @@ class ReferenceTests(unittest.TestCase):
             else:s['adset'].pop(field)
             with self.assertRaises(ValueError):ref.require_binding(r,s,a['shein_profile'],a['shein_reference_profile'])
 
+    def test_individual_creative_features_preserved_and_drift_blocked(self):
+        r,s,a,_,_=fixture()
+        features={'enhance_cta':{'enroll_status':'OPT_IN'},'text_optimizations':{'enroll_status':'OPT_OUT'},'standard_enhancements':{'enroll_status':'OPT_IN'}}
+        s['ads'][0]['creative']['degrees_of_freedom_spec']={'creative_features_spec':features}
+        cp=general.build(r,s,1,a)['campaigns'][0]['ads'][0]['creative_payload']
+        expected=cp['degrees_of_freedom_spec']
+        self.assertEqual(expected['creative_features_spec'],{k:v for k,v in features.items() if k!='standard_enhancements'})
+        ref.verify_degrees(expected,expected)
+        actual=copy.deepcopy(expected);actual['creative_features_spec']['new']={'enroll_status':'OPT_OUT'};ref.verify_degrees(actual,expected)
+        actual['creative_features_spec']['new']={'enroll_status':'OPT_IN'}
+        with self.assertRaises(ValueError):ref.verify_degrees(actual,expected)
+        actual=copy.deepcopy(expected);actual['creative_features_spec']['enhance_cta']={'enroll_status':'OPT_OUT'}
+        with self.assertRaises(ValueError):ref.verify_degrees(actual,expected)
+
 if __name__=='__main__':unittest.main()

@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1560010597385506986",
-      "next_step": "Revisar docs/ares-shein-cross-account-reference.md e promover procedimento nas skills. Retomada pelo mesmo request usando reference-preflight --input data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef547/reference-request.json --dry-run, depois prepare-media e campaign com request-ready.json conforme comandos exatos do documento. Nao executar canario por esta manutencao; preservar SLA e exigir review explicito de ativacao tardia na thread via shein_continuation, sem novos requests.",
-      "objective": "Criar Escalatepower G002 campanha 01 referenciada em Yolokfx G002 C129 com dois videos selecionados, URL e copy literais, COCAP USD0.90, budget herdado e inicio imediato",
+      "next_step": "Retomar o mesmo request pela rota central conforme docs/ares-shein-cross-account-reference.md: preflight fresco, prepare-media dos dois arquivos, campaign dry-run e construção PAUSED/QA global/readback. Relógio original preservado; antes de ativação após SLA, obter review explícito elegível na origem via shein_continuation. Não usar template offline nem criar request substituto.",
+      "objective": "Criar Escalatepower G002 campanha 001 com referência read-only Yolokfx G002 C129, dois vídeos selecionados, URL/copy literais, COCAP USD0.90 e budget herdado",
       "source": "docs/ares-shein-cross-account-reference.md",
-      "state": "technical_implementation_verified_awaiting_review: task t_37bef547; 294 tests +164 subtests passed; live read-only source/target/drive verified; slot001, usd50/day and bid90 offline; zero live objects/uploads/reservations. original source message 1560010597385506986/e2e retained; live api acceptance and serving remain unverified. skill publication pending review; no skill edits in this one-shot run.",
+      "state": "technical_route_implemented_verified_and_skills_published: pendência do worker resolvida na sessão responsável; 11 hashes conferidos, diff e módulo novos revisados, 63 testes foreground ok e reference-preflight live read_only ok slot001/usd50. zero campanhas/uploads/reservas nesta manutenção; aceitação de write meta e serving não comprovados.",
       "thread_id": "1558126133294399569",
-      "updated_at": "2026-10-14T19:58:33+00:00"
+      "updated_at": "2026-10-14T20:10:28+00:00"
     },
     {
       "agent": "ares",
@@ -5872,5 +5872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T19:58:33+00:00"
+  "updated_at": "2026-10-14T20:10:28+00:00"
 }

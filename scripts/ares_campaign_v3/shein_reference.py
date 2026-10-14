@@ -118,3 +118,21 @@ def receipt(source, reference):
             'adset_id': source['adset']['id'], 'ad_ids': [str(a['id']) for a in source['ads']],
             'language': reference['language'], 'page_id': reference['page_id'], 'access': 'READ_ONLY',
             'lineage_route': 'direct_ad_create_with_source_ad_id'}
+
+
+def creative_degrees(creative):
+    degrees = copy.deepcopy(creative.get('degrees_of_freedom_spec') or {})
+    degrees.get('creative_features_spec', {}).pop('standard_enhancements', None)
+    return degrees
+
+
+def verify_degrees(actual, expected):
+    """Preserve original individual features; new API defaults may only OPT_OUT."""
+    actual = copy.deepcopy(actual or {}); expected = copy.deepcopy(expected or {})
+    observed = actual.pop('creative_features_spec', {})
+    wanted = expected.pop('creative_features_spec', {})
+    if any(actual.get(k) != v for k, v in expected.items()):
+        raise ValueError('reference creative degrees state drift')
+    if (any(observed.get(k) != v for k, v in wanted.items())
+            or any(v != {'enroll_status': 'OPT_OUT'} for k, v in observed.items() if k not in wanted)):
+        raise ValueError('reference individual creative feature drift')

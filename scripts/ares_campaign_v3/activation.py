@@ -85,6 +85,11 @@ def validate_live(live, expected, spec, request_id=None):
                         raise ValueError('activation requested bid delta mismatch')
             if kind=='ads':
                 cr=row.get('creative') or {};ocr=original.get('creative') or {}
+                if spec.reference:
+                    slot = next(a for a in spec.ads if a.name == row['name'])
+                    if slot.creative_payload.get('degrees_of_freedom_spec'):
+                        from .shein_reference import verify_degrees
+                        verify_degrees(cr.get('degrees_of_freedom_spec'), slot.creative_payload['degrees_of_freedom_spec'])
                 for field in ['id','object_story_id','effective_object_story_id','url_tags','contextual_multi_ads']:
                     if cr.get(field)!=ocr.get(field):raise ValueError('activation creative/post/copy/tracking drift')
                 if stable_story(cr.get('asset_feed_spec')) != stable_story(ocr.get('asset_feed_spec')) or cr.get('instagram_user_id') != ocr.get('instagram_user_id'):
@@ -98,7 +103,7 @@ def validate_live(live, expected, spec, request_id=None):
 def read_tree(engine,bundle,transport,cid,stage):
     operations=[BatchOperation('campaign','GET',cid+'?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time',kind='readback'),
         BatchOperation('adsets','GET',cid+'/adsets?fields=id,name,bid_amount,bid_constraints,bid_strategy,status,configured_status,start_time,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50',kind='readback'),
-        BatchOperation('ads','GET',cid+'/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags}&limit=50',kind='readback')]
+        BatchOperation('ads','GET',cid+'/ads?fields=id,name,status,configured_status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags,degrees_of_freedom_spec}&limit=50',kind='readback')]
     rows=engine._batch(bundle,transport,operations,stage)
     if len(rows)!=3 or any(r.code!=200 for r in rows):raise ValueError('activation readback incomplete')
     for row in rows:

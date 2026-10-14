@@ -63,7 +63,7 @@ Modos suportados pelo compiler/core:
 
 - `pure_clone`: preservar estrutura, mídia, copy, lineage, Ad setup e localização do tracking da fonte. Create ad usa `source_definition_two_phase`, com definição completa e posts novos; não converter silenciosamente em Use existing post. Preservação expressa de posts só é aceita quando compatível com o destino/tracking exigido, nunca como prioridade automática sobre a duplicação correta.
 - `clone_prestaged`: copiar shell e anúncios por lineage, com assets novos pre-stageados na conta exata; 1–5 ads por campanha.
-- `from_zero_prestaged`: shell do zero nos edges diretos; três ads por campanha; source campaign/adset IDs proibidos no executor; somente lineage de ad quando exigida pela conta. Uma referência interna de copy/estratégia pode ser lida sem transformar o modo em clone.
+- `from_zero_prestaged`: shell do zero nos edges diretos; três ads por campanha no fluxo comum, ou 1–5 na referência explícita entre contas descrita abaixo; source campaign/adset IDs proibidos nos shells do executor; somente lineage de ad quando exigida pela conta. Referência de copy/configuração é read-only e não transforma a criação nova em clone.
 
 Quantidade 1–100: um manifest, números sequenciais e bundles 2+2+…+1 pelo core. Budget é por campanha. Para toda quantidade, inclusive 1, `shein_batch_activation` mantém a criação e QA semântico/mídia renderizada/pós-processamento do pedido inteiro PAUSED; somente depois da barreira chama a fase central de ativação se o pedido já autorizou ACTIVE. O status original fica no target manifest selado e o request não é reescrito. PAUSED não ativa. Esta política supersede a versão anterior limitada a lotes 2+. Falha durante a ativação retoma somente IDs/status pendentes sem recriar campanhas nem reativar nós já corretos. Não montar manifests ad hoc ou pesquisar scripts durante o pedido; materializar apenas intenção e usar o runner.
 
@@ -83,7 +83,33 @@ Quando a Meta rejeitar a mudança de MAXVOL para COCAP/BIDCAP com `100/1885924` 
 
 Fonte canônica: `SHEIN-US-DIRECT.json#/cross_account_reference_policy`. Rodolfo autorizou esse padrão para todos os gestores SHEIN: conta de destino vazia não exige uma campanha prévia e pode usar uma campanha exata de outra conta autorizada como referência read-only para uma criação nova. Não pedir nova aprovação de Rodolfo por ser referência entre contas; validar a autoridade e os ativos de origem e destino separadamente, dentro dos limites dos canais/partições. Preservar a campanha-fonte e aplicar somente na nova campanha os deltas expressos de mídia, copy, destino, lance, budget e início; demais parâmetros compatíveis vêm da API viva, não de defaults CAR ou snapshots.
 
-Distinguir autorização de suporte técnico: verificar a capacidade da rota central antes de upload/write. O intake/compiler inspecionado exige fonte na conta de destino e não aceita `source_account`; isso é lacuna técnica, não falta de autorização do gestor. Não falsificar account_id da referência, criar campanha-fonte na conta vazia, omitir o destino literal, usar writer paralelo ou chamar um clone entre contas de implementação concluída. Manutenção do runner/core fica em etapa separada do hot path, com inventário, testes e REPORT-INFRA; retomar o mesmo request somente pela rota central depois da capacidade comprovada. Criar do zero com referência não exige copiar campaign/adset shells da fonte, e o modo/lineage técnico deve representar explicitamente origem e alvo reais. QA, reserva, metadata, leitura da Page/pixel existentes, moeda, E2E/SLA e readback continuam obrigatórios.
+O diagnóstico histórico de intake sem `source_account` foi supersedido pela capacidade `config.json#/shein_cross_account_reference`. Distinguir implementação instalada, preflight real read-only, aceitação de write Meta e serving: compiler/core exercitados offline não provam os dois últimos. Verificar o gate de capacidade antes de upload/reserva; não falsificar account_id da referência, criar campanha-fonte na conta vazia, omitir destino literal ou usar writer paralelo.
+
+### Rota instalada — criação nova com referência read-only
+
+- Materializar `mode=from_zero_prestaged`, `source_account` exato, `source_campaign_id` real, `source_number`, `website_url` literal e os demais inputs normais. A fonte mantém seu account_id real; shells novos usam os edges diretos da conta destino, sem source_campaign_id/source_adset_id nos shells. O mapa `reference` no manifest guarda origem e acesso READ_ONLY. Isso não é clone nativo entre contas.
+- A implementação atende fonte/alvo da mesma partição e canal, USD e idioma compatíveis, para qualquer uma das seis partições. Não usar essa autorização como acesso cruzado geral. Fonte, alvo, Page/tarefas, identidade Instagram, pixel existente e evento Add to Wishlist são conferidos separadamente.
+- Website URL literal aceita uma campanha por request e 1–5 anúncios ordenados por `campaign_groups`. Não reutilizar uma única UTM literal em múltiplas campanhas nem fracionar o pedido para contornar a validação. Sem referência explícita, o from-zero comum mantém sua contagem de três anúncios.
+- Sem troca de Page expressa, preservar a Page/Instagram da referência exata; Page observada no onboarding não é exclusividade nem override silencioso. Os campos compatíveis de público, atribuição e identidade regional vêm da fonte viva; ausência material bloqueia antes de upload.
+- Budget explícito ou `budget_from_reference=true` resolve o valor vivo da fonte; `bid_strategy=COCAP` e `bid_usd` exato são deltas somente do alvo. Não transportar valores históricos.
+- Destino vazio começa no próximo número livre 001; reler inventário antes do primeiro write. Tracking c01 explicitamente solicitado permanece literal e nome visível usa três dígitos. Colisão número/UTM bloqueia, sem renumerar silenciosamente.
+- Preservar Website URL e Primary text literais. Nesta rota, `url_tags=""` impede sobreposição ao link solicitado. Preservar features individuais; remover somente standard_enhancements descontinuado. Features novas materializadas pela API só podem ser OPT_OUT. Novos creatives/posts não preservam prova social.
+- `source_ad_id` é enviado apenas ao novo anúncio direto no destino como lineage. A documentação do campo não prova aceitação cross-account nem serving; conferir ambos em execução autorizada e não declarar sucesso só por status ACTIVE.
+
+Comandos centrais, sem writer paralelo:
+
+```text
+python3 /root/mgs-agent/scripts/ares-shein-campaigns.py reference-preflight --input <request.json> --dry-run
+python3 /root/mgs-agent/scripts/ares-shein-campaigns.py prepare-media --input <request.json> --confirm-execute
+python3 /root/mgs-agent/scripts/ares-shein-campaigns.py campaign --input <request-ready.json> --dry-run
+python3 /root/mgs-agent/scripts/ares-shein-campaigns.py campaign --input <mesmo-request-ready.json> --confirm-execute
+```
+
+`reference-preflight` não cria manifest/campanha, não sobe mídia e não reserva inventário. `prepare-media` confere a referência antes de qualquer upload/reserva e pre-stageia só na conta destino; `request-ready.json` sai no intake do mesmo request. `{gestor} - USADOS` deve ter Shared Drive, língua e ascendência real confirmados sob VID/pool canônico; não exigir que seja filha direta de CRIATIVOS nem mover os arquivos para contornar o gate. Seleção expressa autoriza reuse somente neste pedido, sem alegar ineditismo. Pasta normal do gestor continua com sua validação de filha direta de CRIATIVOS.
+
+Recuperação usa os mesmos request/IDs; relê efeitos parciais e cria somente camadas ausentes. IDs completos com falha de readback retomam apenas readback. Construção PAUSED, QA semântico/renderizado de todos os ads, metadata/reserva/conciliação e readback permanecem obrigatórios. Preservar E2E/SLA original: aprovação geral do comportamento não é review específico de ativação tardia. Se exigido, usar `shein_continuation` após mensagem explícita elegível na origem, sem novos IDs ou relógio resetado. Nunca usar templates com mídia sintética offline para execute live.
+
+Referência técnica canônica: `/root/mgs-agent/docs/ares-shein-cross-account-reference.md`. Regressão offline explícita: `tests/test_shein_cross_account_reference.py`, incluindo seis partições, 1–5 ads, literals, controle de autoridade/idioma/pixel, fonte imutável e falha parcial sem replay. Em ambiente sem pytest, `python3 -m unittest discover -s tests -p test_shein_cross_account_reference.py -q` exercita a suite sem instalar dependências.
 
 ## Mídia nova
 
@@ -111,7 +137,7 @@ Quando a retomada atingir `invalid creative inventory pagination`, distinguir cu
 
 Para core concluído com QA pendente, aplicar a seção `Retomada de QA sem replay de criação` abaixo. Toda falha continua sob responsabilidade do Ares; a delegação histórica não autoriza menção/handoff rotineiro ao Zeus.
 
-- Fonte na mesma conta, evento fixo Add to Wishlist, Page/pixel/task vivos, URL de destino autorizada, moeda e timezone vivos.
+- Em clone/duplicação comum, fonte na mesma conta; em criação nova com referência entre contas, validar origem e destino separadamente pela rota `cross_account_reference_policy`. Em ambos, evento fixo Add to Wishlist, Page/pixel/task vivos, URL de destino autorizada, moeda e timezone vivos.
 - Tokens históricos válidos como `c01`/`c0101` são capturados literalmente; números/tracking canônicos novos não reescrevem a fonte. Nome antigo US-EN não prova idioma de mídia; novo nome usa idioma do catálogo. Em pure clone, preservar mídia/copy e o Ad setup da fonte; preservação de posts depende da rota selada, não do nome do modo. Qualidade/compatibilidade de mídia continua exigindo evidência no intake criativo.
 - Budget/intenção de início explícitos; status final omitido é resolvido pelo default ACTIVE aprovado, não por suposição do agente. PAUSED expresso prevalece. SCHEDULED ACTIVE exige horário futuro válido; horário explícito vencido do próprio dia é resolvido em IMMEDIATE_AFTER_QA pela política aprovada, preservando o literal original no audit. IMMEDIATE usa `start_now=true` e a fase central depois do QA; somente essa intenção permite o início técnico já passado. Guardrails, quotas e bloqueios reais permanecem.
 - Mesmo sender/account/channel autorizado gera os mesmos parâmetros que Rodolfo para o pedido equivalente. Recusar conta/perfil fora da partição do canal, origem sem permissões ou pai da thread divergente antes de credencial/write; não recusar um remetente apenas por ser titular de outro G00N.

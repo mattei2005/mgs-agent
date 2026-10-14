@@ -242,6 +242,13 @@ def _build_one(request, source, number, account_config):
             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},
                         'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': '' if reference else tags}
+            if reference:
+                from .shein_reference import creative_degrees
+                degrees = creative_degrees(cr)
+                if degrees:
+                    creative['degrees_of_freedom_spec'] = degrees
+                else:
+                    creative.pop('degrees_of_freedom_spec', None)
             ig = p.get('instagram_user_id') if reference else cr.get('instagram_user_id') or story.get('instagram_user_id')
             if ig:
                 creative['object_story_spec']['instagram_user_id'] = ig
