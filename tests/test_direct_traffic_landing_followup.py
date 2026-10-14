@@ -1,10 +1,12 @@
 """Offline queue/transport regressions. Fixtures are not campaign/PC1 results."""
 import copy
 import hashlib
+import importlib.util
 import json
 import sys
 import tempfile
 import unittest
+from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
@@ -170,6 +172,60 @@ class FollowupTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.arm()
         row=self.q.db.execute('SELECT * FROM messages').fetchone();self.assertTrue(row['message_id'])
         self.dc.fail_get=False;self.arm();self.assertEqual(self.dc.posts,1)
+
+    def test_first_retry_blocks_later_url_of_same_request(self):
+        p=copy.deepcopy(self.payload);p['operation']='MULTI-DIRECT';p['links'].append(copy.deepcopy(p['links'][0]))
+        for f in ['effective_campaign_url','landing_url']:p['links'][1][f]=p['links'][1][f].replace('g01','g02')
+        key=self.q.stage(p,lambda u:True);m.publish_creation(self.q,key,'multi',self.dc)
+        self.q.claim('worker');self.q.begin(key,'worker',0);self.q.result(key,'worker',0,'NO_AD',self.closure())
+        self.clock.value+=30;self.assertIsNone(self.q.claim('worker'))
+
+    def test_durable_queue_survives_connection_reopen(self):
+        self.arm();self.q.db.close();self.q=m.Queue(self.root/'queue',now=self.clock)
+        self.assertEqual(self.q.claim('worker')['key'],self.key)
+
+    def test_unclosed_error_blocks_all_observers(self):
+        self.start();self.q.result(self.key,'worker',0,'ERROR',{'diagnosis':'offline simulated uncertain closure'})
+        self.assertEqual(self.q.job(self.key)['state'],'NEEDS_RECONCILIATION')
+        self.assertIsNone(self.q.claim('other'))
+
+    def test_preopen_mapping_error_does_not_claim_observation_success(self):
+        self.start();self.q.result(self.key,'worker',0,'ERROR',{'diagnosis':'offline missing mapping','no_tab_opened':True})
+        self.assertEqual(self.q.job(self.key)['state'],'ATTENTION')
+
+    def test_manifest_adapter_preserves_query_bytes_and_tag_precedence(self):
+        from ares_campaign_v3.landing_followup_adapters import effective_url
+        got=effective_url('https://example.invalid/quiz/?x=%2F&utm_campaign=old&utm_campaign=old2','utm_campaign=b01fb06c126&utm_adgroup=b01fb06c126g01')
+        self.assertEqual(got,'https://example.invalid/quiz/?x=%2F&utm_campaign=b01fb06c126&utm_adgroup=b01fb06c126g01')
+
+    def test_proof_must_be_same_terminal_request(self):
+        p=copy.deepcopy(self.payload);p['request_id']='wrong-request'
+        with self.assertRaises(ValueError):m.validate_payload(p,lambda u:True)
+
+    def test_unresolved_macros_are_not_opened(self):
+        p=copy.deepcopy(self.payload);p['links'][0]['effective_campaign_url']+='&ad={{ad.id}}'
+        with self.assertRaises(ValueError):m.validate_payload(p,lambda u:True)
+
+    def test_cpv_daily_hook_is_after_creation_post_and_readback(self):
+        source=(Path(__file__).resolve().parents[1]/'scripts/ares_campaign_v3/daily_cpv.py').read_text()
+        self.assertGreater(source.index('audit["landing_followup"] = after_daily_reply'),source.rindex('audit["discord_readback"] = post_discord('))
+
+    def test_dispatcher_integration_arms_after_reply_and_finalizes_outbox(self):
+        path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'
+        spec=importlib.util.spec_from_file_location('landing_cli_test',path)
+        assert spec is not None and spec.loader is not None
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        self.arm()
+        def fake_run(command,**kw):
+            if command[-1]=='status':return SimpleNamespace(returncode=0,stdout='{"locked":false}')
+            j=self.q.job(self.key);owner=j['owner']
+            self.q.begin(self.key,owner,0);self.q.result(self.key,owner,0,'PASS',self.success())
+            return SimpleNamespace(returncode=0)
+        with patch.object(cli,'BASE',Path(__file__).resolve().parents[1]),patch.object(cli.subprocess,'run',side_effect=fake_run),patch.object(cli,'Discord',return_value=self.dc):
+            result=cli.tick(self.q)
+        self.assertEqual(result['state'],'COMPLETE');self.assertEqual(self.dc.posts,2)
+        kinds=[x['kind'] for x in self.q.db.execute('SELECT kind FROM events ORDER BY seq')]
+        self.assertLess(kinds.index('creation_reply_verified'),kinds.index('open_intent'))
 
 
 if __name__=='__main__':unittest.main()

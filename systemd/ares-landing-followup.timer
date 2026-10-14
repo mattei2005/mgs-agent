@@ -1,0 +1,12 @@
+[Unit]
+Description=Check Ares post-reply landing queue without origin delivery
+
+[Timer]
+OnBootSec=30s
+OnUnitInactiveSec=15s
+AccuracySec=1s
+Unit=ares-landing-followup.service
+Persistent=false
+
+[Install]
+WantedBy=timers.target

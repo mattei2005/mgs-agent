@@ -1,0 +1,20 @@
+[Unit]
+Description=Ares direct-traffic landing follow-up dispatcher
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/mgs-agent
+Environment=HERMES_HOME=/root/.hermes/profiles/ares
+Environment=HERMES_CUA_DRIVER_CMD=/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh
+Environment=TMPDIR=/root/.hermes/profiles/ares/cache/scratch
+Environment=PATH=/root/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py tick
+TimeoutStartSec=600
+KillMode=control-group
+UMask=0077
+Nice=5
+StandardOutput=journal
+StandardError=journal

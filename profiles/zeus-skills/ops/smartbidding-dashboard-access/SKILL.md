@@ -25,6 +25,14 @@ Use for SB dashboard access, Auth0/BotGuard troubleshooting, Messenger Page/Broa
 - Lead with the operational verdict, then verified coverage. Present material findings as numbered **Problema / Causa / Solução** items; label unproved causes and separate migration/runtime success from functional acceptance.
 - Keep configured entries, distinct executable links, destination URLs and rendered scenarios as separate denominators. State which checks ran per link and which ran only per destination or representative page; a joined result is not a direct end-to-end test of every original query.
 - Preserve drafts and legacy pools during audits. Recommend a bounded correction of published targets first; do not silently turn testing into republication, pool retirement or global redirect changes.
+- When listing problematic routes, distinguish **initial route does not forward**, **route forwards but destination returns 404**, and **page opens but loses parameters**. Show the configured destination or final failing URL for isolated cases, because a route-level label alone can misleadingly imply the entire site is down. Keep public navigation success separate from catalog/AdOps readiness.
+- When a large route list is grouped by prefix and suffix, expand the shorthand programmatically and require exact set equality with the collected identifiers before delivery. Preserve numeric padding and irregular suffixes; a site count or a broad prefix wildcard is not the requested route list.
+
+## Routing change scope and follow-up
+
+- Freeze the exact selected route identities from the owner's numbered groups, including explicit publisher-only selections and exclusions, before building a URL-change payload. Preserve existing pool topology and route metadata for a destination-only request; do not interpret a question about additional broken links as approval to redirect them to the same replacement site.
+- Treat a negative reply to an extension proposal as rejection of that exact extension, not cancellation or rollback of a previously completed authorized cutover. Preserve excluded destinations, record the constraint in the initiative checkpoint, and acknowledge it briefly without re-asking the same proposal.
+- Before giving an updated pending list, retest the known residual links and reconcile their current destinations. Report corrected-by-this-cutover, currently-not-reproducing-without-our-write, still-404, parameter-loss and AdOps-pending as separate results; the optimizer can change destinations, so subtracting the authorized count from an old audit does not establish current residual state.
 
 ## Progressive disclosure — mandatory
 
