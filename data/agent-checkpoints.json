@@ -3783,12 +3783,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Receber os dez lotes de pesquisa/textos; revisão factual/estrutural e determinística; gerar e validar 30 imagens; criar 30 drafts com helpers aprovados e verificar todos os IDs.",
-      "objective": "Concluir 30 artigos SEO em draft conforme Raquel",
-      "source": "data/atena/seo-mass-1559930384852979796/decision.json",
-      "state": "integração mínima concluída após rodolfo 1559935269535486005: dez site_keys válidos e smokes autenticados http200, quatro registros anteriores preservados. registry atena-seo-mass-1559935269535486005; report-infra1559937843781177358. dez frentes editoriais delegadas read-only para corpus completo, temas inéditos, pesquisa e três textos por portal. nenhum post ou mídia criado ainda.",
+      "next_step": "Concluir QA, imagens e criação dos 30 drafts; verificar cada objeto por ID; informar nesta thread os links de edição agrupados por portal, com títulos e status reais, sem anexos e sem publicação.",
+      "objective": "Concluir 30 artigos SEO em draft e entregar links de edição para revisão da Raquel",
+      "source": "https://discord.com/channels/1185714635991679006/1559930384852979796/1559939129339289712",
+      "state": "integração dos dez portais validada. pesquisa, análise integral das categorias e redação delegadas em andamento; etapa wordpress de drafts e mídias ainda pendente. raquel pediu aviso de conclusão com links na mensagem1559939129339289712. não interromper execução nem pedir novo ok rotineiro.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-14T14:37:55+00:00"
+      "updated_at": "2026-10-14T14:41:24+00:00"
     },
     {
       "agent": "atena",
@@ -5842,5 +5842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T14:37:55+00:00"
+  "updated_at": "2026-10-14T14:41:24+00:00"
 }

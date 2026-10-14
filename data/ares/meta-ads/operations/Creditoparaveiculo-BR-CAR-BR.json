@@ -817,12 +817,25 @@
         "Intraday",
         "Intraday ROI history"
       ],
-      "default_format": "C{NN}-{DD/MM}",
-      "moto_format": "C{NN}M-{DD/MM}",
+      "date_column": "Data",
+      "date_column_position": "immediately before Camp",
+      "date_format": "DD/MM",
+      "date_semantics": "operational delivery/start date; preserve existing date selection, never report period",
+      "default_format": "C{NN}",
+      "moto_format": "C{NN}M",
+      "copy_format": "C{NN} COPY C{sourceNN}",
+      "copy_source": "direct source from explicit COPY Cnn or Cnn-DUPnnn canonical campaign name marker; no media/config similarity inference",
+      "unknown_copy_source": "COPY ? when duplication is marked but source missing or conflicting; unmarked campaigns do not imply from-zero",
       "moto_detection": "whole MOTO token in the canonical Meta campaign name",
       "authorized_by": "Rodolfo Mattei",
-      "authorized_at_sp": "2026-08-27T13:02:24-03:00",
-      "authorization_source": "discord:thread:1542545166630396027"
+      "authorized_at_sp": "2026-10-14",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "superseded_rule": {
+        "default_format": "C{NN}-{DD/MM}",
+        "moto_format": "C{NN}M-{DD/MM}",
+        "authorized_at_sp": "2026-08-27T13:02:24-03:00",
+        "authorization_source": "discord:thread:1542545166630396027"
+      }
     },
     "default_bid_strategy": "highest_volume / LOWEST_COST_WITHOUT_CAP / MAXVOL",
     "strategy_requirement": "from-zero campaign requires explicit result_cost_goal or highest_volume; clone inherits source",

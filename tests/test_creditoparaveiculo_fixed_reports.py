@@ -203,7 +203,7 @@ def test_reporting_layouts_are_report_specific_and_no_id_rec():
     assert "Tabela consolidada — visão desktop" in intraday_source
     assert "Histórico ROI SB — visão desktop" in intraday_source
     assert "fetch_sb_roi_history" in intraday_source
-    assert '["Camp", "Dia"]' in intraday_source
+    assert '["Data", "Camp", "Dia"]' in intraday_source
     assert '"RPS"' in intraday_source
     assert '"CPM"' in intraday_source
     assert '"CR"' not in intraday_source

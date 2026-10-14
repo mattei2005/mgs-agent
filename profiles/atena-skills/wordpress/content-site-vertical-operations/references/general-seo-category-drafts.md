@@ -25,7 +25,7 @@ Compare ID/slug com o item dedicado e confira `edit_posts` e `upload_files`. Uma
 
 5. Em lote, use concorrência limitada para GETs independentes, persista uma linha sanitizada por portal e agregue/deduplique por domínio. Confira cobertura contra o manifesto antes de informar totais. Registre HTTP, identidade validada, capacidades e ativação técnica, nunca o objeto bruto do vault.
 6. Se foi solicitado confirmar acessos antes de produzir, comunique o resultado nesta etapa. Se faltar `site_key`, interrompa a produção e encaminhe a integração mínima conforme autoridade vigente. Não peça novas credenciais quando elas já passaram no teste e não trate autorização editorial genérica como autorização para alterar configuração.
-7. Somente depois da autorização explícita de Rodolfo para a integração, registre o mínimo confirmado por fonte/readback: domínio, `wp_url`, país, idioma, vertical, webroot, usuário/ID/role e referência exata da credencial. Valide a configuração antes de qualquer write editorial.
+7. Somente depois da autorização explícita de Rodolfo para a integração, registre o mínimo confirmado por fonte/readback: domínio, `wp_url`, país, idioma, vertical, usuário/ID/role e referência exata da credencial. Registre webroot somente quando confirmado e necessário ao transporte escolhido: uma integração editorial exclusivamente REST pode omitir `wp_path`, como os registros REST já existentes, sem inventar caminho nem ampliar acesso para descobri-lo. Valide a configuração antes de qualquer write editorial.
 
 Autenticação válida, permissão declarada e ativação do `site_key` são resultados distintos. Se houver bloqueio, informe o que foi efetivamente testado, a dependência exata e a ausência de writes; preserve o ponto de retomada sem declarar o lote produzido.
 
@@ -37,7 +37,7 @@ Resolva o termo pelo slug:
 GET /wp-json/wp/v2/categories?slug=<category-slug>
 ```
 
-Registre `id`, `count`, `name`, `slug` e idioma efetivo do site. Depois consulte:
+Registre `id`, `count`, `name`, `slug` e idioma efetivo do site. Se o nome do briefing diferir apenas em acentuação, compare os nomes Unicode sem acentos somente para descobrir um candidato único; preserve o nome, slug e ID reais retornados pela API. Não crie categoria duplicada por `Notícias` versus `Noticias`, não normalize identificadores e não aceite múltiplos candidatos sem resolver idioma/contexto. Depois consulte:
 
 ```text
 GET /wp-json/wp/v2/posts?categories=<id>&per_page=100&page=<n>&_fields=id,date,slug,link,title,content,excerpt,featured_media,categories,tags,yoast_head_json
