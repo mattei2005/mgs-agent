@@ -588,7 +588,9 @@ def _prepare(request, config, common, token, *, reference_only=False):
     if len(pages) != 1:
         raise RouteBlocked('source uses multiple Pages')
     source_page_id = next(iter(pages))
-    page_id = profile['page_id'] if reference else source_page_id
+    # No Page switch was requested: inherit the exact reference identity.
+    # An onboarding Page is a non-exclusive observation, not a silent override.
+    page_id = source_page_id
     compiler_config = copy.deepcopy(config['accounts'][account_id()])
     if CURRENT_PROFILE.get():
         # A sampled Page is an observation, not an exclusive site/account binding.
@@ -637,10 +639,10 @@ def _prepare(request, config, common, token, *, reference_only=False):
                 or not any(str(x.get('id')) == SYSTEM_USER_ID and 'ADVERTISE' in x.get('tasks', []) for x in _complete_edge(gate['reference_assignment']))
                 or not any(str(x.get('id')) == str(pixel) for x in _complete_edge(gate['reference_pixels']))):
             raise RouteBlocked('reference Page/pixel access unconfirmed')
-        http, ig, _ = common.graph_get(page_id, page_token, {'fields': 'id,page_backed_instagram_account'})
-        if http != 200 or ig.get('id') != page_id:
-            raise RouteBlocked('target Page-backed Instagram identity lookup unavailable')
-        compiler_config['shein_profile']['instagram_user_id'] = (ig.get('page_backed_instagram_account') or {}).get('id')
+        identities = {str(x['creative'].get('instagram_user_id') or _story(x).get('instagram_user_id') or '') for x in ads}
+        if len(identities) != 1:
+            raise RouteBlocked('reference Instagram identity is ambiguous')
+        compiler_config['shein_profile']['instagram_user_id'] = next(iter(identities)) or None
     compiled_request = resolve_intent(request, source)
     if reference_only:
         if not reference:

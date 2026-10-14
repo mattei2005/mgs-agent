@@ -89,5 +89,5 @@ def require_binding(request, source, target, reference):
 def receipt(source, reference):
     return {'account_id': source['campaign']['account_id'], 'campaign_id': source['campaign']['id'],
             'adset_id': source['adset']['id'], 'ad_ids': [str(a['id']) for a in source['ads']],
-            'language': reference['language'], 'access': 'READ_ONLY',
+            'language': reference['language'], 'page_id': reference['page_id'], 'access': 'READ_ONLY',
             'lineage_route': 'direct_ad_create_with_source_ad_id'}
