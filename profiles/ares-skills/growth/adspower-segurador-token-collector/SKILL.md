@@ -14,7 +14,7 @@ metadata:
 
 ## When to Use
 
-This skill is for collecting and validating **Meta user tokens for seguradores** through AdsPower profiles/proxies.
+Use this skill for shared AdsPower profile operations on PC1: finding/opening profiles, inspecting Ads Manager campaigns and ad editors, reading current ad fields, and the separately authorized collection/validation of **Meta user tokens for seguradores**.
 
 Use it when Rodolfo asks to:
 
@@ -38,7 +38,9 @@ The same private PC1 transport is used by Zeus and Ares. Deterministic profile a
 
 Token generation remains a separate, higher-sensitivity stage. Opening a profile never authorizes generating, copying, exposing, replacing, or storing a token.
 
-For an Ads Manager screenshot request, confirm both the AdsPower profile/group and the selected Meta ad account before capturing; a logged-in profile can initially open an unrelated personal account. Read the rendered campaign list, inspect the actual screenshot for credentials and legibility, and deliver only the requested image plus a short account/status summary. Leave the browser open unless closure was authorized; do not change campaign state.
+For an Ads Manager screenshot request, confirm both the AdsPower profile/group and the selected Meta ad account before capturing; a logged-in profile can initially open an unrelated personal account. Match the requested level: campaign list for campaign screenshots; the exact selected ad in the editor, with configuration fields and the loaded preview side by side, for ad configuration/preview screenshots. Never substitute the destination landing page for the Ads Manager editor. Inspect the actual screenshot for credentials and legibility, and deliver only the requested image plus a short account/status summary. Leave the browser open unless closure was authorized; do not change campaign state.
+
+For a follow-up asking what is in a field such as **Website URL**, read the current field of the same selected ad rather than repeating the planned URL, recalled campaign setup, or preview destination. Preserve the complete value, including path and query parameters, in a copyable text block with a brief field/ad label. Use the field-extraction recipe in the shared PC1 reference when visible-text output omits input values; a URL-only request does not call for another screenshot.
 
 Keep profile discovery least-privilege: combine the requested name with the known group ID when available, and retain only safe identity fields (`profile_id`, `profile_no`, `name`, `group_id`, `group_name`). Raw inventory responses can include credentials even when the request is read-only; project safe fields before stdout or shared logs through the approved transport, and never reproduce unsolicited secret fields.
 

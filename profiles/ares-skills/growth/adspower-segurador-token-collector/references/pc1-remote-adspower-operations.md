@@ -135,6 +135,40 @@ Ares substitutes `--agent ares`. Use the real current session/thread identifiers
 - Require the editor breadcrumb and selected ad, visible configuration fields, and a loaded **Ad preview**. Capture and inspect the actual image; thumbnails/players being rendered do not prove complete video playback. Leave all fields untouched and report inspection only.
 - The MCP `scroll-element` implementation uses native `querySelector`, so pass only a CSS selector grounded in current DOM; Playwright `text=...` is invalid there even though `click-element` supports it. Do not fetch the full HTML repeatedly when the tool has already persisted its output, and do not infer missing DOM elements from a truncated HTML response.
 
+## Read a current ad field without editing
+
+1. Reattach to the active authorized profile and read `get-page-visible-text` to confirm the same account and exact selected ad. Apply the canonical domain-scope check before returning an operational destination URL; do not visit the destination just to read the field.
+2. If **Website URL** appears as a label but its value is absent, obtain `get-page-html` through the same MCP route before switching to desktop control. Visible text commonly omits form values; the current input's `value` attribute can contain the complete URL even when the screenshot truncates it.
+3. If HTML is persisted as oversized output, parse that local file once with the standard library. Match the actual input by its observed label/placeholder or label association, require one match, and emit only its value. Do not regex-search the whole document for a familiar URL: scripts may contain other ads, stale state or credentials. Do not treat the oversized-output notice alone as proof the saved HTML was truncated; check whether the target input is present.
+
+For a DOM-confirmed Website URL input using the placeholder below, this extraction was exercised successfully. Pass the tool-returned HTML path as the script argument; re-discover the field association if the placeholder changes:
+
+```python
+from html.parser import HTMLParser
+from pathlib import Path
+import sys
+
+class WebsiteField(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.values = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if (tag == "input" and attrs.get("placeholder") ==
+                "Enter the URL people visit after your ad"):
+            self.values.append(attrs.get("value"))
+
+parser = WebsiteField()
+parser.feed(Path(sys.argv[1]).read_text(encoding="utf-8"))
+if len(parser.values) != 1 or not parser.values[0]:
+    raise SystemExit("Exact Website URL field not uniquely resolved")
+print(parser.values[0])
+```
+
+4. Preserve the extracted string without URL normalization or query reordering. HTML entity decoding restores the field value; do not additionally URL-decode it. Keep **Website URL** separate from **Tracking → URL parameters** and do not silently combine them when the operator asked for one field.
+5. Return the field/ad label plus the complete value in a text code block. State direct field verification only when the input was actually read, and leave the editor unchanged. Use GUI fallback only if the DOM route cannot resolve the field; a browser-chrome-only accessibility tree is not evidence that the field is empty.
+
 ## Computer Use fallback — find and open one profile
 
 1. Capture the current AdsPower window by its fresh PID and window ID.
