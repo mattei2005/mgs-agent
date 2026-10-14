@@ -182,9 +182,13 @@ class Queue:
             # One active observer globally, regardless of account/channel. Other
             # campaign writers remain independent and are never locked by PC1.
             if self.db.execute("SELECT 1 FROM jobs WHERE state='RUNNING'").fetchone(): return None
-            r=self.db.execute("SELECT j.key FROM jobs j JOIN links l ON l.job=j.key WHERE j.state='READY' AND j.reply_id IS NOT NULL AND l.state IN ('READY','WAIT_RETRY') AND l.due<=? ORDER BY j.created,l.idx LIMIT 1",(self.now(),)).fetchone()
+            r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY created,key LIMIT 1").fetchone()
             if not r:return None
-            key=r['key'];self.db.execute("UPDATE jobs SET state='RUNNING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
+            key=r['key']
+            first=self.db.execute("SELECT * FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY','OPEN_INTENT') ORDER BY idx LIMIT 1",(key,)).fetchone()
+            if not first or first['due']>self.now():return None
+            if first['state']=='OPEN_INTENT':raise ValueError('uncertain prior tab requires reconciliation')
+            self.db.execute("UPDATE jobs SET state='RUNNING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
             self.event(key,'claimed',{'owner':owner})
             return self.job(key)
 
@@ -205,6 +209,8 @@ class Queue:
     def deferred(self,key,owner):
         with self.tx():
             self.owned(key,owner)
+            if self.db.execute("SELECT 1 FROM links WHERE job=? AND state='OPEN_INTENT'",(key,)).fetchone():
+                raise ValueError('cannot defer an uncertain tab; reconcile or report ERROR')
             self.db.execute("UPDATE jobs SET state='READY',owner=NULL,lease_until=NULL WHERE key=?",(key,))
 
     def result(self,key,owner,idx,result,evidence):
@@ -218,6 +224,9 @@ class Queue:
             self.owned(key,owner)
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
             if row['state']!='OPEN_INTENT':raise ValueError('no matching open intent')
+            previous=json.loads(row['evidence']) if row['evidence'] else {}
+            if previous.get('new_tab_identity') and previous['new_tab_identity']==evidence.get('new_tab_identity'):
+                raise ValueError('a retry must use a different new tab identity')
             state='PASSED' if result=='PASS' else ('WAIT_RETRY' if result=='NO_AD' and row['attempt']==1 else 'ATTENTION')
             self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
             self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'state':state,'evidence':evidence})
@@ -262,7 +271,7 @@ def file_evidence(path):
         raise ValueError('protected real Ares screenshot required')
     if p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'} or p.stat().st_size<100:
         raise ValueError('image evidence missing')
-    return {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+    return {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'captured_at':p.stat().st_mtime}
 
 
 def validate_closure(e):
@@ -288,7 +297,10 @@ def validate_observation(e,link):
         raise ValueError('20 continuous measured seconds with bounded samples required')
     paths=[x['screenshot'] for x in samples]
     if len(set(paths))!=len(paths):raise ValueError('fresh distinct screenshots required')
-    for sample in samples:file_evidence(sample['screenshot'])
+    actual=[file_evidence(sample['screenshot']) for sample in samples]
+    capture_times=[x['captured_at'] for x in actual]
+    if capture_times[-1]-capture_times[0]<20 or any(b<=a or b-a>12 for a,b in zip(capture_times,capture_times[1:])):
+        raise ValueError('real screenshot timestamps do not cover the observation')
     if e.get('network_ad_confirmed') is not True or not e.get('ad_description'):
         raise ValueError('rendered network creative, not empty slot/CTA, required')
 
@@ -303,6 +315,7 @@ class Discord:
         self.bot_id=str(self.get('/users/@me')['id'])
 
     def request(self,method,path,body=None):
+        assert self.token is not None
         headers={'Authorization':'Bot '+self.token,'User-Agent':'MGS-Ares-Landing-Followup/1.0'}
         data=None
         if body is not None:headers['Content-Type']='application/json';data=json.dumps(body,ensure_ascii=False).encode()
