@@ -253,6 +253,12 @@ Conclusão: recomendação ou write usa dados do mesmo período, moeda e chave d
 
 ## Discord
 
+### Fechamento de criação e duplicação
+
+Após validar o lote inteiro, responda com confirmação curta de fonte + quantidade + conta e bullets de números novos, orçamento diário por campanha e total do lote, início no fuso verificado, lance efetivamente herdado/aplicado, status e quantidade real de anúncios validados. Separe a ressalva de posts novos/prova social e qualquer normalização de público comprovada; não declare cópia literalmente idêntica quando houver omissão de flags. Use as árvores finais e a prova de QA como fonte, não os números previstos pelo dry-run nem a cardinalidade do pedido anterior. Data futura com status ACTIVE significa habilitada/programada, não entrega já comprovada.
+
+Distinga orçamento do lote, delta do request e orçamento ativo total da conta. Some os budgets dos IDs novos verificados para informar o lote; não calcule o delta autorizado subtraindo dois snapshots globais da conta, pois outras campanhas podem mudar entre as leituras. Quando informar o total ativo da conta, use o readback consolidado e identifique-o separadamente do lote.
+
 - Responder na thread atual.
 - Toda thread inclui Zeus e Rodolfo; a lista operation-scoped adiciona Geizian e o gestor do canal.
 - Confirmar membros somente por readback real.
