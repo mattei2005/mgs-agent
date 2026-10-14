@@ -145,5 +145,31 @@ class IntakeTests(unittest.TestCase):
         count=self.q.db.execute("SELECT count(*) FROM native_intake WHERE id LIKE 'native:%' AND state='IGNORED'").fetchone()[0]
         self.assertEqual(count,105)
 
+    def test_crash_after_stage_reuses_frozen_proof_when_audit_gains_metadata(self):
+        origin={'thread_id':self.thread,'parent_id':self.parent}
+        payload=li.build_from_source(self.source,self.rid,origin,self.q.root,self.meta,lambda u:True)
+        key=self.q.stage(payload,lambda u:True)
+        self.state['harmless_extra_audit_metadata']='offline fixture after stage';self.save_state()
+        self.intake.tick()
+        self.assertEqual(self.jobs(),1);job=self.q.job(key)
+        self.assertEqual(job['state'],'READY');self.assertEqual(job['payload']['creation_proof'],payload['creation_proof'])
+
+    def daily_fixture(self):
+        state=dict(self.state);state.pop('phase');state['stage']='COMPLETE';state['request_id']=self.rid
+        state['final']={'status':'COMPLETE_FUTURE_ACTIVE','campaign_ids':[self.cid]}
+        state['discord_readback']={'thread_id':self.thread,'message_id':self.dc.messages[0]['id'],'content_match':True}
+        p=self.meta/'engine-v3/audit/daily'/('offline-daily.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(state))
+        return p
+
+    def test_daily_partial_reply_never_substitutes_final_creation_reply(self):
+        self.daily_fixture();self.dc.messages[0]['content']='🟡 V3 PARCIAL — fixture offline'
+        self.assertEqual(self.intake.scan_daily(lambda:self.dc),0);self.assertEqual(self.jobs(),0)
+        self.assertFalse(list((self.q.root/'creation-proofs').glob('*.json')))
+
+    def test_daily_unchanged_native_final_reply_is_enough_without_callback(self):
+        p=self.daily_fixture();before=p.read_bytes();self.dc.messages[0]['content']='✅ V3 CONCLUÍDO — fixture offline'
+        self.assertEqual(self.intake.scan_daily(lambda:self.dc),1)
+        self.assertEqual(self.jobs(),1);self.assertEqual(self.dc.posts,0);self.assertEqual(before,p.read_bytes())
+
 
 if __name__=='__main__':unittest.main()

@@ -1292,6 +1292,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-INTAKE-1559974994967134289",
+      "next_step": "Estabilizar IDs, baixar, revisar, congelar plano e executar READY/LEGACY com readback",
+      "objective": "Tratar e mover criativos Kelly SHEIN US EN preservando originais e reserva",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559974994967134289/plan.json",
+      "state": "inventário inicial read-only: 38 png 1080x1920; estabilização e revisão pendentes",
+      "thread_id": "1559974994967134289",
+      "updated_at": "2026-10-14T17:05:04+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-NUMBER-PADDING-120249566052890724",
       "next_step": "Proximos pedidos usam NNN via formatter e policy; nao renomear outras campanhas nem reexecutar request historico. Renderer integration error registrado para auditoria tecnica propria",
       "objective": "Corrigir prefixo 7 para 007 na C007 e prevenir em campanhas futuras SHEIN",
@@ -5852,5 +5862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T16:59:24+00:00"
+  "updated_at": "2026-10-14T17:05:04+00:00"
 }

@@ -342,18 +342,25 @@ class Intake:
         for path in sorted((self.meta/'engine-v3/audit/daily').glob('*.json')):
             if path.stat().st_mtime<self.epoch():continue
             key='daily:'+str(path)
-            old=self.q.db.execute('SELECT state FROM native_intake WHERE id=?',(key,)).fetchone()
-            if old and old['state']=='READY':continue
-            record=json.loads(path.read_text());reply=record.get('discord_readback') or {}
-            if record.get('stage') not in {'COMPLETE','COMPLETED'} or not reply.get('content_match') or not reply.get('message_id'):continue
-            rid=record['request_id'];thread=identifier(reply['thread_id']);client=dc()
-            channel=client.get('/channels/'+thread);origin={'thread_id':thread,'parent_id':str(channel.get('parent_id') or channel['id'])}
-            payload=build_from_source(path,rid,origin,self.q.root,self.meta,self.check_scope)
-            mid=identifier(reply['message_id']);msg=client.get('/channels/'+thread+'/messages/'+mid)
-            if str(msg.get('channel_id'))!=thread or str((msg.get('author') or {}).get('id'))!=client.bot_id:raise ValueError('daily_native_reply_mismatch')
-            receipt={'verified':True,'native_delivery_state':'delivered','native_obligation_id':key,
-                **origin,'author_id':client.bot_id,'message_ids':[mid],'content_sha256':hashlib.sha256(msg['content'].encode()).hexdigest(),'readback_at':self.q.now()}
-            job=self.arm(payload,receipt);self.record(key,'READY',job=job);count+=1
+            old=self.q.db.execute('SELECT state,updated FROM native_intake WHERE id=?',(key,)).fetchone()
+            if old and (old['state'] in {'READY','IGNORED'} or old['updated']>self.q.now()-60):continue
+            try:
+                record=json.loads(path.read_text());reply=record.get('discord_readback') or {}
+                if record.get('stage') not in {'COMPLETE','COMPLETED'} or not reply.get('content_match') or not reply.get('message_id'):continue
+                rid=record['request_id'];thread=identifier(reply['thread_id']);client=dc()
+                mid=identifier(reply['message_id']);msg=client.get('/channels/'+thread+'/messages/'+mid)
+                if str(msg.get('channel_id'))!=thread or str((msg.get('author') or {}).get('id'))!=client.bot_id:raise ValueError('daily_native_reply_mismatch')
+                # A previous PARTIAL response may still be in the audit during
+                # the normal final post. Do not treat that earlier ID as done.
+                if not str(msg.get('content') or '').startswith('✅ V3 CONCLUÍDO'):continue
+                channel=client.get('/channels/'+thread);origin={'thread_id':thread,'parent_id':str(channel.get('parent_id') or channel['id'])}
+                payload=build_from_source(path,rid,origin,self.q.root,self.meta,self.check_scope)
+                receipt={'verified':True,'native_delivery_state':'delivered','native_obligation_id':key,
+                    **origin,'author_id':client.bot_id,'message_ids':[mid],'content_sha256':hashlib.sha256(msg['content'].encode()).hexdigest(),'readback_at':self.q.now()}
+                job=self.arm(payload,receipt);self.record(key,'READY',job=job);count+=1
+            except (ValueError,OSError,sqlite3.Error,KeyError) as exc:
+                self.record(key,'PENDING',str(exc)[:160])
+                self.incident(key,path.stem,str(exc))
         return count
     def tick(self):
         epoch=self.epoch();client=None
