@@ -104,12 +104,28 @@ Ares substitutes `--agent ares`. Use the real current session/thread identifiers
 ## Preferred MCP flow
 
 1. Connect through `mgs-pc1-adspower-mcp-ssh.sh`, which delegates to the transaction-aware proxy. Idle Zeus and Ares MCP connections do not own PC1. The first active tool sequence acquires the shared lease; the proxy holds it through the browser operation and releases it after `close-browser` or bounded idle recovery. Never use a process-lifetime MCP lease, because the first gateway would monopolize PC1 and starve the other.
-2. Call `get-browser-list` with the exact profile-name filter and require one safe identity match.
+2. Call `get-browser-list` with the requested profile-name filter and the known group ID when available; require one match for the combined profile/group identity, not one name across the entire inventory. Retain only safe identity fields and never inspect or reproduce credential-bearing fields returned alongside them.
 3. Call `get-browser-active`; if the profile is already active, do not open or later close user-owned state unless the current request explicitly authorizes it.
 4. Call `open-browser` for the unique profile and require a successful response with browser connection data. Do not print the WebSocket/CDP value.
 5. Call `connect-browser-with-ws`, then use the allowlisted page tools for the authorized action.
 6. Call `close-browser` only when closure is authorized. Poll `get-browser-active` until `Inactive`/`Closed`; close propagation is asynchronous and may briefly remain `Active`.
 7. Release the lease in every exit path.
+
+## Recover a stopped AdsPower application
+
+1. After an MCP transport failure, inspect the shared lease, current desktop windows, AdsPower/SunBrowser process presence, and the PC1-local API listener before retrying; an uncertain write must still be reconciled at its exact target.
+2. If AdsPower is confirmed absent and the request authorizes opening a profile, acquire the GUI lease, capture `app="desktop"`, and double-click the fresh **AdsPower Browser** shortcut element. Verify the resulting windows before any second launch; starting an absent application is not permission to restart or kill a running one.
+3. Allow a bounded startup wait and re-check the windows and PC1-local listener. A blank **Starting** window alone neither proves readiness nor proves failure. Once the API is available, release the GUI lease before returning to the MCP route so its transaction proxy can acquire its own lease. Re-run the read-only lookup, then reconcile active state before opening the exact profile.
+4. If startup does not recover within the bounded checks, preserve the request and escalate the exact missing prerequisite; do not restart the gateway, alter the transport, or force-close profiles.
+
+## Ads Manager campaign screenshot
+
+1. Resolve and open the unique authorized profile/group through the preferred MCP flow. Attach with `connect-browser-with-ws` using the current open response; do not disclose the connection endpoint.
+2. Navigate with `navigate` to `https://adsmanager.facebook.com/adsmanager/manage/campaigns`, then read `get-page-visible-text`. Do not assume the default selected ad account is the intended business account: an empty personal account can show **Get set up to run ads** while the business campaign account is available in the selector.
+3. If the account differs, click the currently displayed account selector using its observed text. Read the menu, select the relevant business portfolio, read its account entries, then click the exact authorized account name. Use `click-element` with observed `text=...` selectors; never pick a row by position or invent an account from historical context. If multiple accounts remain materially ambiguous, ask which account to capture.
+4. Re-read rendered text and require the intended account name/ID plus the campaign rows and displayed date range. Preserve the UI status literally in meaning: **Preparing** is not proof of delivery. Account switching and inspection do not authorize **Create**, **Edit**, **Review and publish**, or campaign toggles.
+5. Capture the page with `screenshot(isFullPage=false)`, then inspect the returned local image. Confirm campaign rows are visible and no credentials appear. A screenshot can truncate labels: ground the full account/campaign identity in the preceding rendered-text readback rather than claiming the image proves every character. Improve the view only when needed for the requested legibility.
+6. Return the image using `MEDIA:<returned-local-path>` with a concise PT-BR profile/account summary and the observed campaign status. Do not substitute a desktop screenshot of AdsPower startup or a Facebook feed for the requested Ads Manager image. Leave the requested profile open, and release only the lease owned by this operation.
 
 ## Computer Use fallback — find and open one profile
 

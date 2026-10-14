@@ -28,7 +28,7 @@ This is separate from the B001–B010 app/rate-limit monitor. The goal here is *
 
 ## Zeus and Ares — shared PC1 route
 
-For routine remote AdsPower operation—locating a profile, opening it, verifying the SunBrowser instance, or listing visible tabs—load and follow:
+For routine remote AdsPower operation—locating a profile, opening it, verifying the SunBrowser instance, listing visible tabs, or capturing Ads Manager campaigns—load and follow:
 
 ```text
 references/pc1-remote-adspower-operations.md
@@ -37,6 +37,10 @@ references/pc1-remote-adspower-operations.md
 The same private PC1 transport is used by Zeus and Ares. Deterministic profile and browser-page operations use the official AdsPower Local API/MCP route first; Computer Use remains the fallback for native GUI, CAPTCHA, 2FA, checkpoints, or visual recovery. Both routes share the same cross-agent lease, because they can conflict on the same AdsPower profile and interactive browser state. Zeus owns technical governance; Ares owns routine Growth/Media Buying execution within the requesting user's current authority.
 
 Token generation remains a separate, higher-sensitivity stage. Opening a profile never authorizes generating, copying, exposing, replacing, or storing a token.
+
+For an Ads Manager screenshot request, confirm both the AdsPower profile/group and the selected Meta ad account before capturing; a logged-in profile can initially open an unrelated personal account. Read the rendered campaign list, inspect the actual screenshot for credentials and legibility, and deliver only the requested image plus a short account/status summary. Leave the browser open unless closure was authorized; do not change campaign state.
+
+Keep profile discovery least-privilege: combine the requested name with the known group ID when available, and retain only safe identity fields (`profile_id`, `profile_no`, `name`, `group_id`, `group_name`). Raw inventory responses can include credentials even when the request is read-only; project safe fields before stdout or shared logs through the approved transport, and never reproduce unsolicited secret fields.
 
 ## Required URLs
 
