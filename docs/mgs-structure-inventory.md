@@ -7,6 +7,13 @@
 
 ---
 
+## Atualização editorial — lote SEO multilíngue Raquel (2026-10-14)
+
+- Autoridade: Rodolfo na mensagem `1559935269535486005`, após receber o bloqueio técnico do lote na thread `1559930384852979796`; pedido original de Raquel, exclusivamente 30 rascunhos SEO.
+- Configuração: dez registros editoriais mínimos adicionados a `data/sites.json`, somente para os dez alvos allowlisted do briefing; identidade Atena/editor e IDs reais, URLs e categorias confirmados por REST. Registros anteriores preservados. Transporte apenas REST; nenhum webroot inferido e nenhuma operação de filesystem remoto, plugin, credencial, gateway ou dashboard.
+- Fonte/backup/evidência: `data/atena/seo-mass-1559930384852979796/decision.json` e `/root/.hermes/profiles/atena/work/seo-mass-1559930384852979796/`; confirmação de autoridade recorrente da Raquel capturada como candidato `KCI-9b42b77250e3ba5c`, sem alteração do registro global de usuários.
+- Conteúdo: três novos artigos por portal, mínimo de 1.000 palavras, categoria/idioma do briefing, mesma mídia após a primeira frase e como destaque, fontes externas confiáveis. Writes editoriais continuam sujeitos a QA e readback por ID; integração não declara o lote pronto nem autoriza publicação.
+
 ## Atualização operacional — Escalatepower contas e Pages (2026-10-14)
 
 - Autoridade: Rodolfo, mensagem `1559929154030276730`, thread `1559928644149841971`, para configurar o mapeamento das seis contas Escalatepower SHEIN e as seis Pages indicadas; sem criar/ativar campanhas.
