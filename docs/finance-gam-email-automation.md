@@ -81,6 +81,13 @@ Essa lista confirma as classificações já existentes de Yolokfx, Vizioid, Mavr
 
 No lote corrente05/10, a regra corrigiu apenas os dois metadados US de Escalatepower e preservou os valores, IDs e atribuição da fonte. Boostingecon não consta nesse lote. Publicação/readback concluídos:6/6regras locais/remotas,468testes sem skips, fonte3373linhas/62grupos, zero pendências, revisão221/audit3215, dia05/10 completo e replay idempotente. API e desktop/mobile validados. Relatório: `reports/finance-shein-us-six-1557024816031342732.md`. Continuidade pelo checkpoint `ZEUS-FINANCE-GROWPOWERHUB-US-1557017566923325465`, com evidência em `apps/finance-system/private/shein-sites-1557024816031342732/`.
 
+## Zytiva Finanzas ES — decisão1559930340628242484
+
+- Rodolfo1559929556691849267 classificou o item e1559930340628242484 confirmou reutilização sempre que chegar o placement literal `pl_digital-trust_zytivafinanzas_es`: domínio `finanzas.zytiva.com`, Espanha/ES, `ES-CC-ES` (chave técnica `es-cc-es`), responsável G003/Isliago.
+- Preservar `pl_digital-trust_zytivafinanzas_us` como US/`us-cc-es` e o domínio principal `zytiva.com`; outro sufixo sem regra confirmada continua isolado, sem herdar ES. Gestor da linha pendente é explicitamente `g003-d`; não forçar todos os demais media nem mudar a precedência canônica de atribuição.
+- Reutilizar o catálogo existente `site-zytiva-finanzas-principal`/Zytiva Finanzas, Isliago, SB Rede1/CAD, sem alterar status, unidade de rateio ou histórico. A fonte13/10 tem apenas1linha pendente, CAD`0.16972628450920058`; o restante deve ser preservado pelo complemento da mesma identidade de fonte.
+- Estado de execução/publicação: checkpoint `ZEUS-FINANCE-ZYTIVA-ES-1559930340628242484`; evidência `apps/finance-system/private/zytiva-es-1559930340628242484/`. A decisão não equivale por si à conclusão financeira; consultar o checkpoint e o readback.
+
 ## Fontes obrigatórias
 
 O par diário é completo somente com:
