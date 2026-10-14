@@ -212,9 +212,10 @@ class FollowupTests(unittest.TestCase):
         p=copy.deepcopy(self.payload);p['links'][0]['effective_campaign_url']+='&ad={{ad.id}}'
         with self.assertRaises(ValueError):m.validate_payload(p,lambda u:True)
 
-    def test_cpv_daily_hook_is_after_creation_post_and_readback(self):
+    def test_cpv_daily_has_no_followup_dependency(self):
         source=(Path(__file__).resolve().parents[1]/'scripts/ares_campaign_v3/daily_cpv.py').read_text()
-        self.assertGreater(source.index('audit["landing_followup"] = after_daily_reply'),source.rindex('audit["discord_readback"] = post_discord('))
+        self.assertNotIn('landing_followup',source)
+        self.assertIn('audit["discord_readback"] = post_discord(',source)
 
     def test_dispatcher_integration_arms_after_reply_and_finalizes_outbox(self):
         path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'

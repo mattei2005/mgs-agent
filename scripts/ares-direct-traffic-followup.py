@@ -117,7 +117,7 @@ def main():
             a.add_argument('--result',choices=['PASS','NO_AD','ERROR'],required=True)
             a.add_argument('--evidence',type=Path,required=True)
     args=p.parse_args();q=Queue(args.root)
-    if args.command in {'stage','tick'}:
+    if args.command in {'stage','tick','publish-creation'}:
         policy=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text())
         if policy.get('status')!='ACTIVE_FOR_NEW_REQUESTS' or policy.get('approval_message_id')!='1559951763019145247':
             return {'state':'POLICY_DISABLED','side_effect':'none'}
