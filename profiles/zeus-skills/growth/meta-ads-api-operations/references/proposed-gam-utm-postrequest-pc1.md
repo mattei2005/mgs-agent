@@ -2,14 +2,14 @@
 
 Status: proposal only; not an active Campaign Ops rule or execution authorization.
 Owner: Rodolfo Mattei; execution design for Ares.
-Source: Discord thread 1559932317861158993, initial message 1559938326063091775 and corrections 1559940089424125953, 1559940833430474907 and 1559942378695950367.
+Source: Discord thread 1559932317861158993, initial message 1559938326063091775 and corrections 1559940089424125953, 1559940833430474907, 1559942378695950367 and 1559946026142662728.
 
 When resuming this design discussion, preserve Rodolfo's requested ordering:
 
 1. Complete and validate the manager's authorized campaign creation/duplication request, including exact destination links and campaign/adgroup UTMs.
 2. Send the normal request-completed response to the manager first. Do not turn the browser step into a prerequisite for this reply or anchor its dispatch to the campaign's scheduled start.
 3. Only afterward, run the proposed separate background follow-up on PC1 without extending the original campaign scope, budget, strategy or start time.
-4. Process destination URLs sequentially. For each distinct destination and exact UTM pair, create a new tab; never navigate an existing processing tab to the next URL.
+4. Open only the campaign's corresponding landing-page URL, NOT its quiz URL. Resolve the actual landing-page mapping from the completed request/approved route; preserve the exact new campaign/adgroup UTMs and all applicable approved tracking parameters. Do not guess the landing page by removing /quiz/ or altering a slug, and do not substitute the quiz when the mapping is missing; report an unresolved mapping in coordination thread 1559932317861158993. Process landing-page URLs sequentially. For each distinct landing page and exact UTM pair, create a new tab; never navigate an existing processing tab to the next URL. This supersedes the earlier generic destination-link wording.
 5. Confirm an actual network advertisement is rendered and visible. Start the 20-second observation only after that confirmation, keeping the ad in the visible viewport and the tab active. Page-open time alone is insufficient.
 6. After the observation, close that exact processing tab and verify closure; preserve unrelated browser tabs/windows. Then process the next URL in another new tab.
 7. If an ad does not appear on the first attempt, do not notify Rodolfo yet. Close and verify closure of that processing tab, wait one minute, then retry the exact URL once in a fresh tab. If the retry shows an ad, perform the full 20-second visible observation and close/verify that tab normally, without an error alert. Only if the second attempt still shows no ad, report the missing-ad problem in coordination thread 1559932317861158993; keep that link unresolved and do not claim all-link success. No indefinite retry loop is authorized.

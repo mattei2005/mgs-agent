@@ -167,6 +167,14 @@ O bundle da tela define:
 - obter pool: `GET /routing/{id}`;
 - criar pool: `POST /routing/0`;
 - atualizar pool: `POST /routing/{id}`;
+
+### URL-only cutover — API and served deployment are separate gates
+
+- Include and preserve the live `ACTIVE` value in both the frozen metadata and update payload. Older collectors that omit it are incomplete for an in-place write; do not rely on a backend default even if an observed save preserves it.
+- After a pool save and API readback, exercise the original public link through its final destination with every literal tracking parameter. Run a small public canary before the remaining batch; HTTP 201 and matching `/routing/{id}` do not prove that the serving layer was published.
+- If the API has the new URL but cache-busted requests still redirect to the old URL with `CF-Cache-Status: DYNAMIC`, inspect the actual server rewrite owner before purging caches. RunCloud publishers can serve generated Apache `.htaccess` `RewriteRule` entries independently of the SB database.
+- When native publication cannot be resolved and the owner's approved URL-only scope permits safe same-target recovery, replace only the destination URL tokens of the exact existing authorized RewriteRules. Preserve patterns, `R=302`, `QSA`, slash capture, unrelated routes, WordPress/cache/security blocks, ownership and mode; never regenerate or upload an entire `.htaccess` template. Require a private original backup, file-hash compare-and-swap, atomic cutover, per-rule count/identity proof and rollback material, then repeat every affected public chain and a fresh API readback. Keep any unresolved native publication mechanism and AdOps/catalog limitation explicit.
+
 - excluir pool: `DELETE /routing/{id}` — continua sujeito ao Critical Subset de deleção.
 
 Payload de criação usado pela própria UI:
