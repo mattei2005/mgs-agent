@@ -1293,12 +1293,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-INTAKE-1559974994967134289",
-      "next_step": "Consumir conclusão do executor, verificar todos IDs/checksums e reserva, limpar mídia transitória após auditoria",
-      "objective": "Tratar e mover criativos Kelly SHEIN US EN preservando originais e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559974994967134289/plan.json",
-      "state": "38 png estáveis, revisados e clean=true; plano congelado com ids/hashes/names; zero duplicatas; execução iniciada",
+      "next_step": "Nenhuma pendência:38 PNG em READY e38 originais em LEGACY;entrada vazia;clean=true e SHA verificados;reservado Kelly,ares_eligible=false;mídia transitória removida",
+      "objective": "Tratar e mover lote Kelly SHEIN US EN preservando originais e reserva",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-shein-1559974994967134289/final-verification.json",
+      "state": "completed",
       "thread_id": "1559974994967134289",
-      "updated_at": "2026-10-14T17:12:44+00:00"
+      "updated_at": "2026-10-14T17:25:43+00:00"
     },
     {
       "agent": "ares",
@@ -1483,12 +1483,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Fechar REPORT-INFRA/readback e avisar conclusao aqui. Rodolfo fara primeiro pedido real de gestor para validar anuncios; nao criar canario, nao fazer backfill e nao declarar cadastro GAM. Recuperar mesmo evento/request em falhas sem reabrir criacao.",
-      "objective": "Pedido inalterado ate resposta nativa; depois acompanhamento externo FIFO global PC1 com10s",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/independent-intake/verification.json;discord:1559932317861158993#1559969789164920903",
-      "state": "gatilho externo concluido e ativo: status active_for_new_requests; intake read-only de entrega nativa delivered + get real da resposta, provas salvas car/shein, sem callback/wrapper/post de criacao ou chamadas meta. dois timers enabled/active, limites cpu/memoria/io somente no acompanhamento. worker aguarda turno discord nativo ativo sem adicionar trava ao criador. diario byte-identico a baseline original. get real e parsers car3/shein1 validados sem jobs/navegacao historicos. 208 testes selecionados pass;2 checkscpv anteriores separados; fila real vazia e marco sem backfill. mantidos10s, aba nova, retry60s e incidentes no destino canonico.",
+      "next_step": "Primeiro ciclo visual real sera o pedido natural de gestor que Rodolfo anunciou. Manter pedido normal ate resposta entregue; so depois leitor externo, FIFO PC1,10s e retry60s. Recuperar mesmo evento/request e avisar problemas no destino canonico, sem backfill ou replay de criacao.",
+      "objective": "Pedido intacto ate final/resposta; acompanhamento independente em FIFO global PC1 por10s",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/independent-intake/verification.json;REPORT-INFRA:1559979468997660774;discord:1559932317861158993#1559969789164920903",
+      "state": "concluido tecnicamente e ativo: leitor externo ro de entrega nativa+get, sem callback/wrapper/post da criacao ou quotameta; diario byte-igual a baseline. dois timers enabled/active, limites proprios e defer apenas do worker durante turno nativo. provas reais de get e layouts car3/shein1 sem enfileirar/navegar historico. 208 testes selecionados pass,2 checkscpv antigos separados;72 casos fila+intake; contratos/4skills/mirrors conferidos. report-infra1559979468997660774 get verificado, content vazio e sem mentions. hold tecnico encerrado; nenhum canario/cadastrogam afirmado.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-14T17:19:59+00:00"
+      "updated_at": "2026-10-14T17:22:55+00:00"
     },
     {
       "agent": "zeus",
@@ -5862,5 +5862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T17:19:59+00:00"
+  "updated_at": "2026-10-14T17:25:43+00:00"
 }
