@@ -127,6 +127,14 @@ Ares substitutes `--agent ares`. Use the real current session/thread identifiers
 5. Capture the page with `screenshot(isFullPage=false)`, then inspect the returned local image. Confirm campaign rows are visible and no credentials appear. A screenshot can truncate labels: ground the full account/campaign identity in the preceding rendered-text readback rather than claiming the image proves every character. Improve the view only when needed for the requested legibility.
 6. Return the image using `MEDIA:<returned-local-path>` with a concise PT-BR profile/account summary and the observed campaign status. Do not substitute a desktop screenshot of AdsPower startup or a Facebook feed for the requested Ads Manager image. Leave the requested profile open, and release only the lease owned by this operation.
 
+## Ad editor configuration and preview screenshot
+
+- Require an explicit request to open **Edit**; a campaigns-only screenshot request does not authorize it. Opening the editor for inspection does not authorize field changes, toggles, drafts, publication or discarding pre-existing edits.
+- Reconfirm the selected account, campaign, ad set and exact ad name from rendered UI. Select the requested ad and open the toolbar **Edit**. If a name click is intercepted, read back state before another action; do not repeat the same blocked locator.
+- When current, exact IDs are evidenced by the page, selecting with `/adsmanager/manage/ads?act=<account>&selected_campaign_ids=<campaign>&selected_adset_ids=<adset>&selected_ad_ids=<ad>` is a verified navigation-only fallback. Read back **Ads — 1 selected** and the exact intended ad before opening the toolbar **Edit**.
+- Require the editor breadcrumb and selected ad, visible configuration fields, and a loaded **Ad preview**. Capture and inspect the actual image; thumbnails/players being rendered do not prove complete video playback. Leave all fields untouched and report inspection only.
+- The MCP `scroll-element` implementation uses native `querySelector`, so pass only a CSS selector grounded in current DOM; Playwright `text=...` is invalid there even though `click-element` supports it. Do not fetch the full HTML repeatedly when the tool has already persisted its output, and do not infer missing DOM elements from a truncated HTML response.
+
 ## Computer Use fallback — find and open one profile
 
 1. Capture the current AdsPower window by its fresh PID and window ID.
