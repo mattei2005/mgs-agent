@@ -1,4 +1,29 @@
 {
+  "cross_account_reference_policy": {
+    "enabled": true,
+    "approved_by": "344196393512075265",
+    "source_thread_id": "1558126133294399569",
+    "source_message_id": "1560012034580414530",
+    "scope": "SHEIN-US-DIRECT requests from any live-channel-authorized human across all six manager partitions; apply equivalently without renewed Rodolfo approval for this request pattern",
+    "behavior": "An empty target ad account may use an exact campaign in another authorized account as a read-only configuration reference for creating a new campaign in the requested target account. Apply explicit requested changes and inherit only compatible live reference settings not overridden by the request.",
+    "target_has_existing_campaign_required": false,
+    "same_account_reference_required": false,
+    "source_campaign_must_remain_unchanged": true,
+    "account_scope": "Validate source and target access separately under the existing channel/account authorization policy. This decision applies to every manager but does not grant general access or writes outside the originating account partition.",
+    "required_controls": [
+      "exact reference account and campaign plus exact target account",
+      "live source and target identity, currency, timezone, health and access",
+      "read-only source configuration; compatible language, event, Page and existing pixel resolved without credential or structural pixel changes",
+      "preserve literal requested destination and copy; unique target numbering and tracking reconciled before write",
+      "exact budget and currency from explicit request or verified compatible reference inheritance; exact requested bid, start and final status",
+      "explicitly selected media use/reuse remains request-scoped with clean metadata, lineage, reservation and Drive x Meta reconciliation",
+      "materialize target shells, creatives and ads only through the central Engine v3 route appropriate to cross-account references",
+      "all requested ads and campaigns pass semantic and rendered-media QA before authorized activation; exact target GET readback",
+      "preserve original request, IDs, manifests, E2E clock, SLA and late-continuation policy during recovery"
+    ],
+    "excluded": "No parallel campaign writer, arbitrary cross-manager asset access, source mutation, billing, account_spend_limit, credential or ownership changes, app permissions, structural pixel/CAPI, WordPress/quiz/SMS/ChatPion configuration or unapproved recurrence.",
+    "implementation": "shared central Engine v3; technical capability and live results must be verified separately from behavioral authorization"
+  },
   "grouped_manager_media_policy": {
     "enabled": true,
     "approved_by": "344196393512075265",
