@@ -52,6 +52,18 @@ def manager_folder(request, profile, base, ops, drive_token):
     if folder.get('trashed') or folder.get('driveId')!='0AEwt4Ye690ocUk9PVA' or folder.get('name','').casefold() not in names or len(folder.get('parents') or [])!=1:
         raise ValueError('manager folder identity, partition or Shared Drive mismatch')
     parent=ops.drive_file_readback(drive_token,folder['parents'][0])
+    if request.get('source_account') and folder['name'].casefold().endswith(' - usados'):
+        drive = json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json').read_text()).get('drive') or {}
+        vid = (drive.get('folders') or {}).get('VID') or {}
+        if (parent.get('id') != vid.get('folder_id') or parent.get('name') != 'VID'
+                or parent.get('parents') != [drive.get('pool_id')] or parent.get('trashed')
+                or parent.get('driveId') != '0AEwt4Ye690ocUk9PVA'):
+            raise ValueError('manager USED folder must belong to canonical operation VID')
+        pool = ops.drive_file_readback(drive_token, drive['pool_id'])
+        if (pool.get('name') != 'SHEIN_US_' + profile['language'] or pool.get('trashed')
+                or pool.get('driveId') != '0AEwt4Ye690ocUk9PVA' or len(pool.get('parents') or []) != 1):
+            raise ValueError('manager USED pool language/Shared Drive mismatch')
+        parent = ops.drive_file_readback(drive_token, pool['parents'][0])
     if parent.get('name')!='CRIATIVOS' or parent.get('driveId')!='0AEwt4Ye690ocUk9PVA' or parent.get('trashed'):
         raise ValueError('manager folder must be direct child of canonical CRIATIVOS')
     return folder

@@ -112,6 +112,8 @@ def _build_one(request, source, number, account_config):
     authorize(request, p)
     aid = str(p['account_id'])
     reference = account_config.get('shein_reference_profile') if request.get('source_account') else None
+    if request.get('source_account') and not reference:
+        raise ValueError('explicit reference requires independently resolved source profile')
     if reference:
         from .shein_reference import require_binding
         require_binding(request, source, p, reference)

@@ -171,7 +171,9 @@ class ReferenceTests(unittest.TestCase):
                 results=super().execute(operations,stage)
                 for op,result in zip(operations,results):
                     if op.kind in self.effects:
-                        self.effects[op.kind].append({**copy.deepcopy(op.body),'id':result.body['id']})
+                        effect={**copy.deepcopy(op.body),'id':result.body['id']}
+                        if op.kind=='ad_create':effect['creative']={'id':op.body['creative']['creative_id']}
+                        self.effects[op.kind].append(effect)
                 return results
             def execute(self, operations, stage):
                 if stage=='ad_create' and not self.failed:
