@@ -60,7 +60,17 @@ Conclusão antes do hot path: operação, manifest, mídia pre-stageada, source,
 
 ## Acompanhamento comum pós-resposta — obrigatório
 
-Em toda criação/duplicação concluída de tráfego direto (CAR, SHEIN e futuros nichos; nunca BOT/Messenger), carregar `references/landing-followup.md`. Fonte única: `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`, aprovação Rodolfo `1559951763019145247`. Responder PRIMEIRO ao gestor pela barreira de conclusão com GET; somente depois liberar a fila durável de observação da LANDING, não quiz, no PC1. Uma URL/aba nova por vez, 20 segundos reais de anúncio visível e aba ativa, fechamento confirmado, primeira ausência silenciosa + 60s + nova aba, segunda ausência/outros problemas exclusivamente na thread `1559932317861158993`. Só todas PASSED liberam o aviso exato ao gestor, sem PC1 ou alegação GAM. Não alterar campaign writer, orçamento, estratégia, início ou isolamento. O wrapper da referência é obrigatório no fluxo comum; não presumir cobertura automática de runners externos sem job/ack na fila.
+Aplicar a toda criação/duplicação concluída de tráfego direto — CAR, SHEIN e futuros nichos, nunca BOT/Messenger — nesta ordem:
+
+1. Concluir o QA/readback da criação e responder normalmente ao gestor PRIMEIRO; confirmar o envio antes de liberar qualquer navegação. O gatilho é a resposta de conclusão, não o horário de início da campanha. O acompanhamento não pode atrasar essa resposta.
+2. Liberar o acompanhamento separado em background, com fila durável/idempotente e lease exclusiva do PC1, preservando conta, canal e request. Cobrir cada combinação única de landing page + UTMs novas do conjunto, com todos os demais parâmetros aprovados.
+3. Abrir a LANDING PAGE comprovadamente correspondente, nunca a quiz. Não inventar o mapeamento nem substituir pela URL da quiz quando a landing estiver ausente.
+4. Processar uma URL por vez em ABA NOVA. Iniciar os 20 segundos somente após confirmar anúncio da rede realmente visível; manter aba ativa e anúncio visível continuamente. Fechar e verificar o fechamento antes da próxima URL; não clicar nos anúncios nem afetar abas alheias.
+5. Se não houver anúncio na primeira tentativa, fechar/verificar, aguardar 60 segundos e repetir a mesma URL em OUTRA aba nova, sem aviso. Alertar somente se a segunda tentativa também falhar. Outros problemas do acompanhamento também são incidentes, nunca sucesso parcial disfarçado de total.
+6. Enviar problemas exclusivamente ao destino `all_problem_destination_thread` do contrato canônico, nunca à thread do gestor. Identificar pedido, URL permitida e diagnóstico útil, sem output técnico bruto.
+7. Somente depois de TODAS as URLs passarem, enviar na thread do gestor exatamente: “Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 20 segundos em cada uma.” Não mencionar PC1 nesse aviso nem declarar cadastro GAM sem readback próprio.
+
+Resolver autoridade e destinos em `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`; manter IDs e estado operacional nessa fonte, não em cópias da skill. Carregar `references/landing-followup.md` para comandos, evidências e recuperação. Não alterar campaign writer, orçamento, estratégia ou início; não presumir integração automática de um runner apenas porque o consumidor está instalado. Distinguir instalação, testes offline, observação real e cadastro GAM ao informar conclusão.
 
 ## Fluxo operacional
 
