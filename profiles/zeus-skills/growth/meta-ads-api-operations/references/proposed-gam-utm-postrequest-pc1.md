@@ -2,7 +2,7 @@
 
 Status: proposal only; not an active Campaign Ops rule or execution authorization.
 Owner: Rodolfo Mattei; execution design for Ares.
-Source: Discord thread 1559932317861158993, initial message 1559938326063091775 and corrections 1559940089424125953, 1559940833430474907, 1559942378695950367 and 1559946026142662728.
+Source: Discord thread 1559932317861158993, initial message 1559938326063091775 and corrections 1559940089424125953, 1559940833430474907, 1559942378695950367, 1559946026142662728 and 1559948081351364670.
 
 When resuming this design discussion, preserve Rodolfo's requested ordering:
 
@@ -13,7 +13,7 @@ When resuming this design discussion, preserve Rodolfo's requested ordering:
 5. Confirm an actual network advertisement is rendered and visible. Start the 20-second observation only after that confirmation, keeping the ad in the visible viewport and the tab active. Page-open time alone is insufficient.
 6. After the observation, close that exact processing tab and verify closure; preserve unrelated browser tabs/windows. Then process the next URL in another new tab.
 7. If an ad does not appear on the first attempt, do not notify Rodolfo yet. Close and verify closure of that processing tab, wait one minute, then retry the exact URL once in a fresh tab. If the retry shows an ad, perform the full 20-second visible observation and close/verify that tab normally, without an error alert. Only if the second attempt still shows no ad, report the missing-ad problem in coordination thread 1559932317861158993; keep that link unresolved and do not claim all-link success. No indefinite retry loop is authorized.
-8. Only after every link succeeds, send one success follow-up in the original manager request thread confirming links opened and network ads visibly observed for at least 20 seconds each. Claim only that evidence, not GAM registration without independent registration readback.
+8. Only after every link succeeds, send one success follow-up in the original manager request thread: “Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 20 segundos em cada uma.” Do not mention PC1 or the execution host in this manager-facing success message; the execution route remains PC1 internally. Claim only that evidence, not GAM registration without independent registration readback.
 9. Route problems in this separate PC1 follow-up to the coordination thread 1559932317861158993, never to the manager request thread. For a missing advertisement, apply step 7's silent first attempt plus one-minute retry before notifying; this supersedes the earlier immediate missing-ad alert. Other operational problems keep this same coordination destination. Include the original request link, affected account/campaign/destination and exact UTM pair, confirmed progress, failure evidence, attempts and current recovery/blocker. This covers browser/PC1 access, lease contention, navigation, timing, closure and other operational errors. Do not send a partial-success or pending-link report to the manager thread; preserve the normal campaign-completed reply already sent there.
 
 Rodolfo describes Ciro's technology as registering utm_campaign/utm_adgroup after at least 20 seconds of ad visibility within a session. This is user-provided behavior, not independently verified. Confirm with Ciro the session semantics for distinct tabs, an approved test/registration route and IVT handling before rollout. Do not manufacture clicks, change ad-block/security settings or bypass restrictions.
