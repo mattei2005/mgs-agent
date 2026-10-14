@@ -1,14 +1,16 @@
-# Proposed post-request GAM UTM preparation — pending review
+# Approved direct-traffic post-request ad-visibility standard
 
-Status: proposal only; not an active Campaign Ops rule or execution authorization.
-Owner: Rodolfo Mattei; execution design for Ares.
+Status: approved design; handoff/implementation pending. Not proof of deployed runtime or GAM registration.
+Owner: Rodolfo Mattei; implementation and execution owner: Ares.
+Approval: Discord message 1559951763019145247 in thread 1559932317861158993.
+Scope: the direct-traffic strategy across CAR/vehicle, SHEIN and future niches; not BOT/Messenger. Apply to authorized completed campaign creation/duplication requests without changing their account/channel partitions.
 Source: Discord thread 1559932317861158993, initial message 1559938326063091775 and corrections 1559940089424125953, 1559940833430474907, 1559942378695950367, 1559946026142662728 and 1559948081351364670.
 
-When resuming this design discussion, preserve Rodolfo's requested ordering:
+When implementing the approved standard, preserve Rodolfo's requested ordering:
 
 1. Complete and validate the manager's authorized campaign creation/duplication request, including exact destination links and campaign/adgroup UTMs.
 2. Send the normal request-completed response to the manager first. Do not turn the browser step into a prerequisite for this reply or anchor its dispatch to the campaign's scheduled start.
-3. Only afterward, run the proposed separate background follow-up on PC1 without extending the original campaign scope, budget, strategy or start time.
+3. Only afterward, run the separate background follow-up on PC1 without extending the original campaign scope, budget, strategy or start time. Implement as a durable, idempotent queued follow-up bound to the completed request; do not block the campaign-completed reply, duplicate pending/successful work, overlap PC1 leases or let raw process/subagent notifications leak into Discord.
 4. Open only the campaign's corresponding landing-page URL, NOT its quiz URL. Resolve the actual landing-page mapping from the completed request/approved route; preserve the exact new campaign/adgroup UTMs and all applicable approved tracking parameters. Do not guess the landing page by removing /quiz/ or altering a slug, and do not substitute the quiz when the mapping is missing; report an unresolved mapping in coordination thread 1559932317861158993. Process landing-page URLs sequentially. For each distinct landing page and exact UTM pair, create a new tab; never navigate an existing processing tab to the next URL. This supersedes the earlier generic destination-link wording.
 5. Confirm an actual network advertisement is rendered and visible. Start the 20-second observation only after that confirmation, keeping the ad in the visible viewport and the tab active. Page-open time alone is insufficient.
 6. After the observation, close that exact processing tab and verify closure; preserve unrelated browser tabs/windows. Then process the next URL in another new tab.
@@ -18,4 +20,4 @@ When resuming this design discussion, preserve Rodolfo's requested ordering:
 
 Rodolfo describes Ciro's technology as registering utm_campaign/utm_adgroup after at least 20 seconds of ad visibility within a session. This is user-provided behavior, not independently verified. Confirm with Ciro the session semantics for distinct tabs, an approved test/registration route and IVT handling before rollout. Do not manufacture clicks, change ad-block/security settings or bypass restrictions.
 
-No handoff to Ares or runtime/script/scheduler activation has been authorized in these messages; Rodolfo requested the revised flow for review first.
+Rodolfo authorized communication with Ares in this same thread and implementation of the standard in message 1559951763019145247. Ares must persist the cross-niche canonical contract/procedure, institutional registry/checkpoint, audit, inventory and REPORT-INFRA for any structural implementation, validate deterministic tests and report completion here. Do not create a test campaign or conduct additional monetized visits on behalf of this approval: Rodolfo will submit the first manager request after implementation is reported. Distinguish implemented/tested integration from first-real-request validation, and distinguish observed ad visibility from GAM registration.
