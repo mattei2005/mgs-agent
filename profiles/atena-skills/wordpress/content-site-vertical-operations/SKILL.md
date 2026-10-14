@@ -155,6 +155,8 @@ Quando Rodolfo ou Raquel pedir verificação de acesso antes da produção, conc
 
 Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de artigos, mínimo de palavras, posição da imagem, relação entre imagem interna e destacada, fontes externas e status solicitado. Exigências explícitas do briefing prevalecem sobre o padrão inferido do corpus; não reduza um mínimo de palavras nem altere a posição da imagem para imitar referências mais curtas. Não confunda rascunho no WordPress com arquivo local de texto.
 
+Separe nos informes as etapas de texto preparado, revisão editorial, imagem aprovada e rascunho salvo e validado. Texto completo e imagem aprovada não encerram uma entrega de drafts no WordPress. Quando a revisão humana pedir links ao concluir, entregue os links de edição agrupados por portal, identificando cada título e status real, somente após conferir todos os IDs; não substitua essa entrega por anexos ou por um aviso de que os arquivos locais estão prontos.
+
 Quando Rodolfo ou Raquel pedir novos artigos “no mesmo padrão” de uma categoria, trate o arquivo completo da categoria como contrato editorial mensurável:
 
 1. Resolva o ID e a contagem publicados da categoria e extraia todos os posts por esse ID; pagine quando o total exceder o limite da REST.

@@ -73,6 +73,7 @@ Inspecione também o trecho final de `content.raw` em várias referências. Card
 3. Para tendências, valide a afirmação em fonte primária ou editorial confiável antes de escrever.
 4. Cite a fonte dentro do artigo quando ela sustentar um claim datado ou mensurável.
 5. Preserve um manifesto `source_urls`; fonte de pesquisa não autoriza copiar estrutura verbal ou frases.
+6. Separe evidência qualitativa de interesse — consultas encontradas, dúvidas recorrentes e cobertura recente — de métricas de procura. Não apresente presença em SERP ou em reportagem como volume de busca ou crescimento medido; registre a limitação quando não houver dado quantitativo verificável.
 
 ## 5. Montar o artigo no formato do site
 
@@ -128,6 +129,8 @@ Resolva categoria e tags pelo helper oficial antes de montar o payload. Para art
 
 ## 9. Criar rascunhos com payload explícito
 
+Antes do primeiro write, consulte `OPTIONS /wp-json/wp/v2/posts` com a identidade editorial e confira `schema.properties.meta.properties` para as chaves SEO que pretende enviar. A presença no schema confirma registro do campo, não gravação nem score: a comparação com o GET do draft continua obrigatória. Não instale plugin nem altere runtime para contornar campo ausente sem a autorização técnica correspondente.
+
 Payload mínimo:
 
 ```json
@@ -170,6 +173,8 @@ Depois valide `content.rendered`:
 - zero placeholder;
 - hrefs exatos e canônicos;
 - nenhum bloco removido pelo parser do WordPress.
+
+No QA de lotes multilíngues, procure marcadores inequívocos como `[TODO]` ou `[insert ...]`, não a substring `TODO` sem distinção de caixa: `todo` e `todos` são palavras legítimas em espanhol e português e geram falsas reprovações. Antes de enviar o corpo final, remova números de citação órfãos dos textos de âncora quando não houver bibliografia numerada correspondente; preserve o href e a atribuição contextual da fonte, depois repita o QA sobre esse corpo exato.
 
 Diagnóstico de legibilidade em inglês:
 
