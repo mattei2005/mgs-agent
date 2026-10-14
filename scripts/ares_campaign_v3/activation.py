@@ -26,6 +26,41 @@ def digest(value):
     return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 
+def ensure_staging_paused(engine, manifest, campaign_id):
+    """Reconcile existing direct-create children; no creation or manifest edit."""
+    matches = [c for c in manifest.campaigns if c.mode == 'from_zero_prestaged' and c.status == 'PAUSED']
+    if manifest.operation != 'SHEIN-US-DIRECT' or len(matches) != 1:
+        raise ValueError('staging pause requires one existing SHEIN direct-create request')
+    spec = matches[0]
+    checkpoint = Path(engine.config['state_root'])/'checkpoints'/(manifest.request_id+'-'+spec.account_id+'.json')
+    data = json.loads(checkpoint.read_text())
+    bundles = [b for b in data.get('bundles', []) if campaign_id in b.get('campaign_ids', [])]
+    if len(bundles) != 1 or bundles[0].get('status') != 'COMPLETE':
+        raise ValueError('staging pause requires confirmed existing complete IDs')
+    confirmed = bundles[0]
+    bundle = BundlePlan(spec.account_id, spec.app_key, 1, (spec,), (), 0)
+    transport = engine.transport_factory(spec.account_id)
+    key = manifest.request_id+':staging-pause:'+datetime.now(timezone.utc).isoformat()
+    engine.quota.reserve((spec.app_key,spec.account_id),6+3*(len(spec.ads)+1),request_id=key)
+    live = read_tree(engine,bundle,transport,campaign_id,'staging_pause_pre_read')
+    if (live['campaign']['status'] != 'PAUSED' or live['campaign']['account_id'] != spec.account_id
+            or {a['id'] for a in live['ads']['data']} != set(confirmed.get('ad_ids', []))
+            or {a['id'] for a in live['adsets']['data']} != set(confirmed.get('adset_ids', []))):
+        raise ValueError('staging pause account/parent/children binding mismatch')
+    children = live['adsets']['data']+live['ads']['data']
+    if any(n.get('status') not in {'ACTIVE','PAUSED'} for n in children):
+        raise ValueError('staging pause unexpected configured child state')
+    missing = [n for n in children if n['status'] == 'ACTIVE']
+    if missing:
+        engine._batch(bundle,transport,[BatchOperation('stage_pause_'+n['id'],'POST',n['id'],
+            body={'status':'PAUSED'},kind='activation_status') for n in missing],'staging_pause_children')
+        live = read_tree(engine,bundle,transport,campaign_id,'staging_pause_readback')
+    if any(n.get('status') != 'PAUSED' for n in statuses(live)):
+        raise ValueError('staging pause readback incomplete')
+    engine.quota.complete((spec.app_key,spec.account_id),key)
+    return live
+
+
 def normalize(payload):
     out=copy.deepcopy(payload);out.pop('prevalidation',None);out.pop('prevalidated',None)
     for campaign in out['campaigns']:campaign['status']='PAUSED'

@@ -931,7 +931,18 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                 warnings = state.get('qa_warnings', [])
             else:
                 for index, cid in enumerate(state['engine_result']['campaign_ids']):
-                    live_one = _engine_tree(config, rid, cid) or _readback(common, token, cid)
+                    if (len(manifest.campaigns) == 1 and manifest.campaigns[index].reference
+                            and manifest.campaigns[index].mode == 'from_zero_prestaged'
+                            and manifest.campaigns[index].status == 'PAUSED'
+                            and not state.get('staging_children_paused')):
+                        from .activation import ensure_staging_paused
+                        staging_engine = CampaignEngine(config, transport_factory=lambda account: GraphBatchTransport(
+                            account, manifest.graph_version, token, app_secret=os.environ.get('ARES_META_APP_SECRET')))
+                        live_one = ensure_staging_paused(staging_engine, manifest, cid)
+                        state['staging_children_paused'] = True
+                        atomic_json(state_path,state)
+                    else:
+                        live_one = _engine_tree(config, rid, cid) or _readback(common, token, cid)
                     one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
                     warnings.extend(verify_readback(one_payload, state['source'], live_one))
                     from .shein_qa import verify_media, proof_covers

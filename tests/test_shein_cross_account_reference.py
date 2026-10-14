@@ -75,6 +75,50 @@ class ReferenceTests(unittest.TestCase):
             self.assertEqual(slot['source_ad_id'],s['ads'][0]['id'])
         self.assertEqual(shell['reference']['account_id'],s['campaign']['account_id'])
 
+    def test_staging_pause_reconciles_only_existing_active_children(self):
+        from ares_campaign_v3 import activation
+        with tempfile.TemporaryDirectory() as raw:
+            root=Path(raw);r,s,a,assets,cfg=fixture();r['status']='PAUSED'
+            cfg.update(state_root=str(root/'state'),audit_root=str(root/'audit'))
+            m=sealed(root,r,s,a,assets,cfg);t=FakeBatchTransport(a['shein_profile']['account_id'])
+            e=CampaignEngine(cfg,transport_factory=lambda aid:t);created=e.execute(m)
+            checkpoint=json.loads(next((root/'state'/'checkpoints').glob('*.json')).read_text())['bundles'][0]
+            cid=created['campaign_ids'][0]
+            before={'campaign':{'id':cid,'account_id':m.campaigns[0].account_id,'status':'PAUSED'},
+                    'adsets':{'data':[{'id':checkpoint['adset_ids'][0],'status':'ACTIVE'}]},
+                    'ads':{'data':[{'id':aid,'status':'ACTIVE'} for aid in checkpoint['ad_ids']]}}
+            after=copy.deepcopy(before)
+            for n in after['adsets']['data']+after['ads']['data']:n['status']='PAUSED'
+            with patch.object(activation,'read_tree',side_effect=[before,after]),patch.object(e,'_batch',return_value=[]) as writes:
+                live=activation.ensure_staging_paused(e,m,cid)
+                self.assertEqual(live,after)
+                ops=writes.call_args.args[2]
+                self.assertEqual({o.relative_url for o in ops},set(checkpoint['adset_ids']+checkpoint['ad_ids']))
+                self.assertTrue(all(o.body=={'status':'PAUSED'} for o in ops))
+            with patch.object(activation,'read_tree',return_value=after),patch.object(e,'_batch') as writes:
+                activation.ensure_staging_paused(e,m,cid);writes.assert_not_called()
+
+    def test_requested_target_page_is_separate_from_reference_identity(self):
+        r,s,a,assets,cfg=fixture();before=copy.deepcopy(s)
+        target_page='572539232608128';r['target_page_id']=target_page
+        a['shein_profile']['page_id']=target_page
+        a['shein_profile']['instagram_user_id']=None
+        s['adset']['promoted_object']['page_id']=a['shein_reference_profile']['page_id']
+        before=copy.deepcopy(s)
+        p=general.build(r,s,1,a);shell=p['campaigns'][0]
+        self.assertEqual(s,before)
+        self.assertEqual(shell['reference']['page_id'],a['shein_reference_profile']['page_id'])
+        self.assertEqual(shell['reference']['target_page_id'],target_page)
+        self.assertEqual(shell['adset_create']['promoted_object']['page_id'],target_page)
+        for ad in shell['ads']:
+            self.assertEqual(ad['creative_payload']['object_story_spec']['page_id'],target_page)
+            self.assertNotIn('instagram_user_id',ad['creative_payload']['object_story_spec'])
+        validate_account_policy(Manifest.from_dict(p),cfg)
+        p['campaigns'][0]['ads'][0]['creative_payload']['object_story_spec']['page_id']=shell['reference']['page_id']
+        with self.assertRaises(ManifestError):validate_account_policy(Manifest.from_dict(p),cfg)
+        r['target_page_id']='not-a-page'
+        with self.assertRaises(ValueError):ref.validate_intent(r)
+
     def test_all_six_partitions_and_one_through_five_counts_central_core(self):
         for manager in range(6):
             for count in range(1,6):

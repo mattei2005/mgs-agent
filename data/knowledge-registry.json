@@ -3970,6 +3970,25 @@
       "updated_at": "2026-10-09T02:13:36+00:00"
     },
     {
+      "canonical_key": "ares.shein.cross-account-reference.target-page",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-14T20:51:45+00:00",
+      "id": "ARES-SHEIN-REFERENCE-TARGET-PAGE-1560031432968114310",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN criação nova usa Page alvo aprovada, não Page da referência externa",
+      "updated_at": "2026-10-14T20:51:45+00:00"
+    },
+    {
       "canonical_key": "ares.shein-us-direct.reporting.cost-per-result",
       "canonical_source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
       "consumers": [
@@ -11914,5 +11933,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T19:58:33+00:00"
+  "updated_at": "2026-10-14T20:51:45+00:00"
 }
