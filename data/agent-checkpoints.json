@@ -5113,12 +5113,12 @@
     {
       "agent": "zeus",
       "id": "php83-smart-routing-20261014",
-      "next_step": "Snapshot live completo, validar fonte Openzed e operações por publisher, plano reversível, canário, apply e readback público por rota.",
-      "objective": "Corrigir destinos das 609 rotas dos grupos A e Vizioid B/C para Openzed US-CC-EN; revalidar oito casos isolados e listar pendências sem republicar drafts.",
-      "source": "discord:1559601841036198031/1559931178050527265; work/sb-smart-routing/openzed-cutover-1559931178050527265",
-      "state": "authorized_preflight; rodolfo mensagem1559931178050527265; nenhuma gravação sb iniciada",
+      "next_step": "Recuperação segura no mesmo escopo: backup/hash e substituição exclusiva de22 URLs nas RewriteRules existentes; validar canário público antes do restante.",
+      "objective": "Migrar somente 609 rotas dos grupos A e Vizioid B/C para destinos Openzed US-CC-EN.",
+      "source": "discord:1559931178050527265; work/sb-smart-routing/openzed-cutover-1559931178050527265/public-canary-summary.json",
+      "state": "canary_sb22_readback_pass_public_fail: apache .htaccess ainda contém destinations antigos; cloudflare dynamic e query nova descartam cache como causa; demais25 pools não escritos.",
       "thread_id": "1559601841036198031",
-      "updated_at": "2026-10-14T14:14:05+00:00"
+      "updated_at": "2026-10-14T14:48:40+00:00"
     },
     {
       "agent": "zeus",
@@ -5842,5 +5842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T14:41:24+00:00"
+  "updated_at": "2026-10-14T14:48:40+00:00"
 }

@@ -567,5 +567,6 @@ Conclusão: [IP confirmado / IP descartado como único fator / endpoint-specific
 
 ## References
 
+- `references/proposed-gam-utm-postrequest-pc1.md` — pending-review proposal only: PC1 ad-visibility follow-up after the manager's creation-completed reply; sequential new tabs, 20-second observed visibility, one-minute failed-fill retry delay. Not an active execution policy.
 - `references/webshare-adspower-meta-post-ads-proxy-test-2026-06-18.md` — session-specific diagnostic: Webshare proxy from 1Password, direct vs proxied egress, dry-run/write results, cleanup, and conclusion for `POST /ads` block.
 - `references/advanced-access-app-token-post-ads-2026-06-18.md` — session-specific diagnostic: new Advanced Access Meta app/token still reproduced the same `POST /ads` checkpoint while campaign/adset/adcreative creation and cleanup worked.
