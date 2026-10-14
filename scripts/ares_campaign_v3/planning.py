@@ -246,6 +246,7 @@ class Planner:
                         "adset_id": f"{{adset_id_{ci}}}",
                         "creative": {"creative_id": f"{{creative_id_{ci}_{ai}}}"},
                         "status": "ACTIVE",
+                        **({"source_ad_id": ad.source_ad_id} if ad.source_ad_id else {}),
                     },
                     kind="ad_create",
                 ))

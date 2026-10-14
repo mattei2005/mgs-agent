@@ -184,6 +184,7 @@ class CampaignSpec:
     creative_materialization_route: str = "inline_copy"
     start_intent: str = "SCHEDULED"
     bid_override: bool = False
+    reference: dict[str, Any] = field(default_factory=dict)
 
     @property
     def uses_existing_post_two_phase(self) -> bool:
@@ -196,6 +197,19 @@ class CampaignSpec:
         if missing:
             raise ManifestError(f"campaign missing fields: {','.join(missing)}")
         mode = str(value["mode"])
+        reference = value.get('reference') or {}
+        if reference:
+            required_reference = {'account_id', 'campaign_id', 'adset_id', 'ad_ids', 'language', 'access', 'lineage_route'}
+            if (not isinstance(reference, dict) or set(reference) != required_reference
+                    or mode != 'from_zero_prestaged' or reference['access'] != 'READ_ONLY'
+                    or reference['lineage_route'] != 'direct_ad_create_with_source_ad_id'
+                    or reference['language'] not in {'EN', 'ES'}
+                    or reference['account_id'] == str(value['account_id']).removeprefix('act_')):
+                raise ManifestError('invalid cross-account read-only reference')
+            if (not isinstance(reference['ad_ids'], list) or not reference['ad_ids']
+                    or any(re.fullmatch(r'[1-9][0-9]+', str(v)) is None for v in
+                           [reference['account_id'], reference['campaign_id'], reference['adset_id'], *reference['ad_ids']])):
+                raise ManifestError('exact numeric reference identities required')
         if mode not in {"pure_clone", "clone_prestaged", "clone_page_switch", "from_zero_prestaged"}:
             raise ManifestError(f"unsupported mode: {mode}")
         creative_materialization_route = str(
@@ -259,7 +273,9 @@ class CampaignSpec:
                 raise ManifestError(f"campaign_create contains engine-owned fields: {','.join(campaign_reserved)}")
             if adset_reserved:
                 raise ManifestError(f"adset_create contains engine-owned fields: {','.join(adset_reserved)}")
-            if len(ads) not in {3, 5}:
+            if reference and (not 1 <= len(ads) <= 5 or any(a.source_ad_id not in reference['ad_ids'] for a in ads)):
+                raise ManifestError('reference requires one through five ads with exact source lineage')
+            if not reference and len(ads) not in {3, 5}:
                 raise ManifestError("from_zero_prestaged requires exactly three or five ads")
             if not adset_name:
                 raise ManifestError("from_zero_prestaged requires adset_name")
@@ -381,6 +397,7 @@ class CampaignSpec:
             creative_materialization_route=creative_materialization_route,
             start_intent=start_intent,
             bid_override=bid_override,
+            reference=reference,
         )
 
 
@@ -405,6 +422,8 @@ class Manifest:
             raise ManifestError("request_id, operation and graph_version are required")
         _iso(str(value.get("created_at") or ""), "created_at")
         campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
+        if operation != 'SHEIN-US-DIRECT' and any(c.reference for c in campaigns):
+            raise ManifestError('cross-account reference is restricted to SHEIN')
         if operation != 'SHEIN-US-DIRECT' and any(c.bid_override for c in campaigns):
             raise ManifestError('explicit clone bid delta is restricted to SHEIN')
         if str(value.get("operation")) != "SHEIN-US-DIRECT" and any(c.start_intent == "IMMEDIATE" for c in campaigns):

@@ -41,6 +41,7 @@ REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start
                   'source_channel_id', 'mode', 'asset_refs', 'product_label'}
 REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
 REQUEST_FIELDS.update({'bid_strategy', 'bid_usd', 'campaign_groups', 'manager_media_folder_id'})
+REQUEST_FIELDS.update({'source_account', 'source_campaign_id', 'website_url', 'primary_text'})
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -98,6 +99,8 @@ def aware_time(value: Any) -> datetime:
 
 
 def validate_request(request: dict[str, Any]) -> None:
+    from .shein_reference import validate_intent
+    validate_intent(request)
     if set(request) - REQUEST_FIELDS:
         raise RouteBlocked('unknown request field')
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,119}', str(request.get('request_id') or '')):
@@ -140,7 +143,7 @@ def validate_request(request: dict[str, Any]) -> None:
         from .shein_grouped_media import validate_groups
         validate_groups(request)
     if request.get('manager_media_folder_id') is not None:
-        if not re.fullmatch(r'[A-Za-z0-9_-]{10,100}', str(request['manager_media_folder_id'])) or request.get('mode') != 'clone_prestaged' or not request.get('campaign_groups'):
+        if not re.fullmatch(r'[A-Za-z0-9_-]{10,100}', str(request['manager_media_folder_id'])) or request.get('mode') not in {'clone_prestaged', 'from_zero_prestaged'} or not request.get('campaign_groups'):
             raise RouteBlocked('manager media requires exact folder and explicit clone groups')
     if 'bid_strategy' in request or 'bid_usd' in request:
         from .shein_general import bid_delta
@@ -685,6 +688,11 @@ def _run_request_scoped(request: dict[str, Any], *, confirm_execute: bool = Fals
         profile['expired_schedule_policy'] = (operation.get('request_defaults') or {}).get('expired_explicit_start_policy') or {}
         authorize(request, profile)
         request = apply_request_defaults(request, operation)
+        if request.get('source_account'):
+            from .shein_reference import configure
+            profiles = json.loads(path.read_text())['profiles']
+            profile, reference = configure(request, profile, profiles, operation, lookup_account)
+            profile['reference_profile'] = reference
         if request.get('mode') == 'from_zero_prestaged' and not request.get('source_number'):
             if not profile.get('reference_campaign_number'):
                 raise RouteBlocked('empty account requires an approved same-account creation specification')
@@ -716,6 +724,11 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                            capture_output=True, text=True, timeout=20)
     if scope.returncode != 0:
         raise RouteBlocked('operational domain scope rejected')
+    if request.get('source_account'):
+        ref_domain = CURRENT_PROFILE.get()['reference_profile']['destination_base']
+        scope = subprocess.run(['python3', str(BASE / 'scripts/mgs-domain-scope.py'), 'check', '--agent', 'ares', ref_domain], capture_output=True, text=True, timeout=20)
+        if scope.returncode != 0:
+            raise RouteBlocked('operational domain scope rejected')
     auth = json.loads((BASE / 'data/authorized-users.json').read_text())
     if request['authorized_by'] not in auth['agents']['ares']['authorized_user_discord_ids']:
         if not (CURRENT_PROFILE.get() or {}).get('channel_authorization_policy', {}).get('enabled'):

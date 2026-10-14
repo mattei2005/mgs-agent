@@ -97,6 +97,23 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
         base_policy = dict(account.get("campaign_policy") or {})
         mode_policies = base_policy.pop("by_mode", {}) or {}
         policy = {**base_policy, **dict(mode_policies.get(campaign.mode) or {})}
+        if campaign.reference:
+            capability = config.get('shein_cross_account_reference') or {}
+            source_account = accounts.get(campaign.reference['account_id']) or {}
+            tp = account.get('shein_profile') or {}
+            sp = source_account.get('shein_profile') or {}
+            if (capability.get('enabled') is not True or capability.get('approved_by') != '344196393512075265'
+                    or capability.get('lineage_route') != campaign.reference['lineage_route']
+                    or source_account.get('operation') != 'SHEIN-US-DIRECT'
+                    or any(not tp.get(k) or tp[k] != sp.get(k) for k in ['manager_code', 'channel_id', 'language', 'currency'])
+                    or campaign.reference['language'] != tp['language']):
+                raise ManifestError('cross-account capability or source/target partition mismatch')
+            if (campaign.adset_create.get('promoted_object', {}).get('pixel_id') != tp.get('pixel_id')
+                    or any(a.creative_payload.get('object_story_spec', {}).get('page_id') != tp.get('page_id') for a in campaign.ads)):
+                raise ManifestError('cross-account target Page/pixel mismatch')
+            policy['allowed_ad_counts'] = capability.get('allowed_ad_counts') or []
+            if set(policy['allowed_ad_counts']) != {1, 2, 3, 4, 5}:
+                raise ManifestError('cross-account explicit ad-count capability unavailable')
         required_operation = str(account.get("operation") or "").strip()
         if required_operation and manifest.operation != required_operation:
             raise ManifestError(

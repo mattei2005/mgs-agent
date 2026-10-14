@@ -20,7 +20,8 @@ from urllib.request import Request, urlopen
 
 def validate_groups(request):
     groups=request.get('campaign_groups')
-    if request.get('mode')!='clone_prestaged' or not isinstance(groups,list) or len(groups)!=int(request.get('quantity',1)) or not groups:
+    valid_mode = request.get('mode') == 'clone_prestaged' or (request.get('mode') == 'from_zero_prestaged' and bool(request.get('source_account')))
+    if not valid_mode or not isinstance(groups,list) or len(groups)!=int(request.get('quantity',1)) or not groups:
         raise ValueError('explicit groups require clone_prestaged and exact quantity')
     files=[]
     for g in groups:
@@ -46,6 +47,8 @@ def manager_folder(request, profile, base, ops, drive_token):
     fid=request.get('manager_media_folder_id')
     folder=ops.drive_file_readback(drive_token,fid)
     names={str(x.get('manager_name')).casefold() for x in json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json').read_text())['accounts'] if x.get('manager_code')==profile['manager_code']}
+    if request.get('source_account'):
+        names |= {name + ' - usados' for name in names}
     if folder.get('trashed') or folder.get('driveId')!='0AEwt4Ye690ocUk9PVA' or folder.get('name','').casefold() not in names or len(folder.get('parents') or [])!=1:
         raise ValueError('manager folder identity, partition or Shared Drive mismatch')
     parent=ops.drive_file_readback(drive_token,folder['parents'][0])
@@ -85,9 +88,20 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     profile=copy.deepcopy(cfg['accounts'][account['account_id']]['shein_profile'])
     op=json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
     profile['channel_authorization_policy']=op['channel_authorization_policy'];authorize(request,profile,force=True)
+    if request.get('source_account'):
+        from .shein_reference import configure
+        profiles = json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json').read_text())['profiles']
+        profile, reference = configure(request, profile, profiles, op, driver.lookup_account)
+        profile['reference_profile'] = reference
     scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',profile['destination_base']],capture_output=True,timeout=20)
     if scope.returncode!=0:raise ValueError('operational domain scope rejected')
     common=driver._load_common();token,_=common.get_token_from_1password(cfg['accounts'][account['account_id']]['token_item'])
+    if request.get('source_account'):
+        marker = driver.CURRENT_PROFILE.set(profile)
+        try:
+            driver._prepare(request, cfg, driver.ReadOnlyClient(common), token, reference_only=True)
+        finally:
+            driver.CURRENT_PROFILE.reset(marker)
     h,live,_=common.graph_get('act_'+account['account_id'],token,{'fields':'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'})
     if h!=200 or live.get('name')!=profile['account_name'] or live.get('currency')!='USD' or live.get('timezone_name')!=profile['timezone'] or live.get('account_status')!=1 or live.get('disable_reason')!=0 or 'ADVERTISE' not in live.get('user_tasks',[]):
         raise ValueError('exact account live identity/access/health mismatch')

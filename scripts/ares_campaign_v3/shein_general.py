@@ -111,7 +111,12 @@ def _build_one(request, source, number, account_config):
     p = account_config['shein_profile']
     authorize(request, p)
     aid = str(p['account_id'])
-    if request['account'] not in {aid, p['account_name']} or source['campaign'].get('account_id') != aid:
+    reference = account_config.get('shein_reference_profile') if request.get('source_account') else None
+    if reference:
+        from .shein_reference import require_binding
+        require_binding(request, source, p, reference)
+    sp = reference or p
+    if request['account'] not in {aid, p['account_name']} or source['campaign'].get('account_id') != sp['account_id']:
         raise ValueError('account/source binding mismatch')
     if 'preserve_posts' in request and not isinstance(request['preserve_posts'], bool):
         raise ValueError('preserve_posts must be an explicit boolean')
@@ -124,11 +129,15 @@ def _build_one(request, source, number, account_config):
         raise ValueError('explicit delivery status required')
     start = datetime.fromisoformat(request['start_time']).astimezone(ZoneInfo(p['timezone']))
     sn = int(request['source_number'])
-    literal = re.search(r'\((' + re.escape(p['tracking_prefix']) + r'c[0-9]+)\)', source['campaign']['name'])
+    literal = re.search(r'\((' + re.escape(sp['tracking_prefix']) + r'c[0-9]+)\)', source['campaign']['name'])
     if not literal or int(literal.group(1).split('c')[-1]) != sn:
         raise ValueError('source literal tracking token/number mismatch')
     old = literal.group(1)
     new = p['tracking_prefix'] + f'c{number:03d}'
+    if reference:
+        new = p['reference_target_token']
+        if int(new.split('c')[-1]) != number:
+            raise ValueError('literal tracking does not identify the next free target number')
     campaign = copy.deepcopy(source['campaign'])
     campaign['bid_strategy'], bid_updates = bid_delta(request, source)
     label_number = re.match(r'^([0-9]+)\s*-', campaign['name'])
@@ -168,14 +177,14 @@ def _build_one(request, source, number, account_config):
         media = story.get('video_data') or story.get('link_data') or {}
         links = source_links(cr, story)
         link = links[0]
-        if any(x.split('?')[0] != p['destination_base'] for x in links):
+        if any(x.split('?')[0] != sp['destination_base'] for x in links):
             raise ValueError('source destination differs from approved account profile')
         params = dict(parse_qsl(urlparse(link).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
         for destination in links:
             params = dict(parse_qsl(urlparse(destination).query)); params.update(dict(parse_qsl(cr.get('url_tags') or '')))
-            if params.get('utm_medium') != p['utm_medium'] or params.get('utm_campaign') != old or params.get('utm_adgroup') != old + 'g01':
+            if params.get('utm_medium') != sp['utm_medium'] or params.get('utm_campaign') != old or params.get('utm_adgroup') != old + 'g01':
                 raise ValueError('source effective tracking mismatch')
-        if story.get('page_id') != p['page_id'] or not cr.get('effective_object_story_id', '').startswith(p['page_id'] + '_') or ad.get('adset_id') != source['adset']['id']:
+        if story.get('page_id') != sp['page_id'] or not cr.get('effective_object_story_id', '').startswith(sp['page_id'] + '_') or ad.get('adset_id') != source['adset']['id']:
             raise ValueError('Page/adset/post lineage mismatch')
         tags = dict(parse_qsl(cr.get('url_tags') or ''))
         tags.update(utm_source='facebook', utm_medium=p['utm_medium'], utm_campaign=new, utm_adgroup=new + 'g01')
@@ -211,7 +220,7 @@ def _build_one(request, source, number, account_config):
             ads.append({'name': ad['name'], 'source_ad_id': str(ad['id']), 'creative_payload': cp})
     else:
         assets = request.get('_resolved_assets') or []
-        if (mode == 'from_zero_prestaged' and len(assets) != 3) or not 1 <= len(assets) <= 5:
+        if (mode == 'from_zero_prestaged' and not reference and len(assets) != 3) or not 1 <= len(assets) <= 5:
             raise ValueError('from-zero needs three assets; new-media clone needs 1..5')
         if len({a['asset_id'] for a in assets}) != len(assets):
             raise ValueError('duplicate asset lineage')
@@ -221,17 +230,17 @@ def _build_one(request, source, number, account_config):
                 raise ValueError('asset language/readiness mismatch')
             if not asset.get('thumbnail_url') or not asset.get('vertical_video_id'):
                 raise ValueError('asset thumbnail/media incomplete')
-            cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = p['destination_base'] + '?' + tags
+            cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = request['website_url'] if reference else p['destination_base'] + '?' + tags
             vd = {'video_id': asset['vertical_video_id'], 'title': media.get('title') or media.get('name'),
-                  'message': request.get('_primary_text', media['message']), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
+                  'message': request.get('_primary_text', request.get('primary_text', media['message'])), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
             if not vd['title']:
                 raise ValueError('copy headline missing')
             if media.get('link_description') or media.get('description'):
                 vd['link_description'] = media.get('link_description') or media['description']
             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},
-                        'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': tags}
-            ig = cr.get('instagram_user_id') or story.get('instagram_user_id')
+                        'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': '' if reference else tags}
+            ig = p.get('instagram_user_id') if reference else cr.get('instagram_user_id') or story.get('instagram_user_id')
             if ig:
                 creative['object_story_spec']['instagram_user_id'] = ig
             if cr.get('contextual_multi_ads') is not None:
@@ -262,6 +271,18 @@ def _build_one(request, source, number, account_config):
                 shell['adset_create'][field] = copy.deepcopy(source['adset'][field])
         if bid_updates is not None:
             shell['adset_create'].update(bid_updates)
+        if reference:
+            from .shein_reference import receipt
+            shell['reference'] = receipt(source, reference)
+            # Preserve the live configuration, not the G005 fallback defaults.
+            required = {'billing_event', 'optimization_goal', 'targeting', 'promoted_object',
+                        'attribution_spec', 'regional_regulated_categories',
+                        'regional_regulation_identities', 'is_dynamic_creative'}
+            if not required.issubset(source['adset']):
+                raise ValueError('complete compatible live reference adset required')
+            shell['adset_create'].update({k: copy.deepcopy(source['adset'][k]) for k in required})
+            if bid_updates is not None:
+                shell['adset_create'].update(bid_updates)
     else:
         shell.update(source_campaign_id=campaign['id'], source_adset_id=source['adset']['id'],
                      campaign_updates={'daily_budget': str(int(budget)), 'bid_strategy': campaign['bid_strategy']})
