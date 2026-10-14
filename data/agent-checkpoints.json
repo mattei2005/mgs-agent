@@ -1183,12 +1183,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1560010597385506986",
-      "next_step": "Preparar dois assets selecionados e executar mesmo request no Engine central, validar QA/Page/UTM/valor e ativar por continuação revisada com mensagem1560031432968114310; preservar relógio original e IDs, fonte intacta.",
-      "objective": "Concluir campanha001 Escalatepower G002 com Savings Spot, COCAP USD0.90, USD50/dia herdado, dois vídeos e URL/copy literais",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560010597385506986/request-target-page.json",
-      "state": "rodolfo1560031432968114310 autorizou correção/conclusão e confirmou savings spot572539232608128, não fonte. manutenção foreground isolada corrigiu page-alvo no intake/compiler/schema/prevalidation; 64 testes ok e reference-preflight real confirmou alvo/page/slot001/usd50. sem campanha/upload até este checkpoint.",
+      "next_step": "Nenhuma nova criação ou recovery deste request. Aguardar revisão normal Meta; futuras consultas/ações somente por pedido, sem cron. Procedimento e autorização permanente para gestores persistidos; não recriar IDs nem reexecutar ativação de request concluído.",
+      "objective": "Campanha001 Escalatepower G002 Savings Spot com referência C129, dois vídeos, USD50/dia e COCAP0.90",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560010597385506986/final-verification.json",
+      "state": "complete_active_verified: campanha120253328479780502, adset120253328481070502 e 2 ads active; savings spot572539232608128, url/copy/videos/budget/bid/metadata/renderer/postprocess comprovados. fonte129 intacta; continuidade executada com review rodolfo1560031432968114310, e2e original preservado e sla excedido registrado. ads pending_review, serving não comprovado.",
       "thread_id": "1558126133294399569",
-      "updated_at": "2026-10-14T20:51:45+00:00"
+      "updated_at": "2026-10-14T21:01:38+00:00"
     },
     {
       "agent": "ares",
@@ -5872,5 +5872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T20:51:45+00:00"
+  "updated_at": "2026-10-14T21:01:38+00:00"
 }

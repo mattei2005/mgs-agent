@@ -291,6 +291,8 @@ class ReferenceTests(unittest.TestCase):
         expected=cp['degrees_of_freedom_spec']
         self.assertEqual(expected['creative_features_spec'],{k:v for k,v in features.items() if k!='standard_enhancements'})
         ref.verify_degrees(expected,expected)
+        actual=copy.deepcopy(expected);actual['creative_features_spec']['standard_enhancements']={'enroll_status':'OPT_IN'}
+        ref.verify_degrees(actual,expected)
         actual=copy.deepcopy(expected);actual['creative_features_spec']['new']={'enroll_status':'OPT_OUT'};ref.verify_degrees(actual,expected)
         actual['creative_features_spec']['new']={'enroll_status':'OPT_IN'}
         with self.assertRaises(ValueError):ref.verify_degrees(actual,expected)

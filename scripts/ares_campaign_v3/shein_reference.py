@@ -138,6 +138,10 @@ def verify_degrees(actual, expected):
     actual = copy.deepcopy(actual or {}); expected = copy.deepcopy(expected or {})
     observed = actual.pop('creative_features_spec', {})
     wanted = expected.pop('creative_features_spec', {})
+    # Deprecated aggregate is rejected on input yet rematerialized by Graph.
+    # Preserve every individual feature; the aggregate is not a new toggle.
+    observed.pop('standard_enhancements', None)
+    wanted.pop('standard_enhancements', None)
     if any(actual.get(k) != v for k, v in expected.items()):
         raise ValueError('reference creative degrees state drift')
     if (any(observed.get(k) != v for k, v in wanted.items())

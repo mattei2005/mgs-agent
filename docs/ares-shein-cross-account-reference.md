@@ -10,7 +10,7 @@ Implementação no intake/compiler e no schema/planner do mesmo Engine v3, sem w
 A fonte mantém seu `account_id` real e é somente lida. Campanha/conjunto novos usam os edges diretos da conta destino.
 `reference` guarda conta/campanha/conjunto/anúncios/Page originais, idioma, acesso READ_ONLY e a rota de lineage.
 `source_ad_id` entra somente no anúncio novo direto, não no shell de campanha/conjunto. Não se trata de clone nativo entre contas.
-A documentação oficial aceita `source_ad_id` no create de anúncio, mas não comprova aceitação cross-account nem serving do caso. Esses dois estados continuam explicitamente não verificados.
+A documentação oficial aceita `source_ad_id` no create de anúncio, mas não comprova aceitação cross-account nem serving. Após a manutenção, o pedido humano original foi executado na rota central com Savings Spot: a Meta aceitou criação/lineage e ativação dos mesmos dois anúncios, com QA renderizado e readback completos. Prova live: `data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560010597385506986/final-verification.json`. Os anúncios ficaram PENDING_REVIEW no readback final e serving permanece não comprovado; a aceitação deste caso não é promessa de serving em outros pedidos.
 
 Escopo implementado:
 - Qualquer uma das seis partições SHEIN, com fonte e alvo exatos na mesma partição/canal, USD e idioma compatíveis.
