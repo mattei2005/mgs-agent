@@ -16,7 +16,7 @@ A observação é visita técnica pontual autorizada, sem cliques em anúncios e
 6. O timer separado consome a fila após a resposta confirmada. Ares não espera a observação para concluir criação e não relaciona o trigger ao horário de início. Não crie cron Hermes origin/all nem gateway hook ad hoc. Não diga ao gestor que o acompanhamento terminou antes do outbox de sucesso real.
 7. Se staging/integração falhar, preserve a criação validada, entregue seu resumo normal ao gestor e reporte somente a falha do acompanhamento na thread `1559932317861158993`, mantendo o handoff resumível. Nunca repita criação para corrigir a fila.
 
-Esse wrapper é integração no fluxo comum do Ares, não um hook automático de toda chamada arbitrária ao Engine. Runners autônomos que publiquem a própria conclusão precisam usar a mesma barreira antes de incluir o acompanhamento; não afirmar que uma chamada histórica/externa ao Engine foi automaticamente coberta sem job/ack real na fila.
+Esse wrapper é integração no fluxo comum do Ares, não um hook automático de toda chamada arbitrária ao Engine. O runner diário CAR/CPV já possui adapter `landing_followup_adapters.after_daily_reply`, chamado somente DEPOIS do post/readback normal de conclusão, sobre manifest/IDs do próprio pedido; falha da fila não reabre a campanha. Runners externos adicionais precisam usar a mesma barreira antes de incluir o acompanhamento; não afirmar que uma chamada histórica/externa ao Engine foi automaticamente coberta sem job/ack real na fila.
 
 ### Handoff (campos obrigatórios, dados REAIS)
 
@@ -62,9 +62,9 @@ O consumidor é uma sessão CLI limitada do próprio Ares, com resultado técnic
 
 ```text
 python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py show --key <key>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py begin --key <key> --owner <owner do dispatcher> --index <índice>
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py begin --key <key> --owner <owner do dispatcher> --index <índice> --pc1-session-id <ID real desta sessão>
 python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py defer --key <key> --owner <owner>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <índice> --result PASS|NO_AD|ERROR --evidence <arquivo-real.json>
+python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <índice> --pc1-session-id <ID real desta sessão> --result PASS|NO_AD|ERROR --evidence <arquivo-real.json>
 ```
 
 `defer` é somente pré-open, nunca após OPEN_INTENT. Uma execução observa uma única tentativa e sai; timer faz a espera/retry sem sleeper longo na conversa. Não execute publish-creation/result de outro pedido.
@@ -73,7 +73,9 @@ python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <ke
 
 Para PASS: JSON com `observed_url`, opcional `resolved_landing_url` + `mapping_source` se resolvido no worker, `new_tab_identity` real, `tab_closed_verified=true`, `other_tabs_preserved=true`, `closed_screenshot` real, `network_ad_confirmed=true`, `ad_description` descritiva do criativo visto e `samples` de pelo menos três capturas distintas com `monotonic_seconds`, `ad_visible=true`, `tab_active=true`, `screenshot`. Os timestamps reais dos arquivos também precisam abranger >=20s sem lacuna >12s. Não invente observações, identificadores ou tempos. A fila calcula hashes e preserva imagens revisadas em artifacts protegidos; não manda anexos ao chat.
 
-Para NO_AD: identidade real da aba nova + `tab_closed_verified`, `other_tabs_preserved`, `closed_screenshot`. Para ERROR: diagnóstico humano exato, sem trace/path/credencial, mais quaisquer provas/estado parcial disponíveis. Não afirmar fechamento/URL visibilidade quando incertos.
+Para NO_AD: identidade real da aba nova + `tab_closed_verified`, `other_tabs_preserved`, `closed_screenshot`. Para ERROR: diagnóstico humano exato, sem trace/path/credencial, mais quaisquer provas/estado parcial disponíveis; use `no_tab_opened=true` SOMENTE se realmente nenhum open ocorreu. Não afirmar fechamento/URL visibilidade quando incertos.
+
+`begin`, `result` e `reconcile` verificam mecanicamente que a lease física pertence ao Ares e ao mesmo `HERMES_SESSION_ID` real. Um estado NEEDS_RECONCILIATION bloqueia novos observadores; após readback e fechamento seguro da aba incerta, usar `reconcile --key ... --index ... --pc1-session-id ... --evidence ...`. Essa recuperação libera as demais URLs, mas mantém a afetada pendente/ATTENTION; nunca converte incerteza em sucesso nem reabre a URL às cegas. Preservar o incidente para recuperar somente a camada comprovadamente faltante.
 
 ## Durabilidade e manutenção
 

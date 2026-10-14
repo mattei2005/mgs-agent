@@ -5050,6 +5050,24 @@
       "updated_at": "2026-09-23T16:41:47+00:00"
     },
     {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-14T16:03:14+00:00",
+      "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Trafego direto: acompanhamento de landing em fila apos resposta ao gestor",
+      "updated_at": "2026-10-14T16:03:14+00:00"
+    },
+    {
       "canonical_key": "f011.matteiinc02.account_scope",
       "canonical_source": "data/f011-apply-decision-1556720208696316077.json",
       "consumers": [
@@ -11805,5 +11823,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T15:12:49+00:00"
+  "updated_at": "2026-10-14T16:03:14+00:00"
 }

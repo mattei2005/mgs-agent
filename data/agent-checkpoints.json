@@ -1473,12 +1473,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Validar pontos de integracao, transporte PC1, fila idempotente e provas de visibilidade antes de ativar",
-      "objective": "Implementar acompanhamento comum pos-resposta das landing pages de trafego direto",
-      "source": "discord:1559932317861158993#1559951763019145247",
-      "state": "discovery: contrato recebido; sem campanha ou navegacao de landing executada",
+      "next_step": "Concluir audit/REPORT-INFRA e conferir fontes; primeiro teste real sera pedido autorizado de gestor por Rodolfo, sem replay de pedidos antigos.",
+      "objective": "Implantar padrao comum pos-resposta das landing pages de trafego direto",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247;discord:1559932317861158993#1559951763019145247",
+      "state": "implementado: contrato/skills, fila wal idempotente, barreira de resposta/readback, outbox, lease pc1 verificada, consumidor local limitado, timer enabled/active e callback pos-resposta no car diario. 179 testes passaram, 2 divergencias cpv preexistentes reproduzidas no backup anterior. smoke cli e abertura/fechamento tecnico pc1 verificados; fila real vazia; nenhuma campanha teste ou alegacao gam.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-14T15:34:18+00:00"
+      "updated_at": "2026-10-14T16:03:14+00:00"
     },
     {
       "agent": "zeus",
@@ -5852,5 +5852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T15:54:37+00:00"
+  "updated_at": "2026-10-14T16:03:14+00:00"
 }
