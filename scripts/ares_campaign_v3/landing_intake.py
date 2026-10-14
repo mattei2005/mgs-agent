@@ -118,12 +118,12 @@ def verify_native_reply(discord,delivery,origin):
         if int(new)<=int(after):raise ValueError('native_reply_cursor_repeated')
         after=new
     else:raise ValueError('native_reply_readback_bounded')
-    own=sorted([m for m in rows if str((m.get('author') or {}).get('id'))==discord.bot_id and str(m.get('channel_id'))==thread],key=lambda m:int(m['id']))
+    own=sorted([m for m in rows if str((m.get('author') or {}).get('id'))==discord.bot_id and str(m.get('channel_id'))==thread and str(m.get('content') or '').strip()],key=lambda m:int(m['id']))
     target=canonical_text(delivery['content']);matches=[]
     for start in range(len(own)):
         for width in range(1,min(10,len(own)-start)+1):
             group=own[start:start+width]
-            if canonical_text('\n'.join(m.get('content') or '' for m in group))==target:
+            if ''.join(canonical_text(m.get('content') or '') for m in group)==target:
                 matches.append(group)
     if len(matches)!=1:raise ValueError('native_reply_not_uniquely_read_back')
     messages=matches[0]
@@ -248,8 +248,9 @@ def build_from_source(path,rid,origin,root,meta=META,check_scope=scope):
 
 
 class Intake:
-    def __init__(self,q,native_db=NATIVE_DB,meta=META,discord_factory=Discord):
+    def __init__(self,q,native_db=NATIVE_DB,meta=META,discord_factory=Discord,check_scope=None):
         self.q=q;self.native_db=Path(native_db);self.meta=Path(meta);self.discord_factory=discord_factory
+        self.check_scope=scope if check_scope is None else check_scope
         q.db.executescript('''
         CREATE TABLE IF NOT EXISTS intake_settings(key TEXT PRIMARY KEY,value TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS native_intake(id TEXT PRIMARY KEY,updated REAL NOT NULL,state TEXT NOT NULL,detail TEXT,job_key TEXT);
@@ -285,7 +286,7 @@ class Intake:
         if receipt.get('verified') is not True or receipt.get('native_delivery_state')!='delivered':raise ValueError('delivered_native_response_required')
         if receipt['thread_id']!=payload['source_thread_id'] or receipt['parent_id']!=payload['source_channel_id'] or not receipt.get('message_ids'):raise ValueError('native_receipt_partition_mismatch')
         for mid in receipt['message_ids']:identifier(mid)
-        key=self.q.stage(payload)
+        key=self.q.stage(payload,self.check_scope)
         with self.q.tx():
             j=self.q.job(key)
             if j['reply_id']:
@@ -303,10 +304,11 @@ class Intake:
         origin=origin_for_delivery(c,delivery)
         if not origin or not origin['references']:
             self.record(key,'IGNORED');return 'IGNORED'
+        armed=False
         for rid in sorted(origin['references']):
             subkey=key+':'+rid
             old=self.q.db.execute('SELECT state FROM native_intake WHERE id=?',(subkey,)).fetchone()
-            if old and old['state']=='READY':continue
+            if old and old['state']=='READY':armed=True;continue
             paths=source_paths(rid,self.meta)
             if not paths:
                 self.record(subkey,'PENDING','saved_request_evidence_not_found');return 'PENDING'
@@ -315,14 +317,14 @@ class Intake:
             if path.stat().st_mtime<self.epoch():
                 self.record(subkey,'IGNORED','historical_request_no_backfill');continue
             try:
-                payload=build_from_source(path,rid,origin,self.q.root,self.meta)
+                payload=build_from_source(path,rid,origin,self.q.root,self.meta,self.check_scope)
             except ValueError as exc:
                 if str(exc)=='not_registered_direct_traffic':
                     self.record(subkey,'IGNORED');continue
                 self.record(subkey,'PENDING',str(exc));self.incident(subkey,rid,str(exc));return 'PENDING'
             receipt=verify_native_reply(dc(),delivery,origin)
-            job=self.arm(payload,receipt);self.record(subkey,'READY',job=job)
-        self.record(key,'READY');return 'READY'
+            job=self.arm(payload,receipt);self.record(subkey,'READY',job=job);armed=True
+        self.record(key,'READY' if armed else 'IGNORED');return 'READY' if armed else 'IGNORED'
     def scan_daily(self,dc):
         count=0
         for path in sorted((self.meta/'engine-v3/audit/daily').glob('*.json')):
@@ -334,7 +336,7 @@ class Intake:
             if record.get('stage') not in {'COMPLETE','COMPLETED'} or not reply.get('content_match') or not reply.get('message_id'):continue
             rid=record['request_id'];thread=identifier(reply['thread_id']);client=dc()
             channel=client.get('/channels/'+thread);origin={'thread_id':thread,'parent_id':str(channel.get('parent_id') or channel['id'])}
-            payload=build_from_source(path,rid,origin,self.q.root,self.meta)
+            payload=build_from_source(path,rid,origin,self.q.root,self.meta,self.check_scope)
             mid=identifier(reply['message_id']);msg=client.get('/channels/'+thread+'/messages/'+mid)
             if str(msg.get('channel_id'))!=thread or str((msg.get('author') or {}).get('id'))!=client.bot_id:raise ValueError('daily_native_reply_mismatch')
             receipt={'verified':True,'native_delivery_state':'delivered','native_obligation_id':key,
