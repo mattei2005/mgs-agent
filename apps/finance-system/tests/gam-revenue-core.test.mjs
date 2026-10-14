@@ -53,6 +53,8 @@ test('calculation validation checks conversion, mapped totals, cutoff and preser
 
 test('WavesBee split authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1553019425706217652';assert.equal(validatePlan(p).mapping_authority_message_id,'1553019425706217652');});
 
+test('Zytiva Finanzas ES authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1559930340628242484';assert.equal(validatePlan(p).mapping_authority_message_id,'1559930340628242484');});
+
 test('Six SHEIN US sites authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1557024816031342732';assert.equal(validatePlan(p).mapping_authority_message_id,'1557024816031342732');});
 
 test('Growpowerhub US authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1557017566923325465';assert.equal(validatePlan(p).mapping_authority_message_id,'1557017566923325465');});

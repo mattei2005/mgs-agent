@@ -2853,12 +2853,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-ZYTIVA-ES-1559930340628242484",
-      "next_step": "Testar regra, publicar sob release guard, completar fonte original e validar readback/idempotência",
-      "objective": "Confirmar regra permanente do placement pl_digital-trust_zytivafinanzas_es como ES-CC-ES/G003 Isliago e completar somente parcela pendente de 13/10",
+      "next_step": "Validar aplicação, 63 grupos anteriores preservados, replay idempotente, API/desktop/mobile e fechamento13/10; registrar relatório/inventário",
+      "objective": "Regra permanente Zytiva Finanzas ES/G003 e complemento13/10",
       "source": "docs/finance-gam-email-automation.md",
-      "state": "autorizado; preparação isolada e validação antes de publicar; nenhuma escrita financeira realizada",
+      "state": "release committed: 275 node +221 python sem skips, ensaio real, hashes/readback catálogo, fingerprints financeiros preservados durante publicação. complemento canônico em execução com backup/guards.",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-14T14:06:44+00:00"
+      "updated_at": "2026-10-14T14:31:15+00:00"
     },
     {
       "agent": "zeus",
@@ -5842,5 +5842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T14:26:34+00:00"
+  "updated_at": "2026-10-14T14:31:15+00:00"
 }
