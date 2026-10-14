@@ -1182,6 +1182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1560010597385506986",
+      "next_step": "Rodolfo/owner de arquitetura: disponibilizar rota central aprovada para referência entre contas com dois anúncios e URL/copy literais. Retomar mesmo request, sem writer paralelo e sem nova aprovação de onboarding; validar fonte, autoridade e Drive ao retomar.",
+      "objective": "Criar Escalatepower G002 campanha 01 referenciada em Yolokfx G002 C129 com dois vídeos selecionados, URL e copy literais, COCAP USD0.90, budget herdado e início imediato",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560010597385506986/blocked-intent.json",
+      "state": "blocked_cross_account_reference_unsupported: api confirmou destino saudável usd america/new_york vazio e fonte c129 active usd50/dia; schema rejeita source_account e compiler exige fonte na conta alvo; zero writes meta/drive e zero reservas",
+      "thread_id": "1558126133294399569",
+      "updated_at": "2026-10-14T19:28:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
       "next_step": "Aguardar Rodolfo/Zeus confirmar janela normal e liberar nova auditoria; revalidar estado atual e executar pass novo com <=5 perfis por lote, close+GET Inactive antes do proximo; reportar apenas problemas do pass novo.",
       "objective": "Reauditar BACKUP SHEIN em lotes max5, somente problemas, apos liberacao da recuperacao",
@@ -5862,5 +5872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T17:25:43+00:00"
+  "updated_at": "2026-10-14T19:28:32+00:00"
 }
