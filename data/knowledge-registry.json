@@ -5075,15 +5075,33 @@
         "zeus"
       ],
       "domain": "growth",
-      "effective_at": "2026-10-14T16:20:25+00:00",
-      "id": "DIRECT-TRAFFIC-LANDING-ISOLATED-FIFO-1559963300844933141",
+      "effective_at": "2026-10-14T16:22:49+00:00",
+      "id": "DIRECT-TRAFFIC-LANDING-ISOLATED-FIFO-10S-1559964027264962702",
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Acompanhamento independente: FIFO global PC1 e observacao de dez segundos",
+      "updated_at": "2026-10-14T16:22:49+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-14T16:20:25+00:00",
+      "id": "DIRECT-TRAFFIC-LANDING-ISOLATED-FIFO-1559963300844933141",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DIRECT-TRAFFIC-LANDING-ISOLATED-FIFO-10S-1559964027264962702",
       "title": "Acompanhamento isolado da criacao e fila unica global PC1",
-      "updated_at": "2026-10-14T16:20:25+00:00"
+      "updated_at": "2026-10-14T16:22:49+00:00"
     },
     {
       "canonical_key": "f011.matteiinc02.account_scope",
@@ -11841,5 +11859,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T16:20:25+00:00"
+  "updated_at": "2026-10-14T16:22:49+00:00"
 }
