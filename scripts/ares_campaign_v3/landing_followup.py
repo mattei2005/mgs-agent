@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import sqlite3
 import subprocess
 import sys
@@ -67,6 +68,21 @@ def validate_payload(p, check_scope=scope):
         raise ValueError('canonical campaign readback file required')
     if hashlib.sha256(proof.read_bytes()).hexdigest() != p.get('creation_proof_sha256'):
         raise ValueError('creation readback digest mismatch')
+    recorded=json.loads(proof.read_text())
+    recorded_request=(recorded.get('request_id') or (recorded.get('request') or {}).get('request_id')
+        or (recorded.get('manifest') or {}).get('request_id') or (recorded.get('final') or {}).get('request_id'))
+    recorded_status={recorded.get('phase'),recorded.get('status'),recorded.get('stage'),
+        (recorded.get('final') or {}).get('status'),(recorded.get('summary') or {}).get('status')}
+    if recorded_request!=p['request_id'] or not recorded_status.intersection(TERMINAL):
+        raise ValueError('creation proof is not terminal for this exact request')
+    recorded_ids=set(str(x) for x in recorded.get('campaign_ids',[]))
+    for field in ('engine_result','activation_result','final','summary'):
+        entry=recorded.get(field) or {}
+        recorded_ids.update(str(x) for x in entry.get('campaign_ids',[]))
+        recorded_ids.update(str(x.get('campaign_id')) for x in entry.get('campaigns',[]))
+    for tree in recorded.get('final_readback',[]):recorded_ids.add(str(tree['campaign']['id']))
+    if not set(p['campaign_ids']).issubset(recorded_ids):
+        raise ValueError('campaign IDs missing from terminal creation evidence')
     links = p.get('links')
     if not isinstance(links, list) or not links:
         raise ValueError('complete campaign/adgroup URL coverage required')
@@ -76,6 +92,8 @@ def validate_payload(p, check_scope=scope):
         if cid not in p['campaign_ids']:
             raise ValueError('link belongs to another campaign')
         source = link['effective_campaign_url']
+        if any(c in urllib.parse.unquote(source) for c in '{}'):
+            raise ValueError('unresolved URL macros require real same-ad readback')
         check_scope(source)
         query = urllib.parse.parse_qsl(urllib.parse.urlsplit(source).query, keep_blank_values=True)
         names = [k for k, _ in query]
@@ -227,6 +245,9 @@ class Queue:
             previous=json.loads(row['evidence']) if row['evidence'] else {}
             if previous.get('new_tab_identity') and previous['new_tab_identity']==evidence.get('new_tab_identity'):
                 raise ValueError('a retry must use a different new tab identity')
+            # Cache is not durable evidence. Preserve only the reviewed images,
+            # with real timestamp/hash, under protected Ares artifacts.
+            evidence=preserve_evidence(evidence,key,idx,row['attempt'])
             state='PASSED' if result=='PASS' else ('WAIT_RETRY' if result=='NO_AD' and row['attempt']==1 else 'ATTENTION')
             self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
             self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'state':state,'evidence':evidence})
@@ -272,6 +293,24 @@ def file_evidence(path):
     if p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'} or p.stat().st_size<100:
         raise ValueError('image evidence missing')
     return {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'captured_at':p.stat().st_mtime}
+
+
+def preserve_evidence(e,key,idx,attempt):
+    e=json.loads(json.dumps(e))
+    destination=Path('/root/.hermes/profiles/ares/artifacts/landing-followup')/key/str(idx)/str(attempt)
+    paths=[]
+    if e.get('closed_screenshot'):paths.append((e,'closed_screenshot'))
+    paths.extend((x,'screenshot') for x in e.get('samples',[]))
+    if paths:destination.mkdir(parents=True,exist_ok=True,mode=0o700)
+    for container,field in paths:
+        item=file_evidence(container[field]);original=Path(item['path'])
+        target=destination/(item['sha256']+original.suffix.lower())
+        if not target.exists():shutil.copy2(original,target)
+        os.chmod(target,0o600)
+        if hashlib.sha256(target.read_bytes()).hexdigest()!=item['sha256']:raise ValueError('durable evidence copy mismatch')
+        container[field]=str(target);container[field+'_sha256']=item['sha256']
+        container[field+'_captured_at']=item['captured_at']
+    return e
 
 
 def validate_closure(e):
