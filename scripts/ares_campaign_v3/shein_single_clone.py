@@ -936,6 +936,10 @@ def add_parser(subparsers):
     campaign.add_argument('--input', type=Path, required=True)
     campaign.add_argument('--confirm-execute', action='store_true')
     campaign.add_argument('--dry-run', action='store_true')
+    prepare = subparsers.add_parser('prepare-media', help='Verify and reserve explicit manager-folder groups, then canonical account-scoped pre-stage')
+    prepare.add_argument('--input', type=Path, required=True)
+    prepare.add_argument('--confirm-execute', action='store_true')
+    prepare.add_argument('--dry-run', action='store_true')
     lookup = subparsers.add_parser('account-lookup', help='Read canonical exact-name account/manager/channel mapping')
     lookup.add_argument('--account', required=True)
     lookup.add_argument('--manager-code', choices=['G001', 'G002', 'G003', 'G004', 'G005', 'G006'])
@@ -951,6 +955,12 @@ def cli_run(args):
     if not isinstance(request, dict):
         raise RouteBlocked('request must be a JSON object')
     try:
+        if args.command == 'prepare-media':
+            if args.dry_run or not args.confirm_execute:
+                raise RouteBlocked('media preparation requires explicit confirmation; no implicit uploads')
+            from .shein_grouped_media import prepare
+            out = prepare(request)
+            return {'status': 'PRESTAGED_GROUPS_READY', 'request_id': out['request_id'], 'assets': len(out['asset_refs']), 'campaigns': len(out['campaign_groups'])}
         return run_request(request, confirm_execute=args.confirm_execute)
     except RouteBlocked:
         raise

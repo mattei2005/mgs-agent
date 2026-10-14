@@ -1,4 +1,17 @@
 {
+  "grouped_manager_media_policy": {
+    "enabled": true,
+    "approved_by": "344196393512075265",
+    "source_thread_id": "1558134300325716050",
+    "source_message_id": "1559782375473418242",
+    "scope": "SHEIN-US-DIRECT explicit requests from live-channel-authorized humans, within the account partition; Ares may accept equivalent future requests without renewed architecture approval",
+    "supported_mode": "clone_prestaged",
+    "groups": "one to five exact canonical media filenames per campaign, heterogeneous counts allowed, exact literal Primary text and product label per group",
+    "manager_folder": "exact live folder ID, direct child of CRIATIVOS in MGS-AGENTS, name bound to the manager partition from the canonical account catalog; preserve physical folder, IDs and originals",
+    "selection_authority": "explicit selection of exact files authorizes request-scoped use/reuse of those lineages only, after live Drive, checksum, metadata, account and history reconciliation; never imply novelty or erase historical use",
+    "excluded": "no global pool release, cross-partition reservation, unrequested files, parallel campaign writer, billing, credentials, critical pixel/config changes or recurring automation",
+    "requirements": ["request-specific reservation", "download SHA256 plus Drive MD5 and size", "clean=true", "account-scoped pre-stage with registry/title/readiness/association readback", "one shared Engine v3 manifest", "unique target numbering and UTMs", "all-campaign semantic and rendered-media QA before activation", "same request/IDs for readback-first recovery", "preserved timing and SLA policies"]
+  },
   "account_currency": "resolve_by_live_Meta_readback_per_account",
   "authority": {
     "allowed_on_explicit_manager_request": [

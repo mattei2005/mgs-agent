@@ -42,4 +42,20 @@ class GroupTests(unittest.TestCase):
         r,s,a,_=self.fixture();r['campaign_groups'][0]['targeting']={}
         with self.assertRaises(ValueError):general.build(r,s,114,a)
 
+    def test_twelve_heterogeneous_groups_match_exact_counts_and_caps(self):
+        r,s,a,base=case(5,mode='clone_prestaged');counts=[3,2,2,1,2,5,2,2,3,2,2,3]
+        assets=[];groups=[]
+        for i,n in enumerate(counts):
+            group=[]
+            for j in range(n):
+                x=copy.deepcopy(base[0]);x.update(asset_id=f'asset-{i}-{j}',checksum=f'{i*5+j+1:064x}',vertical_video_id=f'video-{i}-{j}',canonical_filename=f'SHEIN_US_EN_VID_PRODUCT_{i}_PV_{j+1:03d}.mp4');assets.append(x);group.append(x['canonical_filename'])
+            groups.append({'files':group,'product_label':f'PRODUCT {i}','primary_text':f'EXACT {i}'})
+        r.update(quantity=12,campaign_groups=groups,_resolved_assets=assets,bid_strategy='COCAP',bid_usd='0.90',budget_usd='45')
+        out=general.build(r,s,101,a)['campaigns']
+        self.assertEqual([len(c['ads']) for c in out],counts)
+        self.assertEqual(sum(len(c['ads']) for c in out),29)
+        self.assertEqual(sum(int(c['campaign_updates']['daily_budget']) for c in out),54000)
+        self.assertTrue(all(c['adset_updates']['bid_amount']=='90' and c['campaign_updates']['bid_strategy']=='COST_CAP' for c in out))
+        self.assertEqual(len({c['idempotency_key'] for c in out}),12)
+
 if __name__=='__main__':unittest.main()

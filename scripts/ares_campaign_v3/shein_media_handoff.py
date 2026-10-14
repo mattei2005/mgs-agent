@@ -55,6 +55,13 @@ def load_ready_assets(request, profile, base, common, token):
         if row.get('reservation_request_id') != request['request_id']:
             raise ValueError('asset must be reserved by canonical Creative Ops for this exact request')
     ops = _ops(base); drive_token, _ = ops.drive_runtime_token()
+    manager = None
+    if request.get('manager_media_folder_id'):
+        from .shein_grouped_media import manager_folder, validate_groups
+        validate_groups(request)
+        manager = manager_folder(request, profile, base, ops, drive_token)
+        if {inventory[r['asset_id']]['canonical_filename'] for r in refs} != set(validate_groups(request)):
+            raise ValueError('reserved assets differ from explicit campaign groups')
     rows = []
     ready_cache = {}; testing_cache = {}
     for ref in refs:
@@ -63,24 +70,31 @@ def load_ready_assets(request, profile, base, common, token):
             raise ValueError('asset must be reserved by canonical Creative Ops for this exact request')
         if row.get('language') != profile['language'] or row.get('vertical') != 'SHEIN' or row.get('metadata_clean') is not True:
             raise ValueError('asset language, vertical or sanitized metadata mismatch')
-        if row.get('status') not in {'01_READY', 'READY'} or not str(row.get('asset_path', '')).endswith('/01_READY'):
+        if manager and (row.get('manager_media_folder_id') != manager['id'] or row.get('explicit_asset_request') is not True or row.get('reservation_authority') != request['authorized_by']):
+            raise ValueError('manager media exact authorization missing')
+        if not manager and (row.get('status') not in {'01_READY', 'READY'} or not str(row.get('asset_path', '')).endswith('/01_READY')):
             raise ValueError('asset is not in the reconciled READY pool')
-        if row.get('clean_checksum') != ref['checksum'] or row.get('used_by') or row.get('meta_ad_id'):
+        if row.get('clean_checksum') != ref['checksum'] or (not manager and (row.get('used_by') or row.get('meta_ad_id'))):
             raise ValueError('asset checksum or previous-use conflict')
         media = registry.require_ready(profile['account_id'], ref['asset_id'], ref['checksum'], required_variants=('vertical',))
         file = ops.drive_file_readback(drive_token, row['asset_drive_id'])
         if file.get('driveId') != '0AEwt4Ye690ocUk9PVA' or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
             raise ValueError('Drive identity/parent/name mismatch')
         parent_id = file['parents'][0]
+        if manager and parent_id != manager['id']:
+            raise ValueError('manager asset moved from authorized folder')
         if parent_id not in ready_cache:
             ready_cache[parent_id] = ops.drive_file_readback(drive_token, parent_id)
         ready = ready_cache[parent_id]
-        if ready.get('name') != '01_READY' or len(ready.get('parents') or []) != 1:
+        if not manager and (ready.get('name') != '01_READY' or len(ready.get('parents') or []) != 1):
             raise ValueError('canonical READY folder identity mismatch')
         q = "'" + ready['parents'][0] + "' in parents and name = '02_TESTING' and trashed = false"
-        if ready['parents'][0] not in testing_cache:
+        if manager:
+            testing = [manager]
+        elif ready['parents'][0] not in testing_cache:
             testing_cache[ready['parents'][0]] = _get('https://www.googleapis.com/drive/v3/files?' + urlencode({'q': q, 'fields': 'files(id,name,driveId)', 'supportsAllDrives': 'true', 'includeItemsFromAllDrives': 'true'}), drive_token)
-        testing = testing_cache[ready['parents'][0]].get('files') or []
+        if not manager:
+            testing = testing_cache[ready['parents'][0]].get('files') or []
         if len(testing) != 1 or testing[0].get('driveId') != '0AEwt4Ye690ocUk9PVA':
             raise ValueError('canonical TESTING destination missing or ambiguous')
         h, video, _ = common.graph_get(media['vertical_video_id'], token, {'fields': 'id,title,status,thumbnails'})
@@ -90,7 +104,7 @@ def load_ready_assets(request, profile, base, common, token):
         if not thumbs:
             raise ValueError('pre-staged video thumbnail unavailable')
         rows.append({**media, 'language': row['language'], 'canonical_filename': row['canonical_filename'], 'asset_drive_id': row['asset_drive_id'],
-                     'thumbnail_url': thumbs[0]['uri'], 'drive_md5': file.get('md5Checksum'), 'ready_parent_id': file['parents'][0], 'testing_parent_id': testing[0]['id']})
+                     'thumbnail_url': thumbs[0]['uri'], 'drive_md5': file.get('md5Checksum'), 'ready_parent_id': file['parents'][0], 'testing_parent_id': testing[0]['id'], 'manager_folder_preserved': bool(manager)})
     # Association is checked on the exact target account, never by a Page video edge.
     needed = {r['vertical_video_id'] for r in rows}; ids = set(); params = {'fields': 'id', 'limit': 500}
     for _ in range(100):
@@ -137,7 +151,12 @@ def finalize_ready_assets(state, live, base, common, token):
             raise ValueError('inventory reservation changed before Drive move')
         # Only missing parent moves, with the same reservation held under the inventory lock.
         for asset in assets:
-            ops.move_asset_to_testing(drive_token, asset, ready_id=asset['ready_parent_id'], testing_id=asset['testing_parent_id'])
+            if asset.get('manager_folder_preserved'):
+                file = ops.drive_file_readback(drive_token, asset['asset_drive_id'])
+                if file.get('trashed') or file.get('parents') != [asset['ready_parent_id']] or file.get('md5Checksum') != asset['drive_md5']:
+                    raise ValueError('manager file identity changed before postprocess')
+            else:
+                ops.move_asset_to_testing(drive_token, asset, ready_id=asset['ready_parent_id'], testing_id=asset['testing_parent_id'])
         for row in rows:
             if row.get('asset_id') not in assignments:
                 continue
@@ -146,7 +165,9 @@ def finalize_ready_assets(state, live, base, common, token):
             a = assignments[row['asset_id']]
             row.update(status='02_TESTING', ares_eligible=False, used_by=a['campaign_id'], ad_account_id=desired['account_id'],
                        meta_ad_id=a['ad_id'], meta_creative_id=a['creative_id'], meta_video_id=a['video_id'], effective_object_story_id=a['post_id'])
-            row['asset_path'] = row['asset_path'].removesuffix('/01_READY') + '/02_TESTING'
+            asset = next(a for a in assets if a['asset_id'] == row['asset_id'])
+            if not asset.get('manager_folder_preserved'):
+                row['asset_path'] = row['asset_path'].removesuffix('/01_READY') + '/02_TESTING'
             history = row.setdefault('test_history', [])
             if not any(x.get('campaign_id') == a['campaign_id'] for x in history):
                 history.append({**a, 'request_id': state['request']['request_id'], 'source': 'general_shein_engine_v3'})

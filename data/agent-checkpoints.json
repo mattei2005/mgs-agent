@@ -1153,12 +1153,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1559780476942815244",
-      "next_step": "Rodolfo aprovar manutencao separada do runner central para grupos heterogeneos, Primary text por grupo, handoff da pasta Nicolas e pos-processamento do lote; reconciliar tres registros stale de SHEIN_FOR_FREE; executar somente pelo v3 com QA integral e mesmo pedido preservado",
-      "objective": "Clonar C20 em 12 campanhas com 29 videos definidos por Nicolas, USD45/dia cada e COCAP USD0.90",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1559780476942815244-blocker.json",
-      "state": "blocked_prewrite_central_route_capability; authority/account/source/29 live drive files verified; zero meta/drive/inventory mutations; exact 12 groups and copy preserved; no target ids",
+      "next_step": "Concluir regressao, REPORT-INFRA, preparar/reservar/prestagear midias; dry-run e executar mesmo request no v3; QA 12/12 antes de ativar",
+      "objective": "Executar 12 clones C20 com 29 videos, USD45/dia e COCAP USD0.90; adaptar rota central e documentar autorizacao reutilizavel",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1559780476942815244-request.json",
+      "state": "maintenance_authorized_by_rodolfo_1559782375473418242; central groups/folder/qa implementation under tests; zero campaigns created",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-10-14T04:16:17+00:00"
+      "updated_at": "2026-10-14T04:23:18+00:00"
     },
     {
       "agent": "ares",
@@ -5792,5 +5792,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T04:16:17+00:00"
+  "updated_at": "2026-10-14T04:23:18+00:00"
 }

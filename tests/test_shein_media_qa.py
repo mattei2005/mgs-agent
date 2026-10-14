@@ -28,7 +28,7 @@ class MediaQATests(unittest.TestCase):
         r,s,a=flexible();desired=compiler.build(r,s,114,a)['campaigns'][0]
         cp=desired['ads'][0]['creative_payload'];cr=copy.deepcopy(cp);cr.update(id='created-creative',instagram_user_id='ig-source',effective_object_story_id=a['shein_profile']['page_id']+'_new')
         cr['asset_feed_spec']['videos'][0]['video_id']='derived-video'
-        live={'ads':{'data':[{'id':'new-ad','source_ad_id':s['ads'][0]['id'],'creative':cr}]}}
+        live={'ads':{'data':[{'id':'new-ad','name':desired['ads'][0]['name'],'source_ad_id':s['ads'][0]['id'],'creative':cr}]}}
         return s,desired,live
 
     def common(self,wrong_title=False):

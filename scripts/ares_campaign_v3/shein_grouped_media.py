@@ -55,6 +55,19 @@ def manager_folder(request, profile, base, ops, drive_token):
 
 
 def prepare(request, *, base=Path('/root/mgs-agent'), work_dir=None):
+    from .shein_single_clone import lookup_account
+    account = lookup_account(request['account'])
+    locks = base/'data/ares/meta-ads/state/shein-campaigns/single-clone'
+    locks.mkdir(parents=True, exist_ok=True)
+    with (locks/('account-'+account['account_id']+'.lock')).open('a+') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise ValueError('account has another in-flight request; no media writes') from None
+        return _prepare_locked(request, base=base, work_dir=work_dir)
+
+
+def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     """Explicit selected media -> download/verify/reserve -> existing pre-stage.
 
     Reads live authority/account/folder, preserves history and requested reuse,
@@ -72,6 +85,8 @@ def prepare(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     profile=copy.deepcopy(cfg['accounts'][account['account_id']]['shein_profile'])
     op=json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
     profile['channel_authorization_policy']=op['channel_authorization_policy'];authorize(request,profile,force=True)
+    scope=subprocess.run(['python3',str(base/'scripts/mgs-domain-scope.py'),'check','--agent','ares',profile['destination_base']],capture_output=True,timeout=20)
+    if scope.returncode!=0:raise ValueError('operational domain scope rejected')
     common=driver._load_common();token,_=common.get_token_from_1password(cfg['accounts'][account['account_id']]['token_item'])
     h,live,_=common.graph_get('act_'+account['account_id'],token,{'fields':'id,name,currency,timezone_name,account_status,disable_reason,user_tasks'})
     if h!=200 or live.get('name')!=profile['account_name'] or live.get('currency')!='USD' or live.get('timezone_name')!=profile['timezone'] or live.get('account_status')!=1 or live.get('disable_reason')!=0 or 'ADVERTISE' not in live.get('user_tasks',[]):
@@ -105,8 +120,8 @@ def prepare(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         if hashlib.sha256(raw).hexdigest()!=row['clean_checksum'] or hashlib.md5(raw).hexdigest()!=f.get('md5Checksum') or len(raw)!=int(f.get('size') or 0):raise ValueError('selected file checksum/size mismatch')
         check=subprocess.run(['python3',str(base/'scripts/clean-creative-metadata.py'),'verify',str(path)],capture_output=True,text=True,timeout=60)
         if check.returncode!=0:raise ValueError('selected file failed metadata-clean verification')
-        detail=json.loads(check.stdout)
-        if detail.get('clean') is not True:raise ValueError('selected file metadata not clean')
+        if not re.search(r'^clean:\s*true\s*$', check.stdout, re.MULTILINE):
+            raise ValueError('selected file metadata not clean')
         return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'drive_id':f['id'],'drive_md5':f['md5Checksum'],'drive_parent_id':folder['id'],'metadata_clean':True}
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:assets=list(pool.map(download,selected))
     # Reconcile scoped Meta usage by exact known media IDs and deterministic

@@ -15,11 +15,13 @@ def validate_rendered(row, expect_video):
 
 def verify_media(common, token, live, desired, source, policy):
     if policy.get('enabled') is not True:raise ValueError('SHEIN media QA policy unavailable')
-    actual={str(a.get('source_ad_id')):a for a in live['ads']['data']}
+    actual={a.get('name'):a for a in live['ads']['data']}
+    if len(actual) != len(desired['ads']):raise ValueError('media QA unique ad names/count mismatch')
     sources={str(a['id']):a for a in source['ads']};pairs=[];metadata=dict(source.get('video_metadata') or {})
     expected_video=[]
     for slot in desired['ads']:
-        ad=actual[str(slot['source_ad_id'])];cp=slot['creative_payload'];cr=ad['creative']
+        ad=actual[slot['name']];cp=slot['creative_payload'];cr=ad['creative']
+        if str(ad.get('source_ad_id')) != str(slot['source_ad_id']):raise ValueError('media QA source lineage mismatch')
         if 'contextual_multi_ads' in cp and cr.get('contextual_multi_ads') != cp['contextual_multi_ads']:raise ValueError('Multi-advertiser ads differs from source; activation blocked')
         if (cp.get('asset_feed_spec') or cp.get('object_story_spec')) and not matches(cr,cp):raise ValueError('full flexible media/copy/identity mismatch')
         expected=video_slots(cp) or video_slots(sources[str(slot['source_ad_id'])]['creative'])
@@ -41,7 +43,7 @@ def verify_media(common, token, live, desired, source, policy):
         e=metadata[expected];o=metadata[observed]
         if not ready_status(o) or not ready_status(e) or e.get('title')!=o.get('title') or e.get('length')!=o.get('length'):
             raise ValueError('video lineage/processing mismatch')
-    ads=[actual[str(slot['source_ad_id'])] for slot in desired['ads']]
+    ads=[actual[slot['name']] for slot in desired['ads']]
     urls=[]
     for offset in range(0,len(ads),50):
         group=ads[offset:offset+50]
