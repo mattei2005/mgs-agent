@@ -33,10 +33,12 @@ headless=False
 xvfb-run -a
 --disable-blink-features=AutomationControlled
 normal Chrome user-agent
-persistent storage_state: /tmp/smartbidding_state_headed.json
+persistent storage_state: /root/.local/share/mgs/smartbidding_state_headed.json
 ```
 
 ## Canonical Command Pattern
+
+Resolve the existing interpreter and state through the owning SB wrapper before installing anything or starting a login. Use the durable paths below when they agree with that wrapper. Hold `mgs_sb_session.session_lease(STATE)` around shared-state access and use the browser admission budget for the workflow; concurrent refreshes can overwrite state or invalidate another reader.
 
 Use the existing venv when present:
 
@@ -45,15 +47,15 @@ cd /root/mgs-agent
 set -a
 source .env 2>/dev/null || true
 set +a
-xvfb-run -a /tmp/sb-venv/bin/python <script>.py
+xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python <script>.py
 ```
 
-If `/tmp/sb-venv` is missing, create a temporary venv and install Playwright before use:
+If the owning wrapper and live filesystem confirm that no suitable venv exists, create an isolated venv and install Playwright there:
 
 ```bash
-python3 -m venv /tmp/sb-venv
-/tmp/sb-venv/bin/pip install --quiet playwright
-/tmp/sb-venv/bin/python -m playwright install chromium
+python3 -m venv /root/.local/share/mgs/sb-venv
+/root/.local/share/mgs/sb-venv/bin/pip install --quiet playwright
+/root/.local/share/mgs/sb-venv/bin/python -m playwright install chromium
 ```
 
 Avoid installing Playwright system-wide. Ubuntu may block system pip via PEP 668.
@@ -68,7 +70,7 @@ browser = await p.chromium.launch(
     args=["--disable-blink-features=AutomationControlled"],
 )
 ctx = await browser.new_context(
-    storage_state="/tmp/smartbidding_state_headed.json",
+    storage_state="/root/.local/share/mgs/smartbidding_state_headed.json",
     viewport={"width": 1600, "height": 1000},
     user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
 )
@@ -77,7 +79,7 @@ ctx = await browser.new_context(
 If there is no valid storage state yet, create the context without `storage_state`, perform login, then save it:
 
 ```python
-await ctx.storage_state(path="/tmp/smartbidding_state_headed.json")
+await ctx.storage_state(path="/root/.local/share/mgs/smartbidding_state_headed.json")
 ```
 
 ## Credentials
@@ -92,13 +94,16 @@ URL: https://app.smartbiddingdigital.com
 
 Never print the password/token/session in chat or logs.
 
-When retrieving a concealed password through `op`, use `--reveal`:
+When retrieving a concealed password through `op`, use `--reveal` and capture stdout directly into process memory, never a displayed terminal result:
 
-```bash
-op item get 'Zeus - Smartbidding Dashboard' \
-  --vault 'MGS Conteúdo' \
-  --field password \
-  --reveal
+```python
+import subprocess
+password = subprocess.check_output(
+    ['op', 'item', 'get', 'Zeus - Smartbidding Dashboard',
+     '--vault', 'MGS Conteúdo', '--field', 'password', '--reveal'],
+    text=True, stderr=subprocess.DEVNULL,
+).strip()
+# Pass password directly to the approved login; never print it.
 ```
 
 Without `--reveal`, `op` can return a masked/reference-like value. Auth0 may then show `Wrong email or password` even though the human credential is valid.
@@ -121,7 +126,7 @@ https://app.smartbiddingdigital.com/accounts
 7. Save storage state:
 
 ```python
-await ctx.storage_state(path="/tmp/smartbidding_state_headed.json")
+await ctx.storage_state(path="/root/.local/share/mgs/smartbidding_state_headed.json")
 ```
 
 ## Known Good Verification
