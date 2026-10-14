@@ -6,6 +6,7 @@ import json
 import sys
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
@@ -20,7 +21,7 @@ class Clock:
 
 class FakeDiscord:
     bot_id='150000000000000001'
-    def __init__(self):self.messages={};self.posts=0;self.lose_post=False;self.fail_get=False
+    def __init__(self):self.messages={};self.posts=0;self.lose_post=False;self.fail_get=False;self.channel_parents={}
     def request(self,method,path,body=None):
         self.posts+=1;mid=str(150000000000000010+self.posts)
         thread=path.split('/')[2]
@@ -32,7 +33,8 @@ class FakeDiscord:
     def get(self,path):
         if self.fail_get:raise ValueError('simulated GET failure')
         if '/messages' not in path and path.startswith('/channels/'):
-            return {'id':path.split('/')[-1],'parent_id':'150000000000000003'}
+            thread=path.split('/')[-1]
+            return {'id':thread,'parent_id':self.channel_parents.get(thread,'150000000000000003')}
         if '?limit=' in path:return list(self.messages.values())
         return self.messages[path.split('/')[-1]]
     deliver=m.Discord.deliver
@@ -68,7 +70,7 @@ class FollowupTests(unittest.TestCase):
     def success(self):
         return {**self.closure(),'observed_url':self.payload['links'][0]['landing_url'],
             'network_ad_confirmed':True,'ad_description':'offline test fixture, not real ad',
-            'samples':[{'monotonic_seconds':t,'ad_visible':True,'tab_active':True,'screenshot':f'fixture-{t}.png'} for t in [0,10,20]]}
+            'samples':[{'monotonic_seconds':t,'ad_visible':True,'tab_active':True,'screenshot':f'fixture-{t}.png'} for t in [0,5,10]]}
     def test_no_claim_before_reply(self):self.assertIsNone(self.q.claim('worker'))
     def test_idempotent_stage(self):self.assertEqual(self.key,self.q.stage(self.payload,lambda u:True))
     def test_mutated_request_rejected(self):
@@ -136,8 +138,8 @@ class FollowupTests(unittest.TestCase):
     def test_empty_slot_not_success(self):
         self.start();e=self.success();e['network_ad_confirmed']=False
         with self.assertRaises(ValueError):self.q.result(self.key,'worker',0,'PASS',e)
-    def test_twenty_seconds_required(self):
-        e=self.success();e['samples'][-1]['monotonic_seconds']=19
+    def test_ten_seconds_required(self):
+        e=self.success();e['samples'][-1]['monotonic_seconds']=9
         with self.assertRaises(ValueError):m.validate_observation(e,self.payload['links'][0])
     def test_inactive_tab_fails(self):
         e=self.success();e['samples'][1]['tab_active']=False
@@ -244,6 +246,41 @@ class FollowupTests(unittest.TestCase):
     def test_reconciliation_requires_real_closure_proof(self):
         self.start();self.clock.value+=601;self.q.recover_expired()
         with self.assertRaises(ValueError):self.q.reconcile(self.key,0,{'tab_closed_verified':False})
+
+    def second_account(self):
+        p=copy.deepcopy(self.payload)
+        p.update(account_id='111111111111115',source_thread_id='150000000000000006',source_channel_id='150000000000000007',request_id='second-manager-fixture',campaign_ids=['111111111111116'])
+        p['links'][0]['campaign_id']='111111111111116'
+        for field in ('landing_url','effective_campaign_url'):p['links'][0][field]=p['links'][0][field].replace('c126','c127')
+        proof=Path(p['creation_proof']).with_name('second-manager-proof.json')
+        proof.write_text(json.dumps({'offline_test_fixture':True,'request_id':p['request_id'],'account_id':p['account_id'],'status':'COMPLETE_FUTURE_ACTIVE','campaign_ids':p['campaign_ids']}))
+        p.update(creation_proof=str(proof),creation_proof_sha256=hashlib.sha256(proof.read_bytes()).hexdigest())
+        self.dc.channel_parents[p['source_thread_id']]=p['source_channel_id']
+        key=self.q.stage(p,lambda u:True);m.publish_creation(self.q,key,'Segundo gestor concluído (fixture offline).',self.dc)
+        return key
+
+    def test_simultaneous_two_accounts_only_one_global_claim(self):
+        import threading
+        self.arm();self.clock.value+=1;self.second_account()
+        barrier=threading.Barrier(2)
+        def claim(owner):
+            q=m.Queue(self.root/'queue',now=self.clock)
+            try:
+                barrier.wait(timeout=5);row=q.claim(owner)
+                return row['key'] if row else None
+            finally:q.db.close()
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            results=list(pool.map(claim,['manager-001-worker','manager-006-worker']))
+        self.assertEqual([x for x in results if x],[self.key])
+
+    def test_second_manager_waits_through_first_manager_retry(self):
+        self.arm();self.clock.value+=1;other=self.second_account()
+        self.assertEqual(self.q.claim('first')['key'],self.key)
+        self.q.begin(self.key,'first',0);self.q.result(self.key,'first',0,'NO_AD',self.closure())
+        self.assertIsNone(self.q.claim('second'))
+        self.clock.value+=60;self.assertEqual(self.q.claim('first')['key'],self.key)
+        self.q.begin(self.key,'first',0);self.q.result(self.key,'first',0,'NO_AD',self.closure('retry-tab-new'))
+        self.assertEqual(self.q.claim('second')['key'],other)
 
 
 if __name__=='__main__':unittest.main()

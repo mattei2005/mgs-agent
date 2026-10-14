@@ -23,7 +23,8 @@ from pathlib import Path
 BASE = Path('/root/mgs-agent')
 ROOT = BASE / 'data/ares/meta-ads/landing-followup'
 INCIDENT_THREAD = '1559932317861158993'
-SUCCESS = 'Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 20 segundos em cada uma.'
+MIN_VISIBLE_SECONDS = 10
+SUCCESS = 'Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 10 segundos em cada uma.'
 TERMINAL = {'COMPLETE', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'COMPLETED'}
 
 
@@ -367,13 +368,13 @@ def validate_observation(e,link):
     if len(samples)<3 or any(x.get('ad_visible') is not True or x.get('tab_active') is not True for x in samples):
         raise ValueError('actual visible network ad + active tab samples required')
     times=[float(x['monotonic_seconds']) for x in samples]
-    if any(b<=a or b-a>10 for a,b in zip(times,times[1:])) or times[-1]-times[0]<20:
-        raise ValueError('20 continuous measured seconds with bounded samples required')
+    if any(b<=a or b-a>10 for a,b in zip(times,times[1:])) or times[-1]-times[0]<MIN_VISIBLE_SECONDS:
+        raise ValueError(f'{MIN_VISIBLE_SECONDS} continuous measured seconds with bounded samples required')
     paths=[x['screenshot'] for x in samples]
     if len(set(paths))!=len(paths):raise ValueError('fresh distinct screenshots required')
     actual=[file_evidence(sample['screenshot']) for sample in samples]
     capture_times=[x['captured_at'] for x in actual]
-    if capture_times[-1]-capture_times[0]<20 or any(b<=a or b-a>12 for a,b in zip(capture_times,capture_times[1:])):
+    if capture_times[-1]-capture_times[0]<MIN_VISIBLE_SECONDS or any(b<=a or b-a>12 for a,b in zip(capture_times,capture_times[1:])):
         raise ValueError('real screenshot timestamps do not cover the observation')
     if e.get('network_ad_confirmed') is not True or not e.get('ad_description'):
         raise ValueError('rendered network creative, not empty slot/CTA, required')

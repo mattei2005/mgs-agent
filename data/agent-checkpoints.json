@@ -1473,12 +1473,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Rodolfo fara o primeiro pedido real com gestor para validar observacao de anuncios ponta a ponta. Nao criar campanha teste agora, nao fazer backfill, nao alegar cadastro GAM. Acompanhar falhas exclusivamente nesta thread.",
-      "objective": "Padrao comum pos-resposta das landing pages de trafego direto",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/verification.json;REPORT-INFRA:1559960235790307361",
-      "state": "instalado e conferido: contrato/skills, fila wal/full idempotente, barreira de resposta com readback de conta/canal, lease fisica pc1 por sessao, outbox, timer ativo e callback car diario pos-resposta. 43 testes novos; 179 passaram na selecao. duas divergencias antigas cpv reproduzidas no backup; check institucional de versao legado tambem anterior. runtime e cli smoke ok; fila de producao vazia; lease pc1 livre; janela tecnica fechada e original preservada. report-infra 1559960235790307361 com get validado, embed vazio/sem mentions.",
+      "next_step": "Validar gatilho externo independente depois da resposta e isolamento de recursos antes de reativar somente acompanhamento. Nunca restaurar callback, stage/preparo ou wrapper na rota de pedidos. Pedidos continuam pelo caminho nativo, sem nova etapa.",
+      "objective": "Preservar rota de campanhas intacta; acompanhamento totalmente externo com FIFO global PC1",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/isolation-correction;discord:1559932317861158993#1559963300844933141",
+      "state": "correcao de isolamento aplicada: callback retirado; diario byte-identico a baseline pre-acompanhamento; wrapper obrigatorio removido das quatro skills. somente acompanhamento em held_for_full_async_isolation, timer disabled/inactive, fila vazia; criacoes nao pausadas. fila global de uma tarefa validada com duas conexoes concorrentes de contas/canais distintos, inclusive espera60s/retry do predecessor. 181 testes selecionados aprovados; duas divergencias cpv anteriores separadas.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-14T16:07:41+00:00"
+      "updated_at": "2026-10-14T16:20:25+00:00"
     },
     {
       "agent": "zeus",
@@ -5852,5 +5852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T16:07:41+00:00"
+  "updated_at": "2026-10-14T16:20:25+00:00"
 }

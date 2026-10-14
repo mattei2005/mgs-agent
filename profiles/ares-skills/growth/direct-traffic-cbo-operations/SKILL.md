@@ -58,7 +58,11 @@ Toda criação/clonagem nova usa exclusivamente o executor central v3. Esta skil
 
 Conclusão antes do hot path: operação, manifest, mídia pre-stageada, source, budget, status e horário estão fechados; durante o hot path não existe `Searching`, patch, teste, criação de cron ou releitura global de portfólio.
 
-## Acompanhamento comum pós-resposta — obrigatório
+## Acompanhamento pós-resposta — isolamento obrigatório
+
+**A rota de pedidos de campanha não participa do acompanhamento.** Não adicionar stage, wrapper, callback, consulta de landing, fila, PC1 ou carregamento da referência de acompanhamento ao atendimento de criação/duplicação. Criar, validar e responder pelo caminho nativo já existente, com a mesma conclusão e sem etapa extra. O processo independente, depois da resposta já entregue, é o único responsável por descobrir/enfileirar/observar. Falha ou fila do acompanhamento nunca trava, retoma ou atrasa criação; campanhas têm prioridade absoluta de recursos. A integração antiga com `publish-creation` e callback no diário foi supersedida por Rodolfo e retirada. Enquanto o contrato estiver `HELD_FOR_FULL_ASYNC_ISOLATION`, somente o acompanhamento fica suspenso, não as campanhas.
+
+O fluxo abaixo governa exclusivamente o processo independente de acompanhamento:
 
 Aplicar a toda criação/duplicação concluída de tráfego direto — CAR, SHEIN e futuros nichos, nunca BOT/Messenger — nesta ordem:
 
@@ -70,7 +74,7 @@ Aplicar a toda criação/duplicação concluída de tráfego direto — CAR, SHE
 6. Enviar problemas exclusivamente ao destino `all_problem_destination_thread` do contrato canônico, nunca à thread do gestor. Identificar pedido, URL permitida e diagnóstico útil, sem output técnico bruto.
 7. Somente depois de TODAS as URLs passarem, enviar na thread do gestor exatamente: “Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 20 segundos em cada uma.” Não mencionar PC1 nesse aviso nem declarar cadastro GAM sem readback próprio.
 
-Resolver autoridade e destinos em `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`; manter IDs e estado operacional nessa fonte, não em cópias da skill. Carregar `references/landing-followup.md` para comandos, evidências e recuperação. Não alterar campaign writer, orçamento, estratégia ou início; não presumir integração automática de um runner apenas porque o consumidor está instalado. Distinguir instalação, testes offline, observação real e cadastro GAM ao informar conclusão.
+Resolver autoridade e destinos em `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`; manter IDs e estado operacional nessa fonte, não em cópias da skill. **Somente o processo separado** carrega `references/landing-followup.md` para comandos, evidências e recuperação; nunca carregar essa referência na rota de pedidos de campanha. Não alterar campaign writer, orçamento, estratégia ou início; não presumir integração automática de um runner apenas porque o consumidor está instalado. Distinguir instalação, testes offline, observação real e cadastro GAM ao informar conclusão.
 
 ## Fluxo operacional
 

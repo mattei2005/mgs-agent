@@ -258,7 +258,7 @@ Conclusão: recomendação ou write usa dados do mesmo período, moeda e chave d
 
 ### Acompanhamento comum das landing pages
 
-Em toda criação/duplicação concluída SHEIN, carregar `direct-traffic-cbo-operations/references/landing-followup.md` e aplicar a barreira comum: resposta de criação confirmada PRIMEIRO; acompanhamento separado depois, sem esperar horário de início nem atrasar o gestor. Única herança genérica autorizada neste ponto: contrato `data/ares/meta-ads/policies/direct-traffic-landing-followup.json` aprovado por Rodolfo `1559951763019145247`. Não herdar lifecycle/budget/evento CAR. URL de observação é landing comprovada, nunca quiz. Problemas somente `1559932317861158993`; mensagem de sucesso exata ao gestor somente após todas as provas. Não comunicar problemas deste acompanhamento na origem, diferentemente de falhas da própria criação.
+A rota SHEIN de criação/duplicação permanece exatamente a atual: não carregar referência de acompanhamento, não preparar fila/landing, não trocar o transporte da resposta e não adicionar wrapper/callback. Criar, validar e responder normalmente; somente um processo independente posterior pode consumir a conclusão já existente. O isolamento e o estado vigente vivem em `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`; `HELD_FOR_FULL_ASYNC_ISOLATION` suspende somente o acompanhamento, nunca os pedidos. A integração antiga pela barreira de resposta foi supersedida por Rodolfo e retirada. Somente o processo separado usa `direct-traffic-cbo-operations/references/landing-followup.md`; nenhuma herança CAR de budget/lifecycle/evento, nenhuma disputa de lane/quota com campanhas e nenhum alerta do acompanhamento ao gestor.
 
 ### Fechamento de criação e duplicação
 

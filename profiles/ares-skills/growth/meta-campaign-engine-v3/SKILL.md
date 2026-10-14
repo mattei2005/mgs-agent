@@ -78,7 +78,7 @@ Carregue somente a referência do branch atual.
 
 ## Pós-resposta de tráfego direto — fora do writer
 
-Ao concluir pedidos CAR, SHEIN ou futuros nichos de tráfego direto, aplicar obrigatoriamente `direct-traffic-cbo-operations/references/landing-followup.md` e a fonte única `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`. O fluxo comum do Ares usa stage local + publish-creation/readback para responder ao gestor PRIMEIRO e liberar o acompanhamento em fila só DEPOIS. Nunca inserir observação PC1 no hot path, bloquear/repetir Meta ou herdar BOT/Messenger. Não presumir que uma chamada isolada/histórica ao Engine contém esse hook: exige job e ID da resposta confirmados na fila. Qualquer falha deste acompanhamento tem destino exclusivo `1559932317861158993`, não a origem do gestor.
+Criação/duplicação CAR, SHEIN e futuros nichos preserva INTEGRALMENTE a rota atual de pedidos: nenhum stage, wrapper de resposta, callback, consulta de landing, fila, PC1 ou leitura da referência de acompanhamento. Responder pelo transporte nativo existente e retornar normalmente. Somente um processo independente, fora dessa execução e após a resposta já entregue, pode consultar o contrato `data/ares/meta-ads/policies/direct-traffic-landing-followup.json` e a referência `direct-traffic-cbo-operations/references/landing-followup.md`. A antiga integração `publish-creation`/callback foi supersedida e retirada por correção de Rodolfo; não restaurá-la. Fila, erro ou indisponibilidade do acompanhamento não podem consumir lane/quota Meta, bloquear, repetir ou acrescentar etapas ao pedido. Enquanto o contrato estiver `HELD_FOR_FULL_ASYNC_ISOLATION`, só o acompanhamento fica suspenso; criações seguem normais.
 
 ## Readback de prova social — identidade correta
 

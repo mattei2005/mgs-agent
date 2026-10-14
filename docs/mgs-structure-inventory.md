@@ -7,7 +7,15 @@
 
 ---
 
-## Atualização Growth — acompanhamento de landing pós-resposta (2026-10-14)
+## Correção Growth — isolamento total e fila única PC1 (2026-10-14)
+
+- Rodolfo determinou que o acompanhamento não pode misturar-se à rota de pedidos nem comprometer velocidade/performance; reafirmou fila global entre G001/G006 simultâneos na mensagem `1559963300844933141`. A mensagem `1559964027264962702` supersede o tempo de 20s por **10s contínuos**, inclusive no validador e no aviso de sucesso. Fonte única atual: `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`, schema 2. Esta correção supersede expressamente o desenho acoplado descrito no histórico abaixo.
+- Retirado o callback de `daily_cpv.py`; arquivo confirmado byte a byte idêntico à baseline anterior à instalação do acompanhamento. Removida das quatro skills a obrigação de stage/publish-creation/preparo na sessão de pedidos; nenhuma referência de acompanhamento é carregada na rota de criação. O transporte nativo de resposta continua intacto.
+- Somente o acompanhamento está `HELD_FOR_FULL_ASYNC_ISOLATION`: timer próprio disabled/inactive, serviço sem processo, fila real vazia, comandos stage/tick/publish-creation bloqueados pelo contrato. Nenhum scheduler/hold de campanha, gateway, credencial, budget, início ou estratégia foi alterado. Reativação exige gatilho externo pós-resposta e isolamento de recursos validados, nunca restaurar wrapper/callback.
+- A fila de acompanhamento é global FIFO, não por gestor/canal: uma tarefa ativa no PC1, espera de retry preserva o predecessor, fechamento incerto bloqueia somente acompanhamento. Duas conexões concorrentes para contas/canais distintos foram testadas; apenas uma ganhou o claim, e o segundo gestor aguardou inclusive a retentativa do primeiro. Criação de campanhas não foi serializada.
+- Validação: 181 testes selecionados aprovados, duas divergências CPV anteriores separadas; mirror somente das skills próprias Ares reconciliado por hash, sem alteração de outros profiles. Provas e baseline: `data/ares/meta-ads/audit/landing-followup-1559951763019145247/isolation-correction/`. A igualdade de código comprova remoção do acréscimo síncrono, não um benchmark geral de latência. Histórico anterior preservado, mas não representa o estado ativo.
+
+## Histórico Growth — acompanhamento pós-resposta inicial (supersedido pelo isolamento acima)
 
 - Autoridade: Rodolfo `1559951763019145247`, thread `1559932317861158993`, handoff Zeus ao Ares. Escopo: todo tráfego direto CAR/SHEIN/futuros nichos; exclui BOT/Messenger. Fonte única `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`.
 - Runtime novo: `scripts/ares-direct-traffic-followup.py`, módulos `ares_campaign_v3/landing_followup.py` e `landing_followup_adapters.py`, SQLite WAL/FULL em `data/ares/meta-ads/landing-followup/`. Fila imutável/idempotente, barreira de resposta ao gestor com GET de autor/thread/conteúdo, consumidor global limitado, lease PC1 cross-agent obrigatória e verificada por ID real de sessão, outbox com ID/nonce/readback. Evidências revisadas ficam protegidas em artifacts do Ares, sem anexos automáticos.
