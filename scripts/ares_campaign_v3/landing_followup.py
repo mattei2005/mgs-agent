@@ -199,7 +199,7 @@ class Queue:
         with self.tx():
             # One active observer globally, regardless of account/channel. Other
             # campaign writers remain independent and are never locked by PC1.
-            if self.db.execute("SELECT 1 FROM jobs WHERE state='RUNNING'").fetchone(): return None
+            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','NEEDS_RECONCILIATION')").fetchone(): return None
             r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY created,key LIMIT 1").fetchone()
             if not r:return None
             key=r['key']
@@ -255,6 +255,8 @@ class Queue:
             all_pass=all(x['state']=='PASSED' for x in remaining)
             pending=any(x['state'] in {'READY','WAIT_RETRY','OPEN_INTENT'} for x in remaining)
             status='OBSERVED' if all_pass else ('READY' if pending else 'ATTENTION')
+            if result=='ERROR' and not evidence.get('no_tab_opened') and evidence.get('tab_closed_verified') is not True:
+                status='NEEDS_RECONCILIATION'
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',(status,key))
             if state=='ATTENTION':
                 diagnosis='Anúncio ausente também na segunda tentativa, após o intervalo de 1 minuto.' if result=='NO_AD' else evidence['diagnosis']
@@ -281,8 +283,12 @@ class Queue:
                 # request here and leave its intent for browser reconciliation.
                 self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL WHERE key=?",(j['key'],))
                 p=json.loads(j['payload'])
+                active=self.db.execute("SELECT idx FROM links WHERE job=? AND state='OPEN_INTENT' ORDER BY idx LIMIT 1",(j['key'],)).fetchone()
+                affected=p['links'][active['idx'] if active else 0]
+                url=affected.get('landing_url') or affected['effective_campaign_url']
+                scope(url)
                 self.prepare_message(j['key']+':worker-expired',INCIDENT_THREAD,
-                    f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}. A execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.")
+                    f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}.\n{url}\nA execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.")
                 self.event(j['key'],'worker_expired',{'automatic_reopen':False})
 
 

@@ -2453,6 +2453,16 @@ def run_daily(
                     f"Criativos novos: {len(selected)} · estoque elegível restante: {stock['eligible_unique_creatives']}"
                 )
                 atomic_json(audit_path, audit)
+                # The normal creation response above is ALREADY sent/read back.
+                # Follow-up is separate, post-reply, and cannot replay or fail
+                # the campaign transaction. Fake/offline backends never enqueue.
+                if isinstance(backend, LiveDailyBackend):
+                    try:
+                        from .landing_followup_adapters import after_daily_reply
+                        audit["landing_followup"] = after_daily_reply(audit_path, audit["discord_readback"])
+                    except Exception as followup_error:
+                        audit["landing_followup"] = {"state": "FOLLOWUP_INTEGRATION_PENDING", "error_type": type(followup_error).__name__, "campaign_replay": False}
+                    atomic_json(audit_path, audit)
             if not quiet:
                 print(json.dumps(final, ensure_ascii=False, indent=2))
             return final

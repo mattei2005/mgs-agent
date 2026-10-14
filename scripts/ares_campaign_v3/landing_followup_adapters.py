@@ -49,6 +49,16 @@ def after_daily_reply(audit_path,reply):
         dc=Discord();thread=str(reply['thread_id']);mid=str(reply['message_id'])
         channel=dc.get('/channels/'+thread)
         p=build_payload(audit_path,thread,channel.get('parent_id') or thread)
+        # The daily audit will receive this adapter's result afterwards. Freeze
+        # the already-complete proof now, rather than pointing at mutable state.
+        frozen=q.root/'creation-proofs'/(p['creation_proof_sha256']+'.json')
+        frozen.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+        if not frozen.exists():
+            import os
+            fd=os.open(frozen,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+            with os.fdopen(fd,'wb') as h:
+                h.write(Path(audit_path).read_bytes());h.flush();os.fsync(h.fileno())
+        p['creation_proof']=str(frozen)
         key=q.stage(p)
         msg=dc.get('/channels/'+thread+'/messages/'+mid)
         if str(msg.get('channel_id'))!=thread or str((msg.get('author') or {}).get('id'))!=dc.bot_id:

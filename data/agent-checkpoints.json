@@ -5123,12 +5123,12 @@
     {
       "agent": "zeus",
       "id": "php83-smart-routing-20261014",
-      "next_step": "Decisão Rodolfo para8 isolados e159 Fincgriffin; correção32paramloss e cv-car-br-001 ainda fora do corte escolhido. AdOps609 operações pendentes, sem cadastro Zeus.",
-      "objective": "Validar PHP8.3 e corrigir destinos aprovados; preservar escopos residuais.",
-      "source": "reports/openzed-routing-cutover-1559931178050527265.md; work/sb-smart-routing/openzed-cutover-1559931178050527265/summary.json; Discord1559931178050527265",
-      "state": "corte aprovado concluído609/609 público200+params;26 pools+6.htaccess validados; report-infra1559947346685730817 readback. adops609 operações pendentes; residual168404+32paramloss.",
+      "next_step": "Não migrar Fincgriffin nem8 isolados para Openzed; nenhuma nova gravação de produção autorizada neste não. Aguardar instrução específica para a remediação residual; preservar609 alterações anteriores.",
+      "objective": "Validar PHP8.3 e preservar o corte autorizado609 rotas para Openzed US-CC-EN.",
+      "source": "reports/openzed-routing-cutover-1559931178050527265.md; Discord1559931178050527265; decisão negativa Discord1559957335294607401",
+      "state": "609 rotas do corte anterior validadas. rodolfo1559957335294607401 negou migrar159 fincgriffin e8 isolados para openzed; esses destinos permanecem inalterados. adops609 e residual168404+32paramloss seguem registrados.",
       "thread_id": "1559601841036198031",
-      "updated_at": "2026-10-14T15:14:43+00:00"
+      "updated_at": "2026-10-14T15:54:37+00:00"
     },
     {
       "agent": "zeus",
@@ -5852,5 +5852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T15:34:18+00:00"
+  "updated_at": "2026-10-14T15:54:37+00:00"
 }
