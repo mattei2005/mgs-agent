@@ -71,6 +71,7 @@ Quando a imagem precisa conter o logo oficial do site:
 - **Branding grande demais:** vira banner e reduz qualidade editorial.
 - **Bandeiras, placas e textos:** aumentam risco de artefatos. Evitar quando não forem essenciais. Qualquer placa, storefront ou pseudo-texto legível reprova o asset; regenere antes do upload em vez de aceitar o fundo como detalhe.
 - **Extensão diferente do conteúdo:** APIs de imagem podem retornar bytes JPEG mesmo quando o arquivo de saída recebeu `.png`. Rode `file`/`identify`, alinhe extensão e MIME antes do upload, porque o uploader define `Content-Type` pelo nome do arquivo.
+- **Alt desatualizado após regeneração:** reveja o texto alternativo contra a foto substituta. Se a pessoa, o equipamento ou o enquadramento mudar, corrija o alt antes do upload e confirme a versão final por readback; não descreva Steam, idioma, instituição, evento real ou profissão como se fossem visualmente comprovados por uma cena ilustrativa.
 - **Metadados de mídia incompletos:** após o upload, grave título e alt text e leia a mídia por ID; valide também a variante `large` usada no corpo e seu `Content-Type` público.
 - **Imagem impactante mas suja:** contraste e golden hour não compensam artefatos grandes ou texto estranho.
 - **Comparação sem critério:** avaliar impacto visual e segurança de publicação separadamente.

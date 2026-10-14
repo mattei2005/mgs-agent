@@ -71,7 +71,7 @@ Inspecione também o trecho final de `content.raw` em várias referências. Card
 1. Compare títulos e slugs propostos com o corpus completo; use similaridade textual como alerta, não só igualdade exata.
 2. Prefira intenções específicas e úteis em vez de outra versão do mesmo tema amplo.
 3. Para tendências, valide a afirmação em fonte primária ou editorial confiável antes de escrever.
-4. Cite a fonte dentro do artigo quando ela sustentar um claim datado ou mensurável.
+4. Cite a fonte dentro do artigo quando ela sustentar um claim datado ou mensurável. Em conteúdo financeiro/jurídico, confira a versão consolidada vigente e a revogação de cada dispositivo citado: uma resolução pode continuar válida em um artigo e ter outro substituído por norma posterior. Não use PDF antigo como prova da atribuição legal atual.
 5. Preserve um manifesto `source_urls`; fonte de pesquisa não autoriza copiar estrutura verbal ou frases.
 6. Separe evidência qualitativa de interesse — consultas encontradas, dúvidas recorrentes e cobertura recente — de métricas de procura. Não apresente presença em SERP ou em reportagem como volume de busca ou crescimento medido; registre a limitação quando não houver dado quantitativo verificável.
 
@@ -125,7 +125,8 @@ Resolva categoria e tags pelo helper oficial antes de montar o payload. Para art
 - O nome solicitado da tag não deve conter hífen; use espaço em termos compostos.
 - Slug auto-gerado com hífen pelo WordPress é normal.
 - Não aplique tag comercial sem o artigo tratar daquele assunto.
-- No readback, compare conjuntos de IDs porque a REST pode reordenar tags.
+- No readback, compare conjuntos de IDs porque a REST pode reordenar tags. Se uma consulta de coleção com `include` omitir ou acrescentar termos, leia cada ID esperado diretamente; não interprete uma coleção filtrada incompleta como tag ausente.
+- Antes de criar tags, reconcilie os nomes existentes por comparação Unicode/casefold para evitar `SEO` versus `seo`. Preserve nome/slug/ID canônicos existentes, deduplique o payload por ID e crie apenas os termos realmente ausentes. Se o helper retornar `400 term_exists`, faça GET no `term_id` fornecido e confirme o termo antes de retomar; nunca repita POST cegamente nem renomeie o termo para satisfazer a capitalização do draft.
 
 ## 9. Criar rascunhos com payload explícito
 
@@ -167,14 +168,15 @@ Faça GET autenticado por ID com `context=edit` e compare contra o payload:
 
 Depois valide `content.rendered`:
 
+- diferencie tipografia do WordPress de alteração semântica: `wptexturize` pode converter apóstrofo ASCII em aspas curvas. Normalize somente essa tipografia e whitespace na comparação visual da primeira frase; mantenha a exigência de `content.raw` byte a byte;
+- detecte placeholders por marcadores delimitados, não por palavras comuns: um regex case-insensitive para `TODO` também encontra «todo» em espanhol e produz falso bloqueio;
+- remova IDs numéricos de citação dentro de links quando não existir lista correspondente; preserve a fonte contextual nomeada e seu href;
 - palavras/H2/parágrafos continuam na faixa;
 - abertura curta preservada;
 - uma imagem, ID, URL e alt esperados;
 - zero placeholder;
 - hrefs exatos e canônicos;
 - nenhum bloco removido pelo parser do WordPress.
-
-No QA de lotes multilíngues, procure marcadores inequívocos como `[TODO]` ou `[insert ...]`, não a substring `TODO` sem distinção de caixa: `todo` e `todos` são palavras legítimas em espanhol e português e geram falsas reprovações. Antes de enviar o corpo final, remova números de citação órfãos dos textos de âncora quando não houver bibliografia numerada correspondente; preserve o href e a atribuição contextual da fonte, depois repita o QA sobre esse corpo exato.
 
 Diagnóstico de legibilidade em inglês:
 

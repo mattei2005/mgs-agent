@@ -11427,6 +11427,24 @@
       "updated_at": "2026-10-08T14:16:58+00:00"
     },
     {
+      "canonical_key": "smart-routing.legacy-group-a-vizioid.openzed-us-cc-en",
+      "canonical_source": "reports/openzed-routing-cutover-1559931178050527265.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "smart-routing",
+      "effective_at": "2026-10-14T15:12:49+00:00",
+      "id": "openzed-routing-cutover-1559931178050527265",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Destinos Openzed US-CC-EN para grupos A e Vizioid B/C",
+      "updated_at": "2026-10-14T15:12:49+00:00"
+    },
+    {
       "canonical_key": "security.google-workspace-auth",
       "canonical_source": "context/security-policies.md",
       "consumers": [
@@ -11787,5 +11805,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T14:43:35+00:00"
+  "updated_at": "2026-10-14T15:12:49+00:00"
 }

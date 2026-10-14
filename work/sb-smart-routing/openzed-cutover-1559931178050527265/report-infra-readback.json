@@ -1,0 +1,18 @@
+{
+  "message_id": "1559947346685730817",
+  "channel_id": "1498132022634483894",
+  "content_empty": true,
+  "embeds": 1,
+  "mentions": 0,
+  "fields": {
+    "Ação": "modificada",
+    "Tipo": "SmartRouting/config/data/skill",
+    "Host": "srv1767265",
+    "Path": "SB:26 pools; MatteiInc03JBF:6 .htaccess; reports/openzed-routing-cutover-1559931178050527265.md; data/infra-inventory.json; data/agent-checkpoints.json; data/knowledge-registry.json; skill smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+    "Motivo": "Rodolfo1559931178050527265: migrar609 rotas gruposA+VizioidB/C para5 destinos Openzed US-CC-EN. Canário provou API diferente do rewrite servido; recuperação cirúrgica de URLs com backup/CAS, sem alterar outros blocos.",
+    "Evidência": "609/609 cadeias públicas HTTP200+parâmetros;26 pools readback independente;482 pools IDs/metadata/identidades preservados;6 hashes/diffmínimo+home200/.htaccess403. AdOps609 operações vazias: limitação explícita. Residual168 links404+32paramloss. Inventário/audit/registry validados. Work:work/sb-smart-routing/openzed-cutover-1559931178050527265",
+    "Pendências Hermes": "total=0 | >=24.0h=0 | mais antiga=0.0h",
+    "Horário": "2026-10-14 11:13:49 EDT"
+  },
+  "validated_at": "2026-10-14T15:14:42.872979+00:00"
+}

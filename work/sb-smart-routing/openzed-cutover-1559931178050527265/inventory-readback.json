@@ -1,0 +1,83 @@
+{
+  "id": "openzed-routing-cutover-1559931178050527265",
+  "agent": "zeus",
+  "type": "smart-routing-url-cutover-and-serving-layer-recovery",
+  "updated_at": "2026-10-14T15:13:35.886054+00:00",
+  "authorization_message_id": "1559931178050527265",
+  "thread_id": "1559601841036198031",
+  "status": "public_destinations_recovered_with_adops_pending",
+  "report_path": "/root/mgs-agent/reports/openzed-routing-cutover-1559931178050527265.md",
+  "evidence_dir": "/root/mgs-agent/work/sb-smart-routing/openzed-cutover-1559931178050527265",
+  "checkpoint_id": "php83-smart-routing-20261014",
+  "registry_id": "openzed-routing-cutover-1559931178050527265",
+  "validated_counts": {
+    "updated_at": "2026-10-14T15:12:49.513172+00:00",
+    "status": "public_destinations_recovered_with_adops_pending",
+    "authorization_message_id": "1559931178050527265",
+    "thread_id": "1559601841036198031",
+    "pools_updated": 26,
+    "routes_updated": 609,
+    "blank_operations": 609,
+    "public_tested": 609,
+    "public_http200": 609,
+    "public_parameter_loss": 0,
+    "residual_tested": 201,
+    "residual_404": 168,
+    "residual_parameter_loss_on_200": 32,
+    "residual_recovered_no_zeus_write": 1,
+    "known_problem_set_tested": 810,
+    "created_pools": 0,
+    "deleted_pools": 0,
+    "republished_drafts": 0,
+    "scope_pools_preserved": 482,
+    "reports": "reports/openzed-routing-cutover-1559931178050527265.md"
+  },
+  "remote_files": [
+    {
+      "domain": "boostingecon",
+      "routes": 90,
+      "sha256": "27ee10bde904b215d7bf482342026cc2ff9e986474702ccfed3aa0be5cceb024",
+      "only_authorized_URL_tokens_changed": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "escalatepower",
+      "routes": 90,
+      "sha256": "c4d048ce9db6412c3bbcd955c21cd92b411eb3dc788d1764e839513ee240adb2",
+      "only_authorized_URL_tokens_changed": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "vizioid",
+      "routes": 159,
+      "sha256": "1ca5bfdf4c0fe3f075cc83f8b88a66f0e8f839283cd7e96076c673b9c113d34d",
+      "only_authorized_URL_tokens_changed": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "growpowerhub",
+      "routes": 90,
+      "sha256": "82c2a8ce2d2f415393e6b8eefa30ad486cbc9927a6177cda089baed02afb17d7",
+      "only_authorized_URL_tokens_changed": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "yolokfx",
+      "routes": 90,
+      "sha256": "ac44bb89168a3fd7738b61a485e068f154b259a01d1b359dd4a97c5f2918aa91",
+      "only_authorized_URL_tokens_changed": true,
+      "status": "PASS"
+    },
+    {
+      "domain": "mavroa",
+      "routes": 90,
+      "sha256": "360fa103951fae6988f9f7f16d14220a37d2f3bda3966ccfd80c71b04874773a",
+      "only_authorized_URL_tokens_changed": true,
+      "status": "PASS"
+    }
+  ],
+  "remote_private_backup_dir": "/root/mgs-route-backups/1559931178050527265/ on MatteiInc03JBF",
+  "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/smart-routing-pool-create.md",
+  "skill_reference_sha256": "7aa4ab88d2c792280301b76ac2b33493cf09d3e0ebf94f1ae1ec21557c0fd814",
+  "report_infra_status": "pending"
+}
