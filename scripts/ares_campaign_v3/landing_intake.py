@@ -13,7 +13,7 @@ import sqlite3
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from .landing_followup import BASE, Queue, Discord, identifier, scope, digest
+from .landing_followup import BASE, Queue, Discord, identifier, scope, digest, validate_payload
 from .landing_followup_adapters import effective_url
 from .creative_media import source_links
 
@@ -87,7 +87,7 @@ def origin_for_delivery(c,delivery):
     if not final or abs(delivery['created_at']-final['timestamp'])>120:return None
     user=c.execute("SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1",(session['id'],final['id'])).fetchone()
     if not user or not user['platform_message_id']:return None
-    tools=c.execute("SELECT content FROM messages WHERE session_id=? AND id>? AND id<? AND role='tool' ORDER BY id LIMIT 300",(session['id'],user['id'],final['id'])).fetchall()
+    tools=list(reversed(c.execute("SELECT content FROM messages WHERE session_id=? AND id>? AND id<? AND role='tool' ORDER BY id DESC LIMIT 300",(session['id'],user['id'],final['id'])).fetchall()))
     origin=json.loads(session['origin_json'] or '{}')
     parent=str(origin.get('parent_chat_id') or thread)
     identifier(thread);identifier(parent);identifier(user['platform_message_id'])
@@ -108,7 +108,10 @@ def verify_native_reply(discord,delivery,origin):
     thread=origin['thread_id'];channel=discord.get('/channels/'+thread)
     if str(channel.get('id'))!=thread or str(channel.get('parent_id') or channel['id'])!=origin['parent_id']:
         raise ValueError('native_origin_partition_mismatch')
-    after=origin['source_message_id'];rows=[]
+    # Read only the response window, not hundreds of progress messages. This
+    # is a derived paging boundary, never represented as an observed message ID.
+    boundary=max(0,int((float(delivery['created_at'])-15)*1000)-1420070400000)<<22
+    after=str(max(int(origin['source_message_id']),boundary));rows=[]
     for _ in range(5):
         page=discord.get('/channels/'+thread+'/messages?after='+after+'&limit=100')
         if not isinstance(page,list):raise ValueError('native_reply_readback_unavailable')
@@ -286,7 +289,16 @@ class Intake:
         if receipt.get('verified') is not True or receipt.get('native_delivery_state')!='delivered':raise ValueError('delivered_native_response_required')
         if receipt['thread_id']!=payload['source_thread_id'] or receipt['parent_id']!=payload['source_channel_id'] or not receipt.get('message_ids'):raise ValueError('native_receipt_partition_mismatch')
         for mid in receipt['message_ids']:identifier(mid)
-        key=self.q.stage(payload,self.check_scope)
+        key=digest([payload['operation'],payload['account_id'],payload['request_id']])
+        existing=self.q.db.execute('SELECT payload FROM jobs WHERE key=?',(key,)).fetchone()
+        if existing:
+            original=json.loads(existing['payload'])
+            for field in ('links','campaign_ids','account_id','source_channel_id','source_thread_id'):
+                if original[field]!=payload[field]:raise ValueError('immutable_native_request_changed')
+            # A crash after stage may precede the receipt transaction. Resume
+            # the already-frozen original, not a changed audit snapshot.
+            validate_payload(original,self.check_scope)
+        else:key=self.q.stage(payload,self.check_scope)
         with self.q.tx():
             j=self.q.job(key)
             if j['reply_id']:
@@ -355,7 +367,7 @@ class Intake:
         with readonly(self.native_db) as c:
             rows=[dict(r) for r in c.execute("SELECT * FROM delivery_obligations WHERE platform='discord' AND state='delivered' AND created_at>=? AND (updated_at>? OR (updated_at=? AND obligation_id>?)) ORDER BY updated_at,obligation_id LIMIT 100",(epoch,cursor,cursor,cursor_key))]
             # Pending events survive cursor advancement and are retried read-only.
-            pending=self.q.db.execute("SELECT id FROM native_intake WHERE state='PENDING' AND id LIKE 'native:%' ORDER BY updated LIMIT 20").fetchall()
+            pending=self.q.db.execute("SELECT id FROM native_intake WHERE state='PENDING' AND id LIKE 'native:%' AND updated<=? ORDER BY updated LIMIT 20",(self.q.now()-60,)).fetchall()
             ids={r['obligation_id'] for r in rows}
             for pending_row in pending:
                 oid=pending_row['id'].split(':')[1]

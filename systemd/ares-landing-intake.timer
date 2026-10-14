@@ -1,0 +1,12 @@
+[Unit]
+Description=Observe completed native replies outside campaign requests
+
+[Timer]
+OnBootSec=10s
+OnUnitInactiveSec=15s
+AccuracySec=1s
+Unit=ares-landing-intake.service
+Persistent=false
+
+[Install]
+WantedBy=timers.target

@@ -50,7 +50,7 @@ class IntakeTests(unittest.TestCase):
             (2,'session-1','tool',json.dumps({'output':json.dumps({'request_id':self.rid,'status':'COMPLETE_FUTURE_ACTIVE','campaign_ids':[self.cid]})}),None,None,1004,None),
             (3,'session-1','assistant',self.text,None,'stop',1005,None)])
         self.c.execute('INSERT INTO delivery_obligations VALUES(?,?,?,?,?,?,?,?,?)',('event-1','native-key','discord',self.thread,self.thread,self.text,'delivered',1006,1007));self.c.commit()
-        self.q=core.Queue(self.meta/'landing-followup',now=lambda:1010)
+        self.now=1010;self.q=core.Queue(self.meta/'landing-followup',now=lambda:self.now)
         self.dc=FakeDiscord(self.text);self.factory_calls=0
         def factory():self.factory_calls+=1;return self.dc
         self.intake=li.Intake(self.q,self.path,self.meta,factory,check_scope=lambda url:True)
@@ -81,7 +81,7 @@ class IntakeTests(unittest.TestCase):
         row=self.q.db.execute("SELECT state FROM native_intake WHERE id='native:event-1'").fetchone();self.assertEqual(row['state'],'PENDING')
     def test_readback_failure_resumes_same_event_without_duplicate(self):
         messages=self.dc.messages;self.dc.messages=[];self.intake.tick()
-        self.dc.messages=messages;self.intake.tick();self.intake.tick()
+        self.dc.messages=messages;self.now+=60;self.intake.tick();self.intake.tick()
         self.assertEqual(self.jobs(),1);self.assertEqual(self.dc.posts,0)
     def test_restart_does_not_duplicate_job(self):
         self.intake.tick();self.q.db.close();self.q=core.Queue(self.meta/'landing-followup',now=lambda:1010)

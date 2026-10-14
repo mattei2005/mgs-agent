@@ -132,7 +132,11 @@ def main():
     if args.command=='status':return {'jobs':[dict(x) for x in q.db.execute('SELECT state,count(*) AS count FROM jobs GROUP BY state')], 'pending_notifications':q.db.execute("SELECT count(*) FROM messages WHERE state!='VERIFIED'").fetchone()[0]}
     if args.command=='tick':return tick(q)
     if args.command=='activate-intake':return {'activation_epoch':Intake(q).activate(),'backfill':False}
-    if args.command=='intake':return Intake(q).tick()
+    if args.command=='intake':
+        with (q.root/'intake.lock').open('a+') as guard:
+            try:fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            except BlockingIOError:return {'state':'INTAKE_BUSY'}
+            return Intake(q).tick()
     if args.command in {'begin','result','reconcile'}:require_pc1_lease(args.pc1_session_id)
     if args.command=='reconcile':
         q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()))
