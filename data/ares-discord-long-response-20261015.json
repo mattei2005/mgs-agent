@@ -64,11 +64,11 @@
     "retained_chunks": 11,
     "mirror_resolved": "/root/mgs-agent/profiles/ares-config.yaml"
   },
-  "status": "restart_scheduled_delivery_recovered",
+  "status": "activated_validated_delivery_recovered",
   "previous_pid": 179641,
   "next_step": "detached safe restart Ares only, then fresh Discord readiness, config smoke, REPORT-INFRA and callback",
   "workspace": "/root/.hermes/profiles/zeus/cache/scratch/ares-discord-long-1560358838279086093",
-  "updated_at": "2026-10-15T18:45:00.641586+00:00",
+  "updated_at": "2026-10-15T18:52:09.893569+00:00",
   "preparation_report": {
     "message_id": "1560362753539965036",
     "readback_verified": true
@@ -81,5 +81,27 @@
     ],
     "delay_seconds": 90
   },
-  "validation_timer": "mgs-ares-discord-long-1560358838279086093"
+  "validation_timer": "mgs-ares-discord-long-1560358838279086093",
+  "activation": {
+    "new_pid": 510781,
+    "active_running": true,
+    "fresh_discord_connected": true,
+    "smoke": {
+      "live_mirror_equal": true,
+      "only_approved_keys_changed": true,
+      "resolved_bool": true,
+      "batch_delay": 1.0,
+      "original_chunks": 11,
+      "retained_chunks": 11,
+      "mirror_resolved": "/root/mgs-agent/profiles/ares-config.yaml"
+    },
+    "network_delivery_over_8_chunks_tested": false
+  },
+  "report_infra": {
+    "message_id": "1560364677949821179",
+    "channel_id": "1498132022634483894",
+    "readback_verified": true
+  },
+  "closure_delivery": "foreground_normal_reply",
+  "validation_timer_cancelled_before_start": true
 }
