@@ -272,7 +272,7 @@ Todo relatório informa:
 
 Não somar contas com moedas ou janelas incomparáveis. Não ativar cron, corte, escala ou otimização automática porque outra operação possui essa regra. Até existir política SHEIN própria, relatórios e ações são on-demand por gestor.
 
-Antes de culpar a campanha por queda, conferir anomalias de entrega, monetização e join de receita quando essas fontes estiverem disponíveis.
+Antes de culpar a campanha por queda, conferir anomalias de entrega, monetização e join de receita quando essas fontes estiverem disponíveis. Ao interpretar Est.Health de 0%, distinguir ausência de denominador de zero calculado por divergência CDP/GAM; conservar ROI real e estimado separados, sem converter o alerta de mensuração em diagnóstico causal do criativo ou autorização de corte. Aplicar a verificação dos contadores em `references/smartbidding-product-analysis.md`, seção `HEALTH separado de ROI`.
 
 Para análises SHEIN de campanha, criativo e produto, carregar `references/smartbidding-product-analysis.md` quando envolver Pricing, HEALTH, ranking de produtos ou mudança de regime de monetização.
 
