@@ -1,0 +1,29 @@
+{
+  "id": "atena-seo-massa-1559930384852979796-publication",
+  "owner": "Content Operations / Atena",
+  "requester_discord_id": "1496254952501280974",
+  "source_thread_id": "1559930384852979796",
+  "approval_message_id": "1560274764201861196",
+  "adjustments_and_publication_message_id": "1560275486695759996",
+  "previous_decision_source": "data/atena/seo-mass-1559930384852979796/decision.json",
+  "previous_registry_id": "ATENA-SEO-MASS-1559935269535486005",
+  "scope": "Aplicar ajustes editoriais pontuais e publicar os mesmos 30 drafts SEO, três por portal, já revisados e aprovados por Raquel. A autorização atual supersede somente a restrição draft-only do escopo anterior; preserva os IDs e demais limites.",
+  "required_article_count": 30,
+  "articles_per_portal": 3,
+  "minimum_visible_words": 1000,
+  "image_position": "imediatamente após a primeira frase",
+  "same_featured_and_inline_media": true,
+  "post_status_target": "publish",
+  "editorial_requirements": [
+    "Fontes confiáveis, preferencialmente oficiais, específicas e adequadas ao idioma e país, inseridas contextualmente nas informações sustentadas; sem bibliografia final ou referências numeradas.",
+    "Exemplos, legislação, instituições, moeda, termos, contexto cultural, fontes e links internos coerentes com o mercado canônico de cada portal.",
+    "Tags de idioma e país no formato lang_* e código real do país, sem alternativas como English, Spanish, Português ou nomes de países por extenso.",
+    "Diversificar formatos e construções nas próximas produções SEO, sem transformar quantidade de itens ou sequência de seções em automatismo. Preservar identidade editorial consolidada.",
+    "Títulos com intenção SEO e benefício ou motivo para clicar quando cabível, sem clickbait; não exige alterar os títulos aprovados.",
+    "Imagens atuais aprovadas, preservar posição e ALT coerente. Qualidade, resolução, relevância, naturalidade, contexto, iluminação e saturação são refinamentos.",
+    "Não reconstruir os artigos aprovados; preservar profundidade e naturalidade."
+  ],
+  "procedure_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md",
+  "evidence_directory": "/root/.hermes/profiles/atena/work/seo-mass-1559930384852979796/publication-feedback",
+  "exclusions": ["credenciais", "plugin/runtime", "alterações estruturais WordPress", "dash financeira", "dash Router", "novos artigos fora do lote"]
+}
