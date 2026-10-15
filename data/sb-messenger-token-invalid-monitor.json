@@ -396,7 +396,9 @@
     714058,
     714071,
     714178,
-    714179
+    714179,
+    714517,
+    714537
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2289,9 +2291,9 @@
     "digital-trust|openzed|16|1754": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-14T16:07:54.000Z",
+        "created_at": "2026-10-15T20:09:34.000Z",
         "domain": "openzed",
-        "notification_id": 713696,
+        "notification_id": 714537,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -2313,7 +2315,8 @@
       ],
       "notification_ids": [
         706599,
-        713696
+        713696,
+        714537
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -2465,9 +2468,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-14T16:07:45.000Z",
+        "created_at": "2026-10-15T20:09:24.000Z",
         "domain": "spe",
-        "notification_id": 713675,
+        "notification_id": 714517,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2522,7 +2525,8 @@
         711488,
         712159,
         712879,
-        713675
+        713675,
+        714517
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -3210,24 +3214,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-15T15:57:13-04:00",
+  "last_check": "2026-10-15T16:12:20-04:00",
   "last_delivery": {
-    "at": "2026-10-15T12:12:16-04:00",
+    "at": "2026-10-15T16:12:20-04:00",
     "cursor_ids": [
-      714178,
-      714179
+      714517,
+      714537
     ],
-    "message_ids": [
-      "1560324437902102661",
-      "1560324442247397498"
-    ],
-    "notification_ids": [
-      714178,
-      714179
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 714179,
+  "last_seen_id": 714537,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

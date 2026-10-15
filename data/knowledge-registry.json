@@ -8864,6 +8864,25 @@
       "updated_at": "2026-09-02T03:22:13+00:00"
     },
     {
+      "canonical_key": "scope.domain.growpowerhub.com",
+      "canonical_source": "data/mgs-domain-scope.json",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-15T20:17:39+00:00",
+      "id": "MGS-GROWPOWERHUB-SHARED-SCOPE-20261015",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Inclusão pontual de growpowerhub.com no escopo compartilhável Ares/Atena",
+      "updated_at": "2026-10-15T20:17:39+00:00"
+    },
+    {
       "canonical_key": "meta-app.alerts.monitoring-cadence",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -12261,5 +12280,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T20:10:34+00:00"
+  "updated_at": "2026-10-15T20:17:39+00:00"
 }

@@ -674,7 +674,21 @@
         "ROAS",
         "Lance"
       ],
-      "format": "short_header_aligned_text_table_short_footer",
+      "format": "short_header_aligned_pipe_table_short_footer",
+      "column_separators": {
+        "status": "ACTIVE",
+        "character": "|",
+        "unicode_codepoint": "U+007C",
+        "join": " | ",
+        "scope": ["main_table", "seven_day_history"],
+        "outer_borders": false,
+        "horizontal_rules": false,
+        "preserve_columns_alignment_family_order_and_financial_snapshot": true,
+        "validate_visual_positions_and_complete_message_lengths": true,
+        "source_thread_id": "1560303769680355525",
+        "source_message_id": null,
+        "source_description": "Rodolfo approved the preview with vertical ASCII pipes as the saved SHEIN report default."
+      },
       "alignment": {
         "main": {"default": "center", "left_aligned_exceptions": ["Produto"], "headers_match_cells": true},
         "history": {"default": "center", "headers_match_cells": true},
