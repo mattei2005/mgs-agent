@@ -1,5 +1,10 @@
 {
-  "state": "BLANK_OPENING_INTENT",
+  "state": "OPENED_NOT_VISUALLY_VALIDATED",
+  "target": {
+    "pid": 18224,
+    "window_id": 4130216,
+    "app_name": "chrome.exe"
+  },
   "baseline": [
     {
       "pid": 18224,
@@ -32,18 +37,18 @@
       "app_name": "explorer.exe"
     }
   ],
-  "base": {
-    "pid": 18224,
-    "window_id": 263324,
-    "app_name": "chrome.exe"
-  },
-  "new_window_created": false,
-  "url_submission_attempted": false,
+  "new_window_created": true,
+  "url_submission_attempted": true,
   "queue_key": "cdd42e163c5388ff20396263161813146acb8b53c5afaea8c05b051cb65a34e2",
   "owner": "landing-observer-68eba16b3b2b4271abadf7611cedc68e",
   "index": 3,
   "attempt": 2,
   "session_id": "20261015_192409_7549ea",
   "mapping_source": "Canonical WP-CLI read-only snapshot /root/.hermes/profiles/ares/cache/scratch/landing-mapping-1b82c8-live.json; active us/sh2-g005 item 66a7f90d-0f34-4edd-80d0-79315f5bd12e; A=B",
-  "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c169&utm_adgroup=b01fb03c169g01"
+  "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c169&utm_adgroup=b01fb03c169g01",
+  "blank_open_elapsed_seconds": 24.145,
+  "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c169&utm_adgroup=b01fb03c169g01",
+  "opening_screenshot": null,
+  "opened_at": 1792106866.6379452,
+  "elapsed_seconds": 31.632
 }
