@@ -72,6 +72,48 @@ def render(s,q,cfg):
     return '\n'.join(lines)
 
 
+def material(value):
+    counts=value.get('counts') or {}
+    terminal=value.get('phase') if value.get('phase') in {'ALL_DONE','CONFIRMING_NOTICES','FINITE_REPORT_PENDING','FINITE_REVIEW_DELIVERED'} else None
+    return (value.get('total'),counts.get('PASSED',0),counts.get('DEFERRED_NO_AD',0),counts.get('REVIEW_REQUIRED',0),value.get('completed_human_groups',0),terminal)
+
+
+def check_stagnation(q,cfg,current):
+    """Third equivalent DELIVERED report requires diagnosis, not another post."""
+    if cfg.get('diagnose_after_equivalent_reports')!=3:return None
+    generation=str(cfg.get('generation') or cfg.get('authority_message_id') or '')
+    equivalent=[]
+    for r in q.db.execute("SELECT seq,detail FROM events WHERE kind='progress_report_prepared' ORDER BY seq DESC"):
+        d=json.loads(r['detail'])
+        if d.get('generation')!=generation:continue
+        if material(d['snapshot'])!=material(current):break
+        out=q.db.execute("SELECT state FROM messages WHERE key=?",(d.get('notification_key'),)).fetchone()
+        if out and out['state']=='VERIFIED':equivalent.append(r['seq'])
+    if len(equivalent)<3:return None
+    incident=core.digest([generation,material(current),equivalent[-1]])
+    for r in q.db.execute("SELECT detail FROM events WHERE kind='progress_stall_diagnosis_required'"):
+        if json.loads(r['detail']).get('incident')==incident:return incident
+    pending=[{'job':j['key'],'idx':l['idx'],'state':l['state'],'attempt':l['attempt']} for j in (q.job(r['key']) for r in q.db.execute('SELECT key FROM jobs')) for l in j['links'] if l['state']!='PASSED']
+    q.event(None,'progress_stall_diagnosis_required',{'incident':incident,'generation':generation,'equivalent_delivered_reports':len(equivalent),'material_snapshot':list(material(current)),'pending':pending,'required_action':'Diagnose real state and repair the actual blocker before repeating the same execution path; suppressing the message alone is not resolution','resolution_requires_real_progress':True})
+    return incident
+
+
+def record_resumed_progress(q):
+    resolved={json.loads(r['detail']).get('incident') for r in q.db.execute("SELECT detail FROM events WHERE kind='progress_stall_progress_resumed'")}
+    for row in q.db.execute("SELECT seq,detail FROM events WHERE kind='progress_stall_diagnosis_required'").fetchall():
+        d=json.loads(row['detail'])
+        if d['incident'] in resolved:continue
+        progress=None
+        for pending in d.get('pending',[]):
+            link=q.db.execute('SELECT state FROM links WHERE job=? AND idx=?',(pending['job'],pending['idx'])).fetchone()
+            if not link or link['state']!='PASSED':continue
+            for result in q.db.execute("SELECT seq,detail FROM events WHERE seq>? AND job=? AND kind='observation_result' ORDER BY seq DESC",(row['seq'],pending['job'])):
+                actual=json.loads(result['detail'])
+                if actual.get('idx')==pending['idx'] and actual.get('result')=='PASS':progress={'job':pending['job'],'idx':pending['idx'],'validated_result_seq':result['seq']};break
+            if progress:break
+        if progress:q.event(None,'progress_stall_progress_resumed',{'incident':d['incident'],**progress,'all_work_complete':False})
+
+
 def prepare(q,cfg=None):
     cfg=policy() if cfg is None else cfg
     if cfg.get('enabled') is not True:return None
@@ -81,11 +123,17 @@ def prepare(q,cfg=None):
     with q.tx():
         s=snapshot(q,cfg)
         if not s:return None
+        record_resumed_progress(q)
+        check_stagnation(q,cfg,s)
         last=None
         for r in q.db.execute("SELECT at,detail FROM events WHERE kind='progress_report_prepared' ORDER BY seq DESC"):
             d=json.loads(r['detail'])
             if d.get('generation')==generation:last=(r['at'],d);break
         if last and (last[1].get('snapshot',{}).get('all_done') or last[1].get('snapshot',{}).get('phase')=='FINITE_REVIEW_DELIVERED') and cfg.get('stop_when_scope_complete',True):return None
+        if last and cfg.get('on_material_change_only') is True:
+            # A timer tick, another claim or another failed opening is not
+            # progress. Ignore transient READY/OPEN_INTENT/RUNNING oscillation.
+            if material(last[1]['snapshot'])==material(s):return None
         phase_change=bool(last and last[1]['snapshot']['phase']!=s['phase'])
         batch_change=bool(last and s['completed_human_groups']>last[1]['snapshot']['completed_human_groups'])
         if last and q.now()-last[0]<interval and not phase_change and not batch_change:return None

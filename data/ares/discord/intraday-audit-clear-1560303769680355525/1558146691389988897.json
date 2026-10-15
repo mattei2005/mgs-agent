@@ -1,0 +1,134 @@
+{
+  "target": {
+    "channel_id": "1558146629805023424",
+    "channel_name": "📊shein-g002-relatorios",
+    "manager_code": "g002",
+    "thread_id": "1558146691389988897",
+    "thread_name": "📈Mavroa Conta 02 Intraday"
+  },
+  "thread": {
+    "id": "1558146691389988897",
+    "name": "📈Mavroa Conta 02 Intraday",
+    "type": 11,
+    "parent_id": "1558146629805023424",
+    "thread_metadata": {
+      "archived": false,
+      "archive_timestamp": "2026-10-09T15:58:40.193000+00:00",
+      "auto_archive_duration": 10080,
+      "locked": false,
+      "create_timestamp": "2026-10-09T15:58:40.193000+00:00"
+    },
+    "message_count": 6
+  },
+  "captured_at": "2026-10-15T16:22:45.651685-04:00",
+  "messages": [
+    {
+      "id": "1560382329350787083",
+      "channel_id": "1558146691389988897",
+      "type": 19,
+      "content": "**Mavroa Conta 02 · G002 · 15/10/2026 · USD**\nPeríodo: hoje, 00:00–16:00 EDT (Nova York).\n**⏱️ ATRASO GAM/SB: 1h 56min**\n\n```text\nR/E   Início  Nº  Produto      Quiz  Gasto  Receita  Saldo   Est.Health    ROI    ROI est.  ROAS   Lance\n🔴🔴  25/09   01  EBIKE         v2   15,55   11,09   -4,46     86,87%    -28,68%  -17,62%   0,69x  MAXVOL\n🔴🔴  02/10   02  ROPA GRATIS   v2   18,40   6,18    -12,22    84,62%    -66,41%  -54,67%   0,34x  MAXVOL\n🔴🔴    —     —   TOTAL         —    33,95   17,27   -16,68    86,09%    -49,13%  -37,70%   0,50x    —\n```\n\n**Histórico de ROI real — últimos 7 dias**\n```text\nInício  Nº  Dia   09/10    10/10    11/10    12/10    13/10    14/10   15/10*   Média 7d\n25/09   01  D21  -9,72%   -7,23%   -4,76%   -32,28%  -10,33%  -31,96%  -28,68%  -17,85%*\n02/10   02  D14  -26,79%  -24,59%  -39,25%  -62,68%  -49,36%  -21,61%  -66,41%  -41,53%*\n```\n\n**Leitura:** ambas estão ativas e negativas hoje. Saldo líquido de mídia: **−US$ 16,68**. A campanha 02 apresenta a maior perda.\n\n- **Fontes:** Meta (gasto/ROAS) e Smart Bidding (receita líquida, estimada e Health).\n- **ROI:** `(receita líquida − gasto Meta) ÷ gasto Meta`. ROI est. usa receita estimada. **R/E:** real/estimado.\n- **\\*** Hoje e Média 7d incluem o parcial até 16:00 EDT; a média é aritmética dos ROIs diários.\n- **Defasagem:** atraso GAM informado pelo SB em nível de publisher; receita e ROI podem estar defasados. Investimento SB: **US$ 33,55**, contra **US$ 33,95** na Meta.\n- **Início:** primeira entrega comprovada. Produto é rótulo do nome; Quiz e Lance conferidos na API.\n\n**Somente leitura — nenhuma campanha alterada.**",
+      "timestamp": "2026-10-15T20:02:17.819000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146691389988897",
+        "message_id": "1560380930819096658",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560381616629616643",
+      "channel_id": "1558146691389988897",
+      "type": 0,
+      "content": "Vou consultar a Mavroa Conta 02 e montar o relatório de hoje com o histórico dos últimos sete dias, sem alterar campanhas.",
+      "timestamp": "2026-10-15T19:59:27.893000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560380930819096658",
+      "channel_id": "1558146691389988897",
+      "type": 0,
+      "content": "manda um relatorio",
+      "timestamp": "2026-10-15T19:56:44.383000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1558146705873047604",
+      "channel_id": "1558146691389988897",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:58:43.646000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146695198674975",
+      "channel_id": "1558146691389988897",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:58:41.101000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146693172559883",
+      "channel_id": "1558146691389988897",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:58:40.618000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    }
+  ],
+  "complete": true
+}

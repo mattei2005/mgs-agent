@@ -648,6 +648,11 @@ def worker_prompt(key,owner,idx,job):
              'defer_c121_until_others':job.get('defer_c121_until_others',False),
              'no_ad_limit_this_phase':1 if job.get('final_retry') else 3 if finite_enabled else 2,
              'final_retry':job.get('final_retry',False)}
+    context['stagnation_diagnosis']=job.get('stagnation_diagnosis',[])
+    context['recent_technical_errors']=job.get('recent_technical_errors',[])
+    context['repeated_technical_failure']=len(context['recent_technical_errors'])>=3 and all(x.get('idx')==idx for x in context['recent_technical_errors'])
+    if context['stagnation_diagnosis'] or context['repeated_technical_failure']:
+        absence_rule=('DIAGNÓSTICO OBRIGATÓRIO POR ESTAGNAÇÃO: houve mais de duas mensagens equivalentes sem progresso OU três erros técnicos consecutivos do mesmo alvo. Leia os erros recentes e o estado real; não repita o helper/caminho técnico que já falhou sem diagnosticar e reparar sua causa ou usar fallback nativo permitido e comprovado. Silenciar status não resolve a pendência. Preserve request, provas, abas alheias e os limites críticos; nunca restart nem writes Meta/GAM/WordPress/Router/financeiro. Se a última abertura real já funcionou, aproveite a prova da mesma tentativa em vez de navegar novamente; só resultado validado demonstra retomada. '+absence_rule)
     if job.get('state')=='RECONCILING':
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
             'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '

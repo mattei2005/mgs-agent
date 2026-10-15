@@ -185,6 +185,13 @@
   },
   "progress_reporting": {
     "enabled": true,
+    "on_material_change_only": true,
+    "diagnose_after_equivalent_reports": 3,
+    "diagnose_after_consecutive_technical_failures": 3,
+    "repeated_report_authority_message_id": "1560386554717798421",
+    "repeated_report_equivalence": "Same material outcome despite timestamp, worker-label or transient state changes; count only delivered GET-verified messages",
+    "repeated_report_action": "MANDATORY_DIAGNOSE_AND_REPAIR_ACTUAL_BLOCKER_NOT_ONLY_SILENCE_MESSAGE",
+    "duplicate_status_supersession": "Rodolfo questioned five repeated unchanged reports; timer/claim/open intent without validated progress no longer triggers another periodic message",
     "authority_message_id": "1560151664692822079",
     "generation": "1560253186277646380",
     "thread_id": "1559932317861158993",

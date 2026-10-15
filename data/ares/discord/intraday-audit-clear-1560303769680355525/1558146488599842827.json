@@ -1,0 +1,292 @@
+{
+  "target": {
+    "channel_id": "1558146374636412959",
+    "channel_name": "📊shein-g001-relatorios",
+    "manager_code": "g001",
+    "thread_id": "1558146488599842827",
+    "thread_name": "📈Yolokfx Conta 05 Intraday"
+  },
+  "thread": {
+    "id": "1558146488599842827",
+    "name": "📈Yolokfx Conta 05 Intraday",
+    "type": 11,
+    "parent_id": "1558146374636412959",
+    "thread_metadata": {
+      "archived": false,
+      "archive_timestamp": "2026-10-09T15:57:51.844000+00:00",
+      "auto_archive_duration": 10080,
+      "locked": false,
+      "create_timestamp": "2026-10-09T15:57:51.844000+00:00"
+    },
+    "message_count": 15
+  },
+  "captured_at": "2026-10-15T16:22:45.061597-04:00",
+  "messages": [
+    {
+      "id": "1560382893568819210",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "```text\n```\n\n**Leitura e fontes**\n- **R/E:** ROI real / estimado. No estimado: 🔴 abaixo de +10%; 🟡 de +10% a +40%; 🟢 acima de +40%.\n- **ROI:** receita líquida Smart Bidding menos gasto Meta, dividido pelo gasto Meta. **ROAS:** compras atribuídas pela Meta; é uma métrica distinta.\n- **Média 7d:** média aritmética dos dias válidos; `n/d` não entra como zero. `*` inclui hoje parcial até **16:00 EDT**. Início = primeira entrega comprovada; Dia = idade civil da campanha.\n- Meta consultada às **16:00:43**; financeiro SB às **16:00:13**; Quiz/Lance validados às **16:01 EDT**. Investimento SB: **US$ 738,89**, diferença de **US$ 12,57** para a Meta; o ROI utiliza o gasto Meta.\n- O atraso de **2 horas** é dos dados GAM informado pelo SB para o publisher; Receita/Saldo/ROI podem estar defasados. Produto é o rótulo da campanha, sem validação visual neste relatório.\n- **Somente leitura: nenhuma campanha ou automação alterada.** (6/6)",
+      "timestamp": "2026-10-15T20:04:32.339000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560382890179825816",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "```text\n30/09       38      D16 +27,3%  +10,5% +63,6% +49,7% +31,0% +61,3% +92,9%     +48,1%*\n30/09       39      D16 +49,4%  +63,0% +61,6% +38,1% +21,1% +44,9% +30,5%     +44,1%*\n13/10       89      D3    n/d    n/d    n/d    n/d   +37,5% +21,0% +61,3%  +39,9%* (3/7)\n13/10  090 COPY C89 D3    n/d    n/d    n/d    n/d   +1,4%  +52,8%  +7,4%  +20,6%* (3/7)\n13/10  091 COPY C89 D3    n/d    n/d    n/d    n/d   +67,1% +20,5% +230,6% +106,1%* (3/7)\n30/09       42      D16 +55,7%  +31,3% +58,5% +65,8% +31,8% +18,4% +45,0%     +43,8%*\n01/10       43      D15 +65,9%  +96,5% +34,3% +21,2% +17,9% +16,8% +26,3%     +39,9%*\n01/10       44      D15  +1,1%  +60,7% +47,9% +37,0% +65,0% +15,3%  +9,3%     +33,8%*\n01/10       45      D15 +51,6%  +61,0% +57,4% -23,6% +23,7% +13,0% +25,3%     +29,8%*\n09/10       79      D7  +20,6%  +17,0% +34,7% -24,3% -20,3% +24,2% +17,7%      +9,9%*\n10/10       80      D6    n/d   +12,1% -30,3% -11,7% -49,8% -31,3% -30,6%  -23,6%* (6/7)\n```\n\n### Histórico de ROI real · 3/3\n```text\nInício      Nº      Dia  09/10  10/10  11/10  12/10  13/10  14/10  15/10*     Média 7d\n10/10       82      D6    n/d   -13,8% -6,9%  +38,7% +41,7% +16,4% -40,9%   +5,9%* (6/7)\n10/10       83      D6    n/d   -38,8% +20,1% -16,5% -8,6%  +17,6%  +5,6%   -3,5%* (6/7)\n02/10       53      D14 +30,1%  +5,7%  -20,0% -1,5%  +36,7% -2,1%   +5,6%      +7,8%*\n03/10       55      D13 +60,4%  +5,8%  -11,5% -0,8%  -7,3%  +11,0% +15,6%     +10,5%*\n03/10       56      D13 +48,4%  +59,4% +29,7% +22,6% +33,6% +2,1%  +37,5%     +33,3%*\n03/10       58      D13 +105,5% +54,0% +31,6% +16,9% +32,1% +16,2% -12,2%     +34,9%*\n11/10       88      D5    n/d    n/d   -7,9%  +12,8% +11,9% -9,9%  +38,0%   +9,0%* (5/7)\n``` (5/6)",
+      "timestamp": "2026-10-15T20:04:31.531000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560382883233927361",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "```text\n06/10       67      D10 +72,6%  -19,1% +41,7% +50,1% -1,3%  +12,5% +23,2%     +25,7%*\n03/10       61      D13 +16,5%  +22,1% -6,4%  +20,4% +17,8% +0,8%  +87,9%     +22,7%*\n03/10       62      D13 +69,7%  +37,1% +17,6% +20,1% +57,5% +19,3%  -0,5%     +31,5%*\n06/10       71      D10 +76,5%  +20,5% +57,7% -1,3%  +6,4%  +32,6% +45,4%     +34,0%*\n06/10       72      D10  -2,7%  +81,5% +44,2% +38,9% +17,3% +70,7% +53,8%     +43,4%*\n25/09       31      D21 +26,4%  +10,6% +32,9% -8,9%  +12,7% +5,1%  +50,2%     +18,4%*\n29/09       32      D17 +42,1%  +82,7% +33,9% +15,8% +51,2% +14,5% +16,2%     +36,6%*\n29/09       33      D17 +86,0%  +19,8% -14,4% +22,6% +45,9% -1,3%  +55,5%     +30,6%*\n29/09       34      D17 +49,9%  +29,7% +7,9%  +54,3% -12,2% -11,2% +68,8%     +26,7%*\n29/09       35      D17 +22,6%  +57,2% -4,4%  +46,1% -18,5% +51,1% +21,6%     +25,1%*\n01/10       46      D15 +63,0%  +46,8% +13,8% +30,5% +27,3% +35,9% +73,7%     +41,6%*\n01/10       47      D15 +33,8%  +35,0% +17,4% +6,2%  +7,1%  +42,9% +13,1%     +22,2%*\n01/10       48      D15 +15,6%  +33,7% +15,9% +31,9% +2,4%  +21,6% +93,2%     +30,6%*\n01/10       49      D15  +4,6%  +45,1% -3,9%  +8,3%  -9,6%  +1,1%  -27,8%      +2,5%*\n```\n\n### Histórico de ROI real · 2/3\n```text\nInício      Nº      Dia  09/10  10/10  11/10  12/10  13/10  14/10  15/10*     Média 7d\n09/10       74      D7  +28,9%  +22,6% +52,2% +9,2%  +15,9% -7,0%  +44,4%     +23,7%*\n09/10       76      D7   +8,0%  +83,8% +24,5% -2,5%  +12,1% +3,9%  -31,2%     +14,1%*\n09/10       77      D7  +12,8%  +15,7% -6,8%  +46,9% +19,9% +9,5%  +52,5%     +21,5%*\n09/10       78      D7  +55,8%  +42,8% -6,0%  +8,2%  +56,2% +33,4% -32,8%     +22,5%*\n25/09       29      D21 +100,7% +68,5% +8,1%  +46,2% +69,4% +60,8%  +2,4%     +50,9%*\n30/09       36      D16 +116,3% +89,0% +72,2% +76,3% +38,9% +60,5% +73,6%     +75,3%*\n30/09       37      D16 +124,2% +80,9% +64,9% +42,8% +66,5% +66,4% +52,2%     +71,1%*\n``` (4/6)",
+      "timestamp": "2026-10-15T20:04:29.875000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560382881803804704",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "```text\nR/E  Início      Nº      Produto          Quiz Gasto Receita Saldo  Est.Health   ROI   ROI est. ROAS  Lance\n🟢🟢 30/09       42      PISTOLA LAVADORA  v2  24,34  35,29  +10,95   95,0%    +45,0%   +47,9%  1,41x MAXVOL\n🟢🟡 01/10       43      PISTOLA LAVADORA  v2  21,98  27,77  +5,79    88,3%    +26,3%   +35,2%  1,15x MAXVOL\n🟢🟡 01/10       44      PISTOLA LAVADORA  v2  21,64  23,66  +2,02    86,5%     +9,3%   +35,6%  1,17x MAXVOL\n🟢🟡 01/10       45      PISTOLA LAVADORA  v2  12,70  15,91  +3,21    84,1%    +25,3%   +25,3%  0,79x MAXVOL\n🟢🟡 09/10       79      RETRO GAME        v2  14,61  17,19  +2,58    95,0%    +17,7%   +32,8%  1,39x MAXVOL\n🔴🔴 10/10       80      RETRO GAME        v2  15,29  10,61  -4,68    97,3%    -30,6%   -15,1%  0,76x MAXVOL\n🔴🔴 10/10       82      RETRO GAME        v2  13,94  8,24   -5,70    90,3%    -40,9%   -30,8%  0,75x MAXVOL\n🟢🟡 10/10       83      RETRO GAME        v2  14,50  15,31  +0,81    96,2%     +5,6%   +13,0%  0,94x MAXVOL\n🟢🟡 02/10       53      RING 1            v3  17,94  18,95  +1,01    91,8%     +5,6%   +27,5%  1,25x MAXVOL\n🟢🟢 03/10       55      RING 1            v2  17,01  19,67  +2,66    68,7%    +15,6%   +49,7%  1,45x MAXVOL\n🟢🟢 03/10       56      RING 1            v2  16,18  22,24  +6,06    97,1%    +37,5%   +62,5%  1,32x MAXVOL\n🔴🟡 03/10       58      RING 1            v2  16,96  14,89  -2,07    96,4%    -12,2%   +25,2%  1,10x MAXVOL\n🟢🟢 11/10       88      ROUPAS            v3  13,75  18,97  +5,22    76,1%    +38,0%   +81,9%  2,33x MAXVOL\n```\n\n### Histórico de ROI real · 1/3\n```text\nInício      Nº      Dia  09/10  10/10  11/10  12/10  13/10  14/10  15/10*     Média 7d\n03/10       59      D13  -0,1%  +52,0% +8,4%  +14,7% -21,0% +26,8% +13,9%     +13,5%*\n06/10       63      D10  +1,9%  +58,7% -10,2% +0,8%  +16,1% +32,5% +18,8%     +16,9%*\n06/10       64      D10  +7,2%  +75,8% -29,9% +31,0% +15,8% -30,6%  +9,4%     +11,2%*\n06/10       65      D10 +18,9%  +91,0% -3,8%  +17,8% -3,9%  +9,2%   +4,3%     +19,1%*\n``` (3/6)",
+      "timestamp": "2026-10-15T20:04:29.534000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560382880574611477",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "```text\n🟢🟢 01/10       46      BIKE EL. KELLY    v2  18,85  32,75  +13,90   86,7%    +73,7%   +86,0%  1,30x MAXVOL\n```\n\n### Campanhas · 2/3\n```text\nR/E  Início      Nº      Produto          Quiz Gasto Receita Saldo  Est.Health   ROI   ROI est. ROAS  Lance\n🟢🟡 01/10       47      BIKE EL. KELLY    v2  22,70  25,68  +2,98    98,9%    +13,1%   +23,8%  1,11x MAXVOL\n🟢🟢 01/10       48      BIKE EL. KELLY    v2  22,79  44,02  +21,23   93,2%    +93,2%  +108,4%  1,41x MAXVOL\n🔴🔴 01/10       49      BIKE EL. KELLY    v2  20,21  14,59  -5,62    93,9%    -27,8%   -16,4%  0,73x MAXVOL\n🟢🟢 09/10       74      BIKE EL. KELLY    v2  13,59  19,62  +6,03    91,8%    +44,4%   +62,0%  1,28x MAXVOL\n🔴🔴 09/10       76      BIKE EL. KELLY    v2  12,29  8,45   -3,84    87,5%    -31,2%   +1,5%   0,83x MAXVOL\n🟢🟢 09/10       77      BIKE EL. KELLY    v2  13,39  20,42  +7,03    93,2%    +52,5%   +52,5%  1,47x MAXVOL\n🔴🔴 09/10       78      BIKE EL. KELLY    v2  13,00  8,73   -4,27    81,0%    -32,8%   -26,8%  0,96x MAXVOL\n🟢🟡 25/09       29      GAR AGUA          v2  26,41  27,04  +0,63    88,9%     +2,4%   +31,5%  1,33x MAXVOL\n🟢🟢 30/09       36      GAR AGUA          v2  25,36  44,03  +18,67   89,7%    +73,6%   +94,7%  2,09x MAXVOL\n🟢🟢 30/09       37      GAR AGUA          v2  26,79  40,78  +13,99   94,3%    +52,2%   +78,3%  1,55x MAXVOL\n🟢🟢 30/09       38      GAR AGUA          v2  24,51  47,29  +22,78   98,2%    +92,9%  +115,7%  1,89x MAXVOL\n🟢🟢 30/09       39      GAR AGUA          v2  26,92  35,12  +8,20    94,8%    +30,5%   +48,6%  1,69x MAXVOL\n🟢🟢 13/10       89      MOLETONS          v3  28,82  46,48  +17,66   96,2%    +61,3%   +84,7%  1,48x MAXVOL\n🟢🟡 13/10  090 COPY C89 MOLETONS          v3  5,96   6,40   +0,44    87,5%     +7,4%   +14,4%  1,15x COCAP\n🟢🟢 13/10  091 COPY C89 MOLETONS          v3  2,52   8,33   +5,81    100,0%   +230,6% +274,2%  1,69x COCAP\n```\n\n### Campanhas · 3/3\n```text\n``` (2/6)",
+      "timestamp": "2026-10-15T20:04:29.241000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560382879458926713",
+      "channel_id": "1558146488599842827",
+      "type": 19,
+      "content": "## 📊 Yolokfx Conta 05 — G001\n**15/10/2026 · Hoje até 16:00 EDT · USD**\n**⏱️ ATRASO GAM/SB: 2h 00min**\n\n- **Gasto:** US$ 751,46\n- **Receita líquida:** US$ 981,35\n- **Saldo:** **+US$ 229,89**\n- **ROI real:** **+30,6%** · **ROI estimado:** **+49,4%**\n- **43 campanhas com entrega hoje**, todas atualmente ativas.\n\n### Campanhas · 1/3\n```text\nR/E  Início      Nº      Produto          Quiz Gasto Receita Saldo  Est.Health   ROI   ROI est. ROAS  Lance\n🟢🟢 03/10       59      BAGS 01           v2  13,90  15,83  +1,93    79,6%    +13,9%   +44,9%  1,68x MAXVOL\n🟢🟡 06/10       63      BAGS 01           v2  13,02  15,47  +2,45    100,0%   +18,8%   +22,0%  1,46x MAXVOL\n🟢🟡 06/10       64      BAGS 01           v2  10,44  11,42  +0,98    89,3%     +9,4%   +27,5%  1,12x MAXVOL\n🟢🟢 06/10       65      BAGS 01           v2  8,93   9,31   +0,38    90,0%     +4,3%   +54,9%  1,84x MAXVOL\n🟢🟡 06/10       67      BAGS 01           v3  12,95  15,96  +3,01    96,1%    +23,2%   +31,1%  1,01x MAXVOL\n🟢🟢 03/10       61      BAGS 02           v3  11,93  22,42  +10,49   84,8%    +87,9%  +116,1%  2,01x MAXVOL\n🔴🟡 03/10       62      BAGS 02           v2  23,73  23,60  -0,13    82,4%     -0,5%   +18,7%  1,24x MAXVOL\n🟢🟢 06/10       71      BAGS 02           v2  12,64  18,38  +5,74    92,9%    +45,4%   +72,7%  1,74x MAXVOL\n🟢🟢 06/10       72      BAGS 02           v2  9,76   15,01  +5,25    93,3%    +53,8%   +76,6%  1,47x MAXVOL\n🟢🟢 25/09       31      BIKE EL. KELLY    v2  22,23  33,39  +11,16   93,5%    +50,2%   +59,6%  1,23x MAXVOL\n🟢🟡 29/09       32      BIKE EL. KELLY    v2  20,35  23,65  +3,30    98,7%    +16,2%   +30,2%  0,90x MAXVOL\n🟢🟢 29/09       33      BIKE EL. KELLY    v2  22,56  35,09  +12,53   85,6%    +55,5%   +66,4%  1,24x MAXVOL\n🟢🟢 29/09       34      BIKE EL. KELLY    v2  20,77  35,05  +14,28   92,1%    +68,8%   +94,8%  1,45x MAXVOL\n🟢🟢 29/09       35      BIKE EL. KELLY    v2  23,30  28,34  +5,04    87,3%    +21,6%   +43,3%  1,02x MAXVOL\n``` (1/6)",
+      "timestamp": "2026-10-15T20:04:28.975000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146488599842827",
+        "message_id": "1560380985030217759",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560381595691778161",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "Vou consultar a Yolokfx Conta 05 e montar o relatório de hoje, com o histórico de ROI dos últimos sete dias.",
+      "timestamp": "2026-10-15T19:59:22.901000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560380985030217759",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "manda um relatorio",
+      "timestamp": "2026-10-15T19:56:57.308000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1559388991638470709",
+      "channel_id": "1558146488599842827",
+      "type": 19,
+      "content": "**Yolokfx Conta 05 · G001 (Ícaro) — 12/10/2026**\n53 campanhas com entrega · 10 linhas · USD · ROI decrescente.\n00:00–22:12 EDT · CRV verificado às 22:13 EDT.\n\n```text\nInício Produto (camp.)          CRV    Custo Gasto $  Health      ROI ROI est.  ROAS\n25/09  GAR AGUA (5)             Vídeo   0,87  232,04  92,60%  +52,66%  +63,41% 1,70x\n30/09  ROUPAS (1)               Vídeo   0,88   33,52  92,98%  +44,09%  +48,63% 1,25x\n30/09  PISTOLA LAVADORA (4)      Vídeo   0,99  160,95  88,50%  +24,51%  +35,49% 1,27x\n25/09  BIKE ELETRICA KELLY (15)  Vídeo   1,18  549,53  92,68%  +21,96%  +29,36% 1,17x\n03/10  BAGS 01 (6)              Vídeo   0,79  133,21  92,39%  +19,74%  +24,95% 1,36x\n03/10  BAGS 02 (5)              Vídeo   0,95  141,87  93,64%  +15,94%  +24,01% 1,30x\n11/10  ROUPAS (1)               Imagem  0,65   29,28  90,00%  +13,42%  +22,10% 1,53x\n02/10  RING 1 (6)               Vídeo   1,13  180,19  91,59%   +9,03%  +15,51% 1,09x\n09/10  RETRO GAME (5)           Vídeo   1,12  113,99  93,93%   -4,87%   +0,90% 1,05x\n08/10  USB (5)                  Vídeo   1,06   80,76  93,95%   -6,14%   -2,51% 1,00x\n```\n\n**Total:** gasto **US$ 1.655,34** · receita líquida **US$ 2.011,02** · ROI **+21,49%** · ROI est. **+29,15%**.\n\nMeta + Smart Bidding. Custo: USD/Add to Wishlist. Health: Est.Health SB; ROAS: compras Meta. ROI líquido/estimado versus gasto Meta. Imagem e vídeo separados, sem rateio de receita.\n\nProduto pelo nome; início por primeira entrega comprovada. Dia parcial; somente leitura.\nInvestimento SB: US$ 1.632,59; diferença para Meta: **US$ 22,75**.",
+      "timestamp": "2026-10-13T02:15:07.653000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146488599842827",
+        "message_id": "1559387923928055911",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1559388075753349243",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "Recuperei o modelo mais recente: **CRV**, **ROI estimado** ao lado do ROI e imagem/vídeo em linhas separadas. Vou aplicar à Yolo Conta 05 · G001 com os dados de hoje.",
+      "timestamp": "2026-10-13T02:11:29.289000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1559387923928055911",
+      "channel_id": "1558146488599842827",
+      "type": 0,
+      "content": "Veja o jeito do último relatório que eu pedi na thread 1558146725376557126\nE monta o mesmo com as mesmas colunas pra conta de anúncio dessa thread aqui.\nYolo conta 05 do gestor g001",
+      "timestamp": "2026-10-13T02:10:53.091000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1558146501614633061",
+      "channel_id": "1558146488599842827",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:57:54.947000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146500138238073",
+      "channel_id": "1558146488599842827",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:57:54.595000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146498938544209",
+      "channel_id": "1558146488599842827",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:57:54.309000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146496543723584",
+      "channel_id": "1558146488599842827",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:57:53.738000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    }
+  ],
+  "complete": true
+}

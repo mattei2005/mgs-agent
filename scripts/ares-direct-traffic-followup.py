@@ -162,6 +162,15 @@ def tick(q):
         j['defer_c121_until_others']=q.target_waits_for_others(j['key'])
         idx=next(x['idx'] for x in j['links'] if x['state'] in ({'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or x['due']<=q.now()))
         j['final_retry']=bool(finite.policy() and finite.final_start(q,j['key'],idx))
+        # More than two equivalent progress messages are a diagnosis gate,
+        # never a reason to repeat the unchanged failing path indefinitely.
+        resolved={json.loads(r['detail']).get('incident') for r in q.db.execute("SELECT detail FROM events WHERE kind='progress_stall_progress_resumed'")}
+        j['stagnation_diagnosis']=[]
+        for row in q.db.execute("SELECT detail FROM events WHERE kind='progress_stall_diagnosis_required' ORDER BY seq DESC"):
+            diagnosis=json.loads(row['detail'])
+            if diagnosis.get('incident') not in resolved and any(x.get('job')==j['key'] for x in diagnosis.get('pending',[])):
+                j['stagnation_diagnosis'].append({'incident':diagnosis['incident'],'required_action':diagnosis['required_action']})
+        j['recent_technical_errors']=[{'idx':d.get('idx'),'attempt':d.get('attempt'),'diagnosis':(d.get('evidence') or {}).get('diagnosis')} for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='observation_result' ORDER BY seq DESC LIMIT 3",(j['key'],)) if (d:=json.loads(row['detail'])).get('result')=='ERROR']
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
         if repairing:prepare_recovery_proof(q,j,idx,directory)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)

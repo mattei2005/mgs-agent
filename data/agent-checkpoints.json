@@ -1342,6 +1342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-INTRADAY-AUDIT-CLEAR-1560303769680355525",
+      "next_step": "Inventariar e preservar evidência local das mensagens, auditar divergências e gate de publicação; só depois executar limpeza nos IDs exatos e validar vazio.",
+      "objective": "Auditar os reports das 36 threads Intraday SHEIN, corrigir o padrão sem publicar novos reports e remover todas as mensagens dessas threads preservando canais/threads",
+      "source": "/root/mgs-agent/data/discord-shein-report-channel-structure.json",
+      "state": "in_progress",
+      "thread_id": "1560303769680355525",
+      "updated_at": "2026-10-15T20:22:43+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-NAMING-US-APP-20261015",
       "next_step": "Proximos pedidos US-SHEIN usam formatter central com (US_APP) apos COPY ou tracking e antes do evento; nao renomear existentes nem alterar manifests selados.",
       "objective": "Salvar (US_APP) na nomenclatura prospectiva US-SHEIN",
@@ -1543,12 +1553,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Consumidor existente executa terceira inicial dos6 sem reiniciar contadores; na terceira ausencia segue proximos; apos fase inicial faz1final por pendente; no fim outbox reporta REVIEW_REQUIRED nesta thread e verifica GET. PASS exige anuncio/foco10s+fechamento; sucesso gestor so grupo integral.",
-      "objective": "Concluir acompanhamento por politica finita3+1 e revisar pendentes com Rodolfo",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/three-then-final-20261015/change-inventory.json;data/ares/meta-ads/landing-followup/queue.sqlite3",
-      "state": "regra3+1 aplicada no contrato/runtime/skillv0.2.0 e registry por supersessao.150 testes pass; readback real40passed+6wait_retry, duas tentativas anteriores preservadas. loop de fechamento removido para ausencias ja comprovadas; worker vivo preservado ate terminar naturalmente. report-infra1560360662901727396 get confirmado, embed vazio de content/mentions.",
+      "next_step": "Consumidor continua C134 preservando2NO_ADanteriores e politica3+1. Tres erros tecnicos consecutivos do mesmo alvo exigem diagnostico/repair antes de repetir caminho; nao viramNO_AD. Informes somente com mudanca material. Finalizar grupo humano e avisoGET apenas apos todosPASS, ou relatar pendentes apos fasefinal.",
+      "objective": "Concluir C134 e manter diagnostico obrigatorio contra estagnacao de informes/executor",
+      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/no-progress-reporting-20261015/change-inventory.json;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/landing-followup/queue.sqlite3",
+      "state": "regra repeticao>2 persistida contrato/skill/registry; watchdog detectou5informes44/46 e encaminha diagnostico em vez de repeticao.158 testes pass; eventos830diagnostico,831c133pass,832retomada. validador c133 reexecutado com3frames anuncio10s/foco/fechamento. estado45passed+1wait_retry(c134), worker original nao interrompido; report-infra1560387779714883636 get verificado.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T18:36:31+00:00"
+      "updated_at": "2026-10-15T20:24:09+00:00"
     },
     {
       "agent": "zeus",
@@ -3873,12 +3883,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-mass-1560295338257023118",
-      "next_step": "ReceberproposedQA4wrappers,currenthashscores4;parentrevalidarundoWrapperhash==independentReview/text/tablecells/exactREST/2camadasnativas. AtualizarQA/releasepara58depoisaprovação,publishMESMOS4IDs,HTTP/mobile390tableoverflowinterno/publiclangregistrado,scorespóspub4. RecontarcategoriaPública15elegíveis=4P1+11SEOsem4REC,podemser19físicos.Nãoclaim54totalcomo58. Cache13exclusãosempreaguar daRodolfoexplícito.",
-      "objective": "Concluir58SEO comtarget15elegíveisPréstamos",
-      "source": "/root/.hermes/profiles/atena/work/seo-mass-1560295338257023118/technical/topfeed-resume/progress54.json",
-      "state": "54publicadosverificadosrest/http/canonical/meta/robots/mídia+domestrito390(47anteriores+7topfield).7topfesrecomputadospelopai,nativopóspub2camadas/permalinks/hash/tagsconfirmados;global/userpt_brpreservados,htmlpt-brpreexistenteobservado,nãomudarconfigglobalforaescopo,análisees/mercadousexplícitos.4topfielddraftscomtableplainemwrapper/reanálise4localpors a-0-7acfa62d,retornopendente,nãopollarartefatos;outros7jápublicadosnãoreexecutaradapteroriginal11drafts. cache13manualcontinuanãoautorizado,nenhumpermissãoderivadaderoleadmin.11novosids/mídiasoriginais,semduplicação.",
+      "next_step": "Não criar nem republicar artigos:58estãopublish. Entregarresumofinal+11URLsTopfeednovas;47URLsrestantespermanecemjáinformadas. RestaSOMENTEpropostadeexclusão13XMLcacheaguardandoconfirmaçãohumanaespecíficaRodolfo(node1560343830438350959). NãoinferirautorizaçãoCachedep promoçãoAdmin/diagnóstico. Seautorizada,revalidar13paths/hashes/tamanho/owner/sem symlink eprimitivanativafingerprintantesação,saltar/reconciliararquivosregeneradossemexpandiralvos. LerURLsXMLcanônicosvalidando58incluídosapósação;semCDNglobal,semoutrosarquivos/plugin/config/locale/role.PortaldocglobalPTnotalterarsemnovaordem.SeRegularizaçãofinalfeita,preservarversãoeditorialpublicada58anteriore supersederegistrodocacheparanovoestado.",
+      "objective": "58SEO publicados e validados;regularizaçãoXMLcache13pendente",
+      "source": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/final-publication-verification.json",
+      "state": "publicação58/58validada,0draft. gamehub15dicas+2jogos;auto15consórcio;car15economia;topfeed11seoes/eua. parentrevalidou58rest/httpcold/canonical/robots/metas/mídias e58layoutscreen/client/inner390semoverflow;58postmeta+indexableúnicorelidospóspub,digestatual. seo76–92/read90genuínos,1034–1358palavras,total67228,17datas18/09–13/10,58mídiasúnicas. préstamospúblico15elegíveis=4p1+11seo,4recexcluídos,19físicos;15cardsurlsverificadosem2páginascanônicas.4tabletopprepubwrappersbyteexact/genuineesrefeitospai e58gateglobalhashatual,semnovosids.2menusnewcat homecanônicadesktop/mobile4viewsconfirmados. topfeed11urlsmapacanônicook;outros47aindaausentespor13xmlcacheold,nãodeletadosmanualmente/semconfirmaçãorodolfo. sourcecanônicadataregistroatena-seo58-publication-1560295338257023118ativa comrelatóriodeverificaçãoreal. localeglobal/usertoppt_brpreservados,conteúdo/análiseesus,paridadeeditoreverdevisualautenticadonãocomprovados.",
       "thread_id": "1560295338257023118",
-      "updated_at": "2026-10-15T19:46:06+00:00"
+      "updated_at": "2026-10-15T20:24:40+00:00"
     },
     {
       "agent": "atena",
@@ -5733,12 +5743,12 @@
     {
       "agent": "zeus",
       "id": "zeus-growpower-report-1560385234242109461",
-      "next_step": "Verificar readback do embed e entrega integral do relatório pelo Ares, reconciliando todas as partes e contagem",
+      "next_step": "Nenhuma ação pendente neste pedido; manter gates e isolamento G003. KR-014 versão antiga é pendência preexistente separada e não foi alterada.",
       "objective": "Aplicar inclusão pontual autorizada de domínio e concluir relatório read-only Growpowerhub Conta03 G003",
       "source": "discord:1558146784554000467:1560385234242109461",
-      "state": "domain_scope_repaired_validated; inventory_audit_registry_complete; infra_embed 1560386330008232069 sent; ares accepted and collecting live report",
+      "state": "completed_validated: scope+ownership single domain reconciled;9scope tests pass; ares report1560386591367635039 read back and sources reconciled; account zero campaigns including terminal status; no delivery09-15oct; nosb rows;delay0confidentfalse;2infra embeds get verified;nometa writes",
       "thread_id": "1558146784554000467",
-      "updated_at": "2026-10-15T20:18:22+00:00"
+      "updated_at": "2026-10-15T20:21:57+00:00"
     },
     {
       "agent": "zeus",
@@ -5992,5 +6002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T20:18:22+00:00"
+  "updated_at": "2026-10-15T20:24:40+00:00"
 }

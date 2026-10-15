@@ -1,0 +1,322 @@
+{
+  "target": {
+    "channel_id": "1558146737108033577",
+    "channel_name": "📊shein-g003-relatorios",
+    "manager_code": "g003",
+    "thread_id": "1558146784554000467",
+    "thread_name": "📈Growpowerhub Conta 03 Intraday"
+  },
+  "thread": {
+    "id": "1558146784554000467",
+    "name": "📈Growpowerhub Conta 03 Intraday",
+    "type": 11,
+    "parent_id": "1558146737108033577",
+    "thread_metadata": {
+      "archived": false,
+      "archive_timestamp": "2026-10-09T15:59:02.405000+00:00",
+      "auto_archive_duration": 10080,
+      "locked": false,
+      "create_timestamp": "2026-10-09T15:59:02.405000+00:00"
+    },
+    "message_count": 15
+  },
+  "captured_at": "2026-10-15T16:22:46.433240-04:00",
+  "messages": [
+    {
+      "id": "1560387330525757574",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "**Cadastro liberado e relatório entregue pelo Ares acima.** Validei a mensagem e os dados coletados:\n\n- **Meta:** conta correta, sem campanhas e sem entrega entre **09 e 15/10**.\n- **Smart Bidding:** nenhuma linha dessa conta no período; métricas sem base ficaram **n/d**, não zero.\n- Os demais bloqueios foram preservados. Nenhuma campanha ou orçamento foi alterado.\n\nAutorização, inventário e REPORT-INFRA registrados. Também salvei na skill `discord-ops` a correção do teste de contagem; a suíte de escopo passou **9/9**.",
+      "timestamp": "2026-10-15T20:22:10.192000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560385234242109461",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560386591367635039",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "📊 **Growpowerhub — Conta 03 / G003**\n**15/10/2026 · parcial até 13:18 PDT (16:18 EDT) · USD**\nFontes: Meta Ads + Smart Bidding · somente leitura.\n\n**⏱️ ATRASO GAM/SB: 0min**\nA API retornou zero, mas sem horário de preenchimento e com confiança desativada; isso **não confirma dados GAM atualizados**.\n\n```text\nR/E  Início  Nº  Produto  Quiz  Gasto  Receita  Saldo  Est.Health  ROI  ROI est.  ROAS  Lance\n───  ──────  ──  ───────  ────  ─────  ───────  ─────  ──────────  ───  ────────  ────  ─────\n```\n**Sem linhas:** a Meta confirmou **0 campanhas** na conta. A consulta adicional também não encontrou campanhas arquivadas/excluídas nem entrega hoje.\n\n**Histórico de ROI real — últimos 7 dias**\n```text\nInício  Nº  Dia  09/10  10/10  11/10  12/10  13/10  14/10  15/10*  Média 7d\n──────  ──  ───  ─────  ─────  ─────  ─────  ─────  ─────  ──────  ────────\n```\nNenhuma campanha ou entrega encontrada de **09/10 a 15/10**. O Smart Bidding não retornou linhas desta conta na mesma janela; Receita, Saldo, Health, ROI, ROI estimado, ROAS e Média 7d ficam **n/d**, não zero presumido.\n\n*15/10 é parcial. Média 7d considera somente ROIs diários válidos; sem base, n/d.*\n\n✅ **Relatório concluído e validado.** Nenhuma campanha, orçamento, credencial ou automação foi alterada.",
+      "timestamp": "2026-10-15T20:19:13.963000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560386195366613085",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560386278850166815",
+      "channel_id": "1558146784554000467",
+      "type": 0,
+      "content": "O gate já está liberado. Vou consultar Meta e Smart Bidding em modo somente leitura e montar o relatório atual com o histórico de sete dias.",
+      "timestamp": "2026-10-15T20:17:59.453000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560386195366613085",
+      "channel_id": "1558146784554000467",
+      "type": 0,
+      "content": "<@1508864261504630925> Retome o pedido de relatório de Rodolfo nesta thread (1560384624721526967), somente leitura, conta 2323706575049143 / Growpowerhub-US-SHEIN-EN-03-G003. Rodolfo confirmou a inclusão pontual do domínio na mensagem 1560385234242109461. Zeus reconciliou context/sites.md e data/mgs-domain-scope.json; gate canônico foi reexecutado para Ares/Atena e retornou allowed=true, mantendo os demais bloqueios. Revalide o gate e gere/entregue aqui o relatório atual no padrão SHEIN vigente (R/E + 12 colunas, histórico ROI 7 datas e Média 7d, atraso GAM/SB). Preserve os IDs e a partição desta conta; nenhuma alteração de campanha, budget, credencial ou cron. Não pedir nova autorização para esta consulta; se outra fonte falhar, investigar/reconciliar e informar a lacuna real, sem repetir a recusa já resolvida. Confirme a entrega completa na própria thread.",
+      "timestamp": "2026-10-15T20:17:39.549000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560385234242109461",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "sim",
+      "timestamp": "2026-10-15T20:13:50.399000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560385130051281009",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1560385130051281009",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "**O relatório ainda está bloqueado por uma regra interna de acesso.** Confirmei o vínculo desta thread com a conta **Growpowerhub — Conta 03 / G003** e reproduzi o bloqueio na lista de domínios permitidos.\n\nA solução recomendada é liberar somente o domínio dessa conta no cadastro compartilhado, preservando os demais bloqueios. O pedido de relatório não confirma automaticamente essa alteração de permissão.\n\n**Confirma a inclusão pontual que detalhei no canal Zeus?** Não alterei campanhas, orçamentos ou permissões nesta tentativa.",
+      "timestamp": "2026-10-15T20:13:25.558000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560384624721526967",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560384762986889350",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "Só posso tratar de domínios oficialmente registrados como pertencentes à MGS.",
+      "timestamp": "2026-10-15T20:11:58.043000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560384624721526967",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560384624721526967",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "<@1508864261504630925> gere o relatorio.",
+      "timestamp": "2026-10-15T20:11:25.078000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560384201696612374",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1560384201696612374",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "**Correção da resposta anterior**\n\nVocê pediu um relatório da conta desta thread. A resposta do Ares foi a recusa padronizada exigida pela regra de segurança após um bloqueio de escopo; ela não entregou o relatório nem explicou o impedimento.\n\nVerifiquei a execução: a conta foi localizada no catálogo SHEIN, mas a consulta parou na lista interna de domínios permitidos. Portanto, o problema está na divergência entre os cadastros internos, não no seu pedido.\n\n**O relatório ainda não foi gerado.** Estou tratando a confirmação necessária com Rodolfo no canal Zeus, sem contornar o bloqueio de segurança. Nenhuma campanha ou orçamento foi alterado nesta correção.",
+      "timestamp": "2026-10-15T20:09:44.221000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560380883763208273",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560381548870504449",
+      "channel_id": "1558146784554000467",
+      "type": 19,
+      "content": "Só posso tratar de domínios oficialmente registrados como pertencentes à MGS.",
+      "timestamp": "2026-10-15T19:59:11.738000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": {
+        "type": 0,
+        "channel_id": "1558146784554000467",
+        "message_id": "1560380883763208273",
+        "guild_id": "1185714635991679006"
+      },
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560380883763208273",
+      "channel_id": "1558146784554000467",
+      "type": 0,
+      "content": "manda um relatorio",
+      "timestamp": "2026-10-15T19:56:33.164000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1558146801591128147",
+      "channel_id": "1558146784554000467",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:59:06.467000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146799439708162",
+      "channel_id": "1558146784554000467",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:59:05.954000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146797631709260",
+      "channel_id": "1558146784554000467",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:59:05.523000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558146795589210233",
+      "channel_id": "1558146784554000467",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T15:59:05.036000+00:00",
+      "edited_timestamp": null,
+      "pinned": false,
+      "embeds": [],
+      "attachments": [],
+      "message_reference": null,
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    }
+  ],
+  "complete": true
+}
