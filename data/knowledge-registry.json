@@ -4026,6 +4026,25 @@
       "updated_at": "2026-10-06T15:57:27+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-15T15:40:43+00:00",
+      "id": "ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: faixas do ROI estimado, Média 7d à direita e colunas centralizadas exceto Produto",
+      "updated_at": "2026-10-15T15:40:43+00:00"
+    },
+    {
       "canonical_key": "ares.shein-us-direct.reporting.first-delivery-date",
       "canonical_source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
       "consumers": [
@@ -4076,10 +4095,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015",
       "title": "Padrão SHEIN: R/E na primeira coluna e histórico diário de ROI real com sete datas abaixo do principal",
-      "updated_at": "2026-10-15T15:26:27+00:00"
+      "updated_at": "2026-10-15T15:40:43+00:00"
     },
     {
       "canonical_key": "ares.shein.human-request-pattern",
@@ -12149,5 +12168,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T15:26:27+00:00"
+  "updated_at": "2026-10-15T15:40:43+00:00"
 }
