@@ -55,16 +55,18 @@ Ao criar uma variação para novo país/idioma/vertical:
 
 ## Acesso WordPress dedicado da Atena
 
-A Atena usa a identidade WordPress dedicada `atena`, com função `editor`, em cada domínio ativo do portfólio. A credencial REST é exclusiva por domínio e deve ser resolvida no vault `MGS Conteúdo` pelo item exato `Atena WordPress - <domínio>`, campo `WordPress API / wp_app_password`.
+A Atena usa a identidade WordPress dedicada `atena`, por padrão com função `editor`, nos domínios ativos do portfólio. A credencial REST é exclusiva por domínio e deve ser resolvida no vault `MGS Conteúdo` pelo item exato `Atena WordPress - <domínio>`, campo `WordPress API / wp_app_password`.
 
 Antes de integrar um novo `site_key`, publicar, rotacionar credencial ou diagnosticar erro `401`, carregue a referência canônica de acesso dedicado da skill `content-publish-wordpress`. A existência dessa credencial não libera o domínio para automação: `data/sites.json` continua sendo o gate técnico. Nunca usar a senha normal no REST, reutilizar Application Password entre domínios, elevar a Atena a Administrator ou expor qualquer segredo.
 
 ## Preflight de rewrite institucional/SEO
 
+Se a equipe técnica já tiver aplicado uma promoção de função expressamente autorizada por Rodolfo, valide a mensagem humana real, a evidência técnica, o item dedicado e `users/me`/leitura nativa antes de adaptar o client. Restrinja a compatibilidade ao domínio, usuário/ID e função exatos confirmados; mantenha o padrão Editor nos demais alvos. Não rebaixe a conta para satisfazer um assert legado, não repita a promoção nem rotacione credenciais. Disponibilidade de Administrator não autoriza operações fora do escopo e não registra automaticamente metas de resultado no REST: abilities de consulta e schema devem ser validados separadamente da análise/persistência real.
+
 Antes de editar páginas ou posts existentes:
 
 1. Resolver o domínio para um `site_key` exato em `data/sites.json` antes de qualquer write.
-2. Validar o item dedicado pelo título exato, conferindo sem imprimir segredo: `site_domain`, `wp_user_id`, `wp_role=editor`, usuário e presença de `wp_app_password`.
+2. Validar o item dedicado pelo título exato, conferindo sem imprimir segredo: `site_domain`, `wp_user_id`, função esperada (`editor` por padrão; exceção exata somente com a promoção autorizada e verificada acima), usuário e presença de `wp_app_password`.
 3. Fazer o smoke autenticado somente leitura definido na referência de acesso dedicado, usando `wp_curl_auth_http`; registrar apenas HTTP, tipo JSON e campos esperados.
 4. Identificar post type e ID reais pelas rotas públicas (`posts`, `pages` ou CPT), pois a URL não prova o endpoint de atualização.
 5. Capturar o baseline no HTML/DOM público final. Para corpo editorial, preferir `article .post_content`, `article .entry-content` ou o seletor específico do tema; não aceitar `.content_wrap` amplo sem validar uma amostra, porque o tema pode reutilizá-lo no menu mobile e gerar falso “sem Lorem” ou links errados.
