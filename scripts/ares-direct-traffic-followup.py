@@ -175,8 +175,8 @@ def tick(q):
                 j['stagnation_diagnosis'].append({'incident':diagnosis['incident'],'required_action':diagnosis['required_action']})
         j['recent_technical_errors']=[{'idx':d.get('idx'),'attempt':d.get('attempt'),'diagnosis':(d.get('evidence') or {}).get('diagnosis')} for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='observation_result' ORDER BY seq DESC LIMIT 3",(j['key'],)) if (d:=json.loads(row['detail'])).get('result')=='ERROR']
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
-        probe=q.db.execute("SELECT detail FROM events WHERE job=? AND kind='technical_probe_intent' ORDER BY seq DESC LIMIT 1",(j['key'],)).fetchone()
-        if repairing and probe:j['technical_probe_evidence_path']=json.loads(probe['detail']).get('probe_file')
+        from ares_campaign_v3.landing_reliability import latest_probe_for_cleanup
+        if repairing:j['technical_probe_evidence_path']=latest_probe_for_cleanup(q,j['key'],idx)
         if repairing and not j.get('technical_probe_evidence_path'):prepare_recovery_proof(q,j,idx,directory)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)
         env=dict(os.environ)

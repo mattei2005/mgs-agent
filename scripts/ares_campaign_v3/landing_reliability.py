@@ -70,3 +70,13 @@ def approve_repair(q,key,owner,idx,probe):
         q.db.execute("UPDATE links SET state='WAIT_RETRY',due=? WHERE job=? AND idx=? AND state='TECHNICAL_REPAIR'",(q.now(),key,idx))
         from .landing_retry_policy import refresh
         refresh(q,key)
+
+
+def latest_probe_for_cleanup(q,key,idx):
+    opened=0
+    for row in q.db.execute("SELECT seq,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq DESC",(key,)):
+        if json.loads(row['detail']).get('idx')==idx:opened=row['seq'];break
+    for row in q.db.execute("SELECT seq,detail FROM events WHERE job=? AND kind='technical_probe_intent' ORDER BY seq DESC",(key,)):
+        d=json.loads(row['detail'])
+        if d.get('idx')==idx:return d.get('probe_file') if row['seq']>opened else None
+    return None

@@ -313,7 +313,7 @@ class Queue:
             if not first or first['due']>self.now():return None
             if first['state']=='OPEN_INTENT':raise ValueError('uncertain prior tab requires reconciliation')
             self.db.execute("UPDATE jobs SET state='RUNNING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
-            self.event(key,'claimed',{'owner':owner})
+            self.event(key,'claimed',{'owner':owner,'idx':first['idx']})
             return self.job(key)
 
     def owned(self,key,owner,allow_recovery=False):
@@ -363,7 +363,16 @@ class Queue:
         if recovered and result not in {'PASS','NO_AD'}:raise ValueError('recovered result requires actual PASS or NO_AD evidence')
         j=self.owned(key,owner,allow_recovery=recovered);link=j['payload']['links'][idx]
         if result=='PASS': validate_observation(evidence,link)
-        elif result=='NO_AD': validate_closure(evidence)
+        elif result=='NO_AD':
+            validate_closure(evidence)
+            from .landing_reliability import policy as execution_policy
+            if execution_policy():
+                if evidence.get('network_ad_confirmed') is not False or not evidence.get('visual_review'):
+                    raise ValueError('NO_AD requires actual negative visual review; technical capture failure is ERROR')
+                observed=file_evidence(evidence['observation_screenshot'])['captured_at']
+                opened=[x['at'] for x in self.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq",(key,)) if json.loads(x['detail']).get('idx')==idx]
+                if not opened or observed<opened[-1] or file_evidence(evidence['closed_screenshot'])['captured_at']<observed:
+                    raise ValueError('NO_AD screenshot must belong to the current opening and precede verified closure')
         else:
             if not evidence.get('diagnosis'):raise ValueError('exact safe diagnosis required')
             if evidence.get('tab_closed_verified') is True:validate_closure(evidence)
@@ -721,7 +730,7 @@ def worker_prompt(key,owner,idx,job):
         'Falhas técnicas recuperáveis são locais: resolver no mesmo request, sem pedir nova aprovação nem alertar Rodolfo; '
         'somente human_action_required=true com required_action concreta autoriza aviso. '
         'Reserve as últimas chamadas para fechar/verificar, persistir result (inclusive ERROR) e liberar a lease; '
-        'Prefira result --evidence-json com metadados mínimos, sem criar um grande arquivo narrativo. Para PASS, use --use-captured-samples --frames-reviewed apenas depois de revisar todas as imagens; o CLI mescla os frames reais. Para NO_AD, basta a evidência real de identidade/fechamento/preservação (e screenshot de ausência para recuperação). '
+        'Prefira result --evidence-json com metadados mínimos, sem criar um grande arquivo narrativo. Para PASS, use --use-captured-samples --frames-reviewed apenas depois de revisar todas as imagens; o CLI mescla os frames reais. Para NO_AD, exigir imagem observation_screenshot da abertura atual, visual_review explícita da ausência, network_ad_confirmed=false e fechamento posterior comprovado. Falha de captura, página não verificada ou prova incerta é ERROR, nunca NO_AD. '
         'Não reler a implementação de scripts como etapa de cada URL: os comandos e o esquema mínimo estão na skill; investigar código somente para corrigir falha concreta, após fechamento seguro. '
         'não encerrar com um texto dizendo que faltou registrar o resultado. '
         'LATÊNCIA: os 10 segundos são a janela mínima de anúncio visível, não um timer por chamada. Agrupe leituras independentes e ações com capture_after; evite recapturas/list_windows redundantes sem dúvida concreta. '

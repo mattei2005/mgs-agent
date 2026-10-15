@@ -26,7 +26,9 @@ def image_paths(value):
 
 def allowed(path):
     p=Path(path)
-    return p.suffix.lower() in SUFFIXES and not p.is_symlink() and any(p.is_relative_to(root) and p.resolve().is_relative_to(root.resolve()) for root in IMAGE_ROOTS)
+    if p.suffix.lower() not in SUFFIXES or p.is_symlink():return False
+    if p.is_relative_to(IMAGE_ROOTS[1]) and not p.name.startswith('computer_use_'):return False
+    return any(p.is_relative_to(root) and p.resolve().is_relative_to(root.resolve()) for root in IMAGE_ROOTS)
 
 
 def references(q,key):

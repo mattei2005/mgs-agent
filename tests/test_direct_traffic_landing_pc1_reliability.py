@@ -112,6 +112,15 @@ class ReliabilityTests(unittest.TestCase):
         self.q.claim_recovery('repair');self.q.deferred(self.key,'repair')
         self.assertEqual(self.q.job(self.key)['state'],'TECHNICAL_REPAIR')
 
+    def test_old_probe_cannot_replace_cleanup_proof_of_a_newer_landing_open(self):
+        with self.q.tx():
+            self.q.event(self.key,'open_intent',{'idx':0,'attempt':1})
+            self.q.event(self.key,'technical_probe_intent',{'idx':0,'probe_file':'old-probe.json'})
+        self.assertEqual(rel.latest_probe_for_cleanup(self.q,self.key,0),'old-probe.json')
+        self.assertIsNone(rel.latest_probe_for_cleanup(self.q,self.key,1))
+        with self.q.tx():self.q.event(self.key,'open_intent',{'idx':0,'attempt':2})
+        self.assertIsNone(rel.latest_probe_for_cleanup(self.q,self.key,0))
+
     def completed(self):
         self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'PASS',self.success())
         self.dc.deliver(self.q,self.key+':success')
