@@ -327,6 +327,12 @@ class FollowupTests(unittest.TestCase):
         self.q.request_human(self.key,'repair',e)
         self.assertEqual(self.q.job(self.key)['state'],'WAITING_HUMAN');self.assertIsNone(self.q.claim_recovery('another'))
 
+    def test_invalid_human_action_cannot_orphan_work_in_human_state(self):
+        self.start()
+        for action in ['   ',123,None]:
+            with self.assertRaises(ValueError):self.q.request_human(self.key,'worker',{'human_action_required':True,'required_action':action,'diagnosis':'offline fixture'})
+            self.assertEqual(self.q.job(self.key)['state'],'RUNNING')
+
     def test_uncertain_human_gate_blocks_all_new_inputs(self):
         self.start()
         e={'human_action_required':True,'required_action':'Offline fixture: unlock desktop','diagnosis':'offline screen locked'}
@@ -366,6 +372,34 @@ class FollowupTests(unittest.TestCase):
         self.assertNotIn('Carregue direct-traffic-cbo-operations',prompt)
         j['state']='RECONCILING';prompt=m.worker_prompt(self.key,'repair',0,j)
         self.assertIn('landing-followup-operations',prompt);self.assertIn('Não abrir URL',prompt)
+
+    def test_single_native_reply_waits_for_all_technical_jobs(self):
+        self.arm();self.clock.value+=1
+        p=copy.deepcopy(self.payload);p['request_id']='offline-subjob-two';p['campaign_ids']=['111111111111119'];p['links'][0]['campaign_id']=p['campaign_ids'][0]
+        for field in ['landing_url','effective_campaign_url']:p['links'][0][field]=p['links'][0][field].replace('c126','c127')
+        proof=self.root/'data/ares/meta-ads/subjob-proof.json';proof.write_text(json.dumps({'request_id':p['request_id'],'account_id':p['account_id'],'status':'COMPLETE','campaign_ids':p['campaign_ids']}))
+        p['creation_proof']=str(proof);p['creation_proof_sha256']=hashlib.sha256(proof.read_bytes()).hexdigest()
+        other=self.q.stage(p,lambda u:True);m.publish_creation(self.q,other,'Second technical job offline fixture',self.dc)
+        receipt=json.dumps({'native_obligation_id':'offline-human-reply'})
+        with self.q.tx():
+            for key in [self.key,other]:self.q.db.execute('INSERT INTO native_receipts VALUES(?,?)',(key,receipt))
+            self.q.db.execute('INSERT INTO native_intake VALUES(?,?,?,?,?)',('native:offline-human-reply',self.clock(),'READY',None,None))
+        self.q.claim('w');self.q.begin(self.key,'w',0);self.q.result(self.key,'w',0,'PASS',self.success())
+        self.assertIsNone(self.q.db.execute('SELECT 1 FROM messages WHERE content=?',(m.SUCCESS,)).fetchone())
+        self.q.claim('w');self.q.begin(other,'w',0);e=self.success();e['observed_url']=p['links'][0]['landing_url'];self.q.result(other,'w',0,'PASS',e)
+        self.assertEqual(self.q.db.execute('SELECT count(*) FROM messages WHERE content=?',(m.SUCCESS,)).fetchone()[0],1)
+        self.assertEqual(self.q.success_key(self.key),self.q.success_key(other))
+
+    def test_native_intake_must_finish_enumeration_before_success(self):
+        self.start()
+        with self.q.tx():
+            self.q.db.execute('INSERT INTO native_receipts VALUES(?,?)',(self.key,json.dumps({'native_obligation_id':'offline-not-enumerated'})))
+            self.q.db.execute('INSERT INTO native_intake VALUES(?,?,?,?,?)',('native:offline-not-enumerated',self.clock(),'PENDING',None,None))
+        self.q.result(self.key,'worker',0,'PASS',self.success())
+        self.assertIsNone(self.q.db.execute('SELECT 1 FROM messages WHERE content=?',(m.SUCCESS,)).fetchone())
+        with self.q.tx():
+            self.q.db.execute("UPDATE native_intake SET state='READY' WHERE id='native:offline-not-enumerated'")
+            self.assertTrue(self.q.prepare_success_if_complete(self.key))
 
     def second_account(self):
         p=copy.deepcopy(self.payload)

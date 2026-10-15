@@ -26,6 +26,8 @@ def require_pc1_lease(session_id):
 
 
 def flush(q,discord):
+    for row in q.db.execute("SELECT key FROM jobs WHERE state='OBSERVED'").fetchall():
+        with q.tx():q.prepare_success_if_complete(row['key'])
     for row in q.db.execute("SELECT key FROM messages WHERE state IN ('PREPARED','INTENT') ORDER BY created").fetchall():
         try:
             message=discord.deliver(q,row['key'])
@@ -41,7 +43,7 @@ def flush(q,discord):
             try:q.acknowledge(row['key'],discord.deliver(q,out['key']),discord.bot_id)
             except Exception:pass
     for row in q.db.execute("SELECT key FROM jobs WHERE state='OBSERVED'").fetchall():
-        out=q.db.execute('SELECT state FROM messages WHERE key=?',(row['key']+':success',)).fetchone()
+        out=q.db.execute('SELECT state FROM messages WHERE key=?',(q.success_key(row['key']),)).fetchone()
         if out and out['state']=='VERIFIED':
             with q.tx():
                 q.db.execute("UPDATE jobs SET state='COMPLETE' WHERE key=?",(row['key'],))

@@ -155,6 +155,8 @@ class Queue:
         CREATE TABLE IF NOT EXISTS messages(key TEXT PRIMARY KEY,thread TEXT NOT NULL,content TEXT NOT NULL,
             nonce TEXT NOT NULL,state TEXT NOT NULL,message_id TEXT,created REAL NOT NULL);
         CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY,at REAL NOT NULL,job TEXT,kind TEXT NOT NULL,detail TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS native_intake(id TEXT PRIMARY KEY,updated REAL NOT NULL,state TEXT NOT NULL,detail TEXT,job_key TEXT);
+        CREATE TABLE IF NOT EXISTS native_receipts(job_key TEXT PRIMARY KEY,receipt TEXT NOT NULL);
         ''')
         os.chmod(self.root/'queue.sqlite3', 0o600)
 
@@ -298,7 +300,7 @@ class Queue:
             status='OBSERVED' if all_pass else ('READY' if pending else 'ATTENTION')
             if result=='ERROR' and not evidence.get('no_tab_opened') and evidence.get('tab_closed_verified') is not True:
                 status='NEEDS_RECONCILIATION'
-            if evidence.get('human_action_required') is True and evidence.get('required_action'):
+            if evidence.get('human_action_required') is True and isinstance(evidence.get('required_action'),str) and evidence['required_action'].strip():
                 status='WAITING_HUMAN_UNCLOSED' if status=='NEEDS_RECONCILIATION' else 'WAITING_HUMAN'
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',(status,key))
             if state=='ATTENTION':
@@ -307,7 +309,33 @@ class Queue:
                 scope(url)  # fail closed before mentioning any operational target
                 self.prepare_problem(key,key+f':incident:{idx}',
                     f"Acompanhamento de landing page — pedido {j['payload']['request_id']} · conta {j['payload']['account_id']}.\n{url}\n{diagnosis}",evidence)
-            if all_pass:self.prepare_message(key+':success',j['payload']['source_thread_id'],SUCCESS)
+            if all_pass:self.prepare_success_if_complete(key)
+
+    def success_group(self,key):
+        own=self.db.execute('SELECT receipt FROM native_receipts WHERE job_key=?',(key,)).fetchone()
+        if not own:return [key],True
+        obligation=json.loads(own['receipt']).get('native_obligation_id')
+        if not obligation:return [key],False
+        keys={r['job_key'] for r in self.db.execute('SELECT job_key,receipt FROM native_receipts')
+              if json.loads(r['receipt']).get('native_obligation_id')==obligation}
+        ordered=[r['key'] for r in self.db.execute('SELECT key FROM jobs ORDER BY created,key') if r['key'] in keys]
+        intake=self.db.execute('SELECT state FROM native_intake WHERE id=?',('native:'+obligation,)).fetchone()
+        return ordered,bool(intake and intake['state']=='READY')
+
+    def success_key(self,key):
+        group,_=self.success_group(key)
+        return (group[0] if group else key)+':success'
+
+    def prepare_success_if_complete(self,key):
+        # A single human reply can contain several technical clone jobs. Never
+        # tell that manager "all pages" after only its first sub-job passed.
+        group,enumerated=self.success_group(key)
+        if not enumerated or not group:return False
+        jobs=[self.job(k) for k in group]
+        if len({j['payload']['source_thread_id'] for j in jobs})!=1:return False
+        if any(j['state'] not in {'OBSERVED','COMPLETE'} or any(l['state']!='PASSED' for l in j['links']) for j in jobs):return False
+        self.prepare_message(self.success_key(key),jobs[0]['payload']['source_thread_id'],SUCCESS)
+        return True
 
     def prepare_message(self,key,thread,content):
         identifier(thread)
@@ -320,7 +348,8 @@ class Queue:
         self.db.execute('INSERT INTO messages VALUES(?,?,?,?,?,?,?)',(key,thread,content,nonce,'PREPARED',None,self.now()))
 
     def request_human(self,key,owner,evidence):
-        if evidence.get('human_action_required') is not True or not evidence.get('required_action') or not evidence.get('diagnosis'):
+        action=evidence.get('required_action')
+        if evidence.get('human_action_required') is not True or not isinstance(action,str) or not action.strip() or not isinstance(evidence.get('diagnosis'),str) or not evidence['diagnosis'].strip():
             raise ValueError('exact indispensable human action and diagnosis required')
         if evidence.get('tab_closed_verified') is True:validate_closure(evidence)
         with self.tx():
