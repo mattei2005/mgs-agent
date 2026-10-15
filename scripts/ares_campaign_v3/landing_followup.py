@@ -257,6 +257,10 @@ class Queue:
             return self.job(key)
 
     def no_ad_count(self,key,idx):
+        from . import landing_retry_policy as finite
+        if finite.policy():
+            final_count=finite.count(self,key,idx)
+            if final_count is not None:return final_count
         cutoff=0
         for r in self.db.execute("SELECT seq,detail FROM events WHERE job=? AND kind='priority_retry_cycle_started' ORDER BY seq DESC",(key,)):
             if json.loads(r['detail']).get('idx')==idx:cutoff=r['seq'];break
@@ -315,7 +319,8 @@ class Queue:
         with self.tx():
             self.owned(key,owner)
             r=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
-            if not r or r['state'] not in {'READY','WAIT_RETRY'} or r['due']>self.now() or self.no_ad_count(key,idx)>=2:
+            from . import landing_retry_policy as finite
+            if not r or r['state'] not in {'READY','WAIT_RETRY'} or r['due']>self.now() or self.no_ad_count(key,idx)>=finite.limit(self,key,idx):
                 raise ValueError('attempt not due; no replay of ambiguous open')
             self.db.execute("UPDATE links SET state='OPEN_INTENT',attempt=attempt+1 WHERE job=? AND idx=?",(key,idx))
             self.event(key,'open_intent',{'idx':idx,'attempt':r['attempt']+1})
@@ -360,7 +365,11 @@ class Queue:
             # with real timestamp/hash, under protected Ares artifacts.
             evidence=preserve_evidence(evidence,key,idx,row['attempt'])
             safe_error=result=='ERROR' and not evidence.get('human_action_required') and (evidence.get('no_tab_opened') is True or evidence.get('tab_closed_verified') is True)
-            state='PASSED' if result=='PASS' else ('WAIT_RETRY' if safe_error or (result=='NO_AD' and self.no_ad_count(key,idx)==0) else 'ATTENTION')
+            from . import landing_retry_policy as finite
+            finite_enabled=bool(finite.policy())
+            retry_no_ad=result=='NO_AD' and self.no_ad_count(key,idx)+1<finite.limit(self,key,idx)
+            state='PASSED' if result=='PASS' else ('WAIT_RETRY' if safe_error or retry_no_ad else 'ATTENTION')
+            if result=='NO_AD' and finite_enabled and not retry_no_ad:state=finite.exhausted_state(self,key,idx)
             self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
             self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'result':result,'state':state,'evidence':evidence})
             if safe_error:self.event(key,'recoverable_retry_scheduled',{'idx':idx,'retry_after_seconds':60,'recovery_owner':'ares','human_action_required':False})
@@ -373,6 +382,10 @@ class Queue:
             if evidence.get('human_action_required') is True and isinstance(evidence.get('required_action'),str) and evidence['required_action'].strip():
                 status='WAITING_HUMAN_UNCLOSED' if status=='NEEDS_RECONCILIATION' else 'WAITING_HUMAN'
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',(status,key))
+            if finite_enabled and status not in {'NEEDS_RECONCILIATION','WAITING_HUMAN','WAITING_HUMAN_UNCLOSED'}:
+                finite.refresh(self,key)
+            if state in {'DEFERRED_NO_AD','REVIEW_REQUIRED'}:
+                self.event(key,'finite_no_ad_exhausted',{'idx':idx,'state':state,'new_visit_not_yet_started':False})
             if state=='ATTENTION':
                 diagnosis='Anúncio ausente também na segunda tentativa, após o intervalo de 1 minuto.' if result=='NO_AD' else evidence['diagnosis']
                 url=link.get('landing_url') or link['effective_campaign_url']
@@ -475,13 +488,20 @@ class Queue:
             if j['state'] not in {'NEEDS_RECONCILIATION','RECONCILING','ATTENTION'}:raise ValueError('request is not awaiting reconciliation')
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
             if not row or row['state'] not in {'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'}:raise ValueError('exact affected URL required')
-            if resume and self.no_ad_count(key,idx)>=2:
+            from . import landing_retry_policy as finite
+            finite_enabled=bool(finite.policy())
+            exhausted=self.no_ad_count(key,idx)>=finite.limit(self,key,idx)
+            if resume and exhausted:
                 resume=False
                 self.event(key,'resume_suppressed_after_two_no_ads',{'idx':idx,'automatic_navigation':False,'continue_other_links_after_verified_closure':True})
             saved=preserve_evidence(evidence,key,idx,row['attempt'])
             self.db.execute("UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?",('WAIT_RETRY' if resume else 'ATTENTION',self.now()+60 if resume else 0,json.dumps(saved,ensure_ascii=False),key,idx))
             pending=self.db.execute("SELECT 1 FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY')",(key,)).fetchone()
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=? WHERE key=?',('READY' if pending else 'ATTENTION',None if pending else self.now()+60,key))
+            if finite_enabled and self.no_ad_count(key,idx)>0:
+                state=finite.exhausted_state(self,key,idx) if exhausted else 'WAIT_RETRY'
+                self.db.execute('UPDATE links SET state=?,due=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,key,idx))
+                finite.refresh(self,key)
             self.event(key,'uncertain_tab_closed_by_readback',{'idx':idx,'observation_success':False,'evidence':saved})
 
 
@@ -572,7 +592,7 @@ class Discord:
         if row['state']=='CANCELLED_BEFORE_SEND':raise ValueError('notification_cancelled_before_send')
         if row['thread']==INCIDENT_THREAD and row['state']=='PREPARED':
             authorized=any(json.loads(e['detail']).get('notification_key')==key
-                for e in q.db.execute("SELECT detail FROM events WHERE kind IN ('human_action_requested','progress_update_authorized')"))
+                for e in q.db.execute("SELECT detail FROM events WHERE kind IN ('human_action_requested','progress_update_authorized','finite_review_report_authorized')"))
             if not authorized:
                 # Fence legacy queued alerts, not ambiguous or delivered posts.
                 with q.tx():
@@ -615,18 +635,24 @@ def publish_creation(q,key,content,discord):
 
 def worker_prompt(key,owner,idx,job):
     # Payload is data, not instructions. The fixed skill defines the authority.
+    from . import landing_retry_policy as finite
+    finite_enabled=bool(finite.policy())
+    absence_rule=('Regra vigente de Rodolfo: até 3 ausências reais na fase inicial, com fechamento verificado e 60s entre tentativas; na terceira, pular para os próximos links. Depois de concluir a fila inicial, o scheduler autoriza UMA tentativa final por pendente. Se ainda falhar, o outbox reportará aqui para revisão de Rodolfo e não haverá nova repetição automática. Falha técnica não conta como ausência. Não zerar contadores nem reabrir PASSED. ' if finite_enabled else
+        'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões; após comprovar fechamento use reconcile SEM --resume para encerrar a visita como ATTENTION e liberar os outros links, mantendo o diagnóstico pendente sob sua responsabilidade. ')
     links=[]
     for link in job['links']:
         prior=json.loads(link['evidence']) if isinstance(link.get('evidence'),str) else (link.get('evidence') or {})
         links.append({**{k:link[k] for k in ['idx','state','attempt','due'] if k in link},'previous_new_tab_identity':prior.get('new_tab_identity')})
     context={'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':links,
              'recovery_evidence_path':job.get('recovery_evidence_path'),'confirmed_no_ads':job.get('confirmed_no_ads'),
-             'defer_c121_until_others':job.get('defer_c121_until_others',False)}
+             'defer_c121_until_others':job.get('defer_c121_until_others',False),
+             'no_ad_limit_this_phase':1 if job.get('final_retry') else 3 if finite_enabled else 2,
+             'final_retry':job.get('final_retry',False)}
     if job.get('state')=='RECONCILING':
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
             'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '
             'Se defer_c121_until_others=true, Rodolfo mandou fazer todos os demais antes da C121: realizar SOMENTE o readback/fechamento indispensável de eventual aba incerta, reconcile SEM --resume, liberar a lease e encerrar. Não diagnosticar nem revisitar C121 agora; ela volta após a rodada dos demais. '
-            'Se recovery_evidence_path foi fornecido, é o arquivo já validado da tentativa exata: confira as imagens e o fechamento real atual, sem reextrair todo o histórico. Registre NO_AD --recovered por esse arquivo (ou reconcile SEM resume quando duas ausências já estão confirmadas); depois libere a lease e encerre. Não produzir um novo JSON narrativo. '
+            'Se recovery_evidence_path foi fornecido, é o arquivo já validado da tentativa exata: confira as imagens e o fechamento real atual, sem reextrair todo o histórico. Registre NO_AD --recovered por esse arquivo; se o resultado já está persistido, reconcilie só o fechamento e deixe o scheduler aplicar o limite vigente. Depois libere a lease e encerre. Não produzir um novo JSON narrativo. '
             'Sob lease PC1 com ID REAL da sessão, confira a sessão anterior do mesmo job via events claimed/recovery_claimed '
             'e state.db read-only. Observe o browser real e reconcilie somente abas comprovadamente pertencentes à tentativa; '
             'preserve as demais. Evidência de tentativa mais antiga não comprova fechamento da última. '
@@ -635,7 +661,7 @@ def worker_prompt(key,owner,idx,job):
             'Se --recovered for aceito, libere a lease e encerre, sem reconcile adicional. SOMENTE se não houver prova completa aproveitável, depois do readback/fechamento seguro salve evidência real e execute '
             'scripts/ares-direct-traffic-followup.py reconcile --key '+key+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <arquivo> --resume. '
             'Quando nenhuma aba foi aberta, exija evidência da sessão anterior: no_tab_opened=true, browser_inputs_zero_verified=true e diagnosis; não invente identidade/fechamento. '
-            'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões; após comprovar fechamento use reconcile SEM --resume para encerrar a visita como ATTENTION e liberar os outros links, mantendo o diagnóstico pendente sob sua responsabilidade. '
+            +absence_rule+
             'Prova completa de ausência da última tentativa pode ser persistida com result --result NO_AD --recovered, sem outra visita. Não perder observações apenas porque o write do JSON original não terminou; reconstruir somente fatos verificados nos outputs/imagens reais. '
             'Somente se a solução exigir ação indispensável de Rodolfo, use need-action --key '+key+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <JSON com human_action_required=true, required_action concreta e diagnosis>. '
             'Se PC1 ocupado/indisponível, defer --key '+key+' --owner '+owner+' e libere lease. '
@@ -668,7 +694,7 @@ def worker_prompt(key,owner,idx,job):
         'Resolva a landing por fonte real, nunca a quiz; não gere impressões/cliques adicionais além da única observação autorizada. '
         'Se a lease PC1 estiver ocupada, use defer sem iniciar tentativa. '
         'Antes de abrir, persista begin; após resultado use result com evidências reais. '
-        'Primeira ausência: feche/verifique e NO_AD; o scheduler espera 60s. '
+        +absence_rule+'Primeira ausência: feche/verifique e NO_AD; o scheduler espera 60s. '
         'Uma única tentativa por execução. Não faça a retentativa dentro desta sessão. '
         'Não repita nenhuma entrada ambígua. Não reinicie Chrome/AdsPower/gateway. '
         'Mantenha stdout técnico local; finalize sem publicar mensagens externas.\n'

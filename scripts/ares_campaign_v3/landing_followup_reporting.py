@@ -33,16 +33,28 @@ def snapshot(q,cfg):
         t=next((j for j in jobs if j['key']==target),None);idx=priority.get('target_index',0)
         exhausted=bool(t and t['links'][idx]['state']=='ATTENTION' and q.no_ad_count(target,idx)>=2)
         phase='FIFO_C121_DONE' if target_done else 'FIFO_C121_DIAGNOSIS' if exhausted else 'C121_FIRST'
+    from . import landing_retry_policy as finite
+    finite_policy=finite.policy()
+    if finite_policy and not all_done:
+        if counts.get('DEFERRED_NO_AD'):phase='FINITE_PENDING_FINAL'
+        elif any(finite.final_start(q,j['key'],l['idx']) and l['state'] in {'READY','WAIT_RETRY','OPEN_INTENT'} for j in jobs for l in j['links']):phase='FINITE_FINAL'
+        elif counts.get('REVIEW_REQUIRED') and all(l['state'] in {'PASSED','REVIEW_REQUIRED'} for j in jobs for l in j['links']):
+            prefix='landing-final-review:'+finite_policy['generation']+':'
+            reported=sum(1 for j in jobs for l in j['links'] if l['state']=='REVIEW_REQUIRED' and q.db.execute("SELECT 1 FROM messages WHERE key=? AND state='VERIFIED'",(prefix+j['key']+':'+str(l['idx']),)).fetchone())
+            phase='FINITE_REVIEW_DELIVERED' if reported==counts['REVIEW_REQUIRED'] else 'FINITE_REPORT_PENDING'
     return {'counts':dict(counts),'active_jobs':len(active),'recovery_jobs':len(repair),'completed_human_groups':len(groups),'phase':phase,'total':sum(counts.values()),'all_done':all_done}
 
 
 def render(s,q,cfg):
     c=s['counts'];stamp=datetime.fromtimestamp(q.now(),ZoneInfo('America/New_York')).strftime('%d/%m às %Hh%M')
     executor='observação em execução' if s['active_jobs'] else ('recuperação em execução/pendente' if s['recovery_jobs'] else 'entre execuções da fila')
+    if s['phase']=='FINITE_REVIEW_DELIVERED':executor='rodada encerrada; pendências entregues para revisão'
     lines=[f'**Atualização da rodada priorizada — {stamp} (Nova York)**',
            f"✅ Links validados: **{c.get('PASSED',0)}** de **{s['total']}**.",
            f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)}**.",
            f'🔄 Executor: {executor}.']
+    if c.get('DEFERRED_NO_AD') or c.get('REVIEW_REQUIRED'):
+        lines.append(f"↪️ Para tentativa final: **{c.get('DEFERRED_NO_AD',0)}** · para sua revisão: **{c.get('REVIEW_REQUIRED',0)}**.")
     if s['phase']=='C121_FIRST':lines.append('**Prioridade atual: C121 primeiro; depois, os demais na ordem da fila. Fechamento incerto exige conferência antes da próxima visita.**')
     elif s['phase'] in {'FIFO_C121_DONE','OTHERS_C121_DONE'}:pass  # Completed priority is history, not a recurring note.
     elif s['phase']=='FIFO_C121_DIAGNOSIS':lines.append('**C121 sem anúncio após duas tentativas desta rodada; diagnóstico preservado, sem nova visita automática. Os demais seguem na ordem da fila.**')
@@ -51,6 +63,10 @@ def render(s,q,cfg):
     elif s['phase']=='RETURN_C121':lines.append('**Os demais trabalhos executáveis desta rodada foram processados. Próxima etapa: retomar a C121.**')
     elif s['phase']=='CONFIRMING_NOTICES':lines.append('**Links validados; falta concluir a conferência dos avisos aos gestores.**')
     elif s['phase']=='ALL_DONE':lines.append('**Rodada concluída: validações integrais e confirmações aos gestores conferidas.**')
+    elif s['phase']=='FINITE_PENDING_FINAL':lines.append('**Após 3 ausências, o link fica para o fim sem bloquear os próximos. Depois haverá 1 tentativa final por pendente.**')
+    elif s['phase']=='FINITE_FINAL':lines.append('**Tentativa final dos links pendentes em andamento; sem repetição ilimitada.**')
+    elif s['phase']=='FINITE_REPORT_PENDING':lines.append('**Tentativas encerradas; falta conferir a entrega dos links com problema para sua revisão.**')
+    elif s['phase']=='FINITE_REVIEW_DELIVERED':lines.append('**Links com problema reportados aqui para sua revisão. Não foram marcados como validados e não serão reabertos automaticamente.**')
     else:lines.append('**A rodada continua; somente validações reais entram como concluídas.**')
     if s['phase']!='ALL_DONE':lines.append('Validação de links não é conclusão de todo o pedido; o aviso ao gestor depende do grupo completo.')
     return '\n'.join(lines)
@@ -69,7 +85,7 @@ def prepare(q,cfg=None):
         for r in q.db.execute("SELECT at,detail FROM events WHERE kind='progress_report_prepared' ORDER BY seq DESC"):
             d=json.loads(r['detail'])
             if d.get('generation')==generation:last=(r['at'],d);break
-        if last and last[1].get('snapshot',{}).get('all_done') and cfg.get('stop_when_scope_complete',True):return None
+        if last and (last[1].get('snapshot',{}).get('all_done') or last[1].get('snapshot',{}).get('phase')=='FINITE_REVIEW_DELIVERED') and cfg.get('stop_when_scope_complete',True):return None
         phase_change=bool(last and last[1]['snapshot']['phase']!=s['phase'])
         batch_change=bool(last and s['completed_human_groups']>last[1]['snapshot']['completed_human_groups'])
         if last and q.now()-last[0]<interval and not phase_change and not batch_change:return None

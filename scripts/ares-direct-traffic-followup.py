@@ -139,6 +139,8 @@ def tick(q):
         try:fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return {'state':'DISPATCHER_BUSY'}
         q.recover_expired()
+        from ares_campaign_v3 import landing_retry_policy as finite
+        finite.maintain(q)
         pending=q.db.execute("SELECT 1 FROM messages WHERE state IN ('PREPARED','INTENT')").fetchone()
         waiting=q.db.execute("SELECT 1 FROM jobs WHERE state IN ('WAITING_CREATION_REPLY','OBSERVED')").fetchone()
         if pending or waiting:
@@ -159,6 +161,7 @@ def tick(q):
         repairing=j['state']=='RECONCILING'
         j['defer_c121_until_others']=q.target_waits_for_others(j['key'])
         idx=next(x['idx'] for x in j['links'] if x['state'] in ({'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or x['due']<=q.now()))
+        j['final_retry']=bool(finite.policy() and finite.final_start(q,j['key'],idx))
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
         if repairing:prepare_recovery_proof(q,j,idx,directory)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)

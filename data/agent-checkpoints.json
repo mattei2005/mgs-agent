@@ -1523,12 +1523,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Consumidor continua FIFO usando abertura em lote e coletor --close-owned-window somente com prova exclusiva revisada; preservar10s+foco+anuncio+fechamento. Conferir ganho tambem nos workers automaticos. Nao reabrir PASSED nem perder capturas por JSON incompleto; diagnosticos restantes seguem sob Ares. Somente sucesso humano integral gera aviso ao gestor.",
-      "objective": "Continuar FIFO com abertura/fechamento nativos agrupados e provas reais; concluir rodada integral",
-      "source": "discord:1559932317861158993;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/meta-ads/audit/landing-followup-1559951763019145247/mechanical-batching-20261015/change-inventory.json",
-      "state": "mudanca real validada pc1: helpers landing_desktop e ares-direct-traffic-ui, coletor opcional fecha janela tecnica em uma chamada, cli mescla fechamento real.135 testes passaram;3 novas urls f44 idx2/3/4 passed no fluxo novo, aberturas16.688/16.330/15.743s; prova fechamento apos ultima amostra12.753/3.544/3.311s versus131.06s baseline. ciclos claimed→result153.714/108.643/135.767s, nao10s totais. f44 idx1 recuperadopass por4frames reais revisados sem nova visita;jobf44 observed. snapshot15/46passed,25ready,6attention. lease foreground liberada e consumidor ja running proximo item. skill/ref lidas de volta, inventario audit/mechanical-batching-20261015.",
+      "next_step": "Implementar e testar fases finitas 3+1, migrar pendentes após fim seguro do worker, validar runtime e reportar",
+      "objective": "Aplicar regra de três ausências, seguir FIFO, uma tentativa final e relatório para revisão de Rodolfo",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "state": "implementacao em andamento; autoridade explícita rodolfo nesta thread; preservar tentativas, pass e observador vivo; sem novas visitas neste turno",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T12:23:02+00:00"
+      "updated_at": "2026-10-15T18:29:20+00:00"
     },
     {
       "agent": "zeus",
@@ -5942,5 +5942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T18:05:36+00:00"
+  "updated_at": "2026-10-15T18:29:20+00:00"
 }
