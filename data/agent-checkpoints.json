@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Consumidor existente continua mesmo request/FIFO sem novo comando. Usar recovery_evidence_path quando fornecido; comparar ultima tentativa, confirmar closure, persistir NO_ADrecovered ou reconcile sem resume ao atingir2ausencias, liberar outros links e lease. Nao escrever JSON narrativo grande nem reabrir por falta de registro. Corrigir bloqueio local com backup/teste/readback/REPORT; somente need-action com acao humana realmente indispensavel. Nao tratar queueREADY, skill/testes ou timer como conclusao; conferir PASS integral e avisoGET por pedido humano.",
-      "objective": "Ares conduz cada acompanhamento ate conclusao real, resolve bloqueios e mantem uma skill dedicada organizada sem depender de cobrancas",
-      "source": "discord:1559932317861158993#1560126627394879551;data/ares/meta-ads/audit/landing-followup-1559951763019145247/control-gate-fix/change-inventory.json;/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md;data/ares/meta-ads/landing-followup/queue.sqlite3",
-      "state": "autoridade atual1560126627394879551. landing-followup-operations ativa, antiga referencia redirect-only, historico/auditoria preservados, contrato/mapa/prompts apontam procedimento unico; readback validado. controle desta conversa nao bloqueia executor; prioridade demais turnos mantida. reserva orfa so liberada com source=tool/job/owner e ausencia de processo vivo por env/sid/queryfile; reserva real recuperada. estado excepcional e trabalho reconciling, nao abandono. registro compacto evidencia-json em result/reconcile/need-action; frames reais so incorporados apos revisao explicita; provas completas recuperadas sem revisitar e vinculadas temporalmente a ultima abertura. contexto enxuto, capsula de prova da tentativa exata preparada pelo consumidor, sem reextrair toda a historia. aviso unico somente grupo humano completo incluindo todos os subjobs.112 testes offline passaram e governanca valida; isso nao declara os anuncios pendentes concluidos. c121 tem2 ausencias reais com imagens/fechamento revistos e eventos reconciliados sem novo input; nao pass, nao terceira visita automatica, apos closure seguir outros links e manter diagnostico local.0meta writes/restarts/schedulechanges/other-profile edits.",
+      "next_step": "Continuar observacoes FIFO e diagnostico local de C121, sem nova visita apos2NO_AD nem falsoPASS. Usar skill landing-followup-operations, prova congelada/registro compacto e mesma linhagem. Concluir aviso unico por pedido humano somente grupo integralmentePASS+GET. Contato com Rodolfo somente se acao dele realmente indispensavel, nunca por abandono de fila.",
+      "objective": "Conduzir acompanhamentos ate conclusao real e resolver bloqueios autonomamente com skill dedicada organizada",
+      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/control-gate-fix/change-inventory.json;data/ares/meta-ads/landing-followup/queue.sqlite3;discord:1559932317861158993#1560126627394879551",
+      "state": "skill dedicada e referencia ativas, legado redirect/historico, gate da conversa e reservas orfas corrigidos, registro compacto e capsula de prova operacionais;112 testes offlinepass e report1560139787929788417 get verificado. snapshot 2026-10-15t00:00:32.009461-04:00: jobc103=running; links=0:passed,1:attention,2:open_intent,3:ready,4:ready,5:ready,6:ready. c121 teve2no_ad reais independentemente reconciliados, nao sucesso. processamento dos demais links retomado automaticamente apos closure; diagnostico de ausencia permanece com ares. nao declarar todos acompanhamentos concluidos.0metawrites/restarts/schedulechanges.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T03:58:30+00:00"
+      "updated_at": "2026-10-15T04:00:32+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T03:58:30+00:00"
+  "updated_at": "2026-10-15T04:00:32+00:00"
 }
