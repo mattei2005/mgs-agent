@@ -32,10 +32,21 @@ Usar key/owner/idx recebidos, não criar novos requests. `HERMES_SESSION_ID` pre
 Depois de anúncio confirmado e aba ativa, executar pelo Python do Hermes (o Python de sistema não contém necessariamente as dependências do handler):
 
 ```text
-$(dirname "$(command -v hermes)")/python /root/mgs-agent/scripts/ares-direct-traffic-sample.py --key <key> --owner <owner> --pc1-session-id "$HERMES_SESSION_ID"
+$(dirname "$(readlink -f "$(command -v hermes)")")/python /root/mgs-agent/scripts/ares-direct-traffic-sample.py --key <key> --owner <owner> --pc1-session-id "$HERMES_SESSION_ID"
 ```
 
 Exige job RUNNING/OPEN_INTENT, lease física e sessão reais. Faz somente `computer_use(action=capture, app=screen)` pelo handler existente e salva frames novos/tempos reais no armazenamento protegido. `CAPTURED_NOT_PASS` não atesta anúncio nem foco. O agente revisa todas as amostras que usará e só então preenche a evidência. `CADENCE_NOT_VALIDATED`/`CAPTURE_ERROR` não significam ausência de anúncio; recapturar na mesma aba, corrigir causa, fechar/verificar e registrar resultado seguro. Não retimar arquivos nem somar trechos desconexos.
+
+Resolver primeiro o symlink de `hermes` com `readlink -f`; o launcher em `.local/bin` pode não ter um `python` irmão. Usar o `python` do diretório real do launcher, não o Python de sistema nem um path adivinhado. Essa resolução deve ocorrer antes da navegação, não como erro repetido por URL.
+
+## Lotes nativos de abertura e fechamento
+
+Preferir os helpers locais para retirar turnos de LLM entre inputs mecânicos, mantendo o handler `computer_use` aprovado e a mesma lease real. Não mudar o transporte compartilhado.
+
+1. Persistir `begin` e chamar pelo Python do Hermes `scripts/ares-direct-traffic-ui.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --url '<landing real com query exata>' --mapping-source '<fonte real>'`. O helper abre uma única janela privada técnica e salva `desktop-open.json` antes/depois dos efeitos. Ele não aprova anúncio; não criar guardas extras. Qualquer erro exige ler a prova parcial e reconciliar, nunca repetir o helper.
+2. Conferir visualmente a página/anúncio/foco e a exclusividade da janela nova. Só então usar o coletor com `--close-owned-window --exclusive-window-reviewed`. Esse modo salva a série antes de fechar; somente com cadência completa usa um clique no Close nativo da janela comprovadamente nova, confere desaparecimento/preservação e salva `closure`. Sem prova válida da mesma abertura/owner/session/attempt, falha fechado. Não habilitar para abertura manual.
+3. `closure.state=CLOSED_NOT_PASS` significa fechamento já feito: não enviar Ctrl+W/click novamente. Revisar offline todos os frames e a prova de fechamento. Depois, `result --use-captured-closure --use-captured-samples --frames-reviewed` mescla evidências reais com os metadados mínimos; sem revisão e anúncio confirmado não há PASS. Cadência inválida não fecha automaticamente e exige recaptura/cleanup seguro na mesma aba.
+4. O helper rejeita janela preexistente, browser errado, fechamento sem controle nativo único e qualquer readback incerto; não repete inputs ambíguos. Uma janela já ausente retorna revisão necessária, não um novo sucesso de fechamento. Medir abertura, série, fechamento e registro por tempos reais, sem transformar testes offline em benchmark.
 
 ## Registro compacto — persistir antes de expirar
 
