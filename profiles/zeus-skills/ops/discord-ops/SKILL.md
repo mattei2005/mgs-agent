@@ -16,6 +16,10 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
+## Correção de respostas em outra thread
+
+Quando Rodolfo pedir para ler uma thread e corrigir a resposta de outro agente, diagnosticar o pedido e a execução exatos antes de atribuir erro ao agente. Publicar a retificação na thread indicada, sem apagar ou se passar pelo autor original, e validar o conteúdo entregue; explicar apenas na conversa atual não satisfaz o pedido. Distinguir resposta corrigida, bloqueio resolvido e entrega operacional concluída. Receita de leitura, correlação de sessão e investigação de recusa: `references/route-pack-03.md`, seção **Investigar e retificar resposta de outro agente**.
+
 ## Operational route packs
 
 - **Referências recentes → Escopo por agente/thread antes de reportar pendências** → `references/route-pack-01.md`
