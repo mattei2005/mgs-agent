@@ -136,6 +136,7 @@ Resolva categoria e tags pelo helper oficial antes de montar o payload. Para art
 - Slug auto-gerado com hífen pelo WordPress é normal.
 - Não aplique tag comercial sem o artigo tratar daquele assunto.
 - No readback, compare conjuntos de IDs porque a REST pode reordenar tags. Se uma consulta de coleção com `include` omitir ou acrescentar termos, leia cada ID esperado diretamente; não interprete uma coleção filtrada incompleta como tag ausente.
+- Para tags padronizadas com nomes duplicados em termos legados, prefira o ID cujo slug seja exatamente `lang_*` ou o código do país e confirme o nome por casefold; não selecione o primeiro resultado da busca. Preserve a capitalização de um termo canônico existente (`BR`, slug `br`), sem criar/renomear termos globais para forçar minúsculas. Se nem slug/nome identificarem candidato único, interrompa a resolução em vez de associar um ID ambíguo.
 - Antes de criar tags, reconcilie os nomes existentes por comparação Unicode/casefold para evitar `SEO` versus `seo`. Preserve nome/slug/ID canônicos existentes, deduplique o payload por ID e crie apenas os termos realmente ausentes. Se o helper retornar `400 term_exists`, faça GET no `term_id` fornecido e confirme o termo antes de retomar; nunca repita POST cegamente nem renomeie o termo para satisfazer a capitalização do draft.
 
 ## 9. Criar rascunhos com payload explícito
