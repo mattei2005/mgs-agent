@@ -100,6 +100,12 @@ Output:
 Flow: Node fetches post via REST → runs `yoastseo` analysis → shell writes scores via
 WP-CLI postmeta update + SQL UPDATE on `wp_yoast_indexable` → confirmed via SSH/DB query.
 
+### Contexto editorial em idioma diferente do locale da interface
+
+Quando não houver locale nativo por post (por exemplo, sem Polylang), confirme conjuntamente o site_key canônico com idioma/mercado autorizados, os marcadores institucionais nativos de idioma/país no ID exato e o hash da revisão editorial independente correspondente. Não deduza idioma apenas do texto nem altere locale global/usuário para satisfazer o analisador. Use o Researcher linguístico genuíno compatível, registre locale do algoritmo separado do mercado financeiro e preserve os locales WordPress observados. Uma convenção de pacote como `es_ES` não transforma conteúdo ES/EUA em regras de Espanha. Sem comparação autenticada, mantenha paridade do editor como não comprovada.
+
+Administrator não registra automaticamente outputs no schema REST. Abilities Yoast consultam valores já salvos, normalmente de posts publicados; não calculam nem comprovam a análise de drafts novos. Use o contrato GET real com query `input[number_of_posts]` quando aplicável, não JSON body ignorado, e confirme os mesmos IDs por leitura nativa de postmeta/indexable. Faça canário antes de expandir e mantenha uma meta e um indexable por alvo.
+
 ### Preflight de scorer externo e persistência nativa
 
 - Selecione explicitamente o Researcher PT/ES e o locale do conteúdo autorizado; o `lang` HTML/site pode divergir do idioma editorial. Registre a divergência sem mudar o idioma global como efeito colateral.
