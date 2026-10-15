@@ -72,8 +72,17 @@ Inspecione também o trecho final de `content.raw` em várias referências. Card
 2. Prefira intenções específicas e úteis em vez de outra versão do mesmo tema amplo.
 3. Para tendências, valide a afirmação em fonte primária ou editorial confiável antes de escrever.
 4. Cite a fonte dentro do artigo quando ela sustentar um claim datado ou mensurável. Em conteúdo financeiro/jurídico, confira a versão consolidada vigente e a revogação de cada dispositivo citado: uma resolução pode continuar válida em um artigo e ter outro substituído por norma posterior. Não use PDF antigo como prova da atribuição legal atual.
-5. Preserve um manifesto `source_urls`; fonte de pesquisa não autoriza copiar estrutura verbal ou frases.
+5. Preserve um manifesto `source_urls` de pesquisa fora do corpo publicado; fonte de pesquisa não autoriza copiar estrutura verbal ou frases. No artigo SEO, insira cada fonte naturalmente na frase/parágrafo que ela sustenta. Não publique blocos finais “Fontes”, “Fuentes consultadas”, “Sources”, bibliografia ou citações numeradas [1], [2], [3]. Priorize fontes confiáveis, oficiais quando possível, específicas e adequadas ao idioma e mercado do portal.
+6. Mantenha exemplos, legislação, instituições, moeda, termos, contexto cultural, fontes e links internos coerentes com o país/mercado canônico do portal. Não transfira regras dos EUA para um artigo da Espanha; fonte estrangeira técnica universal pode ser pertinente, mas não deve fundamentar condição legal/local de outro mercado.
 6. Separe evidência qualitativa de interesse — consultas encontradas, dúvidas recorrentes e cobertura recente — de métricas de procura. Não apresente presença em SERP ou em reportagem como volume de busca ou crescimento medido; registre a limitação quando não houver dado quantitativo verificável.
+
+## Variação, títulos e refinamento editorial em escala
+
+- Em SEO, varie naturalmente formatos, número de itens, aberturas, expressões e sequência de seções conforme a intenção: listas de 5/7/8/10/12 itens, guias sem numeração, comparações, perguntas e respostas, passo a passo e checklists. Oito itens é permitido, não é modelo obrigatório.
+- Preserve a identidade de categorias consolidadas (especialmente moda), mas não produza traduções ou versões excessivamente próximas entre portais. Esta regra é de diversificação SEO, não substitui modelagem contratual REC/P1.
+- Combine palavra-chave/intenção com benefício, curiosidade ou motivo claro para clicar quando isso melhorar o título, sem clickbait nem prejuízo ao SEO. Título aprovado não exige alteração cosmética.
+- Não reconstrua artigos aprovados quando a revisão pedir ajustes pontuais. Preserve profundidade, naturalidade e mínimo do briefing.
+- Imagens aprovadas podem ser preservadas; resolução, relevância específica, naturalidade editorial, contexto local, iluminação e saturação são refinamentos, não reprovação automática. Mantenha a posição após a abertura exigida e ALT factual/coerente.
 
 ## 5. Montar o artigo no formato do site
 
@@ -122,6 +131,7 @@ Não faça uploads antecipados enquanto o texto ainda pode ser abandonado: mídi
 
 Resolva categoria e tags pelo helper oficial antes de montar o payload. Para artigo SEO, use classes compatíveis com o corpus e o pedido, por exemplo país, idioma, `seo`, categoria/vertical, tema limpo e `atena_agent`.
 
+- Para idioma e país, use exclusivamente `lang_*` + código do país real do portal: EN/EUA `lang_en` + `us`; ES/EUA `lang_es` + `us`; PT/BR `lang_pt` + `br`; ES/Espanha `lang_es` + `es`; EN/Reino Unido `lang_en` + `gb`. Outros mercados seguem a mesma convenção conforme fonte canônica, sem inferir país pela língua. Remova do artigo tags alternativas de idioma/país (English, Español, Spanish, Português, United States etc.), sem renomear ou apagar termos globais. Se o briefing restringir o conjunto inteiro às duas tags, aplique somente esse par.
 - O nome solicitado da tag não deve conter hífen; use espaço em termos compostos.
 - Slug auto-gerado com hífen pelo WordPress é normal.
 - Não aplique tag comercial sem o artigo tratar daquele assunto.

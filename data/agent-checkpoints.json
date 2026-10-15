@@ -3833,12 +3833,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Receber a lista de ajustes mencionada por Raquel; aplicar os itens pertinentes, persistir as regras editoriais concretas, revalidar e publicar no fluxo editorial aprovado. Não interpretar a ausência da lista como dispensa dos ajustes.",
-      "objective": "Concluir o lote de 30 artigos SEO revisados por Raquel, aplicando ajustes e publicando após resolver as pendências editoriais.",
-      "source": "data/atena/seo-mass-1559930384852979796/final-verification.json; Discord thread 1559930384852979796 mensagem 1560274764201861196",
-      "state": "30 drafts entregues e validados no checkpoint anterior. raquel informou revisão dos 30 conteúdos, aprovação geral e autorização de publicação condicionada aos ajustes mencionados na mensagem 1560274764201861196. a lista de ajustes não consta na mensagem recebida nem nas mensagens posteriores consultadas nesta retomada. nenhuma publicação ou alteração wordpress executada nesta retomada. o escopo original draft-only fica preservado como histórico; a nova autorização de publicação deve ser reconciliada com os ajustes antes da execução.",
+      "next_step": "Capturar drafts atuais por ID, reconciliar alterações humanas, revisar fontes/mercado e tags, validar e publicar com readback REST e público.",
+      "objective": "Aplicar ajustes pontuais e publicar os 30 artigos SEO aprovados por Raquel",
+      "source": "data/atena/seo-mass-1559930384852979796/final-verification.json; Discord 1559930384852979796/1560275486695759996",
+      "state": "ajustes recebidos na mensagem 1560275486695759996: fontes contextuais sem bloco final, tags padronizadas, coerência de país/idioma; variação editorial e refinamentos sem reconstrução. publicação autorizada por raquel, identidade autorizada consultada. preflight em andamento; nenhuma publicação nesta etapa.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-15T12:55:29+00:00"
+      "updated_at": "2026-10-15T12:58:42+00:00"
     },
     {
       "agent": "atena",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T12:55:29+00:00"
+  "updated_at": "2026-10-15T12:58:42+00:00"
 }
