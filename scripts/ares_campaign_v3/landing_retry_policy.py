@@ -72,7 +72,7 @@ def maintain(q):
             return {'state':'WAITING_SAFE_BOUNDARY'}
         changed=[]
         # Migrate previously exhausted two-attempt links without resetting history.
-        for job in q.db.execute("SELECT key FROM jobs WHERE state='ATTENTION' ORDER BY created,key").fetchall():
+        for job in q.db.execute("SELECT key FROM jobs WHERE state IN ('ATTENTION','READY','DEFERRED_NO_AD') ORDER BY created,key").fetchall():
             key=job['key'];touched=False
             for link in q.db.execute("SELECT * FROM links WHERE job=? AND state='ATTENTION'",(key,)).fetchall():
                 n=q.no_ad_count(key,link['idx'])
@@ -84,9 +84,23 @@ def maintain(q):
             if touched:refresh(q,key)
         # The final pass only begins after all normal observations (including
         # future-due retries) are settled. OBSERVED/COMPLETE need no new visits.
-        initial=q.db.execute("SELECT l.job,l.idx FROM links l JOIN jobs j ON j.key=l.job WHERE j.reply_id IS NOT NULL AND j.state NOT IN ('WAITING_HUMAN','WAITING_HUMAN_UNCLOSED') AND l.state IN ('READY','WAIT_RETRY','OPEN_INTENT')").fetchall()
+        # Freeze peers at the first deferral: later intake cannot postpone the
+        # final return forever. One cohort is drained before opening another.
+        batch=None
+        for r in q.db.execute("SELECT seq,detail FROM events WHERE kind='finite_cohort_started' ORDER BY seq DESC"):
+            detail=json.loads(r['detail'])
+            if detail.get('generation')!=p['generation']:continue
+            done=any(json.loads(x['detail']).get('batch_seq')==r['seq'] for x in q.db.execute("SELECT detail FROM events WHERE kind='finite_cohort_completed'"))
+            if not done:batch=(r['seq'],detail['jobs'])
+            break
+        if batch is None and q.db.execute("SELECT 1 FROM links WHERE state='DEFERRED_NO_AD'").fetchone():
+            peers=[r['key'] for r in q.db.execute("SELECT key FROM jobs WHERE reply_id IS NOT NULL AND state IN ('READY','ATTENTION','DEFERRED_NO_AD') ORDER BY created,key")]
+            q.event(None,'finite_cohort_started',{'generation':p['generation'],'jobs':peers})
+            batch=(q.db.execute('SELECT max(seq) FROM events').fetchone()[0],peers)
+        peers=set(batch[1]) if batch else None
+        initial=[r for r in q.db.execute("SELECT l.job,l.idx FROM links l JOIN jobs j ON j.key=l.job WHERE j.reply_id IS NOT NULL AND j.state NOT IN ('WAITING_HUMAN','WAITING_HUMAN_UNCLOSED') AND l.state IN ('READY','WAIT_RETRY','OPEN_INTENT')") if peers is None or r['job'] in peers]
         if initial:return {'state':'INITIAL_OR_FINAL_IN_PROGRESS','changed':changed}
-        candidate=q.db.execute("SELECT l.* FROM links l JOIN jobs j ON j.key=l.job WHERE l.state='DEFERRED_NO_AD' AND j.state='DEFERRED_NO_AD' ORDER BY j.created,j.key,l.idx LIMIT 1").fetchone()
+        candidate=next((r for r in q.db.execute("SELECT l.* FROM links l JOIN jobs j ON j.key=l.job WHERE l.state='DEFERRED_NO_AD' AND j.state='DEFERRED_NO_AD' ORDER BY j.created,j.key,l.idx") if peers is None or r['job'] in peers),None)
         if candidate:
             key=candidate['job'];idx=candidate['idx']
             if not closed_latest(q,key,candidate):
@@ -100,6 +114,7 @@ def maintain(q):
         # entire retry pass is over. Outbox + exact GET, never a synthetic PASS.
         for link in q.db.execute("SELECT l.*,j.payload FROM links l JOIN jobs j ON j.key=l.job WHERE l.state='REVIEW_REQUIRED' ORDER BY j.created,j.key,l.idx").fetchall():
             key=link['job'];idx=link['idx'];payload=json.loads(link['payload']);e=json.loads(link['evidence'] or '{}')
+            if peers is not None and key not in peers:continue
             url=e.get('observed_url') or payload['links'][idx].get('landing_url') or payload['links'][idx]['effective_campaign_url']
             core.scope(url)
             message_key='landing-final-review:'+p['generation']+':'+key+':'+str(idx)
@@ -111,4 +126,5 @@ def maintain(q):
                 f'{url}\nAção solicitada: revisar a exibição de anúncios deste link. Não validado; sem nova repetição automática.')
             q.prepare_message(message_key,core.INCIDENT_THREAD,content)
             q.event(key,'finite_review_report_authorized',{'idx':idx,'notification_key':message_key,'generation':p['generation'],'authority_thread_id':p['authority_thread_id']})
+        if batch:q.event(None,'finite_cohort_completed',{'batch_seq':batch[0],'generation':p['generation'],'validation_success_not_implied':True})
         return {'state':'FINITE_PASS_SETTLED','changed':changed}

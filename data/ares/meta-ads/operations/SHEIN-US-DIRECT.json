@@ -517,7 +517,18 @@
   },
   "campaign_naming_policy": {
     "status": "ACTIVE_RUNTIME_IMPLEMENTED",
-    "format": "NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - [COPY C<FONTE> -] event_add_to_wishlist",
+    "format": "NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - [COPY C<FONTE> -] (US_APP) - event_add_to_wishlist",
+    "us_app_marker": {
+      "literal": "(US_APP)",
+      "scope": "new campaign requests for US-SHEIN ad accounts, all modes and channels",
+      "position_with_copy": "after COPY C<direct_source_number>, before event_add_to_wishlist",
+      "position_without_copy": "after (TRACKING), before event_add_to_wishlist",
+      "prospective_only": true,
+      "existing_campaigns_rename_authorized": false,
+      "sealed_manifests_unchanged": true,
+      "approved_by": "344196393512075265",
+      "source_thread_id": "1560359535175143545"
+    },
     "visible_campaign_number": {
       "digits": 3,
       "zero_padded": true,
@@ -698,9 +709,20 @@
       },
       "campaign_label": "separate_number_and_product_with_explicit_COPY_Csource_in_number_label_when_recorded_in_live_campaign_name",
       "default_sort": {
-        "keys": ["product_label_ascending_A_to_Z", "first_proven_delivery_ascending_oldest_first", "campaign_number_numeric_ascending", "campaign_id"],
+        "keys": ["product_label_ascending_A_to_Z", "root_family_first_proven_delivery_ascending_oldest_first", "root_campaign_number_numeric_ascending", "root_campaign_id"],
+        "family_order": "parent_then_immediate_copy_children_depth_first_contiguous_family_block",
+        "family_edges": "explicit_direct_COPY_source_number_in_verified_name_same_account_same_product_with_unique_selected_parent",
+        "sibling_order": ["first_proven_delivery_ascending", "campaign_number_numeric_ascending", "campaign_id"],
+        "family_placement_overrides_flat_chronological_order": true,
+        "multi_generation": "show_each_child_below_its_direct_parent_preserve_direct_COPY_label_never_replace_with_root_label",
+        "missing_or_ambiguous_parent": "do_not_invent_or_add_out_of_scope_parent_keep_campaign_visible_with_explicit_limitation",
+        "cycle_policy": "detect_and_reject_ambiguous_family_order_do_not_recurse_forever_or_guess",
+        "pagination": "keep_parent_and_descendants_in_same_message_when_family_fits_Discord_limit",
         "apply_same_order_to_history": true,
-        "source_message_id": "1560341636741861550",
+        "source_thread_id": "1560303769680355525",
+        "source_message_id": null,
+        "source_description": "Rodolfo requested each copy directly below its source, e.g. 97 then 113 COPY C97, and the same for all copied campaigns.",
+        "superseded_flat_sort_source_message_id": "1560341636741861550",
         "do_not_sort_by_ROI_unless_explicitly_requested": true
       },
       "copy_source_label": {

@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 BIDS={'LOWEST_COST_WITHOUT_CAP':'MAXVOL','COST_CAP':'COCAP','LOWEST_COST_WITH_BID_CAP':'BIDCAP'}
-NEW_NAME=re.compile(r'^([0-9]+) - ([0-9]{2}/[0-9]{2}) - (v[123]) - (.+?) - (MAXVOL|COCAP|BIDCAP) - \(([^()]+)\)(?: - COPY C([0-9]+))? - (?:event_)?add_to_wishlist$')
+NEW_NAME=re.compile(r'^([0-9]+) - ([0-9]{2}/[0-9]{2}) - (v[123]) - (.+?) - (MAXVOL|COCAP|BIDCAP) - \(([^()]+)\)(?: - COPY C([0-9]+))?(?: - \(US_APP\))? - (?:event_)?add_to_wishlist$')
 
 
 def product_label(source_name):
@@ -47,4 +47,5 @@ def campaign_name(number,start_time,timezone,destination,product,bid_strategy,tr
     sequence=int(number)
     if not 1 <= sequence <= 999:
         raise ValueError('SHEIN visible campaign number must be within 001-999; never truncate or recycle')
-    return f'{sequence:03d} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - event_add_to_wishlist'
+    # Prospective US-SHEIN naming only; legacy sources remain parseable above.
+    return f'{sequence:03d} - {date} - {version} - {product.strip()} - {alias} - ({tracking}){addon} - (US_APP) - event_add_to_wishlist'

@@ -107,7 +107,9 @@ Não remover a permissão Discord `Embed Links`: isso pode quebrar UI interativa
 
 Quando o Discord exibir `Response truncated — this reply exceeded the delivery limit (8 messages)`, o conteúdo foi gerado por completo, mas o adapter aplicou o teto anti-flood e substituiu a cauda por um aviso. O usuário não deve precisar detectar a falha, pedir “continua” nem recuperar o texto nos logs.
 
-Estado MGS para o profile Zeus:
+A opção é isolada por profile: estar habilitada no Zeus não a habilita no Ares ou na Atena. Ao diagnosticar truncamento, conferir o profile autor da mensagem e o valor resolvido no adapter, não apenas a presença do patch compartilhado. Zeus e Ares possuem autorização para continuação automática; não ampliar esse escopo para outros profiles sem autorização.
+
+Configuração MGS de continuação automática:
 
 ```yaml
 discord:
@@ -123,6 +125,8 @@ Contrato operacional:
 - Manter o comportamento upstream fail-safe (`auto_continue_long_responses: false`) nos profiles que não habilitarem explicitamente a opção.
 - Aplicar o mesmo contrato a envio normal, fórum e overflow de edição/streaming.
 - Se um envio real falhar no meio, registrar entrega parcial e retomar somente a cauda comprovadamente ausente; nunca reenviar cegamente os chunks já publicados.
+- Para recuperar relatório já truncado, usar o texto original da sessão e o formatter/splitter do runtime, comparar por igualdade exata todos os chunks já publicados e conferir a soma de caracteres ausentes contra o aviso. Publicar somente a cauda validada, com identidade do agente original, nonce idempotente, receipts e GET/readback de cada mensagem; não refazer consultas nem recalcular o relatório. Em resultado ambíguo do POST, reconciliar antes de repetir.
+- A flag de continuação é capturada na inicialização do adapter. Não declarar ativação no gateway existente apenas porque YAML e resolver novo passaram: realizar restart seguro autorizado e confirmar novo PID e conexão Discord, preservando os demais agentes.
 - Não substituir a continuação por anexo sem pedido explícito do usuário.
 - Validador pós-restart deve ficar fora de toda a janela `delay + readiness_timeout + margem`; agendar dentro da indisponibilidade do próprio gateway pode atrasar ou perder o disparo.
 - Se o callback prometido não aparecer, reconciliar primeiro finalizer/audit → inventário → estado/output do job. Não remover um one-shot apenas porque `last_run_at` ainda está vazio: ele pode estar em execução e já ter side effects; removê-lo nesse intervalo pode suprimir a entrega final.

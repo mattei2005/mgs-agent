@@ -1523,12 +1523,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Implementar e testar fases finitas 3+1, migrar pendentes após fim seguro do worker, validar runtime e reportar",
-      "objective": "Aplicar regra de três ausências, seguir FIFO, uma tentativa final e relatório para revisão de Rodolfo",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
-      "state": "implementacao em andamento; autoridade explícita rodolfo nesta thread; preservar tentativas, pass e observador vivo; sem novas visitas neste turno",
+      "next_step": "Consumidor existente executa terceira inicial dos6 sem reiniciar contadores; na terceira ausencia segue proximos; apos fase inicial faz1final por pendente; no fim outbox reporta REVIEW_REQUIRED nesta thread e verifica GET. PASS exige anuncio/foco10s+fechamento; sucesso gestor so grupo integral.",
+      "objective": "Concluir acompanhamento por politica finita3+1 e revisar pendentes com Rodolfo",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/three-then-final-20261015/change-inventory.json;data/ares/meta-ads/landing-followup/queue.sqlite3",
+      "state": "regra3+1 aplicada no contrato/runtime/skillv0.2.0 e registry por supersessao.150 testes pass; readback real40passed+6wait_retry, duas tentativas anteriores preservadas. loop de fechamento removido para ausencias ja comprovadas; worker vivo preservado ate terminar naturalmente. report-infra1560360662901727396 get confirmado, embed vazio de content/mentions.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T18:29:20+00:00"
+      "updated_at": "2026-10-15T18:36:31+00:00"
     },
     {
       "agent": "zeus",
@@ -5942,5 +5942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T18:29:20+00:00"
+  "updated_at": "2026-10-15T18:36:31+00:00"
 }
