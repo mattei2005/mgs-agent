@@ -7525,6 +7525,24 @@
       "updated_at": "2026-09-25T15:19:45+00:00"
     },
     {
+      "canonical_key": "finance.sources.transient-read-retry",
+      "canonical_source": "/root/mgs-agent/docs/finance-five-minute-read-retry.md",
+      "consumers": [
+        "finance_spend_sources.py",
+        "mgs-finance-dashboard"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-15T14:09:08+00:00",
+      "id": "FINANCE-READ-RETRY-1560288130085560351",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Consulta financeira: uma nova tentativa automatica apos cinco minutos",
+      "updated_at": "2026-10-15T14:09:08+00:00"
+    },
+    {
       "canonical_key": "finance.august-2026.rede2-gross-owner-correction",
       "canonical_source": "/root/mgs-agent/reports/finance-rede2-gross-1554177164872519692.md",
       "consumers": [
@@ -12039,5 +12057,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T13:38:27+00:00"
+  "updated_at": "2026-10-15T14:09:08+00:00"
 }

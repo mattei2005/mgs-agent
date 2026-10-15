@@ -193,6 +193,8 @@ This section records the original August Sheet audit, not current application st
 - `CAIXA SINTETICO!J2:J75` is complete for August: `J2` and six correct summary formulas were preserved, 49 previously blank source-link/data cells were populated across the two authorized phases, four spacer rows remained blank, and formula/value/scope readback passed with zero displayed errors. Downstream `J77`, `J79:J81` recalculated and passed independent arithmetic checks.
 - `BASE_DASH` and `DASH EXECUTIVO` are live in the principal workbook for August 2026. The normalized base has separate `SITE`, `PAÍS`, `GERAL`, and `GERAL_MÊS` levels so executive totals do not double-count country rows. Executive KPIs bind to `CAIXA SINTETICO`; site/country analytics bind to the audited August blocks. August remains `PROVISÓRIO`.
 
+**Five-minute automatic source retry — Rodolfo1560288130085560351:** `docs/finance-five-minute-read-retry.md` and `references/api-first-site-daily-spend.md` govern one delayed300s re-read of eligible failed Meta/Google scan/detail items, preserving successful data and all financial gates. No repeated financial writes, credential/billing recovery or parallel writer. Execution status: checkpoint `ZEUS-FINANCE-RETRY-1560288130085560351`.
+
 ## Application-first execution
 
 1. Resolve the latest user request, initiative checkpoint and referenced canonical decision before acting. Runtime establishes implementation state; a historical report records only its own release. New confirmed supersessions override the older branch only for their stated scope.

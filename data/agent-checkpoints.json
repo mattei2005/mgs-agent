@@ -2733,12 +2733,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-RETRY-1560288130085560351",
-      "next_step": "Testar atraso300s, falha persistente, exclusoes e publicar com guard",
+      "next_step": "Concluir gates, publicar via release guard, readback e REPORT-INFRA",
       "objective": "Nova tentativa automatica de consulta financeira apos5min, sem duplicar escritas",
-      "source": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351/prepare.py",
-      "state": "preparando candidato isolado; codigo ativo ainda preservado",
+      "source": "/root/mgs-agent/docs/finance-five-minute-read-retry.md",
+      "state": "regra canonica e skill salvas;16testes direcionados e espera real300s+get meta passaram;gates completos em andamento;ativo ainda preservado",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-15T13:50:05+00:00"
+      "updated_at": "2026-10-15T14:09:08+00:00"
     },
     {
       "agent": "zeus",
@@ -5922,5 +5922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T13:51:25+00:00"
+  "updated_at": "2026-10-15T14:09:08+00:00"
 }

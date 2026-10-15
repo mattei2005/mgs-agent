@@ -157,6 +157,21 @@ Quando Rodolfo ou Raquel pedir verificação de acesso antes da produção, conc
 
 Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de artigos, mínimo de palavras, posição da imagem, relação entre imagem interna e destacada, fontes externas e status solicitado. Exigências explícitas do briefing prevalecem sobre o padrão inferido do corpus; não reduza um mínimo de palavras nem altere a posição da imagem para imitar referências mais curtas. Não confunda rascunho no WordPress com arquivo local de texto.
 
+### Regras editoriais permanentes para SEO
+
+Aplique ao preparar, revisar e liberar cada artigo:
+
+1. Insira fontes confiáveis, preferencialmente oficiais e específicas, na frase ou parágrafo que sustentam. Não publique blocos finais de fontes/bibliografia nem chamadas numéricas; mantenha o inventário de pesquisa separado do corpo.
+2. Confira o mercado real do portal em exemplos, legislação, instituições, moeda, vocabulário, contexto e links internos. Uma página no mesmo domínio e idioma pode tratar de outro país: leia seu conteúdo antes de aceitá-la como link interno. Prefira a versão local de uma fonte quando equivalente; não trate documentação técnica universal como legislação local.
+3. Aplique o par de idioma/país **junto**, não no lugar, das tags temáticas/SEO pertinentes e `atena_agent`, conforme a seção de taxonomia.
+4. Varie formatos, quantidade de itens, aberturas, expressões e sequência de seções conforme a intenção. Não transforme listas de oito itens em template obrigatório nem produza traduções quase idênticas entre portais. Preserve a identidade de categorias consolidadas, especialmente moda; esta diversificação SEO não substitui os contratos REC/P1.
+5. Combine intenção/palavra-chave com benefício ou motivo claro para clicar quando houver ganho real, sem clickbait. Preserve títulos aprovados quando não precisarem de ajuste.
+6. Preserve profundidade e naturalidade dos artigos aprovados; execute correções pontuais sem reconstrução desnecessária. Após localizar o último ajuste, valide novamente o corpo final exato.
+7. Preserve imagens aprovadas e a posição pedida após a abertura, com ALT factual. Resolução, relevância específica, naturalidade, contexto local, iluminação e saturação são critérios de refinamento, não motivo para substituir automaticamente toda a mídia.
+8. Separe aprovação editorial, publicação e validação do Yoast. Metadados corretos não comprovam notas persistidas; registre divergências editor/frontend como pendência, usando `yoast-wordpress` para diagnóstico, sem declarar verde nem reescrever texto para mascarar ausência de análise.
+
+A receita de execução e os testes por objeto estão em `references/general-seo-category-drafts.md`.
+
 Separe nos informes as etapas de texto preparado, revisão editorial, imagem aprovada e rascunho salvo e validado. Texto completo e imagem aprovada não encerram uma entrega de drafts no WordPress. Quando a revisão humana pedir links ao concluir, entregue os links de edição agrupados por portal, identificando cada título e status real, somente após conferir todos os IDs; não substitua essa entrega por anexos ou por um aviso de que os arquivos locais estão prontos.
 
 Quando Rodolfo ou Raquel pedir novos artigos “no mesmo padrão” de uma categoria, trate o arquivo completo da categoria como contrato editorial mensurável:
@@ -171,6 +186,19 @@ Quando Rodolfo ou Raquel pedir novos artigos “no mesmo padrão” de uma categ
 8. Meta Yoast confirmada não equivale a score. Só informe SEO/readability numéricos quando houver scorer e readback reais; campo vazio continua “não analisado”.
 
 Use `references/general-seo-category-drafts.md` para a extração, montagem de payload, mídia e QA determinístico do lote.
+
+## Continuidade de lotes entre conversas
+
+Quando houver um próximo lote durante a revisão do atual, recomende uma nova thread para o novo briefing e mantenha as correções da leva anterior na origem. Antes de prometer reaproveitamento, confira o registro de conhecimento e o checkpoint e leia as fontes e referências apontadas. Reaplique regras editoriais vigentes e carregue pendências técnicas como pendências, não como correções concluídas. Resolva novamente alvos, quantidade, categorias, mínimo, status e autorização do novo lote: aprovação/publicação da leva anterior não autoriza publicar a próxima. Não peça que o revisor recopie orientações já recuperáveis.
+
+## Diferenciar artigo de componentes do site
+
+Quando um print destacar comentários, busca, related posts ou outro bloco supostamente inserido no artigo:
+
+1. Identifique o bloco no print e confira sua ancestralidade no DOM publicado, usando o seletor editorial real; em WordPress, `.wp-block-latest-comments`, `.widget_recent_comments` e `#recentcomments` ajudam a localizar comentários recentes.
+2. Compare com `content.raw` do post e com um artigo anterior do mesmo portal. Confirme presença fora do corpo e no controle antes de dizer que pertence ao template/widget preexistente.
+3. Relate separadamente o que foi enviado no artigo e o que o tema/sidebar renderiza. Nomes estranhos sugerem spam, mas não provam classificação sem conferir os comentários.
+4. Não remova comentários, widgets ou configuração como extensão silenciosa da revisão editorial; essa alteração exige escopo e autoridade próprios.
 
 ## Perfis de autor WordPress nos sites MGS
 
@@ -223,20 +251,7 @@ Para Eggbev CAR BR, quando o print/pedido mencionar o bloco de três botões fin
 
 ## Persuasão em rewrite de artigo por referência
 
-Quando Rodolfo pedir artigo “igual/no mesmo modelo/copia a estrutura”, a reescrita deve ser **mais persuasiva e orientada a benefício**, não apenas diferente. Regra: benefício percebido primeiro, ressalva depois.
-
-Evite começar blocos de conversão com negativas ou freios como “não significa aprovação automática”. Prefira abrir com o ganho para o leitor — descobrir opções rapidamente, evitar processos demorados, acelerar a compra, comparar boas condições — e só então inserir a ressalva factual de análise de crédito/condições da instituição.
-
-Exemplos de direção:
-
-- frio: “O ponto importante é entender que rapidez não significa aprovação automática...”
-- melhor: “Uma das principais vantagens do financiamento digital é conseguir descobrir rapidamente quais opções podem estar disponíveis para o seu perfil...”
-- frio: “Neste guia, você vai ver como esse tipo de crédito funciona...”
-- melhor: “Neste guia, você entenderá por que milhares de pessoas utilizam esse modelo para acelerar a compra...”
-- frio: “A diferença do modelo sem entrada está na possibilidade...”
-- melhor: “O maior atrativo desse modelo é permitir que muitas pessoas consigam comprar um veículo sem precisar esperar meses...”
-
-Preservar fatos e condições sensíveis: nunca prometer aprovação, taxa, oferta, elegibilidade ou disponibilidade sem fonte.
+Quando o pedido for seguir o mesmo modelo, preserve a estrutura e reescreva de forma mais persuasiva: **benefício percebido primeiro, ressalva factual depois**. Não abra conversão com negativas, mas nunca prometa aprovação, taxa, oferta, elegibilidade ou disponibilidade sem fonte. Exemplos e receita visual: `references/eggbev-car-br-persuasive-rewrite-and-image-branding-2026-07-02.md`.
 
 ## Imagem destacada e imagem interna por referência
 

@@ -33,7 +33,7 @@ Yoast stores scores in **two layers**:
 
 | Layer | Table / Key | Read by |
 |-------|-------------|---------|
-| 1 — Post meta | `wp_postmeta`: `_yoast_wpseo_linkdex` (SEO), `_yoast_wpseo_content_score` (Readability) | REST API (`?_fields=meta`) |
+| 1 — Post meta | `wp_postmeta`: `_yoast_wpseo_linkdex` (SEO), `_yoast_wpseo_content_score` (Readability) | Leitura autorizada de postmeta; REST somente se esses campos estiverem registrados/expostos |
 | 2 — Indexables | `wp_yoast_indexable`: `primary_focus_keyword_score`, `readability_score` | WP Admin post-list bubbles |
 
 **Score thresholds (Yoast standard):**
@@ -61,7 +61,17 @@ bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh 
 ```
 See `references/yoast-score-architecture.md` for full Node.js API pitfalls.
 
-**Preflight de compatibilidade obrigatório:** a existência do scorer não prova suporte multi-site/multilíngue. Antes de executar, confira sua resolução real de host/webroot e de idioma. O wrapper legado atualmente deriva o webroot do `site_key`, usa transporte fixo e o engine Node usa `EnResearcher`/`en_GB`; não o execute em variantes REST-only ou lotes ES/PT presumindo compatibilidade. Se exigir adaptação de script/runtime ou escrita técnica, escale para Zeus. Não atribua ausência de score no REST a ausência no banco: os campos podem não estar expostos. Em lote que gravou apenas title/metadesc/focuskw, declare score persistido não validado; compare com artigo de controle antes de atribuir divergência editor/frontend a cache. Não peça ao revisor que salve manualmente uma leva inteira para contornar uma lacuna da automação.
+**Preflight de compatibilidade obrigatório:** a existência do scorer não prova suporte multi-site/multilíngue. Confira na implementação vigente como resolve host, webroot, prefixo de tabelas, versão Yoast, Researcher e locale. Não derive webroot do `site_key` nem aplique locale/Researcher inglês a ES/PT por inferência. Se o wrapper fixar esses valores ou a correção exigir adaptação de script/runtime ou escrita técnica, escale para Zeus antes de executar. Não use valores fixos nem force verde para preencher análise ausente.
+
+## § Divergência entre editor, dados salvos e barra publicada
+
+1. Distinga cor do logotipo de cor dos indicadores SEO/legibilidade; registre em qual tela e post a divergência foi observada. Verde no editor mostra análise naquele contexto, não prova persistência nem leitura correta pela barra.
+2. Determine a extensão do padrão. Se afeta uma leva criada por automação e artigos anteriores do mesmo portal estão coerentes, inspecione primeiro o caminho compartilhado de criação/publicação; não diagnostique cache como explicação padrão.
+3. Confira o payload e a execução: title/metadesc/focuskw são entradas, não resultados. Se não houve cálculo e readback reais, informe **score persistido não validado**. Campos numéricos ausentes no REST podem estar apenas não expostos; não conclua que estão vazios no banco.
+4. Compare um post afetado com um controle anterior do mesmo portal, usando acesso autorizado e a instalação real. Separe análise carregada no editor, postmeta/indexable persistidos e indicador frontend. Se um teste humano de salvar no editor muda a barra para verde, registre a evidência e use-a para investigar o gatilho de gravação/atualização; não conclua qual hook é responsável nem que toda a leva foi corrigida.
+5. Corrija somente pelo fluxo compatível e autorizado; valide o resultado salvo e a barra no mesmo ID antes de ampliar ao lote. Preserve conteúdo, mídia, taxonomia e publicação. Não reescreva artigos para mascarar ausência de análise, não force pontuações e não peça ao revisor que salve manualmente a leva inteira para contornar uma lacuna da automação.
+
+Diagnóstico não equivale a reparo: mantenha hipótese, evidência humana, leitura técnica e correção validada separados no relatório.
 
 ---
 
@@ -71,7 +81,7 @@ See `references/yoast-score-architecture.md` for full Node.js API pitfalls.
 1. Find post ID via HTML (REST `?slug=` may return `[]` on eggbev — known bug)
 2. Run Python diagnostic to identify violations (sentence length, transitions, passive voice)
 3. Rewrite only the violated rules
-4. Validate (word count 450–500, subtitle ≤ 100 chars)
+4. Validate against the article's own contract and explicit brief. The 450–500-word and subtitle ≤100-character limits apply only to REC when its contract requires them; do not apply them to long-form SEO or P1.
 5. Publish via REST PATCH
 6. Re-score with `yoast-score-post.sh`
 

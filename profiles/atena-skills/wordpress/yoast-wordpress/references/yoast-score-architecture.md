@@ -12,7 +12,7 @@ Keys:
 - `_yoast_wpseo_metadesc` — Meta description
 - `_yoast_wpseo_focuskw` — Focus keyword
 
-Readable via: `GET /wp-json/wp/v2/posts/{id}?_fields=meta`
+Inspecione `GET /wp-json/wp/v2/posts/{id}?context=edit&_fields=id,meta` com autenticação autorizada. Somente campos registrados/expostos aparecem no REST; a ausência de `_yoast_wpseo_linkdex` ou `_yoast_wpseo_content_score` não comprova valor ausente em postmeta. Para verificar a camada persistida quando não estiver exposta, use leitura técnica autorizada, resolvendo instalação e prefixo reais.
 
 ### Layer 2 — Indexables Table (wp_yoast_indexable)
 Columns:
@@ -46,7 +46,7 @@ on every REST publish — discarding real scores and showing every post as 🟡 
 
 Deployed MD5 on eggbev: `069270de4c07a9d15838ff45df65f539`
 
-After v4: new posts show ⚪ notAnalyzed until editor opened — honest, expected. No flicker on F5.
+Sem resultado persistido, posts podem aparecer como notAnalyzed. Abrir o editor pode executar a análise local, mas não comprova que o resultado foi salvo ou consumido pela barra frontend. Valide o ciclo completo no mesmo post; uma mudança após salvar é evidência do gatilho, não prova de correção de todo o lote.
 
 **Key lesson:** Do NOT use `rest_after_insert_post` to interact with the Yoast indexable.
 Pattern: `register_post_meta` (show_in_rest=true) + `pre_get_posts` filter. Nothing else.

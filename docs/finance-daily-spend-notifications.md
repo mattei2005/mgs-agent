@@ -1,5 +1,9 @@
 # Finance — preenchimento diário de gastos e exceções
 
+## Nova tentativa após cinco minutos — Rodolfo1560288130085560351
+
+A reconsulta de falhas potencialmente transitórias de gastos Meta/Google segue `docs/finance-five-minute-read-retry.md`: uma rodada automática após300segundos, somente para leituras elegíveis que falharam, preservando os resultados válidos. Supersede a repetição curta de1segundo; não muda fontes, horários, gates financeiros, casos críticos ou política de confirmação conjunta. Publicação/readback pelo checkpoint `ZEUS-FINANCE-RETRY-1560288130085560351`.
+
 ## Regra ativa — Rodolfo1557727865750159482, detalhada em1557733120655101973 e1557733965119361075
 
 - Uma mensagem normal, curta, em primeira pessoa nesta thread, com **Problema, Causa e Solução**. Sem nomes de exceções, etapas internas ou alertas genéricos. Causa ainda não provada deve ser apresentada como desconhecida, não presumida.
