@@ -42,7 +42,9 @@
     "campaign_requests_have_absolute_priority": true,
     "off_path_trigger_state": "VALIDATED_READ_ONLY_NATIVE_OUTBOX_OBSERVER",
     "creation_wrapper_and_callback": "PERMANENTLY_RETIRED_DO_NOT_RESTORE",
-    "foreground_priority_gate": "Background worker defers while any existing native Discord turn lease is active; no gate added to creators",
+    "foreground_priority_gate": "Background worker defers to all other native Discord turns; the dedicated followup control/status thread does not block its own independent worker; no gate added to creators",
+    "followup_control_thread_exempt": true,
+    "followup_control_exemption_authority": "Rodolfo reaffirmed autonomous continuity without requiring more messages; diagnosing/status conversation must not stop the independent observation",
     "resource_isolation": "Separate low-weight systemd services; intake CPU10percent/256MiB, worker CPU20percent/1GiB, Nice19 and idle IO",
     "superseded_technical_hold": "HELD_FOR_FULL_ASYNC_ISOLATION was an Ares implementation hold, not a Rodolfo suspension instruction; cleared by external-trigger validation"
   },

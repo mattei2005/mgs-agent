@@ -123,6 +123,21 @@ class IntakeTests(unittest.TestCase):
         self.assertTrue(li.native_busy(self.path,now=1010))
         self.c.execute('DELETE FROM session_turn_leases');self.c.commit();self.assertFalse(li.native_busy(self.path,now=1010))
     def test_unreadable_native_db_defers_observer(self):self.assertTrue(li.native_busy(self.base/'missing.db',now=1010))
+    def test_followup_control_conversation_does_not_stop_its_worker(self):
+        self.policy.write_text(json.dumps({'all_problem_destination_thread':self.thread,'creation_path_isolation':{'followup_control_thread_exempt':True}}))
+        self.c.execute('INSERT INTO session_turn_leases VALUES(?,?)',('session-1',2000));self.c.commit()
+        self.assertFalse(li.native_busy(self.path,now=1010))
+
+    def test_other_campaign_turn_still_has_absolute_priority(self):
+        self.policy.write_text(json.dumps({'all_problem_destination_thread':self.thread,'creation_path_isolation':{'followup_control_thread_exempt':True}}))
+        self.c.execute("INSERT INTO sessions SELECT 'other-creation',source,session_key,'150000000000000099','150000000000000099',origin_json,started_at FROM sessions WHERE id='session-1'")
+        self.c.execute('INSERT INTO session_turn_leases VALUES(?,?)',('session-1',2000))
+        self.c.execute('INSERT INTO session_turn_leases VALUES(?,?)',('other-creation',2000));self.c.commit()
+        self.assertTrue(li.native_busy(self.path,now=1010))
+
+    def test_invalid_priority_policy_fails_closed(self):
+        self.policy.write_text('invalid policy fixture')
+        self.assertTrue(li.native_busy(self.path,now=1010))
     def test_native_connection_is_mechanically_read_only(self):
         with li.readonly(self.path) as c:
             with self.assertRaises(sqlite3.OperationalError):c.execute("DELETE FROM messages")

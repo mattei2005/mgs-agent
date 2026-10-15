@@ -34,9 +34,11 @@ def readonly(path):
 def native_busy(path=NATIVE_DB,now=None):
     # Existing native turn lease: no lock/flag is added to campaign requests.
     try:
+        policy=json.loads(POLICY.read_text())
+        exempt=str(policy.get('all_problem_destination_thread') or '') if policy.get('creation_path_isolation',{}).get('followup_control_thread_exempt') is True else ''
         with readonly(path) as c:
-            return bool(c.execute("SELECT 1 FROM session_turn_leases l JOIN sessions s ON s.id=l.conversation_id WHERE l.expires_at>? AND s.source='discord' LIMIT 1",(time.time() if now is None else now,)).fetchone())
-    except sqlite3.Error:
+            return bool(c.execute("SELECT 1 FROM session_turn_leases l JOIN sessions s ON s.id=l.conversation_id WHERE l.expires_at>? AND s.source='discord' AND (?='' OR COALESCE(NULLIF(s.thread_id,''),s.chat_id,'')<>?) LIMIT 1",(time.time() if now is None else now,exempt,exempt)).fetchone())
+    except (sqlite3.Error,OSError,ValueError):
         return True  # A busy/unreadable native DB defers only the observer.
 
 
