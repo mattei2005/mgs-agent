@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Consumidor e timer existentes continuam o mesmo job apos turno nativo, retomam recuperacao por conta propria e processam pendencias FIFO ate PASS integral+successGET. Nao esperar novo comando humano e nao emitir progresso/incidente recuperavel. Ainda nao declarar os26links pendentes concluidos. Se houver limitacao que so Rodolfo resolve, persistir need-action com acao exata; gatescriticos mantidos.",
-      "objective": "Ares conduz os acompanhamentos ate conclusao validada; recovery automatico duravel, sem depender de mensagens de Rodolfo",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/autonomous-recovery;data/ares/meta-ads/landing-followup/queue.sqlite3;scripts/ares-direct-traffic-sample.py",
-      "state": "corrigida causa de abandono: consumidor antes so reivindicava ready e ignorava needs_reconciliation/attention. agora reivindica reconciling, preserva fifo/lease/readback, reage a expiracao com retry60s e sem reabrir incerto. erro tecnico seguro volta wait_retry; limite no_ad separado das tentativas tecnicas. coletor read-only em processo unico adicionado, captured_not_pass nao aprova anuncio. max80 chamadas, mesmo wallbudget480/timeout540.89 testes offline pass; live claim_recovery + reconcile--resume exercitados no mesmo jobc103 com fechamento real1115478 e originalax110preservado, sem nova navegacao. demais pendencias preservadas e nenhuma marcadapass. avisos apenas acao humana concreta.0meta writes/gatewayrestarts/schedulechanges.",
+      "next_step": "Consumidor existente deve continuar FIFO ate fim real, nao esperar mensagem do operador. Recuperacao de C121 deve conferir ultima abertura/fechamento e persistir resultado compacto ou reconcile sem resume apos2NO_AD, liberando C122+ e mantendo diagnostico local. Prova de PASS/NO_AD valida ja existente deve ser registrada com recovered, nao revisitar. Corrigir defeitos locais com backup/teste/readback/REPORT e retomar; so need-action se houver acao humana concreta indispensavel. Confirmacao gestor unica somente grupo humano completo PASS+GET.",
+      "objective": "Conduzir cada acompanhamento ate validacao integral e mensagem conferida; resolver bloqueios sem depender de novas cobrancas; skill dedicada organizada",
+      "source": "discord:1559932317861158993#1560126627394879551;data/ares/meta-ads/audit/landing-followup-1559951763019145247/control-gate-fix/change-inventory.json;/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md;data/ares/meta-ads/landing-followup/queue.sqlite3",
+      "state": "skill dedicada landing-followup-operations criada com referencia runtime/recovery/status; antiga referencia virou redirect e historico foi arquivado; mapa/contrato/prompts atualizados e readback conferido. corrigido gate que bloqueava pela propria conversa; demais turnos de campanha seguem prioritarios. orfao fisico so e liberado apos source=tool/job/owner+ausencia de processo vivo em env/session/query-file. cli aceita evidencia-json compacta, frames revisados e prova recuperada da ultima tentativa sem novas visitas. sucesso humano agrega todos os jobs pares, nao so um subjob.109 testes offline pass; retomadas reais verificadas e reserva orfa real liberada. c121: duas ausencias reais reconciliadas por imagens e fechamento, nao pass; historico dedup por tentativa; apos closure limite2 nao reabre e libera outros links para continuar. nenhuma conclusao global falsa e nenhum meta write/restart/schedulechange.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T02:21:40+00:00"
+      "updated_at": "2026-10-15T03:47:41+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T03:34:08+00:00"
+  "updated_at": "2026-10-15T03:47:41+00:00"
 }
