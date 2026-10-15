@@ -1173,12 +1173,12 @@
     {
       "agent": "ares",
       "id": "ARES-PC1-LINK-OPENING-REVIEW-1559932317861158993",
-      "next_step": "Explicar somente o fluxo atual do observadorPC1 e discutir correcoes para travamento, espera e erros; manter propostas como rascunho ate confirmacao e preservar todososfluxosdecampanha.",
-      "objective": "Revisar somente abertura e observacao de links noPC1, sem alterar fluxo de campanha",
-      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;skill:landing-followup-operations",
-      "state": "scope_corrected_by_rodolfo: discussao limitada a abrirpc1, pegarlinkdafila, abrirlanding, verificaranuncio/foco/tempo, fechar e tratarretentativas/errostecnicos. pedidos/criacao/conclusao de campanhas estao ok e fora de escopo; auditoria/limpezathreads tambemfora. nenhuma mudanca runtime implementada nesta revisao.",
+      "next_step": "Implementar/testar compatibilidade e novosgates; exercitar probePC1semURLsemimpressao; ativar nofimsegurodoexecutor; purgar somentefotosdetrabalhosCOMPLETEcomrecibos preservados; inventario/REPORT e readback.",
+      "objective": "Aplicar correcoes autorizadas somente noexecutor PC1: retryzero, gatefisico, falhaslimitadas, cleanup screenshotsposconclusao",
+      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015;data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "state": "in_progress_authorized_implementation: rodolfo aprovou retirar60s entreno_ad, limparscreenshotsaposvalidacao/conclusao, corrigirabertura/captura e travasdefalha e lentidao. backup9arquivos esqlitefeito. novo jobobservador vivo preservado; ativar politica apenas emfronteirasegura, semreinicio nem campanhas.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T22:01:32+00:00"
+      "updated_at": "2026-10-15T22:20:59+00:00"
     },
     {
       "agent": "ares",
@@ -1409,6 +1409,16 @@
       "state": "now_code_fixed_offline_passed_live_target_unproven",
       "thread_id": "1557274000680288307",
       "updated_at": "2026-10-08T16:57:01+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-PRODUCT20-PREVIEW-1558147211026501643",
+      "next_step": "Teste publicado e lido de volta em15 mensagens Ares,73 campanhas+histórico; Produto≤20 sem reticências; largura143→138. Mesmo snapshot17:40 e demais células/histórico idênticos. Aguardar conferência visual de Rodolfo antes de promover para padrão global.",
+      "objective": "Enviar teste Produto20 sem reticências na Yolokfx Conta04 preservando as demais colunas e snapshot",
+      "source": "/root/mgs-agent/data/ares/discord/product20-preview-1558147211026501643/publication-journal.json",
+      "state": "completed",
+      "thread_id": "1560303769680355525",
+      "updated_at": "2026-10-15T22:28:48+00:00"
     },
     {
       "agent": "ares",
@@ -6052,5 +6062,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T22:07:49+00:00"
+  "updated_at": "2026-10-15T22:28:48+00:00"
 }

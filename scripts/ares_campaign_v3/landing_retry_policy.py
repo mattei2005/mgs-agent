@@ -47,6 +47,7 @@ def refresh(q,key):
     elif 'OPEN_INTENT' in states:state='NEEDS_RECONCILIATION'
     elif states.intersection({'READY','WAIT_RETRY'}):state='READY'
     elif 'ATTENTION' in states:state='ATTENTION'
+    elif 'TECHNICAL_REPAIR' in states:state='TECHNICAL_REPAIR'
     elif 'DEFERRED_NO_AD' in states:state='DEFERRED_NO_AD'
     elif 'REVIEW_REQUIRED' in states:state='WAITING_HUMAN'
     else:raise ValueError('unrecognized finite retry state')
@@ -78,7 +79,8 @@ def maintain(q):
                 n=q.no_ad_count(key,link['idx'])
                 if not n or not closed_latest(q,key,link):continue
                 state='WAIT_RETRY' if n<limit(q,key,link['idx']) else exhausted_state(q,key,link['idx'])
-                q.db.execute('UPDATE links SET state=?,due=? WHERE job=? AND idx=?',(state,q.now()+60 if state=='WAIT_RETRY' else 0,key,link['idx']))
+                from .landing_reliability import no_ad_delay
+                q.db.execute('UPDATE links SET state=?,due=? WHERE job=? AND idx=?',(state,q.now()+no_ad_delay() if state=='WAIT_RETRY' else 0,key,link['idx']))
                 q.event(key,'finite_retry_migrated',{'idx':link['idx'],'previous_no_ads':n,'state':state,'generation':p['generation'],'history_preserved':True})
                 touched=True;changed.append([key,link['idx'],state])
             if touched:refresh(q,key)
@@ -108,7 +110,8 @@ def maintain(q):
                 q.event(key,'finite_final_needs_closure',{'idx':idx});return {'state':'CLEANUP_REQUIRED'}
             if final_start(q,key,idx):raise ValueError('finite final pass cannot repeat')
             q.event(key,'finite_final_started',{'idx':idx,'generation':p['generation'],'initial_no_ads':q.no_ad_count(key,idx),'maximum_no_ad_attempts':1,'new_visit_not_yet_started':True})
-            q.db.execute("UPDATE links SET state='WAIT_RETRY',due=? WHERE job=? AND idx=?",(q.now()+60,key,idx));refresh(q,key)
+            from .landing_reliability import no_ad_delay
+            q.db.execute("UPDATE links SET state='WAIT_RETRY',due=? WHERE job=? AND idx=?",(q.now()+no_ad_delay(),key,idx));refresh(q,key)
             return {'state':'FINAL_RETRY_SCHEDULED','job':key,'idx':idx,'changed':changed}
         # One immutable final report per failed combination, only when the
         # entire retry pass is over. Outbox + exact GET, never a synthetic PASS.

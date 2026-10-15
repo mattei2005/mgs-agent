@@ -49,7 +49,7 @@ python3 /root/mgs-agent/scripts/ares-shein-campaigns.py campaign --input <reques
 
 O comando faz preflight vivo, seleção da fonte na conta exata, compiler, prevalidation/plan, conciliação de numeração antes do write, delegação ao Engine central e readback. Sem confirmação ou com `--dry-run`, não entra no writer. `single-clone` é alias de compatibilidade, não rota privilegiada; `prepare-live/materialize` G005 de três modos fica apenas legado/rollback, não intake rotineiro.
 
-JSON interno de intenção (não formulário obrigatório ao gestor):
+JSON interno de intenção para duplicação sem horário/status expressos (não formulário obrigatório ao gestor). Use `start_next_midnight=true` e omita `status` para aplicar os defaults canônicos; somente um pedido explícito substitui essas opções. Não copie datas fixas ou PAUSED de exemplos para um pedido que não os solicitou, pois isso altera o agendamento ou impede a ativação autorizada:
 
 ```json
 {
@@ -59,8 +59,7 @@ JSON interno de intenção (não formulário obrigatório ao gestor):
   "source_number": 110,
   "quantity": 1,
   "budget_usd": "30",
-  "start_time": "2026-10-08T00:00:00-04:00",
-  "status": "PAUSED",
+  "start_next_midnight": true,
   "authorized_by": "DISCORD_SENDER_ID",
   "source_channel_id": "CANONICAL_PARENT_CHANNEL_ID",
   "source_thread_id": "ACTUAL_THREAD_OR_CHANNEL_ID",
@@ -223,9 +222,9 @@ A implementação offline não comprova tempo live nem serving. No próximo pedi
 
 - Ao aplicar naming canônico, validar também `config.json#/accounts/<conta>/campaign_policy/name_regex`: `shein_naming.enabled=true` não sincroniza automaticamente o validador. Se o dry-run rejeitar o nome gerado pelo formatter aprovado porque a conta ainda exige US-EN/ES + event_add_to_wishlist, reconciliar somente o regex da conta exata com a política canônica vigente, preservar backup/inventário, provar que nenhum outro campo mudou e repetir o dry-run antes de qualquer write. Não renomear para o padrão antigo, remover o gate ou ampliar a correção para outras contas. Registrar a correção em REPORT-INFRA.
 
-- Mesmo em duplicar/clonar igual, preservar a configuração não significa copiar o nome da fonte. Todo modo SHEIN gera `NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - event_add_to_wishlist` pelo formatter `shein_naming.py`. **NNN tem exatamente três dígitos com zeros à esquerda (`001`, `007`, `099`, `100`), faixa 001–999; fora dela bloquear antes de write sem truncar/reciclar.** Nome legado curto continua aceito como fonte. O padding só afeta o prefixo visível, não tracking nem COPY Cfonte. Número vem primeiro; data é o início configurado no timezone da conta; produto limpo de qualificadores históricos; MAXVOL/COCAP/BIDCAP vêm do bid_strategy real. Não inserir moeda, valor do cap, US-EN/ES, LP NORMAL ou COPY Cnnn no novo padrão.
+- Mesmo em duplicar/clonar igual, preservar a configuração não significa copiar o nome da fonte. Todo modo SHEIN gera `NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - event_add_to_wishlist` pelo formatter `shein_naming.py`. **NNN tem exatamente três dígitos com zeros à esquerda (`001`, `007`, `099`, `100`), faixa 001–999; fora dela bloquear antes de write sem truncar/reciclar.** Nome legado curto continua aceito como fonte. O padding só afeta o prefixo visível, não tracking nem COPY Cfonte. Número vem primeiro; data é o início configurado no timezone da conta; produto limpo de qualificadores históricos; MAXVOL/COCAP/BIDCAP vêm do bid_strategy real. Não inserir moeda, valor do cap, US-EN/ES ou LP NORMAL. Em duplicação/clonagem, incluir `COPY C<fonte direta>` e, nos próximos pedidos US-SHEIN, `(US_APP)`, conforme a política canônica; esses marcadores ficam fora do produto e das UTMs.
 - A nomenclatura aprovada valida somente o output novo. Referências legadas são aceitas sem exigir layout novo: usar API real para configuração, preservar o literal necessário à identidade, nunca adaptar campanhas antigas como pré-condição. Validadores name_regex dos novos manifests devem estar sincronizados com o formatter; não reaplicar essa regex ao source snapshot.
-- Duplicação/clonagem acrescenta ` - COPY C<fonte>` antes do evento; resolver fonte direta do request, não herdar um COPY antigo da campanha-fonte. Criar do zero não inclui COPY por referência de copy/configuração. O parser reconhece nomes novos com e sem add-on para não duplicar data/quiz/lance/COPY no produto.
+- Duplicação/clonagem usa `NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - COPY C<FONTE> - (US_APP) - event_add_to_wishlist` nos próximos pedidos US-SHEIN; resolver a fonte direta do request, não herdar um COPY antigo da campanha-fonte. Criar do zero omite somente `COPY C<FONTE>`, mantendo `(US_APP)` depois de `(TRACKING)`. Gerar pelo formatter central, sem duplicar marcadores nem reescrever campanhas existentes ou manifests selados. O parser aceita fontes históricas sem os add-ons, mas essa compatibilidade não autoriza omiti-los nos novos alvos.
 - Identificar quiz pela regra corporativa verificada do plugin MGS Direct Quiz, não por substring arbitrária: admin do plugin declara lp1=V1/sh1, lp2=V2/sh2, lp3=V3/sh3. Aplicar somente rotas ancoradas `/quiz/us/sh([123])-gNNN/` e mapear para v1/v2/v3. A página atual da rota usada no lote comprovou `data-model=lp2`; registrar evidência e bloquear formatos desconhecidos. Nenhuma alteração de quiz/plugin/WordPress é autorizada pela leitura ou pelo nome.
 - Ler `contextual_multi_ads` dos criativos da fonte e preservá-lo explicitamente no payload de materialização. Esse campo representa Multi-advertiser ads, separado de degrees_of_freedom_spec/Advantage+. Missing não significa OPT_OUT. Com política de preservação ativa, estado da fonte não confirmado bloqueia antes do write.
 - QA compara o enrollment real fonte × alvo em todos os anúncios, e a fase central de ativação relê o campo contra a prova. OPT_OUT na fonte exige OPT_OUT no alvo; não herdar o default da Meta. Uma screenshot de um anúncio não limita a conciliação ao mesmo anúncio: validar todo o lote pedido.

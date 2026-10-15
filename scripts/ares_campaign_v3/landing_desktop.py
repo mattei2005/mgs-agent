@@ -28,11 +28,12 @@ def all_elements(snapshot):
 
 
 def escalates(out):
-    return out.get('code')=='background_unavailable' or out.get('effect')=='suspected_noop'
+    verdict=out.get('verdict') or {}
+    return out.get('code')=='background_unavailable' or out.get('effect')=='suspected_noop' or verdict.get('code')=='background_unavailable' or verdict.get('effect')=='suspected_noop'
 
 
-def open_owned(call,url,base_window=None,on_owned=None):
-    """Open once in a new private window; return for visual review, never PASS."""
+def open_blank_owned(call,base_window=None,on_owned=None):
+    """Create one provably new private window; no URL or page impression."""
     start=time.monotonic();before=windows(call);known={identity(w) for w in before}
     candidates=[w for w in before if w.get('app_name','').lower()=='chrome.exe' and (base_window is None or int(w['window_id'])==base_window)]
     if len(candidates)!=1:raise ValueError('unique base Chrome window required')
@@ -41,24 +42,49 @@ def open_owned(call,url,base_window=None,on_owned=None):
     out=call({'action':'key','keys':'ctrl+shift+n'})
     after=windows(call)
     new=[w for w in after if w.get('app_name','').lower()=='chrome.exe' and identity(w) not in known]
+    # Chromium window registration can lag behind the input acknowledgement.
+    # Re-read only; never repeat an ambiguous hotkey while a window may appear.
+    refusal=out.get('code')=='background_unavailable' or (out.get('verdict') or {}).get('code')=='background_unavailable'
+    for _ in range(3):
+        if new or refusal:break
+        time.sleep(.15);after=windows(call)
+        new=[w for w in after if w.get('app_name','').lower()=='chrome.exe' and identity(w) not in known]
     if not new and escalates(out):
         # Readback has proved the background hotkey did not create a window.
         call({'action':'capture','mode':'ax','pid':base['pid'],'window_id':base['window_id']})
         call({'action':'key','keys':'ctrl+shift+n','delivery_mode':'foreground','bring_to_front':True})
         after=windows(call);new=[w for w in after if w.get('app_name','').lower()=='chrome.exe' and identity(w) not in known]
+        for _ in range(3):
+            if new:break
+            time.sleep(.15);after=windows(call);new=[w for w in after if w.get('app_name','').lower()=='chrome.exe' and identity(w) not in known]
     if len(new)!=1:raise ValueError('new window ambiguous; do not repeat open')
     owned=new[0]
     if not known.issubset({identity(w) for w in after}):raise ValueError('baseline changed; preserve all windows')
     proof={'state':'OWNED_BLANK_WINDOW','target':safe_windows([owned])[0],'baseline':safe_windows(before),'new_window_created':True,'url_submission_attempted':False}
     if on_owned:on_owned(proof)
     snap=call({'action':'capture','mode':'ax','pid':owned['pid'],'window_id':owned['window_id']})
+    for _ in range(2):
+        if any('incognito' in str(e.get('label','')).lower() for e in all_elements(snap)):break
+        time.sleep(.15);snap=call({'action':'capture','mode':'ax','pid':owned['pid'],'window_id':owned['window_id']})
     if not any('incognito' in str(e.get('label','')).lower() for e in all_elements(snap)):
         raise ValueError('new private window not confirmed; no typing')
+    proof['blank_open_elapsed_seconds']=round(time.monotonic()-start,3)
+    if on_owned:on_owned(proof)
+    return proof
+
+
+def open_owned(call,url,base_window=None,on_owned=None):
+    """Open once in a new private window; return for visual review, never PASS."""
+    start=time.monotonic();proof=open_blank_owned(call,base_window,on_owned);owned=proof['target']
     # A newly created private window has its empty address field focused.
     out=call({'action':'type','text':url})
     snap=call({'action':'capture','mode':'ax','pid':owned['pid'],'window_id':owned['window_id']})
     def typed(s):return url in json.dumps(all_elements(s),ensure_ascii=False)
     if not typed(snap) and escalates(out):
+        # Replace any partial address in this exclusively owned blank window,
+        # rather than appending the same URL a second time.
+        call({'action':'key','keys':'ctrl+l','delivery_mode':'foreground','bring_to_front':True})
+        call({'action':'key','keys':'ctrl+a','delivery_mode':'foreground'})
         out=call({'action':'type','text':url,'delivery_mode':'foreground','bring_to_front':True})
         snap=call({'action':'capture','mode':'ax','pid':owned['pid'],'window_id':owned['window_id']})
     if not typed(snap):raise ValueError('exact typed URL unverified; no submit or retry')
@@ -70,7 +96,7 @@ def open_owned(call,url,base_window=None,on_owned=None):
         # Explicit refusal + fresh readback. Never retry an ambiguous Enter.
         call({'action':'key','keys':'return','delivery_mode':'foreground','bring_to_front':True})
         snap=call({'action':'capture','mode':'ax','pid':owned['pid'],'window_id':owned['window_id']})
-    proof.update(state='OPENED_NOT_VISUALLY_VALIDATED',observed_url=url,opening_screenshot=snap.get('screenshot_path'),elapsed_seconds=round(time.monotonic()-start,3))
+    proof.update(state='OPENED_NOT_VISUALLY_VALIDATED',observed_url=url,opening_screenshot=snap.get('screenshot_path'),opened_at=time.time(),elapsed_seconds=round(time.monotonic()-start,3))
     if on_owned:on_owned(proof)
     return proof
 

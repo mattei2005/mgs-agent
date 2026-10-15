@@ -14,9 +14,10 @@ import time
 from pathlib import Path
 
 
-def collect(capture, *, pause=time.sleep, max_frames=12):
-    all_frames=[];chain=[]
+def collect(capture, *, pause=time.sleep, max_frames=12,max_seconds=45):
+    all_frames=[];chain=[];started=time.monotonic()
     for _ in range(max_frames):
+        if time.monotonic()-started>max_seconds:break
         frame=capture();all_frames.append(frame)
         if chain and not (0 < frame['monotonic_seconds']-chain[-1]['monotonic_seconds'] <= 10
                           and 0 < frame['captured_at']-chain[-1]['captured_at'] <= 12):chain=[]
@@ -47,21 +48,27 @@ def main():
     from tools.computer_use.tool import handle_computer_use,release_computer_use_session
     def capture():
         cli.require_pc1_lease(a.pc1_session_id)
-        out=handle_computer_use({'action':'capture','mode':'vision','app':'screen'},session_id=a.pc1_session_id)
-        if isinstance(out,str):out=json.loads(out)
-        image=out.get('screenshot_path') or (out.get('meta') or {}).get('screenshot_path')
+        image=None
+        for _ in range(2):
+            out=handle_computer_use({'action':'capture','mode':'vision','app':'screen'},session_id=a.pc1_session_id)
+            if isinstance(out,str):out=json.loads(out)
+            image=out.get('screenshot_path') or (out.get('meta') or {}).get('screenshot_path')
+            if image:break
         if not image:raise ValueError('capture failed; no image evidence')
         path=Path(image);epoch=path.stat().st_mtime
         return {'screenshot':str(path),'captured_at':epoch,'monotonic_seconds':time.monotonic()-(time.time()-epoch),
                 'analysis':out.get('vision_analysis'),'screen_unchanged':out.get('screen_unchanged',False),'composited_desktop':True}
-    target=q.root/'runs'/a.owner/'capture-series.json';target.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    idx=next(x['idx'] for x in job['links'] if x['state']=='OPEN_INTENT')
+    from ares_campaign_v3.landing_reliability import run_directory
+    directory=run_directory(q,a.owner,a.key,idx,job['links'][idx]['attempt'])
+    target=directory/'capture-series.json';target.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
     def persist(out):
         temp=target.with_suffix('.new');temp.write_text(json.dumps(out,ensure_ascii=False,indent=2));os.chmod(temp,0o600);os.replace(temp,target)
     try:
         proof=None
         if a.close_owned_window:
             if not a.exclusive_window_reviewed:raise ValueError('review exclusive owned window before automatic closure')
-            proof=json.loads((q.root/'runs'/a.owner/'desktop-open.json').read_text())
+            proof=json.loads((directory/'desktop-open.json').read_text())
             idx=next(x['idx'] for x in job['links'] if x['state']=='OPEN_INTENT')
             if (proof.get('queue_key'),proof.get('owner'),proof.get('session_id'),proof.get('index'),proof.get('attempt'))!=(a.key,a.owner,a.pc1_session_id,idx,job['links'][idx]['attempt']):
                 raise ValueError('exact current opening proof required')

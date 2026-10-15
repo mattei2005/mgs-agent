@@ -215,7 +215,7 @@ def main():
     a.add_argument('--resume',action='store_true',help='Resume technical failure only after verified closure, never PASS')
     a=s.add_parser('need-action');a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
     a.add_argument('--pc1-session-id',required=True);evidence_arguments(a)
-    for command in ('begin','defer','result'):
+    for command in ('begin','defer','result','retry-now'):
         a=s.add_parser(command);a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
         if command!='defer':
             a.add_argument('--index',type=int,required=True)
@@ -249,7 +249,10 @@ def main():
             except Exception as e:
                 with q.tx():q.event(None,'progress_delivery_deferred',{'reason':type(e).__name__,'retry_owner':'ares'})
             return result
-    if args.command in {'begin','result','reconcile','need-action'}:require_pc1_lease(args.pc1_session_id)
+    if args.command in {'begin','result','reconcile','need-action','retry-now'}:require_pc1_lease(args.pc1_session_id)
+    if args.command=='retry-now':
+        from ares_campaign_v3.landing_reliability import reclaim_retry
+        return reclaim_retry(q,args.key,args.owner,args.index)
     if args.command=='need-action':
         q.request_human(args.key,args.owner,load_evidence(args))
         return {'state':q.job(args.key)['state']}
@@ -261,14 +264,17 @@ def main():
     elif args.command=='defer':q.deferred(args.key,args.owner)
     elif args.command=='result':
         evidence=load_evidence(args)
+        from ares_campaign_v3.landing_reliability import run_directory
+        current=q.job(args.key)
+        capture_directory=run_directory(q,args.owner,args.key,args.index,current['links'][args.index]['attempt'])
         if args.use_captured_closure:
-            captured=json.loads((q.root/'runs'/args.owner/'capture-series.json').read_text())
+            captured=json.loads((capture_directory/'capture-series.json').read_text())
             closure=captured.get('closure') or {}
             if closure.get('state')!='CLOSED_NOT_PASS':raise ValueError('verified exact owned-window closure required')
             for field in ('new_tab_identity','tab_closed_verified','other_tabs_preserved','closed_screenshot'):
                 evidence[field]=closure[field]
         if args.use_captured_samples:
-            captured=json.loads((q.root/'runs'/args.owner/'capture-series.json').read_text())
+            captured=json.loads((capture_directory/'capture-series.json').read_text())
             if captured.get('state')!='CAPTURED_NOT_PASS' or not args.frames_reviewed or evidence.get('network_ad_confirmed') is not True:
                 raise ValueError('cadence plus explicit review of ad visibility and active tab required')
             evidence['samples']=[{**x,'ad_visible':True,'tab_active':True} for x in captured['samples']]

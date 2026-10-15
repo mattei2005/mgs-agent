@@ -30,7 +30,8 @@ def main():
         raise ValueError('exact real landing mapping and unchanged query required')
     if original.get('landing_url') and original['landing_url']!=a.url:raise ValueError('canonical landing differs')
     core.scope(a.url)
-    dest=q.root/'runs'/a.owner/'desktop-open.json'
+    from ares_campaign_v3.landing_reliability import run_directory
+    dest=run_directory(q,a.owner,a.key,a.index,link['attempt'])/'desktop-open.json'
     if dest.exists():raise ValueError('opening already attempted; read proof and reconcile, never replay')
     dest.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
     def save(proof):
@@ -42,10 +43,14 @@ def main():
     if not executable:raise ValueError('Hermes runtime unavailable')
     sys.path.insert(0,str(Path(executable).resolve().parents[2]))
     from tools.computer_use.tool import handle_computer_use,release_computer_use_session
+    trace=[]
     def call(args):
         cli.require_pc1_lease(a.pc1_session_id)
         result=handle_computer_use(args,session_id=a.pc1_session_id)
-        return json.loads(result) if isinstance(result,str) else result
+        out=json.loads(result) if isinstance(result,str) else result
+        trace.append({'action':args['action'],'code':out.get('code'),'effect':out.get('effect'),'verdict':out.get('verdict'),'window_count':len(out['windows']) if 'windows' in out else None})
+        (dest.parent/'desktop-trace.json').write_text(json.dumps(trace,ensure_ascii=False))
+        return out
     try:result=open_owned(call,a.url,base_window=a.base_window_id,on_owned=save)
     finally:release_computer_use_session(a.pc1_session_id)
     with q.tx():q.event(a.key,'desktop_open_batch',{'idx':a.index,'attempt':link['attempt'],'owner':a.owner,'proof':str(dest),'elapsed_seconds':result['elapsed_seconds'],'visually_validated':False})

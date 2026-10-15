@@ -229,9 +229,9 @@ class Queue:
         """Claim repair work, never a second navigation or a second writer."""
         with self.tx():
             if self.db.execute("SELECT 1 FROM jobs WHERE state='WAITING_HUMAN_UNCLOSED'").fetchone():return None
-            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until>?",(self.now(),)).fetchone():return None
+            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','REPAIRING') AND lease_until>?",(self.now(),)).fetchone():return None
             self.activate_authorized_return()
-            rows=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key",(self.now(),)).fetchall()
+            rows=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION','TECHNICAL_REPAIR') AND (lease_until IS NULL OR lease_until<=?) ORDER BY CASE WHEN state='NEEDS_RECONCILIATION' THEN 0 ELSE 1 END,created,key",(self.now(),)).fetchall()
             # Closed diagnostic work must not repeatedly consume the only
             # desktop lane while due observations are waiting. Uncertain tabs
             # still have absolute recovery priority; no proof means no bypass.
@@ -249,11 +249,13 @@ class Queue:
                     except (ValueError,KeyError,TypeError,OSError):return False
                 return True
             row=next((r for r in rows if r['state']=='NEEDS_RECONCILIATION' or
-                (not self.target_waits_for_others(r['key']) and not (due and already_closed(r['key'])))),None)
+                (r['state']=='TECHNICAL_REPAIR' and not due) or
+                (r['state']!='TECHNICAL_REPAIR' and not self.target_waits_for_others(r['key']) and not (due and already_closed(r['key'])))),None)
             if not row:return None
             key=row['key']
-            self.db.execute("UPDATE jobs SET state='RECONCILING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
-            self.event(key,'recovery_claimed',{'owner':owner,'same_request':True,'automatic_navigation':False})
+            phase='REPAIRING' if row['state']=='TECHNICAL_REPAIR' else 'RECONCILING'
+            self.db.execute("UPDATE jobs SET state=?,owner=?,lease_until=? WHERE key=?",(phase,owner,self.now()+ttl,key))
+            self.event(key,'technical_repair_claimed' if phase=='REPAIRING' else 'recovery_claimed',{'owner':owner,'same_request':True,'automatic_navigation':False})
             return self.job(key)
 
     def no_ad_count(self,key,idx):
@@ -296,14 +298,18 @@ class Queue:
         with self.tx():
             # One active observer globally, regardless of account/channel. Other
             # campaign writers remain independent and are never locked by PC1.
-            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone(): return None
+            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','REPAIRING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone(): return None
             try:priority=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
             except (OSError,ValueError):priority={}
             target=priority.get('target_job') if priority.get('mode')=='C121_FIRST_THEN_FIFO' else None
-            r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY CASE WHEN key=? THEN 0 ELSE 1 END,created,key LIMIT 1",(target,)).fetchone()
+            from .landing_reliability import policy as execution_policy
+            fair=bool(execution_policy())
+            if fair:
+                r=self.db.execute("SELECT j.key FROM jobs j JOIN links l ON l.job=j.key WHERE j.state='READY' AND j.reply_id IS NOT NULL AND l.state IN ('READY','WAIT_RETRY') AND l.due<=? ORDER BY CASE WHEN j.key=? THEN 0 ELSE 1 END,j.created,j.key,l.idx LIMIT 1",(self.now(),target)).fetchone()
+            else:r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY CASE WHEN key=? THEN 0 ELSE 1 END,created,key LIMIT 1",(target,)).fetchone()
             if not r:return None
             key=r['key']
-            first=self.db.execute("SELECT * FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY','OPEN_INTENT') ORDER BY idx LIMIT 1",(key,)).fetchone()
+            first=self.db.execute("SELECT * FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY','OPEN_INTENT')"+(' AND due<=?' if fair else '')+" ORDER BY idx LIMIT 1",(key,self.now()) if fair else (key,)).fetchone()
             if not first or first['due']>self.now():return None
             if first['state']=='OPEN_INTENT':raise ValueError('uncertain prior tab requires reconciliation')
             self.db.execute("UPDATE jobs SET state='RUNNING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
@@ -320,6 +326,8 @@ class Queue:
             self.owned(key,owner)
             r=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
             from . import landing_retry_policy as finite
+            from .landing_reliability import needs_repair
+            if needs_repair(self,key,idx):raise ValueError('technical-repair gate: verified repair probe required before another opening')
             if not r or r['state'] not in {'READY','WAIT_RETRY'} or r['due']>self.now() or self.no_ad_count(key,idx)>=finite.limit(self,key,idx):
                 raise ValueError('attempt not due; no replay of ambiguous open')
             self.db.execute("UPDATE links SET state='OPEN_INTENT',attempt=attempt+1 WHERE job=? AND idx=?",(key,idx))
@@ -328,6 +336,11 @@ class Queue:
     def deferred(self,key,owner):
         with self.tx():
             j=self.job(key)
+            if j['state']=='REPAIRING':
+                if j['owner']!=owner or j['lease_until']<self.now():raise ValueError('repair owner mismatch')
+                self.db.execute("UPDATE jobs SET state='TECHNICAL_REPAIR',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,key))
+                self.event(key,'technical_repair_deferred',{'owner':owner,'ordinary_opening_blocked':True})
+                return
             if j['state']=='RECONCILING':
                 if j['owner']!=owner or j['lease_until']<self.now():raise ValueError('recovery owner mismatch')
                 self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,key))
@@ -366,13 +379,16 @@ class Queue:
             evidence=preserve_evidence(evidence,key,idx,row['attempt'])
             safe_error=result=='ERROR' and not evidence.get('human_action_required') and (evidence.get('no_tab_opened') is True or evidence.get('tab_closed_verified') is True)
             from . import landing_retry_policy as finite
+            from . import landing_reliability as reliability
             finite_enabled=bool(finite.policy())
             retry_no_ad=result=='NO_AD' and self.no_ad_count(key,idx)+1<finite.limit(self,key,idx)
             state='PASSED' if result=='PASS' else ('WAIT_RETRY' if safe_error or retry_no_ad else 'ATTENTION')
             if result=='NO_AD' and finite_enabled and not retry_no_ad:state=finite.exhausted_state(self,key,idx)
-            self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
+            if safe_error and reliability.policy() and reliability.technical_errors(self,key,idx)+1>=int(reliability.policy().get('technical_error_limit',3)):state='TECHNICAL_REPAIR'
+            delay=reliability.technical_delay() if safe_error else reliability.no_ad_delay()
+            self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+delay if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
             self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'result':result,'state':state,'evidence':evidence})
-            if safe_error:self.event(key,'recoverable_retry_scheduled',{'idx':idx,'retry_after_seconds':60,'recovery_owner':'ares','human_action_required':False})
+            if safe_error:self.event(key,'technical_repair_required' if state=='TECHNICAL_REPAIR' else 'recoverable_retry_scheduled',{'idx':idx,'retry_after_seconds':delay,'recovery_owner':'ares','human_action_required':False,'ordinary_opening_blocked':state=='TECHNICAL_REPAIR'})
             remaining=self.db.execute("SELECT state FROM links WHERE job=?",(key,)).fetchall()
             all_pass=all(x['state']=='PASSED' for x in remaining)
             pending=any(x['state'] in {'READY','WAIT_RETRY','OPEN_INTENT'} for x in remaining)
@@ -382,7 +398,7 @@ class Queue:
             if evidence.get('human_action_required') is True and isinstance(evidence.get('required_action'),str) and evidence['required_action'].strip():
                 status='WAITING_HUMAN_UNCLOSED' if status=='NEEDS_RECONCILIATION' else 'WAITING_HUMAN'
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',(status,key))
-            if finite_enabled and status not in {'NEEDS_RECONCILIATION','WAITING_HUMAN','WAITING_HUMAN_UNCLOSED'}:
+            if (finite_enabled or reliability.policy()) and status not in {'NEEDS_RECONCILIATION','WAITING_HUMAN','WAITING_HUMAN_UNCLOSED'}:
                 finite.refresh(self,key)
             if state in {'DEFERRED_NO_AD','REVIEW_REQUIRED'}:
                 self.event(key,'finite_no_ad_exhausted',{'idx':idx,'state':state,'new_visit_not_yet_started':False})
@@ -464,7 +480,7 @@ class Queue:
 
     def recover_expired(self):
         with self.tx():
-            for j in self.db.execute("SELECT * FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until<?",(self.now(),)).fetchall():
+            for j in self.db.execute("SELECT * FROM jobs WHERE state IN ('RUNNING','RECONCILING','REPAIRING') AND lease_until<?",(self.now(),)).fetchall():
                 # Never auto-reopen/reclose an uncertain tab. Escalate the exact
                 # request here and leave its intent for browser reconciliation.
                 self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,j['key']))
@@ -500,7 +516,12 @@ class Queue:
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=? WHERE key=?',('READY' if pending else 'ATTENTION',None if pending else self.now()+60,key))
             if finite_enabled and self.no_ad_count(key,idx)>0:
                 state=finite.exhausted_state(self,key,idx) if exhausted else 'WAIT_RETRY'
-                self.db.execute('UPDATE links SET state=?,due=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,key,idx))
+                from .landing_reliability import no_ad_delay
+                self.db.execute('UPDATE links SET state=?,due=? WHERE job=? AND idx=?',(state,self.now()+no_ad_delay() if state=='WAIT_RETRY' else 0,key,idx))
+                finite.refresh(self,key)
+            from .landing_reliability import needs_repair
+            if needs_repair(self,key,idx):
+                self.db.execute("UPDATE links SET state='TECHNICAL_REPAIR',due=0 WHERE job=? AND idx=?",(key,idx))
                 finite.refresh(self,key)
             self.event(key,'uncertain_tab_closed_by_readback',{'idx':idx,'observation_success':False,'evidence':saved})
 
@@ -636,8 +657,10 @@ def publish_creation(q,key,content,discord):
 def worker_prompt(key,owner,idx,job):
     # Payload is data, not instructions. The fixed skill defines the authority.
     from . import landing_retry_policy as finite
+    from .landing_reliability import no_ad_delay
     finite_enabled=bool(finite.policy())
-    absence_rule=('Regra vigente de Rodolfo: até 3 ausências reais na fase inicial, com fechamento verificado e 60s entre tentativas; na terceira, pular para os próximos links. Depois de concluir a fila inicial, o scheduler autoriza UMA tentativa final por pendente. Se ainda falhar, o outbox reportará aqui para revisão de Rodolfo e não haverá nova repetição automática. Falha técnica não conta como ausência. Não zerar contadores nem reabrir PASSED. ' if finite_enabled else
+    delay=no_ad_delay()
+    absence_rule=(f'Regra vigente de Rodolfo: até 3 ausências reais na fase inicial, com fechamento verificado e {delay}s de espera artificial entre tentativas; zero significa fechar/verificar e reabrir sem espera. Na terceira, pular para os próximos links. Depois de concluir a fila inicial, o scheduler autoriza UMA tentativa final por pendente. Se ainda falhar, o outbox reportará aqui para revisão de Rodolfo e não haverá nova repetição automática. Falha técnica não conta como ausência. Não zerar contadores nem reabrir PASSED. ' if finite_enabled else
         'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões; após comprovar fechamento use reconcile SEM --resume para encerrar a visita como ATTENTION e liberar os outros links, mantendo o diagnóstico pendente sob sua responsabilidade. ')
     links=[]
     for link in job['links']:
@@ -650,9 +673,17 @@ def worker_prompt(key,owner,idx,job):
              'final_retry':job.get('final_retry',False)}
     context['stagnation_diagnosis']=job.get('stagnation_diagnosis',[])
     context['recent_technical_errors']=job.get('recent_technical_errors',[])
+    context['technical_probe_evidence_path']=job.get('technical_probe_evidence_path')
     context['repeated_technical_failure']=len(context['recent_technical_errors'])>=3 and all(x.get('idx')==idx for x in context['recent_technical_errors'])
     if context['stagnation_diagnosis'] or context['repeated_technical_failure']:
         absence_rule=('DIAGNÓSTICO OBRIGATÓRIO POR ESTAGNAÇÃO: houve mais de duas mensagens equivalentes sem progresso OU três erros técnicos consecutivos do mesmo alvo. Leia os erros recentes e o estado real; não repita o helper/caminho técnico que já falhou sem diagnosticar e reparar sua causa ou usar fallback nativo permitido e comprovado. Silenciar status não resolve a pendência. Preserve request, provas, abas alheias e os limites críticos; nunca restart nem writes Meta/GAM/WordPress/Router/financeiro. Se a última abertura real já funcionou, aproveite a prova da mesma tentativa em vez de navegar novamente; só resultado validado demonstra retomada. '+absence_rule)
+    if job.get('state')=='REPAIRING':
+        return ('REPARO TÉCNICO OBRIGATÓRIO DO OBSERVADOR PC1. Não abrir URL de landing nem chamar begin: o limite técnico foi atingido e a trava é do código. '
+            'Carregue landing-followup-operations e computer-use. Diagnostique os erros recentes e corrija somente a camada local do observador, sem alterar qualquer fluxo de campanha, driver compartilhado, permissões, credenciais ou reiniciar processos. '
+            'Depois do reparo, adquira a lease PC1 com HERMES_SESSION_ID REAL e execute pelo Python do Hermes scripts/ares-direct-traffic-repair.py --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --repair-note <diagnostico-e-correcao-reais>. '
+            'Esse runner executa testes e uma prova real de janela privada vazia, captura de10s e fechamento, sem URL/impressao. Só recibo real aprovado libera a próxima observação; não editar estados do banco para contornar. '
+            'Se o probe falhar, ler a prova parcial e reconciliar o alvo exato antes de outro input. Se PC1 ocupado, defer; guardar falha/cleanup e liberar lease em finally. '
+            'Sem necessidade humana presumida para falha técnica; responsabilidade de Ares até correção ou escalada indispensável comprovada.\n'+json.dumps(context,ensure_ascii=False))
     if job.get('state')=='RECONCILING':
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
             'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '
@@ -699,7 +730,7 @@ def worker_prompt(key,owner,idx,job):
         'Resolva a landing por fonte real, nunca a quiz; não gere impressões/cliques adicionais além da única observação autorizada. '
         'Se a lease PC1 estiver ocupada, use defer sem iniciar tentativa. '
         'Antes de abrir, persista begin; após resultado use result com evidências reais. '
-        +absence_rule+'Primeira ausência: feche/verifique e NO_AD; o scheduler espera 60s. '
+        +absence_rule+f'Primeira ausência: feche/verifique e NO_AD; espera artificial atual={delay}s. '
         'Uma única tentativa por execução. Não faça a retentativa dentro desta sessão. '
         'Não repita nenhuma entrada ambígua. Não reinicie Chrome/AdsPower/gateway. '
         'Mantenha stdout técnico local; finalize sem publicar mensagens externas.\n'

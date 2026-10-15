@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-15T17:08:22-04:00",
+    "updated_at": "2026-10-15T18:29:02-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -46001,18 +46001,23 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-direct-traffic-followup.py",
-      "size_bytes": 18855,
-      "modified_at": "2026-10-15T16:20:50-04:00"
+      "size_bytes": 19250,
+      "modified_at": "2026-10-15T18:25:10-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-direct-traffic-repair.py",
+      "size_bytes": 6494,
+      "modified_at": "2026-10-15T18:27:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-direct-traffic-sample.py",
-      "size_bytes": 4845,
-      "modified_at": "2026-10-15T08:08:44-04:00"
+      "size_bytes": 5219,
+      "modified_at": "2026-10-15T18:25:50-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-direct-traffic-ui.py",
-      "size_bytes": 3535,
-      "modified_at": "2026-10-15T08:05:12-04:00"
+      "size_bytes": 3948,
+      "modified_at": "2026-10-15T18:25:50-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
@@ -46311,8 +46316,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_desktop.py",
-      "size_bytes": 6392,
-      "modified_at": "2026-10-15T08:06:53-04:00"
+      "size_bytes": 8132,
+      "modified_at": "2026-10-15T18:25:49-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_finish_all.py",
@@ -46321,8 +46326,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py",
-      "size_bytes": 55071,
-      "modified_at": "2026-10-15T16:35:48-04:00"
+      "size_bytes": 58940,
+      "modified_at": "2026-10-15T18:23:50-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_followup_adapters.py",
@@ -46340,9 +46345,19 @@
       "modified_at": "2026-10-14T23:05:31-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_reliability.py",
+      "size_bytes": 3990,
+      "modified_at": "2026-10-15T18:25:03-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_retry_policy.py",
-      "size_bytes": 8812,
-      "modified_at": "2026-10-15T14:35:21-04:00"
+      "size_bytes": 9015,
+      "modified_at": "2026-10-15T18:23:21-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_screenshot_cleanup.py",
+      "size_bytes": 6055,
+      "modified_at": "2026-10-15T18:28:59-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/media_registry.py",
@@ -50499,15 +50514,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 534602,
-      "md5": "01f8ccf2e155620ce2caffdb0e7a4580",
-      "modified_at": "2026-10-15T17:07:33-04:00"
+      "size_bytes": 538658,
+      "md5": "335cc876f88447b2832c0b2d19632a59",
+      "modified_at": "2026-10-15T18:28:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 85437,
-      "md5": "83b86ae2953c31f0c49041a195ed881f",
-      "modified_at": "2026-10-15T17:07:02-04:00"
+      "md5": "93ce119ab3df072d4cb02fc4ad7aa959",
+      "modified_at": "2026-10-15T18:27:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -50536,8 +50551,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 892,
-      "md5": "8248d27899732e84ae8d6b2c733ade0a",
-      "modified_at": "2026-10-15T16:56:05-04:00"
+      "md5": "7ad2ccf1d29f6d54df8bfd881bf3e5b8",
+      "modified_at": "2026-10-15T18:26:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -50554,8 +50569,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 52789,
-      "md5": "5a7a52a74ad6dde7ded7b558a6f067a3",
-      "modified_at": "2026-10-15T17:05:10-04:00"
+      "md5": "27ec3d108d9132da7fe10ea202919579",
+      "modified_at": "2026-10-15T18:28:38-04:00"
     },
     {
       "path": "/root/mgs-agent/data/browser-resource-budget.json",
@@ -50572,8 +50587,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 3183,
-      "md5": "8aae37cef3050aec31b97e57172c12e3",
-      "modified_at": "2026-10-15T17:00:05-04:00"
+      "md5": "e4b600d0d7ace77029c1cb00e761bcc7",
+      "modified_at": "2026-10-15T18:15:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -50614,8 +50629,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "98ae9f049f0427461d1f992de8d04a0c",
-      "modified_at": "2026-10-15T16:49:02-04:00"
+      "md5": "2d45255274df50becb87c874b72d12f3",
+      "modified_at": "2026-10-15T18:19:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -50776,8 +50791,8 @@
     {
       "path": "/root/mgs-agent/data/finance-readonly-health-state.json",
       "size_bytes": 304,
-      "md5": "155a5eb5dc9438fc2283ceaab351b3f7",
-      "modified_at": "2026-10-15T16:34:29-04:00"
+      "md5": "30b867fc9a92859390cb0b9df47adcc1",
+      "modified_at": "2026-10-15T17:34:30-04:00"
     },
     {
       "path": "/root/mgs-agent/data/finance-sms-usage-contract.json",
@@ -50860,8 +50875,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7209,
-      "md5": "1e4977e63e6979828e9a88c3140bd1cb",
-      "modified_at": "2026-10-15T17:04:01-04:00"
+      "md5": "75ccddda7c5a6aa694fad97255b0d9ee",
+      "modified_at": "2026-10-15T18:24:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -50872,20 +50887,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 72726,
-      "md5": "d33f6b9a340cb9b92f0fa28755e77e8e",
-      "modified_at": "2026-10-15T17:05:02-04:00"
+      "md5": "c1072bf61cd32351898bef9034627da6",
+      "modified_at": "2026-10-15T18:25:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 101314,
-      "md5": "f1e4a30fc5afb1a2fc37ffdc97a354d8",
-      "modified_at": "2026-10-15T17:08:02-04:00"
+      "md5": "617b376b1ea2e0bab3bdefdbd9f0f61d",
+      "modified_at": "2026-10-15T18:29:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "7beec9ba2522751623ba999a86fcfcca",
-      "modified_at": "2026-10-15T17:08:02-04:00"
+      "md5": "19937607d415cac99383c72ca6d0ccab",
+      "modified_at": "2026-10-15T18:29:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -50938,8 +50953,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 826,
-      "md5": "95a08284cda8e823154bbd2bdbd78ebe",
-      "modified_at": "2026-10-15T17:08:18-04:00"
+      "md5": "b47485c7e1ef0f6bee120611fd5866c3",
+      "modified_at": "2026-10-15T18:28:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -50962,14 +50977,14 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 2388834,
-      "md5": "208c55b94d575973fa1219f3522213ad",
-      "modified_at": "2026-10-15T17:08:20-04:00"
+      "md5": "772a0b3d5e5b9d869eddfcead3daf352",
+      "modified_at": "2026-10-15T17:08:40-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 464167,
-      "md5": "758ebc25c7c11c3b65112133a6a49155",
-      "modified_at": "2026-10-15T16:57:09-04:00"
+      "size_bytes": 464974,
+      "md5": "d894d511cbacdb5dbf540f13cb3a4c82",
+      "modified_at": "2026-10-15T17:29:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -51016,8 +51031,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 121301,
-      "md5": "c2500583767fd8d839eb8b0255f6655d",
-      "modified_at": "2026-10-15T17:08:03-04:00"
+      "md5": "385fc5543da9ee9e7b6dfd236548dfdd",
+      "modified_at": "2026-10-15T18:29:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -51106,8 +51121,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 8215,
-      "md5": "d4574db3c92ffbee36b7eca56a2e3b1e",
-      "modified_at": "2026-10-15T16:26:10-04:00"
+      "md5": "786a62a748623a0060b21d86de2a792a",
+      "modified_at": "2026-10-15T18:26:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -51453,9 +51468,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1113,
-      "md5": "6a5c6ef9ef4a7cc4814ced435e896546",
-      "modified_at": "2026-10-15T16:39:02-04:00"
+      "size_bytes": 1082,
+      "md5": "e0c6836e1359be2debbaab703f85b40d",
+      "modified_at": "2026-10-15T17:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -51467,7 +51482,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-10-15T17:07:05-04:00"
+      "modified_at": "2026-10-15T18:22:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -51519,9 +51534,9 @@
     },
     {
       "path": "/root/mgs-agent/data/runcloud-alert-state.json",
-      "size_bytes": 22723,
-      "md5": "d7064aa782bb44b950b48e830be69e68",
-      "modified_at": "2026-10-15T17:00:49-04:00"
+      "size_bytes": 22724,
+      "md5": "275eea922fd17cc33492df8acba46afe",
+      "modified_at": "2026-10-15T18:15:44-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-keitaro-mct-state.json",
@@ -51550,8 +51565,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 87367,
-      "md5": "25b6972b10a5daad51a184f5274e5c5f",
-      "modified_at": "2026-10-15T16:57:14-04:00"
+      "md5": "23ec27729397e42da594c8f8fa28246d",
+      "modified_at": "2026-10-15T18:27:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -51561,9 +51576,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 970975,
-      "md5": "3dfb6a720c5d3926a2f63e2370262db7",
-      "modified_at": "2026-10-15T16:59:17-04:00"
+      "size_bytes": 971520,
+      "md5": "4e6df6747821f6efdc52dd606f599f08",
+      "modified_at": "2026-10-15T18:29:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -51629,7 +51644,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "a7632d01f23d8a9dd80863769e5265a1",
-      "modified_at": "2026-10-15T17:06:02-04:00"
+      "modified_at": "2026-10-15T18:26:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -51639,9 +51654,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17721,
-      "md5": "71aa4e8fd3210a864b72742b50675a3a",
-      "modified_at": "2026-10-15T16:24:04-04:00"
+      "size_bytes": 17596,
+      "md5": "02d6fa179a42a52c75dab3d652d04003",
+      "modified_at": "2026-10-15T18:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -51675,9 +51690,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3932,
-      "md5": "951cf8c88528b968e238c4e3b09e5044",
-      "modified_at": "2026-10-15T17:05:04-04:00"
+      "size_bytes": 3947,
+      "md5": "1b23f7d4839fd86cd3909cfed7ae38a6",
+      "modified_at": "2026-10-15T18:25:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
