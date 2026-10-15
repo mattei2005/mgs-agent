@@ -79,6 +79,18 @@
     "worker_expiry_alerts": false,
     "human_action_required_evidence": ["human_action_required=true", "required_action nonempty"],
     "recovery_owner": "ares",
+    "durable_recovery": {
+      "automatic_claim_states": ["NEEDS_RECONCILIATION", "ATTENTION"],
+      "active_recovery_state": "RECONCILING",
+      "timeout_retry_seconds": 60,
+      "safe_resume_requires_readback": true,
+      "technical_failures_consume_no_ad_limit": false,
+      "human_followup_required_to_resume": false,
+      "sampler": "scripts/ares-direct-traffic-sample.py",
+      "sampler_approval_is_not_visual_pass": true,
+      "completion_requires_real_pass_and_manager_delivery": true,
+      "authority_reaffirmation": "Rodolfo: a tarefa nao pode ficar abandonada nem depender de novas mensagens dele"
+    },
     "same_request_readback_before_retry": true,
     "critical_subset_unchanged": true,
     "supersedes": "Every accompaniment problem automatically posted to this thread"

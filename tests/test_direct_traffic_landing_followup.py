@@ -161,7 +161,8 @@ class FollowupTests(unittest.TestCase):
     def test_recoverable_error_silent(self):
         self.start();self.q.result(self.key,'worker',0,'ERROR',{**self.closure(),'diagnosis':'Offline fixture: cadence gap, agent recovery only'})
         self.assertIsNone(self.q.db.execute("SELECT 1 FROM messages WHERE key LIKE '%incident%'").fetchone())
-        self.assertTrue(self.q.db.execute("SELECT 1 FROM events WHERE kind='problem_kept_local'").fetchone())
+        self.assertTrue(self.q.db.execute("SELECT 1 FROM events WHERE kind='recoverable_retry_scheduled'").fetchone())
+        self.assertEqual(self.q.job(self.key)['state'],'READY')
 
     def test_human_action_flag_without_exact_action_is_silent(self):
         self.start();self.q.result(self.key,'worker',0,'ERROR',{**self.closure(),'diagnosis':'offline fixture','human_action_required':True})
@@ -229,7 +230,7 @@ class FollowupTests(unittest.TestCase):
 
     def test_preopen_mapping_error_does_not_claim_observation_success(self):
         self.start();self.q.result(self.key,'worker',0,'ERROR',{'diagnosis':'offline missing mapping','no_tab_opened':True})
-        self.assertEqual(self.q.job(self.key)['state'],'ATTENTION')
+        self.assertEqual(self.q.job(self.key)['state'],'READY')
 
     def test_manifest_adapter_preserves_query_bytes_and_tag_precedence(self):
         from ares_campaign_v3.landing_followup_adapters import effective_url
@@ -276,6 +277,77 @@ class FollowupTests(unittest.TestCase):
     def test_reconciliation_requires_real_closure_proof(self):
         self.start();self.clock.value+=601;self.q.recover_expired()
         with self.assertRaises(ValueError):self.q.reconcile(self.key,0,{'tab_closed_verified':False})
+
+    def test_expired_worker_is_claimed_for_recovery_without_navigation(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        self.assertIsNone(self.q.claim_recovery('repair'))
+        self.clock.value+=60;j=self.q.claim_recovery('repair')
+        self.assertEqual(j['state'],'RECONCILING');self.assertEqual(j['links'][0]['state'],'OPEN_INTENT')
+        self.assertIsNone(self.q.claim('other'));self.assertIsNone(self.q.claim_recovery('other'))
+
+    def test_recovery_safe_resume_is_not_success(self):
+        self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60
+        self.q.claim_recovery('repair');self.q.reconcile(self.key,0,self.closure('old-owned-tab'),resume=True)
+        j=self.q.job(self.key);self.assertEqual(j['state'],'READY');self.assertEqual(j['links'][0]['state'],'WAIT_RETRY')
+        self.assertIsNone(self.q.claim('next'));self.clock.value+=60
+        self.q.claim('next');self.q.begin(self.key,'next',0)
+        self.assertIsNone(self.q.db.execute('SELECT 1 FROM messages WHERE key=?',(self.key+':success',)).fetchone())
+
+    def test_recovery_can_defer_without_abandoning(self):
+        self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+        with self.assertRaises(ValueError):self.q.deferred(self.key,'wrong')
+        self.q.deferred(self.key,'repair');self.assertEqual(self.q.job(self.key)['state'],'NEEDS_RECONCILIATION')
+        self.assertIsNone(self.q.claim_recovery('again'));self.clock.value+=60
+        self.assertIsNotNone(self.q.claim_recovery('again'))
+
+    def test_technical_errors_do_not_consume_no_ad_limit(self):
+        self.start()
+        for n in range(3):
+            self.q.result(self.key,'worker',0,'ERROR',{**self.closure('technical-'+str(n)),'diagnosis':'offline cadence fixture'})
+            self.clock.value+=60;self.q.claim('worker');self.q.begin(self.key,'worker',0)
+        self.assertEqual(self.q.no_ad_count(self.key,0),0)
+        self.assertEqual(self.q.job(self.key)['links'][0]['attempt'],4)
+
+    def test_two_confirmed_no_ads_cannot_be_reopened_by_recovery(self):
+        self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
+        self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('tab-2'))
+        self.assertEqual(self.q.no_ad_count(self.key,0),2)
+        self.q.claim_recovery('repair')
+        with self.assertRaises(ValueError):self.q.reconcile(self.key,0,self.closure('tab-2'),resume=True)
+
+    def test_no_tab_recovery_requires_zero_input_readback(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        with self.assertRaises(ValueError):self.q.reconcile(self.key,0,{'no_tab_opened':True,'diagnosis':'offline'},resume=True)
+        self.q.reconcile(self.key,0,{'no_tab_opened':True,'browser_inputs_zero_verified':True,'diagnosis':'offline verified no inputs'},resume=True)
+        self.assertEqual(self.q.job(self.key)['state'],'READY')
+
+    def test_human_needed_after_safe_cleanup_does_not_repeat_worker(self):
+        self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+        e={**self.closure(),'human_action_required':True,'required_action':'Offline fixture: restore human login','diagnosis':'offline authentication gate'}
+        self.q.request_human(self.key,'repair',e)
+        self.assertEqual(self.q.job(self.key)['state'],'WAITING_HUMAN');self.assertIsNone(self.q.claim_recovery('another'))
+
+    def test_uncertain_human_gate_blocks_all_new_inputs(self):
+        self.start()
+        e={'human_action_required':True,'required_action':'Offline fixture: unlock desktop','diagnosis':'offline screen locked'}
+        self.q.request_human(self.key,'worker',e)
+        self.assertEqual(self.q.job(self.key)['state'],'WAITING_HUMAN_UNCLOSED')
+        self.assertIsNone(self.q.claim('another'));self.assertIsNone(self.q.claim_recovery('another'))
+
+    def test_dispatcher_repairs_nonready_job_instead_of_idle(self):
+        path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'
+        spec=importlib.util.spec_from_file_location('landing_recovery_cli_test',path)
+        assert spec is not None and spec.loader is not None
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60
+        def fake_run(command,**kw):
+            if command[-1]=='status':return SimpleNamespace(returncode=0,stdout='{"locked":false}')
+            j=self.q.job(self.key);self.assertEqual(j['state'],'RECONCILING')
+            self.q.reconcile(self.key,0,self.closure('closed-by-repair'),resume=True)
+            return SimpleNamespace(returncode=0)
+        with patch.object(cli,'BASE',Path(__file__).resolve().parents[1]),patch.object(cli,'native_busy',return_value=False),patch.object(cli.subprocess,'run',side_effect=fake_run),patch.object(cli,'Discord',return_value=self.dc):
+            result=cli.tick(self.q)
+        self.assertEqual(result['state'],'READY');self.assertEqual(self.dc.posts,1)
 
     def second_account(self):
         p=copy.deepcopy(self.payload)

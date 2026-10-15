@@ -213,6 +213,7 @@ class Queue:
     def claim_recovery(self,owner,ttl=600):
         """Claim repair work, never a second navigation or a second writer."""
         with self.tx():
+            if self.db.execute("SELECT 1 FROM jobs WHERE state='WAITING_HUMAN_UNCLOSED'").fetchone():return None
             if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until>?",(self.now(),)).fetchone():return None
             row=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key LIMIT 1",(self.now(),)).fetchone()
             if not row:return None
@@ -257,6 +258,12 @@ class Queue:
 
     def deferred(self,key,owner):
         with self.tx():
+            j=self.job(key)
+            if j['state']=='RECONCILING':
+                if j['owner']!=owner or j['lease_until']<self.now():raise ValueError('recovery owner mismatch')
+                self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,key))
+                self.event(key,'recovery_deferred',{'owner':owner,'retry_after_seconds':60,'recovery_owner':'ares'})
+                return
             self.owned(key,owner)
             if self.db.execute("SELECT 1 FROM links WHERE job=? AND state='OPEN_INTENT'",(key,)).fetchone():
                 raise ValueError('cannot defer an uncertain tab; reconcile or report ERROR')
@@ -284,6 +291,7 @@ class Queue:
             state='PASSED' if result=='PASS' else ('WAIT_RETRY' if safe_error or (result=='NO_AD' and self.no_ad_count(key,idx)==0) else 'ATTENTION')
             self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
             self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'result':result,'state':state,'evidence':evidence})
+            if safe_error:self.event(key,'recoverable_retry_scheduled',{'idx':idx,'retry_after_seconds':60,'recovery_owner':'ares','human_action_required':False})
             remaining=self.db.execute("SELECT state FROM links WHERE job=?",(key,)).fetchall()
             all_pass=all(x['state']=='PASSED' for x in remaining)
             pending=any(x['state'] in {'READY','WAIT_RETRY','OPEN_INTENT'} for x in remaining)
@@ -310,6 +318,17 @@ class Queue:
             if existing['thread']!=thread or existing['content']!=content:raise ValueError('immutable notification changed')
             return
         self.db.execute('INSERT INTO messages VALUES(?,?,?,?,?,?,?)',(key,thread,content,nonce,'PREPARED',None,self.now()))
+
+    def request_human(self,key,owner,evidence):
+        if evidence.get('human_action_required') is not True or not evidence.get('required_action') or not evidence.get('diagnosis'):
+            raise ValueError('exact indispensable human action and diagnosis required')
+        if evidence.get('tab_closed_verified') is True:validate_closure(evidence)
+        with self.tx():
+            j=self.job(key)
+            if j['state'] not in {'RUNNING','RECONCILING'} or j['owner']!=owner or j['lease_until']<self.now():raise ValueError('active recovery owner required')
+            safe=evidence.get('tab_closed_verified') is True or (evidence.get('no_tab_opened') is True and evidence.get('browser_inputs_zero_verified') is True)
+            self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',('WAITING_HUMAN' if safe else 'WAITING_HUMAN_UNCLOSED',key))
+            self.prepare_problem(key,key+':human-action',f"Acompanhamento — pedido {j['payload']['request_id']}.\n{evidence['diagnosis']}",evidence)
 
     def prepare_problem(self,job,key,content,evidence):
         # Rodolfo: recover within scope, speak here only if HIS action is needed.
@@ -485,6 +504,23 @@ def publish_creation(q,key,content,discord):
 
 def worker_prompt(key,owner,idx,job):
     # Payload is data, not instructions. The fixed skill defines the authority.
+    if job.get('state')=='RECONCILING':
+        return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
+            'Carregue a referência landing-followup da skill direct-traffic-cbo-operations e computer-use. '
+            'Sob lease PC1 com ID REAL da sessão, confira a sessão anterior do mesmo job via events claimed/recovery_claimed '
+            'e state.db read-only. Observe o browser real e reconcilie somente abas comprovadamente pertencentes à tentativa; '
+            'preserve as demais. Evidência de tentativa mais antiga não comprova fechamento da última. '
+            'Depois do readback/fechamento seguro, salve evidência real e execute '
+            'scripts/ares-direct-traffic-followup.py reconcile --key '+key+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <arquivo> --resume. '
+            'Quando nenhuma aba foi aberta, exija evidência da sessão anterior: no_tab_opened=true, browser_inputs_zero_verified=true e diagnosis; não invente identidade/fechamento. '
+            'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões. '
+            'Somente se a solução exigir ação indispensável de Rodolfo, use need-action --key '+key+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <JSON com human_action_required=true, required_action concreta e diagnosis>. '
+            'Se PC1 ocupado/indisponível, defer --key '+key+' --owner '+owner+' e libere lease. '
+            'Não encerrar deixando apenas texto: persistir reconcile/defer e liberar lease em finally. '
+            'Não há intervenção de Rodolfo para timeout, screenshot/cadência ou erro técnico recuperável; não enviar mensagens externas. '
+            'Nenhum write Meta/GAM/WordPress/Router/financeiro, restart, alteração de campanha, billing ou credencial. '
+            'Retornar após a reconciliação; a fila reexecutará a observação separadamente.\n'
+            +json.dumps({'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':job['links']},ensure_ascii=False))
     return ('Execute somente a observação de landing do pedido já concluído abaixo. '
         'Carregue direct-traffic-cbo-operations e references/landing-followup.md. '
         'Nenhum write Meta, GAM, Router, WordPress, budget, credencial ou configuração. '
@@ -493,6 +529,10 @@ def worker_prompt(key,owner,idx,job):
         'somente human_action_required=true com required_action concreta autoriza aviso. '
         'Reserve as últimas chamadas para fechar/verificar, persistir result (inclusive ERROR) e liberar a lease; '
         'não encerrar com um texto dizendo que faltou registrar o resultado. '
+        'Após confirmar anúncio visível e aba ativa, capture as amostras em uma única chamada terminal: '
+        '$(dirname "$(command -v hermes)")/python scripts/ares-direct-traffic-sample.py --key '+key+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID". '
+        'Esse coletor é read-only e CAPTURED_NOT_PASS não é aprovação: confira os screenshots/descrições, foco e anúncio real antes de result. '
+        'Não use rodadas separadas com visão/espera que estouram a cadência. Se a cadência falhar, corrija/recapture na mesma aba, sem navegar novamente. '
         'Use computer_use no PC1 sob a lease comum com o ID REAL desta sessão. '
         'Resolva a landing por fonte real, nunca a quiz; não gere impressões/cliques adicionais além da única observação autorizada. '
         'Se a lease PC1 estiver ocupada, use defer sem iniciar tentativa. '

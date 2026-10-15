@@ -114,6 +114,8 @@ def main():
     a=s.add_parser('reconcile');a.add_argument('--key',required=True);a.add_argument('--index',type=int,required=True)
     a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
     a.add_argument('--resume',action='store_true',help='Resume technical failure only after verified closure, never PASS')
+    a=s.add_parser('need-action');a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
+    a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
     for command in ('begin','defer','result'):
         a=s.add_parser(command);a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
         if command!='defer':
@@ -140,7 +142,10 @@ def main():
             try:fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
             except BlockingIOError:return {'state':'INTAKE_BUSY'}
             return Intake(q).tick()
-    if args.command in {'begin','result','reconcile'}:require_pc1_lease(args.pc1_session_id)
+    if args.command in {'begin','result','reconcile','need-action'}:require_pc1_lease(args.pc1_session_id)
+    if args.command=='need-action':
+        q.request_human(args.key,args.owner,json.loads(args.evidence.read_text()))
+        return {'state':q.job(args.key)['state']}
     if args.command=='reconcile':
         q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()),resume=args.resume)
         return {'state':q.job(args.key)['state'],'observation_success':False}

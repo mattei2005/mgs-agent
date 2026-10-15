@@ -32,6 +32,7 @@ def main():
     p.add_argument('--pc1-session-id',required=True);a=p.parse_args()
     here=Path(__file__).resolve().parent
     spec=importlib.util.spec_from_file_location('landing_control',here/'ares-direct-traffic-followup.py')
+    assert spec is not None and spec.loader is not None
     cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
     cli.require_pc1_lease(a.pc1_session_id)
     q=cli.Queue();job=q.owned(a.key,a.owner)

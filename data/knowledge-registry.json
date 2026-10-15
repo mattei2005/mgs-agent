@@ -5113,6 +5113,24 @@
         "zeus"
       ],
       "domain": "growth",
+      "effective_at": "2026-10-15T02:21:40+00:00",
+      "id": "DIRECT-TRAFFIC-LANDING-AUTONOMOUS-CONTINUITY-1559932317861158993",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Acompanhamento sob responsabilidade Ares ate concluir; recuperacao automatica e so acao humana indispensavel gera contato",
+      "updated_at": "2026-10-15T02:21:40+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
       "effective_at": "2026-10-14T16:03:14+00:00",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
       "kind": "policy",
@@ -5136,10 +5154,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "DIRECT-TRAFFIC-LANDING-AUTONOMOUS-CONTINUITY-1559932317861158993",
       "title": "Ares recupera falhas; avisar Rodolfo somente quando uma acao dele for indispensavel",
-      "updated_at": "2026-10-15T01:21:20+00:00"
+      "updated_at": "2026-10-15T02:21:40+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
@@ -11968,5 +11986,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T02:12:25+00:00"
+  "updated_at": "2026-10-15T02:21:40+00:00"
 }
