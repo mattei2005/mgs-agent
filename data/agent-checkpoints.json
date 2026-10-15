@@ -1173,12 +1173,12 @@
     {
       "agent": "ares",
       "id": "ARES-PC1-LINK-OPENING-REVIEW-1559932317861158993",
-      "next_step": "Implementar/testar compatibilidade e novosgates; exercitar probePC1semURLsemimpressao; ativar nofimsegurodoexecutor; purgar somentefotosdetrabalhosCOMPLETEcomrecibos preservados; inventario/REPORT e readback.",
-      "objective": "Aplicar correcoes autorizadas somente noexecutor PC1: retryzero, gatefisico, falhaslimitadas, cleanup screenshotsposconclusao",
-      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015;data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
-      "state": "in_progress_authorized_implementation: rodolfo aprovou retirar60s entreno_ad, limparscreenshotsaposvalidacao/conclusao, corrigirabertura/captura e travasdefalha e lentidao. backup9arquivos esqlitefeito. novo jobobservador vivo preservado; ativar politica apenas emfronteirasegura, semreinicio nem campanhas.",
+      "next_step": "Operacao normal apenas para itensnovos/pendentes; nunca reabrirPASS. Monitorar execucao real sem afirmar tempoE2E por teste de janela vazia. Reparo exige recibo real e prova da tentativa atual; fotospendentes ficamateconclusao, cleanupidempotente aposCOMPLETE+GET.",
+      "objective": "Correcoes somente executorPC1: retentativa imediata, trava tecnica, selecao devida e limpeza apos conclusao",
+      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015/change-inventory.json;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/landing-followup/probes/pc1-reliability-caption-fix-20261015/technical-probe.json",
+      "state": "completed_verified: codigo/contrato/skillv0.3.0 ativos.193testes pass. no_ad0s comretry-now mesma sessao(0.707/8.609sreclaim reais),3+1 e10svisiveis mantidos. terceiroerro/expiry travatechnical_repair, libera so apos testes+probe real; capturaausente/antiga nao virano_ad. janela/close corrigidos, probenativo vazio aprovado13.684s e6janelas preservadas, semurls.348screenshotsconcluidos removidos244.2mib, metadados/pendentes protegidos. timerexisting retomou novoslinks aposleaseparentliberada. report-infra1560427613007249541get. semalterarworkflowcampanha/restart/cron.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T22:20:59+00:00"
+      "updated_at": "2026-10-15T23:03:00+00:00"
     },
     {
       "agent": "ares",
@@ -3479,6 +3479,16 @@
       "state": "completed",
       "thread_id": "1555704911805808712",
       "updated_at": "2026-10-02T23:58:08+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-VPS-CLEANUP-1560412670132355133",
+      "next_step": "Validar dependências, recuperação mais recente e referências; congelar manifesto e apresentar confirmação destrutiva.",
+      "objective": "Preparar limpeza exata das quatro classes autorizadas, sem afetar dados da dash; executar apenas após confirmação Critical do manifesto.",
+      "source": "discord:1560428152994402345;review:/root/.hermes/profiles/zeus/cache/scratch/disk-review-1560415273041920183/review-result.json",
+      "state": "preparing_exact_manifest_no_deletion",
+      "thread_id": "1560412670132355133",
+      "updated_at": "2026-10-15T23:05:10+00:00"
     },
     {
       "agent": "zeus",
@@ -6072,5 +6082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T22:36:37+00:00"
+  "updated_at": "2026-10-15T23:05:10+00:00"
 }
