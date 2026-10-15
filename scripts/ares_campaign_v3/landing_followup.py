@@ -232,7 +232,24 @@ class Queue:
             if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until>?",(self.now(),)).fetchone():return None
             self.activate_authorized_return()
             rows=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key",(self.now(),)).fetchall()
-            row=next((r for r in rows if r['state']=='NEEDS_RECONCILIATION' or not self.target_waits_for_others(r['key'])),None)
+            # Closed diagnostic work must not repeatedly consume the only
+            # desktop lane while due observations are waiting. Uncertain tabs
+            # still have absolute recovery priority; no proof means no bypass.
+            due=self.db.execute("SELECT 1 FROM jobs j JOIN links l ON l.job=j.key WHERE j.state='READY' AND j.reply_id IS NOT NULL AND l.state IN ('READY','WAIT_RETRY') AND l.due<=?",(self.now(),)).fetchone()
+            def already_closed(key):
+                outstanding=self.db.execute("SELECT state,evidence FROM links WHERE job=? AND state!='PASSED'",(key,)).fetchall()
+                if not outstanding:return False
+                for link in outstanding:
+                    if link['state']!='ATTENTION':return False
+                    try:
+                        e=json.loads(link['evidence'] or '{}')
+                        if e.get('no_tab_opened') is True:
+                            if e.get('browser_inputs_zero_verified') is not True or not e.get('diagnosis'):return False
+                        else:validate_closure(e)
+                    except (ValueError,KeyError,TypeError,OSError):return False
+                return True
+            row=next((r for r in rows if r['state']=='NEEDS_RECONCILIATION' or
+                (not self.target_waits_for_others(r['key']) and not (due and already_closed(r['key'])))),None)
             if not row:return None
             key=row['key']
             self.db.execute("UPDATE jobs SET state='RECONCILING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))

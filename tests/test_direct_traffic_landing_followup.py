@@ -496,6 +496,39 @@ class FollowupTests(unittest.TestCase):
         with self.q.tx():self.q.db.execute("UPDATE jobs SET state='OBSERVED' WHERE key=?",(peer,))
         self.assertFalse(self.q.target_waits_for_others(self.key));self.assertEqual(self.q.claim_recovery('repair')['key'],self.key)
 
+    def test_closed_attention_does_not_starve_due_peer(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        self.q.reconcile(self.key,0,self.closure('closed-for-diagnosis'))
+        peer=self.second_account();self.clock.value+=61
+        self.assertIsNone(self.q.claim_recovery('repeat-cleanup'))
+        self.assertEqual(self.q.claim('next-observation')['key'],peer)
+        self.assertEqual(self.q.job(self.key)['state'],'ATTENTION')
+        self.assertEqual(self.q.job(self.key)['links'][0]['attempt'],1)
+        self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='open_intent'").fetchone()[0],1)
+
+    def test_attention_without_closure_keeps_recovery_priority(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        with self.q.tx():
+            self.q.db.execute("UPDATE jobs SET state='ATTENTION',lease_until=NULL WHERE key=?",(self.key,))
+            self.q.db.execute("UPDATE links SET state='ATTENTION',evidence='{}' WHERE job=?",(self.key,))
+        self.second_account()
+        self.assertEqual(self.q.claim_recovery('required-cleanup')['key'],self.key)
+        self.assertIsNone(self.q.claim('must-not-open'))
+
+    def test_closed_diagnosis_remains_claimable_after_runnable_peers(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        self.q.reconcile(self.key,0,self.closure('diagnosis-still-owned'))
+        self.clock.value+=61
+        self.assertEqual(self.q.claim_recovery('diagnose')['key'],self.key)
+
+    def test_closed_proof_does_not_skip_new_open_intent(self):
+        self.start();self.clock.value+=601;self.q.recover_expired()
+        with self.q.tx():
+            self.q.db.execute("UPDATE jobs SET state='ATTENTION',lease_until=NULL WHERE key=?",(self.key,))
+            self.q.db.execute("UPDATE links SET evidence=? WHERE job=?",(json.dumps(self.closure('older-closed-tab')),self.key))
+        self.second_account()
+        self.assertEqual(self.q.claim_recovery('new-open-cleanup')['key'],self.key)
+
     def test_priority_never_skips_uncertain_closure(self):
         self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60
         peer=self.second_account();self.priority_fixture([peer])
