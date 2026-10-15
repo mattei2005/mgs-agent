@@ -273,9 +273,9 @@ class Queue:
         # own explicit user instruction, not an automatic technical retry.
         try:rule=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
         except (OSError,ValueError):return False
-        permission=rule.get('authorized_new_observation_cycle_after_peers') or {}
+        permission=rule.get('authorized_new_observation_cycle') or rule.get('authorized_new_observation_cycle_after_peers') or {}
         generation=permission.get('authority_message_id');key=rule.get('target_job');idx=rule.get('target_index')
-        if rule.get('mode')!='OTHER_CURRENT_WORK_BEFORE_C121' or permission.get('enabled') is not True or not re.fullmatch(r'[0-9]{15,20}',str(generation or '')) or permission.get('maximum_no_ad_attempts',2)!=2 or not key or self.target_waits_for_others(key):return False
+        if rule.get('mode') not in {'OTHER_CURRENT_WORK_BEFORE_C121','C121_FIRST_THEN_FIFO'} or permission.get('enabled') is not True or not re.fullmatch(r'[0-9]{15,20}',str(generation or '')) or permission.get('maximum_no_ad_attempts',2)!=2 or not key or self.target_waits_for_others(key):return False
         row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone();job=self.db.execute('SELECT state FROM jobs WHERE key=?',(key,)).fetchone()
         if not row or not job or row['state']!='ATTENTION' or job['state']!='ATTENTION':return False
         for r in self.db.execute("SELECT detail FROM events WHERE job=? AND kind='priority_retry_cycle_started'",(key,)):
@@ -293,7 +293,10 @@ class Queue:
             # One active observer globally, regardless of account/channel. Other
             # campaign writers remain independent and are never locked by PC1.
             if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone(): return None
-            r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY created,key LIMIT 1").fetchone()
+            try:priority=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
+            except (OSError,ValueError):priority={}
+            target=priority.get('target_job') if priority.get('mode')=='C121_FIRST_THEN_FIFO' else None
+            r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY CASE WHEN key=? THEN 0 ELSE 1 END,created,key LIMIT 1",(target,)).fetchone()
             if not r:return None
             key=r['key']
             first=self.db.execute("SELECT * FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY','OPEN_INTENT') ORDER BY idx LIMIT 1",(key,)).fetchone()

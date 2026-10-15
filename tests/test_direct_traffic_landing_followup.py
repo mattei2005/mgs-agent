@@ -551,6 +551,38 @@ class FollowupTests(unittest.TestCase):
         self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='priority_retry_cycle_started'").fetchone()[0],1)
         self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='observation_result'").fetchone()[0],4)
 
+    def immediate_priority_fixture(self,peers):
+        cfg=self.priority_fixture(peers);rule=cfg['current_priority']
+        rule['mode']='C121_FIRST_THEN_FIFO'
+        rule['authorized_new_observation_cycle']={'enabled':True,'authority_message_id':'150000000000000099','maximum_no_ad_attempts':2}
+        p=self.root/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json';p.write_text(json.dumps(cfg))
+        return cfg
+
+    def test_c121_immediate_instruction_overrides_defer_then_resumes_fifo(self):
+        self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
+        self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('old-tab-2'))
+        peer=self.second_account();self.immediate_priority_fixture([peer])
+        with self.q.tx():self.q.db.execute('UPDATE jobs SET created=? WHERE key=?',(self.clock.value+100,self.key))
+        self.assertFalse(self.q.target_waits_for_others(self.key));self.q.claim_recovery('selector')
+        self.assertEqual(self.q.job(self.key)['state'],'READY');self.assertEqual(self.q.no_ad_count(self.key,0),0)
+        self.assertIsNone(self.q.claim('waiting-c121'));self.clock.value+=60
+        self.assertEqual(self.q.claim('c121-now')['key'],self.key)
+        self.q.begin(self.key,'c121-now',0);self.q.result(self.key,'c121-now',0,'PASS',self.success())
+        self.assertEqual(self.q.claim('fifo-next')['key'],peer)
+        self.assertEqual(self.q.job(self.key)['links'][0]['attempt'],3)
+        self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='priority_retry_cycle_started'").fetchone()[0],1)
+
+    def test_immediate_priority_does_not_interrupt_active_recovery(self):
+        self.start();peer=self.second_account();cfg=self.immediate_priority_fixture([peer])
+        self.assertIsNone(self.q.claim_recovery('parallel'));self.assertIsNone(self.q.claim('parallel'))
+        self.assertEqual(self.q.job(self.key)['owner'],'worker')
+
+    def test_immediate_priority_report_no_longer_says_c121_last(self):
+        from ares_campaign_v3 import landing_followup_reporting as reports
+        self.arm();peer=self.second_account();cfg=self.immediate_priority_fixture([peer])
+        s=reports.snapshot(self.q,cfg['progress_reporting']);text=reports.render(s,self.q,cfg['progress_reporting'])
+        self.assertEqual(s['phase'],'C121_FIRST');self.assertIn('C121 primeiro',text);self.assertNotIn('fica para o fim',text)
+
     def test_safe_c121_intervention_note_waits_until_other_jobs(self):
         self.start();peer=self.second_account();self.priority_fixture([peer])
         e={**self.closure(),'human_action_required':True,'required_action':'Offline fixture: inspect publisher setting','diagnosis':'offline serving investigation'}

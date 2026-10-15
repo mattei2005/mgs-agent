@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Continuar os demais da rodada mantendo FIFO e uma URL por vez; nao reivindicar diagnostico fechado C121 enquanto pares pendentes. Se recovery antigoC121 ativo, concluir apenas cleanup indispensavel, liberar lease e deixar ATTENTION. Pares OBSERVED contam para liberar retorno sem deadlock da confirmacao humana coletiva; ao final retomar C121 automaticamente com rodada autorizada, preservar provas/contadores anteriores. Informes automaticos nesta thread a cada15min ou marcos, GET antes de declarar entrega, parar serie apos escopoCOMPLETE. Nova mensagem do operador nao e pre-requisito; so pedir acao indispensavel real.",
-      "objective": "Priorizar todos os demais acompanhamentos desta rodada e depois voltar a C121; conduzir ate validacao real e informar progresso automaticamente",
-      "source": "discord:1559932317861158993#1560151664692822079;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/c121-last-reporting/change-inventory.json;data/ares/meta-ads/landing-followup/queue.sqlite3",
-      "state": "ordem rodolfo1560151664692822079 aplicada no contrato e no selector: c121 attention fica adiada enquanto11pedidos pares congelados ainda executaveis; aba incerta exige cleanup seguro sem interrupcao cega. novo retorno a c121 autorizado uma vez apos pares, max2no_ad na nova rodada sem apagar historico antigo.13jobs no escopo de informes; progresso deterministico a cada15min, marcos de lote humano e retornoc121; usa timers existentes do intake/consumidor, nenhum cron novo. informe inicial1560153754366648344 entregue aqui e get conferido. erros tecnicos seguem locais/human-action-only; excecao somente status solicitado.119 testes offlinepass; prioridade real lida como defertrue; skill/ref atualizadas. nao declarar todoslinks concluidos.",
+      "next_step": "Concluir cleanup seguro do f44; selecionar C121 index1 como proxima observacao; registrar resultado real e retomar FIFO; atualizar status somente com evidencias. Sem writes Meta/GAM/WP/Router/financeiro e sem restart.",
+      "objective": "Observar C121 primeiro e depois continuar os demais na ordem FIFO, com validacao real e avisos conferidos",
+      "source": "discord:1559932317861158993#1560253186277646380;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/c121-first-20261015/change-inventory.json",
+      "state": "rodolfo1560253186277646380 supersede adiamento1560151664692822079: contrato c121_first_then_fifo aplicado, nova rodada c121 autorizada uma vez max2no_ad preservando historico.126 testes passaram. tentativa anterior f44 exige reconciliacao de fechamento antes de nova navegacao; nao interromper lease viva nem duplicar observador.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T05:13:52+00:00"
+      "updated_at": "2026-10-15T11:31:14+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T05:13:52+00:00"
+  "updated_at": "2026-10-15T11:31:14+00:00"
 }

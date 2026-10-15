@@ -29,6 +29,10 @@ def snapshot(q,cfg):
     phase=('ALL_DONE' if all_done else 'CONFIRMING_NOTICES' if all_validated else
            'OTHERS_C121_DONE' if others_pending and target_done else 'OTHERS_FIRST' if others_pending else
            'RETURN_C121' if target and not target_done else 'NORMAL')
+    if priority.get('mode')=='C121_FIRST_THEN_FIFO' and phase not in {'ALL_DONE','CONFIRMING_NOTICES'}:
+        t=next((j for j in jobs if j['key']==target),None);idx=priority.get('target_index',0)
+        exhausted=bool(t and t['links'][idx]['state']=='ATTENTION' and q.no_ad_count(target,idx)>=2)
+        phase='FIFO_C121_DONE' if target_done else 'FIFO_C121_DIAGNOSIS' if exhausted else 'C121_FIRST'
     return {'counts':dict(counts),'active_jobs':len(active),'recovery_jobs':len(repair),'completed_human_groups':len(groups),'phase':phase,'total':sum(counts.values()),'all_done':all_done}
 
 
@@ -39,7 +43,10 @@ def render(s,q,cfg):
            f"✅ Links validados: **{c.get('PASSED',0)}** de **{s['total']}**.",
            f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)}**.",
            f'🔄 Executor: {executor}.']
-    if s['phase']=='OTHERS_FIRST':lines.append('**Prioridade mantida: resolver os demais primeiro. C121 fica para o fim.**')
+    if s['phase']=='C121_FIRST':lines.append('**Prioridade atual: C121 primeiro; depois, os demais na ordem da fila. Fechamento incerto exige conferência antes da próxima visita.**')
+    elif s['phase']=='FIFO_C121_DONE':lines.append('**C121 validada; os demais seguem na ordem da fila.**')
+    elif s['phase']=='FIFO_C121_DIAGNOSIS':lines.append('**C121 sem anúncio após duas tentativas desta rodada; diagnóstico preservado, sem nova visita automática. Os demais seguem na ordem da fila.**')
+    elif s['phase']=='OTHERS_FIRST':lines.append('**Prioridade mantida: resolver os demais primeiro. C121 fica para o fim.**')
     elif s['phase']=='OTHERS_C121_DONE':lines.append('**C121 já validada; o executor continua os demais links da rodada.**')
     elif s['phase']=='RETURN_C121':lines.append('**Os demais trabalhos executáveis desta rodada foram processados. Próxima etapa: retomar a C121.**')
     elif s['phase']=='CONFIRMING_NOTICES':lines.append('**Links validados; falta concluir a conferência dos avisos aos gestores.**')

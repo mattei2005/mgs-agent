@@ -129,8 +129,9 @@
   "backfill_existing_requests": false,
   "first_production_test": "Rodolfo via a genuine authorized manager request; no test campaign now",
   "current_priority": {
-    "mode": "OTHER_CURRENT_WORK_BEFORE_C121",
-    "authority_message_id": "1560151664692822079",
+    "mode": "C121_FIRST_THEN_FIFO",
+    "authority_message_id": "1560253186277646380",
+    "supersedes_authority_message_id": "1560151664692822079",
     "authority_thread_id": "1559932317861158993",
     "target_job": "178682693a0c044083c4c21749d452846f59eb6c1ae2fa2a4d1a6a280df11b83",
     "target_index": 1,
@@ -150,10 +151,10 @@
     "scope_frozen_at": "2026-10-15T00:51:18.908033-04:00",
     "do_not_interrupt_active_cleanup": true,
     "no_implicit_extra_landing_visit": true,
-    "authorized_new_observation_cycle_after_peers": {
+    "authorized_new_observation_cycle": {
       "enabled": true,
-      "authority_message_id": "1560151664692822079",
-      "scope": "Only the deferred C121, after the frozen peers are processed",
+      "authority_message_id": "1560253186277646380",
+      "scope": "C121 now after mandatory cleanup of any uncertain owned tab; then resume the remaining work in FIFO order",
       "maximum_no_ad_attempts": 2,
       "preserve_all_previous_attempts": true,
       "once_per_authority_message": true
@@ -162,7 +163,7 @@
   "progress_reporting": {
     "enabled": true,
     "authority_message_id": "1560151664692822079",
-    "generation": "1560151664692822079",
+    "generation": "1560253186277646380",
     "thread_id": "1559932317861158993",
     "interval_seconds": 900,
     "on_human_batch_completed": true,
