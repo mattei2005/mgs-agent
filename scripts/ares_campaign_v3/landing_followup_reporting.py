@@ -44,10 +44,10 @@ def render(s,q,cfg):
            f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)}**.",
            f'🔄 Executor: {executor}.']
     if s['phase']=='C121_FIRST':lines.append('**Prioridade atual: C121 primeiro; depois, os demais na ordem da fila. Fechamento incerto exige conferência antes da próxima visita.**')
-    elif s['phase']=='FIFO_C121_DONE':lines.append('**C121 validada; os demais seguem na ordem da fila.**')
+    elif s['phase'] in {'FIFO_C121_DONE','OTHERS_C121_DONE'}:pass  # Completed priority is history, not a recurring note.
     elif s['phase']=='FIFO_C121_DIAGNOSIS':lines.append('**C121 sem anúncio após duas tentativas desta rodada; diagnóstico preservado, sem nova visita automática. Os demais seguem na ordem da fila.**')
     elif s['phase']=='OTHERS_FIRST':lines.append('**Prioridade mantida: resolver os demais primeiro. C121 fica para o fim.**')
-    elif s['phase']=='OTHERS_C121_DONE':lines.append('**C121 já validada; o executor continua os demais links da rodada.**')
+
     elif s['phase']=='RETURN_C121':lines.append('**Os demais trabalhos executáveis desta rodada foram processados. Próxima etapa: retomar a C121.**')
     elif s['phase']=='CONFIRMING_NOTICES':lines.append('**Links validados; falta concluir a conferência dos avisos aos gestores.**')
     elif s['phase']=='ALL_DONE':lines.append('**Rodada concluída: validações integrais e confirmações aos gestores conferidas.**')

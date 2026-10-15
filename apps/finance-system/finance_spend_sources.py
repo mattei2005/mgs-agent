@@ -67,17 +67,46 @@ def collect_account(a,start,end,meta,token,headers):
   out.update(status='ok',currency=currency,timezone=tz,daily=complete,aggregate_total=str(total),sum_daily=str(summed),reconciliation_difference=str(summed-total),reconciliation_tolerance=str(tolerance),pagination_complete=True)
  except Exception as e:out['error']=str(e) if isinstance(e,SourceError) else type(e).__name__
  return out
+READ_RETRY_SECONDS=300
+READ_RETRY_AUTHORITY='1560288130085560351'
+def retryable_read_error(error):
+ """Read-only transient candidates; never retry credentials/billing/permissions."""
+ text=str(error or '')
+ if text in {'AssertionError','TimeoutError','URLError','ConnectionResetError','ConnectionError','RemoteDisconnected','IncompleteRead'}:return True
+ if re.search(r'(?:Meta|Google) HTTP (?:429|5\d\d)\b',text):return True
+ match=re.search(r'Meta HTTP \d+ code (\d+)\b',text)
+ return bool(match and int(match[1]) in {1,2,4,17,32,613,80004})
+
+def retry_failed_batch(rows,read_one,*,status_key='status',error_key='error',history_key='collection_attempts',evidence_path=None):
+ """One delayed read-only round, only failed rows, bounded shared wait."""
+ rows=[dict(row) for row in rows];pending=[];streak=0;stopped=False
+ for index,row in enumerate(rows):
+  status=row[status_key];row[history_key]=[{'attempt':1,'status':status,'error':row.get(error_key)}]
+  if status=='not_checked':stopped=True
+  streak=streak+1 if status not in {'ok','unavailable_status'} else 0
+  if streak>=5:stopped=True
+  if status=='error' and retryable_read_error(row.get(error_key)):pending.append(index)
+ if not pending or stopped:return rows
+ proof={'authority':READ_RETRY_AUTHORITY,'status':'waiting','delay_seconds':READ_RETRY_SECONDS,'scheduled_at':now(),'accounts':[rows[i].get('id',rows[i].get('account_id')) for i in pending]}
+ def save_proof():
+  if evidence_path is not None:
+   p=pathlib.Path(evidence_path);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(proof));p.chmod(0o600)
+ save_proof();time.sleep(READ_RETRY_SECONDS)
+ proof.update(status='retrying',started_at=now());save_proof()
+ with ThreadPoolExecutor(max_workers=3) as ex:
+  retried=list(ex.map(read_one,[rows[i] for i in pending]))
+ for index,new in zip(pending,retried):
+  previous=rows[index];new=dict(new);new[history_key]=previous[history_key]+[{'attempt':2,'status':new[status_key],'error':new.get(error_key),'delay_seconds':READ_RETRY_SECONDS}]
+  if new[status_key]=='ok':new['automatic_recovery']={'attempts':2,'first_error':previous.get(error_key),'delay_seconds':READ_RETRY_SECONDS,'authority':READ_RETRY_AUTHORITY}
+  rows[index]=new
+ proof.update(status='completed',completed_at=now(),recovered=sum(rows[i][status_key]=='ok' for i in pending),remaining=sum(rows[i][status_key]!='ok' for i in pending));save_proof()
+ return rows
+
 def collect_account_with_retry(a,start,end,meta,token,headers,attempts=2):
- assert isinstance(attempts,int) and 1<=attempts<=3
- history=[];row=None
- for attempt in range(1,attempts+1):
-  row=collect_account(a,start,end,meta,token,headers);history.append({'attempt':attempt,'status':row['status'],'error':row.get('error')})
-  if row['status']=='ok':
-   if attempt>1:row['automatic_recovery']={'attempts':attempt,'first_error':history[0]['error']}
-   return row,history
-  if attempt<attempts:time.sleep(1)
- assert row is not None
- return row,history
+ assert isinstance(attempts,int) and 1<=attempts<=2
+ row=collect_account(a,start,end,meta,token,headers)
+ if attempts==2:row=retry_failed_batch([row],lambda _:collect_account(a,start,end,meta,token,headers))[0]
+ return row,row.get('collection_attempts',[{'attempt':1,'status':row['status'],'error':row.get('error')}])
 def missing_spend_account(a,start,end,meta,token,headers):
  """Read spend for an accessible unregistered account; never create it."""
  out={**a,'spend_status':'error','spend_since':start,'spend_until':end,'spend_queried_at':now()}
@@ -148,7 +177,35 @@ def collect_api_first(start,end,directory):
     for a in batch:streak=0 if a['spend_status'] in ['ok','unavailable_status'] else streak+1
     (directory/'api-account-scan.json').write_text(json.dumps(scans))
  positive=[a for a in scans if a['spend_status']=='ok' and Decimal(a['spend_amount'])>0]
+ scan_inputs={(a['platform'],a['account_id']):a for a in discovered}
  def run(a):
-  row,attempts=collect_account_with_retry({**a,'id':a['account_id']},start,end,worker.meta,token,headers);row['verified_api_identity']=row['status']=='ok';row['business_id']=a.get('business_id');row['collection_attempts']=attempts;(directory/(row['platform']+'-'+row['id']+'.json')).write_text(json.dumps(row));return row
+  row=collect_account({**a,'id':a['account_id']},start,end,worker.meta,token,headers);row['verified_api_identity']=row['status']=='ok';row['business_id']=a.get('business_id');return row
  with ThreadPoolExecutor(max_workers=3) as ex:rows=list(ex.map(run,positive))
+ # Save first observations before a shared five-minute recovery round. Both
+ # phases share one wait so the existing900s standalone cron budget is retained.
+ for row in rows:(directory/(row['platform']+'-'+row['id']+'.json')).write_text(json.dumps(row))
+ tasks=[{'id':a['account_id'],'platform':a['platform'],'phase':'scan','status':a['spend_status'],'error':a.get('spend_error'),'value':a} for a in scans]
+ tasks.extend({'id':a['id'],'platform':a['platform'],'phase':'detail','status':a['status'],'error':a.get('error'),'value':a} for a in rows)
+ def reread(task):
+  identity=scan_inputs[(task['platform'],task['id'])]
+  if task['phase']=='scan':
+   value=missing_spend_account(identity,start,end,worker.meta,token,headers)
+   out={**task,'status':value['spend_status'],'error':value.get('spend_error'),'value':value}
+   # A newly recovered positive account still needs the same exact detail gates.
+   if value['spend_status']=='ok' and Decimal(value['spend_amount'])>0:
+    detail=run(value);detail['collection_attempts']=[{'attempt':1,'status':detail['status'],'error':detail.get('error')}];detail['discovered_after_delayed_retry']=True;out['new_detail']=detail
+   return out
+  value=run(identity);return {**task,'status':value['status'],'error':value.get('error'),'value':value}
+ tasks=retry_failed_batch(tasks,reread,evidence_path=directory/'source-retry.json')
+ scans=[];rows=[]
+ for task in tasks:
+  value=dict(task['value']);key='scan_attempts' if task['phase']=='scan' else 'collection_attempts';value[key]=task['collection_attempts']
+  if task.get('automatic_recovery'):value['automatic_recovery']=task['automatic_recovery']
+  if task['phase']=='scan':
+   scans.append(value)
+   if task.get('new_detail'):rows.append(task['new_detail'])
+  else:rows.append(value)
+ positive=[a for a in scans if a['spend_status']=='ok' and Decimal(a['spend_amount'])>0]
+ (directory/'api-account-scan.json').write_text(json.dumps(scans))
+ for row in rows:(directory/(row['platform']+'-'+row['id']+'.json')).write_text(json.dumps(row))
  out={'schema':'api-first-1','authority':'1547015219325444107','since':start,'until':end,'period':start[:7],'queried_at':now(),'expected_accounts':len(rows),'accounts':rows,'api_scan':scans,'discovered_count':len(scans),'positive_accounts':len(positive),'discovery_errors':errors,'source_scope':{'meta_bm':'155263197283282','google_mcc':'8137016595'},'ad_writes':0,'sheet_writes':0};assert len(scans)==len(discovered) and len(rows)==len(positive);(directory/'collection.json').write_text(json.dumps(out));return out

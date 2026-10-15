@@ -595,6 +595,19 @@ class FollowupTests(unittest.TestCase):
         s=reports.snapshot(self.q,cfg['progress_reporting']);text=reports.render(s,self.q,cfg['progress_reporting'])
         self.assertEqual(s['phase'],'C121_FIRST');self.assertIn('C121 primeiro',text);self.assertNotIn('fica para o fim',text)
 
+    def test_completed_priority_note_is_omitted_without_losing_progress(self):
+        from ares_campaign_v3 import landing_followup_reporting as reports
+        self.arm();peer=self.second_account();cfg=self.immediate_priority_fixture([peer])
+        with self.q.tx():
+            self.q.db.execute("UPDATE links SET state='PASSED' WHERE job=?",(self.key,))
+            self.q.db.execute("UPDATE jobs SET state='OBSERVED' WHERE key=?",(self.key,))
+        s=reports.snapshot(self.q,cfg['progress_reporting'])
+        self.assertEqual(s['phase'],'FIFO_C121_DONE')
+        for phase in ('FIFO_C121_DONE','OTHERS_C121_DONE'):
+            text=reports.render({**s,'phase':phase},self.q,cfg['progress_reporting'])
+            self.assertNotIn('C121',text);self.assertIn('Links validados',text)
+            self.assertIn('Aguardando',text);self.assertIn('Executor',text)
+
     def test_safe_c121_intervention_note_waits_until_other_jobs(self):
         self.start();peer=self.second_account();self.priority_fixture([peer])
         e={**self.closure(),'human_action_required':True,'required_action':'Offline fixture: inspect publisher setting','diagnosis':'offline serving investigation'}

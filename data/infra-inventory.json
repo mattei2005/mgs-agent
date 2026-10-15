@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-15T10:07:42-04:00",
+    "updated_at": "2026-10-15T14:21:31.422070+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44205,6 +44205,41 @@
         "decision": "Denied extension of Openzed US-CC-EN migration to159 Fincgriffin and8 isolated routes; preserve those existing destinations; earlier609 approved changes remain.",
         "production_writes": false
       }
+    },
+    {
+      "id": "finance-retry-five-min-1560288130085560351",
+      "type": "finance-source-read-retry",
+      "authority": [
+        "1560288130085560351"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-15T14:21:31.422070+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/finance_spend_sources.py": "0c31c40a7330dae80b74f502d3db3af29f2463d586a094c7b400b32d40cac185",
+        "apps/finance-system/tests/test_api_first_reporting.py": "dec1ef056231aeb533d6b7cf0961a68e7f307929c122216c24a1bc8996f39bd9",
+        "data/finance-media-spend-contract.json": "1251cd2494a6d876fd40f93b1348b054e723c75b153f0b19a1155c10600fd5f6",
+        "docs/finance-five-minute-read-retry.md": "02c0a0985e8cdd1e11907d52d06c54f225f611a0bfb93036ca66cceff1fc3e48",
+        "docs/finance-daily-spend-notifications.md": "22f1ede448d73960d8488c39089c8c226d6ad89102af3fd3aab7a492b776f4f4",
+        "reports/finance-retry-five-min-1560288130085560351.md": "3bd3c1da1b077a05f268a4b5b9506de2c245401bbd9bb8a84f3a1f25b11b39ba"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "9272eacc739fb86e58d3d39470736b8bb988f061cd52e09ab3caa8932f9e6fd1",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/api-first-site-daily-spend.md": "73c34edbc0cb773b4d340a5ee4fc7198c8033e7e42e598e7d119f5ec23e78550"
+      },
+      "report_path": "reports/finance-retry-five-min-1560288130085560351.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351",
+      "tests": 505,
+      "retry_seconds": 300,
+      "retry_rounds": 1,
+      "real_wait_seconds": 300.0013743439922,
+      "financial_writes": 0,
+      "financial_fingerprints_unchanged": true,
+      "schedule_changed": false,
+      "remote_app_restart": false,
+      "rollback": "apps/finance-system/private/releases/retry-five-min-1560288130085560351",
+      "deletions": 0,
+      "institutional_known_limitation": "KR-014 expects Ares3.6.1; current3.6.8; preexisting reconciled audit FINANCE_PREVIEW_CLOSURE_READBACK; unrelated to finance, not modified"
     }
   ],
   "profile_skill_references": [
