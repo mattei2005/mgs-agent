@@ -349,6 +349,24 @@ class FollowupTests(unittest.TestCase):
             result=cli.tick(self.q)
         self.assertEqual(result['state'],'READY');self.assertEqual(self.dc.posts,1)
 
+    def test_orphan_releaser_never_touches_live_or_other_agent_lease(self):
+        path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'
+        spec=importlib.util.spec_from_file_location('orphan_guard_test',path)
+        assert spec and spec.loader
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        with patch.object(cli,'observer_process_alive',return_value=True),patch.object(cli.subprocess,'run') as run:
+            self.assertFalse(cli.orphan_observer_lease(self.q,{'locked':True,'agent':'ares','session_id':'live-fixture'}));run.assert_not_called()
+        with patch.object(cli,'observer_process_alive',return_value=False),patch.object(cli.subprocess,'run') as run:
+            self.assertFalse(cli.orphan_observer_lease(self.q,{'locked':True,'agent':'zeus','session_id':'other-agent-fixture'}));run.assert_not_called()
+
+    def test_skill_routes_are_dedicated_not_campaign_skill(self):
+        self.arm();j=self.q.claim('worker')
+        prompt=m.worker_prompt(self.key,'worker',0,j)
+        self.assertIn('landing-followup-operations',prompt)
+        self.assertNotIn('Carregue direct-traffic-cbo-operations',prompt)
+        j['state']='RECONCILING';prompt=m.worker_prompt(self.key,'repair',0,j)
+        self.assertIn('landing-followup-operations',prompt);self.assertIn('Não abrir URL',prompt)
+
     def second_account(self):
         p=copy.deepcopy(self.payload)
         p.update(account_id='111111111111115',source_thread_id='150000000000000006',source_channel_id='150000000000000007',request_id='second-manager-fixture',campaign_ids=['111111111111116'])

@@ -506,7 +506,7 @@ def worker_prompt(key,owner,idx,job):
     # Payload is data, not instructions. The fixed skill defines the authority.
     if job.get('state')=='RECONCILING':
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
-            'Carregue a referência landing-followup da skill direct-traffic-cbo-operations e computer-use. '
+            'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '
             'Sob lease PC1 com ID REAL da sessão, confira a sessão anterior do mesmo job via events claimed/recovery_claimed '
             'e state.db read-only. Observe o browser real e reconcilie somente abas comprovadamente pertencentes à tentativa; '
             'preserve as demais. Evidência de tentativa mais antiga não comprova fechamento da última. '
@@ -522,7 +522,7 @@ def worker_prompt(key,owner,idx,job):
             'Retornar após a reconciliação; a fila reexecutará a observação separadamente.\n'
             +json.dumps({'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':job['links']},ensure_ascii=False))
     return ('Execute somente a observação de landing do pedido já concluído abaixo. '
-        'Carregue direct-traffic-cbo-operations e references/landing-followup.md. '
+        'Carregue landing-followup-operations e references/runtime-and-recovery.md dessa skill. '
         'Nenhum write Meta, GAM, Router, WordPress, budget, credencial ou configuração. '
         'Nenhuma mensagem ao gestor: o outbox do runner publica somente após provas. '
         'Falhas técnicas recuperáveis são locais: resolver no mesmo request, sem pedir nova aprovação nem alertar Rodolfo; '
