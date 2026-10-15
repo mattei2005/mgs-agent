@@ -1353,12 +1353,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-INTRADAY-AUDIT-CLEAR-1560303769680355525",
-      "next_step": "Padrão completo corrigido com renderer/gate único, 36 bindings e 12 testes. 254 mensagens do Ares removidas e verificadas; 215 de outros autores permanecem. Necessário liberar Gerenciar mensagens para Ares nos seis canais de relatórios ou admin remover IDs remanescentes registrados. Nenhum report novo publicado; não declarar limpeza completa.",
-      "objective": "Auditar e corrigir integralmente padrão das 36 threads SHEIN, sem novos reports; apagar todas as mensagens mantendo canais/threads",
-      "source": "/root/mgs-agent/data/ares/discord/intraday-audit-clear-1560303769680355525/final-state.json",
-      "state": "blocked",
+      "next_step": "Rodolfo aceitou preservar os avisos de sistema e informou que pedirá novos relatórios em cada canal. Não gerar reports por esta confirmação. Cada novo pedido usa conta vinculada, coleta live e renderer/validate canônico. Auditoria encerrada com exceção dos 138 avisos sistema, sem declarar threads literalmente vazias.",
+      "objective": "Auditoria/padronização e limpeza de conteúdo nas 36 threads SHEIN, preservando canais/threads",
+      "source": "/root/mgs-agent/data/ares/discord/intraday-audit-clear-1560303769680355525/closure-accepted.json",
+      "state": "completed",
       "thread_id": "1560303769680355525",
-      "updated_at": "2026-10-15T20:51:04+00:00"
+      "updated_at": "2026-10-15T21:09:52+00:00"
     },
     {
       "agent": "ares",
@@ -4303,12 +4303,12 @@
     {
       "agent": "ares",
       "id": "creative-intake-1560391898999554049",
-      "next_step": "Executar plano congelado, validar READY, mover originais LEGACY e auditar IDs",
+      "next_step": "Nenhuma pendencia no lote; manter reserva de Kelly ate liberacao expressa ou conciliacao suficiente",
       "objective": "Tratar e mover lote manual Kelly SHEIN US EN, preservar originais e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/20261015-kelly-shein-thread-1560391898999554049/plan.json",
-      "state": "49 imagens revisadas e sanitizadas; plano congelado; nenhuma duplicata exata; dry-run sem write remoto",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/20261015-kelly-shein-thread-1560391898999554049/verification.json",
+      "state": "concluido: 49 fontes, 49 ready novos, 0 duplicatas, 49 originais legacy, sha/clean/inventario/reserva verificados, 0 pendencias recursivas, midia local removida",
       "thread_id": "1560391898999554049",
-      "updated_at": "2026-10-15T20:56:03+00:00"
+      "updated_at": "2026-10-15T21:06:14+00:00"
     },
     {
       "agent": "zeus",
@@ -6022,5 +6022,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T20:56:03+00:00"
+  "updated_at": "2026-10-15T21:09:52+00:00"
 }

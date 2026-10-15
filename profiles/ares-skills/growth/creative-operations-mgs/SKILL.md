@@ -57,7 +57,7 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - `GEIZIAN` contém cópias de conveniência para upload do gestor e fica fora do pool/inventário canônico.
 - `LIBRARY META` contém referências; nunca é fonte automática de asset final.
 - Persistir o plano completo de um lote antes do primeiro write e retomar pelos mesmos IDs, hashes e nomes reservados; uma interrupção não autoriza recalcular variantes nem repetir uploads já confirmados. Receita e gates: `references/mixed-media-drive-intake-ready-legacy.md`.
-- `P_ORIENT` final aceita somente `PV`, `NV`, `PH`, `NH`; square/feed 1:1 usa `PH/NH`.
+- `P_ORIENT` final aceita somente `PV`, `NV`, `PH`, `NH`; square/feed 1:1 usa `PH/NH`. Definir presença humana por asset e ampliar a imagem original quando detalhes pequenos ou revisões conflitantes impedirem uma decisão segura; a visão geral do lote não substitui essa conferência.
 - Para país BR, “Português” sem qualificador usa `LANG=BR`; `LANG=PT` exige português de Portugal explícito.
 - Antes de mudar regras, scripts ou estrutura do Drive, apresentar o plano exato e obter aprovação. Se Rodolfo declarar sua auditoria manual do Drive como final, não aplicar limpeza automática sobre ela.
 
