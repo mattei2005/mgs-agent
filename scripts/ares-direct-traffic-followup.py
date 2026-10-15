@@ -47,6 +47,42 @@ def flush(q,discord):
                 q.event(row['key'],'completed',{'landing_observation':True,'gam_registration':'NOT_VERIFIED'})
 
 
+def observer_process_alive(session_id):
+    marker=('HERMES_SESSION_ID='+session_id).encode()
+    for p in Path('/proc').iterdir():
+        if not p.name.isdigit():continue
+        try:
+            if marker in (p/'environ').read_bytes().split(b'\0'):return True
+        except (FileNotFoundError,ProcessLookupError):continue
+        except (PermissionError,OSError):return True
+    return False
+
+
+def orphan_observer_lease(q,state):
+    """Release only an ended Ares observer's proven orphan; never another task."""
+    sid=state.get('session_id')
+    if not state.get('locked') or state.get('agent')!='ares' or not sid or observer_process_alive(sid):return False
+    try:
+        from ares_campaign_v3.landing_intake import readonly,NATIVE_DB
+        with readonly(NATIVE_DB) as c:
+            row=c.execute("SELECT source FROM sessions WHERE id=?",(sid,)).fetchone()
+            if not row or row['source']!='tool':return False
+            first=c.execute("SELECT content FROM messages WHERE session_id=? AND role='user' ORDER BY id LIMIT 1",(sid,)).fetchone()
+        if not first:return False
+        data=json.loads(first['content'].rsplit('\n',1)[-1])
+        key=data['queue_key'];j=q.job(key)
+        if j['state']!='NEEDS_RECONCILIATION':return False
+        last=q.db.execute("SELECT detail FROM events WHERE job=? AND kind IN ('claimed','recovery_claimed') ORDER BY seq DESC LIMIT 1",(key,)).fetchone()
+        if not last or json.loads(last['detail']).get('owner')!=data.get('owner'):return False
+    except (ValueError,KeyError,TypeError,OSError):return False
+    r=subprocess.run([sys.executable,str(BASE/'scripts/mgs-pc1-computer-use-lock.py'),'release','--agent','ares','--session-id',sid],capture_output=True,text=True,timeout=20)
+    if r.returncode:return False
+    result=json.loads(r.stdout)
+    if result.get('locked') is not False:return False
+    with q.tx():q.event(key,'orphan_pc1_lease_released',{'session_id':sid,'previous_owner_process_alive':False,'automatic_navigation':False})
+    return True
+
+
 def tick(q):
     # Existing native turns have absolute priority; this adds nothing to them.
     if native_busy():return {'state':'WAITING_NATIVE_TURN','creation_path_unchanged':True}
@@ -67,7 +103,9 @@ def tick(q):
         recovery=q.db.execute("SELECT 1 FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?)",(q.now(),)).fetchone()
         if not due and not recovery:return {'state':'IDLE'}
         check=subprocess.run([sys.executable,str(BASE/'scripts/mgs-pc1-computer-use-lock.py'),'status'],capture_output=True,text=True,timeout=20)
-        if check.returncode or json.loads(check.stdout).get('locked'):return {'state':'WAITING_PC1'}
+        if check.returncode:return {'state':'WAITING_PC1'}
+        lock=json.loads(check.stdout)
+        if lock.get('locked') and not orphan_observer_lease(q,lock):return {'state':'WAITING_PC1'}
         owner='landing-observer-'+uuid.uuid4().hex
         j=q.claim_recovery(owner) or q.claim(owner)
         if not j:return {'state':'IDLE'}
