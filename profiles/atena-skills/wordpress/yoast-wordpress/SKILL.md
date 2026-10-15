@@ -23,6 +23,7 @@ Three subsystems live here. Jump to the relevant section:
 Detailed reference files are in `references/`:
 - `references/yoast-score-architecture.md` — full DB schema, mu-plugin history, yoastseo Node.js scorer
 - `references/content-repair-readability.md` — full repair workflow with Python diagnostic
+- `references/bounded-editorial-native-score-repair.md` — limited content-only repair, per-ID preservation, current-hash manifests and native score verification
 - `references/site-health-monitor.md` — full cron monitor design, pitfalls, checklist
 
 ---
@@ -89,9 +90,15 @@ Diagnóstico não equivale a reparo: mantenha hipótese, evidência humana, leit
 5. Publish via REST PATCH
 6. Re-score with `yoast-score-post.sh`
 
+**Retomada parcial de reparo:** reconcilie primeiro a intenção existente com o hash do corpo lido no ID exato; intenção gravada exige readback, nunca replay cego. Se uma normalização nativa de `comment_status` tiver sido explicitamente aceita, limite a exceção ao par exato `''` → `closed`, sem restaurar vazio, abrir comentários ou mudar configuração. Para uma nova revisão editorial, crie snapshots/diffs/manifesta de hash em diretório novo; preserve o bloqueio histórico e reconcilie source JSON, payload e receipt com o corpo real antes de preparar o adaptador de análise. Ao substituir uma revisão já calculada, use novo manifesto/work-dir em vez de alterar um manifest-lock existente.
+
+**Naturalidade antes de densidade:** não acrescente conectivos apenas para satisfazer o assessment de transições. Prefira encadeamento semântico específico, conserve os avisos reais restantes e persista o cálculo genuíno mesmo sem todos os assessments verdes. Mantenha aprovação editorial escopada separada de gate/release global e de prova visual/paridade do editor.
+
 **Key pitfall:** Preserve `<!-- wp:lazyblock/... /-->` blocks exactly — never rewrite their JSON payloads. Only touch `<!-- wp:paragraph -->` and `<!-- wp:heading -->` blocks.
 
 See `references/content-repair-readability.md` for full Python diagnostic code, thresholds table, and before/after rewrite examples.
+
+Em reparos estilísticos escopados, use manifesto novo com IDs exatos e hashes atuais, snapshots pré-GET/source/payload/receipt, diffs pontuais e POST somente `content`. Reconcilie source com marcador de imagem, payload final e receipt contra o readback antes de preparar o adaptador; não edite QA global, release ou manifestos históricos. Remover inícios repetidos ou converter passivas com ator conhecido pode resolver a nota sem perseguir cada aviso de transição: mantenha os assessments residuais reais e pare quando o reparo natural estiver suficiente. Na comparação nativa de indexables, separe `readability_score`/`primary_focus_keyword_score` dos timestamps automáticos `updated_at` e `object_last_modified`; exija que este último corresponda a `post_modified_gmt`, sem confundir timestamps técnicos com alteração da data editorial.
 
 ---
 

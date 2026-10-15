@@ -1,0 +1,9 @@
+# Reparo editorial limitado com nova análise nativa
+
+- Faça GET exato `context=edit` e snapshot por ID de post, mídia, source, payload, receipt, postmeta, indexable e língua nativa antes de editar; isso separa alterações editoriais de alterações produzidas pelo salvamento.
+- Leia os artigos completos e assessments individuais antes de selecionar frases. Converta passivas somente quando o agente estiver claro; conecte relações lógicas reais, sem preencher conectivos para atingir percentuais.
+- Preserve valores, qualificadores legais, links, tags HTML e atributos. Teste `source.body_html` com marcador de imagem recomposto contra `payload.content` e o raw do readback, em vez de comparar hashes de representações diferentes.
+- Envie somente `content` pelo cliente aprovado e releia o mesmo alvo antes de reconciliar arquivos. Compare todos os campos protegidos e o objeto de mídia. Uma exceção autorizada para `comment_status` legado vazio→`closed` deve aceitar somente essa normalização, nunca enviá-la manualmente nem restaurar vazio.
+- Após cada rodada aplicada, reconcilie source/payload/receipt e gere manifesto novo com hashes atuais e workdir novo. Não altere manifests, releases ou QA aprovado históricos para encaixar conteúdo novo.
+- Prepare o adaptador nativo com locale por post confirmado; meça o título com o helper original no DOM e execute analyze genuíno. Aplique somente as duas metas de saída sob autoridade explícita e verifique igualdade em postmeta/indexable, singularidade da linha e preservação não-score.
+- Entregue QA **proposto**, com hashes final do artigo e do corpo, diffs, contagem visível e alertas residuais. Uma pontuação global verde pode coexistir com assessments amarelos/vermelhos; reporte-os e não faça outra rodada apenas para removê-los. Aprovação do conteúdo e autorização de publicação continuam gates distintos.
