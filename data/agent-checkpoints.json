@@ -1393,12 +1393,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-PRODUCT25-CLEAR-1558147211026501643",
-      "next_step": "Aplicar contrato/renderer/testes, validar truncamento visual sem modificar dados ou agrupamentos; inventariar e limpar somente a thread-alvo, mantendo avisos de sistema já aceitos.",
-      "objective": "Limitar Produto a 25 caracteres com espaços no padrão SHEIN, não acrescentar legenda explicativa, e limpar mensagens da thread 1558147211026501643 sem novo relatório",
-      "source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
-      "state": "in_progress",
+      "next_step": "Produto 25 salvo/testado, legenda extensa desativada; 72 rótulos reais QA (máximo37→25), 17 testes OK. 16 mensagens removidas/GET404; 4 avisos de sistema preservados conforme exceção já aceita. Aguardar novo pedido de relatório na própria thread.",
+      "objective": "Limitar Produto a 25 caracteres incluindo espaços, dispensar legenda extensa e limpar somente thread 1558147211026501643 sem novo report",
+      "source": "/root/mgs-agent/data/ares/discord/product25-clear-1558147211026501643/completion.json",
+      "state": "completed",
       "thread_id": "1560303769680355525",
-      "updated_at": "2026-10-15T21:22:40+00:00"
+      "updated_at": "2026-10-15T21:32:04+00:00"
     },
     {
       "agent": "ares",
@@ -6032,5 +6032,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T21:22:40+00:00"
+  "updated_at": "2026-10-15T21:32:04+00:00"
 }

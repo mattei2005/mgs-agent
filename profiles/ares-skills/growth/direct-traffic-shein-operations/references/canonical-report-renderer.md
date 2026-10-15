@@ -4,6 +4,12 @@
 
 Evitar divergência entre threads e uso de modelos históricos em pedidos genéricos. A política visual continua exclusivamente em `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`. O índice `data/ares/discord/shein-intraday-report-bindings.json` vincula as 36 threads a contas exatas; não amplia autoridade. Ler ambos em cada pedido, não usar um snapshot de configuração como estado vigente.
 
+## Produto com largura limitada e sem legenda extensa
+
+Por pedido de Rodolfo na thread `1560303769680355525`, após problema visual na `1558147211026501643`, Produto tem máximo de **25 caracteres incluindo espaços**. Quando houver corte, os três caracteres `...` também entram nesses 25. O helper `product_label` lê `product_column` do contrato, normaliza apenas a exibição para uma linha, neutraliza pipes internos e respeita também largura visual Unicode máxima de 25. Não renomear campanhas/assets, sobrescrever o valor completo do modelo, alterar a ordenação/família ou consolidar produtos só porque seus rótulos truncados coincidem. Só a célula visível é cortada; dados e linhagem permanecem íntegros. Verificar os limites em todas as células depois de renderizar.
+
+Rodolfo dispensou a legenda explicativa. `legend.enabled=false`: não acrescentar blocos de cores R/E, aliases de Lance, definições longas de Média, Produto ou COPY. Conservar apenas rodapé conciso de proveniência/fórmulas essenciais, corte parcial e limitações relevantes; as regras de cálculo/cores continuam no contrato. Não publicar um relatório novo durante um pedido de corrigir/limpar e aguardar nova solicitação. A suíte cobre exatamente 25, excesso com reticências, espaços/controles Unicode, preservação do modelo e de famílias, prefixos truncados iguais e ausência da legenda extensa.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:
