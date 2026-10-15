@@ -1172,6 +1172,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-PC1-LINK-OPENING-REVIEW-1559932317861158993",
+      "next_step": "Explicar somente o fluxo atual do observadorPC1 e discutir correcoes para travamento, espera e erros; manter propostas como rascunho ate confirmacao e preservar todososfluxosdecampanha.",
+      "objective": "Revisar somente abertura e observacao de links noPC1, sem alterar fluxo de campanha",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;skill:landing-followup-operations",
+      "state": "scope_corrected_by_rodolfo: discussao limitada a abrirpc1, pegarlinkdafila, abrirlanding, verificaranuncio/foco/tempo, fechar e tratarretentativas/errostecnicos. pedidos/criacao/conclusao de campanhas estao ok e fora de escopo; auditoria/limpezathreads tambemfora. nenhuma mudanca runtime implementada nesta revisao.",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-15T22:01:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-1559780476942815244",
       "next_step": "Nenhum write pendente. Nao repetir criacao ou ativacao. Consultas futuras somente readback dos IDs; nova solicitacao gera novo request. Entrega nao comprovada por Insights neste fechamento.",
       "objective": "Executar 12 clones C20 e tornar reutilizavel o fluxo SHEIN de grupos/copy e pasta do gestor",
@@ -6032,5 +6042,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T21:32:04+00:00"
+  "updated_at": "2026-10-15T22:01:32+00:00"
 }
