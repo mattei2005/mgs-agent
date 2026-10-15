@@ -12,9 +12,10 @@ def policy():
 
 def technical_errors(q,key,idx):
     count=0
-    for r in q.db.execute("SELECT kind,detail FROM events WHERE job=? AND kind IN ('observation_result','technical_repair_approved') ORDER BY seq DESC",(key,)):
+    for r in q.db.execute("SELECT kind,detail FROM events WHERE job=? AND kind IN ('observation_result','technical_repair_approved','worker_expired') ORDER BY seq DESC",(key,)):
         d=json.loads(r['detail'])
         if d.get('idx')!=idx:continue
+        if r['kind']=='worker_expired':count+=1;continue
         if r['kind']=='technical_repair_approved' or d.get('result')!='ERROR':break
         count+=1
     return count
@@ -22,7 +23,11 @@ def technical_errors(q,key,idx):
 
 def needs_repair(q,key,idx):
     p=policy()
-    return bool(p and technical_errors(q,key,idx)>=int(p.get('technical_error_limit',3)))
+    if not p:return False
+    if technical_errors(q,key,idx)>=int(p.get('technical_error_limit',3)):return True
+    for r in q.db.execute("SELECT kind,detail FROM events WHERE job=? AND kind IN ('technical_repair_required','technical_repair_approved') ORDER BY seq DESC",(key,)):
+        if json.loads(r['detail']).get('idx')==idx:return r['kind']=='technical_repair_required'
+    return False
 
 
 def technical_delay():

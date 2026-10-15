@@ -502,12 +502,16 @@ class Queue:
                 self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,j['key']))
                 p=json.loads(j['payload'])
                 active=self.db.execute("SELECT idx FROM links WHERE job=? AND state='OPEN_INTENT' ORDER BY idx LIMIT 1",(j['key'],)).fetchone()
-                affected=p['links'][active['idx'] if active else 0]
+                selected=active['idx'] if active else 0
+                if not active:
+                    claim=self.db.execute("SELECT detail FROM events WHERE job=? AND kind IN ('claimed','technical_repair_claimed') ORDER BY seq DESC LIMIT 1",(j['key'],)).fetchone()
+                    if claim:selected=json.loads(claim['detail']).get('idx',0) or 0
+                affected=p['links'][selected]
                 url=affected.get('landing_url') or affected['effective_campaign_url']
                 scope(url)
                 self.prepare_problem(j['key'],j['key']+':worker-expired',
                     f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}.\n{url}\nA execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.",{})
-                self.event(j['key'],'worker_expired',{'automatic_reopen':False})
+                self.event(j['key'],'worker_expired',{'automatic_reopen':False,'idx':selected,'phase':j['state']})
 
     def reconcile(self,key,idx,evidence,resume=False):
         # Recovery is readback-first, under the same physical PC1 lease. It
@@ -527,7 +531,8 @@ class Queue:
                 resume=False
                 self.event(key,'resume_suppressed_after_two_no_ads',{'idx':idx,'automatic_navigation':False,'continue_other_links_after_verified_closure':True})
             saved=preserve_evidence(evidence,key,idx,row['attempt'])
-            self.db.execute("UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?",('WAIT_RETRY' if resume else 'ATTENTION',self.now()+60 if resume else 0,json.dumps(saved,ensure_ascii=False),key,idx))
+            from .landing_reliability import technical_delay
+            self.db.execute("UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?",('WAIT_RETRY' if resume else 'ATTENTION',self.now()+technical_delay() if resume else 0,json.dumps(saved,ensure_ascii=False),key,idx))
             pending=self.db.execute("SELECT 1 FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY')",(key,)).fetchone()
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=? WHERE key=?',('READY' if pending else 'ATTENTION',None if pending else self.now()+60,key))
             if finite_enabled and self.no_ad_count(key,idx)>0:
@@ -535,7 +540,9 @@ class Queue:
                 from .landing_reliability import no_ad_delay
                 self.db.execute('UPDATE links SET state=?,due=? WHERE job=? AND idx=?',(state,self.now()+no_ad_delay() if state=='WAIT_RETRY' else 0,key,idx))
                 finite.refresh(self,key)
-            from .landing_reliability import needs_repair
+            from .landing_reliability import needs_repair,policy as execution_policy
+            if execution_policy() and not resume and self.no_ad_count(key,idx)==0:
+                self.event(key,'technical_repair_required',{'idx':idx,'reason':'closed technical attempt without a reusable observation result; stop repeated reconciliation','ordinary_opening_blocked':True})
             if needs_repair(self,key,idx):
                 self.db.execute("UPDATE links SET state='TECHNICAL_REPAIR',due=0 WHERE job=? AND idx=?",(key,idx))
                 finite.refresh(self,key)

@@ -16,7 +16,7 @@ class ReliabilityTests(unittest.TestCase):
     setUpBase=old.FollowupTests.setUp
     tearDown=old.FollowupTests.tearDown
     arm=old.FollowupTests.arm
-    closure=old.FollowupTests.closure
+
     success=old.FollowupTests.success
 
     def setUp(self):
@@ -28,10 +28,16 @@ class ReliabilityTests(unittest.TestCase):
         key=key or self.key;j=self.q.claim('worker');self.assertEqual(j['key'],key);self.q.begin(key,'worker',idx)
         n=self.q.job(key)['links'][idx]['attempt'];self.q.result(key,'worker',idx,'ERROR',{**self.closure('error-'+str(n)),'diagnosis':'offline opening/capture failure'})
 
+    def closure(self,tab='tab-1'):
+        return {'tab_closed_verified':True,'other_tabs_preserved':True,'new_tab_identity':tab,'closed_screenshot':f'closed-{self.clock.value+21}.png'}
+
+    def absence(self,tab):
+        return {**self.closure(tab),'observation_screenshot':f'observed-{self.clock.value+10}.png','visual_review':'Offline fixture: actual negative visual review only','network_ad_confirmed':False}
+
     def test_zero_delay_and_same_process_retry_but_no_fourth_absence(self):
         self.arm();self.q.claim('worker')
         for n in range(1,4):
-            self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('noad-'+str(n)))
+            self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.absence('noad-'+str(n)))
             link=self.q.job(self.key)['links'][0]
             if n<3:
                 self.assertEqual(link['due'],self.clock.value)
@@ -41,6 +47,14 @@ class ReliabilityTests(unittest.TestCase):
 
     def test_retry_directories_differ_between_attempts_same_owner(self):
         self.assertNotEqual(rel.run_directory(self.q,'worker',self.key,0,1),rel.run_directory(self.q,'worker',self.key,0,2))
+
+    def test_capture_failure_cannot_be_recorded_as_ad_absence(self):
+        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0)
+        with self.assertRaisesRegex(ValueError,'negative visual review'):self.q.result(self.key,'worker',0,'NO_AD',self.closure())
+
+    def test_old_observation_cannot_validate_current_no_ad(self):
+        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0);e=self.absence('current');e['observation_screenshot']='observed-1.png'
+        with self.assertRaisesRegex(ValueError,'current opening'):self.q.result(self.key,'worker',0,'NO_AD',e)
 
     def test_third_technical_error_is_hard_block_and_not_no_ad(self):
         self.arm()
@@ -60,7 +74,7 @@ class ReliabilityTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'technical-repair gate'):self.q.begin(self.key,'worker',0)
 
     def test_verified_probe_releases_gate_without_resetting_absence_history(self):
-        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('noad'))
+        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.absence('noad'))
         for _ in range(3):self.error()
         self.q.claim_recovery('repair')
         with self.q.tx():self.q.event(self.key,'technical_probe_verified',{'owner':'repair','idx':0,'probe_file':'offline-real-probe-receipt.json'})
@@ -93,6 +107,21 @@ class ReliabilityTests(unittest.TestCase):
         for _ in range(3):self.error()
         self.q.claim_recovery('repair');self.clock.value+=601;self.q.recover_expired()
         self.assertEqual(self.q.job(self.key)['state'],'NEEDS_RECONCILIATION');self.assertIsNone(self.q.claim('next'))
+
+    def test_three_expired_workers_also_trigger_hard_technical_repair(self):
+        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0)
+        for n in range(3):
+            self.clock.value+=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+            self.q.reconcile(self.key,0,self.closure('closed-'+str(n)),resume=True)
+            if n<2:self.q.claim('worker');self.q.begin(self.key,'worker',0)
+        self.assertEqual(self.q.job(self.key)['state'],'TECHNICAL_REPAIR')
+        self.assertEqual(rel.technical_errors(self.q,self.key,0),3)
+
+    def test_closed_reconciliation_without_result_cannot_spin_forever(self):
+        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0)
+        self.clock.value+=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+        self.q.reconcile(self.key,0,self.closure('closed'),resume=False)
+        self.assertEqual(self.q.job(self.key)['state'],'TECHNICAL_REPAIR');self.assertTrue(rel.needs_repair(self.q,self.key,0))
 
     def test_claim_is_preparation_not_proven_opening(self):
         self.arm();self.q.claim('worker');cfg={'report_jobs':[self.key]};s=reporting.snapshot(self.q,cfg)

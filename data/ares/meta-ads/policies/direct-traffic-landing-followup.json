@@ -243,6 +243,8 @@
     "preserve_pending_images": true,
     "preserve_utm_ids_hashes_timestamps_and_json": true,
     "capture_retry_count": 2,
+    "negative_observation_requires_current_image_and_visual_review": true,
+    "technical_expiry_counts_towards_hard_limit": true,
     "capture_max_seconds": 45,
     "minimum_visible_seconds_unchanged": 10,
     "previous_policy_snapshot": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
