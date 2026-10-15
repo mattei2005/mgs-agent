@@ -1503,12 +1503,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Este request encerrado: não repetir navegação nem criação. Próximas conclusões naturais usam leitor externo/fila existente. GAP automático offline no_tab_opened e sampling auxiliary continuam observações de manutenção, sem alterar estratégia ou rota criação.",
-      "objective": "Pedido intacto até resposta; acompanhamento independente FIFO PC1, anúncio visível 10s",
-      "source": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/retry-shein-1560010597385506986.json;data/ares/meta-ads/landing-followup/queue.sqlite3;discord:1558126133294399569#1560050837798256733",
-      "state": "primeiro ciclo visual real concluído após retry explícito rodolfo: mesmo request shein-1560010597385506986, pc1 online, mapping wordpress ativo read-only, landing rec com utms exatas, anúncios capital one shopping realmente renderizados. seis screenshots desktop compositado cobrem17.198s contínuos, validadorpass; aba e janela guarda próprias fechadas,4abas originais preservadas. job complete; aviso sucesso1560050837798256733 get verificado na origem.0campaignwrites,0quiznavigation,0adclicks. falha anterior transport-only reconciliada por transcript sem input. skill lessons atualizadas e lidas; teste gap11s rejeitado. sem mudanças scripts/config/timers.",
+      "next_step": "Consumidor existente retoma mesmo request na fila após turno nativo. Ares resolve cadência/captura e registra result/closure/lease antes de encerrar. Não emitir mensagem nesta thread por falha recuperável; somente se ação concreta de Rodolfo indispensável. Não repetir criação; sucesso gestor somente cobertura integral real.",
+      "objective": "Recuperação autônoma do acompanhamento; alertar Rodolfo somente se ação dele for indispensável; criação isolada",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/human-action-only/change-inventory.json;data/ares/meta-ads/landing-followup/queue.sqlite3",
+      "state": "regra rodolfo persistida com supersessão: human_action_required_only. timeout, erro técnico e segunda ausência não alertam sem ação humana concreta; fence inclui alertas legados prepared, preserva intent/verified.76 testes pass, governança validateok e skills readback. primeiro teste anterior permanece complete. pedido shein-1560061229643333686-c103 reconciliado por fechamento original+inventário live, mesmo job ready e link0ready sem falsopass, outros6 preservados. timers ativos/enabled;0meta writes/restarts/scheduler changes.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-14T22:05:39+00:00"
+      "updated_at": "2026-10-15T01:22:55+00:00"
     },
     {
       "agent": "zeus",
@@ -5882,5 +5882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T22:55:28+00:00"
+  "updated_at": "2026-10-15T01:22:55+00:00"
 }
