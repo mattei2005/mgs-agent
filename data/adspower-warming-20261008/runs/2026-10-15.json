@@ -1,7 +1,7 @@
 {
   "date": "2026-10-15",
   "timezone": "America/New_York",
-  "state": "running",
+  "state": "completed",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -139,7 +139,7 @@
       "post_video_wait_seconds": 68,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "running",
+      "status": "completed",
       "likes": [
         {
           "url": "https://www.facebook.com/angginatasya.nabilla.3/posts/pfbid0EM4WbTEha4PEtnJBgruistfhKi15SRfdJedBTXEgwspjXmeiedvNCv32pquNg5Kwl",
@@ -191,15 +191,21 @@
         "completed_at": "2026-10-15T09:40:04.518055-04:00",
         "evidence": "real progress and two observed end/restarts, complete intervening cycle"
       },
-      "closed_verified": false,
+      "closed_verified": true,
       "open_intent_at": "2026-10-15T09:38:56.135392-04:00",
       "opened_at": "2026-10-15T09:38:59.972792-04:00",
       "identity": "Mhd Aldy",
       "authenticated_verified_at": "2026-10-15T09:39:15.072700-04:00",
       "wait": {
         "started_at": "2026-10-15T09:40:04.518383-04:00",
-        "target_seconds": 68
-      }
+        "target_seconds": 68,
+        "ended_at": "2026-10-15T09:41:12.518734-04:00",
+        "elapsed_seconds": 68.0,
+        "completed": true
+      },
+      "close_intent_at": "2026-10-15T09:41:12.519609-04:00",
+      "closed_at": "2026-10-15T09:41:18.226012-04:00",
+      "final_active": "Inactive"
     },
     {
       "profile_id": "k1f7o4i7",
@@ -210,13 +216,92 @@
       "likes_target": 3,
       "comments_target": 0,
       "post_video_wait_seconds": 45,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "completed",
+      "likes": [
+        {
+          "url": "https://www.facebook.com/photo/?fbid=1106286585349420",
+          "status": "confirmed",
+          "intent_at": "2026-10-15T09:41:48.333643-04:00",
+          "confirmed_at": "2026-10-15T09:41:51.961548-04:00",
+          "evidence": "Remover Curtir"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10240424681828225",
+          "status": "confirmed",
+          "intent_at": "2026-10-15T09:41:53.080774-04:00",
+          "confirmed_at": "2026-10-15T09:41:56.708139-04:00",
+          "evidence": "Remover Curtir"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10247350921325159",
+          "status": "confirmed",
+          "intent_at": "2026-10-15T09:42:13.226829-04:00",
+          "confirmed_at": "2026-10-15T09:42:17.065835-04:00",
+          "evidence": "Remover Curtir"
+        }
+      ],
       "comments": [],
-      "video": {},
-      "closed_verified": false
+      "video": {
+        "navigation_intent_at": "2026-10-15T09:42:17.623518-04:00",
+        "entry_url": "https://www.facebook.com/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-15T09:42:28.419280-04:00",
+            "position": 8.0,
+            "max": 10.0
+          },
+          {
+            "at": "2026-10-15T09:42:30.689457-04:00",
+            "position": 0.0,
+            "max": 10.0
+          },
+          {
+            "at": "2026-10-15T09:42:32.956376-04:00",
+            "position": 3.0,
+            "max": 10.0
+          },
+          {
+            "at": "2026-10-15T09:42:35.254419-04:00",
+            "position": 5.0,
+            "max": 10.0
+          },
+          {
+            "at": "2026-10-15T09:42:37.523400-04:00",
+            "position": 7.0,
+            "max": 10.0
+          },
+          {
+            "at": "2026-10-15T09:42:39.786546-04:00",
+            "position": 9.0,
+            "max": 10.0
+          },
+          {
+            "at": "2026-10-15T09:42:42.058079-04:00",
+            "position": 2.0,
+            "max": 10.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-15T09:42:42.058608-04:00",
+        "evidence": "real progress and two observed end/restarts, complete intervening cycle"
+      },
+      "closed_verified": true,
+      "open_intent_at": "2026-10-15T09:41:18.367620-04:00",
+      "opened_at": "2026-10-15T09:41:21.441300-04:00",
+      "identity": "Kelly Andrade",
+      "authenticated_verified_at": "2026-10-15T09:41:34.667692-04:00",
+      "wait": {
+        "started_at": "2026-10-15T09:42:42.058935-04:00",
+        "target_seconds": 45,
+        "ended_at": "2026-10-15T09:43:27.059273-04:00",
+        "elapsed_seconds": 45.0,
+        "completed": true
+      },
+      "close_intent_at": "2026-10-15T09:43:27.059842-04:00",
+      "closed_at": "2026-10-15T09:43:30.387304-04:00",
+      "final_active": "Inactive"
     },
     {
       "profile_id": "k1f7o4im",
@@ -227,13 +312,107 @@
       "likes_target": 3,
       "comments_target": 0,
       "post_video_wait_seconds": 60,
-      "initial_active": null,
-      "opened_by_run": false,
-      "status": "pending",
-      "likes": [],
+      "initial_active": "Inactive",
+      "opened_by_run": true,
+      "status": "completed",
+      "likes": [
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10240424681828225",
+          "status": "confirmed",
+          "intent_at": "2026-10-15T09:44:03.575904-04:00",
+          "confirmed_at": "2026-10-15T09:44:07.110021-04:00",
+          "evidence": "Remover Curtir"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=10245854131712274",
+          "status": "confirmed",
+          "intent_at": "2026-10-15T09:44:08.176130-04:00",
+          "confirmed_at": "2026-10-15T09:44:11.817285-04:00",
+          "evidence": "Remover Curtir"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=4406456826334042",
+          "status": "confirmed",
+          "intent_at": "2026-10-15T09:44:19.051790-04:00",
+          "confirmed_at": "2026-10-15T09:44:22.960486-04:00",
+          "evidence": "Remover Curtir"
+        }
+      ],
       "comments": [],
-      "video": {},
-      "closed_verified": false
+      "video": {
+        "navigation_intent_at": "2026-10-15T09:44:23.609474-04:00",
+        "entry_url": "https://www.facebook.com/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-15T09:44:37.327193-04:00",
+            "position": 11.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:39.649209-04:00",
+            "position": 14.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:41.958386-04:00",
+            "position": 1.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:44.260307-04:00",
+            "position": 3.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:46.560164-04:00",
+            "position": 5.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:48.869659-04:00",
+            "position": 8.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:51.169804-04:00",
+            "position": 10.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:53.489329-04:00",
+            "position": 12.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:55.792499-04:00",
+            "position": 15.0,
+            "max": 15.0
+          },
+          {
+            "at": "2026-10-15T09:44:58.098910-04:00",
+            "position": 2.0,
+            "max": 15.0
+          }
+        ],
+        "completed": true,
+        "completed_at": "2026-10-15T09:44:58.099506-04:00",
+        "evidence": "real progress and two observed end/restarts, complete intervening cycle"
+      },
+      "closed_verified": true,
+      "open_intent_at": "2026-10-15T09:43:30.533574-04:00",
+      "opened_at": "2026-10-15T09:43:34.141272-04:00",
+      "identity": "Giselle Santos",
+      "authenticated_verified_at": "2026-10-15T09:43:50.245872-04:00",
+      "wait": {
+        "started_at": "2026-10-15T09:44:58.099787-04:00",
+        "target_seconds": 60,
+        "ended_at": "2026-10-15T09:45:58.100158-04:00",
+        "elapsed_seconds": 60.0,
+        "completed": true
+      },
+      "close_intent_at": "2026-10-15T09:45:58.100867-04:00",
+      "closed_at": "2026-10-15T09:46:03.527159-04:00",
+      "final_active": "Inactive"
     }
   ],
   "transport_blocker": {
@@ -241,5 +420,57 @@
     "reason": "PC1_LEASE_BUSY",
     "recovery": "bounded wait for shared lease; no browser opened"
   },
-  "updated_at": "2026-10-15T09:40:04.518391-04:00"
+  "updated_at": "2026-10-15T09:46:03.591776-04:00",
+  "completed_at": "2026-10-15T09:46:03.591757-04:00",
+  "summary": [
+    {
+      "profile_id": "k13him2j",
+      "no": "894",
+      "identity": "Emgai Datquang",
+      "likes": 5,
+      "target": 5,
+      "new_comments": 0,
+      "video": true,
+      "wait": 44.0,
+      "closed": true,
+      "status": "completed"
+    },
+    {
+      "profile_id": "k1d71895",
+      "no": "1130",
+      "identity": "Mhd Aldy",
+      "likes": 2,
+      "target": 2,
+      "new_comments": 0,
+      "video": true,
+      "wait": 68.0,
+      "closed": true,
+      "status": "completed"
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "no": "1177",
+      "identity": "Kelly Andrade",
+      "likes": 3,
+      "target": 3,
+      "new_comments": 0,
+      "video": true,
+      "wait": 45.0,
+      "closed": true,
+      "status": "completed"
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "no": "1190",
+      "identity": "Giselle Santos",
+      "likes": 3,
+      "target": 3,
+      "new_comments": 0,
+      "video": true,
+      "wait": 60.0,
+      "closed": true,
+      "status": "completed"
+    }
+  ],
+  "transport_recovered_at": "2026-10-15T09:34:52.137663-04:00"
 }

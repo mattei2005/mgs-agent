@@ -1,0 +1,27 @@
+{
+  "id": "atena-yoast-score-divergence-1560287543390371922",
+  "thread_id": "1559930384852979796",
+  "source_message_id": "1560287543390371922",
+  "reported_by": "Raquel Oliveira",
+  "owner": "Atena editorial / Zeus technical diagnosis",
+  "status": "technical_diagnosis_requested_no_repair_performed",
+  "user_report": "Em todos os artigos criados nesta leva e em todos os portais, Yoast verde no editor e cinza na barra da página publicada. Outros artigos apresentam compatibilidade entre as telas.",
+  "scope_manifest": "data/atena/seo-mass-1559930384852979796/publication-verification.json",
+  "confirmed": [
+    "create_verified_drafts.py envia e valida somente os metadados Yoast title, metadesc e focuskw; não chama scorer nem valida score persistido.",
+    "seo_feedback_deploy.py publica e preserva metadados, mas não calcula nem valida score persistido.",
+    "GET autenticado dos posts62341,62343,62345 confirma status publish e focuskw; campos numéricos de score não estão expostos. Isso não comprova ausência no banco.",
+    "O caminho histórico content-generate-rec/scripts/yoast-score-post.sh não existe; há wrapper em content-generate-rec-p1/scripts/yoast-score-post.sh.",
+    "O wrapper encontrado usa host/transporte fixo e deriva webroot do site_key; Node usa EnResearcher e locale en_GB. Não é seguro aplicá-lo por inferência aos dez site_keys REST-only/multilíngues. Nenhuma execução desse wrapper foi feita."
+  ],
+  "inference": "A lacuna de cálculo/persistência/validação do score no fluxo REST é a principal hipótese do padrão relatado, não causa raiz comprovada. Cache não confirmado.",
+  "requested_zeus_action": [
+    "Diagnóstico inicialmente somente leitura: resolver instalações e prefixos reais e ler postmeta/indexable dos30 IDs exatos do manifesto.",
+    "Comparar um artigo anterior de controle em cada portal, distinguindo análise do editor, score persistido e barra frontend.",
+    "Determinar caminho seguro de análise/persistência usando idioma real do portal e compatibilidade da versão Yoast.",
+    "Se a correção exigir script/runtime/plugin/banco técnico, informar escopo e autoridade necessária antes de alterar. Não reindexar globalmente nem forçar valores verdes.",
+    "Preservar integralmente textos, imagens, URLs, tags, categorias, meta e publicação."
+  ],
+  "writes_performed": "Somente registro local e referência procedural própria. Nenhuma alteração WordPress, score, plugin, script produtivo, runtime, cache ou credencial nesta investigação.",
+  "procedure": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress/SKILL.md"
+}
