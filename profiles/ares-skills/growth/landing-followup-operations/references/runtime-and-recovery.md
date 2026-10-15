@@ -70,6 +70,12 @@ Intervenção: human_action_required=true, required_action concreta e diagnosis.
 
 O consumidor usa timer existente; não criar cron Hermes com entrega origin/all. A conversa de controle/status do acompanhamento não bloqueia seu próprio worker; turnos de campanha nos demais canais mantêm prioridade. Após processo morrer, a liberação de reserva órfã exige source=tool da sessão, payload/owner ligados ao mesmo job e ausência de processo vivo; erro/ambiguidade não autoriza liberar.
 
+## Prioridade temporária e informes solicitados
+
+`current_priority` identifica a URL reservada e os pedidos atuais que devem vir antes dela. O scheduler ignora sua ATTENTION fechada enquanto houver pares executáveis pendentes; NEEDS_RECONCILIATION continua exigindo cleanup seguro antes de qualquer outra visita. A instrução não cancela uma limpeza ativa. OBSERVED dos pares conta como URLs feitas, pois o aviso coletivo pode depender da URL reservada; COMPLETE continua exigindo a entrega final. A ordem dos demais permanece FIFO e a rodada é congelada para evitar que pedidos novos adiem o retorno para sempre.
+
+O módulo `ares_campaign_v3.landing_followup_reporting` usa os timers já existentes do intake/consumidor, sem cron novo nem callback de criação. `progress_reporting` contém autorização, escopo, intervalo e marcos. Informa contagens/estado reais, sem afirmar visita ou conclusão por timer ativo. As mensagens são registradas como `progress_update_authorized`, entregues pelo outbox e conferidas por GET; erros técnicos mantêm gate humano-only. Fechamentos de lote humano e retorno à URL reservada podem antecipar o próximo informe. Quando todo o escopo está COMPLETE, o último informe encerra automaticamente a série.
+
 ## Testes e prova operacional
 
 ```text

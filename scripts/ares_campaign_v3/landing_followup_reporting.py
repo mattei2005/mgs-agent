@@ -35,7 +35,7 @@ def snapshot(q,cfg):
 def render(s,q,cfg):
     c=s['counts'];stamp=datetime.fromtimestamp(q.now(),ZoneInfo('America/New_York')).strftime('%d/%m às %Hh%M')
     executor='observação em execução' if s['active_jobs'] else ('recuperação em execução/pendente' if s['recovery_jobs'] else 'entre execuções da fila')
-    lines=[f'**Atualização das filas — {stamp} (Nova York)**',
+    lines=[f'**Atualização da rodada priorizada — {stamp} (Nova York)**',
            f"✅ Links validados: **{c.get('PASSED',0)}** de **{s['total']}**.",
            f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)}**.",
            f'🔄 Executor: {executor}.']

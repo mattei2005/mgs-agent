@@ -29,6 +29,7 @@ Procedimento exclusivo do processo independente que observa anúncios depois de 
 - Ares é dono de CADA tarefa até validação completa e aviso do gestor conferido. Silêncio, `READY`, timer ativo, correção instalada ou teste offline não são conclusão.
 - Rodolfo determinou recuperação autônoma: **bloqueio recuperável também é trabalho do Ares**, não motivo para abandonar a fila nem aguardar outra mensagem/autorização já existente.
 - Avisar na thread de problemas SOMENTE quando houver uma ação humana concreta indispensável. Explicar exatamente a ação; timeout, falha de ferramenta, screenshot ou reconciliação não justificam contato por si só.
+- Prioridades explícitas de uma rodada vivem em `current_priority` do contrato, com o conjunto de pedidos congelado no momento da instrução. Uma URL com fechamento comprovado pode ficar para o fim sem abandonar a task; só readback/cleanup indispensável de aba incerta precede os demais. Não interromper um fechamento ativo. Após os pares estarem observados, não esperar a confirmação coletiva que depende da própria URL adiada: isso criaria deadlock. Novos pedidos posteriores não adiam indefinidamente o retorno.
 - Credenciais, billing, restart e Critical Subset preservam seus gates. Não modificar Router, financeiro, WordPress, GAM, campanha, budget, estratégia ou início neste fluxo. Nunca clicar em anúncio.
 
 ## Dependências mínimas
@@ -62,5 +63,5 @@ Carregar `computer-use` para interação visual. Usar o transporte PC1 já confi
 
 - Conferir invariantes de fonte, origem, request/conta, query exata, identidade da aba, anúncio, foco, tempo, fechamento e outbox; não concluir pelo processo retornar zero.
 - Em status solicitado, separar execução real, recuperação aguardando, fila, links individualmente validados e pedido integralmente concluído. Usar dados atuais e contar/agrupar em código.
-- Detalhes técnicos e erros recuperáveis ficam em audit local. Não narrar cada retry a Rodolfo; só contato necessário à ação dele. Confirmação de sucesso ao gestor continua obrigatória.
+- Detalhes técnicos e erros recuperáveis ficam em audit local. Não narrar cada retry a Rodolfo; só contato necessário à ação dele. Quando Rodolfo solicitar atualizações de progresso, isso autoriza os status expressamente configurados em `progress_reporting`: usar outbox durável e GET, respeitar intervalo/marcos e encerrar os informes quando a rodada terminar. Essa exceção de progresso não libera alertas genéricos de erro. Confirmação de sucesso ao gestor continua obrigatória.
 - Mudanças de procedimento/contrato são persistidas com histórico e readback. Scripts/data operacional exigem inventário e REPORT-INFRA. Nenhum output bruto, path, PID ou credencial vai à conversa operacional.
