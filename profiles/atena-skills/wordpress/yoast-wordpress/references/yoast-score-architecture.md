@@ -103,6 +103,7 @@ WP-CLI postmeta update + SQL UPDATE on `wp_yoast_indexable` → confirmed via SS
 ### Preflight de scorer externo e persistência nativa
 
 - Selecione explicitamente o Researcher PT/ES e o locale do conteúdo autorizado; o `lang` HTML/site pode divergir do idioma editorial. Registre a divergência sem mudar o idioma global como efeito colateral.
+- Em instalações multilíngues com Polylang, `get_locale()` no WP-CLI pode refletir o idioma global, não o idioma do artigo. Confirme por ID `pll_get_post_language($id, 'slug')` e `pll_get_post_language($id, 'locale')`; use o Researcher/locale linguístico do post confirmado, registrando e preservando o locale global. Não remova o gate de idioma nem mude a configuração global: substitua a hipótese inadequada por validação nativa explícita do post, em todas as etapas e readbacks.
 - Meça `titleWidth` em pixels com o método DOM da biblioteca (Arial 20px, peso 400); comprimento em caracteres não é largura e pode produzir outra avaliação.
 - Exija SEO title expandido, permalink real, conteúdo final e resultados individuais sem erros; registre hash do input e se o resultado foi apenas calculado ou também persistido.
 - Não trate a mesma versão npm como prova de paridade com o plugin instalado: releases diferentes podem conservar a versão `yoastseo`. Valide implementação/build e contexto do editor antes de afirmar equivalência.

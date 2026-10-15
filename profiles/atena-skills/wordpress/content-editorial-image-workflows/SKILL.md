@@ -73,6 +73,7 @@ Quando a imagem precisa conter o logo oficial do site:
 - **Extensão diferente do conteúdo:** APIs de imagem podem retornar bytes JPEG mesmo quando o arquivo de saída recebeu `.png`. Rode `file`/`identify`, alinhe extensão e MIME antes do upload, porque o uploader define `Content-Type` pelo nome do arquivo.
 - **Alt desatualizado após regeneração:** reveja o texto alternativo contra a foto substituta. Se a pessoa, o equipamento ou o enquadramento mudar, corrija o alt antes do upload e confirme a versão final por readback; não descreva Steam, idioma, instituição, evento real ou profissão como se fossem visualmente comprovados por uma cena ilustrativa.
 - **Metadados de mídia incompletos:** após o upload, grave título e alt text e leia a mídia por ID; valide também a variante `large` usada no corpo e seu `Content-Type` público.
+- **Lazy-load em aba de browser oculta:** antes de classificar uma imagem ou autoria como ausente, confira `document.visibilityState`, traga a aba à frente e role o elemento real para a viewport; aguarde o carregamento com limite e valide `complete`/`naturalWidth` e o texto de autoria. Uma aba oculta pode suspender o lazy-load apesar de o arquivo responder HTTP 200. Não force `src`, eventos `load` ou conteúdo do DOM para fabricar aprovação; preserve separadas a prova de transporte e a de renderização.
 - **Imagem impactante mas suja:** contraste e golden hour não compensam artefatos grandes ou texto estranho.
 - **Comparação sem critério:** avaliar impacto visual e segurança de publicação separadamente.
 
