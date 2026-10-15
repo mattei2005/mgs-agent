@@ -213,7 +213,7 @@ Em progresso parcial, congele os manifestos já executados e crie o próximo man
 
 Faça GET autenticado por ID com `context=edit` e compare contra o payload:
 
-- ID, `status=draft`, slug, autor e título;
+- ID, status esperado no manifesto da etapa (`draft` ou `publish`), slug, autor e título;
 - `content.raw` byte a byte;
 - excerpt;
 - categoria e conjunto de tags;
@@ -253,7 +253,7 @@ A autorização antecipada para produzir e publicar cobre esta etapa; não peça
 
 3. Após cada write, releia por ID e exija `status=publish`, slug/título/autor preservados, `content.raw` exato, excerpt, categoria, conjunto de tags, featured media e meta SEO inalterados.
 4. Valide a URL pública com HTTP `200`, canonical self, robots efetivo `index,follow`, `og:image` da featured e presença real no sitemap. Releia também a contagem da categoria quando o pedido depender do lote completo.
-5. Faça browser/DOM mobile no conteúdo renderizado: H1, imagem, links, CTA/card comercial, bloco de autoria, biografia e ausência de overflow. Use cache-buster quando a URL canônica ainda servir HTML anterior. No tema CompanyBRS, inspecione `.single-post-content` (outros temas usam `.jd-post-content`) e aguarde o carregamento completo/role o bloco de autoria para a área visível antes de concluir que nome ou biografia estão ausentes; uma leitura precoce pode retornar esses campos vazios.
+5. Faça browser/DOM mobile no conteúdo renderizado: H1, imagem, links, CTA/card comercial, bloco de autoria, biografia e ausência de overflow. Use cache-buster apenas para diagnóstico; aprovação pública exige o mesmo URL canônico sem query e a distinção entre cache de origem e da aba de QA. No tema CompanyBRS, inspecione `.single-post-content` (outros temas usam `.jd-post-content`) e aguarde o carregamento completo/role o bloco de autoria para a área visível antes de concluir que nome ou biografia estão ausentes; uma leitura precoce pode retornar esses campos vazios.
    No QA mobile, reaplique o viewport na página atual antes/depois da navegação e registre/assert `screen.width`, `document.documentElement.clientWidth`, `innerWidth` e `visualViewport.width` no mesmo resultado. Compare o `scrollWidth` com `clientWidth`, não apenas com `innerWidth`: uma tabela larga pode ampliar `innerWidth` e mascarar overflow real. Nome de sessão, etiqueta “mobile” e configuração anterior não provam a largura atual. Se houver deriva, reclassifique a observação como desktop e refaça as URLs afetadas; se a largura física/client estiver correta mas houver expansão/overflow, corrija o componente editorial sem esconder/cortar conteúdo e revalide a URL canônica.
 
 6. Compare o sitemap canônico sem query com uma leitura fresca por cache-buster quando URLs recém-publicadas não aparecerem. Registre os dois resultados separadamente: presença na variante fresca não comprova atualização do sitemap canônico entregue ao crawler. Não altere cache, plugin ou runtime para esconder a divergência; escale o achado técnico.

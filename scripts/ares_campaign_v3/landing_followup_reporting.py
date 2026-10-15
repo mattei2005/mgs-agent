@@ -150,6 +150,10 @@ def prepare(q,cfg=None):
 
 
 def cycle(q,discord_factory,cfg=None):
+    # Rodolfo's explicit finish-all request is a verification barrier, not a
+    # new scheduler or another campaign/cleanup writer.
+    from . import landing_finish_all
+    landing_finish_all.cycle(q,discord_factory)
     cfg=policy() if cfg is None else cfg
     if cfg.get('enabled') is not True:return {'state':'DISABLED'}
     key=prepare(q,cfg)

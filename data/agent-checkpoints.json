@@ -972,6 +972,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-FINISH-LANDING-AND-INTRADAY-1559932317861158993",
+      "next_step": "Verificar46linksPASSED+jobsCOMPLETE+avisosGET; auditoriacheckpointcomplete+36threads existentes/vazias e6pais preservados+testeslayout. So entao aviso final unico nesta thread por outbox+GET.",
+      "objective": "Terminar C134/avisos e auditoria-limpeza36threads, avisar aqui so apos validacao integral",
+      "source": "data/agent-checkpoints.json;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/discord/intraday-audit-clear-1560303769680355525/inventory-summary.json",
+      "state": "autorizado rodolfo: termina tudo e me avisa. auditoria em execucao por sessao original; nao duplicar writes/limpeza. c134 aguardando gate de turno nativo. preparando verificacao final deterministica nos timers existentes, sem novo cron/agente/restart.",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-15T20:34:41+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -6002,5 +6012,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T20:24:40+00:00"
+  "updated_at": "2026-10-15T20:34:41+00:00"
 }

@@ -179,6 +179,7 @@ Use Python with `PARSE_ID` env var to match exact post_id in SQL result row.
 2. Inspecione o schema real e leia o alvo com o wrapper que mantém credenciais fora de argv:
    ```bash
    source /root/mgs-agent/skills/content-publish-wordpress/scripts/wp-curl-auth.sh
+   response_file=$(mktemp "${TMPDIR:?}/yoast-meta.XXXXXX")
    http=$(wp_curl_auth_http "$response_file" "$WP_USER" "$WP_PASS" \
      "$WP_URL/wp-json/wp/v2/posts/$POST_ID?context=edit&_fields=id,meta")
    ```

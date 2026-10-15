@@ -54,7 +54,7 @@ Yoast stores scores in **two layers**:
 
 Os contratos e o histórico de implementação estão em `references/yoast-score-architecture.md`; confirme fonte, versão e efeitos antes de qualquer alteração técnica autorizada.
 
-**Key lesson:** Never use `rest_after_insert_post` to touch the Yoast indexable. Any interference causes score flicker. Let Yoast calculate autonomously.
+**Regra de cálculo:** hooks PHP de save/reindex constroem o indexable, mas não executam a análise linguística JavaScript. Não acrescente um `rest_after_insert_post` próprio para simular notas ou manipular o indexable; calcule com o analisador genuíno e use a rota nativa comprovada para persistir as saídas.
 
 A análise usa a biblioteca genuína `yoastseo`; o wrapper existente abaixo é apenas uma entrada a considerar **depois** do preflight de compatibilidade, não uma garantia de suporte ao próximo portal:
 ```bash
