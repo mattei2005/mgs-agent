@@ -33,6 +33,12 @@ Compare ID/slug com o item dedicado e confira `edit_posts` e `upload_files`. Uma
 
 Autenticação válida, permissão declarada e ativação do `site_key` são resultados distintos. Se houver bloqueio, informe o que foi efetivamente testado, a dependência exata e a ausência de writes; preserve o ponto de retomada sem declarar o lote produzido.
 
+## Entrega exclusivamente local, quando expressamente solicitada
+
+Quando o briefing limitar a tarefa a JSONs locais, aplique o gate de domínio e use a REST pública para inventário; não consulte vault, não teste credenciais, não crie categoria e não altere configuração para produzir texto. Registre separadamente a cobertura pública completa e a impossibilidade de inventariar drafts/privados. A ausência de acesso a `excerpt.raw` deve permanecer explícita: `excerpt.rendered` pode ser fallback automático e não prova que o raw esteja preenchido.
+
+Persista cada pequeno batch antes do seguinte e valide o conjunto relendo os JSONs finais, não apenas os textos geradores. Um marcador editorial de imagem e prompts/ALT completos atendem à preparação local quando a geração foi delegada, mas não constituem imagem gerada ou QA visual. Sugestões entre novos artigos devem apontar para `local_id` em `pending_internal_links`, sem href inventado; os links já inseridos devem vir literalmente da REST, ter mercado verificado, GET 200, URL final igual e canonical self. Distinga recuperação de conteúdo oficial por extrator de evidência HTTP direta: páginas BCB podem retornar 200 com apenas shell JS, enquanto Planalto/Fipe podem exigir outro transporte; preserve o erro original e a proveniência recuperada sem alegar 200 onde houve 403 ou timeout.
+
 ## 2. Inventariar a categoria completa
 
 Resolva o termo pelo slug:
@@ -48,6 +54,7 @@ GET /wp-json/wp/v2/posts?categories=<id>&per_page=100&page=<n>&_fields=id,date,s
 ```
 
 - Compare o total coletado com `category.count`.
+- Reconcilie também com o sitemap de posts antes de declarar inventário completo. Filtros de plugins podem suprimir uma classe de posts na coleção REST mesmo com `X-WP-TotalPages=1`: se o sitemap trouxer URLs ausentes ou `category.count` divergir, leia o HTML canônico dessas URLs, extraia o ID real de `postid-<id>` e consulte `GET /wp-json/wp/v2/posts/<id>` individualmente. Agregue por ID, confirme categoria e `link`, e exclua somente raízes/home que não são posts; não atribua a divergência a cache sem verificar.
 - Se `X-WP-TotalPages > 1`, percorra todas as páginas e dedupe por ID antes de analisar.
 - Para cada post, use `content.rendered` para métricas visíveis e faça uma amostra autenticada `context=edit` para conferir `content.raw` e `excerpt.raw`.
 - Não use apenas a primeira página do arquivo visual: temas antigos e posts fora da dobra continuam bloqueando duplicidade.

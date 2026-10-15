@@ -636,7 +636,7 @@
       "authorized_by_discord_id": "344196393512075265",
       "source_thread_id": "1560303769680355525",
       "source_message_id": null,
-      "source_description": "Rodolfo approved the twelve-column report as the default for all SHEIN ad accounts regardless of domain, manager or requester; explicit different requests remain allowed.",
+      "source_description": "Rodolfo approved the SHEIN report default for all domains/managers, then added R/E as the first column and a seven-date campaign ROI history immediately below the main report; explicit different requests remain allowed.",
       "reference_labels_message_id": "1560305388837150800",
       "scope": "all_SHEIN_ad_accounts_independent_of_domain_manager_channel_or_requester",
       "scope_channels": [
@@ -649,6 +649,7 @@
       ],
       "scope_channels_are_examples_not_limit": true,
       "columns": [
+        "R/E",
         "Início",
         "Nº",
         "Produto",
@@ -669,9 +670,9 @@
         "owner": "Rodolfo Mattei",
         "source_thread_id": "1560303769680355525",
         "source_message_id": null,
-        "source_description": "Rodolfo requested GAM delay in SHEIN reports like CPV; additive to the twelve-column default, independent of domain or manager.",
+        "source_description": "Rodolfo requested GAM delay in SHEIN reports like CPV; mandatory header indicator independent of domain or manager, separate from the table columns.",
         "label": "⏱️ ATRASO GAM/SB",
-        "placement": "prominent_header_above_table_not_a_thirteenth_column",
+        "placement": "prominent_header_above_table_not_an_additional_column",
         "source": "Smart Bidding POST /estimated/delay",
         "payload": {"publisherIds": "resolve_actual_authorized_publishers_for_report_domain", "currency": "report_currency"},
         "value_field": "totalMinutes",
@@ -694,6 +695,7 @@
       "legacy_models_are_not_implicit_overrides": true,
       "missing_metric_policy": "keep_column_show_n/d_with_limitation_never_invent_or_silently_omit",
       "definitions": {
+        "R/E": "two_independent_ROI_direction_dots_real_then_estimated_green_positive_red_negative_yellow_exact_zero_white_missing_no_action_semantics",
         "Início": "first_delivery_proven_by_Meta_Insights_in_account_timezone",
         "Nº": "literal_campaign_number_from_verified_name_never_fabricated",
         "Produto": "short_product_label_from_name_not_visual_validation",
@@ -709,8 +711,43 @@
       },
       "period_and_selection": "follow_current_request_no_inherited_health_threshold",
       "on_demand_only": true,
-      "revision": "Twelve labels and order are the default for every SHEIN ad account; an explicit different request may adapt the report without changing this default. Domain and access gates remain unchanged.",
+      "roi_direction_signal": {
+        "placement": "first_column_R/E",
+        "order": ["ROI", "ROI est."],
+        "positive": "🟢",
+        "negative": "🔴",
+        "exact_zero": "🟡",
+        "missing_or_invalid": "⚪",
+        "compare_unrounded_values": true,
+        "meaning": "ROI_direction_only_not_action_status_learning_or_scale_permission"
+      },
+      "campaign_roi_history": {
+        "required": true,
+        "placement": "immediately_below_complete_main_report",
+        "scope": "same_campaign_ids_and_same_order_as_main_report",
+        "days": 7,
+        "window": "report_date_and_six_prior_calendar_dates_in_Meta_account_timezone",
+        "date_order": "oldest_to_newest",
+        "prefix_columns": ["Início", "Nº", "Dia"],
+        "metric": "daily_real_net_ROI_percent",
+        "formula": "100 * (NET_REVENUE_SB - spend_Meta) / spend_Meta",
+        "join_key": ["account_id", "campaign_id", "civil_date"],
+        "day_label": "D_number_of_calendar_days_since_first_proven_delivery_inclusive_not_CPV_lifecycle",
+        "current_day": "asterisk_and_explicit_partial_until_time_with_account_timezone",
+        "no_positive_spend_or_missing_revenue": "n/d_never_imputed_zero_or_carried_forward",
+        "current_day_must_match_main_ROI": true,
+        "history_source": "SB_Adgroup_daily_NET_REVENUE_and_Meta_daily_Insights_spend_same_currency",
+        "no_CPV_strategy_or_action_inheritance": true
+      },
+      "revision": "R/E precedes the twelve approved labels; seven-date real ROI history follows the main table. Applies to every SHEIN ad account; explicit different requests may adapt presentation. GAM delay stays in the header. Domain and access gates remain unchanged.",
       "superseded_layouts": [
+        {
+          "status": "SUPERSEDED",
+          "source_thread_id": "1560303769680355525",
+          "columns": ["Início", "Nº", "Produto", "Quiz", "Gasto", "Receita", "Saldo", "Est.Health", "ROI", "ROI est.", "ROAS", "Lance"],
+          "scope": "all_SHEIN_ad_accounts_independent_of_domain",
+          "superseded_by": "ARES-SHEIN-REPORT-RE-HISTORY7D-20261015"
+        },
         {
           "status": "SUPERSEDED",
           "source_thread_id": "1557059385417797723",

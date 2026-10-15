@@ -3038,10 +3038,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-RE-HISTORY7D-20261015",
       "title": "Todas as contas SHEIN: padrão de relatório de doze colunas, independente do domínio; adaptações expressas permitidas",
-      "updated_at": "2026-10-15T15:14:52+00:00"
+      "updated_at": "2026-10-15T15:26:27+00:00"
     },
     {
       "canonical_key": "ares.shein.batch-global-qa-activation",
@@ -4061,6 +4061,25 @@
       "superseded_by": null,
       "title": "Relatórios SHEIN incluem atraso GAM/SB no cabeçalho, mantendo as doze colunas",
       "updated_at": "2026-10-15T15:19:05+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-15T15:26:27+00:00",
+      "id": "ARES-SHEIN-REPORT-RE-HISTORY7D-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Padrão SHEIN: R/E na primeira coluna e histórico diário de ROI real com sete datas abaixo do principal",
+      "updated_at": "2026-10-15T15:26:27+00:00"
     },
     {
       "canonical_key": "ares.shein.human-request-pattern",
@@ -12130,5 +12149,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T15:19:05+00:00"
+  "updated_at": "2026-10-15T15:26:27+00:00"
 }
