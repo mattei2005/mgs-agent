@@ -1203,12 +1203,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1560131119834468494",
-      "next_step": "Executar sequencialmente dry-run e campaign central por fonte; reconciliar mesmos IDs em falha; validar agregado16 antes da conclusao",
+      "next_step": "Nenhum write pendente. Nao repetir criacao ou ativacao; novo pedido recebe novo request. Consultas futuras usam IDs do recibo.",
       "objective": "Duplicar C110x4 C104x4 C111x4 C114x4 Yolokfx02 G006 USD45/dia inicio 15/10/2026 00:00 ET",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560131119834468494",
-      "state": "intake_registered_16_campaigns_720usd_daily; four deterministic subrequests pending live preflight",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560131119834468494/complete-verified.json",
+      "state": "completed_verified: c135-c138 fonte110 cost_cap usd0.90; c139-c142 fonte104 cost_cap usd1.00; c143-c146 fonte111 e c147-c150 fonte114 cost_cap usd0.90. 16 campanhas active programadas 15/10/2026 00:00 america/new_york; 40 ads; usd45/dia cada e usd720/dia no lote; lances reais herdados por fonte; qa16/16. recovery preservou campaign/adset/ad ids; posts novos; entrega nao comprovada.",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-10-15T03:24:44+00:00"
+      "updated_at": "2026-10-15T03:34:08+00:00"
     },
     {
       "agent": "ares",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T03:24:44+00:00"
+  "updated_at": "2026-10-15T03:34:08+00:00"
 }

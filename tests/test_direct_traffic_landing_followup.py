@@ -339,6 +339,14 @@ class FollowupTests(unittest.TestCase):
         self.q.claim_recovery('repair')
         with self.assertRaises(ValueError):self.q.reconcile(self.key,0,self.closure('tab-2'),resume=True)
 
+    def test_reconciled_absence_history_counts_once_per_real_attempt(self):
+        self.start()
+        with self.q.tx():
+            for kind in ['reconciled_no_ad','observation_result']:
+                self.q.event(self.key,kind,{'idx':0,'attempt':1,'result':'NO_AD'})
+            self.q.event(self.key,'reconciled_no_ad',{'idx':0,'attempt':2,'result':'NO_AD'})
+        self.assertEqual(self.q.no_ad_count(self.key,0),2)
+
     def test_no_tab_recovery_requires_zero_input_readback(self):
         self.start();self.clock.value+=601;self.q.recover_expired()
         with self.assertRaises(ValueError):self.q.reconcile(self.key,0,{'no_tab_opened':True,'diagnosis':'offline'},resume=True)

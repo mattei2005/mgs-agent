@@ -225,9 +225,12 @@ class Queue:
             return self.job(key)
 
     def no_ad_count(self,key,idx):
-        return sum(1 for r in self.db.execute("SELECT detail FROM events WHERE job=? AND kind='observation_result'",(key,))
-            if (d:=json.loads(r['detail'])).get('idx')==idx and (d.get('result')=='NO_AD' or
-                (not d.get('result') and d.get('state') in {'WAIT_RETRY','ATTENTION'} and not (d.get('evidence') or {}).get('diagnosis'))))
+        attempts=set()
+        for r in self.db.execute("SELECT seq,detail FROM events WHERE job=? AND kind IN ('observation_result','reconciled_no_ad')",(key,)):
+            d=json.loads(r['detail'])
+            confirmed=d.get('result')=='NO_AD' or (not d.get('result') and d.get('state') in {'WAIT_RETRY','ATTENTION'} and not (d.get('evidence') or {}).get('diagnosis'))
+            if d.get('idx')==idx and confirmed:attempts.add(d.get('attempt',('event',r['seq'])))
+        return len(attempts)
 
     def claim(self,owner,ttl=600):
         with self.tx():
@@ -425,7 +428,8 @@ def preserve_evidence(e,key,idx,attempt):
     e=json.loads(json.dumps(e))
     destination=Path('/root/.hermes/profiles/ares/artifacts/landing-followup')/key/str(idx)/str(attempt)
     paths=[]
-    if e.get('closed_screenshot'):paths.append((e,'closed_screenshot'))
+    for field in ('closed_screenshot','observation_screenshot','current_browser_screenshot'):
+        if e.get(field):paths.append((e,field))
     paths.extend((x,'screenshot') for x in e.get('samples',[]))
     if paths:destination.mkdir(parents=True,exist_ok=True,mode=0o700)
     for number,(container,field) in enumerate(paths):
@@ -552,7 +556,8 @@ def worker_prompt(key,owner,idx,job):
             'Se --recovered for aceito, libere a lease e encerre, sem reconcile adicional. SOMENTE se não houver prova completa aproveitável, depois do readback/fechamento seguro salve evidência real e execute '
             'scripts/ares-direct-traffic-followup.py reconcile --key '+key+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <arquivo> --resume. '
             'Quando nenhuma aba foi aberta, exija evidência da sessão anterior: no_tab_opened=true, browser_inputs_zero_verified=true e diagnosis; não invente identidade/fechamento. '
-            'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões. '
+            'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões; após comprovar fechamento use reconcile SEM --resume para encerrar a visita como ATTENTION e liberar os outros links, mantendo o diagnóstico pendente sob sua responsabilidade. '
+            'Prova completa de ausência da última tentativa pode ser persistida com result --result NO_AD --recovered, sem outra visita. Não perder observações apenas porque o write do JSON original não terminou; reconstruir somente fatos verificados nos outputs/imagens reais. '
             'Somente se a solução exigir ação indispensável de Rodolfo, use need-action --key '+key+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <JSON com human_action_required=true, required_action concreta e diagnosis>. '
             'Se PC1 ocupado/indisponível, defer --key '+key+' --owner '+owner+' e libere lease. '
             'Não encerrar deixando apenas texto: persistir reconcile/defer e liberar lease em finally. '

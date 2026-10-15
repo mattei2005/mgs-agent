@@ -37,6 +37,12 @@ $(dirname "$(command -v hermes)")/python /root/mgs-agent/scripts/ares-direct-tra
 
 Exige job RUNNING/OPEN_INTENT, lease física e sessão reais. Faz somente `computer_use(action=capture, app=screen)` pelo handler existente e salva frames novos/tempos reais no armazenamento protegido. `CAPTURED_NOT_PASS` não atesta anúncio nem foco. O agente revisa todas as amostras que usará e só então preenche a evidência. `CADENCE_NOT_VALIDATED`/`CAPTURE_ERROR` não significam ausência de anúncio; recapturar na mesma aba, corrigir causa, fechar/verificar e registrar resultado seguro. Não retimar arquivos nem somar trechos desconexos.
 
+## Registro compacto — persistir antes de expirar
+
+Não escrever um grande JSON narrativo nem reler o código por URL. Usar `result --evidence-json '<JSON mínimo real>'`, na mesma CLI e com os mesmos key/owner/index/session/result. O caminho antigo `--evidence <arquivo>` continua válido. Para PASS, `--use-captured-samples --frames-reviewed` incorpora a série real do coletor somente após confirmação explícita do agente de que TODOS os frames mostram anúncio e aba ativa. Cadência sem revisão visual é rejeitada. Metadados mínimos: observed_url, resolved_landing_url e mapping_source; new_tab_identity; tab_closed_verified, other_tabs_preserved e closed_screenshot; network_ad_confirmed e ad_description. As samples vêm do coletor, sem copiar manualmente cada hash/frame.
+
+Para NO_AD normal, registrar identidade, fechamento e preservação reais com closed_screenshot. Guardar também observation_screenshot e visual_review para eventual recuperação. `--recovered` permite registrar PASS ou NO_AD da última tentativa sem revisitar; exige imagem da própria tentativa e fechamento posterior. Não transformar ausência em PASS. Um arquivo cujo write falhou não é evidência existente: o conteúdo proposto precisa ser reconstruído e conferido independentemente contra outputs/imagens reais antes de uso.
+
 ## Evidência mínima
 
 PASS:
