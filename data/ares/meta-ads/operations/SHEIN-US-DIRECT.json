@@ -631,10 +631,14 @@
   },
   "reporting": {
     "on_demand_default_layout": {
-      "status": "PROVISIONAL_ACTIVE_UNTIL_EXPLICIT_REVISION",
+      "status": "ACTIVE_UNTIL_EXPLICIT_REVISION",
       "owner": "Rodolfo Mattei",
-      "source_thread_id": "1557059385417797723",
-      "reference_thread_id": "1557056254730436671",
+      "authorized_by_discord_id": "344196393512075265",
+      "source_thread_id": "1560303769680355525",
+      "source_message_id": null,
+      "source_description": "Rodolfo approved the twelve-column report as the default for all SHEIN ad accounts regardless of domain, manager or requester; explicit different requests remain allowed.",
+      "reference_labels_message_id": "1560305388837150800",
+      "scope": "all_SHEIN_ad_accounts_independent_of_domain_manager_channel_or_requester",
       "scope_channels": [
         "shein-g001",
         "shein-g002",
@@ -643,20 +647,54 @@
         "shein-g005",
         "shein-g006"
       ],
+      "scope_channels_are_examples_not_limit": true,
       "columns": [
         "Início",
-        "Campanha",
-        "Custo/Res.",
-        "Gasto $",
+        "Nº",
+        "Produto",
+        "Quiz",
+        "Gasto",
+        "Receita",
+        "Saldo",
         "Est.Health",
         "ROI",
-        "ROAS"
+        "ROI est.",
+        "ROAS",
+        "Lance"
       ],
       "format": "short_header_aligned_text_table_short_footer",
-      "campaign_label": "number_and_short_product_name_preserving_relevant_qualifiers",
+      "campaign_label": "separate_number_and_short_product_label_not_visual_proof",
+      "default_for_generic_report_requests": true,
+      "explicit_request_override_allowed": true,
+      "legacy_models_are_not_implicit_overrides": true,
+      "missing_metric_policy": "keep_column_show_n/d_with_limitation_never_invent_or_silently_omit",
+      "definitions": {
+        "Início": "first_delivery_proven_by_Meta_Insights_in_account_timezone",
+        "Nº": "literal_campaign_number_from_verified_name_never_fabricated",
+        "Produto": "short_product_label_from_name_not_visual_validation",
+        "Quiz": "version_from_verified_ad_destinations_mixed_or_n/d_when_needed",
+        "Gasto": "Meta_spend_same_period_and_currency",
+        "Receita": "Smart_Bidding_NET_REVENUE",
+        "Saldo": "NET_REVENUE_minus_Meta_spend",
+        "Est.Health": "Smart_Bidding_Adgroup_health_formula_over_summed_counters",
+        "ROI": "100 * (NET_REVENUE - Meta_spend) / Meta_spend",
+        "ROI est.": "100 * (REVENUE_ESTIMATED - Meta_spend) / Meta_spend",
+        "ROAS": "Meta_omni_purchase_ROAS_not_Smart_Bidding_ROI",
+        "Lance": "live_campaign_adset_bid_strategy_MAXVOL_COCAP_BIDCAP_or_mixed_no_name_inference"
+      },
       "period_and_selection": "follow_current_request_no_inherited_health_threshold",
       "on_demand_only": true,
-      "revision": "Rodolfo will align future report requests with Geizian; no automatic expiry or inferred new model"
+      "revision": "Twelve labels and order are the default for every SHEIN ad account; an explicit different request may adapt the report without changing this default. Domain and access gates remain unchanged.",
+      "superseded_layouts": [
+        {
+          "status": "SUPERSEDED",
+          "source_thread_id": "1557059385417797723",
+          "reference_thread_id": "1557056254730436671",
+          "columns": ["Início", "Campanha", "Custo/Res.", "Gasto $", "Est.Health", "ROI", "ROAS"],
+          "scope": "six_SHEIN_manager_channels",
+          "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015"
+        }
+      ]
     },
     "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
     "automatic_optimization_enabled": false,

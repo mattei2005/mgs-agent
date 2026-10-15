@@ -3025,6 +3025,25 @@
       "updated_at": "2026-09-14T15:04:59+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-15T15:14:52+00:00",
+      "id": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Todas as contas SHEIN: padrão de relatório de doze colunas, independente do domínio; adaptações expressas permitidas",
+      "updated_at": "2026-10-15T15:14:52+00:00"
+    },
+    {
       "canonical_key": "ares.shein.batch-global-qa-activation",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/batch-paused-qa-activation.md",
       "consumers": [
@@ -4089,10 +4108,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "SHEIN seis canais: modelo provisório de relatório alinhado à referência G003",
-      "updated_at": "2026-10-06T16:18:20+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "ares.shein.source-setup-tracking-preservation",
@@ -4308,10 +4327,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "Yolo G001 Health: ordem de colunas, numero e produto, tabela sem preambulo extenso",
-      "updated_at": "2026-10-06T16:09:21+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.yolo-g002.report.column-order",
@@ -4325,10 +4344,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "Yolo G002: Inicio Campanha Custo/Res Gasto Est.Health ROI ROAS",
-      "updated_at": "2026-10-06T16:06:58+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "ares.shein.reporting.thread.1560303769680355525.layout",
@@ -4342,10 +4361,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "Diretoria YOLO G002: doze colunas aprovadas na referência visual",
-      "updated_at": "2026-10-15T14:58:36+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "growth.shein.yolo.g002.analysis.20261002",
@@ -4377,10 +4396,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "Yolo G003 Health report: Inicio Campanha Custo/Res Gasto Est.Health ROI ROAS",
-      "updated_at": "2026-10-06T16:03:35+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.yolo-g004.health-report.column-order",
@@ -4395,10 +4414,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "Yolo G004 Health report: Inicio Campanha Custo/Res Gasto Est.Health ROI ROAS",
-      "updated_at": "2026-10-06T16:05:11+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.yolo-g005.health-report.column-order",
@@ -4413,10 +4432,10 @@
       "kind": "procedure",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "Yolo G005: Inicio Campanha Custo/Res Gasto Est.Health ROI ROAS",
-      "updated_at": "2026-10-06T16:05:17+00:00"
+      "updated_at": "2026-10-15T15:14:52+00:00"
     },
     {
       "canonical_key": "content.editorial.taxonomy.language-country-and-topics",
@@ -12092,5 +12111,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T15:00:58+00:00"
+  "updated_at": "2026-10-15T15:14:52+00:00"
 }

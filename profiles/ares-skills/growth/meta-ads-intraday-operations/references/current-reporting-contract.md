@@ -2,6 +2,10 @@
 
 Este arquivo define somente a apresentação e as evidências mínimas. Métricas, horários, thresholds e ações vêm do contrato da operação.
 
+## Exceção de apresentação — contas SHEIN
+
+Para pedido genérico de relatório de qualquer conta de anúncio SHEIN, independentemente de domínio, gestor, canal ou solicitante autorizado, usar **Início → Nº → Produto → Quiz → Gasto → Receita → Saldo → Est.Health → ROI → ROI est. → ROAS → Lance**, por decisão de Rodolfo na thread `1560303769680355525`. Esse layout específico prevalece sobre o conteúdo genérico abaixo e os antigos modelos de sete colunas. Pedido explícito diferente pode adaptar o relatório. Fonte canônica: `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`; carregar `direct-traffic-shein-operations` e sua referência `smartbidding-product-analysis.md` para definições e coleta. Não ampliar permissões, períodos, filtros, automação ou domínio por essa regra de apresentação.
+
 ## Cabeçalho obrigatório
 
 ```text
