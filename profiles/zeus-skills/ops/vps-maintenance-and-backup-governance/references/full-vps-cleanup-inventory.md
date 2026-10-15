@@ -73,6 +73,18 @@ A destructive cleanup can be filesystem-correct while its Git evidence looks inc
 
 Exception: if audit, expected-service state, and the owning security checkpoint prove auto-commit is intentionally disabled for active sensitive-data containment, do not restart it or make a manual commit merely to close the cleanup. Reconcile every dirty path to authorized concurrent work, keep the validated filesystem/result/inventory/audit closure local, and record versioning as governed by the parent security incident. An intentionally paused writer is different from an unexplained inactive writer; only the latter blocks closure as an infrastructure fault.
 
+#### Untracked targets and native batching
+
+When the reviewed targets are untracked, rerun `git ls-files -z` from the owning repository immediately before deletion and compare its paths programmatically against the exact target roots. If the intersection remains empty, leave the healthy auto-commit watcher running; pausing it adds no tracked-deletion protection. If any target became tracked, stop before deletion and apply the tracked-target closure above.
+
+After filesystem acceptance, verify the governance artifacts independently of the deletion targets:
+
+1. Read the watcher's live batch-size and maximum-wait settings rather than guessing that a quiet period flushes it.
+2. Fetch the repository's remote and compare each scoped local artifact with `git show origin/main:<path>` by checksum. Include the frozen manifest, executor, approval receipt, final result/checksum and validation evidence.
+3. Parse the remote inventory and checkpoint blobs and require this operation's final status and result checksum. `HEAD == origin/main` alone does not prove closure: both refs can still point to the previous planning commit while completed local records await batching.
+4. If the watcher is active and the only gap is normal batching, wait in a bounded foreground loop within its configured maximum window, then fetch and repeat the scoped checks. Do not manufacture events, shorten batching or manually commit merely to accelerate a healthy writer.
+5. Keep the synchronization receipt outside the already-sealed result, or reseal that result if it is changed; otherwise recording the remote verification would invalidate the checksum just verified.
+
 ### 3.2 Upstream advancement discovered during cleanup
 
 A final fetch may show that an application upstream advanced after the destructive manifest was confirmed. Do not let that moving ref rewrite the cleanup result or silently widen the authorized scope.
@@ -98,7 +110,18 @@ Use this order:
 
 If anything writes the result after step 4, recompute the checksum and replace the inventory/audit receipt before closure. Never leave an intermediate checksum labeled as final.
 
-### 3.4 Residual-only open-item ledger
+### 3.4 No-tool profile availability smoke
+
+For filesystem-only cleanup, use a bounded, tool-disabled one-shot through the launcher reconciled with live gateway PIDs. Check the current CLI help before reusing flags, then run once for each named production profile:
+
+```bash
+/root/.local/bin/hermes -p <profile> config check
+/root/.local/bin/hermes -p <profile> chat --oneshot -Q -t '' --max-turns 1 --run-budget 60 -q 'Reply only MGS_CLEANUP_SMOKE_OK. Do not use tools or modify files.'
+```
+
+Require both exit codes to be zero and the marker in the final answer; retain compact per-profile results and elapsed times. Compare the gateway PIDs with the immediate pre-deletion baseline to prove no restart occurred. A successful text smoke proves agent/provider availability, not browser login, financial UI correctness or unchanged database contents; retain those independent checks. Keep the probe free of delegated work and operational tool calls so validation does not become another production task.
+
+### 3.5 Residual-only open-item ledger
 
 After deletion, build a fresh residual inventory and classify what remains into three separate lists:
 
