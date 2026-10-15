@@ -158,6 +158,10 @@ For a supplied all-network/all-account closing workbook, load `references/adops-
 
 For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remain reference inputs. **For January–July historical Dashboard, Rodolfo's2026-09-08 correction supersedes Caixa-backed financial values: use each imported monthly tab and its site blocks exclusively.** Manager workbooks are upstream dependencies used to validate imported calculations, not independent dashboard facts.
 
+## Explaining pending daily imports
+
+When Rodolfo asks what is pending, lead with the exact account/site, its verified manager and the missing financial fact—not merely “partial fill” or “query unconfirmed.” Distinguish the month-to-date recheck window from the latest incomplete day; a failed accumulated query does not mean every earlier day is unfilled. State what was saved, what remains unconfirmed, the effect on the last complete day, and whether any answer is actually required from him. Keep technical recovery with Zeus; do not turn a recoverable collection failure into a request for business confirmation. Follow the recovery procedure in `references/api-first-site-daily-spend.md` before declaring closure.
+
 ## Non-negotiable rules
 
 1. Work one confirmed problem at a time when Rodolfo requests the stepwise flow.
