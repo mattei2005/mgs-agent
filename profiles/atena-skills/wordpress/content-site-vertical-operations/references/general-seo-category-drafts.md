@@ -120,6 +120,7 @@ Inspecione também o trecho final de `content.raw` em várias referências. Card
 - Posicione `<!-- wp:image ... -->` conforme o briefing; se não houver instrução, use o ponto observado no corpus. Quando a exigência for logo após a primeira frase, encerre o parágrafo nessa frase e insira o bloco antes da próxima frase, não depois de um parágrafo com várias sentenças.
 - Use parágrafos curtos e o número de H2s medido.
 - Não acrescente lista, tabela ou FAQ se o padrão dominante não usa esses blocos.
+- Quando o artigo autorizado já tiver tabela, preserve o `<table>` completo dentro do bloco nativo `<!-- wp:table --><figure class="wp-block-table">...</figure><!-- /wp:table -->` quando necessário ao estilo do tema. Prove no canônico que o `overflow-x:auto` fica no contêiner, sem expandir a página, e que a primeira e a última colunas continuam acessíveis. Não esconda overflow no body nem corte/reduza informação para passar o QA; wrappers preservam texto, células e fontes, mas exigem novo hash/readback e análise sobre o corpo final.
 - Deixe `excerpt` explicitamente vazio quando o corpus usa fallback do primeiro parágrafo.
 
 Use a mesma mídia no corpo e em `featured_media` quando o briefing exigir; sem instrução explícita, siga a relação confirmada no corpus. Compare o ID de mídia, não apenas URLs, pois o corpo pode usar uma derivada da mesma imagem. Use o tamanho WordPress `large`, não a URL original, para o bloco do corpo:
