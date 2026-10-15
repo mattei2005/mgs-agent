@@ -664,6 +664,13 @@
         "Lance"
       ],
       "format": "short_header_aligned_text_table_short_footer",
+      "alignment": {
+        "main": {"default": "center", "left_aligned_exceptions": ["Produto"], "headers_match_cells": true},
+        "history": {"default": "center", "headers_match_cells": true},
+        "display_width": "unicode_visual_width_handle_emoji_combining_and_double_width_not_codepoint_length",
+        "source_thread_id": "1560303769680355525",
+        "source_message_id": "1560315984261287949"
+      },
       "required_header_indicators": ["gam_delay"],
       "gam_delay": {
         "status": "ACTIVE",
@@ -695,7 +702,7 @@
       "legacy_models_are_not_implicit_overrides": true,
       "missing_metric_policy": "keep_column_show_n/d_with_limitation_never_invent_or_silently_omit",
       "definitions": {
-        "R/E": "two_independent_ROI_direction_dots_real_then_estimated_green_positive_red_negative_yellow_exact_zero_white_missing_no_action_semantics",
+        "R/E": "real_then_estimated_dots_real_sign_unchanged_estimated_red_below_10_yellow_10_through_40_inclusive_green_above_40_white_missing_no_action_semantics",
         "Início": "first_delivery_proven_by_Meta_Insights_in_account_timezone",
         "Nº": "literal_campaign_number_from_verified_name_never_fabricated",
         "Produto": "short_product_label_from_name_not_visual_validation",
@@ -714,12 +721,22 @@
       "roi_direction_signal": {
         "placement": "first_column_R/E",
         "order": ["ROI", "ROI est."],
-        "positive": "🟢",
-        "negative": "🔴",
-        "exact_zero": "🟡",
+        "real_roi": {
+          "positive": "🟢",
+          "negative": "🔴",
+          "exact_zero": "🟡"
+        },
+        "estimated_roi": {
+          "unit": "percentage_points",
+          "red": {"operator": "lt", "value": 10, "color": "🔴"},
+          "yellow": {"operator": "between_inclusive", "lower": 10, "upper": 40, "color": "🟡"},
+          "green": {"operator": "gt", "value": 40, "color": "🟢"},
+          "missing_or_invalid": "⚪"
+        },
         "missing_or_invalid": "⚪",
         "compare_unrounded_values": true,
-        "meaning": "ROI_direction_only_not_action_status_learning_or_scale_permission"
+        "meaning": "real_ROI_direction_and_estimated_ROI_bands_only_not_action_status_learning_or_scale_permission",
+        "superseded_rules": [{"status": "SUPERSEDED", "rule": "estimated_ROI_used_sign_only_like_real_ROI", "superseded_by": "ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015"}]
       },
       "campaign_roi_history": {
         "required": true,
@@ -737,9 +754,21 @@
         "no_positive_spend_or_missing_revenue": "n/d_never_imputed_zero_or_carried_forward",
         "current_day_must_match_main_ROI": true,
         "history_source": "SB_Adgroup_daily_NET_REVENUE_and_Meta_daily_Insights_spend_same_currency",
+        "trailing_columns": ["Média 7d"],
+        "mean_roi_7d": {
+          "required": true,
+          "placement": "rightmost_after_seven_daily_date_columns",
+          "metric": "arithmetic_mean_of_valid_daily_real_ROI_percentages_not_spend_weighted_period_ROI",
+          "formula": "sum(unrounded_valid_daily_ROI) / count(valid_daily_ROI)",
+          "window": "same_seven_dates_displayed_in_history",
+          "missing_days": "exclude_n/d_never_impute_zero_show_valid_count_as_n/7_when_below_seven",
+          "no_valid_days": "n/d",
+          "current_partial_day": "include_if_valid_and_mark_average_with_asterisk_and_snapshot_note",
+          "rounding": "calculate_from_unrounded_ROI_then_format_HALF_UP_like_history_percentages"
+        },
         "no_CPV_strategy_or_action_inheritance": true
       },
-      "revision": "R/E precedes the twelve approved labels; seven-date real ROI history follows the main table. Applies to every SHEIN ad account; explicit different requests may adapt presentation. GAM delay stays in the header. Domain and access gates remain unchanged.",
+      "revision": "R/E precedes the twelve approved labels; real dot uses sign and estimated dot uses red<10%, yellow10%-40%inclusive, green>40%. Seven-date real ROI history follows main table with rightmost arithmetic Média 7d, excluding n/d and marking partial. All SHEIN accounts; explicit presentation overrides allowed. GAM delay/access gates unchanged.",
       "superseded_layouts": [
         {
           "status": "SUPERSEDED",

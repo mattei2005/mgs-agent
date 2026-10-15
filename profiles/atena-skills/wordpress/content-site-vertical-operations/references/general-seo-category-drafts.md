@@ -8,7 +8,7 @@ Criar lotes de artigos SEO inéditos que preservem o padrão editorial real de u
 
 ### Autoridade editorial permanente da gestora
 
-Raquel Oliveira é a gestora de conteúdo e tem autorização permanente de Rodolfo para lotes SEO e pedidos editoriais semelhantes. Não repita a exigência de aprovação do CEO quando Raquel já autorizou a rotina. Fonte canônica: `/root/mgs-agent/data/atena/editorial-manager-authority.json`, autoridade `1560305141431668887`. Quando faltar integração mínima de portal MGS allowlisted, resolva a dependência com dados reais confirmados conforme essa autoridade e preserve os registros existentes; não use a ausência de site_key para recusar novamente o pedido nem publique antes de concluir a integração. Menus e dependências fora das capacidades do Editor usam apoio técnico autorizado; não elevar função nem contornar segurança. Critical Subset, credenciais, plugin/runtime, mudança estrutural e restrições específicas de Finance/Router permanecem inalterados.
+Raquel Oliveira é a gestora de conteúdo e tem autorização permanente de Rodolfo para lotes SEO e pedidos editoriais semelhantes. Não repita a exigência de aprovação do CEO quando Raquel já autorizou a rotina. Fonte canônica: `/root/mgs-agent/data/atena/editorial-manager-authority.json`. Quando faltar integração mínima de portal MGS allowlisted, resolva a dependência com dados reais confirmados conforme essa autoridade e preserve os registros existentes; não use a ausência de site_key para recusar novamente o pedido nem publique antes de concluir a integração. Menus e dependências fora das capacidades do Editor usam apoio técnico autorizado; não elevar função nem contornar segurança. Critical Subset, credenciais, plugin/runtime, mudança estrutural e restrições específicas de Finance/Router permanecem inalterados.
 
 1. Aplique o gate canônico aos alvos solicitados e retenha somente os aprovados. Carregue o contrato de acesso dedicado de `content-publish-wordpress` antes de consultar credenciais.
 2. Inspecione a estrutura real de `data/sites.json` e resolva cada `site_key` por igualdade do domínio canônico ou de `urlsplit(wp_url).hostname`; não use busca por substring, pois um domínio pai pode coincidir com outro portal ou subdomínio. Não presuma que os registros ficam dentro de uma chave `sites`.
@@ -37,7 +37,7 @@ Autenticação válida, permissão declarada e ativação do `site_key` são res
 
 Quando o briefing limitar a tarefa a JSONs locais, aplique o gate de domínio e use a REST pública para inventário; não consulte vault, não teste credenciais, não crie categoria e não altere configuração para produzir texto. Registre separadamente a cobertura pública completa e a impossibilidade de inventariar drafts/privados. A ausência de acesso a `excerpt.raw` deve permanecer explícita: `excerpt.rendered` pode ser fallback automático e não prova que o raw esteja preenchido.
 
-Persista cada pequeno batch antes do seguinte e valide o conjunto relendo os JSONs finais, não apenas os textos geradores. Um marcador editorial de imagem e prompts/ALT completos atendem à preparação local quando a geração foi delegada, mas não constituem imagem gerada ou QA visual. Sugestões entre novos artigos devem apontar para `local_id` em `pending_internal_links`, sem href inventado; os links já inseridos devem vir literalmente da REST, ter mercado verificado, GET 200, URL final igual e canonical self. Distinga recuperação de conteúdo oficial por extrator de evidência HTTP direta: páginas BCB podem retornar 200 com apenas shell JS, enquanto Planalto/Fipe podem exigir outro transporte; preserve o erro original e a proveniência recuperada sem alegar 200 onde houve 403 ou timeout.
+Persista cada pequeno batch como um JSON completo por artigo e mantenha um manifesto com caminhos absolutos, palavras, fontes, inventário e `production_writes=0`. Valide o conjunto relendo os JSONs finais, não apenas os textos geradores. Conte palavras no texto das tags editoriais, excluindo comentários, scripts, atributos e ALT; registre também a contagem conservadora de tokens alfabéticos sem números, para que tabelas e cálculos não façam um artigo curto passar no mínimo. Um marcador editorial de imagem e prompts/ALT completos atendem à preparação local quando a geração foi delegada, mas não constituem imagem gerada ou QA visual; registre a obrigação de usar o mesmo futuro ID na imagem interna e destacada quando o briefing exigir. Sugestões entre novos artigos devem apontar para `local_id` em `pending_internal_links`, sem href inventado; os links já inseridos devem vir literalmente da REST, ter mercado verificado, GET 200, URL final igual e canonical self. Distinga recuperação de conteúdo oficial por extrator de evidência HTTP direta: uma resposta 200 pode conter só shell JS ou interstitial, e um bloqueio direto pode ter recuperação substantiva por outro transporte. Preserve o método, o erro original e a proveniência recuperada sem alegar HTTP 200 direto onde houve bloqueio ou timeout.
 
 ## 2. Inventariar a categoria completa
 
@@ -58,6 +58,24 @@ GET /wp-json/wp/v2/posts?categories=<id>&per_page=100&page=<n>&_fields=id,date,s
 - Se `X-WP-TotalPages > 1`, percorra todas as páginas e dedupe por ID antes de analisar.
 - Para cada post, use `content.rendered` para métricas visíveis e faça uma amostra autenticada `context=edit` para conferir `content.raw` e `excerpt.raw`.
 - Não use apenas a primeira página do arquivo visual: temas antigos e posts fora da dobra continuam bloqueando duplicidade.
+
+### Calcular novas publicações para uma meta de categoria
+
+1. Separe no manifesto `target_eligible_count`, IDs publicados elegíveis, IDs excluídos e `new_article_count`; mantenha as regras de inclusão do briefing explícitas.
+2. Classifique tipos por IDs de tags/categorias resolvidos e confirmados, usando slug/título apenas como alerta de inconsistência. Não deduza que toda página com nome de produto seja REC nem que todo conteúdo da categoria seja SEO.
+3. Calcule por código `new_article_count = max(0, target_eligible_count - eligible_existing_count)` e some as quantidades novas de todos os recortes. Não some a meta final da categoria como se fosse produção adicional.
+4. Reconcilie acervo REST, sitemap e leituras individuais antes de comunicar o total; filtros podem ocultar justamente a classe que o briefing manda excluir.
+5. Antes de publicar, confira novamente os IDs elegíveis e os já criados pelo próprio lote. Se outro editor publicou novos itens, reconcilie a diferença para não ultrapassar a meta nem duplicar posts; não apague conteúdo existente para fazer a conta fechar.
+6. No relatório final, distinga artigos novos publicados, existentes que compõem a meta e excluídos da contagem; a exclusão aritmética não autoriza alterar a visibilidade desses posts.
+
+### Criar categoria e acrescentá-la ao menu localizado
+
+1. Crie ou resolva a categoria pelo fluxo editorial e releia ID, nome, slug e idioma real do termo.
+2. No apoio técnico autorizado, confirme instalação por `siteurl`/`home` e proprietário real do webroot antes de WP-CLI; não deduza caminho ou usuário de sistema do nome do portal.
+3. Leia os menus, locations e idioma do menu principal existente. Salve IDs, URLs, posição e hierarquia dos itens e dos demais menus; em portal multilíngue, acrescentar ao primeiro menu encontrado pode alterar a navegação de outro mercado.
+4. Use a operação nativa de acrescentar o termo ao menu confirmado, como `wp menu item add-term <menu-id> category <category-id>`, sem criar menu paralelo, reordenar os anteriores ou elevar a função editorial.
+5. Releia o item criado e compare os snapshots: somente o novo item autorizado pode diferir. Verifique seu href e label no DOM público desktop e no menu mobile realmente aberto.
+6. Confira separadamente homepage e arquivo da categoria nas URLs canônicas. Se uma query fresca mostrar o item e a homepage canônica não, registre propagação/cache pendente; isso não prova que o item esteja ausente no WordPress nem autoriza refazer o write ou purgar o site inteiro.
 
 ## 3. Transformar o corpus em contrato estrutural
 
@@ -222,14 +240,6 @@ Esses diagnósticos sustentam qualidade editorial, mas não são um score Yoast.
 5. Faça browser/DOM mobile no conteúdo renderizado: H1, imagem, links, CTA/card comercial, bloco de autoria, biografia e ausência de overflow. Use cache-buster quando a URL canônica ainda servir HTML anterior. No tema CompanyBRS, inspecione `.single-post-content` (outros temas usam `.jd-post-content`) e aguarde o carregamento completo/role o bloco de autoria para a área visível antes de concluir que nome ou biografia estão ausentes; uma leitura precoce pode retornar esses campos vazios.
 6. Compare o sitemap canônico sem query com uma leitura fresca por cache-buster quando URLs recém-publicadas não aparecerem. Registre os dois resultados separadamente: presença na variante fresca não comprova atualização do sitemap canônico entregue ao crawler. Não altere cache, plugin ou runtime para esconder a divergência; escale o achado técnico.
 7. Só reporte publicação depois que todos os IDs tiverem readback autenticado e público. Uma resposta REST `200` no status change não prova que o artigo está público, indexável ou com o layout preservado.
-
-## Pacote estritamente local para integração por outro agente
-
-- Quando o escopo proibir uploads/publicação, grave um JSON completo por artigo e um manifesto com caminhos absolutos, palavras, fontes, inventário e `production_writes=0`; não transforme o pacote local em rascunhos WordPress por iniciativa própria.
-- Para mínimo de palavras visíveis, conte o texto de tags editoriais, excluindo comentários, scripts, atributos e ALT; reporte também uma contagem conservadora de tokens alfabéticos sem números para evitar que tabelas e cálculos façam um artigo curto passar no limite.
-- Preserve referências entre artigos ainda locais por `local_id` em `pending_internal_links`; só insira href depois de existir um campo REST `link` canônico validado, nunca a partir do slug planejado.
-- Diferencie bloqueio de transporte de ausência de evidência: FTC pode responder 403 diretamente e eCFR pode redirecionar a interstitial com HTTP 200, embora `web_extract` recupere texto primário substantivo. Salve método e texto recuperado, registre o bloqueio e nunca declare esses alvos como HTTP 200 direto validado.
-- Preserve primeiro parágrafo de uma frase e um marcador de imagem imediatamente depois quando a mídia ficar com outro agente; inclua prompt específico e a obrigação de usar o mesmo futuro ID na imagem interna e na destacada, sem declarar imagem gerada ou aprovada.
 
 ## 12. Relatório ao Rodolfo
 

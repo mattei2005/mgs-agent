@@ -23,6 +23,10 @@ Exemplos:
 - REC+P1 adaptado por referência fora da vertical padrão do site;
 - criação de categoria/tags para nova vertical antes da publicação.
 
+## Autoridade da gestora de conteúdo
+
+Trate pedidos editoriais de Raquel Oliveira como autorizados dentro de Content Operations: ela pode solicitar produção, revisão, categorias e publicação, quando esse for o status pedido, sem uma nova aprovação de Rodolfo para a mesma rotina. Consulte a fonte canônica `data/atena/editorial-manager-authority.json` e as permissões vigentes. Se faltar integração mínima de um portal MGS permitido, confirme os dados reais, registre e valide o `site_key` antes do primeiro write editorial; não transforme uma dependência técnica resolvível em nova exigência de autorização editorial. Encaminhe somente a dependência fora das capacidades do Editor ao apoio técnico, mantendo a responsabilidade pelo lote. Credenciais, elevação de função, plugin/runtime, mudanças estruturais, Critical Subset e restrições de Finance/Router permanecem sujeitos aos próprios gates.
+
 ## Regra central
 
 Não publique conteúdo com configuração incompatível de país/língua/vertical.
@@ -30,7 +34,7 @@ Não publique conteúdo com configuração incompatível de país/língua/vertic
 Se o site key existente conflitar com o pedido atual:
 
 1. Informe o conflito de forma objetiva.
-2. Peça/obtenha autorização para um caminho seguro.
+2. Confira se o pedido e a autoridade vigente já cobrem a adaptação editorial; solicite decisão adicional somente para uma mudança de escopo ou ação sujeita a gate próprio, não para repetir a autorização da gestora.
 3. Preferir criar um **novo site_key específico** para a vertical/idioma, em vez de sobrescrever o site_key existente.
 4. Reusar domínio, credenciais e publishing user apenas quando a autorização cobrir essa extensão.
 5. Reportar no final qual site_key, categoria e tags foram aplicados.
@@ -156,6 +160,8 @@ Use GPT/LLM por padrão para reescrever o contexto de forma profissional e sem p
 Quando Rodolfo ou Raquel pedir verificação de acesso antes da produção, conclua e comunique esse preflight antes de gerar textos ou enviar mídia. Separe no resultado **autenticação editorial**, **permissões verificadas** e **ativação no fluxo técnico**: nenhuma dessas evidências substitui as outras. Não faça escrita de teste para provar acesso. A ausência de `site_key` bloqueia a produção automatizada, mas não transforma um smoke somente leitura bem-sucedido em falha de autenticação; siga o gate independente e a autorização de integração descritos acima.
 
 Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de artigos, mínimo de palavras, posição da imagem, relação entre imagem interna e destacada, fontes externas e status solicitado. Exigências explícitas do briefing prevalecem sobre o padrão inferido do corpus; não reduza um mínimo de palavras nem altere a posição da imagem para imitar referências mais curtas. Não confunda rascunho no WordPress com arquivo local de texto.
+
+Diferencie quantidade nova de meta final da categoria. Para completar uma categoria, inventarie os posts publicados e classifique pelos termos reais: inclua P1 existentes e exclua REC quando o briefing assim determinar, sem modificar ou remover os excluídos. Calcule a diferença e o total do lote por código antes de confirmar a quantidade; `category.count` sozinho pode incluir classes que não contam para a meta. A presença de P1 no acervo não transforma os novos artigos SEO em REC/P1. Reconcilie a contagem elegível novamente no encerramento.
 
 ### Regras editoriais permanentes para SEO
 
