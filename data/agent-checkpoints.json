@@ -3833,12 +3833,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Raquel revisar os30 artigos pelos links de edição. Não publicar nem alterar conteúdo sem próximo pedido humano autorizado; preservar IDs e payloads.",
-      "objective": "Entregar 30 drafts SEO com links para revisão da Raquel",
-      "source": "data/atena/seo-mass-1559930384852979796/final-verification.json",
-      "state": "execução concluída e cold readback independente aprovado:30/30 drafts,3 por portal,30 imagens, palavras1187–1469 total39887, mesma mídia após primeira frase e featured, categoria única, tags por id direto, metadados yoast, corpo raw exato e links preservados. zero publicação; contagens publicadas das categorias inalteradas. revisão independente corrigida e1bloqueio legal resolvido. conflito de tag400 term_exists reconciliado sem duplicações. revisão humana ainda pendente. arquivo final contém30 links reais.",
+      "next_step": "Receber a lista de ajustes mencionada por Raquel; aplicar os itens pertinentes, persistir as regras editoriais concretas, revalidar e publicar no fluxo editorial aprovado. Não interpretar a ausência da lista como dispensa dos ajustes.",
+      "objective": "Concluir o lote de 30 artigos SEO revisados por Raquel, aplicando ajustes e publicando após resolver as pendências editoriais.",
+      "source": "data/atena/seo-mass-1559930384852979796/final-verification.json; Discord thread 1559930384852979796 mensagem 1560274764201861196",
+      "state": "30 drafts entregues e validados no checkpoint anterior. raquel informou revisão dos 30 conteúdos, aprovação geral e autorização de publicação condicionada aos ajustes mencionados na mensagem 1560274764201861196. a lista de ajustes não consta na mensagem recebida nem nas mensagens posteriores consultadas nesta retomada. nenhuma publicação ou alteração wordpress executada nesta retomada. o escopo original draft-only fica preservado como histórico; a nova autorização de publicação deve ser reconciliada com os ajustes antes da execução.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-14T15:11:19+00:00"
+      "updated_at": "2026-10-15T12:55:29+00:00"
     },
     {
       "agent": "atena",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T12:23:02+00:00"
+  "updated_at": "2026-10-15T12:55:29+00:00"
 }
