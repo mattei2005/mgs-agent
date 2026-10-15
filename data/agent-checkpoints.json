@@ -3833,12 +3833,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Capturar drafts atuais por ID, reconciliar alterações humanas, revisar fontes/mercado e tags, validar e publicar com readback REST e público.",
-      "objective": "Aplicar ajustes pontuais e publicar os 30 artigos SEO aprovados por Raquel",
-      "source": "data/atena/seo-mass-1559930384852979796/final-verification.json; Discord 1559930384852979796/1560275486695759996",
-      "state": "ajustes recebidos na mensagem 1560275486695759996: fontes contextuais sem bloco final, tags padronizadas, coerência de país/idioma; variação editorial e refinamentos sem reconstrução. publicação autorizada por raquel, identidade autorizada consultada. preflight em andamento; nenhuma publicação nesta etapa.",
+      "next_step": "Zeus/Tech diagnosticar divergência do sitemap canônico; publicação editorial concluída. Preservar IDs e não executar correção técnica sem autoridade correspondente. Links públicos constam no relatório local e no publication-verification.json.",
+      "objective": "Publicar o lote de 30 artigos SEO aprovado por Raquel com ajustes pontuais",
+      "source": "data/atena/seo-mass-1559930384852979796/publication-verification.json",
+      "state": "30/30 publicados e validados por rest e http200, canonical self, robots indexáveis, conteúdo/meta/mídia/tags preservados conforme ajustes.30/30 dom desktop/mobile, autoria/biografia e zero overflow.11 corpos ajustados,seis blocos bibliográficos removidos,1187–1469 palavras. regras na skill editorial salvas e relidas. divergência técnica sitemap: sem query lista3/30; leitura fresca lista30/30. escalonamento zeus/tech e inventário enviados por embed canônico report-infra1560281140101914788, existência/content vazio conferidos no canal1498132022634483894. nenhuma alteração de cache/plugin/config/runtime.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-15T12:58:42+00:00"
+      "updated_at": "2026-10-15T13:20:40+00:00"
     },
     {
       "agent": "atena",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T12:58:42+00:00"
+  "updated_at": "2026-10-15T13:20:40+00:00"
 }

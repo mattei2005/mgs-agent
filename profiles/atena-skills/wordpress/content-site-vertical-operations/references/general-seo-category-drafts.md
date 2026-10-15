@@ -208,8 +208,9 @@ Esses diagnósticos sustentam qualidade editorial, mas não são um score Yoast.
 
 3. Após cada write, releia por ID e exija `status=publish`, slug/título/autor preservados, `content.raw` exato, excerpt, categoria, conjunto de tags, featured media e meta SEO inalterados.
 4. Valide a URL pública com HTTP `200`, canonical self, robots efetivo `index,follow`, `og:image` da featured e presença real no sitemap. Releia também a contagem da categoria quando o pedido depender do lote completo.
-5. Faça browser/DOM mobile no conteúdo renderizado: H1, imagem, links, CTA/card comercial, bloco de autoria, biografia e ausência de overflow. Use cache-buster quando a URL canônica ainda servir HTML anterior.
-6. Só reporte publicação depois que todos os IDs tiverem readback autenticado e público. Uma resposta REST `200` no status change não prova que o artigo está público, indexável ou com o layout preservado.
+5. Faça browser/DOM mobile no conteúdo renderizado: H1, imagem, links, CTA/card comercial, bloco de autoria, biografia e ausência de overflow. Use cache-buster quando a URL canônica ainda servir HTML anterior. No tema CompanyBRS, inspecione `.single-post-content` (outros temas usam `.jd-post-content`) e aguarde o carregamento completo/role o bloco de autoria para a área visível antes de concluir que nome ou biografia estão ausentes; uma leitura precoce pode retornar esses campos vazios.
+6. Compare o sitemap canônico sem query com uma leitura fresca por cache-buster quando URLs recém-publicadas não aparecerem. Registre os dois resultados separadamente: presença na variante fresca não comprova atualização do sitemap canônico entregue ao crawler. Não altere cache, plugin ou runtime para esconder a divergência; escale o achado técnico.
+7. Só reporte publicação depois que todos os IDs tiverem readback autenticado e público. Uma resposta REST `200` no status change não prova que o artigo está público, indexável ou com o layout preservado.
 
 ## 12. Relatório ao Rodolfo
 
