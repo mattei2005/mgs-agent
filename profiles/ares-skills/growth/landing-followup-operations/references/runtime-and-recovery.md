@@ -35,7 +35,7 @@ Depois de anúncio confirmado e aba ativa, executar pelo Python do Hermes (o Pyt
 $(dirname "$(readlink -f "$(command -v hermes)")")/python /root/mgs-agent/scripts/ares-direct-traffic-sample.py --key <key> --owner <owner> --pc1-session-id "$HERMES_SESSION_ID"
 ```
 
-Exige job RUNNING/OPEN_INTENT, lease física e sessão reais. Faz somente `computer_use(action=capture, app=screen)` pelo handler existente e salva frames novos/tempos reais no armazenamento protegido. `CAPTURED_NOT_PASS` não atesta anúncio nem foco. O agente revisa todas as amostras que usará e só então preenche a evidência. `CADENCE_NOT_VALIDATED`/`CAPTURE_ERROR` não significam ausência de anúncio; recapturar na mesma aba, corrigir causa, fechar/verificar e registrar resultado seguro. Não retimar arquivos nem somar trechos desconexos.
+Exige job RUNNING/OPEN_INTENT, lease física e sessão reais. Sem as flags de fechamento descritas abaixo, faz somente `computer_use(action=capture, app=screen)` pelo handler existente e salva frames novos/tempos reais no armazenamento protegido. `CAPTURED_NOT_PASS` não atesta anúncio nem foco. O agente revisa todas as amostras que usará e só então preenche a evidência. `CADENCE_NOT_VALIDATED`/`CAPTURE_ERROR` não significam ausência de anúncio; recapturar na mesma aba, corrigir causa, fechar/verificar e registrar resultado seguro. Não retimar arquivos nem somar trechos desconexos.
 
 Resolver primeiro o symlink de `hermes` com `readlink -f`; o launcher em `.local/bin` pode não ter um `python` irmão. Usar o `python` do diretório real do launcher, não o Python de sistema nem um path adivinhado. Essa resolução deve ocorrer antes da navegação, não como erro repetido por URL.
 

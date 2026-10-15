@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Executores seguintes usam fluxo enxuto; medir proxima tentativa por fases e comparar com baseline sem afirmar reducao antes de prova. Manter FIFO, uma URL por vez, anuncio/foco10s, fechamento/readback e avisos obrigatorios. Nenhum restart nem write externo critico.",
-      "objective": "Continuar FIFO apos C121 validada, reduzir overhead sem perder evidencia visual/fechamento",
-      "source": "discord:1559932317861158993;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/meta-ads/audit/landing-followup-1559951763019145247/latency-20261015/change-inventory.json;data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
-      "state": "c121 pass evento399: janela de amostras10.06s, claimed→result429.0s, open_intent→result337.8s; ultima amostra→prova fechamento131.06s e fechamento→result45.14s. proximo job f44 running evento402. otimizacao local aplicada ao prompt/procedimento para fechar prontamente apos serie valida, revisar frames offline em paralelo e registrar compacto;127 testes passaram. ganho real ainda nao medido; nao interromper worker atual.",
+      "next_step": "Consumidor continua FIFO usando abertura em lote e coletor --close-owned-window somente com prova exclusiva revisada; preservar10s+foco+anuncio+fechamento. Conferir ganho tambem nos workers automaticos. Nao reabrir PASSED nem perder capturas por JSON incompleto; diagnosticos restantes seguem sob Ares. Somente sucesso humano integral gera aviso ao gestor.",
+      "objective": "Continuar FIFO com abertura/fechamento nativos agrupados e provas reais; concluir rodada integral",
+      "source": "discord:1559932317861158993;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/meta-ads/audit/landing-followup-1559951763019145247/mechanical-batching-20261015/change-inventory.json",
+      "state": "mudanca real validada pc1: helpers landing_desktop e ares-direct-traffic-ui, coletor opcional fecha janela tecnica em uma chamada, cli mescla fechamento real.135 testes passaram;3 novas urls f44 idx2/3/4 passed no fluxo novo, aberturas16.688/16.330/15.743s; prova fechamento apos ultima amostra12.753/3.544/3.311s versus131.06s baseline. ciclos claimed→result153.714/108.643/135.767s, nao10s totais. f44 idx1 recuperadopass por4frames reais revisados sem nova visita;jobf44 observed. snapshot15/46passed,25ready,6attention. lease foreground liberada e consumidor ja running proximo item. skill/ref lidas de volta, inventario audit/mechanical-batching-20261015.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T11:47:03+00:00"
+      "updated_at": "2026-10-15T12:23:02+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T11:47:03+00:00"
+  "updated_at": "2026-10-15T12:23:02+00:00"
 }
