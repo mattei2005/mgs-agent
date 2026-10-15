@@ -1,5 +1,13 @@
 # Diagnóstico somente leitura de invalidação targeted
 
+## Rotina editorial e autorização já vigente
+
+Trate invalidação rotineira de cache gerado/reproduzível como manutenção da publicação, não como exclusão de conteúdo. Prefira uma API semântica nativa por URL, com efeitos estreitos comprovados, dentro do playbook e da autoridade editorial vigente; não repita cobranças de autorização para o mesmo escopo já explicitamente autorizado. Separe essa rotina de purge global/CDN, alteração de configuração e exclusão de arquivos não-cache. Se uma primitiva física de arquivo entrar em conflito com a redação global de Critical Subset, registre a orientação do gestor para o owner global alinhar a regra; não edite AGENT/permissões nem crie override global ativo por conta própria. A orientação de autonomia de Rodolfo está capturada para alinhamento em `KCI-b953ee97bd2d71fc`, fonte `1560391741905834217`; inbox não é política ativa.
+
+Quando houver uma execução escopada autorizada, feche a manutenção de ponta a ponta: revalide literais/owner/raiz/ausência de symlink, fingerprint da implementação e hash/tamanho atuais, preserve backup, registre intenção antes do write e invoque somente o método inspecionado. Após cada domínio, faça readback do efeito; depois leia os XML canônicos sem query e conte por código os URLs esperados. Uma cópia ausente ou já regenerada exige reconciliação, não replay nem expansão dos alvos. Verifique também hashes/datas/mídia/notas dos artigos para demonstrar que somente o cache mudou. Registre a conclusão real, não apenas a chamada de invalidação.
+
+## Preflight somente leitura
+
 - Faça gate do domínio antes de consultar host, credencial ou endpoint; use somente os owners/webroots/pins confirmados. Não execute inventário global ou `nginx -T` para resolver um único vhost.
 - Leia a implementação instalada por Reflection e preserve fonte/hash/linhas, assinatura, defaults, callbacks e árvore de efeitos. Métodos de mesmo nome diferem por versão; não extrapole de outro site.
 - Compare GET canônico e fresh, salvando headers/corpo. `cf-cache-status:DYNAMIC` não elimina cache de origem. Uma igualdade byte-a-byte com arquivo de cache é evidência mais forte que headers isolados; WPFC pode acrescentar `<!-- via php -->` ao HTML, mas não ao XML.

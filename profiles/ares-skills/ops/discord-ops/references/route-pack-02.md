@@ -14,7 +14,16 @@ Fluxo:
 3. Reportar o bloqueio ao Rodolfo e pedir/corrigir permissão do bot no canal do Zeus, ou usar outro alvo do Zeus explicitamente autorizado por Rodolfo.
 4. Só usar `#alerts-infra` quando a mensagem for realmente um `[REPORT-INFRA]`/alerta de infra, não um pedido operacional.
 
-Pitfall validado no Ares: pedido ao Zeus sobre capacidade de leitura de threads foi enviado para `#alerts-infra` após `#zeus` retornar 403; Rodolfo corrigiu que isso não fazia sentido porque abriu thread no canal de alertas.
+Verificar acesso ao destino operacional antes do envio; um destino de alertas acessível não substitui a thread de trabalho autorizada.
+
+### Limpeza autorizada e recuperação por falta de permissão
+
+1. Resolver o conjunto exato de canais pais e threads, a autorização de exclusão e o executor atual. Inventariar mensagens e autores, congelar os IDs autorizados e preservar evidência local antes de qualquer remoção; não duplicar a limpeza de um executor vivo.
+2. Consultar `GET /users/@me`, os canais pais/threads, `GET /guilds/{guild_id}/members/{bot_id}` e `GET /guilds/{guild_id}/roles`. Calcular permissões base de `@everyone` e roles do membro; considerar `ADMINISTRATOR` e aplicar os overwrites na ordem everyone → agregação de roles → membro. Conferir `MANAGE_MESSAGES` para mensagens de outros autores, além de acesso e leitura. Não inferir capacidade administrativa a partir de uma exclusão própria bem-sucedida.
+3. Dentro do escopo autorizado, reconciliar cada mensagem antes de excluir e confirmar ausência por GET após a exclusão. Persistir removidas, falhas e remanescentes por thread; validar que threads e respectivos pais continuam existindo. Uma limpeza parcial não pode ser rotulada como integral.
+4. Se a permissão não permitir concluir, manter os IDs restantes resumíveis e encaminhar somente esse restante a Zeus/admin na thread operacional autorizada. Informar autorização, conjunto exato, prova da limitação e critério de encerramento; pedir execução pela identidade própria e autorizada do administrador, não fornecer ou usar sua credencial como fallback. Não solicitar grant de role/permissão se a autorização existente é apenas para limpar mensagens.
+5. Usar outbox/nonce estáveis para o handoff. No payload, combinar a mention textual com `allowed_mentions={"parse": [], "users": [target_bot_id], "roles": [], "replied_user": false}`; `parse=[]` sem a allowlist `users` pode impedir que o destinatário receba a mention. Depois, fazer GET do ID exato e conferir conteúdo, destino, autor e presença de `target_bot_id` no array `mentions`. Em POST ambíguo, reconciliar pelo ID/nonce antes de qualquer retry.
+6. Pedir retorno com evidência verificável e mention ao agente responsável para retomar a validação. Registrar handoff entregue como dependência aberta, não como execução ou limpeza concluída. Após o retorno, conferir os IDs remanescentes e o estado atual das threads, reconciliar o checkpoint do trabalho e somente então liberar o aviso integral; o encaminhamento não elimina o bloqueio sozinho.
 
 ### Atualização scoped de channel_prompts
 

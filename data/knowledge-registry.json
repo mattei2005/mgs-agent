@@ -4663,6 +4663,24 @@
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
+      "canonical_source": "data/atena/seo-mass-1560295338257023118/final-verification-cache13-closed.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-15T20:57:09+00:00",
+      "id": "ATENA-SEO58-CACHE13-CLOSED-1560391741905834217",
+      "kind": "source",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "58 artigos publicados e58 URLs nos sitemaps canônicos;cache13 autorizado concluído",
+      "updated_at": "2026-10-15T20:57:09+00:00"
+    },
+    {
+      "canonical_key": "content.seo-batch.1560295338257023118.delivery",
       "canonical_source": "data/atena/seo-mass-1560295338257023118/final-publication-verification.json",
       "consumers": [
         "atena",
@@ -4674,10 +4692,10 @@
       "kind": "source",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO58-CACHE13-CLOSED-1560391741905834217",
       "title": "Lote SEO Raquel:58 novos artigos publicados e validados;cacheXML13 pendente",
-      "updated_at": "2026-10-15T20:10:34+00:00"
+      "updated_at": "2026-10-15T20:57:09+00:00"
     },
     {
       "canonical_key": "atena.wordpress.dedicated_access_contract",
@@ -12336,5 +12354,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T20:44:53+00:00"
+  "updated_at": "2026-10-15T20:57:09+00:00"
 }

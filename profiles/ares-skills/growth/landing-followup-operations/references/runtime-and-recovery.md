@@ -27,6 +27,23 @@ python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py need-action --ke
 
 Usar key/owner/idx recebidos, não criar novos requests. `HERMES_SESSION_ID` precisa ser o ID REAL da execução que segura a lease física. `owner` da fila e ID da sessão podem ser diferentes; não confundir os dois. A lease física é administrada pelo script `mgs-pc1-computer-use-lock.py` com acquire/status/renew/release. Renovar antes de expirar e liberar em finally. Não liberar sessão viva de outro trabalho.
 
+### Vincular a sessão real em execução foreground autorizada
+
+Antes de qualquer input, conferir a identidade da sessão corrente. Se for necessário resolvê-la pelo estado nativo, abrir `state.db` em `mode=ro`/`query_only` e consultar apenas a conversa atual:
+
+```sql
+SELECT s.id, s.source, s.thread_id
+FROM session_turn_leases AS l
+JOIN sessions AS s ON s.id = l.conversation_id
+WHERE l.expires_at > ?
+  AND s.source = 'discord'
+  AND COALESCE(NULLIF(s.thread_id, ''), s.chat_id, '') = ?;
+```
+
+Vincular os parâmetros à hora real e à thread atual; exigir uma única sessão viva e identidade compatível com a origem do turno. Propagar esse ID comprovado para o ambiente do subprocesso e para `--pc1-session-id`, então conferir o readback de `acquire --agent ares --session-id <sessão real> --thread-id <thread atual>`. Não gerar um ID para satisfazer o guard nem reutilizar o ID de um worker encerrado. Resolver a sessão não autoriza ignorar gates de prioridade ou tomar a lease de outro trabalho.
+
+Reservar o job existente com `Queue.claim(owner, ttl=...)`, conferir que a chave retornada é exatamente a pendência autorizada e só então persistir `begin`. Se outra tarefa for selecionada, usar `defer` e liberar a lease sem navegar. O rótulo `owner` é apenas a reserva lógica, nunca a prova de identidade nativa. Depois do `result`, reutilizar `flush(q, Discord())` do controlador existente para fechar o aviso coletivo e exigir `messages.state=VERIFIED` mais GET de conteúdo/autor/destino. Liberar a lease física em `finally` após fechamento seguro; se houver erro antes do registro, conservar as provas e o estado necessário à reconciliação.
+
 ## Coletor de cadência
 
 Depois de anúncio confirmado e aba ativa, executar pelo Python do Hermes (o Python de sistema não contém necessariamente as dependências do handler):
@@ -85,7 +102,9 @@ O consumidor usa timer existente; não criar cron Hermes com entrega origin/all.
 
 ## Prioridade temporária e informes solicitados
 
-`current_priority` identifica a URL e a ordem autorizada. `OTHER_CURRENT_WORK_BEFORE_C121` mantém os pares antes dela; uma instrução posterior expressa pode superseder esse modo por `C121_FIRST_THEN_FIFO`, usando `authorized_new_observation_cycle` uma vez por mensagem para processar a C121 agora e depois retomar FIFO. Não interromper cleanup/observador vivo; fechamento incerto continua antes de qualquer visita. Atualizar também o render dos informes e o checkpoint, preservando o contrato anterior na auditoria. A descrição a seguir trata do modo antigo de pares primeiro. O scheduler ignora sua ATTENTION fechada enquanto houver pares executáveis pendentes; NEEDS_RECONCILIATION continua exigindo cleanup seguro antes de qualquer outra visita. A instrução não cancela uma limpeza ativa. OBSERVED dos pares conta como URLs feitas, pois o aviso coletivo pode depender da URL reservada; COMPLETE continua exigindo a entrega final. A ordem dos demais permanece FIFO e a rodada é congelada para evitar que pedidos novos adiem o retorno para sempre. Quando a própria instrução autorizar voltar a observar a URL após os pares, `authorized_new_observation_cycle_after_peers` libera uma única nova rodada, com evento `priority_retry_cycle_started`; as tentativas antigas não são apagadas. Essa autorização histórica de duas ausências foi supersedida pela política finita vigente `no_ad_retry_policy` de 3 iniciais + 1 final; não reativar/resetar o ciclo antigo. Sem essa autorização, o retorno continua sendo diagnóstico/readback, não uma visita extra implícita.
+Ler `current_priority` e a permissão ativa antes de selecionar um alvo: modos legados com alvo nominal no runtime não são defaults permanentes. Uma nova instrução expressa pode superseder a ordem, mas não interrompe cleanup nem observador vivo, não zera tentativas e não reativa permissões aposentadas. Preservar o contrato anterior em auditoria e atualizar informe/checkpoint para a ordem real.
+
+Congelar os pares da rodada quando houver adiamento, para que pedidos posteriores não posterguem indefinidamente a tentativa final. Contar pares `OBSERVED` como navegações concluídas para decidir o retorno: esperar `COMPLETE` criaria deadlock quando o aviso coletivo depende do próprio alvo adiado. Manter FIFO entre os demais e prioridade de cleanup para `NEEDS_RECONCILIATION` ou prova de fechamento ausente. Aplicar a política finita vigente `no_ad_retry_policy` de três ausências iniciais e uma tentativa final, preservando o histórico; autorizações históricas de ciclos extras não devem ser ressuscitadas.
 
 O módulo `ares_campaign_v3.landing_followup_reporting` usa os timers já existentes do intake/consumidor, sem cron novo nem callback de criação. `progress_reporting` contém autorização, escopo, intervalo e marcos. Informa contagens/estado reais, sem afirmar visita ou conclusão por timer ativo. As mensagens são registradas como `progress_update_authorized`, entregues pelo outbox e conferidas por GET; erros técnicos mantêm gate humano-only. Fechamentos de lote humano e retorno à URL reservada podem antecipar o próximo informe. Quando todo o escopo está COMPLETE, o último informe encerra automaticamente a série.
 

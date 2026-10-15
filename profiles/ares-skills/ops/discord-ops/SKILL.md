@@ -7,6 +7,12 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 # Discord Ops — Comunicação Inter-Agente, Roles e Webhooks
 
+## Regras de execução e fechamento
+
+- Antes de uma limpeza de mensagens, separar mensagens próprias das de outros autores e conferir as permissões efetivas na thread e no canal pai; conseguir apagar mensagens próprias não comprova `MANAGE_MESSAGES` para as demais. Preservar canais/threads e inventariar os IDs exatos antes de excluir.
+- Tratar autorização de limpeza e autorização de alterar permissões como escopos distintos. Se faltar capacidade, registrar o restante e encaminhar a um administrador autorizado pela rota operacional, sem usar a credencial dele nem conceder acesso permanente como atalho. Procedimento em `references/route-pack-02.md`.
+- Conferir handoffs por GET, incluindo a mention efetiva do destinatário. Distinguir pedido entregue, trabalho aceito e resultado validado; só este último encerra a pendência. Não transformar REPORT-INFRA em fila de execução nem chamar um handoff confirmado de tarefa concluída.
+
 ## Progressive disclosure — mandatory
 
 1. Identify the exact operational branch below.
