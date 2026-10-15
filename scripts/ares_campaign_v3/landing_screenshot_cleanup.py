@@ -1,6 +1,7 @@
 """Delete only attributable completed-observer screenshots, never audit JSON."""
 from __future__ import annotations
 import hashlib
+import fcntl
 import json
 import re
 from pathlib import Path
@@ -49,6 +50,12 @@ def references(q,key):
 
 
 def prune_completed(q,apply=False):
+    with (q.root/'screenshot-purge.lock').open('a+') as guard:
+        fcntl.flock(guard,fcntl.LOCK_EX)
+        return _prune_completed(q,apply)
+
+
+def _prune_completed(q,apply=False):
     cfg=policy()
     if not cfg.get('delete_screenshots_after_complete'):return {'state':'DISABLED','files':0,'bytes':0}
     candidates=[];protected=set();eligible=[]

@@ -8,7 +8,7 @@ Para pedido genérico de relatório de qualquer conta de anúncio SHEIN, indepen
 
 ### Produto compacto e sem legenda extensa — SHEIN
 
-Produto deve ocupar no máximo **25 caracteres incluindo espaços e as reticências `...`**, sem quebra interna e com largura visual Unicode máxima de 25. O truncamento só afeta a célula: manter o texto completo para identidade, ordenação e famílias, sem renomear Meta ou consolidar prefixos iguais. Não incluir legenda explicativa por padrão; somente rodapé conciso de fontes/fórmulas essenciais, parcial e limitações. O renderer lê essas regras atuais do contrato e deve ser validado antes da entrega.
+Produto deve ocupar no máximo **20 caracteres incluindo espaços, sem reticências acrescentadas**, sem quebra interna e com largura visual Unicode máxima de 20. O visual foi aprovado por Rodolfo e substitui o limite anterior de 25 com `...`. O truncamento só afeta a célula: manter o texto completo para identidade, ordenação e famílias, sem renomear Meta ou consolidar prefixos iguais. Não incluir legenda explicativa por padrão; somente rodapé conciso de fontes/fórmulas essenciais, parcial e limitações. O renderer lê essas regras atuais do contrato e deve ser validado antes da entrega.
 
 ### Gate SHEIN antes da entrega
 

@@ -53,7 +53,7 @@
     "campaign_requests_have_absolute_priority": true,
     "off_path_trigger_state": "VALIDATED_READ_ONLY_NATIVE_OUTBOX_OBSERVER",
     "creation_wrapper_and_callback": "PERMANENTLY_RETIRED_DO_NOT_RESTORE",
-    "foreground_priority_gate": "Background worker defers to all other native Discord turns; the dedicated followup control/status thread does not block its own independent worker; no gate added to creators",
+    "foreground_priority_gate": "PC1 observer defers only to real physical desktop lease or uncertain owned window; unrelated Discord turns do not block it. Campaign path remains unchanged and resource isolation preserved.",
     "followup_control_thread_exempt": true,
     "followup_control_exemption_authority": "Rodolfo reaffirmed autonomous continuity without requiring more messages; diagnosing/status conversation must not stop the independent observation",
     "resource_isolation": "Separate low-weight systemd services; intake CPU10percent/256MiB, worker CPU20percent/1GiB, Nice19 and idle IO",
@@ -91,7 +91,7 @@
     "authority_thread_id": "1559932317861158993",
     "initial_no_ad_attempts": 3,
     "final_no_ad_attempts": 1,
-    "retry_after_seconds": 60,
+    "retry_after_seconds": 0,
     "initial_exhausted_state": "DEFERRED_NO_AD",
     "final_exhausted_state": "REVIEW_REQUIRED",
     "final_pass_after_initial_queue_settled": true,
@@ -103,9 +103,11 @@
     "no_repeated_cleanup_for_verified_closed_absence": true,
     "technical_failure_is_not_no_ad": true,
     "supersedes": "Two-no-ad limit and repeated ATTENTION reconciliation; historical priority extra-cycle permission retired",
-    "historical_policy": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/three-then-final-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
+    "historical_policy": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/three-then-final-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+    "timing_authority_message_id": "1560416378400284713",
+    "timing_supersession": "Previous 60-second no-ad delay replaced by zero; verified close then new window in same observer session"
   },
-  "retry_after_seconds": 60,
+  "retry_after_seconds": 0,
   "first_no_ad_notification": false,
   "all_problem_destination_thread": "1559932317861158993",
   "problem_notification_policy": {
@@ -124,7 +126,8 @@
     "durable_recovery": {
       "automatic_claim_states": [
         "NEEDS_RECONCILIATION",
-        "ATTENTION"
+        "ATTENTION",
+        "TECHNICAL_REPAIR"
       ],
       "active_recovery_state": "RECONCILING",
       "timeout_retry_seconds": 60,
@@ -134,7 +137,8 @@
       "sampler": "scripts/ares-direct-traffic-sample.py",
       "sampler_approval_is_not_visual_pass": true,
       "completion_requires_real_pass_and_manager_delivery": true,
-      "authority_reaffirmation": "Rodolfo: a tarefa nao pode ficar abandonada nem depender de novas mensagens dele"
+      "authority_reaffirmation": "Rodolfo: a tarefa nao pode ficar abandonada nem depender de novas mensagens dele",
+      "active_technical_repair_state": "REPAIRING"
     },
     "same_request_readback_before_retry": true,
     "critical_subset_unchanged": true,
@@ -216,5 +220,31 @@
     "stop_when_scope_complete": true,
     "delivery": "DURABLE_OUTBOX_PLUS_EXACT_GET",
     "exception_to_quiet_policy": "Explicit progress reports requested by Rodolfo; technical error alerts remain human-action-only"
+  },
+  "pc1_execution_policy": {
+    "enabled": true,
+    "generation": "PC1-EXECUTION-RELIABILITY-1560416378400284713",
+    "authority_message_id": "1560416378400284713",
+    "authority_thread_id": "1559932317861158993",
+    "scope": "PC1 observer only; no campaign request/creation/completion or unrelated thread-cleanup changes",
+    "resource_priority": "PHYSICAL_PC1_ONLY",
+    "technical_error_limit": 3,
+    "technical_retry_delay_seconds": 0,
+    "technical_resume_requires": "REAL_REGRESSION_TESTS_AND_BLANK_WINDOW_CAPTURE_CLOSE_RECEIPT",
+    "safe_failed_item_does_not_block_other_due_links": true,
+    "same_session_immediate_no_ad_retries": true,
+    "delete_screenshots_after_complete": true,
+    "screenshot_cleanup_requires": [
+      "job COMPLETE",
+      "all links PASSED",
+      "final delivery GET VERIFIED",
+      "validation metadata receipt preserved"
+    ],
+    "preserve_pending_images": true,
+    "preserve_utm_ids_hashes_timestamps_and_json": true,
+    "capture_retry_count": 2,
+    "capture_max_seconds": 45,
+    "minimum_visible_seconds_unchanged": 10,
+    "previous_policy_snapshot": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
   }
 }

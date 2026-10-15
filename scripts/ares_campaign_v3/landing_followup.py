@@ -338,6 +338,13 @@ class Queue:
             j=self.job(key)
             if j['state']=='REPAIRING':
                 if j['owner']!=owner or j['lease_until']<self.now():raise ValueError('repair owner mismatch')
+                probe=self.db.execute("SELECT detail FROM events WHERE job=? AND kind='technical_probe_intent' ORDER BY seq DESC LIMIT 1",(key,)).fetchone()
+                if probe:
+                    d=json.loads(probe['detail'])
+                    if d.get('owner')==owner:
+                        proof=json.loads(Path(d['probe_file']).read_text())
+                        safe=(proof.get('closure') or {}).get('state')=='CLOSED_NOT_PASS' or proof.get('no_new_window_verified') is True or proof.get('tests_returncode') not in {0,None}
+                        if not safe:raise ValueError('technical probe window uncertain; reconcile before defer')
                 self.db.execute("UPDATE jobs SET state='TECHNICAL_REPAIR',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,key))
                 self.event(key,'technical_repair_deferred',{'owner':owner,'ordinary_opening_blocked':True})
                 return
@@ -453,7 +460,7 @@ class Queue:
         if evidence.get('tab_closed_verified') is True:validate_closure(evidence)
         with self.tx():
             j=self.job(key)
-            if j['state'] not in {'RUNNING','RECONCILING'} or j['owner']!=owner or j['lease_until']<self.now():raise ValueError('active recovery owner required')
+            if j['state'] not in {'RUNNING','RECONCILING','REPAIRING'} or j['owner']!=owner or j['lease_until']<self.now():raise ValueError('active recovery owner required')
             safe=evidence.get('tab_closed_verified') is True or (evidence.get('no_tab_opened') is True and evidence.get('browser_inputs_zero_verified') is True)
             if safe and self.target_waits_for_others(key):
                 opened=[l for l in j['links'] if l['state']=='OPEN_INTENT']
