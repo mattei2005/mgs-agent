@@ -844,7 +844,18 @@
       "id": "vps-cleanup-20261015-1560428152994402345",
       "agent": "zeus",
       "type": "frozen_vps_cleanup_manifest",
-      "status": "awaiting_critical_confirmation_no_deletion",
+      "status": "completed_validated",
+      "final_result_sha256": "c12c8370f09cdf0b7b8873722e46e2910dc36217752235bbc79f78557da6f377",
+      "report_infra_message_id": "1560437273034494007",
+      "report_infra_readback": true,
+      "confirmation_message_id": "1560436075652980817",
+      "result_path": "/root/mgs-agent/data/vps-cleanup-20261015-1560428152994402345/final-result.json",
+      "targets_deleted": 2158,
+      "targets_remaining": 0,
+      "observed_reclaimed_bytes": 72926224384,
+      "disk_after_used_percent": 52.6,
+      "production_financial_tables_unchanged": "6/6",
+      "recurrence_policy_changed": false,
       "request_message_id": "1560428152994402345",
       "thread_id": "1560412670132355133",
       "manifest": "/root/mgs-agent/data/vps-cleanup-20261015-1560428152994402345/manifest.json",
@@ -861,7 +872,7 @@
       ],
       "retained": "Latest validated Hermes recovery set 2026-10-12, active runtime and dependency/rollback, live financial production, official compact evidence, browser sessions, conversations, offsite/site/security/safety backups",
       "validation": "Two metadata passes equal; exact verifier PASS; zero process or executable-control references in 516 files; 79 protected file hashes; latest recovery archive checksum/listing and 8 SQLite integrity checks PASS; production services3/3 and six-table fingerprint captured; dashboard login200/API401",
-      "next_step": "Show exact irreversible target-set and obtain Rodolfo Critical Subset confirmation before any deletion"
+      "next_step": "All 2158 confirmed targets removed and validated; preserve latest recovery12/10. Producer retention and future deletion schedules unchanged; no new cleanup pending in this exact lot."
     },
     {
       "id": "zeus-growpowerhub-scope-validation-1560385332434837527",

@@ -1,0 +1,50 @@
+{
+  "targets_absent": 2158,
+  "protected_file_hashes_equal": 79,
+  "gateways_pids_unchanged": {
+    "zeus-gateway": {
+      "MainPID": "180264",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "atena-gateway": {
+      "MainPID": "179889",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "ares-gateway": {
+      "MainPID": "510781",
+      "ActiveState": "active",
+      "SubState": "running"
+    }
+  },
+  "failed_units": 0,
+  "retained_recovery": [
+    {
+      "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/profile-control-plane-and-skills-pre-cutover.tar.gz",
+      "tar_listing": "PASS",
+      "checksum": "PASS"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/state-snapshots/20261012-162355-pre-hermes-7cc3fb8c-1559238059541659689",
+      "manifest_files": "PASS",
+      "sqlite_integrity": "PASS"
+    },
+    {
+      "path": "/root/.hermes/profiles/atena/state-snapshots/20261012-162358-pre-hermes-7cc3fb8c-1559238059541659689",
+      "manifest_files": "PASS",
+      "sqlite_integrity": "PASS"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/state-snapshots/20261012-162359-pre-hermes-7cc3fb8c-1559238059541659689",
+      "manifest_files": "PASS",
+      "sqlite_integrity": "PASS"
+    }
+  ],
+  "filesystem": {
+    "total_bytes": 206900281344,
+    "used_bytes": 108830269440,
+    "available_bytes": 98053234688
+  },
+  "observed_reclaimed_bytes": 72926224384
+}

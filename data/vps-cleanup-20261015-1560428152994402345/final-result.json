@@ -1,0 +1,91 @@
+{
+  "status": "completed_validated",
+  "request_message_id": "1560428152994402345",
+  "confirmation_message_id": "1560436075652980817",
+  "thread_id": "1560412670132355133",
+  "manifest_sha256": "55c401a59f7b8f96c19d4d2a8561aa406df45e2790e1f391d271bbf1b5f1f118",
+  "executor_sha256": "1587dcdd65520359391333a95cd7e20fb90a132fac728e18803f7ac6a37c36b6",
+  "targets_deleted": 2158,
+  "targets_remaining": 0,
+  "files_removed": 156371,
+  "naive_allocated_bytes": 72926941184,
+  "inode_aware_reclaim_bytes": 72926941184,
+  "observed_reclaimed_bytes": 72926224384,
+  "groups": {
+    "1_test_material": {
+      "targets": 179,
+      "allocated_bytes": 37681459200
+    },
+    "2_email_material": {
+      "targets": 1954,
+      "allocated_bytes": 10661781504
+    },
+    "3_old_hermes_backups": {
+      "targets": 20,
+      "allocated_bytes": 22197534720
+    },
+    "4_rebuildable_caches": {
+      "targets": 5,
+      "allocated_bytes": 2386165760
+    }
+  },
+  "filesystem_after": {
+    "total_bytes": 206900281344,
+    "used_bytes": 108829003776,
+    "available_bytes": 98054500352,
+    "used_percent": 52.6
+  },
+  "validation": {
+    "exact_targets_absent": "2158/2158",
+    "protected_hashes": "79/79 unchanged",
+    "production_financial_tables": "6/6 same counts and aggregate hashes",
+    "production_financial_writes": 0,
+    "production_services": "3/3 active",
+    "public_dashboard_login": 200,
+    "unauthenticated_api": 401,
+    "gateways": "3/3 active and original PIDs",
+    "failed_units": 0,
+    "retained_recovery": "4/4 PASS; archive historical checksum and listing; eight SQLite integrity checks",
+    "agent_smokes": [
+      {
+        "profile": "zeus",
+        "config_rc": 0,
+        "agent_rc": 0,
+        "marker_present": true,
+        "seconds": 20.9
+      },
+      {
+        "profile": "atena",
+        "config_rc": 0,
+        "agent_rc": 0,
+        "marker_present": true,
+        "seconds": 17.1
+      },
+      {
+        "profile": "ares",
+        "config_rc": 0,
+        "agent_rc": 0,
+        "marker_present": true,
+        "seconds": 21.0
+      }
+    ]
+  },
+  "retained_latest_hermes_recovery": [
+    "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport/profile-control-plane-and-skills-pre-cutover.tar.gz",
+    "/root/.hermes/profiles/zeus/state-snapshots/20261012-162355-pre-hermes-7cc3fb8c-1559238059541659689",
+    "/root/.hermes/profiles/atena/state-snapshots/20261012-162358-pre-hermes-7cc3fb8c-1559238059541659689",
+    "/root/.hermes/profiles/ares/state-snapshots/20261012-162359-pre-hermes-7cc3fb8c-1559238059541659689"
+  ],
+  "out_of_scope_preserved": [
+    "active runtime, source/alternate dependency and code rollback",
+    "all current profile conversations and authenticated browser sessions",
+    "original financial sources and compact reports/receipts",
+    "offsite DR, safety, site and security backup classes"
+  ],
+  "recurrence_policy_changed": false,
+  "completed_validation_at": "2026-10-15T23:40:14.812794+00:00",
+  "report_infra_message_id": "1560437273034494007",
+  "report_infra_readback": true,
+  "governance_errors": [],
+  "closed_at": "2026-10-15T23:40:57.357143+00:00"
+}
