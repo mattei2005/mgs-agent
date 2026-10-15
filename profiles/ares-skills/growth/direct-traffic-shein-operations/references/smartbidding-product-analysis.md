@@ -105,6 +105,16 @@ No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta
 
 No relatório on-demand de campanhas com Estimated Health abaixo de 95% da conta `yolo-g005`, usar `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, com bloco text alinhado, USD no cabeçalho e nomes resumidos mantendo o número identificador. Reproduzir o layout aprovado na thread de referência `1557056254730436671`, sem copiar campanhas, contas ou métricas dela. Pedido apenas de ordem/formato preserva a seleção, os valores e os horários dos snapshots anteriores; manter o grupo sem base de Health separado. Autoridade: Rodolfo Mattei, thread `1557056290688213005`. Não promover automaticamente para outras contas/operações.
 
+## Modelo específico — Diretoria YOLO G002, thread 1560303769680355525
+
+Rodolfo aprovou por imagem e esclarecimento explícito na mensagem `1560305388837150800` os rótulos e a ordem **Início → Nº → Produto → Quiz → Gasto → Receita → Saldo → Est.Health → ROI → ROI est. → ROAS → Lance** para o relatório YOLO G002 desta conversa. Esta decisão substitui somente o layout anterior desta thread, não o padrão global dos seis canais.
+
+- Separar número e produto do nome; produto é rótulo, não validação visual. Não transportar qualificadores de lance, data, quiz, LP, áudio ou COPY para Produto quando o modelo pede somente produto.
+- Receita = receita líquida SB (`NET_REVENUE`); Saldo = receita líquida SB menos gasto Meta; ROI est. usa `REVENUE_ESTIMATED`, separado do ROI normal.
+- Quiz e Lance exigem readback real dos anúncios/creatives e campanhas/conjuntos, conforme as receitas abaixo. Lance mostra MAXVOL/COCAP/BIDCAP; não inferir a estratégia pelo nome nem adicionar cap/orçamento sem pedido.
+- Pedido de corrigir rótulos/colunas é complemento: preservar seleção, métricas, totais, ordenação e horário financeiro já emitidos; consultar somente configurações faltantes e informar seu horário separado. Não adotar a ordenação ou valores da imagem por inferência.
+- Validar as doze colunas, contagem/IDs, cobertura de anúncios e conjuntos, fórmulas e conservação do snapshot antes da renderização. Manter todas as campanhas, com blocos Discord dentro do limite e sem anexo não pedido.
+
 ## Ordem de colunas — relatório yolo-g002
 
 Nos relatórios on-demand da conta `yolo-g002`, usar `Início → Campanha → Custo/Res. → Gasto $ → Est.Health → ROI → ROAS`, em tabela alinhada no bloco `text`, reproduzindo somente o layout da thread `1557056254730436671`, nunca seus dados ou seu recorte. Pedido “como está agora” exige atualização integral de métricas no período atual; não manter o filtro abaixo de 95% de uma pergunta anterior sem novo pedido. Informar USD, snapshot e primeira entrega; abreviar nomes preservando o número e produto. Fonte: Rodolfo Mattei, thread `1555776339431391265`. Escopo exclusivo dessa conta.

@@ -841,6 +841,22 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "atena-seo-mass-1560295338257023118-integration",
+      "agent": "atena",
+      "type": "editorial-site-integration-and-authority",
+      "source_thread_id": "1560295338257023118",
+      "authority_message_id": "1560305141431668887",
+      "paths": [
+        "/root/mgs-agent/data/sites.json",
+        "/root/mgs-agent/data/atena/editorial-manager-authority.json",
+        "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/SKILL.md",
+        "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md"
+      ],
+      "site_keys": ["gamehubad_game_br", "topfeed_loans_us_es", "autocreditadx_car_br", "carcreditad_car_br"],
+      "purpose": "Integração mínima REST dos quatro portais com identidade dedicada confirmada e autoridade editorial permanente de Raquel; sem credencial, função, plugin, runtime ou menu alterado nesta integração.",
+      "evidence": "/root/.hermes/profiles/atena/work/seo-mass-1560295338257023118/onboarding-evidence.json"
+    },
+    {
       "id": "meta-digital-trust-49-1559685342083153942",
       "agent": "zeus",
       "type": "meta_ad_account_scheduled_batch",

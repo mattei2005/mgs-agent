@@ -304,5 +304,49 @@
       "field": "wp_app_password"
     },
     "default_category": "Tendencias"
+  },
+  "gamehubad_game_br": {
+    "name": "GameHubAd",
+    "domain": "gamehubad.com",
+    "wp_url": "https://gamehubad.com",
+    "country": "br",
+    "language": "pt-BR",
+    "verticals": ["game"],
+    "publishing_user": {"id": 6, "username": "atena", "display_name": "Atena"},
+    "credentials_ref": {"vault": "MGS Conteúdo", "item": "Atena WordPress - gamehubad.com", "field": "wp_app_password"},
+    "default_category": "Dicas"
+  },
+  "topfeed_loans_us_es": {
+    "name": "Finanzas TopFeed",
+    "domain": "finanzas.topfeed.fun",
+    "wp_url": "https://finanzas.topfeed.fun",
+    "country": "us",
+    "language": "es",
+    "verticals": ["loans"],
+    "publishing_user": {"id": 7, "username": "atena", "display_name": "Atena"},
+    "credentials_ref": {"vault": "MGS Conteúdo", "item": "Atena WordPress - finanzas.topfeed.fun", "field": "wp_app_password"},
+    "default_category": "Préstamos"
+  },
+  "autocreditadx_car_br": {
+    "name": "Auto Credit Adx",
+    "domain": "autocreditadx.com",
+    "wp_url": "https://autocreditadx.com",
+    "country": "br",
+    "language": "pt-BR",
+    "verticals": ["car"],
+    "publishing_user": {"id": 7, "username": "atena", "display_name": "Atena"},
+    "credentials_ref": {"vault": "MGS Conteúdo", "item": "Atena WordPress - autocreditadx.com", "field": "wp_app_password"},
+    "default_category": "Consórcio"
+  },
+  "carcreditad_car_br": {
+    "name": "Car Credit Ad",
+    "domain": "carcreditad.com",
+    "wp_url": "https://carcreditad.com",
+    "country": "br",
+    "language": "pt-BR",
+    "verticals": ["car"],
+    "publishing_user": {"id": 7, "username": "atena", "display_name": "Atena"},
+    "credentials_ref": {"vault": "MGS Conteúdo", "item": "Atena WordPress - carcreditad.com", "field": "wp_app_password"},
+    "default_category": "Economia"
   }
 }
