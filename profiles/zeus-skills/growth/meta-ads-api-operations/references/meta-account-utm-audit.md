@@ -58,7 +58,8 @@ Use this procedure when Rodolfo asks whether current Meta ads contain an exact U
 1. Re-run the complete paginated scan for every account serving the alert domain; a direct GET of the edited ad alone cannot prove the old UTM is unique elsewhere.
 2. Batch-GET the changed campaign, ad set and each edited ad with nested creative fields. Confirm the old tracking value is absent where expected, the new pair is internally consistent, and the effective statuses match the operator's intended delivery.
 3. Recompute same-domain duplicates by distinct active ad sets and campaigns. Report the correction as complete only when the originally duplicated value has at most one active owner and no edited sibling retains the stale link.
-4. Treat Smart Bidding rows already collected for the same civil day as immutable historical evidence. A same-day Spidey alert may repeat after Meta is fixed until its reporting window rolls; judge the live repair from Meta readback, not from immediate disappearance of historical SB rows.
+4. For an authorized name-only correction, compare the pre/post object state and every sibling creative/destination without replaying a successful POST. Facebook's signed `/ads/image/` preview URL query can rotate between GETs without a creative edit; reconcile that exact preview-only difference separately, retaining the media/creative IDs and comparing all tracking and destination URLs exactly. Never mask arbitrary URL changes as preview volatility.
+5. Treat Smart Bidding rows already collected for the same civil day as immutable historical evidence. A same-day Spidey alert may repeat after Meta is fixed until its reporting window rolls; judge the live repair from Meta readback, not from immediate disappearance of historical SB rows.
 
 ### 7. Trace unexplained Pricing traffic without assuming it is a chat
 

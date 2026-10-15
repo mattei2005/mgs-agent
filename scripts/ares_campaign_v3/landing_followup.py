@@ -212,12 +212,26 @@ class Queue:
             self.db.execute('UPDATE jobs SET state=?,reply_id=? WHERE key=?',('READY',mid,key))
             self.event(key,'creation_reply_verified',{'message_id':mid,'thread_id':p['source_thread_id']})
 
+    def target_waits_for_others(self,key):
+        try:rule=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
+        except (OSError,ValueError):return False
+        if rule.get('mode')!='OTHER_CURRENT_WORK_BEFORE_C121' or rule.get('target_job')!=key:return False
+        own=self.db.execute('SELECT state FROM links WHERE job=? AND idx=?',(key,rule['target_index'])).fetchone()
+        if not own or own['state']=='PASSED':return False
+        for peer in rule.get('cohort_jobs',[]):
+            row=self.db.execute('SELECT state FROM jobs WHERE key=?',(peer,)).fetchone()
+            # OBSERVED peers cannot become COMPLETE until this same human
+            # request's deferred C121 passes, so do not deadlock on its notice.
+            if row and row['state'] not in {'COMPLETE','OBSERVED','WAITING_HUMAN'}:return True
+        return False
+
     def claim_recovery(self,owner,ttl=600):
         """Claim repair work, never a second navigation or a second writer."""
         with self.tx():
             if self.db.execute("SELECT 1 FROM jobs WHERE state='WAITING_HUMAN_UNCLOSED'").fetchone():return None
             if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until>?",(self.now(),)).fetchone():return None
-            row=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key LIMIT 1",(self.now(),)).fetchone()
+            rows=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key",(self.now(),)).fetchall()
+            row=next((r for r in rows if r['state']=='NEEDS_RECONCILIATION' or not self.target_waits_for_others(r['key'])),None)
             if not row:return None
             key=row['key']
             self.db.execute("UPDATE jobs SET state='RECONCILING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
@@ -552,10 +566,12 @@ def worker_prompt(key,owner,idx,job):
         prior=json.loads(link['evidence']) if isinstance(link.get('evidence'),str) else (link.get('evidence') or {})
         links.append({**{k:link[k] for k in ['idx','state','attempt','due'] if k in link},'previous_new_tab_identity':prior.get('new_tab_identity')})
     context={'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':links,
-             'recovery_evidence_path':job.get('recovery_evidence_path'),'confirmed_no_ads':job.get('confirmed_no_ads')}
+             'recovery_evidence_path':job.get('recovery_evidence_path'),'confirmed_no_ads':job.get('confirmed_no_ads'),
+             'defer_c121_until_others':job.get('defer_c121_until_others',False)}
     if job.get('state')=='RECONCILING':
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
             'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '
+            'Se defer_c121_until_others=true, Rodolfo mandou fazer todos os demais antes da C121: realizar SOMENTE o readback/fechamento indispensável de eventual aba incerta, reconcile SEM --resume, liberar a lease e encerrar. Não diagnosticar nem revisitar C121 agora; ela volta após a rodada dos demais. '
             'Se recovery_evidence_path foi fornecido, é o arquivo já validado da tentativa exata: confira as imagens e o fechamento real atual, sem reextrair todo o histórico. Registre NO_AD --recovered por esse arquivo (ou reconcile SEM resume quando duas ausências já estão confirmadas); depois libere a lease e encerre. Não produzir um novo JSON narrativo. '
             'Sob lease PC1 com ID REAL da sessão, confira a sessão anterior do mesmo job via events claimed/recovery_claimed '
             'e state.db read-only. Observe o browser real e reconcilie somente abas comprovadamente pertencentes à tentativa; '

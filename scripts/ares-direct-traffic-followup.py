@@ -153,6 +153,7 @@ def tick(q):
         j=q.claim_recovery(owner) or q.claim(owner)
         if not j:return {'state':'IDLE'}
         repairing=j['state']=='RECONCILING'
+        j['defer_c121_until_others']=q.target_waits_for_others(j['key'])
         idx=next(x['idx'] for x in j['links'] if x['state'] in ({'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or x['due']<=q.now()))
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
         if repairing:prepare_recovery_proof(q,j,idx,directory)

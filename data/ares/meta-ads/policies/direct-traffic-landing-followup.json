@@ -11,8 +11,15 @@
   "procedure_authority_message_id": "1560126627394879551",
   "procedure_history": "direct-traffic-cbo-operations/references/landing-followup.md superseded; redirect only",
   "strategy_family": "DIRECT_TRAFFIC",
-  "niches": ["CAR", "SHEIN", "FUTURE_DIRECT_TRAFFIC_NICHES"],
-  "excluded": ["BOT", "MESSENGER"],
+  "niches": [
+    "CAR",
+    "SHEIN",
+    "FUTURE_DIRECT_TRAFFIC_NICHES"
+  ],
+  "excluded": [
+    "BOT",
+    "MESSENGER"
+  ],
   "trigger": "VERIFIED_CREATION_COMPLETION_REPLY",
   "start_time_dependency": false,
   "worker_backend": "BOUNDED_ARES_CLI_LOCAL_ONLY",
@@ -71,7 +78,11 @@
   "verify_close_before_next": true,
   "minimum_visible_seconds": 10,
   "visible_duration_authority_message_id": "1559964027264962702",
-  "visible_duration_supersession": {"previous_seconds": 20, "current_seconds": 10, "authority": "Rodolfo Mattei"},
+  "visible_duration_supersession": {
+    "previous_seconds": 20,
+    "current_seconds": 10,
+    "authority": "Rodolfo Mattei"
+  },
   "max_attempts_no_ad": 2,
   "retry_after_seconds": 60,
   "first_no_ad_notification": false,
@@ -83,10 +94,16 @@
     "source_message_id": null,
     "automatic_recoverable_error_alerts": false,
     "worker_expiry_alerts": false,
-    "human_action_required_evidence": ["human_action_required=true", "required_action nonempty"],
+    "human_action_required_evidence": [
+      "human_action_required=true",
+      "required_action nonempty"
+    ],
     "recovery_owner": "ares",
     "durable_recovery": {
-      "automatic_claim_states": ["NEEDS_RECONCILIATION", "ATTENTION"],
+      "automatic_claim_states": [
+        "NEEDS_RECONCILIATION",
+        "ATTENTION"
+      ],
       "active_recovery_state": "RECONCILING",
       "timeout_retry_seconds": 60,
       "safe_resume_requires_readback": true,
@@ -110,5 +127,55 @@
   "notification_delivery": "DURABLE_OUTBOX_WITH_EXACT_MESSAGE_GET_READBACK",
   "raw_origin_delivery": false,
   "backfill_existing_requests": false,
-  "first_production_test": "Rodolfo via a genuine authorized manager request; no test campaign now"
+  "first_production_test": "Rodolfo via a genuine authorized manager request; no test campaign now",
+  "current_priority": {
+    "mode": "OTHER_CURRENT_WORK_BEFORE_C121",
+    "authority_message_id": "1560151664692822079",
+    "authority_thread_id": "1559932317861158993",
+    "target_job": "178682693a0c044083c4c21749d452846f59eb6c1ae2fa2a4d1a6a280df11b83",
+    "target_index": 1,
+    "cohort_jobs": [
+      "33b5f9fd48ba4d2e508ddfd2038f1613bf00161daf48fec7b593dc1637e7679c",
+      "93681f2b763e6b636e6eaef00ac6167b6497bd16711ee0ac3005399ff47710b3",
+      "ac32b54d201a1c6ccc5482fc236aaf6d8fd4ab2ea6c1d599b1c2df171e1d3f2b",
+      "f44d4572a84eb9d102b7dd1b0bf29759868176df860099d65dfac3ee38d3e6cb",
+      "72a8e5e7cd22e6940ef3b9ddca78a5c90d8b7e4e2d84985e93b87b9494ab9e3e",
+      "32725949eb041aa49118fe4607996269d9d30383f1ee51cf61ad7f6214ed6c2e",
+      "15b3e3ab40226143f74619eceeb143b92d98badcec1049dce7aa92e623015119",
+      "9ba7354948383e238809a825c9e4b9feaa5c51aac4988223d7097e092dfd1a83",
+      "1181c6ad5b20e1b162fb97846e7bbe1849928bdd28a757b1f9884db2196052b4",
+      "5c18455529a50b913446604e8b6979e975d6015f8740e98d06e64781932f8415",
+      "48335d778153a3fbcdf2de2f2b6860022fd6fb0f8ac19ab82ba5ae79bbd0f68c"
+    ],
+    "scope_frozen_at": "2026-10-15T00:51:18.908033-04:00",
+    "do_not_interrupt_active_cleanup": true,
+    "no_implicit_extra_landing_visit": true
+  },
+  "progress_reporting": {
+    "enabled": true,
+    "authority_message_id": "1560151664692822079",
+    "generation": "1560151664692822079",
+    "thread_id": "1559932317861158993",
+    "interval_seconds": 900,
+    "on_human_batch_completed": true,
+    "on_return_to_c121": true,
+    "report_jobs": [
+      "cf43a2202b405afa80bcc0dc448828550590e2402ca3146cd3f26bcfe82b9566",
+      "178682693a0c044083c4c21749d452846f59eb6c1ae2fa2a4d1a6a280df11b83",
+      "33b5f9fd48ba4d2e508ddfd2038f1613bf00161daf48fec7b593dc1637e7679c",
+      "93681f2b763e6b636e6eaef00ac6167b6497bd16711ee0ac3005399ff47710b3",
+      "ac32b54d201a1c6ccc5482fc236aaf6d8fd4ab2ea6c1d599b1c2df171e1d3f2b",
+      "f44d4572a84eb9d102b7dd1b0bf29759868176df860099d65dfac3ee38d3e6cb",
+      "72a8e5e7cd22e6940ef3b9ddca78a5c90d8b7e4e2d84985e93b87b9494ab9e3e",
+      "32725949eb041aa49118fe4607996269d9d30383f1ee51cf61ad7f6214ed6c2e",
+      "15b3e3ab40226143f74619eceeb143b92d98badcec1049dce7aa92e623015119",
+      "9ba7354948383e238809a825c9e4b9feaa5c51aac4988223d7097e092dfd1a83",
+      "1181c6ad5b20e1b162fb97846e7bbe1849928bdd28a757b1f9884db2196052b4",
+      "5c18455529a50b913446604e8b6979e975d6015f8740e98d06e64781932f8415",
+      "48335d778153a3fbcdf2de2f2b6860022fd6fb0f8ac19ab82ba5ae79bbd0f68c"
+    ],
+    "stop_when_scope_complete": true,
+    "delivery": "DURABLE_OUTBOX_PLUS_EXACT_GET",
+    "exception_to_quiet_policy": "Explicit progress reports requested by Rodolfo; technical error alerts remain human-action-only"
+  }
 }
