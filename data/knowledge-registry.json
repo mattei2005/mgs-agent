@@ -3966,10 +3966,29 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-NAMING-US-APP-20261015",
+      "title": "SHEIN prefixo NNN obrigatorio com tres digitos e zeros a esquerda",
+      "updated_at": "2026-10-15T18:39:17+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.campaign-naming-pattern",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-15T18:39:17+00:00",
+      "id": "ARES-SHEIN-NAMING-US-APP-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "SHEIN prefixo NNN obrigatorio com tres digitos e zeros a esquerda",
-      "updated_at": "2026-10-09T22:27:06+00:00"
+      "title": "US-SHEIN: marcador (US_APP) nos proximos pedidos, apos COPY ou tracking",
+      "updated_at": "2026-10-15T18:39:17+00:00"
     },
     {
       "canonical_key": "ares.shein.quiz-model-route-map",
@@ -4006,6 +4025,25 @@
       "superseded_by": null,
       "title": "SHEIN criação nova usa Page alvo aprovada, não Page da referência externa",
       "updated_at": "2026-10-14T20:51:45+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-15T18:38:35+00:00",
+      "id": "ARES-SHEIN-REPORT-COPY-FAMILY-ORDER-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: manter produto A-Z e agrupar cada campanha com suas cópias imediatamente abaixo, também no histórico",
+      "updated_at": "2026-10-15T18:38:35+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.cost-per-result",
@@ -4095,10 +4133,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-COPY-FAMILY-ORDER-20261015",
       "title": "Relatórios SHEIN por Produto e Início, com COPY da origem direta no nome visível",
-      "updated_at": "2026-10-15T17:23:34+00:00"
+      "updated_at": "2026-10-15T18:38:35+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -12205,5 +12243,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T18:33:29+00:00"
+  "updated_at": "2026-10-15T18:39:17+00:00"
 }

@@ -1,0 +1,72 @@
+{
+  "id": "ares-discord-auto-continue-long-responses-20261015",
+  "authorization_message_id": "1560358838279086093",
+  "source_thread_id": "1560358027385638983",
+  "target_thread_id": "1560303769680355525",
+  "original_session_id": "20261015_105011_519eaa61",
+  "original_message_row": 123596,
+  "recovery": {
+    "session_id": "20261015_105011_519eaa61",
+    "message_row": 123596,
+    "channel_id": "1560303769680355525",
+    "notice_id": "1560343160985747469",
+    "original_chunks": 11,
+    "existing_ids": [
+      "1560343132724396063",
+      "1560343133382778913",
+      "1560343134532149370",
+      "1560343136218128501",
+      "1560343139607257151",
+      "1560343140269953026",
+      "1560343159412891740"
+    ],
+    "missing_chars": 7526,
+    "auto_continue_resolved": true,
+    "delay": 1.0,
+    "recovered": [
+      {
+        "chunk": 8,
+        "id": "1560360154967449613",
+        "nonce": "156034316098574746908",
+        "sha256": "c5eba8d618938761a7161b6c2a292aebb8b4dc4c5ad3a9de4e1af67fb0efc92a",
+        "verified": true
+      },
+      {
+        "chunk": 9,
+        "id": "1560360160168509484",
+        "nonce": "156034316098574746909",
+        "sha256": "a2f2e63ae99335976c5c469a3b9a187b6c97186a5bb0b2b640cf9193a062c87c",
+        "verified": true
+      },
+      {
+        "chunk": 10,
+        "id": "1560360164950024343",
+        "nonce": "156034316098574746910",
+        "sha256": "7b84469188b1f5651dead7e5c2dc83e9256f19e45d077fa0443e7b850f261721",
+        "verified": true
+      },
+      {
+        "chunk": 11,
+        "id": "1560360170964516949",
+        "nonce": "156034316098574746911",
+        "sha256": "39006df13a5a603eeaa556350a0e7177d2752da96367431d81522f60da1334a9",
+        "verified": true
+      }
+    ],
+    "status": "all_missing_chunks_delivered_and_readback_verified"
+  },
+  "config_validation": {
+    "live_mirror_equal": true,
+    "only_approved_keys_changed": true,
+    "resolved_bool": true,
+    "batch_delay": 1.0,
+    "original_chunks": 11,
+    "retained_chunks": 11,
+    "mirror_resolved": "/root/mgs-agent/profiles/ares-config.yaml"
+  },
+  "status": "configuration_validated_delivery_recovered_activation_pending",
+  "previous_pid": 179641,
+  "next_step": "detached safe restart Ares only, then fresh Discord readiness, config smoke, REPORT-INFRA and callback",
+  "workspace": "/root/.hermes/profiles/zeus/cache/scratch/ares-discord-long-1560358838279086093",
+  "updated_at": "2026-10-15T18:41:01.227395+00:00"
+}

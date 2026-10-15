@@ -18,7 +18,7 @@ class PaddingTests(unittest.TestCase):
         for n,head in [(1,'001'),(7,'007'),(99,'099'),(100,'100'),(999,'999')]:
             with self.subTest(number=n):
                 got=campaign_name(n,'2030-10-09T00:00:00-04:00','America/New_York','https://vizioid.com/quiz/us/sh3-g002/','FREE CLOTHES','COST_CAP','b01fb02c007',POLICY,copy_source_number=6)
-                self.assertEqual(got,head+' - 09/10 - v3 - FREE CLOTHES - COCAP - (b01fb02c007) - COPY C6 - event_add_to_wishlist')
+                self.assertEqual(got,head+' - 09/10 - v3 - FREE CLOTHES - COCAP - (b01fb02c007) - COPY C6 - (US_APP) - event_add_to_wishlist')
 
     def test_all_modes_use_padded_target_and_leave_source_untouched(self):
         for mode in ['pure_clone','clone_prestaged','from_zero_prestaged']:
@@ -39,7 +39,7 @@ class PaddingTests(unittest.TestCase):
 
     def test_output_policy_rejects_unpadded_new_name(self):
         r,s,a,_=case(1);a['shein_naming']=POLICY
-        a['campaign_policy']['name_regex']=r'[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \(b[0-9]+fb[0-9]+c[0-9]+\)(?: - COPY C[0-9]+)? - event_add_to_wishlist'
+        a['campaign_policy']['name_regex']=r'[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \(b[0-9]+fb[0-9]+c[0-9]+\)(?: - COPY C[0-9]+)? - \(US_APP\) - event_add_to_wishlist'
         p=shein_general.build(r,s,7,a);validate_account_policy(Manifest.from_dict(p),{'accounts':{a['shein_profile']['account_id']:a}})
         p['campaigns'][0]['name']=p['campaigns'][0]['name'].replace('007 - ','7 - ',1)
         with self.assertRaises(ValueError):validate_account_policy(Manifest.from_dict(p),{'accounts':{a['shein_profile']['account_id']:a}})

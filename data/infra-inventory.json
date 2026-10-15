@@ -19577,6 +19577,37 @@
       }
     },
     {
+      "id": "ares-discord-auto-continue-long-responses-20261015",
+      "agent": "ares",
+      "type": "hermes_profile_config_and_delivery_recovery",
+      "owner": "Zeus/Infra",
+      "authorization_message_id": "1560358838279086093",
+      "source_thread_id": "1560358027385638983",
+      "affected_thread_id": "1560303769680355525",
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "mirror": "/root/mgs-agent/profiles/ares-config.yaml",
+      "checkpoint": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
+      "config": {
+        "auto_continue_long_responses": true,
+        "long_response_batch_delay_seconds": 1.0,
+        "live_mirror_typed_match": true
+      },
+      "validation": {
+        "config_check_exit": 0,
+        "focused_tests": "8 passed",
+        "original_response_chunks_retained": "11/11",
+        "only_approved_keys_changed": true
+      },
+      "delivery_recovery": {
+        "missing_chars": 7526,
+        "missing_chunks": 4,
+        "exact_original_content": true,
+        "readback_verified": true,
+        "message_ids": ["1560360154967449613", "1560360160168509484", "1560360164950024343", "1560360170964516949"]
+      },
+      "status": "configuration_validated_delivery_recovered_activation_pending"
+    },
+    {
       "id": "zeus-discord-auto-continue-long-responses-20260905",
       "agent": "zeus",
       "type": "hermes_runtime_patch_and_profile_config",
