@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Criar lotes de artigos SEO inéditos que preservem o padrão editorial real de uma categoria existente e permaneçam em `draft` para revisão, com mídia, taxonomia, links e metadados confirmados por readback.
+Produzir lotes SEO inéditos no padrão editorial e no status explicitamente solicitado: `draft` para revisão ou publicação já autorizada. Entregar mídia, taxonomia, links e metadados comprovados por readback, sem transformar o fluxo de rascunho em exigência de nova autorização para um lote cuja publicação já foi liberada.
 
 ## 1. Confirmar acessos e ativação antes da produção
 
@@ -32,6 +32,14 @@ Compare ID/slug com o item dedicado e confira `edit_posts` e `upload_files`. Uma
 7. Com a integração coberta pela autoridade vigente — autorização permanente editorial da Raquel ou autorização específica de Rodolfo — registre somente o mínimo confirmado por fonte/readback: domínio, `wp_url`, país, idioma, vertical, usuário/ID/role e referência exata da credencial. Registre webroot somente quando confirmado e necessário ao transporte escolhido: uma integração editorial exclusivamente REST pode omitir `wp_path`, como os registros REST já existentes, sem inventar caminho nem ampliar acesso para descobri-lo. Valide a configuração antes de qualquer write editorial.
 
 Autenticação válida, permissão declarada e ativação do `site_key` são resultados distintos. Se houver bloqueio, informe o que foi efetivamente testado, a dependência exata e a ausência de writes; preserve o ponto de retomada sem declarar o lote produzido.
+
+### Preflight representativo antes de escalar
+
+1. Monte uma linha por portal com `site_key`, usuário/ID/função esperados por fonte vigente, capacidades lidas, idioma/mercado, categorias e regra de quantidade. Não reutilize asserts de função ou contexto de outro lote sem confrontá-los com o estado autorizado atual.
+2. Inspecione `OPTIONS /wp-json/wp/v2/posts` e a rota real de análise/persistência com `yoast-wordpress`: instalação/owner/prefixo, versão, fonte do idioma por post e Researcher suportado. Resolva dependências sem inventar host, webroot ou campos REST.
+3. Depois da autorização de produção, escolha um item real do briefing por combinação distinta e inclua variantes de tabela ou termos traduzidos. Complete texto revisado, mídia aprovada, taxonomia, cálculo genuíno e readback no status autorizado antes de multiplicar uploads/writes.
+4. Mantenha esse item no manifesto e retome seus IDs; o piloto não autoriza publicação quando o briefing pede apenas draft nem cria justificativa para excluir um post de teste extra.
+5. Use helpers parametrizados pelo manifesto vigente, não dependências físicas de diretórios de trabalho de um lote anterior. Preserve a versão já exercitada e valide contagem, identidade e idioma na cópia reutilizável antes de executá-la.
 
 ## Entrega exclusivamente local, quando expressamente solicitada
 
@@ -197,6 +205,10 @@ Payload mínimo:
 
 Crie um post por vez e persista ID/status/slug após cada resposta. Em falha posterior, retome pelo ID já criado; não repita POST sem readback.
 
+Separe o payload original de criação do manifesto da etapa atual. Um payload salvo com `status=draft` não deve levar o verificador a exigir draft depois de uma publicação autorizada: receba o status esperado da etapa explicitamente e compare os demais campos preservados. Não reverta o post nem altere o histórico de criação para fazer um assert passar.
+
+Em progresso parcial, congele os manifestos já executados e crie o próximo manifesto com o subconjunto exato, hashes e estados atuais. Não reconstrua um lock antigo supondo que todos os itens continuam draft quando parte já está publicada. Source aprovado, payload final, receipt e cálculo devem apontar para a mesma revisão de conteúdo antes do próximo write.
+
 ## 10. QA final no objeto exato
 
 Faça GET autenticado por ID com `context=edit` e compare contra o payload:
@@ -228,7 +240,9 @@ Diagnóstico de legibilidade em inglês:
 
 Esses diagnósticos sustentam qualidade editorial, mas não são um score Yoast. Se `_yoast_wpseo_linkdex` ou `_yoast_wpseo_content_score` permanecer vazio, reporte “não analisado”; nunca converta metadados corretos em uma pontuação inventada.
 
-## 11. Publicar após aprovação humana
+## 11. Publicar com autorização editorial vigente
+
+A autorização antecipada para produzir e publicar cobre esta etapa; não peça outro OK por artigo ou por retomada do mesmo lote. Respeite nova pausa expressa, mudança de escopo e gates próprios de operações técnicas.
 
 1. Antes do status change, faça novo GET autenticado por ID com `context=edit` e compare o draft atual com o payload aprovado. Se alguém editou o post durante a revisão, valide o objeto atual exato; não reenvie o payload antigo por cima da revisão humana.
 2. Publique um post por vez com o menor payload possível:

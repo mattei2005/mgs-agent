@@ -97,8 +97,7 @@ Output:
  "indexable_seo":"84","indexable_read":"90","wpcli_ok":true}
 ```
 
-Flow: Node fetches post via REST → runs `yoastseo` analysis → shell writes scores via
-WP-CLI postmeta update + SQL UPDATE on `wp_yoast_indexable` → confirmed via SSH/DB query.
+Fluxo recomendado, após o preflight: leia o post final por REST e o contexto nativo → calcule com Researcher/locale e medição DOM confirmados → atualize somente as saídas calculadas pela rota nativa autorizada → deixe o watcher existente encerrar a reconstrução → confirme postmeta e indexable único. O wrapper histórico também fazia SQL UPDATE direto; isso não é a recomendação para novas execuções nem prova de compatibilidade com outro portal.
 
 ### Contexto editorial em idioma diferente do locale da interface
 
@@ -110,7 +109,7 @@ Administrator não registra automaticamente outputs no schema REST. Abilities Yo
 
 - Selecione explicitamente o Researcher PT/ES e o locale do conteúdo autorizado; o `lang` HTML/site pode divergir do idioma editorial. Registre a divergência sem mudar o idioma global como efeito colateral.
 - Em instalações multilíngues com Polylang, `get_locale()` no WP-CLI pode refletir o idioma global, não o idioma do artigo. Confirme por ID `pll_get_post_language($id, 'slug')` e `pll_get_post_language($id, 'locale')`; use o Researcher/locale linguístico do post confirmado, registrando e preservando o locale global. Não remova o gate de idioma nem mude a configuração global: substitua a hipótese inadequada por validação nativa explícita do post, em todas as etapas e readbacks.
-- Em site sem Polylang, valide em **cada ID** marcadores nativos de idioma/mercado (por exemplo `lang_es` + `us`), o site_key canônico `language=es/country=us` e o hash do source aprovado independentemente. Em adaptador local explicitamente autorizado, `es_ES` pode ser a convenção linguística do pacote/Researcher espanhol sem atribuir mercado Espanha; preserve global/user locale e mantenha paridade do editor `false` quando o editor estiver em outro contexto. Não infira idioma apenas pelo texto nem flexibilize o adaptador compartilhado PT.
+- Em site sem Polylang, aplique a triangulação de idioma/mercado descrita na seção anterior; não use o locale da interface como substituto do contexto editorial nem altere o mercado por causa da convenção linguística do pacote.
 - Meça `titleWidth` em pixels com o método DOM da biblioteca (Arial 20px, peso 400); comprimento em caracteres não é largura e pode produzir outra avaliação.
 - Exija SEO title expandido, permalink real, conteúdo final e resultados individuais sem erros; registre hash do input e se o resultado foi apenas calculado ou também persistido.
 - Não trate a mesma versão npm como prova de paridade com o plugin instalado: releases diferentes podem conservar a versão `yoastseo`. Valide implementação/build e contexto do editor antes de afirmar equivalência.
@@ -177,14 +176,13 @@ Use Python with `PARSE_ID` env var to match exact post_id in SQL result row.
 ## Validation Steps After mu-plugin Change (v4+)
 
 1. Deploy mu-plugin to both locations, verify MD5 identical
-2. Check Layer 1 via REST:
+2. Inspecione o schema real e leia o alvo com o wrapper que mantém credenciais fora de argv:
    ```bash
-   curl -s "https://eggbev.com/wp-json/wp/v2/posts/{id}?_fields=meta" \
-     -u "$WP_USER:$WP_PASS" | jq .meta
+   source /root/mgs-agent/skills/content-publish-wordpress/scripts/wp-curl-auth.sh
+   http=$(wp_curl_auth_http "$response_file" "$WP_USER" "$WP_PASS" \
+     "$WP_URL/wp-json/wp/v2/posts/$POST_ID?context=edit&_fields=id,meta")
    ```
-   Must return exactly 4 fields: `_yoast_wpseo_focuskw`, `_yoast_wpseo_metadesc`,
-   `_yoast_wpseo_title`, `_hide_from_home`. `_yoast_wpseo_linkdex` and
-   `_yoast_wpseo_content_score` **must NOT exist**.
+   Compare somente os campos previstos no contrato dessa instalação. Entradas SEO e `_hide_from_home` são um exemplo de schema, não uma contagem universal; não remova metas extras nem exija exposição de resultados para provar persistência. Quando outputs não estiverem expostos, confirme-os pela leitura nativa autorizada.
 3. Run scorer, confirm 🟢🟢 green bubbles in admin list.
 4. **FLICKER TEST (manual):** Open post editor, press F5 — bubbles must NOT flash.
 

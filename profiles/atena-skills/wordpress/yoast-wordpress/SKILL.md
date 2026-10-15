@@ -47,26 +47,30 @@ Yoast stores scores in **two layers**:
 
 **Critical table name:** `wp_yoast_indexable` (SINGULAR). `wp_yoast_indexables` does not exist — never use the plural form.
 
-**mu-plugin current state (v4, 2026-04-24):**
-- File: `yoast-rest-meta.php` (also absorbs `hide-from-home.php`, now deleted)
-- `register_post_meta` for 4 fields: `_yoast_wpseo_focuskw`, `_yoast_wpseo_metadesc`, `_yoast_wpseo_title`, `_hide_from_home`
-- **NO** `rest_after_insert_post` hook, **NO** indexable `build()` / `save()` calls
-- Yoast owns the indexable entirely — zero interference
-- `pre_get_posts` hides posts with `_hide_from_home=1` from home/feed/search
+**Exemplo de integração de metadados — inspecione a instalação real:**
+- O MU plugin `yoast-rest-meta.php` pode registrar entradas SEO e regras de visibilidade, mas o conjunto de campos REST varia entre sites.
+- Não acrescente hooks próprios de reconstrução de indexables para preencher ou mascarar notas; deixe o watcher nativo do Yoast atuar quando a rota tiver sido inspecionada e comprovada.
+- Não remova nem registre campos apenas para reproduzir o schema de outro portal. Disponibilidade de Administrator não altera, por si só, quais metas foram registradas.
+
+Os contratos e o histórico de implementação estão em `references/yoast-score-architecture.md`; confirme fonte, versão e efeitos antes de qualquer alteração técnica autorizada.
 
 **Key lesson:** Never use `rest_after_insert_post` to touch the Yoast indexable. Any interference causes score flicker. Let Yoast calculate autonomously.
 
-Server-side scoring uses the `@yoastseo` npm library. Entry point:
+A análise usa a biblioteca genuína `yoastseo`; o wrapper existente abaixo é apenas uma entrada a considerar **depois** do preflight de compatibilidade, não uma garantia de suporte ao próximo portal:
 ```bash
 bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh eggbev <post_id>
 ```
-See `references/yoast-score-architecture.md` for full Node.js API pitfalls.
+Não extrapole o exemplo para outros hosts, owners ou idiomas. Use a receita de `references/yoast-score-architecture.md` para escolher cálculo, transporte e readbacks compatíveis.
 
-**Preflight de compatibilidade obrigatório:** a existência do scorer não prova suporte multi-site/multilíngue. Confira na implementação vigente como resolve host, webroot, prefixo de tabelas, versão Yoast, Researcher e locale. Não derive webroot do `site_key` nem aplique locale/Researcher inglês a ES/PT por inferência. Se o wrapper fixar esses valores ou a correção exigir adaptação de script/runtime ou escrita técnica, escale para Zeus antes de executar. Não use valores fixos nem force verde para preencher análise ausente.
+## Preflight de análise e persistência
 
-**Locale em WordPress multilíngue:** confirme a língua nativa do ID exato (`pll_get_post_language($id,'slug')` e `'locale'`, quando Polylang estiver ativo). O `get_locale()` global observado no WP-CLI pode diferir do locale do artigo; não o altere para satisfazer um gate. Somente com contexto nativo do artigo validado e adaptador autorizado, selecione o Researcher correspondente. Grave global e locale do artigo no baseline e readback, exigindo ambos inalterados. Meça `titleWidth` com o helper original do Yoast no DOM isolado, revise os assessments reais e mantenha resultados <71 sem reescrever conteúdo ou forçar verde. Verifique persistência única em postmeta/indexable separadamente da paridade do editor e da observação visual autenticada; sem handle no browser vault, registre o bloqueio e não aguarde indefinidamente.
+1. Resolva os IDs autorizados, instalação, owner, prefixo, versão Yoast, schema REST e transporte real antes de executar o scorer. Não derive webroot do `site_key` nem reutilize um wrapper que fixa outro host/idioma. Diferencie parametrização de adaptador local já autorizada de alteração do scorer compartilhado, acesso, plugin ou runtime; estas últimas seguem o escalonamento próprio.
+2. Confirme o idioma de **cada post**: com Polylang, leia `pll_get_post_language($id,'slug')` e `'locale'`; sem locale nativo por post, confronte site_key autorizado, marcadores institucionais de idioma/mercado e hash da revisão independente. Preserve e registre global/user locale mesmo quando diferirem do conteúdo; uma convenção linguística como `es_ES` não muda o mercado financeiro do artigo.
+3. Selecione o Researcher genuíno correspondente, expanda o SEO title pelo WordPress e meça `titleWidth` com o helper original no DOM isolado. Use rendered final e permalink real, registrando input/hash e estado esperado. Igualdade de versão npm não prova paridade com o editor.
+4. Após autorização de produção, use um artigo real do lote como canário por combinação de contexto/transporte. Inspecione o watcher instalado e prefira as duas atualizações nativas de postmeta quando ele comprovar reconstrução no shutdown; não adote SQL UPDATE de indexable como padrão nem invente hooks para forçar cor.
+5. Releia as duas metas e o indexable único no mesmo ID e exija valores calculados exatos, preservação editorial e contexto inalterado antes da expansão. Separe cálculo, persistência, paridade do editor e observação visual autenticada. Se uma dessas provas não existir, reporte o limite; não transforme ausência de sessão em espera indefinida ou em pedido para o revisor salvar todos os posts.
 
-**Locale por post em sites Polylang:** leia nativamente `pll_get_post_language($id, 'slug')` e `pll_get_post_language($id, 'locale')` em **cada ID**. O locale global observado via CLI pode ser `en_US` enquanto o conteúdo nativo é `pt`/`pt_BR`; use o Researcher do locale do post confirmado, nunca inferência pelo texto. Guarde ambos os locales no baseline/readback e exija preservação do global, sem alterar configuração para passar um gate. Uma adaptação local já aprovada deve manter os demais gates de escopo, identidade e preservação. Se um score real ficar abaixo de 71, persista somente o resultado autorizado e reporte ID/avaliações, sem forçar verde nem reescrever conteúdo fora do escopo.
+Se houver resultado baixo, reporte os assessments reais; um reparo editorial autorizado pode ajustar apenas os trechos responsáveis e deve gerar nova revisão/hash/análise, nunca um número fixo ou conectivos de enchimento.
 
 ## § Divergência entre editor, dados salvos e barra publicada
 
@@ -87,8 +91,8 @@ Diagnóstico não equivale a reparo: mantenha hipótese, evidência humana, leit
 2. Run Python diagnostic to identify violations (sentence length, transitions, passive voice)
 3. Rewrite only the violated rules
 4. Validate against the article's own contract and explicit brief. The 450–500-word and subtitle ≤100-character limits apply only to REC when its contract requires them; do not apply them to long-form SEO or P1.
-5. Publish via REST PATCH
-6. Re-score with `yoast-score-post.sh`
+5. Aplique o menor payload editorial autorizado e valide por GET no mesmo ID.
+6. Recalcule o corpo final pela rota aprovada no preflight e confirme as duas camadas persistidas; não invoque automaticamente um wrapper de outro contexto.
 
 **Retomada parcial de reparo:** reconcilie primeiro a intenção existente com o hash do corpo lido no ID exato; intenção gravada exige readback, nunca replay cego. Se uma normalização nativa de `comment_status` tiver sido explicitamente aceita, limite a exceção ao par exato `''` → `closed`, sem restaurar vazio, abrir comentários ou mudar configuração. Para uma nova revisão editorial, crie snapshots/diffs/manifesta de hash em diretório novo; preserve o bloqueio histórico e reconcilie source JSON, payload e receipt com o corpo real antes de preparar o adaptador de análise. Ao substituir uma revisão já calculada, use novo manifesto/work-dir em vez de alterar um manifest-lock existente.
 
@@ -98,7 +102,7 @@ Diagnóstico não equivale a reparo: mantenha hipótese, evidência humana, leit
 
 See `references/content-repair-readability.md` for full Python diagnostic code, thresholds table, and before/after rewrite examples.
 
-Em reparos estilísticos escopados, use manifesto novo com IDs exatos e hashes atuais, snapshots pré-GET/source/payload/receipt, diffs pontuais e POST somente `content`. Reconcilie source com marcador de imagem, payload final e receipt contra o readback antes de preparar o adaptador; não edite QA global, release ou manifestos históricos. Remover inícios repetidos ou converter passivas com ator conhecido pode resolver a nota sem perseguir cada aviso de transição: mantenha os assessments residuais reais e pare quando o reparo natural estiver suficiente. Na comparação nativa de indexables, separe `readability_score`/`primary_focus_keyword_score` dos timestamps automáticos `updated_at` e `object_last_modified`; exija que este último corresponda a `post_modified_gmt`, sem confundir timestamps técnicos com alteração da data editorial.
+Na comparação nativa de indexables, separe as notas dos timestamps técnicos `updated_at` e `object_last_modified`; confira a relação deste último com `post_modified_gmt`, sem confundi-los com alteração da data editorial. Use `references/bounded-editorial-native-score-repair.md` para a receita completa de snapshots, diffs, reconciliação de artefatos e manifesto da revisão seguinte.
 
 ---
 
