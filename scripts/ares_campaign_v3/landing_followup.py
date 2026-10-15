@@ -381,6 +381,15 @@ class Queue:
             j=self.job(key)
             if j['state'] not in {'RUNNING','RECONCILING'} or j['owner']!=owner or j['lease_until']<self.now():raise ValueError('active recovery owner required')
             safe=evidence.get('tab_closed_verified') is True or (evidence.get('no_tab_opened') is True and evidence.get('browser_inputs_zero_verified') is True)
+            if safe and self.target_waits_for_others(key):
+                opened=[l for l in j['links'] if l['state']=='OPEN_INTENT']
+                if len(opened)>1:raise ValueError('multiple uncertain tabs require individual reconciliation')
+                if opened:
+                    l=opened[0];saved=preserve_evidence(evidence,key,l['idx'],l['attempt'])
+                    self.db.execute("UPDATE links SET state='ATTENTION',evidence=? WHERE job=? AND idx=?",(json.dumps(saved,ensure_ascii=False),key,l['idx']))
+                self.db.execute("UPDATE jobs SET state='ATTENTION',owner=NULL,lease_until=NULL WHERE key=?",(key,))
+                self.event(key,'c121_diagnosis_deferred_by_explicit_order',{'required_action':action.strip(),'diagnosis':evidence['diagnosis'],'safe_cleanup_verified':True,'contact_not_sent':True})
+                return
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',('WAITING_HUMAN' if safe else 'WAITING_HUMAN_UNCLOSED',key))
             self.prepare_problem(key,key+':human-action',f"Acompanhamento — pedido {j['payload']['request_id']}.\n{evidence['diagnosis']}",evidence)
 
@@ -518,7 +527,7 @@ class Discord:
         if row['state']=='CANCELLED_BEFORE_SEND':raise ValueError('notification_cancelled_before_send')
         if row['thread']==INCIDENT_THREAD and row['state']=='PREPARED':
             authorized=any(json.loads(e['detail']).get('notification_key')==key
-                for e in q.db.execute("SELECT detail FROM events WHERE kind='human_action_requested'"))
+                for e in q.db.execute("SELECT detail FROM events WHERE kind IN ('human_action_requested','progress_update_authorized')"))
             if not authorized:
                 # Fence legacy queued alerts, not ambiguous or delivered posts.
                 with q.tx():

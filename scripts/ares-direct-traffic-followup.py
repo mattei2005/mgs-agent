@@ -15,6 +15,7 @@ from pathlib import Path
 from ares_campaign_v3.landing_followup import Queue, Discord, ROOT, BASE, publish_creation, worker_prompt
 from ares_campaign_v3 import landing_followup as core
 from ares_campaign_v3.landing_intake import Intake, native_busy
+from ares_campaign_v3.landing_followup_reporting import cycle as report_progress
 
 
 def require_pc1_lease(session_id):
@@ -127,6 +128,9 @@ def prepare_recovery_proof(q,job,idx,directory):
 
 
 def tick(q):
+    try:report_progress(q,Discord)
+    except Exception as e:
+        with q.tx():q.event(None,'progress_delivery_deferred',{'reason':type(e).__name__,'retry_owner':'ares'})
     # Existing native turns have absolute priority; this adds nothing to them.
     if native_busy():return {'state':'WAITING_NATIVE_TURN','creation_path_unchanged':True}
     # Independent flock spans the entire local observer subprocess. Losing the
@@ -227,7 +231,11 @@ def main():
         with (q.root/'intake.lock').open('a+') as guard:
             try:fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
             except BlockingIOError:return {'state':'INTAKE_BUSY'}
-            return Intake(q).tick()
+            result=Intake(q).tick()
+            try:result['progress_reporting']=report_progress(q,Discord)
+            except Exception as e:
+                with q.tx():q.event(None,'progress_delivery_deferred',{'reason':type(e).__name__,'retry_owner':'ares'})
+            return result
     if args.command in {'begin','result','reconcile','need-action'}:require_pc1_lease(args.pc1_session_id)
     if args.command=='need-action':
         q.request_human(args.key,args.owner,load_evidence(args))

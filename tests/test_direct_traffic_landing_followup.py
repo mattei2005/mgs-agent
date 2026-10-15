@@ -476,6 +476,58 @@ class FollowupTests(unittest.TestCase):
         j=self.q.job(self.key);j['links'][0]['attempt']=2;d=self.root/'wrong-frozen';d.mkdir()
         self.assertFalse(cli.prepare_recovery_proof(self.q,j,0,d));self.assertNotIn('recovery_evidence_path',j)
 
+    def priority_fixture(self,peers):
+        cfg={'current_priority':{'mode':'OTHER_CURRENT_WORK_BEFORE_C121','target_job':self.key,'target_index':0,'cohort_jobs':peers},
+             'progress_reporting':{'enabled':True,'generation':'150000000000000088','authority_message_id':'150000000000000088','thread_id':m.INCIDENT_THREAD,'interval_seconds':900,'report_jobs':[self.key]+peers,'stop_when_scope_complete':True}}
+        p=self.root/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json';p.parent.mkdir(exist_ok=True);p.write_text(json.dumps(cfg))
+        return cfg
+
+    def test_c121_closed_attention_waits_for_other_frozen_jobs(self):
+        self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
+        self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('tab-2'))
+        peer=self.second_account();self.priority_fixture([peer])
+        self.assertTrue(self.q.target_waits_for_others(self.key));self.assertIsNone(self.q.claim_recovery('repair'))
+        self.assertEqual(self.q.claim('other')['key'],peer)
+
+    def test_c121_returns_after_peer_urls_observed_not_blocked_by_its_notice(self):
+        self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
+        self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('tab-2'))
+        peer=self.second_account();self.priority_fixture([peer])
+        with self.q.tx():self.q.db.execute("UPDATE jobs SET state='OBSERVED' WHERE key=?",(peer,))
+        self.assertFalse(self.q.target_waits_for_others(self.key));self.assertEqual(self.q.claim_recovery('repair')['key'],self.key)
+
+    def test_priority_never_skips_uncertain_closure(self):
+        self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60
+        peer=self.second_account();self.priority_fixture([peer])
+        self.assertEqual(self.q.claim_recovery('cleanup')['key'],self.key)
+
+    def test_safe_c121_intervention_note_waits_until_other_jobs(self):
+        self.start();peer=self.second_account();self.priority_fixture([peer])
+        e={**self.closure(),'human_action_required':True,'required_action':'Offline fixture: inspect publisher setting','diagnosis':'offline serving investigation'}
+        self.q.request_human(self.key,'worker',e)
+        self.assertEqual(self.q.job(self.key)['state'],'ATTENTION');self.assertEqual(self.q.job(self.key)['links'][0]['state'],'ATTENTION')
+        self.assertIsNone(self.q.db.execute("SELECT 1 FROM messages WHERE key=?",(self.key+':human-action',)).fetchone())
+
+    def test_explicit_progress_reports_have_interval_readback_and_stop(self):
+        from ares_campaign_v3 import landing_followup_reporting as reports
+        self.arm();cfg=self.priority_fixture([])['progress_reporting']
+        first=reports.cycle(self.q,lambda:self.dc,cfg);self.assertEqual(first['state'],'VERIFIED');self.assertEqual(self.dc.posts,2)
+        self.assertEqual(reports.cycle(self.q,lambda:self.dc,cfg)['state'],'NOT_DUE');self.clock.value+=899
+        self.assertEqual(reports.cycle(self.q,lambda:self.dc,cfg)['state'],'NOT_DUE');self.clock.value+=1
+        self.assertEqual(reports.cycle(self.q,lambda:self.dc,cfg)['state'],'VERIFIED');self.assertEqual(self.dc.posts,3)
+        with self.q.tx():
+            self.q.db.execute("UPDATE jobs SET state='COMPLETE' WHERE key=?",(self.key,));self.q.db.execute("UPDATE links SET state='PASSED' WHERE job=?",(self.key,))
+        self.assertEqual(reports.cycle(self.q,lambda:self.dc,cfg)['state'],'VERIFIED');self.assertEqual(self.dc.posts,4)
+        self.clock.value+=9000;self.assertEqual(reports.cycle(self.q,lambda:self.dc,cfg)['state'],'NOT_DUE');self.assertEqual(self.dc.posts,4)
+
+    def test_progress_reports_do_not_enable_technical_error_alerts(self):
+        from ares_campaign_v3 import landing_followup_reporting as reports
+        self.arm();cfg=self.priority_fixture([])['progress_reporting'];cfg['enabled']=False
+        self.assertEqual(reports.cycle(self.q,lambda:self.dc,cfg)['state'],'DISABLED');self.assertEqual(self.dc.posts,1)
+        with self.q.tx():self.q.prepare_message('still-forbidden-technical-alert',m.INCIDENT_THREAD,'Offline generic technical error')
+        with self.assertRaises(ValueError):self.dc.deliver(self.q,'still-forbidden-technical-alert')
+        self.assertEqual(self.dc.posts,1)
+
     def second_account(self):
         p=copy.deepcopy(self.payload)
         p.update(account_id='111111111111115',source_thread_id='150000000000000006',source_channel_id='150000000000000007',request_id='second-manager-fixture',campaign_ids=['111111111111116'])
