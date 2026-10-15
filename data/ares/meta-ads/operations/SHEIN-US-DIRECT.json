@@ -675,6 +675,26 @@
         "Lance"
       ],
       "format": "short_header_aligned_pipe_table_short_footer",
+      "product_column": {
+        "max_characters": 25,
+        "spaces_count_toward_limit": true,
+        "ellipsis": "...",
+        "ellipsis_included_in_limit": true,
+        "max_visual_width": 25,
+        "single_line": true,
+        "normalize_display_whitespace": true,
+        "preserve_full_product_in_model_for_identity_sort_and_family": true,
+        "no_Meta_campaign_or_asset_name_write": true,
+        "source_thread_id": "1560303769680355525",
+        "reported_bad_layout_thread_id": "1558147211026501643"
+      },
+      "legend": {
+        "enabled": false,
+        "show_extended_explanatory_legend": false,
+        "footer_mode": "concise_required_sources_formulas_partial_cutoff_and_material_limitations_only",
+        "source_thread_id": "1560303769680355525",
+        "source_description": "Rodolfo declined the explanatory legend because it adds too much information."
+      },
       "enforcement": {
         "status": "ACTIVE",
         "renderer": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",

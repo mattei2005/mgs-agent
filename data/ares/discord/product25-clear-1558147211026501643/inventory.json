@@ -1,0 +1,356 @@
+{
+  "thread": {
+    "id": "1558147211026501643",
+    "name": "📈Yolokfx Conta 04 Intraday",
+    "parent_id": "1558147066826334309",
+    "type": 11,
+    "thread_metadata": {
+      "archived": false,
+      "archive_timestamp": "2026-10-09T16:00:44.084000+00:00",
+      "auto_archive_duration": 10080,
+      "locked": false,
+      "create_timestamp": "2026-10-09T16:00:44.084000+00:00"
+    }
+  },
+  "binding": {
+    "thread_id": "1558147211026501643",
+    "channel_id": "1558147066826334309",
+    "thread_name": "📈Yolokfx Conta 04 Intraday",
+    "manager_code": "g004",
+    "account_id": "781612907182683",
+    "account_name": "Yolokfx-US-SHEIN-EN-04-G004",
+    "mode": "on_demand_read_only",
+    "layout_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout",
+    "renderer": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+    "require_render_and_validate_before_delivery": true,
+    "historical_messages_not_default_model": true
+  },
+  "manage_messages_verified": true,
+  "captured_at": "2026-10-15T17:27:31.163678-04:00",
+  "messages": [
+    {
+      "id": "1560400869135097969",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nInício |      Nº       | Dia |  09/10  |  10/10  |  11/10  |  12/10  |  13/10  |  14/10   |  15/10*  |    Média 7d\n30/09  |      54       | D16 | +83,0%  | +74,3%  | +36,5%  | +72,5%  | +88,6%  |  +58,6%  | +105,6%* |    +74,2%*\n30/09  |      55       | D16 | +43,7%  | +12,9%  |  -1,0%  | +54,5%  | +16,4%  |  -21,0%  | +26,3%*  |    +18,8%*\n30/09  |      56       | D16 | +110,8% | +68,5%  | +44,9%  | +32,3%  | +48,4%  |  +8,5%   | +57,6%*  |    +53,0%*\n14/10  |      158      | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |  -45,4%  | -100,0%* | -72,7%* (2/7)\n```\n\n* 15/10 parcial até 17:11 EDT. Média 7d = média aritmética dos ROIs reais diários válidos; n/d não vira zero; (n/7) indica cobertura incompleta.\nFontes: Meta Insights e Smart Bidding/Adgroup. Receita líquida SB; ROI usa gasto Meta; estimado usa receita estimada; ROAS é de compras Meta. Atraso GAM informado pelo SB no nível do publisher. Produto é rótulo do nome; COPY é origem direta explícita.\nOrigem COPY fora do recorte ou ambígua: 120\nOrigem COPY fora do recorte ou ambígua: 121\n**Fim do relatório — 72 campanhas e histórico de 7 dias.** (14/14)",
+      "timestamp": "2026-10-15T21:15:58.048000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400850365718703",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nInício |      Nº       | Dia |  09/10  |  10/10  |  11/10  |  12/10  |  13/10  |  14/10   |  15/10*  |    Média 7d\n02/10  |      64       | D14 | +34,0%  | +64,9%  |  +8,7%  |  +6,4%  | +55,0%  |  +25,7%  | +45,8%*  |    +34,4%*\n02/10  |      65       | D14 | +57,5%  | +60,9%  | +43,8%  | +18,5%  |  -9,1%  | +1469,2% | -100,0%* |    +220,1%*\n07/10  |      94       | D9  | +14,6%  | +13,2%  |  -4,0%  |  +8,1%  |  +5,9%  | -100,0%  | -100,0%* |    -23,2%*\n07/10  |      93       | D9  | +60,4%  | +86,0%  | -12,3%  |  -2,5%  | +21,5%  |  +13,2%  | +138,4%* |    +43,5%*\n15/10  |      161      | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d    | -100,0%* | -100,0%* (1/7)\n15/10  |      162      | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d    | -100,0%* | -100,0%* (1/7)\n08/10  |      103      | D8  | +52,7%  | +13,7%  | +13,5%  | +40,6%  |  +1,1%  |  +41,3%  |  -2,1%*  |    +23,0%*\n08/10  |      105      | D8  | +134,6% | +60,1%  | +46,0%  |  +8,8%  |  -0,9%  |  +10,4%  | +23,9%*  |    +40,4%*\n10/10  | 120 COPY C63  | D6  |   n/d   |  -4,2%  |  +5,5%  | +24,6%  | +14,6%  |  +36,0%  | +16,7%*  | +15,5%* (6/7)\n10/10  | 121 COPY C63  | D6  |   n/d   | -15,0%  |  +9,0%  | -23,2%  |  -8,4%  |  +40,3%  |  -8,7%*  |  -1,0%* (6/7)\n13/10  |      146      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -69,5%  |  +22,7%  | +39,0%*  |  -2,6%* (3/7)\n13/10  |      147      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -38,7%  |  +82,3%  | +182,4%* | +75,3%* (3/7)\n05/10  |      86       | D11 | +35,9%  |  -1,3%  | +18,9%  | +28,3%  |  +7,7%  |  +28,7%  | +61,3%*  |    +25,6%*\n13/10  |      145      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -57,6%  | -100,0%  | -24,6%*  | -60,7%* (3/7)\n```\n\n**Histórico ROI real — 7 dias · 6/6** (13/14)",
+      "timestamp": "2026-10-15T21:15:53.573000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400849593831557",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nInício |      Nº       | Dia |  09/10  |  10/10  |  11/10  |  12/10  |  13/10  |  14/10   |  15/10*  |    Média 7d\n01/10  |      58       | D15 | +42,1%  | +29,7%  | +46,8%  | +11,7%  | -17,4%  |  +18,7%  | +51,3%*  |    +26,1%*\n29/09  |      44       | D17 | +71,0%  | +22,0%  | +30,2%  | +29,4%  | +19,9%  |  +61,7%  | +49,2%*  |    +40,5%*\n29/09  |      45       | D17 | +16,5%  | +48,0%  | +22,3%  | +22,8%  | +29,7%  |  +32,5%  | +40,2%*  |    +30,3%*\n10/10  | 115 COPY C45  | D6  |   n/d   | +12,5%  | +15,3%  |  -7,6%  |  -7,5%  | +288,2%  | -100,0%* | +33,5%* (6/7)\n29/09  |      46       | D17 | +63,3%  | +16,5%  | +26,7%  | +28,4%  | +60,8%  |  +40,6%  | +85,5%*  |    +46,0%*\n29/09  |      47       | D17 | +56,7%  | +10,5%  | +23,2%  | +18,7%  | +38,4%  |  +19,0%  | +47,6%*  |    +30,6%*\n02/10  |      71       | D14 | +116,3% | +68,7%  | -14,7%  | -18,5%  | -19,6%  |  +6,5%   | +41,3%*  |    +25,7%*\n02/10  |      72       | D14 | +103,3% | +93,3%  | +38,3%  |  +0,8%  |  +6,3%  |  +39,3%  | +89,5%*  |    +53,0%*\n14/10  |      156      | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |  -80,9%  | +173,3%* | +46,2%* (2/7)\n14/10  |      157      | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |  -52,8%  |  +5,1%*  | -23,9%* (2/7)\n15/10  |      163      | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d    | -100,0%* | -100,0%* (1/7)\n15/10  |      164      | D1  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |   n/d    | -100,0%* | -100,0%* (1/7)\n06/09  |      11       | D40 | +74,9%  | +54,9%  | +21,6%  | +40,2%  | +25,3%  |  +7,2%   | +32,0%*  |    +36,6%*\n30/09  |      53       | D16 | +23,0%  |  -8,5%  |  +0,4%  | +33,1%  | +37,4%  |  +13,4%  | +32,9%*  |    +18,8%*\n```\n\n**Histórico ROI real — 7 dias · 5/6** (12/14)",
+      "timestamp": "2026-10-15T21:15:53.389000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400848822206576",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nInício |      Nº       | Dia |  09/10  |  10/10  |  11/10  |  12/10  |  13/10  |  14/10   |  15/10*  |    Média 7d\n05/10  |      82       | D11 |  +7,2%  | -100,0% | +675,0% | +508,0% | -100,0% | -100,0%  |   n/d    | +148,4% (6/7)\n11/09  |      23       | D35 | +65,5%  | +36,8%  | +94,6%  | -33,3%  | +15,0%  |  +55,9%  | -100,0%* |    +19,2%*\n30/09  |      52       | D16 | +54,3%  | +30,3%  | +19,4%  | +32,4%  |  -0,2%  |  +42,0%  | +18,5%*  |    +28,1%*\n06/10  |      87       | D10 | +90,8%  | +88,7%  | +48,7%  | +35,1%  |  +7,1%  |  -13,5%  | +25,7%*  |    +40,4%*\n06/10  |      88       | D10 | +174,9% | +48,6%  | +35,4%  | +44,2%  | +20,9%  |  +79,5%  | +94,7%*  |    +71,2%*\n06/10  |      89       | D10 | +55,8%  | +60,2%  | +44,4%  | +22,0%  | +11,3%  |  +24,9%  | +32,9%*  |    +35,9%*\n09/10  |      106      | D7  | +89,8%  | +42,5%  | +32,7%  |  +6,0%  |  +7,7%  |  +98,4%  | +107,7%* |    +55,0%*\n10/10  | 129 COPY C106 | D6  |   n/d   | +62,6%  | +40,0%  | +63,7%  | +57,4%  |  +79,2%  |  +9,0%*  | +52,0%* (6/7)\n10/10  | 130 COPY C106 | D6  |   n/d   |  +6,3%  | +37,1%  | +27,5%  | +39,4%  |  +39,4%  | +46,6%*  | +32,7%* (6/7)\n10/10  | 131 COPY C106 | D6  |   n/d   | +83,6%  | +74,1%  | +38,3%  | +70,8%  |  +37,7%  | -17,1%*  | +47,9%* (6/7)\n10/10  | 132 COPY C106 | D6  |   n/d   | +12,8%  | +18,3%  |  +9,3%  |  -3,7%  |   n/d    |   n/d    |  +9,2% (4/7)\n10/10  | 133 COPY C106 | D6  |   n/d   | +14,2%  | +21,0%  | +28,3%  | +27,7%  |  -4,1%   | -18,1%*  | +11,5%* (6/7)\n14/10  |      160      | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   |  +79,4%  | -100,0%* | -10,3%* (2/7)\n07/10  |      90       | D9  | +83,5%  | +38,6%  | -16,8%  | +17,9%  | +46,3%  |  +13,6%  |  +6,5%*  |    +27,1%*\n```\n\n**Histórico ROI real — 7 dias · 4/6** (11/14)",
+      "timestamp": "2026-10-15T21:15:53.205000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400847869972501",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nInício |      Nº       | Dia |  09/10  |  10/10  |  11/10  |  12/10  |  13/10  |  14/10   |  15/10*  |    Média 7d\n10/10  |      110      | D6  |   n/d   | +112,2% | +66,6%  | +91,3%  | +27,0%  |  +35,6%  |  -5,0%*  | +54,6%* (6/7)\n11/10  | 135 COPY C110 | D5  |   n/d   |   n/d   | -19,3%  | +64,8%  | +43,7%  |  +8,2%   | +67,0%*  | +32,9%* (5/7)\n11/10  | 136 COPY C110 | D5  |   n/d   |   n/d   | +79,0%  | +48,5%  | +92,3%  |  +54,5%  |  -5,7%*  | +53,7%* (5/7)\n11/10  | 137 COPY C110 | D5  |   n/d   |   n/d   | +10,3%  | +62,0%  | +51,0%  |  +50,8%  | +26,7%*  | +40,2%* (5/7)\n11/10  | 138 COPY C110 | D5  |   n/d   |   n/d   | -55,8%  | +64,7%  | +64,3%  |  +14,8%  | +162,5%* | +50,1%* (5/7)\n11/10  | 139 COPY C110 | D5  |   n/d   |   n/d   | -46,5%  | +74,5%  | +83,1%  |  +86,7%  | +17,6%*  | +43,1%* (5/7)\n13/10  | 153 COPY C139 | D3  |   n/d   |   n/d   |   n/d   |   n/d   | +17,7%  |  +55,4%  | +75,7%*  | +49,6%* (3/7)\n13/10  | 154 COPY C139 | D3  |   n/d   |   n/d   |   n/d   |   n/d   |  +3,9%  |  +16,8%  | +152,6%* | +57,8%* (3/7)\n13/10  | 155 COPY C139 | D3  |   n/d   |   n/d   |   n/d   |   n/d   |  +9,7%  |  +95,4%  | +37,2%*  | +47,4%* (3/7)\n25/09  |      32       | D21 | +58,8%  | +48,1%  |  +3,7%  | +16,6%  | +51,5%  |  +28,1%  |  -1,3%*  |    +29,4%*\n30/09  |      50       | D16 | +22,8%  | -16,1%  | +81,4%  | +13,0%  | +36,7%  |  +33,3%  | +37,9%*  |    +29,9%*\n05/10  |      80       | D11 | +10,1%  | +35,7%  |  +3,2%  |  +9,7%  | +10,1%  |  -50,8%  | -100,0%* |    -11,7%*\n25/09  |      34       | D21 | +19,7%  |  +0,9%  | +13,3%  |  -0,0%  |  +4,0%  | +148,5%  | -52,7%*  |    +19,1%*\n28/09  |      41       | D18 | +44,7%  | +60,4%  | +28,4%  | +12,2%  |  +0,5%  |  -16,9%  | -100,0%* |     +4,2%*\n```\n\n**Histórico ROI real — 7 dias · 3/6** (10/14)",
+      "timestamp": "2026-10-15T21:15:52.978000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400846976450604",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nInício |      Nº       | Dia |  09/10  |  10/10  |  11/10  |  12/10  |  13/10  |  14/10   |  15/10*  |    Média 7d\n14/10  |      159      | D2  |   n/d   |   n/d   |   n/d   |   n/d   |   n/d   | -100,0%  | +32,0%*  | -34,0%* (2/7)\n13/10  |      143      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -68,0%  | -100,0%  | -100,0%* | -89,3%* (3/7)\n13/10  |      148      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -73,7%  |  -27,3%  | -11,6%*  | -37,5%* (3/7)\n07/10  |      91       | D9  | +27,3%  | +53,1%  | -19,4%  | +44,2%  | +32,7%  |  +14,5%  | -37,0%*  |    +16,5%*\n07/10  |      92       | D9  | +49,7%  | +105,6% | +32,8%  | +22,4%  | +51,9%  |  +26,1%  | +56,2%*  |    +49,3%*\n09/10  |      107      | D7  | +116,4% | +22,3%  | +53,8%  | +58,3%  | +10,2%  |  -0,9%   | +42,5%*  |    +43,2%*\n09/10  |      108      | D7  | +29,1%  | +14,9%  | +36,1%  | +25,9%  | +30,0%  |  +15,2%  | +59,3%*  |    +30,1%*\n09/10  |      109      | D7  | +11,8%  | +23,4%  | +71,8%  | +39,1%  | +42,6%  |  +95,9%  | +127,4%* |    +58,8%*\n10/10  |      111      | D6  |   n/d   | -26,3%  | -19,0%  | +16,8%  | +36,7%  |  +7,0%   | +91,4%*  | +17,8%* (6/7)\n13/10  |      150      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -26,1%  |   n/d    | -100,0%* | -63,0%* (2/7)\n13/10  |      152      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -30,1%  |  -71,5%  | -49,0%*  | -50,2%* (3/7)\n13/10  |      141      | D3  |   n/d   |   n/d   |   n/d   |   n/d   | -82,5%  | -100,0%  | -100,0%* | -94,2%* (3/7)\n```\n\n**Histórico ROI real — 7 dias · 2/6** (9/14)",
+      "timestamp": "2026-10-15T21:15:52.765000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400840920014994",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🟢🟡 | 10/10  | 120 COPY C63  | Retro Handheld Gaming Console         |  v3  | 18,90 |  22,06  | +3,16  |   93,51%   | +16,72%  | +19,95%  | 1,06x | MAXVOL\n🔴🔴 | 10/10  | 121 COPY C63  | Retro Handheld Gaming Console         |  v3  | 1,50  |  1,37   | -0,13  |  100,00%   |  -8,67%  |  -8,67%  | 1,38x | COCAP\n🟢🟢 | 13/10  |      146      | Retro Vinyl Record Player             |  v3  | 11,99 |  16,67  | +4,68  |   98,36%   | +39,03%  | +102,84% | 1,84x | COCAP\n🟢🟢 | 13/10  |      147      | Retro Vinyl Record Player II          |  v3  | 14,74 |  41,62  | +26,88 |   97,69%   | +182,36% | +206,65% | 2,42x | COCAP\n🟢🟢 | 05/10  |      86       | Robotic Pool Cleaner                  |  v3  | 17,10 |  27,58  | +10,48 |   89,42%   | +61,29%  | +63,68%  | 1,43x | MAXVOL\n🔴🟢 | 13/10  |      145      | Smartphone Gimbal Stabilizer          |  v3  | 1,67  |  1,26   | -0,41  |  100,00%   | -24,55%  | +43,11%  | 0,08x | COCAP\n🟢🟢 | 30/09  |      54       | watch                                 |  v3  | 12,08 |  24,84  | +12,76 |   95,38%   | +105,63% | +168,87% | 1,40x | MAXVOL\n🟢🟢 | 30/09  |      55       | watch                                 |  v3  | 15,25 |  19,26  | +4,01  |  100,00%   | +26,30%  | +49,57%  | 1,41x | MAXVOL\n🟢🟢 | 30/09  |      56       | watch                                 |  v3  | 15,30 |  24,12  | +8,82  |   96,97%   | +57,65%  | +69,15%  | 1,92x | MAXVOL\n🔴🔴 | 14/10  |      158      | WIDE LEG JEANS                        |  v3  | 0,56  |  0,00   | -0,56  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n```\n\n**Histórico ROI real — 7 dias · 1/6** (8/14)",
+      "timestamp": "2026-10-15T21:15:51.321000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400836570648589",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🟢🟢 | 06/09  |      11       | Pokémon Elite Trainer Box             |  v3  | 32,04 |  42,29  | +10,25 |   96,84%   | +31,99%  | +53,90%  | 1,55x | MAXVOL\n🟢🟢 | 30/09  |      53       | Portable Satellite Internet Kit       |  v3  | 17,86 |  23,74  | +5,88  |   96,59%   | +32,92%  | +51,68%  | 1,32x | MAXVOL\n🟢🟢 | 02/10  |      64       | Portable Satellite Internet Kit       |  v3  | 29,68 |  43,28  | +13,60 |   95,07%   | +45,82%  | +54,95%  | 1,56x | MAXVOL\n🔴🔴 | 02/10  |      65       | Portable Satellite Internet Kit       |  v3  | 0,25  |  0,00   | -0,25  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n🔴🔴 | 07/10  |      94       | pressure washer                       |  v3  | 0,21  |  0,00   | -0,21  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n🟢🟢 | 07/10  |      93       | Push mower                            |  v3  | 6,88  |  16,40  | +9,52  |  100,00%   | +138,37% | +203,49% | 2,02x | COCAP\n🔴🔴 | 15/10  |      161      | Retro handheld game console           |  v3  | 1,68  |  0,00   | -1,68  |    n/d     | -100,00% | -100,00% | 0,73x | COCAP\n🔴🔴 | 15/10  |      162      | Retro handheld game console           |  v3  | 2,84  |  0,00   | -2,84  |    n/d     | -100,00% | -100,00% | 1,34x | COCAP\n🔴🔴 | 08/10  |      103      | Retro Handheld Gaming Console         |  v3  | 14,68 |  14,37  | -0,31  |   97,96%   |  -2,11%  |  -2,11%  | 0,65x | MAXVOL\n🟢🟡 | 08/10  |      105      | Retro Handheld Gaming Console         |  v3  | 15,31 |  18,97  | +3,66  |   97,92%   | +23,91%  | +36,32%  | 1,15x | MAXVOL\n```\n\n**SHEIN — principal · 8/8** (7/14)",
+      "timestamp": "2026-10-15T21:15:50.284000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400816190525571",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🟢🟢 | 29/09  |      45       | perfume sample II                     |  v3  | 25,13 |  35,22  | +10,09 |   99,31%   | +40,15%  | +74,61%  | 1,73x | MAXVOL\n🔴🔴 | 10/10  | 115 COPY C45  | perfume sample II                     |  v3  | 0,14  |  0,00   | -0,14  |    n/d     | -100,00% | -100,00% | 4,43x | COCAP\n🟢🟢 | 29/09  |      46       | perfume sample III                    |  v3  | 21,38 |  39,67  | +18,29 |   97,14%   | +85,55%  | +125,16% | 2,05x | MAXVOL\n🟢🟢 | 29/09  |      47       | perfume sample IV                     |  v3  | 17,98 |  26,54  | +8,56  |   95,37%   | +47,61%  | +65,57%  | 1,45x | MAXVOL\n🟢🟢 | 02/10  |      71       | perfume sample IV                     |  v3  | 2,06  |  2,91   | +0,85  |  100,00%   | +41,26%  | +41,26%  | 1,41x | COCAP\n🟢🟢 | 02/10  |      72       | perfume sample IV                     |  v3  | 14,76 |  27,97  | +13,21 |   93,52%   | +89,50%  | +107,86% | 1,90x | MAXVOL\n🟢🟢 | 14/10  |      156      | PLUS SIZE BAGGY JEANS                 |  v3  | 1,31  |  3,58   | +2,27  |  100,00%   | +173,28% | +383,21% | 2,63x | COCAP\n🟢🟡 | 14/10  |      157      | PLUS SIZE BAGGY JEANS                 |  v3  | 4,15  |  4,36   | +0,21  |   95,00%   |  +5,06%  | +37,83%  | 2,70x | COCAP\n🔴🔴 | 15/10  |      163      | PLUS SIZE WORKOUT SETS                |  v3  | 1,81  |  0,00   | -1,81  |    n/d     | -100,00% | -100,00% | 3,29x | COCAP\n🔴🔴 | 15/10  |      164      | PLUS SIZE WORKOUT SETS                |  v3  | 2,67  |  0,00   | -2,67  |    n/d     | -100,00% | -100,00% | 0,23x | COCAP\n```\n\n**SHEIN — principal · 7/8** (6/14)",
+      "timestamp": "2026-10-15T21:15:45.425000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400814739161183",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🟢🟢 | 09/10  |      106      | Go-Kart                               |  v2  | 12,78 |  26,55  | +13,77 |  100,00%   | +107,75% | +126,60% | 1,66x | MAXVOL\n🟢🟡 | 10/10  | 129 COPY C106 | Go-Kart                               |  v2  | 20,43 |  22,26  | +1,83  |  100,00%   |  +8,96%  | +18,99%  | 1,39x | MAXVOL\n🟢🟢 | 10/10  | 130 COPY C106 | Go-Kart                               |  v2  | 27,05 |  39,65  | +12,60 |   97,33%   | +46,58%  | +79,30%  | 1,47x | MAXVOL\n🔴🔴 | 10/10  | 131 COPY C106 | Go-Kart                               |  v2  | 20,03 |  16,60  | -3,43  |   98,48%   | -17,12%  |  +3,84%  | 0,86x | MAXVOL\n⚪⚪ | 10/10  | 132 COPY C106 | Go-Kart                               |  v2  | 0,00  |  0,00   | +0,00  |    n/d     |   n/d    |   n/d    |  n/d  | COCAP\n🔴🔴 | 10/10  | 133 COPY C106 | Go-Kart                               |  v2  | 22,70 |  18,60  | -4,10  |   97,14%   | -18,06%  | -11,54%  | 0,82x | MAXVOL\n🔴🔴 | 14/10  |      160      | LED HALLOWEEN MASKS                   |  v3  | 0,90  |  0,00   | -0,90  |    n/d     | -100,00% | -100,00% | 0,99x | COCAP\n🟢🟡 | 07/10  |      90       | Magnetic Mini E-Reader                |  v3  | 13,32 |  14,18  | +0,86  |   96,00%   |  +6,46%  | +21,32%  | 1,00x | MAXVOL\n🟢🟢 | 01/10  |      58       | Massage Sneakers                      |  v3  | 14,04 |  21,24  | +7,20  |   98,31%   | +51,28%  | +89,25%  | 1,62x | MAXVOL\n🟢🟢 | 29/09  |      44       | perfume sample                        |  v3  | 25,91 |  38,66  | +12,75 |   99,30%   | +49,21%  | +76,65%  | 1,51x | MAXVOL\n```\n\n**SHEIN — principal · 6/8** (5/14)",
+      "timestamp": "2026-10-15T21:15:45.079000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400814281859164",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🟢🟢 | 30/09  |      50       | dash cam                              |  v3  | 11,19 |  15,43  | +4,24  |   90,00%   | +37,89%  | +52,90%  | 0,66x | MAXVOL\n🔴🔴 | 05/10  |      80       | DJ Party Light                        |  v3  | 0,97  |  0,00   | -0,97  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n🔴🔴 | 25/09  |      34       | Dog Water Bottle                      |  v3  | 1,65  |  0,78   | -0,87  |  100,00%   | -52,73%  | -52,73%  | 0,38x | COCAP\n🔴🔴 | 28/09  |      41       | electric bike 1                       |  v3  | 0,67  |  0,00   | -0,67  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n⚪⚪ | 05/10  |      82       | Furniture Lifter and Mover Set        |  v3  | 0,00  |  0,00   | +0,00  |    n/d     |   n/d    |   n/d    |  n/d  | BIDCAP\n🔴🔴 | 11/09  |      23       | gamecontroller                        |  v3  | 0,28  |  0,00   | -0,28  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n🟢🟡 | 30/09  |      52       | gamecontroller                        |  v3  | 27,94 |  33,10  | +5,16  |   95,00%   | +18,47%  | +34,86%  | 1,19x | MAXVOL\n🟢🟡 | 06/10  |      87       | gamecontroller                        |  v3  | 19,47 |  24,48  | +5,01  |   95,35%   | +25,73%  | +33,74%  | 1,42x | MAXVOL\n🟢🟢 | 06/10  |      88       | gamecontroller                        |  v3  | 14,86 |  28,93  | +14,07 |   97,83%   | +94,68%  | +144,28% | 1,77x | MAXVOL\n🟢🟢 | 06/10  |      89       | gamecontroller                        |  v3  | 26,60 |  35,36  | +8,76  |   94,53%   | +32,93%  | +42,67%  | 1,44x | COCAP\n```\n\n**SHEIN — principal · 5/8** (4/14)",
+      "timestamp": "2026-10-15T21:15:44.970000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400812767973389",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🔴🟡 | 10/10  |      110      | Custom Varsity Jackets                |  v3  | 34,29 |  32,57  | -1,72  |   95,62%   |  -5,02%  | +19,71%  | 1,43x | MAXVOL\n🟢🟢 | 11/10  | 135 COPY C110 | Custom Varsity Jackets                |  v3  | 36,91 |  61,64  | +24,73 |   99,59%   | +67,00%  | +93,96%  | 1,83x | MAXVOL\n🔴🟡 | 11/10  | 136 COPY C110 | Custom Varsity Jackets                |  v3  | 40,75 |  38,42  | -2,33  |   95,17%   |  -5,72%  | +18,38%  | 1,24x | MAXVOL\n🟢🟢 | 11/10  | 137 COPY C110 | Custom Varsity Jackets                |  v3  | 34,21 |  43,35  | +9,14  |   96,23%   | +26,72%  | +40,37%  | 1,48x | MAXVOL\n🟢🟢 | 11/10  | 138 COPY C110 | Custom Varsity Jackets                |  v3  | 6,48  |  17,01  | +10,53 |   89,47%   | +162,50% | +162,50% | 2,12x | COCAP\n🟢🟢 | 11/10  | 139 COPY C110 | Custom Varsity Jackets                |  v3  | 29,47 |  34,66  | +5,19  |   96,43%   | +17,61%  | +41,74%  | 1,23x | MAXVOL\n🟢🟢 | 13/10  | 153 COPY C139 | Custom Varsity Jackets                |  v3  | 92,54 | 162,56  | +70,02 |   94,53%   | +75,66%  | +94,80%  | 1,56x | COCAP\n🟢🟢 | 13/10  | 154 COPY C139 | Custom Varsity Jackets                |  v3  | 0,19  |  0,48   | +0,29  |  100,00%   | +152,63% | +152,63% |  n/d  | COCAP\n🟢🟢 | 13/10  | 155 COPY C139 | Custom Varsity Jackets                |  v3  | 7,85  |  10,77  | +2,92  |   94,87%   | +37,20%  | +85,61%  | 1,20x | COCAP\n🔴🟢 | 25/09  |      32       | dash cam                              |  v3  | 15,14 |  14,94  | -0,20  |   96,08%   |  -1,32%  | +56,08%  | 0,98x | MAXVOL\n```\n\n**SHEIN — principal · 4/8** (3/14)",
+      "timestamp": "2026-10-15T21:15:44.609000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400812176580770",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🔴🔴 | 13/10  |      152      | COSMETIC POUCHES                      |  v3  | 2,04  |  1,04   | -1,00  |  100,00%   | -49,02%  | -49,02%  | 0,44x | COCAP\n🔴🔴 | 13/10  |      141      | Custom Embroidered Caps               |  v3  | 0,13  |  0,00   | -0,13  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n```\n\n**SHEIN — principal · 3/8** (2/14)",
+      "timestamp": "2026-10-15T21:15:44.468000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560400809101893693",
+      "channel_id": "1558147211026501643",
+      "type": 19,
+      "content": "## SHEIN · Yolokfx-US-SHEIN-EN-04-G004\n**15/10/2026 · até 17:11 EDT · USD**\n**⏱️ ATRASO GAM/SB: 2h 09min**\nGasto **1021,04** · Receita **1432,18** · Saldo **+411,14** · ROI **+40,27%** · ROI est. **+62,96%**.\n\n**SHEIN — principal · 1/8**\n```text\nR/E  | Início |      Nº       | Produto                               | Quiz | Gasto | Receita | Saldo  | Est.Health |   ROI    | ROI est. | ROAS  | Lance\n🟢🟢 | 14/10  |      159      | Automatic Bread Maker                 |  v3  | 53,54 |  70,65  | +17,11 |   92,53%   | +31,96%  | +55,96%  | 1,36x | COCAP\n🔴🔴 | 13/10  |      143      | Automatic Card Shuffler and Dealer II |  v3  | 0,44  |  0,00   | -0,44  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n🔴🔴 | 13/10  |      148      | BAGGY JEANS                           |  v3  | 1,38  |  1,22   | -0,16  |  100,00%   | -11,59%  | -12,32%  |  n/d  | COCAP\n🔴🔴 | 07/10  |      91       | CLOTHES                               |  v3  | 15,01 |  9,45   | -5,56  |  100,00%   | -37,04%  |  -1,67%  | 0,80x | MAXVOL\n🟢🟢 | 07/10  |      92       | CLOTHES                               |  v3  | 12,45 |  19,45  | +7,00  |   89,62%   | +56,22%  | +90,20%  | 1,84x | MAXVOL\n🟢🟢 | 09/10  |      107      | CLOTHES                               |  v3  | 14,82 |  21,12  | +6,30  |  100,00%   | +42,51%  | +62,08%  | 1,33x | MAXVOL\n🟢🟢 | 09/10  |      108      | CLOTHES                               |  v3  | 11,36 |  18,10  | +6,74  |   98,20%   | +59,33%  | +89,44%  | 1,19x | MAXVOL\n🟢🟢 | 09/10  |      109      | CLOTHES                               |  v3  | 14,78 |  33,61  | +18,83 |   94,92%   | +127,40% | +179,16% | 1,99x | MAXVOL\n🟢🟢 | 10/10  |      111      | CLOTHES III                           |  v3  | 14,23 |  27,24  | +13,01 |   96,49%   | +91,43%  | +98,03%  | 1,57x | MAXVOL\n🔴🔴 | 13/10  |      150      | CLOTHES x2                            |  v3  | 0,33  |  0,00   | -0,33  |    n/d     | -100,00% | -100,00% |  n/d  | COCAP\n```\n\n**SHEIN — principal · 2/8** (1/14)",
+      "timestamp": "2026-10-15T21:15:43.735000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560399439888130161",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "Vou atualizar o parcial de hoje da Yolokfx Conta 04, cruzando Meta × Smart Bidding e mantendo o histórico de sete dias no modelo vigente.",
+      "timestamp": "2026-10-15T21:10:17.289000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1508864261504630925",
+        "username": "Ares",
+        "bot": true
+      }
+    },
+    {
+      "id": "1560399209826488345",
+      "channel_id": "1558147211026501643",
+      "type": 0,
+      "content": "manda um relatorio",
+      "timestamp": "2026-10-15T21:09:22.438000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "bot": null
+      }
+    },
+    {
+      "id": "1558147220614680707",
+      "channel_id": "1558147211026501643",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T16:00:46.370000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558147217317961832",
+      "channel_id": "1558147211026501643",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T16:00:45.584000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558147216185499770",
+      "channel_id": "1558147211026501643",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T16:00:45.314000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    },
+    {
+      "id": "1558147213421584538",
+      "channel_id": "1558147211026501643",
+      "type": 1,
+      "content": "",
+      "timestamp": "2026-10-09T16:00:44.655000+00:00",
+      "edited_timestamp": null,
+      "embeds": [],
+      "attachments": [],
+      "author": {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "bot": true
+      }
+    }
+  ],
+  "delete_normal_ids": [
+    "1560400869135097969",
+    "1560400850365718703",
+    "1560400849593831557",
+    "1560400848822206576",
+    "1560400847869972501",
+    "1560400846976450604",
+    "1560400840920014994",
+    "1560400836570648589",
+    "1560400816190525571",
+    "1560400814739161183",
+    "1560400814281859164",
+    "1560400812767973389",
+    "1560400812176580770",
+    "1560400809101893693",
+    "1560399439888130161",
+    "1560399209826488345"
+  ],
+  "preserve_immutable_system_ids": [
+    "1558147220614680707",
+    "1558147217317961832",
+    "1558147216185499770",
+    "1558147213421584538"
+  ]
+}

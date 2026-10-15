@@ -1392,6 +1392,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-PRODUCT25-CLEAR-1558147211026501643",
+      "next_step": "Aplicar contrato/renderer/testes, validar truncamento visual sem modificar dados ou agrupamentos; inventariar e limpar somente a thread-alvo, mantendo avisos de sistema já aceitos.",
+      "objective": "Limitar Produto a 25 caracteres com espaços no padrão SHEIN, não acrescentar legenda explicativa, e limpar mensagens da thread 1558147211026501643 sem novo relatório",
+      "source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "in_progress",
+      "thread_id": "1560303769680355525",
+      "updated_at": "2026-10-15T21:22:40+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-TODAY-EXPIRED-SCHEDULE-20261009",
       "next_step": "Nao reabrir ou repetir o pedido concluido; Zeus apenas revisao documental. Aplicar regras aos proximos pedidos autorizados.",
       "objective": "Aplicar horario vencido do dia e recovery sem reautorizacao mantendo Ares como dono funcional",
@@ -6022,5 +6032,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T21:18:27+00:00"
+  "updated_at": "2026-10-15T21:22:40+00:00"
 }
