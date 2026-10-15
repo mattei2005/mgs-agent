@@ -33,6 +33,10 @@ Procedimento exclusivo do processo independente que observa anúncios depois de 
 - Uma instrução posterior expressa pode substituir uma prioridade temporária: persistir a supersessão, selecionar o alvo aprovado após cleanup indispensável e retomar FIFO depois dele, sem interromper observador vivo. Conferir no contrato se a permissão ainda está ativa; não ressuscitar ciclos históricos nem zerar contadores da política finita. Atualizar o informe para refletir a ordem real, sem repetir prioridade já concluída.
 - Credenciais, billing, restart e Critical Subset preservam seus gates. Não modificar Router, financeiro, WordPress, GAM, campanha, budget, estratégia ou início neste fluxo. Nunca clicar em anúncio.
 
+## Escopo de revisão do PC1
+
+Quando Rodolfo revisar falhas, travamentos, latência ou regras de abrir links no PC1, restringir a análise e as propostas ao observador: obter o próximo link da fila, adquirir o desktop, abrir a landing, verificar anúncio/foco/tempo, fechar/verificar, persistir resultado e seguir/recuperar. Não misturar essa revisão com pedidos, criação ou conclusão de campanhas, mensagens de conclusão de campanha, nem auditoria/limpeza de threads. Esses fluxos ficam intactos salvo pedido separado e explícito. A origem já validada do link é uma entrada do observador, não motivo para redesenhar o fluxo de campanha. Distinguir encerrar a tentativa no PC1 de concluir um pedido de campanha.
+
 ## Dependências mínimas
 
 Carregar `computer-use` para interação visual. Usar o transporte PC1 já configurado, sob a lease cross-agent. Para convenções adicionais de acesso, consultar somente a referência PC1 de `adspower-segurador-token-collector`; esta tarefa usa Chrome comum, nunca perfil AdsPower/Facebook. Comandos e branches ficam em `references/runtime-and-recovery.md`.
