@@ -31,6 +31,18 @@ Consulte `action_values` junto com `purchase_roas`. Some somente o valor da acti
 
 Exija IDs únicos; igualdade entre seleção e união disjunta das partições; cobertura de todos os anúncios com entrega e de todos os conjuntos relevantes; primeira entrega comprovada; conservação de gasto, receita líquida, receita estimada, resultados e contadores Health. Compare os totais com o mesmo recorte Meta, sem forçar igualdade com campanhas fora da seleção. Valide Custo/resultado e ROAS em linhas reais e o comprimento de cada mensagem com título, cabeçalho e code fences. Esses testes precedem qualquer afirmação de relatório completo.
 
+## Atraso GAM/SB — indicador obrigatório de todos os relatórios SHEIN
+
+Adicionar **⏱️ ATRASO GAM/SB: <duração>** em destaque no cabeçalho, acima da tabela; não criar uma 13ª coluna nem remover/reordenar as doze aprovadas. Regra aditiva de Rodolfo na thread `1560303769680355525`; fonte canônica `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout/gam_delay`.
+
+1. Resolver domínio/conta e `publisherId` reais pelas fontes autorizadas e gate; usar a mesma identidade de publisher da coleta financeira, nunca o publisher CPV nem um publisher YOLO fixo em todos os domínios. Não imprimir/salvar `/company` integral.
+2. Pelo helper `ares-smartbidding-common.py`, ler `api_request('POST', '/estimated/delay', payload={'publisherIds': [publisher_id], 'currency': report_currency})`. Este POST é consulta, não write GAM/SB. Aceitar HTTP 200/201 e objeto com `totalMinutes` numérico finito e não negativo; rejeitar booleano, ausente, inválido e não finito. Campos auxiliares retornados podem incluir `hours`, `minutes`, `currentFillTime`, `jbf_hour`, `fill`, `confident`; não derivar atraso de spend, Health ou diferença de receita.
+3. Formatar minutos inteiros como no CPV, com `hours, minutes = divmod(int(totalMinutes), 60)`: `Hh MMmin` quando houver horas, senão `Mmin`. Fonte explicitamente zero vira `0min`; falha/ausência vira `n/d` com limitação, nunca zero por coerção. Guardar horário/timezone da leitura e publisher junto à evidência sanitizada.
+4. Explicar que é atraso dos dados GAM **informado pelo Smart Bidding**, em nível de publisher, não medição direta GAM nem métrica individual da campanha/conta. Várias contas do mesmo publisher compartilham essa leitura; publishers diferentes têm leituras separadas, sem transplantar atraso de um domínio a outro. Em complemento, não reconsultar o financeiro somente para incluir atraso; informar horário adicional. Em período histórico, rotular o atraso consultado agora como atual, não como histórico da janela financeira.
+5. Avisar sucintamente que Receita/Saldo/ROI podem refletir dados defasados, sem ajustar artificialmente números ou herdar regras CPV de corte/escala/threshold/cron. Falha na fonte de atraso não omite o indicador nem elimina o relatório financeiro disponível.
+
+Verificação exercitada: endpoint live HTTP 201 e `totalMinutes` observado; teste de formatação e indisponibilidade cobre None, vazio, negativo, NaN, booleano, zero, minuto, hora exata e hora+minutos. Não fixar o valor observado como regra ou dado de próximos relatórios.
+
 ## Janelas, custo e produto
 
 Separar pré/pós quando o operador indicar mudança material de monetização. Confirmar a mudança na série diária; o marco informado é contexto do operador, não prova do dia exato da inflexão. Usar dias fechados como ranking principal e dia atual como monitoramento parcial. Comparar também uma coorte comum quando houver mistura de campanhas novas e antigas.

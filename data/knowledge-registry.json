@@ -4044,6 +4044,25 @@
       "updated_at": "2026-10-06T14:20:25+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.reporting.gam-delay",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-15T15:19:05+00:00",
+      "id": "ARES-SHEIN-REPORT-GAM-DELAY-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Relatórios SHEIN incluem atraso GAM/SB no cabeçalho, mantendo as doze colunas",
+      "updated_at": "2026-10-15T15:19:05+00:00"
+    },
+    {
       "canonical_key": "ares.shein.human-request-pattern",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
       "consumers": [
@@ -12111,5 +12130,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T15:14:52+00:00"
+  "updated_at": "2026-10-15T15:19:05+00:00"
 }

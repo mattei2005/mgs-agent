@@ -216,6 +216,14 @@ Esses diagnósticos sustentam qualidade editorial, mas não são um score Yoast.
 6. Compare o sitemap canônico sem query com uma leitura fresca por cache-buster quando URLs recém-publicadas não aparecerem. Registre os dois resultados separadamente: presença na variante fresca não comprova atualização do sitemap canônico entregue ao crawler. Não altere cache, plugin ou runtime para esconder a divergência; escale o achado técnico.
 7. Só reporte publicação depois que todos os IDs tiverem readback autenticado e público. Uma resposta REST `200` no status change não prova que o artigo está público, indexável ou com o layout preservado.
 
+## Pacote estritamente local para integração por outro agente
+
+- Quando o escopo proibir uploads/publicação, grave um JSON completo por artigo e um manifesto com caminhos absolutos, palavras, fontes, inventário e `production_writes=0`; não transforme o pacote local em rascunhos WordPress por iniciativa própria.
+- Para mínimo de palavras visíveis, conte o texto de tags editoriais, excluindo comentários, scripts, atributos e ALT; reporte também uma contagem conservadora de tokens alfabéticos sem números para evitar que tabelas e cálculos façam um artigo curto passar no limite.
+- Preserve referências entre artigos ainda locais por `local_id` em `pending_internal_links`; só insira href depois de existir um campo REST `link` canônico validado, nunca a partir do slug planejado.
+- Diferencie bloqueio de transporte de ausência de evidência: FTC pode responder 403 diretamente e eCFR pode redirecionar a interstitial com HTTP 200, embora `web_extract` recupere texto primário substantivo. Salve método e texto recuperado, registre o bloqueio e nunca declare esses alvos como HTTP 200 direto validado.
+- Preserve primeiro parágrafo de uma frase e um marcador de imagem imediatamente depois quando a mídia ficar com outro agente; inclua prompt específico e a obrigação de usar o mesmo futuro ID na imagem interna e na destacada, sem declarar imagem gerada ou aprovada.
+
 ## 12. Relatório ao Rodolfo
 
 Liste por categoria:

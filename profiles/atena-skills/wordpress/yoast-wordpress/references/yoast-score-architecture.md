@@ -100,6 +100,16 @@ Output:
 Flow: Node fetches post via REST → runs `yoastseo` analysis → shell writes scores via
 WP-CLI postmeta update + SQL UPDATE on `wp_yoast_indexable` → confirmed via SSH/DB query.
 
+### Preflight de scorer externo e persistência nativa
+
+- Selecione explicitamente o Researcher PT/ES e o locale do conteúdo autorizado; o `lang` HTML/site pode divergir do idioma editorial. Registre a divergência sem mudar o idioma global como efeito colateral.
+- Meça `titleWidth` em pixels com o método DOM da biblioteca (Arial 20px, peso 400); comprimento em caracteres não é largura e pode produzir outra avaliação.
+- Exija SEO title expandido, permalink real, conteúdo final e resultados individuais sem erros; registre hash do input e se o resultado foi apenas calculado ou também persistido.
+- Não trate a mesma versão npm como prova de paridade com o plugin instalado: releases diferentes podem conservar a versão `yoastseo`. Valide implementação/build e contexto do editor antes de afirmar equivalência.
+- Inspecione o `Indexable_Post_Meta_Watcher` instalado antes de recomendar SQL direto: versões que observam `added/updated/deleted_post_meta` e reconstroem o objeto no shutdown podem persistir as duas camadas por atualização nativa de meta, sem código novo. Ainda exija readback exato de postmeta/indexable e indicador autenticado no mesmo ID; inspeção de código não substitui teste autorizado.
+- Quando um wrapper usar usuário de sistema fixo, confirme o dono do webroot antes de diagnosticar instalação ausente. Acesso de outro usuário pode fazer `wp` reportar falsamente que não é WordPress.
+- Restrinja os canários de persistência aos IDs recém-autorizados; controles antigos são somente leitura. Schema REST com campos de saída prova exposição, não que um save reproduza a análise nem atualize a barra.
+
 ### PITFALLS — yoastseo v3.6 API (trial & error, 2026-04-24)
 
 **1. Correct imports:**
