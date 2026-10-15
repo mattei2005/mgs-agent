@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-15T14:45:24-04:00",
+    "updated_at": "2026-10-15T18:47:51.830497+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44311,6 +44311,51 @@
       "rollback": "apps/finance-system/private/releases/retry-five-min-1560288130085560351",
       "deletions": 0,
       "institutional_known_limitation": "KR-014 expects Ares3.6.1; current3.6.8; preexisting reconciled audit FINANCE_PREVIEW_CLOSURE_READBACK; unrelated to finance, not modified"
+    },
+    {
+      "id": "topfeed-yoast-role-diagnostic-1560319225732669606",
+      "type": "wordpress-user-role-and-yoast-diagnostic",
+      "agent": "zeus",
+      "status": "role_and_read_retry_verified_editorial_scores_pending",
+      "updated_at": "2026-10-15T18:47:51.830497+00:00",
+      "authority": [
+        "1560362232821588084"
+      ],
+      "thread_id": "1560319225732669606",
+      "domain": "finanzas.topfeed.fun",
+      "wordpress_user": {
+        "id": 7,
+        "login": "atena",
+        "before": "editor",
+        "after": "administrator",
+        "password_email_app_passwords_preserved": true
+      },
+      "verified_installation": {
+        "host": "162.55.28.178",
+        "path": "/home/runcloud/webapps/finanzas-topfeed",
+        "owner": "runcloud"
+      },
+      "vault_metadata": {
+        "item_id": "noggitrwqhnr4llqlcfv4xq5gq",
+        "field": "wp_role",
+        "after": "administrator",
+        "other_fields_preserved": true
+      },
+      "files": {
+        "/root/mgs-agent/reports/topfeed-yoast-role-diagnostic-1560319225732669606.md": "e63124b1525b1f0a7cf462af26be36ee12a7802c869c04e147c65058dedd48ef",
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md": "6b331230a09eb2ee278ea1d028a93f8dfe0d9e13494b24336ab60a11e9738c07",
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/yoast-abilities-role-diagnostics.md": "3e439f3112375d2ffca5dbc2a06be0d1c6dc380146889be996dded6c55078416"
+      },
+      "evidence_path": "/root/.hermes/profiles/zeus/work/topfeed-yoast-1560319225732669606",
+      "post_count": 11,
+      "posts_unchanged": true,
+      "scores_persisted_by_zeus": 0,
+      "locale_changed": false,
+      "rollback": "Native WP_User ID7 set_role editor; baseline role snapshot in evidence. No password rollback necessary.",
+      "report_infra_message_id": "1560363736160534650",
+      "handoff_message_id": "1560363741902545058",
+      "atena_activity_message_id": "1560363782968975461",
+      "closure_readback": "/root/.hermes/profiles/zeus/work/topfeed-yoast-1560319225732669606/closure-readback.json"
     }
   ],
   "profile_skill_references": [
