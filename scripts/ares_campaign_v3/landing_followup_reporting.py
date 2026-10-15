@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json
 import re
-from collections import Counter,defaultdict
+from collections import Counter
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from . import landing_followup as core
@@ -22,8 +22,13 @@ def snapshot(q,cfg):
     groups={q.success_key(j['key']) for j in jobs if j['state']=='COMPLETE'}
     all_done=all(j['state']=='COMPLETE' for j in jobs)
     priority=json.loads((core.BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
-    target=priority.get('target_job');deferred=bool(target and q.target_waits_for_others(target))
-    phase='ALL_DONE' if all_done else ('OTHERS_FIRST' if deferred else 'RETURN_C121')
+    target=priority.get('target_job');peers=set(priority.get('cohort_jobs') or [])
+    others_pending=any(j['key'] in peers and j['state'] not in {'COMPLETE','OBSERVED','WAITING_HUMAN'} for j in jobs)
+    target_done=any(j['key']==target and j['links'][priority.get('target_index',0)]['state']=='PASSED' for j in jobs)
+    all_validated=all(l['state']=='PASSED' for j in jobs for l in j['links'])
+    phase=('ALL_DONE' if all_done else 'CONFIRMING_NOTICES' if all_validated else
+           'OTHERS_C121_DONE' if others_pending and target_done else 'OTHERS_FIRST' if others_pending else
+           'RETURN_C121' if target and not target_done else 'NORMAL')
     return {'counts':dict(counts),'active_jobs':len(active),'recovery_jobs':len(repair),'completed_human_groups':len(groups),'phase':phase,'total':sum(counts.values()),'all_done':all_done}
 
 
@@ -35,8 +40,11 @@ def render(s,q,cfg):
            f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)}**.",
            f'🔄 Executor: {executor}.']
     if s['phase']=='OTHERS_FIRST':lines.append('**Prioridade mantida: resolver os demais primeiro. C121 fica para o fim.**')
+    elif s['phase']=='OTHERS_C121_DONE':lines.append('**C121 já validada; o executor continua os demais links da rodada.**')
     elif s['phase']=='RETURN_C121':lines.append('**Os demais trabalhos executáveis desta rodada foram processados. Próxima etapa: retomar a C121.**')
-    else:lines.append('**Rodada concluída: validações integrais e confirmações aos gestores conferidas.**')
+    elif s['phase']=='CONFIRMING_NOTICES':lines.append('**Links validados; falta concluir a conferência dos avisos aos gestores.**')
+    elif s['phase']=='ALL_DONE':lines.append('**Rodada concluída: validações integrais e confirmações aos gestores conferidas.**')
+    else:lines.append('**A rodada continua; somente validações reais entram como concluídas.**')
     if s['phase']!='ALL_DONE':lines.append('Validação de links não é conclusão de todo o pedido; o aviso ao gestor depende do grupo completo.')
     return '\n'.join(lines)
 
