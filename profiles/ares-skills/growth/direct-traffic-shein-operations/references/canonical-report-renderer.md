@@ -10,6 +10,10 @@ Por pedido de Rodolfo na thread `1560303769680355525`, após problema visual na 
 
 Rodolfo dispensou a legenda explicativa. `legend.enabled=false`: não acrescentar blocos de cores R/E, aliases de Lance, definições longas de Média, Produto ou COPY. Conservar apenas rodapé conciso de proveniência/fórmulas essenciais, corte parcial e limitações relevantes; as regras de cálculo/cores continuam no contrato. Não publicar um relatório novo durante um pedido de corrigir/limpar e aguardar nova solicitação. A suíte cobre exatamente 25, excesso com reticências, espaços/controles Unicode, preservação do modelo e de famílias, prefixos truncados iguais e ausência da legenda extensa.
 
+## Diagnóstico de quebra visual no Discord
+
+Compare as larguras de cada coluna em relatórios reais antes de propor alterar separadores, cabeçalhos ou dividir a tabela. O renderer usa a maior célula de Produto para preencher a coluna inteira: um único nome longo pode alargar todas as linhas, inclusive as dos produtos curtos. Se os perfis das outras colunas forem iguais e só Produto variar, identifique Produto como a causa da diferença entre contas; a largura total é o efeito. Não confundir o limite de 2000 caracteres por mensagem com a largura visual de uma linha. Para isolar a correção, simular a redução apenas de Produto mantendo todas as outras larguras e o separador aprovado. Qualquer novo limite menor que o vigente precisa de aprovação; não trocar a regra global durante um diagnóstico. Um perfil que cabe em outro relatório serve de referência de teste, não de garantia universal para janela/zoom diferentes. Procedimento exercitado comparando perfis completos de relatórios reais e confirmando que somente Produto explicava a diferença de largura.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:
