@@ -98,6 +98,20 @@ class ReliabilityTests(unittest.TestCase):
         self.arm();self.q.claim('worker');cfg={'report_jobs':[self.key]};s=reporting.snapshot(self.q,cfg)
         self.assertEqual(s['opened_jobs'],0);self.assertNotIn('observação em execução',reporting.render(s,self.q,cfg))
 
+    def test_repair_cannot_defer_an_uncertain_probe_window(self):
+        self.arm()
+        for _ in range(3):self.error()
+        self.q.claim_recovery('repair');probe=self.root/'uncertain-probe.json';probe.write_text(json.dumps({'tests_returncode':0,'opening':{'new_window_created':True}}))
+        with self.q.tx():self.q.event(self.key,'technical_probe_intent',{'owner':'repair','idx':0,'probe_file':str(probe)})
+        with self.assertRaisesRegex(ValueError,'probe window uncertain'):self.q.deferred(self.key,'repair')
+        self.assertEqual(self.q.job(self.key)['state'],'REPAIRING')
+
+    def test_repair_can_defer_without_any_probe_input(self):
+        self.arm()
+        for _ in range(3):self.error()
+        self.q.claim_recovery('repair');self.q.deferred(self.key,'repair')
+        self.assertEqual(self.q.job(self.key)['state'],'TECHNICAL_REPAIR')
+
     def completed(self):
         self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'PASS',self.success())
         self.dc.deliver(self.q,self.key+':success')

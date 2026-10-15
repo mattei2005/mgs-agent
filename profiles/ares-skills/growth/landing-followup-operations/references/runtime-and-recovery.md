@@ -5,7 +5,9 @@
 - CLI: `/root/mgs-agent/scripts/ares-direct-traffic-followup.py`.
 - Intake read-only nativo: `ares_campaign_v3.landing_intake`, serviço/timer `ares-landing-intake`.
 - Fila, amostras e notificações: `ares_campaign_v3.landing_followup`, serviço/timer `ares-landing-followup`.
-- Coletor de screenshots: `/root/mgs-agent/scripts/ares-direct-traffic-sample.py`.
+- Coletor de screenshots: `/root/mgs-agent/scripts/ares-direct-traffic-sample.py`; captura sem imagem tem uma repetição read-only limitada; série tem deadline de45s e continua exigindo10s reais, sem somar trechos desconexos.
+- Confiabilidade e retenção: `ares_campaign_v3.landing_reliability` e `landing_screenshot_cleanup`. Após COMPLETE + recibo de entrega VERIFIED, a limpeza usa allowlist de raízes/imagens por linhagem, protege referências de jobs incompletos e preserva metadados/recibos antes de apagar. Nunca executar validação por imagens já purgadas nem reabrir PASSED para substituí-las.
+- Abertura/fechamento: esperar readbacks curtos e limitados de registro da janela sem repetir hotkey ambíguo; ler verdict estruturado inclusive quando aninhado. No Chrome, distinguir o botão Close da aba do Close nativo pela linha/posição dos botões Minimize/Restore, não apenas pelo rótulo. A correção é do observador, sem alterar driver compartilhado ou proteção do navegador.
 - Contrato, IDs de destinos e parâmetros: `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`.
 - Banco nativo Hermes só `mode=ro`/query_only. Nada escreve no criador, na resposta original ou nas lanes/quotas Meta. Sem stage/publish wrapper/callback em criação; esses comandos antigos estão aposentados.
 - Sem backfill de pedidos anteriores ao marco de ativação. `activate-intake` nunca redefine o marco. Não abrir pedidos históricos como canário.
@@ -80,7 +82,7 @@ PASS:
 - pelo menos três samples novos com monotonic_seconds, screenshot, ad_visible=true e tab_active=true;
 - imagens/relógios reais cobrem >=10s, gaps monotônicos <=10s e de arquivo <=12s; query igual à da campanha; caminho não quiz/chat.
 
-NO_AD: identidade/fechamento/preservação reais e screenshot de fechamento. Política vigente: 3 ausências iniciais, com 60s entre tentativas; depois `DEFERRED_NO_AD` e próximos links. Ao terminar a fase inicial, 1 tentativa final por pendente; nova ausência vira `REVIEW_REQUIRED`. Somente ao terminar a fase final, outbox reporta aqui os links para revisão de Rodolfo, com GET. As duas ausências anteriores não são zeradas. Regra antiga de 2 tentativas explicitamente supersedida; histórico no audit.
+NO_AD: identidade/fechamento/preservação reais e screenshot de fechamento. Política vigente: 3 ausências iniciais, **sem espera artificial entre elas**; após result NO_AD/WAIT_RETRY, chamar `retry-now --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID"`, novo begin e nova janela na mesma sessão. O código impede ultrapassar o limite. Provas são isoladas por key/idx/attempt sob a pasta da execução; não reutilizar o arquivo de abertura anterior. Depois da terceira ausência, `DEFERRED_NO_AD` e próximos links. Ao terminar a fase inicial, 1 tentativa final por pendente; nova ausência vira `REVIEW_REQUIRED`. Somente ao terminar a fase final, outbox reporta aqui os links para revisão de Rodolfo, com GET. As duas ausências anteriores não são zeradas. Regra antiga de 2 tentativas explicitamente supersedida; histórico no audit.
 
 ERROR: diagnosis concreta e estado parcial. Fechamento comprovado ou no_tab_opened verdadeiro libera retry técnico; estado ambíguo exige recovery. No-tab em reconcile também exige browser_inputs_zero_verified com leitura da sessão. Não alegar screenshot/visibilidade sem arquivo real.
 
@@ -91,7 +93,9 @@ Intervenção imediata: human_action_required=true, required_action concreta e d
 - READY/WAIT_RETRY: consumidor deve retomar automaticamente quando due e recurso/prioridade permitirem.
 - RUNNING: worker reservado para uma URL; pode ainda estar preparando ferramentas, sem input no PC1. Conferir claim vigente, lease e readback da mesma tentativa antes de afirmar observação em andamento. `OPEN_INTENT` é intenção durável anterior à navegação, não prova de página aberta.
 - NEEDS_RECONCILIATION/ATTENTION: cleanup de aba incerta exige RECONCILING. Ausência com fechamento já comprovado segue os contadores da política finita 3+1; não repetir reconciliação do mesmo fechamento. A rodada congela os pares na primeira deferral para que pedidos posteriores não adiem indefinidamente o retorno final.
-- RECONCILING: readback/cleanup somente; reconcile --resume após prova segura, depois a fila faz a nova observação separadamente.
+- RECONCILING: readback/cleanup somente; reconcile --resume após prova segura, depois a fila faz a nova observação separadamente. Quando `technical_probe_evidence_path` existir, o alvo exato é o probe, não uma landing antiga.
+- TECHNICAL_REPAIR: três erros técnicos consecutivos atingiram uma trava real; sem nova abertura ordinária. Outros itens devidos seguem após cleanup seguro.
+- REPAIRING: fase exclusiva de diagnóstico/correção local. Sob a lease real, executar pelo Python do Hermes `scripts/ares-direct-traffic-repair.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --repair-note '<causa e reparo reais>'`. O runner testa e verifica janela vazia/captura/fechamento, sem URL; só o recibo real libera retry. Falha parcial exige ler technical-probe.json e preservar/reconciliar a janela; `defer` rejeita probe incerto.
 - OBSERVED: todas as URLs do job técnico passaram; o pedido humano ainda pode ter outros jobs pares pendentes. Agrupar por native_obligation_id do recibo, exigir intake READY e todos os pares PASSED antes de uma única notificação. Não refazer navegações.
 - COMPLETE: todos os PASS + confirmação ao gestor GET verificada.
 - DEFERRED_NO_AD: três ausências iniciais já registradas e fechamento seguro; continuar os próximos links. O módulo `ares_campaign_v3.landing_retry_policy` ativa uma única tentativa final por pendente depois de acabar a fase inicial.
