@@ -212,6 +212,7 @@ def main():
             a.add_argument('--result',choices=['PASS','NO_AD','ERROR'],required=True)
             evidence_arguments(a)
             a.add_argument('--use-captured-samples',action='store_true')
+            a.add_argument('--use-captured-closure',action='store_true')
             a.add_argument('--frames-reviewed',action='store_true',help='Explicit agent confirmation: every captured sample shows ad visible and tab active')
             a.add_argument('--recovered',action='store_true',help='Validate saved proof of the last real attempt without another visit')
     args=p.parse_args();q=Queue(args.root)
@@ -248,6 +249,12 @@ def main():
     elif args.command=='defer':q.deferred(args.key,args.owner)
     elif args.command=='result':
         evidence=load_evidence(args)
+        if args.use_captured_closure:
+            captured=json.loads((q.root/'runs'/args.owner/'capture-series.json').read_text())
+            closure=captured.get('closure') or {}
+            if closure.get('state')!='CLOSED_NOT_PASS':raise ValueError('verified exact owned-window closure required')
+            for field in ('new_tab_identity','tab_closed_verified','other_tabs_preserved','closed_screenshot'):
+                evidence[field]=closure[field]
         if args.use_captured_samples:
             captured=json.loads((q.root/'runs'/args.owner/'capture-series.json').read_text())
             if captured.get('state')!='CAPTURED_NOT_PASS' or not args.frames_reviewed or evidence.get('network_ad_confirmed') is not True:

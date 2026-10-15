@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Read-only screenshot batch under the existing PC1 lease; never a navigation.
+"""Screenshot batch with optional verified closure of its own new window.
+Capture never navigates. Optional closure requires an exact reviewed opening proof.
 CAPTURED means cadence evidence only, never confirmation of an ad or PASS.
 """
 from __future__ import annotations
@@ -29,7 +30,10 @@ def collect(capture, *, pause=time.sleep, max_frames=12):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--key',required=True);p.add_argument('--owner',required=True)
-    p.add_argument('--pc1-session-id',required=True);a=p.parse_args()
+    p.add_argument('--pc1-session-id',required=True)
+    p.add_argument('--close-owned-window',action='store_true')
+    p.add_argument('--exclusive-window-reviewed',action='store_true')
+    a=p.parse_args()
     here=Path(__file__).resolve().parent
     spec=importlib.util.spec_from_file_location('landing_control',here/'ares-direct-traffic-followup.py')
     assert spec is not None and spec.loader is not None
@@ -50,10 +54,28 @@ def main():
         path=Path(image);epoch=path.stat().st_mtime
         return {'screenshot':str(path),'captured_at':epoch,'monotonic_seconds':time.monotonic()-(time.time()-epoch),
                 'analysis':out.get('vision_analysis'),'screen_unchanged':out.get('screen_unchanged',False),'composited_desktop':True}
-    try:out=collect(capture)
-    finally:release_computer_use_session(a.pc1_session_id)
     target=q.root/'runs'/a.owner/'capture-series.json';target.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
-    temp=target.with_suffix('.new');temp.write_text(json.dumps(out,ensure_ascii=False,indent=2));os.chmod(temp,0o600);os.replace(temp,target)
+    def persist(out):
+        temp=target.with_suffix('.new');temp.write_text(json.dumps(out,ensure_ascii=False,indent=2));os.chmod(temp,0o600);os.replace(temp,target)
+    try:
+        proof=None
+        if a.close_owned_window:
+            if not a.exclusive_window_reviewed:raise ValueError('review exclusive owned window before automatic closure')
+            proof=json.loads((q.root/'runs'/a.owner/'desktop-open.json').read_text())
+            idx=next(x['idx'] for x in job['links'] if x['state']=='OPEN_INTENT')
+            if (proof.get('queue_key'),proof.get('owner'),proof.get('session_id'),proof.get('index'),proof.get('attempt'))!=(a.key,a.owner,a.pc1_session_id,idx,job['links'][idx]['attempt']):
+                raise ValueError('exact current opening proof required')
+        out=collect(capture);persist(out)
+        if proof is not None and out['state']=='CAPTURED_NOT_PASS':
+            from ares_campaign_v3.landing_desktop import close_owned
+            def call(args):
+                cli.require_pc1_lease(a.pc1_session_id)
+                r=handle_computer_use(args,session_id=a.pc1_session_id)
+                return json.loads(r) if isinstance(r,str) else r
+            out['closure']=close_owned(call,proof,exclusive_reviewed=True)
+            persist(out)
+    finally:release_computer_use_session(a.pc1_session_id)
+    persist(out)
     with q.tx():q.event(a.key,'capture_series_saved',{'owner':a.owner,'path':str(target),'state':out['state'],'frames':len(out['all_frames']),'ad_confirmed':False})
     print(json.dumps({**out,'evidence_file':str(target)},ensure_ascii=False))
 
