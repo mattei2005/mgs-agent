@@ -25,7 +25,18 @@ def require_pc1_lease(session_id):
         raise ValueError('exclusive physical PC1 lease not held by this observer')
 
 
+def evidence_arguments(parser):
+    group=parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--evidence',type=Path)
+    group.add_argument('--evidence-json',help='Compact actual evidence; avoid a separate narrative file')
+
+
+def load_evidence(args):
+    return json.loads(args.evidence_json) if args.evidence_json is not None else json.loads(args.evidence.read_text())
+
+
 def flush(q,discord):
+    # All observation/recovery evidence is already persisted before outbox work.
     for row in q.db.execute("SELECT key FROM jobs WHERE state='OBSERVED'").fetchall():
         with q.tx():q.prepare_success_if_complete(row['key'])
     for row in q.db.execute("SELECT key FROM messages WHERE state IN ('PREPARED','INTENT') ORDER BY created").fetchall():
@@ -56,7 +67,8 @@ def observer_process_alive(session_id,query_file=None):
         if not p.name.isdigit():continue
         try:
             if marker in (p/'environ').read_bytes().split(b'\0'):return True
-            if query_file and str(query_file).encode() in (p/'cmdline').read_bytes().split(b'\0'):return True
+            argv=(p/'cmdline').read_bytes().split(b'\0')
+            if session_id.encode() in argv or (query_file and str(query_file).encode() in argv):return True
         except (FileNotFoundError,ProcessLookupError):continue
         except (PermissionError,OSError):return True
     return False
@@ -157,10 +169,10 @@ def main():
     a=s.add_parser('show');a.add_argument('--key',required=True)
     s.add_parser('status');s.add_parser('tick');s.add_parser('intake');s.add_parser('activate-intake')
     a=s.add_parser('reconcile');a.add_argument('--key',required=True);a.add_argument('--index',type=int,required=True)
-    a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
+    a.add_argument('--pc1-session-id',required=True);evidence_arguments(a)
     a.add_argument('--resume',action='store_true',help='Resume technical failure only after verified closure, never PASS')
     a=s.add_parser('need-action');a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
-    a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
+    a.add_argument('--pc1-session-id',required=True);evidence_arguments(a)
     for command in ('begin','defer','result'):
         a=s.add_parser(command);a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
         if command!='defer':
@@ -168,9 +180,7 @@ def main():
             a.add_argument('--pc1-session-id',required=True)
         if command=='result':
             a.add_argument('--result',choices=['PASS','NO_AD','ERROR'],required=True)
-            g=a.add_mutually_exclusive_group(required=True)
-            g.add_argument('--evidence',type=Path)
-            g.add_argument('--evidence-json',help='Compact actual evidence, no separate write_file round trip')
+            evidence_arguments(a)
             a.add_argument('--use-captured-samples',action='store_true')
             a.add_argument('--frames-reviewed',action='store_true',help='Explicit agent confirmation: every captured sample shows ad visible and tab active')
             a.add_argument('--recovered',action='store_true',help='Validate saved proof of the last real attempt without another visit')
@@ -194,16 +204,16 @@ def main():
             return Intake(q).tick()
     if args.command in {'begin','result','reconcile','need-action'}:require_pc1_lease(args.pc1_session_id)
     if args.command=='need-action':
-        q.request_human(args.key,args.owner,json.loads(args.evidence.read_text()))
+        q.request_human(args.key,args.owner,load_evidence(args))
         return {'state':q.job(args.key)['state']}
     if args.command=='reconcile':
-        q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()),resume=args.resume)
+        q.reconcile(args.key,args.index,load_evidence(args),resume=args.resume)
         job=q.job(args.key)
         return {'state':job['state'],'link_state':job['links'][args.index]['state'],'resumed':job['links'][args.index]['state']=='WAIT_RETRY','observation_success':False}
     if args.command=='begin':q.begin(args.key,args.owner,args.index)
     elif args.command=='defer':q.deferred(args.key,args.owner)
     elif args.command=='result':
-        evidence=json.loads(args.evidence_json) if args.evidence_json is not None else json.loads(args.evidence.read_text())
+        evidence=load_evidence(args)
         if args.use_captured_samples:
             captured=json.loads((q.root/'runs'/args.owner/'capture-series.json').read_text())
             if captured.get('state')!='CAPTURED_NOT_PASS' or not args.frames_reviewed or evidence.get('network_ad_confirmed') is not True:
