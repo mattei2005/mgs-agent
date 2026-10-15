@@ -2732,6 +2732,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-RETRY-1560288130085560351",
+      "next_step": "Testar atraso300s, falha persistente, exclusoes e publicar com guard",
+      "objective": "Nova tentativa automatica de consulta financeira apos5min, sem duplicar escritas",
+      "source": "/root/mgs-agent/apps/finance-system/private/retry-five-min-1560288130085560351/prepare.py",
+      "state": "preparando candidato isolado; codigo ativo ainda preservado",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-15T13:50:05+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-REVIEW-DEDUCTIONS-1553399478248017973",
       "next_step": "Nenhuma pendência desta entrega.",
       "objective": "Mostrar gross, tráfego inválido, rev share e líquido ao expandir redes/sites da Conferência mensal",
@@ -3863,12 +3873,12 @@
     {
       "agent": "atena",
       "id": "atena-yoast-score-divergence-1560287543390371922",
-      "next_step": "Zeus diagnosticar somente leitura30 IDs e controles anteriores por portal,comparando postmeta/indexable/editor/barra. Definir correção compatível com idioma/instalação sem forçar notas nem reindexar globalmente; alterações técnicas seguem gate.",
-      "objective": "Diagnosticar divergência Yoast editor verde vs barra frontend cinza na leva SEO de30 posts",
+      "next_step": "Zeus incorporar teste do salvamento ao diagnóstico: comparar persistência e atualização no editor com fluxo REST; preservar conteúdo e não forçar notas. Não solicitar que Raquel salve manualmente os30 posts.",
+      "objective": "Diagnosticar e definir correção segura da persistência Yoast no lote SEO",
       "source": "data/atena/seo-mass-1559930384852979796/yoast-score-issue-1560287543390371922.json",
-      "state": "raquel relata padrão em todos os artigos/portais da leva,ao contrário dos antigos. confirmado no código: fluxo rest grava metadados mas não chama scorer nem valida scores persistidos. rest não expõe notas,não prova ausência no banco. wrapper legado encontrado não pode ser aplicado por inferência aos site_keys rest-only/es/pt: transporte/webroot fixos e engine en_gb. nenhuma escrita de score ou mudança produtiva. aprendizado próprio persistido na skill yoast-wordpress.",
+      "state": "raquel relatou novo teste1560288846954897532: salvar manualmente no editor faz a barra publicada passar a verde. evidência humana registrada com post não informado; não equivale à correção validada dos30 artigos. fluxo rest desta leva não chamou scorer/não validou scores persistidos. nenhuma alteração wordpress ou técnica nesta atualização.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-15T13:47:19+00:00"
+      "updated_at": "2026-10-15T13:51:25+00:00"
     },
     {
       "agent": "atena",
@@ -5912,5 +5922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T13:47:19+00:00"
+  "updated_at": "2026-10-15T13:51:25+00:00"
 }

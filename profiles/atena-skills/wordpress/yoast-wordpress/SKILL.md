@@ -57,9 +57,11 @@ Yoast stores scores in **two layers**:
 
 Server-side scoring uses the `@yoastseo` npm library. Entry point:
 ```bash
-bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh eggbev <post_id>
+bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh eggbev <post_id>
 ```
 See `references/yoast-score-architecture.md` for full Node.js API pitfalls.
+
+**Preflight de compatibilidade obrigatório:** a existência do scorer não prova suporte multi-site/multilíngue. Antes de executar, confira sua resolução real de host/webroot e de idioma. O wrapper legado atualmente deriva o webroot do `site_key`, usa transporte fixo e o engine Node usa `EnResearcher`/`en_GB`; não o execute em variantes REST-only ou lotes ES/PT presumindo compatibilidade. Se exigir adaptação de script/runtime ou escrita técnica, escale para Zeus. Não atribua ausência de score no REST a ausência no banco: os campos podem não estar expostos. Em lote que gravou apenas title/metadesc/focuskw, declare score persistido não validado; compare com artigo de controle antes de atribuir divergência editor/frontend a cache. Não peça ao revisor que salve manualmente uma leva inteira para contornar uma lacuna da automação.
 
 ---
 

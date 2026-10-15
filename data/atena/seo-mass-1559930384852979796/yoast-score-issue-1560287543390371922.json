@@ -14,7 +14,14 @@
     "O caminho histórico content-generate-rec/scripts/yoast-score-post.sh não existe; há wrapper em content-generate-rec-p1/scripts/yoast-score-post.sh.",
     "O wrapper encontrado usa host/transporte fixo e deriva webroot do site_key; Node usa EnResearcher e locale en_GB. Não é seguro aplicá-lo por inferência aos dez site_keys REST-only/multilíngues. Nenhuma execução desse wrapper foi feita."
   ],
-  "inference": "A lacuna de cálculo/persistência/validação do score no fluxo REST é a principal hipótese do padrão relatado, não causa raiz comprovada. Cache não confirmado.",
+  "manual_save_test": {
+    "source_message_id": "1560288846954897532",
+    "reported_by": "Raquel Oliveira",
+    "observation": "Ao clicar para salvar manualmente no editor, o indicador da página publicada passa a verde.",
+    "verification_level": "teste humano relatado; post/URL não informados; não reproduzido pela Atena",
+    "batch_repair_verified": false
+  },
+  "inference": "O teste humano localiza o gatilho eficaz no salvamento do editor e reforça a hipótese de análise/persistência/atualização ausente no fluxo REST. Não prova qual hook/camada é responsável nem resolução dos30 posts. Cache isolado não deve ser assumido como causa.",
   "requested_zeus_action": [
     "Diagnóstico inicialmente somente leitura: resolver instalações e prefixos reais e ler postmeta/indexable dos30 IDs exatos do manifesto.",
     "Comparar um artigo anterior de controle em cada portal, distinguindo análise do editor, score persistido e barra frontend.",
