@@ -12,6 +12,15 @@ CONTENT=('**Tudo concluído e conferido.**\n'
          '✅ Intraday SHEIN: auditoria/padronização concluída e limpeza das mensagens das 36 threads conferida, com canais e threads preservados.')
 
 
+def checkpoint(cfg,message_id,all_pass):
+    if not cfg.get('completion_checkpoint_id'):return
+    current=json.loads((core.BASE/'data/agent-checkpoints.json').read_text())['checkpoints']
+    if any(x['id']==cfg['completion_checkpoint_id'] and str(message_id) in x['state'] and x['state'].startswith('completed_verified' if all_pass else 'waiting_human_review') for x in current):return
+    command=[sys.executable,str(core.BASE/'scripts/mgs-knowledge-control.py'),'checkpoint-upsert','--id',cfg['completion_checkpoint_id'],'--agent','ares','--thread-id',core.INCIDENT_THREAD,'--objective','Concluir acompanhamento e auditoria Intraday com aviso integral verificado','--state',('completed_verified' if all_pass else 'waiting_human_review')+': aviso final '+str(message_id)+' GET conferido; auditoria e limpeza36threads validadas; '+('46linksPASS e avisosgestor verificados' if all_pass else 'links sem validacao explicitamente reportados para revisao humana'),'--next-step','Nenhuma pendencia deste pedido' if all_pass else 'Rodolfo revisar links reportados; nao reabrir automaticamente nem afirmar sucesso integral ao gestor','--source',str(PLAN)+';data/ares/meta-ads/landing-followup/queue.sqlite3']
+    result=subprocess.run(command,capture_output=True,text=True,timeout=30)
+    if result.returncode:raise ValueError('completion checkpoint pending; notification already verified, never resend')
+
+
 def cycle(q,discord_factory,plan_path=None):
     plan_path=Path(plan_path) if plan_path else q.root/'finish-all-20261015.json'
     if not plan_path.exists():return {'state':'NOT_REQUESTED'}
@@ -22,12 +31,17 @@ def cycle(q,discord_factory,plan_path=None):
     if not key.startswith('finish-all:'):raise ValueError('invalid completion identity')
     existing=q.db.execute('SELECT state,message_id FROM messages WHERE key=?',(key,)).fetchone()
     if existing:
-        if existing['state']=='VERIFIED':return {'state':'COMPLETE','message_id':existing['message_id']}
+        prior=q.db.execute('SELECT content FROM messages WHERE key=?',(key,)).fetchone()
+        if existing['state']=='VERIFIED':
+            checkpoint(cfg,existing['message_id'],prior['content']==CONTENT)
+            return {'state':'COMPLETE','message_id':existing['message_id']}
         m=discord_factory().deliver(q,key)
+        checkpoint(cfg,m['id'],prior['content']==CONTENT)
         return {'state':'COMPLETE','message_id':m['id']}
     checkpoints=json.loads((core.BASE/'data/agent-checkpoints.json').read_text())['checkpoints']
     audit=next((x for x in checkpoints if x['id']==cfg['audit_checkpoint_id']),None)
-    if not audit or audit['state'] not in {'completed','complete','completed_verified','complete_verified'}:
+    audit_state=str((audit or {}).get('state','')).lower()
+    if not audit or not any(audit_state==x or audit_state.startswith(x+':') or audit_state.startswith(x+'_') for x in ('completed','complete')):
         return {'state':'WAITING_AUDIT'}
     jobs=[q.job(k) for k in cfg['landing_jobs']]
     links=[l for j in jobs for l in j['links']]
@@ -49,6 +63,9 @@ def cycle(q,discord_factory,plan_path=None):
         if not row or row['state']!='VERIFIED' or not row['message_id']:return {'state':'WAITING_MANAGER_READBACK'}
     inventory=json.loads(Path(cfg['audit_inventory']).read_text())
     targets=inventory['targets'];ids=[str(t['thread_id']) for t in targets]
+    expected=cfg.get('expected_targets')
+    if expected and {(str(t['thread_id']),str(t['channel_id'])) for t in targets}!={(str(t['thread_id']),str(t['channel_id'])) for t in expected}:
+        raise ValueError('audit scope changed; exact authorized thread identities required')
     if len(ids)!=36 or len(set(ids))!=36:raise ValueError('exact 36-thread coverage required')
     parents={str(t['channel_id']) for t in targets}
     if len(parents)!=6:raise ValueError('exact six report channels required')
@@ -79,4 +96,5 @@ def cycle(q,discord_factory,plan_path=None):
         q.event(None,'completion_notice_authorized',{'notification_key':key,'authority':cfg['authority'],'evidence':evidence})
     m=client.deliver(q,key)
     with q.tx():q.event(None,'finish_all_notice_verified',{'notification_key':key,'message_id':str(m['id']),'all_acceptance_criteria_verified':all_pass,'review_required':len(review)})
+    checkpoint(cfg,m['id'],all_pass)
     return {'state':'COMPLETE','message_id':str(m['id'])}

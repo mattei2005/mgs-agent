@@ -675,6 +675,20 @@
         "Lance"
       ],
       "format": "short_header_aligned_pipe_table_short_footer",
+      "enforcement": {
+        "status": "ACTIVE",
+        "renderer": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+        "thread_bindings": "data/ares/discord/shein-intraday-report-bindings.json",
+        "require_current_contract_read_on_each_request_and_before_delivery": true,
+        "require_canonical_render_then_exact_validation": true,
+        "require_thread_id_for_36_intraday_account_threads": true,
+        "on_validation_failure": "do_not_publish_fix_local_missing_or_invalid_layer_then_validate_again",
+        "receipt": "contract_sha256_report_sha256_account_thread_counts_and_message_lengths",
+        "historical_discord_or_session_model_is_not_an_override": true,
+        "empty_account": "keep_main_and_history_headers_no_invented_rows",
+        "audit_cleanup_does_not_publish_new_reports": true,
+        "source_thread_id": "1560303769680355525"
+      },
       "column_separators": {
         "status": "ACTIVE",
         "character": "|",
