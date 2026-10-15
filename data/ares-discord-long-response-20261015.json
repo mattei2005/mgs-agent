@@ -64,9 +64,22 @@
     "retained_chunks": 11,
     "mirror_resolved": "/root/mgs-agent/profiles/ares-config.yaml"
   },
-  "status": "configuration_validated_delivery_recovered_activation_pending",
+  "status": "restart_scheduled_delivery_recovered",
   "previous_pid": 179641,
   "next_step": "detached safe restart Ares only, then fresh Discord readiness, config smoke, REPORT-INFRA and callback",
   "workspace": "/root/.hermes/profiles/zeus/cache/scratch/ares-discord-long-1560358838279086093",
-  "updated_at": "2026-10-15T18:41:01.227395+00:00"
+  "updated_at": "2026-10-15T18:45:00.641586+00:00",
+  "preparation_report": {
+    "message_id": "1560362753539965036",
+    "readback_verified": true
+  },
+  "restart": {
+    "unit": "mgs-gateway-restart-20261015T184447Z-489855",
+    "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261015T184447Z-489855.log",
+    "agents": [
+      "ares"
+    ],
+    "delay_seconds": 90
+  },
+  "validation_timer": "mgs-ares-discord-long-1560358838279086093"
 }

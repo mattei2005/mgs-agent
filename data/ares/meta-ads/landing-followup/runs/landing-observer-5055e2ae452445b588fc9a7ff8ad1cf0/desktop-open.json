@@ -1,11 +1,52 @@
 {
-  "state": "OPENING_INTENT",
-  "url_submission_attempted": false,
+  "state": "OPENED_NOT_VISUALLY_VALIDATED",
+  "target": {
+    "pid": 18224,
+    "window_id": 1639894,
+    "app_name": "chrome.exe"
+  },
+  "baseline": [
+    {
+      "pid": 18224,
+      "window_id": 263324,
+      "app_name": "chrome.exe"
+    },
+    {
+      "pid": 14788,
+      "window_id": 196948,
+      "app_name": "cua-driver.exe"
+    },
+    {
+      "pid": 24396,
+      "window_id": 131758,
+      "app_name": "SystemSettings.exe"
+    },
+    {
+      "pid": 27320,
+      "window_id": 1572930,
+      "app_name": "ApplicationFrameHost.exe"
+    },
+    {
+      "pid": 18216,
+      "window_id": 66572,
+      "app_name": "TextInputHost.exe"
+    },
+    {
+      "pid": 9632,
+      "window_id": 65984,
+      "app_name": "explorer.exe"
+    }
+  ],
+  "new_window_created": true,
+  "url_submission_attempted": true,
   "queue_key": "93681f2b763e6b636e6eaef00ac6167b6497bd16711ee0ac3005399ff47710b3",
   "owner": "landing-observer-5055e2ae452445b588fc9a7ff8ad1cf0",
   "index": 0,
   "attempt": 3,
   "session_id": "20261015_144156_4775d5",
   "mapping_source": "Persisted same-request index 0 evidence: WP-CLI read-only --skip-plugins --skip-themes mgs_direct_quiz_landings b6b70cac-6d93-49a3-8de0-0f92cae8ec6d us/sh2-g006 active=1 destination_a_url=destination_b_url; exact C127 query retained; no quiz visit.",
-  "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb02c127&utm_adgroup=b01fb02c127g01"
+  "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb02c127&utm_adgroup=b01fb02c127g01",
+  "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb02c127&utm_adgroup=b01fb02c127g01",
+  "opening_screenshot": null,
+  "elapsed_seconds": 31.565
 }
