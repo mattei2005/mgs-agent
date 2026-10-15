@@ -270,6 +270,7 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 
 ## Arquivos de referência
 
+- `references/targeted-cache-readonly-diagnostics.md` — prova de camada WPFC por corpo/hash, Reflection de efeitos CDN/Yoast/nginx e distinção entre API URL e primitiva de arquivo; diagnóstico sem purge.
 - `references/general-seo-category-drafts.md` — procedimento para analisar uma categoria completa, reproduzir seu padrão mensurável e criar lotes de artigos SEO em draft com mídia, links, Yoast e readback.
 - `references/wordpress-author-profiles.md` — padronização segura de nome e biografia de autores, inclusive em lotes multi-site, preservando identidade e credenciais.
 - `references/existing-wordpress-content-replacement.md` — receita para trocar conteúdo demo em posts/páginas/CPTs existentes, preservando blocos, mídia, metadata suportada, rollback e QA desktop/mobile.
