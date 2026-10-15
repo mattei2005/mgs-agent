@@ -1392,6 +1392,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-US-EN-RENAME-20261015-2355",
+      "next_step": "Preparar runner deterministico name-only, dry-run live read-only, testes de idempotencia/escopo e agenda one-shot com readback; nao escrever Meta antes de 23h55.",
+      "objective": "Agendar US-EN para (US_APP) somente em campanhas existentes de Escalatepower Mavroa Vizioid as 23h55 Nova York hoje",
+      "source": "data/ares/meta-ads/audit/shein/account-campaign-name-counts-1560359535175143545/collection.json",
+      "state": "preparing_schedule",
+      "thread_id": "1560359535175143545",
+      "updated_at": "2026-10-15T19:03:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SMS-COPY-OBSERVE-1558154555617841294",
       "next_step": "A partir de 13/10, quando solicitado e com feed SB disponivel, ler dias completos 10-12/10 e comparar com 02-08/10 no mesmo escopo e fontes. Apresentar Data - CTR - Envios - Gasto - Receita - ROI; taxas ponderadas pelos totais, receita liquida, custo unitario vivo e timezone Sao Paulo. Conferir efeito de calendario e receita por sessao; nao afirmar causalidade da copy a partir de CTR ou ROI isolado. Sem envio automatico agendado por esta decisao.",
       "objective": "Avaliar se a nova mensagem melhora CTR e ROI do SMS depois de mais dois dias completos, conforme Rodolfo.",
@@ -5962,5 +5972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T18:48:26+00:00"
+  "updated_at": "2026-10-15T19:03:09+00:00"
 }
