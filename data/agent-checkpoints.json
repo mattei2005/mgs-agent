@@ -3483,12 +3483,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-VPS-CLEANUP-1560412670132355133",
-      "next_step": "Validar dependências, recuperação mais recente e referências; congelar manifesto e apresentar confirmação destrutiva.",
-      "objective": "Preparar limpeza exata das quatro classes autorizadas, sem afetar dados da dash; executar apenas após confirmação Critical do manifesto.",
-      "source": "discord:1560428152994402345;review:/root/.hermes/profiles/zeus/cache/scratch/disk-review-1560415273041920183/review-result.json",
-      "state": "preparing_exact_manifest_no_deletion",
+      "next_step": "Obter confirmação Critical do manifesto55c401a59f7b8f96c19d4d2a8561aa406df45e2790e1f391d271bbf1b5f1f118; revalidar antes de excluir; não ampliar o lote.",
+      "objective": "Executar limpeza das quatro classes autorizadas sem afetar a dash, após confirmação destrutiva do conjunto exato.",
+      "source": "/root/mgs-agent/data/vps-cleanup-20261015-1560428152994402345/manifest.json;request:1560428152994402345",
+      "state": "awaiting_critical_confirmation:2158alvos;156371arquivos;67.919gib;zero_exclusoes;verificador_pass",
       "thread_id": "1560412670132355133",
-      "updated_at": "2026-10-15T23:05:10+00:00"
+      "updated_at": "2026-10-15T23:14:16+00:00"
     },
     {
       "agent": "zeus",
@@ -6082,5 +6082,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T23:05:10+00:00"
+  "updated_at": "2026-10-15T23:14:16+00:00"
 }

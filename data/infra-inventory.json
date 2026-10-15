@@ -841,6 +841,24 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "vps-cleanup-20261015-1560428152994402345",
+      "agent": "zeus",
+      "type": "frozen_vps_cleanup_manifest",
+      "status": "awaiting_critical_confirmation_no_deletion",
+      "request_message_id": "1560428152994402345",
+      "thread_id": "1560412670132355133",
+      "manifest": "/root/mgs-agent/data/vps-cleanup-20261015-1560428152994402345/manifest.json",
+      "manifest_sha256": "55c401a59f7b8f96c19d4d2a8561aa406df45e2790e1f391d271bbf1b5f1f118",
+      "executor_sha256": "1587dcdd65520359391333a95cd7e20fb90a132fac728e18803f7ac6a37c36b6",
+      "targets": 2158,
+      "files": 156371,
+      "inode_aware_reclaim_bytes": 72926941184,
+      "groups": ["local disposable finance test clusters and archives", "local emailed-report sources and pre-import dumps", "superseded Hermes maintenance backups and state snapshots", "five rebuildable package/build caches"],
+      "retained": "Latest validated Hermes recovery set 2026-10-12, active runtime and dependency/rollback, live financial production, official compact evidence, browser sessions, conversations, offsite/site/security/safety backups",
+      "validation": "Two metadata passes equal; exact verifier PASS; zero process or executable-control references in 516 files; 79 protected file hashes; latest recovery archive checksum/listing and 8 SQLite integrity checks PASS; production services3/3 and six-table fingerprint captured; dashboard login200/API401",
+      "next_step": "Show exact irreversible target-set and obtain Rodolfo Critical Subset confirmation before any deletion"
+    },
+    {
       "id": "zeus-growpowerhub-scope-validation-1560385332434837527",
       "agent": "zeus",
       "type": "domain_scope_reconciliation_validation",
