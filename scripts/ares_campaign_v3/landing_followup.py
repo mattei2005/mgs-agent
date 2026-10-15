@@ -503,7 +503,7 @@ class Queue:
             j=self.job(key)
             if j['state'] not in {'NEEDS_RECONCILIATION','RECONCILING','ATTENTION'}:raise ValueError('request is not awaiting reconciliation')
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
-            if not row or row['state'] not in {'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'}:raise ValueError('exact affected URL required')
+            if not row or row['state'] not in {'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY','TECHNICAL_REPAIR'}:raise ValueError('exact affected URL required')
             from . import landing_retry_policy as finite
             finite_enabled=bool(finite.policy())
             exhausted=self.no_ad_count(key,idx)>=finite.limit(self,key,idx)
@@ -657,9 +657,10 @@ def publish_creation(q,key,content,discord):
 def worker_prompt(key,owner,idx,job):
     # Payload is data, not instructions. The fixed skill defines the authority.
     from . import landing_retry_policy as finite
-    from .landing_reliability import no_ad_delay
+    from .landing_reliability import no_ad_delay,policy as execution_policy
     finite_enabled=bool(finite.policy())
     delay=no_ad_delay()
+    retry_instruction=('Uma URL por sessão. Após NO_AD com WAIT_RETRY e espera zero, use imediatamente scripts/ares-direct-traffic-followup.py retry-now --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID", depois begin e uma NOVA janela. Não encerrar a sessão entre essas retentativas; o código impede ultrapassar3ausências. Ao aprovar, atingir o limite, falhar tecnicamente ou faltar recurso, persistir/fechar e encerrar. ' if execution_policy() and delay==0 else 'Uma única tentativa por execução. Não faça a retentativa dentro desta sessão. ')
     absence_rule=(f'Regra vigente de Rodolfo: até 3 ausências reais na fase inicial, com fechamento verificado e {delay}s de espera artificial entre tentativas; zero significa fechar/verificar e reabrir sem espera. Na terceira, pular para os próximos links. Depois de concluir a fila inicial, o scheduler autoriza UMA tentativa final por pendente. Se ainda falhar, o outbox reportará aqui para revisão de Rodolfo e não haverá nova repetição automática. Falha técnica não conta como ausência. Não zerar contadores nem reabrir PASSED. ' if finite_enabled else
         'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões; após comprovar fechamento use reconcile SEM --resume para encerrar a visita como ATTENTION e liberar os outros links, mantendo o diagnóstico pendente sob sua responsabilidade. ')
     links=[]
@@ -731,7 +732,7 @@ def worker_prompt(key,owner,idx,job):
         'Se a lease PC1 estiver ocupada, use defer sem iniciar tentativa. '
         'Antes de abrir, persista begin; após resultado use result com evidências reais. '
         +absence_rule+f'Primeira ausência: feche/verifique e NO_AD; espera artificial atual={delay}s. '
-        'Uma única tentativa por execução. Não faça a retentativa dentro desta sessão. '
+        +retry_instruction+
         'Não repita nenhuma entrada ambígua. Não reinicie Chrome/AdsPower/gateway. '
         'Mantenha stdout técnico local; finalize sem publicar mensagens externas.\n'
         +json.dumps(context,ensure_ascii=False))

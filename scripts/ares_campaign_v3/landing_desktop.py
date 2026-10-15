@@ -38,6 +38,7 @@ def open_blank_owned(call,base_window=None,on_owned=None):
     candidates=[w for w in before if w.get('app_name','').lower()=='chrome.exe' and (base_window is None or int(w['window_id'])==base_window)]
     if len(candidates)!=1:raise ValueError('unique base Chrome window required')
     base=candidates[0]
+    if on_owned:on_owned({'state':'BLANK_OPENING_INTENT','baseline':safe_windows(before),'base':safe_windows([base])[0],'new_window_created':False,'url_submission_attempted':False})
     call({'action':'capture','mode':'ax','pid':base['pid'],'window_id':base['window_id']})
     out=call({'action':'key','keys':'ctrl+shift+n'})
     after=windows(call)
@@ -113,6 +114,13 @@ def close_owned(call,proof,exclusive_reviewed=False):
     if not any(identity(w)==target_id and w.get('app_name','').lower()=='chrome.exe' for w in before):raise ValueError('target browser mismatch')
     snap=call({'action':'capture','mode':'ax','pid':target['pid'],'window_id':target['window_id']})
     controls=[e for e in all_elements(snap) if e.get('role')=='Button' and e.get('label')=='Close' and len(e.get('bounds',[]))==4 and e['bounds'][1]<45 and 0<e['bounds'][3]<=45]
+    captions=[e for e in all_elements(snap) if e.get('role')=='Button' and e.get('label') in {'Minimize','Restore','Maximize'} and len(e.get('bounds',[]))==4 and e['bounds'][1]<45]
+    if captions:
+        # Chrome exposes both tab Close and native-window Close as "Close".
+        # Match the actual caption-button row and its rightmost neighbour,
+        # never the smaller tab button (e.g.28px at y6 versus40px at y0).
+        right=max(e['bounds'][0] for e in captions);row=captions[0]['bounds']
+        controls=[e for e in controls if e['bounds'][0]>right and abs(e['bounds'][1]-row[1])<=2 and abs(e['bounds'][3]-row[3])<=2]
     if len(controls)!=1:raise ValueError('unique native window Close control required')
     # Native caption button, not page content, coordinates, hotkey or process kill.
     call({'action':'click','element':controls[0]['index']})

@@ -69,7 +69,7 @@ def maintain(q):
     p=policy()
     if not p:return {'state':'LEGACY_POLICY'}
     with q.tx():
-        if q.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone():
+        if q.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','REPAIRING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone():
             return {'state':'WAITING_SAFE_BOUNDARY'}
         changed=[]
         # Migrate previously exhausted two-attempt links without resetting history.

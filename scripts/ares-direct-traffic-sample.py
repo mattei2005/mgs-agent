@@ -48,7 +48,7 @@ def main():
     from tools.computer_use.tool import handle_computer_use,release_computer_use_session
     def capture():
         cli.require_pc1_lease(a.pc1_session_id)
-        image=None
+        image=None;out={}
         for _ in range(2):
             out=handle_computer_use({'action':'capture','mode':'vision','app':'screen'},session_id=a.pc1_session_id)
             if isinstance(out,str):out=json.loads(out)

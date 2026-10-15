@@ -61,6 +61,8 @@ def flush(q,discord):
             with q.tx():
                 q.db.execute("UPDATE jobs SET state='COMPLETE' WHERE key=?",(row['key'],))
                 q.event(row['key'],'completed',{'landing_observation':True,'gam_registration':'NOT_VERIFIED'})
+    from ares_campaign_v3.landing_screenshot_cleanup import prune_completed
+    prune_completed(q,apply=True)
 
 
 def observer_process_alive(session_id,query_file=None):
@@ -90,7 +92,7 @@ def orphan_observer_lease(q,state):
         data=json.loads(first['content'].rsplit('\n',1)[-1])
         key=data['queue_key'];j=q.job(key)
         if j['state']!='NEEDS_RECONCILIATION':return False
-        last=q.db.execute("SELECT detail FROM events WHERE job=? AND kind IN ('claimed','recovery_claimed') ORDER BY seq DESC LIMIT 1",(key,)).fetchone()
+        last=q.db.execute("SELECT detail FROM events WHERE job=? AND kind IN ('claimed','recovery_claimed','technical_repair_claimed') ORDER BY seq DESC LIMIT 1",(key,)).fetchone()
         if not last or json.loads(last['detail']).get('owner')!=data.get('owner'):return False
         # --pass-session-id can be set after process startup; /proc/environ of
         # the still-live CLI need not contain it. Check its exact query-file too.
@@ -149,7 +151,7 @@ def tick(q):
             except Exception as e:
                 with q.tx():q.event(None,'notification_transport_deferred',{'reason':str(e)[:120]})
         due=q.db.execute("SELECT 1 FROM jobs j JOIN links l ON l.job=j.key WHERE j.state='READY' AND l.state IN ('READY','WAIT_RETRY') AND l.due<=?",(q.now(),)).fetchone()
-        recovery=q.db.execute("SELECT 1 FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?)",(q.now(),)).fetchone()
+        recovery=q.db.execute("SELECT 1 FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION','TECHNICAL_REPAIR') AND (lease_until IS NULL OR lease_until<=?)",(q.now(),)).fetchone()
         if not due and not recovery:return {'state':'IDLE'}
         check=subprocess.run([sys.executable,str(BASE/'scripts/mgs-pc1-computer-use-lock.py'),'status'],capture_output=True,text=True,timeout=20)
         if check.returncode:return {'state':'WAITING_PC1'}
@@ -159,8 +161,9 @@ def tick(q):
         j=q.claim_recovery(owner) or q.claim(owner)
         if not j:return {'state':'IDLE'}
         repairing=j['state']=='RECONCILING'
+        technical_repairing=j['state']=='REPAIRING'
         j['defer_c121_until_others']=q.target_waits_for_others(j['key'])
-        idx=next(x['idx'] for x in j['links'] if x['state'] in ({'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or x['due']<=q.now()))
+        idx=next(x['idx'] for x in j['links'] if x['state'] in ({'TECHNICAL_REPAIR'} if technical_repairing else {'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY','TECHNICAL_REPAIR'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or technical_repairing or x['due']<=q.now()))
         j['final_retry']=bool(finite.policy() and finite.final_start(q,j['key'],idx))
         # More than two equivalent progress messages are a diagnosis gate,
         # never a reason to repeat the unchanged failing path indefinitely.
@@ -172,7 +175,9 @@ def tick(q):
                 j['stagnation_diagnosis'].append({'incident':diagnosis['incident'],'required_action':diagnosis['required_action']})
         j['recent_technical_errors']=[{'idx':d.get('idx'),'attempt':d.get('attempt'),'diagnosis':(d.get('evidence') or {}).get('diagnosis')} for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='observation_result' ORDER BY seq DESC LIMIT 3",(j['key'],)) if (d:=json.loads(row['detail'])).get('result')=='ERROR']
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
-        if repairing:prepare_recovery_proof(q,j,idx,directory)
+        probe=q.db.execute("SELECT detail FROM events WHERE job=? AND kind='technical_probe_intent' ORDER BY seq DESC LIMIT 1",(j['key'],)).fetchone()
+        if repairing and probe:j['technical_probe_evidence_path']=json.loads(probe['detail']).get('probe_file')
+        if repairing and not j.get('technical_probe_evidence_path'):prepare_recovery_proof(q,j,idx,directory)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)
         env=dict(os.environ)
         for name in ('HERMES_SESSION_ID','HERMES_KANBAN_TASK','HERMES_KANBAN_BOARD'):
@@ -193,7 +198,7 @@ def tick(q):
             except Exception as e:
                 log.write('worker_terminated '+type(e).__name__+'\n');rc=-1
         j=q.job(j['key'])
-        if j['state'] in {'RUNNING','RECONCILING'}:
+        if j['state'] in {'RUNNING','RECONCILING','REPAIRING'}:
             with q.tx():q.db.execute('UPDATE jobs SET lease_until=? WHERE key=?',(q.now()-1,j['key']))
             q.recover_expired()
         try:flush(q,Discord())

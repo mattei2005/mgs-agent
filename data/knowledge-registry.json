@@ -4166,15 +4166,34 @@
         "meta-ads-intraday-operations"
       ],
       "domain": "growth.shein.reporting",
-      "effective_at": "2026-10-15T21:29:04+00:00",
-      "id": "ARES-SHEIN-REPORT-PRODUCT25-NOLEGEND-20261015",
+      "effective_at": "2026-10-15T22:35:58+00:00",
+      "id": "ARES-SHEIN-REPORT-PRODUCT20-APPROVED-20261015",
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Padrão SHEIN aprovado: Produto até20 caracteres com espaços sem reticências, sem legenda extensa",
+      "updated_at": "2026-10-15T22:35:58+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-15T21:29:04+00:00",
+      "id": "ARES-SHEIN-REPORT-PRODUCT25-NOLEGEND-20261015",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-PRODUCT20-APPROVED-20261015",
       "title": "SHEIN Produto máximo 25 caracteres com espaços, truncamento só visual e sem legenda explicativa",
-      "updated_at": "2026-10-15T21:29:04+00:00"
+      "updated_at": "2026-10-15T22:35:58+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -12373,5 +12392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T21:29:04+00:00"
+  "updated_at": "2026-10-15T22:35:58+00:00"
 }

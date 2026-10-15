@@ -77,6 +77,7 @@ def prune_completed(q,apply=False):
             stat=p.stat();files.append({'path':str(p),'size':stat.st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
     summary={'state':'PLAN','files':len(files),'bytes':sum(f['size'] for f in files),'eligible_jobs':len(eligible)}
     if not apply:return summary
+    if not eligible:return {'state':'NO_ELIGIBLE_COMPLETED_JOB','files':0,'bytes':0}
     # Exclude a live claimant for eligible rows before irreversible deletion.
     for j,_ in eligible:
         current=q.job(j['key'])
@@ -93,7 +94,7 @@ def prune_completed(q,apply=False):
         for j,receipts in eligible:
             q.event(j['key'],'validated_screenshot_retention_receipt',{'links':receipts,'binary_images_removed_after_complete':True,'json_events_and_utm_lineage_preserved':True})
             for link in j['links']:
-                e=json.loads(link['evidence'] or '{}');e['screenshots_purged']=True;e['screenshot_retention']='PURGED_AFTER_VERIFIED_COMPLETE'
+                e=json.loads(link['evidence'] or '{}');e['screenshots_purged']=not bool(skipped);e['screenshot_retention']='PURGED_AFTER_VERIFIED_COMPLETE' if not skipped else 'PURGE_PARTIAL_RETRY_REQUIRED'
                 q.db.execute('UPDATE links SET evidence=? WHERE job=? AND idx=?',(json.dumps(e,ensure_ascii=False),j['key'],link['idx']))
         q.event(None,'screenshot_purge_complete',{'deleted_files':deleted,'skipped_changed_files':skipped,'bytes_freed':sum(f['size'] for f in deleted)})
     return {'state':'PURGED','files':len(deleted),'bytes':sum(f['size'] for f in deleted),'eligible_jobs':len(eligible),'skipped_changed':len(skipped)}

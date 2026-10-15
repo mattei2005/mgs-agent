@@ -18,7 +18,12 @@ def snapshot(q,cfg):
     jobs=[q.job(r['key']) for r in q.db.execute('SELECT key FROM jobs ORDER BY created,key') if not wanted or r['key'] in wanted]
     if not jobs or (wanted and {j['key'] for j in jobs}!=wanted):return None
     counts=Counter(l['state'] for j in jobs for l in j['links'])
-    active=[j for j in jobs if j['state']=='RUNNING'];repair=[j for j in jobs if j['state'] in {'RECONCILING','NEEDS_RECONCILIATION'}]
+    active=[j for j in jobs if j['state']=='RUNNING'];repair=[j for j in jobs if j['state'] in {'RECONCILING','NEEDS_RECONCILIATION','REPAIRING','TECHNICAL_REPAIR'}]
+    opened=0
+    for j in active:
+        for link in j['links']:
+            if link['state']!='OPEN_INTENT':continue
+            if any((d:=json.loads(r['detail'])).get('idx')==link['idx'] and d.get('attempt')==link['attempt'] for r in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='desktop_open_batch' ORDER BY seq DESC",(j['key'],))):opened+=1
     groups={q.success_key(j['key']) for j in jobs if j['state']=='COMPLETE'}
     all_done=all(j['state']=='COMPLETE' for j in jobs)
     priority=json.loads((core.BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
@@ -42,16 +47,16 @@ def snapshot(q,cfg):
             prefix='landing-final-review:'+finite_policy['generation']+':'
             reported=sum(1 for j in jobs for l in j['links'] if l['state']=='REVIEW_REQUIRED' and q.db.execute("SELECT 1 FROM messages WHERE key=? AND state='VERIFIED'",(prefix+j['key']+':'+str(l['idx']),)).fetchone())
             phase='FINITE_REVIEW_DELIVERED' if reported==counts['REVIEW_REQUIRED'] else 'FINITE_REPORT_PENDING'
-    return {'counts':dict(counts),'active_jobs':len(active),'recovery_jobs':len(repair),'completed_human_groups':len(groups),'phase':phase,'total':sum(counts.values()),'all_done':all_done}
+    return {'counts':dict(counts),'active_jobs':len(active),'opened_jobs':opened,'recovery_jobs':len(repair),'completed_human_groups':len(groups),'phase':phase,'total':sum(counts.values()),'all_done':all_done}
 
 
 def render(s,q,cfg):
     c=s['counts'];stamp=datetime.fromtimestamp(q.now(),ZoneInfo('America/New_York')).strftime('%d/%m às %Hh%M')
-    executor='observação em execução' if s['active_jobs'] else ('recuperação em execução/pendente' if s['recovery_jobs'] else 'entre execuções da fila')
+    executor='página aberta; verificação em curso' if s.get('opened_jobs') else 'preparando/abrindo; sem abertura comprovada ainda' if s['active_jobs'] else ('recuperação técnica em execução/pendente' if s['recovery_jobs'] else 'entre execuções da fila')
     if s['phase']=='FINITE_REVIEW_DELIVERED':executor='rodada encerrada; pendências entregues para revisão'
     lines=[f'**Atualização da rodada priorizada — {stamp} (Nova York)**',
            f"✅ Links validados: **{c.get('PASSED',0)}** de **{s['total']}**.",
-           f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)}**.",
+           f"⏳ Aguardando: **{c.get('READY',0)+c.get('WAIT_RETRY',0)}** · tentativa iniciada: **{c.get('OPEN_INTENT',0)}** · em diagnóstico: **{c.get('ATTENTION',0)+c.get('TECHNICAL_REPAIR',0)}**.",
            f'🔄 Executor: {executor}.']
     if c.get('DEFERRED_NO_AD') or c.get('REVIEW_REQUIRED'):
         lines.append(f"↪️ Para tentativa final: **{c.get('DEFERRED_NO_AD',0)}** · para sua revisão: **{c.get('REVIEW_REQUIRED',0)}**.")
@@ -75,7 +80,7 @@ def render(s,q,cfg):
 def material(value):
     counts=value.get('counts') or {}
     terminal=value.get('phase') if value.get('phase') in {'ALL_DONE','CONFIRMING_NOTICES','FINITE_REPORT_PENDING','FINITE_REVIEW_DELIVERED'} else None
-    return (value.get('total'),counts.get('PASSED',0),counts.get('DEFERRED_NO_AD',0),counts.get('REVIEW_REQUIRED',0),value.get('completed_human_groups',0),terminal)
+    return (value.get('total'),counts.get('PASSED',0),counts.get('DEFERRED_NO_AD',0),counts.get('REVIEW_REQUIRED',0),counts.get('TECHNICAL_REPAIR',0),value.get('completed_human_groups',0),terminal)
 
 
 def check_stagnation(q,cfg,current):

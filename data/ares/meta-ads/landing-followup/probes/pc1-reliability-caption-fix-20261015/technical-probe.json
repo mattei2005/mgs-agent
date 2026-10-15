@@ -1,0 +1,213 @@
+{
+  "state": "TECHNICAL_PROBE_VERIFIED",
+  "session_id": "20261015_142614_3442b3c6",
+  "owner": null,
+  "idx": null,
+  "repair_note": "Verified and repaired actual Chrome ambiguity between tab Close and window-caption Close; select caption row relative to Minimize/Restore. Also bounded delayed discovery and driver-verdict handling. Repeat blank-only probe after exact prior closure, no landing navigation.",
+  "url_navigation": false,
+  "tests_returncode": 0,
+  "baseline": [
+    {
+      "app_name": "chrome.exe",
+      "pid": 18224,
+      "window_id": 263324,
+      "off_screen": false,
+      "title": "Meta Business Suite - Google Chrome",
+      "z_index": 5
+    },
+    {
+      "app_name": "cua-driver.exe",
+      "pid": 14788,
+      "window_id": 196948,
+      "off_screen": false,
+      "title": "Cua.AgentCursorOverlay.default",
+      "z_index": 4
+    },
+    {
+      "app_name": "SystemSettings.exe",
+      "pid": 24396,
+      "window_id": 131758,
+      "off_screen": false,
+      "title": "Settings",
+      "z_index": 3
+    },
+    {
+      "app_name": "ApplicationFrameHost.exe",
+      "pid": 27320,
+      "window_id": 1572930,
+      "off_screen": false,
+      "title": "Settings",
+      "z_index": 2
+    },
+    {
+      "app_name": "TextInputHost.exe",
+      "pid": 18216,
+      "window_id": 66572,
+      "off_screen": false,
+      "title": "Windows Input Experience",
+      "z_index": 1
+    },
+    {
+      "app_name": "explorer.exe",
+      "pid": 9632,
+      "window_id": 65984,
+      "off_screen": false,
+      "title": "Program Manager",
+      "z_index": 0
+    }
+  ],
+  "opening": {
+    "state": "OWNED_BLANK_WINDOW",
+    "target": {
+      "pid": 18224,
+      "window_id": 6948344,
+      "app_name": "chrome.exe"
+    },
+    "baseline": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "new_window_created": true,
+    "url_submission_attempted": false,
+    "blank_open_elapsed_seconds": 6.226
+  },
+  "series": {
+    "state": "CAPTURED_NOT_PASS",
+    "samples": [
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_a80620e7e8fb4c1db6cf9063cf90965b.png",
+        "captured_at": 1792103852.9410095,
+        "monotonic_seconds": 285471.9127891814,
+        "analysis": "Google Chrome is open full-screen in dark Incognito mode, with the active tab titled **“New Incognito Tab.”**\n\n- The top bar includes Back, Forward, Reload, the address/search field, an **“AI Mode”** button, the three-dot menu, and an **“Incognito”** indicator.\n- A bookmarks bar is visible with many saved folders and links.\n- The main page shows the Incognito hat-and-glasses icon and the heading **“You’ve gone Incognito.”**\n- Explanatory text states that Chrome will not save browsing history, cookies and site data, or information entered in forms, while activity may still be visible to websites, an employer or school, and the internet service provider.\n- A prominent dark notice says **“Third-party cookies are blocked”** and explains that some sites may not work, with a link to allow third-party cookies temporarily.\n- The Windows taskbar is visible at the bottom; the clock reads **6:37 PM** and the date **10/15/2026**.",
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_2c5263b9979f43f4b806d68b623a1288.png",
+        "captured_at": 1792103860.266019,
+        "monotonic_seconds": 285479.23779887904,
+        "analysis": null,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_56985c6e289b4237afd8f4df62b773be.png",
+        "captured_at": 1792103861.02602,
+        "monotonic_seconds": 285479.9977997856,
+        "analysis": "Google Chrome is open full-screen in dark theme on a **“New Incognito Tab”**. The top area includes:\n\n- One tab labeled **New Incognito Tab** and a **+** button for a new tab.\n- Back, forward, reload, and an empty address/search field.\n- An **AI Mode** button inside the right side of the address bar.\n- Toolbar controls and an **Incognito** indicator at the upper right.\n- A visible bookmarks bar containing many saved links and folders.\n\nThe central page shows the Incognito icon and heading **“You’ve gone Incognito”**, followed by privacy information. It says Chrome won’t save browsing history, cookies and site data, or information entered in forms, while activity may still be visible to websites visited, an employer or school, and the internet service provider.\n\nA dark notice box below states **“Third-party cookies are blocked”**, with explanatory text and links about allowing third-party cookies.\n\nThe Windows taskbar is visible at the bottom, with centered app icons and the clock showing **6:37 PM** and date **10/15/2026**.",
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_b37ef780756b46ea8e3dbf30e49f73ad.png",
+        "captured_at": 1792103866.6250274,
+        "monotonic_seconds": 285485.5968069018,
+        "analysis": "Google Chrome is open in a maximized dark-themed **Incognito** window. The active tab and window title read **“New Incognito Tab.”**\n\n- Top bar: Back, Forward, Reload, an empty address/search field, an **“AI Mode”** button, extensions/menu icons, and an **“Incognito”** indicator.\n- A bookmarks bar is visible with many saved links and folders, including **Google Tradutor**, **FB Business**, **Planilhas**, **bibliotecas**, **Sites todos**, **Contas**, **MercadoLivre**, and **All Bookmarks**.\n- Center panel: Incognito hat-and-glasses icon and the heading **“You’ve gone Incognito.”**\n- The page explains that Chrome will not save browsing history, cookies/site data, or information entered in forms, while activity may still be visible to websites, an employer or school, and the internet service provider.\n- A highlighted notice says **“Third-party cookies are blocked”**, with explanatory text and a link about allowing third-party cookies.\n- The Windows taskbar is visible at the bottom; the clock shows **6:37 PM** and the date **10/15/2026**.",
+        "composited_desktop": true
+      }
+    ],
+    "all_frames": [
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_a80620e7e8fb4c1db6cf9063cf90965b.png",
+        "captured_at": 1792103852.9410095,
+        "monotonic_seconds": 285471.9127891814,
+        "analysis": "Google Chrome is open full-screen in dark Incognito mode, with the active tab titled **“New Incognito Tab.”**\n\n- The top bar includes Back, Forward, Reload, the address/search field, an **“AI Mode”** button, the three-dot menu, and an **“Incognito”** indicator.\n- A bookmarks bar is visible with many saved folders and links.\n- The main page shows the Incognito hat-and-glasses icon and the heading **“You’ve gone Incognito.”**\n- Explanatory text states that Chrome will not save browsing history, cookies and site data, or information entered in forms, while activity may still be visible to websites, an employer or school, and the internet service provider.\n- A prominent dark notice says **“Third-party cookies are blocked”** and explains that some sites may not work, with a link to allow third-party cookies temporarily.\n- The Windows taskbar is visible at the bottom; the clock reads **6:37 PM** and the date **10/15/2026**.",
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_2c5263b9979f43f4b806d68b623a1288.png",
+        "captured_at": 1792103860.266019,
+        "monotonic_seconds": 285479.23779887904,
+        "analysis": null,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_56985c6e289b4237afd8f4df62b773be.png",
+        "captured_at": 1792103861.02602,
+        "monotonic_seconds": 285479.9977997856,
+        "analysis": "Google Chrome is open full-screen in dark theme on a **“New Incognito Tab”**. The top area includes:\n\n- One tab labeled **New Incognito Tab** and a **+** button for a new tab.\n- Back, forward, reload, and an empty address/search field.\n- An **AI Mode** button inside the right side of the address bar.\n- Toolbar controls and an **Incognito** indicator at the upper right.\n- A visible bookmarks bar containing many saved links and folders.\n\nThe central page shows the Incognito icon and heading **“You’ve gone Incognito”**, followed by privacy information. It says Chrome won’t save browsing history, cookies and site data, or information entered in forms, while activity may still be visible to websites visited, an employer or school, and the internet service provider.\n\nA dark notice box below states **“Third-party cookies are blocked”**, with explanatory text and links about allowing third-party cookies.\n\nThe Windows taskbar is visible at the bottom, with centered app icons and the clock showing **6:37 PM** and date **10/15/2026**.",
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_b37ef780756b46ea8e3dbf30e49f73ad.png",
+        "captured_at": 1792103866.6250274,
+        "monotonic_seconds": 285485.5968069018,
+        "analysis": "Google Chrome is open in a maximized dark-themed **Incognito** window. The active tab and window title read **“New Incognito Tab.”**\n\n- Top bar: Back, Forward, Reload, an empty address/search field, an **“AI Mode”** button, extensions/menu icons, and an **“Incognito”** indicator.\n- A bookmarks bar is visible with many saved links and folders, including **Google Tradutor**, **FB Business**, **Planilhas**, **bibliotecas**, **Sites todos**, **Contas**, **MercadoLivre**, and **All Bookmarks**.\n- Center panel: Incognito hat-and-glasses icon and the heading **“You’ve gone Incognito.”**\n- The page explains that Chrome will not save browsing history, cookies/site data, or information entered in forms, while activity may still be visible to websites, an employer or school, and the internet service provider.\n- A highlighted notice says **“Third-party cookies are blocked”**, with explanatory text and a link about allowing third-party cookies.\n- The Windows taskbar is visible at the bottom; the clock shows **6:37 PM** and the date **10/15/2026**.",
+        "composited_desktop": true
+      }
+    ]
+  },
+  "closure": {
+    "state": "CLOSED_NOT_PASS",
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 6948344,
+      "app_name": "chrome.exe"
+    },
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "closed_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_e13a3e541cb44b368d14382af3eea310.png",
+    "close_input_sent": true,
+    "close_method": "fresh_native_caption_button",
+    "elapsed_seconds": 8.184,
+    "remaining_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ]
+  },
+  "elapsed_seconds": 38.686,
+  "error": null
+}

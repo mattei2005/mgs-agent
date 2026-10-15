@@ -3,7 +3,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-from ares_campaign_v3.landing_desktop import close_owned,open_owned
+from ares_campaign_v3.landing_desktop import close_owned,open_owned,open_blank_owned
 
 BASE={'pid':1,'window_id':10,'app_name':'chrome.exe'}
 OWN={'pid':1,'window_id':20,'app_name':'chrome.exe'}
@@ -73,6 +73,56 @@ class DesktopTests(unittest.TestCase):
             return d(a)
         with self.assertRaisesRegex(ValueError,'unique native'):close_owned(call,self.proof(),True)
         self.assertFalse(any(x['action']=='click' for x in d.calls))
+
+
+    def test_delayed_window_discovery_does_not_repeat_hotkey(self):
+        d=Desktop();pending=False;reads=0
+        def call(a):
+            nonlocal pending,reads
+            if a['action']=='key' and a['keys']=='ctrl+shift+n':
+                d.calls.append(a.copy());pending=True;return {'effect':'unverifiable'}
+            if a['action']=='list_windows' and pending:
+                reads+=1
+                if reads==3:d.items.append(OWN.copy())
+            return d(a)
+        r=open_owned(call,URL)
+        self.assertEqual(r['target']['window_id'],20)
+        self.assertEqual(len([a for a in d.calls if a.get('keys')=='ctrl+shift+n']),1)
+
+    def test_nested_background_refusal_uses_verified_foreground_fallback(self):
+        d=Desktop()
+        def call(a):
+            r=d(a)
+            return {'verdict':r} if r.get('code')=='background_unavailable' else r
+        r=open_owned(call,URL);self.assertEqual(r['target']['window_id'],20)
+        self.assertEqual(len([a for a in d.calls if a.get('keys')=='ctrl+shift+n']),2)
+
+    def test_blank_probe_never_types_or_submits_url_and_closes_own_window(self):
+        d=Desktop();r=open_blank_owned(d);closed=close_owned(d,r,True)
+        self.assertEqual(closed['state'],'CLOSED_NOT_PASS');self.assertEqual(d.items,[BASE])
+        self.assertFalse(any(a['action']=='type' or a.get('keys')=='return' for a in d.calls))
+
+    def test_partial_url_is_selected_before_foreground_replacement(self):
+        d=Desktop();first=True
+        def call(a):
+            nonlocal first
+            if a['action']=='type' and first:
+                first=False;d.calls.append(a.copy());return {'effect':'suspected_noop'}
+            return d(a)
+        open_owned(call,URL)
+        keys=[a.get('keys') for a in d.calls if a['action']=='key']
+        self.assertIn('ctrl+l',keys);self.assertIn('ctrl+a',keys)
+        self.assertEqual(keys.count('return'),1)
+
+    def test_blank_chrome_tab_close_is_not_confused_with_window_caption_close(self):
+        d=Desktop();d.items=[BASE.copy(),OWN.copy()]
+        def call(a):
+            r=d(a)
+            if a['action']=='capture' and a.get('app')!='screen':
+                r['elements'].extend([{'index':0,'role':'Button','label':'Minimize','bounds':[2423,0,45,40]},{'index':1,'role':'Button','label':'Restore','bounds':[2468,0,46,40]},{'index':54,'role':'Button','label':'Close','bounds':[242,6,28,28]}])
+            return r
+        r=close_owned(call,self.proof(),True);self.assertEqual(r['state'],'CLOSED_NOT_PASS')
+        self.assertEqual([a['element'] for a in d.calls if a['action']=='click'],[2])
 
 
 if __name__=='__main__':unittest.main()

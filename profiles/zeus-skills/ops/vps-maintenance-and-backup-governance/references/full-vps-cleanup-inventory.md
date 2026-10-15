@@ -167,6 +167,8 @@ For old temporary material, list top-level entries individually, apply an explic
 
 When freezing generated PostgreSQL data directories for deletion:
 
+- Identify a cluster root by `PG_VERSION` **plus sibling `base/` and `global/` directories**, and do not count descendants again. PostgreSQL also writes `PG_VERSION` inside `base/<database_oid>/`; those are database subdirectories, not independent clusters. Compare complete cluster trees for redundancy: identical template databases or individual files do not establish that two complete test clusters are interchangeable.
+
 1. Prune every directory containing `PG_VERSION` from external-reference content scans, then search code, tests, reports, retained evidence, service definitions, crons, scripts and checkpoints for each candidate's exact absolute path or basename. Reading cluster binaries wastes time and can create meaningless matches; the cluster itself is not evidence of an outside consumer.
 2. Treat `postmaster.pid` as a signal to inspect, not proof of a live server. Parse its first line and block only when a positive PID exists in `/proc` and its command line resolves to the candidate; record negative sentinels and stale PID files in the manifest without calling them active use. Still scan `/proc` `cmdline`, `cwd`, `exe` and file descriptors independently.
 3. Store nanosecond mtimes directly in new manifests. When an older audit stored floating-point epoch seconds, compare the converted value with a small precision tolerance instead of exact integer equality; binary-float conversion can otherwise report every unchanged target as drift. The freshly computed metadata fingerprint remains the deletion-time authority.

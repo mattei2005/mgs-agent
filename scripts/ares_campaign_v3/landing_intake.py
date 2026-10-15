@@ -35,6 +35,11 @@ def native_busy(path=NATIVE_DB,now=None):
     # Existing native turn lease: no lock/flag is added to campaign requests.
     try:
         policy=json.loads(POLICY.read_text())
+        execution=policy.get('pc1_execution_policy') or {}
+        if execution.get('enabled') is True and execution.get('resource_priority')=='PHYSICAL_PC1_ONLY':
+            # Real desktop ownership is checked under dispatcher flock and the
+            # cross-agent PC1 lease. Unrelated Discord turns do not use PC1.
+            return False
         exempt=str(policy.get('all_problem_destination_thread') or '') if policy.get('creation_path_isolation',{}).get('followup_control_thread_exempt') is True else ''
         with readonly(path) as c:
             return bool(c.execute("SELECT 1 FROM session_turn_leases l JOIN sessions s ON s.id=l.conversation_id WHERE l.expires_at>? AND s.source='discord' AND (?='' OR COALESCE(NULLIF(s.thread_id,''),s.chat_id,'')<>?) LIMIT 1",(time.time() if now is None else now,exempt,exempt)).fetchone())
