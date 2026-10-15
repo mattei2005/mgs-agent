@@ -98,6 +98,13 @@ class ReliabilityTests(unittest.TestCase):
         with self.q.tx():self.q.db.execute('UPDATE links SET due=? WHERE job=? AND idx=0',(self.clock.value+60,key))
         self.assertEqual(self.q.claim('next')['key'],key);self.q.begin(key,'next',1)
 
+    def test_repair_expiry_stays_bound_to_the_actual_nonzero_link_index(self):
+        key=self.multi();self.q.claim('worker');self.q.begin(key,'worker',0);self.q.result(key,'worker',0,'PASS',self.success())
+        for _ in range(3):self.error(key,1)
+        self.q.claim_recovery('repair');self.clock.value+=601;self.q.recover_expired()
+        self.assertEqual(rel.technical_errors(self.q,key,1),4)
+        self.assertEqual(rel.technical_errors(self.q,key,0),0)
+
     def test_unrelated_native_turn_does_not_block_pc1_observer(self):
         with patch.object(intake,'POLICY',self.path),patch.object(intake,'readonly',side_effect=AssertionError('must not query unrelated turns')):
             self.assertFalse(intake.native_busy())
@@ -149,6 +156,12 @@ class ReliabilityTests(unittest.TestCase):
         self.assertIsNone(rel.latest_probe_for_cleanup(self.q,self.key,1))
         with self.q.tx():self.q.event(self.key,'open_intent',{'idx':0,'attempt':2})
         self.assertIsNone(rel.latest_probe_for_cleanup(self.q,self.key,0))
+
+    def test_old_closure_image_cannot_reconcile_current_open(self):
+        self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0)
+        self.clock.value+=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+        e=self.closure('old');e['closed_screenshot']='closed-1.png'
+        with self.assertRaisesRegex(ValueError,'latest actual opening'):self.q.reconcile(self.key,0,e,resume=True)
 
     def completed(self):
         self.arm();self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'PASS',self.success())

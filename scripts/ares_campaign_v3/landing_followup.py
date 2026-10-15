@@ -255,7 +255,9 @@ class Queue:
             key=row['key']
             phase='REPAIRING' if row['state']=='TECHNICAL_REPAIR' else 'RECONCILING'
             self.db.execute("UPDATE jobs SET state=?,owner=?,lease_until=? WHERE key=?",(phase,owner,self.now()+ttl,key))
-            self.event(key,'technical_repair_claimed' if phase=='REPAIRING' else 'recovery_claimed',{'owner':owner,'same_request':True,'automatic_navigation':False})
+            detail={'owner':owner,'same_request':True,'automatic_navigation':False}
+            if phase=='REPAIRING':detail['idx']=self.db.execute("SELECT idx FROM links WHERE job=? AND state='TECHNICAL_REPAIR' ORDER BY idx LIMIT 1",(key,)).fetchone()['idx']
+            self.event(key,'technical_repair_claimed' if phase=='REPAIRING' else 'recovery_claimed',detail)
             return self.job(key)
 
     def no_ad_count(self,key,idx):
@@ -519,6 +521,21 @@ class Queue:
         if evidence.get('no_tab_opened') is not True:validate_closure(evidence)
         elif evidence.get('browser_inputs_zero_verified') is not True or not evidence.get('diagnosis'):
             raise ValueError('no-tab recovery requires actual session input readback and diagnosis')
+        from .landing_reliability import policy as execution_policy,latest_probe_for_cleanup
+        if execution_policy() and evidence.get('no_tab_opened') is not True:
+            opened=[r['at'] for r in self.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq",(key,)) if json.loads(r['detail']).get('idx')==idx]
+            latest=opened[-1] if opened else 0
+            probe_file=latest_probe_for_cleanup(self,key,idx)
+            if probe_file:
+                probe=json.loads(Path(probe_file).read_text());target=(probe.get('opening') or {}).get('target')
+                if target:
+                    actual=evidence.get('new_tab_identity');text=json.dumps(actual) if isinstance(actual,dict) else str(actual)
+                    if not all(re.search(r'\b'+re.escape(str(target[k]))+r'\b',text) for k in ('pid','window_id')):
+                        raise ValueError('closure does not identify the current technical probe window')
+                for event in self.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='technical_probe_intent' ORDER BY seq DESC",(key,)):
+                    if json.loads(event['detail']).get('idx')==idx:latest=max(latest,event['at']);break
+            if file_evidence(evidence['closed_screenshot'])['captured_at']<latest:
+                raise ValueError('closure screenshot predates the latest actual opening')
         with self.tx():
             j=self.job(key)
             if j['state'] not in {'NEEDS_RECONCILIATION','RECONCILING','ATTENTION'}:raise ValueError('request is not awaiting reconciliation')
