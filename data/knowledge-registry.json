@@ -5131,6 +5131,24 @@
         "zeus"
       ],
       "domain": "growth",
+      "effective_at": "2026-10-15T01:21:20+00:00",
+      "id": "DIRECT-TRAFFIC-LANDING-HUMAN-ACTION-ONLY-1559932317861158993",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares recupera falhas; avisar Rodolfo somente quando uma acao dele for indispensavel",
+      "updated_at": "2026-10-15T01:21:20+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
       "effective_at": "2026-10-14T16:22:49+00:00",
       "id": "DIRECT-TRAFFIC-LANDING-ISOLATED-FIFO-10S-1559964027264962702",
       "kind": "policy",
@@ -5172,10 +5190,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "DIRECT-TRAFFIC-LANDING-HUMAN-ACTION-ONLY-1559932317861158993",
       "title": "Pedido intacto ate a resposta; leitor externo e FIFO global PC1 com dez segundos",
-      "updated_at": "2026-10-14T17:19:59+00:00"
+      "updated_at": "2026-10-15T01:21:20+00:00"
     },
     {
       "canonical_key": "f011.matteiinc02.account_scope",
@@ -11933,5 +11951,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-14T20:51:45+00:00"
+  "updated_at": "2026-10-15T01:21:20+00:00"
 }

@@ -119,12 +119,12 @@ class FollowupTests(unittest.TestCase):
         self.assertEqual(self.q.db.execute('SELECT count(*) FROM messages').fetchone()[0],1)
         self.clock.value+=59;self.assertIsNone(self.q.claim('worker'))
         self.clock.value+=1;self.assertIsNotNone(self.q.claim('worker'))
-    def test_second_no_ad_only_incident_thread(self):
+    def test_second_no_ad_stays_local_without_human_action(self):
         self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
         self.q.claim('worker');self.q.begin(self.key,'worker',0)
         self.q.result(self.key,'worker',0,'NO_AD',self.closure('tab-2'))
         r=self.q.db.execute("SELECT * FROM messages WHERE key LIKE '%incident%'").fetchone()
-        self.assertEqual(r['thread'],m.INCIDENT_THREAD);self.assertEqual(self.q.job(self.key)['state'],'ATTENTION')
+        self.assertIsNone(r);self.assertEqual(self.q.job(self.key)['state'],'ATTENTION')
         self.assertIsNone(self.q.db.execute("SELECT 1 FROM messages WHERE content=?",(m.SUCCESS,)).fetchone())
     def test_retry_requires_new_tab(self):
         self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
@@ -156,7 +156,30 @@ class FollowupTests(unittest.TestCase):
     def test_worker_expiry_does_not_reopen(self):
         self.start();self.clock.value+=601;self.q.recover_expired()
         self.assertEqual(self.q.job(self.key)['state'],'NEEDS_RECONCILIATION');self.assertIsNone(self.q.claim('new-worker'))
-        r=self.q.db.execute("SELECT * FROM messages WHERE key LIKE '%expired'").fetchone();self.assertEqual(r['thread'],m.INCIDENT_THREAD)
+        r=self.q.db.execute("SELECT * FROM messages WHERE key LIKE '%expired'").fetchone();self.assertIsNone(r)
+
+    def test_recoverable_error_silent(self):
+        self.start();self.q.result(self.key,'worker',0,'ERROR',{**self.closure(),'diagnosis':'Offline fixture: cadence gap, agent recovery only'})
+        self.assertIsNone(self.q.db.execute("SELECT 1 FROM messages WHERE key LIKE '%incident%'").fetchone())
+        self.assertTrue(self.q.db.execute("SELECT 1 FROM events WHERE kind='problem_kept_local'").fetchone())
+
+    def test_human_action_flag_without_exact_action_is_silent(self):
+        self.start();self.q.result(self.key,'worker',0,'ERROR',{**self.closure(),'diagnosis':'offline fixture','human_action_required':True})
+        self.assertIsNone(self.q.db.execute("SELECT 1 FROM messages WHERE key LIKE '%incident%'").fetchone())
+
+    def test_legacy_queued_problem_never_posts_without_human_gate(self):
+        self.arm()
+        with self.q.tx():self.q.prepare_message('legacy-intake-alert',m.INCIDENT_THREAD,'Offline fixture technical error')
+        with self.assertRaisesRegex(ValueError,'kept_local'):self.dc.deliver(self.q,'legacy-intake-alert')
+        self.assertEqual(self.dc.posts,1)
+        self.assertEqual(self.q.db.execute("SELECT state FROM messages WHERE key='legacy-intake-alert'").fetchone()[0],'CANCELLED_BEFORE_SEND')
+
+    def test_explicit_human_action_only_problem_destination(self):
+        self.start();self.q.result(self.key,'worker',0,'ERROR',{**self.closure(),'diagnosis':'offline fixture: interaction unavailable','human_action_required':True,'required_action':'Offline fixture: restore the authorized interactive login.'})
+        r=self.q.db.execute("SELECT * FROM messages WHERE key LIKE '%incident%'").fetchone()
+        self.assertEqual(r['thread'],m.INCIDENT_THREAD)
+        self.assertIn('Ação necessária de Rodolfo:',r['content'])
+        self.dc.deliver(self.q,r['key']);self.assertEqual(self.dc.posts,2)
     def test_no_success_before_all_links(self):
         p=copy.deepcopy(self.payload);p['operation']='MULTI-DIRECT';p['links'].append(copy.deepcopy(p['links'][0]))
         p['links'][1]['effective_campaign_url']=p['links'][1]['effective_campaign_url'].replace('g01','g02')

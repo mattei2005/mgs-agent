@@ -277,8 +277,8 @@ class Queue:
                 diagnosis='Anúncio ausente também na segunda tentativa, após o intervalo de 1 minuto.' if result=='NO_AD' else evidence['diagnosis']
                 url=link.get('landing_url') or link['effective_campaign_url']
                 scope(url)  # fail closed before mentioning any operational target
-                self.prepare_message(key+f':incident:{idx}',INCIDENT_THREAD,
-                    f"Acompanhamento de landing page — pedido {j['payload']['request_id']} · conta {j['payload']['account_id']}.\n{url}\n{diagnosis}\nLink não concluído; criação das campanhas preservada.")
+                self.prepare_problem(key,key+f':incident:{idx}',
+                    f"Acompanhamento de landing page — pedido {j['payload']['request_id']} · conta {j['payload']['account_id']}.\n{url}\n{diagnosis}",evidence)
             if all_pass:self.prepare_message(key+':success',j['payload']['source_thread_id'],SUCCESS)
 
     def prepare_message(self,key,thread,content):
@@ -291,6 +291,17 @@ class Queue:
             return
         self.db.execute('INSERT INTO messages VALUES(?,?,?,?,?,?,?)',(key,thread,content,nonce,'PREPARED',None,self.now()))
 
+    def prepare_problem(self,job,key,content,evidence):
+        # Rodolfo: recover within scope, speak here only if HIS action is needed.
+        # Expiry, technical errors and missing evidence are not human gates.
+        action=evidence.get('required_action')
+        if evidence.get('human_action_required') is not True or not isinstance(action,str) or not action.strip():
+            self.event(job,'problem_kept_local',{'notification_key':key,'recovery_owner':'ares','human_action_required':False})
+            return False
+        self.prepare_message(key,INCIDENT_THREAD,content+'\nAção necessária de Rodolfo: '+action.strip())
+        self.event(job,'human_action_requested',{'notification_key':key,'required_action':action.strip()})
+        return True
+
     def recover_expired(self):
         with self.tx():
             for j in self.db.execute("SELECT * FROM jobs WHERE state='RUNNING' AND lease_until<?",(self.now(),)).fetchall():
@@ -302,8 +313,8 @@ class Queue:
                 affected=p['links'][active['idx'] if active else 0]
                 url=affected.get('landing_url') or affected['effective_campaign_url']
                 scope(url)
-                self.prepare_message(j['key']+':worker-expired',INCIDENT_THREAD,
-                    f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}.\n{url}\nA execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.")
+                self.prepare_problem(j['key'],j['key']+':worker-expired',
+                    f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}.\n{url}\nA execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.",{})
                 self.event(j['key'],'worker_expired',{'automatic_reopen':False})
 
     def reconcile(self,key,idx,evidence):
@@ -406,6 +417,15 @@ class Discord:
         row=q.db.execute('SELECT * FROM messages WHERE key=?',(key,)).fetchone()
         if not row:raise ValueError('missing durable notification')
         if row['state']=='CANCELLED_BEFORE_SEND':raise ValueError('notification_cancelled_before_send')
+        if row['thread']==INCIDENT_THREAD and row['state']=='PREPARED':
+            authorized=any(json.loads(e['detail']).get('notification_key')==key
+                for e in q.db.execute("SELECT detail FROM events WHERE kind='human_action_requested'"))
+            if not authorized:
+                # Fence legacy queued alerts, not ambiguous or delivered posts.
+                with q.tx():
+                    q.db.execute("UPDATE messages SET state='CANCELLED_BEFORE_SEND' WHERE key=? AND state='PREPARED'",(key,))
+                    q.event(None,'problem_kept_local',{'notification_key':key,'recovery_owner':'ares','human_action_required':False})
+                raise ValueError('recoverable_problem_kept_local')
         thread=row['thread'];mid=row['message_id']
         if not mid and row['state']=='INTENT':
             # Ambiguous POST: read back by stable nonce before any retry. Never
@@ -446,6 +466,10 @@ def worker_prompt(key,owner,idx,job):
         'Carregue direct-traffic-cbo-operations e references/landing-followup.md. '
         'Nenhum write Meta, GAM, Router, WordPress, budget, credencial ou configuração. '
         'Nenhuma mensagem ao gestor: o outbox do runner publica somente após provas. '
+        'Falhas técnicas recuperáveis são locais: resolver no mesmo request, sem pedir nova aprovação nem alertar Rodolfo; '
+        'somente human_action_required=true com required_action concreta autoriza aviso. '
+        'Reserve as últimas chamadas para fechar/verificar, persistir result (inclusive ERROR) e liberar a lease; '
+        'não encerrar com um texto dizendo que faltou registrar o resultado. '
         'Use computer_use no PC1 sob a lease comum com o ID REAL desta sessão. '
         'Resolva a landing por fonte real, nunca a quiz; não gere impressões/cliques adicionais além da única observação autorizada. '
         'Se a lease PC1 estiver ocupada, use defer sem iniciar tentativa. '
