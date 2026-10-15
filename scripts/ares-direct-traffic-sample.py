@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""Read-only screenshot batch under the existing PC1 lease; never a navigation.
+CAPTURED means cadence evidence only, never confirmation of an ad or PASS.
+"""
+from __future__ import annotations
+import argparse
+import importlib.util
+import json
+import os
+import shutil
+import sys
+import time
+from pathlib import Path
+
+
+def collect(capture, *, pause=time.sleep, max_frames=12):
+    all_frames=[];chain=[]
+    for _ in range(max_frames):
+        frame=capture();all_frames.append(frame)
+        if chain and not (0 < frame['monotonic_seconds']-chain[-1]['monotonic_seconds'] <= 10
+                          and 0 < frame['captured_at']-chain[-1]['captured_at'] <= 12):chain=[]
+        chain.append(frame)
+        if len(chain)>=3 and chain[-1]['monotonic_seconds']-chain[0]['monotonic_seconds']>=10 and chain[-1]['captured_at']-chain[0]['captured_at']>=10:
+            return {'state':'CAPTURED_NOT_PASS','samples':chain,'all_frames':all_frames}
+        pause(.5)
+    return {'state':'CADENCE_NOT_VALIDATED','samples':[],'all_frames':all_frames}
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--key',required=True);p.add_argument('--owner',required=True)
+    p.add_argument('--pc1-session-id',required=True);a=p.parse_args()
+    here=Path(__file__).resolve().parent
+    spec=importlib.util.spec_from_file_location('landing_control',here/'ares-direct-traffic-followup.py')
+    cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+    cli.require_pc1_lease(a.pc1_session_id)
+    q=cli.Queue();job=q.owned(a.key,a.owner)
+    if not any(x['state']=='OPEN_INTENT' for x in job['links']):raise ValueError('existing open intent required; sampler never opens a page')
+    executable=shutil.which('hermes')
+    if not executable:raise ValueError('Hermes runtime unavailable')
+    sys.path.insert(0,str(Path(executable).resolve().parents[2]))
+    from tools.computer_use.tool import handle_computer_use,release_computer_use_session
+    def capture():
+        cli.require_pc1_lease(a.pc1_session_id)
+        out=handle_computer_use({'action':'capture','mode':'vision','app':'screen'},session_id=a.pc1_session_id)
+        if isinstance(out,str):out=json.loads(out)
+        image=out.get('screenshot_path') or (out.get('meta') or {}).get('screenshot_path')
+        if not image:raise ValueError('capture failed; no image evidence')
+        path=Path(image);epoch=path.stat().st_mtime
+        return {'screenshot':str(path),'captured_at':epoch,'monotonic_seconds':time.monotonic()-(time.time()-epoch),
+                'analysis':out.get('vision_analysis'),'screen_unchanged':out.get('screen_unchanged',False),'composited_desktop':True}
+    try:out=collect(capture)
+    finally:release_computer_use_session(a.pc1_session_id)
+    target=q.root/'runs'/a.owner/'capture-series.json';target.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    temp=target.with_suffix('.new');temp.write_text(json.dumps(out,ensure_ascii=False,indent=2));os.chmod(temp,0o600);os.replace(temp,target)
+    with q.tx():q.event(a.key,'capture_series_saved',{'owner':a.owner,'path':str(target),'state':out['state'],'frames':len(out['all_frames']),'ad_confirmed':False})
+    print(json.dumps({**out,'evidence_file':str(target)},ensure_ascii=False))
+
+
+if __name__=='__main__':
+    try:main()
+    except Exception as exc:
+        print(json.dumps({'state':'CAPTURE_ERROR','reason':str(exc)[:180]}));sys.exit(1)

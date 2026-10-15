@@ -210,11 +210,27 @@ class Queue:
             self.db.execute('UPDATE jobs SET state=?,reply_id=? WHERE key=?',('READY',mid,key))
             self.event(key,'creation_reply_verified',{'message_id':mid,'thread_id':p['source_thread_id']})
 
+    def claim_recovery(self,owner,ttl=600):
+        """Claim repair work, never a second navigation or a second writer."""
+        with self.tx():
+            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until>?",(self.now(),)).fetchone():return None
+            row=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key LIMIT 1",(self.now(),)).fetchone()
+            if not row:return None
+            key=row['key']
+            self.db.execute("UPDATE jobs SET state='RECONCILING',owner=?,lease_until=? WHERE key=?",(owner,self.now()+ttl,key))
+            self.event(key,'recovery_claimed',{'owner':owner,'same_request':True,'automatic_navigation':False})
+            return self.job(key)
+
+    def no_ad_count(self,key,idx):
+        return sum(1 for r in self.db.execute("SELECT detail FROM events WHERE job=? AND kind='observation_result'",(key,))
+            if (d:=json.loads(r['detail'])).get('idx')==idx and (d.get('result')=='NO_AD' or
+                (not d.get('result') and d.get('state') in {'WAIT_RETRY','ATTENTION'} and not (d.get('evidence') or {}).get('diagnosis'))))
+
     def claim(self,owner,ttl=600):
         with self.tx():
             # One active observer globally, regardless of account/channel. Other
             # campaign writers remain independent and are never locked by PC1.
-            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','NEEDS_RECONCILIATION')").fetchone(): return None
+            if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone(): return None
             r=self.db.execute("SELECT key FROM jobs WHERE state='READY' AND reply_id IS NOT NULL ORDER BY created,key LIMIT 1").fetchone()
             if not r:return None
             key=r['key']
@@ -234,7 +250,7 @@ class Queue:
         with self.tx():
             self.owned(key,owner)
             r=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
-            if not r or r['state'] not in {'READY','WAIT_RETRY'} or r['due']>self.now() or r['attempt']>=2:
+            if not r or r['state'] not in {'READY','WAIT_RETRY'} or r['due']>self.now() or self.no_ad_count(key,idx)>=2:
                 raise ValueError('attempt not due; no replay of ambiguous open')
             self.db.execute("UPDATE links SET state='OPEN_INTENT',attempt=attempt+1 WHERE job=? AND idx=?",(key,idx))
             self.event(key,'open_intent',{'idx':idx,'attempt':r['attempt']+1})
@@ -253,6 +269,7 @@ class Queue:
         elif result=='NO_AD': validate_closure(evidence)
         else:
             if not evidence.get('diagnosis'):raise ValueError('exact safe diagnosis required')
+            if evidence.get('tab_closed_verified') is True:validate_closure(evidence)
         with self.tx():
             self.owned(key,owner)
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
@@ -263,15 +280,18 @@ class Queue:
             # Cache is not durable evidence. Preserve only the reviewed images,
             # with real timestamp/hash, under protected Ares artifacts.
             evidence=preserve_evidence(evidence,key,idx,row['attempt'])
-            state='PASSED' if result=='PASS' else ('WAIT_RETRY' if result=='NO_AD' and row['attempt']==1 else 'ATTENTION')
+            safe_error=result=='ERROR' and not evidence.get('human_action_required') and (evidence.get('no_tab_opened') is True or evidence.get('tab_closed_verified') is True)
+            state='PASSED' if result=='PASS' else ('WAIT_RETRY' if safe_error or (result=='NO_AD' and self.no_ad_count(key,idx)==0) else 'ATTENTION')
             self.db.execute('UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?',(state,self.now()+60 if state=='WAIT_RETRY' else 0,json.dumps(evidence,ensure_ascii=False),key,idx))
-            self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'state':state,'evidence':evidence})
+            self.event(key,'observation_result',{'idx':idx,'attempt':row['attempt'],'result':result,'state':state,'evidence':evidence})
             remaining=self.db.execute("SELECT state FROM links WHERE job=?",(key,)).fetchall()
             all_pass=all(x['state']=='PASSED' for x in remaining)
             pending=any(x['state'] in {'READY','WAIT_RETRY','OPEN_INTENT'} for x in remaining)
             status='OBSERVED' if all_pass else ('READY' if pending else 'ATTENTION')
             if result=='ERROR' and not evidence.get('no_tab_opened') and evidence.get('tab_closed_verified') is not True:
                 status='NEEDS_RECONCILIATION'
+            if evidence.get('human_action_required') is True and evidence.get('required_action'):
+                status='WAITING_HUMAN_UNCLOSED' if status=='NEEDS_RECONCILIATION' else 'WAITING_HUMAN'
             self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',(status,key))
             if state=='ATTENTION':
                 diagnosis='Anúncio ausente também na segunda tentativa, após o intervalo de 1 minuto.' if result=='NO_AD' else evidence['diagnosis']
@@ -304,10 +324,10 @@ class Queue:
 
     def recover_expired(self):
         with self.tx():
-            for j in self.db.execute("SELECT * FROM jobs WHERE state='RUNNING' AND lease_until<?",(self.now(),)).fetchall():
+            for j in self.db.execute("SELECT * FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until<?",(self.now(),)).fetchall():
                 # Never auto-reopen/reclose an uncertain tab. Escalate the exact
                 # request here and leave its intent for browser reconciliation.
-                self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL WHERE key=?",(j['key'],))
+                self.db.execute("UPDATE jobs SET state='NEEDS_RECONCILIATION',owner=NULL,lease_until=? WHERE key=?",(self.now()+60,j['key']))
                 p=json.loads(j['payload'])
                 active=self.db.execute("SELECT idx FROM links WHERE job=? AND state='OPEN_INTENT' ORDER BY idx LIMIT 1",(j['key'],)).fetchone()
                 affected=p['links'][active['idx'] if active else 0]
@@ -317,19 +337,22 @@ class Queue:
                     f"Acompanhamento interrompido — pedido {p['request_id']} · conta {p['account_id']}.\n{url}\nA execução não confirmou o fechamento/resultado; preservada para reconciliação, sem repetir navegação ou criação.",{})
                 self.event(j['key'],'worker_expired',{'automatic_reopen':False})
 
-    def reconcile(self,key,idx,evidence):
+    def reconcile(self,key,idx,evidence,resume=False):
         # Recovery is readback-first, under the same physical PC1 lease. It
         # never promotes an unobserved URL to PASSED or replays an uncertain view.
-        validate_closure(evidence)
+        if evidence.get('no_tab_opened') is not True:validate_closure(evidence)
+        elif evidence.get('browser_inputs_zero_verified') is not True or not evidence.get('diagnosis'):
+            raise ValueError('no-tab recovery requires actual session input readback and diagnosis')
         with self.tx():
             j=self.job(key)
-            if j['state']!='NEEDS_RECONCILIATION':raise ValueError('request is not awaiting reconciliation')
+            if j['state'] not in {'NEEDS_RECONCILIATION','RECONCILING','ATTENTION'}:raise ValueError('request is not awaiting reconciliation')
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
-            if not row or row['state'] not in {'OPEN_INTENT','ATTENTION'}:raise ValueError('exact affected URL required')
+            if not row or row['state'] not in {'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'}:raise ValueError('exact affected URL required')
+            if resume and self.no_ad_count(key,idx)>=2:raise ValueError('two confirmed NO_AD attempts: diagnose without another landing visit')
             saved=preserve_evidence(evidence,key,idx,row['attempt'])
-            self.db.execute("UPDATE links SET state='ATTENTION',evidence=? WHERE job=? AND idx=?",(json.dumps(saved,ensure_ascii=False),key,idx))
+            self.db.execute("UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?",('WAIT_RETRY' if resume else 'ATTENTION',self.now()+60 if resume else 0,json.dumps(saved,ensure_ascii=False),key,idx))
             pending=self.db.execute("SELECT 1 FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY')",(key,)).fetchone()
-            self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=NULL WHERE key=?',('READY' if pending else 'ATTENTION',key))
+            self.db.execute('UPDATE jobs SET state=?,owner=NULL,lease_until=? WHERE key=?',('READY' if pending else 'ATTENTION',None if pending else self.now()+60,key))
             self.event(key,'uncertain_tab_closed_by_readback',{'idx':idx,'observation_success':False,'evidence':saved})
 
 

@@ -64,13 +64,15 @@ def tick(q):
             except Exception as e:
                 with q.tx():q.event(None,'notification_transport_deferred',{'reason':str(e)[:120]})
         due=q.db.execute("SELECT 1 FROM jobs j JOIN links l ON l.job=j.key WHERE j.state='READY' AND l.state IN ('READY','WAIT_RETRY') AND l.due<=?",(q.now(),)).fetchone()
-        if not due:return {'state':'IDLE'}
+        recovery=q.db.execute("SELECT 1 FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?)",(q.now(),)).fetchone()
+        if not due and not recovery:return {'state':'IDLE'}
         check=subprocess.run([sys.executable,str(BASE/'scripts/mgs-pc1-computer-use-lock.py'),'status'],capture_output=True,text=True,timeout=20)
         if check.returncode or json.loads(check.stdout).get('locked'):return {'state':'WAITING_PC1'}
         owner='landing-observer-'+uuid.uuid4().hex
-        j=q.claim(owner)
+        j=q.claim_recovery(owner) or q.claim(owner)
         if not j:return {'state':'IDLE'}
-        idx=next(x['idx'] for x in j['links'] if x['state'] in {'READY','WAIT_RETRY'} and x['due']<=q.now())
+        repairing=j['state']=='RECONCILING'
+        idx=next(x['idx'] for x in j['links'] if x['state'] in ({'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or x['due']<=q.now()))
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)
         env=dict(os.environ)
@@ -86,13 +88,13 @@ def tick(q):
                 if not executable:raise RuntimeError('Hermes CLI unavailable')
                 completed=subprocess.run([executable,'-p','ares','chat','--query-file',str(prompt),
                     '--provider',policy['provider'],'--model',policy['model'],
-                    '--source','tool','--max-turns','40','--run-budget','480','--oneshot','-Q','--pass-session-id'],
+                    '--source','tool','--max-turns','80','--run-budget','480','--oneshot','-Q','--pass-session-id'],
                     env=env,cwd=BASE,stdout=log,stderr=subprocess.STDOUT,timeout=540)
                 rc=completed.returncode
             except Exception as e:
                 log.write('worker_terminated '+type(e).__name__+'\n');rc=-1
         j=q.job(j['key'])
-        if j['state']=='RUNNING':
+        if j['state'] in {'RUNNING','RECONCILING'}:
             with q.tx():q.db.execute('UPDATE jobs SET lease_until=? WHERE key=?',(q.now()-1,j['key']))
             q.recover_expired()
         try:flush(q,Discord())
@@ -111,6 +113,7 @@ def main():
     s.add_parser('status');s.add_parser('tick');s.add_parser('intake');s.add_parser('activate-intake')
     a=s.add_parser('reconcile');a.add_argument('--key',required=True);a.add_argument('--index',type=int,required=True)
     a.add_argument('--pc1-session-id',required=True);a.add_argument('--evidence',type=Path,required=True)
+    a.add_argument('--resume',action='store_true',help='Resume technical failure only after verified closure, never PASS')
     for command in ('begin','defer','result'):
         a=s.add_parser(command);a.add_argument('--key',required=True);a.add_argument('--owner',required=True)
         if command!='defer':
@@ -139,7 +142,7 @@ def main():
             return Intake(q).tick()
     if args.command in {'begin','result','reconcile'}:require_pc1_lease(args.pc1_session_id)
     if args.command=='reconcile':
-        q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()))
+        q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()),resume=args.resume)
         return {'state':q.job(args.key)['state'],'observation_success':False}
     if args.command=='begin':q.begin(args.key,args.owner,args.index)
     elif args.command=='defer':q.deferred(args.key,args.owner)

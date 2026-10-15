@@ -1,4 +1,26 @@
 {
+  "page_delegation_repair_authorizations": {
+    "1151577441379727": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1560112232891686986",
+      "source_thread_id": "1558127274073788488",
+      "source_channel_id": "1548149483039236137",
+      "account_id": "1085117577390237",
+      "account_name": "Vizioid-US-SHEIN-EN-03-G003",
+      "system_user_id": "122095869861482193",
+      "business_id": "155263197283282",
+      "scope": "Repair the exact source Page delegation for authorized Campaign Ops on this account; preserve existing tasks and add only ADVERTISE and ANALYZE when necessary.",
+      "repeat_approval_required": false,
+      "requirements": [
+        "pre-read exact Page identity, business access and existing tasks using an authorized administrative identity",
+        "no blind POST; reconcile uncertain effects before retry",
+        "read back assignment and Page access with original corporate campaign identity",
+        "resume original request and existing IDs through central Engine v3; preserve original E2E clock and QA"
+      ],
+      "exclusions": ["ownership transfer", "credential issuance or rotation", "app permission changes", "billing", "other Pages or accounts", "unapproved recurrence"]
+    }
+  },
   "cross_account_reference_policy": {
     "enabled": true,
     "approved_by": "344196393512075265",
