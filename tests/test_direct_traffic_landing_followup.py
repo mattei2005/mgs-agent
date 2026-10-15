@@ -448,6 +448,18 @@ class FollowupTests(unittest.TestCase):
         with patch.object(sys,'argv',args+['--frames-reviewed']),patch.object(cli,'Queue',return_value=self.q),patch.object(cli,'require_pc1_lease'):
             self.assertEqual(cli.main()['state'],'OBSERVED')
 
+    def test_latency_prompt_closes_before_offline_review_without_weakening_pass(self):
+        self.arm();j=self.q.job(self.key);j['state']='RUNNING'
+        prompt=m.worker_prompt(self.key,'worker',0,j)
+        self.assertLess(prompt.index('feche imediatamente APENAS'),prompt.index('Depois do fechamento, revise offline'))
+        self.assertIn('todas as revisões independentes em paralelo',prompt)
+        self.assertIn('Fechar não autoriza PASS',prompt)
+        self.assertIn('corrija/recapture na mesma aba antes de fechar',prompt)
+        self.assertIn('Sem reduzir os 10s',prompt)
+        j['state']='RECONCILING';recovery=m.worker_prompt(self.key,'repair',0,j)
+        self.assertNotIn('feche imediatamente APENAS',recovery)
+        self.assertIn('Não abrir URL',recovery)
+
     def test_prompt_omits_unrelated_large_evidence(self):
         self.arm();j=self.q.claim('worker')
         j['links'][0]['evidence']=json.dumps({'new_tab_identity':'offline-previous-tab','samples':[{'screenshot':'HUGE_UNRELATED_OFFLINE_DETAIL'}]})
