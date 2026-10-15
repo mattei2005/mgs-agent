@@ -696,7 +696,23 @@
         "no_inherited_action_policy": true,
         "no_new_cron": true
       },
-      "campaign_label": "separate_number_and_short_product_label_not_visual_proof",
+      "campaign_label": "separate_number_and_product_with_explicit_COPY_Csource_in_number_label_when_recorded_in_live_campaign_name",
+      "default_sort": {
+        "keys": ["product_label_ascending_A_to_Z", "first_proven_delivery_ascending_oldest_first", "campaign_number_numeric_ascending", "campaign_id"],
+        "apply_same_order_to_history": true,
+        "source_message_id": "1560341636741861550",
+        "do_not_sort_by_ROI_unless_explicitly_requested": true
+      },
+      "copy_source_label": {
+        "placement": "campaign_identification_in_Nº_cell",
+        "format": "<literal_campaign_number> COPY C<literal_direct_source_number>",
+        "source": "explicit_COPY_Cnumber_marker_in_verified_current_Meta_campaign_name",
+        "preserve_direct_source_not_recursive_root": true,
+        "no_marker": "show_number_only_not_proof_of_no_copy_history",
+        "forbidden_inference": "do_not_infer_copy_source_from_UTM_adgroup_bid_product_or_similarity",
+        "meaning": "read_only_display_label_no_campaign_rename_or_Meta_write",
+        "source_message_id": "1560341816447082708"
+      },
       "default_for_generic_report_requests": true,
       "explicit_request_override_allowed": true,
       "legacy_models_are_not_implicit_overrides": true,

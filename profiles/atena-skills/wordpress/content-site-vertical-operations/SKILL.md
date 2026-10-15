@@ -89,6 +89,12 @@ Trate o texto aprovado como **fragmento editorial**, não como substituto autom�
 
 Pitfall: `yoast_head_json` pode divergir do `meta[name="robots"]` renderizado quando tema, MU plugin ou edge impõe a política final. Preserve e valide a diretiva efetiva no HTML público; não tente “corrigir” a indexação durante um rewrite editorial.
 
+## Reparo editorial mínimo de tabelas publicadas
+
+- Quando autorizado apenas markup responsivo, envolva o `<table>...</table>` byte-exato em `<!-- wp:table --><figure class="wp-block-table">…</figure><!-- /wp:table -->`; preserve o restante do raw e envie somente `content`. Não substitua o conteúdo da tabela por truncamento ou CSS global.
+- Reaplique CDP 390px antes e depois da navegação e exija `documentElement.clientWidth===390`; `innerWidth` pode aumentar justamente por overflow. Confirme aba visível, lazy-load, `scrollWidth<=clientWidth`, overflow interno do bloco e acesso à última coluna no canônico real. Se o canônico mantiver a tabela plain, registre bloqueio stale; query-buster não aprova o canônico e não autoriza purge.
+- Capture postmeta nativo antes e imediatamente após o POST: o save pode remover automaticamente `_uag_css_file_name` e `_uag_page_assets`, mesmo com payload só `content`. Separe esse efeito técnico de preservação editorial e da persistência posterior de scores; registre as linhas exatas e peça ciência do pai. Não declare todas as metas idênticas nem restaure derivados por escrita técnica fora do escopo.
+
 ## Cutover SEO atômico após o rewrite
 
 Nunca remova `noindex` de parte de um lote aprovado. Antes do primeiro write de indexação:
