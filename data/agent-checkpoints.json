@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Executor atual conclui a observacao C121 index1 no PC1 com anuncio/foco/10s e fechamento comprovados; registrar resultado sem perda nem replay cego. Depois retomar restantes por FIFO. Sem solicitar nova mensagem do operador; gates criticos preservados.",
-      "objective": "Observar C121 primeiro e depois continuar os demais na ordem FIFO, com validacao real e avisos conferidos",
-      "source": "discord:1559932317861158993#1560253186277646380;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/meta-ads/audit/landing-followup-1559951763019145247/c121-first-20261015/change-inventory.json",
-      "state": "prioridade c121_first_then_fifo ativa por rodolfo1560253186277646380; cleanup f44 concluido e observation_result persistido evento392. nova rodada c121 registrada evento393 sem apagar historico; c121 selecionada running evento396 owner landing-observer-4d5b7a5ad26949568c422e92c971214f. inicio de visita/validacao ainda nao comprovado neste snapshot.126 testes passam; contrato, procedimento e informes atualizados e lidos de volta; report-infra1560253822327332906 get verificado.",
+      "next_step": "Executores seguintes usam fluxo enxuto; medir proxima tentativa por fases e comparar com baseline sem afirmar reducao antes de prova. Manter FIFO, uma URL por vez, anuncio/foco10s, fechamento/readback e avisos obrigatorios. Nenhum restart nem write externo critico.",
+      "objective": "Continuar FIFO apos C121 validada, reduzir overhead sem perder evidencia visual/fechamento",
+      "source": "discord:1559932317861158993;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/meta-ads/audit/landing-followup-1559951763019145247/latency-20261015/change-inventory.json;data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "state": "c121 pass evento399: janela de amostras10.06s, claimed→result429.0s, open_intent→result337.8s; ultima amostra→prova fechamento131.06s e fechamento→result45.14s. proximo job f44 running evento402. otimizacao local aplicada ao prompt/procedimento para fechar prontamente apos serie valida, revisar frames offline em paralelo e registrar compacto;127 testes passaram. ganho real ainda nao medido; nao interromper worker atual.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T11:36:57+00:00"
+      "updated_at": "2026-10-15T11:47:03+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T11:36:57+00:00"
+  "updated_at": "2026-10-15T11:47:03+00:00"
 }
