@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Consumidor existente deve continuar FIFO ate fim real, nao esperar mensagem do operador. Recuperacao de C121 deve conferir ultima abertura/fechamento e persistir resultado compacto ou reconcile sem resume apos2NO_AD, liberando C122+ e mantendo diagnostico local. Prova de PASS/NO_AD valida ja existente deve ser registrada com recovered, nao revisitar. Corrigir defeitos locais com backup/teste/readback/REPORT e retomar; so need-action se houver acao humana concreta indispensavel. Confirmacao gestor unica somente grupo humano completo PASS+GET.",
-      "objective": "Conduzir cada acompanhamento ate validacao integral e mensagem conferida; resolver bloqueios sem depender de novas cobrancas; skill dedicada organizada",
+      "next_step": "Consumidor existente continua mesmo request/FIFO sem novo comando. Usar recovery_evidence_path quando fornecido; comparar ultima tentativa, confirmar closure, persistir NO_ADrecovered ou reconcile sem resume ao atingir2ausencias, liberar outros links e lease. Nao escrever JSON narrativo grande nem reabrir por falta de registro. Corrigir bloqueio local com backup/teste/readback/REPORT; somente need-action com acao humana realmente indispensavel. Nao tratar queueREADY, skill/testes ou timer como conclusao; conferir PASS integral e avisoGET por pedido humano.",
+      "objective": "Ares conduz cada acompanhamento ate conclusao real, resolve bloqueios e mantem uma skill dedicada organizada sem depender de cobrancas",
       "source": "discord:1559932317861158993#1560126627394879551;data/ares/meta-ads/audit/landing-followup-1559951763019145247/control-gate-fix/change-inventory.json;/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md;data/ares/meta-ads/landing-followup/queue.sqlite3",
-      "state": "skill dedicada landing-followup-operations criada com referencia runtime/recovery/status; antiga referencia virou redirect e historico foi arquivado; mapa/contrato/prompts atualizados e readback conferido. corrigido gate que bloqueava pela propria conversa; demais turnos de campanha seguem prioritarios. orfao fisico so e liberado apos source=tool/job/owner+ausencia de processo vivo em env/session/query-file. cli aceita evidencia-json compacta, frames revisados e prova recuperada da ultima tentativa sem novas visitas. sucesso humano agrega todos os jobs pares, nao so um subjob.109 testes offline pass; retomadas reais verificadas e reserva orfa real liberada. c121: duas ausencias reais reconciliadas por imagens e fechamento, nao pass; historico dedup por tentativa; apos closure limite2 nao reabre e libera outros links para continuar. nenhuma conclusao global falsa e nenhum meta write/restart/schedulechange.",
+      "state": "autoridade atual1560126627394879551. landing-followup-operations ativa, antiga referencia redirect-only, historico/auditoria preservados, contrato/mapa/prompts apontam procedimento unico; readback validado. controle desta conversa nao bloqueia executor; prioridade demais turnos mantida. reserva orfa so liberada com source=tool/job/owner e ausencia de processo vivo por env/sid/queryfile; reserva real recuperada. estado excepcional e trabalho reconciling, nao abandono. registro compacto evidencia-json em result/reconcile/need-action; frames reais so incorporados apos revisao explicita; provas completas recuperadas sem revisitar e vinculadas temporalmente a ultima abertura. contexto enxuto, capsula de prova da tentativa exata preparada pelo consumidor, sem reextrair toda a historia. aviso unico somente grupo humano completo incluindo todos os subjobs.112 testes offline passaram e governanca valida; isso nao declara os anuncios pendentes concluidos. c121 tem2 ausencias reais com imagens/fechamento revistos e eventos reconciliados sem novo input; nao pass, nao terceira visita automatica, apos closure seguir outros links e manter diagnostico local.0meta writes/restarts/schedulechanges/other-profile edits.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T03:47:41+00:00"
+      "updated_at": "2026-10-15T03:58:30+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T03:47:41+00:00"
+  "updated_at": "2026-10-15T03:58:30+00:00"
 }
