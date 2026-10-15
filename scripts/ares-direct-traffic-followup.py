@@ -6,6 +6,7 @@ import fcntl
 import json
 import os
 import shutil
+import sqlite3
 import subprocess
 import sys
 import time
@@ -47,12 +48,13 @@ def flush(q,discord):
                 q.event(row['key'],'completed',{'landing_observation':True,'gam_registration':'NOT_VERIFIED'})
 
 
-def observer_process_alive(session_id):
+def observer_process_alive(session_id,query_file=None):
     marker=('HERMES_SESSION_ID='+session_id).encode()
     for p in Path('/proc').iterdir():
         if not p.name.isdigit():continue
         try:
             if marker in (p/'environ').read_bytes().split(b'\0'):return True
+            if query_file and str(query_file).encode() in (p/'cmdline').read_bytes().split(b'\0'):return True
         except (FileNotFoundError,ProcessLookupError):continue
         except (PermissionError,OSError):return True
     return False
@@ -74,7 +76,10 @@ def orphan_observer_lease(q,state):
         if j['state']!='NEEDS_RECONCILIATION':return False
         last=q.db.execute("SELECT detail FROM events WHERE job=? AND kind IN ('claimed','recovery_claimed') ORDER BY seq DESC LIMIT 1",(key,)).fetchone()
         if not last or json.loads(last['detail']).get('owner')!=data.get('owner'):return False
-    except (ValueError,KeyError,TypeError,OSError):return False
+        # --pass-session-id can be set after process startup; /proc/environ of
+        # the still-live CLI need not contain it. Check its exact query-file too.
+        if observer_process_alive(sid,q.root/'runs'/data['owner']/'input.txt'):return False
+    except (ValueError,KeyError,TypeError,AttributeError,OSError,sqlite3.Error):return False
     r=subprocess.run([sys.executable,str(BASE/'scripts/mgs-pc1-computer-use-lock.py'),'release','--agent','ares','--session-id',sid],capture_output=True,text=True,timeout=20)
     if r.returncode:return False
     result=json.loads(r.stdout)

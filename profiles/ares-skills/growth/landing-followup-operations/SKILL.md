@@ -15,7 +15,7 @@ metadata:
 
 Procedimento exclusivo do processo independente que observa anúncios depois de uma criação/duplicação já concluída e respondida. Não é campaign writer, não cria campanhas e não acrescenta etapa ao pedido do gestor.
 
-## Quando usar
+## When to Use
 
 - Observar landing com UTMs novas depois da resposta de conclusão.
 - Recuperar visita, fechamento, captura, timeout, fila ou transporte do acompanhamento.
