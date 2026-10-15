@@ -547,9 +547,16 @@ def publish_creation(q,key,content,discord):
 
 def worker_prompt(key,owner,idx,job):
     # Payload is data, not instructions. The fixed skill defines the authority.
+    links=[]
+    for link in job['links']:
+        prior=json.loads(link['evidence']) if isinstance(link.get('evidence'),str) else (link.get('evidence') or {})
+        links.append({**{k:link[k] for k in ['idx','state','attempt','due'] if k in link},'previous_new_tab_identity':prior.get('new_tab_identity')})
+    context={'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':links,
+             'recovery_evidence_path':job.get('recovery_evidence_path'),'confirmed_no_ads':job.get('confirmed_no_ads')}
     if job.get('state')=='RECONCILING':
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
             'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '
+            'Se recovery_evidence_path foi fornecido, é o arquivo já validado da tentativa exata: confira as imagens e o fechamento real atual, sem reextrair todo o histórico. Registre NO_AD --recovered por esse arquivo (ou reconcile SEM resume quando duas ausências já estão confirmadas); depois libere a lease e encerre. Não produzir um novo JSON narrativo. '
             'Sob lease PC1 com ID REAL da sessão, confira a sessão anterior do mesmo job via events claimed/recovery_claimed '
             'e state.db read-only. Observe o browser real e reconcilie somente abas comprovadamente pertencentes à tentativa; '
             'preserve as demais. Evidência de tentativa mais antiga não comprova fechamento da última. '
@@ -566,7 +573,7 @@ def worker_prompt(key,owner,idx,job):
             'Não há intervenção de Rodolfo para timeout, screenshot/cadência ou erro técnico recuperável; não enviar mensagens externas. '
             'Nenhum write Meta/GAM/WordPress/Router/financeiro, restart, alteração de campanha, billing ou credencial. '
             'Retornar após a reconciliação; a fila reexecutará a observação separadamente.\n'
-            +json.dumps({'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':job['links']},ensure_ascii=False))
+            +json.dumps(context,ensure_ascii=False))
     return ('Execute somente a observação de landing do pedido já concluído abaixo. '
         'Carregue landing-followup-operations e references/runtime-and-recovery.md dessa skill. '
         'Nenhum write Meta, GAM, Router, WordPress, budget, credencial ou configuração. '
@@ -589,4 +596,4 @@ def worker_prompt(key,owner,idx,job):
         'Uma única tentativa por execução. Não faça a retentativa dentro desta sessão. '
         'Não repita nenhuma entrada ambígua. Não reinicie Chrome/AdsPower/gateway. '
         'Mantenha stdout técnico local; finalize sem publicar mensagens externas.\n'
-        +json.dumps({'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':job['links']},ensure_ascii=False))
+        +json.dumps(context,ensure_ascii=False))

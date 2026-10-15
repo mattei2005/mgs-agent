@@ -448,6 +448,34 @@ class FollowupTests(unittest.TestCase):
         with patch.object(sys,'argv',args+['--frames-reviewed']),patch.object(cli,'Queue',return_value=self.q),patch.object(cli,'require_pc1_lease'):
             self.assertEqual(cli.main()['state'],'OBSERVED')
 
+    def test_prompt_omits_unrelated_large_evidence(self):
+        self.arm();j=self.q.claim('worker')
+        j['links'][0]['evidence']=json.dumps({'new_tab_identity':'offline-previous-tab','samples':[{'screenshot':'HUGE_UNRELATED_OFFLINE_DETAIL'}]})
+        prompt=m.worker_prompt(self.key,'worker',0,j)
+        self.assertNotIn('HUGE_UNRELATED_OFFLINE_DETAIL',prompt)
+        self.assertIn('offline-previous-tab',prompt)
+
+    def test_recovery_freezes_only_matching_real_attempt_metadata(self):
+        path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'
+        spec=importlib.util.spec_from_file_location('frozen_recovery_test',path);assert spec and spec.loader
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        self.clock.value=0;self.start();e={**self.closure(),'network_ad_confirmed':False,'visual_review':'Offline fixture review','observed_url':self.payload['links'][0]['landing_url'],'observation_screenshot':'fixture-7.png'}
+        with self.q.tx():self.q.event(self.key,'reconciled_no_ad',{'idx':0,'attempt':1,'result':'NO_AD','evidence':e})
+        d=self.root/'frozen';d.mkdir();j=self.q.job(self.key)
+        self.assertTrue(cli.prepare_recovery_proof(self.q,j,0,d))
+        self.assertTrue(Path(j['recovery_evidence_path']).is_file())
+        self.assertEqual(j['confirmed_no_ads'],1)
+        self.assertEqual(self.q.job(self.key)['links'][0]['state'],'OPEN_INTENT')
+
+    def test_recovery_does_not_freeze_previous_attempt_as_current(self):
+        path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'
+        spec=importlib.util.spec_from_file_location('wrong_frozen_recovery_test',path);assert spec and spec.loader
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        self.clock.value=0;self.start();e={**self.closure(),'network_ad_confirmed':False,'visual_review':'Offline fixture review','observed_url':self.payload['links'][0]['landing_url'],'observation_screenshot':'fixture-7.png'}
+        with self.q.tx():self.q.event(self.key,'reconciled_no_ad',{'idx':0,'attempt':1,'result':'NO_AD','evidence':e})
+        j=self.q.job(self.key);j['links'][0]['attempt']=2;d=self.root/'wrong-frozen';d.mkdir()
+        self.assertFalse(cli.prepare_recovery_proof(self.q,j,0,d));self.assertNotIn('recovery_evidence_path',j)
+
     def second_account(self):
         p=copy.deepcopy(self.payload)
         p.update(account_id='111111111111115',source_thread_id='150000000000000006',source_channel_id='150000000000000007',request_id='second-manager-fixture',campaign_ids=['111111111111116'])

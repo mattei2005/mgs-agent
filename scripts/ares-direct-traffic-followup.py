@@ -13,6 +13,7 @@ import time
 import uuid
 from pathlib import Path
 from ares_campaign_v3.landing_followup import Queue, Discord, ROOT, BASE, publish_creation, worker_prompt
+from ares_campaign_v3 import landing_followup as core
 from ares_campaign_v3.landing_intake import Intake, native_busy
 
 
@@ -102,6 +103,29 @@ def orphan_observer_lease(q,state):
     return True
 
 
+def prepare_recovery_proof(q,job,idx,directory):
+    """Freeze already-reconciled facts, not a new browser result or a PASS."""
+    target=job['links'][idx]
+    for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='reconciled_no_ad' ORDER BY seq DESC",(job['key'],)):
+        d=json.loads(row['detail'])
+        if d.get('idx')!=idx or d.get('attempt')!=target['attempt']:continue
+        e=d.get('evidence') or {}
+        try:
+            core.validate_closure(e)
+            if e.get('network_ad_confirmed') is not False or not e.get('visual_review'):continue
+            url=core.urllib.parse.urlsplit(e['observed_url']);source=core.urllib.parse.urlsplit(job['payload']['links'][idx]['effective_campaign_url'])
+            if url.hostname!=source.hostname or url.query!=source.query:continue
+            core.scope(e['observed_url'])
+            observed=core.file_evidence(e['observation_screenshot'])['captured_at']
+            opened=[json.loads(x['detail'])|{'at':x['at']} for x in q.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq",(job['key'],)) if json.loads(x['detail']).get('idx')==idx]
+            if not opened or observed<opened[-1]['at'] or core.file_evidence(e['closed_screenshot'])['captured_at']<observed:continue
+        except (ValueError,KeyError,TypeError,OSError):continue
+        p=directory/'recovery-evidence.json';p.write_text(json.dumps(e,ensure_ascii=False));os.chmod(p,0o600)
+        job['recovery_evidence_path']=str(p);job['confirmed_no_ads']=q.no_ad_count(job['key'],idx)
+        return True
+    return False
+
+
 def tick(q):
     # Existing native turns have absolute priority; this adds nothing to them.
     if native_busy():return {'state':'WAITING_NATIVE_TURN','creation_path_unchanged':True}
@@ -131,6 +155,7 @@ def tick(q):
         repairing=j['state']=='RECONCILING'
         idx=next(x['idx'] for x in j['links'] if x['state'] in ({'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'} if repairing else {'READY','WAIT_RETRY'}) and (repairing or x['due']<=q.now()))
         directory=q.root/'runs'/owner;directory.mkdir(parents=True,mode=0o700)
+        if repairing:prepare_recovery_proof(q,j,idx,directory)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)
         env=dict(os.environ)
         for name in ('HERMES_SESSION_ID','HERMES_KANBAN_TASK','HERMES_KANBAN_BOARD'):
