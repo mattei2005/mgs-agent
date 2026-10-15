@@ -1,5 +1,9 @@
 # Análise SHEIN por produto — Meta × Smart Bidding
 
+## Gate de apresentação obrigatório
+
+Usar o renderer offline e a validação exata de `references/canonical-report-renderer.md` antes de qualquer entrega padrão, com leitura atual do contrato e binding thread/conta. Não entregar o texto montado à mão nem usar modelos antigos da conversa para omitir pipes, histórico ou média. O gate não substitui a coleta live nem autoriza novas postagens durante auditoria/limpeza.
+
 ## Escopo e fontes
 
 Resolver conta/gestor pelo contrato vivo e validar o domínio antes da consulta. Analisar somente o CUSTOMER_ID solicitado. Usar Meta Insights diário e SB Reports > Adgroup, juntando CAMPAIGN_ID + data civil; UTM_ADGROUP preserva o drill-down. Pricing é evidência de monetização por operação/regra, não automaticamente por produto ou gestor.
@@ -134,7 +138,7 @@ Pedido genérico usa essas treze colunas (R/E + doze originais) e o histórico d
 
 Definições: Início = primeira entrega comprovada; Nº = número literal da campanha; Produto = rótulo do nome, não prova visual; Quiz = versão nos destinos reais dos anúncios; Gasto = Meta; Receita = `NET_REVENUE` SB; Saldo = Receita − Gasto; Est.Health = fórmula Adgroup sobre somas; ROI = 100 × (Receita − Gasto) / Gasto; ROI est. = 100 × (`REVENUE_ESTIMATED` − Gasto) / Gasto; ROAS = compras Meta; Lance = estratégia live MAXVOL/COCAP/BIDCAP, misto ou n/d. As receitas de consulta abaixo continuam aplicáveis; não inferir Quiz/Lance pelo nome. Sem denominador, n/d.
 
-A fonte estrutural é `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, registro vigente `ARES-SHEIN-REPORT-PIPE-SEPARATORS-20261015`, sucessor de `ARES-SHEIN-REPORT-COPY-FAMILY-ORDER-20261015`, `ARES-SHEIN-REPORT-PRODUCTSTART-COPY-20261015`, `ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015`, `ARES-SHEIN-REPORT-RE-HISTORY7D-20261015` e `ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015`, com histórico preservado. A decisão substitui explicitamente o default provisório de sete colunas aprovado na thread `1557059385417797723` e os defaults históricos por conta abaixo; preserva histórico, sem duas versões ativas do mesmo padrão. O renderizador legado `shein-health-report.py` é fonte de coleta parcial, não apresentação final vigente; completar campos faltantes antes de entregar. Não criar cron, automação ou reemitir relatórios antigos por esta decisão.
+A fonte estrutural é `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, registro vigente `ARES-SHEIN-REPORT-CANONICAL-GATE-20261015`, sucessor de `ARES-SHEIN-REPORT-PIPE-SEPARATORS-20261015`, `ARES-SHEIN-REPORT-COPY-FAMILY-ORDER-20261015`, `ARES-SHEIN-REPORT-PRODUCTSTART-COPY-20261015`, `ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015`, `ARES-SHEIN-REPORT-RE-HISTORY7D-20261015` e `ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015`, com histórico preservado. A decisão substitui explicitamente o default provisório de sete colunas aprovado na thread `1557059385417797723` e os defaults históricos por conta abaixo; preserva histórico, sem duas versões ativas do mesmo padrão. O renderizador legado `shein-health-report.py` é fonte de coleta parcial, não apresentação final vigente; completar campos faltantes antes de entregar. Não criar cron, automação ou reemitir relatórios antigos por esta decisão.
 
 ### Histórico supersedido — modelos por canal/conta
 

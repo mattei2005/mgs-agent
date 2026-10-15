@@ -232,6 +232,12 @@ Conclusão: produto visual, idioma e claim não dependem do nome bruto.
 
 ## Relatórios e otimização
 
+### Gate obrigatório — renderer único e vínculo da thread
+
+Antes de cada pedido e novamente antes da entrega, ler o contrato atual `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`. Nas 36 threads Intraday dos seis gestores, resolver thread → conta pelo índice `data/ares/discord/shein-intraday-report-bindings.json`. Histórico do Discord ou contexto de sessão antigo não substitui o contrato atual; apagar mensagens remotas não apaga automaticamente contexto interno.
+
+Não montar o relatório padrão manualmente nem reutilizar um renderer específico antigo. Após a coleta live, materializar o modelo normalizado conforme `references/canonical-report-renderer.md`, executar `/root/.hermes/profiles/ares/scripts/shein-report-layout.py render --thread-id <ID> --input <modelo.json> --output <report.md>` e, imediatamente antes da entrega, `validate --thread-id <ID> --input <modelo.json> --report <report.md> --receipt <recibo.json>`. Entregar o texto gerado sem reescrever cabeçalhos, tabelas, cores, agrupamentos ou média. Falha de validação bloqueia publicação, não a correção local. O recibo comprova layout/modelo/contrato, não coleta live nem entrega Discord; essas evidências continuam separadas. Contas vazias conservam ambos os cabeçalhos, sem inventar linhas. O renderer é offline: nunca consulta nem escreve Meta/SB/Discord e não altera schedule/cron.
+
 ### Continuidade e alterações incrementais do relatório
 
 1. Para pedido genérico de relatório de qualquer conta de anúncio SHEIN, independentemente de domínio, canal, gestor ou solicitante autorizado (incluindo Geizian), use o padrão canônico vigente de treze colunas abaixo (R/E antes das doze já aprovadas), seguido do histórico diário de sete datas. Modelos históricos de sete colunas ou específicos de uma conta não substituem esse padrão por inferência. Um pedido explícito diferente pode adaptar colunas, agrupamento e ordenação; um complemento do relatório já emitido preserva seu snapshot e recorte. Para Meta × Smart Bidding, carregue `references/smartbidding-product-analysis.md` antes de procurar runners ou snapshots; recupere a referência quando o pedido for explicitamente aquele relatório/modelo. Não remover colunas expressamente pedidas nem trocar agrupamento sem pedido.

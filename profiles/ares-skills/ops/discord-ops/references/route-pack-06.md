@@ -70,6 +70,10 @@ Fluxo padrão:
 6. Manter `data/discord-thread-imports/` local-only no `.gitignore`; não versionar históricos importados.
 
 ---
+## Limpeza de mensagens solicitada — permissão efetiva e escopo
+
+Antes de apagar mensagens por pedido autorizado, confirmar o pai e os IDs exatos das threads, paginar o inventário e preservar evidência local protegida. `Manage Threads` não concede `Manage Messages`: calcular as permissões efetivas do bot no canal-pai, incluindo overwrites de everyone, roles e membro, não somente o bit base do guild. Sem `Manage Messages`, a própria identidade do bot pode apagar suas próprias mensagens por DELETE individual, mas não as de outros autores; não declarar a thread vazia enquanto houver mensagens remanescentes. Não usar credencial de outro agente/admin como atalho de permissão. Se o pedido abranger todos os autores e faltar permissão, concluir somente a camada autorizada/possível, registrar readback e escalar a ação humana exata para o restante; não alterar permissões implicitamente. Depois de possível mutação parcial, reconciliar pelos IDs antes de retry, respeitar retry_after e validar os alvos por GET. Preservar canais e threads quando o pedido for apagar somente mensagens; não confundir limpeza remota com reset de sessão interna.
+
 ## SEÇÃO G — Importar histórico de thread antiga por link/ID
 
 Quando Rodolfo/Raquel pedir para Zeus, Atena, Ares ou outro agente MGS ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md`.

@@ -1,0 +1,28 @@
+{
+  "changed_files": [
+    "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+    "/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json",
+    "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+    "/root/.hermes/profiles/ares/tests/test_shein_report_layout.py",
+    "/root/.hermes/profiles/ares/tests/fixtures/shein_report_real_3.json",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md",
+    "/root/.hermes/profiles/ares/skills/ops/discord-ops/references/route-pack-06.md",
+    "/root/mgs-agent/data/knowledge-registry.json",
+    "/root/mgs-agent/data/agent-checkpoints.json"
+  ],
+  "audit_directory": "/root/mgs-agent/data/ares/discord/intraday-audit-clear-1560303769680355525",
+  "file_count": 12,
+  "scope": "reporting correction and user-authorized Discord own-message cleanup",
+  "not_changed": [
+    "Meta campaigns",
+    "GAM",
+    "Router",
+    "finance dashboard",
+    "permissions",
+    "gateway runtime",
+    "schedules"
+  ]
+}

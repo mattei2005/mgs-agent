@@ -1,0 +1,40 @@
+# Renderer e gate canônicos de relatório SHEIN
+
+## Objetivo
+
+Evitar divergência entre threads e uso de modelos históricos em pedidos genéricos. A política visual continua exclusivamente em `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`. O índice `data/ares/discord/shein-intraday-report-bindings.json` vincula as 36 threads a contas exatas; não amplia autoridade. Ler ambos em cada pedido, não usar um snapshot de configuração como estado vigente.
+
+## Modelo normalizado
+
+O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:
+
+- `account`: `id` (com ou sem act_), `name`, `currency`, `timezone_name` lidos na Meta.
+- `date`: data civil ISO do relatório.
+- `history_dates`: exatamente a data do relatório e as seis datas anteriores, crescentes.
+- `source_timestamps.insights`: horário financeiro ISO com offset; preservar também os horários de SB, delay e configuração no modelo/audit.
+- `delay.totalMinutes`: leitura atual do publisher no SB; ausente/inválido vira n/d.
+- `rows`: uma linha por campaign ID real com `id`, `name` bruto, `number` literal, `product` resumido, `quiz` e `bid` comprovados ou n/d/misto explícitos, `spend` Meta, `net_revenue` e `estimated_revenue` SB, `roi`, `estimated_roi`, `health`, `roas`, `first_delivery` ISO ou null e `history`.
+- Cada item de `history`: `date`, `spend` Meta diário, `net_revenue` SB diário, `roi` e `partial`. O dia atual utiliza o mesmo snapshot financeiro da tabela principal; sem receita/gasto positivo, roi=null. Campos numéricos podem ser strings decimais; não substituir indisponível por zero.
+
+O renderer valida identidade da thread/conta, presença dos campos, cálculo de ROI, sete datas, igualdade da última coluna com o principal e origem COPY explícita. Deriva R/E, Saldo, média com cobertura, família e paginação pelo contrato atual. Não inventar Quiz/Início/Lance para passar o schema: null/n/d comprovado é preferível a inferência. A fonte de coleta precisa seguir o playbook live Meta × SB; passar no gate visual não prova que a coleta foi atualizada.
+
+## Execução padrão nas threads Intraday
+
+1. Coletar e persistir fontes live, sem publicar parciais financeiros sem QA.
+2. Materializar o modelo normalizado com proveniência e o binding correto.
+3. Executar `python3 /root/.hermes/profiles/ares/scripts/shein-report-layout.py render --thread-id <thread_id> --input <model.json> --output <report.md>`.
+4. Executar imediatamente antes da resposta `python3 /root/.hermes/profiles/ares/scripts/shein-report-layout.py validate --thread-id <thread_id> --input <model.json> --report <report.md> --receipt <receipt.json>`.
+5. Usar o report.md gerado integralmente na entrega nativa, sem remontar cabeçalhos ou alterar tabelas. O arquivo `.parts.json` contém blocos completos abaixo de 2000 caracteres. Validar a continuação nativa quando o relatório ultrapassar o limite de uma entrega; não tratar geração local como prova de entrega. Sem anexo não pedido e sem POST paralelo de mensagens por esse helper.
+6. Qualquer alteração no contrato ou texto torna o recibo anterior insuficiente; repetir somente render/validate com o mesmo snapshot, salvo pedido de atualização financeira.
+
+O gate compara o texto exato com o render atual. Ele rejeita remoção de pipes/Quiz, falta do histórico, divergência de ROI, contas trocadas e modelos incompletos. Conta vazia mantém os cabeçalhos do principal e do histórico e declara ausência de linhas; não criar linhas financeiras fictícias. Fora das 36 threads, a coleta e autorização próprias continuam necessárias; o renderer também atende modelos autorizados em Diretoria, sem fingir binding a uma thread diferente.
+
+## Correção e limpeza de threads
+
+Ao auditar relatórios em vários canais, paginar todo o histórico, preservar evidência local protegida e classificar os reports reais antes de qualquer exclusão. Corrigir a camada de formatação/procedimento, testar localmente e não publicar report novo se o pedido disser aguardar. Para apagar mensagens, usar somente os IDs de threads autorizados e verificar o pai; preservar canais, threads, membros e permissões. Após cada mutação, reler os alvos. Mensagens apagadas remotamente podem continuar no contexto interno; nos próximos pedidos o contrato atual e o gate prevalecem sobre exemplos antigos.
+
+## Testes
+
+`python3 -m unittest discover -s /root/.hermes/profiles/ares/tests -p test_shein_report_layout.py -v`.
+
+A suíte usa uma pequena fixture real Meta × SB, além de testes sintéticos explicitamente unitários de limites, ciclos e dados faltantes. Cobre cores em 10/40, média sem imputação, conta vazia, vínculo thread/conta, famílias em múltiplas gerações, ciclos, alinhamento Unicode, preservação de dados e rejeição de texto modificado. Uma renderização local completa também deve ser exercitada antes de promover alteração do renderer. O helper não tem transporte de publicação e não acessa a rede.
