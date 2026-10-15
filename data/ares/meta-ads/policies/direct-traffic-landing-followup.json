@@ -149,7 +149,15 @@
     ],
     "scope_frozen_at": "2026-10-15T00:51:18.908033-04:00",
     "do_not_interrupt_active_cleanup": true,
-    "no_implicit_extra_landing_visit": true
+    "no_implicit_extra_landing_visit": true,
+    "authorized_new_observation_cycle_after_peers": {
+      "enabled": true,
+      "authority_message_id": "1560151664692822079",
+      "scope": "Only the deferred C121, after the frozen peers are processed",
+      "maximum_no_ad_attempts": 2,
+      "preserve_all_previous_attempts": true,
+      "once_per_authority_message": true
+    }
   },
   "progress_reporting": {
     "enabled": true,

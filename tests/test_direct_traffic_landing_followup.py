@@ -501,6 +501,23 @@ class FollowupTests(unittest.TestCase):
         peer=self.second_account();self.priority_fixture([peer])
         self.assertEqual(self.q.claim_recovery('cleanup')['key'],self.key)
 
+    def test_authorized_c121_return_is_once_after_peers_preserving_history(self):
+        self.start();self.q.result(self.key,'worker',0,'NO_AD',self.closure());self.clock.value+=60
+        self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('tab-2'))
+        peer=self.second_account();cfg=self.priority_fixture([peer])
+        cfg['current_priority']['authorized_new_observation_cycle_after_peers']={'enabled':True,'authority_message_id':'150000000000000088'}
+        path=self.root/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json';path.write_text(json.dumps(cfg))
+        self.assertIsNone(self.q.claim_recovery('early'));self.assertEqual(self.q.no_ad_count(self.key,0),2)
+        with self.q.tx():self.q.db.execute("UPDATE jobs SET state='OBSERVED' WHERE key=?",(peer,))
+        self.assertIsNone(self.q.claim_recovery('return'));self.assertEqual(self.q.no_ad_count(self.key,0),0)
+        self.assertEqual(self.q.job(self.key)['links'][0]['attempt'],2)
+        for tab in ['cycle-tab-3','cycle-tab-4']:
+            self.clock.value+=60;self.q.claim('return');self.q.begin(self.key,'return',0);self.q.result(self.key,'return',0,'NO_AD',self.closure(tab))
+        self.assertEqual(self.q.no_ad_count(self.key,0),2)
+        self.q.claim_recovery('diagnose')
+        self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='priority_retry_cycle_started'").fetchone()[0],1)
+        self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='observation_result'").fetchone()[0],4)
+
     def test_safe_c121_intervention_note_waits_until_other_jobs(self):
         self.start();peer=self.second_account();self.priority_fixture([peer])
         e={**self.closure(),'human_action_required':True,'required_action':'Offline fixture: inspect publisher setting','diagnosis':'offline serving investigation'}

@@ -230,6 +230,7 @@ class Queue:
         with self.tx():
             if self.db.execute("SELECT 1 FROM jobs WHERE state='WAITING_HUMAN_UNCLOSED'").fetchone():return None
             if self.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING') AND lease_until>?",(self.now(),)).fetchone():return None
+            self.activate_authorized_return()
             rows=self.db.execute("SELECT * FROM jobs WHERE state IN ('NEEDS_RECONCILIATION','ATTENTION') AND (lease_until IS NULL OR lease_until<=?) ORDER BY created,key",(self.now(),)).fetchall()
             row=next((r for r in rows if r['state']=='NEEDS_RECONCILIATION' or not self.target_waits_for_others(r['key'])),None)
             if not row:return None
@@ -239,12 +240,36 @@ class Queue:
             return self.job(key)
 
     def no_ad_count(self,key,idx):
+        cutoff=0
+        for r in self.db.execute("SELECT seq,detail FROM events WHERE job=? AND kind='priority_retry_cycle_started' ORDER BY seq DESC",(key,)):
+            if json.loads(r['detail']).get('idx')==idx:cutoff=r['seq'];break
         attempts=set()
-        for r in self.db.execute("SELECT seq,detail FROM events WHERE job=? AND kind IN ('observation_result','reconciled_no_ad')",(key,)):
+        for r in self.db.execute("SELECT seq,detail FROM events WHERE job=? AND seq>? AND kind IN ('observation_result','reconciled_no_ad')",(key,cutoff)):
             d=json.loads(r['detail'])
             confirmed=d.get('result')=='NO_AD' or (not d.get('result') and d.get('state') in {'WAIT_RETRY','ATTENTION'} and not (d.get('evidence') or {}).get('diagnosis'))
             if d.get('idx')==idx and confirmed:attempts.add(d.get('attempt',('event',r['seq'])))
         return len(attempts)
+
+    def activate_authorized_return(self):
+        # Runs only inside the existing claim transaction, after every peer is
+        # processed. Historical attempts stay intact; a new cycle needs its
+        # own explicit user instruction, not an automatic technical retry.
+        try:rule=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('current_priority') or {}
+        except (OSError,ValueError):return False
+        permission=rule.get('authorized_new_observation_cycle_after_peers') or {}
+        generation=permission.get('authority_message_id');key=rule.get('target_job');idx=rule.get('target_index')
+        if rule.get('mode')!='OTHER_CURRENT_WORK_BEFORE_C121' or permission.get('enabled') is not True or not re.fullmatch(r'[0-9]{15,20}',str(generation or '')) or permission.get('maximum_no_ad_attempts',2)!=2 or not key or self.target_waits_for_others(key):return False
+        row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone();job=self.db.execute('SELECT state FROM jobs WHERE key=?',(key,)).fetchone()
+        if not row or not job or row['state']!='ATTENTION' or job['state']!='ATTENTION':return False
+        for r in self.db.execute("SELECT detail FROM events WHERE job=? AND kind='priority_retry_cycle_started'",(key,)):
+            if json.loads(r['detail']).get('authority_message_id')==generation:return False
+        evidence=json.loads(row['evidence'] or '{}')
+        try:validate_closure(evidence)
+        except (ValueError,KeyError,OSError):return False
+        self.event(key,'priority_retry_cycle_started',{'idx':idx,'authority_message_id':generation,'previous_attempt_count_preserved':row['attempt'],'maximum_no_ad_attempts':2,'new_visit_not_yet_started':True})
+        self.db.execute("UPDATE links SET state='WAIT_RETRY',due=? WHERE job=? AND idx=?",(self.now()+60,key,idx))
+        self.db.execute("UPDATE jobs SET state='READY',owner=NULL,lease_until=NULL WHERE key=?",(key,))
+        return True
 
     def claim(self,owner,ttl=600):
         with self.tx():
