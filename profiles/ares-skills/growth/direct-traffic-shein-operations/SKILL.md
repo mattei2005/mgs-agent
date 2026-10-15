@@ -167,6 +167,10 @@ NNN - DATA - QUIZ - PRODUTO - LANCE - (TRACKING) - (US_APP) - event_add_to_wishl
 
 Gerar pelo formatter central `shein_naming.campaign_name`; não inserir o marcador em produto, tracking ou UTMs e não duplicá-lo ao usar uma fonte já marcada. A regra é prospectiva: não renomear campanhas existentes nem modificar manifests já selados ou pedidos em recuperação. O parser aceita fontes históricas sem o marcador; a compatibilidade do validador com manifests anteriores não autoriza omitir `(US_APP)` nos próximos pedidos. Não transportar essa regra para CAR/BOT/outras operações. Fonte canônica: `SHEIN-US-DIRECT.json#/campaign_naming_policy/us_app_marker`. Regressão offline: `tests/test_shein_us_app_naming.py`.
 
+## Renomeação literal agendada
+
+Quando Rodolfo autorizar uma troca de texto no nome de campanhas existentes, preservar literalmente todo o restante do nome; não reconstruir pelo formatter de novas campanhas nem inserir outros campos por inferência. Em agendamento, resolver data/fuso, fixar a lista autorizada de contas por ID, impedir qualquer write antes do horário e refazer o inventário paginado no disparo. Separar ativas/pausadas do histórico terminal. Usar tarefa determinística `no_agent=true`, saída curta em PT-BR e readback da agenda; não publicar wrappers técnicos. Sob lease da conta, persistir nome anterior/desejado e IDs antes do write exclusivo de `name`; reler nome, status, budget, lance, início e filhos, e reconciliar a mesma camada após resposta incerta, sem replay cego. Preservar pedidos de criação e manifests existentes. Testes de literalidade, escopo, horário, drift e resposta perdida: `tests/test_shein_scheduled_name_replacement.py`.
+
 ## Correção de número/tracking em campanha existente
 
 Quando o pedido autorizar somente nome + link e preservar o restante, editar os IDs existentes; não criar campanha, conjunto, anúncio, mídia ou alterar budget/lance/schedule/status configurado. Construir o nome pelo `shein_naming.campaign_name`, com a data de início e o quiz/bid reais. Não renomear conjuntos/anúncios sem escopo expresso.

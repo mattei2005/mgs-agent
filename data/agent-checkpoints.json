@@ -1393,12 +1393,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-US-EN-RENAME-20261015-2355",
-      "next_step": "Preparar runner deterministico name-only, dry-run live read-only, testes de idempotencia/escopo e agenda one-shot com readback; nao escrever Meta antes de 23h55.",
-      "objective": "Agendar US-EN para (US_APP) somente em campanhas existentes de Escalatepower Mavroa Vizioid as 23h55 Nova York hoje",
-      "source": "data/ares/meta-ads/audit/shein/account-campaign-name-counts-1560359535175143545/collection.json",
-      "state": "preparing_schedule",
+      "next_step": "One-shot deterministico no_agent agendado 15/10 23:55 America/New_York; preview32 campanhas (Escalatepower1 Mavroa6 Vizioid25), releitura live no disparo; preservar demais campos e terminais. Confirmar execution.json apos disparo; nao executar antes.",
+      "objective": "Trocar literalmente US-EN para (US_APP) em Escalatepower Mavroa Vizioid as 23h55 Nova York em 15/10",
+      "source": "data/ares/meta-ads/audit/shein/shein-us-en-to-us-app-20261015-2355-rodolfo/change-inventory.json",
+      "state": "scheduled_verified",
       "thread_id": "1560359535175143545",
-      "updated_at": "2026-10-15T19:03:09+00:00"
+      "updated_at": "2026-10-15T19:12:23+00:00"
     },
     {
       "agent": "ares",
@@ -3873,12 +3873,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-mass-1560295338257023118",
-      "next_step": "Não marcar completo58. Aguardar resposta humana explícita ao pedido1560343830438350959; conferirIDrealRodolfo,scope13cache+diagnósticoZeus eCriticalSubsetantesdequalquerarquivoexcluído. Revalidar13paths/hashes/owner/sem symlink/metodonativo;ausênciaouregeneraçãonãoautorizaalvosextras. SeZeusforautorizadorepassarorigemhumanaàthread1560319225732669606;diagnósticosóleitura,nãonovocodeplugin/locale/role. Retomar11IDsTopfeedexistentes,validarscores/idioma/publicaçãoecontar15elegíveiscom4P1sem4REC. Entregarrelatórioparcialcom47URLs+11editlinks,nãorepetirPOSTouresumostécnicossemavanço.",
-      "objective": "Concluir58SEO com publicação e QAreal; entrega parcial documentada",
-      "source": "/root/.hermes/profiles/atena/work/seo-mass-1560295338257023118/final-partial-verification.json",
-      "state": "entrega parcial bloqueada por confirmação humana.58criados/58mídias;47publicados(15dicas+2jogos+15consórcio+15economia),11topfeeddraft.47rest/http e dadosyoast2camadas;81–92seo/90read,1034–1358palavras,total54869,17datas18/09–13/10.47mobilefísicoclient/inner390semoverflow comprovados:44normais+3leiturafriaredeurlssemquery.3wrapperscore/table aprovadospelopai comtextocélulasfontesimagensinalterados,scorergenuínoreexecutado/native3relido;invalidaçãoautomáticados2outputsuagdeassetcacheaceita,nãorestaurarcssderivadoantigo.supersedeobloqueioanteriorwarmbrowserpormapeamentobrutorede/arquivoatualecodecoldcanonical;nenhumpurgedessashtmlexecutado.2menushomescanônicasdesktop/mobile4viewsconfirmadas.13xmlsitemapcacheobsoletoscontinuamcom0/47urlsatuais;nenhumaexclusãomanual.2confirmaçõesperguntadasarodolfomsg1560343830438350959continuampendentes:13xmlexatosezeustopfeedsóleitura;semnovaautorizaçãoeditorialraquel.",
+      "next_step": "ReceberresultadoES11canário/persistência;parentrevalidarhash/diffsfactuaisseestiloalterado,ambascamadasnativas,sourceEUAESlocalecontext;aprovarQA/release11e publicarMESMOSIDs. VerificarHTTP/canonical/robots/meta/mídia/layout390/autorecontar15nãoRECemPréstamos(4P1+11SEO);nãoeditarantigos. Cache13continuaaguardandoconfirmaçãoexplícitaexclusãopontual,nãodeduzirdep promoçãoAdmin. Nãomodificarlocale/role/pluginsnemrestart gateway. RegraeditorialRaquelvigente,semnovoOK.",
+      "objective": "Finalizar58artigosSEO retomando11Topfeed semduplicações",
+      "source": "/root/.hermes/profiles/atena/work/seo-mass-1560295338257023118/technical/topfeed-resume/parent-auth-context-native-readback.json",
+      "state": "retomada topfeed emexecução. pai validoumsgrodolfo1560362232821588084eautenticidadezeus1560363741902545058. roleatenauid7administrator/metadata1pwd e rest/native confirmados; realrootfinanzas-topfeeds01ownerruncloud/home/siteurlconferidos;11draftshashes/autor7/posttype/nativelangtagslang_es+usverificados.global/userlocalept_brpreservados,sempolylang. clienttasklocalcompatíveladminsomentetopf/7,demaissiteseditor/legadowp_batchimutável;0rolecredlocalepluginwritesporatena. esscoringcanário54104edezrestantesdelegadossa-0-ee023d9dcomexpansãoapenasapóspersistênciacorreta,sempublicação/scoresforçados.47anteriorespermanecempublicados.13xmlcachenãoautorizados:aaprovaçãododiagnósticoemzeusthreadnãoincluiexclusãocache. ownskillproceduralrolesguardupdated/readback,globalaccessrefcapturekci-a14de2f4842c6dc7candidatoapenas. inventory/reportinfra1560367931907514389readbackembedlimpook.",
       "thread_id": "1560295338257023118",
-      "updated_at": "2026-10-15T18:05:36+00:00"
+      "updated_at": "2026-10-15T19:11:34+00:00"
     },
     {
       "agent": "atena",
@@ -5972,5 +5972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T19:03:09+00:00"
+  "updated_at": "2026-10-15T19:12:23+00:00"
 }

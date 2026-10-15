@@ -73,6 +73,16 @@ def timing_guard(now):
         raise ValueError('late_start_requires_review')
 
 
+def safe_reason(exc):
+    allowed = {'too_early', 'late_start_requires_review', 'account_identity_drift',
+               'pagination_incomplete', 'child_pagination_requires_review',
+               'campaign_account_drift', 'campaign_name_external_drift',
+               'non_name_invariant_drift', 'name_readback_pending',
+               'authorized_account_scope_drift'}
+    reason = str(exc)
+    return reason if reason in allowed else type(exc).__name__
+
+
 def get(common, token, path, params):
     status, body, _ = common.graph_get(path, token, params)
     if status != 200:
@@ -231,7 +241,7 @@ def main():
                             if attempt == 2:
                                 raise
                 except Exception as exc:
-                    target.update(error_type=type(exc).__name__, error_reason=str(exc)[:200], state='RECOVERY_REQUIRED')
+                    target.update(error_type=type(exc).__name__, error_reason=safe_reason(exc), state='RECOVERY_REQUIRED')
                     failures.append(target['id'])
                     save(state)
                 finally:
@@ -240,6 +250,8 @@ def main():
             verified = [t for t in state['targets'] if t.get('state') == 'VERIFIED']
             state.update(status='RECOVERY_REQUIRED' if failures else 'COMPLETE',
                          verified_count=len(verified), failed_ids=failures)
+            if failures:
+                state['next_step'] = 'Resolve per-target recorded error, GET exact saved IDs, compare before/desired names and invariants, resume only missing name writes under the same request. No other mutations.'
             save(state)
             atomic(AUDIT / 'execution.json', state)
             if failures:
@@ -252,7 +264,7 @@ def main():
             return 0
         except Exception as exc:
             state.update(status='RECOVERY_REQUIRED', error_type=type(exc).__name__,
-                         error_reason=str(exc)[:200], next_step='Reconcile exact saved IDs and before/desired names; resume only missing name updates after resolving recorded cause. No campaign creation or non-name writes.')
+                         error_reason=safe_reason(exc), next_step='Reconcile exact saved IDs and before/desired names; resume only missing name updates after resolving recorded cause. No campaign creation or non-name writes.')
             save(state)
             print('⚠️ Troca US-EN → (US_APP) ainda não concluída. Pedido preservado para recuperação pelo Ares; nenhuma ampliação de escopo.')
             return 0  # Cron transport succeeded; operational failure remains in durable state.
