@@ -29,6 +29,14 @@ For an explicitly authorized historical keepalive cleanup:
 5. Verify every exact deleted ID returns Discord `404 / 10008`, then perform a fresh complete scan of active threads. Declare completion only when all pages are read and the literal-match count is zero. Aggregate counts in code, distinguishing scanned threads, affected threads, matched messages, actual deletions and already-absent messages.
 6. Keep scratch artifacts local and append the final audit with exact IDs and verification results. This is a one-time cleanup, not a new recurring cron.
 
+## System messages that Discord refuses to delete
+
+- Classify every inventoried message by its API `type` before cleanup. Thread recipient-add events (`type=1`) can appear with an agent author but are system events, not ordinary messages authored by that bot.
+- On HTTP 403 / Discord code `50021` (`Cannot execute action on a system message`), stop DELETE retries for that system-message class. `MANAGE_MESSAGES` or the apparent author's identity does not resolve that API restriction; do not escalate permissions or try another identity as a workaround.
+- Continue only the other exact, authorized deletable IDs. Verify each deletion with GET 404 / 10008, scan every target thread, and report ordinary-message cleanup separately from preserved system events. Never claim an empty thread when system events remain.
+- Preserve thread/channel IDs. Deleting and recreating a thread is a scope change, not a cleanup fallback. If literal zero-message acceptance remains blocked, document exact residual IDs and ask the authorized requester whether preserving system events is acceptable; do not silently redefine completion.
+- Official error reference: https://docs.discord.com/developers/topics/opcodes-and-status-codes (`50021`).
+
 ## Validation checklist
 
 - Explicit deletion scope from Rodolfo

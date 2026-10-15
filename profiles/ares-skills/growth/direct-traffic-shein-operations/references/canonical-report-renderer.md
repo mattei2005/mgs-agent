@@ -33,6 +33,10 @@ O gate compara o texto exato com o render atual. Ele rejeita remoção de pipes/
 
 Ao auditar relatórios em vários canais, paginar todo o histórico, preservar evidência local protegida e classificar os reports reais antes de qualquer exclusão. Corrigir a camada de formatação/procedimento, testar localmente e não publicar report novo se o pedido disser aguardar. Para apagar mensagens, usar somente os IDs de threads autorizados e verificar o pai; preservar canais, threads, membros e permissões. Após cada mutação, reler os alvos. Mensagens apagadas remotamente podem continuar no contexto interno; nos próximos pedidos o contrato atual e o gate prevalecem sobre exemplos antigos.
 
+## Origem COPY com padding diferente
+
+Compare a identidade numérica para resolver o pai explícito dentro da mesma conta/produto/seleção (por exemplo, `COPY C6` resolve `006` quando único), preservando os tokens literais `006` e `COPY C6` na apresentação e no modelo. Não retire zeros dos nomes nem altere o tracking para contornar o gate. Se mais de um ID tiver o mesmo número após a comparação numérica, mantenha a ambiguidade explícita, sem escolher um pai. O teste `test_padded_copy_parent_keeps_literals` cobre vínculo único, preservação integral do modelo e ambiguidade numérica; a suíte canônica foi exercitada com esse caso e com relatório live.
+
 ## Testes
 
 `python3 -m unittest discover -s /root/.hermes/profiles/ares/tests -p test_shein_report_layout.py -v`.
