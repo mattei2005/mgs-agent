@@ -3833,12 +3833,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-massa-1559930384852979796",
-      "next_step": "Zeus/Tech diagnosticar divergência do sitemap canônico; publicação editorial concluída. Preservar IDs e não executar correção técnica sem autoridade correspondente. Links públicos constam no relatório local e no publication-verification.json.",
-      "objective": "Publicar o lote de 30 artigos SEO aprovado por Raquel com ajustes pontuais",
-      "source": "data/atena/seo-mass-1559930384852979796/publication-verification.json",
-      "state": "30/30 publicados e validados por rest e http200, canonical self, robots indexáveis, conteúdo/meta/mídia/tags preservados conforme ajustes.30/30 dom desktop/mobile, autoria/biografia e zero overflow.11 corpos ajustados,seis blocos bibliográficos removidos,1187–1469 palavras. regras na skill editorial salvas e relidas. divergência técnica sitemap: sem query lista3/30; leitura fresca lista30/30. escalonamento zeus/tech e inventário enviados por embed canônico report-infra1560281140101914788, existência/content vazio conferidos no canal1498132022634483894. nenhuma alteração de cache/plugin/config/runtime.",
+      "next_step": "Raquel continuar a revisão dos demais pontos. Zeus/Tech mantém o encaminhamento anterior do sitemap. Não repetir correção de tags já validada nem limitar o conjunto ao par de idioma/país.",
+      "objective": "Manter os30 artigos SEO publicados conforme revisão humana",
+      "source": "data/atena/seo-mass-1559930384852979796/tag-correction-1560284833924518091.json",
+      "state": "correção explícita de raquel1560284833924518091 aplicada:30/30 posts receberam de volta tags temáticas/seo pertinentes e atena_agent, mantendo par canônico lang_*+país e sem restaurar identificadores alternativos de idioma/país. writes somente no campo tags; status publish,corpo,título,slug,categoria,mídia,meta e demais campos editoriais preservados.30/30 readbacks autenticados e públicos http200 confirmaram as tags. regra para qualquer tipo de artigo persistida na skill e na fonte canônica editorial-taxonomy-policy.json. pendência anterior de sitemap permanece registrada separadamente,sem diagnóstico/correção técnica nesta tarefa.",
       "thread_id": "1559930384852979796",
-      "updated_at": "2026-10-15T13:20:40+00:00"
+      "updated_at": "2026-10-15T13:38:27+00:00"
     },
     {
       "agent": "atena",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T13:20:40+00:00"
+  "updated_at": "2026-10-15T13:38:27+00:00"
 }

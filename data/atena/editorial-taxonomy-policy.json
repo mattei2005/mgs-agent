@@ -1,0 +1,29 @@
+{
+  "id": "ATENA-EDITORIAL-TAXONOMY-1560284833924518091",
+  "owner": "Content Operations / Raquel Oliveira",
+  "authorized_requester_discord_id": "1496254952501280974",
+  "source_thread_id": "1559930384852979796",
+  "source_message_id": "1560284833924518091",
+  "scope": "Taxonomia editorial de idioma/país e coexistência com tags temáticas/SEO e identificação Atena; qualquer tipo de artigo.",
+  "rules": {
+    "mandatory_language_country_pair_all_article_types": true,
+    "language_tag_format": "lang_*",
+    "country_tag": "código do país/mercado real confirmado na fonte canônica do portal",
+    "pair_is_not_a_total_tag_limit": true,
+    "preserve_relevant_topic_and_seo_tags": true,
+    "atena_agent_allowed": true,
+    "preserve_article_contract_required_tags": true,
+    "remove_only_alternative_language_country_identifiers": true,
+    "do_not_rename_or_delete_shared_terms": true
+  },
+  "examples": [
+    {"language": "en", "country": "us", "tags": ["lang_en", "us"]},
+    {"language": "es", "country": "us", "tags": ["lang_es", "us"]},
+    {"language": "pt", "country": "br", "tags": ["lang_pt", "br"]},
+    {"language": "es", "country": "es", "tags": ["lang_es", "es"]},
+    {"language": "en", "country": "gb", "tags": ["lang_en", "gb"]}
+  ],
+  "explicit_supersession": "Supersede a interpretação operacional tags-only-pair aplicada ao lote SEO na mensagem1560275486695759996, registrada em publication-feedback/*.taxonomy.json como tag_policy. Esses arquivos são históricos; a regra ativa permite coexistência com tags relevantes e atena_agent.",
+  "procedure_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md#8-categorias-e-tags",
+  "batch_repair_evidence": "data/atena/seo-mass-1559930384852979796/tag-correction-1560284833924518091.json"
+}

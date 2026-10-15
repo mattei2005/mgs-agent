@@ -110,6 +110,8 @@ Se o pedido autorizar explicitamente drafts como fallback por falta de configura
 
 ## Taxonomia e validação
 
+O par canônico `lang_*` + país é obrigatório independentemente do tipo de artigo e identifica somente idioma/mercado; não é um limite de duas tags. Preserve tags temáticas/SEO pertinentes, `atena_agent` e as classes obrigatórias do contrato REC/P1/SEO. Ao corrigir idioma/país, remova apenas identificadores alternativos dessas classes, nunca as demais tags válidas. Detalhes e resolução de IDs: `references/general-seo-category-drafts.md`, seção 8.
+
 Antes de publicar:
 
 1. Resolver/criar a categoria da nova vertical.
