@@ -49,6 +49,9 @@ Use this procedure when Rodolfo asks whether current Meta ads contain an exact U
 3. Multiple campaign IDs prove campaign-level reuse. Multiple rows with one campaign ID identify an intra-campaign collision candidate; confirm its distinct ad sets in current Meta before calling it still live. Historical SB identifies what happened then, while current Meta determines whether it remains broken now.
 4. Inspect the response schema instead of assuming the alert columns map one-to-one to this endpoint. Unmatched traffic may lack a campaign ID, and a malformed tracking value can appear on a different report field than expected.
 5. Never claim to reproduce the alert's `Investiment` number unless endpoint, window, timezone, publisher set and currency are identical. State the exact date-scoped value and the unresolved aggregation gap instead of forcing reconciliation.
+6. Reconcile SB `ADGROUP_NAME`, `UTM_ADGROUP` and Meta's creative-link UTM independently. SB can retain the wrong token from an ad-set name while every current ad URL already has the correct account-specific token; do not report a link collision or recommend replacing creatives when the confirmed defect is name drift. Name-only correction remains a separately authorized write.
+7. Direct-GET every extra campaign ID resolved by SB even if the account ads edge omitted it. A `DELETED` campaign can remain joined to the same UTM and revenue metrics as its active replacement, with zero investment and no current delivery. Classify historical reuse separately from simultaneous active duplication, and never sum repeated joined revenue as independent earnings.
+8. Filter returned rows by their explicit `DATE` after the request. A single-day report request can include previous-date rows; the requested payload alone is not proof of the response's civil-date coverage.
 
 ### 6. Verify a reported correction
 

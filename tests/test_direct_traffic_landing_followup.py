@@ -285,6 +285,30 @@ class FollowupTests(unittest.TestCase):
         self.assertEqual(j['state'],'RECONCILING');self.assertEqual(j['links'][0]['state'],'OPEN_INTENT')
         self.assertIsNone(self.q.claim('other'));self.assertIsNone(self.q.claim_recovery('other'))
 
+    def test_valid_last_attempt_proof_can_recover_without_new_visit(self):
+        self.clock.value=0;self.start();self.clock.value=601;self.q.recover_expired();self.clock.value+=60
+        self.q.claim_recovery('repair');e=self.success()
+        with self.assertRaises(ValueError):self.q.result(self.key,'repair',0,'PASS',e)
+        self.q.result(self.key,'repair',0,'PASS',e,recovered=True)
+        self.assertEqual(self.q.job(self.key)['links'][0]['state'],'PASSED')
+        self.assertEqual(self.q.db.execute("SELECT count(*) FROM events WHERE kind='open_intent'").fetchone()[0],1)
+
+    def test_old_attempt_proof_cannot_recover_newer_open(self):
+        self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+        with self.assertRaisesRegex(ValueError,'latest actual open'):self.q.result(self.key,'repair',0,'PASS',self.success(),recovered=True)
+        self.assertEqual(self.q.job(self.key)['links'][0]['state'],'OPEN_INTENT')
+
+    def test_recovered_flag_cannot_promote_error_to_success(self):
+        self.start()
+        with self.assertRaises(ValueError):self.q.result(self.key,'worker',0,'ERROR',{'diagnosis':'offline'},recovered=True)
+
+    def test_real_absence_proof_can_be_recorded_after_worker_timeout(self):
+        self.clock.value=0;self.start();self.clock.value=601;self.q.recover_expired();self.clock.value+=60;self.q.claim_recovery('repair')
+        e={**self.closure(),'network_ad_confirmed':False,'visual_review':'Offline reviewed absence fixture, not real browser result','observation_screenshot':'fixture-7.png'}
+        self.q.result(self.key,'repair',0,'NO_AD',e,recovered=True)
+        self.assertEqual(self.q.no_ad_count(self.key,0),1)
+        self.assertEqual(self.q.job(self.key)['links'][0]['state'],'WAIT_RETRY')
+
     def test_recovery_safe_resume_is_not_success(self):
         self.start();self.clock.value+=601;self.q.recover_expired();self.clock.value+=60
         self.q.claim_recovery('repair');self.q.reconcile(self.key,0,self.closure('old-owned-tab'),resume=True)
@@ -400,6 +424,19 @@ class FollowupTests(unittest.TestCase):
         with self.q.tx():
             self.q.db.execute("UPDATE native_intake SET state='READY' WHERE id='native:offline-not-enumerated'")
             self.assertTrue(self.q.prepare_success_if_complete(self.key))
+
+    def test_compact_result_merges_only_explicitly_reviewed_frames(self):
+        path=Path(__file__).resolve().parents[1]/'scripts/ares-direct-traffic-followup.py'
+        spec=importlib.util.spec_from_file_location('compact_result_cli_test',path);assert spec and spec.loader
+        cli=importlib.util.module_from_spec(spec);spec.loader.exec_module(cli)
+        self.start();e=self.success();samples=e.pop('samples')
+        f=self.q.root/'runs/worker/capture-series.json';f.parent.mkdir(parents=True);f.write_text(json.dumps({'state':'CAPTURED_NOT_PASS','samples':samples}))
+        args=['tool','result','--key',self.key,'--owner','worker','--index','0','--pc1-session-id','offline-fixture','--result','PASS','--evidence-json',json.dumps(e),'--use-captured-samples']
+        with patch.object(sys,'argv',args),patch.object(cli,'Queue',return_value=self.q),patch.object(cli,'require_pc1_lease'):
+            with self.assertRaises(ValueError):cli.main()
+        self.assertEqual(self.q.job(self.key)['state'],'RUNNING')
+        with patch.object(sys,'argv',args+['--frames-reviewed']),patch.object(cli,'Queue',return_value=self.q),patch.object(cli,'require_pc1_lease'):
+            self.assertEqual(cli.main()['state'],'OBSERVED')
 
     def second_account(self):
         p=copy.deepcopy(self.payload)

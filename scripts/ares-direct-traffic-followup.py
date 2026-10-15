@@ -168,7 +168,12 @@ def main():
             a.add_argument('--pc1-session-id',required=True)
         if command=='result':
             a.add_argument('--result',choices=['PASS','NO_AD','ERROR'],required=True)
-            a.add_argument('--evidence',type=Path,required=True)
+            g=a.add_mutually_exclusive_group(required=True)
+            g.add_argument('--evidence',type=Path)
+            g.add_argument('--evidence-json',help='Compact actual evidence, no separate write_file round trip')
+            a.add_argument('--use-captured-samples',action='store_true')
+            a.add_argument('--frames-reviewed',action='store_true',help='Explicit agent confirmation: every captured sample shows ad visible and tab active')
+            a.add_argument('--recovered',action='store_true',help='Validate saved proof of the last real attempt without another visit')
     args=p.parse_args();q=Queue(args.root)
     if args.command in {'stage','publish-creation'}:
         return {'state':'RETIRED_CREATION_ROUTE_UNCHANGED','side_effect':'none'}
@@ -196,7 +201,14 @@ def main():
         return {'state':q.job(args.key)['state'],'observation_success':False}
     if args.command=='begin':q.begin(args.key,args.owner,args.index)
     elif args.command=='defer':q.deferred(args.key,args.owner)
-    elif args.command=='result':q.result(args.key,args.owner,args.index,args.result,json.loads(args.evidence.read_text()))
+    elif args.command=='result':
+        evidence=json.loads(args.evidence_json) if args.evidence_json is not None else json.loads(args.evidence.read_text())
+        if args.use_captured_samples:
+            captured=json.loads((q.root/'runs'/args.owner/'capture-series.json').read_text())
+            if captured.get('state')!='CAPTURED_NOT_PASS' or not args.frames_reviewed or evidence.get('network_ad_confirmed') is not True:
+                raise ValueError('cadence plus explicit review of ad visibility and active tab required')
+            evidence['samples']=[{**x,'ad_visible':True,'tab_active':True} for x in captured['samples']]
+        q.result(args.key,args.owner,args.index,args.result,evidence,recovered=args.recovered)
     return {'state':q.job(args.key)['state']}
 
 

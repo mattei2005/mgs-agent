@@ -45,7 +45,7 @@ Carregar `computer-use` para interação visual. Usar o transporte PC1 já confi
 6. Usar o coletor read-only de amostras em UMA chamada terminal após a confirmação visual. Ele não navega e não aprova anúncios. Revisar imagens/descrições e foco; só amostras reais cobrindo pelo menos 10 segundos contínuos, com cadência válida, podem sustentar PASS. Se a cadência falhar, corrigir/recapturar na mesma aba, não reabrir a página.
 7. Fechar apenas a aba da tentativa; conferir desaparecimento e preservação das demais. Fechar guarda/janela somente com propriedade exclusiva comprovada. Persistir `result`, então liberar a lease em finally. Reservar chamadas finais para isso; não terminar apenas com texto dizendo que faltou registrar.
 8. Primeira ausência real de anúncio: `NO_AD`, fechamento verificado e 60 segundos completos antes de nova aba. Segunda ausência confirmada: diagnosticar sem terceira visita automática. Falha técnica de evidência não consome o limite de duas ausências.
-9. Somente TODAS as combinações de landing + UTMs validadas liberam o sucesso exato do contrato na thread original. Conferir entrega por GET. Não afirmar registro GAM sem prova própria. Não enviar prints sem pedido explícito.
+9. Somente TODAS as combinações do pedido HUMANO liberam o sucesso exato do contrato na thread original. Uma resposta nativa pode conter vários jobs técnicos: agrupar pelo recibo original, exigir enumeração do intake concluída e todos os pares validados, e enviar uma única confirmação. Conferir entrega por GET. Não afirmar registro GAM sem prova própria. Não enviar prints sem pedido explícito.
 
 ## Recuperação — não abandonar estados excepcionais
 
@@ -53,7 +53,7 @@ Carregar `computer-use` para interação visual. Usar o transporte PC1 já confi
 - No recovery, não abrir URL nem repetir input incerto. Ler a tentativa mais recente do mesmo job e conferir estado real antes de fechar/repetir algo. Fechamento de tentativa antiga não prova o da última.
 - Com fechamento/preservação reais comprovados, `reconcile --resume` devolve a mesma URL à fila com espera, nunca a PASSED. Sem qualquer navegação, exigir leitura da sessão provando zero inputs, mais diagnóstico. Não inventar aba/fechamento para satisfazer validador.
 - Processo expirado vira recuperação com backoff; processo vivo/lease de outro trabalho nunca é contornado. Reserva órfã só pode ser liberada após provar identidade do observador Ares, vínculo ao mesmo job e ausência de processo vivo. Dúvida falha fechado e continua sob diagnóstico do Ares.
-- Se uma prova válida já foi gravada, reconciliar antes de qualquer nova visita. Não gerar impressões adicionais para substituir um resultado já confirmado.
+- Se uma prova COMPLETA da última tentativa já existe, revisá-la e usar `result --result PASS --recovered` sob a lease de recuperação: o mesmo validador verifica URL, anúncio, foco, tempos reais e fechamento posterior, além de rejeitar imagens anteriores à última abertura. Isso não abre outra página. Uma prova parcial/incerta não pode virar PASS; nesse caso, reconciliar o fechamento e só então retomar. Não gerar impressões adicionais para substituir um resultado já confirmado.
 - Se PC1 estiver indisponível/ocupado, registrar defer/backoff e manter retomada automática, sem alerta genérico. Não reiniciar gateway, PC ou navegador por conta própria.
 - `need-action` é exclusivo para intervenção humana comprovadamente indispensável; o outbox exige flag explícita e ação concreta. Aba incerta mantém bloqueio físico/global até reconciliação.
 

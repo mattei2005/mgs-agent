@@ -244,9 +244,9 @@ class Queue:
             self.event(key,'claimed',{'owner':owner})
             return self.job(key)
 
-    def owned(self,key,owner):
+    def owned(self,key,owner,allow_recovery=False):
         j=self.job(key)
-        if j['state']!='RUNNING' or j['owner']!=owner or j['lease_until']<self.now():raise ValueError('observer lease expired or owner mismatch')
+        if j['state'] not in ({'RUNNING','RECONCILING'} if allow_recovery else {'RUNNING'}) or j['owner']!=owner or j['lease_until']<self.now():raise ValueError('observer lease expired or owner mismatch')
         return j
 
     def begin(self,key,owner,idx):
@@ -271,16 +271,24 @@ class Queue:
                 raise ValueError('cannot defer an uncertain tab; reconcile or report ERROR')
             self.db.execute("UPDATE jobs SET state='READY',owner=NULL,lease_until=NULL WHERE key=?",(key,))
 
-    def result(self,key,owner,idx,result,evidence):
+    def result(self,key,owner,idx,result,evidence,recovered=False):
         if result not in {'PASS','NO_AD','ERROR'}:raise ValueError('unknown result')
-        j=self.owned(key,owner);link=j['payload']['links'][idx]
+        if recovered and result not in {'PASS','NO_AD'}:raise ValueError('recovered result requires actual PASS or NO_AD evidence')
+        j=self.owned(key,owner,allow_recovery=recovered);link=j['payload']['links'][idx]
         if result=='PASS': validate_observation(evidence,link)
         elif result=='NO_AD': validate_closure(evidence)
         else:
             if not evidence.get('diagnosis'):raise ValueError('exact safe diagnosis required')
             if evidence.get('tab_closed_verified') is True:validate_closure(evidence)
+        if recovered:
+            opened=[json.loads(x['detail'])|{'at':x['at']} for x in self.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq",(key,)) if json.loads(x['detail']).get('idx')==idx]
+            if result=='NO_AD' and (evidence.get('network_ad_confirmed') is not False or not evidence.get('visual_review')):
+                raise ValueError('recovered absence requires explicit visual review and actual screenshot')
+            frames=[file_evidence(x['screenshot'])['captured_at'] for x in evidence['samples']] if result=='PASS' else [file_evidence(evidence['observation_screenshot'])['captured_at']]
+            if not opened or min(frames)<opened[-1]['at'] or file_evidence(evidence['closed_screenshot'])['captured_at']<max(frames):
+                raise ValueError('recovered proof is not from the latest actual open or lacks later closure')
         with self.tx():
-            self.owned(key,owner)
+            self.owned(key,owner,allow_recovery=recovered)
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
             if row['state']!='OPEN_INTENT':raise ValueError('no matching open intent')
             previous=json.loads(row['evidence']) if row['evidence'] else {}
@@ -539,7 +547,9 @@ def worker_prompt(key,owner,idx,job):
             'Sob lease PC1 com ID REAL da sessão, confira a sessão anterior do mesmo job via events claimed/recovery_claimed '
             'e state.db read-only. Observe o browser real e reconcilie somente abas comprovadamente pertencentes à tentativa; '
             'preserve as demais. Evidência de tentativa mais antiga não comprova fechamento da última. '
-            'Depois do readback/fechamento seguro, salve evidência real e execute '
+            'Se já existir evidência COMPLETA e válida da última tentativa (URL, anúncio, foco, >=10s, amostras reais e fechamento posterior), '
+            'registre sem nova visita: result --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --result PASS --evidence <arquivo> --recovered. O validador exige vínculo temporal à última abertura; não preencher lacunas nem declarar visibilidade não provada. '
+            'Se --recovered for aceito, libere a lease e encerre, sem reconcile adicional. SOMENTE se não houver prova completa aproveitável, depois do readback/fechamento seguro salve evidência real e execute '
             'scripts/ares-direct-traffic-followup.py reconcile --key '+key+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --evidence <arquivo> --resume. '
             'Quando nenhuma aba foi aberta, exija evidência da sessão anterior: no_tab_opened=true, browser_inputs_zero_verified=true e diagnosis; não invente identidade/fechamento. '
             'Duas ausências NO_AD confirmadas não permitem nova visita: diagnostique sem novas impressões. '
@@ -557,6 +567,8 @@ def worker_prompt(key,owner,idx,job):
         'Falhas técnicas recuperáveis são locais: resolver no mesmo request, sem pedir nova aprovação nem alertar Rodolfo; '
         'somente human_action_required=true com required_action concreta autoriza aviso. '
         'Reserve as últimas chamadas para fechar/verificar, persistir result (inclusive ERROR) e liberar a lease; '
+        'Prefira result --evidence-json com metadados mínimos, sem criar um grande arquivo narrativo. Para PASS, use --use-captured-samples --frames-reviewed apenas depois de revisar todas as imagens; o CLI mescla os frames reais. Para NO_AD, basta a evidência real de identidade/fechamento/preservação (e screenshot de ausência para recuperação). '
+        'Não reler a implementação de scripts como etapa de cada URL: os comandos e o esquema mínimo estão na skill; investigar código somente para corrigir falha concreta, após fechamento seguro. '
         'não encerrar com um texto dizendo que faltou registrar o resultado. '
         'Após confirmar anúncio visível e aba ativa, capture as amostras em uma única chamada terminal: '
         '$(dirname "$(command -v hermes)")/python scripts/ares-direct-traffic-sample.py --key '+key+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID". '
