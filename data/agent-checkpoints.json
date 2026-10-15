@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
-      "next_step": "Concluir cleanup seguro do f44; selecionar C121 index1 como proxima observacao; registrar resultado real e retomar FIFO; atualizar status somente com evidencias. Sem writes Meta/GAM/WP/Router/financeiro e sem restart.",
+      "next_step": "Executor atual conclui a observacao C121 index1 no PC1 com anuncio/foco/10s e fechamento comprovados; registrar resultado sem perda nem replay cego. Depois retomar restantes por FIFO. Sem solicitar nova mensagem do operador; gates criticos preservados.",
       "objective": "Observar C121 primeiro e depois continuar os demais na ordem FIFO, com validacao real e avisos conferidos",
-      "source": "discord:1559932317861158993#1560253186277646380;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-followup-1559951763019145247/c121-first-20261015/change-inventory.json",
-      "state": "rodolfo1560253186277646380 supersede adiamento1560151664692822079: contrato c121_first_then_fifo aplicado, nova rodada c121 autorizada uma vez max2no_ad preservando historico.126 testes passaram. tentativa anterior f44 exige reconciliacao de fechamento antes de nova navegacao; nao interromper lease viva nem duplicar observador.",
+      "source": "discord:1559932317861158993#1560253186277646380;data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/landing-followup/queue.sqlite3;data/ares/meta-ads/audit/landing-followup-1559951763019145247/c121-first-20261015/change-inventory.json",
+      "state": "prioridade c121_first_then_fifo ativa por rodolfo1560253186277646380; cleanup f44 concluido e observation_result persistido evento392. nova rodada c121 registrada evento393 sem apagar historico; c121 selecionada running evento396 owner landing-observer-4d5b7a5ad26949568c422e92c971214f. inicio de visita/validacao ainda nao comprovado neste snapshot.126 testes passam; contrato, procedimento e informes atualizados e lidos de volta; report-infra1560253822327332906 get verificado.",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-15T11:31:14+00:00"
+      "updated_at": "2026-10-15T11:36:57+00:00"
     },
     {
       "agent": "zeus",
@@ -5902,5 +5902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T11:31:14+00:00"
+  "updated_at": "2026-10-15T11:36:57+00:00"
 }
