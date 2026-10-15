@@ -337,7 +337,9 @@ class FollowupTests(unittest.TestCase):
         self.q.claim('worker');self.q.begin(self.key,'worker',0);self.q.result(self.key,'worker',0,'NO_AD',self.closure('tab-2'))
         self.assertEqual(self.q.no_ad_count(self.key,0),2)
         self.q.claim_recovery('repair')
-        with self.assertRaises(ValueError):self.q.reconcile(self.key,0,self.closure('tab-2'),resume=True)
+        self.q.reconcile(self.key,0,self.closure('tab-2'),resume=True)
+        self.assertEqual(self.q.job(self.key)['links'][0]['state'],'ATTENTION')
+        self.assertIsNone(self.q.db.execute('SELECT 1 FROM messages WHERE key=?',(self.key+':success',)).fetchone())
 
     def test_reconciled_absence_history_counts_once_per_real_attempt(self):
         self.start()

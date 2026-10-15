@@ -198,7 +198,8 @@ def main():
         return {'state':q.job(args.key)['state']}
     if args.command=='reconcile':
         q.reconcile(args.key,args.index,json.loads(args.evidence.read_text()),resume=args.resume)
-        return {'state':q.job(args.key)['state'],'observation_success':False}
+        job=q.job(args.key)
+        return {'state':job['state'],'link_state':job['links'][args.index]['state'],'resumed':job['links'][args.index]['state']=='WAIT_RETRY','observation_success':False}
     if args.command=='begin':q.begin(args.key,args.owner,args.index)
     elif args.command=='defer':q.deferred(args.key,args.owner)
     elif args.command=='result':

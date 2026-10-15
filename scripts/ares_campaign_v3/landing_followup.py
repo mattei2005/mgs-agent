@@ -407,7 +407,9 @@ class Queue:
             if j['state'] not in {'NEEDS_RECONCILIATION','RECONCILING','ATTENTION'}:raise ValueError('request is not awaiting reconciliation')
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
             if not row or row['state'] not in {'OPEN_INTENT','ATTENTION','READY','WAIT_RETRY'}:raise ValueError('exact affected URL required')
-            if resume and self.no_ad_count(key,idx)>=2:raise ValueError('two confirmed NO_AD attempts: diagnose without another landing visit')
+            if resume and self.no_ad_count(key,idx)>=2:
+                resume=False
+                self.event(key,'resume_suppressed_after_two_no_ads',{'idx':idx,'automatic_navigation':False,'continue_other_links_after_verified_closure':True})
             saved=preserve_evidence(evidence,key,idx,row['attempt'])
             self.db.execute("UPDATE links SET state=?,due=?,evidence=? WHERE job=? AND idx=?",('WAIT_RETRY' if resume else 'ATTENTION',self.now()+60 if resume else 0,json.dumps(saved,ensure_ascii=False),key,idx))
             pending=self.db.execute("SELECT 1 FROM links WHERE job=? AND state IN ('READY','WAIT_RETRY')",(key,)).fetchone()
