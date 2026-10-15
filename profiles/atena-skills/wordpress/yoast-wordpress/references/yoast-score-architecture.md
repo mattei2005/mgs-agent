@@ -109,6 +109,10 @@ WP-CLI postmeta update + SQL UPDATE on `wp_yoast_indexable` → confirmed via SS
 - Inspecione o `Indexable_Post_Meta_Watcher` instalado antes de recomendar SQL direto: versões que observam `added/updated/deleted_post_meta` e reconstroem o objeto no shutdown podem persistir as duas camadas por atualização nativa de meta, sem código novo. Ainda exija readback exato de postmeta/indexable e indicador autenticado no mesmo ID; inspeção de código não substitui teste autorizado.
 - Quando um wrapper usar usuário de sistema fixo, confirme o dono do webroot antes de diagnosticar instalação ausente. Acesso de outro usuário pode fazer `wp` reportar falsamente que não é WordPress.
 - Restrinja os canários de persistência aos IDs recém-autorizados; controles antigos são somente leitura. Schema REST com campos de saída prova exposição, não que um save reproduza a análise nem atualize a barra.
+- Prefira atualização nativa exclusiva de postmeta quando até `post_modified` precisar permanecer intacto; compare o objeto WP_Post inteiro, o GET edit completo, todas as metas não autorizadas e o objeto da mídia antes/depois. Metas numéricas como strings e uma única linha indexable precisam reproduzir exatamente a saída calculada.
+- Resolva o permalink do draft por `get_permalink`/Yoast e registre separadamente `get_sample_permalink`; não substitua `?p=<id>` por URL inventada nem afirme que o editor usa o mesmo contexto sem ler seu `collectData`. O editor pode analisar baseUrl+slug, blocos e modificadores não presentes no REST renderizado.
+- Separe aprovação de persistência de aprovação visual: draft público pode retornar 404 e vault sem handle impede inspeção autenticada. Registre esses limites, preserve `native_editor_parity_verified=false` e forneça leitura dos seletores da barra para depois da publicação, sem mandar salvar o editor.
+- Em adaptadores retomáveis, grave intenção antes do write e retome por leitura exata, nunca por replay cego. Exija manifesto imutável com IDs/receipts do lote atual, hash do corpo, título/slug/status/mídia esperados e confirmação explícita da autoridade; reexecute o scorer genuíno antes de aceitar números.
 
 ### PITFALLS — yoastseo v3.6 API (trial & error, 2026-04-24)
 
@@ -144,12 +148,7 @@ node /root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js ...
 ```
 
 **5. `wp yoast index --object-id` does NOT exist in Yoast v27.x.**
-Use SQL UPDATE directly:
-```sql
-UPDATE wp_yoast_indexable
-  SET primary_focus_keyword_score=84, readability_score=90
-  WHERE object_id=62008 AND object_type='post'
-```
+Não deduza que isso exige SQL UPDATE. Prefira `wp post meta update <id> _yoast_wpseo_linkdex <score_calculado>` e o equivalente para `_yoast_wpseo_content_score` quando o watcher nativo instalado tiver sido inspecionado e o canário autorizado confirmar ambas as camadas. Deixe cada processo encerrar para executar o shutdown; depois leia a linha indexable única e os valores meta exatos. O fluxo SQL direto descrito no histórico de 2026-04-24 não é o procedimento recomendado para novas execuções.
 
 **6. `resolve-credentials.sh` returns JSON, not KEY=VALUE:**
 ```bash
