@@ -1,7 +1,7 @@
 ---
 name: landing-followup-operations
 description: "Use when observing landing ads after campaign completion."
-version: 0.5.0
+version: 0.5.1
 author: Rodolfo Mattei / Ares
 license: internal
 platforms: [linux]
@@ -19,6 +19,7 @@ Observar anúncios depois da conclusão de uma criação/duplicação, sem acres
 
 - Executar ou acompanhar a observação pós-criação de landings com UTMs novas.
 - Recuperar intake, tentativa, fechamento, fila ou entrega do acompanhamento.
+- Auditar pedidos e pendências, distinguindo criação/ativação, acompanhamento PC1 e entrega de avisos, sem transformar consulta em execução.
 - Executar replay expressamente autorizado, preservando os resultados históricos.
 - Não carregar como etapa da criação/clone de campanhas.
 
@@ -72,6 +73,16 @@ Fluxo preferido de Rodolfo: **links preparados → aba nova normal → identific
 - Mais de duas mensagens equivalentes sem progresso real exigem diagnosticar o bloqueio, não enviar outra mensagem igual nem apenas silenciar o watchdog. Timestamp, claim, rótulo do worker e `OPEN_INTENT` não são avanço; PASS validado é.
 - Detalhes técnicos ficam locais. Não despejar traceback, comandos, paths, IDs de processo ou avisos de atualização na conversa. Preparar a entrega sanitizada antes de iniciar um processo em background; não deixar a notificação genérica de saída competir com o outbox operacional.
 - **Notificação interna de processo antigo não é novo pedido.** Correlacionar o ID com a rodada e o checkpoint; se o resultado já foi consumido, não responder ao operador de novo, reabrir PC1 ou revalidar links. Se necessário, fazer uma única conferência local delimitada e consumir o aviso pelo mecanismo suportado. Depois, encerrar sem recapitulações ou investigação repetitiva de uma tarefa fechada.
+
+## 6. Responder sobre pedidos e pendências
+
+1. Definir o alcance antes de concluir: **fila PC1 vazia e outbox vazio comprovam somente o acompanhamento**, não que todos os pedidos de campanha terminaram. Se a pergunta abranger os pedidos dos gestores, conferir também os pedidos humanos e os estados de criação/QA/ativação; seguir a receita de auditoria da referência.
+2. Para pedidos feitos hoje, usar o fuso do operador e o timestamp da mensagem humana original, não a data do nome/início da campanha, a criação do job ou o horário de conclusão. Separar pedidos anteriores processados hoje de solicitações novas; não apresentar o replay anterior como resposta sobre novos pedidos.
+3. Enumerar a origem pelo lado dos pedidos, não só pelos sucessos entregues ou jobs existentes. Solicitação ainda em recuperação, QA ou `ACTIVATION_DEFERRED` pode não ter entrado no observador; ausência na fila não é aprovação nem prova de falha do captador.
+4. Apresentar por gestor/conta as camadas verificadas: criação, ativação/agendamento, landings e aviso. Uma mensagem humana com várias fontes continua sendo um pedido com vários grupos; contar campanhas e links únicos em código. Não responder que todos deram certo quando somente um gestor concluiu e outro aguarda ativação.
+5. Confirmar estado atual da campanha por GET read-only dos IDs persistidos antes de afirmar que continua ativa/pausada. Usar a menor leitura necessária; para resultado histórico, identificar recibo e horário em vez de chamá-lo de estado live. ACTIVE com início futuro comprova habilitação/agendamento, não entrega atual.
+6. Manter gates separados: recuperação automática de anúncio ausente não autoriza ativação tardia de campanha. Consulta de status não é aprovação para ativar, retomar writer ou recriar objetos. Informar a pendência e a confirmação exigida na origem, sem executar o write por inferência.
+7. Separar resíduos de cadastro de trabalho não realizado. Registros pai/filho de intake podem referenciar pedidos já concluídos; não somá-los como novos links pendentes nem limpar uma divergência de origem apenas porque o request ID coincide. Se a verificação foi apenas do PC1, declarar esse limite na primeira frase, não depois de uma afirmação geral de ausência de pendências.
 
 ## Fronteiras e continuidade
 
