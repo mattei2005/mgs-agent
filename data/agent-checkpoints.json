@@ -3942,6 +3942,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1560480639843569758",
+      "next_step": "Sem pendencia neste pedido; campanhas habilitadas para o horario solicitado, entrega ainda nao comprovada",
+      "objective": "Clonar C127 oito vezes na Yolokfx 02 G006 com 17 videos exatos em oito grupos, USD45/dia, COCAP USD0.90 e inicio 16/10/2026 00:30 ET",
+      "source": "discord:thread:1558134300325716050;message:1560480639843569758;recovery-message:1560483113111658659;data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560480639843569758/final-verification.json",
+      "state": "complete_future_active: c151-c158, 8 campanhas e 17 ads active. usd45/dia cada, lote usd360/dia; cost_cap com bid_amount=90 em todos os conjuntos. inicio 2026-10-16 00:30 america/new_york. grupos, nomes dos arquivos, primary text literal, utms e qa de midia 8/8 validados. recovery somente qa apos snapshot compacto; ids de campanha/conjunto/ad iguais aos checkpoints, sem recriacao. posts novos. readback final conferido por assertions.",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-16T02:44:12+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-utm-audit-1559593111624220762",
       "next_step": "Nenhuma ação Meta pendente. Em nova conferência, separar PAUSED/ACTIVE do histórico ARCHIVED/DELETED e consultar estado live; não promover este encerramento para regra global fora do incidente.",
       "objective": "Localizar e conferir as duas utm_adgroup duplicadas do alerta SHEIN.",
@@ -6092,5 +6102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T01:46:52+00:00"
+  "updated_at": "2026-10-16T02:44:12+00:00"
 }
