@@ -1,0 +1,177 @@
+{
+  "result": "PASS",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c134&utm_adgroup=b01fb01c134g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c134&utm_adgroup=b01fb01c134g01&nocache",
+    "mapping_source": "Read-only HTTP GET https://yolokfx.com/quiz/us/sh2-g002/ returned 200; anchors mgs-dq-cta-a and mgs-dq-cta-b both href=https://yolokfx.com/rec-us-app-shein-circle-of-style/; matches work/mavroa-shein-es-20260916/yolokfx-landings.json id=yolokfx-us-g002 destination_a_url=destination_b_url. Original campaign query preserved verbatim; observer adds approved bare nocache.",
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c134&utm_adgroup=b01fb01c134g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792174624.3025842,
+      "target": {
+        "pid": 18224,
+        "window_id": 7865896,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792174632.430246,
+      "opened_at": 1792174636.9022396
+    },
+    "opened_at": 1792174636.9022396,
+    "phase_seconds": {
+      "opening": 22.3679407860036,
+      "visual": 21.135290539008565,
+      "closure": 2.791880760982167,
+      "mechanical_total": 58.59024732897524
+    },
+    "visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "description": "Two rendered Altium network ads are visible: a top banner reading “From PCB Design to Production. Without Friction” with a “Learn More” button, and a right-side Altium Develop ad reading “Create Without Limits” with product-creation artwork and a “Learn More” button."
+    },
+    "network_ad_confirmed": true,
+    "ad_description": "Two rendered Altium network ads are visible: a top banner reading “From PCB Design to Production. Without Friction” with a “Learn More” button, and a right-side Altium Develop ad reading “Create Without Limits” with product-creation artwork and a “Learn More” button.",
+    "visual_review": "Two rendered Altium network ads are visible: a top banner reading “From PCB Design to Production. Without Friction” with a “Learn More” button, and a right-side Altium Develop ad reading “Create Without Limits” with product-creation artwork and a “Learn More” button.",
+    "scroll_result": {
+      "ok": true,
+      "action": "scroll",
+      "message": "Scrolled down 2 ticks via UIA (delivery_mode:background).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "accessibility",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "observation_started_at": 1792174660.3328254,
+    "visible_seconds": 10.0000917930156,
+    "observation_ended_at": 1792174670.3329237,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 7865896,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792174673.1246603,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 7865896,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ]
+  },
+  "batch_scope": "6ea14052bd6607747b6bd098566a7428c3aa2b5c2a6bf650764026390645e642"
+}
