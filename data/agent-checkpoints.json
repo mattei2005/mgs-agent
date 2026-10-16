@@ -72,6 +72,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-COMPLETION-HANDOFF-1560692876453748739",
+      "next_step": "Handoff normal permanece automatico. C092 requer decisao especifica de ativacao tardia; nao promover resposta parcial nem ignorar origem; sem callback/transporte novo e sem visitas adicionais.",
+      "objective": "Garantir passagem automatica somente apos conclusao genuina e entrega nativa, sem ampliar para ativacao Meta",
+      "source": "reports/ares-completion-handoff-1560692876453748739.json",
+      "state": "supported_handoff_verified;9new_boundary_tests_and286suite_pass;no_missing_eligible_completion_demonstrated;no_runtime_pipeline_patch_or_meta_write;c092_nonterminal_excluded",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-16T16:49:50+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-40-CLONES-ACCOUNTS-05-13-20260905",
       "next_step": "Nenhum; este request não pode ser retomado nem reutilizado",
       "objective": "Pedido anterior de teste de performance de 40 campanhas, agora cancelado sem writes externos",
@@ -2049,6 +2059,16 @@
       "state": "completed_live_id_recheck: 21 seguradores; 138 páginas dtr com ambos ids; 136 presentes na sb; 12 ok, 7 removidos, 2 divergentes. ione 23/23, michelle 4/4 e semakin 23/23 corrigidos para ok. milena falta 22383/1310207535499669; riza falta 22298/1274590525727926. auditoria e readback independente fizeram zero writes.",
       "thread_id": "1544837470687076454",
       "updated_at": "2026-09-03T21:02:15+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-C092-LATE-REVIEW-1560656571212505109",
+      "next_step": "Receber confirmacao especifica elegivel de ativacao tardia;usar shein_continuation central com mesmosIDs/QA/readback sem nova criacao. Depois de conclusao e resposta nativa genuina na origem, intake automatico armaPC1;nao inferir aprovacao de uma cobranca do handoff.",
+      "objective": "Concluir pedido original Geizian C35 paraC092 nos mesmos IDs,75USD eCOCAP1.05 quando houver review elegivel",
+      "source": "data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1560656571212505109/state.json",
+      "state": "awaiting_specific_human_late_activation_review;canonical_phaseactivation_deferred;enginecomplete_paused;not_eligible_pc1_yet",
+      "thread_id": "1558123871817965589",
+      "updated_at": "2026-10-16T16:49:50+00:00"
     },
     {
       "agent": "zeus",
@@ -6192,5 +6212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T16:42:27+00:00"
+  "updated_at": "2026-10-16T16:49:51+00:00"
 }

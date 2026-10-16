@@ -1,7 +1,7 @@
 ---
 name: landing-followup-operations
 description: "Use when observing landing ads after campaign completion."
-version: 0.5.1
+version: 0.5.2
 author: Rodolfo Mattei / Ares
 license: internal
 platforms: [linux]
@@ -81,7 +81,7 @@ Fluxo preferido de Rodolfo: **links preparados → aba nova normal → identific
 3. Enumerar a origem pelo lado dos pedidos, não só pelos sucessos entregues ou jobs existentes. Solicitação ainda em recuperação, QA ou `ACTIVATION_DEFERRED` pode não ter entrado no observador; ausência na fila não é aprovação nem prova de falha do captador.
 4. Apresentar por gestor/conta as camadas verificadas: criação, ativação/agendamento, landings e aviso. Uma mensagem humana com várias fontes continua sendo um pedido com vários grupos; contar campanhas e links únicos em código. Não responder que todos deram certo quando somente um gestor concluiu e outro aguarda ativação.
 5. Confirmar estado atual da campanha por GET read-only dos IDs persistidos antes de afirmar que continua ativa/pausada. Usar a menor leitura necessária; para resultado histórico, identificar recibo e horário em vez de chamá-lo de estado live. ACTIVE com início futuro comprova habilitação/agendamento, não entrega atual.
-6. Manter gates separados: recuperação automática de anúncio ausente não autoriza ativação tardia de campanha. Consulta de status não é aprovação para ativar, retomar writer ou recriar objetos. Informar a pendência e a confirmação exigida na origem, sem executar o write por inferência.
+6. Manter gates separados: recuperação automática de anúncio ausente não autoriza ativação tardia de campanha. Consulta de status ou cobrança para corrigir o handoff pós-conclusão não é, por si, aprovação de ativação. Conferir o escopo exato antes de ativar, retomar writer ou recriar objetos. `ACTIVATION_DEFERRED` continua fora da elegibilidade PC1, mesmo com `engine_result.status=COMPLETE_PAUSED`: criação parcial e pedido concluído são marcos diferentes. Exigir conclusão terminal genuína salva + resposta nativa integral realmente entregue na origem, com request/conta/IDs/partição conferidos; depois, o leitor independente deve armar uma única vez, sem nova cobrança. Não promover resposta parcial antiga, fabricar publicação de conclusão, alterar transporte/callback da criação ou contornar origem para fazer o teste passar. Sem defeito de handoff demonstrado, testar o caminho suportado e relatar a decisão de negócio pendente, sem ampliar a intervenção.
 7. Separar resíduos de cadastro de trabalho não realizado. Registros pai/filho de intake podem referenciar pedidos já concluídos; não somá-los como novos links pendentes nem limpar uma divergência de origem apenas porque o request ID coincide. Se a verificação foi apenas do PC1, declarar esse limite na primeira frase, não depois de uma afirmação geral de ausência de pendências.
 
 ## Fronteiras e continuidade

@@ -1,0 +1,32 @@
+{
+  "scope": "Post-completion PC1 handoff verification only",
+  "authority_message_id": "1560692876453748739",
+  "requested_behavior": "A genuinely completed campaign request, with its real delivered native completion in the correct origin, automatically enters the independent PC1 queue without another human nudge",
+  "diagnosis": "No dropped eligible completion demonstrated. Nicolas request is COMPLETE with9PASSED links and verified notice. C092 remains ACTIVATION_DEFERRED and correctly has no PC1 job.",
+  "c092": {
+    "request_id": "shein-1560656571212505109",
+    "campaign_id": "120255039988870547",
+    "phase": "ACTIVATION_DEFERRED",
+    "engine_status": "COMPLETE_PAUSED",
+    "activation_result": "E2E_TARGET_EXCEEDED",
+    "pc1_job_exists": false,
+    "required_decision": "Specific eligible human late-activation review of the same C092 request/IDs, retaining USD75 daily and COCAP1.05; not inferred from a request to correct the handoff"
+  },
+  "verified_existing_path": {
+    "completed_nicolas_request": "shein-1560643503883550840",
+    "links_passed": 9,
+    "pending_outbox": 0,
+    "new_genuine_completion_test": "ACTIVATION_DEFERRED partial reply -> legitimate saved terminal state plus NEW real-source native completion -> exactly one READY queue job",
+    "state_update_without_new_completion_reply": "does not promote old partial reply",
+    "wrong_origin_or_unpublished_reply": "does not enqueue"
+  },
+  "tests": {"targeted_completion_boundary": 9, "full_suite": 286, "failures": 0, "fixtures": "Explicitly offline; not live activation or PC1 evidence"},
+  "changes": ["tests/test_direct_traffic_landing_completion_boundary.py", "Ares skill landing-followup-operations0.5.2: distinguish handoff correction from campaign activation approval"],
+  "operational_handoff_code_changed": false,
+  "campaign_creation_or_response_transport_changed": false,
+  "callbacks_added": 0,
+  "custom_creation_completion_posts": 0,
+  "meta_writes": 0,
+  "browser_visits": 0,
+  "activation_gate_waived": false
+}
