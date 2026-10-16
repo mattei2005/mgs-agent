@@ -1,0 +1,30 @@
+{
+  "fixture": "synthetic-only; native code; real HTTP/filesystem mutation blocked",
+  "results": [
+    {
+      "case": "normal_expiry_successful_refresh",
+      "refresh_calls": 1,
+      "selected": true,
+      "rotated": true
+    },
+    {
+      "case": "peer_rotated_row_stale_process",
+      "refresh_calls": 0,
+      "should_be_zero": true,
+      "adopted_peer": true,
+      "state": null
+    },
+    {
+      "case": "refresh_token_invalidated_classification",
+      "selected": false,
+      "terminal_classifier": true,
+      "state": "dead",
+      "stored_reason": "refresh_token_invalidated",
+      "stored_message": "Codex token refresh failed: Your session has ended. Please log in again."
+    },
+    {
+      "case": "expired_exhausted_fallback",
+      "returns_expired": false
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-15T23:25:29-04:00",
+    "updated_at": "2026-10-16T03:45:12.716525+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44499,6 +44499,36 @@
       },
       "supplemental_report_infra_message_id": "1560386844913434625",
       "supplemental_report_infra_get_verified": true
+    },
+    {
+      "id": "codex-rootcause-1560486954515046455",
+      "agent": "zeus",
+      "type": "oauth-forensic-investigation",
+      "status": "open_real_renewal_test_requires_critical_confirmation",
+      "source_thread_id": "1560486954515046455",
+      "authorization_message_id": "1560496140036743210",
+      "checkpoint": "ZEUS-CODEX-ROOTCAUSE-1560486954515046455",
+      "paths": [
+        "reports/codex-rootcause-20261016-1560486954515046455.md",
+        "/root/mgs-agent/reports/codex-rootcause-20261016-1560486954515046455-evidence",
+        "data/agent-checkpoints.json"
+      ],
+      "confirmed_native_defects": [
+        "manual_row_missing_pre_refresh_resync",
+        "refresh_invalidated_not_terminal_metadata_lost",
+        "expired_exhausted_bearer_returned_by_fallback"
+      ],
+      "validation": {
+        "synthetic_cases": 4,
+        "candidate_fixed_defects": 3,
+        "candidate_related_suite_passed": 17,
+        "candidate_deployed": false,
+        "production_credential_mutation": false,
+        "historical_revocation_origin_proven": false
+      },
+      "updated_at": "2026-10-16T03:45:12.716525+00:00",
+      "report_infra_message_id": "1560498878959058967",
+      "report_infra_get_verified": true
     }
   ],
   "profile_skill_references": [

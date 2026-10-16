@@ -1,0 +1,30 @@
+{
+  "fixture": "synthetic-only; native code; real HTTP/filesystem mutation blocked",
+  "results": [
+    {
+      "case": "normal_expiry_successful_refresh",
+      "refresh_calls": 1,
+      "selected": true,
+      "rotated": true
+    },
+    {
+      "case": "peer_rotated_row_stale_process",
+      "refresh_calls": 1,
+      "should_be_zero": false,
+      "adopted_peer": false,
+      "state": "dead"
+    },
+    {
+      "case": "refresh_token_invalidated_classification",
+      "selected": false,
+      "terminal_classifier": false,
+      "state": "exhausted",
+      "stored_reason": null,
+      "stored_message": null
+    },
+    {
+      "case": "expired_exhausted_fallback",
+      "returns_expired": true
+    }
+  ]
+}

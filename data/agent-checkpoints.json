@@ -2223,12 +2223,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-CODEX-ROOTCAUSE-1560486954515046455",
-      "next_step": "Reproduzir caminho nativo de pool com IO/HTTP mockados e correlacionar codigo exato, logs e estados anteriores.",
-      "objective": "Determinar causa da perda de autenticacao dos agentes no ciclo de expiracao OAuth e reproduzir renovacao isoladamente sem alterar credenciais de producao.",
+      "next_step": "Solicitar confirmacao critica para teste controlado de renovacao real do login atual do Ares, uma unica credencial; capturar somente codigo/mensagem/request-id seguros e validar inferencia apos writeback nativo. Sem novo login ou copia entre perfis.",
+      "objective": "Determinar causa da perda de autenticacao dos agentes e reproduzir renovacao sem alterar credenciais produtivas.",
       "source": "discord:1560486954515046455/1560496140036743210",
-      "state": "investigacao aprofundada autorizada por rodolfo 1560496140036743210. expiracao conjunta comprovada; renovacao sem sucesso e causa de rejeicao ainda em teste. apis de prod e tokens preservados. pesquisa upstream encontrou falhas de resync de pool manual e fallback de token expirado; nenhuma promovida a causa sem reproducao local.",
+      "state": "tres defeitos do runtime reproduzidos com credenciais sinteticas: falta resync da propria linha manual antes do refresh, refresh_token_invalidated nao terminal perde motivo, fallback retorna bearer vencido/exhausted. controle de refresh normal passa. candidato isolado corrige os tres e passa17 testes relacionados; nao implantado. origem historica da invalidacao openai nao provada. evidencias reports/codex-rootcause-20261016-1560486954515046455.md.",
       "thread_id": "1560486954515046455",
-      "updated_at": "2026-10-16T03:36:26+00:00"
+      "updated_at": "2026-10-16T03:45:12+00:00"
     },
     {
       "agent": "zeus",
@@ -6132,5 +6132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T03:36:26+00:00"
+  "updated_at": "2026-10-16T03:45:12+00:00"
 }
