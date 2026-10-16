@@ -208,7 +208,7 @@ class IntakeTests(unittest.TestCase):
 
     def test_correctable_ignored_origin_is_reconsidered_without_cursor_reset(self):
         self.midturn_fixture()
-        self.intake.record('native:event-1','IGNORED')
+        self.intake.record('native:event-1','IGNORED');self.now+=61
         self.q.db.execute("UPDATE intake_settings SET value='1007' WHERE key='cursor'")
         self.q.db.execute("UPDATE intake_settings SET value='event-1' WHERE key='cursor_key'");self.q.db.commit()
         self.intake.tick();self.assertEqual(self.jobs(),1)
@@ -266,6 +266,37 @@ class IntakeTests(unittest.TestCase):
 
     def test_grouped_old_child_is_not_backfilled(self):
         self.grouped_fixture();os.utime(self.source.parent.parent/(self.rid+'-c131')/'state.json',(980,980))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_grouped_cross_account_child_is_rejected(self):
+        self.grouped_fixture()
+        p=self.source.parent.parent/(self.rid+'-c131')/'state.json'
+        d=json.loads(p.read_text());d['manifest']['campaigns'][0]['account_id']='111111111111199';p.write_text(json.dumps(d))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_grouped_different_original_message_is_rejected(self):
+        self.grouped_fixture()
+        p=self.source.parent.parent/(self.rid+'-c131')/'state.json'
+        d=json.loads(p.read_text());d['request']['source_message_id']='150000000000000099';p.write_text(json.dumps(d))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_grouped_duplicate_campaign_ids_are_rejected(self):
+        self.grouped_fixture();self.aggregate['groups'][1]['campaign_ids']=[self.cid]
+        self.aggregate_path.write_text(json.dumps(self.aggregate))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_pending_recovery_precedes_ignored_migration_and_skips_child_rows(self):
+        self.midturn_fixture();self.intake.record('native:event-1','PENDING')
+        for i in range(25):self.intake.record('native:old-'+str(i),'IGNORED')
+        for i in range(25):self.intake.record('native:event-1:child-'+str(i),'PENDING')
+        self.now+=61
+        self.q.db.execute("UPDATE intake_settings SET value='1007' WHERE key='cursor'")
+        self.q.db.execute("UPDATE intake_settings SET value='event-1' WHERE key='cursor_key'");self.q.db.commit()
+        self.intake.tick();self.assertEqual(self.jobs(),1)
+
+    def test_old_delivery_ignored_migration_cannot_backfill(self):
+        self.midturn_fixture();self.intake.record('native:event-1','IGNORED');self.now+=61
+        self.c.execute('UPDATE delivery_obligations SET created_at=980');self.c.commit()
         self.intake.tick();self.assertEqual(self.jobs(),0)
 
     def daily_fixture(self):

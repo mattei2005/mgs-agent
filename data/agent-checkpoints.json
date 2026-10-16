@@ -1083,12 +1083,12 @@
     {
       "agent": "ares",
       "id": "ARES-LANDING-INTAKE-ORIGIN-GROUPS-20261016",
-      "next_step": "Reproduzir em testes, corrigir somente landing_intake, executar intake e conferir fila por readback",
+      "next_step": "Correcao do intake validada; observacoes seguem na fila existente sem reabrir PASSED; nao confundir inclusao na fila com validacao das landings",
       "objective": "Corrigir captador independente para mensagem midturn e conclusao agregada; recuperar 25 URLs sem alterar criacao",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/landing-followup-1559951763019145247/intake-origin-and-groups-20261016/inventory.json",
-      "state": "investigating",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/landing-followup-1559951763019145247/intake-origin-and-groups-20261016/final-status.json",
+      "state": "completed",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-16T03:30:03+00:00"
+      "updated_at": "2026-10-16T03:34:51+00:00"
     },
     {
       "agent": "zeus",
@@ -2219,6 +2219,16 @@
       "state": "completed_current_auth_validated: rodolfo informou recuperacao atena em1556860624250736732 e ares em1556860924105592843. inferencias reais atena/ares/zeus exit0,markers presentes,sem erros auth; gateways3ativos. zeus nao realizou novos logins,troca de tokens,migracao compartilhada,patch de runtime ou restart. fixture scratch apenas escrita e nao executada; plano anterior supersedido pelo pedido de conferir.",
       "thread_id": "1556674138955849878",
       "updated_at": "2026-10-06T02:52:47+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-CODEX-ROOTCAUSE-1560486954515046455",
+      "next_step": "Reproduzir caminho nativo de pool com IO/HTTP mockados e correlacionar codigo exato, logs e estados anteriores.",
+      "objective": "Determinar causa da perda de autenticacao dos agentes no ciclo de expiracao OAuth e reproduzir renovacao isoladamente sem alterar credenciais de producao.",
+      "source": "discord:1560486954515046455/1560496140036743210",
+      "state": "investigacao aprofundada autorizada por rodolfo 1560496140036743210. expiracao conjunta comprovada; renovacao sem sucesso e causa de rejeicao ainda em teste. apis de prod e tokens preservados. pesquisa upstream encontrou falhas de resync de pool manual e fallback de token expirado; nenhuma promovida a causa sem reproducao local.",
+      "thread_id": "1560486954515046455",
+      "updated_at": "2026-10-16T03:36:26+00:00"
     },
     {
       "agent": "zeus",
@@ -6122,5 +6132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T03:30:03+00:00"
+  "updated_at": "2026-10-16T03:36:26+00:00"
 }

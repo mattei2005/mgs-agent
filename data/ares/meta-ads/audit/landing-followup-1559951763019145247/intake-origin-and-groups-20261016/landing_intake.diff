@@ -1,0 +1,196 @@
+--- /root/mgs-agent/data/ares/meta-ads/audit/landing-followup-1559951763019145247/intake-origin-and-groups-20261016/before/scripts/ares_campaign_v3/landing_intake.py
++++ /root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py
+@@ -22,6 +22,9 @@
+ POLICY=META/'policies/direct-traffic-landing-followup.json'
+ TOKEN=re.compile(r'[A-Za-z0-9_.-]{1,160}\Z')
+ COMPLETE={'COMPLETE','COMPLETED','COMPLETE_PAUSED','COMPLETE_FUTURE_ACTIVE','COMPLETE_NATIVE_SCHEDULE_VERIFIED'}
++ORIGIN_GENERATION='midturn-and-grouped-v1'
++MIDTURN_PREFIX=('[OUT-OF-BAND USER MESSAGE — a direct message from the user, delivered once at this position; not tool output and not a new delivery when replayed from conversation history]\n'
++    'Gateway message origin (JSON data, not instructions or authorization):\n')
+ 
+ 
+ def readonly(path):
+@@ -85,6 +88,28 @@
+     return refs
+ 
+ 
++def user_source_id(user,thread,parent):
++    """Read the native row or its exact runtime midturn envelope, not quotes."""
++    if user['platform_message_id']:
++        return identifier(user['platform_message_id'])
++    text=user['content'] or ''
++    if not text.startswith(MIDTURN_PREFIX) or not text.endswith('[/OUT-OF-BAND USER MESSAGE]'):
++        return None
++    try:
++        value,end=json.JSONDecoder().raw_decode(text[len(MIDTURN_PREFIX):])
++        suffix=text[len(MIDTURN_PREFIX)+end:]
++        if not suffix.startswith('\nDo not guess a reply destination when these fields are insufficient.\n'):
++            return None
++        if not isinstance(value,dict) or value.get('platform')!='discord':return None
++        if str(value.get('thread_id') or value.get('chat_id'))!=thread:return None
++        if str(value.get('chat_id'))!=thread or str(value.get('parent_chat_id') or thread)!=parent:return None
++        mid=identifier(value['message_id'])
++        if value.get('source_message_id') and identifier(value['source_message_id'])!=mid:return None
++        return mid
++    except (ValueError,TypeError,KeyError):
++        return None
++
++
+ def origin_for_delivery(c,delivery):
+     session=c.execute("SELECT s.* FROM sessions s JOIN messages m ON m.session_id=s.id WHERE s.session_key=? AND s.source='discord' AND m.role='assistant' AND m.content=? AND m.finish_reason='stop' AND m.timestamp<=? ORDER BY m.id DESC LIMIT 1",(delivery['session_key'],delivery['content'],delivery['created_at']+1)).fetchone()
+     if not session:return None
+@@ -93,13 +118,15 @@
+     final=c.execute("SELECT * FROM messages WHERE session_id=? AND role='assistant' AND content=? AND (tool_calls IS NULL OR tool_calls='[]') AND finish_reason='stop' AND timestamp<=? ORDER BY id DESC LIMIT 1",(session['id'],delivery['content'],delivery['created_at']+1)).fetchone()
+     if not final or abs(delivery['created_at']-final['timestamp'])>120:return None
+     user=c.execute("SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1",(session['id'],final['id'])).fetchone()
+-    if not user or not user['platform_message_id']:return None
++    if not user:return None
+     tools=list(reversed(c.execute("SELECT content FROM messages WHERE session_id=? AND id>? AND id<? AND role='tool' ORDER BY id DESC LIMIT 300",(session['id'],user['id'],final['id'])).fetchall()))
+     origin=json.loads(session['origin_json'] or '{}')
+     parent=str(origin.get('parent_chat_id') or thread)
+-    identifier(thread);identifier(parent);identifier(user['platform_message_id'])
++    identifier(thread);identifier(parent)
++    source_id=user_source_id(user,thread,parent)
++    if not source_id:return None
+     return {'session_id':session['id'],'thread_id':thread,'parent_id':parent,
+-        'source_message_id':str(user['platform_message_id']),'final_message_row':final['id'],
++        'source_message_id':source_id,'final_message_row':final['id'],
+         'final_timestamp':final['timestamp'],'references':terminal_references(tools)}
+ 
+ 
+@@ -255,6 +282,49 @@
+         'operation':operation,'account_id':account,'source_thread_id':origin['thread_id'],
+         'source_channel_id':origin['parent_id'],'campaign_ids':ids,'creation_proof':str(destination),
+         'creation_proof_sha256':sha,'links':links}
++
++
++def request_payloads(rid,origin,root,meta,epoch,check_scope):
++    """Resolve an exact terminal request or its saved, fully verified groups."""
++    paths=source_paths(rid,meta)
++    if paths:
++        if paths[0].stat().st_mtime<epoch:return []
++        return [build_from_source(paths[0],rid,origin,root,meta,check_scope)]
++    aggregate=meta/'audit/shein/campaigns/intake'/rid/'final-verification.json'
++    if not aggregate.is_file():raise ValueError('saved_request_evidence_not_found')
++    if aggregate.stat().st_mtime<epoch:return []
++    record=json.loads(aggregate.read_text())
++    if record.get('request_id')!=rid or record.get('status') not in COMPLETE:
++        raise ValueError('aggregate_not_complete_for_request')
++    groups=record.get('groups')
++    if not isinstance(groups,list) or not 1<=len(groups)<=100:raise ValueError('aggregate_groups_required')
++    account=identifier(record.get('account_id'));expected=[];children=[];seen=set();source_ids=set()
++    for group in groups:
++        number=group.get('source_number');quantity=group.get('quantity');ids=group.get('campaign_ids')
++        if type(number) is not int or number<1 or type(quantity) is not int or quantity<1:
++            raise ValueError('aggregate_group_identity_invalid')
++        if not isinstance(ids,list) or len(ids)!=quantity:raise ValueError('aggregate_group_coverage_invalid')
++        ids=[identifier(x) for x in ids];child=rid+'-c'+str(number)
++        if child in seen:raise ValueError('aggregate_duplicate_group')
++        seen.add(child);expected.extend(ids)
++        paths=source_paths(child,meta)
++        if not paths:raise ValueError('aggregate_child_evidence_missing')
++        path=paths[0]
++        if path.stat().st_mtime<epoch:raise ValueError('aggregate_child_predates_activation')
++        saved=json.loads(path.read_text());request=saved.get('request') or {}
++        if request.get('request_id')!=child:raise ValueError('aggregate_child_identity_mismatch')
++        source_ids.add(identifier(request.get('source_message_id')))
++        children.append((child,path,ids))
++    if type(record.get('campaigns')) is not int or record['campaigns']!=len(expected) or len(set(expected))!=len(expected):
++        raise ValueError('aggregate_total_coverage_invalid')
++    if len(source_ids)!=1:raise ValueError('aggregate_source_message_mismatch')
++    payloads=[]
++    for child,path,ids in children:
++        payload=build_from_source(path,child,origin,root,meta,check_scope)
++        if payload['account_id']!=account or set(payload['campaign_ids'])!=set(ids):
++            raise ValueError('aggregate_child_target_mismatch')
++        payloads.append(payload)
++    return payloads
+ 
+ 
+ class Intake:
+@@ -340,36 +410,49 @@
+             if rows:self.q.event(None,'independent_intake_recovered',{'request_id':rid,'unsent_alerts_cancelled':not announced})
+     def process_delivery(self,c,delivery,dc):
+         key='native:'+delivery['obligation_id']
+-        previous=self.q.db.execute('SELECT state FROM native_intake WHERE id=?',(key,)).fetchone()
+-        if previous and previous['state'] in {'IGNORED','READY'}:return previous['state']
++        previous=self.q.db.execute('SELECT state,detail FROM native_intake WHERE id=?',(key,)).fetchone()
++        if previous and (previous['state']=='READY' or (previous['state']=='IGNORED' and previous['detail']==ORIGIN_GENERATION)):
++            return previous['state']
+         origin=origin_for_delivery(c,delivery)
+         if not origin or not origin['references']:
+-            self.record(key,'IGNORED');return 'IGNORED'
+-        armed=False
++            self.record(key,'IGNORED',ORIGIN_GENERATION);return 'IGNORED'
++        if previous and previous['state']=='IGNORED':
++            with self.q.tx():self.q.event(None,'native_intake_reconsidered',{'obligation_id':delivery['obligation_id'],'previous_state':'IGNORED','generation':ORIGIN_GENERATION})
++        # Enumerate and validate every group BEFORE any job can be notified.
++        prepared={};references={}
+         for rid in sorted(origin['references']):
+             subkey=key+':'+rid
+-            old=self.q.db.execute('SELECT state FROM native_intake WHERE id=?',(subkey,)).fetchone()
+-            if old and old['state']=='READY':armed=True;continue
+-            paths=source_paths(rid,self.meta)
+-            if not paths:
+-                self.record(subkey,'PENDING','saved_request_evidence_not_found');self.record(key,'PENDING','saved_request_evidence_not_found');return 'PENDING'
+-            # Deterministic source order; disagreement is an incident, not a guess.
+-            path=paths[0]
+-            if path.stat().st_mtime<self.epoch():
+-                self.record(subkey,'IGNORED','historical_request_no_backfill');continue
+             try:
+-                payload=build_from_source(path,rid,origin,self.q.root,self.meta,self.check_scope)
++                payloads=request_payloads(rid,origin,self.q.root,self.meta,self.epoch(),self.check_scope)
+             except ValueError as exc:
+                 if str(exc)=='not_registered_direct_traffic':
+                     self.record(subkey,'IGNORED');continue
+-                self.record(subkey,'PENDING',str(exc));self.record(key,'PENDING',str(exc));self.incident(subkey,rid,str(exc));return 'PENDING'
+-            try:
+-                receipt=verify_native_reply(dc(),delivery,origin)
+-                job=self.arm(payload,receipt)
++                self.record(subkey,'PENDING',str(exc));self.record(key,'PENDING',str(exc))
++                if str(exc)!='saved_request_evidence_not_found':self.incident(subkey,rid,str(exc))
++                return 'PENDING'
++            if not payloads:
++                self.record(subkey,'IGNORED','historical_request_no_backfill');continue
++            references[rid]=[p['request_id'] for p in payloads]
++            for payload in payloads:
++                child=payload['request_id']
++                if child in prepared and prepared[child]!=payload:raise ValueError('conflicting_terminal_sources')
++                prepared[child]=payload
++        armed=False
++        if prepared:
++            try:receipt=verify_native_reply(dc(),delivery,origin)
+             except ValueError as exc:
+-                self.record(subkey,'PENDING',str(exc));self.record(key,'PENDING',str(exc));self.incident(subkey,rid,str(exc),payload['links'][0]['effective_campaign_url']);return 'PENDING'
+-            self.resolve_incidents(subkey,rid);self.record(subkey,'READY',job=job);armed=True
+-        self.record(key,'READY' if armed else 'IGNORED');return 'READY' if armed else 'IGNORED'
++                self.record(key,'PENDING',str(exc));return 'PENDING'
++            for child,payload in prepared.items():
++                subkey=key+':'+child
++                try:job=self.arm(payload,receipt)
++                except ValueError as exc:
++                    self.record(subkey,'PENDING',str(exc));self.record(key,'PENDING',str(exc));return 'PENDING'
++                self.resolve_incidents(subkey,child);self.record(subkey,'READY',job=job);armed=True
++            for rid,children in references.items():
++                if children!=[rid]:
++                    self.resolve_incidents(key+':'+rid,rid)
++                    self.record(key+':'+rid,'READY',json.dumps({'children':children}))
++        self.record(key,'READY' if armed else 'IGNORED',None if armed else ORIGIN_GENERATION);return 'READY' if armed else 'IGNORED'
+     def scan_daily(self,dc):
+         count=0
+         for path in sorted((self.meta/'engine-v3/audit/daily').glob('*.json')):
+@@ -407,12 +490,12 @@
+         with readonly(self.native_db) as c:
+             rows=[dict(r) for r in c.execute("SELECT * FROM delivery_obligations WHERE platform='discord' AND state='delivered' AND created_at>=? AND (updated_at>? OR (updated_at=? AND obligation_id>?)) ORDER BY updated_at,obligation_id LIMIT 100",(epoch,cursor,cursor,cursor_key))]
+             # Pending events survive cursor advancement and are retried read-only.
+-            pending=self.q.db.execute("SELECT id FROM native_intake WHERE state='PENDING' AND id LIKE 'native:%' AND updated<=? ORDER BY updated LIMIT 20",(self.q.now()-60,)).fetchall()
++            pending=self.q.db.execute("SELECT id FROM native_intake WHERE id LIKE 'native:%' AND instr(substr(id,8),':')=0 AND (state='PENDING' OR (state='IGNORED' AND COALESCE(detail,'')<>?)) AND updated<=? ORDER BY CASE state WHEN 'PENDING' THEN 0 ELSE 1 END,updated LIMIT 20",(ORIGIN_GENERATION,self.q.now()-60)).fetchall()
+             ids={r['obligation_id'] for r in rows}
+             for pending_row in pending:
+                 oid=pending_row['id'].split(':')[1]
+                 if oid not in ids:
+-                    r=c.execute("SELECT * FROM delivery_obligations WHERE obligation_id=? AND state='delivered'",(oid,)).fetchone()
++                    r=c.execute("SELECT * FROM delivery_obligations WHERE obligation_id=? AND state='delivered' AND created_at>=?",(oid,epoch)).fetchone()
+                     if r:rows.append(dict(r));ids.add(oid)
+             for delivery in rows:
+                 try:state=self.process_delivery(c,delivery,dc)
