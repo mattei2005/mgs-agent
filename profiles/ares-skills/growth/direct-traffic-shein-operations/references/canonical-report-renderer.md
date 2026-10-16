@@ -33,6 +33,12 @@ Quando Rodolfo autorizar acréscimos para uma conta específica, registrar o rec
 - Em complemento de colunas, preservar todos os campos financeiros, nomes, seleção, ordem e histórico do modelo anterior e informar os dois horários no cabeçalho. O atraso GAM/SB preservado continua sendo observação daquele snapshot financeiro, não uma leitura atual.
 - Exercitar a suíte `test_shein_report_configuration_columns.py` junto às demais `test_shein_report_*.py`, comparar todas as células antigas e o histórico e repetir render/validate com a thread exata. O acréscimo não autoriza write Meta, alteração global, cron ou exclusão de mensagens.
 
+## Prévia compacta de cabeçalhos
+
+Para o teste autorizado da conta `1583000095650153`, acrescentar **`--preview-compact-headers --preview-product-max-characters 12 --preview-remove-product-ellipsis`** em render e validate. O modo lê `account_column_overrides.<account_id>.compact_header_preview` do contrato atual e aplica somente os rótulos **Budget R. → B.R.; Receita → Rev; Est.Health → Health; ROI est. → ROI E.**. As chaves lógicas das métricas, posições, valores, alinhamento, nomes completos, famílias e histórico continuam inalterados; somente Produto é cortado para a apresentação aprovada. Calcular larguras usando os rótulos finais, não os cabeçalhos antigos. Guardar `preview_compact_headers` no recibo e rejeitar texto de prévia quando o validate não usar as mesmas opções. Conta sem autorização ou cap/modo divergente falha fechado.
+
+Esse pedido de teste não promove automaticamente os rótulos nem o limite de 12 ao padrão global ou normal da conta; aguardar aprovação visual. Reutilizar o mesmo modelo financeiro e o mesmo snapshot de configuração e indicar os horários no cabeçalho; não consultar Meta/SB novamente apenas para mudar texto. Validar igualdade de todas as células exceto Produto, ordem/IDs, histórico, largura e tamanho das partes. Publicar como novo relatório no destino solicitado, com journal e GET exato; **não apagar ou editar relatórios anteriores**. Suíte: `test_shein_report_compact_headers.py`, junto às demais `test_shein_report_*.py`.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:

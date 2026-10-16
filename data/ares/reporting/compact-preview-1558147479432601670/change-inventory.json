@@ -1,0 +1,46 @@
+{
+  "status": "preview_published_and_verified_pending_visual_approval",
+  "scope": "authorized visual preview only; account1583000095650153; product12; compact labels; no deletion or financial refresh",
+  "source_thread_id": "1560303769680355525",
+  "target_thread_id": "1558147479432601670",
+  "files": [
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+      "backup": "/root/mgs-agent/data/ares/reporting/compact-preview-1558147479432601670/before/shein-report-layout.py",
+      "sha256_before": "7fce484d6ad9f51d60213d776add090fcf30d4d788e9688b8207a76066eafdc9",
+      "sha256_after": "53b1783e8bad14b6abfbd3d2f94026ed9d1ce059cc933828dba3f2d1b3036a26"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "backup": "/root/mgs-agent/data/ares/reporting/compact-preview-1558147479432601670/before/SHEIN-US-DIRECT.json",
+      "sha256_before": "723e042b5b3b7ded6bdf2c841c4bccb13d5f826f372c91368d92c056eb3ae92b",
+      "sha256_after": "f320c0e453ee0f74ddfd8a8bd8260681b3e235066970e6c00df3f45df9894316"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_compact_headers.py",
+      "sha256_after": "38f80be7234f9d47a8e8e86e0974998235cc72a08f03ed99d2e09f4c74959603"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+      "sha256_after": "690f4c55298779ddd90a14f0b4fa618c17210c9c93600cde84b43661528c0405"
+    }
+  ],
+  "updated_at": "2026-10-16T17:06:02.753613+00:00",
+  "tests_passed": 43,
+  "qa": {
+    "rows": 74,
+    "history_cells": 518,
+    "previous_width": 156,
+    "new_width": 140,
+    "parts": 13,
+    "old_cells_and_order_preserved_except_product": true,
+    "history_identical": true,
+    "source_model": "/root/mgs-agent/data/ares/reporting/bid-budgetr-1558147479432601670/model.json"
+  },
+  "publication_journal": "/root/mgs-agent/data/ares/reporting/compact-preview-1558147479432601670/publication-journal.json",
+  "previous_parts_preserved_and_exact": 13,
+  "meta_sb_calls": 0,
+  "delete_calls": 0,
+  "edit_calls": 0,
+  "normal_and_global_default_unchanged": true
+}

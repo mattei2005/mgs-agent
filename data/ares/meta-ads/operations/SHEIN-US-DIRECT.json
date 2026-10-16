@@ -691,7 +691,17 @@
           "preserve_financial_snapshot_on_column_complement": true,
           "require_separate_configuration_timestamp": true,
           "no_Meta_budget_bid_status_write": true,
-          "does_not_change_other_accounts_default_columns": true
+          "does_not_change_other_accounts_default_columns": true,
+          "compact_header_preview": {
+            "status": "authorized_preview_pending_visual_approval",
+            "source_thread_id": "1560303769680355525",
+            "source_message_id": null,
+            "product_max_characters": 12,
+            "remove_product_ellipsis": true,
+            "header_aliases": {"Budget R.": "B.R.", "Receita": "Rev", "Est.Health": "Health", "ROI est.": "ROI E."},
+            "preserve_snapshot_order_values_and_previous_messages": true,
+            "not_a_global_or_automatic_default_change": true
+          }
         }
       },
       "format": "short_header_aligned_pipe_table_short_footer",
