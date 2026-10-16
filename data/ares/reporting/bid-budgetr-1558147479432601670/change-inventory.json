@@ -6,13 +6,37 @@
     {
       "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
       "backup": "/root/mgs-agent/data/ares/reporting/bid-budgetr-1558147479432601670/before/shein-report-layout.py",
-      "sha256_before": "da17bcc635f91ac8860262265ec6d21e90fd29278b0f791d24a96c0bbcc6842f"
+      "sha256_before": "da17bcc635f91ac8860262265ec6d21e90fd29278b0f791d24a96c0bbcc6842f",
+      "sha256_after": "7fce484d6ad9f51d60213d776add090fcf30d4d788e9688b8207a76066eafdc9"
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "backup": "/root/mgs-agent/data/ares/reporting/bid-budgetr-1558147479432601670/before/SHEIN-US-DIRECT.json",
-      "sha256_before": "965929717ce0bbe8e0dbe397b3aca2d82bf100c3f87895e6094113b50135d8f1"
+      "sha256_before": "965929717ce0bbe8e0dbe397b3aca2d82bf100c3f87895e6094113b50135d8f1",
+      "sha256_after": "723e042b5b3b7ded6bdf2c841c4bccb13d5f826f372c91368d92c056eb3ae92b"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_configuration_columns.py",
+      "sha256_after": "16d5d941ae7663f14068aa471b65d6d168fec373c0c893ad34f7552d2fc5e092"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+      "sha256_after": "14d0a9a7e270ea0c8e4f99ed3c53d64c4ee46a96762221eaddd869e1d15b075a"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+      "sha256_after": "87433f192256b1c36a646b8802c76ad144991b2eb7b394cd6090f7a58aeb6807"
     }
   ],
-  "status": "in_progress"
+  "status": "published_and_verified",
+  "updated_at": "2026-10-16T16:42:04.496747+00:00",
+  "tests_passed": 39,
+  "financial_snapshot": "2026-10-16T07:02:58.203432-04:00",
+  "configuration_snapshot": "2026-10-16T12:37:28.352874-04:00",
+  "campaigns": 74,
+  "history_cells": 518,
+  "verified_message_parts": 13,
+  "meta_writes": 0,
+  "registry_id": "ARES-SHEIN-G006-02-BID-BUDGETR-20261016",
+  "publication_journal": "/root/mgs-agent/data/ares/reporting/bid-budgetr-1558147479432601670/publication-journal.json"
 }

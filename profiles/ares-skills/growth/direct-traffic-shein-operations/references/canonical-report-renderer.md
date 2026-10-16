@@ -22,6 +22,17 @@ O teste de 20 sem reticências foi aprovado e promovido ao padrão: próximos re
 
 Comparar a largura total real antes/depois: retirar `...` de alguns rótulos não reduz necessariamente a largura da coluna, pois outros nomes completos podem continuar com o máximo vigente. Informar o resultado sem prometer que a quebra visual foi resolvida. Para teste de formatação, reutilizar o modelo financeiro real do relatório que o usuário está comparando, declarando o horário, sem uma nova coleta financeira desnecessária. Entrega em outra thread exige destino explicitamente pedido e readback da conta/thread e de cada mensagem publicada; manter journal para reconciliar efeitos parciais e não reenviar report às cegas. O renderer continua sem transporte; a opção de prévia não autoriza postagem por si só. Testes cobrem remoção só do sufixo acrescentado, preservação de nomes sem corte e pontos originais, integridade das demais células e validação com modo explícito.
 
+## Colunas Meta por conta — Bid e Budget R.
+
+Quando Rodolfo autorizar acréscimos para uma conta específica, registrar o recorte em `on_demand_default_layout.account_column_overrides`, mantendo intactas as colunas globais das demais contas. Na conta `1583000095650153` / `Yolokfx-US-SHEIN-EN-02-G006`, thread corrigida `1558147479432601670`, o renderer acrescenta **Bid imediatamente antes de Gasto** e **Budget R. imediatamente antes de Receita**. A fonte é a decisão de Rodolfo na Diretoria `1560303769680355525`; o destino anterior foi corrigido, não deve receber a publicação.
+
+- Ler os mesmos campaign IDs por GET/batch GET com `account_id,name,bid_strategy,budget_remaining,daily_budget,lifetime_budget` e conjuntos paginados `id,campaign_id,bid_strategy,bid_amount`. Confirmar conta/moeda e cobertura integral; não usar nome ou gasto como configuração.
+- `Budget R.` usa `campaign.budget_remaining` retornado pela Meta, convertido de unidades menores para a moeda da conta (USD: Decimal/100). **Nunca calcular daily_budget menos o gasto do snapshot**, que pode ter outro horário. Ausente permanece `n/d`; zero explícito é `0,00`. Não substituir pelo saldo da conta ou pelo budget diário.
+- `Bid` usa `adset.bid_amount` somente quando a estratégia efetiva do conjunto/campanha for `COST_CAP`; MAXVOL e BIDCAP ficam `—`. Cap ausente fica `n/d`; estratégias diversas ficam `MIXED`/`misto`. Para múltiplos conjuntos COST_CAP com caps diferentes, não escolher um arbitrário: deixar o campo numérico indisponível e explicar os valores mistos no rodapé.
+- Modelo exige `budget_remaining`, `cost_per_result_goal`, `bid_strategy_live` e `source_timestamps.configuration`; valores monetários são já convertidos. O renderer rejeita campos omitidos, números inválidos/negativos e goal numérico em estratégia não COST_CAP. Indisponibilidade explícita usa null mais limitação, nunca dado inventado.
+- Em complemento de colunas, preservar todos os campos financeiros, nomes, seleção, ordem e histórico do modelo anterior e informar os dois horários no cabeçalho. O atraso GAM/SB preservado continua sendo observação daquele snapshot financeiro, não uma leitura atual.
+- Exercitar a suíte `test_shein_report_configuration_columns.py` junto às demais `test_shein_report_*.py`, comparar todas as células antigas e o histórico e repetir render/validate com a thread exata. O acréscimo não autoriza write Meta, alteração global, cron ou exclusão de mensagens.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:
