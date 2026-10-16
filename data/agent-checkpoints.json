@@ -3983,12 +3983,12 @@
     {
       "agent": "ares",
       "id": "ares-intake-1560783862555087003",
-      "next_step": "Conferir 19 fontes, congelar plano, sanitizar e executar com readback missing-only",
+      "next_step": "Executar somente camadas ausentes; validar READY, mover originais a LEGACY, entregar limpos em nicolas e auditar 19 IDs",
       "objective": "Tratar 19 criativos US SHEIN EN de Nicolas e entregar na pasta nicolas preservando originais e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1560783862555087003",
-      "state": "preparando inventario live, estabilidade e revisao tecnica/visual; nenhum write drive",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1560783862555087003/plan.json",
+      "state": "19 videos novos encontrados em nicolas, estabilidade 3 polls; revisao multiframe, clean=true e plano congelado com hashes e nomes; zero write remoto ate aqui",
       "thread_id": "1560783862555087003",
-      "updated_at": "2026-10-16T22:39:39+00:00"
+      "updated_at": "2026-10-16T22:51:32+00:00"
     },
     {
       "agent": "ares",
@@ -6252,5 +6252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T22:39:39+00:00"
+  "updated_at": "2026-10-16T22:51:32+00:00"
 }
