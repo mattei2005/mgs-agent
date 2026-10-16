@@ -62,6 +62,14 @@ O gestor não precisa descobrir IDs técnicos; Ares os obtém em read-only e reg
 
 Se o gestor subir o original antes do tratamento, o tratado correspondente continua reservado e inelegível. Estratégias diferentes (bot e tráfego direto) não tornam original e tratado candidatos independentes.
 
+## Recuperar drift de nomes e reposições na pasta do gestor
+
+- Se o preparador rejeitar nome ausente/ambíguo, liste por API a pasta exata inteira antes de pedir outro arquivo: o Drive pode conter todos os nomes literais enquanto o inventário mantém nomes anteriores. Compare também os IDs dos registros cujo nome já coincide; coincidência de nome não garante o arquivo certo.
+- Para renomeação no mesmo ID, exija igualdade de MD5/tamanho live com o registro. Para reposição com ID novo, baixe a cópia selecionada, confira MD5/tamanho do Drive, SHA256 contra a linhagem existente e metadata clean; preserve os IDs anteriores e histórico Meta. Checksum idêntico é a mesma linhagem, não um asset novo.
+- Trate trocas de nomes como um mapa completo antes de editar: um nome solicitado pode apontar no cache a outra linhagem cujo tratado está na lixeira. Confirme cada ID antigo por GET, preserve backup e histórico, reconcilie apenas registros comprovados sob lock e valide unicidade de todos os nomes solicitados contra seus IDs live. Não renomeie o Drive, apague histórico ou descarte uma colisão apenas para satisfazer o lookup; registro histórico retirado do lookup precisa conservar nome anterior e evidência da retirada. Registre manutenção de dados em REPORT-INFRA.
+- Uma reserva de request anterior concluído não prova execução ainda em andamento nem libera uso global. Para reuso explicitamente solicitado pelo mesmo gestor, valide o estado terminal anterior e os anúncios na conta exata; mantenha bindings/test_history e anexe a transferência de reserva ao histórico. Request anterior ainda resumível permanece conflitante; não roube a reserva.
+- Retome o mesmo pedido pelo preparador central, dry-run e Engine v3. Antes de concluir, exija igualdade de campaign/adset/ad IDs do checkpoint com as árvores finais, cobertura exata de ad/creative IDs pelas provas renderizadas e conferência literal dos grupos/copy. Essa conferência real testa o reparo; metadados reconciliados sozinhos não comprovam campanha concluída.
+
 ## Pitfalls
 
 - Não considerar `01_READY` sinônimo de “nunca usado”.
