@@ -13,6 +13,40 @@ def policy():
     except (OSError,ValueError):return {}
 
 
+def prepare_item(q,key,idx,result):
+    """Called inside result transaction: SQLite only, never Discord/HTTP."""
+    cfg=policy()
+    if cfg.get('enabled') is not True or cfg.get('mode')!='PER_ITEM':return None
+    j=q.job(key);link=j['links'][idx]
+    if link['state'] not in {'PASSED','DEFERRED_NO_AD','COOLDOWN_NO_AD'}:return None
+    jobs=None
+    for row in q.db.execute("SELECT detail FROM events WHERE kind='continuous_batch_started' ORDER BY seq DESC"):
+        d=json.loads(row['detail'])
+        if key in d.get('jobs',[]):jobs=d.get('report_jobs') or d['jobs'];break
+    if jobs is None:jobs=q.success_group(key)[0]
+    jobs=list(dict.fromkeys(peer for k in jobs for peer in q.success_group(k)[0]))
+    peers=[q.job(k) for k in jobs];counts=Counter(l['state'] for p in peers for l in p['links']);total=sum(counts.values());done=counts.get('PASSED',0)
+    payload_link=j['payload']['links'][idx];utm=dict(core.urllib.parse.parse_qsl(core.urllib.parse.urlsplit(payload_link['effective_campaign_url']).query)).get('utm_campaign','')
+    label='✅ Anúncio identificado · rolagem ·10 segundos · nova aba normal fechada.' if link['state']=='PASSED' else '↪️ Sem anúncio após3tentativas; retorno ao final da rodada.' if link['state']=='DEFERRED_NO_AD' else '⏳ Ainda sem anúncio; recuperação automática60s após encerrar a rodada.'
+    pending=sum(counts.get(s,0) for s in ['DEFERRED_NO_AD','COOLDOWN_NO_AD','REVIEW_REQUIRED']);remaining=total-done-pending
+    content=f'**Acompanhamento — campanha {utm}**\n{label}\n✅ Com anúncio: **{done}/{total}** · ⏳ Aguardando: **{remaining}** · para retorno/revisão: **{pending}**.'
+    thread=core.identifier(cfg.get('thread_id') or core.INCIDENT_THREAD);notice=f'landing-item:{key}:{idx}:{link["attempt"]}:{link["state"]}'
+    q.prepare_message(notice,thread,content);q.event(key,'progress_update_authorized',{'notification_key':notice,'mode':'PER_ITEM','idx':idx,'attempt':link['attempt'],'scope_jobs':jobs})
+    return notice
+
+
+def deliver_items(q,discord_factory,cfg):
+    rows=q.db.execute("SELECT key FROM messages WHERE key LIKE 'landing-item:%' AND state IN ('PREPARED','INTENT') ORDER BY created LIMIT ?",(int(cfg.get('delivery_batch_size',5)),)).fetchall()
+    if not rows:return {'state':'NOT_DUE','mode':'PER_ITEM'}
+    client=discord_factory();verified=[]
+    for row in rows:
+        try:m=client.deliver(q,row['key']);verified.append(str(m['id']))
+        except Exception as exc:
+            with q.tx():q.event(None,'item_delivery_deferred',{'notification_key':row['key'],'reason':type(exc).__name__,'same_outbox_preserved':True})
+            break
+    return {'state':'VERIFIED' if len(verified)==len(rows) else 'DELIVERY_DEFERRED','mode':'PER_ITEM','message_ids':verified}
+
+
 def snapshot(q,cfg):
     wanted=set(cfg.get('report_jobs') or [])
     jobs=[q.job(r['key']) for r in q.db.execute('SELECT key FROM jobs ORDER BY created,key') if not wanted or r['key'] in wanted]
@@ -121,7 +155,7 @@ def record_resumed_progress(q):
 
 def prepare(q,cfg=None):
     cfg=policy() if cfg is None else cfg
-    if cfg.get('enabled') is not True:return None
+    if cfg.get('enabled') is not True or cfg.get('mode')=='PER_ITEM':return None
     generation=str(cfg.get('generation') or cfg.get('authority_message_id') or '')
     if not re.fullmatch(r'[0-9]{15,20}',generation):raise ValueError('explicit progress authority required')
     thread=core.identifier(cfg['thread_id']);interval=max(60,int(cfg.get('interval_seconds',900)))
@@ -161,6 +195,7 @@ def cycle(q,discord_factory,cfg=None):
     landing_finish_all.cycle(q,discord_factory)
     cfg=policy() if cfg is None else cfg
     if cfg.get('enabled') is not True:return {'state':'DISABLED'}
+    if cfg.get('mode')=='PER_ITEM':return deliver_items(q,discord_factory,cfg)
     key=prepare(q,cfg)
     generation=str(cfg.get('generation') or cfg.get('authority_message_id') or '')
     pending=q.db.execute("SELECT key FROM messages WHERE key LIKE ? AND state IN ('PREPARED','INTENT') ORDER BY created",('landing-progress:'+generation+':%',)).fetchall()

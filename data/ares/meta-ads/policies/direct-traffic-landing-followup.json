@@ -75,6 +75,43 @@
     "campaign_creation_requests_are_not_serialized": true
   },
   "new_tab_every_attempt": true,
+  "active_observation_route": {
+    "mode": "LEAN_NORMAL_NEW_TAB",
+    "authority": "344196393512075265",
+    "authority_message_ids": [
+      "1560613464874029137",
+      "1560614875024195746",
+      "1560615018133717053"
+    ],
+    "session_definition": "Abertura do link em uma aba NOVA; nunca trocar a URL de uma aba usada",
+    "browser_mode": "NORMAL_NOT_INCOGNITO",
+    "prepare_all_exact_links_before_first_navigation": true,
+    "sequence": [
+      "new_normal_tab",
+      "identify_rendered_ad",
+      "scroll",
+      "observe_10_seconds",
+      "close_owned_tab",
+      "next_new_tab"
+    ],
+    "screenshot_series_required": false,
+    "offline_frame_review_required": false,
+    "minimal_visual_read_allowed_for_actual_ad_detection": true,
+    "compact_result_and_owned_closure_required": true,
+    "no_code_configuration_or_documentation_while_landing_open": true,
+    "observation_query_flag": {
+      "name": "nocache",
+      "value": null,
+      "authority_message_id": "1560620891472265308",
+      "applies_to": "OBSERVER_URL_ONLY_NOT_META_CAMPAIGN_URL",
+      "preserve_existing_query_bytes": true
+    },
+    "supersedes": "Private windows, screenshot cadence collection and per-frame review as mandatory landing route",
+    "version": "0.5.0",
+    "repair_browser_mode": "NORMAL_NOT_INCOGNITO",
+    "repair_screenshot_series_required": false,
+    "shared_mechanical_core": "ares_campaign_v3.landing_lean.observe_prepared"
+  },
   "verify_close_before_next": true,
   "minimum_visible_seconds": 10,
   "visible_duration_authority_message_id": "1559964027264962702",
@@ -86,14 +123,14 @@
   "max_attempts_no_ad": 3,
   "no_ad_retry_policy": {
     "enabled": true,
-    "generation": "LANDING-THREE-THEN-FINAL-20261015",
-    "authority": "Rodolfo Mattei: tentar 3x; sem anúncio pular para próxima; no final tentar as pendentes e reportar aqui as que continuarem com problema para revisão",
+    "generation": "LANDING-AUTO60S-1560642881830789181",
+    "authority": "Rodolfo: manter3iniciais+1retorno;ao terminar tudo esperar1min e tentar mais1vez os ainda sem anuncio, sem pedido manual nem loop infinito",
     "authority_thread_id": "1559932317861158993",
     "initial_no_ad_attempts": 3,
     "final_no_ad_attempts": 1,
     "retry_after_seconds": 0,
     "initial_exhausted_state": "DEFERRED_NO_AD",
-    "final_exhausted_state": "REVIEW_REQUIRED",
+    "final_exhausted_state": "COOLDOWN_NO_AD",
     "final_pass_after_initial_queue_settled": true,
     "report_only_after_final_pass_settled": true,
     "report_destination_thread_id": "1559932317861158993",
@@ -102,17 +139,27 @@
     "never_reopen_passed": true,
     "no_repeated_cleanup_for_verified_closed_absence": true,
     "technical_failure_is_not_no_ad": true,
-    "supersedes": "Two-no-ad limit and repeated ATTENTION reconciliation; historical priority extra-cycle permission retired",
+    "supersedes": "Previous3+1 policy which required another manual request after four absences; initial zero-delay retries unchanged",
     "historical_policy": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/three-then-final-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
     "timing_authority_message_id": "1560416378400284713",
-    "timing_supersession": "Previous 60-second no-ad delay replaced by zero; verified close then new window in same observer session"
+    "timing_supersession": "Previous 60-second no-ad delay replaced by zero; verified close then new window in same observer session",
+    "supersedes_generation": "LANDING-THREE-THEN-FINAL-20261015",
+    "authority_message_id": "1560642881830789181",
+    "automatic_recovery": {
+      "enabled": true,
+      "additional_no_ad_attempts": 1,
+      "wait_after_round_seconds": 60,
+      "exhausted_state": "REVIEW_REQUIRED",
+      "deadline_persisted_once_per_frozen_cohort": true,
+      "release_pc1_while_waiting": true
+    }
   },
   "retry_after_seconds": 0,
   "first_no_ad_notification": false,
   "all_problem_destination_thread": "1559932317861158993",
   "problem_notification_policy": {
     "mode": "HUMAN_ACTION_REQUIRED_ONLY",
-    "final_no_ad_review_exception": "After the finite 3+1 pass, report every unresolved link here for Rodolfo review; no generic technical alerts",
+    "final_no_ad_review_exception": "After3initial+1final+1automatic recovery after60s, report unresolved links here; no generic technical alerts",
     "authority": "Rodolfo Mattei: resolver sozinho e falar aqui somente quando precisar da acao dele",
     "source_thread_id": "1559932317861158993",
     "source_message_id": null,
@@ -155,6 +202,68 @@
   "backfill_existing_requests": false,
   "first_production_test": "Rodolfo via a genuine authorized manager request; no test campaign now",
   "current_priority": {
+    "mode": "FIFO",
+    "authority_message_id": "1560642881830789181",
+    "do_not_interrupt_active_cleanup": true,
+    "no_implicit_extra_landing_visit": true
+  },
+  "progress_reporting": {
+    "enabled": true,
+    "mode": "PER_ITEM",
+    "thread_id": "1559932317861158993",
+    "authority_message_id": "1560642881830789181",
+    "delivery": "DURABLE_OUTBOX_PLUS_EXACT_GET",
+    "delivery_batch_size": 5,
+    "scope": "FROZEN_BATCH_AND_ORIGINAL_HUMAN_GROUP",
+    "on_material_change_only": true,
+    "stop_when_scope_complete": true,
+    "diagnose_after_consecutive_technical_failures": 3,
+    "manager_success_still_requires_all_pairs": true,
+    "no_retroactive_report_backfill": true,
+    "no_http_between_pc1_items": true
+  },
+  "pc1_execution_policy": {
+    "enabled": true,
+    "generation": "PC1-EXECUTION-RELIABILITY-1560416378400284713",
+    "authority_message_id": "1560416378400284713",
+    "authority_thread_id": "1559932317861158993",
+    "scope": "PC1 observer only; no campaign request/creation/completion or unrelated thread-cleanup changes",
+    "resource_priority": "PHYSICAL_PC1_ONLY",
+    "technical_error_limit": 3,
+    "technical_retry_delay_seconds": 0,
+    "technical_resume_requires": "REAL_REGRESSION_TESTS_AND_NORMAL_BLANK_NATIVE_CLOSE_RECEIPT",
+    "safe_failed_item_does_not_block_other_due_links": true,
+    "same_session_immediate_no_ad_retries": true,
+    "delete_screenshots_after_complete": true,
+    "screenshot_cleanup_requires": [
+      "job COMPLETE",
+      "all links PASSED",
+      "final delivery GET VERIFIED",
+      "validation metadata receipt preserved"
+    ],
+    "preserve_pending_images": true,
+    "preserve_utm_ids_hashes_timestamps_and_json": true,
+    "capture_retry_count": 2,
+    "negative_observation_requires_current_image_and_visual_review": true,
+    "technical_expiry_counts_towards_hard_limit": true,
+    "capture_max_seconds": 45,
+    "minimum_visible_seconds_unchanged": 10,
+    "previous_policy_snapshot": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
+  },
+  "previous_observer_policy": "data/ares/meta-ads/audit/landing-continuous-unification-20261016/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+  "continuous_execution": {
+    "enabled": true,
+    "authority_message_id": "1560642881830789181",
+    "authority_thread_id": "1559932317861158993",
+    "mode": "PREPARED_SERIAL_BATCH",
+    "maximum_run_seconds": 10800,
+    "prepare_all_before_first_navigation": true,
+    "single_backend_until_safe_batch_end": true,
+    "notification_delivery_outside_pc1_loop": true,
+    "no_extra_canary_visits": true,
+    "executor": "scripts/ares-direct-traffic-batch-observe.py"
+  },
+  "legacy_current_priority_snapshot": {
     "mode": "C121_FIRST_THEN_FIFO",
     "authority_message_id": "1560253186277646380",
     "supersedes_authority_message_id": "1560151664692822079",
@@ -187,7 +296,7 @@
       "once_per_authority_message": true
     }
   },
-  "progress_reporting": {
+  "legacy_progress_reporting_snapshot": {
     "enabled": true,
     "on_material_change_only": true,
     "diagnose_after_equivalent_reports": 3,
@@ -220,33 +329,5 @@
     "stop_when_scope_complete": true,
     "delivery": "DURABLE_OUTBOX_PLUS_EXACT_GET",
     "exception_to_quiet_policy": "Explicit progress reports requested by Rodolfo; technical error alerts remain human-action-only"
-  },
-  "pc1_execution_policy": {
-    "enabled": true,
-    "generation": "PC1-EXECUTION-RELIABILITY-1560416378400284713",
-    "authority_message_id": "1560416378400284713",
-    "authority_thread_id": "1559932317861158993",
-    "scope": "PC1 observer only; no campaign request/creation/completion or unrelated thread-cleanup changes",
-    "resource_priority": "PHYSICAL_PC1_ONLY",
-    "technical_error_limit": 3,
-    "technical_retry_delay_seconds": 0,
-    "technical_resume_requires": "REAL_REGRESSION_TESTS_AND_BLANK_WINDOW_CAPTURE_CLOSE_RECEIPT",
-    "safe_failed_item_does_not_block_other_due_links": true,
-    "same_session_immediate_no_ad_retries": true,
-    "delete_screenshots_after_complete": true,
-    "screenshot_cleanup_requires": [
-      "job COMPLETE",
-      "all links PASSED",
-      "final delivery GET VERIFIED",
-      "validation metadata receipt preserved"
-    ],
-    "preserve_pending_images": true,
-    "preserve_utm_ids_hashes_timestamps_and_json": true,
-    "capture_retry_count": 2,
-    "negative_observation_requires_current_image_and_visual_review": true,
-    "technical_expiry_counts_towards_hard_limit": true,
-    "capture_max_seconds": 45,
-    "minimum_visible_seconds_unchanged": 10,
-    "previous_policy_snapshot": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "authority": "344196393512075265",
+  "authority_message_id": "1560613464874029137",
+  "supersedes_instruction": "screenshot-series-review-between-items",
+  "scope": "landing observer only",
+  "flow": "premap all links; open; visually detect rendered network ad; scroll;10seconds;close;next",
+  "progress": "each completed item current thread only;no SHEIN repeat notice",
+  "no_screenshot_series": true,
+  "original_passed_jobs_unchanged": true,
+  "new_tab_session_definition": {
+    "authority_message_id": "1560614875024195746",
+    "definition": "Sessao=abertura do link em uma aba NOVA. Fechar anterior;abrir nova;nunca substituir URL em aba usada;retentativas tambem nova aba."
+  }
+}

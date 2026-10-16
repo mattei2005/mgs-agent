@@ -513,6 +513,14 @@ apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 fi
 
+# Codex refresh integrity: current consolidated runtime only. Keep retained
+# rollback trees untouched; absence/drift on the active base fails closed.
+CODEX_INTEGRITY_TESTS=()
+if primary_patch_present; then
+  apply_patch_if_needed "codex-refresh-integrity-2026-10-16.patch"
+  CODEX_INTEGRITY_TESTS=("$REPO/tests/agent/test_mgs_codex_refresh_integrity.py")
+fi
+
 # Performance supplement belongs to the current consolidated base; retained
 # rollback runtimes remain guardable without forcing a new feature onto them.
 MCP_COMPAT_TESTS=()
@@ -882,6 +890,7 @@ fi
   "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py" \
   "${MCP_COMPAT_TESTS[@]}" \
+  "${CODEX_INTEGRITY_TESTS[@]}" \
   "${AUTH_HEAL_TESTS[@]}")
 
 log "OK Hermes MGS patches present, py_compile, one-shot lifecycle, dead-letter/trace and busy-steer tests passed"

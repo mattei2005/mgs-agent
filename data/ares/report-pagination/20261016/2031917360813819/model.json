@@ -1,0 +1,117 @@
+{
+  "account": {
+    "id": "act_2031917360813819",
+    "name": "Escalatepower-US-SHEIN-EN-04-G004",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "delay": "2026-10-15T17:11:39.765569-04:00",
+    "sb": "2026-10-15T17:11:39.911257-04:00",
+    "insights": "2026-10-15T17:11:40.581974-04:00",
+    "campaigns": "2026-10-15T17:11:45.041262-04:00",
+    "ad_insights": "2026-10-15T17:11:49.547083-04:00",
+    "ads": "2026-10-15T17:11:50.221285-04:00",
+    "daily": "2026-10-15T17:11:53.133214-04:00",
+    "adsets": "2026-10-15T17:11:56.065144-04:00"
+  },
+  "delay": {
+    "hours": 3,
+    "minutes": 10,
+    "totalMinutes": 190,
+    "currentFillTime": "2026-10-15T18:00:00.000Z",
+    "jbf_hour": 14,
+    "fill": 1,
+    "confident": true
+  },
+  "rows": [
+    {
+      "id": "120252786352480205",
+      "name": "001 - [14/10] - COCAP - Electric Car Jack Kit - PRODUCTS - US-EN (b01fb04c01) event_add_to_wishlist",
+      "number": "001",
+      "product": "Electric Car Jack Kit",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "spend": "2.31",
+      "net_revenue": "0.13",
+      "estimated_revenue": "0.13",
+      "roi": "-94.37229437229437229437229437",
+      "estimated_roi": "-94.37229437229437229437229437",
+      "health": "100",
+      "roas": null,
+      "first_delivery": "2026-10-14",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "10.7",
+          "net_revenue": "2.65",
+          "roi": "-75.23364485981308411214953271",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "2.31",
+          "net_revenue": "0.13",
+          "roi": "-94.37229437229437229437229437",
+          "partial": true
+        }
+      ],
+      "sb_spend": "2.24",
+      "status": "ACTIVE"
+    }
+  ],
+  "publisher": {
+    "companyId": "digital-trust",
+    "publisherId": "digital-trust_escalatepower",
+    "name": "escalatepower",
+    "url": "https://escalatepower.com"
+  },
+  "mode": "read_only",
+  "writes": 0
+}

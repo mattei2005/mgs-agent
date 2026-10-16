@@ -4054,6 +4054,25 @@
         "meta-ads-intraday-operations"
       ],
       "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-16T12:23:35+00:00",
+      "id": "ARES-SHEIN-REPORT-CAPACITY2000-20261016",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: paginação por capacidade real 2000 e entrega nativa exata sem segundo split nos seis canais",
+      "updated_at": "2026-10-16T12:23:35+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
       "effective_at": "2026-10-15T18:38:35+00:00",
       "id": "ARES-SHEIN-REPORT-COPY-FAMILY-ORDER-20261015",
       "kind": "policy",
@@ -4171,10 +4190,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-CAPACITY2000-20261016",
       "title": "Padrão SHEIN aprovado: Produto até20 caracteres com espaços sem reticências, sem legenda extensa",
-      "updated_at": "2026-10-15T22:35:58+00:00"
+      "updated_at": "2026-10-16T12:23:35+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -8506,6 +8525,24 @@
       "updated_at": "2026-10-06T04:49:53+00:00"
     },
     {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-16T14:20:42+00:00",
+      "id": "LANDING-CONTINUOUS-AUTO60S-1560642881830789181",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Observer continuo normal;informes por item fora PC1;recuperacao automatica60s apos3+1",
+      "updated_at": "2026-10-16T14:20:42+00:00"
+    },
+    {
       "canonical_key": "growth.direct-traffic.landing-followup.procedure",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md",
       "consumers": [
@@ -8521,6 +8558,42 @@
       "superseded_by": null,
       "title": "Skill dedicada do acompanhamento: bloqueios, recuperacao e execucao ate conclusao validada",
       "updated_at": "2026-10-15T03:14:30+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-16T11:44:34+00:00",
+      "id": "LANDING-LEAN-NORMAL-1560615018133717053",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "LANDING-CONTINUOUS-AUTO60S-1560642881830789181",
+      "title": "Landing: links preparados; nova aba normal por tentativa; anuncio,rolagem,10s,fechar; sem serie screenshots",
+      "updated_at": "2026-10-16T14:20:42+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.landing-observation-query-flag",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-16T11:56:12+00:00",
+      "id": "LANDING-NOCACHE-1560620891472265308",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "nocache bare apenas na URL do observador; UTMs e URL Meta preservadas",
+      "updated_at": "2026-10-16T11:56:12+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.landing-followup.repeated-report-diagnosis",
@@ -9521,10 +9594,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "LANDING-LEAN-NORMAL-1560615018133717053",
       "title": "PC1: retrysem60s, trava tecnica obrigatoria, fila fisica e purge de screenshots apos conclusao validada",
-      "updated_at": "2026-10-15T22:50:45+00:00"
+      "updated_at": "2026-10-16T11:44:34+00:00"
     },
     {
       "canonical_key": "permissions.ares-atena.finance-router-write",
@@ -12410,5 +12483,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-15T22:50:45+00:00"
+  "updated_at": "2026-10-16T14:20:42+00:00"
 }

@@ -1,0 +1,18 @@
+usage: ares-direct-traffic-repair.py [-h] [--key KEY] [--owner OWNER]
+                                     [--index INDEX]
+                                     --pc1-session-id PC1_SESSION_ID
+                                     --repair-note REPAIR_NOTE
+                                     [--standalone-probe-id STANDALONE_PROBE_ID]
+
+Normal-only blank-window repair probe. Never navigates or collects frames.
+Older receipts remain readable for reconciliation; there is no private
+fallback.
+
+options:
+  -h, --help            show this help message and exit
+  --key KEY
+  --owner OWNER
+  --index INDEX
+  --pc1-session-id PC1_SESSION_ID
+  --repair-note REPAIR_NOTE
+  --standalone-probe-id STANDALONE_PROBE_ID

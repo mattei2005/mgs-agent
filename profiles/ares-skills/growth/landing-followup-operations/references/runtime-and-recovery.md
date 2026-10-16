@@ -1,37 +1,20 @@
-# Runtime e comandos — acompanhamento independente
+# Runtime e recuperação do observador
 
-## Componentes e fronteiras
+## When to Use
 
-- CLI: `/root/mgs-agent/scripts/ares-direct-traffic-followup.py`.
-- Intake read-only nativo: `ares_campaign_v3.landing_intake`, serviço/timer `ares-landing-intake`.
-- Fila, amostras e notificações: `ares_campaign_v3.landing_followup`, serviço/timer `ares-landing-followup`.
-- Coletor de screenshots: `/root/mgs-agent/scripts/ares-direct-traffic-sample.py`; captura sem imagem tem uma repetição read-only limitada; série tem deadline de45s e continua exigindo10s reais, sem somar trechos desconexos.
-- Confiabilidade e retenção: `ares_campaign_v3.landing_reliability` e `landing_screenshot_cleanup`. Após COMPLETE + recibo de entrega VERIFIED, a limpeza usa allowlist de raízes/imagens por linhagem, protege referências de jobs incompletos e preserva metadados/recibos antes de apagar. Nunca executar validação por imagens já purgadas nem reabrir PASSED para substituí-las.
-- Abertura/fechamento: esperar readbacks curtos e limitados de registro da janela sem repetir hotkey ambíguo; ler verdict estruturado inclusive quando aninhado. No Chrome, distinguir o botão Close da aba do Close nativo pela linha/posição dos botões Minimize/Restore, não apenas pelo rótulo. A correção é do observador, sem alterar driver compartilhado ou proteção do navegador.
-- Contrato, IDs de destinos e parâmetros: `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`.
-- Banco nativo Hermes só `mode=ro`/query_only. Nada escreve no criador, na resposta original ou nas lanes/quotas Meta. Sem stage/publish wrapper/callback em criação; esses comandos antigos estão aposentados.
-- Sem backfill de pedidos anteriores ao marco de ativação. `activate-intake` nunca redefine o marco. Não abrir pedidos históricos como canário.
+Consultar quando precisar dos comandos de execução, vínculo da sessão real, recuperação de tentativa/intake ou reconciliação de notificações. O fluxo obrigatório e as preferências do operador ficam no SKILL.md; não restaurar comandos antigos de janela privada/coleta de frames como default da rota enxuta.
 
-## Comandos via terminal
+## 1. Preparação e execução do lote contínuo
 
-```text
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py status
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py show --key <key>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py intake
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py tick
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py begin --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID"
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py defer --key <key> --owner <owner>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --result PASS|NO_AD|ERROR --evidence <JSON>
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --result PASS --evidence <JSON completo da última tentativa> --recovered
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py reconcile --key <key> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --evidence <JSON> --resume
-python3 /root/mgs-agent/scripts/ares-direct-traffic-followup.py need-action --key <key> --owner <owner> --pc1-session-id "$HERMES_SESSION_ID" --evidence <JSON>
+### Identificar runtime, sessão e propriedade
+
+1. Resolver o executável real antes de abrir qualquer landing:
+
+```bash
+HERMES_PY="$(dirname "$(readlink -f "$(command -v hermes)")")/python"
 ```
 
-Usar key/owner/idx recebidos, não criar novos requests. `HERMES_SESSION_ID` precisa ser o ID REAL da execução que segura a lease física. `owner` da fila e ID da sessão podem ser diferentes; não confundir os dois. A lease física é administrada pelo script `mgs-pc1-computer-use-lock.py` com acquire/status/renew/release. Renovar antes de expirar e liberar em finally. Não liberar sessão viva de outro trabalho.
-
-### Vincular a sessão real em execução foreground autorizada
-
-Antes de qualquer input, conferir a identidade da sessão corrente. Se for necessário resolvê-la pelo estado nativo, abrir `state.db` em `mode=ro`/`query_only` e consultar apenas a conversa atual:
+2. Usar o ID real da sessão que fará os inputs; `owner` lógico da fila não é esse ID. Se precisar recuperar a identidade de um turno foreground, consultar apenas a conversa atual no banco nativo read-only:
 
 ```sql
 SELECT s.id, s.source, s.thread_id
@@ -42,118 +25,165 @@ WHERE l.expires_at > ?
   AND COALESCE(NULLIF(s.thread_id, ''), s.chat_id, '') = ?;
 ```
 
-Vincular os parâmetros à hora real e à thread atual; exigir uma única sessão viva e identidade compatível com a origem do turno. Propagar esse ID comprovado para o ambiente do subprocesso e para `--pc1-session-id`, então conferir o readback de `acquire --agent ares --session-id <sessão real> --thread-id <thread atual>`. Não gerar um ID para satisfazer o guard nem reutilizar o ID de um worker encerrado. Resolver a sessão não autoriza ignorar gates de prioridade ou tomar a lease de outro trabalho.
+Exigir uma única sessão viva compatível com a origem. Nunca gerar uma identidade para satisfazer o guard, reutilizar worker encerrado ou tomar uma lease viva.
 
-Reservar o job existente com `Queue.claim(owner, ttl=...)`, conferir que a chave retornada é exatamente a pendência autorizada e só então persistir `begin`. Se outra tarefa for selecionada, usar `defer` e liberar a lease sem navegar. O rótulo `owner` é apenas a reserva lógica, nunca a prova de identidade nativa. Depois do `result`, reutilizar `flush(q, Discord())` do controlador existente para fechar o aviso coletivo e exigir `messages.state=VERIFIED` mais GET de conteúdo/autor/destino. Liberar a lease física em `finally` após fechamento seguro; se houver erro antes do registro, conservar as provas e o estado necessário à reconciliação.
+3. Ler o job e reservar a mesma pendência pelo controlador existente. Com `Queue.claim(owner, ttl=...)`, conferir a chave retornada antes de qualquer input; se vier outro alvo, devolver a reserva sem navegar. Reconciliar janelas incertas antes de iniciar outro item.
 
-## Recuperar uma entrada ignorada após mensagem durante a execução
+A lease física é administrada por `scripts/mgs-pc1-computer-use-lock.py` com `status`, `acquire`, `renew` e `release`. Renovar antes de expirar. Liberar somente com fechamento seguro ou ausência de input comprovada; término do processo não basta.
 
-- Antes de reparar uma entrada `IGNORED`, reler o mesmo `native_intake`, o job por request e a evidência terminal canônica. Uma mensagem corretiva durante a execução pode existir no banco nativo como `role=user` sem `platform_message_id`, embora seu envelope e o pedido canônico preservem a origem. Isso faz `origin_for_delivery` retornar `None`; não significa campanha incompleta nem ausência de pedido.
-- Para recuperar somente o pedido expressamente autorizado, usar a origem exata do `request` terminal salvo, exigir estado concluído e posterior ao `activation_epoch`, e fazer GET do ID exato da conclusão informado pelo operador. Conferir ID, conteúdo contra `delivery_obligations` entregue, autor, thread e pai. Não inferir a mensagem apenas pelo horário nem preencher recibo sem GET real.
-- Reutilizar `build_from_source` e `Intake.arm`, com gate de domínio e recibo verdadeiro do mesmo pedido. Preservar o estado ignorado anterior em evento; registrar a recuperação nos registros pai/filho de `native_intake`. Não alterar banco nativo, estado de campanha, cursor global, marco de ativação nem outras entradas ignoradas. Conferir em nova conexão read-only o job, todos os links, o recibo e os IDs. Uma segunda execução deve reconciliar o mesmo job, nunca criar outro.
-- Conferir consumidor e reserva vigentes sem iniciar outro observador. `RUNNING` com links `READY` significa somente executor reservado/preparando; não afirmar que houve abertura nem validação. Essa recuperação pontual não corrige, por si, o reconhecimento automático de mensagens durante a execução.
+### Chamar a rota enxuta contínua
 
-## Captador automático — mensagens durante execução e pedidos agrupados
+O despachante congela `batch-scope.json` com owner, pedidos/digests e conjunto da rodada. Reutilizar os mapeamentos de `prepared_landing_links`; se faltarem destinos, resolver TODOS antes de obter PC1 e fornecer um único manifest `{"items":[{"job":"<key>","index":0,"url":"<landing-real>","mapping_source":"<fonte-canônica>","destination_count":1}]}` com cobertura exata dos pendentes. Destinos A/B distintos não podem ser omitidos ou declarados como únicos por conveniência.
 
-- `origin_for_delivery` aceita o ID nativo da linha e, quando ele estiver ausente, somente o envelope midturn exato do runtime no início/fim da mensagem de usuário. Conferir plataforma, thread/chat, pai e igualdade de `message_id`/`source_message_id`; conteúdo citado ou envelope de outra partição falha fechado. Isso apenas identifica a origem: prova terminal salva, domínio e resposta real no Discord continuam obrigatórios.
-- `request_payloads` resolve o pedido simples ou a conclusão agregada salva em `audit/shein/campaigns/intake/<request_id>/final-verification.json`. Para agregado, enumerar todos os grupos declarados; validar a identidade literal dos filhos, conta, origem, IDs únicos, quantidades e total contra cada estado terminal/readback salvo. Não escolher o primeiro filho nem fazer glob aproximado para adivinhar evidência. Validar a cobertura inteira antes de armar jobs.
-- Vincular todos os filhos ao mesmo `native_obligation_id`/recibo real. O pai `native_intake` só fica `READY` depois da enumeração completa; isso preserva a confirmação única do pedido humano, sem notificações prematuras. Reexecutar o intake deve reutilizar os jobs, não repetir criação, navegação ou postagem.
-- Reconsiderar entradas antigas `IGNORED` uma vez por geração da correção, em lotes limitados, somente se a entrega ocorreu após `activation_epoch`. Priorizar `PENDING` e selecionar apenas registros pai; filhos não podem ocupar essa rodada nem provocar loop de revisão. Marcar ignorados já avaliados com a geração corrente. Não resetar cursor, ativação, contadores ou `PASSED`, e não alterar banco nativo ou fluxo de criação.
-- Testar os dois casos positivos e seus negativos: envelope citado/malformado/fora da partição, fonte antiga, grupo faltante/incompleto, conta/origem divergente, IDs repetidos, total inconsistente, idempotência e recuperação sem starvation. Testes usam fixtures offline; prova operacional exige GET e nova leitura da fila real.
-
-## Coletor de cadência
-
-Depois de anúncio confirmado e aba ativa, executar pelo Python do Hermes (o Python de sistema não contém necessariamente as dependências do handler):
-
-```text
-$(dirname "$(readlink -f "$(command -v hermes)")")/python /root/mgs-agent/scripts/ares-direct-traffic-sample.py --key <key> --owner <owner> --pc1-session-id "$HERMES_SESSION_ID"
+```bash
+"$HERMES_PY" /root/mgs-agent/scripts/ares-direct-traffic-batch-observe.py \
+  --scope '<batch-scope.json>' --owner <owner> \
+  --pc1-session-id "$HERMES_SESSION_ID" \
+  --manifest '<mapa-completo.json>'
 ```
 
-Exige job RUNNING/OPEN_INTENT, lease física e sessão reais. Sem as flags de fechamento descritas abaixo, faz somente `computer_use(action=capture, app=screen)` pelo handler existente e salva frames novos/tempos reais no armazenamento protegido. `CAPTURED_NOT_PASS` não atesta anúncio nem foco. O agente revisa todas as amostras que usará e só então preenche a evidência. `CADENCE_NOT_VALIDATED`/`CAPTURE_ERROR` não significam ausência de anúncio; recapturar na mesma aba, corrigir causa, fechar/verificar e registrar resultado seguro. Não retimar arquivos nem somar trechos desconexos.
+Omitir `--manifest` quando o mapa já estiver completo no cache vinculado ao digest do pedido. O loop faz `begin`, visita, decisão visual, scroll,10s, fechamento e `result` de forma serial; não chamar `begin` fora dele. Manter o backend durante o lote e encerrá-lo uma vez ao final seguro. A pausa e o deadline são verificados entre tentativas; erro técnico devolve diagnóstico, janela incerta impede próxima abertura. Não criar outro turno de modelo por URL e não esperar HTTP de Discord entre itens.
 
-Resolver primeiro o symlink de `hermes` com `readlink -f`; o launcher em `.local/bin` pode não ter um `python` irmão. Usar o `python` do diretório real do launcher, não o Python de sistema nem um path adivinhado. Essa resolução deve ocorrer antes da navegação, não como erro repetido por URL.
+O CLI `ares-direct-traffic-lean-observe.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --url '<landing exata>' --mapping-source '<fonte>'` permanece apenas como compatibilidade individual, usando o MESMO `landing_lean.observe_prepared`. Não confundir nenhum deles com os comandos legados de janela privada/coleta.
 
-## Lotes nativos de abertura e fechamento
+O módulo `ares_campaign_v3.landing_lean` concentra abertura normal, fechamento próprio, alvo de rolagem, decisão visual estruturada e validação compacta. Usar o handler público `computer_use`; não modificar o driver compartilhado ou importar um caminho privado de input para contornar seus gates.
 
-Preferir os helpers locais para retirar turnos de LLM entre inputs mecânicos, mantendo o handler `computer_use` aprovado e a mesma lease real. Não mudar o transporte compartilhado.
+### Preservar o endereço de origem
 
-1. Persistir `begin` e chamar pelo Python do Hermes `scripts/ares-direct-traffic-ui.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --url '<landing real com query exata>' --mapping-source '<fonte real>'`. O helper abre uma única janela privada técnica e salva `desktop-open.json` antes/depois dos efeitos. Ele não aprova anúncio; não criar guardas extras. Qualquer erro exige ler a prova parcial e reconciliar, nunca repetir o helper.
-2. Conferir visualmente a página/anúncio/foco e a exclusividade da janela nova. Só então usar o coletor com `--close-owned-window --exclusive-window-reviewed`. Esse modo salva a série antes de fechar; somente com cadência completa usa um clique no Close nativo da janela comprovadamente nova, confere desaparecimento/preservação e salva `closure`. Sem prova válida da mesma abertura/owner/session/attempt, falha fechado. Não habilitar para abertura manual.
-3. `closure.state=CLOSED_NOT_PASS` significa fechamento já feito: não enviar Ctrl+W/click novamente. Revisar offline todos os frames e a prova de fechamento. Depois, `result --use-captured-closure --use-captured-samples --frames-reviewed` mescla evidências reais com os metadados mínimos; sem revisão e anúncio confirmado não há PASS. Cadência inválida não fecha automaticamente e exige recaptura/cleanup seguro na mesma aba.
-4. O helper rejeita janela preexistente, browser errado, fechamento sem controle nativo único e qualquer readback incerto; não repete inputs ambíguos. Uma janela já ausente retorna revisão necessária, não um novo sucesso de fechamento. Medir abertura, série, fechamento e registro por tempos reais, sem transformar testes offline em benchmark.
+`observation_url` aplica somente a extensão autorizada pelo contrato ativo. O flag `nocache` é bare: usar `?nocache` quando não há query e `&nocache` depois dos parâmetros existentes. Preservar ordem, escapes e valores; não usar `=1`, duplicar o flag ou escrever na URL Meta. Guardar a URL canônica original e a efetivamente aberta em campos distintos.
 
-## Registro compacto — persistir antes de expirar
+Ler instruções de URL no limite seguro entre tentativas. Se uma regra mudar durante a execução, aplicar ao próximo item sem alterar uma navegação em andamento; informar de onde passou a valer, em vez de afirmar que foi retroativa.
 
-Não escrever um grande JSON narrativo nem reler o código por URL. Usar `result --evidence-json '<JSON mínimo real>'`, na mesma CLI e com os mesmos key/owner/index/session/result. O caminho antigo `--evidence <arquivo>` continua válido. Para PASS, `--use-captured-samples --frames-reviewed` incorpora a série real do coletor somente após confirmação explícita do agente de que TODOS os frames mostram anúncio e aba ativa. Cadência sem revisão visual é rejeitada. Metadados mínimos: observed_url, resolved_landing_url e mapping_source; new_tab_identity; tab_closed_verified, other_tabs_preserved e closed_screenshot; network_ad_confirmed e ad_description. As samples vêm do coletor, sem copiar manualmente cada hash/frame.
+### Validar o desktop sem galeria
 
-Para NO_AD normal, registrar identidade, fechamento e preservação reais com closed_screenshot. Guardar também observation_screenshot e visual_review para eventual recuperação. `--recovered` permite registrar PASS ou NO_AD da última tentativa sem revisitar; exige imagem da própria tentativa e fechamento posterior. Não transformar ausência em PASS. Um arquivo cujo write falhou não é evidência existente: o conteúdo proposto precisa ser reconstruído e conferido independentemente contra outputs/imagens reais antes de uso.
+- Confirmar a navegação por readback após Enter; uma URL digitada na barra ainda não prova carregamento.
+- Se a leitura mostrar New Tab, tela de loading ou página não confirmada, reler limitadamente na mesma aba. Não registrar `NO_AD` nem abrir outra página para resolver uma leitura inconclusiva.
+- Após `capture(app="screen")`, refazer `capture(mode="ax", pid=<pid>, window_id=<window_id>)`; localizar o `Document` da página com bounds de viewport e usar seu índice fresco para scroll. Sem esse alvo, a rolagem pode ser recusada mesmo com a janela aberta.
+- Examinar `code`, `effect` e `verdict`, inclusive aninhados. Uma recusa ou no-op comprovado permite escalar; input `unverifiable` exige readback antes de repetir. Não prever foreground apenas porque é Chrome.
+- Fechar pelo controle nativo da janela própria, conferindo a linha de Minimize/Restore/Maximize e o Close à direita; Chrome também chama o botão da aba de Close. Uma janela técnica de uma aba deve permanecer exclusiva da tarefa.
+- Verificar ausência do alvo e preservação das identidades anteriores. Se o fechamento já foi confirmado, não clicar novamente nem repetir cleanup por mudanças posteriores feitas pelo usuário.
 
-## Evidência mínima
+O recibo lean vincula URL efetiva, abertura normal nova, decisão visual de anúncio/página ativa, tempo medido e enumerações nativas antes/depois do fechamento. Ausência de série de imagens não dispensa esses fatos nem transforma script/slot vazio/CTA editorial em anúncio.
 
-PASS:
-- observed_url exata; resolved_landing_url e mapping_source quando o worker resolveu destino;
-- new_tab_identity real; tab_closed_verified=true, other_tabs_preserved=true e closed_screenshot real;
-- network_ad_confirmed=true e descrição específica do criativo renderizado;
-- pelo menos três samples novos com monotonic_seconds, screenshot, ad_visible=true e tab_active=true;
-- imagens/relógios reais cobrem >=10s, gaps monotônicos <=10s e de arquivo <=12s; query igual à da campanha; caminho não quiz/chat.
+## 2. Fila, resultado e recuperação
 
-NO_AD: exigir identidade/fechamento/preservação reais, screenshot de fechamento e **observation_screenshot da abertura atual**, `network_ad_confirmed=false` e `visual_review` explícita da ausência. O código confere a ordem abertura → imagem de ausência → fechamento. Falha de captura, imagem antiga ou página não verificada é erro técnico, não ausência. Política vigente: 3 ausências iniciais, **sem espera artificial entre elas**; após result NO_AD/WAIT_RETRY, chamar `retry-now --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID"`, novo begin e nova janela na mesma sessão. O código impede ultrapassar o limite. Provas são isoladas por key/idx/attempt sob a pasta da execução; não reutilizar o arquivo de abertura anterior. Depois da terceira ausência, `DEFERRED_NO_AD` e próximos links. Ao terminar a fase inicial, 1 tentativa final por pendente; nova ausência vira `REVIEW_REQUIRED`. Somente ao terminar a fase final, outbox reporta aqui os links para revisão de Rodolfo, com GET. As duas ausências anteriores não são zeradas. Regra antiga de 2 tentativas explicitamente supersedida; histórico no audit.
-
-ERROR: diagnosis concreta e estado parcial. Fechamento comprovado ou no_tab_opened verdadeiro libera retry técnico; estado ambíguo exige recovery. No-tab em reconcile também exige browser_inputs_zero_verified com leitura da sessão. Não alegar screenshot/visibilidade sem arquivo real.
-
-Intervenção imediata: human_action_required=true, required_action concreta e diagnosis. O outbox registra o vínculo e só publica nesse caso, exceto o relatório final de revisão após 3+1 expressamente autorizado por Rodolfo. Não transformar dificuldade do agente em necessidade humana presumida. Se a aba continuar incerta, WAITING_HUMAN_UNCLOSED impede outros inputs.
-
-## Diagnóstico por estado
-
-- READY/WAIT_RETRY: consumidor deve retomar automaticamente quando due e recurso/prioridade permitirem.
-- RUNNING: worker reservado para uma URL; pode ainda estar preparando ferramentas, sem input no PC1. Conferir claim vigente, lease e readback da mesma tentativa antes de afirmar observação em andamento. `OPEN_INTENT` é intenção durável anterior à navegação, não prova de página aberta.
-- NEEDS_RECONCILIATION/ATTENTION: cleanup de aba incerta exige RECONCILING. Ausência com fechamento já comprovado segue os contadores da política finita 3+1; não repetir reconciliação do mesmo fechamento. A rodada congela os pares na primeira deferral para que pedidos posteriores não adiem indefinidamente o retorno final.
-- RECONCILING: readback/cleanup somente; reconcile --resume após prova segura, depois a fila faz a nova observação separadamente. Quando `technical_probe_evidence_path` existir, o alvo exato é o probe, não uma landing antiga.
-- TECHNICAL_REPAIR: três erros técnicos consecutivos atingiram uma trava real; sem nova abertura ordinária. Outros itens devidos seguem após cleanup seguro.
-- REPAIRING: fase exclusiva de diagnóstico/correção local. Sob a lease real, executar pelo Python do Hermes `scripts/ares-direct-traffic-repair.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --repair-note '<causa e reparo reais>'`. O runner testa e verifica janela vazia/captura/fechamento, sem URL; só o recibo real libera retry. Falha parcial exige ler technical-probe.json e preservar/reconciliar a janela; `defer` rejeita probe incerto.
-- OBSERVED: todas as URLs do job técnico passaram; o pedido humano ainda pode ter outros jobs pares pendentes. Agrupar por native_obligation_id do recibo, exigir intake READY e todos os pares PASSED antes de uma única notificação. Não refazer navegações.
-- COMPLETE: todos os PASS + confirmação ao gestor GET verificada.
-- DEFERRED_NO_AD: três ausências iniciais já registradas e fechamento seguro; continuar os próximos links. O módulo `ares_campaign_v3.landing_retry_policy` ativa uma única tentativa final por pendente depois de acabar a fase inicial.
-- REVIEW_REQUIRED: ausência também na tentativa final; sem nova visita automática. Quando terminar a rodada final, relatório durável nesta thread identifica pedido, conta, campanha/UTM e URL para revisão de Rodolfo. Evento `finite_review_report_authorized` libera somente esse relatório; entrega exige GET. Informes recorrentes encerram após os relatórios verificados, sem chamar pendência de PASS/COMPLETE.
-- WAITING_HUMAN/WAITING_HUMAN_UNCLOSED: ação humana indispensável comprovada ou fase 3+1 esgotada com pedido explícito de revisão. Aba incerta continua bloqueando navegação; preservar tudo e nunca repetir postagem ambígua.
-
-O consumidor usa timer existente; não criar cron Hermes com entrega origin/all. A conversa de controle/status do acompanhamento não bloqueia seu próprio worker; turnos de campanha nos demais canais mantêm prioridade. Após processo morrer, a liberação de reserva órfã exige source=tool da sessão, payload/owner ligados ao mesmo job e ausência de processo vivo; erro/ambiguidade não autoriza liberar.
-
-## Prioridade temporária e informes solicitados
-
-Ler `current_priority` e a permissão ativa antes de selecionar um alvo: modos legados com alvo nominal no runtime não são defaults permanentes. Uma nova instrução expressa pode superseder a ordem, mas não interrompe cleanup nem observador vivo, não zera tentativas e não reativa permissões aposentadas. Preservar o contrato anterior em auditoria e atualizar informe/checkpoint para a ordem real.
-
-Congelar os pares da rodada quando houver adiamento, para que pedidos posteriores não posterguem indefinidamente a tentativa final. Contar pares `OBSERVED` como navegações concluídas para decidir o retorno: esperar `COMPLETE` criaria deadlock quando o aviso coletivo depende do próprio alvo adiado. Manter FIFO entre os demais e prioridade de cleanup para `NEEDS_RECONCILIATION` ou prova de fechamento ausente. Aplicar a política finita vigente `no_ad_retry_policy` de três ausências iniciais e uma tentativa final, preservando o histórico; autorizações históricas de ciclos extras não devem ser ressuscitadas.
-
-O módulo `ares_campaign_v3.landing_followup_reporting` usa os timers já existentes do intake/consumidor, sem cron novo nem callback de criação. `progress_reporting` contém autorização, escopo, intervalo e marcos. Informa contagens/estado reais, sem afirmar visita ou conclusão por timer ativo. As mensagens são registradas como `progress_update_authorized`, entregues pelo outbox e conferidas por GET; erros técnicos mantêm gate humano-only. Fechamentos de lote humano e retorno à URL reservada podem antecipar o próximo informe. Quando todo o escopo está COMPLETE, o último informe encerra automaticamente a série.
-
-## Testes e prova operacional
+Comandos do controlador, usados somente no estado e na finalidade correspondentes:
 
 ```text
+python3 scripts/ares-direct-traffic-followup.py status
+python3 scripts/ares-direct-traffic-followup.py show --key <key>
+python3 scripts/ares-direct-traffic-followup.py defer --key <key> --owner <owner>
+python3 scripts/ares-direct-traffic-followup.py retry-now --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID"
+python3 scripts/ares-direct-traffic-followup.py result --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --result PASS|NO_AD|ERROR --evidence <arquivo>
+python3 scripts/ares-direct-traffic-followup.py reconcile --key <key> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --evidence <arquivo> --resume
+```
+
+Não registrar resultado de novo se o runner já o gravou. Antes de `--recovered`, verificar o formato e o suporte do validador para a prova atual; não mesclar um recibo lean com flags legadas de samples para fazê-lo passar.
+
+### Escolher a prova certa
+
+1. Construir o caminho pela rodada, job, índice, owner e número da tentativa corrente.
+2. Se o recibo corrente não existir, tratar como prova ausente. **Nunca cair no último arquivo disponível por glob/mtime:** ele pode ser o fechamento de uma visita anterior.
+3. Conferir que abertura, observação e fechamento pertencem à mesma tentativa e ocorreram na ordem correta. Prova completa permite registro sem outra visita; prova parcial permite apenas o cleanup que sustenta.
+4. Em ausência de navegação, provar ausência de inputs/nova janela por leitura da sessão e do desktop. Não inventar uma aba fechada para liberar um guard.
+5. Se registros têm o mesmo início, identidade e fechamento, investigar duplicidade antes de somar tentativas. Preservar a classificação antiga por supersessão explícita, sem contá-la como outro erro/visita.
+
+### Estados e decisões
+
+- `READY` / `WAIT_RETRY`: executar quando devido e o recurso permitir. Com atraso zero de ausência, reutilizar a sessão/lease quando suportado, mas persistir uma nova tentativa e abrir outra aba normal.
+- `RUNNING`: existe reserva; pode ainda não haver input. `OPEN_INTENT` prova intenção durável, não carregamento.
+- `NEEDS_RECONCILIATION` / `RECONCILING`: somente leitura/cleanup até resolver a janela incerta. Não navegar nem liberar a proteção física antes disso.
+- `TECHNICAL_REPAIR` / `REPAIRING`: diagnosticar a camada local; executar `ares-direct-traffic-repair.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --repair-note '<causa e correção reais>'`. No modo ativo, o teste abre somente janela vazia NORMAL e confere fechamento/preservação nativos, sem URL, Incognito, série de imagens, galeria ou timer de anúncio. O recibo de teste não aprova uma landing. Não consumir a política de ausência com falhas técnicas.
+- `DEFERRED_NO_AD`: três ausências reais e fechamento seguro; continuar os outros links. Após a fase inicial, uma tentativa de retorno final.
+- `COOLDOWN_NO_AD`: retorno final ainda sem anúncio. Quando TODOS os itens/retornos do lote congelado terminarem, `finite.maintain` grava um prazo único `due=agora+60s`. Devolver o PC1 e encerrar o backend durante a espera; o timer já existente agenda UMA recuperação automática por pendente ao vencer. Reinício/intake não reseta o minuto nem cria ciclo infinito. O histórico total permanece3+1+1.
+- `REVIEW_REQUIRED`: também não houve anúncio na recuperação automática após o minuto. Reportar ao operador e parar após essas5ausências, sem reabrir aprovados. Novo pedido explícito para um pendente autoriza uma tentativa adicional identificável, sem conceder todas as fases de novo. Antes do input, conferir o suporte do runner à autorização; não reutilizar um comando histórico que ignore o estado. Após o resultado, reconciliar ledger, total consolidado, lista de revisão e checkpoint; preservar o retrato anterior por supersessão.
+- `OBSERVED`: URLs do job técnico passaram; verificar os outros grupos do pedido humano antes da confirmação coletiva. Não reabrir URLs por pendência de notificação.
+- `COMPLETE`: validação integral e entrega final verificadas. Imagens legadas já purgadas não justificam outra navegação.
+- `WAITING_HUMAN_UNCLOSED`: preservar o bloqueio e explicar somente a ação humana indispensável, sem retry de input incerto.
+
+Um erro seguro de item não deve monopolizar a fila: prosseguir nos devidos quando não houver aba incerta. Congelar o conjunto da rodada para o retorno final; jobs pares `OBSERVED` contam como navegação concluída, pois aguardar a confirmação coletiva que depende do próprio pendente causaria deadlock.
+
+## 3. Intake independente e pedidos agrupados
+
+### Recuperar uma entrada sem alterar campanhas
+
+1. Ler `native_intake`, o job do mesmo request e a evidência terminal salva. Não interpretar `IGNORED` como prova de que a criação não aconteceu.
+2. Resolver a origem exata do pedido. Mensagem recebida durante uma execução pode não preencher `platform_message_id`; usar somente o envelope midturn do runtime, conferindo plataforma, thread/chat, pai e igualdade dos IDs. Envelope citado, malformado ou de outra partição falha fechado.
+3. Fazer GET da resposta nativa exata e conferir ID, conteúdo, autor, thread e pai contra a obrigação entregue. Horário semelhante não substitui identidade.
+4. Reutilizar `build_from_source` e `Intake.arm`, com prova real e gate de domínio. Registrar a recuperação pai/filho e o estado anterior em evento; reexecução deve reconciliar o mesmo job.
+5. Conferir em nova leitura a cobertura de todos os links, recibos e IDs. Distinguir entrada armada, worker reservado, navegação e resultado validado.
+
+Não escrever no banco nativo Hermes, no estado de campanha, no cursor global ou no marco de ativação. Não ampliar recuperação pontual para outras entradas ignoradas nem fazer backfill histórico.
+
+### Enumerar uma conclusão agregada
+
+- Usar a prova agregada canônica para enumerar **todos** os filhos declarados; não escolher o primeiro filho ou adivinhar por glob.
+- Validar IDs literais de requests, origem, conta, campanhas únicas, quantidade de cada grupo e total. Grupo faltante/incompleto ou partição divergente impede armar o conjunto como completo.
+- Vincular os filhos ao mesmo `native_obligation_id` e recibo real. Só marcar o pai `READY` após enumeração completa; o sucesso coletivo deve sair uma vez por pedido humano.
+- Em reconsideração automática, usar a geração da correção e lotes limitados; priorizar pais `PENDING`. Não deixar filhos ocuparem a seleção indefinidamente nem zerar cursores, tentativas ou `PASSED`.
+
+Testar casos positivos e negativos de envelope, partição, origem histórica, grupo faltante, conta divergente, IDs duplicados, total inconsistente, idempotência e starvation. Fixtures offline não substituem GET e readback operacional.
+
+## 4. Informes, background e avisos atrasados
+
+### Publicar progresso sem bloquear a visita
+
+No modo ativo `PER_ITEM`, `prepare_item` grava o card e sua autorização na transação de `result`, sem HTTP. O intake/consumidor independente entrega `landing-item:*` pelo outbox com GET; o loop PC1 não espera a rede para seguir. Escopo e totais seguem o lote congelado nos retornos, não toda a fila histórica. O modo antigo por intervalo permanece somente como compatibilidade/configuração histórica. Em POST ambíguo, reconciliar ID/nonce antes de repetir; em rate limit, preservar o outbox para o próximo ciclo, sem fabricar entrega nem fazer outra visita.
+
+Modelo de informe por evento, com números apurados em código:
+
+```text
+✅ Campanha <identificador> — item concluído
+Anúncio identificado · rolagem · 10 s · aba normal fechada.
+Concluídos com anúncio: <X>/<N> · aguardando: <Y> · revisão: <Z>.
+```
+
+Para ausência esgotada, trocar a primeira linha por pendência explícita e não aumentar o contador de aprovados. Não apresentar partes do mesmo pedido como trabalhos extras. `round_complete` pode significar fim das tentativas, não aprovação de todos os links.
+
+Na operação normal, reutilizar `flush(q, Discord())` quando aplicável e exigir todos os pares do recibo original antes do sucesso coletivo. Em replay com override autorizado, não executar um flush indiscriminado que envie o sucesso ao gestor; limitar os informes ao destino registrado para aquela rodada.
+
+### Evitar output técnico automático
+
+- Preparar logs locais e entrega sanitizada antes de iniciar o background. Redirecionar stdout/stderr técnicos; não usar a notificação genérica de saída para despejar traces no Discord.
+- Se a notificação automática for desativada para evitar output bruto, conservar um consumidor explícito do resultado, outbox operacional e checkpoint. Silenciar o processo não pode abandonar sua conclusão.
+- Para mudança de regra ou parada, preferir pausa cooperativa depois do fechamento corrente. Identificar o processo real, não apenas seu shell pai; nunca matar um input incerto nem reiniciar navegador/gateway para trocar uma URL.
+
+### Consumir uma conclusão histórica sem reabrir trabalho
+
+1. Tratar a notificação interna como evento, não como uma nova mensagem do operador.
+2. Correlacionar o ID exato com a execução e seu checkpoint. Se já foi consumida e o encerramento está conferido, não publicar outro aviso nem repetir o sumário final.
+3. Quando necessário, usar uma única checagem local: processo encerrado, resultados da rodada coerentes e pendências de revisão mantidas. Não adquirir PC1 nem abrir URL para isso.
+4. Para um processo encerrado, o mecanismo suportado `process_manage(action="log", session_id=<id-exato>, limit=1)` lê o final e marca consumo no registro de processos. `wait` também consome a conclusão quando retorna o resultado encerrado; `poll` é observação de status e não deve ser tratado como confirmação equivalente de supressão no gateway.
+5. Consumir no registro não retira um evento já encaminhado à conversa. Não editar JSONs globais de processos, drenar notificações de outras sessões ou prometer que um aviso já em trânsito desaparecerá. Depois de verificar/consumir o alvo necessário, encerrar — sem ciclos de autorrecapitulação, novas conferências idênticas ou retomada de links aprovados.
+
+## 5. Auditoria de status sem visitas
+
+1. Definir período no fuso do operador; separar pedidos anteriores ao `activation_epoch` sem transformá-los em backfill.
+2. Ler a fila e o ledger da rodada apontado pelo checkpoint, não apenas um rótulo histórico. Usar SQLite `mode=ro`/`query_only` e projetar só os campos necessários.
+3. Agregar por três unidades distintas: pedido humano, job técnico e combinação landing + UTMs. Deduplicar e contar em código; comparar o recorte monitorado com a fila global quando a pergunta pedir o que falta além dele.
+4. Para cobertura de todo período/canal, reconciliar as obrigações nativas entregues com as provas terminais e jobs usando o intake existente. Busca por palavras ou ausência de turno ativo não prova ausência de trabalho.
+5. Separar reserva, intenção de abrir, navegação comprovada, PASS, revisão e entrega. `WAITING_NATIVE_TURN` histórico não comprova ocupação física atual nem criação de campanha.
+6. Conferir outbox `PREPARED`/`INTENT` e agrupar `OBSERVED` pelo recibo original. Não chamar uma confirmação coletiva pendente de nova fila de links.
+7. Se todos os resultados e recibos já concordam, não regravar o checkpoint nem repetir o relatório por um evento antigo. Se houver divergência real, corrigir somente a camada faltante e validar o readback.
+
+### Conferir o fluxo e localizar overhead
+
+1. Ler o contrato ativo e seguir suas chamadas no despachante, no executor normal, na recuperação e no reporter. Verificar particularmente se `RUNNING`, `RECONCILING` e `REPAIRING` obedecem ao mesmo modo normal/sem galeria; uma regra no SKILL.md não corrige automaticamente um comando legado.
+2. Comparar o caminho automático com o lote efetivamente exercitado: verificar se há mapa compartilhado preparado e um executor contínuo, ou se o despachante inicia um novo CLI/turno de modelo por link. Registrar a diferença como lacuna de integração, não como migração concluída.
+3. Inspecionar o modo de informes e seu escopo. Distinguir entrega por item de configuração histórica por intervalo; verificar os estados dos jobs antes de atribuir bloqueio a uma prioridade antiga. Propor publicação fora do trecho crítico do PC1 preservando outbox/GET, sem afirmar que já está desacoplada se o loop aguarda a entrega antes do próximo item.
+4. Apurar tempos pelos recibos da mesma tentativa: preparação/navegação até abertura, leitura e observação, fechamento, término do backend e entrega. Deduplicar tentativas antes dos cálculos. Separar amostras de PASS, NO_AD e ERROR; publicar mediana/faixa com o denominador e as exclusões. Não tratar a mediana de um PASS como duração de cada link ou previsão do lote inteiro.
+5. Conferir timers e o último resultado do serviço sem acioná-los. Um serviço oneshot inativo entre ciclos, com resultado bem-sucedido e timer ativo, não é por si uma falha.
+6. Entregar uma revisão operacional curta: fluxo válido, regras de exceção, medição observada e lacunas ainda não implementadas. Testes offline, replay real e integração automática são evidências diferentes. Não reabrir páginas nem alterar produção somente para responder à revisão; guardar achados temporários em relatório/checkpoint, não como novas regras globais.
+7. Não diagnosticar cache pela sequência de resultados: comparar as opções realmente usadas nas ausências e no PASS. Sem isolamento da variável, registrar apenas o resultado observado e a limitação causal.
+
+## 6. Testes e retenção
+
+```bash
 python3 -m unittest discover -s /root/mgs-agent/tests -p 'test_direct_traffic_landing*.py'
 ```
 
-Testes offline não são resultado visual real. Validar separadamente: runner de criação preservado; intake/consumidor ativos; transição real da fila; anúncio/tempo/foco/fechamento reais; mensagem exata entregue/readback. GAM exige outra prova própria. Não chamar timer ativo de tarefa concluída.
+A suíte lean deve cobrir nova aba normal, rejeição de Incognito/reuso, query exata e extensão autorizada, loading diferente de ausência, retarget de Document para scroll, escalada após sinal, tempo inválido/NaN, propriedade/fechamento e seleção da rota do worker. Cobrir também o modo ativo nas ramificações de reconciliação e reparo, a autorização de uma única tentativa extra sem resetar o lote, a atualização coerente do consolidado após esse resultado e o modo de informe por item. Um teste do caminho feliz não demonstra que o reparador deixou de exigir Incognito/galeria. Testes legados de galeria devem selecionar explicitamente seu modo, sem obrigar o caminho atual a voltar ao comportamento antigo.
 
-## Auditoria de andamento por período e canais
+Separar testes offline de prova operacional: execução real do helper, anúncio, tempo, fechamento, estado da fila e mensagem entregue são verificações distintas. Não usar totais históricos de testes como evidência da versão corrente.
 
-Executar esta consulta fora da transação de criação, sem navegar nas landings e sem disputar o PC1 com um observador ativo.
-
-1. Obter data/hora reais e construir o início do período em `America/New_York` quando o pedido for “hoje”; não usar a data UTC do host para cortar o dia do operador. Ler `intake_settings.activation_epoch` e manter o recorte anterior à ativação separado, sem transformar consulta de status em backfill.
-2. Abrir a fila em SQLite `mode=ro`, `query_only=ON`; coletar `jobs`, `links`, `events`, `messages`, `native_intake` e `intake_settings`. Salvar um snapshot JSON protegido e calcular contagens/deduplicações em código, não pela leitura visual do output. Projetar somente campos úteis; não despejar os JSONs completos de evidência no chat.
-3. Verificar cobertura pelo lado da origem: ler `delivery_obligations` entregues no período no banco nativo read-only e reconstruir o mesmo turno humano. Usar as funções existentes de `ares_campaign_v3.landing_intake`, após conferir suas assinaturas: `origin_for_delivery`, `terminal_references`, `source_paths` e `verify_native_reply`. Cruzar cada request terminal elegível com seu job; itens `IGNORED` e busca por palavras no texto não provam ausência de criação. Separar respostas sobre criativos, regras ou manutenção de conclusões reais de campanha.
-4. Reconciliar três unidades distintas: pedido humano/resposta de origem, job técnico por request/conta e combinação única de landing + UTMs. Agrupar a apresentação por thread/conta/gestor usando o catálogo canônico por identidade técnica; não contar quatro jobs da mesma resposta como quatro pedidos humanos nem somar números iguais de campanhas de contas diferentes.
-5. Classificar com evidência: READY/WAIT_RETRY = aguardando; RUNNING exige claim vigente e consumidor/lease compatíveis, mas pode ser somente preparação; OPEN_INTENT = intenção persistida antes do input, ainda sem prova de abertura; navegação exige readback do desktop ligado à mesma tentativa. NEEDS_RECONCILIATION/ATTENTION = recuperação pendente, não execução normal; PASSED = URL validada; OBSERVED = URLs do job técnico validadas, exigindo conferir os pares do mesmo pedido humano antes de classificar como mera pendência de notificação; COMPLETE exige mensagem de sucesso do outbox verificada. Timer ativo, contador incrementado, teste aprovado ou migração para retry não provam visita nem avanço visual.
-6. Fazer GET das respostas originais e de cada mensagem de sucesso já existente pelo transporte corporativo autorizado; conferir destino, autor e conteúdo. Se todas as URLs passaram mas o envio estiver pendente, relatar pendência de entrega e reconciliar o outbox, sem repetir POST ambíguo. Se ainda houver URLs não aprovadas, explicar que não é apenas falta de mensagem.
-7. Conferir serviço/timer, claim e lease atuais para identificar gargalo, sem tocar no desktop de outro executor. Para espera por prioridade, conferir `native_busy` em `ares_campaign_v3.landing_intake` e as leases não expiradas de `session_turn_leases JOIN sessions ON sessions.id=session_turn_leases.conversation_id`, com `sessions.source='discord'`, excluindo a thread de controle conforme o contrato. Ler o banco nativo somente em `mode=ro`/`query_only`; retornar só campos necessários. Separar o último `WAITING_NATIVE_TURN` do gate atual: turno concorrente não é necessariamente criação nem uso do desktop. Uma URL incerta pode segurar gestores posteriores na FIFO global; explicar sem sugerir que a criação foi pausada. Não cancelar nem iniciar outro observador para acelerar a consulta.
-8. Atualizar somente os estados que mudaram antes de fechar o relatório. Informar horário do snapshot, bullets por gestor/conta com campanhas e status, total de URLs por estado e exclusões anteriores à ativação. Validar que os totais agregados fecham e que todos os requests elegíveis têm correspondência antes de afirmar cobertura completa; não prometer prazo sem medição.
-
-### Consulta curta de pendências ou tentativa recente
-
-Para responder apenas quais links faltam, se houve nova visita ou o que existe além de um lote, começar por uma consulta curta; a auditoria completa da origem acima é necessária somente para afirmar cobertura de todo um período/canal.
-
-1. Ler `progress_reporting.report_jobs` para o recorte do informe e comparar com todos os `jobs` da fila. Projetar `jobs.state`, `links.idx/state/attempt/due` e os últimos eventos `claimed`, `open_intent`, `observation_result` e reconciliação. Não despejar payload/evidência completos.
-2. Para listar URLs, usar a landing resolvida da evidência ou do payload canônico, nunca inventar destino pelo slug. Aplicar o gate de domínio antes de mencionar qualquer alvo; preservar a query byte a byte. Deduplicar e contar em código, mantendo combinações de UTMs distintas mesmo quando a landing-base é igual. Preferir campanha + link clicável, sem anexo ou preview desnecessário.
-3. Ler `messages` nos estados `PREPARED`/`INTENT` e agrupar jobs `OBSERVED` pelo `native_obligation_id` em `native_receipts`. Informar quando a confirmação coletiva depende dos próprios links já listados: não contar essa dependência como outra fila de navegação. Outbox vazio não significa pedido integral concluído.
-4. Se a pergunta mencionar outros atendimentos, conferir o gate nativo atual conforme o passo 7. Limitar a conclusão: nenhum outro turno ativo agora não prova que não existam pedidos agendados ou trabalho fora do acompanhamento.
-5. Responder primeiro à pergunta direta e depois dar estado e horário. Dizer explicitamente quando só houve enfileiramento/preparação; reservar abertura, anúncio visível e conclusão para suas provas próprias. Não aguardar o worker nem disputar sua lease apenas para melhorar uma resposta de status.
+Para imagens legadas, usar apenas o mecanismo autorizado de limpeza após estado final válido e GET de entrega. Preservar metadados/recibos, proteger referências de tarefas incompletas e não seguir symlinks para outras raízes. A ausência de uma imagem já purgada não invalida um PASS registrado nem autoriza outra impressão.

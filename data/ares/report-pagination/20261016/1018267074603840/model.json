@@ -1,0 +1,181 @@
+{
+  "account": {
+    "id": "act_1018267074603840",
+    "name": "Escalatepower-US-SHEIN-EN-01-G001",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-15T17:10:13.368673-04:00",
+    "smartbidding": "2026-10-15T17:10:09.088286-04:00",
+    "delay": "2026-10-15T17:10:10.586314-04:00",
+    "configuration": "2026-10-15T17:10:48.849120-04:00"
+  },
+  "delay": {
+    "hours": 3,
+    "minutes": 10,
+    "totalMinutes": 190,
+    "currentFillTime": "2026-10-15T18:00:00.000Z",
+    "jbf_hour": 14,
+    "fill": 1,
+    "confident": true
+  },
+  "rows": [
+    {
+      "id": "120253713844140209",
+      "name": "001 - 15/10 - v3 - CALÇAS JEANS PG - COCAP - (b01fb01c01) - event_add_to_wishlist",
+      "number": "001",
+      "product": "CALÇAS JEANS PG",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "spend": "5.16",
+      "net_revenue": "0.4",
+      "estimated_revenue": "0.4",
+      "roi": "-92.24806201550387596899224806",
+      "estimated_roi": "-92.24806201550387596899224806",
+      "health": "95.45454545454545454545454545",
+      "roas": null,
+      "first_delivery": "2026-10-15",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "5.16",
+          "net_revenue": "0.4",
+          "roi": "-92.24806201550387596899224806",
+          "partial": true
+        }
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "120253714049890209",
+      "name": "002 - 15/10 - v3 - CALÇAS JEANS PG - COCAP - (b01fb01c02) - event_add_to_wishlist",
+      "number": "002",
+      "product": "CALÇAS JEANS PG",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "spend": "10.49",
+      "net_revenue": "2.54",
+      "estimated_revenue": "2.86",
+      "roi": "-75.78646329837940896091515729",
+      "estimated_roi": "-72.73593898951382268827454719",
+      "health": "83.33333333333333333333333333",
+      "roas": "0.090562",
+      "first_delivery": "2026-10-15",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "10.49",
+          "net_revenue": "2.54",
+          "roi": "-75.78646329837940896091515729",
+          "partial": true
+        }
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "audit": {
+    "mode": "read_only",
+    "meta_writes": 0,
+    "delivered_ads_covered": 4,
+    "configured_ads": 4,
+    "adsets": 2,
+    "spend_meta": "15.65",
+    "spend_sb": "15.54"
+  }
+}

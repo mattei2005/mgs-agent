@@ -1,0 +1,56 @@
+{
+  "actual_round_snapshot": {
+    "PASS_LEAN": 33
+  },
+  "round_complete": true,
+  "completed_at": 1792154755.060069,
+  "per_item_notices_get_verified": 35,
+  "review_required_campaigns": [],
+  "original_five_jobs_verified_unchanged": true,
+  "desktop_lease_released": true,
+  "tests_passed": 246,
+  "source": "normal-results.json;normal-phase/queue.sqlite3;original five global jobs",
+  "nocache_from_campaign": 165,
+  "original_manager_notifications": 0,
+  "report_infra_message_id": "1560629777210024012",
+  "report_infra_exact_get_verified": true,
+  "report_infra_content_empty_no_mentions": true,
+  "historical_final_verifications": [
+    {
+      "actual_round_snapshot": {
+        "PASS_LEAN": 32,
+        "REVIEW_REQUIRED": 1
+      },
+      "round_complete": true,
+      "completed_at": 1792153211.3697975,
+      "per_item_notices_get_verified": 34,
+      "review_required_campaigns": [
+        173
+      ],
+      "original_five_jobs_verified_unchanged": true,
+      "desktop_lease_released": true,
+      "tests_passed": 246,
+      "source": "normal-results.json;normal-phase/queue.sqlite3;original five global jobs",
+      "nocache_from_campaign": 165,
+      "original_manager_notifications": 0,
+      "report_infra_message_id": "1560629777210024012",
+      "report_infra_exact_get_verified": true,
+      "report_infra_content_empty_no_mentions": true
+    }
+  ],
+  "last_explicit_retry": {
+    "campaign": 173,
+    "attempt": 5,
+    "authority": "Rodolfo Mattei: Tenta de novo",
+    "previous_no_ad_count_preserved": 4,
+    "result": "PASS_LEAN",
+    "dwell_seconds": 10.000123844016343,
+    "browser_mode": "NORMAL",
+    "nocache": true,
+    "closed": true,
+    "other32_unchanged": true,
+    "result_notice_message_id": "1560635098603331698",
+    "result_notice_exact_get_verified": true
+  },
+  "report_infra_scope": "Existing infrastructure report covers route implementation and prior32+1 snapshot;latest runtime retry supersedes that operational snapshot without code/config changes"
+}

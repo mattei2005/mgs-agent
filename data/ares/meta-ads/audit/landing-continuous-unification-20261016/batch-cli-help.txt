@@ -1,0 +1,12 @@
+usage: ares-direct-traffic-batch-observe.py [-h] --scope SCOPE --owner OWNER
+                                            [--manifest MANIFEST]
+                                            --pc1-session-id PC1_SESSION_ID
+
+Continuous prepared landing batch. All diagnostic stdout stays local.
+
+options:
+  -h, --help            show this help message and exit
+  --scope SCOPE
+  --owner OWNER
+  --manifest MANIFEST
+  --pc1-session-id PC1_SESSION_ID

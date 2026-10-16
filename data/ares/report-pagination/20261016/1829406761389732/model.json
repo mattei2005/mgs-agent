@@ -1,0 +1,120 @@
+{
+  "account": {
+    "id": "act_1829406761389732",
+    "name": "Mavroa-US-SHEIN-ES-05-G005",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-15T17:11:37.497614-04:00",
+    "sb": "2026-10-15T17:11:07.234638-04:00",
+    "delay": "2026-10-15T17:11:07.085102-04:00",
+    "adsets": "2026-10-15T17:12:20.200567-04:00",
+    "ads": "2026-10-15T17:12:15.812518-04:00",
+    "daily": "2026-10-15T17:12:07.452388-04:00",
+    "campaigns": "2026-10-15T17:11:07.385883-04:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 10,
+    "totalMinutes": 130,
+    "currentFillTime": "2026-10-15T19:00:00.000Z",
+    "jbf_hour": 15,
+    "fill": 1.03,
+    "confident": true
+  },
+  "rows": [
+    {
+      "id": "120253392569480652",
+      "name": "01 - [13/10] - Prendas IMG - PRODUCTS - US-EN (b01fb05c01) event_add_to_wishlist",
+      "number": "01",
+      "product": "Prendas",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "spend": "10.63",
+      "net_revenue": "9.45",
+      "estimated_revenue": "9.45",
+      "roi": "-11.10065851364063969896519285",
+      "estimated_roi": "-11.10065851364063969896519285",
+      "health": "97.5",
+      "roas": "0.795861",
+      "first_delivery": "2026-10-13",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "33.05",
+          "net_revenue": "14.4",
+          "roi": "-56.42965204236006051437216339",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "18.92",
+          "net_revenue": "14.26",
+          "roi": "-24.63002114164904862579281184",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "10.63",
+          "net_revenue": "9.45",
+          "roi": "-11.10065851364063969896519285",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "audit": {
+    "reconciliation": [
+      {
+        "campaign_id": "120253392569480652",
+        "spend_meta": "10.63",
+        "investment_sb": "10.02",
+        "status": "ACTIVE",
+        "ad_count": 2
+      }
+    ],
+    "writes": 0,
+    "selection": "Meta spend>0 OR impressions>0",
+    "sb_no_delivery_revenue": "0"
+  }
+}

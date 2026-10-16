@@ -1,0 +1,58 @@
+{
+  "account": {
+    "id": "act_1867022354284742",
+    "name": "Growpowerhub-US-SHEIN-EN-06-G006",
+    "currency": "USD",
+    "timezone_name": "America/Los_Angeles",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-15T14:11:01.470042-07:00",
+    "configuration": "2026-10-15T14:11:04.352044-07:00",
+    "history": "2026-10-15T14:11:14.790051-07:00"
+  },
+  "delay": {
+    "totalMinutes": null,
+    "reason": "Sem destino/publisher confirmado; conta sem campanhas. Smart Bidding não consultado."
+  },
+  "rows": [],
+  "notes": [
+    "Conta ativa; nenhuma campanha encontrada, incluindo arquivadas/excluídas.",
+    "Meta sem registros de entrega hoje e entre 09 e 15/10/2026.",
+    "Sem destino/publisher confirmado nesta conta; Smart Bidding não consultado.",
+    "Somente leitura; nenhuma alteração realizada."
+  ],
+  "provenance": {
+    "mode": "read_only",
+    "source_counts": {
+      "today": 0,
+      "terminal": 0,
+      "campaigns": 0,
+      "history": 0
+    },
+    "meta_writes": 0,
+    "binding": {
+      "thread_id": "1558147411900366861",
+      "channel_id": "1558147364450074734",
+      "thread_name": "📈Growpowerhub Conta 06 Intraday",
+      "manager_code": "g006",
+      "account_id": "1867022354284742",
+      "account_name": "Growpowerhub-US-SHEIN-EN-06-G006",
+      "mode": "on_demand_read_only",
+      "layout_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout",
+      "renderer": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+      "require_render_and_validate_before_delivery": true,
+      "historical_messages_not_default_model": true
+    }
+  }
+}

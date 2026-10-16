@@ -1,0 +1,85 @@
+{
+  "authority_message_ids": [
+    "1560613464874029137",
+    "1560614875024195746",
+    "1560615018133717053",
+    "1560617037544558625",
+    "1560620891472265308"
+  ],
+  "scope": "Observer only; normal new tab each attempt; pre-mapped links; no screenshot series; per-item current-thread notices; original Meta/Drive/WordPress/Router/finance untouched",
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_lean.py",
+      "sha256": "b6f31456bffd2c88305a78df505cf29511af2ffa1d0955ecec75e442a55c822b",
+      "size": 11528
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-direct-traffic-supervised-repeat.py",
+      "sha256": "a45b8ec3550ca09ef2325d91e037e342473f5bfae9bb7095b894103e4270a59b",
+      "size": 7380
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-direct-traffic-lean-observe.py",
+      "sha256": "9b83ce3b5ca180eb7a55e2862a393c37103fb2d2db7732364c3a70a68810ad06",
+      "size": 5303
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py",
+      "sha256": "5e57cc60a7b29b0d73ca7d6d7a9d71586914b4497e8d74f5317064dbddc43464",
+      "size": 65949
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_direct_traffic_landing_lean.py",
+      "sha256": "6cf4d7135c68d5fd55eb08d58e66284d89ad2d4448d3fe8753b17b4f30d6c8b0",
+      "size": 8765
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_direct_traffic_landing_followup.py",
+      "sha256": "bc3a2b99f9c9f0b3d411fa2155bc2e42b5f95bdb072324b1dbcd1a6a11cb1863",
+      "size": 49751
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "sha256": "d29d732c48d5483145502956eba4e1be7a1f478ebf028d8b61a827f6735942be",
+      "size": 14795
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md",
+      "sha256": "154a4d77af2dc34d952e7e43008d5bfce7702c26255553bfc19f9bfddd039878",
+      "size": 21585
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/references/runtime-and-recovery.md",
+      "sha256": "8b87a3d2d91871104b63ccfba3873c9ff943f8ae6403252903751afed3ec2ce9",
+      "size": 30965
+    }
+  ],
+  "tests": {
+    "command": "python3 -m unittest discover -s /root/mgs-agent/tests -p 'test_direct_traffic_landing*.py'",
+    "passed": 246,
+    "failures": 0
+  },
+  "actual_round_snapshot": {
+    "PASS_LEAN": 32,
+    "REVIEW_REQUIRED": 1
+  },
+  "round_complete": true,
+  "snapshotted_at": 1792153507.3215044,
+  "skill": "landing-followup-operations",
+  "original_completed_jobs_unchanged": true,
+  "critical_system_writes": 0,
+  "nocache_first_campaign": 165,
+  "query_rule": "Bare &nocache only on observation URL;original Meta URL and all existing query bytes preserved",
+  "knowledge_registry_ids": [
+    "LANDING-LEAN-NORMAL-1560615018133717053",
+    "LANDING-NOCACHE-1560620891472265308"
+  ],
+  "completed_at": 1792153211.3697975,
+  "per_item_notices_get_verified": 34,
+  "review_required_campaigns": [
+    173
+  ],
+  "original_five_jobs_verified_unchanged": true,
+  "desktop_lease_released": true,
+  "audit_correction": "Duplicate same-start/window/closure C151 audit entry explicitly superseded; excluded from attempt counts; original receipt kept"
+}

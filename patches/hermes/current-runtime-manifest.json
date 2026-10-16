@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "primary_patch": "mgs-runtime-customizations-2026-10-02-main-a510d6c6.patch",
-  "upstream_sha": "a510d6c64a61582688133b5f54c8191e190a1f49",
-  "supplemental_patches": [],
+  "primary_patch": "mgs-runtime-customizations-2026-10-12-main-7cc3fb8c.patch",
+  "upstream_sha": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e",
+  "supplemental_patches": ["codex-refresh-integrity-2026-10-16.patch"],
   "absorbed_supplements": [
     "mgs-browser-budget-hygiene-2026-10-02.patch",
     "mgs-mcp-sdk-readonly-2026-10-02.patch"

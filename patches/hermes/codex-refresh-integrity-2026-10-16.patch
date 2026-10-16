@@ -1,0 +1,249 @@
+--- a/agent/credential_pool.py
++++ b/agent/credential_pool.py
+@@ -1309,7 +1309,9 @@
+         the pool store, is token authority for those sources; a row with no
+         token material at all is refused for the same reason.
+         """
+-        if self.provider not in ("anthropic", "xai-oauth") and plugin_refresh_hook(self.provider) is None:
++        if self.provider not in ("anthropic", "xai-oauth", "openai-codex") and plugin_refresh_hook(self.provider) is None:
++            return entry
++        if self.provider == "openai-codex" and not _is_manual_source(entry.source):
+             return entry
+         is_anthropic = self.provider == "anthropic"
+         is_xai = self.provider == "xai-oauth"
+@@ -1548,7 +1550,7 @@
+         # the winner's rotated token and skips the POST.
+         with _auth_store_lock(timeout_seconds=self._single_use_refresh_lock_timeout()):
+             if self.provider == "openai-codex":
+-                synced = self._sync_entry_from_auth_store(entry)
++                synced = self._sync_entry_from_auth_store(self._sync_entry_from_pool_store(entry))
+                 if synced is not entry and not force and not self._entry_needs_refresh(synced):
+                     return synced
+                 return self._refresh_entry_impl(synced, force=force)
+@@ -1821,7 +1823,8 @@
+                 return None
+         elif self.provider in _TOKENS_SINGLETON_PROVIDERS:
+             _, display, _, terminal_fn_name = _TOKENS_SINGLETON_PROVIDERS[self.provider]
+-            synced = self._sync_entry_from_auth_store(entry)
++            current = self._sync_entry_from_pool_store(entry) if self.provider == "openai-codex" else entry
++            synced = self._sync_entry_from_auth_store(current)
+             if synced.refresh_token != entry.refresh_token:
+                 logger.debug("%s OAuth refresh failed but auth.json has newer tokens — adopting", display)
+                 return self._adopt(synced, **_MARK_OK)
+--- a/hermes_cli/auth.py
++++ b/hermes_cli/auth.py
+@@ -1985,7 +1985,7 @@
+         terminal_refresh_codes=_OAUTH_GRANT_DEAD_CODES | _NOUS_AUTH_MISSING_CODES, logout_from_config=True),
+     "openai-codex": OAuthProviderFlow(
+         "openai-codex", "resolve_codex_runtime_credentials", "get_codex_auth_status",
+-        terminal_refresh_codes=_OAUTH_GRANT_DEAD_CODES | {"codex_refresh_failed", "codex_auth_missing_refresh_token"},
++        terminal_refresh_codes=_OAUTH_GRANT_DEAD_CODES | {"codex_refresh_failed", "codex_auth_missing_refresh_token", "refresh_token_invalidated", "token_invalidated", "token_revoked"},
+         logout_from_config=True),
+     "xai-oauth": OAuthProviderFlow(
+         "xai-oauth", "resolve_xai_oauth_runtime_credentials", "get_xai_oauth_auth_status",
+--- a/hermes_cli/auth_codex.py
++++ b/hermes_cli/auth_codex.py
+@@ -934,7 +934,11 @@
+             # raw reads as far-future here and as elapsed there, hiding a usable entry (#103349).
+             reset_at = _parse_absolute_timestamp(entry.get("last_error_reset_at"))
+             in_cooldown = reset_at is not None and reset_at > time.time()
+-            if _nonempty_str(token) and not in_cooldown:
++            exhausted_without_reset = entry.get("last_status") == "exhausted" and reset_at is None
++            if (_nonempty_str(token) and not in_cooldown
++                    and entry.get("last_status") != "dead"
++                    and not exhausted_without_reset
++                    and not _codex_access_token_is_expiring(token, 0)):
+                 return token.strip(), _stripped(entry.get("base_url"))
+     except Exception:
+         logger.debug("Codex pool fallback lookup failed", exc_info=True)
+--- a/tests/conftest.py
++++ b/tests/conftest.py
+@@ -1460,3 +1460,27 @@
+             if candidate.exists():
+                 return str(candidate)
+     return found or "bash"
++
++
++@pytest.fixture(autouse=True)
++def _mgs_shein_literal_profile_fixture(request, tmp_path, monkeypatch, _hermetic_environment):
++    """Isolate only the SHEIN paginator's profile literal in native transport tests.
++
++    Preserve the real-home I/O guard and all other path resolution. A fixture
++    path substitutes the inactive production profile constant, not live state.
++    """
++    if request.node.path.name not in {
++        "test_discord_send.py", "test_discord_split_cap.py",
++        "test_discord_free_response.py", "test_discord_edit_message_overflow.py",
++    }:
++        return
++    original = Path.resolve
++    isolated = original(tmp_path / "inactive-ares-profile")
++
++    def resolve(path, *args, **kwargs):
++        if str(path) == "/root/.hermes/profiles/ares":
++            return isolated
++        return original(path, *args, **kwargs)
++
++    monkeypatch.setattr(Path, "resolve", resolve)
++
+--- /dev/null
++++ b/tests/agent/test_mgs_codex_refresh_integrity.py
+@@ -0,0 +1,158 @@
++"""MGS OAuth regressions: synthetic grants, isolated stores, no live HTTP."""
++from __future__ import annotations
++import base64
++import json
++import multiprocessing
++import socket
++import time
++from dataclasses import replace
++
++import pytest
++from agent import credential_pool as cp
++from hermes_cli import auth, auth_codex
++
++
++def jwt(exp, marker='fixture'):
++    def seg(value):
++        return base64.urlsafe_b64encode(json.dumps(value).encode()).decode().rstrip('=')
++    return seg({'alg':'none'})+'.'+seg({'exp':int(exp),'sub':'fixture','jti':marker,
++        'https://api.openai.com/auth':{'chatgpt_account_id':'fixture'}})+'.synthetic'
++
++
++def row(exp=None):
++    return {'id':'manual-fixture','label':'synthetic-only','auth_type':'oauth',
++        'priority':0,'source':'manual:device_code','access_token':jwt(exp or time.time()-120),
++        'refresh_token':'synthetic-old','last_refresh':'2026-10-01T00:00:00Z'}
++
++
++def pool_from(raw):
++    pool=cp.CredentialPool('openai-codex',[cp.PooledCredential.from_dict('openai-codex',raw)])
++    pool._persisted_token_pairs=auth._token_pairs_by_id([raw])
++    return pool
++
++
++@pytest.fixture
++def home(tmp_path,monkeypatch):
++    path=tmp_path/'isolated-home';path.mkdir()
++    monkeypatch.setenv('HERMES_HOME',str(path))
++    def blocked(*args,**kwargs):
++        raise AssertionError('Real network forbidden by synthetic OAuth regression')
++    monkeypatch.setattr(socket.socket,'connect',blocked)
++    return path
++
++
++def write_store(home,raw):
++    (home/'auth.json').write_text(json.dumps({'version':1,'providers':{},
++        'active_provider':'openai-codex','credential_pool':{'openai-codex':[raw]}}))
++
++
++def test_expired_access_automatically_refreshes_and_persists(home,monkeypatch):
++    raw=row();write_store(home,raw);pool=pool_from(raw);calls=[]
++    minted=jwt(time.time()+7200,'renewed')
++    def refresh(access,refresh):
++        calls.append(refresh)
++        return {'access_token':minted,'refresh_token':'synthetic-new','last_refresh':'2026-10-16T12:00:00Z'}
++    monkeypatch.setattr(auth,'refresh_codex_oauth_pure',refresh)
++    selected=pool.select()
++    assert calls==['synthetic-old']
++    assert selected and selected.access_token==minted
++    persisted=json.loads((home/'auth.json').read_text())['credential_pool']['openai-codex'][0]
++    assert persisted['access_token']==minted and persisted['refresh_token']=='synthetic-new'
++
++
++def test_stale_manual_instance_adopts_own_persisted_row_without_post(home,monkeypatch):
++    raw=row();pool=pool_from(raw)
++    peer={**raw,'access_token':jwt(time.time()+7200,'peer'),'refresh_token':'synthetic-peer',
++          'last_refresh':'2026-10-16T12:00:00Z'}
++    write_store(home,peer)
++    calls=[]
++    def refresh(*args):
++        calls.append(args)
++        raise AssertionError('Consumed grant replayed')
++    monkeypatch.setattr(auth,'refresh_codex_oauth_pure',refresh)
++    selected=pool._refresh_entry(pool._entries[0],force=False)
++    assert calls==[]
++    assert selected and selected.refresh_token=='synthetic-peer'
++
++
++def test_refresh_failure_adopts_peer_before_condemning_grant(home):
++    raw=row();pool=pool_from(raw)
++    peer={**raw,'access_token':jwt(time.time()+7200,'peer'),'refresh_token':'synthetic-peer'}
++    write_store(home,peer)
++    error=auth.AuthError('fixture reused',provider='openai-codex',code='refresh_token_reused',relogin_required=True)
++    selected=pool._recover_failed_refresh(pool._entries[0],error)
++    assert selected and selected.refresh_token=='synthetic-peer'
++    assert selected.last_status=='ok'
++
++
++@pytest.mark.parametrize('code',['refresh_token_invalidated','token_invalidated','token_revoked'])
++def test_invalidated_grant_is_terminal_and_reason_survives(home,monkeypatch,code):
++    raw=row();write_store(home,raw);pool=pool_from(raw)
++    error=auth.AuthError('Your session has ended. Please log in again.',provider='openai-codex',code=code,relogin_required=True)
++    def refresh(*args):raise error
++    monkeypatch.setattr(auth,'refresh_codex_oauth_pure',refresh)
++    assert auth._is_terminal_codex_oauth_refresh_error(error)
++    assert pool.select() is None
++    entry=pool._entries[0]
++    assert entry.last_status=='dead'
++    assert entry.last_error_reason==code
++    assert 'session has ended' in (entry.last_error_message or '')
++
++
++@pytest.mark.parametrize('status,expired,allowed',[
++    ('ok',False,True),('ok',True,False),('dead',False,False),
++    ('exhausted',False,False),('exhausted',True,False)])
++def test_fallback_rejects_expired_or_unavailable_bearer(home,monkeypatch,status,expired,allowed):
++    raw=row(time.time()+(-120 if expired else 7200));raw['last_status']=status
++    monkeypatch.setattr(auth,'read_credential_pool',lambda provider:[raw])
++    token,_=auth_codex._pool_codex_credential()
++    assert bool(token) is allowed
++
++
++@pytest.mark.parametrize('offset,status,allowed',[
++    (-120,'exhausted',True),(120,'exhausted',False),(-120,'dead',False)])
++def test_fallback_preserves_elapsed_quota_reset(home,monkeypatch,offset,status,allowed):
++    raw=row(time.time()+7200);raw['last_status']=status
++    raw['last_error_reset_at']=(time.time()+offset)*1000
++    monkeypatch.setattr(auth,'read_credential_pool',lambda provider:[raw])
++    token,_=auth_codex._pool_codex_credential()
++    assert bool(token) is allowed
++
++
++def _race_worker(raw,home,start,ready,output):
++    # Both workers build their stale in-memory pools before the barrier.
++    pool=pool_from(raw)
++    def refresh(access,refresh):
++        calls=home/'fake-endpoint-posts.json'
++        consumed=json.loads(calls.read_text()) if calls.exists() else []
++        if refresh in consumed:
++            raise auth.AuthError('fixture consumed',provider='openai-codex',code='refresh_token_reused',relogin_required=True)
++        consumed.append(refresh);calls.write_text(json.dumps(consumed))
++        time.sleep(0.08)
++        return {'access_token':jwt(time.time()+7200,'concurrent-winner'),
++                'refresh_token':'synthetic-race-winner','last_refresh':'2026-10-16T12:00:00Z'}
++    auth.refresh_codex_oauth_pure=refresh
++    ready.put(True)
++    if not start.wait(15):
++        output.put({'error':'barrier_timeout'});return
++    selected=pool._refresh_entry(pool._entries[0],force=False)
++    output.put({'selected':selected is not None,'winner':bool(selected and selected.refresh_token=='synthetic-race-winner')})
++
++
++def test_two_os_processes_serialize_refresh_and_adopt_winner(home):
++    raw=row();write_store(home,raw)
++    ctx=multiprocessing.get_context('fork')
++    start=ctx.Event();ready=ctx.Queue();output=ctx.Queue()
++    workers=[ctx.Process(target=_race_worker,args=(raw,home,start,ready,output)) for _ in range(2)]
++    for worker in workers:worker.start()
++    try:
++        for _ in workers:assert ready.get(timeout=15)
++        start.set()
++        results=[output.get(timeout=20) for _ in workers]
++        for worker in workers:
++            worker.join(timeout=10);assert worker.exitcode==0
++        assert results==[{'selected':True,'winner':True}]*2
++        assert json.loads((home/'fake-endpoint-posts.json').read_text())==['synthetic-old']
++    finally:
++        for worker in workers:
++            if worker.is_alive():worker.terminate();worker.join(timeout=5)

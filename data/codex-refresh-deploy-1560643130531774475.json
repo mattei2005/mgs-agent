@@ -1,0 +1,43 @@
+{
+  "authorization_message_id": "1560643130531774475",
+  "preparation_order": [
+    "zeus",
+    "atena",
+    "ares"
+  ],
+  "activation_order": [
+    "atena",
+    "ares",
+    "zeus"
+  ],
+  "handoff_gate": "actual_discord_message_before_restart",
+  "runtime_repo": "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+  "finalizers": {
+    "atena": {
+      "path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261016T134633Z-2114022.sh",
+      "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261016T134633Z-2114022.sha256",
+      "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261016T134633Z-2114022.log",
+      "sha256": "76b22f2b64ddf7fd301a8d3e119fc70d461d9c5d772c43b235f23ae49e968495"
+    },
+    "ares": {
+      "path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261016T134633Z-2114093.sh",
+      "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261016T134633Z-2114093.sha256",
+      "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261016T134633Z-2114093.log",
+      "sha256": "cf15b4a6280801ad059779a3f59a4c40558a6d7306ac3fa3cee8c90f28d89cff"
+    },
+    "zeus": {
+      "path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261016T134633Z-2114170.sh",
+      "snapshot": "/root/mgs-agent/data/mgs-gateway-restart-snapshot-20261016T134633Z-2114170.sha256",
+      "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20261016T134633Z-2114170.log",
+      "sha256": "9bb101c01c33a44483522f354872956cf585c59f8d7575c238512299766e8ddd"
+    }
+  },
+  "test_evidence": {
+    "codex_suite_passed": 240,
+    "full_guard_suite_passed": 722,
+    "controller_tests_passed": 5,
+    "synthetic_cases_per_profile": 15,
+    "preactivation_real_profile_inferences": 3
+  },
+  "rollback": "/root/mgs-agent/backups/codex-refresh-integrity-1560643130531774475"
+}

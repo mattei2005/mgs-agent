@@ -39,6 +39,11 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/ares-skills/gr
 # validated. Exact reference only; no other Ares skill or token path is exempt.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/ares-skills/growth/adspower-segurador-token-collector/references/pc1-remote-adspower-operations\.md$"
 
+# Reviewed Python source snapshot from the authorized Codex investigation,
+# byte-identical to deployed code and scanned for embedded credentials.
+# Exact evidence path only: no auth store, sibling or backup is exempt.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credential_pool\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

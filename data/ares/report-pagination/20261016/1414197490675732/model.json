@@ -1,0 +1,182 @@
+{
+  "account": {
+    "id": "act_1414197490675732",
+    "name": "Mavroa-US-SHEIN-ES-02-G002",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-15T17:10:30.043156-04:00",
+    "sb": "2026-10-15T17:10:25.861450-04:00",
+    "delay": "2026-10-15T17:10:25.770773-04:00",
+    "campaigns": "2026-10-15T17:10:29.063090-04:00",
+    "adsets": "2026-10-15T17:10:30.608284-04:00",
+    "ads": "2026-10-15T17:10:34.731315-04:00",
+    "daily": "2026-10-15T17:10:31.464846-04:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 10,
+    "totalMinutes": 130,
+    "currentFillTime": "2026-10-15T19:00:00.000Z",
+    "jbf_hour": 15,
+    "fill": 1.03,
+    "confident": true
+  },
+  "rows": [
+    {
+      "id": "120251812603560326",
+      "name": "01 - EBIKE - SHEIN - US-EN (b01fb02c01) 25/09 event_add_to_wishlist",
+      "number": "01",
+      "product": "EBIKE",
+      "quiz": "v2",
+      "bid": "MAXVOL",
+      "spend": "17.42",
+      "net_revenue": "12.18",
+      "estimated_revenue": "14.38",
+      "roi": "-30.08036739380022962112514351",
+      "estimated_roi": "-17.45120551090700344431687715",
+      "health": "88.18181818181818181818181818",
+      "roas": "0.750861",
+      "first_delivery": "2026-09-25",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "30.46",
+          "net_revenue": "27.5",
+          "roi": "-9.717662508207485226526592252",
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "26.54",
+          "net_revenue": "24.62",
+          "roi": "-7.234363225320271288620949510",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "36.96",
+          "net_revenue": "35.2",
+          "roi": "-4.761904761904761904761904762",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "23.08",
+          "net_revenue": "15.63",
+          "roi": "-32.27902946273830155979202773",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "32.63",
+          "net_revenue": "29.26",
+          "roi": "-10.32791909285933190315660435",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "29.07",
+          "net_revenue": "19.78",
+          "roi": "-31.95734434124527003783969728",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "17.42",
+          "net_revenue": "12.18",
+          "roi": "-30.08036739380022962112514351",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120251920442760326",
+      "name": "02 - ROPA GRATIS - SHEIN - US-EN (b01fb02c02) 02/10 event_add_to_wishlist",
+      "number": "02",
+      "product": "ROPA GRATIS",
+      "quiz": "v2",
+      "bid": "MAXVOL",
+      "spend": "19.55",
+      "net_revenue": "8.26",
+      "estimated_revenue": "11.04",
+      "roi": "-57.74936061381074168797953964",
+      "estimated_roi": "-43.52941176470588235294117647",
+      "health": "98.41269841269841269841269841",
+      "roas": "0.434271",
+      "first_delivery": "2026-10-02",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "29.15",
+          "net_revenue": "21.34",
+          "roi": "-26.79245283018867924528301887",
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "26.47",
+          "net_revenue": "19.96",
+          "roi": "-24.59387986399697771061579146",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "37.73",
+          "net_revenue": "22.92",
+          "roi": "-39.25258415054333421680360456",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "25.27",
+          "net_revenue": "9.43",
+          "roi": "-62.68302334784329244163039177",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "26.48",
+          "net_revenue": "13.41",
+          "roi": "-49.35800604229607250755287009",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "31.98",
+          "net_revenue": "25.07",
+          "roi": "-21.60725453408380237648530331",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "19.55",
+          "net_revenue": "8.26",
+          "roi": "-57.74936061381074168797953964",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "audit": {
+    "selection": "Meta spend > 0 OR impressions > 0 today",
+    "mode": "read_only",
+    "meta_writes": 0,
+    "sb_investment": "36.75",
+    "sb_revenue_without_delivery": null,
+    "validated_ads": 4,
+    "validated_adsets": 2
+  }
+}

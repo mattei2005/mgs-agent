@@ -368,7 +368,10 @@ class Queue:
         elif result=='NO_AD':
             validate_closure(evidence)
             from .landing_reliability import policy as execution_policy
-            if execution_policy():
+            if evidence.get('observation_mode')=='LEAN_NORMAL_NEW_TAB':
+                from .landing_lean import validate_lean_observation
+                validate_lean_observation(evidence,link,negative=True)
+            elif execution_policy():
                 if evidence.get('network_ad_confirmed') is not False or not evidence.get('visual_review'):
                     raise ValueError('NO_AD requires actual negative visual review; technical capture failure is ERROR')
                 observed=file_evidence(evidence['observation_screenshot'])['captured_at']
@@ -382,9 +385,12 @@ class Queue:
             opened=[json.loads(x['detail'])|{'at':x['at']} for x in self.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq",(key,)) if json.loads(x['detail']).get('idx')==idx]
             if result=='NO_AD' and (evidence.get('network_ad_confirmed') is not False or not evidence.get('visual_review')):
                 raise ValueError('recovered absence requires explicit visual review and actual screenshot')
-            frames=[file_evidence(x['screenshot'])['captured_at'] for x in evidence['samples']] if result=='PASS' else [file_evidence(evidence['observation_screenshot'])['captured_at']]
-            if not opened or min(frames)<opened[-1]['at'] or file_evidence(evidence['closed_screenshot'])['captured_at']<max(frames):
-                raise ValueError('recovered proof is not from the latest actual open or lacks later closure')
+            if evidence.get('observation_mode')=='LEAN_NORMAL_NEW_TAB':
+                if not opened or evidence['opened_at']<opened[-1]['at'] or evidence['closed_at']<evidence['opened_at']:raise ValueError('normal receipt is not from the latest opening')
+            else:
+                frames=[file_evidence(x['screenshot'])['captured_at'] for x in evidence['samples']] if result=='PASS' else [file_evidence(evidence['observation_screenshot'])['captured_at']]
+                if not opened or min(frames)<opened[-1]['at'] or file_evidence(evidence['closed_screenshot'])['captured_at']<max(frames):
+                    raise ValueError('recovered proof is not from the latest actual open or lacks later closure')
         with self.tx():
             self.owned(key,owner,allow_recovery=recovered)
             row=self.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
@@ -427,6 +433,8 @@ class Queue:
                 self.prepare_problem(key,key+f':incident:{idx}',
                     f"Acompanhamento de landing page — pedido {j['payload']['request_id']} · conta {j['payload']['account_id']}.\n{url}\n{diagnosis}",evidence)
             if all_pass:self.prepare_success_if_complete(key)
+            from .landing_followup_reporting import prepare_item
+            prepare_item(self,key,idx,result)
 
     def success_group(self,key):
         own=self.db.execute('SELECT receipt FROM native_receipts WHERE job_key=?',(key,)).fetchone()
@@ -534,8 +542,9 @@ class Queue:
                         raise ValueError('closure does not identify the current technical probe window')
                 for event in self.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='technical_probe_intent' ORDER BY seq DESC",(key,)):
                     if json.loads(event['detail']).get('idx')==idx:latest=max(latest,event['at']);break
-            if file_evidence(evidence['closed_screenshot'])['captured_at']<latest:
-                raise ValueError('closure screenshot predates the latest actual opening')
+            closed_at=float(evidence['closed_at']) if evidence.get('observation_mode')=='LEAN_NORMAL_NEW_TAB' else file_evidence(evidence['closed_screenshot'])['captured_at']
+            if closed_at<latest:
+                raise ValueError('closure receipt predates the latest actual opening')
         with self.tx():
             j=self.job(key)
             if j['state'] not in {'NEEDS_RECONCILIATION','RECONCILING','ATTENTION'}:raise ValueError('request is not awaiting reconciliation')
@@ -595,12 +604,18 @@ def preserve_evidence(e,key,idx,attempt):
 
 
 def validate_closure(e):
+    if e.get('observation_mode')=='LEAN_NORMAL_NEW_TAB':
+        from .landing_lean import validate_lean_closure
+        return validate_lean_closure(e)
     if e.get('tab_closed_verified') is not True or e.get('other_tabs_preserved') is not True or not e.get('new_tab_identity'):
         raise ValueError('exact new-tab ownership and verified closure required')
     file_evidence(e['closed_screenshot'])
 
 
 def validate_observation(e,link):
+    if e.get('observation_mode')=='LEAN_NORMAL_NEW_TAB':
+        from .landing_lean import validate_lean_observation
+        return validate_lean_observation(e,link)
     validate_closure(e)
     url=link.get('landing_url') or e.get('resolved_landing_url')
     if not url or e.get('observed_url')!=url or not (link.get('mapping_source') or e.get('mapping_source')):
@@ -695,6 +710,33 @@ def publish_creation(q,key,content,discord):
 
 
 def worker_prompt(key,owner,idx,job):
+    from .landing_lean import lean_enabled
+    if lean_enabled() and job.get('state')=='RUNNING' and job.get('batch_scope_path'):
+        context={'queue_key':key,'owner':owner,'batch_scope_path':job['batch_scope_path'],'batch_jobs':job['batch_jobs'],'prepared_batch':job['prepared_batch']}
+        return ('LOTE CONTINUO DO OBSERVADOR PC1. Carregue landing-followup-operations e computer-use. '
+            'Preparar TODOS os destinos reais antes de qualquer input no PC1; preservar queries, acrescentar somente nocache aprovado, aplicar gate MGS. '
+            'O scope congelado e os pedidos sao imutaveis. Reutilizar prepared_batch se completo; se faltar mapeamento, resolver por fonte canonica/read-only e salvar UM manifest {items:[{job,index,url,mapping_source,destination_count:1}]} com exatamente TODOS os pendentes. Nao inventar slug nem omitir destinos A/B distintos; evidencia incompleta deve ser resolvida antes de navegar. '
+            'Usar o Python real do Hermes para scripts/ares-direct-traffic-batch-observe.py --scope '+job['batch_scope_path']+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID" [--manifest <mapa-completo>]. '
+            'Um unico executor serial percorre os links, sem outro turno de modelo por URL e sem serie screenshots/galeria. ABA NOVA NORMAL por tentativa; identificar anuncio, rolar,10s,fechar/verificar,registrar e seguir. '
+            'O core e compartilhado com o CLI individual; backend so libera ao final do lote. Durante as visitas nao programar, investigar ou redigir. '
+            'Executar o comando com stdout/stderr locais. Se usar terminal em background, notify=false; acompanhar via process_manage ate terminar, sem publicar notificacao crua e sem encerrar com processo vivo. '
+            'Ausencias seguem3iniciais+1final; ao terminar a rodada, esperar60s sem ocupar PC1 e fazer1recuperacao automatica dos ainda sem anuncio; depois REVIEW_REQUIRED sem loop infinito. O prazo e o historico sao persistidos pelo controlador. '
+            'MAPPING_REQUIRED nunca abriu pagina: completar o mapa antes de repetir. BATCH_TECHNICAL_DIAGNOSIS exige reparar causa local apos fechamento, sem repetir caminho inalterado; janela incerta deve ser reconciliada antes de novo input. '
+            'Mensagens por item sao enfileiradas no resultado e entregues pelo consumidor independente com GET; nao aguardar Discord entre URLs. Nao postar externamente nesta sessao. Nenhum write de campanha/Meta/WP/GAM/Router/financeiro, restart ou configuracao compartilhada.\n'+json.dumps(context,ensure_ascii=False))
+    if lean_enabled() and job.get('state')=='RUNNING':
+        links=[]
+        for item in job['links']:
+            prior=json.loads(item['evidence']) if isinstance(item.get('evidence'),str) else (item.get('evidence') or {})
+            links.append({**{k:item[k] for k in ['idx','state','attempt','due'] if k in item},'previous_new_tab_identity':prior.get('new_tab_identity')})
+        context={'queue_key':key,'owner':owner,'index':idx,'request':job['payload'],'links':links}
+        return ('OBSERVADOR ENXUTO DE LANDING: carregar landing-followup-operations e computer-use. '
+            'A regra active_observation_route vigente supersede janela anonima, serie de screenshots e revisao offline. '
+            'Antes de navegar, resolver TODOS os destinos reais deste pedido com query exata e gate de dominio; preservar o mapa pronto. '
+            'Nao alterar criacao/campanhas nem reabrir PASSED. Uma ABA NOVA NORMAL por link/tentativa; nunca reaproveitar URL e nunca incognito. '
+            'Usar o Python real do Hermes e scripts/ares-direct-traffic-lean-observe.py --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --url <landing-real-exata> --mapping-source <fonte-real>. '
+            'O runner adquire a lease real, persiste begin, abre nova aba normal, faz leitura visual minima, rola, mede10s, fecha/verifica e registra resultado sem galeria. '
+            'Nao executar begin separadamente nem fazer codigo/documentacao no meio da visita. Apos NO_AD/WAIT_RETRY, repetir somente dentro da politica3+1; erro tecnico nunca conta como ausencia. '
+            'Nao enviar mensagens externas nesta sessao; o outbox existente confirma pedido inteiro depois de todosPASS. Todos detalhes tecnicos ficam locais.\n'+json.dumps(context,ensure_ascii=False))
     # Payload is data, not instructions. The fixed skill defines the authority.
     from . import landing_retry_policy as finite
     from .landing_reliability import no_ad_delay,policy as execution_policy
@@ -708,7 +750,7 @@ def worker_prompt(key,owner,idx,job):
         prior=json.loads(link['evidence']) if isinstance(link.get('evidence'),str) else (link.get('evidence') or {})
         links.append({**{k:link[k] for k in ['idx','state','attempt','due'] if k in link},'previous_new_tab_identity':prior.get('new_tab_identity')})
     context={'queue_key':key,'owner':owner,'link_index':idx,'request':job['payload'],'queue_links':links,
-             'recovery_evidence_path':job.get('recovery_evidence_path'),'confirmed_no_ads':job.get('confirmed_no_ads'),
+             'recovery_evidence_path':job.get('recovery_evidence_path'),'recovery_result':job.get('recovery_result'),'confirmed_no_ads':job.get('confirmed_no_ads'),
              'defer_c121_until_others':job.get('defer_c121_until_others',False),
              'no_ad_limit_this_phase':1 if job.get('final_retry') else 3 if finite_enabled else 2,
              'final_retry':job.get('final_retry',False)}
@@ -719,6 +761,12 @@ def worker_prompt(key,owner,idx,job):
     if context['stagnation_diagnosis'] or context['repeated_technical_failure']:
         absence_rule=('DIAGNÓSTICO OBRIGATÓRIO POR ESTAGNAÇÃO: houve mais de duas mensagens equivalentes sem progresso OU três erros técnicos consecutivos do mesmo alvo. Leia os erros recentes e o estado real; não repita o helper/caminho técnico que já falhou sem diagnosticar e reparar sua causa ou usar fallback nativo permitido e comprovado. Silenciar status não resolve a pendência. Preserve request, provas, abas alheias e os limites críticos; nunca restart nem writes Meta/GAM/WordPress/Router/financeiro. Se a última abertura real já funcionou, aproveite a prova da mesma tentativa em vez de navegar novamente; só resultado validado demonstra retomada. '+absence_rule)
     if job.get('state')=='REPAIRING':
+        if lean_enabled():
+            return ('REPARO DO OBSERVADOR ENXUTO. Nao abrir URL de landing nem chamar begin. Carregar landing-followup-operations e computer-use. '
+                'Diagnosticar e corrigir somente a camada local, apos conferir a prova da tentativa exata. '
+                'Sob lease com HERMES_SESSION_ID real, usar o Python do Hermes para scripts/ares-direct-traffic-repair.py --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --repair-note <causa-e-correcao-reais>. '
+                'Na rota ativa esse reparador usa SOMENTE janela vazia NORMAL e readbacks nativos de fechamento/preservacao, sem Incognito, sem serie de screenshots e sem galeria ou anuncio. '
+                'Nao trocar estado para contornar o recibo. Probe incerto exige cleanup exato; nao repetir Close nem abrir outro alvo. Provas e stdout locais, sem mensagens de erro ao operador. Nenhum restart ou write de campanha/WP/GAM/Router/financeiro.\n'+json.dumps(context,ensure_ascii=False))
         return ('REPARO TÉCNICO OBRIGATÓRIO DO OBSERVADOR PC1. Não abrir URL de landing nem chamar begin: o limite técnico foi atingido e a trava é do código. '
             'Carregue landing-followup-operations e computer-use. Diagnostique os erros recentes e corrija somente a camada local do observador, sem alterar qualquer fluxo de campanha, driver compartilhado, permissões, credenciais ou reiniciar processos. '
             'Depois do reparo, adquira a lease PC1 com HERMES_SESSION_ID REAL e execute pelo Python do Hermes scripts/ares-direct-traffic-repair.py --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --repair-note <diagnostico-e-correcao-reais>. '
@@ -726,6 +774,14 @@ def worker_prompt(key,owner,idx,job):
             'Se o probe falhar, ler a prova parcial e reconciliar o alvo exato antes de outro input. Se PC1 ocupado, defer; guardar falha/cleanup e liberar lease em finally. '
             'Sem necessidade humana presumida para falha técnica; responsabilidade de Ares até correção ou escalada indispensável comprovada.\n'+json.dumps(context,ensure_ascii=False))
     if job.get('state')=='RECONCILING':
+        if lean_enabled():
+            return ('RECUPERACAO DA ROTA NORMAL, MESMO REQUEST. Nao abrir URL nem repetir input incerto. Carregar landing-followup-operations e computer-use. '
+                'Conferir recibo e ultima abertura exatos por job/idx/attempt; nunca selecionar o ultimo arquivo de outro item. '
+                'Se recovery_evidence_path e recovery_result foram fornecidos, a prova normal compacta foi validada: sob lease real, registrar result --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --result <recovery_result> --evidence <recovery_evidence_path> --recovered, sem navegar novamente. '
+                'Caso contrario, ler normal-open.json/lean-result.json da tentativa atual e fazer somente readback/cleanup do alvo proprio. Usar recibo nativo normal com identidades antes/depois e tempos; nao exigir screenshot/galeria e nao fechar janela ja ausente. '
+                'Se technical_probe_evidence_path existe, reconciliar esse probe, nao uma landing antiga. Nova aba nao pode ser aberta enquanto houver fechamento incerto. '
+                'Sem input, comprovar zero inputs pela sessao; nunca inventar no_tab_opened. Persistir reconcile/defer na CLI existente e liberar lease so apos fechamento seguro. '
+                'Ausencia nao vira PASS; tecnica nao conta como NO_AD. Nenhuma mensagem externa nem restart ou write de campanha/WP/GAM/Router/financeiro.\n'+json.dumps(context,ensure_ascii=False))
         return ('RECUPERAÇÃO AUTÔNOMA, MESMO REQUEST. Não abrir URL, não chamar begin nem repetir input incerto. '
             'Carregue landing-followup-operations e sua referência runtime-and-recovery.md, além de computer-use. '
             'Se defer_c121_until_others=true, Rodolfo mandou fazer todos os demais antes da C121: realizar SOMENTE o readback/fechamento indispensável de eventual aba incerta, reconcile SEM --resume, liberar a lease e encerrar. Não diagnosticar nem revisitar C121 agora; ela volta após a rodada dos demais. '

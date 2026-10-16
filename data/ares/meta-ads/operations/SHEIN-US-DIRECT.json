@@ -768,7 +768,7 @@
         "multi_generation": "show_each_child_below_its_direct_parent_preserve_direct_COPY_label_never_replace_with_root_label",
         "missing_or_ambiguous_parent": "do_not_invent_or_add_out_of_scope_parent_keep_campaign_visible_with_explicit_limitation",
         "cycle_policy": "detect_and_reject_ambiguous_family_order_do_not_recurse_forever_or_guess",
-        "pagination": "keep_parent_and_descendants_in_same_message_when_family_fits_Discord_limit",
+        "pagination": "capacity_first_fill_maximum_complete_rows_up_to_exact_2000_units_preserve_family_order_but_allow_message_boundary_inside_family",
         "apply_same_order_to_history": true,
         "source_thread_id": "1560303769680355525",
         "source_message_id": null,
@@ -806,6 +806,26 @@
         "Lance": "live_campaign_adset_bid_strategy_MAXVOL_COCAP_BIDCAP_or_mixed_no_name_inference"
       },
       "period_and_selection": "follow_current_request_no_inherited_health_threshold",
+      "discord_pagination": {
+        "status": "active",
+        "source_thread_id": "1560620352789544980",
+        "source_message_id": null,
+        "authority": "Rodolfo Mattei: maximize Discord message capacity and standardize next reports across six manager channels",
+        "message_limit": 2000,
+        "count_unit": "UTF-16_including_emoji_title_headers_fences_and_newlines",
+        "policy": "maximum_complete_rows_in_current_order_no_arbitrary_safety_reserve",
+        "family_boundary": "may_split_between_complete_rows_preserve_parent_copy_adjacency_and_order",
+        "small_reports": "combine_summary_tables_and_footer_when_complete_blocks_fit",
+        "native_delivery": "exact_validated_receipt_parts_no_second_split_or_second_page_counter",
+        "scope": "six_SHEIN_report_channels_36_Intraday_threads_same_renderer",
+        "preserve": ["financial_snapshot", "columns", "alignment", "product_limit", "campaign_order", "all_campaigns", "history"],
+        "no_republish_or_delete_old_reports": true,
+        "superseded_rules": [
+          {"status": "superseded", "rule": "arbitrary_1870_budget_plus_70_reserve"},
+          {"status": "superseded", "rule": "keep_entire_family_on_same_page_even_if_current_page_underfilled"},
+          {"status": "superseded", "rule": "generic_native_repagination_of_already_paginated_SHEIN_report"}
+        ]
+      },
       "on_demand_only": true,
       "roi_direction_signal": {
         "placement": "first_column_R/E",

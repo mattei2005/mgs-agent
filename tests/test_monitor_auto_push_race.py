@@ -187,6 +187,32 @@ class AutoPushRaceTests(unittest.TestCase):
         self.assertEqual(json.loads(self.state.read_text())["consecutive_failures"], 3)
         self.assertEqual(len(self.requests), 2)
 
+    def test_commit_error_never_clears_guardrail_or_reports_green(self):
+        self.git("push", "-q", "origin", "HEAD:main")
+        now = datetime.now().astimezone()
+        block = (now - timedelta(seconds=20)).strftime("%Y-%m-%d %H:%M:%S")
+        error = (now - timedelta(seconds=10)).strftime("%Y-%m-%d %H:%M:%S")
+        (self.base / "logs/auto-commit-watcher.log").write_text(
+            f"[{block}] BLOQUEADO: arquivo sensível detectado; commit automático abortado\n"
+            f"[{error}] ERRO no commit (talvez nada novo)\n")
+        before = self.state.read_bytes()
+        output = self.run_monitor()
+        self.assertIn("repo_failures=2", output)
+        self.assertIn("auto-commit falhou", output)
+        self.assertEqual(self.state.read_bytes(), before)
+        self.assertEqual(self.requests, [])
+
+    def test_successful_commit_clears_previous_commit_error(self):
+        self.git("push", "-q", "origin", "HEAD:main")
+        now = datetime.now().astimezone()
+        error = (now - timedelta(seconds=20)).strftime("%Y-%m-%d %H:%M:%S")
+        success = (now - timedelta(seconds=10)).strftime("%Y-%m-%d %H:%M:%S")
+        (self.base / "logs/auto-commit-watcher.log").write_text(
+            f"[{error}] ERRO no commit (talvez nada novo)\n"
+            f"[{success}] Commit OK: fixture\n")
+        self.assertIn("total_failures=0", self.run_monitor())
+        self.assertEqual(self.requests, [])
+
 
 if __name__ == "__main__":
     unittest.main()

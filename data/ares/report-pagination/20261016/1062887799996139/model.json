@@ -1,0 +1,108 @@
+{
+  "account": {
+    "id": "act_1062887799996139",
+    "name": "Escalatepower-US-SHEIN-EN-02-G002",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-15T17:10:42.919374-04:00",
+    "sb_history": "2026-10-15T17:10:39.112121-04:00",
+    "delay": "2026-10-15T17:10:39.135370-04:00",
+    "adsets": "2026-10-15T17:11:29.789307-04:00",
+    "ads": "2026-10-15T17:11:12.508267-04:00",
+    "daily": "2026-10-15T17:11:05.284297-04:00"
+  },
+  "delay": {
+    "http": 201,
+    "hours": 3,
+    "minutes": 10,
+    "totalMinutes": 190,
+    "currentFillTime": "2026-10-15T18:00:00.000Z",
+    "jbf_hour": 14,
+    "fill": 1,
+    "confident": true
+  },
+  "rows": [
+    {
+      "id": "120253328479780502",
+      "name": "001 - 14/10 - v3 - PLUS SIZE SET - COCAP - (b01fb02c01) - event_add_to_wishlist",
+      "number": "001",
+      "product": "PLUS SIZE SET",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "spend": "28.39",
+      "net_revenue": "15.15",
+      "estimated_revenue": "16.2",
+      "roi": "-46.63613948573441352588939768",
+      "estimated_roi": "-42.93765410355759070095103910",
+      "health": "95.91836734693877551020408163",
+      "roas": "0.186685",
+      "first_delivery": "2026-10-14",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "15.47",
+          "net_revenue": "6.41",
+          "roi": "-58.56496444731738849385908209",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "28.39",
+          "net_revenue": "15.15",
+          "roi": "-46.63613948573441352588939768",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "meta_writes": 0,
+  "publisher_id": "digital-trust_escalatepower"
+}

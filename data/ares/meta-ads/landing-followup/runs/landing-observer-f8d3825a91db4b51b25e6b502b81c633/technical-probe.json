@@ -1,0 +1,303 @@
+{
+  "state": "TECHNICAL_PROBE_VERIFIED",
+  "session_id": "20261016_053841_5a0ce4",
+  "owner": "landing-observer-f8d3825a91db4b51b25e6b502b81c633",
+  "idx": 1,
+  "repair_note": "Recent attempts 6/7/8 failed cadence: synchronous auxiliary vision delayed real screenshots by 18.9-20.5s. Local collector now defers only response vision rendering in its single process, preserves handler/lease/approval and fresh frames, restores renderer in finally, uses 1s spacing to cover >=10s with 12 frames, preserves partial frames on capture error and rejects over-deadline series. Existing local probe selects unique normal Chrome read-only. No shared driver/config/campaign changes; offline regressions plus this blank private-window probe are the required verification.",
+  "url_navigation": false,
+  "tests_returncode": 0,
+  "tests_output": "........................................................................................................................./root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd394130>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3944f0>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3947c0>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd394c70>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd394b80>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd395120>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3953f0>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3954e0>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3956c0>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd395f30>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd396200>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/encoder.py:263: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3965c0>\n  return _iterencode(o, 0)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n........../root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd395f30>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3954e0>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3944f0>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd397010>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd394130>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd397880>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd397b50>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c0040>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c0310>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/json/decoder.py:31: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c05e0>\n  def __init__(self, msg, doc, pos):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n................../root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3954e0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c05e0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c09a0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c0c70>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c0f40>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c13f0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c14e0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c15d0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c18a0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c1d50>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c1e40>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c2110>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c23e0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c26b0>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c2980>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_followup.py:165: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c2c50>\n  self.db.execute('BEGIN IMMEDIATE')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n........./root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd3954e0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c2c50>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c1d50>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c15d0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c14e0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c18a0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c05e0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c36a0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n................................................../root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:330: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd396980>\n  @property\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:330: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x70eabd0c08b0>\n  @property\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n.............\n----------------------------------------------------------------------\nRan 221 tests in 21.423s\n\nOK\n",
+  "baseline": [
+    {
+      "app_name": "chrome.exe",
+      "pid": 18224,
+      "window_id": 263324,
+      "off_screen": false,
+      "title": "Meta Business Suite - Google Chrome",
+      "z_index": 5
+    },
+    {
+      "app_name": "cua-driver.exe",
+      "pid": 14788,
+      "window_id": 196948,
+      "off_screen": false,
+      "title": "Cua.AgentCursorOverlay.default",
+      "z_index": 4
+    },
+    {
+      "app_name": "SystemSettings.exe",
+      "pid": 24396,
+      "window_id": 131758,
+      "off_screen": false,
+      "title": "Settings",
+      "z_index": 3
+    },
+    {
+      "app_name": "ApplicationFrameHost.exe",
+      "pid": 27320,
+      "window_id": 1572930,
+      "off_screen": false,
+      "title": "Settings",
+      "z_index": 2
+    },
+    {
+      "app_name": "TextInputHost.exe",
+      "pid": 18216,
+      "window_id": 66572,
+      "off_screen": false,
+      "title": "Windows Input Experience",
+      "z_index": 1
+    },
+    {
+      "app_name": "explorer.exe",
+      "pid": 9632,
+      "window_id": 65984,
+      "off_screen": false,
+      "title": "Program Manager",
+      "z_index": 0
+    }
+  ],
+  "base_window_id": 263324,
+  "opening": {
+    "state": "OWNED_BLANK_WINDOW",
+    "target": {
+      "pid": 18224,
+      "window_id": 9504250,
+      "app_name": "chrome.exe"
+    },
+    "baseline": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "new_window_created": true,
+    "url_submission_attempted": false,
+    "blank_open_elapsed_seconds": 8.507
+  },
+  "series": {
+    "state": "CAPTURED_NOT_PASS",
+    "samples": [
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_5189a2225f7e4c809a77cff64be80de5.png",
+        "captured_at": 1792143737.3523622,
+        "monotonic_seconds": 325356.32414143666,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_593716ac26444a129430157ae830b7f4.png",
+        "captured_at": 1792143738.809364,
+        "monotonic_seconds": 325357.7811437486,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": true,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_32096fd3f67345e39dcb343daeb531a5.png",
+        "captured_at": 1792143740.3103662,
+        "monotonic_seconds": 325359.28214595676,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_3c30b0ae884c4a169f01aa8236fca8a5.png",
+        "captured_at": 1792143741.807368,
+        "monotonic_seconds": 325360.7791477923,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_d6d9cccad9584d6f94d9670cfa10e91f.png",
+        "captured_at": 1792143743.31437,
+        "monotonic_seconds": 325362.2861497756,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_6de3aeeef309470cafc175430f6b0b1f.png",
+        "captured_at": 1792143744.806372,
+        "monotonic_seconds": 325363.77815173846,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": true,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_1bdba78324a841f9a621115dfe5a1482.png",
+        "captured_at": 1792143746.3123739,
+        "monotonic_seconds": 325365.28415379365,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_b1d52c0dfb744d1cac3efa8f1812917c.png",
+        "captured_at": 1792143747.812376,
+        "monotonic_seconds": 325366.78415565717,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      }
+    ],
+    "all_frames": [
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_5189a2225f7e4c809a77cff64be80de5.png",
+        "captured_at": 1792143737.3523622,
+        "monotonic_seconds": 325356.32414143666,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_593716ac26444a129430157ae830b7f4.png",
+        "captured_at": 1792143738.809364,
+        "monotonic_seconds": 325357.7811437486,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": true,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_32096fd3f67345e39dcb343daeb531a5.png",
+        "captured_at": 1792143740.3103662,
+        "monotonic_seconds": 325359.28214595676,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_3c30b0ae884c4a169f01aa8236fca8a5.png",
+        "captured_at": 1792143741.807368,
+        "monotonic_seconds": 325360.7791477923,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_d6d9cccad9584d6f94d9670cfa10e91f.png",
+        "captured_at": 1792143743.31437,
+        "monotonic_seconds": 325362.2861497756,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_6de3aeeef309470cafc175430f6b0b1f.png",
+        "captured_at": 1792143744.806372,
+        "monotonic_seconds": 325363.77815173846,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": true,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_1bdba78324a841f9a621115dfe5a1482.png",
+        "captured_at": 1792143746.3123739,
+        "monotonic_seconds": 325365.28415379365,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      },
+      {
+        "screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_b1d52c0dfb744d1cac3efa8f1812917c.png",
+        "captured_at": 1792143747.812376,
+        "monotonic_seconds": 325366.78415565717,
+        "analysis": null,
+        "analysis_deferred": true,
+        "screen_unchanged": false,
+        "composited_desktop": true
+      }
+    ]
+  },
+  "closure": {
+    "state": "CLOSED_NOT_PASS",
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 9504250,
+      "app_name": "chrome.exe"
+    },
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "closed_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_adb04c45fcdd48f18fee4d960c35de7d.png",
+    "close_input_sent": true,
+    "close_method": "fresh_native_caption_button",
+    "elapsed_seconds": 4.539,
+    "remaining_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ]
+  },
+  "elapsed_seconds": 43.132,
+  "error": null
+}

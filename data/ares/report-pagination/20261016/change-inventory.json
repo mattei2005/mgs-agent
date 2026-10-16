@@ -1,0 +1,50 @@
+{
+  "id": "ARES-SHEIN-REPORT-CAPACITY2000-20261016",
+  "agent": "ares",
+  "source_thread_id": "1560620352789544980",
+  "authority": "Rodolfo Mattei direct instruction in source thread; source message ID not provided",
+  "status": "active_verified",
+  "updated_at": "2026-10-16T12:37:15.426504+00:00",
+  "purpose": "Use exact maximum complete rows and native receipt pagination in six SHEIN report channels/36 Intraday threads; other profiles unchanged",
+  "paths": [
+    "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+    "/root/.hermes/profiles/ares/scripts/shein_report_delivery.py",
+    "/root/.hermes/profiles/ares/scripts/verify_shein_report_pagination.py",
+    "/root/.hermes/profiles/ares/tests/test_shein_report_pagination.py",
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs/plugins/platforms/discord/adapter.py",
+    "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md",
+    "/root/.hermes/profiles/ares/skills/ops/discord-ops/references/route-pack-03.md",
+    "/root/.hermes/profiles/ares/scripts/finalize_shein_report_pagination.py"
+  ],
+  "backup": "/root/mgs-agent/backups/ares-report-pagination-20261016",
+  "validation": {
+    "tests_passed": 31,
+    "accounts": 36,
+    "managers": 6,
+    "rows": 542,
+    "old_native_messages": 116,
+    "new_native_messages": 110,
+    "max_new_utf16_units": 2000,
+    "all_financial_cells_preserved": true,
+    "report_posts": 0
+  },
+  "file_hashes": {
+    "/root/.hermes/profiles/ares/scripts/shein-report-layout.py": "da17bcc635f91ac8860262265ec6d21e90fd29278b0f791d24a96c0bbcc6842f",
+    "/root/.hermes/profiles/ares/scripts/shein_report_delivery.py": "97930a8998e24910a97f600cb5187e3f27cc394c88101cd5e19682542f8b4f63",
+    "/root/.hermes/profiles/ares/scripts/verify_shein_report_pagination.py": "8eaa8f8b0dad315793d35320a2f3002eb6be6e8e3e1ed832943bdc0246f9d011",
+    "/root/.hermes/profiles/ares/tests/test_shein_report_pagination.py": "448b33878fc4dacc30b9fde6693fe1916d6936bab5611414d83f0ba64ff9a05a",
+    "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs/plugins/platforms/discord/adapter.py": "c204808f5bd265998bb142aafe0179623d94c36ed7606fe5d75f20356ce68858",
+    "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json": "965929717ce0bbe8e0dbe397b3aca2d82bf100c3f87895e6094113b50135d8f1",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md": "9a15113746b3a1297a59559143f368cd209554233b5a254a1663501743fe9ef0",
+    "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md": "acec5bd12b9b9c69a96b1b1e512e7de27a4e3528c8c3ea9980859ee0bd870dc1",
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md": "a3130da4a0cd9f014ad318a43603a2b3251257f8764777f7ce7a7177d2f8d5f7",
+    "/root/.hermes/profiles/ares/skills/ops/discord-ops/references/route-pack-03.md": "0d5285ee749f73fa723fd719d12e1aca5d3a72dd4c1f6194e46c18c1b6aa0c9b",
+    "/root/.hermes/profiles/ares/scripts/finalize_shein_report_pagination.py": "8eb2a8ff9d2ad8d59255ed18067ee4f590c27290dd4cfeaadcd5a212ceb2ad61"
+  },
+  "next_step": "Próximo relatório solicitado usa render/validate e recibo nativo; sem republicação retroativa",
+  "activation_evidence": "/root/mgs-agent/data/ares/report-pagination/20261016/activation.json",
+  "infra_receipt": "/root/mgs-agent/data/ares/report-pagination/20261016/infra-receipt.json"
+}

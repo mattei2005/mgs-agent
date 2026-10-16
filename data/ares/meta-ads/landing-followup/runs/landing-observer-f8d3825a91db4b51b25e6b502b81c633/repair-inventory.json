@@ -1,0 +1,59 @@
+{
+  "scope": "PC1 observer local repair only",
+  "queue_key": "da43fbdac46d88fc44ab1d4d071203fcebd8b554f150ed5ac7a121eb30e734f8",
+  "owner": "landing-observer-f8d3825a91db4b51b25e6b502b81c633",
+  "index": 1,
+  "session_id": "20261016_053841_5a0ce4",
+  "diagnosis": "Attempts 6-8 failed valid cadence because synchronous auxiliary vision delayed screenshots approximately 18.9-20.5 seconds. No valid continuous ten-second series existed; those failures remain technical errors, not no-ad observations.",
+  "preexisting_local_corrections_preserved_and_exercised": [
+    "Capture response analysis deferred within single observer subprocess; renderer restored in finally. Shared handler, transport, approval and lease remain in use; no shared driver/config file changed.",
+    "One-second sample spacing provides sufficient duration within twelve-frame budget.",
+    "Repair runner resolves the unique normal Chrome base using read-only discovery and retains failed-probe cleanup gates."
+  ],
+  "changes_this_run": [
+    "Collector now preserves partial frame records on capture failure and returns CAPTURE_ERROR without success samples.",
+    "Collector checks the deadline after each capture, preventing over-deadline cadence validation.",
+    "Added two offline regression tests for partial capture failure and post-capture deadline."
+  ],
+  "files_exercised_sha256": {
+    "scripts/ares-direct-traffic-repair.py": "f83c56fc81ae49850a3c7e7cc96ee6f28670594ac4d88c374652cec530d58a74",
+    "scripts/ares-direct-traffic-sample.py": "759cdfe49164414858d35a1bc79656fa2fcb2856290ec0d80a281ae3a71f9e35",
+    "tests/test_direct_traffic_landing_sample.py": "657f5e9702dd1f6bedc1d5bdb4f95d108f818580272a736fc655834959b21ce4",
+    "tests/test_direct_traffic_landing_repair.py": "494b2f76641553a23a60950fc66caa93abb6903daef191eb408b37d439ddbaf0"
+  },
+  "backup_manifest": "/root/.hermes/profiles/ares/cache/scratch/pc1-repair-f8d3825a-backup/manifest.json",
+  "tests": {"count": 221, "returncode": 0, "result": "OK", "seconds": 21.423, "git_diff_check": "passed"},
+  "probe": {
+    "file": "technical-probe.json",
+    "sha256": "7289a45351b52573b82b387b22f709ecac5f714a87a5df0424c6966ce9829dbd",
+    "state": "TECHNICAL_PROBE_VERIFIED",
+    "samples": 8,
+    "seconds": 10.460014220501762,
+    "url_navigation": false,
+    "url_submission_attempted": false,
+    "target_window_id": 9504250,
+    "closure": "CLOSED_NOT_PASS",
+    "baseline_windows_preserved": 6,
+    "visual_review": "Both unique SHA256 groups covering all eight real frames reviewed: Chrome New Incognito Tab, empty address bar, no landing/site/ad, active Chrome. Closure screenshot reviewed: previous normal browser restored."
+  },
+  "readback": {
+    "technical_probe_verified_event_seq": 2072,
+    "technical_repair_approved_event_seq": 2073,
+    "job_state": "READY",
+    "link_state": "WAIT_RETRY",
+    "attempt_preserved": 8,
+    "other_passed_indices_preserved": [0, 2, 3, 4],
+    "no_ad_history_preserved": true,
+    "physical_lease_released_in_finally": true,
+    "physical_lease_status_readback": "unlocked"
+  },
+  "prohibited_actions_performed": [],
+  "landing_opened": false,
+  "begin_called": false,
+  "campaign_changes": false,
+  "shared_driver_changes": false,
+  "permission_or_credential_changes": false,
+  "process_restarts": false,
+  "manual_database_state_override": false,
+  "observation_pass_claimed": false
+}

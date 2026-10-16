@@ -91,7 +91,14 @@ def orphan_observer_lease(q,state):
         if not first:return False
         data=json.loads(first['content'].rsplit('\n',1)[-1])
         key=data['queue_key'];j=q.job(key)
-        if j['state']!='NEEDS_RECONCILIATION':return False
+        if j['state']!='NEEDS_RECONCILIATION':
+            scope_path=Path(data.get('batch_scope_path') or '')
+            if not scope_path.is_relative_to(q.root/'runs') or not scope_path.is_file():return False
+            scope=json.loads(scope_path.read_text())
+            if scope.get('owner')!=data.get('owner') or scope.get('first_job')!=key:return False
+            candidates=[q.job(x['key']) for x in scope.get('jobs',[]) if q.job(x['key'])['state']=='NEEDS_RECONCILIATION']
+            if len(candidates)!=1:return False
+            j=candidates[0];key=j['key']
         last=q.db.execute("SELECT detail FROM events WHERE job=? AND kind IN ('claimed','recovery_claimed','technical_repair_claimed') ORDER BY seq DESC LIMIT 1",(key,)).fetchone()
         if not last or json.loads(last['detail']).get('owner')!=data.get('owner'):return False
         # --pass-session-id can be set after process startup; /proc/environ of
@@ -109,6 +116,26 @@ def orphan_observer_lease(q,state):
 def prepare_recovery_proof(q,job,idx,directory):
     """Freeze already-reconciled facts, not a new browser result or a PASS."""
     target=job['links'][idx]
+    # Reuse only the exact normal receipt of the latest attempt; never navigate
+    # again just because the queue write failed after a verified closure.
+    last=q.db.execute("SELECT detail FROM events WHERE job=? AND kind='claimed' ORDER BY seq DESC LIMIT 1",(job['key'],)).fetchone()
+    if last and target['state']=='OPEN_INTENT':
+        owner=json.loads(last['detail']).get('owner')
+        if owner:
+            from ares_campaign_v3.landing_reliability import run_directory
+            receipt=run_directory(q,owner,job['key'],idx,target['attempt'])/'lean-result.json'
+            if receipt.is_file():
+                saved=json.loads(receipt.read_text());e=saved.get('evidence') or {};result=saved.get('result')
+                try:
+                    if e.get('observation_mode')!='LEAN_NORMAL_NEW_TAB' or result not in {'PASS','NO_AD'}:raise ValueError('incomplete normal receipt')
+                    from ares_campaign_v3.landing_lean import validate_lean_observation
+                    validate_lean_observation(e,job['payload']['links'][idx],negative=result=='NO_AD')
+                    opened=[r['at'] for r in q.db.execute("SELECT at,detail FROM events WHERE job=? AND kind='open_intent' ORDER BY seq",(job['key'],)) if json.loads(r['detail']).get('idx')==idx]
+                    if not opened or e['opened_at']<opened[-1]:raise ValueError('normal receipt predates current attempt')
+                except (ValueError,KeyError,TypeError,OSError):pass
+                else:
+                    p=directory/'recovery-evidence.json';p.write_text(json.dumps(e,ensure_ascii=False));os.chmod(p,0o600)
+                    job['recovery_evidence_path']=str(p);job['recovery_result']=result;return True
     for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='reconciled_no_ad' ORDER BY seq DESC",(job['key'],)):
         d=json.loads(row['detail'])
         if d.get('idx')!=idx or d.get('attempt')!=target['attempt']:continue
@@ -178,6 +205,16 @@ def tick(q):
         from ares_campaign_v3.landing_reliability import latest_probe_for_cleanup
         if repairing:j['technical_probe_evidence_path']=latest_probe_for_cleanup(q,j['key'],idx)
         if repairing and not j.get('technical_probe_evidence_path'):prepare_recovery_proof(q,j,idx,directory)
+        from ares_campaign_v3 import landing_batch as batch
+        continuous=bool(batch.policy()) and not repairing and not technical_repairing
+        batch_scope=None
+        if continuous:
+            batch_scope=batch.freeze_scope(q,j['key'],owner)
+            batch_scope['deadline']=q.now()+int(batch.policy().get('maximum_run_seconds',10800))-300
+            scope_path=directory/'batch-scope.json';scope_path.write_text(json.dumps(batch_scope,ensure_ascii=False,indent=2));os.chmod(scope_path,0o600)
+            j['batch_scope_path']=str(scope_path)
+            j['batch_jobs']=[{'key':x['key'],'request':q.job(x['key'])['payload']} for x in batch_scope['jobs']]
+            j['prepared_batch']=batch.cached_manifest(q,batch_scope,owner)
         prompt=directory/'input.txt';prompt.write_text(worker_prompt(j['key'],owner,idx,j));os.chmod(prompt,0o600)
         env=dict(os.environ)
         for name in ('HERMES_SESSION_ID','HERMES_KANBAN_TASK','HERMES_KANBAN_BOARD'):
@@ -192,18 +229,24 @@ def tick(q):
                 if not executable:raise RuntimeError('Hermes CLI unavailable')
                 completed=subprocess.run([executable,'-p','ares','chat','--query-file',str(prompt),
                     '--provider',policy['provider'],'--model',policy['model'],
-                    '--source','tool','--max-turns','80','--run-budget','480','--oneshot','-Q','--pass-session-id'],
-                    env=env,cwd=BASE,stdout=log,stderr=subprocess.STDOUT,timeout=540)
+                    '--source','tool','--max-turns','180' if continuous else '80','--run-budget',str(batch.policy().get('maximum_run_seconds',10800)) if continuous else '480','--oneshot','-Q','--pass-session-id'],
+                    env=env,cwd=BASE,stdout=log,stderr=subprocess.STDOUT,timeout=int(batch.policy().get('maximum_run_seconds',10800))+100 if continuous else 540)
                 rc=completed.returncode
             except Exception as e:
                 log.write('worker_terminated '+type(e).__name__+'\n');rc=-1
-        j=q.job(j['key'])
-        if j['state'] in {'RUNNING','RECONCILING','REPAIRING'}:
-            with q.tx():q.db.execute('UPDATE jobs SET lease_until=? WHERE key=?',(q.now()-1,j['key']))
-            q.recover_expired()
+        expired=[]
+        for key in ([x['key'] for x in batch_scope['jobs']] if batch_scope else [j['key']]):
+            current=q.job(key)
+            if current['state'] in {'RUNNING','RECONCILING','REPAIRING'} and current['owner']==owner:
+                with q.tx():q.db.execute('UPDATE jobs SET lease_until=? WHERE key=?',(q.now()-1,key))
+                expired.append(key)
+        if expired:q.recover_expired()
         try:flush(q,Discord())
         except Exception as e:
             with q.tx():q.event(j['key'],'notification_transport_deferred',{'reason':str(e)[:120]})
+        if continuous:
+            from collections import Counter
+            return {'state':'BATCH_PROGRESS_SAVED','jobs_by_state':dict(Counter(q.job(x['key'])['state'] for x in batch_scope['jobs'])),'worker_returncode':rc}
         return {'state':q.job(j['key'])['state'],'worker_returncode':rc}
 
 

@@ -1,0 +1,13 @@
+{
+  "status": "scheduled_and_read_back",
+  "unit": "mgs-ares-shein-pagination-20261016",
+  "target": "ares_only",
+  "delay_seconds": 45,
+  "deterministic_no_agent": true,
+  "chat_delivery": "none",
+  "script": "/root/.hermes/profiles/ares/scripts/finalize_shein_report_pagination.py",
+  "finalizer": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261016T123505Z-1971437.sh",
+  "timer_readback": "Unit=mgs-ares-shein-pagination-20261016.service\nTimersMonotonic={ OnActiveUSec=45s ; next_elapse=3d 21h 17min 3.020057s }\nActiveState=active\n",
+  "service_readback": "ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/.hermes/profiles/ares/scripts/finalize_shein_report_pagination.py --finalizer /root/mgs-agent/data/mgs-gateway-restart-finalizer-20261016T123505Z-1971437.sh ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }\n",
+  "scheduled_at": "2026-10-16T12:35:59.066317+00:00"
+}

@@ -1,0 +1,176 @@
+{
+  "result": "PASS",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb02c187&utm_adgroup=b01fb02c187g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb02c187&utm_adgroup=b01fb02c187g01&nocache",
+    "mapping_source": "/root/.hermes/profiles/ares/cache/scratch/landing-mapping-c114-live.json; canonical read-only WP-CLI mgs_direct_quiz_landings b6b70cac-6d93-49a3-8de0-0f92cae8ec6d active us/sh2-g006 A=B; context/acquisition.md; literal effective campaign query retained",
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb02c187&utm_adgroup=b01fb02c187g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792159058.5490835,
+      "target": {
+        "pid": 18224,
+        "window_id": 7865726,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792159066.5559347,
+      "opened_at": 1792159071.2039661
+    },
+    "opened_at": 1792159071.2039661,
+    "phase_seconds": {
+      "opening": 21.952453306003008,
+      "visual": 19.5210344279767,
+      "closure": 2.771394898998551,
+      "mechanical_total": 56.47177162300795
+    },
+    "visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "description": "The foreground normal Chrome window shows the loaded “How to Get Free SHEIN Products” landing page. Two rendered Slack ads are visible: a top banner reading “Meet Slackbot.” with a “SIGN UP” button, and a right-side creative reading “Meet Slackbot. Finally, AI that actually ‘gets’ your work.” with a “Sign Up” button. The page is unobscured."
+    },
+    "network_ad_confirmed": true,
+    "ad_description": "The foreground normal Chrome window shows the loaded “How to Get Free SHEIN Products” landing page. Two rendered Slack ads are visible: a top banner reading “Meet Slackbot.” with a “SIGN UP” button, and a right-side creative reading “Meet Slackbot. Finally, AI that actually ‘gets’ your work.” with a “Sign Up” button. The page is unobscured.",
+    "visual_review": "The foreground normal Chrome window shows the loaded “How to Get Free SHEIN Products” landing page. Two rendered Slack ads are visible: a top banner reading “Meet Slackbot.” with a “SIGN UP” button, and a right-side creative reading “Meet Slackbot. Finally, AI that actually ‘gets’ your work.” with a “Sign Up” button. The page is unobscured.",
+    "scroll_result": {
+      "ok": true,
+      "action": "scroll",
+      "message": "Scrolled down 2 ticks via UIA (delivery_mode:background).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "accessibility",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "observation_started_at": 1792159092.951986,
+    "visible_seconds": 10.000172104977537,
+    "observation_ended_at": 1792159102.952165,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 7865726,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792159105.7234323,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 7865726,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ]
+  }
+}

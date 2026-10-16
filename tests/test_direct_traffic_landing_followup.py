@@ -450,7 +450,8 @@ class FollowupTests(unittest.TestCase):
 
     def test_latency_prompt_closes_before_offline_review_without_weakening_pass(self):
         self.arm();j=self.q.job(self.key);j['state']='RUNNING'
-        prompt=m.worker_prompt(self.key,'worker',0,j)
+        with patch('ares_campaign_v3.landing_lean.lean_enabled',return_value=False):
+            prompt=m.worker_prompt(self.key,'worker',0,j)
         self.assertLess(prompt.index('feche imediatamente APENAS'),prompt.index('Depois do fechamento, revise offline'))
         self.assertIn('todas as revisões independentes em paralelo',prompt)
         self.assertIn('Fechar não autoriza PASS',prompt)

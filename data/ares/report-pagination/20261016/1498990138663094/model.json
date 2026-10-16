@@ -1,0 +1,120 @@
+{
+  "account": {
+    "id": "act_1498990138663094",
+    "name": "Escalatepower-US-SHEIN-EN-06-G006",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-15",
+  "history_dates": [
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+  ],
+  "source_timestamps": {
+    "account": "2026-10-15T17:11:44.757676-04:00",
+    "publisher": "2026-10-15T17:11:45.015820-04:00",
+    "delay": "2026-10-15T17:11:45.189310-04:00",
+    "sb_rows": "2026-10-15T17:11:45.273904-04:00",
+    "insights": "2026-10-15T17:11:54.050788-04:00",
+    "campaigns": "2026-10-15T17:11:54.539630-04:00",
+    "ad_insights": "2026-10-15T17:11:56.960251-04:00",
+    "adsets": "2026-10-15T17:12:08.809286-04:00",
+    "ads": "2026-10-15T17:12:11.153949-04:00",
+    "daily": "2026-10-15T17:12:21.070960-04:00"
+  },
+  "delay": {
+    "hours": 3,
+    "minutes": 10,
+    "totalMinutes": 190,
+    "currentFillTime": "2026-10-15T18:00:00.000Z",
+    "jbf_hour": 14,
+    "fill": 1,
+    "confident": true
+  },
+  "rows": [
+    {
+      "id": "120252795396560042",
+      "name": "01- 14/10 - SHEIN FOR FREE - (b01fb06c01) - event_add_to_wishlist",
+      "number": "01",
+      "product": "SHEIN FOR FREE",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "spend": "26.6",
+      "net_revenue": "4.96",
+      "estimated_revenue": "5.47",
+      "roi": "-81.35338345864661654135338346",
+      "estimated_roi": "-79.43609022556390977443609023",
+      "health": "96.02272727272727272727272727",
+      "roas": "0.297368",
+      "first_delivery": "2026-10-14",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-10",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "0",
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "46.4",
+          "net_revenue": "3.5",
+          "roi": "-92.45689655172413793103448276",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "26.6",
+          "net_revenue": "4.96",
+          "roi": "-81.35338345864661654135338346",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "reconciliation": [
+    {
+      "campaign_id": "120252795396560042",
+      "meta_spend": "26.6",
+      "sb_investment": "26.41",
+      "difference": "0.19"
+    }
+  ],
+  "selection": [
+    "120252795396560042"
+  ]
+}

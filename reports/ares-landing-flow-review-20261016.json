@@ -1,0 +1,61 @@
+{
+  "type": "read_only_flow_review",
+  "scope": "Landing observer only; no campaign creation changes or extra landing visits",
+  "source_thread_id": "1559932317861158993",
+  "operational_changes": false,
+  "extra_browser_visits": 0,
+  "verified_round": {"passed": 33, "pending": 0, "c173": "PASS on explicitly authorized fifth attempt; four prior NO_AD preserved"},
+  "verified_tests": {"suite": "test_direct_traffic_landing*.py", "passed": 246, "failures": 0},
+  "successful_attempt_metrics": {
+    "sample_count": 33,
+    "median_full_cycle_seconds": 47.9,
+    "mean_full_cycle_seconds": 48.06,
+    "min_full_cycle_seconds": 40.9,
+    "max_full_cycle_seconds": 60.19,
+    "median_navigation_seconds": 16.59,
+    "median_post_close_seconds": 5.12,
+    "caveat": "Per successful attempt only; excludes failed/NO_AD attempts, initial preparation and manual pauses. Separately computed medians are not additive."
+  },
+  "confirmed_rules": [
+    "Prepare all exact landing destinations and queries before navigation; preserve original campaign URLs",
+    "Bare nocache flag on observation URL only: &nocache when UTMs already exist",
+    "One real shared PC1 lease; one observer; unrelated Discord turns do not block physical work",
+    "New NORMAL tab every attempt, never Incognito or replacement URL in a used tab",
+    "Actual rendered network ad detection; scroll; measured10seconds; owned closure verified; next item",
+    "No screenshot series/offline gallery or coding/documentation while a landing waits open",
+    "Loading/New Tab/technical error is not NO_AD",
+    "Up to3initial NO_AD then defer; one final attempt; REVIEW_REQUIRED afterwards; extra attempt only on fresh explicit authorization",
+    "Do not re-open approved links or reset history",
+    "Compact results; per-item reporting when requested; durable outbox/GET; no raw process-exit alerts",
+    "Normal manager completion remains collective; replay no-manager-notice is a round-specific override"
+  ],
+  "open_implementation_findings": [
+    {
+      "finding": "Automatic dispatcher still starts a bounded Hermes CLI/model worker per selected link; supervised replay used a continuous prepared batch",
+      "source": "scripts/ares-direct-traffic-followup.py:tick",
+      "recommendation": "Consolidate continuous mechanical batch execution with shared prepared map, bounded leases and safe pause boundaries; do not add campaign-creation hooks"
+    },
+    {
+      "finding": "Technical-repair runner and REPAIRING prompt still require a blank private window and screenshot cadence, conflicting with active lean normal-tab rules",
+      "sources": ["scripts/ares-direct-traffic-repair.py", "scripts/ares_campaign_v3/landing_followup.py:worker_prompt"],
+      "recommendation": "Align repair path with active route and add regression coverage before claiming end-to-end unification"
+    },
+    {
+      "finding": "Generic progress reporter retains historical interval-based configuration; per-item reports were implemented in supervised replay",
+      "source": "scripts/ares_campaign_v3/landing_followup_reporting.py",
+      "recommendation": "Make per-item progress a properly scoped shared mode without blocking next PC1 item on message delivery",
+      "current_risk_context": "The13historical progress-scope jobs and historical priority target are COMPLETE; they were not active pending work in this audit"
+    }
+  ],
+  "causal_limitations": [
+    "C173 had four NO_AD and later PASS with both normal Chrome and nocache in all five attempts; this does not establish cache as the cause or nocache as a delivery guarantee",
+    "Successful supervised replay and passing offline tests do not prove the automatic dispatcher, repair branch and progress delivery are fully unified"
+  ],
+  "runtime_readback": {"intake_timer": "active/waiting", "followup_timer": "active/waiting", "oneshot_services": "inactive between cycles, Result=success", "global_queue": "21 COMPLETE jobs"},
+  "canonical_sources": [
+    "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+    "data/ares/meta-ads/landing-followup/supervised-repeat-20261016-062358/normal-results.json",
+    "data/ares/meta-ads/landing-followup/supervised-repeat-20261016-062358/final-verification.json",
+    "data/agent-checkpoints.json#ARES-SUPERVISED-REPEAT-20261016-062358"
+  ]
+}

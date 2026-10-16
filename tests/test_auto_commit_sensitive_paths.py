@@ -63,6 +63,12 @@ fi
             "profiles/ares-skills/growth/adspower-segurador-token-collector/live-token.json": 1,
             "profiles/ares-skills/growth/adspower-segurador-token-collector/credentials.json": 1,
             "profiles/ares-skills/growth/adspower-segurador-token-collector/references/other.md": 1,
+            "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credential_pool.py": 0,
+            "work/reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credential_pool.py": 1,
+            "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credential_pool.py.bak": 1,
+            "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/other_credentials.py": 1,
+            "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credentials.json": 1,
+            "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

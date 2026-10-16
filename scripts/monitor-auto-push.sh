@@ -215,6 +215,7 @@ fi
 # depois de um commit/skip limpo posterior.
 if [[ -f "$AUTO_COMMIT_LOG" ]]; then
     LAST_BLOCK_EPOCH=0
+    LAST_COMMIT_ERROR_EPOCH=0
     LAST_CLEAR_EPOCH=0
     while IFS= read -r line; do
         ts="$(echo "$line" | grep -oP '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' || true)"
@@ -224,7 +225,9 @@ if [[ -f "$AUTO_COMMIT_LOG" ]]; then
         (( line_epoch >= CUTOFF_EPOCH )) || continue
         if echo "$line" | grep -q "BLOQUEADO: arquivo sensível detectado"; then
             LAST_BLOCK_EPOCH="$line_epoch"
-        elif echo "$line" | grep -qE "Commit OK:|Working tree limpo, skipping|ERRO no commit"; then
+        elif echo "$line" | grep -q "ERRO no commit"; then
+            LAST_COMMIT_ERROR_EPOCH="$line_epoch"
+        elif echo "$line" | grep -qE "Commit OK:|Working tree limpo, skipping"; then
             LAST_CLEAR_EPOCH="$line_epoch"
         fi
     done < <(tail -500 "$AUTO_COMMIT_LOG" 2>/dev/null || true)
@@ -244,6 +247,11 @@ if [[ -f "$AUTO_COMMIT_LOG" ]]; then
     if (( LAST_BLOCK_EPOCH > LAST_CLEAR_EPOCH )); then
         AUTO_COMMIT_GUARDRAIL_BLOCKED=1
         REPO_FAILURES+=("auto-commit bloqueado por guardrail sensível [commit/push não iniciou]")
+    fi
+    # Failure before push (for example an abandoned Git index.lock) must never
+    # clear the guardrail incident or turn a dirty, uncommitted repo green.
+    if (( LAST_COMMIT_ERROR_EPOCH > LAST_CLEAR_EPOCH )); then
+        REPO_FAILURES+=("auto-commit falhou [commit/push não iniciou; consultar auto-commit-watcher.log]")
     fi
 fi
 

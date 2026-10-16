@@ -1,0 +1,75 @@
+{
+  "queue_key": "a755c60674d01f9e63b238b57dc740d33a72658a429ba457dfc66b2e5822229a",
+  "owner": "landing-observer-7345e183cb9848aeb6f8144a6c21119c",
+  "index": 4,
+  "state": "DEFERRED_PC1_BUSY_TECHNICAL_REPAIR",
+  "reason": "Other job NEEDS_RECONCILIATION; probe refused multiple Chrome candidates before input; no new probe window. No receipt approved.",
+  "cleanup": {
+    "probe_state": "TECHNICAL_PROBE_FAILED",
+    "no_new_window_verified": true,
+    "no_probe_opening": true,
+    "baseline_preserved_now": true,
+    "fresh_windows": [
+      {
+        "pid": 18224,
+        "window_id": 1180142,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "no_input_sent": true,
+    "checked_at": 1792138742.0202453
+  },
+  "offline_tests": 214,
+  "resource_guard_cases_passed": 7,
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/ares-direct-traffic-sample.py",
+      "sha256": "5652520993c5932225f1dd481a27d2bdfd4f988a50a176bf122e41caff9f3ccd",
+      "size_bytes": 6176
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-direct-traffic-repair.py",
+      "sha256": "4c5ae96739112c4e499ccad9f1bab3c22c49c1b56cedc0fed7e3f126e6f74a4b",
+      "size_bytes": 6869
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_direct_traffic_landing_sample.py",
+      "sha256": "daf4f3d86ce46cb251ee065ec638039bcd50ed338d5397ba8cd2d2ed9d9ae5dd",
+      "size_bytes": 4016
+    }
+  ],
+  "probe_file": "/root/mgs-agent/data/ares/meta-ads/landing-followup/runs/landing-observer-7345e183cb9848aeb6f8144a6c21119c/technical-probe.json",
+  "no_campaign_changes": true,
+  "no_shared_driver_changes": true,
+  "no_restart": true
+}
