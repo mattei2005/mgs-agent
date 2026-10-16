@@ -3863,12 +3863,12 @@
     {
       "agent": "ares",
       "id": "ares-intake-1560461722148536454",
-      "next_step": "Congelar plano; validar clean; upload READY; readback; mover originais LEGACY e finais Nicolas; registrar inventário",
-      "objective": "Tratar e mover 13 criativos US SHEIN EN para Nicolas, preservando originais e reserva",
+      "next_step": "Concluir quatro adicionais; auditar por ID/SHA/clean=true os 17, limpar mídia transitória e reportar mapa exato",
+      "objective": "Tratar 17 criativos US SHEIN EN para Nicolas: 13 iniciais e adicionais 14 a 17",
       "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1560461722148536454",
-      "state": "13 vídeos novos localizados em nicolas, não na entrada; lote estável, baixado e revisado em cinco frames por vídeo. sanitização e plano de nomes em andamento",
+      "state": "13 concluídos e com readback por arquivo. adicionais 14.mp4 a 17.mp4 estáveis e revisados, sanitização/execução em andamento. um 13.mp4 extra não solicitado permanece intocado",
       "thread_id": "1560461722148536454",
-      "updated_at": "2026-10-16T01:30:05+00:00"
+      "updated_at": "2026-10-16T01:43:27+00:00"
     },
     {
       "agent": "ares",
@@ -6092,5 +6092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T01:30:05+00:00"
+  "updated_at": "2026-10-16T01:43:27+00:00"
 }
