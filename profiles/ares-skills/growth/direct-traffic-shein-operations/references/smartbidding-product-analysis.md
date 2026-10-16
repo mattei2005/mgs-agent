@@ -1,10 +1,16 @@
 # Análise SHEIN por produto — Meta × Smart Bidding
 
+## Padrão vigente — compacto global aprovado
+
+Usar em todas as36contas/threads (seis canais de relatórios): **R/E → Início → Nº → Produto → Quiz → Bid → Gasto → B.R. → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**. Produto: **máximo12caracteres incluindo espaços, sem reticências**. Fonte ativa `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, política `ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016`. `Rev`, `Health`, `ROI E.` e `B.R.` são aliases de Receita, Est.Health, ROI est. e Budget R.; fórmulas e fontes permanecem. Bid é meta real COST_CAP; orçamento restante vem de campaign.budget_remaining, nunca diário menos gasto do relatório. Carregar `canonical-report-renderer.md` e completar configuração dos modelos antes do render/validate normal, sem flags de prévia. Os limites20/25 e padrões anteriores abaixo são histórico supersedido; não usar como default. Preservar seleção conforme pedido, histórico, famílias e reports antigos.
+
 ## Gate de apresentação obrigatório
 
 Usar o renderer offline e a validação exata de `references/canonical-report-renderer.md` antes de qualquer entrega padrão, com leitura atual do contrato e binding thread/conta. Não entregar o texto montado à mão nem usar modelos antigos da conversa para omitir pipes, histórico ou média. O gate não substitui a coleta live nem autoriza novas postagens durante auditoria/limpeza.
 
-## Produto: no máximo 20 caracteres visíveis
+## Histórico supersedido — limite Produto20
+
+A regra ativa é Produto12 na seção inicial; manter os nomes completos e todos os cuidados de identidade abaixo, substituindo somente o limite de apresentação.
 
 Na coluna Produto, máximo de **20 caracteres incluindo espaços, sem reticências acrescentadas**, em uma única linha; limitar também largura visual Unicode a 20. Regra aprovada por Rodolfo após o teste visual, supersedendo o limite anterior de 25 com `...`. A regra é de apresentação: preservar valor completo no modelo, sorting e famílias, sem renomear Meta nem fundir produtos por prefixo truncado. Usar `product_label` do renderer canônico, não cortar manualmente valores financeiros ou nomes de outras colunas. Rodolfo também dispensou legenda explicativa: seguir `legend.enabled=false`, mantendo somente notas essenciais e curtas de fonte, fórmula, parcial e limitações. Origem: conversa `1560303769680355525`, exemplo problemático `1558147211026501643`.
 
@@ -134,7 +140,9 @@ São limites condicionais ao rendimento e à composição atuais, não bids Meta
 - Na thread `1558147479432601670`, conta `1583000095650153` / Yolokfx Conta 02 G006, o modelo específico solicitado por Rodolfo e reafirmado por Geizian é **Início → Produto (camp.) → CRV → Custo → Gasto $ → Health → ROI → ROI est. → ROAS**, consolidado por produto + formato real, com ROI decrescente. Referência: relatório de 12/10/2026 às 22:13 EDT citado na própria conversa. Selecionar campanhas com entrega Meta no dia; receita SB de campanhas sem entrega fica separada, fora do consolidado. Manter o agrupamento por produto, salvo drill-down expresso para campanhas individuais; não adicionar ativos sem entrega às partições financeiras. Ausência de um produto no dia não autoriza copiar linha do dia anterior.
 - O runner `shein-health-report.py` é específico para filtro de Health e não comprova um relatório genérico completo: ele separa campanhas sem denominador e não inclui automaticamente toda a seleção Meta. Em consolidação por produto, validar cobertura dos IDs com entrega, formato nos anúncios com entrega, partições disjuntas, somas financeiras/resultados, primeira entrega, receita estimada independente e tamanho do bloco Discord. Exigir em cada consulta teste de IDs únicos, cobertura integral de mídia e conservação de gasto/receita/resultados; não congelar contagens de consultas anteriores nem executar mutação Meta para completar um relatório.
 
-## Padrão vigente — todas as contas de anúncio SHEIN
+## Histórico supersedido — padrão anterior por conta e treze colunas
+
+O padrão global compacto ativo é o da seção inicial; o registro anterior abaixo fica preservado como histórico de supersessão.
 
 Rodolfo promoveu o relatório de doze colunas desta conversa a padrão de **todas as contas de anúncio SHEIN, independentemente de domínio, gestor, canal ou solicitante autorizado**, incluindo Geizian e os seis gestores. Origem: thread `1560303769680355525`; referência dos rótulos: mensagem `1560305388837150800`; a mensagem posterior de generalização não teve ID fornecido. Ordem e grafia atuais, após o acréscimo de R/E e histórico por Rodolfo na mesma conversa: **R/E → Início → Nº → Produto → Quiz → Gasto → Receita → Saldo → Est.Health → ROI → ROI est. → ROAS → Lance**.
 

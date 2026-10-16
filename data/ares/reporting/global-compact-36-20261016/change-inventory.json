@@ -1,0 +1,69 @@
+{
+  "id": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016",
+  "status": "active_all36reports_published_verified",
+  "owner": "Rodolfo Mattei",
+  "agent": "ares",
+  "source_thread_id": "1560303769680355525",
+  "scope": "all36 SHEIN account report threads in6parent report channels",
+  "files": [
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+      "sha256_after": "7d70b7a936cb3cb9bb664f69c28671797a483b657b67854a5ae39132aa4f5362",
+      "backup": "/root/mgs-agent/data/ares/reporting/global-compact-36-20261016/before/shein-report-layout.py",
+      "sha256_before": "53b1783e8bad14b6abfbd3d2f94026ed9d1ce059cc933828dba3f2d1b3036a26"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "sha256_after": "5cf9fa5ab3036b466064878336841f297a0561fc771ea307246c92271a7976ac",
+      "backup": "/root/mgs-agent/data/ares/reporting/global-compact-36-20261016/before/SHEIN-US-DIRECT.json",
+      "sha256_before": "f320c0e453ee0f74ddfd8a8bd8260681b3e235066970e6c00df3f45df9894316"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_layout.py",
+      "sha256_after": "1834d5a1d5b3ae80e8c82cb40a07b3e402e874d9e4d796552fefe89b5a7c45a9"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_configuration_columns.py",
+      "sha256_after": "ccc438e394d1ebf1b845777fc74f2351e80df616ebc3863fd984e058404c6599"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_compact_headers.py",
+      "sha256_after": "3f97d8485629c0700b201c8494163cf73ad0ab0998dfb5829288a1ad50d18cf1"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/fixtures/shein_report_real_3.json",
+      "sha256_after": "8669985c5f564a0508d6b21a08fd915fa2f69d73735810fa5880e75fb2e2f9f6",
+      "backup": "/root/mgs-agent/data/ares/reporting/global-compact-36-20261016/before/shein_report_real_3.json",
+      "sha256_before": "766f4f0d4ab937f3a28abbc7c1bb04c949bf759293aea38d14ef898a7ee91b4e"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+      "sha256_after": "5c4bc4d243efb5449511c6a0bde4ca171b67cd2b1b7a625afc13146798683e14"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+      "sha256_after": "a21d5bc95c46d9f19efff89c321b790a07db9389cd685c64c03e23cb6e0e51ae"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
+      "sha256_after": "365148f067515531843f7842a670959610f04398af314b36de1f4e035b65ec56"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md",
+      "sha256_after": "6c9bed20d733dd62aba60fe9d4f9ffedfa280cc614245f0d38ef937606a6185c"
+    }
+  ],
+  "tests_passed": 43,
+  "publication_summary": "/root/mgs-agent/data/ares/reporting/global-compact-36-20261016/publication-summary.json",
+  "financial_collection_summary": "/root/mgs-agent/data/ares/reporting/global-compact-36-20261016/collection-summary.json",
+  "reports": 36,
+  "parts": 118,
+  "campaigns": 565,
+  "history_cells": 3955,
+  "zero_delivery_accounts": 12,
+  "meta_writes": 0,
+  "deletes": 0,
+  "cron_changes": 0,
+  "restarts": 0,
+  "updated_at": "2026-10-16T17:24:13.590201+00:00"
+}

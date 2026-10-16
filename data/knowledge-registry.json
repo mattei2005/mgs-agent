@@ -3824,10 +3824,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016",
       "title": "Yolokfx Conta02 G006: Bid antes Gasto e Budget R. antes Receita; recorte por conta",
-      "updated_at": "2026-10-16T16:40:49+00:00"
+      "updated_at": "2026-10-16T17:22:06+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.account-1583000095650153.compact-preview",
@@ -3842,10 +3842,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016",
       "title": "Prévia autorizada Yolokfx02 G006: Produto12 e cabeçalhos B.R./Rev/Health/ROI E.; sem promoção global",
-      "updated_at": "2026-10-16T17:04:43+00:00"
+      "updated_at": "2026-10-16T17:22:06+00:00"
     },
     {
       "canonical_key": "ares.shein.thread.1558134703565967394.scope",
@@ -4095,10 +4095,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016",
       "title": "SHEIN: paginação por capacidade real 2000 e entrega nativa exata sem segundo split nos seis canais",
-      "updated_at": "2026-10-16T12:23:35+00:00"
+      "updated_at": "2026-10-16T17:18:47+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -4192,6 +4192,25 @@
       "superseded_by": null,
       "title": "Relatórios SHEIN incluem atraso GAM/SB no cabeçalho, mantendo as doze colunas",
       "updated_at": "2026-10-15T15:19:05+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-ads-intraday-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-16T17:18:47+00:00",
+      "id": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN todas36contas: Produto12 sem reticencias,15colunas B.R./Rev/Health/ROI E., Bid CostCap e budgetremaining reais",
+      "updated_at": "2026-10-16T17:18:47+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -12519,5 +12538,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T17:04:43+00:00"
+  "updated_at": "2026-10-16T17:22:06+00:00"
 }

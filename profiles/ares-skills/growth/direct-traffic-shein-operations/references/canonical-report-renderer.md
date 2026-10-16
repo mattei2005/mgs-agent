@@ -4,7 +4,15 @@
 
 Evitar divergência entre threads e uso de modelos históricos em pedidos genéricos. A política visual continua exclusivamente em `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`. O índice `data/ares/discord/shein-intraday-report-bindings.json` vincula as 36 threads a contas exatas; não amplia autoridade. Ler ambos em cada pedido, não usar um snapshot de configuração como estado vigente.
 
-## Produto com largura limitada e sem legenda extensa
+## Padrão vigente — compacto global, quinze colunas, Produto12
+
+A prévia foi **aprovada e promovida por Rodolfo para todas as36contas/threads**, nos seis canais de relatórios (seis contas por gestor). Política ativa: `ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016`, no mesmo `on_demand_default_layout` canônico. O renderer usa normalmente, sem flags de prévia, **R/E → Início → Nº → Produto → Quiz → Bid → Gasto → B.R. → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**, com Produto de no máximo **12 caracteres incluindo espaços e sem reticências**. `header_aliases` troca somente a apresentação das chaves lógicas; orçamento restante, bid, receita, Health e ROI estimado mantêm as fontes/fórmulas abaixo. O acréscimo de Bid/B.R. deixou de ser exclusivo da Conta02 G006. Os blocos de Produto20 e prévia pendente a seguir são histórico explicitamente supersedido, não regras ativas.
+
+Para atualização integral, exigir `budget_remaining`, `cost_per_result_goal`, `bid_strategy_live`, sete datas e timestamps financeiros/configuração em cada modelo, mesmo nas contas antes sem essas colunas; dados ausentes explícitos ficam null/n/d, nunca fabricar configuração para passar no gate. `financial_snapshot_preserved=false` identifica uma coleta atual: não rotular dados novos como complemento preservado. Para complemento apenas visual, manter true e os horários originais. Contas sem entrega conservam cabeçalhos e n/d financeiros; delay sem publisher comprovado fica indisponível, não zero. Preservar todos os reports anteriores.
+
+Ao materializar números de campanhas legadas, aceitar o prefixo literal de dígitos mesmo quando seguido de marcador entre colchetes, como `87 [23] - ...`; não exigir hífen imediatamente após o número, não renomear nem interpretar o número interno como identidade. Identidade financeira continua campaign ID real. Em falha local de parsing/modelagem, reutilizar as fontes persistidas e corrigir somente a camada local, sem repetir extrações financeiras.
+
+## Histórico supersedido — Produto20 e teste de aprovação anterior
 
 Rodolfo aprovou na thread `1560303769680355525` o relatório da `1558147211026501643` com Produto de no máximo **20 caracteres incluindo espaços, sem acrescentar reticências**. Esse é o padrão vigente para todas as contas SHEIN e supersede a regra anterior de 25 com `...`. O helper `product_label` lê `product_column` do contrato, normaliza apenas a exibição para uma linha, neutraliza pipes internos e respeita também largura visual Unicode máxima de 20. Não renomear campanhas/assets, sobrescrever o valor completo do modelo, alterar a ordenação/família ou consolidar produtos só porque seus rótulos truncados coincidem. Só a célula visível é cortada; dados e linhagem permanecem íntegros. Verificar os limites em todas as células depois de renderizar.
 
@@ -22,7 +30,9 @@ O teste de 20 sem reticências foi aprovado e promovido ao padrão: próximos re
 
 Comparar a largura total real antes/depois: retirar `...` de alguns rótulos não reduz necessariamente a largura da coluna, pois outros nomes completos podem continuar com o máximo vigente. Informar o resultado sem prometer que a quebra visual foi resolvida. Para teste de formatação, reutilizar o modelo financeiro real do relatório que o usuário está comparando, declarando o horário, sem uma nova coleta financeira desnecessária. Entrega em outra thread exige destino explicitamente pedido e readback da conta/thread e de cada mensagem publicada; manter journal para reconciliar efeitos parciais e não reenviar report às cegas. O renderer continua sem transporte; a opção de prévia não autoriza postagem por si só. Testes cobrem remoção só do sufixo acrescentado, preservação de nomes sem corte e pontos originais, integridade das demais células e validação com modo explícito.
 
-## Colunas Meta por conta — Bid e Budget R.
+## Fontes Meta de Bid e orçamento restante — agora globais
+
+A autorização inicialmente scoped descrita no parágrafo seguinte foi supersedida pela aprovação global acima. Aplicar as mesmas receitas de leitura abaixo às36contas; não usar o antigo recorte como bloqueio. Os rótulos visíveis atuais são Bid e B.R.
 
 Quando Rodolfo autorizar acréscimos para uma conta específica, registrar o recorte em `on_demand_default_layout.account_column_overrides`, mantendo intactas as colunas globais das demais contas. Na conta `1583000095650153` / `Yolokfx-US-SHEIN-EN-02-G006`, thread corrigida `1558147479432601670`, o renderer acrescenta **Bid imediatamente antes de Gasto** e **Budget R. imediatamente antes de Receita**. A fonte é a decisão de Rodolfo na Diretoria `1560303769680355525`; o destino anterior foi corrigido, não deve receber a publicação.
 
@@ -33,7 +43,9 @@ Quando Rodolfo autorizar acréscimos para uma conta específica, registrar o rec
 - Em complemento de colunas, preservar todos os campos financeiros, nomes, seleção, ordem e histórico do modelo anterior e informar os dois horários no cabeçalho. O atraso GAM/SB preservado continua sendo observação daquele snapshot financeiro, não uma leitura atual.
 - Exercitar a suíte `test_shein_report_configuration_columns.py` junto às demais `test_shein_report_*.py`, comparar todas as células antigas e o histórico e repetir render/validate com a thread exata. O acréscimo não autoriza write Meta, alteração global, cron ou exclusão de mensagens.
 
-## Prévia compacta de cabeçalhos
+## Histórico — prévia compacta aprovada e promovida
+
+A aprovação global no início desta referência substitui o status pendente abaixo. Preservar flags somente para reconstrução histórica ou outro teste explicitamente autorizado; o fluxo normal não usa flags.
 
 Para o teste autorizado da conta `1583000095650153`, acrescentar **`--preview-compact-headers --preview-product-max-characters 12 --preview-remove-product-ellipsis`** em render e validate. O modo lê `account_column_overrides.<account_id>.compact_header_preview` do contrato atual e aplica somente os rótulos **Budget R. → B.R.; Receita → Rev; Est.Health → Health; ROI est. → ROI E.**. As chaves lógicas das métricas, posições, valores, alinhamento, nomes completos, famílias e histórico continuam inalterados; somente Produto é cortado para a apresentação aprovada. Calcular larguras usando os rótulos finais, não os cabeçalhos antigos. Guardar `preview_compact_headers` no recibo e rejeitar texto de prévia quando o validate não usar as mesmas opções. Conta sem autorização ou cap/modo divergente falha fechado.
 

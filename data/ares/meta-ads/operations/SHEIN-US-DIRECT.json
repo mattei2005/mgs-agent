@@ -721,8 +721,8 @@
         "no_Meta_campaign_or_asset_name_write": true,
         "source_thread_id": "1560303769680355525",
         "reported_bad_layout_thread_id": "1558147211026501643",
-        "approval": "Rodolfo approved the 20-character no-ellipsis report as excellent and requested removal of previous versions.",
-        "superseded_rules": [{"status": "SUPERSEDED", "max_characters": 25, "ellipsis": "...", "superseded_by": "ARES-SHEIN-REPORT-PRODUCT20-APPROVED-20261015"}]
+        "approval": "Rodolfo approved the compact preview with12characters, B.R./Rev/Health/ROI E., and promoted it for all36SHEIN account threads;20character default is superseded.",
+        "superseded_rules": [{"status": "SUPERSEDED", "max_characters": 25, "ellipsis": "...", "superseded_by": "ARES-SHEIN-REPORT-PRODUCT20-APPROVED-20261015"}, {"status": "SUPERSEDED", "max_characters": 20, "ellipsis": "", "superseded_by": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016"}]
       },
       "legend": {
         "enabled": false,
@@ -910,7 +910,7 @@
         },
         "no_CPV_strategy_or_action_inheritance": true
       },
-      "revision": "R/E precedes the twelve approved labels; real dot uses sign and estimated dot uses red<10%, yellow10%-40%inclusive, green>40%. Seven-date real ROI history follows main table with rightmost arithmetic Média 7d, excluding n/d and marking partial. All SHEIN accounts; explicit presentation overrides allowed. GAM delay/access gates unchanged.",
+      "revision": "Approved global compact standard for all36SHEIN account threads: logical15columns displayed R/E, Início, Nº, Produto, Quiz, Bid, Gasto, B.R., Rev, Saldo, Health, ROI, ROI E., ROAS, Lance; Produto max12 including spaces without ellipsis. Bid is real COST_CAP goal only, B.R. is real Meta campaign budget_remaining. Preserve R/E signals, Unicode alignment, capacity-first exact2000 pagination, COPY families, delay and seven-date ROI history with Média7d. Supersedes product20 and prior account-only preview; no campaign writes, deletion, cron or automatic optimization.",
       "superseded_layouts": [
         {
           "status": "SUPERSEDED",
