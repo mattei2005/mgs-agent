@@ -1,0 +1,826 @@
+{
+  "observed_at": "2026-10-16T17:12:58.494344+00:00",
+  "campaign": {
+    "id": "120255673187420150",
+    "account_id": "7840111366055613",
+    "name": "115 - FREE CLOTHES IMG - US-EN (b01fb01c115) 09/10 event_add_to_wishlist",
+    "created_time": "2026-10-08T19:34:11-0400",
+    "status": "ACTIVE",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "budget_remaining": "5422",
+    "daily_budget": "7500",
+    "adsets": {
+      "data": [
+        {
+          "id": "120255673187450150",
+          "campaign_id": "120255673187420150",
+          "promoted_object": {
+            "pixel_id": "1049581090103163",
+            "custom_event_type": "ADD_TO_WISHLIST",
+            "smart_pse_enabled": false
+          },
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "ads": {
+      "data": [
+        {
+          "id": "120255673187500150",
+          "campaign_id": "120255673187420150",
+          "creative": {
+            "id": "2509392569545363",
+            "object_story_spec": {
+              "page_id": "1187478564456307"
+            },
+            "asset_feed_spec": {
+              "images": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f646641b8c8cd2a2a",
+                      "id": "120255647729410150"
+                    }
+                  ],
+                  "hash": "e0a15a283aafbf28713f600ecc8f3de6"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f285b8f5679f2956c",
+                      "id": "120255647729380150"
+                    }
+                  ],
+                  "hash": "03ed9d08ca500dc28ae87b51381fd2df"
+                }
+              ],
+              "bodies": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fc06939450473893d",
+                      "id": "120255647729390150"
+                    },
+                    {
+                      "name": "placement_asset_f6ca244171bddcf2b",
+                      "id": "120255647729400150"
+                    },
+                    {
+                      "name": "placement_asset_fbac10b170248d4cc",
+                      "id": "120255647729440150"
+                    }
+                  ],
+                  "text": "👕👗👚 FREE CLOTHES \n✔️ NO EXTRA COSTS OR FEES.\n⏱️ For a Limited Time!"
+                }
+              ],
+              "call_to_action_types": [
+                "GET_OFFER"
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "link_urls": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fce82e6b02e8bc8e4",
+                      "id": "120255647729340150"
+                    },
+                    {
+                      "name": "placement_asset_ff6affa367a9cc248",
+                      "id": "120255647729360150"
+                    },
+                    {
+                      "name": "placement_asset_f917bb1ea036c98ad",
+                      "id": "120255647729430150"
+                    }
+                  ],
+                  "website_url": "https://yolokfx.com/quiz/us/sh2-g002/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c115&utm_adgroup=b01fb01c115g01",
+                  "display_url": ""
+                }
+              ],
+              "titles": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f86cf273caef5123b",
+                      "id": "120255647729350150"
+                    },
+                    {
+                      "name": "placement_asset_fad953b685edeba95",
+                      "id": "120255647729370150"
+                    },
+                    {
+                      "name": "placement_asset_f3fb854ac1fa05a42",
+                      "id": "120255647729420150"
+                    }
+                  ],
+                  "text": "CLICK HERE ☑️"
+                }
+              ],
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram",
+                      "audience_network",
+                      "whatsapp"
+                    ],
+                    "facebook_positions": [
+                      "instream_video",
+                      "story",
+                      "facebook_reels"
+                    ],
+                    "instagram_positions": [
+                      "story",
+                      "reels",
+                      "ig_search"
+                    ],
+                    "audience_network_positions": [
+                      "classic"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_f285b8f5679f2956c",
+                    "id": "120255647729380150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f6ca244171bddcf2b",
+                    "id": "120255647729400150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f917bb1ea036c98ad",
+                    "id": "120255647729430150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_fad953b685edeba95",
+                    "id": "120255647729370150"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13
+                  },
+                  "image_label": {
+                    "name": "placement_asset_f646641b8c8cd2a2a",
+                    "id": "120255647729410150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_fc06939450473893d",
+                    "id": "120255647729390150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_ff6affa367a9cc248",
+                    "id": "120255647729360150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f3fb854ac1fa05a42",
+                    "id": "120255647729420150"
+                  },
+                  "priority": 2
+                }
+              ],
+              "optimization_type": "PLACEMENT",
+              "additional_data": {
+                "multi_share_end_card": false,
+                "is_click_to_message": false
+              },
+              "reasons_to_shop": false,
+              "shops_bundle": false
+            }
+          }
+        },
+        {
+          "id": "120255673187430150",
+          "campaign_id": "120255673187420150",
+          "creative": {
+            "id": "1093790613035367",
+            "object_story_spec": {
+              "page_id": "1187478564456307"
+            },
+            "asset_feed_spec": {
+              "images": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f0469f71f64cdbf1a",
+                      "id": "120255647729860150"
+                    },
+                    {
+                      "name": "placement_asset_fabb7530e3230c335",
+                      "id": "120255647729900150"
+                    }
+                  ],
+                  "hash": "d577652664d395e89ac786d9f67cff3f"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_ff2bd361e29976358",
+                      "id": "120255647730000150"
+                    }
+                  ],
+                  "hash": "d577652664d395e89ac786d9f67cff3f",
+                  "image_crops": {
+                    "191x100": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1122,
+                        587
+                      ]
+                    ]
+                  }
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fe6e0b18dd62d95c4",
+                      "id": "120255647730010150"
+                    }
+                  ],
+                  "hash": "43554b607602480edc4a95f577c54ca1"
+                }
+              ],
+              "bodies": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fcc1ce50a839e6e9c",
+                      "id": "120255647729870150"
+                    },
+                    {
+                      "name": "placement_asset_f091fbcb321e0e569",
+                      "id": "120255647729880150"
+                    },
+                    {
+                      "name": "placement_asset_f8cc0394bb0ca7dff",
+                      "id": "120255647729890150"
+                    },
+                    {
+                      "name": "placement_asset_fa0c8273099533c30",
+                      "id": "120255647729910150"
+                    },
+                    {
+                      "name": "placement_asset_f50a1f93c01cd5607",
+                      "id": "120255647729980150"
+                    },
+                    {
+                      "name": "placement_asset_f2a219321557e852a",
+                      "id": "120255647730020150"
+                    }
+                  ],
+                  "text": "👕👗👚 FREE CLOTHES \n✔️ NO EXTRA COSTS OR FEES.\n⏱️ For a Limited Time!"
+                }
+              ],
+              "call_to_action_types": [
+                "GET_OFFER"
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "link_urls": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_ff143f702048fbc5f",
+                      "id": "120255647729830150"
+                    },
+                    {
+                      "name": "placement_asset_fa859bd164d43649e",
+                      "id": "120255647729840150"
+                    },
+                    {
+                      "name": "placement_asset_f17b1c29282ce6103",
+                      "id": "120255647729850150"
+                    },
+                    {
+                      "name": "placement_asset_f2b8af7bb1c131b0c",
+                      "id": "120255647729940150"
+                    },
+                    {
+                      "name": "placement_asset_f793574e574b20933",
+                      "id": "120255647729950150"
+                    },
+                    {
+                      "name": "placement_asset_f7c6674eca4151859",
+                      "id": "120255647729960150"
+                    }
+                  ],
+                  "website_url": "https://yolokfx.com/quiz/us/sh2-g002/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c115&utm_adgroup=b01fb01c115g01",
+                  "display_url": ""
+                }
+              ],
+              "titles": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f0e59256ea8a9d16f",
+                      "id": "120255647729810150"
+                    },
+                    {
+                      "name": "placement_asset_fb4ad7a65c17cc860",
+                      "id": "120255647729820150"
+                    },
+                    {
+                      "name": "placement_asset_f47c77d74523811f5",
+                      "id": "120255647729920150"
+                    },
+                    {
+                      "name": "placement_asset_fda5de5c245b21b8d",
+                      "id": "120255647729930150"
+                    },
+                    {
+                      "name": "placement_asset_f2dc3f590ed56027b",
+                      "id": "120255647729970150"
+                    },
+                    {
+                      "name": "placement_asset_f509a9d8567da7ebb",
+                      "id": "120255647729990150"
+                    }
+                  ],
+                  "text": "CLICK HERE ☑️"
+                }
+              ],
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram",
+                      "threads"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "facebook_reels_overlay",
+                      "profile_feed",
+                      "notification"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ],
+                    "threads_positions": [
+                      "threads_stream"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_f0469f71f64cdbf1a",
+                    "id": "120255647729860150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f2a219321557e852a",
+                    "id": "120255647730020150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_fa859bd164d43649e",
+                    "id": "120255647729840150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f509a9d8567da7ebb",
+                    "id": "120255647729990150"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram",
+                      "audience_network",
+                      "whatsapp"
+                    ],
+                    "facebook_positions": [
+                      "instream_video",
+                      "story",
+                      "facebook_reels"
+                    ],
+                    "instagram_positions": [
+                      "story",
+                      "reels",
+                      "ig_search"
+                    ],
+                    "audience_network_positions": [
+                      "classic"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_fe6e0b18dd62d95c4",
+                    "id": "120255647730010150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f8cc0394bb0ca7dff",
+                    "id": "120255647729890150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f17b1c29282ce6103",
+                    "id": "120255647729850150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f2dc3f590ed56027b",
+                    "id": "120255647729970150"
+                  },
+                  "priority": 2
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook"
+                    ],
+                    "facebook_positions": [
+                      "right_hand_column",
+                      "search"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_ff2bd361e29976358",
+                    "id": "120255647730000150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_fcc1ce50a839e6e9c",
+                    "id": "120255647729870150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_ff143f702048fbc5f",
+                    "id": "120255647729830150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_fb4ad7a65c17cc860",
+                    "id": "120255647729820150"
+                  },
+                  "priority": 3
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13
+                  },
+                  "image_label": {
+                    "name": "placement_asset_fabb7530e3230c335",
+                    "id": "120255647729900150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f091fbcb321e0e569",
+                    "id": "120255647729880150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f793574e574b20933",
+                    "id": "120255647729950150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f47c77d74523811f5",
+                    "id": "120255647729920150"
+                  },
+                  "priority": 4
+                }
+              ],
+              "optimization_type": "PLACEMENT",
+              "additional_data": {
+                "multi_share_end_card": false,
+                "is_click_to_message": false
+              },
+              "reasons_to_shop": false,
+              "shops_bundle": false
+            }
+          }
+        },
+        {
+          "id": "120255673187510150",
+          "campaign_id": "120255673187420150",
+          "creative": {
+            "id": "1626136062368647",
+            "object_story_spec": {
+              "page_id": "1187478564456307"
+            },
+            "asset_feed_spec": {
+              "images": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f3b668d51a12eb41a",
+                      "id": "120255647729600150"
+                    },
+                    {
+                      "name": "placement_asset_f6b3bcdd3d1853395",
+                      "id": "120255647729630150"
+                    }
+                  ],
+                  "hash": "6a2cb2cfdfef6a68e273b97457425b45"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f309876fa3dd567b6",
+                      "id": "120255647729640150"
+                    }
+                  ],
+                  "hash": "ec284bfd4f97ab222fca18c8b3aceaad"
+                },
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fbe99eec117599e25",
+                      "id": "120255647729620150"
+                    }
+                  ],
+                  "hash": "6a2cb2cfdfef6a68e273b97457425b45",
+                  "image_crops": {
+                    "191x100": [
+                      [
+                        0,
+                        11
+                      ],
+                      [
+                        1122,
+                        598
+                      ]
+                    ]
+                  }
+                }
+              ],
+              "bodies": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fa7d54edc5d8807e1",
+                      "id": "120255647729670150"
+                    },
+                    {
+                      "name": "placement_asset_fb8ceb28707a6930b",
+                      "id": "120255647729680150"
+                    },
+                    {
+                      "name": "placement_asset_feab30cbf0af92db7",
+                      "id": "120255647729690150"
+                    },
+                    {
+                      "name": "placement_asset_f41e64cbef82d95d4",
+                      "id": "120255647729740150"
+                    },
+                    {
+                      "name": "placement_asset_f600b0b2d6a83c619",
+                      "id": "120255647729750150"
+                    },
+                    {
+                      "name": "placement_asset_f6605b80b41b3ef5d",
+                      "id": "120255647729760150"
+                    }
+                  ],
+                  "text": "👕👗👚 FREE CLOTHES \n✔️ NO EXTRA COSTS OR FEES.\n⏱️ For a Limited Time!"
+                }
+              ],
+              "call_to_action_types": [
+                "GET_OFFER"
+              ],
+              "descriptions": [
+                {
+                  "text": "⭐️⭐️⭐️⭐️⭐️"
+                }
+              ],
+              "link_urls": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_fb75536c27ea2811a",
+                      "id": "120255647729590150"
+                    },
+                    {
+                      "name": "placement_asset_fff5f5658450e5df5",
+                      "id": "120255647729650150"
+                    },
+                    {
+                      "name": "placement_asset_f6062827745b1f98c",
+                      "id": "120255647729660150"
+                    },
+                    {
+                      "name": "placement_asset_faaf68017722f4b64",
+                      "id": "120255647729710150"
+                    },
+                    {
+                      "name": "placement_asset_f857e6ddf96254ecf",
+                      "id": "120255647729720150"
+                    },
+                    {
+                      "name": "placement_asset_fa8b1561796df1da1",
+                      "id": "120255647729730150"
+                    }
+                  ],
+                  "website_url": "https://yolokfx.com/quiz/us/sh2-g002/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c115&utm_adgroup=b01fb01c115g01",
+                  "display_url": ""
+                }
+              ],
+              "titles": [
+                {
+                  "adlabels": [
+                    {
+                      "name": "placement_asset_f2c9f7ec39409743c",
+                      "id": "120255647729550150"
+                    },
+                    {
+                      "name": "placement_asset_f82de339ea6edcd0f",
+                      "id": "120255647729560150"
+                    },
+                    {
+                      "name": "placement_asset_f2e889385bc400a23",
+                      "id": "120255647729580150"
+                    },
+                    {
+                      "name": "placement_asset_f17c0308486bf1121",
+                      "id": "120255647729610150"
+                    },
+                    {
+                      "name": "placement_asset_f29e02a8e00aeb939",
+                      "id": "120255647729700150"
+                    },
+                    {
+                      "name": "placement_asset_ff21d5cccca92bc95",
+                      "id": "120255647729770150"
+                    }
+                  ],
+                  "text": "CLICK HERE ☑️"
+                }
+              ],
+              "ad_formats": [
+                "AUTOMATIC_FORMAT"
+              ],
+              "asset_customization_rules": [
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram",
+                      "threads"
+                    ],
+                    "facebook_positions": [
+                      "feed",
+                      "marketplace",
+                      "biz_disco_feed",
+                      "facebook_reels_overlay",
+                      "profile_feed",
+                      "notification"
+                    ],
+                    "instagram_positions": [
+                      "stream",
+                      "explore_home",
+                      "profile_feed"
+                    ],
+                    "threads_positions": [
+                      "threads_stream"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_f6b3bcdd3d1853395",
+                    "id": "120255647729630150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_fb8ceb28707a6930b",
+                    "id": "120255647729680150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_fb75536c27ea2811a",
+                    "id": "120255647729590150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f17c0308486bf1121",
+                    "id": "120255647729610150"
+                  },
+                  "priority": 1
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook",
+                      "instagram",
+                      "audience_network",
+                      "whatsapp"
+                    ],
+                    "facebook_positions": [
+                      "instream_video",
+                      "story",
+                      "facebook_reels"
+                    ],
+                    "instagram_positions": [
+                      "story",
+                      "reels",
+                      "ig_search"
+                    ],
+                    "audience_network_positions": [
+                      "classic"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_f309876fa3dd567b6",
+                    "id": "120255647729640150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f6605b80b41b3ef5d",
+                    "id": "120255647729760150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f857e6ddf96254ecf",
+                    "id": "120255647729720150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f2e889385bc400a23",
+                    "id": "120255647729580150"
+                  },
+                  "priority": 2
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13,
+                    "publisher_platforms": [
+                      "facebook"
+                    ],
+                    "facebook_positions": [
+                      "right_hand_column",
+                      "search"
+                    ]
+                  },
+                  "image_label": {
+                    "name": "placement_asset_fbe99eec117599e25",
+                    "id": "120255647729620150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f41e64cbef82d95d4",
+                    "id": "120255647729740150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_f6062827745b1f98c",
+                    "id": "120255647729660150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f82de339ea6edcd0f",
+                    "id": "120255647729560150"
+                  },
+                  "priority": 3
+                },
+                {
+                  "customization_spec": {
+                    "age_max": 65,
+                    "age_min": 13
+                  },
+                  "image_label": {
+                    "name": "placement_asset_f3b668d51a12eb41a",
+                    "id": "120255647729600150"
+                  },
+                  "body_label": {
+                    "name": "placement_asset_f600b0b2d6a83c619",
+                    "id": "120255647729750150"
+                  },
+                  "link_url_label": {
+                    "name": "placement_asset_fff5f5658450e5df5",
+                    "id": "120255647729650150"
+                  },
+                  "title_label": {
+                    "name": "placement_asset_f29e02a8e00aeb939",
+                    "id": "120255647729700150"
+                  },
+                  "priority": 4
+                }
+              ],
+              "optimization_type": "PLACEMENT",
+              "additional_data": {
+                "multi_share_end_card": false,
+                "is_click_to_message": false
+              },
+              "reasons_to_shop": false,
+              "shops_bundle": false
+            }
+          }
+        }
+      ]
+    }
+  }
+}

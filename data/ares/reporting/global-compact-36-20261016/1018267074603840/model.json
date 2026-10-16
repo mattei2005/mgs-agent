@@ -1,0 +1,185 @@
+{
+  "account": {
+    "id": "act_1018267074603840",
+    "name": "Escalatepower-US-SHEIN-EN-01-G001",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:11.973539+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:11.973678+00:00",
+    "configuration": "2026-10-16T17:12:40.970535+00:00",
+    "delay": "2026-10-16T17:11:38.681743+00:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 12,
+    "totalMinutes": 132,
+    "currentFillTime": "2026-10-16T15:00:00.000Z",
+    "jbf_hour": 11,
+    "fill": 1.05,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120253713844140209",
+      "name": "001 - 15/10 - v3 - CALÇAS JEANS PG - COCAP - (b01fb01c01) - event_add_to_wishlist",
+      "number": "001",
+      "product": "CALÇAS JEANS PG",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "49.11",
+      "spend": "0.89",
+      "net_revenue": "0",
+      "estimated_revenue": "0",
+      "roi": "-100",
+      "estimated_roi": "-100",
+      "health": null,
+      "roas": "0.977528",
+      "first_delivery": "2026-10-15",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "5.39",
+          "net_revenue": "0.4",
+          "roi": "-92.57884972170686456400742115",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "0.89",
+          "net_revenue": "0",
+          "roi": "-100",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120253714049890209",
+      "name": "002 - 15/10 - v3 - CALÇAS JEANS PG - COCAP - (b01fb01c02) - event_add_to_wishlist",
+      "number": "002",
+      "product": "CALÇAS JEANS PG",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "49.27",
+      "spend": "0.73",
+      "net_revenue": "0.28",
+      "estimated_revenue": "0.28",
+      "roi": "-61.64383561643835616438356164",
+      "estimated_roi": "-61.64383561643835616438356164",
+      "health": "100",
+      "roas": null,
+      "first_delivery": "2026-10-15",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "11.51",
+          "net_revenue": "2.82",
+          "roi": "-75.49956559513466550825369244",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "0.73",
+          "net_revenue": "0.28",
+          "roi": "-61.64383561643835616438356164",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/escalatepower-report-20261015T171008/model.json",
+    "meta_campaign_writes": 0
+  }
+}

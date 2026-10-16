@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-10-16T17:13:36.955956+00:00",
+  "campaign": {
+    "id": "120256503722790460",
+    "account_id": "1877104513669062",
+    "name": "07 - IMAGEM - HANDBAGS - (US_APP) (b01fb05c07) event_add_to_wishlist",
+    "created_time": "2026-10-14T14:24:25-0400",
+    "status": "ACTIVE",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "budget_remaining": "1253",
+    "daily_budget": "2000",
+    "adsets": {
+      "data": [
+        {
+          "id": "120256503722780460",
+          "campaign_id": "120256503722790460",
+          "promoted_object": {
+            "pixel_id": "1049581090103163",
+            "custom_event_type": "ADD_TO_WISHLIST",
+            "smart_pse_enabled": false
+          },
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "ads": {
+      "data": [
+        {
+          "id": "120256503722810460",
+          "campaign_id": "120256503722790460",
+          "creative": {
+            "id": "1097344813088422",
+            "object_story_spec": {
+              "page_id": "1087231034465124",
+              "instagram_user_id": "17841419414846105",
+              "link_data": {
+                "link": "https://vizioid.com/quiz/us/sh3-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c07&utm_adgroup=b01fb05c07g01&fbclid=fbclid",
+                "message": "FREE HANDBAGS 🛍️👜🎁\n✔️ NO ADDITIONAL COSTS OR FEESUNLOCK THE OFFER ☑️",
+                "name": "UNLOCK THE OFFER ☑️",
+                "description": "⭐️⭐️⭐️⭐️⭐️",
+                "image_hash": "6f348f247933441c5e7e14236d2646ab",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "120256503722800460",
+          "campaign_id": "120256503722790460",
+          "creative": {
+            "id": "1681176900072572",
+            "object_story_spec": {
+              "page_id": "1087231034465124",
+              "instagram_user_id": "17841419414846105",
+              "link_data": {
+                "link": "https://vizioid.com/quiz/us/sh3-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c07&utm_adgroup=b01fb05c07g01&fbclid=fbclid",
+                "message": "FREE HANDBAGS 🛍️👜🎁\n✔️ NO ADDITIONAL COSTS OR FEESUNLOCK THE OFFER ☑️",
+                "name": "UNLOCK THE OFFER ☑️",
+                "description": "⭐️⭐️⭐️⭐️⭐️",
+                "image_hash": "8b2450d54fbedaf80511f46405ccf1ff",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

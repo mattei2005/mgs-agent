@@ -1,0 +1,71 @@
+{
+  "observed_at": "2026-10-16T17:13:36.954726+00:00",
+  "campaign": {
+    "id": "120253392569480652",
+    "account_id": "1829406761389732",
+    "name": "01 - [13/10] - Prendas IMG - PRODUCTS - (US_APP) (b01fb05c01) event_add_to_wishlist",
+    "created_time": "2026-10-12T16:53:13-0400",
+    "status": "ACTIVE",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "budget_remaining": "1274",
+    "daily_budget": "2000",
+    "adsets": {
+      "data": [
+        {
+          "id": "120253392569490652",
+          "campaign_id": "120253392569480652",
+          "promoted_object": {
+            "pixel_id": "1001283201270967",
+            "custom_event_type": "ADD_TO_WISHLIST",
+            "smart_pse_enabled": false
+          },
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "ads": {
+      "data": [
+        {
+          "id": "120253392569500652",
+          "campaign_id": "120253392569480652",
+          "creative": {
+            "id": "28717995671186306",
+            "object_story_spec": {
+              "page_id": "651566168029395",
+              "link_data": {
+                "link": "https://mavroa.com/quiz/us/sh3-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c01&utm_adgroup=b01fb05c01g01&fbclid=fbclid",
+                "message": "Prendas GRATIS 🎁\n✔️ SIN COSTOS NI CARGOS ADICIONALES",
+                "name": "DESBLOQUEA LA OFERTA ☑️",
+                "description": "⭐️⭐️⭐️⭐️⭐️",
+                "image_hash": "d06c30660eebc677766b134a038951cc",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "120253392648950652",
+          "campaign_id": "120253392569480652",
+          "creative": {
+            "id": "2876990132680523",
+            "object_story_spec": {
+              "page_id": "651566168029395",
+              "link_data": {
+                "link": "https://mavroa.com/quiz/us/sh3-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c01&utm_adgroup=b01fb05c01g01&fbclid=fbclid",
+                "message": "Prendas GRATIS 🎁\n✔️ SIN COSTOS NI CARGOS ADICIONALES",
+                "name": "DESBLOQUEA LA OFERTA ☑️",
+                "description": "⭐️⭐️⭐️⭐️⭐️",
+                "image_hash": "fa1e424ad1d7fc2557f9a6dbebe8fe2d",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "account": {
+    "id": "act_1877104513669062",
+    "name": "Vizioid-US-SHEIN-EN-05-G005",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:33.828284+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:33.828457+00:00",
+    "configuration": "2026-10-16T17:13:36.956089+00:00",
+    "delay": "2026-10-16T17:11:38.921939+00:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 12,
+    "totalMinutes": 132,
+    "currentFillTime": "2026-10-16T15:00:00.000Z",
+    "jbf_hour": 11,
+    "fill": 1.03,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120256407864260460",
+      "name": "01 - CLOTHES  - PRODUCTS - (US_APP) (b01fb05c01) event_add_to_wishlist",
+      "number": "01",
+      "product": "CLOTHES",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "22.13",
+      "spend": "12.87",
+      "net_revenue": "19.31",
+      "estimated_revenue": "22.22",
+      "roi": "50.03885003885003885003885004",
+      "estimated_roi": "72.64957264957264957264957265",
+      "health": "97.72727272727272727272727273",
+      "roas": "1.181041",
+      "first_delivery": "2026-10-08",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": "25.67",
+          "net_revenue": "26.88",
+          "roi": "4.713673548889754577327619790",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "47.32",
+          "net_revenue": "42.52",
+          "roi": "-10.14370245139475908706677937",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "39.66",
+          "net_revenue": "52.3",
+          "roi": "31.87090267271810388300554715",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "35.08",
+          "net_revenue": "41.28",
+          "roi": "17.67388825541619156214367161",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "36.73",
+          "net_revenue": "35.88",
+          "roi": "-2.314184590253199019874761775",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "27",
+          "net_revenue": "29.44",
+          "roi": "9.037037037037037037037037037",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "12.87",
+          "net_revenue": "19.31",
+          "roi": "50.03885003885003885003885004",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120256420252240460",
+      "name": "04 - clothes 2 - (US_APP) (b01fb05c04) event_add_to_wishlist",
+      "number": "04",
+      "product": "clothes 2",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "26.24",
+      "spend": "7.57",
+      "net_revenue": "13.85",
+      "estimated_revenue": "14.32",
+      "roi": "82.95904887714663143989431968",
+      "estimated_roi": "89.16776750330250990752972259",
+      "health": "94.93670886075949367088607595",
+      "roas": "2.015852",
+      "first_delivery": "2026-10-09",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": "15.91",
+          "net_revenue": "15.69",
+          "roi": "-1.382778126964173475801382778",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "29.7",
+          "net_revenue": "28.48",
+          "roi": "-4.107744107744107744107744108",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "24.5",
+          "net_revenue": "15.01",
+          "roi": "-38.73469387755102040816326531",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "21.26",
+          "net_revenue": "24.63",
+          "roi": "15.85136406396989651928504233",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "20.07",
+          "net_revenue": "19.96",
+          "roi": "-0.5480817140009965122072745391",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "16.8",
+          "net_revenue": "27.64",
+          "roi": "64.52380952380952380952380952",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "7.57",
+          "net_revenue": "13.85",
+          "roi": "82.95904887714663143989431968",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120256483948570460",
+      "name": "05 - Plus Size Two Piece Set - (US_APP) (b01fb05c05) event_add_to_wishlist",
+      "number": "05",
+      "product": "Plus Size Two Piece Set",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "9.78",
+      "spend": "10.22",
+      "net_revenue": "10.95",
+      "estimated_revenue": "11.75",
+      "roi": "7.142857142857142857142857143",
+      "estimated_roi": "14.97064579256360078277886497",
+      "health": "98.98989898989898989898989899",
+      "roas": "1.466732",
+      "first_delivery": "2026-10-14",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "25.96",
+          "net_revenue": "19.43",
+          "roi": "-25.15408320493066255778120185",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "17.84",
+          "net_revenue": "17.85",
+          "roi": "0.05605381165919282511210762332",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "10.22",
+          "net_revenue": "10.95",
+          "roi": "7.142857142857142857142857143",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120256503722790460",
+      "name": "07 - IMAGEM - HANDBAGS - (US_APP) (b01fb05c07) event_add_to_wishlist",
+      "number": "07",
+      "product": "IMAGEM - HANDBAGS",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "12.53",
+      "spend": "7.47",
+      "net_revenue": "6.51",
+      "estimated_revenue": "9.29",
+      "roi": "-12.85140562248995983935742972",
+      "estimated_roi": "24.36412315930388219544846051",
+      "health": "98.03921568627450980392156863",
+      "roas": "1.72423",
+      "first_delivery": "2026-10-15",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "25.08",
+          "net_revenue": "24.61",
+          "roi": "-1.874003189792663476874003190",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "7.47",
+          "net_revenue": "6.51",
+          "roi": "-12.85140562248995983935742972",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120256503851980460",
+      "name": "08 - IMAGEM - workout clothes - (US_APP) (b01fb05c08) event_add_to_wishlist",
+      "number": "08",
+      "product": "IMAGEM - workout clothes",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "20.76",
+      "spend": "9.24",
+      "net_revenue": "13.22",
+      "estimated_revenue": "14.57",
+      "roi": "43.07359307359307359307359307",
+      "estimated_roi": "57.68398268398268398268398268",
+      "health": "92.30769230769230769230769231",
+      "roas": "1.304113",
+      "first_delivery": "2026-10-15",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "24.68",
+          "net_revenue": "35.23",
+          "roi": "42.74716369529983792544570502",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "9.24",
+          "net_revenue": "13.22",
+          "roi": "43.07359307359307359307359307",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/vizioid05-report-20261015-1710/model.json",
+    "meta_campaign_writes": 0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "account": {
+    "id": "act_2235938116947880",
+    "name": "Boostingecon-US-SHEIN-ES-06-G006",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:36.331544+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:36.331910+00:00",
+    "configuration": "2026-10-16T17:11:36.331544+00:00",
+    "delay": "2026-10-16T17:11:36.331544+00:00"
+  },
+  "delay": {
+    "totalMinutes": null
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [
+    "Conta sem entrega no dia; atraso n/d sem publisher comprovado por anúncio no recorte."
+  ],
+  "rows": [],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/boostingecon06-report-20261015-1711/model.json",
+    "meta_campaign_writes": 0
+  }
+}

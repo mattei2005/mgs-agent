@@ -1,0 +1,72 @@
+{
+  "observed_at": "2026-10-16T17:13:49.662753+00:00",
+  "campaign": {
+    "id": "120250214946080331",
+    "account_id": "2429758060563333",
+    "name": "133 - 13/10 - v2 - CLOTHES 3 IMAGEM - COCAP - (b01fb03c133) - COPY C120 - event_add_to_wishlist",
+    "created_time": "2026-10-12T13:19:46-0400",
+    "status": "ACTIVE",
+    "bid_strategy": "COST_CAP",
+    "budget_remaining": "5874",
+    "daily_budget": "10000",
+    "adsets": {
+      "data": [
+        {
+          "id": "120250214946520331",
+          "campaign_id": "120250214946080331",
+          "bid_amount": 65,
+          "promoted_object": {
+            "pixel_id": "1049581090103163",
+            "custom_event_type": "ADD_TO_WISHLIST",
+            "smart_pse_enabled": false
+          },
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "ads": {
+      "data": [
+        {
+          "id": "120250214949290331",
+          "campaign_id": "120250214946080331",
+          "creative": {
+            "id": "944583971628724",
+            "object_story_spec": {
+              "page_id": "410983488769165",
+              "instagram_user_id": "17841469509077092",
+              "link_data": {
+                "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c133&utm_adgroup=b01fb03c133g01",
+                "message": "👚🎁😱 CLOTHES FREE\n✔️ NO EXTRA COSTS OR FEES.",
+                "name": "CLICK HERE ✅",
+                "image_hash": "a11d70ead589d59b96adac6d459dff82",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "120250214948450331",
+          "campaign_id": "120250214946080331",
+          "creative": {
+            "id": "3523609727813182",
+            "object_story_spec": {
+              "page_id": "410983488769165",
+              "instagram_user_id": "17841469509077092",
+              "link_data": {
+                "link": "https://yolokfx.com/quiz/us/sh2-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb03c133&utm_adgroup=b01fb03c133g01",
+                "message": "👚🎁😱 CLOTHES FREE\n✔️ NO EXTRA COSTS OR FEES.",
+                "name": "CLICK HERE ✅",
+                "image_hash": "648a7f8f1ee51c06b41e1e6715a5b152",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

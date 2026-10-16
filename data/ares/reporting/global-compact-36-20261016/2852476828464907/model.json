@@ -1,0 +1,185 @@
+{
+  "account": {
+    "id": "act_2852476828464907",
+    "name": "Mavroa-US-SHEIN-ES-04-G004",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:30.430683+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:30.430845+00:00",
+    "configuration": "2026-10-16T17:13:21.510336+00:00",
+    "delay": "2026-10-16T17:11:38.511155+00:00"
+  },
+  "delay": {
+    "hours": 1,
+    "minutes": 12,
+    "totalMinutes": 72,
+    "currentFillTime": "2026-10-16T16:00:00.000Z",
+    "jbf_hour": 12,
+    "fill": 0.94,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120249561566280372",
+      "name": "01 - [07/10] - edredón - COCAP - PRODUCTS - (US_APP) (b01fb04c01) event_add_to_wishlist",
+      "number": "01",
+      "product": "edredón",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "36.24",
+      "spend": "3.75",
+      "net_revenue": "0.9",
+      "estimated_revenue": "1.24",
+      "roi": "-76",
+      "estimated_roi": "-66.93333333333333333333333333",
+      "health": "100",
+      "roas": "0.242667",
+      "first_delivery": "2026-10-07",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": "9.18",
+          "net_revenue": "3.1",
+          "roi": "-66.23093681917211328976034858",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "25.46",
+          "net_revenue": "13.6",
+          "roi": "-46.58287509819324430479183032",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "20",
+          "net_revenue": "8.27",
+          "roi": "-58.65",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "20.71",
+          "net_revenue": "6.17",
+          "roi": "-70.20762916465475615644616127",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "16.34",
+          "net_revenue": "7.04",
+          "roi": "-56.91554467564259485924112607",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "9.84",
+          "net_revenue": "5.72",
+          "roi": "-41.86991869918699186991869919",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "3.75",
+          "net_revenue": "0.9",
+          "roi": "-76",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120249620651840372",
+      "name": "02 - [10/10] - Go-Kart - COCAP - PRODUCTS - (US_APP) (b01fb04c02) event_add_to_wishlist",
+      "number": "02",
+      "product": "Go-Kart",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "39.55",
+      "spend": "0.45",
+      "net_revenue": "0",
+      "estimated_revenue": "0",
+      "roi": "-100",
+      "estimated_roi": "-100",
+      "health": null,
+      "roas": null,
+      "first_delivery": "2026-10-10",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": "6.96",
+          "net_revenue": "1.04",
+          "roi": "-85.05747126436781609195402299",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "23.54",
+          "net_revenue": "8.35",
+          "roi": "-64.52846219201359388275276126",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "10.69",
+          "net_revenue": "2.23",
+          "roi": "-79.13938260056127221702525725",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "3.73",
+          "net_revenue": "1.47",
+          "roi": "-60.58981233243967828418230563",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "2.33",
+          "net_revenue": "1.03",
+          "roi": "-55.79399141630901287553648069",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "2.47",
+          "net_revenue": "0.77",
+          "roi": "-68.82591093117408906882591093",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "0.45",
+          "net_revenue": "0",
+          "roi": "-100",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/mavroa04-report-20261015T171155/model.json",
+    "meta_campaign_writes": 0
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "observed_at": "2026-10-16T17:12:40.970848+00:00",
+  "campaign": {
+    "id": "52647573355022",
+    "account_id": "4511685129081248",
+    "name": "001 - 14/10 - v2 - BIKE ELECTRIC - COCAP - (b01fb01c01)  - event_add_to_wishlist",
+    "created_time": "2026-10-13T23:32:18-0400",
+    "status": "ACTIVE",
+    "bid_strategy": "COST_CAP",
+    "budget_remaining": "4731",
+    "daily_budget": "5000",
+    "adsets": {
+      "data": [
+        {
+          "id": "52647573355222",
+          "campaign_id": "52647573355022",
+          "bid_amount": 100,
+          "promoted_object": {
+            "pixel_id": "1001283201270967",
+            "custom_event_type": "ADD_TO_WISHLIST",
+            "smart_pse_enabled": false
+          },
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "ads": {
+      "data": [
+        {
+          "id": "52647573355422",
+          "campaign_id": "52647573355022",
+          "creative": {
+            "id": "985311827923515",
+            "object_story_spec": {
+              "page_id": "415428131658493",
+              "instagram_user_id": "17841415872681157",
+              "video_data": {
+                "video_id": "1682149296852934",
+                "title": "DESBLOQUEA LA OFERTA ✅✅✅",
+                "message": "🚲 BICICLETA ELÉCTRICA GRATIS 🚲\n💥SIN COSTES NI CARGOS ADICIONALES💥",
+                "link_description": "⭐⭐⭐⭐⭐",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW",
+                  "value": {
+                    "link": "https://mavroa.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb01c01&utm_adgroup=b01fb01c01g01"
+                  }
+                },
+                "image_url": "https://www.facebook.com/ads/image/?d=AQLn26gpkfyJAwg_60rafIs5udnMw5DtlgW3GvXI-6aV2aOcnc3ns1Dm4rrfBcF3s-yM4Kb2kp-G55TIrmgdstAv5Ajx91GLZbXEDmgXateKyWbhrev3w5ywH25l12krqs_meSxP7TP87sPRDuqjbdcq",
+                "image_hash": "0dd71fde3fdc9d63dacae552063f9c94"
+              }
+            }
+          }
+        },
+        {
+          "id": "52647578402222",
+          "campaign_id": "52647573355022",
+          "creative": {
+            "id": "1870460560978990",
+            "object_story_spec": {
+              "page_id": "415428131658493",
+              "instagram_user_id": "17841415872681157",
+              "video_data": {
+                "video_id": "1611805810425345",
+                "title": "DESBLOQUEA LA OFERTA ✅✅✅",
+                "message": "🚲 BICICLETA ELÉCTRICA GRATIS 🚲\n💥SIN COSTES NI CARGOS ADICIONALES💥",
+                "link_description": "⭐⭐⭐⭐⭐",
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW",
+                  "value": {
+                    "link": "https://mavroa.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb01c01&utm_adgroup=b01fb01c01g01"
+                  }
+                },
+                "image_url": "https://www.facebook.com/ads/image/?d=AQLOmVd1LSTx3uiQcpjTL_RcHWNDTym9JlFN5QS4roK9-8ZfVu3biwFxRpansX6RmMgJ1z3D4BQpMmb2Jq5EN8szv2aBLcPN_VO1mkhoN8imOonpmoWqhTvA4tt7J1D2KGX0q850yZZNSL1KHgfxCwze",
+                "image_hash": "06f7bb2f75b7a7e709e007a1643a3d56"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

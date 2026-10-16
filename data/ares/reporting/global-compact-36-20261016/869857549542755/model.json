@@ -1,0 +1,115 @@
+{
+  "account": {
+    "id": "act_869857549542755",
+    "name": "Vizioid-US-SHEIN-EN-06-G006",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:36.333579+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:36.333702+00:00",
+    "configuration": "2026-10-16T17:13:49.671123+00:00",
+    "delay": "2026-10-16T17:11:38.921939+00:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 12,
+    "totalMinutes": 132,
+    "currentFillTime": "2026-10-16T15:00:00.000Z",
+    "jbf_hour": 11,
+    "fill": 1.03,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120256186073150670",
+      "name": "01 - TENT - (US_APP) (b01fb06c01) event_add_to_wishlist",
+      "number": "01",
+      "product": "TENT",
+      "quiz": "v2",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "13.91",
+      "spend": "10.94",
+      "net_revenue": "7.33",
+      "estimated_revenue": "8.34",
+      "roi": "-32.99817184643510054844606947",
+      "estimated_roi": "-23.76599634369287020109689214",
+      "health": "100",
+      "roas": "1.304388",
+      "first_delivery": "2026-10-07",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": "15.17",
+          "net_revenue": "13.86",
+          "roi": "-8.635464733025708635464733026",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "31.68",
+          "net_revenue": "20.51",
+          "roi": "-35.25883838383838383838383838",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "27.19",
+          "net_revenue": "20.56",
+          "roi": "-24.38396469290180213313718279",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "24.75",
+          "net_revenue": "16.68",
+          "roi": "-32.60606060606060606060606061",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "26.42",
+          "net_revenue": "21.62",
+          "roi": "-18.16805450416351249053747161",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "21.23",
+          "net_revenue": "16.55",
+          "roi": "-22.04427696655675930287329251",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "10.94",
+          "net_revenue": "7.33",
+          "roi": "-32.99817184643510054844606947",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/vizioid06-report-20261015T171117/model.json",
+    "meta_campaign_writes": 0
+  }
+}

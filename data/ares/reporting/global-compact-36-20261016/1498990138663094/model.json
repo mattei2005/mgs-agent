@@ -1,0 +1,115 @@
+{
+  "account": {
+    "id": "act_1498990138663094",
+    "name": "Escalatepower-US-SHEIN-EN-06-G006",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:36.332276+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:36.332421+00:00",
+    "configuration": "2026-10-16T17:13:49.670464+00:00",
+    "delay": "2026-10-16T17:11:38.681743+00:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 12,
+    "totalMinutes": 132,
+    "currentFillTime": "2026-10-16T15:00:00.000Z",
+    "jbf_hour": 11,
+    "fill": 1.05,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120252795396560042",
+      "name": "01- 14/10 - SHEIN FOR FREE - (b01fb06c01) - event_add_to_wishlist",
+      "number": "01",
+      "product": "SHEIN FOR FREE",
+      "quiz": "v3",
+      "bid": "MAXVOL",
+      "bid_strategy_live": "LOWEST_COST_WITHOUT_CAP",
+      "cost_per_result_goal": null,
+      "budget_remaining": "19.3",
+      "spend": "25.7",
+      "net_revenue": "3.95",
+      "estimated_revenue": "4.4",
+      "roi": "-84.63035019455252918287937743",
+      "estimated_roi": "-82.87937743190661478599221790",
+      "health": "93.88888888888888888888888889",
+      "roas": "0.628405",
+      "first_delivery": "2026-10-14",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "46.4",
+          "net_revenue": "3.5",
+          "roi": "-92.45689655172413793103448276",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "40.02",
+          "net_revenue": "6.86",
+          "roi": "-82.85857071464267866066966517",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "25.7",
+          "net_revenue": "3.95",
+          "roi": "-84.63035019455252918287937743",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/escalate06-report-20261015T171144/model.json",
+    "meta_campaign_writes": 0
+  }
+}

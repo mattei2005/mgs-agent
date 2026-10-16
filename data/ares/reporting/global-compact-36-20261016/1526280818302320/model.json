@@ -1,0 +1,465 @@
+{
+  "account": {
+    "id": "act_1526280818302320",
+    "name": "Vizioid-US-SHEIN-EN-01-G001",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:11.974541+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:11.974864+00:00",
+    "configuration": "2026-10-16T17:12:40.972809+00:00",
+    "delay": "2026-10-16T17:11:38.921939+00:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 12,
+    "totalMinutes": 132,
+    "currentFillTime": "2026-10-16T15:00:00.000Z",
+    "jbf_hour": 11,
+    "fill": 1.03,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120249908476140375",
+      "name": "02 - BIKE ELETRICA - (US_APP) [LP2] (b01fb01c02) 08/10 event_add_to_wishlist",
+      "number": "02",
+      "product": "BIKE ELETRICA",
+      "quiz": "v2",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "1",
+      "budget_remaining": "46.52",
+      "spend": "3.42",
+      "net_revenue": "3.33",
+      "estimated_revenue": "3.54",
+      "roi": "-2.631578947368421052631578947",
+      "estimated_roi": "3.508771929824561403508771930",
+      "health": "90.32258064516129032258064516",
+      "roas": "2.090643",
+      "first_delivery": "2026-10-08",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": "39.42",
+          "net_revenue": "67.65",
+          "roi": "71.61339421613394216133942161",
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "25.6",
+          "net_revenue": "42.17",
+          "roi": "64.7265625",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "1.97",
+          "net_revenue": "2.9",
+          "roi": "47.20812182741116751269035533",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "2.39",
+          "net_revenue": "5.62",
+          "roi": "135.1464435146443514644351464",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "33.82",
+          "net_revenue": "27.21",
+          "roi": "-19.54464813719692489651094027",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "13.96",
+          "net_revenue": "12.42",
+          "roi": "-11.03151862464183381088825215",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "3.42",
+          "net_revenue": "3.33",
+          "roi": "-2.631578947368421052631578947",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120249950467970375",
+      "name": "03 - BIKE ELETRICA - (US_APP) [LP2] (b01fb01c03) 11/10 event_add_to_wishlist",
+      "number": "03",
+      "product": "BIKE ELETRICA",
+      "quiz": "v2",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "1",
+      "budget_remaining": "13.85",
+      "spend": "35.99",
+      "net_revenue": "35.75",
+      "estimated_revenue": "46.38",
+      "roi": "-0.6668519033064740205612670186",
+      "estimated_roi": "28.86913031397610447346485135",
+      "health": "93.91891891891891891891891892",
+      "roas": "1.32898",
+      "first_delivery": "2026-10-11",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": "16.23",
+          "net_revenue": "11.41",
+          "roi": "-29.69808995686999383857054837",
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": "7.54",
+          "net_revenue": "12.63",
+          "roi": "67.50663129973474801061007958",
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "53.85",
+          "net_revenue": "60.34",
+          "roi": "12.05199628597957288765088208",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "61.27",
+          "net_revenue": "76.88",
+          "roi": "25.47739513628203035743430717",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "60.72",
+          "net_revenue": "73.45",
+          "roi": "20.96508563899868247694334651",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "35.99",
+          "net_revenue": "35.75",
+          "roi": "-0.6668519033064740205612670186",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120249974215460375",
+      "name": "04 - GAME RETRO - (US_APP) [LP2] (b01fb01c04) 13/10 event_add_to_wishlist",
+      "number": "04",
+      "product": "GAME RETRO",
+      "quiz": "v2",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "48",
+      "spend": "2",
+      "net_revenue": "3.18",
+      "estimated_revenue": "3.18",
+      "roi": "59.00",
+      "estimated_roi": "59.00",
+      "health": "88.88888888888888888888888889",
+      "roas": "1.06",
+      "first_delivery": "2026-10-13",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": "5.4",
+          "net_revenue": "2.09",
+          "roi": "-61.29629629629629629629629630",
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "4.57",
+          "net_revenue": "8.74",
+          "roi": "91.24726477024070021881838074",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "3.69",
+          "net_revenue": "3.35",
+          "roi": "-9.214092140921409214092140921",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "2",
+          "net_revenue": "3.18",
+          "roi": "59.00",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120250015593850375",
+      "name": "05 - GAME RETRO - (US_APP) [LP2] (b01fb01c05) 16/10 event_add_to_wishlist",
+      "number": "05",
+      "product": "GAME RETRO",
+      "quiz": "v2",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "46.13",
+      "spend": "3.87",
+      "net_revenue": "1.61",
+      "estimated_revenue": "1.61",
+      "roi": "-58.39793281653746770025839793",
+      "estimated_roi": "-58.39793281653746770025839793",
+      "health": "78.57142857142857142857142857",
+      "roas": "1.054264",
+      "first_delivery": "2026-10-16",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "3.87",
+          "net_revenue": "1.61",
+          "roi": "-58.39793281653746770025839793",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120250015602370375",
+      "name": "06 - GAME RETRO - (US_APP) [LP2] (b01fb01c06) 16/10 event_add_to_wishlist",
+      "number": "06",
+      "product": "GAME RETRO",
+      "quiz": "v2",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "46.43",
+      "spend": "3.57",
+      "net_revenue": "1.45",
+      "estimated_revenue": "2.18",
+      "roi": "-59.38375350140056022408963585",
+      "estimated_roi": "-38.93557422969187675070028011",
+      "health": "100",
+      "roas": "0.232493",
+      "first_delivery": "2026-10-16",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "3.57",
+          "net_revenue": "1.45",
+          "roi": "-59.38375350140056022408963585",
+          "partial": true
+        }
+      ]
+    },
+    {
+      "id": "120250015658380375",
+      "name": "07 - BIKE ELETRICA - (US_APP) [LP2] (b01fb01c07) 16/10 event_add_to_wishlist",
+      "number": "07",
+      "product": "BIKE ELETRICA",
+      "quiz": "v2",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "1",
+      "budget_remaining": "34.34",
+      "spend": "15.66",
+      "net_revenue": "11.06",
+      "estimated_revenue": "13.98",
+      "roi": "-29.37420178799489144316730524",
+      "estimated_roi": "-10.72796934865900383141762452",
+      "health": "97.14285714285714285714285714",
+      "roas": "0.816731",
+      "first_delivery": "2026-10-16",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "15.66",
+          "net_revenue": "11.06",
+          "roi": "-29.37420178799489144316730524",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/vizioid01-report-20261015T170949/model.json",
+    "meta_campaign_writes": 0
+  }
+}

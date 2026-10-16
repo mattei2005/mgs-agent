@@ -1,0 +1,115 @@
+{
+  "account": {
+    "id": "act_1062887799996139",
+    "name": "Escalatepower-US-SHEIN-EN-02-G002",
+    "currency": "USD",
+    "timezone_name": "America/New_York",
+    "account_status": 1
+  },
+  "date": "2026-10-16",
+  "history_dates": [
+    "2026-10-10",
+    "2026-10-11",
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "source_timestamps": {
+    "insights": "2026-10-16T17:11:11.978246+00:00",
+    "sb": "2026-10-16T17:11:37.413679+00:00",
+    "daily": "2026-10-16T17:11:11.978646+00:00",
+    "configuration": "2026-10-16T17:12:47.758182+00:00",
+    "delay": "2026-10-16T17:11:38.681743+00:00"
+  },
+  "delay": {
+    "hours": 2,
+    "minutes": 12,
+    "totalMinutes": 132,
+    "currentFillTime": "2026-10-16T15:00:00.000Z",
+    "jbf_hour": 11,
+    "fill": 1.05,
+    "confident": true
+  },
+  "financial_snapshot_preserved": false,
+  "configuration_limitations": [],
+  "rows": [
+    {
+      "id": "120253328479780502",
+      "name": "001 - 14/10 - v3 - PLUS SIZE SET - COCAP - (b01fb02c01) - event_add_to_wishlist",
+      "number": "001",
+      "product": "PLUS SIZE SET",
+      "quiz": "v3",
+      "bid": "COCAP",
+      "bid_strategy_live": "COST_CAP",
+      "cost_per_result_goal": "0.9",
+      "budget_remaining": "38.81",
+      "spend": "1.19",
+      "net_revenue": "0.6",
+      "estimated_revenue": "0.6",
+      "roi": "-49.57983193277310924369747899",
+      "estimated_roi": "-49.57983193277310924369747899",
+      "health": "87.5",
+      "roas": "0.285714",
+      "first_delivery": "2026-10-14",
+      "history": [
+        {
+          "date": "2026-10-10",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-11",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-12",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-13",
+          "spend": null,
+          "net_revenue": null,
+          "roi": null,
+          "partial": false
+        },
+        {
+          "date": "2026-10-14",
+          "spend": "15.47",
+          "net_revenue": "6.41",
+          "roi": "-58.56496444731738849385908209",
+          "partial": false
+        },
+        {
+          "date": "2026-10-15",
+          "spend": "32.13",
+          "net_revenue": "18.27",
+          "roi": "-43.13725490196078431372549020",
+          "partial": false
+        },
+        {
+          "date": "2026-10-16",
+          "spend": "1.19",
+          "net_revenue": "0.6",
+          "roi": "-49.57983193277310924369747899",
+          "partial": true
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "collection_mode": "current_36_accounts",
+    "selection": "today_Meta_spend_or_impressions_positive",
+    "historical_model": "/root/.hermes/profiles/ares/cache/scratch/escalatepower-g002-report-20261015T171038/model.json",
+    "meta_campaign_writes": 0
+  }
+}
