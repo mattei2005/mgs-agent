@@ -51,6 +51,10 @@ Para o teste autorizado da conta `1583000095650153`, acrescentar **`--preview-co
 
 Esse pedido de teste não promove automaticamente os rótulos nem o limite de 12 ao padrão global ou normal da conta; aguardar aprovação visual. Reutilizar o mesmo modelo financeiro e o mesmo snapshot de configuração e indicar os horários no cabeçalho; não consultar Meta/SB novamente apenas para mudar texto. Validar igualdade de todas as células exceto Produto, ordem/IDs, histórico, largura e tamanho das partes. Publicar como novo relatório no destino solicitado, com journal e GET exato; **não apagar ou editar relatórios anteriores**. Suíte: `test_shein_report_compact_headers.py`, junto às demais `test_shein_report_*.py`.
 
+## Ordenação explícita por conta
+
+Consultar `on_demand_default_layout.account_sort_overrides` antes de renderizar. Uma preferência autorizada e persistida para a conta exata pode substituir somente a ordenação global, sem mudar métricas, seleção, colunas ou outras contas. O modo `estimated_roi_desc` usa ROI estimado não arredondado, descendente; n/d fica no final e empates usam primeira entrega, número e ID. O ranking único prevalece sobre adjacência de famílias COPY, mas preserva os rótulos de origem e usa a mesma ordem no histórico. Não dividir por produto quando isso quebrar o ranking global escolhido. O renderer valida identidade e modo canônicos; um campo de ordenação fornecido apenas no modelo não é uma regra ativa. Exercitar `test_shein_report_account_sort.py` e o replay financeiro integral, com conservação de IDs/células e isolamento de outras contas.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:

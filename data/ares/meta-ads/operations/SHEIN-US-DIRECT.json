@@ -792,6 +792,28 @@
         "no_new_cron": true
       },
       "campaign_label": "separate_number_and_product_with_explicit_COPY_Csource_in_number_label_when_recorded_in_live_campaign_name",
+      "account_sort_overrides": {
+        "1583000095650153": {
+          "status": "active",
+          "account_name": "Yolokfx-US-SHEIN-EN-02-G006",
+          "thread_id": "1558147479432601670",
+          "mode": "estimated_roi_desc",
+          "group_by_product": false,
+          "missing_values": "last",
+          "compare_unrounded": true,
+          "tie_breakers": ["first_delivery_ascending", "campaign_number_numeric_ascending", "campaign_id"],
+          "apply_same_order_to_history": true,
+          "rank_overrides_family_adjacency_preserve_COPY_labels": true,
+          "authorized_by_discord_id": "1055570806945620030",
+          "source_thread_id": "1558147479432601670",
+          "source_message_id": null,
+          "source_description": "Nicolas requested a current Intraday sorted by estimated ROI descending and the same for future updates of this exact account; optional product blocks were offered to agent discretion. A single global ranking was selected to preserve direct cross-product comparison.",
+          "effective_date": "2026-10-16",
+          "scope": "presentation_only_on_demand_no_Meta_write_no_schedule",
+          "supersedes_for_this_account_only": "global_product_and_COPY_family_order",
+          "policy_id": "ARES-SHEIN-YOLO02-G006-ROI-EST-DESC-20261016"
+        }
+      },
       "default_sort": {
         "keys": ["product_label_ascending_A_to_Z", "root_family_first_proven_delivery_ascending_oldest_first", "root_campaign_number_numeric_ascending", "root_campaign_id"],
         "family_order": "parent_then_immediate_copy_children_depth_first_contiguous_family_block",

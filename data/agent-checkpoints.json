@@ -1692,6 +1692,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO02-G006-INTRADAY-ROI-SORT-20261016",
+      "next_step": "Entregar texto canônico nesta resposta; próximos pedidos usam account_sort_overrides sem cron.",
+      "objective": "Intraday atual e ranking persistente ROI estimado decrescente Yolokfx02 G006",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-g006-roi-sort-20261016T180509/model.json",
+      "state": "preferência ativa e registrada; 49 testes ok; coleta live meta/sb validada: 85 campanhas, 595 células; relatório renderizado e gate exato ok; report-infra enviado com get confirmado.",
+      "thread_id": "1558147479432601670",
+      "updated_at": "2026-10-16T22:06:41+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "DIRECT-TRAFFIC-LANDING-FOLLOWUP-1559951763019145247",
       "next_step": "Nenhuma pendencia de landing deste pedido; limpezaIntraday e215mensagens de outros autores permanecem somente no checkpoint conjunto/admin, nao duplicar navegacoes",
       "objective": "Concluir integralmente a rodada de46landings e aviso ao gestor",
@@ -6232,5 +6242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T17:24:42+00:00"
+  "updated_at": "2026-10-16T22:06:41+00:00"
 }
