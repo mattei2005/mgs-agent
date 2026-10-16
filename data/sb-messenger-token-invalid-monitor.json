@@ -400,7 +400,10 @@
     714517,
     714537,
     714921,
-    714932
+    714932,
+    715217,
+    715231,
+    715255
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -639,9 +642,9 @@
     "digital-trust|cliquet|13|1737": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-15T16:05:28.000Z",
+        "created_at": "2026-10-16T20:06:26.000Z",
         "domain": "cliquet",
-        "notification_id": 714178,
+        "notification_id": 715217,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -662,7 +665,8 @@
         "1560324437902102661"
       ],
       "notification_ids": [
-        714178
+        714178,
+        715217
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -1633,9 +1637,9 @@
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-05T12:09:32.000Z",
+        "created_at": "2026-10-16T20:06:40.000Z",
         "domain": "infinitynexx",
-        "notification_id": 706507,
+        "notification_id": 715231,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -1643,7 +1647,7 @@
         "pages": 2,
         "segurador_id": "1690",
         "segurador_name": "Adrielly Freitas",
-        "source": "page_token",
+        "source": "canary",
         "user_email": "disparosinfinitynexxmxcces001@gmail.com",
         "user_id": "110",
         "user_name": "Disparos Infinitynexx MX-CC-ES - G001"
@@ -1654,7 +1658,8 @@
       ],
       "notification_ids": [
         692106,
-        706507
+        706507,
+        715231
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2721,9 +2726,9 @@
     "digital-trust|vizioid|50|217": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-15T16:06:52.000Z",
+        "created_at": "2026-10-16T20:08:16.000Z",
         "domain": "vizioid",
-        "notification_id": 714179,
+        "notification_id": 715255,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -2744,7 +2749,8 @@
         "1560324442247397498"
       ],
       "notification_ids": [
-        714179
+        714179,
+        715255
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -3218,18 +3224,19 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-16T15:57:13-04:00",
+  "last_check": "2026-10-16T16:12:14-04:00",
   "last_delivery": {
-    "at": "2026-10-16T08:12:13-04:00",
+    "at": "2026-10-16T16:12:14-04:00",
     "cursor_ids": [
-      714921,
-      714932
+      715217,
+      715231,
+      715255
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 714932,
+  "last_seen_id": 715255,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
