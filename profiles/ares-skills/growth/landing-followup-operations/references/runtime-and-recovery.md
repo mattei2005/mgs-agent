@@ -156,15 +156,33 @@ Na operação normal, reutilizar `flush(q, Discord())` quando aplicável e exigi
 4. Para um processo encerrado, o mecanismo suportado `process_manage(action="log", session_id=<id-exato>, limit=1)` lê o final e marca consumo no registro de processos. `wait` também consome a conclusão quando retorna o resultado encerrado; `poll` é observação de status e não deve ser tratado como confirmação equivalente de supressão no gateway.
 5. Consumir no registro não retira um evento já encaminhado à conversa. Não editar JSONs globais de processos, drenar notificações de outras sessões ou prometer que um aviso já em trânsito desaparecerá. Depois de verificar/consumir o alvo necessário, encerrar — sem ciclos de autorrecapitulação, novas conferências idênticas ou retomada de links aprovados.
 
-## 5. Auditoria de status sem visitas
+## 5. Auditoria de pedidos e status sem visitas
 
-1. Definir período no fuso do operador; separar pedidos anteriores ao `activation_epoch` sem transformá-los em backfill.
-2. Ler a fila e o ledger da rodada apontado pelo checkpoint, não apenas um rótulo histórico. Usar SQLite `mode=ro`/`query_only` e projetar só os campos necessários.
-3. Agregar por três unidades distintas: pedido humano, job técnico e combinação landing + UTMs. Deduplicar e contar em código; comparar o recorte monitorado com a fila global quando a pergunta pedir o que falta além dele.
-4. Para cobertura de todo período/canal, reconciliar as obrigações nativas entregues com as provas terminais e jobs usando o intake existente. Busca por palavras ou ausência de turno ativo não prova ausência de trabalho.
-5. Separar reserva, intenção de abrir, navegação comprovada, PASS, revisão e entrega. `WAITING_NATIVE_TURN` histórico não comprova ocupação física atual nem criação de campanha.
-6. Conferir outbox `PREPARED`/`INTENT` e agrupar `OBSERVED` pelo recibo original. Não chamar uma confirmação coletiva pendente de nova fila de links.
-7. Se todos os resultados e recibos já concordam, não regravar o checkpoint nem repetir o relatório por um evento antigo. Se houver divergência real, corrigir somente a camada faltante e validar o readback.
+### Delimitar período e enumerar a origem
+
+1. Fixar alcance e corte no fuso do operador. Para pedidos feitos hoje, usar o timestamp da mensagem humana original; separar solicitações anteriores concluídas hoje, o replay de uma rodada antiga e campanhas programadas para outra data. Não usar `jobs.created`, data do nome ou início da campanha como substitutos da data do pedido. Separar o marco de ativação do observador sem transformá-lo em backfill.
+2. Abrir bancos com SQLite `mode=ro` e `PRAGMA query_only=ON`. Enumerar as mensagens humanas dos canais/threads autorizados em `messages` + `sessions`, preservando `platform_message_id`, sessão, origem e timestamp; conferir a instrução efetiva, não o contexto citado ou o display name. Incluir aprovações/correções posteriores do mesmo pedido. Não limitar a enumeração a `delivery_obligations.state=delivered`, respostas contendo COMPLETE ou jobs já existentes: isso omite justamente solicitações não concluídas.
+3. Cruzar as respostas disponíveis com a origem pelos helpers read-only `origin_for_delivery`, `terminal_references`, `source_paths` e pelos recibos salvos. Uma busca por palavras pode selecionar candidatos, mas não comprova cobertura, execução ou ausência. Não executar `intake`, `tick`, `arm` ou `build_from_source` para produzir um status: esses caminhos podem gravar fila/provas ou iniciar trabalho. Recuperar referências existentes sem criar novos jobs, navegar ou disputar a lease PC1.
+
+### Conferir as camadas do pedido
+
+4. Para cada solicitação, ler o estado canônico do runner mesmo quando não houver job de landing. Em SHEIN, carregar a skill da operação e consultar `state/shein-campaigns/single-clone/<request_id>/state.json`; em várias fontes, conferir os filhos `<request_id>-c<source_number>` e a verificação agregada. Extrair apenas fase, IDs persistidos, QA e resultado de ativação. `ACTIVATION_DEFERRED`, `POSTPROCESS_PENDING` e `RECOVERY_PENDING` não são conclusão integral; `engine_result.status=COMPLETE_PAUSED` não comprova que o pedido ACTIVE foi cumprido. Pedido sem conclusão elegível pode estar corretamente fora do captador, não necessariamente ter sido perdido por ele.
+5. Se for preciso informar o estado atual, fazer GET read-only dos IDs exatos na conta confirmada, usando a identidade corporativa da operação. Começar pelos campos necessários à decisão, como `id,account_id,status,effective_status`; acrescentar budget, lance ou início somente conforme o que será afirmado. Não consultar mídia/prévias ou toda a hierarquia de um lote só para responder se falta ativação. Reutilizar leituras concluídas; em falha de uma consulta, declarar sua limitação e não transformar recibo histórico em status live. Confirmar o agendamento futuro separado da entrega: ACTIVE com data futura não significa veiculação agora.
+6. Cruzar então com `jobs`, `links`, `native_receipts` e `messages` do observador. Agregar por pedido humano/resposta original, job técnico e combinação landing + UTMs. Uma mensagem com várias fontes pode gerar vários jobs, mas continua sendo um pedido humano. Contar IDs únicos e validar cobertura em código; não anunciar sucesso global por um dos grupos.
+7. Conferir outbox `PREPARED`/`INTENT`, agrupar `OBSERVED` pelo recibo original e fazer GET das mensagens exatas necessárias para confirmar entrega. Reserva, `OPEN_INTENT`, navegação comprovada, PASS, revisão e entrega são estados diferentes; aviso coletivo pendente não exige outra visita. Timer ativo e serviço oneshot inativo com `Result=success` não provam que todos os pedidos de campanha terminaram.
+
+### Responder sem misturar pendências
+
+8. Apresentar por gestor/conta o que foi confirmado em criação, ativação/agendamento, PC1 e aviso. Se uma camada estiver pendente, começar por essa ressalva em vez de dizer que todos deram certo. Informar causa e próxima decisão exatas: um gate de ativação tardia não é ausência de anúncio e não recebe a retentativa automática do PC1. Uma pergunta de status não autoriza ativação, continuação de writer, alteração de budget ou recriação.
+9. Separar conciliação de cadastro de links não processados. Registros pai/filho `PENDING` podem apontar para pedidos cujos jobs já estão COMPLETE; não somá-los como novas visitas faltando. Conferir a origem e o recibo antes de classificá-los ou corrigi-los; coincidência de request ID não permite remover um guard de partição. Se a consulta cobriu somente o observador, dizer explicitamente que não há pendência no PC1, sem extrapolar para toda Campaign Ops.
+10. Se resultados e recibos já concordarem, encerrar a consulta sem regravar checkpoints ou reabrir links. Havendo divergência real, corrigir somente a camada autorizada e validar por readback; manter o restante como histórico.
+
+Critérios de conferência da resposta:
+- Fila PC1 e outbox vazios, mas campanha criada PAUSED com ativação diferida: **pedido de campanha ainda pendente**.
+- Vários grupos do mesmo pedido com todos os links PASSED e aviso coletivo verificado: **acompanhamento concluído**, sem multiplicar a quantidade de pedidos humanos.
+- Criação/agendamento confirmados para data futura: **programada**, não entrega atual comprovada.
+- Estado atual da API não consultado ou leitura indisponível: **resultado histórico com fonte/horário**, não afirmação de status live.
+- Entrada de cadastro divergente e jobs correspondentes concluídos: **conciliação técnica separada**, sem nova navegação e sem suprimir a divergência por inferência.
 
 ### Conferir o fluxo e localizar overhead
 
