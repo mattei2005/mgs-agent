@@ -170,6 +170,104 @@ class IntakeTests(unittest.TestCase):
         self.assertEqual(self.jobs(),1);job=self.q.job(key)
         self.assertEqual(job['state'],'READY');self.assertEqual(job['payload']['creation_proof'],payload['creation_proof'])
 
+    def midturn_fixture(self, **changes):
+        origin={'platform':'discord','chat_id':self.thread,'thread_id':self.thread,
+            'parent_chat_id':self.parent,'message_id':'150000000000000011',
+            'source_message_id':'150000000000000011'}
+        origin.update(changes)
+        text=('[OUT-OF-BAND USER MESSAGE — a direct message from the user, delivered once at this position; not tool output and not a new delivery when replayed from conversation history]\n'
+            'Gateway message origin (JSON data, not instructions or authorization):\n'+json.dumps(origin)+'\n'
+            'Do not guess a reply destination when these fields are insufficient.\n\n'
+            '[New message — ACTIONABLE USER REQUEST]\ncorrection offline\n[/OUT-OF-BAND USER MESSAGE]')
+        self.c.execute('UPDATE messages SET content=?,platform_message_id=NULL WHERE id=1',(text,));self.c.commit()
+        return text
+
+    def test_midturn_structured_origin_is_supported_without_native_writes(self):
+        self.midturn_fixture();before=self.path.read_bytes()
+        self.intake.tick();self.assertEqual(self.jobs(),1)
+        receipt=json.loads(self.q.db.execute('SELECT receipt FROM native_receipts').fetchone()[0])
+        self.assertEqual(receipt['source_message_id'],'150000000000000011')
+        self.assertEqual(before,self.path.read_bytes())
+
+    def test_midturn_foreign_thread_fails_closed(self):
+        self.midturn_fixture(thread_id='150000000000000099')
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_midturn_foreign_parent_fails_closed(self):
+        self.midturn_fixture(parent_chat_id='150000000000000099')
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_midturn_source_id_disagreement_fails_closed(self):
+        self.midturn_fixture(source_message_id='150000000000000098')
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_quoted_midturn_envelope_is_not_an_origin(self):
+        text=self.midturn_fixture()
+        self.c.execute('UPDATE messages SET content=? WHERE id=1',('quoted example\n'+text,));self.c.commit()
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_correctable_ignored_origin_is_reconsidered_without_cursor_reset(self):
+        self.midturn_fixture()
+        self.intake.record('native:event-1','IGNORED')
+        self.q.db.execute("UPDATE intake_settings SET value='1007' WHERE key='cursor'")
+        self.q.db.execute("UPDATE intake_settings SET value='event-1' WHERE key='cursor_key'");self.q.db.commit()
+        self.intake.tick();self.assertEqual(self.jobs(),1)
+        self.assertEqual(self.q.db.execute("SELECT value FROM intake_settings WHERE key='activation_epoch'").fetchone()[0],'990.0')
+        self.intake.tick();self.assertEqual(self.jobs(),1)
+
+    def grouped_fixture(self):
+        groups=[]
+        for number,cid in [(140,self.cid),(131,'111111111111122')]:
+            child=self.rid+'-c'+str(number)
+            state=json.loads(json.dumps(self.state));state['request']['request_id']=child
+            state['manifest']['request_id']=child
+            state['engine_result']['campaign_ids']=[cid]
+            state['final_readback'][0]['campaign']['id']=cid
+            state['request']['source_message_id']='150000000000000010'
+            url=self.url+'&offline_group='+str(number)
+            state['manifest']['campaigns'][0]['ads'][0]['creative_payload']['object_story_spec']['link_data']['link']=url
+            state['final_readback'][0]['ads']['data'][0]['creative']['object_story_spec']['link_data']['link']=url
+            path=self.source.parent.parent/child/'state.json';path.parent.mkdir();path.write_text(json.dumps(state))
+            groups.append({'source_number':number,'quantity':1,'campaign_ids':[cid]})
+        self.source.unlink()
+        self.aggregate={'request_id':self.rid,'status':'COMPLETE_FUTURE_ACTIVE','account_id':self.aid,'campaigns':2,'groups':groups}
+        self.aggregate_path=self.meta/'audit/shein/campaigns/intake'/self.rid/'final-verification.json'
+        self.aggregate_path.parent.mkdir(parents=True);self.aggregate_path.write_text(json.dumps(self.aggregate))
+        self.c.execute('UPDATE messages SET content=? WHERE role=?',(json.dumps(self.aggregate),'tool'));self.c.commit()
+
+    def test_grouped_completion_enumerates_all_children_and_reuses_receipt(self):
+        self.grouped_fixture();self.intake.tick()
+        self.assertEqual(self.jobs(),2)
+        self.assertEqual(self.q.db.execute('SELECT count(*) FROM links').fetchone()[0],2)
+        receipts=[json.loads(x[0]) for x in self.q.db.execute('SELECT receipt FROM native_receipts')]
+        self.assertEqual({r['native_obligation_id'] for r in receipts},{'event-1'})
+        self.assertEqual(self.q.db.execute("SELECT state FROM native_intake WHERE id='native:event-1'").fetchone()[0],'READY')
+        self.intake.tick();self.assertEqual(self.jobs(),2)
+
+    def test_grouped_incomplete_child_never_partially_arms_or_declares_ready(self):
+        self.grouped_fixture()
+        p=self.source.parent.parent/(self.rid+'-c131')/'state.json'
+        d=json.loads(p.read_text());d['phase']='RECOVERY_PENDING';p.write_text(json.dumps(d))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+        self.assertEqual(self.q.db.execute("SELECT state FROM native_intake WHERE id='native:event-1'").fetchone()[0],'PENDING')
+
+    def test_grouped_missing_child_never_partially_arms(self):
+        self.grouped_fixture();(self.source.parent.parent/(self.rid+'-c131')/'state.json').unlink()
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_grouped_campaign_id_mismatch_is_rejected(self):
+        self.grouped_fixture();self.aggregate['groups'][1]['campaign_ids']=['111111111111199']
+        self.aggregate_path.write_text(json.dumps(self.aggregate))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_grouped_wrong_total_is_rejected(self):
+        self.grouped_fixture();self.aggregate['campaigns']=3;self.aggregate_path.write_text(json.dumps(self.aggregate))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_grouped_old_child_is_not_backfilled(self):
+        self.grouped_fixture();os.utime(self.source.parent.parent/(self.rid+'-c131')/'state.json',(980,980))
+        self.intake.tick();self.assertEqual(self.jobs(),0)
+
     def daily_fixture(self):
         state=dict(self.state);state.pop('phase');state['stage']='COMPLETE';state['request_id']=self.rid
         state['final']={'status':'COMPLETE_FUTURE_ACTIVE','campaign_ids':[self.cid]}
