@@ -674,6 +674,26 @@
         "ROAS",
         "Lance"
       ],
+      "account_column_overrides": {
+        "1583000095650153": {
+          "status": "active",
+          "account_name": "Yolokfx-US-SHEIN-EN-02-G006",
+          "thread_id": "1558147479432601670",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1560303769680355525",
+          "source_message_id": null,
+          "authority": "Rodolfo approved Bid before Gasto and Budget R. before Receita; corrected target thread to 1558147479432601670.",
+          "columns": ["R/E", "Início", "Nº", "Produto", "Quiz", "Bid", "Gasto", "Budget R.", "Receita", "Saldo", "Est.Health", "ROI", "ROI est.", "ROAS", "Lance"],
+          "definitions": {
+            "Budget R.": "Meta campaign budget_remaining in account major currency units; not daily_budget minus frozen report spend; unavailable remains n/d",
+            "Bid": "Meta adset bid_amount for effective COST_CAP only, in account major currency units; non-COST_CAP displays em dash; mixed/missing stays explicit"
+          },
+          "preserve_financial_snapshot_on_column_complement": true,
+          "require_separate_configuration_timestamp": true,
+          "no_Meta_budget_bid_status_write": true,
+          "does_not_change_other_accounts_default_columns": true
+        }
+      },
       "format": "short_header_aligned_pipe_table_short_footer",
       "product_column": {
         "max_characters": 20,

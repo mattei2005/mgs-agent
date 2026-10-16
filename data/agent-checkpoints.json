@@ -1272,6 +1272,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-BID-BUDGETR-1558147479432601670",
+      "next_step": "Resolver snapshot/coletores, ler configuracao Meta, adaptar renderer no recorte pedido, testar e entregar com readback.",
+      "objective": "Adicionar Bid antes de Gasto e Budget R. antes de Receita; relatorio conta1583000095650153 na thread corrigida1558147479432601670; sem write Meta",
+      "source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "state": "in_progress",
+      "thread_id": "1560303769680355525",
+      "updated_at": "2026-10-16T16:35:56+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-BID-CHANNEL-RULES-20261009",
       "next_step": "Aplicar no proximo pedido real; estrategia e cap exigem readback Meta antes de ativacao. Zeus: atualizar regressao global KR-014 stale (3.6.1 vs 3.6.8), sem downgrade; nao bloqueia esta operacao.",
       "objective": "Aplicar regras aprovadas de lance e solicitantes autorizados nos seis canais SHEIN",
@@ -6182,5 +6192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T14:30:49+00:00"
+  "updated_at": "2026-10-16T16:35:56+00:00"
 }
