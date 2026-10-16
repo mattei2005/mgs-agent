@@ -1,0 +1,24 @@
+{
+  "authority_message_id": "1560692876453748739",
+  "scope": "Completion handoff verification; no campaign/activation or response-transport changes",
+  "files": [
+    {
+      "path": "/root/mgs-agent/tests/test_direct_traffic_landing_completion_boundary.py",
+      "sha256": "75df5405218842446632d684f238946613b2ae5ca7b5ed57ae67724d16164736"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md",
+      "sha256": "cfe359c8f5996e426c827319a3c6a24572095fa1760cf3a733669981f3a9fe4f"
+    }
+  ],
+  "tests": {
+    "new_completion_boundary": 9,
+    "full_suite": 286,
+    "failures": 0
+  },
+  "production_handoff_code_changed": false,
+  "Meta_writes": 0,
+  "browser_visits": 0,
+  "c092": "ACTIVATION_DEFERRED;still not eligible;late activation decision separate",
+  "audit": "reports/ares-completion-handoff-1560692876453748739.json"
+}
