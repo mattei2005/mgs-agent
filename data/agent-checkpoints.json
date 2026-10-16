@@ -3863,12 +3863,12 @@
     {
       "agent": "ares",
       "id": "ares-intake-1560461722148536454",
-      "next_step": "Concluir quatro adicionais; auditar por ID/SHA/clean=true os 17, limpar mídia transitória e reportar mapa exato",
+      "next_step": "Sem pendência no lote autorizado; comunicar mapa exato e arquivo extra não solicitado",
       "objective": "Tratar 17 criativos US SHEIN EN para Nicolas: 13 iniciais e adicionais 14 a 17",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1560461722148536454",
-      "state": "13 concluídos e com readback por arquivo. adicionais 14.mp4 a 17.mp4 estáveis e revisados, sanitização/execução em andamento. um 13.mp4 extra não solicitado permanece intocado",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1560461722148536454/final-verification.json",
+      "state": "concluído: 17 finais em nicolas, 17 originais em legacy, inventário e reserva fail-closed validados por id/sha/clean=true. replay sem novos writes passou. mídia local removida após validação. 13.mp4 extra preservado intocado",
       "thread_id": "1560461722148536454",
-      "updated_at": "2026-10-16T01:43:27+00:00"
+      "updated_at": "2026-10-16T01:46:52+00:00"
     },
     {
       "agent": "ares",
@@ -6092,5 +6092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T01:43:27+00:00"
+  "updated_at": "2026-10-16T01:46:52+00:00"
 }
