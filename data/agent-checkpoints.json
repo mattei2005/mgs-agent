@@ -3952,6 +3952,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1560485368912937044",
+      "next_step": "Retomar apenas QA C131 apos expirar snapshot de 15s, mesmos request/IDs; depois C106 e C116 sequencialmente na lane central",
+      "objective": "Executar pedido Nicolas: C140 5x, C131 5x, C106 5x, C116 10x na Yolokfx 02 G006, USD45/dia cada e inicio 16/10/2026 00:00 ET; preservar configuracao live por fonte",
+      "source": "discord:thread:1558134300325716050;message:1560485368912937044;recovery-message:1560490084489240616;request:shein-1560485368912937044-c140;request:shein-1560485368912937044-c131",
+      "state": "em andamento: fonte c140 concluida c159-c163 com 10 ads e cocap usd1.00 herdado. fonte c131 criou c164-c168 e 10 ads; core complete_paused, qa pendente por snapshot compacto de creative (somente id/name/status), sem evidencia de drift material. c131 fonte cocap usd0.90. c106 e c116 ainda nao executadas.",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-16T03:16:10+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-utm-audit-1559593111624220762",
       "next_step": "Nenhuma ação Meta pendente. Em nova conferência, separar PAUSED/ACTIVE do histórico ARCHIVED/DELETED e consultar estado live; não promover este encerramento para regra global fora do incidente.",
       "objective": "Localizar e conferir as duas utm_adgroup duplicadas do alerta SHEIN.",
@@ -6102,5 +6112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T02:44:12+00:00"
+  "updated_at": "2026-10-16T03:16:10+00:00"
 }

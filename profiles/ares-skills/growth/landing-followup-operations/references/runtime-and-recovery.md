@@ -46,6 +46,13 @@ Vincular os parâmetros à hora real e à thread atual; exigir uma única sessã
 
 Reservar o job existente com `Queue.claim(owner, ttl=...)`, conferir que a chave retornada é exatamente a pendência autorizada e só então persistir `begin`. Se outra tarefa for selecionada, usar `defer` e liberar a lease sem navegar. O rótulo `owner` é apenas a reserva lógica, nunca a prova de identidade nativa. Depois do `result`, reutilizar `flush(q, Discord())` do controlador existente para fechar o aviso coletivo e exigir `messages.state=VERIFIED` mais GET de conteúdo/autor/destino. Liberar a lease física em `finally` após fechamento seguro; se houver erro antes do registro, conservar as provas e o estado necessário à reconciliação.
 
+## Recuperar uma entrada ignorada após mensagem durante a execução
+
+- Antes de reparar uma entrada `IGNORED`, reler o mesmo `native_intake`, o job por request e a evidência terminal canônica. Uma mensagem corretiva durante a execução pode existir no banco nativo como `role=user` sem `platform_message_id`, embora seu envelope e o pedido canônico preservem a origem. Isso faz `origin_for_delivery` retornar `None`; não significa campanha incompleta nem ausência de pedido.
+- Para recuperar somente o pedido expressamente autorizado, usar a origem exata do `request` terminal salvo, exigir estado concluído e posterior ao `activation_epoch`, e fazer GET do ID exato da conclusão informado pelo operador. Conferir ID, conteúdo contra `delivery_obligations` entregue, autor, thread e pai. Não inferir a mensagem apenas pelo horário nem preencher recibo sem GET real.
+- Reutilizar `build_from_source` e `Intake.arm`, com gate de domínio e recibo verdadeiro do mesmo pedido. Preservar o estado ignorado anterior em evento; registrar a recuperação nos registros pai/filho de `native_intake`. Não alterar banco nativo, estado de campanha, cursor global, marco de ativação nem outras entradas ignoradas. Conferir em nova conexão read-only o job, todos os links, o recibo e os IDs. Uma segunda execução deve reconciliar o mesmo job, nunca criar outro.
+- Conferir consumidor e reserva vigentes sem iniciar outro observador. `RUNNING` com links `READY` significa somente executor reservado/preparando; não afirmar que houve abertura nem validação. Essa recuperação pontual não corrige, por si, o reconhecimento automático de mensagens durante a execução.
+
 ## Coletor de cadência
 
 Depois de anúncio confirmado e aba ativa, executar pelo Python do Hermes (o Python de sistema não contém necessariamente as dependências do handler):
