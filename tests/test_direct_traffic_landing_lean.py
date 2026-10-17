@@ -53,6 +53,45 @@ class LeanTests(unittest.TestCase):
   with patch('ares_campaign_v3.landing_lean.time.sleep'):
    with self.assertRaisesRegex(ValueError,'Typed URL unverified'):open_normal(f,'https://example.invalid/x')
   self.assertFalse(any(a.get('keys')=='return' for a in f.calls))
+ def test_navigation_loading_rereads_same_tab_without_more_enter(self):
+  class Delayed(Fake):
+   def __init__(self):super().__init__();self.pending_reads=0
+   def __call__(self,a):
+    out=super().__call__(a)
+    if a.get('keys')=='return':self.pending_reads=2
+    if a['action']=='capture' and self.pending_reads:
+     self.pending_reads-=1;out['elements'][1]['label']='New Tab'
+     out['elements'].append({'role':'Document','label':'Search icon'})
+     out['elements'].append({'role':'Document','label':'chrome-untrusted://new-tab-page/'})
+    return out
+  f=Delayed()
+  with patch('ares_campaign_v3.landing_lean.time.sleep'):p=open_normal(f,'https://example.invalid/x')
+  self.assertEqual(p['state'],'OPENED_NORMAL')
+  self.assertEqual(sum(a.get('keys')=='return' for a in f.calls),1)
+ def test_native_close_lag_rereads_without_duplicate_click(self):
+  class Delayed(Fake):
+   def __init__(self):super().__init__();self.pending_close=0
+   def __call__(self,a):
+    out=super().__call__(a)
+    if a['action']=='click':self.new=True;self.pending_close=2
+    if a['action']=='list_windows' and self.pending_close:
+     self.pending_close-=1
+     if not self.pending_close:self.new=False;out={'windows':[BASE]}
+    return out
+  f=Delayed();p=open_normal(f,'https://example.invalid/x')
+  with patch('ares_campaign_v3.landing_lean.time.sleep'):e=close_normal(f,p)
+  self.assertTrue(e['tab_closed_verified'])
+  self.assertEqual(sum(a['action']=='click' for a in f.calls),1)
+ def test_native_close_never_repeats_input_when_window_stays(self):
+  class Stuck(Fake):
+   def __call__(self,a):
+    out=super().__call__(a)
+    if a['action']=='click':self.new=True
+    return out
+  f=Stuck();p=open_normal(f,'https://example.invalid/x')
+  with patch('ares_campaign_v3.landing_lean.time.sleep'):
+   with self.assertRaisesRegex(ValueError,'Closure uncertain'):close_normal(f,p)
+  self.assertEqual(sum(a['action']=='click' for a in f.calls),1)
  def test_strict_visual_bools(self):
   with self.assertRaises(ValueError):structured_visual(self.visual(network_ad_visible='yes'))
  def test_visual_real_negative(self):self.assertFalse(structured_visual(self.visual(network_ad_visible=False,description='Loaded landing; no rendered ad'))['network_ad_visible'])

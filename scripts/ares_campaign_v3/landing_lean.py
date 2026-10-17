@@ -60,9 +60,15 @@ def open_normal(call,url,on_owned=lambda p:None):
         # Fresh native readback plus explicit driver signal before escalation.
         call(dict(action='key',keys='return',delivery_mode='foreground',bring_to_front=True))
         snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
-    docs=[str(e.get('label','')) for e in all_elements(snap) if e.get('role')=='Document']
-    if not docs or all(x in ['New Tab','Google New Tab',''] for x in docs):
-        raise ValueError('Landing navigation not confirmed; technical failure, not NO_AD')
+    # Enter acknowledgement precedes the native document replacement. Re-read
+    # the same owned tab only; never submit Enter again while loading.
+    for reread in range(6):
+        docs=[str(e.get('label','')) for e in all_elements(snap) if e.get('role')=='Document']
+        loaded=[x for x in docs if x and x not in ['New Tab','Google New Tab','Search icon','Omnibox Popup'] and not x.startswith(('chrome://','chrome-untrusted://'))]
+        if loaded:break
+        if reread==5:raise ValueError('Landing navigation not confirmed; technical failure, not NO_AD')
+        time.sleep(.3)
+        snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
     proof.update(state='OPENED_NORMAL',opened_at=time.time());on_owned(proof)
     return proof
 
@@ -79,8 +85,11 @@ def close_normal(call,proof):
     controls=[e for e in es if e.get('label')=='Close' and len(e.get('bounds',[]))==4 and e['bounds'][0]>right and abs(e['bounds'][1]-row[1])<=2 and abs(e['bounds'][3]-row[3])<=2]
     if len(controls)!=1:raise ValueError('Unique native close required')
     call(dict(action='click',element=controls[0]['index']))
-    after=windows(call);afterids={identity(w) for w in after}
-    if identity(target) in afterids or not (ids-{identity(target)}).issubset(afterids):raise ValueError('Closure uncertain; no duplicate input')
+    for reread in range(5):
+        after=windows(call);afterids={identity(w) for w in after}
+        if identity(target) not in afterids and (ids-{identity(target)}).issubset(afterids):break
+        if reread==4:raise ValueError('Closure uncertain; no duplicate input')
+        time.sleep(.15)
     return dict(tab_closed_verified=True,other_tabs_preserved=True,new_tab_identity=target,closed_at=time.time(),before_windows=safe_windows(before),after_windows=safe_windows(after))
 
 def scroll_owned(call,target):
@@ -125,7 +134,9 @@ def observe_prepared(call,read_visual,url,mapping_source,*,on_owned=lambda p:Non
         if proof and proof.get('new_window_created'):
             t=monotonic()
             try:e.update(close_normal(call,proof))
-            except Exception as exc:e['diagnosis']='Owned closure requires reconciliation: '+str(exc)[:180];result='ERROR'
+            except Exception as exc:
+                if e.get('diagnosis'):e['observation_diagnosis']=e['diagnosis']
+                e['diagnosis']='Owned closure requires reconciliation: '+str(exc)[:180];result='ERROR'
             e.setdefault('phase_seconds',{})['closure']=monotonic()-t
         elif proof is None:e.update(no_tab_opened=True,browser_inputs_zero_verified=True)
     e.setdefault('phase_seconds',{})['mechanical_total']=monotonic()-started

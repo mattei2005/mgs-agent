@@ -1,0 +1,223 @@
+{
+  "state": "TECHNICAL_PROBE_VERIFIED",
+  "session_id": "20261017_110805_8c8377",
+  "owner": "landing-observer-bad1501e6b2241308eb8cfd9bfaa941c",
+  "idx": 0,
+  "repair_note": "Native AX timestamps prove loading document arrived after initial Enter read and close completed after first enumeration. Added bounded same-tab native rereads and bounded close readback; no extra Enter or Close. Exact attempt 1 reconciled absent with baseline preserved. Observer regression suite passes.",
+  "url_navigation": false,
+  "tests_returncode": 0,
+  "tests_output": "{\"state\": \"TECHNICAL_PROBE_VERIFIED\", \"probe_file\": \"/root/.hermes/profiles/ares/cache/scratch/landing-tests-ibimn800/queue/probes/offline-normal/technical-probe.json\", \"url_navigation\": false, \"closure_verified\": true, \"elapsed_seconds\": 0.001}\n............................................./root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57d030>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57d990>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57d210>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57da80>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57df30>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57db70>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e2f0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57de40>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e5c0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e6b0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57eb60>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57ed40>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57ef20>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57f010>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57f100>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57f2e0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57f6a0>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57f790>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n............................................./root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57d120>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n............................................................./root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e7a0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57d990>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57df30>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e5c0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e6b0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384b80>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384e50>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384f40>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f385120>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f385a80>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n.............../root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f57e6b0>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384310>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f385120>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384b80>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f385b70>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386020>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386200>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386110>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f3866b0>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386980>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386d40>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f387010>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f3872e0>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/mgs-agent/scripts/ares_campaign_v3/landing_intake.py:120: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f3875b0>\n  user=c.execute(\"SELECT * FROM messages WHERE session_id=? AND role='user' AND id<? ORDER BY id DESC LIMIT 1\",(session['id'],final['id'])).fetchone()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n................/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386d40>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f386110>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f385b70>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384310>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e0130>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e0400>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e04f0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e07c0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e0c70>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e0d60>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e1030>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e1300>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e15d0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e18a0>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e1b70>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:635: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e1e40>\n  return object.__new__(cls)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n......................./root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f384310>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e2020>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e1b70>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e18a0>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e1e40>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e0c70>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:694: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3e0e07c0>\n  raise AttributeError(name)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n............/root/.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/unittest/mock.py:2259: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x73db3f387c40>\n  def __init__(self, name, parent):\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n..........................................................................................................\n----------------------------------------------------------------------\nRan 323 tests in 16.346s\n\nOK\n",
+  "mode": "LEAN_NORMAL_NEW_TAB",
+  "baseline": [
+    {
+      "pid": 18224,
+      "window_id": 263324,
+      "app_name": "chrome.exe"
+    },
+    {
+      "pid": 14788,
+      "window_id": 196948,
+      "app_name": "cua-driver.exe"
+    },
+    {
+      "pid": 24396,
+      "window_id": 131758,
+      "app_name": "SystemSettings.exe"
+    },
+    {
+      "pid": 27320,
+      "window_id": 1572930,
+      "app_name": "ApplicationFrameHost.exe"
+    },
+    {
+      "pid": 18216,
+      "window_id": 66572,
+      "app_name": "TextInputHost.exe"
+    },
+    {
+      "pid": 9632,
+      "window_id": 65984,
+      "app_name": "explorer.exe"
+    }
+  ],
+  "base_window_id": 263324,
+  "opening": {
+    "state": "OWNED_NORMAL_NEW_WINDOW",
+    "baseline": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "url": null,
+    "url_submission_attempted": false,
+    "opened_intent_at": 1792250189.9029,
+    "target": {
+      "pid": 18224,
+      "window_id": 10225080,
+      "app_name": "chrome.exe"
+    },
+    "new_window_created": true,
+    "new_tab_created": true,
+    "browser_mode": "NORMAL",
+    "blank_opened_at": 1792250200.3232577
+  },
+  "normal_blank_verified": true,
+  "closure": {
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 10225080,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792250204.0637684,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 10225080,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "state": "CLOSED_NOT_PASS",
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "normal_opening": {
+      "state": "OWNED_NORMAL_NEW_WINDOW",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": null,
+      "url_submission_attempted": false,
+      "opened_intent_at": 1792250189.9029,
+      "target": {
+        "pid": 18224,
+        "window_id": 10225080,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792250200.3232577
+    },
+    "opened_at": 1792250189.9029
+  },
+  "elapsed_seconds": 31.893,
+  "error": null
+}
