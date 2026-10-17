@@ -1,0 +1,34 @@
+{
+  "owner": "landing-observer-a054e7e386cb40ef9c299e90e636600f",
+  "scope_id": "bb0ef9386a17778c3970ec00f1e3606e579506091154a7d4afa099c2af49f04f",
+  "job": "2689d91b8a156747173fc9d8ada8599b055964c5130a7a95c89e9f5fbcc61a54",
+  "objective": "Observe every frozen landing plus exact campaign query using the serial PC1 batch executor",
+  "execution_state": "FINITE_PASS_SETTLED",
+  "queue_state_at_readback": "OBSERVED",
+  "links_total": 2,
+  "links_passed": 2,
+  "review_required": 0,
+  "items": [
+    {"index": 0, "campaign": "120252074568650744", "state": "PASSED", "attempt": 1, "visible_seconds": 10.000106298946775, "tab_closed_verified": true, "other_tabs_preserved": true},
+    {"index": 1, "campaign": "120252074568640744", "state": "PASSED", "attempt": 2, "visible_seconds": 10.000122837955132, "tab_closed_verified": true, "other_tabs_preserved": true}
+  ],
+  "repair": {
+    "cause": "Native AX omnibox snapshot lag: first read showed nocach, subsequent closure read showed complete nocache; URL had not been submitted",
+    "change": "Bounded read-only recapture of the exact owned omnibox after type, before escalation/failure; no duplicate typing on eventual native readback",
+    "regression_tests": 288,
+    "regression_result": "OK",
+    "tests_log": "repair-tests.log",
+    "changed_file_inventory": [
+      {"path": "scripts/ares_campaign_v3/landing_lean.py", "sha256": "480445aa9fc9c6214093a96201da0eaad549518a6e6aba8e98775a50a39f90f8"},
+      {"path": "tests/test_direct_traffic_landing_lean.py", "sha256": "75beb66ff5a350be023bfcc600becdbda80b082b7088ec9eb65ccba74bf1273d"}
+    ],
+    "live_verification": "Only pending index 1 retried and PASSED; approved index 0 never reopened"
+  },
+  "physical_lease_released_verified": true,
+  "executor_processes_exited_verified": true,
+  "external_posts_by_this_session": 0,
+  "item_outbox_at_readback": "Both item messages VERIFIED by independent consumer",
+  "final_success_outbox_at_readback": "PREPARED",
+  "next_action": "Independent existing consumer handles the queued final success; no further PC1 visit required",
+  "source": "Frozen batch-scope.json, exact queue readback, executor logs and immutable per-attempt evidence"
+}
