@@ -8610,10 +8610,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "LANDING-MOBILE-20-30S-1561037521234952253",
       "title": "Observer continuo normal;informes por item fora PC1;recuperacao automatica60s apos3+1",
-      "updated_at": "2026-10-16T14:20:42+00:00"
+      "updated_at": "2026-10-17T15:57:01+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.landing-followup.procedure",
@@ -8649,6 +8649,23 @@
       "superseded_by": "LANDING-CONTINUOUS-AUTO60S-1560642881830789181",
       "title": "Landing: links preparados; nova aba normal por tentativa; anuncio,rolagem,10s,fechar; sem serie screenshots",
       "updated_at": "2026-10-16T14:20:42+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-17T15:57:01+00:00",
+      "id": "LANDING-MOBILE-20-30S-1561037521234952253",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Acompanhamento mobile nativo com permanencia20-30s; supersede10s",
+      "updated_at": "2026-10-17T15:57:01+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.landing-observation-query-flag",
@@ -12573,5 +12590,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T15:27:45+00:00"
+  "updated_at": "2026-10-17T15:57:01+00:00"
 }

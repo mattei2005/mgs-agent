@@ -76,9 +76,16 @@ class MobileTests(unittest.TestCase):
             path=Path(tmp)/'offline.png';Image.new('RGB',(2560,1440),color='white').save(path)
             for match,uncertain,expected in [(True,False,True),(False,False,False),(True,True,False)]:
                 def review(shot,prompt):
-                    self.assertLessEqual(Image.open(shot['screenshot_path']).width,1100)
+                    with Image.open(shot['screenshot_path']) as image:self.assertLessEqual(image.width,1100)
                     return dict(success=True,analysis=json.dumps(dict(exact_match=match,uncertain=uncertain,observed_difference='offline fixture')))
                 with patch.object(mobile,'_capture',return_value=es):
                     self.assertEqual(mobile.verify_omnibox(None,TARGET,'https://example.invalid/lp',lambda:{'screenshot_path':str(path)},review),expected)
+    def test_rewarded_gate_is_negative_not_pass_or_loading_error(self):
+        from ares_campaign_v3 import landing_followup as core
+        base=dict(pid=1,window_id=1,app_name='chrome.exe');url='https://example.invalid/lp?utm_campaign=c1'
+        e=self.evidence();e.update(observation_mode='LEAN_NORMAL_NEW_TAB',normal_opening=dict(browser_mode='NORMAL',new_tab_created=True,target=TARGET,baseline=[base],state='OPENED_NORMAL',url_submission_attempted=True,url=url),new_tab_identity=TARGET,before_windows=[base,TARGET],after_windows=[base],tab_closed_verified=True,other_tabs_preserved=True,observed_url=url,resolved_landing_url=url,mapping_source='offline',network_ad_confirmed=False,site_gate_visible=True,visual=dict(network_ad_visible=False,active_normal_chrome=True,unobstructed=False,landing_loaded=True,site_gate_visible=True,description='offline site gate'))
+        with patch.object(lean,'lean_enabled',return_value=True),patch.object(core,'scope',return_value=True),patch.object(mobile,'policy',return_value=P):
+            lean.validate_lean_observation(e,dict(effective_campaign_url=url),negative=True)
+            with self.assertRaises(ValueError):lean.validate_lean_observation(e,dict(effective_campaign_url=url),negative=False)
 
 if __name__=='__main__':unittest.main()

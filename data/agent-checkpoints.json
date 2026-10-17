@@ -1903,12 +1903,12 @@
     {
       "agent": "ares",
       "id": "LANDING-MOBILE-20-30S-1561037521234952253",
-      "next_step": "Provar mobile em janela vazia normal; atualizar executor/testes; executar1replayC170 preservando PASS histórico",
-      "objective": "Atualizar acompanhamento para mobile e janela20-30s; testar somente C170 de hoje",
-      "source": "discord:message:1561037521234952253",
-      "state": "preparing_native_mobile;no_new_landing_visit;authority1561037521234952253",
+      "next_step": "Novas observações usam mobile e20-30s. Não repetirC170: teste encerrado; gate exige clique patrocinado não autorizado. Original continua concluído historicamente.",
+      "objective": "Acompanhamento mobile nativo20-30s e um testeC170 de hoje",
+      "source": "data/ares/meta-ads/audit/landing-mobile-1561037521234952253/final-verification.json;discord:message:1561037521234952253",
+      "state": "complete_policy_and_runtime_verified;336testsok;one_actual_c170_visit_iphone16_393x852;25.3098s;no_ad_site_gate;native_closed;original_pass_preserved;zero_ad_clicks",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-17T15:26:35+00:00"
+      "updated_at": "2026-10-17T15:58:19+00:00"
     },
     {
       "agent": "zeus",
@@ -6352,5 +6352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T15:27:45+00:00"
+  "updated_at": "2026-10-17T15:58:19+00:00"
 }

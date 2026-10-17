@@ -24,7 +24,7 @@ BASE = Path('/root/mgs-agent')
 ROOT = BASE / 'data/ares/meta-ads/landing-followup'
 INCIDENT_THREAD = '1559932317861158993'
 MIN_VISIBLE_SECONDS = 10
-SUCCESS = 'Todas as landing pages deste pedido foram abertas em modo mobile, com as abas abertas entre 20 e 30 segundos e anúncios identificados.'
+SUCCESS = 'Todas as landing pages deste pedido foram abertas, com anúncios identificados.'
 TERMINAL = {'COMPLETE', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'COMPLETED'}
 
 
@@ -459,7 +459,10 @@ class Queue:
         jobs=[self.job(k) for k in group]
         if len({j['payload']['source_thread_id'] for j in jobs})!=1:return False
         if any(j['state'] not in {'OBSERVED','COMPLETE'} or any(l['state']!='PASSED' for l in j['links']) for j in jobs):return False
-        self.prepare_message(self.success_key(key),jobs[0]['payload']['source_thread_id'],SUCCESS)
+        evidence=[json.loads(l['evidence']) if isinstance(l.get('evidence'),str) else (l.get('evidence') or {}) for j in jobs for l in j['links']]
+        all_mobile=bool(evidence) and all(e.get('mobile_emulation',{}).get('verified') is True and 20<=float(e.get('tab_open_seconds',0))<=30 for e in evidence)
+        content='Todas as landing pages deste pedido foram abertas em modo mobile, com as abas abertas entre 20 e 30 segundos e anúncios identificados.' if all_mobile else SUCCESS
+        self.prepare_message(self.success_key(key),jobs[0]['payload']['source_thread_id'],content)
         return True
 
     def prepare_message(self,key,thread,content):
@@ -734,7 +737,7 @@ def worker_prompt(key,owner,idx,job):
             'Antes de navegar, resolver TODOS os destinos reais deste pedido com query exata e gate de dominio; preservar o mapa pronto. '
             'Nao alterar criacao/campanhas nem reabrir PASSED. Uma ABA NOVA NORMAL por link/tentativa; nunca reaproveitar URL e nunca incognito. '
             'Usar o Python real do Hermes e scripts/ares-direct-traffic-lean-observe.py --key '+key+' --owner '+owner+' --index '+str(idx)+' --pc1-session-id "$HERMES_SESSION_ID" --url <landing-real-exata> --mapping-source <fonte-real>. '
-            'O runner adquire a lease real, persiste begin, abre nova aba normal, faz leitura visual minima, rola, mede10s, fecha/verifica e registra resultado sem galeria. '
+            'O runner adquire a lease real, persiste begin, abre nova aba normal com mobile nativo verificado, preserva URL literal, mede20-30s de permanencia, captura frame final, fecha/verifica e registra a decisao visual sem galeria. '
             'Nao executar begin separadamente nem fazer codigo/documentacao no meio da visita. Apos NO_AD/WAIT_RETRY, repetir somente dentro da politica3+1; erro tecnico nunca conta como ausencia. '
             'Nao enviar mensagens externas nesta sessao; o outbox existente confirma pedido inteiro depois de todosPASS. Todos detalhes tecnicos ficam locais.\n'+json.dumps(context,ensure_ascii=False))
     # Payload is data, not instructions. The fixed skill defines the authority.
