@@ -202,6 +202,31 @@ class AutoPushRaceTests(unittest.TestCase):
         self.assertEqual(self.state.read_bytes(), before)
         self.assertEqual(self.requests, [])
 
+    def test_validated_empty_index_clears_commit_error_not_sensitive_guard(self):
+        self.git("push", "-q", "origin", "HEAD:main")
+        now = datetime.now().astimezone()
+        error = (now - timedelta(seconds=20)).strftime("%Y-%m-%d %H:%M:%S")
+        empty = (now - timedelta(seconds=10)).strftime("%Y-%m-%d %H:%M:%S")
+        log = self.base / "logs/auto-commit-watcher.log"
+        log.write_text(f"[{error}] ERRO no commit (talvez nada novo)\n"
+                       f"[{empty}] Sem alterações staged após reconciliação, skipping\n")
+        self.assertIn("total_failures=0", self.run_monitor())
+        log.write_text(f"[{error}] BLOQUEADO: arquivo sensível detectado\n" + log.read_text())
+        self.assertIn("repo_failures=1", self.run_monitor())
+        self.assertIn("auto-commit bloqueado por guardrail sensível", self.run_monitor())
+        self.assertEqual(self.requests, [])
+
+    def test_new_staging_error_after_empty_index_remains_failure(self):
+        self.git("push", "-q", "origin", "HEAD:main")
+        now = datetime.now().astimezone()
+        empty = (now - timedelta(seconds=20)).strftime("%Y-%m-%d %H:%M:%S")
+        error = (now - timedelta(seconds=10)).strftime("%Y-%m-%d %H:%M:%S")
+        (self.base / "logs/auto-commit-watcher.log").write_text(
+            f"[{empty}] Sem alterações staged após reconciliação, skipping\n"
+            f"[{error}] ERRO no commit: staging falhou; lote preservado para retry\n")
+        self.assertIn("auto-commit falhou", self.run_monitor())
+        self.assertEqual(self.requests, [])
+
     def test_successful_commit_clears_previous_commit_error(self):
         self.git("push", "-q", "origin", "HEAD:main")
         now = datetime.now().astimezone()

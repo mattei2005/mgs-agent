@@ -242,17 +242,44 @@ PY
   # Stage somente os paths retornados pelo status filtrado. O parse é NUL-safe
   # para nomes com espaço; cada `git add` é tolerante a corrida de arquivo
   # removido/movido entre status e staging.
+  STAGING_FAILED=0
   while IFS=$'\t' read -r status path; do
     [ -n "$path" ] || continue
     if [[ "${status:0:1}" == "D" && "${status:1:1}" == " " ]]; then
       # Deleção já staged: não há path no working tree nem no index para stagear.
       continue
     elif [[ "${status:1:1}" == "D" ]]; then
-      git add -u -- "$path" >> "$LOG_FILE" 2>&1 || log "WARN: não consegui stagear deleção volátil: $path"
+      if ! git add -u -- "$path" >> "$LOG_FILE" 2>&1; then
+        STAGING_FAILED=1
+        log "WARN: não consegui stagear deleção: $path"
+      fi
     elif ! git add -A -- "$path" >> "$LOG_FILE" 2>&1; then
       log "WARN: não consegui stagear path volátil, seguindo: $path"
+      # Um arquivo transitório desaparecido não implica falha no índice.
+      # Se o path ainda existe, preservar a falha real (lock/permissão etc.).
+      if [[ -e "$path" || -L "$path" ]]; then
+        STAGING_FAILED=1
+      fi
     fi
   done <<< "$STATUS_PATHS"
+
+  if (( STAGING_FAILED != 0 )); then
+    log "ERRO no commit: staging falhou; lote preservado para retry"
+    continue
+  fi
+
+  # O snapshot pode conter somente WAL/SHM que somem antes de git add.
+  # git commit sem diff retorna 1; isso é no-op, não falha de commit/push.
+  if git diff --cached --quiet --exit-code; then
+    log "Sem alterações staged após reconciliação, skipping"
+    continue
+  else
+    DIFF_RC=$?
+    if (( DIFF_RC != 1 )); then
+      log "ERRO no commit: não foi possível validar o índice rc=${DIFF_RC}"
+      continue
+    fi
+  fi
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 
