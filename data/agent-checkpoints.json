@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-C092-EXTRA-20261017",
-      "next_step": "Sem repetição automática; revisão da exibição se desejada, sem writes em campanhas/site",
-      "objective": "Uma tentativa adicional C092 após espera mínima de 5 minutos",
-      "source": "data/ares/meta-ads/audit/landing-manual-retry-1561029313275633679/verification.json",
-      "state": "completed_one_extra_no_ad; attempt6; review_required1; owned_tab_closed_other_tabs_preserved; prior5_absences_preserved",
+      "next_step": "Nenhuma ação neste link; não reabrir. Resolução humana não equivale a PASS automatizado.",
+      "objective": "Encerrar acompanhamento C092 pela confirmação visual de Rodolfo",
+      "source": "data/ares/meta-ads/audit/landing-operator-resolution-1561036513473470596/verification.json;discord:message:1561036513473470596",
+      "state": "complete;resolved_by_operator;supersedes_review_after_extra_attempt;prior6no_ad_preserved;no_new_visit;readback_verified",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-17T15:02:03+00:00"
+      "updated_at": "2026-10-17T15:22:21+00:00"
     },
     {
       "agent": "ares",
@@ -29,6 +29,16 @@
       "state": "complete_rodolfo_ui_confirmed_final_thread_message_verified",
       "thread_id": "1557274000680288307",
       "updated_at": "2026-10-09T04:07:42+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-C137-OPERATOR-RESOLUTION-1561036117283963033",
+      "next_step": "Nenhuma ação neste link; não reabrir. Resolução humana não equivale a PASS automatizado.",
+      "objective": "Encerrar pendência C137 pela confirmação visual de Rodolfo",
+      "source": "data/ares/meta-ads/audit/landing-operator-resolution-1561036117283963033/verification.json;discord:message:1561036117283963033",
+      "state": "complete;resolved_by_operator;prior5no_ad_preserved;no_new_visit;readback_verified",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-17T15:21:10+00:00"
     },
     {
       "agent": "ares",
@@ -2093,12 +2103,12 @@
     {
       "agent": "zeus",
       "id": "RUNCLOUD-QUOTA-1561029089458917528",
-      "next_step": "Contencao implantada e validada em cron real; aguardar decisao Rodolfo para eventual saude 2h/backups24h. API indisponivel ate liberacao de cota pelo provedor; nao repetir consultas antes do reset informado",
-      "objective": "Auditar consumo RunCloud, conter chamadas durante quota esgotada e testar retomada; preservar cadencias e billing",
-      "source": "/root/mgs-agent/reports/runcloud-quota-audit-1561029089458917528.json",
-      "state": "waiting_owner_cadence_decision",
+      "next_step": "Auditoria global de oito datas; testes de cadencia/watchdog; backup, configuracao e crontab exatos; readback e REPORT-INFRA",
+      "objective": "Aplicar cadencia RunCloud aprovada: saude2h e status de backups24h, preservando execucao dos backups, bloqueio de quota e billing",
+      "source": "discord:1561025799199522987/1561035336010829825",
+      "state": "in_progress",
       "thread_id": "1561025799199522987",
-      "updated_at": "2026-10-17T14:58:59+00:00"
+      "updated_at": "2026-10-17T15:17:33+00:00"
     },
     {
       "agent": "zeus",
@@ -5111,6 +5121,16 @@
       "updated_at": "2026-10-17T14:51:09+00:00"
     },
     {
+      "agent": "ares",
+      "id": "landing-observer-bad1501e6b2241308eb8cfd9bfaa941c",
+      "next_step": "PC1 encerrado e liberado; 1/1 PASSED, anuncio observado por 10s e aba propria fechada. Historico ERROR reconciliado, NO_AD, PASS preservado. Consumidor independente responsavel por entrega final ao gestor; nao reabrir landing. Reparo restrito ao observador validado por 323 testes, probe normal vazio e lote real; inventario local no verified-summary. REPORT-INFRA somente dry-run local por veto expresso a posts externos nesta sessao.",
+      "objective": "Observar lote congelado SHEIN campanha 011 no PC1 com todos os destinos reais e queries exatas.",
+      "source": "data/ares/meta-ads/landing-followup/runs/landing-observer-bad1501e6b2241308eb8cfd9bfaa941c/verified-summary.json",
+      "state": "observed_all_passed",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-17T15:20:08+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "loftloader-rollout-20260817",
       "next_step": "Nenhuma pendência de preloader; manter monitoramento e usar a skill canônica para futuros sites.",
@@ -6322,5 +6342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T15:02:03+00:00"
+  "updated_at": "2026-10-17T15:22:21+00:00"
 }
