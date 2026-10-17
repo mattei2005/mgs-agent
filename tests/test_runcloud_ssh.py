@@ -27,6 +27,16 @@ CFG={'servers':[TARGET],'ssh_key_ref':{'item_id':'fixture-only','vault':'fixture
 
 class SSHTests(unittest.TestCase):
     def setUp(self):self.assertIsNotNone(S,'SSH collector is not implemented yet')
+    def test_key_loader_uses_native_openssh_export(self):
+        calls=[];private='-----BEGIN OPENSSH PRIVATE KEY-----\nfixture\n-----END OPENSSH PRIVATE KEY-----\n'
+        def run(args,**kwargs):
+            calls.append(args)
+            output=private if args[1]=='read' else json.dumps({'fields':[{'id':'private_key','value':private}]})
+            return subprocess.CompletedProcess(args,0,output,'')
+        with patch.object(S.subprocess,'run',side_effect=run):key=S.load_key(CFG)
+        self.assertEqual(key,private.encode())
+        self.assertEqual(calls[0][1],'read')
+        self.assertIn('ssh-format=openssh',calls[0][-1])
     def test_schema_rejects_stale_sample(self):
         with self.assertRaises(S.SSHError):S.validate_health(fixture(700),TARGET,1000)
     def test_schema_rejects_missing_service(self):
@@ -45,6 +55,8 @@ class SSHTests(unittest.TestCase):
             self.assertIn('PasswordAuthentication=no',args)
             self.assertIn('StrictHostKeyChecking=yes',args)
             self.assertIn('IdentityAgent=none',args)
+            self.assertIn('IdentityFile=none',args)
+            self.assertEqual(args[args.index('-i')+1],'/proc/'+str(os.getpid())+'/fd/'+str(fd))
             self.assertEqual(args[-1],'mgs-health-v1')
             return subprocess.CompletedProcess(args,0,json.dumps(fixture()),'')
         sample=S.read_target(b'fixture-key-not-a-secret',TARGET,CFG['ssh_known_hosts'],runner=runner,now=1000)

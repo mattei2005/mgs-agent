@@ -18,10 +18,9 @@ def load_key(cfg):
     ref=cfg.get('ssh_key_ref',{})
     if not ref.get('item_id') or not ref.get('vault'):raise SSHError('credential_reference_missing')
     try:
-        p=subprocess.run([WRAPPER,'item','get',ref['item_id'],'--vault',ref['vault'],'--format','json','--reveal'],capture_output=True,text=True,timeout=45)
+        p=subprocess.run([WRAPPER,'read','op://'+ref['vault']+'/'+ref['item_id']+'/private key?ssh-format=openssh'],capture_output=True,text=True,timeout=45)
         if p.returncode:raise SSHError('credential_unavailable')
-        item=json.loads(p.stdout)
-        key=next((f.get('value') for f in item.get('fields',[]) if f.get('id')=='private_key'),None)
+        key=p.stdout
         if not isinstance(key,str) or not key.startswith('-----BEGIN OPENSSH PRIVATE KEY-----'):raise SSHError('credential_invalid')
         return key.encode()
     except (OSError,ValueError,subprocess.SubprocessError):raise SSHError('credential_unavailable') from None
@@ -58,11 +57,15 @@ def read_target(key,target,known_hosts,runner=None,now=None):
         while view:
             written=os.write(fd,view);view=view[written:]
         os.lseek(fd,0,os.SEEK_SET)
-        args=['/usr/bin/ssh','-F','/dev/null','-T','-i','/proc/self/fd/'+str(fd),'-o','IdentitiesOnly=yes','-o','IdentityAgent=none','-o','BatchMode=yes','-o','PreferredAuthentications=publickey','-o','PasswordAuthentication=no','-o','KbdInteractiveAuthentication=no','-o','StrictHostKeyChecking=yes','-o','UserKnownHostsFile='+str(known_hosts),'-o','GlobalKnownHostsFile=/dev/null','-o','ConnectTimeout=12','-o','ConnectionAttempts=1','-o','LogLevel=ERROR','-l','zeus',host,COMMAND]
+        # OpenSSH closes inherited descriptors. Keep the secret in the live
+        # parent's memfd, and explicitly suppress unrelated default identities.
+        identity='/proc/'+str(os.getpid())+'/fd/'+str(fd)
+        if not Path(identity).is_file():raise SSHError('ssh_identity_unavailable')
+        args=['/usr/bin/ssh','-F','/dev/null','-T','-o','IdentityFile=none','-i',identity,'-o','IdentitiesOnly=yes','-o','IdentityAgent=none','-o','BatchMode=yes','-o','PreferredAuthentications=publickey','-o','PasswordAuthentication=no','-o','KbdInteractiveAuthentication=no','-o','StrictHostKeyChecking=yes','-o','UserKnownHostsFile='+str(known_hosts),'-o','GlobalKnownHostsFile=/dev/null','-o','ConnectTimeout=12','-o','ConnectionAttempts=1','-o','LogLevel=ERROR','-l','zeus',host,COMMAND]
         p=runner(args,pass_fds=(fd,),capture_output=True,text=True,timeout=35)
         if p.returncode:
             error=p.stderr.lower()
-            code='ssh_host_key_failed' if 'host key' in error or 'host identification' in error else 'ssh_auth_failed' if 'permission denied' in error else 'ssh_command_denied' if 'access denied' in error else 'ssh_unreachable'
+            code='ssh_identity_unavailable' if 'identity file' in error and 'not accessible' in error else 'ssh_host_key_failed' if 'host key verification failed' in error or 'remote host identification has changed' in error else 'ssh_auth_failed' if 'permission denied' in error else 'ssh_command_denied' if 'access denied' in error else 'ssh_unreachable'
             raise SSHError(code)
         if len(p.stdout)>65536:raise SSHError('ssh_invalid_sample')
         try:data=json.loads(p.stdout)
