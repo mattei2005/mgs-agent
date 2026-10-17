@@ -563,12 +563,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-D1-20261018-19-CORRECTION",
-      "next_step": "Superseder requests anteriores, preparar nomes/ciclos corretos e reconciliar dois one-shots existentes, sem write budget/status antecipado.",
+      "next_step": "One-shots aguardam horario exato, pre-read de drift e campanha ACTIVE unico com GET final; commits D1 separados, sem budget write nem retomada de crons pausados.",
       "objective": "Corrigir lotes D1 CPV13: C40 C41 18/10 e C42 C43 19/10 00h SP",
-      "source": "data/ares/meta-ads/state/manual-campaign-actions/cpv13-d1-20261018-19-config.json",
-      "state": "preflight meta confirmou quatro paused 1x1x3; budgets atuais c40/c41/c42 usd30 e c43 usd25. agendamentos em correção com preservação de histórico.",
+      "source": "data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-d1-batch-correction-20261017/summary.json",
+      "state": "scheduled_verified: c40/c41 18/10 e c42/c43 19/10 00h sp. dois jobs originais corrigidos enabled/no_agent; antigos requests supersedidos. meta 4 paused 1x1x3; budgets atuais usd30/30/30/25 preservados. 16 testes verdes; diario/intraday dry-run ok; auditoria 8 dias sem colisao operacional.",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-17T21:55:23+00:00"
+      "updated_at": "2026-10-17T21:59:10+00:00"
     },
     {
       "agent": "zeus",
@@ -6412,5 +6412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T21:55:23+00:00"
+  "updated_at": "2026-10-17T21:59:10+00:00"
 }
