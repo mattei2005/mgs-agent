@@ -4583,12 +4583,12 @@
     {
       "agent": "ares",
       "id": "cpv13-c41-c42-c40-c32-d1-20261017",
-      "next_step": "Validar hierarquia e ciclos, preparar requests, testar e confirmar os dois agendamentos",
-      "objective": "Ativar C41/C42 18-10 00:00 SP e C40/C32 19-10 00:00 SP com retorno ao D1 operacional e budgets preservados",
-      "source": "discord:thread:1539832402744975450",
-      "state": "preflight ao vivo e preparação do agendamento determinístico em andamento; nenhum status alterado",
+      "next_step": "One-shots fazem pre-read, status ACTIVE e GET no horário, validam nova proveniência D1; para C32 aguardar indicação de outra campanha por Rodolfo, sem recriar ou clonar implicitamente.",
+      "objective": "Ativar C41/C42 18-10 00:00 SP e C40 19-10 00:00 SP com retorno ao D1; resolver alvo C32 excluído",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-d1-20261018-19-config.json",
+      "state": "scheduled: c41 us$30/dia e c42 us$25/dia em 18-10; c40 us$30/dia em 19-10. jobs determinísticos habilitados e lidos de volta; meta confirmou três campanhas paused com filhos active, datas novas, budgets preservados. c32 deleted e sem outro alvo não terminal pelo wrapper; pergunta enviada a rodolfo.",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-17T16:09:50+00:00"
+      "updated_at": "2026-10-17T16:17:17+00:00"
     },
     {
       "agent": "ares",
@@ -6372,5 +6372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T16:09:50+00:00"
+  "updated_at": "2026-10-17T16:17:17+00:00"
 }

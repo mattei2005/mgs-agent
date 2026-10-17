@@ -7,6 +7,15 @@
 
 ---
 
+## Campaign Ops — CPV13 reentrada D1 em duas viradas (2026-10-17)
+
+- Autoridade: Rodolfo Mattei na thread `1539832402744975450`. Agendados C41/C42 para `2026-10-18T00:00:00-03:00` e C40 para `2026-10-19T00:00:00-03:00`, com D1 operacional novo, histórico preservado e budgets live inalterados (USD30, USD25 e USD30/dia, respectivamente).
+- Runner: `/root/.hermes/profiles/ares/scripts/cpv13-d1-restart-20261018-19.py`; wrappers `cpv13-c41-c42-d1-20261018.py` e `cpv13-c40-d1-20261019.py`. Configuração/request canônicos em `data/ares/meta-ads/state/manual-campaign-actions/cpv13-d1-20261018-19-config.json`; ciclos no contrato `Creditoparaveiculo-BR-CAR-BR.json`.
+- One-shots Hermes Ares `b6dbf310a27e` e `051eb42132fd`, `no_agent=true`, habilitados, stdout sanitizado para a origem, falha técnica local. Início físico 22:58:50 ET e espera sem lane até 00:00 SP. Agendas globais expandidas por oito datas; zero colisão operacional não baseline, baselines infra inevitáveis auditadas, lane exclusiva da conta adquirida só na execução.
+- Controle: pre-read por ID, budget e hierarquia congelados, fsync in-flight, POST de status único e GET final; nenhuma alteração de filhos, mídia, UTMs, estratégia, budget, billing ou crons recorrentes. Datas Meta atualizadas com readback estável; PREP sem habilitar ações; cadeia de criação e ativação do D1 separada e validada pelo guard real.
+- Validação: 12 testes aprovados, dry-runs live dos dois lotes e Diário/Intraday sem ações/postagens aprovados; reinício não alega reset técnico do aprendizado Meta. Skill `direct-traffic-vehicle-finance-operations/references/operational-d1-restart.md` atualizada e relida.
+- Pendência isolada: C32 (`120250956477790632`) confirmada `DELETED` e nenhum alvo vivo com wrapper exato encontrado. Rodolfo foi consultado sobre a campanha pretendida; não recriar/duplicar nem inventar reativação. Checkpoint `cpv13-c41-c42-c40-c32-d1-20261017` preserva a retomada.
+
 ## Growth vigente — leitor externo pós-resposta, fila PC1 e 10s (2026-10-14)
 
 - Rodolfo reafirmou na mensagem `1559969789164920903`: o pedido não muda até o final; só depois vem o acompanhamento autorizado. Fonte única schema 3: `data/ares/meta-ads/policies/direct-traffic-landing-followup.json`, agora `ACTIVE_FOR_NEW_REQUESTS`. O hold técnico anterior do Ares foi encerrado por validação do gatilho externo, não por nova aprovação exigida ao operador.

@@ -23,7 +23,18 @@ def main():
         d=json.loads(row['detail'])
         if d.get('round_id')!=round_id:continue
         old=json.loads(Path(d['evidence_file']).read_text());proof=old['evidence']
-        if old['result']!='ERROR' or proof.get('normal_opening',{}).get('url_submission_attempted') is not False or proof.get('tab_closed_verified') is not True:return dict(state='REPLAY_ALREADY_RECORDED',result=d['result'],evidence_file=d['evidence_file'])
+        safe_no_navigation=proof.get('normal_opening',{}).get('url_submission_attempted') is False
+        repaired_misdirection=False
+        if not safe_no_navigation and old['result']=='ERROR' and proof.get('tab_closed_verified') is True:
+            from ares_campaign_v3.landing_rewarded import delivered_point,point_inside
+            point=delivered_point(proof.get('gate_click_result') or {});bounds=(proof.get('mobile_emulation') or {}).get('viewport_bounds')
+            outside=point is not None and bounds and not point_inside(point,bounds)
+            no_reward=bool(proof.get('rewarded_trace')) and all(not x.get('rewarded') and not x.get('article') for x in proof['rewarded_trace'])
+            records=[json.loads(x['detail']) for x in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_misdirected_input_repair'",(s['job'],))]
+            repair=next((x for x in records if x.get('round_id')==round_id and x.get('failed_evidence_file')==d['evidence_file']),None)
+            if outside and no_reward and repair and 'OK' in Path(repair['tests_log']).read_text():
+                core.validate_closure(proof);repaired_misdirection=True
+        if old['result']!='ERROR' or proof.get('tab_closed_verified') is not True or not (safe_no_navigation or repaired_misdirection):return dict(state='REPLAY_ALREADY_RECORDED',result=d['result'],evidence_file=d['evidence_file'])
         previous.append(d)
     starts=sum(json.loads(r['detail']).get('round_id')==round_id for r in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_started'",(s['job'],)))
     if starts!=len(previous):raise ValueError('existing replay needs reconciliation; no unproven second visit')
