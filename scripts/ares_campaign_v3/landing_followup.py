@@ -24,7 +24,7 @@ BASE = Path('/root/mgs-agent')
 ROOT = BASE / 'data/ares/meta-ads/landing-followup'
 INCIDENT_THREAD = '1559932317861158993'
 MIN_VISIBLE_SECONDS = 10
-SUCCESS = 'Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 10 segundos em cada uma.'
+SUCCESS = 'Todas as landing pages deste pedido foram abertas em modo mobile, com as abas abertas entre 20 e 30 segundos e anúncios identificados.'
 TERMINAL = {'COMPLETE', 'COMPLETE_PAUSED', 'COMPLETE_FUTURE_ACTIVE', 'COMPLETED'}
 
 
@@ -717,7 +717,7 @@ def worker_prompt(key,owner,idx,job):
             'Preparar TODOS os destinos reais antes de qualquer input no PC1; preservar queries, acrescentar somente nocache aprovado, aplicar gate MGS. '
             'O scope congelado e os pedidos sao imutaveis. Reutilizar prepared_batch se completo; se faltar mapeamento, resolver por fonte canonica/read-only e salvar UM manifest {items:[{job,index,url,mapping_source,destination_count:1}]} com exatamente TODOS os pendentes. Nao inventar slug nem omitir destinos A/B distintos; evidencia incompleta deve ser resolvida antes de navegar. '
             'Usar o Python real do Hermes para scripts/ares-direct-traffic-batch-observe.py --scope '+job['batch_scope_path']+' --owner '+owner+' --pc1-session-id "$HERMES_SESSION_ID" [--manifest <mapa-completo>]. '
-            'Um unico executor serial percorre os links, sem outro turno de modelo por URL e sem serie screenshots/galeria. ABA NOVA NORMAL por tentativa; identificar anuncio, rolar,10s,fechar/verificar,registrar e seguir. '
+            'Um unico executor serial percorre os links, sem outro turno de modelo por URL e sem serie screenshots/galeria. ABA NOVA NORMAL MOBILE por tentativa; preset nativo verificado antes da navegacao; rolar,manter aba20-30s,capturar frame final,fechar/verificar e revisar o frame sem prolongar a visita. '
             'O core e compartilhado com o CLI individual; backend so libera ao final do lote. Durante as visitas nao programar, investigar ou redigir. '
             'Executar o comando com stdout/stderr locais. Se usar terminal em background, notify=false; acompanhar via process_manage ate terminar, sem publicar notificacao crua e sem encerrar com processo vivo. '
             'Ausencias seguem3iniciais+1final; ao terminar a rodada, esperar60s sem ocupar PC1 e fazer1recuperacao automatica dos ainda sem anuncio; depois REVIEW_REQUIRED sem loop infinito. O prazo e o historico sao persistidos pelo controlador. '

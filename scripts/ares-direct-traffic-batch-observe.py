@@ -7,6 +7,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from ares_campaign_v3 import landing_followup as core
 from ares_campaign_v3 import landing_batch as batch
 from ares_campaign_v3.landing_lean import observe_prepared,observation_url,VISUAL_PROMPT
+from ares_campaign_v3.landing_mobile import MOBILE_PROMPT
 from ares_campaign_v3.landing_reliability import run_directory
 
 
@@ -42,13 +43,16 @@ def main():
         shot=sampler.capture_screen(ct,a.pc1_session_id)
         if not shot.get('screenshot_path'):raise ValueError('minimal visual read missing')
         return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
+    def capture_visual():return sampler.capture_screen(ct,a.pc1_session_id)
+    def review_visual(shot):return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
+    def read_mobile():return asyncio.run(vision_analyze_tool(capture_visual()['screenshot_path'],MOBILE_PROMPT))
     def execute(item,attempt):
         nonlocal safe
         directory=run_directory(q,a.owner,item['job'],item['index'],attempt);directory.mkdir(parents=True,exist_ok=True,mode=0o700)
         def save_open(value):
             (directory/'normal-open.json').write_text(json.dumps(value,ensure_ascii=False,indent=2))
         safe=False
-        result,e=observe_prepared(call,read_visual,observation_url(item['url']),item['mapping_source'],on_owned=save_open)
+        result,e=observe_prepared(call,read_visual,observation_url(item['url']),item['mapping_source'],on_owned=save_open,read_mobile=read_mobile,capture_visual=capture_visual,review_visual=review_visual)
         safe=e.get('tab_closed_verified') is True or (e.get('no_tab_opened') is True and e.get('browser_inputs_zero_verified') is True)
         (directory/'lean-result.json').write_text(json.dumps({'result':result,'evidence':e,'batch_scope':scope['id']},ensure_ascii=False,indent=2))
         return result,e

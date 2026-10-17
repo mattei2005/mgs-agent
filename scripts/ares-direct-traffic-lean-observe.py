@@ -6,6 +6,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from ares_campaign_v3 import landing_followup as core
 from ares_campaign_v3.landing_lean import observe_prepared,observation_url,tracking_query_matches,VISUAL_PROMPT,lean_enabled
+from ares_campaign_v3.landing_mobile import MOBILE_PROMPT
 from ares_campaign_v3.landing_reliability import run_directory
 
 def main():
@@ -34,11 +35,14 @@ def main():
         shot=sampler.capture_screen(ct,a.pc1_session_id)
         if not shot.get('screenshot_path'):raise ValueError('minimal visual read missing')
         return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
+    def capture_visual():return sampler.capture_screen(ct,a.pc1_session_id)
+    def review_visual(shot):return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
+    def read_mobile():return asyncio.run(vision_analyze_tool(capture_visual()['screenshot_path'],MOBILE_PROMPT))
     try:
         lease('acquire');leased=True;q.begin(a.key,a.owner,a.index);j=q.job(a.key)
         directory=run_directory(q,a.owner,a.key,a.index,j['links'][a.index]['attempt']);directory.mkdir(parents=True,exist_ok=True,mode=0o700)
         def persist(value):(directory/'normal-open.json').write_text(json.dumps(value,ensure_ascii=False,indent=2))
-        safe=False;result,e=observe_prepared(call,read_visual,a.url,a.mapping_source,on_owned=persist)
+        safe=False;result,e=observe_prepared(call,read_visual,a.url,a.mapping_source,on_owned=persist,read_mobile=read_mobile,capture_visual=capture_visual,review_visual=review_visual)
         safe=e.get('tab_closed_verified') is True or (e.get('no_tab_opened') is True and e.get('browser_inputs_zero_verified') is True)
         (directory/'lean-result.json').write_text(json.dumps({'result':result,'evidence':e},ensure_ascii=False,indent=2));q.result(a.key,a.owner,a.index,result,e)
         return {'state':q.job(a.key)['state'],'result':result,'screenshot_series':False}

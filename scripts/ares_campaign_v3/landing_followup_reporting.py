@@ -28,6 +28,9 @@ def prepare_item(q,key,idx,result):
     peers=[q.job(k) for k in jobs];counts=Counter(l['state'] for p in peers for l in p['links']);total=sum(counts.values());done=counts.get('PASSED',0)
     payload_link=j['payload']['links'][idx];utm=dict(core.urllib.parse.parse_qsl(core.urllib.parse.urlsplit(payload_link['effective_campaign_url']).query)).get('utm_campaign','')
     label='✅ Anúncio identificado · rolagem ·10 segundos · nova aba normal fechada.' if link['state']=='PASSED' else '↪️ Sem anúncio após3tentativas; retorno ao final da rodada.' if link['state']=='DEFERRED_NO_AD' else '⏳ Ainda sem anúncio; recuperação automática60s após encerrar a rodada.'
+    evidence=json.loads(link['evidence']) if isinstance(link.get('evidence'),str) else (link.get('evidence') or {})
+    if link['state']=='PASSED' and evidence.get('mobile_emulation',{}).get('verified') is True:
+        label=f"✅ Anúncio identificado · mobile · aba aberta {float(evidence['tab_open_seconds']):.1f}s · aba normal fechada."
     pending=sum(counts.get(s,0) for s in ['DEFERRED_NO_AD','COOLDOWN_NO_AD','REVIEW_REQUIRED']);remaining=total-done-pending
     content=f'**Acompanhamento — campanha {utm}**\n{label}\n✅ Com anúncio: **{done}/{total}** · ⏳ Aguardando: **{remaining}** · para retorno/revisão: **{pending}**.'
     thread=core.identifier(cfg.get('thread_id') or core.INCIDENT_THREAD);notice=f'landing-item:{key}:{idx}:{link["attempt"]}:{link["state"]}'

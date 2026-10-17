@@ -88,14 +88,30 @@
     "prepare_all_exact_links_before_first_navigation": true,
     "sequence": [
       "new_normal_tab",
-      "identify_rendered_ad",
+      "verify_native_mobile_preset_before_navigation",
       "scroll",
-      "observe_10_seconds",
+      "keep_tab_open_20_to_30_seconds",
+      "capture_one_final_visual_frame",
       "close_owned_tab",
+      "review_captured_frame_without_extending_tab_residence",
       "next_new_tab"
     ],
     "screenshot_series_required": false,
     "offline_frame_review_required": false,
+    "single_final_frame_analysis_after_close": true,
+    "mobile_effective_at_epoch": 1792250747.737,
+    "mobile_emulation": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "mechanism": "NATIVE_CHROME_DEVTOOLS_DEVICE_TOOLBAR",
+      "device_name": "iPhone 16",
+      "viewport_width": 393,
+      "viewport_height": 852,
+      "orientation": "PORTRAIT",
+      "verify_before_navigation": true,
+      "desktop_fallback": false,
+      "scope": "OWNED_NEW_NORMAL_TAB_ONLY_NO_PROFILE_PROXY_EXTENSION_CHANGES"
+    },
     "minimal_visual_read_allowed_for_actual_ad_detection": true,
     "compact_result_and_owned_closure_required": true,
     "no_code_configuration_or_documentation_while_landing_open": true,
@@ -113,12 +129,26 @@
     "shared_mechanical_core": "ares_campaign_v3.landing_lean.observe_prepared"
   },
   "verify_close_before_next": true,
-  "minimum_visible_seconds": 10,
-  "visible_duration_authority_message_id": "1559964027264962702",
+  "minimum_visible_seconds": 20,
+  "maximum_tab_open_seconds": 30,
+  "duration_semantics": "TAB_RESIDENCE_NOT_CONTINUOUS_AD_VISIBILITY",
+  "tab_residence": {
+    "minimum_seconds": 20,
+    "maximum_seconds": 30,
+    "target_seconds": 22,
+    "authority_message_id": "1561037521234952253",
+    "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+    "measure": "ACTUAL_OPENED_AT_TO_NATIVE_CLOSED_AT",
+    "historical_receipts_unchanged": true
+  },
+  "visible_duration_authority_message_id": "1561037521234952253",
   "visible_duration_supersession": {
-    "previous_seconds": 20,
-    "current_seconds": 10,
-    "authority": "Rodolfo Mattei"
+    "previous_seconds": 10,
+    "current_minimum_seconds": 20,
+    "current_maximum_seconds": 30,
+    "semantics": "TAB_RESIDENCE",
+    "authority": "Rodolfo Mattei",
+    "history_source": "data/ares/meta-ads/audit/landing-mobile-1561037521234952253/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
   },
   "max_attempts_no_ad": 3,
   "no_ad_retry_policy": {
@@ -192,7 +222,7 @@
     "supersedes": "Every accompaniment problem automatically posted to this thread"
   },
   "success_destination": "ORIGINAL_MANAGER_THREAD_ONLY_WHEN_ALL_PASS",
-  "success_message": "Todas as landing pages deste pedido foram abertas, com anúncios visíveis por pelo menos 10 segundos em cada uma.",
+  "success_message": "Todas as landing pages deste pedido foram abertas em modo mobile, com as abas abertas entre 20 e 30 segundos e anúncios identificados.",
   "gam_registration": "NEVER_CLAIM_WITHOUT_SEPARATE_GAM_READBACK",
   "ad_clicks": false,
   "campaign_writes": false,
@@ -247,7 +277,7 @@
     "negative_observation_requires_current_image_and_visual_review": true,
     "technical_expiry_counts_towards_hard_limit": true,
     "capture_max_seconds": 45,
-    "minimum_visible_seconds_unchanged": 10,
+    "legacy_minimum_visible_seconds_superseded": 10,
     "previous_policy_snapshot": "data/ares/meta-ads/audit/landing-followup-1559951763019145247/pc1-reliability-20261015/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
   },
   "previous_observer_policy": "data/ares/meta-ads/audit/landing-continuous-unification-20261016/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json",

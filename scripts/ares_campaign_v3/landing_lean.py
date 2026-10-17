@@ -40,10 +40,17 @@ def typed_url_snapshot(call,target,url):
         if reread<2:time.sleep(.15)
     return snap
 
-def open_normal(call,url,on_owned=lambda p:None):
+def open_normal(call,url,on_owned=lambda p:None,*,configure=None):
     def persist(p):
         p['url']=url;on_owned(p)
     proof=open_blank_normal(call,on_owned=persist);target=proof['target']
+    if configure:
+        proof['mobile_emulation']=configure(target);on_owned(proof)
+        call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
+        out=call(dict(action='key',keys='ctrl+l'))
+        if escalates(out):
+            call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
+            call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
     out=call(dict(action='type',text=url))
     snap=typed_url_snapshot(call,target,url)
     if url not in json.dumps(all_elements(snap),ensure_ascii=False):
@@ -62,14 +69,14 @@ def open_normal(call,url,on_owned=lambda p:None):
         snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
     # Enter acknowledgement precedes the native document replacement. Re-read
     # the same owned tab only; never submit Enter again while loading.
-    for reread in range(6):
+    for reread in range(0 if configure else 6):
         docs=[str(e.get('label','')) for e in all_elements(snap) if e.get('role')=='Document']
         loaded=[x for x in docs if x and x not in ['New Tab','Google New Tab','Search icon','Omnibox Popup'] and not x.startswith(('chrome://','chrome-untrusted://'))]
         if loaded:break
         if reread==5:raise ValueError('Landing navigation not confirmed; technical failure, not NO_AD')
         time.sleep(.3)
         snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
-    proof.update(state='OPENED_NORMAL',opened_at=time.time());on_owned(proof)
+    proof.update(state='NAVIGATION_SUBMITTED' if configure else 'OPENED_NORMAL',opened_at=time.time());on_owned(proof)
     return proof
 
 def close_normal(call,proof):
@@ -106,8 +113,11 @@ def scroll_owned(call,target):
     if out.get('ok') is False or out.get('effect')=='suspected_noop':raise ValueError('Scroll unconfirmed: '+str(out.get('message') or out.get('error') or out.get('code'))[:180])
     return out
 
-def observe_prepared(call,read_visual,url,mapping_source,*,on_owned=lambda p:None,pause=time.sleep,clock=time.time,monotonic=time.monotonic):
+def observe_prepared(call,read_visual,url,mapping_source,*,on_owned=lambda p:None,pause=time.sleep,clock=time.time,monotonic=time.monotonic,read_mobile=None,capture_visual=None,review_visual=None):
     """One bounded mechanical visit. Keeps the backend alive for the next item."""
+    from .landing_mobile import policy,observe_mobile
+    if policy():
+        return observe_mobile(call,url,mapping_source,read_mobile=read_mobile,capture_visual=capture_visual,review_visual=review_visual,on_owned=on_owned,pause=pause,clock=clock,monotonic=monotonic)
     proof=None;result='ERROR';started=monotonic()
     e:dict=dict(observation_mode='LEAN_NORMAL_NEW_TAB',observed_url=url,resolved_landing_url=url,mapping_source=mapping_source)
     def persist(p):
@@ -198,6 +208,11 @@ def validate_lean_observation(e,link,*,negative=False):
     if any(visual.get(k) is not True for k in ['active_normal_chrome','unobstructed','landing_loaded']):raise ValueError('Actual loaded foreground normal landing required')
     expected=not negative
     if visual.get('network_ad_visible') is not expected or e.get('network_ad_confirmed') is not expected or not visual.get('description'):raise ValueError('Actual ad visual decision required')
+    from .landing_mobile import policy,validate_mobile
+    mobile_policy=policy()
+    if mobile_policy and e['opened_at']>=mobile_policy['effective_at_epoch']:
+        validate_mobile(e,mobile_policy)
+        return
     if negative:return
     times=[float(e[k]) for k in ['observation_started_at','observation_ended_at','visible_seconds']]
     if any(not math.isfinite(x) for x in times) or times[2]<10 or times[1]-times[0]<10 or e['closed_at']<times[1] or times[0]<e['opened_at']:raise ValueError('Measured10seconds before closure required')

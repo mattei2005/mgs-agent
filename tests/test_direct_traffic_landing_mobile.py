@@ -1,0 +1,57 @@
+"""OFFLINE fixtures: native mobile setup and bounded residence; no ad evidence."""
+import json,os,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+from ares_campaign_v3 import landing_mobile as mobile
+from ares_campaign_v3 import landing_lean as lean
+
+P=dict(device_name='iPhone 16',viewport_width=393,viewport_height=852,minimum_seconds=20,maximum_seconds=30,target_seconds=22,effective_at_epoch=99)
+M=dict(device_toolbar_enabled=True,device_name='iPhone 16',viewport_width=393,viewport_height=852,viewport_bounds=[600,200,393,852],verified=True,verified_at=90,source='offline_fixture')
+TARGET=dict(pid=1,window_id=2,app_name='chrome.exe')
+
+class MobileTests(unittest.TestCase):
+    def evidence(self):return dict(mobile_emulation=dict(M),opened_at=100,closed_at=125,tab_open_seconds=25,visual_captured_at=122)
+    def test_valid_mobile_and_residence(self):mobile.validate_mobile(self.evidence(),P)
+    def test_reject_short_long_nan(self):
+        for dwell in [10,19.99,30.01,float('nan')]:
+            e=self.evidence();e.update(tab_open_seconds=dwell,closed_at=100+dwell)
+            with self.assertRaises(ValueError):mobile.validate_mobile(e,P)
+    def test_reject_frame_from_other_attempt(self):
+        for t in [90,110,126]:
+            e=self.evidence();e['visual_captured_at']=t
+            with self.assertRaises(ValueError):mobile.validate_mobile(e,P)
+    def test_reject_desktop_or_wrong_dimensions(self):
+        for change in [dict(device_toolbar_enabled=False),dict(device_name='Responsive'),dict(viewport_width=1920),dict(verified=False)]:
+            e=self.evidence();e['mobile_emulation'].update(change)
+            with self.assertRaises(ValueError):mobile.validate_mobile(e,P)
+    def test_mobile_must_precede_navigation(self):
+        e=self.evidence();e['mobile_emulation']['verified_at']=101
+        with self.assertRaises(ValueError):mobile.validate_mobile(e,P)
+    def test_same_residence_for_no_ad_and_pass_and_review_after_close(self):
+        for ad in [False,True]:
+            clock=[100.0];events=[]
+            def pause(n):clock[0]+=n
+            def opening(call,url,persist,configure):
+                configure(TARGET);p=dict(target=TARGET,new_window_created=True,new_tab_created=True,browser_mode='NORMAL',opened_at=clock[0],state='NAVIGATION_SUBMITTED');persist(p);return p
+            def closure(call,proof):events.append('close');clock[0]+=2;return dict(closed_at=clock[0],tab_closed_verified=True,other_tabs_preserved=True)
+            with tempfile.TemporaryDirectory() as tmp:
+                frame=Path(tmp)/'frame.png';frame.write_bytes(b'offline fixture, not an actual ad')
+                def capture():events.append('capture');os.utime(frame,(clock[0],clock[0]));return {'screenshot_path':str(frame)}
+                def review(shot):events.append('review');return dict(success=True,analysis=json.dumps(dict(network_ad_visible=ad,active_normal_chrome=True,unobstructed=True,landing_loaded=True,description='offline fixture only')))
+                with patch.object(mobile,'policy',return_value=P),patch.object(mobile,'configure_mobile',return_value=dict(M)),patch.object(mobile,'scroll_mobile',return_value={'offline':True}),patch.object(lean,'open_normal',side_effect=opening),patch.object(lean,'close_normal',side_effect=closure):
+                    result,e=mobile.observe_mobile(lambda a:None,'https://example.invalid/lp','offline',read_mobile=lambda:None,capture_visual=capture,review_visual=review,on_owned=lambda p:None,pause=pause,clock=lambda:clock[0],monotonic=lambda:clock[0])
+                self.assertEqual(result,'PASS' if ad else 'NO_AD');self.assertEqual(events,['capture','close','review']);self.assertEqual(e['tab_open_seconds'],24);self.assertNotIn('visible_seconds',e)
+    def test_missing_verification_callback_fails_closed(self):
+        with self.assertRaises(ValueError):mobile.configure_mobile(lambda a:None,TARGET,None,P)
+    def test_scroll_mobile_uses_verified_page_not_devtools(self):
+        calls=[]
+        def call(a):
+            calls.append(a)
+            return {'ok':True,'effect':'confirmed','elements':[{'role':'Document','label':'DevTools','index':5,'bounds':[0,100,2560,1200]}]}
+        mobile.scroll_mobile(call,TARGET,M)
+        self.assertEqual(calls[-1]['coordinate'],[796,626]);self.assertNotIn('element',calls[-1])
+    def test_dispatch_requires_new_mobile_path(self):
+        with patch.object(mobile,'policy',return_value=P),patch.object(mobile,'observe_mobile',return_value=('OFFLINE',{})) as runner:
+            self.assertEqual(lean.observe_prepared(None,None,'url','source')[0],'OFFLINE');runner.assert_called_once()
+
+if __name__=='__main__':unittest.main()
