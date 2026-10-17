@@ -28,13 +28,39 @@ def final_start(q,key,idx):return _start(q,key,idx,'finite_final_started')
 def recovery_start(q,key,idx):return _start(q,key,idx,'finite_automatic_recovery_started')
 
 
+def manual_start(q,key,idx):return _start(q,key,idx,'explicit_single_retry_authorized')
+
+
+def authorize_single_retry(q,key,idx,*,authority_message_id,authority_thread_id,not_before):
+    """Operator-scoped single retry; durable authority, no resets or browser input."""
+    import math,re
+    if not re.fullmatch(r'[0-9]{15,20}',str(authority_message_id)) or authority_thread_id!=core.INCIDENT_THREAD:
+        raise ValueError('exact operator message and control thread required')
+    if not math.isfinite(float(not_before)) or float(not_before)<0:raise ValueError('finite deadline required')
+    with q.tx():
+        for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_single_retry_authorized'",(key,)):
+            d=json.loads(row['detail'])
+            if d.get('authority_message_id')==authority_message_id:
+                if d.get('idx')!=idx or d.get('not_before')!=float(not_before):raise ValueError('immutable retry authorization differs')
+                return {'state':'ALREADY_AUTHORIZED','job':key,'idx':idx}
+        link=q.db.execute('SELECT * FROM links WHERE job=? AND idx=?',(key,idx)).fetchone()
+        job=q.job(key)
+        if not link or link['state']!='REVIEW_REQUIRED' or job['state']!='WAITING_HUMAN':raise ValueError('only closed review-required target can be retried')
+        if not closed_latest(q,key,link):raise ValueError('latest exact attempt closure required')
+        q.event(key,'explicit_single_retry_authorized',{'idx':idx,'authority_message_id':authority_message_id,'authority_thread_id':authority_thread_id,'not_before':float(not_before),'maximum_no_ad_attempts':1,'previous_attempt_count_preserved':link['attempt'],'previous_state':link['state']})
+        q.db.execute("UPDATE links SET state='WAIT_RETRY',due=? WHERE job=? AND idx=?",(float(not_before),key,idx))
+        refresh(q,key)
+        return {'state':'SINGLE_RETRY_SCHEDULED','job':key,'idx':idx,'not_before':float(not_before)}
+
+
 def limit(q,key,idx):
+    if manual_start(q,key,idx):return 1
     p=policy()
     return (1 if final_start(q,key,idx) else 3) if p else 2
 
 
 def count(q,key,idx):
-    cutoff=recovery_start(q,key,idx) or final_start(q,key,idx)
+    cutoff=manual_start(q,key,idx) or recovery_start(q,key,idx) or final_start(q,key,idx)
     if cutoff is None:return None
     attempts=set()
     for r in q.db.execute("SELECT seq,detail FROM events WHERE job=? AND seq>? AND kind IN ('observation_result','reconciled_no_ad')",(key,cutoff)):
@@ -44,6 +70,7 @@ def count(q,key,idx):
 
 
 def exhausted_state(q,key,idx):
+    if manual_start(q,key,idx):return 'REVIEW_REQUIRED'
     if recovery_start(q,key,idx):return 'REVIEW_REQUIRED'
     if final_start(q,key,idx):return 'COOLDOWN_NO_AD' if automatic() else 'REVIEW_REQUIRED'
     return 'DEFERRED_NO_AD'

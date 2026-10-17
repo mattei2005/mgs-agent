@@ -20,6 +20,50 @@ def check(state=None, checkpoint=None, **changes):
     return normalized_schedule_proof(state or s, checkpoint or c, **args)
 
 
+def elapsed_fixture():
+    s, c = fixture()
+    s['request'] = {'request_id': 'test', 'start_time': '2026-10-13T00:00:00-04:00',
+                    'budget_usd': '100', 'bid_strategy': 'COCAP', 'bid_usd': '0.85'}
+    s['account'] = {'id': 'act_123', 'timezone_name': 'America/New_York'}
+    s['resolved_request'] = {**s['request'], 'start_now': True,
+        'start_time': s['manifest']['campaigns'][0]['start_time'],
+        'schedule_adjustment': {'requested_start_time': s['request']['start_time'],
+            'resolved_at': '2026-10-13T14:09:38+00:00',
+            'reason': 'EXPLICIT_SAME_ACCOUNT_DAY_ELAPSED', 'intent': 'IMMEDIATE_AFTER_QA'}}
+    return s, c
+
+
+def test_elapsed_same_day_copy_uses_audited_resolved_intent_without_state_mutation():
+    s, c = elapsed_fixture()
+    original = copy.deepcopy((s, c))
+    assert check(s, c)['verified'] is True
+    assert (s, c) == original
+
+
+def test_elapsed_resolution_requires_exact_audit_identity_day_and_scope():
+    for field, value in [('request_id', 'other'), ('budget_usd', '200'),
+                         ('bid_usd', '0.90'), ('start_now', False),
+                         ('start_time', '2026-10-13T10:10:09-04:00')]:
+        s, c = elapsed_fixture()
+        s['resolved_request'][field] = value
+        assert check(s, c) is None
+    for field, value in [('requested_start_time', '2026-10-12T00:00:00-04:00'),
+                         ('resolved_at', '2026-10-14T14:09:38+00:00'),
+                         ('reason', 'OTHER'), ('intent', 'SCHEDULED')]:
+        s, c = elapsed_fixture()
+        s['resolved_request']['schedule_adjustment'][field] = value
+        assert check(s, c) is None
+    s, c = elapsed_fixture()
+    s['request']['start_time'] = s['resolved_request']['schedule_adjustment']['requested_start_time'] = '2026-10-12T00:00:00-04:00'
+    assert check(s, c) is None
+    s, c = elapsed_fixture()
+    s['account']['id'] = 'act_999'
+    assert check(s, c) is None
+    s, c = elapsed_fixture()
+    s.pop('account')
+    assert check(s, c) is None
+
+
 def test_copy_window_normalization_is_proven():
     assert check()['verified'] is True
 

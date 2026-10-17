@@ -1,0 +1,152 @@
+{
+  "result": "NO_AD",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01&nocache",
+    "mapping_source": "Read-only HTTP 200 https://yolokfx.com/quiz/us/sh2-g001/; static config_sha256=b16932a5a26a3b4728e70f3a020e94690efec4b95047b5a382b0dc17c011b6cb; both data-mgs-dq-cta A/B hrefs identical; direct-quiz.js?v=1.2.0 mergeUrl preserves source tracking; context/acquisition.md:59 corroborates destination; mapping-readback.json in same run",
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792249227.956728,
+      "target": {
+        "pid": 18224,
+        "window_id": 15861138,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792249235.9732673,
+      "opened_at": 1792249242.8683114
+    },
+    "opened_at": 1792249242.8683114,
+    "phase_seconds": {
+      "opening": 24.110325941999918,
+      "visual": 10.975621679999676,
+      "closure": 2.7434631969999828,
+      "mechanical_total": 37.829426828999885
+    },
+    "visual": {
+      "network_ad_visible": false,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "description": "The foreground normal Chrome window shows a fully loaded YOLOKFX landing page titled “How to Get Free SHEIN Products.” No distinct rendered network ad creative is visible; the green Store pickup and Home delivery buttons are editorial page elements and do not qualify as ads."
+    },
+    "network_ad_confirmed": false,
+    "ad_description": "The foreground normal Chrome window shows a fully loaded YOLOKFX landing page titled “How to Get Free SHEIN Products.” No distinct rendered network ad creative is visible; the green Store pickup and Home delivery buttons are editorial page elements and do not qualify as ads.",
+    "visual_review": "The foreground normal Chrome window shows a fully loaded YOLOKFX landing page titled “How to Get Free SHEIN Products.” No distinct rendered network ad creative is visible; the green Store pickup and Home delivery buttons are editorial page elements and do not qualify as ads.",
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 15861138,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792249256.5874875,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 15861138,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ]
+  },
+  "batch_scope": "3c64c800ad2a36e0d780d15f15381a2ac78b908b026a3fdc8fd1729bc3a5b4d3"
+}

@@ -80,6 +80,10 @@ python3 scripts/ares-direct-traffic-followup.py reconcile --key <key> --index <i
 
 Não registrar resultado de novo se o runner já o gravou. Antes de `--recovered`, verificar o formato e o suporte do validador para a prova atual; não mesclar um recibo lean com flags legadas de samples para fazê-lo passar.
 
+### Autorizar uma tentativa pontual após revisão
+
+Para novo pedido explícito sobre um único `REVIEW_REQUIRED`, usar `landing_retry_policy.authorize_single_retry(q, key, idx, authority_message_id=..., authority_thread_id=..., not_before=...)`. Resolver ID e timestamp da mensagem humana pelo banco nativo read-only; não inventar IDs. A função exige fechamento da tentativa exata, preserva contador/evidência anteriores, grava autorização imutável e concede somente uma ausência adicional. O deadline é persistido em `links.due`; espera solicitada não ocupa o PC1. O consumidor existente pode executar quando vencer; se for foreground, fazer claim normal e conferir a chave antes de chamar o CLI lean. Repetir a mesma autorização é idempotente, não concede outra visita. Não usar `retry-now`, zerar contador ou editar estados diretamente para contornar a revisão. Depois conferir resultado, consolidado, avisos e checkpoint. Teste: `test_direct_traffic_landing_manual_retry.py` cobre deadline, histórico, idempotência, ausência única, PASS e rejeição de alvo/fechamento/autoridade inválidos.
+
 ### Escolher a prova certa
 
 1. Construir o caminho pela rodada, job, índice, owner e número da tentativa corrente.

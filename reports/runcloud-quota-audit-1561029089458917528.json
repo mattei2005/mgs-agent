@@ -1,0 +1,75 @@
+{
+  "id": "RUNCLOUD-QUOTA-1561029089458917528",
+  "authorization_message_id": "1561029089458917528",
+  "source_thread_id": "1561025799199522987",
+  "created_at_utc": "2026-10-17T14:57:53+00:00",
+  "outcome": "Quota-control fix deployed and exercised; provider monitoring still unavailable until quota returns; normal-cadence change awaits owner decision",
+  "scope_preserved": {
+    "server_ids": ["290075", "288158", "310255"],
+    "cron": "13,28,43,58 * * * *",
+    "stagger_seconds": 35,
+    "health_cadence_minutes": 15,
+    "backup_cadence_seconds": 3600,
+    "billing_changed": false,
+    "credentials_changed": false,
+    "server_mutations": false,
+    "restarts": false,
+    "deletions": false
+  },
+  "consumer_discovery": {
+    "account_api_consumers_found": ["scripts/monitor-runcloud.py", "scripts/runcloud-inventory.sh", "scripts/mgs-router-audit-destination-controlplane.py", "apps/finance-system/deploy/runcloud_ops.py"],
+    "direct_periodic_binding_found": "monitor-runcloud.py: one root cron entry; no other direct consumer references in active Hermes jobs, /etc/cron.d or systemd unit files",
+    "exclusive_attribution": "Not proven: provider account-wide history and external consumers were not available",
+    "archive_cycles_parsed": 848,
+    "archive_request_attempts": 20379,
+    "archive_cycles_reporting_http_429": 255,
+    "measurement_limit": "Request attempts emitted by local logs across retained archives, not successful provider-billed calls or a single billing-period total"
+  },
+  "structural_budget": {
+    "nominal_health_calls_per_cycle": 9,
+    "healthy_full_cycle_observed_calls": 108,
+    "active_backup_instances_observed": 93,
+    "nominal_current_30_day_calls": 97200,
+    "nominal_current_31_day_calls": 100440,
+    "monthly_quota": 10000,
+    "projection_limit": "Nominal healthy workload projection from current cadence and observed full-cycle size; retries, other consumers and inventory growth are additional"
+  },
+  "changes": {
+    "script": "/root/mgs-agent/scripts/monitor-runcloud.py",
+    "script_sha256": "0cfb300abd813480ab8cb79f94ed47d2492c8c75c9f67ec89cbb8f90f79014ce",
+    "state_control": "api_control stores kind/retry_at/observed_at/HTTP and known rate-limit fields only",
+    "behavior": ["First HTTP429 ends the entire API collection without retrying other endpoints", "Honor later valid provider Retry-After seconds/HTTP-date and absolute reset header without truncating the wait", "Subsequent blocked runs skip both API calls and the RunCloud credential lookup", "Preserve unknown server/backup observations, existing incidents, original backup-check timestamp and outbox", "Retry after the provider deadline; clear cooldown only on an actual successful HTTP/JSON response; full monitoring recovery still requires complete collection"],
+    "fallback_without_valid_headers": {"monthly_seconds": 86400, "transient_seconds": 60},
+    "rollback_source": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-quota-1561029089458917528/monitor-runcloud.py.before"
+  },
+  "validation": {
+    "test_first": "12 expected regression failures before implementation; additional infinite-deadline failure reproduced before fix",
+    "quota_tests_passed": 16,
+    "original_tests_passed": 13,
+    "total_tests_passed": 29,
+    "first_production_run": {"api_calls": 1, "returncode": 1, "status": "deferred_quota"},
+    "second_production_run": {"api_calls": 0, "returncode": 1, "status": "deferred_quota", "observed_subprocesses": ["logrotate"], "observed_network_requests": 0},
+    "dry_run": {"returncode": 0, "api_calls": 0, "production_state_unchanged": true},
+    "exit_status_semantics": "Apply deliberately remains nonzero while provider monitoring is unavailable; no false success or recovery",
+    "cron_config_and_validated_script_comparison": "passed",
+    "scheduled_cycle": {"state_last_check_utc": "2026-10-17T14:58:36.514667+00:00", "status": "deferred_quota", "api_calls": 0, "events": 0, "sent": []},
+    "live_api_recovery": "Not claimed; only controlled fixtures exercised future recovery"
+  },
+  "provider_block": {
+    "message": "Monthly API quota limit exceeded.",
+    "limit": 10000,
+    "remaining": 0,
+    "reset_at_utc": "2026-11-11T18:40:05+00:00",
+    "retry_at": 1794422405.0
+  },
+  "proposal_not_applied": {
+    "health_cadence_hours": 2,
+    "backup_inventory_cadence_hours": 24,
+    "nominal_calls_31_days": 6417,
+    "remaining_nominal_headroom": 3583,
+    "coverage_impact": "Health detection may wait up to two hours instead of fifteen minutes; backup status is checked daily instead of hourly. Existing backup-age threshold remains separate and unchanged.",
+    "gate": "Rodolfo must explicitly approve coverage/frequency before scheduler/config changes; re-audit global schedule then"
+  },
+  "evidence_root": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-quota-1561029089458917528",
+  "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md"
+}

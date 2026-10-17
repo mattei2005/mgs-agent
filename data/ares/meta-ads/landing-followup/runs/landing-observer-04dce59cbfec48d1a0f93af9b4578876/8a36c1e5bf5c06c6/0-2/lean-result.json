@@ -1,0 +1,152 @@
+{
+  "result": "NO_AD",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c137&utm_adgroup=b01fb01c137g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c137&utm_adgroup=b01fb01c137g01&nocache",
+    "mapping_source": "Read-only HTTP GET https://yolokfx.com/quiz/us/sh2-g002/ returned 200 with User-Agent Mozilla/5.0; anchors classes mgs-dq-cta-a and mgs-dq-cta-b both href=https://yolokfx.com/rec-us-app-shein-circle-of-style/. Matches work/mavroa-shein-es-20260916/yolokfx-landings.json id=yolokfx-us-g002 destination_a_url=destination_b_url, active=1. Original campaign query preserved verbatim; observer adds approved bare nocache.",
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c137&utm_adgroup=b01fb01c137g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792248896.6973057,
+      "target": {
+        "pid": 18224,
+        "window_id": 9962934,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792248904.8409522,
+      "opened_at": 1792248912.03843
+    },
+    "opened_at": 1792248912.03843,
+    "phase_seconds": {
+      "opening": 16.235297518999914,
+      "visual": 8.966445730999794,
+      "closure": 2.979195291999986,
+      "mechanical_total": 28.180955122999876
+    },
+    "visual": {
+      "network_ad_visible": false,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "description": "No real rendered network ad is visible. The loaded YOLOKFX landing page shows editorial content about getting free SHEIN products and green Store pickup/Home delivery buttons, which are not qualifying ad creative."
+    },
+    "network_ad_confirmed": false,
+    "ad_description": "No real rendered network ad is visible. The loaded YOLOKFX landing page shows editorial content about getting free SHEIN products and green Store pickup/Home delivery buttons, which are not qualifying ad creative.",
+    "visual_review": "No real rendered network ad is visible. The loaded YOLOKFX landing page shows editorial content about getting free SHEIN products and green Store pickup/Home delivery buttons, which are not qualifying ad creative.",
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 9962934,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792248923.9841301,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 9962934,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ]
+  },
+  "batch_scope": "e38a88b97807f1949ccd5dcb0be02ab5568d4c20b1d2d4d01a23d882104aaaeb"
+}

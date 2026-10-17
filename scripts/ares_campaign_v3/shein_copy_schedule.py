@@ -25,8 +25,30 @@ def normalized_schedule_proof(state, checkpoint, *, request_id, account_id, camp
     """Pure validator; None means original exact schedule gate still fails."""
     try:
         request = state.get('request') or {}
-        if request.get('request_id') != request_id or request.get('start_now') is not True:
+        if request.get('request_id') != request_id:
             return None
+        if request.get('start_now') is not True:
+            # Same-day elapsed schedules preserve the literal human request.
+            # Accept only its audited, scope-identical resolved NOW intent.
+            resolved = state.get('resolved_request') or {}
+            adjustment = resolved.get('schedule_adjustment') or {}
+            account = state.get('account') or {}
+            if (resolved.get('start_now') is not True
+                    or any(resolved.get(k) != v for k, v in request.items() if k != 'start_time')
+                    or adjustment.get('requested_start_time') != request.get('start_time')
+                    or adjustment.get('reason') != 'EXPLICIT_SAME_ACCOUNT_DAY_ELAPSED'
+                    or adjustment.get('intent') != 'IMMEDIATE_AFTER_QA'
+                    or account.get('id') != 'act_' + str(account_id)
+                    or not account.get('timezone_name')
+                    or _instant(resolved.get('start_time')) != _instant(expected)):
+                return None
+            from zoneinfo import ZoneInfo
+            zone = ZoneInfo(account['timezone_name'])
+            requested = _instant(request['start_time'])
+            resolved_at = _instant(adjustment['resolved_at'])
+            if (not requested <= resolved_at <= _instant(expected)
+                    or requested.astimezone(zone).date() != resolved_at.astimezone(zone).date()):
+                return None
         if str(checkpoint.get('account_id')) != str(account_id) or checkpoint.get('status') != 'COMPLETE':
             return None
         shells = [c for c in state['manifest']['campaigns'] if c.get('idempotency_key') == idempotency_key]

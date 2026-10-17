@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """RunCloud read-only monitor. No remote mutation; explicit approved targets."""
-import argparse, copy, fcntl, hashlib, json, os, subprocess, sys, time
+import argparse, copy, fcntl, hashlib, json, math, os, subprocess, sys, time
 import urllib.error, urllib.request
+from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone
 from pathlib import Path
 BASE=Path('/root/mgs-agent')
@@ -24,9 +25,42 @@ def fresh_state(): return {'schema':1,'incidents':{},'outbox':[],'last_check':No
 
 class APIError(Exception):
     definitely_rejected=False
+
+def cooldown_active(control, now):
+    deadline=control.get('retry_at')
+    return isinstance(deadline,(int,float)) and not isinstance(deadline,bool) and math.isfinite(deadline) and deadline>now
+
+def quota_control(error, now):
+    """Persist only known rate-limit fields, never arbitrary response bodies."""
+    try: monthly=json.loads(error.read(4096)).get('message')=='Monthly API quota limit exceeded.'
+    except (ValueError,AttributeError): monthly=False
+    dates=[]
+    retry=error.headers.get('Retry-After','')
+    try: dates.append(now+max(0,float(retry)))
+    except (ValueError,TypeError):
+        try: dates.append(parsedate_to_datetime(retry).timestamp())
+        except (ValueError,TypeError,OverflowError): pass
+    try: dates.append(float(error.headers.get('X-RateLimit-Reset','')))
+    except (ValueError,TypeError): pass
+    deadline=max([x for x in dates if math.isfinite(x) and now<x<253402300799],default=now+(86400 if monthly else 60))
+    result={'kind':'monthly_quota' if monthly else 'rate_limit','retry_at':deadline,'observed_at':now,'http':429}
+    for key,header in [('limit','X-RateLimit-Limit'),('remaining','X-RateLimit-Remaining')]:
+        try: result[key]=int(error.headers[header])
+        except (ValueError,TypeError,KeyError): pass
+    return result
+
+def deferred_collection(control, calls=0):
+    monthly=control.get('kind')=='monthly_quota'
+    until=datetime.fromtimestamp(control['retry_at'],UTC).isoformat()
+    detail=('Cota mensal da API RunCloud esgotada.' if monthly else 'API RunCloud limitou consultas (HTTP 429).')+' Coleta suspensa até '+until+'; servidores e backups sem observação nova, não considerados saudáveis.'
+    return {'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':detail,'confirmed':True}}, {'servers':[],'backups':None,'api_errors':['monthly_quota_exhausted' if monthly else 'rate_limit_backoff'],'api_calls':calls,'status':'deferred_quota' if monthly else 'deferred_rate_limit','retry_at':control['retry_at']}
+
 class API:
-    def __init__(self,token): self.token=token; self.last=0; self.calls=0; self.failures=0
+    def __init__(self,token,control=None):
+        self.token=token; self.last=0; self.calls=0; self.failures=0
+        self.control=control if control is not None else {}
     def get(self,path):
+        if cooldown_active(self.control,time.time()): raise APIError('RunCloud API cooldown active')
         reason='Request failed'
         for attempt in range(2):
             time.sleep(max(0,1.3-(time.monotonic()-self.last)))
@@ -34,8 +68,14 @@ class API:
             req=urllib.request.Request('https://manage.runcloud.io/api/v3'+path,headers={'Authorization':'Bearer '+self.token,'Accept':'application/json','User-Agent':'MGS-RunCloud-Monitor/1.0'})
             try:
                 with urllib.request.urlopen(req,timeout=20) as r: value=json.load(r)
-                self.failures=0; return value
+                self.failures=0
+                if self.control: self.control.clear()
+                return value
             except urllib.error.HTTPError as e:
+                if e.code==429:
+                    self.control.clear();self.control.update(quota_control(e,time.time()));e.close()
+                    self.failures+=1
+                    raise APIError('RunCloud '+self.control['kind']+'; retry deferred') from None
                 reason='HTTP '+str(e.code); delay=min(30,float(e.headers.get('Retry-After','2')) if e.headers.get('Retry-After','2').replace('.','',1).isdigit() else 2)
                 e.close()
                 if e.code in (401,403): break
@@ -67,6 +107,8 @@ def disk_observation(h):
     return severity,f'Disco {pct:.1f}% ocupado; livre {free/1024:.1f} GiB (unidade API MB).'
 
 def collect(api,cfg,state,now,force_backups=False):
+    control=getattr(api,'control',{})
+    if cooldown_active(control,now): return deferred_collection(control,getattr(api,'calls',0))
     observations={}; errors=[]; summary=[]
     def put(key,server,severity,detail,confirmed=False):
         observations[key]={'server':server,'severity':severity,'detail':detail,'confirmed':confirmed}
@@ -96,6 +138,7 @@ def collect(api,cfg,state,now,force_backups=False):
             summary.append({'server':name,'online':True,'disk_pct':round(100*float(h['usedDiskSpace'])/float(h['totalDiskSpace']),2)})
         except (APIError,ValueError,KeyError,TypeError) as e:
             errors.append(str(e) if isinstance(e,APIError) else 'Invalid health schema '+sid)
+        if cooldown_active(control,time.time()): return deferred_collection(control,getattr(api,'calls',0))
         if getattr(api,'failures',0)>=5: break
     backup_due=force_backups or now-state.get('last_backup_check',0)>=3600
     backup_summary=None
@@ -118,9 +161,11 @@ def collect(api,cfg,state,now,force_backups=False):
                     backup_summary['checked']+=1; backup_summary['completed_latest']+=int(latest.get('status')=='COMPLETED')
                 except (APIError,ValueError,KeyError,TypeError) as e:
                     all_ok=False; errors.append(str(e) if isinstance(e,APIError) else 'Invalid snapshot schema '+bid)
+                if cooldown_active(control,time.time()): return deferred_collection(control,getattr(api,'calls',0))
                 if getattr(api,'failures',0)>=5: all_ok=False; break
             if all_ok: state['last_backup_check']=now
         except (APIError,KeyError,TypeError) as e: errors.append(str(e) if isinstance(e,APIError) else 'Invalid backups schema')
+    if cooldown_active(control,time.time()): return deferred_collection(control,getattr(api,'calls',0))
     put('monitor:api','Monitor RunCloud',2 if errors else 0,'; '.join(errors)[:850] if errors else 'Coleta API íntegra.',True)
     return observations,{'servers':summary,'backups':backup_summary,'api_errors':errors,'api_calls':getattr(api,'calls',0)}
 
@@ -212,10 +257,13 @@ def main():
         rotation=subprocess.run(['/usr/sbin/logrotate','--state',str(BASE/'data/runcloud-logrotate.status'),str(BASE/'config/runcloud-logrotate.conf')],capture_output=True,timeout=15)
         if rotation.returncode: raise APIError('Local log rotation failed; exit '+str(rotation.returncode))
     load_env(BASE/'.env');load_env('/root/.hermes/profiles/zeus/.env')
-    r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
-    if r.returncode or not r.stdout.strip():
-        observations={'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':'Credencial RunCloud indisponível no 1Password; valor/erro bruto omitido.','confirmed':True}};summary={'api_errors':['1Password credential unavailable']}
-    else: observations,summary=collect(API(r.stdout.strip()),cfg,state,now,args.force_backups)
+    control=state.setdefault('api_control',{})
+    if cooldown_active(control,now): observations,summary=deferred_collection(control)
+    else:
+        r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
+        if r.returncode or not r.stdout.strip():
+            observations={'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':'Credencial RunCloud indisponível no 1Password; valor/erro bruto omitido.','confirmed':True}};summary={'api_errors':['1Password credential unavailable']}
+        else: observations,summary=collect(API(r.stdout.strip(),control),cfg,state,now,args.force_backups)
     events=transitions(state,observations,now); state['last_check']=datetime.now(UTC).isoformat();state['last_summary']=summary
     if summary.get('backups') is not None: state['last_backup_summary']=summary['backups']
     if args.dry_run: print(json.dumps({'mode':'dry-run','events':len(events),'summary':summary},ensure_ascii=False));return 0
