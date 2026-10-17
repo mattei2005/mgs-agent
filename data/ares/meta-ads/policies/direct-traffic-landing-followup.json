@@ -112,6 +112,19 @@
       "desktop_fallback": false,
       "scope": "OWNED_NEW_NORMAL_TAB_ONLY_NO_PROFILE_PROXY_EXTENSION_CHANGES"
     },
+    "rewarded_gate": {
+      "enabled": true,
+      "authority_message_id": "1561047502944477287",
+      "effective_at_epoch": 1792253127.562,
+      "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+      "maximum_gate_clicks": 1,
+      "maximum_wait_seconds": 180,
+      "observation_target_seconds": 25,
+      "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "ad_creative_clicks": false,
+      "advertiser_link_clicks": false,
+      "wait_without_repeated_cta": true
+    },
     "minimal_visual_read_allowed_for_actual_ad_detection": true,
     "compact_result_and_owned_closure_required": true,
     "no_code_configuration_or_documentation_while_landing_open": true,
@@ -138,7 +151,9 @@
     "target_seconds": 22,
     "authority_message_id": "1561037521234952253",
     "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
-    "measure": "ACTUAL_OPENED_AT_TO_NATIVE_CLOSED_AT",
+    "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+    "rewarded_wait_counted_in_observation": false,
+    "timing_authority_message_id": "1561047502944477287",
     "historical_receipts_unchanged": true
   },
   "visible_duration_authority_message_id": "1561037521234952253",

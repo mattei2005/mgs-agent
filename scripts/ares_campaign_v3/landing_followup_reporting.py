@@ -31,6 +31,8 @@ def prepare_item(q,key,idx,result):
     evidence=json.loads(link['evidence']) if isinstance(link.get('evidence'),str) else (link.get('evidence') or {})
     if link['state']=='PASSED' and evidence.get('mobile_emulation',{}).get('verified') is True:
         label=f"✅ Anúncio identificado · mobile · aba aberta {float(evidence['tab_open_seconds']):.1f}s · aba normal fechada."
+        if evidence.get('article_verified') is True:
+            label=f"✅ Anúncio identificado · mobile · artigo/rolagem · observação {float(evidence['observation_seconds']):.1f}s · aba fechada."
     pending=sum(counts.get(s,0) for s in ['DEFERRED_NO_AD','COOLDOWN_NO_AD','REVIEW_REQUIRED']);remaining=total-done-pending
     content=f'**Acompanhamento — campanha {utm}**\n{label}\n✅ Com anúncio: **{done}/{total}** · ⏳ Aguardando: **{remaining}** · para retorno/revisão: **{pending}**.'
     thread=core.identifier(cfg.get('thread_id') or core.INCIDENT_THREAD);notice=f'landing-item:{key}:{idx}:{link["attempt"]}:{link["state"]}'

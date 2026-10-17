@@ -1911,6 +1911,16 @@
       "updated_at": "2026-10-17T15:58:19+00:00"
     },
     {
+      "agent": "ares",
+      "id": "LANDING-REWARDED-1561047502944477287",
+      "next_step": "Testar em mobile uma vez; não clicar no anúncio/anunciante; medir observação somente após artigo/rolagem",
+      "objective": "Um testeC170: CTA editorial, esperarrewarded/artigo, rolar e observar25s",
+      "source": "discord:message:1561047502944477287",
+      "state": "preparing_bounded_rewarded_qa;no_new_visit;original_pass_preserved",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-17T16:08:12+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "META-APP-B0015-CUTOVER-20260903",
       "next_step": "Operação normal: aceitar as 5 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
@@ -4572,6 +4582,16 @@
     },
     {
       "agent": "ares",
+      "id": "cpv13-c41-c42-c40-c32-d1-20261017",
+      "next_step": "Validar hierarquia e ciclos, preparar requests, testar e confirmar os dois agendamentos",
+      "objective": "Ativar C41/C42 18-10 00:00 SP e C40/C32 19-10 00:00 SP com retorno ao D1 operacional e budgets preservados",
+      "source": "discord:thread:1539832402744975450",
+      "state": "preflight ao vivo e preparação do agendamento determinístico em andamento; nenhum status alterado",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-17T16:09:50+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "cpv13-c45m-2x-immediate-20261008-0900-rodolfo",
       "next_step": "Concluído; monitorar novo D1. Checkpoint anterior de bloqueio supersedido por readback real.",
       "objective": "Duplicação C45M para C46M/C47M, recuperada nos mesmos IDs",
@@ -6352,5 +6372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T15:58:19+00:00"
+  "updated_at": "2026-10-17T16:09:50+00:00"
 }

@@ -13,7 +13,7 @@ def policy():
     if m.get('enabled') is not True:return {}
     d=p.get('tab_residence') or {}
     if (d.get('minimum_seconds'),d.get('maximum_seconds'))!=(20,30) or not 20<=float(d.get('target_seconds',0))<=27:raise ValueError('Explicit20-30s bounded residence required')
-    return dict(m,**d,effective_at_epoch=p['active_observation_route']['mobile_effective_at_epoch'])
+    return dict(m,**d,effective_at_epoch=p['active_observation_route']['mobile_effective_at_epoch'],rewarded_gate=p['active_observation_route'].get('rewarded_gate') or {})
 
 
 def _capture(call,target):return all_elements(call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id'])))
@@ -98,6 +98,9 @@ def verify_omnibox(call,target,url,capture_visual,review_visual):
 
 
 def observe_mobile(call,url,mapping_source,*,read_mobile,capture_visual,review_visual,on_owned,pause=time.sleep,clock=time.time,monotonic=time.monotonic):
+    if (policy().get('rewarded_gate') or {}).get('enabled') is True:
+        from .landing_rewarded import observe_rewarded
+        return observe_rewarded(call,url,mapping_source,read_mobile=read_mobile,capture_visual=capture_visual,review_visual=review_visual,on_owned=on_owned,pause=pause,clock=clock,monotonic=monotonic)
     from .landing_lean import open_normal,close_normal,structured_visual
     p=policy();proof=None;shot=None;result='ERROR';start=monotonic()
     e:dict=dict(observation_mode='LEAN_NORMAL_NEW_TAB',observed_url=url,resolved_landing_url=url,mapping_source=mapping_source,dwell_policy=p,phase_seconds={})
@@ -148,6 +151,14 @@ def validate_mobile(e,p=None):
     p=p or policy()
     mobile=e.get('mobile_emulation') or {}
     if not mobile_matches(mobile,p) or mobile.get('verified') is not True:raise ValueError('Verified native mobile preset required')
+    reward=p.get('rewarded_gate') or {}
+    if reward.get('enabled') is True and e['opened_at']>=reward['effective_at_epoch']:
+        duration=float(e.get('observation_seconds',float('nan')));start=float(e.get('observation_started_at',float('nan')));end=float(e.get('observation_ended_at',float('nan')));frame=float(e.get('visual_captured_at',float('nan')))
+        if any(not math.isfinite(n) for n in [duration,start,end,frame]) or not 20<=duration<=30 or abs(duration-(end-start))>.2:raise ValueError('Actual post-article observation must be20-30seconds')
+        if e.get('article_verified') is not True or e.get('scroll_visual_changed') is not True or start<float(e.get('article_ready_at',float('inf'))):raise ValueError('Article release and actual scroll required before observation clock')
+        if not start+20<=frame<=end+.2 or e['closed_at']<end:raise ValueError('Final article frame/timing differs from this attempt')
+        if mobile.get('verified_at',float('inf'))>e['opened_at']:raise ValueError('Mobile must precede navigation')
+        return
     dwell=float(e.get('tab_open_seconds',float('nan')));actual=float(e['closed_at'])-float(e['opened_at']);frame=float(e.get('visual_captured_at',float('nan')))
     if any(not math.isfinite(x) for x in [dwell,actual,frame]) or not 20<=dwell<=30 or abs(dwell-actual)>.01:raise ValueError('Actual tab residence must be20-30seconds')
     if not e['opened_at']+20<=frame<=e['closed_at']:raise ValueError('Final visual frame must belong to this20-30second visit')

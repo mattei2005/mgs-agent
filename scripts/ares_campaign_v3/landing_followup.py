@@ -591,7 +591,7 @@ def preserve_evidence(e,key,idx,attempt):
     e=json.loads(json.dumps(e))
     destination=Path('/root/.hermes/profiles/ares/artifacts/landing-followup')/key/str(idx)/str(attempt)
     paths=[]
-    for field in ('closed_screenshot','observation_screenshot','current_browser_screenshot'):
+    for field in ('closed_screenshot','observation_screenshot','current_browser_screenshot','gate_screenshot','article_screenshot'):
         if e.get(field):paths.append((e,field))
     paths.extend((x,'screenshot') for x in e.get('samples',[]))
     if paths:destination.mkdir(parents=True,exist_ok=True,mode=0o700)
