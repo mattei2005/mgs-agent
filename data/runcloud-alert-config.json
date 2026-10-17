@@ -4,7 +4,8 @@
   "authorization_message_ids": [
     "1557811389647560865",
     "1557826145578127361",
-    "1561035336010829825"
+    "1561035336010829825",
+    "1561052418089689190"
   ],
   "source_thread_id": "1557806235066044489",
   "schedule": "4 0-23/2 * * *",
@@ -23,7 +24,16 @@
         "nginx",
         "mariadb",
         "httpd"
-      ]
+      ],
+      "ssh": {
+        "host": "162.55.28.178",
+        "user": "zeus",
+        "unit_map": {
+          "nginx": "nginx-rc.service",
+          "mariadb": "mariadb.service",
+          "httpd": "apache2-rc.service"
+        }
+      }
     },
     {
       "id": "288158",
@@ -33,7 +43,17 @@
         "mariadb",
         "httpd",
         "supervisor"
-      ]
+      ],
+      "ssh": {
+        "host": "162.55.28.179",
+        "user": "zeus",
+        "unit_map": {
+          "nginx": "nginx-rc.service",
+          "mariadb": "mariadb.service",
+          "httpd": "apache2-rc.service",
+          "supervisor": "supervisord.service"
+        }
+      }
     },
     {
       "id": "310255",
@@ -43,7 +63,17 @@
         "mariadb",
         "httpd",
         "redis"
-      ]
+      ],
+      "ssh": {
+        "host": "46.4.95.117",
+        "user": "zeus",
+        "unit_map": {
+          "nginx": "nginx-rc.service",
+          "mariadb": "mariadb.service",
+          "httpd": "apache2-rc.service",
+          "redis": "redis-server.service"
+        }
+      }
     }
   ],
   "webapp_servers": {
@@ -173,5 +203,15 @@
     "SSH/security",
     "remote repair/restart"
   ],
-  "rollback": "Restore the exact prior root crontab retained in the task backup; retain script/config/state for evidence, no deletion."
+  "rollback": "Restore the exact prior root crontab retained in the task backup; retain script/config/state for evidence, no deletion.",
+  "health_transport": "ssh",
+  "ssh_key_ref": {
+    "vault": "ghkdcenuzsp57w37nzhxuxnkj4",
+    "vault_label": "MGS Conteúdo",
+    "item_id": "3ml5wa7v7td3r5uvhwgtcx5mnu",
+    "field": "private key",
+    "title": "MGS RunCloud Monitor - SSH Read Only"
+  },
+  "ssh_known_hosts": "/root/.ssh/known_hosts_mgs",
+  "ssh_authorization_message_id": "1561052418089689190"
 }

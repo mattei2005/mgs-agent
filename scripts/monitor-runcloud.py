@@ -52,7 +52,7 @@ def quota_control(error, now):
 def deferred_collection(control, calls=0):
     monthly=control.get('kind')=='monthly_quota'
     until=datetime.fromtimestamp(control['retry_at'],UTC).isoformat()
-    detail=('Cota mensal da API RunCloud esgotada.' if monthly else 'API RunCloud limitou consultas (HTTP 429).')+' Coleta suspensa até '+until+'; servidores e backups sem observação nova, não considerados saudáveis.'
+    detail=('Cota mensal da API RunCloud esgotada.' if monthly else 'API RunCloud limitou consultas (HTTP 429).')+' Consultas pela API suspensas até '+until+'; estado da plataforma/backups sem observação nova. Saúde por SSH, quando habilitada, é independente.'
     return {'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':detail,'confirmed':True}}, {'servers':[],'backups':None,'api_errors':['monthly_quota_exhausted' if monthly else 'rate_limit_backoff'],'api_calls':calls,'status':'deferred_quota' if monthly else 'deferred_rate_limit','retry_at':control['retry_at']}
 
 class API:
@@ -115,7 +115,7 @@ def collect(api,cfg,state,now,force_backups=False):
     observations={}; errors=[]; summary=[]
     def put(key,server,severity,detail,confirmed=False):
         observations[key]={'server':server,'severity':severity,'detail':detail,'confirmed':confirmed}
-    for target in cfg['servers']:
+    for target in ([] if cfg.get('health_transport')=='ssh' else cfg['servers']):
         sid=target['id']; name=target['name']
         try:
             d=api.get('/servers/'+sid)
@@ -171,6 +171,27 @@ def collect(api,cfg,state,now,force_backups=False):
     if cooldown_active(control,time.time()): return deferred_collection(control,getattr(api,'calls',0))
     put('monitor:api','Monitor RunCloud',2 if errors else 0,'; '.join(errors)[:850] if errors else 'Coleta API íntegra.',True)
     return observations,{'servers':summary,'backups':backup_summary,'api_errors':errors,'api_calls':getattr(api,'calls',0)}
+
+def collect_provider(cfg,state,now,force_backups=False):
+    control=state.setdefault('api_control',{})
+    if cooldown_active(control,now): return deferred_collection(control)
+    if cfg.get('health_transport')=='ssh' and not force_backups and now-state.get('last_backup_check',0)<cfg['backup_cadence_seconds']:
+        return {},{'servers':[],'backups':None,'api_errors':[],'api_calls':0,'status':'backup_check_not_due'}
+    r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
+    if r.returncode or not r.stdout.strip():
+        return {'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':'Credencial RunCloud indisponível no 1Password; valor/erro bruto omitido.','confirmed':True}},{'servers':[],'backups':None,'api_errors':['1Password credential unavailable'],'api_calls':0}
+    return collect(API(r.stdout.strip(),control),cfg,state,now,force_backups)
+
+def collect_hybrid(cfg,state,now,force_backups=False,health_collector=None,provider_collector=None):
+    if health_collector is None:
+        sys.path.insert(0,str(Path(__file__).parent))
+        from mgs_runcloud_ssh import collect_health
+        health_collector=collect_health
+    provider_collector=provider_collector or collect_provider
+    health,hs=health_collector(cfg,now)
+    provider,ps=provider_collector(cfg,state,now,force_backups)
+    status='health_error' if hs['ssh_errors'] else 'health_ok_backups_deferred' if ps.get('api_errors') else 'health_ok_backup_check_not_due' if ps.get('status')=='backup_check_not_due' else 'ok'
+    return {**health,**provider},{**ps,'servers':hs['servers'],'health_transport':'ssh','ssh_attempts':hs['ssh_attempts'],'ssh_errors':hs['ssh_errors'],'status':status}
 
 def transitions(state,observations,now):
     events=[]
@@ -260,19 +281,14 @@ def main():
         rotation=subprocess.run(['/usr/sbin/logrotate','--state',str(BASE/'data/runcloud-logrotate.status'),str(BASE/'config/runcloud-logrotate.conf')],capture_output=True,timeout=15)
         if rotation.returncode: raise APIError('Local log rotation failed; exit '+str(rotation.returncode))
     load_env(BASE/'.env');load_env('/root/.hermes/profiles/zeus/.env')
-    control=state.setdefault('api_control',{})
-    if cooldown_active(control,now): observations,summary=deferred_collection(control)
-    else:
-        r=subprocess.run(['op','item','get','RunCloud API - MGS','--vault',os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'),'--fields','label=runcloud_api_key_token','--reveal'],capture_output=True,text=True,timeout=40)
-        if r.returncode or not r.stdout.strip():
-            observations={'monitor:api':{'server':'Monitor RunCloud','severity':2,'detail':'Credencial RunCloud indisponível no 1Password; valor/erro bruto omitido.','confirmed':True}};summary={'api_errors':['1Password credential unavailable']}
-        else: observations,summary=collect(API(r.stdout.strip(),control),cfg,state,now,args.force_backups)
+    if cfg.get('health_transport')=='ssh': observations,summary=collect_hybrid(cfg,state,now,args.force_backups)
+    else: observations,summary=collect_provider(cfg,state,now,args.force_backups)
     events=transitions(state,observations,now); state['last_check']=datetime.now(UTC).isoformat();state['last_summary']=summary
     if summary.get('backups') is not None: state['last_backup_summary']=summary['backups']
     if args.dry_run: print(json.dumps({'mode':'dry-run','events':len(events),'summary':summary},ensure_ascii=False));return 0
     enqueue(state,events,args.state,now,observations)
     sent=deliver(state,args.state,Discord(os.environ['DISCORD_BOT_TOKEN'],cfg['channel_id']))
-    print(json.dumps({'mode':'apply','events':len(events),'sent':sent,'summary':summary},ensure_ascii=False));return 0 if not summary.get('api_errors') else 1
+    print(json.dumps({'mode':'apply','events':len(events),'sent':sent,'summary':summary},ensure_ascii=False));return 0 if not summary.get('api_errors') and not summary.get('ssh_errors') else 1
 if __name__=='__main__':
     try: sys.exit(main())
     except Exception as e:

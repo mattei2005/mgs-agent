@@ -112,6 +112,12 @@ Create the complete master artifact first whenever item-per-record writes may ex
 
 The detailed no-plaintext workflow, Document `uuid` handling, per-item schema, reconciliation, and readback gates are in `references/bulk-sensitive-import.md`.
 
+### SSH key generation, import and same-item recovery
+
+- Use native `op item create --category ssh` for a new generated identity. The CLI does not support importing an existing SSH private key through a generic SSH Key JSON template: it can create an item whose `private_key` is TEXT, then fail all normal reads with `private_key isn't a field`. A create response alone is not validation.
+- For an externally generated key or a malformed typed item, use the official 1Password SDK in an isolated environment, not a downgrade or modification of the agent runtime. Read the exact existing vault/item IDs, preserve the private key in memory, change the existing field to `ItemFieldType.SSHKEY` and put the same item. Verify both the unchanged item ID and public identity. Never create another identity, duplicate item, delete the failed record or rotate an installed key by implication.
+- Export the runtime private key with native `op read 'op://<vault-id>/<item-id>/private key?ssh-format=openssh'`, captured only in process memory. Validate actual OpenSSH parsing and authentication before installation/cutover; do not assume that JSON field storage format is directly usable by SSH.
+
 ### 5. Reconcile failures before retry
 
 After any failed or timed-out mutating command:

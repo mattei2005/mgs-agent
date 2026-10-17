@@ -9,11 +9,12 @@ import sys
 import time
 import unittest
 from unittest.mock import patch
+from typing import Any
 
 MODULE=Path('/root/mgs-agent/scripts/mgs_runcloud_ssh.py')
 REMOTE=Path('/root/mgs-agent/scripts/runcloud-ssh-readonly.py')
 MONITOR=Path('/root/mgs-agent/scripts/monitor-runcloud.py')
-def load(path,name):
+def load(path,name) -> Any:
     if not path.exists(): return None
     spec=importlib.util.spec_from_file_location(name,path)
     assert spec is not None and spec.loader is not None
