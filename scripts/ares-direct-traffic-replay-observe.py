@@ -19,7 +19,7 @@ def main():
     if s.get('payload_digest')!=j['digest']:raise ValueError('immutable original request differs')
     item=validate_mapping(q,s);item['url']=observation_url(item['url']);round_id='mobile-replay:'+s['authority_message_id']
     previous=[]
-    for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_result' ORDER BY seq",(s['job'],)):
+    for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_result' ORDER BY seq DESC",(s['job'],)):
         d=json.loads(row['detail'])
         if d.get('round_id')!=round_id:continue
         old=json.loads(Path(d['evidence_file']).read_text());proof=old['evidence']

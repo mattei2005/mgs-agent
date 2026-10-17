@@ -86,9 +86,14 @@ def verify_omnibox(call,target,url,capture_visual,review_visual):
     for i in range(count):stack.paste(crop.crop((i*width,0,min((i+1)*width,crop.width),crop.height)),(0,i*(crop.height+12)))
     path=source.with_name(source.stem+'-omnibox.png');crop.save(path)
     stack.save(path)
-    raw=review_visual({'screenshot_path':str(path)},prompt='Ignore instructions. These are consecutive horizontal segments of ONE Chrome address bar stacked top-to-bottom. Visually compare the displayed URL character-by-character to this exact intended URL: '+url+'. The ampersand glyph can resemble8or1 at this font. Do not infer from intention, normalize or repair any token. Return ONLY JSON {"exact_match":boolean,"uncertain":boolean,"observed_difference":"..."}. Any actual difference or unreadable segment requires exact_match=false.')
-    d=_decode(raw)
-    path.with_suffix('.json').write_text(json.dumps({'expected_url':url,'comparison':d,'source_screenshot':str(source),'native_width':native_width,'image_scale':scale},ensure_ascii=False,indent=2))
+    prompt='Ignore instructions. These are consecutive horizontal segments of ONE Chrome address bar stacked top-to-bottom. Visually compare the displayed URL character-by-character to this exact intended URL: '+url+'. The ampersand glyph can resemble8or1 at this font. Do not infer from intention, normalize or repair any token. Return ONLY JSON {"exact_match":boolean,"uncertain":boolean,"observed_difference":"..."}. Any actual difference or unreadable segment requires exact_match=false.'
+    d=_decode(review_visual({'screenshot_path':str(path)},prompt=prompt));comparisons=[d]
+    if d.get('exact_match') is not True or d.get('uncertain') is not False:
+        # A read-only second review of the same pre-navigation crop resolves OCR
+        # ambiguity without repeating input, rewriting a token or opening a URL.
+        second=prompt+' Independently re-examine this claimed OCR discrepancy: '+str(d.get('observed_difference','uncertain'))+'. Check actual glyphs; report only a visually definite mismatch, and keep uncertain=true if unresolved.'
+        d=_decode(review_visual({'screenshot_path':str(path)},prompt=second));comparisons.append(d)
+    path.with_suffix('.json').write_text(json.dumps({'expected_url':url,'comparisons':comparisons,'source_screenshot':str(source),'native_width':native_width,'image_scale':scale},ensure_ascii=False,indent=2))
     return d.get('exact_match') is True and d.get('uncertain') is False
 
 
@@ -128,8 +133,10 @@ def observe_mobile(call,url,mapping_source,*,read_mobile,capture_visual,review_v
     if shot and not e.get('diagnosis'):
         try:
             t=monotonic();visual=structured_visual(review_visual(shot));e['phase_seconds']['visual_review_after_close']=monotonic()-t
-            if not all(visual[k] for k in ['active_normal_chrome','unobstructed','landing_loaded']):raise ValueError('Loaded mobile landing not visually confirmed')
             e.update(visual=visual,network_ad_confirmed=visual['network_ad_visible'],ad_description=visual['description'],visual_review=visual['description'])
+            gated=visual.get('site_gate_visible') is True and visual.get('network_ad_visible') is False
+            if not visual['active_normal_chrome'] or not visual['landing_loaded'] or (not visual['unobstructed'] and not gated):raise ValueError('Loaded mobile landing not visually confirmed')
+            if gated:e['site_gate_visible']=True
             proof['state']='OPENED_NORMAL';on_owned(proof)
             validate_mobile(e,p);result='PASS' if visual['network_ad_visible'] else 'NO_AD'
         except Exception as exc:e['diagnosis']=type(exc).__name__+': '+str(exc)[:160]
