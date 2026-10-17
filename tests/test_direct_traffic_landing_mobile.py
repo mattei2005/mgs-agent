@@ -53,5 +53,32 @@ class MobileTests(unittest.TestCase):
     def test_dispatch_requires_new_mobile_path(self):
         with patch.object(mobile,'policy',return_value=P),patch.object(mobile,'observe_mobile',return_value=('OFFLINE',{})) as runner:
             self.assertEqual(lean.observe_prepared(None,None,'url','source')[0],'OFFLINE');runner.assert_called_once()
+    def test_mobile_url_uses_native_value_not_swallowed_typing(self):
+        calls=[]
+        def call(a):
+            calls.append(a);return {'ok':True,'effect':'confirmed','elements':[{'role':'Edit','label':'Address and search bar','index':5,'bounds':[100,50,1800,24]}]}
+        proof=dict(target=TARGET,new_window_created=True,new_tab_created=True,browser_mode='NORMAL')
+        with patch.object(lean,'open_blank_normal',return_value=proof):
+            out=lean.open_normal(call,'https://example.invalid/lp',configure=lambda t:dict(M),verify_url=lambda u,t:True)
+        self.assertEqual(sum(a['action']=='set_value' for a in calls),1);self.assertFalse(any(a['action']=='type' for a in calls));self.assertTrue(out['url_submission_attempted'])
+    def test_unverified_native_value_never_submits(self):
+        calls=[]
+        def call(a):
+            calls.append(a);return {'elements':[{'role':'Edit','label':'Address and search bar','index':5,'bounds':[100,50,1800,24]}]}
+        proof=dict(target=TARGET,new_window_created=True,new_tab_created=True,browser_mode='NORMAL')
+        with patch.object(lean,'open_blank_normal',return_value=proof):
+            with self.assertRaises(ValueError):lean.open_normal(call,'https://example.invalid/lp',configure=lambda t:dict(M),verify_url=lambda u,t:False)
+        self.assertFalse(any(a.get('keys')=='return' for a in calls))
+    def test_omnibox_comparison_rejects_difference_and_uncertainty(self):
+        from PIL import Image
+        es=[dict(role='Edit',label='Address and search bar',index=5,bounds=[170,51,1800,24]),dict(label='Close',bounds=[2514,0,46,40])]
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'offline.png';Image.new('RGB',(2560,1440),color='white').save(path)
+            for match,uncertain,expected in [(True,False,True),(False,False,False),(True,True,False)]:
+                def review(shot,prompt):
+                    self.assertLessEqual(Image.open(shot['screenshot_path']).width,1100)
+                    return dict(success=True,analysis=json.dumps(dict(exact_match=match,uncertain=uncertain,observed_difference='offline fixture')))
+                with patch.object(mobile,'_capture',return_value=es):
+                    self.assertEqual(mobile.verify_omnibox(None,TARGET,'https://example.invalid/lp',lambda:{'screenshot_path':str(path)},review),expected)
 
 if __name__=='__main__':unittest.main()

@@ -46,20 +46,26 @@ def open_normal(call,url,on_owned=lambda p:None,*,configure=None,verify_url=None
     proof=open_blank_normal(call,on_owned=persist);target=proof['target']
     if configure:
         proof['mobile_emulation']=configure(target);on_owned(proof)
+        snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
+        bar=next(e for e in all_elements(snap) if e.get('role')=='Edit' and e.get('label')=='Address and search bar')
+        # With DevTools attached, SendInput type can be swallowed while reporting
+        # success. Native UIA ValuePattern is verified in the composited omnibox.
+        out=call(dict(action='set_value',element=bar['index'],value=url))
+        if verify_url is None or not verify_url(url,target):raise ValueError('Native omnibox URL unverified; do not submit')
         call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
         out=call(dict(action='key',keys='ctrl+l'))
         if escalates(out):
             call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
             call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
-    out=call(dict(action='type',text=url))
-    snap=typed_url_snapshot(call,target,url)
-    typed_ok=url in json.dumps(all_elements(snap),ensure_ascii=False) or (verify_url is not None and verify_url(url,target))
-    if not typed_ok:
-        if not escalates(out):raise ValueError('Typed URL unverified; do not submit')
-        call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
-        call(dict(action='type',text=url,delivery_mode='foreground'))
+    else:
+        out=call(dict(action='type',text=url))
         snap=typed_url_snapshot(call,target,url)
-        if url not in json.dumps(all_elements(snap),ensure_ascii=False) and not (verify_url is not None and verify_url(url,target)):raise ValueError('URL unverified')
+        if url not in json.dumps(all_elements(snap),ensure_ascii=False):
+            if not escalates(out):raise ValueError('Typed URL unverified; do not submit')
+            call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
+            call(dict(action='type',text=url,delivery_mode='foreground'))
+            snap=typed_url_snapshot(call,target,url)
+            if url not in json.dumps(all_elements(snap),ensure_ascii=False):raise ValueError('URL unverified')
     proof['url_submission_attempted']=True;on_owned(proof)
     out=call(dict(action='key',keys='return'))
     snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))

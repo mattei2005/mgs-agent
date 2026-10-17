@@ -26,7 +26,13 @@ def main():
         if old['result']!='ERROR' or proof.get('normal_opening',{}).get('url_submission_attempted') is not False or proof.get('tab_closed_verified') is not True:return dict(state='REPLAY_ALREADY_RECORDED',result=d['result'],evidence_file=d['evidence_file'])
         previous.append(d)
     starts=sum(json.loads(r['detail']).get('round_id')==round_id for r in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_started'",(s['job'],)))
-    if starts!=len(previous) or starts>=3:raise ValueError('existing replay needs reconciliation or technical repair; no unproven second visit')
+    if starts!=len(previous):raise ValueError('existing replay needs reconciliation; no unproven second visit')
+    if starts>=3:
+        repairs=[json.loads(r['detail']) for r in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_technical_repair'",(s['job'],))]
+        repair=next((r for r in repairs if r.get('round_id')==round_id and r.get('after_completed_technical_attempts')==starts),None)
+        if not repair:raise ValueError('three technical failures require verified repair before another blank/navigation attempt')
+        core.validate_closure(json.loads(Path(repair['blank_closure_file']).read_text()))
+        if 'OK' not in Path(repair['tests_log']).read_text():raise ValueError('technical repair regression proof missing')
     if q.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','REPAIRING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone():return {'state':'WAITING_EXISTING_OBSERVER','browser_actions':0}
     sys.path.insert(0,str(Path(shutil.which('hermes')).resolve().parents[2]));from tools.computer_use import tool as ct
     from tools.vision_tools import vision_analyze_tool
