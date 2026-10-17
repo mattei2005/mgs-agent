@@ -1555,7 +1555,7 @@
     },
     {
       "id": "RUNCLOUD-INITIAL-MONITOR-1557826145578127361",
-      "tests_passed": 29,
+      "tests_passed": 34,
       "quota_control_update": {
         "authorization_message_id": "1561029089458917528",
         "source_thread_id": "1561025799199522987",
@@ -1570,7 +1570,7 @@
         "quota_limit": 10000,
         "quota_remaining": 0,
         "provider_reset_at_utc": "2026-11-11T18:40:05+00:00",
-        "cadence_proposal": "NOT APPLIED: health every 2h and backups every 24h; owner coverage decision required"
+        "cadence_proposal": "Historical proposal applied by1561035336010829825; see cadence_update"
       },
       "logrotate_config": "/root/mgs-agent/config/runcloud-logrotate.conf",
       "logrotate_state": "/root/mgs-agent/data/runcloud-logrotate.status",
@@ -1588,9 +1588,9 @@
       "config": "/root/mgs-agent/data/runcloud-alert-config.json",
       "state": "/root/mgs-agent/data/runcloud-alert-state.json",
       "tests": "/root/mgs-agent/tests/test_monitor_runcloud.py",
-      "schedule": "13,28,43,58 * * * *",
+      "schedule": "4 0-23/2 * * *",
       "stagger_seconds": 35,
-      "schedule_exception": "08:28 Eastern GAM intake approved by 1557826145578127361",
+      "schedule_exception": "Former08:28 exception is historical and unused; new eight-day audit has zero operational conflicts",
       "scope": "connection, expected services, disk, active daily backups; no remote mutations",
       "servers": [
         "290075",
@@ -1600,7 +1600,24 @@
       "active_backup_instances_observed": 93,
       "activation_message_id": "1557831995948531785",
       "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md",
-      "updated_at": "2026-10-08T19:11:14.189678+00:00"
+      "updated_at": "2026-10-17T15:25:45.906589+00:00",
+      "script_sha256": "0114be187cb57fc6c26e0b3fca0c26d5ac58f0197aa339054c852b86ff031c7d",
+      "cadence_update": {
+        "authorization_message_id": "1561035336010829825",
+        "schedule": "4 0-23/2 * * *",
+        "health_cadence_seconds": 7200,
+        "backup_status_cadence_seconds": 86400,
+        "backup_execution_changed": false,
+        "backup_max_age_hours": 36,
+        "watchdog_log_tolerance_seconds": 10800,
+        "tests_passed": 34,
+        "eight_day_operational_conflicts": 0,
+        "report": "/root/mgs-agent/reports/runcloud-cadence-1561035336010829825.json",
+        "quota_status": "still_exhausted_zero_requests_during_cooldown",
+        "native_crontab_readback": true,
+        "exact_installed_command_exercised": true,
+        "future_scheduled_tick_observed": false
+      }
     },
     {
       "id": "RUNCLOUD-ALERTS-PREFLIGHT-1557811389647560865",
@@ -46230,7 +46247,7 @@
       "entry": "CRON_TZ=America/New_York"
     },
     {
-      "entry": "13,28,43,58 * * * * /usr/bin/flock -n /var/lock/monitor-runcloud.lock /bin/sh -c '/bin/sleep 35; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-runcloud.py >> /root/mgs-agent/logs/monitor-runcloud.log 2>&1'"
+      "entry": "4 0-23/2 * * * /usr/bin/flock -n /var/lock/monitor-runcloud.lock /bin/sh -c '/bin/sleep 35; /usr/bin/timeout 300s /usr/bin/python3 -B /root/mgs-agent/scripts/monitor-runcloud.py >> /root/mgs-agent/logs/monitor-runcloud.log 2>&1'"
     }
   ],
   "scripts": [
@@ -47466,8 +47483,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
-      "size_bytes": 17638,
-      "modified_at": "2026-10-08T14:53:46-04:00"
+      "size_bytes": 17816,
+      "modified_at": "2026-10-17T15:23:24.398163+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
@@ -47506,8 +47523,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-runcloud.py",
-      "size_bytes": 16509,
-      "modified_at": "2026-10-08T15:19:56-04:00"
+      "size_bytes": 19927,
+      "modified_at": "2026-10-17T15:23:21.814162+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-messenger-token-invalid.py",

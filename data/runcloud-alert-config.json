@@ -3,14 +3,16 @@
   "channel_id": "1557807035544768662",
   "authorization_message_ids": [
     "1557811389647560865",
-    "1557826145578127361"
+    "1557826145578127361",
+    "1561035336010829825"
   ],
   "source_thread_id": "1557806235066044489",
-  "schedule": "13,28,43,58 * * * *",
+  "schedule": "4 0-23/2 * * *",
+  "cadence_authorization_message_id": "1561035336010829825",
   "timezone": "America/New_York",
   "stagger_seconds": 35,
   "backup_max_age_hours": 36,
-  "backup_cadence_seconds": 3600,
+  "backup_cadence_seconds": 86400,
   "snapshot_timezone_assumption": "UTC; 36h threshold provides buffer beyond the observed daily cadence; timestamps with explicit offsets take precedence",
   "phase": "initial_four_alert_families",
   "servers": [
@@ -158,6 +160,8 @@
   },
   "privacy": "Backup alerts use numeric backup ID only; no private domain labels, raw webapp objects or deployment keys. SpazioVPS excluded from MGS initial host scope.",
   "schedule_exception": {
+    "status": "historical_superseded_no_0828_run",
+    "superseded_by_authorization_message_id": "1561035336010829825",
     "approved_by_message_id": "1557826145578127361",
     "operation": "finance_gam_revenue_sync.py --scheduled-intake",
     "time": "08:28 America/New_York",

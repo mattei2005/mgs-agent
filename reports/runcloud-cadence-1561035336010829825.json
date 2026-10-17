@@ -1,0 +1,80 @@
+{
+  "id": "RUNCLOUD-CADENCE-1561035336010829825",
+  "authorization_message_id": "1561035336010829825",
+  "thread_id": "1561025799199522987",
+  "outcome": "Approved two-hour health/daily backup-status inspection installed and exercised; API quota remains exhausted",
+  "supersedes": {
+    "cadence": "15-minute health and hourly backup-status inspection",
+    "prior_audit": "/root/mgs-agent/reports/runcloud-quota-audit-1561029089458917528.json",
+    "historical_0828_exception": "No longer used by the new cadence; financial schedule preserved"
+  },
+  "current_contract": {
+    "cron": "4 0-23/2 * * *",
+    "timezone": "America/New_York",
+    "stagger_seconds": 35,
+    "health_cadence_seconds": 7200,
+    "backup_status_cadence_seconds": 86400,
+    "backup_max_age_hours": 36,
+    "watchdog_log_age_seconds": 10800,
+    "lock": "/var/lock/monitor-runcloud.lock",
+    "timeout_seconds": 300,
+    "backup_execution_changed": false,
+    "financial_crons_changed": false,
+    "billing_changed": false,
+    "credential_changes": false,
+    "restarts": false,
+    "deletions": false
+  },
+  "implementation": {
+    "monitor": "/root/mgs-agent/scripts/monitor-runcloud.py",
+    "monitor_sha256": "0114be187cb57fc6c26e0b3fca0c26d5ac58f0197aa339054c852b86ff031c7d",
+    "collector_fix": "Honor backup_cadence_seconds instead of hardcoded3600; reject invalid cadence values",
+    "watchdog": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+    "watchdog_sha256": "865c51a56b8a7862ba8808b77fac6bc5442a27b235d092034f1361d2743d3efc",
+    "config_sha256": "7b58a4fa89faae07e5f3eb31cb14618cbf38ec495c8fced3cb9d8ed104eba873"
+  },
+  "scheduling_validation": {
+    "civil_dates": 8,
+    "window_start": "2026-10-17T00:00:00-04:00",
+    "window_end": "2026-10-25T00:00:00-04:00",
+    "entries_audited": 94,
+    "expanded_target_ticks": 96,
+    "non_baseline_operational_conflicts": 0,
+    "baseline_collisions": "Four continuous minute watchdogs, memory-capacity monitor, two isolated continuous landing queues; minimum measured baseline contention, unchanged35-second stagger",
+    "canonical_receipt": "/root/mgs-agent/data/runcloud-alert-schedule-validation.json",
+    "native_crontab_syntax_validation": "passed",
+    "exact_crontab_readback": true,
+    "preflight_issue_recovered": "crontab truncated the102-character absolute candidate path; proved live crontab unchanged, then native dry-run and installation passed using relative filename in protected scratch"
+  },
+  "runtime_validation": {
+    "tests_passed": 34,
+    "test_suites": {"original": 13, "quota": 16, "cadence": 5},
+    "test_first": "Daily cadence and watchdog regressions reproduced before implementation",
+    "shell_syntax": "passed",
+    "dry_run_api_calls": 0,
+    "installed_cron_command": "Exercised the exact installed command manually including lock,35-second stagger,timeout and log redirection",
+    "command_readback_utc": "2026-10-17T15:25:45.906589+00:00",
+    "command_exit": 1,
+    "command_status": "deferred_quota",
+    "command_api_calls": 0,
+    "watchdog_target": "OK; age0min, threshold180min; global problems0",
+    "cron_and_three_gateways": "active",
+    "future_scheduled_tick_observed": false,
+    "provider_recovery_claimed": false
+  },
+  "quota": {
+    "monthly_limit": 10000,
+    "remaining": 0,
+    "provider_reset_at_utc": "2026-11-11T18:40:05+00:00",
+    "cooldown_preserved": true,
+    "nominal_monitor_calls_31_days": 6417,
+    "nominal_headroom_before_other_consumers": 3583,
+    "projection_limit": "Healthy nominal workload with the93 observed backup instances; retries, other consumers and inventory growth are additional. This is not a measured billed total."
+  },
+  "continuity": {
+    "checkpoint_id": "RUNCLOUD-QUOTA-1561029089458917528",
+    "configuration": "/root/mgs-agent/data/runcloud-alert-config.json",
+    "procedure": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md",
+    "evidence_and_rollback": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-quota-1561029089458917528"
+  }
+}

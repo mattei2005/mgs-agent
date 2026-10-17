@@ -73,6 +73,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     if script == 'monitor-runcloud.py' and minute == '13,28,43,58' and hour == '*':
         # RunCloud: four cycles, with 35s stagger and bounded hourly backup scan.
         return 60 * 60
+    if script == 'monitor-runcloud.py' and minute == '4' and hour == '0-23/2':
+        # Rodolfo1561035336010829825: two-hour checks plus one-hour grace.
+        return 3 * 3600
     if script == 'monitor-hermes-memory-capacity.py':
         # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
         return 40 * 60

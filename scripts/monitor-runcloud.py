@@ -107,6 +107,9 @@ def disk_observation(h):
     return severity,f'Disco {pct:.1f}% ocupado; livre {free/1024:.1f} GiB (unidade API MB).'
 
 def collect(api,cfg,state,now,force_backups=False):
+    backup_cadence=cfg.get('backup_cadence_seconds',3600)
+    if not isinstance(backup_cadence,int) or isinstance(backup_cadence,bool) or backup_cadence<=0:
+        raise APIError('Invalid backup cadence')
     control=getattr(api,'control',{})
     if cooldown_active(control,now): return deferred_collection(control,getattr(api,'calls',0))
     observations={}; errors=[]; summary=[]
@@ -140,7 +143,7 @@ def collect(api,cfg,state,now,force_backups=False):
             errors.append(str(e) if isinstance(e,APIError) else 'Invalid health schema '+sid)
         if cooldown_active(control,time.time()): return deferred_collection(control,getattr(api,'calls',0))
         if getattr(api,'failures',0)>=5: break
-    backup_due=force_backups or now-state.get('last_backup_check',0)>=3600
+    backup_due=force_backups or now-state.get('last_backup_check',0)>=backup_cadence
     backup_summary=None
     if backup_due and getattr(api,'failures',0)<5:
         try:

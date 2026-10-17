@@ -9649,10 +9649,27 @@
       "kind": "capability",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-RUNCLOUD-MONITOR-CADENCE-1561035336010829825",
+      "title": "Monitor RunCloud inicial: conexao, servicos, disco e backups; canal exclusivo e excecao de agenda autorizada",
+      "updated_at": "2026-10-17T15:27:45+00:00"
+    },
+    {
+      "canonical_key": "infrastructure.runcloud.monitor.initial",
+      "canonical_source": "/root/mgs-agent/data/runcloud-alert-config.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-17T15:27:45+00:00",
+      "id": "MGS-RUNCLOUD-MONITOR-CADENCE-1561035336010829825",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Monitor RunCloud inicial: conexao, servicos, disco e backups; canal exclusivo e excecao de agenda autorizada",
-      "updated_at": "2026-10-08T19:11:12+00:00"
+      "title": "RunCloud: saude2h e status de backups24h; controle persistente de quota; execucao dos backups preservada",
+      "updated_at": "2026-10-17T15:27:45+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
@@ -12556,5 +12573,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-16T22:05:08+00:00"
+  "updated_at": "2026-10-17T15:27:45+00:00"
 }

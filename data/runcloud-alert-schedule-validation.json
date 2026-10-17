@@ -1,52 +1,1244 @@
 {
-  "expr": "13,28,43,58 * * * *",
-  "operational_conflicts": [
-    {
-      "name": "/usr/bin/flock -n /var/lock/mgs-finance-gam-revenue.cron.lock /bin/sh -c '/bin/sleep 17; /usr/bin/timeout 2700s /usr/bin/python3 /root/mgs-agent/apps/finance-system/finan",
-      "source": "root",
-      "overlaps": 8
-    }
-  ],
+  "pass": true,
+  "expr": "4 0-23/2 * * *",
+  "minute": 4,
+  "ticks": 96,
+  "operational_conflicts": [],
   "baseline_collisions": [
     {
-      "name": "flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1",
       "source": "root",
-      "overlaps": 768
+      "name": "monitor_honcho_billing_watch.py",
+      "overlaps": 96
     },
     {
-      "name": "sleep 17 && flock -n /var/lock/monitor_honcho_billing_watch.lock /root/mgs-agent/scripts/monitor_honcho_billing_watch.py >> /root/mgs-agent/logs/monitor-honcho-billing-wa",
       "source": "root",
-      "overlaps": 768
+      "name": "monitor_hermes_pending_writes.py",
+      "overlaps": 96
     },
     {
-      "name": "flock -n /var/lock/monitor_hermes_pending_writes.lock /root/mgs-agent/scripts/monitor_hermes_pending_writes.py >> /root/mgs-agent/logs/monitor-hermes-pending-writes.log 2",
       "source": "root",
-      "overlaps": 768
+      "name": "finalize-hermes-structural-write.py",
+      "overlaps": 96
     },
     {
-      "name": "flock -n /var/lock/finalize-hermes-structural-write.lock /root/mgs-agent/scripts/finalize-hermes-structural-write.py >> /root/mgs-agent/logs/hermes-structural-write-final",
       "source": "root",
-      "overlaps": 768
+      "name": "monitor-hermes-memory-capacity.py",
+      "overlaps": 96
     },
     {
-      "name": "sleep 90 && flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monito",
       "source": "root",
-      "overlaps": 8
+      "name": "hermes-news-explainer-watchdog.py",
+      "overlaps": 96
     },
     {
-      "name": "flock -n /var/lock/hermes_news_explainer_watchdog.lock /root/mgs-agent/scripts/hermes-news-explainer-watchdog.py >> /root/mgs-agent/logs/hermes-news-explainer-watchdog.lo",
-      "source": "root",
-      "overlaps": 768
+      "source": "systemd",
+      "name": "ares-landing-followup.timer",
+      "overlaps": 96
+    },
+    {
+      "source": "systemd",
+      "name": "ares-landing-intake.timer",
+      "overlaps": 96
     }
   ],
-  "baseline_contention": 3848,
-  "ticks": 768,
-  "authorization_message_id": "1557826145578127361",
-  "approved_exception": "finance GAM intake 08:28 Eastern",
+  "baseline_contention": 672,
+  "timezone": "America/New_York",
+  "window_start": "2026-10-17T00:00:00-04:00",
+  "window_end": "2026-10-25T00:00:00-04:00",
+  "civil_dates": 8,
+  "entries_audited": 94,
+  "unknown": [],
+  "timers": [
+    {
+      "unit": "apport-autoreport.timer",
+      "definition": "TimersMonotonic={ OnUnitActiveUSec=3h ; next_elapse=0 }\nTimersMonotonic={ OnStartupUSec=1h ; next_elapse=0 }\nRandomizedDelayUSec=0\nActiveState=inactive\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "apt-daily-upgrade.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 06:00:00 ; next_elapse=Sun 2026-10-18 06:00:00 EDT }\nRandomizedDelayUSec=1h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "apt-daily.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 06,18:00:00 ; next_elapse=Sat 2026-10-17 10:26:30 EDT }\nRandomizedDelayUSec=12h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "ares-landing-followup.timer",
+      "definition": "TimersMonotonic={ OnUnitInactiveUSec=15s ; next_elapse=58min 42.010336s }\nTimersMonotonic={ OnBootUSec=30s ; next_elapse=30s }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "continuous_isolated_landing_queue"
+    },
+    {
+      "unit": "ares-landing-intake.timer",
+      "definition": "TimersMonotonic={ OnUnitInactiveUSec=15s ; next_elapse=58min 35.304492s }\nTimersMonotonic={ OnBootUSec=10s ; next_elapse=10s }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "continuous_isolated_landing_queue"
+    },
+    {
+      "unit": "dpkg-db-backup.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Sun 2026-10-18 00:00:00 EDT }\nRandomizedDelayUSec=3h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "e2scrub_all.timer",
+      "definition": "TimersCalendar={ OnCalendar=Sun *-*-* 03:10:00 ; next_elapse=Sun 2026-10-18 03:10:00 EDT }\nRandomizedDelayUSec=1min\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "fstrim.timer",
+      "definition": "TimersCalendar={ OnCalendar=Mon *-*-* 00:00:00 ; next_elapse=Mon 2026-10-19 00:00:00 EDT }\nRandomizedDelayUSec=1h 40min\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "fwupd-refresh.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* *:00:00 ; next_elapse=Sat 2026-10-17 12:00:00 EDT }\nRandomizedDelayUSec=1h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "logrotate.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Sun 2026-10-18 00:00:00 EDT }\nRandomizedDelayUSec=3h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "man-db.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Sat 2026-10-17 10:26:30 EDT }\nRandomizedDelayUSec=12h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "motd-news.timer",
+      "definition": "TimersMonotonic={ OnStartupUSec=1min ; next_elapse=1min 3.379300s }\nTimersCalendar={ OnCalendar=*-*-* 00,12:00:00 ; next_elapse=Sat 2026-10-17 12:00:00 EDT }\nRandomizedDelayUSec=12h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "phpsessionclean.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* *:09,39:00 ; next_elapse=Sat 2026-10-17 11:39:00 EDT }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "snapd.snap-repair.timer",
+      "definition": "TimersMonotonic={ OnStartupUSec=15min ; next_elapse=0 }\nTimersCalendar={ OnCalendar=*-*-* 05,11,17,23:00:00 ; next_elapse=(null) }\nRandomizedDelayUSec=2h\nActiveState=inactive\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "sysstat-collect.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* *:00/10:00 ; next_elapse=Sat 2026-10-17 11:30:00 EDT }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "sysstat-summary.timer",
+      "definition": "TimersCalendar={ OnCalendar=*-*-* 00:07:00 ; next_elapse=Sun 2026-10-18 00:07:00 EDT }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "systemd-tmpfiles-clean.timer",
+      "definition": "TimersMonotonic={ OnUnitActiveUSec=1d ; next_elapse=1d 15min 6.834741s }\nTimersMonotonic={ OnBootUSec=15min ; next_elapse=15min }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "ua-timer.timer",
+      "definition": "TimersMonotonic={ OnStartupUSec=1min ; next_elapse=1min 3.379300s }\nTimersMonotonic={ OnUnitActiveUSec=6h ; next_elapse=6h 52min 41.235312s }\nRandomizedDelayUSec=1h\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "update-notifier-download.timer",
+      "definition": "TimersMonotonic={ OnUnitActiveUSec=1d ; next_elapse=1d 5min 9.239311s }\nTimersMonotonic={ OnStartupUSec=5min ; next_elapse=5min 3.379300s }\nRandomizedDelayUSec=0\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    },
+    {
+      "unit": "update-notifier-motd.timer",
+      "definition": "TimersCalendar={ OnCalendar=Sun *-*-* 06:00:00 ; next_elapse=Sun 2026-10-18 06:00:00 EDT }\nRandomizedDelayUSec=1w\nActiveState=active\n",
+      "classification": "OS_infrastructure_baseline"
+    }
+  ],
+  "candidate_summary": [
+    {
+      "expr": "0 0-23/2 * * *",
+      "operational_conflicts": 8,
+      "baseline_contention": 1232
+    },
+    {
+      "expr": "1 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "2 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "3 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "4 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "5 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 960
+    },
+    {
+      "expr": "6 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "7 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 769
+    },
+    {
+      "expr": "8 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "9 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 649
+    },
+    {
+      "expr": "10 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 865
+    },
+    {
+      "expr": "11 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 840
+    },
+    {
+      "expr": "12 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 840
+    },
+    {
+      "expr": "13 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "14 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "15 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 1320
+    },
+    {
+      "expr": "16 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "17 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "18 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "19 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 576
+    },
+    {
+      "expr": "20 0-23/2 * * *",
+      "operational_conflicts": 3,
+      "baseline_contention": 936
+    },
+    {
+      "expr": "21 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "22 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "23 0-23/2 * * *",
+      "operational_conflicts": 3,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "24 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "25 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 960
+    },
+    {
+      "expr": "26 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "27 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 840
+    },
+    {
+      "expr": "28 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "29 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "30 0-23/2 * * *",
+      "operational_conflicts": 4,
+      "baseline_contention": 1224
+    },
+    {
+      "expr": "31 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "32 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "33 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "34 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "35 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 960
+    },
+    {
+      "expr": "36 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "37 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "38 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "39 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 648
+    },
+    {
+      "expr": "40 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 864
+    },
+    {
+      "expr": "41 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "42 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 840
+    },
+    {
+      "expr": "43 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "44 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "45 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 1320
+    },
+    {
+      "expr": "46 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "47 0-23/2 * * *",
+      "operational_conflicts": 2,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "48 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "49 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 576
+    },
+    {
+      "expr": "50 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 864
+    },
+    {
+      "expr": "51 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "52 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 768
+    },
+    {
+      "expr": "53 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "54 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 744
+    },
+    {
+      "expr": "55 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 960
+    },
+    {
+      "expr": "56 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 840
+    },
+    {
+      "expr": "57 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 840
+    },
+    {
+      "expr": "58 0-23/2 * * *",
+      "operational_conflicts": 1,
+      "baseline_contention": 672
+    },
+    {
+      "expr": "59 0-23/2 * * *",
+      "operational_conflicts": 0,
+      "baseline_contention": 672
+    }
+  ],
+  "jobs": [
+    {
+      "source": "root",
+      "name": "sync-souls.sh",
+      "expr": "*/5 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "monitor-auto-push.sh",
+      "expr": "11,26,41,56 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-yoast-health-eggbev.sh",
+      "expr": "23 10 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "check-pending-reports.sh",
+      "expr": "7,22,37,52 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-service-restarts.sh",
+      "expr": "1-56/5 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "monitor-gpt55-oauth-cost.sh",
+      "expr": "54 11 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "expr": "3-58/5 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "infra-discovery.sh",
+      "expr": "0 5 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-updates.sh",
+      "expr": "37 8,14,20 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "track-article-cost.sh",
+      "expr": "*/15 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "cleanup-zombie-sessions.sh",
+      "expr": "0 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "housekeeping-bak-cleanup.sh",
+      "expr": "44 20 * * 2,5",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 2
+    },
+    {
+      "source": "root",
+      "name": "pendencia-render-md.sh",
+      "expr": "0 8 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "chat-log.sh",
+      "expr": "0 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "cron-control-plane.py",
+      "expr": "32 8 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-cron-stale-logs.sh",
+      "expr": "*/15 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer.py",
+      "expr": "*/5 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "monitor-webshare-status.sh",
+      "expr": "7 8,14,20 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "mgs-safety-backup.sh",
+      "expr": "41 3 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "expr": "* * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "monitor-honcho-health.sh",
+      "expr": "54 2,8,14,20 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 32
+    },
+    {
+      "source": "root",
+      "name": "monitor-discord-thread-archive-warnings.py",
+      "expr": "16 9 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "discord-archive-stale-agent-threads.py",
+      "expr": "*/15 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-vps-health.py",
+      "expr": "*/5 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-page-health-sync.sh",
+      "expr": "30 7,15 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 16
+    },
+    {
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "expr": "2-57/5 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2304
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-daily-match-audit.sh",
+      "expr": "20 6 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-op-rate-limit.py",
+      "expr": "39 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "monitor-drive-auth-unified.py",
+      "expr": "19,49 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "root",
+      "name": "sync-sb-sms-revenue-daily.sh",
+      "expr": "0 8 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sync-smsfunnel-cost-daily.sh",
+      "expr": "8 9 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "expr": "* * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "expr": "* * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-restricted-summary.py",
+      "expr": "5 8 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sb-restricted-transition-monitor.py",
+      "expr": "14,29,44,59 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "refresh-sb-restricted-history-sheet.py",
+      "expr": "0 8,14,20 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "expr": "24 0,1,7-23 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 152
+    },
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "expr": "3-58/5 13,14 * * 5",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-memory-capacity.py",
+      "expr": "4,14,24,34,44,54 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1152
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "expr": "* * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "root",
+      "name": "hermes-context-cost-audit.py",
+      "expr": "47 4 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "expr": "0 8 * * *",
+      "timezone": "America/Sao_Paulo",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "expr": "*/15 * * * *",
+      "timezone": "America/Sao_Paulo",
+      "baseline": false,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "expr": "21 * * * *",
+      "timezone": "America/Sao_Paulo",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "root",
+      "name": "sync-sb-messenger-revenue-sheet.py",
+      "expr": "17 8 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "expr": "12,27,42,57 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 768
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "expr": "5 0 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "finance_media_spend_sync.py",
+      "expr": "3 9 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "expr": "3,8,18,28 8 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 32
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "expr": "22,31,41 9 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 24
+    },
+    {
+      "source": "root",
+      "name": "finance-month-rollover.py",
+      "expr": "4 23 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "root",
+      "name": "finance-readonly-health.py",
+      "expr": "34 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system:52",
+      "expr": "17 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system:53",
+      "expr": "25 6 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system:54",
+      "expr": "47 6 * * 7",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "system:55",
+      "expr": "52 6 1 * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 0
+    },
+    {
+      "source": "/etc/cron.d/php",
+      "name": "system:56",
+      "expr": "09,39 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "name": "system:57",
+      "expr": "30 3 * * 0",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "name": "system:58",
+      "expr": "10 3 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "/etc/cron.d/monarx-update",
+      "name": "system:59",
+      "expr": "20 4 * * 2",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "system:60",
+      "expr": "5-55/10 * * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1152
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "system:61",
+      "expr": "59 23 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "zeus",
+      "name": "Hermes MGS patch watchdog",
+      "expr": {
+        "kind": "interval",
+        "minutes": 360,
+        "display": "every 360m"
+      },
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 32
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch",
+      "expr": "*/3 0,8-23 * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 2720
+    },
+    {
+      "source": "zeus",
+      "name": "b013-dtr-link-watch",
+      "expr": "2-59/9 0,8-23 * * *",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 952
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR backup hor\u00e1rio",
+      "expr": "23 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR backup completo",
+      "expr": "15 4 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR restore semanal",
+      "expr": "45 5 * * 0",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "zeus",
+      "name": "MGS DR monitor SLA",
+      "expr": "*/30 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "zeus",
+      "name": "SB Utility Candidate Reservoir",
+      "expr": "30 6 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 8
+    },
+    {
+      "source": "zeus",
+      "name": "Financeiro \u00b7 c\u00e2mbio autom\u00e1tico",
+      "expr": "26,56 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 384
+    },
+    {
+      "source": "zeus",
+      "name": "meta-app-roles-watch overnight",
+      "expr": "*/10 1-7 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 336
+    },
+    {
+      "source": "zeus",
+      "name": "b013-dtr-link-watch overnight",
+      "expr": "2-59/10 1-7 * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 336
+    },
+    {
+      "source": "zeus",
+      "name": "F011 descarte condicional dois backups",
+      "expr": {
+        "kind": "once",
+        "run_at": "2026-11-05T00:05:47-05:00",
+        "display": "once at 2026-11-05 00:05"
+      },
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 0
+    },
+    {
+      "source": "zeus",
+      "name": "AdsPower aquecimento 2026-10-19",
+      "expr": {
+        "kind": "once",
+        "run_at": "2026-10-19T09:32:25-04:00",
+        "display": "once at 2026-10-19 09:32"
+      },
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "zeus",
+      "name": "AdsPower aquecimento 2026-10-20",
+      "expr": {
+        "kind": "once",
+        "run_at": "2026-10-20T09:32:25-04:00",
+        "display": "once at 2026-10-20 09:32"
+      },
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "ares",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "expr": "1 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "ares",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h cont\u00ednuo",
+      "expr": "6 * * * *",
+      "timezone": "America/New_York",
+      "baseline": false,
+      "expanded_ticks": 192
+    },
+    {
+      "source": "systemd",
+      "name": "apt-daily-upgrade.timer",
+      "expr": "*-*-* 06:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "apt-daily.timer",
+      "expr": "*-*-* 06,18:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "ares-landing-followup.timer",
+      "expr": "continuous 15s after prior service completes",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "systemd",
+      "name": "ares-landing-intake.timer",
+      "expr": "continuous 15s after prior service completes",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 11520
+    },
+    {
+      "source": "systemd",
+      "name": "dpkg-db-backup.timer",
+      "expr": "*-*-* 00:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "e2scrub_all.timer",
+      "expr": "Sun *-*-* 03:10:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "fstrim.timer",
+      "expr": "Mon *-*-* 00:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "fwupd-refresh.timer",
+      "expr": "*-*-* *:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "logrotate.timer",
+      "expr": "*-*-* 00:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "man-db.timer",
+      "expr": "*-*-* 00:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "motd-news.timer",
+      "expr": "*-*-* 00,12:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "phpsessionclean.timer",
+      "expr": "*-*-* *:09,39:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "snapd.snap-repair.timer",
+      "expr": "*-*-* 05,11,17,23:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "sysstat-collect.timer",
+      "expr": "*-*-* *:00/10:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "sysstat-summary.timer",
+      "expr": "*-*-* 00:07:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    },
+    {
+      "source": "systemd",
+      "name": "update-notifier-motd.timer",
+      "expr": "Sun *-*-* 06:00:00",
+      "timezone": "America/New_York",
+      "baseline": true,
+      "expanded_ticks": 1
+    }
+  ],
   "stagger_seconds": 35,
-  "unapproved_conflicts": 0,
-  "audited_at": "2026-10-08T19:08:10.700206+00:00",
-  "entries_audited": 86,
-  "window_start": "2026-10-08T00:00:00-04:00",
-  "window_end": "2026-10-16T00:00:00-04:00"
+  "resource_guards": [
+    "existing /var/lock/monitor-runcloud.lock",
+    "existing state .lock",
+    "timeout300s",
+    "RunCloud API is isolated from coincident baseline APIs",
+    "no backup execution, no financial writer, no browser",
+    "provider quota cooldown remains effective"
+  ],
+  "app_scheduler_review": "Live root cron, every profile job file, systemd timers and canonical runtime-artifact schedule records reviewed; RunCloud has one root writer. Finance long-poll/landing queues remain event-driven and do not use this API/state. Historical inactive or completed inventory records are not new enabled jobs.",
+  "authorization_message_id": "1561035336010829825",
+  "health_cadence_seconds": 7200,
+  "backup_status_cadence_seconds": 86400,
+  "supersedes": {
+    "previous_schedule": "13,28,43,58 * * * *",
+    "previous_backup_status_cadence_seconds": 3600,
+    "historical_0828_exception_not_used": true,
+    "retained_previous_validation": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-quota-1561029089458917528/schedule-validation.previous-cadence.json"
+  }
 }

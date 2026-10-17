@@ -1901,6 +1901,16 @@
       "updated_at": "2026-09-03T20:37:02+00:00"
     },
     {
+      "agent": "ares",
+      "id": "LANDING-MOBILE-20-30S-1561037521234952253",
+      "next_step": "Provar mobile em janela vazia normal; atualizar executor/testes; executar1replayC170 preservando PASS histórico",
+      "objective": "Atualizar acompanhamento para mobile e janela20-30s; testar somente C170 de hoje",
+      "source": "discord:message:1561037521234952253",
+      "state": "preparing_native_mobile;no_new_landing_visit;authority1561037521234952253",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-17T15:26:35+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "META-APP-B0015-CUTOVER-20260903",
       "next_step": "Operação normal: aceitar as 5 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
@@ -2103,12 +2113,12 @@
     {
       "agent": "zeus",
       "id": "RUNCLOUD-QUOTA-1561029089458917528",
-      "next_step": "Auditoria global de oito datas; testes de cadencia/watchdog; backup, configuracao e crontab exatos; readback e REPORT-INFRA",
+      "next_step": "Nenhuma decisao pendente. Cron ativo respeita bloqueio persistente ate reset informado pela RunCloud; nao declarar recuperacao da API sem coleta integra.",
       "objective": "Aplicar cadencia RunCloud aprovada: saude2h e status de backups24h, preservando execucao dos backups, bloqueio de quota e billing",
-      "source": "discord:1561025799199522987/1561035336010829825",
-      "state": "in_progress",
+      "source": "/root/mgs-agent/reports/runcloud-cadence-1561035336010829825.json",
+      "state": "completed",
       "thread_id": "1561025799199522987",
-      "updated_at": "2026-10-17T15:17:33+00:00"
+      "updated_at": "2026-10-17T15:27:45+00:00"
     },
     {
       "agent": "zeus",
@@ -6342,5 +6352,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T15:22:21+00:00"
+  "updated_at": "2026-10-17T15:27:45+00:00"
 }
