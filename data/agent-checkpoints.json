@@ -13,12 +13,12 @@
     {
       "agent": "ares",
       "id": "ARES-C092-EXTRA-20261017",
-      "next_step": "Aguardar deadline; consumidor existente ou claim foreground normal; verificar uma tentativa e resultado/avisos",
+      "next_step": "Sem repetição automática; revisão da exibição se desejada, sem writes em campanhas/site",
       "objective": "Uma tentativa adicional C092 após espera mínima de 5 minutos",
-      "source": "data/ares/meta-ads/audit/landing-manual-retry-1561029313275633679/change-inventory.json;discord:message:1561029313275633679",
-      "state": "single_retry_scheduled; due1792249109; attempt5_preserved; 320testsok",
+      "source": "data/ares/meta-ads/audit/landing-manual-retry-1561029313275633679/verification.json",
+      "state": "completed_one_extra_no_ad; attempt6; review_required1; owned_tab_closed_other_tabs_preserved; prior5_absences_preserved",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-17T14:55:45+00:00"
+      "updated_at": "2026-10-17T15:02:03+00:00"
     },
     {
       "agent": "ares",
@@ -6322,5 +6322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T14:59:09+00:00"
+  "updated_at": "2026-10-17T15:02:03+00:00"
 }
