@@ -29,6 +29,30 @@ class LeanTests(unittest.TestCase):
   with self.assertRaises(ValueError):open_normal(Fake(incognito=True),'https://example.invalid/x')
  def test_newtab_not_noad(self):
   with self.assertRaisesRegex(ValueError,'technical failure'):open_normal(Fake(unloaded=True),'https://example.invalid/x')
+ def test_typed_url_lag_rereads_without_duplicate_input(self):
+  class Delayed(Fake):
+   def __init__(self):super().__init__();self.pending_reads=0
+   def __call__(self,a):
+    out=super().__call__(a)
+    if a['action']=='type':self.pending_reads=2
+    if a['action']=='capture' and self.pending_reads:
+     self.pending_reads-=1;out['elements'][0]['label']=self.typed[:-1]
+    return out
+  f=Delayed()
+  with patch('ares_campaign_v3.landing_lean.time.sleep'):p=open_normal(f,'https://example.invalid/x?nocache')
+  self.assertEqual(p['state'],'OPENED_NORMAL')
+  self.assertEqual(sum(a['action']=='type' for a in f.calls),1)
+  self.assertEqual(sum(a.get('keys')=='return' for a in f.calls),1)
+ def test_typed_url_missing_never_submits(self):
+  class Missing(Fake):
+   def __call__(self,a):
+    out=super().__call__(a)
+    if a['action']=='capture':out['elements'][0]['label']='Address and search bar'
+    return out
+  f=Missing()
+  with patch('ares_campaign_v3.landing_lean.time.sleep'):
+   with self.assertRaisesRegex(ValueError,'Typed URL unverified'):open_normal(f,'https://example.invalid/x')
+  self.assertFalse(any(a.get('keys')=='return' for a in f.calls))
  def test_strict_visual_bools(self):
   with self.assertRaises(ValueError):structured_visual(self.visual(network_ad_visible='yes'))
  def test_visual_real_negative(self):self.assertFalse(structured_visual(self.visual(network_ad_visible=False,description='Loaded landing; no rendered ad'))['network_ad_visible'])

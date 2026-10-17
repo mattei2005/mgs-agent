@@ -1,0 +1,140 @@
+{
+  "result": "ERROR",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g004-s&utm_campaign=b01fb04c171&utm_adgroup=b01fb04c171g01&fbclid=fbclid&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g004-s&utm_campaign=b01fb04c171&utm_adgroup=b01fb04c171g01&fbclid=fbclid&nocache",
+    "mapping_source": "Read-only GET exact campaign quiz URL; both live data-mgs-dq-cta A/B hrefs identical; mgs-direct-quiz 1.2.0 mergeUrl preserves query. Evidence: /root/mgs-agent/data/ares/meta-ads/landing-followup/runs/landing-observer-a054e7e386cb40ef9c299e90e636600f/mapping-source-1.html",
+    "diagnosis": "ValueError: URL unverified",
+    "normal_opening": {
+      "state": "OWNED_NORMAL_NEW_WINDOW",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g004-s&utm_campaign=b01fb04c171&utm_adgroup=b01fb04c171g01&fbclid=fbclid&nocache",
+      "url_submission_attempted": false,
+      "opened_intent_at": 1792213135.7013617,
+      "target": {
+        "pid": 18224,
+        "window_id": 14091646,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792213143.8928041
+    },
+    "opened_at": 1792213135.7013617,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 14091646,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792213148.9287002,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 14091646,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "phase_seconds": {
+      "closure": 2.783577632973902,
+      "mechanical_total": 14.100788704003207
+    }
+  },
+  "batch_scope": "bb0ef9386a17778c3970ec00f1e3606e579506091154a7d4afa099c2af49f04f"
+}

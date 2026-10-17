@@ -31,17 +31,26 @@ def open_blank_normal(call,on_owned=lambda p:None,base_window=None):
     return proof
 
 
+def typed_url_snapshot(call,target,url):
+    # Native omnibox text may still be arriving after type returns. Re-read
+    # without input before declaring a failure or replacing a partial address.
+    for reread in range(3):
+        snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
+        if url in json.dumps(all_elements(snap),ensure_ascii=False):return snap
+        if reread<2:time.sleep(.15)
+    return snap
+
 def open_normal(call,url,on_owned=lambda p:None):
     def persist(p):
         p['url']=url;on_owned(p)
     proof=open_blank_normal(call,on_owned=persist);target=proof['target']
     out=call(dict(action='type',text=url))
-    snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
+    snap=typed_url_snapshot(call,target,url)
     if url not in json.dumps(all_elements(snap),ensure_ascii=False):
         if not escalates(out):raise ValueError('Typed URL unverified; do not submit')
         call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
         call(dict(action='type',text=url,delivery_mode='foreground'))
-        snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
+        snap=typed_url_snapshot(call,target,url)
         if url not in json.dumps(all_elements(snap),ensure_ascii=False):raise ValueError('URL unverified')
     proof['url_submission_attempted']=True;on_owned(proof)
     out=call(dict(action='key',keys='return'))
