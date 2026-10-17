@@ -1,7 +1,7 @@
 ---
 name: landing-followup-operations
 description: "Use when observing landing ads after campaign completion."
-version: 0.5.2
+version: 0.6.0
 author: Rodolfo Mattei / Ares
 license: internal
 platforms: [linux]
@@ -33,7 +33,7 @@ Observar anúncios depois da conclusão de uma criação/duplicação, sem acres
 
 ## 2. Executar sem trabalho intermediário
 
-Fluxo preferido de Rodolfo: **links preparados → aba nova normal → identificar anúncio → rolar → observar 10 segundos → fechar/verificar → próximo link em outra aba nova**.
+Fluxo vigente de Rodolfo: **links preparados → aba nova normal → verificar emulação mobile antes da navegação → abrir URL exata → rolagem nativa quando verificável → manter a aba aberta entre 20 e 30 segundos → capturar um frame final → fechar/verificar → analisar o frame sem prolongar a visita → próximo link em outra aba nova**. Esta regra supersede os 10 segundos para novas visitas, preservando os recibos históricos.
 
 - **Sessão significa abertura do link em uma aba NOVA.** Fechar a aba anterior antes da próxima; isso vale também nas retentativas. Nunca substituir a URL de uma aba usada e nunca usar Incognito. Uma janela técnica normal de uma única aba pode assegurar propriedade e fechamento sem tocar no Chrome do usuário.
 - Carregar `computer-use`; usar o handler e o transporte PC1 aprovados, sob a lease física compartilhada e com o ID real da sessão. Um observador por vez. Não tomar recurso de executor vivo nem confundir outra conversa Discord com ocupação física do PC1.
@@ -43,7 +43,15 @@ Fluxo preferido de Rodolfo: **links preparados → aba nova normal → identific
 - Depois de uma leitura compositada `app=screen`, selecionar novamente a janela própria e o **Document** da página por captura AX fresca antes de rolar. A leitura de tela não mantém um alvo de input utilizável; scroll sem elemento pode ser recusado. Escalar somente após sinal real do driver e readback, sem repetir input confirmado ou ambíguo.
 - Confirmar navegação após Enter. Página em carregamento ou New Tab não é ausência de anúncio: fazer releitura limitada na mesma aba, sem renavegar. Falha técnica é `ERROR`, não `NO_AD`.
 - Registrar um recibo compacto com URL efetiva, identidade da nova aba normal, decisão visual, tempo medido e fechamento/preservação nativos. Fechar apenas o alvo próprio e verificar sua ausência antes de seguir; não repetir Close se já houve fechamento.
-- Medir preparação do lote, navegação, leitura visual, observação, fechamento, liberação do backend e entrega separadamente. Os 10 segundos são permanência mínima, **não promessa de ciclo total de 10 segundos**. Calcular tempos e contagens em código; informar se a amostra inclui só PASS ou também ausências, erros, pausas e retentativas. Não somar medianas de etapas como se fossem a mediana do ciclo nem extrapolar tentativas aprovadas para o prazo de todo o lote. Medir também o período depois do fechamento: ele revela overhead local sem manter a landing aberta. Não alegar ganho de velocidade sem medição real.
+- Medir preparação do lote, navegação, leitura visual, observação, fechamento, liberação do backend e entrega separadamente. A faixa de **20–30 segundos mede a permanência real da aba após navegação até o fechamento nativo**, tanto em PASS quanto em NO_AD; não significa 20–30 segundos de anúncio continuamente visível nem promessa de ciclo total. Verificar o limite superior real; preparação mobile e análise após fechamento ficam separadas. Calcular tempos e contagens em código; informar se a amostra inclui só PASS ou também ausências, erros, pausas e retentativas. Não somar medianas de etapas como se fossem a mediana do ciclo nem extrapolar tentativas aprovadas para o prazo de todo o lote. Medir também o período depois do fechamento: ele revela overhead local sem manter a landing aberta. Não alegar ganho de velocidade sem medição real.
+
+### Mobile e classificação sem cliques
+
+- Usar exclusivamente o preset nativo **iPhone 16, 393×852, retrato**, em aba nova NORMAL própria. Verificar visualmente a toolbar antes de navegar. Não usar mera janela estreita como prova de mobile, nem alterar proxy, extensões, cookies ou perfil compartilhado; não fazer fallback desktop silencioso.
+- O núcleo `landing_mobile` é usado pelo mesmo executor lean individual e batch. Mede `tab_open_seconds` de `opened_at` a `closed_at`, com alvo interno 22s para deixar margem à captura/fechamento e aceitar somente 20–30s reais. Captura final depois de 20s; análise pode terminar após fechar. Preservar a prova da captura real, não transformar tempo de janela vazia em visita.
+- Com DevTools, a AX pode omitir o valor da omnibox e `type` pode ser descartado mesmo com ack. Usar `set_value` na Edit nativa, verificar crop compositado escalado/segmentado e comparar URL literal antes de Enter. Permitir somente uma segunda revisão read-only do mesmo crop para resolver OCR; nunca corrigir token, reescrever URL por inferência ou repetir navegação para obter uma prova.
+- **Gate editorial/rewarded não é anúncio renderizado.** Site carregado coberto por “CLAIM MY FREE PRODUCTS / You will see a sponsored ad” é `NO_AD` com `site_gate_visible=true`, não PASS nem falha de carregamento. Não clicar no CTA que dispara publicidade. Não diagnosticar maior chance de anúncio por uma única visita.
+- Replay explicitamente autorizado de um aprovado usa rodada separada pelo `ares-direct-traffic-replay-observe.py`, com scope de autoridade, job/índice/digest/mapeamento e `maximum_visits=1`. Não reabrir o estado original nem alterar PASS anterior. Falha antes de Enter só pode ser reparada após recibo exato de `url_submission_attempted=false` e fechamento; três falhas exigem testes e prova nativa de janela vazia antes de nova tentativa. Depois de uma navegação, reconciliar o mesmo frame, nunca repetir o replay para melhorar o resultado.
 
 ## 3. Aplicar tentativas finitas e preservar histórico
 

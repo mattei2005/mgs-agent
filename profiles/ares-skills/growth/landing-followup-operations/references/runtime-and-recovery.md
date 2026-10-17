@@ -42,7 +42,7 @@ O despachante congela `batch-scope.json` com owner, pedidos/digests e conjunto d
   --manifest '<mapa-completo.json>'
 ```
 
-Omitir `--manifest` quando o mapa já estiver completo no cache vinculado ao digest do pedido. O loop faz `begin`, visita, decisão visual, scroll,10s, fechamento e `result` de forma serial; não chamar `begin` fora dele. Manter o backend durante o lote e encerrá-lo uma vez ao final seguro. A pausa e o deadline são verificados entre tentativas; erro técnico devolve diagnóstico, janela incerta impede próxima abertura. Não criar outro turno de modelo por URL e não esperar HTTP de Discord entre itens.
+Omitir `--manifest` quando o mapa já estiver completo no cache vinculado ao digest do pedido. O loop faz `begin`, verifica mobile nativo, navega, tenta rolagem no alvo próprio, mede 20–30s reais de permanência, captura um frame final, fecha e só então analisa/registra `result` de forma serial; não chamar `begin` fora dele. Manter o backend durante o lote e encerrá-lo uma vez ao final seguro. A pausa e o deadline são verificados entre tentativas; erro técnico devolve diagnóstico, janela incerta impede próxima abertura. Não criar outro turno de modelo por URL e não esperar HTTP de Discord entre itens.
 
 O CLI `ares-direct-traffic-lean-observe.py --key <key> --owner <owner> --index <idx> --pc1-session-id "$HERMES_SESSION_ID" --url '<landing exata>' --mapping-source '<fonte>'` permanece apenas como compatibilidade individual, usando o MESMO `landing_lean.observe_prepared`. Não confundir nenhum deles com os comandos legados de janela privada/coleta.
 
@@ -138,7 +138,7 @@ Modelo de informe por evento, com números apurados em código:
 
 ```text
 ✅ Campanha <identificador> — item concluído
-Anúncio identificado · rolagem · 10 s · aba normal fechada.
+Anúncio identificado · mobile · aba aberta <tempo real entre 20–30>s · aba normal fechada.
 Concluídos com anúncio: <X>/<N> · aguardando: <Y> · revisão: <Z>.
 ```
 
