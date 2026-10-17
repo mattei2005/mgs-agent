@@ -2133,12 +2133,12 @@
     {
       "agent": "zeus",
       "id": "RUNCLOUD-SSH-1561052418089689190",
-      "next_step": "Chave instalada nos3hosts;15 restricoes reais passaram; dry-run hibrido3hosts saudaveis API0. Finalizar suites, ativar script/config e validar command/state/report",
+      "next_step": "Nenhuma confirmacao pendente. SSH operacional; API somente backups/status segue em cooldown ate cota liberada. Nao inferir recuperacao do provedor por sucesso SSH.",
       "objective": "Instalar chave SSH exclusiva com forced-command somente leitura nos tres hosts e migrar saude2h para SSH; backupsAPI24h e quota preservados",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-ssh-1561052418089689190/installation.json",
-      "state": "installed_verified_pre_cutover",
+      "source": "/root/mgs-agent/reports/runcloud-ssh-activation-1561052418089689190.json",
+      "state": "completed",
       "thread_id": "1561025799199522987",
-      "updated_at": "2026-10-17T16:49:11+00:00"
+      "updated_at": "2026-10-17T16:55:39+00:00"
     },
     {
       "agent": "zeus",
@@ -6382,5 +6382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T16:49:11+00:00"
+  "updated_at": "2026-10-17T16:55:39+00:00"
 }

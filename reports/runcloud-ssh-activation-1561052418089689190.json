@@ -1,0 +1,211 @@
+{
+  "id": "RUNCLOUD-SSH-1561052418089689190",
+  "authorization_message_id": "1561052418089689190",
+  "thread_id": "1561025799199522987",
+  "outcome": "Restricted SSH health collection active and validated on all three targets; managed backup/status API remains quota-blocked",
+  "scope": {
+    "user": "zeus",
+    "hosts": [
+      {
+        "id": "290075",
+        "server": "MatteiInc01",
+        "host": "162.55.28.178"
+      },
+      {
+        "id": "288158",
+        "server": "MatteiInc02",
+        "host": "162.55.28.179"
+      },
+      {
+        "id": "310255",
+        "server": "MatteiInc03JBF",
+        "host": "46.4.95.117"
+      }
+    ],
+    "health_cron": "4 0-23/2 * * *",
+    "timezone": "America/New_York",
+    "stagger_seconds": 35,
+    "backup_status_cadence_seconds": 86400,
+    "backup_max_age_hours": 36,
+    "backup_execution_changed": false,
+    "provider_host_endpoints_used": false,
+    "firewall_or_sshd_changed": false,
+    "gateway_restarts": false,
+    "billing_changed": false,
+    "existing_access_replaced": false,
+    "file_deletions": false
+  },
+  "identity": {
+    "vault": "MGS Conteúdo",
+    "vault_id": "ghkdcenuzsp57w37nzhxuxnkj4",
+    "item_id": "3ml5wa7v7td3r5uvhwgtcx5mnu",
+    "title": "MGS RunCloud Monitor - SSH Read Only",
+    "category": "SSH_KEY",
+    "algorithm": "ed25519",
+    "fingerprint": "SHA256:T+gMycLmo5jiI8j3iGpwarD7BV3cpY013vdIsuzvUkY",
+    "private_key_persistent_storage": "1Password only",
+    "volatile_key_transport": "mode0600 anonymous parent-process memfd; descriptor closed after SSH",
+    "forced_command": "/usr/bin/python3 -I /home/zeus/.ssh/mgs-runcloud-monitor-readonly.py",
+    "allowed_operation": "mgs-health-v1",
+    "authorized_key_options": "restrict + exact forced command",
+    "new_key_line_count_per_host": 1,
+    "no_password_agent_or_default_identity_fallback": true
+  },
+  "implementation": {
+    "monitor": "scripts/monitor-runcloud.py",
+    "monitor_sha256": "9628b736dba750da23e9653f26d715f7927c6dc8b0ba13b849cb3efa4993b874",
+    "ssh_client": "scripts/mgs_runcloud_ssh.py",
+    "ssh_client_sha256": "1484b6bce2bc65240121541b77bcb2121ccf4d301fc5a5708de0965b88f3bc2e",
+    "remote_collector": "scripts/runcloud-ssh-readonly.py",
+    "remote_collector_sha256": "5fd84655727fcb688e8352b18dabee18b7dbb27eba5a2fce85c2c3ef8f48bfd3",
+    "config_sha256": "f80b1f7d834572981ecbecad388994378b87daac58a2cff8cab2a5fa35cfff48",
+    "remote_file_mode": "0500",
+    "known_hosts": "/root/.ssh/known_hosts_mgs"
+  },
+  "validation": {
+    "unit_tests_passed": 50,
+    "real_allowed_hosts": 3,
+    "expected_services_active": 11,
+    "real_restriction_checks": 15,
+    "real_restriction_checks_passed": 15,
+    "rejected_cases": [
+      "arbitrary command",
+      "command injection",
+      "shell",
+      "PTY",
+      "forwarding"
+    ],
+    "existing_access_and_key_bytes": [
+      {
+        "id": "290075",
+        "server": "MatteiInc01",
+        "user": "zeus",
+        "original_key_hash": "9796f2eceff7aca60764b351225aa1f4de3c10045508f8a691bbdee66e0d9ac5",
+        "original_bytes_preserved": true,
+        "new_line_count": 1,
+        "restricted": true,
+        "fingerprint": "SHA256:T+gMycLmo5jiI8j3iGpwarD7BV3cpY013vdIsuzvUkY",
+        "collector_hash": "5fd84655727fcb688e8352b18dabee18b7dbb27eba5a2fce85c2c3ef8f48bfd3"
+      },
+      {
+        "id": "288158",
+        "server": "MatteiInc02",
+        "user": "zeus",
+        "original_key_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "original_bytes_preserved": true,
+        "new_line_count": 1,
+        "restricted": true,
+        "fingerprint": "SHA256:T+gMycLmo5jiI8j3iGpwarD7BV3cpY013vdIsuzvUkY",
+        "collector_hash": "5fd84655727fcb688e8352b18dabee18b7dbb27eba5a2fce85c2c3ef8f48bfd3"
+      },
+      {
+        "id": "310255",
+        "server": "MatteiInc03JBF",
+        "user": "zeus",
+        "original_key_hash": "9796f2eceff7aca60764b351225aa1f4de3c10045508f8a691bbdee66e0d9ac5",
+        "original_bytes_preserved": true,
+        "new_line_count": 1,
+        "restricted": true,
+        "fingerprint": "SHA256:T+gMycLmo5jiI8j3iGpwarD7BV3cpY013vdIsuzvUkY",
+        "collector_hash": "5fd84655727fcb688e8352b18dabee18b7dbb27eba5a2fce85c2c3ef8f48bfd3"
+      }
+    ],
+    "candidate_dry_run_production_state_unchanged": true,
+    "production": {
+      "at_utc": "2026-10-17T16:50:41.506570+00:00",
+      "mode": "manual execution of exact installed root cron command",
+      "returncode": 1,
+      "last_check": "2026-10-17T16:50:41.465534+00:00",
+      "summary": {
+        "servers": [
+          {
+            "server": "MatteiInc01",
+            "source": "ssh",
+            "disk_pct": 12.94,
+            "expected_services": 3,
+            "services_running": true
+          },
+          {
+            "server": "MatteiInc02",
+            "source": "ssh",
+            "disk_pct": 2.16,
+            "expected_services": 4,
+            "services_running": true
+          },
+          {
+            "server": "MatteiInc03JBF",
+            "source": "ssh",
+            "disk_pct": 4.09,
+            "expected_services": 4,
+            "services_running": true
+          }
+        ],
+        "backups": null,
+        "api_errors": [
+          "monthly_quota_exhausted"
+        ],
+        "api_calls": 0,
+        "status": "health_ok_backups_deferred",
+        "retry_at": 1794422405.0,
+        "health_transport": "ssh",
+        "ssh_attempts": 3,
+        "ssh_errors": []
+      },
+      "api_cooldown_unchanged": true,
+      "last_successful_backup_check_unchanged": true,
+      "outbox_pending": 0,
+      "new_ssh_observations": {
+        "290075:ssh": {
+          "published": 0,
+          "observed_at": 1792255836.2764301
+        },
+        "288158:ssh": {
+          "published": 0,
+          "observed_at": 1792255836.2764301
+        },
+        "310255:ssh": {
+          "published": 0,
+          "observed_at": 1792255836.2764301
+        },
+        "monitor:ssh": {
+          "published": 0,
+          "observed_at": 1792255836.2764301
+        }
+      },
+      "cron_target_unchanged": true
+    },
+    "future_scheduled_tick_observed_after_cutover": false,
+    "provider_api_recovery_claimed": false
+  },
+  "recovered_implementation_issues": [
+    {
+      "cause": "Generic CLI SSH Key JSON import stored private_key as TEXT, causing native item-read serialization failure",
+      "correction": "Official isolated SDK changed the existing field to SSHKEY on the same item; public identity and item ID preserved; native OpenSSH export and real authentication validated",
+      "new_duplicate_identity_created": false,
+      "credential_leak_detected": false
+    },
+    {
+      "cause": "OpenSSH closes inherited descriptors, making /proc/self/fd/N disappear in the child",
+      "correction": "Address live parent memfd through /proc/<parent-pid>/fd/N; explicitly set IdentityFile=none and disable unrelated auth fallback; regressions and real canaries passed"
+    }
+  ],
+  "provider_block": {
+    "kind": "monthly_quota",
+    "remaining": 0,
+    "retry_at": 1794422405.0,
+    "reset_utc": "2026-11-11T18:40:05+00:00",
+    "last_successful_backup_check_preserved": true,
+    "ssh_health_independent_of_api_cooldown": true
+  },
+  "rollback_and_evidence": {
+    "local": "/root/.hermes/profiles/zeus/cache/scratch/runcloud-ssh-1561052418089689190",
+    "remote_authorized_keys_backup": "/home/zeus/.ssh/authorized_keys.mgs-monitor-before-1561052418089689190",
+    "remote_existing_keys_preserved": true,
+    "failed_artifacts_and_backups_retained": true,
+    "sdk_environment": "Isolated preparation only under profile scratch; not required by active monitor"
+  },
+  "procedures": [
+    "ops/log-monitor-discord-alert/references/runcloud-initial-monitoring.md",
+    "ops/onepassword-service-account-vault-operations/SKILL.md"
+  ]
+}

@@ -1,7 +1,7 @@
 ---
 name: landing-followup-operations
 description: "Use when observing landing ads after campaign completion."
-version: 0.7.0
+version: 0.7.1
 author: Rodolfo Mattei / Ares
 license: internal
 platforms: [linux]
@@ -59,6 +59,7 @@ Fluxo vigente de Rodolfo: **links preparados → aba nova normal → verificar e
 - Até **3 ausências reais iniciais**, sem espera artificial entre fechar/verificar e abrir outra aba nova. Na terceira, marcar `DEFERRED_NO_AD` e seguir os outros links.
 - Depois de processar toda a fase inicial, fazer **uma tentativa de retorno final por pendente**. Se ainda não houver anúncio, marcar `COOLDOWN_NO_AD`. Ao encerrar TODOS os itens e retornos do lote congelado, iniciar **um único prazo durável de60segundos** e fazer **uma recuperação automática adicional por link ainda sem anúncio**, sem exigir outro pedido do operador. Liberar PC1/backend durante a espera; o timer existente retoma quando vencer. Novo intake ou novo executor não reinicia o minuto e não posterga indefinidamente os pares congelados. Isso é **3iniciais +1retorno +60s +1recuperação**, no máximo5ausências reais; não é loop por minuto. Ausência na recuperação vira `REVIEW_REQUIRED`, reportada somente depois de encerrar a fase inteira. Falha técnica não consome ausências; PASS nunca é reaberto.
 - Interpretar um novo pedido como “tenta de novo”, em resposta a um único pendente identificado, como autorização para **uma tentativa adicional desse alvo**, não para reiniciar o lote ou conceder novamente todas as fases automáticas. Registrar a autorização e preservar as ausências anteriores; usar nova aba normal e as opções de URL vigentes. Se passar, retirar a pendência dos totais, da verificação consolidada e do checkpoint, mantendo o retrato anterior como histórico. Se não passar, manter a revisão e não repetir de novo sem nova autorização. Não zerar contadores ou contornar guards para forçar a execução.
+- Quando o responsável autorizado confirmar que viu o anúncio e pedir para considerar um link resolvido, registrar **resolução humana** vinculada à mensagem e ao alvo exatos, sem nova visita. Preservar tentativas e provas anteriores; usar `RESOLVED_BY_OPERATOR`, não fabricar `PASSED` automatizado. Retirar somente esse alvo das pendências e conferir o consolidado; encerrar o pedido agregado apenas quando todos os seus alvos estiverem resolvidos. Não enviar um aviso que atribua à automação a observação ou duração declarada apenas pelo humano.
 - Preservar contadores e provas já registrados; não conceder três tentativas novas a um item que já teve duas ausências. Congelar os pares da rodada para impedir que pedidos novos adiem indefinidamente o retorno final.
 - Nunca reabrir `PASSED` por timeout, notificação atrasada, foto purgada ou necessidade de confirmar um status. Replay exige novo pedido explícito: criar uma rodada identificável, ligada aos mesmos originais, sem zerar nem sobrescrever a validação histórica e sem iniciar observador concorrente. Avaliar o ledger da rodada atual: um PASS antigo não aprova a nova visita, e uma ausência nova não rebaixa retroativamente a validação antiga.
 - Três erros técnicos consecutivos do mesmo alvo exigem diagnóstico/reparo da camada local antes de outra abertura ordinária. Com fechamento seguro, seguir os outros itens devidos; janela incerta tem prioridade de reconciliação e mantém o bloqueio físico.
@@ -73,6 +74,14 @@ Fluxo vigente de Rodolfo: **links preparados → aba nova normal → verificar e
 6. Corrigir defeitos recuperáveis somente no observador, com testes e readback. Não repetir indefinidamente o caminho quebrado nem transferir um erro local ao operador. O reparador atualizado seleciona, na rota ativa, uma janela vazia **NORMAL**, readbacks nativos e fechamento/preservação; não usa Incognito, série de imagens, galeria ou visita a URL. Provas privadas/cadência legadas permanecem somente legíveis para reconciliação histórica; o reparador não tem mais caminho de abertura anônima e falha fechado se faltar uma rota normal ativa. Probe standalone também deve respeitar observadores com janela incerta. Recibo normal completo da tentativa exata pode ser recuperado sem imagens nem nova visita; é obrigatório conferir vínculo temporal e identidade nativa.
 
 ## 5. Informar progresso e encerrar corretamente
+
+### Responder à pergunta exata com a evidência da tentativa
+
+- Responder primeiro se o anúncio solicitado foi identificado: **sim**, **não identificado** ou **não verificado**. Separar anúncio dentro do artigo, peça rewarded e CTA editorial; artigo liberado, rolagem executada, tempo cumprido ou testes aprovados não comprovam exibição de anúncio. Informar o local/formato somente quando a evidência o identificar.
+- Conferir os registros visuais já salvos da liberação do artigo e do pós-rolagem antes de responder sobre exibição. Um frame final sem anúncio comprova somente a ausência no trecho observado, não que nenhum anúncio apareceu em toda a página ou durante toda a visita. Não reabrir a landing para responder uma pergunta sobre o teste encerrado.
+- Quando perguntarem qual backend foi usado, conferir o executor efetivamente chamado e o recibo de inputs da tentativa e responder diretamente **PC1/automação nativa** ou **Playwright**, conforme a prova. O nome Chrome sozinho não diferencia os transportes. Identificar emulação mobile pelo DevTools como emulação no Chrome do PC1, nunca como celular físico; não substituir a resposta por detalhes de arquitetura ou quantidade de testes.
+
+### Informes de execução e encerramento
 
 - O modo ativo `PER_ITEM` prepara uma mensagem durável na própria transação do resultado, sem HTTP. O consumidor independente do intake entrega os cards e confere GET; o PC1 não espera Discord para abrir o próximo item. Não criar thread/agente por link nem usar intervalos de15min como modo atual. Usar card curto: item, resultado, concluídos/total, pendentes para retorno/revisão e próximo estado real. Preservar o conjunto da rodada nos retornos; deduplicar por job+índice+tentativa+estado. Limitar a drenagem do outbox e preservar INTENT/nonce em erro ou rate limit, sem repetir POST às cegas.
 - Contar e deduplicar em código. Separar links, jobs técnicos e pedido humano; partes `OBSERVED` do mesmo pedido não são novos links pendentes.

@@ -9700,10 +9700,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-RUNCLOUD-MONITOR-HYBRID-1561052418089689190",
+      "title": "RunCloud: saude2h e status de backups24h; controle persistente de quota; execucao dos backups preservada",
+      "updated_at": "2026-10-17T16:55:38+00:00"
+    },
+    {
+      "canonical_key": "infrastructure.runcloud.monitor.initial",
+      "canonical_source": "/root/mgs-agent/data/runcloud-alert-config.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-17T16:55:38+00:00",
+      "id": "MGS-RUNCLOUD-MONITOR-HYBRID-1561052418089689190",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "RunCloud: saude2h e status de backups24h; controle persistente de quota; execucao dos backups preservada",
-      "updated_at": "2026-10-17T15:27:45+00:00"
+      "title": "RunCloud: saude por SSH restrito2h; backups pela API24h; chave exclusiva1Password e quota preservada",
+      "updated_at": "2026-10-17T16:55:38+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
@@ -12607,5 +12624,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T16:21:53+00:00"
+  "updated_at": "2026-10-17T16:55:38+00:00"
 }
