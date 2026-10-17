@@ -1273,12 +1273,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1560834396301303819",
-      "next_step": "Solicitar a Rodolfo autorizacao especifica para atribuir somente ADVERTISE e ANALYZE nesta Page ao System User corporativo; pedido de repetir campanha nao libera permission write. Apos autorizacao: pre-read com administrativo validado, union de tarefas, POST somente se ausente, readback administrativo e corporativo. Retomar o request original e o mesmo input no runner central, sem novas copias implicitas, preservando E2E/SLA e review tardio.",
-      "objective": "Retomar a unica duplicacao da C08 Vizioid-US-SHEIN-EN-05-G005; USD100/dia, COCAP USD0.85, pedido original 17/10 00:00 America/New_York.",
-      "source": "data/ares/meta-ads/audit/shein/preflight-blockers/shein-1560834396301303819/request.json",
-      "state": "nova tentativa autorizada por rodolfo na mensagem 1561015532226871348. dry-run central ainda bloqueado em page code10. readback administrativo confirmou page1087231034465124 mega offers no business155263197283282 digital trust, mas assigned_users paginado nao inclui system user122095869861482193. identidade corporativa correta e scopes granted; get page corporativo continua code10. conta1877104513669062 saudavel usd america/new_york; c08 id120256503851980460 active inalterada e dois anuncios na mesma page. inventario live sem copy c8/c08; state/checkpoint do core inexistentes, nenhum write de campanha nesta tentativa.",
+      "next_step": "Manutencao tecnica separada do hot path: corrigir tratamento de metadata interna schedule_adjustment no compiler/validator, testar regressao sem afrouxar input humano, SLA ou QA; depois retomar input original shein-1560834396301303819. Preservar USD100, COCAP0.85, fonte C08, source_message_id e relogio original; review tardio se exigido. Reparo de Page ja concluido: nao repetir POST de atribuicao.",
+      "objective": "Concluir unica duplicacao C08 Vizioid05 G005 USD100/dia COCAP0.85; mesmo pedido e E2E.",
+      "source": "data/ares/meta-ads/audit/shein/preflight-blockers/shein-1560834396301303819/recovery-1561026788665200753.json",
+      "state": "rodolfo1561026788665200753 autorizou reparar delegacao mega offers. post200 aplicado somente advertise+analyze; readback administrativo exato e get corporativo200 com page token disponivel em memoria. acesso resolvido. dry-run central agora bloqueia unknown request field: resolve_intent gera schedule_adjustment interno para horario explicito vencido, mas build_manifest revalida sem retirar essa metadata e request_fields a rejeita. nenhum script editado, campanha criada ou manifest reescrito.",
       "thread_id": "1558133823969955851",
-      "updated_at": "2026-10-17T14:01:03+00:00"
+      "updated_at": "2026-10-17T14:45:15+00:00"
     },
     {
       "agent": "ares",
@@ -2103,12 +2103,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-C092-LATE-REVIEW-1560656571212505109",
-      "next_step": "Receber confirmacao especifica elegivel de ativacao tardia;usar shein_continuation central com mesmosIDs/QA/readback sem nova criacao. Depois de conclusao e resposta nativa genuina na origem, intake automatico armaPC1;nao inferir aprovacao de uma cobranca do handoff.",
-      "objective": "Concluir pedido original Geizian C35 paraC092 nos mesmos IDs,75USD eCOCAP1.05 quando houver review elegivel",
+      "next_step": "Nenhuma pendencia deste pedido; nao repetir criacao ou ativacao. Responder confirmacao nativa na origem.",
+      "objective": "Concluir C092 nos mesmos IDs com USD75/dia e COCAP1.05",
       "source": "data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1560656571212505109/state.json",
-      "state": "awaiting_specific_human_late_activation_review;canonical_phaseactivation_deferred;enginecomplete_paused;not_eligible_pc1_yet",
+      "state": "concluido: continuacao autorizada por rodolfo1561025932725063741; c092120255039988870547 active e effectiveactive;1adset active bid105;2ads active com qa renderizada cobrindo ids/creatives exatos;usd75/dia cost_cap; mesmos campaign/adset/ad ids do checkpoint; engine_replayed=false; manifests e sla original preservados; sem warnings; postprocess completo. impressões/gasto nao consultados.",
       "thread_id": "1558123871817965589",
-      "updated_at": "2026-10-16T16:49:50+00:00"
+      "updated_at": "2026-10-17T14:41:47+00:00"
     },
     {
       "agent": "zeus",
@@ -5711,6 +5711,16 @@
       "updated_at": "2026-10-15T02:32:59+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1561026537548025931",
+      "next_step": "Obter decisao explicita para remover somente espaco final no nome da fonte135; apos autorizacao, pre-read/update name/readback exclusivo e repetir dry-run/execute do mesmo request; preservar budget/lance/status/fonte e SLA",
+      "objective": "Duplicar uma vez C135 Yolokfx G002, USD100/dia, NOW 17/10; lance herdado",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1561026537548025931/request.json",
+      "state": "prewrite_blocked_source_name: source120255803981600150 active; nome contem (b01fb01c135 ) com espaco antes do fechamento; urls dos dois ads usam b01fb01c135 corretamente; nenhum copy c135 live; dry-run bloqueou antes de writes. nenhum codigo, nome fonte ou guard alterado; pedido persistido. identidade do intake e medicao a partir da correcao17/10; id da mensagem anterior indisponivel",
+      "thread_id": "1557917403822956698",
+      "updated_at": "2026-10-17T14:44:02+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -6282,5 +6292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T14:01:03+00:00"
+  "updated_at": "2026-10-17T14:45:15+00:00"
 }

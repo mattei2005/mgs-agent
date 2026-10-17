@@ -25,6 +25,10 @@ Use for RunCloud alerts in the dedicated channel. Resolve actual operational val
 9. Verify log rotation in the live filesystem rather than assuming a historical `/etc/logrotate.d/mgs-agent` file exists. This monitor owns `config/runcloud-logrotate.conf` and `data/runcloud-logrotate.status`, invoked under its existing lock: daily/1MiB rotation, `copytruncate`, `rotate -1`, no compression or expiry deletion. Archives preserve history; shortening retention or deleting logs needs its separate authorization. Exercise a scratch fixture to prove the archive preserves the original content.
 10. Keep the watchdog aware of the explicit minute list: 60-minute log tolerance for this 15-minute monitor. Successful state reads and a fresh log do not prove delivery; require exact Discord GET.
 
+## API quota diagnostic boundary
+
+- On HTTP 429, inspect the sanitized response body and `Retry-After`/rate-limit headers before treating the failure as transient. `Monthly API quota limit exceeded` with zero remaining requests is a monthly quota block, not proof of a server outage. Stop interactive retries, preserve unknown observations and open incidents, and validate public websites or approved guest probes independently. Do not clear an incident from a fresh log alone, bypass the quota with another identity, change billing, or promise recovery before quota availability is verified. Keep any proposed scheduler/consumer change separate from the read-only diagnosis.
+
 ## Validation
 
 - Run the exact production interpreter: `/usr/bin/python3 -B /root/mgs-agent/tests/test_monitor_runcloud.py`.

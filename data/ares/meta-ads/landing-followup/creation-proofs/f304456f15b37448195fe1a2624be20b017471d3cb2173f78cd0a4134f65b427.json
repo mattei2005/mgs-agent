@@ -1,0 +1,2065 @@
+{
+  "account_id": "787796726891306",
+  "campaign_ids": [
+    "120255039988870547"
+  ],
+  "manifest": {
+    "campaigns": [
+      {
+        "account_id": "787796726891306",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "titles": [
+                  {
+                    "text": "UNLOCK THE OFFER ✅✅✅"
+                  }
+                ]
+              },
+              "name": "SHEIN G001 C92 AD - 01 COPY C35",
+              "object_story_spec": {
+                "instagram_user_id": "17841436730765402",
+                "page_id": "1165811629958161",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                    }
+                  },
+                  "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                  "link_description": "⭐⭐⭐⭐⭐",
+                  "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                  "title": "UNLOCK THE OFFER ✅✅✅",
+                  "video_id": "1079538124782974"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "AD - 01",
+            "source_ad_id": "120254695947060547"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_IN"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "titles": [
+                  {
+                    "text": "UNLOCK THE OFFER ✅✅✅"
+                  }
+                ]
+              },
+              "name": "SHEIN G001 C92 AD - 02 COPY C35",
+              "object_story_spec": {
+                "instagram_user_id": "17841436730765402",
+                "page_id": "1165811629958161",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                    }
+                  },
+                  "image_hash": "1c3569453de82ae3837573b6b746845e",
+                  "link_description": "⭐⭐⭐⭐⭐",
+                  "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                  "title": "UNLOCK THE OFFER ✅✅✅",
+                  "video_id": "1094174283368785"
+                }
+              },
+              "url_tags": ""
+            },
+            "name": "AD - 02",
+            "source_ad_id": "120254695947070547"
+          }
+        ],
+        "adset_name": "CONJUNTO 01 - (b01fb05c092g01)",
+        "adset_updates": {
+          "bid_amount": "105",
+          "bid_constraints": {}
+        },
+        "app_key": "mgs-meta-app-1299247318762949",
+        "bid_override": true,
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "7500"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1560656571212505109",
+        "mode": "pure_clone",
+        "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120254695947050547",
+        "source_campaign_id": "120254695947040547",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-10-16T10:13:49-04:00",
+        "status": "PAUSED"
+      }
+    ],
+    "created_at": "2026-10-16T14:13:19.975267+00:00",
+    "execution_mode": "pure_clone",
+    "graph_version": "v26.0",
+    "operation": "SHEIN-US-DIRECT",
+    "prevalidated": true,
+    "prevalidation": {
+      "checks": [
+        "schema_v3",
+        "unique_idempotency",
+        "timezone_start",
+        "safe_creative_payload",
+        "source_ad_lineage"
+      ],
+      "content_digest": "85096e286d1d4282a117e799022caf7197cc139935110129577f0fc851148e0d",
+      "engine_version": 3,
+      "validated_at": "2026-10-16T14:13:19.976667+00:00"
+    },
+    "request_id": "shein-1560656571212505109",
+    "schema_version": 3
+  },
+  "original_terminal_status": "COMPLETE_FUTURE_ACTIVE",
+  "request": {
+    "source_channel_id": "1548149087206121613",
+    "source_thread_id": "1558123871817965589"
+  },
+  "request_id": "shein-1560656571212505109",
+  "saved_terminal_record": {
+    "account": {
+      "account_status": 1,
+      "currency": "USD",
+      "disable_reason": 0,
+      "id": "act_787796726891306",
+      "name": "Yolokfx-US-SHEIN-EN-05-G001",
+      "timezone_name": "America/New_York",
+      "user_tasks": [
+        "DRAFT",
+        "ANALYZE",
+        "ADVERTISE",
+        "MANAGE"
+      ]
+    },
+    "activation_result": {
+      "activation_state": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/activation/shein-1560656571212505109-787796726891306.json",
+      "campaign_ids": [
+        "120255039988870547"
+      ],
+      "creation_digest": "f158140afae394d4c85b4e47c15fa99f316579c6dd89ca916aae4e744c669dbe",
+      "request_id": "shein-1560656571212505109",
+      "status": "COMPLETE_FUTURE_ACTIVE",
+      "target_digest": "43d4de84896e61a53a9a69616323b3b0a8b1ef762a287a12e2c040e3cdf7f054",
+      "trees": [
+        {
+          "ads": {
+            "data": [
+              {
+                "adset_id": "120255039989050547",
+                "configured_status": "ACTIVE",
+                "creative": {
+                  "contextual_multi_ads": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "degrees_of_freedom_spec": {
+                    "creative_features_spec": {
+                      "advantage_plus_creative": {
+                        "enroll_status": "OPT_OUT"
+                      }
+                    }
+                  },
+                  "effective_object_story_id": "1165811629958161_122122465233433079",
+                  "id": "2597378224040038",
+                  "instagram_user_id": "17841436730765402",
+                  "object_story_spec": {
+                    "instagram_user_id": "17841436730765402",
+                    "page_id": "1165811629958161",
+                    "video_data": {
+                      "call_to_action": {
+                        "type": "GET_OFFER_VIEW",
+                        "value": {
+                          "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                        }
+                      },
+                      "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                      "image_url": "https://www.facebook.com/ads/image/?d=AQKF7T5AU4IO50gJfZ9RDI4PVh_7ZHDP2HPUtTw_nnMEYbbqFHy7v1MDBivhgoMxVng8AOpAuZs3ERovMjZSs3_hhovlGEcDxmXKy4KMzs3_0C48RDdpGPEQxKAKF_8yprEB0YCTcbxQ-nrg0q9kbRIp",
+                      "link_description": "⭐⭐⭐⭐⭐",
+                      "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                      "title": "UNLOCK THE OFFER ✅✅✅",
+                      "video_id": "1079538124782974"
+                    }
+                  }
+                },
+                "id": "120255039991290547",
+                "name": "AD - 01",
+                "source_ad_id": "120254695947060547",
+                "status": "ACTIVE"
+              },
+              {
+                "adset_id": "120255039989050547",
+                "configured_status": "ACTIVE",
+                "creative": {
+                  "contextual_multi_ads": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "degrees_of_freedom_spec": {
+                    "creative_features_spec": {
+                      "advantage_plus_creative": {
+                        "enroll_status": "OPT_OUT"
+                      }
+                    }
+                  },
+                  "effective_object_story_id": "1165811629958161_122122465209433079",
+                  "id": "1598275961783143",
+                  "instagram_user_id": "17841436730765402",
+                  "object_story_spec": {
+                    "instagram_user_id": "17841436730765402",
+                    "page_id": "1165811629958161",
+                    "video_data": {
+                      "call_to_action": {
+                        "type": "GET_OFFER_VIEW",
+                        "value": {
+                          "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                        }
+                      },
+                      "image_hash": "1c3569453de82ae3837573b6b746845e",
+                      "image_url": "https://www.facebook.com/ads/image/?d=AQI72Lu43Z3L_3NpXC3NpfcgphDoEupwFJ_V8eNS-Xn79xQyBxjeg_sHF9IKTqoOn1L5svZdpHH7lK3K9jD8pLWdvm-CI7XUuvloWN7B_SkNncrNzFua21XUE9R3fiaeURnb9_0bEFU_xGlMGkLdwNGy",
+                      "link_description": "⭐⭐⭐⭐⭐",
+                      "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                      "title": "UNLOCK THE OFFER ✅✅✅",
+                      "video_id": "1094174283368785"
+                    }
+                  }
+                },
+                "id": "120255039991230547",
+                "name": "AD - 02",
+                "source_ad_id": "120254695947070547",
+                "status": "ACTIVE"
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVHZAIXzVwUnF2cmhCS2RLUXpZAejZAiWlhhMWhSTEZAVYXR3ZA0hNcjVqeUl2aVNMLUo0ajZA2M0NnTlk1NElLMnhqNXZAzYXZALWkg1SG9JaTJrRnU5NV9oS3NR",
+                "before": "QVFIVFJjcC1CM0c1d3FnWTdGbVZAZAeDhOVkw0NzZAaWUZA3ZAkw0M01qb05pLS1GQ2h5RElRMWdnelJsUTgxRWt3Yy04R2tGOHNXT3c3Y3RpNm1ERlJ6VU5icDZAB"
+              }
+            }
+          },
+          "adsets": {
+            "data": [
+              {
+                "attribution_spec": [
+                  {
+                    "event_type": "CLICK_THROUGH",
+                    "window_days": 7
+                  },
+                  {
+                    "event_type": "VIEW_THROUGH",
+                    "window_days": 1
+                  },
+                  {
+                    "event_type": "ENGAGED_VIDEO_VIEW",
+                    "window_days": 1
+                  }
+                ],
+                "bid_amount": 105,
+                "billing_event": "IMPRESSIONS",
+                "configured_status": "ACTIVE",
+                "id": "120255039989050547",
+                "is_dynamic_creative": false,
+                "name": "CONJUNTO 01 - (b01fb05c092g01)",
+                "optimization_goal": "OFFSITE_CONVERSIONS",
+                "promoted_object": {
+                  "custom_event_type": "ADD_TO_WISHLIST",
+                  "pixel_id": "1049581090103163",
+                  "smart_pse_enabled": false
+                },
+                "start_time": "2026-10-16T10:13:49-0400",
+                "status": "ACTIVE",
+                "targeting": {
+                  "age_max": 65,
+                  "age_min": 18,
+                  "age_range": [
+                    18,
+                    65
+                  ],
+                  "brand_safety_content_filter_levels": [
+                    "FACEBOOK_RELAXED",
+                    "AN_RELAXED"
+                  ],
+                  "geo_locations": {
+                    "countries": [
+                      "US"
+                    ],
+                    "location_types": [
+                      "frequently_in",
+                      "home",
+                      "recent"
+                    ]
+                  },
+                  "targeting_automation": {
+                    "advantage_audience": 1
+                  }
+                }
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVFg1V3FxeXhfcFY1b3hpYmVPeEhnaXpSczhBSFpKRndkZAXFIMG9LT3BWcnlzMGl1U3BQLWFQSXFRbFZASV1RTOE9HYU9pQnlzbm9oelpPTkdEWTNQY0NB",
+                "before": "QVFIVFg1V3FxeXhfcFY1b3hpYmVPeEhnaXpSczhBSFpKRndkZAXFIMG9LT3BWcnlzMGl1U3BQLWFQSXFRbFZASV1RTOE9HYU9pQnlzbm9oelpPTkdEWTNQY0NB"
+              }
+            }
+          },
+          "campaign": {
+            "account_id": "787796726891306",
+            "bid_strategy": "COST_CAP",
+            "configured_status": "ACTIVE",
+            "daily_budget": "7500",
+            "effective_status": "ACTIVE",
+            "id": "120255039988870547",
+            "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+            "start_time": "2026-10-16T10:13:49-0400",
+            "status": "ACTIVE"
+          }
+        }
+      ]
+    },
+    "batch_barrier": true,
+    "completed_at": "2026-10-17T14:41:21.910760+00:00",
+    "creation_social": [],
+    "engine_result": {
+      "audit_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/shein-1560656571212505109.json",
+      "campaign_ids": [
+        "120255039988870547"
+      ],
+      "deferred_accounts": [],
+      "idempotent_replay": false,
+      "metrics": {
+        "campaign_count": 1,
+        "global_wave_count": 1,
+        "intermediate_get_calls": 0,
+        "lane_count": 1,
+        "outer_readback_calls": 1
+      },
+      "request_id": "shein-1560656571212505109",
+      "retry_after_seconds": 0,
+      "status": "COMPLETE_PAUSED"
+    },
+    "execution_started_at": "2026-10-16T14:12:02.174000+00:00",
+    "final_readback": [
+      {
+        "ads": {
+          "data": [
+            {
+              "adset_id": "120255039989050547",
+              "configured_status": "ACTIVE",
+              "creative": {
+                "contextual_multi_ads": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "degrees_of_freedom_spec": {
+                  "creative_features_spec": {
+                    "advantage_plus_creative": {
+                      "enroll_status": "OPT_OUT"
+                    }
+                  }
+                },
+                "effective_object_story_id": "1165811629958161_122122465233433079",
+                "id": "2597378224040038",
+                "instagram_user_id": "17841436730765402",
+                "object_story_spec": {
+                  "instagram_user_id": "17841436730765402",
+                  "page_id": "1165811629958161",
+                  "video_data": {
+                    "call_to_action": {
+                      "type": "GET_OFFER_VIEW",
+                      "value": {
+                        "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                      }
+                    },
+                    "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                    "image_url": "https://www.facebook.com/ads/image/?d=AQKF7T5AU4IO50gJfZ9RDI4PVh_7ZHDP2HPUtTw_nnMEYbbqFHy7v1MDBivhgoMxVng8AOpAuZs3ERovMjZSs3_hhovlGEcDxmXKy4KMzs3_0C48RDdpGPEQxKAKF_8yprEB0YCTcbxQ-nrg0q9kbRIp",
+                    "link_description": "⭐⭐⭐⭐⭐",
+                    "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                    "title": "UNLOCK THE OFFER ✅✅✅",
+                    "video_id": "1079538124782974"
+                  }
+                }
+              },
+              "id": "120255039991290547",
+              "name": "AD - 01",
+              "source_ad_id": "120254695947060547",
+              "status": "ACTIVE"
+            },
+            {
+              "adset_id": "120255039989050547",
+              "configured_status": "ACTIVE",
+              "creative": {
+                "contextual_multi_ads": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "degrees_of_freedom_spec": {
+                  "creative_features_spec": {
+                    "advantage_plus_creative": {
+                      "enroll_status": "OPT_OUT"
+                    }
+                  }
+                },
+                "effective_object_story_id": "1165811629958161_122122465209433079",
+                "id": "1598275961783143",
+                "instagram_user_id": "17841436730765402",
+                "object_story_spec": {
+                  "instagram_user_id": "17841436730765402",
+                  "page_id": "1165811629958161",
+                  "video_data": {
+                    "call_to_action": {
+                      "type": "GET_OFFER_VIEW",
+                      "value": {
+                        "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                      }
+                    },
+                    "image_hash": "1c3569453de82ae3837573b6b746845e",
+                    "image_url": "https://www.facebook.com/ads/image/?d=AQI72Lu43Z3L_3NpXC3NpfcgphDoEupwFJ_V8eNS-Xn79xQyBxjeg_sHF9IKTqoOn1L5svZdpHH7lK3K9jD8pLWdvm-CI7XUuvloWN7B_SkNncrNzFua21XUE9R3fiaeURnb9_0bEFU_xGlMGkLdwNGy",
+                    "link_description": "⭐⭐⭐⭐⭐",
+                    "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                    "title": "UNLOCK THE OFFER ✅✅✅",
+                    "video_id": "1094174283368785"
+                  }
+                }
+              },
+              "id": "120255039991230547",
+              "name": "AD - 02",
+              "source_ad_id": "120254695947070547",
+              "status": "ACTIVE"
+            }
+          ],
+          "paging": {
+            "cursors": {
+              "after": "QVFIVHZAIXzVwUnF2cmhCS2RLUXpZAejZAiWlhhMWhSTEZAVYXR3ZA0hNcjVqeUl2aVNMLUo0ajZA2M0NnTlk1NElLMnhqNXZAzYXZALWkg1SG9JaTJrRnU5NV9oS3NR",
+              "before": "QVFIVFJjcC1CM0c1d3FnWTdGbVZAZAeDhOVkw0NzZAaWUZA3ZAkw0M01qb05pLS1GQ2h5RElRMWdnelJsUTgxRWt3Yy04R2tGOHNXT3c3Y3RpNm1ERlJ6VU5icDZAB"
+            }
+          }
+        },
+        "adsets": {
+          "data": [
+            {
+              "attribution_spec": [
+                {
+                  "event_type": "CLICK_THROUGH",
+                  "window_days": 7
+                },
+                {
+                  "event_type": "VIEW_THROUGH",
+                  "window_days": 1
+                },
+                {
+                  "event_type": "ENGAGED_VIDEO_VIEW",
+                  "window_days": 1
+                }
+              ],
+              "bid_amount": 105,
+              "billing_event": "IMPRESSIONS",
+              "configured_status": "ACTIVE",
+              "id": "120255039989050547",
+              "is_dynamic_creative": false,
+              "name": "CONJUNTO 01 - (b01fb05c092g01)",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST",
+                "pixel_id": "1049581090103163",
+                "smart_pse_enabled": false
+              },
+              "start_time": "2026-10-16T10:13:49-0400",
+              "status": "ACTIVE",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "US"
+                  ],
+                  "location_types": [
+                    "frequently_in",
+                    "home",
+                    "recent"
+                  ]
+                },
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              }
+            }
+          ],
+          "paging": {
+            "cursors": {
+              "after": "QVFIVFg1V3FxeXhfcFY1b3hpYmVPeEhnaXpSczhBSFpKRndkZAXFIMG9LT3BWcnlzMGl1U3BQLWFQSXFRbFZASV1RTOE9HYU9pQnlzbm9oelpPTkdEWTNQY0NB",
+              "before": "QVFIVFg1V3FxeXhfcFY1b3hpYmVPeEhnaXpSczhBSFpKRndkZAXFIMG9LT3BWcnlzMGl1U3BQLWFQSXFRbFZASV1RTOE9HYU9pQnlzbm9oelpPTkdEWTNQY0NB"
+            }
+          }
+        },
+        "campaign": {
+          "account_id": "787796726891306",
+          "bid_strategy": "COST_CAP",
+          "configured_status": "ACTIVE",
+          "daily_budget": "7500",
+          "effective_status": "ACTIVE",
+          "id": "120255039988870547",
+          "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+          "start_time": "2026-10-16T10:13:49-0400",
+          "status": "ACTIVE"
+        }
+      }
+    ],
+    "manifest": {
+      "campaigns": [
+        {
+          "account_id": "787796726891306",
+          "ads": [
+            {
+              "creative_payload": {
+                "contextual_multi_ads": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "degrees_of_freedom_spec": {
+                  "creative_features_spec": {
+                    "pac_relaxation": {
+                      "enroll_status": "OPT_IN"
+                    },
+                    "product_browsing": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "site_extensions": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "text_translation": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "translate_voiceover": {
+                      "enroll_status": "OPT_OUT"
+                    }
+                  }
+                },
+                "media_sourcing_spec": {
+                  "titles": [
+                    {
+                      "text": "UNLOCK THE OFFER ✅✅✅"
+                    }
+                  ]
+                },
+                "name": "SHEIN G001 C92 AD - 01 COPY C35",
+                "object_story_spec": {
+                  "instagram_user_id": "17841436730765402",
+                  "page_id": "1165811629958161",
+                  "video_data": {
+                    "call_to_action": {
+                      "type": "GET_OFFER_VIEW",
+                      "value": {
+                        "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                      }
+                    },
+                    "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                    "link_description": "⭐⭐⭐⭐⭐",
+                    "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                    "title": "UNLOCK THE OFFER ✅✅✅",
+                    "video_id": "1079538124782974"
+                  }
+                },
+                "url_tags": ""
+              },
+              "name": "AD - 01",
+              "source_ad_id": "120254695947060547"
+            },
+            {
+              "creative_payload": {
+                "contextual_multi_ads": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "degrees_of_freedom_spec": {
+                  "creative_features_spec": {
+                    "pac_relaxation": {
+                      "enroll_status": "OPT_IN"
+                    },
+                    "product_browsing": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "site_extensions": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "text_translation": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "translate_voiceover": {
+                      "enroll_status": "OPT_OUT"
+                    }
+                  }
+                },
+                "media_sourcing_spec": {
+                  "titles": [
+                    {
+                      "text": "UNLOCK THE OFFER ✅✅✅"
+                    }
+                  ]
+                },
+                "name": "SHEIN G001 C92 AD - 02 COPY C35",
+                "object_story_spec": {
+                  "instagram_user_id": "17841436730765402",
+                  "page_id": "1165811629958161",
+                  "video_data": {
+                    "call_to_action": {
+                      "type": "GET_OFFER_VIEW",
+                      "value": {
+                        "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                      }
+                    },
+                    "image_hash": "1c3569453de82ae3837573b6b746845e",
+                    "link_description": "⭐⭐⭐⭐⭐",
+                    "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                    "title": "UNLOCK THE OFFER ✅✅✅",
+                    "video_id": "1094174283368785"
+                  }
+                },
+                "url_tags": ""
+              },
+              "name": "AD - 02",
+              "source_ad_id": "120254695947070547"
+            }
+          ],
+          "adset_name": "CONJUNTO 01 - (b01fb05c092g01)",
+          "adset_updates": {
+            "bid_amount": "105",
+            "bid_constraints": {}
+          },
+          "app_key": "mgs-meta-app-1299247318762949",
+          "bid_override": true,
+          "campaign_updates": {
+            "bid_strategy": "COST_CAP",
+            "daily_budget": "7500"
+          },
+          "creative_materialization_route": "source_definition_two_phase",
+          "idempotency_key": "shein-1560656571212505109",
+          "mode": "pure_clone",
+          "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+          "source_adset_id": "120254695947050547",
+          "source_campaign_id": "120254695947040547",
+          "start_intent": "IMMEDIATE",
+          "start_time": "2026-10-16T10:13:49-04:00",
+          "status": "PAUSED"
+        }
+      ],
+      "created_at": "2026-10-16T14:13:19.975267+00:00",
+      "execution_mode": "pure_clone",
+      "graph_version": "v26.0",
+      "operation": "SHEIN-US-DIRECT",
+      "prevalidated": true,
+      "prevalidation": {
+        "checks": [
+          "schema_v3",
+          "unique_idempotency",
+          "timezone_start",
+          "safe_creative_payload",
+          "source_ad_lineage"
+        ],
+        "content_digest": "85096e286d1d4282a117e799022caf7197cc139935110129577f0fc851148e0d",
+        "engine_version": 3,
+        "validated_at": "2026-10-16T14:13:19.976667+00:00"
+      },
+      "request_id": "shein-1560656571212505109",
+      "schema_version": 3
+    },
+    "media_postprocess_complete": true,
+    "media_qa": {
+      "120255039988870547": {
+        "ad_ids": [
+          "120255039991290547",
+          "120255039991230547"
+        ],
+        "creative_ids": [
+          "2597378224040038",
+          "1598275961783143"
+        ],
+        "rendered_media": [
+          {
+            "images": [
+              {
+                "height": 1920,
+                "width": 1080
+              }
+            ],
+            "videos": [
+              {
+                "duration": 17.790708,
+                "error": null,
+                "height": 1280,
+                "readyState": 4,
+                "width": 720
+              }
+            ]
+          },
+          {
+            "images": [
+              {
+                "height": 1920,
+                "width": 1080
+              }
+            ],
+            "videos": [
+              {
+                "duration": 16.084042,
+                "error": null,
+                "height": 1280,
+                "readyState": 4,
+                "width": 720
+              }
+            ]
+          }
+        ],
+        "signed_urls_persisted": false,
+        "variant_pairs": [
+          [
+            "1079538124782974",
+            "1079538124782974"
+          ],
+          [
+            "1094174283368785",
+            "1094174283368785"
+          ]
+        ],
+        "verified": true
+      }
+    },
+    "new_media_assets": [],
+    "number": 92,
+    "page_id": "1165811629958161",
+    "phase": "COMPLETE_FUTURE_ACTIVE",
+    "prepared_at": "2026-10-16T14:13:16.107367+00:00",
+    "prerequisites": {
+      "assignment": {
+        "data": [
+          {
+            "id": "122116750671458820",
+            "name": "Aline Rosse",
+            "tasks": [
+              "MANAGE_LEADS",
+              "MODERATE",
+              "MESSAGING",
+              "ANALYZE",
+              "ADVERTISE",
+              "CREATE_CONTENT",
+              "MANAGE"
+            ]
+          },
+          {
+            "id": "122108473071499450",
+            "name": "Claudia Farias",
+            "tasks": [
+              "MANAGE_LEADS",
+              "VIEW_MONETIZATION_INSIGHTS",
+              "MODERATE",
+              "MESSAGING",
+              "ANALYZE",
+              "ADVERTISE",
+              "CREATE_CONTENT",
+              "MANAGE"
+            ]
+          },
+          {
+            "id": "122141618025069441",
+            "name": "Roosevelt Mattei",
+            "tasks": [
+              "MANAGE_LEADS",
+              "VIEW_MONETIZATION_INSIGHTS",
+              "MODERATE",
+              "MESSAGING",
+              "ANALYZE",
+              "ADVERTISE",
+              "CREATE_CONTENT",
+              "MANAGE"
+            ]
+          },
+          {
+            "id": "122095869861482193",
+            "name": "minibot System User",
+            "tasks": [
+              "ANALYZE",
+              "ADVERTISE"
+            ]
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "after": "QVFIVHdTRF9UQURWS0lCUFpqTjdkS2NVRzZATc1JMMWpxUDBoM1Y3ZAFhwTWlIanU2eU9VR0lmUElCLThiOHVkS3lqTV9iRWc4R2xtcHdMemtCSUNranZAlLWp4SjdzcW9XMHFPUkZAjY25mTktMbk5R",
+            "before": "QVFIVDBQOGIxaU5fekVsVHFNRnBRT294Y0lnM2JpaEdDVFRCbXRHd3BORTRIVHFCMmVCaWt3Q3VaQmlJTTZAVN0RJU05VMEVJQ0VMTDFfbkFoQ3pxVHVjQTNR"
+          }
+        }
+      },
+      "page": {
+        "id": "1165811629958161",
+        "name": "Smart Finds"
+      },
+      "pixels": {
+        "data": [
+          {
+            "id": "1049581090103163",
+            "name": "US-SHEIN-EN"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "after": "MTA0OTU4MTA5MDEwMzE2MwZDZD",
+            "before": "MTA0OTU4MTA5MDEwMzE2MwZDZD"
+          }
+        }
+      }
+    },
+    "qa_proof": {
+      "creation_digest": "f158140afae394d4c85b4e47c15fa99f316579c6dd89ca916aae4e744c669dbe",
+      "execution_started_at": "2026-10-16T14:12:02.174000+00:00",
+      "media_qa": {
+        "120255039988870547": {
+          "ad_ids": [
+            "120255039991290547",
+            "120255039991230547"
+          ],
+          "creative_ids": [
+            "2597378224040038",
+            "1598275961783143"
+          ],
+          "rendered_media": [
+            {
+              "images": [
+                {
+                  "height": 1920,
+                  "width": 1080
+                }
+              ],
+              "videos": [
+                {
+                  "duration": 17.790708,
+                  "error": null,
+                  "height": 1280,
+                  "readyState": 4,
+                  "width": 720
+                }
+              ]
+            },
+            {
+              "images": [
+                {
+                  "height": 1920,
+                  "width": 1080
+                }
+              ],
+              "videos": [
+                {
+                  "duration": 16.084042,
+                  "error": null,
+                  "height": 1280,
+                  "readyState": 4,
+                  "width": 720
+                }
+              ]
+            }
+          ],
+          "signed_urls_persisted": false,
+          "variant_pairs": [
+            [
+              "1079538124782974",
+              "1079538124782974"
+            ],
+            [
+              "1094174283368785",
+              "1094174283368785"
+            ]
+          ],
+          "verified": true
+        }
+      },
+      "request_id": "shein-1560656571212505109",
+      "target_digest": "43d4de84896e61a53a9a69616323b3b0a8b1ef762a287a12e2c040e3cdf7f054",
+      "trees": [
+        {
+          "ads": {
+            "data": [
+              {
+                "adset_id": "120255039989050547",
+                "creative": {
+                  "contextual_multi_ads": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "degrees_of_freedom_spec": {
+                    "creative_features_spec": {
+                      "adapt_to_placement": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "add_text_overlay": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ads_with_benefits": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "advantage_plus_creative": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "app_highlights": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "audio": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "auto_promotion_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "biz_ai": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "carousel_to_video": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "catalog_feed_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "creative_stickers": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "customize_product_recommendation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "cv_transformation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "description_automation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "dha_optimization": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "dynamic_cta_text": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "dynamic_partner_content": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "enable_ncs_testimonials": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "enhance_cta": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "fb_feed_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "fb_reels_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "fb_story_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "feed_caption_optimization": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "generate_cta": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "hide_price": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "hyperlink_formatting": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_feed_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_glados_feed": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_reels_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_stream_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_video_native_subtitle": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_animation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_auto_crop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_background_gen": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_banner": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_brightness_and_contrast": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_end_card": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_enhancement": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_templates": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_text_translation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_touchups": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_uncrop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "inline_comment": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "local_store_extension": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "media_liquidity_animated_image": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "media_order": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "media_type_automation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "multi_creative_post_carousel": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "multi_photo_to_video": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "music_generation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "pac_genai_recomposition": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "pac_recomposition": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "pac_relaxation": {
+                        "enroll_status": "OPT_IN"
+                      },
+                      "product_browsing": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "product_extensions": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "product_metadata_automation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "product_tags": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "profile_card": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "profile_extension": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "replace_media_text": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "reveal_details_over_time": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "show_destination_blurbs": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "show_summary": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "site_extensions": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "standard_enhancements_catalog": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_extraction_for_headline": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_extraction_for_tap_target": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_formatting_optimization": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_generation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_optimizations": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_overlay_translation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_translation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "translate_voiceover": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_auto_crop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_filtering": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_highlight": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_highlights": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_to_image": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_uncrop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_uncrop_9x16_to_9x18": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_voiceover": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "wa_mm_image_filtering": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "wa_mm_text_truncation_length": {
+                        "enroll_status": "OPT_OUT"
+                      }
+                    }
+                  },
+                  "effective_object_story_id": "1165811629958161_122122465233433079",
+                  "id": "2597378224040038",
+                  "instagram_user_id": "17841436730765402",
+                  "object_story_spec": {
+                    "instagram_user_id": "17841436730765402",
+                    "page_id": "1165811629958161",
+                    "video_data": {
+                      "call_to_action": {
+                        "type": "GET_OFFER_VIEW",
+                        "value": {
+                          "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                        }
+                      },
+                      "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                      "image_url": "https://www.facebook.com/ads/image/?d=AQKyxHuRbOMnse4_8a4XjS1q4D1Lh_NTrLgJvnLt0nhBJ8GURNq8PqH21uBVrqz6YP4jLSw1Tj8Sag2pBap1v3Ihb2MjmufCEVP5PdUihPU_5-LMlFOLZfMrTgT8xIzT2O6rQUfNo7OQiBReucRUvY9P",
+                      "link_description": "⭐⭐⭐⭐⭐",
+                      "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                      "title": "UNLOCK THE OFFER ✅✅✅",
+                      "video_id": "1079538124782974"
+                    }
+                  }
+                },
+                "id": "120255039991290547",
+                "name": "AD - 01",
+                "source_ad_id": "120254695947060547",
+                "status": "PAUSED"
+              },
+              {
+                "adset_id": "120255039989050547",
+                "creative": {
+                  "contextual_multi_ads": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "degrees_of_freedom_spec": {
+                    "creative_features_spec": {
+                      "adapt_to_placement": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "add_text_overlay": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ads_with_benefits": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "advantage_plus_creative": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "app_highlights": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "audio": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "auto_promotion_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "biz_ai": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "carousel_to_video": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "catalog_feed_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "creative_stickers": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "customize_product_recommendation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "cv_transformation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "description_automation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "dha_optimization": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "dynamic_cta_text": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "dynamic_partner_content": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "enable_ncs_testimonials": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "enhance_cta": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "fb_feed_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "fb_reels_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "fb_story_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "feed_caption_optimization": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "generate_cta": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "hide_price": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "hyperlink_formatting": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_feed_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_glados_feed": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_reels_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_stream_tag": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "ig_video_native_subtitle": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_animation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_auto_crop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_background_gen": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_banner": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_brightness_and_contrast": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_end_card": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_enhancement": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_templates": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_text_translation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_touchups": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "image_uncrop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "inline_comment": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "local_store_extension": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "media_liquidity_animated_image": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "media_order": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "media_type_automation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "multi_creative_post_carousel": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "multi_photo_to_video": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "music_generation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "pac_genai_recomposition": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "pac_recomposition": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "pac_relaxation": {
+                        "enroll_status": "OPT_IN"
+                      },
+                      "product_browsing": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "product_extensions": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "product_metadata_automation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "product_tags": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "profile_card": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "profile_extension": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "replace_media_text": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "reveal_details_over_time": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "show_destination_blurbs": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "show_summary": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "site_extensions": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "standard_enhancements_catalog": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_extraction_for_headline": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_extraction_for_tap_target": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_formatting_optimization": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_generation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_optimizations": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_overlay_translation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "text_translation": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "translate_voiceover": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_auto_crop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_filtering": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_highlight": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_highlights": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_to_image": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_uncrop": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_uncrop_9x16_to_9x18": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "video_voiceover": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "wa_mm_image_filtering": {
+                        "enroll_status": "OPT_OUT"
+                      },
+                      "wa_mm_text_truncation_length": {
+                        "enroll_status": "OPT_OUT"
+                      }
+                    }
+                  },
+                  "effective_object_story_id": "1165811629958161_122122465209433079",
+                  "id": "1598275961783143",
+                  "instagram_user_id": "17841436730765402",
+                  "object_story_spec": {
+                    "instagram_user_id": "17841436730765402",
+                    "page_id": "1165811629958161",
+                    "video_data": {
+                      "call_to_action": {
+                        "type": "GET_OFFER_VIEW",
+                        "value": {
+                          "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                        }
+                      },
+                      "image_hash": "1c3569453de82ae3837573b6b746845e",
+                      "image_url": "https://www.facebook.com/ads/image/?d=AQJ2q3pETn1rkGRJ_nZvMaDii9UfxnIj_SlIIFyaeIlx52ff5_gTfcUpDHfLeacCnswSx6CbjZ3wPNxnG2qlkNYQKE-D03Inx13HO8H37GKFsWXFNhK_v2XmbQevpwkNSyCjbWTy4XVeLYWEYxj7Zz66",
+                      "link_description": "⭐⭐⭐⭐⭐",
+                      "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                      "title": "UNLOCK THE OFFER ✅✅✅",
+                      "video_id": "1094174283368785"
+                    }
+                  }
+                },
+                "id": "120255039991230547",
+                "name": "AD - 02",
+                "source_ad_id": "120254695947070547",
+                "status": "PAUSED"
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVDFZASTZASOGxDVkNYY3J0ZA1ZAnZAFlBemNBQnlWckVMSzNiQnJHRFVMd00yRktTZAXM0R2s3ZAEN2SmNVZAE5JT1A1UHdQQXZACVTNrczNGMFFCZAW5QU0VQd3p3",
+                "before": "QVFIVFI3ZAXRjVEl1MHVUazRPNDZAuMGtBOHpxUUpJOGVCWGMyUHBoODRnMGhtNExfd2JXQzVEcWJiby16Um9vSnF4bVVhS3M4eTNFam85X3BRbUtVUFFSTVR3"
+              }
+            }
+          },
+          "adsets": {
+            "data": [
+              {
+                "attribution_spec": [
+                  {
+                    "event_type": "CLICK_THROUGH",
+                    "window_days": 7
+                  },
+                  {
+                    "event_type": "VIEW_THROUGH",
+                    "window_days": 1
+                  },
+                  {
+                    "event_type": "ENGAGED_VIDEO_VIEW",
+                    "window_days": 1
+                  }
+                ],
+                "bid_amount": 105,
+                "billing_event": "IMPRESSIONS",
+                "id": "120255039989050547",
+                "is_dynamic_creative": false,
+                "name": "CONJUNTO 01 - (b01fb05c092g01)",
+                "optimization_goal": "OFFSITE_CONVERSIONS",
+                "promoted_object": {
+                  "custom_event_type": "ADD_TO_WISHLIST",
+                  "pixel_id": "1049581090103163",
+                  "smart_pse_enabled": false
+                },
+                "start_time": "2026-10-16T10:13:49-0400",
+                "status": "PAUSED",
+                "targeting": {
+                  "age_max": 65,
+                  "age_min": 18,
+                  "age_range": [
+                    18,
+                    65
+                  ],
+                  "brand_safety_content_filter_levels": [
+                    "FACEBOOK_RELAXED",
+                    "AN_RELAXED"
+                  ],
+                  "geo_locations": {
+                    "countries": [
+                      "US"
+                    ],
+                    "location_types": [
+                      "frequently_in",
+                      "home",
+                      "recent"
+                    ]
+                  },
+                  "targeting_automation": {
+                    "advantage_audience": 1
+                  }
+                }
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVFg1V3FxeXhfcFY1b3hpYmVPeEhnaXpSczhBSFpKRndkZAXFIMG9LT3BWcnlzMGl1U3BQLWFQSXFRbFZASV1RTOE9HYU9pQnlzbm9oelpPTkdEWTNQY0NB",
+                "before": "QVFIVFg1V3FxeXhfcFY1b3hpYmVPeEhnaXpSczhBSFpKRndkZAXFIMG9LT3BWcnlzMGl1U3BQLWFQSXFRbFZASV1RTOE9HYU9pQnlzbm9oelpPTkdEWTNQY0NB"
+              }
+            }
+          },
+          "campaign": {
+            "account_id": "787796726891306",
+            "bid_strategy": "COST_CAP",
+            "daily_budget": "7500",
+            "effective_status": "PAUSED",
+            "id": "120255039988870547",
+            "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+            "start_time": "2026-10-16T10:13:49-0400",
+            "status": "PAUSED"
+          }
+        }
+      ],
+      "verified": true
+    },
+    "qa_warnings": [],
+    "request": {
+      "account": "Yolokfx-US-SHEIN-EN-05-G001",
+      "authorized_by": "321263240782807040",
+      "bid_strategy": "COCAP",
+      "bid_usd": "1.05",
+      "budget_usd": "75",
+      "mode": "pure_clone",
+      "quantity": 1,
+      "request_id": "shein-1560656571212505109",
+      "source_channel_id": "1548149087206121613",
+      "source_message_id": "1560656571212505109",
+      "source_number": 35,
+      "source_thread_id": "1558123871817965589",
+      "start_now": true,
+      "status": "ACTIVE"
+    },
+    "resolved_request": {
+      "account": "Yolokfx-US-SHEIN-EN-05-G001",
+      "authorized_by": "321263240782807040",
+      "bid_strategy": "COCAP",
+      "bid_usd": "1.05",
+      "budget_usd": "75",
+      "mode": "pure_clone",
+      "quantity": 1,
+      "request_id": "shein-1560656571212505109",
+      "source_channel_id": "1548149087206121613",
+      "source_message_id": "1560656571212505109",
+      "source_number": 35,
+      "source_thread_id": "1558123871817965589",
+      "start_now": true,
+      "start_time": "2026-10-16T14:13:49+00:00",
+      "status": "ACTIVE"
+    },
+    "schema_version": 1,
+    "source": {
+      "ads": [
+        {
+          "adset_id": "120254695947050547",
+          "creative": {
+            "contextual_multi_ads": {
+              "enroll_status": "OPT_OUT"
+            },
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "pac_relaxation": {
+                  "enroll_status": "OPT_IN"
+                },
+                "product_browsing": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "site_extensions": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "standard_enhancements": {
+                  "enroll_status": "OPT_IN"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            },
+            "effective_object_story_id": "1165811629958161_122118988257433079",
+            "id": "1690915212816515",
+            "instagram_user_id": "17841436730765402",
+            "media_sourcing_spec": {
+              "titles": [
+                {
+                  "text": "UNLOCK THE OFFER ✅✅✅"
+                }
+              ]
+            },
+            "name": "UNLOCK THE OFFER ✅✅✅ 2026-09-28-fd290bc34246f830b69b59e8dd7b18b0",
+            "object_story_spec": {
+              "instagram_user_id": "17841436730765402",
+              "page_id": "1165811629958161",
+              "video_data": {
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW",
+                  "value": {
+                    "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c35&utm_adgroup=b01fb05c35g01"
+                  }
+                },
+                "image_hash": "1c3569453de82ae3837573b6b746845e",
+                "image_url": "https://www.facebook.com/ads/image/?d=AQJJKzhmLOy-krLxudGftM014wgOW4Y6HWeKvHM6vUkXO8smA31IZ4lc7nsaqCAHzsMBikTk2gXg2l4G2vC0T5GDm4UfrnlXNaif9puRJ-MtMEWXdMCu22UQzAeZg-C7aIhtExBpo4X2ptdNmPBWugIH",
+                "link_description": "⭐⭐⭐⭐⭐",
+                "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                "title": "UNLOCK THE OFFER ✅✅✅",
+                "video_id": "1094174283368785"
+              }
+            }
+          },
+          "id": "120254695947070547",
+          "name": "AD - 02",
+          "source_ad_id": "120254695933150547",
+          "status": "ACTIVE"
+        },
+        {
+          "adset_id": "120254695947050547",
+          "creative": {
+            "contextual_multi_ads": {
+              "enroll_status": "OPT_OUT"
+            },
+            "degrees_of_freedom_spec": {
+              "creative_features_spec": {
+                "pac_relaxation": {
+                  "enroll_status": "OPT_IN"
+                },
+                "product_browsing": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "site_extensions": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "standard_enhancements": {
+                  "enroll_status": "OPT_IN"
+                },
+                "text_translation": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "translate_voiceover": {
+                  "enroll_status": "OPT_OUT"
+                }
+              }
+            },
+            "effective_object_story_id": "1165811629958161_122118988275433079",
+            "id": "1066143686289758",
+            "instagram_user_id": "17841436730765402",
+            "media_sourcing_spec": {
+              "titles": [
+                {
+                  "text": "UNLOCK THE OFFER ✅✅✅"
+                }
+              ]
+            },
+            "name": "UNLOCK THE OFFER ✅✅✅ 2026-09-28-ae4de329ba286242bdc106a4d1999a8f",
+            "object_story_spec": {
+              "instagram_user_id": "17841436730765402",
+              "page_id": "1165811629958161",
+              "video_data": {
+                "call_to_action": {
+                  "type": "GET_OFFER_VIEW",
+                  "value": {
+                    "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c35&utm_adgroup=b01fb05c35g01"
+                  }
+                },
+                "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                "image_url": "https://www.facebook.com/ads/image/?d=AQJvG_g05Ftb9_U3H-TVieyQ3vQ03UIsr6VQisLKpRlny1sIBxf9s42qflZ9kvsRz1zP7uPIN_vPKzzDO2YREyLfh5sw8-UdTx-MFQ_vKlfrkpPslE_Kzc2NzfTtfr561qNKrvGaqHrM-n5rev9_df89",
+                "link_description": "⭐⭐⭐⭐⭐",
+                "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                "title": "UNLOCK THE OFFER ✅✅✅",
+                "video_id": "1079538124782974"
+              }
+            }
+          },
+          "id": "120254695947060547",
+          "name": "AD - 01",
+          "source_ad_id": "120254695933140547",
+          "status": "ACTIVE"
+        }
+      ],
+      "adset": {
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          },
+          {
+            "event_type": "ENGAGED_VIDEO_VIEW",
+            "window_days": 1
+          }
+        ],
+        "billing_event": "IMPRESSIONS",
+        "id": "120254695947050547",
+        "is_dynamic_creative": false,
+        "name": "CONJUNTO 01 - (b01fb05c35g01)",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "promoted_object": {
+          "custom_event_type": "ADD_TO_WISHLIST",
+          "pixel_id": "1049581090103163",
+          "smart_pse_enabled": false
+        },
+        "regional_regulated_categories": [
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "regional_regulation_identities": {
+          "universal_beneficiary": "2174500773392632",
+          "universal_payer": "2174500773392632"
+        },
+        "start_time": "2026-09-29T00:30:00-0400",
+        "status": "ACTIVE",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "geo_locations": {
+            "countries": [
+              "US"
+            ],
+            "location_types": [
+              "frequently_in",
+              "home",
+              "recent"
+            ]
+          },
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        }
+      },
+      "campaign": {
+        "account_id": "787796726891306",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "buying_type": "AUCTION",
+        "daily_budget": "5000",
+        "id": "120254695947040547",
+        "name": "35 - BIKE ELETRICA KELLY - US-EN (b01fb05c35) event_add_to_wishlist 29 SET LP2",
+        "objective": "OUTCOME_SALES",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "US"
+        ],
+        "status": "ACTIVE"
+      },
+      "video_metadata": {
+        "1079538124782974": {
+          "id": "1079538124782974",
+          "length": 17.682,
+          "status": {
+            "processing_phase": {
+              "status": "complete"
+            },
+            "publishing_phase": {
+              "publish_status": "published",
+              "publish_time": "2026-09-25T04:07:05+0000",
+              "status": "complete"
+            },
+            "uploading_phase": {
+              "status": "complete"
+            },
+            "video_status": "ready"
+          },
+          "title": "SHEIN_US_EN_VID_FREE_ELECTRIC_BIKE_PV_003.mp4"
+        },
+        "1094174283368785": {
+          "id": "1094174283368785",
+          "length": 15.976,
+          "status": {
+            "processing_phase": {
+              "status": "complete"
+            },
+            "publishing_phase": {
+              "publish_status": "published",
+              "publish_time": "2026-09-25T04:07:05+0000",
+              "status": "complete"
+            },
+            "uploading_phase": {
+              "status": "complete"
+            },
+            "video_status": "ready"
+          },
+          "title": "SHEIN_US_EN_VID_FREE_ELECTRIC_BIKE_PV_004.mp4"
+        }
+      }
+    },
+    "summary": {
+      "account_active_daily_budget_usd": 2081.54,
+      "account_id": "787796726891306",
+      "ads": 2,
+      "budget_usd": 75.0,
+      "campaign_id": "120255039988870547",
+      "campaigns": [
+        {
+          "ads": 2,
+          "campaign_id": "120255039988870547",
+          "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist"
+        }
+      ],
+      "engine_replayed": false,
+      "logical_gets": 1,
+      "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+      "number": 92,
+      "posts_preserved": false,
+      "read_http_requests": 1,
+      "request_active_budget_delta_usd": 75.0,
+      "request_id": "shein-1560656571212505109",
+      "social": [],
+      "source_campaign_id": "120254695947040547",
+      "start_time": "2026-10-16T10:13:49-0400",
+      "status": "COMPLETE_FUTURE_ACTIVE",
+      "timing_basis": "Discord message creation to readback",
+      "timings": {
+        "e2e_target_met": false,
+        "e2e_target_seconds": 144,
+        "original_request_e2e_ms": 88159736.76,
+        "postprocess_ms": 5915.647,
+        "preparation_ms": 163.089,
+        "request_to_readback_ms": 88159736.76,
+        "runner_total_ms": 7062.457
+      },
+      "warnings": []
+    },
+    "target_manifest": {
+      "campaigns": [
+        {
+          "account_id": "787796726891306",
+          "ads": [
+            {
+              "creative_payload": {
+                "contextual_multi_ads": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "degrees_of_freedom_spec": {
+                  "creative_features_spec": {
+                    "pac_relaxation": {
+                      "enroll_status": "OPT_IN"
+                    },
+                    "product_browsing": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "site_extensions": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "text_translation": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "translate_voiceover": {
+                      "enroll_status": "OPT_OUT"
+                    }
+                  }
+                },
+                "media_sourcing_spec": {
+                  "titles": [
+                    {
+                      "text": "UNLOCK THE OFFER ✅✅✅"
+                    }
+                  ]
+                },
+                "name": "SHEIN G001 C92 AD - 01 COPY C35",
+                "object_story_spec": {
+                  "instagram_user_id": "17841436730765402",
+                  "page_id": "1165811629958161",
+                  "video_data": {
+                    "call_to_action": {
+                      "type": "GET_OFFER_VIEW",
+                      "value": {
+                        "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                      }
+                    },
+                    "image_hash": "84e5e21ea70cae4802199dafc4d518e7",
+                    "link_description": "⭐⭐⭐⭐⭐",
+                    "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                    "title": "UNLOCK THE OFFER ✅✅✅",
+                    "video_id": "1079538124782974"
+                  }
+                },
+                "url_tags": ""
+              },
+              "name": "AD - 01",
+              "source_ad_id": "120254695947060547"
+            },
+            {
+              "creative_payload": {
+                "contextual_multi_ads": {
+                  "enroll_status": "OPT_OUT"
+                },
+                "degrees_of_freedom_spec": {
+                  "creative_features_spec": {
+                    "pac_relaxation": {
+                      "enroll_status": "OPT_IN"
+                    },
+                    "product_browsing": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "site_extensions": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "text_translation": {
+                      "enroll_status": "OPT_OUT"
+                    },
+                    "translate_voiceover": {
+                      "enroll_status": "OPT_OUT"
+                    }
+                  }
+                },
+                "media_sourcing_spec": {
+                  "titles": [
+                    {
+                      "text": "UNLOCK THE OFFER ✅✅✅"
+                    }
+                  ]
+                },
+                "name": "SHEIN G001 C92 AD - 02 COPY C35",
+                "object_story_spec": {
+                  "instagram_user_id": "17841436730765402",
+                  "page_id": "1165811629958161",
+                  "video_data": {
+                    "call_to_action": {
+                      "type": "GET_OFFER_VIEW",
+                      "value": {
+                        "link": "https://yolokfx.com/quiz/us/sh2-g001/?utm_source=facebook&utm_medium=g001-s&utm_campaign=b01fb05c092&utm_adgroup=b01fb05c092g01"
+                      }
+                    },
+                    "image_hash": "1c3569453de82ae3837573b6b746845e",
+                    "link_description": "⭐⭐⭐⭐⭐",
+                    "message": "🚲 FREE E-BIKE 🚲\n💥NO ADDITIONAL COSTS OR FEES💥",
+                    "title": "UNLOCK THE OFFER ✅✅✅",
+                    "video_id": "1094174283368785"
+                  }
+                },
+                "url_tags": ""
+              },
+              "name": "AD - 02",
+              "source_ad_id": "120254695947070547"
+            }
+          ],
+          "adset_name": "CONJUNTO 01 - (b01fb05c092g01)",
+          "adset_updates": {
+            "bid_amount": "105",
+            "bid_constraints": {}
+          },
+          "app_key": "mgs-meta-app-1299247318762949",
+          "bid_override": true,
+          "campaign_updates": {
+            "bid_strategy": "COST_CAP",
+            "daily_budget": "7500"
+          },
+          "creative_materialization_route": "source_definition_two_phase",
+          "idempotency_key": "shein-1560656571212505109",
+          "mode": "pure_clone",
+          "name": "092 - 16/10 - v2 - BIKE ELETRICA KELLY - COCAP - (b01fb05c092) - COPY C35 - (US_APP) - event_add_to_wishlist",
+          "source_adset_id": "120254695947050547",
+          "source_campaign_id": "120254695947040547",
+          "start_intent": "IMMEDIATE",
+          "start_time": "2026-10-16T10:13:49-04:00",
+          "status": "ACTIVE"
+        }
+      ],
+      "created_at": "2026-10-16T14:13:19.975267+00:00",
+      "execution_mode": "pure_clone",
+      "graph_version": "v26.0",
+      "operation": "SHEIN-US-DIRECT",
+      "prevalidated": true,
+      "prevalidation": {
+        "checks": [
+          "schema_v3",
+          "unique_idempotency",
+          "timezone_start",
+          "safe_creative_payload",
+          "source_ad_lineage"
+        ],
+        "content_digest": "20d2d742abc7fe10c689caaff34f0e8f4b4c4a95a288a27520ab0f242e36bd4c",
+        "engine_version": 3,
+        "validated_at": "2026-10-16T14:13:19.975948+00:00"
+      },
+      "request_id": "shein-1560656571212505109",
+      "schema_version": 3
+    }
+  },
+  "source_evidence_path": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1560656571212505109/state.json",
+  "source_evidence_sha256": "c47a0120e9282b9c38301a33409e75b8abc596b7438ee7a8ff9be892efbdb876",
+  "status": "COMPLETE_FUTURE_ACTIVE"
+}
