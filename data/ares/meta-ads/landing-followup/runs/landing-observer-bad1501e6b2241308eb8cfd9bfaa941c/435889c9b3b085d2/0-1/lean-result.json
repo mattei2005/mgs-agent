@@ -1,0 +1,63 @@
+{
+  "result": "ERROR",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://vizioid.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c011&utm_adgroup=b01fb05c011g01&fbclid=fbclid&nocache",
+    "resolved_landing_url": "https://vizioid.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c011&utm_adgroup=b01fb05c011g01&fbclid=fbclid&nocache",
+    "mapping_source": "Live read-only GET https://vizioid.com/quiz/us/sh3-g005/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c011&utm_adgroup=b01fb05c011g01&fbclid=fbclid; all 7 [data-mgs-dq-cta] hrefs resolve to one identical destination; direct-quiz.js?v=1.2.0 mergeUrl preserves tracking; evidence /root/.hermes/profiles/ares/cache/scratch/landing-bad1501-source.html and landing-bad1501-source.js",
+    "diagnosis": "Owned closure requires reconciliation: Closure uncertain; no duplicate input",
+    "normal_opening": {
+      "state": "OWNED_NORMAL_NEW_WINDOW",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://vizioid.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g005-s&utm_campaign=b01fb05c011&utm_adgroup=b01fb05c011g01&fbclid=fbclid&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792249900.1164112,
+      "target": {
+        "pid": 18224,
+        "window_id": 25232808,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792249908.1240587
+    },
+    "opened_at": 1792249900.1164112,
+    "phase_seconds": {
+      "closure": 2.941349573000025,
+      "mechanical_total": 26.07536846899984
+    }
+  },
+  "batch_scope": "4ec1b61206393f003f86c2ff76096661ef5917cfd2c54a2a70e0bddcdccc1840"
+}
