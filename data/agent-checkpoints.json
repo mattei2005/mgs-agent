@@ -1912,6 +1912,16 @@
     },
     {
       "agent": "ares",
+      "id": "LANDING-RETRY-1561073565657464873",
+      "next_step": "Nenhuma repetição automática. Informar ausência de anúncio nos trechos verificados; histórico original permanece intacto.",
+      "objective": "Uma nova tentativaC170 noPC1 mobile conforme pedidoRodolfo",
+      "source": "data/ares/meta-ads/audit/landing-retry-1561073565657464873/final-verification.json;discord:message:1561073565657464873",
+      "state": "complete_single_replay;no_ad_in_article_entry_and_postscroll_views;article_scroll_verified;observation25.5009s;native_closed;original_pass_preserved",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-17T17:52:48+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "LANDING-REWARDED-1561047502944477287",
       "next_step": "Não repetirC170. Nova regra conta20-30s depois deartigo/rolagem, espera rewarded separada; sem clique em anúncio ouanunciante.",
       "objective": "C170 mobile: CTA próprio, liberaçãoartigo,rolagem e25s de observação",
@@ -6382,5 +6392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T16:55:39+00:00"
+  "updated_at": "2026-10-17T17:52:48+00:00"
 }
