@@ -63,6 +63,47 @@ class ElapsedScheduleTests(unittest.TestCase):
         self.assertEqual(Manifest.from_dict(payload).campaigns[0].start_intent,'IMMEDIATE')
         self.assertEqual(r['start_time'],'2030-10-09T11:30:00-04:00');self.assertEqual(s,before)
 
+    def test_elapsed_intent_crosses_real_manifest_validation_boundary(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from test_shein_general_runtime import case
+        from ares_campaign_v3.schema import Manifest
+        for status in ('ACTIVE', 'PAUSED'):
+            with self.subTest(status=status):
+                request, source, account, _ = case(4, status=status)
+                request.update(start_time='2030-10-09T11:30:00-04:00',
+                               budget_usd='100', bid_strategy='COCAP', bid_usd='0.85')
+                original = copy.deepcopy((request, source))
+                resolved = route.resolve_intent(request, source, now=NOW, profile=PROFILE)
+                audit = copy.deepcopy(resolved['schedule_adjustment'])
+                payload = route.build_manifest(resolved, source, 114, account)
+                campaign = Manifest.from_dict(payload).campaigns[0]
+                self.assertEqual(campaign.start_intent, 'IMMEDIATE')
+                self.assertEqual(payload['campaigns'][0]['status'], status)
+                self.assertEqual(payload['campaigns'][0]['campaign_updates']['daily_budget'], '10000')
+                self.assertEqual(payload['campaigns'][0]['campaign_updates']['bid_strategy'], 'COST_CAP')
+                self.assertEqual(payload['campaigns'][0]['adset_updates']['bid_amount'], '85')
+                self.assertEqual(resolved['schedule_adjustment'], audit)
+                self.assertEqual((request, source), original)
+                self.assertNotIn('schedule_adjustment', payload['campaigns'][0])
+
+    def test_schedule_audit_is_not_accepted_as_human_request_field(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from test_shein_general_runtime import case
+        request, _, _, _ = case(4)
+        request['schedule_adjustment'] = {'intent': 'IMMEDIATE_AFTER_QA'}
+        with self.assertRaisesRegex(route.RouteBlocked, 'unknown request field'):
+            route.validate_request(request)
+        with self.assertRaisesRegex(route.RouteBlocked, 'unknown request field'):
+            route.run_request(request, confirm_execute=False)
+
+    def test_unrelated_internal_field_still_fails_manifest_boundary(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from test_shein_general_runtime import case
+        request, source, account, _ = case(4)
+        request['skip_qa'] = True
+        with self.assertRaisesRegex(route.RouteBlocked, 'unknown request field'):
+            route.build_manifest(request, source, 114, account)
+
     def test_account_timezone_defines_calendar_day(self):
         p={'timezone':'America/Los_Angeles','expired_schedule_policy':POLICY}
         # Still yesterday in Los Angeles although UTC date is today.

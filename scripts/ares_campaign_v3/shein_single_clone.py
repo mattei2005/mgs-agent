@@ -195,7 +195,10 @@ def lookup_page(identifier: str):
 
 def build_manifest(request: dict[str, Any], source: dict[str, Any], number: int,
                    account_config: dict[str, Any]) -> dict[str, Any]:
-    validate_request({k: v for k, v in request.items() if k != '_resolved_assets'})
+    # These fields are produced after strict intake validation, not user inputs.
+    # Keep schedule_adjustment in the resolved request for audit/continuation.
+    validate_request({k: v for k, v in request.items()
+                      if k not in {'_resolved_assets', 'schedule_adjustment'}})
     if account_config.get('shein_profile'):
         from .shein_general import build
         return build(request, source, number, account_config)

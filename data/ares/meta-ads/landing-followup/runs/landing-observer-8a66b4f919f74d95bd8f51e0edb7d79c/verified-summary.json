@@ -1,0 +1,32 @@
+{
+  "job": "36bdb73fb31c2202d31203490590445fe09dbc380ca0b4a099105768978f761e",
+  "request_id": "shein-1560656571212505109",
+  "state": "WAITING_HUMAN",
+  "link_state": "REVIEW_REQUIRED",
+  "links": 1,
+  "passed": 0,
+  "review_required": 1,
+  "attempts": 5,
+  "no_ad_attempts": 5,
+  "all_attempts_closed": true,
+  "other_windows_preserved": true,
+  "messages": [
+    {
+      "key": "landing-item:36bdb73fb31c2202d31203490590445fe09dbc380ca0b4a099105768978f761e:0:3:DEFERRED_NO_AD",
+      "state": "VERIFIED",
+      "message_id": "1561027941343821915"
+    },
+    {
+      "key": "landing-item:36bdb73fb31c2202d31203490590445fe09dbc380ca0b4a099105768978f761e:0:4:COOLDOWN_NO_AD",
+      "state": "VERIFIED",
+      "message_id": "1561028015566094378"
+    },
+    {
+      "key": "landing-final-review:LANDING-AUTO60S-1560642881830789181:36bdb73fb31c2202d31203490590445fe09dbc380ca0b4a099105768978f761e:0",
+      "state": "PREPARED",
+      "message_id": null
+    }
+  ],
+  "external_posts_this_session": 0,
+  "checked_at": 1792248661.256561
+}
