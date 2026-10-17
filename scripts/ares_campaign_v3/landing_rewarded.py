@@ -83,7 +83,9 @@ def observe_rewarded(call,url,mapping_source,*,read_mobile,capture_visual,review
             # Never click within rewarded media, advertiser links, or repeat an
             # ambiguous CTA. Wait for readable article release on the same tab.
             pause(2)
-        if article is None:raise ValueError('Rewarded/article release not confirmed within bounded wait; no repeated CTA')
+        if article is None:
+            e.update(human_action_required=True,required_action='Revisar a liberação do artigo pelo rewarded; CTA único não levou a artigo legível dentro do prazo. Não repetir visualização publicitária automaticamente.')
+            raise ValueError('Rewarded/article release not confirmed within bounded wait; no repeated CTA')
         e.update(article_verified=True,article_ready_at=clock(),article_screenshot=article_shot['screenshot_path'],rewarded_wait_seconds=clock()-e['opened_at'])
         e['scroll_result']=scroll_article(call,proof['target'])
         after,scroll_shot=read_state(capture_visual,review_visual)

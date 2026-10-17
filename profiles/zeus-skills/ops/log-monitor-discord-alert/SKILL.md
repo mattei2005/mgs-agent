@@ -35,10 +35,12 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Auditoria de alertas Discord por janela: embeds completos, agrupamento por incidente, reconciliação com resoluções/live state e anti-spam de guardrail** → `references/discord-alert-history-audit-and-incident-reconciliation.md`
 - **Espelhar `Messenger user token invalid` da Smart Bidding com page count, dedupe, outbox e zero mentions** → `references/sb-messenger-token-invalid-monitor.md`
 
-- **RunCloud: conexão, serviços, disco e backups; transporte/outbox, agenda e limites da fase inicial** → `references/runcloud-initial-monitoring.md`
+- **RunCloud: coleta, orçamento de API, cooldown, cadência e avaliação SSH/API híbrida** → `references/runcloud-initial-monitoring.md`
 
 ## MGS transport and telemetry invariants
 
+- Before buying API capacity or reducing monitoring frequency, map each monitored predicate to its authoritative source and budget the complete collection workload. Prefer approved direct guest reads for host-local facts when they preserve the required evidence; retain provider reads for control-plane facts that local files cannot prove. A transport change must preserve unknown-state handling, alert semantics and the approved coverage.
+- Prove integration at the consumer, not at credential storage: an SSH key in 1Password or a successful interactive SSH login does not migrate an API-based monitor. Verify the runner's actual transport and exercise its exact deployed command before describing the new path as active.
 - For monitors posting to a Discord channel already reachable by an authenticated MGS bot, prefer direct Discord API delivery with that bot. Do not add a recurring 1Password lookup merely to retrieve a webhook.
 - Keep 1Password only for secrets genuinely required by the monitored operation, not for alert transport when local bot authentication already exists.
 - Alert delivery should remain independent of the dependency being monitored when practical; for example, a 1Password rate-limit monitor must alert through Discord bot auth rather than a 1Password-resolved webhook.

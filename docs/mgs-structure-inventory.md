@@ -9,6 +9,8 @@
 
 ## Campaign Ops — CPV13 reentrada D1 em duas viradas (2026-10-17)
 
+- **Emenda posterior de Rodolfo na mesma thread:** `C32` foi corrigida literalmente para `C42`; budgets de C40/C41/C42 confirmados em USD30/dia. Somente C42 exigiu POST de USD25→USD30, seguido de GET e duas leituras estáveis; requests originais foram reconciliados sem repetir o write. Esta emenda supersede o budget USD25 da C42 mencionado abaixo, preservado como histórico. A C42 já estava no lote de 18/10: decidir entre repetir o D1 em 19/10 ou mover sua ativação para 19/10 permanece pendente de resposta explícita. Nenhuma agenda foi alterada por inferência. Audit `cpv13-c40-c41-c42-budget30-correction-20261017-rodolfo`.
+
 - Autoridade: Rodolfo Mattei na thread `1539832402744975450`. Agendados C41/C42 para `2026-10-18T00:00:00-03:00` e C40 para `2026-10-19T00:00:00-03:00`, com D1 operacional novo, histórico preservado e budgets live inalterados (USD30, USD25 e USD30/dia, respectivamente).
 - Runner: `/root/.hermes/profiles/ares/scripts/cpv13-d1-restart-20261018-19.py`; wrappers `cpv13-c41-c42-d1-20261018.py` e `cpv13-c40-d1-20261019.py`. Configuração/request canônicos em `data/ares/meta-ads/state/manual-campaign-actions/cpv13-d1-20261018-19-config.json`; ciclos no contrato `Creditoparaveiculo-BR-CAR-BR.json`.
 - One-shots Hermes Ares `b6dbf310a27e` e `051eb42132fd`, `no_agent=true`, habilitados, stdout sanitizado para a origem, falha técnica local. Início físico 22:58:50 ET e espera sem lane até 00:00 SP. Agendas globais expandidas por oito datas; zero colisão operacional não baseline, baselines infra inevitáveis auditadas, lane exclusiva da conta adquirida só na execução.

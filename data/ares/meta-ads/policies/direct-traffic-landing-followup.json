@@ -89,8 +89,11 @@
     "sequence": [
       "new_normal_tab",
       "verify_native_mobile_preset_before_navigation",
+      "open_exact_landing_url",
+      "click_authorized_site_gate_once_if_present",
+      "wait_for_rewarded_and_actual_article_release",
       "scroll",
-      "keep_tab_open_20_to_30_seconds",
+      "observe_article_20_to_30_seconds_after_verified_scroll",
       "capture_one_final_visual_frame",
       "close_owned_tab",
       "review_captured_frame_without_extending_tab_residence",
@@ -136,15 +139,16 @@
       "preserve_existing_query_bytes": true
     },
     "supersedes": "Private windows, screenshot cadence collection and per-frame review as mandatory landing route",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "repair_browser_mode": "NORMAL_NOT_INCOGNITO",
     "repair_screenshot_series_required": false,
     "shared_mechanical_core": "ares_campaign_v3.landing_lean.observe_prepared"
   },
   "verify_close_before_next": true,
   "minimum_visible_seconds": 20,
-  "maximum_tab_open_seconds": 30,
-  "duration_semantics": "TAB_RESIDENCE_NOT_CONTINUOUS_AD_VISIBILITY",
+  "legacy_maximum_tab_open_seconds_superseded": 30,
+  "maximum_observation_seconds": 30,
+  "duration_semantics": "POST_ARTICLE_SCROLL_OBSERVATION_NOT_TOTAL_TAB_RESIDENCE",
   "tab_residence": {
     "minimum_seconds": 20,
     "maximum_seconds": 30,
@@ -156,12 +160,12 @@
     "timing_authority_message_id": "1561047502944477287",
     "historical_receipts_unchanged": true
   },
-  "visible_duration_authority_message_id": "1561037521234952253",
+  "visible_duration_authority_message_id": "1561047502944477287",
   "visible_duration_supersession": {
     "previous_seconds": 10,
     "current_minimum_seconds": 20,
     "current_maximum_seconds": 30,
-    "semantics": "TAB_RESIDENCE",
+    "semantics": "POST_ARTICLE_AND_SCROLL_OBSERVATION",
     "authority": "Rodolfo Mattei",
     "history_source": "data/ares/meta-ads/audit/landing-mobile-1561037521234952253/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
   },
@@ -237,7 +241,7 @@
     "supersedes": "Every accompaniment problem automatically posted to this thread"
   },
   "success_destination": "ORIGINAL_MANAGER_THREAD_ONLY_WHEN_ALL_PASS",
-  "success_message": "Todas as landing pages deste pedido foram abertas em modo mobile, com as abas abertas entre 20 e 30 segundos e anúncios identificados.",
+  "success_message": "Todas as landing pages deste pedido foram abertas em modo mobile e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.",
   "gam_registration": "NEVER_CLAIM_WITHOUT_SEPARATE_GAM_READBACK",
   "ad_clicks": false,
   "campaign_writes": false,

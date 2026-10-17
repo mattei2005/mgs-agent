@@ -1913,12 +1913,12 @@
     {
       "agent": "ares",
       "id": "LANDING-REWARDED-1561047502944477287",
-      "next_step": "Testar em mobile uma vez; não clicar no anúncio/anunciante; medir observação somente após artigo/rolagem",
-      "objective": "Um testeC170: CTA editorial, esperarrewarded/artigo, rolar e observar25s",
-      "source": "discord:message:1561047502944477287",
-      "state": "preparing_bounded_rewarded_qa;no_new_visit;original_pass_preserved",
+      "next_step": "Não repetirC170. Nova regra conta20-30s depois deartigo/rolagem, espera rewarded separada; sem clique em anúncio ouanunciante.",
+      "objective": "C170 mobile: CTA próprio, liberaçãoartigo,rolagem e25s de observação",
+      "source": "data/ares/meta-ads/audit/landing-rewarded-1561047502944477287/final-verification.json;discord:message:1561047502944477287",
+      "state": "complete_flow_qa;342testsok;valid_gate_click1;article_and_scroll_verified;observation25.2536s;no_ad;rewarded_creative_not_confirmed;native_closed;originalpass_preserved;first_misdirected_coordinate_attempt_repaired",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-17T16:08:12+00:00"
+      "updated_at": "2026-10-17T16:22:26+00:00"
     },
     {
       "agent": "zeus",
@@ -2129,6 +2129,16 @@
       "state": "completed",
       "thread_id": "1561025799199522987",
       "updated_at": "2026-10-17T15:27:45+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "RUNCLOUD-SSH-1561052418089689190",
+      "next_step": "Revalidar manifest e hosts, preparar e testar coletor/dispatcher restrito, criar chave privada no1Password por memoria, instalar e validar allowed/denied antes do cutover",
+      "objective": "Instalar chave SSH exclusiva com forced-command somente leitura nos tres hosts e migrar saude2h para SSH; backupsAPI24h e quota preservados",
+      "source": "discord:1561025799199522987/1561052418089689190",
+      "state": "in_progress",
+      "thread_id": "1561025799199522987",
+      "updated_at": "2026-10-17T16:25:13+00:00"
     },
     {
       "agent": "zeus",
@@ -4583,12 +4593,12 @@
     {
       "agent": "ares",
       "id": "cpv13-c41-c42-c40-c32-d1-20261017",
-      "next_step": "One-shots fazem pre-read, status ACTIVE e GET no horário, validam nova proveniência D1; para C32 aguardar indicação de outra campanha por Rodolfo, sem recriar ou clonar implicitamente.",
-      "objective": "Ativar C41/C42 18-10 00:00 SP e C40 19-10 00:00 SP com retorno ao D1; resolver alvo C32 excluído",
+      "next_step": "Aguardar resposta de Rodolfo: manter C42 em 18-10 e reiniciar D1 novamente em 19-10 com C40, ou mover C42 para 19-10. Não adicionar ativação duplicada sem essa decisão.",
+      "objective": "Reentrada D1: C41/C42 18-10 e C40 19-10; budget USD30/dia nas três; esclarecer C42 também citada para 19-10",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-d1-20261018-19-config.json",
-      "state": "scheduled: c41 us$30/dia e c42 us$25/dia em 18-10; c40 us$30/dia em 19-10. jobs determinísticos habilitados e lidos de volta; meta confirmou três campanhas paused com filhos active, datas novas, budgets preservados. c32 deleted e sem outro alvo não terminal pelo wrapper; pergunta enviada a rodolfo.",
+      "state": "budget corrigido e validado por meta get: c40/c41/c42 usd30/dia, todas paused. requests congelados atualizados; dry-runs live dos dois lotes ok. rodolfo corrigiu c32 para c42, porém c42 já consta em 18-10. agendas originais mantidas sem inferir repetição/movimento.",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-17T16:17:17+00:00"
+      "updated_at": "2026-10-17T16:26:45+00:00"
     },
     {
       "agent": "ares",
@@ -6372,5 +6382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T16:17:17+00:00"
+  "updated_at": "2026-10-17T16:26:45+00:00"
 }
