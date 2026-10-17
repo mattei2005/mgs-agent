@@ -44,7 +44,7 @@ def main():
         if not shot.get('screenshot_path'):raise ValueError('minimal visual read missing')
         return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
     def capture_visual():return sampler.capture_screen(ct,a.pc1_session_id)
-    def review_visual(shot):return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
+    def review_visual(shot,prompt=VISUAL_PROMPT):return asyncio.run(vision_analyze_tool(shot['screenshot_path'],prompt))
     def read_mobile():return asyncio.run(vision_analyze_tool(capture_visual()['screenshot_path'],MOBILE_PROMPT))
     def execute(item,attempt):
         nonlocal safe

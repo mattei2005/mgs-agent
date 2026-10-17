@@ -40,7 +40,7 @@ def typed_url_snapshot(call,target,url):
         if reread<2:time.sleep(.15)
     return snap
 
-def open_normal(call,url,on_owned=lambda p:None,*,configure=None):
+def open_normal(call,url,on_owned=lambda p:None,*,configure=None,verify_url=None):
     def persist(p):
         p['url']=url;on_owned(p)
     proof=open_blank_normal(call,on_owned=persist);target=proof['target']
@@ -53,12 +53,13 @@ def open_normal(call,url,on_owned=lambda p:None,*,configure=None):
             call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
     out=call(dict(action='type',text=url))
     snap=typed_url_snapshot(call,target,url)
-    if url not in json.dumps(all_elements(snap),ensure_ascii=False):
+    typed_ok=url in json.dumps(all_elements(snap),ensure_ascii=False) or (verify_url is not None and verify_url(url,target))
+    if not typed_ok:
         if not escalates(out):raise ValueError('Typed URL unverified; do not submit')
         call(dict(action='key',keys='ctrl+l',delivery_mode='foreground',bring_to_front=True))
         call(dict(action='type',text=url,delivery_mode='foreground'))
         snap=typed_url_snapshot(call,target,url)
-        if url not in json.dumps(all_elements(snap),ensure_ascii=False):raise ValueError('URL unverified')
+        if url not in json.dumps(all_elements(snap),ensure_ascii=False) and not (verify_url is not None and verify_url(url,target)):raise ValueError('URL unverified')
     proof['url_submission_attempted']=True;on_owned(proof)
     out=call(dict(action='key',keys='return'))
     snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))

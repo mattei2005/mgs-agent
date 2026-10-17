@@ -18,15 +18,20 @@ def main():
     if j['state']!='COMPLETE' or before['state'] not in {'PASSED','RESOLVED_BY_OPERATOR'}:raise ValueError('replay only for an already terminal target')
     if s.get('payload_digest')!=j['digest']:raise ValueError('immutable original request differs')
     item=validate_mapping(q,s);item['url']=observation_url(item['url']);round_id='mobile-replay:'+s['authority_message_id']
-    for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_result'",(s['job'],)):
+    previous=[]
+    for row in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_result' ORDER BY seq",(s['job'],)):
         d=json.loads(row['detail'])
-        if d.get('round_id')==round_id:return dict(state='REPLAY_ALREADY_RECORDED',result=d['result'],evidence_file=d['evidence_file'])
-    if any(json.loads(r['detail']).get('round_id')==round_id for r in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_started'",(s['job'],))):raise ValueError('existing replay needs reconciliation; no second visit')
+        if d.get('round_id')!=round_id:continue
+        old=json.loads(Path(d['evidence_file']).read_text());proof=old['evidence']
+        if old['result']!='ERROR' or proof.get('normal_opening',{}).get('url_submission_attempted') is not False or proof.get('tab_closed_verified') is not True:return dict(state='REPLAY_ALREADY_RECORDED',result=d['result'],evidence_file=d['evidence_file'])
+        previous.append(d)
+    starts=sum(json.loads(r['detail']).get('round_id')==round_id for r in q.db.execute("SELECT detail FROM events WHERE job=? AND kind='explicit_replay_started'",(s['job'],)))
+    if starts!=len(previous) or starts>=3:raise ValueError('existing replay needs reconciliation or technical repair; no unproven second visit')
     if q.db.execute("SELECT 1 FROM jobs WHERE state IN ('RUNNING','RECONCILING','REPAIRING','NEEDS_RECONCILIATION','WAITING_HUMAN_UNCLOSED')").fetchone():return {'state':'WAITING_EXISTING_OBSERVER','browser_actions':0}
     sys.path.insert(0,str(Path(shutil.which('hermes')).resolve().parents[2]));from tools.computer_use import tool as ct
     from tools.vision_tools import vision_analyze_tool
     spec=importlib.util.spec_from_file_location('replay_capture',core.BASE/'scripts/ares-direct-traffic-sample.py');sampler=importlib.util.module_from_spec(spec);spec.loader.exec_module(sampler)
-    lock=core.BASE/'scripts/mgs-pc1-computer-use-lock.py';safe=True;leased=False;directory=a.scope.parent/'replay';directory.mkdir(exist_ok=True)
+    lock=core.BASE/'scripts/mgs-pc1-computer-use-lock.py';safe=True;leased=False;directory=a.scope.parent/('replay' if not starts else 'replay-technical-'+str(starts+1));directory.mkdir(exist_ok=True)
     def lease(action):
         args=[sys.executable,str(lock),action,'--agent','ares','--session-id',a.pc1_session_id]
         if action=='acquire':args+=['--ttl','900','--thread-id',core.INCIDENT_THREAD]
@@ -35,7 +40,7 @@ def main():
     def call(args):
         r=ct.handle_computer_use(args,session_id=a.pc1_session_id);return json.loads(r) if isinstance(r,str) else r
     def capture_visual():return sampler.capture_screen(ct,a.pc1_session_id)
-    def review_visual(shot):return asyncio.run(vision_analyze_tool(shot['screenshot_path'],VISUAL_PROMPT))
+    def review_visual(shot,prompt=VISUAL_PROMPT):return asyncio.run(vision_analyze_tool(shot['screenshot_path'],prompt))
     def read_visual():return review_visual(capture_visual())
     def read_mobile():return asyncio.run(vision_analyze_tool(capture_visual()['screenshot_path'],MOBILE_PROMPT))
     try:
@@ -47,7 +52,7 @@ def main():
         if result in {'PASS','NO_AD'}:
             from ares_campaign_v3.landing_lean import validate_lean_observation
             validate_lean_observation(e,j['payload']['links'][idx],negative=result=='NO_AD')
-        e=core.preserve_evidence(e,'replay-'+s['authority_message_id'],idx,1)
+        e=core.preserve_evidence(e,'replay-'+s['authority_message_id'],idx,starts+1)
         output=directory/'result.json';output.write_text(json.dumps({'round_id':round_id,'result':result,'evidence':e},ensure_ascii=False,indent=2))
         with q.tx():q.event(s['job'],'explicit_replay_result',{'round_id':round_id,'idx':idx,'result':result,'evidence_file':str(output),'original_state_preserved':True,'original_attempt_count_preserved':before['attempt']})
         after=q.job(s['job']);assert after['state']==j['state'] and after['links'][idx]==before

@@ -31,7 +31,7 @@ class MobileTests(unittest.TestCase):
         for ad in [False,True]:
             clock=[100.0];events=[]
             def pause(n):clock[0]+=n
-            def opening(call,url,persist,configure):
+            def opening(call,url,persist,configure,verify_url):
                 configure(TARGET);p=dict(target=TARGET,new_window_created=True,new_tab_created=True,browser_mode='NORMAL',opened_at=clock[0],state='NAVIGATION_SUBMITTED');persist(p);return p
             def closure(call,proof):events.append('close');clock[0]+=2;return dict(closed_at=clock[0],tab_closed_verified=True,other_tabs_preserved=True)
             with tempfile.TemporaryDirectory() as tmp:
