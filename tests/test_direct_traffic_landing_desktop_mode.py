@@ -29,7 +29,7 @@ class DesktopTests(unittest.TestCase):
    with patch.object(desktop.core,'BASE',root):
     with self.assertRaises(ValueError):desktop.policy()
  def test_shared_desktop_observes25_then_closes_and_reviews(self):
-  for ad in [True,False]:
+  for ad,initial_ad in [(True,False),(False,False),(False,True)]:
    clock=[100.0];events=[];states=iter([state(article=True,excerpt='before'),state(article=True,excerpt='after')])
    def opening(call,url,persist,configure,verify_url):
     configure(TARGET);p=dict(target=TARGET,new_window_created=True,new_tab_created=True,browser_mode='NORMAL',opened_at=clock[0],state='NAVIGATION_SUBMITTED');persist(p);return p
@@ -40,9 +40,10 @@ class DesktopTests(unittest.TestCase):
      n[0]+=1;p=Path(tmp)/(str(n[0])+'.png');p.write_bytes(b'OFFLINE');os.utime(p,(clock[0],clock[0]));return {'screenshot_path':str(p)}
     def review(shot,prompt):
      if prompt==rw.STATE_PROMPT.replace('mobile viewport','desktop viewport'):data=next(states)
-     else:events.append('review');data=dict(network_ad_visible=ad,active_normal_chrome=True,unobstructed=True,landing_loaded=True,description='OFFLINE desktop fixture')
+     else:events.append('review');data=dict(network_ad_visible=(initial_ad if Path(shot['screenshot_path']).stem=='1' else ad),active_normal_chrome=True,unobstructed=True,landing_loaded=True,description='OFFLINE desktop fixture')
      return {'success':True,'analysis':json.dumps(data)}
     with patch.object(desktop,'configure',return_value=V),patch.object(lean,'open_normal',side_effect=opening),patch.object(lean,'close_normal',side_effect=closure):
      result,e=rw.observe_rewarded(lambda a:{'ok':True,'effect':'confirmed'},'https://example.invalid/lp','offline',read_mobile=None,capture_visual=capture,review_visual=review,on_owned=lambda p:None,pause=lambda n:clock.__setitem__(0,clock[0]+n),clock=lambda:clock[0],monotonic=lambda:clock[0],desktop_config=P)
-   self.assertEqual(result,'PASS' if ad else 'NO_AD');self.assertEqual(e['device_mode'],'DESKTOP');self.assertNotIn('mobile_emulation',e);self.assertEqual(e['observation_seconds'],25);self.assertEqual(events,['close','review'])
+   self.assertEqual(result,'PASS' if ad or initial_ad else 'NO_AD');self.assertEqual(e['device_mode'],'DESKTOP');self.assertNotIn('mobile_emulation',e);self.assertEqual(e['observation_seconds'],25);self.assertEqual(events,['close','review'] if ad else ['close','review','review'])
+   if initial_ad:self.assertEqual(e['ad_confirmation_stage'],'ARTICLE_BEFORE_SCROLL');self.assertFalse(e['final_visual']['network_ad_visible'])
 if __name__=='__main__':unittest.main()

@@ -1,23 +1,77 @@
-# Smart Bidding — contribuição do lucro por faixa de ROI
+# Smart Bidding — reconciliação de lucro por estratégia e faixa de ROI
 
-Use para análise read-only consolidada por empresas da SB, sem assumir que o lucro total do card é integralmente atribuível às campanhas.
+Use quando o operador quiser explicar o lucro consolidado da SB por faixas de ROI, especialmente em escopo que mistura aquisição direta e BOT com retenção. O contrato de apresentação dos três blocos está no SKILL.md; este arquivo contém a receita técnica.
 
-1. Resolver identidade e autoridade; pedidos globais do produto SB não exigem inventar um domínio-alvo. Abrir o helper vivo `scripts/ares-smartbidding-common.py` e validar sua interface antes do uso. Autenticar internamente; nunca imprimir credenciais/headers.
-2. Tratar `/company` como resposta sensível: filtrar em memória para as empresas autorizadas e projetar apenas companyId/name e publisherId/name/active. Não gravar ou imprimir resposta bruta. Incluir publishers inativos quando o pedido disser todos.
-3. Obter as rotas reais do frontend atual (`reportProvider`, Acquisition/Adgroup). `/report/performance_per_campaigns` retorna linhas granulares de adgroup, não necessariamente uma linha por campanha. A assinatura e hashes dos bundles mudam; não fixar nomes de assets históricos.
-4. Fixar o dia civil completo conforme semântica do relatório SB. Payloads 00:00Z podem incluir a data anterior: conferir o conjunto de DATE retornado, corrigir janela com offset explícito e exigir somente a data pedida. Não transformar a faixa UTC em prova do fuso de todos os fornecedores.
-5. Coletar campanhas por POST de relatório e totais por GET `/report/performance_per_domain`, com os mesmos publishers, período e moeda; o GET usa `publishers[]` conforme serialização do frontend. Esses POSTs são consultas, não mutações de campanha.
-6. Espelhar `Discount revenue share`: quando ativo usar NET_REVENUE e lucro=NET_REVENUE−INVESTIMENT. Não descontar a participação novamente. Confirmar no frontend vivo, não em memória.
-7. Validar unicidade da chave granular e completude. Agregar investimento e receita por SOURCE + CUSTOMER_ID + CAMPAIGN_ID antes de calcular ROI. Não calcular faixas por adgroup nem fazer média simples de ROI.
-8. Classificar com precisão decimal e limites não sobrepostos: ROI<0; 0≤ROI<10; 10≤ROI<20; 20≤ROI<30; ROI≥30. Testar exatamente 0/10/20/30 e valores imediatamente antes/depois. Campanhas com investimento zero não têm ROI econômico definido; separar sua receita, mesmo que a UI mostre ROI=0.
-9. Reconciliar três camadas: lucro das faixas; receita em linhas sem identidade ou em campanhas sem gasto; receita consolidada do domínio ausente da tabela de aquisição. A UI calcula `profitTotal` por domínio e `profitAcquisition` pela tabela: não são a mesma métrica. Não ratear o residual por gasto, receita ou ROI sem metodologia explicitamente autorizada.
-10. Informar contribuição assinada de cada faixa sobre o lucro consolidado real; prejuízo contribui negativamente e parcelas positivas podem superar 100%. Se houver residual, mostrá-lo como não classificável nos relatórios consultados, sem rotulá-lo automaticamente como broadcast/SMS/orgânico ou lucro das campanhas atuais.
-11. Comparar os totais vivos com a referência informada pelo usuário, exibindo qualquer delta sem inventar causa. Repetir leitura de campanha para validar estabilidade; exigir que soma das faixas + itens sem ROI + residual = lucro consolidado.
-12. Entregar conclusão primeiro, cinco faixas e reconciliação; não chamar a decomposição de integral quando parte do lucro não tiver vínculo comprovado. Salvar resultado/checkpoint para retomada sem anexar arquivos não pedidos.
-13. Quando o consolidado incluir BOT e tráfego direto, separar aquisição de retenção antes de interpretar as faixas. BOT deve mostrar receita de aquisição/drip e broadcast, sem somar novamente componentes já incluídos no total da Page. Receita de uma base histórica não é automaticamente retorno das campanhas do mesmo dia. Usar Page/UTM comprovado como unidade econômica comum para gasto de aquisição + receita total da Page; se várias campanhas alimentarem a Page, não duplicar broadcast entre elas nem rotular o ROI da Page como ROI de cada campanha. Receita em Pages sem gasto fica separada, sem ROI finito. Manter ROI de aquisição e ROI operacional BOT identificados como métricas diferentes; não inferir corte de campanhas pelo ROI de aquisição isolado.
-14. No tráfego direto, classificar campanhas por receita direta e gasto; retenção SMS comprovada deve ter bloco próprio e ponte para o total da operação. Não atribuir receita SMS às campanhas de aquisição do dia sem vínculo de coorte. Reconciliar primeiro a mesma base de custo/receita da aba Domain; custos adicionais de SMS ou broadcast ausentes da SB entram em análise ajustada separada, nunca silenciosamente no fechamento do card.
-15. Para BOT, validar o join company + publisher + `pg_<id>` entre UTM_ADGROUP da aquisição e UTM_CAMPAIGN do Messenger. Exigir igualdade de gasto por Page, não apenas no total. A coluna NET_REVENUE de aquisição pode vir zero-only nas linhas pg apesar de a Page ter receita: não chamar esse zero de prejuízo de aquisição real nem colocá-lo automaticamente no bucket negativo. Usar `/report/messenger` para receita e ROI operacional da Page. Confirmar a base líquida de REVENUE por paridade com Domain/NET_REVENUE em publishers sem mistura, além da fórmula do frontend; não aplicar novo desconto de 10%. Usar REVENUE como total; DRIP_REVENUE e BD_REVENUE são componentes, e sua eventual diferença residual deve ser preservada sem somar novamente.
-16. Campos DOMAIN/PUBLISHER da SB podem conter slugs ou IDs compostos, não FQDNs. Resolver o identificador pelo publisher vivo e pela fonte canônica da operação antes de aplicar um gate de domínio específico; nunca enviar um slug como se fosse domínio nem adivinhar sufixo. Em relatório global do produto, esses identificadores são chaves de junção, não pedidos operacionais novos de site.
-17. Na reconciliação final, separar receita BOT de Pages sem gasto das faixas das Pages com gasto. Informar se o percentual do lucro usa o subtotal da estratégia ou o total Domain. Reconciliar gasto de todas as campanhas (direto + BOT) e lucro de direto + BOT + SMS + diferenças não atribuídas; não ocultar diferenças pequenas de granularidade nem imputá-las a uma faixa.
+## 1. Fixar período, escopo e fonte do total
 
-Validação mínima: unicidade granular; contagem de campanhas antes/depois; soma de investimento exata; reconciliação decimal do lucro; testes de limites; readback live estável. Nenhum write SB/Meta/Google é necessário.
+1. Recuperar o relatório/checkpoint anterior quando o pedido disser mesma análise; preservar moeda, empresas, tratamento de revenue share e metodologia. Reenvio usa os valores validados; novo período exige dados novos.
+2. Resolver datas relativas pelo relógio real no fuso aplicável e fixar uma data civil. Construir `initialDate` e `finalDate` para o dia completo conforme a semântica SB. Conferir o conjunto de `DATE` retornado: timestamps começando às 00:00Z podem incluir a data anterior. Corrigir a janela com offset explícito antes de agregar; não inferir desse payload o fuso de cada conta de mídia.
+3. Confirmar se a referência humana vem de `Domain`, aquisição ou outro card. O frontend calcula `profitTotal` usando receita por domínio e `profitAcquisition` usando a tabela de aquisição; não são o mesmo total.
+4. Abrir a interface viva de `/root/mgs-agent/scripts/ares-smartbidding-common.py`. Autenticar internamente e usar `api_request(method, path, payload=...)`; tokens e headers não entram nos relatórios.
+5. Consultar `GET /company`, filtrar em memória somente as empresas autorizadas e projetar `companyId/name` e `publisherId/name/active`. Incluir publishers inativos se o pedido disser todos. A resposta completa contém dados sensíveis: não imprimir nem gravar o bruto ou um prefixo truncado.
+6. Tratar `DOMAIN` e `PUBLISHER` como identificadores que podem ser slugs ou IDs compostos. Resolver pelo publisher vivo e pela fonte canônica antes de uma ação de domínio; não enviar slug ao gate como se fosse FQDN nem adivinhar sufixo. No relatório global do produto, essas chaves servem para junção.
+
+## 2. Coletar as quatro fontes comparáveis
+
+Confirmar as rotas no `reportProvider` e nos componentes atuais do frontend; descobrir bundles a partir do HTML vigente, sem fixar hashes históricos. Usar o mesmo escopo, período e moeda nas quatro consultas:
+
+| Fonte lógica | Consulta |
+| --- | --- |
+| Aquisição granular | `POST /report/performance_per_campaigns` |
+| BOT por página | `POST /report/messenger` |
+| Retenção SMS | `POST /report/performance_per_sms` |
+| Referência consolidada | `GET /report/performance_per_domain` |
+
+O payload dos POSTs contém `initialDate`, `finalDate`, `publishers` e `currency`. O GET usa esses parâmetros, serializando publishers como `publishers[]`. São consultas de relatório, não mutações de campanha. Salvar evidência e agregar programaticamente; a rota de campaigns pode retornar várias linhas de adgroup por campanha.
+
+Para revenue share ativo, usar `NET_REVENUE` na aquisição, SMS e Domain. No Messenger, verificar a fórmula do frontend e comparar `REVENUE` com Domain/`NET_REVENUE` em publishers sem mistura: o relatório pode entregar receita já líquida diretamente. Não aplicar novamente o desconto da rede.
+
+## 3. Resolver a estratégia antes de calcular ROI
+
+1. Validar unicidade da chave granular de aquisição e das chaves Page/UTM do Messenger.
+2. Vincular BOT pelo join `company + publisher + UTM_ADGROUP=pg_<id>` da aquisição com `company + publisher + UTM_CAMPAIGN` do Messenger. Exigir identidade sem conflito e igualdade do investimento por página, não apenas igualdade no total.
+3. Confirmar o tráfego direto pelas contas/UTMs e contratos aplicáveis. Não chamar automaticamente todo resto de direto nem supor que `SOURCE=facebook` identifica BOT: ambas as estratégias usam Facebook. Padrões de UTM são evidência a validar, não uma allowlist global imutável. Manter identidade ambígua separada.
+4. Agregar o tráfego direto por `SOURCE + CUSTOMER_ID + CAMPAIGN_ID` antes de calcular ROI. Não classificar adgroups individualmente nem tirar média simples de percentuais.
+5. No BOT, usar a página como unidade econômica quando múltiplas campanhas a alimentarem. Cada gasto e receita entra uma única vez; não copiar o broadcast inteiro para cada campanha.
+
+**Pitfall crítico:** `NET_REVENUE` da aquisição pode vir zero-only nas linhas BOT apesar de o Messenger mostrar receita positiva. Não transformar ausência de cobertura dessa coluna em prejuízo de aquisição de −100%; usar o resultado operacional por página e rotular o ROI de campanha como indisponível quando não houver atribuição válida.
+
+## 4. Calcular faixas e separar retenção sem gasto
+
+Usar decimal desde a leitura dos valores monetários:
+
+- `lucro = receita líquida − investimento`.
+- `ROI = lucro × 100 / investimento`, somente com investimento positivo.
+- Faixas sem sobreposição: `ROI<0`; `0≤ROI<10`; `10≤ROI<20`; `20≤ROI<30`; `ROI≥30`.
+- `contribuição = lucro da faixa × 100 / lucro da estratégia`; no consolidado, o denominador é o lucro total Domain. Denominador zero gera N/D, não divisão inventada; lucro total negativo exige rótulo explícito para evitar leitura enganosa das contribuições.
+
+Para BOT, `REVENUE` é o total da página; `DRIP_REVENUE` e `BD_REVENUE` são componentes. Não calcular total + drip + broadcast. Se os componentes não fecharem exatamente, preservar a diferença dentro do total como não detalhada.
+
+Separar receita BOT de páginas sem gasto no dia: não há ROI finito, portanto não colocar em 0% nem em 30%+. O resultado diário inclui leads históricos e não representa ROI de coorte/LTV dos leads recém-captados. A mesma cautela vale para receita direta sem gasto e para retenção SMS: sem vínculo de coorte, não atribuir às campanhas atuais.
+
+## 5. Fechar contra Domain antes de interpretar
+
+Exigir duas identidades:
+
+```text
+investimento direto + investimento BOT = investimento consolidado
+lucro direto + lucro BOT + resultado SMS na base SB + diferenças = lucro Domain
+```
+
+Dentro de cada estratégia, somar faixas, receitas sem ROI e linhas sem identidade até reconciliar seu subtotal. Localizar diferenças por publisher ajuda o diagnóstico, mas não prova vínculo a campanha/página; não ratear por gasto, receita ou ROI para fazer o fechamento parecer completo.
+
+Separar custos operacionais que a SB não incluiu. Custo SMS zero no relatório não prova custo real zero; mostrar a mesma base de Domain primeiro e qualquer P&L ajustado em outro bloco. Comparar os totais vivos com a referência humana e informar o delta sem inventar causa.
+
+Interpretar aquisição e retenção separadamente. ROI negativo de aquisição não é prova isolada de prejuízo do BOT; não recomendar corte como se toda receita de retenção fosse preservada automaticamente.
+
+## 6. Verificar e entregar
+
+- Testar exatamente os limites 0/10/20/30 e valores imediatamente adjacentes.
+- Validar contagens distintas de linhas, campanhas e páginas; não transportar denominadores de um período para outro.
+- Repetir as quatro consultas e comparar chaves, valores monetários e contagens. Se mudarem, reconciliar a versão utilizada antes de fechar.
+- Verificar a base líquida por múltiplos publishers comparáveis e frontend vivo. Pequenas diferenças centesimais podem decorrer de granularidade/arredondamento: declarar a tolerância e distinguir igualdade exata de aproximação; não exigir uma contagem incidental de matches exatos herdada de outro dia nem eliminar residual para passar no teste.
+- Manter precisão integral nos cálculos e arredondar apenas na apresentação. Se as parcelas exibidas somarem 100,01% ou 99,99%, explicar o arredondamento; não editar uma parcela para forçar 100%.
+- Publicar na ordem estável: tráfego direto sem SMS; BOT com drip/broadcast; consolidado. Repetir fonte, data e denominador junto aos títulos para que cada bloco faça sentido isoladamente.
+- Preservar relatório e checkpoint por período; uma nova data não sobrescreve os resultados anteriores. Entregar inline, sem anexos não solicitados.
+
+Critério de aceite: quatro fontes do mesmo dia/escopo, estratégia e identidade comprovadas, ausência de receita BOT zero-only tratada corretamente, joins por página exatos para gasto, faixas sem sobreposição, reconciliação decimal e readback documentados; limitações de atribuição e custos permanecem explícitas.

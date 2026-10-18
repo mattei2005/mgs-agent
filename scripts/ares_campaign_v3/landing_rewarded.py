@@ -56,7 +56,7 @@ def scroll_article(call,target):
 
 def observe_rewarded(call,url,mapping_source,*,read_mobile,capture_visual,review_visual,on_owned,pause=time.sleep,clock=time.time,monotonic=time.monotonic,desktop_config=None):
     from .landing_lean import open_normal,close_normal,structured_visual,VISUAL_PROMPT
-    cfg=desktop_config or policy();desktop=bool(desktop_config);r=cfg['rewarded_gate'];proof=None;final_shot=None;result='ERROR';start=monotonic()
+    cfg=desktop_config or policy();desktop=bool(desktop_config);r=cfg['rewarded_gate'];proof=None;final_shot=None;article_shot=None;result='ERROR';start=monotonic()
     e:dict=dict(observation_mode='LEAN_NORMAL_NEW_TAB',observed_url=url,resolved_landing_url=url,mapping_source=mapping_source,dwell_policy=cfg,rewarded_authority_message_id=r['authority_message_id'],rewarded_trace=[],phase_seconds={})
     def persist(v):
         nonlocal proof
@@ -112,7 +112,12 @@ def observe_rewarded(call,url,mapping_source,*,read_mobile,capture_visual,review
     if proof and proof.get('opened_at') is not None and e.get('closed_at'):e['tab_open_seconds']=e['closed_at']-proof['opened_at']
     if final_shot and not e.get('diagnosis'):
         try:
-            visual=structured_visual(review_visual(final_shot,prompt=VISUAL_PROMPT));e.update(visual=visual,network_ad_confirmed=visual['network_ad_visible'],ad_description=visual['description'],visual_review=visual['description'])
+            visual=structured_visual(review_visual(final_shot,prompt=VISUAL_PROMPT));e['final_visual']=visual
+            if not visual['network_ad_visible'] and article_shot:
+                initial=structured_visual(review_visual(article_shot,prompt=VISUAL_PROMPT))
+                if initial['network_ad_visible'] and all(initial[k] for k in ['active_normal_chrome','unobstructed','landing_loaded']):
+                    visual=initial;e.update(ad_confirmation_stage='ARTICLE_BEFORE_SCROLL',ad_confirmation_visual=initial)
+            e.update(visual=visual,network_ad_confirmed=visual['network_ad_visible'],ad_description=visual['description'],visual_review=visual['description'])
             if not all(visual[k] for k in ['active_normal_chrome','unobstructed','landing_loaded']):raise ValueError('Actual article/ad view not confirmed')
             proof['state']='OPENED_NORMAL';on_owned(proof)
             if desktop:

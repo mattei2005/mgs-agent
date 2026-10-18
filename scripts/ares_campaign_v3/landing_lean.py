@@ -235,6 +235,15 @@ def validate_lean_observation(e,link,*,negative=False):
     scope(url)
     if source.hostname!=dest.hostname or not tracking_query_matches(dest.query,source.query) or re.search(r'/(quiz|chat)(/|$)',dest.path,re.I):raise ValueError('Mutated landing/query refused')
     visual=e.get('visual') or {}
+    if e.get('ad_confirmation_stage')=='ARTICLE_BEFORE_SCROLL':
+        from .landing_followup import file_evidence
+        initial=e.get('ad_confirmation_visual') or {};frame=file_evidence(e.get('article_screenshot',''))
+        if negative or initial!=visual or initial.get('network_ad_visible') is not True:
+            raise ValueError('actual article-frame ad review required')
+        if not e['opened_at']<=frame['captured_at']<=float(e.get('observation_started_at',0))<=e['closed_at']:
+            raise ValueError('article ad frame must belong to the exact current visit')
+        if e.get('article_screenshot_sha256') and e['article_screenshot_sha256']!=frame['sha256']:
+            raise ValueError('article ad image changed')
     gated_negative=negative and e.get('site_gate_visible') is True and visual.get('site_gate_visible') is True and visual.get('network_ad_visible') is False
     if visual.get('active_normal_chrome') is not True or visual.get('landing_loaded') is not True or (visual.get('unobstructed') is not True and not gated_negative):raise ValueError('Actual loaded foreground normal landing required')
     expected=not negative

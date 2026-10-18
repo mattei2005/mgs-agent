@@ -167,6 +167,13 @@ class LeanValidationTests(unittest.TestCase):
  def test_lean_pass_with_authorized_nocache(self):
   from ares_campaign_v3.landing_lean import observation_url
   original=self.link['effective_campaign_url'];self.e['observed_url']=self.e['resolved_landing_url']=observation_url(self.e['observed_url']);self.e['normal_opening']['url']=self.e['observed_url'];self.validate();self.assertEqual(self.link['effective_campaign_url'],original)
+ def test_initial_ad_frame_is_current_and_not_negated_by_scroll(self):
+  from ares_campaign_v3.landing_lean import validate_lean_observation
+  self.e.update(ad_confirmation_stage='ARTICLE_BEFORE_SCROLL',ad_confirmation_visual=dict(self.e['visual']),article_screenshot='offline-image',article_screenshot_sha256='offline-sha',final_visual=dict(self.e['visual'],network_ad_visible=False))
+  with patch('ares_campaign_v3.landing_followup.file_evidence',return_value={'sha256':'offline-sha','captured_at':5}):self.validate()
+  for frame in [{'sha256':'offline-sha','captured_at':0},{'sha256':'changed','captured_at':5},{'sha256':'offline-sha','captured_at':25}]:
+   with patch('ares_campaign_v3.landing_followup.file_evidence',return_value=frame):
+    with self.assertRaises(ValueError):self.validate()
  def test_worker_active_route(self):
   from ares_campaign_v3.landing_followup import worker_prompt
   p=worker_prompt('key','owner',0,dict(state='RUNNING',payload={},links=[]))
