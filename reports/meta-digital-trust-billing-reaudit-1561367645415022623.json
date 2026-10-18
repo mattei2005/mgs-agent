@@ -1,0 +1,7365 @@
+{
+  "request_id": "1561367645415022623",
+  "thread_id": "1560998899467157636",
+  "source": "Meta Graph v26.0 read-only; complete owned/client account pagination; 351 independent daily/aggregate spend reconciliations",
+  "status": "completed_validated",
+  "summary": {
+    "credit_checked_at": "2026-10-18T09:23:03.846023-04:00",
+    "credit_total": "997288.8",
+    "credit_used": "744839.58",
+    "credit_available": "252449.22",
+    "count_accounts": 351,
+    "line_count": 144,
+    "positive7_count": 36,
+    "zero7_count": 108,
+    "yesterday_positive_count": 34,
+    "funding_unknown_count": 159,
+    "funding_unknown_spend7_by_currency": {
+      "BRL": "0",
+      "USD": "0"
+    },
+    "funding_unknown_today_by_currency": {
+      "BRL": "0",
+      "USD": "0"
+    },
+    "line_periods": [
+      "{'since': '2026-10-11', 'until': '2026-10-17', 'today': '2026-10-18'}"
+    ],
+    "line_today_partial": "8924.83",
+    "target_exclusive": "2026-10-27T00:00:00-04:00",
+    "elapsed_remaining_days": "8.608983263622685185185185185",
+    "scenarios": {
+      "avg7": {
+        "burn": "27501.14285714285714285714286",
+        "elapsed_projection": "236756.8785876394113756613757",
+        "elapsed_remainder": "15692.3414123605886243386243",
+        "full9_projection": "247510.2857142857142857142857",
+        "full9_remainder": "4938.9342857142857142857143",
+        "runway_days": "9.179590146902985849938703845",
+        "exhaustion_estimate": "2026-10-27T13:41:40.434715-04:00"
+      },
+      "avg3": {
+        "burn": "29382.45333333333333333333334",
+        "elapsed_projection": "252953.0489908412450617283951",
+        "elapsed_remainder": "-503.8289908412450617283951",
+        "full9_projection": "264442.0800000000000000000001",
+        "full9_remainder": "-11992.8600000000000000000001",
+        "runway_days": "8.591835989189012580751142176",
+        "exhaustion_estimate": "2026-10-26T23:35:18.475489-04:00"
+      },
+      "yesterday": {
+        "burn": "32810.64",
+        "elapsed_projection": "282466.2506287490194444444444",
+        "elapsed_remainder": "-30017.0306287490194444444444",
+        "full9_projection": "295295.76",
+        "full9_remainder": "-42846.54",
+        "runway_days": "7.694126661351317743268647000",
+        "exhaustion_estimate": "2026-10-26T02:02:36.389564-04:00"
+      }
+    },
+    "ceiling_elapsed": "29323.92969872828331054336112",
+    "ceiling_full9": "28049.91333333333333333333333",
+    "below1000_yesterday": {
+      "count": 25,
+      "spend": "2321.80"
+    },
+    "gte1000_yesterday": {
+      "count": 9,
+      "spend": "30488.84"
+    },
+    "unpaid_invoices": 28,
+    "invoice_due_total": "352171.68",
+    "invoice_periods": [
+      "2026-09-01"
+    ],
+    "invoice_due_dates": [
+      "2026-10-31T07:00:00+0000"
+    ],
+    "comparison": {
+      "line_added": [],
+      "line_removed": [],
+      "invoice_added": [],
+      "invoice_removed": []
+    },
+    "prior_date_recheck": {
+      "date": "2026-10-16",
+      "current_total": "29299.94",
+      "previous_snapshot_total": "29237.06",
+      "total_revision": "62.88",
+      "under1000_count": 26,
+      "under1000_current": "2672.30",
+      "under1000_previous": "2667.20",
+      "under1000_revision": "5.10",
+      "specific_cause": "unproven"
+    }
+  },
+  "account_analysis": [
+    {
+      "id": "1492168699397108",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1770569568407466",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2392553118185242",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1193600879907304",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1667350644977659",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1929541528211413",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1619565326512341",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "946487571418897",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2340284600133059",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1067159546089745",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2250492359132407",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2357329635103368",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1969322040402478",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1800326567686107",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2133380397262472",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1612462606996858",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2193964448136823",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2228465484379757",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "954270423910307",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1546415517242093",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1803760257416577",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1109191818427759",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1427459932825360",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1677451037111689",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1459741672736034",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "28535042682782978",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1077272028402284",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1080841411370873",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1808676850264440",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "4868230010129921",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1621159239555697",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1500482291840054",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "4448777488728156",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1663268201836138",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1572169847493650",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1817165482930530",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1004822502636895",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1081732717781784",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1396558688807591",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "903328286048653",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "39425116493768885",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1377700164543050",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1637952401283133",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1446675230900017",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1085117577390237",
+      "name": "Vizioid-US-SHEIN-EN-03-G003",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "83.15",
+        "2026-10-12": "73.32",
+        "2026-10-13": "82.47",
+        "2026-10-14": "95.24",
+        "2026-10-15": "127.5",
+        "2026-10-16": "104.22",
+        "2026-10-17": "89.08",
+        "2026-10-18": "19.13"
+      },
+      "total7": "654.98",
+      "avg7": "93.56857142857142857142857143",
+      "avg3": "106.9333333333333333333333333",
+      "yesterday": "89.08",
+      "today_partial": "19.13",
+      "reconciled": true
+    },
+    {
+      "id": "937846586033361",
+      "name": "Mavroa-US-SHEIN-ES-06-G006",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "36.4",
+        "2026-10-12": "18.31",
+        "2026-10-13": "24.53",
+        "2026-10-14": "27.8",
+        "2026-10-15": "22.84",
+        "2026-10-16": "24.34",
+        "2026-10-17": "19.93",
+        "2026-10-18": "6.7"
+      },
+      "total7": "174.15",
+      "avg7": "24.87857142857142857142857143",
+      "avg3": "22.37",
+      "yesterday": "19.93",
+      "today_partial": "6.7",
+      "reconciled": true
+    },
+    {
+      "id": "1433481158666734",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2856191321403176",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1829406761389732",
+      "name": "Mavroa-US-SHEIN-ES-05-G005",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-13": "33.05",
+        "2026-10-14": "18.92",
+        "2026-10-15": "17.29",
+        "2026-10-16": "17.55",
+        "2026-10-17": "12.81",
+        "2026-10-18": "6.68"
+      },
+      "total7": "99.62",
+      "avg7": "14.23142857142857142857142857",
+      "avg3": "15.88333333333333333333333333",
+      "yesterday": "12.81",
+      "today_partial": "6.68",
+      "reconciled": true
+    },
+    {
+      "id": "1074952208460047",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "4511685129081248",
+      "name": "Mavroa-US-SHEIN-ES-01-G001",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-14": "12.02",
+        "2026-10-15": "2.84",
+        "2026-10-16": "60.83",
+        "2026-10-17": "121.45",
+        "2026-10-18": "40.73"
+      },
+      "total7": "197.14",
+      "avg7": "28.16285714285714285714285714",
+      "avg3": "61.70666666666666666666666667",
+      "yesterday": "121.45",
+      "today_partial": "40.73",
+      "reconciled": true
+    },
+    {
+      "id": "1414197490675732",
+      "name": "Mavroa-US-SHEIN-ES-02-G002",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "74.69",
+        "2026-10-12": "48.35",
+        "2026-10-13": "59.11",
+        "2026-10-14": "61.07",
+        "2026-10-15": "59.4",
+        "2026-10-16": "62.91",
+        "2026-10-17": "53.16",
+        "2026-10-18": "16.07"
+      },
+      "total7": "418.69",
+      "avg7": "59.81285714285714285714285714",
+      "avg3": "58.49",
+      "yesterday": "53.16",
+      "today_partial": "16.07",
+      "reconciled": true
+    },
+    {
+      "id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-15": "29.38",
+        "2026-10-16": "19.27",
+        "2026-10-17": "35.7",
+        "2026-10-18": "11.29"
+      },
+      "total7": "84.35",
+      "avg7": "12.05",
+      "avg3": "28.11666666666666666666666667",
+      "yesterday": "35.7",
+      "today_partial": "11.29",
+      "reconciled": true
+    },
+    {
+      "id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "49",
+        "2026-10-12": "30.69",
+        "2026-10-13": "24.44",
+        "2026-10-14": "18.67",
+        "2026-10-15": "12.31",
+        "2026-10-16": "8.65",
+        "2026-10-17": "14.54",
+        "2026-10-18": "3.92"
+      },
+      "total7": "158.30",
+      "avg7": "22.61428571428571428571428571",
+      "avg3": "11.83333333333333333333333333",
+      "yesterday": "14.54",
+      "today_partial": "3.92",
+      "reconciled": true
+    },
+    {
+      "id": "4436447599903921",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "851118651324016",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1544876390300338",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1358154269866392",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1543059503787193",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "38322107940768625",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1841881940581069",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "4013263468980268",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1404914355113072",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1062887799996139",
+      "name": "Escalatepower-US-SHEIN-EN-02-G002",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-14": "15.47",
+        "2026-10-15": "32.13",
+        "2026-10-16": "11.13",
+        "2026-10-17": "18.45",
+        "2026-10-18": "1.48"
+      },
+      "total7": "77.18",
+      "avg7": "11.02571428571428571428571429",
+      "avg3": "20.57",
+      "yesterday": "18.45",
+      "today_partial": "1.48",
+      "reconciled": true
+    },
+    {
+      "id": "1732731174688237",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1647024653455243",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1139947138528968",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1118512173852170",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1058384167061349",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2349914102412065",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1547524853816263",
+      "name": "Growpowerhub-US-SHEIN-EN-05-G005",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1439329238341563",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2515256105613303",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1045218238395245",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-15": "74.22",
+        "2026-10-16": "68.37",
+        "2026-10-17": "71.33",
+        "2026-10-18": "25.01"
+      },
+      "total7": "213.92",
+      "avg7": "30.56",
+      "avg3": "71.30666666666666666666666667",
+      "yesterday": "71.33",
+      "today_partial": "25.01",
+      "reconciled": true
+    },
+    {
+      "id": "1633540688395320",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2124056211543075",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1954493705109037",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1457027459586895",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1641314784081546",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "4350561495088398",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2878762199124191",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1402050635214581",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1049215688108533",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1075583358452166",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1622438326211670",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2265822817574916",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1110933044840870",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "898230859797310",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1230254592624377",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1059595533346862",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2259446841264424",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2585842718549460",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "27376128778729261",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1635726541410028",
+      "name": "Growpowerhub-US-SHEIN-EN-01-G001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "869857549542755",
+      "name": "Vizioid-US-SHEIN-EN-06-G006",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "61.67",
+        "2026-10-12": "84.42",
+        "2026-10-13": "76.77",
+        "2026-10-14": "46.17",
+        "2026-10-15": "21.26",
+        "2026-10-16": "23.31",
+        "2026-10-17": "19.83",
+        "2026-10-18": "8.68"
+      },
+      "total7": "333.43",
+      "avg7": "47.63285714285714285714285714",
+      "avg3": "21.46666666666666666666666667",
+      "yesterday": "19.83",
+      "today_partial": "8.68",
+      "reconciled": true
+    },
+    {
+      "id": "1130214696640395",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1867022354284742",
+      "name": "Growpowerhub-US-SHEIN-EN-06-G006",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2048894646501291",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1644016727159850",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1558642092685163",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2530431657460209",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1422636729787173",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2085371176188537",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1763668874689346",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1498990138663094",
+      "name": "Escalatepower-US-SHEIN-EN-06-G006",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-14": "46.4",
+        "2026-10-15": "40.05",
+        "2026-10-16": "44.94",
+        "2026-10-17": "37.91",
+        "2026-10-18": "17.25"
+      },
+      "total7": "169.30",
+      "avg7": "24.18571428571428571428571429",
+      "avg3": "40.96666666666666666666666667",
+      "yesterday": "37.91",
+      "today_partial": "17.25",
+      "reconciled": true
+    },
+    {
+      "id": "2255699715207320",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1104954882187896",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3495850840578653",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2623443151446887",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1580123800238791",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1583372639857995",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1001810346224337",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2104037003654048",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2631740813952325",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2473065753215306",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "28522966503986625",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1055346167105557",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3267160103481154",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1734561694263258",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1543530857515875",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1044123768431473",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1767987891070870",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "950315064024892",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2326617038201651",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1550566159492216",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1736068407518263",
+      "name": "Vizioid-US-SHEIN-EN-04-G004",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "29.57",
+        "2026-10-12": "12.99",
+        "2026-10-13": "6.46",
+        "2026-10-14": "7.96",
+        "2026-10-15": "5.89",
+        "2026-10-16": "23.41",
+        "2026-10-17": "8.52",
+        "2026-10-18": "2.64"
+      },
+      "total7": "94.80",
+      "avg7": "13.54285714285714285714285714",
+      "avg3": "12.60666666666666666666666667",
+      "yesterday": "8.52",
+      "today_partial": "2.64",
+      "reconciled": true
+    },
+    {
+      "id": "2031917360813819",
+      "name": "Escalatepower-US-SHEIN-EN-04-G004",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-14": "10.72",
+        "2026-10-15": "5.25",
+        "2026-10-16": "19.66",
+        "2026-10-17": "25.57",
+        "2026-10-18": "1.87"
+      },
+      "total7": "61.20",
+      "avg7": "8.742857142857142857142857143",
+      "avg3": "16.82666666666666666666666667",
+      "yesterday": "25.57",
+      "today_partial": "1.87",
+      "reconciled": true
+    },
+    {
+      "id": "2058036964919384",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2539094766524235",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2931507527199508",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2238319676946739",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1730462148011237",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2281212156009966",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1877104513669062",
+      "name": "Vizioid-US-SHEIN-EN-05-G005",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "107.26",
+        "2026-10-12": "86.65",
+        "2026-10-13": "70.8",
+        "2026-10-14": "101.46",
+        "2026-10-15": "111.4",
+        "2026-10-16": "125.68",
+        "2026-10-17": "295.29",
+        "2026-10-18": "120.87"
+      },
+      "total7": "898.54",
+      "avg7": "128.3628571428571428571428571",
+      "avg3": "177.4566666666666666666666667",
+      "yesterday": "295.29",
+      "today_partial": "120.87",
+      "reconciled": true
+    },
+    {
+      "id": "1053673874192660",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3420755074751938",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1361084153744772",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1562308841608290",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1800154627681689",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "873386352377260",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1777757086900929",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1579521827199521",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "832188863253886",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1612952677109615",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "897046653487466",
+      "name": "Escalatepower-US-SHEIN-EN-05-G005",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-15": "31.91",
+        "2026-10-16": "19.22",
+        "2026-10-17": "10.06",
+        "2026-10-18": "11.02"
+      },
+      "total7": "61.19",
+      "avg7": "8.741428571428571428571428571",
+      "avg3": "20.39666666666666666666666667",
+      "yesterday": "10.06",
+      "today_partial": "11.02",
+      "reconciled": true
+    },
+    {
+      "id": "1018267074603840",
+      "name": "Escalatepower-US-SHEIN-EN-01-G001",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-15": "16.9",
+        "2026-10-16": "2.9",
+        "2026-10-17": "8.07",
+        "2026-10-18": "4.93"
+      },
+      "total7": "27.87",
+      "avg7": "3.981428571428571428571428571",
+      "avg3": "9.29",
+      "yesterday": "8.07",
+      "today_partial": "4.93",
+      "reconciled": true
+    },
+    {
+      "id": "1449850703665399",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "28327920593513643",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2323706575049143",
+      "name": "Growpowerhub-US-SHEIN-EN-03-G003",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1754588462350629",
+      "name": "Growpowerhub-US-SHEIN-EN-02-G002",
+      "currency": "USD",
+      "timezone": "America/Los_Angeles",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2235938116947880",
+      "name": "Boostingecon-US-SHEIN-ES-06-G006",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1823103112017320",
+      "name": "001",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1055972713483222",
+      "name": "001n",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1052719314075904",
+      "name": "Infinitynexx-MX-CC-ES-01-G001",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "69.74",
+        "2026-10-12": "59.27",
+        "2026-10-13": "55.97",
+        "2026-10-14": "63.49",
+        "2026-10-15": "69.89",
+        "2026-10-16": "25.25"
+      },
+      "total7": "343.61",
+      "avg7": "49.08714285714285714285714286",
+      "avg3": "31.71333333333333333333333333",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1000062965991423",
+      "name": "Creditoparaveiculo-BR-CAR-BR-16-G006",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1063939172741186",
+      "name": "Creditoparaveiculo-BR-CAR-BR-15-G001",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "551.51",
+        "2026-10-12": "618.56",
+        "2026-10-13": "521.22",
+        "2026-10-14": "537.47",
+        "2026-10-15": "473.52",
+        "2026-10-16": "525.96",
+        "2026-10-17": "548.88",
+        "2026-10-18": "164.17"
+      },
+      "total7": "3777.12",
+      "avg7": "539.5885714285714285714285714",
+      "avg3": "516.12",
+      "yesterday": "548.88",
+      "today_partial": "164.17",
+      "reconciled": true
+    },
+    {
+      "id": "1046241194533786",
+      "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "201.39",
+        "2026-10-12": "231.09",
+        "2026-10-13": "370.33",
+        "2026-10-14": "559.63",
+        "2026-10-15": "578.55",
+        "2026-10-16": "516.65",
+        "2026-10-17": "614.86",
+        "2026-10-18": "206.93"
+      },
+      "total7": "3072.50",
+      "avg7": "438.9285714285714285714285714",
+      "avg3": "570.02",
+      "yesterday": "614.86",
+      "today_partial": "206.93",
+      "reconciled": true
+    },
+    {
+      "id": "1441839147966220",
+      "name": "Creditoparaveiculo-BR-CAR-BR-12-G003",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1063653816008487",
+      "name": "Creditoparaveiculo-BR-CAR-BR-11-G005",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1732885114400079",
+      "name": "Creditoparaveiculo-BR-CAR-BR-10-G002",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1818352379129666",
+      "name": "Creditoparaveiculo-BR-CAR-BR-09-G004",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1346395337364200",
+      "name": "Creditoparaveiculo-BR-CAR-BR-08-G002",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "998033409772093",
+      "name": "Wantabrand-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "914613244984958",
+      "name": "Eggbev-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1643768573355157",
+      "name": "Cliquet-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1992216064751164",
+      "name": "Newsoun-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2575787119520435",
+      "name": "Topfeed-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1611527210400265",
+      "name": "Openzed-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1586218016357996",
+      "name": "Zytiva-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1039675528400037",
+      "name": "Zuout-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1753257812779707",
+      "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "39.72",
+        "2026-10-12": "53.02",
+        "2026-10-13": "55.52",
+        "2026-10-14": "50.11",
+        "2026-10-15": "41.49",
+        "2026-10-16": "45.1",
+        "2026-10-17": "54.99",
+        "2026-10-18": "13.39"
+      },
+      "total7": "339.95",
+      "avg7": "48.56428571428571428571428571",
+      "avg3": "47.19333333333333333333333333",
+      "yesterday": "54.99",
+      "today_partial": "13.39",
+      "reconciled": true
+    },
+    {
+      "id": "2039876850230678",
+      "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1323747189905575",
+      "name": "Creditoparaveiculo-BR-CAR-BR-07-G001",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1851640026221079",
+      "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "354.81",
+        "2026-10-12": "450.83",
+        "2026-10-13": "333.32",
+        "2026-10-14": "352.11",
+        "2026-10-15": "288.67",
+        "2026-10-16": "346.11",
+        "2026-10-17": "357.62",
+        "2026-10-18": "116.81"
+      },
+      "total7": "2483.47",
+      "avg7": "354.7814285714285714285714286",
+      "avg3": "330.80",
+      "yesterday": "357.62",
+      "today_partial": "116.81",
+      "reconciled": true
+    },
+    {
+      "id": "2633813727134360",
+      "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "1326.94",
+        "2026-10-12": "1659.75",
+        "2026-10-13": "1159.43",
+        "2026-10-14": "1122.25",
+        "2026-10-15": "1104.42",
+        "2026-10-16": "1137.39",
+        "2026-10-17": "1244.44",
+        "2026-10-18": "384.27"
+      },
+      "total7": "8754.62",
+      "avg7": "1250.66",
+      "avg3": "1162.083333333333333333333333",
+      "yesterday": "1244.44",
+      "today_partial": "384.27",
+      "reconciled": true
+    },
+    {
+      "id": "1107653168698121",
+      "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "1535.93",
+        "2026-10-12": "1707.2",
+        "2026-10-13": "1417.89",
+        "2026-10-14": "1372.47",
+        "2026-10-15": "1107.41",
+        "2026-10-16": "1242.42",
+        "2026-10-17": "1331.24",
+        "2026-10-18": "370.05"
+      },
+      "total7": "9714.56",
+      "avg7": "1387.794285714285714285714286",
+      "avg3": "1227.023333333333333333333333",
+      "yesterday": "1331.24",
+      "today_partial": "370.05",
+      "reconciled": true
+    },
+    {
+      "id": "2293082574767019",
+      "name": "Financeadx-CA-CC-FR-01",
+      "currency": "USD",
+      "timezone": "Canada/Eastern",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1307492658016080",
+      "name": "Creditoparaveiculo-BR-CAR-BR-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1356770869843984",
+      "name": "OpenzedFinanzas-ES-CC-ES-03",
+      "currency": "USD",
+      "timezone": "Europe/Madrid",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "841945108386762",
+      "name": "Openzed-GB-CC-EN-02",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1290644206529750",
+      "name": "OpenzedFinanzas-ES-CC-ES-02",
+      "currency": "USD",
+      "timezone": "Europe/Madrid",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "200.4",
+        "2026-10-12": "141.93",
+        "2026-10-13": "321.3",
+        "2026-10-14": "295.03",
+        "2026-10-15": "263.4",
+        "2026-10-16": "280.6",
+        "2026-10-17": "246",
+        "2026-10-18": "126.29"
+      },
+      "total7": "1748.66",
+      "avg7": "249.8085714285714285714285714",
+      "avg3": "263.3333333333333333333333333",
+      "yesterday": "246",
+      "today_partial": "126.29",
+      "reconciled": true
+    },
+    {
+      "id": "1576499503900490",
+      "name": "Lyzmo-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1051419481387651",
+      "name": "Helixenit-MX-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3606740736147012",
+      "name": "Topfeed-GB-CC-EN-02",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1879106292789246",
+      "name": "Topfeed-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1703589510634590",
+      "name": "Infinitynexx-MX-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3322645821230045",
+      "name": "Zuout-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1082795024919580",
+      "name": "Cliquet-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1859697548077508",
+      "name": "WantabrandFinance-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1522077799537057",
+      "name": "Eggbev-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1200421592010623",
+      "name": "Fincgriffin-ES-CC-ES-01",
+      "currency": "USD",
+      "timezone": "Europe/Madrid",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "26632890069640784",
+      "name": "Zytiva-GB-CC-EN-02",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "515.58",
+        "2026-10-12": "425.51",
+        "2026-10-13": "860.57",
+        "2026-10-14": "256.72"
+      },
+      "total7": "2058.38",
+      "avg7": "294.0542857142857142857142857",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2422027798240533",
+      "name": "Lyzmo-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2603250543403541",
+      "name": "Newsoun-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "964693426100518",
+      "name": "Topfeed-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1962094864436862",
+      "name": "Xyvlov-MX-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2036373690427012",
+      "name": "Financeadx-MX-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3188620887977617",
+      "name": "Infinitynexx-MX-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "814915838330687",
+      "name": "Helixenit-MX-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "70.62",
+        "2026-10-12": "48.14",
+        "2026-10-13": "417.39",
+        "2026-10-14": "207.85",
+        "2026-10-15": "123.33",
+        "2026-10-16": "112.39",
+        "2026-10-17": "77.27",
+        "2026-10-18": "7.73"
+      },
+      "total7": "1056.99",
+      "avg7": "150.9985714285714285714285714",
+      "avg3": "104.33",
+      "yesterday": "77.27",
+      "today_partial": "7.73",
+      "reconciled": true
+    },
+    {
+      "id": "26246776234981414",
+      "name": "OpenzedFinanzas-ES-CC-ES-01",
+      "currency": "USD",
+      "timezone": "Europe/Madrid",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1402778621160763",
+      "name": "Openzed-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "938402175545316",
+      "name": "Zytiva-GB-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Europe/London",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1417920063274526",
+      "name": "Wantabrand-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1199812475541594",
+      "name": "DucapesFinance-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "4327951124103402",
+      "name": "Ducapes-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "786499340850472",
+      "name": "Ducapes-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2014919962774800",
+      "name": "DucapesFinance-US-CC-EN-01 (openzed-us-cc-en)",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1463645154922070",
+      "name": "Wantabrand-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "779620558569051",
+      "name": "Financeadx-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "802790702419529",
+      "name": "Openzed-CAR-LOAN01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1001115192056600",
+      "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "177.52",
+        "2026-10-12": "146.94",
+        "2026-10-13": "142.85",
+        "2026-10-14": "121.64",
+        "2026-10-15": "126.85",
+        "2026-10-16": "97.63",
+        "2026-10-17": "81.99",
+        "2026-10-18": "33.19"
+      },
+      "total7": "895.42",
+      "avg7": "127.9171428571428571428571429",
+      "avg3": "102.1566666666666666666666667",
+      "yesterday": "81.99",
+      "today_partial": "33.19",
+      "reconciled": true
+    },
+    {
+      "id": "1296373865494424",
+      "name": "Financeadx-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "750417994429563",
+      "name": "Fincgriffin-TR-CC-TR-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1875159756368999",
+      "name": "ZytivaFinanzas-ES-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1972488586924014",
+      "name": "Financeadx-ZA-CC-EN-01",
+      "currency": "USD",
+      "timezone": "Africa/Johannesburg",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "648687381127947",
+      "name": "Financeadx-MX-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "177.66",
+        "2026-10-12": "147.09",
+        "2026-10-13": "166.94",
+        "2026-10-14": "148.21",
+        "2026-10-15": "152.26",
+        "2026-10-16": "166.91",
+        "2026-10-17": "144.2",
+        "2026-10-18": "20.92"
+      },
+      "total7": "1103.27",
+      "avg7": "157.61",
+      "avg3": "154.4566666666666666666666667",
+      "yesterday": "144.2",
+      "today_partial": "20.92",
+      "reconciled": true
+    },
+    {
+      "id": "646390844722547",
+      "name": "Financeadx-AR-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "622892223812136",
+      "name": "ZuoutFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2917074998467652",
+      "name": "ZuoutFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "766488759094178",
+      "name": "Boostingecon-US-SHEIN-ES-05-G005",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1695366567639607",
+      "name": "EggbevFinanzas-US-CC-ES-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "746786111113673",
+      "name": "PortalrelevanteFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1395666951633103",
+      "name": "Conecta-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "731235595920081",
+      "name": "Conecta-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1032265641850255",
+      "name": "Financeadx-CA-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/Toronto",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1762774024309795",
+      "name": "Financeadx-CA-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/Toronto",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "53.84",
+        "2026-10-12": "47",
+        "2026-10-13": "42.93",
+        "2026-10-14": "43.49",
+        "2026-10-15": "44.85",
+        "2026-10-16": "47.38",
+        "2026-10-17": "34.29",
+        "2026-10-18": "10.17"
+      },
+      "total7": "313.78",
+      "avg7": "44.82571428571428571428571429",
+      "avg3": "42.17333333333333333333333333",
+      "yesterday": "34.29",
+      "today_partial": "10.17",
+      "reconciled": true
+    },
+    {
+      "id": "1665423567430749",
+      "name": "Cliquet-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1006921161511407",
+      "name": "CliquetFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1340155967044119",
+      "name": "ZytivaFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1772267146710748",
+      "name": "ZytivaFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1230596021928352",
+      "name": "OpenzedFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1245683183659911",
+      "name": "OpenzedFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "919.66"
+      },
+      "total7": "919.66",
+      "avg7": "131.38",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1898264600987955",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "599100686163921",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "649321087781962",
+      "name": "Boostingecon-US-SHEIN-ES-01-G001",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1640828540206057",
+      "name": "Fincgriffin-US-CAR-EN-01 g005",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "2407807766227252",
+      "name": "Boostingecon-US-SHEIN-ES-02-G002",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "595100949964174",
+      "name": "Helixenit-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "506558989127002",
+      "name": "Helixenit-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3288190251316187",
+      "name": "Boostingecon-US-SHEIN-ES-03-G003",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "632601102707139",
+      "name": "Fincgriffin-US-CAR-EN-01 g004",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "865124755619494",
+      "name": "Marevelx-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1690115951930146",
+      "name": "Marevelx-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1794336051418476",
+      "name": "Xyvlov-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "9865063550170292",
+      "name": "Xyvlov-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1759462794592642",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "536294549227786",
+      "name": "Vizioid-US-SHEIN-EN-02-G002",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "411.47",
+        "2026-10-12": "315.91",
+        "2026-10-13": "342.05",
+        "2026-10-14": "355.45",
+        "2026-10-15": "425.58",
+        "2026-10-16": "325.87",
+        "2026-10-17": "271.11",
+        "2026-10-18": "75.1"
+      },
+      "total7": "2447.44",
+      "avg7": "349.6342857142857142857142857",
+      "avg3": "340.8533333333333333333333333",
+      "yesterday": "271.11",
+      "today_partial": "75.1",
+      "reconciled": true
+    },
+    {
+      "id": "1930583704091254",
+      "name": "Helixenit-DE-CC-DE-03",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "9019661471428570",
+      "name": "Helixenit-DE-CC-DE-02",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1621334898419474",
+      "name": "Financeadx-US-CC-ES-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1238994353819178",
+      "name": "SPEEmpleo-US-JOB-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "447794238364331",
+      "name": "LyzmoFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1084763203436108",
+      "name": "EggbevFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1601834724103654",
+      "name": "EggbevFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1100321331787077",
+      "name": "Newsoun-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "549358044611243",
+      "name": "NewsounFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "855852143294489",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1083662493452363",
+      "name": "Boostingecon-US-SHEIN-ES-04-G004",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1150642493152741",
+      "name": "Infinitynexx-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1537687014353483",
+      "name": "Infinitynexx-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "593523533182602",
+      "name": "001 DE",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1596746574275903",
+      "name": "001 DE",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1254066319219582",
+      "name": "TopfeedFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "488452146983103",
+      "name": "Wavesbee-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1357985585576983",
+      "name": "Xyvlov-DE-CC-DE-03",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "539939688953122",
+      "name": "Xyvlov-DE-CC-DE-02",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1583000095650153",
+      "name": "Yolokfx-US-SHEIN-EN-02-G006",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "2329.98",
+        "2026-10-12": "2406.92",
+        "2026-10-13": "1550.85",
+        "2026-10-14": "2838.83",
+        "2026-10-15": "3543.33",
+        "2026-10-16": "5850.66",
+        "2026-10-17": "6899.62",
+        "2026-10-18": "1890.76"
+      },
+      "total7": "25420.19",
+      "avg7": "3631.455714285714285714285714",
+      "avg3": "5431.203333333333333333333333",
+      "yesterday": "6899.62",
+      "today_partial": "1890.76",
+      "reconciled": true
+    },
+    {
+      "id": "2429758060563333",
+      "name": "Yolokfx-US-SHEIN-EN-03-G005",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "3046.27",
+        "2026-10-12": "2607.95",
+        "2026-10-13": "3314.93",
+        "2026-10-14": "4085.71",
+        "2026-10-15": "4566.16",
+        "2026-10-16": "5016.85",
+        "2026-10-17": "4757.87",
+        "2026-10-18": "1219.48"
+      },
+      "total7": "27395.74",
+      "avg7": "3913.677142857142857142857143",
+      "avg3": "4780.293333333333333333333333",
+      "yesterday": "4757.87",
+      "today_partial": "1219.48",
+      "reconciled": true
+    },
+    {
+      "id": "1087480119322404",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1265298634804756",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "573270008581646",
+      "name": "Zytiva-US-CC-EN-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1269297837732928",
+      "name": "Zytiva-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1744611463000838",
+      "name": "Openzed-US-CC-EN-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "389.97",
+        "2026-10-12": "304.58",
+        "2026-10-13": "491.5",
+        "2026-10-14": "441.61",
+        "2026-10-15": "490.63",
+        "2026-10-16": "367.88",
+        "2026-10-17": "1742.12",
+        "2026-10-18": "749.23"
+      },
+      "total7": "4228.29",
+      "avg7": "604.0414285714285714285714286",
+      "avg3": "866.8766666666666666666666667",
+      "yesterday": "1742.12",
+      "today_partial": "749.23",
+      "reconciled": true
+    },
+    {
+      "id": "1542257646409395",
+      "name": "Financeadx-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "471178855746180",
+      "name": "Fincgriffin-US-CAR-EN-01 g006",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1066906121624682",
+      "name": "001 DE",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "478686751754691",
+      "name": "Xyvlov-DE-CC-DE-01",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1539033173668397",
+      "name": "Newsoun-DE-CC-DE-02",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1022529252756344",
+      "name": "Helixenit-DE-CC-DE-01",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1676023646569785",
+      "name": "001 US JOB",
+      "currency": "USD",
+      "timezone": "Europe/Rome",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1014073380246913",
+      "name": "Infinitynexx-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "799233985680043",
+      "name": "Fincgriffin-US-CAR-EN-01 g002",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "7840111366055613",
+      "name": "Yolokfx-US-SHEIN-EN-01-G002",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "5135.15",
+        "2026-10-12": "4502.43",
+        "2026-10-13": "4260.24",
+        "2026-10-14": "4643.37",
+        "2026-10-15": "3859.77",
+        "2026-10-16": "4123.06",
+        "2026-10-17": "4977.39",
+        "2026-10-18": "1221.67"
+      },
+      "total7": "31501.41",
+      "avg7": "4500.201428571428571428571429",
+      "avg3": "4320.073333333333333333333333",
+      "yesterday": "4977.39",
+      "today_partial": "1221.67",
+      "reconciled": true
+    },
+    {
+      "id": "1526280818302320",
+      "name": "Vizioid-US-SHEIN-EN-01-G001",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "51.38",
+        "2026-10-12": "29.07",
+        "2026-10-13": "61.75",
+        "2026-10-14": "99.66",
+        "2026-10-15": "78.37",
+        "2026-10-16": "139.42",
+        "2026-10-17": "130.36",
+        "2026-10-18": "37.12"
+      },
+      "total7": "590.01",
+      "avg7": "84.28714285714285714285714286",
+      "avg3": "116.05",
+      "yesterday": "130.36",
+      "today_partial": "37.12",
+      "reconciled": true
+    },
+    {
+      "id": "781612907182683",
+      "name": "Yolokfx-US-SHEIN-EN-04-G004",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "3092.16",
+        "2026-10-12": "2535.91",
+        "2026-10-13": "3054.24",
+        "2026-10-14": "2124.74",
+        "2026-10-15": "1913.33",
+        "2026-10-16": "1950.4",
+        "2026-10-17": "2159.19",
+        "2026-10-18": "546.16"
+      },
+      "total7": "16829.97",
+      "avg7": "2404.281428571428571428571429",
+      "avg3": "2007.64",
+      "yesterday": "2159.19",
+      "today_partial": "546.16",
+      "reconciled": true
+    },
+    {
+      "id": "475733151872988",
+      "name": "001 FR LOAN",
+      "currency": "USD",
+      "timezone": "Europe/Paris",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "469633792449946",
+      "name": "Marevelx-DE-CC-DE-01",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "505426201926920",
+      "name": "001 DE",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1481815942722118",
+      "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "1519.71",
+        "2026-10-12": "2456.84",
+        "2026-10-13": "3353.7",
+        "2026-10-14": "3448.69",
+        "2026-10-15": "3736.04",
+        "2026-10-16": "2902.85",
+        "2026-10-17": "2423.66",
+        "2026-10-18": "537.31"
+      },
+      "total7": "19841.49",
+      "avg7": "2834.498571428571428571428571",
+      "avg3": "3020.85",
+      "yesterday": "2423.66",
+      "today_partial": "537.31",
+      "reconciled": true
+    },
+    {
+      "id": "836036068124922",
+      "name": "Marevelx-DE-CC-DE-02",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1430034464330819",
+      "name": "Openzed-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "475858618708253",
+      "name": "Fincgriffin-US-CAR-EN-01 g001",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "828323822724765",
+      "name": "001 US",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "787796726891306",
+      "name": "Yolokfx-US-SHEIN-EN-05-G001",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "2225.15",
+        "2026-10-12": "1849.75",
+        "2026-10-13": "1642.52",
+        "2026-10-14": "1814.37",
+        "2026-10-15": "1460.88",
+        "2026-10-16": "1703.34",
+        "2026-10-17": "1923.06",
+        "2026-10-18": "563.02"
+      },
+      "total7": "12619.07",
+      "avg7": "1802.724285714285714285714286",
+      "avg3": "1695.76",
+      "yesterday": "1923.06",
+      "today_partial": "563.02",
+      "reconciled": true
+    },
+    {
+      "id": "1512271136370247",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "7166688780063393",
+      "name": "Zuout-US-CC-EN-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1600310064116258",
+      "name": "Yolokfx-US-SHEIN-EN-06-G003",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "4510.66",
+        "2026-10-12": "4472.19",
+        "2026-10-13": "4492.2",
+        "2026-10-14": "6288.87",
+        "2026-10-15": "5544.15",
+        "2026-10-16": "5603.52",
+        "2026-10-17": "5453.91",
+        "2026-10-18": "1266.37"
+      },
+      "total7": "36365.50",
+      "avg7": "5195.071428571428571428571429",
+      "avg3": "5533.86",
+      "yesterday": "5453.91",
+      "today_partial": "1266.37",
+      "reconciled": true
+    },
+    {
+      "id": "1401366777181615",
+      "name": "PortalRelevante-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "3752157451670648",
+      "name": "Lyzmo-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "609.6",
+        "2026-10-12": "468.98",
+        "2026-10-13": "353.92",
+        "2026-10-14": "396.01",
+        "2026-10-15": "437.72",
+        "2026-10-16": "505.85",
+        "2026-10-17": "373.69",
+        "2026-10-18": "113.65"
+      },
+      "total7": "3145.77",
+      "avg7": "449.3957142857142857142857143",
+      "avg3": "439.0866666666666666666666667",
+      "yesterday": "373.69",
+      "today_partial": "113.65",
+      "reconciled": true
+    },
+    {
+      "id": "1167639857557379",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "320955207618404",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "750779463360371",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "306048175799468",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "403835832165335",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "299445119796959",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "367530082732798",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "784534536899952",
+      "name": "Newsoun-DE-CC-DE-01",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "309966038725407",
+      "name": "TopfeedFinanzas-US-CC-ES-02",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "other",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1115291772981400",
+      "name": "Conecta-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1508555813022660",
+      "name": "PortalrelevanteFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1073631607174341",
+      "name": "Zuout-US-CC-EN-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "359142713675192",
+      "name": "Newsoun-DE-CC-DE-04",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "902060548291162",
+      "name": "Zytiva-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "407388981645830",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1818460511984988",
+      "name": "LyzmoFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1034081997659047",
+      "name": "Eggbev-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "908704754163659",
+      "name": "Zuout-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "64.83",
+        "2026-10-12": "50.32",
+        "2026-10-13": "42.79",
+        "2026-10-14": "36.16",
+        "2026-10-15": "61.03",
+        "2026-10-16": "54.39",
+        "2026-10-17": "40.09",
+        "2026-10-18": "18.56"
+      },
+      "total7": "349.61",
+      "avg7": "49.94428571428571428571428571",
+      "avg3": "51.83666666666666666666666667",
+      "yesterday": "40.09",
+      "today_partial": "18.56",
+      "reconciled": true
+    },
+    {
+      "id": "1118046685851746",
+      "name": "CliquetFinanzas-US-CC-ES-03",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "336562339356179",
+      "name": "Openzed-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "392558193256993",
+      "name": "Newsoun-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "317705427343708",
+      "name": "Newsoun-DE-CC-DE-03",
+      "currency": "USD",
+      "timezone": "Europe/Berlin",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1044514616760606",
+      "name": "CliquetFinanzas-US-CC-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1280294005972443",
+      "name": "Amazingxjobs-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1123949745677240",
+      "name": "Cliquet-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "820610266425751",
+      "name": "Wavesbee-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "818090900114091",
+      "name": "SPEEmpleo-US-JOB-ES-01",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "828843525453577",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "311204101516831",
+      "name": "Topfeed-US-CC-EN-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {
+        "2026-10-11": "626.35",
+        "2026-10-12": "349.43",
+        "2026-10-13": "203.32",
+        "2026-10-14": "100.85",
+        "2026-10-15": "253.09",
+        "2026-10-16": "41.27",
+        "2026-10-17": "92.98"
+      },
+      "total7": "1667.29",
+      "avg7": "238.1842857142857142857142857",
+      "avg3": "129.1133333333333333333333333",
+      "yesterday": "92.98",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1056845612149904",
+      "name": "SPE-US-JOB-EN-01",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1855325541552075",
+      "name": "001 BR",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "824796689138710",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "684100996700121",
+      "name": "Wavesbee-EN-02",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "6815576755163306",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1418276262054163",
+      "name": "001 br",
+      "currency": "BRL",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "701425885216012",
+      "name": "001 BR",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "660907775806776",
+      "name": "DicasFinancas-BR-CC-BR-01-G003",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1099204731485315",
+      "name": "Fincgriffin-US-CAR-EN-01 g003",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "257157843792381",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1606041609891360",
+      "name": "sem usar",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "768959284682306",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "636413087837435",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Toronto",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "489009180018746",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "283179307368115",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "1075609353842541",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "675188827703096",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/Mexico_City",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "193636499665576",
+      "name": "Inactive",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "funding": "unknown",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "913760996417281",
+      "name": "001 BR",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    },
+    {
+      "id": "682862773296607",
+      "name": "001 BR",
+      "currency": "USD",
+      "timezone": "America/Sao_Paulo",
+      "funding": "line",
+      "period": {
+        "since": "2026-10-11",
+        "until": "2026-10-17",
+        "today": "2026-10-18"
+      },
+      "daily": {},
+      "total7": "0",
+      "avg7": "0",
+      "avg3": "0",
+      "yesterday": "0",
+      "today_partial": "0",
+      "reconciled": true
+    }
+  ],
+  "unpaid_invoice_mapping": [
+    {
+      "invoice": "26887952",
+      "account_id": "1107653168698121",
+      "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+      "amount": "48948.27",
+      "due": "48948.27",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26877313",
+      "account_id": "2633813727134360",
+      "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+      "amount": "37088.13",
+      "due": "37088.13",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26898588",
+      "account_id": "311204101516831",
+      "name": "Topfeed-US-CC-EN-01",
+      "amount": "33758.19",
+      "due": "33758.19",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26891526",
+      "account_id": "7840111366055613",
+      "name": "Yolokfx-US-SHEIN-EN-01-G002",
+      "amount": "31270.53",
+      "due": "31270.53",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26863777",
+      "account_id": "336562339356179",
+      "name": "Openzed-US-CC-EN-01",
+      "amount": "24674.88",
+      "due": "24674.88",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26905962",
+      "account_id": "1744611463000838",
+      "name": "Openzed-US-CC-EN-03",
+      "amount": "22877.5",
+      "due": "22877.5",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26859099",
+      "account_id": "2429758060563333",
+      "name": "Yolokfx-US-SHEIN-EN-03-G005",
+      "amount": "22617.12",
+      "due": "22617.12",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26885611",
+      "account_id": "1851640026221079",
+      "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+      "amount": "20452.92",
+      "due": "20452.92",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26875377",
+      "account_id": "814915838330687",
+      "name": "Helixenit-MX-CC-ES-01",
+      "amount": "20092.88",
+      "due": "20092.88",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26885901",
+      "account_id": "26632890069640784",
+      "name": "Zytiva-GB-CC-EN-02",
+      "amount": "19294.76",
+      "due": "19294.76",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26887900",
+      "account_id": "3188620887977617",
+      "name": "Infinitynexx-MX-CC-ES-01",
+      "amount": "15327.99",
+      "due": "15327.99",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26867526",
+      "account_id": "3752157451670648",
+      "name": "Lyzmo-US-CC-EN-01",
+      "amount": "11317.58",
+      "due": "11317.58",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26904934",
+      "account_id": "781612907182683",
+      "name": "Yolokfx-US-SHEIN-EN-04-G004",
+      "amount": "9554.09",
+      "due": "9554.09",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26866388",
+      "account_id": "1245683183659911",
+      "name": "OpenzedFinanzas-US-CC-ES-01",
+      "amount": "7885.98",
+      "due": "7885.98",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26856834",
+      "account_id": "1583000095650153",
+      "name": "Yolokfx-US-SHEIN-EN-02-G006",
+      "amount": "5371.01",
+      "due": "5371.01",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26902347",
+      "account_id": "1753257812779707",
+      "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+      "amount": "3874.38",
+      "due": "3874.38",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26858460",
+      "account_id": "787796726891306",
+      "name": "Yolokfx-US-SHEIN-EN-05-G001",
+      "amount": "3611.52",
+      "due": "3611.52",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26877768",
+      "account_id": "1034081997659047",
+      "name": "Eggbev-US-CC-EN-01",
+      "amount": "2284.61",
+      "due": "2284.61",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26874648",
+      "account_id": "536294549227786",
+      "name": "Vizioid-US-SHEIN-EN-02-G002",
+      "amount": "2153.08",
+      "due": "2153.08",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26900510",
+      "account_id": "2422027798240533",
+      "name": "Lyzmo-GB-CC-EN-01",
+      "amount": "1867.86",
+      "due": "1867.86",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26908958",
+      "account_id": "1600310064116258",
+      "name": "Yolokfx-US-SHEIN-EN-06-G003",
+      "amount": "1860.22",
+      "due": "1860.22",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26907197",
+      "account_id": "1254066319219582",
+      "name": "TopfeedFinanzas-US-CC-ES-01",
+      "amount": "1627.65",
+      "due": "1627.65",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26871953",
+      "account_id": "1542257646409395",
+      "name": "Financeadx-US-CC-EN-01",
+      "amount": "1364.55",
+      "due": "1364.55",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26889077",
+      "account_id": "2039876850230678",
+      "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "amount": "1086.57",
+      "due": "1086.57",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26875205",
+      "account_id": "392558193256993",
+      "name": "Newsoun-US-CC-EN-01",
+      "amount": "961.23",
+      "due": "961.23",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26900659",
+      "account_id": "908704754163659",
+      "name": "Zuout-US-CC-EN-01",
+      "amount": "664.44",
+      "due": "664.44",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26858386",
+      "account_id": "1414197490675732",
+      "name": "Mavroa-US-SHEIN-ES-02-G002",
+      "amount": "221.33",
+      "due": "221.33",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    },
+    {
+      "invoice": "26856974",
+      "account_id": "1430034464330819",
+      "name": "Openzed-US-CC-EN-02",
+      "amount": "62.41",
+      "due": "62.41",
+      "period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000"
+    }
+  ],
+  "meta_writes": 0
+}
