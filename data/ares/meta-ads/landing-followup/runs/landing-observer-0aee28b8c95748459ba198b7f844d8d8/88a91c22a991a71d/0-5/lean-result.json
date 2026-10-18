@@ -1,0 +1,295 @@
+{
+  "result": "NO_AD",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c138&utm_adgroup=b01fb01c138g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c138&utm_adgroup=b01fb01c138g01&nocache",
+    "mapping_source": "Read-only HTTP GET https://yolokfx.com/quiz/us/sh2-g002/ returned 200 with User-Agent Mozilla/5.0 during this preparation; anchors mgs-dq-cta-a and mgs-dq-cta-b both href=https://yolokfx.com/rec-us-app-shein-circle-of-style/. Matches context/acquisition.md#43-59. Both A/B destinations verified equal; original campaign query preserved verbatim; executor adds approved bare nocache.",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "mechanism": "NATIVE_CHROME_DEVTOOLS_DEVICE_TOOLBAR",
+      "device_name": "iPhone 16",
+      "viewport_width": 393,
+      "viewport_height": 852,
+      "orientation": "PORTRAIT",
+      "verify_before_navigation": true,
+      "desktop_fallback": false,
+      "scope": "OWNED_NEW_NORMAL_TAB_ONLY_NO_PROFILE_PROXY_EXTENSION_CHANGES",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "effective_at_epoch": 1792250747.737,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792332845.184814,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Mobile viewport shows a blank white loading screen with a faint site logo/spinner; no gate, article body, or ad is visible."
+      },
+      {
+        "at": 1792332855.6437566,
+        "gate": true,
+        "rewarded": false,
+        "article": false,
+        "description": "Foreground Chrome mobile viewport shows a site-owned free-products gate with a green CLAIM MY FREE PRODUCTS button and note that a sponsored ad will be shown. No sponsored overlay, network ad, or readable article body is currently visible."
+      },
+      {
+        "at": 1792332872.4776144,
+        "gate": false,
+        "rewarded": false,
+        "article": true,
+        "description": "Normal Chrome is active with a mobile viewport showing the article title, an introductory paragraph, and a site questionnaire offering Store pickup or Home delivery. No CLAIM MY FREE PRODUCTS button, rewarded overlay, or network ad is visible."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 124.78019364899956
+    },
+    "mobile_emulation": {
+      "device_toolbar_enabled": true,
+      "device_name": "iPhone 16",
+      "viewport_width": 393,
+      "viewport_height": 852,
+      "viewport_bounds": [
+        806,
+        188,
+        393,
+        852
+      ],
+      "verified": true,
+      "verified_at": 1792332828.5999959,
+      "source": "native_toolbar_visual"
+    },
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c138&utm_adgroup=b01fb01c138g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792332803.1637266,
+      "target": {
+        "pid": 18224,
+        "window_id": 13633064,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792332811.647259,
+      "mobile_emulation": {
+        "device_toolbar_enabled": true,
+        "device_name": "iPhone 16",
+        "viewport_width": 393,
+        "viewport_height": 852,
+        "viewport_bounds": [
+          806,
+          188,
+          393,
+          852
+        ],
+        "verified": true,
+        "verified_at": 1792332828.5999959,
+        "source": "native_toolbar_visual"
+      },
+      "opened_at": 1792332840.635651
+    },
+    "opened_at": 1792332840.635651,
+    "gate_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_ff65de3f1178477182ac00d228b04622.png",
+    "gate_click_attempted": true,
+    "gate_clicked_at": 1792332862.1555026,
+    "gate_click_result": {
+      "ok": true,
+      "action": "click",
+      "message": "✅ Posted click to Chromium pid 18224 at (1002,642) (background, no foreground swap).",
+      "effect": "unverifiable",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "synthetic_events"
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "gate_actual_native_point": [
+      1002,
+      642
+    ],
+    "article_verified": true,
+    "article_ready_at": 1792332872.4776177,
+    "article_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_e708906fa7824604b9a31e9725f8064f.png",
+    "rewarded_wait_seconds": 31.8419668674469,
+    "scroll_result": {
+      "ok": true,
+      "action": "press_key",
+      "message": "✅ Sent pagedown via SendInput on pid 18224 (delivery_mode:foreground).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "foreground"
+        },
+        "effect": "unverifiable",
+        "route": "global_input",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "scroll_visual_changed": true,
+    "observation_started_at": 1792332884.820655,
+    "observation_ended_at": 1792332910.3563483,
+    "observation_seconds": 25.535694081001566,
+    "observation_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_6506fa104a444ce3acecfa0550676470.png",
+    "visual_captured_at": 1792332910.3541822,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 13633064,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792332913.7755036,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 13633064,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 73.13985252380371,
+    "visual": {
+      "network_ad_visible": false,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "The landing page is loaded in foreground normal Chrome and shows SHEIN reviewer program article text. No rendered network advertising artwork or ad copy is visible."
+    },
+    "network_ad_confirmed": false,
+    "ad_description": "The landing page is loaded in foreground normal Chrome and shows SHEIN reviewer program article text. No rendered network advertising artwork or ad copy is visible.",
+    "visual_review": "The landing page is loaded in foreground normal Chrome and shows SHEIN reviewer program article text. No rendered network advertising artwork or ad copy is visible."
+  },
+  "batch_scope": "033fb321b659b569e8a3c5ab43c6a93d40c259e1dd58a0f4f0727f12cb86bcae"
+}

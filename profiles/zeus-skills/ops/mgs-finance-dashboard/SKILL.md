@@ -162,7 +162,13 @@ For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remai
 
 ## Explaining pending daily imports
 
-When Rodolfo asks what is pending, lead with the exact account/site, its verified manager and the missing financial fact—not merely “partial fill” or “query unconfirmed.” Distinguish the month-to-date recheck window from the latest incomplete day; a failed accumulated query does not mean every earlier day is unfilled. State what was saved, what remains unconfirmed, the effect on the last complete day, and whether any answer is actually required from him. Keep technical recovery with Zeus; do not turn a recoverable collection failure into a request for business confirmation. Follow the recovery procedure in `references/api-first-site-daily-spend.md` before declaring closure.
+When Rodolfo asks what remains to finish, answer the decision he needs to make before explaining technical causes:
+
+1. Refresh both spend and GAM state and follow their latest result receipts; an earlier alert may already be resolved. Separate the latest attempted run from an older successful receipt retained in state.
+2. Lead with exactly what is needed from him, or explicitly say that no decision is needed. Number the items and mark each as resolved, Zeus-owned technical recovery, or awaiting his answer. For an unresolved financial item, name the exact site/account, country, date, native amount/currency and missing field; include the manager only when verified. Ask a concrete question such as which vertical applies, not a generic request to check the report.
+3. State separately the last verified spend date, the last fully closed revenue date, and the part already saved. Distinguish the month-to-date recheck window from the latest incomplete day; a failed accumulated query does not mean every earlier day is unfilled. Do not describe a technically recovered spend failure as a continuing business blocker.
+4. Keep revision numbers, locks and retry mechanics secondary unless he asks why. Keep technical recovery with Zeus; neither a collection retry nor a write conflict is a request for Rodolfo to classify data. Explain retry coverage only for the stage actually covered by deployed code.
+5. After a numbered answer, apply only the confirmed classification through the guarded workflow and validate the resulting completion date. Follow `references/api-first-site-daily-spend.md` for technical recovery and `references/revenue-manager-attribution-and-sequential-daily-flow.md` for mapping completion.
 
 ## Non-negotiable rules
 

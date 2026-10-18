@@ -93,7 +93,7 @@ No lote corrente05/10, a regra corrigiu apenas os dois metadados US de Escalatep
 - Rodolfo confirmou `autocreditadx.com` / US → `us-car-en`, responsável G002/MGS, na thread1545426987756298340. Regra para o placement `pl_digital-trust_autocreditadx_us`; outros países sem classificação continuam bloqueados.
 - Preservar a precedência do medium canônico e a operação existente. Na linha16/10, medium `-` retorna ao fallback direto `g002-s`/`SEM_COMISSAO` (MGS), sem atribuir comissão externa.
 - Reutilizar `site-autocreditadx-principal`/AutoCreditAdx, SB Rede1/CAD, INATIVO/Não participa. O responsável não mapeado de outubro foi confirmado como MGS; não alterar rateio, rede, status ou competências fechadas.
-- Complemento autorizado16/10: CAD`0.009780046659281841`. Manter os74grupos previamente confirmados e a mesma identidade/hash de fonte. Publicação e conclusão são verificadas no checkpoint `ZEUS-FINANCE-AUTOCREDITADX-1561373355704320192`, não presumidas desta decisão.
+- Complemento autorizado16/10: CAD`0.009780046659281841`. Mantidos os74grupos previamente confirmados e a mesma identidade/hash de fonte. Publicação validada com507testes sem skips;16/10 completo em revisão692/audit4587, replay idempotente. Cadeia diária17/10 retomada e validada em revisão693/audit4593, zero pendências, replay idempotente e API/browser desktop/mobile. Evidências: `reports/finance-autocreditadx-1561373355704320192.md`; checkpoint `ZEUS-FINANCE-AUTOCREDITADX-1561373355704320192`.
 
 ## Fontes obrigatórias
 
