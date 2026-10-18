@@ -8651,6 +8651,24 @@
       "updated_at": "2026-10-17T15:57:01+00:00"
     },
     {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-18T16:22:56+00:00",
+      "id": "LANDING-DESKTOP-1561409616343203882",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Observador em desktop normal sem emulacao; repetir pendencias preservando aprovados e tempo20-30s",
+      "updated_at": "2026-10-18T16:22:56+00:00"
+    },
+    {
       "canonical_key": "growth.direct-traffic.landing-followup.procedure",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md",
       "consumers": [
@@ -8785,10 +8803,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "LANDING-DESKTOP-1561409616343203882",
       "title": "Gate editorial autorizado; esperarartigo,rolar e observar20-30s;semclickpublicitario",
-      "updated_at": "2026-10-17T16:21:53+00:00"
+      "updated_at": "2026-10-18T16:22:56+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
@@ -12694,5 +12712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T15:59:48+00:00"
+  "updated_at": "2026-10-18T16:22:56+00:00"
 }

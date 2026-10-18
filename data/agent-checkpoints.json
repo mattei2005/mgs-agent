@@ -1143,12 +1143,12 @@
     {
       "agent": "ares",
       "id": "ARES-LANDING-DESKTOP-1561409616343203882",
-      "next_step": "Conferir fim seguro do worker, instalar desktop20-30s sem mobile, congelar pendencias e executar rota compartilhada; restaurar timer e avisar acompanhamento com origem.",
-      "objective": "Migrar acompanhamento para desktop normal e refazer somente pendencias atuais",
-      "source": "data/ares/meta-ads/audit/landing-desktop-1561409616343203882",
-      "state": "migration_in_progress;timer_paused_for_safe_code_change;active_repair_blank_probe_verified_no_navigation;preserve_passed",
+      "next_step": "Executar batch congelado8jobs; manter backend serial; supervisor consome fases60s e restaura timer; avisos existentes por item e conclusao nas origens. Sem reabrir aprovados.",
+      "objective": "Refazer21pendencias em desktop normal e avisar acompanhamento por origem",
+      "source": "data/ares/meta-ads/audit/landing-desktop-1561409616343203882/batch-scope.json",
+      "state": "desktop_rule_active;mobile_disabled;382tests_pass;real_blank_probe_verified;all21mappings_prepared;c215pass_desktop25.2s_native_closed_current_initial_ad_frame;remaining20;old_mobile_pass_c221_preserved",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-18T16:05:43+00:00"
+      "updated_at": "2026-10-18T16:22:56+00:00"
     },
     {
       "agent": "ares",
@@ -6482,5 +6482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T16:16:00+00:00"
+  "updated_at": "2026-10-18T16:22:56+00:00"
 }
