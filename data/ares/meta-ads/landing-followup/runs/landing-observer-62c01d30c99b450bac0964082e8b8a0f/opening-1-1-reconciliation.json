@@ -1,0 +1,139 @@
+{
+  "job": "5ed9a9a0d95a45b5c237268923d6b1cf120fe8b58430dc80bb492ea241314a67",
+  "index": 1,
+  "attempt": 1,
+  "session_id": "20261018_112525_4e0082",
+  "opening_receipt": "/root/mgs-agent/data/ares/meta-ads/landing-followup/runs/landing-observer-62c01d30c99b450bac0964082e8b8a0f/5ed9a9a0d95a45b5/1-1/normal-open.json",
+  "readbacks": [
+    {
+      "at": 1792339256.4943147,
+      "windows": [
+        {
+          "pid": 9632,
+          "window_id": 20907408,
+          "app_name": "explorer.exe"
+        },
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ]
+    },
+    {
+      "at": 1792339257.887305,
+      "windows": [
+        {
+          "pid": 9632,
+          "window_id": 20907408,
+          "app_name": "explorer.exe"
+        },
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ]
+    },
+    {
+      "at": 1792339259.2046535,
+      "windows": [
+        {
+          "pid": 9632,
+          "window_id": 20907408,
+          "app_name": "explorer.exe"
+        },
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ]
+    }
+  ],
+  "current_document_labels": [
+    "Meta Business Suite"
+  ],
+  "new_window_absent_verified": true,
+  "url_submission_attempted": false,
+  "cleanup_inputs": 0,
+  "browser_inputs_zero_verified": false,
+  "opening_shortcut_was_attempted": true,
+  "observation_success": false,
+  "diagnosis": "Normal opening shortcut did not yield a registered new window. Three fresh native enumerations equal the exact opening baseline; original browser document remains. No URL was submitted. Preserve ERROR and require a blank normal repair probe before retry."
+}
