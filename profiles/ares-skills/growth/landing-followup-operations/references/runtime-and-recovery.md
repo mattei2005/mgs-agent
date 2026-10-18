@@ -54,6 +54,8 @@ O módulo `ares_campaign_v3.landing_lean` concentra abertura normal, fechamento 
 
 Ler instruções de URL no limite seguro entre tentativas. Se uma regra mudar durante a execução, aplicar ao próximo item sem alterar uma navegação em andamento; informar de onde passou a valer, em vez de afirmar que foi retroativa.
 
+Quando o operador pedir um diagnóstico removendo um parâmetro de uma URL pendente, manter a autorização, original e variante em rodada separada com uma visita por alvo, validar primeiro o mapeamento original e depois a transformação literal exata. Não relaxar globalmente `tracking_query_matches`, modificar payload/digest ou converter o resultado da variante em aprovação da URL completa da campanha. Persistir o diagnóstico e preservar os estados/contadores originais; não confundir esse experimento com retry da mesma URL. Um frame inicial com anúncio não pode ser negado por um frame final após rolagem que só mostra outro trecho; registrar ambos e separar identificação de anúncio, observação cumprida e PASS do executor.
+
 ### Validar o desktop sem galeria
 
 - Confirmar a navegação por readback após Enter; uma URL digitada na barra ainda não prova carregamento.

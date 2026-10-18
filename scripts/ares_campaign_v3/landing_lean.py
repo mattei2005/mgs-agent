@@ -172,17 +172,34 @@ def structured_visual(raw):
     return result
 
 def observation_url(url):
+    """Observer-only authorized query delta; never mutate campaign payloads."""
     import urllib.parse
     from .landing_followup import BASE
-    rule=(json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('active_observation_route') or {}).get('observation_query_flag') or {}
-    if rule.get('name')!='nocache' or rule.get('value') is not None:return url
-    query=urllib.parse.urlsplit(url).query
-    if 'nocache' in query.split('&'):return url
-    return url+('&' if query else ('' if url.endswith('?') else '?'))+'nocache'
+    route=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('active_observation_route') or {}
+    removal=route.get('observation_query_removal') or {}
+    main,hash_sep,fragment=url.partition('#')
+    base,query_sep,query=main.partition('?')
+    if removal.get('enabled') is True:
+        if (removal.get('keys')!=['utm_source'] or removal.get('applies_to')!='OBSERVER_URL_ONLY_NOT_META_CAMPAIGN_URL'
+                or not removal.get('authority_message_id')):
+            raise ValueError('Exact observer-only utm_source removal authority required')
+        # Decode names only to recognize encoded equivalents. Retained segments,
+        # including escapes, repeats, order and values, remain byte-for-byte.
+        parts=query.split('&') if query_sep else []
+        query='&'.join(p for p in parts if urllib.parse.unquote_plus(p.partition('=')[0])!='utm_source')
+        main=base+('?' + query if query else '')
+    rule=route.get('observation_query_flag') or {}
+    if rule.get('name')=='nocache' and rule.get('value') is None and 'nocache' not in query.split('&'):
+        main+=('&' if query else ('' if main.endswith('?') else '?'))+'nocache'
+    return main+(hash_sep+fragment if hash_sep else '')
 
 def tracking_query_matches(actual,original):
     import urllib.parse
-    return actual==original or actual==urllib.parse.urlsplit(observation_url('https://tracking.invalid/?'+original)).query
+    expected=urllib.parse.urlsplit(observation_url('https://tracking.invalid/?'+original)).query
+    # Preserve strict acceptance of historic exact query + bare nocache receipts;
+    # new navigation always uses observation_url and the active removal rule.
+    historical=original if 'nocache' in original.split('&') else original+('&' if original else '')+'nocache'
+    return actual in {original,expected,historical}
 
 def lean_enabled():
     from .landing_followup import BASE

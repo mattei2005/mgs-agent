@@ -1162,6 +1162,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-LANDING-NO-SOURCE-1561388270649221291",
+      "next_step": "Atualizar helper/contrato, testar sem navegar, resolver tres revisoes pelo operador e conferir criacao/ativacao/intake",
+      "objective": "Regra observador sem utm_source, encerramento C138-C140 e auditoria dos pedidos de hoje",
+      "source": "data/ares/meta-ads/audit/landing-no-source-rule-1561388270649221291",
+      "state": "in_progress;authority_verified;backup_saved;2campaign_requests_identified",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-18T14:41:06+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-LANDING-SOURCE-VARIANT-1561385193653280868",
       "next_step": "Nenhuma nova visita autorizada. Diagnostico separado nao aprova URLs completas nem estabelece causa da ausencia anterior.",
       "objective": "Testar C138 C139 C140 removendo somente utm_source=facebook por pedido de Rodolfo",
@@ -6442,5 +6452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:37:35+00:00"
+  "updated_at": "2026-10-18T14:41:06+00:00"
 }

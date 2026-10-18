@@ -301,6 +301,19 @@ def request_payloads(rid,origin,root,meta,epoch,check_scope):
     account=identifier(record.get('account_id'));expected=[];children=[];seen=set();source_ids=set()
     for group in groups:
         number=group.get('source_number');quantity=group.get('quantity');ids=group.get('campaign_ids')
+        # The canonical detailed completion receipt enumerates exact campaign
+        # records instead of repeating compact quantity/IDs. Normalize read-only
+        # and reject conflicts; never rewrite campaign receipts or skip children.
+        detailed=group.get('campaigns')
+        if detailed is not None:
+            if not isinstance(detailed,list) or not detailed or any(not isinstance(x,dict) for x in detailed):
+                raise ValueError('aggregate_group_detailed_coverage_invalid')
+            detailed_ids=[identifier(x.get('campaign_id')) for x in detailed]
+            if len(set(detailed_ids))!=len(detailed_ids):raise ValueError('aggregate_group_detailed_duplicate')
+            if ids is not None and ids!=detailed_ids:raise ValueError('aggregate_group_detailed_conflict')
+            if quantity is not None and (type(quantity) is not int or quantity!=len(detailed_ids)):
+                raise ValueError('aggregate_group_detailed_quantity_conflict')
+            ids=detailed_ids;quantity=len(detailed_ids)
         if type(number) is not int or number<1 or type(quantity) is not int or quantity<1:
             raise ValueError('aggregate_group_identity_invalid')
         if not isinstance(ids,list) or len(ids)!=quantity:raise ValueError('aggregate_group_coverage_invalid')

@@ -60,7 +60,7 @@
     "superseded_technical_hold": "HELD_FOR_FULL_ASYNC_ISOLATION was an Ares implementation hold, not a Rodolfo suspension instruction; cleared by external-trigger validation"
   },
   "landing_mapping": "CANONICAL_EVIDENCE_REQUIRED_NEVER_QUIZ",
-  "utm_policy": "EXACT_EFFECTIVE_NEW_CAMPAIGN_ADGROUP_AND_ALL_APPROVED_PARAMETERS",
+  "utm_policy": "EXACT_EFFECTIVE_NEW_CAMPAIGN_ADGROUP_AND_ALL_APPROVED_PARAMETERS_EXCEPT_AUTHORIZED_OBSERVER_ONLY_QUERY_REMOVALS",
   "coverage": "EACH_UNIQUE_LANDING_PLUS_UTM_COMBINATION",
   "resource": "PC1_INTERACTIVE_DESKTOP_SHARED_CROSS_AGENT_LEASE",
   "parallel_urls": 1,
@@ -131,6 +131,19 @@
     "minimal_visual_read_allowed_for_actual_ad_detection": true,
     "compact_result_and_owned_closure_required": true,
     "no_code_configuration_or_documentation_while_landing_open": true,
+    "observation_query_removal": {
+      "enabled": true,
+      "keys": ["utm_source"],
+      "authority_user_id": "344196393512075265",
+      "authority_message_id": "1561388270649221291",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792334372.914,
+      "applies_to": "OBSERVER_URL_ONLY_NOT_META_CAMPAIGN_URL",
+      "preserve_all_other_query_bytes": true,
+      "preserve_original_url_and_campaign_payload": true,
+      "supersedes": "Preservation of utm_source in observation navigation only; historical receipts remain unchanged",
+      "history_source": "data/ares/meta-ads/audit/landing-no-source-rule-1561388270649221291/before/data/ares/meta-ads/policies/direct-traffic-landing-followup.json"
+    },
     "observation_query_flag": {
       "name": "nocache",
       "value": null,

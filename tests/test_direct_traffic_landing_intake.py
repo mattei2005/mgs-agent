@@ -235,6 +235,39 @@ class IntakeTests(unittest.TestCase):
         self.aggregate_path.parent.mkdir(parents=True);self.aggregate_path.write_text(json.dumps(self.aggregate))
         self.c.execute('UPDATE messages SET content=? WHERE role=?',(json.dumps(self.aggregate),'tool'));self.c.commit()
 
+    def detailed_grouped_fixture(self):
+        self.grouped_fixture()
+        for group in self.aggregate['groups']:
+            group['campaigns']=[{'campaign_id':cid} for cid in group.pop('campaign_ids')]
+            group.pop('quantity')
+        self.aggregate_path.write_text(json.dumps(self.aggregate))
+
+    def test_detailed_grouped_receipt_enumerates_all_children(self):
+        self.detailed_grouped_fixture();self.intake.tick()
+        self.assertEqual(self.jobs(),2)
+        self.assertEqual(self.q.db.execute('SELECT count(*) FROM links').fetchone()[0],2)
+        self.intake.tick();self.assertEqual(self.jobs(),2)
+
+    def test_detailed_grouped_receipt_conflicting_ids_rejected(self):
+        self.detailed_grouped_fixture();self.aggregate['groups'][0]['campaign_ids']=['111111111111199']
+        self.aggregate_path.write_text(json.dumps(self.aggregate));self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_detailed_grouped_receipt_conflicting_quantity_rejected(self):
+        self.detailed_grouped_fixture();self.aggregate['groups'][0]['quantity']=2
+        self.aggregate_path.write_text(json.dumps(self.aggregate));self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_detailed_grouped_receipt_duplicate_ids_rejected(self):
+        self.detailed_grouped_fixture();g=self.aggregate['groups'][0];g['campaigns'].append(dict(g['campaigns'][0]))
+        self.aggregate_path.write_text(json.dumps(self.aggregate));self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_detailed_grouped_receipt_missing_id_rejected(self):
+        self.detailed_grouped_fixture();self.aggregate['groups'][0]['campaigns']=[{}]
+        self.aggregate_path.write_text(json.dumps(self.aggregate));self.intake.tick();self.assertEqual(self.jobs(),0)
+
+    def test_detailed_grouped_receipt_wrong_child_target_rejected(self):
+        self.detailed_grouped_fixture();self.aggregate['groups'][0]['campaigns'][0]['campaign_id']='111111111111199'
+        self.aggregate_path.write_text(json.dumps(self.aggregate));self.intake.tick();self.assertEqual(self.jobs(),0)
+
     def test_grouped_completion_enumerates_all_children_and_reuses_receipt(self):
         self.grouped_fixture();self.intake.tick()
         self.assertEqual(self.jobs(),2)
