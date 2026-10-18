@@ -50,7 +50,7 @@ O módulo `ares_campaign_v3.landing_lean` concentra abertura normal, fechamento 
 
 ### Preservar o endereço de origem
 
-`observation_url` aplica somente a extensão autorizada pelo contrato ativo. O flag `nocache` é bare: usar `?nocache` quando não há query e `&nocache` depois dos parâmetros existentes. Preservar ordem, escapes e valores; não usar `=1`, duplicar o flag ou escrever na URL Meta. Guardar a URL canônica original e a efetivamente aberta em campos distintos.
+`observation_url` aplica os deltas autorizados no contrato ativo: remover `utm_source` de qualquer valor da navegação do observador (autoridade `1561388270649221291`), preservando literalmente todos os demais segmentos, e manter o flag bare `nocache`. Usar `?nocache` quando não restar query e `&nocache` depois dos parâmetros restantes; não usar `=1`, duplicar o flag ou escrever na URL Meta. Guardar a URL canônica original e a efetivamente aberta em campos distintos. O matcher aceita tanto o delta exato vigente quanto recibos históricos originais + bare nocache; nunca permite trocar campanha/adgroup ou acrescentar parâmetro arbitrário. Testes: `test_direct_traffic_landing_source_removal.py`.
 
 Ler instruções de URL no limite seguro entre tentativas. Se uma regra mudar durante a execução, aplicar ao próximo item sem alterar uma navegação em andamento; informar de onde passou a valer, em vez de afirmar que foi retroativa.
 
@@ -133,7 +133,7 @@ Não escrever no banco nativo Hermes, no estado de campanha, no cursor global ou
 
 ### Enumerar uma conclusão agregada
 
-- Usar a prova agregada canônica para enumerar **todos** os filhos declarados; não escolher o primeiro filho ou adivinhar por glob.
+- Usar a prova agregada canônica para enumerar **todos** os filhos declarados; não escolher o primeiro filho ou adivinhar por glob. Aceitar tanto grupos compactos `quantity` + `campaign_ids` quanto o formato canônico detalhado `campaigns[].campaign_id`, derivando quantidade somente da enumeração explícita e confrontando cada filho/total/conta/origem. Se ambos os formatos coexistirem, exigir igualdade; conflito, duplicata ou ID ausente falham fechado. Normalizar apenas no leitor do observador, nunca editar o comprovante ou a rota de criação.
 - Validar IDs literais de requests, origem, conta, campanhas únicas, quantidade de cada grupo e total. Grupo faltante/incompleto ou partição divergente impede armar o conjunto como completo.
 - Vincular os filhos ao mesmo `native_obligation_id` e recibo real. Só marcar o pai `READY` após enumeração completa; o sucesso coletivo deve sair uma vez por pedido humano.
 - Em reconsideração automática, usar a geração da correção e lotes limitados; priorizar pais `PENDING`. Não deixar filhos ocuparem a seleção indefinidamente nem zerar cursores, tentativas ou `PASSED`.

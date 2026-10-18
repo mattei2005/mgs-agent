@@ -1163,22 +1163,22 @@
     {
       "agent": "ares",
       "id": "ARES-LANDING-NO-SOURCE-1561388270649221291",
-      "next_step": "Atualizar helper/contrato, testar sem navegar, resolver tres revisoes pelo operador e conferir criacao/ativacao/intake",
-      "objective": "Regra observador sem utm_source, encerramento C138-C140 e auditoria dos pedidos de hoje",
-      "source": "data/ares/meta-ads/audit/landing-no-source-rule-1561388270649221291",
-      "state": "in_progress;authority_verified;backup_saved;2campaign_requests_identified",
+      "next_step": "Consumidor automatico existente acompanha as 15 landings de Nicolas sem utm_source, sem novo pedido e sem alterar campanhas; informar resultado via outbox normal. Nao reabrir Geizian C138-C140.",
+      "objective": "Regra sem source instalada e auditoria dos pedidos de hoje",
+      "source": "data/ares/meta-ads/audit/landing-no-source-rule-1561388270649221291/today-status-verification.json",
+      "state": "rule_active_executor_contract_skill_readback;360tests_pass;3reviews_resolved_by_operator;18campaigns_live_active;nicolas15landings_in_automatic_queue;detailed_aggregate_reader_fixed_and_actual5children_armed",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-18T14:41:06+00:00"
+      "updated_at": "2026-10-18T14:47:25+00:00"
     },
     {
       "agent": "ares",
       "id": "ARES-LANDING-SOURCE-VARIANT-1561385193653280868",
-      "next_step": "Nenhuma nova visita autorizada. Diagnostico separado nao aprova URLs completas nem estabelece causa da ausencia anterior.",
-      "objective": "Testar C138 C139 C140 removendo somente utm_source=facebook por pedido de Rodolfo",
-      "source": "data/ares/meta-ads/audit/landing-source-variant-1561385193653280868/visual-reconciliation.json",
-      "state": "complete_diagnostic;3ads_identified_initial_frames;c138square_observation_incomplete;c139homescom_c140teddyswims_25s_postscroll;all_closed;original_review_preserved;no_meta_write",
+      "next_step": "Nenhuma pendencia neste pedido; nao reabrir. Regra sem utm_source vigente somente no observador.",
+      "objective": "Teste C138 C139 C140 sem source e encerramento por Rodolfo",
+      "source": "data/ares/meta-ads/audit/landing-no-source-rule-1561388270649221291/operator-resolution-verification.json",
+      "state": "superseded_by_operator_resolution_1561388270649221291;3ads_identified;3resolved_by_operator;job_complete;no_new_visit;not_automated_full_query_pass",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-18T14:37:35+00:00"
+      "updated_at": "2026-10-18T14:47:25+00:00"
     },
     {
       "agent": "zeus",
@@ -6452,5 +6452,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:41:06+00:00"
+  "updated_at": "2026-10-18T14:47:25+00:00"
 }

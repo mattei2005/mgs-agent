@@ -8693,15 +8693,33 @@
         "zeus"
       ],
       "domain": "growth",
+      "effective_at": "2026-10-18T10:39:32.914-04:00",
+      "id": "LANDING-NO-SOURCE-1561388270649221291",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Observador de landings sem utm_source; demais parametros e nocache preservados; nenhuma alteracao Meta",
+      "updated_at": "2026-10-18T14:45:11+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.landing-observation-query-flag",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
       "effective_at": "2026-10-16T11:56:12+00:00",
       "id": "LANDING-NOCACHE-1560620891472265308",
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "LANDING-NO-SOURCE-1561388270649221291",
       "title": "nocache bare apenas na URL do observador; UTMs e URL Meta preservadas",
-      "updated_at": "2026-10-16T11:56:12+00:00"
+      "updated_at": "2026-10-18T14:45:11+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.landing-followup.repeated-report-diagnosis",
@@ -12642,5 +12660,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:00:43+00:00"
+  "updated_at": "2026-10-18T14:45:11+00:00"
 }
