@@ -318,6 +318,8 @@ A rota SHEIN de criação/duplicação permanece exatamente a atual: não carreg
 
 Após validar o lote inteiro, responda com confirmação curta de fonte + quantidade + conta e bullets de números novos, orçamento diário por campanha e total do lote, início no fuso verificado, lance efetivamente herdado/aplicado, status e quantidade real de anúncios validados. Separe a ressalva de posts novos/prova social e qualquer normalização de público comprovada; não declare cópia literalmente idêntica quando houver omissão de flags. Use as árvores finais e a prova de QA como fonte, não os números previstos pelo dry-run nem a cardinalidade do pedido anterior. Data futura com status ACTIVE significa habilitada/programada, não entrega já comprovada.
 
+Separe conclusão operacional de cumprimento do SLA: confira `phase`, `activation_result.trees`, cobertura de `media_qa` e `original_request_e2e_ms` antes de classificar o resultado. Um readback final pode terminar após o alvo mesmo com ativação já concluída; nesse caso, confirme o estado real validado e preserve a medição de atraso, sem anunciar SLA cumprido, repetir ativação ou abrir continuação desnecessária. Somente o estado efetivo `ACTIVATION_DEFERRED` com revisão pendente segue a receita de continuação; não o deduza apenas da duração total. Não altere relógio, limite ou manifests para reconciliar essa diferença.
+
 Distinga orçamento do lote, delta do request e orçamento ativo total da conta. Some os budgets dos IDs novos verificados para informar o lote; não calcule o delta autorizado subtraindo dois snapshots globais da conta, pois outras campanhas podem mudar entre as leituras. Quando informar o total ativo da conta, use o readback consolidado e identifique-o separadamente do lote.
 
 - Responder na thread atual.
