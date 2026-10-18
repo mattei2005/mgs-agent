@@ -8739,6 +8739,23 @@
       "updated_at": "2026-10-18T14:45:11+00:00"
     },
     {
+      "canonical_key": "growth.direct-traffic.landing-notification-origin-context",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-18T15:59:48+00:00",
+      "id": "LANDING-ORIGIN-CONTEXT-1561407383786487848",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Acompanhamentos na thread de Rodolfo incluem nome e link da thread de origem",
+      "updated_at": "2026-10-18T15:59:48+00:00"
+    },
+    {
       "canonical_key": "growth.direct-traffic.landing-followup.repeated-report-diagnosis",
       "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
       "consumers": [
@@ -12677,5 +12694,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:54:05+00:00"
+  "updated_at": "2026-10-18T15:59:48+00:00"
 }

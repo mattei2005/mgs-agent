@@ -670,6 +670,9 @@ class Discord:
         row=q.db.execute('SELECT * FROM messages WHERE key=?',(key,)).fetchone()
         if not row:raise ValueError('missing durable notification')
         if row['state']=='CANCELLED_BEFORE_SEND':raise ValueError('notification_cancelled_before_send')
+        if row['thread']==INCIDENT_THREAD:
+            from .landing_followup_reporting import origin_notification_content
+            row=dict(row);row['content']=origin_notification_content(q,row,self)
         if row['thread']==INCIDENT_THREAD and row['state']=='PREPARED':
             authorized=any(json.loads(e['detail']).get('notification_key')==key
                 for e in q.db.execute("SELECT detail FROM events WHERE kind IN ('human_action_requested','progress_update_authorized','finite_review_report_authorized','completion_notice_authorized')"))

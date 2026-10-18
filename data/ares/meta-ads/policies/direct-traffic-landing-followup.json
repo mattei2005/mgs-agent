@@ -295,6 +295,19 @@
     "do_not_interrupt_active_cleanup": true,
     "no_implicit_extra_landing_visit": true
   },
+  "notification_origin_context": {
+    "enabled": true,
+    "authority_message_id": "1561407383786487848",
+    "authority_thread_id": "1559932317861158993",
+    "destination_thread_id": "1559932317861158993",
+    "include_source_thread_name": true,
+    "include_source_thread_link": true,
+    "name_source": "EXACT_DISCORD_CHANNEL_GET_WITH_PARENT_VALIDATION",
+    "apply_at_delivery_outside_pc1": true,
+    "preserve_outbox_base_and_nonce": true,
+    "preserve_historical_and_ambiguous_messages": true,
+    "manager_conclusion_text_unchanged": true
+  },
   "progress_reporting": {
     "enabled": true,
     "mode": "PER_ITEM",

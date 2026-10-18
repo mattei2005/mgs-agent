@@ -40,6 +40,52 @@ def prepare_item(q,key,idx,result):
     return notice
 
 
+def origin_notification_content(q,row,client):
+    """Render verified origin names off PC1; keep outbox base/nonce immutable."""
+    try:cfg=json.loads((core.BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('notification_origin_context') or {}
+    except (OSError,ValueError):return row['content']
+    if cfg.get('enabled') is not True or row['thread']!=core.INCIDENT_THREAD:return row['content']
+    q.db.execute('CREATE TABLE IF NOT EXISTS message_origin_renderings(key TEXT PRIMARY KEY,content TEXT NOT NULL,origins TEXT NOT NULL)')
+    old=q.db.execute('SELECT content FROM message_origin_renderings WHERE key=?',(row['key'],)).fetchone()
+    if old:return old['content']
+    # An ambiguous POST or an old delivered notice must never change its body.
+    if row['state']!='PREPARED' or row['message_id']:return row['content']
+    keys=[]
+    if row['key'].startswith('landing-item:'):
+        keys=[row['key'].split(':')[1]]
+    else:
+        for event in q.db.execute('SELECT job,detail FROM events WHERE detail LIKE ? ORDER BY seq DESC',('%'+row['key']+'%',)):
+            detail=json.loads(event['detail'])
+            if detail.get('notification_key')!=row['key']:continue
+            keys=detail.get('job_keys') or detail.get('scope_jobs') or ([event['job']] if event['job'] else [])
+            if keys:break
+    if not keys and row['key'].startswith('landing-progress:'):keys=policy().get('report_jobs') or []
+    if not keys:return row['content']
+    origins=[];seen=set();lines=[]
+    cache=getattr(client,'_landing_origin_names',{})
+    for key in keys:
+        payload=q.job(key)['payload'];thread=core.identifier(payload['source_thread_id'])
+        if thread in seen:continue
+        seen.add(thread)
+        channel=cache.get(thread)
+        if channel is None:channel=client.get('/channels/'+thread)
+        if str(channel.get('id'))!=thread or str(channel.get('parent_id') or thread)!=payload['source_channel_id'] or not isinstance(channel.get('name'),str) or not channel['name'].strip():
+            raise ValueError('exact source thread name/parent required')
+        cache[thread]=channel
+        name=' '.join(channel['name'].split())
+        # Metadata is display-only, never instructions or mention authority.
+        shown=re.sub(r'([\\`*_{}\[\]()<>])',r'\\\1',name)
+        lines.append(f'📍 **Thread de origem:** {shown} · <#{thread}>')
+        origins.append({'thread_id':thread,'name':name,'parent_id':payload['source_channel_id']})
+    client._landing_origin_names=cache
+    content='\n'.join(lines)+'\n'+row['content']
+    if len(content)>1900:raise ValueError('origin-labelled notice exceeds safe message limit')
+    with q.tx():
+        q.db.execute('INSERT OR IGNORE INTO message_origin_renderings VALUES(?,?,?)',(row['key'],content,json.dumps(origins,ensure_ascii=False)))
+        q.event(None,'notification_origin_rendered',{'notification_key':row['key'],'authority_message_id':cfg.get('authority_message_id'),'origins':origins,'outbox_base_preserved':True})
+    return q.db.execute('SELECT content FROM message_origin_renderings WHERE key=?',(row['key'],)).fetchone()['content']
+
+
 def deliver_items(q,discord_factory,cfg):
     rows=q.db.execute("SELECT key FROM messages WHERE key LIKE 'landing-item:%' AND state IN ('PREPARED','INTENT') ORDER BY created LIMIT ?",(int(cfg.get('delivery_batch_size',5)),)).fetchall()
     if not rows:return {'state':'NOT_DUE','mode':'PER_ITEM'}
