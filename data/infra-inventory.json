@@ -841,6 +841,19 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-media-spend-recovery-1561367006962393099",
+      "agent": "zeus",
+      "type": "verified_operational_recovery",
+      "source_alert_id": "1561367006962393099",
+      "state_path": "/root/mgs-agent/data/finance-media-spend-state.json",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/media-spend-runs/20261018T091917-0400/recovery-verification.json",
+      "source_collection": "/root/mgs-agent/apps/finance-system/private/media-spend-runs/20261018T090326-0400/collection.json",
+      "cause": "Concurrent authorized SMS import advanced workspace revision 688 to 689; optimistic-concurrency guard rejected stale spend calculation.",
+      "result": "Guarded replay passed, workspace revision 690, spend ledger through 2026-10-17 with 1802 rows; zero-change dry replay; 23 SMS additions preserved.",
+      "code_or_schedule_changed": false,
+      "remaining_separate_issue": "GAM partial_mapping for autocreditadx.com US; no mapping change authorized by technical recovery."
+    },
+    {
       "id": "vps-cleanup-20261015-1560428152994402345",
       "agent": "zeus",
       "type": "frozen_vps_cleanup_manifest",
