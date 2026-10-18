@@ -1,0 +1,31 @@
+{
+  "state": "QUERY_POLICY_CONFLICT_BEFORE_PC1",
+  "scope_id": "6f3f38b456171055643ac38ab96ee71611af35bcfadfe5d9a32f4109ff806b0a",
+  "owner": "landing-observer-b86808f64e584266ba8a1148486fb629",
+  "pc1_session_id": "20261018_111222_5c08dc",
+  "manifest": "prepared-manifest.json",
+  "mapping_evidence": "mapping-readonly-proof.json",
+  "scope_validated": true,
+  "request_digests_unchanged": true,
+  "manifest_exact_pending_coverage": true,
+  "manifest_count": 14,
+  "scope_links": 15,
+  "technical_repair_count": 1,
+  "technical_repair_target": {
+    "job": "c803d56b69abd616fe9788093612e5079feffbdbe2128348f02857deddbe0a8f",
+    "index": 0,
+    "campaign_id": "120253503309310174",
+    "attempt": 0
+  },
+  "query_mismatch_count": 14,
+  "browser_inputs_from_this_session": 0,
+  "executor_launched": false,
+  "external_posts_from_this_session": 0,
+  "scope_and_requests_modified": false,
+  "shared_configuration_modified": false,
+  "user_requested": "preservar queries; acrescentar somente nocache aprovado",
+  "active_runner_removes": ["utm_source"],
+  "active_removal_authority_message_id": "1561388270649221291",
+  "required_decision": "Confirmar se neste lote vale preservar a query integral conforme o pedido atual ou a remocao de utm_source vigente no contrato canonico. Nao navegar nem alterar configuracao compartilhada enquanto houver conflito.",
+  "next_step_after_decision": "Revalidar o mesmo scope e o mapa completo contra o estado atual; recuperar C215 pelo controlador suportado sem zerar historico; executar o runner serial apenas quando a URL efetiva corresponder ao escopo autorizado."
+}
