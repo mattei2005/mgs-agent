@@ -20,13 +20,28 @@ from finance_gam_revenue_sync import blocker_body, healthy_state_fields, missing
 
 
 class GamRevenuePlanTests(unittest.TestCase):
+    def test_autocreditadx_us_car_mgs_exact_mapping(self):
+        rules = load_rules()
+        self.assertEqual(rules['authority']['autocreditadx_us_car_en'], '1561373355704320192')
+        for day in ['2026-10-16', '2026-10-17']:
+            with tempfile.TemporaryDirectory() as td:
+                p = self.pair(td, [[day,'pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [[day,'pl_digital-trust_autocreditadx_us','mg99-s','c','x',2],[day,'pl_digital-trust_autocreditadx_us','g001-d','c','x',3]], rules)
+                self.assertEqual(p['blockers'], [])
+                self.assertEqual(p['mapping_authority_message_id'], '1561373355704320192')
+                rows = [e for e in p['entries'] if e['site']=='AutoCreditAdx']
+                self.assertEqual({(e['country'],e['source_vertical'],e['source_manager_tag'],e['manager'],e['gross']) for e in rows}, {('US','us-car-en','g002-s','SEM_COMISSAO','2'),('US','us-car-en','g001-d','george','3')})
+                self.assertTrue(p['summary']['currency_totals_reconciled'])
+        with tempfile.TemporaryDirectory() as td:
+            p = self.pair(td, [['2026-10-17','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [['2026-10-17','pl_digital-trust_autocreditadx_fr','g002-s','c','x',2]], rules)
+            self.assertEqual(p['blockers'][0]['type'], 'new_domain_country')
+
     def test_zytiva_finanzas_es_repeats_and_preserves_us(self):
         rules = load_rules()
         self.assertEqual(rules['authority']['zytiva_finanzas_es'], '1559930340628242484')
         for day in ['2026-10-13', '2026-10-14']:
             with tempfile.TemporaryDirectory() as td:
                 p = self.pair(td, [[day,'pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [[day,'pl_digital-trust_zytivafinanzas_es','-','c','x',2],[day,'pl_digital-trust_zytivafinanzas_us','g003-d','c','x',3],[day,'pl_digital-trust_zytiva_us','g003-d','c','x',4]], rules)
-                self.assertEqual(p['mapping_authority_message_id'], '1559930340628242484')
+                self.assertEqual(p['mapping_authority_message_id'], rules['authority'].get('autocreditadx_us_car_en') or '1559930340628242484')
                 self.assertEqual(p['blockers'], [])
                 rows = [e for e in p['entries'] if e['site']=='Zytiva Finanzas']
                 self.assertEqual({(e['country'],e['source_vertical'],e['source_manager_tag'],e['manager'],e['gross']) for e in rows}, {('ES','es-cc-es','g003-d','isliago','2'),('US','us-cc-es','g003-d','isliago','3')})
@@ -49,7 +64,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as td:
                 p = self.pair(td, [['2026-10-06','pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [['2026-10-06','pl_digital-trust_'+brand+'_us','g001-s','c','x',2]], rules)
                 self.assertEqual(p['blockers'], [])
-                self.assertEqual(p['mapping_authority_message_id'], rules['authority'].get('zytiva_finanzas_es', '1557024816031342732'))
+                self.assertEqual(p['mapping_authority_message_id'], rules['authority'].get('autocreditadx_us_car_en') or rules['authority'].get('zytiva_finanzas_es', '1557024816031342732'))
                 e = next(e for e in p['entries'] if e['site']==rules['dashboard_sites'][domain])
                 self.assertEqual((e['country'],e['source_vertical'],e['gross'],e['currency']),('US',vertical,'2','CAD'))
                 self.assertEqual(e['source_manager_tag'], 'g002-d' if brand=='boostingecon' else 'g001-s')
@@ -65,7 +80,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as td:
                 plan = self.pair(td, [[day,'pl_digital-trust_creditoparaveiculo_br','g002-s','c','x',1]], [[day,'pl_digital-trust_growpowerhub_us','g001-s','c','x',2],[day,'pl_digital-trust_growpowerhub_us','mg01-d','c','x',3],[day,'pl_digital-trust_growpowerhub_de','mg01-d','c','x',4]], rules)
                 self.assertEqual(plan['blockers'], [])
-                self.assertEqual(plan['mapping_authority_message_id'], rules['authority'].get('zytiva_finanzas_es') or rules['authority'].get('shein_sites_us','1557017566923325465'))
+                self.assertEqual(plan['mapping_authority_message_id'], rules['authority'].get('autocreditadx_us_car_en') or rules['authority'].get('zytiva_finanzas_es') or rules['authority'].get('shein_sites_us','1557017566923325465'))
                 rows = [e for e in plan['entries'] if e['site']=='Growpowerhub']
                 self.assertEqual({(e['country'],e['source_vertical'],e['source_manager_tag'],e['gross']) for e in rows}, {('US','us-shein-en','g001-s','2'),('US','us-shein-en','g002-d','3'),('DE','de-cc-de','g002-d','4')})
                 self.assertTrue(plan['summary']['currency_totals_reconciled'])
@@ -77,6 +92,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_growpowerhub_confirmed_de_repeats_other_suffixes_block(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('autocreditadx_us_car_en', None)
         rules['authority'].pop('zytiva_finanzas_es', None)
         rules['authority'].pop('shein_sites_us', None)
         rules['authority'].pop('growpowerhub_us_shein_en', None)
@@ -109,6 +125,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_wavesbee_principal_finanzas_separation_and_manager_fallback(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('autocreditadx_us_car_en', None)
         rules['authority'].pop('zytiva_finanzas_es', None)
         rules['authority'].pop('shein_sites_us', None)
         rules['authority'].pop('growpowerhub_us_shein_en', None)
@@ -141,6 +158,7 @@ class GamRevenuePlanTests(unittest.TestCase):
 
     def test_topfeed_br_financeadx_ar_confirmed_verticals_preserve_managers(self):
         rules = deepcopy(load_rules())
+        rules['authority'].pop('autocreditadx_us_car_en', None)
         rules['authority'].pop('zytiva_finanzas_es', None)
         rules['authority'].pop('shein_sites_us', None)
         rules['authority'].pop('growpowerhub_us_shein_en', None)
@@ -437,7 +455,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual((mapped["Ducapes"]["source_vertical"], mapped["Ducapes"]["source_manager_tag"]), ("us-cc-es", "g001-d"))
             self.assertEqual((mapped["Escalatepower"]["source_vertical"], mapped["Escalatepower"]["source_manager_tag"]), ("us-shein-en", "g002-d"))
             self.assertEqual((mapped["WavesBee"]["source_vertical"], mapped["WavesBee"]["source_manager_tag"]), ("us-cc-en", "g003-d"))
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("autocreditadx_us_car_en") or load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
         rules = load_rules()
         self.assertEqual(rules["authority"]["openzed_br_ducapes_split_escalatepower_wavesbee"], "1549411618570633227")
 
@@ -460,7 +478,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertIn(("Zuout", "g002-d", "us-cc-en"), rows)
             self.assertIn(("Zuout", "g006-d", "us-cc-en"), rows)
             self.assertIn(("Zyclor", "g002-d", "de-cc-de"), rows)
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("autocreditadx_us_car_en") or load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
         rules = load_rules()
         self.assertEqual(rules["vertical_by_domain_country"]["finance.ducapes.com|us"], "us-cc-en")
         self.assertEqual(rules["dashboard_sites"]["finance.ducapes.com"], "Ducapes Finance")
@@ -477,7 +495,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual({e["source_manager_tag"] for e in rows}, {"g002-s", "g006-s"})
             self.assertTrue(all(e["source_vertical"] == "br-cc-br" and e["country"] == "BR" for e in rows))
             self.assertEqual(next(e["manager"] for e in rows if e["source_manager_tag"] == "g002-s"), "SEM_COMISSAO")
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("autocreditadx_us_car_en") or load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
 
     def test_eggbev_br_and_carcreditad_permanent_mapping(self):
         with tempfile.TemporaryDirectory() as td:
@@ -491,7 +509,7 @@ class GamRevenuePlanTests(unittest.TestCase):
             self.assertEqual(rows["CarCreditAd"]["source_vertical"], "us-car-en")
             self.assertEqual(rows["CarCreditAd"]["source_manager_tag"], "g002-s")
             self.assertEqual(rows["CarCreditAd"]["manager"], "SEM_COMISSAO")
-            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
+            self.assertEqual(plan["mapping_authority_message_id"], load_rules()["authority"].get("autocreditadx_us_car_en") or load_rules()["authority"].get("zytiva_finanzas_es") or load_rules()["authority"].get("shein_sites_us") or load_rules()["authority"].get("growpowerhub_us_shein_en", load_rules()["authority"].get("growpowerhub_de_mgs", load_rules()["authority"].get("wavesbee_finanzas_us_split", load_rules()["authority"].get("topfeed_br_financeadx_ar", "1551947602562392085")))))
         self.assertIn("CarCreditAd", load_rules()["not_running_site_labels"])
 
     def test_daily_known_aliases_reuse_validated_september_mappings(self):
@@ -625,6 +643,7 @@ class GamRevenuePlanTests(unittest.TestCase):
     def test_approved_country_override_changes_country_and_vertical_together(self):
         with tempfile.TemporaryDirectory() as td:
             rules = deepcopy(load_rules())
+            rules['authority'].pop('autocreditadx_us_car_en', None)
             rules['authority'].pop('zytiva_finanzas_es', None)
             rules['authority'].pop('shein_sites_us', None)
             rules['authority'].pop('growpowerhub_us_shein_en', None)
