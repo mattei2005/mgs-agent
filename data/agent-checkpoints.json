@@ -4212,6 +4212,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1561295675642347562",
+      "next_step": "Retomar C125 com snapshot completo; preservar IDs e seguir sequencialmente nas fontes restantes",
+      "objective": "Duplicar C130 C125 C199 C145 C185 tres vezes cada USD45/dia 18/10/2026 05:00 ET",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1561295675642347562",
+      "state": "c130 concluida 215-217 active programadas; c125 core complete_paused qa readback compacto pendente; fontes199/145/185 ainda sem execucao",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-18T08:35:20+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-report-pagination-20261016",
       "next_step": "Aguardar próximos pedidos dos gestores; usar render/validate atual e entrega nativa exata",
       "objective": "Padronizar próximos relatórios SHEIN nos seis canais com limite real Discord e sem dupla paginação",
@@ -6412,5 +6422,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-17T21:59:10+00:00"
+  "updated_at": "2026-10-18T08:35:20+00:00"
 }
