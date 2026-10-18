@@ -174,6 +174,6 @@ def maintain(q):
             utm=dict(core.urllib.parse.parse_qsl(core.urllib.parse.urlsplit(url).query)).get('utm_campaign','')
             extra=' e em 1 recuperação automática após60segundos' if recovery_start(q,key,idx) else ''
             content=('**Landing pendente — revisão de Rodolfo**\n'+f"Pedido: {payload['request_id']} · conta: {payload['account_id']} · campanha: {utm}\n"+'Sem anúncio visível em 3 tentativas iniciais e em 1 tentativa final'+extra+', após os demais links.\n'+f'{url}\nAção solicitada: revisar a exibição de anúncios deste link. Não validado; sem nova repetição automática.')
-            q.prepare_message(message_key,core.INCIDENT_THREAD,content);q.event(key,'finite_review_report_authorized',{'idx':idx,'notification_key':message_key,'generation':p['generation'],'authority_thread_id':p['authority_thread_id']})
+            q.prepare_message(message_key,core.notification_thread(),content);q.event(key,'finite_review_report_authorized',{'idx':idx,'notification_key':message_key,'generation':p['generation'],'authority_thread_id':p['authority_thread_id']})
         if batch:q.event(None,'finite_cohort_completed',{'batch_seq':batch[0],'generation':p['generation'],'validation_success_not_implied':True})
         return {'state':'FINITE_PASS_SETTLED','changed':changed}

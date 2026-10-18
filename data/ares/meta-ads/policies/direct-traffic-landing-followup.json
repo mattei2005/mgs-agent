@@ -208,7 +208,7 @@
     "final_exhausted_state": "COOLDOWN_NO_AD",
     "final_pass_after_initial_queue_settled": true,
     "report_only_after_final_pass_settled": true,
-    "report_destination_thread_id": "1559932317861158993",
+    "report_destination_thread_id": "1561423880780910668",
     "report_delivery": "DURABLE_OUTBOX_WITH_EXACT_GET",
     "preserve_existing_attempts": true,
     "never_reopen_passed": true,
@@ -231,7 +231,7 @@
   },
   "retry_after_seconds": 0,
   "first_no_ad_notification": false,
-  "all_problem_destination_thread": "1559932317861158993",
+  "all_problem_destination_thread": "1561423880780910668",
   "problem_notification_policy": {
     "mode": "HUMAN_ACTION_REQUIRED_ONLY",
     "final_no_ad_review_exception": "After3initial+1final+1automatic recovery after60s, report unresolved links here; no generic technical alerts",
@@ -280,7 +280,7 @@
     {
       "enabled": true,
       "authority_message_id": "1561391162588401725",
-      "thread_id": "1559932317861158993",
+      "thread_id": "1561423880780910668",
       "request_id": "shein-1561295675642347562",
       "total_links": 15,
       "job_keys": [
@@ -298,6 +298,17 @@
   "ad_clicks": false,
   "campaign_writes": false,
   "budget_strategy_schedule_changes": false,
+  "notification_destination": {
+    "thread_id": "1561423880780910668",
+    "thread_name": "Acompanhar links abertos após pedidos - Rodolfo",
+    "parent_id": "1508853425952133180",
+    "authority_message_id": "1561425148261830757",
+    "previous_authority_message_id": "1561424056178188299",
+    "authority_thread_id": "1559932317861158993",
+    "scope": "FOLLOWUP_PROGRESS_REVIEW_AND_REQUESTED_COMPLETION_ONLY",
+    "manager_success_destination_unchanged": true,
+    "supersedes_destination_thread_id": "1559932317861158993"
+  },
   "notification_delivery": "DURABLE_OUTBOX_WITH_EXACT_MESSAGE_GET_READBACK",
   "raw_origin_delivery": false,
   "backfill_existing_requests": false,
@@ -312,7 +323,7 @@
     "enabled": true,
     "authority_message_id": "1561407383786487848",
     "authority_thread_id": "1559932317861158993",
-    "destination_thread_id": "1559932317861158993",
+    "destination_thread_id": "1561423880780910668",
     "include_source_thread_name": true,
     "include_source_thread_link": true,
     "name_source": "EXACT_DISCORD_CHANNEL_GET_WITH_PARENT_VALIDATION",
@@ -324,7 +335,7 @@
   "progress_reporting": {
     "enabled": true,
     "mode": "PER_ITEM",
-    "thread_id": "1559932317861158993",
+    "thread_id": "1561423880780910668",
     "authority_message_id": "1560642881830789181",
     "delivery": "DURABLE_OUTBOX_PLUS_EXACT_GET",
     "delivery_batch_size": 5,

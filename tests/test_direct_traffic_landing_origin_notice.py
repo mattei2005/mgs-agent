@@ -48,6 +48,11 @@ class OriginNoticeTests(unittest.TestCase):
    self.q.prepare_message(key,core.INCIDENT_THREAD,'Rodada concluida.')
    self.q.event(None,'completion_notice_authorized',{'notification_key':key,'job_keys':[self.key,self.key]})
   m=self.dc.deliver(self.q,key);self.assertEqual(m['content'].count('Thread de origem'),1)
+ def test_new_approved_destination_keeps_origin_label_and_guard(self):
+  key=self.notice();target='1561423880780910668';p=self.root/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json'
+  p.write_text(json.dumps({'notification_destination':{'thread_id':target},'notification_origin_context':{'enabled':True,'destination_thread_id':target,'authority_message_id':'1561425148261830757'}}))
+  with self.q.tx():self.q.db.execute('update messages set thread=? where key=?',(target,key))
+  m=self.dc.deliver(self.q,key);self.assertEqual(m['channel_id'],target);self.assertIn('Thread de origem',m['content']);self.assertEqual(core.notification_thread(),target)
  def test_verified_rendering_not_changed_on_rename(self):
   key=self.notice();m=self.dc.deliver(self.q,key);self.dc._landing_origin_names={}
   self.dc.get=lambda p: (_ for _ in ()).throw(AssertionError('must not refetch existing rendering'))

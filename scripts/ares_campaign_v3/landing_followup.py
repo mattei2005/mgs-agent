@@ -506,7 +506,7 @@ class Queue:
         if evidence.get('human_action_required') is not True or not isinstance(action,str) or not action.strip():
             self.event(job,'problem_kept_local',{'notification_key':key,'recovery_owner':'ares','human_action_required':False})
             return False
-        self.prepare_message(key,INCIDENT_THREAD,content+'\nAção necessária de Rodolfo: '+action.strip())
+        self.prepare_message(key,notification_thread(),content+'\nAção necessária de Rodolfo: '+action.strip())
         self.event(job,'human_action_requested',{'notification_key':key,'required_action':action.strip()})
         return True
 
@@ -646,6 +646,12 @@ def validate_observation(e,link):
         raise ValueError('rendered network creative, not empty slot/CTA, required')
 
 
+def notification_thread():
+    try:p=json.loads((BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text())
+    except (OSError,ValueError):return INCIDENT_THREAD
+    return identifier((p.get('notification_destination') or {}).get('thread_id') or INCIDENT_THREAD)
+
+
 class Discord:
     def __init__(self):
         self.token=None
@@ -672,10 +678,10 @@ class Discord:
         row=q.db.execute('SELECT * FROM messages WHERE key=?',(key,)).fetchone()
         if not row:raise ValueError('missing durable notification')
         if row['state']=='CANCELLED_BEFORE_SEND':raise ValueError('notification_cancelled_before_send')
-        if row['thread']==INCIDENT_THREAD:
+        if row['thread'] in {INCIDENT_THREAD,notification_thread()}:
             from .landing_followup_reporting import origin_notification_content
             row=dict(row);row['content']=origin_notification_content(q,row,self)
-        if row['thread']==INCIDENT_THREAD and row['state']=='PREPARED':
+        if row['thread'] in {INCIDENT_THREAD,notification_thread()} and row['state']=='PREPARED':
             authorized=any(json.loads(e['detail']).get('notification_key')==key
                 for e in q.db.execute("SELECT detail FROM events WHERE kind IN ('human_action_requested','progress_update_authorized','finite_review_report_authorized','completion_notice_authorized')"))
             if not authorized:

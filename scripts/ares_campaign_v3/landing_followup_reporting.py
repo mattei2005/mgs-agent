@@ -46,7 +46,7 @@ def origin_notification_content(q,row,client):
     """Render verified origin names off PC1; keep outbox base/nonce immutable."""
     try:cfg=json.loads((core.BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('notification_origin_context') or {}
     except (OSError,ValueError):return row['content']
-    if cfg.get('enabled') is not True or row['thread']!=core.INCIDENT_THREAD:return row['content']
+    if cfg.get('enabled') is not True or row['thread'] not in {core.INCIDENT_THREAD,str(cfg.get('destination_thread_id') or core.INCIDENT_THREAD)}:return row['content']
     q.db.execute('CREATE TABLE IF NOT EXISTS message_origin_renderings(key TEXT PRIMARY KEY,content TEXT NOT NULL,origins TEXT NOT NULL)')
     old=q.db.execute('SELECT content FROM message_origin_renderings WHERE key=?',(row['key'],)).fetchone()
     if old:return old['content']
@@ -249,7 +249,7 @@ def completion_notices(q,discord_factory,subscriptions=None):
     for cfg in subscriptions:
         if cfg.get('enabled') is not True:continue
         authority=core.identifier(cfg['authority_message_id']);thread=core.identifier(cfg['thread_id'])
-        if thread!=core.INCIDENT_THREAD:raise ValueError('completion control thread required')
+        if thread not in {core.INCIDENT_THREAD,core.notification_thread()}:raise ValueError('completion control thread required')
         keys=cfg.get('job_keys') or []
         if not keys or len(set(keys))!=len(keys):raise ValueError('exact unique completion jobs required')
         jobs=[q.job(k) for k in keys];links=[l for j in jobs for l in j['links']]
