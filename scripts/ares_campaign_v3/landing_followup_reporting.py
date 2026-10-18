@@ -193,7 +193,42 @@ def prepare(q,cfg=None):
         return key
 
 
+def completion_notices(q,discord_factory,subscriptions=None):
+    """One-shot requested completion notices, consumed by the existing timer."""
+    if subscriptions is None:
+        subscriptions=json.loads((core.BASE/'data/ares/meta-ads/policies/direct-traffic-landing-followup.json').read_text()).get('request_completion_notifications') or []
+    delivered=[]
+    for cfg in subscriptions:
+        if cfg.get('enabled') is not True:continue
+        authority=core.identifier(cfg['authority_message_id']);thread=core.identifier(cfg['thread_id'])
+        if thread!=core.INCIDENT_THREAD:raise ValueError('completion control thread required')
+        keys=cfg.get('job_keys') or []
+        if not keys or len(set(keys))!=len(keys):raise ValueError('exact unique completion jobs required')
+        jobs=[q.job(k) for k in keys];links=[l for j in jobs for l in j['links']]
+        if len(links)!=cfg.get('total_links'):raise ValueError('completion coverage differs')
+        notice='landing-request-complete:'+authority
+        previous=q.db.execute('SELECT state FROM messages WHERE key=?',(notice,)).fetchone()
+        if previous and previous['state']=='VERIFIED':continue
+        if any(j['state'] not in {'COMPLETE','WAITING_HUMAN','OBSERVED'} for j in jobs):continue
+        if any(l['state'] not in {'PASSED','RESOLVED_BY_OPERATOR','REVIEW_REQUIRED'} for l in links):continue
+        counts=Counter(l['state'] for l in links)
+        review=counts.get('REVIEW_REQUIRED',0)
+        if not review:
+            manager_notices={q.success_key(k) for k in keys}
+            if any(not q.db.execute("SELECT 1 FROM messages WHERE key=? AND state='VERIFIED'",(k,)).fetchone() for k in manager_notices):continue
+            content=f"✅ Acompanhamento do pedido do Nicolas concluído: **{len(links)} landings**. Aviso de conclusão entregue e conferido na thread do pedido."
+        else:
+            content=f"A rodada do pedido do Nicolas terminou: **{counts.get('PASSED',0)} de {len(links)} landings validadas** e **{review} para revisão**. O pedido não foi comunicado como integralmente aprovado."
+        with q.tx():
+            q.prepare_message(notice,thread,content)
+            if not any(json.loads(r['detail']).get('notification_key')==notice for r in q.db.execute("SELECT detail FROM events WHERE kind='completion_notice_authorized'")):
+                q.event(None,'completion_notice_authorized',{'notification_key':notice,'authority_message_id':authority,'job_keys':keys,'counts':dict(counts)})
+        message=discord_factory().deliver(q,notice);delivered.append(str(message['id']))
+    return {'state':'VERIFIED' if delivered else 'NOT_DUE','message_ids':delivered}
+
+
 def cycle(q,discord_factory,cfg=None):
+    completion_notices(q,discord_factory)
     # Rodolfo's explicit finish-all request is a verification barrier, not a
     # new scheduler or another campaign/cleanup writer.
     from . import landing_finish_all

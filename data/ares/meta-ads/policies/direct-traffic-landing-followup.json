@@ -255,6 +255,32 @@
   },
   "success_destination": "ORIGINAL_MANAGER_THREAD_ONLY_WHEN_ALL_PASS",
   "success_message": "Todas as landing pages deste pedido foram abertas em modo mobile e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.",
+  "manager_completion_message_policy": {
+    "authority_message_id": "1561391162588401725",
+    "authority_thread_id": "1559932317861158993",
+    "mode": "EXISTING_STANDARD_EVIDENCE_BASED_MESSAGE",
+    "mention_observer_query_changes": false,
+    "mention_utm_source_removal": false,
+    "modify_existing_messages": false
+  },
+  "request_completion_notifications": [
+    {
+      "enabled": true,
+      "authority_message_id": "1561391162588401725",
+      "thread_id": "1559932317861158993",
+      "request_id": "shein-1561295675642347562",
+      "total_links": 15,
+      "job_keys": [
+        "c803d56b69abd616fe9788093612e5079feffbdbe2128348f02857deddbe0a8f",
+        "b32c17b82af15836c5b447019cb61e2988d847acaf66840e1d191d2efbc1a437",
+        "5ed9a9a0d95a45b5c237268923d6b1cf120fe8b58430dc80bb492ea241314a67",
+        "8bad690ccf17cad95c3c998086b5d94473b4c575729b30ea125c2eb42cad4bba",
+        "425eb8f3ad088ad8d3a20139a20b4bcaed3ef794adc4af8a8f6ad02b2a110290"
+      ],
+      "delivery": "EXISTING_REPORTER_DURABLE_OUTBOX_WITH_GET_ONCE",
+      "require_manager_notice_verified_for_success": true
+    }
+  ],
   "gam_registration": "NEVER_CLAIM_WITHOUT_SEPARATE_GAM_READBACK",
   "ad_clicks": false,
   "campaign_writes": false,

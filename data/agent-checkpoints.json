@@ -1163,12 +1163,12 @@
     {
       "agent": "ares",
       "id": "ARES-LANDING-NO-SOURCE-1561388270649221291",
-      "next_step": "Consumidor automatico existente acompanha as 15 landings de Nicolas sem utm_source, sem novo pedido e sem alterar campanhas; informar resultado via outbox normal. Nao reabrir Geizian C138-C140.",
-      "objective": "Regra sem source instalada e auditoria dos pedidos de hoje",
-      "source": "data/ares/meta-ads/audit/landing-no-source-rule-1561388270649221291/today-status-verification.json",
-      "state": "rule_active_executor_contract_skill_readback;360tests_pass;3reviews_resolved_by_operator;18campaigns_live_active;nicolas15landings_in_automatic_queue;detailed_aggregate_reader_fixed_and_actual5children_armed",
+      "next_step": "Consumidor existente recupera tentativa e conclui15links; aviso nas threads mantem padrao; reporter entrega aqui resumo unico com GET apos concluir, sem declarar revisoes como sucesso integral. Nao reabrir Geizian.",
+      "objective": "Concluir acompanhamento das15landings Nicolas e avisar Rodolfo",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "state": "completion_notice_armed_authority1561391162588401725;existing_reporter_one_shot_exact5jobs15links;manager_standard_message_unchanged_no_query_details;367tests_pass;recovery_existing_consumer",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-18T14:47:25+00:00"
+      "updated_at": "2026-10-18T14:54:05+00:00"
     },
     {
       "agent": "ares",
@@ -1279,6 +1279,16 @@
       "state": "completed_verified: codigo/contrato/skillv0.3.0 ativos.193testes pass. no_ad0s comretry-now mesma sessao(0.707/8.609sreclaim reais),3+1 e10svisiveis mantidos. terceiroerro/expiry travatechnical_repair, libera so apos testes+probe real; capturaausente/antiga nao virano_ad. janela/close corrigidos, probenativo vazio aprovado13.684s e6janelas preservadas, semurls.348screenshotsconcluidos removidos244.2mib, metadados/pendentes protegidos. timerexisting retomou novoslinks aposleaseparentliberada. report-infra1560427613007249541get. semalterarworkflowcampanha/restart/cron.",
       "thread_id": "1559932317861158993",
       "updated_at": "2026-10-15T23:03:00+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SB-ROI-BANDS-1561388893558014103",
+      "next_step": "Coletar totais e linhas por campanha da SB, validar moeda/fuso/escopo, agregar cinco faixas sem sobreposicao e reconciliar.",
+      "objective": "Decompor o lucro de sexta 16/10/2026 por ROI de campanhas FB+Google nas empresas Digital Trust e Digital Trust 2, BRL, sem cortes por estrategia/site.",
+      "source": "discord:thread:1561388893558014103",
+      "state": "autorizado por rodolfo; descoberta da rota sb read-only e reconciliacao com investimento 173070.46, receita 243611.67 e lucro 70541.21 em andamento.",
+      "thread_id": "1561388893558014103",
+      "updated_at": "2026-10-18T14:50:18+00:00"
     },
     {
       "agent": "ares",
@@ -6452,5 +6462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:47:25+00:00"
+  "updated_at": "2026-10-18T14:54:05+00:00"
 }
