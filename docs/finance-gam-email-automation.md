@@ -88,6 +88,13 @@ No lote corrente05/10, a regra corrigiu apenas os dois metadados US de Escalatep
 - Reutilizar o catálogo existente `site-zytiva-finanzas-principal`/Zytiva Finanzas, Isliago, SB Rede1/CAD, sem alterar status, unidade de rateio ou histórico. A fonte13/10 tem apenas1linha pendente, CAD`0.16972628450920058`; o restante deve ser preservado pelo complemento da mesma identidade de fonte.
 - Publicação e fechamento validados:496testes sem skips;3091linhas→64grupos, somente1complemento CAD`0.16972628450920058`;63grupos prévios preservados; zero pendências; revisão556/audit4279; cutoff13/10; replay `already_applied`. API autenticada e desktop/mobile do Relatório Diário/Isliago passaram. Evidência: `reports/finance-zytiva-es-1559930340628242484.md` e `apps/finance-system/private/zytiva-es-1559930340628242484/`; checkpoint `ZEUS-FINANCE-ZYTIVA-ES-1559930340628242484`.
 
+## AutoCreditAdx US — decisão1561373355704320192
+
+- Rodolfo confirmou `autocreditadx.com` / US → `us-car-en`, responsável G002/MGS, na thread1545426987756298340. Regra para o placement `pl_digital-trust_autocreditadx_us`; outros países sem classificação continuam bloqueados.
+- Preservar a precedência do medium canônico e a operação existente. Na linha16/10, medium `-` retorna ao fallback direto `g002-s`/`SEM_COMISSAO` (MGS), sem atribuir comissão externa.
+- Reutilizar `site-autocreditadx-principal`/AutoCreditAdx, SB Rede1/CAD, INATIVO/Não participa. O responsável não mapeado de outubro foi confirmado como MGS; não alterar rateio, rede, status ou competências fechadas.
+- Complemento autorizado16/10: CAD`0.009780046659281841`. Manter os74grupos previamente confirmados e a mesma identidade/hash de fonte. Publicação e conclusão são verificadas no checkpoint `ZEUS-FINANCE-AUTOCREDITADX-1561373355704320192`, não presumidas desta decisão.
+
 ## Fontes obrigatórias
 
 O par diário é completo somente com:
