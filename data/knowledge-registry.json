@@ -8792,6 +8792,24 @@
       "updated_at": "2026-10-15T20:23:23+00:00"
     },
     {
+      "canonical_key": "growth.direct-traffic.landing-notification-destination",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-18T17:10:25+00:00",
+      "id": "LANDING-REPORT-DESTINATION-1561425148261830757",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Acompanhamentos de landings na thread escolhida por Rodolfo; avisos dos gestores permanecem na origem",
+      "updated_at": "2026-10-18T17:10:25+00:00"
+    },
+    {
       "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
       "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
       "consumers": [
@@ -12712,5 +12730,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T16:22:56+00:00"
+  "updated_at": "2026-10-18T17:10:25+00:00"
 }
