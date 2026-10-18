@@ -1283,12 +1283,12 @@
     {
       "agent": "ares",
       "id": "ARES-SB-ROI-BANDS-1561388893558014103",
-      "next_step": "Coletar totais e linhas por campanha da SB, validar moeda/fuso/escopo, agregar cinco faixas sem sobreposicao e reconciliar.",
-      "objective": "Decompor o lucro de sexta 16/10/2026 por ROI de campanhas FB+Google nas empresas Digital Trust e Digital Trust 2, BRL, sem cortes por estrategia/site.",
-      "source": "discord:thread:1561388893558014103",
-      "state": "autorizado por rodolfo; descoberta da rota sb read-only e reconciliacao com investimento 173070.46, receita 243611.67 e lucro 70541.21 em andamento.",
+      "next_step": "Entregar cinco faixas e bloco nao classificavel; nao ratear residual. Para decomposicao integral futura, exigir vinculo adicional de receita as campanhas, sem inferir broadcast/SMS.",
+      "objective": "Decompor lucro de sexta 16/10/2026 por ROI de campanhas FB+Google, Digital Trust + Digital Trust 2, BRL.",
+      "source": "/root/mgs-agent/reports/ares/sb-roi-bands-20261016-1561388893558014103.md",
+      "state": "analise read-only reconciliada: 912 linhas unicas, 680 campanhas com gasto. faixas somam lucro brl17584.71; brl53002.19 ficam fora das faixas por ausencia de atribuicao ou gasto zero. lucro consolidado vivo brl70586.90, diferenca +45.69 da referencia. readback http201 estavel, nove testes de limites e reconciliacao decimal pass. zero writes sb/meta/google.",
       "thread_id": "1561388893558014103",
-      "updated_at": "2026-10-18T14:50:18+00:00"
+      "updated_at": "2026-10-18T14:54:51+00:00"
     },
     {
       "agent": "ares",
@@ -6462,5 +6462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:54:05+00:00"
+  "updated_at": "2026-10-18T14:54:51+00:00"
 }

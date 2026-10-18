@@ -77,6 +77,8 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
+- **Smart Bidding: decompor lucro por faixas de ROI e reconciliar card total × aquisição** → `references/smartbidding-roi-band-reconciliation.md`
+
 - **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
 - **Interpretar pedidos naturais de criação por canal/operação** → `references/natural-campaign-request-contracts.md`
 - **Criar/clonar campanhas Meta, lotes e alta escala** → `meta-campaign-engine-v3/SKILL.md`

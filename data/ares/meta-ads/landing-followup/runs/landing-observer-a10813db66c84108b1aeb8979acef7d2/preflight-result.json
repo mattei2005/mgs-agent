@@ -1,0 +1,16 @@
+{
+  "state": "AUTHORITY_CONFLICT_BEFORE_PC1_INPUT",
+  "scope_id": "73781411f70d501b4a50da39cd1fa19696f57e014a5030adb337ae5d6fbeeef2",
+  "owner": "landing-observer-a10813db66c84108b1aeb8979acef7d2",
+  "session_id": "20261018_105552_7bd65a",
+  "manifest": "prepared-manifest.json",
+  "prepared_count": 15,
+  "active_quiz_read_only_gets": 15,
+  "both_editorial_destinations_verified_identical_per_item": true,
+  "domain_gate": "ALLOWED",
+  "pc1_actions_issued_by_this_execution": 0,
+  "batch_executor_started": false,
+  "reason": "Current user request says preserve all query bytes and add only bare nocache; active executor observation_url removes utm_source under stored authority 1561388270649221291. No shared config changed and no navigation initiated.",
+  "required_decision": "Confirm whether the observer-only authorized removal remains applicable to this immutable batch or full query preservation is mandatory.",
+  "external_posts_by_this_execution": 0
+}
