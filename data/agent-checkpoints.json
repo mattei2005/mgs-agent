@@ -1283,12 +1283,12 @@
     {
       "agent": "ares",
       "id": "ARES-SB-ROI-BANDS-1561388893558014103",
-      "next_step": "Reconciliar BOT, trafego direto e SMS contra Domain. Manter faixas diretas por campanha; para BOT validar unidade Page/UTM e gasto+receita total sem duplicar broadcast nem atribuir base historica a campanhas atuais.",
-      "objective": "Decompor lucro Domain de sexta 16/10/2026, separando economia BOT com broadcast de trafego direto e retencao SMS CPV.",
-      "source": "/root/mgs-agent/reports/ares/sb-roi-bands-20261016-1561388893558014103.md",
-      "state": "rodolfo esclareceu origem domain e economia bot/aquisicao+broadcast versus direto/receita direta+sms cpv. analise anterior preservada como aquisicao apenas, nao lucro economico integral das estrategias. correcao registrada no relatorio e procedimento com readback; nenhum novo total por estrategia calculado.",
+      "next_step": "Apresentar os dois blocos com denominadores explicitos. Nao atribuir SMS/base historica a campanhas atuais nem ratear diferenca 968.12. Qualquer aprofundamento usa v2 como base.",
+      "objective": "Decompor lucro Domain de sexta 16/10/2026 por BOT e trafego direto, com faixas e SMS separado.",
+      "source": "/root/mgs-agent/reports/ares/sb-roi-bands-20261016-1561388893558014103-v2.md",
+      "state": "v2 concluida e reconciliada: direto brl41016.62 (651 campanhas com gasto), bot brl24406.90 (17 pages/29 campanhas com gasto), sms cpv brl4195.26, diferenca granular nao atribuida brl968.12 = domain brl70586.90. bot sem gasto gera brl13320.43 separado das faixas. primeira interpretacao negativa supersedida: 22967.41 de gasto bot tinham net_revenue zero-only na tabela de aquisicao, nao ausencia de receita real. readbacks estaveis, joins por page exatos, testes e reconciliacao decimal pass; zero writes externos.",
       "thread_id": "1561388893558014103",
-      "updated_at": "2026-10-18T15:08:23+00:00"
+      "updated_at": "2026-10-18T15:31:17+00:00"
     },
     {
       "agent": "ares",
@@ -6462,5 +6462,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T15:08:23+00:00"
+  "updated_at": "2026-10-18T15:31:17+00:00"
 }
