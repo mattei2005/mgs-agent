@@ -103,8 +103,21 @@
     "offline_frame_review_required": false,
     "single_final_frame_analysis_after_close": true,
     "mobile_effective_at_epoch": 1792250747.737,
-    "mobile_emulation": {
+    "desktop_observation": {
       "enabled": true,
+      "authority_message_id": "1561409616343203882",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed"
+    },
+    "mobile_emulation": {
+      "enabled": false,
       "authority_message_id": "1561037521234952253",
       "mechanism": "NATIVE_CHROME_DEVTOOLS_DEVICE_TOOLBAR",
       "device_name": "iPhone 16",

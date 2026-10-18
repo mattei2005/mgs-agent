@@ -45,7 +45,8 @@ def open_normal(call,url,on_owned=lambda p:None,*,configure=None,verify_url=None
         p['url']=url;on_owned(p)
     proof=open_blank_normal(call,on_owned=persist);target=proof['target']
     if configure:
-        proof['mobile_emulation']=configure(target);on_owned(proof)
+        configured=configure(target)
+        proof['desktop_view' if configured.get('device_mode')=='DESKTOP' else 'mobile_emulation']=configured;on_owned(proof)
         snap=call(dict(action='capture',mode='ax',pid=target['pid'],window_id=target['window_id']))
         bar=next(e for e in all_elements(snap) if e.get('role')=='Edit' and e.get('label')=='Address and search bar')
         # With DevTools attached, SendInput type can be swallowed while reporting
@@ -122,6 +123,11 @@ def scroll_owned(call,target):
 
 def observe_prepared(call,read_visual,url,mapping_source,*,on_owned=lambda p:None,pause=time.sleep,clock=time.time,monotonic=time.monotonic,read_mobile=None,capture_visual=None,review_visual=None):
     """One bounded mechanical visit. Keeps the backend alive for the next item."""
+    from .landing_desktop_observation import policy as desktop_policy
+    desktop=desktop_policy()
+    if desktop:
+        from .landing_rewarded import observe_rewarded
+        return observe_rewarded(call,url,mapping_source,read_mobile=None,capture_visual=capture_visual,review_visual=review_visual,on_owned=on_owned,pause=pause,clock=clock,monotonic=monotonic,desktop_config=desktop)
     from .landing_mobile import policy,observe_mobile
     if policy():
         return observe_mobile(call,url,mapping_source,read_mobile=read_mobile,capture_visual=capture_visual,review_visual=review_visual,on_owned=on_owned,pause=pause,clock=clock,monotonic=monotonic)
@@ -235,6 +241,11 @@ def validate_lean_observation(e,link,*,negative=False):
     if visual.get('network_ad_visible') is not expected or e.get('network_ad_confirmed') is not expected or not visual.get('description'):raise ValueError('Actual ad visual decision required')
     from .landing_mobile import policy,validate_mobile
     mobile_policy=policy()
+    from .landing_desktop_observation import policy as desktop_policy,validate as validate_desktop
+    desktop=desktop_policy()
+    if desktop and e['opened_at']>=desktop['effective_at_epoch']:
+        validate_desktop(e,desktop)
+        return
     if mobile_policy and e['opened_at']>=mobile_policy['effective_at_epoch']:
         validate_mobile(e,mobile_policy)
         return

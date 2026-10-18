@@ -462,7 +462,9 @@ class Queue:
         evidence=[json.loads(l['evidence']) if isinstance(l.get('evidence'),str) else (l.get('evidence') or {}) for j in jobs for l in j['links']]
         all_mobile=bool(evidence) and all(e.get('mobile_emulation',{}).get('verified') is True and 20<=float(e.get('observation_seconds',e.get('tab_open_seconds',0)))<=30 for e in evidence)
         all_articles=all_mobile and all(e.get('article_verified') is True and e.get('scroll_visual_changed') is True for e in evidence)
-        content='Todas as landing pages deste pedido foram abertas em modo mobile e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.' if all_articles else ('Todas as landing pages deste pedido foram abertas em modo mobile, com anúncios identificados.' if all_mobile else SUCCESS)
+        modern=bool(evidence) and all((e.get('mobile_emulation',{}).get('verified') is True or e.get('desktop_view',{}).get('verified') is True) and e.get('article_verified') is True and e.get('scroll_visual_changed') is True and 20<=float(e.get('observation_seconds',0))<=30 for e in evidence)
+        all_desktop=modern and all(e.get('device_mode')=='DESKTOP' for e in evidence)
+        content=('Todas as landing pages deste pedido foram abertas em modo desktop e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.' if all_desktop else 'Todas as landing pages deste pedido foram abertas e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.' if modern and not all_articles else 'Todas as landing pages deste pedido foram abertas em modo mobile e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.' if all_articles else ('Todas as landing pages deste pedido foram abertas em modo mobile, com anúncios identificados.' if all_mobile else SUCCESS))
         self.prepare_message(self.success_key(key),jobs[0]['payload']['source_thread_id'],content)
         return True
 

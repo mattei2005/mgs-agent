@@ -1142,6 +1142,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-LANDING-DESKTOP-1561409616343203882",
+      "next_step": "Conferir fim seguro do worker, instalar desktop20-30s sem mobile, congelar pendencias e executar rota compartilhada; restaurar timer e avisar acompanhamento com origem.",
+      "objective": "Migrar acompanhamento para desktop normal e refazer somente pendencias atuais",
+      "source": "data/ares/meta-ads/audit/landing-desktop-1561409616343203882",
+      "state": "migration_in_progress;timer_paused_for_safe_code_change;active_repair_blank_probe_verified_no_navigation;preserve_passed",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-18T16:05:43+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-LANDING-FLOW-REVIEW-20261016",
       "next_step": "Nenhuma implementacao pendente desta revisao; usar verificacao final da unificacao e contrato ativo. Relatorio anterior permanece historico, nao lista atual de pendencias. Nao reabrir33aprovados.",
       "objective": "Revisao do fluxo PC1 e resolucao dos3pontos de integracao aprovados por Rodolfo",
@@ -6462,5 +6472,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T15:31:17+00:00"
+  "updated_at": "2026-10-18T16:05:43+00:00"
 }
