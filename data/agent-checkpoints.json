@@ -1161,6 +1161,16 @@
       "updated_at": "2026-10-16T03:34:51+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ARES-LANDING-SOURCE-VARIANT-1561385193653280868",
+      "next_step": "Executar mecanicamente no PC1 e verificar os tres recibos; nao aprovar URLs originais por diagnostico sem source",
+      "objective": "Testar C138 C139 C140 removendo somente utm_source=facebook por pedido de Rodolfo",
+      "source": "data/ares/meta-ads/audit/landing-source-variant-1561385193653280868/scope.json",
+      "state": "prepared;3exact_targets;one_diagnostic_visit_each;original_review_preserved;no_meta_write",
+      "thread_id": "1559932317861158993",
+      "updated_at": "2026-10-18T14:29:43+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ARES-META-APP-PROFILE-TOKEN-CUTOVER-20260902",
       "next_step": "Aguardar tick real Eggbev LEADS c3d2499d8c33 às 20:16 ET e validação one-shot d1b94343f4af às 20:21 ET nesta thread; depois confirmar streak0 ou reportar/corrigir bloqueio. Badges históricos Diário/Intraday CPV13 serão substituídos nos ticks 16:01/16:06 ET.",
@@ -6432,5 +6442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:15:59+00:00"
+  "updated_at": "2026-10-18T14:29:43+00:00"
 }
