@@ -1,0 +1,264 @@
+{
+  "result": "NO_AD",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb02c216&utm_adgroup=b01fb02c216g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb02c216&utm_adgroup=b01fb02c216g01&nocache",
+    "mapping_source": "Live read-only HTTP GET https://yolokfx.com/quiz/us/sh2-g006/?nocache; exact mgs-dq-cta-a and mgs-dq-cta-b hrefs identical; response_sha256=c9df5af49c448aff440b5f70dd07fd3cde5b1f9275652bc3c2ac5ffa27c44261",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "mechanism": "NATIVE_CHROME_DEVTOOLS_DEVICE_TOOLBAR",
+      "device_name": "iPhone 16",
+      "viewport_width": 393,
+      "viewport_height": 852,
+      "orientation": "PORTRAIT",
+      "verify_before_navigation": true,
+      "desktop_fallback": false,
+      "scope": "OWNED_NEW_NORMAL_TAB_ONLY_NO_PROFILE_PROXY_EXTENSION_CHANGES",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "effective_at_epoch": 1792250747.737,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792337262.0294871,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Mobile viewport shows a blank white loading screen with a faint centered YOLOK FX logo; no gate, article body, rewarded content, or network ad is visible."
+      },
+      {
+        "at": 1792337270.453394,
+        "gate": false,
+        "rewarded": false,
+        "article": true,
+        "description": "Normal Chrome is active with a mobile viewport showing the article title, a visible network ad, and readable article content followed by a questionnaire. No CLAIM MY FREE PRODUCTS gate or rewarded overlay is visible."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 103.32514575000096
+    },
+    "mobile_emulation": {
+      "device_toolbar_enabled": true,
+      "device_name": "iPhone 16",
+      "viewport_width": 393,
+      "viewport_height": 852,
+      "viewport_bounds": [
+        806,
+        188,
+        393,
+        852
+      ],
+      "verified": true,
+      "verified_at": 1792337243.1424863,
+      "source": "native_toolbar_visual"
+    },
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb02c216&utm_adgroup=b01fb02c216g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792337219.7966905,
+      "target": {
+        "pid": 18224,
+        "window_id": 34080168,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792337227.996227,
+      "mobile_emulation": {
+        "device_toolbar_enabled": true,
+        "device_name": "iPhone 16",
+        "viewport_width": 393,
+        "viewport_height": 852,
+        "viewport_bounds": [
+          806,
+          188,
+          393,
+          852
+        ],
+        "verified": true,
+        "verified_at": 1792337243.1424863,
+        "source": "native_toolbar_visual"
+      },
+      "opened_at": 1792337257.6615465
+    },
+    "opened_at": 1792337257.6615465,
+    "article_verified": true,
+    "article_ready_at": 1792337270.4533978,
+    "article_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_684a7fbab839437cb33869cccea447fc.png",
+    "rewarded_wait_seconds": 12.79185152053833,
+    "scroll_result": {
+      "ok": true,
+      "action": "press_key",
+      "message": "✅ Sent pagedown via SendInput on pid 18224 (delivery_mode:foreground).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "foreground"
+        },
+        "effect": "unverifiable",
+        "route": "global_input",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "scroll_visual_changed": true,
+    "observation_started_at": 1792337280.6570644,
+    "observation_ended_at": 1792337305.8865418,
+    "observation_seconds": 25.229479134999565,
+    "observation_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_14c2783e7886475d8dd99f10c1719fd9.png",
+    "visual_captured_at": 1792337305.8842971,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 34080168,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792337308.7603567,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 34080168,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 51.09881019592285,
+    "visual": {
+      "network_ad_visible": false,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Loaded yolokfx.com SHEIN article is visible in normal Chrome. No rendered network advertising creative is present; the green Store pickup and Home delivery buttons are editorial site elements, not ads."
+    },
+    "network_ad_confirmed": false,
+    "ad_description": "Loaded yolokfx.com SHEIN article is visible in normal Chrome. No rendered network advertising creative is present; the green Store pickup and Home delivery buttons are editorial site elements, not ads.",
+    "visual_review": "Loaded yolokfx.com SHEIN article is visible in normal Chrome. No rendered network advertising creative is present; the green Store pickup and Home delivery buttons are editorial site elements, not ads."
+  },
+  "batch_scope": "cda9c743376699ac0608512f66d14ad480f1452c8a046359a2972089bf85dde3"
+}
