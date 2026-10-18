@@ -1163,12 +1163,12 @@
     {
       "agent": "ares",
       "id": "ARES-LANDING-SOURCE-VARIANT-1561385193653280868",
-      "next_step": "Executar mecanicamente no PC1 e verificar os tres recibos; nao aprovar URLs originais por diagnostico sem source",
+      "next_step": "Nenhuma nova visita autorizada. Diagnostico separado nao aprova URLs completas nem estabelece causa da ausencia anterior.",
       "objective": "Testar C138 C139 C140 removendo somente utm_source=facebook por pedido de Rodolfo",
-      "source": "data/ares/meta-ads/audit/landing-source-variant-1561385193653280868/scope.json",
-      "state": "prepared;3exact_targets;one_diagnostic_visit_each;original_review_preserved;no_meta_write",
+      "source": "data/ares/meta-ads/audit/landing-source-variant-1561385193653280868/visual-reconciliation.json",
+      "state": "complete_diagnostic;3ads_identified_initial_frames;c138square_observation_incomplete;c139homescom_c140teddyswims_25s_postscroll;all_closed;original_review_preserved;no_meta_write",
       "thread_id": "1559932317861158993",
-      "updated_at": "2026-10-18T14:29:43+00:00"
+      "updated_at": "2026-10-18T14:37:35+00:00"
     },
     {
       "agent": "zeus",
@@ -6442,5 +6442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:29:43+00:00"
+  "updated_at": "2026-10-18T14:37:35+00:00"
 }
