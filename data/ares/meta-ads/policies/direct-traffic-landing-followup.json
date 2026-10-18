@@ -88,7 +88,7 @@
     "prepare_all_exact_links_before_first_navigation": true,
     "sequence": [
       "new_normal_tab",
-      "verify_native_mobile_preset_before_navigation",
+      "verify_normal_desktop_without_mobile_emulation_before_navigation",
       "open_exact_landing_url",
       "click_authorized_site_gate_once_if_present",
       "wait_for_rewarded_and_actual_article_release",
@@ -267,7 +267,7 @@
     "supersedes": "Every accompaniment problem automatically posted to this thread"
   },
   "success_destination": "ORIGINAL_MANAGER_THREAD_ONLY_WHEN_ALL_PASS",
-  "success_message": "Todas as landing pages deste pedido foram abertas em modo mobile e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.",
+  "success_message": "Todas as landing pages deste pedido foram abertas e tiveram anúncios identificados, com observação de 20 a 30 segundos após a liberação do artigo e a rolagem.",
   "manager_completion_message_policy": {
     "authority_message_id": "1561391162588401725",
     "authority_thread_id": "1559932317861158993",

@@ -19,7 +19,7 @@ class SharedMechanicalTests(unittest.TestCase):
     def visual(self,found=True,loaded=True):return {'success':True,'analysis':json.dumps(dict(network_ad_visible=found,active_normal_chrome=True,unobstructed=True,landing_loaded=loaded,description='Offline rendered-ad fixture' if found else 'Offline loaded page without advertising'))}
     def observe(self,reader):
         timer=types.SimpleNamespace(time=self.clock,monotonic=self.clock,sleep=self.pause)
-        with patch.object(lean,'time',timer),patch('ares_campaign_v3.landing_mobile.policy',return_value={}):return lean.observe_prepared(self.native,reader,'https://example.invalid/landing?utm_campaign=b01fb02c151&utm_adgroup=b01fb02c151g01','offline fixture',pause=self.pause,clock=self.clock,monotonic=self.clock)
+        with patch('ares_campaign_v3.landing_desktop_observation.policy',return_value={}),patch.object(lean,'time',timer),patch('ares_campaign_v3.landing_mobile.policy',return_value={}):return lean.observe_prepared(self.native,reader,'https://example.invalid/landing?utm_campaign=b01fb02c151&utm_adgroup=b01fb02c151g01','offline fixture',pause=self.pause,clock=self.clock,monotonic=self.clock)
     def test_pass_one_visual_read_normal_scroll10_and_close(self):
         reads=[];r,e=self.observe(lambda:reads.append(1) or self.visual());self.assertEqual(r,'PASS');self.assertEqual(reads,[1]);self.assertEqual(e['visible_seconds'],10);self.assertTrue(e['tab_closed_verified']);self.assertTrue(e['other_tabs_preserved']);self.assertEqual(self.pauses,[10]);self.assertNotIn('samples',e)
         self.assertFalse(any(a.get('keys')=='ctrl+shift+n' for a in self.native.calls));self.assertTrue(any(a['action']=='scroll' and a.get('element')==40 for a in self.native.calls))

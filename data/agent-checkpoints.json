@@ -1302,6 +1302,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SB-ROI-BANDS-20261017-1561388893558014103",
+      "next_step": "Entregar os tres blocos com percentuais por estrategia e global, SMS sem custo externo e receita BOT sem gasto separada. Nao repetir consultas sem novo pedido; sexta permanece preservada.",
+      "objective": "Analise de ontem 17/10/2026 no mesmo formato: trafego direto sem SMS, BOT com retencao e consolidado Domain.",
+      "source": "/root/mgs-agent/reports/ares/sb-roi-bands-20261017-1561388893558014103.md",
+      "state": "concluida e reconciliada: direto brl42065.38 roi25.75%; bot brl24513.31 roi92.33%; sms cpv brl4355.38; diferenca brl599.22; lucro domain brl71533.29 sobre gasto189912.03 e receita261445.32, roi37.67%. 680 campanhas diretas e 16 pages/44 campanhas bot com gasto; joins por page exatos; quatro readbacks estaveis; nove testes de fronteira e reconciliacao decimal pass; zero writes externos.",
+      "thread_id": "1561388893558014103",
+      "updated_at": "2026-10-18T16:16:00+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-1559780476942815244",
       "next_step": "Nenhum write pendente. Nao repetir criacao ou ativacao. Consultas futuras somente readback dos IDs; nova solicitacao gera novo request. Entrega nao comprovada por Insights neste fechamento.",
       "objective": "Executar 12 clones C20 e tornar reutilizavel o fluxo SHEIN de grupos/copy e pasta do gestor",
@@ -6472,5 +6482,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T16:05:43+00:00"
+  "updated_at": "2026-10-18T16:16:00+00:00"
 }

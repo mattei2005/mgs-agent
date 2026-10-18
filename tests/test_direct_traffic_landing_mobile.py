@@ -51,7 +51,7 @@ class MobileTests(unittest.TestCase):
         mobile.scroll_mobile(call,TARGET,M)
         self.assertEqual(calls[-1]['coordinate'],[796,626]);self.assertNotIn('element',calls[-1])
     def test_dispatch_requires_new_mobile_path(self):
-        with patch.object(mobile,'policy',return_value=P),patch.object(mobile,'observe_mobile',return_value=('OFFLINE',{})) as runner:
+        with patch('ares_campaign_v3.landing_desktop_observation.policy',return_value={}),patch.object(mobile,'policy',return_value=P),patch.object(mobile,'observe_mobile',return_value=('OFFLINE',{})) as runner:
             self.assertEqual(lean.observe_prepared(None,None,'url','source')[0],'OFFLINE');runner.assert_called_once()
     def test_mobile_url_uses_native_value_not_swallowed_typing(self):
         calls=[]
