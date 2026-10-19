@@ -420,7 +420,9 @@
     717607,
     717624,
     718225,
-    718244
+    718244,
+    718427,
+    718446
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2601,9 +2603,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-18T16:05:49.000Z",
+        "created_at": "2026-10-19T20:04:15.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 717514,
+        "notification_id": 718446,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2637,7 +2639,8 @@
         714071,
         714932,
         716414,
-        717514
+        717514,
+        718446
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -2677,9 +2680,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-18T16:05:39.000Z",
+        "created_at": "2026-10-19T20:04:07.000Z",
         "domain": "topfeed",
-        "notification_id": 717497,
+        "notification_id": 718427,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -2705,7 +2708,8 @@
         714058,
         714921,
         716377,
-        717497
+        717497,
+        718427
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -3258,18 +3262,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-19T15:57:13-04:00",
+  "last_check": "2026-10-19T16:12:15-04:00",
   "last_delivery": {
-    "at": "2026-10-19T12:12:14-04:00",
+    "at": "2026-10-19T16:12:15-04:00",
     "cursor_ids": [
-      718225,
-      718244
+      718427,
+      718446
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 718244,
+  "last_seen_id": 718446,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
