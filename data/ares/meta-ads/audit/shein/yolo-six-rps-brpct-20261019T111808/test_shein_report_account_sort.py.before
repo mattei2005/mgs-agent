@@ -1,0 +1,131 @@
+"""Account-only descending estimated ROI, without API access."""
+import copy
+import importlib.util
+from pathlib import Path
+import unittest
+
+spec = importlib.util.spec_from_file_location('account_sort_layout', Path('/root/.hermes/profiles/ares/scripts/shein-report-layout.py'))
+layout = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(layout)
+ACCOUNT = {'id': 'act_1583000095650153', 'name': 'Yolokfx-US-SHEIN-EN-02-G006'}
+RULE = {'status': 'active', 'account_name': ACCOUNT['name'], 'mode': 'estimated_roi_desc'}
+CFG = {'account_sort_overrides': {'1583000095650153': RULE}}
+
+def row(cid, score, product='A', start='2026-10-01', source=None):
+    return dict(id=cid, number=cid, product=product, first_delivery=start, estimated_roi=score, copy_source_literal=source)
+
+class AccountSortTests(unittest.TestCase):
+    def test_descending_before_rounding_and_missing_last(self):
+        rows = [row('1', None), row('2', '-20'), row('3', '40.001'), row('4', '40.002', 'Z'), row('5', '0')]
+        before = copy.deepcopy(rows)
+        groups, _ = layout.ordered_groups(rows, ACCOUNT, CFG)
+        self.assertEqual([r['id'] for g in groups for r in g], ['4', '3', '5', '2', '1'])
+        self.assertEqual(rows, before)
+
+    def test_explicit_rank_overrides_copy_family_but_keeps_identity(self):
+        rows = [row('1', '10'), row('2', '50', source='1')]
+        groups, _ = layout.ordered_groups(rows, ACCOUNT, CFG)
+        self.assertEqual([r['id'] for g in groups for r in g], ['2', '1'])
+        self.assertEqual(rows[1]['copy_source_literal'], '1')
+
+    def test_other_account_keeps_default_families(self):
+        rows = [row('1', '10'), row('2', '50', source='1')]
+        other = {'id': 'act_7840111366055613', 'name': 'Yolokfx-US-SHEIN-EN-01-G002'}
+        self.assertEqual(layout.ordered_groups(rows, other, CFG), layout.family_groups(rows))
+
+    def test_ties_deterministic_and_invalid_scores_last(self):
+        rows = [row('3', 'NaN'), row('2', '10'), row('1', '10'), row('4', 'Infinity')]
+        groups, _ = layout.ordered_groups(rows, ACCOUNT, CFG)
+        self.assertEqual([r['id'] for g in groups for r in g], ['1', '2', '3', '4'])
+
+    def test_mismatched_identity_unknown_mode_and_duplicate_rejected(self):
+        for account, cfg in [({**ACCOUNT, 'name': 'wrong'}, CFG), (ACCOUNT, {'account_sort_overrides': {'1583000095650153': {**RULE, 'mode': 'unsupported'}}})]:
+            with self.assertRaises(layout.LayoutError):
+                layout.ordered_groups([row('1', '1')], account, cfg)
+        with self.assertRaises(layout.LayoutError):
+            layout.ordered_groups([row('1', '1'), row('1', '2')], ACCOUNT, CFG)
+
+    def test_empty_and_inactive(self):
+        self.assertEqual(layout.ordered_groups([], ACCOUNT, CFG), ([], []))
+        cfg = {'account_sort_overrides': {'1583000095650153': {**RULE, 'status': 'superseded'}}}
+        rows = [row('1', '10'), row('2', '50', source='1')]
+        self.assertEqual(layout.ordered_groups(rows, ACCOUNT, cfg), layout.family_groups(rows))
+
+class ExplicitRequestSortTests(unittest.TestCase):
+    def test_one_request_does_not_change_default_or_model(self):
+        model = {'explicit_sort_request': {'mode': 'estimated_roi_desc', 'authorized_by_discord_id': '344196393512075265', 'source_thread_id': '1561752465978818722', 'request_text': 'ROI estimado maior para menor'}}
+        before = copy.deepcopy(model)
+        request = layout.requested_sort(model)
+        rows = [row('1', '10'), row('2', '50', source='1'), row('3', None)]
+        other = {'id': 'act_7840111366055613', 'name': 'Yolokfx-US-SHEIN-EN-01-G002'}
+        groups, _ = layout.ordered_groups(rows, other, CFG, request)
+        self.assertEqual([r['id'] for g in groups for r in g], ['2', '1', '3'])
+        self.assertEqual(layout.ordered_groups(rows, other, CFG), layout.family_groups(rows))
+        self.assertEqual(model, before)
+
+    def test_missing_or_invalid_request_rejected(self):
+        self.assertIsNone(layout.requested_sort({}))
+        for rule in ({}, {'mode': 'unsupported'}, {'mode': 'estimated_roi_desc', 'authorized_by_discord_id': 'other', 'source_thread_id': '1561752465978818722', 'request_text': 'sort'}):
+            with self.assertRaises(layout.LayoutError):
+                layout.requested_sort({'explicit_sort_request': rule})
+
+    def test_long_footer_complete_lines_unicode_and_no_loss(self):
+        lines = ['Limitação ' + str(i) + ' 🟢' * 20 for i in range(90)]
+        parts = layout.prose_parts('\n'.join(lines))
+        self.assertEqual('\n'.join(parts), '\n'.join(lines))
+        self.assertTrue(all(layout.discord_length(part) <= 2000 for part in parts))
+        with self.assertRaises(layout.LayoutError):
+            layout.prose_parts('x' * 2001)
+
+class IndependentHistoryTests(unittest.TestCase):
+    def model(self):
+        import json
+        model = json.loads((Path(__file__).parent / 'fixtures/shein_report_real_3.json').read_text())
+        model['explicit_sort_request'] = {'mode': 'estimated_roi_asc', 'history_sort': 'campaign_number_asc', 'hide_copy_origin_notes': True, 'authorized_by_discord_id': '344196393512075265', 'source_thread_id': '1561752465978818722', 'request_text': 'Principal crescente; histórico por número; sem aviso COPY'}
+        return model
+
+    def test_main_and_history_independent_preserve_all_cells(self):
+        model = self.model()
+        before = copy.deepcopy(model)
+        result = layout.render_model(model)
+        expected = sorted(model['rows'], key=lambda r: (layout.number(r['estimated_roi']) is None, layout.number(r['estimated_roi']) or 0, r['first_delivery'] or '9999-12-31', int(r['number']), r['id']))
+        self.assertEqual(result['campaign_ids'], [r['id'] for r in expected])
+        self.assertEqual(result['history_campaign_ids'], [r['id'] for r in sorted(model['rows'], key=lambda r: (int(r['number']), r['id']))])
+        self.assertEqual(model, before)
+        layout.validate_report(model, result['text'])
+        legacy = copy.deepcopy(model)
+        legacy.pop('explicit_sort_request')
+        baseline = layout.render_model(legacy)
+        def cells(parts):
+            return sorted(tuple(cell.strip() for cell in line.split('|')) for part in parts for line in part.splitlines()[3:-1])
+        self.assertEqual(cells(result['main_parts']), cells(baseline['main_parts']))
+        self.assertEqual(cells(result['history_parts']), cells(baseline['history_parts']))
+
+    def test_copy_notes_audit_only_and_other_limitations_visible(self):
+        model = self.model()
+        import re
+        model['rows'][1]['name'] = re.sub(r'\bCOPY\s+C\d+\b', 'COPY C9999', model['rows'][1]['name'])
+        model['configuration_limitations'] = ['Quiz n/d: manter esta limitação.']
+        result = layout.render_model(model)
+        self.assertNotIn('Origem COPY fora do recorte ou ambígua:', result['text'])
+        self.assertTrue(any(note.startswith('Origem COPY fora do recorte ou ambígua:') for note in result['diagnostics']))
+        self.assertIn('COPY C9999', result['text'])
+        self.assertIn('Quiz n/d: manter esta limitação.', result['text'])
+        model['explicit_sort_request']['hide_copy_origin_notes'] = False
+        self.assertIn('Origem COPY fora do recorte ou ambígua:', layout.render_model(model)['text'])
+
+    def test_ascending_scores_missing_last_without_rounding(self):
+        request = layout.requested_sort(self.model())
+        rows = [row('1', None), row('2', '-20'), row('3', '40.002'), row('4', '40.001'), row('5', '0')]
+        groups, _ = layout.ordered_groups(rows, ACCOUNT, CFG, request)
+        self.assertEqual([r['id'] for g in groups for r in g], ['2', '5', '4', '3', '1'])
+
+    def test_invalid_history_and_visibility_rejected(self):
+        for key, value in [('history_sort', 'unknown'), ('hide_copy_origin_notes', 'yes')]:
+            model = self.model()
+            model['explicit_sort_request'][key] = value
+            with self.assertRaises(layout.LayoutError):
+                layout.requested_sort(model)
+
+if __name__ == '__main__':
+    unittest.main()

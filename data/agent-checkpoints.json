@@ -4313,12 +4313,12 @@
     {
       "agent": "ares",
       "id": "ares-yolo-six-intraday-1561752465978818722",
-      "next_step": "Nenhuma acao pendente. Proxima atualizacao financeira somente mediante pedido; ordenacoes aplicadas ao reenvio autorizado, sem mudar defaults globais.",
-      "objective": "Substituir ultimo lote YOLO: ROI estimado crescente, historico por numero e avisos COPY somente no audit",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-reorder-20261019T110028/completion.json",
-      "state": "concluido: seis threads preservadas, 559 campanhas mesmas celulas e corte 19/10 10:49 edt. novas 90 mensagens validadas por get exato; 94 mensagens somente do lote anterior excluidas e ausencia confirmada por get 404. 56 testes aprovados; zero meta write/cron.",
+      "next_step": "Adaptar renderer request-scoped; testar; validar modelos/celulas e dois rankings; publicar seis relatorios; confirmar por GET; excluir somente 90 mensagens exatas do ultimo lote preservando anteriores.",
+      "objective": "Substituir ultimo lote YOLO com RPS nativo SB antes Bid, BR percentual, ROI estimado decrescente e historico numerico",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-rps-brpct-20261019T111808/rps-provenance.json",
+      "state": "autorizado por rodolfo: pode aplicar. fonte rps validada no frontend sb vigente: modulo nativo e mesma unidade usd/1000 sessoes, nao formula independente net/sessao; 559 valores nativos obtidos dos dados congelados. daily budget e budget_remaining presentes nas 559 campanhas do mesmo snapshot. nenhum post/delete novo executado.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T15:05:57+00:00"
+      "updated_at": "2026-10-19T15:20:26+00:00"
     },
     {
       "agent": "atena",
@@ -6502,5 +6502,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:05:57+00:00"
+  "updated_at": "2026-10-19T15:20:26+00:00"
 }
