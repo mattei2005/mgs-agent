@@ -3084,15 +3084,32 @@
         "ares"
       ],
       "domain": "growth.shein.reporting",
-      "effective_at": "2026-10-19T17:08:43+00:00",
-      "id": "ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019",
+      "effective_at": "2026-10-19T21:01:17+00:00",
+      "id": "ARES-SHEIN-ALL36-BUDGET-USED-20261019",
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "SHEIN36: B.U.% gasto Meta diario/orcamento diario substitui B.R.% prospectivamente; demais regras preservadas",
+      "updated_at": "2026-10-19T21:01:17+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-19T17:08:43+00:00",
+      "id": "ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL36-BUDGET-USED-20261019",
       "title": "Padrao global36 SHEIN: St RPS UI BR% Nº13 grade157 tetos visuais rankingROIe e historico numerico",
-      "updated_at": "2026-10-19T17:08:43+00:00"
+      "updated_at": "2026-10-19T21:01:17+00:00"
     },
     {
       "canonical_key": "ares.shein.batch-global-qa-activation",
@@ -4728,10 +4745,27 @@
       "kind": "preference",
       "owner": "Geizian Pereira",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-YOLO-G002-BUDGET-USED-GLOBAL-20261019",
+      "title": "Yolokfx G002: B.U.% representa gasto Meta diario sobre orçamento diario, substituindo B.R.%",
+      "updated_at": "2026-10-19T21:01:18+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.reporting.7840111366055613.budget-display",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-19T21:01:18+00:00",
+      "id": "ARES-YOLO-G002-BUDGET-USED-GLOBAL-20261019",
+      "kind": "preference",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Yolokfx G002: B.U.% representa gasto Meta diario sobre orçamento diario, substituindo B.R.%",
-      "updated_at": "2026-10-19T20:43:38+00:00"
+      "title": "Yolokfx G002 herda BudgetUsed do padrao global36; excecao anterior preservada para snapshots historicos",
+      "updated_at": "2026-10-19T21:01:18+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.yolo-g002.report.column-order",
@@ -10926,6 +10960,23 @@
       "updated_at": "2026-10-09T14:42:07+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.explicit-exact100-display",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-19T20:57:38+00:00",
+      "id": "ares-shein-report-explicit-exact100-display",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Exceção de apresentação B.R.% exatos100 por pedido e IDs",
+      "updated_at": "2026-10-19T20:57:38+00:00"
+    },
+    {
       "canonical_key": "procedure.ares.shein.report-reference-resolution",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
       "consumers": [
@@ -12917,5 +12968,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T20:43:38+00:00"
+  "updated_at": "2026-10-19T21:01:18+00:00"
 }

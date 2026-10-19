@@ -1382,6 +1382,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
+      "next_step": "Aplicar somente a metrica BudgetUsed, testar36bindings e isolamento de demais regras, registrar e reportar",
+      "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
+      "source": "discord:1558146725376557126/1561845294080204821",
+      "state": "rodolfo aprovou pode aplicar em resposta ao resumo confirmado. backup de contrato e renderer preservados; implementacao prospectiva e validacao36 pendentes",
+      "thread_id": "1558146725376557126",
+      "updated_at": "2026-10-19T20:58:51+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-BACKUP-AUDIT-1558159385694576661",
       "next_step": "Aguardar Rodolfo/Zeus confirmar janela normal e liberar nova auditoria; revalidar estado atual e executar pass novo com <=5 perfis por lote, close+GET Inactive antes do proximo; reportar apenas problemas do pass novo.",
       "objective": "Reauditar BACKUP SHEIN em lotes max5, somente problemas, apos liberacao da recuperacao",
@@ -1803,12 +1813,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-INTRADAY-20261019-1649",
-      "next_step": "Coletar fontes novas, RPS visivel DOM, materializar e validar relatorio na origem",
+      "next_step": "Aguardar decisao de ampliar Gasto de5para6caracteres (grade157para158) somente neste relatorio. Depois retomar model.json e RPS salvos, render/validate e entrega sem nova coleta financeira",
       "objective": "Novo relatorio atualizado Meta/SB com B.U.% e RPS apos ROAS",
-      "source": "discord:1558146725376557126",
-      "state": "binding conta/thread, catalogo e overrides reconciliados; dominio aprovado; coleta live pendente",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-yolo01-g002-20261019T165008/presentation-overflow.json",
+      "state": "fontes novas completas: meta/sb16:50 edt, rps dom16:54 edt, 87campanhas,7datas; 7pausas confirmadas live. gate visual bloqueia somente gasto campanha135:125,03 ocupa6caracteres e perfil autoriza5. sem truncar/omitir/alargar sem decisao; dados preservados e zero writes meta",
       "thread_id": "1558146725376557126",
-      "updated_at": "2026-10-19T20:49:44+00:00"
+      "updated_at": "2026-10-19T20:55:52+00:00"
     },
     {
       "agent": "ares",
@@ -4332,6 +4342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-g004-active-report-1561843395478159381",
+      "next_step": "Entregar report.md integral nesta resposta; entrega remota depende do adapter nativo.",
+      "objective": "Entregar relatório das58campanhas ativas com exceção B.R.% aprovada por Joe.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/report-layout/exact100-yolo-g004-20261019-1561845113930649734/handoff.json",
+      "state": "render validado; 99testes pass; 58linhas e histórico preservados; pronto para entrega nativa exata.",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-10-19T20:57:38+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-report-pagination-20261016",
       "next_step": "Aguardar próximos pedidos dos gestores; usar render/validate atual e entrega nativa exata",
       "objective": "Padronizar próximos relatórios SHEIN nos seis canais com limite real Discord e sem dupla paginação",
@@ -6572,5 +6592,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T20:49:44+00:00"
+  "updated_at": "2026-10-19T20:58:51+00:00"
 }
