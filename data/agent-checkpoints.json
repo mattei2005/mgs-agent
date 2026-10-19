@@ -1802,6 +1802,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO-G002-INTRADAY-20261019-1649",
+      "next_step": "Coletar fontes novas, RPS visivel DOM, materializar e validar relatorio na origem",
+      "objective": "Novo relatorio atualizado Meta/SB com B.U.% e RPS apos ROAS",
+      "source": "discord:1558146725376557126",
+      "state": "binding conta/thread, catalogo e overrides reconciliados; dominio aprovado; coleta live pendente",
+      "thread_id": "1558146725376557126",
+      "updated_at": "2026-10-19T20:49:44+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-YOLO-G002-RPS-AFTER-ROAS-20261019",
       "next_step": "Entrega nativa do texto exato preparado; somente transporte pendente, sem nova coleta ou republicacao por inferencia",
       "objective": "Atualizar relatorio on-demand da Yolokfx G002 e mover RPS para depois de ROAS somente neste pedido",
@@ -6562,5 +6572,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T20:43:38+00:00"
+  "updated_at": "2026-10-19T20:49:44+00:00"
 }
