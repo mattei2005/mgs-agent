@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
-      "next_step": "Próximo ciclo já autorizado: 2026-10-19 09:32 America/New_York. Não repetir 16/10 completed. Preservar quatro IDs, zero comentários, sorteio persistido e fechamento sequencial. Encerrar após 20/10; não criar recorrência.",
-      "objective": "Executar oito ciclos autorizados nos quatro perfis, sem novos comentários, encerrando após 20/10",
-      "source": "data/adspower-warming-20261008/runs/2026-10-16.json",
-      "state": "2026-10-16 completed: 894 emgai datquang 2/2; 1130 mhd aldy 3/3; 1177 kelly andrade 4/4; 1190 giselle santos 5/5. quatro reels completos com progresso e dois fins/reinícios; esperas reais 57/55/63/55s; quatro fechamentos inactive confirmados. zero novos comentários. dois timeouts no menu de reação do 894 reconciliados e recuperados sem duplicação. parser stdlib substituiu dependência ausente; sem instalação. nenhuma pendência ou alteração de infraestrutura.",
+      "next_step": "894 concluído e fechado; concluir 1130,1177,1190 sequencialmente; próximo ciclo final 2026-10-20",
+      "objective": "Executar ciclo autorizado 2026-10-19 nos quatro perfis, zero comentários",
+      "source": "data/adspower-warming-20261008/runs/2026-10-19.json",
+      "state": "running",
       "thread_id": "1557593341720526899",
-      "updated_at": "2026-10-16T13:47:23+00:00"
+      "updated_at": "2026-10-19T13:38:18+00:00"
     },
     {
       "agent": "ares",
@@ -6492,5 +6492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T12:40:27+00:00"
+  "updated_at": "2026-10-19T13:38:18+00:00"
 }
