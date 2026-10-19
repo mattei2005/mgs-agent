@@ -4376,6 +4376,23 @@
       "updated_at": "2026-10-09T00:02:30+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.rps-visible-column",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-19T15:26:58+00:00",
+      "id": "ARES-SHEIN-RPS-UI-ONLY-BRPCT-20261019",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "RPS exigido da dash: copiar coluna visivel, sem API/formula; complemento B.R.% autorizado",
+      "updated_at": "2026-10-19T15:26:58+00:00"
+    },
+    {
       "canonical_key": "ares.shein.single-campaign.e2e-target",
       "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
       "consumers": [
@@ -12764,5 +12781,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:05:57+00:00"
+  "updated_at": "2026-10-19T15:26:58+00:00"
 }

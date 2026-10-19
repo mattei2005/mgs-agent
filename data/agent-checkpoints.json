@@ -4313,12 +4313,12 @@
     {
       "agent": "ares",
       "id": "ares-yolo-six-intraday-1561752465978818722",
-      "next_step": "Adaptar renderer request-scoped; testar; validar modelos/celulas e dois rankings; publicar seis relatorios; confirmar por GET; excluir somente 90 mensagens exatas do ultimo lote preservando anteriores.",
-      "objective": "Substituir ultimo lote YOLO com RPS nativo SB antes Bid, BR percentual, ROI estimado decrescente e historico numerico",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-rps-brpct-20261019T111808/rps-provenance.json",
-      "state": "autorizado por rodolfo: pode aplicar. fonte rps validada no frontend sb vigente: modulo nativo e mesma unidade usd/1000 sessoes, nao formula independente net/sessao; 559 valores nativos obtidos dos dados congelados. daily budget e budget_remaining presentes nas 559 campanhas do mesmo snapshot. nenhum post/delete novo executado.",
+      "next_step": "Renovar a sessao autenticada da SB pelo login seguro autorizado. Retomar mesmos drafts, copiar RPS renderizado de cada campanha nas seis contas (data/moeda verificadas), validar e publicar; somente depois excluir os 90 IDs do ultimo lote, com GET de confirmacao. Nao usar os valores provisorios de API/funcao local.",
+      "objective": "Substituir ultimo lote YOLO: RPS copiado da coluna visivel SB, BR%, ROI estimado decrescente e historico numerico",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-rps-brpct-20261019T111808/pending-ui-access.json",
+      "state": "pendente de reautenticacao segura ui. rodolfo reiterou ui-only na mensagem 1561761087723016325: proibido api e calculo local. browser use e duas sessoes corporativas salvas redirecionam ao login; cofre do browser sem login e prompt indisponivel nesta sessao discord. 62 testes offline ok; seis drafts/559 campanhas preparados e gate rejeita ausencia de prova ui. zero novo relatorio publicado e zero anterior excluido; primeiras mensagens das seis threads preservadas por get.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T15:20:26+00:00"
+      "updated_at": "2026-10-19T15:26:58+00:00"
     },
     {
       "agent": "atena",
@@ -6502,5 +6502,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:20:26+00:00"
+  "updated_at": "2026-10-19T15:26:58+00:00"
 }
