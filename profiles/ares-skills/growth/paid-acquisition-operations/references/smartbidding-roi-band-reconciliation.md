@@ -64,6 +64,12 @@ Separar custos operacionais que a SB não incluiu. Custo SMS zero no relatório 
 
 Interpretar aquisição e retenção separadamente. ROI negativo de aquisição não é prova isolada de prejuízo do BOT; não recomendar corte como se toda receita de retenção fosse preservada automaticamente.
 
+## Conciliação com contas de anúncio e faixas personalizadas
+
+- Quando o pedido exigir que o investimento bata com as contas, consultar Insights Meta por campanha e, independentemente, por conta, com a mesma data civil no timezone live e moeda. Exigir igualdade da soma das campanhas com o total de cada conta; preservar NET_REVENUE SB e recalcular lucro e faixa usando o gasto Meta. Mostrar a diferença contra INVESTIMENT SB, sem atribuir causa não comprovada nem forçar igualdade.
+- Congelar o snapshot verificado. Um dia fechado ainda pode receber ajustes centesimais entre leituras Meta; comparar IDs e valores, recuperar somente as contas divergentes e reconciliar novamente com os totais. Não declarar readbacks estáveis quando houve alteração, nem descartar uma resposta concluída por falha de validação local.
+- Aplicar os limites pedidos, não os defaults da análise anterior. Em `0% a 15%` versus `negativas`, usar `0≤ROI≤15` e `ROI<0`, comparar antes do arredondamento e testar zero, 15 e valores imediatamente adjacentes. Somar conjuntos antes de classificar; receita sem gasto e SMS sem vínculo comprovado ficam fora das faixas das campanhas.
+
 ## 6. Verificar e entregar
 
 - Testar exatamente os limites 0/10/20/30 e valores imediatamente adjacentes.
