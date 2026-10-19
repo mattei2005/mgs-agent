@@ -55,6 +55,12 @@ Esse pedido de teste não promove automaticamente os rótulos nem o limite de 12
 
 Consultar `on_demand_default_layout.account_sort_overrides` antes de renderizar. Uma preferência autorizada e persistida para a conta exata pode substituir somente a ordenação global, sem mudar métricas, seleção, colunas ou outras contas. O modo `estimated_roi_desc` usa ROI estimado não arredondado, descendente; n/d fica no final e empates usam primeira entrega, número e ID. O ranking único prevalece sobre adjacência de famílias COPY, mas preserva os rótulos de origem e usa a mesma ordem no histórico. Não dividir por produto quando isso quebrar o ranking global escolhido. O renderer valida identidade e modo canônicos; um campo de ordenação fornecido apenas no modelo não é uma regra ativa. Exercitar `test_shein_report_account_sort.py` e o replay financeiro integral, com conservação de IDs/células e isolamento de outras contas.
 
+## Ordenação pontual expressamente solicitada
+
+Para um pedido explícito de Rodolfo de ROI estimado decrescente, sem torná-lo preferência permanente, incluir no modelo `explicit_sort_request` com `mode=estimated_roi_desc`, `authorized_by_discord_id=344196393512075265`, `source_thread_id` real e `request_text` literal. O renderer canônico valida a proveniência local e aplica o ranking sem mudar o contrato, o default de outras consultas ou os valores. Essa metadata não substitui a validação da autoridade da conversa. Usar render/validate normais; principal e histórico conservam os mesmos IDs e a mesma ordem. Sem o campo, continua a regra canônica da conta. Não editar políticas persistentes nem adaptar manualmente o texto para uma ordenação de um único pedido.
+
+Quando muitas origens COPY estiverem fora da seleção, preservar todas as notas de limitação e paginar o rodapé por linhas completas, com limite exato de 2000 unidades UTF-16; não apagar notas para caber nem repetir consultas financeiras por uma falha visual. Testar ordenação não arredondada, n/d ao final, preservação de células/defaults e rodapé longo com Unicode. Executar a suíte com o Python do runtime Hermes: o Python do sistema pode não conter as dependências do adapter nativo. Validação exercitada: suíte integral de 52 testes e seis modelos live, 559 campanhas, com recibos exatos e leitura de cada parte publicada.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:
