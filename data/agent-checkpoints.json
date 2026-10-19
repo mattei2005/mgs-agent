@@ -4323,12 +4323,12 @@
     {
       "agent": "ares",
       "id": "ares-yolo-six-intraday-1561752465978818722",
-      "next_step": "Nenhuma pendencia. Proximo relatorio usa defaults salvos e nova coleta no periodo pedido; se UI expirar, renovar pela rota corporativa Ares/1Password antes de pedir intervencao.",
-      "objective": "Concluir substituicao dos seis relatorios YOLO com RPS da dash e padrao aprovado",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-rps-brpct-20261019T111808/completion.json",
-      "state": "concluido. login ui renovado pela credencial ares do 1password, sem outra identidade nem exposicao. rps copiado de celulas renderizadas para as 559 campanhas; financeiro/config 10:49 edt preservados e rps 11:40 edt explicitado. seis relatorios, 95 novas partes com get exato; 90 partes somente do ultimo lote excluidas com get404. br%, rps antes bid, roi estimado desc, historico numerico, copy audit-only confirmados. zero meta write/cron.",
+      "next_step": "Aplicar coluna St sem ponto e mapa ACTIVE=A, PAUSED=P, DELETED=D, ARCHIVED=A; testar; render/validate seis modelos; publicar/confirmar; excluir apenas os 95 IDs do ultimo lote com GET404.",
+      "objective": "Acrescentar St antes Produto nas seis contas YOLO, republicar e excluir somente ultimo lote",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-status-20261019T115025/status-observed-at.json",
+      "state": "em execucao autorizada. leitura meta por ids exatos concluida nas 559 campanhas. rodolfo corrigiu na mensagem 1561768488425627691: archived usa somente a, igual active na apresentacao; manter status bruto distinto no audit. demais dados/cortes devem ser preservados. nenhum novo post/delete discord executado nesta revisao.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T15:46:04+00:00"
+      "updated_at": "2026-10-19T15:51:22+00:00"
     },
     {
       "agent": "atena",
@@ -4773,12 +4773,12 @@
     {
       "agent": "ares",
       "id": "creative-intake-kelly-1561765244450111621",
-      "next_step": "Executar apenas estagios ausentes de READY LEGACY inventario e auditoria final por ID",
+      "next_step": "Nenhuma pendencia neste intake; usar links READY LEGACY e mapa exato do manifesto. Uso em campanha requer pedido proprio e conciliacao.",
       "objective": "Tratar e mover lote Kelly US SHEIN EN preservando originais e reserva",
       "source": "/root/mgs-agent/data/ares/creative-ops/batches/kelly-1561765244450111621.json",
-      "state": "40 imagens revisadas, sanitizadas clean=true, hashes conciliados; 40 linhagens novas, nomes e plano congelados",
+      "state": "concluido: 40 imagens novas ready, 40 originais legacy, 40 linhagens inventariadas reservadas kelly; auditoria final clean=true download sha tamanho driveid nomes e pais aprovada; 0 pendencias; midia local transitoria removida",
       "thread_id": "1561765244450111621",
-      "updated_at": "2026-10-19T15:44:45+00:00"
+      "updated_at": "2026-10-19T15:51:26+00:00"
     },
     {
       "agent": "zeus",
@@ -6522,5 +6522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:46:04+00:00"
+  "updated_at": "2026-10-19T15:51:26+00:00"
 }
