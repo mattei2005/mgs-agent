@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-19T14:35:02-04:00",
+    "updated_at": "2026-10-19T14:35:23-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44928,6 +44928,41 @@
       "ui_financial_writes": 0,
       "rollback": "apps/finance-system/private/releases/autocreditadx-1561373355704320192",
       "deletions": 0
+    },
+    {
+      "id": "sb-restricted-recovery-1561808667794210988",
+      "agent": "zeus",
+      "type": "cron-session-recovery",
+      "updated_at": "2026-10-19T14:35:52-04:00",
+      "status": "recovered_verified",
+      "source_message_id": "1561808667794210988",
+      "paths": [
+        "/root/mgs-agent/data/cron-stale-logs-state.json",
+        "/root/mgs-agent/data/sb-restricted-transition-state.json"
+      ],
+      "validation": {
+        "company_http": 200,
+        "dry_run_exit": 0,
+        "apply_exit": 0,
+        "publishers": 54,
+        "active_users": 73,
+        "scoped_rows": 2888,
+        "monitored_pages": 515,
+        "sheet_state_exact_identity_fb_status_date_match": true,
+        "sheet_readback_ok": true,
+        "state_last_check": "2026-10-19T14:35:11-04:00",
+        "discord_posts": 0,
+        "unit_tests_passed": 9,
+        "watchdog_target": "OK",
+        "watchdog_problems": 0
+      },
+      "credential_changed": false,
+      "script_cron_config_changed": false,
+      "recurrence_risk": "Canonical auth-wall recurrence; session restored, durable prevention not proven. Existing session lease, atomic session-save, bounded-refresh and fail-closed gates preserved.",
+      "report_infra": {
+        "status": "pending",
+        "reason": "Resolver request prohibits direct Discord posting; final is delivered by monitor."
+      }
     }
   ],
   "profile_skill_references": [
@@ -51121,9 +51156,9 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 3424,
-      "md5": "f028ab1433535527c52748a95f171b1d",
-      "modified_at": "2026-10-19T14:30:04-04:00"
+      "size_bytes": 2948,
+      "md5": "e5078390e60dba8ece9e80753549c2fa",
+      "modified_at": "2026-10-19T14:35:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -51488,8 +51523,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 819,
-      "md5": "d6a7ce68597303d5427a42c7f51b6462",
-      "modified_at": "2026-10-19T14:34:18-04:00"
+      "md5": "1d7e015637860522b347b4f4bce0b391",
+      "modified_at": "2026-10-19T14:35:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -51512,8 +51547,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 2417063,
-      "md5": "689a18c2a9c2854a594b24b72cce20fe",
-      "modified_at": "2026-10-19T13:27:21-04:00"
+      "md5": "c3d4ee98b021e77c25a1a02fd3070e50",
+      "modified_at": "2026-10-19T14:35:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
