@@ -2,9 +2,11 @@
 
 Este arquivo define somente a apresentação e as evidências mínimas. Métricas, horários, thresholds e ações vêm do contrato da operação.
 
-## Exceção ativa — SHEIN compacto global aprovado
+## Exceção ativa — SHEIN: delegar ao contrato específico
 
-Padrão atual para todas as36threads de contas nos seis canais de relatórios: **R/E → Início → Nº → Produto → Quiz → Bid → Gasto → B.R. → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**. Produto tem no máximo **12 caracteres incluindo espaços, sem reticências**. `B.R.` usa `campaign.budget_remaining` Meta e Bid somente a meta real de COST_CAP; Rev/Health/ROI E. conservam fórmulas de Receita/Est.Health/ROI est. Modelo completo e timestamps exigidos pelo renderer. Fonte: `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, `ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016`. Sem flags de prévia no fluxo normal. Preservar demais regras de cores, famílias, Unicode, paginação2000, atraso e histórico7dias com Média7d. Nenhuma autorização de cron, write Meta ou exclusão de relatórios. O padrão13colunas/Produto20 na subseção histórica abaixo foi explicitamente supersedido por Rodolfo.
+Para relatórios SHEIN, carregar `direct-traffic-shein-operations` e `references/canonical-report-renderer.md` daquela skill. Resolver o binding da thread e ler `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, incluindo `account_report_overrides` e o perfil vigente, antes de coletar e novamente antes de entregar. Esta referência genérica não mantém uma segunda especificação ativa do layout SHEIN, pois cópias parciais ficam desatualizadas quando o contrato muda.
+
+Não restaurar os modelos históricos de treze ou quinze colunas abaixo: o padrão específico inclui St, RPS visível da dash e B.R.% na grade uniforme, com ordenações independentes do principal e do histórico. Usar o renderer canônico sem flags de prévia em pedidos normais, validar o texto exato e entregar suas partes sem reescrita ou segunda paginação. Receita ausente permanece n/d; RPS não pode ser substituído por API ou fórmula. Nenhuma regra visual autoriza cron, write Meta ou exclusão de relatórios.
 
 ## Histórico supersedido — apresentação SHEIN anterior
 
