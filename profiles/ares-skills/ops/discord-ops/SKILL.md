@@ -13,6 +13,12 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 - Tratar autorização de limpeza e autorização de alterar permissões como escopos distintos. Se faltar capacidade, registrar o restante e encaminhar a um administrador autorizado pela rota operacional, sem usar a credencial dele nem conceder acesso permanente como atalho. Procedimento em `references/route-pack-02.md`.
 - Conferir handoffs por GET, incluindo a mention efetiva do destinatário. Distinguir pedido entregue, trabalho aceito e resultado validado; só este último encerra a pendência. Não transformar REPORT-INFRA em fila de execução nem chamar um handoff confirmado de tarefa concluída.
 
+## Transferência de contexto entre threads
+
+- Diferenciar o objeto do pedido antes de publicar: resumir a conversa preserva decisões, correções e pendências; transferir uma análise indicada por prints ou mensagens exige o relatório completo, com todas as contas, tabelas, projeções e ressalvas. Não substituir a análise solicitada por outro resumo.
+- Preferir o texto original das mensagens à retranscrição dos prints; imagens identificam o relatório, mas OCR pode alterar nomes, IDs e valores. Preservar ordem e conteúdo das partes, atribuir o autor e informar a data/hora da consulta original; republicação não é nova auditoria nem validação independente dos números.
+- Publicar na thread indicada, sem anexos não solicitados, sem apagar o histórico e sem acionar outros bots desnecessariamente. Confirmar somente após leitura das partes no destino e fornecer o link direto. Receita: `references/discord-thread-history-import.md`, seção de transferência.
+
 ## Progressive disclosure — mandatory
 
 1. Identify the exact operational branch below.
