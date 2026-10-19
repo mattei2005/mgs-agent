@@ -1,7 +1,7 @@
 {
   "date": "2026-10-19",
   "timezone": "America/New_York",
-  "state": "running",
+  "state": "completed",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -450,21 +450,209 @@
       "post_video_wait_seconds": 67,
       "initial_active": "Inactive",
       "opened_by_run": true,
-      "status": "opening",
-      "likes": [],
+      "status": "completed",
+      "likes": [
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=4621068088127546",
+          "intent_at": "2026-10-19T09:44:31.683989-04:00",
+          "status": "confirmed",
+          "submit_intent_at": "2026-10-19T09:44:32.900950-04:00",
+          "evidence": [
+            "Remover Curtir",
+            "Alterar reação Curtir"
+          ],
+          "verified_at": "2026-10-19T09:44:35.521594-04:00"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=1805599777533327",
+          "intent_at": "2026-10-19T09:44:36.004433-04:00",
+          "status": "confirmed",
+          "submit_intent_at": "2026-10-19T09:44:37.240040-04:00",
+          "evidence": [
+            "Remover Curtir",
+            "Alterar reação Curtir"
+          ],
+          "verified_at": "2026-10-19T09:44:39.898197-04:00"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=10215565487886143",
+          "intent_at": "2026-10-19T09:44:47.276196-04:00",
+          "status": "confirmed",
+          "submit_intent_at": "2026-10-19T09:44:48.597313-04:00",
+          "evidence": [
+            "Remover Curtir",
+            "Alterar reação Curtir"
+          ],
+          "verified_at": "2026-10-19T09:44:51.495006-04:00"
+        },
+        {
+          "post_url": "https://www.facebook.com/photo/?fbid=29111324335144520",
+          "intent_at": "2026-10-19T09:44:52.282158-04:00",
+          "status": "confirmed",
+          "submit_intent_at": "2026-10-19T09:44:53.929808-04:00",
+          "evidence": [
+            "Remover Curtir",
+            "Alterar reação Curtir"
+          ],
+          "verified_at": "2026-10-19T09:44:56.770985-04:00"
+        }
+      ],
       "comments": [],
-      "video": {},
-      "closed_verified": false,
+      "video": {
+        "navigation_intent_at": "2026-10-19T09:44:57.440176-04:00",
+        "url": "https://www.facebook.com/reel/?s=tab",
+        "samples": [
+          {
+            "at": "2026-10-19T09:45:03.402577-04:00",
+            "position": 4.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:03.784505-04:00",
+            "position": 4.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:05.143396-04:00",
+            "position": 5.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:06.506042-04:00",
+            "position": 7.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:07.869511-04:00",
+            "position": 8.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:09.226969-04:00",
+            "position": 0.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:10.595435-04:00",
+            "position": 1.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:11.954310-04:00",
+            "position": 2.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:13.302699-04:00",
+            "position": 4.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:14.650969-04:00",
+            "position": 5.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:15.996769-04:00",
+            "position": 7.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:17.347485-04:00",
+            "position": 8.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:18.694722-04:00",
+            "position": 9.0,
+            "duration": 10.0
+          },
+          {
+            "at": "2026-10-19T09:45:20.047980-04:00",
+            "position": 1.0,
+            "duration": 10.0
+          }
+        ],
+        "full_interval_started_at": "2026-10-19T09:45:09.226969-04:00",
+        "complete": true,
+        "completed_at": "2026-10-19T09:45:20.048773-04:00",
+        "wraps_verified": 2
+      },
+      "closed_verified": true,
       "open_intent_at": "2026-10-19T09:43:18.849087-04:00",
       "opened_at": "2026-10-19T09:43:22.796435-04:00",
       "technical_recovery": [
         {
           "at": "2026-10-19T09:43:57.915695-04:00",
           "stage": "attach",
-          "error": "MCP attach timeout; no Facebook writes attempted"
+          "error": "MCP attach timeout; no Facebook writes attempted",
+          "recovered_at": "2026-10-19T09:44:23.823525-04:00"
         }
-      ]
+      ],
+      "authenticated_identity": "Giselle Santos",
+      "responsive_verified_at": "2026-10-19T09:44:23.823510-04:00",
+      "wait_started_at": "2026-10-19T09:45:20.049302-04:00",
+      "wait_elapsed_seconds": 67.0,
+      "wait_ended_at": "2026-10-19T09:46:27.049848-04:00",
+      "close_intent_at": "2026-10-19T09:46:27.050650-04:00",
+      "closed_at": "2026-10-19T09:46:34.952636-04:00",
+      "close_readback": "Inactive"
     }
   ],
-  "updated_at": "2026-10-19T09:43:57.915711-04:00"
+  "updated_at": "2026-10-19T09:46:47.842229-04:00",
+  "completed_at": "2026-10-19T09:46:47.842214-04:00",
+  "summary": [
+    {
+      "profile_id": "k13him2j",
+      "profile_no": "894",
+      "identity": "Emgai Datquang",
+      "likes_confirmed": 5,
+      "likes_target": 5,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 72.0,
+      "closed_verified": true,
+      "status": "completed",
+      "technical_recovered": 0
+    },
+    {
+      "profile_id": "k1d71895",
+      "profile_no": "1130",
+      "identity": "Mhd Aldy",
+      "likes_confirmed": 3,
+      "likes_target": 3,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 58.003,
+      "closed_verified": true,
+      "status": "completed",
+      "technical_recovered": 0
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "profile_no": "1177",
+      "identity": "Kelly Andrade",
+      "likes_confirmed": 2,
+      "likes_target": 2,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 60.0,
+      "closed_verified": true,
+      "status": "completed",
+      "technical_recovered": 1
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "identity": "Giselle Santos",
+      "likes_confirmed": 4,
+      "likes_target": 4,
+      "new_comments": 0,
+      "video_complete": true,
+      "wait_seconds": 67.0,
+      "closed_verified": true,
+      "status": "completed",
+      "technical_recovered": 1
+    }
+  ]
 }

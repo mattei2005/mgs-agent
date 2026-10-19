@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
-      "next_step": "894 concluído e fechado; concluir 1130,1177,1190 sequencialmente; próximo ciclo final 2026-10-20",
-      "objective": "Executar ciclo autorizado 2026-10-19 nos quatro perfis, zero comentários",
+      "next_step": "Executar somente o ciclo final já autorizado de 2026-10-20 às 09:32 America/New_York; depois encerrar sem recorrência. Hoje: 894=5/5,1130=3/3,1177=2/2,1190=4/4; quatro Reels completos, esperas 72/58/60/67s e fechamentos Inactive confirmados; zero comentários e zero pendências.",
+      "objective": "Rotina finita de aquecimento dos quatro perfis autorizados, zero comentários",
       "source": "data/adspower-warming-20261008/runs/2026-10-19.json",
-      "state": "running",
+      "state": "2026-10-19 completed; rotina aguardando último ciclo",
       "thread_id": "1557593341720526899",
-      "updated_at": "2026-10-19T13:38:18+00:00"
+      "updated_at": "2026-10-19T13:46:58+00:00"
     },
     {
       "agent": "ares",
@@ -6492,5 +6492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T13:38:18+00:00"
+  "updated_at": "2026-10-19T13:46:58+00:00"
 }
