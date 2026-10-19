@@ -703,6 +703,22 @@
         "supersedes_product20_and_account_only_preview": true,
         "no_deletion_no_schedule_or_Meta_write": true
       },
+      "account_budget_display_overrides": {
+        "7840111366055613": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-G002-BUDGET-USED-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-01-G002",
+          "source_thread_id": "1558146725376557126",
+          "authorized_by_discord_id": "321263240782807040",
+          "effective_from_report_date": "2026-10-19",
+          "metric": "daily_spend_over_daily_budget_percent",
+          "display_header": "B.U.%",
+          "formula": "100 * Meta campaign spend on report civil date / Meta campaign daily_budget",
+          "supersedes_for_this_account_only": "budget_remaining_over_daily_budget_percent",
+          "scope": "this_account_reporting_only_no_Meta_budget_write_no_global_change",
+          "request_text": "Essa coluna do B.R.% , corrige,eu preciso que ela seja do Budget usado comparado ao Budget total do dia daquela campanha,  e  não o que falta gastar.\n\nOu seja, seria melhor a coluna B.U.% que seria Budget Used, nessa coluna eu preciso da porcentagem de orcçamento que ja foi usado do dia em comparação ao orçamento total do dia da campanha."
+        }
+      },
       "account_column_overrides": {
         "1583000095650153": {
           "status": "superseded_by_global_compact",

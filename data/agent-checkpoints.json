@@ -1742,6 +1742,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO-G002-BUDGET-USED-20261019",
+      "next_step": "Usar B.U.% nos proximos relatorios desta conta; nao republicar relatorio inteiro nem atualizar fontes sem pedido",
+      "objective": "Corrigir B.R.% para B.U.% no relatorio desta conta: gasto diario Meta/orcamento diario x100",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/report-layout/budget-used-yolo-g002-20261019/receipt.json",
+      "state": "concluido: regra scoped salva no contrato; renderer calcula gasto do dia/daily_budget, n/d sem denominador e sem clamp100; 94 testes ok; 87 linhas reais reprocessadas com demais celulas e historico intactos; nenhuma alteracao meta",
+      "thread_id": "1558146725376557126",
+      "updated_at": "2026-10-19T20:43:38+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-YOLO-G002-C071-NOW-20261008",
       "next_step": "Pedido concluído; nao repetir criacao. Rota automatica ainda precisa manutencao separada para precisao temporal, effective IN_PROCESS e intent NOW. Conferir serving por Insights sem atribuir zero spend inicial a erro de midia.",
       "objective": "C114 derivada C71, USD150 e inicio imediato apos QA",
@@ -6552,5 +6562,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T19:02:44+00:00"
+  "updated_at": "2026-10-19T20:43:38+00:00"
 }

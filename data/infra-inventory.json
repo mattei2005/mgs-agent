@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-19T16:19:23-04:00",
+    "updated_at": "2026-10-19T16:43:57.569196-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44994,6 +44994,50 @@
       "evidence_directory": "/root/.hermes/profiles/ares/cache/scratch/intraday-yolo01-g002-20261019T145306",
       "account_id": "7840111366055613",
       "report_campaigns": 87
+    },
+    {
+      "id": "ares-yolo-g002-budget-used-20261019",
+      "agent": "ares",
+      "type": "account-scoped-reporting-correction",
+      "updated_at": "2026-10-19T16:43:57.569196-04:00",
+      "status": "validated",
+      "authorized_by": "Geizian Pereira",
+      "source_thread_id": "1558146725376557126",
+      "account_id": "7840111366055613",
+      "formula": "100 * daily Meta spend / campaign daily_budget",
+      "column": "B.U.%",
+      "tests_passed": 94,
+      "real_rows_verified": 87,
+      "history_and_other_cells_preserved": true,
+      "meta_writes": 0,
+      "global_layout_unchanged": true,
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+          "sha256": "a61c83256c8515bedc6164029205154b82cb128e5875593fe05c7dc1d9d1011c",
+          "size_bytes": 43578
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/tests/test_shein_report_budget_used.py",
+          "sha256": "04dc2bd6a8bc1a9afd2172fc74c1ce6569d16aa80e8eaf8069c00a2844aa195e",
+          "size_bytes": 5050
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+          "sha256": "e98735a0b5f4f703c72ae22af32180a8f05cf0f76d3c6cb38a42d6284f4fc1c4",
+          "size_bytes": 129116
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+          "sha256": "1abc398dbe735a34efb84a1702b77c5157eec5d398d3b865c5a04167a4d35f35",
+          "size_bytes": 65515
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+          "sha256": "0da1e48979f23d826ad0da5855323bb3ce4a50592c145809188fba9e2895e71c",
+          "size_bytes": 45130
+        }
+      ]
     }
   ],
   "profile_skill_references": [

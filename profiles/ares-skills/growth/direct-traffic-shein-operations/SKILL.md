@@ -25,6 +25,10 @@ Tetos de exibição somente nas linhas principais: ROI/ROI E.999,99% sem `+`, ne
 
 Lote global exige fontes novas por conta/publisher, gate dos seis domínios, identidade/moeda/timezone Meta, RPS UI com filtros e paginação completos, 36IDs de conta/thread únicos e seis relatórios por gestor/site. Contas sem entrega conservam os cabeçalhos principal/histórico e n/d de receita/ROI, sem linhas inventadas. Distinguir zero SB explícito de linha ausente. Persistir cada fonte/modelo/recibo e confirmar cada parte por GET. Retomar somente a fonte/parte ausente após falha, com journal e nonce. Pedido de relatórios novos não autoriza excluir antigos, criar cron, mudar Meta ou republicar em outro destino. O rollout foi exercitado com 87 testes e entrega integral dos36bindings; contagens incidentais de campanhas/partes não são defaults.
 
+### Exceção de métrica — Yolokfx G002
+
+Para a conta `7840111366055613`, consultar `on_demand_default_layout.account_budget_display_overrides`: Geizian substituiu **B.R.% por B.U.%**, percentual do gasto Meta do dia sobre o orçamento diário da própria campanha, não orçamento restante. O override vale somente nesta conta; preservar as demais regras/contas. Procedimento e testes em `references/canonical-report-renderer.md`, seção Budget Used.
+
 ## Histórico supersedido — compacto global de quinze colunas
 
 Rodolfo aprovou na Diretoria `1560303769680355525` o padrão compacto para os próximos relatórios de **todas as 36 contas**, distribuídas em **36 threads Intraday dentro de seis canais de relatórios**, seis contas por gestor. Usar as **15 colunas visíveis**, nesta ordem: **R/E → Início → Nº → Produto → Quiz → Bid → Gasto → B.R. → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**. Produto tem no máximo **12 caracteres incluindo espaços, sem reticências**. `B.R.` = `budget_remaining` real da campanha Meta; `Bid` = `bid_amount` real em COST_CAP, demais estratégias `—`; `Rev` = receita líquida SB; `Health` conserva Est.Health; `ROI E.` conserva ROI estimado. São aliases de apresentação, sem trocar fórmulas. Preservar os separadores, cores, alinhamento, famílias COPY, histórico de sete datas e Média 7d.
