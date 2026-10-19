@@ -4312,13 +4312,23 @@
     },
     {
       "agent": "ares",
-      "id": "ares-yolo-six-intraday-1561752465978818722",
-      "next_step": "Renovar a sessao autenticada da SB pelo login seguro autorizado. Retomar mesmos drafts, copiar RPS renderizado de cada campanha nas seis contas (data/moeda verificadas), validar e publicar; somente depois excluir os 90 IDs do ultimo lote, com GET de confirmacao. Nao usar os valores provisorios de API/funcao local.",
-      "objective": "Substituir ultimo lote YOLO: RPS copiado da coluna visivel SB, BR%, ROI estimado decrescente e historico numerico",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-rps-brpct-20261019T111808/pending-ui-access.json",
-      "state": "pendente de reautenticacao segura ui. rodolfo reiterou ui-only na mensagem 1561761087723016325: proibido api e calculo local. browser use e duas sessoes corporativas salvas redirecionam ao login; cofre do browser sem login e prompt indisponivel nesta sessao discord. 62 testes offline ok; seis drafts/559 campanhas preparados e gate rejeita ausencia de prova ui. zero novo relatorio publicado e zero anterior excluido; primeiras mensagens das seis threads preservadas por get.",
+      "id": "ares-yolo-default-layout-1561752465978818722",
+      "next_step": "Padrao pronto sem nova aprovacao. A substituicao de relatorios segue no checkpoint original, pendente exclusivamente de login seguro da SB para copiar RPS visivel.",
+      "objective": "Aplicar como padrao os ajustes aprovados nas seis contas YOLO para proximos relatorios",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-default-layout-20261019T113137/result.json",
+      "state": "concluido: seis overrides conta/nome/thread persistidos no contrato, vigencia prospectiva, renderer resolve automaticamente sem flags. rps ui-only antes bid; br%; principal roi estimado desc; historico numero asc; copy somente audit. 68 testes aprovados e readback real. outras 30 contas, meta e crons inalterados. nenhum relatorio novo publicado/excluido.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T15:26:58+00:00"
+      "updated_at": "2026-10-19T15:34:14+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ares-yolo-six-intraday-1561752465978818722",
+      "next_step": "Renovar autenticacao UI SB por fluxo seguro; copiar coluna RPS renderizada por conta/campaign ID no periodo/moeda corretos; retomar os mesmos drafts e journals para validar/publicar seis relatorios e excluir somente o ultimo lote autorizado. Nao pedir nova aprovacao de layout.",
+      "objective": "Concluir substituicao dos seis relatorios YOLO com o padrao aprovado e RPS da coluna visivel SB",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-default-layout-20261019T113137/result.json",
+      "state": "autorizacao confirmada, sem necessidade de nova aprovacao. padrao prospectivo ja aplicado canonicamente nas seis contas e validado em 68 testes. entrega/substituicao ainda pendente: browser use e sessoes sb salvas retornam ao login; preenchimento seguro indisponivel nesta sessao. rps por api/calculo local vetado por rodolfo. relatorios anteriores preservados, nenhum novo post/delete de report nesta revisao.",
+      "thread_id": "1561752465978818722",
+      "updated_at": "2026-10-19T15:34:14+00:00"
     },
     {
       "agent": "atena",
@@ -6502,5 +6512,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:26:58+00:00"
+  "updated_at": "2026-10-19T15:34:14+00:00"
 }

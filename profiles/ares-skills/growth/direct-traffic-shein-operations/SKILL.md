@@ -21,6 +21,10 @@ Rodolfo aprovou na Diretoria `1560303769680355525` o padrão compacto para os pr
 
 Fonte única: `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, política `ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016`, com `header_aliases` e `product_column`. Relatórios normais usam render/validate **sem flags de prévia** e modelos completos de configuração. O limite anterior20, os treze campos e a limitação inicial das duas colunas à Conta02 G006 estão explicitamente supersedidos; exemplos históricos abaixo não são defaults ativos. Não herdar a data ou o financeiro de outro relatório quando o usuário pedir atualização. Para lote de36, persistir cada fonte/conta, tratar as contas sem entrega com cabeçalhos e n/d sem inventar receita, validar36IDs de conta/thread únicos e confirmar cada parte por GET antes de concluir. Não apagar/editar relatórios antigos, ativar cron ou fazer write Meta por esse pedido.
 
+## Padrão salvo para as seis contas YOLO
+
+Rodolfo promoveu as mudanças desta Diretoria para os próximos relatórios das **seis contas Yolokfx G001–G006**, sem nova confirmação por pedido: **RPS copiado da coluna visível da dash SB imediatamente antes de Bid; B.R.% em vez de valor monetário; principal por ROI estimado maior → menor; histórico por número crescente; avisos de origem COPY somente no audit, preservando os marcadores**. Fonte única: `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout/account_report_overrides`, política `ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019`. Os overrides conferem conta/nome/thread e têm vigência prospectiva por horário do snapshot financeiro; snapshots anteriores e as outras 30 contas conservam suas regras. O gate exige RPS da UI: autorização do layout não substitui autenticação nem libera API/cálculo local. Distinguir **padrão aplicado** de **relatório publicado** e manter a substituição anterior pendente até ter fonte válida. Detalhes em `references/canonical-report-renderer.md`.
+
 ## Quando usar
 
 Carregue esta skill quando o pedido vier de um canal `shein-g001`…`shein-g006` ou mencionar simultaneamente SHEIN, Meta e tráfego direto nos EUA.
