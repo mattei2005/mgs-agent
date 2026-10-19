@@ -1383,12 +1383,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
-      "next_step": "Aplicar somente a metrica BudgetUsed, testar36bindings e isolamento de demais regras, registrar e reportar",
+      "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
-      "source": "discord:1558146725376557126/1561845294080204821",
-      "state": "rodolfo aprovou pode aplicar em resposta ao resumo confirmado. backup de contrato e renderer preservados; implementacao prospectiva e validacao36 pendentes",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/report-layout/BU-ALL36-20261019/change-inventory.json",
+      "state": "concluido: b.u.% ativo prospectivamente nas36contas/threads,6sites/6gestores; somente subarvores da politica budgetused alteradas; fontes historicas preservadas. 102testes ok, render/validate offline36bindings. contrato, skill, registry e inventario com readback; report-infra confirmado; zero writes meta/crons/republicacoes",
       "thread_id": "1558146725376557126",
-      "updated_at": "2026-10-19T20:58:51+00:00"
+      "updated_at": "2026-10-19T21:02:15+00:00"
     },
     {
       "agent": "ares",
@@ -6592,5 +6592,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T20:58:51+00:00"
+  "updated_at": "2026-10-19T21:02:15+00:00"
 }

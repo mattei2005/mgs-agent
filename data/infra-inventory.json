@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-19T16:55:22-04:00",
+    "updated_at": "2026-10-19T17:02:05.053472-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -45052,6 +45052,61 @@
           "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
           "sha256": "0da1e48979f23d826ad0da5855323bb3ce4a50592c145809188fba9e2895e71c",
           "size_bytes": 45130
+        }
+      ]
+    },
+    {
+      "id": "ares-shein-all36-budget-used-20261019",
+      "agent": "ares",
+      "type": "global-reporting-metric-standard",
+      "updated_at": "2026-10-19T17:02:05.053472-04:00",
+      "status": "validated",
+      "authorized_by": "Rodolfo Mattei",
+      "source_thread_id": "1558146725376557126",
+      "confirmation_request_message_id": "1561845294080204821",
+      "approval_text": "Pode aplicar.",
+      "policy_id": "ARES-SHEIN-ALL36-BUDGET-USED-20261019",
+      "effective_from_financial_snapshot": "2026-10-19T16:59:37.406578-04:00",
+      "accounts": 36,
+      "threads": 36,
+      "tests_passed": 102,
+      "binding_render_validate": 36,
+      "validation_mode": "offline_test_fixtures_no_new_platform_reads",
+      "other_contract_fields_unchanged": true,
+      "historical_snapshot_semantics_preserved": true,
+      "meta_writes": 0,
+      "schedule_changes": 0,
+      "report_posts": 0,
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+          "sha256": "32f275d03e52ddcf9da120e0257218c8bd3d4f9dc8a8f4b672e38afc003a1929",
+          "size_bytes": 173804
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+          "sha256": "9471d16e1ed54fed4272004499655cd24332029c69496398a3b65d88516f513d",
+          "size_bytes": 46903
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/tests/test_shein_report_budget_used_all36.py",
+          "sha256": "f755e851ca1cb648f202aa8e39f859989b5233db0a61828062fe4756b2c3697f",
+          "size_bytes": 5013
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+          "sha256": "9244f3d95cac397f5b09f1accf64e0ee1aa1b0695681eae7f966342a085f5058",
+          "size_bytes": 66974
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+          "sha256": "87f72584b5577dfdc8e8b8feb220e9ec2e3f522c327a2f8dcc45b22d4d0509ec",
+          "size_bytes": 49792
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
+          "sha256": "b80ba742f9c8317ea9e692d329c46f4a4c4783e8063079e60ba6c151b19f646b",
+          "size_bytes": 52161
         }
       ]
     }
