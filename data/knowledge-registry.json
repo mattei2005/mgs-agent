@@ -4816,10 +4816,27 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-YOLO-REPORT-UNIFORM-CAPS-20261019",
+      "title": "YOLO St antes Produto sem ponto: ACTIVE=A PAUSED=P DELETED=D ARCHIVED=A; demais defaults preservados",
+      "updated_at": "2026-10-19T16:45:52+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.reporting.yolo-default-layout",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-19T16:45:52+00:00",
+      "id": "ARES-YOLO-REPORT-UNIFORM-CAPS-20261019",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "YOLO St antes Produto sem ponto: ACTIVE=A PAUSED=P DELETED=D ARCHIVED=A; demais defaults preservados",
-      "updated_at": "2026-10-19T15:58:40+00:00"
+      "title": "YOLO grade unica157: Nº13, ROI/ROI E999,99 sem+, ROAS9,99x, receita9.999,99; limites somente visuais",
+      "updated_at": "2026-10-19T16:45:52+00:00"
     },
     {
       "canonical_key": "content.editorial.taxonomy.language-country-and-topics",
@@ -12832,5 +12849,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:58:40+00:00"
+  "updated_at": "2026-10-19T16:45:52+00:00"
 }
