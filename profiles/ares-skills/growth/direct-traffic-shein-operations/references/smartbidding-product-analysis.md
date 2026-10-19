@@ -1,6 +1,10 @@
 # Análise SHEIN por produto — Meta × Smart Bidding
 
-## Padrão vigente — compacto global aprovado
+## Padrão vigente — global36 com St, RPS da dash e grade fixa
+
+A política `ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019` estende às36contas/seis sites todas as mudanças, não somente à YOLO. Fonte: `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout/account_report_overrides` e perfil `SHEIN_ALL36_UNIFORM_G001_CAPS_V1`. Colunas: **R/E → Início → Nº → St → Produto → Quiz → RPS → Bid → Gasto → B.R.% → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**. Nº13, Produto12, grade157 igual para todos; principal ROI estimado real decrescente, histórico número crescente. Tetos apenas visuais: ROI/ROI E.999,99% sem+, ROAS9,99x, Rev9.999,99; valores reais preservados para cálculo/cores/total/ordenação/histórico. St: ACTIVE/ARCHIVED=A, PAUSED=P, DELETED=D. RPS deve ser copiado da coluna renderizada da dash SB na unidade nativa por mil sessões, sem cálculo local/API substitutivos. B.R.% usa budget_remaining/daily_budget Meta da mesma configuração. Carregar o renderer/gate canônico e suas regras de fonte UI, vigência, overflow e entrega exata. As definições/fórmulas de reconciliação financeira abaixo permanecem, sem transformar os modelos antigos em defaults atuais.
+
+## Histórico supersedido — compacto global de quinze colunas
 
 Usar em todas as36contas/threads (seis canais de relatórios): **R/E → Início → Nº → Produto → Quiz → Bid → Gasto → B.R. → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**. Produto: **máximo12caracteres incluindo espaços, sem reticências**. Fonte ativa `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`, política `ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016`. `Rev`, `Health`, `ROI E.` e `B.R.` são aliases de Receita, Est.Health, ROI est. e Budget R.; fórmulas e fontes permanecem. Bid é meta real COST_CAP; orçamento restante vem de campaign.budget_remaining, nunca diário menos gasto do relatório. Carregar `canonical-report-renderer.md` e completar configuração dos modelos antes do render/validate normal, sem flags de prévia. Os limites20/25 e padrões anteriores abaixo são histórico supersedido; não usar como default. Preservar seleção conforme pedido, histórico, famílias e reports antigos.
 
@@ -110,7 +114,7 @@ Na validação da fórmula, cobrir denominador ausente/zero como `n/d` e, com GA
 
 ROI positivo com gasto residual não prova vencedor. Declarar a régua analítica escolhida de gasto, dias de entrega e consistência; ela não vira regra de corte/escala sem autorização. Diferenciar vencedor consistente, positivo com margem estreita, promissor com janela curta, negativo recente e inconclusivo. Não chamar todas as campanhas pausadas de perdedoras nem todo ROI alto de vencedor.
 
-Expressar RPS claramente: NET_REVENUE / SESSIONS em USD por sessão ou multiplicado por 1.000, com a unidade visível. Para um cenário proposto de ROI q:
+Para a **coluna RPS do relatório padrão**, copiar o valor renderizado pela Smart Bidding, mantendo a unidade nativa por mil sessões e a mesma conta/campanha/data/moeda. Não substituir por `NET_REVENUE / SESSIONS` nem pela execução local da função do frontend. Em uma análise separada expressamente solicitada, `NET_REVENUE / SESSIONS` pode ser apresentado como **receita líquida por sessão**, com unidade explícita, sem confundir essa métrica analítica com a coluna RPS da dash. Para um cenário proposto de ROI q:
 
 ```
 custo/sessão máximo = receita líquida/sessão / (1+q)

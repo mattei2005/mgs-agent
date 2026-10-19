@@ -3078,6 +3078,23 @@
       "updated_at": "2026-10-08T15:13:22+00:00"
     },
     {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-19T17:08:43+00:00",
+      "id": "ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Padrao global36 SHEIN: St RPS UI BR% Nº13 grade157 tetos visuais rankingROIe e historico numerico",
+      "updated_at": "2026-10-19T17:08:43+00:00"
+    },
+    {
       "canonical_key": "ares.shein.batch-global-qa-activation",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/batch-paused-qa-activation.md",
       "consumers": [
@@ -4241,10 +4258,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019",
       "title": "SHEIN todas36contas: Produto12 sem reticencias,15colunas B.R./Rev/Health/ROI E., Bid CostCap e budgetremaining reais",
-      "updated_at": "2026-10-16T17:18:47+00:00"
+      "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
       "canonical_key": "ares.shein.reporting.explicit-request-sort",
@@ -4794,6 +4811,23 @@
         "ares"
       ],
       "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-19T17:08:43+00:00",
+      "id": "ARES-YOLO-REPORT-REDIRECT-ALL36-20261019",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "YOLO usa o padrao global36 SHEIN; exclusividade de layout supersedida",
+      "updated_at": "2026-10-19T17:08:43+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.reporting.yolo-default-layout",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.shein.reporting",
       "effective_at": "2026-10-19T15:34:14+00:00",
       "id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
       "kind": "policy",
@@ -4833,10 +4867,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-YOLO-REPORT-REDIRECT-ALL36-20261019",
       "title": "YOLO grade unica157: Nº13, ROI/ROI E999,99 sem+, ROAS9,99x, receita9.999,99; limites somente visuais",
-      "updated_at": "2026-10-19T16:45:52+00:00"
+      "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
       "canonical_key": "content.editorial.taxonomy.language-country-and-topics",
@@ -12849,5 +12883,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T16:45:52+00:00"
+  "updated_at": "2026-10-19T17:08:43+00:00"
 }

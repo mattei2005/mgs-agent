@@ -4293,12 +4293,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-all36-intraday-1561752465978818722",
-      "next_step": "Coletar novas fontes Meta/SB por conta e publisher; copiar RPS da dash; validar cobertura/sem entrega e gradecomum; persistir padrao36 e publicar cada parte nas threads exatas com GET. Zero Meta write/cron/DELETE.",
-      "objective": "Estender padrao uniforme a todos os sites SHEIN e publicar intraday atual em todas36threads",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-intraday-20261019T125002/request.json",
-      "state": "pedido autorizado por rodolfo. catalogo e bindings reconciliados:36contas/36threads unicos, seis sites permitidos e seis publishers reais. identidades meta, usd e timezones ny/la confirmados via get. escopo ampliado explicitamente da yolo para toda operacao. sem novas publicacoes nem exclusoes; historico remoto deve permanecer.",
+      "next_step": "Nenhuma pendencia. Proximos relatorios seguem politica global36. Recuperar entrega exata por completion.latest_delivery_sources; nao excluir historico por inferencia.",
+      "objective": "Padrao global uniforme e intraday atual em todos os sites/36threads SHEIN",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-intraday-20261019T125002/completion.json",
+      "state": "concluido:36contas/36threads unicas,6sites,6gestores,6relatorios por gestor e por site.613campanhas com entrega;12contas vazias com n/d e ambos cabecalhos.138partes publicadas e cada alvo confirmado por getexato,0delete. financeiro novo19/10 de12:50:50 a12:52:03edt erps copiado da dash12:55edt. todas36contas no mesmo perfil157 com st,rps,br%,nº13,tetos visuais,principalroie desc e historico numero asc.87testes e readback canonico ok.2campanhas sem receita sb no corte permaneceram n/d, sem zero inventado;1quiz nao confirmado. nenhuma alteracao meta/cron.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T16:50:14+00:00"
+      "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
       "agent": "ares",
@@ -4323,22 +4323,22 @@
     {
       "agent": "ares",
       "id": "ares-yolo-default-layout-1561752465978818722",
-      "next_step": "Usar contrato salvo nos proximos pedidos; nao pedir nova aprovacao do modelo nem republicar outras contas sem pedido.",
-      "objective": "Padrao uniforme seis YOLO com tetos de apresentacao e Nº13",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-uniform-caps-20261019T124000/completion.json",
-      "state": "concluido: politica ares-yolo-report-uniform-caps-20261019 ativa, st anterior supersedida. mesmo perfil fixo157 em todos, caps somente principal, fontes e valores reais preservados. 82testes e replay559linhas ok; publicacao de teste autorizada somente g004 confirmada por get.",
+      "next_step": "Carregar a politica global vigente, sem inferir restricao aos seis YOLO nem pedir nova aprovacao de layout.",
+      "objective": "Redirecionar antigo padrao exclusivo YOLO ao global36",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-intraday-20261019T125002/completion.json",
+      "state": "concluido: exclusividade yolo supersedida pela politica ares-shein-all36-uniform-caps-20261019.36bindings e mesmo perfil canonicamente confirmados;87testes e36entregas externas verificadas. colunas, fontes e caps iguais em todos os sites/gestores.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T16:45:52+00:00"
+      "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
       "agent": "ares",
       "id": "ares-yolo-six-intraday-1561752465978818722",
-      "next_step": "Antes de futura exclusao/republicacao, resolver a conta solicitada em latest_delivery_sources e usar os IDs do journal correspondente, sem tratar todas as contas como um lote novo.",
-      "objective": "Manter entregas YOLO reconciliadas apos substituicao parcial G004 com grade uniforme",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-uniform-caps-20261019T124000/completion.json",
-      "state": "ultima revisao parcial concluida: somente g004 republicado com grade157 e tetos visuais;13mensagens novas verificadas e13anteriores ausentes. demais cinco contas mantem ultimas entregas st. completion.latest_delivery_sources aponta diretorio exato por conta para reconciliar proximos pedidos. default uniforme aplicado aos seis, nao significa republicacao de todos. sem pendencia operacional alem da conferencia visual solicitada.",
+      "next_step": "Usar checkpoint ares-shein-all36-intraday-1561752465978818722 e seus latest_delivery_sources para continuidade; nenhuma republicacao ou exclusao adicional pendente.",
+      "objective": "YOLO integrado ao lote global36 SHEIN com padrao uniforme",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-intraday-20261019T125002/completion.json",
+      "state": "concluido e supersedido em alcance pelo lote global36. as seis yolo receberam fontes financeiras novas e novas entregas verificadas, junto aos demais30relatorios. padrao deixou de ser exclusivo yolo. fonte atual aponta os ultimos journals de todas36contas; historico anterior preservado.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T16:45:52+00:00"
+      "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
       "agent": "ares",
@@ -6542,5 +6542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T16:50:14+00:00"
+  "updated_at": "2026-10-19T17:08:43+00:00"
 }
