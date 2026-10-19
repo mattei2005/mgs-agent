@@ -1792,6 +1792,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO-G002-RPS-AFTER-ROAS-20261019",
+      "next_step": "Coletar fontes Meta/SB e RPS DOM; renderizar e validar ordem explicita; entregar na origem",
+      "objective": "Atualizar relatorio on-demand da Yolokfx G002 e mover RPS para depois de ROAS somente neste pedido",
+      "source": "discord:1558146725376557126",
+      "state": "binding e autoridade reconciliados; dominio aprovado; coleta nova e adaptacao de apresentacao pendentes",
+      "thread_id": "1558146725376557126",
+      "updated_at": "2026-10-19T18:52:42+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-YOLO-G006-C41-C100-1558134300325716050",
       "next_step": "Nenhum write pendente; nao repetir criacao ou attach. Meta processa automaticamente os tres anuncios ACTIVE configurados. Em consulta futura reler IN_PROCESS/revisao sem alterar status.",
       "objective": "Corrigir nome e tracking da C41 de 10/10 para C100 sem alterar restante nem C41 historica",
@@ -6542,5 +6552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T17:08:43+00:00"
+  "updated_at": "2026-10-19T18:52:43+00:00"
 }
