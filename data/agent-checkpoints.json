@@ -1292,6 +1292,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-ROI-SHEIN-CPV-20261018-1561388893558014103",
+      "next_step": "Consultar SB em USD, agregar por campanha e reconciliar gasto com Insights Meta; persistir divergencias antes de classificar.",
+      "objective": "Apurar investimento USD e lucro de campanhas SHEIN e CPV de 18/10/2026 nas faixas 0 a 15% e negativas, reconciliando Smart Bidding com Meta.",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/roi-shein-cpv-20261018",
+      "state": "em coleta read-only; sete publishers resolvidos e dominios validados; nenhuma alteracao externa.",
+      "thread_id": "1561388893558014103",
+      "updated_at": "2026-10-19T12:36:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SB-ROI-BANDS-1561388893558014103",
       "next_step": "Apresentar os dois blocos com denominadores explicitos. Nao atribuir SMS/base historica a campanhas atuais nem ratear diferenca 968.12. Qualquer aprofundamento usa v2 como base.",
       "objective": "Decompor lucro Domain de sexta 16/10/2026 por BOT e trafego direto, com faixas e SMS separado.",
@@ -6482,5 +6492,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-18T17:10:26+00:00"
+  "updated_at": "2026-10-19T12:36:36+00:00"
 }
