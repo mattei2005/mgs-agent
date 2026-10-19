@@ -90,6 +90,14 @@ Ordem de `subs`:
 6. offsite_conversion.fb_pixel_lead
 ```
 
+## Relatório de BM por forma de pagamento
+
+- Para repetir um relatório de billing, recupere primeiro o checkpoint/registry e o relatório validado anterior; quando a referência foi produzida por outro agente, a busca de sessões read-only nesse profile pode localizar o artefato e a metodologia. Não confunda o token de campanha com o acesso administrativo necessário para inventariar billing da BM.
+- Pagine `owned_ad_accounts` e `client_ad_accounts`, deduplique por account ID e leia `currency,timezone_name,funding_source_details`. Classifique a linha solicitada pela igualdade exata do ID da fonte; `type=4` indica monthly invoicing, `type=1` indica cartão. Não publique IDs de fontes nem dados de cartão. Fonte omitida não comprova ausência de pagamento: consulte a conta exata com `user_tasks` e mantenha a lacuna se persistir.
+- Use Graph v26.0 e o helper comum `graph_batch_get` em lotes bounded, exclusivamente com filhos GET; o POST de transporte não é autorização de mutação. Valide HTTP/body, identidade/moeda e paginação de cada filho e salve progresso por lote sem URLs com tokens.
+- Para gasto do mês, derive dia 1 e data atual no fuso de cada conta; consulte Insights account-level diário e agregado para o mesmo intervalo e reconcilie com Decimal. Consulte também contas sem fonte visível para medir a lacuna financeira; some moedas separadamente e conte contas com gasto versus zeradas em código.
+- Informe que o dia corrente é parcial e que o agrupamento representa a **forma de pagamento atual**: gasto publicitário do mês não é cobrança liquidada no cartão nem prova de que toda a despesa foi faturada nessa fonte histórica. Liste contas com gasto e declare a contagem/valor comum das zeradas.
+
 ## Throttling e rate limit
 
 - Todas as chamadas devem passar por `ares-meta-common.py`.
