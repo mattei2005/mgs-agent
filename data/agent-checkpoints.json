@@ -1823,12 +1823,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-INTRADAY-20261019-1853",
-      "next_step": "Aguardar autorizacao pontual para ampliar Gasto de5para6caracteres. Retomar estas mesmas fontes; completar configuracao/historico/RPSDOM e render/validate sem repetir financeiro",
-      "objective": "Entregar relatorio atualizado solicitado por Geizian com B.U.% e RPS apos ROAS",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-yolo01-g002-20261019T185333/summary.json",
-      "state": "fontes live meta/sb18:53edt salvas e consolidadas:87campanhas, gasto3132.76usd, receita4446.30usd. preflight visual detectou gasto119=110,00 e135=148,92:precisam6posicoes,perfil autoriza5. nao truncar valores nem alterar largura silenciosamente; sem write meta",
+      "next_step": "Preservar todas as fontes18:53EDT e a restricao de Gasto; nao aplicar mudanca de layout nem reenviar financeiro antigo como atualizado. Retomar somente com alternativa de apresentacao expressamente autorizada ou mudanca canonica aplicavel",
+      "objective": "Relatorio no modelo referenciado com B.U.% e coluna Gasto preservada por instrucao de Geizian",
+      "source": "discord:1558146725376557126",
+      "state": "geizian determinou expressamente nao mexer na coluna de gastos atuais. proposta de ampliar gasto nao foi autorizada; preservar valores, largura e formato. b.u.% permanece aplicado. relatorio completo nao entregue: valores110,00/148,92 excedem5posicoes; proibido cortar valores, ocultar campanhas ou alargar silenciosamente",
       "thread_id": "1558146725376557126",
-      "updated_at": "2026-10-19T22:54:09+00:00"
+      "updated_at": "2026-10-19T23:43:55+00:00"
     },
     {
       "agent": "ares",
@@ -6612,5 +6612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T22:54:09+00:00"
+  "updated_at": "2026-10-19T23:43:55+00:00"
 }
