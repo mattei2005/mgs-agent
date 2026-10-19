@@ -18,7 +18,14 @@
         "read back assignment and Page access with original corporate campaign identity",
         "resume original request and existing IDs through central Engine v3; preserve original E2E clock and QA"
       ],
-      "exclusions": ["ownership transfer", "credential issuance or rotation", "app permission changes", "billing", "other Pages or accounts", "unapproved recurrence"]
+      "exclusions": [
+        "ownership transfer",
+        "credential issuance or rotation",
+        "app permission changes",
+        "billing",
+        "other Pages or accounts",
+        "unapproved recurrence"
+      ]
     }
   },
   "cross_account_reference_policy": {
@@ -659,8 +666,29 @@
         "shein-g006"
       ],
       "scope_channels_are_examples_not_limit": true,
-      "columns": ["R/E", "Início", "Nº", "Produto", "Quiz", "Bid", "Gasto", "Budget R.", "Receita", "Saldo", "Est.Health", "ROI", "ROI est.", "ROAS", "Lance"],
-      "header_aliases": {"Budget R.": "B.R.", "Receita": "Rev", "Est.Health": "Health", "ROI est.": "ROI E."},
+      "columns": [
+        "R/E",
+        "Início",
+        "Nº",
+        "Produto",
+        "Quiz",
+        "Bid",
+        "Gasto",
+        "Budget R.",
+        "Receita",
+        "Saldo",
+        "Est.Health",
+        "ROI",
+        "ROI est.",
+        "ROAS",
+        "Lance"
+      ],
+      "header_aliases": {
+        "Budget R.": "B.R.",
+        "Receita": "Rev",
+        "Est.Health": "Health",
+        "ROI est.": "ROI E."
+      },
       "approved_compact_global": {
         "status": "active",
         "policy_id": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016",
@@ -685,7 +713,23 @@
           "source_thread_id": "1560303769680355525",
           "source_message_id": null,
           "authority": "Rodolfo approved Bid before Gasto and Budget R. before Receita; corrected target thread to 1558147479432601670.",
-          "columns": ["R/E", "Início", "Nº", "Produto", "Quiz", "Bid", "Gasto", "Budget R.", "Receita", "Saldo", "Est.Health", "ROI", "ROI est.", "ROAS", "Lance"],
+          "columns": [
+            "R/E",
+            "Início",
+            "Nº",
+            "Produto",
+            "Quiz",
+            "Bid",
+            "Gasto",
+            "Budget R.",
+            "Receita",
+            "Saldo",
+            "Est.Health",
+            "ROI",
+            "ROI est.",
+            "ROAS",
+            "Lance"
+          ],
           "definitions": {
             "Budget R.": "Meta campaign budget_remaining in account major currency units; not daily_budget minus frozen report spend; unavailable remains n/d",
             "Bid": "Meta adset bid_amount for effective COST_CAP only, in account major currency units; non-COST_CAP displays em dash; mixed/missing stays explicit"
@@ -701,7 +745,12 @@
             "source_message_id": null,
             "product_max_characters": 12,
             "remove_product_ellipsis": true,
-            "header_aliases": {"Budget R.": "B.R.", "Receita": "Rev", "Est.Health": "Health", "ROI est.": "ROI E."},
+            "header_aliases": {
+              "Budget R.": "B.R.",
+              "Receita": "Rev",
+              "Est.Health": "Health",
+              "ROI est.": "ROI E."
+            },
             "preserve_snapshot_order_values_and_previous_messages": true,
             "not_a_global_or_automatic_default_change": true
           }
@@ -722,7 +771,20 @@
         "source_thread_id": "1560303769680355525",
         "reported_bad_layout_thread_id": "1558147211026501643",
         "approval": "Rodolfo approved the compact preview with12characters, B.R./Rev/Health/ROI E., and promoted it for all36SHEIN account threads;20character default is superseded.",
-        "superseded_rules": [{"status": "SUPERSEDED", "max_characters": 25, "ellipsis": "...", "superseded_by": "ARES-SHEIN-REPORT-PRODUCT20-APPROVED-20261015"}, {"status": "SUPERSEDED", "max_characters": 20, "ellipsis": "", "superseded_by": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016"}]
+        "superseded_rules": [
+          {
+            "status": "SUPERSEDED",
+            "max_characters": 25,
+            "ellipsis": "...",
+            "superseded_by": "ARES-SHEIN-REPORT-PRODUCT20-APPROVED-20261015"
+          },
+          {
+            "status": "SUPERSEDED",
+            "max_characters": 20,
+            "ellipsis": "",
+            "superseded_by": "ARES-SHEIN-REPORT-GLOBAL-COMPACT12-20261016"
+          }
+        ]
       },
       "legend": {
         "enabled": false,
@@ -750,7 +812,10 @@
         "character": "|",
         "unicode_codepoint": "U+007C",
         "join": " | ",
-        "scope": ["main_table", "seven_day_history"],
+        "scope": [
+          "main_table",
+          "seven_day_history"
+        ],
         "outer_borders": false,
         "horizontal_rules": false,
         "preserve_columns_alignment_family_order_and_financial_snapshot": true,
@@ -760,13 +825,24 @@
         "source_description": "Rodolfo approved the preview with vertical ASCII pipes as the saved SHEIN report default."
       },
       "alignment": {
-        "main": {"default": "center", "left_aligned_exceptions": ["Produto"], "headers_match_cells": true},
-        "history": {"default": "center", "headers_match_cells": true},
+        "main": {
+          "default": "center",
+          "left_aligned_exceptions": [
+            "Produto"
+          ],
+          "headers_match_cells": true
+        },
+        "history": {
+          "default": "center",
+          "headers_match_cells": true
+        },
         "display_width": "unicode_visual_width_handle_emoji_combining_and_double_width_not_codepoint_length",
         "source_thread_id": "1560303769680355525",
         "source_message_id": "1560315984261287949"
       },
-      "required_header_indicators": ["gam_delay"],
+      "required_header_indicators": [
+        "gam_delay"
+      ],
       "gam_delay": {
         "status": "ACTIVE",
         "owner": "Rodolfo Mattei",
@@ -776,7 +852,10 @@
         "label": "⏱️ ATRASO GAM/SB",
         "placement": "prominent_header_above_table_not_an_additional_column",
         "source": "Smart Bidding POST /estimated/delay",
-        "payload": {"publisherIds": "resolve_actual_authorized_publishers_for_report_domain", "currency": "report_currency"},
+        "payload": {
+          "publisherIds": "resolve_actual_authorized_publishers_for_report_domain",
+          "currency": "report_currency"
+        },
         "value_field": "totalMinutes",
         "unit": "minutes",
         "format": "Hh MMmin_or_Mmin",
@@ -801,7 +880,11 @@
           "group_by_product": false,
           "missing_values": "last",
           "compare_unrounded": true,
-          "tie_breakers": ["first_delivery_ascending", "campaign_number_numeric_ascending", "campaign_id"],
+          "tie_breakers": [
+            "first_delivery_ascending",
+            "campaign_number_numeric_ascending",
+            "campaign_id"
+          ],
           "apply_same_order_to_history": true,
           "rank_overrides_family_adjacency_preserve_COPY_labels": true,
           "authorized_by_discord_id": "1055570806945620030",
@@ -815,10 +898,19 @@
         }
       },
       "default_sort": {
-        "keys": ["product_label_ascending_A_to_Z", "root_family_first_proven_delivery_ascending_oldest_first", "root_campaign_number_numeric_ascending", "root_campaign_id"],
+        "keys": [
+          "product_label_ascending_A_to_Z",
+          "root_family_first_proven_delivery_ascending_oldest_first",
+          "root_campaign_number_numeric_ascending",
+          "root_campaign_id"
+        ],
         "family_order": "parent_then_immediate_copy_children_depth_first_contiguous_family_block",
         "family_edges": "explicit_direct_COPY_source_number_in_verified_name_same_account_same_product_with_unique_selected_parent",
-        "sibling_order": ["first_proven_delivery_ascending", "campaign_number_numeric_ascending", "campaign_id"],
+        "sibling_order": [
+          "first_proven_delivery_ascending",
+          "campaign_number_numeric_ascending",
+          "campaign_id"
+        ],
         "family_placement_overrides_flat_chronological_order": true,
         "multi_generation": "show_each_child_below_its_direct_parent_preserve_direct_COPY_label_never_replace_with_root_label",
         "missing_or_ambiguous_parent": "do_not_invent_or_add_out_of_scope_parent_keep_campaign_visible_with_explicit_limitation",
@@ -873,18 +965,38 @@
         "small_reports": "combine_summary_tables_and_footer_when_complete_blocks_fit",
         "native_delivery": "exact_validated_receipt_parts_no_second_split_or_second_page_counter",
         "scope": "six_SHEIN_report_channels_36_Intraday_threads_same_renderer",
-        "preserve": ["financial_snapshot", "columns", "alignment", "product_limit", "campaign_order", "all_campaigns", "history"],
+        "preserve": [
+          "financial_snapshot",
+          "columns",
+          "alignment",
+          "product_limit",
+          "campaign_order",
+          "all_campaigns",
+          "history"
+        ],
         "no_republish_or_delete_old_reports": true,
         "superseded_rules": [
-          {"status": "superseded", "rule": "arbitrary_1870_budget_plus_70_reserve"},
-          {"status": "superseded", "rule": "keep_entire_family_on_same_page_even_if_current_page_underfilled"},
-          {"status": "superseded", "rule": "generic_native_repagination_of_already_paginated_SHEIN_report"}
+          {
+            "status": "superseded",
+            "rule": "arbitrary_1870_budget_plus_70_reserve"
+          },
+          {
+            "status": "superseded",
+            "rule": "keep_entire_family_on_same_page_even_if_current_page_underfilled"
+          },
+          {
+            "status": "superseded",
+            "rule": "generic_native_repagination_of_already_paginated_SHEIN_report"
+          }
         ]
       },
       "on_demand_only": true,
       "roi_direction_signal": {
         "placement": "first_column_R/E",
-        "order": ["ROI", "ROI est."],
+        "order": [
+          "ROI",
+          "ROI est."
+        ],
         "real_roi": {
           "positive": "🟢",
           "negative": "🔴",
@@ -892,15 +1004,34 @@
         },
         "estimated_roi": {
           "unit": "percentage_points",
-          "red": {"operator": "lt", "value": 10, "color": "🔴"},
-          "yellow": {"operator": "between_inclusive", "lower": 10, "upper": 40, "color": "🟡"},
-          "green": {"operator": "gt", "value": 40, "color": "🟢"},
+          "red": {
+            "operator": "lt",
+            "value": 10,
+            "color": "🔴"
+          },
+          "yellow": {
+            "operator": "between_inclusive",
+            "lower": 10,
+            "upper": 40,
+            "color": "🟡"
+          },
+          "green": {
+            "operator": "gt",
+            "value": 40,
+            "color": "🟢"
+          },
           "missing_or_invalid": "⚪"
         },
         "missing_or_invalid": "⚪",
         "compare_unrounded_values": true,
         "meaning": "real_ROI_direction_and_estimated_ROI_bands_only_not_action_status_learning_or_scale_permission",
-        "superseded_rules": [{"status": "SUPERSEDED", "rule": "estimated_ROI_used_sign_only_like_real_ROI", "superseded_by": "ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015"}]
+        "superseded_rules": [
+          {
+            "status": "SUPERSEDED",
+            "rule": "estimated_ROI_used_sign_only_like_real_ROI",
+            "superseded_by": "ARES-SHEIN-REPORT-EST-BANDS-AVG7D-20261015"
+          }
+        ]
       },
       "campaign_roi_history": {
         "required": true,
@@ -909,16 +1040,26 @@
         "days": 7,
         "window": "report_date_and_six_prior_calendar_dates_in_Meta_account_timezone",
         "date_order": "oldest_to_newest",
-        "prefix_columns": ["Início", "Nº", "Dia"],
+        "prefix_columns": [
+          "Início",
+          "Nº",
+          "Dia"
+        ],
         "metric": "daily_real_net_ROI_percent",
         "formula": "100 * (NET_REVENUE_SB - spend_Meta) / spend_Meta",
-        "join_key": ["account_id", "campaign_id", "civil_date"],
+        "join_key": [
+          "account_id",
+          "campaign_id",
+          "civil_date"
+        ],
         "day_label": "D_number_of_calendar_days_since_first_proven_delivery_inclusive_not_CPV_lifecycle",
         "current_day": "asterisk_and_explicit_partial_until_time_with_account_timezone",
         "no_positive_spend_or_missing_revenue": "n/d_never_imputed_zero_or_carried_forward",
         "current_day_must_match_main_ROI": true,
         "history_source": "SB_Adgroup_daily_NET_REVENUE_and_Meta_daily_Insights_spend_same_currency",
-        "trailing_columns": ["Média 7d"],
+        "trailing_columns": [
+          "Média 7d"
+        ],
         "mean_roi_7d": {
           "required": true,
           "placement": "rightmost_after_seven_daily_date_columns",
@@ -937,7 +1078,20 @@
         {
           "status": "SUPERSEDED",
           "source_thread_id": "1560303769680355525",
-          "columns": ["Início", "Nº", "Produto", "Quiz", "Gasto", "Receita", "Saldo", "Est.Health", "ROI", "ROI est.", "ROAS", "Lance"],
+          "columns": [
+            "Início",
+            "Nº",
+            "Produto",
+            "Quiz",
+            "Gasto",
+            "Receita",
+            "Saldo",
+            "Est.Health",
+            "ROI",
+            "ROI est.",
+            "ROAS",
+            "Lance"
+          ],
           "scope": "all_SHEIN_ad_accounts_independent_of_domain",
           "superseded_by": "ARES-SHEIN-REPORT-RE-HISTORY7D-20261015"
         },
@@ -945,11 +1099,159 @@
           "status": "SUPERSEDED",
           "source_thread_id": "1557059385417797723",
           "reference_thread_id": "1557056254730436671",
-          "columns": ["Início", "Campanha", "Custo/Res.", "Gasto $", "Est.Health", "ROI", "ROAS"],
+          "columns": [
+            "Início",
+            "Campanha",
+            "Custo/Res.",
+            "Gasto $",
+            "Est.Health",
+            "ROI",
+            "ROAS"
+          ],
           "scope": "six_SHEIN_manager_channels",
           "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015"
         }
-      ]
+      ],
+      "account_report_overrides": {
+        "787796726891306": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-05-G001",
+          "thread_id": "1558146488599842827",
+          "manager_code": "g001",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+          "scope": "future_on_demand_reports_six_YOLO_accounts_only_no_Meta_or_schedule_write",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "pode aplciar entao o que converasmos pra mandar o proximo relatorio la\nachei q vc ja tava fazendo."
+          }
+        },
+        "7840111366055613": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-01-G002",
+          "thread_id": "1558146725376557126",
+          "manager_code": "g002",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+          "scope": "future_on_demand_reports_six_YOLO_accounts_only_no_Meta_or_schedule_write",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "pode aplciar entao o que converasmos pra mandar o proximo relatorio la\nachei q vc ja tava fazendo."
+          }
+        },
+        "1600310064116258": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-06-G003",
+          "thread_id": "1558146852854169650",
+          "manager_code": "g003",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+          "scope": "future_on_demand_reports_six_YOLO_accounts_only_no_Meta_or_schedule_write",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "pode aplciar entao o que converasmos pra mandar o proximo relatorio la\nachei q vc ja tava fazendo."
+          }
+        },
+        "781612907182683": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-04-G004",
+          "thread_id": "1558147211026501643",
+          "manager_code": "g004",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+          "scope": "future_on_demand_reports_six_YOLO_accounts_only_no_Meta_or_schedule_write",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "pode aplciar entao o que converasmos pra mandar o proximo relatorio la\nachei q vc ja tava fazendo."
+          }
+        },
+        "2429758060563333": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-03-G005",
+          "thread_id": "1558147344711557211",
+          "manager_code": "g005",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+          "scope": "future_on_demand_reports_six_YOLO_accounts_only_no_Meta_or_schedule_write",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "pode aplciar entao o que converasmos pra mandar o proximo relatorio la\nachei q vc ja tava fazendo."
+          }
+        },
+        "1583000095650153": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-REPORT-RPS-BRPCT-DEFAULT-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-02-G006",
+          "thread_id": "1558147479432601670",
+          "manager_code": "g006",
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "effective_from_financial_snapshot": "2026-10-19T11:31:37.500140-04:00",
+          "scope": "future_on_demand_reports_six_YOLO_accounts_only_no_Meta_or_schedule_write",
+          "supersedes_for_this_account_only": "prior_report_column_and_history_order_defaults_for_future_snapshots",
+          "rps_source": "visible_SB_dashboard_column_only_no_API_or_local_calculation",
+          "options": {
+            "mode": "estimated_roi_desc",
+            "history_sort": "campaign_number_asc",
+            "hide_copy_origin_notes": true,
+            "include_rps": true,
+            "budget_remaining_display": "percent_daily_budget",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "request_text": "pode aplciar entao o que converasmos pra mandar o proximo relatorio la\nachei q vc ja tava fazendo."
+          }
+        }
+      }
     },
     "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
     "automatic_optimization_enabled": false,
