@@ -33,6 +33,13 @@ Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar 
 - Em pedido de reenvio, reproduzir os três blocos validados, com a mesma data e valores, sem nova coleta não solicitada. Em pedido da mesma análise para outro período, reutilizar a metodologia, consultar novamente as fontes e validar a nova data; não copiar contagens, resultados ou limites de validação incidentais do período anterior. Resolver datas relativas pelo relógio real e explicitar a data civil no resultado.
 - Distinguir **lucro SB, na base de custos de Domain**, de lucro líquido após todos os custos operacionais. Custo de SMS zero ou ausente na SB não prova gratuidade do envio; qualquer ajuste externo deve ser separado e fundamentado. Relatório read-only não autoriza pausar campanhas, alterar estratégia nem inferir que um corte preservaria toda a retenção.
 
+## Diagnóstico de aumento de gasto — Smart Bidding
+
+- Quando o pedido for identificar qual site/gestor puxou um salto, comparar a média diária de uma janela-base explícita com a média dos dias completos após o salto. Excluir o dia em andamento ou separá-lo como parcial; ordenar pela contribuição absoluta em USD/dia, não pelo maior gasto atual nem pelo maior percentual de crescimento.
+- Entregar primeiro o principal site e gestor/conta, depois consolidado antes × depois, ranking de sites e detalhamento dos gestores no site dominante. Mostrar a evolução diária dos maiores contribuintes quando ajudar a localizar a aceleração. Usar blocos `text` alinhados e valores arredondados, mantendo precisão integral no cálculo.
+- Separar atribuição de gasto de autoria da alteração: conta vinculada a um gestor não prova quem mudou seu budget. Preservar gestores não identificados e diferenças entre print e consulta atual como limitações explícitas, sem inventar responsáveis ou causas.
+- Seguir o ramo de decomposição de gasto em `references/smartbidding-roi-band-reconciliation.md`; os três blocos e as quatro fontes obrigatórias da análise de ROI não se aplicam automaticamente a um pedido somente de gasto.
+
 ## Arquitetura e tempo de execução
 
 Use um único Campaign Engine para a mecânica universal de criar do zero, duplicar, clonar, quota, recovery e readback. Separe naming, UTM, Page/pixel, evento, copy, mídia, schedule e pós-processamento em adapters/runners/contratos por família ou operação; relatórios, ROI e otimização ficam fora do executor. Não crie um novo major ou fork por nicho quando um adapter retrocompatível resolve.
@@ -86,7 +93,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
-- **Smart Bidding: decompor lucro por faixas de ROI e reconciliar card total × aquisição** → `references/smartbidding-roi-band-reconciliation.md`
+- **Smart Bidding: decompor aumento de gasto por site/gestor ou reconciliar lucro por faixas de ROI** → `references/smartbidding-roi-band-reconciliation.md`
 
 - **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
 - **Interpretar pedidos naturais de criação por canal/operação** → `references/natural-campaign-request-contracts.md`

@@ -1,6 +1,11 @@
-# Smart Bidding — reconciliação de lucro por estratégia e faixa de ROI
+# Smart Bidding — reconciliação de gasto e lucro
 
-Use quando o operador quiser explicar o lucro consolidado da SB por faixas de ROI, especialmente em escopo que mistura aquisição direta e BOT com retenção. O contrato de apresentação dos três blocos está no SKILL.md; este arquivo contém a receita técnica.
+Escolher o ramo antes da coleta:
+
+- **Aumento de gasto por site/gestor:** usar a seção `Decompor aumento de gasto`, com Domain e aquisição granular; não coletar Messenger/SMS nem produzir faixas de ROI sem necessidade.
+- **Lucro por estratégia/faixa de ROI:** seguir as seções numeradas abaixo, incluindo as quatro fontes comparáveis. O contrato dos três blocos de ROI está no SKILL.md.
+
+Os dois ramos compartilham o procedimento de período, autenticação e escopo da seção 1.
 
 ## 1. Fixar período, escopo e fonte do total
 
@@ -11,7 +16,7 @@ Use quando o operador quiser explicar o lucro consolidado da SB por faixas de RO
 5. Consultar `GET /company`, filtrar em memória somente as empresas autorizadas e projetar `companyId/name` e `publisherId/name/active`. Incluir publishers inativos se o pedido disser todos. A resposta completa contém dados sensíveis: não imprimir nem gravar o bruto ou um prefixo truncado.
 6. Tratar `DOMAIN` e `PUBLISHER` como identificadores que podem ser slugs ou IDs compostos. Resolver pelo publisher vivo e pela fonte canônica antes de uma ação de domínio; não enviar slug ao gate como se fosse FQDN nem adivinhar sufixo. No relatório global do produto, essas chaves servem para junção.
 
-## 2. Coletar as quatro fontes comparáveis
+## 2. Coletar as quatro fontes comparáveis para ROI
 
 Confirmar as rotas no `reportProvider` e nos componentes atuais do frontend; descobrir bundles a partir do HTML vigente, sem fixar hashes históricos. Usar o mesmo escopo, período e moeda nas quatro consultas:
 
@@ -80,4 +85,17 @@ Interpretar aquisição e retenção separadamente. ROI negativo de aquisição 
 - Publicar na ordem estável: tráfego direto sem SMS; BOT com drip/broadcast; consolidado. Repetir fonte, data e denominador junto aos títulos para que cada bloco faça sentido isoladamente.
 - Preservar relatório e checkpoint por período; uma nova data não sobrescreve os resultados anteriores. Entregar inline, sem anexos não solicitados.
 
-Critério de aceite: quatro fontes do mesmo dia/escopo, estratégia e identidade comprovadas, ausência de receita BOT zero-only tratada corretamente, joins por página exatos para gasto, faixas sem sobreposição, reconciliação decimal e readback documentados; limitações de atribuição e custos permanecem explícitas.
+Critério de aceite de ROI: quatro fontes do mesmo dia/escopo, estratégia e identidade comprovadas, ausência de receita BOT zero-only tratada corretamente, joins por página exatos para gasto, faixas sem sobreposição, reconciliação decimal e readback documentados; limitações de atribuição e custos permanecem explícitas.
+
+## Decompor aumento de gasto por site e gestor
+
+1. **Fixar a comparação.** Ler a imagem real quando houver print, confirmando mês/ano, moeda e linhas diárias. Resolver o dia atual pelo relógio e escolher a janela-base anterior ao salto; se o pedido disser semana anterior, usar sete datas civis completas imediatamente anteriores ao início identificado. Separar o dia em andamento, pois compará-lo com dias completos reduz artificialmente a média posterior.
+2. **Coletar somente as duas fontes necessárias.** Seguir a seção 1 para autenticação e publishers. Descobrir o `reportProvider` no HTML/frontend vigente e confirmar `GET /report/performance_per_domain` e `POST /report/performance_per_campaigns`. Usar `initialDate`, `finalDate`, publishers e `currency` idênticos; no GET, serializar a lista como `publishers[]`. Validar as datas de `DATE` retornadas antes de calcular.
+3. **Congelar e reconciliar o investimento.** Salvar lotes separados, sem credenciais, e ler `INVESTIMENT` com `Decimal(str(valor))`. Validar unicidade de `PK_JBF_PERFORMANCE_PER_DOMAIN` e `PK_JBF_PERFORMANCE_PER_ADGROUP` quando presentes; não eliminar linhas distintas só porque pertencem à mesma campanha, pois a aquisição retorna granularidade de adgroup. Somar os dias independentemente nas duas fontes e expor resíduos centesimais em vez de forçar igualdade. Usar Domain para o consolidado/sites e aquisição para contas/campanhas.
+4. **Resolver gestor por identidade estável.** Agrupar aquisição por empresa, publisher/site, `SOURCE` e `CUSTOMER_ID`; tratar `ACCOUNT_NAME` como rótulo, não chave única. Cruzar o ID com o cadastro da operação e o código de gestor com a fonte canônica da equipe. Usar sufixo G001–G006 do nome apenas como pista de junção; confirmar a atribuição no cadastro antes de publicar o nome humano. Preservar contas sem vínculo validado como `gestor não identificado`, sem excluir seu gasto do consolidado nem atribuí-las ao gestor de outra conta do mesmo site.
+5. **Calcular a ponte antes → depois.** Para cada grupo, calcular `media_base = soma_base / dias_base`, `media_pos = soma_pos / dias_pos` e `delta_dia = media_pos − media_base`. Usar o mesmo denominador de dias civis para todos os grupos, incluindo zeros confirmados; ausência de cobertura não equivale a zero. Ordenar por `delta_dia` decrescente e descer de site para conta/gestor nos maiores contribuintes. Mostrar o dia de pico separadamente da média posterior. Base zero produz percentual N/D, não infinito nem 100% arbitrário.
+6. **Validar a interpretação da contribuição.** Exigir que a soma dos deltas por site reproduza o delta consolidado da mesma fonte. Se um site adicionar mais que o aumento líquido total, explicar que quedas de outros sites compensaram parte do salto; participação acima de 100% pode ser correta. Não ordenar pelo percentual de crescimento, porque uma base pequena pode esconder os maiores aumentos em dólares.
+7. **Conferir print e readback.** Comparar o total diário vivo com a imagem; não misturar o total do print com parcelas de outra extração nem atribuir diferença a atraso, filtro, câmbio ou canal sem prova. Repetir as duas consultas com os mesmos parâmetros e comparar chaves, contagens e `INVESTIMENT` por linha, pois totais estáveis podem esconder compensações entre contas. Se houver mudança, reconciliar a versão utilizada antes de fechar.
+8. **Entregar a conclusão operacional.** Mostrar primeiro site e gestor/conta predominantes; depois janelas/moeda, média consolidada, maiores deltas por site e gestores do site principal. Distinguir vínculo da conta de autoria de budget write: só histórico de alterações/audit específico comprova quem executou a mudança. Relatório de gasto não autoriza alteração de campanha.
+
+Critério de aceite de gasto: mesmas datas/escopo/moeda nas duas fontes, investimento sem duplicidade, deltas por site fechando no consolidado, atribuição de gestor validada ou explicitamente pendente, readback das parcelas e diferença contra o print preservada. Testes de consistência: grupos com gasto zero continuam no denominador; base zero não divide; um grupo pode superar 100% do aumento líquido quando outros caem; mudanças opostas entre contas devem ser detectadas mesmo com total estável.

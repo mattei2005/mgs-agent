@@ -4313,22 +4313,22 @@
     {
       "agent": "ares",
       "id": "ares-yolo-default-layout-1561752465978818722",
-      "next_step": "Usar o contrato salvo nos proximos pedidos; nenhuma nova aprovacao de layout ou desbloqueio de acesso pendente.",
-      "objective": "Aplicar padrao aprovado as seis contas YOLO e validar primeira entrega completa",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-rps-brpct-20261019T111808/completion.json",
-      "state": "concluido: default canonico prospectivo preservado, 68 testes offline ok e primeira revisao completa entregue nas seis threads apos renovar login ares pelo 1password. fonte rps visivel ui verificada em todas as 559 campanhas. 95 partes novas e ausencia das 90 anteriores confirmadas.",
+      "next_step": "Usar contrato vigente sem nova aprovacao de layout.",
+      "objective": "Manter padrao aprovado das seis YOLO incluindo St antes Produto",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-status-20261019T115025/completion.json",
+      "state": "concluido: politica ares-yolo-report-st-20261019 ativa e anterior supersedida com historico. st sem ponto; active/archived=a, paused=p, deleted=d. vigencia adicional prospectiva para status; outras 30 contas inalteradas. 74 testes e primeira entrega das seis contas confirmados.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T15:46:04+00:00"
+      "updated_at": "2026-10-19T15:58:40+00:00"
     },
     {
       "agent": "ares",
       "id": "ares-yolo-six-intraday-1561752465978818722",
-      "next_step": "Aplicar coluna St sem ponto e mapa ACTIVE=A, PAUSED=P, DELETED=D, ARCHIVED=A; testar; render/validate seis modelos; publicar/confirmar; excluir apenas os 95 IDs do ultimo lote com GET404.",
-      "objective": "Acrescentar St antes Produto nas seis contas YOLO, republicar e excluir somente ultimo lote",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-status-20261019T115025/status-observed-at.json",
-      "state": "em execucao autorizada. leitura meta por ids exatos concluida nas 559 campanhas. rodolfo corrigiu na mensagem 1561768488425627691: archived usa somente a, igual active na apresentacao; manter status bruto distinto no audit. demais dados/cortes devem ser preservados. nenhum novo post/delete discord executado nesta revisao.",
+      "next_step": "Nenhuma pendencia. Proximos relatorios usam St e demais defaults salvos; novas consultas informam horarios reais de cada fonte.",
+      "objective": "Acrescentar St antes Produto nas seis contas YOLO e substituir somente ultimo lote",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-six-status-20261019T115025/completion.json",
+      "state": "concluido: st literal sem ponto antes produto; mapa active=a paused=p deleted=d archived=a conforme correcao 1561768488425627691. status configurado consultado na meta as 11:50 edt para as 559 campanhas. demais celulas financeiras/config/rps e historico integralmente preservados. seis threads: 95 partes novas com get exato; 95 partes somente do ultimo lote removidas com get404. 74 testes aprovados. default canonico salvo, raw statuses distintos no audit. zero meta write/cron.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-19T15:51:22+00:00"
+      "updated_at": "2026-10-19T15:58:40+00:00"
     },
     {
       "agent": "atena",
@@ -6522,5 +6522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:51:26+00:00"
+  "updated_at": "2026-10-19T15:58:40+00:00"
 }
