@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-19T14:35:23-04:00",
+    "updated_at": "2026-10-19T15:02:31.628056-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -44963,6 +44963,37 @@
         "status": "pending",
         "reason": "Resolver request prohibits direct Discord posting; final is delivered by monitor."
       }
+    },
+    {
+      "id": "ares-shein-explicit-rps-move-20261019",
+      "agent": "ares",
+      "type": "report-renderer-scoped-extension",
+      "updated_at": "2026-10-19T15:02:31.593412-04:00",
+      "status": "tested_live_model_validated",
+      "authorized_by": "Geizian Pereira",
+      "source_thread_id": "1558146725376557126",
+      "scope": "RPS apos ROAS somente no pedido; sem alterar defaults globais/Meta/cron",
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+          "sha256": "f23117ba2d31c3ce6403823af9ea2ad332e27f0f3ca3acafa911fea204803a51",
+          "size_bytes": 41231
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/tests/test_shein_report_explicit_rps_move.py",
+          "sha256": "7ec7a85d618cc0e011d80bcfce10066b6276b7128e26d101f0b9c4a8ec1efa0d",
+          "size_bytes": 3058
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+          "sha256": "d4d0ff49556864277a4863de64235ae1ce4a9468d48dde4a8ede9b3b80dc07cc",
+          "size_bytes": 42791
+        }
+      ],
+      "tests_passed": 90,
+      "evidence_directory": "/root/.hermes/profiles/ares/cache/scratch/intraday-yolo01-g002-20261019T145306",
+      "account_id": "7840111366055613",
+      "report_campaigns": 87
     }
   ],
   "profile_skill_references": [

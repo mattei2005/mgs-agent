@@ -124,6 +124,12 @@ Para acesso UI read-only, preservar User-Agent/args do helper corporativo e nunc
 
 Verificar a captura antes do renderer: mesma conta/domínio/data/moeda, uma célula consolidada por campanha, última página comprovada e cobertura exata dos IDs com entrega. Esses checks foram exercitados com extração DOM paginada e render/validate reais; não transformar contagens observadas em limites ou defaults.
 
+## Mudança pontual de posição da coluna RPS
+
+Para pedido explícito de Rodolfo ou Geizian de mover RPS após ROAS, preencher no modelo `explicit_column_request` com `column=RPS`, `after=ROAS`, `account_id` real sem act_, `source_thread_id`, `authorized_by_discord_id` real e `request_text` literal. O renderer valida a conta/thread no índice e move somente essa coluna, mantendo larguras por nome, grade157, dados, ranking, histórico e defaults globais. Usar render/validate normais; não editar o texto pronto nem atribuir a autorização a Rodolfo quando o solicitante foi Geizian. A ausência desse campo conserva o padrão canônico; o delta pontual não promove uma regra global. Regressão: `test_shein_report_explicit_rps_move.py`, junto à suíte completa de relatórios.
+
+No Playwright, o input PrimeVue `Select a dimension` é oculto: aguardar `state=attached`, depois clicar o contêiner `xpath=../..`; `wait_for()` com visibilidade padrão nunca conclui para esse input. Preservar o launch corporativo headed com `--disable-blink-features=AutomationControlled`; sem DISPLAY usar `xvfb-run -a`, sem substituir por headless durante a coleta. Nunca abrir storage-state como texto: contém cookies e tokens. Validar identidade pelo DOM da tela autenticada e projetar somente dimensões, filtros, paginação e linhas do recorte.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:

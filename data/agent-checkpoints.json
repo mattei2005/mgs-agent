@@ -1793,12 +1793,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-RPS-AFTER-ROAS-20261019",
-      "next_step": "Coletar fontes Meta/SB e RPS DOM; renderizar e validar ordem explicita; entregar na origem",
+      "next_step": "Entrega nativa do texto exato preparado; somente transporte pendente, sem nova coleta ou republicacao por inferencia",
       "objective": "Atualizar relatorio on-demand da Yolokfx G002 e mover RPS para depois de ROAS somente neste pedido",
-      "source": "discord:1558146725376557126",
-      "state": "binding e autoridade reconciliados; dominio aprovado; coleta nova e adaptacao de apresentacao pendentes",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/intraday-yolo01-g002-20261019T145306/receipt.json",
+      "state": "fontes live meta/sb 14:53 edt e rps dom 15:00 edt; 87 campanhas, 609 celulas historicas, 90 testes ok; renderer e recibo validados; report-infra conferido; zero writes meta",
       "thread_id": "1558146725376557126",
-      "updated_at": "2026-10-19T18:52:42+00:00"
+      "updated_at": "2026-10-19T19:02:44+00:00"
     },
     {
       "agent": "ares",
@@ -6552,5 +6552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T18:52:43+00:00"
+  "updated_at": "2026-10-19T19:02:44+00:00"
 }
