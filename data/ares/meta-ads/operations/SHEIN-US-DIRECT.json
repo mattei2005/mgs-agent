@@ -3282,6 +3282,26 @@
         "no_Meta_write": true,
         "no_schedule_change": true,
         "no_republication": true
+      },
+      "account_width_overrides": {
+        "7840111366055613": {
+          "status": "active",
+          "policy_id": "ARES-YOLO-G002-AUTO-GASTO-WIDTH-20261019",
+          "account_name": "Yolokfx-US-SHEIN-EN-01-G002",
+          "source_thread_id": "1558146725376557126",
+          "authorized_by_discord_id": "321263240782807040",
+          "effective_from_report_date": "2026-10-19",
+          "mode": "expand_to_fit",
+          "columns": [
+            "Gasto"
+          ],
+          "request_text": "ah entendi, entao pode amplitar e adaptar, quando o numero tiver maior e tiver mais caractere",
+          "scope": "this_account_Gasto_width_only_no_financial_value_change_no_Meta_write",
+          "supersedes": "prior refusal to widen Gasto in the same conversation",
+          "preserve_minimum_profile_width": true,
+          "preserve_decimal_places": true,
+          "preserve_other_columns": true
+        }
       }
     },
     "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",

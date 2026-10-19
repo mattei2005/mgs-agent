@@ -1823,12 +1823,12 @@
     {
       "agent": "ares",
       "id": "ARES-YOLO-G002-INTRADAY-20261019-1853",
-      "next_step": "Preservar todas as fontes18:53EDT e a restricao de Gasto; nao aplicar mudanca de layout nem reenviar financeiro antigo como atualizado. Retomar somente com alternativa de apresentacao expressamente autorizada ou mudanca canonica aplicavel",
-      "objective": "Relatorio no modelo referenciado com B.U.% e coluna Gasto preservada por instrucao de Geizian",
+      "next_step": "Persistir regra scoped e testar Gasto adaptativo; completar RPS/config/historico, render/validate e entregar relatorio completo",
+      "objective": "Concluir relatorio pendente com Gasto adaptativo autorizado, B.U.% e RPS apos ROAS",
       "source": "discord:1558146725376557126",
-      "state": "geizian determinou expressamente nao mexer na coluna de gastos atuais. proposta de ampliar gasto nao foi autorizada; preservar valores, largura e formato. b.u.% permanece aplicado. relatorio completo nao entregue: valores110,00/148,92 excedem5posicoes; proibido cortar valores, ocultar campanhas ou alargar silenciosamente",
+      "state": "geizian autorizou ampliar e adaptar quando numero tiver mais caracteres, supersedendo restricao anterior somente de apresentacao gasto. financeiro18:53edt sera preservado; completar demais fontes com horarios distintos",
       "thread_id": "1558146725376557126",
-      "updated_at": "2026-10-19T23:43:55+00:00"
+      "updated_at": "2026-10-19T23:52:54+00:00"
     },
     {
       "agent": "ares",
@@ -6612,5 +6612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T23:43:55+00:00"
+  "updated_at": "2026-10-19T23:52:54+00:00"
 }
