@@ -42,7 +42,8 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops ocorre pelo inventário/estado compartilhado, não por handoff entre bots.
 
 - Original e tratado pertencem à mesma linhagem. Reuploads exatos também se vinculam a ela: contabilizar fontes recebidas separadamente de destinos READY únicos e não consumir uma nova variante para uma duplicata.
-- Toda conclusão de intake inclui contagens verificadas, links READY e o mapa exato `nome original → nome final` de cada fonte, inclusive reuploads duplicados; separar IMG/VID quando o lote for grande, sem anexos não solicitados.
+- Toda conclusão de intake inclui contagens verificadas, link do destino final efetivo e o mapa exato `nome original → nome final` de cada fonte, inclusive reuploads duplicados; separar IMG/VID quando o lote for grande, sem anexos não solicitados.
+- Quando o pedido autorizar entrega em pasta de gestor, validar primeiro o tratado em READY e depois mover esse mesmo Drive ID para a pasta exata solicitada, sem criar um segundo candidato. Registrar o parent final real e manter os originais no LEGACY da operação; auditar e comunicar a pasta do gestor como destino final, não afirmar que o tratado continua fisicamente em READY. Receita: `references/mixed-media-drive-intake-ready-legacy.md`.
 - Encerrar pelo estado auditado do lote, não pelo término isolado de preparação ou upload. Correlacionar cada processo à sua fase e ao manifesto; uma notificação atrasada de fase já consumida não reabre o intake nem exige repetir a resposta final.
 - Upload de gestor inicia `RESERVADO_PELO_GESTOR` e `ares_eligible=false`.
 - `01_READY` prova prontidão técnica, não ineditismo.
