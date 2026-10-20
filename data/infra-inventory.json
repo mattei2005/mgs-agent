@@ -45312,8 +45312,8 @@
       "id": "ares-creative-30tb-copy-queue-integration-20261020",
       "agent": "zeus",
       "type": "copy-only-archive-queue-and-authorized-ares-skill-update",
-      "status": "hardened_worker_and_sa_verified_archive_human_access_decision_pending",
-      "updated_at": "2026-10-20T18:53:13.729585+00:00",
+      "status": "hardened_worker_sa_upload_context_archive_acl_verified_intake_consumers_pending",
+      "updated_at": "2026-10-20T19:35:55.693108+00:00",
       "authority_message_id": "1562104715271999589",
       "thread_id": "1562078493498540042",
       "registry_id": "ARES-CREATIVE-30TB-QUEUE-INTEGRATION-20261020",
@@ -45651,8 +45651,8 @@
       "id": "ares-creative-30tb-sa-automation-and-upload-layout-20261020",
       "agent": "zeus",
       "type": "bounded-cloud-archive-reconciliation-and-additive-upload-context",
-      "status": "hardened_worker_and_sa_verified_archive_human_access_decision_pending",
-      "updated_at": "2026-10-20T18:53:13.729481+00:00",
+      "status": "hardened_worker_sa_upload_context_archive_acl_verified_intake_consumers_pending",
+      "updated_at": "2026-10-20T19:35:55.693033+00:00",
       "authority_message_ids": [
         "1562141828449439838",
         "1562164883766902888"
@@ -45690,8 +45690,8 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
-          "size_bytes": 37768,
-          "sha256": "4411c6776e9280bb5569233b518e208e7d8215274225f94a5e0fd9ab8ef57575"
+          "size_bytes": 39136,
+          "sha256": "af539681c80f4ca6779d05a8a8463bce3c5ed97c52ee2569532bc425641fb3d6"
         },
         {
           "path": "/root/.hermes/profiles/zeus/scripts/ares-archive-automation-monitor.py",
@@ -45700,13 +45700,13 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "size_bytes": 16107,
-          "sha256": "73875a28409d60b386bca18d9bb56d4a2dfe37d572803a814068bb2b30fabb6f"
+          "size_bytes": 16549,
+          "sha256": "e989b639c74df7c007ad214bd5d6bf829e47c6d33b80aff06179b5b0730a4050"
         },
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "size_bytes": 16107,
-          "sha256": "73875a28409d60b386bca18d9bb56d4a2dfe37d572803a814068bb2b30fabb6f"
+          "size_bytes": 16549,
+          "sha256": "e989b639c74df7c007ad214bd5d6bf829e47c6d33b80aff06179b5b0730a4050"
         },
         {
           "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/shared-drive-30tb-archive-queue.md",
@@ -45772,6 +45772,11 @@
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/archive-access-proposal-1562173688026234910.json",
           "size_bytes": 5077,
           "sha256": "1929efcdb88c321e6a06975a825bfa5184f70d39bd05abacfe71228bc35c5a5b"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/archive-access-applied-1562186592372920332.json",
+          "size_bytes": 7874,
+          "sha256": "a3f4941df1c32a6b71aa9737a70b3605bd6b332b892c9fc1948c29b2dbb84bb3"
         }
       ],
       "cron": {
@@ -45808,7 +45813,6 @@
       "owner_worker_active_sha256": "b7ba49117656c2641299b96b02a1bd39e7c9d6d31a906efcf2be47231c1ce714",
       "live_mirrors_equal": true,
       "pending": [
-        "explicit archive human access decision (9 same current corporate accounts as My Drive writer)",
         "Ares automatic intake executor",
         "archive/stock consumer integration and live cutover gates",
         "separate Critical Subset source cleanup confirmation"
@@ -45886,8 +45890,11 @@
         "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/archive-access-proposal-1562173688026234910.json",
         "addition_count": 9,
         "target_set_sha256": "6e97f8dc77ce4df01a3871b1d75861a6dbf3883d3b8f50e93d46b7fcea985d8d",
-        "applied": false,
-        "candidate_id": "KCI-14f62a63a54bb648"
+        "applied": true,
+        "candidate_id": "KCI-14f62a63a54bb648",
+        "resolved_by_authority_message_id": "1562186592372920332",
+        "resolved_by_registry_id": "ARES-ARCHIVE-HUMAN-ACCESS-20261020",
+        "historical": true
       },
       "last_deployment_source_message_id": "1562173688026234910",
       "hardened_worker_report_infra": {
@@ -45899,6 +45906,29 @@
         "single_embed": true,
         "no_mentions": true,
         "http": 200
+      },
+      "archive_access_applied": {
+        "authority_message_id": "1562186592372920332",
+        "receipt": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/archive-access-applied-1562186592372920332.json",
+        "approved_grants": 9,
+        "total_permissions": 11,
+        "existing_copies_checked": 3,
+        "target_set_sha256": "6e97f8dc77ce4df01a3871b1d75861a6dbf3883d3b8f50e93d46b7fcea985d8d",
+        "owner_preserved": true,
+        "sa_writer_preserved": true,
+        "source_acl_unchanged": true,
+        "public_or_domain_sharing": false,
+        "notification_emails": false,
+        "reconciler_status": "ok"
+      },
+      "archive_access_report_infra": {
+        "verified_at": "2026-10-20T19:36:31.410867+00:00",
+        "channel_id": "1498132022634483894",
+        "message_id": "1562187635072438375",
+        "http": 200,
+        "empty_content": true,
+        "single_embed": true,
+        "no_mentions": true
       }
     },
     {

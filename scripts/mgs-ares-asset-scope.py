@@ -68,6 +68,13 @@ def enforce_meta_path(path,params=None,method='GET'):
  # The technical app exception is metadata-only and never grants discovery.
  if clean==APP_ID and method.upper()=='GET' and set(str(params.get('fields','id,name')).split(','))<={'id','name'} and set(params)<={'fields'}:return
  data=load_scope()
+ # Read-only invoices of the one operational business; never business discovery.
+ if clean==data.get('operational_business_id','')+'/business_invoices':
+  invoice_fields={'id','invoice_id','ad_account_ids','amount','currency','billing_period','invoice_date','payment_status','invoice_type','due_date'}
+  requested=set(str(params.get('fields','')).split(','))
+  permitted={'fields','issue_start_date','issue_end_date','start_date','end_date','after','before','limit'}
+  if method.upper()!='GET' or not requested or 'ad_account_ids' not in requested or not requested.issubset(invoice_fields) or not set(params).issubset(permitted):raise ScopeError(DENY)
+  return
  for key in ('account_id','ad_account_id'):
   if key in params and not allowed_account(params[key],data):raise ScopeError(DENY)
  batch=params.get('batch')
@@ -114,13 +121,23 @@ def observe_meta_response(path,params,payload,method='GET'):
      body=response.get('body');body=json.loads(body) if isinstance(body,str) else body
      observe_meta_response(child['relative_url'],None,body,child.get('method','GET'))
   return
- data=load_scope();parts=clean.split('/');account=_account_for_node(parts[0],data)
+ data=load_scope()
+ if clean==data.get('operational_business_id','')+'/business_invoices':
+  invoices=payload.get('data') if isinstance(payload,dict) else None
+  if not isinstance(invoices,list):raise ScopeError(DENY)
+  for invoice in invoices:
+   account_ids=invoice.get('ad_account_ids') if isinstance(invoice,dict) else None
+   if not isinstance(account_ids,list) or not account_ids or any(not allowed_account(str(a),data) for a in account_ids):raise ScopeError(DENY)
+  return
+ parts=clean.split('/');account=_account_for_node(parts[0],data)
  if not account:return
  updates={}
  def collect(row):
   if isinstance(row,list):
    for value in row:collect(value)
   elif isinstance(row,dict):
+   business=row.get('business')
+   if isinstance(business,dict) and business.get('id') is not None and str(business['id'])!=data['operational_business_id']:raise ScopeError(DENY)
    if row.get('account_id') is not None and not allowed_account(str(row['account_id']),data):raise ScopeError(DENY)
    if row.get('account_id') is not None and str(row['account_id']).removeprefix('act_')!=account:raise ScopeError(DENY)
    oid=str(row.get('id',''))

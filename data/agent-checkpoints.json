@@ -113,12 +113,12 @@
     {
       "agent": "ares",
       "id": "ARES-CONFIDENTIALITY-REAUDIT-1562104297926295623",
-      "next_step": "Tratar exclusivamente fontes documentais e rotas operacionais de consulta/relatorio no escopo aprovado; preservar app, tokens, permissoes, campanhas e servidor. Nao usar proposta de infraestrutura como pendencia deste pedido nem prometer isolamento absoluto.",
-      "objective": "Escopo operacional Ares: consultas, relatorios e fontes documentais somente Digital Trust e hosts SB; infraestrutura excluida por Rodolfo",
+      "next_step": "Concluir rotas documentais positivas, testar relatórios completos por selecao permitida e registrar cobertura/limites da API sem pendencias artificiais",
+      "objective": "Fechar documentacao ativa e validacao operacional de consultas/relatorios Ares somente Digital Trust/SB; sem infraestrutura",
       "source": "context/ares-asset-scope.md",
-      "state": "correcao expressa de rodolfo: pedido nao envolve servidor. proposta anterior de migracao nao-root/servico/cofre/restart supersedida e fora deste pedido; nao aguardar nem solicitar confirmacao de infraestrutura. correcoes locais de consulta e testes registrados preservados; nenhum servico alterado.",
+      "state": "fechamento final autorizado: revisar fontes ativas e fluxos genericos, incluindo cobrancas/faturas; preservar correcoes existentes e evidencias historicas; nenhuma mudanca de servidor/permissoes",
       "thread_id": "1562104297926295623",
-      "updated_at": "2026-10-20T19:33:46+00:00"
+      "updated_at": "2026-10-20T19:37:43+00:00"
     },
     {
       "agent": "ares",
@@ -6902,5 +6902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T19:35:10+00:00"
+  "updated_at": "2026-10-20T19:37:43+00:00"
 }

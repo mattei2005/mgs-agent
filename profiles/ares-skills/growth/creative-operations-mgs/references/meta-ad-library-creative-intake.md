@@ -18,7 +18,7 @@ Manual/semi-manual          Prints/links/IDs enviados por humano             Mai
 Regra prática:
 
 1. Se o objetivo for responder “consigo ver/baixar hoje?”, primeiro testar browser renderizado.
-2. Se houver token Meta disponível, validar sem expor token: `/me`, `/me/adaccounts`, conta conhecida e `/me/permissions`.
+2. Para validar a integração operacional, selecionar uma conta pelo cadastro positivo Ares, aplicar o gate e consultar somente essa conta conhecida. Não enumerar identidades/contas/BMs para descobrir acesso. A pesquisa pública da Ad Library é referência externa, não inventário de ativos MGS; seguir `meta-library-reference-intake` e seu backend autorizado.
 3. Para Ad Library via API, testar `ads_archive` com `search_terms`, `ad_type`, `ad_reached_countries`, `fields` e `limit` baixo.
 4. Se `/ads_archive` retornar `OAuthException code 10 / subcode 2332002` com mensagem `Application does not have permission for this action`, o token pode estar válido para Ads/Ares, mas o app não está liberado para Ad Library. Não trate como token expirado.
 5. Se o erro for `OAuthException code 190 / subcode 463`, o token expirou; pedir renovação ou usar outro item/token autorizado.

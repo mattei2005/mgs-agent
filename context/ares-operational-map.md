@@ -42,7 +42,7 @@ Intake Drive read-only                  /root/mgs-agent/scripts/ares-drive-uploa
 Dados Meta Ads                          /root/mgs-agent/data/ares/meta-ads/
 Scripts Ares                            /root/mgs-agent/scripts/ares-*
 Logs Ares                               /root/.hermes/profiles/ares/logs/
-Audit MGS                               /root/mgs-agent/logs/events-audit.jsonl
+Audit operacional Ares                  /root/mgs-agent/data/ares/meta-ads/audit/
 ```
 
 ### Canais Discord canônicos

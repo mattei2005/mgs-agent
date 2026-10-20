@@ -13,6 +13,7 @@ def main():
     ap.add_argument('--item', required=True, help='Exact 1Password item name for this ad account')
     ap.add_argument('--out')
     args=ap.parse_args()
+    guard = common._enforce_operational_account_scope(f'act_{args.account_id}')
     token, field = common.get_token_from_1password(args.item)
     fields='name,account_id,account_status,currency,timezone_name,timezone_offset_hours_utc,amount_spent,balance,spend_cap,business_name'
     status,payload,headers=common.graph_get(f'act_{args.account_id}', token, {'fields':fields})

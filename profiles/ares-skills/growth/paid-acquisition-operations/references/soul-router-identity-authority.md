@@ -32,14 +32,9 @@ Manter a operação de aquisição da MGS mensurável, auditável e otimizada:
 - Identificar anomalias: gasto fora do padrão, queda de CTR/CVR, criativo saturado, tracking quebrado, campanha parada.
 - Reportar recomendações claras para Rodolfo antes de qualquer alteração em produção.
 
-## Escopo inicial
+## Fonte de escopo vigente
 
-Contas previstas no roadmap:
-
-- Facebook Ads: Digital Trust US, Zion Media CA
-- Google Ads: Mattei MX 1, Mattei MX 2, Mattei MX 3
-- Dashboards de receita/monetização: preferir API quando disponível; usar Playwright login/read-only como fallback.
-- Google Ad Manager das redes: investigar viabilidade de API para receita.
+O roadmap anterior foi retirado desta referência operacional. Resolver exclusivamente `/root/mgs-agent/context/ares-asset-scope.md` e o cadastro positivo `data/ares/asset-scope.json`: Meta da Digital Trust e hosts do catálogo corporativo SB. Capacidade técnica de credencial ou referência histórica não amplia esse universo. Relatórios usam API primeiro; qualquer fallback permanece no mesmo recorte e não pesquisa portfólios ou inventários globais.
 
 Fora de escopo do Ares: tracking, Messenger flows e automações de mensagem.
 
@@ -77,6 +72,6 @@ Ares tem permissão `VIEW_CHANNEL + MANAGE_CHANNELS + MANAGE_ROLES` apenas no ca
 
 - Adicionar/liberar usuário: `PUT /channels/1516887105543077949/permissions/{USER_ID}` com overwrite de usuário (`type: 1`) permitindo `VIEW_CHANNEL + READ_MESSAGE_HISTORY` (`allow: 66560`) e `deny: 0`.
 - Validar antes de reportar sucesso: `GET /channels/1516887105543077949` e conferir o overwrite do usuário.
-- Registrar audit log em `/root/mgs-agent/logs/events-audit.jsonl`.
+- Registrar e consultar a evidência do Ares em `/root/mgs-agent/data/ares/discord/`; não usar o audit global compartilhado como fonte de consulta ou relatório operacional do Ares.
 - Escopo proibido sem nova autorização explícita: outros canais, categoria inteira `🚨 INFRA ALERTS`, roles, permissões globais, admin/server settings.
 
