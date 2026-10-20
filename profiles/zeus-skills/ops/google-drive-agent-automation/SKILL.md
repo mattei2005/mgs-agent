@@ -53,7 +53,17 @@ A Service Account may edit an existing My Drive Sheet that was explicitly shared
 
 For storage-capacity or migration questions, classify the actual Drive with read-only metadata first, then distinguish access to existing files from creation of new files and storage ownership. Do not infer the Workspace edition from a displayed user/folder limit, or treat sharing a folder as transferring its storage charge. Compare expanding the existing Workspace storage before proposing a migration or authentication redesign; retrieve current official pricing and label account-specific eligibility as unverified until checked. Use `references/service-account-my-drive-quota.md` for the diagnosis sequence, capacity comparison and concise explanation.
 
-For an explicitly approved isolated owner-account queue (not an agent identity fallback), use `references/apps-script-owner-queue-bridge.md`: immutable SA-published requests, owner receipts, pinned worker bootstrap, independent binary verification, staged activation and no source deletion during validation.
+## Cross-account cloud connector gates
+
+For an explicitly approved owner-account connector, preserve the canonical SA for agents and keep the separate owner execution bounded to the approved account and roots. Keep steady-state processing in the cloud; do not introduce an operator computer or per-file approvals into an authorized unattended workflow.
+
+1. Inspect the actual project manifest before the first owner run. Declare the scopes needed by dynamically loaded code explicitly and check them before executing the worker; automatic scope inference cannot see remote code.
+2. Bind both publishers with Google-native `permissionId` values derived from trusted API identity/ownership metadata. Require exact pinned IDs, preserve leading zeros, and reject contradictory visible emails. An omitted cross-account email is not proof of an unauthorized publisher, but email/display name alone is not sufficient proof either.
+3. Run one frozen canary, independently verify its receipt and source/copy bytes through the SA, and publish/read back its ACK before installing a timer. Preserve primary IDs and keep deletion disabled.
+4. Verify recurrence with two fresh scheduled heartbeats from the same trigger, expected code hash and native publisher. Record configured cadence separately from observed elapsed time; tolerate dispatch jitter rather than demand exact timestamp equality.
+5. Report the acceptance layer actually proven. A running timer does not prove recurring SA reconciliation, agent intake, consumer read cutover or cleanup. Empty work after a verified canary is normal; `status:ok` with nonempty `blocked` is not operation success.
+
+Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment commands, owner handoff, consent recovery, provenance checks and staged acceptance.
 
 ## Required preflight
 
