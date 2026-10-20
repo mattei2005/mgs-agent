@@ -82,6 +82,8 @@ def drive_inventory(token: str) -> dict[str, Any]:
     ready = one_folder(drive_children(token, video["id"]), "01_READY")
     testing = one_folder(drive_children(token, video["id"]), "02_TESTING")
     files = [row for row in drive_children(token, ready["id"]) if row.get("mimeType") != FOLDER_MIME]
+    import ares_archive_storage as storage
+    files=storage.project_stock(files,token)
     return {"root": root, "operation": operation, "ready": ready, "testing": testing, "files": files}
 
 

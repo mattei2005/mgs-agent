@@ -21,7 +21,8 @@ def media_record(entry,physical,stock):
     if len(physical.get('parents',[]))!=1 or (entry.get('archiveParentId') and physical['parents']!=[entry['archiveParentId']]):raise StorageError('ARCHIVE_PARENT_CHANGED')
     if any(p.get('type') in ['domain','anyone'] for p in physical.get('permissions',[])):raise StorageError('ARCHIVE_PUBLIC')
     if stock.get('id')!=entry.get('stockShortcutId') or stock.get('mimeType')!=SHORTCUT or stock.get('driveId')!=b.SOURCE_DRIVE or stock.get('trashed') is not False or len(stock.get('parents',[]))!=1 or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or stock.get('name')!=physical['name']:raise StorageError('STOCK_SHORTCUT_CHANGED')
-    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':physical['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock['driveId'],'parents':list(stock['parents']),'trashed':False,'capabilities':stock.get('capabilities',{}),'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry.get('jobId'),'lineage_id':entry['lineageId']}
+    capabilities={**stock.get('capabilities',{}),'canDownload':physical.get('capabilities',{}).get('canDownload',False)}
+    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':physical['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock['driveId'],'parents':list(stock['parents']),'trashed':False,'capabilities':capabilities,'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry.get('jobId'),'lineage_id':entry['lineageId']}
 
 def require_registered_mapping(entry,index):
     job=index.get('verified_jobs',{}).get(entry.get('jobId'))
@@ -63,7 +64,7 @@ def drive(token=None,write=False):
     d=b.Drive.__new__(b.Drive);d.token=token;d.api_json=api_json;d.base='https://www.googleapis.com/drive/v3/';return d
 
 def meta(d,fid):
-    return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,size,md5Checksum,sha256Checksum,parents,driveId,trashed,owners(emailAddress),permissions(type,emailAddress,role),shortcutDetails(targetId),properties,lastModifyingUser(permissionId,emailAddress),capabilities(canEdit,canDownload,canMoveItemWithinDrive)'})
+    return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,size,md5Checksum,sha256Checksum,version,createdTime,parents,driveId,trashed,owners(emailAddress),permissions(type,emailAddress,role),shortcutDetails(targetId),properties,lastModifyingUser(permissionId,emailAddress),capabilities(canEdit,canDownload,canMoveItemWithinDrive)'})
 
 def mapping(source_id,index=None):
     index=index or b.read_json(b.DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}});entry=index['mappings'].get(source_id)

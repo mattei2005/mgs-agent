@@ -899,7 +899,9 @@ def move_asset_to_testing(
     if before.get('record_kind')=='mgs.logical.media.v1':
         import ares_archive_storage as storage
         if before['parents']==[testing_id]:return before
-        return storage.move_stock(before,testing_id,ready_id,token)
+        moved=storage.move_stock(before,testing_id,ready_id,token)
+        assert moved is not None
+        return moved
     parents = set(str(value) for value in before.get("parents") or [])
     if testing_id not in parents:
         if ready_id not in parents:

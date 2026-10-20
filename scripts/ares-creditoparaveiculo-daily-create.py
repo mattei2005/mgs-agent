@@ -565,6 +565,8 @@ def drive_inventory(token: str) -> dict[str, Any]:
             row["kind"] = kind
             row["ready_parent_id"] = ready["id"]
             row["testing_parent_id"] = testing["id"]
+        import ares_archive_storage as storage
+        files=storage.project_stock(files,token)
         all_ready.extend(files)
         types[kind] = {"ready": ready, "testing": testing, "files": files}
     return {"root": root_meta, "types": types, "files": all_ready, "counts": {"IMG": len(types["IMG"]["files"]), "VID": len(types["VID"]["files"]), "TOTAL": len(all_ready)}}
@@ -601,6 +603,12 @@ def download_drive_file(token: str, file_row: dict[str, Any], destination: Path)
 
 
 def drive_move_to_testing(token: str, file_row: dict[str, Any]) -> dict[str, Any]:
+    if file_row.get('record_kind')=='mgs.logical.media.v1':
+        import ares_archive_storage as storage
+        if file_row['parents']==[file_row['testing_parent_id']]:return file_row
+        moved=storage.move_stock(file_row,file_row['testing_parent_id'],file_row['ready_parent_id'],token)
+        assert moved is not None
+        return moved
     params = urllib.parse.urlencode({
         "addParents": file_row["testing_parent_id"],
         "removeParents": file_row["ready_parent_id"],

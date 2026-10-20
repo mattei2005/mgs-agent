@@ -24,9 +24,31 @@ def verify_reservation(row,baseline,batch):
 
 def describe(row,slot):
     if not layout.OPERATION.fullmatch(slot.get('operation','')) or layout.MANAGERS.get(slot.get('manager_code'))!=slot.get('manager_name'):raise IntakeError('UNREGISTERED_CONTEXT')
+    if not str(row.get('mimeType','')).startswith(('image/','video/')):raise IntakeError('UNSUPPORTED_CREATIVE_MIME')
     if row.get('parents')!=[slot['folder_id']] or row.get('trashed'):raise IntakeError('SOURCE_PARENT')
     if not re.fullmatch(r'[A-Za-z0-9_-]{8,}',row.get('id','')) or not re.fullmatch(r'[a-f0-9]{32}',row.get('md5Checksum','')) or not re.fullmatch(r'[1-9][0-9]*',str(row.get('size',''))):raise IntakeError('UPLOAD_INCOMPLETE')
-    return {'source_id':row['id'],'name':row['name'],'mime_type':row['mimeType'],'size':str(row['size']),'md5':row['md5Checksum'],'version':str(row['version']),'created_at':row['createdTime'],'source_parent_id':slot['folder_id'],'slot_id':slot.get('registered_slot_id',slot['folder_id']),'operation':slot['operation'],'manager_code':slot['manager_code'],'manager_name':slot['manager_name']}
+    return {'source_id':row['id'],'name':row['name'],'mime_type':row['mimeType'],'size':str(row['size']),'md5':row['md5Checksum'],'sha256':row.get('sha256Checksum'),'version':str(row['version']),'created_at':row['createdTime'],'source_parent_id':slot['folder_id'],'slot_id':slot.get('registered_slot_id',slot['folder_id']),'operation':slot['operation'],'manager_code':slot['manager_code'],'manager_name':slot['manager_name']}
+
+def validate_new_batch(d,batch,manifest):
+    """Fresh ID ancestry/content checks before the first durable writer claim."""
+    for source in batch['sources']:
+        slots=[s for s in manifest['slots'] if s['folder_id']==source['slot_id']]
+        if len(slots)!=1:raise IntakeError('UNREGISTERED_SLOT_ID')
+        slot=slots[0];layout.validate_slot(d,manifest,slot)
+        if any(slot[k]!=batch[k] or source[k]!=batch[k] for k in ['operation','manager_code','manager_name']):raise IntakeError('BATCH_CONTEXT_CHANGED')
+        raw=d.meta(source['source_id'])
+        if raw.get('parents')!=[source['source_parent_id']] or raw.get('driveId')!=bridge.SOURCE_DRIVE or raw.get('trashed'):raise IntakeError('SOURCE_MOVED_BEFORE_CLAIM')
+        if any(str(raw.get(k))!=str(source[v]) for k,v in [('name','name'),('mimeType','mime_type'),('size','size'),('md5Checksum','md5'),('createdTime','created_at')]):raise IntakeError('SOURCE_CONTENT_CHANGED_BEFORE_CLAIM')
+        if str(raw.get('version'))!=source['version']:
+            if not source.get('sha256') or raw.get('sha256Checksum')!=source['sha256'] or not re.fullmatch(r'[0-9]+',str(raw.get('version',''))) or not re.fullmatch(r'[0-9]+',source['version']) or int(raw['version'])<int(source['version']):raise IntakeError('SOURCE_VERSION_CHANGED_WITHOUT_CONTENT_PROOF')
+        parent=source['source_parent_id']
+        for _ in range(12):
+            if parent==source['slot_id']:break
+            folder=d.meta(parent)
+            if folder.get('driveId')!=bridge.SOURCE_DRIVE or folder.get('trashed') or folder.get('mimeType')!=bridge.FOLDER or len(folder.get('parents',[]))!=1:raise IntakeError('SOURCE_CONTAINER_SCOPE')
+            parent=folder['parents'][0]
+        else:raise IntakeError('SOURCE_NO_LONGER_IN_REGISTERED_SLOT')
+    return True
 
 def observe(state,descriptors,now):
     fingerprint=hashlib.sha256(bridge.canonical(sorted(descriptors,key=lambda d:d['source_id']))).hexdigest();old=state.get('observation',{})
@@ -63,7 +85,8 @@ def complete(state,bid,owner,proofs):
     entry.update(status='complete',proofs=proofs,completed_at=bridge.now_iso());state.setdefault('completed',{}).update({pid:bid for pid in expected});return entry
 
 def batch_archive_ready(entry,index):
-    return all(index.get('mappings',{}).get(sid,{}).get('verified') is True and bool(index['mappings'][sid].get('stockShortcutId')) for sid in entry.get('archive_source_ids',[]))
+    ids=entry.get('archive_source_ids')
+    return isinstance(ids,list) and all(index.get('mappings',{}).get(sid,{}).get('verified') is True and bool(index['mappings'][sid].get('stockShortcutId')) for sid in ids)
 
 def finish_with_archive(state,batch,owner):
     entry=state['claims'][batch['batch_id']]
@@ -94,7 +117,7 @@ def children_many(d,parents):
     for start in range(0,len(parents),30):
         group=parents[start:start+30];query='trashed=false and ('+' or '.join("'"+p+"' in parents" for p in group)+')';page=None
         while True:
-            params={'q':query,'corpora':'drive','driveId':bridge.SOURCE_DRIVE,'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':1000,'fields':'nextPageToken,files(id,name,mimeType,parents,size,md5Checksum,version,createdTime,trashed)'}
+            params={'q':query,'corpora':'drive','driveId':bridge.SOURCE_DRIVE,'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':1000,'fields':'nextPageToken,files(id,name,mimeType,parents,size,md5Checksum,sha256Checksum,version,createdTime,trashed)'}
             if page:params['pageToken']=page
             value=d.api('GET','files',params);rows+=value.get('files',[]);page=value.get('nextPageToken')
             if len(rows)>10000:raise IntakeError('BOUNDED_INTAKE_SCOPE')
@@ -200,6 +223,7 @@ def main():
             batch=bridge.read_json(DATA/'intake-batches'/('batch-'+args.batch_id+'.json'));assert batch and batch['batch_id']==args.batch_id
             with locked_state() as state:
                 if args.action=='claim':
+                    if args.batch_id not in state['claims']:validate_new_batch(bridge.Drive(),batch,bridge.read_json(DATA/'upload-context-layout.json'))
                     result=claim(state,batch,args.owner)
                     if 'inventory_before' not in result:
                         baseline={}

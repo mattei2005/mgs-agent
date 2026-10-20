@@ -769,6 +769,8 @@ def select_assets(
                 "retest_candidates": len([row for row in candidates if row.get("status") == "03_TESTED"]),
             },
         )
+    import ares_archive_storage as storage
+    for row in selected:storage.require_lineage_available(row)
     return selected
 
 

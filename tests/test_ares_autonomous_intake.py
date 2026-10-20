@@ -60,4 +60,6 @@ class IntakeTests(unittest.TestCase):
  def test_archive_completion_waits_for_every_verified_alias(self):
   entry={'archive_source_ids':['rawOffline001','cleanOffline001']};index={'mappings':{'rawOffline001':{'verified':True,'stockShortcutId':'a'}}}
   self.assertFalse(self.a.batch_archive_ready(entry,index));index['mappings']['cleanOffline001']={'verified':True,'stockShortcutId':'b'};self.assertTrue(self.a.batch_archive_ready(entry,index))
+ def test_unsupported_file_cannot_be_described_as_creative(self):
+  with self.assertRaises(self.a.IntakeError):self.a.describe({**self.row,'mimeType':'text/html'}, self.slot)
 if __name__=='__main__':unittest.main()
