@@ -8,12 +8,56 @@ Escolher o ramo antes da coleta:
 
 Todos os ramos compartilham o procedimento de período, autenticação e escopo da seção 1.
 
-## Listas pela coluna Estimate Health — Meta primeiro, dash SB depois
+## Listas pela coluna Estimate Health — Meta primeiro, SB em lote
 
-- Para listar campanhas ativas abaixo de um percentual de Estimate Health, começar pelo catálogo positivo de contas da operação e conferir cada conta na Meta, com o gate account-scoped antes da leitura e paginação completa. A seleção nasce das campanhas ativas nas contas de anúncio, nunca das linhas ou dos candidatos encontrados primeiro na SB. Reconciliar contas previstas versus consultadas e IDs ativos únicos; conta sem linha financeira não equivale a conta auditada nem campanha sem resultado.
-- Depois, abrir a dashboard SB no período exato solicitado e copiar o percentual renderizado na coluna Estimate Health para os mesmos IDs de conta/campanha. Relacionar por IDs reais e conferir a granularidade por campanha; não substituir essa evidência por cálculo local dos contadores, média diária ou seleção derivada da API. A fórmula da API pode apoiar diagnóstico, mas não prova leitura da coluna.
-- Manter campanhas ativas sem correspondência ou sem percentual como pendentes/n/d, separadas das campanhas comprovadamente abaixo do corte. Não certificar cobertura integral nem reutilizar uma lista anterior como definitiva enquanto faltar a leitura da dash. Se o navegador impedir a coleta, preservar a seleção Meta e solicitar somente o acesso/interação realmente necessário, sem inventar percentuais.
-- Teste de aceite: igualdade entre o catálogo autorizado e contas consultadas; status e unicidade da seleção Meta; cobertura da coluna renderizada para cada ID, com ausências explícitas; datas e threshold preservados. Um teste somente da fórmula não satisfaz este aceite.
+### 1. Congelar o universo de campanhas ativas
+
+Resolver pelo catálogo positivo as contas de cada operação solicitada, sem fixar na skill quantidades de contas ou campanhas. Aplicar o gate account-scoped antes da consulta e comparar os conjuntos `contas_previstas` e `contas_consultadas`. Uma conta sem linhas SB não está automaticamente sem campanhas ativas.
+
+Usar `ares-meta-common.py` com a versão Graph vigente, a credencial do binding e `graph_batch_get` para agrupar as leituras independentes de identidade da conta e do edge `act_<account_id>/campaigns`. Pedir `id,name,account_id,status,configured_status,effective_status` e filtrar `status IN [ACTIVE]`. Desempacotar `status, responses, headers`, validar o HTTP externo e cada `response.code`, consumir `response.body` já normalizado e seguir todos os cursores pendentes. Para somente efetivamente ativas, confirmar também `effective_status=ACTIVE`; conservar divergências de status separadamente. Persistir os resultados concluídos antes das asserções locais e recuperar apenas as partes ausentes.
+
+A seleção nasce dos IDs ativos encontrados nas contas, nunca das candidatas abaixo do corte na SB. Conferir unicidade de `account_id + campaign_id` e a identidade retornada antes da junção financeira.
+
+### 2. Consultar o recorte SB sem navegação por campanha
+
+Resolver os publishers reais somente das operações solicitadas pelo catálogo corporativo autorizado e validar os hosts. Usar o helper `ares-smartbidding-common.py`:
+
+```python
+status, rows, metadata = sb.api_request(
+    'POST', '/report/performance_per_campaigns',
+    payload={
+        'initialDate': initial_date_with_offset,
+        'finalDate': final_date_with_offset,
+        'publishers': authorized_publisher_ids,
+        'currency': report_currency,
+    },
+)
+```
+
+O endpoint recebe uma lista de publishers; usar uma consulta para o recorte quando couber ou lotes bounded conforme tamanho/timeout. Não transformar isso em uma consulta por campanha ou uma varredura de todos os sites. Este POST lê relatório, não altera campanhas. Validar HTTP 200/201, tipo da resposta, cobertura e datas retornadas. Antes de salvar, restringir conjuntamente `PUBLISHER`, alias `DOMAIN` comprovado, `CUSTOMER_ID` autorizado e `DATE`; verificar duplicidade da chave granular quando disponível.
+
+Fazer left join a partir dos IDs Meta. Distinguir ausência de linha, campo ausente/inválido e zero numérico retornado; nunca converter resposta vazia em uma linha financeira zero. Agregar todos os adgroups e dias da mesma campanha antes de calcular o percentual, sem média de percentuais diários.
+
+### 3. Reproduzir a coluna vigente com proveniência correta
+
+Descobrir os bundles pelo HTML atual da dash, seguir os imports do relatório Adgroup e localizar a definição `ESTIMATED_HEALTH`, seus argumentos e o agrupamento usado pela tabela. Não fixar hashes de bundles. A implementação observada recebe `CDP_IMPRESSIONS` como numerador e `GAM_CODE_SERVED_COUNT` como denominador:
+
+```text
+ratio = 100 × soma(CDP_IMPRESSIONS) / soma(GAM_CODE_SERVED_COUNT)
+Health = max(0, ratio > 100 ? 200 − ratio : ratio)
+```
+
+Conferir a implementação viva antes de reutilizar a fórmula. Com denominador positivo, comparar com o corte solicitado antes do arredondamento. A coluna do frontend retorna zero quando o denominador é zero; se for necessário reproduzir esse zero, rotular `0% — sem base`, sem confundi-lo com zero calculado sobre denominador positivo. Campanha sem linha SB continua sem correspondência, não recebe o zero de uma função que nem chegou a ser aplicada a ela. Componentes ausentes/inválidos ficam indisponíveis e exigem ressalva, não coerção silenciosa.
+
+Rotular a origem como **API SB com fórmula da coluna da dash**; isso não prova que a célula foi lida visualmente. Se o operador exigir conferência visual, copiar o valor renderizado no mesmo período e granularidade para os IDs exatos; usar browser/PC1 como verificação ou fallback, sem reconstruir sessão ou permissões do frontend para aparentar acesso. Preservar a coleta Meta e SB já válida e não repeti-la apenas por falha de navegação.
+
+### 4. Validar e entregar
+
+- Exigir igualdade entre contas previstas e consultadas, paginação integral, IDs ativos únicos e nenhuma conta/campanha fora do escopo.
+- Reconciliar todas as campanhas ativas em partições disjuntas: percentual válido abaixo do corte, percentual válido fora do corte, linha sem base e campanha sem correspondência. Essas quantidades devem somar a seleção Meta.
+- Testar razão numerador/denominador de 0, 0,9, 1, 1,1, 2 e acima de 2, além de denominador zero, linha ausente, corte exato e valores imediatamente adjacentes. Reproduzir a fórmula não substitui testes de cobertura.
+- Informar período civil, horário do status Meta, fonte/metodologia do percentual e lacunas relevantes. Em complemento apenas visual, conservar seleção e snapshot; em atualização, recuperar novas fontes e comparar os IDs.
+- Responder perguntas sobre velocidade com a conclusão primeiro: o relatório pode ser consultado em lote; leituras individuais são exceções para lacunas específicas. Não prometer duração nem afirmar paridade visual sem evidência.
 
 ## 1. Fixar período, escopo e fonte do total
 

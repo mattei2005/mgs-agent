@@ -24,6 +24,16 @@ Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar 
 - Quando o operador pedir alteração somente de uma parte, preserve o restante do texto, sua ordem e compactação; devolva o modelo em cerca `text` sem expandi-lo em um formulário novo.
 - Se vários modelos precisarem ser copiados separadamente no Discord, entregue exatamente um por resposta e avance apenas quando o operador disser `próximo`; durante a coleta, confirme `1/N`, `2/N` etc. e faça a revisão cruzada somente depois do último bloco.
 
+## Relatórios de campanhas ativas e Estimate Health
+
+- Resolver todas as contas do recorte pelo catálogo positivo, aplicar os gates e enumerar suas campanhas na Meta com paginação completa. Reconciliar contas previstas versus consultadas antes de filtrar por Health; consultar somente contas que apareceram na SB não demonstra cobertura de todas as contas.
+- Preferir coleta em lote: Graph Batch para as leituras independentes de contas/campanhas e API de relatórios SB com a lista dos publishers autorizados do recorte. Não abrir campanha por campanha nem percorrer o inventário global de sites para um relatório restrito a operações conhecidas. Recuperar individualmente somente páginas ou fontes ausentes/inválidas.
+- Meta define identidade e status atual; SB fornece os dados da janela. Quando o percentual é calculado no frontend, reproduzir a regra vigente da coluna sobre as somas de cada campanha, após conferir a implementação atual. Informar `API SB com fórmula da coluna` em vez de alegar leitura visual. Usar a dash quando houver pedido inequívoco de conferência visual, dúvida de paridade ou lacuna que a API não resolva; uma pergunta sobre a coluna não exige navegação manual por si só.
+- Preservar a distinção entre campanha sem linha SB, linha com denominador zero e percentual válido. Não excluir silenciosamente ativos sem base nem apresentá-los como Health comprovadamente baixo. Não chamar o relatório de completo enquanto houver conta não consultada ou correspondência pendente sem ressalva explícita.
+- Quando o operador questionar a demora ou sugerir a API, responder primeiro se há consulta em lote e qual etapa realmente exige leitura individual; não continuar uma conferência visual desnecessária. Receita, datas, IDs, cobertura e percentuais permanecem sujeitos aos mesmos testes, independentemente do canal de coleta.
+
+Receita e aceite: `references/smartbidding-roi-band-reconciliation.md`, seção `Listas pela coluna Estimate Health`.
+
 ## Relatórios de ROI — contrato de análise e apresentação
 
 - Antes de decompor lucro por faixas, identificar a fonte do total e a unidade econômica: o consolidado `Domain` da Smart Bidding inclui receitas que podem não aparecer na aquisição por campanha. Em escopo misto, separar tráfego direto de BOT antes de interpretar rentabilidade; carregar `references/smartbidding-roi-band-reconciliation.md`.
@@ -96,7 +106,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
-- **Smart Bidding: listar por Estimate Health, decompor aumento de gasto por site/gestor ou reconciliar lucro por faixas de ROI** → `references/smartbidding-roi-band-reconciliation.md`; para Health, seguir Meta primeiro e coluna renderizada da dash depois.
+- **Smart Bidding: listar por Estimate Health, decompor aumento de gasto por site/gestor ou reconciliar lucro por faixas de ROI** → `references/smartbidding-roi-band-reconciliation.md`; para Health, selecionar ativas na Meta e consultar SB em lote, com paridade da fórmula vigente da coluna; leitura visual somente quando necessária ou expressamente solicitada.
 
 - **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
 - **Interpretar pedidos naturais de criação por canal/operação** → `references/natural-campaign-request-contracts.md`

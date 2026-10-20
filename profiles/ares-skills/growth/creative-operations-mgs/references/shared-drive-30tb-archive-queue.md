@@ -4,7 +4,7 @@
 
 Rodolfo confirmou explicitamente a alteração das skills Creative Operations e Taxonomia e a integração da fila na mensagem `1562104715271999589`, thread `1562078493498540042`. A integração geral foi aprovada em `1562087305051902063`. Esta confirmação não ativa exclusão da origem, não altera campanhas/budgets e não autoriza migrar ou limpar o acervo anterior.
 
-Estado nesta implantação: código/fila publicados e testados localmente; o worker proprietário da conta Google ainda aguarda execução de validação pelo owner. Fonte viva: `/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json`. Com `queue_enabled=false`, preservar integralmente o fluxo atual. Não declarar fila automática ativa com base apenas nesta skill, arquivos publicados ou testes offline.
+Esta skill define o contrato, não um snapshot do rollout. Consultar estado/checkpoint e evidências na fonte canônica ao final, e a configuração viva `/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json`. Com `queue_enabled=false`, preservar integralmente o fluxo atual. Distinguir teste local, cópia real, ACK, relógio Google, reconciliação SA, intake e consumidores; nenhuma dessas camadas isolada prova automação completa. Versão staged do worker não é versão ativa até execução/heartbeat do owner confirmado.
 
 ## Identidades e destinos
 
@@ -18,7 +18,7 @@ Estado nesta implantação: código/fila publicados e testados localmente; o wor
 
 1. Terminar o contrato vigente de tratamento: estabilidade, classificação visual, naming congelado, limpeza, readback/SHA, READY (ou gestor explicitamente autorizado), original em LEGACY e inventário. Não usar o CLI CSV histórico como substituto desse contrato.
 2. Consultar `queue-config.json`. Enquanto a fila estiver desabilitada, não forçar enqueue, mudar auth ou redefinir o destino físico do intake. O recurso ainda está em validação de implantação, não é um erro do criativo.
-3. Quando a fila estiver habilitada e o lote for novo dentro de `effective_after`, executar internamente, sem pedir aprovação por arquivo:
+3. Quando a fila estiver habilitada e o lote for novo dentro de `effective_after`, o produtor/reconciliador recorrente `ares_archive_automation.py` observa o inventário após todos os gates de tratamento e enfileira internamente, sem aprovação por arquivo e sem alterar reserva/elegibilidade. Não iniciar um produtor paralelo por thread. O CLI abaixo é uma rota de recuperação manual somente após conferir liveness/checkpoint e serializar pelo mesmo lock:
 
 ```
 python3 /root/mgs-agent/scripts/ares_archive_bridge.py enqueue-lineage --asset-id <asset_id_exato> --apply
@@ -26,7 +26,7 @@ python3 /root/mgs-agent/scripts/ares_archive_bridge.py enqueue-lineage --asset-i
 
 4. O produtor exige uma única linhagem, `metadata_clean=true`, primeiro recebimento e criação dos dois arquivos posteriores ao corte, RAW em LEGACY, clean no READY ou pasta de gestor exata, e SHA correspondente aos dois checksums canônicos. Não enfileirar registros históricos por varredura, inventar timestamps ou criar uma nova linhagem para um reupload exato. Linhagens históricas/duplicatas ligadas a elas ficam preservadas no fluxo existente, sem alteração ou limpeza retroativa.
 5. O comando sem `--apply` é dry-run: apenas leituras/download em streaming e plano. Não cria pastas remotas ou arquivos de mídia. O job é estável por IDs/hashes/path; reexecução reaproveita o manifesto e não cria um novo pedido independente.
-6. O worker copia apenas jobs publicados pela SA canônica, verificados por `lastModifyingUser` do Google + hash do corpo, com origem/pasta de arquivo fixas. Não transforma texto de um manifesto em autorização irrestrita. Usa lock, marcadores por fonte/checksum, bloqueio de replay ambíguo, limites por execução e orçamento de runtime. Não possui função de exclusão da origem.
+6. O worker copia apenas jobs publicados pela SA canônica, verificados pelo `permissionId` nativo fixado de `lastModifyingUser` + hash do corpo, com origem/pasta de arquivo fixas. E-mail omitido entre contas é possível; e-mail/nome/propriedade editável sozinho nunca comprova autor. Não transforma texto de um manifesto em autorização irrestrita. Usa lock, marcadores por fonte/checksum, bloqueio de replay ambíguo, limites por execução e orçamento de runtime. Não possui função de exclusão da origem. `File.version` é contador de alterações do servidor, não hash de conteúdo: preservar a versão congelada para auditoria e seguir o gate forte de SHA nativo + streams da implementação vigente; jamais ignorar divergência de bytes/path ou reescrever o pedido para passar.
 
 ## Conferência e leitura
 
