@@ -1612,6 +1612,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-PRODUCT-REPAIR-1562059174383460353",
+      "next_step": "39 produtos corrigidos; 7 partes editadas nos mesmos IDs e 14 partes verificadas. 76 campanhas e histórico preservados; 157 testes OK; sem envio de novo relatório ou writes Meta.",
+      "objective": "Corrigir produtos e editar o relatório existente sem alterar finanças ou campanhas",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/product-repair-1562059174383460353/remote-readback.json",
+      "state": "completed_get_verified",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-10-20T11:11:54+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-PRODUCT20-PREVIEW-1558147211026501643",
       "next_step": "Teste publicado e lido de volta em15 mensagens Ares,73 campanhas+histórico; Produto≤20 sem reticências; largura143→138. Mesmo snapshot17:40 e demais células/histórico idênticos. Aguardar conferência visual de Rodolfo antes de promover para padrão global.",
       "objective": "Enviar teste Produto20 sem reticências na Yolokfx Conta04 preservando as demais colunas e snapshot",
@@ -4392,6 +4402,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-daily-0800-20261020",
+      "next_step": "Concluir validacao de rotas/coletor e auditoria global;agendar sem colisao preservando publicacao08h",
+      "objective": "Programar relatorio diario D-1 as08h America/New_York nas threads SHEIN existentes exceto Boostingecon/Growpowerhub; inicio20/10 autorizado por Rodolfo",
+      "source": "discord:1561752465978818722",
+      "state": "preflight:nenhum cron novo ou envio aplicado;resolver24destinos e fontes d-1",
+      "thread_id": "1561752465978818722",
+      "updated_at": "2026-10-20T11:11:30+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-g002-g006-approved-20261019T221027",
       "next_step": "Sem pendencias. Proximos pedidos usam contrato/renderer vigente; preservar historico e nao reenviar lote concluido. IDs/partes e evidencias em completion.json e delivery.json por conta.",
       "objective": "Gerar e entregar30relatorios SHEIN G002-G006 no padrao G001 aprovado por Rodolfo",
@@ -6692,5 +6712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T09:16:14+00:00"
+  "updated_at": "2026-10-20T11:11:54+00:00"
 }
