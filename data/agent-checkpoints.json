@@ -582,6 +582,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C51-C52-SPEND-CHECK-1H",
+      "next_step": "One-shot consulta e entrega resumo em PT-BR aproximadamente 12h45 SP de 20/10; se API nao confirmar, informar indisponibilidade sem inventar gasto zero.",
+      "objective": "Avisar Rodolfo em uma hora se C51/C52 registraram gasto, read-only",
+      "source": "data/ares/meta-ads/audit/read-only/Creditoparaveiculo-BR-CAR-BR/cpv13-c51-c52-spend-check-1h-20261020/request.json",
+      "state": "scheduled_verified: job 71c252ee8f39 enabled/scheduled/no_agent/origin nesta thread; live dry-run pass e auditoria de agenda sem conflito operacional. script busca meta insights usd e imprime gasto/impressao/status separado por c51/c52; zero writes meta.",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-20T14:45:48+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-D1-20261018-19-CORRECTION",
       "next_step": "One-shots aguardam horario exato, pre-read de drift e campanha ACTIVE unico com GET final; commits D1 separados, sem budget write nem retomada de crons pausados.",
       "objective": "Corrigir lotes D1 CPV13: C40 C41 18/10 e C42 C43 19/10 00h SP",
@@ -643,12 +653,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Confirmacao critica de Rodolfo 1562104715271999589 permite atualizar Creative Operations/Taxonomia e fila. Implementar request imutavel via SA, worker Google owner, recibos e reconciliacao; testar antes de publicar regras ativas. Exclusao/campanhas/budgets/acervo anterior preservados.",
-      "objective": "Implantar ponte Google isolada para arquivo criativo 30 TB sem PC pessoal; integrar fila/skills Ares sem exclusao durante validacao",
+      "next_step": "Owner substituir Code.gs por integrations/creative-archive-30tb/Bootstrap.gs e executar somente mgsArquivoTeste no projeto aprovado. Job canario 526d7a2a007c1fed4b2a9147f92d62b4 ja esta em REQUESTS. Aguardar recibo Google real e SA reconcile --apply/ACK antes de mgsArquivoAtivar. Worker atual 1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS; SHA e config completos na fonte. Depois provar clock/recorrencia, integrar watcher/consumidores e confirmar limpeza delimitada. Nao ativar exclusao ou acervo anterior.",
+      "objective": "Integrar fila de arquivo 30 TB e skills Ares preservando acervo/campanhas; exclusao desativada durante validacao",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "ares_skill_critical_change_confirmed_building_copy_only_queue",
+      "state": "ares_skills_updated_copy_queue_staged_owner_worker_test_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T14:11:33+00:00"
+      "updated_at": "2026-10-20T14:47:07+00:00"
     },
     {
       "agent": "ares",
@@ -1059,6 +1069,16 @@
       "state": "waiting_rodolfo_acceptance: landings46/46 eavisosgestorget concluidos. limpezahistorica:254ares+77zeus mensagens removidas;138eventos type1 bloqueados porapi50021. parentares verificou36threads e6canais preservados,77ids ausentes e138type1atuais. novo pedidorodolfo foraescopo mantido. zeus solicitou aceite; nao concluirautomaticamente, nao chamar threadsvazias.",
       "thread_id": "1559932317861158993",
       "updated_at": "2026-10-15T21:14:06+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-G004-REPORT-20261020T104442",
+      "next_step": "Fontes novas20/10 10:45EDT,58campanhas,11partes exatas;53ativas/5pausadas,RPS DOM15páginas;entrega do report integral pela resposta nativa,sem duplicar por API;sem writes Meta.",
+      "objective": "Relatório on-demand atual Meta × Smart Bidding conta04 G004",
+      "source": "/root/mgs-agent/data/ares/reporting/on-demand-yolo-g004-20261020T104442/781612907182683/receipt.json",
+      "state": "validated_ready_native_delivery",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-10-20T14:47:13+00:00"
     },
     {
       "agent": "ares",
@@ -6782,5 +6802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T14:38:00+00:00"
+  "updated_at": "2026-10-20T14:47:13+00:00"
 }

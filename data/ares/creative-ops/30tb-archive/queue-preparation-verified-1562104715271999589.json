@@ -1,0 +1,68 @@
+{
+  "status": "staged_transport_and_local_code_verified_owner_tick_pending",
+  "authority_message_id": "1562104715271999589",
+  "verified_at": "2026-10-20T14:43:13.927315+00:00",
+  "local_checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_ares_archive_bridge.py"
+      ],
+      "exit": 0,
+      "summary": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.041s\n\nOK"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "integrations/creative-archive-30tb/Worker.js"
+      ],
+      "exit": 0,
+      "summary": ""
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/test_creative_archive_30tb_pilot.cjs",
+        "tests/test_creative_archive_check_account.cjs",
+        "tests/test_creative_archive_pilot_orchestration.cjs",
+        "tests/test_creative_archive_worker.cjs",
+        "tests/test_creative_archive_worker_orchestration.cjs",
+        "tests/test_creative_archive_bootstrap.cjs"
+      ],
+      "exit": 0,
+      "summary": "  ...\n1..65\n# tests 65\n# suites 0\n# pass 65\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 277.000423"
+    }
+  ],
+  "request_count": 1,
+  "receipt_count": 0,
+  "canary_job_id": "526d7a2a007c1fed4b2a9147f92d62b4",
+  "request_file_id": "1A-VQGqLI8EHvoCUW_B0Hd-NrwI3eZJyJ",
+  "worker_file_id": "1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS",
+  "worker_sha256": "7c31864eba74f25e0717c174490134f61ecd20d51c119177647393aae693fe81",
+  "remote_worker_byte_exact": true,
+  "publisher": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+  "ares_skill_live_mirror_files": 5,
+  "historical_record_rejected_and_unchanged": true,
+  "source_deletion_enabled": false,
+  "production_queue_enabled": false,
+  "owner_worker_executed": false,
+  "clock_trigger_installed": false,
+  "worker_versions_retained": [
+    {
+      "id": "1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS",
+      "name": "MGS-Archive-Worker-7c31864eba74.js"
+    },
+    {
+      "id": "1F8Ld-iRtLU6YBCx9-p9PcWvFsJPZIvKs",
+      "name": "MGS-Archive-Worker-79cc81f46e7c.js"
+    }
+  ]
+}

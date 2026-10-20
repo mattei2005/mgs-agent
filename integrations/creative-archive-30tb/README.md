@@ -1,6 +1,6 @@
 # Isolated 30 TB archive — copy-only pilot
 
-Status: real owner copy and owner replay passed, independently verified through canonical Service Account metadata/binary retrieval and exact-folder/marker candidate count. No trigger, public web endpoint, source deletion or production authentication change. The full unattended creative pipeline is not active; Ares rule-change approval is the next Critical Subset gate.
+Status: real owner copy/replay passed. Rodolfo approved Ares rule/integration changes in `1562104715271999589`; both authorized skills were updated conditionally with backups and live/mirror proof. The copy-only queue bridge and pinned owner worker are now staged and a real canary request has been uploaded/read back. No owner queue-worker execution, trigger, public web endpoint, source deletion or production auth change has occurred. The full unattended creative pipeline is not active.
 
 Authority: Rodolfo message 1562087305051902063 in thread 1562078493498540042. Scope and security gates: `docs/ares-creative-30tb-autonomous-requirements.md`.
 
@@ -21,7 +21,15 @@ A successful script receipt is explicitly `copy_verified_canonical_sa_readback_p
 
 Real replay receipt: `data/ares/creative-ops/30tb-archive/pilot-replay-canonical-verified-1562103182103023729.json`; same destination ID, exactly one copy, original creation time and content preserved, source intact. No further repeated pilot run is needed. The static script status suffix `readback_pending` does not override the independent verified receipts.
 
-No source cleanup is implemented. After the pilot, first obtain the additional Critical Subset confirmation to amend Ares's Creative Operations/Taxonomy skills, then validate operational consumers, lineage, scheduling/quotas/large-video behavior, recovery and an exact bounded cleanup policy before requesting destructive activation. Do not patch another agent's skills merely because the general integration requirement is approved.
+No source cleanup is implemented. The additional Critical Subset confirmation for Ares skills was supplied and applied; deletion activation remains separately gated. The CLI stores verified archive mappings laterally and never rewrites primary creative IDs/reservations. Queue processing/recurring reconciliation, consumer/human-permission parity and the complete autonomous intake must be observed before calling production active.
+
+## Queue bridge rollout
+
+`scripts/ares_archive_bridge.py` provides `preflight`, `init`, `publish-worker`, `enqueue-canary`, `enqueue-lineage`, `reconcile`, `status` and `resolve`; writes require `--apply`. Configuration is in `data/ares/creative-ops/30tb-archive/queue-config.json`, with production queue/read cutover/deletion disabled.
+
+The owner replaces Code.gs with `Bootstrap.gs` and runs `mgsArquivoTeste` only. This loads the exact SHA-256-pinned Worker.js from the canonical Drive, processes the immutable canary request and writes a separate Google receipt/heartbeat. The SA then executes `reconcile --apply` to verify full streams and publish an ACK. Only after that real ACK may the owner call `mgsArquivoAtivar`, which installs at most one five-minute trigger. Preserve old pilot properties/code artifacts for rollback; do not schedule `runArchivePilot`.
+
+The queue worker is not a Drive-upload classifier or sanitizer. It consumes already-verified new lineages after Ares completes its normal intake contract. Installing its clock alone does not create a full autonomous UPLOAD MANUAL watcher. Treat those integration layers and recurring verification as separate acceptance gates; never fabricate their readiness from local tests.
 
 ## Local verification
 

@@ -131,6 +131,15 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 4. Depois do GET correto, exija duas leituras estáveis de budget, nome, status, hierarquia e `updated_time`. Arquive o snapshot preparado anterior como emenda do mesmo request e atualize o congelamento para o estado autorizado novo, sob lock; assim o ativador futuro não interpreta a própria alteração de budget como drift externo. Preserve IDs, horário, criação/ativação, histórico do ciclo e checkpoints; emenda apenas de budget não reinicia D1 nem zera guardrails novamente.
 5. Atualize somente os campos correspondentes no contrato e checkpoint, mantendo a decisão pendente separada. Rode o dry-run live do ativador de cada lote afetado e o validador de proveniência antes de confirmar a emenda. Não desabilite o gate de drift para acomodá-la e não recrie jobs cujo horário e escopo permanecem iguais. Na resposta, confirme primeiro o campo já validado e faça uma única pergunta curta sobre a decisão restante.
 
+## Antecipação de execução e substituição autorizada
+
+1. Quando o operador trocar uma condição futura por execução imediata, registre a supersessão antes de agir. Liste os jobs, identifique somente os vinculados aos IDs do pedido, pause/cancele os que ficaram obsoletos e confirme `enabled=false` por readback. Superseda também request, contrato e checkpoint anteriores, para impedir reativação tardia das fontes ou repetição do fallback.
+2. Mantenha a autorização pontual separada de recorrência: não crie o monitor condicional que foi supersedido, nem retome watchers, escala ou criação diária pausados. Preserve budgets exatos e a ordem explícita de ações do operador.
+3. Para “duplicar, ativar e depois excluir as originais”, use `meta-campaign-engine-v3` para as cópias com próximos números e UTMs próprias. Mantenha as fontes preservadas até concluir a criação, a validação semântica e a ativação das substitutas; erro parcial retoma os mesmos IDs, sem novas cópias.
+4. Antes de excluir, releia as substitutas por ID: conta, budget, estrutura, filhos configurados ACTIVE, tracking correto e ausência de erro hard devem estar confirmados. Preserve o snapshot de entrega das fontes e aplique a exclusão nominal somente nos IDs autorizados, com GET terminal. Não transforme essa exclusão em corte D3, reprovação de criativos ou remoção de arquivos.
+5. Reconcilie os novos usos na mesma linhagem criativa: registre campanhas/anúncios/creatives/vídeos antigos e novos, preserve Drive IDs, checksums, reserva e histórico. Duplicação com a mesma mídia não consome novos assets; não libere a fonte como candidata inédita nem altere contadores de tentativa sem critério canônico.
+6. Faça readback final de originais, substitutas e agenda desativada. Responda com mapeamento fonte→cópia, budgets, status de campanha/conjunto/anúncio, exclusões e cancelamento do agendamento; informe o budget ativo e delta quando houver criação. Diferencie sempre ativação confirmada de gasto/impressões observados: a troca pode estar concluída sem a causa de serving estar comprovadamente resolvida.
+
 ## Onboarding de nova operação
 
 1. Validar solicitante e autoridade.

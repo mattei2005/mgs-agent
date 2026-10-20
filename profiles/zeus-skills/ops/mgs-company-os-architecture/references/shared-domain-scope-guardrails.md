@@ -34,6 +34,15 @@ Use quando um agente de equipe pode acessar uma conta ou inventário que também
 - Testes determinísticos passam e um canário novo de cada agente demonstra a política no runtime de destino.
 - Inventário, audit, checkpoint e REPORT-INFRA têm readback.
 
+## Auditoria de expurgo e alcance efetivo
+
+- Antes de expurgar referências, separar ativos operacionais proibidos de dependências técnicas legítimas: o nome de um portfólio pode aparecer como proprietário do app que atende contas corporativas. Não apagar essa evidência nem revogar o app como se fosse apenas uma conta de anúncio; reconciliar consumidores e exigir o gate crítico apropriado.
+- Auditar conteúdo ativo, mirrors, caches/spillovers, backups de contratos, colunas textuais dos bancos de sessões e snapshots locais. Contar arquivos únicos e linhas de banco distintas; não somar hits de colunas sobrepostas. Declarar explicitamente o que ficou fora da cobertura, como Git histórico, Discord remoto e backups externos.
+- Validar isolamento do token por leituras exatas de contas e por uma leitura mínima de campanhas nos alvos do auditor. Uma listagem `/me/adaccounts` sem o portfólio excluído não prova negação. Não testar escrita para comprovar confidencialidade de leitura.
+- Comparar o catálogo corporativo da SB com a sessão do agente e com a sessão administrativa autorizada: omissão causada por papel de usuário não significa remoção do site do catálogo. Não converter automaticamente publishers inativos ou visíveis em propriedade aprovada.
+- Distinguir allowlist documental de isolamento técnico: processos executados como o mesmo root, sem confinamento de caminhos ou credenciais, podem alcançar fontes fora da rota documentada. Limpeza textual não substitui privilégio mínimo.
+- Manter a auditoria read-only até a confirmação adicional exigida para exclusão, política de segurança, permissão ou credencial. Preservar achados privados apenas na superfície Zeus e não criar uma nova denylist compartilhada para registrar o expurgo.
+
 ## Pitfalls
 
 - **Não use inventário do provedor nem lista operacional, protegida ou parceira como allowlist — acesso, manutenção ou monetização transformam envolvimento técnico em falsa propriedade corporativa.**

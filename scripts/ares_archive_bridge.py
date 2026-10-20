@@ -246,8 +246,10 @@ def enqueue(d,c,job):
     else:atomic_json(path,job)
     payload=canonical(job)
     fid=d.upload_once(c['requests_folder_id'],'job-'+job['jobId']+'.json',payload,'application/json','request:'+job['jobId'],'request')
-    if d.meta(fid).get('lastModifyingUser',{}).get('emailAddress')!=CANONICAL_SA:raise ArchiveError('REQUEST_AUTHOR')
-    return {'status':'queued','jobId':job['jobId'],'requestFileId':fid,'kind':job['kind'],'deleteSource':False}
+    request_meta=d.meta(fid)
+    if request_meta.get('lastModifyingUser',{}).get('emailAddress')!=CANONICAL_SA:raise ArchiveError('REQUEST_AUTHOR')
+    state=request_meta.get('properties',{}).get('mgsArchiveState')
+    return {'status':'already_verified' if state=='verified' else 'queued','jobId':job['jobId'],'requestFileId':fid,'kind':job['kind'],'deleteSource':False}
 
 def job_for_lineage(d,c,asset_id):
     rows=[json.loads(line) for line in (BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip()]
@@ -328,7 +330,12 @@ def main():
                 ids=[args.job_id] if args.job_id else [p.stem[4:] for p in sorted((DATA/'jobs').glob('job-*.json'))]
                 out={'results':[reconcile(d,c,j,args.apply) for j in ids]}
             else:
-                out={'queueEnabled':c['queue_enabled'],'deleteSource':False,'requests':len(d.listing(c['requests_folder_id'],kind='request')),'receipts':len(d.listing(c['receipts_folder_id'],kind='receipt')),'workerFileId':c.get('worker_file_id')}
+                heartbeat=None;beat=d.one(c['control_folder_id'],'heartbeat:worker-v1')
+                if beat:
+                    if d.meta(beat['id']).get('lastModifyingUser',{}).get('emailAddress')!=ACCOUNT:raise ArchiveError('HEARTBEAT_AUTHOR')
+                    heartbeat=json.loads(d.raw(beat['id']))
+                    if heartbeat.get('schema')!='mgs.archive.heartbeat.v1' or heartbeat.get('workerSha256')!=c.get('worker_sha256'):raise ArchiveError('HEARTBEAT_CODE_VERSION')
+                out={'queueEnabled':c['queue_enabled'],'deleteSource':False,'requests':len(d.listing(c['requests_folder_id'],kind='request')),'receipts':len(d.listing(c['receipts_folder_id'],kind='receipt')),'workerFileId':c.get('worker_file_id'),'heartbeat':heartbeat}
         print(json.dumps(out,ensure_ascii=False))
     return 0
 
