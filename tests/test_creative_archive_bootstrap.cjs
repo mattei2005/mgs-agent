@@ -11,8 +11,8 @@ const config=JSON.parse(boot.match(/var config = (.+);/)[1]);
 const codeId=boot.match(/getFileById\('([^']+)'\)/)[1];
 function setup(mode,ack) {
  const h=makeHarness(undefined,config);h.texts[codeId]=mode==='tampered'?source+'\n// changed':source;
- const triggers=[];h.state.triggerCreates=0;
- h.context.ScriptApp={getScriptId:()=>mode==='wrongProject'?'otherProject':'1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF',getProjectTriggers:()=>triggers,newTrigger:name=>({timeBased:()=>({everyMinutes:n=>({create:()=>{h.state.triggerCreates++;triggers.push({getHandlerFunction:()=>name});return {id:'offline-trigger'};}})})})};
+ const triggers=[];h.state.triggerCreates=0;h.state.scopeCalls=[];
+ h.context.ScriptApp={AuthMode:{FULL:'FULL'},requireScopes:(auth,scopes)=>{h.state.scopeCalls.push({auth,scopes:Array.from(scopes)});if(mode==='missingScopes')throw new Error('SCOPE_REQUIRED');},getScriptId:()=>mode==='wrongProject'?'otherProject':'1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF',getProjectTriggers:()=>triggers,newTrigger:name=>({timeBased:()=>({everyMinutes:n=>({create:()=>{h.state.triggerCreates++;triggers.push({getHandlerFunction:()=>name});return {id:'offline-trigger'};}})})})};
  if(ack){h.metas.ack={id:'ack',parents:[config.requestsFolderId],lastModifyingUser:{emailAddress:'mgsagent@mgs-core-prod.iam.gserviceaccount.com'},properties:{mgsArchiveKey:'ack:'+config.canaryJobId,mgsArchiveType:'ack'}};h.texts.ack=JSON.stringify({schema:'mgs.archive.ack.v1',jobId:config.canaryJobId,kind:'canary',status:'verified',deleteSource:false});}
  vm.runInContext(boot,h.context);return h;
 }
@@ -21,3 +21,6 @@ test('tampered remote worker is never executed',()=>{const h=setup('tampered');a
 test('another Apps Script project cannot run this bootstrap',()=>{const h=setup('wrongProject');assert.throws(()=>h.context.mgsArquivoTeste(),/PROJETO_INCORRETO/);assert.equal(h.state.writes.length,0);});
 test('scheduler requires canonical SA canary acknowledgement',()=>{const h=setup();assert.throws(()=>h.context.mgsArquivoAtivar(),/AGUARDANDO_CONFERENCIA/);assert.equal(h.state.triggerCreates,0);});
 test('acknowledged activation is idempotent and keeps deletion disabled',()=>{const h=setup(undefined,true);h.context.mgsArquivoAtivar();h.context.mgsArquivoAtivar();assert.equal(h.state.triggerCreates,1);assert.equal(h.state.copies,0);assert.equal(config.deleteSource,false);});
+test('manifest explicitly covers dynamic Drive writes and planned trigger management',()=>{const m=JSON.parse(fs.readFileSync(path.join(dir,'appsscript.json'),'utf8'));assert.deepEqual(m.oauthScopes.slice().sort(),['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/script.scriptapp'].sort());assert.ok(m.dependencies.enabledAdvancedServices.some(s=>s.userSymbol==='Drive' && s.serviceId==='drive' && s.version==='v3'));});
+test('missing OAuth scopes stop before worker writes or copy attempts',()=>{const h=setup('missingScopes');assert.throws(()=>h.context.mgsArquivoTeste(),/SCOPE_REQUIRED/);assert.equal(h.state.writes.length,0);assert.equal(h.state.copies,0);assert.equal(h.state.triggerCreates,0);});
+test('scope guard explicitly checks the manifest-required scopes',()=>{const h=setup();h.context.mgsArquivoTeste();assert.equal(h.state.scopeCalls.length,1);assert.equal(h.state.scopeCalls[0].auth,'FULL');assert.deepEqual(h.state.scopeCalls[0].scopes.slice().sort(),['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/script.scriptapp'].sort());});

@@ -18,7 +18,7 @@ Read exact target accounts with:
 Rules:
 
 - Require exact account-ID and expected-name readback.
-- `funding_source_details` requires `MANAGE` for the account.
+- Request `user_tasks` with `funding_source_details` and classify the live projection, not permission assumptions: an omitted task list is not proof that a returned brand/suffix is unusable, and even a visible `MANAGE` task does not prove missing funding means no payment method. Retry missing details with an exact-account GET before reporting them as unavailable.
 - Expose only brand and masked suffix; never payment-source IDs or credentials in Discord.
 - `balance`, `amount_spent`, and `spend_cap` use minor currency units; Insights `spend` is already in major units.
 - A user-confirmed relationship such as several masked AMEX suffixes representing one physical card may be consolidated. Never infer that relationship from brand alone.

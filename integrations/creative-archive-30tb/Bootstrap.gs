@@ -2,6 +2,10 @@ function mgsArquivoTeste(e) {
   if (ScriptApp.getScriptId() !== '1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF') {
     throw new Error('PROJETO_INCORRETO');
   }
+  ScriptApp.requireScopes(ScriptApp.AuthMode.FULL, [
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/script.scriptapp'
+  ]);
   var codigo = DriveApp.getFileById('1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS').getBlob().getDataAsString('UTF-8');
   var hash = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, codigo, Utilities.Charset.UTF_8)
     .map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');

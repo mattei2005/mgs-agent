@@ -1,0 +1,28 @@
+{
+  "status": "local_scope_fix_tested_remote_manifest_required",
+  "source_message_id": "1562116310215958579",
+  "error_method": "drive.files.create",
+  "error_stage": "mgsArchiveWriteHeartbeat",
+  "confirmed_issue": "executing Google principal lacks one of required Drive write OAuth scopes; file Editor permission is not an OAuth grant",
+  "design_fault": "dynamic worker operations are not visible to Apps Script static auto-scope inference; explicit manifest/scopes were not included in owner instructions",
+  "remote_manifest_inspected": false,
+  "required_scopes": [
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/script.scriptapp"
+  ],
+  "local_fixes": [
+    "appsscript.json explicit full Drive + planned trigger scopes",
+    "Bootstrap.gs requireScopes before loading/executing worker"
+  ],
+  "regression_red_failures": 3,
+  "regression_green_js_tests": 68,
+  "cloud_receipts_observed": 0,
+  "cloud_heartbeat_observed": false,
+  "pilot_copy_count": 1,
+  "source_intact": true,
+  "queue_enabled": false,
+  "delete_source": false,
+  "recovered_google_execution_verified": false,
+  "next_step": "owner show appsscript.json; preserve existing fields and apply explicit scope patch; update guard and retry same job only after all required scopes are granted",
+  "updated_at": "2026-10-20T14:56:29.823302+00:00"
+}

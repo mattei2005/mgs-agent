@@ -45,7 +45,7 @@ Resolve the executable path first instead of assuming Chrome is on `PATH`. Keep 
 
 ### 3. Navigate and submit only non-secret identity data
 
-Capture the exact Chrome window by fresh PID/window ID. Prefer fresh accessibility elements for page controls. When a page is rendered as an image and exposes no control nodes, use a visual capture to locate the target and pass the screenshot-relative coordinate directly; do not pre-scale it before calling `computer_use`, because the driver maps it to native screen coordinates.
+Capture the exact Chrome window by fresh PID/window ID. Prefer fresh accessibility elements for page controls. If no control nodes are available, locate the target visually and follow the live capture's coordinate-space contract; do not assume screenshot pixels and native desktop coordinates are interchangeable. Use native element bounds when available, and apply a scale only when the live backend explicitly requires it. A downscaled image can otherwise send a click to a different control.
 
 Type only the non-secret account identifier through CUA. If Chromium returns `background_unavailable`, retry only that text action in foreground mode, then recapture and require the expected identifier in the field before clicking Continue.
 
@@ -53,8 +53,8 @@ Type only the non-secret account identifier through CUA. If Chromium returns `ba
 
 At the password page:
 
-1. Confirm the page origin is the intended site.
-2. Open the password-manager extension.
+1. Confirm the page origin is the intended site. Let the login form finish loading, then recapture immediately before any authentication-related click: a passkey chooser can appear asynchronously and change the active window or element mapping.
+2. Inspect the current authentication surface before opening the extension. If Windows Security shows **Choose a passkey** for the intended domain, report it as a passkey-provider selection, not proof that the vault is locked, credentials were rejected, or the bank blocked automation. Preserve the prompt, release the lease, and ask the user to complete authentication directly on the target machine; resume with step 5 after acknowledgement. Otherwise, open the password-manager extension.
 3. If it is already unlocked, select the exact site/identifier item and let the extension fill the page; never reveal the password field.
 4. If the manager asks for its master password or Windows Security asks for a Windows Hello PIN to unlock it, stop. Leave the site and popup open, release the shared desktop lease, and ask the user to unlock it directly through their Remote Desktop session. Never ask for either secret in chat, reveal a saved unlock item, or relay the secret through CUA. Explain this as the protected human-unlock workflow, not an untested claim that the field is technically undrivable.
 5. Treat the user's completion acknowledgement as the trigger for immediate read-only validation, not proof of recovery. Reacquire the lease, rediscover the Chrome PID/window ID, and inspect the current target page first. If the requested account area is already authenticated, proceed to its readback without reopening the extension or provoking another challenge. Validate manager unlock, website authentication and any device-security hold separately; completing one does not prove the others cleared.

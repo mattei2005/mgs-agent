@@ -25,6 +25,8 @@ The bootstrap's manual test must be exercised before scheduling. Its installer m
 - Reset per-item `job`/`prior` state at the start of every JavaScript loop iteration. Function-scoped `var` can otherwise carry a trusted previous job into a later untrusted request's error handler and overwrite the wrong receipt. Cover this with an interleaving regression.
 - Release locks in a nested `finally` even when budget/state persistence fails. Invalid budget state must fail closed, not reset runtime accounting. Bound jobs per tick, execution time, rolling runtime budget, retries and provider cooldowns.
 
+- Emit an owner-authored heartbeat with the pinned worker hash, timestamp, work/error summary and the installable event's `triggerUid` when present. A manual execution must keep that field null. Read back provenance/hash through the SA so publishing code, running a manual test and observing a scheduled tick remain distinct proofs.
+
 ## Proof levels
 
 Report separately: offline contract/orchestration tests; real SA queue transport/readback; owner worker execution; canonical receipt/binary verification; scheduled tick observed; operational Ares intake/consumer integration; destructive cleanup activated. Do not collapse these into one success claim. A paused `queue_enabled=false` stage is intentional deployment state, not active unattended processing.

@@ -17,6 +17,12 @@ related_skills: [discord-ops, hermes-agent-operations, log-monitor-discord-alert
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
+## Audit execution and reporting
+
+- Resolve the requested asset boundary before searching: distinguish ad accounts, operational domains, app ownership and credentials. Removing an asset from an agent's remit does not implicitly authorize revoking a shared app or deleting unrelated evidence.
+- For a whole-agent audit, load `references/shared-domain-scope-guardrails.md` and freeze a machine-readable coverage manifest before reporting. Keep documented scope, actual credential reach and operating-system isolation as separate findings.
+- Report to Rodolfo with the verdict first, followed by numbered **Problema / Causa / Solução** items. Label unproved causes, give verified coverage and exclusions, and distinguish completed audit from unapplied remediation. Ask only for the exact critical transition that remains blocked, not a blanket approval for loosely specified cleanup and credential changes.
+
 ## Operational route packs
 
 - **When to use → 2. Create a blueprint before operational changes** → `references/route-pack-01.md`
