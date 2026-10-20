@@ -4353,12 +4353,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-all36-approved-compact-20261019T233015",
-      "next_step": "ConferirBU fonteMeta/orcamento;promoverpoliticaglobal comreplayhistorico;testar/re-render36semrecoletarfinanceiro;arquivarIDsatuais e substituirporconta comGET/GET404.",
-      "objective": "Promover formato compacto aprovado e substituir36ultimosrelatorios G001-G006;explicar BU alto com dados reais",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-approved-compact-20261019T233015/request.json",
-      "state": "aprovacao_explicita_recebida:previewfinal semst,nº comlance+cp+quiz,legendaestruturada aprovado por rodolfo para36contas.pendencias exatas recuperadas do manifest,167idsatuais;manterhistoricoanterior e snapshots. auditoriabu emandamento;semwritebudget.",
+      "next_step": "Sem pendencias. Proximos relatorios SHEIN usam compact_identity_standard automaticamente;BUsobrebudgetvigenteneverinicial,reconciliar antesfinalrender. Consultar completion/latest-deliveries;nao reenviar nem excluir outros historicos sempedido.",
+      "objective": "Promover formato compacto aprovado e substituir36ultimosrelatorios G001-G006;corrigir BU com budget vigente e explicar na legenda",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-approved-compact-20261019T233015/completion.json",
+      "state": "concluido_get_get404_verificado:36contas/36threads,6por gestor g001-g006,616campanhas,167partesnovasget e167idsanterioresdeleteget404;historicoanterior preservado.compacto14colunas,grade143,nº comlancecpquiz,semstquizlance,legenda organizada e buexplicado.616budgets vigentes revalidados23:45edt;5g00190para150 corrigidos mantendo gastocorte;financeiro/budget/bid/status comhorariosseparados.152testesok.0metawrite/cron.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T03:31:21+00:00"
+      "updated_at": "2026-10-20T03:55:25+00:00"
     },
     {
       "agent": "ares",
@@ -4443,12 +4443,12 @@
     {
       "agent": "ares",
       "id": "ares-yolo-g001-number-bid-preview",
-      "next_step": "Aguardar OKvisual explicito de Rodolfo antes da promocao global e substituicao dos36lotes atuais em pending-global-rollout.json. Usar somente osIDs atuais deste delivery;previewsanteriores ja excluidas. Preservar demais historicos e snapshots.",
-      "objective": "Remover St da previa YOLO G001 mantendo blocos por status e substituir ultimo report",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-g001-no-status-preview-20261019T231933/pending-global-rollout.json",
-      "state": "previa_sem_st_concluida_aguardando_validacao:55campanhas/55historicos e financeiro19/10 21:51edt preservados;st removida,titulo dos blocos identifica status;rawstatus/timestamp retidos.nº090cccp89v3,bid e legendaorganizada mantidos;grade143versus146.142testesok;11partesnovasget e11ids anterioresdeleteget404.35demaisreportsintactos;0metawrite/cron.",
+      "next_step": "Usar checkpoint ares-shein-all36-approved-compact-20261019T233015 e completion.json. Nao executar antigos pending-global-rollout.json nem reutilizar IDs das previas excluidas.",
+      "objective": "Previa YOLO G001 validada e promovida para formato global SHEIN",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/all36-approved-compact-20261019T233015/completion.json",
+      "state": "aprovada_e_promovida_globalmente:rodolfovalidouformato e autorizou36contas.previasv1-v4 mantidas so paraauditoria;ultimayolog001 substituida junto com demais35reports;novo lote completoget/get404emall36-approved-compact-20261019t233015. nenhuma validacao visual pendente.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T03:23:33+00:00"
+      "updated_at": "2026-10-20T03:55:25+00:00"
     },
     {
       "agent": "ares",
@@ -6662,5 +6662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T03:31:21+00:00"
+  "updated_at": "2026-10-20T03:55:25+00:00"
 }
