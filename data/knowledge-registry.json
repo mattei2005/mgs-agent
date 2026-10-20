@@ -4912,6 +4912,24 @@
       "updated_at": "2026-10-09T15:30:32+00:00"
     },
     {
+      "canonical_key": "ares.creative.upload.context-layout",
+      "canonical_source": "data/ares/creative-ops/30tb-archive/upload-context-layout.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-10-20T18:27:02+00:00",
+      "id": "ARES-UPLOAD-CONTEXT-LAYOUT-20261020",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "UPLOAD MANUAL: operacao e gestor nas subpastas existentes",
+      "updated_at": "2026-10-20T18:27:02+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reporting.number-bid-preview",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -13270,5 +13288,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T17:49:34+00:00"
+  "updated_at": "2026-10-20T18:27:02+00:00"
 }

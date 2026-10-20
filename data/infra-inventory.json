@@ -45312,8 +45312,8 @@
       "id": "ares-creative-30tb-copy-queue-integration-20261020",
       "agent": "zeus",
       "type": "copy-only-archive-queue-and-authorized-ares-skill-update",
-      "status": "google_worker_clock_verified_internal_integration_pending",
-      "updated_at": "2026-10-20T16:30:20.558708+00:00",
+      "status": "google_clock_and_sa_verified_owner_hardening_staged_intake_consumers_pending",
+      "updated_at": "2026-10-20T18:29:35.552692+00:00",
       "authority_message_id": "1562104715271999589",
       "thread_id": "1562078493498540042",
       "registry_id": "ARES-CREATIVE-30TB-QUEUE-INTEGRATION-20261020",
@@ -45321,8 +45321,8 @@
       "files": [
         {
           "path": "/root/mgs-agent/scripts/ares_archive_bridge.py",
-          "size_bytes": 23040,
-          "sha256": "ddfe7e8b9f05202d55fc24483c9f8c4c5d9483ed0b9a99422e966dc2cb7ab5ad"
+          "size_bytes": 24646,
+          "sha256": "2705a4bcaf78db5a3f68367126ce32fe3c1880f93434ab4e17d013d3b4e9963f"
         },
         {
           "path": "/root/mgs-agent/tests/test_ares_archive_bridge.py",
@@ -45331,8 +45331,8 @@
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_worker.cjs",
-          "size_bytes": 5709,
-          "sha256": "a3c53098afcd55f06aaafbd2ebbc37882cadaddae1ce66590f2ead88467c57a7"
+          "size_bytes": 6287,
+          "sha256": "9afe5d9d23e89652737fba59a1c252f4bb58cc39bb7139284b876f496201cad7"
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_worker_orchestration.cjs",
@@ -45346,13 +45346,13 @@
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/Worker.js",
-          "size_bytes": 16279,
-          "sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2"
+          "size_bytes": 16805,
+          "sha256": "b7ba49117656c2641299b96b02a1bd39e7c9d6d31a906efcf2be47231c1ce714"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/Bootstrap.gs",
           "size_bytes": 2261,
-          "sha256": "590046ec91601407d152efc9b32c0b9f1f6d1cef768a36eecba9b2210d2bddf6"
+          "sha256": "13b4eb8ed2dbba4fe4339564803356eb764a4ed27af820aa22a3f428d5d820d6"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/README.md",
@@ -45361,8 +45361,8 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
-          "size_bytes": 29547,
-          "sha256": "f3dd065ef6a52f4b469b5078f64849c5ceaf4684d0878553aff3cf705183794b"
+          "size_bytes": 36395,
+          "sha256": "7d85d9b0425250c0fd9be8937648cb8b98e730c442b2b07b5e9516f54b51d52e"
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json",
@@ -45386,8 +45386,8 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "size_bytes": 8820,
-          "sha256": "7c316696a02c0ae66b55749f9aecadc0aa5fc593edb9ac9b2a25b5a9db4bc478"
+          "size_bytes": 15311,
+          "sha256": "800f8157d8a2b746cd9c28d7e45bfc450ba7d299d428bd121b56ca3b30d4ee36"
         },
         {
           "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/SKILL.md",
@@ -45421,13 +45421,13 @@
         },
         {
           "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/shared-drive-30tb-archive-queue.md",
-          "size_bytes": 6417,
-          "sha256": "52ff32869c093376ad82fe39f8398848d7d2f504ed1331c98651e0644541252d"
+          "size_bytes": 7272,
+          "sha256": "be1f9d27f8b16676efdfd9b6c6d8b56580e37f2190a00c991ee121d1b29980a4"
         },
         {
           "path": "/root/mgs-agent/profiles/ares-skills/growth/creative-operations-mgs/references/shared-drive-30tb-archive-queue.md",
-          "size_bytes": 6417,
-          "sha256": "52ff32869c093376ad82fe39f8398848d7d2f504ed1331c98651e0644541252d"
+          "size_bytes": 7272,
+          "sha256": "be1f9d27f8b16676efdfd9b6c6d8b56580e37f2190a00c991ee121d1b29980a4"
         },
         {
           "path": "/root/.hermes/profiles/ares/skills/growth/creative-taxonomy-mgs/references/route-pack-02.md",
@@ -45576,7 +45576,11 @@
       "clock_observed_interval_seconds": 301.879,
       "clock_ticks_observed": 2,
       "last_verified_clock_heartbeat_at": "2026-10-20T16:28:04.972Z",
-      "clock_proof_path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/clock-trigger-verified-1562138665260556369.json"
+      "clock_proof_path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/clock-trigger-verified-1562138665260556369.json",
+      "active_remote_worker_sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2",
+      "local_source_matches_active_worker": false,
+      "staged_remote_worker_byte_exact": true,
+      "next_phase_inventory_id": "ares-creative-30tb-sa-automation-and-upload-layout-20261020"
     },
     {
       "id": "zeus-ares-sb-scope-audit-1562108149710856284",
@@ -45641,6 +45645,189 @@
       "scope": "Requisito é ausência de exposição em relatórios e consultas genéricas, não mera recusa a alvos. Preserva controles locais já validados e exceção técnica do app; nenhuma alteração de permissão, credencial ou sistema.",
       "validation": "Checkpoint reaberto e regra procedural lida de volta; serviço ainda root sem confinamento de caminhos.",
       "updated_at": "2026-10-20T16:03:54.631067+00:00"
+    },
+    {
+      "id": "ares-creative-30tb-sa-automation-and-upload-layout-20261020",
+      "agent": "zeus",
+      "type": "bounded-cloud-archive-reconciliation-and-additive-upload-context",
+      "status": "sa_and_context_layout_verified_owner_repin_intake_consumers_pending",
+      "updated_at": "2026-10-20T18:29:35.525311+00:00",
+      "authority_message_ids": [
+        "1562141828449439838",
+        "1562164883766902888"
+      ],
+      "ares_skill_critical_confirmation_message_id": "1562104715271999589",
+      "thread_id": "1562078493498540042",
+      "checkpoint_id": "ARES-CREATIVE-30TB-1562078493498540042",
+      "canonical_source": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
+      "layout_manifest": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/upload-context-layout.json",
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/ares_archive_bridge.py",
+          "size_bytes": 24646,
+          "sha256": "2705a4bcaf78db5a3f68367126ce32fe3c1880f93434ab4e17d013d3b4e9963f"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_archive_automation.py",
+          "size_bytes": 12579,
+          "sha256": "bcea7999cad9c557498493b65784d1c0cd5f94d3e7a62bcb611a2779426e856f"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_upload_context_layout.py",
+          "size_bytes": 4840,
+          "sha256": "875c38c128a7fd7ee8fd9caf548713df2a7b7aa45c03b3617a3a28d0b16f374e"
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/Worker.js",
+          "size_bytes": 16805,
+          "sha256": "b7ba49117656c2641299b96b02a1bd39e7c9d6d31a906efcf2be47231c1ce714"
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/Bootstrap.gs",
+          "size_bytes": 2261,
+          "sha256": "13b4eb8ed2dbba4fe4339564803356eb764a4ed27af820aa22a3f428d5d820d6"
+        },
+        {
+          "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
+          "size_bytes": 36395,
+          "sha256": "7d85d9b0425250c0fd9be8937648cb8b98e730c442b2b07b5e9516f54b51d52e"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/scripts/ares-archive-automation-monitor.py",
+          "size_bytes": 1255,
+          "sha256": "368169da747c130608b0b7a085d35c51cc84668e56fcb8891ed31ee4eac87b84"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
+          "size_bytes": 15311,
+          "sha256": "800f8157d8a2b746cd9c28d7e45bfc450ba7d299d428bd121b56ca3b30d4ee36"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
+          "size_bytes": 15311,
+          "sha256": "800f8157d8a2b746cd9c28d7e45bfc450ba7d299d428bd121b56ca3b30d4ee36"
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/shared-drive-30tb-archive-queue.md",
+          "size_bytes": 7272,
+          "sha256": "be1f9d27f8b16676efdfd9b6c6d8b56580e37f2190a00c991ee121d1b29980a4"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/ares-skills/growth/creative-operations-mgs/references/shared-drive-30tb-archive-queue.md",
+          "size_bytes": 7272,
+          "sha256": "be1f9d27f8b16676efdfd9b6c6d8b56580e37f2190a00c991ee121d1b29980a4"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_archive_automation.py",
+          "size_bytes": 8261,
+          "sha256": "bc22dde849bca2e8f02541c8ee822e302056ca4f0942b079f1fb346acaa1c9fe"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_archive_bridge.py",
+          "size_bytes": 6757,
+          "sha256": "e5afcff0ef014082a29f87ab7d5b697371c473d8d8055aa5d4e2193c2c0a5e34"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_archive_reconciler.py",
+          "size_bytes": 7111,
+          "sha256": "135f2055d5a16f7e602b1ef8cb8dc04101d680e20b0a97235538c6c6575ce0d5"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_archive_source_version_proof.py",
+          "size_bytes": 2242,
+          "sha256": "0233ac55baffc8ce0de6ba6cc61df436c1bdb97bc55201f01bcce092b185a005"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_archive_validation_enqueue.py",
+          "size_bytes": 3651,
+          "sha256": "2992f1a0bc3f9a3424ce1e051eb261d1f921dc4909d8d1265e28afbdac9f3af5"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_archive_validation_pair.py",
+          "size_bytes": 3130,
+          "sha256": "59ed1f64b895bdbabc9420302ee9e72125451ca07373f865432c9f207ed72ea9"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_ares_upload_context_layout.py",
+          "size_bytes": 4959,
+          "sha256": "76c234cf52a12fbc7b6d96fb98c20a0f95d7362b65eac62c63a6cc31e560c482"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_creative_archive_worker.cjs",
+          "size_bytes": 6287,
+          "sha256": "9afe5d9d23e89652737fba59a1c252f4bb58cc39bb7139284b876f496201cad7"
+        }
+      ],
+      "cron": {
+        "id": "83b148017b4d",
+        "name": "Ares arquivo 30TB · reconciliação cloud",
+        "schedule": {
+          "kind": "cron",
+          "expr": "10,25,40,55 * * * *",
+          "display": "10,25,40,55 * * * *"
+        },
+        "script": null,
+        "monitor_script": "ares-archive-automation-monitor.py",
+        "deliver": "discord:1496267442899521627:1562078493498540042",
+        "enabled": true,
+        "state": "scheduled",
+        "no_agent": false,
+        "last_run_at": "2026-10-20T14:25:45.692190-04:00",
+        "next_run_at": "2026-10-20T14:40:00-04:00",
+        "last_status": "ok"
+      },
+      "python_archive_tests": 84,
+      "python_layout_tests": 12,
+      "javascript_tests": 79,
+      "operations": 19,
+      "managers": 6,
+      "slots": 114,
+      "old_upload_children_preserved": 7,
+      "root_acl_unchanged": true,
+      "primary_inventory_unchanged_by_layout": true,
+      "queue_enabled": false,
+      "prefer_archive_reads": false,
+      "delete_source": false,
+      "include_historical": false,
+      "owner_worker_active_sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2",
+      "owner_worker_staged": {
+        "active_worker_file_id": "1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us",
+        "active_worker_sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2",
+        "byte_exact_readback": true,
+        "next_step": "owner repin only Code.gs file ID and SHA; run mgsArquivoTeste; verify new owner heartbeat before promoting local active worker config",
+        "production_enabled": false,
+        "request_bodies_unchanged": true,
+        "same_authorized_google_principals": true,
+        "scope": "same frozen source IDs/content hashes/names/MIME/parents/createdTime; metadata version may only advance with exact Google-native SHA256, never backwards; SA still verifies both complete streams",
+        "source_deletion_enabled": false,
+        "source_message_id": "1562141828449439838",
+        "staged_at": "2026-10-20T17:43:29.866095+00:00",
+        "status": "staged_owner_repin_required",
+        "worker_file_id": "1efuPCdZ3NYs-2YFuaqothARe-YWDhLJt",
+        "worker_sha256": "b7ba49117656c2641299b96b02a1bd39e7c9d6d31a906efcf2be47231c1ce714"
+      },
+      "live_mirrors_equal": true,
+      "pending": [
+        "owner staged worker repin plus real new-digest clock heartbeat",
+        "Ares automatic intake executor",
+        "archive/stock consumer integration and live cutover gates",
+        "separate Critical Subset confirmation for bounded source cleanup"
+      ],
+      "report_infra": {
+        "verified_at": "2026-10-20T18:30:57.627454+00:00",
+        "source_message_ids": [
+          "1562141828449439838",
+          "1562164883766902888"
+        ],
+        "channel_id": "1498132022634483894",
+        "message_id": "1562171123691692063",
+        "author_id": "1496296175014252634",
+        "http": 200,
+        "empty_content": true,
+        "single_embed": true,
+        "no_mentions": true,
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1562171123691692063"
+      }
     }
   ],
   "profile_skill_references": [
