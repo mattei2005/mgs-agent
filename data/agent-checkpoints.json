@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Novo scripts/ares_archive_automation.py: TDD 26+13+24 testes, dry/apply/replay reais OK, cache evita rehash repetido. Cron Zeus 83b148017b4d monitor relativo ares-archive-automation-monitor.py, 10,25,40,55 ET +25s; confirmar tick natural. Flags false. Proximo canario IMG RAW+clean isolado em controle, sem tocar inventario; depois integrar leitura/intake. User 1562141828449439838 autorizou continuar 100%; exclusao exige confirmacao especifica.",
+      "next_step": "Rodolfo confirmou layout operacao/gestor em 1562164883766902888. Criar apenas pastas aditivas nas 19 operacoes existentes e 6 gestores canonicos, preservar 7 pastas anteriores e ACL. SA recorrente saudável; par tecnico e ACK verificados, worker reforcado staged b7, ainda exige repin do owner antes de producao. Faltam intake Ares, consumidores e cleanup autorizado separadamente. Flags continuam false.",
       "objective": "Concluir fluxo autonomo de criativos e arquivo 30 TB preservando campanhas/acervo/reservas; limpeza depende de confirmacao critica especifica",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "sa_automation_code_verified_scheduler_created_validation_pair_pending",
+      "state": "upload_operation_manager_layout_approved_implementation_in_progress",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T17:05:38+00:00"
+      "updated_at": "2026-10-20T18:12:56+00:00"
     },
     {
       "agent": "ares",
@@ -1103,12 +1103,12 @@
     {
       "agent": "ares",
       "id": "ARES-HEALTH-1562158678403194912",
-      "next_step": "Obter autorização de foreground para abrir nova aba SB no Chrome PC1 sem tocar na aba pessoal; ler período e coluna Estimate Health para os IDs Meta, incluindo 40 ativos sem linhas SB no snapshot anterior. Reutilizar snapshot Meta e não certificar a lista antiga.",
-      "objective": "Listar campanhas ativas SHEIN e CPV com Estimate Health abaixo de 90% de 01 a 19/10/2026, copiando a coluna renderizada SB",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/estimate-health-20261001-19/all-account-validation.json",
-      "state": "meta auditada integralmente: 36 contas shein, 16 cpv, 539 e 74 campanhas efetivamente active. percentuais anteriores calculados pela api não são validação da dash. browser automatizado bloqueado pelo frontend; chrome nativo pc1 disponível, mas ctrl+t exige foreground, ainda não autorizado. nenhuma campanha alterada.",
+      "next_step": "Nenhuma execucao pendente deste relatorio; preservar lacuna das 40 campanhas sem correspondencia SB e nao classifica-las por Health. Nova atualizacao somente quando solicitada.",
+      "objective": "Listar campanhas ativas SHEIN e CPV com Estimate Health abaixo de 90% de 01 a 19/10/2026, via API em lote autorizada por Rodolfo",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/estimate-health-20261001-19/final-api-report.json",
+      "state": "concluido via api. snapshot 20/10/2026 14:07 edt: 36/36 contas shein e 16/16 cpv; 539 e 74 campanhas efetivamente active. sb consultada em uma requisicao para sete publishers autorizados; formula vigente estimated_health validada no frontend. shein: 10 abaixo de 90%, 493 >=90%, 36 sem linha sb. cpv: 0 abaixo de 90%, 70 >=90%, 4 sem linha sb. particoes reconciliadas, sem campanha alterada; lista dos dez inalterada.",
       "thread_id": "1562158678403194912",
-      "updated_at": "2026-10-20T17:49:34+00:00"
+      "updated_at": "2026-10-20T18:07:30+00:00"
     },
     {
       "agent": "ares",
@@ -6872,5 +6872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T17:49:34+00:00"
+  "updated_at": "2026-10-20T18:12:56+00:00"
 }
