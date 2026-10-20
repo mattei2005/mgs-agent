@@ -9,7 +9,7 @@
 - Target account: mgsdigitalcorp@gmail.com. Account/quota, destination ownership/privacy and canonical SA access are evidenced below. One real owner-executed pilot copy and canonical SA binary retrieval now pass. Autonomous processing and source cleanup remain unimplemented/inactive.
 - No additional Workspace storage purchase is requested.
 
-## Status — real copy pilot verified; replay and unattended integration pending
+## Status — real copy and replay pilot complete; Ares rule-change gate pending
 
 Rodolfo approved advancing with the isolated integration and preparing the limited cleanup policy in message https://discord.com/channels/1185714635991679006/1562078493498540042/1562087305051902063. This does not activate source deletion: exact targets and the destructive-activation confirmation remain pending after the pilot. The current Service Account-only agent architecture remains active.
 
@@ -45,7 +45,8 @@ Zeus's browser-security rejection remains unresolved; Rodolfo used his supported
 - Hardened the copy-only pilot to accept only the exact approved source and destination, and compare source parent/size/MD5 against the canonical SA-verified ancestry manifest. This avoids requiring ancestor-folder access or broad sharing just for validation. Five new scope tests ran RED then GREEN; eight offline orchestration regressions cover locking, reuse, lost responses, ambiguity and checksum failure. Combined suite: 35/35 offline PASS, not a real cloud copy receipt.
 - Real pilot execution evidence: screenshot `/root/.hermes/profiles/zeus/cache/images/img_5fc8c4f9a59c.png`, message 1562101859299364936, shows successful owner execution. Exact identifiers were resolved independently by canonical Drive API enumeration in the pinned destination folder using the approved source-ID/checksum marker, rather than normalizing ambiguous OCR characters.
 - Canonical verification receipt: `data/ares/creative-ops/30tb-archive/pilot-copy-canonical-sa-verified-1562101859299364936.json`. Exactly one matching copy exists: `1wz1Lm5l8a-UnbQnm5xFsO1Om0LqAQTkR`, owner `mgsdigitalcorp@gmail.com`, parent `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`, private, 5375929 bytes, quotaBytesUsed 5375929, MD5 `59065739912275ee5995bfee8d5ca9c7`. Both source and destination streamed HTTP 200 through canonical SA and yielded the identical SHA-256 `11e123e5b495e5ed1a2ae5099b1cef94b6255a4c5f8302859b01a8b291793027`. Source ID/parent/size/MD5/version12 and non-trashed state were unchanged before/after readback. Source was not deleted.
-- Next single validation step: owner reruns `runArchivePilot` once without editing code/properties, then Zeus confirms the same destination ID and exactly one matching copy. This proves real replay reuse before designing the unattended queue, operational inventory mapping and approved cleanup policy. Do not enable a recurring trigger for this static one-file pilot and do not remove its pending marker.
+- Real replay completed by the owner in message 1562103182103023729. Canonical SA listing independently confirms exactly one matching destination, the same ID `1wz1Lm5l8a-UnbQnm5xFsO1Om0LqAQTkR`, unchanged original copy creation time `2026-10-20T13:54:47.846Z`, unchanged content and intact source version `12`. Receipt: `data/ares/creative-ops/30tb-archive/pilot-replay-canonical-verified-1562103182103023729.json`. The repeated static status `copy_verified_canonical_sa_readback_pending` is expected; it is a code label, not a fresh failure after Zeus's independent verification.
+- Pilot copy/retrieval/replay acceptance is complete. Do not ask the owner to repeat it again. Do not enable a recurring trigger for this static one-file pilot or remove its pending marker. Next: explicitly approve the Critical Subset change to Ares's Creative Operations and Taxonomy skills, then implement/test queue, archive-ID resolution, lineage and consumers without enabling source deletion during integration.
 - Six new offline preflight contract tests and the combined pilot/preflight suite passed (22 tests). These tests remain separate from the actual owner-executed Google account/quota receipt.
 - Apps Script API documentation explicitly states that its API does not work with Service Accounts. Do not ask Rodolfo to share the script with the canonical Service Account as a supposed way to remotely manage or execute the script. File access through Drive and Apps Script API support are different gates. Preserve Service Account authentication for agent Drive/Sheets consumers; owner-side isolated script setup/consent remains necessary.
 
@@ -62,8 +63,20 @@ Zeus's browser-security rejection remains unresolved; Rodolfo used his supported
 
 ## Acceptance and next gate
 
-- Prove one isolated media copy, ownership/storage attribution, byte integrity and canonical Service Account readback.
+- DONE for the exact pilot: isolated media copy, ownership/storage attribution, byte integrity, canonical Service Account readback/retrieval and real owner replay without a duplicate.
 - Test interruption/retry without duplicate archive candidates, concurrent processing protection and consumer/lineage parity.
 - Validate Apps Script permissions, runtime/copy quotas and representative video sizes before assuming production capacity.
 - Before activation, obtain the separate approval for the new account-authorized connector and bounded automatic permanent source-cleanup policy. Configure access to the real destination and obtain the account's initial Google consent through the protected login flow; never accept credentials/codes in chat.
 - Only call the pipeline active after deployed runtime and end-to-end receipt verification. No user computer may be part of the steady-state execution path.
+
+## Read-only Ares integration discovery and Critical Subset boundary
+
+Zeus inspected (did not modify) Ares's current `creative-operations-mgs` and `creative-taxonomy-mgs` skills plus the current READY/LEGACY intake pack. They still require the canonical Shared Drive as final physical root and write/verify RAW in `99_LEGACY` and clean assets in `01_READY`, sharing one lineage. Uploads remain reserved to the manager and `ares_eligible=false`; country/vertical/language/naming and duplicate identity must be preserved. The historical `ares-execute-creative-copy-clean.py` CSV executor alone is explicitly not the complete current intake contract.
+
+To integrate the approved storage architecture without leaving contradictory active rules, the next gate is Rodolfo's additional confirmation under AGENT.md Critical Subset item 10 (modifying another agent's skills). Exact affected skill surfaces to prepare:
+
+- `/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/SKILL.md` and a dedicated archive-integration reference under that skill.
+- `/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/route-pack-02.md` and `references/mixed-media-drive-intake-ready-legacy.md` for the bounded staged/archived final-parent contract.
+- `/root/.hermes/profiles/ares/skills/growth/creative-taxonomy-mgs/references/route-pack-02.md` for physical archive location versus lineage/status invariants.
+
+Scope of that confirmation: permit the necessary Ares skill/integration changes for the already-approved future creative flow only. Preserve existing upload entry, agent Service Account, manager reservations/eligibility, naming, budgets/campaigns and the historical collection. No new broad permissions or source deletion are authorized by recording this gate. All production rule cutover must wait for exact consumer/queue tests. Automatic permanent cleanup retains its separate bounded activation confirmation after those tests.

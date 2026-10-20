@@ -1,6 +1,6 @@
 # Isolated 30 TB archive — copy-only pilot
 
-Status: one real copy executed by the owner in Apps Script and independently verified through canonical Service Account metadata/binary retrieval. No trigger, public web endpoint, source deletion or production authentication change. The full unattended creative pipeline is not active.
+Status: real owner copy and owner replay passed, independently verified through canonical Service Account metadata/binary retrieval and exact-folder/marker candidate count. No trigger, public web endpoint, source deletion or production authentication change. The full unattended creative pipeline is not active; Ares rule-change approval is the next Critical Subset gate.
 
 Authority: Rodolfo message 1562087305051902063 in thread 1562078493498540042. Scope and security gates: `docs/ares-creative-30tb-autonomous-requirements.md`.
 
@@ -19,7 +19,9 @@ A script lock prevents parallel pilot writers. The source ID + MD5 marker identi
 
 A successful script receipt is explicitly `copy_verified_canonical_sa_readback_pending`, not full migration success. Zeus must then read the exact copied file through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`, compare owner/parents/size/MD5 and download/verify retrieval under the Service Account. Preserve the source. This gate passed for destination `1wz1Lm5l8a-UnbQnm5xFsO1Om0LqAQTkR`: exact-folder/marker enumeration found one copy, both source/copy streams matched in size/MD5/SHA-256, owner/private ACL and source preservation passed. Receipt: `data/ares/creative-ops/30tb-archive/pilot-copy-canonical-sa-verified-1562101859299364936.json`. Next: one real replay reuse test, then queue/inventory integration; never schedule this static single-file pilot as if it were production.
 
-No source cleanup is implemented. After the pilot, validate operational consumers, lineage, scheduling/quotas/large-video behavior, recovery and an exact bounded cleanup policy before requesting the destructive activation confirmation.
+Real replay receipt: `data/ares/creative-ops/30tb-archive/pilot-replay-canonical-verified-1562103182103023729.json`; same destination ID, exactly one copy, original creation time and content preserved, source intact. No further repeated pilot run is needed. The static script status suffix `readback_pending` does not override the independent verified receipts.
+
+No source cleanup is implemented. After the pilot, first obtain the additional Critical Subset confirmation to amend Ares's Creative Operations/Taxonomy skills, then validate operational consumers, lineage, scheduling/quotas/large-video behavior, recovery and an exact bounded cleanup policy before requesting destructive activation. Do not patch another agent's skills merely because the general integration requirement is approved.
 
 ## Local verification
 

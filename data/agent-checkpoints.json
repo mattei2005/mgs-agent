@@ -623,12 +623,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Rodolfo reexecutar runArchivePilot uma vez, sem editar codigo/propriedades, e enviar log. Zeus deve confirmar reuso do destinationId 1wz1Lm5l8a-UnbQnm5xFsO1Om0LqAQTkR e exatamente uma copia. Depois implementar fila/inventario/consumidores autonomos; nao agendar piloto estatico. Exclusao segue inativa.",
+      "next_step": "Rodolfo confirmar mudanca das skills creative-operations-mgs e creative-taxonomy-mgs do Ares para integrar arquivo 30 TB; AGENT Critical Subset item10. Escopo: futura fila criativa e resolucao de IDs/inventario, mantendo upload, SA, reservas, naming e campanhas/budgets/acervo anterior. Nenhuma exclusao durante integracao. Depois implementar/testar consumidores e confirmar politica destrutiva delimitada antes de ativar limpeza.",
       "objective": "Implantar ponte Google isolada para arquivo criativo 30 TB sem PC pessoal e preparar politica limitada de limpeza autonoma",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "real_pilot_copy_and_sa_retrieval_verified_replay_pending",
+      "state": "copy_replay_pilot_complete_ares_skill_critical_confirmation_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T13:59:05+00:00"
+      "updated_at": "2026-10-20T14:05:24+00:00"
     },
     {
       "agent": "ares",
@@ -6762,5 +6762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T13:59:05+00:00"
+  "updated_at": "2026-10-20T14:05:24+00:00"
 }
