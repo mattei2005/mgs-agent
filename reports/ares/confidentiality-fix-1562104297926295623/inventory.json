@@ -1,0 +1,64 @@
+{
+  "state": "partial_correction_verified_isolation_pending_critical_confirmation",
+  "checkpoint_id": "ARES-CONFIDENTIALITY-REAUDIT-1562104297926295623",
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/mgs-ares-asset-scope.py",
+      "sha256": "4e832f80606296ecc13a8f81bcef6619206327c1e67afc60364bdd12f749ab19",
+      "bytes": 8585
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-common.py",
+      "sha256": "ff110d40d6a29ea0be2e7c8581af8c9590009ba5e130af3ff55b61478283be31",
+      "bytes": 34826
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-smartbidding-common.py",
+      "sha256": "f8d024e74b0957d9f03ca17f51d52b40d253494914cc66b29fbbbcc729613bb2",
+      "bytes": 20179
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+      "sha256": "bb9d97b3dc4aabbdd5d55f2b251d6a65350b466d6248f23e3fbabe6520ab4396",
+      "bytes": 102958
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/reactivate-creditoparaveiculo-20260820.py",
+      "sha256": "9e436e606676f82a1d62483d5d193b5f12486688c3d6e85a9aca8f430fb4926a",
+      "bytes": 8455
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_ares_confidentiality_routes.py",
+      "sha256": "119f339ca412fcdd031965c41b083d4dad6a361521abef78af111e39ff6f5a0a",
+      "bytes": 9674
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/sb-publisher-scope.json",
+      "sha256": "1d871d2488e9e96debdc45950863667a92c2ed2bdaeab00910633d7ff82934e9",
+      "bytes": 13759
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/state/scoped-object-provenance.json",
+      "sha256": "1e6937756e3943b7d649ba96571e28ec7040ec3c938c7f6c93623bc1eb88934f",
+      "bytes": 2632
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/smartbidding-roi-band-reconciliation.md",
+      "sha256": "67045739f4df5c5e9c836533f19f8e9d53e5cb3977f6410637e4927c3ddacac5",
+      "bytes": 27485
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/confidentiality-scope-audit.md",
+      "sha256": "0e65f7c35fe13532ca7f551a15a5ce25eeba46e458e9fd602c705ecfad98df42",
+      "bytes": 3949
+    }
+  ],
+  "test_result": {
+    "passed": 64,
+    "subtests_passed": 18
+  },
+  "meta_platform_mutations": 0,
+  "service_mutations": 0,
+  "live_evidence": "live-readonly-smoke.json",
+  "pending_critical_action": "Zeus: Ares dedicated non-root runtime, scoped data and credential boundary, /etc service change with explicit confirmation; no in-session restart"
+}

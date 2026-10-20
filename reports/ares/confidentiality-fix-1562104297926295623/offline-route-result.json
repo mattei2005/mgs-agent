@@ -1,0 +1,66 @@
+{
+  "network_requests": 0,
+  "credentials_used": false,
+  "cases": [
+    {
+      "route": "unknown_account_edge",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "unknown_account_field",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "bare_numeric_account_node",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "unscoped_account_discovery",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "unscoped_business_discovery",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "unknown_business_owned_accounts",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "bare_campaign_node",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "batch_unknown_act_edge",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "batch_account_in_query",
+      "blocked": true,
+      "expected_block": true,
+      "meets_requirement": true
+    },
+    {
+      "route": "approved_app_metadata",
+      "blocked": false,
+      "expected_block": false,
+      "meets_requirement": true
+    }
+  ]
+}

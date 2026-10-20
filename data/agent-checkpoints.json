@@ -113,12 +113,12 @@
     {
       "agent": "ares",
       "id": "ARES-CONFIDENTIALITY-REAUDIT-1562104297926295623",
-      "next_step": "Implementar validacao positiva de rotas Meta e SB, testar compatibilidade e explicitar isolamento de servico separado",
-      "objective": "Corrigir cobertura de confidencialidade Ares sem alterar apps, credenciais, permissoes, campanhas ou servicos",
-      "source": "reports/ares/confidentiality-reaudit-1562104297926295623/report.md",
-      "state": "correcao autorizada por rodolfo em andamento; reconciliacao dos fontes e testes antes de writes localizados",
+      "next_step": "Confirmacao critica especifica de Rodolfo: Zeus alterar unidade Ares em /etc para identidade nao-root, workspace/fontes positivos e fronteira de credenciais sem acesso global; ativacao fora da sessao, sem revogar app/tokens/permissoes. Apos aprovacao validar filesystem/cofre/HTTP alternativo e relatorios genericos E2E antes do cutover.",
+      "objective": "Concluir confidencialidade Ares com consultas Digital Trust e hosts SB e isolamento efetivo das fontes",
+      "source": "reports/ares/confidentiality-fix-1562104297926295623/report.md",
+      "state": "correcao local aplicada: 64 testes e 18 subtestes ok; 10 provas offline ok; meta/bot/car http200 e sb http200/201. sigilo e2e ainda aberto: processo root, fontes compartilhadas e ferramentas/credenciais amplas continuam acessiveis.",
       "thread_id": "1562104297926295623",
-      "updated_at": "2026-10-20T18:47:52+00:00"
+      "updated_at": "2026-10-20T19:03:31+00:00"
     },
     {
       "agent": "ares",
@@ -2253,12 +2253,12 @@
     {
       "agent": "zeus",
       "id": "META-APP-B0068-CUTOVER-20261020",
-      "next_step": "Validar Graph, backup, canário isolado e dois ciclos contidos antes de reativar.",
+      "next_step": "Zeus mantém monitoramento automático: 11 de 13 perfis presentes; Tiago De Oliveira Vianna e Viviane Moura permanecem X e serão reconciliados/alertados quando entrarem. Pausa B011-7 preservada.",
       "objective": "Substituir B006-7 por B006-8 na mesma rota de monitoramento, validar e reativar.",
-      "source": "discord:message:1562178809736863756; data/meta-app-registry.json",
-      "state": "preflight: item imutável atual com app_name b006-8 e campos presentes; sheet sa 13 linhas b006-8, zero b006-7. produção ainda b006-7 pausado; b011-7 será preservado.",
+      "source": "discord:message:1562178809736863756; data/meta-app-registry.json; backups/meta-app-b0067-to-b0068-1562178809736863756/closure-readback.json",
+      "state": "completed",
       "thread_id": "1562178809736863756",
-      "updated_at": "2026-10-20T19:02:04+00:00"
+      "updated_at": "2026-10-20T19:11:02+00:00"
     },
     {
       "agent": "zeus",
@@ -6892,5 +6892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T19:02:04+00:00"
+  "updated_at": "2026-10-20T19:11:02+00:00"
 }

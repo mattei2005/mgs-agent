@@ -76,6 +76,14 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Campanha nova deve nascer PAUSED, salvo autorização operacional explícita em contrato validado.
 - IDs técnicos ficam em audit; relatório humano mostra alias e nomes operacionais.
 
+## Comunicação de auditoria e correção
+
+- Responda primeiro se o pedido foi concluído. Separe em linguagem direta **executado e validado**, **não executado** e **dependente de confirmação**; auditoria concluída não significa correção executada.
+- Quando Rodolfo perguntar o que está pendente, nomeie a ação ainda não feita, o responsável e o impedimento concreto. Não repita a política de escopo nem responda apenas com “falta fechar tecnicamente”, pois isso não explica o trabalho restante.
+- Distinga **cadastro autorizado**, **bloqueio no helper** e **isolamento efetivo**. Diga “a lista contém somente os ativos autorizados” quando a evidência for cadastral; não use “acesso restrito” para sugerir que credenciais ou servidor já foram isolados.
+- Não peça novamente aprovação de uma regra ou limpeza já autorizada. Se uma correção exigir confirmação crítica própria, apresente de uma vez o alvo, a alteração concreta, o impacto e o que será preservado; execute as partes independentes já autorizadas, sem transformar o pedido em uma sequência de confirmações genéricas.
+- Ao mudar de diagnóstico para execução, declare explicitamente essa transição. No fechamento, detalhe quais proteções foram testadas e quais rotas/fontes continuam sem validação; não trate uma amostra live ou testes verdes como garantia de sigilo de toda a operação.
+
 ## Métricas e decisão
 
 - Cada operação declara a métrica principal e sua fórmula. Não assumir `subs`, `MO`, `CPMO`, `CPS`, purchase ROAS ou ROI por país/estratégia.

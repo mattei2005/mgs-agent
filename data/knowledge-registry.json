@@ -11934,10 +11934,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0068-20261020",
+      "title": "B006-6 substitui B006-5, validado e reativado no mesmo canal",
+      "updated_at": "2026-10-20T19:07:57+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b006.current-generation",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-20T19:07:57+00:00",
+      "id": "decision-meta-roles-b0068-20261020",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B006-6 substitui B006-5, validado e reativado no mesmo canal",
-      "updated_at": "2026-10-05T15:21:53+00:00"
+      "title": "B006-8 substitui B006-7 no mesmo canal; validação e reativação concluídas",
+      "updated_at": "2026-10-20T19:07:57+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b007.current-generation",
@@ -13288,5 +13306,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T18:27:02+00:00"
+  "updated_at": "2026-10-20T19:07:57+00:00"
 }
