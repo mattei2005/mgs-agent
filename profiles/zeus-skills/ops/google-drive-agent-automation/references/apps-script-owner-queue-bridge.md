@@ -5,7 +5,7 @@ Use only after Rodolfo explicitly approves a separate owner-authorized cloud con
 ## Minimal authority-preserving design
 
 - Keep uploads and sanitization in the canonical Shared Drive. Put technical request/receipt files in a dedicated control folder, not the creative candidate pool.
-- Have the SA publish immutable, content-hashed JSON requests. Verify `lastModifyingUser.emailAddress` from Google metadata is exactly the canonical SA before interpreting a request; reject missing or different publishers. A property hash alone is not provenance because another editor could rewrite both content and property.
+- Have the SA publish immutable, content-hashed JSON requests. Require Google-output `lastModifyingUser.permissionId` to match the pinned native ID of the canonical SA before interpreting a request; pin the owner similarly for receipts/heartbeats. Derive bindings from authenticated Drive `About.user` and the already-approved private archive root's owner, not from a request or its editable properties. Google can hide another principal's `emailAddress`; when visible, it must also match. Missing/mismatched native IDs always fail closed, even if email/displayName looks correct. A property hash alone is not provenance because another editor could rewrite both content and property.
 - Bind source Drive/root, archive owner/root, media-only roles, exact sources/parents/hashes and allowed relative paths. Keep the deletion flag false. Separate an exact historical canary from future lineage requests; enforce timezone-aware first-seen/source-created cutoffs and never scan old inventory into the queue implicitly.
 - The owner worker creates copies in that owner's My Drive. It checks effective account, scope, raw request digest, source state, destination ownership/path and copy integrity, then writes its own receipt. The SA independently streams/verifies both source and copy, records a sidecar mapping and publishes an ACK. Do not replace primary creative IDs or reservations merely because a receipt exists.
 - Preserve original/clean lineage, manager reservation and eligibility. Keep source deletion and primary-ID/read cutover separately gated until consumer and human-permission parity pass.
@@ -23,6 +23,14 @@ If the remote manifest has not been read, obtain its current content through the
 Publish a versioned worker source blob in the Shared Drive and verify its raw bytes/SHA-256 after upload. Pin that exact source ID, SHA-256, project ID and bounded config in a small owner-side bootstrap. Check the code digest before dynamic compilation. This lets other existing Drive editors cause only a blocked integrity check, not silently replace code executed with the owner's account. A code update requires a deliberately repinned version; never auto-trust a changed source file.
 
 The bootstrap's manual test must be exercised before scheduling. Its installer must require a canary ACK published by the canonical SA, refuse duplicate triggers and create at most one recurring trigger. Do not interpret a prepared installer, local VM test or published code file as a live Google trigger.
+
+## Cross-principal Drive publisher identity
+
+Request `lastModifyingUser(emailAddress,permissionId)` explicitly in both `files.get` and `files.list`; selecting email alone can yield an empty modifier object across accounts. Verify both directions: the owner reads SA requests/ACKs, and the SA reads owner receipts/heartbeats. The Google User reference documents that email may be absent depending on visibility; the stable native permission ID is Google output, not an editable file marker. Treat IDs as opaque strings and preserve leading zeros. Do not authorize by display name, a body field or an email-only fallback. A changed native ID for the same email is a different binding requiring investigation/authorization, not an automatic pin refresh.
+
+Cover hidden emails, wrong/missing IDs, contradictory visible emails, unknown expected principals and replay of receipt/heartbeat with privacy-shaped fixtures. Verify Google-derived bindings live before pinning. Updating the representation of the same already-approved principal is not an ACL grant or a new authorized user; retain and audit the binding evidence. Publish a new immutable worker version and deliberately repin its file ID/hash; retain the previous version for rollback. Until the owner runs that new pin, its local tests and source publication do not prove Google recovery.
+
+A worker summary with `status:"ok"` but nonempty `blocked` is not a completed archive operation. Require an empty block list, actual per-job receipt, canonical binary verification/ACK and separate scheduled-heartbeat proof at their respective gates.
 
 ## Replay, concurrency and recovery
 

@@ -653,12 +653,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Manifesto remoto completo confirmado na imagem da mensagem 1562131946102980638: nao declara oauthScopes. Owner aplicar manifesto preservado com Drive e script.scriptapp e guard requireScopes antes de var codigo; salvar e executar somente mgsArquivoTeste na conta autorizada. Depois validar receipt/heartbeat/SA ACK do mesmo canario antes de mgsArquivoAtivar. Producao e exclusao continuam bloqueadas; correcao Google ainda nao aplicada/validada.",
+      "next_step": "Owner manter manifesto e escopos; trocar apenas ID de codigo para 1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us e SHA esperado para 2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2 em Code.gs. Salvar e executar somente mgsArquivoTeste no mesmo canario 526d7a2a007c1fed4b2a9147f92d62b4. Aguardar receipt real, SA binarios/reconcile e ACK antes de mgsArquivoAtivar. OAuth write recuperado; publisher fix ainda nao executado pelo owner. Sem producao, exclusao ou acervo anterior.",
       "objective": "Integrar fila de arquivo 30 TB e skills Ares preservando acervo/campanhas; exclusao desativada durante validacao",
-      "source": "data/ares/creative-ops/30tb-archive/owner-manifest-inspected-1562131946102980638.json",
-      "state": "owner_manifest_missing_explicit_scopes_confirmed",
+      "source": "docs/ares-creative-30tb-autonomous-requirements.md",
+      "state": "oauth_recovered_publisher_fix_published_owner_repin_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T15:56:58+00:00"
+      "updated_at": "2026-10-20T16:11:59+00:00"
     },
     {
       "agent": "ares",
@@ -6832,5 +6832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T16:03:54+00:00"
+  "updated_at": "2026-10-20T16:11:59+00:00"
 }

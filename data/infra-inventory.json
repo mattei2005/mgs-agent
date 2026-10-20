@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-20T12:07:59-04:00",
+    "updated_at": "2026-10-20T16:11:58.952233+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -45312,8 +45312,8 @@
       "id": "ares-creative-30tb-copy-queue-integration-20261020",
       "agent": "zeus",
       "type": "copy-only-archive-queue-and-authorized-ares-skill-update",
-      "status": "owner_manifest_missing_explicit_scopes_confirmed",
-      "updated_at": "2026-10-20T15:56:58.073016+00:00",
+      "status": "oauth_recovered_publisher_fix_published_owner_repin_required",
+      "updated_at": "2026-10-20T16:11:58.952233+00:00",
       "authority_message_id": "1562104715271999589",
       "thread_id": "1562078493498540042",
       "registry_id": "ARES-CREATIVE-30TB-QUEUE-INTEGRATION-20261020",
@@ -45321,38 +45321,38 @@
       "files": [
         {
           "path": "/root/mgs-agent/scripts/ares_archive_bridge.py",
-          "size_bytes": 22714,
-          "sha256": "4b0d22768c168c91149eea682af75b713050c07f636f1b4620df9bebdd200e28"
+          "size_bytes": 23040,
+          "sha256": "ddfe7e8b9f05202d55fc24483c9f8c4c5d9483ed0b9a99422e966dc2cb7ab5ad"
         },
         {
           "path": "/root/mgs-agent/tests/test_ares_archive_bridge.py",
-          "size_bytes": 5090,
-          "sha256": "2b901ed2250c3c42c14a580cd202fe55f626bfdde235e0de9d99c34b3490d987"
+          "size_bytes": 6757,
+          "sha256": "e5afcff0ef014082a29f87ab7d5b697371c473d8d8055aa5d4e2193c2c0a5e34"
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_worker.cjs",
-          "size_bytes": 3821,
-          "sha256": "c18280c353b225b6d276d8cad8721ce8b7a8c1766876313dd8586b51ce50aad3"
+          "size_bytes": 5709,
+          "sha256": "a3c53098afcd55f06aaafbd2ebbc37882cadaddae1ce66590f2ead88467c57a7"
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_worker_orchestration.cjs",
-          "size_bytes": 7612,
-          "sha256": "f477a34955e83ef512776273857f22f0845e87fde95952521ae1d76caeaf831f"
+          "size_bytes": 8274,
+          "sha256": "1f4e8337fb4ddcee045341114cf2aa17d203ab268c1bf7217ca5989abadb4d6b"
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_bootstrap.cjs",
-          "size_bytes": 4391,
-          "sha256": "7285a9146f663305de9e171317408d275177d9565818d24e9e6e61c8b13f8f06"
+          "size_bytes": 4427,
+          "sha256": "d2cb1a1c25f3cb66d53bcca5b319bd2e0bbda12341f667a93368204d6cc0160b"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/Worker.js",
-          "size_bytes": 15853,
-          "sha256": "7c31864eba74f25e0717c174490134f61ecd20d51c119177647393aae693fe81"
+          "size_bytes": 16279,
+          "sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/Bootstrap.gs",
           "size_bytes": 2261,
-          "sha256": "5ae6311438e0ebc3a1cb7f40d1c244c244d6af3d0f64566a7372aa01fb361316"
+          "sha256": "590046ec91601407d152efc9b32c0b9f1f6d1cef768a36eecba9b2210d2bddf6"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/README.md",
@@ -45361,13 +45361,13 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
-          "size_bytes": 22200,
-          "sha256": "f1d9451d19cacf5794edcdd70050accd5c0b448021908994068d92abcdd0f482"
+          "size_bytes": 25565,
+          "sha256": "d73f8cee6bdc8f50311f26859a7b6cead27a4151d6e51c7a0ccf1aa6144d8d17"
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json",
           "size_bytes": 897,
-          "sha256": "9832f1d1691525fa3bbf23247ab1b66072d3c62dcd70d83b010b2a794a18fae0"
+          "sha256": "5b850bd9dd13330ab64dd2b1ea9589d08c4afddb6c472089ecefe29238f64a8d"
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-preparation-verified-1562104715271999589.json",
@@ -45386,8 +45386,8 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "size_bytes": 6868,
-          "sha256": "8f8b2a594a03b64276ca2acb738248302d88ea5adbe7fb3997761b762d0dd65f"
+          "size_bytes": 8820,
+          "sha256": "7c316696a02c0ae66b55749f9aecadc0aa5fc593edb9ac9b2a25b5a9db4bc478"
         },
         {
           "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/SKILL.md",
@@ -45453,22 +45453,31 @@
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/owner-manifest-inspected-1562131946102980638.json",
           "size_bytes": 1325,
           "sha256": "7e1ea545b39cf2f05d68a9664a3f72b3a8fdfb196a0fdef04ac4d024d30ddc32"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/publisher-recovery-prepared-1562132969509097503.json",
+          "size_bytes": 2045,
+          "sha256": "5c8617fdd902f6f13f6aa26e05de0ba1bf1456305ddb30657aa682ab2443cd25"
         }
       ],
       "critical_live_skill_files": 5,
       "critical_live_mirror_equal": true,
       "backup_dir": "/root/.hermes/profiles/zeus/artifacts/creative-archive-30tb/authorization-1562104715271999589",
-      "offline_python_tests": 17,
-      "offline_js_tests": 68,
+      "offline_python_tests": 24,
+      "offline_js_tests": 76,
       "real_request_count": 1,
       "real_receipt_count": 0,
       "canary_job_id": "526d7a2a007c1fed4b2a9147f92d62b4",
       "source_drive_control_folder_id": "1d3w4Xc1EjrmueciM_vCMgva6qJiqpFJR",
       "requests_folder_id": "1yjIOwDLmhAaLNmDdt701WpoFNzNeDXGk",
       "receipts_folder_id": "1gmXrQ-nszxNCwqSytsbX5AEnhm1rvXUL",
-      "worker_file_id": "1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS",
-      "worker_sha256": "7c31864eba74f25e0717c174490134f61ecd20d51c119177647393aae693fe81",
+      "worker_file_id": "1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us",
+      "worker_sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2",
       "worker_versions_retained": [
+        {
+          "id": "1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us",
+          "name": "MGS-Archive-Worker-2e62499de173.js"
+        },
         {
           "id": "1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS",
           "name": "MGS-Archive-Worker-7c31864eba74.js"
@@ -45490,7 +45499,7 @@
       "primary_creative_inventory_writes": 0,
       "google_auth_selector_changes": 0,
       "new_google_acl_grants": 0,
-      "next_gate": "owner replace manifest preserving timezone/Drive v3/logging/runtime; add prepared requireScopes guard before dynamic worker load; save and run only mgsArquivoTeste with all two declared scopes granted; require canonical SA receipt/ACK before activation",
+      "next_gate": "Owner manter manifesto e escopos; trocar apenas ID de codigo para 1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us e SHA esperado para 2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2 em Code.gs. Salvar e executar somente mgsArquivoTeste no mesmo canario 526d7a2a007c1fed4b2a9147f92d62b4. Aguardar receipt real, SA binarios/reconcile e ACK antes de mgsArquivoAtivar. OAuth write recuperado; publisher fix ainda nao executado pelo owner. Sem producao, exclusao ou acervo anterior.",
       "oauth_scope_recovery": {
         "source_message_id": "1562116310215958579",
         "scope_error": "drive.files.create",
@@ -45499,7 +45508,7 @@
         "local_regression_green": true,
         "owner_worker_attempted": true,
         "owner_worker_completed": false,
-        "google_recovery_verified": false,
+        "google_recovery_verified": true,
         "receipt_count": 0,
         "heartbeat_exists": false,
         "source_intact": true,
@@ -45509,7 +45518,28 @@
           "https://www.googleapis.com/auth/script.scriptapp"
         ],
         "remote_manifest_oauth_scopes_absent": true,
-        "manifest_evidence_message_id": "1562131946102980638"
+        "manifest_evidence_message_id": "1562131946102980638",
+        "oauth_write_recovery_verified": true,
+        "manifest_scopes_verified": true
+      },
+      "publisher_recovery": {
+        "source_message_id": "1562132969509097503",
+        "native_ids_verified": {
+          "mgsagent@mgs-core-prod.iam.gserviceaccount.com": "07414359829876449782",
+          "mgsdigitalcorp@gmail.com": "03783617840924670288"
+        },
+        "same_approved_principals_only": true,
+        "no_acl_or_credential_changes": true,
+        "heartbeat_id": "1bfYo56Nx3tShQCQsHez9IsQphawbesT_",
+        "heartbeat_native_publisher_verified": true,
+        "last_heartbeat_worker_sha256": "7c31864eba74f25e0717c174490134f61ecd20d51c119177647393aae693fe81",
+        "owner_new_worker_execution_verified": false,
+        "source_intact": true,
+        "pilot_copies": 1,
+        "request_id": "1A-VQGqLI8EHvoCUW_B0Hd-NrwI3eZJyJ",
+        "request_unchanged_sha256": "752060520e1c419d38e11c790204f3db01db3a7bdc196ae42cd8e499eab3d496",
+        "backup_dir": "/root/.hermes/profiles/zeus/artifacts/creative-archive-30tb/publisher-recovery-1562132969509097503",
+        "proof_path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/publisher-recovery-prepared-1562132969509097503.json"
       }
     },
     {
