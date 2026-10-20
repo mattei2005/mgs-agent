@@ -35,6 +35,8 @@ For a copy-only pilot, use Drive's server-side `files.copy` rather than download
 
 Keep deletion and scheduling absent from the first pilot. Trashing still consumes storage; permanent source cleanup needs its separate bounded Critical Subset confirmation, dependency checks and retention/recovery policy. A locked or unavailable protected login is an authentication blocker, not permission to extract a password into chat, use another identity, ask for a chat code or create an alternate token. Record the approved operational requirement separately from deployed capability so future sessions do not treat unattended operation as already active.
 
+A Google sign-in rejection saying `This browser or app may not be secure` immediately after account identification is a browser-security gate, not evidence of wrong credentials or 2FA failure. Verify the exact Login username/standard-password presence safely, stop after bounded official-entry checks, and request one-time interactive sign-in/consent through a supported browser. Do not create a secret relay before a usable password stage, read a password exposed in a screenshot, choose an alternate saved password field without evidence, weaken account security or misrepresent initial manual setup as an always-on computer dependency.
+
 ### Official sources to refresh
 
 - Shared Drive ownership and pooled storage: https://developers.google.com/workspace/drive/api/guides/about-shareddrives

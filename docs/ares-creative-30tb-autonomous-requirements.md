@@ -17,11 +17,19 @@ Preparation completed locally in `integrations/creative-archive-30tb/`: copy-onl
 
 Read-only canonical Service Account probes returned HTTP 200 for MGS-AGENTS and CRIATIVOS. The source pilot candidate `1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N` is a video under `CRIATIVOS/Nicolas`, with size 5375929 bytes and MD5 `59065739912275ee5995bfee8d5ca9c7`; metadata reported `canCopy=true`. This does not prove the destination account's permission.
 
-Deployment blocker: the isolated browser reached Google sign-in; no Google login was available through `browser_vault`, and the 1Password browser backend reported `locked` with unlock unavailable in this session. The original browser session timed out during navigation; an isolated session recovered browser access and established the real authentication gate. No password or code was requested in chat, no alternate personal token was created, and no credential was read into conversation.
+Historical pre-retry blocker (superseded): the isolated browser reached Google sign-in; no Google login was available through `browser_vault`, and the 1Password browser backend reported `locked` with unlock unavailable in this session. The original browser session timed out during navigation; an isolated session recovered browser access and established the real authentication gate. No password or code was requested in chat, no alternate personal token was created, and no credential was read into conversation.
 
-The canonical 1Password Service Account CLI remained available. A credential-safe metadata search of accessible items did not locate a Google account Login for `mgsdigitalcorp@gmail.com`; only the canonical Service Account and unrelated Google Ads credentials were identified. No password/secret fields were read. If the Login exists under a non-obvious title, resolve it by exact username through the protected relay procedure in `onepassword-service-account-vault-operations`; otherwise Rodolfo must add the Login to 1Password, never chat. Do not infer that the browser backend being locked means canonical 1Password itself is unavailable.
+Historical pre-retry metadata scan (superseded): the canonical 1Password Service Account CLI remained available. A credential-safe metadata search of accessible items did not locate a Google account Login for `mgsdigitalcorp@gmail.com`; only the canonical Service Account and unrelated Google Ads credentials were identified. No password/secret fields were read in that pre-retry scan. Do not infer that the browser backend being locked means canonical 1Password itself is unavailable.
 
 No remote Apps Script project, archive destination folder, new permission, scheduler, copy or deletion has been created. The exact 30 TB destination, account storage quota, Google consent and canonical Service Account destination readback remain unverified.
+
+## Latest retry — credential located; Google browser-security rejection
+
+Rodolfo provided the Login item and authorized retry in message 1562090838748569660. The canonical 1Password item `tvo7ib7lqon66pz23j4x333jny` in vault `ghkdcenuzsp57w37nzhxuxnkj4` is titled `accounts.google.com`; username exactly matches `mgsdigitalcorp@gmail.com`, and the standard password field is populated. Only credential-safe metadata/presence was emitted; no screenshot credential was used.
+
+Both the Google ServiceLogin and official InteractiveLogin entry paths accepted navigation, then rejected the browser immediately after account identification with `This browser or app may not be secure` (`rrk=46`). No password entry occurred, so neither a bad password nor 2FA failure is established. No temporary browser-vault credential relay was created. Stop automated login retries rather than changing security settings, routing through a third-party proxy or extracting alternate password fields.
+
+Current next gate: one-time interactive sign-in and Apps Script initial consent through a Google-supported browser. This is setup only, not a computer-dependent execution architecture. The cloud project/pilot remains undeployed. Prior missing-credential diagnosis above is historical and superseded by this observed provider block.
 
 ## Proposed isolated architecture, pending approval and proof
 
