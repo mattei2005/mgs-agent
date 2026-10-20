@@ -251,6 +251,8 @@ SB_READ_ROUTES = {
 def _scoped_catalog() -> list[dict]:
     import importlib.util
     spec = importlib.util.spec_from_file_location('sb_domain_scope_guard', '/root/mgs-agent/scripts/mgs-domain-scope.py')
+    if spec is None or spec.loader is None:
+        raise ValueError('Validação de escopo SB indisponível; consulta negada.')
     gate = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(gate)
     registry = gate.load_registry(gate.DEFAULT_REGISTRY)
@@ -321,6 +323,33 @@ def api_request(
     return _api_request_transport(method, path, payload=payload, item_name=item_name)
 
 
+def _validate_sb_response(body: object, companies: list[dict]) -> None:
+    # Reject a contradictory server payload before it reaches report callers.
+    account_scope = json.loads(Path('/root/mgs-agent/data/ares/asset-scope.json').read_text())
+    allowed_accounts = {row['account_id'] for row in account_scope['ad_accounts']}
+    aliases = set()
+    for company in companies:
+        for publisher in company.get('publishers') or []:
+            aliases.update(str(publisher.get(k) or '').lower() for k in ('host', 'name', 'publisherId'))
+            aliases.add(company['companyId'] + '_' + str(publisher['publisherId']))
+    def visit(value):
+        if isinstance(value, list):
+            for row in value:
+                visit(row)
+        elif isinstance(value, dict):
+            for key in ('DOMAIN', 'PUBLISHER'):
+                if value.get(key) not in (None, '') and str(value[key]).lower() not in aliases:
+                    raise ValueError('Resposta SB divergente do escopo; relatório retido.')
+            if str(value.get('SOURCE') or '').lower() in {'facebook', 'meta', 'fb'}:
+                customer = str(value.get('CUSTOMER_ID') or '').removeprefix('act_')
+                if customer and customer not in allowed_accounts:
+                    raise ValueError('Resposta SB divergente do escopo; relatório retido.')
+            for child in value.values():
+                if isinstance(child, (dict, list)):
+                    visit(child)
+    visit(body)
+
+
 def _api_request_transport(
     method: str,
     path: str,
@@ -328,6 +357,7 @@ def _api_request_transport(
     payload: dict | None = None,
     item_name: str = TOKEN_ITEM_DEFAULT,
 ) -> tuple[int, object, dict]:
+    _validate_sb_request(method, path, payload, _scoped_catalog())
     token, token_source = get_access_token(item_name)
     for attempt in range(2):
         response = requests.request(
@@ -342,6 +372,8 @@ def _api_request_transport(
         except ValueError:
             body = {"raw_length": len(response.content)}
         if response.status_code not in {401, 403} or attempt == 1:
+            if 200 <= response.status_code < 300:
+                _validate_sb_response(body, _scoped_catalog())
             return response.status_code, body, {
                 "credential_item": item_name,
                 "token_len": len(token),

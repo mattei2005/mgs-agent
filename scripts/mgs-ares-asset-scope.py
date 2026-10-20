@@ -87,11 +87,12 @@ def enforce_meta_path(path,params=None,method='GET'):
    if not isinstance(body,dict):raise ScopeError(DENY)
    enforce_meta_path(child['relative_url'],body,child.get('method','GET'))
   return
- # Root multi-ID reads must prove every node independently.
- if not clean and params.get('ids'):
+ # Multi-ID parameters must prove every node, even when combined with a path.
+ if params.get('ids'):
   ids=params['ids'] if isinstance(params['ids'],list) else str(params['ids']).split(',')
+  if not ids:raise ScopeError(DENY)
   for node in ids:enforce_meta_path(str(node),{k:v for k,v in params.items() if k!='ids'},method)
-  return
+  if not clean:return
  parts=clean.split('/')
  if not parts or not re.fullmatch(r'(?:act_)?[0-9]{5,30}',parts[0]):raise ScopeError(DENY)
  if any(edge in BLOCKED_DISCOVERY for edge in parts[1:]):raise ScopeError(DENY)
@@ -103,6 +104,7 @@ def enforce_meta_path(path,params=None,method='GET'):
 def observe_meta_response(path,params,payload,method='GET'):
  """Record only IDs obtained through an already validated account/object path."""
  if not is_ares_context() or not isinstance(payload,(dict,list)):return
+ enforce_meta_path(path,params,method)
  clean,merged=_request_parts(path,params)
  if merged.get('batch') is not None:
   children=merged['batch'];children=json.loads(children) if isinstance(children,str) else children

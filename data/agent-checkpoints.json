@@ -2252,6 +2252,16 @@
     },
     {
       "agent": "zeus",
+      "id": "META-APP-B0068-CUTOVER-20261020",
+      "next_step": "Validar Graph, backup, canário isolado e dois ciclos contidos antes de reativar.",
+      "objective": "Substituir B006-7 por B006-8 na mesma rota de monitoramento, validar e reativar.",
+      "source": "discord:message:1562178809736863756; data/meta-app-registry.json",
+      "state": "preflight: item imutável atual com app_name b006-8 e campos presentes; sheet sa 13 linhas b006-8, zero b006-7. produção ainda b006-7 pausado; b011-7 será preservado.",
+      "thread_id": "1562178809736863756",
+      "updated_at": "2026-10-20T19:02:04+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "META-APP-B0073-CUTOVER-20260903",
       "next_step": "Operação normal: aceitar as 17 roles restantes; o cron limpa X e alerta cada adição automaticamente.",
       "objective": "Substituir B007-2 por B007-3 no monitor Meta, validar 1Password, Graph, Sheet e reativar toda a rota sem reutilizar IDs app-scoped.",
@@ -6882,5 +6892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T18:51:59+00:00"
+  "updated_at": "2026-10-20T19:02:04+00:00"
 }

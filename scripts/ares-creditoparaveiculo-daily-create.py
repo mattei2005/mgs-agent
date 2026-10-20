@@ -645,6 +645,7 @@ def make_square_clean(source: Path, destination: Path) -> dict[str, Any]:
 
 
 def multipart_video_upload(common, page_token: str, path: Path, title: str, stage: str) -> dict[str, Any]:
+    scope_guard = common._enforce_operational_account_scope(f'{PAGE_ID}/videos', {}, 'POST')
     common._throttle_before_request()
     url = f"https://graph-video.facebook.com/{GRAPH_VERSION}/{PAGE_ID}/videos"
     try:
@@ -659,6 +660,7 @@ def multipart_video_upload(common, page_token: str, path: Path, title: str, stag
     common.record_response_usage(dict(response.headers), response.status_code, payload)
     if response.status_code not in {200, 201} or not isinstance(payload, dict) or payload.get("error") or not payload.get("id"):
         raise Stop(stage, {"http": response.status_code, "error": safe_meta(common, payload), "payload_keys": sorted(payload) if isinstance(payload, dict) else []})
+    scope_guard.observe_meta_response(f'{PAGE_ID}/videos', {}, payload, 'POST')
     return {"id": str(payload["id"]), "title": title, "bytes": path.stat().st_size}
 
 
@@ -984,6 +986,7 @@ def validate_hierarchy(readback: dict[str, Any], source: dict[str, Any], number:
 
 
 def delete_edge(common, token: str, object_id: str, stage: str) -> dict[str, Any]:
+    common._enforce_operational_account_scope(object_id, {}, 'DELETE')
     common._throttle_before_request()
     url = f"https://graph.facebook.com/{GRAPH_VERSION}/{object_id}"
     response = requests.delete(url, data={"access_token": token}, timeout=60)
