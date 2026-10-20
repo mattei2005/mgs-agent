@@ -277,10 +277,11 @@ def notify(job, s):
     verify_final(s)
     channel = str(job['request']['source_thread_id'])
     nonce = 'sq' + re.sub('[^0-9]', '', job['request_id'])[-20:]
-    content = completion_text(s)
+    content = job.get('native_completion_content') or completion_text(s)
     actor = _get('/users/@me')['id']
     recent = _get('/channels/' + channel + '/messages?limit=100')
-    found = next((m for m in recent if str(m.get('nonce')) == nonce and m.get('author', {}).get('id') == actor), None)
+    found = next((m for m in recent if (str(m.get('nonce')) == nonce or m.get('content') == content)
+                  and m.get('author', {}).get('id') == actor), None)
     if job.get('notification'):
         found = _get('/channels/' + channel + '/messages/' + job['notification'])
     if not found:
@@ -297,8 +298,16 @@ def notify(job, s):
                    'allowed_mentions': {'parse': []}}
         req = urllib.request.Request('https://discord.com/api/v10/channels/' + channel + '/messages',
               data=json.dumps(payload).encode(), method='POST', headers={
-                  'Authorization': 'Bot ' + token, 'Content-Type': 'application/json'})
-        with urllib.request.urlopen(req, timeout=30) as response: found = json.load(response)
+                  'Authorization': 'Bot ' + token, 'Content-Type': 'application/json', 'User-Agent': 'MGS-Ares/1.0'})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                job['delivery_http'] = response.status
+                found = json.load(response)
+        except Exception as exc:
+            job['delivery_error_type'] = type(exc).__name__
+            job['delivery_http'] = getattr(exc, 'code', None)
+            atomic(job_path(BASE, job['request_id']), job)
+            raise
         job['notification'] = found['id']; atomic(job_path(BASE, job['request_id']), job)
     read = _get('/channels/' + channel + '/messages/' + found['id'])
     if read.get('content') != content or read.get('channel_id') != channel or read.get('author', {}).get('id') != actor:

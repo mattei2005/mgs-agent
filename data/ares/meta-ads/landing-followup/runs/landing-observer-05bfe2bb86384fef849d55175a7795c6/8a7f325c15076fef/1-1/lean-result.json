@@ -1,0 +1,271 @@
+{
+  "result": "PASS",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://escalatepower.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01&nocache",
+    "resolved_landing_url": "https://escalatepower.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01&nocache",
+    "mapping_source": "Read-only live GET of exact campaign quiz URL + bare nocache: all 7 data-mgs-dq-cta hrefs resolve to this single article; direct-quiz.js?v=1.2.1 initLinks/mergeUrl preserves campaign query. Corroborated by work/shein-growpowerhub-escalatepower-1556503439406534777/public-escalatepower.com-quiz_us_sh3-g006.html.",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792502427.0820327,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Normal Chrome is active and displaying a mostly blank loading page with a centered EscalatePower Finanzas logo; no gate, article, rewarded content, or network ad is visible."
+      },
+      {
+        "at": 1792502435.3709917,
+        "gate": false,
+        "rewarded": false,
+        "article": true,
+        "description": "Normal Chrome viewport shows a readable SHEIN product-trials article with banner and sidebar network ads. No CLAIM MY FREE PRODUCTS gate or rewarded overlay is visible."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 107.70844822798972
+    },
+    "device_mode": "DESKTOP",
+    "desktop_view": {
+      "desktop_view": true,
+      "device_toolbar_visible": false,
+      "viewport_bounds": [
+        0,
+        121,
+        2560,
+        1271
+      ],
+      "device_mode": "DESKTOP",
+      "verified": true,
+      "verified_at": 1792502400.6154516,
+      "source": "native_and_visual_desktop"
+    },
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://escalatepower.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792502378.7789462,
+      "target": {
+        "pid": 18224,
+        "window_id": 10946006,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792502387.0320807,
+      "desktop_view": {
+        "desktop_view": true,
+        "device_toolbar_visible": false,
+        "viewport_bounds": [
+          0,
+          121,
+          2560,
+          1271
+        ],
+        "device_mode": "DESKTOP",
+        "verified": true,
+        "verified_at": 1792502400.6154516,
+        "source": "native_and_visual_desktop"
+      },
+      "opened_at": 1792502422.3673198
+    },
+    "opened_at": 1792502422.3673198,
+    "article_verified": true,
+    "article_ready_at": 1792502435.370995,
+    "article_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_82d39e69e8044999894558574df0b9c8.png",
+    "rewarded_wait_seconds": 13.003675699234009,
+    "scroll_result": {
+      "ok": true,
+      "action": "press_key",
+      "message": "✅ Sent pagedown via SendInput on pid 18224 (delivery_mode:foreground).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "foreground"
+        },
+        "effect": "unverifiable",
+        "route": "global_input",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "scroll_visual_changed": true,
+    "observation_started_at": 1792502443.5705204,
+    "observation_ended_at": 1792502469.0540085,
+    "observation_seconds": 25.483489239006303,
+    "observation_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_84988166c71c4d1992ec413531f43958.png",
+    "visual_captured_at": 1792502469.0505464,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 10946006,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792502472.2140923,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 10946006,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 49.84677243232727,
+    "final_visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Rendered sidebar network ad labeled PUBLICIDADE showing a red PDF icon, the text 'View Template (PDF),' and a red 'Open' button."
+    },
+    "visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Rendered sidebar network ad labeled PUBLICIDADE showing a red PDF icon, the text 'View Template (PDF),' and a red 'Open' button."
+    },
+    "network_ad_confirmed": true,
+    "ad_description": "Rendered sidebar network ad labeled PUBLICIDADE showing a red PDF icon, the text 'View Template (PDF),' and a red 'Open' button.",
+    "visual_review": "Rendered sidebar network ad labeled PUBLICIDADE showing a red PDF icon, the text 'View Template (PDF),' and a red 'Open' button."
+  },
+  "batch_scope": "c4e4e16616a172f352995fbf4d4bfc5c13e9830a8a92cb14577b87f6d953c35d"
+}

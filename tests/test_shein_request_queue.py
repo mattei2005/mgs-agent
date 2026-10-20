@@ -159,6 +159,30 @@ class RequestQueueTests(unittest.TestCase):
         value['media_qa']['C']['ad_ids'] = ['A']
         q.verify_final(value)
 
+    def test_native_exact_content_reconciles_without_nonce_or_resend(self):
+        from unittest.mock import patch
+        q.enqueue(self.req, 'campaign', [], self.base)
+        job = json.loads(q.job_path(self.base, self.req['request_id']).read_text())
+        job.update(delivery_intent_at='2026-10-20T13:06:00+00:00', native_completion_content='verified fixture receipt')
+        message = {'id': 'M', 'channel_id': 'THREAD', 'content': 'verified fixture receipt', 'author': {'id': 'ARES'}}
+        with patch.object(q, 'BASE', self.base), patch.object(q, 'verify_final'), patch('ares_campaign_v3.shein_channel_authority._get', side_effect=[{'id': 'ARES'}, [message], message]), patch('urllib.request.urlopen') as post:
+            q.notify(job, {'completed_at': 'time'})
+        post.assert_not_called()
+        self.assertEqual(job['status'], 'DELIVERED')
+        self.assertEqual(job['notification'], 'M')
+
+    def test_other_author_cannot_satisfy_native_delivery(self):
+        from unittest.mock import patch
+        q.enqueue(self.req, 'campaign', [], self.base)
+        job = json.loads(q.job_path(self.base, self.req['request_id']).read_text())
+        job.update(delivery_intent_at='2026-10-20T13:06:00+00:00', native_completion_content='verified fixture receipt')
+        message = {'id': 'M', 'channel_id': 'THREAD', 'content': 'verified fixture receipt', 'author': {'id': 'OTHER'}}
+        with patch.object(q, 'BASE', self.base), patch.object(q, 'verify_final'), patch('ares_campaign_v3.shein_channel_authority._get', side_effect=[{'id': 'ARES'}, [message]]), patch('urllib.request.urlopen') as post:
+            with self.assertRaisesRegex(ValueError, 'uncertain'):
+                q.notify(job, {'completed_at': 'time'})
+        post.assert_not_called()
+        self.assertNotEqual(job['status'], 'DELIVERED')
+
     def test_final_notice_contains_only_verified_completion(self):
         with self.assertRaises(ValueError):
             q.completion_text({'phase': 'POSTPROCESS_PENDING'})

@@ -4413,12 +4413,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1562023429690097665",
-      "next_step": "Worker aguarda predecessor terminal; então relê uso histórico, reconcilia somente reservas terminais sob locks e retoma mesmo runner/IDs/QA; publica somente conclusão normal na origem por Ares e valida GET/nonce. Não pedir prioridade nem avisar contenção ao operador.",
-      "objective": "Concluir pedido original Vizioid G006 com4 campanhas/10 anúncios sem recriar IDs; contenção tratada por fila silenciosa aprovada.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/jobs/shein-1562023429690097665.json",
-      "state": "waiting_automatic_queue: política corrigida por rodolfo1562081180285935670; job persistido com request original imutável e dependência shein-1562024416823607398. serviço próprio ativo/enabled e worker real conferido. 4 campaign ids originais preservados;64 testes verdes; zero novo write meta ou transferência de reserva ao enfileirar. aviso final ainda não enviado; campanhas ainda não concluídas.",
+      "next_step": "Responder recibo normal nesta origem; worker reconcilia conteúdo literal+autor/canal e marca aviso DELIVERED sem novo POST. Não reexecutar campanhas concluídas.",
+      "objective": "Quatro clones C01 Vizioid G006 concluídos; conferir fechamento normal ao solicitante.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/maintenance/queue-native-receipt-1562023429690097665/live-verification.json",
+      "state": "operation_complete_verified: 004-007,4 campanhas/4 conjuntos/10 anúncios active por get novo; usd20/dia cada,totalusd80/dia,cost_cap90c; qa4/4 com ids exatos; ids originais preservados. runner terminou20/10 09:06edt. apenas aviso automático falhou; resposta nativa preparada, sem declarar entrega antes do get. nenhum novo write meta nesta conferência.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-10-20T12:46:33+00:00"
+      "updated_at": "2026-10-20T13:21:50+00:00"
     },
     {
       "agent": "ares",
@@ -6752,5 +6752,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T13:13:42+00:00"
+  "updated_at": "2026-10-20T13:21:50+00:00"
 }
