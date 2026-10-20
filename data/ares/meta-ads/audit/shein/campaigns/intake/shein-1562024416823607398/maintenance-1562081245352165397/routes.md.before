@@ -1,0 +1,277 @@
+# MGS OS — Rotas Operacionais
+
+> Status: proposta canônica v0.3
+> Fonte-mãe: `context/company-os.md`
+> Base operacional: `context/company-current-operating-model.md`
+
+## Regra padrão de roteamento
+
+```text
+Identificar assunto
+→ identificar área
+→ identificar dono humano/agente
+→ consultar fonte de verdade
+→ verificar permissão
+→ executar, responder ou escalar
+→ registrar se afetar produção, permissão, custo, credencial ou infra
+```
+
+## Rotas por tipo de pedido
+
+```text
+Pedido/evento                          Dono primário                  Agente        Escalação
+-------------------------------------- ------------------------------ ------------ ----------------------
+Criar REC/P1                           Raquel / Rodolfo / Content     Atena        Zeus se exceção/erro.
+Editar/publicar conteúdo WordPress      Raquel / Rodolfo / Content     Atena        Zeus se risco técnico.
+Criar artigo SEO                        Raquel / Rodolfo / Content     Atena        Zeus se prioridade conflita.
+Montar/configurar site WordPress        Rodolfo / Tech                 Zeus apoio   Rodolfo aprova.
+Configurar pixel Facebook/Google Ads    Rodolfo / Tech/Growth          Zeus apoio   Rodolfo aprova.
+Criar criativo estático                 Kelly + Geizian / Creative     Ares         Rodolfo se padrão/ferramenta.
+Criar/editar vídeo                      Kelly + Geizian / Creative     Ares         Rodolfo se padrão/ferramenta.
+Organizar criativos Canva/Drive         Kelly + Geizian / Creative     Ares         Rodolfo se estrutura mudar.
+Reservar/conciliar criativo para teste   Growth + Creative               Ares         Meta × Drive antes do write.
+Criar/subir campanha Facebook Ads       Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
+Criar/subir campanha Google Ads         Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
+Criar/subir campanha TikTok Ads         Rodolfo + Geizian + gestores   Ares         Futuro; Rodolfo aprova.
+Operar perfil AdsPower no PC1            Rodolfo + usuários autorizados Ares         Zeus se acesso/infra; lease obrigatório.
+Analisar ROI campanha                   Growth + Revenue + Finance     Ares         Zeus/Rodolfo se anomalia.
+Cobrar tarefa pendente de gestor         Office / Follow-up             N/A          Ially; escala Geizian/Rodolfo.
+Configurar estratégia ChatPion/Messenger Rodolfo + Geizian + gestores   N/A          Sem Ares.
+Configurar quiz + captura SMS/email      Rodolfo / Growth               N/A          Rodolfo.
+Operar SMS Funnel                        Rodolfo / Growth               N/A          Rodolfo.
+Consultar/relatar SMS Funnel (read-only) Growth / Campaign Ops          Ares         Produto interno; sem gate de domínio salvo site explícito.
+Ajustar blocos/preço AdOps              Revenue / SmartBidding         N/A          Rodolfo/Geizian/gestor.
+Cadastrar URLs/produtos e `jbf_operation` na Smart Bidding  Revenue / AdOps  N/A    Time de AdOps executa; Zeus apenas valida/reporta quando solicitado.
+Aprovar site em rede AdX/SmartBidding    Revenue / Rodolfo              Zeus apoio   Rodolfo.
+Fechamento financeiro                   Rodolfo / Finance              Zeus report  Rodolfo.
+Autorizar usuário externo               Rodolfo / Security             Zeus         Rodolfo confirma.
+Alterar credencial/token                 Security / Rodolfo             Zeus         Rodolfo confirma.
+Erro Hermes/VPS/agente                  Tech / Zeus                    Zeus         Rodolfo se crítico.
+Inventário/reorganização estrutural      Tech / Zeus                    Zeus         Rodolfo aprova blocos.
+Criar/alterar cron global/operacional   Domínio + Tech/Zeus           Agente dono   Política anti-colisão obrigatória.
+```
+
+Toda criação ou alteração de cron, por qualquer agente ou scheduler, segue `context/cron-scheduling-policy.md`. O agente dono do domínio define a semântica; Zeus governa o inventário global quando houver conflito, mas ninguém pode gravar o schedule antes de escolher um minuto de início livre entre jobs agendáveis e validar duração, lock e recursos compartilhados.
+
+## Content Operations
+
+REC/P1, edição/publicação WordPress e artigos SEO pertencem à Atena. Se precisar intervenção manual, Rodolfo e Raquel cuidam.
+
+Zeus só entra quando houver exceção, erro recorrente, risco técnico, usuário sem autorização ou conflito operacional.
+
+## Tech / WordPress / Pixel
+
+Montar/configurar site WordPress e configurar pixel de Facebook Ads/Google Ads continuam sob responsabilidade do Rodolfo. Zeus pode ajudar como apoio técnico/orquestrador quando Rodolfo solicitar ou quando houver problema operacional.
+
+## Creative Operations — Ares
+
+Tudo relacionado a criativos — criação, edição, vídeo, estático, referências, organização, naming, metadata, Drive e inventário — pertence ao módulo Creative Ops do Ares.
+
+```text
+Comando humano principal       Kelly
+Também podem pedir             Rodolfo, Geizian e gestores autorizados
+Agente                         Ares
+Área                           Creative Operations + Growth
+```
+
+Fluxo unificado:
+
+```text
+1. Usuário autorizado pede ou envia criativo ao Ares.
+2. Ares cria/trata/classifica e sanitiza.
+3. Kelly ou responsável aprova quando o fluxo exigir.
+4. Ares salva no Shared Drive canônico `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), valida e registra original → tratado.
+5. Upload de gestor permanece reservado e ares_eligible=false.
+6. Antes de campanha, Ares concilia Drive × Meta e reserva o selecionado.
+7. Campaign Ops executa somente com autoridade vigente e valida por readback.
+```
+
+O gate canônico de metadata é `/root/mgs-agent/scripts/clean-creative-metadata.sh`. Original e tratado são uma única linhagem; `01_READY` não prova ineditismo.
+
+## Growth / Campaigns — Ares
+
+Tudo relacionado a campanhas, independente do source, pertence ao Ares.
+
+```text
+Sources atuais                 Facebook Ads e Google Ads
+Source futuro/potencial         TikTok Ads
+Usuários previstos              Rodolfo, Geizian e gestores treinados
+Agente                          Ares
+Área                            Growth / Media Buying
+```
+
+Ares gerencia criativos, contas, campanhas, análises e relatórios conforme permissão aprovada. Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas estão autorizados conforme o registry real.
+
+Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de quiz. Ares pode consultar e produzir relatórios read-only do SMS Funnel como parte de Campaign Ops/Growth, além de usar campanhas/estratégias resultantes desses fluxos; a configuração dessas estruturas fica com Rodolfo, Geizian e gestores conforme o caso.
+
+Campanhas Meta da família `chatpion_bot_messenger` usam `chatpion-bot-campaign-operations` como procedimento compartilhado. A skill da família não contém site, conta ou valor operacional: cada consumidor resolve identidade, authority, thresholds, budgets, Pages, horários, threads, runners, state e exceções no próprio contrato. Mudança de família projeta todas as operações ativas; override de uma operação atualiza somente sua rota funcional e sua thread Regras.
+
+## Recovery operacional do Ares
+
+- **Autoridade:** correção explícita de Rodolfo Mattei na thread `1558159641303580693`, referindo-se à mensagem `1558159707862990992` na thread de origem `1557917403822956698`: Ares deve resolver e avisar no pedido original, sem mencionar ou acionar Zeus como fallback rotineiro.
+- **Regra ativa para Ares:** erros em pedidos já autorizados permanecem sob responsabilidade do Ares. Diagnosticar, fazer readback, reconciliar efeitos parciais e concluir pela rota central com o mesmo request/IDs. Não transferir a execução nem exigir repetição de autorização por falha técnica.
+- **Correção segura:** manutenção técnica autorizada fica separada da transação de campanha; preservar manifests selados, fonte, budget, estratégia e relógio. Retomar somente camada ausente/inválida após validação; nenhum writer paralelo, replay cego, cópia/exclusão implícita ou canário não autorizado.
+- **Comunicação:** informar resultado validado na thread original. Bloqueio externo incontornável mantém checkpoint resumível e causa/próxima decisão exatas para Rodolfo, sem menção automática ao Zeus. Gates críticos e autorização explícita para intervenção separada permanecem.
+- **Histórico:** a delegação abaixo preserva a autorização técnica histórica de Zeus, mas não é mais a rota automática de Ares nem obrigação de handoff. Inclusão obrigatória de membros em threads é regra distinta e não foi revogada.
+
+## Delegação histórica de recovery Ares → Zeus
+
+- **Autoridade:** Rodolfo Mattei (`344196393512075265`), mensagem `1558142033774776411`, thread `1558141425541980203`, em 2026-10-09. Esta decisão supersede a interpretação de que todo handoff técnico de Ares exige um novo OK direto de Rodolfo para Zeus atuar.
+- **Gatilho:** handoff novo e autêntico do Ares (`1508864261504630925`) para recuperação técnica de um comando humano de gestor/operador já autorizado no escopo original. Não concede acesso Full do Ares ao Zeus nem autorização global a outros usuários.
+- **Validação obrigatória:** ler comando humano e eventuais continuações na thread de origem; conferir identidade, autorização vigente, conta/canal, budget, estratégia, status, schedule e checkpoint antes de qualquer write. Para SHEIN, aplicar a autoridade live por canal/partição definida em `SHEIN-US-DIRECT.json#/channel_authorization_policy`.
+- **Execução:** Zeus investiga, corrige com segurança a infraestrutura/rota central e recupera o mesmo pedido sem cobrar nova autorização de Rodolfo ou repetir o OK de orçamento já aprovado. Preservar IDs e escopo; sem writer paralelo, cópias adicionais, exclusões implícitas ou modificação da fonte. Novo início exige continuação humana explícita ou política vigente de Rodolfo que autorize o ajuste. A política posterior de SHEIN `SHEIN-US-DIRECT.json#/request_defaults/expired_explicit_start_policy` (mensagem `1558142161659105342`) autoriza horário explícito vencido do próprio dia da conta → início imediato após QA, com auditoria do horário original, sem novo OK somente pelo atraso. Fora desse recorte, não inferir novo horário; com efeitos parciais, preservar request/IDs e usar continuação central auditada, nunca nova cópia ou sobrescrita silenciosa do manifest.
+- **Dono funcional e comunicação:** Ares informa o gestor e continua o pedido na thread de origem pela rota canônica, após a correção técnica e com QA/readback completo antes da ativação. Zeus não se torna dono de estratégia/performance.
+- **Exceções preservadas:** mudança de escopo, autorização humana não comprovada, conta fora da partição, credenciais, billing, operações destrutivas e demais itens do Critical Subset continuam sujeitos às confirmações próprias. Essa delegação não autoriza alterar skills de outro agente sem o gate vigente.
+- **Registro:** `authorized-users.json#/agents/zeus/delegated_handoff_policy`; registrar execução, inventário, checkpoint e REPORT-INFRA quando aplicável.
+
+## Gestores e rastreamento por UTM_medium
+
+```text
+Gestor     Código UTM_medium
+---------  -----------------
+Icaro      g001
+Geizian    g002
+Isliago    g003
+Joe        g004
+Kelly      g005
+Nicolas    g006
+```
+
+O `UTM_medium` carrega o código do gestor. Ele é usado para rastrear receita/lucro por gestor, site e campanha.
+
+## Estratégia ChatPion / Messenger
+
+ChatPion, no contexto MGS, significa o fluxo operacional baseado no dashboard `digitaltrchat.com` configurado pelo dev da Smart Bidding.
+
+Responsabilidade: Ares não mexe no ChatPion/DigitalTrChat. O cadastro de usuários é feito por Rodolfo e Geizian. Os gestores acessam os usuários das verticais e fazem a configuração operacional e os fluxos descritos abaixo.
+
+Fluxo resumido:
+
+```text
+1. Admin MGS entra no DigitalTrChat.
+2. Cria usuários por site/vertical.
+3. Gestor loga com o usuário da vertical.
+4. Gestor conecta um segurador/perfil Facebook.
+5. O segurador tem várias páginas Facebook conectadas.
+6. Em Bot Manager, configura flows de mensagens.
+7. Campanha roda no Facebook Ads com objetivo Messenger.
+8. Usuário clica no anúncio e abre Messenger com mensagem JSON pré-definida.
+9. Usuário entra no drip de até 28 mensagens nas primeiras 24h.
+10. Depois segue para broadcast via Smart Bidding.
+```
+
+Broadcast:
+
+```text
+1. Página é cadastrada na dashboard da Smart Bidding.
+2. Template de mensagens e horários é selecionado.
+3. Após 24h do cadastro, usuário começa a receber broadcast.
+4. Pode enviar até 12 mensagens por dia.
+5. Cada mensagem pode ter texto, imagem, botão e/ou link para artigo/site MGS.
+```
+
+Observação: estratégia de bot/Messenger funciona para Facebook Ads, não para Google Ads.
+
+## Estratégia tráfego direto / quiz / SMS
+
+Outra estratégia de aquisição é tráfego direto via quiz e captura de SMS/email.
+
+Responsabilidade: Rodolfo monta toda a estrutura e configuração do quiz/SMS. Ares não configura quiz nem SMS Funnel, mas consultas, auditorias e relatórios read-only do dashboard fazem parte do escopo normal do Ares.
+
+Fluxo atual:
+
+```text
+1. Campanha roda no Facebook Ads ou Google Ads.
+2. Usuário clica no anúncio.
+3. Usuário abre o quiz.
+4. Usuário responde perguntas.
+5. Usuário preenche nome, telefone e, se usado, email.
+6. SMS Funnel envia SMS após alguns minutos.
+7. SMS tem CTA e link.
+8. Clique abre artigo/site MGS.
+9. Receita vem da monetização do site.
+```
+
+Ferramenta atual de SMS: `SMS Funnel` (`app2.smsfunnel.com.br`).
+
+## Revenue / AdOps / Smart Bidding / ActiveView
+
+Ajustar blocos/preço AdOps e aprovar site em rede fazem parte da camada AdX/Ad Manager dos parceiros Google: Smart Bidding e ActiveView.
+
+A dashboard da Smart Bidding é a principal para gerenciamento por ser mais completa. ActiveView permanece como exceção intencional para `openzed` e seus subdomínios enquanto esses sites ainda estiverem na tecnologia/rede AV. Wavesbee e finanzas.wavesbee usam JBF/GAM SB. Cliquet e finanzas.cliquet carregam wrapper JBF, mas os builders de produção ainda usam o GAM AV `198073784`; rotear como migração SB incompleta até o cutover para os builders genéricos atuais e a validação dos slots no GAM SB `21922122164`.
+
+Fluxo resumido para site novo:
+
+```text
+1. Rodolfo monta o site inteiro.
+2. Site é enviado para aprovação no parceiro/rede correto: Smart Bidding por padrão ou ActiveView nas exceções.
+3. URLs monetizáveis são enviadas para cadastro.
+4. Parceiro configura blocos de anúncio no site.
+5. Rodolfo configura pixel.
+6. Rodolfo cria contas/campanhas em Facebook Ads ou Google Ads.
+7. Campanhas iniciam conforme estratégia de tráfego.
+```
+
+## Alertas RunCloud
+
+- Canal exclusivo de alertas RunCloud designado por Rodolfo: Discord `1557807035544768662`.
+- Fonte da designação: mensagem `1557807209776156675`, thread `1557806235066044489`.
+- A designação do destino não ativa integração, webhook, monitor ou notificações. Tipos de alerta, limiares e implementação permanecem sujeitos ao escopo aprovado; não foram definidos nessa mensagem.
+- REPORT-INFRA permanece no canal canônico `1498132022634483894`; não confundir o registro de mudanças com o novo destino de alertas RunCloud.
+- Fase inicial ativada sob as autorizações `1557811389647560865` e `1557826145578127361`: conexão, serviços esperados, disco e backups dos servidores Inc configurados em `data/runcloud-alert-config.json`. A exceção diária de agenda às 08:28 Eastern, com stagger de 35 segundos e isolamento do monitor, foi confirmada por Rodolfo; o cron financeiro não foi alterado.
+- Runner: `scripts/monitor-runcloud.py`; procedimento: skill `log-monitor-discord-alert`, referência `runcloud-initial-monitoring.md`. Memória/carga, SSL, SSH/segurança e reparos remotos não pertencem à cobertura inicial ativa.
+
+## Alertas de capacidade Hermes
+
+```text
+Evento                         Canal         ID
+-----------------------------  ------------  -------------------
+USER/MEMORY >=90%              #limites-90   1527401973698007060
+REPORT-INFRA da mudança        #alerts-infra 1498132022634483894
+```
+
+O monitor informa Rodolfo e gera proposta before/after somente leitura no limiar de 90%. A proposta nunca é aplicada automaticamente; alteração de USER/MEMORY continua exigindo aprovação explícita. O Discord recebe apenas metadata e ID da proposta, nunca o conteúdo da memória.
+
+## Escalar para Zeus
+
+Escalar para Zeus quando houver:
+
+- usuário externo sem autorização;
+- risco de publicação errada;
+- erro recorrente de agente;
+- falha de cron/script;
+- mudança em produção;
+- custo/ROI anormal;
+- budget sensível;
+- credencial;
+- dúvida de dono;
+- conflito entre áreas;
+- pedido fora do playbook.
+
+## Escalar para Rodolfo
+
+Escalar para Rodolfo quando houver:
+
+- budget;
+- credenciais;
+- produção crítica;
+- acesso permanente;
+- agente novo;
+- política operacional;
+- fechamento financeiro;
+- remoção/migração estrutural;
+- risco jurídico, financeiro, reputacional ou operacional.
+
+## Rotas por área
+
+```text
+Área                         Entrada comum                         Saída esperada
+---------------------------- -------------------------------------- -----------------------------
+Executive / Management        prioridade, decisão, conflito          decisão, direção, governança
+Content Operations            pedido editorial/WordPress             conteúdo publicado/ajustado
+Creative Ops + Growth        criativo, campanha, custo, ROI         asset/campanha/análise/alerta
+Revenue / AdOps               bloco, aprovação, regra, monetização   ajuste/alerta/relatório
+Finance / BI                  fechamento, receita, custo             relatório/decisão financeira
+Tech / WordPress / Infra      site, plugin, pixel, Hermes, VPS       ajuste técnico validado
+Security / Access             acesso, token, dashboard, API          autorização/negação/audit log
+```
