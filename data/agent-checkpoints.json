@@ -4433,12 +4433,12 @@
     {
       "agent": "ares",
       "id": "ares-yolo-g001-number-bid-preview",
-      "next_step": "Aguardar validacao visual explicita de Rodolfo. Somente apos ela promover mergeNumeroLance para padrao,rerender36modelos com mesmoscortes e substituir somente lotes atuais do pending-global-rollout.json,com GETpublicacoes/GET404deletes. Nao executar rollout ou exclusoes globais antes do OK.",
-      "objective": "Enviar previa YOLO G001 com CC/MV/BC na coluna Nº, retirar Lance e substituir somente ultimo report desta conta",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-g001-number-bid-preview-20261019T223848/pending-global-rollout.json",
-      "state": "previa_concluida_aguardando_validacao:55campanhas/55historicos e financeiro19/10 21:51edt preservados;nº abreviado+copy na principal/historico,semlance,bidmantido,grade154versus160.129testes ok;11partes novas getexato e10ids anteriores deletados get404. demais35relatorios inalterados. numero atual dos novosids em delivery.json;defaults globais sem mudanca.",
+      "next_step": "Aguardar OKvisual explicito de Rodolfo paraCP. Somente apos validacao promover formato e substituir lotes atuais das36contas apontados no pending-global-rollout.json,sem apagar historicoanterior e sem recarregarfinanceiro para mudanca visual.Nao usar IDs da previaV1 que ja foram excluidos.",
+      "objective": "Substituir somente previa YOLO G001 pela versao CP89, mantendo fonte e corte financeiro",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-g001-cp-preview-20261019T225900/pending-global-rollout.json",
+      "state": "cp_previa_concluida_aguardando_validacao:55campanhas/55historicos e snapshot21:51edt preservados;nºusacc/mv/bcecporigemliteral,semlance,bidmantido,grade150versus154.133testes ok,11partesnovasgetexato e11ids antigosdeleteget404. demais35reportsintactos.novosids no delivery.json e pending-global-rollout.json;nenhuma campanhameta oucron alterado.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T02:45:01+00:00"
+      "updated_at": "2026-10-20T03:03:27+00:00"
     },
     {
       "agent": "ares",
@@ -6652,5 +6652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T02:45:01+00:00"
+  "updated_at": "2026-10-20T03:03:27+00:00"
 }

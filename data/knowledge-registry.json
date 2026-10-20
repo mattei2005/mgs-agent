@@ -4752,6 +4752,24 @@
       "updated_at": "2026-10-09T15:30:32+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.number-bid-preview",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-20T03:01:49+00:00",
+      "id": "ARES-YOLO-G001-CP-PREVIEW-20261019",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "draft",
+      "superseded_by": null,
+      "title": "Previa YOLO G001 CP89 substitui COPY C89, Nº12 grade150; sem rollout global antes de validacao",
+      "updated_at": "2026-10-20T03:01:49+00:00"
+    },
+    {
       "canonical_key": "ares.shein-us-direct.yolo-g001.reporting.health-layout",
       "canonical_source": "profiles/ares-skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
       "consumers": [
@@ -13039,5 +13057,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T02:42:29+00:00"
+  "updated_at": "2026-10-20T03:01:49+00:00"
 }
