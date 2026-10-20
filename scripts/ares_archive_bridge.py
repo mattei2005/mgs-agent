@@ -77,8 +77,9 @@ def validate_asset(a):
     timestamp(a.get('sourceCreatedTime'))
     return a
 
-def make_request(c,assets,*,kind,lineage_id):
+def make_request(c,assets,*,kind,lineage_id,validation_only=False):
     validate_config(c)
+    if type(validation_only) is not bool:raise ArchiveError('VALIDATION_FLAG')
     if not assets or len(assets)>2 or kind not in ('canary','lineage'): raise ArchiveError('JOB_SCOPE')
     for a in assets: validate_asset(a)
     if len({a['sourceId'] for a in assets})!=len(assets): raise ArchiveError('DUPLICATE_SOURCE')
@@ -89,6 +90,7 @@ def make_request(c,assets,*,kind,lineage_id):
         if {a['role'] for a in assets}!={'original','clean'}: raise ArchiveError('LINEAGE_PAIR_REQUIRED')
         if any(timestamp(a['sourceCreatedTime'])<timestamp(c['effective_after']) for a in assets): raise ArchiveError('HISTORICAL_SOURCE_EXCLUDED')
     identity={'schema':'mgs.archive.request.v1','account':ACCOUNT,'sourceDriveId':SOURCE_DRIVE,'sourceRootId':SOURCE_ROOT,'archiveRootId':ARCHIVE_ROOT,'deleteSource':False,'kind':kind,'lineageId':str(lineage_id),'assets':assets}
+    if validation_only:identity['validationOnly']=True
     identity['jobId']=hashlib.sha256(canonical(identity)).hexdigest()[:32]
     identity['createdAt']=now_iso()
     return identity
@@ -104,6 +106,17 @@ def validate_receipt(job,r):
     got=[(a.get('role'),a.get('sourceId')) for a in r.get('assets',[])]
     if len(got)!=len(expected) or set(got)!=expected: raise ArchiveError('RECEIPT_ASSET_SET')
     return True
+
+def record_verified_job(index,job,result):
+    if result.get('status')!='verified' or result.get('jobId')!=job.get('jobId') or result.get('deleteSource') is not False:raise ArchiveError('UNVERIFIED_INDEX_RESULT')
+    if 'validationOnly' in job and job['validationOnly'] is not True:raise ArchiveError('VALIDATION_FLAG')
+    if job['kind']=='lineage' and job.get('validationOnly') is not True:
+        for entry in result['assets']:
+            prev=index['mappings'].get(entry['sourceId'])
+            if prev and any(prev.get(k)!=entry[k] for k in ('archiveId','sha256','lineageId')):raise ArchiveError('MAPPING_CONFLICT')
+        for entry in result['assets']:index['mappings'][entry['sourceId']]=entry
+    index['verified_jobs'][job['jobId']]=result
+    return index
 
 def resolve_id(source_id,mappings,prefer=False):
     entry=mappings.get(source_id,{})
@@ -296,14 +309,11 @@ def reconcile(d,c,job_id,apply=False):
     result={'status':'verified','kind':job['kind'],'jobId':job_id,'assets':verified,'verifiedAt':now_iso(),'deleteSource':False,'inventoryIdentifiersChanged':False}
     if apply:
         index=read_json(DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}})
-        if job['kind']=='lineage':
-            for entry in verified:
-                prev=index['mappings'].get(entry['sourceId'])
-                if prev and any(prev.get(k)!=entry[k] for k in ('archiveId','sha256','lineageId')):raise ArchiveError('MAPPING_CONFLICT')
-                index['mappings'][entry['sourceId']]=entry
-        index['verified_jobs'][job_id]=result
+        if job.get('validationOnly') is True:result['validationOnly']=True
+        record_verified_job(index,job,result)
         atomic_json(DATA/'archive-index.json',index);atomic_json(DATA/'jobs'/('verified-'+job_id+'.json'),result)
         ack={'schema':'mgs.archive.ack.v1','jobId':job_id,'kind':job['kind'],'status':'verified','deleteSource':False,'assets':verified}
+        if job.get('validationOnly') is True:ack['validationOnly']=True
         # Stable ack bytes make retries replay-safe despite later local verification times.
         d.upload_once(c['requests_folder_id'],'ack-'+job_id+'.json',canonical(ack),'application/json','ack:'+job_id,'ack')
         request_file=d.one(c['requests_folder_id'],'request:'+job_id)
