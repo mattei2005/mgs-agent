@@ -96,7 +96,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Operational route packs
 
-- **Smart Bidding: decompor aumento de gasto por site/gestor ou reconciliar lucro por faixas de ROI** → `references/smartbidding-roi-band-reconciliation.md`
+- **Smart Bidding: listar por Estimate Health, decompor aumento de gasto por site/gestor ou reconciliar lucro por faixas de ROI** → `references/smartbidding-roi-band-reconciliation.md`; para Health, seguir Meta primeiro e coluna renderizada da dash depois.
 
 - **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
 - **Interpretar pedidos naturais de criação por canal/operação** → `references/natural-campaign-request-contracts.md`

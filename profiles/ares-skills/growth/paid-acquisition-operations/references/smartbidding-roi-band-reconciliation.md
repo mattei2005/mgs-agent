@@ -8,6 +8,13 @@ Escolher o ramo antes da coleta:
 
 Todos os ramos compartilham o procedimento de período, autenticação e escopo da seção 1.
 
+## Listas pela coluna Estimate Health — Meta primeiro, dash SB depois
+
+- Para listar campanhas ativas abaixo de um percentual de Estimate Health, começar pelo catálogo positivo de contas da operação e conferir cada conta na Meta, com o gate account-scoped antes da leitura e paginação completa. A seleção nasce das campanhas ativas nas contas de anúncio, nunca das linhas ou dos candidatos encontrados primeiro na SB. Reconciliar contas previstas versus consultadas e IDs ativos únicos; conta sem linha financeira não equivale a conta auditada nem campanha sem resultado.
+- Depois, abrir a dashboard SB no período exato solicitado e copiar o percentual renderizado na coluna Estimate Health para os mesmos IDs de conta/campanha. Relacionar por IDs reais e conferir a granularidade por campanha; não substituir essa evidência por cálculo local dos contadores, média diária ou seleção derivada da API. A fórmula da API pode apoiar diagnóstico, mas não prova leitura da coluna.
+- Manter campanhas ativas sem correspondência ou sem percentual como pendentes/n/d, separadas das campanhas comprovadamente abaixo do corte. Não certificar cobertura integral nem reutilizar uma lista anterior como definitiva enquanto faltar a leitura da dash. Se o navegador impedir a coleta, preservar a seleção Meta e solicitar somente o acesso/interação realmente necessário, sem inventar percentuais.
+- Teste de aceite: igualdade entre o catálogo autorizado e contas consultadas; status e unicidade da seleção Meta; cobertura da coluna renderizada para cada ID, com ausências explícitas; datas e threshold preservados. Um teste somente da fórmula não satisfaz este aceite.
+
 ## 1. Fixar período, escopo e fonte do total
 
 1. Recuperar o relatório/checkpoint anterior quando o pedido disser mesma análise; preservar moeda, empresas, tratamento de revenue share e metodologia. Reenvio usa os valores validados; novo período exige dados novos.

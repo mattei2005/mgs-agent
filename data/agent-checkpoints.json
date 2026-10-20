@@ -1102,6 +1102,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-HEALTH-1562158678403194912",
+      "next_step": "Obter autorização de foreground para abrir nova aba SB no Chrome PC1 sem tocar na aba pessoal; ler período e coluna Estimate Health para os IDs Meta, incluindo 40 ativos sem linhas SB no snapshot anterior. Reutilizar snapshot Meta e não certificar a lista antiga.",
+      "objective": "Listar campanhas ativas SHEIN e CPV com Estimate Health abaixo de 90% de 01 a 19/10/2026, copiando a coluna renderizada SB",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/estimate-health-20261001-19/all-account-validation.json",
+      "state": "meta auditada integralmente: 36 contas shein, 16 cpv, 539 e 74 campanhas efetivamente active. percentuais anteriores calculados pela api não são validação da dash. browser automatizado bloqueado pelo frontend; chrome nativo pc1 disponível, mas ctrl+t exige foreground, ainda não autorizado. nenhuma campanha alterada.",
+      "thread_id": "1562158678403194912",
+      "updated_at": "2026-10-20T17:49:34+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-KELLY-CAR-BR-BR-INTAKE-20260903-1545129145665593426",
       "next_step": "Aguardar revisão/liberação expressa da Kelly ou conciliação Meta × Drive antes de qualquer elegibilidade ou uso em campanha.",
       "objective": "Tratar e organizar o lote de criativos BR/CAR/PT-BR enviado por Kelly em UPLOAD MANUAL",
@@ -6862,5 +6872,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T17:05:54+00:00"
+  "updated_at": "2026-10-20T17:49:34+00:00"
 }
