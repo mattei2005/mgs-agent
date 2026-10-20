@@ -9,6 +9,7 @@ bridge=importlib.util.module_from_spec(bridge_spec);bridge_spec.loader.exec_modu
 
 class AutomationTests(unittest.TestCase):
     def setUp(self):
+        sys.modules['ares_archive_bridge']=bridge
         spec=importlib.util.spec_from_file_location('ares_archive_automation',ROOT/'scripts/ares_archive_automation.py')
         assert spec is not None and spec.loader is not None
         self.api=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.api)
@@ -35,6 +36,12 @@ class AutomationTests(unittest.TestCase):
         self.row['asset_drive_id']=self.row['source_drive_id'];self.assertEqual(self.api.select_inventory([self.row],self.c)[0],[])
     def test_duplicate_lineage_id_fails_closed(self):
         with self.assertRaises(bridge.ArchiveError):self.api.select_inventory([self.row,dict(self.row)],self.c)
+    def test_out_of_scope_historical_duplicates_do_not_block_future_queue(self):
+        old={**self.row,'first_seen_at':'2026-10-20T09:00:00Z'}
+        self.assertEqual(self.api.select_inventory([old,dict(old)],self.c)[0],[])
+    def test_new_lineage_reusing_historical_id_still_fails_closed(self):
+        old={**self.row,'first_seen_at':'2026-10-20T09:00:00Z'}
+        with self.assertRaises(bridge.ArchiveError):self.api.select_inventory([old,self.row],self.c)
     def test_reservation_changes_do_not_create_second_archive_identity(self):
         first=self.api.lineage_fingerprint(self.row);self.row.update(status='TESTING',ares_eligible=True,reservation_status='LIBERADO')
         self.assertEqual(first,self.api.lineage_fingerprint(self.row))
@@ -58,5 +65,27 @@ class AutomationTests(unittest.TestCase):
         self.c['queue_enabled']=True;other={**self.row,'asset_id':'asset_second'};state={};calls=[]
         out=self.api.enqueue_ready([self.row,other],self.c,state,True,lambda row:(calls.append(row) or {'jobId':'a'*32,'requestFileId':'offlineRequest123'}),limit=1)
         self.assertEqual(len(calls),1);self.assertEqual(out['deferred'],1)
+    def test_fresh_real_clock_heartbeat_is_healthy(self):
+        hb={'schema':'mgs.archive.heartbeat.v1','workerSha256':'a'*64,'executedAt':'2026-10-20T15:00:00Z','status':'ok','blocked':[],'canaryAcknowledged':True,'triggerUid':'native-clock','deleteSource':False};self.c['worker_sha256']='a'*64
+        self.assertTrue(self.api.heartbeat_ready(hb,self.c,'2026-10-20T15:05:00Z'))
+    def test_pending_jobs_take_priority_over_cached_audits(self):
+        jobs=[{'jobId':'cached'},{'jobId':'new'}];state={'verified':{'cached':{}}}
+        self.assertEqual(self.api.choose_jobs(jobs,state)[0]['jobId'],'new')
+    def test_job_scan_is_bounded(self):
+        jobs=[{'jobId':str(i)} for i in range(50)]
+        self.assertLessEqual(len(self.api.choose_jobs(jobs,{})),16)
+    def test_pending_round_robin_does_not_starve_backlog(self):
+        jobs=[{'jobId':str(i)} for i in range(50)];state={};seen=set()
+        for _ in range(5):seen.update(j['jobId'] for j in self.api.choose_jobs(jobs,state))
+        self.assertEqual(len(seen),50)
+    def test_manual_heartbeat_not_clock_proof(self):
+        hb={'schema':'mgs.archive.heartbeat.v1','workerSha256':'a'*64,'executedAt':'2026-10-20T15:00:00Z','status':'ok','blocked':[],'canaryAcknowledged':True,'triggerUid':None,'deleteSource':False};self.c['worker_sha256']='a'*64
+        self.assertFalse(self.api.heartbeat_ready(hb,self.c,'2026-10-20T15:05:00Z'))
+    def test_stale_heartbeat_not_ready(self):
+        hb={'schema':'mgs.archive.heartbeat.v1','workerSha256':'a'*64,'executedAt':'2026-10-20T15:00:00Z','status':'ok','blocked':[],'canaryAcknowledged':True,'triggerUid':'native-clock','deleteSource':False};self.c['worker_sha256']='a'*64
+        self.assertFalse(self.api.heartbeat_ready(hb,self.c,'2026-10-20T16:00:00Z'))
+    def test_nonempty_blocked_not_success(self):
+        hb={'schema':'mgs.archive.heartbeat.v1','workerSha256':'a'*64,'executedAt':'2026-10-20T15:00:00Z','status':'ok','blocked':[{'reason':'PUBLISHER'}],'canaryAcknowledged':True,'triggerUid':'native-clock','deleteSource':False};self.c['worker_sha256']='a'*64
+        self.assertFalse(self.api.heartbeat_ready(hb,self.c,'2026-10-20T15:05:00Z'))
 
 if __name__=='__main__':unittest.main()

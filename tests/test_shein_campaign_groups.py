@@ -24,6 +24,31 @@ class GroupTests(unittest.TestCase):
             self.assertTrue(all(ad['creative_payload']['media_sourcing_spec']['bodies']==[{'text':g['primary_text']}] for ad in c['ads']))
         self.assertEqual(s,before)
         self.assertEqual(len({c['idempotency_key'] for c in out}),2)
+    def test_optional_headline_is_literal_and_preserves_native_cta(self):
+        r,s,a,_=self.fixture();before=copy.deepcopy(s)
+        r['campaign_groups'][0]['headline']='LO QUIERO GRATIS 👉'
+        r['campaign_groups'][1]['headline']='  EXACT TWO 👉  '
+        out=general.build(r,s,114,a)['campaigns']
+        for c,g in zip(out,r['campaign_groups']):
+            for ad in c['ads']:
+                cr=ad['creative_payload'];vd=cr['object_story_spec']['video_data']
+                self.assertEqual(vd['title'],g['headline'])
+                self.assertEqual(cr['media_sourcing_spec']['titles'],[{'text':g['headline']}])
+                self.assertEqual(vd['call_to_action']['type'],s['ads'][0]['creative']['object_story_spec']['video_data']['call_to_action']['type'])
+        self.assertEqual(s,before)
+        r.pop('_resolved_assets');driver.validate_request(r)
+
+    def test_invalid_optional_headline_rejected(self):
+        for value in ['', '  ', None, 123, {'text':'NO'}]:
+            r,s,a,_=self.fixture();r['campaign_groups'][0]['headline']=value
+            with self.assertRaises(ValueError):general.build(r,s,114,a)
+
+    def test_omitted_headline_keeps_live_reference(self):
+        r,s,a,_=self.fixture()
+        out=general.build(r,s,114,a)['campaigns']
+        expected=s['ads'][0]['creative']['object_story_spec']['video_data']['title']
+        self.assertTrue(all(ad['creative_payload']['object_story_spec']['video_data']['title']==expected for c in out for ad in c['ads']))
+
     def test_group_request_is_supported(self):
         r,*_=self.fixture();r.pop('_resolved_assets');r['manager_media_folder_id']='1234567890';driver.validate_request(r)
     def test_duplicate_cross_group_asset_rejected(self):

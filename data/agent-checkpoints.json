@@ -6283,12 +6283,12 @@
     {
       "agent": "ares",
       "id": "shein-1562142917961973831",
-      "next_step": "Confirmar campo para LO QUIERO GRATIS 👉; preservar request e literais; resolver suporte central antes de mídia/manifest; não modificar fonte nem criar lote divergente",
-      "objective": "Clonar campanha 01 Mavroa06 G006 em duas campanhas, USD30/dia cada, COST_CAP USD0.90, cinco vídeos Nicolas e início 20/10/2026 13:00 ET",
+      "next_step": "Manutenção separada mínima do campo headline opcional com regressão, inventário e REPORT-INFRA; retomar mesmo request no runner central, sem alterar fonte e sem resetar relógio",
+      "objective": "Clonar fonte01 Mavroa06 em dois grupos explícitos, USD30/dia cada e CostCap0.90",
       "source": "data/ares/meta-ads/audit/shein/preflight-blockers/shein-1562142917961973831/request.json",
-      "state": "awaiting_copy_field_clarification; conta/fonte/pasta verificadas por api; zero writes meta/drive/reservas; cta literal não cabe no botão nativo e headline herdada difere",
+      "state": "copy_confirmed nicolas confirmou headline literal lo quiero gratis 👉 e botão herdado get_offer_view; nenhum write meta/drive; transação suspensa para manutenção separada do compiler sem suporte headline",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-20T16:40:14+00:00"
+      "updated_at": "2026-10-20T16:52:44+00:00"
     },
     {
       "agent": "zeus",
@@ -6862,5 +6862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T16:41:30+00:00"
+  "updated_at": "2026-10-20T16:52:44+00:00"
 }
