@@ -49,12 +49,12 @@ class B013ProfileRemovalAlertTests(unittest.TestCase):
         }
         return row
 
-    def test_current_generation_is_b0136(self):
+    def test_current_generation_is_b0137(self):
         source = SCRIPT.read_text(encoding='utf-8')
         self.assertIn("CONFIG_ITEM_ID = 's2dnq2ipplrfmetbj66taasmde'", source)
         self.assertIn("CONFIG_ITEM = os.environ.get('MGS_B013_CONFIG_ITEM', CONFIG_ITEM_ID)", source)
-        self.assertIn("if app_name != 'B013-6':", source)
-        self.assertIn("!= 'B013-6':", source)
+        self.assertIn("if app_name != 'B013-7':", source)
+        self.assertIn("!= 'B013-7':", source)
         self.assertIn('f"Meta APP - {config[\'app_name\']}"', source)
         self.assertNotIn("CONFIG_ITEM_LABEL = 'BOT B013-5", source)
 

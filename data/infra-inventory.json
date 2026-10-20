@@ -841,6 +841,24 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "b013-sheets-transport-recovery-1562223922047623178",
+      "agent": "zeus",
+      "type": "verified_monitor_recovery",
+      "source_alert_id": "1562223922047623178",
+      "cron_job_id": "498fb0d95e10",
+      "paths": [
+        "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+        "/root/mgs-agent/tests/test_b013_sheets_transport.py",
+        "/root/mgs-agent/tests/test_b013_profile_removal_alert.py"
+      ],
+      "cause": "Missing socket import masked Sheets connection reset with NameError before bounded transport retry.",
+      "correction": "Import socket; add four transport regression tests; reconcile pre-existing stale generation test with authorized B013-7 cutover.",
+      "script_sha256": "101b8a50f7f302dda8209146196085a411bc31b6efdf31e4fb76927f46045b3e",
+      "backup": "/root/mgs-agent/backups/b013-sheets-transport-1562223922047623178/b013-dtr-link-watch.sh.before",
+      "validation": "bash -n PASS; 28 tests PASS; live Sheets read 49 targets via canonical SA; scheduled run 2026-10-20T18:03:52-04:00 OK/failure_streak=0, healthy capability, unknown=0, zero Sheet updates and alerts.",
+      "schedule_or_credentials_changed": false
+    },
+    {
       "agent": "ares",
       "authorization_message_id": "1561845113930649734",
       "id": "ares-shein-report-exact100-one-request-20261019",
