@@ -146,7 +146,7 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         if f.get('driveId')!='0AEwt4Ye690ocUk9PVA' or f.get('trashed') or f.get('name')!=row['canonical_filename'] or f.get('parents')!=[folder['id']]:raise ValueError('selected file live identity/folder mismatch')
         path=work_dir/row['canonical_filename']
         if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest()!=row['clean_checksum']:
-            with urlopen(Request('https://www.googleapis.com/drive/v3/files/'+row['asset_drive_id']+'?alt=media&supportsAllDrives=true',headers={'Authorization':'Bearer '+dt}),timeout=180) as response:
+            with urlopen(Request('https://www.googleapis.com/drive/v3/files/'+f.get('provider_id',row['asset_drive_id'])+'?alt=media&supportsAllDrives=true',headers={'Authorization':'Bearer '+dt}),timeout=180) as response:
                 with path.open('wb') as handle:
                     while chunk:=response.read(1024*1024):handle.write(chunk)
         raw=path.read_bytes()
@@ -155,7 +155,7 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         if check.returncode!=0:raise ValueError('selected file failed metadata-clean verification')
         if not re.search(r'^clean:\s*true\s*$', check.stdout, re.MULTILINE):
             raise ValueError('selected file metadata not clean')
-        return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'drive_id':f['id'],'drive_md5':f['md5Checksum'],'drive_parent_id':folder['id'],'metadata_clean':True}
+        return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'drive_id':f['id'],'provider_drive_id':f.get('provider_id',f['id']),'storage_record_kind':f.get('record_kind','native_drive_metadata'),'drive_md5':f['md5Checksum'],'drive_parent_id':folder['id'],'metadata_clean':True}
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:assets=list(pool.map(download,selected))
     # Reconcile scoped Meta usage by exact known media IDs and deterministic
     # lineage titles; requested reuse is explicit, never a claim of novelty.

@@ -968,6 +968,11 @@ def drive_inventory(token: str) -> dict[str, Any]:
         current_ready = current_by_status["01_READY"]
         counts[kind] = len(current_ready)
         counts[f"{kind}_RETEST_ELIGIBLE_PHYSICAL"] = len(current_by_status["03_TESTED"])
+    import ares_archive_storage as storage
+    files=storage.project_stock(files,token)
+    for kind in ('IMG','VID'):
+        counts[kind]=sum(1 for row in files if row.get('kind')==kind and row.get('location')=='01_READY')
+        counts[kind+'_RETEST_ELIGIBLE_PHYSICAL']=sum(1 for row in files if row.get('kind')==kind and row.get('location')=='03_TESTED')
     counts["TOTAL"] = counts.get("IMG", 0) + counts.get("VID", 0)
     return {"root": root, "files": files, "counts": counts}
 
@@ -976,11 +981,12 @@ def download_drive_file(token: str, source: dict[str, Any], destination: Path) -
     count_call("drive_download")
     destination.parent.mkdir(parents=True, exist_ok=True)
     request = urllib.request.Request(
-        f"https://www.googleapis.com/drive/v3/files/{source['id']}?"
+        f"https://www.googleapis.com/drive/v3/files/{source.get('provider_id',source['id'])}?"
         + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"}),
         headers={"Authorization": f"Bearer {token}", "User-Agent": "MGS-Ares-CPV-V3-Daily/1.0"},
     )
     digest = hashlib.md5()
+    archive_sha = hashlib.sha256()
     size = 0
     try:
         with urllib.request.urlopen(request, timeout=240) as response, destination.open("wb") as handle:
@@ -990,6 +996,7 @@ def download_drive_file(token: str, source: dict[str, Any], destination: Path) -
                     break
                 handle.write(chunk)
                 digest.update(chunk)
+                archive_sha.update(chunk)
                 size += len(chunk)
     except Exception:
         destination.unlink(missing_ok=True)
@@ -997,6 +1004,8 @@ def download_drive_file(token: str, source: dict[str, Any], destination: Path) -
     if digest.hexdigest() != str(source.get("md5Checksum") or "") or size != int(source.get("size") or 0):
         destination.unlink(missing_ok=True)
         raise DailyBlocked("drive_download", "Drive download checksum or size mismatch", {"file_id": source.get("id")})
+    if source.get('record_kind')=='mgs.logical.media.v1' and archive_sha.hexdigest()!=source.get('sha256Checksum'):
+        raise DailyBlocked('drive_download','Archived payload SHA-256 mismatch',{'logical_id':source['id'],'provider_id':source['provider_id']})
     return {"md5": digest.hexdigest(), "bytes": size}
 
 
@@ -1080,6 +1089,11 @@ def move_to_status(token: str, source: dict[str, Any], target_status: str) -> di
     source_parent_id = str(source.get("source_parent_id") or ((source.get("parents") or [""])[0]))
     if not source_parent_id:
         raise DailyBlocked("drive_move", "source Drive status folder is unavailable", {"file_id": source.get("id")})
+    if source.get('record_kind')=='mgs.logical.media.v1':
+        import ares_archive_storage as storage
+        result=storage.move_stock(source,target_parent_id,source_parent_id,token)
+        result['target_status']=target_status
+        return result
     params = urllib.parse.urlencode({"addParents": target_parent_id, "removeParents": source_parent_id, "fields": "id,name,driveId,parents,trashed,size,md5Checksum", "supportsAllDrives": "true"})
     result = drive_request(token, "PATCH", f"https://www.googleapis.com/drive/v3/files/{source['id']}?{params}", body=b"{}", content_type="application/json")
     if result.get("driveId") != DRIVE_ID or result.get("trashed") or set(result.get("parents") or []) != {target_parent_id} or str(result.get("md5Checksum") or "") != str(source.get("md5Checksum") or ""):

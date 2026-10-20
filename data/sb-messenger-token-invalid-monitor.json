@@ -425,7 +425,12 @@
     718446,
     718659,
     718671,
-    718685
+    718685,
+    719275,
+    719295,
+    719313,
+    719349,
+    719355
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -657,6 +662,39 @@
         706581
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|boostingecon|30|1762": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-20T20:05:27.000Z",
+        "domain": "boostingecon",
+        "notification_id": 719355,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 1,
+          "Broadcast": 1,
+          "On-hold": 45,
+          "Ready": 4
+        },
+        "pages": 51,
+        "segurador_id": "1762",
+        "segurador_name": "Tiago De Oliveira Vianna",
+        "source": "page_token",
+        "user_email": "disparosboostingecon@gmail.com",
+        "user_id": "30",
+        "user_name": "Disparos Boostingecon US-CC-EN"
+      },
+      "last_sent_at": "2026-10-20T16:12:15-04:00",
+      "message_ids": [
+        "1562196774196748371"
+      ],
+      "notification_ids": [
+        719355
+      ],
+      "opened_at": "2026-10-20T16:12:14-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -2364,9 +2402,9 @@
     "digital-trust|openzed|16|908": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-19T16:05:23.000Z",
+        "created_at": "2026-10-20T20:04:50.000Z",
         "domain": "openzed",
-        "notification_id": 718244,
+        "notification_id": 719349,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -2394,7 +2432,8 @@
         711517,
         712178,
         712902,
-        718244
+        718244,
+        719349
       ],
       "opened_at": "2026-10-06T12:12:13-04:00",
       "repeat_count": 0,
@@ -2507,9 +2546,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-19T16:05:21.000Z",
+        "created_at": "2026-10-20T20:04:48.000Z",
         "domain": "spe",
-        "notification_id": 718225,
+        "notification_id": 719313,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2568,7 +2607,8 @@
         714517,
         715901,
         717279,
-        718225
+        718225,
+        719313
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -2608,9 +2648,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-19T20:04:15.000Z",
+        "created_at": "2026-10-20T20:04:35.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 718446,
+        "notification_id": 719295,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2645,7 +2685,8 @@
         714932,
         716414,
         717514,
-        718446
+        718446,
+        719295
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -2685,9 +2726,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-19T20:04:07.000Z",
+        "created_at": "2026-10-20T20:04:26.000Z",
         "domain": "topfeed",
-        "notification_id": 718427,
+        "notification_id": 719275,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -2714,7 +2755,8 @@
         714921,
         716377,
         717497,
-        718427
+        718427,
+        719275
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -3268,19 +3310,25 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-20T15:57:14-04:00",
+  "last_check": "2026-10-20T16:12:15-04:00",
   "last_delivery": {
-    "at": "2026-10-19T20:12:14-04:00",
+    "at": "2026-10-20T16:12:15-04:00",
     "cursor_ids": [
-      718659,
-      718671,
-      718685
+      719275,
+      719295,
+      719313,
+      719349,
+      719355
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1562196774196748371"
+    ],
+    "notification_ids": [
+      719355
+    ]
   },
   "last_error": null,
-  "last_seen_id": 718685,
+  "last_seen_id": 719355,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

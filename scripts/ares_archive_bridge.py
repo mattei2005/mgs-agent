@@ -122,7 +122,11 @@ def record_verified_job(index,job,result):
         for entry in result['assets']:
             prev=index['mappings'].get(entry['sourceId'])
             if prev and any(prev.get(k)!=entry[k] for k in ('archiveId','sha256','lineageId')):raise ArchiveError('MAPPING_CONFLICT')
-        for entry in result['assets']:index['mappings'][entry['sourceId']]=entry
+        for entry in result['assets']:
+            previous=index['mappings'].get(entry['sourceId'],{});stored=dict(entry)
+            for key in ('stockShortcutId','stockAliasVerifiedAt','sourceRetirementReceipt'):
+                if key in previous:stored[key]=previous[key]
+            index['mappings'][entry['sourceId']]=stored
     index['verified_jobs'][job['jobId']]=result
     return index
 

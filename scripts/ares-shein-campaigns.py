@@ -861,6 +861,14 @@ def drive_runtime_token() -> tuple[str, dict[str, Any]]:
 
 
 def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
+    # Media may be an explicitly tagged logical catalogue record, NOT a raw
+    # Google response. Folders/historical unmapped files retain native metadata.
+    import sys as _sys
+    _scripts=str(Path(__file__).resolve().parent)
+    if _scripts not in _sys.path:_sys.path.insert(0,_scripts)
+    import ares_archive_storage as storage
+    projected=storage.resolve_media(file_id,token)
+    if projected is not None:return projected
     fields = "id,name,size,md5Checksum,driveId,parents,trashed"
     url = (
         f"https://www.googleapis.com/drive/v3/files/{file_id}?"
@@ -888,6 +896,10 @@ def move_asset_to_testing(
     if not file_id:
         raise SheinRunnerBlocked("drive_postprocess", "asset_drive_id is required")
     before = drive_file_readback(token, file_id)
+    if before.get('record_kind')=='mgs.logical.media.v1':
+        import ares_archive_storage as storage
+        if before['parents']==[testing_id]:return before
+        return storage.move_stock(before,testing_id,ready_id,token)
     parents = set(str(value) for value in before.get("parents") or [])
     if testing_id not in parents:
         if ready_id not in parents:
