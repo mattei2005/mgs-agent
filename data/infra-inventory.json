@@ -841,6 +841,24 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-cpv69-pricing-read-recovery-20261020",
+      "agent": "zeus",
+      "type": "scoped_read_only_report_regression_fix",
+      "source_alert_id": "1562227678608883784",
+      "job_id": "69dfca2b9719",
+      "paths": [
+        "/root/mgs-agent/scripts/ares-smartbidding-common.py",
+        "/root/mgs-agent/tests/test_ares_confidentiality_routes.py",
+        "/root/mgs-agent/reports/zeus/cron-69dfca2b9719-recovery-20261020.json"
+      ],
+      "scope": "Restaura GET Pricing por publisher corporativo aprovado para o contrato Rewarded já vigente. Mantém bloqueio de mutações, publishers externos e consultas ambíguas; valida publisher da resposta.",
+      "validation": "117 testes e 37 subtestes PASS no perfil Ares; Pricing HTTP 200; Intraday report-only dry-run rc=0 e actions=[]; diff check PASS. Suite adicional conta05: 7 PASS e 1 asserção legada de caminho de cache falha, sem alteração de credencial/runtime conta05.",
+      "status": "cause_fixed_live_dry_run_validated_scheduler_tick_pending",
+      "scheduler_next_run_at_inspection": "2026-10-20T19:06:00-04:00",
+      "unchanged": "Cadência, registros de autorização, campanhas, orçamentos e credenciais; nenhum envio operacional Discord nesta recuperação.",
+      "sha256": "7e55966b9a7572ffeb9bfb5d50b19fec81695b398ae7ed0df98302ef7684c392"
+    },
+    {
       "id": "b013-sheets-transport-recovery-1562223922047623178",
       "agent": "zeus",
       "type": "verified_monitor_recovery",

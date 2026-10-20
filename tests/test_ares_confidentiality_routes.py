@@ -201,5 +201,51 @@ class SBConfidentialityTests(unittest.TestCase):
                     sb.api_request(method, path, payload={'publishers': [publisher]})
             credentials.assert_not_called()
 
+    def test_scoped_pricing_read_reaches_transport(self):
+        publisher = sorted(sb._publisher_scope(sb._scoped_catalog()))[0]
+        for suffix in ['', '?should_update_metrics=0', '?should_update_metrics=1']:
+            with self.subTest(suffix=suffix), patch.object(sb, '_api_request_transport', return_value=(200, {}, {})) as transport:
+                self.assertEqual(sb.api_request('GET', '/pricing/' + publisher + suffix)[0], 200)
+                transport.assert_called_once()
+
+    def test_pricing_rejects_writes_foreign_publishers_and_ambiguous_queries(self):
+        publisher = sorted(sb._publisher_scope(sb._scoped_catalog()))[0]
+        route = '/pricing/' + publisher
+        cases = [
+            ('POST', route, None), ('PUT', route, {}), ('DELETE', route, None),
+            ('GET', route, {}), ('GET', '/pricing/synthetic-outside', None),
+            ('GET', route + '/rules', None), ('GET', route + '?publishers[]=synthetic-outside', None),
+            ('GET', route + '?should_update_metrics=1&should_update_metrics=0', None),
+            ('GET', route + '?should_update_metrics=', None),
+            ('GET', route + '?should_update_metrics=2', None),
+            ('GET', 'https://example.invalid' + route, None),
+            ('GET', route + '#fragment', None),
+        ]
+        for method, path, body in cases:
+            with self.subTest(method=method, path=path), patch.object(sb, 'get_access_token') as credentials, patch.object(sb.requests, 'request') as http:
+                with self.assertRaises(ValueError):
+                    sb.api_request(method, path, payload=body)
+                credentials.assert_not_called()
+                http.assert_not_called()
+
+    def test_pricing_direct_transport_cannot_bypass_scope(self):
+        with patch.object(sb, 'get_access_token') as credentials, patch.object(sb.requests, 'request') as http:
+            with self.assertRaises(ValueError):
+                sb._api_request_transport('GET', '/pricing/synthetic-outside')
+            credentials.assert_not_called()
+            http.assert_not_called()
+
+    def test_pricing_response_must_match_requested_publisher(self):
+        publisher = sorted(sb._publisher_scope(sb._scoped_catalog()))[0]
+        for body in [{}, [], {'publisherId': 'synthetic-outside'}, {'publisherId': publisher}]:
+            with self.subTest(body=body), patch.object(sb, 'get_access_token', return_value=('synthetic', 'fixture')), patch.object(sb.requests, 'request') as http:
+                http.return_value.status_code = 200
+                http.return_value.json.return_value = body
+                if body == {'publisherId': publisher}:
+                    self.assertEqual(sb._api_request_transport('GET', '/pricing/' + publisher)[0], 200)
+                else:
+                    with self.assertRaises(ValueError):
+                        sb._api_request_transport('GET', '/pricing/' + publisher)
+
 if __name__ == '__main__':
     unittest.main()

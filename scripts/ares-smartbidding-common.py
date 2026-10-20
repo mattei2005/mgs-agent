@@ -286,7 +286,22 @@ def _publisher_scope(companies: list[dict]) -> set[str]:
 
 def _validate_sb_request(method: str, path: str, payload: dict | None, companies: list[dict]) -> None:
     parsed = urllib.parse.urlsplit(path)
-    if parsed.scheme or parsed.netloc or parsed.fragment or parsed.path not in SB_READ_ROUTES:
+    if parsed.scheme or parsed.netloc or parsed.fragment:
+        raise ValueError('Rota SB não autorizada; consulta negada.')
+    if parsed.path.startswith('/pricing/'):
+        # Pricing reads carry the publisher in the path, not a report selector.
+        # Restore the existing rewarded report without opening pricing writes.
+        publisher = parsed.path.removeprefix('/pricing/')
+        query = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
+        if (
+            method.upper() != 'GET' or payload is not None
+            or publisher not in _publisher_scope(companies)
+            or any(key != 'should_update_metrics' for key in query)
+            or ('should_update_metrics' in query and query['should_update_metrics'] not in [['0'], ['1']])
+        ):
+            raise ValueError('Leitura Pricing SB fora do escopo; consulta negada.')
+        return
+    if parsed.path not in SB_READ_ROUTES:
         raise ValueError('Rota SB não autorizada; consulta negada.')
     if method.upper() not in {'GET', 'POST'}:
         raise ValueError('Somente leitura SB autorizada.')
@@ -374,6 +389,12 @@ def _api_request_transport(
         if response.status_code not in {401, 403} or attempt == 1:
             if 200 <= response.status_code < 300:
                 _validate_sb_response(body, _scoped_catalog())
+                route = urllib.parse.urlsplit(path).path
+                if route.startswith('/pricing/') and (
+                    not isinstance(body, dict)
+                    or body.get('publisherId') != route.removeprefix('/pricing/')
+                ):
+                    raise ValueError('Resposta Pricing SB divergente do publisher; relatório retido.')
             return response.status_code, body, {
                 "credential_item": item_name,
                 "token_len": len(token),

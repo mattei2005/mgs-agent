@@ -1,0 +1,43 @@
+{
+  "alert_url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1562227678608883784",
+  "job_id": "69dfca2b9719",
+  "agent": "zeus",
+  "status": "cause_fixed_live_dry_run_validated_scheduler_tick_pending",
+  "root_cause": "O gate SB de escopo corporativo passou a aceitar somente rotas estáticas e rejeitou GET /pricing/<publisher>?should_update_metrics=1 usado pelo contrato Intraday Rewarded já vigente. Publisher creditoparaveiculo pertence ao catálogo positivo aprovado.",
+  "canonical_sources": [
+    "context/ares-asset-scope.md",
+    "data/ares/sb-publisher-scope.json",
+    "data/knowledge-registry.json#ARES-CREDITOPARAVEICULO-INTRADAY-REWARDED-METRICS-V4",
+    "data/ares/meta-ads/operations/Creditoparaveiculo-BR-CAR-BR.json#/smart_bidding_roi/intraday_monetization"
+  ],
+  "changes": [
+    "scripts/ares-smartbidding-common.py: restaurada leitura Pricing com publisher validado antes de credenciais/HTTP, método GET, ausência de payload, query restrita e readback do publisher da resposta",
+    "tests/test_ares_confidentiality_routes.py: quatro testes de regressão com subcasos positivos/negativos"
+  ],
+  "validation": {
+    "pre_fix_denial_reproduced_without_http": true,
+    "publisher_in_approved_scope": true,
+    "live_pricing_http": 200,
+    "live_rewarded_slot_count": 4,
+    "intraday_command": "creditoparaveiculo-fixed-reports.py --mode intraday --report-only --dry-run",
+    "intraday_exit_code": 0,
+    "intraday_stderr": "",
+    "intraday_report": "/root/mgs-agent/data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20261020T221918Z.json",
+    "intraday_actions": [],
+    "discord_delivery_attempted": false,
+    "focused_tests_passed": 117,
+    "focused_subtests_passed": 37,
+    "additional_account05_suite": "7 passed; 1 unrelated cache-path assertion failed and was reproduced in isolation. Test expects an old isolated cache while the untouched runtime uses the approved shared CAR/SHEIN BISU cache. No credential/cache changes made.",
+    "test_environment_recovery": "System Python lacks pytest; used the Python interpreter from the live Hermes launcher. Confidentiality tests require the Ares runtime profile; 34/34 passed under that profile.",
+    "diff_check": "passed"
+  },
+  "unchanged": ["cron schedule", "publisher/account authorization registries", "campaigns", "budgets", "production credentials", "Discord operational messages"],
+  "scheduler": {
+    "last_status_at_inspection": "error",
+    "next_run_at_at_inspection": "2026-10-20T19:06:00-04:00",
+    "historical_error_not_manually_cleared": true
+  },
+  "rollback_backups": "/root/.hermes/profiles/zeus/cache/scratch/cpv69-recovery/",
+  "script_sha256": "7e55966b9a7572ffeb9bfb5d50b19fec81695b398ae7ed0df98302ef7684c392",
+  "tests_sha256": "f9c8b64829c91a538bc613de0d024f8cbc4e27f2e9a248583930e3f6c82c85ad"
+}
