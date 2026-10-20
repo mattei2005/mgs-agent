@@ -1,0 +1,491 @@
+{
+  "completed_at": "2026-10-20T12:36:52-04:00",
+  "thread_id": "1562104297926295623",
+  "scope": "Ares profile and shared operational sources; excludes other private agent profiles, application private stores, git history and dependencies",
+  "statistics": {
+    "files": 160742,
+    "text_files_scanned": 121001,
+    "bytes_scanned": 4197092533,
+    "binary_files_inventoried": 39741,
+    "non_regular": 41,
+    "deduplicated": 17
+  },
+  "database_files": 76,
+  "archives": 30,
+  "archive_members": 37188,
+  "private_stem_file_hits": [
+    {
+      "source_id": "3f3f564294b3e4c0",
+      "category": "shared/data",
+      "occurrences": 42
+    },
+    {
+      "source_id": "96c97c6693036bef",
+      "category": "shared/data",
+      "occurrences": 27
+    },
+    {
+      "source_id": "20d1d0531cf56e78",
+      "category": "shared/data",
+      "occurrences": 177
+    },
+    {
+      "source_id": "6e34fdda460f6dff",
+      "category": "shared/data",
+      "occurrences": 42
+    },
+    {
+      "source_id": "01e8db36503d81ce",
+      "category": "shared/data",
+      "occurrences": 42
+    },
+    {
+      "source_id": "f481bc07636de55f",
+      "category": "shared/reports",
+      "occurrences": 21
+    },
+    {
+      "source_id": "677d8e63b3d1c26f",
+      "category": "shared/reports",
+      "occurrences": 15
+    },
+    {
+      "source_id": "02401ecc49d154b4",
+      "category": "shared/reports",
+      "occurrences": 18
+    },
+    {
+      "source_id": "fd75f4a8efa72800",
+      "category": "shared/reports",
+      "occurrences": 65
+    },
+    {
+      "source_id": "e42dd130126398e9",
+      "category": "shared/reports",
+      "occurrences": 18
+    },
+    {
+      "source_id": "ed796ea32302aa8a",
+      "category": "shared/reports",
+      "occurrences": 627
+    },
+    {
+      "source_id": "5131bad8b5355fd4",
+      "category": "shared/logs",
+      "occurrences": 92
+    },
+    {
+      "source_id": "08df251a16caa685",
+      "category": "shared/backups",
+      "occurrences": 3
+    },
+    {
+      "source_id": "01cf6dac27b29421",
+      "category": "shared/backups",
+      "occurrences": 18
+    },
+    {
+      "source_id": "93ae5e5d950d8aa7",
+      "category": "shared/backups",
+      "occurrences": 3
+    },
+    {
+      "source_id": "c52b037840930b03",
+      "category": "shared/backups",
+      "occurrences": 3
+    },
+    {
+      "source_id": "27fe919de2a820af",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "fcff60792fcdd114",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "372a242afa05d9bf",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "93d799609d578461",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "183956127d26e9d7",
+      "category": "shared/backups",
+      "occurrences": 42
+    },
+    {
+      "source_id": "2ecc65c04472f57d",
+      "category": "shared/backups",
+      "occurrences": 12
+    },
+    {
+      "source_id": "e7600dca10858633",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "d6c000d0d0a0b13a",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "cdac6c5c815d17da",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "662aea381ff5e05a",
+      "category": "shared/backups",
+      "occurrences": 42
+    },
+    {
+      "source_id": "2c26650d09a7963e",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "3c4d4262a89a8c82",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "fe4ecfbeedb40fbd",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "56081fdd22b57282",
+      "category": "shared/backups",
+      "occurrences": 42
+    },
+    {
+      "source_id": "55b681f1065cced6",
+      "category": "shared/backups",
+      "occurrences": 42
+    },
+    {
+      "source_id": "60c31f738f87cd5a",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "4d0e8432e7f8e284",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "eafb014ec7703dc3",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "dd6337c5bc375d98",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "00694348076b7544",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "02435ad06025376d",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "f699431507a3f2ec",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "d538c75e0514b8c7",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "8a71389f608dad14",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "e7c55c6b05084e28",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "9ea4a7e715913193",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "c9c5f960515fc784",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "ed3020d470c0f32b",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "81c84530e2502551",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "c2f312294ee29885",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "3691580b21b49e0a",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "7ea08729a5b0d912",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "c717f119cc386fae",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "97746cda9a2a2c17",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "6277890759939cde",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "60e32e25d5f1d362",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "98f2704a09271f89",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "accb7639bbd811bb",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "fabb808c07a99b1b",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "867e8d0a07fc207e",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "936e7267d695ff4d",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "3637726e01a901ce",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "3720f9b667ec4982",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "30fdd825505bde1e",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "dafbcb6ec74a7e5b",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "4f79fb9951e54c02",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "cb4a8b4fa030fb7a",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "197709bacd372809",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "b373880d410d7eed",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "0c71e3609647e14c",
+      "category": "shared/backups",
+      "occurrences": 42
+    },
+    {
+      "source_id": "f70ab42cffddcdba",
+      "category": "shared/backups",
+      "occurrences": 23
+    },
+    {
+      "source_id": "9b7ed60eb65f1808",
+      "category": "shared/backups",
+      "occurrences": 11
+    },
+    {
+      "source_id": "6ddc69914a59e6b6",
+      "category": "shared/backups",
+      "occurrences": 42
+    },
+    {
+      "source_id": "8cd5f9e46ae7dc33",
+      "category": "shared/backups",
+      "occurrences": 23
+    }
+  ],
+  "archive_private_members": 8,
+  "profile_private_stem_text_files": 0,
+  "current_history_private_stem_user_messages": 2,
+  "fts_duplicates_not_new_messages": true,
+  "existing_scope_tests": {
+    "passed": 21,
+    "failed": 0
+  },
+  "offline_route_probes": {
+    "network_requests": 0,
+    "credentials_used": false,
+    "cases": [
+      {
+        "route": "unknown_account_edge",
+        "blocked": true,
+        "expected_block": true,
+        "meets_requirement": true
+      },
+      {
+        "route": "unknown_account_field",
+        "blocked": true,
+        "expected_block": true,
+        "meets_requirement": true
+      },
+      {
+        "route": "bare_numeric_account_node",
+        "blocked": false,
+        "expected_block": true,
+        "meets_requirement": false
+      },
+      {
+        "route": "unscoped_account_discovery",
+        "blocked": false,
+        "expected_block": true,
+        "meets_requirement": false
+      },
+      {
+        "route": "unscoped_business_discovery",
+        "blocked": false,
+        "expected_block": true,
+        "meets_requirement": false
+      },
+      {
+        "route": "unknown_business_owned_accounts",
+        "blocked": false,
+        "expected_block": true,
+        "meets_requirement": false
+      },
+      {
+        "route": "bare_campaign_node",
+        "blocked": false,
+        "expected_block": true,
+        "meets_requirement": false
+      },
+      {
+        "route": "batch_unknown_act_edge",
+        "blocked": true,
+        "expected_block": true,
+        "meets_requirement": true
+      },
+      {
+        "route": "batch_account_in_query",
+        "blocked": false,
+        "expected_block": true,
+        "meets_requirement": false
+      },
+      {
+        "route": "approved_app_metadata",
+        "blocked": false,
+        "expected_block": false,
+        "meets_requirement": true
+      }
+    ]
+  },
+  "sb_offline_probe": {
+    "network_requests": 0,
+    "credentials_used": false,
+    "synthetic_response_returned_unfiltered": true,
+    "transport_called_with_company_scope_parameter": false,
+    "http_mock_calls": 1
+  },
+  "current_contract_scope": {
+    "files": 15,
+    "account_references": 102,
+    "domain_references": 44,
+    "files_with_unapproved_references": []
+  },
+  "limits": {
+    "temporary_paths": {
+      "count": 39,
+      "located": 39,
+      "classification": {
+        "broken_symbolic_link": 39
+      },
+      "unlocated": 0
+    },
+    "database_retry": {
+      "exists": true,
+      "size": 131072,
+      "tables": 4,
+      "status": "read_failed",
+      "error_code": "SQLITE_CORRUPT"
+    }
+  },
+  "runtime": {
+    "uid": 0,
+    "terminal_backend": "local",
+    "service_user": "root",
+    "ProtectSystem": "no",
+    "ProtectHome": "no",
+    "NoNewPrivileges": "no",
+    "InaccessiblePaths": []
+  },
+  "not_tested": [
+    "live access to outside assets",
+    "live token reach",
+    "external memory store",
+    "remote Discord history",
+    "external backups",
+    "git history",
+    "application private databases"
+  ],
+  "changes_to_platforms_credentials_services": false
+}

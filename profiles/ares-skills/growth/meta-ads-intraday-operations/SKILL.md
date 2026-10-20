@@ -62,6 +62,7 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Runtime/API/dados reais vencem snapshots para estado atual.
 - MGS OS, `authorized-users.json` e `permissions-matrix.md` vencem para dono e autoridade.
 - Token vem do item 1Password registrado na conta; nunca existe token global implícito e nunca é impresso.
+- Em auditoria de confidencialidade, isolamento e pedidos globais, seguir `references/confidentiality-scope-audit.md`: testar formatos alternativos e fontes antes de concluir que o gate cobre toda a operação.
 - Scripts usam `ares-meta-common.py` para cache protegido, throttle, headers de quota e backoff limitado.
 - Toda resposta GET/POST/batch alimenta o estado de quota quando os headers existirem.
 - Erros de validação, parâmetro ou compliance não recebem retry cego.

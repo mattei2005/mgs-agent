@@ -1,0 +1,19 @@
+{
+  "type": "audit-delivery-inventory",
+  "scope": "read-only source audit; documentation and checkpoint writes only",
+  "artifacts": [
+    {
+      "path": "/root/mgs-agent/reports/ares/confidentiality-reaudit-1562104297926295623/report.md",
+      "sha256": "270b944e2d847fe59b605f8d610917e824598b66870842701e3893a278059228",
+      "bytes": 4652
+    },
+    {
+      "path": "/root/mgs-agent/reports/ares/confidentiality-reaudit-1562104297926295623/evidence.json",
+      "sha256": "438053500556ff8d4bd8cc70c52dd78016cc29b74fe875a1ba2b3adfad8e048f",
+      "bytes": 11446
+    }
+  ],
+  "supporting_skill": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/confidentiality-scope-audit.md",
+  "checkpoint_id": "ARES-CONFIDENTIALITY-REAUDIT-1562104297926295623",
+  "no_platform_or_service_writes": true
+}
