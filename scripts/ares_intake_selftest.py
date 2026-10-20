@@ -18,7 +18,7 @@ def finish(d,clean_id):
     rh=d.hashes(raw['id']);ch=d.hashes(clean['id']);validate_selftest_identity(test,raw,clean,rh['sha256'])
     for m in [raw,clean]:
         if m.get('driveId')!=bridge.SOURCE_DRIVE or m.get('trashed') or not m.get('name','').startswith('MGS_INTAKE_TEST_ONLY_'):raise SelftestError('SELFTEST_PHYSICAL_SCOPE')
-        if d.relative_parent(m['parents'][0],bridge.config_load()['control_folder_id'])[:1]!=['TEST_INPUTS']:raise SelftestError('SELFTEST_CONTROL_ONLY')
+        if d.relative_parent(m['parents'][0],bridge.config_load()['control_folder_id'])[:1]!=['TEST_INPUTS_INTAKE_AUTOMATION']:raise SelftestError('SELFTEST_CONTROL_ONLY')
     raw_bytes=d.raw(raw['id']);clean_bytes=d.raw(clean['id']);one=Image.open(io.BytesIO(raw_bytes)).convert('RGB');two=Image.open(io.BytesIO(clean_bytes)).convert('RGB')
     if one.size!=two.size or one.tobytes()!=two.tobytes():raise SelftestError('SELFTEST_LOSSLESS_PIXEL_QA')
     scratch=Path(os.environ.get('TMPDIR','/root/.hermes/profiles/ares/cache/scratch'))/'intake-selftest-1562188030205362227';scratch.mkdir(parents=True,exist_ok=True);download=scratch/'verified-clean.png';download.write_bytes(clean_bytes)
