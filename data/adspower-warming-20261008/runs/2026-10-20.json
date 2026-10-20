@@ -1,7 +1,7 @@
 {
   "date": "2026-10-20",
   "timezone": "America/New_York",
-  "state": "running",
+  "state": "completed",
   "profiles": [
     {
       "profile_id": "k13him2j",
@@ -94,7 +94,8 @@
       },
       "close_intent_at": "2026-10-20T09:37:22.510416-04:00",
       "closed_at": "2026-10-20T09:37:32.155392-04:00",
-      "final_active": "Inactive"
+      "final_active": "Inactive",
+      "final_verified_at": "2026-10-20T09:47:13.953341-04:00"
     },
     {
       "profile_id": "k1d71895",
@@ -228,7 +229,8 @@
       },
       "close_intent_at": "2026-10-20T09:40:16.117963-04:00",
       "closed_at": "2026-10-20T09:40:21.855030-04:00",
-      "final_active": "Inactive"
+      "final_active": "Inactive",
+      "final_verified_at": "2026-10-20T09:47:14.106992-04:00"
     },
     {
       "profile_id": "k1f7o4i7",
@@ -352,7 +354,8 @@
       },
       "close_intent_at": "2026-10-20T09:43:29.499256-04:00",
       "closed_at": "2026-10-20T09:43:34.924640-04:00",
-      "final_active": "Inactive"
+      "final_active": "Inactive",
+      "final_verified_at": "2026-10-20T09:47:14.286700-04:00"
     },
     {
       "profile_id": "k1f7o4im",
@@ -471,8 +474,67 @@
       },
       "close_intent_at": "2026-10-20T09:46:46.415663-04:00",
       "closed_at": "2026-10-20T09:46:56.356551-04:00",
-      "final_active": "Inactive"
+      "final_active": "Inactive",
+      "final_verified_at": "2026-10-20T09:47:14.435862-04:00"
     }
   ],
-  "updated_at": "2026-10-20T09:46:56.357360-04:00"
+  "updated_at": "2026-10-20T09:47:14.435919-04:00",
+  "completed_at": "2026-10-20T09:47:14.435907-04:00",
+  "summary": [
+    {
+      "profile_id": "k13him2j",
+      "profile_no": "894",
+      "identity": "Emgai Datquang",
+      "likes_target": 3,
+      "likes_confirmed": 3,
+      "comments_new": 0,
+      "full_reels": 1,
+      "wait_seconds": 50.0,
+      "closed": "Inactive"
+    },
+    {
+      "profile_id": "k1d71895",
+      "profile_no": "1130",
+      "identity": "Mhd Aldy",
+      "likes_target": 4,
+      "likes_confirmed": 4,
+      "comments_new": 0,
+      "full_reels": 1,
+      "wait_seconds": 60.0,
+      "closed": "Inactive"
+    },
+    {
+      "profile_id": "k1f7o4i7",
+      "profile_no": "1177",
+      "identity": "Kelly Andrade",
+      "likes_target": 5,
+      "likes_confirmed": 5,
+      "comments_new": 0,
+      "full_reels": 1,
+      "wait_seconds": 50.0,
+      "closed": "Inactive"
+    },
+    {
+      "profile_id": "k1f7o4im",
+      "profile_no": "1190",
+      "identity": "Giselle Santos",
+      "likes_target": 5,
+      "likes_confirmed": 5,
+      "comments_new": 0,
+      "full_reels": 1,
+      "wait_seconds": 82.0,
+      "closed": "Inactive"
+    }
+  ],
+  "pending": [],
+  "technical_recovery": [
+    {
+      "issue": "Optional bs4 unavailable",
+      "resolution": "Used Python stdlib HTMLParser; no installation or infrastructure change"
+    },
+    {
+      "issue": "Multiple Like buttons outside reaction menu",
+      "resolution": "Bound menu using observed reaction alternatives before write; exact-post readback confirmed"
+    }
+  ]
 }

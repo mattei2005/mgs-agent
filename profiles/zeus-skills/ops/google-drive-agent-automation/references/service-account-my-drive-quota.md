@@ -39,6 +39,8 @@ A Google sign-in rejection saying `This browser or app may not be secure` immedi
 
 The Apps Script management/execution API does not support Service Accounts (https://developers.google.com/apps-script/api/concepts). Do not request script Editor sharing with the canonical Service Account as a supposed remote-edit or execution path. Drive file permissions do not prove Apps Script API compatibility. When the owner supplies an Apps Script project URL, preserve its exact ID, mark ownership/content as unverified until read back, and guide the initial owner-side setup one step at a time. Enabling the Advanced Drive v3 service in a default Apps Script Cloud project enables its corresponding API automatically; do not request unrelated Cloud billing, API keys or global Apps Script API access merely for this service.
 
+For a one-file archive pilot, read the source's ancestry and ACL with the canonical Service Account before asking the Gmail identity to copy it. Pin the exact source ID, parent, drive, size and checksum plus exact destination in the copy-only code. A directly shared file need not expose its ancestor folders; do not grant the whole archive merely to satisfy an ancestry traversal. Inspect existing permissions before creating a grant; if the destination account already has sufficient access, preserve it and report that no permission was added. Keep the bounded pilot-code scope distinct from any broader access that already existed.
+
 ### Official sources to refresh
 
 - Shared Drive ownership and pooled storage: https://developers.google.com/workspace/drive/api/guides/about-shareddrives

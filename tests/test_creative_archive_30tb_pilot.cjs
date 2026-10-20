@@ -7,7 +7,7 @@ const path = require('node:path');
 const file = path.join(__dirname, '..', 'integrations', 'creative-archive-30tb', 'Pilot.js');
 let api;
 test('pilot implementation exists', () => { assert.ok(fs.existsSync(file), 'bounded copy-only pilot implementation missing'); api = require(file); });
-const config = () => ({account:'mgsdigitalcorp@gmail.com', sourceDriveId:'0AEwt4Ye690ocUk9PVA', creativeRootId:'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa', sourceFileId:'1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N', destinationFolderId:'testDestinationId', deleteSource:false});
+const config = () => ({account:'mgsdigitalcorp@gmail.com', sourceDriveId:'0AEwt4Ye690ocUk9PVA', creativeRootId:'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa', sourceFileId:'1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N', destinationFolderId:'1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J', deleteSource:false});
 const source = () => ({id:config().sourceFileId,name:'pilot.mp4',driveId:config().sourceDriveId,mimeType:'video/mp4',size:'5375929',md5Checksum:'59065739912275ee5995bfee8d5ca9c7',version:'7',trashed:false});
 const destination = () => ({id:'newCopyId',name:'pilot.mp4',mimeType:'video/mp4',size:'5375929',md5Checksum:source().md5Checksum,trashed:false,parents:[config().destinationFolderId],owners:[{emailAddress:config().account}]});
 test('accepts bounded copy-only configuration',()=>assert.equal(api.validateConfig(config()).deleteSource,false));
@@ -25,3 +25,9 @@ test('rejects wrong destination parent',()=>assert.throws(()=>api.verifyCopy(sou
 test('rejects a trashed copy',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),trashed:true},config()),/TRASHED/));
 test('rejects copy equal to source ID',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),id:source().id},config()),/SAME_ID/));
 test('contains no mutation primitive for source removal or scheduling',()=>{const text=fs.readFileSync(file,'utf8');assert.doesNotMatch(text,/Drive\.Files\.(remove|delete|update)|newTrigger|ScriptApp\.newTrigger/);});
+const approvedSource = () => ({...source(),parents:['1iGO8km_WVwbIppLotf1h1kZ7W0UKUxz1']});
+test('accepts exact SA-verified pilot manifest without requesting parent-folder access',()=>assert.equal(api.pilotRequireApprovedSource(approvedSource(),config()),true));
+test('blocks source outside exact approved pilot',()=>assert.throws(()=>api.pilotRequireApprovedSource({...approvedSource(),id:'otherSourceId'},config()),/APPROVED_SOURCE/));
+test('blocks moved pilot source',()=>assert.throws(()=>api.pilotRequireApprovedSource({...approvedSource(),parents:['otherParent']},config()),/APPROVED_SOURCE/));
+test('blocks content changed since SA preflight',()=>assert.throws(()=>api.pilotRequireApprovedSource({...approvedSource(),md5Checksum:'a'.repeat(32)},config()),/APPROVED_SOURCE/));
+test('blocks target outside exact approved archive',()=>assert.throws(()=>api.validateConfig({...config(),destinationFolderId:'otherDestination'}),/CONFIG:pilot_scope/));

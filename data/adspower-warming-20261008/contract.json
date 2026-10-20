@@ -86,8 +86,17 @@
     "idempotent persistent per-date per-profile actions; ambiguous side effect blocks replay",
     "only close instances opened by this run; pre-existing active state preserved and reported"
   ],
-  "delivery": "discord:1496267442899521627:1557593341720526899,discord:1508853425952133180:1559206239223812127",
-  "status_delivery_thread_ids": ["1557593341720526899", "1559206239223812127"],
+  "delivery": "discord:1508853425952133180:1559206239223812127",
+  "status_delivery_thread_ids": ["1559206239223812127"],
+  "reporting_amendment_current": {
+    "authorization_message_id": "1562100139827667016",
+    "supersedes_authorization_message_id": "1559206352956432395",
+    "change": "Avisos desta rotina exclusivamente na thread 1559206239223812127; não publicar mais na thread de origem 1557593341720526899. Inclui resultados, parciais e bloqueios.",
+    "supersedes_delivery": "discord:1496267442899521627:1557593341720526899,discord:1508853425952133180:1559206239223812127",
+    "operational_scope_and_schedule_unchanged": true,
+    "completed_scheduler_jobs_preserved": true,
+    "new_schedules_authorized": false
+  },
   "reporting_amendments": [{"authorization_message_id": "1559206352956432395", "change": "Todo status desta rotina enviado na thread de origem também deve ser enviado na thread 1559206239223812127; preservar origem e copiar resultados, parciais e bloqueios, sem duplicar execução.", "supersedes_delivery": "discord:1496267442899521627:1557593341720526899", "operational_scope_and_schedule_unchanged": true}],
   "scheduler_job_ids": ["edd232f95259", "06616da0a7f1", "435855150505", "b68f1a9c48ea", "e426028e7678", "96d0f2493a63", "74a2c1b67096", "149e87b0b179"],
   "status": "scheduled",

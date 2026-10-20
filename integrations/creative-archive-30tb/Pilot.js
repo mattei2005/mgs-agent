@@ -6,6 +6,7 @@ function validateConfig(c) {
     if (typeof c[k] !== 'string' || !/^[A-Za-z0-9_-]{8,}$/.test(c[k])) throw new Error('CONFIG:' + k);
   });
   if (c.sourceDriveId !== '0AEwt4Ye690ocUk9PVA' || c.creativeRootId !== '1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa') throw new Error('CONFIG:source_scope');
+  if (c.sourceFileId !== '1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N' || c.destinationFolderId !== '1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J') throw new Error('CONFIG:pilot_scope');
   if (c.deleteSource !== false) throw new Error('DELETE_FORBIDDEN');
   return c;
 }
@@ -35,16 +36,20 @@ function verifyCopy(s, d, c) {
 function pilotGetFile(id) {
   return Drive.Files.get(id, {supportsAllDrives:true, fields:'id,name,mimeType,size,md5Checksum,version,trashed,parents,driveId,owners(emailAddress),capabilities(canCopy,canAddChildren)'});
 }
-function pilotRequireCreativeAncestor(source, c) {
-  var current = source;
-  var seen = {};
-  for (var depth = 0; depth < 30; depth++) {
-    if (current.id === c.creativeRootId) return true;
-    if (seen[current.id] || !current.parents || current.parents.length !== 1) throw new Error('SOURCE_ANCESTRY');
-    seen[current.id] = true;
-    current = pilotGetFile(current.parents[0]);
+function pilotRequireApprovedSource(source, c) {
+  // Source ancestry was read back with the canonical SA before sharing this
+  // one file. Do not grant access to the entire tree just to traverse parents.
+  if (source.id !== '1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N' ||
+      c.sourceFileId !== source.id ||
+      c.creativeRootId !== '1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa' ||
+      source.driveId !== '0AEwt4Ye690ocUk9PVA' ||
+      !source.parents || source.parents.length !== 1 ||
+      source.parents[0] !== '1iGO8km_WVwbIppLotf1h1kZ7W0UKUxz1' ||
+      String(source.size) !== '5375929' ||
+      source.md5Checksum !== '59065739912275ee5995bfee8d5ca9c7') {
+    throw new Error('APPROVED_SOURCE_CHANGED');
   }
-  throw new Error('SOURCE_ANCESTRY_LIMIT');
+  return true;
 }
 function pilotRequireSaAccess(folderId) {
   var token;
@@ -71,7 +76,7 @@ function runArchivePilot() {
     if (folder.mimeType !== 'application/vnd.google-apps.folder' || folder.trashed !== false || folder.driveId || !(folder.owners || []).some(function(o) {return o.emailAddress === c.account;}) || !folder.capabilities || !folder.capabilities.canAddChildren) throw new Error('DESTINATION_FOLDER');
     pilotRequireSaAccess(c.destinationFolderId);
     var source = validateSource(pilotGetFile(c.sourceFileId), c);
-    pilotRequireCreativeAncestor(source, c);
+    pilotRequireApprovedSource(source, c);
     if (!source.capabilities || !source.capabilities.canCopy) throw new Error('SOURCE_COPY_PERMISSION');
     var marker = source.id + '_' + source.md5Checksum;
     var q = "'" + c.destinationFolderId + "' in parents and trashed=false and properties has { key='mgsArchivePilot' and value='" + marker + "' }";
@@ -102,4 +107,4 @@ function runArchivePilot() {
     return receipt;
   } finally { lock.releaseLock(); }
 }
-if (typeof module !== 'undefined') module.exports = {validateConfig:validateConfig,validateSource:validateSource,assertSourceStable:assertSourceStable,verifyCopy:verifyCopy};
+if (typeof module !== 'undefined') module.exports = {validateConfig:validateConfig,validateSource:validateSource,assertSourceStable:assertSourceStable,verifyCopy:verifyCopy,pilotRequireApprovedSource:pilotRequireApprovedSource};
