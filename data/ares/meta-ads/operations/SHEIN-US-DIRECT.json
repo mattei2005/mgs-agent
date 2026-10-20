@@ -3283,6 +3283,28 @@
         "no_schedule_change": true,
         "no_republication": true
       },
+      "number_bid_preview": {
+        "status": "authorized_preview_pending_visual_approval",
+        "policy_id": "ARES-YOLO-G001-NUMBER-BID-PREVIEW-20261019",
+        "account_id": "787796726891306",
+        "account_name": "Yolokfx-US-SHEIN-EN-05-G001",
+        "thread_id": "1558146488599842827",
+        "authorized_by_discord_id": "344196393512075265",
+        "source_thread_id": "1561752465978818722",
+        "source_message_id": null,
+        "request_text": "Gostei. Manda um report no yolo do g001 pra eu ver como fica pra validar. E deleta o report anterior que você acabou de mandar. Aí se eu validar você vai deletar todos os reports q vc mandou agora e aí fazer em todos e mandar em todos alterado",
+        "number_column_width": 16,
+        "strategy_aliases": {"COCAP": "CC", "MAXVOL": "MV", "BIDCAP": "BC", "misto": "MX", "n/d": "n/d"},
+        "label_order": "literal_number strategy_alias literal_COPY_source",
+        "apply_same_identity_label_to_history": true,
+        "remove_main_column": "Lance",
+        "preserve_Bid_column": true,
+        "preserve_all_financial_fields_and_timestamps": true,
+        "global_rollout": "requires_subsequent_Rodolfo_visual_validation",
+        "other_reports_unchanged": true,
+        "no_Meta_write": true,
+        "no_schedule_change": true
+      },
       "numeric_width_standard": {
         "status": "active",
         "policy_id": "ARES-SHEIN-ALL36-NUMERIC-WIDTHS-20261019",
