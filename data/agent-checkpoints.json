@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Rodolfo 1562188030205362227 mandou finalizar sem atualizacoes intermediarias. Intake contextual novo em TDD (14 testes), descoberta real114slots sem midia pendente; nao ativado. Implementar dispatcher nativo Ares com manifesto/claim exclusivo, leitura/estoque arquivo, provar fluxo real e ativar gates aprovados. Nove ACLs ja verificadas. Apenas Critical Subset/bloqueio decisorio permite interromper com pergunta; exclusao ainda exige confirmacao especifica. Nao repetir passos Google implantados.",
-      "objective": "Concluir fluxo autonomo de criativos e arquivo 30 TB preservando campanhas/acervo/reservas; limpeza depende de confirmacao critica especifica",
+      "next_step": "Zeus monitora automaticamente o primeiro upload real e exceções; nenhum upload real estava pendente. Solicitar somente a confirmação crítica da política proposta de exclusão definitiva dos novos pares, após 24h, máximo dois pares por execução; antes de apply implementar e validar reconciliação consciente de aposentadoria. Não excluir nada, não migrar histórico nem alterar campanhas/budgets.",
+      "objective": "Fluxo autônomo de novos criativos: contexto por folder ID, Ares, arquivo Gmail 30 TB, SA, consumidores e limpeza separada",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "noncritical_completion_intake_and_consumer_implementation_in_progress",
+      "state": "copy_only_active_scheduled_verified_cleanup_critical_confirmation_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T19:45:49+00:00"
+      "updated_at": "2026-10-20T20:46:47+00:00"
     },
     {
       "agent": "ares",
@@ -6902,5 +6902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T19:53:38+00:00"
+  "updated_at": "2026-10-20T20:46:47+00:00"
 }

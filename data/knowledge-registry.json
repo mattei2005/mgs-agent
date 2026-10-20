@@ -904,10 +904,63 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREATIVE-30TB-AUTONOMY-COPY-ONLY-ACTIVE-20261020",
+      "title": "Operacao autonoma de criativos com arquivo 30 TB: requisito aprovado, ativacao pendente",
+      "updated_at": "2026-10-20T20:46:47+00:00"
+    },
+    {
+      "canonical_key": "ares.creative.30tb.autonomous-requirements",
+      "canonical_source": "docs/ares-creative-30tb-autonomous-requirements.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-10-20T20:46:47+00:00",
+      "id": "ARES-CREATIVE-30TB-AUTONOMY-COPY-ONLY-ACTIVE-20261020",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Operacao autonoma de criativos com arquivo 30 TB: requisito aprovado, ativacao pendente",
-      "updated_at": "2026-10-20T12:55:51+00:00"
+      "title": "Autonomia de novos criativos ativa para tratamento e arquivo; limpeza definitiva aguarda confirmação específica",
+      "updated_at": "2026-10-20T20:46:47+00:00"
+    },
+    {
+      "canonical_key": "ares.creative.30tb.source_cleanup_proposal",
+      "canonical_source": "docs/ares-creative-30tb-source-cleanup-policy.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-10-20T20:46:47+00:00",
+      "id": "ARES-CREATIVE-30TB-CLEANUP-PROPOSAL-20261020",
+      "kind": "policy",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "draft",
+      "superseded_by": null,
+      "title": "PROPOSTA INATIVA: exclusão definitiva de novos pares verificados, retenção 24h e máximo dois pares por execução",
+      "updated_at": "2026-10-20T20:46:47+00:00"
+    },
+    {
+      "canonical_key": "ares.creative.30tb.queue_integration",
+      "canonical_source": "data/ares/creative-ops/30tb-archive/cutover-1562188030205362227.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-10-20T20:46:47+00:00",
+      "id": "ARES-CREATIVE-30TB-QUEUE-ACTIVE-20261020",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Integração Ares/arquivo e leitura-estoque ativadas, com histórico e exclusão desligados",
+      "updated_at": "2026-10-20T20:46:47+00:00"
     },
     {
       "canonical_key": "ares.creative.30tb.queue_integration",
@@ -922,10 +975,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREATIVE-30TB-QUEUE-ACTIVE-20261020",
       "title": "Skills Ares e fila de arquivo 30 TB autorizadas; copia-only staged, exclusao e producao desativadas",
-      "updated_at": "2026-10-20T14:47:07+00:00"
+      "updated_at": "2026-10-20T20:46:47+00:00"
     },
     {
       "canonical_key": "growth.creative-ops.direct-shein.intake-vertical",
@@ -13342,5 +13395,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T19:35:10+00:00"
+  "updated_at": "2026-10-20T20:46:47+00:00"
 }

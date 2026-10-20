@@ -60,6 +60,18 @@ Cover hidden emails, wrong/missing IDs, contradictory visible emails, unknown ex
 
 A worker summary with `status:"ok"` but nonempty `blocked` is not a completed archive operation. Require an empty block list, actual per-job receipt, canonical binary verification/ACK and separate scheduled-heartbeat proof at their respective gates.
 
+## Autonomous intake and logical-media consumers
+
+Keep an immutable folder-ID context registry and a durable single-owner batch before processing. Revalidate source content and ID ancestry before the first writer claim; filenames and editable file content never grant context or authority. Manual writers must respect the same active source claims. Preserve the inventory baseline and manager reservation; an archive transport result never promotes campaign eligibility.
+
+Treat treatment completion, owner copy, independent ACK, stock alias and final batch release as separate states. Persist `treated_waiting_archive` before publishing through the common queue lock, then let `archive_ready` resume only completion, not classification/upload. Never invert the intake-state → archive-queue lock order. Keep technical E2E jobs `validationOnly` and outside the production catalogue even when exercising the real download/move primitives.
+
+Represent archived media as an explicitly tagged domain catalogue (`mgs.logical.media.v1`), never as fabricated raw Google metadata. Preserve the logical ID; expose actual provider/stock IDs and native metadata separately. Resolve bytes to the Gmail copy and status movement to a Shared-Drive shortcut, with exact owner/hash/path/target checks. Deduplicate retained staging media plus its alias as one candidate. Obtain download capability from the real byte provider, movement capability from the real stock object. Include `version` and `createdTime` in field masks whenever a frozen-source validator consumes that metadata. Old/unmapped historical media must keep its original route, not migrate implicitly.
+
+Stable source-monitor output suppresses repeated model wakes. Keep idle/waiting output stable, but attach a bounded retry epoch to active pending/resume/error states so a failed executor is not suppressed forever. Record a separate local heartbeat and have the canonical health monitor cover native Ares job failure, stale discovery, execution errors and archive health. A local-only executor needs this explicit escalation path; local output alone does not close monitoring.
+
+Exercise the actual owner receipt/SA ACK, provider download and forward/reverse shortcut moves before enabling the copy-only flags. Then observe natural scheduled runs after cutover, distinguish a technical fixture from the first real production upload, and keep cleanup off until separately confirmed. A copy-only cutover does not release staging quota. Before source retirement, extend reconciliation/alias repair to validate an explicit retirement receipt; never reinterpret an unexplained 404 as authorized deletion.
+
 ## Replay, concurrency and recovery
 
 - Use one local producer lock plus the worker's script lock. Immutable request bodies and separately owned receipts avoid competing writers on the same JSON content.
