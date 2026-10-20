@@ -73,6 +73,7 @@ def control_scope(d,c):
     if m.get('mimeType')!=b.FOLDER or m.get('driveId')!=b.SOURCE_DRIVE or m.get('parents')!=[c['control_folder_id']] or m.get('trashed'):raise RetirementError('RETIREMENT_CONTROL_FOLDER_SCOPE')
 
 def verified_receipt(d,c,job,asset,entry):
+    if job.get('kind')!='lineage' or job.get('validationOnly') is True:raise RetirementError('RETIREMENT_RECEIPT_NOT_PRODUCTION')
     fid=entry.get('sourceRetirementReceipt')
     if not fid:raise RetirementError('RETIREMENT_RECEIPT_MISSING')
     control_scope(d,c);m=d.meta(fid);b.require_publisher(m,b.CANONICAL_SA,'RETIREMENT_RECEIPT_AUTHOR');raw=d.raw(fid);r=json.loads(raw)
@@ -107,6 +108,9 @@ def check_copy(d,asset,entry):
     import ares_archive_storage as storage
     record=storage.media_record(entry,storage.meta(d,entry['archiveId']),storage.meta(d,entry['stockShortcutId']))
     if record['name']!=asset['name'] or record['mimeType']!=asset['mimeType'] or d.relative_parent(record['provider_metadata']['parents'][0],b.ARCHIVE_ROOT)!=asset['relativeParent']:raise RetirementError('RETIREMENT_ARCHIVE_PATH')
+    stock_path=d.relative_parent(record['stock_metadata']['parents'][0],b.SOURCE_ROOT)
+    allowed_status=['99_LEGACY'] if asset['role']=='original' else ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']
+    if len(stock_path)!=3 or stock_path[:2]!=asset['relativeParent'][:2] or stock_path[-1] not in allowed_status:raise RetirementError('RETIREMENT_STOCK_PATH')
     permissions=record['provider_metadata'].get('permissions',[]);writers={p.get('emailAddress') for p in permissions if p.get('role')=='writer'}
     if not WRITERS.issubset(writers) or b.CANONICAL_SA not in writers or not record['capabilities'].get('canDownload'):raise RetirementError('RETIREMENT_HUMAN_OR_SA_ACCESS')
     if d.hashes(entry['archiveId'])!={k:asset[k] for k in ['size','md5','sha256']}:raise RetirementError('RETIREMENT_ARCHIVE_BYTES')
@@ -166,6 +170,7 @@ def retire_asset(d,c,job,asset,row_fingerprint):
     index=_object(b.DATA/'archive-index.json');entry=index['mappings'][asset['sourceId']]
     if entry.get('sourceRetirementReceipt'):return verified_receipt(d,c,job,asset,entry)['receipt_file_id']
     source=storage.meta(d,asset['sourceId']);b.validate_source_metadata(source,asset,c)
+    if d.relative_parent(source['parents'][0],b.SOURCE_ROOT)!=asset['relativeParent']:raise RetirementError('RETIREMENT_SOURCE_ANCESTRY_CHANGED')
     caps=d.api('GET','files/'+asset['sourceId'],{'supportsAllDrives':'true','fields':'id,capabilities(canDelete)'})
     if not caps.get('capabilities',{}).get('canDelete'):raise RetirementError('RETIREMENT_SOURCE_DELETE_CAPABILITY')
     expected={k:asset[k] for k in ['size','md5','sha256']};check_copy(d,asset,entry)

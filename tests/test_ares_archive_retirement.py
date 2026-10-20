@@ -68,6 +68,7 @@ class RetirementTests(unittest.TestCase):
   (base/'data/ares/creative-ops/inventory/assets.jsonl').write_text(json.dumps(self.row)+'\n');(data/'archive-index.json').write_text(json.dumps(self.index));asset=self.job['assets'][0];source={'id':asset['sourceId'],'name':asset['name'],'mimeType':asset['mimeType'],'size':asset['size'],'md5Checksum':asset['md5'],'sha256Checksum':asset['sha256'],'version':'1','createdTime':asset['sourceCreatedTime'],'parents':[asset['sourceParentId']],'driveId':self.m.b.SOURCE_DRIVE,'trashed':False}
   class FakeDrive:
    token='offline-token-never-network';payload=b''
+   def relative_parent(_self,_parent,_root):return asset['relativeParent']
    def api(_self,*args,**kwargs):return {'capabilities':{'canDelete':True}}
    def hashes(_self,_fid):return {k:asset[k] for k in ['size','md5','sha256']}
    def upload_once(_self,_parent,_name,body,*args):_self.payload=body;return 'intentOffline001'

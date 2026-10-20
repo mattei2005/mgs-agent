@@ -1,10 +1,10 @@
 # Ares Creative Ops — 30 TB autonomous archive requirements
 
-## Current authoritative status — copy-only autonomous cutover
+## Current authoritative status — autonomous archive and bounded retirement active
 
 This section explicitly supersedes the rollout-status snapshots below; retain them as historical evidence, not active flags. Runtime truth remains `data/ares/creative-ops/30tb-archive/queue-config.json`, `intake-config.json` and their acceptance receipts.
 
-- Authorized by Rodolfo `1562188030205362227`: native Ares contextual intake is enabled; `queue_enabled=true` and `prefer_archive_reads=true`. `delete_source=false` and `include_historical=false` remain mandatory. No credentials, campaign permissions, campaign state, strategy or budget changed.
+- Authorized intake/integration `1562188030205362227` plus explicit contextual retirement confirmation `1562233890716786830`: native Ares intake, `queue_enabled=true`, `prefer_archive_reads=true`, `delete_source=true`; `include_historical=false`. The separate SA retirement controller enforces 24h retention and at most two new production pairs/run. Owner worker requests/ACK/heartbeat remain copy-only false. No credentials, campaign permissions/state/strategy/budget changed.
 - Real native Ares job `528c5710269d` processed the isolated PNG fixture, used the sanitizer, preserved/moved RAW by its original ID, and enqueued original+clean as validationOnly job `c96d0b8f41ff54cdb296fe8a09de4788`. Owner execution and independent SA streams/ACK passed. This is a real technical E2E, not a fabricated campaign candidate or production inventory write.
 - Real consumer `ares_campaign_v3.daily_cpv.download_drive_file` retrieved the Gmail copy; MD5/size/SHA matched. A real technical stock shortcut moved READY → TESTING → READY while the Gmail file parent and bytes stayed unchanged. Evidence: `intake-storage-e2e-live-1562188030205362227.json`; production mapping count remains zero.
 - Consumer adapters preserve logical IDs and use explicitly tagged catalogue records with real provider/stock metadata; aliases carry stock movement. New lineages are gated until independent ACK, alias proof and intake release. Historical unmapped files keep their existing route; retained staging + alias do not become two candidates.
@@ -13,7 +13,7 @@ This section explicitly supersedes the rollout-status snapshots below; retain th
 - Python archive/intake/layout suites and consumer regressions pass. The broader campaign suite exposed two unchanged baseline failures (old token-selector assertion and historical CPV reader-gate assertion), reproduced against the untouched rollback snapshot; no Meta/auth/report behavior was modified to mask them. Detailed JUnit receipts are in the initiative artifact directory.
 - No real manager upload was pending in the 114 registered slots at cutover. Zeus owns first-real-upload acceptance and ongoing exceptions; this is not a task for Rodolfo and must not be represented as already observed.
 - The nine approved human writer accounts remain inherited on copies. Native Ares executor is local/silent; the Zeus health monitor covers stale intake/native failures and archive blocks.
-- Remaining decision gate: bounded automatic permanent source cleanup is NOT authorized or active. Proposed policy: `docs/ares-creative-30tb-source-cleanup-policy.md`; source retirement also needs retirement-aware reconciliation before apply. Copy-only archiving does not free Shared Drive staging quota. No file was deleted; historical assets and all reservations/primary IDs remain intact.
+- Retirement implemented/active: `scripts/ares_archive_retirement.py`, native SA intentions/receipts, retention, exact pair/hash/owner/ACL/path/claims/reference checks, strong ETag conditional delete, no ambiguous replay, receipt-aware reconciliation and alias validation. Active policy: `docs/ares-creative-30tb-source-cleanup-policy.md`; deployment proof: `retirement-activation-1562233890716786830.json`. Initial live cycle had zero eligible sources and no deletions. Real destructive E2E is not yet observed because no real upload pair has reached the gates; Zeus owns first-eligible verification. Do not fake candidates, delete technical fixtures or bypass retention to claim otherwise. Historical assets, reservations and primary IDs remain intact.
 
 ## Authority and scope
 
