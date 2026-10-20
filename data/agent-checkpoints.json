@@ -4342,6 +4342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1561914267924439041",
+      "next_step": "Executar sequencialmente cada fonte via runner central; QA e readback integral; preservar mesmos request e IDs em recovery; recibo agregado antes de concluir",
+      "objective": "Duplicar C195 C199 C193 C194 C108 C198 C217 tres vezes cada na Yolokfx02 G006 USD45/dia inicio20/10/2026 00:12 ET",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1561914267924439041",
+      "state": "in_progress: sete intencoes deterministicas, 21 campanhas, usd945/dia lote; c195 dry_run_ok; nenhum write ate este checkpoint",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-20T01:30:25+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-all36-intraday-1561752465978818722",
       "next_step": "Nenhuma pendencia. Proximos relatorios seguem politica global36. Recuperar entrega exata por completion.latest_delivery_sources; nao excluir historico por inferencia.",
       "objective": "Padrao global uniforme e intraday atual em todos os sites/36threads SHEIN",
@@ -6612,5 +6622,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T23:58:15+00:00"
+  "updated_at": "2026-10-20T01:30:25+00:00"
 }
