@@ -1,0 +1,280 @@
+{
+  "result": "PASS",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g004-s&utm_campaign=b01fb04c191&utm_adgroup=b01fb04c191g01&fbclid=fbclid&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g004-s&utm_campaign=b01fb04c191&utm_adgroup=b01fb04c191g01&fbclid=fbclid&nocache",
+    "mapping_source": "Live read-only HTTP200 exact quiz URL; all 7 data-mgs-dq-cta hrefs identical; direct-quiz.js?v=1.2.0 mergeUrl preserves tracking. Evidence /root/mgs-agent/data/ares/meta-ads/landing-followup/runs/landing-observer-cc2ae3d4780344f4923993394481a07f/mapping-http-4.html sha256=871e3effc3aa33af3d6e5cd094b697a2c41b0e4d728a7b226fa18016639c21cb; JS /root/.hermes/profiles/ares/cache/scratch/landing-cc2ae3-source.js",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792456775.1844878,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a mostly blank white page with a small centered YOLO FX loading logo; no article body, site gate, rewarded overlay, or network ad is visible."
+      },
+      {
+        "at": 1792456782.5508103,
+        "gate": false,
+        "rewarded": false,
+        "article": true,
+        "description": "Normal Chrome viewport showing a readable SHEIN product-testing article, an inline Store pickup/Home delivery questionnaire, and visible network ads at the top and right. No CLAIM MY FREE PRODUCTS gate or rewarded overlay is visible."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 92.00230900000315
+    },
+    "device_mode": "DESKTOP",
+    "desktop_view": {
+      "desktop_view": true,
+      "device_toolbar_visible": false,
+      "viewport_bounds": [
+        0,
+        121,
+        2560,
+        1270
+      ],
+      "device_mode": "DESKTOP",
+      "verified": true,
+      "verified_at": 1792456749.300621,
+      "source": "native_and_visual_desktop"
+    },
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g004-s&utm_campaign=b01fb04c191&utm_adgroup=b01fb04c191g01&fbclid=fbclid&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792456734.7252262,
+      "target": {
+        "pid": 18224,
+        "window_id": 31458820,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792456742.7700078,
+      "desktop_view": {
+        "desktop_view": true,
+        "device_toolbar_visible": false,
+        "viewport_bounds": [
+          0,
+          121,
+          2560,
+          1270
+        ],
+        "device_mode": "DESKTOP",
+        "verified": true,
+        "verified_at": 1792456749.300621,
+        "source": "native_and_visual_desktop"
+      },
+      "opened_at": 1792456769.1123898
+    },
+    "opened_at": 1792456769.1123898,
+    "article_verified": true,
+    "article_ready_at": 1792456782.5508132,
+    "article_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_065fa550fad44d3eb6f5d77058e80e14.png",
+    "rewarded_wait_seconds": 13.438423871994019,
+    "scroll_result": {
+      "ok": true,
+      "action": "press_key",
+      "message": "✅ Sent pagedown via SendInput on pid 18224 (delivery_mode:foreground).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "foreground"
+        },
+        "effect": "unverifiable",
+        "route": "global_input",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "scroll_visual_changed": true,
+    "observation_started_at": 1792456789.3591616,
+    "observation_ended_at": 1792456814.572019,
+    "observation_seconds": 25.212857916980283,
+    "observation_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_b55780b390ac4b049d0e62a52a16dbf4.png",
+    "visual_captured_at": 1792456814.5699172,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 31458820,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792456817.5393412,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 31458820,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 48.42695140838623,
+    "final_visual": {
+      "network_ad_visible": false,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "The loaded landing page shows unobstructed editorial content about the official SHEIN reviewer program. No rendered network advertising creative or site gate is visible."
+    },
+    "ad_confirmation_stage": "ARTICLE_BEFORE_SCROLL",
+    "ad_confirmation_visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Two rendered network ads are visible: a top Altium banner reading “Manufacturing That Moves as Fast as You Do” with a “Learn More” button, and a Capital One Shopping ad reading “Coupon codes found!” with an “Apply Codes” button. The SHEIN article landing page is loaded and visible without a site gate."
+    },
+    "visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Two rendered network ads are visible: a top Altium banner reading “Manufacturing That Moves as Fast as You Do” with a “Learn More” button, and a Capital One Shopping ad reading “Coupon codes found!” with an “Apply Codes” button. The SHEIN article landing page is loaded and visible without a site gate."
+    },
+    "network_ad_confirmed": true,
+    "ad_description": "Two rendered network ads are visible: a top Altium banner reading “Manufacturing That Moves as Fast as You Do” with a “Learn More” button, and a Capital One Shopping ad reading “Coupon codes found!” with an “Apply Codes” button. The SHEIN article landing page is loaded and visible without a site gate.",
+    "visual_review": "Two rendered network ads are visible: a top Altium banner reading “Manufacturing That Moves as Fast as You Do” with a “Learn More” button, and a Capital One Shopping ad reading “Coupon codes found!” with an “Apply Codes” button. The SHEIN article landing page is loaded and visible without a site gate."
+  },
+  "batch_scope": "2862b06b9b3eb0d85daa96641f65ddb4cd170e2c64c4ab9dc7d58c915341d5fe"
+}
