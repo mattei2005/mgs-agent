@@ -3283,6 +3283,34 @@
         "no_schedule_change": true,
         "no_republication": true
       },
+      "campaign_status_blocks": {
+        "status": "active",
+        "policy_id": "ARES-SHEIN-STATUS-BLOCKS-20261019",
+        "scope": "all_SHEIN_report_requests",
+        "authorized_by_discord_id": "344196393512075265",
+        "source_thread_id": "1561752465978818722",
+        "source_message_id": null,
+        "request_text": "Uma modificação, quando pedirem os relatórios da shein, quero que você separe por blocos as campanhas que são ativas e campanhas pausadas.",
+        "effective_from_financial_snapshot": "2026-10-19T21:42:35.036297-04:00",
+        "status_field": "campaign_status",
+        "blocks": [
+          {"status": "ACTIVE", "label": "Campanhas ativas"},
+          {"status": "PAUSED", "label": "Campanhas pausadas"},
+          {"status": "ARCHIVED", "label": "Campanhas arquivadas"},
+          {"status": "DELETED", "label": "Campanhas deletadas"},
+          {"status": "UNKNOWN", "label": "Status indisponível"}
+        ],
+        "always_show": ["ACTIVE", "PAUSED"],
+        "main_sort_within_each_block": "preserve_effective_main_sort",
+        "history_sort_within_each_block": "preserve_effective_history_sort",
+        "apply_to_main_and_history": true,
+        "preserve_selection_and_totals": true,
+        "do_not_classify_by_display_code_or_spend": true,
+        "supersedes": "unified_cross_status_ranking_only; all_columns_metrics_budget_used_widths_and_history_preserved",
+        "no_Meta_write": true,
+        "no_schedule_change": true,
+        "no_republication": true
+      },
       "account_width_overrides": {
         "7840111366055613": {
           "status": "active",

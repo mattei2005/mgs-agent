@@ -3089,10 +3089,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-STATUS-BLOCKS-20261019",
       "title": "SHEIN36: B.U.% gasto Meta diario/orcamento diario substitui B.R.% prospectivamente; demais regras preservadas",
-      "updated_at": "2026-10-19T21:01:17+00:00"
+      "updated_at": "2026-10-20T01:45:18+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -4551,6 +4551,24 @@
       "superseded_by": null,
       "title": "Pedidos SHEIN v3 com delta de lance e estado offline validado",
       "updated_at": "2026-10-09T15:20:24+00:00"
+    },
+    {
+      "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-20T01:45:18+00:00",
+      "id": "ARES-SHEIN-STATUS-BLOCKS-20261019",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: blocos separados de campanhas ativas e pausadas no principal e historico; demais metricas preservadas",
+      "updated_at": "2026-10-20T01:45:18+00:00"
     },
     {
       "canonical_key": "ares.discord.thread.1558127160831508623.account-scope",
@@ -12985,5 +13003,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T23:57:38+00:00"
+  "updated_at": "2026-10-20T01:45:18+00:00"
 }
