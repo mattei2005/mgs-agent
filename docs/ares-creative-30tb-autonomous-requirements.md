@@ -1,5 +1,20 @@
 # Ares Creative Ops — 30 TB autonomous archive requirements
 
+## Current authoritative status — copy-only autonomous cutover
+
+This section explicitly supersedes the rollout-status snapshots below; retain them as historical evidence, not active flags. Runtime truth remains `data/ares/creative-ops/30tb-archive/queue-config.json`, `intake-config.json` and their acceptance receipts.
+
+- Authorized by Rodolfo `1562188030205362227`: native Ares contextual intake is enabled; `queue_enabled=true` and `prefer_archive_reads=true`. `delete_source=false` and `include_historical=false` remain mandatory. No credentials, campaign permissions, campaign state, strategy or budget changed.
+- Real native Ares job `528c5710269d` processed the isolated PNG fixture, used the sanitizer, preserved/moved RAW by its original ID, and enqueued original+clean as validationOnly job `c96d0b8f41ff54cdb296fe8a09de4788`. Owner execution and independent SA streams/ACK passed. This is a real technical E2E, not a fabricated campaign candidate or production inventory write.
+- Real consumer `ares_campaign_v3.daily_cpv.download_drive_file` retrieved the Gmail copy; MD5/size/SHA matched. A real technical stock shortcut moved READY → TESTING → READY while the Gmail file parent and bytes stayed unchanged. Evidence: `intake-storage-e2e-live-1562188030205362227.json`; production mapping count remains zero.
+- Consumer adapters preserve logical IDs and use explicitly tagged catalogue records with real provider/stock metadata; aliases carry stock movement. New lineages are gated until independent ACK, alias proof and intake release. Historical unmapped files keep their existing route; retained staging + alias do not become two candidates.
+- Global scheduler re-audit selected the same Ares schedule `12,27,42,57 * * * *`, without non-baseline collisions. SA schedule remains `10,25,40,55 * * * *`; Google clock remains five minutes. Native job/prompt readback and post-cutover scheduled evidence are recorded in `cutover-1562188030205362227.json`.
+- Rollback snapshots: `/root/.hermes/profiles/zeus/artifacts/creative-archive-30tb/cutover-1562188030205362227/` and `consumer-adapter-1562188030205362227/`. Pausing copy-only flags does not delete origins, copies, aliases, requests or inventory.
+- Python archive/intake/layout suites and consumer regressions pass. The broader campaign suite exposed two unchanged baseline failures (old token-selector assertion and historical CPV reader-gate assertion), reproduced against the untouched rollback snapshot; no Meta/auth/report behavior was modified to mask them. Detailed JUnit receipts are in the initiative artifact directory.
+- No real manager upload was pending in the 114 registered slots at cutover. Zeus owns first-real-upload acceptance and ongoing exceptions; this is not a task for Rodolfo and must not be represented as already observed.
+- The nine approved human writer accounts remain inherited on copies. Native Ares executor is local/silent; the Zeus health monitor covers stale intake/native failures and archive blocks.
+- Remaining decision gate: bounded automatic permanent source cleanup is NOT authorized or active. Proposed policy: `docs/ares-creative-30tb-source-cleanup-policy.md`; source retirement also needs retirement-aware reconciliation before apply. Copy-only archiving does not free Shared Drive staging quota. No file was deleted; historical assets and all reservations/primary IDs remain intact.
+
 ## Authority and scope
 
 - Owner: Rodolfo Mattei; Discord user 344196393512075265.
@@ -9,7 +24,7 @@
 - Target account: mgsdigitalcorp@gmail.com. Account/quota, destination ownership/privacy and canonical SA access are evidenced below. One real owner-executed pilot copy and canonical SA binary retrieval now pass. Autonomous processing and source cleanup remain unimplemented/inactive.
 - No additional Workspace storage purchase is requested.
 
-## Status — Ares change approved/applied; copy-only queue staged for owner validation
+## Historical status — initial copy-only queue staging (superseded)
 
 Rodolfo approved advancing with the isolated integration and preparing the limited cleanup policy in message https://discord.com/channels/1185714635991679006/1562078493498540042/1562087305051902063. This does not activate source deletion: exact targets and the destructive-activation confirmation remain pending after the pilot. The current Service Account-only agent architecture remains active.
 
