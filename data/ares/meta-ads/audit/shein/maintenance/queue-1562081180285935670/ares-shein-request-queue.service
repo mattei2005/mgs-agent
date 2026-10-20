@@ -1,0 +1,24 @@
+[Unit]
+Description=MGS Ares SHEIN authorized request contention queue
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/mgs-agent
+Environment=PYTHONPATH=/root/mgs-agent/scripts
+Environment=PYTHONUNBUFFERED=1
+Environment=TMPDIR=/root/.hermes/profiles/ares/cache/scratch
+ExecStart=/usr/bin/python3 -m ares_campaign_v3.shein_request_queue --work
+Restart=on-failure
+RestartSec=15
+KillMode=control-group
+TimeoutStopSec=1900
+NoNewPrivileges=true
+PrivateTmp=true
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

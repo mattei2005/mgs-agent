@@ -4403,12 +4403,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1562023429690097665",
-      "next_step": "Rodolfo decidir prioridade/liberação explícita das5 reservas concorrentes ou concluir pedido detentor na origem; após reconciliação autorizada do inventário, retomar mesmo request-ready para pós-processamento e ativação, sem recriar IDs, sem trocar manifests, sem reiniciar SLA.",
-      "objective": "Concluir quatro clones C01 Vizioid G006, USD20/dia e COCAP USD0.90, 10 vídeos Nicolas.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562023429690097665/validated-paused-receipt.json",
-      "state": "4 campanhas 004-007/4 conjuntos/10 anúncios criados e conferidos paused; qa semântico/renderizado 4/4 com cobertura exata dos 10 ad e creative ids. page reparada e readback200. user_age_unknown restaurado false em4 alvos com get. pós-processamento bloqueado por5 linhagens reservadas por shein-1562024416823607398 (nicolas, escalatepower g006, state recovery_pending/core failed com shells persistidos). não tomar reserva de outro pedido não terminal.",
+      "next_step": "Worker aguarda predecessor terminal; então relê uso histórico, reconcilia somente reservas terminais sob locks e retoma mesmo runner/IDs/QA; publica somente conclusão normal na origem por Ares e valida GET/nonce. Não pedir prioridade nem avisar contenção ao operador.",
+      "objective": "Concluir pedido original Vizioid G006 com4 campanhas/10 anúncios sem recriar IDs; contenção tratada por fila silenciosa aprovada.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/jobs/shein-1562023429690097665.json",
+      "state": "waiting_automatic_queue: política corrigida por rodolfo1562081180285935670; job persistido com request original imutável e dependência shein-1562024416823607398. serviço próprio ativo/enabled e worker real conferido. 4 campaign ids originais preservados;64 testes verdes; zero novo write meta ou transferência de reserva ao enfileirar. aviso final ainda não enviado; campanhas ainda não concluídas.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-10-20T12:18:58+00:00"
+      "updated_at": "2026-10-20T12:46:33+00:00"
     },
     {
       "agent": "ares",
@@ -6742,5 +6742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T12:21:07+00:00"
+  "updated_at": "2026-10-20T12:46:33+00:00"
 }

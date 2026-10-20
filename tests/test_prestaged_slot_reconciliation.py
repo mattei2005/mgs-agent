@@ -26,7 +26,7 @@ class PrestagedReconciliationTests(unittest.TestCase):
         with self.assertRaises(ValueError):resolve_slot([{'id':'501','adset_id':'WRONG','source_ad_id':'100'}],self.spec(),'20',{'confirmed_objects':{'ad_copy_1_1':{'copied_ad_id':'501'}}},1,1,2)
     def test_video_offer_schema_normalization_preserves_immutable_input(self):
         ad=self.spec();old=copy.deepcopy(ad.creative_payload);result=copy_parameters(ad.creative_payload,'SHEIN-US-DIRECT')
-        self.assertEqual(result['object_story_spec']['video_data']['call_to_action']['type'],'GET_OFFER_VIEW')
+        self.assertEqual(result['object_story_spec']['video_data']['call_to_action']['type'],'GET_OFFER')
         self.assertEqual(ad.creative_payload,old)
         self.assertEqual(copy_parameters(old,'OTHER'),old)
 

@@ -1070,6 +1070,12 @@ def cli_run(args):
     if not isinstance(request, dict):
         raise RouteBlocked('request must be a JSON object')
     try:
+        # Maintenance-layer contention gate; never alter the sealed Engine manifest.
+        if args.confirm_execute and not args.dry_run and args.command != 'reference-preflight':
+            from .shein_request_queue import gate
+            queued = gate(request, args.command, BASE)
+            if queued is not None:
+                return queued
         if args.command == 'prepare-media':
             if args.dry_run or not args.confirm_execute:
                 raise RouteBlocked('media preparation requires explicit confirmation; no implicit uploads')
@@ -1077,9 +1083,19 @@ def cli_run(args):
             out = prepare(request)
             return {'status': 'PRESTAGED_GROUPS_READY', 'request_id': out['request_id'], 'assets': len(out['asset_refs']), 'campaigns': len(out['campaign_groups'])}
         return run_request(request, confirm_execute=args.confirm_execute, reference_only=args.command == 'reference-preflight')
-    except RouteBlocked:
+    except RouteBlocked as exc:
+        if args.confirm_execute and not args.dry_run and args.command != 'reference-preflight':
+            from .shein_request_queue import defer_conflict
+            queued = defer_conflict(request, args.command, str(exc), BASE)
+            if queued is not None:
+                return queued
         raise
     except ValueError as exc:
+        if args.confirm_execute and not args.dry_run and args.command != 'reference-preflight':
+            from .shein_request_queue import defer_conflict
+            queued = defer_conflict(request, args.command, str(exc), BASE)
+            if queued is not None:
+                return queued
         raise RouteBlocked(str(exc)) from exc
     except Exception as exc:
         # Never expose a raw provider exception, URL or credential in the operational CLI.

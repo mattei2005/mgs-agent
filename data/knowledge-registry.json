@@ -4534,6 +4534,23 @@
       "updated_at": "2026-10-19T15:26:58+00:00"
     },
     {
+      "canonical_key": "SHEIN-US-DIRECT.request_queue_policy",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-20T12:44:27+00:00",
+      "id": "ARES-SHEIN-SILENT-CONTENTION-QUEUE-1562081180285935670",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fila silenciosa de pedidos SHEIN concorrentes com retomada e aviso final",
+      "updated_at": "2026-10-20T12:44:27+00:00"
+    },
+    {
       "canonical_key": "ares.shein.single-campaign.e2e-target",
       "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
       "consumers": [
@@ -13165,5 +13182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T12:13:39+00:00"
+  "updated_at": "2026-10-20T12:44:27+00:00"
 }

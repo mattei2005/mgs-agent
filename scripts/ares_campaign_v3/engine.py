@@ -1,6 +1,7 @@
 from __future__ import annotations
 from .creative_media import creative_body, matches as media_creative_matches
 from . import progress
+from .prestaged_reconciliation import copy_parameters
 
 from request_serialization import serialized_engine
 
@@ -483,7 +484,7 @@ class CampaignEngine:
                         f"ad_copy_{ci}_{ai}", "POST", f"{ad.source_ad_id}/copies",
                         body={
                             "adset_id": adset_id,
-                            "creative_parameters": ad.creative_payload,
+                            "creative_parameters": copy_parameters(ad.creative_payload, (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation')),
                             "status_option": campaign.status,
                             "rename_options": {"rename_strategy": "NO_RENAME"},
                         },
@@ -1115,26 +1116,35 @@ class CampaignEngine:
         resolved: dict[tuple[int, int], str] = {}
         resolved_rows: dict[tuple[int, int], dict[str, Any]] = {}
         missing_ops: list[BatchOperation] = []
+        redundant_ops: list[BatchOperation] = []
+        from .prestaged_reconciliation import resolve_slot, copy_parameters
+        from .prestaged_two_phase import rejected_slots, materialize as two_phase_materialize
+        fallback_slots = rejected_slots(record) if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT' else set()
+        fallback_entries = []
         for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
             live_rows = live_by_campaign[ci]
+            result_page = next(row for row in read_results if row.name == f"recovery_ads_{ci}")
+            if result_page.body.get('paging', {}).get('next'):
+                raise ExecutionFailed('prestaged recovery inventory incomplete; no writes')
             for ai, ad in enumerate(campaign.ads, 1):
-                matches = [
-                    row
-                    for row in live_rows
-                    if str(row.get("adset_id") or "") == adset_id
-                    and str(row.get("source_ad_id") or "") == str(ad.source_ad_id)
-                    and (row.get('name') == ad.name or (row.get('creative') or {}).get('name') == ad.creative_payload.get('name')
-                         or sum(str(s.source_ad_id) == str(ad.source_ad_id) for s in campaign.ads) == 1)
-                ]
-                if len(matches) > 1:
-                    raise ExecutionFailed(
-                        f"partial prestaged bundle has duplicate lineage for campaign {ci} ad {ai}"
-                    )
-                if matches:
-                    resolved[(ci, ai)] = str(matches[0].get("id") or "")
+                chosen, extras = resolve_slot(live_rows, ad, adset_id, record, ci, ai,
+                    sum(str(s.source_ad_id) == str(ad.source_ad_id) for s in campaign.ads))
+                for extra in extras:
+                    if extra.get('status') != 'PAUSED':
+                        raise ExecutionFailed('redundant copy is not PAUSED; preserve for review')
+                    extra_id = str(extra['id'])
+                    if extra_id not in record.setdefault('redundant_ad_ids', []):
+                        record['redundant_ad_ids'].append(extra_id)
+                    redundant_ops.append(BatchOperation('recovery_archive_redundant_'+extra_id,
+                        'POST', extra_id, body={'status':'ARCHIVED'}, kind='ad_update'))
+                if f'{ci}.{ai}' in fallback_slots and (not chosen or chosen.get('name') != ad.name):
+                    fallback_entries.append((ci, ai, ad, adset_id, chosen))
+                    continue
+                if chosen:
+                    resolved[(ci, ai)] = str(chosen.get("id") or "")
                     if not resolved[(ci, ai)]:
                         raise ExecutionFailed("recovery readback returned an ad without id")
-                    resolved_rows[(ci, ai)] = matches[0]
+                    resolved_rows[(ci, ai)] = chosen
                     continue
                 missing_ops.append(BatchOperation(
                     f"recovery_ad_copy_{ci}_{ai}",
@@ -1142,12 +1152,23 @@ class CampaignEngine:
                     f"{ad.source_ad_id}/copies",
                     body={
                         "adset_id": adset_id,
-                        "creative_parameters": ad.creative_payload,
+                        "creative_parameters": copy_parameters(ad.creative_payload, (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation')),
                         "status_option": campaign.status,
                         "rename_options": {"rename_strategy": "NO_RENAME"},
                     },
                     kind="ad_copy_with_creative",
                 ))
+
+        if redundant_ops:
+            self._batch(bundle, transport, redundant_ops, 'recovery_archive_journal_proven_duplicates')
+            checks = [BatchOperation('verify_'+op.relative_url, 'GET',
+                op.relative_url+'?fields=id,status', kind='readback') for op in redundant_ops]
+            verified = self._batch(bundle, transport, checks, 'recovery_verify_archived_duplicates')
+            if any(row.body.get('status') != 'ARCHIVED' for row in verified):
+                raise ExecutionFailed('redundant copy archive not confirmed; no missing writes')
+
+        if fallback_entries:
+            resolved.update(two_phase_materialize(self, bundle, transport, record, fallback_entries))
 
         if missing_ops:
             timing, started = self._timed_start()

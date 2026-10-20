@@ -3,14 +3,8 @@ from __future__ import annotations
 import copy
 
 def copy_parameters(payload, operation):
-    result=copy.deepcopy(payload)
-    # AFS GET_OFFER is serialized as the video-post subtype in direct video_data.
-    # This leaves sealed inputs unchanged and never changes the user-facing CTA.
-    if operation == 'SHEIN-US-DIRECT':
-        cta=((result.get('object_story_spec') or {}).get('video_data') or {}).get('call_to_action') or {}
-        if cta.get('type') == 'GET_OFFER':
-            cta['type']='GET_OFFER_VIEW'
-    return result
+    # Validate-only acceptance is not evidence for changing the CTA subtype.
+    return copy.deepcopy(payload)
 
 def resolve_slot(rows, ad, adset_id, record, ci, ai, lineage_count):
     names={f'ad_copy_{ci}_{ai}',f'recovery_ad_copy_{ci}_{ai}'}

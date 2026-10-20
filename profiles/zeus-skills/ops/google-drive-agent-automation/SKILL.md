@@ -51,6 +51,8 @@ Service Account cannot access existing Sheet   Add canonical SA as Editor; do no
 
 A Service Account may edit an existing My Drive Sheet that was explicitly shared with it, but new binary/file uploads belong in the Shared Drive because Service Accounts do not have personal storage quota.
 
+For storage-capacity or migration questions, classify the actual Drive with read-only metadata first, then distinguish access to existing files from creation of new files and storage ownership. Do not infer the Workspace edition from a displayed user/folder limit, or treat sharing a folder as transferring its storage charge. Compare expanding the existing Workspace storage before proposing a migration or authentication redesign; retrieve current official pricing and label account-specific eligibility as unverified until checked. Use `references/service-account-my-drive-quota.md` for the diagnosis sequence, capacity comparison and concise explanation.
+
 ## Required preflight
 
 1. Load `/root/mgs-agent/.env` without printing values.

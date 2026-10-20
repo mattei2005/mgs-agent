@@ -4076,5 +4076,31 @@
     "campaign_writes_in_this_request": 0,
     "credential_changes": 0,
     "unrelated_assets_unchanged": true
+  },
+  "request_queue_policy": {
+    "enabled": true,
+    "approved_by": "344196393512075265",
+    "source_message_id": "1562081180285935670",
+    "source_thread_id": "1558134653242703935",
+    "scope": "SHEIN authorized on-demand campaign requests; contention only on the same account or explicitly selected media lineages, within canonical channel/account authority",
+    "behavior": "Queue silently behind active request; resume original request and IDs after predecessor terminal. Never ask for priority transfer on ordinary contention. Preserve original message, requester, manifest, SLA, budgets, bids, QA and all platform readbacks.",
+    "independent_lanes": "Unrelated accounts/assets remain independent; no global campaign writer lock",
+    "active_reservation_transfer": false,
+    "terminal_reuse": "Only explicit selected-file reuse after predecessor terminal, prior usage readback and atomic inventory history update",
+    "delivery": "Ares final completion only in original thread after exact final readback and QA coverage, nonce-journaled POST then GET; no queue/progress/technical notices",
+    "runtime": "ares_campaign_v3.shein_request_queue",
+    "service": "ares-shein-request-queue.service",
+    "authority_recheck": "Live channel authority and operational domain gate before queue processing; central runner revalidates before every write/activation",
+    "excluded": [
+      "credential or billing changes",
+      "ownership",
+      "pixel/CAPI",
+      "WordPress",
+      "Dash financeira",
+      "Dash Router",
+      "new campaign writer",
+      "new recurring campaign creation",
+      "removing SLA or QA"
+    ]
   }
 }
