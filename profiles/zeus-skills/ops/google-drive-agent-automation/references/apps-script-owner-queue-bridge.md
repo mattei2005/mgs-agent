@@ -34,6 +34,16 @@ Publish a versioned worker source blob in the Shared Drive and verify its raw by
 
 The bootstrap's manual test must be exercised before scheduling. Its installer must require a canary ACK published by the canonical SA, refuse duplicate triggers and create at most one recurring trigger. Do not interpret a prepared installer, local VM test or published code file as a live Google trigger.
 
+## Content identity versus Google metadata versions
+
+Google documents `File.version` as a counter for every server-side change, including changes not visible to the requester. Do not equate a forward counter advance with a changed media payload, and do not claim its exact cause without evidence. Preserve the original immutable request/version for audit. A safe forward-version acceptance requires the Google-output `sha256Checksum` to equal the frozen SHA-256, with exact source ID, name, MIME, creation time, parent/root, size, MD5 and non-trashed state; backwards/malformed versions, missing native SHA under drift, or any inconsistent content/path field fail closed. The SA must still stream and verify BOTH original and archived bytes before ACK. Never rebase the request, create a replacement candidate or accept MD5/name alone to clear this gate.
+
+Keep active and staged worker versions separate. A verified local fix/source upload does not deploy it into a SHA-pinned owner bootstrap; require owner repin plus a real heartbeat of the staged digest before promoting the active SA config. Keep production flags disabled while that gate is open.
+
+For recurring SA reconciliation, cache only an independently verified job whose current request/receipt/ACK/native publishers and source/archive metadata fingerprints still match. Metadata changes invalidate the cache and require complete binary re-verification; do not re-download every completed video on every healthy timer tick. Use a bounded pending cursor and a rotating completed audit sample, preserving backlog rather than dropping it.
+
+Hermes cron monitor paths on this MGS runtime must be filenames relative to the active profile's scripts directory; an absolute path is rejected despite generic tool descriptions. Read back jobs after a rejected create before retrying. A health monitor should perform deterministic work each tick and emit stable health-only JSON without timestamps/counters, so routine work does not wake an LLM. Healthy agent runs return `[SILENT]`; a real decision-block summary must have an explicit origin-thread delivery route, not disappear into local-only output. Engine traces remain local.
+
 ## Cross-principal Drive publisher identity
 
 Request `lastModifyingUser(emailAddress,permissionId)` explicitly in both `files.get` and `files.list`; selecting email alone can yield an empty modifier object across accounts. Verify both directions: the owner reads SA requests/ACKs, and the SA reads owner receipts/heartbeats. The Google User reference documents that email may be absent depending on visibility; the stable native permission ID is Google output, not an editable file marker. Treat IDs as opaque strings and preserve leading zeros. Do not authorize by display name, a body field or an email-only fallback. A changed native ID for the same email is a different binding requiring investigation/authorization, not an automatic pin refresh.
