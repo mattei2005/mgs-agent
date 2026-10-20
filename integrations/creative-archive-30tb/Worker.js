@@ -49,8 +49,15 @@ function mgsArchiveRequirePublisher(meta,email) {
 function mgsArchiveValidateSource(m,a,c) {
   if (!m || m.id!==a.sourceId || m.trashed!==false || m.driveId!==c.sourceDriveId ||
       !m.parents || m.parents.length!==1 || m.parents[0]!==a.sourceParentId || String(m.size)!==String(a.size) ||
-      m.md5Checksum!==a.md5 || String(m.version)!==String(a.version) || m.name!==a.name || m.mimeType!==a.mimeType ||
+      m.md5Checksum!==a.md5 || m.name!==a.name || m.mimeType!==a.mimeType ||
+      (a.sourceCreatedTime && m.createdTime!==a.sourceCreatedTime) ||
       !m.capabilities || !m.capabilities.canCopy) throw new Error('SOURCE_CHANGED_OR_COPY_BLOCKED');
+  var observed=String(m.version || ''),frozen=String(a.version || '');
+  var canonicalVersion=/^(0|[1-9][0-9]*)$/;
+  var backwards=observed.length<frozen.length || (observed.length===frozen.length && observed<frozen);
+  if (!canonicalVersion.test(observed) || !canonicalVersion.test(frozen) || backwards ||
+      (m.sha256Checksum!=null && m.sha256Checksum!==a.sha256) ||
+      (observed!==frozen && m.sha256Checksum!==a.sha256)) throw new Error('SOURCE_VERSION_OR_CONTENT_PROOF');
   return true;
 }
 function mgsArchiveHash(text) {
@@ -58,7 +65,7 @@ function mgsArchiveHash(text) {
 }
 function mgsArchiveText(id) { return DriveApp.getFileById(id).getBlob().getDataAsString('UTF-8'); }
 function mgsArchiveMeta(id) {
-  return Drive.Files.get(id,{supportsAllDrives:true,fields:'id,name,mimeType,parents,driveId,size,md5Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canCopy,canAddChildren),permissions(type,emailAddress,role)'});
+  return Drive.Files.get(id,{supportsAllDrives:true,fields:'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canCopy,canAddChildren),permissions(type,emailAddress,role)'});
 }
 function mgsArchiveList(parent,key,type,state) {
   var quote=function(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");};

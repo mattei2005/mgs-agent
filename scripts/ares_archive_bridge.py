@@ -96,8 +96,16 @@ def make_request(c,assets,*,kind,lineage_id,validation_only=False):
     return identity
 
 def validate_source_metadata(meta,a,c):
-    expected={'id':a['sourceId'],'size':a['size'],'md5Checksum':a['md5'],'version':a['version'],'driveId':c['source_drive_id']}
+    expected={'id':a['sourceId'],'size':a['size'],'md5Checksum':a['md5'],'driveId':c['source_drive_id'],'name':a['name'],'mimeType':a['mimeType']}
+    if a.get('sourceCreatedTime'):expected['createdTime']=a['sourceCreatedTime']
     if any(str(meta.get(k))!=str(v) for k,v in expected.items()) or meta.get('parents')!=[a['sourceParentId']] or meta.get('trashed') is not False: raise ArchiveError('SOURCE_CHANGED')
+    native=meta.get('sha256Checksum');current=meta.get('version');frozen=a.get('version')
+    if native is not None and native!=a['sha256']:raise ArchiveError('SOURCE_CONTENT_SHA_CHANGED')
+    if not isinstance(current,str) or not isinstance(frozen,str) or not re.fullmatch(r'[0-9]+',current) or not re.fullmatch(r'[0-9]+',frozen) or int(current)<int(frozen):raise ArchiveError('SOURCE_VERSION_INVALID')
+    # File.version covers every server-side change, not only payload revisions.
+    # Never rewrite the request: forward metadata drift needs Google's exact
+    # SHA-256, in addition to both full binary streams checked by reconcile().
+    if current!=frozen and native!=a['sha256']:raise ArchiveError('SOURCE_VERSION_WITHOUT_CONTENT_PROOF')
     return True
 
 def validate_receipt(job,r):
@@ -152,7 +160,7 @@ class Drive:
         if status not in (200,201): raise ArchiveError('DRIVE_HTTP_'+str(status))
         return data
     def meta(self,fid):
-        return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
+        return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
     def listing(self,parent,*,key=None,kind=None):
         q="'"+parent+"' in parents and trashed=false"
         for name,value in [('mgsArchiveKey',key),('mgsArchiveType',kind)]:
