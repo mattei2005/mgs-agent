@@ -3,9 +3,9 @@
 **⏱️ ATRASO GAM/SB ATUAL: 1h 25min**
 Diário D-1: 19/10/2026 00:00–23:59 no fuso America/New_York; coleta em 20/10 07:25 EDT.
 Financeiro: 20/10 07:25 EDT. Bid: Meta 20/10 07:25 EDT.
-B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 20/10 07:49 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 20/10 08:01 EDT.
 RPS: coluna da dash SB, consultada em 20/10 07:47 EDT.
-Status dos blocos: Meta 20/10 07:49 EDT.
+Status dos blocos: Meta 20/10 08:01 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **2774,83** · Rev **3779,37** · Saldo **+1004,54** · ROI **36,20%** · ROI E. **36,44%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.

@@ -4403,12 +4403,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1562023429690097665",
-      "next_step": "Administrador da Page disponibilizar acesso compartilhado ao portfólio Digital Trust ou à identidade administrativa autorizada. Revalidar Page/tarefas, adicionar somente ADVERTISE/ANALYZE se ausentes; confirmar acesso BISU original; retomar mesmo request-ready, sem reupload ou novo request e preservando SLA.",
-      "objective": "Concluir 4 clones C01 Vizioid G006, vídeos/textos Nicolas; USD20/dia, COCAP USD0.90; reparar Page com autorização pontual Rodolfo.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562023429690097665/page-repair-authorization-and-access.json",
-      "state": "repair_authorized_external_access_blocker: rodolfo mensagem 1562061144208965674 autorizou reparo pontual e retomada. aprovação canônica salva e validada. dois candidatos administrativos autenticam por get/me mas não acessam a page fonte 1215401431666913. 10 vídeos preparados; nenhum objeto de campanha criado; nenhum permission write.",
+      "next_step": "Retomar mesmo request pelo runner central após janela de quota; concluir bundle2 e QA/render de todos os 10 ads, depois ativação autorizada ou review tardio exigido pelo gate.",
+      "objective": "Concluir quatro clones C01 Vizioid G006 com grupos/textos Nicolas, USD20/dia cada e COCAP USD0.90.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1562023429690097665/state.json",
+      "state": "page_repair_verified; execução central iniciada. bundle1 criou 2 campanhas/2 conjuntos/5 anúncios paused; ids persistidos, somente readback adiado pela quota meta. retomada única determinística aguardando 305s conforme runner; sem replay de criação. original request/relógio preservados.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-10-20T11:15:12+00:00"
+      "updated_at": "2026-10-20T12:04:45+00:00"
     },
     {
       "agent": "ares",
@@ -6163,12 +6163,12 @@
     {
       "agent": "ares",
       "id": "shein-1562024416823607398",
-      "next_step": "Obter decisão de prioridade/transferência das reservas não terminais; reconciliar histórico sob lock, retomar prepare-media e campaign no mesmo request. Preservar E2E e revisão tardia se exigida.",
-      "objective": "Clonar campanha 001 Escalatepower G006 em 3 campanhas, grupos 3/3/2, USD20/dia por campanha, COCAP USD0.90, 20/10/2026 05:30 America/New_York",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/request.json",
-      "state": "profile reconciliado contra meta. nenhuma campanha nova. preparação retida: cinco vídeos ainda reservados pelo pedido vizioid não terminal shein-1562023429690097665; três reservas de pedido antigo terminal também preservadas. sem sobrescrever reservas.",
+      "next_step": "Pedir autorização explícita de Rodolfo para delegar somente ADVERTISE+ANALYZE na Page 857361470788197 ao SU corporativo; após autorização, pre-read/journal, write mínimo e readbacks admin/corporativo; repetir dry-run no mesmo request-ready, validar vídeos-fonte e seguir Engine v3/QA. Não trocar credencial nem recriar mídia.",
+      "objective": "Concluir 3 clones da campanha 001 na Escalatepower 06 G006; USD20/dia cada; COCAP USD0.90; grupos 3/3/2 e copy literal.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/page-access-diagnostic.json",
+      "state": "retomada de rodolfo validada por get; reservas transferidas e 8 mídias pre-stageadas/ready na conta correta. dry-run retido por code10 em vídeos da fonte e page offers spot 857361470788197. admin get comprova page no digital trust; assigned_users completo sem o su corporativo 122095869861482193. scopes granted, assigned_pages completo sem a page. zero campanha nova; zero permission write.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-10-20T08:51:48+00:00"
+      "updated_at": "2026-10-20T12:07:43+00:00"
     },
     {
       "agent": "zeus",
@@ -6742,5 +6742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T11:50:10+00:00"
+  "updated_at": "2026-10-20T12:07:43+00:00"
 }

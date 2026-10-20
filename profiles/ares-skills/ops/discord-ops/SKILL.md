@@ -13,6 +13,13 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 - Tratar autorização de limpeza e autorização de alterar permissões como escopos distintos. Se faltar capacidade, registrar o restante e encaminhar a um administrador autorizado pela rota operacional, sem usar a credencial dele nem conceder acesso permanente como atalho. Procedimento em `references/route-pack-02.md`.
 - Conferir handoffs por GET, incluindo a mention efetiva do destinatário. Distinguir pedido entregue, trabalho aceito e resultado validado; só este último encerra a pendência. Não transformar REPORT-INFRA em fila de execução nem chamar um handoff confirmado de tarefa concluída.
 
+## Progresso temporário e avisos de execução
+
+- Manter o acompanhamento ao vivo solicitado pelo usuário e verificar separadamente o encerramento visual: com limpeza automática habilitada, progressos temporários remanescentes após a resposta final exigem diagnóstico, não devem ser apresentados como comportamento normal nem resolvidos desligando `tool_progress`.
+- Separar três provas no fechamento: resultado operacional, entrega externa e limpeza das mensagens temporárias. Cron ativo ou relatório preparado não comprova publicação; operação recuperada não comprova que os resíduos visuais foram removidos.
+- Tratar notificações internas tardias como reconciliação do mesmo trabalho: comparar tentativa, horário e estado canônico mais recente antes de agir. Se a falha já estiver superada, não responder novamente ao pedido encerrado, repetir alertas ao usuário nem reexecutar o lote; comunicar somente mudança material ou bloqueio atual comprovado.
+- Ao receber reclamação sobre resíduos, explicar brevemente as falhas comprovadas e o estado atual, sem atribuir uma causa à limpeza por coincidência temporal. Para exclusão manual, obter o escopo necessário e preservar mensagens humanas, conclusões e relatórios; não transformar diagnóstico em autorização de apagar histórico. Receita de diagnóstico em `references/route-pack-05.md`, seção de progresso residual.
+
 ## Transferência de contexto entre threads
 
 - Diferenciar o objeto do pedido antes de publicar: resumir a conversa preserva decisões, correções e pendências; transferir uma análise indicada por prints ou mensagens exige o relatório completo, com todas as contas, tabelas, projeções e ressalvas. Não substituir a análise solicitada por outro resumo.
