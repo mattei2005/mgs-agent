@@ -26,25 +26,120 @@ def is_ares_context():
  try:return 'ares-gateway.service' in Path('/proc/self/cgroup').read_text()
  except OSError:return False
 
-def enforce_meta_path(path,params=None):
+PROVENANCE=Path('/root/mgs-agent/data/ares/meta-ads/state/scoped-object-provenance.json')
+APP_ID='1299247318762949'
+OBJECT_EDGES={'campaigns':'campaign','adsets':'adset','ads':'ad','adcreatives':'creative','advideos':'video','videos':'video','adspixels':'pixel'}
+BLOCKED_DISCOVERY={'adaccounts','businesses','owned_ad_accounts','client_ad_accounts','owned_pages','client_pages','assigned_users'}
+
+def _request_parts(path,params):
+ from urllib.parse import urlsplit,parse_qs,unquote
+ raw=str(path)
+ parsed=urlsplit(raw)
+ if parsed.scheme or parsed.netloc or parsed.fragment or '\\' in raw:raise ScopeError(DENY)
+ clean=unquote(parsed.path).strip('/')
+ if any(x in {'.','..'} for x in clean.split('/')) or '{' in clean or '}' in clean:raise ScopeError(DENY)
+ query=parse_qs(parsed.query,keep_blank_values=True)
+ if any(len(v)!=1 for v in query.values()):raise ScopeError(DENY)
+ merged={k:v[0] for k,v in query.items()}
+ for k,v in dict(params or {}).items():
+  if k in merged and str(merged[k])!=str(v):raise ScopeError(DENY)
+  merged[k]=v
+ return clean,merged
+
+def _scope_signature(data):
+ import hashlib
+ return hashlib.sha256(json.dumps(sorted(x['account_id'] for x in data['ad_accounts'])).encode()).hexdigest()
+
+def _objects(data):
+ try:stored=json.loads(PROVENANCE.read_text())
+ except (OSError,ValueError):return {}
+ if stored.get('scope_signature')!=_scope_signature(data):return {}
+ return stored.get('objects',{}) if isinstance(stored.get('objects'),dict) else {}
+
+def _account_for_node(node,data):
+ if allowed_account(node,data):return node.removeprefix('act_')
+ row=_objects(data).get(node,{})
+ account=row.get('account_id')
+ return account if row.get('source')=='scoped_graph_response' and allowed_account(account,data) else None
+
+def enforce_meta_path(path,params=None,method='GET'):
  if not is_ares_context():return
- params=params or {}
- candidates=[]
- for value in re.findall(r'(?:^|/)act_([^/?]+)',str(path)):
-  candidates.append(value)
+ clean,params=_request_parts(path,params)
+ # The technical app exception is metadata-only and never grants discovery.
+ if clean==APP_ID and method.upper()=='GET' and set(str(params.get('fields','id,name')).split(','))<={'id','name'} and set(params)<={'fields'}:return
+ data=load_scope()
  for key in ('account_id','ad_account_id'):
-  if key in (params or {}):candidates.append(str(params[key]))
- if candidates:
-  data=load_scope()
-  if any(not allowed_account(v,data) for v in candidates):raise ScopeError(DENY)
- batch=(params or {}).get('batch')
- if batch:
+  if key in params and not allowed_account(params[key],data):raise ScopeError(DENY)
+ batch=params.get('batch')
+ if batch is not None:
+  if clean:raise ScopeError(DENY)
   try:children=json.loads(batch) if isinstance(batch,str) else batch
-  except ValueError:raise ScopeError('Batch inválido; operação negada.') from None
-  if not isinstance(children,list):raise ScopeError('Batch inválido; operação negada.')
+  except (ValueError,TypeError):raise ScopeError(DENY) from None
+  if not isinstance(children,list) or not children or len(children)>50:raise ScopeError(DENY)
+  from urllib.parse import parse_qs
   for child in children:
-   if not isinstance(child,dict):raise ScopeError('Batch inválido; operação negada.')
-   enforce_meta_path(child.get('relative_url',''))
+   if not isinstance(child,dict) or not child.get('relative_url'):raise ScopeError(DENY)
+   body=child.get('body') or {}
+   if isinstance(body,str):
+    pairs=parse_qs(body,keep_blank_values=True)
+    if any(len(v)!=1 for v in pairs.values()):raise ScopeError(DENY)
+    body={k:v[0] for k,v in pairs.items()}
+   if not isinstance(body,dict):raise ScopeError(DENY)
+   enforce_meta_path(child['relative_url'],body,child.get('method','GET'))
+  return
+ # Root multi-ID reads must prove every node independently.
+ if not clean and params.get('ids'):
+  ids=params['ids'] if isinstance(params['ids'],list) else str(params['ids']).split(',')
+  for node in ids:enforce_meta_path(str(node),{k:v for k,v in params.items() if k!='ids'},method)
+  return
+ parts=clean.split('/')
+ if not parts or not re.fullmatch(r'(?:act_)?[0-9]{5,30}',parts[0]):raise ScopeError(DENY)
+ if any(edge in BLOCKED_DISCOVERY for edge in parts[1:]):raise ScopeError(DENY)
+ if re.search(r'\b(?:'+ '|'.join(BLOCKED_DISCOVERY)+r')\b',str(params.get('fields',''))):raise ScopeError(DENY)
+ # A caller-provided account_id is not proof that a bare object belongs to it.
+ if not _account_for_node(parts[0],data):raise ScopeError(DENY)
+
+
+def observe_meta_response(path,params,payload,method='GET'):
+ """Record only IDs obtained through an already validated account/object path."""
+ if not is_ares_context() or not isinstance(payload,(dict,list)):return
+ clean,merged=_request_parts(path,params)
+ if merged.get('batch') is not None:
+  children=merged['batch'];children=json.loads(children) if isinstance(children,str) else children
+  if isinstance(payload,list):
+   for child,response in zip(children,payload):
+    if isinstance(response,dict) and 200<=int(response.get('code',0))<300:
+     body=response.get('body');body=json.loads(body) if isinstance(body,str) else body
+     observe_meta_response(child['relative_url'],None,body,child.get('method','GET'))
+  return
+ data=load_scope();parts=clean.split('/');account=_account_for_node(parts[0],data)
+ if not account:return
+ updates={}
+ def collect(row):
+  if isinstance(row,list):
+   for value in row:collect(value)
+  elif isinstance(row,dict):
+   if row.get('account_id') is not None and not allowed_account(str(row['account_id']),data):raise ScopeError(DENY)
+   if row.get('account_id') is not None and str(row['account_id']).removeprefix('act_')!=account:raise ScopeError(DENY)
+   oid=str(row.get('id',''))
+   if re.fullmatch(r'[0-9]{5,30}',oid):updates[oid]={'account_id':account,'source':'scoped_graph_response'}
+   for key in ('data','campaigns','adsets','ads','creative','adcreatives','videos','advideos','adspixels'):
+    if isinstance(row.get(key),(dict,list)):collect(row[key])
+ collect(payload)
+ if not updates:return
+ import fcntl,os,tempfile
+ PROVENANCE.parent.mkdir(parents=True,exist_ok=True)
+ with Path(str(PROVENANCE)+'.lock').open('a') as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX)
+  objects=_objects(data)
+  for oid,row in updates.items():
+   if oid in objects and objects[oid].get('account_id')!=row['account_id']:raise ScopeError(DENY)
+  objects.update(updates)
+  fd,name=tempfile.mkstemp(prefix='.scoped-provenance-',dir=PROVENANCE.parent)
+  os.fchmod(fd,0o600)
+  with os.fdopen(fd,'w') as stream:
+   json.dump({'schema_version':1,'scope_signature':_scope_signature(data),'objects':objects},stream);stream.flush();os.fsync(stream.fileno())
+  os.replace(name,PROVENANCE)
 
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['validate','check-account','list-accounts']);p.add_argument('target',nargs='?');p.add_argument('--json',action='store_true');args=p.parse_args()

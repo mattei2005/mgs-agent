@@ -34,6 +34,10 @@ Publish a versioned worker source blob in the Shared Drive and verify its raw by
 
 The bootstrap's manual test must be exercised before scheduling. Its installer must require a canary ACK published by the canonical SA, refuse duplicate triggers and create at most one recurring trigger. Do not interpret a prepared installer, local VM test or published code file as a live Google trigger.
 
+## Human access is a separate cutover gate
+
+An owner-account copy inherits its destination access model, not proof of the source's human access. Compare actual source and archive ACLs before read/link/source-cleanup cutover; a successful SA download does not validate any manager's access. Freeze any proposed additions by exact Google-native permission IDs/emails and target roles, preserve owner and SA, and obtain the required explicit sharing decision before granting them. Shared Drive organizer/fileOrganizer roles are not My Drive roles; disclose any proposed mapping to writer rather than call it exact role parity. Keep public/domain sharing and unrelated identities out of the proposal. A sharing approval never authorizes deletion, historical migration or agent/campaign permissions.
+
 ## Approved upload-context layout
 
 For unattended creative intake, resolve operation and responsible manager from an explicitly approved registry of actual folder IDs under the unchanged upload root—not from filenames, numerical container names, uploader identity or editable properties alone. Derive operation slots only from existing canonical operation folders and managers from the current team registry. Before creating anything, reject ambiguous duplicate names and validate target drive/parents/capabilities. Create only additive operation/manager folders; preserve prior folders/media and root ACL exactly, reconcile ambiguous POSTs before retry, and read back every slot. Keep `context_ready` separate from `auto_treatment_enabled`: a deployed folder layout is not an active classifier/processor, campaign permission or archive-consumer cutover. Preserve the original authorization in a canonical manifest and register the decision/checkpoint.

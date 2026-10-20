@@ -239,7 +239,89 @@ def get_access_token(item_name: str = TOKEN_ITEM_DEFAULT, force_refresh: bool = 
         return token, f"auth0_expires_at={expires_at}"
 
 
+SB_SCOPE_PATH = Path('/root/mgs-agent/data/ares/sb-publisher-scope.json')
+SB_READ_ROUTES = {
+    '/report/performance_per_campaigns', '/report/messenger',
+    '/report/performance_per_sms', '/report/performance_per_domain',
+    '/estimated/delay', '/estimated/revenue/utm_adgroup',
+    '/campaigns/Messenger', '/photo/performance_per_adgroup',
+}
+
+
+def _scoped_catalog() -> list[dict]:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('sb_domain_scope_guard', '/root/mgs-agent/scripts/mgs-domain-scope.py')
+    gate = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gate)
+    registry = gate.load_registry(gate.DEFAULT_REGISTRY)
+    try:
+        stored = json.loads(SB_SCOPE_PATH.read_text())
+    except (OSError, ValueError):
+        raise ValueError('Catálogo corporativo SB indisponível; consulta negada.') from None
+    companies = stored.get('companies')
+    if stored.get('schema_version') != 1 or stored.get('status') != 'active' or not isinstance(companies, list):
+        raise ValueError('Catálogo corporativo SB inválido; consulta negada.')
+    if {c.get('companyId') for c in companies} != {'digital-trust', 'digital-trust-2'} or len(companies) != 2:
+        raise ValueError('Catálogo corporativo SB inválido; consulta negada.')
+    hosts = set()
+    for company in companies:
+        for publisher in company.get('publishers') or []:
+            host = gate.allowed_domain(publisher.get('url'), registry, 'ares')
+            if host is None or host != publisher.get('host') or publisher.get('companyId') != company['companyId']:
+                raise ValueError('Catálogo corporativo SB fora do escopo; consulta negada.')
+            hosts.add(host)
+    if hosts != set(gate.domains_for_agent(registry, 'ares')):
+        raise ValueError('Catálogo corporativo SB requer reconciliação; consulta negada.')
+    return companies
+
+
+def _publisher_scope(companies: list[dict]) -> set[str]:
+    return {
+        str(p['publisherId']) if str(p['publisherId']).startswith(c['companyId'] + '_') else c['companyId'] + '_' + str(p['publisherId'])
+        for c in companies for p in c.get('publishers') or []
+    }
+
+
+def _validate_sb_request(method: str, path: str, payload: dict | None, companies: list[dict]) -> None:
+    parsed = urllib.parse.urlsplit(path)
+    if parsed.scheme or parsed.netloc or parsed.fragment or parsed.path not in SB_READ_ROUTES:
+        raise ValueError('Rota SB não autorizada; consulta negada.')
+    if method.upper() not in {'GET', 'POST'}:
+        raise ValueError('Somente leitura SB autorizada.')
+    query = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
+    allowed = _publisher_scope(companies)
+    selectors = []
+    for source in (query, payload or {}):
+        for key in ('publishers', 'publishers[]', 'publisherIds', 'publisherIds[]', 'companies', 'companies[]'):
+            if key in source:
+                values = source[key]
+                values = values if isinstance(values, list) else [values]
+                if not values or any(not isinstance(v, str) or v not in allowed for v in values):
+                    raise ValueError('Recorte SB não autorizado; consulta negada.')
+                selectors.extend(values)
+    if not selectors:
+        raise ValueError('Consulta SB exige publishers corporativos explícitos.')
+    # No mutation endpoint or unrestricted company listing reaches HTTP.
+
+
 def api_request(
+    method: str,
+    path: str,
+    *,
+    payload: dict | None = None,
+    item_name: str = TOKEN_ITEM_DEFAULT,
+) -> tuple[int, object, dict]:
+    companies = _scoped_catalog()
+    if method.upper() == 'GET' and path == '/company' and payload is None:
+        return 200, companies, {'source': 'approved_local_corporate_catalog', 'network_requests': 0}
+    if method.upper() == 'GET' and path in {'/company/' + c['companyId'] for c in companies} and payload is None:
+        company = next(c for c in companies if path == '/company/' + c['companyId'])
+        return 200, company, {'source': 'approved_local_corporate_catalog', 'network_requests': 0}
+    _validate_sb_request(method, path, payload, companies)
+    return _api_request_transport(method, path, payload=payload, item_name=item_name)
+
+
+def _api_request_transport(
     method: str,
     path: str,
     *,

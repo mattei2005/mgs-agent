@@ -600,7 +600,7 @@ def is_rate_limit_response(status, payload):
     return False
 
 
-def _enforce_operational_account_scope(path, params=None):
+def _enforce_operational_account_scope(path, params=None, method='GET'):
     # Applies only to Ares contexts; preserves Zeus administrative/billing audits.
     # Read local positive scope before any credential-bearing HTTP request.
     import importlib.util
@@ -610,11 +610,13 @@ def _enforce_operational_account_scope(path, params=None):
         raise RuntimeError('Ares operational scope unavailable')
     guard = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(guard)
-    guard.enforce_meta_path(path, params)
+    guard.enforce_meta_path(path, params, method)
+    return guard
 
 
 def _graph_get_once(path, token, params=None):
-    _enforce_operational_account_scope(path, params)
+    guard = _enforce_operational_account_scope(path, params, 'GET')
+    scope_params = dict(params or {})
     params = dict(params or {})
     params['access_token'] = token
     url = f'https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip("/")}?'+urllib.parse.urlencode(params)
@@ -626,6 +628,8 @@ def _graph_get_once(path, token, params=None):
             payload = json.loads(body)
             headers = dict(resp.headers)
             record_response_usage(headers, resp.status, payload, logical_points=1)
+            if 200 <= resp.status < 300:
+                guard.observe_meta_response(path, scope_params, payload, 'GET')
             return resp.status, payload, headers
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8','replace')
@@ -651,7 +655,7 @@ def _encode_form(params):
 
 
 def _graph_post_once(path, token, params=None, logical_points=3):
-    _enforce_operational_account_scope(path, params)
+    guard = _enforce_operational_account_scope(path, params, 'POST')
     clean = _encode_form(params)
     clean['access_token'] = token
     req = urllib.request.Request(
@@ -667,6 +671,8 @@ def _graph_post_once(path, token, params=None, logical_points=3):
             payload = json.loads(body) if body else {}
             headers = dict(resp.headers)
             record_response_usage(headers, resp.status, payload, logical_points=logical_points)
+            if 200 <= resp.status < 300:
+                guard.observe_meta_response(path, params, payload, 'POST')
             return resp.status, payload, headers
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8','replace')
