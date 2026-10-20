@@ -66,6 +66,11 @@ For an explicitly approved owner-account connector, preserve the canonical SA fo
 
 Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment commands, owner handoff, consent recovery, provenance checks and staged acceptance.
 
+## Operator-facing handoff
+
+- When Rodolfo asks what is missing or says he did not understand, start with the practical gap in one sentence, then show the current flow and the exact remaining step. State separately whether that step is unimplemented, implemented but disabled, or awaiting the required authorization; technical gate lists obscure that distinction.
+- Before confirming that operators can keep uploading normally, check the live intake registry and explain the required subfolder in the same answer: unchanged upload root → operation → manager. Explicitly identify root-level or legacy folders that are outside automatic intake, and say whether original media can be uploaded without preprocessing; a bare “same folder” can send files to an unmonitored location.
+
 ## Required preflight
 
 1. Load `/root/mgs-agent/.env` without printing values.
