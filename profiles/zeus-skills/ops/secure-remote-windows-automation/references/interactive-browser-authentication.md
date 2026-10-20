@@ -61,6 +61,16 @@ At the password page:
 
 A server-side 1Password Service Account may safely confirm item metadata, but it does not authorize or justify carrying the resolved password into a different remote browser through SSH, shell variables, clipboard injection, MCP arguments, or synthetic typing. The fill must remain inside the password manager's protected browser path.
 
+#### Windows Hello configuration guidance
+
+When the user asks how to avoid a Hello prompt, identify its purpose before giving instructions:
+
+- **1Password vault unlock:** the user can open and unlock the desktop app, select their account/collection → **Settings → Security**, then turn off **Unlock using Windows Hello** to use their 1Password account password instead. Alternatively, turn off only **Show Windows Hello prompt automatically** to retain Hello as an optional unlock method. Both alternatives still require the user to perform protected unlocks; neither grants the agent permission to enter the master password.
+- **Website passkey held by Windows:** changing 1Password's unlock preference does not remove the passkey's device-verification requirement. Preserve it for human completion, or use the site's existing username/password option through an unlocked password-manager extension if the site offers that option. Do not delete or replace a passkey as a login repair.
+- **Unclear prompt:** ask which app/domain the dialog names or inspect the exact dialog read-only; a generic Windows Security title alone does not establish which gate is active.
+
+Use the current official instructions at `https://support.1password.com/windows-hello/` and `https://support.1password.com/unlock-auto-lock/?windows` when explaining these settings; recheck labels before changing them. Do not remove device-wide Windows Hello or disable auto-lock merely to make an account-reading task unattended. After any user-performed change, validate the exact browser/manager/site state again and report only the gate actually cleared; absence of a visible Hello dialog does not prove an unlocked vault or successful login.
+
 ### 5. Validate the authenticated target
 
 Do not declare success from a click or from a filled password field. Require the site to show an authenticated state, then navigate to the requested account area and read back the exact artifact (for example, the account-level referral link rather than a product deep link). If 2FA, passkey approval, or a site checkpoint appears, use the approved human handoff and keep verification pending.

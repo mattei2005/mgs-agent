@@ -653,12 +653,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Owner substituir Code.gs por integrations/creative-archive-30tb/Bootstrap.gs e executar somente mgsArquivoTeste no projeto aprovado. Job canario 526d7a2a007c1fed4b2a9147f92d62b4 ja esta em REQUESTS. Aguardar recibo Google real e SA reconcile --apply/ACK antes de mgsArquivoAtivar. Worker atual 1eZAvS7WhnzMglzRY3NWWnEguBdS5mrPS; SHA e config completos na fonte. Depois provar clock/recorrencia, integrar watcher/consumidores e confirmar limpeza delimitada. Nao ativar exclusao ou acervo anterior.",
+      "next_step": "Owner cancelar popup repetido e mostrar appsscript.json; preservar dependencias/config e declarar Drive + script.scriptapp, aplicar guard do Bootstrap e conceder somente escopos previstos. Reexecutar mesmo mgsArquivoTeste; depois validar receipt/heartbeat e ACK canario 526d7a2a007c1fed4b2a9147f92d62b4 pela SA antes de mgsArquivoAtivar. Producao, exclusao e acervo anterior continuam desligados. Evidencia de recovery preparado na fonte; Google ainda nao recuperado.",
       "objective": "Integrar fila de arquivo 30 TB e skills Ares preservando acervo/campanhas; exclusao desativada durante validacao",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "ares_skills_updated_copy_queue_staged_owner_worker_test_required",
+      "state": "owner_worker_oauth_scope_blocked_manifest_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T14:47:07+00:00"
+      "updated_at": "2026-10-20T15:04:47+00:00"
     },
     {
       "agent": "ares",
@@ -6812,5 +6812,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T14:52:55+00:00"
+  "updated_at": "2026-10-20T15:04:47+00:00"
 }
