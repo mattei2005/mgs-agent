@@ -1103,12 +1103,12 @@
     {
       "agent": "ares",
       "id": "ARES-HEALTH-1562158678403194912",
-      "next_step": "Nenhuma execucao pendente deste relatorio; preservar lacuna das 40 campanhas sem correspondencia SB e nao classifica-las por Health. Nova atualizacao somente quando solicitada.",
-      "objective": "Listar campanhas ativas SHEIN e CPV com Estimate Health abaixo de 90% de 01 a 19/10/2026, via API em lote autorizada por Rodolfo",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/estimate-health-20261001-19/final-api-report.json",
-      "state": "concluido via api. snapshot 20/10/2026 14:07 edt: 36/36 contas shein e 16/16 cpv; 539 e 74 campanhas efetivamente active. sb consultada em uma requisicao para sete publishers autorizados; formula vigente estimated_health validada no frontend. shein: 10 abaixo de 90%, 493 >=90%, 36 sem linha sb. cpv: 0 abaixo de 90%, 70 >=90%, 4 sem linha sb. particoes reconciliadas, sem campanha alterada; lista dos dez inalterada.",
+      "next_step": "Sem execucao pendente. Conclusao refere-se a Health acumulado 01-19/10 e status ativo atual, nao a queda em qualquer dia isolado.",
+      "objective": "Confirmar cobertura integral de campanhas ativas SHEIN e CPV com Estimate Health abaixo de 90% no acumulado 01 a 19/10/2026",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/estimate-health-20261001-19/recheck-completeness.json",
+      "state": "reconferido e concluido 20/10/2026 14:21 edt. nova leitura completa de 52 contas e sb em lote: mesmas 10 campanhas e percentuais; todos os contadores health estaveis. universo: 613 ativas, 573 com health (10 abaixo e 563 >=90). as 40 sem linha sb foram verificadas por get insights exato no periodo: nenhuma com gasto ou impressoes; 17 criadas apos 19/10. nenhuma campanha alterada.",
       "thread_id": "1562158678403194912",
-      "updated_at": "2026-10-20T18:07:30+00:00"
+      "updated_at": "2026-10-20T18:21:38+00:00"
     },
     {
       "agent": "ares",
@@ -4572,6 +4572,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-intraday-36-1562168260043210784",
+      "next_step": "Coletar fontes atuais, RPS conforme contrato vigente, validar compacto/historico, entregar36reports e conferir cada parte.",
+      "objective": "Coletar Intraday atual e entregar nas36threads SHEIN dos6gestores; somente leitura Meta/SB e publicacao dos relatorios",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-intraday-1562168260043210784",
+      "state": "escopo reconciliado:36contas/36threads,6por gestor;36gates de conta e6dominios permitidos; fontes novas pendentes.",
+      "thread_id": "1562168260043210784",
+      "updated_at": "2026-10-20T18:19:54+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-paused-selection-deferred-1561752465978818722",
       "next_step": "Continuar reports no recorte atual;quando gestor pedir somente pausadas,resolver conta/periodo e selecionarPAUSED por statusMeta,sem exigirentrega no dia;nao executarconsulta agora. Reavaliar expansao do padrao apenas mediante nova decisao.",
       "objective": "Preservar decisao de Rodolfo sobre selecao das campanhas pausadas nos reports SHEIN",
@@ -6872,5 +6882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T18:12:56+00:00"
+  "updated_at": "2026-10-20T18:21:38+00:00"
 }
