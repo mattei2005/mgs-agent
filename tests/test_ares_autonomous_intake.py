@@ -51,4 +51,10 @@ class IntakeTests(unittest.TestCase):
   row={'asset_id':'new','source_manager':'Nicolas','ares_eligible':False,'used_by':None,'reservation_status':'RESERVADO_PELO_GESTOR'}
   self.assertTrue(self.a.verify_reservation(row,{},self.slot))
   with self.assertRaises(self.a.IntakeError):self.a.verify_reservation({**row,'source_manager':'Kelly'},{},self.slot)
+ def test_selftest_never_accepts_operational_parent_or_unpinned_raw(self):
+  config={'schema':'mgs.intake.selftest.v1','validation_only':True,'run_id':'1562188030205362227','raw_source_id':'sourceOffline001','raw_sha256':'a'*64,'upload_parent_id':'uploadOffline001','legacy_parent_id':'legacyOffline001','ready_parent_id':'readyOffline001'}
+  raw={'id':'sourceOffline001','parents':['legacyOffline001'],'properties':{'mgsArchiveType':'intake_test_media'}};clean={'id':'cleanOffline001','parents':['readyOffline001'],'properties':{'mgsArchiveType':'intake_test_media'}}
+  self.assertTrue(self.a.validate_selftest_identity(config,raw,clean,'a'*64))
+  with self.assertRaises(self.a.IntakeError):self.a.validate_selftest_identity(config,raw,{**clean,'parents':['OPERATIONAL']},'a'*64)
+  with self.assertRaises(self.a.IntakeError):self.a.validate_selftest_identity(config,raw,clean,'b'*64)
 if __name__=='__main__':unittest.main()

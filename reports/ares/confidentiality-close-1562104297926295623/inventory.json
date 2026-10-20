@@ -1,0 +1,168 @@
+{
+  "status": "COMPLETED_OPERATIONAL_SCOPE",
+  "scope": "Ares report sources, active documentation and scoped read-only report flows; no infrastructure work",
+  "supersedes_operational_status_of": [
+    "reports/ares/confidentiality-reaudit-1562104297926295623",
+    "reports/ares/confidentiality-fix-1562104297926295623"
+  ],
+  "test_result": {
+    "passed": 82,
+    "subtests_passed": 18
+  },
+  "documentation_sources": 1262,
+  "document_check_passed": true,
+  "mirrors_verified": 8,
+  "report_selection_accounts": 351,
+  "e2e_routes_verified": true,
+  "sb_publishers_selected": 52,
+  "data_availability_is_not_full_account_financial_coverage": true,
+  "remote_mutations": 0,
+  "service_or_permission_changes": false,
+  "files": [
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/reactivate-creditoparaveiculo-20260820.py",
+      "sha256": "9e436e606676f82a1d62483d5d193b5f12486688c3d6e85a9aca8f430fb4926a",
+      "bytes": 8455
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/meta-ad-library-creative-intake.md",
+      "sha256": "09d44703d704d56ced311ac6da32421dcc6aabf9215c0a7f44d280e3da9cb05e",
+      "bytes": 4538
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
+      "sha256": "5f10dc852990bdaf8c1392071f233ada7a79d84f9893d288bdc67514208f34de",
+      "bytes": 53328
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-account-visualization/SKILL.md",
+      "sha256": "c5854f96f86cc9a6de721cd6e87779bb47bfb2634585208becebb5d172bea577",
+      "bytes": 10319
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-account-visualization/references/scoped-generic-reporting.md",
+      "sha256": "372ee2877409566166f53b22794b93f5fbc4d6028c4ee8d0c9dd8fa71cf1b284",
+      "bytes": 4560
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "sha256": "d076d4677b74bf10897341a8772ce65bc4f9de8d6a87dd5993aa85cf54e2b658",
+      "bytes": 23760
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/confidentiality-scope-audit.md",
+      "sha256": "d8903d1fde674f0c3cd3ec1e56d638da263f6ae1e4f5cf71b95e53a0dd2b7349",
+      "bytes": 7915
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/smartbidding-roi-band-reconciliation.md",
+      "sha256": "67045739f4df5c5e9c836533f19f8e9d53e5cb3977f6410637e4927c3ddacac5",
+      "bytes": 27485
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/soul-router-identity-authority.md",
+      "sha256": "f3423da845472979e1bb4981d0e1643da1b7b7a3b72d123748b7df1c5bad631d",
+      "bytes": 6592
+    },
+    {
+      "path": "/root/mgs-agent/context/ares-asset-scope.md",
+      "sha256": "2f000e28343e148c6a06282960d7ae84ae7ac66f216ce3a8a56bbfc89bd98295",
+      "bytes": 5023
+    },
+    {
+      "path": "/root/mgs-agent/context/ares-operational-map.md",
+      "sha256": "3fdf26b36e7d45bc46590c3b2986756f1234c9736b8b70ba71d60ad4c0efad89",
+      "bytes": 43908
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/state/scoped-object-provenance.json",
+      "sha256": "1e6937756e3943b7d649ba96571e28ec7040ec3c938c7f6c93623bc1eb88934f",
+      "bytes": 2632
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/sb-publisher-scope.json",
+      "sha256": "1d871d2488e9e96debdc45950863667a92c2ed2bdaeab00910633d7ff82934e9",
+      "bytes": 13759
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/creative-operations-mgs/references/meta-ad-library-creative-intake.md",
+      "sha256": "09d44703d704d56ced311ac6da32421dcc6aabf9215c0a7f44d280e3da9cb05e",
+      "bytes": 4538
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
+      "sha256": "5f10dc852990bdaf8c1392071f233ada7a79d84f9893d288bdc67514208f34de",
+      "bytes": 53328
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-account-visualization/SKILL.md",
+      "sha256": "c5854f96f86cc9a6de721cd6e87779bb47bfb2634585208becebb5d172bea577",
+      "bytes": 10319
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-account-visualization/references/scoped-generic-reporting.md",
+      "sha256": "372ee2877409566166f53b22794b93f5fbc4d6028c4ee8d0c9dd8fa71cf1b284",
+      "bytes": 4560
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "sha256": "d076d4677b74bf10897341a8772ce65bc4f9de8d6a87dd5993aa85cf54e2b658",
+      "bytes": 23760
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/references/confidentiality-scope-audit.md",
+      "sha256": "d8903d1fde674f0c3cd3ec1e56d638da263f6ae1e4f5cf71b95e53a0dd2b7349",
+      "bytes": 7915
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/references/smartbidding-roi-band-reconciliation.md",
+      "sha256": "67045739f4df5c5e9c836533f19f8e9d53e5cb3977f6410637e4927c3ddacac5",
+      "bytes": 27485
+    },
+    {
+      "path": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/references/soul-router-identity-authority.md",
+      "sha256": "f3423da845472979e1bb4981d0e1643da1b7b7a3b72d123748b7df1c5bad631d",
+      "bytes": 6592
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+      "sha256": "bb9d97b3dc4aabbdd5d55f2b251d6a65350b466d6248f23e3fbabe6520ab4396",
+      "bytes": 102958
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
+      "sha256": "63d362e9267ad83858b8fd7b1a55a3ef38819b9d59ecb8804beae0b3cebf74f0",
+      "bytes": 1785
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-common.py",
+      "sha256": "ff110d40d6a29ea0be2e7c8581af8c9590009ba5e130af3ff55b61478283be31",
+      "bytes": 34826
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-scoped-report.py",
+      "sha256": "500d0a869533980e040f0552174279240d1e12e0f2d675ddafa046b0b265257b",
+      "bytes": 11371
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-smartbidding-common.py",
+      "sha256": "f8d024e74b0957d9f03ca17f51d52b40d253494914cc66b29fbbbcc729613bb2",
+      "bytes": 20179
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-ares-asset-scope.py",
+      "sha256": "675f02360b79df37e7581b86b14e1724e5b092c25ce404599133178a2a658d5d",
+      "bytes": 9887
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_ares_confidentiality_routes.py",
+      "sha256": "d87c64180a5abb19cc2394dce65b0509327dcef59e79bb99c72b1df5219ef5bf",
+      "bytes": 11514
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_ares_scoped_report.py",
+      "sha256": "16f7b3e5875ab7692f56d100afd0d34fae70101f755ea537f7264bd41c5efa4c",
+      "bytes": 6418
+    }
+  ]
+}

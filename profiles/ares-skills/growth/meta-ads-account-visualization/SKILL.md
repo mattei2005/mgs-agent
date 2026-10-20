@@ -90,6 +90,10 @@ Ordem de `subs`:
 6. offsite_conversion.fb_pixel_lead
 ```
 
+## Relatórios genéricos de contas, gastos, cobranças e faturas
+
+Seguir `references/scoped-generic-reporting.md` e o executor read-only `ares-scoped-report.py`. O plano nasce do cadastro positivo; indisponibilidade da Meta não autoriza consulta a outro portfólio, outro agente ou fonte administrativa. Não usar o audit global compartilhado como fonte de relatório.
+
 ## Relatório de BM por forma de pagamento
 
 - Antes de consultar qualquer conta, use o catálogo positivo `data/ares/asset-scope.json` e exija `allowed=true` no checker `mgs-ares-asset-scope.py check-account <ID> --json`. O escopo atual Digital Trust prevalece sobre relatórios históricos e sobre as instruções genéricas de inventário abaixo: não reenumere outros portfólios nem amplie o catálogo por capacidade do token. Consulte somente os IDs autorizados e valide `business.id` no readback.

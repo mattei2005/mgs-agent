@@ -1,0 +1,39 @@
+{
+  "catalog_accounts": 351,
+  "inventory_coverage_reconciled": true,
+  "inventory_readable_primary_binding": 52,
+  "scope_verified": true,
+  "modes": [
+    {
+      "mode": "spend",
+      "selected_accounts": 52,
+      "complete_accounts": 52,
+      "scope_verified": true,
+      "complete_pagination": true,
+      "returned_event_count": null
+    },
+    {
+      "mode": "charges",
+      "selected_accounts": 52,
+      "complete_accounts": 52,
+      "scope_verified": true,
+      "complete_pagination": true,
+      "returned_event_count": 0
+    },
+    {
+      "mode": "invoices",
+      "http_status": 200,
+      "complete_pagination": true,
+      "exposed_invoices": 0
+    }
+  ],
+  "remote_mutations": 0,
+  "registered_additional_bindings": [
+    {
+      "account_id": "1034081997659047",
+      "readable": true,
+      "scope_verified": true
+    }
+  ],
+  "e2e_route_validation_complete": true
+}

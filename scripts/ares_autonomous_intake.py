@@ -9,7 +9,12 @@ import ares_upload_context_layout as layout
 DATA=bridge.DATA;STATE=DATA/'intake-state.json';CONFIG=DATA/'intake-config.json'
 class IntakeError(RuntimeError):pass
 
-PROTECTED=('asset_id','source_drive_id','asset_drive_id','canonical_filename','operation','original_checksum','clean_checksum','source_manager','ares_eligible','used_by','campaign_owner','reservation_status','reservation_request_id','meta_ad_id','meta_video_id','meta_creative_id')
+def validate_selftest_identity(test,raw,clean,raw_sha):
+    import ares_intake_selftest as checks
+    try:return checks.validate_selftest_identity(test,raw,clean,raw_sha)
+    except checks.SelftestError as exc:raise IntakeError(str(exc)) from exc
+
+PROTECTED=('asset_id','source_drive_id','asset_drive_id','canonical_filename','operation','original_checksum','clean_checksum','source_manager','ares_eligible','used_by','campaign_owner','reservation_status','reservation_request_id','meta_ad_id','meta_video_id','meta_creative_id','status','asset_path','manager_media_folder_id','metadata_clean')
 def protected_fingerprint(row):return hashlib.sha256(bridge.canonical({k:row.get(k) for k in PROTECTED})).hexdigest()
 def verify_reservation(row,baseline,batch):
     if row['asset_id'] in baseline:
@@ -109,6 +114,9 @@ def monitor(polls=3,interval=20):
     cfg=bridge.read_json(CONFIG,{})
     if cfg.get('enabled') is not True:return {'status':'disabled','pending':0}
     if cfg.get('authority_message_id')!='1562188030205362227' or cfg.get('source_root_id')!=bridge.SOURCE_ROOT:raise IntakeError('AUTHORITY_SCOPE')
+    test=bridge.read_json(DATA/'intake-selftest-1562188030205362227.json',{})
+    if test.get('status')=='pending':return {'status':'selftest','manifest':str(DATA/'intake-selftest-1562188030205362227.json'),'run_id':'1562188030205362227'}
+    if cfg.get('live_treatment_enabled') is not True:return {'status':'live_treatment_disabled','pending':0}
     manifest=bridge.read_json(DATA/'upload-context-layout.json');assert isinstance(manifest,dict)
     d=bridge.Drive();scope=bridge.config_load();layout.check_folder(d,manifest,manifest['upload_root_id'],bridge.SOURCE_ROOT,'UPLOAD MANUAL')
     with locked_state() as state:
@@ -139,7 +147,12 @@ def verify_completed(d,batch,baseline):
         if row.get('operation')!=op or kind not in ['IMG','VID'] or row.get('metadata_clean') is not True:raise IntakeError('LINEAGE_CONTEXT_OR_ELIGIBILITY')
         verify_reservation(row,baseline,batch)
         raw=d.meta(source['source_id']);clean=d.meta(row['asset_drive_id'])
-        if raw.get('name')!=source['name'] or d.relative_parent(raw['parents'][0],bridge.SOURCE_ROOT)!=[op,kind,'99_LEGACY'] or d.relative_parent(clean['parents'][0],bridge.SOURCE_ROOT)!=[op,kind,'01_READY']:raise IntakeError('FINAL_PARENT_SCOPE')
+        expected_clean=[op,kind,'01_READY']
+        if row['asset_id'] in baseline:
+            parts=row.get('asset_path','').split('/')
+            if parts[:2]!=['MGS-AGENTS','CRIATIVOS'] or parts[-1]!=row['canonical_filename']:raise IntakeError('EXISTING_DESTINATION_PATH')
+            expected_clean=parts[2:-1]
+        if raw.get('name')!=source['name'] or d.relative_parent(raw['parents'][0],bridge.SOURCE_ROOT)!=[op,kind,'99_LEGACY'] or d.relative_parent(clean['parents'][0],bridge.SOURCE_ROOT)!=expected_clean:raise IntakeError('FINAL_PARENT_SCOPE')
         if raw.get('driveId')!=bridge.SOURCE_DRIVE or clean.get('driveId')!=bridge.SOURCE_DRIVE or raw.get('trashed') or clean.get('trashed') or clean.get('name')!=row.get('canonical_filename'):raise IntakeError('FINAL_IDENTITY')
         hashes=d.hashes(source['source_id']);ch=d.hashes(clean['id'])
         allowed_raw={row['original_checksum'],row['clean_checksum']} if row['asset_id'] in baseline else {row['original_checksum']}
@@ -149,9 +162,14 @@ def verify_completed(d,batch,baseline):
 
 def main():
     import argparse
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['monitor','claim','complete']);ap.add_argument('--batch-id');ap.add_argument('--owner');args=ap.parse_args()
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['monitor','claim','complete','selftest-complete']);ap.add_argument('--batch-id');ap.add_argument('--owner');ap.add_argument('--clean-id');args=ap.parse_args()
     try:
         if args.action=='monitor':result=monitor()
+        elif args.action=='selftest-complete':
+            cfg=bridge.read_json(CONFIG,{})
+            if cfg.get('enabled') is not True or args.owner!=cfg.get('owner_job_id') or not re.fullmatch(r'[A-Za-z0-9_-]{8,}',args.clean_id or ''):raise IntakeError('SELFTEST_NATIVE_OWNER')
+            from ares_intake_selftest import finish
+            result=finish(bridge.Drive(True),args.clean_id)
         else:
             cfg=bridge.read_json(CONFIG,{})
             if cfg.get('enabled') is not True or args.owner!=cfg.get('owner_job_id'):raise IntakeError('ACTIVE_NATIVE_OWNER_REQUIRED')
@@ -170,6 +188,7 @@ def main():
                     entry=state['claims'].get(args.batch_id)
                     if not entry or entry['owner']!=args.owner or not isinstance(entry.get('inventory_before'),dict):raise IntakeError('FROZEN_INVENTORY_BASELINE_REQUIRED')
                     result=complete(state,args.batch_id,args.owner,verify_completed(bridge.Drive(),batch,entry['inventory_before']))
+        if args.action=='claim':result={k:v for k,v in result.items() if k!='inventory_before'}
         print(json.dumps(result,ensure_ascii=False));return 0
     except Exception as exc:
         error={'status':'blocked','reason':str(exc)[:220],'at':bridge.now_iso(),'scope':'intake_only','delete_source':False};bridge.atomic_json(DATA/'intake-last-error.json',error);print(json.dumps({k:v for k,v in error.items() if k!='at'}));return 2

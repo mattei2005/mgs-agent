@@ -40,6 +40,8 @@ Dados criativos                         /root/mgs-agent/data/ares/creative-ops/
 Inventário unificado                    /root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl
 Intake Drive read-only                  /root/mgs-agent/scripts/ares-drive-upload-manual-inventory.py
 Dados Meta Ads                          /root/mgs-agent/data/ares/meta-ads/
+Relatórios gerais Meta / billing         meta-ads-account-visualization/references/scoped-generic-reporting.md; scripts/ares-scoped-report.py
+Catálogo positivo SB                    /root/mgs-agent/data/ares/sb-publisher-scope.json; ares-smartbidding-common.py sem catálogo HTTP global
 Scripts Ares                            /root/mgs-agent/scripts/ares-*
 Logs Ares                               /root/.hermes/profiles/ares/logs/
 Audit operacional Ares                  /root/mgs-agent/data/ares/meta-ads/audit/

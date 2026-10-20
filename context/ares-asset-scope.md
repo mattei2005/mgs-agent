@@ -17,7 +17,16 @@ O app `minibot` (`1299247318762949`) permanece autorizado como dependência téc
 
 ## Fonte afirmativa e snapshot
 
-Rodolfo confirmou este catálogo corporativo como escopo autorizado na mensagem acima. Snapshot ao vivo GET /company por sessão administrativa; propriedade e escopo afirmados por essa decisão, não inferidos de mera hospedagem/receita. Contas obtidas pela edge paginada owned_ad_accounts da BM Digital Trust. Registro executável: `data/ares/asset-scope.json`.
+Rodolfo confirmou este catálogo corporativo como escopo autorizado na mensagem acima. O registro de origem do snapshot foi produzido por leitura administrativa corporativa; isso é proveniência histórica, não instrução para Ares consultar catálogos globais. Contas obtidas pelo cadastro autorizado da BM Digital Trust. Registro executável: `data/ares/asset-scope.json`. O catálogo de publishers usado pelo Ares é `data/ares/sb-publisher-scope.json`, validado contra os hosts desta fonte; a rota `/company` do helper Ares é projeção local, sem HTTP global.
+
+## Fontes operacionais de relatórios
+
+- Contas, gasto, cobranças e faturas: `meta-ads-account-visualization/references/scoped-generic-reporting.md` e `scripts/ares-scoped-report.py`. O catálogo positivo define a seleção inclusive em pedidos genéricos; campos/contas não expostos pela credencial ficam indisponíveis, sem buscar outro portfólio, perfil de agente ou credencial administrativa.
+- Faturas: somente leitura do edge da BM operacional, com contas relacionadas comprovadas no cadastro; nunca consultar BM ou fatura desconhecida por ID como fallback. Gasto e cartão atual não comprovam fatura nem cartão efetivamente cobrado.
+- Receita por domínio: publishers resolvidos da projeção local e validados antes do relatório SB. Não obter catálogo remoto global para filtrar depois.
+- Evidências de referência do Ares: `data/ares/`, `reports/ares/` e fontes canônicas específicas apontadas pelo mapa. Inventários, históricos, logs e backups globais compartilhados não são fontes alternativas para relatórios do Ares. Não apagar ou alterar dados de outras operações para corrigir o roteamento do Ares.
+- Servidor, identidade do serviço, cofre, restart e revogação de permissões não pertencem a este pedido, conforme correção expressa de Rodolfo nesta thread; nenhuma proposta desse tipo fica como condição de aceite do recorte operacional.
+
 
 Hosts corporativos autorizados ao Ares neste snapshot:
 

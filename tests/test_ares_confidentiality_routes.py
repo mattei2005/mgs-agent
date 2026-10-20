@@ -23,7 +23,7 @@ class MetaConfidentialityTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
-        self.data = {'ad_accounts': [{'account_id': '111111'}]}
+        self.data = {'operational_business_id': '555555', 'ad_accounts': [{'account_id': '111111'}]}
         for target, value in [('is_ares_context', True), ('load_scope', self.data)]:
             obj = patch.object(scope, target, return_value=value)
             obj.start()
@@ -100,6 +100,34 @@ class MetaConfidentialityTests(unittest.TestCase):
     def test_response_from_batch_establishes_child_provenance(self):
         scope.observe_meta_response('', {'batch': [{'method': 'GET', 'relative_url': 'act_111111/campaigns'}]}, [{'code': 200, 'body': json.dumps({'data': [{'id': '333333', 'account_id': '111111'}]})}], 'POST')
         scope.enforce_meta_path('333333')
+
+    def test_fixed_business_invoice_read_is_allowed(self):
+        scope.enforce_meta_path('555555/business_invoices', {'fields': 'id,ad_account_ids,currency,amount'})
+
+    def test_other_business_invoice_read_denied(self):
+        with self.assertRaises(scope.ScopeError):
+            scope.enforce_meta_path('666666/business_invoices', {'fields': 'id,ad_account_ids'})
+
+    def test_invoice_lookup_cannot_override_business_or_omit_accounts(self):
+        for params in [{'fields': 'id,amount'}, {'fields': 'id,ad_account_ids', 'invoice_id': 'synthetic-unproven'}, {'fields': 'id,ad_account_ids,download_uri'}]:
+            with self.assertRaises(scope.ScopeError):
+                scope.enforce_meta_path('555555/business_invoices', params)
+
+    def test_invoice_endpoint_cannot_mutate(self):
+        with self.assertRaises(scope.ScopeError):
+            scope.enforce_meta_path('555555/business_invoices', {'fields': 'id,ad_account_ids'}, 'POST')
+
+    def test_invoice_response_rejects_unknown_account(self):
+        with self.assertRaises(scope.ScopeError):
+            scope.observe_meta_response('555555/business_invoices', {'fields': 'id,ad_account_ids'}, {'data': [{'id': '777777', 'ad_account_ids': ['222222']}]})
+
+    def test_invoice_response_is_accepted_only_with_positive_accounts(self):
+        scope.observe_meta_response('555555/business_invoices', {'fields': 'id,ad_account_ids'}, {'data': [{'id': '777777', 'ad_account_ids': ['111111']}]})
+        self.assertFalse(scope.PROVENANCE.exists())
+
+    def test_moved_business_is_retained_before_report_callers(self):
+        with self.assertRaises(scope.ScopeError):
+            scope.observe_meta_response('act_111111', {'fields': 'id,account_id,business{id}'}, {'id': 'act_111111', 'account_id': '111111', 'business': {'id': '666666'}})
 
     def test_scope_change_invalidates_provenance(self):
         scope.observe_meta_response('act_111111/campaigns', {}, {'data': [{'id': '333333'}]})
