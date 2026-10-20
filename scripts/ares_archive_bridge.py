@@ -56,7 +56,11 @@ def timestamp(value):
 
 def validate_config(c):
     expected={'account':ACCOUNT,'source_drive_id':SOURCE_DRIVE,'source_root_id':SOURCE_ROOT,'archive_root_id':ARCHIVE_ROOT}
-    if any(c.get(k)!=v for k,v in expected.items()) or c.get('delete_source') is not False: raise ArchiveError('CONFIG_SCOPE_OR_DELETION')
+    if any(c.get(k)!=v for k,v in expected.items()): raise ArchiveError('CONFIG_SCOPE_OR_DELETION')
+    if c.get('delete_source') is not False:
+        if c.get('delete_source') is not True:raise ArchiveError('CONFIG_SCOPE_OR_DELETION')
+        import ares_archive_retirement as retirement
+        retirement.validate_active_policy(c) # Separate confirmed controller; owner requests remain copy-only.
     timestamp(c['effective_after'])
     return c
 
@@ -257,7 +261,7 @@ def preflight(d,c):
     if dst.get('driveId') or dst.get('trashed') or not any(x.get('emailAddress')==ACCOUNT for x in dst.get('owners',[])):raise ArchiveError('ARCHIVE_OWNER')
     if not dst.get('capabilities',{}).get('canEdit'):raise ArchiveError('ARCHIVE_ACCESS')
     if any(x.get('type') in ('anyone','domain') for x in dst.get('permissions',[])):raise ArchiveError('ARCHIVE_PUBLIC')
-    return {'status':'preflight_ok','archiveOwner':ACCOUNT,'deleteSource':False,'queueEnabled':c['queue_enabled']}
+    return {'status':'preflight_ok','archiveOwner':ACCOUNT,'deleteSource':c['delete_source'],'ownerWorkerDeleteSource':False,'queueEnabled':c['queue_enabled']}
 
 def initialize(d,c):
     preflight(d,c)
@@ -313,10 +317,13 @@ def reconcile(d,c,job_id,apply=False):
         if m.get('size')!=a['size'] or m.get('md5Checksum')!=a['md5'] or m.get('name')!=a['name']:raise ArchiveError('COPIED_METADATA')
         if len(m.get('parents',[]))!=1 or d.relative_parent(m['parents'][0],ARCHIVE_ROOT)!=a['relativeParent']:raise ArchiveError('COPIED_PATH')
         if any(p.get('type') in ('anyone','domain') for p in m.get('permissions',[])):raise ArchiveError('COPIED_PUBLIC')
-        validate_source_metadata(d.meta(a['sourceId']),a,c)
+        import ares_archive_retirement as retirement
+        source=retirement.source_state(d,c,job,a)
+        retired=source.get('record_kind')=='mgs.source.retirement.v1'
+        if not retired:validate_source_metadata(source,a,c)
         expected={k:a[k] for k in ('size','md5','sha256')}
-        if d.hashes(m['id'])!=expected or d.hashes(a['sourceId'])!=expected:raise ArchiveError('BINARY_INTEGRITY')
-        validate_source_metadata(d.meta(a['sourceId']),a,c)
+        if d.hashes(m['id'])!=expected or (not retired and d.hashes(a['sourceId'])!=expected):raise ArchiveError('BINARY_INTEGRITY')
+        if not retired:validate_source_metadata(d.meta(a['sourceId']),a,c)
         verified.append({'sourceId':a['sourceId'],'archiveId':m['id'],'owner':ACCOUNT,'verified':True,'role':a['role'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'jobId':job_id,'lineageId':job['lineageId'],'relativeParent':a['relativeParent']})
     result={'status':'verified','kind':job['kind'],'jobId':job_id,'assets':verified,'verifiedAt':now_iso(),'deleteSource':False,'inventoryIdentifiersChanged':False}
     if apply:

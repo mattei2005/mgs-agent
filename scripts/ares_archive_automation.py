@@ -81,7 +81,8 @@ def verification_snapshot(d,c,job):
     media=[]
     for asset in job['assets']:
         copied=next(x for x in receipt['assets'] if x['sourceId']==asset['sourceId'] and x['role']==asset['role'])
-        media.append({'source':d.meta(asset['sourceId']),'archive':d.meta(copied['archiveId'])})
+        import ares_archive_retirement as retirement
+        media.append({'source':retirement.source_state(d,c,job,asset),'archive':d.meta(copied['archiveId'])})
     frozen={'request':meta,'receipt_meta':rm,'receipt':receipt,'ack_meta':ackmeta,'ack':ack,'media':media}
     return {'pending':False,'acked':bool(ack) and props.get('mgsArchiveState')=='verified','fingerprint':hashlib.sha256(bridge.canonical(frozen)).hexdigest()}
 
@@ -127,13 +128,27 @@ def choose_jobs(jobs,state):
     return selected
 
 
-def run_cycle(apply=False,reconcile_only=False):
+def run_cycle(apply=False,reconcile_only=False,intake_state=None):
+    # Never take intake-state after queue lock. Intake completion passes the
+    # state it already owns; independent ticks acquire that lock first.
+    c=bridge.config_load()
+    if c.get('delete_source') and intake_state is None:
+        import fcntl
+        with (bridge.DATA/'.intake-state.lock').open('a+') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX)
+            state=bridge.read_json(bridge.DATA/'intake-state.json',{'schema':'mgs.intake.state.v1','claims':{},'completed':{}})
+            return _run_cycle(apply,reconcile_only,state,allow_retirement=True)
+    return _run_cycle(apply,reconcile_only,intake_state,allow_retirement=intake_state is None)
+
+def _run_cycle(apply=False,reconcile_only=False,intake_state=None,allow_retirement=True):
     import json
     c=bridge.config_load()
     with bridge.queue_lock():
         state=bridge.read_json(bridge.DATA/'automation-state.json',{'schema':'mgs.archive.automation.v1'})
         if state.get('schema')!='mgs.archive.automation.v1':raise bridge.ArchiveError('AUTOMATION_STATE_SCHEMA')
         d=bridge.Drive(apply);bridge.preflight(d,c)
+        import ares_archive_retirement as retirement
+        if apply and c.get('delete_source') and allow_retirement:retirement.recover_accepted(d,c)
         beat=d.one(c['control_folder_id'],'heartbeat:worker-v1');hb={}
         if beat:
             bridge.require_publisher(d.meta(beat['id']),bridge.ACCOUNT,'HEARTBEAT_AUTHOR');hb=json.loads(d.raw(beat['id']))
@@ -156,8 +171,9 @@ def run_cycle(apply=False,reconcile_only=False):
         if reconcile_only or not healthy:producer_config['queue_enabled']=False
         def publish(row):return bridge.enqueue(d,c,bridge.job_for_lineage(d,c,row['asset_id']))
         production=enqueue_ready(rows,producer_config,state,apply,publish)
-        blocked=reconciliation['blocked']+production['blocked']
-        result={'schema':'mgs.archive.automation.tick.v1','status':'ok' if healthy and not blocked else 'blocked','executed_at':bridge.now_iso(),'apply':apply,'worker_ready':healthy,'worker_executed_at':hb.get('executedAt'),'worker_trigger_uid':hb.get('triggerUid'),'inventory_rows':len(rows),'jobs_total':len(jobs),'jobs_scanned':len(selected),'reconciliation':reconciliation,'production':production,'queue_enabled':c['queue_enabled'],'delete_source':False,'prefer_archive_reads':c.get('prefer_archive_reads',False),'include_historical':c.get('include_historical',False)}
+        cleanup=retirement.run_cycle(d,c,intake_state or {'claims':{}},apply=apply and not reconcile_only) if healthy and not reconciliation['blocked'] and allow_retirement else {'status':'deferred','enabled':c.get('delete_source',False),'blocked':[]}
+        blocked=reconciliation['blocked']+production['blocked']+cleanup['blocked']
+        result={'schema':'mgs.archive.automation.tick.v1','status':'ok' if healthy and not blocked else 'blocked','executed_at':bridge.now_iso(),'apply':apply,'worker_ready':healthy,'worker_executed_at':hb.get('executedAt'),'worker_trigger_uid':hb.get('triggerUid'),'inventory_rows':len(rows),'jobs_total':len(jobs),'jobs_scanned':len(selected),'reconciliation':reconciliation,'production':production,'retirement':cleanup,'queue_enabled':c['queue_enabled'],'delete_source':c['delete_source'],'owner_worker_delete_source':False,'prefer_archive_reads':c.get('prefer_archive_reads',False),'include_historical':c.get('include_historical',False)}
         if apply:
             state['updated_at']=result['executed_at'];bridge.atomic_json(bridge.DATA/'automation-state.json',state);bridge.atomic_json(bridge.DATA/'automation-last-tick.json',result)
         return result

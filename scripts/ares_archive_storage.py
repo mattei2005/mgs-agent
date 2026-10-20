@@ -43,7 +43,11 @@ def dedupe_catalog(rows):
 
 def enabled():
     cfg=b.read_json(b.CONFIG,{})
-    return cfg.get('prefer_archive_reads') is True
+    if cfg.get('prefer_archive_reads') is True:return True
+    # Retirement is irreversible at the physical Google ID. Never route an
+    # already-retired logical ID back to a missing staging binary on rollback.
+    index=b.read_json(b.DATA/'archive-index.json',{'mappings':{}})
+    return any(e.get('sourceRetirementReceipt') for e in index.get('mappings',{}).values())
 
 def require_lineage_available(row):
     cfg=b.config_load()
@@ -104,7 +108,13 @@ def ensure_shortcuts(d,job_id):
     if not ack:raise StorageError('ACK_REQUIRED_BEFORE_ALIAS')
     b.require_publisher(d.meta(ack['id']),b.CANONICAL_SA)
     for asset in job['assets']:
-        entry=index['mappings'][asset['sourceId']];require_registered_mapping(entry,index);source=meta(d,entry['sourceId']);expected=next(a for a in frozen['assets'] if a['sourceId']==entry['sourceId']);b.validate_source_metadata(source,expected,b.config_load())
+        entry=index['mappings'][asset['sourceId']];require_registered_mapping(entry,index);expected=next(a for a in frozen['assets'] if a['sourceId']==entry['sourceId'])
+        if entry.get('sourceRetirementReceipt'):
+            import ares_archive_retirement as retirement
+            retirement.verified_receipt(d,b.config_load(),frozen,expected,entry)
+            if not entry.get('stockShortcutId'):raise StorageError('RETIRED_SOURCE_WITHOUT_STOCK_ALIAS')
+            media_record(entry,meta(d,entry['archiveId']),meta(d,entry['stockShortcutId']));made.append(entry['stockShortcutId']);continue
+        source=meta(d,entry['sourceId']);b.validate_source_metadata(source,expected,b.config_load())
         if d.relative_parent(source['parents'][0],b.SOURCE_ROOT)!=entry['relativeParent']:raise StorageError('SOURCE_MOVED_BEFORE_ALIAS')
         key='stock:'+entry['sourceId']+':'+entry['md5'];previous=d.one(source['parents'][0],key)
         if entry.get('stockShortcutId'):sid=entry['stockShortcutId']

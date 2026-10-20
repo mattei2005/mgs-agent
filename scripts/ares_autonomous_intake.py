@@ -116,7 +116,7 @@ def finish_with_archive(state,batch,owner):
         entry.update(status='treated_waiting_archive',proofs=proofs,archive_source_ids=[r[k] for r in new for k in ['source_drive_id','asset_drive_id']],treated_at=bridge.now_iso())
         bridge.atomic_json(STATE,state) # Persist complete treatment before publishing transport.
     import ares_archive_automation as transport
-    cycle=transport.run_cycle(apply=True)
+    cycle=transport.run_cycle(apply=True,intake_state=state)
     if cycle['reconciliation']['blocked'] or cycle['production']['blocked']:raise IntakeError('ARCHIVE_TRANSPORT_BLOCKED')
     index=bridge.read_json(DATA/'archive-index.json',{'mappings':{}})
     if not batch_archive_ready(entry,index):return {'status':'waiting_archive','batch_id':batch['batch_id'],'treated_verified':True,'source_count':len(batch['sources'])}
