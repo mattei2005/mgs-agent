@@ -15,6 +15,16 @@ metadata:
 
 Skill específica da vertical SHEIN em tráfego direto Meta para os Estados Unidos. Ela isola o segmento SHEIN das regras operacionais de financiamento veicular: ambos usam tráfego direto, mas não compartilham contas, nomes, eventos, bids, budgets, schedules, learning policy, relatórios, criativos ou automações.
 
+## Pedidos concorrentes e comunicação — regra permanente
+
+1. Resolver conta, pedido original e recursos envolvidos antes de qualquer retomada; correção técnica rotineira dentro do escopo já autorizado não exige um novo pedido de aprovação.
+2. Se a mesma conta ou uma linhagem selecionada estiver ocupada por outro pedido ativo, usar a fila durável canônica de `request_queue_policy`. Não oferecer nem solicitar prioridade como solução padrão, não transferir reservas ativas e não serializar contas/assets independentes.
+3. Durante fila, cooldown e reparo rotineiro, manter o acompanhamento técnico nos registros, sem mensagens operacionais intermediárias. Não confundir retorno `QUEUED` com execução garantida: confirmar job/dependência persistidos e consumidor responsável pela retomada.
+4. Retomar automaticamente o mesmo request e os mesmos IDs após a dependência terminar; preservar parâmetros, manifests, relógio/SLA, autoridade live, QA e readback. Separar manutenção do executor da transação de campanha e voltar somente pela rota central validada.
+5. Comunicar na origem apenas o fechamento normal, curto e baseado no lote inteiro validado. Somente uma decisão realmente ausente, ampliação de escopo, Critical Subset ou bloqueio externo incontornável justifica interromper o operador; contenção e falha técnica recuperável não são esses casos.
+
+Receita de fila, recuperação por slot e verificação da entrega: `references/general-campaign-fast-route.md`, seções `Fila silenciosa de pedidos concorrentes` e `Manutenção separada: slots parcialmente copiados`.
+
 ## Padrão global vigente — todas as 36 contas SHEIN
 
 Resolva o padrão de todos os sites, gestores e threads SHEIN pelo contrato vivo `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`: combine `account_report_overrides`, `format_profiles`, `budget_used_standard`, `numeric_width_standard`, `campaign_status_blocks` e `compact_identity_standard`. Um perfil-base isolado não representa as regras efetivas de apresentação. Reconcile conta/nome/thread com o catálogo e o GET Meta atual antes da coleta; use os bindings atuais para definir o alcance de cada pedido, sem herdar exclusividade histórica de YOLO.
