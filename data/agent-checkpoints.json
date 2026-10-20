@@ -4393,12 +4393,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-status-blocks-g001-1561918043305803869",
-      "next_step": "Finalizar inventario e REPORT-INFRA; coletar seis contas G001, render/validate e entregar nas threads Intraday canonicas com GET exato.",
+      "next_step": "Aguardar autorizacao pontual:BU6para7 em Mavroa,Vizioid,Yolokfx;Gasto5para6 eSaldo6para7 somenteYolokfx. Apos OK:aplicar somente excecao visual autorizada,preservar fontes/cortes,atualizar somente status se necessario,render/validate6bindings,publicar nas threads Intraday G001 com journal/nonce e GET de cada parte.",
       "objective": "Separar ativas/pausadas nos relatorios SHEIN e enviar relatorios G001 apos validacao",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein-report-status-blocks-20261019/change-inventory.json",
-      "state": "mudanca de contrato/renderer/skill concluida;118testes ok e registry validado. preparando relatorios g001 conforme pedido1561918043305803869,sem writemeta ou cron.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/g001-status-blocks-1561918043305803869/prepublication-status.json",
+      "state": "padrao concluido:contrato,renderer,skill e registry com readback;118testes ok,36bindings,report-infra getverificado. loteg001:6contas meta verificadas,65campanhas com entrega,financeiro novo persistido,rps ui17paginas com cobertura integral.3modelos validados;mavroa/vizioid/yolokfx bloqueados somente por larguras numericas;0relatorios publicados,0meta writes,0cron.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T01:50:26+00:00"
+      "updated_at": "2026-10-20T02:01:08+00:00"
     },
     {
       "agent": "ares",
@@ -6632,5 +6632,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T01:50:26+00:00"
+  "updated_at": "2026-10-20T02:01:08+00:00"
 }
