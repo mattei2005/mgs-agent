@@ -4403,12 +4403,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1562023429690097665",
-      "next_step": "Retomar mesmo request pelo runner central após janela de quota; concluir bundle2 e QA/render de todos os 10 ads, depois ativação autorizada ou review tardio exigido pelo gate.",
-      "objective": "Concluir quatro clones C01 Vizioid G006 com grupos/textos Nicolas, USD20/dia cada e COCAP USD0.90.",
+      "next_step": "Após quota, reconciliar somente shell do bundle2 e criar filhos ausentes pelo Engine; verificar 10 ads, QA integral e status final. Preservar nomes/IDs/manifests/SLA e fazer recibo agregado antes do fechamento.",
+      "objective": "Concluir quatro clones C01 Vizioid G006, 10 vídeos/textos Nicolas, USD20/dia por campanha, COCAP USD0.90.",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1562023429690097665/state.json",
-      "state": "page_repair_verified; execução central iniciada. bundle1 criou 2 campanhas/2 conjuntos/5 anúncios paused; ids persistidos, somente readback adiado pela quota meta. retomada única determinística aguardando 305s conforme runner; sem replay de criação. original request/relógio preservados.",
+      "state": "repair_verified; quatro campaign ids e quatro adset ids persistidos. bundle1 readback completo com 5 ads; bundle2 falhou transitoriamente http500/meta2 na configuração do shell. mesmo runner confirmou recovery pendente com quota300s; retomada única ativa. todas permanecem em staging paused.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-10-20T12:04:45+00:00"
+      "updated_at": "2026-10-20T12:10:35+00:00"
     },
     {
       "agent": "ares",
@@ -6742,5 +6742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T12:07:43+00:00"
+  "updated_at": "2026-10-20T12:10:35+00:00"
 }

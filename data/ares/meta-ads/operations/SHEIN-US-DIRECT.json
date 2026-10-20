@@ -1,5 +1,33 @@
 {
   "page_delegation_repair_authorizations": {
+    "857361470788197": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1562075891557732444",
+      "source_thread_id": "1558134405313200150",
+      "source_channel_id": "1548150155184701440",
+      "account_id": "1498990138663094",
+      "account_name": "Escalatepower-US-SHEIN-EN-06-G006",
+      "system_user_id": "122095869861482193",
+      "business_id": "155263197283282",
+      "scope": "Durable authorization for the current and future authorized Escalatepower 06 G006 requests using Offers Spot Page 857361470788197. Preserve existing tasks and add only ADVERTISE and ANALYZE if absent; no expansion to other Pages, accounts or identities.",
+      "repeat_approval_required": false,
+      "requirements": [
+        "pre-read exact Page identity, business and existing tasks using authorized administrative identity",
+        "persist sanitized journal before minimal write; no blind replay after uncertain effects",
+        "read back assignment administratively and Page access with original corporate identity",
+        "resume original campaign request and IDs through central Engine v3; preserve E2E, media QA and activation gates"
+      ],
+      "exclusions": [
+        "ownership transfer",
+        "credential issuance or rotation",
+        "app permission changes",
+        "billing",
+        "other Pages or accounts",
+        "automatic campaigns or unapproved recurrence"
+      ],
+      "initial_request_id": "shein-1562024416823607398"
+    },
     "1151577441379727": {
       "enabled": true,
       "approved_by": "344196393512075265",
