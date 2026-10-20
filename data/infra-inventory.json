@@ -45180,10 +45180,10 @@
       "id": "ares-creative-30tb-copy-pilot-20261020",
       "agent": "zeus",
       "type": "isolated-google-archive-copy-pilot-local-artifact",
-      "status": "bounded_pilot_code_ready_owner_execution_pending",
+      "status": "real_pilot_copy_sa_stream_integrity_verified_replay_pending",
       "authorization_message_id": "1562087305051902063",
       "source_thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T13:52:24.331395+00:00",
+      "updated_at": "2026-10-20T13:59:05.500217+00:00",
       "files": [
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/Pilot.js",
@@ -45202,8 +45202,8 @@
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/README.md",
-          "size_bytes": 4082,
-          "sha256": "f7483ba82997dc3fc1c86f8d4944615d67210e45a05231b7bb5d775e723840bd"
+          "size_bytes": 4709,
+          "sha256": "2258b7ed592f71dfbb20efb3a6834ce2e6a85eb337b99c00d452af3d54e8715b"
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_30tb_pilot.cjs",
@@ -45212,13 +45212,13 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
-          "size_bytes": 11753,
-          "sha256": "c6110ecab654b09dacdf70a5215809838ab9a07a5e203ffac12e40b9fc7495f3"
+          "size_bytes": 12936,
+          "sha256": "d4ba6676c15bb6e1ec4a9ce4125e1485696d46f88f02dfa0fe16a930b78f8747"
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/service-account-my-drive-quota.md",
-          "size_bytes": 8977,
-          "sha256": "27acf04a2c8cbf118b2cfd54bf76d13dadb64eaf7327cccfc76bfe54f476c088"
+          "size_bytes": 9757,
+          "sha256": "0ace6e4a86bfb2ea88bc970f8c496eae46aa8e6e1b939084d36eb42baadab79a"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/CheckAccount.js",
@@ -45244,12 +45244,16 @@
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/pilot-source-permission-readback-1562099964476399760.json",
           "size_bytes": 520,
           "sha256": "88bf9dd5b43aad6177f5a4476be734998a3580698bfd9cdb80aeeb7d812da9d7"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/pilot-copy-canonical-sa-verified-1562101859299364936.json",
+          "size_bytes": 990,
+          "sha256": "6b2bd0ceecf5a7ebb8ddd4986ac6e6be3a93882169bc9b601109c55f313bf4a1"
         }
       ],
       "offline_tests": 35,
       "real_source_metadata_http": 200,
-      "cloud_copy_verified": false,
-      "cloud_project_created": false,
+      "cloud_copy_verified": true,
       "source_deletion_enabled": false,
       "credentials_read": false,
       "blocker": "Google rejects automated browser after account identification before password: browser or app may not be secure (rrk=46), two official entry routes checked",
@@ -45261,7 +45265,6 @@
       "owner_supplied_script_id": "1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF",
       "project_source_message_id": "1562094810528088185",
       "project_owner_independently_verified": false,
-      "remote_pilot_deployed": false,
       "drive_service_owner_confirmation_message_id": "1562096306967548047",
       "account_quota_independently_verified": false,
       "account_quota_evidence": {
@@ -45282,7 +45285,16 @@
       "source_gmail_access": "pre-existing organizer; unchanged",
       "source_permissions_created": 0,
       "source_content_unchanged": true,
-      "script_config_confirmation_message_id": "1562099964476399760"
+      "script_config_confirmation_message_id": "1562099964476399760",
+      "owner_editor_pilot_executed": true,
+      "cloud_project_created_by_owner": true,
+      "web_deployment_created": false,
+      "pilot_destination_file_id": "1wz1Lm5l8a-UnbQnm5xFsO1Om0LqAQTkR",
+      "pilot_sa_download_verified": true,
+      "pilot_source_and_copy_sha256": "11e123e5b495e5ed1a2ae5099b1cef94b6255a4c5f8302859b01a8b291793027",
+      "production_unattended_pipeline_active": false,
+      "copy_verification_receipt": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/pilot-copy-canonical-sa-verified-1562101859299364936.json",
+      "copy_execution_message_id": "1562101859299364936"
     }
   ],
   "profile_skill_references": [

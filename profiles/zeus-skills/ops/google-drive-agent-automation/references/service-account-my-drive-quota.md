@@ -41,6 +41,8 @@ The Apps Script management/execution API does not support Service Accounts (http
 
 For a one-file archive pilot, read the source's ancestry and ACL with the canonical Service Account before asking the Gmail identity to copy it. Pin the exact source ID, parent, drive, size and checksum plus exact destination in the copy-only code. A directly shared file need not expose its ancestor folders; do not grant the whole archive merely to satisfy an ancestry traversal. Inspect existing permissions before creating a grant; if the destination account already has sufficient access, preserve it and report that no permission was added. Keep the bounded pilot-code scope distinct from any broader access that already existed.
 
+For screenshot-only Apps Script receipts, do not treat OCR of opaque IDs as authoritative or repair lookalike characters. Resolve the exact copied file through the already-verified destination folder plus the approved source-ID/checksum property marker, require exactly one match, and use the API-returned ID for readback. Validate private ownership/parent/size/MD5 and stream both source and destination with the canonical Service Account to compare byte counts and SHA-256 without saving binary residue. Re-read the source metadata afterward. A successful one-file copy/retrieval is pilot proof only; require a real replay-reuse check and queue/consumer/lineage validation before calling unattended operation active, and never schedule the static one-file pilot as production.
+
 ### Official sources to refresh
 
 - Shared Drive ownership and pooled storage: https://developers.google.com/workspace/drive/api/guides/about-shareddrives
