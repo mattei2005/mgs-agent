@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-20T07:23:22.978487-04:00",
+  "status": "PASS",
+  "boundary_tests": 7,
+  "accounts": 52,
+  "accounts_with_spend": 30,
+  "campaigns": 685,
+  "sb_rows": 785,
+  "meta_readback_stable": true,
+  "sb_readback_stable": true,
+  "band_changes": [
+    {
+      "account_id": "7840111366055613",
+      "campaign_id": "120255653555680150",
+      "old_band": "0_a_15",
+      "new_band": "negativo"
+    },
+    {
+      "account_id": "7840111366055613",
+      "campaign_id": "120255673187480150",
+      "old_band": "acima_15",
+      "new_band": "0_a_15"
+    },
+    {
+      "account_id": "1600310064116258",
+      "campaign_id": "120257886899430151",
+      "old_band": "acima_15",
+      "new_band": "0_a_15"
+    },
+    {
+      "account_id": "2633813727134360",
+      "campaign_id": "52557775624635",
+      "old_band": "acima_15",
+      "new_band": "0_a_15"
+    }
+  ],
+  "combined_spend": "13646.38",
+  "combined_profit": "-510.52",
+  "dash_delta": "0.76"
+}
