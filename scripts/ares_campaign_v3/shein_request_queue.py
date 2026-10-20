@@ -270,6 +270,37 @@ def completion_text(s):
     return body
 
 
+def find_notice(job, channel, nonce, content, actor, get):
+    """Prove presence or absence since the original intent, not just page one."""
+    floor_text = job.get('delivery_intent_at') or job.get('enqueued_at')
+    floor = datetime.fromisoformat(floor_text) if floor_text else None
+    before = None
+    seen = set()
+    for page_number in range(1, 51):
+        path = '/channels/' + channel + '/messages?limit=100'
+        if before:
+            path += '&before=' + before
+        rows = get(path)
+        if not isinstance(rows, list):
+            raise ValueError('queue notice history incomplete')
+        for message in rows:
+            if not isinstance(message, dict) or message.get('channel_id') != channel:
+                raise ValueError('queue notice history channel mismatch')
+            if (message.get('author', {}).get('id') == actor
+                    and (str(message.get('nonce')) == nonce or message.get('content') == content)):
+                return {'message': message, 'complete': True, 'pages': page_number}
+        if len(rows) < 100:
+            return {'message': None, 'complete': True, 'pages': page_number}
+        dates = [datetime.fromisoformat(m['timestamp']) for m in rows]
+        if floor is not None and min(dates) < floor:
+            return {'message': None, 'complete': True, 'pages': page_number}
+        cursor = str(rows[-1].get('id') or '')
+        if not cursor or cursor in seen:
+            raise ValueError('queue notice history pagination invalid')
+        seen.add(cursor); before = cursor
+    raise ValueError('queue notice history coverage limit; no blind resend')
+
+
 def notify(job, s):
     """Deferred final only, as Ares; reconcile nonce and GET exact sent target."""
     from .shein_channel_authority import _get
@@ -279,15 +310,29 @@ def notify(job, s):
     nonce = 'sq' + re.sub('[^0-9]', '', job['request_id'])[-20:]
     content = job.get('native_completion_content') or completion_text(s)
     actor = _get('/users/@me')['id']
-    recent = _get('/channels/' + channel + '/messages?limit=100')
-    found = next((m for m in recent if (str(m.get('nonce')) == nonce or m.get('content') == content)
-                  and m.get('author', {}).get('id') == actor), None)
+    scan = find_notice(job, channel, nonce, content, actor, _get)
+    found = scan['message']
+    job['delivery_reconciliation'] = {'complete': scan['complete'], 'pages': scan['pages'],
+                                    'found': bool(found), 'checked_at': datetime.now(timezone.utc).isoformat()}
     if job.get('notification'):
         found = _get('/channels/' + channel + '/messages/' + job['notification'])
     if not found:
-        if job.get('delivery_intent_at'):
+        if job.get('native_completion_content') and job.get('delivery_intent_at'):
             raise ValueError('queue delivery uncertain; reconcile exact target before any resend')
-        job['delivery_intent_at'] = datetime.now(timezone.utc).isoformat()
+        if int(job.get('delivery_attempts') or 0) >= 3:
+            job['delivery_attention_required'] = True
+            atomic(job_path(BASE, job['request_id']), job)
+            raise ValueError('queue delivery retry limit; attention required, no duplicate POST')
+        if not scan['complete']:
+            raise ValueError('queue delivery scan incomplete; no resend')
+        import hashlib
+        digest = hashlib.sha256(content.encode()).hexdigest()
+        if job.get('delivery_payload_sha256') not in {None, digest}:
+            raise ValueError('queue delivery payload changed; reconcile before retry')
+        job['delivery_payload_sha256'] = digest
+        job.setdefault('delivery_intent_at', datetime.now(timezone.utc).isoformat())
+        job['delivery_attempts'] = int(job.get('delivery_attempts') or 0) + 1
+        job['delivery_last_attempt_at'] = datetime.now(timezone.utc).isoformat()
         atomic(job_path(BASE, job['request_id']), job)
         token = None
         for line in Path('/root/.hermes/profiles/ares/.env').read_text().splitlines():
@@ -306,6 +351,13 @@ def notify(job, s):
         except Exception as exc:
             job['delivery_error_type'] = type(exc).__name__
             job['delivery_http'] = getattr(exc, 'code', None)
+            if job['delivery_http'] == 429:
+                try:
+                    detail = json.loads(exc.read())
+                    delay = float(detail.get('retry_after', 300))
+                    job['delivery_retry_after_epoch'] = time.time() + max(1, min(delay, 3600))
+                except (ValueError, TypeError, AttributeError):
+                    pass
             atomic(job_path(BASE, job['request_id']), job)
             raise
         job['notification'] = found['id']; atomic(job_path(BASE, job['request_id']), job)
@@ -313,6 +365,10 @@ def notify(job, s):
     if read.get('content') != content or read.get('channel_id') != channel or read.get('author', {}).get('id') != actor:
         raise ValueError('queue final delivery readback mismatch')
     job.update(status='DELIVERED', notification=read['id'], completed_at=s.get('completed_at'))
+    job['delivery_confirmed_at'] = datetime.now(timezone.utc).isoformat()
+    for key in ['last_error_type', 'retry_after_epoch', 'delivery_error_type',
+                'delivery_retry_after_epoch', 'delivery_attention_required']:
+        job.pop(key, None)
     atomic(job_path(BASE, job['request_id']), job)
 
 
@@ -371,6 +427,33 @@ def tick(job, base=BASE):
     atomic(path, job)
 
 
+def delivery_attention(job):
+    """One technical escalation after bounded retries; never an origin warning."""
+    if not job.get('delivery_attention_required') or job.get('delivery_alert_intent_at'):
+        return
+    from .shein_channel_authority import _get
+    job['delivery_alert_intent_at'] = datetime.now(timezone.utc).isoformat()
+    atomic(job_path(BASE, job['request_id']), job)
+    try:
+        result = subprocess.run(['bash', str(BASE / 'scripts/send-report-infra-embed.sh'),
+            '--action', 'modificada', '--type', 'SHEIN completion delivery recovery',
+            '--path', 'SHEIN request ' + job['request_id'],
+            '--reason', 'Entrega de conclusão excedeu três tentativas reconciliadas; campanhas concluídas não devem ser reexecutadas.',
+            '--evidence', 'Request=' + job['request_id'] + '; conta=' + str(job['request'].get('account', 'n/d'))
+                + '; HTTP=' + str(job.get('delivery_http')) + '; conferir somente transporte e aviso na origem.'],
+            capture_output=True, text=True, timeout=60)
+        match = re.search(r'message_id=(\d+)', result.stdout)
+        if result.returncode or not match:
+            raise ValueError('queue delivery attention transport unavailable')
+        message = _get('/channels/1498132022634483894/messages/' + match.group(1))
+        if message.get('content') != '' or not message.get('embeds') or message.get('mentions'):
+            raise ValueError('queue delivery attention readback mismatch')
+        job['delivery_alert_message_id'] = message['id']
+    except Exception as exc:
+        job['delivery_alert_error_type'] = type(exc).__name__
+    atomic(job_path(BASE, job['request_id']), job)
+
+
 def work(base=BASE, max_seconds=None):
     directory = root(base) / 'queue'; directory.mkdir(parents=True, exist_ok=True)
     with (directory / 'worker.lock').open('a+') as lock:
@@ -392,8 +475,9 @@ def work(base=BASE, max_seconds=None):
                 try: tick(job, base)
                 except Exception as exc:
                     job.update(status='RECOVERY_PENDING', last_error_type=type(exc).__name__,
-                               retry_after_epoch=time.time() + 300)
+                               retry_after_epoch=max(time.time() + 300, float(job.get('delivery_retry_after_epoch') or 0)))
                     atomic(job_path(base, job['request_id']), job)
+                    delivery_attention(job)
             atomic(directory / 'worker.json', {'pid': os.getpid(), 'heartbeat_at': datetime.now(timezone.utc).isoformat(), 'pending': len(pending)})
             time.sleep(30)
 

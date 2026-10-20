@@ -45179,10 +45179,10 @@
       "id": "ares-creative-30tb-copy-pilot-20261020",
       "agent": "zeus",
       "type": "isolated-google-archive-copy-pilot-local-artifact",
-      "status": "owner_drive_service_reported_ready_readonly_account_preflight_pending",
+      "status": "destination_metadata_verified_script_config_pending",
       "authorization_message_id": "1562087305051902063",
       "source_thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T13:35:21.991578+00:00",
+      "updated_at": "2026-10-20T13:45:31.616002+00:00",
       "files": [
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/Pilot.js",
@@ -45196,13 +45196,13 @@
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/pilot-config.json",
-          "size_bytes": 254,
-          "sha256": "458147588dfedeae19560c677ed6dfe1f93da5ee67cc9fd95a3c04a3385af802"
+          "size_bytes": 285,
+          "sha256": "b379da05e68ea1f5ef6b1f13ee3a8330bd75317090d963c8469f0d13ce8323ff"
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/README.md",
-          "size_bytes": 3665,
-          "sha256": "10709a57f6a8ba17f292fe1105acae71acc357445a41282c269704334dd11e21"
+          "size_bytes": 3849,
+          "sha256": "d771f5fe039414c902c097bf1d949c4af5e75f6ca2ce667d72b2c6ecd84f21f7"
         },
         {
           "path": "/root/mgs-agent/tests/test_creative_archive_30tb_pilot.cjs",
@@ -45211,8 +45211,8 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
-          "size_bytes": 9090,
-          "sha256": "a0bdd8b9734c3c58200e73957c114c5298e6985a2da1694fdf48cb083975fdc8"
+          "size_bytes": 10861,
+          "sha256": "e294617a78672f6915b563c82bec2889c4e84ede9fb6eb2543f19ab3ea66cd71"
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/service-account-my-drive-quota.md",
@@ -45247,7 +45247,22 @@
       "project_owner_independently_verified": false,
       "remote_pilot_deployed": false,
       "drive_service_owner_confirmation_message_id": "1562096306967548047",
-      "account_quota_independently_verified": false
+      "account_quota_independently_verified": false,
+      "account_quota_evidence": {
+        "conta": "mgsdigitalcorp@gmail.com",
+        "limiteBytes": "32985348833280",
+        "usadoBytes": "13513052",
+        "usadoDriveBytes": "1721",
+        "lixeiraDriveBytes": "0"
+      },
+      "account_quota_evidence_type": "owner_execution_screenshot_readback",
+      "account_quota_source_message_id": "1562097493028638812",
+      "destination_service_account_access_verified": true,
+      "destination_folder_id": "1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J",
+      "destination_owner_verified": "mgsdigitalcorp@gmail.com",
+      "destination_service_account_role": "writer",
+      "destination_general_access": "restricted",
+      "destination_verification_source_message_id": "1562098879506153626"
     }
   ],
   "profile_skill_references": [

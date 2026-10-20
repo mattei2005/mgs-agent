@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "ADSPOWER-WARMING-20261008",
-      "next_step": "Executar somente o ciclo final já autorizado de 2026-10-20 às 09:32 America/New_York; depois encerrar sem recorrência. Hoje: 894=5/5,1130=3/3,1177=2/2,1190=4/4; quatro Reels completos, esperas 72/58/60/67s e fechamentos Inactive confirmados; zero comentários e zero pendências.",
-      "objective": "Rotina finita de aquecimento dos quatro perfis autorizados, zero comentários",
-      "source": "data/adspower-warming-20261008/runs/2026-10-19.json",
-      "state": "2026-10-19 completed; rotina aguardando último ciclo",
+      "next_step": "Concluir somente perfil 1190, agregar readback e encerrar ciclo final sem nova recorrência.",
+      "objective": "Rotina finita dos quatro perfis autorizados; zero comentários",
+      "source": "data/adspower-warming-20261008/runs/2026-10-20.json",
+      "state": "2026-10-20 em execução: 894 3/3,1130 4/4,1177 5/5; reels completos, esperas 50/60/50s e inactive confirmados.",
       "thread_id": "1557593341720526899",
-      "updated_at": "2026-10-19T13:46:58+00:00"
+      "updated_at": "2026-10-20T13:43:44+00:00"
     },
     {
       "agent": "ares",
@@ -623,12 +623,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Rodolfo colar e executar CheckAccount.js / verificarContaMGS no projeto 1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF; retornar log seguro conta/quota ou texto de aviso Google antes de avancar. Sem copia, deploy publico, triggers ou exclusao.",
+      "next_step": "No Apps Script, Rodolfo adicionar propriedade MGS_ARCHIVE_PILOT_CONFIG com JSON canonico em integrations/creative-archive-30tb/pilot-config.json e salvar. Destino exato 1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J; deleteSource false. Nao executar copia ainda. Antes do piloto resolver acesso Gmail somente ao arquivo fonte e validacao de ancestry sem compartilhar todo acervo.",
       "objective": "Implantar ponte Google isolada para arquivo criativo 30 TB sem PC pessoal e preparar politica limitada de limpeza autonoma",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "owner_reported_drive_service_ready_account_preflight_pending",
+      "state": "destination_owner_privacy_sa_editor_verified_pilot_config_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T13:35:01+00:00"
+      "updated_at": "2026-10-20T13:45:31+00:00"
     },
     {
       "agent": "ares",
@@ -4342,6 +4342,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-notification-1562097776429506722",
+      "next_step": "Nenhuma pendência da correção técnica; manter conferência manual solicitada ao Nicolas sem agir por ele. Não reenviar conclusão nem reexecutar campanhas encerradas.",
+      "objective": "Corrigir recorrência da falha de aviso final SHEIN, sem alterar campanhas e preservando conferência humana de Nicolas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/maintenance/notification-1562097776429506722/verification.json",
+      "state": "complete_verified: causa de transporte reproduzida com403 no user-agent urllib; canônico alcança api400/50006 para mensagem vazia inválida,zero mensagens. implementada reconciliação paginada até intenção original; retries3 com mesmo nonce/hash apenas após ausência completa; sem replay meta; alerta técnico único no limite; limpeza terminal.73 testes verdes. aviso1562093618091532339 confirmado por4 gets,post proibido e0post;delivered limpo; state/checkpoint meta com hashes inalterados; serviço próprio ativo com fonte nova. procedimento atualizado e validado.",
+      "thread_id": "1558134653242703935",
+      "updated_at": "2026-10-20T13:46:11+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-1560480639843569758",
       "next_step": "Sem pendencia neste pedido; campanhas habilitadas para o horario solicitado, entrega ainda nao comprovada",
       "objective": "Clonar C127 oito vezes na Yolokfx 02 G006 com 17 videos exatos em oito grupos, USD45/dia, COCAP USD0.90 e inicio 16/10/2026 00:30 ET",
@@ -4413,12 +4423,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1562023429690097665",
-      "next_step": "Responder recibo normal nesta origem; worker reconcilia conteúdo literal+autor/canal e marca aviso DELIVERED sem novo POST. Não reexecutar campanhas concluídas.",
-      "objective": "Quatro clones C01 Vizioid G006 concluídos; conferir fechamento normal ao solicitante.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/maintenance/queue-native-receipt-1562023429690097665/live-verification.json",
-      "state": "operation_complete_verified: 004-007,4 campanhas/4 conjuntos/10 anúncios active por get novo; usd20/dia cada,totalusd80/dia,cost_cap90c; qa4/4 com ids exatos; ids originais preservados. runner terminou20/10 09:06edt. apenas aviso automático falhou; resposta nativa preparada, sem declarar entrega antes do get. nenhum novo write meta nesta conferência.",
+      "next_step": "Aguardar conferência manual de Nicolas solicitada por Rodolfo. Não reexecutar campanhas nem duplicar aviso final.",
+      "objective": "Quatro clones C01 Vizioid G006 concluídos com aviso final confirmado.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/jobs/shein-1562023429690097665.json",
+      "state": "complete_delivery_verified: campanhas004-007/10 anúncios concluídos e anteriormente conferidos active; orçamentousd20/dia por campanha,totalusd80,deltapostousd80,cocapusd0.90. aviso nativo1562093618091532339 confirmado porget exato canal/autor/conteúdo;filadelivered sem erros residuais e sem novopost. correção de transporte validada separadamente no checkpoint ares-notification-1562097776429506722; nenhum novo write meta.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-10-20T13:21:50+00:00"
+      "updated_at": "2026-10-20T13:46:11+00:00"
     },
     {
       "agent": "ares",
@@ -6752,5 +6762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T13:35:01+00:00"
+  "updated_at": "2026-10-20T13:46:11+00:00"
 }

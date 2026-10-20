@@ -6,7 +6,7 @@
 - Requirement source: https://discord.com/channels/1185714635991679006/1562078493498540042/1562086632151322735
 - Related discussion: same thread; source creative audit thread 1562077031099793439.
 - Approved operational requirement: managers place creative media in the existing upload folder; Ares coordinates treatment, archiving, validation, inventory reconciliation and source cleanup unattended, without routine approval per file or dependency on Rodolfo's computer.
-- Target account stated by Rodolfo: mgsdigitalcorp@gmail.com, with 30 TB available according to him. Account capacity and exact destination folder have not been independently verified.
+- Target account: mgsdigitalcorp@gmail.com. Its account identity and storage limit are evidenced by Rodolfo's successful Google account/quota execution screenshot below. Exact destination folder ownership/privacy and canonical Service Account Editor access were subsequently verified by live API metadata. Copying and cleanup remain unverified and inactive.
 - No additional Workspace storage purchase is requested.
 
 ## Status — implementation approved; owner-created project received, setup pending
@@ -21,7 +21,7 @@ Historical pre-retry blocker (superseded): the isolated browser reached Google s
 
 Historical pre-retry metadata scan (superseded): the canonical 1Password Service Account CLI remained available. A credential-safe metadata search of accessible items did not locate a Google account Login for `mgsdigitalcorp@gmail.com`; only the canonical Service Account and unrelated Google Ads credentials were identified. No password/secret fields were read in that pre-retry scan. Do not infer that the browser backend being locked means canonical 1Password itself is unavailable.
 
-Zeus has not created a remote Apps Script project, archive destination folder, new permission, scheduler, copy or deletion. Rodolfo subsequently supplied the owner-created project below. The exact 30 TB destination, account storage quota, script consent and canonical Service Account destination readback remain unverified.
+Zeus has not created a remote Apps Script project, archive destination folder, new permission, scheduler, copy or deletion. Rodolfo supplied the owner-created project, successful account/quota execution and archive folder below. Canonical Service Account destination metadata readback passed. Source access by the Gmail copying identity and an actual end-to-end copy remain pending.
 
 ## Latest retry — credential located; Google browser-security rejection
 
@@ -38,7 +38,11 @@ Zeus's browser-security rejection remains unresolved; Rodolfo confirmed access t
 - Exact project ID: `1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF`.
 - Intended owner account: `mgsdigitalcorp@gmail.com`; reported by Rodolfo, not yet independently verified.
 - Rodolfo reported Advanced Drive service setup complete in message 1562096306967548047; this is owner-reported, not independently inspected by Zeus.
-- Next single setup step: paste and run the read-only `CheckAccount.js` function `verificarContaMGS` through the owner-supported browser and return its safe account/quota log. No file creation, copying, permission changes, triggers or source removal are in this function. Six new offline contract tests pass, and the combined pilot/preflight suite has 22 passing tests; these are not Google runtime receipts. Do not deploy publicly or enable triggers.
+- Rodolfo supplied execution screenshot `/root/.hermes/profiles/zeus/cache/images/img_49b4e0c56157.png` in message 1562097493028638812. Visual readback shows `Execution completed` and the exact real log: `{"conta":"mgsdigitalcorp@gmail.com","limiteBytes":"32985348833280","usadoBytes":"13513052","usadoDriveBytes":"1721","lixeiraDriveBytes":"0"}`. This verifies the owner-executed account/quota preflight from supplied screenshot evidence, not an independent Service Account probe or full pipeline proof.
+- Destination supplied in message 1562098879506153626: `https://drive.google.com/drive/folders/1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`. Exact canonical Service Account `files.get` returned HTTP 200: name `MGS-ARQUIVO`, folder MIME, non-trashed, no `driveId`, owner `mgsdigitalcorp@gmail.com`, canonical SA permission `writer`, `canEdit=true`, `canAddChildren=true`, `canModifyContent=true`. Permissions comprise only the owner and canonical SA; no public/domain grant. This proves existing destination access, not Service Account upload quota.
+- Source pilot metadata was refreshed with canonical SA: ID `1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N`, parent `1iGO8km_WVwbIppLotf1h1kZ7W0UKUxz1`, version `12`, size `5375929`, MD5 `59065739912275ee5995bfee8d5ca9c7`, copy/share capabilities true; no source mutation.
+- Next single setup step: owner adds Script Property `MGS_ARCHIVE_PILOT_CONFIG` with the bounded JSON in `integrations/creative-archive-30tb/pilot-config.json`, now containing the exact verified destination and `deleteSource=false`. No code execution or public deployment yet. Before the copy, grant only the required pilot source read scope to the Gmail account, resolve source-ancestry visibility without broad sharing, and validate the copying code. No triggers or source cleanup are enabled.
+- Six new offline preflight contract tests and the combined pilot/preflight suite passed (22 tests). These tests remain separate from the actual owner-executed Google account/quota receipt.
 - Apps Script API documentation explicitly states that its API does not work with Service Accounts. Do not ask Rodolfo to share the script with the canonical Service Account as a supposed way to remotely manage or execute the script. File access through Drive and Apps Script API support are different gates. Preserve Service Account authentication for agent Drive/Sheets consumers; owner-side isolated script setup/consent remains necessary.
 
 ## Proposed isolated architecture, pending approval and proof
