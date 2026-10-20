@@ -108,6 +108,10 @@ class Drive:
         self.folder_cache: dict[tuple[str, str], str] = {}
 
     def request(self, url: str, *, method: str = "GET", data: bytes | None = None, headers: dict[str, str] | None = None, timeout: int = 60) -> Any:
+        if method not in ['GET','HEAD'] and url.startswith('https://www.googleapis.com/drive/v3/files/'):
+            import ares_autonomous_intake as intake
+            fid=urllib.parse.urlparse(url).path.rsplit('/',1)[-1]
+            intake.assert_source_writer(fid,os.environ.get('ARES_INTAKE_BATCH_ID'))
         h = {"Authorization": "Bearer " + self.token, "User-Agent": "mgs-ares"}
         if headers:
             h.update(headers)

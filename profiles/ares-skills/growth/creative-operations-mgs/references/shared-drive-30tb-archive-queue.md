@@ -28,6 +28,14 @@ python3 /root/mgs-agent/scripts/ares_archive_bridge.py enqueue-lineage --asset-i
 5. O comando sem `--apply` é dry-run: apenas leituras/download em streaming e plano. Não cria pastas remotas ou arquivos de mídia. O job é estável por IDs/hashes/path; reexecução reaproveita o manifesto e não cria um novo pedido independente.
 6. O worker copia apenas jobs publicados pela SA canônica, verificados pelo `permissionId` nativo fixado de `lastModifyingUser` + hash do corpo, com origem/pasta de arquivo fixas. E-mail omitido entre contas é possível; e-mail/nome/propriedade editável sozinho nunca comprova autor. Não transforma texto de um manifesto em autorização irrestrita. Usa lock, marcadores por fonte/checksum, bloqueio de replay ambíguo, limites por execução e orçamento de runtime. Não possui função de exclusão da origem. `File.version` é contador de alterações do servidor, não hash de conteúdo: preservar a versão congelada para auditoria e seguir o gate forte de SHA nativo + streams da implementação vigente; jamais ignorar divergência de bytes/path ou reescrever o pedido para passar.
 
+## Intake autônomo e exclusividade
+
+O job nativo Ares `528c5710269d` usa os 114 IDs registrados em `upload-context-layout.json`, não o filename, para operação/gestor. O contrato completo está em `integrations/creative-archive-30tb/AresIntakeJobPrompt.txt`; o estado vivo está em `intake-config.json` e `intake-state.json` no mesmo diretório da fila.
+
+Antes de qualquer writer manual tocar uma fonte, consultar `ares_autonomous_intake.assert_source_writer(source_id)`; uma fonte reclamada por batch ativo não pode ganhar outro executor. O executor dono informa o batch exato em `ARES_INTAKE_BATCH_ID` nas primitivas mutantes e retoma seu plano persistido. Nunca roubar claim nem substituir source IDs depois de timeout.
+
+Após tratamento, o verificador `complete` publica pelo lock único e pode retornar `waiting_archive`: aguardar receipt/ACK/atalhos; isso não é conclusão. `archive_ready` retoma somente `complete`, sem novo tratamento. O job de intake é local/silencioso; Zeus monitora sua saúde e faz escalonamento quando necessário.
+
 ## Conferência e leitura
 
 ```
@@ -43,7 +51,7 @@ A fila usa registros laterais de arquivo, não muda `asset_id`, `source_drive_id
 python3 /root/mgs-agent/scripts/ares_archive_bridge.py resolve --source-id <id>
 ```
 
-Por padrão, mantém o ID original. `--use-verified` permite consultar um mapeamento lateral já verificado, sem promover elegibilidade. `prefer_archive_reads` permanece desabilitado nesta fase. Antes de excluir qualquer ID antigo, integrar e testar todos os consumidores/links e validar permissões humanas equivalentes nos novos destinos; a aprovação desta skill não dispensa esse gate.
+Por padrão, mantém o ID original. `--use-verified` permite consultar um mapeamento lateral já verificado, sem promover elegibilidade. Consultar `prefer_archive_reads` vivo: somente quando true usar `ares_archive_storage` nos consumidores integrados. O catálogo `mgs.logical.media.v1` preserva o ID lógico e expõe `provider_id` e `stock_file_id` reais separadamente; não é resposta bruta da API Google. Baixar pelo provider verificado; movimentar somente o atalho de estoque dentro dos status da mesma operação, jamais a cópia proprietária. Arquivo retido + atalho representam uma candidata, não duas. Canários validationOnly nunca geram mappings de produção. Linhagem nova fica indisponível para campanha até ACK/atalhos e liberação do batch; isso não muda elegibilidade ou reserva. Antes de excluir qualquer ID antigo, integrar e testar todos os consumidores/links e validar permissões humanas equivalentes nos novos destinos; a aprovação desta skill não dispensa esse gate.
 
 ## Limites de ativação
 

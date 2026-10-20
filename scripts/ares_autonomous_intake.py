@@ -75,6 +75,12 @@ def claim(state,batch,owner):
         return entry
     entry={'owner':owner,'batch':batch,'status':'claimed','claimed_at':bridge.now_iso()};claims[batch['batch_id']]=entry;return entry
 
+def assert_source_writer(source_id,batch_id=None):
+    state=bridge.read_json(STATE,{'claims':{}})
+    for bid,entry in state.get('claims',{}).items():
+        if entry.get('status')!='complete' and any(s['source_id']==source_id for s in entry['batch']['sources']) and bid!=batch_id:raise IntakeError('SOURCE_ALREADY_OWNED_BY_AUTONOMOUS_INTAKE')
+    return True
+
 def complete(state,bid,owner,proofs):
     entry=state.get('claims',{}).get(bid)
     if not entry or entry['owner']!=owner:raise IntakeError('CLAIM_OWNER')
@@ -87,6 +93,18 @@ def complete(state,bid,owner,proofs):
 def batch_archive_ready(entry,index):
     ids=entry.get('archive_source_ids')
     return isinstance(ids,list) and all(index.get('mappings',{}).get(sid,{}).get('verified') is True and bool(index['mappings'][sid].get('stockShortcutId')) for sid in ids)
+
+def health(now=None):
+    cfg=bridge.read_json(CONFIG,{})
+    if cfg.get('live_treatment_enabled') is not True:return {'status':'disabled'}
+    tick=bridge.read_json(DATA/'intake-monitor-last-tick.json',{})
+    try:age=(bridge.timestamp(now or bridge.now_iso())-bridge.timestamp(tick['at'])).total_seconds()
+    except (KeyError,bridge.ArchiveError):return {'status':'blocked','reason':'INTAKE_MONITOR_MISSING'}
+    if tick.get('owner_job_id')!=cfg['owner_job_id'] or not -60<=age<=2700:return {'status':'blocked','reason':'INTAKE_MONITOR_STALE_OR_WRONG_OWNER'}
+    error=bridge.read_json(DATA/'intake-last-error.json',{})
+    if error.get('status')=='blocked':return {'status':'blocked','reason':'INTAKE_EXECUTION_ERROR','diagnostic':'intake-last-error.json'}
+    if tick.get('result',{}).get('status')=='blocked':return {'status':'blocked','reason':'INTAKE_MONITOR_BLOCKED'}
+    return {'status':'ok'}
 
 def finish_with_archive(state,batch,owner):
     entry=state['claims'][batch['batch_id']]
@@ -236,6 +254,9 @@ def main():
                     if not entry or entry['owner']!=args.owner or not isinstance(entry.get('inventory_before'),dict):raise IntakeError('FROZEN_INVENTORY_BASELINE_REQUIRED')
                     result=finish_with_archive(state,batch,args.owner)
         if isinstance(result,dict) and 'inventory_before' in result:result={k:v for k,v in result.items() if k!='inventory_before'}
+        if args.action in ['complete','selftest-complete']:
+            previous=bridge.read_json(DATA/'intake-last-error.json',{})
+            if previous.get('status')=='blocked':bridge.atomic_json(DATA/'intake-last-error.json',{'status':'recovered','at':bridge.now_iso(),'previous_error':previous,'recovered_action':args.action,'batch_id':args.batch_id})
         print(json.dumps(result,ensure_ascii=False));return 0
     except Exception as exc:
         error={'status':'blocked','reason':str(exc)[:220],'at':bridge.now_iso(),'scope':'intake_only','delete_source':False};bridge.atomic_json(DATA/'intake-last-error.json',error);print(json.dumps({k:v for k,v in error.items() if k!='at'}));return 2
