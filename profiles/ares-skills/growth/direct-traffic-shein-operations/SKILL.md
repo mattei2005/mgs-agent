@@ -17,7 +17,7 @@ Skill específica da vertical SHEIN em tráfego direto Meta para os Estados Unid
 
 ## Padrão global vigente — todas as 36 contas SHEIN
 
-Por autorização explícita de Rodolfo nesta Diretoria e reforço na mensagem `1561784289786466416`, as últimas mudanças passaram a valer para **todos os seis sites, seis gestores e 36 threads Intraday**, não somente YOLO. Fonte única: `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout/account_report_overrides` e perfil `format_profiles.SHEIN_ALL36_UNIFORM_G001_CAPS_V1`, política `ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019`. Cada binding conta/nome/thread precisa coincidir com o catálogo e o GET Meta atual.
+Resolva o padrão de todos os sites, gestores e threads SHEIN pelo contrato vivo `SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`: combine `account_report_overrides`, `format_profiles`, `budget_used_standard`, `numeric_width_standard` e `campaign_status_blocks`. Um perfil-base isolado não representa as regras efetivas de apresentação. Reconcile conta/nome/thread com o catálogo e o GET Meta atual antes da coleta; use os bindings atuais para definir o alcance de cada pedido, sem herdar exclusividade histórica de YOLO.
 
 Colunas vigentes para próximos snapshots: **R/E → Início → Nº → St → Produto → Quiz → RPS → Bid → Gasto → B.U.% → Rev → Saldo → Health → ROI → ROI E. → ROAS → Lance**. Grade principal mínima160 nos novos relatórios, por `numeric_width_standard`: Gasto6, B.U.%7 e Saldo7 com expansão autorizada se necessária; largura única por coluna nos blocos do mesmo relatório. Nº13 e Produto12 sem reticências permanecem. A grade157 dos perfis-base é histórica/compatibilidade e não bloqueia essas três colunas. **St:** ACTIVE=A, PAUSED=P, DELETED=D, ARCHIVED=A apenas na apresentação; manter os estados técnicos distintos. **RPS:** copiar da coluna visível da dash SB por conta/campanha/data/moeda, sem API/fórmula local. **B.U.%:** gasto Meta da campanha no dia civil do relatório/daily_budget Meta da própria campanha ×100, conforme vigência de `account_budget_display_overrides` e `budget_used_standard`; não é orçamento restante. **Principal:** ROI estimado real decrescente, n/d ao final. **Histórico:** número da campanha crescente, sete datas e Média7d. Marcadores COPY continuam; avisos de origem somente no audit.
 
@@ -270,6 +270,15 @@ O produto/ângulo mostrado no vídeo deve ser identificado por evidência visual
 Conclusão: produto visual, idioma e claim não dependem do nome bruto.
 
 ## Relatórios e otimização
+
+### Lotes por gestor e fusos diferentes
+
+1. Diferencie aprovação de padrão de pedido de envio: atualizar o layout não publica relatórios; quando o usuário aprovar a amostra e pedir os demais gestores, execute a coleta e entrega das contas desses gestores, sem repetir a amostra já concluída nem pedir nova confirmação do mesmo layout.
+2. Congele os bindings solicitados por conta/thread e conte a cobertura por gestor antes da coleta. Em cada identidade Meta, valide ID, nome e moeda e leia o `timezone_name` real; não exija que todas as contas tenham o fuso da primeira. Calcule a data civil e o histórico por conta, pois contas do mesmo lote podem estar em dias diferentes.
+3. Persista as fontes por conta e valide as colunas usando as regras efetivas, incluindo as larguras adaptativas já autorizadas. Separe erro de fórmula B.U.% de excesso visual; não recalcule orçamento restante nem peça aprovação de largura novamente para Gasto/B.U.%/Saldo cobertos pela política.
+4. Revalide status por GET em lotes bounded antes da publicação, preservando o financeiro e declarando o horário de status separado. Valide cada relatório e destino; publique em grupos recuperáveis por gestor, persistindo intenção, nonce, IDs e GET de cada parte. Feche o pedido somente após reconciliar todos os bindings solicitados com as entregas verificadas.
+
+Receita de coleta, batch GET e recibos: `references/canonical-report-renderer.md`, seção `Lotes multigestor — coleta e publicação recuperáveis`.
 
 ### Gate obrigatório — renderer único e vínculo da thread
 

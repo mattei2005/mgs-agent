@@ -4363,12 +4363,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-g002-g006-approved-20261019T221027",
-      "next_step": "Materializar/validar30modelos com padrao atual e conservar cortes;readback consolidado de status/destinos;publicar por gestor com journal e GET de cada parte.",
+      "next_step": "Sem pendencias. Proximos pedidos usam contrato/renderer vigente; preservar historico e nao reenviar lote concluido. IDs/partes e evidencias em completion.json e delivery.json por conta.",
       "objective": "Gerar e entregar30relatorios SHEIN G002-G006 no padrao G001 aprovado por Rodolfo",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/g002-g006-approved-20261019T221027/request.json",
-      "state": "coleta persistida:30contas meta verificadas;551campanhas com entrega;meta diario/config/destinos e sb7datas persistidos por conta. rps copiado da dash usd em17paginas,573linhas do recorte;moeda/dimensoes/data no mesmo contexto.25contas edt,5pdt conservadas;sem supor fuso unico.0publicacoes neste lote.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/g002-g006-approved-20261019T221027/completion.json",
+      "state": "concluido_get_verificado:30contas/30threads unicas,6relatorios por gestor g002-g006.551campanhas e145partes publicadas com nonce/journal e getexato.10contas sem entrega com nd,cabecalhos e0linhas inventadas. financeiro19/10 22:11-22:12edt;rpsui22:17edt em17paginas,cobertura integral;status22:19edt.25contas edt e5pdt reais preservadas;usd. ativas/pausadas separadas,bu gastometa/budgetmeta e larguras adaptativas canonicas.0deletes,0metawrite,0cron,0republicacaog001.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T02:18:34+00:00"
+      "updated_at": "2026-10-20T02:22:03+00:00"
     },
     {
       "agent": "ares",
@@ -6642,5 +6642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T02:18:34+00:00"
+  "updated_at": "2026-10-20T02:22:03+00:00"
 }
