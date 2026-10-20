@@ -653,12 +653,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Owner cancelar popup repetido e mostrar appsscript.json; preservar dependencias/config e declarar Drive + script.scriptapp, aplicar guard do Bootstrap e conceder somente escopos previstos. Reexecutar mesmo mgsArquivoTeste; depois validar receipt/heartbeat e ACK canario 526d7a2a007c1fed4b2a9147f92d62b4 pela SA antes de mgsArquivoAtivar. Producao, exclusao e acervo anterior continuam desligados. Evidencia de recovery preparado na fonte; Google ainda nao recuperado.",
+      "next_step": "Manifesto remoto completo confirmado na imagem da mensagem 1562131946102980638: nao declara oauthScopes. Owner aplicar manifesto preservado com Drive e script.scriptapp e guard requireScopes antes de var codigo; salvar e executar somente mgsArquivoTeste na conta autorizada. Depois validar receipt/heartbeat/SA ACK do mesmo canario antes de mgsArquivoAtivar. Producao e exclusao continuam bloqueadas; correcao Google ainda nao aplicada/validada.",
       "objective": "Integrar fila de arquivo 30 TB e skills Ares preservando acervo/campanhas; exclusao desativada durante validacao",
-      "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "owner_worker_oauth_scope_blocked_manifest_required",
+      "source": "data/ares/creative-ops/30tb-archive/owner-manifest-inspected-1562131946102980638.json",
+      "state": "owner_manifest_missing_explicit_scopes_confirmed",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T15:04:47+00:00"
+      "updated_at": "2026-10-20T15:56:58+00:00"
     },
     {
       "agent": "ares",
@@ -6832,5 +6832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T15:55:07+00:00"
+  "updated_at": "2026-10-20T15:56:58+00:00"
 }

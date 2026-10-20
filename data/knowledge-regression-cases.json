@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30",
+  "updated_at": "2026-10-20T15:56:27.892465+00:00",
   "cases": [
     {
       "id": "KR-001",
@@ -264,6 +264,19 @@
         "Domínio ausente pode ser consultado",
         "Autorização de usuário supera este gate"
       ]
+    },
+    {
+      "id": "KR-022",
+      "question": "Qual é o escopo operacional do Ares e o ownership de app amplia esse escopo?",
+      "source": "context/ares-asset-scope.md",
+      "required_all": [
+        "155263197283282",
+        "Smart Bidding",
+        "1299247318762949",
+        "check-account",
+        "não autorizam"
+      ],
+      "forbidden_any": []
     }
   ]
 }

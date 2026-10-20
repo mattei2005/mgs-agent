@@ -1,0 +1,41 @@
+{
+  "source_message_id": "1562131946102980638",
+  "observed_at": "2026-10-20T15:56:58.073016+00:00",
+  "evidence": "owner screenshot img_c8c9bbf1050e.png; complete appsscript.json visible",
+  "observed_manifest": {
+    "timeZone": "America/New_York",
+    "dependencies": {
+      "enabledAdvancedServices": [
+        {
+          "userSymbol": "Drive",
+          "version": "v3",
+          "serviceId": "drive"
+        }
+      ]
+    },
+    "exceptionLogging": "STACKDRIVER",
+    "runtimeVersion": "V8"
+  },
+  "oauth_scopes_absent": true,
+  "proposed_manifest": {
+    "timeZone": "America/New_York",
+    "dependencies": {
+      "enabledAdvancedServices": [
+        {
+          "userSymbol": "Drive",
+          "version": "v3",
+          "serviceId": "drive"
+        }
+      ]
+    },
+    "exceptionLogging": "STACKDRIVER",
+    "runtimeVersion": "V8",
+    "oauthScopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/script.scriptapp"
+    ]
+  },
+  "remote_fix_applied": false,
+  "google_execution_recovered": false,
+  "next_step": "owner replace manifest preserving timezone/Drive v3/logging/runtime; add prepared requireScopes guard before dynamic worker load; save and run only mgsArquivoTeste with all two declared scopes granted; require canonical SA receipt/ACK before activation"
+}

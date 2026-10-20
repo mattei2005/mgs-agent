@@ -45312,8 +45312,8 @@
       "id": "ares-creative-30tb-copy-queue-integration-20261020",
       "agent": "zeus",
       "type": "copy-only-archive-queue-and-authorized-ares-skill-update",
-      "status": "owner_worker_oauth_scope_blocked_local_fix_ready",
-      "updated_at": "2026-10-20T15:04:47.285694+00:00",
+      "status": "owner_manifest_missing_explicit_scopes_confirmed",
+      "updated_at": "2026-10-20T15:56:58.073016+00:00",
       "authority_message_id": "1562104715271999589",
       "thread_id": "1562078493498540042",
       "registry_id": "ARES-CREATIVE-30TB-QUEUE-INTEGRATION-20261020",
@@ -45448,6 +45448,11 @@
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/oauth-scope-recovery-prepared-1562116310215958579.json",
           "size_bytes": 1351,
           "sha256": "b7613dd0fbc659672c1bf13ac67bfef37471f68755afb4983315f330016de0d3"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/owner-manifest-inspected-1562131946102980638.json",
+          "size_bytes": 1325,
+          "sha256": "7e1ea545b39cf2f05d68a9664a3f72b3a8fdfb196a0fdef04ac4d024d30ddc32"
         }
       ],
       "critical_live_skill_files": 5,
@@ -45485,11 +45490,11 @@
       "primary_creative_inventory_writes": 0,
       "google_auth_selector_changes": 0,
       "new_google_acl_grants": 0,
-      "next_gate": "owner show current appsscript.json; explicit planned scopes + bootstrap guard; same canary retry, then real receipt/heartbeat/SA ACK; no production or deletion activation",
+      "next_gate": "owner replace manifest preserving timezone/Drive v3/logging/runtime; add prepared requireScopes guard before dynamic worker load; save and run only mgsArquivoTeste with all two declared scopes granted; require canonical SA receipt/ACK before activation",
       "oauth_scope_recovery": {
         "source_message_id": "1562116310215958579",
         "scope_error": "drive.files.create",
-        "remote_manifest_inspected": false,
+        "remote_manifest_inspected": true,
         "local_regression_red_failures": 3,
         "local_regression_green": true,
         "owner_worker_attempted": true,
@@ -45502,7 +45507,9 @@
         "required_scopes": [
           "https://www.googleapis.com/auth/drive",
           "https://www.googleapis.com/auth/script.scriptapp"
-        ]
+        ],
+        "remote_manifest_oauth_scopes_absent": true,
+        "manifest_evidence_message_id": "1562131946102980638"
       }
     },
     {
@@ -45517,7 +45524,41 @@
       "scope": "Auditoria do escopo corporativo SB, documentação e alcance técnico do Ares. Identificadores privados não são replicados no inventário compartilhado.",
       "status": "audit_completed_critical_remediation_not_applied",
       "validation": "Manifesto local, consultas Meta/SB read-only, metadados de continuidade e aprendizagem validados; nenhuma exclusão ou alteração de permissão/credencial.",
-      "updated_at": "2026-10-20T14:53:36.205202+00:00"
+      "updated_at": "2026-10-20T14:53:36.205202+00:00",
+      "remediation_record_id": "zeus-ares-scope-cutover-1562127427151339701",
+      "remediation_status": "authorized_local_scope_completed_no_meta_permission_change"
+    },
+    {
+      "id": "zeus-ares-scope-cutover-1562127427151339701",
+      "agent": "zeus",
+      "type": "approved_local_operational_scope_and_targeted_history_redaction",
+      "authorization_message_id": "1562127427151339701",
+      "source_thread_id": "1562104297926295623",
+      "paths": [
+        "/root/mgs-agent/data/ares/asset-scope.json",
+        "/root/mgs-agent/context/ares-asset-scope.md",
+        "/root/mgs-agent/data/mgs-domain-scope.json",
+        "/root/mgs-agent/context/security-policies.md",
+        "/root/.hermes/profiles/ares/SOUL.md",
+        "/root/mgs-agent/profiles/ares-soul.md",
+        "/root/mgs-agent/context/ares-operational-map.md",
+        "/root/mgs-agent/context/monetization.md",
+        "/root/mgs-agent/scripts/mgs-domain-scope.py",
+        "/root/mgs-agent/scripts/mgs-ares-asset-scope.py",
+        "/root/mgs-agent/scripts/ares-meta-common.py",
+        "/root/mgs-agent/tests/test_mgs_domain_scope.py",
+        "/root/mgs-agent/tests/test_mgs_ares_asset_scope.py",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/knowledge-inbox.jsonl",
+        "/root/mgs-agent/data/knowledge-regression-cases.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "evidence_path": "/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701/completion.json",
+      "status": "completed_validated_with_separate_global_version_assertion_residual",
+      "scope": "Contas Digital Trust e hosts corporativos SB; exceção técnica de app preservada. Nenhuma alteração Meta ACL, credencial, campanha ou budget. Atena inalterada.",
+      "validation": "41 testes focados PASS; canário Ares com política no prompt e zero ferramentas; helper bloqueia fora do cadastro antes do HTTP; app e contas permitidas HTTP200; SQLite/FTS sem referências operacionais privadas.",
+      "separate_residual": "KR-014 fixa versão de engine diferente da config atual; engine e asserção existente não foram alterados.",
+      "updated_at": "2026-10-20T15:57:27.817598+00:00"
     }
   ],
   "profile_skill_references": [
