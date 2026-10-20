@@ -49,4 +49,15 @@ def materialize(engine,bundle,transport,record,entries):
             raise ValueError('prestaged fallback creative definition/account mismatch')
     attaches=[BatchOperation(f'prestaged_fallback_attach_{ci}_{ai}','POST',resolved[(ci,ai)],body={'creative':{'creative_id':creatives[f'{ci}.{ai}']},'name':ad.name,'status':'PAUSED'},kind='ad_update') for ci,ai,ad,_,_ in entries]
     engine._batch(bundle,transport,attaches,'prestaged_two_phase_attach')
+    ad_checks=[BatchOperation(f'fallback_ad_verify_{ci}_{ai}','GET',resolved[(ci,ai)]+'?fields=id,account_id,adset_id,source_ad_id,name,status,configured_status,creative{id}',kind='readback') for ci,ai,_,_,_ in entries]
+    verified=engine._batch(bundle,transport,ad_checks,'prestaged_two_phase_ad_readback')
+    byname={x.name:x.body for x in verified}
+    for ci,ai,ad,setid,_ in entries:
+        row=byname[f'fallback_ad_verify_{ci}_{ai}']
+        if (str(row.get('id'))!=resolved[(ci,ai)] or str(row.get('account_id'))!=str(bundle.account_id)
+            or str(row.get('adset_id'))!=str(setid) or str(row.get('source_ad_id'))!=str(ad.source_ad_id)
+            or row.get('name')!=ad.name or row.get('status')!='PAUSED'
+            or str((row.get('creative') or {}).get('id'))!=creatives[f'{ci}.{ai}']):
+            raise ValueError('prestaged fallback attach readback mismatch')
+        record.setdefault('prestaged_fallback_ad_readbacks',{})[f'{ci}.{ai}']=row
     return resolved

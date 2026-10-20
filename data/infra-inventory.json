@@ -45161,6 +45161,72 @@
           "size_bytes": 52514
         }
       ]
+    },
+    {
+      "id": "ares-creative-30tb-autonomous-requirements-20261020",
+      "agent": "zeus",
+      "type": "requirements-and-continuity-only",
+      "status": "requirements_recorded_activation_blocked",
+      "source_message_id": "1562086632151322735",
+      "source_thread_id": "1562078493498540042",
+      "canonical_source": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
+      "registry_id": "ARES-CREATIVE-30TB-AUTONOMY-20261020",
+      "checkpoint_id": "ARES-CREATIVE-30TB-1562078493498540042",
+      "scope": "Unattended creative workflow requirement; no Google authentication/permissions/scheduler/deletions changed",
+      "updated_at": "2026-10-20T12:56:15.168914+00:00"
+    },
+    {
+      "id": "ares-creative-30tb-copy-pilot-20261020",
+      "agent": "zeus",
+      "type": "isolated-google-archive-copy-pilot-local-artifact",
+      "status": "local_tests_passed_google_login_blocked_not_deployed",
+      "authorization_message_id": "1562087305051902063",
+      "source_thread_id": "1562078493498540042",
+      "updated_at": "2026-10-20T13:03:31.984510+00:00",
+      "files": [
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/Pilot.js",
+          "size_bytes": 6469,
+          "sha256": "016d2e6ddbe3c0039541e2ed32e7caa62457f13a00ad2c5567864171d6dc6a6f"
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/appsscript.json",
+          "size_bytes": 293,
+          "sha256": "d7619db47bb7c4f71761d561d50a1438a407710197782635d916281173f8cf4c"
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/pilot-config.json",
+          "size_bytes": 254,
+          "sha256": "458147588dfedeae19560c677ed6dfe1f93da5ee67cc9fd95a3c04a3385af802"
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/README.md",
+          "size_bytes": 3328,
+          "sha256": "5cdfbfa0e52c70f39771c411449c6467435c15a594dc4d33c0c00a4bf7394f73"
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_creative_archive_30tb_pilot.cjs",
+          "size_bytes": 3352,
+          "sha256": "3784fa537ebea802bd0e920899a9f0c2d395c8e8231cd08e6a875c7991cd5390"
+        },
+        {
+          "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
+          "size_bytes": 6374,
+          "sha256": "d5c9a8c55d580e2c7798ae00b2d581405df77bb63c73861c7f3a4837105e1c99"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/service-account-my-drive-quota.md",
+          "size_bytes": 6964,
+          "sha256": "553264e48f554f46f231007a0b24701773185d019f0092356ece98ad42a7cb8f"
+        }
+      ],
+      "offline_tests": 16,
+      "real_source_metadata_http": 200,
+      "cloud_copy_verified": false,
+      "cloud_project_created": false,
+      "source_deletion_enabled": false,
+      "credentials_read": false,
+      "blocker": "Google account sign-in required; no identifiable target Login in accessible 1Password item metadata"
     }
   ],
   "profile_skill_references": [

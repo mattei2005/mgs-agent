@@ -20,7 +20,8 @@ def allows_elapsed_campaign(value):
     context=APPROVED_RESUME.get()
     if not context or (context.get('verified') or {}).get('verified') is not True:return False
     candidates=context['state']['target_manifest'].get('campaigns') or []
-    return (context['descriptor'].get('start_now') is True and len(candidates)==1 and value==candidates[0]
+    return (context['descriptor'].get('start_now') is True
+            and len(candidates)==int(context['descriptor'].get('quantity',0)) and value in candidates
             and value.get('account_id')==context['descriptor']['account_id'] and value.get('status')=='ACTIVE')
 
 
@@ -74,15 +75,23 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
              ('bid_strategy','bid_strategy'),('bid_usd','bid_usd'),('status','status')]
     if any(str(descriptor.get(a)) != str(original.get(b)) for a,b in pairs):
         raise ValueError('continuation changed immutable request scope')
-    if descriptor.get('start_now') is not True or int(descriptor.get('quantity',0)) != int(original.get('quantity',1)) or int(descriptor['quantity']) != 1 or original['status'] != 'ACTIVE':
-        raise ValueError('continuation requires explicit NOW for one existing ACTIVE-intent request')
+    quantity = int(original.get('quantity',1))
+    if descriptor.get('start_now') is not True or int(descriptor.get('quantity',0)) != quantity or not 1 <= quantity <= 100 or original['status'] != 'ACTIVE':
+        raise ValueError('continuation requires explicit NOW for exact existing ACTIVE-intent request quantity')
     if state.get('phase') not in {'RECOVERY_PENDING','ENGINE_PENDING','POSTPROCESS_PENDING','ACTIVATION_PENDING','ACTIVATION_DEFERRED','GLOBAL_QA_COMPLETE','COMPLETE_FUTURE_ACTIVE'}:
         raise ValueError('continuation requires an existing recoverable checkpoint')
     bundles = checkpoint.get('bundles') or []
     cids = [str(cid) for b in bundles for cid in b.get('campaign_ids',[])]
     sids = [str(sid) for b in bundles for sid in b.get('adset_ids',[])]
-    if cids != [str(descriptor.get('existing_campaign_id'))] or sids != [str(descriptor.get('existing_adset_id'))]:
-        raise ValueError('continuation does not match existing confirmed shell IDs')
+    wanted_cids = descriptor.get('existing_campaign_ids') if quantity > 1 else [descriptor.get('existing_campaign_id')]
+    wanted_sids = descriptor.get('existing_adset_ids') if quantity > 1 else [descriptor.get('existing_adset_id')]
+    if (not isinstance(wanted_cids,list) or not isinstance(wanted_sids,list)
+        or len(cids)!=quantity or len(sids)!=quantity or len(set(cids))!=quantity or len(set(sids))!=quantity
+        or any(not re.fullmatch(r'[0-9]+',x) for x in cids+sids)
+        or cids != [str(x) for x in wanted_cids] or sids != [str(x) for x in wanted_sids]):
+        raise ValueError('continuation does not match exact existing confirmed shell IDs and order')
+    if quantity > 1 and (len(state['manifest'].get('campaigns') or [])!=quantity or len(state['target_manifest'].get('campaigns') or [])!=quantity):
+        raise ValueError('continuation batch does not cover both sealed manifests')
     if descriptor.get('preserved_start_time'):
         expected=datetime.fromisoformat(state['manifest']['campaigns'][0]['start_time']).astimezone(timezone.utc)
         preserved=datetime.fromisoformat(descriptor['preserved_start_time']).astimezone(timezone.utc)

@@ -1,0 +1,27 @@
+'use strict';
+// Offline contract tests only. Fixtures are NOT Google API receipts.
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const file = path.join(__dirname, '..', 'integrations', 'creative-archive-30tb', 'Pilot.js');
+let api;
+test('pilot implementation exists', () => { assert.ok(fs.existsSync(file), 'bounded copy-only pilot implementation missing'); api = require(file); });
+const config = () => ({account:'mgsdigitalcorp@gmail.com', sourceDriveId:'0AEwt4Ye690ocUk9PVA', creativeRootId:'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa', sourceFileId:'1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N', destinationFolderId:'testDestinationId', deleteSource:false});
+const source = () => ({id:config().sourceFileId,name:'pilot.mp4',driveId:config().sourceDriveId,mimeType:'video/mp4',size:'5375929',md5Checksum:'59065739912275ee5995bfee8d5ca9c7',version:'7',trashed:false});
+const destination = () => ({id:'newCopyId',name:'pilot.mp4',mimeType:'video/mp4',size:'5375929',md5Checksum:source().md5Checksum,trashed:false,parents:[config().destinationFolderId],owners:[{emailAddress:config().account}]});
+test('accepts bounded copy-only configuration',()=>assert.equal(api.validateConfig(config()).deleteSource,false));
+test('rejects enabled source deletion',()=>assert.throws(()=>api.validateConfig({...config(),deleteSource:true}),/DELETE_FORBIDDEN/));
+test('rejects missing destination',()=>assert.throws(()=>api.validateConfig({...config(),destinationFolderId:''}),/CONFIG/));
+test('rejects wrong destination account',()=>assert.throws(()=>api.validateConfig({...config(),account:'other@example.com'}),/ACCOUNT/));
+test('rejects changed source size',()=>assert.throws(()=>api.assertSourceStable(source(),{...source(),size:'1'}),/SOURCE_CHANGED/));
+test('rejects changed source version',()=>assert.throws(()=>api.assertSourceStable(source(),{...source(),version:'8'}),/SOURCE_CHANGED/));
+test('rejects Google-native document',()=>assert.throws(()=>api.validateSource({...source(),mimeType:'application/vnd.google-apps.spreadsheet'},config()),/MEDIA_ONLY/));
+test('rejects wrong source drive',()=>assert.throws(()=>api.validateSource({...source(),driveId:'otherDrive'},config()),/SOURCE_DRIVE/));
+test('accepts identical owned copy in exact destination',()=>assert.equal(api.verifyCopy(source(),destination(),config()),true));
+test('rejects copied checksum mismatch',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),md5Checksum:'wrong'},config()),/CHECKSUM/));
+test('rejects wrong owner',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),owners:[{emailAddress:'other@example.com'}]},config()),/OWNER/));
+test('rejects wrong destination parent',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),parents:['otherFolder']},config()),/PARENT/));
+test('rejects a trashed copy',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),trashed:true},config()),/TRASHED/));
+test('rejects copy equal to source ID',()=>assert.throws(()=>api.verifyCopy(source(),{...destination(),id:source().id},config()),/SAME_ID/));
+test('contains no mutation primitive for source removal or scheduling',()=>{const text=fs.readFileSync(file,'utf8');assert.doesNotMatch(text,/Drive\.Files\.(remove|delete|update)|newTrigger|ScriptApp\.newTrigger/);});

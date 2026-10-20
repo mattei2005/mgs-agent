@@ -1169,6 +1169,8 @@ class CampaignEngine:
 
         if fallback_entries:
             resolved.update(two_phase_materialize(self, bundle, transport, record, fallback_entries))
+            for ci, ai, _, _, _ in fallback_entries:
+                resolved_rows[(ci,ai)] = record['prestaged_fallback_ad_readbacks'][f'{ci}.{ai}']
 
         if missing_ops:
             timing, started = self._timed_start()

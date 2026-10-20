@@ -27,6 +27,14 @@ Google Service Accounts do not have personal Drive storage quota. Folder visibil
 6. Prefer expansion of the existing Workspace when it meets the need, because it avoids moving files and changing IDs or authentication. Present the technical conclusion first, the concrete affected operation second, and the least-disruptive recommendation third. For a follow-up asking why sharing is insufficient, explain the creator-versus-folder-owner distinction directly rather than repeating a broad migration warning.
 7. Keep assessment read-only. Billing, ownership, permissions and authentication changes need their applicable approval gates. If an isolated architecture is later approved, inventory consumers and lineage, define rollback, run one bounded write/readback/recovery canary, and validate the exact consumers before claiming equivalent operation.
 
+### Isolated cloud archive proposal — approval and proof gates
+
+When Workspace expansion and a user's always-on computer are excluded, assess an isolated account-authorized Google Apps Script copy connector as a candidate, not as an active Service Account fallback. Require explicit approval for the separate architecture and initial account consent; preserve the agents' canonical Service Account and never restore retired OAuth artifacts. Keep the Shared Drive as bounded staging only if lineage and all real consumers can support archive IDs outside it.
+
+For a copy-only pilot, use Drive's server-side `files.copy` rather than downloading video blobs through Apps Script URL Fetch. Verify effective account, target ownership, exact source ancestry, matching size/MD5 and unchanged source state. Use a single-writer lock, durable source-ID/checksum marker and a pending-before-copy sentinel; an ambiguous non-idempotent response without visible landed state must block instead of replaying blindly. Local contract tests are not Google deployment or copy proof. Require exact destination readback and retrieval with the canonical Service Account before reporting end-to-end success.
+
+Keep deletion and scheduling absent from the first pilot. Trashing still consumes storage; permanent source cleanup needs its separate bounded Critical Subset confirmation, dependency checks and retention/recovery policy. A locked or unavailable protected login is an authentication blocker, not permission to extract a password into chat, use another identity, ask for a chat code or create an alternate token. Record the approved operational requirement separately from deployed capability so future sessions do not treat unattended operation as already active.
+
 ### Official sources to refresh
 
 - Shared Drive ownership and pooled storage: https://developers.google.com/workspace/drive/api/guides/about-shareddrives
