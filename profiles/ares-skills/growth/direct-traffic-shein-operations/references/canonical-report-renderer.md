@@ -91,7 +91,9 @@ A autorização de Rodolfo para aplicar e usar no próximo relatório promoveu o
 
 Aplicar configuração já autorizada não requer nova confirmação do operador. Configuração concluída e fonte/entrega bloqueadas são estados diferentes: informar exatamente o que foi aplicado e qual acesso falta, sem declarar relatório publicado. A implementação foi exercitada em 68 testes offline incluindo seis bindings reais, resolução automática sem flags, fonte UI ausente fail-closed, isolamento das outras contas, preservação histórica e deltas explícitos. Testes não provam leitura UI nem entrega remota.
 
-## Grade única e tetos visuais — global36, com origem no YOLO
+## Grade-base histórica157 e tetos visuais preservados
+
+A regra posterior `numeric_width_standard` supersede a rigidez157 para Gasto/B.U.%/Saldo nos próximos relatórios: mínimo160 e expansão dessas três colunas já autorizada, sem nova pergunta. O restante desta seção descreve o perfil-base/histórico e os tetos que continuam vigentes.
 
 Rodolfo aprovou inicialmente as seis YOLO pelo perfil `YOLO_UNIFORM_G001_CAPS_V1`, posteriormente supersedido para os próximos relatórios das36contas pelo perfil `SHEIN_ALL36_UNIFORM_G001_CAPS_V1`, fonte `on_demand_default_layout.format_profiles`, política `ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019`. Todas usam a mesma grade principal com Nº de 13 posições (`999 COPY C999`) e largura total de 157 posições visuais, referência G001. As larguras são dados canônicos por nome de coluna; duas junções junto a St perdem apenas um espaço cada, preservando `|`, células, alinhamento e todas as colunas. O perfil e os overrides abrangem agora as36contas SHEIN; as vigências e os perfis anteriores permanecem preservados para reconstrução histórica. `format_profile_id` é resolvido da política para próximos snapshots, com `format_profile_effective_from_financial_snapshot`; um complemento autorizado pode selecionar o mesmo perfil para o snapshot preservado.
 

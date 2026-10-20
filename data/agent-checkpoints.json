@@ -4362,6 +4362,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-g002-g006-approved-20261019T221027",
+      "next_step": "Materializar/validar30modelos com padrao atual e conservar cortes;readback consolidado de status/destinos;publicar por gestor com journal e GET de cada parte.",
+      "objective": "Gerar e entregar30relatorios SHEIN G002-G006 no padrao G001 aprovado por Rodolfo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/g002-g006-approved-20261019T221027/request.json",
+      "state": "coleta persistida:30contas meta verificadas;551campanhas com entrega;meta diario/config/destinos e sb7datas persistidos por conta. rps copiado da dash usd em17paginas,573linhas do recorte;moeda/dimensoes/data no mesmo contexto.25contas edt,5pdt conservadas;sem supor fuso unico.0publicacoes neste lote.",
+      "thread_id": "1561752465978818722",
+      "updated_at": "2026-10-20T02:18:34+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-g004-active-report-1561843395478159381",
       "next_step": "Entregar report.md integral nesta resposta; entrega remota depende do adapter nativo.",
       "objective": "Entregar relatório das58campanhas ativas com exceção B.R.% aprovada por Joe.",
@@ -6632,5 +6642,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T02:08:50+00:00"
+  "updated_at": "2026-10-20T02:18:34+00:00"
 }
