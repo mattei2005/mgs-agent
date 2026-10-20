@@ -1,0 +1,981 @@
+#!/usr/bin/env python3
+"""Canonical SHEIN report renderer/gate. Offline only; never posts or mutates APIs."""
+import argparse
+import copy
+import hashlib
+import json
+import re
+import unicodedata
+from collections import defaultdict
+from datetime import date, datetime, timedelta
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from pathlib import Path
+from zoneinfo import ZoneInfo
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from shein_report_delivery import discord_length, register_report
+
+CONTRACT = Path('/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json')
+
+
+class LayoutError(ValueError):
+    pass
+
+
+def policy():
+    return json.loads(CONTRACT.read_text())['reporting']['on_demand_default_layout']
+
+
+def number(value):
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        result = Decimal(str(value))
+        return result if result.is_finite() else None
+    except (InvalidOperation, ValueError):
+        return None
+
+
+def signal(value, estimated=False):
+    v = number(value)
+    if v is None:
+        return '⚪'
+    rule = policy()['roi_direction_signal']
+    if estimated:
+        bands = rule['estimated_roi']
+        return bands['red']['color'] if v < Decimal(bands['red']['value']) else bands['green']['color'] if v > Decimal(bands['green']['value']) else bands['yellow']['color']
+    colors = rule['real_roi']
+    return colors['positive'] if v > 0 else colors['negative'] if v < 0 else colors['exact_zero']
+
+
+def mean_roi(values):
+    valid = [v for x in values if (v := number(x)) is not None]
+    return (sum(valid) / len(valid) if valid else None, len(valid))
+
+
+def roi(revenue, spend):
+    r, s = number(revenue), number(spend)
+    return (r - s) * 100 / s if r is not None and s is not None and s > 0 else None
+
+
+def equal_metric(actual, expected, label):
+    a, e = number(actual), number(expected)
+    if (a is None) != (e is None) or (a is not None and abs(a - e) > Decimal('1e-18')):
+        raise LayoutError('Inconsistent ' + label)
+
+
+def fmt(value, suffix='', signed=False, places=2):
+    v = number(value)
+    if v is None:
+        return 'n/d'
+    v = v.quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP)
+    return format(v, f'+.{places}f' if signed else f'.{places}f').replace('.', ',') + suffix
+
+
+def capped_display(value, limit, suffix='', grouped=False):
+    """Presentation only: never mutate the financial model or ranking inputs."""
+    v, cap = number(value), number(limit)
+    if v is None:
+        return 'n/d'
+    if cap is None or cap < 0:
+        raise LayoutError('Invalid display cap')
+    v = min(v, cap).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    if grouped:
+        text = format(v, ',.2f').replace(',', '@').replace('.', ',').replace('@', '.')
+    else:
+        text = format(v, '.2f').replace('.', ',')
+    return text + suffix
+
+
+def visual_width(text):
+    return sum(0 if unicodedata.combining(c) else 2 if unicodedata.east_asian_width(c) in ('W', 'F') else 1 for c in text)
+
+
+def product_label(value, remove_ellipsis=False, max_characters=None):
+    rule = policy().get('product_column') or {}
+    limit = rule.get('max_characters', 20)
+    visual_limit = rule.get('max_visual_width', limit)
+    suffix = rule.get('ellipsis', '')
+    if max_characters is not None:
+        if not isinstance(max_characters, int) or isinstance(max_characters, bool) or max_characters <= 0 or max_characters > limit:
+            raise LayoutError('Preview product cap must be a positive integer no larger than the default')
+        limit = max_characters
+        visual_limit = min(visual_limit, limit)
+    budget_suffix = '' if remove_ellipsis and max_characters is not None else suffix
+    if not isinstance(limit, int) or isinstance(limit, bool) or limit < len(budget_suffix) or not isinstance(visual_limit, int) or visual_limit < visual_width(budget_suffix):
+        raise LayoutError('Invalid product display limit')
+    text = unicodedata.normalize('NFC', str(value) if value is not None else 'n/d')
+    text = ' '.join(text.replace('|', ' ').split())
+    def fits(candidate):
+        return len(candidate) <= limit and visual_width(candidate) <= visual_limit
+    if fits(text):
+        return text
+    prefix = text
+    while prefix and not fits(prefix.rstrip() + budget_suffix):
+        prefix = prefix[:-1]
+    return prefix.rstrip() if remove_ellipsis else prefix.rstrip() + suffix
+
+
+def bar_positions(text):
+    positions, current = [], 0
+    for char in text:
+        if char == '|':
+            positions.append(current)
+        current += visual_width(char)
+    return positions
+
+
+def family_groups(rows):
+    ids = {r['id']: r for r in rows}
+    if len(ids) != len(rows):
+        raise LayoutError('Duplicate campaign ID')
+    by_number, children, parents, notes = defaultdict(list), defaultdict(list), {}, []
+    for r in rows:
+        # Match numeric identity, preserving literal padding in all labels.
+        by_number[(r['product'], int(r['number']))].append(r['id'])
+    for r in rows:
+        source = r.get('copy_source_literal')
+        if source is None:
+            continue
+        matches = by_number[(r['product'], int(source))]
+        if len(matches) != 1:
+            notes.append('Origem COPY fora do recorte ou ambígua: ' + r['number'])
+            continue
+        parents[r['id']] = matches[0]
+        children[matches[0]].append(r['id'])
+    colors = {}
+    def check(cid):
+        if colors.get(cid) == 1:
+            raise LayoutError('COPY cycle')
+        if colors.get(cid) == 2:
+            return
+        colors[cid] = 1
+        for child in children[cid]:
+            check(child)
+        colors[cid] = 2
+    for cid in ids:
+        check(cid)
+    key = lambda cid: (ids[cid].get('first_delivery') or '9999-12-31', int(ids[cid]['number']), cid)
+    def tree(cid):
+        group = [ids[cid]]
+        for child in sorted(children[cid], key=key):
+            group.extend(tree(child))
+        return group
+    roots = sorted((cid for cid in ids if cid not in parents), key=lambda cid: (unicodedata.normalize('NFKD', ids[cid]['product']).casefold(), *key(cid)))
+    groups = [tree(cid) for cid in roots]
+    if len([r for g in groups for r in g]) != len(rows):
+        raise LayoutError('Family coverage mismatch')
+    return groups, notes
+
+
+def requested_sort(model):
+    """Validate an explicit one-request presentation override, not a saved policy."""
+    rule = model.get('explicit_sort_request')
+    if rule is None:
+        return None
+    if not isinstance(rule, dict) or rule.get('mode') not in ('estimated_roi_desc', 'estimated_roi_asc'):
+        raise LayoutError('Unsupported explicit report sorting')
+    if rule.get('history_sort') not in (None, 'campaign_number_asc'):
+        raise LayoutError('Unsupported explicit history sorting')
+    if 'hide_copy_origin_notes' in rule and not isinstance(rule['hide_copy_origin_notes'], bool):
+        raise LayoutError('Invalid COPY diagnostic visibility')
+    if 'include_rps' in rule and not isinstance(rule['include_rps'], bool):
+        raise LayoutError('Invalid RPS column request')
+    if 'include_status' in rule and not isinstance(rule['include_status'], bool):
+        raise LayoutError('Invalid status column request')
+    if 'status_codes' in rule:
+        codes = rule['status_codes']
+        if not isinstance(codes, dict) or set(codes) != {'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'} or any(not isinstance(v, str) or not re.fullmatch(r'[A-Za-z]{1,3}', v) for v in codes.values()):
+            raise LayoutError('Invalid campaign status display map')
+    if 'format_profile_id' in rule and not re.fullmatch(r'[A-Za-z0-9_-]+', str(rule['format_profile_id'])):
+        raise LayoutError('Invalid report format profile')
+    if rule.get('budget_remaining_display') not in (None, 'percent_daily_budget'):
+        raise LayoutError('Unsupported budget remaining presentation')
+    if rule.get('authorized_by_discord_id') != '344196393512075265' or not re.fullmatch(r'\d{17,20}', str(rule.get('source_thread_id', ''))) or not str(rule.get('request_text', '')).strip():
+        raise LayoutError('Missing explicit report sorting authority/provenance')
+    return rule
+
+
+def effective_report_options(model, cfg):
+    """Resolve prospective account defaults, then explicit authorized deltas."""
+    explicit = requested_sort(model)
+    account = model.get('account') or {}
+    aid = str(account.get('id', '')).removeprefix('act_')
+    rule = cfg.get('account_report_overrides', {}).get(aid, {})
+    if rule.get('status') != 'active':
+        return explicit
+    if rule.get('account_name') != account.get('name'):
+        raise LayoutError('Account report override identity mismatch')
+    stamp = (model.get('source_timestamps') or {}).get('insights') or model.get('snapshot_at')
+    if not stamp:
+        raise LayoutError('Missing financial timestamp for account report policy')
+    if datetime.fromisoformat(stamp) < datetime.fromisoformat(rule['effective_from_financial_snapshot']):
+        return explicit
+    options = copy.deepcopy(rule['options'])
+    status_since = rule.get('status_column_effective_from_financial_snapshot')
+    if status_since and datetime.fromisoformat(stamp) < datetime.fromisoformat(status_since):
+        options.pop('include_status', None)
+    format_since = rule.get('format_profile_effective_from_financial_snapshot')
+    if format_since and datetime.fromisoformat(stamp) < datetime.fromisoformat(format_since):
+        options.pop('format_profile_id', None)
+    requested_sort({'explicit_sort_request': options})
+    options['_canonical_default'] = True
+    if explicit is not None:
+        options.update(explicit)
+        options['_canonical_default'] = False
+    return options
+
+
+def campaign_status_code(value, codes):
+    if value is None:
+        return 'n/d'
+    if value not in ('ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'):
+        raise LayoutError('Unsupported configured campaign status')
+    return codes[value]
+
+
+def ordered_groups(rows, account, cfg, explicit_request=None):
+    """Apply a saved account rule or a validated one-request presentation order."""
+    groups, notes = family_groups(rows)
+    rule = cfg.get('account_sort_overrides', {}).get(str(account['id']).removeprefix('act_'), {})
+    if explicit_request is not None:
+        rule = {'status': 'active', 'account_name': account['name'], 'mode': explicit_request['mode']}
+    if rule.get('status') != 'active':
+        return groups, notes
+    if rule.get('account_name') != account['name']:
+        raise LayoutError('Account sort override identity mismatch')
+    if rule.get('mode') not in ('estimated_roi_desc', 'estimated_roi_asc'):
+        raise LayoutError('Unsupported account sort override')
+    def key(row):
+        value = number(row.get('estimated_roi'))
+        score = (-value if rule['mode'] == 'estimated_roi_desc' else value) if value is not None else Decimal(0)
+        return (value is None, score,
+                row.get('first_delivery') or '9999-12-31', int(row['number']), row['id'])
+    return [[row] for row in sorted(rows, key=key)], notes
+
+
+def pack_complete_parts(parts):
+    """Combine complete blocks where possible; never split a row or fence."""
+    packed = []
+    for part in parts:
+        if packed and discord_length(packed[-1] + '\n\n' + part) <= 2000:
+            packed[-1] += '\n\n' + part
+        else:
+            packed.append(part)
+    return packed
+
+
+def prose_parts(text):
+    """Keep long audit/limitation footers within the same exact Discord limit."""
+    parts, current = [], ''
+    for line in text.splitlines():
+        if discord_length(line) > 2000:
+            raise LayoutError('One footer line exceeds Discord capacity')
+        candidate = current + ('\n' if current else '') + line
+        if discord_length(candidate) > 2000:
+            parts.append(current)
+            current = line
+        else:
+            current = candidate
+    if current:
+        parts.append(current)
+    return parts
+
+
+def table_parts(title, headers, groups, left_columns, join, prefix='', fixed_widths=None):
+    flat = [r for group in groups for r in group]
+    widths = [max(visual_width(v) for v in [headers[i]] + [row[i] for row in flat]) for i in range(len(headers))]
+    if fixed_widths is not None:
+        if len(fixed_widths) != len(headers) or any(not isinstance(w, int) or isinstance(w, bool) or w < actual for w, actual in zip(fixed_widths, widths)):
+            raise LayoutError('A table value exceeds the authorized fixed column width; do not publish')
+        widths = list(fixed_widths)
+    joiners = [join] * (len(headers) - 1) if isinstance(join, str) else list(join)
+    if len(joiners) != len(headers) - 1 or any(j not in (' | ', ' |', '| ') for j in joiners):
+        raise LayoutError('Invalid fixed table separators')
+    def cell(value, width, left):
+        spaces = width - visual_width(value)
+        if left:
+            return value + ' ' * spaces
+        n = spaces // 2
+        return ' ' * n + value + ' ' * (spaces - n)
+    def line(row):
+        values = [cell(v, w, i in left_columns) for i, (v, w) in enumerate(zip(row, widths))]
+        text = values[0] + ''.join(j + v for j, v in zip(joiners, values[1:]))
+        return text if fixed_widths is not None else text.rstrip()
+    header = line(headers)
+    lines = [line(row) for row in flat]
+    def message(chunk, i, total):
+        lead = prefix.strip() + '\n\n' if prefix and i == 1 else ''
+        return lead + f'**{title} · {i}/{total}**\n```text\n' + header + '\n' + '\n'.join(chunk) + ('\n' if chunk else '') + '```'
+    if prefix and lines and discord_length(message([lines[0]], 1, 1)) > 2000:
+        return pack_complete_parts([prefix.strip(), *table_parts(title, headers, groups, left_columns, join, fixed_widths=fixed_widths)])
+    # Fixed point includes the real page numbers rather than an arbitrary reserve.
+    # The new capacity-first policy permits a family boundary only when needed;
+    # adjacency and exact parent/child order remain unchanged.
+    total = 1
+    while True:
+        chunks, current = [], []
+        if discord_length(message([], 1, total)) > 2000:
+            raise LayoutError('Table header exceeds Discord capacity')
+        for item in lines:
+            i = len(chunks) + 1
+            if discord_length(message(current + [item], i, total)) <= 2000:
+                current.append(item)
+            else:
+                if not current:
+                    raise LayoutError('One row exceeds Discord capacity')
+                chunks.append(current)
+                current = [item]
+                if discord_length(message(current, len(chunks) + 1, total)) > 2000:
+                    raise LayoutError('One row exceeds Discord capacity')
+        if current or not chunks:
+            chunks.append(current)
+        if len(chunks) == total:
+            break
+        total = len(chunks)
+    parts = []
+    for i, chunk in enumerate(chunks, 1):
+        if any(bar_positions(row) != bar_positions(header) for row in chunk):
+            raise LayoutError('Visual separators misaligned')
+        text = message(chunk, i, total)
+        if discord_length(text) > 2000:
+            raise LayoutError('Discord part too large')
+        parts.append(text)
+    return parts
+
+
+def requested_rps_move(model):
+    """One-request, account-bound presentation delta; never a global default."""
+    rule = model.get('explicit_column_request')
+    if rule is None:
+        return False
+    account = model.get('account') or {}
+    if not isinstance(rule, dict) or rule.get('column') != 'RPS' or rule.get('after') != 'ROAS':
+        raise LayoutError('Unsupported explicit column move')
+    if rule.get('authorized_by_discord_id') not in ('344196393512075265', '321263240782807040') or not str(rule.get('request_text', '')).strip():
+        raise LayoutError('Missing explicit column authority/provenance')
+    if str(rule.get('account_id')) != str(account.get('id', '')).removeprefix('act_'):
+        raise LayoutError('Explicit column move account mismatch')
+    bindings = json.loads(Path('/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json').read_text())
+    entries = bindings if isinstance(bindings, list) else bindings.get('bindings', [])
+    if isinstance(entries, dict):
+        entries = list(entries.values())
+    if not any(str(b.get('account_id')) == str(rule.get('account_id')) and str(b.get('thread_id')) == str(rule.get('source_thread_id')) for b in entries):
+        raise LayoutError('Explicit column move thread mismatch')
+    return True
+
+
+def account_budget_used(model, cfg):
+    """Resolve an authorized, account-scoped budget-usage reporting correction."""
+    account = model.get('account') or {}
+    aid = str(account.get('id', '')).removeprefix('act_')
+    rule = cfg.get('account_budget_display_overrides', {}).get(aid, {})
+    # New metric policies are prospective; retain prior snapshot semantics.
+    for _ in range(5):
+        since = rule.get('effective_from_financial_snapshot')
+        if not since:
+            break
+        stamp = (model.get('source_timestamps') or {}).get('insights') or model.get('snapshot_at')
+        if not stamp:
+            raise LayoutError('Missing financial timestamp for budget usage policy')
+        if datetime.fromisoformat(stamp) >= datetime.fromisoformat(since):
+            break
+        rule = rule.get('previous_rule', {})
+    else:
+        raise LayoutError('Budget usage policy history exceeds supported depth')
+    if rule.get('status') != 'active' or model.get('date', '') < rule.get('effective_from_report_date', '9999-12-31'):
+        return False
+    if rule.get('account_name') != account.get('name') or rule.get('metric') != 'daily_spend_over_daily_budget_percent':
+        raise LayoutError('Budget usage override identity/metric mismatch')
+    if rule.get('authorized_by_discord_id') not in ('344196393512075265', '321263240782807040') or not str(rule.get('request_text', '')).strip():
+        raise LayoutError('Missing budget usage authority/provenance')
+    bindings = json.loads(Path('/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json').read_text())['bindings']
+    entries = bindings.values() if isinstance(bindings, dict) else bindings
+    if not any(str(b.get('account_id')) == aid and b.get('thread_id') == rule.get('source_thread_id') for b in entries):
+        raise LayoutError('Budget usage override thread mismatch')
+    return True
+
+
+def budget_used_percent(spend, daily_budget):
+    used, daily = number(spend), number(daily_budget)
+    return used * 100 / daily if used is not None and used >= 0 and daily is not None and daily > 0 else None
+
+
+def requested_budget_compaction(model):
+    """Validate a one-report, exact-100% display exception; never round data."""
+    rule = model.get('explicit_budget_display_request')
+    if rule is None:
+        return set()
+    if not isinstance(rule, dict) or rule.get('mode') != 'exact_100_percent_without_decimals':
+        raise LayoutError('Unsupported explicit budget display exception')
+    account = model.get('account') or {}
+    aid = str(account.get('id', '')).removeprefix('act_')
+    actor = str(rule.get('authorized_by_discord_id') or '')
+    authorized = json.loads(Path('/root/mgs-agent/data/authorized-users.json').read_text())['agents']['ares']['authorized_user_discord_ids']
+    if actor not in authorized or not str(rule.get('request_text', '')).strip() or not re.fullmatch(r'[0-9]{17,20}', str(rule.get('source_message_id') or '')):
+        raise LayoutError('Missing explicit budget display authority/provenance')
+    if str(rule.get('account_id')) != aid:
+        raise LayoutError('Budget display exception account mismatch')
+    bindings = json.loads(Path('/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json').read_text())['bindings']
+    entries = bindings.values() if isinstance(bindings, dict) else bindings
+    if not any(str(b.get('account_id')) == aid and b.get('thread_id') == rule.get('source_thread_id') for b in entries):
+        raise LayoutError('Budget display exception thread mismatch')
+    targets = rule.get('campaign_ids')
+    if not isinstance(targets, list) or not targets or len(set(targets)) != len(targets) or any(not re.fullmatch(r'[0-9]+', str(cid)) for cid in targets):
+        raise LayoutError('Budget display exception needs unique exact campaign IDs')
+    rows = {r['id']: r for r in model.get('rows', [])}
+    for cid in targets:
+        if cid not in rows:
+            raise LayoutError('Budget display exception target absent')
+        remaining, daily = number(rows[cid].get('budget_remaining')), number(rows[cid].get('daily_budget'))
+        if remaining is None or daily is None or daily <= 0 or remaining != daily:
+            raise LayoutError('Budget display exception requires exactly 100 percent')
+    return set(targets)
+
+
+def account_expanding_columns(model, cfg):
+    """Account-bound permission to fit numeric Gasto without changing values."""
+    account = model.get('account') or {}
+    aid = str(account.get('id', '')).removeprefix('act_')
+    rule = cfg.get('account_width_overrides', {}).get(aid, {})
+    if rule.get('status') != 'active' or model.get('date', '') < rule.get('effective_from_report_date', '9999-12-31'):
+        return set()
+    if rule.get('account_name') != account.get('name') or rule.get('mode') != 'expand_to_fit' or rule.get('columns') != ['Gasto']:
+        raise LayoutError('Unsupported account width override identity/mode/columns')
+    if rule.get('authorized_by_discord_id') not in ('344196393512075265', '321263240782807040') or not str(rule.get('request_text', '')).strip():
+        raise LayoutError('Missing adaptive width authority/provenance')
+    bindings = json.loads(Path('/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json').read_text())['bindings']
+    entries = bindings.values() if isinstance(bindings, dict) else bindings
+    if not any(str(b.get('account_id')) == aid and b.get('thread_id') == rule.get('source_thread_id') for b in entries):
+        raise LayoutError('Adaptive width override thread mismatch')
+    return set(rule['columns'])
+
+
+def requested_column_widths(model):
+    """Validate exact, one-report numeric width exceptions; never change data."""
+    rule = model.get('explicit_column_width_request')
+    if rule is None:
+        return {}
+    account = model.get('account') or {}
+    aid = str(account.get('id', '')).removeprefix('act_')
+    authorized = json.loads(Path('/root/mgs-agent/data/authorized-users.json').read_text())['agents']['ares']['authorized_user_discord_ids']
+    if not isinstance(rule, dict) or rule.get('authorized_by_discord_id') not in authorized or not str(rule.get('request_text', '')).strip() or not str(rule.get('approved_scope', '')).strip():
+        raise LayoutError('Missing explicit column width authority/provenance')
+    if str(rule.get('account_id')) != aid or rule.get('account_name') != account.get('name') or rule.get('report_date') != model.get('date') or rule.get('financial_snapshot_at') != model.get('source_timestamps', {}).get('insights'):
+        raise LayoutError('Explicit column width report identity mismatch')
+    bindings = json.loads(Path('/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json').read_text())['bindings']
+    entries = bindings.values() if isinstance(bindings, dict) else bindings
+    if not any(str(b.get('account_id')) == aid and b.get('thread_id') == rule.get('source_thread_id') for b in entries):
+        raise LayoutError('Explicit column width thread mismatch')
+    widths = rule.get('column_widths')
+    supported = widths == {'Gasto': 6, 'B.U.%': 7}
+    if widths == {'Gasto': 6, 'B.U.%': 7, 'Saldo': 7}:
+        supported = rule.get('authorized_by_discord_id') == '344196393512075265'
+    if not supported or any(type(v) is not int for v in widths.values()):
+        raise LayoutError('Unsupported explicit column width exception')
+    return widths
+
+
+def global_numeric_width_rule(model, cfg):
+    """Authorized global presentation only; historical snapshots opt in explicitly."""
+    rule = cfg.get('numeric_width_standard', {})
+    if rule.get('status') != 'active':
+        return None
+    aid = str((model.get('account') or {}).get('id', '')).removeprefix('act_')
+    binding = cfg.get('account_report_overrides', {}).get(aid)
+    if not binding:
+        return None
+    if binding.get('account_name') != model['account'].get('name'):
+        raise LayoutError('Global numeric width account mismatch')
+    if rule.get('authorized_by_discord_id') != '344196393512075265' or rule.get('mode') != 'expand_to_fit' or rule.get('minimum_column_widths') != {'Gasto': 6, 'B.U.%': 7, 'Saldo': 7} or rule.get('columns') != ['Gasto', 'B.U.%', 'Saldo'] or not rule.get('request_text'):
+        raise LayoutError('Invalid global numeric width authority/columns')
+    stamp = (model.get('source_timestamps') or {}).get('insights') or model.get('snapshot_at')
+    if not stamp:
+        raise LayoutError('Missing timestamp for global numeric widths')
+    explicit = model.get('numeric_width_policy_id')
+    if explicit is not None:
+        applied = (model.get('source_timestamps') or {}).get('presentation')
+        if explicit != rule['policy_id'] or not rule.get('allow_explicit_application_to_preserved_snapshot') or not applied or datetime.fromisoformat(applied) < datetime.fromisoformat(rule['effective_from_financial_snapshot']):
+            raise LayoutError('Invalid preserved snapshot numeric width application')
+    elif datetime.fromisoformat(stamp) < datetime.fromisoformat(rule['effective_from_financial_snapshot']):
+        return None
+    return rule
+
+
+def status_block_policy(model, cfg):
+    """Prospective presentation rule; never confuse ARCHIVED=A with ACTIVE=A."""
+    rule = cfg.get('campaign_status_blocks', {})
+    if rule.get('status') != 'active':
+        return None
+    if rule.get('authorized_by_discord_id') != '344196393512075265' or rule.get('status_field') != 'campaign_status' or not rule.get('request_text'):
+        raise LayoutError('Invalid status block authority/source')
+    stamp = (model.get('source_timestamps') or {}).get('insights') or model.get('snapshot_at')
+    if not stamp:
+        raise LayoutError('Missing financial timestamp for status blocks')
+    if datetime.fromisoformat(stamp) < datetime.fromisoformat(rule['effective_from_financial_snapshot']):
+        return None
+    if [b['status'] for b in rule['blocks']] != ['ACTIVE', 'PAUSED', 'ARCHIVED', 'DELETED', 'UNKNOWN']:
+        raise LayoutError('Unsupported campaign status blocks')
+    return rule
+
+
+def status_table_parts(title, headers, groups, left, join, ids, rows_by_id, rule, prefix='', fixed_widths=None):
+    """Partition rendered rows stably while conserving one grid and exact IDs."""
+    if rule is None:
+        return table_parts(title, headers, groups, left, join, prefix=prefix, fixed_widths=fixed_widths)
+    cells = [row for group in groups for row in group]
+    if len(ids) != len(cells) or len(set(ids)) != len(ids):
+        raise LayoutError('Status block campaign coverage mismatch')
+    widths = fixed_widths or [max(visual_width(v) for v in [headers[i]] + [row[i] for row in cells]) for i in range(len(headers))]
+    rendered = dict(zip(ids, cells))
+    parts, covered = [], []
+    for block in rule['blocks']:
+        selected = [cid for cid in ids if (rows_by_id[cid].get('campaign_status') or 'UNKNOWN') == block['status']]
+        if not selected and block['status'] not in rule['always_show']:
+            continue
+        covered.extend(selected)
+        parts.extend(table_parts(title + ' · ' + block['label'] + f' ({len(selected)})', headers,
+                                 [[rendered[cid]] for cid in selected], left, join,
+                                 prefix=prefix if not parts else '', fixed_widths=widths))
+    if set(covered) != set(ids) or len(covered) != len(ids):
+        raise LayoutError('Status blocks must retain every selected campaign exactly once')
+    return parts
+
+
+def number_bid_preview_rule(model, cfg):
+    """Opt-in preview bound to the exact account/thread; never a global default."""
+    selected = model.get('number_bid_preview_policy_id')
+    if selected is None:
+        return None
+    rule = cfg.get('number_bid_preview', {})
+    for _ in range(5):
+        if selected == rule.get('policy_id'):
+            break
+        rule = rule.get('previous_rule', {})
+    else:
+        raise LayoutError('Number/bid preview history exceeds supported depth')
+    account = model.get('account') or {}
+    aid = str(account.get('id', '')).removeprefix('act_')
+    if selected != rule.get('policy_id') or rule.get('status') != 'authorized_preview_pending_visual_approval':
+        raise LayoutError('Number/bid preview is not authorized')
+    if rule.get('authorized_by_discord_id') != '344196393512075265' or not rule.get('request_text') or rule.get('account_id') != aid or rule.get('account_name') != account.get('name'):
+        raise LayoutError('Number/bid preview account/authority mismatch')
+    check_thread_binding(model, rule['thread_id'])
+    copy_format = rule.get('copy_display_format')
+    width = 12 if copy_format == 'CP{literal_source_number}' else 16
+    if copy_format not in (None, 'CP{literal_source_number}') or rule.get('number_column_width') != width or rule.get('strategy_aliases') != {'COCAP': 'CC', 'MAXVOL': 'MV', 'BIDCAP': 'BC', 'misto': 'MX', 'n/d': 'n/d'}:
+        raise LayoutError('Unsupported number/bid preview presentation')
+    return rule
+
+
+def number_bid_label(row, rule, copy_source=None):
+    short = rule['strategy_aliases'].get(row['bid'])
+    if short is None:
+        raise LayoutError('Unsupported verified bid strategy in number preview')
+    source_label = (' CP' + copy_source if rule.get('copy_display_format') == 'CP{literal_source_number}' else ' COPY C' + copy_source) if copy_source else ''
+    return row['number'] + ' ' + short + source_label
+
+
+def render_model(model, preview_remove_product_ellipsis=False, preview_product_max_characters=None, preview_compact_headers=False):
+    cfg = policy()
+    number_bid_preview = number_bid_preview_rule(model, cfg)
+    numeric_width_rule = global_numeric_width_rule(model, cfg)
+    status_blocks = status_block_policy(model, cfg)
+    compact_budget_ids = requested_budget_compaction(model)
+    explicit_sort = effective_report_options(model, cfg)
+    include_rps = bool(explicit_sort and explicit_sort.get('include_rps'))
+    include_status = bool(explicit_sort and explicit_sort.get('include_status'))
+    status_codes = (explicit_sort or {}).get('status_codes', {'ACTIVE': 'A', 'PAUSED': 'P', 'DELETED': 'D', 'ARCHIVED': 'Ar'})
+    budget_used = account_budget_used(model, cfg)
+    budget_percent = budget_used or bool(explicit_sort and explicit_sort.get('budget_remaining_display') == 'percent_daily_budget')
+    if compact_budget_ids and (budget_used or not budget_percent):
+        raise LayoutError('Budget display exception only applies to B.R.%')
+    if include_rps:
+        rps_source = model.get('rps_source') or {}
+        if rps_source.get('source_kind') != 'SB_DASH_VISIBLE_COLUMN' or rps_source.get('native_metric_id') != 'RPS' or rps_source.get('capture_method') != 'rendered_table_DOM' or rps_source.get('dashboard_url') != 'https://app.smartbiddingdigital.com/reports/adgroup' or not rps_source.get('observed_at') or rps_source.get('unit') != model.get('account', {}).get('currency', '') + '/1000_sessions' or not re.fullmatch(r'[a-f0-9]{64}', str(rps_source.get('capture_sha256', ''))) or rps_source.get('data_date') != model.get('date'):
+            raise LayoutError('Missing visible SB dashboard RPS provenance/unit/date')
+    if preview_product_max_characters is not None:
+        product_label('', remove_ellipsis=preview_remove_product_ellipsis, max_characters=preview_product_max_characters)
+    if cfg.get('column_separators', {}).get('join') != ' | ':
+        raise LayoutError('Unsupported separator contract')
+    account = model.get('account') or {}
+    if not all(account.get(k) for k in ('id', 'name', 'currency', 'timezone_name')):
+        raise LayoutError('Missing account evidence')
+    account_id = str(account['id']).removeprefix('act_')
+    override = cfg.get('account_column_overrides', {}).get(account_id, {})
+    columns = list(cfg['columns'])
+    if override.get('status') == 'active':
+        if account['name'] != override.get('account_name'):
+            raise LayoutError('Account column override identity mismatch')
+        columns = list(override['columns'])
+    if include_rps:
+        columns.insert(columns.index('Bid'), 'RPS')
+    if include_status:
+        columns.insert(columns.index('Produto'), 'St')
+    if number_bid_preview:
+        if not columns or columns[-1] != 'Lance':
+            raise LayoutError('Number/bid preview requires Lance as the last column')
+        columns.remove('Lance')
+    move_rps = requested_rps_move(model)
+    if move_rps:
+        if not include_rps or 'ROAS' not in columns:
+            raise LayoutError('Explicit RPS move requires existing RPS and ROAS')
+        columns.remove('RPS')
+        columns.insert(columns.index('ROAS') + 1, 'RPS')
+    aliases = dict(cfg.get('header_aliases', {}))
+    if budget_percent:
+        aliases['Budget R.'] = 'B.U.%' if budget_used else 'B.R.%'
+    if preview_compact_headers:
+        preview = override.get('compact_header_preview', {})
+        if preview.get('status') not in ('authorized_preview_pending_visual_approval', 'approved_and_promoted'):
+            raise LayoutError('Compact header preview is not authorized for this account')
+        if preview_product_max_characters != preview.get('product_max_characters') or preview_remove_product_ellipsis != preview.get('remove_product_ellipsis'):
+            raise LayoutError('Compact header preview requires the authorized product presentation')
+        aliases.update(preview.get('header_aliases', {}))
+    display_columns = [aliases.get(name, name) for name in columns]
+    if len(set(display_columns)) != len(display_columns):
+        raise LayoutError('Ambiguous report header aliases')
+    format_profile = None
+    profile_id = (explicit_sort or {}).get('format_profile_id')
+    if profile_id:
+        format_profile = cfg.get('format_profiles', {}).get(profile_id)
+        expected_columns = list(format_profile.get('display_columns', [])) if format_profile else []
+        if budget_used:
+            expected_columns = ['B.U.%' if name == 'B.R.%' else name for name in expected_columns]
+        if move_rps and 'RPS' in expected_columns and 'ROAS' in expected_columns:
+            expected_columns.remove('RPS')
+            expected_columns.insert(expected_columns.index('ROAS') + 1, 'RPS')
+        if number_bid_preview:
+            expected_columns.remove('Lance')
+        if not format_profile or format_profile.get('status') != 'active' or account_id not in format_profile.get('account_ids', []) or expected_columns != display_columns:
+            raise LayoutError('Report format profile identity/columns mismatch')
+        fixed_widths = [format_profile['column_widths']['B.R.%' if budget_used and name == 'B.U.%' else name] for name in display_columns]
+        main_join = list(format_profile['column_joiners'])
+        expected_grid_width = format_profile['line_visual_width']
+        if number_bid_preview:
+            old_number_width = format_profile['column_widths']['Nº']
+            fixed_widths[display_columns.index('Nº')] = number_bid_preview['number_column_width']
+            removed_join = main_join.pop()
+            expected_grid_width += number_bid_preview['number_column_width'] - old_number_width - format_profile['column_widths']['Lance'] - visual_width(removed_join)
+        if sum(fixed_widths) + sum(map(visual_width, main_join)) != expected_grid_width:
+            raise LayoutError('Fixed report grid width mismatch')
+    else:
+        if number_bid_preview:
+            raise LayoutError('Number/bid preview requires the canonical fixed profile')
+        fixed_widths, main_join = None, ' | '
+    configuration_columns = bool({'Bid', 'Budget R.'} & set(columns))
+    target = date.fromisoformat(model['date'])
+    dates = [(target - timedelta(days=n)).isoformat() for n in range(cfg['campaign_roi_history']['days'] - 1, -1, -1)]
+    if model.get('history_dates') != dates:
+        raise LayoutError('History must contain the exact seven civil dates')
+    stamps = model.get('source_timestamps') or {}
+    stamp = stamps.get('insights') or model.get('snapshot_at')
+    if not stamp:
+        raise LayoutError('Missing financial snapshot timestamp')
+    cutoff = datetime.fromisoformat(stamp).astimezone(ZoneInfo(account['timezone_name']))
+    config_stamp = stamps.get('configuration')
+    if configuration_columns and not config_stamp:
+        raise LayoutError('Missing configuration snapshot timestamp')
+    config_cutoff = datetime.fromisoformat(config_stamp).astimezone(ZoneInfo(account['timezone_name'])) if configuration_columns else None
+    if budget_used and (cutoff.date() != target or config_cutoff is None or config_cutoff.date() != target):
+        raise LayoutError('Budget usage requires financial and budget evidence for the report civil date')
+    status_stamp = stamps.get('status')
+    if (include_status or status_blocks) and not status_stamp:
+        raise LayoutError('Missing Meta campaign status timestamp')
+    status_cutoff = datetime.fromisoformat(status_stamp).astimezone(ZoneInfo(account['timezone_name'])) if include_status or status_blocks else None
+    rows = copy.deepcopy(model.get('rows', []))
+    required = ('id', 'name', 'number', 'product', 'quiz', 'bid', 'spend', 'net_revenue', 'estimated_revenue', 'roi', 'estimated_roi', 'health', 'roas', 'first_delivery', 'history')
+    for r in rows:
+        missing = [key for key in required if key not in r]
+        if missing:
+            raise LayoutError('Missing evidence fields: ' + ','.join(missing))
+        if configuration_columns:
+            if not all(k in r for k in ('budget_remaining', 'cost_per_result_goal', 'bid_strategy_live')):
+                raise LayoutError('Missing Budget R./Bid source evidence')
+            for key in ('budget_remaining', 'cost_per_result_goal'):
+                if r[key] is not None and (number(r[key]) is None or number(r[key]) < 0):
+                    raise LayoutError('Invalid configuration metric: ' + key)
+            if r['bid_strategy_live'] != 'COST_CAP' and r['cost_per_result_goal'] is not None:
+                raise LayoutError('Cost per result goal is only applicable to COST_CAP')
+        if not re.fullmatch(r'\d+', r['number']):
+            raise LayoutError('Campaign number must be literal digits')
+        if not isinstance(r['product'], str):
+            raise LayoutError('Product label must be text')
+        if include_status or status_blocks:
+            if 'campaign_status' not in r:
+                raise LayoutError('Missing configured campaign status evidence')
+            campaign_status_code(r['campaign_status'], status_codes)
+        if include_rps and ('rps' not in r or (r['rps'] is not None and (number(r['rps']) is None or number(r['rps']) < 0))):
+            raise LayoutError('Missing or invalid visible SB RPS value')
+        if budget_percent and ('daily_budget' not in r or (r['daily_budget'] is not None and (number(r['daily_budget']) is None or number(r['daily_budget']) < 0 or (not budget_used and number(r['daily_budget']) == 0)))):
+            raise LayoutError('Missing or invalid daily budget denominator')
+        if number(r['spend']) is None or number(r['spend']) < 0:
+            raise LayoutError('Invalid Meta spend')
+        equal_metric(r['roi'], roi(r['net_revenue'], r['spend']), 'current ROI')
+        equal_metric(r['estimated_roi'], roi(r['estimated_revenue'], r['spend']), 'estimated ROI')
+        markers = re.findall(r'\bCOPY\s+C(\d+)\b', r['name'], re.I)
+        if len(set(markers)) > 1:
+            raise LayoutError('Ambiguous COPY marker')
+        r['copy_source_literal'] = markers[0] if markers else None
+        r['display'] = r['number'] + (' COPY C' + markers[0] if markers else '')
+        if number_bid_preview:
+            r['display'] = number_bid_label(r, number_bid_preview, markers[0] if markers else None)
+        if [h.get('date') for h in r['history']] != dates:
+            raise LayoutError('Daily campaign coverage mismatch')
+        for h in r['history']:
+            if not all(k in h for k in ('spend', 'net_revenue', 'roi', 'partial')):
+                raise LayoutError('Missing daily source evidence')
+            equal_metric(h['roi'], roi(h['net_revenue'], h['spend']), 'daily ROI')
+            if h['date'] != dates[-1] and h['partial']:
+                raise LayoutError('Past civil date cannot be current partial')
+        equal_metric(r['history'][-1]['roi'], r['roi'], 'current history/main snapshot')
+    groups, notes = ordered_groups(rows, account, cfg, explicit_sort)
+    if status_blocks:
+        ranked = [r for group in groups for r in group]
+        groups = [[r] for block in status_blocks['blocks'] for r in ranked
+                  if (r.get('campaign_status') or 'UNKNOWN') == block['status']]
+    main_groups, history_groups, history_by_id = [], [], {}
+    for group in groups:
+        main, history = [], []
+        for r in group:
+            start = date.fromisoformat(r['first_delivery']).strftime('%d/%m') if r['first_delivery'] else 'n/d'
+            age = 'D' + str((target - date.fromisoformat(r['first_delivery'])).days + 1) if r['first_delivery'] else 'n/d'
+            balance = number(r['net_revenue']) - number(r['spend']) if number(r['net_revenue']) is not None else None
+            values = {'R/E': signal(r['roi']) + signal(r['estimated_roi'], True), 'Início': start, 'Nº': r['display'], 'Produto': product_label(r['product'], remove_ellipsis=preview_remove_product_ellipsis, max_characters=preview_product_max_characters), 'Quiz': r['quiz'], 'Gasto': fmt(r['spend']), 'Receita': fmt(r['net_revenue']), 'Saldo': fmt(balance, signed=True), 'Est.Health': fmt(r['health'], '%'), 'ROI': fmt(r['roi'], '%', True), 'ROI est.': fmt(r['estimated_roi'], '%', True), 'ROAS': fmt(r['roas'], 'x'), 'Lance': r['bid']}
+            if include_rps:
+                values['RPS'] = fmt(r['rps'])
+            if include_status:
+                values['St'] = campaign_status_code(r['campaign_status'], status_codes)
+            if format_profile:
+                caps = format_profile['caps']
+                values['ROI'] = capped_display(r['roi'], caps['ROI'], '%')
+                values['ROI est.'] = capped_display(r['estimated_roi'], caps['ROI E.'], '%')
+                values['ROAS'] = capped_display(r['roas'], caps['ROAS'], 'x')
+                values['Receita'] = capped_display(r['net_revenue'], caps['Rev'], grouped=True)
+            if configuration_columns:
+                strategy = r['bid_strategy_live']
+                remaining, daily = number(r['budget_remaining']), number(r.get('daily_budget'))
+                values['Budget R.'] = fmt(budget_used_percent(r['spend'], daily), '%') if budget_used else fmt(remaining * 100 / daily if remaining is not None and daily is not None and daily > 0 else None, '%') if budget_percent else fmt(remaining)
+                if r['id'] in compact_budget_ids:
+                    values['Budget R.'] = '100%'
+                values['Bid'] = fmt(r['cost_per_result_goal']) if strategy == 'COST_CAP' else '—' if strategy in ('LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP') else 'misto' if strategy == 'MIXED' else 'n/d'
+            try:
+                main.append([values[k] for k in columns])
+            except KeyError as exc:
+                raise LayoutError('Renderer requires update for new column') from exc
+            average, n = mean_roi([h['roi'] for h in r['history']])
+            partial = any(h['partial'] and number(h['roi']) is not None for h in r['history'])
+            avg = fmt(average, '%', True, 1) + ('*' if partial else '') + (f' ({n}/7)' if 0 < n < 7 else '')
+            history_row = [start, r['display'], age] + [fmt(h['roi'], '%', True, 1) + ('*' if h['partial'] and h['roi'] is not None else '') for h in r['history']] + [avg]
+            history.append(history_row)
+            history_by_id[r['id']] = history_row
+        main_groups.append(main)
+        history_groups.append(history)
+    history_ids = [r['id'] for g in groups for r in g]
+    if explicit_sort is not None and explicit_sort.get('history_sort') == 'campaign_number_asc':
+        history_ids = [r['id'] for r in sorted(rows, key=lambda r: (int(r['number']), r['id']))]
+        history_groups = [[history_by_id[cid]] for cid in history_ids]
+    has_partial = any(h['partial'] for r in rows for h in r['history'])
+    history_headers = ['Início', 'Nº', 'Dia'] + [date.fromisoformat(dt).strftime('%d/%m') + ('*' if i == len(dates) - 1 and has_partial else '') for i, dt in enumerate(dates)] + ['Média 7d']
+    width_expansions = {}
+    expanding_columns = account_expanding_columns(model, cfg)
+    if numeric_width_rule:
+        if fixed_widths is None or not budget_used:
+            raise LayoutError('Global numeric widths require the current B.U.% profile')
+        expanding_columns |= set(numeric_width_rule['columns'])
+        for name, minimum in numeric_width_rule['minimum_column_widths'].items():
+            index = display_columns.index(name)
+            if fixed_widths[index] < minimum:
+                width_expansions[name] = {'from': fixed_widths[index], 'to': minimum}
+                fixed_widths[index] = minimum
+    if fixed_widths is not None and expanding_columns:
+        for name in expanding_columns:
+            index = display_columns.index(name)
+            needed = max([visual_width(display_columns[index])] + [visual_width(row[index]) for group in main_groups for row in group])
+            if needed > fixed_widths[index]:
+                width_expansions[name] = {'from': width_expansions.get(name, {}).get('from', fixed_widths[index]), 'to': needed}
+                fixed_widths[index] = needed
+    explicit_widths = requested_column_widths(model)
+    if explicit_widths and (fixed_widths is None or not budget_used):
+        raise LayoutError('Explicit column width exception requires the B.U.% fixed profile')
+    for name, width in explicit_widths.items():
+        index = display_columns.index(name)
+        if width < fixed_widths[index]:
+            raise LayoutError('Explicit column width cannot shrink a column')
+        if width > fixed_widths[index]:
+            width_expansions[name] = {'from': fixed_widths[index], 'to': width}
+            fixed_widths[index] = width
+    left = {i for i, name in enumerate(columns) if name in cfg['alignment']['main']['left_aligned_exceptions']}
+    main_ids = [r['id'] for group in groups for r in group]
+    rows_by_id = {r['id']: r for r in rows}
+    main_parts = status_table_parts('SHEIN — principal', display_columns, main_groups, left, main_join, main_ids, rows_by_id, status_blocks, fixed_widths=fixed_widths)
+    history_parts = status_table_parts('Histórico ROI real — 7 dias', history_headers, history_groups, set(), ' | ', history_ids, rows_by_id, status_blocks)
+    if status_blocks:
+        history_ids = [cid for block in status_blocks['blocks'] for cid in history_ids
+                       if (rows_by_id[cid].get('campaign_status') or 'UNKNOWN') == block['status']]
+    delay = number((model.get('delay') or {}).get('totalMinutes'))
+    if delay is None or delay < 0:
+        delay_label = 'n/d — fonte indisponível ou inválida'
+    else:
+        hh, mm = divmod(int(delay), 60)
+        delay_label = f'{hh}h {mm:02d}min' if hh else f'{mm}min'
+    spend = sum(number(r['spend']) for r in rows)
+    revenue = sum(number(r['net_revenue']) for r in rows) if rows and all(number(r['net_revenue']) is not None for r in rows) else None
+    estimated = sum(number(r['estimated_revenue']) for r in rows) if rows and all(number(r['estimated_revenue']) is not None for r in rows) else None
+    balance = revenue - spend if revenue is not None else None
+    header = f"## SHEIN · {account['name']}\n**{target.strftime('%d/%m/%Y')} · até {cutoff.strftime('%H:%M %Z')} · {account['currency']}**\n**⏱️ ATRASO GAM/SB: {delay_label}**\n"
+    if number_bid_preview:
+        label = 'Nº com lance abreviado e CP de origem' if number_bid_preview.get('copy_display_format') else 'Lance junto do Nº'
+        header = '**Prévia para validação: ' + label + '; mesmo snapshot financeiro.**\n' + header
+    if configuration_columns:
+        financial_label = 'Financeiro preservado' if model.get('financial_snapshot_preserved', True) else 'Financeiro'
+        budget_label = 'B.U.' if budget_used else 'B.R.'
+        header += f"{financial_label}: {cutoff.strftime('%d/%m %H:%M %Z')}. Bid/{budget_label}: Meta {config_cutoff.strftime('%d/%m %H:%M %Z')}.\n"
+    if include_rps:
+        rps_cutoff = datetime.fromisoformat(rps_source['observed_at']).astimezone(ZoneInfo(account['timezone_name']))
+        header += f"RPS: coluna da dash SB, consultada em {rps_cutoff.strftime('%d/%m %H:%M %Z')}.\n"
+    if include_status or status_blocks:
+        header += f"St: Meta {status_cutoff.strftime('%d/%m %H:%M %Z')}.\n"
+    if status_blocks:
+        header += 'Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.\n'
+    if preview_product_max_characters is not None:
+        qualifier = ', sem reticências' if preview_remove_product_ellipsis else ''
+        header = f'**Prévia visual: Produto até {preview_product_max_characters} caracteres{qualifier}; mesmo snapshot financeiro.**\n' + header
+    elif preview_remove_product_ellipsis:
+        header = '**Prévia visual: Produto sem reticências; mesmo snapshot financeiro.**\n' + header
+    if preview_compact_headers:
+        header = '**Cabeçalhos compactos: B.R. · Rev · Health · ROI E.**\n' + header
+    header += f"Gasto **{fmt(spend)}** · {aliases.get('Receita', 'Receita')} **{fmt(revenue)}** · Saldo **{fmt(balance, signed=True)}** · ROI **{fmt(roi(revenue, spend), '%', not bool(format_profile))}** · {aliases.get('ROI est.', 'ROI est.')} **{fmt(roi(estimated, spend), '%', not bool(format_profile))}**.\n"
+    sort_rule = cfg.get('account_sort_overrides', {}).get(account_id, {})
+    if explicit_sort is not None:
+        direction = 'do menor para o maior' if explicit_sort['mode'] == 'estimated_roi_asc' else 'do maior para o menor'
+        origin = 'Padrão salvo nesta conta' if explicit_sort.get('_canonical_default') else 'Ordenação deste pedido'
+        header += f'{origin}: ROI E. {direction}; sem base ao final.\n'
+        if explicit_sort.get('history_sort') == 'campaign_number_asc':
+            header += 'Histórico de 7 dias: número da campanha em ordem crescente.\n'
+    elif sort_rule.get('status') == 'active':
+        header += 'Ordenação salva nesta conta: ROI E. do maior para o menor; sem base ao final.\n'
+    if not rows:
+        header += 'Sem campanhas com entrega no recorte; nenhuma linha financeira foi inventada.\n'
+    footer = f"{'* ' + target.strftime('%d/%m') + ' parcial até ' + cutoff.strftime('%H:%M %Z') + '.\n' if has_partial else ''}"
+    if number_bid_preview:
+        source_note = 'CP89 = cópia da campanha 89; origem direta preservada.' if number_bid_preview.get('copy_display_format') else 'COPY preserva a origem direta.'
+        footer += 'Nº: CC = COCAP; MV = MAXVOL; BC = BIDCAP; MX = misto. ' + source_note + ' Bid mantém o valor da meta.\n'
+    footer += 'Fontes: Meta Insights × Smart Bidding/Adgroup. ROI = receita líquida/gasto Meta − 1; ROI est. = receita estimada/gasto Meta − 1; ROAS = valor de compras Meta/gasto.\nReceita/ROI sujeitos ao atraso GAM/SB.\n'
+    if format_profile:
+        footer += 'Tetos visuais nas linhas principais: ROI/ROI E. 999,99%; ROAS 9,99x; Rev 9.999,99. Cálculos, totais e ranking usam valores reais; histórico preservado.\n'
+    if numeric_width_rule:
+        footer += 'Padrão SHEIN: Gasto, B.U.% e Saldo com largura adaptada aos números, preservando sinais e casas decimais.\n'
+    elif width_expansions:
+        footer += ('Exceção pontual aprovada: ' + ', '.join(width_expansions) + ' com largura ampliada somente neste relatório, sem alterar valores ou casas decimais.\n') if explicit_widths else 'Coluna Gasto com largura adaptada aos números, sem alterar valores ou casas decimais.\n'
+    if compact_budget_ids:
+        footer += 'Exceção pontual aprovada: B.R.% exatamente 100,00% aparece como 100% somente nas campanhas autorizadas; valores brutos preservados.\n'
+    if include_status:
+        labels = [('ACTIVE', 'ativa'), ('PAUSED', 'pausada'), ('DELETED', 'deletada'), ('ARCHIVED', 'arquivada')]
+        status_legend = {}
+        for key, label in labels:
+            status_legend.setdefault(status_codes[key], []).append(label)
+        footer += 'St (campanha): ' + '; '.join(code + ' = ' + '/'.join(labels) for code, labels in status_legend.items()) + '.\n'
+    if configuration_columns:
+        delay_note = 'Atraso GAM/SB observado no snapshot financeiro preservado.' if model.get('financial_snapshot_preserved', True) else 'Atraso GAM/SB consultado nesta coleta.'
+        if budget_used:
+            footer += f"B.U.% = gasto Meta no dia/orçamento diário da campanha × 100; não é orçamento restante. Sem teto de 100%. Bid em {account['currency']}. {delay_note}\n"
+        elif budget_percent:
+            footer += f"B.R.% = orçamento restante Meta/orçamento diário × 100; Bid em {account['currency']}. {delay_note}\n"
+        else:
+            footer += f"{aliases.get('Budget R.', 'Budget R.')} = budget_remaining Meta; Bid = meta de custo/resultado em Cost Cap; ambos em {account['currency']}. {delay_note}\n"
+        if include_rps:
+            footer += f"RPS copiado da coluna da dash Smart Bidding, em {account['currency']} por mil sessões.\n"
+        for limitation in model.get('configuration_limitations', []):
+            footer += str(limitation) + '\n'
+    if cfg.get('legend', {}).get('enabled', False):
+        footer += 'Média 7d = média aritmética dos ROIs reais diários válidos; n/d não vira zero; (n/7) indica cobertura incompleta. Produto é rótulo do nome; COPY é origem direta explícita.\n'
+    visible_notes = [note for note in notes if not (explicit_sort is not None and explicit_sort.get('hide_copy_origin_notes') and note.startswith('Origem COPY fora do recorte ou ambígua:'))]
+    if visible_notes:
+        footer += '\n'.join(visible_notes) + '\n'
+    footer += f'**Fim do relatório — {len(rows)} campanhas e histórico de 7 dias.**'
+    main_delivery = status_table_parts('SHEIN — principal', display_columns, main_groups, left, main_join, main_ids, rows_by_id, status_blocks, prefix=header.strip(), fixed_widths=fixed_widths)
+    parts = pack_complete_parts([*main_delivery, *history_parts, *prose_parts(footer.strip())])
+    result = {'text': '\n\n'.join(parts), 'parts': parts, 'main_parts': main_parts, 'history_parts': history_parts, 'campaign_order': [r['display'] for g in groups for r in g], 'campaign_ids': [r['id'] for g in groups for r in g], 'main_rows': len(rows), 'history_rows': len(rows), 'history_cells': len(rows) * len(dates), 'contract_sha256': hashlib.sha256(json.dumps(cfg, sort_keys=True, ensure_ascii=False).encode()).hexdigest()}
+    result['history_campaign_ids'] = history_ids
+    result['status_blocks_policy_id'] = status_blocks['policy_id'] if status_blocks else None
+    result['numeric_width_policy_id'] = numeric_width_rule['policy_id'] if numeric_width_rule else None
+    result['number_bid_preview_policy_id'] = number_bid_preview['policy_id'] if number_bid_preview else None
+    result['width_expansions'] = width_expansions
+    result['diagnostics'] = notes
+    if any(discord_length(p) > 2000 for p in parts):
+        raise LayoutError('Header or footer exceeds Discord capacity')
+    return result
+
+
+def validate_report(model, text, thread_id=None, preview_remove_product_ellipsis=False, preview_product_max_characters=None, preview_compact_headers=False):
+    if thread_id is not None:
+        check_thread_binding(model, thread_id)
+    result = render_model(model, preview_remove_product_ellipsis=preview_remove_product_ellipsis, preview_product_max_characters=preview_product_max_characters, preview_compact_headers=preview_compact_headers)
+    if text != result['text']:
+        raise LayoutError('Report differs from canonical rendering; do not publish')
+    return {'status': 'validated', 'contract_sha256': result['contract_sha256'], 'report_sha256': hashlib.sha256(text.encode()).hexdigest(), 'model_sha256': hashlib.sha256(json.dumps(model, sort_keys=True, ensure_ascii=False).encode()).hexdigest(), 'account_id': model['account']['id'], 'account_name': model['account']['name'], 'thread_id': thread_id, 'report_date': model['date'], 'main_rows': result['main_rows'], 'history_rows': result['history_rows'], 'parts': len(result['parts']), 'max_part_chars': max(map(len, result['parts'])), 'max_part_utf16_units': max(map(discord_length, result['parts'])), 'pagination_policy': 'capacity_first_exact_2000_no_secondary_split', 'preview_remove_product_ellipsis': bool(preview_remove_product_ellipsis), 'preview_product_max_characters': preview_product_max_characters, 'preview_compact_headers': bool(preview_compact_headers)}
+
+
+def check_thread_binding(model, thread_id):
+    index = Path('/root/mgs-agent/data/ares/discord/shein-intraday-report-bindings.json')
+    bindings = json.loads(index.read_text())['bindings']
+    matches = [b for b in bindings if b['thread_id'] == str(thread_id)]
+    if len(matches) != 1:
+        raise LayoutError('Thread is not uniquely bound to a SHEIN account')
+    account = model.get('account') or {}
+    binding = matches[0]
+    if str(account.get('id', '')).removeprefix('act_') != binding['account_id'] or account.get('name') != binding['account_name']:
+        raise LayoutError('Thread/account identity mismatch')
+    return binding
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest='command', required=True)
+    render = sub.add_parser('render')
+    render.add_argument('--input', required=True)
+    render.add_argument('--output', required=True)
+    render.add_argument('--thread-id')
+    render.add_argument('--preview-remove-product-ellipsis', action='store_true')
+    render.add_argument('--preview-product-max-characters', type=int)
+    render.add_argument('--preview-compact-headers', action='store_true')
+    validate = sub.add_parser('validate')
+    validate.add_argument('--input', required=True)
+    validate.add_argument('--report', required=True)
+    validate.add_argument('--receipt')
+    validate.add_argument('--thread-id')
+    validate.add_argument('--preview-remove-product-ellipsis', action='store_true')
+    validate.add_argument('--preview-product-max-characters', type=int)
+    validate.add_argument('--preview-compact-headers', action='store_true')
+    args = parser.parse_args()
+    try:
+        model = json.loads(Path(args.input).read_text())
+        if args.thread_id:
+            check_thread_binding(model, args.thread_id)
+        if args.command == 'render':
+            result = render_model(model, preview_remove_product_ellipsis=args.preview_remove_product_ellipsis, preview_product_max_characters=args.preview_product_max_characters, preview_compact_headers=args.preview_compact_headers)
+            path = Path(args.output)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(result['text'])
+            path.with_suffix('.parts.json').write_text(json.dumps(result['parts'], ensure_ascii=False, indent=2))
+            receipt = validate_report(model, result['text'], args.thread_id, args.preview_remove_product_ellipsis, args.preview_product_max_characters, args.preview_compact_headers)
+            receipt['preview_compact_headers'] = args.preview_compact_headers
+            receipt['delivery_receipt'] = str(register_report(result))
+            print(json.dumps(receipt, ensure_ascii=False))
+        else:
+            receipt = validate_report(model, Path(args.report).read_text(), args.thread_id, args.preview_remove_product_ellipsis, args.preview_product_max_characters, args.preview_compact_headers)
+            receipt['preview_compact_headers'] = args.preview_compact_headers
+            result = render_model(model, args.preview_remove_product_ellipsis, args.preview_product_max_characters, args.preview_compact_headers)
+            receipt['delivery_receipt'] = str(register_report(result))
+            if args.receipt:
+                Path(args.receipt).write_text(json.dumps(receipt, ensure_ascii=False, indent=2))
+            print(json.dumps(receipt, ensure_ascii=False))
+    except (LayoutError, KeyError, ValueError, TypeError) as exc:
+        print(json.dumps({'status': 'invalid', 'reason': str(exc)}, ensure_ascii=False))
+        return 2
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

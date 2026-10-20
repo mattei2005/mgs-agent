@@ -3285,15 +3285,15 @@
       },
       "number_bid_preview": {
         "status": "authorized_preview_pending_visual_approval",
-        "policy_id": "ARES-YOLO-G001-CP-PREVIEW-20261019",
+        "policy_id": "ARES-YOLO-G001-QUIZ-LEGEND-PREVIEW-20261019",
         "account_id": "787796726891306",
         "account_name": "Yolokfx-US-SHEIN-EN-05-G001",
         "thread_id": "1558146488599842827",
         "authorized_by_discord_id": "344196393512075265",
         "source_thread_id": "1561752465978818722",
         "source_message_id": null,
-        "request_text": "Deleta o relatório do g001. Aplica isso. E manda lá de novo",
-        "number_column_width": 12,
+        "request_text": "Pode aplicar. Deleta o relatório anterior e manda lá de novo. Outra coisa a legenda no final do report, da uma melhorada nela. Ta tudo escrito muito bagunçado. Deixa mais bonitinho.",
+        "number_column_width": 15,
         "strategy_aliases": {
           "COCAP": "CC",
           "MAXVOL": "MV",
@@ -3301,7 +3301,7 @@
           "misto": "MX",
           "n/d": "n/d"
         },
-        "label_order": "literal_number strategy_alias CP_literal_source_number",
+        "label_order": "literal_number strategy_alias CP_literal_source_number quiz_last",
         "apply_same_identity_label_to_history": true,
         "remove_main_column": "Lance",
         "preserve_Bid_column": true,
@@ -3311,18 +3311,18 @@
         "no_Meta_write": true,
         "no_schedule_change": true,
         "copy_display_format": "CP{literal_source_number}",
-        "supersedes": "ARES-YOLO-G001-NUMBER-BID-PREVIEW-20261019",
+        "supersedes": "ARES-YOLO-G001-CP-PREVIEW-20261019",
         "previous_rule": {
           "status": "authorized_preview_pending_visual_approval",
-          "policy_id": "ARES-YOLO-G001-NUMBER-BID-PREVIEW-20261019",
+          "policy_id": "ARES-YOLO-G001-CP-PREVIEW-20261019",
           "account_id": "787796726891306",
           "account_name": "Yolokfx-US-SHEIN-EN-05-G001",
           "thread_id": "1558146488599842827",
           "authorized_by_discord_id": "344196393512075265",
           "source_thread_id": "1561752465978818722",
           "source_message_id": null,
-          "request_text": "Gostei. Manda um report no yolo do g001 pra eu ver como fica pra validar. E deleta o report anterior que você acabou de mandar. Aí se eu validar você vai deletar todos os reports q vc mandou agora e aí fazer em todos e mandar em todos alterado",
-          "number_column_width": 16,
+          "request_text": "Deleta o relatório do g001. Aplica isso. E manda lá de novo",
+          "number_column_width": 12,
           "strategy_aliases": {
             "COCAP": "CC",
             "MAXVOL": "MV",
@@ -3330,7 +3330,7 @@
             "misto": "MX",
             "n/d": "n/d"
           },
-          "label_order": "literal_number strategy_alias literal_COPY_source",
+          "label_order": "literal_number strategy_alias CP_literal_source_number",
           "apply_same_identity_label_to_history": true,
           "remove_main_column": "Lance",
           "preserve_Bid_column": true,
@@ -3338,8 +3338,40 @@
           "global_rollout": "requires_subsequent_Rodolfo_visual_validation",
           "other_reports_unchanged": true,
           "no_Meta_write": true,
-          "no_schedule_change": true
-        }
+          "no_schedule_change": true,
+          "copy_display_format": "CP{literal_source_number}",
+          "supersedes": "ARES-YOLO-G001-NUMBER-BID-PREVIEW-20261019",
+          "previous_rule": {
+            "status": "authorized_preview_pending_visual_approval",
+            "policy_id": "ARES-YOLO-G001-NUMBER-BID-PREVIEW-20261019",
+            "account_id": "787796726891306",
+            "account_name": "Yolokfx-US-SHEIN-EN-05-G001",
+            "thread_id": "1558146488599842827",
+            "authorized_by_discord_id": "344196393512075265",
+            "source_thread_id": "1561752465978818722",
+            "source_message_id": null,
+            "request_text": "Gostei. Manda um report no yolo do g001 pra eu ver como fica pra validar. E deleta o report anterior que você acabou de mandar. Aí se eu validar você vai deletar todos os reports q vc mandou agora e aí fazer em todos e mandar em todos alterado",
+            "number_column_width": 16,
+            "strategy_aliases": {
+              "COCAP": "CC",
+              "MAXVOL": "MV",
+              "BIDCAP": "BC",
+              "misto": "MX",
+              "n/d": "n/d"
+            },
+            "label_order": "literal_number strategy_alias literal_COPY_source",
+            "apply_same_identity_label_to_history": true,
+            "remove_main_column": "Lance",
+            "preserve_Bid_column": true,
+            "preserve_all_financial_fields_and_timestamps": true,
+            "global_rollout": "requires_subsequent_Rodolfo_visual_validation",
+            "other_reports_unchanged": true,
+            "no_Meta_write": true,
+            "no_schedule_change": true
+          }
+        },
+        "include_quiz_in_number": true,
+        "legend_layout": "structured_v1"
       },
       "numeric_width_standard": {
         "status": "active",
