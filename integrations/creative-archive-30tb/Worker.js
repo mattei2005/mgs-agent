@@ -38,7 +38,12 @@ function mgsArchiveValidateJob(j,c) {
   return j;
 }
 function mgsArchiveRequirePublisher(meta,email) {
-  if (!meta.lastModifyingUser || meta.lastModifyingUser.emailAddress!==email) throw new Error('PUBLISHER');
+  // Drive may hide another principal's email. Native IDs are Google output,
+  // pinned from authenticated About.user and the approved archive root owner.
+  var pins={'mgsagent@mgs-core-prod.iam.gserviceaccount.com':'07414359829876449782','mgsdigitalcorp@gmail.com':'03783617840924670288'};
+  var user=meta && meta.lastModifyingUser,expected=pins[email];
+  if (!expected || !user || user.permissionId!==expected ||
+      (user.emailAddress!=null && user.emailAddress!==email)) throw new Error('PUBLISHER');
   return true;
 }
 function mgsArchiveValidateSource(m,a,c) {
@@ -53,7 +58,7 @@ function mgsArchiveHash(text) {
 }
 function mgsArchiveText(id) { return DriveApp.getFileById(id).getBlob().getDataAsString('UTF-8'); }
 function mgsArchiveMeta(id) {
-  return Drive.Files.get(id,{supportsAllDrives:true,fields:'id,name,mimeType,parents,driveId,size,md5Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress),properties,capabilities(canCopy,canAddChildren),permissions(type,emailAddress,role)'});
+  return Drive.Files.get(id,{supportsAllDrives:true,fields:'id,name,mimeType,parents,driveId,size,md5Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canCopy,canAddChildren),permissions(type,emailAddress,role)'});
 }
 function mgsArchiveList(parent,key,type,state) {
   var quote=function(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");};
@@ -61,7 +66,7 @@ function mgsArchiveList(parent,key,type,state) {
   [['mgsArchiveKey',key],['mgsArchiveType',type],['mgsArchiveState',state]].forEach(function(p){if(p[1])q+=" and properties has { key='"+p[0]+"' and value='"+quote(p[1])+"' }";});
   var all=[],token;
   do {
-    var opts={q:q,pageSize:100,supportsAllDrives:true,includeItemsFromAllDrives:true,fields:'nextPageToken,files(id,name,mimeType,parents,properties,lastModifyingUser(emailAddress))'};
+    var opts={q:q,pageSize:100,supportsAllDrives:true,includeItemsFromAllDrives:true,fields:'nextPageToken,files(id,name,mimeType,parents,properties,lastModifyingUser(emailAddress,permissionId))'};
     if(token)opts.pageToken=token;
     var page=Drive.Files.list(opts);all=all.concat(page.files || []);token=page.nextPageToken;
     if(all.length>10000)throw new Error('QUEUE_LIST_LIMIT');

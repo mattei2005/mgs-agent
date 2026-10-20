@@ -57,6 +57,23 @@ class ArchiveContractTests(unittest.TestCase):
         self.assertEqual(self.api.resolve_id(sid,{sid:{'verified':True,'archiveId':'newId'}},False),sid)
     def test_verified_mapping_can_resolve_explicitly(self):
         sid=self.asset['sourceId'];self.assertEqual(self.api.resolve_id(sid,{sid:{'verified':True,'archiveId':'newId','owner':self.cfg['account']}},True),'newId')
+    def test_google_hidden_email_accepts_pinned_sa_permission_id(self):
+        self.assertIs(self.api.require_publisher({'lastModifyingUser':{'permissionId':'07414359829876449782'}},self.api.CANONICAL_SA),True)
+    def test_google_hidden_email_accepts_pinned_owner_permission_id(self):
+        self.assertIs(self.api.require_publisher({'lastModifyingUser':{'permissionId':'03783617840924670288'}},self.api.ACCOUNT),True)
+    def test_matching_email_cannot_bypass_wrong_permission_id(self):
+        with self.assertRaises(self.api.ArchiveError):self.api.require_publisher({'lastModifyingUser':{'emailAddress':self.api.CANONICAL_SA,'permissionId':'other'}},self.api.CANONICAL_SA)
+    def test_missing_native_id_fails_closed(self):
+        with self.assertRaises(self.api.ArchiveError):self.api.require_publisher({'lastModifyingUser':{'emailAddress':self.api.ACCOUNT}},self.api.ACCOUNT)
+    def test_contradictory_email_fails_closed(self):
+        with self.assertRaises(self.api.ArchiveError):self.api.require_publisher({'lastModifyingUser':{'emailAddress':'other@example.com','permissionId':'03783617840924670288'}},self.api.ACCOUNT)
+    def test_unknown_expected_publisher_fails_closed(self):
+        with self.assertRaises(self.api.ArchiveError):self.api.require_publisher({'lastModifyingUser':{'emailAddress':'other@example.com','permissionId':'03783617840924670288'}},'other@example.com')
+    def test_bridge_requests_native_id_from_google_metadata(self):
+        d=object.__new__(self.api.Drive);calls=[]
+        d.api=lambda method,path,params:(calls.append(params) or {})
+        d.meta('offline-file')
+        self.assertIn('permissionId',calls[0]['fields'])
     def test_mapping_never_changes_inventory_identifiers(self):
         source={'source_drive_id':'source','asset_drive_id':'clean','ares_eligible':False};before=source.copy()
         self.api.resolve_id('clean',{'clean':{'verified':True,'archiveId':'newId','owner':self.cfg['account']}},True)

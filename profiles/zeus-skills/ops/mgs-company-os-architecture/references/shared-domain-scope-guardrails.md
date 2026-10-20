@@ -22,6 +22,9 @@ Use quando um agente de equipe pode acessar uma conta ou inventário que também
 
 ## Critérios de aceitação
 
+- Quando o executivo exigir ausência de exposição a gestores, tratar o objetivo como confidencialidade e não descoberta: pedidos genéricos de gastos, cartões, billing, todas as contas ou relatórios devem receber exclusivamente dados corporativos permitidos, sem nomes, IDs, valores, contagens ou confirmação lateral de outros ativos. Não expor primeiro ao modelo para filtrar somente a resposta.
+- Não encerrar confidencialidade porque um helper bloqueou IDs conhecidos ou porque uma sessão nova repetiu a política. Exigir cobertura das fontes de relatórios/finanças, caches, históricos, caminhos alternativos de ferramenta e credenciais, com testes end-to-end de consultas genéricas. Se o agente ainda compartilha root ou pode buscar fontes privadas por outra rota, registrar a garantia como não concluída; preservar separadamente os controles locais já validados e a exceção técnica do app.
+
 - Registro ordenado, único, sem wildcard e validado por schema.
 - Cada host permitido aparece literalmente na fonte afirmativa de ownership, e o checker rejeita o registro inteiro se a cobertura não for 100%; um ponteiro genérico para um arquivo existente não basta.
 - A suíte de regressão de produção passa após a mudança; se ela contém uma asserção intencional da cardinalidade da allowlist, atualize essa asserção junto com a nova entrada em vez de aceitar uma falha ou enfraquecer o teste.

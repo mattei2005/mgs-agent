@@ -4403,12 +4403,12 @@
     {
       "agent": "zeus",
       "id": "ares-sb-scope-audit-1562108149710856284",
-      "next_step": "Zeus monitora consistência dos cadastros positivos e helpers. Sem pendência de autorização neste cutover local. Revogação Meta, sandbox do host, Git histórico e serviços externos não foram alterados nem fazem parte desta execução.",
-      "objective": "Aplicar escopo operacional Ares Digital Trust + catálogo corporativo SB, com expurgo localizado e preservação integral do app e permissões.",
-      "source": "/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701/apply-result.json",
-      "state": "completed_local_scope_and_purge_validated",
+      "next_step": "Zeus deve mapear e validar todas as rotas de relatórios/finanças, fontes, caches e acesso alternativo. Limpeza local e helper permanecem validados, mas não encerram a garantia de sigilo. Preservar app e permissões; qualquer separação crítica de credencial ou sistema exige desenho e confirmação exatos. Origem da correção: mensagem 1562133755932573808.",
+      "objective": "Garantir confidencialidade e não descoberta por gestores: consultas genéricas do Ares devem receber somente dados corporativos permitidos, sem exposição de outros ativos por relatórios, financeiro, caches ou caminhos alternativos.",
+      "source": "context/ares-asset-scope.md",
+      "state": "reopened_confidentiality_end_to_end_not_validated",
       "thread_id": "1562104297926295623",
-      "updated_at": "2026-10-20T15:55:07+00:00"
+      "updated_at": "2026-10-20T16:03:54+00:00"
     },
     {
       "agent": "ares",
@@ -6832,5 +6832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T15:56:58+00:00"
+  "updated_at": "2026-10-20T16:03:54+00:00"
 }

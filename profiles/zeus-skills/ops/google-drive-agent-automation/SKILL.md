@@ -93,6 +93,15 @@ For Search Console API enablement, Service Usage IAM, property access and read-o
 
 ## Sheets verification
 
+### Source-to-Sheet financial reconciliation
+
+- Match the exact spreadsheet, numeric tab ID, headers and unique account row before writing; use issuer/product plus the displayed card suffix rather than row position alone. Keep credentials and full card numbers out of evidence and Sheets.
+- Treat each financial field independently: balance owed, available credit, available to spend, spending limit and Pay Over Time limit are not interchangeable. Publish only a source-explicit value with its original meaning; never infer a total limit from a balance or a blank detail panel.
+- Write only authorized, verified differences and preserve unknown fields, formulas and formatting. When the source already matches the Sheet, report a verified no-op rather than claiming an update. When only one field is verified, report partial field coverage and identify any preserved older value as unvalidated.
+- Preserve a pre-write snapshot and compare the full bounded values/formulas range after the narrow write, so a successful cell update cannot hide an accidental change elsewhere.
+
+For issuer-dashboard navigation, card-suffix reconciliation, short session recovery and the exact read/write/readback sequence, use `references/bank-card-limit-reconciliation.md`. Browser authentication belongs to `secure-remote-windows-automation`, not Google identity selection.
+
 For DigitalTRChat portfolio page-count refreshes, use `references/dtr-page-count-reconciliation.md`: it defines row-occurrence scope, duplicate switcher-name resolution, immutable backup, numeric-string canary readback, narrow writes and monitor pause/resume closure.
 
 For every cutover or permission change:

@@ -35,6 +35,16 @@ FOLDER='application/vnd.google-apps.folder'
 
 class ArchiveError(RuntimeError): pass
 
+PUBLISHER_PERMISSION_IDS={CANONICAL_SA:'07414359829876449782',ACCOUNT:'03783617840924670288'}
+
+def require_publisher(meta,email,reason='PUBLISHER'):
+    # Native IDs remain authoritative when Google hides cross-principal email.
+    user=meta.get('lastModifyingUser') if isinstance(meta,dict) else None
+    expected=PUBLISHER_PERMISSION_IDS.get(email)
+    if not expected or not isinstance(user,dict) or user.get('permissionId')!=expected or (user.get('emailAddress') is not None and user['emailAddress']!=email):
+        raise ArchiveError(reason)
+    return True
+
 def canonical(value): return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
 def now_iso(): return dt.datetime.now(dt.timezone.utc).isoformat()
 def timestamp(value):
@@ -129,7 +139,7 @@ class Drive:
         if status not in (200,201): raise ArchiveError('DRIVE_HTTP_'+str(status))
         return data
     def meta(self,fid):
-        return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
+        return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
     def listing(self,parent,*,key=None,kind=None):
         q="'"+parent+"' in parents and trashed=false"
         for name,value in [('mgsArchiveKey',key),('mgsArchiveType',kind)]:
@@ -138,7 +148,7 @@ class Drive:
                 q+=" and properties has { key='"+name+"' and value='"+value+"' }"
         out=[];page=None
         while True:
-            p={'q':q,'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':100,'fields':'nextPageToken,files(id,name,mimeType,parents,lastModifyingUser(emailAddress),properties)'}
+            p={'q':q,'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':100,'fields':'nextPageToken,files(id,name,mimeType,parents,lastModifyingUser(emailAddress,permissionId),properties)'}
             if page:p['pageToken']=page
             d=self.api('GET','files',p);out+=d.get('files',[]);page=d.get('nextPageToken')
             if len(out)>10000: raise ArchiveError('QUEUE_LIST_LIMIT')
@@ -233,7 +243,7 @@ def initialize(d,c):
 def publish_worker(d,c):
     source=(BASE/'integrations/creative-archive-30tb/Worker.js').read_bytes();sha=hashlib.sha256(source).hexdigest()
     fid=d.upload_once(c['control_folder_id'],'MGS-Archive-Worker-'+sha[:12]+'.js',source,'application/javascript','worker:'+sha,'worker')
-    if d.meta(fid).get('lastModifyingUser',{}).get('emailAddress')!=CANONICAL_SA:raise ArchiveError('WORKER_AUTHOR')
+    require_publisher(d.meta(fid),CANONICAL_SA,'WORKER_AUTHOR')
     c.update({'worker_file_id':fid,'worker_sha256':sha});atomic_json(CONFIG,c)
     return {'status':'worker_published_and_hash_verified','workerFileId':fid,'sha256':sha}
 
@@ -247,7 +257,7 @@ def enqueue(d,c,job):
     payload=canonical(job)
     fid=d.upload_once(c['requests_folder_id'],'job-'+job['jobId']+'.json',payload,'application/json','request:'+job['jobId'],'request')
     request_meta=d.meta(fid)
-    if request_meta.get('lastModifyingUser',{}).get('emailAddress')!=CANONICAL_SA:raise ArchiveError('REQUEST_AUTHOR')
+    require_publisher(request_meta,CANONICAL_SA,'REQUEST_AUTHOR')
     state=request_meta.get('properties',{}).get('mgsArchiveState')
     return {'status':'already_verified' if state=='verified' else 'queued','jobId':job['jobId'],'requestFileId':fid,'kind':job['kind'],'deleteSource':False}
 
@@ -269,7 +279,7 @@ def reconcile(d,c,job_id,apply=False):
     rf=d.one(c['receipts_folder_id'],'receipt:'+job_id)
     if not rf:return {'status':'pending','jobId':job_id}
     rm=d.meta(rf['id'])
-    if rm.get('lastModifyingUser',{}).get('emailAddress')!=ACCOUNT:raise ArchiveError('RECEIPT_AUTHOR')
+    require_publisher(rm,ACCOUNT,'RECEIPT_AUTHOR')
     r=json.loads(d.raw(rf['id']));validate_receipt(job,r);verified=[]
     for a in job['assets']:
         item=next(x for x in r['assets'] if x['sourceId']==a['sourceId'] and x['role']==a['role'])
@@ -299,7 +309,7 @@ def reconcile(d,c,job_id,apply=False):
         request_file=d.one(c['requests_folder_id'],'request:'+job_id)
         if not request_file:raise ArchiveError('REQUEST_MISSING_AFTER_VERIFY')
         request_meta=d.meta(request_file['id'])
-        if request_meta.get('lastModifyingUser',{}).get('emailAddress')!=CANONICAL_SA:raise ArchiveError('REQUEST_PUBLISHER_CHANGED')
+        require_publisher(request_meta,CANONICAL_SA,'REQUEST_PUBLISHER_CHANGED')
         properties=dict(request_meta.get('properties') or {})
         if properties.get('mgsArchiveState')!='verified':
             properties['mgsArchiveState']='verified'
@@ -332,7 +342,7 @@ def main():
             else:
                 heartbeat=None;beat=d.one(c['control_folder_id'],'heartbeat:worker-v1')
                 if beat:
-                    if d.meta(beat['id']).get('lastModifyingUser',{}).get('emailAddress')!=ACCOUNT:raise ArchiveError('HEARTBEAT_AUTHOR')
+                    require_publisher(d.meta(beat['id']),ACCOUNT,'HEARTBEAT_AUTHOR')
                     heartbeat=json.loads(d.raw(beat['id']))
                     if heartbeat.get('schema')!='mgs.archive.heartbeat.v1' or heartbeat.get('workerSha256')!=c.get('worker_sha256'):raise ArchiveError('HEARTBEAT_CODE_VERSION')
                 out={'queueEnabled':c['queue_enabled'],'deleteSource':False,'requests':len(d.listing(c['requests_folder_id'],kind='request')),'receipts':len(d.listing(c['receipts_folder_id'],kind='receipt')),'workerFileId':c.get('worker_file_id'),'heartbeat':heartbeat}

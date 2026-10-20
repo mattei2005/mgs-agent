@@ -13,7 +13,8 @@ function makeHarness(mode,override) {
  metas[c.requestsFolderId]={id:c.requestsFolderId,parents:[c.controlFolderId],driveId:c.sourceDriveId};
  metas[c.receiptsFolderId]={id:c.receiptsFolderId,parents:[c.controlFolderId],driveId:c.sourceDriveId};
  metas[c.archiveRootId]={id:c.archiveRootId,trashed:false,owners:[{emailAddress:account}]};
- metas.requestOne={id:'requestOne',parents:[c.requestsFolderId],version:'1',lastModifyingUser:{emailAddress:sa},properties:{mgsArchiveKey:'request:'+j.jobId,mgsArchiveType:'request',mgsArchiveState:'queued',sha256:sha(texts.requestOne)}};
+ metas.requestOne={id:'requestOne',parents:[c.requestsFolderId],version:'1',lastModifyingUser:{emailAddress:sa,permissionId:'07414359829876449782'},properties:{mgsArchiveKey:'request:'+j.jobId,mgsArchiveType:'request',mgsArchiveState:'queued',sha256:sha(texts.requestOne)}};
+ if(mode==='privateEmail')delete metas.requestOne.lastModifyingUser.emailAddress;
  metas[a.sourceId]={id:a.sourceId,name:a.name,mimeType:a.mimeType,parents:[a.sourceParentId],driveId:c.sourceDriveId,size:a.size,md5Checksum:a.md5,version:a.version,trashed:false,capabilities:{canCopy:true}};
  metas[a.sourceParentId]={id:a.sourceParentId,name:'Nicolas',parents:[c.sourceRootId],driveId:c.sourceDriveId};
  metas.archiveCopy={id:'archiveCopy',name:a.name,mimeType:a.mimeType,parents:[c.archiveRootId],size:a.size,md5Checksum:a.md5,trashed:false,owners:[{emailAddress:account}],permissions:[],properties:{mgsArchivePilot:a.sourceId+'_'+a.md5}};
@@ -33,7 +34,8 @@ function makeHarness(mode,override) {
  const persist=(metadata,id,blob)=>{
    if(id===a.sourceId)throw new Error('SOURCE_MUTATION_FORBIDDEN');
    state.writes.push(id);texts[id]=blob.text;
-   metas[id]={...(metas[id]||{}),...metadata,id,version:'1',lastModifyingUser:{emailAddress:account}};
+   metas[id]={...(metas[id]||{}),...metadata,id,version:'1',lastModifyingUser:{emailAddress:account,permissionId:'03783617840924670288'}};
+   if(mode==='privateEmail')delete metas[id].lastModifyingUser.emailAddress;
    return {id};
  };
  const ctx={console:{log:()=>{}},DriveApp:{getFileById:id=>({getBlob:()=>({getDataAsString:()=>texts[id]})})},
@@ -55,3 +57,4 @@ test('wrong Google account cannot write a receipt',()=>{const h=makeHarness('wro
 test('lock is released even if budget persistence fails',()=>{const h=makeHarness('persistFailure');assert.throws(h.run,/PERSISTENCE/);assert.equal(h.state.released,1);});
 test('owner heartbeat records clock-event identity without claiming a manual run was scheduled',()=>{const h=makeHarness(undefined,{executionTriggerUid:'offline-clock-event',workerSha256:'b'.repeat(64)});h.run();const records=Object.values(h.metas).filter(m=>m.properties && m.properties.mgsArchiveType==='heartbeat');assert.equal(records.length,1);const beat=JSON.parse(h.texts[records[0].id]);assert.equal(beat.triggerUid,'offline-clock-event');assert.equal(beat.workerSha256,'b'.repeat(64));assert.equal(records[0].lastModifyingUser.emailAddress,account);});
 test('manual heartbeat has no trigger identifier',()=>{const h=makeHarness();h.run();const m=Object.values(h.metas).find(x=>x.properties && x.properties.mgsArchiveType==='heartbeat');assert.ok(m);assert.equal(JSON.parse(h.texts[m.id]).triggerUid,null);});
+test('hidden Google emails preserve request receipt and heartbeat provenance over replay',()=>{const h=makeHarness('privateEmail');const first=h.run();assert.equal(first.blocked.length,0);assert.equal(first.copied.length,1);const second=h.run();assert.equal(second.blocked.length,0);assert.equal(h.state.copies,0);assert.equal(Object.values(h.metas).filter(m=>m.properties && m.properties.mgsArchiveType==='receipt').length,1);});

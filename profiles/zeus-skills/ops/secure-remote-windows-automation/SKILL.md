@@ -47,6 +47,9 @@ For an authorized account task that needs the user's real Windows Chrome session
 - Distinguish Windows Hello used to unlock 1Password from Windows Hello authorizing a Windows-held website passkey before recommending settings changes; they are separate gates. Prefer a human unlock or the manager's own unlock setting over removing device-wide protection. A successful manual unlock is not proof that future account reads can run unattended.
 - Treat window titles, accessibility labels, and application notes as potentially secret-bearing. Some applications concatenate profile notes into a browser title; match locally and report only sanitized identity fields, booleans, and PIDs.
 - After a cua-driver or Hermes update, re-resolve the versioned Windows binary path and rerun the entire read-only canary; a wrapper pinned to an old version directory can silently become stale.
+- Resolve each indexed action from the capture immediately preceding it: match the exact semantic label, role and safe account identity, require one match, then use that snapshot's index. Never carry an ordinal into a new capture, even on the same page; asynchronous banners and account selectors can shift indices without a stale-token error.
+- For password-manager login suggestions, try the inline manager button inside the username field when the toolbar popup is absent; clicking the text field alone may not open it. Recheck after one authorized tab reload before escalating to the user; the protected fill stays inside the manager.
+- After a human authentication handoff, inspect the current site immediately and finish the authorized reads in bounded batches. Honor the site's live inactivity timeout; if it expires, resume through the normal protected login and ask for another approval only if a new challenge actually appears. Do not disable timeouts or add unattended keep-alive activity.
 
 ## Procedure
 
