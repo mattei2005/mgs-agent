@@ -17,6 +17,9 @@ test('rejects path traversal',()=>{const j=job();j.assets[0].relativeParent=['..
 test('requires original-clean pair for lineage',()=>assert.throws(()=>api.mgsArchiveValidateJob({...job(),kind:'lineage'},cfg()),/PAIR/));
 test('validates unchanged source',()=>assert.equal(api.mgsArchiveValidateSource(meta(),asset(),cfg()),true));
 test('rejects changed source version',()=>assert.throws(()=>api.mgsArchiveValidateSource({...meta(),version:'13'},asset(),cfg()),/SOURCE/));
+test('metadata-only version advance requires exact Google native SHA-256',()=>assert.equal(api.mgsArchiveValidateSource({...meta(),version:'13',sha256Checksum:asset().sha256},asset(),cfg()),true));
+test('wrong native SHA rejects even when frozen version matches',()=>assert.throws(()=>api.mgsArchiveValidateSource({...meta(),sha256Checksum:'c'.repeat(64)},asset(),cfg()),/SOURCE/));
+test('native content proof never accepts a backwards version',()=>assert.throws(()=>api.mgsArchiveValidateSource({...meta(),version:'11',sha256Checksum:asset().sha256},asset(),cfg()),/SOURCE/));
 test('rejects moved source',()=>assert.throws(()=>api.mgsArchiveValidateSource({...meta(),parents:['other']},asset(),cfg()),/SOURCE/));
 test('rejects wrong request publisher',()=>assert.throws(()=>api.mgsArchiveRequirePublisher({lastModifyingUser:{emailAddress:'other@example.com'}},'mgsagent@mgs-core-prod.iam.gserviceaccount.com'),/PUBLISHER/));
 test('rejects omitted request publisher',()=>assert.throws(()=>api.mgsArchiveRequirePublisher({},'mgsagent@mgs-core-prod.iam.gserviceaccount.com'),/PUBLISHER/));
