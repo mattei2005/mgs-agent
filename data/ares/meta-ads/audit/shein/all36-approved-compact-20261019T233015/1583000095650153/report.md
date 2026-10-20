@@ -1,15 +1,16 @@
 ## SHEIN · Yolokfx-US-SHEIN-EN-02-G006
 **19/10/2026 · até 22:12 EDT · USD**
 **⏱️ ATRASO GAM/SB: 1h 08min**
-Financeiro preservado: 19/10 22:12 EDT. Bid/B.U.: Meta 19/10 22:16 EDT.
+Financeiro preservado: 19/10 22:12 EDT. Bid: Meta 19/10 22:16 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:17 EDT.
-Status dos blocos: Meta 19/10 22:19 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **6312,72** · Rev **9272,45** · Saldo **+2959,73** · ROI **46,89%** · ROI E. **58,88%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
 Histórico de 7 dias: número da campanha em ordem crescente.
 
-**SHEIN — principal · Campanhas ativas (116) · 1/10**
+**SHEIN — principal · Campanhas ativas (116) · 1/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
 🟢🟢 | 17/10  | 199 CC CP110 v2 | FREE TV BED  | 868,97  | 0,90 | 84,32  | 91,92%  |  180,88  | +96,56  | 91,73%  | 114,52%  | 154,02%  | 2,08x
@@ -19,12 +20,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 14/10  | 106 CC CP20 v2  | FREE DJ CONT | 865,94  | 0,90 | 35,25  | 87,82%  |  72,31   | +37,06  | 97,77%  | 105,13%  | 115,26%  | 1,89x
 🟢🟢 | 17/10  | 193 CC CP110 v2 | FOUR WHEELER | 710,91  | 0,90 | 75,40  | 101,15% |  147,17  | +71,77  | 99,37%  |  95,19%  | 111,22%  | 1,79x
 🟢🟢 | 17/10  | 206 CC CP78 v2  | TENT         | 771,76  | 0,90 | 38,78  | 96,61%  |  72,57   | +33,79  | 93,52%  |  87,13%  | 109,77%  | 1,58x
-🟢🟢 | 17/10  | 189 CC CP153 v2 | FREE INFLATA | 1135,45 | 0,90 |  5,55  | 13,83%  |   8,87   |  +3,32  | 80,56%  |  59,82%  | 104,68%  | 1,27x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 2/10**
+**SHEIN — principal · Campanhas ativas (116) · 2/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 17/10  | 189 CC CP153 v2 | FREE INFLATA | 1135,45 | 0,90 |  5,55  | 13,83%  |   8,87   |  +3,32  | 80,56%  |  59,82%  | 104,68%  | 1,27x
 🟢🟢 | 18/10  | 217 CC CP130 v2 | FREE LAWN MO | 750,00  | 0,75 | 20,28  | 70,74%  |  34,56   | +14,28  | 93,60%  |  70,41%  | 100,59%  | 1,41x
 🟢🟢 | 16/10  | 170 CC CP106 v2 | FREE DJ CONT | 881,67  | 0,90 | 41,94  | 91,45%  |  71,85   | +29,91  | 95,02%  |  71,32%  |  97,21%  | 1,68x
 🟢🟢 | 17/10  | 205 CC CP78 v2  | TENT         | 876,98  | 0,90 | 44,28  | 120,13% |  81,91   | +37,63  | 98,08%  |  84,98%  |  94,24%  | 1,52x
@@ -36,12 +37,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 05/10  |    78 CC v2     | TENT         | 801,60  | 0,90 | 140,19 | 109,73% |  233,19  | +93,00  | 94,28%  |  66,34%  |  87,34%  | 1,46x
 🟢🟢 | 14/10  | 118 CC CP112 v2 | FREE LAWN MO | 949,81  | 0,90 | 103,37 | 115,59% |  172,96  | +69,59  | 95,71%  |  67,32%  |  85,81%  | 1,52x
 🟢🟢 | 15/10  | 125 CC CP103 v2 | FREE SNOW BL | 761,27  | 0,90 | 114,76 | 87,98%  |  190,78  | +76,02  | 96,56%  |  66,24%  |  82,22%  | 1,71x
-🟢🟢 | 16/10  | 177 CC CP116 v2 | FREE LAWN MO | 805,95  | 0,90 | 33,40  | 116,50% |  56,76   | +23,36  | 95,88%  |  69,94%  |  81,86%  | 1,12x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 3/10**
+**SHEIN — principal · Campanhas ativas (116) · 3/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 16/10  | 177 CC CP116 v2 | FREE LAWN MO | 805,95  | 0,90 | 33,40  | 116,50% |  56,76   | +23,36  | 95,88%  |  69,94%  |  81,86%  | 1,12x
 🟢🟢 | 18/10  | 224 CC CP145 v2 | FREE DOLLS   | 831,31  | 0,90 | 36,07  | 125,81% |  62,34   | +26,27  | 97,73%  |  72,83%  |  81,56%  | 1,33x
 🟢🟢 | 15/10  | 134 CC CP113 v2 | FREE CHRISTM | 859,35  | 0,80 | 42,95  | 107,00% |  71,85   | +28,90  | 98,17%  |  67,29%  |  81,00%  | 1,46x
 🟢🟢 | 16/10  | 153 CC CP127 v2 | FREE INFLATA | 823,71  | 0,90 | 30,41  | 106,07% |  50,35   | +19,94  | 95,63%  |  65,57%  |  80,20%  | 1,36x
@@ -53,12 +54,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 18/10  | 221 CC CP199 v2 | FREE TV BED  | 730,68  | 0,90 | 74,36  | 92,65%  |  115,20  | +40,84  | 98,14%  |  54,92%  |  76,75%  | 1,67x
 🟢🟢 | 17/10  | 203 CC CP159 v2 | FREE RIMS    | 898,21  | 1,00 | 30,99  | 38,61%  |  54,16   | +23,17  | 96,35%  |  74,77%  |  76,35%  | 1,55x
 🟢🟢 | 17/10  | 192 CC CP157 v2 | FREE TOOLBOX | 817,84  | 0,90 | 54,02  | 104,69% |  90,20   | +36,18  | 97,95%  |  66,98%  |  75,44%  | 1,49x
-🟢🟢 | 16/10  | 176 CC CP116 v2 | FREE LAWN MO | 816,47  | 0,90 | 36,28  | 90,38%  |  62,41   | +26,13  | 99,53%  |  72,02%  |  73,93%  | 1,56x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 4/10**
+**SHEIN — principal · Campanhas ativas (116) · 4/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 16/10  | 176 CC CP116 v2 | FREE LAWN MO | 816,47  | 0,90 | 36,28  | 90,38%  |  62,41   | +26,13  | 99,53%  |  72,02%  |  73,93%  | 1,56x
 🟢🟢 | 02/10  |    32 CC v2     | TENT         | 916,85  | 0,90 | 68,81  | 88,43%  |  104,79  | +35,98  | 94,36%  |  52,29%  |  70,95%  | 1,35x
 🟢🟢 | 14/10  | 112 CC CP20 v2  | FREE LAWN MO | 924,57  | 0,90 | 35,58  | 101,66% |  57,93   | +22,35  | 96,83%  |  62,82%  |  70,69%  | 1,48x
 🟢🟢 | 11/10  |    86 CC v3     | FREE CLOTHES | 1091,45 | 0,85 | 40,70  | 101,40% |  67,78   | +27,08  | 95,86%  |  66,54%  |  69,07%  | 1,48x
@@ -70,12 +71,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 16/10  | 179 CC CP116 v2 | FREE LAWN MO | 797,59  | 0,90 | 60,69  | 98,01%  |  94,69   | +34,00  | 99,71%  |  56,02%  |  66,77%  | 1,58x
 🟢🟢 | 02/10  |    37 CC v2     | TENT         | 895,64  | 0,95 | 38,41  | 74,44%  |  62,88   | +24,47  | 94,91%  |  63,71%  |  66,05%  | 1,55x
 🟢🟢 | 17/10  | 198 CC CP110 v2 | FREE LOG SPL | 739,27  | 0,90 | 49,47  | 95,87%  |  78,49   | +29,02  | 96,49%  |  58,66%  |  64,89%  | 1,55x
-🟢🟢 | 03/10  |    52 CC v2     | Scratch Remo | 708,75  | 0,90 | 36,40  | 98,01%  |  56,14   | +19,74  | 99,49%  |  54,23%  |  64,20%  | 1,56x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 5/10**
+**SHEIN — principal · Campanhas ativas (116) · 5/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 03/10  |    52 CC v2     | Scratch Remo | 708,75  | 0,90 | 36,40  | 98,01%  |  56,14   | +19,74  | 99,49%  |  54,23%  |  64,20%  | 1,56x
 🟢🟢 | 14/10  | 115 CC CP112 v2 | FREE LAWN MO | 901,14  | 0,90 | 41,17  | 102,57% |  64,07   | +22,90  | 97,81%  |  55,62%  |  64,05%  | 1,27x
 🟢🟢 | 17/10  | 191 CC CP157 v2 | FREE TOOLBOX | 836,25  | 0,90 | 40,79  | 101,62% |  59,31   | +18,52  | 94,87%  |  45,40%  |  63,89%  | 1,48x
 🟢🟢 | 24/09  |    12 CC v2     | TENT         | 725,80  | 0,95 | 31,43  | 109,63% |  44,21   | +12,78  | 94,51%  |  40,66%  |  63,67%  | 1,50x
@@ -87,12 +88,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 17/10  | 202 CC CP110 v2 | FREE SMART T | 916,42  | 0,90 | 76,08  | 97,58%  |  112,13  | +36,05  | 95,89%  |  47,38%  |  60,06%  | 1,39x
 🟢🟢 | 16/10  | 167 CC CP131 v2 | FREE E-BIKE  | 813,39  | 0,90 | 29,65  | 65,82%  |  43,91   | +14,26  | 94,44%  |  48,09%  |  60,03%  | 1,10x
 🟢🟢 | 15/10  | 126 CC CP103 v2 | FREE SNOW BL | 727,38  | 0,90 | 87,67  | 87,13%  |  121,19  | +33,52  | 94,56%  |  38,23%  |  59,63%  | 1,45x
-🟢🟢 | 14/10  | 111 CC CP20 v2  | FREE DOLLS   | 685,78  | 0,90 | 34,16  | 75,91%  |  49,95   | +15,79  | 96,51%  |  46,22%  |  59,51%  | 1,44x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 6/10**
+**SHEIN — principal · Campanhas ativas (116) · 6/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 14/10  | 111 CC CP20 v2  | FREE DOLLS   | 685,78  | 0,90 | 34,16  | 75,91%  |  49,95   | +15,79  | 96,51%  |  46,22%  |  59,51%  | 1,44x
 🟢🟢 | 16/10  | 158 CC CP127 v2 | FREE WASHING | 845,50  | 0,90 | 40,84  | 101,74% |  58,92   | +18,08  | 98,95%  |  44,27%  |  59,06%  | 1,35x
 🟢🟢 | 11/10  |    87 CC v3     | FREE CLOTHES | 889,37  | 0,90 | 43,25  | 107,75% |  63,24   | +19,99  | 95,44%  |  46,22%  |  56,74%  | 1,54x
 🟢🟢 | 05/10  |    77 CC v2     | TENT         | 849,84  | 0,90 | 60,89  | 99,12%  |  83,17   | +22,28  | 89,35%  |  36,59%  |  55,71%  | 1,35x
@@ -104,12 +105,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 15/10  | 139 CC CP104 v2 | FREE RIMS    | 867,52  | 1,00 | 55,11  | 104,57% |  78,09   | +22,98  | 98,74%  |  41,70%  |  53,93%  | 1,37x
 🟢🟢 | 17/10  | 184 CC CP151 v2 | FREE CHRISTM | 674,64  | 0,90 | 24,58  | 85,73%  |  33,82   |  +9,24  | 98,97%  |  37,59%  |  53,30%  | 1,33x
 🟢🟢 | 16/10  | 160 CC CP140 v2 | FREE RIMS    | 756,85  | 1,00 | 66,26  | 110,97% |  99,43   | +33,17  | 99,07%  |  50,06%  |  52,79%  | 1,22x
-🟢🟢 | 16/10  | 174 CC CP116 v2 | FREE LAWN MO | 723,42  | 0,90 | 34,47  | 120,23% |  48,85   | +14,38  | 98,02%  |  41,72%  |  51,67%  | 1,33x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 7/10**
+**SHEIN — principal · Campanhas ativas (116) · 7/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 16/10  | 174 CC CP116 v2 | FREE LAWN MO | 723,42  | 0,90 | 34,47  | 120,23% |  48,85   | +14,38  | 98,02%  |  41,72%  |  51,67%  | 1,33x
 🟢🟢 | 15/10  | 127 CC CP112 v2 | FREE LAWN MO | 765,67  | 0,90 | 102,78 | 114,93% |  142,25  | +39,47  | 96,55%  |  38,40%  |  50,26%  | 1,31x
 🟢🟢 | 17/10  | 190 CC CP157 v2 | FREE TOOLBOX | 709,07  | 0,90 | 33,66  | 117,40% |  46,96   | +13,30  | 98,03%  |  39,51%  |  48,84%  | 1,27x
 🟢🟢 | 14/10  | 103 CC CP20 v2  | FREE SNOW BL | 733,61  | 0,90 | 132,03 | 103,34% |  183,01  | +50,98  | 98,09%  |  38,61%  |  48,82%  | 1,38x
@@ -121,12 +122,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 11/10  |    42 CC v3     | FREE CLOTHES | 824,24  | 0,95 | 64,19  | 120,57% |  89,28   | +25,09  | 99,69%  |  39,09%  |  47,39%  | 1,41x
 🟢🟢 | 14/10  | 113 CC CP20 v2  | FREE CHRISTM | 660,03  | 0,80 | 152,72 | 98,66%  |  207,09  | +54,37  | 98,03%  |  35,60%  |  47,11%  | 1,48x
 🟢🟢 | 16/10  | 159 CC CP140 v2 | FREE RIMS    | 793,19  | 1,00 | 82,29  | 60,75%  |  116,36  | +34,07  | 97,43%  |  41,40%  |  47,07%  | 1,29x
-🟢🟢 | 15/10  | 128 CC CP112 v2 | FREE LAWN MO | 821,47  | 0,90 | 120,71 | 112,47% |  167,47  | +46,76  | 99,68%  |  38,74%  |  46,89%  | 1,42x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 8/10**
+**SHEIN — principal · Campanhas ativas (116) · 8/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 15/10  | 128 CC CP112 v2 | FREE LAWN MO | 821,47  | 0,90 | 120,71 | 112,47% |  167,47  | +46,76  | 99,68%  |  38,74%  |  46,89%  | 1,42x
 🟢🟢 | 15/10  | 141 CC CP104 v2 | FREE RIMS    | 764,90  | 1,00 | 73,03  | 88,82%  |  92,95   | +19,92  | 90,10%  |  27,28%  |  44,50%  | 1,19x
 🟢🟢 | 11/10  |    89 CC v3     | FREE CLOTHES | 890,74  | 0,95 | 37,62  | 131,22% |  52,52   | +14,90  | 100,00% |  39,61%  |  44,34%  | 1,40x
 🟢🟢 | 05/10  |    81 CC v2     | TENT         | 973,81  | 0,95 | 13,27  | 46,29%  |  18,41   |  +5,14  | 92,22%  |  38,73%  |  43,71%  | 1,19x
@@ -138,12 +139,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 16/10  | 178 CC CP116 v2 | FREE LAWN MO | 721,08  | 0,90 | 100,67 | 109,26% |  129,42  | +28,75  | 97,59%  |  28,56%  |  39,91%  | 1,40x
 🟢🟡 | 17/10  | 214 CC CP133 v2 | FREE CHRISTM | 636,24  | 0,80 | 78,41  | 100,56% |  102,61  | +24,20  | 99,48%  |  30,86%  |  39,68%  | 1,42x
 🟢🟡 | 18/10  | 226 CC CP145 v2 | FREE DOLLS   | 651,56  | 0,90 | 39,16  | 111,89% |  49,79   | +10,63  | 93,75%  |  27,15%  |  38,38%  | 1,30x
-🟢🟡 | 16/10  | 163 CC CP140 v2 | FREE RIMS    | 841,15  | 1,00 | 46,07  | 75,00%  |  58,83   | +12,76  | 100,00% |  27,70%  |  38,05%  | 1,24x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 9/10**
+**SHEIN — principal · Campanhas ativas (116) · 9/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 16/10  | 163 CC CP140 v2 | FREE RIMS    | 841,15  | 1,00 | 46,07  | 75,00%  |  58,83   | +12,76  | 100,00% |  27,70%  |  38,05%  | 1,24x
 🟢🟡 | 15/10  | 131 CC CP107 v2 | FREE E-BIKE  | 914,68  | 0,90 | 39,30  | 97,91%  |  50,08   | +10,78  | 100,00% |  27,43%  |  37,76%  | 1,25x
 🟢🟡 | 17/10  | 208 CC CP174 v2 | FREE LAWN MO | 718,83  | 0,90 | 36,22  | 126,33% |  49,81   | +13,59  | 92,70%  |  37,52%  |  37,52%  | 1,25x
 🟢🟡 | 17/10  | 211 CC CP103 v2 | FREE SNOW BL | 745,00  | 0,90 | 55,09  | 88,97%  |  72,59   | +17,50  | 97,10%  |  31,77%  |  37,41%  | 1,39x
@@ -155,12 +156,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 29/09  |    14 CC v2     | TENT         | 964,32  | 0,90 | 29,01  | 101,19% |  38,19   |  +9,18  | 96,97%  |  31,64%  |  33,26%  | 1,14x
 🟢🟡 | 16/10  | 157 CC CP127 v2 | FREE TOOLBOX | 894,60  | 0,90 | 88,06  | 117,98% |  106,58  | +18,52  | 98,79%  |  21,03%  |  32,26%  | 1,13x
 🟢🟡 | 18/10  | 228 CC CP185 v2 | FREE CHRISTM | 791,27  | 0,90 | 35,18  | 122,71% |  44,86   |  +9,68  | 91,30%  |  27,52%  |  31,84%  | 1,22x
-🟢🟡 | 02/10  |    26 CC v2     | Bikes        | 815,59  | 1,00 | 38,56  | 134,50% |  49,92   | +11,36  | 97,67%  |  29,46%  |  30,76%  | 1,35x
 ```
 
-**SHEIN — principal · Campanhas ativas (116) · 10/10**
+**SHEIN — principal · Campanhas ativas (116) · 10/11**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 02/10  |    26 CC v2     | Bikes        | 815,59  | 1,00 | 38,56  | 134,50% |  49,92   | +11,36  | 97,67%  |  29,46%  |  30,76%  | 1,35x
 🟢🟡 | 16/10  | 151 CC CP127 v2 | FREE CHRISTM | 722,31  | 0,90 | 36,73  | 128,11% |  40,75   |  +4,02  | 96,48%  |  10,94%  |  27,99%  | 1,24x
 🟢🟡 | 18/10  | 225 CC CP145 v2 | FREE DOLLS   | 631,67  | 0,90 | 35,06  | 122,29% |  41,09   |  +6,03  | 99,39%  |  17,20%  |  27,75%  | 1,48x
 🟢🟡 | 16/10  | 154 CC CP127 v2 | FREE LAWN MO | 674,90  | 0,90 | 72,84  | 107,91% |  85,52   | +12,68  | 96,46%  |  17,41%  |  26,54%  | 1,24x
@@ -172,6 +173,11 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 14/10  | 117 CC CP112 v2 | FREE LAWN MO | 852,76  | 0,90 | 19,11  | 66,66%  |  22,25   |  +3,14  | 96,39%  |  16,43%  |  16,48%  | 0,98x
 🟢🟡 | 17/10  | 197 CC CP110 v2 | FREE LAWN MO | 634,52  | 0,90 | 30,49  | 106,35% |  35,40   |  +4,91  | 93,43%  |  16,10%  |  16,10%  | 1,15x
 🟢🔴 | 16/10  | 161 CC CP140 v2 | FREE RIMS    | 800,71  | 1,00 | 19,87  | 69,31%  |  20,18   |  +0,31  | 95,65%  |  1,56%   |  6,69%   | 1,09x
+```
+
+**SHEIN — principal · Campanhas ativas (116) · 11/11**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
 🔴🔴 | 18/10  | 227 CC CP185 v2 | FREE CHRISTM | 723,33  | 0,90 | 31,91  | 111,30% |  30,80   |  -1,11  | 97,12%  |  -3,48%  |  6,55%   | 0,79x
 ```
 
@@ -373,7 +379,8 @@ Início |       Nº        | Dia | 13/10  |  14/10  |  15/10  | 16/10  | 17/10  
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

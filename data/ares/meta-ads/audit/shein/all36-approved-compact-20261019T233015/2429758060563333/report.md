@@ -1,9 +1,10 @@
 ## SHEIN · Yolokfx-US-SHEIN-EN-03-G005
 **19/10/2026 · até 22:11 EDT · USD**
 **⏱️ ATRASO GAM/SB: 1h 08min**
-Financeiro preservado: 19/10 22:11 EDT. Bid/B.U.: Meta 19/10 22:16 EDT.
+Financeiro preservado: 19/10 22:11 EDT. Bid: Meta 19/10 22:16 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:17 EDT.
-Status dos blocos: Meta 19/10 22:19 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **4784,24** · Rev **7562,44** · Saldo **+2778,20** · ROI **58,07%** · ROI E. **68,68%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
@@ -19,12 +20,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 16/10  | 168 CC CP154 v2 | MAKEUP       | 855,00  | 0,70 | 49,09  | 32,73%  |  92,98   | +43,89  | 88,61%  |  89,41%  | 124,30%  | 2,06x
 🟢🟢 | 19/10  | 173 CC CP171 v2 | PLUS SIZE JA | 760,17  | 0,65 | 143,71 | 95,81%  |  279,99  | +136,28 | 96,56%  |  94,83%  | 113,92%  | 2,03x
 🟢🟢 | 19/10  | 176 CC CP171 v2 | PLUS SIZE JA | 696,07  | 0,65 | 155,30 | 103,53% |  301,59  | +146,29 | 97,23%  |  94,20%  | 111,30%  | 1,98x
-🟢🟢 | 19/10  | 177 CC CP171 v2 | PLUS SIZE JA | 785,41  | 0,65 | 154,23 | 102,82% |  303,81  | +149,58 | 98,71%  |  96,99%  | 108,75%  | 1,83x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 2/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 19/10  | 177 CC CP171 v2 | PLUS SIZE JA | 785,41  | 0,65 | 154,23 | 102,82% |  303,81  | +149,58 | 98,71%  |  96,99%  | 108,75%  | 1,83x
 🟢🟢 | 09/10  |    103 MV v2    | Mini Keychai | 940,92  |  —   | 41,12  | 102,80% |  83,20   | +42,08  | 98,67%  | 102,33%  | 106,42%  | 1,67x
 🟢🟢 | 13/10  |    137 MV v2    | Plus Size Tw | 709,84  |  —   | 66,52  | 83,15%  |  115,07  | +48,55  | 90,79%  |  72,99%  | 105,58%  | 1,79x
 🟢🟢 | 08/10  |    97 MV v2     | BAGS ESCALA  | 732,39  |  —   | 35,51  | 88,78%  |  71,37   | +35,86  | 97,95%  | 100,99%  | 104,87%  | 2,22x
@@ -36,12 +37,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 13/10  |    138 MV v2    | Wide Leg Jea | 746,20  |  —   | 38,52  | 96,30%  |  69,09   | +30,57  | 92,15%  |  79,36%  |  97,95%  | 1,83x
 🟢🟢 | 08/10  |    99 MV v2     | BAGS ESCALA  | 900,90  |  —   | 38,38  | 95,95%  |  70,01   | +31,63  | 97,39%  |  82,41%  |  97,13%  | 1,69x
 🟢🟢 | 02/10  |    88 MV v2     | BAGS         | 767,95  |  —   | 44,23  | 88,46%  |  76,02   | +31,79  | 92,91%  |  71,87%  |  96,02%  | 1,70x
-🟢🟢 | 11/10  |    120 MV v2    | CLOTHES 3 IM | 674,08  |  —   | 44,32  | 88,64%  |  78,01   | +33,69  | 95,59%  |  76,02%  |  94,18%  | 1,79x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 3/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 11/10  |    120 MV v2    | CLOTHES 3 IM | 674,08  |  —   | 44,32  | 88,64%  |  78,01   | +33,69  | 95,59%  |  76,02%  |  94,18%  | 1,79x
 🟢🟢 | 16/10  | 169 CC CP154 v2 | MAKEUP       | 825,93  | 0,70 | 62,79  | 41,86%  |  116,81  | +54,02  | 99,74%  |  86,03%  |  92,90%  | 1,65x
 🟢🟢 | 15/10  | 155 CC CP146 v2 | Plus Size Wo | 983,75  | 0,85 |  4,17  |  4,17%  |   7,08   |  +2,91  | 100,00% |  69,78%  |  91,61%  | 1,29x
 🟢🟢 | 19/10  | 174 CC CP171 v2 | PLUS SIZE JA | 792,96  | 0,65 | 155,21 | 103,47% |  282,83  | +127,62 | 98,36%  |  82,22%  |  90,76%  | 1,72x
@@ -53,12 +54,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 16/10  | 167 CC CP154 v2 | MAKEUP       | 843,22  | 0,70 | 79,68  | 53,12%  |  137,70  | +58,02  | 97,11%  |  72,82%  |  79,41%  | 1,73x
 🟢🟢 | 08/09  |    13 MV v2     | PRODUTOS 2   | 789,09  |  —   | 27,18  | 90,60%  |  46,56   | +19,38  | 95,65%  |  71,30%  |  79,21%  | 1,53x
 🟢🟢 | 14/10  | 143 CC CP137 v2 | Plus Size Tw | 647,69  | 0,65 |  4,24  |  2,83%  |   7,58   |  +3,34  | 97,50%  |  78,77%  |  78,77%  | 1,61x
-🟢🟢 | 11/10  | 124 CC CP103 v2 | Mini Keychai | 830,56  | 0,65 |  8,67  | 21,68%  |  13,46   |  +4,79  | 90,32%  |  55,25%  |  78,55%  | 1,21x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 4/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 11/10  | 124 CC CP103 v2 | Mini Keychai | 830,56  | 0,65 |  8,67  | 21,68%  |  13,46   |  +4,79  | 90,32%  |  55,25%  |  78,55%  | 1,21x
 🟢🟢 | 26/09  |    52 MV v3     | WIGS         | 973,15  |  —   | 37,37  | 93,43%  |  63,21   | +25,84  | 99,49%  |  69,15%  |  75,41%  | 1,48x
 🟢🟢 | 14/10  | 140 CC CP137 v2 | Plus Size Tw | 643,31  | 0,65 | 98,13  | 65,42%  |  163,90  | +65,77  | 98,10%  |  67,02%  |  74,47%  | 1,85x
 🟢🟢 | 09/10  |    104 MV v2    | clothes 2    | 906,67  |  —   | 36,85  | 92,13%  |  61,20   | +24,35  | 95,81%  |  66,08%  |  73,41%  | 1,44x
@@ -70,12 +71,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 15/10  | 158 CC CP146 v2 | Plus Size Wo | 731,88  | 0,85 | 104,11 | 104,11% |  163,82  | +59,71  | 100,00% |  57,35%  |  67,24%  | 1,54x
 🟢🟢 | 25/09  |    49 MV v3     | WIGS         | 1207,68 |  —   | 45,36  | 90,72%  |  74,82   | +29,46  | 97,85%  |  64,95%  |  66,80%  | 1,23x
 🟢🟢 | 14/10  | 149 CC CP126 v2 | Plus Size Tw | 659,53  | 0,80 | 155,15 | 103,43% |  238,16  | +83,01  | 99,76%  |  53,50%  |  66,36%  | 1,65x
-🟢🟢 | 14/10  | 150 CC CP126 v2 | Plus Size Tw | 768,96  | 0,80 | 156,50 | 104,33% |  238,63  | +82,13  | 99,38%  |  52,48%  |  65,01%  | 1,59x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 5/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 14/10  | 150 CC CP126 v2 | Plus Size Tw | 768,96  | 0,80 | 156,50 | 104,33% |  238,63  | +82,13  | 99,38%  |  52,48%  |  65,01%  | 1,59x
 🟢🟢 | 11/10  | 125 CC CP103 v2 | Mini Keychai | 638,13  | 0,65 |  6,15  | 15,38%  |   9,19   |  +3,04  | 88,89%  |  49,43%  |  63,09%  | 1,22x
 🟢🟢 | 14/10  | 152 CC CP126 v2 | Plus Size Tw | 672,62  | 0,80 | 160,70 | 107,13% |  245,38  | +84,68  | 99,26%  |  52,69%  |  60,95%  | 1,65x
 🟢🟢 | 14/10  | 141 CC CP137 v2 | Plus Size Tw | 596,49  | 0,65 | 105,60 | 70,40%  |  147,16  | +41,56  | 90,88%  |  39,36%  |  60,49%  | 1,52x
@@ -87,12 +88,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 12/09  |    26 MV v2     | SURPRESA     | 598,18  |  —   | 32,39  | 107,97% |  46,92   | +14,53  | 99,57%  |  44,86%  |  51,96%  | 1,55x
 🟢🟢 | 02/09  |    01 MV v2     | CARREGADOR P | 727,71  |  —   | 21,83  | 87,32%  |  31,43   |  +9,60  | 98,10%  |  43,98%  |  50,62%  | 1,25x
 🟢🟢 | 14/10  | 151 CC CP126 v2 | Plus Size Tw | 636,92  | 0,80 | 163,20 | 108,80% |  234,31  | +71,11  | 98,85%  |  43,57%  |  49,11%  | 1,44x
-🟢🟢 | 29/09  |    72 MV v2     | CARREGADOR P | 717,38  |  —   | 36,78  | 91,95%  |  51,65   | +14,87  | 98,36%  |  40,43%  |  48,26%  | 1,19x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 6/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 29/09  |    72 MV v2     | CARREGADOR P | 717,38  |  —   | 36,78  | 91,95%  |  51,65   | +14,87  | 98,36%  |  40,43%  |  48,26%  | 1,19x
 🟢🟢 | 08/10  |    96 MV v2     | BAGS ESCALA  | 660,25  |  —   | 35,10  | 87,75%  |  47,54   | +12,44  | 98,78%  |  35,44%  |  48,06%  | 1,40x
 🟢🟢 | 02/10  |    85 MV v2     | under-eye pa | 662,29  |  —   | 49,17  | 98,34%  |  70,33   | +21,16  | 94,44%  |  43,03%  |  46,63%  | 1,37x
 🟢🟢 | 02/10  |    83 MV v2     | Portable Cor | 553,02  |  —   | 48,76  | 97,52%  |  62,22   | +13,46  | 98,38%  |  27,60%  |  45,94%  | 1,47x
@@ -104,12 +105,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 16/09  |    43 MV v3     | PIJAMAS      | 667,46  |  —   | 25,83  | 86,10%  |  35,49   |  +9,66  | 96,77%  |  37,40%  |  43,52%  | 1,71x
 🟢🟢 | 29/09  |    73 MV v2     | CARREGADOR P | 581,83  |  —   | 36,49  | 91,23%  |  48,24   | +11,75  | 100,00% |  32,20%  |  43,14%  | 1,48x
 🟢🟢 | 26/09  |    53 MV v3     | WIGS         | 756,46  |  —   | 23,71  | 79,03%  |  30,61   |  +6,90  | 98,25%  |  29,10%  |  42,60%  | 1,22x
-🟢🟢 | 10/10  | 117 CC CP102 v2 | Retro Handhe | 644,30  | 0,95 | 37,89  | 75,78%  |  52,76   | +14,87  | 98,50%  |  39,25%  |  42,54%  | 1,29x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 7/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 10/10  | 117 CC CP102 v2 | Retro Handhe | 644,30  | 0,95 | 37,89  | 75,78%  |  52,76   | +14,87  | 98,50%  |  39,25%  |  42,54%  | 1,29x
 🟢🟢 | 10/10  | 113 CC CP91 v2  | multifunctio | 828,46  | 0,65 |  6,95  | 13,90%  |   9,29   |  +2,34  | 96,77%  |  33,67%  |  40,43%  | 1,17x
 🟢🟡 | 11/10  | 121 CC CP103 v2 | Mini Keychai | 501,50  | 0,65 |  6,84  | 17,10%  |   9,03   |  +2,19  | 89,29%  |  32,02%  |  38,89%  | 1,41x
 🟢🟡 | 03/10  |    91 MV v2     | multifunctio | 594,43  |  —   | 29,01  | 96,70%  |  37,45   |  +8,44  | 96,84%  |  29,09%  |  38,57%  | 1,47x
@@ -121,12 +122,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 16/10  |    165 MV v2    | LED Face Mas | 615,58  |  —   | 71,86  | 102,66% |  89,33   | +17,47  | 99,20%  |  24,31%  |  30,89%  | 1,31x
 🟢🟡 | 10/10  | 115 CC CP102 v2 | Retro Handhe | 678,04  | 0,95 | 24,09  | 48,18%  |  27,04   |  +2,95  | 97,96%  |  12,25%  |  30,14%  | 1,32x
 🟢🟡 | 13/10  | 134 CC CP120 v2 | CLOTHES 3 IM | 796,10  | 0,65 | 22,88  | 22,88%  |  29,13   |  +6,25  | 93,38%  |  27,32%  |  29,94%  | 1,25x
-🟢🟡 | 30/09  |    76 MV v2     | under-eye pa | 675,05  |  —   | 49,89  | 99,78%  |  61,38   | +11,49  | 100,00% |  23,03%  |  29,06%  | 1,33x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 8/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 30/09  |    76 MV v2     | under-eye pa | 675,05  |  —   | 49,89  | 99,78%  |  61,38   | +11,49  | 100,00% |  23,03%  |  29,06%  | 1,33x
 🟢🟡 | 10/09  |    15 MV v2     | FONE DE OUVI | 727,92  |  —   | 28,45  | 81,29%  |  34,18   |  +5,73  | 99,03%  |  20,14%  |  28,86%  | 1,20x
 🟢🟡 | 05/10  |    94 MV v2     | ice cube tra | 618,87  |  —   | 27,06  | 90,20%  |  34,53   |  +7,47  | 95,65%  |  27,61%  |  27,61%  | 1,27x
 🟢🟡 | 14/10  |    146 MV v2    | Plus Size Wo | 597,44  |  —   | 53,96  | 89,93%  |  63,88   |  +9,92  | 98,32%  |  18,38%  |  26,69%  | 1,25x
@@ -138,12 +139,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 27/09  |    56 MV v2     | MASCARA LAD  | 516,52  |  —   | 20,16  | 80,64%  |  21,38   |  +1,22  | 96,39%  |  6,05%   |  11,26%  | 1,22x
 🟢🟡 | 28/09  |    63 MV v3     | WIGS         | 810,98  |  —   | 41,06  | 82,12%  |  43,23   |  +2,17  | 96,86%  |  5,28%   |  10,50%  | 1,22x
 🟢🔴 | 26/09  |    54 MV v3     | WIGS         | 658,41  |  —   | 38,84  | 97,10%  |  40,29   |  +1,45  | 98,61%  |  3,73%   |  9,47%   | 1,07x
-🔴🔴 | 11/10  | 128 CC CP109 v2 | Plus Size Tw | 657,50  | 0,70 |  4,11  |  2,74%  |   2,08   |  -2,03  | 40,00%  | -49,39%  |  7,30%   | 0,35x
 ```
 
 **SHEIN — principal · Campanhas ativas (96) · 9/9**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🔴🔴 | 11/10  | 128 CC CP109 v2 | Plus Size Tw | 657,50  | 0,70 |  4,11  |  2,74%  |   2,08   |  -2,03  | 40,00%  | -49,39%  |  7,30%   | 0,35x
 🟢🔴 | 30/09  |    78 MV v2     | Portable Cor | 635,17  |  —   | 49,21  | 98,42%  |  50,33   |  +1,12  | 96,61%  |  2,28%   |  7,11%   | 1,15x
 🟢🔴 | 10/10  | 114 CC CP91 v2  | multifunctio | 490,38  | 0,65 | 10,94  | 21,88%  |  11,48   |  +0,54  | 100,00% |  4,94%   |  4,94%   | 1,22x
 🔴🔴 | 15/10  | 156 CC CP146 v2 | Plus Size Wo | 340,00  | 0,85 |  0,90  |  0,90%  |   0,61   |  -0,29  | 75,00%  | -32,22%  | -32,22%  |  n/d 
@@ -313,7 +314,8 @@ Início |       Nº        | Dia |  13/10  |  14/10  |  15/10  |  16/10  |  17/1
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

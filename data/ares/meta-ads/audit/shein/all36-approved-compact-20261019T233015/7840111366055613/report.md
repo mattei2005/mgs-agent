@@ -1,15 +1,16 @@
 ## SHEIN · Yolokfx-US-SHEIN-EN-01-G002
 **19/10/2026 · até 22:11 EDT · USD**
 **⏱️ ATRASO GAM/SB: 1h 08min**
-Financeiro preservado: 19/10 22:11 EDT. Bid/B.U.: Meta 19/10 22:12 EDT.
+Financeiro preservado: 19/10 22:11 EDT. Bid: Meta 19/10 22:12 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:17 EDT.
-Status dos blocos: Meta 19/10 22:19 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **4383,70** · Rev **6052,11** · Saldo **+1668,41** · ROI **38,06%** · ROI E. **49,15%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
 Histórico de 7 dias: número da campanha em ordem crescente.
 
-**SHEIN — principal · Campanhas ativas (80) · 1/7**
+**SHEIN — principal · Campanhas ativas (80) · 1/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
 🟢🟢 | 18/10  | 139 CC CP135 v2 | ICE BALL MAK | 748,46  | 0,75 | 16,98  | 11,32%  |  26,27   |  +9,29  | 91,89%  |  54,71%  | 112,96%  | 1,28x
@@ -19,12 +20,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 18/10  | 138 CC CP135 v2 | ICE BALL MAK | 756,67  | 0,75 |  0,99  |  0,66%  |   1,18   |  +0,19  | 25,00%  |  19,19%  |  94,95%  | 2,02x
 🟢🟢 | 26/08  |    02 MV v2     | ROBOT VACUUM | 751,70  |  —   | 16,81  | 83,01%  |  30,57   | +13,76  | 97,65%  |  81,86%  |  92,92%  | 1,86x
 🟢🟢 | 22/09  |    73 BC v2     | FREE CLOTHES | 1040,31 |  —   | 17,60  |  5,87%  |  29,96   | +12,36  | 100,00% |  70,23%  |  91,19%  | 1,54x
-🟢🟢 | 22/09  |    70 MV v2     | FREE CLOTHES | 823,66  |  —   | 75,15  | 100,20% |  135,66  | +60,51  | 98,08%  |  80,52%  |  90,27%  | 1,83x
 ```
 
-**SHEIN — principal · Campanhas ativas (80) · 2/7**
+**SHEIN — principal · Campanhas ativas (80) · 2/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 22/09  |    70 MV v2     | FREE CLOTHES | 823,66  |  —   | 75,15  | 100,20% |  135,66  | +60,51  | 98,08%  |  80,52%  |  90,27%  | 1,83x
 🟢🟢 | 09/10  | 131 CC CP112 v2 | FREE CLOTHES | 790,68  | 0,75 | 17,48  | 15,89%  |  30,93   | +13,45  | 99,17%  |  76,95%  |  87,41%  | 1,76x
 🟢🟢 | 22/09  |    65 MV v2     | FREE CLOTHES | 995,31  |  —   | 73,86  | 98,48%  |  129,89  | +56,03  | 97,38%  |  75,86%  |  84,74%  | 1,68x
 🟢🟢 | 08/10  |    117 CC v2    | SPOT CLEANER | 967,69  | 0,85 | 13,16  | 17,03%  |  22,51   |  +9,35  | 89,80%  |  71,05%  |  83,13%  | 1,13x
@@ -36,12 +37,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 07/09  |    10 MV v2     | DRONE 3 new  | 784,85  |  —   | 29,82  | 84,67%  |  47,57   | +17,75  | 100,00% |  59,52%  |  71,03%  | 1,26x
 🟢🟢 | 01/10  |    104 MV v3    | FREE CLOTHES | 809,39  |  —   | 72,97  | 97,29%  |  118,48  | +45,51  | 97,09%  |  62,37%  |  70,47%  | 1,66x
 🟢🟢 | 01/10  |    100 MV v2    | EBIKE 2      | 994,04  |  —   | 65,21  | 86,95%  |  100,23  | +35,02  | 97,98%  |  53,70%  |  67,31%  | 1,22x
-🟢🟢 | 09/10  | 122 MV CP67 v2  | FREE CLOTHES | 933,51  |  —   | 48,89  | 97,78%  |  78,07   | +29,18  | 97,74%  |  59,69%  |  66,52%  | 1,56x
 ```
 
-**SHEIN — principal · Campanhas ativas (80) · 3/7**
+**SHEIN — principal · Campanhas ativas (80) · 3/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 09/10  | 122 MV CP67 v2  | FREE CLOTHES | 933,51  |  —   | 48,89  | 97,78%  |  78,07   | +29,18  | 97,74%  |  59,69%  |  66,52%  | 1,56x
 🟢🟢 | 12/10  | 133 CC CP100 v2 | EBIKE 2      | 921,80  | 0,93 | 33,32  | 33,32%  |  50,18   | +16,86  | 97,39%  |  50,60%  |  62,94%  | 1,15x
 🟢🟢 | 22/09  |    71 BC v2     | FREE CLOTHES | 797,86  |  —   | 133,86 | 44,62%  |  187,26  | +53,40  | 98,03%  |  39,89%  |  62,75%  | 1,39x
 🟢🟢 | 09/10  | 125 MV CP104 v3 | FREE CLOTHES | 903,23  |  —   | 49,01  | 98,02%  |  76,28   | +27,27  | 98,87%  |  55,64%  |  62,50%  | 1,47x
@@ -53,12 +54,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 22/09  |    62 MV v2     | FREE CLOTHES | 873,60  |  —   | 75,28  | 100,37% |  106,65  | +31,37  | 96,89%  |  41,67%  |  56,39%  | 1,39x
 🟢🟢 | 22/09  |    56 MV v2     | FREE CLOTHES | 777,54  |  —   | 63,40  | 97,54%  |  93,33   | +29,93  | 98,46%  |  47,21%  |  55,03%  | 1,48x
 🟢🟢 | 13/09  |    21 MV v2     | FREE CLOTHES | 789,92  |  —   | 59,25  | 98,75%  |  85,08   | +25,83  | 96,51%  |  43,59%  |  54,13%  | 1,49x
-🟢🟢 | 22/09  |    69 MV v2     | FREE CLOTHES | 838,78  |  —   | 76,40  | 101,87% |  108,61  | +32,21  | 98,41%  |  42,16%  |  52,95%  | 1,41x
 ```
 
-**SHEIN — principal · Campanhas ativas (80) · 4/7**
+**SHEIN — principal · Campanhas ativas (80) · 4/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 22/09  |    69 MV v2     | FREE CLOTHES | 838,78  |  —   | 76,40  | 101,87% |  108,61  | +32,21  | 98,41%  |  42,16%  |  52,95%  | 1,41x
 🟢🟢 | 29/09  |    88 MV v2     | WIGS         | 841,09  |  —   | 47,26  | 94,52%  |  67,66   | +20,40  | 97,76%  |  43,17%  |  52,33%  | 1,41x
 🟢🟢 | 08/10  | 114 BC CP71 v2  | FREE CLOTHES | 795,59  |  —   | 160,22 | 53,41%  |  215,15  | +54,93  | 98,37%  |  34,28%  |  52,19%  | 1,33x
 🟢🟢 | 28/09  |    86 MV v2     | WIGS         | 697,50  |  —   | 28,31  | 94,37%  |  36,28   |  +7,97  | 99,21%  |  28,15%  |  51,78%  | 1,40x
@@ -70,12 +71,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 22/09  |    68 MV v2     | FREE CLOTHES | 813,56  |  —   | 75,06  | 100,08% |  108,67  | +33,61  | 98,98%  |  44,78%  |  50,29%  | 1,41x
 🟢🟢 | 22/09  |    59 MV v2     | FREE CLOTHES | 961,50  |  —   | 59,91  | 99,85%  |  84,51   | +24,60  | 99,02%  |  41,06%  |  49,86%  | 1,38x
 🟢🟢 | 07/10  |    112 MV v2    | FREE CLOTHES | 661,69  |  —   | 51,69  | 103,38% |  71,35   | +19,66  | 96,56%  |  38,03%  |  49,16%  | 1,50x
-🟢🟢 | 09/10  | 121 MV CP67 v2  | FREE CLOTHES | 874,32  |  —   | 44,20  | 88,40%  |  54,73   | +10,53  | 86,21%  |  23,82%  |  49,05%  | 1,29x
 ```
 
-**SHEIN — principal · Campanhas ativas (80) · 5/7**
+**SHEIN — principal · Campanhas ativas (80) · 5/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 09/10  | 121 MV CP67 v2  | FREE CLOTHES | 874,32  |  —   | 44,20  | 88,40%  |  54,73   | +10,53  | 86,21%  |  23,82%  |  49,05%  | 1,29x
 🟢🟢 | 09/10  | 128 MV CP104 v3 | FREE CLOTHES | 965,75  |  —   | 49,23  | 98,46%  |  68,36   | +19,13  | 99,16%  |  38,86%  |  48,95%  | 1,19x
 🟢🟢 | 09/10  | 126 MV CP104 v3 | FREE CLOTHES | 805,68  |  —   | 47,43  | 94,86%  |  63,28   | +15,85  | 97,20%  |  33,42%  |  48,79%  | 1,35x
 🟢🟢 | 22/09  |    72 BC v2     | FREE CLOTHES | 709,80  |  —   | 47,73  | 15,91%  |  59,08   | +11,35  | 94,38%  |  23,78%  |  48,23%  | 1,31x
@@ -87,12 +88,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 09/10  | 124 MV CP67 v2  | FREE CLOTHES | 861,20  |  —   | 47,19  | 94,38%  |  64,33   | +17,14  | 97,03%  |  36,32%  |  42,15%  | 1,32x
 🟢🟢 | 24/09  |    79 MV v2     | WASHER       | 772,37  |  —   | 40,69  | 81,38%  |  51,12   | +10,43  | 98,08%  |  25,63%  |  40,70%  | 1,28x
 🟢🟡 | 17/10  | 137 CC CP135 v2 | ICE BALL MAK | 584,95  | 0,75 | 32,42  | 21,61%  |  42,68   | +10,26  | 95,78%  |  31,65%  |  39,39%  | 1,41x
-🟢🟡 | 04/10  |    107 MV v2    | HAIRBRUSH au | 704,47  |  —   | 47,36  | 94,72%  |  62,54   | +15,18  | 96,85%  |  32,05%  |  37,92%  | 1,38x
 ```
 
-**SHEIN — principal · Campanhas ativas (80) · 6/7**
+**SHEIN — principal · Campanhas ativas (80) · 6/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 04/10  |    107 MV v2    | HAIRBRUSH au | 704,47  |  —   | 47,36  | 94,72%  |  62,54   | +15,18  | 96,85%  |  32,05%  |  37,92%  | 1,38x
 🟢🟡 | 29/09  |    90 MV v2     | WIGS         | 788,39  |  —   | 33,65  | 96,14%  |  39,14   |  +5,49  | 98,39%  |  16,32%  |  37,68%  | 1,20x
 🟢🟡 | 09/10  | 127 MV CP104 v3 | FREE CLOTHES | 779,05  |  —   | 48,75  | 97,50%  |  64,81   | +16,06  | 98,66%  |  32,94%  |  37,09%  | 1,37x
 🟢🟡 | 23/09  |    75 MV v2     | FOR FREE     | 779,38  |  —   | 47,26  | 94,52%  |  55,39   |  +8,13  | 92,20%  |  17,20%  |  36,82%  | 1,30x
@@ -104,12 +105,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 01/10  |    102 MV v3    | FREE CLOTHES | 735,63  |  —   | 74,66  | 99,55%  |  87,59   | +12,93  | 97,54%  |  17,32%  |  27,85%  | 1,23x
 🟢🟡 | 28/09  |    84 MV v2     | WIGS         | 745,93  |  —   | 47,65  | 95,30%  |  56,95   |  +9,30  | 99,46%  |  19,52%  |  27,28%  | 1,20x
 🟢🟡 | 25/09  |    83 MV v2     | WIGS         | 725,23  |  —   | 34,21  | 97,74%  |  42,43   |  +8,22  | 94,71%  |  24,03%  |  26,72%  | 1,40x
-🟢🟡 | 29/09  |    87 MV v2     | WIGS         | 758,27  |  —   | 47,68  | 95,36%  |  50,79   |  +3,11  | 99,42%  |  6,52%   |  22,21%  | 1,14x
 ```
 
-**SHEIN — principal · Campanhas ativas (80) · 7/7**
+**SHEIN — principal · Campanhas ativas (80) · 7/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 29/09  |    87 MV v2     | WIGS         | 758,27  |  —   | 47,68  | 95,36%  |  50,79   |  +3,11  | 99,42%  |  6,52%   |  22,21%  | 1,14x
 🟢🟡 | 04/10  |    108 MV v2    | HAIRBRUSH au | 675,00  |  —   | 47,34  | 94,68%  |  55,89   |  +8,55  | 96,23%  |  18,06%  |  21,25%  | 1,23x
 🟢🟡 | 07/10  |    110 CC v2    | TURBO BLOWER | 686,00  | 0,90 | 58,67  | 117,34% |  68,24   |  +9,57  | 99,57%  |  16,31%  |  18,83%  | 1,21x
 🟢🟡 | 07/10  |    111 MV v2    | TABLET       | 655,38  |  —   | 54,81  | 109,62% |  60,05   |  +5,24  | 99,59%  |  9,56%   |  17,39%  | 1,24x
@@ -121,6 +122,11 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🔴🔴 | 08/10  | 113 CC CP97 v2  | EBIKE 1 BID  | 770,38  | 0,95 | 54,72  | 109,44% |  54,20   |  -0,52  | 95,53%  |  -0,95%  |  7,47%   | 0,98x
 🔴🔴 | 22/09  |    35 MV v2     | HAIRBRUSH au | 701,54  |  —   | 35,95  | 89,88%  |  32,83   |  -3,12  | 92,97%  |  -8,68%  |  -2,23%  | 1,04x
 🔴🔴 | 01/09  |    05 MV v2     | SPEAKER audi | 503,16  |  —   | 18,02  | 87,90%  |  15,19   |  -2,83  | 82,81%  | -15,70%  |  -5,77%  | 1,42x
+```
+
+**SHEIN — principal · Campanhas ativas (80) · 8/8**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
 🔴🔴 | 10/10  |    132 CC v2    | GAME CONSOLE | 502,11  | 1,10 | 15,80  | 21,07%  |   8,90   |  -6,90  | 97,62%  | -43,67%  | -38,10%  | 0,78x
 ```
 
@@ -266,7 +272,8 @@ Início |       Nº        | Dia |  13/10  |  14/10  |  15/10  | 16/10  | 17/10 
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

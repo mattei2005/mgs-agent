@@ -38,7 +38,8 @@ Início | Nº | Dia | 13/10 | 14/10 | 15/10 | 16/10 | 17/10 | 18/10 | 19/10 | M�
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

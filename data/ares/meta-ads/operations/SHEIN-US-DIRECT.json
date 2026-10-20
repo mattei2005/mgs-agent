@@ -3550,7 +3550,28 @@
         "supersedes": "prior separate St Quiz Lance columns and COPY literal presentation only; existing numeric width/budget/status block policies preserved",
         "no_Meta_write": true,
         "no_schedule_change": true,
-        "no_delete_or_republication_without_request": true
+        "no_delete_or_republication_without_request": true,
+        "budget_reference_policy": {
+          "authorized_by_discord_id": "344196393512075265",
+          "source_thread_id": "1561752465978818722",
+          "source_message_id": "1561945974681772053",
+          "request_text": "Então tem que calcular sobre o orçamento atual da campanha e não o inicial, correto? Confere isso.",
+          "denominator": "current Meta campaign daily_budget, never initial/static budget",
+          "refresh_before_final_render": true,
+          "when_financial_snapshot_preserved": "preserve reported spend cutoff; refresh budget reference and declare both timestamps explicitly",
+          "budget_timestamp_field": "source_timestamps.budget",
+          "do_not_falsely_refresh_Bid_timestamp": true,
+          "budget_changes_require_reconciliation": true,
+          "no_Meta_budget_write": true,
+          "legend_explanation": {
+            "source_message_id": "1561948255984558223",
+            "required": true,
+            "explain_current_not_initial_or_remaining": true,
+            "explain_budget_increase_and_reduction_effect": true,
+            "mention_Meta_daily_flexibility_without_assuming_cause": true,
+            "declare_separate_financial_and_budget_timestamps": true
+          }
+        }
       },
       "number_bid_preview": {
         "status": "authorized_preview_pending_visual_approval",

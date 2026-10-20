@@ -1,9 +1,10 @@
 ## SHEIN · Yolokfx-US-SHEIN-EN-04-G004
 **19/10/2026 · até 22:11 EDT · USD**
 **⏱️ ATRASO GAM/SB: 1h 08min**
-Financeiro preservado: 19/10 22:11 EDT. Bid/B.U.: Meta 19/10 22:16 EDT.
+Financeiro preservado: 19/10 22:11 EDT. Bid: Meta 19/10 22:16 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:17 EDT.
-Status dos blocos: Meta 19/10 22:19 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **2250,83** · Rev **2721,17** · Saldo **+470,34** · ROI **20,90%** · ROI E. **30,46%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
@@ -19,12 +20,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 02/10  |    71 CC v3     | [47]         | 451,43  | 0,70 |  0,99  |  1,41%  |   2,85   |  +1,86  | 92,86%  | 187,88%  | 187,88%  | 0,86x
 🟢🟢 | 06/10  |    88 CC v3     | [30/09]      | 688,18  | 1,00 |  5,00  |  4,10%  |  12,78   |  +7,78  | 89,47%  | 155,60%  | 186,00%  | 2,07x
 🟢🟢 | 17/10  |    173 MV v2    | Triple Lapto | 779,20  |  —   | 35,97  | 89,93%  |  69,34   | +33,37  | 99,18%  |  92,77%  | 110,34%  | 1,75x
-🟢🟢 | 10/10  | 129 MV CP106 v2 | Go-Kart      | 1129,07 |  —   | 49,38  | 109,73% |  87,05   | +37,67  | 94,25%  |  76,29%  |  84,41%  | 1,31x
 ```
 
 **SHEIN — principal · Campanhas ativas (54) · 2/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 10/10  | 129 MV CP106 v2 | Go-Kart      | 1129,07 |  —   | 49,38  | 109,73% |  87,05   | +37,67  | 94,25%  |  76,29%  |  84,41%  | 1,31x
 🟢🟢 | 30/09  |    54 MV v3     | [30/09]      | 631,81  |  —   | 28,28  | 70,70%  |  47,19   | +18,91  | 98,88%  |  66,87%  |  78,43%  | 1,69x
 🔴🟢 | 19/10  | 180 CC CP54 v3  | watch        | 634,17  | 0,80 | 28,09  | 18,73%  |  16,11   | -11,98  | 17,95%  | -42,65%  |  70,52%  | 0,68x
 🟢🟢 | 30/09  |    55 MV v3     | [30/09]      | 737,74  |  —   | 26,47  | 88,23%  |  40,34   | +13,87  | 98,06%  |  52,40%  |  61,88%  | 1,44x
@@ -36,12 +37,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 11/10  | 136 MV CP110 v3 | Custom Varsi | 941,00  |  —   | 113,45 | 75,63%  |  151,36  | +37,91  | 95,39%  |  33,42%  |  39,53%  | 1,22x
 🟢🟡 | 10/10  |    110 MV v3    | [10/10]      | 760,00  |  —   | 84,62  | 105,78% |  107,29  | +22,67  | 97,19%  |  26,79%  |  38,40%  | 1,34x
 🟢🟡 | 13/10  |    147 CC v3    | Retro Vinyl  | 546,86  | 0,85 | 59,08  | 39,39%  |  78,26   | +19,18  | 95,97%  |  32,46%  |  37,91%  | 1,22x
-🟢🟡 | 19/10  | 183 CC CP173 v2 | Triple Lapto | 644,40  | 0,75 | 32,42  | 21,47%  |  42,19   |  +9,77  | 99,48%  |  30,14%  |  36,55%  | 1,50x
 ```
 
 **SHEIN — principal · Campanhas ativas (54) · 3/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 19/10  | 183 CC CP173 v2 | Triple Lapto | 644,40  | 0,75 | 32,42  | 21,47%  |  42,19   |  +9,77  | 99,48%  |  30,14%  |  36,55%  | 1,50x
 🟢🟡 | 10/10  | 130 MV CP106 v2 | Go-Kart      | 912,47  |  —   | 57,63  | 96,05%  |  72,49   | +14,86  | 98,23%  |  25,79%  |  34,60%  | 1,10x
 🟢🟡 | 19/10  | 179 CC CP54 v3  | watch        | 596,77  | 0,75 | 41,69  | 27,79%  |  52,40   | +10,71  | 95,19%  |  25,69%  |  34,01%  | 1,35x
 🟢🟡 | 29/09  |    46 MV v3     | [29/09]      | 724,90  |  —   | 49,24  | 98,48%  |  60,75   | +11,51  | 97,62%  |  23,38%  |  33,47%  | 1,25x
@@ -53,12 +54,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 06/09  |    11 MV v3     | [23/09]      | 505,17  |  —   | 56,15  | 90,56%  |  65,93   |  +9,78  | 96,77%  |  17,42%  |  27,76%  | 1,25x
 🟢🟡 | 09/10  |    109 CC v3    | [09/10]      | 760,64  | 1,00 | 111,37 | 74,25%  |  124,07  | +12,70  | 95,95%  |  11,40%  |  26,58%  | 1,19x
 🟢🟡 | 30/09  |    56 MV v3     | [30/09]      | 536,67  |  —   | 42,37  | 105,93% |  47,91   |  +5,54  | 90,18%  |  13,08%  |  25,80%  | 1,27x
-🟢🟡 | 29/09  |    44 MV v3     | [29/09]      | 510,00  |  —   | 53,48  | 89,13%  |  61,05   |  +7,57  | 99,13%  |  14,15%  |  25,43%  | 1,19x
 ```
 
 **SHEIN — principal · Campanhas ativas (54) · 4/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 29/09  |    44 MV v3     | [29/09]      | 510,00  |  —   | 53,48  | 89,13%  |  61,05   |  +7,57  | 99,13%  |  14,15%  |  25,43%  | 1,19x
 🟢🟡 | 07/10  |    90 MV v3     | [07/10]      | 615,63  |  —   | 40,32  | 100,80% |  47,88   |  +7,56  | 92,27%  |  18,75%  |  22,92%  | 1,31x
 🟢🟡 | 19/10  | 176 CC CP86 v3  | Robotic Pool | 674,00  | 0,85 | 10,02  |  6,68%  |  12,13   |  +2,11  | 97,50%  |  21,06%  |  21,16%  | 1,07x
 🟢🟡 | 09/10  |    107 CC v3    | [09/10]      | 846,35  | 1,00 | 111,66 | 74,44%  |  128,92  | +17,26  | 98,19%  |  15,46%  |  20,98%  | 1,14x
@@ -70,12 +71,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🔴🔴 | 02/10  |    64 CC v3     | [53]         | 525,00  | 1,00 | 11,50  |  7,67%  |   8,25   |  -3,25  | 75,00%  | -28,26%  |  8,96%   | 0,99x
 🔴🔴 | 29/09  |    47 MV v3     | [29/09]      | 591,20  |  —   | 42,62  | 106,55% |  42,51   |  -0,11  | 93,08%  |  -0,26%  |  8,21%   | 1,09x
 🔴🔴 | 05/10  |    86 MV v3     | [05/10]      | 605,88  |  —   | 32,94  | 109,80% |  32,87   |  -0,07  | 97,39%  |  -0,21%  |  7,10%   | 0,91x
-🔴🔴 | 09/10  |    106 MV v2    | [09/10]      | 729,81  |  —   | 40,76  | 101,90% |  33,63   |  -7,13  | 73,87%  | -17,49%  |  4,93%   | 0,90x
 ```
 
 **SHEIN — principal · Campanhas ativas (54) · 5/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🔴🔴 | 09/10  |    106 MV v2    | [09/10]      | 729,81  |  —   | 40,76  | 101,90% |  33,63   |  -7,13  | 73,87%  | -17,49%  |  4,93%   | 0,90x
 🟢🔴 | 11/10  | 139 CC CP110 v3 | Custom Varsi | 778,75  | 1,00 | 87,67  | 58,45%  |  89,15   |  +1,48  | 95,09%  |  1,69%   |  2,30%   | 0,92x
 🔴🔴 | 11/10  | 137 MV CP110 v3 | Custom Varsi | 647,00  |  —   | 105,30 | 105,30% |  97,41   |  -7,89  | 99,18%  |  -7,49%  |  1,51%   | 0,96x
 🟢🔴 | 19/10  | 181 CC CP92 v3  | CLOTHES      | 735,00  | 0,80 |  3,93  |  2,62%  |   3,97   |  +0,04  | 100,00% |  1,02%   |  1,02%   | 0,81x
@@ -234,7 +235,8 @@ Início |       Nº        | Dia |  13/10  |  14/10   |  15/10  |  16/10   |  17
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

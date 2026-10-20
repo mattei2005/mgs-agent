@@ -4,7 +4,15 @@
 
 Evitar divergência entre threads e uso de modelos históricos em pedidos genéricos. A política visual continua exclusivamente em `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/reporting/on_demand_default_layout`. O índice `data/ares/discord/shein-intraday-report-bindings.json` vincula as 36 threads a contas exatas; não amplia autoridade. Ler ambos em cada pedido, não usar um snapshot de configuração como estado vigente.
 
-## Padrão global vigente — 36 contas, seis sites SHEIN
+## Padrão global vigente — compacto de 14 colunas
+
+A aprovação de Rodolfo do modelo final para G001–G006 promoveu `on_demand_default_layout.compact_identity_standard`, política `ARES-SHEIN-ALL36-COMPACT-IDENTITY-20261019`. Ordem: **R/E, Início, Nº, Produto, RPS, Bid, Gasto, B.U.%, Rev, Saldo, Health, ROI, ROI E., ROAS**. Nº15 combina número literal, lance abreviado, CP da origem e quiz no final; St/Quiz/Lance deixam de ser colunas. Grade-base143 e mínimos adaptativos Gasto6/B.U.%7/Saldo7; status bruto/timestamp e blocos continuam obrigatórios. A legenda aprovada usa seções e bullets, preservando fórmulas, unidades, parcial, fontes e limitações. Aplicação automática para novos snapshots após a vigência; em reformatação expressamente autorizada de snapshot preservado, usar `compact_identity_policy_id` e `source_timestamps.presentation`, mantendo os demais dados/horários. Não aplicar implicitamente a replays antigos nem usar o cabeçalho de prévia nos próximos relatórios normais.
+
+Antes de publicar, reler `daily_budget` vigente por campaign ID e reconciliar com o modelo. Não confundir orçamento inicial, orçamento do corte antigo e orçamento atual. Quando somente a referência orçamentária for renovada, salvar `source_timestamps.budget`; o renderer mostra financeiro/Bid/orçamento em horários separados, usando gasto do corte informado sobre budget vigente. Não alterar gasto/ROI/receitas silenciosamente nem rotular Bid como atualizado só porque o budget foi lido. Checar `activities` v26 e old/new amounts nos casos de variação: budget reduzido também eleva B.U.%. Fonte API de budget atual não autoriza write Meta. Testes: `test_shein_report_global_compact_identity.py` e `test_shein_report_current_budget_reference.py`.
+
+Os parágrafos anteriores a esta promoção, abaixo, preservam a evolução e os perfis-base. As listas17colunas/grades157–160 não substituem o compacto vigente.
+
+## Histórico do padrão global — 36 contas, seis sites SHEIN
 
 Rodolfo expandiu explicitamente as últimas mudanças a **todas** as contas/sites da SHEIN, reforçado na mensagem `1561784289786466416` da thread `1561752465978818722`. Política vigente `ARES-SHEIN-ALL36-UNIFORM-CAPS-20261019`; perfil `on_demand_default_layout.format_profiles.SHEIN_ALL36_UNIFORM_G001_CAPS_V1`, com os36IDs reais e `account_report_overrides` correspondentes. Os recortes exclusivos YOLO e o antigo compacto15 estão supersedidos para próximos relatórios de toda a operação; perfis históricos permanecem somente para replay.
 

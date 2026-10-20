@@ -1,9 +1,10 @@
 ## SHEIN · Yolokfx-US-SHEIN-EN-06-G003
 **19/10/2026 · até 22:11 EDT · USD**
 **⏱️ ATRASO GAM/SB: 1h 08min**
-Financeiro preservado: 19/10 22:11 EDT. Bid/B.U.: Meta 19/10 22:16 EDT.
+Financeiro preservado: 19/10 22:11 EDT. Bid: Meta 19/10 22:16 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:17 EDT.
-Status dos blocos: Meta 19/10 22:19 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **4290,11** · Rev **5828,19** · Saldo **+1538,08** · ROI **35,85%** · ROI E. **44,51%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
@@ -19,12 +20,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 10/10  |    084 CC v2    | BAGGY JEANS  | 1332,17 | 0,90 | 14,98  | 37,45%  |  27,36   | +12,38  | 97,26%  |  82,64%  | 109,68%  | 1,08x
 🟢🟢 | 13/10  | 100 CC CP31 v3  | CLOTHES 2    | 866,49  | 0,75 | 147,75 | 98,50%  |  279,54  | +131,79 | 98,32%  |  89,20%  | 104,21%  | 1,77x
 🟢🟢 | 14/10  | 121 MV CP44 v2  | ELECTRIC BIK | 943,73  |  —   | 58,08  | 77,44%  |  105,00  | +46,92  | 99,07%  |  80,79%  | 100,38%  | 1,37x
-🟢🟢 | 01/10  |    15 MV v2     | ELECTRIC SCO | 1051,76 |  —   | 26,14  | 104,56% |  47,96   | +21,82  | 97,81%  |  83,47%  |  86,27%  | 1,25x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 2/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 01/10  |    15 MV v2     | ELECTRIC SCO | 1051,76 |  —   | 26,14  | 104,56% |  47,96   | +21,82  | 97,81%  |  83,47%  |  86,27%  | 1,25x
 🟢🟢 | 06/10  |    33 MV v2     | ELECTRIC BIK | 965,26  |  —   | 36,90  | 92,25%  |  66,02   | +29,12  | 95,79%  |  78,92%  |  80,51%  | 1,46x
 🟢🟢 | 10/10  |    077 MV v2    | POWER BANK   | 857,19  |  —   | 27,91  | 93,03%  |  48,29   | +20,38  | 98,64%  |  73,02%  |  79,83%  | 1,59x
 🟢🟢 | 13/10  |    089 CC v2    | PLUS SIZE PI | 280,00  | 0,90 |  0,28  |  0,28%  |   0,50   |  +0,22  | 100,00% |  78,57%  |  78,57%  | 4,57x
@@ -36,12 +37,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 09/10  |    63 CC v2     | POWER BANK   | 957,28  | 1,10 | 43,71  | 109,28% |  69,69   | +25,98  | 99,51%  |  59,44%  |  67,26%  | 1,32x
 🟢🟢 | 14/10  |    125 MV v3    | PLUS SIZE PI | 735,32  |  —   | 78,81  | 105,08% |  122,23  | +43,42  | 95,79%  |  55,09%  |  67,12%  | 1,54x
 🟢🟢 | 10/10  | 067 MV CP20 v2  | ELECTRIC BIK | 848,96  |  —   | 63,44  | 84,59%  |  95,29   | +31,85  | 98,33%  |  50,20%  |  64,42%  | 1,37x
-🟢🟢 | 06/10  |    39 MV v2     | POWER BANK   | 972,11  |  —   | 48,96  | 97,92%  |  78,02   | +29,06  | 93,94%  |  59,35%  |  62,97%  | 1,24x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 3/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 06/10  |    39 MV v2     | POWER BANK   | 972,11  |  —   | 48,96  | 97,92%  |  78,02   | +29,06  | 93,94%  |  59,35%  |  62,97%  | 1,24x
 🟢🟢 | 13/10  | 101 CC CP31 v3  | CLOTHES 2    | 807,24  | 0,75 | 84,33  | 56,22%  |  133,79  | +49,46  | 98,29%  |  58,65%  |  61,82%  | 1,48x
 🟢🟢 | 06/10  |    30 MV v2     | TOOLBOX      | 756,78  |  —   | 27,35  | 91,17%  |  40,10   | +12,75  | 92,91%  |  46,62%  |  60,40%  | 1,46x
 🟢🟢 | 10/10  |    073 MV v3    | CLOTHES 1    | 803,62  |  —   | 68,40  | 91,20%  |  97,90   | +29,50  | 95,00%  |  43,13%  |  59,34%  | 1,29x
@@ -53,12 +54,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 14/10  | 110 MV CP69 v3  | CLOTHES 2    | 867,76  |  —   | 39,55  | 98,88%  |  58,59   | +19,04  | 98,02%  |  48,14%  |  52,74%  | 1,61x
 🟢🟢 | 10/10  |    081 MV v2    | ELECTRIC BIK | 832,11  |  —   | 36,43  | 91,08%  |  53,17   | +16,74  | 96,93%  |  45,95%  |  51,80%  | 1,12x
 🟢🟢 | 06/10  |    37 MV v2     | BAGS 1       | 751,82  |  —   | 31,84  | 106,13% |  43,51   | +11,67  | 95,78%  |  36,65%  |  51,57%  | 1,54x
-🟢🟢 | 15/10  | 130 MV CP124 v3 | PLUS SIZE PI | 615,64  |  —   | 49,75  | 99,50%  |  72,51   | +22,76  | 99,64%  |  45,75%  |  51,14%  | 1,65x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 4/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 15/10  | 130 MV CP124 v3 | PLUS SIZE PI | 615,64  |  —   | 49,75  | 99,50%  |  72,51   | +22,76  | 99,64%  |  45,75%  |  51,14%  | 1,65x
 🟢🟢 | 14/10  | 111 MV CP69 v3  | CLOTHES 2    | 749,81  |  —   | 50,50  | 101,00% |  68,38   | +17,88  | 91,40%  |  35,41%  |  50,79%  | 1,46x
 🟢🟢 | 14/10  | 109 MV CP69 v3  | CLOTHES 2    | 793,55  |  —   | 71,81  | 95,75%  |  96,59   | +24,78  | 97,65%  |  34,51%  |  50,10%  | 1,41x
 🟢🟢 | 02/10  |    19 MV v2     | ELECTRIC BIK | 810,00  |  —   | 40,45  | 134,83% |  56,86   | +16,41  | 95,53%  |  40,57%  |  50,04%  | 1,02x
@@ -70,12 +71,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 13/10  | 096 CC CP59 v2  | ELECTRIC BIK | 792,50  | 0,95 | 13,54  | 13,54%  |  19,98   |  +6,44  | 100,00% |  47,56%  |  47,56%  | 1,26x
 🟢🟢 | 10/10  |    068 MV v3    | CLOTHES 2    | 795,52  |  —   | 72,72  | 96,96%  |  97,59   | +24,87  | 97,59%  |  34,20%  |  47,44%  | 1,49x
 🟢🟢 | 14/10  | 119 MV CP44 v2  | ELECTRIC BIK | 876,78  |  —   | 47,32  | 94,64%  |  67,60   | +20,28  | 97,74%  |  42,86%  |  46,13%  | 1,08x
-🟢🟢 | 15/10  | 131 CC CP124 v3 | PLUS SIZE PI | 627,58  | 0,75 | 37,79  | 75,58%  |  53,04   | +15,25  | 97,63%  |  40,35%  |  46,07%  | 1,30x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 5/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 15/10  | 131 CC CP124 v3 | PLUS SIZE PI | 627,58  | 0,75 | 37,79  | 75,58%  |  53,04   | +15,25  | 97,63%  |  40,35%  |  46,07%  | 1,30x
 🟢🟢 | 14/10  | 114 MV CP59 v2  | ELECTRIC BIK | 771,82  |  —   | 45,05  | 90,10%  |  60,19   | +15,14  | 99,20%  |  33,61%  |  45,26%  | 1,32x
 🟢🟢 | 01/10  |    12 MV v2     | ELECTRIC SCO | 821,95  |  —   | 45,82  | 91,64%  |  60,56   | +14,74  | 96,35%  |  32,17%  |  42,60%  | 1,37x
 🟢🟢 | 15/10  | 136 CC CP125 v3 | PLUS SIZE PI | 723,20  | 0,85 | 67,98  | 169,95% |  94,13   | +26,15  | 99,39%  |  38,47%  |  41,22%  | 1,39x
@@ -87,12 +88,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 14/10  | 104 MV CP88 v2  | PLUS SIZE PI | 849,33  |  —   | 53,31  | 106,62% |  66,38   | +13,07  | 97,61%  |  24,52%  |  37,16%  | 1,17x
 🟢🟡 | 14/10  | 112 MV CP59 v2  | ELECTRIC BIK | 858,31  |  —   | 35,44  | 88,60%  |  44,68   |  +9,24  | 95,77%  |  26,07%  |  36,68%  | 1,13x
 🟢🟡 | 13/10  | 094 CC CP59 v2  | ELECTRIC BIK | 874,92  | 0,95 | 103,27 | 103,27% |  138,98  | +35,71  | 98,89%  |  34,58%  |  35,68%  | 1,24x
-🟢🟡 | 13/10  | 102 CC CP31 v3  | CLOTHES 2    | 788,58  | 0,73 | 85,71  | 57,14%  |  114,43  | +28,72  | 97,07%  |  33,51%  |  35,47%  | 1,42x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 6/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 13/10  | 102 CC CP31 v3  | CLOTHES 2    | 788,58  | 0,73 | 85,71  | 57,14%  |  114,43  | +28,72  | 97,07%  |  33,51%  |  35,47%  | 1,42x
 🟢🟡 | 15/10  | 135 CC CP125 v3 | PLUS SIZE PI | 658,40  | 0,85 | 44,86  | 112,15% |  58,21   | +13,35  | 97,93%  |  29,76%  |  34,35%  | 1,42x
 🟢🟡 | 15/10  |    133 MV v2    | FAUX LEATHER | 835,53  |  —   | 29,68  | 98,93%  |  34,42   |  +4,74  | 96,26%  |  15,97%  |  34,23%  | 1,00x
 🟢🟡 | 09/10  |    54 MV v2     | ELECTRIC BIK | 729,63  |  —   | 42,46  | 106,15% |  52,18   |  +9,72  | 99,39%  |  22,89%  |  32,60%  | 0,83x
@@ -104,12 +105,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 06/10  |    40 MV v2     | RINGS        | 739,84  |  —   | 33,55  | 167,75% |  41,28   |  +7,73  | 97,22%  |  23,04%  |  28,44%  | 1,17x
 🟢🟡 | 07/10  |    45 MV v2     | ELECTRIC BIK | 672,68  |  —   | 28,86  | 96,20%  |  33,11   |  +4,25  | 85,57%  |  14,73%  |  27,96%  | 1,11x
 🟢🟡 | 09/10  |    58 MV v2     | ELECTRIC BIK | 790,93  |  —   | 59,47  | 148,68% |  68,85   |  +9,38  | 96,63%  |  15,77%  |  27,81%  | 1,14x
-🟢🟡 | 10/10  |    069 MV v3    | CLOTHES 2    | 721,00  |  —   | 52,69  | 131,73% |  63,70   | +11,01  | 99,54%  |  20,90%  |  27,69%  | 1,14x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 7/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 10/10  |    069 MV v3    | CLOTHES 2    | 721,00  |  —   | 52,69  | 131,73% |  63,70   | +11,01  | 99,54%  |  20,90%  |  27,69%  | 1,14x
 🟢🟡 | 09/10  |    48 MV v2     | POWER BANK   | 745,98  |  —   | 48,44  | 121,10% |  57,66   |  +9,22  | 97,19%  |  19,03%  |  27,54%  | 1,18x
 🟢🟡 | 09/10  |    53 MV v3     | CLOTHES 2    | 790,25  |  —   | 48,01  | 120,03% |  57,61   |  +9,60  | 99,42%  |  20,00%  |  27,47%  | 1,25x
 🟢🟡 | 10/10  |    64 CC v2     | POWER BANK   | 664,31  | 1,00 | 38,48  | 96,20%  |  42,72   |  +4,24  | 92,65%  |  11,02%  |  26,51%  | 1,10x
@@ -121,12 +122,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 09/10  |    52 MV v3     | CLOTHES 2    | 654,96  |  —   | 56,96  | 142,40% |  67,79   | +10,83  | 96,80%  |  19,01%  |  22,56%  | 1,18x
 🟢🟡 | 10/10  |    071 MV v3    | CLOTHES 1    | 734,88  |  —   | 46,77  | 116,93% |  54,24   |  +7,47  | 94,04%  |  15,97%  |  21,83%  | 1,24x
 🟢🟡 | 02/10  |    20 MV v2     | ELECTRIC BIK | 759,16  |  —   | 49,37  | 123,43% |  56,14   |  +6,77  | 97,08%  |  13,71%  |  20,92%  | 0,96x
-🟢🟡 | 09/10  |    51 MV v3     | CLOTHES 2    | 593,94  |  —   | 32,69  | 81,73%  |  35,28   |  +2,59  | 100,00% |  7,92%   |  18,02%  | 1,21x
 ```
 
 **SHEIN — principal · Campanhas ativas (89) · 8/8**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 09/10  |    51 MV v3     | CLOTHES 2    | 593,94  |  —   | 32,69  | 81,73%  |  35,28   |  +2,59  | 100,00% |  7,92%   |  18,02%  | 1,21x
 🟢🟡 | 02/10  |    26 CC v2     | CLOTHES 1 -  | 744,24  | 0,80 | 39,87  | 53,16%  |  44,20   |  +4,33  | 96,77%  |  10,86%  |  15,25%  | 1,13x
 🟢🟡 | 30/09  |    09 MV v3     | CLOTHES      | 728,42  |  —   | 33,46  | 111,53% |  36,21   |  +2,75  | 99,37%  |  8,22%   |  15,15%  | 1,33x
 🟢🟡 | 06/10  |    36 MV v2     | ELECTRIC BIK | 633,59  |  —   | 48,90  | 163,00% |  52,46   |  +3,56  | 98,37%  |  7,28%   |  14,56%  | 1,12x
@@ -342,7 +343,8 @@ Início |       Nº        | Dia |  13/10  |  14/10  |  15/10  |  16/10  |  17/1
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

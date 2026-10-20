@@ -1,9 +1,10 @@
 ## SHEIN · Vizioid-US-SHEIN-EN-01-G001
 **19/10/2026 · até 21:51 EDT · USD**
 **⏱️ ATRASO GAM/SB: 52min**
-Financeiro preservado: 19/10 21:51 EDT. Bid/B.U.: Meta 19/10 21:51 EDT.
+Financeiro preservado: 19/10 21:51 EDT. Bid: Meta 19/10 21:51 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:07 EDT.
-Status dos blocos: Meta 19/10 22:05 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **119,24** · Rev **103,63** · Saldo **-15,61** · ROI **-13,09%** · ROI E. **-8,03%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
@@ -49,7 +50,8 @@ Início |    Nº    | Dia |  13/10  | 14/10  | 15/10  | 16/10  | 17/10  | 18/10 
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.

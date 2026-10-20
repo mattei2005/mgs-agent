@@ -1,9 +1,10 @@
 ## SHEIN · Yolokfx-US-SHEIN-EN-05-G001
 **19/10/2026 · até 21:51 EDT · USD**
 **⏱️ ATRASO GAM/SB: 51min**
-Financeiro preservado: 19/10 21:51 EDT. Bid/B.U.: Meta 19/10 21:51 EDT.
+Financeiro preservado: 19/10 21:51 EDT. Bid: Meta 19/10 21:51 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 19/10 23:45 EDT.
 RPS: coluna da dash SB, consultada em 19/10 22:07 EDT.
-Status dos blocos: Meta 19/10 22:06 EDT.
+Status dos blocos: Meta 19/10 23:45 EDT.
 Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
 Gasto **2426,41** · Rev **3304,79** · Saldo **+878,38** · ROI **36,20%** · ROI E. **44,43%**.
 Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
@@ -12,21 +13,21 @@ Histórico de 7 dias: número da campanha em ordem crescente.
 **SHEIN — principal · Campanhas ativas (47) · 1/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
-🟢🟢 | 18/10  |    106 CC v3    | PLUS SIZE    | 890,45  | 0,90 | 105,51 | 117,23% |  227,83  | +122,32 | 93,87%  | 115,93%  | 119,48%  | 1,83x
-🟢🟢 | 17/10  |    103 CC v3    | PLUS SIZE    | 877,44  | 0,90 | 101,90 | 113,22% |  194,91  | +93,01  | 95,77%  |  91,28%  |  93,62%  | 1,80x
-🟢🟢 | 18/10  |    107 CC v3    | PLUS SIZE    | 831,87  | 0,90 | 105,44 | 117,16% |  196,80  | +91,36  | 91,34%  |  86,65%  |  92,55%  | 1,76x
-🟢🟢 | 18/10  |    105 CC v3    | PLUS SIZE    | 845,54  | 0,90 | 104,52 | 116,13% |  195,71  | +91,19  | 90,09%  |  87,25%  |  88,78%  | 1,76x
+🟢🟢 | 18/10  |    106 CC v3    | PLUS SIZE    | 890,45  | 0,90 | 105,51 | 70,34%  |  227,83  | +122,32 | 93,87%  | 115,93%  | 119,48%  | 1,83x
+🟢🟢 | 17/10  |    103 CC v3    | PLUS SIZE    | 877,44  | 0,90 | 101,90 | 67,93%  |  194,91  | +93,01  | 95,77%  |  91,28%  |  93,62%  | 1,80x
+🟢🟢 | 18/10  |    107 CC v3    | PLUS SIZE    | 831,87  | 0,90 | 105,44 | 70,29%  |  196,80  | +91,36  | 91,34%  |  86,65%  |  92,55%  | 1,76x
+🟢🟢 | 18/10  |    105 CC v3    | PLUS SIZE    | 845,54  | 0,90 | 104,52 | 69,68%  |  195,71  | +91,19  | 90,09%  |  87,25%  |  88,78%  | 1,76x
 🟢🟢 | 17/10  |    098 CC v2    | WIGS 2       | 886,65  | 0,90 | 69,74  | 107,29% |  121,79  | +52,05  | 90,44%  |  74,63%  |  84,46%  | 1,37x
 🟢🟢 | 18/10  |    108 CC v2    | WIGS 1       | 984,57  | 0,90 | 64,17  | 106,95% |  112,88  | +48,71  | 93,75%  |  75,91%  |  80,47%  | 1,53x
 🟢🟢 | 06/10  |    64 MV v2     | BAGS 01      | 654,84  |  —   | 21,99  | 109,95% |  35,90   | +13,91  | 93,42%  |  63,26%  |  79,35%  | 1,63x
-🟢🟢 | 17/10  |    095 CC v2    | WIGS 1       | 793,10  | 0,90 | 57,73  | 76,97%  |  87,59   | +29,86  | 91,38%  |  51,72%  |  72,42%  | 1,53x
 ```
 
 **SHEIN — principal · Campanhas ativas (47) · 2/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 17/10  |    095 CC v2    | WIGS 1       | 793,10  | 0,90 | 57,73  | 76,97%  |  87,59   | +29,86  | 91,38%  |  51,72%  |  72,42%  | 1,53x
 🟢🟢 | 18/10  |    109 CC v2    | WIGS 1       | 840,94  | 0,90 | 71,31  | 118,85% |  117,86  | +46,55  | 95,00%  |  65,28%  |  72,28%  | 1,71x
-🟢🟢 | 17/10  |    104 CC v3    | PLUS SIZE    | 792,06  | 0,90 | 102,37 | 113,74% |  161,71  | +59,34  | 94,76%  |  57,97%  |  58,96%  | 1,50x
+🟢🟢 | 17/10  |    104 CC v3    | PLUS SIZE    | 792,06  | 0,90 | 102,37 | 68,25%  |  161,71  | +59,34  | 94,76%  |  57,97%  |  58,96%  | 1,50x
 🟢🟢 | 19/10  |    112 CC v3    | PLUS SIZE 2  | 1025,14 | 0,90 | 23,71  | 47,42%  |  34,13   | +10,42  | 100,00% |  43,95%  |  57,74%  | 0,98x
 🟢🟢 | 29/09  |    33 MV v2     | BIKE ELETRIC | 993,04  |  —   | 47,39  | 94,78%  |  68,87   | +21,48  | 94,29%  |  45,33%  |  57,46%  | 1,04x
 🟢🟢 | 06/10  |    63 MV v2     | BAGS 01      | 640,78  |  —   | 26,34  | 87,80%  |  36,91   | +10,57  | 99,35%  |  40,13%  |  50,72%  | 1,59x
@@ -36,12 +37,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟢 | 30/09  |    39 MV v2     | GAR AGUA     | 666,87  |  —   | 51,13  | 85,22%  |  64,94   | +13,81  | 95,33%  |  27,01%  |  42,05%  | 1,32x
 🟢🟡 | 17/10  |    096 CC v2    | WIGS 2       | 804,16  | 0,90 | 60,07  | 120,14% |  81,50   | +21,43  | 91,09%  |  35,68%  |  38,79%  | 1,08x
 🟢🟡 | 01/10  |    45 MV v2     | PISTOLA LAVA | 698,83  |  —   | 28,44  | 94,80%  |  36,84   |  +8,40  | 91,60%  |  29,54%  |  38,22%  | 0,97x
-🟢🟡 | 13/10  |    89 MV v3     | MOLETONS     | 697,61  |  —   | 54,94  | 91,57%  |  68,12   | +13,18  | 93,62%  |  23,99%  |  32,93%  | 1,25x
 ```
 
 **SHEIN — principal · Campanhas ativas (47) · 3/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 13/10  |    89 MV v3     | MOLETONS     | 697,61  |  —   | 54,94  | 91,57%  |  68,12   | +13,18  | 93,62%  |  23,99%  |  32,93%  | 1,25x
 🟢🟡 | 13/10  | 091 CC CP89 v3  | MOLETONS     | 731,08  | 1,00 | 51,99  | 86,65%  |  59,86   |  +7,87  | 89,64%  |  15,14%  |  29,70%  | 1,05x
 🟢🟡 | 19/10  |    113 CC v3    | PLUS SIZE 2  | 786,67  | 0,90 | 29,60  | 59,20%  |  36,11   |  +6,51  | 84,92%  |  21,99%  |  28,99%  | 1,13x
 🟢🟡 | 18/10  |    110 CC v2    | WIGS 1       | 962,86  | 0,90 |  9,50  | 15,83%  |  12,13   |  +2,63  | 97,14%  |  27,68%  |  27,68%  | 0,91x
@@ -53,12 +54,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🟡 | 17/10  |    102 CC v3    | ROUPA CONJUN | 759,85  | 0,90 | 38,84  | 77,68%  |  44,43   |  +5,59  | 90,00%  |  14,39%  |  24,67%  | 1,05x
 🟢🟡 | 17/10  |    099 CC v3    | ROUPA CONJUN | 696,12  | 0,90 | 53,38  | 106,76% |  63,64   | +10,26  | 94,50%  |  19,22%  |  22,97%  | 1,33x
 🟢🟡 | 06/10  |    72 MV v2     | BAGS 02      | 692,37  |  —   | 21,30  | 106,50% |  23,05   |  +1,75  | 91,36%  |  8,22%   |  22,72%  | 0,98x
-🟢🟡 | 01/10  |    48 MV v2     | BIKE ELETRIC | 926,67  |  —   | 43,49  | 86,98%  |  50,04   |  +6,55  | 90,11%  |  15,06%  |  20,99%  | 1,04x
 ```
 
 **SHEIN — principal · Campanhas ativas (47) · 4/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 01/10  |    48 MV v2     | BIKE ELETRIC | 926,67  |  —   | 43,49  | 86,98%  |  50,04   |  +6,55  | 90,11%  |  15,06%  |  20,99%  | 1,04x
 🟢🟡 | 13/10  | 090 CC CP89 v3  | MOLETONS     | 713,04  | 1,05 | 63,03  | 105,05% |  67,42   |  +4,39  | 96,00%  |  6,96%   |  20,78%  | 1,15x
 🔴🟡 | 17/10  |    094 CC v2    | WIGS 1       | 635,78  | 0,90 | 29,98  | 49,97%  |  20,16   |  -9,82  | 98,28%  | -32,76%  |  18,68%  | 0,94x
 🟢🟡 | 03/10  |    62 MV v2     | BAGS 02      | 736,32  |  —   | 41,67  | 83,34%  |  44,00   |  +2,33  | 93,75%  |  5,59%   |  16,82%  | 0,86x
@@ -70,12 +71,12 @@ R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.
 🟢🔴 | 17/10  |    101 CC v3    | ROUPA CONJUN | 691,30  | 0,90 | 52,04  | 104,08% |  57,24   |  +5,20  | 92,92%  |  9,99%   |  9,99%   | 1,20x
 🔴🔴 | 03/10  |    58 MV v2     | RING 1       | 594,08  |  —   | 36,64  | 91,60%  |  35,68   |  -0,96  | 90,65%  |  -2,62%  |  9,44%   | 1,08x
 🔴🔴 | 17/10  |    093 CC v2    | WIGS 1       | 754,38  | 0,90 | 10,34  | 15,91%  |  10,33   |  -0,01  | 100,00% |  -0,10%  |  8,22%   | 1,01x
-🔴🔴 | 06/10  |    67 MV v3     | BAGS 01      | 670,41  |  —   | 30,68  | 102,27% |  29,56   |  -1,12  | 93,24%  |  -3,65%  |  -1,17%  | 0,97x
 ```
 
 **SHEIN — principal · Campanhas ativas (47) · 5/5**
 ```text
 R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🔴🔴 | 06/10  |    67 MV v3     | BAGS 01      | 670,41  |  —   | 30,68  | 102,27% |  29,56   |  -1,12  | 93,24%  |  -3,65%  |  -1,17%  | 0,97x
 🔴🔴 | 17/10  | 092 CC CP35 v2  | BIKE ELETRIC | 611,36  | 1,05 | 40,33  | 53,77%  |  34,73   |  -5,60  | 95,71%  | -13,89%  |  -2,13%  | 0,96x
 🔴🔴 | 19/10  |    111 CC v3    | PLUS SIZE 2  | 664,86  | 0,90 | 50,93  | 101,86% |  41,84   |  -9,09  | 93,64%  | -17,85%  | -13,94%  | 0,85x
 🔴🔴 | 06/10  |    71 MV v2     | BAGS 02      | 471,06  |  —   | 26,58  | 88,60%  |  19,61   |  -6,97  | 88,61%  | -26,22%  | -24,64%  | 0,94x
@@ -182,7 +183,8 @@ Início |       Nº       | Dia | 13/10  | 14/10  |  15/10  | 16/10  |  17/10  |
 
 **📊 Métricas**
 - **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
-- **B.U.%**: gasto Meta no dia ÷ orçamento diário × 100; pode ultrapassar 100%. Não é orçamento restante.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
 - **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
 - **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
 - **ROAS**: valor de compras Meta ÷ gasto Meta.
