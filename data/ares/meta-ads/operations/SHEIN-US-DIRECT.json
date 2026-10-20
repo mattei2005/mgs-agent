@@ -3824,13 +3824,14 @@
         }
       }
     },
-    "activation_gate": "Rodolfo advances the operation beyond campaign-creation onboarding",
+    "activation_gate": "Daily D-1 subset explicitly authorized by Rodolfo in thread1561752465978818722 on2026-10-20; other recurring reports require their own authorization",
     "automatic_optimization_enabled": false,
     "campaign_creation_threads_are_not_reporting_threads": true,
-    "cron_enabled": false,
+    "cron_enabled": true,
+    "daily_report_policy": "data/ares/meta-ads/policies/shein-daily-report.json",
     "currency": "per-account live readback",
     "fixed_threads": {},
-    "mode": "DEFERRED_IN_PHASE_1",
+    "mode": "ON_DEMAND_READ_ONLY_WITH_AUTHORIZED_DAILY_D1_SUBSET",
     "timezone": "per-account live readback"
   },
   "rollout_phase": {
@@ -3846,7 +3847,8 @@
     "deleted_threads_history": "data/ares/discord/shein-fixed-routes.json",
     "fixed_threads": "none; six trial creation threads were deleted by Rodolfo and verified absent",
     "phase": "PHASE_1_CAMPAIGN_CREATION_ONLY",
-    "report_crons": false,
+    "report_crons": true,
+    "report_crons_policy": "data/ares/meta-ads/policies/shein-daily-report.json",
     "reports_and_optimization_threads": "deferred until managers gain operational familiarity and Rodolfo advances the phase"
   },
   "runtime_readiness": {
