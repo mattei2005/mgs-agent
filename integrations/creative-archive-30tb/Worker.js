@@ -151,6 +151,20 @@ function mgsArchiveCanaryAck(c) {
   var ack=JSON.parse(mgsArchiveText(found.id));
   return ack.schema==='mgs.archive.ack.v1' && ack.jobId===c.canaryJobId && ack.kind==='canary' && ack.status==='verified' && ack.deleteSource===false;
 }
+function mgsArchiveWriteHeartbeat(c,summary) {
+  var key='heartbeat:worker-v1',old=mgsArchiveOne(c.controlFolderId,key);
+  var result={schema:'mgs.archive.heartbeat.v1',status:summary.status,executedAt:new Date().toISOString(),triggerUid:c.executionTriggerUid || null,workerSha256:c.workerSha256 || null,copiedCount:(summary.copied || []).length,blocked:summary.blocked || [],canaryAcknowledged:summary.canaryAcknowledged===true,deleteSource:false};
+  var text=JSON.stringify(result),blob=Utilities.newBlob(text,'application/json','worker-heartbeat.json'),id;
+  if(old) {
+    var m=mgsArchiveMeta(old.id);mgsArchiveRequirePublisher(m,c.account);
+    if(!m.parents || m.parents[0]!==c.controlFolderId || !m.properties || m.properties.mgsArchiveType!=='heartbeat')throw new Error('HEARTBEAT_SCOPE');
+    id=Drive.Files.update({properties:{mgsArchiveKey:key,mgsArchiveType:'heartbeat'}},old.id,blob,{supportsAllDrives:true,fields:'id'}).id;
+  } else {
+    id=Drive.Files.create({name:'worker-heartbeat.json',mimeType:'application/json',parents:[c.controlFolderId],properties:{mgsArchiveKey:key,mgsArchiveType:'heartbeat'}},blob,{supportsAllDrives:true,fields:'id'}).id;
+  }
+  if(mgsArchiveText(id)!==text)throw new Error('HEARTBEAT_READBACK');
+  mgsArchiveRequirePublisher(mgsArchiveMeta(id),c.account);
+}
 function mgsArchiveWorkerTick(input) {
   var c=mgsArchiveValidateConfig(input),lock=LockService.getScriptLock();
   if(!lock.tryLock(1000))return {status:'busy',deleteSource:false};
@@ -166,7 +180,9 @@ function mgsArchiveWorkerTick(input) {
     var priorLedger=JSON.parse(props.getProperty('MGS_ARCHIVE_RUNTIME_24H') || '[]');
     if(!Array.isArray(priorLedger) || priorLedger.some(function(p){return !Array.isArray(p) || p.length!==2 || !isFinite(p[0]) || !isFinite(p[1]) || p[1]<0;}))throw new Error('RUNTIME_BUDGET_CORRUPT');
     ledger=priorLedger.filter(function(p){return p[0]>start-86400000;});budgetReady=true;
-    if(ledger.length>=350 || ledger.reduce(function(n,p){return n+p[1];},0)>=3600000)return {status:'runtime_budget_paused',deleteSource:false};
+    if(ledger.length>=350 || ledger.reduce(function(n,p){return n+p[1];},0)>=3600000) {
+      var paused={status:'runtime_budget_paused',deleteSource:false};mgsArchiveWriteHeartbeat(c,paused);return paused;
+    }
     var summary={status:'ok',copied:[],blocked:[],canaryAcknowledged:mgsArchiveCanaryAck(c),deleteSource:false};
     var rows=mgsArchiveList(c.requestsFolderId,null,'request','queued');
     for(var i=0;i<rows.length && summary.copied.length+summary.blocked.length<2 && Date.now()-start<210000;i++) {
@@ -199,7 +215,7 @@ function mgsArchiveWorkerTick(input) {
         }
       }
     }
-    console.log(JSON.stringify(summary));return summary;
+    mgsArchiveWriteHeartbeat(c,summary);console.log(JSON.stringify(summary));return summary;
   } finally {
     try {
       if(budgetReady) {

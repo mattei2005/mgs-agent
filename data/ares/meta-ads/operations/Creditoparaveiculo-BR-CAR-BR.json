@@ -1651,8 +1651,8 @@
           "request_id": "cpv13-c42-c43-d1-20261019-rodolfo",
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1539832402744975450",
-          "status": "active_d1",
-          "actions_enabled": true,
+          "status": "deleted_manual_replacement_20261020",
+          "actions_enabled": false,
           "vehicle_type": "CARRO",
           "initial_budget_usd": 10,
           "planned_budget_usd_on_2026_09_06": 25,
@@ -1722,7 +1722,13 @@
           "creation_request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
           "creation_readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/cpv13-c42-c46-20260905-rodolfo-r3.json",
           "activation_readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c42-c43-d1-20261019-rodolfo/activation-C42.json",
-          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/cpv13-c42-c46-20260905-rodolfo-r3.json"
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/cpv13-c42-c46-20260905-rodolfo-r3.json",
+          "operator_status": "DELETED",
+          "terminal_request_id": "cpv13-c42-c43-immediate-20261020-rodolfo",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c42-c43-immediate-20261020-rodolfo/request.json",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:message:1562109283418644592",
+          "api_raw_status": "DELETED"
         },
         "43": {
           "campaign_id": "120251081581810632",
@@ -1731,8 +1737,8 @@
           "request_id": "cpv13-c42-c43-d1-20261019-rodolfo",
           "authorized_by": "Rodolfo Mattei",
           "authorization_source": "discord:thread:1539832402744975450",
-          "status": "active_d1",
-          "actions_enabled": true,
+          "status": "deleted_manual_replacement_20261020",
+          "actions_enabled": false,
           "vehicle_type": "CARRO",
           "initial_budget_usd": 10,
           "planned_budget_usd_on_2026_09_06": 25,
@@ -1773,7 +1779,13 @@
           "creation_request_id": "cpv13-c42-c46-20260905-rodolfo-r3",
           "creation_readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/cpv13-c42-c46-20260905-rodolfo-r3.json",
           "activation_readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c42-c43-d1-20261019-rodolfo/activation-C43.json",
-          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/cpv13-c42-c46-20260905-rodolfo-r3.json"
+          "readback_audit": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/cpv13-c42-c46-20260905-rodolfo-r3.json",
+          "operator_status": "DELETED",
+          "terminal_request_id": "cpv13-c42-c43-immediate-20261020-rodolfo",
+          "terminal_meta_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c42-c43-immediate-20261020-rodolfo/request.json",
+          "terminal_authorized_by": "Rodolfo Mattei",
+          "terminal_authorization_source": "discord:message:1562109283418644592",
+          "api_raw_status": "DELETED"
         },
         "44": {
           "campaign_id": "120251081604280632",
@@ -3282,7 +3294,7 @@
         "120251081581810632"
       ],
       "scheduled_for": "2026-10-21T00:00:00-03:00",
-      "state": "SCHEDULED",
+      "state": "SUPERSEDED_BY_IMMEDIATE_REPLACEMENT",
       "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c42-c43-fix-activate-20261021-rodolfo.json",
       "script": "/root/.hermes/profiles/ares/scripts/cpv13-c42-c43-activate-20261021.py",
       "cron_job_id": "3b091340c964",
@@ -3296,7 +3308,40 @@
         "43": 3000
       },
       "budget_write_at_activation": false,
-      "children_unchanged_already_active": true
+      "children_unchanged_already_active": true,
+      "superseded_by": "cpv13-c42-c43-immediate-20261020-rodolfo",
+      "cron_enabled": false
+    },
+    "cpv13-c42-c43-immediate-20261020-rodolfo": {
+      "request_id": "cpv13-c42-c43-immediate-20261020-rodolfo",
+      "state": "COMPLETE_ACTIVATED_ORIGINALS_DELETED",
+      "campaign_numbers": [
+        "51",
+        "52"
+      ],
+      "campaign_ids": [
+        "120251725737910632",
+        "120251725737930632"
+      ],
+      "source_campaign_numbers": [
+        "42",
+        "43"
+      ],
+      "source_campaign_ids": [
+        "120251081581790632",
+        "120251081581810632"
+      ],
+      "mode": "pure_clone",
+      "budget_minor_each": 3000,
+      "activated_at_sp": "2026-10-20T11:35:29.643931-03:00",
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:message:1562109283418644592",
+      "readback_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c42-c43-immediate-20261020-rodolfo/final-platform-readback.json",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c42-c43-immediate-20261020-rodolfo.json",
+      "new_autonomous_allowlist_entries": false,
+      "immediate_start_exception": true,
+      "first_delivery_auto_pause_not_armed": true,
+      "recurring_jobs_unchanged": true
     }
   },
   "creative_drive_organization": {

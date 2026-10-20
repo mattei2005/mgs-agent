@@ -53,6 +53,8 @@ A Service Account may edit an existing My Drive Sheet that was explicitly shared
 
 For storage-capacity or migration questions, classify the actual Drive with read-only metadata first, then distinguish access to existing files from creation of new files and storage ownership. Do not infer the Workspace edition from a displayed user/folder limit, or treat sharing a folder as transferring its storage charge. Compare expanding the existing Workspace storage before proposing a migration or authentication redesign; retrieve current official pricing and label account-specific eligibility as unverified until checked. Use `references/service-account-my-drive-quota.md` for the diagnosis sequence, capacity comparison and concise explanation.
 
+For an explicitly approved isolated owner-account queue (not an agent identity fallback), use `references/apps-script-owner-queue-bridge.md`: immutable SA-published requests, owner receipts, pinned worker bootstrap, independent binary verification, staged activation and no source deletion during validation.
+
 ## Required preflight
 
 1. Load `/root/mgs-agent/.env` without printing values.
