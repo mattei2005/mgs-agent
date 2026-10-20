@@ -4403,12 +4403,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1562023429690097665",
-      "next_step": "Após quota, reconciliar somente shell do bundle2 e criar filhos ausentes pelo Engine; verificar 10 ads, QA integral e status final. Preservar nomes/IDs/manifests/SLA e fazer recibo agregado antes do fechamento.",
-      "objective": "Concluir quatro clones C01 Vizioid G006, 10 vídeos/textos Nicolas, USD20/dia por campanha, COCAP USD0.90.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1562023429690097665/state.json",
-      "state": "repair_verified; quatro campaign ids e quatro adset ids persistidos. bundle1 readback completo com 5 ads; bundle2 falhou transitoriamente http500/meta2 na configuração do shell. mesmo runner confirmou recovery pendente com quota300s; retomada única ativa. todas permanecem em staging paused.",
+      "next_step": "Rodolfo decidir prioridade/liberação explícita das5 reservas concorrentes ou concluir pedido detentor na origem; após reconciliação autorizada do inventário, retomar mesmo request-ready para pós-processamento e ativação, sem recriar IDs, sem trocar manifests, sem reiniciar SLA.",
+      "objective": "Concluir quatro clones C01 Vizioid G006, USD20/dia e COCAP USD0.90, 10 vídeos Nicolas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562023429690097665/validated-paused-receipt.json",
+      "state": "4 campanhas 004-007/4 conjuntos/10 anúncios criados e conferidos paused; qa semântico/renderizado 4/4 com cobertura exata dos 10 ad e creative ids. page reparada e readback200. user_age_unknown restaurado false em4 alvos com get. pós-processamento bloqueado por5 linhagens reservadas por shein-1562024416823607398 (nicolas, escalatepower g006, state recovery_pending/core failed com shells persistidos). não tomar reserva de outro pedido não terminal.",
       "thread_id": "1558134653242703935",
-      "updated_at": "2026-10-20T12:10:35+00:00"
+      "updated_at": "2026-10-20T12:18:58+00:00"
     },
     {
       "agent": "ares",
@@ -6163,12 +6163,12 @@
     {
       "agent": "ares",
       "id": "shein-1562024416823607398",
-      "next_step": "Pedir autorização explícita de Rodolfo para delegar somente ADVERTISE+ANALYZE na Page 857361470788197 ao SU corporativo; após autorização, pre-read/journal, write mínimo e readbacks admin/corporativo; repetir dry-run no mesmo request-ready, validar vídeos-fonte e seguir Engine v3/QA. Não trocar credencial nem recriar mídia.",
-      "objective": "Concluir 3 clones da campanha 001 na Escalatepower 06 G006; USD20/dia cada; COCAP USD0.90; grupos 3/3/2 e copy literal.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/page-access-diagnostic.json",
-      "state": "retomada de rodolfo validada por get; reservas transferidas e 8 mídias pre-stageadas/ready na conta correta. dry-run retido por code10 em vídeos da fonte e page offers spot 857361470788197. admin get comprova page no digital trust; assigned_users completo sem o su corporativo 122095869861482193. scopes granted, assigned_pages completo sem a page. zero campanha nova; zero permission write.",
+      "next_step": "Exige manutenção separada do executor/adapter, fora da transação: preservar formato de source AFS em clone_prestaged e corrigir reconciliação de slots parcialmente criados com source repetido/nome temporário. Depois testes, readback, reaproveitar IDs existentes e reconciliar reversivelmente redundantes; jamais excluir sem escopo. Não nova campanha nem reset E2E. Retomar só após correção validada, QA8 e continuação central.",
+      "objective": "Concluir 3 clones da campanha 001 Escalatepower 06 G006; USD20/dia cada; COCAP USD0.90; grupos 3/3/2 e copy literal.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/partial-final-readback.json",
+      "state": "page offers spot delegada e autorização futura registrada. campanhas002/003 criadas paused usd20/cost_cap bid90. fonte inalterada. após recovery readback-first, executor repetiu 4 slots já existentes com source_ad_id repetido; agora há8 ads paused nas duas campanhas, incluindo4 redundantes. slots2 afs continuam 100/1443048; terceira campanha não criada. não executar de novo: recovery não reconcilia corretamente slots repetidos antes da normalização de nomes. ids e evidência em partial-final-readback.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-10-20T12:07:43+00:00"
+      "updated_at": "2026-10-20T12:21:07+00:00"
     },
     {
       "agent": "zeus",
@@ -6742,5 +6742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T12:10:35+00:00"
+  "updated_at": "2026-10-20T12:21:07+00:00"
 }
