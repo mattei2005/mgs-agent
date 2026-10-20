@@ -623,12 +623,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Autorizacao inicial interativa por navegador compativel do Google; confirmar acesso ao Apps Script da conta Gmail, depois criar projeto isolado e executar piloto. Nao repetir senha nem reduzir seguranca; PC do usuario nao participa da execucao recorrente.",
+      "next_step": "Rodolfo colar e executar CheckAccount.js / verificarContaMGS no projeto 1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF; retornar log seguro conta/quota ou texto de aviso Google antes de avancar. Sem copia, deploy publico, triggers ou exclusao.",
       "objective": "Implantar ponte Google isolada para arquivo criativo 30 TB sem PC pessoal e preparar politica limitada de limpeza autonoma",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "retry autorizado 1562090838748569660. login accounts.google.com localizado no 1password; username exato mgsdigitalcorp@gmail.com e campo password presente. google rejeitou navegador apos identificacao, antes da senha, em servicelogin e interactivelogin: this browser or app may not be secure, rrk=46. sem relay temporario, senha digitada, projeto cloud, copia ou exclusao. piloto local continua validado apenas offline.",
+      "state": "owner_reported_drive_service_ready_account_preflight_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T13:13:42+00:00"
+      "updated_at": "2026-10-20T13:35:01+00:00"
     },
     {
       "agent": "ares",
@@ -6752,5 +6752,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T13:21:50+00:00"
+  "updated_at": "2026-10-20T13:35:01+00:00"
 }

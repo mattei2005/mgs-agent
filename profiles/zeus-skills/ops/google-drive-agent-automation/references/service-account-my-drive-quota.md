@@ -37,6 +37,8 @@ Keep deletion and scheduling absent from the first pilot. Trashing still consume
 
 A Google sign-in rejection saying `This browser or app may not be secure` immediately after account identification is a browser-security gate, not evidence of wrong credentials or 2FA failure. Verify the exact Login username/standard-password presence safely, stop after bounded official-entry checks, and request one-time interactive sign-in/consent through a supported browser. Do not create a secret relay before a usable password stage, read a password exposed in a screenshot, choose an alternate saved password field without evidence, weaken account security or misrepresent initial manual setup as an always-on computer dependency.
 
+The Apps Script management/execution API does not support Service Accounts (https://developers.google.com/apps-script/api/concepts). Do not request script Editor sharing with the canonical Service Account as a supposed remote-edit or execution path. Drive file permissions do not prove Apps Script API compatibility. When the owner supplies an Apps Script project URL, preserve its exact ID, mark ownership/content as unverified until read back, and guide the initial owner-side setup one step at a time. Enabling the Advanced Drive v3 service in a default Apps Script Cloud project enables its corresponding API automatically; do not request unrelated Cloud billing, API keys or global Apps Script API access merely for this service.
+
 ### Official sources to refresh
 
 - Shared Drive ownership and pooled storage: https://developers.google.com/workspace/drive/api/guides/about-shareddrives

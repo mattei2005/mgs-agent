@@ -56,6 +56,8 @@ docs/mgs-knowledge-continuity-plan.md
 
 A checkpoint answers: objective, current state, next step, responsible agent, thread/source, and update time. It does not replace audit or the pendência system.
 
+The current `mgs-knowledge-control.py checkpoint-upsert` normalizes `state` with `.strip().lower()`. Use a lowercase machine-status label there; never embed a case-sensitive Drive/Apps Script ID, URL or command in `state`. Preserve literals in the canonical source and `next_step` (which retain case), and read those exact fields back. If an equality check fails after a helper mutation, inspect the actual record and normalization before retrying; repair only the metadata field, not the external identifier or an already-landed operation.
+
 ## Safe rollout sequence
 
 ### Phase 0 — Stabilize

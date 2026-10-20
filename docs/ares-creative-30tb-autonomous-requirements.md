@@ -9,7 +9,7 @@
 - Target account stated by Rodolfo: mgsdigitalcorp@gmail.com, with 30 TB available according to him. Account capacity and exact destination folder have not been independently verified.
 - No additional Workspace storage purchase is requested.
 
-## Status — implementation approved; initial account access blocked
+## Status — implementation approved; owner-created project received, setup pending
 
 Rodolfo approved advancing with the isolated integration and preparing the limited cleanup policy in message https://discord.com/channels/1185714635991679006/1562078493498540042/1562087305051902063. This does not activate source deletion: exact targets and the destructive-activation confirmation remain pending after the pilot. The current Service Account-only agent architecture remains active.
 
@@ -21,7 +21,7 @@ Historical pre-retry blocker (superseded): the isolated browser reached Google s
 
 Historical pre-retry metadata scan (superseded): the canonical 1Password Service Account CLI remained available. A credential-safe metadata search of accessible items did not locate a Google account Login for `mgsdigitalcorp@gmail.com`; only the canonical Service Account and unrelated Google Ads credentials were identified. No password/secret fields were read in that pre-retry scan. Do not infer that the browser backend being locked means canonical 1Password itself is unavailable.
 
-No remote Apps Script project, archive destination folder, new permission, scheduler, copy or deletion has been created. The exact 30 TB destination, account storage quota, Google consent and canonical Service Account destination readback remain unverified.
+Zeus has not created a remote Apps Script project, archive destination folder, new permission, scheduler, copy or deletion. Rodolfo subsequently supplied the owner-created project below. The exact 30 TB destination, account storage quota, script consent and canonical Service Account destination readback remain unverified.
 
 ## Latest retry — credential located; Google browser-security rejection
 
@@ -29,7 +29,17 @@ Rodolfo provided the Login item and authorized retry in message 1562090838748569
 
 Both the Google ServiceLogin and official InteractiveLogin entry paths accepted navigation, then rejected the browser immediately after account identification with `This browser or app may not be secure` (`rrk=46`). No password entry occurred, so neither a bad password nor 2FA failure is established. No temporary browser-vault credential relay was created. Stop automated login retries rather than changing security settings, routing through a third-party proxy or extracting alternate password fields.
 
-Current next gate: one-time interactive sign-in and Apps Script initial consent through a Google-supported browser. This is setup only, not a computer-dependent execution architecture. The cloud project/pilot remains undeployed. Prior missing-credential diagnosis above is historical and superseded by this observed provider block.
+Zeus's browser-security rejection remains unresolved; Rodolfo confirmed access through his own supported browser. This is setup only, not a computer-dependent execution architecture. The pilot remains undeployed. Prior missing-credential diagnosis above is historical and superseded by this observed provider block.
+
+## Owner-created Apps Script project — supplied, not independently inspected
+
+- Source message: 1562094810528088185.
+- Exact URL: https://script.google.com/home/projects/1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF/edit
+- Exact project ID: `1NxZ0ZTgZk4f3pzzX3fQQ-Y2wKpunjYbAaxbO8HN1fe9R5gXbEYVLpbUF`.
+- Intended owner account: `mgsdigitalcorp@gmail.com`; reported by Rodolfo, not yet independently verified.
+- Rodolfo reported Advanced Drive service setup complete in message 1562096306967548047; this is owner-reported, not independently inspected by Zeus.
+- Next single setup step: paste and run the read-only `CheckAccount.js` function `verificarContaMGS` through the owner-supported browser and return its safe account/quota log. No file creation, copying, permission changes, triggers or source removal are in this function. Six new offline contract tests pass, and the combined pilot/preflight suite has 22 passing tests; these are not Google runtime receipts. Do not deploy publicly or enable triggers.
+- Apps Script API documentation explicitly states that its API does not work with Service Accounts. Do not ask Rodolfo to share the script with the canonical Service Account as a supposed way to remotely manage or execute the script. File access through Drive and Apps Script API support are different gates. Preserve Service Account authentication for agent Drive/Sheets consumers; owner-side isolated script setup/consent remains necessary.
 
 ## Proposed isolated architecture, pending approval and proof
 
