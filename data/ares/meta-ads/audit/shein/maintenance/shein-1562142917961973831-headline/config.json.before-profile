@@ -1,0 +1,4637 @@
+{
+  "engine_version": 3,
+  "shein_cross_account_reference": {
+    "enabled": true,
+    "approved_by": "344196393512075265",
+    "source_message_id": "1560012034580414530",
+    "canonical_policy": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json#/cross_account_reference_policy",
+    "mode": "from_zero_prestaged",
+    "lineage_route": "direct_ad_create_with_source_ad_id",
+    "allowed_ad_counts": [1, 2, 3, 4, 5],
+    "source_access": "READ_ONLY",
+    "target_writes": "existing central Engine direct edges only",
+    "offline_verified": true,
+    "live_read_only_preflight_verified": true,
+    "evidence": "data/ares/meta-ads/audit/shein/cross-account-maintenance-t_37bef547/acceptance-proof.json",
+    "procedure": "docs/ares-shein-cross-account-reference.md",
+    "live_api_acceptance_verified": true,
+    "live_write_evidence": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1560010597385506986/final-verification.json",
+    "serving_verified": false,
+    "maintenance_canary_authorized": false
+  },
+  "shein_batch_activation": {
+    "enabled": true,
+    "operation": "SHEIN-US-DIRECT",
+    "minimum_quantity": 1,
+    "creation_status": "PAUSED",
+    "activation_after": "all_campaigns_semantic_and_rendered_media_QA_and_postprocess",
+    "final_status": "as_explicitly_requested",
+    "single_campaign_unchanged": false,
+    "authority": "344196393512075265",
+    "authorization_thread_id": "1557274000680288307",
+    "actual_meta_canary_authorized": false
+  },
+  "release_version": "3.6.8",
+  "status": "active_guarded_standard_access_live_usage_sovereign",
+  "enabled": true,
+  "write_enabled": true,
+  "global_budget_limit_policy": {
+    "source": "/root/mgs-agent/data/ares/meta-ads/policies/global-budget-limit-policy.json",
+    "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
+    "internal_budget_limits_enforced": false,
+    "applies_to_all_registered_and_future_accounts": true
+  },
+  "require_account_registration": true,
+  "require_explicit_account_modes": true,
+  "require_explicit_ad_serving_route": true,
+  "media_upload_enabled": true,
+  "on_demand_media_policy": {
+    "exact_account_required_before_upload": true,
+    "global_or_cross_account_prestage": false,
+    "deterministic_title_reconciliation": "one account-scoped scan per unresolved batch",
+    "partial_variant_recovery": "reuse an existing vertical or square ID and upload only the missing variant",
+    "ready_readback": "one logical poll per batch, chunked at 50 Graph subrequests",
+    "association_readback": "one account-scoped scan per batch before any registry commit",
+    "registry_commit": "only after every required video is ready and associated"
+  },
+  "require_prevalidated_manifest": true,
+  "require_appsecret_proof": false,
+  "graph_version": "v26.0",
+  "bundle_size": 2,
+  "max_ads_per_batch": 10,
+  "max_account_workers": 8,
+  "soft_score": 100,
+  "hard_score": 120,
+  "development_access_score_max": 60,
+  "standard_access_score_max": 9000,
+  "score_window_seconds": 300,
+  "development_access_readback_cooldown_seconds": 305,
+  "quota_retry_safety_seconds": 5,
+  "readback_recovery_points_per_campaign": 3,
+  "points_per_mode": {
+    "pure_clone": 30,
+    "clone_prestaged": 30,
+    "clone_page_switch": 30,
+    "from_zero_prestaged": 30
+  },
+  "quota_scope": "app_key_plus_ad_account_id",
+  "quota_tier_policy": "unknown uses configured 100/120 ceiling; live development_access caps the lane at 60; live standard_access uses 9000 and skips the fixed development readback cooldown",
+  "reader_exclusion_policy": "all recurring CPV Meta readers defer while the persisted per-account writer lease or cpv-daily operation state is resumable",
+  "transient_code2_retry_policy": "initial write, missing-only recovery and readback use distinct quota reservation IDs; retry only after effective capacity exists; a fresh recovery reservation includes targeted reconciliation, missing writes, required name normalization and final readback, so no second fixed cooldown is added when the estimated recovery cost fits",
+  "readback_policy": "one_outer_graph_batch_per_two_campaigns",
+  "intermediate_get_calls": 0,
+  "supported_modes": [
+    "pure_clone",
+    "clone_prestaged",
+    "clone_page_switch",
+    "from_zero_prestaged"
+  ],
+  "explicit_request_modes": [
+    "pure_clone",
+    "clone_prestaged",
+    "clone_page_switch",
+    "from_zero_prestaged"
+  ],
+  "mode_taxonomy": {
+    "from_zero_prestaged": "criar estrutura do zero: novos IDs de campanha, conjunto, anúncio, creative, post e mídia; source_ad_id é permitido apenas no anúncio e obrigatório quando a conta declarar lineage_required_for_new_media",
+    "clone_prestaged": "clonar com criativos novos: copiar campanha/conjunto/anúncios-fonte por lineage, substituindo a mídia e o payload criativo por assets novos do Drive",
+    "pure_clone": "duplicar igual: copiar a campanha sem trocar mídia, copy, estrutura, público, estratégia ou budget; atribuir o próximo número sequencial e reescrever somente os nomes canônicos e o link de destino/UTMs para o novo número; novos IDs técnicos são inevitáveis"
+  },
+  "pure_clone_tracking_policy": "pure_clone never consumes Drive assets; target campaign number must be the next live sequential slot; campaign/adset names and every destination tracking reference change from source cN/gNN to target cN/gNN while base URL and non-UTM parameters remain unchanged; source media and copy remain unchanged; source_campaign_id and source number are persisted for provenance; URL-tag rematerialization may create a new Creative ID, so readback validates media/copy equivalence, final URLs/UTMs and effective_object_story_id without requiring Creative ID equality",
+  "pure_clone_visible_lineage_marker": "append C{source_campaign_number:03d}-DUP{duplicate_ordinal:03d} to each duplicated campaign name; the ordinal runs 001..N inside the request and every duplicate points directly to the requested source campaign; example: five duplicates of C37 use C037-DUP001 through C037-DUP005",
+  "mode_selection_policy": "never collapse the three modes; daily new-creative cohorts use clone_prestaged, while pure_clone is only materialized by an explicit request to duplicate the campaign identically",
+  "media_policy": "prestage before campaign manifest; clone_prestaged uses source ad copies with lineage and new Drive creatives; from_zero_prestaged creates campaign, adset, creatives and ads directly, forbids source campaign/adset IDs and may carry only source_ad_id on each new ad when the account requires lineage for serving; pure_clone reuses the source hierarchy without Drive media substitution",
+  "ad_naming_policy": "CPV prestaged modes require canonical_filename; ad and creative display names use canonical stem; technical asset_id is audit-only",
+  "failure_reporting_policy": "every operator-visible failure identifies operation/campaigns and states stage, cause, consequence, correction in progress and useful recovery status; no internal paths or credentials",
+  "failure_write_gate": "standing Rodolfo authority: errors inside an authorized request trigger readback-first automatic recovery of the missing or invalid layer until completion; no blind replay and no scope expansion",
+  "automatic_failure_recovery": {
+    "enabled": true,
+    "readback_before_write": true,
+    "missing_layer_only": true,
+    "blind_replay_blocked": true,
+    "preserve_request_id": true,
+    "preserve_original_scope": true
+  },
+  "scheduled_creation_budget_reporting": "every completed scheduled creation reports active account budget, exact request delta and USD source basis; no internal cap balance while global limits are inactive",
+  "creation_lifecycle_gate": "scheduled creation is a conditional phase after D1-D3 analysis, pause and scale decisions; a creation_hold blocks all new campaign writes until Rodolfo or Nicolas releases it",
+  "appsecret_proof": {
+    "required": false,
+    "pending": "enable only after every v3 server call has ARES_META_APP_SECRET and Meta App Require App Secret is coordinated"
+  },
+  "state_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state",
+  "audit_root": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit",
+  "media_registry": "/root/mgs-agent/data/ares/meta-ads/engine-v3/media-registry.json",
+  "accounts": {
+    "7840111366055613": {
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-01-G002",
+      "operation": "SHEIN-US-DIRECT",
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "marketing_api_access_tier": "standard_access",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "ad_serving_route": "lineage_required_for_new_media",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "onboarding_evidence": {
+        "authorized_by": "Rodolfo Mattei",
+        "source_thread_id": "1557274000680288307",
+        "source_campaign_id": "120255596011860150",
+        "source_adset_id": "120255596011870150",
+        "source_ad_ids": [
+          "120255596011900150",
+          "120255596011880150"
+        ],
+        "page_id": "1187478564456307",
+        "pixel_id": "1049581090103163",
+        "live_account_identity_health_currency_timezone_verified": true,
+        "live_page_advertise_assignment_verified": true,
+        "live_pixel_account_association_verified": true,
+        "scope": "pure_clone only; request supplies status, budget and schedule"
+      },
+      "account_id": "7840111366055613",
+      "shein_profile": {
+        "account_id": "7840111366055613",
+        "account_name": "Yolokfx-US-SHEIN-EN-01-G002",
+        "manager_code": "G002",
+        "manager_discord_id": "321263240782807040",
+        "channel_id": "1548149300826079333",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb01",
+        "utm_medium": "g002-s",
+        "destination_base": "https://yolokfx.com/quiz/us/sh2-g002/",
+        "page_id": "1187478564456307",
+        "instagram_user_id": null,
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120255634723560150",
+        "reference_campaign_number": 110,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-7840111366055613.json"
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1046241194533786": {
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "ad_serving_route": "lineage_required_for_new_media",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "marketing_api_access_tier": "standard_access",
+      "timezone": "America/Sao_Paulo",
+      "token_user_id": "122095869861482193",
+      "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "credential_cutover_source": "discord:thread:1549416017430839367"
+    },
+    "2039876850230678": {
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "ad_serving_route": "lineage_required_for_new_media",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "marketing_api_access_tier": "standard_access",
+      "timezone": "America/Sao_Paulo",
+      "token_user_id": "122095869861482193",
+      "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "credential_cutover_source": "discord:thread:1549416017430839367"
+    },
+    "1034081997659047": {
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Eggbev-US-CC-EN-01-G006",
+      "operation": "Eggbev-US-CC-EN-BOT",
+      "token_item": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+      "token_type": "user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "Carla Nunes",
+      "marketing_api_access_tier": "standard_access",
+      "timezone": "America/New_York",
+      "ad_serving_route": "direct_and_lineage_verified",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "campaign_policy": {
+        "name_regex": ".+ DUP[0-9]{2,}$",
+        "budget_update_required": true,
+        "budget_source": "campaign_updates",
+        "configured_status": "ACTIVE",
+        "start_local_time": "00:00",
+        "immediate_start_request_ids": [
+          "eggbev-pg-5024-20260830-nicolas-01",
+          "eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01"
+        ],
+        "immediate_start_authorized_managers": [
+          "Nicolas Holanda"
+        ],
+        "immediate_start_approval_scope": "Eggbev creation and clone requests explicitly instructed and finally approved by Nicolas; no separate Rodolfo approval is required",
+        "immediate_start_requires_request_allowlist": true,
+        "immediate_start_requires_final_ok": true,
+        "pure_clone_allowed_update_keys": [
+          "daily_budget"
+        ],
+        "by_mode": {
+          "from_zero_prestaged": {
+            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\) C[0-9]{3}",
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3,
+              5
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "US"
+              ]
+            },
+            "required_adset_create": {
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "is_dynamic_creative": false,
+              "attribution_spec": [
+                {
+                  "event_type": "CLICK_THROUGH",
+                  "window_days": 7
+                },
+                {
+                  "event_type": "VIEW_THROUGH",
+                  "window_days": 1
+                }
+              ],
+              "targeting": {
+                "age_min": 18,
+                "age_max": 65,
+                "geo_locations": {
+                  "countries": [
+                    "US"
+                  ],
+                  "location_types": [
+                    "frequently_in",
+                    "home",
+                    "recent"
+                  ]
+                },
+                "targeting_automation": {
+                  "advantage_audience": 1
+                },
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "feed",
+                  "instream_video",
+                  "marketplace",
+                  "story",
+                  "search",
+                  "biz_disco_feed",
+                  "facebook_reels",
+                  "facebook_reels_overlay",
+                  "profile_feed"
+                ],
+                "instagram_positions": [
+                  "stream",
+                  "story",
+                  "reels",
+                  "explore_home",
+                  "profile_feed"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "device_platforms": [
+                  "mobile",
+                  "desktop"
+                ]
+              },
+              "promoted_object": {
+                "pixel_id": "935354115143283",
+                "custom_event_type": "OTHER",
+                "custom_event_str": "eggbev-pv-u",
+                "smart_pse_enabled": false
+              },
+              "regional_regulated_categories": [
+                "VOLUNTARY_VERIFICATION"
+              ],
+              "regional_regulation_identities": {
+                "universal_beneficiary": "1919111075424645",
+                "universal_payer": "1919111075424645"
+              }
+            }
+          }
+        }
+      }
+    },
+    "2429758060563333": {
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-03-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "marketing_api_access_tier": "standard_access",
+      "timezone": "America/New_York",
+      "ad_serving_route": "direct_and_lineage_verified",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "pure_clone_tracking_required": true,
+      "ad_serving_evidence": {
+        "direct_ad_id": "120249663142730331",
+        "source_ad_id": "0",
+        "date_start": "2026-09-02",
+        "date_stop": "2026-09-13",
+        "spend_usd": "42.78",
+        "impressions": "738",
+        "readback_source": "Meta Graph v26 insights"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "token_user_id": "122095869861482193",
+      "credential_cutover_at_utc": "2026-09-15T16:34:42.708146+00:00",
+      "credential_cutover_source": "discord:thread:1549416017430839367",
+      "account_id": "2429758060563333",
+      "currency": "USD",
+      "shein_profile": {
+        "account_id": "2429758060563333",
+        "account_name": "Yolokfx-US-SHEIN-EN-03-G005",
+        "manager_code": "G005",
+        "manager_discord_id": "1291113428982693940",
+        "channel_id": "1548150015275438220",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb03",
+        "utm_medium": "g005-s",
+        "destination_base": "https://yolokfx.com/quiz/us/sh2-g005/",
+        "page_id": "410983488769165",
+        "instagram_user_id": "17841469509077092",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120250135295890331",
+        "reference_campaign_number": 101,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-2429758060563333.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "649321087781962": {
+      "account_id": "649321087781962",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Boostingecon-US-SHEIN-ES-01-G001",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "649321087781962",
+        "account_name": "Boostingecon-US-SHEIN-ES-01-G001",
+        "manager_code": "G001",
+        "manager_discord_id": "409878085807112207",
+        "channel_id": "1548149087206121613",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "2407807766227252": {
+      "account_id": "2407807766227252",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Boostingecon-US-SHEIN-ES-02-G002",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "2407807766227252",
+        "account_name": "Boostingecon-US-SHEIN-ES-02-G002",
+        "manager_code": "G002",
+        "manager_discord_id": "321263240782807040",
+        "channel_id": "1548149300826079333",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "3288190251316187": {
+      "account_id": "3288190251316187",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Boostingecon-US-SHEIN-ES-03-G003",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "3288190251316187",
+        "account_name": "Boostingecon-US-SHEIN-ES-03-G003",
+        "manager_code": "G003",
+        "manager_discord_id": "432898782188011543",
+        "channel_id": "1548149483039236137",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1083662493452363": {
+      "account_id": "1083662493452363",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Boostingecon-US-SHEIN-ES-04-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1083662493452363",
+        "account_name": "Boostingecon-US-SHEIN-ES-04-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "766488759094178": {
+      "account_id": "766488759094178",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Boostingecon-US-SHEIN-ES-05-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "766488759094178",
+        "account_name": "Boostingecon-US-SHEIN-ES-05-G005",
+        "manager_code": "G005",
+        "manager_discord_id": "1291113428982693940",
+        "channel_id": "1548150015275438220",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "2235938116947880": {
+      "account_id": "2235938116947880",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Boostingecon-US-SHEIN-ES-06-G006",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "2235938116947880",
+        "account_name": "Boostingecon-US-SHEIN-ES-06-G006",
+        "manager_code": "G006",
+        "manager_discord_id": "1055570806945620030",
+        "channel_id": "1548150155184701440",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1018267074603840": {
+      "account_id": "1018267074603840",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Escalatepower-US-SHEIN-EN-01-G001",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1018267074603840",
+        "account_name": "Escalatepower-US-SHEIN-EN-01-G001",
+        "manager_code": "G001",
+        "manager_discord_id": "409878085807112207",
+        "channel_id": "1548149087206121613",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
+        "reason": "Account, approved Page and existing pixel access verified. Campaign-specific source, copy, media, tracking and other requested parameters remain material preflight inputs, not a new asset-authorization gate.",
+        "page_id": "646849908513689",
+        "page_name": "Trending Deals",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "assets_access_verified": true,
+        "operational_domain": "escalatepower.com",
+        "asset_onboarding_authorization": {
+          "authorized_by": "344196393512075265",
+          "source_thread_id": "1559928644149841971",
+          "source_message_id": "1559929154030276730",
+          "validated_at": "2026-10-14T14:08:27.975931+00:00",
+          "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/delegation-journal.json"
+        },
+        "asset_reauthorization_required": false
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1062887799996139": {
+      "account_id": "1062887799996139",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Escalatepower-US-SHEIN-EN-02-G002",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1062887799996139",
+        "account_name": "Escalatepower-US-SHEIN-EN-02-G002",
+        "manager_code": "G002",
+        "manager_discord_id": "321263240782807040",
+        "channel_id": "1548149300826079333",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
+        "reason": "Account, approved Page and existing pixel access verified. Campaign-specific source, copy, media, tracking and other requested parameters remain material preflight inputs, not a new asset-authorization gate.",
+        "page_id": "572539232608128",
+        "page_name": "Savings Spot",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "assets_access_verified": true,
+        "operational_domain": "escalatepower.com",
+        "asset_onboarding_authorization": {
+          "authorized_by": "344196393512075265",
+          "source_thread_id": "1559928644149841971",
+          "source_message_id": "1559929154030276730",
+          "validated_at": "2026-10-14T14:08:27.975931+00:00",
+          "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/delegation-journal.json"
+        },
+        "asset_reauthorization_required": false
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1062446663435585": {
+      "account_id": "1062446663435585",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Escalatepower-US-SHEIN-EN-03-G003",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1062446663435585",
+        "account_name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "manager_code": "G003",
+        "manager_discord_id": "432898782188011543",
+        "channel_id": "1548149483039236137",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
+        "reason": "Account, approved Page and existing pixel access verified. Campaign-specific source, copy, media, tracking and other requested parameters remain material preflight inputs, not a new asset-authorization gate.",
+        "page_id": "978908185316800",
+        "page_name": "Central Deals",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "assets_access_verified": true,
+        "operational_domain": "escalatepower.com",
+        "asset_onboarding_authorization": {
+          "authorized_by": "344196393512075265",
+          "source_thread_id": "1559928644149841971",
+          "source_message_id": "1559929154030276730",
+          "validated_at": "2026-10-14T14:08:27.975931+00:00",
+          "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/delegation-journal.json"
+        },
+        "asset_reauthorization_required": false
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "2031917360813819": {
+      "account_id": "2031917360813819",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Escalatepower-US-SHEIN-EN-04-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "2031917360813819",
+        "account_name": "Escalatepower-US-SHEIN-EN-04-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
+        "reason": "Account, approved Page and existing pixel access verified. Campaign-specific source, copy, media, tracking and other requested parameters remain material preflight inputs, not a new asset-authorization gate.",
+        "page_id": "571515486037700",
+        "page_name": "Offer Hub",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "assets_access_verified": true,
+        "operational_domain": "escalatepower.com",
+        "asset_onboarding_authorization": {
+          "authorized_by": "344196393512075265",
+          "source_thread_id": "1559928644149841971",
+          "source_message_id": "1559929154030276730",
+          "validated_at": "2026-10-14T14:08:27.975931+00:00",
+          "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/delegation-journal.json"
+        },
+        "asset_reauthorization_required": false
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "897046653487466": {
+      "account_id": "897046653487466",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Escalatepower-US-SHEIN-EN-05-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "897046653487466",
+        "account_name": "Escalatepower-US-SHEIN-EN-05-G005",
+        "manager_code": "G005",
+        "manager_discord_id": "1291113428982693940",
+        "channel_id": "1548150015275438220",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
+        "reason": "Account, approved Page and existing pixel access verified. Campaign-specific source, copy, media, tracking and other requested parameters remain material preflight inputs, not a new asset-authorization gate.",
+        "page_id": "797583000096802",
+        "page_name": "Trending Picks",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "assets_access_verified": true,
+        "operational_domain": "escalatepower.com",
+        "asset_onboarding_authorization": {
+          "authorized_by": "344196393512075265",
+          "source_thread_id": "1559928644149841971",
+          "source_message_id": "1559929154030276730",
+          "validated_at": "2026-10-14T14:08:27.975931+00:00",
+          "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/delegation-journal.json"
+        },
+        "asset_reauthorization_required": false
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1498990138663094": {
+      "account_id": "1498990138663094",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Escalatepower-US-SHEIN-EN-06-G006",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1498990138663094",
+        "account_name": "Escalatepower-US-SHEIN-EN-06-G006",
+        "manager_code": "G006",
+        "manager_discord_id": "1055570806945620030",
+        "channel_id": "1548150155184701440",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "ASSETS_ACCESS_READY_CAMPAIGN_SPEC_REQUIRED",
+        "reason": "Account, approved Page and existing pixel access verified. Campaign-specific source, copy, media, tracking and other requested parameters remain material preflight inputs, not a new asset-authorization gate.",
+        "page_id": "857361470788197",
+        "page_name": "Offers Spot",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "assets_access_verified": true,
+        "operational_domain": "escalatepower.com",
+        "destination_base": "https://escalatepower.com/quiz/us/sh3-g006/",
+        "tracking_prefix": "b01fb06",
+        "utm_medium": "g006-s",
+        "asset_onboarding_authorization": {
+          "authorized_by": "344196393512075265",
+          "source_thread_id": "1559928644149841971",
+          "source_message_id": "1559929154030276730",
+          "validated_at": "2026-10-14T14:08:27.975931+00:00",
+          "evidence": "/root/mgs-agent/data/ares/meta-ads/audit/shein/escalatepower-onboarding-1559929154030276730/delegation-journal.json"
+        },
+        "asset_reauthorization_required": false
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1635726541410028": {
+      "account_id": "1635726541410028",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Growpowerhub-US-SHEIN-EN-01-G001",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1635726541410028",
+        "account_name": "Growpowerhub-US-SHEIN-EN-01-G001",
+        "manager_code": "G001",
+        "manager_discord_id": "409878085807112207",
+        "channel_id": "1548149087206121613",
+        "language": "EN",
+        "timezone": "America/Los_Angeles",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1754588462350629": {
+      "account_id": "1754588462350629",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Growpowerhub-US-SHEIN-EN-02-G002",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1754588462350629",
+        "account_name": "Growpowerhub-US-SHEIN-EN-02-G002",
+        "manager_code": "G002",
+        "manager_discord_id": "321263240782807040",
+        "channel_id": "1548149300826079333",
+        "language": "EN",
+        "timezone": "America/Los_Angeles",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "2323706575049143": {
+      "account_id": "2323706575049143",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Growpowerhub-US-SHEIN-EN-03-G003",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "2323706575049143",
+        "account_name": "Growpowerhub-US-SHEIN-EN-03-G003",
+        "manager_code": "G003",
+        "manager_discord_id": "432898782188011543",
+        "channel_id": "1548149483039236137",
+        "language": "EN",
+        "timezone": "America/Los_Angeles",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1419148446852410": {
+      "account_id": "1419148446852410",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1419148446852410",
+        "account_name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "EN",
+        "timezone": "America/Los_Angeles",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1547524853816263": {
+      "account_id": "1547524853816263",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Growpowerhub-US-SHEIN-EN-05-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1547524853816263",
+        "account_name": "Growpowerhub-US-SHEIN-EN-05-G005",
+        "manager_code": "G005",
+        "manager_discord_id": "1291113428982693940",
+        "channel_id": "1548150015275438220",
+        "language": "EN",
+        "timezone": "America/Los_Angeles",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1867022354284742": {
+      "account_id": "1867022354284742",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Growpowerhub-US-SHEIN-EN-06-G006",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/Los_Angeles",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1867022354284742",
+        "account_name": "Growpowerhub-US-SHEIN-EN-06-G006",
+        "manager_code": "G006",
+        "manager_discord_id": "1055570806945620030",
+        "channel_id": "1548150155184701440",
+        "language": "EN",
+        "timezone": "America/Los_Angeles",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "4511685129081248": {
+      "account_id": "4511685129081248",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-01-G001",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "4511685129081248",
+        "account_name": "Mavroa-US-SHEIN-ES-01-G001",
+        "manager_code": "G001",
+        "manager_discord_id": "409878085807112207",
+        "channel_id": "1548149087206121613",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1414197490675732": {
+      "account_id": "1414197490675732",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-02-G002",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1414197490675732",
+        "account_name": "Mavroa-US-SHEIN-ES-02-G002",
+        "manager_code": "G002",
+        "manager_discord_id": "321263240782807040",
+        "channel_id": "1548149300826079333",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb02",
+        "utm_medium": "g002-s",
+        "destination_base": "https://mavroa.com/quiz/us/sh2-g002/",
+        "page_id": "556922304176025",
+        "instagram_user_id": null,
+        "pixel_id": "1001283201270967",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120251920442760326",
+        "reference_campaign_number": 2,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-1414197490675732.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1543098427832443": {
+      "account_id": "1543098427832443",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-03-G003",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1543098427832443",
+        "account_name": "Mavroa-US-SHEIN-ES-03-G003",
+        "manager_code": "G003",
+        "manager_discord_id": "432898782188011543",
+        "channel_id": "1548149483039236137",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "2852476828464907": {
+      "account_id": "2852476828464907",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-04-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "2852476828464907",
+        "account_name": "Mavroa-US-SHEIN-ES-04-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb04",
+        "utm_medium": "g004-s",
+        "destination_base": "https://mavroa.com/quiz/us/sh3-g004/",
+        "page_id": "717431928129946",
+        "instagram_user_id": "17841415113559417",
+        "pixel_id": "1001283201270967",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120249561566280372",
+        "reference_campaign_number": 1,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-2852476828464907.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1829406761389732": {
+      "account_id": "1829406761389732",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-05-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1829406761389732",
+        "account_name": "Mavroa-US-SHEIN-ES-05-G005",
+        "manager_code": "G005",
+        "manager_discord_id": "1291113428982693940",
+        "channel_id": "1548150015275438220",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "937846586033361": {
+      "account_id": "937846586033361",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Mavroa-US-SHEIN-ES-06-G006",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "937846586033361",
+        "account_name": "Mavroa-US-SHEIN-ES-06-G006",
+        "manager_code": "G006",
+        "manager_discord_id": "1055570806945620030",
+        "channel_id": "1548150155184701440",
+        "language": "ES",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1526280818302320": {
+      "account_id": "1526280818302320",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Vizioid-US-SHEIN-EN-01-G001",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1526280818302320",
+        "account_name": "Vizioid-US-SHEIN-EN-01-G001",
+        "manager_code": "G001",
+        "manager_discord_id": "409878085807112207",
+        "channel_id": "1548149087206121613",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb01",
+        "utm_medium": "g001-s",
+        "destination_base": "https://vizioid.com/quiz/us/sh2-g001/",
+        "page_id": "951216801414229",
+        "instagram_user_id": "17841416302041382",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": false,
+        "status": "PAGE_ACCESS_PENDING",
+        "reference_campaign_id": "120249891019360375",
+        "reference_campaign_number": 1,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-1526280818302320.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "536294549227786": {
+      "account_id": "536294549227786",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Vizioid-US-SHEIN-EN-02-G002",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "536294549227786",
+        "account_name": "Vizioid-US-SHEIN-EN-02-G002",
+        "manager_code": "G002",
+        "manager_discord_id": "321263240782807040",
+        "channel_id": "1548149300826079333",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb02",
+        "utm_medium": "g002-s",
+        "destination_base": "https://vizioid.com/quiz/us/sh3-g002/",
+        "page_id": "1122672947588196",
+        "instagram_user_id": null,
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120249530169740724",
+        "reference_campaign_number": 6,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-536294549227786.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1085117577390237": {
+      "account_id": "1085117577390237",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Vizioid-US-SHEIN-EN-03-G003",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1085117577390237",
+        "account_name": "Vizioid-US-SHEIN-EN-03-G003",
+        "manager_code": "G003",
+        "manager_discord_id": "432898782188011543",
+        "channel_id": "1548149483039236137",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "status": "NEEDS_ACCOUNT_REFERENCE",
+        "reason": "no same-account approved source/template; never borrow another manager identity"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1736068407518263": {
+      "account_id": "1736068407518263",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Vizioid-US-SHEIN-EN-04-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1736068407518263",
+        "account_name": "Vizioid-US-SHEIN-EN-04-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb04",
+        "utm_medium": "g004-s",
+        "destination_base": "https://vizioid.com/quiz/us/sh3-g004/",
+        "page_id": "680516861808576",
+        "instagram_user_id": null,
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": false,
+        "status": "PAGE_ACCESS_PENDING",
+        "reference_campaign_id": "120256470810440273",
+        "reference_campaign_number": 2,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-1736068407518263.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1877104513669062": {
+      "account_id": "1877104513669062",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Vizioid-US-SHEIN-EN-05-G005",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1877104513669062",
+        "account_name": "Vizioid-US-SHEIN-EN-05-G005",
+        "manager_code": "G005",
+        "manager_discord_id": "1291113428982693940",
+        "channel_id": "1548150015275438220",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb05",
+        "utm_medium": "g005-s",
+        "destination_base": "https://vizioid.com/quiz/us/sh3-g005/",
+        "page_id": "1087231034465124",
+        "instagram_user_id": "17841419414846105",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": false,
+        "status": "PAGE_ACCESS_PENDING",
+        "reference_campaign_id": "120256408459580460",
+        "reference_campaign_number": 2,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-1877104513669062.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "869857549542755": {
+      "account_id": "869857549542755",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Vizioid-US-SHEIN-EN-06-G006",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "869857549542755",
+        "account_name": "Vizioid-US-SHEIN-EN-06-G006",
+        "manager_code": "G006",
+        "manager_discord_id": "1055570806945620030",
+        "channel_id": "1548150155184701440",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb06",
+        "utm_medium": "g006-s",
+        "destination_base": "https://vizioid.com/quiz/us/sh2-g006/",
+        "page_id": "1215401431666913",
+        "instagram_user_id": "17841416761132730",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": false,
+        "status": "PAGE_ACCESS_PENDING",
+        "reference_campaign_id": "120256186885380670",
+        "reference_campaign_number": 2,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-869857549542755.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1583000095650153": {
+      "account_id": "1583000095650153",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-02-G006",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1583000095650153",
+        "account_name": "Yolokfx-US-SHEIN-EN-02-G006",
+        "manager_code": "G006",
+        "manager_discord_id": "1055570806945620030",
+        "channel_id": "1548150155184701440",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb02",
+        "utm_medium": "g006-s",
+        "destination_base": "https://yolokfx.com/quiz/us/sh2-g006/",
+        "page_id": "1250640494803108",
+        "instagram_user_id": null,
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120253293995120174",
+        "reference_campaign_number": 66,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-1583000095650153.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "781612907182683": {
+      "account_id": "781612907182683",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-04-G004",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "781612907182683",
+        "account_name": "Yolokfx-US-SHEIN-EN-04-G004",
+        "manager_code": "G004",
+        "manager_discord_id": "1214246869484576890",
+        "channel_id": "1548149654926135486",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb04",
+        "utm_medium": "g004-s",
+        "destination_base": "https://yolokfx.com/quiz/us/sh3-g004/",
+        "page_id": "1114341178421506",
+        "instagram_user_id": "17841433248564485",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120251932369130744",
+        "reference_campaign_number": 95,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-781612907182683.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "787796726891306": {
+      "account_id": "787796726891306",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-05-G001",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "787796726891306",
+        "account_name": "Yolokfx-US-SHEIN-EN-05-G001",
+        "manager_code": "G001",
+        "manager_discord_id": "409878085807112207",
+        "channel_id": "1548149087206121613",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb05",
+        "utm_medium": "g001-s",
+        "destination_base": "https://yolokfx.com/quiz/us/sh2-g001/",
+        "page_id": "1165811629958161",
+        "instagram_user_id": "17841436730765402",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": false,
+        "status": "PAGE_ACCESS_PENDING",
+        "reference_campaign_id": "120254839375410547",
+        "reference_campaign_number": 72,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-787796726891306.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    },
+    "1600310064116258": {
+      "account_id": "1600310064116258",
+      "app_key": "mgs-meta-app-1299247318762949",
+      "alias": "Yolokfx-US-SHEIN-EN-06-G003",
+      "operation": "SHEIN-US-DIRECT",
+      "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
+      "token_type": "business_integration_system_user_access_token",
+      "meta_app_id": "1299247318762949",
+      "token_identity": "minibot System User",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "supported_modes": [
+        "pure_clone",
+        "clone_prestaged",
+        "from_zero_prestaged"
+      ],
+      "ad_serving_route": "lineage_required_for_new_media",
+      "pure_clone_tracking_required": true,
+      "shein_profile": {
+        "account_id": "1600310064116258",
+        "account_name": "Yolokfx-US-SHEIN-EN-06-G003",
+        "manager_code": "G003",
+        "manager_discord_id": "432898782188011543",
+        "channel_id": "1548149483039236137",
+        "language": "EN",
+        "timezone": "America/New_York",
+        "currency": "USD",
+        "catalogued": true,
+        "account_advertise_verified": true,
+        "tracking_prefix": "b01fb06",
+        "utm_medium": "g003-s",
+        "destination_base": "https://yolokfx.com/quiz/us/sh2-g003/",
+        "page_id": "824257670775162",
+        "instagram_user_id": "17841437074325839",
+        "pixel_id": "1049581090103163",
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "page_pixel_access_verified": true,
+        "status": "LIVE_SOURCE_READY",
+        "reference_campaign_id": "120257786539810151",
+        "reference_campaign_number": 47,
+        "source_snapshot": "/root/mgs-agent/data/ares/meta-ads/audit/shein/general-runtime-20261007/source-1600310064116258.json"
+      },
+      "single_clone_runtime": {
+        "enabled": true,
+        "command": "scripts/ares-shein-campaigns.py campaign",
+        "scope": "one account-bound request through shared Engine v3; same path for all G001-G006 managers and Rodolfo",
+        "authority_policy": "data/ares/meta-ads/policies/SHEIN-US-DIRECT-request-parity.json"
+      },
+      "campaign_policy": {
+        "name_regex": "[0-9]{3} - [0-9]{2}/[0-9]{2} - v[123] - .+ - (?:MAXVOL|COCAP|BIDCAP) - \\(b[0-9]+fb[0-9]+c[0-9]+\\)(?: - COPY C[0-9]+)?(?: - \\(US_APP\\))? - event_add_to_wishlist",
+        "by_mode": {
+          "pure_clone": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "creative_materialization_route": "existing_post_two_phase",
+            "pure_clone_allowed_update_keys": [
+              "daily_budget",
+              "bid_strategy"
+            ],
+            "allowed_creative_materialization_routes": [
+              "existing_post_two_phase",
+              "full_media_two_phase",
+              "source_definition_two_phase"
+            ]
+          },
+          "clone_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_updates",
+            "allowed_ad_counts": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "required_media_variants": [
+              "vertical"
+            ]
+          },
+          "from_zero_prestaged": {
+            "budget_update_required": true,
+            "budget_source": "campaign_create",
+            "allowed_ad_counts": [
+              3
+            ],
+            "required_media_variants": [
+              "vertical"
+            ],
+            "required_campaign_create": {
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "special_ad_categories": []
+            },
+            "required_adset_create": {
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "promoted_object": {
+                "custom_event_type": "ADD_TO_WISHLIST"
+              }
+            }
+          }
+        }
+      },
+      "pure_clone_setup_policy": "PRESERVE_SOURCE_DEFINITION",
+      "shein_naming": {
+        "enabled": true,
+        "route_regex": "^/quiz/us/sh([123])-g[0-9]{3}/$",
+        "layout_version_map": {
+          "1": "v1",
+          "2": "v2",
+          "3": "v3"
+        },
+        "evidence": "plugins/mgs-direct-quiz/includes/class-mgs-direct-quiz.php:668-669"
+      },
+      "require_source_contextual_multi_ads": true
+    }
+  },
+  "rollback": {
+    "engine": "v2",
+    "runner": "/root/mgs-agent/scripts/ares-creditoparaveiculo-daily-create.py",
+    "backup": "/root/mgs-agent/backups/ares-campaign-engine-v3-20260821T033736Z",
+    "deletion_performed": false
+  },
+  "official_meta_sources": [
+    "https://developers.facebook.com/ads/blog/post/v2/2018/07/02/marketing-api-tier-simplification/",
+    "https://developers.facebook.com/docs/app-review/",
+    "https://developers.facebook.com/docs/development/release/business-verification/",
+    "https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/",
+    "https://developers.facebook.com/docs/facebook-login/guides/access-tokens/",
+    "https://developers.facebook.com/docs/features-reference/",
+    "https://developers.facebook.com/docs/features-reference#marketing-api-access-tier",
+    "https://developers.facebook.com/docs/graph-api/batch-requests",
+    "https://developers.facebook.com/docs/graph-api/guides/secure-requests/",
+    "https://developers.facebook.com/docs/marketing-api/access/",
+    "https://developers.facebook.com/docs/marketing-api/asyncrequests",
+    "https://developers.facebook.com/docs/marketing-api/guides/videoads",
+    "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/copies",
+    "https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/copies",
+    "https://developers.facebook.com/docs/marketing-api/reference/adgroup/copies",
+    "https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/",
+    "https://developers.facebook.com/docs/marketing-api/using-the-api/post-processing",
+    "https://developers.facebook.com/docs/permissions/"
+  ],
+  "shein_execution_sla": {
+    "enabled": true,
+    "quantity": 1,
+    "target_seconds": 144,
+    "measurement": "original message/receipt when available, otherwise runner start; includes full QA and readback",
+    "late_activation_allowed": false,
+    "authority": "344196393512075265",
+    "authorization_thread_id": "1557274000680288307",
+    "live_target_verified": false
+  },
+  "shein_media_qa": {
+    "enabled": true,
+    "chrome_path": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+    "python_path": "/root/mgs-agent/runtime/ares-media-qa/bin/python",
+    "timeout_seconds": 35,
+    "before_activation": true,
+    "all_quantities": true,
+    "reference_support": [
+      "traditional_existing_post",
+      "flexible_full_media"
+    ],
+    "signed_preview_urls_persisted": false,
+    "source_snapshot_ttl_seconds": 120
+  }
+}

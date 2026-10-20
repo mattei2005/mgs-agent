@@ -85,6 +85,8 @@ def build(request, source, number, account_config):
             child['_resolved_assets'] = [by_filename[f] for f in group['files']]
             child['product_label'] = group['product_label']
             child['_primary_text'] = group['primary_text']
+            if 'headline' in group:
+                child['_headline'] = group['headline']
             one = _build_one(child, source, number+offset, account_config)
             payload = payload or one; campaigns.extend(one['campaigns'])
         payload['request_id'] = request['request_id']; payload['campaigns'] = campaigns
@@ -233,7 +235,7 @@ def _build_one(request, source, number, account_config):
             if not asset.get('thumbnail_url') or not asset.get('vertical_video_id'):
                 raise ValueError('asset thumbnail/media incomplete')
             cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = request['website_url'] if reference else p['destination_base'] + '?' + tags
-            vd = {'video_id': asset['vertical_video_id'], 'title': media.get('title') or media.get('name'),
+            vd = {'video_id': asset['vertical_video_id'], 'title': request.get('_headline', media.get('title') or media.get('name')),
                   'message': request.get('_primary_text', request.get('primary_text', media['message'])), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
             if not vd['title']:
                 raise ValueError('copy headline missing')

@@ -1,0 +1,130 @@
+{
+  "status": "blocked",
+  "candidate_schedule": "10,25,40,55 * * * *",
+  "timezone": "America/New_York",
+  "expanded_civil_days": 8,
+  "candidate_starts": 768,
+  "nonbaseline_collisions": [
+    {
+      "job": "root:monitor_honcho_billing_watch.py",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    },
+    {
+      "job": "root:monitor_hermes_pending_writes.py",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    },
+    {
+      "job": "root:finalize-hermes-structural-write.py",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    }
+  ],
+  "unavoidable_dense_or_OS_baselines": [
+    {
+      "job": "root:sync-souls.sh",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    },
+    {
+      "job": "root:hermes-news-explainer.py",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    },
+    {
+      "job": "root:monitor-vps-health.py",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    },
+    {
+      "job": "root:hermes-news-explainer-watchdog.py",
+      "count": 768,
+      "examples": [
+        "2026-10-20T00:10:00-04:00",
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:40:00-04:00"
+      ]
+    },
+    {
+      "job": "zeus:fb40054022fa",
+      "count": 112,
+      "examples": [
+        "2026-10-20T01:10:00-04:00",
+        "2026-10-20T01:40:00-04:00",
+        "2026-10-20T02:10:00-04:00"
+      ]
+    },
+    {
+      "job": "/etc/cron.d/e2scrub_all",
+      "count": 8,
+      "examples": [
+        "2026-10-20T03:10:00-04:00",
+        "2026-10-21T03:10:00-04:00",
+        "2026-10-22T03:10:00-04:00"
+      ]
+    },
+    {
+      "job": "/etc/cron.d/sysstat",
+      "count": 384,
+      "examples": [
+        "2026-10-20T00:25:00-04:00",
+        "2026-10-20T00:55:00-04:00",
+        "2026-10-20T01:25:00-04:00"
+      ]
+    },
+    {
+      "job": "/etc/crontab",
+      "count": 8,
+      "examples": [
+        "2026-10-20T06:25:00-04:00",
+        "2026-10-21T06:25:00-04:00",
+        "2026-10-22T06:25:00-04:00"
+      ]
+    }
+  ],
+  "system_timers_inventoried": 20,
+  "google_owner_worker": {
+    "every_minutes": 5,
+    "last_verified_trigger_uid": "2456112746912022528",
+    "writer": "owner",
+    "locks": "Google ScriptLock; disjoint from local SA queue lock"
+  },
+  "resource_isolation": {
+    "local_lock": "30tb-archive/.queue.lock",
+    "cloud_lock": "Google ScriptLock",
+    "distinct_writers": "SA request/ACK vs owner receipt/heartbeat/media",
+    "no_browser": true,
+    "no_agent": true,
+    "cadence_minutes": 15,
+    "stagger_seconds": 25,
+    "production_flag": false,
+    "source_delete_flag": false
+  },
+  "preflight_source": "/root/.hermes/profiles/zeus/cache/scratch/archive-automation-global-schedules-preflight.json",
+  "generated_at": "2026-10-20T16:56:46.201599+00:00"
+}

@@ -450,8 +450,14 @@
       "currency": "USD",
       "catalogued": true,
       "account_advertise_verified": true,
-      "status": "NEEDS_ACCOUNT_REFERENCE",
-      "reason": "no same-account approved source/template; never borrow another manager identity"
+      "status": "SOURCE_OBSERVED_PREFLIGHT_PENDING",
+      "reason": "same-account campaign 01 observed live; Page/pixel gates remain enforced by runner",
+      "tracking_prefix": "b01fb06",
+      "utm_medium": "g006-s",
+      "destination_base": "https://mavroa.com/quiz/us/sh3-g006/",
+      "reference_campaign_id": "120250562155850629",
+      "reference_campaign_number": 1,
+      "source_snapshot": "data/ares/meta-ads/audit/shein/maintenance/shein-1562142917961973831-headline/source-profile-evidence.json"
     },
     "1526280818302320": {
       "account_id": "1526280818302320",

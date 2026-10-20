@@ -6283,12 +6283,12 @@
     {
       "agent": "ares",
       "id": "shein-1562142917961973831",
-      "next_step": "Manutenção separada mínima do campo headline opcional com regressão, inventário e REPORT-INFRA; retomar mesmo request no runner central, sem alterar fonte e sem resetar relógio",
-      "objective": "Clonar fonte01 Mavroa06 em dois grupos explícitos, USD30/dia cada e CostCap0.90",
-      "source": "data/ares/meta-ads/audit/shein/preflight-blockers/shein-1562142917961973831/request.json",
-      "state": "copy_confirmed nicolas confirmou headline literal lo quiero gratis 👉 e botão herdado get_offer_view; nenhum write meta/drive; transação suspensa para manutenção separada do compiler sem suporte headline",
+      "next_step": "Concluir mesmo request por leitura consolidada e QA integral; conferirIDs/budget/lance/copy; respeitar eventual gate de revisão tardia; não refazer objetos",
+      "objective": "Clonar campanha01 em 002 Cepillo(2 vídeos) e003 Cuatrimoto(3 vídeos), USD30/dia cada, CostCapUSD0.90 e headline literal confirmada",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562142917961973831/request-ready.json",
+      "state": "readback_deferred; engine confirmou 2 campaign ids e5 ad ids; nenhuma cópia a repetir; retomada determinística armada para somente readback/qa após janela de quota; mídia5/5 pronta e intake visual es validado; ativação ainda não comprovada",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-20T16:52:44+00:00"
+      "updated_at": "2026-10-20T17:00:20+00:00"
     },
     {
       "agent": "zeus",
@@ -6862,5 +6862,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T16:52:44+00:00"
+  "updated_at": "2026-10-20T17:00:21+00:00"
 }
