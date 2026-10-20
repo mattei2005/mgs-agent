@@ -4552,6 +4552,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-paused-selection-deferred-1561752465978818722",
+      "next_step": "Continuar reports no recorte atual;quando gestor pedir somente pausadas,resolver conta/periodo e selecionarPAUSED por statusMeta,sem exigirentrega no dia;nao executarconsulta agora. Reavaliar expansao do padrao apenas mediante nova decisao.",
+      "objective": "Preservar decisao de Rodolfo sobre selecao das campanhas pausadas nos reports SHEIN",
+      "source": "discord:1561752465978818722; /root/.hermes/profiles/ares/scripts/shein-daily-report.py",
+      "state": "decisao_rodolfo:nao aplicar proposta de incluir todas active/paused no padrao,pois ampliaria demais os reports. manter recorte atual por entrega/gasto/impressao no dia e cron existente. consulta somentepaused fica on-demand mediante pedido expresso do gestor; nao foi solicitada agora. nenhum script,layout,cron,campanha ourelatorio alterado por esta decisao.",
+      "thread_id": "1561752465978818722",
+      "updated_at": "2026-10-20T15:44:17+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-report-pagination-20261016",
       "next_step": "Aguardar próximos pedidos dos gestores; usar render/validate atual e entrega nativa exata",
       "objective": "Padronizar próximos relatórios SHEIN nos seis canais com limite real Discord e sem dupla paginação",
@@ -6822,5 +6832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T15:39:40+00:00"
+  "updated_at": "2026-10-20T15:44:17+00:00"
 }

@@ -8,6 +8,8 @@
 
 ## 1. Regra de uso
 
+Escopo operacional obrigatório e mais restritivo: `context/ares-asset-scope.md` + `data/ares/asset-scope.json` — somente contas Digital Trust e hosts corporativos do catálogo SB; app técnico não amplia contas/domínios.
+
 Antes de busca ampla por `drive`, `creative`, `reference`, `video`, `meta`, `campaign`, `UPLOAD`, `budget`, `roi`, `canva` ou nomes soltos, abrir este mapa e escolher a fonte específica.
 
 Busca ampla só quando a fonte indicada não existir, o termo for novo, houver auditoria de drift ou Rodolfo pedir para procurar em tudo.

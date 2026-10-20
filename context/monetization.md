@@ -84,6 +84,8 @@ Acessos operacionais: Rodolfo, Geizian e gestores conforme necessidade/escopo.
 
 ## Dashboard ActiveView — conjunto protegido
 
+Zeus: o complemento privado do conjunto protegido permanece em `/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701/protected-monetization-zeus-only.md`. Ares/Atena não consultam esse complemento; ausência nesta visão compartilhável não autoriza alteração desses ativos.
+
 Este é um conjunto operacional protegido da parceria ActiveView, não um registro de propriedade. A presença nesta seção não afirma que o domínio pertença à MGS e esta lista não pode ser usada como fonte para a allowlist `data/mgs-domain-scope.json`.
 
 ActiveView permanece ativa somente nos sites abaixo. Rodolfo determinou que Zeus não altere loader, bloco Ad Inserter, cache, configuração, builder ou rota desses alvos sem uma nova instrução explícita:
@@ -91,18 +93,11 @@ ActiveView permanece ativa somente nos sites abaixo. Rodolfo determinou que Zeus
 ```text
 app.conectageral.com
 app.portalrelevante.com
-deolhonoworld.com
 es.seuprimeiroempregoam.com
 esp.noticiainforme.com
 financescredit.com
 finanzas.conectageral.com
-newsfolha.com
-jobs.newsfolha.com
 noticiainforme.com
-scorexboost.com
-jobs.scorexboost.com
-vagaaqui.com
-jobs.deolhonoworld.com
 ```
 
 Os sites abaixo não rodam mais na ActiveView. Blocos AV desabilitados ainda armazenados são resíduo histórico, não configuração ativa; não devem ser reativados nem removidos automaticamente sem pedido específico:

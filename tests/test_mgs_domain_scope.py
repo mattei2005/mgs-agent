@@ -112,7 +112,11 @@ class DomainScopeTests(unittest.TestCase):
 
     def test_production_ownership_source_covers_every_allowed_domain(self):
         data = json.loads(PRODUCTION.read_text())
-        self.assertEqual(data["canonical_sources"], ["context/sites.md"])
+        self.assertEqual(data["canonical_sources"], ["context/ares-asset-scope.md", "context/sites.md"])
+        self.assertEqual(data["agent_scopes"]["ares"]["ownership_source"], "context/ares-asset-scope.md")
+        scoped_source = (BASE / data["agent_scopes"]["ares"]["ownership_source"]).read_text().lower()
+        for domain in data["agent_scopes"]["ares"]["domains"]:
+            self.assertRegex(scoped_source, rf"(?<![a-z0-9.-]){re.escape(domain)}(?![a-z0-9.-])")
         self.assertEqual(data["ownership_source"], "context/sites.md")
         source = (BASE / data["ownership_source"]).read_text().lower()
         for domain in data["domains"]:

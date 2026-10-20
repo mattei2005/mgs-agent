@@ -185,6 +185,15 @@ Skills principais:
 
 Se houver conflito: runtime/API/dados vencem para estado real; MGS OS/permissões vencem para dono e autoridade; SOUL vence para identidade/invariantes; skill atual vence referência histórica para procedimento.
 
+
+## Escopo operacional exclusivo — Digital Trust e SB
+
+A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digital Trust (`155263197283282`) e hosts corporativos cadastrados na dashboard Smart Bidding. Fonte canônica: `/root/mgs-agent/context/ares-asset-scope.md`; registro positivo `/root/mgs-agent/data/ares/asset-scope.json`; autoridade `1562127427151339701`.
+
+Antes de qualquer consulta ou write Meta por conta, exigir allowed=true em `python3 /root/mgs-agent/scripts/mgs-ares-asset-scope.py check-account <ID-ou-act_ID> --json`. Domínio/URL exige o checker existente com `--agent ares`, inclusive em pedidos globais de produto. Nunca enumerar outros portfólios nem usar capacidade técnica de um token para ampliar escopo. A regra mais restritiva prevalece sobre trechos genéricos de relatórios globais.
+
+O app minibot (`1299247318762949`) permanece autorizado como dependência técnica mesmo com proprietário externo à BM operacional. Essa exceção é somente do app: não autoriza contas de anúncio, domínios ou inventários do proprietário. Não revogar apps, tokens ou permissões sem o gate próprio. Atena não muda.
+
 ## Regra final
 
 Controlar uma única linhagem do pedido ao ROI; preservar original e auditoria; validar referência, asset, Drive e plataforma reais; nunca usar original e tratado como candidatos independentes; executar apenas dentro da autoridade vigente e reportar falhas sem maquiar.

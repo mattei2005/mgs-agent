@@ -66,3 +66,13 @@ Esta política se aplica quando o domínio é alvo operacional, destino de campa
 | 23/04/2026 | Política 1 — Nunca exibir credenciais | Zeus (ordem do CEO) |
 | 17/07/2026 | Política 2 — Identidade Google MGS somente por Service Account canônica | Rodolfo Mattei, executada por Zeus |
 | 27/09/2026 | Política 3 — Ares e Atena limitados a domínios MGS em canais compartilhados | Rodolfo Mattei, confirmação `1553838930338521149` |
+
+## Política 4 — Escopo operacional específico do Ares
+
+Autoridade: Rodolfo Mattei, confirmação `1562127427151339701`. Fonte e snapshot positivos: `context/ares-asset-scope.md` e `data/ares/asset-scope.json`.
+
+Ares opera somente contas de anúncio da BM Digital Trust (`155263197283282`) e hosts corporativos cadastrados no catálogo Smart Bidding. Executar `mgs-ares-asset-scope.py check-account` antes de consultas/escritas Meta e `mgs-domain-scope.py check --agent ares` antes de domínio/URL. Pedidos globais de produto não excepcionam esse limite. O override positivo de Ares no registro de domínios prevalece sobre a lista geral; Atena não muda.
+
+O app minibot (`1299247318762949`) continua autorizado como dependência técnica; seu ownership em outro portfólio não autoriza contas ou domínios desse proprietário. Preservar app, credenciais, permissões, campanhas e budgets. Nenhuma alteração de permissão Meta foi autorizada neste cutover; exige confirmação separada com alvos exatos.
+
+Identificadores privados não são armazenados em denylist compartilhada. Evidência completa da auditoria fica no profile Zeus. O limite documental não é isolamento de sistema operacional nem redução do alcance técnico do token.

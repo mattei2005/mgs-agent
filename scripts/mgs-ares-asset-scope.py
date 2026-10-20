@@ -19,6 +19,33 @@ def allowed_account(value,data):
  if not re.fullmatch(r'[0-9]{5,30}',raw):return False
  return any(x['account_id']==raw for x in data['ad_accounts'])
 
+def is_ares_context():
+ import os
+ if os.environ.get('HERMES_PROFILE')=='ares' or os.environ.get('HERMES_HOME','').rstrip('/')=='/root/.hermes/profiles/ares':return True
+ if any(str(v).startswith('/root/.hermes/profiles/ares/') for v in sys.argv):return True
+ try:return 'ares-gateway.service' in Path('/proc/self/cgroup').read_text()
+ except OSError:return False
+
+def enforce_meta_path(path,params=None):
+ if not is_ares_context():return
+ params=params or {}
+ candidates=[]
+ for value in re.findall(r'(?:^|/)act_([^/?]+)',str(path)):
+  candidates.append(value)
+ for key in ('account_id','ad_account_id'):
+  if key in (params or {}):candidates.append(str(params[key]))
+ if candidates:
+  data=load_scope()
+  if any(not allowed_account(v,data) for v in candidates):raise ScopeError(DENY)
+ batch=(params or {}).get('batch')
+ if batch:
+  try:children=json.loads(batch) if isinstance(batch,str) else batch
+  except ValueError:raise ScopeError('Batch inválido; operação negada.') from None
+  if not isinstance(children,list):raise ScopeError('Batch inválido; operação negada.')
+  for child in children:
+   if not isinstance(child,dict):raise ScopeError('Batch inválido; operação negada.')
+   enforce_meta_path(child.get('relative_url',''))
+
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['validate','check-account','list-accounts']);p.add_argument('target',nargs='?');p.add_argument('--json',action='store_true');args=p.parse_args()
  try:data=load_scope()

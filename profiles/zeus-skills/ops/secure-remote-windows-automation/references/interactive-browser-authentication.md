@@ -71,6 +71,12 @@ When the user asks how to avoid a Hello prompt, identify its purpose before givi
 
 Use the current official instructions at `https://support.1password.com/windows-hello/` and `https://support.1password.com/unlock-auto-lock/?windows` when explaining these settings; recheck labels before changing them. Do not remove device-wide Windows Hello or disable auto-lock merely to make an account-reading task unattended. After any user-performed change, validate the exact browser/manager/site state again and report only the gate actually cleared; absence of a visible Hello dialog does not prove an unlocked vault or successful login.
 
+### 4a. Recover a missing browser-extension suggestion
+
+- If an authorized site's login page loads but the password-manager toolbar button produces no verified popup, reload the exact login tab once and inspect a fresh screenshot for the small inline 1Password button inside the username field. Clicking the field itself may not open the suggestion; click the inline button, then select the exact approved item through the manager. Do not infer that the vault is locked or unavailable merely from a missing toolbar popup.
+- The inline suggestion may be visible only in pixels, not in the browser accessibility tree. Ground its position on a fresh capture and pass screenshot-relative coordinates directly to Hermes Computer Use; do not multiply by the reported AX/native bounds scale. Verify the driver's delivered coordinates and resulting UI before retrying.
+- Selecting the saved item can both fill and submit login automatically. Read the resulting page before clicking the site's Log In button; never duplicate the submission. If a bank sends a device push, preserve that challenge and request approval directly on the user's device without resending notifications or switching verification methods automatically.
+
 ### 5. Validate the authenticated target
 
 Do not declare success from a click or from a filled password field. Require the site to show an authenticated state, then navigate to the requested account area and read back the exact artifact (for example, the account-level referral link rather than a product deep link). If 2FA, passkey approval, or a site checkpoint appears, use the approved human handoff and keep verification pending.

@@ -600,7 +600,21 @@ def is_rate_limit_response(status, payload):
     return False
 
 
+def _enforce_operational_account_scope(path, params=None):
+    # Applies only to Ares contexts; preserves Zeus administrative/billing audits.
+    # Read local positive scope before any credential-bearing HTTP request.
+    import importlib.util
+    guard_path = Path('/root/mgs-agent/scripts/mgs-ares-asset-scope.py')
+    spec = importlib.util.spec_from_file_location('mgs_ares_asset_scope_guard', guard_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError('Ares operational scope unavailable')
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+    guard.enforce_meta_path(path, params)
+
+
 def _graph_get_once(path, token, params=None):
+    _enforce_operational_account_scope(path, params)
     params = dict(params or {})
     params['access_token'] = token
     url = f'https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip("/")}?'+urllib.parse.urlencode(params)
@@ -637,6 +651,7 @@ def _encode_form(params):
 
 
 def _graph_post_once(path, token, params=None, logical_points=3):
+    _enforce_operational_account_scope(path, params)
     clean = _encode_form(params)
     clean['access_token'] = token
     req = urllib.request.Request(

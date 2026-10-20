@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-15T16:18:10.630990-04:00",
+  "updated_at": "2026-10-20T15:43:04.852818+00:00",
   "owner": "Rodolfo Mattei",
   "classification": "shareable_mgs_domains_only",
   "consumers": [
@@ -16,6 +16,7 @@
     "deny_response": "Só posso tratar de domínios oficialmente registrados como pertencentes à MGS."
   },
   "canonical_sources": [
+    "context/ares-asset-scope.md",
     "context/sites.md"
   ],
   "ownership_source": "context/sites.md",
@@ -78,5 +79,66 @@
     "zuout.com",
     "zyclor.com",
     "zytiva.com"
-  ]
+  ],
+  "agent_scopes": {
+    "ares": {
+      "domains": [
+        "autocreditadx.com",
+        "boostingecon.com",
+        "carcreditad.com",
+        "cephyric.com",
+        "cliquet.com",
+        "conectageral.com",
+        "creditoparaveiculo.com",
+        "de.newsoun.com",
+        "dicasfinancas.info",
+        "ducapes.com",
+        "eggbev.com",
+        "empleo.seuprimeiroempregoam.com",
+        "escalatepower.com",
+        "finance.ducapes.com",
+        "finance.topfeed.fun",
+        "finance.wantabrand.com",
+        "financeadx.com",
+        "financiamentoautoadx.com",
+        "financiarveiculo.com",
+        "finanzas.cliquet.com",
+        "finanzas.conectageral.com",
+        "finanzas.eggbev.com",
+        "finanzas.lyzmo.com",
+        "finanzas.newsoun.com",
+        "finanzas.openzed.com",
+        "finanzas.portalrelevante.com",
+        "finanzas.topfeed.fun",
+        "finanzas.wavesbee.com",
+        "finanzas.zuout.com",
+        "finanzas.zytiva.com",
+        "fincgriffin.com",
+        "gamezonead.com",
+        "gamingadx.com",
+        "growpowerhub.com",
+        "helixenit.net",
+        "infinitynexx.com",
+        "jobscana.com",
+        "lyzmo.com",
+        "marevelx.com",
+        "mavroa.com",
+        "newsoun.com",
+        "openzed.com",
+        "portalrelevante.com",
+        "seuprimeiroempregoam.com",
+        "topfeed.fun",
+        "vizioid.com",
+        "wavesbee.com",
+        "xyvlov.com",
+        "yolokfx.com",
+        "zuout.com",
+        "zyclor.com",
+        "zytiva.com"
+      ],
+      "ownership_source": "context/ares-asset-scope.md",
+      "source": "SB corporate catalog; Rodolfo confirmation 1562127427151339701",
+      "operational_registry": "data/ares/asset-scope.json"
+    }
+  }
 }
