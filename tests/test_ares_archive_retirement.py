@@ -98,4 +98,14 @@ class RetirementTests(unittest.TestCase):
   index={'mappings':{'rawOffline001':{'sourceRetirementReceipt':'receiptOffline001'}}};record={'record_kind':'mgs.source.retirement.v1','source_id':'rawOffline001'}
   with patch.object(self.m.b,'read_json',return_value=index),patch.object(self.m,'verified_receipt',return_value=record) as verify:
    self.assertEqual(self.m.source_state(object(),self.c,self.job,self.job['assets'][0]),record);verify.assert_called_once()
+ def test_intake_transport_never_executes_unrelated_source_cleanup(self):
+  import ares_archive_automation as transport
+  with patch.object(transport.bridge,'config_load',return_value={'delete_source':True}),patch.object(transport,'_run_cycle',return_value={'status':'ok'}) as inner:
+   state={'claims':{}};transport.run_cycle(apply=True,intake_state=state);self.assertFalse(inner.call_args.kwargs['allow_retirement'])
+ def test_retired_logical_ids_remain_archive_resolved_after_cleanup_pause(self):
+  import ares_archive_storage as storage
+  with patch.object(storage.b,'read_json',side_effect=[{'prefer_archive_reads':False},{'mappings':{'logicalOffline001':{'sourceRetirementReceipt':'receiptOffline001'}}}]):self.assertTrue(storage.enabled())
+ def test_validation_receipt_is_rejected_before_any_provider_read(self):
+  self.job['validationOnly']=True
+  with self.assertRaises(self.m.RetirementError):self.m.verified_receipt(object(),self.c,self.job,self.job['assets'][0],{})
 if __name__=='__main__':unittest.main()

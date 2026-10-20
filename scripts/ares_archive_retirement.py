@@ -129,10 +129,25 @@ def live_reference_guard(sids):
         return value in sids and key not in allowed and not tagged
     for root in [b.BASE/'data/ares/meta-ads',b.BASE/'data/ares/creative-ops/inventory']:
         if not root.exists():continue
-        for p in root.rglob('*.json'):
-            if any(k in p.parts for k in ['audit','reports','logs','history','backups']):continue
-            if p.stat().st_size>5000000:raise RetirementError('RETIREMENT_REFERENCE_SCAN_LIMIT')
-            if inspect(b.read_json(p,{})):raise RetirementError('UNMEDIATED_SOURCE_REFERENCE:'+str(p.relative_to(b.BASE)))
+        for pattern in ['*.json','*.jsonl']:
+            for p in root.rglob(pattern):
+                if any(k in p.parts for k in ['audit','reports','logs','history','backups']):continue
+                # Only a literal candidate-ID hit needs semantic parsing. Large
+                # unrelated caches must not make every future pair unretirable.
+                hit=False;carry=''
+                with p.open(errors='replace') as handle:
+                    while True:
+                        chunk=handle.read(1048576)
+                        if not chunk:break
+                        text=carry+chunk
+                        if any(s in text for s in sids):hit=True;break
+                        carry=text[-256:]
+                if not hit:continue
+                if p.stat().st_size>20000000:raise RetirementError('RETIREMENT_REFERENCE_SCAN_LIMIT:'+str(p.relative_to(b.BASE)))
+                if p.suffix=='.jsonl':
+                    with p.open() as handle:values=[json.loads(line) for line in handle if line.strip() and any(s in line for s in sids)]
+                else:values=b.read_json(p,{})
+                if inspect(values):raise RetirementError('UNMEDIATED_SOURCE_REFERENCE:'+str(p.relative_to(b.BASE)))
     for root in [b.BASE/'scripts',Path('/root/.hermes/profiles/ares/scripts')]:
         for pattern in ['*.py','*.sh']:
             for p in root.rglob(pattern):

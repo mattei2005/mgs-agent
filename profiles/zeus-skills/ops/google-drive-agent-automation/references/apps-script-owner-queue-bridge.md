@@ -72,6 +72,16 @@ Stable source-monitor output suppresses repeated model wakes. Keep idle/waiting 
 
 Exercise the actual owner receipt/SA ACK, provider download and forward/reverse shortcut moves before enabling the copy-only flags. Then observe natural scheduled runs after cutover, distinguish a technical fixture from the first real production upload, and keep cleanup off until separately confirmed. A copy-only cutover does not release staging quota. Before source retirement, extend reconciliation/alias repair to validate an explicit retirement receipt; never reinterpret an unexplained 404 as authorized deletion.
 
+## Confirmed source retirement controller
+
+After the separate destructive confirmation, preserve the immutable owner worker's copy-only protocol and activate only the bounded SA retirement controller. Bind its live flag to a frozen approval digest, roots, owner, cutoff, retention and per-run limit; require a complete new production lineage, released intake batch, native ACK, working archive/stock access and no unmanaged physical-ID references. Never use technical fixtures or historical assets as live delete tests, nor bypass retention to manufacture a successful destructive receipt.
+
+Acquire intake-state before archive-queue before inventory locks. Intake completion may pass its already-owned state into transport but must defer unrelated retirement work to the SA tick; never reacquire its own non-reentrant file lock or invert lock order. Persist and read back a canonical-SA-authored immutable intent before DELETE, use a native strong resource ETag for conditional mutation, and persist accepted HTTP status before checking absence. Drive v3 metadata may omit ETag; the same canonical SA can read the documented v2 resource ETag for a bounded v2 conditional delete without changing authentication or the normal v3 media pipeline.
+
+An ambiguous response or precondition rejection is not permission to replay DELETE. Resume accepted-but-unpublished receipts without deleting again. Publish a native SA receipt binding request/source/archive IDs, frozen source hashes, authority, actual DELETE status and confirmed absence. Reconciliation and alias validation must verify that receipt instead of streaming the now-absent source; unexplained 404 remains an error. Preserve actual Google metadata and use a distinct retirement-proof record, never fabricate a file response. Once an ID is retired, rollback may pause further cleanup but must not resolve that logical ID back to the missing physical source.
+
+Report deployment, a healthy empty cleanup cycle, real eligibility and an actual destructive E2E as separate facts. Zero eligible new pairs is valid unattended operation, not proof that a real delete already ran. Keep first-eligible validation with Zeus and do not require the owner to create an artificial production upload.
+
 ## Replay, concurrency and recovery
 
 - Use one local producer lock plus the worker's script lock. Immutable request bodies and separately owned receipts avoid competing writers on the same JSON content.
