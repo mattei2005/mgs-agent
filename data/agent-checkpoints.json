@@ -4433,12 +4433,12 @@
     {
       "agent": "ares",
       "id": "ares-yolo-g001-number-bid-preview",
-      "next_step": "Implementar preview opt-in isolado,testar e render/validate;publicar e GET partes novas;deletar somente10IDs antigos autorizados e confirmar404. Aguardar aprovacao antes de outros deletes/envios.",
+      "next_step": "Aguardar validacao visual explicita de Rodolfo. Somente apos ela promover mergeNumeroLance para padrao,rerender36modelos com mesmoscortes e substituir somente lotes atuais do pending-global-rollout.json,com GETpublicacoes/GET404deletes. Nao executar rollout ou exclusoes globais antes do OK.",
       "objective": "Enviar previa YOLO G001 com CC/MV/BC na coluna Nº, retirar Lance e substituir somente ultimo report desta conta",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-g001-number-bid-preview-20261019T223848/request.json",
-      "state": "iniciado:escopo exclusivo conta787796726891306/thread1558146488599842827.55campanhas e10ids do ultimo lote recuperados pelo journal;financeiro preservado. rollout dos demais condicionado a nova validacao visual de rodolfo;sem alteracao global autorizada ainda.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/yolo-g001-number-bid-preview-20261019T223848/pending-global-rollout.json",
+      "state": "previa_concluida_aguardando_validacao:55campanhas/55historicos e financeiro19/10 21:51edt preservados;nº abreviado+copy na principal/historico,semlance,bidmantido,grade154versus160.129testes ok;11partes novas getexato e10ids anteriores deletados get404. demais35relatorios inalterados. numero atual dos novosids em delivery.json;defaults globais sem mudanca.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T02:39:22+00:00"
+      "updated_at": "2026-10-20T02:45:01+00:00"
     },
     {
       "agent": "ares",
@@ -6652,5 +6652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T02:39:22+00:00"
+  "updated_at": "2026-10-20T02:45:01+00:00"
 }
