@@ -3,9 +3,10 @@
 Escolher o ramo antes da coleta:
 
 - **Aumento de gasto por site/gestor:** usar a seção `Decompor aumento de gasto`, com Domain e aquisição granular; não coletar Messenger/SMS nem produzir faixas de ROI sem necessidade.
-- **Lucro por estratégia/faixa de ROI:** seguir as seções numeradas abaixo, incluindo as quatro fontes comparáveis. O contrato dos três blocos de ROI está no SKILL.md.
+- **Lucro misto por estratégia/faixa de ROI:** seguir as seções numeradas abaixo, incluindo as quatro fontes comparáveis. O contrato dos três blocos de ROI está no SKILL.md.
+- **Campanhas de tráfego direto em faixas personalizadas:** usar aquisição granular SB e Insights Meta por campanha e por conta, conforme `Conciliação com contas de anúncio e faixas personalizadas`. Validar a estratégia pelo cadastro antes de dispensar Messenger/SMS/Domain; não apresentar o subtotal das campanhas como lucro total do site.
 
-Os dois ramos compartilham o procedimento de período, autenticação e escopo da seção 1.
+Todos os ramos compartilham o procedimento de período, autenticação e escopo da seção 1.
 
 ## 1. Fixar período, escopo e fonte do total
 
@@ -72,20 +73,22 @@ Interpretar aquisição e retenção separadamente. ROI negativo de aquisição 
 ## Conciliação com contas de anúncio e faixas personalizadas
 
 - Quando o pedido exigir que o investimento bata com as contas, consultar Insights Meta por campanha e, independentemente, por conta, com a mesma data civil no timezone live e moeda. Exigir igualdade da soma das campanhas com o total de cada conta; preservar NET_REVENUE SB e recalcular lucro e faixa usando o gasto Meta. Mostrar a diferença contra INVESTIMENT SB, sem atribuir causa não comprovada nem forçar igualdade.
-- Congelar o snapshot verificado. Um dia fechado ainda pode receber ajustes centesimais entre leituras Meta; comparar IDs e valores, recuperar somente as contas divergentes e reconciliar novamente com os totais. Não declarar readbacks estáveis quando houve alteração, nem descartar uma resposta concluída por falha de validação local.
+- Congelar o snapshot verificado. Um dia fechado ainda pode receber ajustes entre leituras Meta; comparar IDs e valores por campanha e recuperar, para cada conta divergente, o par campanha + total de conta com os mesmos parâmetros. Preservar cada resposta concluída antes das asserções locais e substituir somente a conta reconciliada, pois misturar um novo detalhamento com um total antigo produz fechamento aparente. Não declarar readbacks globais estáveis quando houve alteração.
+- Verificar separadamente estabilidade das faixas pedidas e estabilidade do restante do universo. Após ajuste histórico, recalcular todas as campanhas e comparar quantidade, investimento, receita e lucro por faixa; só afirmar que o pedido não foi afetado quando esses campos permanecerem iguais. Na reanálise do mesmo dia, contar mudanças de faixa por `account_id + campaign_id`, não pela diferença líquida das contagens, pois entradas e saídas podem se compensar.
+- Se o par campanha × conta continuar divergente após diagnóstico e readbacks delimitados, preservar ambos os totais e a diferença como pendência de conciliação; não ratear o residual, atribuí-lo automaticamente a arredondamento ou certificar igualdade integral. Distinguir resultado calculado por campanha de fechamento conciliado e registrar no checkpoint a conta afetada, evidência e próxima verificação. Uma ressalva não transforma a conciliação incompleta em teste aprovado.
 - Aplicar os limites pedidos, não os defaults da análise anterior. Em `0% a 15%` versus `negativas`, usar `0≤ROI≤15` e `ROI<0`, comparar antes do arredondamento e testar zero, 15 e valores imediatamente adjacentes. Somar conjuntos antes de classificar; receita sem gasto e SMS sem vínculo comprovado ficam fora das faixas das campanhas.
 
 ## 6. Verificar e entregar
 
-- Testar exatamente os limites 0/10/20/30 e valores imediatamente adjacentes.
+- Testar os limites das faixas efetivamente solicitadas, valores imediatamente adjacentes e investimento zero; usar 0/10/20/30 somente quando forem os cortes do relatório.
 - Validar contagens distintas de linhas, campanhas e páginas; não transportar denominadores de um período para outro.
-- Repetir as quatro consultas e comparar chaves, valores monetários e contagens. Se mudarem, reconciliar a versão utilizada antes de fechar.
+- Repetir as consultas exigidas pelo ramo escolhido e comparar chaves, valores monetários e contagens: as quatro fontes no relatório misto; aquisição SB e os dois níveis de Insights Meta no relatório restrito de campanhas diretas. Se mudarem, reconciliar a versão utilizada antes de fechar.
 - Verificar a base líquida por múltiplos publishers comparáveis e frontend vivo. Pequenas diferenças centesimais podem decorrer de granularidade/arredondamento: declarar a tolerância e distinguir igualdade exata de aproximação; não exigir uma contagem incidental de matches exatos herdada de outro dia nem eliminar residual para passar no teste.
 - Manter precisão integral nos cálculos e arredondar apenas na apresentação. Se as parcelas exibidas somarem 100,01% ou 99,99%, explicar o arredondamento; não editar uma parcela para forçar 100%.
-- Publicar na ordem estável: tráfego direto sem SMS; BOT com drip/broadcast; consolidado. Repetir fonte, data e denominador junto aos títulos para que cada bloco faça sentido isoladamente.
+- No relatório misto, publicar na ordem estável: tráfego direto sem SMS; BOT com drip/broadcast; consolidado. No relatório restrito, publicar primeiro as faixas solicitadas e sua soma; depois contexto e conciliação. Repetir fonte, data e denominador junto aos títulos para que cada bloco faça sentido isoladamente.
 - Preservar relatório e checkpoint por período; uma nova data não sobrescreve os resultados anteriores. Entregar inline, sem anexos não solicitados.
 
-Critério de aceite de ROI: quatro fontes do mesmo dia/escopo, estratégia e identidade comprovadas, ausência de receita BOT zero-only tratada corretamente, joins por página exatos para gasto, faixas sem sobreposição, reconciliação decimal e readback documentados; limitações de atribuição e custos permanecem explícitas.
+Critério de aceite de ROI misto: quatro fontes do mesmo dia/escopo, estratégia e identidade comprovadas, ausência de receita BOT zero-only tratada corretamente, joins por página exatos para gasto, faixas sem sobreposição, reconciliação decimal e readback documentados. Para campanhas diretas em faixas personalizadas: aquisição SB e Insights Meta por campanha/conta no mesmo período e moeda, cobertura do join por IDs, agregação prévia dos conjuntos, limites testados, conservação decimal e readbacks documentados. Igualdade campanha × conta só recebe aceite quando demonstrada; residual persistente exige status com ressalva, não PASS de conciliação. Limitações de atribuição e custos permanecem explícitas em ambos os ramos.
 
 ## Decompor aumento de gasto por site e gestor
 

@@ -1313,12 +1313,12 @@
     {
       "agent": "ares",
       "id": "ARES-ROI-SHEIN-CPV-20261019-1561388893558014103",
-      "next_step": "Coletar novos dados SB/Meta, agregar conjuntos e conferir totais de contas antes das faixas.",
+      "next_step": "Entregar valores de19/10 inline com diferencaSB59.52 e residual campanha×conta0.15 explicitos; nao declarar fechamento exato global; reconsultar residual somente em nova revisao autorizada.",
       "objective": "Apurar SHEIN e CPV de19/10/2026 em USD, campanhas ROI0-15 e negativas, com conciliacao Meta.",
       "source": "/root/mgs-agent/reports/ares/roi-shein-cpv-20261019-1561388893558014103",
-      "state": "iniciado; mesmo escopo shein+cpv, somente19/10/2026; dominios validados; read-only.",
+      "state": "analise concluida com ressalva:19/10 roi0-15 103campanhas investimento4033.19 lucro358.06; negativas126 investimento2593.90 prejuizo567.06; soma6627.09 resultado-209.00. 689campanhas,52contas,30com gasto;51contas fecham;residual0.15emuma conta persiste apos readbacks. meta campanhas32960.47 contas32960.32 sb32900.95. sb estavel,meta ajustes historicos;faixas pedidas inalteradas. zero writes externos.",
       "thread_id": "1561388893558014103",
-      "updated_at": "2026-10-20T11:39:38+00:00"
+      "updated_at": "2026-10-20T11:42:01+00:00"
     },
     {
       "agent": "ares",
@@ -4433,12 +4433,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-daily-0800-20261020",
-      "next_step": "Concluir validacao de rotas/coletor e auditoria global;agendar sem colisao preservando publicacao08h",
-      "objective": "Programar relatorio diario D-1 as08h America/New_York nas threads SHEIN existentes exceto Boostingecon/Growpowerhub; inicio20/10 autorizado por Rodolfo",
-      "source": "discord:1561752465978818722",
-      "state": "preflight:nenhum cron novo ou envio aplicado;resolver24destinos e fontes d-1",
+      "next_step": "Cron ja iniciado aguarda08h para revalidar budget/status e publicar24reports comGET de cada parte. Resultado externo em state/shein-daily-report/2026-10-19/completion.json;retomar somente fontes/partes pendentes pelo mesmojournal se falhar. Nao reenviar por inferencia.",
+      "objective": "Relatorio diario D-1 as08h America/New_York nas threads SHEIN existentes exceto Boostingecon/Growpowerhub; inicio20/10 autorizado por Rodolfo",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/daily-0800-20261020/change-inventory.json",
+      "state": "cron_ativo_preparacao_live_validada:24threads/24contas,4por gestor. root07:47 prepa,post>=08het;primeiro20/10 referente19/10. 170testesok;619campanhas/4333celulas/144partes prontas,24render/validate,rpsui17paginas;24destinosget. auditoria global8datas pre/post pass,sem colisaooperacional. policy/contrato/skill/registry/inventario e report-infra getconfirmados. campanhas,dashboards,outrasagendas e historico intocados. publicacao futura ainda nao declarada entregue.",
       "thread_id": "1561752465978818722",
-      "updated_at": "2026-10-20T11:11:30+00:00"
+      "updated_at": "2026-10-20T11:50:10+00:00"
     },
     {
       "agent": "ares",
@@ -6742,5 +6742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T11:39:38+00:00"
+  "updated_at": "2026-10-20T11:50:10+00:00"
 }

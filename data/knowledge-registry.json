@@ -3458,6 +3458,24 @@
       "updated_at": "2026-10-14T19:32:44+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.daily-d1-schedule",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/policies/shein-daily-report.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-20T11:49:41+00:00",
+      "id": "ARES-SHEIN-DAILY-D1-0800-20261020",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN Diario D-1 as08h ET nas24threads; exclui Boostingecon e Growpowerhub",
+      "updated_at": "2026-10-20T11:49:41+00:00"
+    },
+    {
       "canonical_key": "ares.shein.request-default-final-status",
       "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -13129,5 +13147,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T11:14:54+00:00"
+  "updated_at": "2026-10-20T11:49:41+00:00"
 }
