@@ -4391,6 +4391,16 @@
       "updated_at": "2026-10-20T13:46:11+00:00"
     },
     {
+      "agent": "ares",
+      "id": "ares-report-repair-1558146725376557126-1562126829337313431",
+      "next_step": "Nenhuma republicacao pendente. Proximos envios devem usar partes exatas do recibo canônico, sem splitter secundario; nao alterar ou excluir outros relatorios.",
+      "objective": "Corrigir entrega truncada do report YolokfxG002 na thread1558146725376557126; reenviar e remover somente2mensagens quebradas conforme Rodolfo1562126829337313431",
+      "source": "/root/mgs-agent/data/ares/reporting/repair-1558146725376557126-1562126829337313431/completion.json",
+      "state": "concluido_get_get404:15partes canonicas publicadas egetexato;80campanhas/560celulas historicas,corte20/10 11:07edt,financeiro/configuracao/timestamps preservados.2mensagens quebradas removidas eget404/10008;48mensagens anteriores/humano getpreservadas.0metawrite,0cron,0mudanca de layout. recuperacao429 somenteget,semreplaypost/delete.",
+      "thread_id": "1561752465978818722",
+      "updated_at": "2026-10-20T15:39:40+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "ares-sb-scope-audit-1562108149710856284",
       "next_step": "Zeus aguarda confirmação crítica para expurgo localizado e atualização da política; nenhuma alteração de credencial, permissão, app, campanha ou serviço foi aplicada. Reconciliar consumidores e novo inventário antes de qualquer mudança de privilégio.",
@@ -6812,5 +6822,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T15:04:47+00:00"
+  "updated_at": "2026-10-20T15:39:40+00:00"
 }

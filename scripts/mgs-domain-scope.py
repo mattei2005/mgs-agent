@@ -118,13 +118,34 @@ def validate_registry(data: dict, path: Path) -> None:
         if uncovered:
             raise ScopeError("domain lacks affirmative ownership source")
 
+    overrides = data.get("agent_scopes", {})
+    if not isinstance(overrides, dict) or not set(overrides).issubset(VALID_AGENTS):
+        raise ScopeError("invalid agent scope")
+    for agent, scoped in overrides.items():
+        values = scoped.get("domains") if isinstance(scoped, dict) else None
+        if not isinstance(values, list) or not values or values != sorted(set(values)):
+            raise ScopeError("invalid agent domain allowlist")
+        if any(not isinstance(v, str) or normalize_target(v) != v or v.startswith("www.") for v in values):
+            raise ScopeError("invalid agent domain")
+        source = scoped.get("ownership_source")
+        if not isinstance(source, str) or source not in sources:
+            raise ScopeError("agent ownership source missing")
+        if path.resolve() == DEFAULT_REGISTRY.resolve():
+            source_text = (BASE / source).read_text(encoding="utf-8").lower()
+            if any(not re.search(rf"(?<![a-z0-9.-]){re.escape(v)}(?![a-z0-9.-])", source_text) for v in values):
+                raise ScopeError("agent domain lacks affirmative scope source")
 
-def allowed_domain(target: str, data: dict) -> str | None:
+
+def domains_for_agent(data: dict, agent: str | None = None) -> list[str]:
+    return data.get("agent_scopes", {}).get(agent, {}).get("domains", data["domains"])
+
+
+def allowed_domain(target: str, data: dict, agent: str | None = None) -> str | None:
     try:
         host = normalize_target(target)
     except ScopeError:
         return None
-    allowed = set(data["domains"])
+    allowed = set(domains_for_agent(data, agent))
     if host in allowed:
         return host
     if data["policy"].get("allow_www_alias") and host.startswith("www.") and host[4:] in allowed:
@@ -190,11 +211,11 @@ def main(argv: list[str] | None = None) -> int:
         return 4
 
     if args.command == "list":
-        emit({"agent": args.agent, "domains": data["domains"]}, args.json)
+        emit({"agent": args.agent, "domains": domains_for_agent(data, args.agent)}, args.json)
         return 0
 
     if args.command == "check":
-        domain = allowed_domain(args.target, data)
+        domain = allowed_domain(args.target, data, args.agent)
         if domain:
             emit({"agent": args.agent, "allowed": True, "domain": domain}, args.json)
             return 0
@@ -204,7 +225,7 @@ def main(argv: list[str] | None = None) -> int:
     allowed: list[str] = []
     blocked_count = 0
     for target in args.targets:
-        domain = allowed_domain(target, data)
+        domain = allowed_domain(target, data, args.agent)
         if domain:
             if domain not in allowed:
                 allowed.append(domain)
