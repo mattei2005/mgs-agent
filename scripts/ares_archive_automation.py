@@ -158,9 +158,28 @@ def run_cycle(apply=False,reconcile_only=False):
         return result
 
 
+def enqueue_validation_pair(d,c,manifest,apply=False):
+    bridge.validate_config(c)
+    if manifest.get('schema')!='mgs.archive.validation-pair.v1' or manifest.get('run_id')!='archive-validation-1562141828449439838' or manifest.get('metadata_clean') is not True:raise bridge.ArchiveError('VALIDATION_MANIFEST_SCOPE')
+    assets=[]
+    for role,leaf in [('original','99_LEGACY'),('clean','01_READY')]:
+        source=manifest['sources'][role];m=d.meta(source['id']);bridge.require_publisher(m,bridge.CANONICAL_SA,'VALIDATION_SOURCE_AUTHOR')
+        path=d.relative_parent(m['parents'][0],c['control_folder_id'])
+        if m.get('driveId')!=c['source_drive_id'] or not m.get('name','').startswith('MGS_ARCHIVE_TEST_ONLY_') or m.get('properties',{}).get('mgsArchiveType')!='archive_test_media' or not path or path[0]!='TEST_INPUTS' or path[-1]!=leaf:raise bridge.ArchiveError('VALIDATION_SOURCE_SCOPE')
+        asset=bridge.asset_snapshot(d,c,source['id'],role)
+        if asset['sha256']!=source['sha256']:raise bridge.ArchiveError('VALIDATION_SOURCE_CHECKSUM')
+        assets.append(asset)
+    job=bridge.make_request(c,assets,kind='lineage',lineage_id=manifest['run_id'],validation_only=True)
+    return bridge.enqueue(d,c,job) if apply else {'status':'dry_run','jobId':job['jobId'],'validationOnly':True}
+
+
 def main():
     import argparse,json
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--apply',action='store_true');parser.add_argument('--reconcile-only',action='store_true');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--apply',action='store_true');parser.add_argument('--reconcile-only',action='store_true');parser.add_argument('--enqueue-validation-pair',action='store_true');args=parser.parse_args()
+    if args.enqueue_validation_pair:
+        with bridge.queue_lock():
+            result=enqueue_validation_pair(bridge.Drive(args.apply),bridge.config_load(),bridge.read_json(bridge.DATA/'validation-pair-1562141828449439838.json',{}),args.apply)
+        print(json.dumps(result));return 0
     try:result=run_cycle(args.apply,args.reconcile_only)
     except (bridge.ArchiveError,ValueError,KeyError,OSError) as exc:
         print(json.dumps({'status':'blocked','reason':str(exc)[:200],'delete_source':False}));return 2

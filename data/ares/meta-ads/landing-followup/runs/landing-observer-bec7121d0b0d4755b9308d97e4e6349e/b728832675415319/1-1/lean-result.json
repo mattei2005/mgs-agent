@@ -1,0 +1,301 @@
+{
+  "result": "PASS",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://mavroa.com/rec-us-app-shein-productos-gratis/?utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01&nocache",
+    "resolved_landing_url": "https://mavroa.com/rec-us-app-shein-productos-gratis/?utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01&nocache",
+    "mapping_source": "READ_ONLY_HTTP_200 https://mavroa.com/quiz/us/sh3-g006/ ; MGS Direct Quiz plugin=1.2.1 config_sha256=92a1ee962ab217a3286f41e42bf51ad0d991321f2bdab615cdd1d0cc16596e02 ; all 7 data-mgs-dq-cta hrefs have exactly one unique destination https://mavroa.com/rec-us-app-shein-productos-gratis/ ; https://mavroa.com/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.js?v=1.2.1 initLinks/mergeUrl preserves source query",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792516300.3316717,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome is active and the webpage is showing a mostly blank loading screen with a centered Mavroa logo; no gate, article body, or advertisement is visible."
+      },
+      {
+        "at": 1792516307.832333,
+        "gate": false,
+        "rewarded": false,
+        "article": true,
+        "description": "Normal Chrome viewport showing a Spanish SHEIN article with readable body text, an inline pickup/home-delivery questionnaire, and visible network ads at the top and right. No CLAIM MY FREE PRODUCTS gate or rewarded overlay is visible."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 78.86497830000008
+    },
+    "device_mode": "DESKTOP",
+    "desktop_view": {
+      "desktop_view": true,
+      "device_toolbar_visible": false,
+      "viewport_bounds": [
+        0,
+        122,
+        2560,
+        1270
+      ],
+      "device_mode": "DESKTOP",
+      "verified": true,
+      "verified_at": 1792516285.7559614,
+      "source": "native_and_visual_desktop"
+    },
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 17460,
+          "window_id": 66544,
+          "app_name": "Discord.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24268,
+          "window_id": 1705338,
+          "app_name": "1Password.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://mavroa.com/rec-us-app-shein-productos-gratis/?utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792516269.9324367,
+      "target": {
+        "pid": 18224,
+        "window_id": 20645272,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792516278.0696058,
+      "desktop_view": {
+        "desktop_view": true,
+        "device_toolbar_visible": false,
+        "viewport_bounds": [
+          0,
+          122,
+          2560,
+          1270
+        ],
+        "device_mode": "DESKTOP",
+        "verified": true,
+        "verified_at": 1792516285.7559614,
+        "source": "native_and_visual_desktop"
+      },
+      "opened_at": 1792516296.0411189
+    },
+    "opened_at": 1792516296.0411189,
+    "article_verified": true,
+    "article_ready_at": 1792516307.832337,
+    "article_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_0e6e827a21e34141a5db6485d8408cda.png",
+    "rewarded_wait_seconds": 11.791218280792236,
+    "scroll_result": {
+      "ok": true,
+      "action": "press_key",
+      "message": "✅ Sent pagedown via SendInput on pid 18224 (delivery_mode:foreground).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "foreground"
+        },
+        "effect": "unverifiable",
+        "route": "global_input",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "scroll_visual_changed": true,
+    "observation_started_at": 1792516315.4769952,
+    "observation_ended_at": 1792516340.7450955,
+    "observation_seconds": 25.268100998015143,
+    "observation_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_82aefeb3827d4a7cbf5d7bd83e762e9c.png",
+    "visual_captured_at": 1792516340.7423553,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 20645272,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792516343.8646715,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 20645272,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 17460,
+        "window_id": 66544,
+        "app_name": "Discord.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24268,
+        "window_id": 1705338,
+        "app_name": "1Password.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 17460,
+        "window_id": 66544,
+        "app_name": "Discord.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24268,
+        "window_id": 1705338,
+        "app_name": "1Password.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 47.82355260848999,
+    "final_visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Rendered sidebar network ad for a PDF tool, showing a red PDF icon, “View PDF (Free),” “Edit and Play,” and a red “Open” button."
+    },
+    "visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Rendered sidebar network ad for a PDF tool, showing a red PDF icon, “View PDF (Free),” “Edit and Play,” and a red “Open” button."
+    },
+    "network_ad_confirmed": true,
+    "ad_description": "Rendered sidebar network ad for a PDF tool, showing a red PDF icon, “View PDF (Free),” “Edit and Play,” and a red “Open” button.",
+    "visual_review": "Rendered sidebar network ad for a PDF tool, showing a red PDF icon, “View PDF (Free),” “Edit and Play,” and a red “Open” button."
+  },
+  "batch_scope": "0d97c4d2d27a9efef5f613f015c4ce2945143fc8c3c3dfd47796e4f7e6d3c818"
+}
