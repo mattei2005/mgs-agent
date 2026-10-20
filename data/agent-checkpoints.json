@@ -6163,12 +6163,12 @@
     {
       "agent": "ares",
       "id": "shein-1562024416823607398",
-      "next_step": "Exige manutenção separada do executor/adapter, fora da transação: preservar formato de source AFS em clone_prestaged e corrigir reconciliação de slots parcialmente criados com source repetido/nome temporário. Depois testes, readback, reaproveitar IDs existentes e reconciliar reversivelmente redundantes; jamais excluir sem escopo. Não nova campanha nem reset E2E. Retomar só após correção validada, QA8 e continuação central.",
-      "objective": "Concluir 3 clones da campanha 001 Escalatepower 06 G006; USD20/dia cada; COCAP USD0.90; grupos 3/3/2 e copy literal.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/partial-final-readback.json",
-      "state": "page offers spot delegada e autorização futura registrada. campanhas002/003 criadas paused usd20/cost_cap bid90. fonte inalterada. após recovery readback-first, executor repetiu 4 slots já existentes com source_ad_id repetido; agora há8 ads paused nas duas campanhas, incluindo4 redundantes. slots2 afs continuam 100/1443048; terceira campanha não criada. não executar de novo: recovery não reconcilia corretamente slots repetidos antes da normalização de nomes. ids e evidência em partial-final-readback.",
+      "next_step": "Terminar readback bundle1 e bundle2 pela mesma rota; QA semântico/renderizado de3campanhas/8ads; recuperação auditada usa aprovação humana já verificada, sem reset E2E. Validar mesma conta/budget/bid/grupos antes da resposta nativa.",
+      "objective": "Concluir pedido original de 3 clones da fonte001 Escalatepower06 G006; USD20/dia cada, COCAP USD0.90, 8 vídeos e copy literal.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/request-ready.json",
+      "state": "manutenção separada executada sob autorização rodolfo1562081245352165397. 110 testes e43subtests; fila canônica17testes e uma regra ativa. recuperação por journal corrige duplicatas;4 redundantes archived/readback semdelete. fallback central two-phase resolveu6ads nos mesmos campaign/adset ids; creatives existentes reutilizados, cta literal. bundle1 children_created_readback_pending. continuação on-demand em execução respeita quota; só conclusão visível.",
       "thread_id": "1558134405313200150",
-      "updated_at": "2026-10-20T12:21:07+00:00"
+      "updated_at": "2026-10-20T12:48:14+00:00"
     },
     {
       "agent": "zeus",
@@ -6742,5 +6742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T12:46:33+00:00"
+  "updated_at": "2026-10-20T12:48:14+00:00"
 }
