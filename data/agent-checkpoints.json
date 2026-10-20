@@ -562,6 +562,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C42-C43-IMMEDIATE-20261020",
+      "next_step": "Cancelar agenda antiga, identificar proxima sequencia live, duplicar via Engine v3, validar ACTIVE e hierarquia; depois DELETED originais com GET.",
+      "objective": "Duplicar C42/C43 agora USD30 cada, ativar e validar novas; depois excluir originais; cancelar agenda antiga",
+      "source": "discord:message:1562109283418644592",
+      "state": "autorizacao imediata rodolfo mensagem 1562109283418644592 supersede espera ate 21/10 02h; descoberta e preflight antes de write.",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-20T14:25:01+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-C45M-2X-20261008-0900",
       "next_step": "Concluído; acompanhar D1 canônico, sem cron novo, replay ou handoff.",
       "objective": "Duplicar C45M para C46M/C47M: conclusão recuperada nos mesmos IDs",
@@ -6772,5 +6782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T14:20:42+00:00"
+  "updated_at": "2026-10-20T14:25:01+00:00"
 }

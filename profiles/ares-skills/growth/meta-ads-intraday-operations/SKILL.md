@@ -1,7 +1,7 @@
 ---
 name: meta-ads-intraday-operations
 description: "Use em governança, relatórios e crons Meta por operação."
-version: 3.0.2
+version: 3.0.3
 author: Ares
 license: internal
 metadata:
@@ -105,12 +105,20 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 5. Se o objeto já estiver no estado terminal aceito pelo contrato, conclua sem POST. Caso contrário, envie somente `graph_post_once(campaign_id, token, {'status': 'DELETED'})` e faça GET direto do mesmo ID. Aceite os literais terminais previstos pela operação, registre o literal real e confira que budget e identidade foram preservados. Timeout/resposta ambígua exige GET antes de qualquer retry; HTTP de sucesso sozinho não confirma exclusão.
 6. Marque o request concluído e libere sua coordenação somente após readback terminal. Se persistir incerteza, mantenha o estado resumível e siga a recuperação vigente; não use um `finally` que marque a lease COMPLETE apesar de falha. Responda em uma linha curta com campanha, alias da conta e status confirmado na Meta, sem IDs técnicos ou trilha interna.
 
+## Diagnóstico de campanha ativa sem dados
+
+1. Separe três perguntas: os objetos estão habilitados, houve entrega no período e qual é a causa da ausência de entrega? Confirme conta/moeda/fuso e leia a campanha exata, seus conjuntos e anúncios por ID. Compare `configured_status` com `effective_status`; todos ACTIVE ainda não provam impressões ou gasto.
+2. Consulte Insights na janela solicitada; se vier sem linhas, faça uma consulta bounded com `date_preset=maximum` para distinguir ausência no período de ausência no histórico disponível. Preserve a resposta vazia como evidência, não como causa nem prova de falha do relatório. Informe a janela consultada.
+3. Expanda somente os alvos: `issues_info`, `ad_review_feedback`, `recommendations`, início/fim, lance e evento. Quando houver vídeo, leia `status` dos video IDs em batch. Inspecione UTMs/creative IDs apenas quando necessário, mantendo payloads completos no audit e evitando despejar asset feeds ou URLs de thumbnails na conversa.
+4. Corrija somente uma divergência comprovada e autorizada, com pre-read e GET posterior. Se conjuntos/anúncios já estiverem configurados ACTIVE, não envie toggles redundantes para aparentar reparo. Ausência de erros retornados e vídeos `ready` não demonstram elegibilidade integral nem explicam o serving; não invente uma causa ou anuncie correção da entrega.
+5. Execute os campos independentes autorizados — pausa, budget e agendamento — mesmo que a causa continue aberta. Congele o snapshot somente depois dos ajustes confirmados e diferencie no resumo: diagnóstico confirmado, mudanças concluídas, ativação agendada e causa ainda pendente. Mantenha o diagnóstico não resolvido no mesmo request/checkpoint com próxima ação concreta; nunca marque a recuperação de entrega como concluída apenas porque o job foi criado ou a campanha voltou a ACTIVE.
+
 ## Pausa imediata e ativação pontual agendada
 
 1. Resolva conta e campanhas pelo contrato da conversa e confirme IDs, moeda, timezone e estado pela Meta. Interprete “meia-noite” como a próxima ocorrência de `00:00` no fuso operacional confirmado; informe a data civil explicitamente na conclusão.
 2. Trate o pedido como **status-only** quando não houver outra mudança expressa: preserve o budget live de cada campanha, filhos, nome/data, tracking, mídia, copy e ciclo D1. Reativação não autoriza reinício operacional de D1 nem aplicação de um budget padrão. Valide que os filhos permitem a ativação; se estiverem pausados, não os altere implicitamente.
 3. Faça o preflight mínimo e persista o request antes do write. Execute a pausa imediata solicitada e confirme-a por GET antes de dedicar tempo à auditoria global de agenda; discovery de scheduler não deve prolongar gasto evitável. Campanha já pausada não recebe POST redundante.
-4. Congele o estado preparado por ID, incluindo budget individual, hierarquia, campos materiais e `updated_time`; confirme estabilidade com uma segunda leitura bounded. Reutilize helpers de transporte/readiness validados, sem herdar seus IDs, budgets ou ações históricas. Não reescreva `start_time` de conjunto já iniciado para simular reativação.
+4. Congele o estado preparado por ID, incluindo budget individual, hierarquia, campos materiais e `updated_time`; confirme estabilidade com uma segunda leitura bounded. Em pedido combinado com budget nominal, aplique e confirme primeiro somente o ajuste autorizado e preserve o budget live dos demais alvos; o ativador deve validar os valores finais congelados e fazer apenas status write, sem reaplicar budgets ou confundir o próprio ajuste com drift externo. Reutilize helpers de transporte/readiness validados, sem herdar seus IDs, budgets ou ações históricas. Não reescreva `start_time` de conjunto já iniciado para simular reativação.
 5. Audite a agenda global, faça backup e registre um one-shot determinístico. Se necessário, inicie fisicamente pouco antes do alvo e aguarde dentro do runner, sem adquirir a lane durante a espera. Escolha a menor contenção **dentro da janela compatível** e reserve timeout para espera, lock, API e readback. Não retome crons pausados como efeito lateral.
 6. Teste bloqueio antecipado sem chamadas Meta, rejeição de drift de budget/hierarquia e replay concluído sem write. No horário alvo, adquira a lane account-scoped, faça novo pre-read, persista `in_flight`, aplique somente `status=ACTIVE` e confirme cada alvo por GET. Reconcilie tentativas ambíguas pelos IDs antes de qualquer retry; conclua somente quando todos os alvos estiverem confirmados.
 7. Leia de volta o job exato, incluindo horário com offset, `enabled`, `no_agent`, script e destino/thread; vincule-o ao request e repita a auditoria excluindo somente esse próprio job. Registre checkpoint, inventário e REPORT-INFRA. Na conversa, diferencie **pausada agora**, **ativação agendada** e **ativação confirmada**; use bullets curtos com data, fuso e budgets preservados, sem IDs internos.

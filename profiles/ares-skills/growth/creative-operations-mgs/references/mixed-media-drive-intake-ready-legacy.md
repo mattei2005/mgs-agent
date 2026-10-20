@@ -2,6 +2,10 @@
 
 Use when an authorized request identifies country, vertical and language and asks Ares to apply rules to an image-only, video-only or mixed batch in `UPLOAD MANUAL`.
 
+## Arquivo 30 TB após o intake — exceção aprovada e controlada
+
+Rodolfo aprovou a integração em `1562104715271999589`. Aplicar `shared-drive-30tb-archive-queue.md` depois de completar todos os gates deste pack, não no lugar deles. Enquanto `queue_enabled=false`, manter o comportamento atual. Quando habilitada, a fila recebe somente a linhagem nova totalmente verificada e posterior ao corte, sem pedir aprovação por arquivo; originais, nomes, reservas e IDs primários permanecem intactos. O ACK de arquivo é uma camada separada de prova; nenhum gatilho ou exclusão é inferido desta regra.
+
 ## Durable execution pattern
 
 1. Resolve the live hierarchy from the configured root and confirm `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; never assume the root ID is itself `CRIATIVOS`.

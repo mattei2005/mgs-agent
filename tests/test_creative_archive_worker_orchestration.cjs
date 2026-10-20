@@ -3,8 +3,8 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto'),path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../integrations/creative-archive-30tb/Worker.js'),'utf8');
 const account='mgsdigitalcorp@gmail.com',sa='mgsagent@mgs-core-prod.iam.gserviceaccount.com';
-function makeHarness(mode) {
- const c={account,sourceDriveId:'0AEwt4Ye690ocUk9PVA',sourceRootId:'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa',archiveRootId:'1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J',controlFolderId:'controlFolder123',requestsFolderId:'requestsFolder123',receiptsFolderId:'receiptsFolder123',deleteSource:false};
+function makeHarness(mode,override) {
+ const c={account,sourceDriveId:'0AEwt4Ye690ocUk9PVA',sourceRootId:'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa',archiveRootId:'1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J',controlFolderId:'controlFolder123',requestsFolderId:'requestsFolder123',receiptsFolderId:'receiptsFolder123',deleteSource:false,...(override || {})};
  const a={role:'clean',sourceId:'1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N',sourceParentId:'1iGO8km_WVwbIppLotf1h1kZ7W0UKUxz1',name:'unit.mp4',mimeType:'video/mp4',size:'5375929',md5:'59065739912275ee5995bfee8d5ca9c7',sha256:'11e123e5b495e5ed1a2ae5099b1cef94b6255a4c5f8302859b01a8b291793027',version:'12',relativeParent:[]};
  const j={schema:'mgs.archive.request.v1',jobId:'a'.repeat(32),kind:'canary',lineageId:'PILOT-ONLY',account,sourceDriveId:c.sourceDriveId,sourceRootId:c.sourceRootId,archiveRootId:c.archiveRootId,deleteSource:false,assets:[a]};
  const texts={requestOne:JSON.stringify(j)},metas={},props={},state={copies:0,writes:[],released:0};
@@ -25,7 +25,7 @@ function makeHarness(mode) {
  if(mode==='budget')props.MGS_ARCHIVE_RUNTIME_24H=JSON.stringify([[Date.now(),3600001]]);
  const list=opts=>{
    const parent=opts.q.match(/^'([^']+)' in parents/)[1];let rows=Object.values(metas).filter(m=>m.parents && m.parents.includes(parent));
-   for(const [key,val] of opts.q.matchAll(/key='([^']+)' and value='([^']+)'/g)){}
+
    const matches=[...opts.q.matchAll(/key='([^']+)' and value='([^']+)'/g)];
    for(const m of matches)rows=rows.filter(r=>r.properties && r.properties[m[1]]===m[2]);
    return {files:rows.map(r=>structuredClone(r))};
@@ -44,7 +44,7 @@ function makeHarness(mode) {
  };
  function persistUpdate(m,id,blob){return persist(m,id,blob);}
  vm.createContext(ctx);vm.runInContext(source,ctx);
- return {run:()=>ctx.mgsArchiveWorkerTick(c),state,texts,metas,j,c};
+ return {run:()=>ctx.mgsArchiveWorkerTick(c),state,texts,metas,j,c,context:ctx};
 }
 test('owner worker adopts the existing verified canary without a new copy',()=>{const h=makeHarness();const r=h.run();assert.deepEqual(Array.from(r.copied),[h.j.jobId]);assert.equal(h.state.copies,0);assert.equal(h.state.writes.length,1);const receipt=JSON.parse(h.texts[h.state.writes[0]]);assert.equal(receipt.status,'copied');assert.equal(receipt.assets[0].archiveId,'archiveCopy');assert.equal(h.state.released,1);});
 test('a real worker replay reuses its completed receipt',()=>{const h=makeHarness();h.run();h.run();assert.equal(h.state.copies,0);assert.equal(h.state.writes.length,1);});

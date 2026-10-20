@@ -44,6 +44,10 @@ ares_eligible = false
 
 O original e a cópia tratada compartilham a mesma linhagem. Se o gestor usar o original, a tratada também fica inelegível. Silêncio nunca libera o asset.
 
+## Exceção de arquivo 30 TB — integração em validação
+
+Por confirmação crítica de Rodolfo `1562104715271999589`, a estrutura abaixo continua sendo a entrada e o tratamento temporário. Uma cópia de arquivo verificada pode existir no `MGS-ARQUIVO` da conta `mgsdigitalcorp@gmail.com`, via worker proprietário e fila lateral descritos em `creative-operations-mgs/references/shared-drive-30tb-archive-queue.md`. Consultar a flag viva em `data/ares/creative-ops/30tb-archive/queue-config.json`: enquanto desabilitada, não redefinir destinos físicos do intake. Linhagem, nomes, status, reserva de gestor e `ares_eligible=false` são preservados; arquivo lateral não constitui um candidato novo. Não alterar IDs primários, mover/excluir fontes ou migrar acervo anterior nesta fase.
+
 ## Estrutura Drive canônica
 
 A raiz real deve ser validada por API antes do write. Estrutura atual:

@@ -177,6 +177,7 @@ class Drive:
             return fid
         boundary='mgs-'+uuid.uuid4().hex
         props={'mgsArchiveKey':key,'mgsArchiveType':kind,'sha256':hashlib.sha256(data).hexdigest()}
+        if kind=='request':props['mgsArchiveState']='queued'
         meta={'name':name,'parents':[parent],'mimeType':mime,'properties':props}
         body=(('--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n').encode()+canonical(meta)+('\r\n--'+boundary+'\r\nContent-Type: '+mime+'\r\n\r\n').encode()+data+('\r\n--'+boundary+'--\r\n').encode())
         url='https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true&fields=id'
@@ -293,6 +294,15 @@ def reconcile(d,c,job_id,apply=False):
         ack={'schema':'mgs.archive.ack.v1','jobId':job_id,'kind':job['kind'],'status':'verified','deleteSource':False,'assets':verified}
         # Stable ack bytes make retries replay-safe despite later local verification times.
         d.upload_once(c['requests_folder_id'],'ack-'+job_id+'.json',canonical(ack),'application/json','ack:'+job_id,'ack')
+        request_file=d.one(c['requests_folder_id'],'request:'+job_id)
+        if not request_file:raise ArchiveError('REQUEST_MISSING_AFTER_VERIFY')
+        request_meta=d.meta(request_file['id'])
+        if request_meta.get('lastModifyingUser',{}).get('emailAddress')!=CANONICAL_SA:raise ArchiveError('REQUEST_PUBLISHER_CHANGED')
+        properties=dict(request_meta.get('properties') or {})
+        if properties.get('mgsArchiveState')!='verified':
+            properties['mgsArchiveState']='verified'
+            d.api('PATCH','files/'+request_file['id'],{'supportsAllDrives':'true','fields':'id,properties'},{'properties':properties})
+            if d.meta(request_file['id']).get('properties',{}).get('mgsArchiveState')!='verified':raise ArchiveError('ACK_STATE_READBACK')
     return result
 
 def main():

@@ -93,7 +93,7 @@ function mgsArchiveEnsurePath(c,names) {
     if(page.nextPageToken || (page.files || []).length>1)throw new Error('DUPLICATE_ARCHIVE_FOLDER');
     var id;
     if((page.files || []).length)id=page.files[0].id;
-    else id=Drive.Files.create({name:name,mimeType:'application/vnd.google-apps.folder',parents:[parent]},{fields:'id'}).id;
+    else id=Drive.Files.create({name:name,mimeType:'application/vnd.google-apps.folder',parents:[parent]}).id;
     var m=mgsArchiveMeta(id);
     if(m.trashed || m.driveId || !m.parents || m.parents[0]!==parent || !(m.owners || []).some(function(o){return o.emailAddress===c.account;}))throw new Error('ARCHIVE_FOLDER_OWNER');
     parent=id;
@@ -154,7 +154,7 @@ function mgsArchiveCanaryAck(c) {
 function mgsArchiveWorkerTick(input) {
   var c=mgsArchiveValidateConfig(input),lock=LockService.getScriptLock();
   if(!lock.tryLock(1000))return {status:'busy',deleteSource:false};
-  var start=Date.now(),props=PropertiesService.getScriptProperties(),ledger=[];
+  var start=Date.now(),props=PropertiesService.getScriptProperties(),ledger=[],budgetReady=false;
   try {
     var about=Drive.About.get({fields:'user(emailAddress)'});
     if(!about.user || about.user.emailAddress!==c.account)throw new Error('EXECUTION_ACCOUNT');
@@ -163,12 +163,14 @@ function mgsArchiveWorkerTick(input) {
        requests.driveId!==c.sourceDriveId || !requests.parents || requests.parents[0]!==c.controlFolderId ||
        receipts.driveId!==c.sourceDriveId || !receipts.parents || receipts.parents[0]!==c.controlFolderId ||
        root.driveId || root.trashed || !(root.owners || []).some(function(o){return o.emailAddress===c.account;}))throw new Error('QUEUE_OR_ARCHIVE_ROOT');
-    ledger=JSON.parse(props.getProperty('MGS_ARCHIVE_RUNTIME_24H') || '[]').filter(function(p){return p[0]>start-86400000;});
+    var priorLedger=JSON.parse(props.getProperty('MGS_ARCHIVE_RUNTIME_24H') || '[]');
+    if(!Array.isArray(priorLedger) || priorLedger.some(function(p){return !Array.isArray(p) || p.length!==2 || !isFinite(p[0]) || !isFinite(p[1]) || p[1]<0;}))throw new Error('RUNTIME_BUDGET_CORRUPT');
+    ledger=priorLedger.filter(function(p){return p[0]>start-86400000;});budgetReady=true;
     if(ledger.length>=350 || ledger.reduce(function(n,p){return n+p[1];},0)>=3600000)return {status:'runtime_budget_paused',deleteSource:false};
     var summary={status:'ok',copied:[],blocked:[],canaryAcknowledged:mgsArchiveCanaryAck(c),deleteSource:false};
     var rows=mgsArchiveList(c.requestsFolderId,null,'request','queued');
     for(var i=0;i<rows.length && summary.copied.length+summary.blocked.length<2 && Date.now()-start<210000;i++) {
-      var row=rows[i],j;
+      var row=rows[i],j=null,prior=null;
       try {
         var meta=mgsArchiveMeta(row.id);
         mgsArchiveRequirePublisher(meta,'mgsagent@mgs-core-prod.iam.gserviceaccount.com');
@@ -177,7 +179,7 @@ function mgsArchiveWorkerTick(input) {
         if(mgsArchiveHash(text)!==meta.properties.sha256)throw new Error('REQUEST_HASH');
         j=mgsArchiveValidateJob(JSON.parse(text),c);
         if(meta.properties.mgsArchiveKey!=='request:'+j.jobId)throw new Error('REQUEST_KEY');
-        var existing=mgsArchiveOne(c.receiptsFolderId,'receipt:'+j.jobId),prior;
+        var existing=mgsArchiveOne(c.receiptsFolderId,'receipt:'+j.jobId);
         if(existing) {
           mgsArchiveRequirePublisher(mgsArchiveMeta(existing.id),c.account);prior=JSON.parse(mgsArchiveText(existing.id));
           if(prior.status==='copied')continue;
@@ -199,10 +201,13 @@ function mgsArchiveWorkerTick(input) {
     }
     console.log(JSON.stringify(summary));return summary;
   } finally {
-    ledger.push([start,Math.max(1,Date.now()-start)]);
-    var compact=JSON.stringify(ledger.slice(-350));
-    if(compact.length<8500)props.setProperty('MGS_ARCHIVE_RUNTIME_24H',compact);
-    lock.releaseLock();
+    try {
+      if(budgetReady) {
+        ledger.push([start,Math.max(1,Date.now()-start)]);
+        var compact=JSON.stringify(ledger.slice(-350));
+        if(compact.length<8500)props.setProperty('MGS_ARCHIVE_RUNTIME_24H',compact);
+      }
+    } finally {lock.releaseLock();}
   }
 }
 if(typeof module!=='undefined')module.exports={mgsArchiveValidateConfig:mgsArchiveValidateConfig,mgsArchiveValidateJob:mgsArchiveValidateJob,mgsArchiveValidateSource:mgsArchiveValidateSource,mgsArchiveRequirePublisher:mgsArchiveRequirePublisher};
