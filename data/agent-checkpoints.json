@@ -4403,12 +4403,12 @@
     {
       "agent": "zeus",
       "id": "ares-sb-scope-audit-1562108149710856284",
-      "next_step": "Zeus aguarda confirmação crítica para expurgo localizado e atualização da política; nenhuma alteração de credencial, permissão, app, campanha ou serviço foi aplicada. Reconciliar consumidores e novo inventário antes de qualquer mudança de privilégio.",
-      "objective": "Auditar o escopo documental e o alcance técnico do Ares contra o catálogo corporativo Smart Bidding.",
-      "source": "/root/.hermes/profiles/zeus/reports/ares-scope-audit-1562108149710856284.json",
-      "state": "audit_completed_pending_critical_confirmation",
+      "next_step": "Zeus monitora consistência dos cadastros positivos e helpers. Sem pendência de autorização neste cutover local. Revogação Meta, sandbox do host, Git histórico e serviços externos não foram alterados nem fazem parte desta execução.",
+      "objective": "Aplicar escopo operacional Ares Digital Trust + catálogo corporativo SB, com expurgo localizado e preservação integral do app e permissões.",
+      "source": "/root/.hermes/profiles/zeus/reports/ares-scope-cutover-1562127427151339701/apply-result.json",
+      "state": "completed_local_scope_and_purge_validated",
       "thread_id": "1562104297926295623",
-      "updated_at": "2026-10-20T14:52:55+00:00"
+      "updated_at": "2026-10-20T15:55:07+00:00"
     },
     {
       "agent": "ares",
@@ -6832,5 +6832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T15:44:17+00:00"
+  "updated_at": "2026-10-20T15:55:07+00:00"
 }

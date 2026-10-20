@@ -44,6 +44,14 @@ Use quando um agente de equipe pode acessar uma conta ou inventário que também
 6. **Releia alvos mutáveis antes de fechar o escopo.** Conte arquivos únicos e linhas de banco em código a partir do manifesto salvo. Em um agente ativo, novos backups e mensagens podem surgir durante a auditoria; registre o instante observado e não prometa contagens estáveis nem expurgo definitivo. Antes de qualquer limpeza aprovada, recalcule o conjunto de alvos e reconcilie writers e consumidores pelo gate de concorrência aplicável; não pare um agente nem amplie a exclusão implicitamente.
 7. **Separe auditoria de remediação.** Preserve achados privados na superfície Zeus sem criar uma nova denylist compartilhada; registre somente ponteiros e metadados não sensíveis na continuidade compartilhada. Mantenha o pedido de auditoria read-only e obtenha a confirmação crítica exigida para exclusão ou mudança de política, permissão ou credencial. Apresente separadamente o expurgo documental, a preservação das dependências funcionais e qualquer corte técnico de acesso. Não revogue um app nem apague sua evidência de ownership como substituto para remover contas fora de escopo.
 
+## Cutover confirmado com exceção técnica de app
+
+- Reclassificar os achados após a confirmação refinada do executivo: se somente o ownership do app continua autorizado, preservar essas referências e expurgar identificadores de contas/domínios operacionais excluídos. Não tratar todas as ocorrências do nome do portfólio como material proibido nem revogar permissões para limpar documentação.
+- Aplicar o recorte positivo por agente quando a nova regra for mais restritiva para apenas um consumidor; manter o cadastro e o comportamento dos demais agentes intactos. Testar exatidão de host, alias www, negação de subdomínio implícito e cobertura afirmativa de cada fonte específica.
+- Exigir guard antes do HTTP no helper canônico, incluindo filhos de batch e GET/POST dirigidos a contas, e provar negação com transport mock que não foi chamado. Resolver o contexto do chamador por profile/caminho/cgroup verificados, sem presumir variáveis de ambiente no gateway; não bloquear auditoria administrativa do Zeus.
+- Redigir apenas os tokens proibidos dos históricos autorizados, preservando IDs, pares de ferramentas, conteúdo alheio e referências técnicas permitidas. Fazer backup SQLite consistente antes, validar quick_check e busca FTS depois; não realizar wipe forense ou reescrever Git como efeito implícito.
+- Distinguir escopo local e helper validados de revogação Meta, sandbox do host e atualização de toda sessão antiga. Validar uma sessão nova com prompt resolvido e zero ferramentas; não reiniciar nem resetar writers em andamento para alegar isolamento universal.
+
 ## Pitfalls
 
 - **Não use inventário do provedor nem lista operacional, protegida ou parceira como allowlist — acesso, manutenção ou monetização transformam envolvimento técnico em falsa propriedade corporativa.**

@@ -1642,6 +1642,24 @@
       "updated_at": "2026-08-28T13:52:02+00:00"
     },
     {
+      "canonical_key": "permissions.ares.operational.asset_scope",
+      "canonical_source": "context/ares-asset-scope.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-20T15:55:07+00:00",
+      "id": "ARES-DIGITAL-TRUST-SB-SCOPE-20261020",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares: contas Digital Trust e hosts corporativos SB; exceção somente do app técnico",
+      "updated_at": "2026-10-20T15:55:07+00:00"
+    },
+    {
       "canonical_key": "ares.strategy-family.direct-traffic-car",
       "canonical_source": "data/ares/meta-ads/strategy-families/direct-traffic-car.json",
       "consumers": [
@@ -13235,5 +13253,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T14:47:07+00:00"
+  "updated_at": "2026-10-20T15:55:07+00:00"
 }
