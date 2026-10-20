@@ -56,6 +56,10 @@ Retain exact billing types:
 
 For a normal successful charge, `extra_data.type=payment_amount` and numeric `extra_data.new_value` is the minor-unit charge. Preserve `transaction_id` only in protected reconciliation state; do not print or post it.
 
+- Keep `category=BUDGET` explicit even when requesting all event types: an unfiltered activities request can paginate hundreds of delivery/edit events while omitting a billing charge returned by the BUDGET query for the same account and dates. Absence from the unfiltered edge is not negative billing evidence.
+- For an issuer charge without a named Business, discover all Businesses visible to the approved broad credential and union their paginated owned/client inventories with `/me/adaccounts`. A card-funded account in a different Business can be absent from `/me/adaccounts` and from the previously audited primary BM.
+- Distinguish an exact amount/date/account charge match from issuer reconciliation. If the activity exposes no charged-card suffix, report the current default separately and do not assert it was the card used for that event. Same-value charges in another account, even one currently on Mastercard, cannot be excluded solely from its current default.
+
 Official activity model: <https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-activity/>
 
 ### Business invoices

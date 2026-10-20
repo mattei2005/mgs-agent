@@ -552,6 +552,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-C42-C43-20261021",
+      "next_step": "Executar ativacao no horario, exigir GET de cada campanha e hierarquia, persistir readback no mesmo request. Causa da falta de entrega permanece pendente de diagnostico de serving/Ads Manager se continuar sem entrega; nao declarar corrigida sem evidencia.",
+      "objective": "Diagnosticar falta de entrega C42/C43, pausar ambas e agendar 21/10 00h SP; C43 USD30",
+      "source": "data/ares/meta-ads/audit/controlled-write/Creditoparaveiculo-BR-CAR-BR/cpv13-c42-c43-fix-activate-20261021-rodolfo/request.json",
+      "state": "paused confirmado em ambas; c42 usd30 preservado, c43 usd25 para usd30 confirmado. 1 conjunto/3 ads por campanha ja active; 12 videos ready; sem issues/review/recommendations retornados; insights maximum e 19/20 sem linhas. causa de zero entrega nao identificada na api. one-shot 3b091340c964 enabled/no_agent, origem exata conferida, espera ate 21/10 00h sp; 8 safety tests e live dry-run pass; nenhuma mudanca d1/naming/filhos.",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-20T14:20:42+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-C45M-2X-20261008-0900",
       "next_step": "Concluído; acompanhar D1 canônico, sem cron novo, replay ou handoff.",
       "objective": "Duplicar C45M para C46M/C47M: conclusão recuperada nos mesmos IDs",
@@ -6762,5 +6772,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T14:11:33+00:00"
+  "updated_at": "2026-10-20T14:20:42+00:00"
 }

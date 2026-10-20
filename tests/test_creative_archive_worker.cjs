@@ -1,0 +1,24 @@
+'use strict';
+// Offline fixtures only; no Google requests are made by this test file.
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const file=path.join(__dirname,'../integrations/creative-archive-30tb/Worker.js');let api;
+const cfg=()=>({account:'mgsdigitalcorp@gmail.com',sourceDriveId:'0AEwt4Ye690ocUk9PVA',sourceRootId:'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa',archiveRootId:'1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J',controlFolderId:'controlFolder123',requestsFolderId:'requestsFolder123',receiptsFolderId:'receiptsFolder123',deleteSource:false});
+const asset=()=>({role:'clean',sourceId:'1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N',sourceParentId:'1iGO8km_WVwbIppLotf1h1kZ7W0UKUxz1',name:'unit.mp4',mimeType:'video/mp4',size:'5375929',md5:'59065739912275ee5995bfee8d5ca9c7',sha256:'11e123e5b495e5ed1a2ae5099b1cef94b6255a4c5f8302859b01a8b291793027',version:'12',relativeParent:[]});
+const job=()=>({schema:'mgs.archive.request.v1',jobId:'a'.repeat(32),kind:'canary',lineageId:'PILOT-ONLY',account:cfg().account,sourceDriveId:cfg().sourceDriveId,sourceRootId:cfg().sourceRootId,archiveRootId:cfg().archiveRootId,deleteSource:false,assets:[asset()]});
+const meta=()=>({id:asset().sourceId,name:asset().name,mimeType:asset().mimeType,parents:[asset().sourceParentId],driveId:cfg().sourceDriveId,size:asset().size,md5Checksum:asset().md5,version:'12',trashed:false,capabilities:{canCopy:true}});
+test('worker exists',()=>{assert.ok(fs.existsSync(file),'owner queue worker missing');api=require(file);});
+test('accepts exact bounded config',()=>assert.equal(api.mgsArchiveValidateConfig(cfg()).deleteSource,false));
+test('rejects deletion flag',()=>assert.throws(()=>api.mgsArchiveValidateConfig({...cfg(),deleteSource:true}),/CONFIG/));
+test('rejects other archive root',()=>assert.throws(()=>api.mgsArchiveValidateConfig({...cfg(),archiveRootId:'otherArchiveId'}),/CONFIG/));
+test('accepts one-file canary envelope',()=>assert.equal(api.mgsArchiveValidateJob(job(),cfg()).kind,'canary'));
+test('rejects arbitrary canary source',()=>{const j=job();j.assets[0].sourceId='otherSourceId';assert.throws(()=>api.mgsArchiveValidateJob(j,cfg()),/CANARY/);});
+test('rejects arbitrary canary path',()=>{const j=job();j.assets[0].relativeParent=['other'];assert.throws(()=>api.mgsArchiveValidateJob(j,cfg()),/CANARY/);});
+test('rejects path traversal',()=>{const j=job();j.assets[0].relativeParent=['..'];assert.throws(()=>api.mgsArchiveValidateJob(j,cfg()),/PATH/);});
+test('requires original-clean pair for lineage',()=>assert.throws(()=>api.mgsArchiveValidateJob({...job(),kind:'lineage'},cfg()),/PAIR/));
+test('validates unchanged source',()=>assert.equal(api.mgsArchiveValidateSource(meta(),asset(),cfg()),true));
+test('rejects changed source version',()=>assert.throws(()=>api.mgsArchiveValidateSource({...meta(),version:'13'},asset(),cfg()),/SOURCE/));
+test('rejects moved source',()=>assert.throws(()=>api.mgsArchiveValidateSource({...meta(),parents:['other']},asset(),cfg()),/SOURCE/));
+test('rejects wrong request publisher',()=>assert.throws(()=>api.mgsArchiveRequirePublisher({lastModifyingUser:{emailAddress:'other@example.com'}},'mgsagent@mgs-core-prod.iam.gserviceaccount.com'),/PUBLISHER/));
+test('rejects omitted request publisher',()=>assert.throws(()=>api.mgsArchiveRequirePublisher({},'mgsagent@mgs-core-prod.iam.gserviceaccount.com'),/PUBLISHER/));
+test('preserves canonical publisher',()=>assert.equal(api.mgsArchiveRequirePublisher({lastModifyingUser:{emailAddress:'mgsagent@mgs-core-prod.iam.gserviceaccount.com'}},'mgsagent@mgs-core-prod.iam.gserviceaccount.com'),true));
+test('worker contains no source deletion or scheduler primitive',()=>assert.doesNotMatch(fs.readFileSync(file,'utf8'),/\.Files\.(remove|delete)\s*\(|setTrashed|newTrigger|eval\(/));

@@ -3270,6 +3270,33 @@
         "42": 3000,
         "43": 2500
       }
+    },
+    "cpv13-c42-c43-fix-activate-20261021-rodolfo": {
+      "request_id": "cpv13-c42-c43-fix-activate-20261021-rodolfo",
+      "campaign_numbers": [
+        "42",
+        "43"
+      ],
+      "campaign_ids": [
+        "120251081581790632",
+        "120251081581810632"
+      ],
+      "scheduled_for": "2026-10-21T00:00:00-03:00",
+      "state": "SCHEDULED",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-c42-c43-fix-activate-20261021-rodolfo.json",
+      "script": "/root/.hermes/profiles/ares/scripts/cpv13-c42-c43-activate-20261021.py",
+      "cron_job_id": "3b091340c964",
+      "no_agent": true,
+      "post_write_readback": true,
+      "operational_d1_reset": false,
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "budget_minor": {
+        "42": 3000,
+        "43": 3000
+      },
+      "budget_write_at_activation": false,
+      "children_unchanged_already_active": true
     }
   },
   "creative_drive_organization": {
