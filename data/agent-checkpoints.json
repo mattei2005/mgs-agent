@@ -4352,6 +4352,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1562023429690097665",
+      "next_step": "Administrador disponibilizar Page fonte ao System User corporativo com ADVERTISE/ANALYZE; confirmar GET e retomar mesmo request-ready pelo dry-run/Engine v3. Não alterar permissões sem autorização específica nem recriar request.",
+      "objective": "Clonar C01 Vizioid G006 em 4 grupos explícitos; USD20/dia cada, COCAP USD0.90; 20/10/2026 05:30 EDT.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562023429690097665/preflight-page-blocker.json",
+      "state": "acesso externo pendente: 10 vídeos pre-stageados; 0 campanhas criadas. page 1215401431666913 da c01 não atribuída ao bisu 122095869861482193 (assigned_pages paginado completo; scopes granted; get page code10). reservas históricas reconciliadas com 10 gets e backup.",
+      "thread_id": "1558134653242703935",
+      "updated_at": "2026-10-20T08:47:38+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-all36-approved-compact-20261019T233015",
       "next_step": "Sem pendencias. Proximos relatorios SHEIN usam compact_identity_standard automaticamente;BUsobrebudgetvigenteneverinicial,reconciliar antesfinalrender. Consultar completion/latest-deliveries;nao reenviar nem excluir outros historicos sempedido.",
       "objective": "Promover formato compacto aprovado e substituir36ultimosrelatorios G001-G006;corrigir BU com budget vigente e explicar na legenda",
@@ -6091,6 +6101,16 @@
       "updated_at": "2026-10-17T14:48:08+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1562024416823607398",
+      "next_step": "Obter decisão de prioridade/transferência das reservas não terminais; reconciliar histórico sob lock, retomar prepare-media e campaign no mesmo request. Preservar E2E e revisão tardia se exigida.",
+      "objective": "Clonar campanha 001 Escalatepower G006 em 3 campanhas, grupos 3/3/2, USD20/dia por campanha, COCAP USD0.90, 20/10/2026 05:30 America/New_York",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562024416823607398/request.json",
+      "state": "profile reconciliado contra meta. nenhuma campanha nova. preparação retida: cinco vídeos ainda reservados pelo pedido vizioid não terminal shein-1562023429690097665; três reservas de pedido antigo terminal também preservadas. sem sobrescrever reservas.",
+      "thread_id": "1558134405313200150",
+      "updated_at": "2026-10-20T08:51:48+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -6662,5 +6682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T03:55:25+00:00"
+  "updated_at": "2026-10-20T08:51:48+00:00"
 }
