@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-19T17:02:05.053472-04:00",
+    "updated_at": "2026-10-19T19:58:00.604742-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -45107,6 +45107,58 @@
           "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/smartbidding-product-analysis.md",
           "sha256": "b80ba742f9c8317ea9e692d329c46f4a4c4783e8063079e60ba6c151b19f646b",
           "size_bytes": 52161
+        }
+      ]
+    },
+    {
+      "id": "ares-yolo-g002-auto-gasto-width-20261019",
+      "agent": "ares",
+      "type": "account-scoped-report-width",
+      "updated_at": "2026-10-19T19:58:00.604742-04:00",
+      "status": "tested_and_real_report_validated",
+      "account_id": "7840111366055613",
+      "source_thread_id": "1558146725376557126",
+      "authorized_by": "Geizian Pereira",
+      "request_text": "ah entendi, entao pode amplitar e adaptar, quando o numero tiver maior e tiver mais caractere",
+      "scope": "Gasto width only, one account; other values/columns unchanged",
+      "tests_passed": 107,
+      "real_campaigns": 87,
+      "real_history_cells": 609,
+      "report_parts": 15,
+      "financial_snapshot_preserved": "2026-10-19T18:53:37.110971-04:00",
+      "width_expansion": {
+        "Gasto": {
+          "from": 5,
+          "to": 6
+        }
+      },
+      "meta_writes": 0,
+      "schedule_changes": 0,
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+          "sha256": "87468381bc5c5f3f3340b6795001df5351483defe07ef5cce58f4c15cf08a03f",
+          "size_bytes": 174730
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-report-layout.py",
+          "sha256": "7ad248ad3e44ad982ebef17f952140c4b3565e51e86a557ec6d66cea1dc84832",
+          "size_bytes": 48919
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/tests/test_shein_report_adaptive_gasto.py",
+          "sha256": "827063420aa161e5ba14d2647f3e46d10578331c864618b0042da042d279ad8b",
+          "size_bytes": 4941
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/SKILL.md",
+          "sha256": "0261d156c7d2532bb068953e622d05c4a3324ba749fd8dd0826357d19a4c9fc5",
+          "size_bytes": 67602
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
+          "sha256": "33acb7c922be4906167c64cbb2956d7e8801d186f6ff2b9714dd38d926eaa7c6",
+          "size_bytes": 52514
         }
       ]
     }
