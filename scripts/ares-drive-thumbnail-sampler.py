@@ -76,6 +76,9 @@ def access_token(sa: dict[str, Any]) -> str:
 
 
 def drive_get(token: str, file_id: str) -> dict[str, Any]:
+    import ares_archive_storage as storage
+    projected=storage.resolve_media(file_id,token)
+    if projected is not None:return projected
     params = {"fields": "id,name,mimeType,thumbnailLink,hasThumbnail,webContentLink", "supportsAllDrives": "true"}
     req = urllib.request.Request(
         f"https://www.googleapis.com/drive/v3/files/{file_id}?" + urllib.parse.urlencode(params),
@@ -94,7 +97,7 @@ def download_thumb(token: str, meta: dict[str, Any], out_path: Path) -> bool:
     else:
         # Fallback downloads the real file; only used for small images.
         req = urllib.request.Request(
-            f"https://www.googleapis.com/drive/v3/files/{meta['id']}?alt=media&supportsAllDrives=true",
+            f"https://www.googleapis.com/drive/v3/files/{meta.get('provider_id',meta['id'])}?alt=media&supportsAllDrives=true",
             headers={"Authorization": "Bearer " + token, "User-Agent": "mgs-ares"},
         )
     try:

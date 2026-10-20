@@ -39,4 +39,10 @@ class StorageTests(unittest.TestCase):
  def test_reverification_preserves_alias_outside_immutable_ack_assets(self):
   b=self.m.b;index={'mappings':{self.entry['sourceId']:dict(self.entry)},'verified_jobs':{}};entry={k:v for k,v in self.entry.items() if k!='stockShortcutId'};job={'kind':'lineage','jobId':'job'};result={'status':'verified','jobId':'job','deleteSource':False,'assets':[entry]}
   b.record_verified_job(index,job,result);self.assertEqual(index['mappings'][entry['sourceId']]['stockShortcutId'],'shortcutOffline001');self.assertNotIn('stockShortcutId',result['assets'][0])
+ def test_new_lineage_cannot_reach_campaign_before_archive_ack_and_alias(self):
+  from unittest.mock import patch
+  row={'asset_id':'assetOffline001','asset_drive_id':'logicalOffline001','first_seen_at':'2026-10-20T21:00:00Z'};cfg={'queue_enabled':True,'effective_after':'2026-10-20T14:23:41Z'}
+  with patch.object(self.m.b,'config_load',return_value=cfg),patch.object(self.m,'mapping',return_value=None):
+   with self.assertRaises(self.m.StorageError):self.m.require_lineage_available(row)
+  with patch.object(self.m.b,'config_load',return_value={**cfg,'queue_enabled':False}):self.assertTrue(self.m.require_lineage_available(row))
 if __name__=='__main__':unittest.main()

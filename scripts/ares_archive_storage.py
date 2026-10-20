@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import ares_archive_bridge as b
 SHORTCUT='application/vnd.google-apps.shortcut'
-class StorageError(RuntimeError):pass
+class StorageError(b.ArchiveError):pass
 
 def media_record(entry,physical,stock):
     if entry.get('verified') is not True or entry.get('owner')!=b.ACCOUNT:raise StorageError('ARCHIVE_MAPPING_NOT_VERIFIED')
@@ -44,6 +44,19 @@ def enabled():
     cfg=b.read_json(b.CONFIG,{})
     return cfg.get('prefer_archive_reads') is True
 
+def require_lineage_available(row):
+    cfg=b.config_load()
+    if not cfg.get('queue_enabled'):return True
+    try:is_new=b.timestamp(row['first_seen_at'])>=b.timestamp(cfg['effective_after'])
+    except (KeyError,b.ArchiveError):return True # Legacy unknown dates are never migrated implicitly.
+    if not is_new:return True
+    entry=mapping(row['asset_drive_id'])
+    if not entry or not entry.get('stockShortcutId'):raise StorageError('ARCHIVE_PENDING_BEFORE_CAMPAIGN')
+    intake=b.read_json(b.DATA/'intake-state.json',{'claims':{}})
+    for claim in intake.get('claims',{}).values():
+        if claim.get('status')!='complete' and any(s.get('source_id')==row.get('source_drive_id') for s in claim['batch']['sources']):raise StorageError('INTAKE_BATCH_NOT_RELEASED')
+    return True
+
 def drive(token=None,write=False):
     if token is None:return b.Drive(write)
     from mgs_google_workspace_auth import api_json
@@ -74,6 +87,7 @@ def project_stock(rows,token=None):
         logical=aliases.get(row['id'])
         if logical:
             record=resolve_media(logical,token)
+            if record is None:raise StorageError('CATALOGUE_READ_FLAG_CHANGED')
             extras={k:v for k,v in row.items() if k in ['kind','location','source_parent_id','status_parent_ids','ready_parent_id','testing_parent_id','tested_parent_id','winners_parent_id','rejected_parent_id']};out.append({**record,**extras})
         elif row['id'] in maps and maps[row['id']].get('stockShortcutId'):
             continue # Original retention bytes are not a second stock candidate.
@@ -84,7 +98,7 @@ def ensure_shortcuts(d,job_id):
     """After independent ACK only. Adds aliases, never removes retained sources."""
     index=b.read_json(b.DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}});job=index['verified_jobs'].get(job_id)
     if not job or job.get('kind')!='lineage' or job.get('validationOnly') is True:return []
-    frozen=b.read_json(b.DATA/'jobs'/('job-'+job_id+'.json'));made=[]
+    frozen=b.read_json(b.DATA/'jobs'/('job-'+job_id+'.json'));assert isinstance(frozen,dict);made=[]
     ack=d.one(b.config_load()['requests_folder_id'],'ack:'+job_id)
     if not ack:raise StorageError('ACK_REQUIRED_BEFORE_ALIAS')
     b.require_publisher(d.meta(ack['id']),b.CANONICAL_SA)
@@ -97,7 +111,8 @@ def ensure_shortcuts(d,job_id):
         else:
             payload={'name':source['name'],'mimeType':SHORTCUT,'parents':list(source['parents']),'shortcutDetails':{'targetId':entry['archiveId']},'properties':{'mgsArchiveType':'stock_shortcut','mgsArchiveKey':key,'mgsArchiveLogicalSource':entry['sourceId'],'mgsArchiveJob':job_id}}
             intent=Path(b.DATA/'jobs'/('shortcut-intent-'+entry['sourceId']+'.json'))
-            if intent.exists() and b.read_json(intent).get('status')=='creating':raise StorageError('AMBIGUOUS_ALIAS_NO_REPLAY')
+            pending=b.read_json(intent,{})
+            if pending.get('status')=='creating':raise StorageError('AMBIGUOUS_ALIAS_NO_REPLAY')
             b.atomic_json(intent,{'status':'creating','source_id':entry['sourceId'],'archive_id':entry['archiveId'],'parent':source['parents'][0],'at':b.now_iso()})
             try:sid=d.api('POST','files',{'supportsAllDrives':'true','fields':'id'},payload)['id']
             except Exception:
@@ -110,19 +125,33 @@ def ensure_shortcuts(d,job_id):
         b.atomic_json(b.DATA/'archive-index.json',index);b.atomic_json(b.DATA/'jobs'/('shortcut-intent-'+entry['sourceId']+'.json'),{'status':'verified','source_id':entry['sourceId'],'stock_shortcut_id':sid,'at':b.now_iso()});made.append(sid)
     return made
 
-def move_stock(record,target_parent_id,expected_parent_id,token=None):
-    if record.get('record_kind')!='mgs.logical.media.v1':return None
-    d=drive(token,True);entry=mapping(record['id']);assert entry
-    before=resolve_media(record['id'],token)
-    if not before or before['parents']!=[expected_parent_id]:raise StorageError('STOCK_PARENT_CAS')
+def _move_checked_entry(d,entry,target_parent_id,expected_parent_id,*,technical=False):
+    physical=meta(d,entry['archiveId']);stock=meta(d,entry['stockShortcutId']);before=media_record(entry,physical,stock)
+    if before['parents']!=[expected_parent_id]:raise StorageError('STOCK_PARENT_CAS')
     destination=meta(d,target_parent_id)
     if destination.get('driveId')!=b.SOURCE_DRIVE or destination.get('trashed') or destination.get('mimeType')!=b.FOLDER:raise StorageError('STOCK_DESTINATION_SCOPE')
     current_path=d.relative_parent(expected_parent_id,b.SOURCE_ROOT);new_path=d.relative_parent(target_parent_id,b.SOURCE_ROOT)
     if current_path[:-1]!=new_path[:-1] or new_path[-1] not in ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']:raise StorageError('STOCK_STATUS_SCOPE')
+    if technical and current_path[:2]!=['00_ARQUIVO_CONTROLE','TEST_INPUTS_INTAKE_AUTOMATION']:raise StorageError('TECHNICAL_STOCK_SCOPE')
     params={'supportsAllDrives':'true','addParents':target_parent_id,'removeParents':expected_parent_id,'fields':'id,parents,driveId'};d.api('PATCH','files/'+entry['stockShortcutId'],params,{})
-    after=resolve_media(record['id'],token)
-    if not after or after['parents']!=[target_parent_id] or after['md5Checksum']!=before['md5Checksum']:raise StorageError('STOCK_MOVE_READBACK')
+    after=media_record(entry,meta(d,entry['archiveId']),meta(d,entry['stockShortcutId']))
+    if after['parents']!=[target_parent_id] or after['md5Checksum']!=before['md5Checksum'] or after['provider_metadata']['parents']!=physical['parents']:raise StorageError('STOCK_MOVE_READBACK')
     return after
+
+def move_stock(record,target_parent_id,expected_parent_id,token=None):
+    if record.get('record_kind')!='mgs.logical.media.v1':return None
+    d=drive(token,True);entry=mapping(record['id']);assert entry
+    resolve_media(record['id'],token) # Recheck the immutable archive root/path proof.
+    return _move_checked_entry(d,entry,target_parent_id,expected_parent_id)
+
+def probe_stock_move(d,job_id,shortcut_id,source_id,target_parent_id,expected_parent_id):
+    index=b.read_json(b.DATA/'archive-index.json');job=index['verified_jobs'].get(job_id)
+    if not job or job.get('validationOnly') is not True or job.get('status')!='verified':raise StorageError('TECHNICAL_PROBE_SCOPE')
+    entry=next(a for a in job['assets'] if a['sourceId']==source_id);candidate={**entry,'stockShortcutId':shortcut_id}
+    stock=meta(d,shortcut_id);b.require_publisher(stock,b.CANONICAL_SA)
+    if stock.get('properties',{}).get('mgsArchiveType')!='archive_test_shortcut':raise StorageError('TECHNICAL_ALIAS_MARKER')
+    after=_move_checked_entry(d,candidate,target_parent_id,expected_parent_id,technical=True)
+    return {'validation_only':True,'production_record_emitted':False,'logical_id_preserved':after['id']==source_id,'actual_stock_id':shortcut_id,'actual_provider_id':after['provider_id'],'stock_parent_verified':after['parents']==[target_parent_id],'archive_parent_unchanged':True}
 
 def download_id(logical_id,token=None):
     record=resolve_media(logical_id,token)

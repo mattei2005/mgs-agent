@@ -433,7 +433,9 @@ def drive_runtime(*, write: bool = False):
 
 def download_drive(token: str, row: dict[str, Any], destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
-    url = f"https://www.googleapis.com/drive/v3/files/{row['id']}?" + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"})
+    import ares_archive_storage as storage
+    provider_id=storage.download_id(row['id'],token)
+    url = f"https://www.googleapis.com/drive/v3/files/{provider_id}?" + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"})
     request = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "User-Agent": "MGS-Ares-Eggbev-Create/1.0"})
     digest = hashlib.md5()
     size = 0
@@ -721,6 +723,12 @@ def verify_messenger_json_installation(state: dict[str, Any], assignments: list[
 
 
 def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
+    import sys as _sys
+    _scripts=str(Path(__file__).resolve().parent)
+    if _scripts not in _sys.path:_sys.path.insert(0,_scripts)
+    import ares_archive_storage as storage
+    projected=storage.resolve_media(file_id,token)
+    if projected is not None:return projected
     params = urllib.parse.urlencode({"fields": "id,name,size,md5Checksum,driveId,parents,trashed", "supportsAllDrives": "true"})
     request = urllib.request.Request(
         f"https://www.googleapis.com/drive/v3/files/{file_id}?{params}",
@@ -732,6 +740,12 @@ def drive_file_readback(token: str, file_id: str) -> dict[str, Any]:
 
 def move_to_testing(token: str, file_id: str, ready_id: str, testing_id: str, expected: dict[str, Any]) -> dict[str, Any]:
     before = drive_file_readback(token, file_id)
+    if before.get('record_kind')=='mgs.logical.media.v1':
+        import ares_archive_storage as storage
+        if before['parents']==[testing_id]:return before
+        moved=storage.move_stock(before,testing_id,ready_id,token)
+        assert moved is not None
+        return moved
     parents = set(str(value) for value in before.get("parents") or [])
     if testing_id not in parents:
         if ready_id not in parents:

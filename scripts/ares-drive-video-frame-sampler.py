@@ -162,7 +162,9 @@ def main() -> int:
         safe_id = hashlib.sha256(fid.encode()).hexdigest()[:16]
         ext = Path(row.get("original_filename", "video.mp4")).suffix or ".mp4"
         video_path = video_dir / f"{safe_id}{ext}"
-        media_url = "https://www.googleapis.com/drive/v3/files/" + fid + "?" + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"})
+        import ares_archive_storage as storage
+        provider_id=storage.download_id(fid,token)
+        media_url = "https://www.googleapis.com/drive/v3/files/" + provider_id + "?" + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"})
         data = drive.request(media_url, timeout=180)
         if not isinstance(data, (bytes, bytearray)):
             raise RuntimeError(f"download did not return bytes for {fid}")

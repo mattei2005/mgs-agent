@@ -190,6 +190,8 @@ class Drive:
         return parent
 
     def download(self, file_id: str, out_path: Path) -> None:
+        import ares_archive_storage as storage
+        file_id=storage.download_id(file_id,self.token)
         url = f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media&supportsAllDrives=true"
         req = urllib.request.Request(url, headers={"Authorization": "Bearer " + self.token, "User-Agent": "mgs-ares"})
         with urllib.request.urlopen(req, timeout=300) as r, out_path.open("wb") as f:

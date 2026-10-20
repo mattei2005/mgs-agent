@@ -70,6 +70,8 @@ def load_ready_assets(request, profile, base, common, token):
             raise ValueError('asset must be reserved by canonical Creative Ops for this exact request')
         if row.get('language') != profile['language'] or row.get('vertical') != 'SHEIN' or row.get('metadata_clean') is not True:
             raise ValueError('asset language, vertical or sanitized metadata mismatch')
+        import ares_archive_storage as storage
+        storage.require_lineage_available(row)
         if manager and (row.get('manager_media_folder_id') != manager['id'] or row.get('explicit_asset_request') is not True or row.get('reservation_authority') != request['authorized_by']):
             raise ValueError('manager media exact authorization missing')
         if not manager and (row.get('status') not in {'01_READY', 'READY'} or not str(row.get('asset_path', '')).endswith('/01_READY')):

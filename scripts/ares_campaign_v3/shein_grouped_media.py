@@ -134,6 +134,8 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         row=matches[0]
         if row.get('language')!=profile['language'] or row.get('vertical')!='SHEIN' or row.get('metadata_clean') is not True:
             raise ValueError('selected media language/sanitization mismatch')
+        import ares_archive_storage as storage
+        storage.require_lineage_available(row)
         if row.get('reservation_request_id') not in {None,request['request_id']}:
             raise ValueError('selected lineage reserved by another request')
         selected.append(row)

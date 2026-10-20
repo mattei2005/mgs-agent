@@ -145,6 +145,11 @@ def run_cycle(apply=False,reconcile_only=False):
             if not re.fullmatch(r'[a-f0-9]{32}',job.get('jobId','')) or path.name!='job-'+job['jobId']+'.json':raise bridge.ArchiveError('LOCAL_JOB_ID_MISMATCH')
             jobs.append(job)
         selected=choose_jobs(jobs,state);reconciliation=reconcile_jobs(d,c,selected,state,apply)
+        if apply:
+            import ares_archive_storage as storage
+            for jid in reconciliation['verified']+reconciliation['cached']:
+                try:storage.ensure_shortcuts(d,jid)
+                except bridge.ArchiveError as exc:reconciliation['blocked'].append({'job_id':jid,'reason':str(exc)[:200]})
         inv=bridge.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
         rows=[json.loads(line) for line in inv.read_text().splitlines() if line.strip()]
         producer_config=dict(c)

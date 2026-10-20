@@ -57,4 +57,7 @@ class IntakeTests(unittest.TestCase):
   self.assertTrue(self.a.validate_selftest_identity(config,raw,clean,'a'*64))
   with self.assertRaises(self.a.IntakeError):self.a.validate_selftest_identity(config,raw,{**clean,'parents':['OPERATIONAL']},'a'*64)
   with self.assertRaises(self.a.IntakeError):self.a.validate_selftest_identity(config,raw,clean,'b'*64)
+ def test_archive_completion_waits_for_every_verified_alias(self):
+  entry={'archive_source_ids':['rawOffline001','cleanOffline001']};index={'mappings':{'rawOffline001':{'verified':True,'stockShortcutId':'a'}}}
+  self.assertFalse(self.a.batch_archive_ready(entry,index));index['mappings']['cleanOffline001']={'verified':True,'stockShortcutId':'b'};self.assertTrue(self.a.batch_archive_ready(entry,index))
 if __name__=='__main__':unittest.main()

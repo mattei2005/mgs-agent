@@ -62,6 +62,25 @@ def complete(state,bid,owner,proofs):
         if not all(p.get(k) is True for k in ['source_parent_verified','clean_verified','inventory_verified','reservation_preserved']) or not all(re.fullmatch(r'[a-f0-9]{64}',p.get(k,'')) for k in ['raw_sha256','clean_sha256']):raise IntakeError('MISSING_VERIFICATION')
     entry.update(status='complete',proofs=proofs,completed_at=bridge.now_iso());state.setdefault('completed',{}).update({pid:bid for pid in expected});return entry
 
+def batch_archive_ready(entry,index):
+    return all(index.get('mappings',{}).get(sid,{}).get('verified') is True and bool(index['mappings'][sid].get('stockShortcutId')) for sid in entry.get('archive_source_ids',[]))
+
+def finish_with_archive(state,batch,owner):
+    entry=state['claims'][batch['batch_id']]
+    if entry['owner']!=owner:raise IntakeError('CLAIM_OWNER')
+    if entry.get('status')!='treated_waiting_archive':
+        proofs=verify_completed(bridge.Drive(),batch,entry['inventory_before'])
+        rows=[json.loads(l) for l in (bridge.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if l.strip()]
+        sources={p['source_id'] for p in proofs};new=[r for r in rows if r.get('source_drive_id') in sources and r['asset_id'] not in entry['inventory_before']]
+        entry.update(status='treated_waiting_archive',proofs=proofs,archive_source_ids=[r[k] for r in new for k in ['source_drive_id','asset_drive_id']],treated_at=bridge.now_iso())
+        bridge.atomic_json(STATE,state) # Persist complete treatment before publishing transport.
+    import ares_archive_automation as transport
+    cycle=transport.run_cycle(apply=True)
+    if cycle['reconciliation']['blocked'] or cycle['production']['blocked']:raise IntakeError('ARCHIVE_TRANSPORT_BLOCKED')
+    index=bridge.read_json(DATA/'archive-index.json',{'mappings':{}})
+    if not batch_archive_ready(entry,index):return {'status':'waiting_archive','batch_id':batch['batch_id'],'treated_verified':True,'source_count':len(batch['sources'])}
+    return complete(state,batch['batch_id'],owner,entry['proofs'])
+
 @contextlib.contextmanager
 def locked_state():
     with (DATA/'.intake-state.lock').open('a+') as lock:
@@ -123,7 +142,11 @@ def monitor(polls=3,interval=20):
         # Resume the same durable batch; never allocate a replacement on timeout.
         active=[x for x in state['claims'].values() if x['status']!='complete']
         if active:
-            entry=sorted(active,key=lambda x:x['claimed_at'])[0];return {'status':'resume','batch_id':entry['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+entry['batch']['batch_id']+'.json'))}
+            entry=sorted(active,key=lambda x:x['claimed_at'])[0];status='resume'
+            if entry.get('status')=='treated_waiting_archive':
+                ready=batch_archive_ready(entry,bridge.read_json(DATA/'archive-index.json',{'mappings':{}}));status='archive_ready' if ready else 'waiting_archive'
+                if not ready and (bridge.timestamp(bridge.now_iso())-bridge.timestamp(entry['treated_at'])).total_seconds()>2700:status='blocked'
+            return {'status':status,'batch_id':entry['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+entry['batch']['batch_id']+'.json'))}
         rows=[json.loads(x) for x in (bridge.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if x.strip()];excluded=inventory_source_ids(rows)|set(state['completed'])
         for index in range(polls):
             descriptors=[r for r in discover(d,manifest,scope['effective_after']) if r['source_id'] not in excluded]
@@ -187,8 +210,8 @@ def main():
                 else:
                     entry=state['claims'].get(args.batch_id)
                     if not entry or entry['owner']!=args.owner or not isinstance(entry.get('inventory_before'),dict):raise IntakeError('FROZEN_INVENTORY_BASELINE_REQUIRED')
-                    result=complete(state,args.batch_id,args.owner,verify_completed(bridge.Drive(),batch,entry['inventory_before']))
-        if args.action=='claim':result={k:v for k,v in result.items() if k!='inventory_before'}
+                    result=finish_with_archive(state,batch,args.owner)
+        if isinstance(result,dict) and 'inventory_before' in result:result={k:v for k,v in result.items() if k!='inventory_before'}
         print(json.dumps(result,ensure_ascii=False));return 0
     except Exception as exc:
         error={'status':'blocked','reason':str(exc)[:220],'at':bridge.now_iso(),'scope':'intake_only','delete_source':False};bridge.atomic_json(DATA/'intake-last-error.json',error);print(json.dumps({k:v for k,v in error.items() if k!='at'}));return 2

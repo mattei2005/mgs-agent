@@ -572,7 +572,9 @@ def drive_inventory(token: str) -> dict[str, Any]:
 
 def download_drive_file(token: str, file_row: dict[str, Any], destination: Path) -> dict[str, Any]:
     destination.parent.mkdir(parents=True, exist_ok=True)
-    url = f"https://www.googleapis.com/drive/v3/files/{file_row['id']}?" + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"})
+    import ares_archive_storage as storage
+    provider_id=storage.download_id(file_row['id'],token)
+    url = f"https://www.googleapis.com/drive/v3/files/{provider_id}?" + urllib.parse.urlencode({"alt": "media", "supportsAllDrives": "true"})
     request = urllib.request.Request(url, headers={"Authorization": "Bearer " + token, "User-Agent": "MGS-Ares-CPV-Daily-Create/1.0"})
     md5 = hashlib.md5()
     size = 0
