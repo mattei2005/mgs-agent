@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-20T16:11:58.952233+00:00",
+    "updated_at": "2026-10-20T16:19:13.071468+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -45312,8 +45312,8 @@
       "id": "ares-creative-30tb-copy-queue-integration-20261020",
       "agent": "zeus",
       "type": "copy-only-archive-queue-and-authorized-ares-skill-update",
-      "status": "oauth_recovered_publisher_fix_published_owner_repin_required",
-      "updated_at": "2026-10-20T16:11:58.952233+00:00",
+      "status": "owner_canary_binary_verified_ack_published_schedule_pending",
+      "updated_at": "2026-10-20T16:19:13.071468+00:00",
       "authority_message_id": "1562104715271999589",
       "thread_id": "1562078493498540042",
       "registry_id": "ARES-CREATIVE-30TB-QUEUE-INTEGRATION-20261020",
@@ -45361,8 +45361,8 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
-          "size_bytes": 25565,
-          "sha256": "d73f8cee6bdc8f50311f26859a7b6cead27a4151d6e51c7a0ccf1aa6144d8d17"
+          "size_bytes": 27843,
+          "sha256": "e7c25d608e5917bcd113ceaf7f4bf940e56e384b2546003e297205ff47acf5df"
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json",
@@ -45458,6 +45458,21 @@
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/publisher-recovery-prepared-1562132969509097503.json",
           "size_bytes": 2045,
           "sha256": "5c8617fdd902f6f13f6aa26e05de0ba1bf1456305ddb30657aa682ab2443cd25"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/canary-owner-receipt-sa-ack-verified-1562136821050245242.json",
+          "size_bytes": 1871,
+          "sha256": "ed449ddee6c4956780fc0d770f7eb2cbf8ef5f1e25698f2136a4fc5c73879f16"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/archive-index.json",
+          "size_bytes": 651,
+          "sha256": "4f897d2d87134e14b8dade56176d64d90544b9aab86548ef0e750ecad6c2f595"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/jobs/verified-526d7a2a007c1fed4b2a9147f92d62b4.json",
+          "size_bytes": 582,
+          "sha256": "d03031b828e150bc3edcfee5d7aca8c135f359225804e7bbbae0fc809dabc542"
         }
       ],
       "critical_live_skill_files": 5,
@@ -45466,7 +45481,7 @@
       "offline_python_tests": 24,
       "offline_js_tests": 76,
       "real_request_count": 1,
-      "real_receipt_count": 0,
+      "real_receipt_count": 1,
       "canary_job_id": "526d7a2a007c1fed4b2a9147f92d62b4",
       "source_drive_control_folder_id": "1d3w4Xc1EjrmueciM_vCMgva6qJiqpFJR",
       "requests_folder_id": "1yjIOwDLmhAaLNmDdt701WpoFNzNeDXGk",
@@ -45499,7 +45514,7 @@
       "primary_creative_inventory_writes": 0,
       "google_auth_selector_changes": 0,
       "new_google_acl_grants": 0,
-      "next_gate": "Owner manter manifesto e escopos; trocar apenas ID de codigo para 1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us e SHA esperado para 2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2 em Code.gs. Salvar e executar somente mgsArquivoTeste no mesmo canario 526d7a2a007c1fed4b2a9147f92d62b4. Aguardar receipt real, SA binarios/reconcile e ACK antes de mgsArquivoAtivar. OAuth write recuperado; publisher fix ainda nao executado pelo owner. Sem producao, exclusao ou acervo anterior.",
+      "next_gate": "Owner executar mgsArquivoAtivar UMA vez no projeto aprovado; teste interno deve ler ACK real 1SnET5XX2TU5UqFRbZ4t5eQCeiKz_80NN do mesmo canario e so entao criar um trigger de 5 minutos. Retornar resumo agendamento_ativo/exclusaoAtiva false. Zeus observar heartbeat novo com triggerUid e depois integrar reconciliacao SA/consumidores/intake sem ativar producao ou exclusao antes dos gates. Canary owner+receipt+SHA binarios+ACK ja validados.",
       "oauth_scope_recovery": {
         "source_message_id": "1562116310215958579",
         "scope_error": "drive.files.create",
@@ -45532,15 +45547,25 @@
         "no_acl_or_credential_changes": true,
         "heartbeat_id": "1bfYo56Nx3tShQCQsHez9IsQphawbesT_",
         "heartbeat_native_publisher_verified": true,
-        "last_heartbeat_worker_sha256": "7c31864eba74f25e0717c174490134f61ecd20d51c119177647393aae693fe81",
-        "owner_new_worker_execution_verified": false,
+        "last_heartbeat_worker_sha256": "2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2",
+        "owner_new_worker_execution_verified": true,
         "source_intact": true,
         "pilot_copies": 1,
         "request_id": "1A-VQGqLI8EHvoCUW_B0Hd-NrwI3eZJyJ",
         "request_unchanged_sha256": "752060520e1c419d38e11c790204f3db01db3a7bdc196ae42cd8e499eab3d496",
         "backup_dir": "/root/.hermes/profiles/zeus/artifacts/creative-archive-30tb/publisher-recovery-1562132969509097503",
-        "proof_path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/publisher-recovery-prepared-1562132969509097503.json"
-      }
+        "proof_path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/publisher-recovery-prepared-1562132969509097503.json",
+        "previous_heartbeat_worker_sha256": "7c31864eba74f25e0717c174490134f61ecd20d51c119177647393aae693fe81",
+        "recovered_at": "2026-10-20T16:19:13.071468+00:00"
+      },
+      "owner_worker_verified": true,
+      "owner_canary_binary_verified": true,
+      "canary_ack_published": true,
+      "canary_ack_id": "1SnET5XX2TU5UqFRbZ4t5eQCeiKz_80NN",
+      "canary_receipt_id": "1qvIe7n7cKepJP21tflmx8SoZW3mOKOZu",
+      "request_state": "verified",
+      "clock_trigger_observed": false,
+      "canary_runtime_proof": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/canary-owner-receipt-sa-ack-verified-1562136821050245242.json"
     },
     {
       "id": "zeus-ares-sb-scope-audit-1562108149710856284",

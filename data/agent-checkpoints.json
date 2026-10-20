@@ -112,6 +112,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CONFIDENTIALITY-REAUDIT-1562104297926295623",
+      "next_step": "Concluir varredura redigida, testes offline de cobertura e evidenciar lacunas sem alterar acessos",
+      "objective": "Reauditar arquivos e rotas do Ares para confidencialidade exclusiva Digital Trust e catalogo SB",
+      "source": "context/ares-asset-scope.md",
+      "state": "auditoria read-only em andamento; revisao documental, testes locais e separacao de fontes, sem consultar ativos externos",
+      "thread_id": "1562104297926295623",
+      "updated_at": "2026-10-20T16:23:21+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-40-CLONES-ACCOUNTS-05-13-20260905",
       "next_step": "Nenhum; este request não pode ser retomado nem reutilizado",
       "objective": "Pedido anterior de teste de performance de 40 campanhas, agora cancelado sem writes externos",
@@ -653,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Owner manter manifesto e escopos; trocar apenas ID de codigo para 1x22ZLuSZ3MiIgu_Rc23WtTiMVqTzJ4Us e SHA esperado para 2e62499de17325c3ddcfa55561e3ec343a3dd4657b8121461d31cbb5586787e2 em Code.gs. Salvar e executar somente mgsArquivoTeste no mesmo canario 526d7a2a007c1fed4b2a9147f92d62b4. Aguardar receipt real, SA binarios/reconcile e ACK antes de mgsArquivoAtivar. OAuth write recuperado; publisher fix ainda nao executado pelo owner. Sem producao, exclusao ou acervo anterior.",
+      "next_step": "Owner executar mgsArquivoAtivar UMA vez no projeto aprovado; teste interno deve ler ACK real 1SnET5XX2TU5UqFRbZ4t5eQCeiKz_80NN do mesmo canario e so entao criar um trigger de 5 minutos. Retornar resumo agendamento_ativo/exclusaoAtiva false. Zeus observar heartbeat novo com triggerUid e depois integrar reconciliacao SA/consumidores/intake sem ativar producao ou exclusao antes dos gates. Canary owner+receipt+SHA binarios+ACK ja validados.",
       "objective": "Integrar fila de arquivo 30 TB e skills Ares preservando acervo/campanhas; exclusao desativada durante validacao",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "oauth_recovered_publisher_fix_published_owner_repin_required",
+      "state": "owner_canary_binary_verified_ack_published_schedule_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T16:11:59+00:00"
+      "updated_at": "2026-10-20T16:19:13+00:00"
     },
     {
       "agent": "ares",
@@ -6832,5 +6842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T16:11:59+00:00"
+  "updated_at": "2026-10-20T16:23:21+00:00"
 }
