@@ -623,12 +623,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Rodolfo confirmar mudanca das skills creative-operations-mgs e creative-taxonomy-mgs do Ares para integrar arquivo 30 TB; AGENT Critical Subset item10. Escopo: futura fila criativa e resolucao de IDs/inventario, mantendo upload, SA, reservas, naming e campanhas/budgets/acervo anterior. Nenhuma exclusao durante integracao. Depois implementar/testar consumidores e confirmar politica destrutiva delimitada antes de ativar limpeza.",
-      "objective": "Implantar ponte Google isolada para arquivo criativo 30 TB sem PC pessoal e preparar politica limitada de limpeza autonoma",
+      "next_step": "Confirmacao critica de Rodolfo 1562104715271999589 permite atualizar Creative Operations/Taxonomia e fila. Implementar request imutavel via SA, worker Google owner, recibos e reconciliacao; testar antes de publicar regras ativas. Exclusao/campanhas/budgets/acervo anterior preservados.",
+      "objective": "Implantar ponte Google isolada para arquivo criativo 30 TB sem PC pessoal; integrar fila/skills Ares sem exclusao durante validacao",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "copy_replay_pilot_complete_ares_skill_critical_confirmation_required",
+      "state": "ares_skill_critical_change_confirmed_building_copy_only_queue",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T14:05:24+00:00"
+      "updated_at": "2026-10-20T14:11:33+00:00"
     },
     {
       "agent": "ares",
@@ -6762,5 +6762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T14:05:24+00:00"
+  "updated_at": "2026-10-20T14:11:33+00:00"
 }
