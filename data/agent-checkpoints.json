@@ -113,12 +113,12 @@
     {
       "agent": "ares",
       "id": "ARES-CONFIDENTIALITY-REAUDIT-1562104297926295623",
-      "next_step": "Confirmacao critica especifica de Rodolfo: Zeus alterar unidade Ares em /etc para identidade nao-root, workspace/fontes positivos e fronteira de credenciais sem acesso global; ativacao fora da sessao, sem revogar app/tokens/permissoes. Apos aprovacao validar filesystem/cofre/HTTP alternativo e relatorios genericos E2E antes do cutover.",
-      "objective": "Concluir confidencialidade Ares com consultas Digital Trust e hosts SB e isolamento efetivo das fontes",
-      "source": "reports/ares/confidentiality-fix-1562104297926295623/report.md",
-      "state": "correcao local aplicada: 64 testes e 18 subtestes ok; 10 provas offline ok; meta/bot/car http200 e sb http200/201. sigilo e2e ainda aberto: processo root, fontes compartilhadas e ferramentas/credenciais amplas continuam acessiveis.",
+      "next_step": "Tratar exclusivamente fontes documentais e rotas operacionais de consulta/relatorio no escopo aprovado; preservar app, tokens, permissoes, campanhas e servidor. Nao usar proposta de infraestrutura como pendencia deste pedido nem prometer isolamento absoluto.",
+      "objective": "Escopo operacional Ares: consultas, relatorios e fontes documentais somente Digital Trust e hosts SB; infraestrutura excluida por Rodolfo",
+      "source": "context/ares-asset-scope.md",
+      "state": "correcao expressa de rodolfo: pedido nao envolve servidor. proposta anterior de migracao nao-root/servico/cofre/restart supersedida e fora deste pedido; nao aguardar nem solicitar confirmacao de infraestrutura. correcoes locais de consulta e testes registrados preservados; nenhum servico alterado.",
       "thread_id": "1562104297926295623",
-      "updated_at": "2026-10-20T19:03:31+00:00"
+      "updated_at": "2026-10-20T19:33:46+00:00"
     },
     {
       "agent": "ares",
@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "User 1562173688026234910 confirmou repin. Novo worker 1efuPCdZ3NYs-2YFuaqothARe-YWDhLJt / b7ba49117656c2641299b96b02a1bd39e7c9d6d31a906efcf2be47231c1ce714 validado em relogios 18:43 e18:48 UTC, mesmo trigger; config promovida, SA apply reconcile-only OK. ACL fonte11 vs arquivo2; proposta nove contas existentes como writer congelada, nao aplicada. Obter decisao de Rodolfo sobre espelhamento de acesso sem publico. Depois concluir intake Ares e consumidores/estoque. Quatro flags false; exclusao exige confirmacao critica separada. Nao pedir novos passos Google para esta implantacao.",
+      "next_step": "Autorizacao 1562186592372920332 aplicada: nove writers exatos em MGS-ARQUIVO; alvo SHA 6e97f8dc77ce4df01a3871b1d75861a6dbf3883d3b8f50e93d46b7fcea985d8d, total11, owner/SA/origem preservados, sem publico/domain/email. Nove grants lidos individualmente e herdados nas tres copias atuais. SA apply reconcile-only revalidou dois jobs, status ok. Politica aprovada registrada, KCI-14f62a63a54bb648 historico supersedido. Nao pedir nova aprovacao desse compartilhamento. Faltam executor intake Ares e consumidores/estoque. Manter queue/prefer/historical/delete false ate gates; exclusao requer confirmacao critica separada.",
       "objective": "Concluir fluxo autonomo de criativos e arquivo 30 TB preservando campanhas/acervo/reservas; limpeza depende de confirmacao critica especifica",
       "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "hardened_worker_and_sa_verified_awaiting_archive_human_access_decision",
+      "state": "owner_sa_upload_context_and_archive_acl_verified_intake_consumers_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T18:51:59+00:00"
+      "updated_at": "2026-10-20T19:35:10+00:00"
     },
     {
       "agent": "ares",
@@ -6902,5 +6902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T19:19:59+00:00"
+  "updated_at": "2026-10-20T19:35:10+00:00"
 }
