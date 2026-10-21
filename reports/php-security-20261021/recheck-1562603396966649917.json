@@ -1,0 +1,86 @@
+{
+  "source_message_id": "1562603396966649917",
+  "checked_at": "2026-10-21T23:09:22.386488+00:00",
+  "result": "PHP, reboots and application checks validated; historical audit-plugin forwarding loss disclosed",
+  "totals": {
+    "apps": 110,
+    "http_checks": 220,
+    "php_executions": 109,
+    "regressions": 0
+  },
+  "hosts": [
+    {
+      "host": "MatteiInc01",
+      "kernel": "5.15.0-198-generic",
+      "php_versions": [
+        "8.3.36-1+ubuntu22.04+1"
+      ],
+      "reboot_pending": false,
+      "failed_units": [],
+      "config_unchanged": true,
+      "regressions": []
+    },
+    {
+      "host": "MatteiInc02",
+      "kernel": "5.15.0-198-generic",
+      "php_versions": [
+        "8.3.36-1+ubuntu22.04+1"
+      ],
+      "reboot_pending": false,
+      "failed_units": [],
+      "config_unchanged": true,
+      "regressions": []
+    },
+    {
+      "host": "MatteiInc03",
+      "kernel": "5.15.0-198-generic",
+      "php_versions": [
+        "8.3.36-1+ubuntu22.04+1"
+      ],
+      "reboot_pending": false,
+      "failed_units": [],
+      "config_unchanged": true,
+      "regressions": []
+    }
+  ],
+  "local": {
+    "php_cli": "php8.3-cli 8.3.6-0ubuntu0.24.04.13\nphp8.3-common 8.3.6-0ubuntu0.24.04.13\nphp8.3-opcache 8.3.6-0ubuntu0.24.04.13\nphp8.3-readline 8.3.6-0ubuntu0.24.04.13\n",
+    "reboot_pending": false,
+    "gateway_states": {
+      "zeus": "active",
+      "atena": "active",
+      "ares": "active"
+    }
+  },
+  "audit_plugin_samples": [
+    {
+      "sample": 0,
+      "time": 1792624304.9126236,
+      "plugin_queue_current": "0",
+      "plugin_queue_size": "1200",
+      "plugin_overflow_historical": "yes",
+      "plugin_queue_suspended": "no",
+      "plugins_active": "1",
+      "logging_suspended": "no",
+      "writing_to_logs": "yes",
+      "kernel_lost": "0",
+      "kernel_backlog": "0"
+    },
+    {
+      "sample": 1,
+      "time": 1792624320.942904,
+      "plugin_queue_current": "0",
+      "plugin_queue_size": "1200",
+      "plugin_overflow_historical": "yes",
+      "plugin_queue_suspended": "no",
+      "plugins_active": "1",
+      "logging_suspended": "no",
+      "writing_to_logs": "yes",
+      "kernel_lost": "0",
+      "kernel_backlog": "0"
+    }
+  ],
+  "audit_caveat": "Inc01 plugin queue of1200 previously filled and dropped forwarding events. Current queue0 in two samples, logging unsuspended, kernel lost0. Historical drops not recreated; burst trigger unproven. No daemon restart, audit rule or config change performed. auditctl --signal state unsupported on3.0.7; documented SIGCONT diagnostic dump used.",
+  "unchanged_prior_caveats": "Hardware initialization messages and public403/DNS limits remain as previously disclosed.",
+  "production_config_changes": false
+}
