@@ -1113,12 +1113,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
-      "next_step": "Validar clean visual, executar upload READY e move LEGACY com readbacks, auditar e acompanhar arquivo",
+      "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/kelly-1562496628559188109/manifest.json;prepare:proc_5d85924d69e1;plan:proc_782d4be5ca79",
-      "state": "30 fontes estaveis; 1080x1920; revisao visual concluida, sem duplicatas exatas. preparacao concluida; sanitizacao e plano em andamento",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/kelly-1562496628559188109/manifest.json",
+      "state": "tratamento solicitado concluido e auditado: 30 ready clean=true sha verificado, 30 originais legacy, inventario e reserva preservados, entrada recursiva zero. midia local removida apos verificacao. arquivo adicional automatico pendente por worker runtime_budget_paused; report-infra 1562501550708887563 confirmado por get",
       "thread_id": "1562496628559188109",
-      "updated_at": "2026-10-21T16:12:08+00:00"
+      "updated_at": "2026-10-21T16:24:17+00:00"
     },
     {
       "agent": "ares",
@@ -6942,5 +6942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T16:12:08+00:00"
+  "updated_at": "2026-10-21T16:24:17+00:00"
 }

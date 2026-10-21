@@ -16,6 +16,8 @@ Fluxo:
 
 Verificar acesso ao destino operacional antes do envio; um destino de alertas acessível não substitui a thread de trabalho autorizada.
 
+- No readback HTTP do REPORT-INFRA, reproduzir o `User-Agent` do transporte canônico (`MGS-Zeus/1.0`) junto da mesma identidade autorizada. Um GET `urllib` sem esse header pode retornar 403 mesmo quando o mesmo GET com o header funciona; confirmar com os headers do transporte antes de classificar como `Missing Access` ou pedir mudança de permissão. Validar o ID exato, `content` vazio, embed e ausência de mentions; nunca reenviar um POST apenas porque seu readback falhou.
+
 ### Limpeza autorizada e recuperação por falta de permissão
 
 1. Resolver o conjunto exato de canais pais e threads, a autorização de exclusão e o executor atual. Inventariar mensagens e autores, congelar os IDs autorizados e preservar evidência local antes de qualquer remoção; não duplicar a limpeza de um executor vivo.
