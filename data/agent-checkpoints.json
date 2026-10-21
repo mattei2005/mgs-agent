@@ -6823,12 +6823,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Capturar superficies e snapshots nativos; baseline ampla verde; candidato inativo com port completo, testes de preservacao, regressao/config/auth isolados. Sem launcher, restart, exclusao, credencial ou configprod. Estado /root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/preparation-state.json",
-      "objective": "Preparar Hermes main isolado, preservar integralmente MGS; producao e gateways inalterados",
+      "next_step": "Concluir regressao ampla candidato, guard/precheck em copias isoladas, reproducao byte-exact, preservacao105paths, config/auth metadata read-only e retention gate. Nenhum launcher/restart/configprod/deletion autorizado nesta fase. Candidate tests require fresh-process TLS/MCP; voice startup and memory span-patch native API ported. Frozen target3f2afed3eb813cb00bd381d29b084d0e01de048f; logs/checkpoints em/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation",
+      "objective": "Preparacao Hermes main isolada; sem mudancas em producao",
       "source": "discord:1562331354568589393/1562474468146942115",
-      "state": "isolated_preparation_started; vps completed_validated; authority1562474468146942115; target3f2afed3eb813cb00bd381d29b084d0e01de048f",
+      "state": "isolated_port_in_validation; snapshots4nativesqlpass; baseline3201passed25skipped; source105paths; consolidated108paths; 3realmergeconflictsresolved; candidate/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T14:37:45+00:00"
+      "updated_at": "2026-10-21T15:55:37+00:00"
     },
     {
       "agent": "zeus",
@@ -6932,5 +6932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T14:41:40+00:00"
+  "updated_at": "2026-10-21T15:55:37+00:00"
 }
