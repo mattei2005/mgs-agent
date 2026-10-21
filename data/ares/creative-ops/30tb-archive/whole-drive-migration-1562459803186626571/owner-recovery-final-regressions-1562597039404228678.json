@@ -1,0 +1,85 @@
+{
+  "tests": [
+    {
+      "suite": "test_whole_drive_acceptance_resume.py",
+      "exit_code": 0,
+      "runner_cases": 15,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_whole_drive_acceptance_resume-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_mgs_corporate_receipt_recovery.py",
+      "exit_code": 0,
+      "runner_cases": 11,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_mgs_corporate_receipt_recovery-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_mgs_corporate_archive.py",
+      "exit_code": 0,
+      "runner_cases": 12,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_mgs_corporate_archive-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_mgs_whole_drive_migration.py",
+      "exit_code": 0,
+      "runner_cases": 10,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_mgs_whole_drive_migration-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_ares_archive_backfill.py",
+      "exit_code": 0,
+      "runner_cases": 8,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_ares_archive_backfill-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_ares_archive_automation.py",
+      "exit_code": 0,
+      "runner_cases": 28,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_ares_archive_automation-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_corporate_receipt_recovery.cjs",
+      "exit_code": 0,
+      "runner_cases": 17,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_corporate_receipt_recovery-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_corporate_archive_setup.cjs",
+      "exit_code": 0,
+      "runner_cases": 30,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_corporate_archive_setup-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_archive_runtime_recovery.cjs",
+      "exit_code": 0,
+      "runner_cases": 17,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_archive_runtime_recovery-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_whole_drive_probe.cjs",
+      "exit_code": 0,
+      "runner_cases": 1,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_whole_drive_probe-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_creative_archive_worker.cjs",
+      "exit_code": 0,
+      "runner_cases": 26,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-final-test_creative_archive_worker-1562597039404228678.log",
+      "failure_excerpt": null
+    }
+  ],
+  "all_passed": true,
+  "suite_count": 11,
+  "new_resume_cases": 15,
+  "owner_acceptance_cases": 10
+}

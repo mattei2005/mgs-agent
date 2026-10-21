@@ -1,0 +1,83 @@
+{
+  "tests": [
+    {
+      "suite": "test_whole_drive_acceptance_resume.py",
+      "exit_code": 0,
+      "count": 15,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_whole_drive_acceptance_resume-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_mgs_corporate_receipt_recovery.py",
+      "exit_code": 0,
+      "count": 11,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_mgs_corporate_receipt_recovery-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_mgs_corporate_archive.py",
+      "exit_code": 0,
+      "count": 12,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_mgs_corporate_archive-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_mgs_whole_drive_migration.py",
+      "exit_code": 1,
+      "count": 8,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_mgs_whole_drive_migration-1562597039404228678.log",
+      "failure_excerpt": "test_mgs_whole_drive_migration.py\", line 53, in test_valid_receipt_scheduled_heartbeat_promotes_both_pins_only\n    def test_valid_receipt_scheduled_heartbeat_promotes_both_pins_only(self):self.execute('ok')\n                                                                             ^^^^^^^^^^^^^^^^^^\n  File \"/root/mgs-agent/tests/test_mgs_whole_drive_migration.py\", line 46, in execute\n    out=m.accept_owner();self.assertEqual(out['status'],'owner_probe_verified');self.assertFalse(out['production_migrated']);self.assertEqual(store[b.CONFIG]['worker_sha256'],stage['worker_sha256']);self.assertEqual(store[hp]['worker_sha256'],stage['worker_sha256']);self.assertTrue(store[hp]['copy_enabled']);self.assertFalse(store[hp]['historical_cleanup_enabled'])\n        ^^^^^^^^^^^^^^^^\n  File \"/root/mgs-agent/scripts/mgs_whole_drive_migration.py\", line 178, in accept_owner\n    setup=corporate.verify_setup(d,c,False)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/mgs-agent/scripts/mgs_corporate_archive.py\", line 82, in verify_setup\n    p,s=load_plan();key='corporate-setup:'+APPROVAL;f=d.one(c['receipts_folder_id'],key)\n                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/mgs-agent/tests/test_mgs_whole_drive_migration.py\", line 24, in one\n    raise AssertionError(key)\nAssertionError: corporate-setup:1562565746557456515\n\n----------------------------------------------------------------------\nRan 8 tests in 0.015s\n\nFAILED (failures=2)\n"
+    },
+    {
+      "suite": "test_ares_archive_backfill.py",
+      "exit_code": 0,
+      "count": 8,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_ares_archive_backfill-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_ares_archive_automation.py",
+      "exit_code": 0,
+      "count": 28,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_ares_archive_automation-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_corporate_receipt_recovery.cjs",
+      "exit_code": 0,
+      "count": 17,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_corporate_receipt_recovery-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_corporate_archive_setup.cjs",
+      "exit_code": 0,
+      "count": 30,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_corporate_archive_setup-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_archive_runtime_recovery.cjs",
+      "exit_code": 0,
+      "count": 17,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_archive_runtime_recovery-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_whole_drive_probe.cjs",
+      "exit_code": 0,
+      "count": 1,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_whole_drive_probe-1562597039404228678.log",
+      "failure_excerpt": null
+    },
+    {
+      "suite": "test_creative_archive_worker.cjs",
+      "exit_code": 0,
+      "count": 26,
+      "log": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/owner-recovery-accepted-test_creative_archive_worker-1562597039404228678.log",
+      "failure_excerpt": null
+    }
+  ],
+  "all_passed": false,
+  "total": 173
+}

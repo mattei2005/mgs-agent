@@ -3,6 +3,7 @@ from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import mgs_whole_drive_migration as m
+import mgs_corporate_archive as corporate
 b=m.b
 
 class OwnerAcceptanceTests(unittest.TestCase):
@@ -13,6 +14,11 @@ class OwnerAcceptanceTests(unittest.TestCase):
   # Offline fixture follows the candidate being tested, not an older live pin.
   import hashlib
   stage['worker_sha256']=hashlib.sha256(worker).hexdigest();store[m.DATA/'stage.json']=copy.deepcopy(stage)
+  # The new corporate verifier is a separate unit with native receipt/ACL/
+  # Sheets coverage. Keep this acceptor fixture offline, even with live stage
+  # flags, and explicitly exercise its additional refusal boundary below.
+  stage['corporate_grants_applied']=True
+  store[m.DATA/'stage.json']=copy.deepcopy(stage)
   receipt={'schema':'mgs.whole.drive.probe.receipt.v1','authorizationMessageId':m.AUTH,'manifestSha256':stage['manifest_sha256'],'status':'completed','productionMutation':False,'deleteSource':False,'canary':{'restored':kind!='unrestored'},'targets':[{'metadata':{'id':x['id']}} for x in manifest['targets']]}
   hb={'workerSha256':stage['worker_sha256'],'triggerUid':'2456112746912022528' if kind!='manual' else None,'status':'ok','blocked':[],'canaryAcknowledged':True,'deleteSource':False,'executedAt':b.now_iso() if kind!='stale' else '2020-01-01T00:00:00Z'}
   owner={'permissionId':'03783617840924670288','emailAddress':b.ACCOUNT};sa={'permissionId':'07414359829876449782','emailAddress':b.CANONICAL_SA}
@@ -41,7 +47,8 @@ class OwnerAcceptanceTests(unittest.TestCase):
   return stage,c,store,writes,Drive,atomic,read,hp
  def execute(self,kind):
   stage,c,store,writes,Drive,atomic,read,hp=self.fixture(kind)
-  with patch.object(b,'Drive',Drive),patch.object(b,'queue_lock',contextlib.nullcontext),patch.object(b,'config_load',side_effect=lambda:copy.deepcopy(store[b.CONFIG])),patch.object(m,'read',side_effect=read),patch.object(b,'atomic_json',side_effect=atomic):
+  setup={'status':'awaiting_owner_corporate_setup' if kind=='corporate_pending' else 'corporate_setup_verified','root_id':'OTHER' if kind=='corporate_wrong_root' else stage['corporate_root_id']}
+  with patch.object(corporate,'verify_setup',return_value=setup),patch.object(b,'Drive',Drive),patch.object(b,'queue_lock',contextlib.nullcontext),patch.object(b,'config_load',side_effect=lambda:copy.deepcopy(store[b.CONFIG])),patch.object(m,'read',side_effect=read),patch.object(b,'atomic_json',side_effect=atomic):
    if kind=='ok':
     out=m.accept_owner();self.assertEqual(out['status'],'owner_probe_verified');self.assertFalse(out['production_migrated']);self.assertEqual(store[b.CONFIG]['worker_sha256'],stage['worker_sha256']);self.assertEqual(store[hp]['worker_sha256'],stage['worker_sha256']);self.assertTrue(store[hp]['copy_enabled']);self.assertFalse(store[hp]['historical_cleanup_enabled'])
    elif kind=='write_failure':
@@ -58,5 +65,7 @@ class OwnerAcceptanceTests(unittest.TestCase):
  def test_wrong_canary_parent_no_write(self):self.execute('wrong_parent')
  def test_wrong_code_no_write(self):self.execute('wrong_code')
  def test_second_pin_write_failure_rolls_back_first(self):self.execute('write_failure')
+ def test_missing_corporate_setup_prevents_any_pin_write(self):self.execute('corporate_pending')
+ def test_wrong_corporate_root_prevents_any_pin_write(self):self.execute('corporate_wrong_root')
 
 if __name__=='__main__':unittest.main()
