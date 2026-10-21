@@ -30,7 +30,7 @@ A árvore inclui mídia, arquivos auxiliares e atalhos. Os atalhos existentes pr
 6. Somente depois da validação e de confirmação destrutiva adicional que inclua EXPRESSAMENTE o acervo histórico, aplicar sua limpeza delimitada no Drive antigo. A aprovação `1562233890716786830` continua sendo só novos pares e não cobre esse histórico. Não apagar pastas/controle ou dados não inventariados.
 7. Validar origens/destinos/consumidores após cada lote, registrar falhas parciais, manter recuperação e auditar. Fechar como migrado somente quando o conjunto completo estiver verificado.
 
-## Confirmação histórica recebida e preparação verificada
+## Confirmação histórica recebida e preparação verificada — estado anterior
 
 A confirmação adicional `1562268909686497422` (Rodolfo `344196393512075265`, texto `Sim`) responde expressamente à pergunta `1562258695318933655`: remover os arquivos antigos somente depois de todas as cópias/acessos nos 30 TB estarem verificados, preservando pastas de entrada/controle e atalhos necessários. Mensagens e remetente foram lidos na thread de origem. Esta decisão supera apenas o gate de autorização histórica que antes estava pendente; não altera a política futura `1562233890716786830`, não autoriza apagar atalhos implicitamente e não dispensa os gates técnicos.
 
@@ -42,7 +42,7 @@ Versão preparada, publicada e relida: worker `1JS_z_TqTdkF0giv_90i_yHA6gm7Y_oW2
 
 Validação offline: 87 testes JS, 129 testes Python do arquivo e 17 do intake passaram; mais dez regressões de execução do worker passaram sobre o composite. Receipts em `validation.json`/logs; testes de fixtures não são prova de execução do proprietário. Um falso bloqueio inicial de ACL foi diagnosticado: `files.get` não retornava `permissions` para fonte Shared Drive. A conferência foi corrigida para o endpoint de permissões paginado, sem grants, replay de cópias nem mudança de escopo; os oito acessos reais passaram.
 
-## Gates ainda abertos e retomada exata
+## Gates no checkpoint anterior — superados parcialmente pela execução abaixo
 
 1. Repin deliberado no `Code.gs` do mesmo Apps Script: trocar somente ID/hash pelos valores publicados acima; preservar manifesto/escopos/agendamento e não clicar em Implantar. A SA não pode editar/impersonar o proprietário. Nenhum byte histórico deste backfill está verificado/migrado; atualizar documentação não é migração.
 2. Após execução do novo pin, ler receipt, native publisher, streams de origem/destino, hashes, paths e acessos dos nove colaboradores. Observar heartbeat agendado com o novo hash e o mesmo trigger `2456112746912022528`. Executar `python3 scripts/ares_archive_backfill.py accept-owner` somente depois de verificar o primeiro lote real; isso publica ACK e promove o pin SA sem pedir novas aprovações por arquivo.
@@ -51,3 +51,17 @@ Validação offline: 87 testes JS, 129 testes Python do arquivo e 17 do intake p
 5. Só então implementar/validar e executar a retirada histórica autorizada, com origem/destino fixados, prova nativa de proteção contra corrida, receipt real e readback. `historical_cleanup_enabled=false`; `include_historical=false` no controlador futuro permanece correto. Nenhum arquivo histórico foi removido.
 
 O fluxo autônomo de novos uploads permanece ativo e sua limpeza limitada permanece separada. Não criar writer concorrente com Ares/SA nem substituir as políticas ativas enquanto o novo backfill não estiver validado.
+
+## Repin confirmado, primeiro lote verificado e cópia recorrente ativa
+
+Esta seção supersede os estados anteriores de repin pendente, cópia não iniciada e `copy_enabled=false`; não encerra a migração integral. Rodolfo informou `feito` em `1562452180005298263`. A execução manual real do novo SHA foi observada em `2026-10-21T13:08:28.568Z`, sem bloqueios, com o receipt do mesmo primeiro job `d28c7ec5d6ef0aeb109f5cb641362238`.
+
+Zeus verificou integralmente os oito arquivos do primeiro lote: streams de origem e destino, SHA-256/MD5/tamanho, publisher nativo, propriedade, hierarquia e acesso dos nove colaboradores e SA. O ACK SA foi publicado e relido em `1rk_u8Xck0e1XmC0U9qDvQ4lagHgoCgV7`. Nenhuma fonte foi apagada nem ID lógico/candidato/reserva alterado.
+
+O agendamento existente foi comprovado com o novo SHA e o mesmo trigger `2456112746912022528` nos heartbeats `2026-10-21T13:13:17.039Z` e `2026-10-21T13:20:51.558Z`, ambos saudáveis. Intervalo observado de 454,519 segundos entre conclusões; configuração de cinco minutos preservada, sem recriar timer. O tempo de trabalho e o jitter não são prova de uma nova cadência configurada.
+
+`accept-owner` promoveu o pin SA e ativou `stage.copy_enabled=true`; o `cycle --apply` e o tick completo `ares_archive_automation.py --apply` passaram sem bloqueios. A cópia histórica segue no mesmo lock/tick do reconciliador existente, em lotes limitados; consultar `backfill-index.json` e `last-tick.json` para contagens atuais, não esta fotografia. A árvore de 844 pastas também avança no worker. A saúde real do monitor foi exercitada e retornou `status=ok`.
+
+O monitor agora acorda Zeus explicitamente em `all_bytes_verified_consumer_cutover_pending`, para não encerrar silenciosamente após os bytes. Três regressões de saúde cobrem cópia normal, fase completa com consumidores pendentes e histórico desativado. O job existente `83b148017b4d` permanece habilitado, com entrega de bloqueios nesta thread; nenhum novo cron foi criado.
+
+Pendências integrais: verificar todos os 5.860 arquivos e a árvore; resolver/validar os leitores e 1.002 atalhos preservando IDs de negócio e reservas; então implementar/testar a retirada histórica já autorizada, com proteção contra corrida e receipts reais. `historical_cleanup_enabled=false` e o controlador futuro continua `include_historical=false`. Atualização de procedimento não substitui a prova de migração nem autoriza declarar tudo concluído. Evidência de aceitação: `owner-activation-1562452180005298263.json` no diretório desta migração.

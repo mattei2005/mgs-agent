@@ -6,10 +6,10 @@ function mgsArquivoTeste(e) {
     'https://www.googleapis.com/auth/drive',
     'https://www.googleapis.com/auth/script.scriptapp'
   ]);
-  var codigo = DriveApp.getFileById('1efuPCdZ3NYs-2YFuaqothARe-YWDhLJt').getBlob().getDataAsString('UTF-8');
+  var codigo = DriveApp.getFileById('1JS_z_TqTdkF0giv_90i_yHA6gm7Y_oW2').getBlob().getDataAsString('UTF-8');
   var hash = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, codigo, Utilities.Charset.UTF_8)
     .map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
-  if (hash !== 'b7ba49117656c2641299b96b02a1bd39e7c9d6d31a906efcf2be47231c1ce714') {
+  if (hash !== '508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05') {
     throw new Error('CODIGO_DIVERGENTE_NAO_EXECUTADO');
   }
   var config = {"account":"mgsdigitalcorp@gmail.com","sourceDriveId":"0AEwt4Ye690ocUk9PVA","sourceRootId":"1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa","archiveRootId":"1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J","controlFolderId":"1d3w4Xc1EjrmueciM_vCMgva6qJiqpFJR","requestsFolderId":"1yjIOwDLmhAaLNmDdt701WpoFNzNeDXGk","receiptsFolderId":"1gmXrQ-nszxNCwqSytsbX5AEnhm1rvXUL","effectiveAfter":"2026-10-20T14:23:41.417372+00:00","canaryJobId":"526d7a2a007c1fed4b2a9147f92d62b4","deleteSource":false};

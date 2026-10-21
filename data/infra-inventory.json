@@ -842,7 +842,16 @@
   "runtime_artifacts": [
     {
       "id": "zeus-vps-hermes-1562331354568589393",
-      "status": "blocked_exact_critical_confirmation",
+      "status": "packages_installed_reboot_prepared",
+      "vps_phase": "packages_installed_reboot_pending",
+      "critical_authorization": "1562451046654283847",
+      "rollback": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393",
+      "rollback_validated": "9 packages: 7 original debs and 2 strict installed payloads; SHA256 and tar content comparisons passed",
+      "validator": "/root/mgs-agent/scripts/vps-maintenance-validate-20261021.py",
+      "validator_unit": "mgs-vps-maintenance-1562331354568589393.service",
+      "validator_unit_retention": "disable after post-boot validation; retain definition because no file deletion authorized",
+      "reboot_executor": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/reboot-finalizer.py",
+      "reboot_safety": "exact delivered bot handoff plus inactive canonical SQLite turn; immutable dispatch hashes and pure verifier; native same-session continuation",
       "agent": "zeus",
       "thread_id": "1562331354568589393",
       "authorization_message_id": "1562443674116292609",
@@ -850,9 +859,9 @@
       "checkpoint_id": "zeus-vps-hermes-1562331354568589393",
       "scope": "VPS first; Hermes latest main after VPS validation",
       "vps_transaction": {"upgraded": 9, "new": 0, "removed": 0, "phased_deferred": 8},
-      "mutation_status": "No packages installed, gateways restarted, VPS rebooted or files deleted by this turn",
-      "fwupd_refresh": "Metadata refresh failed: LVFS returned HTTP 503; diagnostic and unit retry failed; no firmware install attempted",
-      "next_gate": "Exact Critical Subset confirmation for the nine package versions in preflight and proposed same-kernel reboot; preserve Ubuntu phasing"
+      "mutation_status": "All nine exact package targets installed with rc=0; dpkg clean and all three gateway PIDs unchanged; reboot prepared, not executed yet; no files deleted",
+      "fwupd_refresh": "Metadata refresh failed: LVFS returned HTTP 503; bounded attempts failed; no firmware install attempted; strict post-boot gate remains open",
+      "next_gate": "After the delivered handoff and ended foreground turn: detached authorized reboot, external validation receipt and same-session native continuation. Consume validator result before Hermes staging; preserve Ubuntu phasing"
     },
     {
       "agent": "zeus",
@@ -46286,18 +46295,18 @@
     {
       "agent": "zeus",
       "canonical_source": "docs/ares-creative-30tb-full-archive-migration.md",
-      "copy_phase_hook_installed_but_enabled": false,
-      "copy_started": false,
+      "copy_phase_hook_installed_but_enabled": true,
+      "copy_started": true,
       "files": [
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "sha256": "aab21d3b272d57055ccfed0d3633045a8f60d11e2260a16e3725719cab1cd428",
-          "size_bytes": 23979
+          "sha256": "a126aca9317c990adda45b034179a24b12128c1039c46d9887f51d246a29d51b",
+          "size_bytes": 25777
         },
         {
           "path": "/root/mgs-agent/data/agent-checkpoints.json",
-          "sha256": "b6af3f3a0419d15867f5d0cf6030c432b3277a57f8b8c82be5326e4c336b1704",
-          "size_bytes": 613075
+          "sha256": "04b3816f5e922b82463053c20c1e2aac308b18761009a4f3be17f47732f8f0f4",
+          "size_bytes": 615961
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/historical-migration-1562256530454220851/authorization.json",
@@ -46326,8 +46335,8 @@
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/historical-migration-1562256530454220851/stage.json",
-          "sha256": "3ea1f61d055e1f5f357d4edc5b849d90e66d7fd57d891a3a99e6367d7b6822aa",
-          "size_bytes": 1000
+          "sha256": "536948c719de36b56c128727b810dad217bce9bb1e9d0361913e64d1549b65d2",
+          "size_bytes": 961
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/historical-migration-1562256530454220851/validation.json",
@@ -46336,8 +46345,8 @@
         },
         {
           "path": "/root/mgs-agent/data/knowledge-registry.json",
-          "sha256": "bafb33edc000f6aa6331a6fc963703a82c3d15686c819c06d1b175727ddf838d",
-          "size_bytes": 510335
+          "sha256": "83bd8b8032d513ea0f8963b3da7cfcc5bb1dc7c051bd65102f868ba6914ab9f7",
+          "size_bytes": 512760
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md",
@@ -46346,8 +46355,8 @@
         },
         {
           "path": "/root/mgs-agent/docs/ares-creative-30tb-full-archive-migration.md",
-          "sha256": "8711f25b93ad5b56229dcde5eca9a74b4a62b1bcb2afa29a769543ae9259938e",
-          "size_bytes": 8582
+          "sha256": "579825b5f20a6d753a62dd7b667baa45afe5b63fe09646581acefa4c706309ad",
+          "size_bytes": 11233
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/BackfillExtension.js",
@@ -46361,8 +46370,8 @@
         },
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "sha256": "aab21d3b272d57055ccfed0d3633045a8f60d11e2260a16e3725719cab1cd428",
-          "size_bytes": 23979
+          "sha256": "a126aca9317c990adda45b034179a24b12128c1039c46d9887f51d246a29d51b",
+          "size_bytes": 25777
         },
         {
           "path": "/root/mgs-agent/scripts/ares_archive_automation.py",
@@ -46383,6 +46392,26 @@
           "path": "/root/mgs-agent/tests/test_creative_archive_backfill.cjs",
           "sha256": "a8d3f2cbbec43cc21e9130bb62019b2747b9417cf1972dcc8f7381d65829e702",
           "size_bytes": 3115
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/scripts/ares-archive-automation-monitor.py",
+          "sha256": "fc3bfcbdea67aeb73587e52b7d3d9fe16d6193a152df72f7a42f628bffed43ae",
+          "size_bytes": 2724
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/Bootstrap.gs",
+          "sha256": "853d9739ad0a4d8791622e221991e99065eee689ac8947259ebebea3349616fa",
+          "size_bytes": 2261
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/historical-migration-1562256530454220851/owner-activation-1562452180005298263.json",
+          "sha256": "0d72408fb68ceca232f05095cf75d2b22a914cae25b5f1b20d2db6ea95d4d99a",
+          "size_bytes": 1302
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json",
+          "sha256": "c999d7a4876beecfbd0ca992a386052d5a00fc1b21558279a004e75313a86bf6",
+          "size_bytes": 1219
         }
       ],
       "first_hidden_batch": {
@@ -46395,7 +46424,7 @@
       "historical_retirement_authorized": true,
       "historical_retirement_message_id": "1562268909686497422",
       "historical_source_deleted": false,
-      "historical_verified_files": 0,
+      "historical_verified_files": 24,
       "id": "ares-creative-30tb-full-archive-migration-1562256530454220851",
       "inventory_summary": {
         "binary_bytes": 27390463226,
@@ -46407,7 +46436,7 @@
         "shortcuts": 1002
       },
       "own_skill_mirror_verified": true,
-      "owner_worker_supports_historical": false,
+      "owner_worker_supports_historical": true,
       "previous_reports": [
         {
           "channel_id": "1498132022634483894",
@@ -46417,26 +46446,76 @@
           "single_embed": true,
           "status": "verified",
           "verified_at": "2026-10-21T00:17:34.662727+00:00"
+        },
+        {
+          "channel_id": "1498132022634483894",
+          "content_empty": true,
+          "message_id": "1562274784929120317",
+          "no_mentions": true,
+          "sent_at": "2026-10-21T01:22:14.474808+00:00",
+          "single_embed": true,
+          "status": "verified",
+          "verified_at": "2026-10-21T01:22:14.740480+00:00"
         }
       ],
       "report_infra": {
-        "channel_id": "1498132022634483894",
-        "content_empty": true,
-        "message_id": "1562274784929120317",
-        "no_mentions": true,
-        "sent_at": "2026-10-21T01:22:14.474808+00:00",
-        "single_embed": true,
         "status": "verified",
-        "verified_at": "2026-10-21T01:22:14.740480+00:00"
+        "channel_id": "1498132022634483894",
+        "message_id": "1562457706906918964",
+        "content_empty": true,
+        "no_mentions": true,
+        "single_embed": true,
+        "verified_at": "2026-10-21T13:29:38.505703+00:00"
       },
       "source_message_id": "1562256530454220851",
       "source_thread_id": "1562078493498540042",
       "staged_worker_file_id": "1JS_z_TqTdkF0giv_90i_yHA6gm7Y_oW2",
       "staged_worker_sha256": "508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05",
       "staged_worker_supports_historical": true,
-      "status": "backfill_staged_owner_repin_required",
+      "status": "historical_copy_active_first_batches_verified",
       "type": "migration_scope_inventory",
-      "updated_at": "2026-10-21T01:21:19.227770+00:00"
+      "updated_at": "2026-10-21T13:28:16.937633+00:00",
+      "owner_activation": {
+        "ack_file_id": "1rk_u8Xck0e1XmC0U9qDvQ4lagHgoCgV7",
+        "ack_native_publisher_verified": true,
+        "consumer_cutover_complete": false,
+        "continuation_job_id": "83b148017b4d",
+        "copy_enabled": true,
+        "first_batch_bytes": 7639215,
+        "first_batch_files": 8,
+        "first_job_id": "d28c7ec5d6ef0aeb109f5cb641362238",
+        "full_migration_complete": false,
+        "historical_cleanup_enabled": false,
+        "historical_source_deleted": false,
+        "latest_heartbeat": {
+          "blocked": [],
+          "canaryAcknowledged": true,
+          "copiedCount": 2,
+          "deleteSource": false,
+          "executedAt": "2026-10-21T13:25:50.786Z",
+          "schema": "mgs.archive.heartbeat.v1",
+          "status": "ok",
+          "triggerUid": "2456112746912022528",
+          "workerSha256": "508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05"
+        },
+        "monitor_live_status": "ok",
+        "monitor_phase_regressions": 3,
+        "recurrence": {
+          "configured_interval_minutes": 5,
+          "first_scheduled_at": "2026-10-21T13:13:17.039Z",
+          "observed_interval_seconds": 454.519,
+          "second_scheduled_at": "2026-10-21T13:20:51.558Z",
+          "trigger_uid": "2456112746912022528"
+        },
+        "schema": "mgs.archive.backfill.owner.activation.v1",
+        "source_message_id": "1562452180005298263",
+        "total_files": 5860,
+        "verified_at": "2026-10-21T13:27:31.979192+00:00",
+        "verified_bytes": 95378980,
+        "verified_files": 24,
+        "worker_file_id": "1JS_z_TqTdkF0giv_90i_yHA6gm7Y_oW2",
+        "worker_sha256": "508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05"
+      }
     },
     {
       "id": "hermes-news-trim-recovery-1562330295112572928",

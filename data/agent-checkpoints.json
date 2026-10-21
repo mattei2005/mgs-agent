@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Autorização histórica 1562268909686497422 recebida e sender/pergunta lidos no Discord. Código/manifesto/lote real 8 preparados, publicados e relidos; zero bytes históricos migrados. Gate externo: proprietário trocar somente worker ID 1JS_z_TqTdkF0giv_90i_yHA6gm7Y_oW2 e SHA 508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05 no mesmo Code.gs, salvar/rodar mgsArquivoTeste; não alterar manifesto/trigger/Implantar. Depois validar lote d28c7ec5d6ef0aeb109f5cb641362238 com SA, observar heartbeat novo e aceitar owner via CLI; preservar requests e não criar cópias extras. Copy phase limitada integrada no SA mas desabilitada até essa prova. Concluir árvore/leitores/1002 atalhos e só depois retirada histórica aprovada; código histórico de delete ainda não implementado/ativado. Ver doc e stage.json, não pedir novamente autorização para copiar/retirar esse conjunto.",
-      "objective": "Migrar todo acervo aos 30 TB e retirar fontes históricas só após cópia/acessos/consumidores completos",
+      "next_step": "Repin confirmado por Rodolfo 1562452180005298263 e comprovado no Google: receipt/ACK do primeiro lote, dois heartbeats agendados do SHA 508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05 e mesmo trigger. accept-owner promoveu pin SA; copy_enabled=true. Cópia segue limitada no reconciliador 83b148017b4d, sem novo cron/writer. Consultar stage/backfill-index/last-tick/owner-activation na pasta historical-migration-1562256530454220851. Monitor retorna saúde ok e acorda em all_bytes_verified_consumer_cutover_pending. Ao concluir os 5860 arquivos e 844 pastas, executar e validar consumidores/1002 atalhos preservando IDs/reservas; implementar/testar retirada histórica sob confirmação já existente 1562268909686497422. historical_cleanup_enabled=false; nenhum histórico removido. Não pedir novos cliques, não declarar migração integral concluída.",
+      "objective": "Migrar todo acervo aos 30 TB e retirar fontes históricas somente após cópias/acessos/consumidores completos",
       "source": "docs/ares-creative-30tb-full-archive-migration.md",
-      "state": "full_archive_backfill_staged_owner_repin_required",
+      "state": "historical_copy_active_first_batches_verified",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T01:21:19+00:00"
+      "updated_at": "2026-10-21T13:27:32+00:00"
     },
     {
       "agent": "ares",
@@ -6813,12 +6813,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Obter confirmacao critica para transacao exata de 9 pacotes e reboot controlado no mesmo kernel; preservar 8 pacotes phased; depois portar Hermes main. Plano: /root/mgs-agent/reports/vps-maintenance/20261021-1562331354568589393/preflight.json",
-      "objective": "Atualizar VPS primeiro e Hermes main depois, com rollback e validacao integral",
-      "source": "discord:1562331354568589393/1562443674116292609",
-      "state": "{\"vps_preflight\": \"completed_validated\", \"vps_install\": \"awaiting_critical_confirmation\", \"vps_reboot\": \"proposed_awaiting_critical_confirmation\", \"hermes_port\": \"pending_after_vps\", \"hermes_activation\": \"pending_after_staging\", \"cleanup\": \"not_executed_no_manifest\", \"governance\": \"in_progress\"}",
+      "next_step": "After exact final bot handoff and inactive canonical SQLite turn: detached reboot authorized by 1562451046654283847, native continuation and external post-boot validator. On resume FIRST wait until mgs-vps-maintenance-1562331354568589393.service exits (max 1800s, silent/manual foreground polling), then read /root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json and consume completed checks without replaying installs. Recover any safe failed gate; report VPS only after full validation or exact blocker. Keep Hermes pending until VPS gate closed, then continue original all/main request with its own staging and critical activation gates. No deletion authorized; retain validator unit disabled.",
+      "objective": "Atualizar VPS primeiro e Hermes main depois; avisar Rodolfo quando a VPS estiver concluida",
+      "source": "discord:1562331354568589393/1562451046654283847",
+      "state": "packages_installed_reboot_prepared; nine exact targets installed rc0; backup verified; pure verifier 49/49; external lvfs http503 still open; hermes unchanged",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T12:37:52+00:00"
+      "updated_at": "2026-10-21T13:31:03+00:00"
     },
     {
       "agent": "zeus",
@@ -6922,5 +6922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T12:37:52+00:00"
+  "updated_at": "2026-10-21T13:31:03+00:00"
 }
