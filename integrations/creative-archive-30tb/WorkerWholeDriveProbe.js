@@ -196,7 +196,7 @@ function mgsArchiveWorkerTick(input) {
       var paused={status:'runtime_budget_paused',deleteSource:false};mgsArchiveWriteHeartbeat(c,paused);return paused;
     }
     var summary={status:'ok',copied:[],blocked:[],canaryAcknowledged:mgsArchiveCanaryAck(c),deleteSource:false};
-    if(summary.canaryAcknowledged)summary.wholeDriveProbe=mgsWholeDriveOwnerProbe(c,props,start);
+    if(summary.canaryAcknowledged){summary.wholeDriveProbe=mgsWholeDriveProbeSafely(c,props,start);if(['blocked','blocked_canary_restore','recovered_canary_no_replay'].indexOf(summary.wholeDriveProbe.status)>=0)summary.blocked.push({component:'whole_drive_probe',reason:summary.wholeDriveProbe.reason || summary.wholeDriveProbe.status});}
     if(summary.canaryAcknowledged)summary.backfillTree=mgsArchiveBackfillTree(c,start);
     var rows=mgsArchiveList(c.requestsFolderId,null,'request','queued');
     for(var i=0;i<rows.length && summary.copied.length+summary.blocked.length<2 && Date.now()-start<210000;i++) {
@@ -365,6 +365,7 @@ function mgsWholeDriveOwnerProbe(c,props,start){
   mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var prior=JSON.parse(mgsArchiveText(old.id));
   if(prior.schema!=='mgs.whole.drive.probe.receipt.v1' || prior.authorizationMessageId!==MGS_WHOLE_DRIVE_PROBE.authorizationMessageId || prior.manifestSha256!==MGS_WHOLE_DRIVE_PROBE.manifestSha256 || prior.productionMutation!==false || prior.deleteSource!==false)throw new Error('WHOLE_DRIVE_PRIOR_RECEIPT_BINDING');
   if(prior.status==='completed' || prior.status==='recovered_canary_no_replay')return {status:prior.status,reused:true};
+  if(prior.status==='blocked' && prior.workerSha256===c.workerSha256 && ((prior.attempts || 0)>=5 || (prior.retryAfter && Date.parse(prior.retryAfter)>Date.now())))return {status:'blocked',reason:prior.reason,reused:true};
  }
  var p=mgsWholeDriveManifest(c),about=Drive.About.get({fields:'user(emailAddress,permissionId),storageQuota(limit,usage,usageInDrive,usageInDriveTrash)'});
  if(!about.user || about.user.emailAddress!==c.account || about.user.permissionId!=='03783617840924670288')throw new Error('WHOLE_DRIVE_OWNER_IDENTITY');
@@ -377,9 +378,24 @@ function mgsWholeDriveOwnerProbe(c,props,start){
  var targets=[];
  for(var i=0;i<p.targets.length;i++){
   if(Date.now()-start>120000)return {status:'deferred_runtime',productionMutation:false};
-  var t=p.targets[i],m=mgsWholeDriveMeta(t.id);
-  if(m.trashed || m.id!==t.id || m.name!==t.name || m.mimeType!==t.mimeType || JSON.stringify(m.parents || [])!==JSON.stringify(t.parents || []) || (m.driveId || null)!==(t.driveId || null))throw new Error('WHOLE_DRIVE_PROBE_SOURCE_CHANGED');
-  targets.push({metadata:m,permissions:mgsWholeDrivePermissions(t.id)});
+  var t=p.targets[i],m=mgsWholeDriveMeta(t.id),fields=[],nativeDrive=null;
+  // A shared-drive root is a virtual File whose display name is not a stable
+  // cross-principal identity. Bind it with drives.get, never a label alias.
+  if(t.id===c.sourceDriveId){
+   nativeDrive=Drive.Drives.get(c.sourceDriveId,{fields:'id,name'});
+   if(!nativeDrive || nativeDrive.id!==c.sourceDriveId || t.mimeType!=='application/vnd.google-apps.folder')fields.push('nativeDriveIdentity');
+  }else if(m.name!==t.name)fields.push('name');
+  if(m.trashed)fields.push('trashed');
+  if(m.id!==t.id)fields.push('id');
+  if(m.mimeType!==t.mimeType)fields.push('mimeType');
+  if(JSON.stringify(m.parents || [])!==JSON.stringify(t.parents || []))fields.push('parents');
+  if((m.driveId || null)!==(t.driveId || null))fields.push('driveId');
+  if(fields.length){
+   var mismatch=new Error('WHOLE_DRIVE_PROBE_SOURCE_CHANGED:'+t.id+':'+fields.join(','));
+   mismatch.mgsProbeDetail={targetId:t.id,fields:fields,expected:{id:t.id,name:t.name,mimeType:t.mimeType,parents:t.parents || [],driveId:t.driveId || null},observed:{id:m.id,name:m.name,mimeType:m.mimeType,parents:m.parents || [],driveId:m.driveId || null,trashed:m.trashed},nativeDrive:nativeDrive};
+   throw mismatch;
+  }
+  targets.push({metadata:m,permissions:mgsWholeDrivePermissions(t.id),nativeDrive:nativeDrive});
  }
  var result={schema:'mgs.whole.drive.probe.receipt.v1',authorizationMessageId:p.authorizationMessageId,manifestSha256:MGS_WHOLE_DRIVE_PROBE.manifestSha256,status:'completed',owner:about.user,storageQuota:about.storageQuota || null,targets:targets,productionMutation:false,deleteSource:false,completedAt:null,canary:{sourceId:p.canary.id,moveAttempted:false,restored:false,sourceBefore:null,destinationAfter:null,sourceAfter:null,moveError:null}};
  var a=p.canary,before=mgsWholeDriveMeta(a.id);mgsWholeDriveCanaryIdentity(before,a);
@@ -398,9 +414,21 @@ function mgsWholeDriveOwnerProbe(c,props,start){
   }catch(error){result.canary.moveError=String(error && error.message || error).slice(0,240);}
   finally{
    try{var back=mgsWholeDriveRestoreCanary(c,a,props,pending);result.canary.restored=true;result.canary.sourceAfter={metadata:back,permissions:mgsWholeDrivePermissions(a.id)};}
-   catch(error){result.status='blocked_canary_restore';result.canary.restoreError=String(error && error.message || error).slice(0,240);mgsWholeDriveWriteProbe(c,result);throw error;}
+   catch(error){result.status='blocked_canary_restore';result.canary.restoreError=String(error && error.message || error).slice(0,240);mgsWholeDriveWriteProbe(c,result);error.mgsWholeDriveReceiptWritten=true;throw error;}
   }
  }else{result.canary.restored=true;result.canary.moveError='OWNER_CAN_MOVE_OUT_FALSE';}
  result.completedAt=new Date().toISOString();mgsWholeDriveWriteProbe(c,result);
  return {status:result.status,canaryRestored:result.canary.restored,canaryMoveError:result.canary.moveError,productionMutation:false};
+}
+function mgsWholeDriveProbeSafely(c,props,start){
+ try{return mgsWholeDriveOwnerProbe(c,props,start);}
+ catch(error){
+  var reason=String(error && error.message || error).slice(0,300);
+  if(!error.mgsWholeDriveReceiptWritten){
+   var old=mgsArchiveOne(c.receiptsFolderId,'whole-drive-probe:'+MGS_WHOLE_DRIVE_PROBE.authorizationMessageId),attempts=1;
+   if(old){mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var previous=JSON.parse(mgsArchiveText(old.id));if(previous.workerSha256===c.workerSha256)attempts=(previous.attempts || 0)+1;}
+   mgsWholeDriveWriteProbe(c,{schema:'mgs.whole.drive.probe.receipt.v1',authorizationMessageId:MGS_WHOLE_DRIVE_PROBE.authorizationMessageId,manifestSha256:MGS_WHOLE_DRIVE_PROBE.manifestSha256,workerSha256:c.workerSha256 || null,status:'blocked',reason:reason,diagnostic:error.mgsProbeDetail || null,attempts:attempts,retryAfter:attempts<5 ? new Date(Date.now()+300000).toISOString() : null,productionMutation:false,deleteSource:false,completedAt:new Date().toISOString(),targets:[],canary:{sourceId:'1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4',moveAttempted:error.mgsProbeDetail ? false : null,restored:null}});
+  }
+  return {status:'blocked',reason:reason,productionMutation:false};
+ }
 }

@@ -56,6 +56,7 @@ function mgsWholeDriveOwnerProbe(c,props,start){
   mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var prior=JSON.parse(mgsArchiveText(old.id));
   if(prior.schema!=='mgs.whole.drive.probe.receipt.v1' || prior.authorizationMessageId!==MGS_WHOLE_DRIVE_PROBE.authorizationMessageId || prior.manifestSha256!==MGS_WHOLE_DRIVE_PROBE.manifestSha256 || prior.productionMutation!==false || prior.deleteSource!==false)throw new Error('WHOLE_DRIVE_PRIOR_RECEIPT_BINDING');
   if(prior.status==='completed' || prior.status==='recovered_canary_no_replay')return {status:prior.status,reused:true};
+  if(prior.status==='blocked' && prior.workerSha256===c.workerSha256 && ((prior.attempts || 0)>=5 || (prior.retryAfter && Date.parse(prior.retryAfter)>Date.now())))return {status:'blocked',reason:prior.reason,reused:true};
  }
  var p=mgsWholeDriveManifest(c),about=Drive.About.get({fields:'user(emailAddress,permissionId),storageQuota(limit,usage,usageInDrive,usageInDriveTrash)'});
  if(!about.user || about.user.emailAddress!==c.account || about.user.permissionId!=='03783617840924670288')throw new Error('WHOLE_DRIVE_OWNER_IDENTITY');
@@ -104,9 +105,21 @@ function mgsWholeDriveOwnerProbe(c,props,start){
   }catch(error){result.canary.moveError=String(error && error.message || error).slice(0,240);}
   finally{
    try{var back=mgsWholeDriveRestoreCanary(c,a,props,pending);result.canary.restored=true;result.canary.sourceAfter={metadata:back,permissions:mgsWholeDrivePermissions(a.id)};}
-   catch(error){result.status='blocked_canary_restore';result.canary.restoreError=String(error && error.message || error).slice(0,240);mgsWholeDriveWriteProbe(c,result);throw error;}
+   catch(error){result.status='blocked_canary_restore';result.canary.restoreError=String(error && error.message || error).slice(0,240);mgsWholeDriveWriteProbe(c,result);error.mgsWholeDriveReceiptWritten=true;throw error;}
   }
  }else{result.canary.restored=true;result.canary.moveError='OWNER_CAN_MOVE_OUT_FALSE';}
  result.completedAt=new Date().toISOString();mgsWholeDriveWriteProbe(c,result);
  return {status:result.status,canaryRestored:result.canary.restored,canaryMoveError:result.canary.moveError,productionMutation:false};
+}
+function mgsWholeDriveProbeSafely(c,props,start){
+ try{return mgsWholeDriveOwnerProbe(c,props,start);}
+ catch(error){
+  var reason=String(error && error.message || error).slice(0,300);
+  if(!error.mgsWholeDriveReceiptWritten){
+   var old=mgsArchiveOne(c.receiptsFolderId,'whole-drive-probe:'+MGS_WHOLE_DRIVE_PROBE.authorizationMessageId),attempts=1;
+   if(old){mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var previous=JSON.parse(mgsArchiveText(old.id));if(previous.workerSha256===c.workerSha256)attempts=(previous.attempts || 0)+1;}
+   mgsWholeDriveWriteProbe(c,{schema:'mgs.whole.drive.probe.receipt.v1',authorizationMessageId:MGS_WHOLE_DRIVE_PROBE.authorizationMessageId,manifestSha256:MGS_WHOLE_DRIVE_PROBE.manifestSha256,workerSha256:c.workerSha256 || null,status:'blocked',reason:reason,diagnostic:error.mgsProbeDetail || null,attempts:attempts,retryAfter:attempts<5 ? new Date(Date.now()+300000).toISOString() : null,productionMutation:false,deleteSource:false,completedAt:new Date().toISOString(),targets:[],canary:{sourceId:'1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4',moveAttempted:error.mgsProbeDetail ? false : null,restored:null}});
+  }
+  return {status:'blocked',reason:reason,productionMutation:false};
+ }
 }

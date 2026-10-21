@@ -2393,12 +2393,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Rodolfo informou feito em 1562467403000975382. Espera limitada e releitura direta/por listagem não encontraram receipt do probe nem heartbeat do novo SHA c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3; último heartbeat permaneceu 2026-10-21T14:04:35.841Z com SHA anterior. Canary técnico segue íntegro no source Shared Drive. Nenhuma promoção de pin, replay, mudança de timer/manifesto/credencial/ACL ou migração corporativa. Bloqueio exato: ler na conta proprietária Apps Script > Execuções a execução mgsArquivoTeste e obter apenas mensagem do erro ou última linha do log se concluída. Não supor WHOLE_DRIVE_PROBE_SOURCE_CHANGED sem erro nativo. Após diagnóstico, corrigir camada faltante; eventual novo worker precisa capturar receipt de falha antes de propagar exceção. Preservar código remoto imutável e sourceIDs. Evidência owner-execution-block-1562467403000975382.json na pasta whole-drive. Continuar autoridade original; reportar somente ação necessária no editor/Critical ou 100%.",
-      "objective": "Migrar todo MGS-AGENTS para os 30 TB e validar automação integral preservando upload/staging no antigo",
+      "next_step": "Imagem 1562471409740021896 confirmou WHOLE_DRIVE_PROBE_SOURCE_CHANGED após loader, sem identificar alvo/campo. SA releu os 15 alvos sem mismatch; native files.get root=Drive vs drives.get root=MGS-AGENTS comprovam defeito de comparação de label virtual, mas campo exato do owner ainda não foi exposto. Corrigido root via native drive ID sem reduzir gates de ID/MIME/parents/driveId/nomes não-root; falhas agora têm receipt detalhado e heartbeat bloqueado, retries máximos5. Nova versão publicada/relida ID 1npryxflWsy8Lvx3LS7cnbivYp4ejyns- SHA 4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd. Passaram18JS+8Pythonaccept+8histórico. Necessário proprietário trocar apenas ID/hash no mesmo Code.gs, salvar e rodar mgsArquivoTeste, sem manifesto/timer/Implantar. Nenhuma promoção SA; canary permanece origem; produção corporativa não migrou nem foi removida. Após feito, ler receipt/campos reais e heartbeat scheduled novo SHA mesmo trigger, então accept-owner. Não prometer recuperação antes prova Google; última versão ativa no owner falhou e heartbeat parou.",
+      "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automação integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_execution_details_required",
+      "state": "owner_repin_required_source_guard_fix_published",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T14:18:29+00:00"
+      "updated_at": "2026-10-21T14:30:35+00:00"
     },
     {
       "agent": "zeus",
@@ -6932,5 +6932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T14:22:23+00:00"
+  "updated_at": "2026-10-21T14:30:35+00:00"
 }

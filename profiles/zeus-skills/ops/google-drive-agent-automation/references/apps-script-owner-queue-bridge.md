@@ -114,4 +114,6 @@ Keep a new owner probe separate from production migration. Pin its exact SA mani
 
 After a successful Drive create, persist and validate the returned ID with `files.get` before relying on property-indexed `files.list`; a lagging search index is not evidence that creation failed and never authorizes a second POST. Read back the landed exact object first, reuse it, and keep the original intent/receipt.
 
+Bind a Shared Drive's virtual root through `drives.get(...fields=id,name)` and the exact opaque drive ID, not its `files.get.name` label: the root can appear as `Drive` on one metadata surface and the actual drive name on another. Keep non-root names and every ID/MIME/parent/driveId gate strict. Emit mismatched target IDs and field names into an owner-authored blocked receipt before an optional probe exception can prevent the heartbeat. Preserve any detailed restore-failure receipt; cap repeated probe attempts and require real owner execution before claiming recovery. A generic SOURCE_CHANGED exception alone does not prove which field differed.
+
 Current reusable implementation: `/root/mgs-agent/scripts/ares_archive_bridge.py` and `/root/mgs-agent/integrations/creative-archive-30tb/`. Live rollout state and authority remain in the canonical initiative document/checkpoint; this reference does not grant new access or deployment authority.

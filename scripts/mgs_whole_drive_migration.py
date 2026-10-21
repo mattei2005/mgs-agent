@@ -120,13 +120,13 @@ def publish_probe():
         source=b.BASE/'integrations/creative-archive-30tb/WorkerWholeDriveProbe.js'
         raw=source.read_bytes();digest=hashlib.sha256(raw).hexdigest()
         base=(b.BASE/'integrations/creative-archive-30tb/WorkerBackfill.js').read_text()
-        hook='    if(summary.canaryAcknowledged)summary.wholeDriveProbe=mgsWholeDriveOwnerProbe(c,props,start);\n'
+        hook="    if(summary.canaryAcknowledged){summary.wholeDriveProbe=mgsWholeDriveProbeSafely(c,props,start);if(['blocked','blocked_canary_restore','recovered_canary_no_replay'].indexOf(summary.wholeDriveProbe.status)>=0)summary.blocked.push({component:'whole_drive_probe',reason:summary.wholeDriveProbe.reason || summary.wholeDriveProbe.status});}\n"
         if raw.decode().replace(hook,'',1)[:len(base)]!=base or raw.decode().count(hook)!=1:raise b.ArchiveError('PROBE_COMPOSITE_BASE_CHANGED')
         if hashlib.sha256(base.encode()).hexdigest()!=c['worker_sha256']:raise b.ArchiveError('PROBE_ACTIVE_BASE_NOT_PINNED')
         fid=d.upload_once(c['control_folder_id'],'worker-whole-drive-probe-'+digest+'.js',raw,'application/javascript','worker:'+digest,'worker_source')
         meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
         if meta.get('parents')!=[c['control_folder_id']] or hashlib.sha256(d.raw(fid)).hexdigest()!=digest:raise b.ArchiveError('PROBE_WORKER_READBACK')
-        stage.update(worker_file_id=fid,worker_sha256=digest,worker_source_path=str(source.relative_to(b.BASE)),previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=c['worker_sha256'],status='owner_repin_required',published_at=b.now_iso(),active_sa_pin_unchanged=True,js_regressions_passed=11,python_backfill_regressions_passed=8,python_owner_acceptance_regressions_passed=8)
+        stage.update(worker_file_id=fid,worker_sha256=digest,worker_source_path=str(source.relative_to(b.BASE)),previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=c['worker_sha256'],status='owner_repin_required',published_at=b.now_iso(),active_sa_pin_unchanged=True,js_regressions_passed=18,python_backfill_regressions_passed=8,python_owner_acceptance_regressions_passed=8)
         b.atomic_json(DATA/'stage.json',stage)
         return stage
 
