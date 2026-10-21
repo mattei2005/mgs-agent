@@ -2393,12 +2393,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Inventário completo 7884 objetos; 8 Sheets/163 abas baseline e ACL raiz vs criativos distintos registrados. Worker probe final publicado/relido: ID 1eYTggn8T3SWpKewqowuvcVvzSPV4bOH0 SHA c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3. Proprietário precisa trocar somente ID/hash no MESMO Code.gs, salvar/rodar mgsArquivoTeste; sem manifesto/timer/Implantar. Probe corporativo é read-only em produção, único movimento ida/volta da Sheet técnica 1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4. Nenhum conteúdo corporativo migrado/removido, pin ativo e backfill anterior preservados. Após feito: scripts/mgs_whole_drive_migration.py status; verificar receipt canary restored e heartbeat scheduled novoSHA mesmo trigger2456112746912022528; então accept-owner promove ambos pins com rollback. Revisar capacidades/ACL reais; implementar canário e migração corporativa com produtores/backup/restore/Sheets e acesso restrito. Concluir criativos/atalhos/retirada só após gates. Rodolfo pediu silêncio exceto editor Apps Script, 100% ou Critical Subset real.",
-      "objective": "Migrar todo MGS-AGENTS para a conta de 30 TB, preservar somente upload/staging no antigo e validar automação/backup/Sheets/consumidores/limpeza integral",
+      "next_step": "Rodolfo informou feito em 1562467403000975382. Espera limitada e releitura direta/por listagem não encontraram receipt do probe nem heartbeat do novo SHA c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3; último heartbeat permaneceu 2026-10-21T14:04:35.841Z com SHA anterior. Canary técnico segue íntegro no source Shared Drive. Nenhuma promoção de pin, replay, mudança de timer/manifesto/credencial/ACL ou migração corporativa. Bloqueio exato: ler na conta proprietária Apps Script > Execuções a execução mgsArquivoTeste e obter apenas mensagem do erro ou última linha do log se concluída. Não supor WHOLE_DRIVE_PROBE_SOURCE_CHANGED sem erro nativo. Após diagnóstico, corrigir camada faltante; eventual novo worker precisa capturar receipt de falha antes de propagar exceção. Preservar código remoto imutável e sourceIDs. Evidência owner-execution-block-1562467403000975382.json na pasta whole-drive. Continuar autoridade original; reportar somente ação necessária no editor/Critical ou 100%.",
+      "objective": "Migrar todo MGS-AGENTS para os 30 TB e validar automação integral preservando upload/staging no antigo",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_editor_repin_required_probe_ready",
+      "state": "owner_execution_details_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T14:01:50+00:00"
+      "updated_at": "2026-10-21T14:18:29+00:00"
     },
     {
       "agent": "zeus",
@@ -6932,5 +6932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T14:02:13+00:00"
+  "updated_at": "2026-10-21T14:18:29+00:00"
 }
