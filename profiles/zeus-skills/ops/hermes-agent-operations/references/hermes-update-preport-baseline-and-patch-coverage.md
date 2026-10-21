@@ -42,23 +42,35 @@ This separates three claims that must not be conflated: all original paths were 
 
 For the concrete semantic-merge pattern, one-shot Honcho teardown diagnosis, exact guard predicates, OAuth gate, and restart-snapshot expansion discovered during a 976-commit port, load `references/hermes-update-2026-07-19-port-lifecycle.md`.
 
+## Semantic compatibility after upstream refactors
+
+1. Locate the target's actual call site, implementation and regression tests before adapting a patch. When code moves into mixins or extracted modules, carry the MGS invariant into the new owner and test that path; a method name retained in the old file or a syntax-only pass does not prove startup works.
+2. Map every baseline test module to the candidate. If upstream removes a module, verify the removal and identify replacement tests covering its original contract; record one-to-many mappings and reconcile the resulting module count instead of silently dropping the missing path.
+3. Test both new calls and persisted replay when mutation APIs change. A transition from whole-entry replacement to span patching must preserve already-reviewed pending records, unchanged files on rejection, capacity-error metadata and dead-letter behavior; passing only the new action leaves old durable records stranded.
+4. Run `git diff --check <frozen-target>` as well as the working-tree check before exporting the final patch, because committed port changes can contain whitespace errors that the latter omits. Correct introduced errors without unrelated reformatting, then recreate and verify the exported artifact.
+
 ## Test isolation and failure classification
 
-- Run compatibility tests with a fresh `HERMES_HOME` and remove profile-specific routing variables such as Discord allowlists. Tests must not inherit production channel scope, bot policy, or session state.
+- Allocate isolated OS home and temp directories, remove production credentials/routing variables, and inspect the target conftest before setting `HERMES_HOME`. If it protects the pre-import home, leave `HERMES_HOME` unset and let the conftest allocate it; otherwise use a disposable test home. Tests must not inherit production channel scope, bot policy, or session state.
 - Build an isolated target venv with the exact relevant extras before interpreting provider/platform failures. A missing optional extra is a test-environment gap, not a runtime regression.
-- If a broad suite is mostly green but failures suggest module-order pollution or mocked SDK leakage, rerun every failed module together in a fresh Python process. Record both results: broad-suite count and isolated rerun count. Do not call the port green until every port-relevant failure is green in isolation or is proven to fail identically on clean upstream.
+- If failures suggest module-order pollution or mocked SDK leakage, rerun each failed module in its own fresh Python process, not all failed modules together. Record broad and isolated results separately; compare an unresolved failure with clean upstream under the same environment before blaming the port. Require every port-relevant failure to pass in isolation or have an explicit, evidenced applicability disposition.
 - Production keyword changes such as `suppress_embeds`/`suppress` require updating all fake `send()`/`edit()` signatures and assertions. Also isolate tests from live env values rather than weakening production behavior to satisfy old fixtures.
 - Filesystem timestamp tests must force a distinct `mtime_ns`; back-to-back writes can share one timestamp tick and create false cache failures.
 - Tests for a legacy/fallback data source must mock the new primary source. Otherwise live state (for example `state.db`) can win before the fixture under test is consulted.
-- Before exporting a custom `HERMES_HOME` for pytest, inspect the target `tests/conftest.py`: versions with `_PRE_SANDBOX_HERMES_HOME` may classify even that disposable pre-import path as a real home and reject later import-time reads. Let the canonical conftest allocate its sandbox, strip production routing/credential environment, and keep temporary files under the session scratch root. Re-run affected modules in fresh processes. Media fixtures under a protected `.hermes` subtree can independently fail the delivery policy; do not relax production media protection to make these fixtures pass. Report environment failures, fixture incompatibilities, and test timeouts separately from runtime defects.
+- Place media fixtures under sandbox roots accepted by the native delivery policy; do not relax production media protection to make fixtures pass. Report environment failures, fixture incompatibilities and test timeouts separately from runtime defects.
 
-### Fresh-process and immutable-evidence refinements
+### Fixture and immutable-evidence invariants
 
-- Prefer the target's native per-file test runner with two workers when broad grouped pytest runs leak mocked SDK/TLS state. Preserve every failed grouped run, then verify all expected modules in fresh interpreters and aggregate persisted native summaries; a wrapper's exit zero is not a test verdict. Keep foreground batches comfortably below the tool's observed hard timeout and stream logs to disk during execution, because captured stdout can disappear when the tool terminates the whole process group. Verify no owned test process remains before retrying.
-- Keep all native test temp roots under the profile scratch. When a hermetic wrapper drops `TMPDIR`, explicitly forward its supported `TMP` and `TEMP` variables too. Do not preset `HERMES_HOME` before importing a conftest that treats that initial path as a protected live home.
 - When a host-cwd unit fixture sits under `/root`, the native container-prefix detector may intentionally classify it as container-local. In that isolated test only, mark the exact synthetic launch path as host; do not relax production path classification or Docker access policy.
 - Once a supplement is absorbed into a new consolidated artifact, require guard/manifest ownership equality and its behavior tests instead of reverse-applying the obsolete supplement against refactored source or normalized fixtures. Keep rollback artifacts unchanged and fail closed if ownership is missing.
 - Never update checksum-frozen initial preparation metadata to track a rebased candidate. Keep a separate `candidate-state.json` and append-only validation receipts; preserve and verify the original rollback manifest before promotion.
+
+### Bounded native-runner recipe
+
+1. Inspect `scripts/run_tests.sh` and its argument/environment handling in the frozen target. When that runner exists, invoke it from the candidate with `HERMES_PYTHON=<candidate>/.venv/bin/python`, `HERMES_TEST_WORKERS=2`, and the exact module list. Set supported file-timeout/retry controls explicitly; do not substitute a guessed runner interface.
+2. Give each named batch its own isolated `HOME`, scratch-backed `TMPDIR`/`TMP`/`TEMP`, log and result JSON. Stream child stdout/stderr directly to the retained log. Bound the batch below the tool's observed execution ceiling, not merely its advertised timeout; on interruption inspect surviving owned processes and partial evidence before resuming only uncompleted work.
+3. Save each batch's tested upstream SHA, port HEAD, requested/completed module lists, process exit status, timeout flag and native summary. Aggregate with code and require exact set equality with the approved module plan; preserve skipped and expected-failure classifications rather than counting them as passed.
+4. On a new target, use new run names and retain prior receipts. Keep broad-suite, patch-guard and post-upstream results separate and disclose overlap; summing their pass counts does not produce a unique-test total.
 
 ## Safe staged dependencies and post-merge hooks
 
@@ -81,7 +93,8 @@ Report separately:
 - local tracked/untracked counts;
 - overlap files;
 - patch guard artifact count versus updater-precheck coverage;
-- broad baseline result;
+- broad baseline result, candidate module coverage, skips and historical-failure disposition;
+- configuration checks, read-only credential status, real inference smokes and post-restart readiness as separate gates; a configured or refreshable grant is not proof of a successful model request;
 - remaining gate before live staging.
 
 A plan is not ready when either patch coverage or the broad baseline is unresolved.
