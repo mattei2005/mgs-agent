@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Supersede estado anterior de cópia saudável: owner repin novo SHA e4f32e02... comprovado por heartbeat manual+scheduled mas guard interno runtime_budget_paused antes do probe. Consultar checkpoint MGS-WHOLE-DRIVE-30TB-1562459803186626571 e docs/mgs-whole-drive-30tb-migration.md. Cópias/pins/flags/manifestos existentes preservados, histórico não apagado. Mesmo monitor83b148017b4d agora expõe motivo real e acorda transição da pausa; não pedir editor nem contornar limite. Após receipt probe novo+canário restaurado+heartbeat saudável scheduled, accept-owner promove atomicamente ambos pins, tick comum retoma cópia. Não declarar migração completa; consumidores/atalhos/retirada histórica continuam pendentes.",
+      "next_step": "O encaminhamento anterior de aguardar foi supersedido por correção manual de controle. Consultar checkpoint MGS-WHOLE-DRIVE-30TB-1562459803186626571 e última seção de docs/mgs-whole-drive-30tb-migration.md: novo staged 1Xs19EeF6TPuEV67egukJDPT_hlu2tQmQ/02d870020bf678c9da3485bac873c2bfbf17e99f1439877d24b3891a2f9fe4cb separa teste manual de cópia, preserva orçamento/ledger bulk e informa uso/primeira expiração. 94 verificações locais; source remoto relido; owner ainda precisa repinar ID/hash e rodar mgsArquivoTeste. Depois ler prova real/canário/telemetria; não promover SA sem scheduled saudável. Nenhuma migração integral/limpeza concluída; histórico/candidatos/reservas preservados. Não repetir Runs por camadas internas nem mudar timer.",
       "objective": "Migrar todo acervo aos 30 TB e retirar fontes históricas somente após cópias/acessos/consumidores completos",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_runtime_budget_paused",
+      "state": "owner_repin_required_manual_control_recovery",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T20:15:42+00:00"
+      "updated_at": "2026-10-21T20:25:43+00:00"
     },
     {
       "agent": "ares",
@@ -2403,12 +2403,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Imagem 1562558490449412126 + heartbeat manual 20:09:23Z e scheduled 20:13:02Z confirmam novo SHA e4f32e02e99f29021030a58cc2a0b20a9eef35dc23e4d4e8af8e10c271a30728, trigger existente2456112746912022528, mas runtime_budget_paused ANTES do probe. Receipt continua antigo4641e3f; não é nova falha do fix. Canary relido na origem. Limite interno 24h/3600000ms/350 entradas preservado; ledger privado SA-invisível, liberação exata desconhecida. Não pedir editor/Run/reset/novo timer. Erro secundário RETIREMENT_ACTIVATION_NOT_PINNED corrigido: runtime gate separado do contrato; 28Python+8accept+23JS e monitor live mostram pausa exata. Mesmo monitor83b148017b4d expõe status/SHA/scheduled estáveis e acorda ao sair da pausa. Depois da liberação ler receipt novo/15alvos/restauração canary live + heartbeat saudável agendado; somente então accept-owner e tick comum. Ainda falta migração corporativa/consumidores; nenhum pin ativo, flag, mídia ou ACL alterado. Evidência runtime-budget-diagnosis-1562558490449412126.json. Respeitar janela, não contornar limite.",
+      "next_step": "1562560584346636379 exige solução. Corrigido bloqueio do teste pelo guard de cópia: extensão manual somente probe/canário, mesmo lock/owner/ACK/manifesto, nunca loop mídia; orçamento próprio 5min/16 entradas e bulk ledger/cap preservados. Agendado delega worker anterior. Heartbeat publica uso/ramo/earliestRetryAt estimativo. 17recovery+23probe+10base+8accept+8backfill+28auto passaram, readback SHA/publisher remoto confirmado. Novo staged ID1Xs19EeF6TPuEV67egukJDPT_hlu2tQmQ SHA02d870020bf678c9da3485bac873c2bfbf17e99f1439877d24b3891a2f9fe4cb. Owner deve trocar só ID/hash no mesmo Code.gs e executar mgsArquivoTeste, sem manifesto/timer/Implantar. Supersede encaminhamento passivo de esperar. Ainda NÃO executado Google/promovido SA. Após feito ler receipt/probe/restauração/telemetria; validar capacidades/ACL; heartbeat scheduled saudável antes de accept-owner+tick. Não chamar solução do acervo concluída; nenhum arquivo produtivo/ACL/delete alterado. Fonte doc canônica, seção recuperação manual.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automação integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_repin_confirmed_runtime_budget_paused",
+      "state": "owner_repin_required_manual_control_recovery",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T20:15:42+00:00"
+      "updated_at": "2026-10-21T20:24:55+00:00"
     },
     {
       "agent": "zeus",
@@ -3359,6 +3359,16 @@
       "state": "remediacao local/live validada:6senhas,141sessoes,8devices,mfa/financeiro preservados;main reescrito;contexto agosto preservado e astra smoke pass. rodolfo submeteu pedido github sensitive data removal;confirmacao visual message successfully submitted em1551299336959434852. sem protocolo/prazo na tela. objeto historico ainda nao confirmado removido;auto-push pausado.",
       "thread_id": "1551285829584953484",
       "updated_at": "2026-09-20T18:30:54+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
+      "next_step": "Ler todas as abas, reconciliar datas/moedas/totais/duplicatas e apresentar problemas antes de qualquer alteracao financeira",
+      "objective": "Analisar integralmente a fonte AdOps de setembro em somente leitura, usando agosto concluido como referencia",
+      "source": "discord:1545426987756298340#1562562282838429729;https://docs.google.com/spreadsheets/d/1ARyzDDEpVhlED6ndmHs1RC3pUlsJNQ20yTyZ6wSJVtA/edit",
+      "state": "read_only_source_audit_in_progress",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-21T20:26:49+00:00"
     },
     {
       "agent": "zeus",
@@ -6942,5 +6952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T20:15:42+00:00"
+  "updated_at": "2026-10-21T20:26:49+00:00"
 }

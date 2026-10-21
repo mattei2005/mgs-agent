@@ -130,6 +130,26 @@ def publish_probe():
         b.atomic_json(DATA/'stage.json',stage)
         return stage
 
+def publish_recovery():
+    """Publish additive manual-control lane; no active-pin promotion or data move."""
+    with b.queue_lock():
+        d=b.Drive(True);c=b.config_load();b.preflight(d,c)
+        stage=read(DATA/'stage.json',{})
+        if not isinstance(stage,dict):raise b.ArchiveError('WHOLE_DRIVE_STAGE_INVALID')
+        base=b.BASE/'integrations/creative-archive-30tb/WorkerWholeDriveProbe.js'
+        extension=b.BASE/'integrations/creative-archive-30tb/RuntimeRecoveryExtension.js'
+        source=b.BASE/'integrations/creative-archive-30tb/WorkerWholeDriveRecovery.js'
+        raw=source.read_bytes();digest=hashlib.sha256(raw).hexdigest()
+        previous=hashlib.sha256(base.read_bytes()).hexdigest()
+        if previous!='e4f32e02e99f29021030a58cc2a0b20a9eef35dc23e4d4e8af8e10c271a30728' or raw!=base.read_bytes()+b'\n'+extension.read_bytes():raise b.ArchiveError('RECOVERY_COMPOSITE_CHANGED')
+        if stage.get('worker_sha256') not in [previous,digest] or c['worker_sha256']!=stage.get('previous_active_worker_sha256'):raise b.ArchiveError('RECOVERY_STAGE_OR_ACTIVE_PIN_DRIFT')
+        fid=d.upload_once(c['control_folder_id'],'worker-whole-drive-recovery-'+digest+'.js',raw,'application/javascript','worker:'+digest,'worker_source')
+        meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
+        if meta.get('parents')!=[c['control_folder_id']] or hashlib.sha256(d.raw(fid)).hexdigest()!=digest:raise b.ArchiveError('RECOVERY_WORKER_READBACK')
+        stage.update(superseded_probe_worker_file_id=stage.get('superseded_probe_worker_file_id') or stage.get('worker_file_id'),superseded_probe_worker_sha256=previous,worker_file_id=fid,worker_sha256=digest,worker_source_path=str(source.relative_to(b.BASE)),status='owner_repin_required_manual_control_recovery',published_at=b.now_iso(),updated_at=b.now_iso(),owner_repin_confirmed=False,active_sa_pin_unchanged=True,manual_mode='probe_only_no_production',bulk_runtime_limit_unchanged=True,recovery_js_tests_passed=17)
+        b.atomic_json(DATA/'stage.json',stage)
+        return stage
+
 def accept_owner():
     with b.queue_lock():
         d=b.Drive(False);c=b.config_load();stage=read(DATA/'stage.json',{})
@@ -167,7 +187,7 @@ def accept_owner():
 
 def main():
     import argparse
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['prepare','status','publish-probe','accept-owner']);args=ap.parse_args()
-    result={'prepare':prepare,'status':status,'publish-probe':publish_probe,'accept-owner':accept_owner}[args.action]()
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['prepare','status','publish-probe','publish-recovery','accept-owner']);args=ap.parse_args()
+    result={'prepare':prepare,'status':status,'publish-probe':publish_probe,'publish-recovery':publish_recovery,'accept-owner':accept_owner}[args.action]()
     print(json.dumps(result,ensure_ascii=False))
 if __name__=='__main__':main()

@@ -1,0 +1,36 @@
+{
+  "suites": [
+    {
+      "suite": "recovery_js",
+      "exit_code": 0,
+      "passed_count": 17
+    },
+    {
+      "suite": "whole_probe_js",
+      "exit_code": 0,
+      "passed_count": 23
+    },
+    {
+      "suite": "base_orchestration_js",
+      "exit_code": 0,
+      "passed_count": 10
+    },
+    {
+      "suite": "owner_accept_python",
+      "exit_code": 0,
+      "passed_count": 8
+    },
+    {
+      "suite": "backfill_python",
+      "exit_code": 0,
+      "passed_count": 8
+    },
+    {
+      "suite": "automation_python",
+      "exit_code": 0,
+      "passed_count": 28
+    }
+  ],
+  "offline_only": true,
+  "google_recovery_verified": false
+}
