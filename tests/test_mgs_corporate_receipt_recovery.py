@@ -41,4 +41,17 @@ class RecoveredReceiptTests(unittest.TestCase):
  def test_accept_cli_partial_state_is_nonzero_not_success(self):
   partial={'status':'corporate_root_acl_verified_owner_receipt_pending','grants_applied':True}
   with patch.object(sys,'argv',['mgs_corporate_archive.py','accept-setup']),patch.object(a.b,'queue_lock',contextlib.nullcontext),patch.object(a.b,'Drive',return_value=object()),patch.object(a.b,'config_load',return_value={}),patch.object(a,'verify_setup',return_value=partial),contextlib.redirect_stdout(io.StringIO()):self.assertEqual(a.main(),2)
+ def test_verified_recovered_setup_clears_missing_receipt_state(self):
+  p,s,r,rid=self.fixture();s['owner_setup_receipt_missing']=True
+  root=copy.deepcopy(r['root']);root['properties']={'mgsArchiveKey':'corporate-root:'+a.APPROVAL,'mgsArchiveType':'corporate_root'}
+  receipt_id='RECOVERY_RECEIPT_123';c={'receipts_folder_id':'RECEIPT_FOLDER_123'};store={}
+  class Drive:
+   def one(self,parent,key):return {'id':receipt_id}
+   def meta(self,fid):
+    if fid==receipt_id:return {'id':fid,'parents':[c['receipts_folder_id']],'driveId':a.b.SOURCE_DRIVE,'properties':{'mgsArchiveKey':'corporate-setup:'+a.APPROVAL,'mgsArchiveType':'corporate_setup_receipt'},'lastModifyingUser':{'permissionId':p['ownerPermissionId']}}
+    return copy.deepcopy(root if fid==rid else r['canary']['sourceAfter']['metadata'])
+   def raw(self,fid):return a.b.canonical(r)
+  with patch.object(a,'load_plan',return_value=(p,s)),patch.object(a.h,'permissions',side_effect=lambda d,fid:a.desired(p,source=fid!=rid)),patch.object(a.m,'sheets_get',return_value={'spreadsheetId':p['canary']['id']}),patch.object(a.b,'read_json',return_value={}),patch.object(a.b,'atomic_json',side_effect=lambda path,value:store.update({path:copy.deepcopy(value)})):
+   out=a.verify_setup(Drive(),c,apply=True)
+  self.assertEqual(out['status'],'corporate_setup_verified');self.assertFalse(store[a.STAGE]['owner_setup_receipt_missing']);self.assertTrue(store[a.STAGE]['owner_setup_verified'])
 if __name__=='__main__':unittest.main()

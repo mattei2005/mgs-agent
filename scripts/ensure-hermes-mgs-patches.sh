@@ -320,7 +320,7 @@ PY
       if { grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run.py" \
           || grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run_busy.py"; } \
         && { grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
-          || grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run_turn.py"; } \
+          || grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run_busy.py"; } \
         && grep -q "test_run_agent_merges_leftover_steer_into_earlier_queued_turn" "$REPO/tests/gateway/test_run_progress_topics.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
@@ -399,7 +399,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # Owner-confirmed main cutoff 7cc3fb8c: complete 101-path MGS port with
 # byte-identical clean-target reproduction, reverse-check and broad baseline.
 # Retained older runtimes remain read-only guardable through prior artifacts.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-10-12-main-7cc3fb8c.patch"
+PRIMARY_PATCH="mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
 PRIMARY_PATCH_READY=0
 primary_patch_present() {
   local candidate_patch="${1:-$PRIMARY_PATCH}"
@@ -426,6 +426,7 @@ fi
 # Every retained rollback runtime must remain guardable without trying to apply
 # an unrelated historical patch. Newest retained surface wins.
 PRIOR_PRIMARY_PATCHES=(
+  "mgs-runtime-customizations-2026-10-12-main-7cc3fb8c.patch"
   "mgs-runtime-customizations-2026-10-02-main-a510d6c6.patch"
   "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
   "mgs-runtime-customizations-2026-09-24-main-ee5ee84a.patch"
@@ -517,7 +518,16 @@ fi
 # rollback trees untouched; absence/drift on the active base fails closed.
 CODEX_INTEGRITY_TESTS=()
 if primary_patch_present; then
-  apply_patch_if_needed "codex-refresh-integrity-2026-10-16.patch"
+  # The validated new composite owns these changes. Replaying the old
+  # supplement is unsafe after upstream/test-harness relocation; require
+  # exact guard/manifest ownership, then the behavioral integrity tests.
+  python3 - "$PATCH_DIR/current-runtime-manifest.json" "$PRIMARY_PATCH" <<'PY'
+import json, sys
+m = json.load(open(sys.argv[1], encoding="utf-8"))
+assert m["primary_patch"] == sys.argv[2], "manifest/guard primary mismatch"
+name = "codex-refresh-integrity-2026-10-16.patch"
+assert name in m["absorbed_supplements"] and name not in m["supplemental_patches"], "Codex refresh integrity ownership missing"
+PY
   CODEX_INTEGRITY_TESTS=("$REPO/tests/agent/test_mgs_codex_refresh_integrity.py")
 fi
 
@@ -725,7 +735,7 @@ grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO
     || grep -q "def _merge_leftover_steer_into_pending_turn" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS queued-turn + leftover-steer merge helper"
 { grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run.py" \
-    || grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run_turn.py"; } \
+    || grep -q "Merging leftover /steer into earlier queued turn" "$REPO/gateway/run_busy.py"; } \
   || fail "missing MGS queued-turn + leftover-steer production integration"
 grep -q "test_run_agent_merges_leftover_steer_into_earlier_queued_turn" "$REPO/tests/gateway/test_run_progress_topics.py" \
   || fail "missing MGS queued-turn + leftover-steer regression test"

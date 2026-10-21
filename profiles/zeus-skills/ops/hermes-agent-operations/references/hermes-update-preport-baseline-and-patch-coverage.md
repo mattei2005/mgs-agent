@@ -72,6 +72,11 @@ For the concrete semantic-merge pattern, one-shot Honcho teardown diagnosis, exa
 3. Save each batch's tested upstream SHA, port HEAD, requested/completed module lists, process exit status, timeout flag and native summary. Aggregate with code and require exact set equality with the approved module plan; preserve skipped and expected-failure classifications rather than counting them as passed.
 4. On a new target, use new run names and retain prior receipts. Keep broad-suite, patch-guard and post-upstream results separate and disclose overlap; summing their pass counts does not produce a unique-test total.
 
+### Launcher ownership at controlled cutover
+
+- Reconcile a launcher-drift abort before retrying: native source publication can replace a venv symlink with a regular shell forwarder to the same checkout. Reproduce it in scratch with the native publisher; do not call it an unauthorized concurrent action or weaken the exact-target/hash gate merely because `readlink -f` changed.
+- For an MGS-owned Git/venv deployment updated exclusively by the controlled port workflow, declare the existing external update owner using the target's native `write_install_stamp.py --update-mechanism external`; preserve the actual commit/version and do not falsely label it Nix/Docker. This prevents native self-publication from competing with the MGS launcher owner. Validate the supported ownership contract, unchanged live launcher, dependency interpreter, guard, regressions and real canaries before retry. Include `install-stamp.json` in every deployment/restart snapshot and assert its reviewed hash before each agent; never disable a safety check or rely on an unrecognized wrapper shape to avoid publication.
+
 ### Cutover configuration and real-smoke refinements
 
 - Apply pre-handoff boolean changes with the **currently running** runtime's native config CLI/writer. A candidate CLI can bump `_config_version` before the old gateway has been replaced, even when the only requested change is `sessions.auto_prune`. Compare complete parsed before/after mappings, preserve compatibility until handoff, and sync mirrors with the native atomic writer; treat schema metadata separately from operational settings. Use the serializer actually installed in that runtime rather than assuming PyYAML is present.
