@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Nenhuma configuração/decisão pendente para Rodolfo. Zeus monitora o primeiro upload real e primeira exclusão elegível: ainda não observados porque não há pares de produção. Retenção 24h e dois pares/ciclo; nunca tocar histórico/canários ou forçar prova destrutiva. SA tick natural 19:10 ET saudável com controlador ativo; REPORT-INFRA 1562242104103534639 conferido. Falhas/ambiguidade devem ser investigadas e recuperadas no mesmo escopo.",
-      "objective": "Fluxo autônomo operacional de novos criativos: upload contextual, Ares, Gmail 30 TB, SA, leitores/estoque e limpeza limitada",
-      "source": "docs/ares-creative-30tb-autonomous-requirements.md",
-      "state": "operational_autonomous_archive_and_retirement_active",
+      "next_step": "Escopo corrigido em 1562256530454220851: copiar acervo completo está autorizado. Inventário novo congelado em historical-migration-1562256530454220851/discovery.json; histórico ainda não copiado. Preparar backfill com manifestos exatos e nova versão pinada do owner worker (atual rejeita HISTORICAL_SCOPE), validar os 1002 atalhos/leitores/IDs e acessos, atualizar Ares. Solicitar confirmação destrutiva específica antes de retirar fontes históricas; autorização anterior só cobre novos pares. Não alterar campanhas/budgets, nem fingir migração por mudança de docs.",
+      "objective": "Migrar TODO o acervo criativo existente e futuro aos 30 TB; Drive antigo somente intake/staging e atalhos/controle necessários",
+      "source": "docs/ares-creative-30tb-full-archive-migration.md",
+      "state": "full_archive_migration_scoped_historical_retirement_confirmation_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-20T23:12:50+00:00"
+      "updated_at": "2026-10-21T00:15:52+00:00"
     },
     {
       "agent": "ares",
@@ -6902,5 +6902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-20T23:12:50+00:00"
+  "updated_at": "2026-10-21T00:15:52+00:00"
 }

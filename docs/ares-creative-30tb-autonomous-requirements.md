@@ -1,6 +1,8 @@
 # Ares Creative Ops — 30 TB autonomous archive requirements
 
-## Current authoritative status — autonomous archive and bounded retirement active
+## Current authoritative status — full-archive objective clarified; historical migration pending
+
+Rodolfo clarified in `1562256530454220851` that ALL existing creative archive bytes, not only future uploads, belong permanently in the 30 TB account; the old Drive is intake/staging only (plus necessary stock aliases/control). This supersedes the previous scope-completion claim, not the currently running new-upload pipeline. Canonical full-migration source: `docs/ares-creative-30tb-full-archive-migration.md`; a fresh ID-level inventory is recorded under `historical-migration-1562256530454220851/`. Historical copies have not started. The existing new-only retirement authorization does not permit deleting historical sources; that needs its own explicit destructive confirmation.
 
 This section explicitly supersedes the rollout-status snapshots below; retain them as historical evidence, not active flags. Runtime truth remains `data/ares/creative-ops/30tb-archive/queue-config.json`, `intake-config.json` and their acceptance receipts.
 

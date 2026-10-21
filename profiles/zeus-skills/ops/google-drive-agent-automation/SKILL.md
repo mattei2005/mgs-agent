@@ -68,6 +68,9 @@ Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment co
 
 ## Operator-facing handoff
 
+- When the storage objective is to use the old Drive only for intake/staging, include the existing archive explicitly in the migration boundary. Inventory the whole creative tree, including non-media auxiliaries and existing shortcuts; a LEGACY-only audit or a future-upload pipeline is not a full migration. Do not claim the overall objective complete while historical bytes or dependent links remain unmigrated.
+- Keep historical copy authorization distinct from destructive historical retirement. Reuse neither a future-only cleanup approval nor a date-cutoff exception to remove old assets. Freeze the full target manifest, preserve business IDs/reservations and shortcut consumers, and explain any remaining owner-code or destructive gate without reducing the task to a documentation edit.
+
 - When Rodolfo asks what is missing or says he did not understand, start with the practical gap in one sentence, then show the current flow and the exact remaining step. State separately whether that step is unimplemented, implemented but disabled, or awaiting the required authorization; technical gate lists obscure that distinction.
 - Before confirming that operators can keep uploading normally, check the live intake registry and explain the required subfolder in the same answer: unchanged upload root → operation → manager. Explicitly identify root-level or legacy folders that are outside automatic intake, and say whether original media can be uploaded without preprocessing; a bare “same folder” can send files to an unmonitored location.
 
