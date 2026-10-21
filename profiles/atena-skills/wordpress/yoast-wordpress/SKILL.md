@@ -24,6 +24,7 @@ Detailed reference files are in `references/`:
 - `references/yoast-score-architecture.md` — full DB schema, mu-plugin history, yoastseo Node.js scorer
 - `references/content-repair-readability.md` — full repair workflow with Python diagnostic
 - `references/bounded-editorial-native-score-repair.md` — limited content-only repair, per-ID preservation, current-hash manifests and native score verification
+- `references/social-image-after-featured-rest.md` — stale OG/Twitter after REST featured-media updates; native per-ID derivation, preservation and separate cache gates
 - `references/site-health-monitor.md` — full cron monitor design, pitfalls, checklist
 
 ---
