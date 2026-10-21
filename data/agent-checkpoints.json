@@ -1113,12 +1113,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
-      "next_step": "Congelar fontes, revisar, sanitizar e verificar READY LEGACY inventario e arquivo",
-      "objective": "Tratar e mover lote US SHEIN EN enviado por Kelly",
-      "source": "discord:thread:1562496628559188109",
-      "state": "inventario live localizado na raiz upload manual; estabilizacao e revisao pendentes; nenhum write drive realizado",
+      "next_step": "Validar clean visual, executar upload READY e move LEGACY com readbacks, auditar e acompanhar arquivo",
+      "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/kelly-1562496628559188109/manifest.json;prepare:proc_5d85924d69e1;plan:proc_782d4be5ca79",
+      "state": "30 fontes estaveis; 1080x1920; revisao visual concluida, sem duplicatas exatas. preparacao concluida; sanitizacao e plano em andamento",
       "thread_id": "1562496628559188109",
-      "updated_at": "2026-10-21T16:04:51+00:00"
+      "updated_at": "2026-10-21T16:12:08+00:00"
     },
     {
       "agent": "ares",
@@ -6942,5 +6942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T16:04:51+00:00"
+  "updated_at": "2026-10-21T16:12:08+00:00"
 }
