@@ -4532,6 +4532,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-1562318014286929935",
+      "next_step": "Manutencao separada de seguranca para compatibilizar leitura de identidade sem ampliar escopo; depois dry-run e retomada dos mesmos cinco request IDs. Nao bypassar gate nem criar campanhas por outra rota.",
+      "objective": "Duplicar C200x4 C165x2 C245x2 C196x2 C86x2 Yolokfx02 G006 USD45/dia inicio21/10/2026 00:35 ET",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562318014286929935/preflight-blocker.json",
+      "state": "blocked_security_gate_incompatibility: conta positiva allowed=true mas guard rejeita endpoint tecnico me exigido no preflight de identidade; zero writes meta tentados; 12 copias usd540/dia preservadas nos cinco requests originais",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-21T04:16:06+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-all36-approved-compact-20261019T233015",
       "next_step": "Sem pendencias. Proximos relatorios SHEIN usam compact_identity_standard automaticamente;BUsobrebudgetvigenteneverinicial,reconciliar antesfinalrender. Consultar completion/latest-deliveries;nao reenviar nem excluir outros historicos sempedido.",
       "objective": "Promover formato compacto aprovado e substituir36ultimosrelatorios G001-G006;corrigir BU com budget vigente e explicar na legenda",
@@ -6902,5 +6912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T04:00:32+00:00"
+  "updated_at": "2026-10-21T04:16:06+00:00"
 }
