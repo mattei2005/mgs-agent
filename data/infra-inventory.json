@@ -853,16 +853,16 @@
       "authority_message_id": "1562459803186626571",
       "source_thread_id": "1562078493498540042",
       "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
-      "status": "owner_repin_required_source_guard_fix_published",
-      "block_evidence": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/source-guard-diagnosis-1562471409740021896.json",
-      "updated_at": "2026-10-21T14:32:25.879376+00:00",
+      "status": "owner_repin_required_archive_parent_visibility_fix",
+      "block_evidence": "data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/archive-parent-diagnosis-1562474366359310489.json",
+      "updated_at": "2026-10-21T14:42:47.357313+00:00",
       "inventory_objects": 7884,
       "inventory_bytes": 228215846168,
       "native_sheets": 8,
       "native_tabs": 163,
       "native_formulas": 3,
-      "staged_worker_file_id": "1npryxflWsy8Lvx3LS7cnbivYp4ejyns-",
-      "staged_worker_sha256": "4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd",
+      "staged_worker_file_id": "1MFz88EdhGmAk86PIf7wkm6gP0b23OxIf",
+      "staged_worker_sha256": "e4f32e02e99f29021030a58cc2a0b20a9eef35dc23e4d4e8af8e10c271a30728",
       "manifest_file_id": "10UR_TxYDpTZhwfQ8sWj0OuJt7Dlrqcw2",
       "manifest_sha256": "9153478b8dbf4703c25806685cbd893b72c3c0f8bb73ed3908ff01d34136a238",
       "canary_id": "1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4",
@@ -873,39 +873,39 @@
       "existing_creative_backfill_preserved": true,
       "acl_changes": false,
       "new_credentials": false,
-      "js_tests_passed": 18,
+      "js_tests_passed": 23,
       "python_acceptance_tests_passed": 8,
       "python_backfill_tests_passed": 8,
       "skill_runtime_mirror_identical": true,
       "report_infra": {
         "status": "verified",
         "channel_id": "1498132022634483894",
-        "message_id": "1562473808026275954",
+        "message_id": "1562476359442239620",
         "content_empty": true,
         "single_embed": true,
         "no_mentions": true,
-        "verified_at": "2026-10-21T14:33:18.837500+00:00"
+        "verified_at": "2026-10-21T14:43:27.017734+00:00"
       },
       "files": [
         {
           "path": "/root/mgs-agent/scripts/mgs_whole_drive_migration.py",
-          "sha256": "b1edcb7e6f535a75d2b0469ad222b2ded9c6fc463ed821087c6ae20ac97edae4",
-          "size_bytes": 14459
+          "sha256": "07da28cd8b41d8a5d0202335e73373e961a7529688fedf2a8f5be79e0e5ef2c0",
+          "size_bytes": 14510
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/WholeDriveProbeExtension.js",
-          "sha256": "a2dc13f8ca9650635d8c90489b6212c13420cc54fba8b0e209d55d0026fb238f",
-          "size_bytes": 12674
+          "sha256": "2d72d0116d73c3d8cb44c7f1aa6699674127f17c63ec8a12c29a81c69bd5d36a",
+          "size_bytes": 13491
         },
         {
           "path": "/root/mgs-agent/integrations/creative-archive-30tb/WorkerWholeDriveProbe.js",
-          "sha256": "4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd",
-          "size_bytes": 36958
+          "sha256": "e4f32e02e99f29021030a58cc2a0b20a9eef35dc23e4d4e8af8e10c271a30728",
+          "size_bytes": 37826
         },
         {
           "path": "/root/mgs-agent/tests/test_whole_drive_probe.cjs",
-          "sha256": "52df734e0410f50ca879b6dffc1601bb5bea48c8bbd72d36186442168a5ece4d",
-          "size_bytes": 11494
+          "sha256": "cb545b9408fdc3e575eeffb0204807ca301634f8d0fd5a400085955b66dd68b6",
+          "size_bytes": 13676
         },
         {
           "path": "/root/mgs-agent/tests/test_mgs_whole_drive_migration.py",
@@ -914,22 +914,22 @@
         },
         {
           "path": "/root/mgs-agent/docs/mgs-whole-drive-30tb-migration.md",
-          "sha256": "5af4139762633afa58154feeaf4120d30d40390f63795782969b0ff98e6462a7",
-          "size_bytes": 10502
+          "sha256": "f92f0bfb81e39251f7cbef276d53fe0407c475aaf07473a07cef18560ecbf8e0",
+          "size_bytes": 12634
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "sha256": "07a7c1ce9e4f6f598e90b2428469aa670917501c3545eeab7d7df196d12dd1f9",
-          "size_bytes": 28124
+          "sha256": "1d37e7780d0807bea1d0b287d61f5b20196e29f8c27e7c362ab1b79186830ccd",
+          "size_bytes": 28812
         },
         {
           "path": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
-          "sha256": "07a7c1ce9e4f6f598e90b2428469aa670917501c3545eeab7d7df196d12dd1f9",
-          "size_bytes": 28124
+          "sha256": "1d37e7780d0807bea1d0b287d61f5b20196e29f8c27e7c362ab1b79186830ccd",
+          "size_bytes": 28812
         },
         {
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/stage.json",
-          "sha256": "f796a97a1a2f5376eef50b7f681aa65129ee1512a6d521a1196499ec5d8cd264",
+          "sha256": "6c797a62d8084689834ff769704863ee2c13a061d477101f640442d392abd8ff",
           "size_bytes": 997
         },
         {
@@ -956,6 +956,11 @@
           "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/source-guard-diagnosis-1562471409740021896.json",
           "sha256": "01ec0fa2edeedcbe9132fd5c8bd0e97165247e2dec97b04149cf124cfda4e6c5",
           "size_bytes": 1152
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/archive-parent-diagnosis-1562474366359310489.json",
+          "sha256": "f3ab5bfb60da3e0674451159695d3fd3a86b467139022371d4bd3b588aff2fe1",
+          "size_bytes": 1983
         }
       ],
       "source_guard_repair": {
@@ -1002,8 +1007,88 @@
           "single_embed": true,
           "no_mentions": true,
           "verified_at": "2026-10-21T14:04:47.550517+00:00"
+        },
+        {
+          "status": "verified",
+          "channel_id": "1498132022634483894",
+          "message_id": "1562473808026275954",
+          "content_empty": true,
+          "single_embed": true,
+          "no_mentions": true,
+          "verified_at": "2026-10-21T14:33:18.837500+00:00"
         }
-      ]
+      ],
+      "archive_parent_visibility_fix": {
+        "canary_still_in_source": true,
+        "canonical_sa_archive_root_now": {
+          "id": "1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J",
+          "owners": [
+            {
+              "emailAddress": "mgsdigitalcorp@gmail.com"
+            }
+          ],
+          "parents": [],
+          "version": "17"
+        },
+        "confirmed_failure": "archive root parent visibility differs between SA and owner",
+        "correction": "For this exact archive-root ID only, when SA snapshot omits parents require owner-visible parent to equal authenticated owner My Drive root and pinned owner; keep all source paths strict. Global blocked state cannot remain ok.",
+        "native_owner_publisher_verified": true,
+        "owner_recovery_verified": false,
+        "owner_root_identity_pending_native_confirmation": true,
+        "production_corporate_migrated": false,
+        "receipt": {
+          "attempts": 1,
+          "authorizationMessageId": "1562459803186626571",
+          "canary": {
+            "moveAttempted": false,
+            "restored": null,
+            "sourceId": "1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4"
+          },
+          "completedAt": "2026-10-21T14:34:08.799Z",
+          "deleteSource": false,
+          "diagnostic": {
+            "expected": {
+              "driveId": null,
+              "id": "1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J",
+              "mimeType": "application/vnd.google-apps.folder",
+              "name": "MGS-ARQUIVO",
+              "parents": []
+            },
+            "fields": [
+              "parents"
+            ],
+            "nativeDrive": null,
+            "observed": {
+              "driveId": null,
+              "id": "1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J",
+              "mimeType": "application/vnd.google-apps.folder",
+              "name": "MGS-ARQUIVO",
+              "parents": [
+                "0AET_Qs3G4VFwUk9PVA"
+              ],
+              "trashed": false
+            },
+            "targetId": "1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J"
+          },
+          "manifestSha256": "9153478b8dbf4703c25806685cbd893b72c3c0f8bb73ed3908ff01d34136a238",
+          "productionMutation": false,
+          "reason": "WHOLE_DRIVE_PROBE_SOURCE_CHANGED:1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J:parents",
+          "retryAfter": "2026-10-21T14:39:08.798Z",
+          "schema": "mgs.whole.drive.probe.receipt.v1",
+          "status": "blocked",
+          "targets": [],
+          "workerSha256": "4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd"
+        },
+        "receipt_file_id": "1o2PdzovEnImcwqUbYBFyII_Es7F1ewQE",
+        "source_deleted": false,
+        "source_message_id": "1562474366359310489",
+        "tests": {
+          "js": 23,
+          "python_acceptance": 8,
+          "python_backfill": 8
+        },
+        "verified_at": "2026-10-21T14:40:47.748081+00:00"
+      }
     },
     {
       "id": "zeus-vps-hermes-1562331354568589393",

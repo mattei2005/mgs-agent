@@ -51,13 +51,23 @@ Ação externa necessária: no MESMO Code.gs, trocar somente o ID de `DriveApp.g
 
 Retomada Zeus: `python3 scripts/mgs_whole_drive_migration.py status`; verificar receipt owner, quinze alvos, prova real de restauração da Sheet técnica e capacidades/permissões observadas. Esperar heartbeat AGENDADO do novo SHA e trigger existente `2456112746912022528`, então `accept-owner` promove atomicamente os pins SA/histórico, mantendo flags, manifesto de criativos e cópias existentes. Rodar o tick comum e conferir recorrência; só então definir/executar a migração corporativa preservando IDs/ACL e produtores. Não pedir novo consentimento nem recriar timer para substituir essa verificação. Os comandos `prepare`/`publish-probe` são preparação, não aceitação live.
 
-## Correção do validador e diagnóstico — pin vigente
+## Correção do validador e diagnóstico — versão anterior
 
 A imagem de Rodolfo em `1562471409740021896` confirma execução do código após o loader e erro `WHOLE_DRIVE_PROBE_SOURCE_CHANGED`, iniciado 10:22:42 AM e encerrado 10:23:25 AM. O erro anterior não incluía ID/campo, portanto o campo exato observado pelo proprietário ainda não foi provado. A SA releu os quinze alvos sem divergência; a evidência nativa demonstra `files.get(root).name=Drive` e `drives.get(root).name=MGS-AGENTS`. Comparar esse rótulo da raiz virtual como identidade entre principais era um defeito do validador, mas não se deve afirmar que esse foi o campo específico da execução owner sem receipt.
 
 A raiz agora é vinculada por `drives.get` e ID nativo. Os outros nomes, todos os IDs, MIME, parents e driveId continuam estritos. Uma divergência registra ID, campos esperados/observados em receipt owner e bloqueio no heartbeat, em vez de abortar silenciosamente antes das evidências. Limite de cinco tentativas/cooldown e preservação do receipt de restauração do canário evitam replay/loops.
 
-Novo código preparado, publicado e relido: ID `1npryxflWsy8Lvx3LS7cnbivYp4ejyns-`, SHA-256 `4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd`. Este é o único pin staged vigente. Passaram dezoito testes JS, oito de aceitação Python e oito do backfill. Evidência `source-guard-diagnosis-1562471409740021896.json`.
+Código anterior, supersedido pela correção de visibilidade abaixo: ID `1npryxflWsy8Lvx3LS7cnbivYp4ejyns-`, SHA-256 `4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd`. Passaram dezoito testes JS, oito de aceitação Python e oito do backfill. Evidência `source-guard-diagnosis-1562471409740021896.json`.
 
 Correção ainda NÃO executada/validada no Google. O proprietário precisa repinar somente ID/hash no mesmo Code.gs e rodar mgsArquivoTeste. O pin SA permanece anterior, nenhuma migração corporativa/exclusão/ACL foi aplicada, e a Sheet técnica foi relida na origem. O último código owner falhou antes do heartbeat, interrompendo o ciclo; não descrever o fluxo como saudável até nova execução real e recuperação validada. Não alterar timer/manifesto/credenciais nem reescrever requests para contornar o erro.
+
+## Visibilidade do pai My Drive — pin staged vigente
+
+A imagem `1562474366359310489` e o receipt owner nativo lido pela SA identificaram o alvo/campo real: `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`, `parents`. O manifesto SA tem `[]` porque o pai não é projetado para a SA; o proprietário vê `[0AET_Qs3G4VFwUk9PVA]`. A resposta anterior comprovou execução da versão nova e progresso criativo parcial, mas NÃO sucesso do probe: `blocked` não estava vazio, `wholeDriveProbe.status=blocked` e `productionMutation=false`. O canário sequer foi movido. Receipt, publisher, expected/observed e releitura SA estão em `archive-parent-diagnosis-1562474366359310489.json`.
+
+A correção trata somente o ID exato do archive root: não confunde parent omitido com parent vazio. Exige que o pai visto pelo owner seja o root My Drive obtido de `files.get('root')`, com propriedade da conta autenticada e MIME de pasta. Pais arbitrários, owner errado e todos os pais de fontes permanecem bloqueados. O resultado registra essa prova nativa. A identidade do root visto pelo proprietário ainda precisa ser confirmada pela execução desta nova versão, não foi presumida pelo prefixo do ID.
+
+O top-level agora retorna `blocked` quando o probe estiver bloqueado, mesmo que uma cópia criativa tenha avançado. Passaram 23 testes JS, oito testes Python de aceitação e oito do histórico, incluindo visibilidade de parent e rejeições. Fontes criativas, requests, manifesto fixado, retenção e ACL não foram reescritos.
+
+Único pin staged vigente: ID `1MFz88EdhGmAk86PIf7wkm6gP0b23OxIf`, SHA-256 `e4f32e02e99f29021030a58cc2a0b20a9eef35dc23e4d4e8af8e10c271a30728`. Publicado e relido pela SA, ainda NÃO executado/aceito no Google. O proprietário troca apenas ID/hash no mesmo Code.gs, salva e roda mgsArquivoTeste; sem manifesto, timer ou Implantar. Após receipt de conclusão/canary restaurado e heartbeat scheduled com o novo digest, `accept-owner` promove os dois pins sob lock e valida rollback. A migração corporativa e seu fechamento integral continuam pendentes; não repetir uma afirmação de recuperação antes das provas reais.
 

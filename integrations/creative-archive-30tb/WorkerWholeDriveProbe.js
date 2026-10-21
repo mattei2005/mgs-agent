@@ -196,7 +196,7 @@ function mgsArchiveWorkerTick(input) {
       var paused={status:'runtime_budget_paused',deleteSource:false};mgsArchiveWriteHeartbeat(c,paused);return paused;
     }
     var summary={status:'ok',copied:[],blocked:[],canaryAcknowledged:mgsArchiveCanaryAck(c),deleteSource:false};
-    if(summary.canaryAcknowledged){summary.wholeDriveProbe=mgsWholeDriveProbeSafely(c,props,start);if(['blocked','blocked_canary_restore','recovered_canary_no_replay'].indexOf(summary.wholeDriveProbe.status)>=0)summary.blocked.push({component:'whole_drive_probe',reason:summary.wholeDriveProbe.reason || summary.wholeDriveProbe.status});}
+    if(summary.canaryAcknowledged){summary.wholeDriveProbe=mgsWholeDriveProbeSafely(c,props,start);if(['blocked','blocked_canary_restore','recovered_canary_no_replay'].indexOf(summary.wholeDriveProbe.status)>=0)summary.blocked.push({component:'whole_drive_probe',reason:summary.wholeDriveProbe.reason || summary.wholeDriveProbe.status});if(summary.blocked.length)summary.status='blocked';}
     if(summary.canaryAcknowledged)summary.backfillTree=mgsArchiveBackfillTree(c,start);
     var rows=mgsArchiveList(c.requestsFolderId,null,'request','queued');
     for(var i=0;i<rows.length && summary.copied.length+summary.blocked.length<2 && Date.now()-start<210000;i++) {
@@ -388,14 +388,24 @@ function mgsWholeDriveOwnerProbe(c,props,start){
   if(m.trashed)fields.push('trashed');
   if(m.id!==t.id)fields.push('id');
   if(m.mimeType!==t.mimeType)fields.push('mimeType');
-  if(JSON.stringify(m.parents || [])!==JSON.stringify(t.parents || []))fields.push('parents');
+  var expectedParents=t.parents || [],observedParents=m.parents || [],ownerRoot=null,parentMatch=JSON.stringify(observedParents)===JSON.stringify(expectedParents);
+  if(t.id===c.archiveRootId && expectedParents.length===0){
+   parentMatch=false;
+   // Drive can omit a My Drive parent from the SA's view. The owner must prove
+   // the visible parent is its authenticated root; arbitrary parents still fail.
+   if(!m.driveId && observedParents.length===1 && (m.owners || []).some(function(o){return o.emailAddress===c.account;})){
+    ownerRoot=Drive.Files.get('root',{fields:'id,mimeType,owners(emailAddress)'});
+    parentMatch=ownerRoot && ownerRoot.mimeType==='application/vnd.google-apps.folder' && (ownerRoot.owners || []).some(function(o){return o.emailAddress===c.account;}) && observedParents[0]===ownerRoot.id;
+   }
+  }
+  if(!parentMatch)fields.push('parents');
   if((m.driveId || null)!==(t.driveId || null))fields.push('driveId');
   if(fields.length){
    var mismatch=new Error('WHOLE_DRIVE_PROBE_SOURCE_CHANGED:'+t.id+':'+fields.join(','));
-   mismatch.mgsProbeDetail={targetId:t.id,fields:fields,expected:{id:t.id,name:t.name,mimeType:t.mimeType,parents:t.parents || [],driveId:t.driveId || null},observed:{id:m.id,name:m.name,mimeType:m.mimeType,parents:m.parents || [],driveId:m.driveId || null,trashed:m.trashed},nativeDrive:nativeDrive};
+   mismatch.mgsProbeDetail={targetId:t.id,fields:fields,expected:{id:t.id,name:t.name,mimeType:t.mimeType,parents:t.parents || [],driveId:t.driveId || null},observed:{id:m.id,name:m.name,mimeType:m.mimeType,parents:m.parents || [],driveId:m.driveId || null,trashed:m.trashed},nativeDrive:nativeDrive,ownerRoot:ownerRoot};
    throw mismatch;
   }
-  targets.push({metadata:m,permissions:mgsWholeDrivePermissions(t.id),nativeDrive:nativeDrive});
+  targets.push({metadata:m,permissions:mgsWholeDrivePermissions(t.id),nativeDrive:nativeDrive,ownerRoot:ownerRoot});
  }
  var result={schema:'mgs.whole.drive.probe.receipt.v1',authorizationMessageId:p.authorizationMessageId,manifestSha256:MGS_WHOLE_DRIVE_PROBE.manifestSha256,status:'completed',owner:about.user,storageQuota:about.storageQuota || null,targets:targets,productionMutation:false,deleteSource:false,completedAt:null,canary:{sourceId:p.canary.id,moveAttempted:false,restored:false,sourceBefore:null,destinationAfter:null,sourceAfter:null,moveError:null}};
  var a=p.canary,before=mgsWholeDriveMeta(a.id);mgsWholeDriveCanaryIdentity(before,a);

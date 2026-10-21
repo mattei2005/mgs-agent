@@ -2393,12 +2393,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Imagem 1562471409740021896 confirmou WHOLE_DRIVE_PROBE_SOURCE_CHANGED após loader, sem identificar alvo/campo. SA releu os 15 alvos sem mismatch; native files.get root=Drive vs drives.get root=MGS-AGENTS comprovam defeito de comparação de label virtual, mas campo exato do owner ainda não foi exposto. Corrigido root via native drive ID sem reduzir gates de ID/MIME/parents/driveId/nomes não-root; falhas agora têm receipt detalhado e heartbeat bloqueado, retries máximos5. Nova versão publicada/relida ID 1npryxflWsy8Lvx3LS7cnbivYp4ejyns- SHA 4641e3f0a2f038347b2c5785d578eac1e73abe80d793cc7a58ed6956df6805dd. Passaram18JS+8Pythonaccept+8histórico. Necessário proprietário trocar apenas ID/hash no mesmo Code.gs, salvar e rodar mgsArquivoTeste, sem manifesto/timer/Implantar. Nenhuma promoção SA; canary permanece origem; produção corporativa não migrou nem foi removida. Após feito, ler receipt/campos reais e heartbeat scheduled novo SHA mesmo trigger, então accept-owner. Não prometer recuperação antes prova Google; última versão ativa no owner falhou e heartbeat parou.",
+      "next_step": "Imagem 1562474366359310489 e receipt Google owner verificado identificaram campo exato: MGS-ARQUIVO 1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J parents esperado[] porque SA não vê pai, owner vê [0AET_Qs3G4VFwUk9PVA]. Probe bloqueado, não sucesso apesar de statusgeral ok. Corrigido apenas archiveRootID: exigir pai visível igual files.get(root) nativo do owner autenticado, mesmo owner/MIME; outros pais estritos. Top-level agora blocked se probe blocked. Passaram23JS+8Pythonaccept+8histórico. Worker novo publicado/relido ID 1MFz88EdhGmAk86PIf7wkm6gP0b23OxIf SHA e4f32e02e99f29021030a58cc2a0b20a9eef35dc23e4d4e8af8e10c271a30728. Proprietário precisa trocar só ID/hash no mesmo Code.gs e rodar mgsArquivoTeste, sem manifesto/timer/Implantar. Após feito ler receipt status/campos e canary restored, heartbeat scheduled do novoSHA mesmo trigger2456112746912022528, só então accept-owner e tick comum. Não chamar ok com blocked não vazio; ainda não promover SA nem declarar recuperação/migração. Canary segue origem, sem moveAttempted; corp migration/delete/ACL zero. Diagnóstico archive-parent-diagnosis-1562474366359310489.json. Escopo integral permanece aberto.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automação integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_repin_required_source_guard_fix_published",
+      "state": "owner_repin_required_archive_parent_visibility_fix",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T14:30:35+00:00"
+      "updated_at": "2026-10-21T14:41:40+00:00"
     },
     {
       "agent": "zeus",
@@ -6823,12 +6823,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Apresentar runtime v0.21.7+159/e6ad505, upstreambase7cc3fb8c, stable0.22.3/5841pendentes e main13282fda/5849pendentes (8posrelease). Pedir inicio da preparacao isolada; nenhum cutover ou restart nesta revisao. Preservar101pathscommit+dirty/untracked, Codexrefresh, SHEINsplitter, Honcho, 90%, topologia3gateways e politica de retencao; auto_prune explicittrue e gate antes de startup. Fonte: /root/mgs-agent/reports/hermes-updates/20261021-1562469526409322601-readonly/review.json",
-      "objective": "VPS concluida; revisar Hermes instalado e novidades antes de iniciar plano controlado",
-      "source": "discord:1562331354568589393/1562469526409322601",
-      "state": "vps completed_validated; hermes readonly review completed; awaiting owner start of isolated preparation per1562469526409322601",
+      "next_step": "Capturar superficies e snapshots nativos; baseline ampla verde; candidato inativo com port completo, testes de preservacao, regressao/config/auth isolados. Sem launcher, restart, exclusao, credencial ou configprod. Estado /root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/preparation-state.json",
+      "objective": "Preparar Hermes main isolado, preservar integralmente MGS; producao e gateways inalterados",
+      "source": "discord:1562331354568589393/1562474468146942115",
+      "state": "isolated_preparation_started; vps completed_validated; authority1562474468146942115; target3f2afed3eb813cb00bd381d29b084d0e01de048f",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T14:22:23+00:00"
+      "updated_at": "2026-10-21T14:37:45+00:00"
     },
     {
       "agent": "zeus",
@@ -6932,5 +6932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T14:30:35+00:00"
+  "updated_at": "2026-10-21T14:41:40+00:00"
 }
