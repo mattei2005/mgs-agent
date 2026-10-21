@@ -1136,14 +1136,14 @@
         "preparation": {
           "authority": "1562474468146942115",
           "status": "candidate_validated_awaiting_activation_and_retention_confirmation",
-          "evidence": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/preparation-final.json",
+          "evidence": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/preparation-final-4d043038.json",
           "candidate_state": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/candidate-state.json",
           "candidate": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
-          "validated_upstream": "47b23fa048536c413a53ae5ad391f9a911f5d4e5",
-          "validated_port_head": "68a3c35f08bd04474c410cfa10933e67c3cce407",
+          "validated_upstream": "4d04303818b61bf3aa09278af48356315515965b",
+          "validated_port_head": "d743b988130f2614e04f6954fcf07ed40885650f",
           "latest_upstream_observed": "4d04303818b61bf3aa09278af48356315515965b",
-          "new_commits_since_validated_target": 1,
-          "new_commit_scope": "GitHub Actions desktop bundled release workflow only; not ported or activated",
+          "new_commits_since_validated_target": 0,
+          "new_commit_scope": null,
           "original_paths_preserved": 105,
           "consolidated_paths": 111,
           "broad_modules": 213,
@@ -1161,9 +1161,14 @@
             "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/scripts/ensure-hermes-mgs-patches.sh",
             "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/scripts/run-hermes-post-upstream-regression.sh",
             "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/patches/hermes/current-runtime-manifest.json",
-            "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/patches/hermes/mgs-runtime-customizations-2026-10-21-main-47b23fa0.patch"
+            "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/patches/hermes/mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
           ],
-          "next_gate": "Owner Critical activation confirmation incl latest-main refresh and sessions.auto_prune true -> false in Zeus/Atena/Ares; root already false. Real profile inference smokes and post-restart validation remain gated."
+          "next_gate": "Critical owner confirmation: activate latest validated 4d043038; change sessions.auto_prune true -> false only for Zeus/Atena/Ares (root already false). Preserve data, recreate native snapshots immediately before cutover; real inference and post-restart smokes still required.",
+          "source_and_pids_unchanged": true,
+          "learned_skill_readback": "profile and versioned mirror identical",
+          "report_infra_message_id": "1562513050781880514",
+          "report_infra_channel_id": "1498132022634483894",
+          "report_readback": "exact message ID returned by alerts-infra readback; content empty"
         }
       },
       "post_boot_result": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json",
