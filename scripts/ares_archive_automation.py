@@ -172,8 +172,15 @@ def _run_cycle(apply=False,reconcile_only=False,intake_state=None,allow_retireme
         def publish(row):return bridge.enqueue(d,c,bridge.job_for_lineage(d,c,row['asset_id']))
         production=enqueue_ready(rows,producer_config,state,apply,publish)
         cleanup=retirement.run_cycle(d,c,intake_state or {'claims':{}},apply=apply and not reconcile_only) if healthy and not reconciliation['blocked'] and allow_retirement else {'status':'deferred','enabled':c.get('delete_source',False),'blocked':[]}
+        backfill={'status':'not_enabled','blocked':[]}
+        backfill_stage=bridge.read_json(bridge.DATA/'historical-migration-1562256530454220851/stage.json',{})
+        if healthy and not reconciliation['blocked'] and allow_retirement and backfill_stage.get('copy_enabled') is True:
+            import ares_archive_backfill as historical
+            backfill=historical.cycle_locked(d,c,apply=apply and not reconcile_only)
+            reconciliation['blocked'].extend(backfill.get('blocked',[]))
         blocked=reconciliation['blocked']+production['blocked']+cleanup['blocked']
         result={'schema':'mgs.archive.automation.tick.v1','status':'ok' if healthy and not blocked else 'blocked','executed_at':bridge.now_iso(),'apply':apply,'worker_ready':healthy,'worker_executed_at':hb.get('executedAt'),'worker_trigger_uid':hb.get('triggerUid'),'inventory_rows':len(rows),'jobs_total':len(jobs),'jobs_scanned':len(selected),'reconciliation':reconciliation,'production':production,'retirement':cleanup,'queue_enabled':c['queue_enabled'],'delete_source':c['delete_source'],'owner_worker_delete_source':False,'prefer_archive_reads':c.get('prefer_archive_reads',False),'include_historical':c.get('include_historical',False)}
+        result['historical_backfill']=backfill
         if apply:
             state['updated_at']=result['executed_at'];bridge.atomic_json(bridge.DATA/'automation-state.json',state);bridge.atomic_json(bridge.DATA/'automation-last-tick.json',result)
         return result
