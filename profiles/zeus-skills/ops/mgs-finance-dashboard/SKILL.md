@@ -49,12 +49,22 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 
 ## When to Use
 
-- Auditing the principal MGS finance workbook before a dashboard or month rollover.
-- Continuing the August 2026 dashboard initiative from another session.
-- Reconciling the principal monthly tab, `CAIXA SINTETICO`, and manager workbooks.
-- Building or validating the normalized dashboard base and executive views.
+- Reconciling supplied network/spend closing reports against the live financial application and applying authorized monthly corrections.
+- Resuming financial-application work from its current checkpoint and production state.
+- Explaining revenue, spend, manager remuneration or payment observations in the Dash.
+- Auditing the principal monthly Sheet, `CAIXA SINTETICO` or manager workbooks only when those surfaces are explicitly requested.
 
-Do not use this skill to change source formulas without an explicit, cell-bounded correction authorized by Rodolfo.
+Do not substitute the general finance workbook for the live Dash as the comparison target. A supplied closing Sheet is a read-only reference unless Rodolfo separately authorizes editing it.
+
+## Rodolfo's monthly-closing workflow
+
+1. **Compare the requested source with the actual destination.** Read the supplied closing report and the same month in the live Dash. “Analyze first” prohibits financial writes; it does not mean stopping after inspecting the report or asking for missing exports before consulting available application/API evidence.
+2. **Explain the current numbered point before correcting it when requested.** Show Dash versus report in the original currency, the signed difference, affected domains/days/managers and one concrete example. Separate gross-revenue changes from their downstream effect on profit and remuneration; identify increases even when the overall adjustment is a reduction. Distinguish verified differences from a supplier-cause explanation supplied by management.
+3. **Bind approval to that point.** In a point-by-point sequence, “correct everything” authorizes all explained corrections within the current point, not the remaining networks or expense categories. Execute the full approved point without requesting permission again for each domain; pause only for an unresolved rule, attribution conflict or separate authorization gate.
+4. **Keep the confirmed closing source authoritative.** Once Rodolfo chooses its values, correct the Dash to that source rather than reopening the same source-choice question. Preserve existing attribution exceptions, unrelated currencies and settled periods; do not convert a gross correction into a second expense or payment deduction.
+5. **Finish with the verified financial result.** When asked to notify only at completion, keep routine progress internal. Report source total, Dash total, monetary difference, actual validation coverage, requested manager-note visibility and preserved scope. State cent-level parity accurately, then name the next untouched point without applying it.
+
+Use `references/adops-monthly-source-reconciliation.md` for source-quality gates, gross-overlay transactions and nonmonetary payment observations.
 
 ## Financial-system implementation
 
