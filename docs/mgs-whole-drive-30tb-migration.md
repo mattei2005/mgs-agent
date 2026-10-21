@@ -36,3 +36,18 @@ O worker Google ativo e seu bootstrap estão limitados a CRIATIVOS. Não consegu
 5. Ajuste e prova de todos os produtores/leitores/backup/restore/retention para destino de 30 TB; nenhum crescimento permanente no root antigo fora do staging autorizado.
 6. Concluir acervo criativo, leitores e atalhos; adequar pipeline para armazenamento antigo apenas temporário abaixo da entrada preservada.
 7. Executar somente a retirada autorizada após os gates aplicáveis; verificar árvore residual real e funcionamento integral, então reportar 100% com evidências. Até isso, iniciativa permanece aberta.
+
+## Preparação executada e gate Apps Script
+
+Oito Sheets reais foram lidas pela SA com Drive + Sheets API e baseline persistido: 163 abas, três fórmulas e nenhuma dependência IMPORTRANGE literal encontrada. Isso não comprova ausência de consumidores externos/Apps Script; esses continuam no gate de cutover. Nenhuma Sheet de produção foi copiada, movida ou alterada.
+
+Criada uma única Sheet técnica vazia `1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4`, marcada validationOnly, fora do catálogo Ares. A listagem de propriedades atrasou após o POST inicial; o ID existente foi reconciliado e reutilizado, sem segundo POST. A implementação agora valida o ID retornado diretamente antes de confiar no índice de busca.
+
+Manifesto SA de probe: ID `10UR_TxYDpTZhwfQ8sWj0OuJt7Dlrqcw2`, SHA-256 `9153478b8dbf4703c25806685cbd893b72c3c0f8bb73ed3908ff01d34136a238`. Quinze alvos exatos; somente leitura em produção. O único movimento permitido pela extensão é ida/volta da Sheet técnica fixada, com restauração imediata, intenção durável e reconciliação de resposta ambígua. Nenhuma chamada DELETE ou escrita de ACL é implementada. O teste observa separadamente acessos antes e depois e não transforma uma perda de herança em grant automático.
+
+Worker final preparado/publicado/relido: ID `1eYTggn8T3SWpKewqowuvcVvzSPV4bOH0`, SHA-256 `c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3`, fonte `integrations/creative-archive-30tb/WorkerWholeDriveProbe.js`. Fonte anterior de probe permanece evidência inativa; usar somente este pin final. O pin SA ativo e o backfill histórico não foram alterados. Passaram 11 testes JS do probe/composite, oito testes Python de aceitação/rollback e oito regressões Python do histórico. A primeira rodada da fixture Python usou hash staged antigo e foi corrigida para testar o candidato sem mudar o hash real de produção; a rodada final passou integralmente.
+
+Ação externa necessária: no MESMO Code.gs, trocar somente o ID de `DriveApp.getFileById(...)` e o SHA de `if(hash !== ...)` pelos valores finais acima; salvar e executar apenas `mgsArquivoTeste`. Não alterar manifesto, timer, consentimentos ou Implantar. Este repin habilita a inspeção/canário do novo escopo, não declara a migração corporativa pronta.
+
+Retomada Zeus: `python3 scripts/mgs_whole_drive_migration.py status`; verificar receipt owner, quinze alvos, prova real de restauração da Sheet técnica e capacidades/permissões observadas. Esperar heartbeat AGENDADO do novo SHA e trigger existente `2456112746912022528`, então `accept-owner` promove atomicamente os pins SA/histórico, mantendo flags, manifesto de criativos e cópias existentes. Rodar o tick comum e conferir recorrência; só então definir/executar a migração corporativa preservando IDs/ACL e produtores. Não pedir novo consentimento nem recriar timer para substituir essa verificação. Os comandos `prepare`/`publish-probe` são preparação, não aceitação live.
+

@@ -2392,6 +2392,16 @@
     },
     {
       "agent": "zeus",
+      "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
+      "next_step": "Inventário completo 7884 objetos; 8 Sheets/163 abas baseline e ACL raiz vs criativos distintos registrados. Worker probe final publicado/relido: ID 1eYTggn8T3SWpKewqowuvcVvzSPV4bOH0 SHA c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3. Proprietário precisa trocar somente ID/hash no MESMO Code.gs, salvar/rodar mgsArquivoTeste; sem manifesto/timer/Implantar. Probe corporativo é read-only em produção, único movimento ida/volta da Sheet técnica 1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4. Nenhum conteúdo corporativo migrado/removido, pin ativo e backfill anterior preservados. Após feito: scripts/mgs_whole_drive_migration.py status; verificar receipt canary restored e heartbeat scheduled novoSHA mesmo trigger2456112746912022528; então accept-owner promove ambos pins com rollback. Revisar capacidades/ACL reais; implementar canário e migração corporativa com produtores/backup/restore/Sheets e acesso restrito. Concluir criativos/atalhos/retirada só após gates. Rodolfo pediu silêncio exceto editor Apps Script, 100% ou Critical Subset real.",
+      "objective": "Migrar todo MGS-AGENTS para a conta de 30 TB, preservar somente upload/staging no antigo e validar automação/backup/Sheets/consumidores/limpeza integral",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "owner_editor_repin_required_probe_ready",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-21T14:01:50+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "RUNCLOUD-QUOTA-1561029089458917528",
       "next_step": "Nenhuma decisao pendente. Cron ativo respeita bloqueio persistente ate reset informado pela RunCloud; nao declarar recuperacao da API sem coleta integra.",
       "objective": "Aplicar cadencia RunCloud aprovada: saude2h e status de backups24h, preservando execucao dos backups, bloqueio de quota e billing",
@@ -6813,12 +6823,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Investigar e recuperar sem repetir instalacao: service_ssh.service",
+      "next_step": "Entregar milestone solicitado: VPS concluida, nove pacotes e reboot validados, oito phased preservados. LVFS HTTP503 e real mas nenhum dispositivo guest updatable; nao e pacote/firmware pendente. Hermes ainda inalterado; proxima fase autorizada: port completo de main em candidato inativo, sem cutover antes dos gates proprios. Nenhum executor concorrente permanece.",
       "objective": "VPS primeiro, Hermes main depois; rollback e validacao integral",
       "source": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json",
-      "state": "blocked_post_boot",
+      "state": "vps completed_validated; hermes pending; lvfs nonblocking not-applicable residual",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T13:46:19+00:00"
+      "updated_at": "2026-10-21T14:02:13+00:00"
     },
     {
       "agent": "zeus",
@@ -6922,5 +6932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T13:46:19+00:00"
+  "updated_at": "2026-10-21T14:02:13+00:00"
 }

@@ -27,6 +27,10 @@ O executor usa Graph Batch com filhos GET e paginação por cursor no mesmo path
 - Manter gasto Insights, valor integral da invoice (`amount`) e saldo residual (`amount_due`) como grandezas distintas. Nunca preencher invoice com o gasto do mês: ajustes de faturamento podem produzir diferenças reais. A normalização monetária exige offset/documentação da moeda; não inferir o saldo residual a partir de `balance`. Se o guard recusar `amount_due` ou `billed_amount_details`, não contornar nem ampliar o guard dentro do relatório; entregar os campos autorizados com a limitação explícita. Outubro em andamento não é invoice emitida só por existir gasto.
 - Não publicar anexos ou payloads financeiros durante uma validação técnica; entregar status/cobertura e limitações. Um relatório financeiro efetivo informa período, moeda, fonte e unidade.
 
+## Apresentação por conta e forma de pagamento
+
+Para o relatório Digital Trust de setembro/outubro com invoices abertas, reunir todas as contas selecionadas em somente dois blocos, `Cartão` e `Linha`, nas colunas `Conta → Invoice → Setembro → Outubro → Forma de pgto`. Não subdividir por presença/ausência de invoice. Reformatar a mesma base validada sem nova coleta quando o pedido mudar somente o layout; manter semântica, horário e ressalvas dos valores. Verificar unicidade das contas e reconciliação dos subtotais após reagrupar.
+
 ## Testes
 
 Rodar no Python da instalação Hermes `tests/test_ares_scoped_report.py` junto de `test_ares_confidentiality_routes.py`, `test_mgs_ares_asset_scope.py`, `test_mgs_domain_scope.py` e `test_ares_meta_common_usage.py`. Os fixtures são sintéticos, nunca evidência de dado financeiro real.

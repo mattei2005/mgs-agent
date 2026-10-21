@@ -599,7 +599,7 @@
       "maintenance_20261021": {
         "authority": "1562451046654283847",
         "kernel": "6.8.0-147-generic",
-        "status": "blocked_post_boot",
+        "status": "vps_completed_validated_ready_hermes",
         "result": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json"
       }
     },
@@ -848,8 +848,8 @@
   "runtime_artifacts": [
     {
       "id": "zeus-vps-hermes-1562331354568589393",
-      "status": "blocked_post_boot",
-      "vps_phase": "blocked_post_boot",
+      "status": "vps_completed_validated_ready_hermes",
+      "vps_phase": "vps_completed_validated_ready_hermes",
       "critical_authorization": "1562451046654283847",
       "rollback": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393",
       "rollback_validated": "9 packages: 7 original debs and 2 strict installed payloads; SHA256 and tar content comparisons passed",
@@ -870,9 +870,10 @@
         "removed": 0,
         "phased_deferred": 8
       },
-      "mutation_status": "All nine exact package targets installed with rc=0; dpkg clean and all three gateway PIDs unchanged; reboot prepared, not executed yet; no files deleted",
-      "fwupd_refresh": "Metadata refresh failed: LVFS returned HTTP 503; bounded attempts failed; no firmware install attempted; strict post-boot gate remains open",
-      "next_gate": "service_ssh.service",
+      "mutation_status": "All nine exact package targets and authorized reboot completed; post-boot kernel, packages, gateways, SSH and services validated; no files deleted",
+      "fwupd_refresh": "LVFS metadata HTTP503 persists. Successful device inventory proves zero guest-updatable devices; refresh is not applicable to this KVM guest update transaction, not a successful refresh and not a pending VPS package",
+      "firmware_applicability_tests": "5 cases PASS: empty/internal-only not applicable; updatable/updatable-hidden/mixed remain applicable",
+      "next_gate": "Hermes full-surface port and validation",
       "post_boot_result": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json",
       "checks": {
         "boot_changed": true,
@@ -916,7 +917,7 @@
         "service_mgs-finance-meta-lookup.service": true,
         "service_ares-shein-request-queue.service": true,
         "service_tailscaled.service": true,
-        "service_ssh.service": false,
+        "service_ssh.service": true,
         "tool_node": true,
         "tool_npm": true,
         "tool_corepack": true,
@@ -927,10 +928,10 @@
         "rollback_hashes": true,
         "boot_priority_errors_zero": true,
         "fresh_discord_3_profiles": true,
-        "firmware_metadata_refreshed": false
+        "firmware_applicability_satisfied": true
       },
-      "updated_at": "2026-10-21T13:46:19.187867+00:00",
-      "hermes_phase": "blocked_until_vps_recovery"
+      "updated_at": "2026-10-21T14:02:13.285430+00:00",
+      "hermes_phase": "pending_after_vps"
     },
     {
       "agent": "zeus",

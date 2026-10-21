@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pure VPS verifier and post-boot receipt; never reboots or restarts gateways."""
-import argparse,datetime,importlib.util,json,os,pathlib,re,stat,subprocess,tempfile,time,urllib.request
+import argparse,datetime,importlib.util,json,os,pathlib,re,socket,stat,subprocess,tempfile,time,urllib.request
 BASE=pathlib.Path('/root/mgs-agent')
 ROOT=pathlib.Path('/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393')
 IDENT='zeus-vps-hermes-1562331354568589393'
@@ -55,9 +55,16 @@ def collect(after=False):
   if unit=='ssh.service' and not checks['service_'+unit]:
    sock=dict(l.split('=',1) for l in run(['systemctl','show','ssh.socket','-p','ActiveState','-p','SubState','-p','Listen']).stdout.splitlines() if '=' in l)
    listener=run(['ss','-ltnp','sport = :22']).stdout
+   banner_ok=False
+   if sock.get('ActiveState')=='active' and sock.get('SubState')=='listening' and 'LISTEN' in listener:
+    # A read-only protocol probe lets the existing systemd socket create its
+    # RuntimeDirectory and start sshd naturally; no restart/config mutation.
+    try:
+     with socket.create_connection(('127.0.0.1',22),timeout=5) as connection:banner_ok=connection.recv(255).startswith(b'SSH-')
+    except OSError:pass
    config=run(['/usr/sbin/sshd','-t'],check=False)
-   checks['service_'+unit]=sock.get('ActiveState')=='active' and sock.get('SubState')=='listening' and ':22' in sock.get('Listen','') and 'LISTEN' in listener and config.returncode==0
-   details['ssh_socket_activation']={'socket':sock,'port22_listening':'LISTEN' in listener,'config_valid':config.returncode==0,'service_pid_zero_expected_until_connection':True}
+   checks['service_'+unit]=sock.get('ActiveState')=='active' and sock.get('SubState')=='listening' and ':22' in sock.get('Listen','') and 'LISTEN' in listener and banner_ok and config.returncode==0
+   details['ssh_socket_activation']={'socket':sock,'port22_listening':'LISTEN' in listener,'ssh_protocol_banner_valid':banner_ok,'config_valid':config.returncode==0,'runtime_directory_created_by_existing_socket_service':True}
   if unit.endswith('-gateway.service'):
    agent=unit.removesuffix('-gateway.service');args=(pathlib.Path('/proc')/state['MainPID']/'cmdline').read_bytes().split(b'\0')
    checks['runtime_argv_'+agent]=[s.decode() for s in args[:6]]==[pre['interpreter'],'/root/.local/bin/hermes','-p',agent,'gateway','run']
@@ -118,6 +125,15 @@ def report(result):
  text=run(['bash',str(BASE/'scripts/send-report-infra-embed.sh'),'--action','modificada','--type','vps/systemd/data','--path',str(SCRIPT)+'; /etc/systemd/system/'+UNIT+'; data/infra-inventory.json; data/agent-checkpoints.json','--reason','Lote exato de nove pacotes e reboot autorizados; Hermes preservado. Unit retida desabilitada, sem exclusao.','--evidence',str(ROOT/'post-boot-result.json')+'; overall='+str(result['overall'])+'; gate='+result['first_failure']+'; phased preservados; validacao completa no recibo.']).stdout
  m=re.search(r'message_id=(\d+)',text);assert m
  return verify_message('1498132022634483894',m.group(1))
+def firmware_applicability(devices):
+ # Virtualization alone is not an exemption: e.g. some VMs expose UEFI dbx.
+ return any(any(str(flag).startswith('updatable') for flag in device.get('Flags',[])) for device in devices)
+
+def firmware_inventory():
+ payload=json.loads(run(['fwupdmgr','get-devices','--json'],timeout=90).stdout)
+ devices=payload.get('Devices',[]);assert isinstance(devices,list)
+ return {'metadata_required':firmware_applicability(devices),'devices':[{'Name':d.get('Name'),'Plugin':d.get('Plugin'),'Flags':d.get('Flags',[])} for d in devices]}
+
 def post_boot():
  result=None
  try:
@@ -126,11 +142,19 @@ def post_boot():
    text=run(['python3',str(BASE/'scripts/check-gateway-ready.py'),'--service',agent+'-gateway.service','--log',str(pathlib.Path('/root/.hermes/profiles')/agent/'logs/agent.log'),'--offset',str(pre['log_offsets'][agent]),'--timeout','300'],timeout=340).stdout;ready[agent]=json.loads(text)
   run(['apt-get','update','-qq'],timeout=180)
   result=collect(True);result['details']['gateway_readiness']=ready
-  # One bounded recovery probe after the new boot; never firmware installation.
-  fw=run(['fwupdmgr','refresh'],timeout=180,check=False)
-  atomic(ROOT/'fwupd-post-boot.json',{'at':now(),'returncode':fw.returncode,'stdout':fw.stdout[-1800:],'stderr':fw.stderr[-1800:]})
+  # Scope firmware checks to devices that this guest can actually update.
+  applicability=firmware_inventory()
+  if applicability['metadata_required']:
+   fw=run(['fwupdmgr','refresh'],timeout=180,check=False)
+   firmware={'at':now(),'returncode':fw.returncode,'stdout':fw.stdout[-1800:],'stderr':fw.stderr[-1800:],'applicability':applicability}
+   firmware_ok=fw.returncode in (0,2,101)
+  else:
+   firmware={'at':now(),'status':'not_applicable_no_guest_updatable_devices','applicability':applicability}
+   firmware_ok=True
+  atomic(ROOT/'fwupd-post-boot.json',firmware)
   result=collect(True);result['checks']['fresh_discord_3_profiles']=all(v.get('ready') for v in ready.values());result['details']['gateway_readiness']=ready
-  result['checks']['firmware_metadata_refreshed']=fw.returncode in (0,2,101)
+  result['checks']['firmware_applicability_satisfied']=firmware_ok
+  result['details']['firmware']=firmware
   result['overall']=all(result['checks'].values());result['first_failure']=next((k for k,v in result['checks'].items() if not v),'')
  except Exception as exc:result={'at':now(),'overall':False,'checks':{},'first_failure':type(exc).__name__+': '+str(exc)[:400],'authority':AUTH}
  atomic(ROOT/'post-boot-result.json',result);audit('vps_post_boot_runtime_readback',overall=result['overall'],result=str(ROOT/'post-boot-result.json'))

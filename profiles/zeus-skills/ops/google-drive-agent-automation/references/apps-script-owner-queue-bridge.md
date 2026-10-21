@@ -106,4 +106,12 @@ After owner repin, allow the current manual execution and existing scheduled tri
 
 A paused `queue_enabled=false` stage is intentional deployment state, not active unattended intake. Keep transport, timer, reconciler and business-flow readiness separate in checkpoints and reports.
 
+## Whole-drive scope expansion and reversible owner probes
+
+When the owner expands a creative-only migration to the entire Shared Drive, inventory all active objects by paginated `corpora=drive` listing and reconcile ancestry, not just the visible root or creative manifest. Snapshot native Sheets metadata/formulas and discover consumers before deciding whether to move IDs or copy/replace them. Treat encrypted disaster-recovery files as a restricted recovery class: a destination creative parent with more collaborators is not ACL parity. Preserve producer, verification, retention and restore routes; copying today's backups alone is not an automated cutover.
+
+Keep a new owner probe separate from production migration. Pin its exact SA manifest and allow no production mutation, delete or ACL grant. If checking native cross-drive ID preservation, use only one explicitly tagged synthetic resource, a durable move intent, exact native owner checks, immediate restoration, and landed-state reconciliation after a lost response. Preserve a recovered receipt as terminal/no-replay rather than moving again on every timer. Promote a deliberately repinned digest only after the native receipt, live canary restoration and fresh scheduled heartbeat agree; update both general and historical digest bindings under the same queue lock, with rollback if either write fails.
+
+After a successful Drive create, persist and validate the returned ID with `files.get` before relying on property-indexed `files.list`; a lagging search index is not evidence that creation failed and never authorizes a second POST. Read back the landed exact object first, reuse it, and keep the original intent/receipt.
+
 Current reusable implementation: `/root/mgs-agent/scripts/ares_archive_bridge.py` and `/root/mgs-agent/integrations/creative-archive-30tb/`. Live rollout state and authority remain in the canonical initiative document/checkpoint; this reference does not grant new access or deployment authority.

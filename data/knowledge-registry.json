@@ -1011,10 +1011,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "MGS-WHOLE-DRIVE-30TB-20261021",
       "title": "Acervo criativo inteiro nos 30 TB; Drive antigo só intake/staging; migração histórica autorizada e ainda não executada",
-      "updated_at": "2026-10-21T00:15:52+00:00"
+      "updated_at": "2026-10-21T14:01:50+00:00"
     },
     {
       "canonical_key": "ares.creative.30tb.historical-retirement",
@@ -10586,6 +10586,25 @@
       "updated_at": "2026-10-17T16:55:38+00:00"
     },
     {
+      "canonical_key": "ares.creative.30tb.autonomous-requirements",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "company-operations",
+      "effective_at": "2026-10-21T14:01:50+00:00",
+      "id": "MGS-WHOLE-DRIVE-30TB-20261021",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Todo MGS-AGENTS nos 30 TB; Drive antigo somente entrada/staging, migração corporativa autorizada e probe proprietário pendente",
+      "updated_at": "2026-10-21T14:01:50+00:00"
+    },
+    {
       "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
       "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
       "consumers": [
@@ -13557,5 +13576,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T05:22:59+00:00"
+  "updated_at": "2026-10-21T14:01:50+00:00"
 }

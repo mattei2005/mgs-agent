@@ -126,13 +126,48 @@ def publish_probe():
         fid=d.upload_once(c['control_folder_id'],'worker-whole-drive-probe-'+digest+'.js',raw,'application/javascript','worker:'+digest,'worker_source')
         meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
         if meta.get('parents')!=[c['control_folder_id']] or hashlib.sha256(d.raw(fid)).hexdigest()!=digest:raise b.ArchiveError('PROBE_WORKER_READBACK')
-        stage.update(worker_file_id=fid,worker_sha256=digest,worker_source_path=str(source.relative_to(b.BASE)),previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=c['worker_sha256'],status='owner_repin_required',published_at=b.now_iso(),active_sa_pin_unchanged=True,js_regressions_passed=10,python_backfill_regressions_passed=8)
+        stage.update(worker_file_id=fid,worker_sha256=digest,worker_source_path=str(source.relative_to(b.BASE)),previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=c['worker_sha256'],status='owner_repin_required',published_at=b.now_iso(),active_sa_pin_unchanged=True,js_regressions_passed=11,python_backfill_regressions_passed=8,python_owner_acceptance_regressions_passed=8)
         b.atomic_json(DATA/'stage.json',stage)
         return stage
 
+def accept_owner():
+    with b.queue_lock():
+        d=b.Drive(False);c=b.config_load();stage=read(DATA/'stage.json',{})
+        if not isinstance(stage,dict) or not stage.get('worker_sha256'):raise b.ArchiveError('PROBE_STAGE_REQUIRED')
+        found=d.one(c['receipts_folder_id'],PROBE_KEY)
+        if not found:raise b.ArchiveError('OWNER_PROBE_RECEIPT_MISSING')
+        rm=d.meta(found['id']);b.require_publisher(rm,b.ACCOUNT)
+        result=json.loads(d.raw(found['id']));manifest=read(DATA/'probe-manifest.json',{})
+        if not isinstance(result,dict) or not isinstance(manifest,dict):raise b.ArchiveError('OWNER_PROBE_JSON_OBJECT_REQUIRED')
+        if rm.get('parents')!=[c['receipts_folder_id']] or rm.get('properties',{}).get('mgsArchiveType')!='whole_drive_probe_receipt' or result.get('schema')!='mgs.whole.drive.probe.receipt.v1' or result.get('authorizationMessageId')!=AUTH or result.get('manifestSha256')!=stage['manifest_sha256'] or result.get('status')!='completed' or result.get('productionMutation') is not False or result.get('deleteSource') is not False or result.get('canary',{}).get('restored') is not True:raise b.ArchiveError('OWNER_PROBE_BINDING_OR_CANARY_NOT_RESTORED')
+        if {x['metadata']['id'] for x in result.get('targets',[])}!={x['id'] for x in manifest.get('targets',[])}:raise b.ArchiveError('OWNER_PROBE_TARGET_CLOSURE')
+        canary=d.meta(stage['canary_id'])
+        if canary.get('driveId')!=b.SOURCE_DRIVE or canary.get('parents')!=[b.SOURCE_DRIVE] or canary.get('properties',{}).get('validationOnly')!='true':raise b.ArchiveError('OWNER_PROBE_CANARY_RESTORE_LIVE')
+        wf=d.meta(stage['worker_file_id']);b.require_publisher(wf,b.CANONICAL_SA)
+        if hashlib.sha256(d.raw(wf['id'])).hexdigest()!=stage['worker_sha256']:raise b.ArchiveError('OWNER_PROBE_WORKER_CHANGED')
+        beat=d.one(c['control_folder_id'],'heartbeat:worker-v1')
+        if not beat:raise b.ArchiveError('OWNER_PROBE_SCHEDULED_HEARTBEAT_REQUIRED')
+        b.require_publisher(d.meta(beat['id']),b.ACCOUNT);hb=json.loads(d.raw(beat['id']))
+        if hb.get('workerSha256')!=stage['worker_sha256'] or hb.get('triggerUid')!='2456112746912022528' or hb.get('status')!='ok' or hb.get('blocked') or hb.get('canaryAcknowledged') is not True or hb.get('deleteSource') is not False:raise b.ArchiveError('OWNER_PROBE_SCHEDULE_NOT_READY')
+        age=(b.timestamp(b.now_iso())-b.timestamp(hb['executedAt'])).total_seconds()
+        if not -60<=age<=1200:raise b.ArchiveError('OWNER_PROBE_HEARTBEAT_STALE')
+        hp=historical.location()/'stage.json';hs=read(hp,{})
+        if not isinstance(hs,dict) or hs.get('worker_sha256') not in [stage['previous_active_worker_sha256'],stage['worker_sha256']] or c['worker_sha256'] not in [stage['previous_active_worker_sha256'],stage['worker_sha256']]:raise b.ArchiveError('OWNER_PROBE_ACTIVE_PIN_DRIFT')
+        old_c=dict(c);old_hs=dict(hs)
+        c.update(worker_file_id=stage['worker_file_id'],worker_sha256=stage['worker_sha256'],active_worker_source_path=stage['worker_source_path'])
+        hs.update(worker_file_id=stage['worker_file_id'],worker_sha256=stage['worker_sha256'],worker_source_path=stage['worker_source_path'])
+        try:
+            b.atomic_json(b.CONFIG,c);b.atomic_json(hp,hs)
+            if b.config_load()!=c or read(hp)!=hs:raise b.ArchiveError('OWNER_PROBE_ACTIVE_PIN_READBACK')
+        except Exception:
+            b.atomic_json(b.CONFIG,old_c);b.atomic_json(hp,old_hs);raise
+        proof={'status':'owner_probe_verified','verified_at':b.now_iso(),'receipt_file_id':found['id'],'scheduled_heartbeat':hb,'canary_restored_live':True,'production_migrated':False,'full_migration_complete':False,'next_phase':'owner_capabilities_acl_review_then_production_migration_canary'}
+        b.atomic_json(DATA/'owner-probe-receipt.json',{'file_id':found['id'],'verified_at':b.now_iso(),'receipt':result});b.atomic_json(DATA/'owner-acceptance.json',proof);stage.update(status=proof['status'],active_sa_pin_unchanged=False);b.atomic_json(DATA/'stage.json',stage)
+        return proof
+
 def main():
     import argparse
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['prepare','status','publish-probe']);args=ap.parse_args()
-    result={'prepare':prepare,'status':status,'publish-probe':publish_probe}[args.action]()
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['prepare','status','publish-probe','accept-owner']);args=ap.parse_args()
+    result={'prepare':prepare,'status':status,'publish-probe':publish_probe,'accept-owner':accept_owner}[args.action]()
     print(json.dumps(result,ensure_ascii=False))
 if __name__=='__main__':main()
