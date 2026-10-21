@@ -847,6 +847,113 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "mgs-whole-drive-30tb-1562459803186626571",
+      "agent": "zeus",
+      "type": "migration_staged_owner_probe",
+      "authority_message_id": "1562459803186626571",
+      "source_thread_id": "1562078493498540042",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "status": "owner_editor_repin_required",
+      "updated_at": "2026-10-21T14:03:39.926488+00:00",
+      "inventory_objects": 7884,
+      "inventory_bytes": 228215846168,
+      "native_sheets": 8,
+      "native_tabs": 163,
+      "native_formulas": 3,
+      "staged_worker_file_id": "1eYTggn8T3SWpKewqowuvcVvzSPV4bOH0",
+      "staged_worker_sha256": "c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3",
+      "manifest_file_id": "10UR_TxYDpTZhwfQ8sWj0OuJt7Dlrqcw2",
+      "manifest_sha256": "9153478b8dbf4703c25806685cbd893b72c3c0f8bb73ed3908ff01d34136a238",
+      "canary_id": "1x6GzlsvFzFKoZ9lHI5n8G-uxfctD37LjqWkwOkH69G4",
+      "canary_validation_only": true,
+      "production_corporate_migration_started": false,
+      "production_corporate_deleted": false,
+      "active_sa_pin_unchanged": true,
+      "existing_creative_backfill_preserved": true,
+      "acl_changes": false,
+      "new_credentials": false,
+      "js_tests_passed": 11,
+      "python_acceptance_tests_passed": 8,
+      "python_backfill_tests_passed": 8,
+      "skill_runtime_mirror_identical": true,
+      "report_infra": {
+        "status": "verified",
+        "channel_id": "1498132022634483894",
+        "message_id": "1562466594150551673",
+        "content_empty": true,
+        "single_embed": true,
+        "no_mentions": true,
+        "verified_at": "2026-10-21T14:04:47.550517+00:00"
+      },
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/mgs_whole_drive_migration.py",
+          "sha256": "f48e4f60fd017df10c3e09384eaf36fcb1f9a970dbf47fb1a40b28b9ed03b587",
+          "size_bytes": 14218
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/WholeDriveProbeExtension.js",
+          "sha256": "abd2cc9216336a31addd4feba012f907cd33f4d529f5aa9c94edf662e47736dc",
+          "size_bytes": 10186
+        },
+        {
+          "path": "/root/mgs-agent/integrations/creative-archive-30tb/WorkerWholeDriveProbe.js",
+          "sha256": "c95545733270833409466a01f9c04d4ee64149d9665e4e1b40182d3fb85e3ac3",
+          "size_bytes": 34229
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_whole_drive_probe.cjs",
+          "sha256": "90277b0afb9213f26289de0dc82bfa922add78e042a6f784797557165481a356",
+          "size_bytes": 7908
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_mgs_whole_drive_migration.py",
+          "sha256": "ed05190a8d533420d8df7a53d5a6c34ca42f67bd8b471428564c5b98c2cbf0b8",
+          "size_bytes": 4547
+        },
+        {
+          "path": "/root/mgs-agent/docs/mgs-whole-drive-30tb-migration.md",
+          "sha256": "6b650414dfeda625678ed51f743070a704cc74a31fa0c73ccd24c64e882a1dff",
+          "size_bytes": 8542
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
+          "sha256": "f0e05772ed15cdef0e89014ab89f27ed25c27aee821cf590480028a503c34569",
+          "size_bytes": 27470
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/apps-script-owner-queue-bridge.md",
+          "sha256": "f0e05772ed15cdef0e89014ab89f27ed25c27aee821cf590480028a503c34569",
+          "size_bytes": 27470
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/stage.json",
+          "sha256": "a55aa2e1a35da413318ce2f19e4a58ad52246ced0549f666ec408e579497c23c",
+          "size_bytes": 997
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/discovery.json",
+          "sha256": "d433cf24b547dd1db5c629695fe0877376d67f908d35809c4b0eb91befaacc20",
+          "size_bytes": 1423
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/probe-manifest.json",
+          "sha256": "37f080a7f264af444e8a1fa4b5bebe9e8b7967606ff8abd29128b14bc3113e0d",
+          "size_bytes": 12114
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/source-access.json",
+          "sha256": "8fce3df361c0601d579dac06ebe24f9274c6d8cc2d0023f9050b0d7f414cbec3",
+          "size_bytes": 8301
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/sheets-baseline-summary.json",
+          "sha256": "b1b167678a20307f6f18b60c072d024a81ec9b29a7821a9c7203edb2aaa169c1",
+          "size_bytes": 28202
+        }
+      ]
+    },
+    {
       "id": "zeus-vps-hermes-1562331354568589393",
       "status": "vps_completed_validated_ready_hermes",
       "vps_phase": "vps_completed_validated_ready_hermes",

@@ -69,6 +69,8 @@ A priority error emitted in the current boot remains a failed post-boot health g
 
 Report inaccessible ESM Apps updates as a separate residual; do not fold them into the zero normal APT-candidate gate or silently attach Ubuntu Pro.
 
+Before making LVFS metadata availability a VPS-completion gate, inspect `fwupdmgr get-devices --json` and each device's `Flags`. If no guest-visible device has an `updatable*` flag, classify firmware metadata as not applicable to this guest's update transaction, preserve any HTTP failure as a non-blocking external residual, and never describe that classification as a successful refresh. KVM by itself is not enough to waive the gate: a VM may expose an updatable UEFI dbx device. Require a successful device inventory and test both no-updatable-device and updatable/updatable-hidden cases; keep the gate blocking when applicability is unknown or a supported update path exists.
+
 ## Governance closure
 
 Use a two-process boundary: the validator proves runtime health and exits; a separate cleanup/closure process runs only after that exit. When native same-session continuation is also armed, persist the validator unit, result path and bounded wait in the checkpoint before dispatch. On resumption, wait for that exact validator to exit and consume its atomic final receipt before updating the same inventory/checkpoint, announcing completion or starting the next maintenance phase; gateway reconnection can precede validator completion and otherwise creates parallel closure writers. If the validator is missing, times out or exits without a final receipt, reconcile its logs and partial effects rather than replaying the package transaction or reboot. Close in this order:
