@@ -28,6 +28,12 @@ function mgsArchiveValidateBackfillJob(j,c,manifest){
 }
 var mgsArchiveValidateLiveJob=mgsArchiveValidateJob;
 mgsArchiveValidateJob=function(j,c){return j && j.kind==='backfill' ? mgsArchiveValidateBackfillJob(j,c,mgsArchiveLoadBackfillManifest(c)) : mgsArchiveValidateLiveJob(j,c);};
+var mgsArchiveValidateLiveSource=mgsArchiveValidateSource;
+mgsArchiveValidateSource=function(meta,asset,c){
+ var result=mgsArchiveValidateLiveSource(meta,asset,c);
+ if(asset.role==='historical' && meta.createdTime!==asset.sourceCreatedTime)throw new Error('BACKFILL_SOURCE_CREATION_CHANGED');
+ return result;
+};
 var mgsArchiveListLive=mgsArchiveList;
 mgsArchiveList=function(parent,key,type,state){
  var rows=mgsArchiveListLive(parent,key,type,state);

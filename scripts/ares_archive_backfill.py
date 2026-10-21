@@ -39,6 +39,7 @@ def permissions(d,fid):
 
 def source_access(d,a,c):
  m=d.meta(a['sourceId']);b.validate_source_metadata(m,a,c)
+ if m.get('createdTime')!=a['sourceCreatedTime']:raise BackfillError('BACKFILL_SOURCE_CREATION_CHANGED')
  if d.relative_parent(m['parents'][0],b.SOURCE_ROOT)!=a['relativeParent']:raise BackfillError('BACKFILL_SOURCE_PATH_CHANGED')
  # files.get omits permissions for Shared-Drive files. The exact paginated
  # permissions endpoint is the access gate, not an empty metadata projection.
@@ -140,7 +141,7 @@ def accept_owner():
   d=b.Drive(True);c=b.config_load();proof=cycle_locked(d,c,apply=False)
   if not proof['owner_ready']:raise BackfillError('BACKFILL_NEW_OWNER_PIN_NOT_LIVE')
   first=stage.get('prepared_first_job',{}).get('job_id')
-  if first not in proof['verified_jobs']:raise BackfillError('BACKFILL_FIRST_REAL_BATCH_VERIFICATION_REQUIRED')
+  if first not in proof['verified_jobs'] and first not in obj(location()/'backfill-index.json',{'verified_jobs':{}})['verified_jobs']:raise BackfillError('BACKFILL_FIRST_REAL_BATCH_VERIFICATION_REQUIRED')
   verify_job(d,c,obj(location()/'jobs'/('job-'+first+'.json')),apply=True)
   c.update(worker_file_id=stage['worker_file_id'],worker_sha256=stage['worker_sha256'],active_worker_source_path='integrations/creative-archive-30tb/WorkerBackfill.js');b.atomic_json(b.CONFIG,c);stage.update(copy_enabled=True,status='copying');b.atomic_json(location()/'stage.json',stage)
   if b.config_load()!=c:raise BackfillError('BACKFILL_ACTIVE_CONFIG_READBACK')

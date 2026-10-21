@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Confirmação histórica adicional 1562268909686497422 registrada e vinculada ao inventário. Implementar/testar/publicar backfill copy-only por manifesto exato no owner worker e produtor/verificador SA, sem trocar auth. Gate real: bootstrap proprietário pinado exige repin deliberado; não alegar implantação antes do heartbeat. Remoção histórica só após todo acervo/copias/acessos/atalhos verificados; preservar pastas de entrada/controle. Não pedir novamente autorização para copiar ou retirar esse conjunto confirmado.",
-      "objective": "Migrar todo acervo criativo aos 30 TB, validar consumidores/atalhos e só então retirar fontes históricas confirmadas",
+      "next_step": "Autorização histórica 1562268909686497422 recebida e sender/pergunta lidos no Discord. Código/manifesto/lote real 8 preparados, publicados e relidos; zero bytes históricos migrados. Gate externo: proprietário trocar somente worker ID 1JS_z_TqTdkF0giv_90i_yHA6gm7Y_oW2 e SHA 508e4d6c8423f39696f565458388a75b9e7037d7f066f910846d200ef4815a05 no mesmo Code.gs, salvar/rodar mgsArquivoTeste; não alterar manifesto/trigger/Implantar. Depois validar lote d28c7ec5d6ef0aeb109f5cb641362238 com SA, observar heartbeat novo e aceitar owner via CLI; preservar requests e não criar cópias extras. Copy phase limitada integrada no SA mas desabilitada até essa prova. Concluir árvore/leitores/1002 atalhos e só depois retirada histórica aprovada; código histórico de delete ainda não implementado/ativado. Ver doc e stage.json, não pedir novamente autorização para copiar/retirar esse conjunto.",
+      "objective": "Migrar todo acervo aos 30 TB e retirar fontes históricas só após cópia/acessos/consumidores completos",
       "source": "docs/ares-creative-30tb-full-archive-migration.md",
-      "state": "full_archive_backfill_implementation_in_progress",
+      "state": "full_archive_backfill_staged_owner_repin_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T01:03:00+00:00"
+      "updated_at": "2026-10-21T01:21:19+00:00"
     },
     {
       "agent": "ares",
@@ -4693,12 +4693,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-mass-1560295338257023118",
-      "next_step": "Nadaareexecutar/republicar/invalidatecomamesmaintenção. Preservarbackup/evidências13XML/sourcecanônicafinal. EmnovopedidoeditorialusarautoridadevigenteRaquel,preflightcorretoefluxocacheoperacionalaprovado;ownerZeustrataalinhamentodacorreçãoglobaldocandidatoKCIsemAtenaalterarAGENT/permmatrix.Manterlimites:paridadeeditor/indicadorvisualautenticadonãocomprovados,notasgenuínasdeclaradasapenascomreadbacknativo.",
-      "objective": "Concluído:58SEO publicados e58URLs nos sitemaps canônicos",
-      "source": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/final-verification-cache13-closed.json",
-      "state": "concluído. rodolfo1560391741905834217confirmoucache13eorientourotinasemnovasautorizações.13xmlexatoscomowner/root/methodfingerprint/sem symlink/hash/tamanhorevalidados,13backups,13exclusõesnativasunitáriassemg lob/recursão/cdnglobal;ausênciapósaçãoem13confirmada.13getsxmlcanônicoshttp200validosehashnovo.58/58novosurlsagoranospost-sitemapscanônicos(17gamehub,15auto,15car,11topf).58corpos/datas/featuredmedia/notasrelidospósopinalterados.0posts/mídias/roles/credenciais/plugins/config/localealteradospelainvalidação. sem açõespendentesdestelote. sourcepublicação58/cache13fechadosupersedeuregistroantigo,arquivosanteriorespreservados. correçãoproceduralcachegravada/relidana skillcontent-site-vertical-operations;alinhamentoglobalcriticalsubsetcandidatokci-b953ee97bd2d71fcencaminhadozeusviareg/reportinfra1560396450368585770validadoembedsemcontent/mentions,nãooverrideativoagent.",
+      "next_step": "Auditar URLs e arquivos públicos GameHub primeiro, corrigir editorialmente o necessário; revisar redação/imagens/bios dos 58 e fazer segunda validação pública.",
+      "objective": "Revisar e corrigir os 58 artigos existentes; priorizar publicação/categorias dos 17 GameHub; não iniciar novo lote",
+      "source": "discord:1560295338257023118#1562273124030873610;data/atena/seo-mass-1560295338257023118/final-verification-cache13-closed.json",
+      "state": "reaberto por revisão humana 1562273124030873610. identidade autorizada validada. inventário histórico recuperado; nenhuma correção wordpress executada nesta revisão ainda.",
       "thread_id": "1560295338257023118",
-      "updated_at": "2026-10-15T21:18:27+00:00"
+      "updated_at": "2026-10-21T01:16:20+00:00"
     },
     {
       "agent": "atena",
@@ -6902,5 +6902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T01:03:00+00:00"
+  "updated_at": "2026-10-21T01:21:19+00:00"
 }

@@ -85,6 +85,10 @@ Quando a imagem precisa conter o logo oficial do site:
 4. Inspecione novamente cada substituta antes do upload. Quando o briefing exigir foto sem marcas/textos, reprove também logotipos incidentais reconhecíveis em tampas de notebooks, calculadoras, grades e traseiras de veículos ou fachadas, além de placas e letreiros legíveis; uma cena bonita ou anatomicamente correta não dispensa esse gate. Não trate `sem marcas` no prompt como prova visual nem amplie a proibição a branding oficial expressamente solicitado. Se o reconhecimento ficar inconclusivo na prancha, abra o original antes de decidir.
 5. Redija ou ajuste o alt text a partir da imagem final observada, no idioma do artigo, e não do prompt original. Uma regeneração pode retirar a pessoa, o laptop ou outro objeto; manter o alt anterior descreve algo que já não existe. Não afirme jogo, plataforma, instituição, profissão ou evento específico quando a foto mostra apenas uma cena conceitual genérica; não gere interface falsa para suprir essa ausência.
 
+## Pertinência e diversidade entre artigos do lote
+
+Conforme revisão de Raquel `discord:1560295338257023118#1562273124030873610`, compare as imagens finais lado a lado com os temas antes de liberar o lote. Cada imagem deve ajudar a comunicar a intenção específica do artigo. Planeje conceito, composição, enquadramento, elementos, ambiente e ação próprios; não aceite a mesma composição apenas com outra pessoa, carro, ângulo ou cenário. Registre o motivo de preservar ou substituir cada asset. Não troque imagem correta para gerar diferença artificial. Faça QA visual das substitutas e confirme no resultado público a imagem interna e destacada efetivamente renderizadas.
+
 ## Comparação de alternativas geradas
 
 Ao comparar duas imagens, classifique separadamente:

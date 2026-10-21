@@ -999,6 +999,24 @@
       "updated_at": "2026-10-21T00:15:52+00:00"
     },
     {
+      "canonical_key": "ares.creative.30tb.historical-retirement",
+      "canonical_source": "docs/ares-creative-30tb-full-archive-migration.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-ops",
+      "effective_at": "2026-10-21T01:21:18+00:00",
+      "id": "ARES-CREATIVE-30TB-HISTORICAL-RETIREMENT-20261020",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Retirada histórica confirmada somente após migração integral verificada aos 30 TB",
+      "updated_at": "2026-10-21T01:21:18+00:00"
+    },
+    {
       "canonical_key": "ares.creative.30tb.queue_integration",
       "canonical_source": "data/ares/creative-ops/30tb-archive/cutover-1562188030205362227.json",
       "consumers": [
@@ -5421,6 +5439,24 @@
       "superseded_by": null,
       "title": "Raquel gestora de conteúdo: autoridade permanente para lotes SEO e pedidos editoriais semelhantes",
       "updated_at": "2026-10-15T15:00:58+00:00"
+    },
+    {
+      "canonical_key": "content.seo.batch-review-gates",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-21T01:17:32+00:00",
+      "id": "ATENA-SEO-BATCH-REVIEW-GATES-1562273124030873610",
+      "kind": "procedure",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "QA SEO transversal: variação editorial e visual, bio localizada e dupla validação pública/categorias",
+      "updated_at": "2026-10-21T01:17:32+00:00"
     },
     {
       "canonical_key": "content.seo-mass.1559930384852979796",
@@ -13467,5 +13503,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T00:15:52+00:00"
+  "updated_at": "2026-10-21T01:21:18+00:00"
 }

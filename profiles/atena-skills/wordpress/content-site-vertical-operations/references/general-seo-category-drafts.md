@@ -259,6 +259,19 @@ A autorização antecipada para produzir e publicar cobre esta etapa; não peça
 6. Compare o sitemap canônico sem query com uma leitura fresca por cache-buster quando URLs recém-publicadas não aparecerem. Registre os dois resultados separadamente: presença na variante fresca não comprova atualização do sitemap canônico entregue ao crawler. Não altere cache, plugin ou runtime para esconder a divergência; escale o achado técnico.
 7. Só reporte publicação depois que todos os IDs tiverem readback autenticado e público. Uma resposta REST `200` no status change não prova que o artigo está público, indexável ou com o layout preservado.
 
+## Gate de revisão transversal de lote SEO
+
+Correção editorial de Raquel, fonte `discord:1560295338257023118#1562273124030873610` (supersede qualquer uso do padrão dominante como fórmula fixa para SEO):
+
+1. Faça a estrutura nascer do tema e da intenção de busca. Não imponha a sequência abertura explicativa → contextualização → blocos → exemplo/checklist → conclusão cautelosa. Varie naturalmente entradas, desenvolvimento, número/tipo de H2/H3, listas, perguntas, exemplos, comparações, tabelas pertinentes e sobretudo encerramentos; não altere texto correto só para fabricar diferença.
+2. Compare todos os artigos do lote antes de liberar: registre por artigo a intenção, abertura, sequência de seções, transições, exemplos/checklists e fecho, procurando repetição sistemática inclusive entre portais. Proximidade temática não dispensa desenvolvimento próprio.
+3. Planeje e compare imagens por assunto: composição, enquadramento, elementos, ambiente, ação e conceito visual. Trocar ângulo, pessoa, carro ou cenário da mesma cena não resolve repetição; a imagem deve comunicar o tema específico. Preserve assets já pertinentes e realmente distintos.
+4. Mantenha fontes oficiais/confiáveis contextualizadas no corpo, sem bloco artificial final de Fontes/Sources/Fuentes.
+5. Após publicar, comprove a URL canônica pública e a presença do artigo no arquivo público da categoria correta, percorrendo a paginação necessária e registrando URL/ID por item. Status publish, category.count, associação REST ou sitemap isolado não comprovam presença na categoria. Se o arquivo continuar omitindo os posts, diagnostique em leitura e escale a dependência técnica sem alterar plugin/runtime por inferência.
+6. Só conclua após conferir o resultado público renderizado de cada alvo: URL funcionando, categoria correta, corpo completo, imagem correta, idioma/mercado correto, autoria/bio no idioma e links externos funcionando. Resposta de sucesso WordPress não substitui esse gate. Faça uma segunda passagem pública depois das correções e mantenha falhas/limitações explícitas, sem converter bloqueio externo em link validado.
+7. Na autoria Atena, preserve primeira pessoa e adapte a biografia ao idioma editorial real do portal (PT-BR, espanhol ou inglês), sem alterar identidade, credenciais ou função. Use o contrato atualizado em `wordpress-author-profiles.md`; locale do usuário/admin não define o idioma do conteúdo.
+8. Em revisão de lote existente, reconcilie os mesmos IDs e URLs e preserve o que já está correto. Uma ordem de não iniciar o próximo lote permanece ativa até nova autorização humana.
+
 ## 12. Relatório ao Rodolfo
 
 Liste por categoria:

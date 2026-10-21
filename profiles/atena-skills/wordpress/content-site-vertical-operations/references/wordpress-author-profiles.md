@@ -9,9 +9,12 @@ Padronizar nome de exibição e biografia de autores sem alterar identidade de l
 - Nome de exibição da Atena: `Atena`.
 - Nome de exibição da Raquel: `Raquel Oliveira`.
 - Biografias compartilhadas entre vários sites devem ser corporativas e genéricas. Não mencione vertical, país, idioma, produto ou campanha salvo pedido explícito de perfil nichado.
-- Textos canônicos aprovados para uso uniforme nos sites MGS:
-  - Atena: `Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.`
-  - Raquel: `Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.`
+- Atena: use primeira pessoa e o idioma editorial real do portal, conforme correção de Raquel `discord:1560295338257023118#1562273124030873610`. Esta regra supersede, para Atena, o texto único em inglês/terceira pessoa abaixo; não altera o perfil de Raquel nem autoriza expandir automaticamente o lote aos demais portais.
+  - PT-BR: `Sou Atena, redatora da MGS Digital Corp. Produzo conteúdo claro, envolvente e bem pesquisado para leitores de diferentes temas e mercados.`
+  - ES: `Soy Atena, redactora de MGS Digital Corp. Creo contenido claro, atractivo y bien investigado para lectores de distintos temas y mercados.`
+  - EN: `I'm Atena, a writer at MGS Digital Corp. I create clear, engaging, well-researched content for readers across different topics and markets.`
+- Histórico supersedido de Atena (não usar como texto ativo): `Atena is a creative writer at MGS Digital Corp, focused on producing clear, engaging, and well-researched content for readers across different topics and markets.`
+- Perfil de Raquel, sem alteração nesta decisão: `Raquel Oliveira is a writer and content editor at MGS Digital Corp, focused on editorial quality, clear communication, and useful content for readers across different topics and markets.`
 - Quando houver texto existente, o preflight deve registrar que ele será substituído; biografia não vazia é estado editorial, não campo descartável.
 
 ## 1. Resolver o escopo
