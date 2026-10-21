@@ -33,6 +33,15 @@ class AresScopeTests(unittest.TestCase):
  def test_app_metadata_exception_is_preserved(self):
   with patch.object(scope,'is_ares_context',return_value=True),patch.object(scope,'load_scope') as loader:
    scope.enforce_meta_path('1299247318762949',{'fields':'id,name'});loader.assert_not_called()
+ def test_identity_metadata_only_and_business_readback(self):
+  fixture={**self.fixture(),'operational_business_id':'155263197283282'}
+  with patch.object(scope,'is_ares_context',return_value=True),patch.object(scope,'load_scope',return_value=fixture):
+   scope.enforce_meta_path('me',{'fields':'id,name,client_business_id'})
+   scope.enforce_meta_path('',{'batch':json.dumps([{'method':'GET','relative_url':'me?fields=id,name,client_business_id'}])})
+   scope.observe_meta_response('me',{'fields':'id,name,client_business_id'},{'id':'333333','client_business_id':'155263197283282'})
+   with self.assertRaises(scope.ScopeError):scope.observe_meta_response('me',{'fields':'id,name,client_business_id'},{'id':'333333','client_business_id':'222222'})
+   for path,params,method in [('me',{'fields':'id,name,client_business_id'},'POST'),('me',{'fields':'id,client_business_id,adaccounts'},'GET'),('me/adaccounts',{},'GET'),('me/businesses',{},'GET'),('me',{'fields':'id,client_business_id','ids':'222222'},'GET')]:
+    with self.subTest(path=path,params=params),self.assertRaises(scope.ScopeError):scope.enforce_meta_path(path,params,method)
  def test_ares_domain_scope_matches_approved_catalog(self):
   d=domains.load_registry(BASE/'data/mgs-domain-scope.json');a=scope.load_scope()
   self.assertEqual(domains.domains_for_agent(d,'ares'),a['domains']);self.assertEqual(len(a['domains']),52)

@@ -220,6 +220,40 @@ def test_post_accepted_get_failed_retries_only_get(repo,discord_server):
     assert len(record['posts'])==1
 
 
+def test_legacy_outbox_discord_description_trim_reconciles_without_post(tmp_path):
+    payload = {'content': '', 'embeds': [{'title': monitor.TITLE,
+               'description': 'Release notes cut at a word ',
+               'url': 'https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.2',
+               'fields': []}]}
+    pending = {'channel_id': '1505609056771899644', 'message_id': '1559183118093656225',
+               'release_commit': 'fixture-release', 'release_tag': 'v0.22.2',
+               'upstream': 'fixture-main', 'payload': payload}
+    actual = {**copy.deepcopy(payload), 'id': pending['message_id'],
+              'author': {'id': monitor.BOT_ID}}
+    actual['embeds'][0]['description'] = payload['embeds'][0]['description'].rstrip()
+    assert monitor.verify_message(actual, pending)
+    altered = copy.deepcopy(actual)
+    altered['embeds'][0]['description'] = 'Release notes changed at a word'
+    assert not monitor.verify_message(altered, pending)
+    calls = []
+    def api(token, method, path, body=None):
+        calls.append((method, path))
+        return actual
+    state = {'pending_announcement': pending}
+    assert monitor.deliver(state, tmp_path / 'state.json', api=api, token='fixture') == actual['id']
+    assert calls == [('GET', '/channels/1505609056771899644/messages/1559183118093656225')]
+    assert 'pending_announcement' not in state
+
+
+def test_new_payload_normalizes_whitespace_after_description_cap(repo):
+    repo['meta'].write_text(json.dumps({'tag_name': 'v2026.1.1', 'draft': False,
+        'prerelease': False, 'body': 'a' * 1799 + ' ' + 'tail'}))
+    meta = json.loads(repo['meta'].read_text())
+    payload = monitor.build_payload(repo['live'], meta, repo['first'], repo['first'],
+                                    0, 'v2026.1.1', repo['first'])
+    assert payload['embeds'][0]['description'] == 'a' * 1799
+
+
 def test_ambiguous_delivery_never_blindly_reposts(tmp_path):
     state={'pending_announcement':{'channel_id':'1','delivery_ambiguous':True,'payload':{'embeds':[{'fields':[]}]}}}
     calls=[]

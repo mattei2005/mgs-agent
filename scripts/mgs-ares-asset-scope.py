@@ -68,6 +68,11 @@ def enforce_meta_path(path,params=None,method='GET'):
  # The technical app exception is metadata-only and never grants discovery.
  if clean==APP_ID and method.upper()=='GET' and set(str(params.get('fields','id,name')).split(','))<={'id','name'} and set(params)<={'fields'}:return
  data=load_scope()
+ # Corporate credential identity is a technical read, never an asset/discovery grant.
+ if clean=='me':
+  fields=set(str(params.get('fields','')).split(','))
+  if method.upper()!='GET' or set(params)!={'fields'} or not {'id','client_business_id'}<=fields or not fields<={'id','name','client_business_id'}:raise ScopeError(DENY)
+  return
  # Read-only invoices of the one operational business; never business discovery.
  if clean==data.get('operational_business_id','')+'/business_invoices':
   invoice_fields={'id','invoice_id','ad_account_ids','amount','currency','billing_period','invoice_date','payment_status','invoice_type','due_date'}
@@ -122,6 +127,9 @@ def observe_meta_response(path,params,payload,method='GET'):
      observe_meta_response(child['relative_url'],None,body,child.get('method','GET'))
   return
  data=load_scope()
+ if clean=='me':
+  if not isinstance(payload,dict) or str(payload.get('client_business_id',''))!=data.get('operational_business_id'):raise ScopeError(DENY)
+  return
  if clean==data.get('operational_business_id','')+'/business_invoices':
   invoices=payload.get('data') if isinstance(payload,dict) else None
   if not isinstance(invoices,list):raise ScopeError(DENY)

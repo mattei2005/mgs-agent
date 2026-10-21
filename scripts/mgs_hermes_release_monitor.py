@@ -106,7 +106,10 @@ def verify_message(message, pending):
             and str((message.get('author') or {}).get('id')) == BOT_ID
             and message.get('content', '') == ''
             and embed.get('title') == TITLE
-            and embed.get('description') == expected['embeds'][0]['description']
+            # Discord trims edge ASCII whitespace from embed descriptions.
+            # Legacy outboxes can end in a space after the length cap; accept
+            # only that transport normalization, never changed body content.
+            and embed.get('description') == expected['embeds'][0]['description'].strip(' \t\r\n')
             and embed.get('url') == expected['embeds'][0]['url']
             and embed.get('fields') == expected['embeds'][0]['fields'])
 
@@ -186,7 +189,7 @@ def build_payload(runtime, meta, release, previous, stable_pending, local_tag, l
     url = 'https://github.com/NousResearch/hermes-agent/releases/tag/' + meta['tag_name']
     payload = {'content': '', 'allowed_mentions': {'parse': []},
                'embeds': [{'title': TITLE, 'color': 3447003, 'url': url,
-                           'description': (body[:1800] or 'A publicação não contém notas detalhadas; os títulos dos commits são fontes auxiliares.'),
+                           'description': (body[:1800].strip(' \t\r\n') or 'A publicação não contém notas detalhadas; os títulos dos commits são fontes auxiliares.'),
                            'fields': items}]}
     return payload
 
