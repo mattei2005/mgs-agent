@@ -6833,12 +6833,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Concluir regressao ampla candidato, guard/precheck em copias isoladas, reproducao byte-exact, preservacao105paths, config/auth metadata read-only e retention gate. Nenhum launcher/restart/configprod/deletion autorizado nesta fase. Candidate tests require fresh-process TLS/MCP; voice startup and memory span-patch native API ported. Frozen target3f2afed3eb813cb00bd381d29b084d0e01de048f; logs/checkpoints em/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation",
-      "objective": "Preparacao Hermes main isolada; sem mudancas em producao",
+      "next_step": "Concluir gates4d, fechamento inventario/audit/REPORT e pedir Critical para corte e sessions.auto_prune true->false nos tres agentes. Root ja false. Estado atual em candidate-state.json; preparation-state.json imutavel protegido por ROLLBACK.sha256.",
+      "objective": "Preparacao Hermes main isolada, sem corte ou limpeza",
       "source": "discord:1562331354568589393/1562474468146942115",
-      "state": "isolated_port_in_validation; snapshots4nativesqlpass; baseline3201passed25skipped; source105paths; consolidated108paths; 3realmergeconflictsresolved; candidate/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+      "state": "port 105 paths preservados em patch111; alvo atualizado4d043038 (ultimo delta soci); candidate d743b988; suite47b 3281pass, guard727pass, post401pass; repetindo gates no4d; rollback44hashesok; source/pids/launcher inalterados",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T15:55:37+00:00"
+      "updated_at": "2026-10-21T16:57:30+00:00"
     },
     {
       "agent": "zeus",
@@ -6942,5 +6942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T16:24:17+00:00"
+  "updated_at": "2026-10-21T16:57:30+00:00"
 }
