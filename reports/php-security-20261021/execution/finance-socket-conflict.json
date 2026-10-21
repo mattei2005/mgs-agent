@@ -1,0 +1,13 @@
+{
+  "mgs-finance-dash.socket": "Listen=/run/mgs-finance-dash.sock (Stream)\nTriggers=mgs-finance-dash.service\nTriggeredBy=\nActiveState=active\nFragmentPath=/etc/systemd/system/mgs-finance-dash.socket\n",
+  "mgs-finance-dash.service": "MainPID=3056005\nTriggers=\nTriggeredBy=mgs-finance-dash.socket\nActiveState=active\nFragmentPath=/etc/systemd/system/mgs-finance-dash.service\n",
+  "var_run_resolves_to": "/run",
+  "/etc/php83rc/fpm.d/mgs-finance-dash.conf": {
+    "sha256": "645d5b2ff63c4a07677a55355cd763b6a5bd97ca7f1b9d1fa2ab153818c37c2b",
+    "expected_old_socket_occurrences": 1
+  },
+  "/etc/nginx-rc/conf.d/mgs-finance-dash.d/proxy.conf": {
+    "sha256": "abe8ff28cbdf3254de8de90af6a853cc74b7a85833d97246063d76ec05298bc7",
+    "expected_old_socket_occurrences": 1
+  }
+}

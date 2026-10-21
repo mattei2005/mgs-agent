@@ -6153,12 +6153,12 @@
     {
       "agent": "zeus",
       "id": "php-security-20261021",
-      "next_step": "Revalidar lotes exatos, mapear apps e congelar canarios; backup PHP/config e pacotes anteriores antes de instalar. Autorizacao 1562585423589412987.",
-      "objective": "Aplicar patches PHP aprovados nos tres Mattei RunCloud e quatro pacotes CLI locais, com rollback e validacao",
-      "source": "reports/php-security-20261021/assessment.md",
-      "state": "authorized_preflight",
+      "next_step": "Patches 8.3.36 instalados nos tres hosts. Inc02/03 validados; Inc01 sites PHP validos, dashboard Node 502: pool PHP usa /var/run/mgs-finance-dash.sock, mesmo /run/socket Node. Solicitar confirmacao para isolar listen PHP + fallback Nginx e reiniciar FPM/socket/service financeiro; quatro CLI locais ainda pendentes.",
+      "objective": "Corrigir PHP nos tres RunCloud e CLI local; recuperar dashboard afetado por colisao de socket",
+      "source": "reports/php-security-20261021/execution/finance-socket-conflict.json",
+      "state": "blocked_critical_socket_collision",
       "thread_id": "1562582544292249772",
-      "updated_at": "2026-10-21T21:57:12+00:00"
+      "updated_at": "2026-10-21T22:04:30+00:00"
     },
     {
       "agent": "zeus",
@@ -6972,5 +6972,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T21:59:26+00:00"
+  "updated_at": "2026-10-21T22:04:30+00:00"
 }
