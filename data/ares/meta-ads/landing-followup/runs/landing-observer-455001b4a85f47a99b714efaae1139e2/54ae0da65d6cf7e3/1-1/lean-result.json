@@ -1,0 +1,325 @@
+{
+  "result": "PASS",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb02c262&utm_adgroup=b01fb02c262g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb02c262&utm_adgroup=b01fb02c262g01&nocache",
+    "mapping_source": "READ_ONLY_HTTP_200 https://yolokfx.com/quiz/us/sh3-g006/ ; MGS Direct Quiz static plugin=1.2.0 config_sha256=e733a3b839ab85a3d22e23882849370debbc668bb230fbb59653913a46c58da1 ; all 7 data-mgs-dq-cta hrefs have exactly one unique destination https://yolokfx.com/rec-us-app-shein-circle-of-style/ ; sole application script https://yolokfx.com/wp-content/plugins/mgs-direct-quiz/assets/direct-quiz.js?v=1.2.0 initLinks/mergeUrl preserves received parameters and has no alternate destination selection; context/acquisition.md#43-59; literal campaign query retained",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792595700.443698,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome is active in a normal desktop viewport. The page is displaying a mostly blank white loading screen with a faint YOLOK FX logo; no gate, rewarded overlay, network ad, or readable article body is visible."
+      },
+      {
+        "at": 1792595709.709851,
+        "gate": false,
+        "rewarded": false,
+        "article": true,
+        "description": "Normal Chrome desktop viewport showing the readable SHEIN article, an inline Store pickup/Home delivery questionnaire, and visible Altium network ads. The site-owned CLAIM MY FREE PRODUCTS gate is absent."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 96.75992085300004
+    },
+    "device_mode": "DESKTOP",
+    "desktop_view": {
+      "desktop_view": true,
+      "device_toolbar_visible": false,
+      "viewport_bounds": [
+        0,
+        120,
+        2560,
+        1272
+      ],
+      "device_mode": "DESKTOP",
+      "verified": true,
+      "verified_at": 1792595676.205357,
+      "source": "native_and_visual_desktop"
+    },
+    "normal_opening": {
+      "state": "OPENED_NORMAL",
+      "baseline": [
+        {
+          "pid": 331420,
+          "window_id": 1246726,
+          "app_name": "CredentialUIBroker.exe"
+        },
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 17460,
+          "window_id": 66544,
+          "app_name": "Discord.exe"
+        },
+        {
+          "pid": 24268,
+          "window_id": 1705338,
+          "app_name": "1Password.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g006-s&utm_campaign=b01fb02c262&utm_adgroup=b01fb02c262g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792595658.6335847,
+      "target": {
+        "pid": 18224,
+        "window_id": 43779496,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792595666.9327562,
+      "desktop_view": {
+        "desktop_view": true,
+        "device_toolbar_visible": false,
+        "viewport_bounds": [
+          0,
+          120,
+          2560,
+          1272
+        ],
+        "device_mode": "DESKTOP",
+        "verified": true,
+        "verified_at": 1792595676.205357,
+        "source": "native_and_visual_desktop"
+      },
+      "opened_at": 1792595694.7413533
+    },
+    "opened_at": 1792595694.7413533,
+    "article_verified": true,
+    "article_ready_at": 1792595709.7098536,
+    "article_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_aa62c5afe1f64841b97a29ff5df55867.png",
+    "rewarded_wait_seconds": 14.96850061416626,
+    "scroll_result": {
+      "ok": true,
+      "action": "press_key",
+      "message": "✅ Sent pagedown via SendInput on pid 18224 (delivery_mode:foreground).",
+      "effect": "unverifiable",
+      "delivery_mode": "foreground",
+      "meta": {
+        "delivery": {
+          "mode": "foreground"
+        },
+        "effect": "unverifiable",
+        "route": "global_input",
+        "foreground_focus": {
+          "invoked": true,
+          "tool": "bring_to_front"
+        }
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    },
+    "scroll_visual_changed": true,
+    "observation_started_at": 1792595717.8336413,
+    "observation_ended_at": 1792595743.2373261,
+    "observation_seconds": 25.403685860999758,
+    "observation_screenshot": "/root/.hermes/profiles/ares/cache/images/computer_use_bca348ccd4fb4ece82008dc1bd14ded1.png",
+    "visual_captured_at": 1792595743.2347412,
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 43779496,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792595746.3791618,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 43779496,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 331420,
+        "window_id": 1246726,
+        "app_name": "CredentialUIBroker.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 17460,
+        "window_id": 66544,
+        "app_name": "Discord.exe"
+      },
+      {
+        "pid": 24268,
+        "window_id": 1705338,
+        "app_name": "1Password.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 331420,
+        "window_id": 1246726,
+        "app_name": "CredentialUIBroker.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 17460,
+        "window_id": 66544,
+        "app_name": "Discord.exe"
+      },
+      {
+        "pid": 24268,
+        "window_id": 1705338,
+        "app_name": "1Password.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 51.63780856132507,
+    "final_visual": {
+      "network_ad_visible": false,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Loaded article page about the official SHEIN reviewer program is visible in foreground normal Chrome. No rendered network advertising artwork or ad text is visible, and no site gate or overlay is present."
+    },
+    "ad_confirmation_stage": "ARTICLE_BEFORE_SCROLL",
+    "ad_confirmation_visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Two rendered Altium ads are visible: an orange banner reading “Secure Electronic Design Collaboration” with a Learn More button, and a blue side ad reading “Designed for Regulated Electronic Programs” with a Learn More button."
+    },
+    "visual": {
+      "network_ad_visible": true,
+      "active_normal_chrome": true,
+      "unobstructed": true,
+      "landing_loaded": true,
+      "site_gate_visible": false,
+      "description": "Two rendered Altium ads are visible: an orange banner reading “Secure Electronic Design Collaboration” with a Learn More button, and a blue side ad reading “Designed for Regulated Electronic Programs” with a Learn More button."
+    },
+    "network_ad_confirmed": true,
+    "ad_description": "Two rendered Altium ads are visible: an orange banner reading “Secure Electronic Design Collaboration” with a Learn More button, and a blue side ad reading “Designed for Regulated Electronic Programs” with a Learn More button.",
+    "visual_review": "Two rendered Altium ads are visible: an orange banner reading “Secure Electronic Design Collaboration” with a Learn More button, and a blue side ad reading “Designed for Regulated Electronic Programs” with a Learn More button."
+  },
+  "batch_scope": "2c2862dae26cb9bb5b0f1e7aafe0dfc67f931a9e2ae36eedf47732faa26a3142"
+}
