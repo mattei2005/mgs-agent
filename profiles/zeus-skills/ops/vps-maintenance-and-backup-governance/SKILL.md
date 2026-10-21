@@ -62,6 +62,7 @@ Load this skill when Rodolfo asks:
 12. For a dedicated backup plus preserved isolated restore of a live webapp and database—especially through temporary SSH or after a partial tar attempt—load `references/live-webapp-backup-and-isolated-restore.md`; it defines real headroom modeling, schema-neutral roundtrip proof, safe archive resume, independent readback, and production postchecks.
 13. For RunCloud webapp disagreements between cached/dynamic/origin responses, per-app security headers, Cloudflare Origin CA, selective edge transforms, or CSP canaries, load `references/runcloud-webapp-header-edge-origin-validation.md`; it defines layer attribution, the supported `extra.d` extension boundary, manifest-gated Nginx changes, and rollback validation.
 14. For rsyslog or another daemon failing because a destination log is absent or unwritable, load `references/system-log-file-creation-and-rotation.md`; it defines read-only attribution across ACL/tmpfiles/logrotate, exact-file repair, durability after rotation, probe validation, and rollback without deleting logs.
+15. For an urgent PHP vulnerability notice or provider PHP maintenance email, load `references/php-security-advisory-runtime-audit.md`; it separates upstream fixes, vendor backports, actual HTTP workers, temporary mitigations, repository freshness and production confirmation.
 
 ## Hostinger provider route
 

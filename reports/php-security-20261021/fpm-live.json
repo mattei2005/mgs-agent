@@ -1,0 +1,290 @@
+[
+  {
+    "name": "MatteiInc01",
+    "exit": 0,
+    "data": {
+      "fpm_info": [
+        "PHP Version => 8.3.33",
+        "Loaded Configuration File => /etc/php83rc/php.ini",
+        "Scan this dir for additional .ini files => /etc/php83rc/conf.d",
+        "Additional .ini files parsed => /etc/php83rc/conf.d/10mysqlnd.ini,",
+        "PHP Version => 8.3.33",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "package": {
+        "exit": 0,
+        "lines": [
+          "php83rc 8.3.33-1+ubuntu22.04+1",
+          "php83rc-bcmath 8.3.33-1+ubuntu22.04+1",
+          "php83rc-common 8.3.33-1+ubuntu22.04+1",
+          "php83rc-compression 8.3.33-1+ubuntu22.04+1",
+          "php83rc-curl 8.3.33-1+ubuntu22.04+1",
+          "php83rc-essentials 8.3.33-1+ubuntu22.04+1",
+          "php83rc-gd 8.3.33-1+ubuntu22.04+1",
+          "php83rc-imap 8.3.33-1+ubuntu22.04+1",
+          "php83rc-intl 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mbstring 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mysql 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mysqli 8.3.33-1+ubuntu22.04+1",
+          "php83rc-opcache 8.3.33-1+ubuntu22.04+1",
+          "php83rc-pecl-igbinary 3.2.17RC1-1+ubuntu22.04+1",
+          "php83rc-pecl-memcache 8.2-1+ubuntu22.04+1",
+          "php83rc-pecl-memcached 3.4.0-1+ubuntu22.04+1",
+          "php83rc-pecl-msgpack 3.0.1-1+ubuntu22.04+1",
+          "php83rc-pecl-redis 6.3.0-1+ubuntu22.04+1",
+          "php83rc-pecl-swoole 6.2.1-1+ubuntu22.04+1",
+          "php83rc-pecl-timezonedb 2026.1-1+ubuntu22.04+1",
+          "php83rc-pecl-xmlrpc 1.0.0RC3-1+ubuntu22.04+1",
+          "php83rc-process 8.3.33-1+ubuntu22.04+1",
+          "php83rc-pspell 8.3.33-1+ubuntu22.04+1",
+          "php83rc-realpath-turbo 8.3.33-1+ubuntu22.04+1",
+          "php83rc-soap 8.3.33-1+ubuntu22.04+1",
+          "php83rc-sodium 8.3.33-1+ubuntu22.04+1",
+          "php83rc-sqlite 8.3.33-1+ubuntu22.04+1",
+          "php83rc-tidy 8.3.33-1+ubuntu22.04+1",
+          "php83rc-xml 8.3.33-1+ubuntu22.04+1"
+        ]
+      },
+      "policy": {
+        "exit": 0,
+        "lines": [
+          "php83rc:",
+          "  Installed: 8.3.33-1+ubuntu22.04+1",
+          "  Candidate: 8.3.33-1+ubuntu22.04+1",
+          "  Version table:",
+          " *** 8.3.33-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "        100 /var/lib/dpkg/status",
+          "     8.3.32-1+ubuntu22.04+2 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.31-1+ubuntu22.04+2 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.30-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.29-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.28-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.27-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.26-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.25-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.23-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.22-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.21-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.20-1+ubuntu22.04+1 500"
+        ]
+      },
+      "service": {
+        "exit": 0,
+        "lines": [
+          "MainPID=1833060",
+          "ExecMainStartTimestamp=Fri 2026-09-04 06:28:50 UTC",
+          "ActiveState=active"
+        ]
+      },
+      "running_binary": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "upload_progress_overrides": [],
+      "unreadable_configs": 0,
+      "installed_changelog_cve_hits": []
+    },
+    "error": "<string>:17: FutureWarning: Possible nested set at position 8\n"
+  },
+  {
+    "name": "MatteiInc02",
+    "exit": 0,
+    "data": {
+      "fpm_info": [
+        "PHP Version => 8.3.33",
+        "Loaded Configuration File => /etc/php83rc/php.ini",
+        "Scan this dir for additional .ini files => /etc/php83rc/conf.d",
+        "Additional .ini files parsed => /etc/php83rc/conf.d/10mysqlnd.ini,",
+        "PHP Version => 8.3.33",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "package": {
+        "exit": 0,
+        "lines": [
+          "php83rc 8.3.33-1+ubuntu22.04+1",
+          "php83rc-bcmath 8.3.33-1+ubuntu22.04+1",
+          "php83rc-common 8.3.33-1+ubuntu22.04+1",
+          "php83rc-compression 8.3.33-1+ubuntu22.04+1",
+          "php83rc-curl 8.3.33-1+ubuntu22.04+1",
+          "php83rc-essentials 8.3.33-1+ubuntu22.04+1",
+          "php83rc-gd 8.3.33-1+ubuntu22.04+1",
+          "php83rc-imap 8.3.33-1+ubuntu22.04+1",
+          "php83rc-intl 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mbstring 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mysql 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mysqli 8.3.33-1+ubuntu22.04+1",
+          "php83rc-opcache 8.3.33-1+ubuntu22.04+1",
+          "php83rc-pecl-igbinary 3.2.17RC1-1+ubuntu22.04+1",
+          "php83rc-pecl-memcache 8.2-1+ubuntu22.04+1",
+          "php83rc-pecl-memcached 3.4.0-1+ubuntu22.04+1",
+          "php83rc-pecl-msgpack 3.0.1-1+ubuntu22.04+1",
+          "php83rc-pecl-redis 6.3.0-1+ubuntu22.04+1",
+          "php83rc-pecl-swoole 6.2.1-1+ubuntu22.04+1",
+          "php83rc-pecl-timezonedb 2026.1-1+ubuntu22.04+1",
+          "php83rc-pecl-xmlrpc 1.0.0RC3-1+ubuntu22.04+1",
+          "php83rc-process 8.3.33-1+ubuntu22.04+1",
+          "php83rc-pspell 8.3.33-1+ubuntu22.04+1",
+          "php83rc-realpath-turbo 8.3.33-1+ubuntu22.04+1",
+          "php83rc-soap 8.3.33-1+ubuntu22.04+1",
+          "php83rc-sodium 8.3.33-1+ubuntu22.04+1",
+          "php83rc-sqlite 8.3.33-1+ubuntu22.04+1",
+          "php83rc-tidy 8.3.33-1+ubuntu22.04+1",
+          "php83rc-xml 8.3.33-1+ubuntu22.04+1"
+        ]
+      },
+      "policy": {
+        "exit": 0,
+        "lines": [
+          "php83rc:",
+          "  Installed: 8.3.33-1+ubuntu22.04+1",
+          "  Candidate: 8.3.33-1+ubuntu22.04+1",
+          "  Version table:",
+          " *** 8.3.33-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "        100 /var/lib/dpkg/status",
+          "     8.3.32-1+ubuntu22.04+2 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.31-1+ubuntu22.04+2 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.30-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.29-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.28-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.27-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.26-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.25-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.23-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.22-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.21-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.20-1+ubuntu22.04+1 500"
+        ]
+      },
+      "service": {
+        "exit": 0,
+        "lines": [
+          "MainPID=2126124",
+          "ExecMainStartTimestamp=Wed 2026-10-14 03:38:44 UTC",
+          "ActiveState=active"
+        ]
+      },
+      "running_binary": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "upload_progress_overrides": [],
+      "unreadable_configs": 0,
+      "installed_changelog_cve_hits": []
+    },
+    "error": "<string>:17: FutureWarning: Possible nested set at position 8\n"
+  },
+  {
+    "name": "MatteiInc03JBF",
+    "exit": 0,
+    "data": {
+      "fpm_info": [
+        "PHP Version => 8.3.33",
+        "Loaded Configuration File => /etc/php83rc/php.ini",
+        "Scan this dir for additional .ini files => /etc/php83rc/conf.d",
+        "Additional .ini files parsed => /etc/php83rc/conf.d/10mysqlnd.ini,",
+        "PHP Version => 8.3.33",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "package": {
+        "exit": 0,
+        "lines": [
+          "php83rc 8.3.33-1+ubuntu22.04+1",
+          "php83rc-bcmath 8.3.33-1+ubuntu22.04+1",
+          "php83rc-common 8.3.33-1+ubuntu22.04+1",
+          "php83rc-compression 8.3.33-1+ubuntu22.04+1",
+          "php83rc-curl 8.3.33-1+ubuntu22.04+1",
+          "php83rc-essentials 8.3.33-1+ubuntu22.04+1",
+          "php83rc-gd 8.3.33-1+ubuntu22.04+1",
+          "php83rc-imap 8.3.33-1+ubuntu22.04+1",
+          "php83rc-intl 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mbstring 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mysql 8.3.33-1+ubuntu22.04+1",
+          "php83rc-mysqli 8.3.33-1+ubuntu22.04+1",
+          "php83rc-opcache 8.3.33-1+ubuntu22.04+1",
+          "php83rc-pecl-igbinary 3.2.17RC1-1+ubuntu22.04+1",
+          "php83rc-pecl-memcache 8.2-1+ubuntu22.04+1",
+          "php83rc-pecl-memcached 3.4.0-1+ubuntu22.04+1",
+          "php83rc-pecl-msgpack 3.0.1-1+ubuntu22.04+1",
+          "php83rc-pecl-redis 6.3.0-1+ubuntu22.04+1",
+          "php83rc-pecl-swoole 6.2.1-1+ubuntu22.04+1",
+          "php83rc-pecl-timezonedb 2026.1-1+ubuntu22.04+1",
+          "php83rc-pecl-xmlrpc 1.0.0RC3-1+ubuntu22.04+1",
+          "php83rc-process 8.3.33-1+ubuntu22.04+1",
+          "php83rc-pspell 8.3.33-1+ubuntu22.04+1",
+          "php83rc-realpath-turbo 8.3.33-1+ubuntu22.04+1",
+          "php83rc-soap 8.3.33-1+ubuntu22.04+1",
+          "php83rc-sodium 8.3.33-1+ubuntu22.04+1",
+          "php83rc-sqlite 8.3.33-1+ubuntu22.04+1",
+          "php83rc-tidy 8.3.33-1+ubuntu22.04+1",
+          "php83rc-xml 8.3.33-1+ubuntu22.04+1"
+        ]
+      },
+      "policy": {
+        "exit": 0,
+        "lines": [
+          "php83rc:",
+          "  Installed: 8.3.33-1+ubuntu22.04+1",
+          "  Candidate: 8.3.33-1+ubuntu22.04+1",
+          "  Version table:",
+          " *** 8.3.33-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "        100 /var/lib/dpkg/status",
+          "     8.3.32-1+ubuntu22.04+2 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.31-1+ubuntu22.04+2 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.30-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.29-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.28-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.27-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.26-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.25-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.23-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.22-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.21-1+ubuntu22.04+1 500",
+          "        500 https://release.runcloud.io jammy/main amd64 Packages",
+          "     8.3.20-1+ubuntu22.04+1 500"
+        ]
+      },
+      "service": {
+        "exit": 0,
+        "lines": [
+          "MainPID=2806892",
+          "ExecMainStartTimestamp=Thu 2026-09-03 06:45:56 UTC",
+          "ActiveState=active"
+        ]
+      },
+      "running_binary": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "upload_progress_overrides": [],
+      "unreadable_configs": 0,
+      "installed_changelog_cve_hits": []
+    },
+    "error": "<string>:17: FutureWarning: Possible nested set at position 8\n"
+  }
+]
