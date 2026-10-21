@@ -64,6 +64,7 @@ GET /wp-json/wp/v2/posts?categories=<id>&per_page=100&page=<n>&_fields=id,date,s
 - Compare o total coletado com `category.count`.
 - Reconcilie também com o sitemap de posts antes de declarar inventário completo. Filtros de plugins podem suprimir uma classe de posts na coleção REST mesmo com `X-WP-TotalPages=1`: se o sitemap trouxer URLs ausentes ou `category.count` divergir, leia o HTML canônico dessas URLs, extraia o ID real de `postid-<id>` e consulte `GET /wp-json/wp/v2/posts/<id>` individualmente. Agregue por ID, confirme categoria e `link`, e exclua somente raízes/home que não são posts; não atribua a divergência a cache sem verificar.
 - Se `X-WP-TotalPages > 1`, percorra todas as páginas e dedupe por ID antes de analisar.
+- No WPClient que serializa query com `urlencode(..., doseq=True)`, envie `include` como CSV (`','.join(map(str, ids))`) tanto em posts quanto em mídia. Uma lista gera parâmetros `include=ID&include=ID` e o WordPress pode retornar só o último registro; exija igualdade do conjunto de IDs e cobertura antes de concluir que os demais objetos não existem. Exercite um lote real maior que um ID, pois smoke unitário não detecta esse erro.
 - Para cada post, use `content.rendered` para métricas visíveis e faça uma amostra autenticada `context=edit` para conferir `content.raw` e `excerpt.raw`.
 - Não use apenas a primeira página do arquivo visual: temas antigos e posts fora da dobra continuam bloqueando duplicidade.
 
