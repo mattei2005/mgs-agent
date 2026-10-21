@@ -12,6 +12,7 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 - Antes de uma limpeza de mensagens, separar mensagens próprias das de outros autores e conferir as permissões efetivas na thread e no canal pai; conseguir apagar mensagens próprias não comprova `MANAGE_MESSAGES` para as demais. Preservar canais/threads e inventariar os IDs exatos antes de excluir.
 - Tratar autorização de limpeza e autorização de alterar permissões como escopos distintos. Se faltar capacidade, registrar o restante e encaminhar a um administrador autorizado pela rota operacional, sem usar a credencial dele nem conceder acesso permanente como atalho. Procedimento em `references/route-pack-02.md`.
 - Conferir handoffs por GET, incluindo a mention efetiva do destinatário. Distinguir pedido entregue, trabalho aceito e resultado validado; só este último encerra a pendência. Não transformar REPORT-INFRA em fila de execução nem chamar um handoff confirmado de tarefa concluída.
+- Ao recuperar em outra conversa um pedido bloqueado, publicar também a conclusão na thread de origem e verificar a mensagem exata por GET; concluir na Diretoria não comprova que o solicitante foi avisado. Antes de afirmar falta de capacidade ou pedir nova menção, verificar a integração operacional autorizada do próprio Ares. Reconciliar mensagens/nonce antes de reenviar e nunca reexecutar campanhas para corrigir apenas a comunicação.
 
 ## Progresso temporário e avisos de execução
 

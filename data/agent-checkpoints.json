@@ -6812,6 +6812,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-vps-hermes-1562331354568589393",
+      "next_step": "Obter confirmacao critica para transacao exata de 9 pacotes e reboot controlado no mesmo kernel; preservar 8 pacotes phased; depois portar Hermes main. Plano: /root/mgs-agent/reports/vps-maintenance/20261021-1562331354568589393/preflight.json",
+      "objective": "Atualizar VPS primeiro e Hermes main depois, com rollback e validacao integral",
+      "source": "discord:1562331354568589393/1562443674116292609",
+      "state": "{\"vps_preflight\": \"completed_validated\", \"vps_install\": \"awaiting_critical_confirmation\", \"vps_reboot\": \"proposed_awaiting_critical_confirmation\", \"hermes_port\": \"pending_after_vps\", \"hermes_activation\": \"pending_after_staging\", \"cleanup\": \"not_executed_no_manifest\", \"governance\": \"in_progress\"}",
+      "thread_id": "1562331354568589393",
+      "updated_at": "2026-10-21T12:37:52+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-vps-hermes-maintenance-20260905",
       "next_step": "Nenhum; manutenção encerrada.",
       "objective": "Atualizar VPS ao snapd 2.76.3, concluir kernel 6.8.0-139 por reboot validado e validar Hermes v0.21.0 estável",
@@ -6912,5 +6922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T10:32:14+00:00"
+  "updated_at": "2026-10-21T12:37:52+00:00"
 }

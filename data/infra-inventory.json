@@ -841,6 +841,20 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-vps-hermes-1562331354568589393",
+      "status": "blocked_exact_critical_confirmation",
+      "agent": "zeus",
+      "thread_id": "1562331354568589393",
+      "authorization_message_id": "1562443674116292609",
+      "preflight": "/root/mgs-agent/reports/vps-maintenance/20261021-1562331354568589393/preflight.json",
+      "checkpoint_id": "zeus-vps-hermes-1562331354568589393",
+      "scope": "VPS first; Hermes latest main after VPS validation",
+      "vps_transaction": {"upgraded": 9, "new": 0, "removed": 0, "phased_deferred": 8},
+      "mutation_status": "No packages installed, gateways restarted, VPS rebooted or files deleted by this turn",
+      "fwupd_refresh": "Metadata refresh failed: LVFS returned HTTP 503; diagnostic and unit retry failed; no firmware install attempted",
+      "next_gate": "Exact Critical Subset confirmation for the nine package versions in preflight and proposed same-kernel reboot; preserve Ubuntu phasing"
+    },
+    {
       "agent": "zeus",
       "id": "zeus-cpv69-pricing-read-recovery-20261020",
       "job_id": "69dfca2b9719",
