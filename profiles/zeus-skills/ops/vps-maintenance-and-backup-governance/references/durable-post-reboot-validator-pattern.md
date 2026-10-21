@@ -38,6 +38,10 @@ Create a self-contained one-shot systemd unit before reboot:
 
 Use the canonical Discord transport `/root/mgs-agent/scripts/discord-bot-post.py` and REPORT helper `/root/mgs-agent/scripts/send-report-infra-embed.sh`; never parse, print or embed the bot token in the validator.
 
+Read back an asynchronous systemd dispatch with bounded convergence, not a single immediate assertion. After `systemd-run --no-block` returns a unit name, poll that exact unit with `systemctl show <unit> -p ActiveState -p SubState -p MainPID -p ExecStart`: require `active/running`, a positive PID and the frozen command for a waiting executor, or inspect its durable result if it already exited. An initial `activating` state is not proof of failed creation. Preserve the returned unit identity and reconcile it before any retry, because creating another executor can duplicate the reboot. Record the dispatch receipt only after this readback; it proves executor readiness, never reboot completion.
+
+Check expected inactivity without a success-only subprocess wrapper. `systemctl is-active <unit>` normally returns status `3` with `inactive`; capture its return code and stdout explicitly when validating that a next-boot unit has not started. Treat `failed`, `unknown`, or a missing unit separately instead of accepting every nonzero code as expected inactivity.
+
 ## Post-boot acceptance gates
 
 The validator must prove all of the following from live state:
@@ -65,7 +69,7 @@ Report inaccessible ESM Apps updates as a separate residual; do not fold them in
 
 ## Governance closure
 
-Use a two-process boundary: the validator proves runtime health and exits; a separate cleanup/closure process runs only after that exit. Close in this order:
+Use a two-process boundary: the validator proves runtime health and exits; a separate cleanup/closure process runs only after that exit. When native same-session continuation is also armed, persist the validator unit, result path and bounded wait in the checkpoint before dispatch. On resumption, wait for that exact validator to exit and consume its atomic final receipt before updating the same inventory/checkpoint, announcing completion or starting the next maintenance phase; gateway reconnection can precede validator completion and otherwise creates parallel closure writers. If the validator is missing, times out or exits without a final receipt, reconcile its logs and partial effects rather than replaying the package transaction or reboot. Close in this order:
 
 1. the validator writes an atomic compact result JSON, appends the validation audit readback, updates the existing VPS/vendor inventory records, and closes or fails the checkpoint;
 2. the validator disables future execution without unlinking its active unit definition, records `validated_pending_cleanup`, and exits;

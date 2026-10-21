@@ -6813,12 +6813,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "After exact final bot handoff and inactive canonical SQLite turn: detached reboot authorized by 1562451046654283847, native continuation and external post-boot validator. On resume FIRST wait until mgs-vps-maintenance-1562331354568589393.service exits (max 1800s, silent/manual foreground polling), then read /root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json and consume completed checks without replaying installs. Recover any safe failed gate; report VPS only after full validation or exact blocker. Keep Hermes pending until VPS gate closed, then continue original all/main request with its own staging and critical activation gates. No deletion authorized; retain validator unit disabled.",
-      "objective": "Atualizar VPS primeiro e Hermes main depois; avisar Rodolfo quando a VPS estiver concluida",
-      "source": "discord:1562331354568589393/1562451046654283847",
-      "state": "packages_installed_reboot_prepared; nine exact targets installed rc0; backup verified; pure verifier 49/49; external lvfs http503 still open; hermes unchanged",
+      "next_step": "Investigar e recuperar sem repetir instalacao: service_ssh.service",
+      "objective": "VPS primeiro, Hermes main depois; rollback e validacao integral",
+      "source": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json",
+      "state": "blocked_post_boot",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T13:31:03+00:00"
+      "updated_at": "2026-10-21T13:46:19+00:00"
     },
     {
       "agent": "zeus",
@@ -6922,5 +6922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T13:31:03+00:00"
+  "updated_at": "2026-10-21T13:46:19+00:00"
 }

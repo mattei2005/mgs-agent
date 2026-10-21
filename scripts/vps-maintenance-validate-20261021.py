@@ -52,6 +52,12 @@ def collect(after=False):
   for name,h in items.items():checks['profile_'+profile+'_'+name]=run(['sha256sum',str(pathlib.Path('/root/.hermes/profiles')/profile/name)]).stdout.split()[0]==h
  for unit,old in pre['services'].items():
   state=service(unit);checks['service_'+unit]=state['ActiveState']=='active' and int(state['MainPID'])>0
+  if unit=='ssh.service' and not checks['service_'+unit]:
+   sock=dict(l.split('=',1) for l in run(['systemctl','show','ssh.socket','-p','ActiveState','-p','SubState','-p','Listen']).stdout.splitlines() if '=' in l)
+   listener=run(['ss','-ltnp','sport = :22']).stdout
+   config=run(['/usr/sbin/sshd','-t'],check=False)
+   checks['service_'+unit]=sock.get('ActiveState')=='active' and sock.get('SubState')=='listening' and ':22' in sock.get('Listen','') and 'LISTEN' in listener and config.returncode==0
+   details['ssh_socket_activation']={'socket':sock,'port22_listening':'LISTEN' in listener,'config_valid':config.returncode==0,'service_pid_zero_expected_until_connection':True}
   if unit.endswith('-gateway.service'):
    agent=unit.removesuffix('-gateway.service');args=(pathlib.Path('/proc')/state['MainPID']/'cmdline').read_bytes().split(b'\0')
    checks['runtime_argv_'+agent]=[s.decode() for s in args[:6]]==[pre['interpreter'],'/root/.local/bin/hermes','-p',agent,'gateway','run']
