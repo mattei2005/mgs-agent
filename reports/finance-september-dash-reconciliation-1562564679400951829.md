@@ -57,3 +57,17 @@ Há diferenças de atribuição mesmo em sites com total mensal igual:
 ## Aprendizado persistido
 
 Skill`mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md`: analisar primeiro bloqueia escrita, não a comparação real com a aplicação; usar consultas oficiais já autorizadas para resolver IDs/nomes/detalhes antes de exigir novo export; preservar Google micros quando todos os valores diários arredondados coincidem. Essa correção de procedimento não é alteração financeira.
+
+## Retomada ponto a ponto — somente ponto1/Rede1
+
+Autoridade1562572094657798335: explicar detalhadamente o ponto1 antes de ir corrigindo; manter os demais pontos fora da sequência atual. Nenhum ajuste autorizado/aplicado nesta etapa de explicação.
+
+Readback atual: fonte Rede1 integralmente idêntica; Dash revisão1644, cadastro19. Additions idênticas; únicos overrides alterados foram cotaçõesUSD/CAD eUSD/BRL, acompanhadas por audit4931/AUTO_QUOTES_UPDATED. Receita CAD e diferenças da conferência permanecem iguais. Não é uma alteração de receita não atribuída.
+
+Zytiva explica86,2856048643% da diferença Rede1.183 linhas da fonte, linhas2813–2995, todasg003-d. Gross mensalCAD37610,2761827352945763544 na fonte versus41191,002222328764391225 na Dash; redução3580,7260395934698148706. GB representa3580,43420902338160000674 da diferença;US0,29183057008821487276. Os dias com divergência visível são10–17,21 e25/09.
+
+Exemplo verificável:14/09/GB. Plan preservado `private/gam-email-runs/20260915T093604-0400/plan.json` contém119 registros de linhagem somandoCAD2236,490724081084830403, exatamente o valor da entrada ainda presente na Dash. O fechamento atual somaCAD1558,094727047071667586, diferença−678,395997034013162817. Na fonte nova sãoE2820+E2862+E2863, respectivamente direct0,057101307655867586,facebook1022,8741016504656,mct535,1635240889502. O arquivo XLSX apontado pelo plan histórico não existe mais naquele caminho local; a prova recuperada nesta etapa é do plano/linhagem preservado e do readback da entrada, não uma nova validação do binário original. Não afirmar motivo de revisão do fornecedor, fraude ou inválidos a partir disso.
+
+Recomendação de primeira correção dentro do ponto1: Zytiva, valoresCAD nos dias/países exatos, preservando G003/Isliago e as verticais registradas; nunca inserir uma despesa/abatimento no total geral ou no último dia. Motor deve recalcular descontos/impostos/lucro/remuneração; redução de gross não é a mesma redução de lucro ou de pagamento. Após Zytiva, restante Rede1 éCAD569,12728208548457371743. Aguardando alinhamento do primeiro ajuste; nada foi escrito na Dash ou na fonte.
+
+Evidências adicionais:`point1-*-readback.json`, `point1-snapshot.json`, `point1-zytiva-detail.json`, `point1-zytiva-origin-proof.json` no workspace privado da iniciativa.

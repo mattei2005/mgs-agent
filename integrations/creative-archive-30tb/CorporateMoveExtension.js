@@ -59,7 +59,7 @@ function mgsCorporateEnsureSubPath(c,p,rootId,names,props){
 }
 function mgsCorporateMoveOne(c,p,rootId,j,requestSha,props){
  var key='corporate-move-receipt:'+j.jobId,old=mgsArchiveOne(c.receiptsFolderId,key),a=j.asset;
- if(old){mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var prior=JSON.parse(mgsArchiveText(old.id));if(prior.schema!=='mgs.corporate.move.receipt.v1' || prior.jobId!==j.jobId || prior.requestSha256!==requestSha || prior.planSha256!==j.planSha256 || prior.rootId!==rootId || prior.sourceId!==a.sourceId || prior.deleteSource!==false)throw Error('CORPORATE_MOVE_RECEIPT_BINDING');if(prior.status==='moved')return {status:'reused',jobId:j.jobId};if((prior.attempts || 0)>=5)throw Error('CORPORATE_MOVE_RETRY_EXHAUSTED');if(prior.retryAfter && Date.parse(prior.retryAfter)>Date.now())throw Error('CORPORATE_MOVE_COOLDOWN');}
+ if(old){mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var prior=JSON.parse(mgsArchiveText(old.id));if(prior.schema!=='mgs.corporate.move.receipt.v1' || prior.jobId!==j.jobId || prior.requestSha256!==requestSha || prior.planSha256!==j.planSha256 || prior.rootId!==rootId || prior.sourceId!==a.sourceId || prior.deleteSource!==false)throw Error('CORPORATE_MOVE_RECEIPT_BINDING');if(prior.status==='moved'){props.deleteProperty('MGS_CORPORATE_MOVE_'+j.jobId);return {status:'reused',jobId:j.jobId};}if((prior.attempts || 0)>=5)throw Error('CORPORATE_MOVE_RETRY_EXHAUSTED');if(prior.retryAfter && Date.parse(prior.retryAfter)>Date.now())throw Error('CORPORATE_MOVE_COOLDOWN');}
  var pending='MGS_CORPORATE_MOVE_'+j.jobId,existing=props.getProperty(pending),intent=existing?JSON.parse(existing):null,m=mgsArchiveMeta(a.sourceId),target;
  mgsCorporateContent(m,a,p);
  if(m.driveId===c.sourceDriveId){
