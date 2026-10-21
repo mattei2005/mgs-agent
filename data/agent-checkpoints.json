@@ -6823,12 +6823,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Entregar milestone solicitado: VPS concluida, nove pacotes e reboot validados, oito phased preservados. LVFS HTTP503 e real mas nenhum dispositivo guest updatable; nao e pacote/firmware pendente. Hermes ainda inalterado; proxima fase autorizada: port completo de main em candidato inativo, sem cutover antes dos gates proprios. Nenhum executor concorrente permanece.",
-      "objective": "VPS primeiro, Hermes main depois; rollback e validacao integral",
-      "source": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json",
-      "state": "vps completed_validated; hermes pending; lvfs nonblocking not-applicable residual",
+      "next_step": "Apresentar runtime v0.21.7+159/e6ad505, upstreambase7cc3fb8c, stable0.22.3/5841pendentes e main13282fda/5849pendentes (8posrelease). Pedir inicio da preparacao isolada; nenhum cutover ou restart nesta revisao. Preservar101pathscommit+dirty/untracked, Codexrefresh, SHEINsplitter, Honcho, 90%, topologia3gateways e politica de retencao; auto_prune explicittrue e gate antes de startup. Fonte: /root/mgs-agent/reports/hermes-updates/20261021-1562469526409322601-readonly/review.json",
+      "objective": "VPS concluida; revisar Hermes instalado e novidades antes de iniciar plano controlado",
+      "source": "discord:1562331354568589393/1562469526409322601",
+      "state": "vps completed_validated; hermes readonly review completed; awaiting owner start of isolated preparation per1562469526409322601",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T14:02:13+00:00"
+      "updated_at": "2026-10-21T14:22:23+00:00"
     },
     {
       "agent": "zeus",
@@ -6932,5 +6932,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T14:18:29+00:00"
+  "updated_at": "2026-10-21T14:22:23+00:00"
 }

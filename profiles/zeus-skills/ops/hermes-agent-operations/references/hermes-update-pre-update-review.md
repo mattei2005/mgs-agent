@@ -8,7 +8,7 @@ Use for an update-worthiness decision, an explanation of applied commits, or dis
 
 1. Identify the branch: prospective update decision, retrospective applied-update benefits, or enterprise capability discovery. Do not answer a retrospective question with today's moving main.
 2. Resolve the deployed repo through the canonical launcher and named gateway PID/ExecStart; inherited environment and legacy checkouts are not deployment evidence.
-3. For prospective review, resolve the installed upstream base and selected public target. Fetch only when permitted, complete it, then capture refs once before counting.
+3. For prospective review, resolve the installed upstream base and selected public target. Fetch only when permitted, complete it, then capture refs once before counting. Refresh GitHub's latest published stable release in the same observation instead of carrying forward the earlier thread's release name; a newly published release can move thousands of commits from post-release development into the stable range without changing the installed runtime.
 4. For retrospective review, recover the pre-update upstream base and approved cutoff from acceptance/activation receipts or the checkpoint source. Review exactly `BASE..TARGET`, distinguish the upstream cutoff from the local MGS port commit, and keep later commits in a separate cycle.
 5. Validate ancestry. Verify the official release's published, non-draft, non-prerelease status separately: `git describe` can select a nearer canary and is not stable-release proof.
 6. Read official notes for crossed releases, but do not reuse their totals or advertise their entire feature window: some code may already have been installed before our update.
@@ -106,6 +106,8 @@ Concrete checks and pitfalls:
 - Check explicit plugin activation and platform support. A Windows-oriented extension is not automatically suitable for a Linux VPS; a Desktop pane does not add its interface to Discord.
 - Verify an observer's exact surface. Slash-command metadata is not an audit of every terminal command or production operation.
 - Reuse existing trustworthy smoke evidence for an explanatory brief; label untested options instead of launching exploratory LLM runs or installing dependencies.
+- Read each real profile's resolved session-pruning policy, not only the target's new default. An explicit `sessions.auto_prune: true` survives an upstream change back to opt-in and can delete history during startup, including a seemingly harmless candidate smoke. Record the current setting and its authorization, preserve the retention decision, and use synthetic/disposable profiles for preparation until backup and the applicable destructive gate are settled; never silently toggle production retention during a read-only review.
+- Compare memory-provider migration and gateway multiplexing headlines against the installed base and live selectors before calling them new work. A provider may already be external, while three explicitly standalone gateways must not become one host gateway merely because the updater offers automatic migration. List only remaining adoption/port work and freeze the existing topology and provider route in the controlled plan.
 
 ## 5. Translate capabilities into company outcomes
 

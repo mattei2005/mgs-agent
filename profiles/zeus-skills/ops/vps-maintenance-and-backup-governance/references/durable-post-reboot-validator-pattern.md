@@ -34,7 +34,7 @@ Create a self-contained one-shot systemd unit before reboot:
 - enabled for the next multi-user boot;
 - no dependency on the active conversation surviving;
 - one clean user conclusion and one canonical REPORT-INFRA only;
-- disable/remove the one-shot unit after recording the result so it cannot rerun on later boots.
+- disable the one-shot unit after recording the result so it cannot rerun on later boots; remove its files only through an authorized cleanup boundary, otherwise retain the disabled definition as an explicitly inventoried artifact.
 
 Use the canonical Discord transport `/root/mgs-agent/scripts/discord-bot-post.py` and REPORT helper `/root/mgs-agent/scripts/send-report-infra-embed.sh`; never parse, print or embed the bot token in the validator.
 
@@ -77,14 +77,14 @@ Use a two-process boundary: the validator proves runtime health and exits; a sep
 
 1. the validator writes an atomic compact result JSON, appends the validation audit readback, updates the existing VPS/vendor inventory records, and closes or fails the checkpoint;
 2. the validator disables future execution without unlinking its active unit definition, records `validated_pending_cleanup`, and exits;
-3. an external cleanup unit ordered `After=<validator>.service`, or a foreground reconciliation after confirmed validator exit, removes the unit file, reloads systemd, runs `reset-failed`, and proves `LoadState=not-found`, `is-active=inactive`, and zero failed units;
-4. the cleanup process updates the runtime-artifact entry to `cleaned_after_validation`, closes the checkpoint, and appends a cleanup audit boundary; the tracked inventory points to the secure result artifact for later transport receipts instead of embedding a volatile `thread_post: pending` object;
+3. after confirmed validator exit, take the authorized closure branch: an external cleanup unit ordered `After=<validator>.service`, or foreground reconciliation, removes the exact authorized unit file, reloads systemd and proves `LoadState=not-found`/inactive; if deletion was not authorized, retain the definition and prove disabled/inactive with PID `0`. Reset only the exited validator's failed state when needed and require zero failed units in either branch;
+4. update the runtime-artifact entry to `cleaned_after_validation` or `validated_disabled_retained` according to the actual branch, close this phase in the checkpoint, and append its audit boundary. Do not describe retention as deletion or cancel a separately requested cleanup. The tracked inventory points to the secure result artifact for later transport receipts instead of embedding a volatile `thread_post: pending` object;
 5. synchronize the validator script, inventory and checkpoint through the canonical auto-versioning path; require scoped Git clean, the auto-versioning service in its authorized expected state, and local `HEAD == origin/main`;
 6. send one REPORT-INFRA embed with content empty and evidence that includes runtime, cleanup and Git readbacks;
 7. post one binary-first thread result: `Sim, VPS concluída` only on full pass, otherwise `Não, <first failing gate>`;
 8. persist REPORT/thread transport receipts and final state atomically in the secure result artifact without creating a new repository write after the Git gate. If inventory policy requires duplicating those receipts, perform a final readback reconciliation and canonical sync before marking the inventory entry completed; never leave a completed entry with a nested transport status of `pending`.
 
-Do not publish the final green REPORT before the one-shot unit is actually cleaned and the canonical Git gate passes. If cleanup or Git synchronization fails, keep the result durable, classify the exact governance failure, and report red rather than claiming full closure. If a status request finds `result.overall=true` but the final-status or transport receipt is absent, classify it as **runtime validated, governance pending**: reconcile the unit and failed-state readbacks, finish inventory/audit/Git/REPORT once, and do not rerun already-passed expensive smokes or regression suites unless live drift is observed.
+Do not publish the final green REPORT before the one-shot unit's authorized closure branch is validated and the canonical Git gate passes; disabled/inactive retention is valid only when no separately requested deletion remains pending. If cleanup or Git synchronization fails, keep the result durable, classify the exact governance failure, and report red rather than claiming full closure. If a status request finds `result.overall=true` but the final-status or transport receipt is absent, classify it as **runtime validated, governance pending**: reconcile the unit and failed-state readbacks, finish inventory/audit/Git/REPORT once, and do not rerun already-passed expensive smokes or regression suites unless live drift is observed.
 
 ## Canonical Git closure without manual commits
 
@@ -97,6 +97,8 @@ When inventory/checkpoint writes must be committed before the final green report
 5. fetch the remote ref and require the relevant paths clean plus local `HEAD == origin/main` before REPORT-INFRA or the user-facing green result.
 
 If this gate cannot close safely, preserve the result as governance-pending. Do not bypass the canonical path with a manual commit or declare success from local `HEAD` alone.
+
+When the watcher's batching window exceeds a foreground tool's runtime, split observation into bounded calls below that runtime and persist one absolute convergence deadline outside the watched repository. On timeout, read the existing result, owned-path status and watcher state before continuing only the remaining wait; do not replay inventory writes, recreate executors or reset the full batching allowance. Recheck a selective skill mirror after its producer has run, because the source can be committed while the newly synchronized reference starts a later batch.
 
 A scoped clean-path gate can pass before the asynchronous post-commit push finishes. After it passes, fetch and compare `HEAD` with the remote in a bounded convergence window (for example 90 seconds), preserving the concrete exception or ahead/behind evidence. Do not publish a blocked result from a single comparison during that window. If a false Git blocker already fired but runtime checks passed, reconcile the push receipt, reset only the exited validator's failed state, close inventory/checkpoint and send a resolved REPORT in foreground; do not rerun the reboot or already-passed smokes.
 

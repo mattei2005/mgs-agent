@@ -68,9 +68,24 @@ function mgsWholeDriveOwnerProbe(c,props,start){
  var targets=[];
  for(var i=0;i<p.targets.length;i++){
   if(Date.now()-start>120000)return {status:'deferred_runtime',productionMutation:false};
-  var t=p.targets[i],m=mgsWholeDriveMeta(t.id);
-  if(m.trashed || m.id!==t.id || m.name!==t.name || m.mimeType!==t.mimeType || JSON.stringify(m.parents || [])!==JSON.stringify(t.parents || []) || (m.driveId || null)!==(t.driveId || null))throw new Error('WHOLE_DRIVE_PROBE_SOURCE_CHANGED');
-  targets.push({metadata:m,permissions:mgsWholeDrivePermissions(t.id)});
+  var t=p.targets[i],m=mgsWholeDriveMeta(t.id),fields=[],nativeDrive=null;
+  // A shared-drive root is a virtual File whose display name is not a stable
+  // cross-principal identity. Bind it with drives.get, never a label alias.
+  if(t.id===c.sourceDriveId){
+   nativeDrive=Drive.Drives.get(c.sourceDriveId,{fields:'id,name'});
+   if(!nativeDrive || nativeDrive.id!==c.sourceDriveId || t.mimeType!=='application/vnd.google-apps.folder')fields.push('nativeDriveIdentity');
+  }else if(m.name!==t.name)fields.push('name');
+  if(m.trashed)fields.push('trashed');
+  if(m.id!==t.id)fields.push('id');
+  if(m.mimeType!==t.mimeType)fields.push('mimeType');
+  if(JSON.stringify(m.parents || [])!==JSON.stringify(t.parents || []))fields.push('parents');
+  if((m.driveId || null)!==(t.driveId || null))fields.push('driveId');
+  if(fields.length){
+   var mismatch=new Error('WHOLE_DRIVE_PROBE_SOURCE_CHANGED:'+t.id+':'+fields.join(','));
+   mismatch.mgsProbeDetail={targetId:t.id,fields:fields,expected:{id:t.id,name:t.name,mimeType:t.mimeType,parents:t.parents || [],driveId:t.driveId || null},observed:{id:m.id,name:m.name,mimeType:m.mimeType,parents:m.parents || [],driveId:m.driveId || null,trashed:m.trashed},nativeDrive:nativeDrive};
+   throw mismatch;
+  }
+  targets.push({metadata:m,permissions:mgsWholeDrivePermissions(t.id),nativeDrive:nativeDrive});
  }
  var result={schema:'mgs.whole.drive.probe.receipt.v1',authorizationMessageId:p.authorizationMessageId,manifestSha256:MGS_WHOLE_DRIVE_PROBE.manifestSha256,status:'completed',owner:about.user,storageQuota:about.storageQuota || null,targets:targets,productionMutation:false,deleteSource:false,completedAt:null,canary:{sourceId:p.canary.id,moveAttempted:false,restored:false,sourceBefore:null,destinationAfter:null,sourceAfter:null,moveError:null}};
  var a=p.canary,before=mgsWholeDriveMeta(a.id);mgsWholeDriveCanaryIdentity(before,a);
