@@ -72,6 +72,11 @@ For the concrete semantic-merge pattern, one-shot Honcho teardown diagnosis, exa
 3. Save each batch's tested upstream SHA, port HEAD, requested/completed module lists, process exit status, timeout flag and native summary. Aggregate with code and require exact set equality with the approved module plan; preserve skipped and expected-failure classifications rather than counting them as passed.
 4. On a new target, use new run names and retain prior receipts. Keep broad-suite, patch-guard and post-upstream results separate and disclose overlap; summing their pass counts does not produce a unique-test total.
 
+### Cutover configuration and real-smoke refinements
+
+- Apply pre-handoff boolean changes with the **currently running** runtime's native config CLI/writer. A candidate CLI can bump `_config_version` before the old gateway has been replaced, even when the only requested change is `sessions.auto_prune`. Compare complete parsed before/after mappings, preserve compatibility until handoff, and sync mirrors with the native atomic writer; treat schema metadata separately from operational settings. Use the serializer actually installed in that runtime rather than assuming PyYAML is present.
+- A named-profile CLI may dispatch to its already running gateway rather than execute the candidate locally. Do not treat that as a pre-activation inference test of new code or bypass the ownership policy. Reject unsupported local-only options without changing global config; run real canaries after fresh PIDs prove the new owner. Require rc=0, an actual `honcho_profile` tool-use, a successful tool-result, and the exact final result text—not merely a marker echoed in input or logs.
+
 ## Safe staged dependencies and post-merge hooks
 
 - Do not mutate the active production venv during the no-restart stage. Clone it to a versioned next-venv (prefer `cp -a --reflink=auto` when supported), then use `uv pip install --python <next>/bin/python -e '<repo>[active-extras]'` to upgrade the target while preserving optional packages already present. Avoid repeated `uv sync --extra ...` on that production candidate: extras omitted from a later sync can be uninstalled. Run the full guard/config checks with an overridable `PYBIN`. Swap/activate that venv only inside the separately authorized detached restart window.

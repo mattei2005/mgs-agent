@@ -1,0 +1,114 @@
+Unit=apport-autoreport.service
+TimersMonotonic={ OnUnitActiveUSec=3h ; next_elapse=0 }
+TimersMonotonic={ OnStartupUSec=1h ; next_elapse=0 }
+NextElapseUSecRealtime=
+
+Unit=apt-daily-upgrade.service
+TimersCalendar={ OnCalendar=*-*-* 06:00:00 ; next_elapse=Thu 2026-10-22 06:00:00 EDT }
+NextElapseUSecRealtime=Thu 2026-10-22 06:15:58 EDT
+
+Unit=apt-daily.service
+TimersCalendar={ OnCalendar=*-*-* 06,18:00:00 ; next_elapse=Wed 2026-10-21 18:00:00 EDT }
+NextElapseUSecRealtime=Wed 2026-10-21 18:32:38 EDT
+
+Unit=ares-landing-followup.service
+TimersMonotonic={ OnUnitInactiveUSec=15s ; next_elapse=6h 52min 24.477496s }
+TimersMonotonic={ OnBootUSec=30s ; next_elapse=30s }
+NextElapseUSecRealtime=
+
+Unit=ares-landing-intake.service
+TimersMonotonic={ OnUnitInactiveUSec=15s ; next_elapse=6h 52min 26.007853s }
+TimersMonotonic={ OnBootUSec=10s ; next_elapse=10s }
+NextElapseUSecRealtime=
+
+Unit=dpkg-db-backup.service
+TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Thu 2026-10-22 00:00:00 EDT }
+NextElapseUSecRealtime=Thu 2026-10-22 02:27:08 EDT
+
+Unit=e2scrub_all.service
+TimersCalendar={ OnCalendar=Sun *-*-* 03:10:00 ; next_elapse=Sun 2026-10-25 03:10:00 EDT }
+NextElapseUSecRealtime=Sun 2026-10-25 03:10:57 EDT
+
+Unit=fstrim.service
+TimersCalendar={ OnCalendar=Mon *-*-* 00:00:00 ; next_elapse=Mon 2026-10-26 00:00:00 EDT }
+NextElapseUSecRealtime=Mon 2026-10-26 00:02:58 EDT
+
+Unit=fwupd-refresh.service
+TimersCalendar={ OnCalendar=*-*-* *:00:00 ; next_elapse=Wed 2026-10-21 17:00:00 EDT }
+NextElapseUSecRealtime=Wed 2026-10-21 17:01:23 EDT
+
+Unit=logrotate.service
+TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Thu 2026-10-22 00:00:00 EDT }
+NextElapseUSecRealtime=Thu 2026-10-22 01:43:57 EDT
+
+Unit=man-db.service
+TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=Thu 2026-10-22 00:00:00 EDT }
+NextElapseUSecRealtime=Thu 2026-10-22 03:16:26 EDT
+
+
+Unit=mdcheck_continue.service
+TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=
+
+Unit=mdcheck_start.service
+TimersCalendar={ OnCalendar=Sun *-*-01..07 01:00:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=
+
+Unit=mdmonitor-oneshot.service
+TimersCalendar={ OnCalendar=*-*-* 00:00:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=
+
+Unit=motd-news.service
+TimersMonotonic={ OnStartupUSec=1min ; next_elapse=1min 3.754396s }
+TimersCalendar={ OnCalendar=*-*-* 00,12:00:00 ; next_elapse=Thu 2026-10-22 00:00:00 EDT }
+NextElapseUSecRealtime=Thu 2026-10-22 07:12:29 EDT
+
+Unit=phpsessionclean.service
+TimersCalendar={ OnCalendar=*-*-* *:09,39:00 ; next_elapse=Wed 2026-10-21 16:39:00 EDT }
+NextElapseUSecRealtime=Wed 2026-10-21 16:39:00 EDT
+
+Unit=snapd.snap-repair.service
+TimersMonotonic={ OnStartupUSec=15min ; next_elapse=0 }
+TimersCalendar={ OnCalendar=*-*-* 05,11,17,23:00:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=
+
+Unit=sysstat-collect.service
+TimersCalendar={ OnCalendar=*-*-* *:00/10:00 ; next_elapse=Wed 2026-10-21 16:40:00 EDT }
+NextElapseUSecRealtime=Wed 2026-10-21 16:40:00 EDT
+
+Unit=sysstat-summary.service
+TimersCalendar={ OnCalendar=*-*-* 00:07:00 ; next_elapse=Thu 2026-10-22 00:07:00 EDT }
+NextElapseUSecRealtime=Thu 2026-10-22 00:07:00 EDT
+
+Unit=systemd-sysupdate-reboot.service
+TimersCalendar={ OnCalendar=*-*-* 04:10:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=
+
+Unit=systemd-sysupdate.service
+TimersMonotonic={ OnUnitActiveUSec=2h ; next_elapse=0 }
+TimersMonotonic={ OnBootUSec=15min ; next_elapse=0 }
+TimersCalendar={ OnCalendar=Sat *-*-* 00:00:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=
+
+Unit=systemd-tmpfiles-clean.service
+TimersMonotonic={ OnUnitActiveUSec=1d ; next_elapse=1d 15min 979.270ms }
+TimersMonotonic={ OnBootUSec=15min ; next_elapse=15min }
+NextElapseUSecRealtime=
+
+Unit=ua-timer.service
+TimersMonotonic={ OnStartupUSec=1min ; next_elapse=1min 3.754396s }
+TimersMonotonic={ OnUnitActiveUSec=6h ; next_elapse=6h 37min 25.986323s }
+NextElapseUSecRealtime=
+
+Unit=update-notifier-download.service
+TimersMonotonic={ OnUnitActiveUSec=1d ; next_elapse=1d 5min 3.978360s }
+TimersMonotonic={ OnStartupUSec=5min ; next_elapse=5min 3.754396s }
+NextElapseUSecRealtime=
+
+Unit=update-notifier-motd.service
+TimersCalendar={ OnCalendar=Sun *-*-* 06:00:00 ; next_elapse=Sun 2026-10-25 06:00:00 EDT }
+NextElapseUSecRealtime=Mon 2026-10-26 10:50:35 EDT
+
+Unit=xfs_scrub_all.service
+TimersCalendar={ OnCalendar=Sun *-*-* 03:10:00 ; next_elapse=(null) }
+NextElapseUSecRealtime=

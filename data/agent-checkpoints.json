@@ -633,12 +633,12 @@
     {
       "agent": "ares",
       "id": "ARES-CPV13-PAUSE-RESTART-20261022",
-      "next_step": "Validar snapshot/agenda, vincular job, conferir readback e registrar REPORT-INFRA",
+      "next_step": "22/10/2026 00:00 America/Sao_Paulo: runner validará os dez IDs congelados e aplicará somente ACTIVE com GET; não repetir exclusões nem criação; se drift preservar request e escalar",
       "objective": "Excluir C51/C52; pausar demais campanhas e reativar22/10 00:00 SP sem budget ou D1 write",
       "source": "data/ares/meta-ads/state/manual-campaign-actions/cpv13-delete-c51-c52-pause-rest-20261022-rodolfo.json",
-      "state": "meta get verificou c51/c52 deleted e dez campanhas paused; preparando snapshot e one-shot",
+      "state": "scheduled: c51/c52 deleted;10 campanhas paused, budgets preservados; snapshot estável, dez testes de segurança e dry-run live ok; one-shot enabled/no_agent/origin correto e auditoria oito dias sem colisão operacional",
       "thread_id": "1539832402744975450",
-      "updated_at": "2026-10-21T20:33:51+00:00"
+      "updated_at": "2026-10-21T20:36:05+00:00"
     },
     {
       "agent": "ares",
@@ -3373,12 +3373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Alinhar AV vazio, M2 detalhado, Facebook diario e GamingAdx14-30/09; explicar C24 texto omitido do total FB e datas Google; depois conciliar fonte x Dash sem escrita ate autorizacao",
-      "objective": "Conferencia setembro: auditoria integral da fonte AdOps antes de conciliar/aplicar na Dash; agosto preservado",
-      "source": "reports/finance-september-source-audit-1562562282838429729.md;discord:1545426987756298340#1562562282838429729",
-      "state": "source_audit_complete_awaiting_source_clarifications_no_financial_writes",
+      "next_step": "Capturar workspace setembro e cadastro de contas em somente leitura, comparar moedas nativas por rede/site/gestor e gastos; separar deltas comprovados de lacunas sem bloquear a comparacao",
+      "objective": "Conferir relatorio AdOps setembro contra Dash financeira setembro; ajustes na Dash sao destino; planilha geral fora do escopo",
+      "source": "reports/finance-september-source-audit-1562562282838429729.md;discord:1545426987756298340#1562564679400951829",
+      "state": "live_dashboard_reconciliation_in_progress",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-21T20:29:51+00:00"
+      "updated_at": "2026-10-21T20:35:07+00:00"
     },
     {
       "agent": "zeus",
@@ -6853,12 +6853,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Pedir confirmacao Critical para ativar runtime candidato e sessions.auto_prune true->false nos tres agentes (root ja false). Apos autorizacao: re-freeze main/source, native snapshots fresh, safe finalizer Ares->Atena->Zeus, real3profile smokes/postvalidation; never claim production updated before these gates. Final evidence:/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/preparation-final-4d043038.json",
-      "objective": "VPS concluida; Hermes preparado aguardando corte critico",
-      "source": "discord:1562331354568589393/1562474468146942115",
-      "state": "preparation_validated_waiting_owner_activation; target4d043038, portd743b988; 213modules3281pass; guard727pass; post401pass; backup44hashesok; source105paths+pids+launcher unchanged; zero pending main at final observation",
+      "next_step": "Detached external unit executes /root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/supervisor.py --execute. It exclusively owns promotion, restart Ares->canary->Atena->canary->Zeus->canary, guard/post-regression, rollback, inventory/audit/REPORT and origin delivery. Do not race this owner. Read external-state.json/result.json; if running observe only; if origin_readback true do not duplicate report. Target4d exactly approved; public main advanced15 commits, disclosed not silently included.",
+      "objective": "Corte Hermes 4d043038 autorizado; external supervisor owns closeout",
+      "source": "discord:1562331354568589393/1562558871053144137",
+      "state": "authority1562558871053144137 verified rodolfo id344196393512075265; fresh native snapshots4 quick-checkok; rollback4981hashesok; db copies candidate migration+old reopen4pass; auto_prune=false3live+mirrors; no gateways restarted yet; prepared canonical helper per-agent order3pass",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T17:08:44+00:00"
+      "updated_at": "2026-10-21T20:40:18+00:00"
     },
     {
       "agent": "zeus",
@@ -6962,5 +6962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T20:33:51+00:00"
+  "updated_at": "2026-10-21T20:40:18+00:00"
 }

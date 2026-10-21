@@ -6,6 +6,10 @@ Rodolfo `1551042463060197386`, thread `1545426987756298340`, supplied August/202
 
 Use canonical Google SA only. Read every named tab completely and preserve original values/types/row numbers plus hashes. Re-read all source tabs before finalizing, not merely Drive modifiedTime. Compare with a consistent live production workspace and master account registry, recording their revisions.
 
+## Explicit comparison target
+
+For Rodolfo's monthly closing, compare the supplied AdOps/network/spend workbook with the live financial application at `dash.mgsdigitalcorp.com`, not with his general finance workbook. The completed prior-month AdOps workbook is a structural/process reference only; do not reopen that month. A request to inspect the new source first authorizes source-quality analysis before the application comparison, not substitution of the general Sheet as the destination. State clearly which phase is actually verified and preserve the no-financial-write gate until application is authorized.
+
 ## Required reconciliation gates
 
 1. Detect cross-tab copied tails by exact row-position equality and currency-format transitions before summing networks. Equal grid row counts are not independent evidence of complete reports. Quarantine suspicious rows in analysis, retain literal data, and obtain source confirmation before an import.

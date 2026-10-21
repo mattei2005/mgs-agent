@@ -1,0 +1,23 @@
+NEXT                            LEFT LAST                              PASSED UNIT                           ACTIVATES
+Wed 2026-10-21 16:35:46 EDT      10s Wed 2026-10-21 16:35:31 EDT       5s ago ares-landing-followup.timer    ares-landing-followup.service
+Wed 2026-10-21 16:35:48 EDT      11s Wed 2026-10-21 16:35:32 EDT       4s ago ares-landing-intake.timer      ares-landing-intake.service
+Wed 2026-10-21 16:39:00 EDT 3min 23s Wed 2026-10-21 16:09:01 EDT    26min ago phpsessionclean.timer          phpsessionclean.service
+Wed 2026-10-21 16:40:00 EDT 4min 23s Wed 2026-10-21 16:30:00 EDT     5min ago sysstat-collect.timer          sysstat-collect.service
+Wed 2026-10-21 16:45:39 EDT    10min Wed 2026-10-21 10:20:48 EDT       6h ago ua-timer.timer                 ua-timer.service
+Wed 2026-10-21 17:01:23 EDT    25min Wed 2026-10-21 16:14:36 EDT    21min ago fwupd-refresh.timer            fwupd-refresh.service
+Wed 2026-10-21 18:32:38 EDT 1h 57min Wed 2026-10-21 07:44:21 EDT            - apt-daily.timer                apt-daily.service
+Thu 2026-10-22 00:07:00 EDT       7h -                                      - sysstat-summary.timer          sysstat-summary.service
+Thu 2026-10-22 01:43:57 EDT       9h Wed 2026-10-21 00:00:54 EDT            - logrotate.timer                logrotate.service
+Thu 2026-10-22 02:27:08 EDT       9h Wed 2026-10-21 01:31:55 EDT            - dpkg-db-backup.timer           dpkg-db-backup.service
+Thu 2026-10-22 03:16:26 EDT      10h Wed 2026-10-21 06:10:50 EDT            - man-db.timer                   man-db.service
+Thu 2026-10-22 06:15:58 EDT      13h Wed 2026-10-21 06:10:41 EDT            - apt-daily-upgrade.timer        apt-daily-upgrade.service
+Thu 2026-10-22 07:12:29 EDT      14h Wed 2026-10-21 14:12:59 EDT 2h 22min ago motd-news.timer                motd-news.service
+Thu 2026-10-22 09:48:26 EDT      17h Wed 2026-10-21 09:48:26 EDT       6h ago update-notifier-download.timer update-notifier-download.service
+Thu 2026-10-22 09:58:23 EDT      17h Wed 2026-10-21 09:58:23 EDT       6h ago systemd-tmpfiles-clean.timer   systemd-tmpfiles-clean.service
+Sun 2026-10-25 03:10:57 EDT   3 days Sun 2026-10-18 03:10:59 EDT            - e2scrub_all.timer              e2scrub_all.service
+Mon 2026-10-26 00:02:58 EDT   4 days Mon 2026-10-19 00:49:21 EDT            - fstrim.timer                   fstrim.service
+Mon 2026-10-26 10:50:35 EDT   4 days Tue 2026-10-20 08:44:27 EDT            - update-notifier-motd.timer     update-notifier-motd.service
+-                                  - -                                      - apport-autoreport.timer        apport-autoreport.service
+-                                  - -                                      - snapd.snap-repair.timer        snapd.snap-repair.service
+
+20 timers listed.
