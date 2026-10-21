@@ -2402,6 +2402,16 @@
     },
     {
       "agent": "zeus",
+      "id": "MGS-CORPORATE-MANUAL-PILOT-1562611397823569983",
+      "next_step": "Operador abriu origem/destino na conta Gmail. Piloto manual preparado para Sheet Auditoria DTR x Smart Bidding — IDs e Auto Principal Drip — 2026-09-24, ID1NOXGvM4W5DdGH5tjGjZd4j6Rpks0L-aHhzryDZ0po98, sourceVersion19, 11 abas. Baseline completo e ACL origem/destino congelados em manual-corporate-pilot-1562611397823569983/manifest.json. Lane corporativa desativada, sem activation remoto ou requests corporativos; SID excluido do manifesto criativo, sem pausar/trocar escopo criativos. Somente instrucao de Mover nativo pelo navegador para MGS-CORPORATIVO, mesma conta Gmail/mesmo ID; nada copiado/movido/excluido ainda. Apos resposta do operador, verificar parent/owner/native ACL4, snapshot completo valores/formulas/IDs de abas/formatacao, Sheets API200 e canario reversivel de escrita SA antes de aceitar e ampliar lote. Nao mover backups/CRIATIVOS/UPLOAD MANUAL neste piloto; objetivo integral nao foi reduzido.",
+      "objective": "Validar um movimento nativo manual de Sheet corporativa com mesmo ID e ACL aprovada, sem concorrencia nem mudar a meta integral",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "awaiting_owner_native_browser_move",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-21T23:44:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "MGS-PRIVATE-PANELS-1555940444473655388",
       "next_step": "Operação normal; preservar robots/header/meta; nenhuma pendência executiva",
       "objective": "Favicon Router e SEO/indexação off nos dois painéis",
@@ -2413,12 +2423,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Recibo owner BF recuperado em 22:32:13.750Z e accept-setup SA corporate_setup_verified: root/ACL4/canario origem/Sheets200. NAO pedir novo repin/Run. Fonte ultima secao docs/mgs-whole-drive-30tb-migration.md e owner-recovery-accepted-1562597039404228678.json. Mesmo monitor 83b148017b4d agora chama resume-acceptance para promover os dois pins somente apos scheduled nativo BF saudavel; pausa/manual/stale nao promovem, ledger e limites intactos. Gates de producao corporativa continuam fechados. Proxima fase sob autorizacao integral original: produtor/reconciliacao corporativa, consumidores das oito Sheets e backup/retencao/restore; retomar backfill criativo ja autorizado quando ready. Sem writer/cron paralelo, sem novas ACLs/credenciais/exclusoes, sem fake100. Resolver bloqueios seguros autonomamente; so interromper em gate critico/editor real.",
+      "next_step": "Primeiro aguardar/validar piloto manual controlado MGS-CORPORATE-MANUAL-PILOT-1562611397823569983; nao publicar requests para esse SID. Recibo owner BF recuperado em 22:32:13.750Z e accept-setup SA corporate_setup_verified: root/ACL4/canario origem/Sheets200. NAO pedir novo repin/Run. Fonte ultima secao docs/mgs-whole-drive-30tb-migration.md e owner-recovery-accepted-1562597039404228678.json. Mesmo monitor 83b148017b4d agora chama resume-acceptance para promover os dois pins somente apos scheduled nativo BF saudavel; pausa/manual/stale nao promovem, ledger e limites intactos. Gates de producao corporativa continuam fechados. Proxima fase sob autorizacao integral original: produtor/reconciliacao corporativa, consumidores das oito Sheets e backup/retencao/restore; retomar backfill criativo ja autorizado quando ready. Sem writer/cron paralelo, sem novas ACLs/credenciais/exclusoes, sem fake100. Resolver bloqueios seguros autonomamente; so interromper em gate critico/editor real.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automacao integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
       "state": "corporate_setup_verified_awaiting_healthy_scheduled_bulk",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T23:02:46+00:00"
+      "updated_at": "2026-10-21T23:44:54+00:00"
     },
     {
       "agent": "zeus",
@@ -6982,5 +6992,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T23:32:11+00:00"
+  "updated_at": "2026-10-21T23:44:54+00:00"
 }

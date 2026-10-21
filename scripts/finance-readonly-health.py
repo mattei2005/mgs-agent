@@ -16,6 +16,13 @@ def collect():
  if not isinstance(r.get('expected'),int) or r['expected']<=0 or r.get('checked')!=r['expected'] or r.get('passed',0)+len(r.get('failures',[]))!=r['checked']:raise ValueError('coverage')
  return r
 
+def probe():
+ try:return collect()
+ except Exception as e:
+  if isinstance(e,TimeoutError) and str(e)=='finance_release_admission_busy_no_changes':
+   return {'ok':False,'deferred':True,'reason':'authorized_finance_operation_in_progress','expected':0,'checked':0,'passed':0,'failures':[]}
+  return {'ok':False,'expected':0,'checked':0,'passed':0,'failures':[{'period':'unknown','manager':'all','code':'probe_'+type(e).__name__}]}
+
 def payload(result,recovery=False):
  failures=result.get('failures',[]);detail='\n'.join(x['period']+' · '+x['manager']+' · '+x['code'] for x in failures[:10]) or 'Consulta de produção indisponível; nenhuma alteração financeira executada.'
  return {'content':'' if recovery else '<@344196393512075265>','allowed_mentions':{'parse':[],'users':[] if recovery else ['344196393512075265'],'roles':[],'replied_user':False},'embeds':[{'title':'Financeiro — verificação recuperada' if recovery else 'Financeiro — verificação bloqueada','color':3066993 if recovery else 15158332,'fields':[{'name':'Resultado','value':f"{result.get('passed',0)}/{result.get('expected',0)} combinações válidas" if recovery else detail,'inline':False},{'name':'Validação','value':'Módulo implantado + banco PostgreSQL em somente leitura; serviços e regras não foram alterados.','inline':False},{'name':'Ação','value':'Recuperação confirmada; operação normal.' if recovery else 'Consulta repetida. Preservada a trava financeira; investigar causa antes de corrigir valores. Origem: thread1545426987756298340.','inline':False}]}]}
@@ -46,10 +53,19 @@ def send_notice(body,requester=None):
  return {'message_id':mid,'channel_id':CHANNEL,'readback':True}
 
 def transition(old,result,send):
- now=datetime.datetime.now(datetime.timezone.utc).isoformat();new={**old,'last_check':now,'result':result,'authority':'1556500454291148811','last_status':'ok' if result.get('ok') else 'failed'}
+ now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+ if result.get('deferred'):
+  since=old.get('deferred_since') or now
+  try:elapsed=(datetime.datetime.fromisoformat(now)-datetime.datetime.fromisoformat(since)).total_seconds()
+  except (ValueError,TypeError):elapsed=300
+  if elapsed<300:
+   # No successful probe occurred: preserve last_success and any open incident.
+   return {**old,'last_check':now,'result':result,'last_status':'deferred','deferred_since':since,'authority':'1556500454291148811'}
+  result={'ok':False,'expected':0,'checked':0,'passed':0,'failures':[{'period':'unknown','manager':'all','code':'finance_operation_wait_exceeded_5m'}]}
+ new={**old,'last_check':now,'result':result,'authority':'1556500454291148811','last_status':'ok' if result.get('ok') else 'failed'}
  if result.get('ok'):
   if old.get('alert_signature'):new['last_notice']=send(payload(result,True));new['alert_signature']=None
-  new['failure_streak']=0;new['last_success']=now
+  new['failure_streak']=0;new['last_success']=now;new.pop('deferred_since',None)
  else:
   signature=hashlib.sha256(json.dumps(result.get('failures',[]),sort_keys=True).encode()).hexdigest();new['failure_streak']=old.get('failure_streak',0)+1
   if signature!=old.get('alert_signature'):new['last_notice']=send(payload(result));new['alert_signature']=signature
@@ -66,11 +82,8 @@ def main():
  with open('/var/lock/mgs-finance-readonly-health.lock','a') as lock:
   try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
   except BlockingIOError:return
-  def attempt():
-   try:return collect()
-   except Exception as e:return {'ok':False,'expected':0,'checked':0,'passed':0,'failures':[{'period':'unknown','manager':'all','code':'probe_'+type(e).__name__}]}
-  result=attempt()
-  if not result['ok']:time.sleep(2);result=attempt()
+  result=probe()
+  if not result['ok']:time.sleep(2);result=probe()
   if args.check_only:print(json.dumps(result));return
   old=json.loads(STATE.read_text()) if STATE.exists() else {}
   try:new=transition(old,result,send_notice)
