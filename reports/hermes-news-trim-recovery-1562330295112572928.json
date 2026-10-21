@@ -1,0 +1,56 @@
+{
+  "id": "hermes-news-trim-recovery-1562330295112572928",
+  "agent": "zeus",
+  "updated_at": "2026-10-21T05:06:54.980338+00:00",
+  "thread_id": "1562330295112572928",
+  "authority_message_id": "1562330295112572928",
+  "standing_authority": "SOUL safe same-scope monitor recovery; notification policy unchanged",
+  "policy": "official-release-only",
+  "status": "recovered_verified",
+  "cause": "Discord removed one trailing ASCII space from truncated v0.21.7 description; exact raw comparison blocked outbox since 2026-10-12",
+  "backup": "/root/.hermes/profiles/zeus/cache/scratch/hermes-news-recovery-1562330295112572928",
+  "files": [
+    {
+      "path": "scripts/mgs_hermes_release_monitor.py",
+      "sha256": "a61b0753fff3100936a7a896f115a20ef389de59563646754d435d71e9057268"
+    },
+    {
+      "path": "tests/test_hermes_release_only_monitor.py",
+      "sha256": "e99192b655818a3e5319f5227a9c88f90417f5000e728d5fe2b65a2414cf6613"
+    },
+    {
+      "path": "profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+      "sha256": "bebb77fa80fdc395a5eedd5a051003c5256c94608583732497532730283ddef2"
+    }
+  ],
+  "validation": {
+    "pytest_passed": 45,
+    "subtests_passed": 8,
+    "old_message_reconciled_without_post": "1559183118093656225",
+    "new_release": "v0.22.2",
+    "new_message_id": "1562330895950815315",
+    "explanation_id": "1562331025449689189",
+    "exact_readback": true,
+    "third_run_silent": true,
+    "skill_live_mirror_equal": true
+  },
+  "changes_excluded": [
+    "runtime install",
+    "gateway restart",
+    "cron schedule",
+    "notification policy"
+  ],
+  "test_environment_recovery": [
+    "system python has no pytest",
+    "first fallback path used venv instead of actual .venv; corrected from launcher shebang"
+  ],
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1562331329226612798",
+    "readback_ok": true,
+    "content_empty": true,
+    "embed_count": 1,
+    "mentions": 0,
+    "verified_at": "2026-10-21T05:07:13.035823+00:00"
+  }
+}

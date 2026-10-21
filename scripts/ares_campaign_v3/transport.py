@@ -54,6 +54,16 @@ class BatchResult:
     headers: tuple[dict[str, Any], ...] = ()
 
 
+def _operational_scope_guard():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('ares_engine_asset_scope', '/root/mgs-agent/scripts/mgs-ares-asset-scope.py')
+    if spec is None or spec.loader is None:
+        raise RuntimeError('operational_scope_unavailable')
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+    return guard
+
+
 class GraphBatchTransport:
     def __init__(self, account_id: str, graph_version: str, token: str, app_secret: str | None = None, timeout: int = 90):
         self.account_id = str(account_id).removeprefix("act_")
@@ -68,6 +78,21 @@ class GraphBatchTransport:
         if not operations:
             return []
         batch = [operation.graph_payload() for operation in operations]
+        # Same fail-closed guard as the common Graph client, before any HTTP.
+        guard = _operational_scope_guard()
+        if guard.is_ares_context():
+            guard.enforce_meta_path('act_' + self.account_id, {'fields': 'id'})
+            guard.enforce_meta_path('', {'batch': batch}, 'POST')
+            scope_data = guard.load_scope()
+            for operation in operations:
+                clean, _ = guard._request_parts(operation.relative_url, operation.body)
+                node = clean.split('/')[0]
+                dependency = guard._dependency_for_node(node, scope_data)
+                if dependency:
+                    if self.account_id not in dependency['account_ids']:
+                        raise guard.ScopeError(guard.DENY)
+                elif guard._account_for_node(node, scope_data) != self.account_id:
+                    raise guard.ScopeError(guard.DENY)
         form: dict[str, str] = {
             "access_token": self._token,
             "batch": json.dumps(batch, ensure_ascii=False, separators=(",", ":")),
@@ -109,6 +134,17 @@ class GraphBatchTransport:
             code = int(item.get("code") or 0) if isinstance(item, dict) else 0
             headers = tuple(item.get("headers") or ()) if isinstance(item, dict) else ()
             results.append(BatchResult(operation.name, code, body, headers))
+        successful_ids = [{'name': row.name, 'code': row.code, 'ids': {
+            key: row.body[key] for key in ('id', 'copied_campaign_id', 'copied_adset_id', 'copied_ad_id', 'ad_object_ids') if key in row.body
+        }} for row in results if 200 <= row.code < 300]
+        try:
+            for operation, row in zip(operations, results):
+                if 200 <= row.code < 300:
+                    guard.observe_meta_response(operation.relative_url, operation.body, row.body, operation.method)
+        except Exception as exc:
+            # IDs survive even if post-HTTP provenance validation fails.
+            raise BatchTransportError(stage, {'error': 'scope_observation_failed', 'error_type': type(exc).__name__,
+                                             'successful_children': successful_ids}) from None
         self.calls.append({"stage": stage, "operations": len(operations), "outer_headers": outer_headers})
         failures = [result for result in results if result.code < 200 or result.code >= 300]
         if failures:

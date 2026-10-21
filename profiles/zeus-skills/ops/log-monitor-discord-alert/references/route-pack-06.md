@@ -43,6 +43,8 @@ Resumir o delta entre releases e notas oficiais, nunca o acumulado runtime→mai
 
 Persistir intenção/outbox antes do envio, ID aceito antes do GET e dedupe por release. Ler o alvo exato antes de concluir; GET falho após POST repete apenas GET. Entrega ambígua reconcilia ou bloqueia, sem repost cego. Testar com repos locais e servidor HTTP loopback: avanço de main silencioso, release nova, release já instalada, retry de HTTP, readback, idempotência, aliases e ambos consumidores. Produção saudável não publica smoke nem reanuncia histórico.
 
+Normalizar espaços ASCII nas bordas da descrição após truncá-la ao limite do embed, porque o Discord remove esses espaços no transporte. Ao reconciliar uma outbox antiga, comparar o texto esperado com a mesma normalização estrita, preservando autor, título, URL, campos e o ID já aceito; diferença real de conteúdo continua bloqueada. Provar com fixture uma descrição cortada exatamente em espaço, a recuperação usando somente GET e a rejeição de conteúdo alterado, depois executar reconciliar → publicar a release atual → repetir silenciosamente. O watchdog de explicações saudáveis não prova que o produtor Git continua publicando; verificar também o log e a outbox do produtor.
+
 ### RunCloud API — dados mínimos e classificação de agenda
 
 - Projete respostas `/webapps` por allowlist antes de imprimir, persistir ou agregar: `id`, `name`, `phpVersion`, `stack` e `type` bastam para vínculo de aplicação/backup. O objeto bruto pode incluir `pullKey1`/`pullKey2`; nunca despeje nem salve essas chaves de deploy em evidência. Preserve credenciais apenas em memória durante uso autorizado.

@@ -62,6 +62,23 @@ def _account_for_node(node,data):
  account=row.get('account_id')
  return account if row.get('source')=='scoped_graph_response' and allowed_account(account,data) else None
 
+def _dependency_for_node(node,data):
+ row=_objects(data).get(node,{})
+ accounts=row.get('account_ids',[])
+ return row if row.get('source')=='scoped_graph_dependency' and accounts and all(allowed_account(a,data) for a in accounts) else None
+
+def _enforce_dependency(clean,params,method,row,data):
+ parts=clean.split('/')
+ if method.upper()!='GET' or len(parts)>2:raise ScopeError(DENY)
+ kind=row.get('kind');edge=parts[1] if len(parts)==2 else ''
+ fields=set(str(params.get('fields','')).split(','))
+ allowed={'page':{'id','name','access_token','instagram_business_account'},'video':{'id','title','length','status','picture','source'},'pixel':{'id','name'},'instagram':{'id','name','username'}}.get(kind,set())
+ if edge=='assigned_users' and kind=='page':
+  if str(params.get('business',''))!=data.get('operational_business_id') or not fields or not fields<={'id','name','tasks'} or not set(params)<={'business','fields','limit','after','before'}:raise ScopeError(DENY)
+ elif edge=='thumbnails' and kind=='video':
+  if not set(params)<={'fields','limit','after','before'} or (fields!={''} and not fields<={'id','uri','is_preferred','width','height','scale'}):raise ScopeError(DENY)
+ elif edge or not fields or not fields<=allowed or not set(params)<={'fields'}:raise ScopeError(DENY)
+
 def enforce_meta_path(path,params=None,method='GET'):
  if not is_ares_context():return
  clean,params=_request_parts(path,params)
@@ -107,6 +124,10 @@ def enforce_meta_path(path,params=None,method='GET'):
   if not clean:return
  parts=clean.split('/')
  if not parts or not re.fullmatch(r'(?:act_)?[0-9]{5,30}',parts[0]):raise ScopeError(DENY)
+ dependency=_dependency_for_node(parts[0],data)
+ if dependency:
+  _enforce_dependency(clean,params,method,dependency,data)
+  return
  if any(edge in BLOCKED_DISCOVERY for edge in parts[1:]):raise ScopeError(DENY)
  if re.search(r'\b(?:'+ '|'.join(BLOCKED_DISCOVERY)+r')\b',str(params.get('fields',''))):raise ScopeError(DENY)
  # A caller-provided account_id is not proof that a bare object belongs to it.
@@ -137,9 +158,25 @@ def observe_meta_response(path,params,payload,method='GET'):
    account_ids=invoice.get('ad_account_ids') if isinstance(invoice,dict) else None
    if not isinstance(account_ids,list) or not account_ids or any(not allowed_account(str(a),data) for a in account_ids):raise ScopeError(DENY)
   return
- parts=clean.split('/');account=_account_for_node(parts[0],data)
+ parts=clean.split('/')
+ # Dependency reads never turn Pages/users/media into writable account objects.
+ if _dependency_for_node(parts[0],data):return
+ account=_account_for_node(parts[0],data)
  if not account:return
  updates={}
+ def dependency(oid,kind):
+  oid=str(oid or '')
+  if re.fullmatch(r'[0-9]{5,30}',oid):updates[oid]={'account_ids':[account],'source':'scoped_graph_dependency','kind':kind}
+ def references(row):
+  if isinstance(row,list):
+   for value in row:references(value)
+  elif isinstance(row,dict):
+   for key,value in row.items():
+    if key=='page_id':dependency(value,'page')
+    elif key in {'video_id','original_video_id'}:dependency(value,'video')
+    elif key=='pixel_id':dependency(value,'pixel')
+    elif key=='instagram_user_id':dependency(value,'instagram')
+    elif isinstance(value,(dict,list)):references(value)
  def collect(row):
   if isinstance(row,list):
    for value in row:collect(value)
@@ -150,6 +187,12 @@ def observe_meta_response(path,params,payload,method='GET'):
    if row.get('account_id') is not None and str(row['account_id']).removeprefix('act_')!=account:raise ScopeError(DENY)
    oid=str(row.get('id',''))
    if re.fullmatch(r'[0-9]{5,30}',oid):updates[oid]={'account_id':account,'source':'scoped_graph_response'}
+   # Copy receipts are explicit evidence of newly created objects in this scope.
+   for key in ('copied_campaign_id','copied_adset_id','copied_ad_id'):
+    copied=str(row.get(key,''))
+    if re.fullmatch(r'[0-9]{5,30}',copied):updates[copied]={'account_id':account,'source':'scoped_graph_response'}
+   for key in ('object_story_spec','asset_feed_spec','media_sourcing_spec','promoted_object'):
+    if isinstance(row.get(key),(dict,list)):references(row[key])
    for key in ('data','campaigns','adsets','ads','creative','adcreatives','videos','advideos','adspixels'):
     if isinstance(row.get(key),(dict,list)):collect(row[key])
  collect(payload)
@@ -160,8 +203,19 @@ def observe_meta_response(path,params,payload,method='GET'):
   fcntl.flock(lock,fcntl.LOCK_EX)
   objects=_objects(data)
   for oid,row in updates.items():
-   if oid in objects and objects[oid].get('account_id')!=row['account_id']:raise ScopeError(DENY)
-  objects.update(updates)
+   previous=objects.get(oid,{})
+   if row.get('source')=='scoped_graph_dependency':
+    if previous.get('source')=='scoped_graph_response':
+     if not allowed_account(previous.get('account_id'),data):raise ScopeError(DENY)
+     continue
+    if previous and (previous.get('source')!='scoped_graph_dependency' or previous.get('kind')!=row['kind']):raise ScopeError(DENY)
+    row['account_ids']=sorted(set(row['account_ids']+previous.get('account_ids',[])))
+   elif previous.get('source')=='scoped_graph_dependency':
+    # An account-scoped library can prove ownership of a media/pixel node;
+    # retain the stricter read-only dependency grant rather than upgrading it.
+    continue
+   elif previous and previous.get('account_id')!=row['account_id']:raise ScopeError(DENY)
+   objects[oid]=row
   fd,name=tempfile.mkstemp(prefix='.scoped-provenance-',dir=PROVENANCE.parent)
   os.fchmod(fd,0o600)
   with os.fdopen(fd,'w') as stream:
