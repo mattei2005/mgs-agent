@@ -50,6 +50,16 @@ class AutomationTests(unittest.TestCase):
     def test_disabled_queue_never_enqueues(self):
         calls=[];out=self.api.enqueue_ready([self.row],self.c,{},True,lambda row:calls.append(row))
         self.assertEqual(calls,[]);self.assertEqual(out['queued'],[])
+    def test_unhealthy_gate_keeps_approved_config_and_never_publishes(self):
+        self.c['queue_enabled']=True
+        before=json.dumps(self.c,sort_keys=True);state={};calls=[]
+        out=self.api.enqueue_ready([self.row],self.c,state,True,lambda row:calls.append(row),enabled=False)
+        self.assertEqual(json.dumps(self.c,sort_keys=True),before)
+        self.assertEqual((calls,state,out['queued'],out['planned']),([],{},[],[]))
+    def test_disabled_runtime_gate_still_validates_scope(self):
+        self.c['archive_root_id']='unapproved'
+        with self.assertRaises(bridge.ArchiveError):
+            self.api.enqueue_ready([self.row],self.c,{},True,lambda row:self.fail('no publish'),enabled=False)
     def test_dry_run_never_enqueues_or_mutates_state(self):
         self.c['queue_enabled']=True;state={};calls=[];out=self.api.enqueue_ready([self.row],self.c,state,False,lambda row:calls.append(row))
         self.assertEqual(calls,[]);self.assertEqual(state,{});self.assertEqual(out['planned'],['asset_offline'])

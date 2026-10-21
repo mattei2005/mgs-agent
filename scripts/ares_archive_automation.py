@@ -38,10 +38,10 @@ def select_inventory(rows,c):
     return selected,excluded
 
 
-def enqueue_ready(rows,c,state,apply,publish,limit=2):
+def enqueue_ready(rows,c,state,apply,publish,limit=2,enabled=True):
     selected,excluded=select_inventory(rows,c)
     out={'queued':[],'planned':[],'blocked':[],'deferred':0,'excluded':excluded}
-    if not c.get('queue_enabled'):return out
+    if not c.get('queue_enabled') or not enabled:return out
     previous=state.get('enqueued',{})
     for row in selected:
         aid=row['asset_id'];fingerprint=lineage_fingerprint(row);old=previous.get(aid)
@@ -167,10 +167,10 @@ def _run_cycle(apply=False,reconcile_only=False,intake_state=None,allow_retireme
                 except bridge.ArchiveError as exc:reconciliation['blocked'].append({'job_id':jid,'reason':str(exc)[:200]})
         inv=bridge.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
         rows=[json.loads(line) for line in inv.read_text().splitlines() if line.strip()]
-        producer_config=dict(c)
-        if reconcile_only or not healthy:producer_config['queue_enabled']=False
         def publish(row):return bridge.enqueue(d,c,bridge.job_for_lineage(d,c,row['asset_id']))
-        production=enqueue_ready(rows,producer_config,state,apply,publish)
+        # Runtime liveness is not a change to the approved retirement contract.
+        # Validate the intact config; inhibit publishing through a separate gate.
+        production=enqueue_ready(rows,c,state,apply,publish,enabled=healthy and not reconcile_only)
         cleanup=retirement.run_cycle(d,c,intake_state or {'claims':{}},apply=apply and not reconcile_only) if healthy and not reconciliation['blocked'] and allow_retirement else {'status':'deferred','enabled':c.get('delete_source',False),'blocked':[]}
         backfill={'status':'not_enabled','blocked':[]}
         backfill_stage=bridge.read_json(bridge.DATA/'historical-migration-1562256530454220851/stage.json',{})
@@ -181,6 +181,8 @@ def _run_cycle(apply=False,reconcile_only=False,intake_state=None,allow_retireme
         blocked=reconciliation['blocked']+production['blocked']+cleanup['blocked']
         result={'schema':'mgs.archive.automation.tick.v1','status':'ok' if healthy and not blocked else 'blocked','executed_at':bridge.now_iso(),'apply':apply,'worker_ready':healthy,'worker_executed_at':hb.get('executedAt'),'worker_trigger_uid':hb.get('triggerUid'),'inventory_rows':len(rows),'jobs_total':len(jobs),'jobs_scanned':len(selected),'reconciliation':reconciliation,'production':production,'retirement':cleanup,'queue_enabled':c['queue_enabled'],'delete_source':c['delete_source'],'owner_worker_delete_source':False,'prefer_archive_reads':c.get('prefer_archive_reads',False),'include_historical':c.get('include_historical',False)}
         result['historical_backfill']=backfill
+        result['owner_worker_status']=hb.get('status')
+        result['owner_worker_sha256']=hb.get('workerSha256')
         if apply:
             state['updated_at']=result['executed_at'];bridge.atomic_json(bridge.DATA/'automation-state.json',state);bridge.atomic_json(bridge.DATA/'automation-last-tick.json',result)
         return result

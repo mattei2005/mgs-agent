@@ -589,7 +589,7 @@ streaming:
   cursor: ' ▉'
   fresh_final_after_seconds: 60.0
 sessions:
-  auto_prune: true
+  auto_prune: false
   retention_days: 30
   vacuum_after_prune: true
   min_interval_hours: 24
