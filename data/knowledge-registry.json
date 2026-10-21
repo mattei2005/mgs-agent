@@ -8847,6 +8847,24 @@
       "updated_at": "2026-09-08T02:59:27+00:00"
     },
     {
+      "canonical_key": "finance.2026-09.rede1-closing",
+      "canonical_source": "reports/finance-september-rede1-complete-1562583090235318283.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-21T22:44:35+00:00",
+      "id": "FINANCE-SEPT-REDE1-CLOSING-1562583090235318283",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Setembro: fechamento Rede1 governa gross e nota Zytiva G003",
+      "updated_at": "2026-10-21T22:44:35+00:00"
+    },
+    {
       "canonical_key": "finance.2026-09.sheet-mirror-source-and-review",
       "canonical_source": "reports/finance-september-export-1555274844109803522.md",
       "consumers": [
@@ -13612,5 +13630,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T22:37:16+00:00"
+  "updated_at": "2026-10-21T22:44:35+00:00"
 }
