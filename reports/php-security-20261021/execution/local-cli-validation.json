@@ -1,0 +1,40 @@
+{
+  "before": {
+    "php8.3-cli": "8.3.6-0ubuntu0.24.04.12",
+    "php8.3-common": "8.3.6-0ubuntu0.24.04.12",
+    "php8.3-opcache": "8.3.6-0ubuntu0.24.04.12",
+    "php8.3-readline": "8.3.6-0ubuntu0.24.04.12"
+  },
+  "after": {
+    "php8.3-cli": "8.3.6-0ubuntu0.24.04.13",
+    "php8.3-common": "8.3.6-0ubuntu0.24.04.13",
+    "php8.3-opcache": "8.3.6-0ubuntu0.24.04.13",
+    "php8.3-readline": "8.3.6-0ubuntu0.24.04.13"
+  },
+  "gateways_unchanged": true,
+  "gateways": {
+    "zeus": {
+      "MainPID": "715495",
+      "ActiveState": "active"
+    },
+    "atena": {
+      "MainPID": "712961",
+      "ActiveState": "active"
+    },
+    "ares": {
+      "MainPID": "712337",
+      "ActiveState": "active"
+    }
+  },
+  "modules_unchanged": true,
+  "php_smoke": "8.3.6 cli",
+  "fixed_cves": [
+    "CVE-2026-109618",
+    "CVE-2026-109619"
+  ],
+  "backup": "/root/.hermes/secure-backups/vps-maintenance/php-security-20261021-1562585423589412987",
+  "backup_validated": true,
+  "dpkg_clean": true,
+  "reboot_marker": false,
+  "time": 1792622019.9024844
+}

@@ -64,6 +64,11 @@ export function paymentExchangeIndicators(selected){
  const source_note=status==='Confirmado'?'Câmbios confirmados nesta competência':status==='Parcialmente confirmado'?'Há câmbios confirmados e provisórios nesta competência':'Câmbios da competência, ainda provisórios';
  return {exchange_rates,status,source_note,source:'dash',updated_at:selected.updated_at};
 }
+// Read-only observations are audit metadata, never monetary ledger entries.
+export async function paymentNotes(db,period,counterparty){
+ const rows=(await db.query("SELECT id,created_at,after_data->>'note_id' AS note_id,after_data->>'title' AS title,after_data->>'text' AS text FROM audit_events WHERE scenario_id=$1 AND action='PAYMENT_NOTE_ADDED' AND after_data->>'period'=$2 AND after_data->>'counterparty'=$3 ORDER BY id DESC LIMIT 50",[workspaceId(period),period,counterparty])).rows;
+ const seen=new Set();return rows.filter(n=>n.note_id&&!seen.has(n.note_id)&&seen.add(n.note_id)).map(n=>({id:n.note_id,title:String(n.title||'Observação').slice(0,160),text:String(n.text||'').slice(0,4000),created_at:n.created_at}));
+}
 export async function ledger(db,period,counterparty,req){
  periodInfo(period);
  const rows=(await db.query(`SELECT id,result->'domain'->'cash' AS cash,result->'domain'->'realized' AS realized,result->'domain'->'expenses' AS expenses,updated_at,jsonb_path_query_array(additions,'$[*] ? (@.kind == "rate")') AS rate_settings,jsonb_path_query_array(additions,'$[*] ? (@.kind == "site" && @.network_pending == true)') AS network_pending,
@@ -75,7 +80,7 @@ export async function ledger(db,period,counterparty,req){
  const parties=payees({expenses:selected.expenses});counterparty=counterparty||(role(req)==='manager'?parties.find(p=>p.manager===managerBook(req.auth.manager_key))?.id:'geizian');const selectedParty=parties.find(p=>p.id===counterparty);if(!selectedParty)fail('Beneficiário inválido');if(role(req)==='manager'&&selectedParty.manager!==managerBook(req.auth.manager_key))fail('Acesso restrito',403);
  const periods=rows.map(r=>({period:r.id.slice(10),due:r.id.slice(10)>today().slice(0,7)?0:counterparty==='geizian'?cents(r.realized?.half_brl??r.cash.half_brl):Math.abs(cents(r.expenses.find(e=>e.id===counterparty)?.brl||0))}));const entries=(await db.query('SELECT * FROM finance_ledger WHERE counterparty=$1 AND period <= $2 ORDER BY effective_date,created_at,id',[counterparty,period])).rows;const historical=counterparty==='geizian'?await historyOpening(db):null;const opening=historical?cents(historical.raw):0;
  const indicators=role(req)==='manager'?null:paymentExchangeIndicators(selected);
- return {network_pending:rows.some(r=>r.network_pending?.length),period,counterparty,party:selectedParty,currency:'BRL',provisional:true,opening,opening_source:historical?.source||null,periods,entries:entries.map(e=>({...e,version:ledgerVersion(e)})),indicators,...ledgerSummary(periods,entries,opening,period),parties:role(req)==='manager'?parties.filter(p=>p.manager===managerBook(req.auth.manager_key)):parties};
+ return {notes:await paymentNotes(db,period,counterparty),network_pending:rows.some(r=>r.network_pending?.length),period,counterparty,party:selectedParty,currency:'BRL',provisional:true,opening,opening_source:historical?.source||null,periods,entries:entries.map(e=>({...e,version:ledgerVersion(e)})),indicators,...ledgerSummary(periods,entries,opening,period),parties:role(req)==='manager'?parties.filter(p=>p.manager===managerBook(req.auth.manager_key)):parties};
 }
 export async function installFinanceOps(app,db){
  if(!db.production)await db.exec(opsSchema);

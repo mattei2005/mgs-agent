@@ -10055,6 +10055,25 @@
       "updated_at": "2026-10-15T20:17:39+00:00"
     },
     {
+      "canonical_key": "infrastructure.hosting.providers",
+      "canonical_source": "context/sites.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-21T22:37:16+00:00",
+      "id": "MGS-HOSTING-PROVIDERS-1562595243084484661",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Hospedagem atual: Hetzner com RunCloud e Hostinger; emails de outros fornecedores sao informativos",
+      "updated_at": "2026-10-21T22:37:16+00:00"
+    },
+    {
       "canonical_key": "meta-app.alerts.monitoring-cadence",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
@@ -13593,5 +13612,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T20:42:16+00:00"
+  "updated_at": "2026-10-21T22:37:16+00:00"
 }

@@ -1,0 +1,318 @@
+{
+  "status": "completed_validated_approved_scope",
+  "updated_at": "2026-10-21T22:36:14.904677+00:00",
+  "authorization_ids": [
+    "1562585423589412987",
+    "1562594110655828149"
+  ],
+  "runcloud_hosts": [
+    {
+      "host": "MatteiInc01",
+      "time": 1792622104.1390944,
+      "packages": {
+        "php83rc": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-bcmath": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-common": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-compression": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-curl": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-essentials": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-gd": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-imap": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-intl": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mbstring": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mysql": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mysqli": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-opcache": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-process": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-pspell": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-realpath-turbo": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-soap": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-sodium": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-sqlite": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-tidy": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-xml": "8.3.36-1+ubuntu22.04+1"
+      },
+      "apps": 75,
+      "http_checks": 150,
+      "fcgi_completed": 74,
+      "fcgi_skipped": [
+        {
+          "app": "mgs-finance-dash",
+          "skipped": "no_index_php"
+        }
+      ],
+      "regressions": [],
+      "old_deleted_workers": [],
+      "all_modules_preserved": true,
+      "config_changes_exactly_approved": true,
+      "protected_service_pids_unchanged": true,
+      "rollback_validated": true,
+      "current_http_issues": [
+        {
+          "app": "allincraft",
+          "domain": "allincraft.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "allincraft.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        },
+        {
+          "app": "kievportal",
+          "domain": "kievportal.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "kievportal.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        },
+        {
+          "app": "mgs-finance-dash",
+          "domain": "dash.mgsdigitalcorp.com",
+          "origin": true,
+          "tls_verified": false,
+          "exit": 0,
+          "status": 403,
+          "final_host": "dash.mgsdigitalcorp.com",
+          "content_type": "text/html",
+          "error_kind": null
+        },
+        {
+          "app": "portalbrasilnews",
+          "domain": "portalbrasilnews.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "portalbrasilnews.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        },
+        {
+          "app": "prospecth",
+          "domain": "prospecthomeimprovement.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "prospecthomeimprovement.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        }
+      ],
+      "current_fcgi_issues": []
+    },
+    {
+      "host": "MatteiInc02",
+      "time": 1792622067.4902656,
+      "packages": {
+        "php83rc": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-bcmath": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-common": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-compression": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-curl": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-essentials": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-gd": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-imap": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-intl": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mbstring": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mysql": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mysqli": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-opcache": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-process": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-pspell": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-realpath-turbo": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-soap": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-sodium": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-sqlite": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-tidy": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-xml": "8.3.36-1+ubuntu22.04+1"
+      },
+      "apps": 15,
+      "http_checks": 30,
+      "fcgi_completed": 15,
+      "fcgi_skipped": [],
+      "regressions": [],
+      "old_deleted_workers": [],
+      "all_modules_preserved": true,
+      "config_changes_exactly_approved": true,
+      "protected_service_pids_unchanged": true,
+      "rollback_validated": true,
+      "current_http_issues": [],
+      "current_fcgi_issues": []
+    },
+    {
+      "host": "MatteiInc03",
+      "time": 1792622067.5635653,
+      "packages": {
+        "php83rc": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-bcmath": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-common": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-compression": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-curl": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-essentials": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-gd": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-imap": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-intl": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mbstring": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mysql": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-mysqli": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-opcache": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-process": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-pspell": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-realpath-turbo": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-soap": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-sodium": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-sqlite": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-tidy": "8.3.36-1+ubuntu22.04+1",
+        "php83rc-xml": "8.3.36-1+ubuntu22.04+1"
+      },
+      "apps": 20,
+      "http_checks": 40,
+      "fcgi_completed": 20,
+      "fcgi_skipped": [],
+      "regressions": [],
+      "old_deleted_workers": [],
+      "all_modules_preserved": true,
+      "config_changes_exactly_approved": true,
+      "protected_service_pids_unchanged": true,
+      "rollback_validated": true,
+      "current_http_issues": [
+        {
+          "app": "bkp2-ducapes",
+          "domain": "bkp2.ducapes.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 6,
+          "status": 0,
+          "final_host": "bkp2.ducapes.com",
+          "content_type": "",
+          "error_kind": "transport"
+        }
+      ],
+      "current_fcgi_issues": []
+    }
+  ],
+  "local_cli": {
+    "before": {
+      "php8.3-cli": "8.3.6-0ubuntu0.24.04.12",
+      "php8.3-common": "8.3.6-0ubuntu0.24.04.12",
+      "php8.3-opcache": "8.3.6-0ubuntu0.24.04.12",
+      "php8.3-readline": "8.3.6-0ubuntu0.24.04.12"
+    },
+    "after": {
+      "php8.3-cli": "8.3.6-0ubuntu0.24.04.13",
+      "php8.3-common": "8.3.6-0ubuntu0.24.04.13",
+      "php8.3-opcache": "8.3.6-0ubuntu0.24.04.13",
+      "php8.3-readline": "8.3.6-0ubuntu0.24.04.13"
+    },
+    "gateways_unchanged": true,
+    "gateways": {
+      "zeus": {
+        "MainPID": "715495",
+        "ActiveState": "active"
+      },
+      "atena": {
+        "MainPID": "712961",
+        "ActiveState": "active"
+      },
+      "ares": {
+        "MainPID": "712337",
+        "ActiveState": "active"
+      }
+    },
+    "modules_unchanged": true,
+    "php_smoke": "8.3.6 cli",
+    "fixed_cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "backup": "/root/.hermes/secure-backups/vps-maintenance/php-security-20261021-1562585423589412987",
+    "backup_validated": true,
+    "dpkg_clean": true,
+    "reboot_marker": false,
+    "time": 1792622019.9024844
+  },
+  "finance_socket_recovery": {
+    "authorization": "1562594110655828149",
+    "states": {
+      "php83rc-fpm.service": {
+        "MainPID": "2973647",
+        "ActiveState": "active"
+      },
+      "nginx-rc.service": {
+        "MainPID": "3069",
+        "ActiveState": "active"
+      },
+      "mgs-finance-dash.service": {
+        "MainPID": "2973735",
+        "ActiveState": "active"
+      },
+      "mgs-finance-dash.socket": {
+        "Listen": "/run/mgs-finance-dash.sock (Stream)",
+        "ActiveState": "active"
+      },
+      "mgs-postgresql18.service": {
+        "MainPID": "2152017",
+        "ActiveState": "active"
+      },
+      "mariadb.service": {
+        "MainPID": "3524426",
+        "ActiveState": "active"
+      },
+      "apache2-rc.service": {
+        "MainPID": "3122724",
+        "ActiveState": "active"
+      }
+    },
+    "http": [
+      {
+        "exit": 0,
+        "status": 200
+      }
+    ],
+    "hashes_after": {
+      "/etc/php83rc/fpm.d/mgs-finance-dash.conf": "bd8fd1c0d844f1ecb7d687e6306475ede4daa3c5f5b5a23a71628df15ccab7fb",
+      "/etc/nginx-rc/conf.d/mgs-finance-dash.d/proxy.conf": "cb8407266919e1010f2e2600dd350131733a5164d3c6b79235ea62faf6ebaa61"
+    },
+    "socket_owners": [
+      "u_str LISTEN 0      8192           /var/run/mgs-finance-dash-php.sock -2102482638            * 0    users:((\"php-fpm\",pid=2973647,fd=46))                                                                                                    ",
+      "u_str LISTEN 0      511                    /run/mgs-finance-dash.sock -2102492788            * 0    users:((\"node\",pid=2973735,fd=3),(\"systemd\",pid=1,fd=48))                                                                                "
+    ],
+    "separated_sockets": true,
+    "protected_service_pids_unchanged": true,
+    "financial_writes": 0,
+    "time": 1792621919.9680128
+  },
+  "totals": {
+    "apps": 110,
+    "http_checks": 220,
+    "fcgi_completed": 109,
+    "php_packages_upgraded": 67
+  },
+  "other_environments": "not_certified_by_this_scope",
+  "new_emails": {
+    "malwarebytes": "same PHP2Shell incident; no additional CVE shown",
+    "digitalocean_two_images": "same CVE-2026-109618/109619; generic all-customer warning; does not prove MGS compromise or automatic Droplet remediation"
+  },
+  "browser_validation": {
+    "url": "https://dash.mgsdigitalcorp.com/",
+    "landed_path": "/login",
+    "title": "🐴 Entrar · MGS Finance",
+    "login_form_visible": true,
+    "authenticated_financial_views_tested": false
+  },
+  "current_hosting_scope": {
+    "providers": [
+      "Hetzner",
+      "Hostinger"
+    ],
+    "management": "RunCloud",
+    "source_message_id": "1562595243084484661",
+    "canonical_source": "context/sites.md"
+  }
+}

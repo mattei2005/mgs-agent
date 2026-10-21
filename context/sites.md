@@ -170,6 +170,15 @@ Toda entrada de `data/mgs-domain-scope.json` deve aparecer literalmente neste ar
 
 ---
 
+## Hospedagem vigente
+
+Confirmação de Rodolfo em 21/10/2026, mensagem Discord `1562595243084484661`, thread `1562582544292249772`:
+
+- A hospedagem atualmente usada é **Hetzner + RunCloud e Hostinger**. Hetzner/Hostinger são provedores de infraestrutura; RunCloud é a camada de gestão dos servidores correspondentes, não um terceiro provedor de máquinas.
+- Emails de DigitalOcean e outros fornecedores são avisos informativos de segurança; recebê-los não comprova infraestrutura ativa nesse fornecedor nem comprometimento de recursos MGS.
+- Referências anteriores a AWS/Bitnami/DigitalOcean devem ser tratadas como históricas para o escopo de hospedagem atual, até nova evidência explícita. Esta confirmação não afirma exclusão de dados, encerramento de contas ou remoção de backups.
+- A lista de provedores não substitui o vínculo live domínio → webapp → host nem comprova instalação de um patch em cada servidor. Inventário/runtime continua sendo a fonte para versões e exposição reais.
+
 ## Rede de monetização vigente
 
 Smart Bidding/JBF é a referência operacional atual para os sites migrados. ActiveView permanece somente no conjunto protegido definido em `context/monetization.md`.
