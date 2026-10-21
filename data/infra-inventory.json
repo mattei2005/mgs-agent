@@ -1228,7 +1228,7 @@
       "critical_authorization": "1562451046654283847",
       "firmware_applicability_tests": "5 cases PASS: empty/internal-only not applicable; updatable/updatable-hidden/mixed remain applicable",
       "fwupd_refresh": "LVFS metadata HTTP503 persists. Successful device inventory proves zero guest-updatable devices; refresh is not applicable to this KVM guest update transaction, not a successful refresh and not a pending VPS package",
-      "hermes_phase": "pending_after_vps",
+      "hermes_phase": "failed_rollback_reported",
       "hermes_review": {
         "authority": "1562469526409322601",
         "installed_head": "e6ad505398ac5956bdbefd9e111a598c5e6b6575",
@@ -1271,14 +1271,14 @@
             "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/patches/hermes/current-runtime-manifest.json",
             "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation/guard-stage/patches/hermes/mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
           ],
-          "status": "candidate_validated_awaiting_activation_and_retention_confirmation",
+          "status": "activation_failed_rollback_reported",
           "test_totals_overlap": true,
           "validated_port_head": "d743b988130f2614e04f6954fcf07ed40885650f",
           "validated_upstream": "4d04303818b61bf3aa09278af48356315515965b"
         },
         "production_updated": false,
         "source": "/root/mgs-agent/reports/hermes-updates/20261021-1562469526409322601-readonly/review.json",
-        "status": "preparation_validated_awaiting_critical_activation",
+        "status": "activation_failed_rollback_reported",
         "upstream_base": "7cc3fb8cb55898747dd1dfa56fda3e16ebba028e",
         "upstream_overlap_paths": 32,
         "activation_authorization": {
@@ -1308,7 +1308,7 @@
       },
       "id": "zeus-vps-hermes-1562331354568589393",
       "mutation_status": "All nine exact package targets and authorized reboot completed; post-boot kernel, packages, gateways, SSH and services validated; no files deleted",
-      "next_gate": "Owner start of isolated Hermes preparation after readonly review; activation/restarts remain separate gates",
+      "next_gate": "diagnose gateway_readiness_zeus",
       "post_boot_result": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/post-boot-result.json",
       "preflight": "/root/mgs-agent/reports/vps-maintenance/20261021-1562331354568589393/preflight.json",
       "reboot_executor": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393/reboot-finalizer.py",
@@ -1316,9 +1316,9 @@
       "rollback": "/root/.hermes/secure-backups/vps-maintenance/20261021-1562331354568589393",
       "rollback_validated": "9 packages: 7 original debs and 2 strict installed payloads; SHA256 and tar content comparisons passed",
       "scope": "VPS first; Hermes latest main after VPS validation",
-      "status": "vps_completed_validated_ready_hermes",
+      "status": "vps_completed_hermes_rollback",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T14:02:13.285430+00:00",
+      "updated_at": "2026-10-21T16:49:27.903257-04:00",
       "validator": "/root/mgs-agent/scripts/vps-maintenance-validate-20261021.py",
       "validator_unit": "mgs-vps-maintenance-1562331354568589393.service",
       "validator_unit_retention": "disabled_retained_no_deletion_authorized",
@@ -1328,6 +1328,49 @@
         "phased_deferred": 8,
         "removed": 0,
         "upgraded": 9
+      },
+      "hermes_candidate_repo": "/root/.hermes/hermes-agent-stage-main-7cc3fb8c-mgs",
+      "hermes_candidate_head": "e6ad505398ac5956bdbefd9e111a598c5e6b6575",
+      "hermes_final_acceptance": "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/result.json",
+      "hermes_activation": {
+        "authority": "1562558871053144137",
+        "target": "4d04303818b61bf3aa09278af48356315515965b",
+        "port_head": "d743b988130f2614e04f6954fcf07ed40885650f",
+        "candidate": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "success": false,
+        "evidence": "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/result.json",
+        "report_infra_message_id": "1562568525015683184",
+        "auto_prune": false,
+        "deletions": false,
+        "services": {
+          "ares": {
+            "MainPID": "616887",
+            "NRestarts": "0",
+            "ExecMainStartTimestamp": "Wed 2026-10-21 16:44:48 EDT",
+            "ActiveState": "active",
+            "SubState": "running",
+            "candidate_in_cmdline": false,
+            "pid_changed": true
+          },
+          "atena": {
+            "MainPID": "617146",
+            "NRestarts": "0",
+            "ExecMainStartTimestamp": "Wed 2026-10-21 16:45:01 EDT",
+            "ActiveState": "active",
+            "SubState": "running",
+            "candidate_in_cmdline": false,
+            "pid_changed": true
+          },
+          "zeus": {
+            "MainPID": "619277",
+            "NRestarts": "0",
+            "ExecMainStartTimestamp": "Wed 2026-10-21 16:49:16 EDT",
+            "ActiveState": "active",
+            "SubState": "running",
+            "candidate_in_cmdline": false,
+            "pid_changed": true
+          }
+        }
       }
     },
     {
@@ -47078,6 +47121,98 @@
       "status": "source_audit_complete_awaiting_source_clarifications",
       "type": "read_only_financial_source_audit",
       "updated_at": "2026-10-21T20:30:18.750899+00:00"
+    },
+    {
+      "id": "ares-discord-tools-1562565571990528144",
+      "agent": "zeus",
+      "subject_agent": "ares",
+      "source_message_id": "1562565571990528144",
+      "source_thread_id": "1562564076469747803",
+      "status": "completed_validated",
+      "paths": [
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/route-pack-03.md"
+      ],
+      "change": "Only add discord and discord_admin to platform_toolsets.discord; preserve all other config values",
+      "cause": "Explicit Discord platform toolset list excluded discord and discord_admin; server permission existed",
+      "validation": {
+        "status": "validated",
+        "identity": "1508864261504630925",
+        "profile": "ares",
+        "platform": "discord",
+        "toolsets_added": [
+          "discord",
+          "discord_admin"
+        ],
+        "schema_names": [
+          "discord",
+          "discord_admin"
+        ],
+        "delete_action_exposed": true,
+        "native_fetch_messages": "success_nonempty",
+        "native_channel_info": "success",
+        "effective_permissions": {
+          "VIEW_CHANNEL": true,
+          "READ_MESSAGE_HISTORY": true,
+          "SEND_MESSAGES_IN_THREADS": true,
+          "MANAGE_MESSAGES": true
+        },
+        "discord_permission_changes": 0,
+        "config_delta_exact": true,
+        "live_mirror_exact": true,
+        "gateway_restart": false
+      },
+      "backup": "/root/.hermes/profiles/zeus/cache/scratch/ares-discord-tools-1562565571990528144",
+      "updated_at": "2026-10-21T20:42:26.061552+00:00",
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1562566791371432033",
+        "readback_ok": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      }
+    },
+    {
+      "id": "finance-september-dash-reconciliation-1562564679400951829",
+      "agent": "zeus",
+      "type": "read_only_dashboard_reconciliation",
+      "source_message_id": "1562564679400951829",
+      "source_thread_id": "1545426987756298340",
+      "status": "reconciliation_complete_adjustments_not_applied",
+      "financial_writes": 0,
+      "workspace_revision": 1643,
+      "account_revision": 19,
+      "fb_verified_accounts": 37,
+      "fb_changed_days": 38,
+      "files": [
+        {
+          "path": "/root/mgs-agent/reports/finance-september-dash-reconciliation-1562564679400951829.md",
+          "sha256": "3b089f6ba579e6557af5ed38222333e70b9792ab8389a0a52c748fc64e1fa1a8"
+        },
+        {
+          "path": "/root/mgs-agent/apps/finance-system/private/september-closing-1562564679400951829/evidence-sha256.json",
+          "sha256": "67a79ab1850ffe191c384311c0721d973d647ff9f28c97cc58d51079537fbbd7"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "ddc545c3096bc59bfb1996f3c206a60999a92bc74a2e994067ac64daab74e2c0"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/adops-monthly-source-reconciliation.md",
+          "sha256": "cb535b264095c1bc123bd8a8e1992b8e4b9ee8219aa45967e6be438d95afc6df"
+        }
+      ],
+      "updated_at": "2026-10-21T20:43:54.911281+00:00",
+      "report_infra": {
+        "message_id": "1562567132791701565",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0,
+        "readback_ok": true
+      }
     }
   ],
   "profile_skill_references": [

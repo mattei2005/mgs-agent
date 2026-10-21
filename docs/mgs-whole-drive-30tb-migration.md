@@ -105,3 +105,7 @@ Proposta congelada em `corporate-acl-proposal-1562563383415406614.json`, ainda N
 
 Bloqueio decisório atual: confirmar esse desenho de compartilhamento antes de criar grants/mover produção. Não pedir novas execuções do teste nem editar manifesto/timer para resolver ACL. Manter proposta como NÃO autorizada até resposta explícita. Após confirmação, implementar somente o desenho aprovado, testar em canário com ACL e recuperar/validar fluxo; eventual fronteira owner-code nova deve ser consolidada, não assumir que o worker de probe já é migrador corporativo. Evidência independente: `owner-probe-live-verification-1562563383415406614.json`.
 
+
+## Confirmação corporativa recebida
+
+Rodolfo confirmou `sim` em `1562565746557456515` na mesma thread, respondendo à proposta de `MGS-CORPORATIVO` separado de criativos, owner Gmail e Rodolfo/support/SA como Editores, preservando extras por arquivo. Isso supersede somente o estado de decisão ACL pendente; não prova aplicação. A proposta local está `authorized_not_yet_applied`, com confirmação e audit. Implementação owner consolidada em andamento; nenhum grant/move corporativo/deleção aplicado. A aprovação não estende gestores à raiz corporativa, não muda credenciais/billing e não libera exclusão.

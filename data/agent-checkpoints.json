@@ -2413,12 +2413,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "1562563383415406614: imagens+receipt owner SA verificado concluíram probe real,15IDs exatos,canário moveu/retornou mesmoID,ACL4origem→1owner MyDrive→4restaurados. Canary relido origem; nenhum corp prod movido. Não pedir mais teste/editor. Novo SHA02d870020bf678c9da3485bac873c2bfbf17e99f1439877d24b3891a2f9fe4cb manualok. Bulk 3656946/3600000ms,289/350, primeira tentativa estimada21:08:01.572Z=17:08Eastern; não é prazo fixo. Aguardar scheduled saudável para accept-owner+tick criativo aprovado, independentemente da decisão corporativa. Bloqueio real: confirmar proposta MGS-CORPORATIVO irmã de MGS-ARQUIVO, ownerGmail; Rodolfo mattei2005/support/SA como writer(mapeia organizer); sem gestores na raiz corporativa, extras só porarquivo(Geizian AdsPower). corporate-acl-proposal-1562563383415406614.json NÃO autorizada/não aplicada. Não ampliar ACL nem mover prod antes da decisão; preservar backups/IDs/consumidores. Após confirmação implementar escopo exato e canário ACL/recuperação. Evidência owner-probe-live-verification-1562563383415406614.json. Pin SA ainda anterior; sem novos crons.",
+      "next_step": "Rodolfo confirmou sim em1562565746557456515 a proposta corporate-acl-proposal-1562563383415406614.json. Confirmação/grants ainda não aplicados auditados. Implementar extensão owner consolidada: criar MGS-CORPORATIVO irmã do arquivo criativo,4principais exatos(ownerGmail+Rodolfo/support/SA writer),extras sóporarquivo,canário com ACL/restauração; preparar mover corporativo exato por requestsSA gated ACK/ativação, sem produção/manual nem delete. Preservar pin ativo e locks, testar/publicar/readback; owner boundary exige próximo repin apenas quando código completo estiver validado. Não alterar outras ACL/creds/retention destrutiva nem declarar completo. Mesmo agendamento continua bulkpaused.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automação integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_probe_verified_corporate_acl_decision_required_bulk_wait",
+      "state": "corporate_acl_authorized_implementation_in_progress",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T20:33:25+00:00"
+      "updated_at": "2026-10-21T20:42:15+00:00"
     },
     {
       "agent": "zeus",
@@ -3373,12 +3373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Capturar workspace setembro e cadastro de contas em somente leitura, comparar moedas nativas por rede/site/gestor e gastos; separar deltas comprovados de lacunas sem bloquear a comparacao",
-      "objective": "Conferir relatorio AdOps setembro contra Dash financeira setembro; ajustes na Dash sao destino; planilha geral fora do escopo",
-      "source": "reports/finance-september-source-audit-1562562282838429729.md;discord:1545426987756298340#1562564679400951829",
-      "state": "live_dashboard_reconciliation_in_progress",
+      "next_step": "Apresentar deltas reais; decidir prioridade Yolokfx01-09 versus excecao aprovada e obter atribuicao M2. FB37/37 API confere fonte,27contas38dias+36.04; Google43/43 arredondamentos conferem; preparar plano sem alterar pagamentos/agosto",
+      "objective": "Conferir e ajustar setembro na Dash com relatorio AdOps indicado; planilha geral excluida; analise primeiro",
+      "source": "reports/finance-september-dash-reconciliation-1562564679400951829.md;discord:1545426987756298340#1562564679400951829",
+      "state": "live_reconciliation_complete_financial_adjustments_not_applied",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-21T20:35:07+00:00"
+      "updated_at": "2026-10-21T20:43:27+00:00"
     },
     {
       "agent": "zeus",
@@ -6853,12 +6853,12 @@
     {
       "agent": "zeus",
       "id": "zeus-vps-hermes-1562331354568589393",
-      "next_step": "Detached external unit executes /root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/supervisor.py --execute. It exclusively owns promotion, restart Ares->canary->Atena->canary->Zeus->canary, guard/post-regression, rollback, inventory/audit/REPORT and origin delivery. Do not race this owner. Read external-state.json/result.json; if running observe only; if origin_readback true do not duplicate report. Target4d exactly approved; public main advanced15 commits, disclosed not silently included.",
-      "objective": "Corte Hermes 4d043038 autorizado; external supervisor owns closeout",
+      "next_step": "External closeout owns delivery; result=/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation/result.json",
+      "objective": "VPS concluida; Hermes corte autorizado",
       "source": "discord:1562331354568589393/1562558871053144137",
-      "state": "authority1562558871053144137 verified rodolfo id344196393512075265; fresh native snapshots4 quick-checkok; rollback4981hashesok; db copies candidate migration+old reopen4pass; auto_prune=false3live+mirrors; no gateways restarted yet; prepared canonical helper per-agent order3pass",
+      "state": "activation_failed_rollback_reported",
       "thread_id": "1562331354568589393",
-      "updated_at": "2026-10-21T20:40:18+00:00"
+      "updated_at": "2026-10-21T20:49:28+00:00"
     },
     {
       "agent": "zeus",
@@ -6962,5 +6962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T20:40:18+00:00"
+  "updated_at": "2026-10-21T20:49:28+00:00"
 }
