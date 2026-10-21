@@ -632,6 +632,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPV13-PAUSE-RESTART-20261022",
+      "next_step": "Validar snapshot/agenda, vincular job, conferir readback e registrar REPORT-INFRA",
+      "objective": "Excluir C51/C52; pausar demais campanhas e reativar22/10 00:00 SP sem budget ou D1 write",
+      "source": "data/ares/meta-ads/state/manual-campaign-actions/cpv13-delete-c51-c52-pause-rest-20261022-rodolfo.json",
+      "state": "meta get verificou c51/c52 deleted e dez campanhas paused; preparando snapshot e one-shot",
+      "thread_id": "1539832402744975450",
+      "updated_at": "2026-10-21T20:33:51+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV13-REPORT-ISOLATION-20261008",
       "next_step": "Cadencia normal preservada: Intraday horas impares SP e Diario horarios vigentes. C46M/C47M permanecem no request de campanha pendente, sem desbloqueio por relatorio. Zeus/Tech: reconciliar falha independente SMS Funnel custo diario detail26402 versus report26401 de 07/10 antes de qualquer write WordPress.",
       "objective": "Corrigir bloqueio indevido de relatorios CPV13 por writer lease persistente e auditar schedulers MGS",
@@ -663,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "O encaminhamento anterior de aguardar foi supersedido por correção manual de controle. Consultar checkpoint MGS-WHOLE-DRIVE-30TB-1562459803186626571 e última seção de docs/mgs-whole-drive-30tb-migration.md: novo staged 1Xs19EeF6TPuEV67egukJDPT_hlu2tQmQ/02d870020bf678c9da3485bac873c2bfbf17e99f1439877d24b3891a2f9fe4cb separa teste manual de cópia, preserva orçamento/ledger bulk e informa uso/primeira expiração. 94 verificações locais; source remoto relido; owner ainda precisa repinar ID/hash e rodar mgsArquivoTeste. Depois ler prova real/canário/telemetria; não promover SA sem scheduled saudável. Nenhuma migração integral/limpeza concluída; histórico/candidatos/reservas preservados. Não repetir Runs por camadas internas nem mudar timer.",
+      "next_step": "Probe manual novo SHA02d87002... passou noGoogle e canário/ACL restaurados. Não pedir mais editor/teste. Ver checkpoint MGS-WHOLE-DRIVE-30TB-1562459803186626571. Bulk aguarda janela móvel(estimativa21:08Z); após scheduled saudável executar accept-owner para ambos pins+tick criativo já autorizado. Não misturar pausa com pedido de compartilhamento corporativo: acl nova MGS-CORPORATIVO precisa decisão explícita, mas não suspende cópia histórica previamente aprovada quando runtime voltar. Mesmo job83b148017b4d/locks/manifestos/IDs. Histórico/delete/catálogo permanecem nos respectivos gates; nada integral concluído.",
       "objective": "Migrar todo acervo aos 30 TB e retirar fontes históricas somente após cópias/acessos/consumidores completos",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_repin_required_manual_control_recovery",
+      "state": "owner_probe_verified_bulk_wait",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T20:25:43+00:00"
+      "updated_at": "2026-10-21T20:33:25+00:00"
     },
     {
       "agent": "ares",
@@ -2403,12 +2413,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "1562560584346636379 exige solução. Corrigido bloqueio do teste pelo guard de cópia: extensão manual somente probe/canário, mesmo lock/owner/ACK/manifesto, nunca loop mídia; orçamento próprio 5min/16 entradas e bulk ledger/cap preservados. Agendado delega worker anterior. Heartbeat publica uso/ramo/earliestRetryAt estimativo. 17recovery+23probe+10base+8accept+8backfill+28auto passaram, readback SHA/publisher remoto confirmado. Novo staged ID1Xs19EeF6TPuEV67egukJDPT_hlu2tQmQ SHA02d870020bf678c9da3485bac873c2bfbf17e99f1439877d24b3891a2f9fe4cb. Owner deve trocar só ID/hash no mesmo Code.gs e executar mgsArquivoTeste, sem manifesto/timer/Implantar. Supersede encaminhamento passivo de esperar. Ainda NÃO executado Google/promovido SA. Após feito ler receipt/probe/restauração/telemetria; validar capacidades/ACL; heartbeat scheduled saudável antes de accept-owner+tick. Não chamar solução do acervo concluída; nenhum arquivo produtivo/ACL/delete alterado. Fonte doc canônica, seção recuperação manual.",
+      "next_step": "1562563383415406614: imagens+receipt owner SA verificado concluíram probe real,15IDs exatos,canário moveu/retornou mesmoID,ACL4origem→1owner MyDrive→4restaurados. Canary relido origem; nenhum corp prod movido. Não pedir mais teste/editor. Novo SHA02d870020bf678c9da3485bac873c2bfbf17e99f1439877d24b3891a2f9fe4cb manualok. Bulk 3656946/3600000ms,289/350, primeira tentativa estimada21:08:01.572Z=17:08Eastern; não é prazo fixo. Aguardar scheduled saudável para accept-owner+tick criativo aprovado, independentemente da decisão corporativa. Bloqueio real: confirmar proposta MGS-CORPORATIVO irmã de MGS-ARQUIVO, ownerGmail; Rodolfo mattei2005/support/SA como writer(mapeia organizer); sem gestores na raiz corporativa, extras só porarquivo(Geizian AdsPower). corporate-acl-proposal-1562563383415406614.json NÃO autorizada/não aplicada. Não ampliar ACL nem mover prod antes da decisão; preservar backups/IDs/consumidores. Após confirmação implementar escopo exato e canário ACL/recuperação. Evidência owner-probe-live-verification-1562563383415406614.json. Pin SA ainda anterior; sem novos crons.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automação integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner_repin_required_manual_control_recovery",
+      "state": "owner_probe_verified_corporate_acl_decision_required_bulk_wait",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T20:24:55+00:00"
+      "updated_at": "2026-10-21T20:33:25+00:00"
     },
     {
       "agent": "zeus",
@@ -3363,12 +3373,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Ler todas as abas, reconciliar datas/moedas/totais/duplicatas e apresentar problemas antes de qualquer alteracao financeira",
-      "objective": "Analisar integralmente a fonte AdOps de setembro em somente leitura, usando agosto concluido como referencia",
-      "source": "discord:1545426987756298340#1562562282838429729;https://docs.google.com/spreadsheets/d/1ARyzDDEpVhlED6ndmHs1RC3pUlsJNQ20yTyZ6wSJVtA/edit",
-      "state": "read_only_source_audit_in_progress",
+      "next_step": "Alinhar AV vazio, M2 detalhado, Facebook diario e GamingAdx14-30/09; explicar C24 texto omitido do total FB e datas Google; depois conciliar fonte x Dash sem escrita ate autorizacao",
+      "objective": "Conferencia setembro: auditoria integral da fonte AdOps antes de conciliar/aplicar na Dash; agosto preservado",
+      "source": "reports/finance-september-source-audit-1562562282838429729.md;discord:1545426987756298340#1562562282838429729",
+      "state": "source_audit_complete_awaiting_source_clarifications_no_financial_writes",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-21T20:26:49+00:00"
+      "updated_at": "2026-10-21T20:29:51+00:00"
     },
     {
       "agent": "zeus",
@@ -6952,5 +6962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T20:26:49+00:00"
+  "updated_at": "2026-10-21T20:33:51+00:00"
 }

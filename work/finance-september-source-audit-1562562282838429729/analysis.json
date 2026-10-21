@@ -1,0 +1,5829 @@
+{
+  "tabs": [
+    {
+      "title": "rede 1 SB",
+      "errors": [],
+      "formulas": [
+        [
+          3058,
+          5,
+          "=SUM(E1:E3057)",
+          778884.5639868041
+        ]
+      ]
+    },
+    {
+      "title": "rede 2 SB",
+      "errors": [],
+      "formulas": [
+        [
+          683,
+          5,
+          "=SUM(E1:E682)",
+          209644.9342063551
+        ]
+      ]
+    },
+    {
+      "title": "rede AV consolidado",
+      "errors": [],
+      "formulas": [
+        [
+          2,
+          4,
+          "=SUM('rede AV - detalhado'!H16232)",
+          0
+        ],
+        [
+          2,
+          5,
+          "=SUM(C2-D2)",
+          0
+        ],
+        [
+          3,
+          4,
+          "=SUM('rede AV - detalhado'!H16373)",
+          0
+        ],
+        [
+          3,
+          5,
+          "=SUM(C3-D3)",
+          0
+        ],
+        [
+          4,
+          4,
+          "=SUM('rede AV - detalhado'!H4)",
+          0
+        ],
+        [
+          4,
+          5,
+          "=SUM(C4-D4)",
+          0
+        ],
+        [
+          5,
+          4,
+          "=SUM('rede AV - detalhado'!H4838)",
+          0
+        ],
+        [
+          5,
+          5,
+          "=SUM(C5-D5)",
+          0
+        ],
+        [
+          6,
+          4,
+          "=SUM('rede AV - detalhado'!H4797)",
+          0
+        ],
+        [
+          6,
+          5,
+          "=SUM(C6-D6)",
+          0
+        ],
+        [
+          7,
+          4,
+          "=SUM('rede AV - detalhado'!H6282)",
+          0
+        ],
+        [
+          7,
+          5,
+          "=SUM(C7-D7)",
+          0
+        ],
+        [
+          8,
+          4,
+          "=SUM('rede AV - detalhado'!H6423)",
+          0
+        ],
+        [
+          8,
+          5,
+          "=SUM(C8-D8)",
+          0
+        ],
+        [
+          9,
+          4,
+          "=SUM('rede AV - detalhado'!H9728)",
+          0
+        ],
+        [
+          9,
+          5,
+          "=SUM(C9-D9)",
+          0
+        ],
+        [
+          10,
+          4,
+          "=SUM('rede AV - detalhado'!H331)",
+          0
+        ],
+        [
+          10,
+          5,
+          "=SUM(C10-D10)",
+          0
+        ],
+        [
+          11,
+          4,
+          "=SUM('rede AV - detalhado'!H6525)",
+          0
+        ],
+        [
+          11,
+          5,
+          "=SUM(C11-D11)",
+          0
+        ],
+        [
+          12,
+          4,
+          "=SUM('rede AV - detalhado'!H10979)",
+          0
+        ],
+        [
+          12,
+          5,
+          "=SUM(C12-D12)",
+          0
+        ],
+        [
+          13,
+          4,
+          "=SUM('rede AV - detalhado'!H8040)",
+          0
+        ],
+        [
+          13,
+          5,
+          "=SUM(C13-D13)",
+          0
+        ],
+        [
+          14,
+          4,
+          "=SUM('rede AV - detalhado'!H12511)",
+          0
+        ],
+        [
+          14,
+          5,
+          "=SUM(C14-D14)",
+          0
+        ],
+        [
+          15,
+          4,
+          "=SUM('rede AV - detalhado'!H10997)",
+          0
+        ],
+        [
+          15,
+          5,
+          "=SUM(C15-D15)",
+          0
+        ],
+        [
+          16,
+          4,
+          "=SUM('rede AV - detalhado'!G12512)",
+          0
+        ],
+        [
+          16,
+          5,
+          "=SUM(C16-D16)",
+          0
+        ],
+        [
+          17,
+          4,
+          "=SUM('rede AV - detalhado'!H12562)",
+          0
+        ],
+        [
+          17,
+          5,
+          "=SUM(C17-D17)",
+          0
+        ],
+        [
+          18,
+          4,
+          "=SUM('rede AV - detalhado'!H6091)",
+          0
+        ],
+        [
+          18,
+          5,
+          "=SUM(C18-D18)",
+          0
+        ],
+        [
+          19,
+          4,
+          "=SUM('rede AV - detalhado'!H16097)",
+          0
+        ],
+        [
+          19,
+          5,
+          "=SUM(C19-D19)",
+          0
+        ],
+        [
+          20,
+          4,
+          "=SUM('rede AV - detalhado'!H8367)",
+          0
+        ],
+        [
+          20,
+          5,
+          "=SUM(C20-D20)",
+          0
+        ],
+        [
+          21,
+          4,
+          "=SUM('rede AV - detalhado'!H12741)",
+          0
+        ],
+        [
+          21,
+          5,
+          "=SUM(C21-D21)",
+          0
+        ],
+        [
+          22,
+          4,
+          "=SUM('rede AV - detalhado'!H8526)",
+          0
+        ],
+        [
+          22,
+          5,
+          "=SUM(C22-D22)",
+          0
+        ],
+        [
+          23,
+          4,
+          "=SUM('rede AV - detalhado'!H14420)",
+          0
+        ],
+        [
+          23,
+          5,
+          "=SUM(C23-D23)",
+          0
+        ],
+        [
+          26,
+          3,
+          "=SUM(C2:C24)",
+          0
+        ],
+        [
+          26,
+          4,
+          "=SUM(D2:D24)",
+          0
+        ],
+        [
+          26,
+          5,
+          "=SUM(E2:E24)",
+          0
+        ]
+      ]
+    },
+    {
+      "title": "rede AV - detalhado",
+      "errors": [],
+      "formulas": []
+    },
+    {
+      "title": "Rede MonetizeMore (M2)",
+      "errors": [],
+      "formulas": []
+    },
+    {
+      "title": "Gastos FB",
+      "errors": [],
+      "formulas": [
+        [
+          41,
+          3,
+          "=SUM(C2:C39)",
+          495704.61
+        ]
+      ]
+    },
+    {
+      "title": "Gastos Google",
+      "errors": [],
+      "formulas": [
+        [
+          50,
+          4,
+          "=SUM(D5:D49)",
+          111547.89000000001
+        ]
+      ]
+    }
+  ],
+  "rede 1 SB": {
+    "rows": 3050,
+    "total": "778884.56398680319913306997",
+    "dates": [
+      "2026-09-01",
+      "2026-09-02",
+      "2026-09-03",
+      "2026-09-04",
+      "2026-09-05",
+      "2026-09-06",
+      "2026-09-07",
+      "2026-09-08",
+      "2026-09-09",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-12",
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-24",
+      "2026-09-25",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30"
+    ],
+    "placements": {
+      "pl_digital-trust_autocreditadx_us": "0.022122988410875555",
+      "pl_digital-trust_boostingecon_us": "0.6086245824194525462",
+      "pl_digital-trust_cephyric_fr": "0.65870071241640814185",
+      "pl_digital-trust_cliquet_br": "0.02195803408720381939",
+      "pl_digital-trust_cliquet_gb": "0.0315475764060906682",
+      "pl_digital-trust_cliquet_us": "4.31547955554381207657",
+      "pl_digital-trust_cliquetfinanzas_us": "189.3118606878913208831",
+      "pl_digital-trust_dicasfinancas_br": "0.0202450407905818208",
+      "pl_digital-trust_ducapes_us": "0.036138283481092349",
+      "pl_digital-trust_eggbev_br": "0.4732937456451401",
+      "pl_digital-trust_eggbev_gb": "490.0670878715184276054",
+      "pl_digital-trust_eggbev_us": "257566.523544219014792464",
+      "pl_digital-trust_eggbevfinanzas_us": "167.649110779947292545",
+      "pl_digital-trust_escalatepower_us": "0.26868670062182178775",
+      "pl_digital-trust_financeadx_ar": "0.0093848407789993021",
+      "pl_digital-trust_financeadx_ca": "4523.035580449988070634",
+      "pl_digital-trust_financeadx_mx": "11986.42534899742951544",
+      "pl_digital-trust_financeadx_us": "2992.1243365059585591820",
+      "pl_digital-trust_financeadx_za": "156.132873972514295957",
+      "pl_digital-trust_gamingadx_us": "895.76608311742722159436",
+      "pl_digital-trust_growpowerhub_de": "8.190546956508865",
+      "pl_digital-trust_helixenit_de": "135.885209463247560963",
+      "pl_digital-trust_helixenit_mx": "38527.47110356469072035",
+      "pl_digital-trust_helixenit_us": "263.08342428550476896",
+      "pl_digital-trust_infinitynexx_mx": "33931.00225169202915090",
+      "pl_digital-trust_infinitynexx_us": "98.7440257561479013220",
+      "pl_digital-trust_lyzmo_gb": "3595.2895236396518003737",
+      "pl_digital-trust_lyzmo_us": "21577.72565827094267807764",
+      "pl_digital-trust_lyzmofinanzas_us": "87.0731332531968245667",
+      "pl_digital-trust_marevelx_de": "390.37894444486290897",
+      "pl_digital-trust_marevelx_us": "16.21415774662812847",
+      "pl_digital-trust_mavroa_us": "274.90208468247491145169",
+      "pl_digital-trust_newsoun_gb": "192.8238072900687917777",
+      "pl_digital-trust_newsoun_us": "2445.44575093427621974277",
+      "pl_digital-trust_newsounde_de": "385.1289563924924236597",
+      "pl_digital-trust_newsounfinanzas_us": "83.10416609274583178752",
+      "pl_digital-trust_openzed_br": "0.01055422257459491974",
+      "pl_digital-trust_openzed_gb": "2716.982624722569941142",
+      "pl_digital-trust_openzed_us": "99297.0836934177245398223",
+      "pl_digital-trust_openzedfinanzas_es": "34358.8150575077332060693",
+      "pl_digital-trust_openzedfinanzas_us": "17629.14241790875722934706",
+      "pl_digital-trust_portalrelevante_us": "0.2015073789298856543",
+      "pl_digital-trust_topfeed_br": "1.18654123934900954681",
+      "pl_digital-trust_topfeed_gb": "557.11023054493610293507",
+      "pl_digital-trust_topfeed_us": "63691.13923088189178704247",
+      "pl_digital-trust_topfeedfinanzas_es": "96.36914869294820054553",
+      "pl_digital-trust_topfeedfinanzas_us": "5059.48497713600099833317",
+      "pl_digital-trust_topfeedfun_us": "0.0044103070041834743",
+      "pl_digital-trust_vizioid_us": "2480.6635005926850740069",
+      "pl_digital-trust_wavesbee_us": "0.2157071584548971452",
+      "pl_digital-trust_wavesbeefinanzas_us": "0.012742353809102358",
+      "pl_digital-trust_xyvlov_de": "983.9094853589768611533",
+      "pl_digital-trust_xyvlov_us": "2.691926065584145021",
+      "pl_digital-trust_yolokfx_us": "132197.1820323420046754145",
+      "pl_digital-trust_zuout_us": "741.3874530726470235281",
+      "pl_digital-trust_zuoutfinanzas_us": "290.7464063871581161996",
+      "pl_digital-trust_zyclor_de": "0.00013401554486460498",
+      "pl_digital-trust_zytiva_gb": "36841.7572524245048820548",
+      "pl_digital-trust_zytiva_us": "768.5189303107896942996",
+      "pl_digital-trust_zytivafinanzas_es": "0.08557962688236341",
+      "pl_digital-trust_zytivafinanzas_us": "183.8976900059772941978"
+    },
+    "mediums": {
+      "g002-s": "69768.21831566677067065640",
+      "g002-d": "268.64741270506895954579",
+      "g001-d": "5154.7332618641537359967",
+      "g006-d": "304100.60369843626685794754",
+      "g005-d": "42032.94241802302631724069",
+      "g004-d": "98852.08792763104091430435",
+      "g003-d": "192617.94558618108945067850",
+      "g001-s": "4913.1717319380301437",
+      "g003-s": "2037.904389080268689",
+      "g004-s": "11797.88366254646372",
+      "g005-s": "39971.25488959406812",
+      "g006-s": "7369.170693136951554"
+    },
+    "money_text": [],
+    "negative_rows": [],
+    "zero_rows": 0,
+    "duplicate_keys": [
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_cliquet_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          33,
+          40
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_cliquet_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          34,
+          42
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_cliquetfinanzas_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          49,
+          73
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_cliquetfinanzas_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          50,
+          78
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_eggbev_gb",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          119,
+          175
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          179,
+          225
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          181,
+          227
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          183,
+          229
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          186,
+          232,
+          283
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          187,
+          233
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          193,
+          243
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          198,
+          251
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          201,
+          254
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          202,
+          255
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          206,
+          260,
+          294
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          208,
+          263
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          211,
+          267
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          217,
+          277
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          219,
+          279
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          220,
+          280
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          224,
+          281
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          228,
+          282
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          234,
+          284
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          236,
+          285
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          238,
+          286
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          240,
+          287
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          242,
+          288
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          246,
+          289
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          248,
+          290
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          250,
+          291
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          252,
+          292
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          258,
+          293
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          264,
+          295
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          268,
+          296
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_eggbev_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          276,
+          297
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_eggbevfinanzas_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          298,
+          301
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_eggbevfinanzas_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          299,
+          307
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          349,
+          388
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          351,
+          394
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          353,
+          396
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          354,
+          400
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          356,
+          406
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          357,
+          410
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          358,
+          412
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          359,
+          414
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          360,
+          416
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          371,
+          421
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          373,
+          422
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_financeadx_ca",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          381,
+          423
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_financeadx_mx",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          425,
+          457
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_financeadx_mx",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          441,
+          487
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          518,
+          555
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          524,
+          566
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          527,
+          570
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          528,
+          572
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          531,
+          576
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          533,
+          578
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          534,
+          580
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          536,
+          584
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          537,
+          586
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          538,
+          594
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          539,
+          596
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          541,
+          598
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          543,
+          600
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          545,
+          604
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          547,
+          607
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          549,
+          609
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_financeadx_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          550,
+          611
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          620,
+          665
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          625,
+          670
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          628,
+          673
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          630,
+          675
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          633,
+          678
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          643,
+          687
+        ]
+      },
+      {
+        "key": [
+          "2026-09-19",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          645,
+          689
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          656,
+          699
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          664,
+          706
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          666,
+          707
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          703,
+          708
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_financeadx_za",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          704,
+          709
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_gamingadx_us",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          725,
+          737
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_helixenit_mx",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          805,
+          853
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_helixenit_mx",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          807,
+          855
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          881,
+          913
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          883,
+          919
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          884,
+          921
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          885,
+          923
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          887,
+          925
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          888,
+          929
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          890,
+          932
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          892,
+          934
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          893,
+          936
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          899,
+          948
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          900,
+          950
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_helixenit_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          903,
+          954
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_infinitynexx_mx",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          972,
+          1071
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_infinitynexx_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          1115,
+          1170
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_lyzmo_gb",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1225,
+          1241
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_lyzmo_gb",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1231,
+          1280
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_lyzmo_gb",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1235,
+          1290
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1293,
+          1347
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1295,
+          1349
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1297,
+          1351
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1298,
+          1353
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1300,
+          1355
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1301,
+          1357
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1302,
+          1359
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1303,
+          1361
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1305,
+          1363
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1307,
+          1365
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1309,
+          1367
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1310,
+          1369
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1312,
+          1371
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1314,
+          1373
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1316,
+          1375
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1318,
+          1377
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1320,
+          1379
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1321,
+          1381
+        ]
+      },
+      {
+        "key": [
+          "2026-09-19",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1323,
+          1383
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1325,
+          1385
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1327,
+          1387
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1329,
+          1389
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1331,
+          1391
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1333,
+          1393
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1335,
+          1395
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1337,
+          1397
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1339,
+          1399
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1341,
+          1401
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1343,
+          1403
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1345,
+          1405
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          1366,
+          1406
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          1402,
+          1407
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_lyzmo_us",
+          "g006-d",
+          "facebook"
+        ],
+        "rows": [
+          1404,
+          1408
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_lyzmofinanzas_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1410,
+          1415
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_lyzmofinanzas_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1412,
+          1432
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_lyzmofinanzas_us",
+          "g006-d",
+          "mct"
+        ],
+        "rows": [
+          1413,
+          1434
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_marevelx_de",
+          "g001-d",
+          "mct"
+        ],
+        "rows": [
+          1443,
+          1460
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_mavroa_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          1511,
+          1519
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_mavroa_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          1514,
+          1520
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1558,
+          1592
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1559,
+          1594
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1560,
+          1596
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1561,
+          1598
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1564,
+          1604
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1566,
+          1606
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1568,
+          1610
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1569,
+          1612
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1570,
+          1614
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1571,
+          1616
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1573,
+          1617
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1574,
+          1624
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1575,
+          1626
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1578,
+          1630
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1579,
+          1632
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1581,
+          1636
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1582,
+          1638
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1584,
+          1639
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1586,
+          1643
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_newsoun_us",
+          "g005-d",
+          "facebook"
+        ],
+        "rows": [
+          1640,
+          1644
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1645,
+          1668
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1647,
+          1681
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1649,
+          1662
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1650,
+          1663
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1651,
+          1664
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1652,
+          1665
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1653,
+          1666
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1654,
+          1667
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1655,
+          1670
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1656,
+          1671
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_newsounde_de",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1660,
+          1687
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_newsounfinanzas_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1690,
+          1702
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_newsounfinanzas_us",
+          "g005-d",
+          "mct"
+        ],
+        "rows": [
+          1691,
+          1707
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1814,
+          1900
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1818,
+          1906
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1820,
+          1908
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "direct"
+        ],
+        "rows": [
+          1828,
+          1923
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1836,
+          1939
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1841,
+          1947
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1845,
+          1953
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1847,
+          1955
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_openzed_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          1849,
+          1957
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_openzedfinanzas_es",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          1971,
+          2026
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_openzedfinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2038,
+          2075
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_openzedfinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2044,
+          2089
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_openzedfinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2052,
+          2105
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_openzedfinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2059,
+          2117
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_openzedfinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2062,
+          2121
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_openzedfinanzas_us",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2064,
+          2122
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2202,
+          2237
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2207,
+          2253
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2213,
+          2265
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2215,
+          2267
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2216,
+          2268,
+          2288
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2217,
+          2269
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2223,
+          2281
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2230,
+          2286
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2250,
+          2287
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2272,
+          2289
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_topfeed_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2282,
+          2290
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2304,
+          2339
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2306,
+          2341
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2309,
+          2345
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2310,
+          2347
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2312,
+          2349
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2313,
+          2351
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2315,
+          2353
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2318,
+          2359
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2321,
+          2363
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2322,
+          2365
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2323,
+          2369
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2326,
+          2373
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2327,
+          2379
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2329,
+          2381
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2331,
+          2383
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2333,
+          2385
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2334,
+          2389
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2335,
+          2391
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2336,
+          2394
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "mct"
+        ],
+        "rows": [
+          2337,
+          2396
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2338,
+          2397
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_topfeedfinanzas_us",
+          "g004-d",
+          "facebook"
+        ],
+        "rows": [
+          2352,
+          2398
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_vizioid_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2405,
+          2439
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_vizioid_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2412,
+          2417
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_vizioid_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2424,
+          2440
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_vizioid_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2434,
+          2441
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_xyvlov_de",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2451,
+          2482
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_xyvlov_de",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2461,
+          2508
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_xyvlov_de",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2475,
+          2509
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_xyvlov_de",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2500,
+          2510
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_xyvlov_de",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2502,
+          2511
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_xyvlov_de",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2504,
+          2512
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_yolokfx_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2530,
+          2692
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_yolokfx_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2531,
+          2693
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_yolokfx_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2541,
+          2585
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_yolokfx_us",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          2592,
+          2694
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_zuout_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2697,
+          2715
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_zuout_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2699,
+          2716
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_zuout_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2702,
+          2718
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_zuout_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2705,
+          2719
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_zuout_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2707,
+          2720
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_zuout_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2712,
+          2723
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_zuoutfinanzas_us",
+          "g002-d",
+          "facebook"
+        ],
+        "rows": [
+          2761,
+          2772
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_zytiva_gb",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2813,
+          2836
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_zytiva_gb",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2835,
+          2894
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2897,
+          2948
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2899,
+          2950
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2901,
+          2951
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2903,
+          2953
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2904,
+          2954
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2905,
+          2955
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2907,
+          2957
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2909,
+          2958
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2911,
+          2959
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2913,
+          2961
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2915,
+          2963
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2917,
+          2965
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2919,
+          2966
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2921,
+          2967
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2923,
+          2968
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2925,
+          2969
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2926,
+          2971
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2927,
+          2973
+        ]
+      },
+      {
+        "key": [
+          "2026-09-19",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2929,
+          2974
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2930,
+          2975
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2931,
+          2976
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2932,
+          2978
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2934,
+          2980
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2936,
+          2982
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2938,
+          2983
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2940,
+          2985
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2942,
+          2987
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2943,
+          2989
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2945,
+          2990
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2947,
+          2991
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2979,
+          2993
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_zytiva_us",
+          "g003-d",
+          "facebook"
+        ],
+        "rows": [
+          2988,
+          2994
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2997,
+          3020
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          2999,
+          3022
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3000,
+          3023
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3001,
+          3024
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3002,
+          3025
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3003,
+          3027
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3004,
+          3028
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3005,
+          3029
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3006,
+          3030
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3007,
+          3031
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3008,
+          3033
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3009,
+          3036
+        ]
+      },
+      {
+        "key": [
+          "2026-09-19",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3010,
+          3038
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3011,
+          3039
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3012,
+          3040
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3013,
+          3041
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3014,
+          3043
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3015,
+          3045
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3016,
+          3046
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3017,
+          3047
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3018,
+          3048
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_zytivafinanzas_us",
+          "g003-d",
+          "mct"
+        ],
+        "rows": [
+          3019,
+          3049
+        ]
+      }
+    ],
+    "exact_duplicates": [],
+    "formats": {
+      "\"CA$\"#,##0.00_);(\"CA$\"#,##0.00)": 3050
+    },
+    "excluded": [
+      {
+        "row": 3058,
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          778884.5639868041,
+          "",
+          ""
+        ],
+        "cellE": {
+          "userEnteredValue": {
+            "formulaValue": "=SUM(E1:E3057)"
+          },
+          "effectiveValue": {
+            "numberValue": 778884.5639868041
+          },
+          "formattedValue": "CA$778.884,56 ",
+          "effectiveFormat": {
+            "numberFormat": {
+              "type": "CURRENCY",
+              "pattern": "\"CA$\"#,##0.00_);(\"CA$\"#,##0.00)"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "rede 2 SB": {
+    "rows": 678,
+    "total": "209644.93420635515299812711",
+    "dates": [
+      "2026-09-01",
+      "2026-09-02",
+      "2026-09-03",
+      "2026-09-04",
+      "2026-09-05",
+      "2026-09-06",
+      "2026-09-07",
+      "2026-09-08",
+      "2026-09-09",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-12",
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-24",
+      "2026-09-25",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30"
+    ],
+    "placements": {
+      "pl_digital-trust_carcreditad_us": "0.00007200027000000001",
+      "pl_digital-trust_creditoparaveiculo_br": "182745.689853767099227391",
+      "pl_digital-trust_fincgriffin_us": "242.966406320607010292",
+      "pl_digital-trust_gamezonead_br": "26656.2778742671767604441"
+    },
+    "mediums": {
+      "g002-s": "31608.86381279480077783511",
+      "g001-s": "21661.078037538033051",
+      "g003-s": "50610.880500490163795",
+      "g004-s": "27781.80711978602018",
+      "g005-s": "71828.049905377065085",
+      "g006-s": "5911.2884240484630990",
+      "g001-d": "39.55361792551100127",
+      "g002-d": "7.78261318468999972",
+      "g004-d": "16.09208754510200002",
+      "g005-d": "43.94954881019000151",
+      "g006-d": "135.588538855114007772"
+    },
+    "money_text": [],
+    "negative_rows": [],
+    "zero_rows": 0,
+    "duplicate_keys": [
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          4,
+          8
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          18,
+          22
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          21,
+          31
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          33,
+          37
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          47,
+          51
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          61,
+          65
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          75,
+          79
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          89,
+          93
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          103,
+          107
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          117,
+          121
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          120,
+          130
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          132,
+          136
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          146,
+          150
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          160,
+          164
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          174,
+          178
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          187,
+          191
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          200,
+          204
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          203,
+          212
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          214,
+          218
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          239,
+          243
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          242,
+          252
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          280,
+          284
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          307,
+          311
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          310,
+          320
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          322,
+          326
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          336,
+          340
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          350,
+          354
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          364,
+          368
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          378,
+          382
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "facebook"
+        ],
+        "rows": [
+          381,
+          391
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_creditoparaveiculo_br",
+          "g002-s",
+          "sms"
+        ],
+        "rows": [
+          393,
+          397
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          525,
+          652
+        ]
+      },
+      {
+        "key": [
+          "2026-09-01",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          526,
+          527,
+          528,
+          653
+        ]
+      },
+      {
+        "key": [
+          "2026-09-02",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          531,
+          532,
+          533,
+          654
+        ]
+      },
+      {
+        "key": [
+          "2026-09-03",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          536,
+          537,
+          538
+        ]
+      },
+      {
+        "key": [
+          "2026-09-04",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          541,
+          542
+        ]
+      },
+      {
+        "key": [
+          "2026-09-05",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          545,
+          546,
+          655
+        ]
+      },
+      {
+        "key": [
+          "2026-09-06",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          549,
+          550,
+          656
+        ]
+      },
+      {
+        "key": [
+          "2026-09-07",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          553,
+          554
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          556,
+          657
+        ]
+      },
+      {
+        "key": [
+          "2026-09-08",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          557,
+          558,
+          658
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          560,
+          659
+        ]
+      },
+      {
+        "key": [
+          "2026-09-09",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          561,
+          562
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          564,
+          660
+        ]
+      },
+      {
+        "key": [
+          "2026-09-10",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          565,
+          566,
+          661
+        ]
+      },
+      {
+        "key": [
+          "2026-09-11",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          569,
+          570,
+          662
+        ]
+      },
+      {
+        "key": [
+          "2026-09-12",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          573,
+          574
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          576,
+          663
+        ]
+      },
+      {
+        "key": [
+          "2026-09-13",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          577,
+          578
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          580,
+          664
+        ]
+      },
+      {
+        "key": [
+          "2026-09-14",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          581,
+          582,
+          665
+        ]
+      },
+      {
+        "key": [
+          "2026-09-15",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          585,
+          586
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          588,
+          666
+        ]
+      },
+      {
+        "key": [
+          "2026-09-16",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          589,
+          590,
+          667
+        ]
+      },
+      {
+        "key": [
+          "2026-09-17",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          593,
+          594,
+          668
+        ]
+      },
+      {
+        "key": [
+          "2026-09-18",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          597,
+          598,
+          599,
+          669
+        ]
+      },
+      {
+        "key": [
+          "2026-09-19",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          601,
+          670
+        ]
+      },
+      {
+        "key": [
+          "2026-09-19",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          602,
+          603,
+          604,
+          605
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          607,
+          671
+        ]
+      },
+      {
+        "key": [
+          "2026-09-20",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          608,
+          609,
+          672
+        ]
+      },
+      {
+        "key": [
+          "2026-09-21",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          612,
+          613,
+          614,
+          673
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          616,
+          674
+        ]
+      },
+      {
+        "key": [
+          "2026-09-22",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          617,
+          618,
+          675
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          620,
+          676
+        ]
+      },
+      {
+        "key": [
+          "2026-09-23",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          621,
+          622,
+          677
+        ]
+      },
+      {
+        "key": [
+          "2026-09-24",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          625,
+          626,
+          678
+        ]
+      },
+      {
+        "key": [
+          "2026-09-25",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          629,
+          630
+        ]
+      },
+      {
+        "key": [
+          "2026-09-26",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          633,
+          634
+        ]
+      },
+      {
+        "key": [
+          "2026-09-27",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          637,
+          638
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "direct"
+        ],
+        "rows": [
+          640,
+          679
+        ]
+      },
+      {
+        "key": [
+          "2026-09-28",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          641,
+          642
+        ]
+      },
+      {
+        "key": [
+          "2026-09-29",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          645,
+          646
+        ]
+      },
+      {
+        "key": [
+          "2026-09-30",
+          "pl_digital-trust_gamezonead_br",
+          "g002-s",
+          "google"
+        ],
+        "rows": [
+          649,
+          650,
+          651
+        ]
+      }
+    ],
+    "exact_duplicates": [],
+    "formats": {
+      "\"$\"#,##0.00_);(\"$\"#,##0.00)": 678
+    },
+    "excluded": [
+      {
+        "row": 683,
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          209644.9342063551,
+          "",
+          ""
+        ],
+        "cellE": {
+          "userEnteredValue": {
+            "formulaValue": "=SUM(E1:E682)"
+          },
+          "effectiveValue": {
+            "numberValue": 209644.9342063551
+          },
+          "formattedValue": "CA$209.644,93 ",
+          "effectiveFormat": {
+            "numberFormat": {
+              "type": "CURRENCY",
+              "pattern": "\"CA$\"#,##0.00_);(\"CA$\"#,##0.00)"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "facebook": {
+    "records": [
+      {
+        "row": 2,
+        "account": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+        "amount": "3874.38",
+        "numeric": true
+      },
+      {
+        "row": 3,
+        "account": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+        "amount": "48949.51",
+        "numeric": true
+      },
+      {
+        "row": 4,
+        "account": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+        "amount": "37088.13",
+        "numeric": true
+      },
+      {
+        "row": 5,
+        "account": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "amount": "1086.57",
+        "numeric": true
+      },
+      {
+        "row": 6,
+        "account": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+        "amount": "20452.92",
+        "numeric": true
+      },
+      {
+        "row": 7,
+        "account": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "amount": "3819.68",
+        "numeric": true
+      },
+      {
+        "row": 8,
+        "account": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "amount": "15424.42",
+        "numeric": true
+      },
+      {
+        "row": 9,
+        "account": "Eggbev-US-CC-EN-01",
+        "amount": "2284.61",
+        "numeric": true
+      },
+      {
+        "row": 10,
+        "account": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+        "amount": "104234.53",
+        "numeric": true
+      },
+      {
+        "row": 11,
+        "account": "Financeadx-CA-CC-EN-01",
+        "amount": "1347.01",
+        "numeric": true
+      },
+      {
+        "row": 12,
+        "account": "Financeadx-MX-CC-ES-01",
+        "amount": "4092.76",
+        "numeric": true
+      },
+      {
+        "row": 13,
+        "account": "Financeadx-US-CC-EN-01",
+        "amount": "1364.55",
+        "numeric": true
+      },
+      {
+        "row": 14,
+        "account": "Helixenit-MX-CC-ES-01",
+        "amount": "20101.19",
+        "numeric": true
+      },
+      {
+        "row": 15,
+        "account": "Infinitynexx-MX-CC-ES-01",
+        "amount": "15328.01",
+        "numeric": true
+      },
+      {
+        "row": 16,
+        "account": "Infinitynexx-MX-CC-ES-01-G001",
+        "amount": "3874.79",
+        "numeric": true
+      },
+      {
+        "row": 17,
+        "account": "Lyzmo-GB-CC-EN-01",
+        "amount": "1831.91",
+        "numeric": true
+      },
+      {
+        "row": 18,
+        "account": "Lyzmo-US-CC-EN-01",
+        "amount": "11317.58",
+        "numeric": true
+      },
+      {
+        "row": 19,
+        "account": "Mavroa-US-SHEIN-ES-02-G002",
+        "amount": "221.33",
+        "numeric": true
+      },
+      {
+        "row": 20,
+        "account": "Newsoun-US-CC-EN-01",
+        "amount": "961.23",
+        "numeric": true
+      },
+      {
+        "row": 21,
+        "account": "Openzed-US-CC-EN-01",
+        "amount": "24674.95",
+        "numeric": true
+      },
+      {
+        "row": 22,
+        "account": "Openzed-US-CC-EN-02",
+        "amount": "62.7",
+        "numeric": true
+      },
+      {
+        "row": 23,
+        "account": "Openzed-US-CC-EN-03",
+        "amount": "22877.5",
+        "numeric": true
+      },
+      {
+        "row": 24,
+        "account": "OpenzedFinanzas-ES-CC-ES-01",
+        "amount": "5045.00",
+        "numeric": false
+      },
+      {
+        "row": 25,
+        "account": "OpenzedFinanzas-ES-CC-ES-02",
+        "amount": "5870.78",
+        "numeric": true
+      },
+      {
+        "row": 26,
+        "account": "OpenzedFinanzas-ES-CC-ES-03",
+        "amount": "5268.67",
+        "numeric": true
+      },
+      {
+        "row": 27,
+        "account": "OpenzedFinanzas-US-CC-ES-01",
+        "amount": "7886.14",
+        "numeric": true
+      },
+      {
+        "row": 28,
+        "account": "Topfeed-US-CC-EN-01",
+        "amount": "33758.19",
+        "numeric": true
+      },
+      {
+        "row": 29,
+        "account": "TopfeedFinanzas-US-CC-ES-01",
+        "amount": "1627.92",
+        "numeric": true
+      },
+      {
+        "row": 30,
+        "account": "Vizioid-US-SHEIN-EN-02-G002",
+        "amount": "2153.08",
+        "numeric": true
+      },
+      {
+        "row": 31,
+        "account": "Yolokfx-US-SHEIN-EN-01-G002",
+        "amount": "31270.53",
+        "numeric": true
+      },
+      {
+        "row": 32,
+        "account": "Yolokfx-US-SHEIN-EN-02-G006",
+        "amount": "5371.01",
+        "numeric": true
+      },
+      {
+        "row": 33,
+        "account": "Yolokfx-US-SHEIN-EN-03-G005",
+        "amount": "22617.12",
+        "numeric": true
+      },
+      {
+        "row": 34,
+        "account": "Yolokfx-US-SHEIN-EN-04-G004",
+        "amount": "9554.09",
+        "numeric": true
+      },
+      {
+        "row": 35,
+        "account": "Yolokfx-US-SHEIN-EN-05-G001",
+        "amount": "3611.52",
+        "numeric": true
+      },
+      {
+        "row": 36,
+        "account": "Yolokfx-US-SHEIN-EN-06-G003",
+        "amount": "1860.22",
+        "numeric": true
+      },
+      {
+        "row": 37,
+        "account": "Zuout-US-CC-EN-01",
+        "amount": "664.44",
+        "numeric": true
+      },
+      {
+        "row": 38,
+        "account": "Zytiva-GB-CC-EN-02",
+        "amount": "18920.64",
+        "numeric": true
+      }
+    ],
+    "accounts": 37,
+    "sum_numeric": "495704.61",
+    "sum_including_explicit_decimal_text": "500749.61"
+  },
+  "google": {
+    "rows": [
+      {
+        "row": 5,
+        "raw_date": 46031,
+        "stored_date": "2026-01-09",
+        "display": "9/1/2026",
+        "intended_US_date": "2026-09-01",
+        "account": "Gamingadx-US-01",
+        "amount": "441.94"
+      },
+      {
+        "row": 6,
+        "raw_date": 46062,
+        "stored_date": "2026-02-09",
+        "display": "9/2/2026",
+        "intended_US_date": "2026-09-02",
+        "account": "Gamingadx-US-01",
+        "amount": "413.92"
+      },
+      {
+        "row": 7,
+        "raw_date": 46090,
+        "stored_date": "2026-03-09",
+        "display": "9/3/2026",
+        "intended_US_date": "2026-09-03",
+        "account": "Gamingadx-US-01",
+        "amount": "422.09"
+      },
+      {
+        "row": 8,
+        "raw_date": 46121,
+        "stored_date": "2026-04-09",
+        "display": "9/4/2026",
+        "intended_US_date": "2026-09-04",
+        "account": "Gamingadx-US-01",
+        "amount": "438.22"
+      },
+      {
+        "row": 9,
+        "raw_date": 46151,
+        "stored_date": "2026-05-09",
+        "display": "9/5/2026",
+        "intended_US_date": "2026-09-05",
+        "account": "Gamingadx-US-01",
+        "amount": "444.96"
+      },
+      {
+        "row": 10,
+        "raw_date": 46182,
+        "stored_date": "2026-06-09",
+        "display": "9/6/2026",
+        "intended_US_date": "2026-09-06",
+        "account": "Gamingadx-US-01",
+        "amount": "431.94"
+      },
+      {
+        "row": 11,
+        "raw_date": 46212,
+        "stored_date": "2026-07-09",
+        "display": "9/7/2026",
+        "intended_US_date": "2026-09-07",
+        "account": "Gamingadx-US-01",
+        "amount": "400.64"
+      },
+      {
+        "row": 12,
+        "raw_date": 46243,
+        "stored_date": "2026-08-09",
+        "display": "9/8/2026",
+        "intended_US_date": "2026-09-08",
+        "account": "Gamingadx-US-01",
+        "amount": "407.77"
+      },
+      {
+        "row": 13,
+        "raw_date": 46274,
+        "stored_date": "2026-09-09",
+        "display": "9/9/2026",
+        "intended_US_date": "2026-09-09",
+        "account": "Gamingadx-US-01",
+        "amount": "418.95"
+      },
+      {
+        "row": 14,
+        "raw_date": 46304,
+        "stored_date": "2026-10-09",
+        "display": "9/10/2026",
+        "intended_US_date": "2026-09-10",
+        "account": "Gamingadx-US-01",
+        "amount": "406.63"
+      },
+      {
+        "row": 15,
+        "raw_date": 46335,
+        "stored_date": "2026-11-09",
+        "display": "9/11/2026",
+        "intended_US_date": "2026-09-11",
+        "account": "Gamingadx-US-01",
+        "amount": "413.6"
+      },
+      {
+        "row": 16,
+        "raw_date": 46365,
+        "stored_date": "2026-12-09",
+        "display": "9/12/2026",
+        "intended_US_date": "2026-09-12",
+        "account": "Gamingadx-US-01",
+        "amount": "402.26"
+      },
+      {
+        "row": 17,
+        "raw_date": "9/13/2026",
+        "stored_date": null,
+        "display": "9/13/2026",
+        "intended_US_date": "2026-09-13",
+        "account": "Gamingadx-US-01",
+        "amount": "307.67"
+      },
+      {
+        "row": 18,
+        "raw_date": 46031,
+        "stored_date": "2026-01-09",
+        "display": "9/1/2026",
+        "intended_US_date": "2026-09-01",
+        "account": "Mattei 1",
+        "amount": "3752.49"
+      },
+      {
+        "row": 19,
+        "raw_date": 46062,
+        "stored_date": "2026-02-09",
+        "display": "9/2/2026",
+        "intended_US_date": "2026-09-02",
+        "account": "Mattei 1",
+        "amount": "3297.23"
+      },
+      {
+        "row": 20,
+        "raw_date": 46090,
+        "stored_date": "2026-03-09",
+        "display": "9/3/2026",
+        "intended_US_date": "2026-09-03",
+        "account": "Mattei 1",
+        "amount": "3353.32"
+      },
+      {
+        "row": 21,
+        "raw_date": 46121,
+        "stored_date": "2026-04-09",
+        "display": "9/4/2026",
+        "intended_US_date": "2026-09-04",
+        "account": "Mattei 1",
+        "amount": "3259.04"
+      },
+      {
+        "row": 22,
+        "raw_date": 46151,
+        "stored_date": "2026-05-09",
+        "display": "9/5/2026",
+        "intended_US_date": "2026-09-05",
+        "account": "Mattei 1",
+        "amount": "3515.48"
+      },
+      {
+        "row": 23,
+        "raw_date": 46182,
+        "stored_date": "2026-06-09",
+        "display": "9/6/2026",
+        "intended_US_date": "2026-09-06",
+        "account": "Mattei 1",
+        "amount": "3406.71"
+      },
+      {
+        "row": 24,
+        "raw_date": 46212,
+        "stored_date": "2026-07-09",
+        "display": "9/7/2026",
+        "intended_US_date": "2026-09-07",
+        "account": "Mattei 1",
+        "amount": "3316.39"
+      },
+      {
+        "row": 25,
+        "raw_date": 46243,
+        "stored_date": "2026-08-09",
+        "display": "9/8/2026",
+        "intended_US_date": "2026-09-08",
+        "account": "Mattei 1",
+        "amount": "3095.2"
+      },
+      {
+        "row": 26,
+        "raw_date": 46274,
+        "stored_date": "2026-09-09",
+        "display": "9/9/2026",
+        "intended_US_date": "2026-09-09",
+        "account": "Mattei 1",
+        "amount": "3316.19"
+      },
+      {
+        "row": 27,
+        "raw_date": 46304,
+        "stored_date": "2026-10-09",
+        "display": "9/10/2026",
+        "intended_US_date": "2026-09-10",
+        "account": "Mattei 1",
+        "amount": "2631.68"
+      },
+      {
+        "row": 28,
+        "raw_date": 46335,
+        "stored_date": "2026-11-09",
+        "display": "9/11/2026",
+        "intended_US_date": "2026-09-11",
+        "account": "Mattei 1",
+        "amount": "3574.1"
+      },
+      {
+        "row": 29,
+        "raw_date": 46365,
+        "stored_date": "2026-12-09",
+        "display": "9/12/2026",
+        "intended_US_date": "2026-09-12",
+        "account": "Mattei 1",
+        "amount": "3274.69"
+      },
+      {
+        "row": 30,
+        "raw_date": "9/13/2026",
+        "stored_date": null,
+        "display": "9/13/2026",
+        "intended_US_date": "2026-09-13",
+        "account": "Mattei 1",
+        "amount": "3314.48"
+      },
+      {
+        "row": 31,
+        "raw_date": "9/14/2026",
+        "stored_date": null,
+        "display": "9/14/2026",
+        "intended_US_date": "2026-09-14",
+        "account": "Mattei 1",
+        "amount": "3048.92"
+      },
+      {
+        "row": 32,
+        "raw_date": "9/15/2026",
+        "stored_date": null,
+        "display": "9/15/2026",
+        "intended_US_date": "2026-09-15",
+        "account": "Mattei 1",
+        "amount": "3206.49"
+      },
+      {
+        "row": 33,
+        "raw_date": "9/16/2026",
+        "stored_date": null,
+        "display": "9/16/2026",
+        "intended_US_date": "2026-09-16",
+        "account": "Mattei 1",
+        "amount": "2970.88"
+      },
+      {
+        "row": 34,
+        "raw_date": "9/17/2026",
+        "stored_date": null,
+        "display": "9/17/2026",
+        "intended_US_date": "2026-09-17",
+        "account": "Mattei 1",
+        "amount": "2622"
+      },
+      {
+        "row": 35,
+        "raw_date": "9/18/2026",
+        "stored_date": null,
+        "display": "9/18/2026",
+        "intended_US_date": "2026-09-18",
+        "account": "Mattei 1",
+        "amount": "4298.37"
+      },
+      {
+        "row": 36,
+        "raw_date": "9/19/2026",
+        "stored_date": null,
+        "display": "9/19/2026",
+        "intended_US_date": "2026-09-19",
+        "account": "Mattei 1",
+        "amount": "6508.6"
+      },
+      {
+        "row": 37,
+        "raw_date": "9/20/2026",
+        "stored_date": null,
+        "display": "9/20/2026",
+        "intended_US_date": "2026-09-20",
+        "account": "Mattei 1",
+        "amount": "7313.99"
+      },
+      {
+        "row": 38,
+        "raw_date": "9/21/2026",
+        "stored_date": null,
+        "display": "9/21/2026",
+        "intended_US_date": "2026-09-21",
+        "account": "Mattei 1",
+        "amount": "5265.08"
+      },
+      {
+        "row": 39,
+        "raw_date": "9/22/2026",
+        "stored_date": null,
+        "display": "9/22/2026",
+        "intended_US_date": "2026-09-22",
+        "account": "Mattei 1",
+        "amount": "5374.57"
+      },
+      {
+        "row": 40,
+        "raw_date": "9/23/2026",
+        "stored_date": null,
+        "display": "9/23/2026",
+        "intended_US_date": "2026-09-23",
+        "account": "Mattei 1",
+        "amount": "4023.4"
+      },
+      {
+        "row": 41,
+        "raw_date": "9/24/2026",
+        "stored_date": null,
+        "display": "9/24/2026",
+        "intended_US_date": "2026-09-24",
+        "account": "Mattei 1",
+        "amount": "3623.83"
+      },
+      {
+        "row": 42,
+        "raw_date": "9/25/2026",
+        "stored_date": null,
+        "display": "9/25/2026",
+        "intended_US_date": "2026-09-25",
+        "account": "Mattei 1",
+        "amount": "3494.19"
+      },
+      {
+        "row": 43,
+        "raw_date": "9/26/2026",
+        "stored_date": null,
+        "display": "9/26/2026",
+        "intended_US_date": "2026-09-26",
+        "account": "Mattei 1",
+        "amount": "2839.54"
+      },
+      {
+        "row": 44,
+        "raw_date": "9/27/2026",
+        "stored_date": null,
+        "display": "9/27/2026",
+        "intended_US_date": "2026-09-27",
+        "account": "Mattei 1",
+        "amount": "2880.69"
+      },
+      {
+        "row": 45,
+        "raw_date": "9/28/2026",
+        "stored_date": null,
+        "display": "9/28/2026",
+        "intended_US_date": "2026-09-28",
+        "account": "Mattei 1",
+        "amount": "1977.36"
+      },
+      {
+        "row": 46,
+        "raw_date": "9/29/2026",
+        "stored_date": null,
+        "display": "9/29/2026",
+        "intended_US_date": "2026-09-29",
+        "account": "Mattei 1",
+        "amount": "1924.76"
+      },
+      {
+        "row": 47,
+        "raw_date": "9/30/2026",
+        "stored_date": null,
+        "display": "9/30/2026",
+        "intended_US_date": "2026-09-30",
+        "account": "Mattei 1",
+        "amount": "1717.63"
+      }
+    ],
+    "by_account": {
+      "Gamingadx-US-01": {
+        "rows": 13,
+        "total": "5350.59",
+        "intended_dates": [
+          "2026-09-01",
+          "2026-09-02",
+          "2026-09-03",
+          "2026-09-04",
+          "2026-09-05",
+          "2026-09-06",
+          "2026-09-07",
+          "2026-09-08",
+          "2026-09-09",
+          "2026-09-10",
+          "2026-09-11",
+          "2026-09-12",
+          "2026-09-13"
+        ]
+      },
+      "Mattei 1": {
+        "rows": 30,
+        "total": "106197.30",
+        "intended_dates": [
+          "2026-09-01",
+          "2026-09-02",
+          "2026-09-03",
+          "2026-09-04",
+          "2026-09-05",
+          "2026-09-06",
+          "2026-09-07",
+          "2026-09-08",
+          "2026-09-09",
+          "2026-09-10",
+          "2026-09-11",
+          "2026-09-12",
+          "2026-09-13",
+          "2026-09-14",
+          "2026-09-15",
+          "2026-09-16",
+          "2026-09-17",
+          "2026-09-18",
+          "2026-09-19",
+          "2026-09-20",
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-09-24",
+          "2026-09-25",
+          "2026-09-26",
+          "2026-09-27",
+          "2026-09-28",
+          "2026-09-29",
+          "2026-09-30"
+        ]
+      }
+    },
+    "total": "111547.89",
+    "numeric_dates": 24,
+    "numeric_outside_september": 22
+  },
+  "m2": {
+    "finance.wantabrand.com": {
+      "rows": 30,
+      "total": "1.80",
+      "dates": [
+        "2026-09-01",
+        "2026-09-02",
+        "2026-09-03",
+        "2026-09-04",
+        "2026-09-05",
+        "2026-09-06",
+        "2026-09-07",
+        "2026-09-08",
+        "2026-09-09",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-12",
+        "2026-09-13",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16",
+        "2026-09-17",
+        "2026-09-18",
+        "2026-09-19",
+        "2026-09-20",
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-25",
+        "2026-09-26",
+        "2026-09-27",
+        "2026-09-28",
+        "2026-09-29",
+        "2026-09-30"
+      ]
+    },
+    "wantabrand.com": {
+      "rows": 30,
+      "total": "703.20",
+      "dates": [
+        "2026-09-01",
+        "2026-09-02",
+        "2026-09-03",
+        "2026-09-04",
+        "2026-09-05",
+        "2026-09-06",
+        "2026-09-07",
+        "2026-09-08",
+        "2026-09-09",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-12",
+        "2026-09-13",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16",
+        "2026-09-17",
+        "2026-09-18",
+        "2026-09-19",
+        "2026-09-20",
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-25",
+        "2026-09-26",
+        "2026-09-27",
+        "2026-09-28",
+        "2026-09-29",
+        "2026-09-30"
+      ]
+    }
+  },
+  "m2_total": "705.00",
+  "sb_cross_network_exact_overlap": 0
+}

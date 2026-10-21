@@ -3342,6 +3342,61 @@
       "immediate_start_exception": true,
       "first_delivery_auto_pause_not_armed": true,
       "recurring_jobs_unchanged": true
+    },
+    "cpv13-delete-c51-c52-pause-rest-20261022-rodolfo": {
+      "request_id": "cpv13-delete-c51-c52-pause-rest-20261022-rodolfo",
+      "campaign_ids": [
+        "120250209380780632",
+        "120250209406580632",
+        "120250209406610632",
+        "120250989174530632",
+        "120251081604300632",
+        "120251608480950632",
+        "120251608480940632",
+        "120251621439060632",
+        "120251621439070632",
+        "120251621447340632"
+      ],
+      "campaign_numbers": [
+        "8",
+        "9",
+        "10",
+        "40",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50"
+      ],
+      "deleted_campaign_ids": [
+        "120251725737910632",
+        "120251725737930632"
+      ],
+      "scheduled_for": "2026-10-22T00:00:00-03:00",
+      "state": "SCHEDULE_PENDING",
+      "state_path": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/cpv13-delete-c51-c52-pause-rest-20261022-rodolfo.json",
+      "script": "/root/.hermes/profiles/ares/scripts/cpv13-pause-rest-activate-20261022.py",
+      "cron_job_id": null,
+      "authorized_by": "Rodolfo Mattei",
+      "authorization_source": "discord:thread:1539832402744975450",
+      "budget_minor": {
+        "8": 6591,
+        "9": 6591,
+        "10": 5070,
+        "40": 3000,
+        "45": 7548,
+        "46": 6500,
+        "47": 5500,
+        "48": 6591,
+        "49": 6591,
+        "50": 6591
+      },
+      "operational_d1_reset": false,
+      "budget_write_at_activation": false,
+      "no_agent": true,
+      "post_write_readback": true,
+      "children_unchanged": true
     }
   },
   "creative_drive_organization": {
