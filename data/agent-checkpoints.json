@@ -663,12 +663,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Escopo corrigido em 1562256530454220851: copiar acervo completo está autorizado. Inventário novo congelado em historical-migration-1562256530454220851/discovery.json; histórico ainda não copiado. Preparar backfill com manifestos exatos e nova versão pinada do owner worker (atual rejeita HISTORICAL_SCOPE), validar os 1002 atalhos/leitores/IDs e acessos, atualizar Ares. Solicitar confirmação destrutiva específica antes de retirar fontes históricas; autorização anterior só cobre novos pares. Não alterar campanhas/budgets, nem fingir migração por mudança de docs.",
-      "objective": "Migrar TODO o acervo criativo existente e futuro aos 30 TB; Drive antigo somente intake/staging e atalhos/controle necessários",
+      "next_step": "Confirmação histórica adicional 1562268909686497422 registrada e vinculada ao inventário. Implementar/testar/publicar backfill copy-only por manifesto exato no owner worker e produtor/verificador SA, sem trocar auth. Gate real: bootstrap proprietário pinado exige repin deliberado; não alegar implantação antes do heartbeat. Remoção histórica só após todo acervo/copias/acessos/atalhos verificados; preservar pastas de entrada/controle. Não pedir novamente autorização para copiar ou retirar esse conjunto confirmado.",
+      "objective": "Migrar todo acervo criativo aos 30 TB, validar consumidores/atalhos e só então retirar fontes históricas confirmadas",
       "source": "docs/ares-creative-30tb-full-archive-migration.md",
-      "state": "full_archive_migration_scoped_historical_retirement_confirmation_pending",
+      "state": "full_archive_backfill_implementation_in_progress",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T00:15:52+00:00"
+      "updated_at": "2026-10-21T01:03:00+00:00"
     },
     {
       "agent": "ares",
@@ -6902,5 +6902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T00:15:52+00:00"
+  "updated_at": "2026-10-21T01:03:00+00:00"
 }
