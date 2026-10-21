@@ -1,0 +1,62 @@
+{
+  "revision_id": "ATENA-SEO58-REVISION-1562273124030873610",
+  "source_thread_id": "1560295338257023118",
+  "authority_message_id": "1562273124030873610",
+  "requester_discord_id": "1496254952501280974",
+  "status": "editorial_revision_in_progress",
+  "requested_articles": 58,
+  "next_batch_authorized": false,
+  "workspace": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610",
+  "manifest": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/manifest58.json",
+  "gamehub_priority": {
+    "cause": "Public category archives served stale WP Fastest Cache HTML despite correct publish status and native category association.",
+    "operation": "Native semantic WpFastestCache::delete_cache_of_term on verified term_taxonomy_ids 50 and 305, with live source fingerprints, bounded cache roots and backups.",
+    "global_cdn_purge": false,
+    "duplicate_posts_created": 0,
+    "canonical_category_presence_verified": 17,
+    "dicas_verified": 15,
+    "jogos_verified": 2,
+    "public_urls_http200": 17,
+    "full_public_bodies_match": 17,
+    "evidence": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/gamehubad.com/category-public-first-pass.json"
+  },
+  "initial_public_audit": {
+    "url_count": 58,
+    "http200": 58,
+    "self_canonical": 58,
+    "category_archive_presence": 58,
+    "minimum_visible_words": 1034,
+    "external_unique_urls": 62,
+    "external_http200": 55,
+    "external_browser_recovered": 2,
+    "external_roblox_antibot_blocked": 5,
+    "evidence": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/initial-http58.json"
+  },
+  "author_bios": {
+    "updated_domains": 4,
+    "description_only": true,
+    "first_person": true,
+    "languages": ["pt-BR", "es"],
+    "authenticated_readbacks": 4,
+    "public_bio_current": 11,
+    "public_bio_stale_pending_article_refresh": 47,
+    "evidence": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/author-profile-updates.json"
+  },
+  "editorial_content_writes_this_revision": 0,
+  "image_uploads_this_revision": 0,
+  "remaining": [
+    "Review local proposed text and image corrections per all 58 exact IDs; compare the batch transversally.",
+    "Apply only needed editorial corrections with concurrent-change protection and authenticated readback.",
+    "Recompute genuine Yoast outputs on the exact final rendered revisions where changed; do not fabricate scores or editor parity.",
+    "Validate localized bios in all final public article renders.",
+    "Second full public validation of all 58 URLs, complete body, image, correct category, language/market and external links.",
+    "Retain explicit limitation for five official Roblox support sources blocked by Cloudflare in HTTP and browser.",
+    "Topfeed Spanish content and localized bio are correct, but site HTML lang still emits pt-BR; diagnose within allowed scope and escalate structural fix if needed. Do not change global/user locale."
+  ],
+  "procedural_rules": {
+    "canonical_key": "content.seo.batch-review-gates",
+    "registry_id": "ATENA-SEO-BATCH-REVIEW-GATES-1562273124030873610",
+    "source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md",
+    "readback_validated": true
+  }
+}

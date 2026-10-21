@@ -6,6 +6,14 @@ Trate invalidação rotineira de cache gerado/reproduzível como manutenção da
 
 Quando houver uma execução escopada autorizada, feche a manutenção de ponta a ponta: revalide literais/owner/raiz/ausência de symlink, fingerprint da implementação e hash/tamanho atuais, preserve backup, registre intenção antes do write e invoque somente o método inspecionado. Após cada domínio, faça readback do efeito; depois leia os XML canônicos sem query e conte por código os URLs esperados. Uma cópia ausente ou já regenerada exige reconciliação, não replay nem expansão dos alvos. Verifique também hashes/datas/mídia/notas dos artigos para demonstrar que somente o cache mudou. Registre a conclusão real, não apenas a chamada de invalidação.
 
+## Arquivos de categoria vazios ou incompletos com posts publicados
+
+Antes de alterar publicação ou taxonomia, confronte associação REST/native, HTML canônico do arquivo e variante fresca. Quando a categoria canônica está vazia/antiga e a fresca contém os IDs corretos, não republique nem duplique posts: comprove a camada de cache de origem. `cf-cache-status:DYNAMIC` não elimina WP Fastest Cache.
+
+Para cache HTML de categorias, inspecione ao vivo a API semântica instalada `WpFastestCache::delete_cache_of_term($term_taxonomy_id)` e sua árvore de efeitos antes de usá-la na manutenção editorial autorizada. Resolva o term_taxonomy_id nativo (não presuma igualdade com term_id), slug, link e parent; pais positivos ampliam o efeito e exigem reconciliar o escopo. Confirme raízes por `getWpContentDir`, fingerprints dos métodos, owner, ausência de symlinks e somente arquivos de cache esperados; preserve backup. Essa API pode invalidar o index HTML, paginação e feeds da categoria; não substitua por `singleDeleteCache`/toolbar se esses métodos dispararem CDN global. Não invoque primitivas físicas genéricas como fallback por inferência. Depois da API, exija URL canônica sem query, percorra a paginação real e faça mapping dos IDs/URLs esperados no DOM; confira novamente após as correções editoriais. Registre o efeito e as limitações em vez de aceitar status publish/category.count como prova pública.
+
+No parser do corpo publicado, exclua também o contador `Post Views` injetado pelo tema/plugin. Ao comparar texto completo, separe os text nodes de tabelas/listas antes de normalizar whitespace; `textContent` cru pode concatenar células e produzir falso conteúdo truncado. Guarde a falha do parser e a revalidação corrigida, sem alterar o artigo para satisfazer um teste defeituoso.
+
 ## Preflight somente leitura
 
 - Faça gate do domínio antes de consultar host, credencial ou endpoint; use somente os owners/webroots/pins confirmados. Não execute inventário global ou `nginx -T` para resolver um único vhost.
