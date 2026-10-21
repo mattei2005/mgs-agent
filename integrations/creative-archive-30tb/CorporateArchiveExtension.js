@@ -39,7 +39,7 @@ function mgsCorporateEnsureRoot(c,p,props){
    try{id=Drive.Files.create({name:p.rootName,mimeType:'application/vnd.google-apps.folder',parents:[p.ownerRootId],properties:{mgsArchiveKey:key,mgsArchiveType:'corporate_root'}},null,{fields:'id'}).id;}
    catch(error){found=mgsArchiveOne(p.ownerRootId,key);if(!found)throw Error('CORPORATE_ROOT_CREATE_AMBIGUOUS_NO_REPLAY');id=found.id;}
   }
-  mgsCorporateFolderMeta(id,p.ownerRootId,p,p.rootName);props.setProperty(state,id);props.deleteProperty(intent);
+  props.setProperty(state,id);mgsCorporateFolderMeta(id,p.ownerRootId,p,p.rootName);props.deleteProperty(intent);
  }
  var m=mgsCorporateFolderMeta(id,p.ownerRootId,p,p.rootName);
  if(!m.properties || m.properties.mgsArchiveKey!==key || m.properties.mgsArchiveType!=='corporate_root')throw Error('CORPORATE_ROOT_MARKER');return m;
@@ -60,13 +60,22 @@ function mgsCorporateGrantExact(id,desired,props){
 }
 function mgsCorporateWrite(c,key,type,body){
  var old=mgsArchiveOne(c.receiptsFolderId,key),text=JSON.stringify(body),blob=Utilities.newBlob(text,'application/json',type+'.json'),id;
- if(old){var m=mgsArchiveMeta(old.id);mgsArchiveRequirePublisher(m,c.account);if(!m.parents || m.parents[0]!==c.receiptsFolderId || !m.properties || m.properties.mgsArchiveType!==type)throw Error('CORPORATE_RECEIPT_SCOPE');id=Drive.Files.update({properties:{mgsArchiveKey:key,mgsArchiveType:type}},old.id,blob,{supportsAllDrives:true,fields:'id'}).id;}
- else id=Drive.Files.create({name:type+'.json',mimeType:'application/json',parents:[c.receiptsFolderId],properties:{mgsArchiveKey:key,mgsArchiveType:type}},blob,{supportsAllDrives:true,fields:'id'}).id;
+ try{
+  if(old){var m=mgsArchiveMeta(old.id);mgsArchiveRequirePublisher(m,c.account);if(!m.parents || m.parents[0]!==c.receiptsFolderId || !m.properties || m.properties.mgsArchiveType!==type)throw Error('CORPORATE_RECEIPT_SCOPE');id=Drive.Files.update({properties:{mgsArchiveKey:key,mgsArchiveType:type}},old.id,blob,{supportsAllDrives:true,fields:'id'}).id;}
+  else id=Drive.Files.create({name:type+'.json',mimeType:'application/json',parents:[c.receiptsFolderId],properties:{mgsArchiveKey:key,mgsArchiveType:type}},blob,{supportsAllDrives:true,fields:'id'}).id;
+ }catch(error){
+  var landed=mgsArchiveOne(c.receiptsFolderId,key);
+  if(landed){var lm=mgsArchiveMeta(landed.id);mgsArchiveRequirePublisher(lm,c.account);if(lm.parents && lm.parents[0]===c.receiptsFolderId && lm.properties && lm.properties.mgsArchiveType===type && mgsArchiveText(landed.id)===text)id=landed.id;}
+  if(!id){var uncertain=Error('CORPORATE_RECEIPT_WRITE_AMBIGUOUS');uncertain.mgsCorporatePublicationAmbiguous=true;throw uncertain;}
+ }
  if(mgsArchiveText(id)!==text)throw Error('CORPORATE_RECEIPT_READBACK');mgsArchiveRequirePublisher(mgsArchiveMeta(id),c.account);return id;
 }
 function mgsCorporateSetup(c,props,start){
  var p=mgsCorporatePlan(c),about=Drive.About.get({fields:'user(emailAddress,permissionId)'});
  if(!about.user || about.user.emailAddress!==p.account || about.user.permissionId!==p.ownerPermissionId)throw Error('CORPORATE_OWNER_IDENTITY');
+ // Bind every approved email to its live Google-native source membership
+ // before creating any destination permission, not only after POST.
+ mgsCorporateRequireAcl(mgsCorporateAcl(c.sourceDriveId),mgsCorporateDesired(p,true),false);
  var root=mgsCorporateEnsureRoot(c,p,props),desired=mgsCorporateDesired(p,false),acl=mgsCorporateGrantExact(root.id,desired,props),key='corporate-setup:'+p.sharingConfirmationMessageId,old=mgsArchiveOne(c.receiptsFolderId,key);
  if(old){mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);var prior=JSON.parse(mgsArchiveText(old.id));if(prior.schema!=='mgs.corporate.setup.receipt.v1' || prior.planSha256!==MGS_CORPORATE_PINS.planSha256 || prior.sharingConfirmationMessageId!==p.sharingConfirmationMessageId || prior.root.id!==root.id || prior.deleteSource!==false || prior.productionMutation!==false)throw Error('CORPORATE_PRIOR_RECEIPT_BINDING');if(prior.status==='completed' && prior.canary.restored){var live=mgsWholeDriveMeta(p.canary.id);mgsWholeDriveCanaryIdentity(live,p.canary);if(live.driveId!==c.sourceDriveId || !live.parents || live.parents[0]!==p.canary.sourceParentId)throw Error('CORPORATE_CANARY_NOT_RESTORED_LIVE');return {status:'completed',rootId:root.id,reused:true,productionMutation:false};}}
  var pending='MGS_CORPORATE_CANARY_PENDING_'+p.canary.id,done='MGS_CORPORATE_CANARY_DONE_'+p.canary.id;
@@ -76,7 +85,7 @@ function mgsCorporateSetup(c,props,start){
  var a=p.canary,before=mgsWholeDriveMeta(a.id);mgsWholeDriveCanaryIdentity(before,a);
  if(before.driveId!==c.sourceDriveId || !before.parents || before.parents[0]!==a.sourceParentId)throw Error('CORPORATE_CANARY_SOURCE');
  var sourceAcl=mgsCorporateAcl(a.id);mgsCorporateRequireAcl(sourceAcl,mgsCorporateDesired(p,true),false);
- var result={schema:'mgs.corporate.setup.receipt.v1',status:'completed',sharingConfirmationMessageId:p.sharingConfirmationMessageId,authorizationMessageId:p.authorizationMessageId,planSha256:MGS_CORPORATE_PINS.planSha256,root:root,rootPermissions:acl,deleteSource:false,productionMutation:false,canary:{sourceId:a.id,sourceBefore:{metadata:before,permissions:sourceAcl},destinationAfter:null,sourceAfter:null,restored:false},completedAt:null};
+ var result={schema:'mgs.corporate.setup.receipt.v1',status:'completed',sharingConfirmationMessageId:p.sharingConfirmationMessageId,authorizationMessageId:p.authorizationMessageId,planSha256:MGS_CORPORATE_PINS.planSha256,root:root,rootPermissions:acl,deleteSource:false,productionMutation:false,infrastructureMutation:true,productionContentMoved:false,canary:{sourceId:a.id,sourceBefore:{metadata:before,permissions:sourceAcl},destinationAfter:null,sourceAfter:null,restored:false},completedAt:null};
  props.setProperty(pending,JSON.stringify({sourceId:a.id,sourceParentId:a.sourceParentId,destinationParentId:root.id,startedAt:new Date().toISOString()}));
  try{
   try{Drive.Files.update({},a.id,null,{supportsAllDrives:true,addParents:root.id,removeParents:a.sourceParentId,fields:'id'});}
@@ -92,7 +101,9 @@ function mgsCorporateSetup(c,props,start){
  return {status:'completed',rootId:root.id,receiptId:receipt,canaryRestored:true,productionMutation:false};
 }
 function mgsCorporateSetupSafely(c,props,start){
- try{return mgsCorporateSetup(c,props,start);}catch(error){var reason=String(error.message || error).slice(0,300);mgsCorporateWrite(c,'corporate-setup-error:1562565746557456515','corporate_setup_error',{schema:'mgs.corporate.setup.error.v1',sharingConfirmationMessageId:'1562565746557456515',planSha256:MGS_CORPORATE_PINS.planSha256,status:'blocked',reason:reason,deleteSource:false,productionMutation:false,executedAt:new Date().toISOString()});return {status:'blocked',reason:reason,productionMutation:false};}
+ var prior=null,key='corporate-setup-error:1562565746557456515',old=mgsArchiveOne(c.receiptsFolderId,key);
+ if(old){mgsArchiveRequirePublisher(mgsArchiveMeta(old.id),c.account);prior=JSON.parse(mgsArchiveText(old.id));if(prior.workerSha256===c.workerSha256 && prior.planSha256===MGS_CORPORATE_PINS.planSha256 && ((prior.attempts || 0)>=5 || (prior.retryAfter && Date.parse(prior.retryAfter)>Date.now())))return {status:'blocked',reason:prior.reason,reused:true,productionMutation:false};}
+ try{return mgsCorporateSetup(c,props,start);}catch(error){var reason=String(error.message || error).slice(0,300),attempts=prior && prior.workerSha256===c.workerSha256 ? (prior.attempts || 0)+1:1;mgsCorporateWrite(c,key,'corporate_setup_error',{schema:'mgs.corporate.setup.error.v1',sharingConfirmationMessageId:'1562565746557456515',planSha256:MGS_CORPORATE_PINS.planSha256,workerSha256:c.workerSha256,status:'blocked',reason:reason,attempts:attempts,retryAfter:attempts<5?new Date(Date.now()+300000).toISOString():null,deleteSource:false,productionMutation:false,executedAt:new Date().toISOString()});return {status:'blocked',reason:reason,productionMutation:false};}
 }
 var mgsCorporatePriorProbe=mgsWholeDriveProbeSafely;
 mgsWholeDriveProbeSafely=function(c,props,start){
