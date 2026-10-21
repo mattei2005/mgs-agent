@@ -9,10 +9,12 @@
   "issues": [
     {
       "domain": "gamehubad.com",
-      "post_ids": [62716,62720,62730,62738,62740,62742,62744,62748],
-      "issue": "Eight canonical public pages still serve prior OG image from generated WPFC HTML. Current body, featured attachment, native social indexable, REST Yoast OG and fresh public representation show the approved image.",
+      "post_ids": [62716,62720,62730,62738,62740,62742],
+      "initial_affected_post_ids": [62716,62720,62730,62738,62740,62742,62744,62748],
+      "resolved_incidentally_after_legitimate_neighbor_content_repairs": [62744,62748],
+      "issue": "Six canonical public pages still serve prior OG image from generated WPFC HTML in both final public passes. Current body, featured attachment, native social indexable, REST Yoast OG and fresh public representation show the approved image.",
       "verified_state": "Native/REST repair of all28 replaced attachments completed by inspected per-ID Yoast public API. Auto/Car12 semantic URL cache refreshes completed and read back. Game lacks that URL API in the installed version; its singleDeleteCache/toolbar can trigger global CDN.",
-      "support_needed": "Determine and authorize the smallest safe cache-maintenance route for these exact eight URLs. Do not use global purge, plugin/config changes, physical file deletion or resave by inference. If physical cache primitives are required, apply the actual Critical Subset/authority gate rather than bypassing it.",
+      "support_needed": "Determine and authorize the smallest safe cache-maintenance route for these exact six remaining URLs. Do not use global purge, plugin/config changes, physical file deletion or resave by inference. If physical cache primitives are required, apply the actual Critical Subset/authority gate rather than bypassing it.",
       "target_mapping": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/og-final-targets28.json",
       "native_and_source_evidence": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/og-repair/",
       "public_evidence": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/og-after-urlcache-public28.json"
@@ -25,6 +27,16 @@
       "evidence": "/root/.hermes/profiles/atena/work/seo-revision-1562273124030873610/public-dom-corrected-pass1-diagnostic-verification.json"
     }
   ],
-  "not_a_publication_failure": "All58 exact article URLs are public HTTP200 with complete revised bodies; all58 appear in the correct public category archives. These two technical issues must remain explicit, not reported as corrected.",
+  "additional_author_archive_issue": {
+    "domain": "gamehubad.com",
+    "url": "https://gamehubad.com/author/atena/",
+    "canonical_http": 403,
+    "fresh_http": 403,
+    "browser_text": "Forbidden",
+    "localized_bio_visible_on_all17_article_pages": true,
+    "support_needed": "Review whether this author-archive restriction is intentional. Do not change security or runtime as an inferred bio edit."
+  },
+  "final_evidence": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/revision-final-verification-1562273124030873610.json",
+  "not_a_publication_failure": "All58 exact article URLs are public HTTP200 with complete revised bodies; all58 appear in the correct public category archives. Technical issues remain explicit, not reported as corrected.",
   "source_authority": "Raquel's request1562273124030873610 covers editorial review/publication corrections only; technical Critical Subset and production scope gates remain unchanged."
 }
