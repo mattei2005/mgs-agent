@@ -1,0 +1,70 @@
+{
+  "reboot_completed": true,
+  "application_validation_passed": true,
+  "overall_health_gate_clear": false,
+  "authorization": "1562596910748139551",
+  "host": "MatteiInc03JBF",
+  "before_boot_id": "2d2afb88-0f09-4c96-a42a-06cf0644b263",
+  "postboot": {
+    "host": "MatteiInc03",
+    "auth": "1562596910748139551",
+    "boot_id": "002f364d-b8c9-4312-a1c2-2d07be3e13d8",
+    "kernel": "5.15.0-198-generic",
+    "reboot_marker": false,
+    "units": {
+      "nginx-rc.service": {
+        "MainPID": "2562",
+        "ActiveState": "active",
+        "SubState": "running",
+        "UnitFileState": "enabled"
+      },
+      "php83rc-fpm.service": {
+        "MainPID": "1131",
+        "ActiveState": "active",
+        "SubState": "running",
+        "UnitFileState": "enabled"
+      },
+      "apache2-rc.service": {
+        "MainPID": "2381",
+        "ActiveState": "active",
+        "SubState": "running",
+        "UnitFileState": "enabled"
+      },
+      "mariadb.service": {
+        "MainPID": "1233",
+        "ActiveState": "active",
+        "SubState": "running",
+        "UnitFileState": "enabled"
+      },
+      "cron.service": {
+        "MainPID": "2327",
+        "ActiveState": "active",
+        "SubState": "running",
+        "UnitFileState": "enabled"
+      }
+    },
+    "time": 1792623119.60854,
+    "failed_units": [],
+    "boot_critical_journal": [
+      "pci 0000:0e:00.0: Failed to read data",
+      "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+      "snd_hda_intel 0000:0d:00.6: no codecs found!"
+    ],
+    "dpkg_audit_clean": true,
+    "tmp_correct": true,
+    "backup_verified": true,
+    "journal_gate_clear": false
+  },
+  "apps": {
+    "host": "MatteiInc03",
+    "apps": 20,
+    "http_checks": 40,
+    "php_executions": 20,
+    "php_version": "PHP 8.3.36 (cli) (built: Oct 21 2026 16:02:32) (NTS)",
+    "regressions": [],
+    "module_set_preserved": true,
+    "config_and_apps_preserved": true,
+    "time": 1792623127.7467475
+  },
+  "time": 1792623127.8067038
+}

@@ -28,7 +28,7 @@ Invoke version probes through the reconciled absolute launcher. Treat cached upd
 
 ## 2. Count completely, then inspect representative changes
 
-Run aggregation and filtering in Python. Pass the resolved repo/base/target as arguments:
+Run aggregation and filtering in Python. Preserve the resolved repo/base/target and the complete SHA/title list in a profile-scratch review artifact before selecting examples; reconcile the collected count with `git rev-list --count`. Do not reconstruct totals from truncated tool output. Pass the resolved repo/base/target as arguments:
 
 ```python
 import collections
@@ -73,6 +73,7 @@ print(json.dumps({
 - Verify a feature at the final target before advertising it; a reverted feature or catalogue entry is not deployed implementation. Locate moved symbols before concluding absence from a guessed path.
 - Distinguish upstream improvements from preserved MGS customizations; a retained local guard is not a new upstream benefit.
 - Label likely impact as expected unless measured in MGS. Do not convert upstream benchmarks, prompt-token reductions or estimated API cost into claimed CPU, latency or cash savings on a subscription.
+- Describe the review and test coverage literally: counting/classifying the complete commit log plus reading representative diffs is not a semantic audit of every commit. Passing MGS acceptance tests validates their exercised paths, not every newly shipped plugin, provider or platform. Keep overlapping test groups separate instead of adding them into a fictional independent total.
 
 ## 3. Discover capabilities efficiently
 
@@ -88,7 +89,9 @@ Prefer native features that solve a company problem before extra packages. Compa
 
 Read only whitelisted fields for Zeus/Atena/Ares and reduce output at the source. Never print full configs, auth documents, `.env`, MCP arguments or secret-bearing endpoints.
 
-Inspect relevant selectors: `memory.provider`, `context.engine`, compression threshold, `plugins.enabled`, Kanban dispatch settings and curator enablement. A missing override is not proof a feature is off; consult the deployed default/resolver.
+Inspect relevant selectors: model/provider, API mode and transport, `memory.provider`, `context.engine`, compression threshold, `plugins.enabled`, Kanban dispatch settings and curator enablement. A missing override is not proof a feature is off; consult the deployed default/resolver.
+
+Resolve the effective transport before assigning a provider-specific fix to MGS. The `openai-codex` provider label alone does not establish use of Codex app-server; HTTP/API and app-server paths can receive different fixes. If effective selection remains unverified, describe the benefit conditionally rather than claiming that path was exercised. Treat an unchanged OAuth pool, model selection or refresh customization as preserved configuration, not as a newly installed feature.
 
 Distinguish these evidence levels for each option:
 
@@ -133,7 +136,9 @@ Inspect unattended execution, scratch cleanup, credential exposure and profile-w
 
 **Enterprise capability discovery:** use four sections: applied improvements; useful available-but-not-operational capabilities; optional-plugin trade-offs; short prioritized recommendation.
 
-Use numbered topics and bullets, not raw changelogs, pipe tables or unsolicited attachments. Keep a simple version question short; expand for broader discovery. End with an operational priority, not a generic offer or installation question when the user only asked to understand. Cite official pages plus exact-range/current-state evidence. State that no plugins were installed or configurations changed by the review.
+Use numbered topics and bullets, not raw changelogs, pipe tables or unsolicited attachments. Keep a simple version question short; expand for broader discovery. End with an operational priority, not a generic offer or installation question when the user only asked to understand. Cite official pages plus exact-range/current-state evidence.
+
+Report review side effects by subsystem. Say that no plugins were installed or runtime configuration changed only when verified. If preserving an explicit owner decision required checkpoint, inventory or audit updates, disclose those metadata writes separately rather than claiming that nothing changed. When later commits were deferred, retain the installed cutoff and the timestamped reference count; neither this explanation nor a newly published commit reopens deployment authorization.
 
 ## Conditional branch: patch portability dry-run
 

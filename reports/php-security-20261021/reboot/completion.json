@@ -1,0 +1,113 @@
+{
+  "status": "reboots_and_applications_validated_with_journal_residual",
+  "authorization_message_id": "1562596910748139551",
+  "parallel_strategy_message_id": "1562597939874893856",
+  "execution": "Inc02 completed first; remaining Inc01 and Inc03 rebooted concurrently after explicit strategy change. Inc02 not repeated.",
+  "updated_at": "2026-10-21T22:53:53.521284+00:00",
+  "servers": [
+    {
+      "host": "MatteiInc02",
+      "previous_kernel": "5.15.0-194-generic",
+      "kernel": "5.15.0-198-generic",
+      "previous_boot_id": "505fa0af-1145-4cb7-b0d3-090aa5ea29a2",
+      "boot_id": "35d0ba54-7422-4fc4-99aa-eea26c5a3214",
+      "reboot_completed": true,
+      "apps": {
+        "host": "MatteiInc02",
+        "apps": 15,
+        "http_checks": 30,
+        "php_executions": 15,
+        "php_version": "PHP 8.3.36 (cli) (built: Oct 21 2026 16:02:32) (NTS)",
+        "regressions": [],
+        "module_set_preserved": true,
+        "config_and_apps_preserved": true,
+        "time": 1792622833.3138697
+      },
+      "journal_gate_clear": false,
+      "journal_residual": [
+        "pci 0000:0e:00.0: Failed to read data",
+        "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+        "snd_hda_intel 0000:0d:00.6: no codecs found!",
+        "error: kex_exchange_identification: Connection closed by remote host"
+      ],
+      "hardware_logs_identical_to_prior_boot": true,
+      "prior_boot_hardware_evidence_available": true,
+      "failed_units": [],
+      "reboot_marker": false,
+      "backup_verified": true
+    },
+    {
+      "host": "MatteiInc03JBF",
+      "previous_kernel": "5.15.0-187-generic",
+      "kernel": "5.15.0-198-generic",
+      "previous_boot_id": "2d2afb88-0f09-4c96-a42a-06cf0644b263",
+      "boot_id": "002f364d-b8c9-4312-a1c2-2d07be3e13d8",
+      "reboot_completed": true,
+      "apps": {
+        "host": "MatteiInc03",
+        "apps": 20,
+        "http_checks": 40,
+        "php_executions": 20,
+        "php_version": "PHP 8.3.36 (cli) (built: Oct 21 2026 16:02:32) (NTS)",
+        "regressions": [],
+        "module_set_preserved": true,
+        "config_and_apps_preserved": true,
+        "time": 1792623127.7467475
+      },
+      "journal_gate_clear": false,
+      "journal_residual": [
+        "pci 0000:0e:00.0: Failed to read data",
+        "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+        "snd_hda_intel 0000:0d:00.6: no codecs found!"
+      ],
+      "hardware_logs_identical_to_prior_boot": false,
+      "prior_boot_hardware_evidence_available": false,
+      "failed_units": [],
+      "reboot_marker": false,
+      "backup_verified": true
+    },
+    {
+      "host": "MatteiInc01",
+      "previous_kernel": "5.15.0-187-generic",
+      "kernel": "5.15.0-198-generic",
+      "previous_boot_id": "038684b8-6dde-44ad-a38c-969046be4ff7",
+      "boot_id": "b9879eb3-7c8d-404c-802b-bfd8ad0ebdfb",
+      "reboot_completed": true,
+      "apps": {
+        "host": "MatteiInc01",
+        "apps": 75,
+        "http_checks": 150,
+        "php_executions": 74,
+        "php_version": "PHP 8.3.36 (cli) (built: Oct 21 2026 16:02:32) (NTS)",
+        "regressions": [],
+        "module_set_preserved": true,
+        "config_and_apps_preserved": true,
+        "time": 1792623140.1710393,
+        "finance_node_socket": true,
+        "finance_php_socket": true
+      },
+      "journal_gate_clear": false,
+      "journal_residual": [
+        "pci 0000:0e:00.0: Failed to read data",
+        "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)",
+        "snd_hda_intel 0000:0d:00.6: no codecs found!",
+        "error: kex_exchange_identification: read: Connection reset by peer"
+      ],
+      "hardware_logs_identical_to_prior_boot": false,
+      "prior_boot_hardware_evidence_available": false,
+      "failed_units": [],
+      "reboot_marker": false,
+      "backup_verified": true
+    }
+  ],
+  "totals": {
+    "reboots_completed": 3,
+    "applications": 110,
+    "http_checks": 220,
+    "php_executions": 109
+  },
+  "hostinger_not_rebooted_and_gateways_unchanged": true,
+  "strict_zero_priority_error_gate_passed": false,
+  "residual_diagnosis": "Current boot includes AMD USB/controller and audio initialization messages. Identical previous-boot evidence confirmed on Inc02; previous kernel evidence not available in the queried prior-boot journal on Inc01/03. No service failures or application regression in tested paths. SSH accepts verified; aborted kex entries remain preserved, not all attributed to our probe. No driver/firmware/system-config repair authorized or performed.",
+  "finance_browser": "Rendered login form confirmed after reboot; Node and PHP sockets remained separate. No authenticated financial view or financial writes."
+}

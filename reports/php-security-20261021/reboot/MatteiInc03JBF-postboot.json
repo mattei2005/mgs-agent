@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc03JBF",
+  "exit": 0,
+  "stdout": "{\"ok\": true, \"phase\": \"postboot\", \"data\": {\"host\": \"MatteiInc03\", \"auth\": \"1562596910748139551\", \"boot_id\": \"002f364d-b8c9-4312-a1c2-2d07be3e13d8\", \"kernel\": \"5.15.0-198-generic\", \"reboot_marker\": false, \"units\": {\"nginx-rc.service\": {\"MainPID\": \"2562\", \"ActiveState\": \"active\", \"SubState\": \"running\", \"UnitFileState\": \"enabled\"}, \"php83rc-fpm.service\": {\"MainPID\": \"1131\", \"ActiveState\": \"active\", \"SubState\": \"running\", \"UnitFileState\": \"enabled\"}, \"apache2-rc.service\": {\"MainPID\": \"2381\", \"ActiveState\": \"active\", \"SubState\": \"running\", \"UnitFileState\": \"enabled\"}, \"mariadb.service\": {\"MainPID\": \"1233\", \"ActiveState\": \"active\", \"SubState\": \"running\", \"UnitFileState\": \"enabled\"}, \"cron.service\": {\"MainPID\": \"2327\", \"ActiveState\": \"active\", \"SubState\": \"running\", \"UnitFileState\": \"enabled\"}}, \"time\": 1792623119.60854, \"failed_units\": [], \"boot_critical_journal\": [\"pci 0000:0e:00.0: Failed to read data\", \"hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)\", \"snd_hda_intel 0000:0d:00.6: no codecs found!\"], \"dpkg_audit_clean\": true, \"tmp_correct\": true, \"backup_verified\": true}}\n",
+  "stderr": ""
+}

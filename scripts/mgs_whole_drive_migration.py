@@ -173,6 +173,10 @@ def accept_owner():
         if not -60<=age<=1200:raise b.ArchiveError('OWNER_PROBE_HEARTBEAT_STALE')
         hp=historical.location()/'stage.json';hs=read(hp,{})
         if not isinstance(hs,dict) or hs.get('worker_sha256') not in [stage['previous_active_worker_sha256'],stage['worker_sha256']] or c['worker_sha256'] not in [stage['previous_active_worker_sha256'],stage['worker_sha256']]:raise b.ArchiveError('OWNER_PROBE_ACTIVE_PIN_DRIFT')
+        if stage.get('corporate_grants_applied'):
+            import mgs_corporate_archive as corporate
+            setup=corporate.verify_setup(d,c,False)
+            if setup.get('status')!='corporate_setup_verified' or setup.get('root_id')!=stage.get('corporate_root_id'):raise b.ArchiveError('OWNER_CORPORATE_SETUP_REQUIRED')
         old_c=dict(c);old_hs=dict(hs)
         c.update(worker_file_id=stage['worker_file_id'],worker_sha256=stage['worker_sha256'],active_worker_source_path=stage['worker_source_path'])
         hs.update(worker_file_id=stage['worker_file_id'],worker_sha256=stage['worker_sha256'],worker_source_path=stage['worker_source_path'])
@@ -185,9 +189,44 @@ def accept_owner():
         b.atomic_json(DATA/'owner-probe-receipt.json',{'file_id':found['id'],'verified_at':b.now_iso(),'receipt':result});b.atomic_json(DATA/'owner-acceptance.json',proof);stage.update(status=proof['status'],active_sa_pin_unchanged=False);b.atomic_json(DATA/'stage.json',stage)
         return proof
 
+def resume_acceptance():
+    """Resume only the deliberately repinned, approved receipt-recovery version.
+
+    No new owner code, trigger, producer, ACL, retirement or runtime-cap change.
+    A paused/manual/stale execution is NOT accepted as healthy scheduled proof.
+    accept_owner repeats every live gate under its own existing writer lock.
+    """
+    expected='bf9801376e8b0479271c41f7608661a21ae6edba47a6c9e7d32282466f9d3108'
+    accepted={'status':'accepted','worker_sha256':expected,'production_activation_performed':False,'migration_completion_asserted':False}
+    with b.queue_lock():
+        stage=read(DATA/'stage.json',{});corp=read(DATA/'corporate-stage.json',{})
+        if not isinstance(stage,dict) or stage.get('worker_sha256')!=expected:return {'status':'not_applicable'}
+        if not isinstance(corp,dict) or corp.get('worker_sha256')!=expected or corp.get('owner_setup_verified') is not True or corp.get('owner_setup_receipt_missing') is not False:return {'status':'awaiting_corporate_setup'}
+        c=b.config_load()
+        if c['worker_sha256']==expected:
+            proof=read(DATA/'owner-acceptance.json',{})
+            if not isinstance(proof,dict) or proof.get('status')!='owner_probe_verified' or proof.get('scheduled_heartbeat',{}).get('workerSha256')!=expected:raise b.ArchiveError('WHOLE_DRIVE_ACCEPTANCE_PROOF_MISSING')
+            return accepted
+        d=b.Drive(False);found=d.one(c['control_folder_id'],'heartbeat:worker-v1')
+        if not found:return {'status':'awaiting_expected_owner_schedule'}
+        meta=d.meta(found['id']);b.require_publisher(meta,b.ACCOUNT)
+        if meta.get('trashed') is not False or meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('parents')!=[c['control_folder_id']]:raise b.ArchiveError('WHOLE_DRIVE_RESUME_HEARTBEAT_SCOPE')
+        hb=json.loads(d.raw(found['id']))
+        if not isinstance(hb,dict) or hb.get('deleteSource') is not False or not isinstance(hb.get('blocked'),list):raise b.ArchiveError('WHOLE_DRIVE_RESUME_HEARTBEAT_BINDING')
+        if hb.get('workerSha256')!=expected or hb.get('triggerUid')!='2456112746912022528' or hb.get('executionMode')!='scheduled_bulk':return {'status':'awaiting_expected_owner_schedule'}
+        age=(b.timestamp(b.now_iso())-b.timestamp(hb['executedAt'])).total_seconds()
+        if not -60<=age<=1200:return {'status':'awaiting_fresh_owner_schedule'}
+        if hb.get('status')=='runtime_budget_paused' and not hb['blocked'] and hb.get('canaryAcknowledged') is True:return {'status':'awaiting_bulk_budget_recovery'}
+        if hb.get('status')!='ok' or hb['blocked'] or hb.get('canaryAcknowledged') is not True:return {'status':'awaiting_healthy_owner_schedule'}
+    # Never nest queue locks. The existing acceptor revalidates live owner,
+    # receipt, exact source digest, restored canary, root ACL and configuration.
+    proof=accept_owner()
+    if proof.get('status')!='owner_probe_verified':raise b.ArchiveError('WHOLE_DRIVE_RESUME_ACCEPTANCE_FAILED')
+    return accepted
+
 def main():
     import argparse
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['prepare','status','publish-probe','publish-recovery','accept-owner']);args=ap.parse_args()
-    result={'prepare':prepare,'status':status,'publish-probe':publish_probe,'publish-recovery':publish_recovery,'accept-owner':accept_owner}[args.action]()
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['prepare','status','publish-probe','publish-recovery','accept-owner','resume-acceptance']);args=ap.parse_args()
+    result={'prepare':prepare,'status':status,'publish-probe':publish_probe,'publish-recovery':publish_recovery,'accept-owner':accept_owner,'resume-acceptance':resume_acceptance}[args.action]()
     print(json.dumps(result,ensure_ascii=False))
 if __name__=='__main__':main()
