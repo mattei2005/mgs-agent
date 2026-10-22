@@ -34,7 +34,8 @@
       "problem": "Preloader remains with document.readyState complete and no pending requests until pointer movement; overlay persists18s without interaction.",
       "cause_confirmed": "34 delayed Rocket script tags; after harmless pointer movement body changes to loaded/loftloader-loaded and overlay stops intercepting.",
       "caused_by_php_update": "not_proven",
-      "proposed_scope": "Reconcile preloader with delayed JavaScript and bounded timeout, no theme redesign."
+      "proposed_scope": "Reconcile preloader with delayed JavaScript and bounded timeout, no theme redesign.",
+      "repair_disposition": "intentionally_retained_owner_choice"
     },
     {
       "id": "financeadx_legacy_js",
@@ -43,7 +44,8 @@
       "problem": "Five distinct first-party JavaScript asset URLs404; browser chunk-loading and syntax errors on desktop/mobile. Home visually renders.",
       "cause_confirmed": "Legacy home loads copied Elementor JavaScript while referenced original wp-content plugin assets are absent; source assets/index.html and runtime files have2023timestamps.",
       "caused_by_php_update": "not_proven; no application files changed by the authorized PHP transaction",
-      "proposed_scope": "Repair the legacy home asset dependencies from trusted sources without blindly installing Elementor/Pro."
+      "proposed_scope": "Repair the legacy home asset dependencies from trusted sources without blindly installing Elementor/Pro.",
+      "repair_disposition": "intentionally_retained_owner_choice"
     },
     {
       "id": "topfeed_article_image",
@@ -52,7 +54,8 @@
       "problem": "One representative article requests an image filename that returns404 on desktop/mobile.",
       "cause_confirmed": "Exact requested file is absent; related same-title images exist under different scaled filenames.",
       "caused_by_php_update": "not_proven",
-      "proposed_scope": "Correct only the stored image reference after exact attachment/content verification."
+      "proposed_scope": "Correct only the stored image reference after exact attachment/content verification.",
+      "repair_disposition": "intentionally_retained_owner_choice"
     },
     {
       "id": "informegeral_footer_content",
@@ -61,7 +64,8 @@
       "problem": "Footer image URL is malformed and points through demo/staging text; page also shows no-post/widget placeholder messages.",
       "cause_confirmed": "Malformed browser currentSrc and rendered placeholder text confirmed; intended current content scope not established.",
       "caused_by_php_update": "not_proven",
-      "proposed_scope": "Repair footer asset reference; review homepage/content intent separately, no automatic editorial production."
+      "proposed_scope": "Repair footer asset reference; review homepage/content intent separately, no automatic editorial production.",
+      "repair_disposition": "intentionally_retained_owner_choice"
     }
   ],
   "other_limits": [
@@ -76,5 +80,11 @@
   "billing_credentials_or_permissions_changed": false,
   "artifact_root": "/root/.hermes/profiles/zeus/artifacts/site-audit-1562626826709241937",
   "evidence_sha256": "0a5bae9d69ea3e5ea69846105338e06f4b758d6227e8e701eeeaeee0c048c023",
-  "final_runtime_evidence": "/root/.hermes/profiles/zeus/artifacts/site-audit-1562626826709241937/final-runtime.json"
+  "final_runtime_evidence": "/root/.hermes/profiles/zeus/artifacts/site-audit-1562626826709241937/final-runtime.json",
+  "owner_disposition": {
+    "status": "intentionally_retained_owner_choice",
+    "message_id": "1562643226492543009",
+    "decision": "Leave the four frontend findings unchanged; no repair requested or authorized.",
+    "updated_at": "2026-10-22T01:47:01.670446+00:00"
+  }
 }
