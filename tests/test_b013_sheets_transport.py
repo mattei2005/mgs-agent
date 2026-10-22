@@ -54,6 +54,48 @@ class B013SheetsTransportTests(unittest.TestCase):
         self.assertEqual(result[0], 200)
         self.assertEqual(request.call_count, 2)
 
+    def test_oauth_transport_errors_retry_then_recover(self):
+        errors = [socket.timeout('timed out'), urllib.error.URLError(ConnectionResetError(104, 'reset'))]
+        for error in errors:
+            with self.subTest(error=type(error).__name__):
+                with patch.object(self.mod.GOOGLE_AUTH, 'service_account_project_id', return_value='fixture-project'):
+                    with patch.object(self.mod.GOOGLE_AUTH, 'service_account_access_token', side_effect=[error, 'fixture-token']) as request:
+                        with patch('time.sleep') as sleep:
+                            result = self.mod.google_service_account_access_token()
+                self.assertEqual(result, 'fixture-token')
+                self.assertEqual(request.call_count, 2)
+                sleep.assert_called_once_with(1)
+
+    def test_oauth_transport_exhaustion_preserves_cause(self):
+        error = urllib.error.URLError(socket.timeout('timed out'))
+        with patch.object(self.mod.GOOGLE_AUTH, 'service_account_project_id', return_value='fixture-project'):
+            with patch.object(self.mod.GOOGLE_AUTH, 'service_account_access_token', side_effect=error) as request:
+                with patch('time.sleep') as sleep:
+                    with self.assertRaisesRegex(RuntimeError, 'Google OAuth transport failed after 3 attempts') as raised:
+                        self.mod.google_service_account_access_token()
+        self.assertIs(raised.exception.__cause__, error)
+        self.assertEqual(request.call_count, 3)
+        self.assertEqual([call.args for call in sleep.call_args_list], [(1,), (2,)])
+
+    def test_oauth_http_failure_is_not_retried(self):
+        error = urllib.error.HTTPError('https://example.invalid', 400, 'Invalid grant', Message(), io.BytesIO(b'{}'))
+        with patch.object(self.mod.GOOGLE_AUTH, 'service_account_project_id', return_value='fixture-project'):
+            with patch.object(self.mod.GOOGLE_AUTH, 'service_account_access_token', side_effect=error) as request:
+                with patch('time.sleep') as sleep:
+                    with self.assertRaises(urllib.error.HTTPError):
+                        self.mod.google_service_account_access_token()
+        self.assertEqual(request.call_count, 1)
+        sleep.assert_not_called()
+
+    def test_oauth_configuration_failure_is_not_retried(self):
+        with patch.object(self.mod.GOOGLE_AUTH, 'service_account_project_id', return_value='fixture-project'):
+            with patch.object(self.mod.GOOGLE_AUTH, 'service_account_access_token', side_effect=RuntimeError('fixture-invalid-key')) as request:
+                with patch('time.sleep') as sleep:
+                    with self.assertRaisesRegex(RuntimeError, 'fixture-invalid-key'):
+                        self.mod.google_service_account_access_token()
+        self.assertEqual(request.call_count, 1)
+        sleep.assert_not_called()
+
     def test_http_403_is_not_retried(self):
         error = urllib.error.HTTPError('https://example.invalid', 403, 'Forbidden', Message(), io.BytesIO(b'{}'))
         with patch('urllib.request.urlopen', side_effect=error) as request:
