@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "CorrecaoRodolfo1562830126402641921: foco nesta continuacao e criativos ja processados, NAO backupsinfra. Copia historica ativa/semblocked;128de5860 do manifestoAMPLO nao e contagem exata processed-only. Reconciliar catalogo/linhagens↔manifesto, validar destino/hash/acessos/atalhos/consumidores; nao reprocessar. Entradaantiga temporaria; retirarfonte so apos gatesconfirmados. Nao iniciar lotehistorico_DR por esta cobranca nem desligar fluxospreviamenteaprovados. Fonte ultima secao doc1562830126402641921.",
-      "objective": "Deixar nos30TB todo acervo do Drive antigo ja processado pelo Ares, com organizacao/acessos/referencias preservados",
+      "next_step": "Rodolfo1562835794601975811 pediu resolver tudo agora e propôs retirar sem24h. Continuar migracao/validacao NAO destrutivas no mesmo writer. Congelar processed-only porIDs/catalogo e manifestos; executar ciclohistorico; auditar consumer/intake/aliases. Nao mudar24hpara0nem executar nova retirada sem confirmacao critica adicional exata. Nao apagar controles/atalhos que consumidoresatuais usam; avaliar como manter somenteUploadManual sem quebrar Ares. Sem lote_DR como substituto doobjetivo.",
+      "objective": "Drive antigo somente UPLOAD MANUAL; acervo processado pelo Ares nos30TB com automacao e retirada validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "creative_historical_copying_delivery_focus_corrected",
+      "state": "executing_scope_reconciliation_immediate_cleanup_confirmation_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T14:11:06+00:00"
+      "updated_at": "2026-10-22T14:34:06+00:00"
     },
     {
       "agent": "ares",
@@ -6513,12 +6513,12 @@
     {
       "agent": "ares",
       "id": "shein-1562827628191416351",
-      "next_step": "Aguardar Rodolfo/administrador providenciar delegação ADVERTISE+ANALYZE da Page exata ao System User corporativo; sem ownership/credencial. Revalidar acesso e retomar mesmo request pela rota central, preservando relógio/SLA/QA e horário.",
-      "objective": "Duplicar uma vez C001 de Mavroa-US-SHEIN-ES-03-G003; USD30/dia CBO; 23/10/2026 00h America/New_York.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562827628191416351/preflight-blocker.json",
-      "state": "preflight autorizado sem write meta. conta viva saudável usd/et; fonte120250312738080753 com2 anúncios. profile local de referência reconciliado. get corporativo page885885747952529 retorna400/code10; assigned_users administrativo200 completo confirma ausência do system user122095869861482193. sem autorização canônica de reparo desta page.",
+      "next_step": "Sem write pendente. Futuros pedidos desta conta/Page usam autorização canônica, com novo pedido de campanha e acesso/QA/readback live; não pedir novamente autorização de delegação neste recorte.",
+      "objective": "Duplicar uma vez C001 Mavroa03 G003; USD30/dia; início23/10/2026 00h Nova York.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1562827628191416351/completion-receipt.json",
+      "state": "concluído complete_future_active, c002 id120250418633580753, 1 conjunto e2 anúncios active com qa exato. usd30/dia cbo; cost_cap usd0.75 herdado. início23/10 00h et preservado. page ofertas selectas delegada somente advertise/analyze e validada com identidade corporativa; autorização durável de rodolfo registrada no contrato. mesmo request/ids, sem replay; review de retomada1562834899080052868; relógio/sla original preservado, alvo e2e não cumprido. posts novos; meta omitiu flags opcionais age/gender.",
       "thread_id": "1558127210966032385",
-      "updated_at": "2026-10-22T14:03:00+00:00"
+      "updated_at": "2026-10-22T14:34:15+00:00"
     },
     {
       "agent": "zeus",
@@ -7112,5 +7112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T14:11:06+00:00"
+  "updated_at": "2026-10-22T14:34:15+00:00"
 }
