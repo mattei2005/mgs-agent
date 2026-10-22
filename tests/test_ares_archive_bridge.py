@@ -11,9 +11,10 @@ MODULE=ROOT/'scripts/ares_archive_bridge.py'
 class ArchiveContractTests(unittest.TestCase):
     def setUp(self):
         self.assertTrue(MODULE.exists(), 'copy-only queue bridge missing')
-        spec=importlib.util.spec_from_file_location('ares_archive_bridge',MODULE)
-        assert spec is not None and spec.loader is not None
-        self.api=importlib.util.module_from_spec(spec);sys.modules[spec.name]=self.api;spec.loader.exec_module(self.api)
+        # Reuse canonical module identity: retirement derives ArchiveError from it.
+        # Replacing sys.modules per case creates incompatible exception classes.
+        sys.path.insert(0,str(ROOT/'scripts'))
+        self.api=importlib.import_module('ares_archive_bridge')
         self.cfg={'account':'mgsdigitalcorp@gmail.com','source_drive_id':'0AEwt4Ye690ocUk9PVA','source_root_id':'1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa','archive_root_id':'1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J','delete_source':False,'queue_enabled':False,'effective_after':'2026-10-20T14:00:00+00:00'}
         self.asset={'role':'clean','sourceId':'1WDP1Mgwy4jTAowTDNy_k9RcuSieKOg9N','sourceParentId':'1iGO8km_WVwbIppLotf1h1kZ7W0UKUxz1','name':'unit.mp4','mimeType':'video/mp4','size':'5375929','md5':'59065739912275ee5995bfee8d5ca9c7','sha256':'11e123e5b495e5ed1a2ae5099b1cef94b6255a4c5f8302859b01a8b291793027','version':'12','relativeParent':[],'sourceCreatedTime':'2026-10-20T09:00:00Z'}
     def job(self):return self.api.make_request(self.cfg,[self.asset],kind='canary',lineage_id='PILOT-ONLY')
