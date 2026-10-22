@@ -64,4 +64,25 @@ class BackupAutomationTests(unittest.TestCase):
  def test_heartbeat_without_timestamp_is_not_ready(self):self.assertFalse(self.a.owner_ready({}, {},self.p))
  def test_same_worker_manual_heartbeat_is_not_scheduled_proof(self):
   hb={'executedAt':self.a.b.now_iso(),'workerSha256':'e'*64,'triggerUid':None,'status':'ok','blocked':[],'deleteSource':False,'canaryAcknowledged':True};self.assertFalse(self.a.owner_ready(hb,{'worker_sha256':'e'*64,'plan_sha256':'f'*64},self.p))
+ def scheduled_fixture(self):
+  self.p.update(pilotId='pilot123',pilotSha256='b'*64)
+  s={'worker_sha256':'e'*64,'plan_sha256':'f'*64}
+  hb={'executedAt':self.a.b.now_iso(),'workerSha256':s['worker_sha256'],'triggerUid':'2456112746912022528','status':'ok','blocked':[],'deleteSource':False,'canaryAcknowledged':True,'backupArchive':{'planSha256':s['plan_sha256'],'archiveTrashEnabled':False,'probe':{'status':'verified','pilotId':self.p['pilotId'],'pilotSha256':self.p['pilotSha256'],'ownerCanTrashPilot':True}}}
+  return hb,s
+ def test_null_probe_is_pending_not_exception(self):
+  hb,s=self.scheduled_fixture();hb['backupArchive']['probe']=None;self.assertFalse(self.a.owner_ready(hb,s,self.p))
+ def test_null_backup_section_is_pending_not_exception(self):
+  hb,s=self.scheduled_fixture();hb['backupArchive']=None;self.assertFalse(self.a.owner_ready(hb,s,self.p))
+ def test_non_object_probe_is_pending_not_exception(self):
+  hb,s=self.scheduled_fixture();hb['backupArchive']['probe']=[];self.assertFalse(self.a.owner_ready(hb,s,self.p))
+ def test_missing_probe_is_pending_not_exception(self):
+  hb,s=self.scheduled_fixture();del hb['backupArchive']['probe'];self.assertFalse(self.a.owner_ready(hb,s,self.p))
+ def test_complete_native_scheduled_probe_remains_ready(self):
+  hb,s=self.scheduled_fixture();self.assertTrue(self.a.owner_ready(hb,s,self.p))
+ def test_null_probe_cannot_promote_stage(self):
+  from unittest.mock import Mock,patch
+  import contextlib
+  hb,s=self.scheduled_fixture();hb['backupArchive']['probe']=None
+  with patch.object(self.a,'load',return_value=(self.p,s)),patch.object(self.a,'heartbeat',return_value=hb),patch.object(self.a.b,'Drive',return_value=Mock()),patch.object(self.a.b,'config_load',return_value={}),patch.object(self.a.b,'queue_lock',contextlib.nullcontext),patch.object(self.a.b,'atomic_json') as write,patch.object(self.a.m,'accept_owner') as accept:
+   self.assertEqual(self.a.resume_acceptance()['status'],'awaiting_healthy_new_owner_schedule');write.assert_not_called();accept.assert_not_called()
 if __name__=='__main__':unittest.main()

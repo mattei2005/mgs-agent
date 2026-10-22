@@ -246,6 +246,12 @@ Validação executada: 42 testes Python (sete novos +35 regressões), 12 VM do t
 
 Ação owner estritamente necessária: no MESMO Code.gs trocar somente ID/hash do loader pelos novos valores desta seção; salvar e executar apenas mgsArquivoTeste para verificar o pin. Sem alterar manifesto, agendamento, Implantar ou consentimentos. O manual continua probe-only, não move/apaga. Depois validar heartbeat novo com limitMs5400000 e dois scheduled saudáveis pelo MESMO monitor83b148017b4d; então o aceite/ativação future-only já existente pode prosseguir. Não reutilizar screenshots do digest anterior como prova do novo teto. Migração integral e retenção destrutiva continuam abertas.
 
+### Owner confirmou teto90min; validador null-probe corrigido — 1562819463680757831
+
+Rodolfo enviou a execução concluída das09:24:41Eastern. Confirmação independente pela SA: heartbeat nativo owner executedAt2026-10-22T13:24:37.696Z, digest23b3953232921ac91d5efeeed2cecda70043c7563b6c2513e14f427c65b2e948, manual_probe_only/triggerUidnull, statusok, ACKtrue/blocked[], bulk.limitMs5400000/usedMs3413713/pausedfalse e backupArchive.probe.statusverified sem moved/delete. Este registro SUPERA o pedido de novo repin/run da seção acima: o proprietário já executou a versão correta. Não pedir outro teste manual para obter prova agendada. Aceite SA/future-only permanece fechado até dois scheduled saudáveis com o mesmo trigger e probe completo.
+
+No mesmo fluxo de recovery foi reproduzido o AttributeError de owner_ready com heartbeat scheduledok e probe:null. Corrigido somente o consumidor Python: backupArchive/probe ausente/null/não-objeto retorna pendente, sem aceitar/promover nem persistir amostras falsas. Seis testes novos cobrem formas nulas/inválidas, sucesso completo e zero write/aceite sem probe. Suíte Python48PASS mais VMteto12PASS, com SHA owner90min inalterado. Não exige outro repin, credencial, timer, alteração de limite ou arquivo Google. Learning em skill Drive/backup-owner-automation e mirror. Pendência real continua a observação dos agendamentos, não ação do Rodolfo. Já confirmado nativamente o PRIMEIRO scheduled saudável às2026-10-22T13:30:01.988Z (09:30Eastern), trigger2456112746912022528, mesmo digest novo, statusok/blocked[]/ACKtrue, probeverified, teto5400000 e pausedfalse. Primeira amostra gravada pelo acceptor real; stage e checkpoints agora awaiting_second_scheduled_backup_heartbeat/owner_repin_confirmedtrue, sem pins promovidos/ativação. Aguardando segunda amostra distinta pelo monitor existente; nenhuma nova ação owner solicitada.
+
 
 
 

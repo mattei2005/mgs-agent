@@ -146,7 +146,10 @@ def heartbeat(d,c):
 def owner_ready(hb,s,p):
  if not hb or not isinstance(hb.get('executedAt'),str):return False
  age=(b.timestamp(b.now_iso())-b.timestamp(hb.get('executedAt'))).total_seconds()
- bk=hb.get('backupArchive',{});probe=bk.get('probe',{})
+ bk=hb.get('backupArchive')
+ if not isinstance(bk,dict):return False
+ probe=bk.get('probe')
+ if not isinstance(probe,dict):return False
  return hb.get('workerSha256')==s.get('worker_sha256') and hb.get('triggerUid')=='2456112746912022528' and hb.get('status')=='ok' and not hb.get('blocked') and hb.get('deleteSource') is False and hb.get('canaryAcknowledged') is True and -60<=age<=1200 and bk.get('planSha256')==s['plan_sha256'] and bk.get('archiveTrashEnabled') is False and probe.get('status')=='verified' and probe.get('pilotId')==p['pilotId'] and probe.get('pilotSha256')==p['pilotSha256'] and probe.get('ownerCanTrashPilot') is True
 
 def resume_acceptance():

@@ -59,7 +59,13 @@ Supersede a inferência `br-cc-br` do baseline Zeus e encerra a pendência BR do
 
 Rodolfo reafirmou `autocreditadx.com` → `us-car-en` na revisão de01–09/09. Manter a versão Zeus: gestor `g002-d` e receita original GAM preservados. O original possui uma linha em07/09, placement `pl_digital-trust_autocreditadx_us`, UTMs `-`, receita CAD0.022122988410875555; o país US vem do original, CAR da confirmação empresarial. Claude usou `us-game-en`, classificação rejeitada nesta revisão. Não é mudança de valor nem de gestor. Baselines intactos; incluir a confirmação no Excel final após todos os domínios. Próximo domínio: cliquet.com. Esta confirmação reafirma a regra anterior1547441127697678418, sem nova regra concorrente.
 
-## Decisão ativa Yolokfx — 1547678046553636905
+## Decisão vigente de fechamento diário do mês inteiro — 1562816076503449702
+
+Rodolfo1562815034445537411 escolheu os totais dos prints AdGroup para os cinco gestores e o complemento do fechamento para MGS;1562815747917352963 exigiu os valores reais por dia;1562816076503449702 autorizou aplicar. Esta decisão supersede a regra1547678046553636905 limitada01–09 para o fechamento de setembro inteiro: G001/G003/G004/G005/G006 seguem REVENUE/CAD diário por conta na SB; G002-s recebe total diário do fechamento GAM menos esses cinco. Manter US/us-shein-en/-s. Alvos CAD:Ícaro5385.56;Isliago2050.73;Joe15814.29;Kelly41950.93;Nicolas8621.80;MGS58373.87;total132197.18. Não extrapolar paraoutubro ou importador global.
+
+Aplicado evalidado emprodução1682→1683:125correções diárias,180controles dia/gestor,30totais diários preservados;consultaSBmensal=30diárias/2769PKs;cinco blocosCAD somam manualmente ao total mensal,DOMdesktop/mobilevalidado. Ledgerintacto. Fonte/evidência canônica:`reports/finance-yolo-daily-close-1562816076503449702.md`;checkpointZEUS-FINANCE-YOLO-1562816076503449702.
+
+## Histórico supersedido — decisão Yolokfx 01–09, 1547678046553636905
 
 Rodolfo confirmou, inclusive por follow-up «exato»: para yolokfx.com de 01–09/09/2026, manter o total original GAM de cada dia/moeda; atribuir a G001, G003, G004, G005 e G006 a receita bruta REVENUE da dashboard SB AdGroup, pelo gestor de ACCOUNT_NAME; atribuir a `g002-s` o total GAM do dia menos a soma dos outros cinco gestores. Preservar `-s` e `us-shein-en`. Calcular por dia, não dividir igualmente o resíduo do período. Não somar de novo G002 ou não identificados da SB: estão absorvidos pelo complemento. Se houver resíduo negativo ou escopo/moeda divergente, bloquear para revisão, sem rateio silencioso.
 
