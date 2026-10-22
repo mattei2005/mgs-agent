@@ -34,6 +34,12 @@
 - Preserve partial progress before a long multi-window request. A browser-harness Runtime.evaluate wait can expire before the browser promise finishes: store per-window results and completion/error state in the page, read the bounded progress back, append it to a local evidence file and resume only missing domain/date keys. Consume every pending read before finishing. Require the complete deduplicated window count and gap-free month coverage.
 - Compare NETWORK daily amounts with the closing Sheet at the Sheet's displayed precision. A sum of rounded daily values can differ from a sum of raw network values or rounded campaign/window aggregates; preserve all three bases instead of replacing the owner-designated closing total. A Direct/BOT classification does not itself establish operational country/vertical, and a historical template with several countries does not authorize choosing one by guess.
 
+## Posting an owner-confirmed monthly M2 source
+
+After the owner resolves operational country/vertical and manager/strategy, bind that decision to the exact month and domains. Use the designated closing Sheet/NETWORK daily amounts—not the rounded Profit Attribution subtotal—and create deterministic native revenue identities only for positive daily amounts, retaining every zero-day control separately. Preserve original domain, source row/hash and assignment authority; distinguish the owner's concentration rule from tracking-derived geography.
+
+Reuse the existing M2 catalog, monthly invalid/revshare/tax/FX settings and manager identity mapping. Do not create duplicate sites, reactivate an inactive residual-revenue site for expense allocation, seed fake spending, or turn this posting into a payment. Freeze/rehearse/restore-test/apply/read back through the bounded native import workflow in `references/gam-revenue-dashboard-import.md`. Verify all source domain/day controls, no unintended non-target-country revenue, the company's profit bridge and the real manager renderer's daily/monthly gross columns; a correct company total alone does not prove manager attribution. Keep unrelated facts, prior closing phases, other months and the payment ledger unchanged.
+
 ## August 2026 validated read-only observation
 
 - Dashboard production, cutoff 31/08:
