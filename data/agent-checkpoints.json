@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "CamadaBACKUPS futuros agora ativa e primeiroreal1.02GB verificado por stream+ACK; nativo90min sempausa; SA/historicalpins23b395aceitos. Sem mais cliques owner. Continuar restante do escopo integral original: acervo criativo/historico, consumidores corporativos e politica de retencao; nao declarar100nem liberar retirada/historico sem gatesproprios. Mesmofluxo/lock/monitor83b148017b4d; exclusoes de backups desativadas. Fonte doc ultima secao1562821632542900347 e live-backup-validation-1562821632542900347.json.",
-      "objective": "Migrar todo acervo aos30TB preservando IDs/acesso/consumidores e gates de limpeza",
+      "next_step": "CorrecaoRodolfo1562830126402641921: foco nesta continuacao e criativos ja processados, NAO backupsinfra. Copia historica ativa/semblocked;128de5860 do manifestoAMPLO nao e contagem exata processed-only. Reconciliar catalogo/linhagens↔manifesto, validar destino/hash/acessos/atalhos/consumidores; nao reprocessar. Entradaantiga temporaria; retirarfonte so apos gatesconfirmados. Nao iniciar lotehistorico_DR por esta cobranca nem desligar fluxospreviamenteaprovados. Fonte ultima secao doc1562830126402641921.",
+      "objective": "Deixar nos30TB todo acervo do Drive antigo ja processado pelo Ares, com organizacao/acessos/referencias preservados",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "backup_archive_automatic_verified_full_migration_pending",
+      "state": "creative_historical_copying_delivery_focus_corrected",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T13:43:55+00:00"
+      "updated_at": "2026-10-22T14:11:06+00:00"
     },
     {
       "agent": "ares",
@@ -1089,6 +1089,16 @@
       "state": "waiting_rodolfo_acceptance: landings46/46 eavisosgestorget concluidos. limpezahistorica:254ares+77zeus mensagens removidas;138eventos type1 bloqueados porapi50021. parentares verificou36threads e6canais preservados,77ids ausentes e138type1atuais. novo pedidorodolfo foraescopo mantido. zeus solicitou aceite; nao concluirautomaticamente, nao chamar threadsvazias.",
       "thread_id": "1559932317861158993",
       "updated_at": "2026-10-15T21:14:06+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-G004-REPORT-1562828736750026865",
+      "next_step": "Fontes novas22/10 10:04EDT;42campanhas com entrega hoje, todas ACTIVE no readback10:06EDT;histórico7d e RPS DOM13páginas;9partes exatas validadas. Entregar report integral pela resposta nativa, sem duplicar por API e sem writes Meta.",
+      "objective": "Relatório on-demand atual Meta × Smart Bidding Conta04 G004",
+      "source": "/root/mgs-agent/data/ares/reporting/on-demand-g004-1562828736750026865/781612907182683/receipt.json",
+      "state": "validated_ready_native_delivery",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-10-22T14:06:44+00:00"
     },
     {
       "agent": "ares",
@@ -3463,12 +3473,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Nao reexecutar1-6 nem restaurar antiga excecaoYolo01-09. Yolo1683validado; sem pagamento/liqFX ou declaracao de resolucaoAV sem fonte",
-      "objective": "Conferencia setembro: pontos1-6 concluidos; Yolo posterior fechamento diario AdGroup autorizado",
-      "source": "reports/finance-yolo-daily-close-1562816076503449702.md;reports/finance-september-attribution-complete-1562684657601089557.md",
-      "state": "points1_6_complete_yolo_full_month_daily_supersession_applied",
+      "next_step": "Nenhuma pendencia nesta conferencia. Nao reexecutar ajustes; cambio definitivo, recebimentos e pagamentos sao etapas separadas sem nova autorizacao neste fechamento",
+      "objective": "Conferencia setembro de receitas e gastos encerrada: pontos1-6 validados e ActiveView sem faturamento confirmado",
+      "source": "reports/finance-september-close-av-zero-1562829014609961071.md;reports/finance-yolo-daily-close-1562816076503449702.md",
+      "state": "completed_validated_points1_6_av_no_revenue_owner_confirmed",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-22T13:31:51+00:00"
+      "updated_at": "2026-10-22T14:05:16+00:00"
     },
     {
       "agent": "zeus",
@@ -7102,5 +7112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T14:03:00+00:00"
+  "updated_at": "2026-10-22T14:11:06+00:00"
 }

@@ -262,6 +262,12 @@ Amostras scheduled retidas13:34:29.654Z e13:40:08.841Z com o mesmo trigger/hash,
 
 Evidência canônica detalhada: `live-backup-validation-1562821632542900347.json` e `live-backup-observations-1562821632542900347.json`. Esta seção SUPERA os estados aguardando segunda execução/ativação/primeiro backup real. Rodolfo não precisa clicar Run nem mover novos backups manualmente. Não declara migração integral completa, não libera lote histórico de backups e não ativa retenção destrutiva: arquivo nos30TB e validação futura estão automáticos nesta lane; descarte permanece desativado e retenção somente em preview, com confirmação crítica separada.
 
+## Foco reafirmado: acervo já processado pelo Ares — 1562830126402641921
+
+Rodolfo corrigiu a comunicação de Zeus: a cobrança atual é deixar no Drive30TB TODO o conteúdo do Drive antigo já processado pelo Ares. Os backups citados por Zeus são arquivos técnicos de recuperação da infraestrutura em _DISASTER_RECOVERY, não os criativos tratados pelo Ares; foram uma frente distinta e não podem substituir o objetivo criativo nem ser apresentados como sua pendência central. Esta continuação deve focar o acervo processado, preservando organização, integridade, acessos e referências/atalhos do catálogo; não reprocessar criativos para migrar armazenamento. Destino permanente dos processados:30TB; entrada no Drive antigo continua temporária conforme contrato aprovado, com retirada apenas após gates de validação e autorização aplicáveis.
+
+A migração histórica criativa já está copy_enabledtrue/statuscopying, bloqueios vazios na consulta14:09:58Z; acervo histórico amplo tinha128 mappings verificados de5860 arquivos. Esses números incluem o manifesto histórico congelado e NÃO provam uma contagem exata do subconjunto já processado. Reconciliar catálogo Ares/linhagens e manifesto antes de reportar o progresso desse subconjunto. Não iniciar lote histórico de backups como resposta a esta correção. Não desligar silenciosamente automações já aprovadas nem interpretar a clarificação como autorização para excluir fontes sem os gates. Fechamento deve comprovar que os criativos processados são consumidos a partir do destino30TB, não apenas que o transporte/backend está saudável.
+
 
 
 

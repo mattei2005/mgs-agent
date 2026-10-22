@@ -90,6 +90,15 @@ Quando a imagem precisa conter o logo oficial do site:
 
 Conforme revisão de Raquel `discord:1560295338257023118#1562273124030873610`, compare as imagens finais lado a lado com os temas antes de liberar o lote. Cada imagem deve ajudar a comunicar a intenção específica do artigo. Planeje conceito, composição, enquadramento, elementos, ambiente e ação próprios; não aceite a mesma composição apenas com outra pessoa, carro, ângulo ou cenário. Registre o motivo de preservar ou substituir cada asset. Não troque imagem correta para gerar diferença artificial. Faça QA visual das substitutas e confirme no resultado público a imagem interna e destacada efetivamente renderizadas.
 
+### Gate de especificidade reforçado pela revisão humana
+
+Fonte: Raquel, `discord:1560295338257023118#1562828122762649781`.
+
+- Defina o conceito pela intenção do artigo, não por um inventário recorrente de objetos. Franquia de seguro pede contexto de sinistro/análise de cobertura; combustível pede abastecimento/consumo; manutenção pede situação de oficina. Repetir compactos cinzas/prateados, chaves, papéis, envelopes e mesas com pequenas variações não comprova diversidade.
+- Para jogos identificados, exija leitura visual do universo digital pertinente: maquete de prédios, peças de madeira/tabuleiro e cabana realista não substituem imagens adequadas de Roblox, Brawl Stars e Minecraft. Não fabrique screenshot, interface ou identidade do jogo; use fonte legítima e verificável ou cena editorial humanizada que mostre o contexto real sem afirmar que tela genérica comprova o jogo.
+- Prefira pessoas em ação e situações naturais quando compatíveis com o tema, sem impor presença humana artificial em todas as imagens. Varie ação, ambiente, perspectiva, enquadramento, elementos e composição; evite metáforas abstratas e cenas intercambiáveis.
+- Compare diversidade ENTRE artigos; neste lote SEO preserve a destacada igual à primeira imagem interna do próprio artigo e a posição aprovada. Substitua só assets realmente inadequados e reinspecione cada final antes do upload.
+
 ## Comparação de alternativas geradas
 
 Ao comparar duas imagens, classifique separadamente:

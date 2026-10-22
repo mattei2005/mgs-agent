@@ -1,0 +1,168 @@
+## SHEIN · Yolokfx-US-SHEIN-EN-04-G004
+**22/10/2026 · até 10:04 EDT · USD**
+**⏱️ ATRASO GAM/SB: 2h 04min**
+Financeiro: 22/10 10:04 EDT. Bid: Meta 22/10 10:04 EDT.
+B.U.%: gasto do corte financeiro ÷ orçamento diário vigente, consultado na Meta em 22/10 10:06 EDT.
+RPS: coluna da dash SB, consultada em 22/10 10:05 EDT.
+Status dos blocos: Meta 22/10 10:06 EDT.
+Blocos por status configurado: ativas primeiro, pausadas separadas; demais estados sem mistura. Ordenação dentro de cada bloco.
+Gasto **521,25** · Rev **732,03** · Saldo **+210,78** · ROI **40,44%** · ROI E. **86,15%**.
+Padrão salvo nesta conta: ROI E. do maior para o menor; sem base ao final.
+Histórico de 7 dias: número da campanha em ordem crescente.
+
+**SHEIN — principal · Campanhas ativas (42) · 1/4**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 20/10  | 189 CC CP186 v3 | Men's Hair S | 1373,33 | 0,85 |  2,58  |  1,71%  |   7,41   |  +4,83  | 14,29%  | 187,21%  | 468,22%  | 1,53x
+🟢🟢 | 19/10  | 183 CC CP173 v2 | Triple Lapto | 1374,81 | 0,75 | 11,83  |  7,83%  |  33,41   | +21,58  | 88,71%  | 182,42%  | 380,05%  | 2,01x
+🟢🟢 | 10/10  | 129 MV CP106 v2 | Go-Kart      | 1182,63 |  —   |  8,64  | 19,20%  |  20,23   | +11,59  | 82,05%  | 134,14%  | 197,22%  | 2,03x
+🟢🟢 | 19/10  | 184 CC CP173 v2 | Triple Lapto | 1017,81 | 0,80 | 10,58  |  7,01%  |  29,32   | +18,74  | 97,62%  | 177,13%  | 192,16%  | 2,52x
+🟢🟢 | 17/10  | 171 CC CP129 v2 | Go-Kart      | 1253,33 | 0,95 |  3,14  |  4,19%  |   6,77   |  +3,63  | 80,95%  | 115,61%  | 183,12%  | 1,79x
+🟢🟢 | 13/10  |    146 CC v3    | Retro Vinyl  | 1177,81 | 0,85 | 18,30  |  9,15%  |  33,92   | +15,62  | 79,66%  |  85,36%  | 163,99%  | 1,44x
+🟢🟢 | 17/10  |    172 MV v2    | Dual Laptop  | 801,54  |  —   | 20,09  | 26,79%  |  37,51   | +17,42  | 95,90%  |  86,71%  | 147,19%  | 2,01x
+```
+
+**SHEIN — principal · Campanhas ativas (42) · 2/4**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 05/10  |    86 MV v3     | Robotic Pool | 838,24  |  —   |  6,87  | 22,90%  |  12,83   |  +5,96  | 96,88%  |  86,75%  | 145,41%  | 1,80x
+🟢🟢 | 13/10  |    147 CC v3    | Retro Vinyl  | 818,89  | 0,85 |  7,76  |  5,17%  |  13,26   |  +5,50  | 92,86%  |  70,88%  | 131,19%  | 1,42x
+🟢🟢 | 21/10  |    195 MV v3    | mini makeup  | 1604,17 |  —   | 12,15  | 40,50%  |  17,32   |  +5,17  | 95,45%  |  42,55%  | 120,25%  | 0,61x
+🟢🟢 | 10/10  | 130 MV CP106 v2 | Go-Kart      | 973,48  |  —   | 12,71  | 21,18%  |  20,15   |  +7,44  | 98,25%  |  58,54%  | 113,85%  | 1,46x
+🟢🟢 | 06/10  |    88 CC v3     | gamecontroll | 621,46  | 1,00 | 10,77  |  8,83%  |  22,93   | +12,16  | 98,63%  | 112,91%  | 112,91%  | 1,63x
+🟢🟢 | 19/10  | 180 CC CP54 v3  | watch        | 727,21  | 0,80 | 23,42  | 15,61%  |  39,92   | +16,50  | 99,16%  |  70,45%  | 112,00%  | 1,85x
+🟢🟢 | 10/10  |    110 MV v3    | Custom Varsi | 909,06  |  —   | 17,79  | 22,24%  |  26,18   |  +8,39  | 87,93%  |  47,16%  | 108,32%  | 1,77x
+🟢🟢 | 17/10  |    173 MV v2    | Triple Lapto | 715,60  |  —   | 21,19  | 30,27%  |  32,20   | +11,01  | 94,25%  |  51,96%  |  90,18%  | 1,48x
+🟢🟢 | 08/10  |    105 CC v3    | Retro Handhe | 1433,33 | 1,00 |  3,31  |  4,73%  |   3,87   |  +0,56  | 100,00% |  16,92%  |  86,40%  | 1,45x
+🟢🟢 | 11/10  | 136 MV CP110 v3 | Custom Varsi | 955,78  |  —   | 40,32  | 26,88%  |  55,06   | +14,74  | 99,32%  |  36,56%  |  80,43%  | 1,25x
+🟢🟢 | 11/10  | 139 CC CP110 v3 | Custom Varsi | 900,83  | 1,00 | 20,12  | 13,41%  |  29,18   |  +9,06  | 96,25%  |  45,03%  |  76,34%  | 1,04x
+🟢🟢 | 11/10  | 137 MV CP110 v3 | Custom Varsi | 884,19  |  —   | 26,67  | 26,67%  |  34,22   |  +7,55  | 93,75%  |  28,31%  |  69,63%  | 1,52x
+```
+
+**SHEIN — principal · Campanhas ativas (42) · 3/4**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟢 | 09/10  |    106 MV v2    | Go-Kart      | 977,50  |  —   |  8,96  | 22,40%  |  10,56   |  +1,60  | 88,46%  |  17,86%  |  66,74%  | 1,56x
+🟢🟢 | 29/09  |    46 MV v3     | perfume samp | 624,35  |  —   | 10,39  | 20,78%  |  12,92   |  +2,53  | 94,74%  |  24,35%  |  54,76%  | 1,17x
+🔴🟢 | 01/10  |    58 MV v3     | Massage Snea | 476,67  |  —   |  7,04  | 23,47%  |   6,43   |  -0,61  | 89,47%  |  -8,66%  |  53,69%  | 1,27x
+🟢🟢 | 29/09  |    45 MV v3     | perfume samp | 565,00  |  —   | 11,06  | 18,43%  |  11,19   |  +0,13  | 90,63%  |  1,18%   |  53,62%  | 0,75x
+🟢🟢 | 30/09  |    54 MV v3     | watch        | 548,50  |  —   |  6,87  | 17,18%  |   9,87   |  +3,00  | 100,00% |  43,67%  |  51,53%  | 1,78x
+🟢🟢 | 29/09  |    44 MV v3     | perfume samp | 812,27  |  —   | 12,33  | 20,55%  |  16,08   |  +3,75  | 95,74%  |  30,41%  |  51,26%  | 1,13x
+🟢🟢 | 18/10  |    175 MV v3    | watch        | 599,17  |  —   |  5,61  | 14,03%  |   6,47   |  +0,86  | 91,30%  |  15,33%  |  49,55%  | 1,43x
+🟢🟢 | 09/10  |    109 CC v3    | CLOTHES      | 1019,66 | 1,00 | 46,82  | 31,21%  |  53,22   |  +6,40  | 98,73%  |  13,67%  |  47,89%  | 1,24x
+🟢🟢 | 19/10  |    186 MV v3    | Men's Hair S | 819,23  |  —   |  7,14  | 18,31%  |   9,59   |  +2,45  | 100,00% |  34,31%  |  46,50%  | 1,99x
+🟢🟢 | 02/10  |    64 CC v3     | Portable Sat | 566,61  | 1,00 | 28,95  | 19,30%  |  31,62   |  +2,67  | 98,90%  |  9,22%   |  46,32%  | 1,02x
+🟢🟡 | 13/10  | 153 CC CP139 v3 | Custom Varsi | 915,13  | 1,00 | 28,30  | 14,15%  |  32,12   |  +3,82  | 98,82%  |  13,50%  |  38,83%  | 1,24x
+🟢🟡 | 02/10  |    71 CC v3     | perfume samp | 312,27  | 0,80 |  4,69  |  6,70%  |   6,18   |  +1,49  | 97,30%  |  31,77%  |  36,67%  | 0,34x
+```
+
+**SHEIN — principal · Campanhas ativas (42) · 4/4**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+🟢🟡 | 19/10  | 185 CC CP173 v2 | Triple Lapto | 353,33  | 0,70 |  0,72  |  0,48%  |   0,95   |  +0,23  | 100,00% |  31,94%  |  31,94%  | 2,58x
+🟢🟡 | 29/09  |    47 MV v3     | perfume samp | 617,33  |  —   |  8,21  | 20,53%  |   8,33   |  +0,12  | 96,30%  |  1,46%   |  30,21%  | 1,08x
+🔴🟡 | 30/09  |    52 MV v3     | gamecontroll | 535,36  |  —   | 18,70  | 31,17%  |  13,49   |  -5,21  | 84,21%  | -27,86%  |  27,49%  | 1,24x
+🔴🟡 | 30/09  |    56 MV v3     | watch        | 588,13  |  —   |  8,56  | 21,40%  |   8,47   |  -0,09  | 100,00% |  -1,05%  |  26,52%  | 0,87x
+🔴🟡 | 20/10  |    192 MV v3    | Nails printi | 592,50  |  —   | 11,17  | 31,91%  |   8,53   |  -2,64  | 94,74%  | -23,63%  |  22,29%  | 0,94x
+🔴🔴 | 07/10  |    92 MV v3     | CLOTHES      | 561,11  |  —   |  5,60  | 18,67%  |   4,54   |  -1,06  | 100,00% | -18,93%  |  8,93%   | 1,82x
+🔴🔴 | 21/10  |    194 MV v3    | wigs II      | 1690,00 |  —   |  4,85  | 16,17%  |   4,56   |  -0,29  | 92,86%  |  -5,98%  |  -5,77%  | 0,68x
+🔴🔴 | 20/10  | 191 CC CP186 v3 | Men's Hair S | 390,00  | 0,70 |  1,19  |  0,79%  |   0,35   |  -0,84  | 100,00% | -70,59%  | -12,61%  | 1,12x
+🔴🔴 | 20/10  | 190 CC CP186 v3 | Men's Hair S | 410,00  | 0,75 |  0,44  |  0,29%  |   0,37   |  -0,07  | 100,00% | -15,91%  | -18,18%  | 1,48x
+🔴🔴 | 21/10  |    193 MV v3    | wigs         | 280,00  |  —   |  5,39  | 17,97%  |   0,50   |  -4,89  |  0,00%  | -90,72%  | -81,26%  | 0,44x
+🔴🔴 | 13/10  | 155 CC CP139 v3 | Custom Varsi |  0,00   | 1,00 |  0,02  |  0,02%  |   0,00   |  -0,02  |   n/d   | -100,00% | -100,00% |  n/d 
+```
+
+**SHEIN — principal · Campanhas pausadas (0) · 1/1**
+```text
+R/E  | Início |       Nº        | Produto      |   RPS   | Bid  | Gasto  |  B.U.%  |   Rev    |  Saldo  | Health  |   ROI    |  ROI E.  | ROAS 
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (42) · 1/3**
+```text
+Início |       Nº        | Dia |  16/10  | 17/10  | 18/10  |  19/10  |  20/10  |  21/10  |  22/10*  |    Média 7d   
+29/09  |    44 MV v3     | D24 | +30,8%  | +47,2% | +34,2% | +10,9%  | +34,3%  | +67,4%  | +30,4%*  |    +36,5%*    
+29/09  |    45 MV v3     | D24 |  +8,7%  | +6,5%  | +40,0% |  +5,2%  | +14,5%  |  +9,8%  |  +1,2%*  |    +12,3%*    
+29/09  |    46 MV v3     | D24 | +10,5%  | +8,3%  | +22,1% | +18,5%  | +56,1%  | +23,3%  | +24,4%*  |    +23,3%*    
+29/09  |    47 MV v3     | D24 | +31,1%  | +25,5% | +38,2% | +13,7%  |  -9,3%  |  +9,9%  |  +1,5%*  |    +15,8%*    
+30/09  |    52 MV v3     | D23 |  +9,4%  | -21,8% | +39,2% | +38,6%  | +28,2%  | +39,7%  | -27,9%*  |    +15,1%*    
+30/09  |    54 MV v3     | D23 | +25,6%  | +69,8% | +27,0% | +59,3%  | +25,5%  | +60,6%  | +43,7%*  |    +44,5%*    
+30/09  |    56 MV v3     | D23 | +41,5%  | +26,8% | +0,3%  | +21,1%  | +18,1%  | +38,9%  |  -1,1%*  |    +20,8%*    
+01/10  |    58 MV v3     | D22 | -11,3%  | -8,8%  | +31,3% | +30,0%  | +84,2%  | +62,9%  |  -8,7%*  |    +25,6%*    
+02/10  |    64 CC v3     | D21 |  -0,7%  | +15,1% | -23,2% | -27,8%  | +52,1%  | +19,0%  |  +9,2%*  |     +6,2%*    
+02/10  |    71 CC v3     | D21 | -100,0% | -12,3% | +51,3% | +187,9% |  +4,1%  | +16,0%  | +31,8%*  |    +25,5%*    
+05/10  |    86 MV v3     | D18 | +25,8%  | +39,9% | +35,5% | +10,3%  | +36,6%  |  -3,4%  | +86,8%*  |    +33,1%*    
+06/10  |    88 CC v3     | D17 | +52,8%  | +16,8% | -20,0% |  +6,0%  | +143,2% | +20,6%  | +112,9%* |    +47,5%*    
+07/10  |    92 MV v3     | D16 | +41,4%  | +14,0% | +44,4% | +25,8%  | +41,2%  | +10,1%  | -18,9%*  |    +22,5%*    
+08/10  |    105 CC v3    | D15 | -100,0% | +39,5% | +63,7% | -25,6%  | +18,7%  | -14,1%  | +16,9%*  |     -0,1%*    
+09/10  |    106 MV v2    | D14 |  -3,8%  | +18,5% | +28,1% |  -5,0%  | +22,4%  | +20,9%  | +17,9%*  |    +14,1%*    
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (42) · 2/3**
+```text
+Início |       Nº        | Dia |  16/10  | 17/10  | 18/10  |  19/10  |  20/10  |  21/10  |  22/10*  |    Média 7d   
+09/10  |    109 CC v3    | D14 | +12,5%  | +1,2%  | +18,9% | +13,9%  | +44,4%  | +23,5%  | +13,7%*  |    +18,3%*    
+10/10  |    110 MV v3    | D13 | +24,6%  | +14,0% | +13,1% | +29,4%  | +13,3%  | -14,8%  | +47,2%*  |    +18,1%*    
+10/10  | 129 MV CP106 v2 | D13 |  -8,7%  | +8,4%  | +2,6%  | +69,7%  | +18,6%  | +49,3%  | +134,1%* |    +39,2%*    
+10/10  | 130 MV CP106 v2 | D13 | +34,5%  | +22,8% | +12,1% | +28,3%  | +17,6%  | +45,8%  | +58,5%*  |    +31,4%*    
+11/10  | 136 MV CP110 v3 | D12 | +28,7%  | +11,9% | +36,5% | +32,2%  | +23,8%  | +27,5%  | +36,6%*  |    +28,2%*    
+11/10  | 137 MV CP110 v3 | D12 |  +6,3%  | +11,8% | +29,4% |  +0,9%  |  -4,0%  | +19,5%  | +28,3%*  |    +13,2%*    
+11/10  | 139 CC CP110 v3 | D12 | +41,0%  | +12,2% | -9,0%  |  +1,3%  |  -2,2%  | +32,5%  | +45,0%*  |    +17,3%*    
+13/10  |    146 CC v3    | D10 | +10,5%  | +17,8% | +3,4%  | +27,9%  | +37,8%  | +137,1% | +85,4%*  |    +45,7%*    
+13/10  |    147 CC v3    | D10 | +15,6%  | +15,2% | +47,2% | +31,5%  | -19,2%  | +28,5%  | +70,9%*  |    +27,1%*    
+13/10  | 153 CC CP139 v3 | D10 | +45,4%  | +42,9% | +5,2%  | +30,2%  | +26,1%  | +11,2%  | +13,5%*  |    +24,9%*    
+13/10  | 155 CC CP139 v3 | D10 | +70,7%  | -20,2% | +44,9% | -73,0%  | +63,7%  |  -4,8%  | -100,0%* |     -2,7%*    
+17/10  | 171 CC CP129 v2 | D6  |   n/d   | +12,4% | +82,2% | +25,6%  | +11,4%  | -37,8%  | +115,6%* | +34,9%* (6/7) 
+17/10  |    172 MV v2    | D6  |   n/d   | +36,5% | +93,2% | +36,0%  | +42,1%  | +28,6%  | +86,7%*  | +53,9%* (6/7) 
+17/10  |    173 MV v2    | D6  |   n/d   | +35,3% | +84,6% | +96,3%  | +74,2%  | +84,6%  | +52,0%*  | +71,2%* (6/7) 
+18/10  |    175 MV v3    | D5  |   n/d   |  n/d   | -23,8% |  +7,1%  | +46,5%  | +38,2%  | +15,3%*  | +16,7%* (5/7) 
+```
+
+**Histórico ROI real — 7 dias · Campanhas ativas (42) · 3/3**
+```text
+Início |       Nº        | Dia |  16/10  | 17/10  | 18/10  |  19/10  |  20/10  |  21/10  |  22/10*  |    Média 7d   
+19/10  | 180 CC CP54 v3  | D4  |   n/d   |  n/d   |  n/d   |  -9,0%  | +32,2%  | +32,2%  | +70,5%*  | +31,5%* (4/7) 
+19/10  | 183 CC CP173 v2 | D4  |   n/d   |  n/d   |  n/d   | +30,8%  | +49,7%  | +13,3%  | +182,4%* | +69,1%* (4/7) 
+19/10  | 184 CC CP173 v2 | D4  |   n/d   |  n/d   |  n/d   | +11,3%  |  +0,9%  | +38,2%  | +177,1%* | +56,9%* (4/7) 
+19/10  | 185 CC CP173 v2 | D4  |   n/d   |  n/d   |  n/d   | +494,4% | -31,3%  | -12,6%  | +31,9%*  | +120,6%* (4/7)
+19/10  |    186 MV v3    | D4  |   n/d   |  n/d   |  n/d   | -72,2%  | +35,4%  | -18,8%  | +34,3%*  |  -5,3%* (4/7) 
+20/10  | 189 CC CP186 v3 | D3  |   n/d   |  n/d   |  n/d   |   n/d   | +22,2%  |  +9,3%  | +187,2%* | +72,9%* (3/7) 
+20/10  | 190 CC CP186 v3 | D3  |   n/d   |  n/d   |  n/d   |   n/d   | -39,0%  | +34,7%  | -15,9%*  |  -6,7%* (3/7) 
+20/10  | 191 CC CP186 v3 | D3  |   n/d   |  n/d   |  n/d   |   n/d   |  +9,2%  | -16,8%  | -70,6%*  | -26,1%* (3/7) 
+20/10  |    192 MV v3    | D3  |   n/d   |  n/d   |  n/d   |   n/d   |  +3,8%  | +63,6%  | -23,6%*  | +14,6%* (3/7) 
+21/10  |    193 MV v3    | D2  |   n/d   |  n/d   |  n/d   |   n/d   |   n/d   | -47,1%  | -90,7%*  | -68,9%* (2/7) 
+21/10  |    194 MV v3    | D2  |   n/d   |  n/d   |  n/d   |   n/d   |   n/d   | -82,8%  |  -6,0%*  | -44,4%* (2/7) 
+21/10  |    195 MV v3    | D2  |   n/d   |  n/d   |  n/d   |   n/d   |   n/d   | -84,9%  | +42,6%*  | -21,2%* (2/7) 
+```
+
+**Histórico ROI real — 7 dias · Campanhas pausadas (0) · 1/1**
+```text
+Início |       Nº        | Dia |  16/10  | 17/10  | 18/10  |  19/10  |  20/10  |  21/10  |  22/10*  |    Média 7d   
+```
+
+**📘 Legenda do Nº e blocos**
+- **Exemplo — 090 CC CP89 v3**: campanha 090 · COCAP · cópia da 89 · quiz v3.
+- **Lance**: CC = COCAP · MV = MAXVOL · BC = BIDCAP · MX = misto.
+- **CP** indica a origem direta da cópia; **v1/v2/v3** identifica o quiz.
+- **Blocos**: o título identifica o status configurado das campanhas na Meta; ativas e pausadas ficam separadas.
+
+**📊 Métricas**
+- **Bid**: meta de custo/resultado em COCAP; — nas demais estratégias.
+- **B.U.%**: gasto do corte financeiro ÷ budget diário atual × 100; não usamos o orçamento inicial nem o restante.
+- **Leitura do B.U.%**: para o mesmo gasto, um aumento do budget reduz a razão; uma redução do budget pode levá-la acima de 100%. A flexibilidade de gasto diário da Meta também pode superar a referência.
+- **Rev / Saldo**: receita líquida SB / receita líquida menos gasto Meta.
+- **ROI / ROI E.**: 100 × (receita ÷ gasto Meta − 1), usando receita líquida / estimada, respectivamente.
+- **ROAS**: valor de compras Meta ÷ gasto Meta.
+- **RPS**: coluna da dash SB, em USD por mil sessões.
+- **Média 7d**: média dos ROIs diários válidos; n/d não vira zero. (n/7) mostra a cobertura.
+
+**⏱️ Fontes e leitura**
+- **Fontes**: Meta Insights × Smart Bidding/Adgroup. Valores monetários em USD.
+- **Parcial**: 22/10 até 10:04 EDT; * identifica o dia e a média parcial.
+- **Atraso GAM/SB**: informado pelo Smart Bidding nesta coleta; Receita e ROI podem estar defasados.
+- **Tetos visuais**: ROI/ROI E. 999,99% · ROAS 9,99x · Rev 9.999,99. Dados, cálculos, ranking e histórico usam valores reais.
+- **Layout**: Gasto, B.U.% e Saldo se adaptam aos números, sem cortar sinais ou casas decimais.
+
+**⚠️ Observações**
+- Intraday do dia corrente, parcial; seleção por entrega Meta hoje, incluindo pausadas com entrega. RPS da coluna visível SB; horários financeiro, Bid, status e orçamento separados.
+
+**Fim do relatório — 42 campanhas e histórico de 7 dias.**

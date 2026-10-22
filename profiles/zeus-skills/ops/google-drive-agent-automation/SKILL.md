@@ -70,6 +70,8 @@ Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment co
 
 ## Operator-facing handoff
 
+- When Rodolfo asks about media already processed by Ares, keep that exact delivery in focus: permanent storage in the 30 TB archive with catalogue/lineage, access, organization and consumer references preserved, without reprocessing. Infrastructure disaster-recovery backups are a separate class, not the creative media or a substitute for reporting its migration. Join the processed catalogue to the frozen historical manifest before presenting a processed-only count; broad manifest totals can include originals and auxiliaries. Do not initiate a historical infrastructure-backup batch merely to answer that creative-delivery request or silently cancel existing approved flows.
+
 - When the storage objective is to use the old Drive only for intake/staging, include the existing archive explicitly in the migration boundary. Inventory the whole creative tree, including non-media auxiliaries and existing shortcuts; a LEGACY-only audit or a future-upload pipeline is not a full migration. Do not claim the overall objective complete while historical bytes or dependent links remain unmigrated.
 - Keep historical copy authorization distinct from destructive historical retirement. Reuse neither a future-only cleanup approval nor a date-cutoff exception to remove old assets. Freeze the full target manifest, preserve business IDs/reservations and shortcut consumers, and explain any remaining owner-code or destructive gate without reducing the task to a documentation edit.
 

@@ -8865,6 +8865,23 @@
       "updated_at": "2026-10-22T04:56:41+00:00"
     },
     {
+      "canonical_key": "finance.2026-09.activeview.no-revenue",
+      "canonical_source": "reports/finance-september-close-av-zero-1562829014609961071.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-22T14:05:16+00:00",
+      "id": "FINANCE-SEPT-AV-ZERO-1562829014609961071",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Setembro2026 ActiveView sem faturamento; conferencia receitas/gastos encerrada",
+      "updated_at": "2026-10-22T14:05:16+00:00"
+    },
+    {
       "canonical_key": "finance.2026-09.facebook-closing",
       "canonical_source": "reports/finance-september-facebook-complete-1562609136909295721.md",
       "consumers": [
@@ -9868,6 +9885,23 @@
       "superseded_by": null,
       "title": "Smart Deals compartilhada: vínculo completo ao BISU restabelecido",
       "updated_at": "2026-10-07T06:24:51+00:00"
+    },
+    {
+      "canonical_key": "drive.archive.processed-ares.delivery-focus",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "creative-ops",
+      "effective_at": "2026-10-22T14:11:06+00:00",
+      "id": "MGS-ARES-PROCESSED-ARCHIVE-FOCUS-1562830126402641921",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Entrega cobrada: acervo ja processado pelo Ares nos30TB, nao backups de infraestrutura",
+      "updated_at": "2026-10-22T14:11:06+00:00"
     },
     {
       "canonical_key": "mgs.whole-drive.30tb.backup_archive_automation_deployment",
@@ -13840,5 +13874,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T13:29:55+00:00"
+  "updated_at": "2026-10-22T14:11:06+00:00"
 }
