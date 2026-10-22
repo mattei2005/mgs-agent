@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc01",
+  "exit": 0,
+  "stdout": "{\"observed_at\": \"2026-10-22T18:10:55.418195+00:00\", \"host\": \"MatteiInc01\", \"boot_id\": \"b9879eb3-7c8d-404c-802b-bfd8ad0ebdfb\", \"kernel\": \"5.15.0-198-generic\", \"default_kernel\": \"/vmlinuz\", \"services\": {\"nginx-rc\": \"MainPID=2666\\nActiveState=active\\nUnitFileState=enabled\", \"php83rc-fpm\": \"MainPID=1074\\nActiveState=active\\nUnitFileState=enabled\", \"apache2-rc\": \"MainPID=2393\\nActiveState=active\\nUnitFileState=enabled\", \"mariadb\": \"MainPID=1164\\nActiveState=active\\nUnitFileState=enabled\", \"cron\": \"MainPID=2334\\nActiveState=active\\nUnitFileState=enabled\", \"mgs-finance-dash\": \"MainPID=989\\nActiveState=active\\nUnitFileState=enabled\", \"mgs-finance-dash.socket\": \"ActiveState=active\\nUnitFileState=enabled\", \"mgs-postgresql18\": \"MainPID=988\\nActiveState=active\\nUnitFileState=enabled\"}, \"failed_units\": \"\", \"dpkg_audit\": \"\", \"tmp\": {\"uid\": 0, \"gid\": 0, \"mode\": \"0o1777\"}, \"available_bytes\": 1540003774464, \"reboot_required\": false}\n",
+  "stderr": ""
+}

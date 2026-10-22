@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc02",
+  "exit": 0,
+  "stdout": "{\"exit\": 1, \"stdout\": \"/proc\\n   [ ] target exists\\n   [ ] do not check proc source (pseudo/net)\\n   [ ] do not check proc FS type (pseudo/net)\\n/boot/efi\\n   [E] wrong order: /boot/efi specified before /boot\\n   [ ] target exists\\n   [ ] FS options: umask=0077\\n   [ ] UUID=5BA6-B54F translated to /dev/nvme0n1p1\\n   [ ] source /dev/nvme0n1p1 exists\\n   [ ] FS type is vfat\\nnone\\n   [ ] UUID=90fc65da-71f3-452c-8f72-e800db05f367 translated to /dev/md0\\n   [ ] source /dev/md0 exists\\n   [ ] FS type is swap\\n/boot\\n   [ ] target exists\\n   [ ] UUID=16e02eb4-21c8-4539-8707-60ca6a026c08 translated to /dev/md1\\n   [ ] source /dev/md1 exists\\n   [ ] FS type is ext3\\n/\\n   [ ] target exists\\n   [ ] UUID=b2444a56-427d-49c2-aa3f-c597ac3c1dc2 translated to /dev/md2\\n   [ ] source /dev/md2 exists\\n   [ ] FS type is ext4\\n   [W] recommended root FS passno is 1 (current is 0)\\n\", \"stderr\": \"\\n0 parse errors, 1 error, 1 warning\\n\"}\n",
+  "stderr": ""
+}
