@@ -3349,18 +3349,20 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-10-21T00:05:02-04:00",
+    "last_check": "2026-10-22T00:05:02-04:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-10-20T00:00:00-04:00",
-      "deleted": 0,
-      "eligible": 0,
-      "message_ids": [],
+      "cutoff": "2026-10-21T00:00:00-04:00",
+      "deleted": 1,
+      "eligible": 1,
+      "message_ids": [
+        "1562196774196748371"
+      ],
       "remaining": 0,
       "scanned": 1,
       "would_delete": 0
     },
-    "last_success_date": "2026-10-21"
+    "last_success_date": "2026-10-22"
   }
 }
