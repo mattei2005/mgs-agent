@@ -1,0 +1,101 @@
+{
+  "ready": {
+    "Hestia-mail": {
+      "host": "server.boostingecon.com",
+      "boot_id": "266581bb-c980-4802-89f8-324a6b2972f9",
+      "kernel": "6.8.0-147-generic",
+      "units": {
+        "nginx.service": {
+          "MainPID": "1606",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "php8.3-fpm.service": {
+          "MainPID": "1385",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "hestia.service": {
+          "MainPID": "0",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "generated"
+        },
+        "exim4.service": {
+          "MainPID": "1959",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "dovecot.service": {
+          "MainPID": "1363",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mariadb.service": {
+          "MainPID": "1789",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "cron.service": {
+          "MainPID": "1358",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        }
+      }
+    }
+  },
+  "remaining": [
+    "MatteiInc01",
+    "MatteiInc02",
+    "MatteiInc03JBF"
+  ],
+  "observations": [
+    {
+      "host": "Hestia-mail",
+      "attempt": 1,
+      "ssh_exit": 0,
+      "new_boot": true,
+      "services_active": true,
+      "boot_id": "266581bb-c980-4802-89f8-324a6b2972f9",
+      "kernel": "6.8.0-147-generic"
+    },
+    {
+      "host": "MatteiInc01",
+      "attempt": 1,
+      "ssh_exit": 255,
+      "diagnostic": "ssh: connect to host 162.55.28.178 port 22: Connection timed out\n"
+    },
+    {
+      "host": "MatteiInc02",
+      "attempt": 1,
+      "ssh_exit": 255,
+      "diagnostic": "ssh: connect to host 162.55.28.179 port 22: Connection timed out\n"
+    },
+    {
+      "host": "MatteiInc03JBF",
+      "attempt": 1,
+      "ssh_exit": 255,
+      "diagnostic": "ssh: connect to host 46.4.95.117 port 22: Connection timed out\n"
+    }
+  ]
+}

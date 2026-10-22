@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc02",
+  "exit": 0,
+  "stdout": "{\"Result\": \"success\", \"Requires\": \"dev-nvme0n1p1.device \\\"systemd-fsck@dev-disk-by\\\\\\\\x2duuid-5BA6\\\\\\\\x2dB54F.service\\\" -.mount system.slice boot.mount\", \"After\": \"\\\"systemd-fsck@dev-disk-by\\\\\\\\x2duuid-5BA6\\\\\\\\x2dB54F.service\\\" -.mount boot.mount dev-nvme0n1p1.device systemd-journald.socket system.slice blockdev@dev-nvme0n1p1.target \\\"blockdev@dev-disk-by\\\\\\\\x2duuid-5BA6\\\\\\\\x2dB54F.target\\\" local-fs-pre.target\", \"ActiveState\": \"active\", \"fstab_mtime\": 1714220845.7132776}\n",
+  "stderr": ""
+}

@@ -3257,6 +3257,24 @@
       "updated_at": "2026-08-24T23:17:27+00:00"
     },
     {
+      "canonical_key": "drive.archive30tb.owner_connector_architecture",
+      "canonical_source": "context/drive-archive-owner-connector.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "google-archive",
+      "effective_at": "2026-10-22T18:12:33+00:00",
+      "id": "ARES-OWNER-CONNECTOR-AUTH-1562888530265374731",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conector privado VPS30TB autorizado; OAuth novo exclusivo, agentesSA preservados; producao depende validacao",
+      "updated_at": "2026-10-22T18:12:33+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reporting.ui-auth-recovery",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
       "consumers": [
@@ -13981,5 +13999,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T16:45:18+00:00"
+  "updated_at": "2026-10-22T18:12:33+00:00"
 }

@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc02",
+  "exit": 0,
+  "stdout": "{\"ok\": true, \"phase\": \"dispatch\", \"result\": {\"authorization\": \"1562891945536393229\", \"timer\": {\"Result\": \"success\", \"LoadState\": \"loaded\", \"ActiveState\": \"active\", \"SubState\": \"waiting\", \"UnitFileState\": \"transient\"}, \"schedule\": \"NextElapseUSecRealtime=Thu 2026-10-22 18:18:51 UTC\\nTriggers=zeus-hetzner-reboot-1562891945536393229.service\\n\", \"target\": \"ExecStart={ path=/usr/bin/systemctl ; argv[]=/usr/bin/systemctl reboot --no-block ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }\\n\", \"target_epoch\": 1792693131}}\n",
+  "stderr": ""
+}
