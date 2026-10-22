@@ -82,6 +82,34 @@
         "unapproved recurrence"
       ],
       "authorized_request_id": "shein-1562023429690097665"
+    },
+    "885885747952529": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1562834899080052868",
+      "source_thread_id": "1558127210966032385",
+      "source_channel_id": "1548149483039236137",
+      "account_id": "1543098427832443",
+      "account_name": "Mavroa-US-SHEIN-ES-03-G003",
+      "system_user_id": "122095869861482193",
+      "business_id": "155263197283282",
+      "scope": "Durable authorization for current and future authorized requests on this account using exact Page 885885747952529. Preserve existing tasks; add only ADVERTISE and ANALYZE when absent. No other Page/account/identity authority.",
+      "repeat_approval_required": false,
+      "requirements": [
+        "pre-read exact Page identity, operational business and existing tasks with authorized administrative identity",
+        "sanitized journal before minimal assignment write; reconcile uncertain effects before retry",
+        "administrative assignment readback and original corporate Page access readback",
+        "resume original request and IDs through central Engine v3 with original E2E, QA and activation gates"
+      ],
+      "exclusions": [
+        "ownership transfer",
+        "credential issuance or rotation",
+        "app permission changes",
+        "billing",
+        "other Pages or accounts",
+        "unapproved recurrence"
+      ],
+      "initial_request_id": "shein-1562827628191416351"
     }
   },
   "cross_account_reference_policy": {
