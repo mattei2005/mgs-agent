@@ -116,6 +116,8 @@ For this class, “baixar os textos das imagens” usually means **download/extr
 
 ## Pitfalls
 
+- Do not treat Playwright `context.route` or Chromium `Network.setBlockedURLs` alone as guaranteed network isolation across an HTTP redirect chain: redirected navigation can reach the provider without the expected interception. Prove fixture egress isolation with a wholly local redirect target or an independently enforced network boundary before testing provider-shaped URLs. If a fixture reaches a real provider error, record that actual network evidence and its limitation; never label it offline, intercepted, or proof of real account authorization. Never use real credentials to test this behavior.
+
 - Keep Chromium's `TMPDIR` short enough for Linux Unix-domain socket paths. Deep task-ID scratch subdirectories can trigger `FATAL ... Socket path too long` even when the same smoke passes with the profile scratch root. Retain evidence in the task directory but run browser temp/profile sockets under the short allowed profile scratch root; do not fall back to system `/tmp` or remove protected persistent browser profiles.
 - For real-browser QA of a self-hosted panel with strict CSP, prefer Playwright locator assertions such as `expect(locator).to_have_text(...)` over `wait_for_function` with an expression string: the string path invokes `eval` and can fail under `script-src 'self'`. Fix the test harness, never weaken the application CSP to make a smoke pass. Keep QA dependencies in a project-owned isolated environment and reuse an existing compatible Chromium without changing protected agent runtimes or browser caches.
 

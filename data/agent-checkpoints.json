@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "1562905531394301997: habilitacao HTTPS na rede correta efetivada. Serveproc_3e517c0617b0 ativo publicando https://mgs-zeus-vps.tail3b0269.ts.net:8443 via127.0.0.1:43171. NativeDNS.CertDomains incluihost; TLS CA+SNI peloIPtailnet deuHTTP200 /status e /. Primeiro handshake demorou emissao cert e segundo passou; CapMapnaotemkeyHTTPSmesmoaposTLS200, NAOusarisso comobloqueio. Orientar abrirpagina,criarNOVOclienteWEBno mgs-core-prod,redirectURI https://mgs-zeus-vps.tail3b0269.ts.net:8443/callback ,ClientID/Secretso1PitemMGS Drive30TB OwnerConnectorOAuth;consentirGoogleowner mgsdigitalcorp@gmail.com. Google auth aindaNaoSalva,prod=false;nenhumamidiaexecutada. Nativepanelmismatchencerrado,naomigrar redes/alterarcallback. Depois validarrefreshowner canarioSA handoffintegral.",
-      "objective": "Conector privado 30TB; concluir auth canario e handoff sem writer paralelo",
+      "next_step": "1562907116443013263 ORIGIN_REJECTED era bugheaderlandingno-referrer=>ChromiumOrigin:null. Corrigido same-origin so landing; callbackno-ref,Origin/CSRF/PKCEestritos. CSPlandingpermite self+accounts.google.com paraOAuthredirect.31unittestsPASS;ChromiumrealHTTPSPOSTorigemexata agoraCLIENT_CONFIGURATION_REQUIRED legitimo. 1P3camposVAZIOS,OAuthnaoSalvo,prod=false. Authnovo proc_6736a1149177 PID1922645;Serve1881064intacto. Proximo usuarioabrir DIRETO https://console.cloud.google.com/auth/clients?project=mgs-core-prod ; NAOclicarAutorizarantescliente. supportcorporativarecomendada masIAMnaoConfirmado; seprojetonaoaparecepedirprint,naocriaroutro. CriarWEBnovo,redirectURIprivadomesmo;salvarID/secretso1P;consentowner30TBmgsdigitalcorp. QAfixtureCSPalcancouerrosreaisGooglecomIDOFFLINE_FIXTURE,naoeraisoladaporroute/blockURLs:limitacaoHonesta,NAOauthproof. Rollback/provas em artifacts/archive-owner-origin-1562907116443013263; scriptsauth+testsmodificados.",
+      "objective": "Conector privado 30TB; auth real canario e handoff sem writer paralelo",
       "source": "context/drive-archive-owner-connector.md",
-      "state": "private_https_recovered_verified_awaiting_google_client_and_owner_consent",
+      "state": "browser_origin_bug_fixed_google_client_configuration_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T19:11:02+00:00"
+      "updated_at": "2026-10-22T19:27:03+00:00"
     },
     {
       "agent": "ares",
@@ -7132,5 +7132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T19:17:46+00:00"
+  "updated_at": "2026-10-22T19:27:03+00:00"
 }
