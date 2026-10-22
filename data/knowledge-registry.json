@@ -8865,6 +8865,24 @@
       "updated_at": "2026-10-21T23:51:18+00:00"
     },
     {
+      "canonical_key": "finance.2026-09.google-cent-closing",
+      "canonical_source": "reports/finance-september-google-complete-1562623875055886377.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-22T00:43:06+00:00",
+      "id": "FINANCE-SEPT-GOOGLE-CENTS-1562623875055886377",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Setembro Google: alinhar centavos diarios do fechamento e preservar micros de origem",
+      "updated_at": "2026-10-22T00:43:06+00:00"
+    },
+    {
       "canonical_key": "finance.2026-09.rede1-closing",
       "canonical_source": "reports/finance-september-rede1-complete-1562583090235318283.md",
       "consumers": [
@@ -13666,5 +13684,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-21T23:51:18+00:00"
+  "updated_at": "2026-10-22T00:43:06+00:00"
 }

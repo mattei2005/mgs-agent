@@ -3393,12 +3393,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Congelar fonte/workspace; backup e ensaio; aplicar43valores BRL com excecao somente setembro; validar R$111547.89 sem diferenca e preservar receitas/Facebook",
-      "objective": "Ajustar ponto4 Google setembro aos43valores diarios em centavos do fechamento, mantendo micros como evidencia e demais pontos",
-      "source": "reports/finance-september-point4-explanation-1562622867873603655.md;discord:1545426987756298340#1562623875055886377",
-      "state": "point4_google_daily_cent_alignment_authorized",
+      "next_step": "Ponto5 MonetizeMore ainda nao aplicado: USD705.00 na fonte e zero registrado. Explicar e resolver atribuicao do principal antes de preencher; nao reexecutar pontos1-4",
+      "objective": "Conferencia setembro x Dash ponto a ponto; pontos1-4 concluidos com fonte preservada",
+      "source": "reports/finance-september-google-complete-1562623875055886377.md;discord:1545426987756298340#1562623875055886377",
+      "state": "point4_google_complete_43_daily_values_60of60_controls",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-22T00:29:47+00:00"
+      "updated_at": "2026-10-22T00:43:06+00:00"
     },
     {
       "agent": "zeus",
@@ -6492,6 +6492,16 @@
     },
     {
       "agent": "zeus",
+      "id": "sites-post-php-render-1562626826709241937",
+      "next_step": "Piloto Playwright em dois dominios; depois111alvos em lotes persistidos, home e artigo representativo quando houver. Validar CSS/JS/imagens/geometria e separar WAF/DNS/defeitos sem baseline de regressaoPHP.",
+      "objective": "Verificar abertura e renderizacao desktop/mobile das110aplicacoes atualizadas e Spazio cadastrado, sem mutacao de sites",
+      "source": "/root/.hermes/profiles/zeus/cache/scratch/site-audit-1562626826709241937/targets.json",
+      "state": "browser_pilot",
+      "thread_id": "1562582544292249772",
+      "updated_at": "2026-10-22T00:44:50+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "smart-routing-four-finanzas-us-cc-es-20260824",
       "next_step": "AdOps disponibilizar operações faltantes; preencher e validar 91 rotas sem congelar URLs e sem alterar identidades/topologia.",
       "objective": "Padronizar cinco URLs nos quatro publishers Finanzas US-CC-ES com topologia canônica 6+5 e Smart Routing ativo.",
@@ -7002,5 +7012,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T00:37:49+00:00"
+  "updated_at": "2026-10-22T00:44:50+00:00"
 }
