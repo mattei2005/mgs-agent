@@ -2402,6 +2402,16 @@
     },
     {
       "agent": "zeus",
+      "id": "MGS-BACKUP-AUTOMATION-1562688137472249867",
+      "next_step": "Preservar producer/staging source e flags deleteSource:false. Implementar lane separada de backup no mesmo ownerworker/lock/budget, SA queue/reconciler em monitor existente, future-only sem historico implicito, retention preview apenas. Exercitar TDD e preflight live, publicar hash imutavel, parar SOMENTE no owner editor repin necessario; nenhuma exclusao ativada. Gates nativos2scheduled/newSHA/probe/publisher antes de promote. Source/archive tierIDs verificados via binding live; nao usar IDs em prose sem lookup.",
+      "objective": "Implementar produtor/reconciliador automaticos de backups e retention preview no arquivo Gmail, sem ativar exclusao",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "implementation_started",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T04:47:44+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "MGS-CORPORATE-BACKUP-LAYOUT-1562643079188451401",
       "next_step": "Cinco pastas criadas confirmadas por readback owner Gmail/ACL4/hierarquia/tiers vazios. backup-archive-binding.json com publictags nativos de ownerworker, IDs source/arquivo, config intacta. Bind real e replay sem mudanca de versoes passaram. Novo controlador +14testes e5suites regressao OK. Agora checkpoint MGS-CORPORATE-BACKUP-PILOT-1562665022910500936. Nao orientar lote nem cutover; source root e tiers permanecem.",
       "objective": "Migrar integralmente aos 30 TB com IDs/acesso/backup/retencao/restaure e automacao futura comprovados",
@@ -7062,5 +7072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T04:32:11+00:00"
+  "updated_at": "2026-10-22T04:47:44+00:00"
 }
