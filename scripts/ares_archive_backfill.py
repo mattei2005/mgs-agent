@@ -17,15 +17,34 @@ def obj(path,default=None):
  if not isinstance(v,dict):raise BackfillError('BACKFILL_JSON_OBJECT:'+Path(path).name)
  return v
 
+def apply_metadata_reconciliation(manifest,record):
+ if record.get('schema')!='mgs.archive.metadata.reconciliation.v1' or record.get('migration_id')!=MIGRATION or record.get('copy_authority_message_id')!=MIGRATION or record.get('unchanged_binary_membership') is not True or record.get('source_and_archive_roots_unchanged') is not True:raise BackfillError('METADATA_RECONCILIATION_SCOPE')
+ result=json.loads(b.canonical(manifest));byid={a['sourceId']:a for a in result['assets']};seen=set()
+ for row in record.get('changes',[]):
+  sid=row.get('source_id');original=byid.get(sid);effective=row.get('effective_asset',{})
+  if not original or sid in seen or original!=row.get('frozen_asset'):raise BackfillError('METADATA_RECONCILIATION_MEMBERSHIP')
+  seen.add(sid)
+  if set(original)!=set(effective) or any(effective.get(k)!=v for k,v in original.items() if k not in ['name','sourceParentId','relativeParent','version']):raise BackfillError('METADATA_RECONCILIATION_CONTENT_CHANGE')
+  if row.get('source_hashes')!={k:original[k] for k in ['size','md5','sha256']} or row.get('native_actor_email') not in WRITERS or row.get('native_actor_role') not in ['writer','owner','organizer','fileOrganizer'] or not row.get('native_actor_permission_id'):raise BackfillError('METADATA_RECONCILIATION_PROOF')
+  if effective.get('relativeParent',[])[:2]!=original.get('relativeParent',[])[:2] or not isinstance(effective.get('relativeParent'),list) or not effective['relativeParent'] or any(not isinstance(x,str) or not x or x in ['.','..'] or any(c in x for c in '/\\\x00') for x in effective['relativeParent']):raise BackfillError('METADATA_RECONCILIATION_CROSS_OPERATION')
+  if not isinstance(effective.get('name'),str) or not effective['name'] or any(x in effective['name'] for x in '/\\\x00') or not re.fullmatch('[A-Za-z0-9_-]{8,}',str(effective.get('sourceParentId',''))) or not str(effective.get('version','')).isdigit() or int(effective['version'])<int(original['version']):raise BackfillError('METADATA_RECONCILIATION_FIELDS')
+  original.update(effective)
+ return result
+
 def manifest_load():
  p=location();stage=obj(p/'stage.json');m=obj(p/'manifest.json');auth=obj(p/'authorization.json')
  if stage['manifest_sha256']!=hashlib.sha256(b.canonical(m)).hexdigest() or m.get('migrationId')!=MIGRATION or m.get('authorizationMessageId')!=CONFIRMATION or m.get('deleteSource') is not False or auth.get('historical_retirement_confirmation_message_id')!=CONFIRMATION or auth.get('confirmed_by_user_id')!='344196393512075265' or m.get('sourceRootId')!=b.SOURCE_ROOT or m.get('sourceDriveId')!=b.SOURCE_DRIVE or m.get('archiveRootId')!=b.ARCHIVE_ROOT or m.get('account')!=b.ACCOUNT:raise BackfillError('BACKFILL_MANIFEST_AUTHORITY')
  if len(m['assets'])!=5860 or len({a['sourceId'] for a in m['assets']})!=5860 or len(m['folderPaths'])!=844 or len(m['shortcuts'])!=1002:raise BackfillError('BACKFILL_MANIFEST_SET')
+ if stage.get('metadata_reconciliation_sha256'):
+  record=obj(p/'metadata-reconciliation.json')
+  if hashlib.sha256(b.canonical(record)).hexdigest()!=stage['metadata_reconciliation_sha256']:raise BackfillError('METADATA_RECONCILIATION_HASH')
+  m=apply_metadata_reconciliation(m,record);stage={**stage,'metadata_reconciled_ids':[r['source_id'] for r in record['changes']]}
  return m,stage
 
 def make_job(assets,c,stage):
  if not 1<=len(assets)<=8 or len({a['sourceId'] for a in assets})!=len(assets):raise BackfillError('BACKFILL_EXACT_BATCH_BOUND')
  identity={'schema':'mgs.archive.request.v1','kind':'backfill','account':c['account'],'sourceDriveId':c['source_drive_id'],'sourceRootId':c['source_root_id'],'archiveRootId':c['archive_root_id'],'deleteSource':False,'migrationId':stage['migration_id'],'manifestFileId':stage['manifest_file_id'],'manifestSha256':stage['manifest_sha256'],'assets':json.loads(b.canonical(assets))}
+ if any(a['sourceId'] in stage.get('metadata_reconciled_ids',[]) for a in assets):identity['metadataReconciliationSha256']=stage['metadata_reconciliation_sha256']
  identity['jobId']=hashlib.sha256(b.canonical(identity)).hexdigest()[:32];identity['createdAt']=b.now_iso();return identity
 
 def permissions(d,fid):

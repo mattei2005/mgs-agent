@@ -37,6 +37,7 @@ def validate_job(j,c,manifest,stage):
   validate_path(a['relativeParent'])
   if a['role']!='historical' or str(a['size']).isdigit() is False or int(a['size'])<0 or not re.fullmatch('[a-f0-9]{32}',a['md5']) or not re.fullmatch('[a-f0-9]{64}',a['sha256']):raise TransportError('ASSET_FIELDS')
   if a['mimeType'].startswith('application/vnd.google-apps/'):raise TransportError('NATIVE_DOCUMENT_EXCLUDED')
+ if any(a['sourceId'] in stage.get('metadata_reconciled_ids',[]) for a in assets) and j.get('metadataReconciliationSha256')!=stage.get('metadata_reconciliation_sha256'):raise TransportError('JOB_METADATA_RECONCILIATION_BINDING')
  identity={k:v for k,v in j.items() if k not in ['jobId','createdAt']}
  if hashlib.sha256(b.canonical(identity)).hexdigest()[:32]!=j.get('jobId'):raise TransportError('JOB_DIGEST')
  return True
@@ -157,7 +158,11 @@ class OwnerDrive(b.Drive):
   b.require_publisher(self.meta(landed),b.ACCOUNT);return landed
 
 class Engine:
- def __init__(self,owner,c,manifest,stage,journal=None):self.owner=owner;self.c=c;self.manifest=manifest;self.stage=stage;self.journal=journal or Journal();self.folder_cache={};self.deadline:float|None=None;self.folder_lock=threading.RLock();self.stop=threading.Event();self.created_ids=[]
+ def __init__(self,owner,c,manifest,stage,journal=None):
+  self.owner=owner;self.c=c;self.manifest=manifest;self.stage=stage;self.journal=journal or Journal();self.folder_cache={};self.deadline:float|None=None;self.folder_lock=threading.RLock();self.stop=threading.Event();self.created_ids=[]
+  if stage and stage.get('metadata_reconciliation_sha256'):
+   fid=stage['metadata_reconciliation_file_id'];meta=owner.meta(fid);b.require_publisher(meta,b.CANONICAL_SA);raw=owner.raw(fid)
+   if meta.get('parents')!=[c['control_folder_id']] or meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('properties',{}).get('mgsArchiveType')!='backfill_metadata_reconciliation' or hashlib.sha256(raw).hexdigest()!=stage['metadata_reconciliation_sha256']:raise TransportError('NATIVE_METADATA_RECONCILIATION_PROVENANCE')
  def check_running(self):
   if self.stop.is_set():raise TransportError('BATCH_STOPPED_ON_FIRST_FAILURE')
   if self.deadline is not None and time.monotonic()>self.deadline:raise TransportError('COOPERATIVE_YIELD')
