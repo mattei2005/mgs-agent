@@ -143,6 +143,8 @@ def run_cycle(apply=False,reconcile_only=False,intake_state=None):
 def _run_cycle(apply=False,reconcile_only=False,intake_state=None,allow_retirement=True):
     import json
     c=bridge.config_load()
+    if c.get('owner_executor_mode')=='vps_handoff':
+        return {'schema':'mgs.archive.automation.tick.v1','status':'handoff_draining','executed_at':bridge.now_iso(),'apply':apply,'worker_ready':False,'owner_executor':'private-vps-v1','owner_worker_status':'handoff_draining','owner_worker_sha256':c.get('owner_executor_sha256'),'worker_executed_at':None,'worker_trigger_uid':None,'inventory_rows':0,'jobs_total':0,'jobs_scanned':0,'reconciliation':{'verified':[],'cached':[],'pending':[],'blocked':[]},'production':{'queued':[],'blocked':[]},'retirement':{'status':'deferred_handoff','blocked':[]},'historical_backfill':{'status':'deferred_handoff','blocked':[]},'queue_enabled':c['queue_enabled'],'delete_source':c['delete_source'],'owner_worker_delete_source':False,'prefer_archive_reads':c.get('prefer_archive_reads',False),'include_historical':c.get('include_historical',False)}
     with bridge.queue_lock():
         state=bridge.read_json(bridge.DATA/'automation-state.json',{'schema':'mgs.archive.automation.v1'})
         if state.get('schema')!='mgs.archive.automation.v1':raise bridge.ArchiveError('AUTOMATION_STATE_SCHEMA')

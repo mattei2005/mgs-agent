@@ -284,10 +284,15 @@ def enqueue(d,c,job):
         job=saved
     else:atomic_json(path,job)
     payload=canonical(job)
-    fid=d.upload_once(c['requests_folder_id'],'job-'+job['jobId']+'.json',payload,'application/json','request:'+job['jobId'],'request')
+    request_type='vps_request' if c.get('owner_executor_mode') in ['vps_handoff','vps'] else 'request'
+    fid=d.upload_once(c['requests_folder_id'],'job-'+job['jobId']+'.json',payload,'application/json','request:'+job['jobId'],request_type)
     request_meta=d.meta(fid)
     require_publisher(request_meta,CANONICAL_SA,'REQUEST_AUTHOR')
     state=request_meta.get('properties',{}).get('mgsArchiveState')
+    if request_type=='vps_request' and request_meta.get('properties',{}).get('mgsArchiveType')=='vps_request' and state not in ['verified','queued']:
+        d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id,properties'},{'properties':{**request_meta['properties'],'mgsArchiveState':'queued'}})
+        state=d.meta(fid).get('properties',{}).get('mgsArchiveState')
+        if state!='queued':raise ArchiveError('VPS_QUEUE_STATE_READBACK')
     return {'status':'already_verified' if state=='verified' else 'queued','jobId':job['jobId'],'requestFileId':fid,'kind':job['kind'],'deleteSource':False}
 
 def job_for_lineage(d,c,asset_id):

@@ -53,8 +53,10 @@ def enqueue(d,c,job):
   if any(old.get(k)!=job.get(k) for k in ['assets','manifestSha256','migrationId','kind']):raise BackfillError('BACKFILL_IMMUTABLE_JOB_CONFLICT')
   job=old
  else:b.atomic_json(path,job)
- fid=d.upload_once(c['requests_folder_id'],'backfill-'+job['jobId']+'.json',b.canonical(job),'application/json','request:'+job['jobId'],'backfill_request');meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
- if meta.get('properties',{}).get('mgsArchiveType')!='backfill_request' or d.raw(fid)!=b.canonical(job):raise BackfillError('BACKFILL_QUEUE_READBACK')
+ request_type='vps_backfill_request' if c.get('owner_executor_mode') in ['vps_handoff','vps'] else 'backfill_request'
+ fid=d.upload_once(c['requests_folder_id'],'backfill-'+job['jobId']+'.json',b.canonical(job),'application/json','request:'+job['jobId'],request_type);meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
+ if meta.get('properties',{}).get('mgsArchiveType') not in ['backfill_request',request_type] or d.raw(fid)!=b.canonical(job):raise BackfillError('BACKFILL_QUEUE_READBACK')
+ if c.get('owner_executor_mode')=='vps_handoff' and meta.get('properties',{}).get('mgsArchiveType')=='backfill_request':return {'job_id':job['jobId'],'request_file_id':fid,'asset_count':len(job['assets']),'handoff_reserved':True}
  if meta['properties'].get('mgsArchiveState')!='verified':
   props={**meta['properties'],'mgsArchiveState':'queued'};d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id,properties'},{'properties':props})
   if d.meta(fid)['properties'].get('mgsArchiveState')!='queued':raise BackfillError('BACKFILL_QUEUE_STATE_READBACK')
@@ -70,11 +72,12 @@ def prepare_first():
   result=enqueue(d,c,make_job(chosen,c,stage));stage['prepared_first_job']=result;stage['status']='owner_repin_required_hidden_first_batch_ready';b.atomic_json(location()/'stage.json',stage)
  return result
 
-def verify_job(d,c,job,apply=False):
+def verify_job(d,c,job,apply=False,request_type='backfill_request'):
+ if request_type not in ['backfill_request','vps_backfill_request']:raise BackfillError('BACKFILL_REQUEST_TYPE')
  req=d.one(c['requests_folder_id'],'request:'+job['jobId'])
  if not req:raise BackfillError('BACKFILL_REQUEST_MISSING')
  qm=d.meta(req['id']);b.require_publisher(qm,b.CANONICAL_SA)
- if qm.get('parents')!=[c['requests_folder_id']] or qm.get('properties',{}).get('mgsArchiveType')!='backfill_request' or d.raw(req['id'])!=b.canonical(job):raise BackfillError('BACKFILL_REQUEST_CHANGED')
+ if qm.get('parents')!=[c['requests_folder_id']] or qm.get('properties',{}).get('mgsArchiveType')!=request_type or d.raw(req['id'])!=b.canonical(job):raise BackfillError('BACKFILL_REQUEST_CHANGED')
  found=d.one(c['receipts_folder_id'],'receipt:'+job['jobId'])
  if not found:return {'status':'pending','job_id':job['jobId']}
  rm=d.meta(found['id']);b.require_publisher(rm,b.ACCOUNT)
