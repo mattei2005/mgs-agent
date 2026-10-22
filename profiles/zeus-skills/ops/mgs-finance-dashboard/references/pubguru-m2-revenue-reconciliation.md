@@ -26,6 +26,14 @@
    - M2 gross in the finance dashboard.
 7. Report a difference rather than changing the dashboard. A divergence between two PubGuru reports is an upstream-source inconsistency until PubGuru/MonetizeMore or Rodolfo identifies which source governs.
 
+## Browser collection and empty-window handling
+
+- Before asking Rodolfo for an export missing from the closing workbook, try the already-authorized read-only PubGuru route. Use the origin-bound saved vault handle; keep passwords, session tokens and token-bearing resource URLs entirely out of logs/evidence.
+- The browser's observed Profit Attribution request can be reused for the same authorized domains/date windows, preserving its authenticated parameters in browser memory. Persist only sanitized financial rows plus domain, exact start/end, requested/reporting currency and HTTP status. Never print or save the complete request URL because it carries a token.
+- Treat HTTP204 as an explicitly empty report window, not malformed JSON. Record it as `no_report_rows` and reconcile it against the monthly NETWORK source; do not silently turn network/auth failures or other empty responses into zero.
+- Preserve partial progress before a long multi-window request. A browser-harness Runtime.evaluate wait can expire before the browser promise finishes: store per-window results and completion/error state in the page, read the bounded progress back, append it to a local evidence file and resume only missing domain/date keys. Consume every pending read before finishing. Require the complete deduplicated window count and gap-free month coverage.
+- Compare NETWORK daily amounts with the closing Sheet at the Sheet's displayed precision. A sum of rounded daily values can differ from a sum of raw network values or rounded campaign/window aggregates; preserve all three bases instead of replacing the owner-designated closing total. A Direct/BOT classification does not itself establish operational country/vertical, and a historical template with several countries does not authorize choosing one by guess.
+
 ## August 2026 validated read-only observation
 
 - Dashboard production, cutoff 31/08:
