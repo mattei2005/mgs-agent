@@ -1,6 +1,8 @@
 # Migração integral MGS-AGENTS → conta de 30 TB
 
-## Correção de eficiência — 1562859075107164270 (publicada; ainda não ativa no owner)
+## Correção de eficiência — 1562859075107164270 (teste manual verificado; aceitação agendada pendente)
+
+O owner executou a nova revisão em `2026-10-22T16:43:05.645Z`, confirmado pelas imagens da mensagem `1562869000965324812` e pelo heartbeat nativo relido pela SA: digest `56de68d1062dfc8d76a15502dfaca46a0fe9ab1ebc7efe33ae9f6fc48464cf2a`, status `ok`, modo `manual_probe_only`, ACK/probe verificados e zero cópias/movimentos/exclusões. O repin manual não está mais pendente; não solicitar outro Run nem executar mgsArquivoAtivar. Os pins SA/histórico permanecem anteriores até duas execuções agendadas saudáveis da revisão nova. O heartbeat manual ainda registra orçamento bulk pausado. Prova: `data/ares/creative-ops/30tb-archive/efficiency-owner-manual-proof-1562869000965324812.json`. O bloco abaixo preserva o histórico da publicação; suas instruções de repin já foram cumpridas.
 
 Rodolfo apontou repetição de alertas sem entrega. A investigação confirmou no código: consultas About/metadados/heartbeat antes da admissão de orçamento; preparação histórica global antes das cópias; resolução repetida de diretórios; e erros de leitura/criação do Drive. Esses mecanismos contribuem para desperdício, mas não foi medido o custo exato de cada fase nem atribuída toda a saturação a eles.
 
