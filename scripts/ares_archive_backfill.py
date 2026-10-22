@@ -104,6 +104,13 @@ def verify_job(d,c,job,apply=False):
   if d.meta(req['id'])['properties'].get('mgsArchiveState')!='verified':raise BackfillError('BACKFILL_VERIFIED_STATE_READBACK')
  return result
 
+def prioritize_pending_assets(assets,catalogue_rows):
+ # Prioritize this delivery without changing membership, frozen bytes or jobs already queued.
+ active=[r for r in catalogue_rows if r.get('metadata_clean') is True and r.get('status') not in {'TRASHED','DELETED','DELETED_BY_MANAGER_REQUEST','TRASHED_BY_MANAGER_REQUEST'} and not any(r.get(k) for k in ['asset_trashed','source_trashed','asset_drive_trashed','source_drive_trashed','deleted_at','removed_at','superseded_by_asset_id'])]
+ processed={r.get('asset_drive_id') for r in active if isinstance(r.get('asset_drive_id'),str)}
+ originals={r.get('source_drive_id') for r in active if isinstance(r.get('source_drive_id'),str)}
+ return sorted(assets,key=lambda a:0 if a['sourceId'] in processed else 1 if a['sourceId'] in originals else 2)
+
 def cycle_locked(d,c,apply=False):
  m,stage=manifest_load();p=location();idx=obj(p/'backfill-index.json',{'mappings':{},'verified_jobs':{}});result={'status':'awaiting_owner_repin','migration_id':MIGRATION,'owner_ready':False,'verified_files':len(idx['mappings']),'total_files':len(m['assets']),'queued_jobs':[],'verified_jobs':[],'pending_jobs':[],'blocked':[],'historical_cleanup_enabled':False}
  beat=d.one(c['control_folder_id'],'heartbeat:worker-v1')
@@ -123,6 +130,8 @@ def cycle_locked(d,c,apply=False):
   except b.ArchiveError as exc:result['blocked'].append({'job_id':job['jobId'],'reason':str(exc)[:220]})
  if apply and not result['blocked']:
   idx=obj(p/'backfill-index.json',{'mappings':{},'verified_jobs':{}});already={a['sourceId'] for j in localjobs for a in j['assets']};left=[a for a in m['assets'] if a['sourceId'] not in already];open_count=sum(j['jobId'] not in idx['verified_jobs'] for j in localjobs)
+  catalogue=[json.loads(line) for line in (b.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip()]
+  left=prioritize_pending_assets(left,catalogue);result['queue_priority']='processed_catalogue_then_originals_then_auxiliaries'
   for start in range(0,min(len(left),max(0,min(4,12-open_count))*8),8):
    chunk=left[start:start+8]
    try:
