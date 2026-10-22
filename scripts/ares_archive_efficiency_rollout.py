@@ -60,7 +60,7 @@ def publish():
   fid=a.staged_blob(d,s,c['control_folder_id'],'worker:'+prepared['worker_sha256'],'worker_source',TARGET.read_bytes(),'worker-efficient-'+prepared['worker_sha256']+'.js','application/javascript')
   b.require_publisher(d.meta(fid),b.CANONICAL_SA)
   if d.raw(fid)!=TARGET.read_bytes():raise b.ArchiveError('EFFICIENCY_NATIVE_BYTES_READBACK')
-  s.update(worker_file_id=fid,worker_sha256=prepared['worker_sha256'],worker_source_path=prepared['worker_source_path'],previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=BASE_SHA,previous_activation_file_id=s.get('activation_file_id'),owner_accepted=False,automatic_archive_enabled=False,heartbeat_samples=[],status='efficiency_revision_awaiting_owner_repin',published_at=b.now_iso())
+  s.update(worker_file_id=fid,worker_sha256=prepared['worker_sha256'],worker_source_path=prepared['worker_source_path'],previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=BASE_SHA,previous_activation_file_id=s.get('activation_file_id'),owner_accepted=False,automatic_archive_enabled=s.get('automatic_archive_enabled') is True,heartbeat_samples=[],status='efficiency_revision_awaiting_owner_repin',published_at=b.now_iso())
   s['efficiency_revision'].update(status=s['status'],worker_file_id=fid,backup_activation_key_versioned=True)
   b.atomic_json(a.STAGE,s);sync_whole(s)
   if b.config_load()!=c:raise b.ArchiveError('EFFICIENCY_ACTIVE_CONFIG_CHANGED')
