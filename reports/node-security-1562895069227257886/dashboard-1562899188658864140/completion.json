@@ -1,0 +1,194 @@
+{
+  "status": "approved_hostinger_and_dashboard_node22_patches_completed",
+  "authorization_message_id": "1562896598286078085",
+  "one_task_model_exception_message_id": "1562899188658864140",
+  "completed_at": "2026-10-22T19:17:46.414142+00:00",
+  "hostinger": {
+    "node": "22.23.4",
+    "package": "22.23.4-1nodesource1",
+    "npm_preserved": "12.2.0",
+    "corepack_preserved": "0.36.0",
+    "evidence": "../hostinger-1562896598286078085-validation.json"
+  },
+  "dashboard": {
+    "authorization": "1562896598286078085",
+    "model_exception": "1562899188658864140",
+    "time": 1792696539.2164614,
+    "status": "dashboard_node22_security_patch_completed",
+    "version": "v22.23.4",
+    "binary_path": "/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node",
+    "historical_prefix_retained_for_existing_unit_and_cli_compatibility": true,
+    "binary_sha256": "94efd062ed066c1a0b332e18249859c905e920eeada5df55d24c99b919629a90",
+    "app_pid": 513408,
+    "previous_app_pid": 992,
+    "code_files_unchanged": 95,
+    "dependency_files_unchanged": 1347,
+    "config_unchanged": true,
+    "financial_tables_fingerprint_unchanged": 9,
+    "financial_writes": 0,
+    "protected_service_pids_unchanged": true,
+    "boot_unchanged": true,
+    "http_checks": [
+      {
+        "path": "/login",
+        "private_socket": false,
+        "exit": 0,
+        "status": 200
+      },
+      {
+        "path": "/login",
+        "private_socket": true,
+        "exit": 0,
+        "status": 200
+      },
+      {
+        "path": "/api/scenarios",
+        "private_socket": false,
+        "exit": 0,
+        "status": 401
+      },
+      {
+        "path": "/api/scenarios",
+        "private_socket": true,
+        "exit": 0,
+        "status": 401
+      },
+      {
+        "path": "/api/health",
+        "private_socket": false,
+        "exit": 0,
+        "status": 401
+      },
+      {
+        "path": "/api/health",
+        "private_socket": true,
+        "exit": 0,
+        "status": 401
+      },
+      {
+        "path": "/",
+        "private_socket": false,
+        "exit": 0,
+        "status": 303
+      },
+      {
+        "path": "/",
+        "private_socket": true,
+        "exit": 0,
+        "status": 303
+      }
+    ],
+    "rollback_verified": true,
+    "backup": "/root/zeus-finance-node-1562899188658864140",
+    "recovered_validator_failures": [
+      "Type=simple briefly exposes systemd executable before Node exec;actual convergence recorded",
+      "Socket units have ActiveState but no MainPID;role-aware checks passed before retry"
+    ]
+  },
+  "gates": [
+    {
+      "phase": "node",
+      "counts": {
+        "tests": 279,
+        "pass": 279,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "pass": true,
+      "seconds": 398.995127
+    },
+    {
+      "phase": "python",
+      "counts": {
+        "tests": 242
+      },
+      "pass": true,
+      "seconds": 700.046321
+    }
+  ],
+  "total_test_cases": 521,
+  "production_readonly_canary": {
+    "pass": true,
+    "node": "22.23.4",
+    "readonly_database": true,
+    "workspaces": 3,
+    "manager_views": 15,
+    "expected": 15,
+    "http_checks": [
+      {
+        "path": "/login",
+        "status": 200,
+        "bytes": 2832
+      },
+      {
+        "path": "/api/scenarios",
+        "status": 401,
+        "bytes": 38
+      },
+      {
+        "path": "/api/health",
+        "status": 401,
+        "bytes": 38
+      },
+      {
+        "path": "/",
+        "status": 303,
+        "bytes": 32
+      }
+    ],
+    "financial_writes": 0
+  },
+  "public_browser": {
+    "pass": true,
+    "checks": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "login_rendered": true,
+        "api_auth_preserved": true,
+        "js_errors": 0,
+        "no_horizontal_overflow": true
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "login_rendered": true,
+        "api_auth_preserved": true,
+        "js_errors": 0,
+        "no_horizontal_overflow": true
+      }
+    ],
+    "login_attempts": 0,
+    "financial_posts": 0
+  },
+  "validator_recovery": {
+    "rollbacks": 2,
+    "causes": [
+      "Type=simple active state briefly resolved tosystemd before Nodeexec;actual convergence0.1s recorded",
+      "Socket unit has noMainPID;role-aware verification corrected before final retry"
+    ],
+    "recovery_scope": "Same approved Node binary;original appcode/config/financialdata never rewritten;full original rollback receipts preserved."
+  },
+  "concurrency": "Canonical finance admission/legacy/remote file locks retained;busy lookup worker was not killed. Queued on samekernel lock to avoid nonblocking writer starvation.",
+  "code_configuration_provenance": "95 deployed files and1347 dependency files identical before/after. Two JSONfiles differ bytewise betweenlocal testtree andremote package/config;package dependencies/engines match semantically and production configuration was frozen and exercised inreal readonly canary,not synchronized or repaired.",
+  "secure_full_gate_logs": "/root/.hermes/secure-backups/vps-maintenance/node-security-1562896598286078085/dashboard-gates-1562899188658864140",
+  "retained_artifacts": [
+    "/root/zeus-finance-node-1562899188658864140 onMatteiInc01",
+    "/home/mgsfinance/runtime/.node-security-1562899188658864140 candidateNode,not service target",
+    "/root/.hermes/secure-backups/vps-maintenance/node-security-1562896598286078085/dashboard-gates-1562899188658864140"
+  ],
+  "outside_confirmed_lot": [
+    "Three Mattei globalNode18.20.8",
+    "BitNinja embeddedNode10.24.1 onInc01/03",
+    "Hostinger Playwright embeddedNode24.17.0/24.18.1"
+  ],
+  "no_new_reboot_or_gateway_restart": true,
+  "no_financial_writes": true,
+  "model_exception_is_one_task_only": true
+}

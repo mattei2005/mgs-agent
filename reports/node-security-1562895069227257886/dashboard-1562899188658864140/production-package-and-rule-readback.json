@@ -1,0 +1,19 @@
+{
+  "package": {
+    "engines": {
+      "node": ">=22"
+    },
+    "dependencies": {
+      "@electric-sql/pglite": "0.5.8",
+      "express": "5.2.1",
+      "pg": "8.23.0",
+      "qrcode": "1.5.4"
+    },
+    "devDependencies": {
+      "@playwright/test": "1.63.0"
+    }
+  },
+  "remote_rule_sha256": "65bf25d846a7b597e9abb69d9e0d94b7ea0b42724c1224855abba94fc2ff7705",
+  "active_node_unchanged_before_cutover": true,
+  "remote_rule_matches_canonical_data": false
+}

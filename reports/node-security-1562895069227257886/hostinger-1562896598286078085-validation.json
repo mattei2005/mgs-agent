@@ -1,0 +1,59 @@
+{
+  "authority": "1562896598286078085",
+  "status": "hostinger_node22_completed_dashboard_blocked_by_finance_model_route",
+  "package_version": "22.23.4-1nodesource1",
+  "node": "v22.23.4",
+  "npm": "12.2.0",
+  "corepack": "0.36.0",
+  "system_node_consumers": [
+    {
+      "pid": 1859081,
+      "exe": "/usr/bin/node",
+      "cwd": "/root/.hermes/profiles/zeus/mcp/hostinger-vps",
+      "version": "v22.23.4"
+    },
+    {
+      "pid": 1859562,
+      "exe": "/usr/bin/node",
+      "cwd": "/root/.hermes/profiles/zeus/lsp/node_modules/pyright/dist",
+      "version": "v22.23.4"
+    }
+  ],
+  "other_node_processes_outside_confirmed_scope": [
+    {
+      "pid": 1858558,
+      "exe": "/root/.local/share/mgs/sb-venv/lib/python3.12/site-packages/playwright/driver/node",
+      "cwd": "/root/mgs-agent",
+      "version": "v24.17.0"
+    },
+    {
+      "pid": 1860074,
+      "exe": "/root/mgs-agent/.venv-sb/lib/python3.11/site-packages/playwright/driver/node",
+      "cwd": "/root",
+      "version": "v24.18.1"
+    }
+  ],
+  "gateways_unchanged": true,
+  "boot_unchanged": true,
+  "rollback_verified": true,
+  "mcp_reconnect_probe": "catalog search passed after native reconnect and exactnewPID/version readback",
+  "lsp_reload": "Old Pyright PID1828414 exited;native manager respawns a dead client on next eligible edit. No old systemNode process remains.",
+  "needrestart_exit": 0,
+  "needrestart": [
+    "NEEDRESTART-KCUR: 6.8.0-147-generic",
+    "NEEDRESTART-KEXP: 6.8.0-147-generic",
+    "NEEDRESTART-KSTA: 1"
+  ],
+  "dashboard_mutated": false,
+  "dashboard_blocker": {
+    "rule": "mgs-finance-dashboard/SKILL.md mandatory model route",
+    "required": "openai-codex/gpt-6-astra-900k",
+    "active_turn": "openai-codex/gpt-6.1-sol",
+    "disposition": "No model/global-config/gateway change or finance runtime write. Need finance-route execution or explicit one-task exception."
+  },
+  "recovered_tool_failures": [
+    "npm view result was a singleton array;metadata normalized. npm pack JSON was not assumed after failure;existing tarball independently read and publicSHA1/SHA512 verified before mutation.",
+    "MCP first request observed old transport closure;confirmed freshserverPID22.23.4,then harmless catalog search passed.",
+    "Broad postreload Node predicate saw unrelated transient Playwright Node24.17.0;refined exactsystemruntime scope,not replaced vendorSDK."
+  ]
+}

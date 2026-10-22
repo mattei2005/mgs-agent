@@ -118,6 +118,27 @@ exec {self.real_git} "$@"
         self.assertNotIn("Sem alterações staged", text)
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
 
+    def test_reviewed_private_runbook_commits(self):
+        name = "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md"
+        path = self.repo / name
+        path.parent.mkdir(parents=True)
+        path.write_text("Synthetic documentation fixture; no credentials.\n")
+        receipt = "data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997.json"
+        evidence = self.repo / receipt
+        evidence.parent.mkdir(parents=True)
+        evidence.write_text('{"synthetic_fixture":true}\n')
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()), {name, receipt})
+
+    def test_private_runbook_exception_does_not_allow_sibling_credentials(self):
+        base = self.repo / "profiles/zeus-skills/ops/google-drive-agent-automation/references"
+        base.mkdir(parents=True)
+        (base / "private-vps-owner-connector.md").write_text("Synthetic documentation fixture.\n")
+        (base / "credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc02",
+  "exit": 0,
+  "stdout": "{\"observed_at\": 1792693565.7120135, \"dispatch_journal\": [{\"time_usec\": \"1792693131124283\", \"message\": \"Started /usr/bin/systemctl reboot --no-block.\"}, {\"time_usec\": \"1792693131130225\", \"message\": \"zeus-hetzner-reboot-1562891945536393229.service: Deactivated successfully.\"}], \"current_boot_errors\": [{\"time_usec\": \"1792693215776441\", \"monotonic_usec\": \"5118871\", \"transport\": \"kernel\", \"message\": \"pci 0000:0e:00.0: Failed to read data\"}, {\"time_usec\": \"1792693215792076\", \"monotonic_usec\": \"5134506\", \"transport\": \"kernel\", \"message\": \"hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)\"}, {\"time_usec\": \"1792693215925102\", \"monotonic_usec\": \"5267532\", \"transport\": \"kernel\", \"message\": \"snd_hda_intel 0000:0d:00.6: no codecs found!\"}, {\"time_usec\": \"1792693508669635\", \"monotonic_usec\": \"298012066\", \"transport\": \"syslog\", \"message\": \"error: kex_exchange_identification: banner line contains invalid characters\"}], \"failed_units\": \"\", \"reboot_timer_loadstate\": \"LoadState=not-found\\nActiveState=inactive\", \"postboot_time\": \"2026-10-22 18:20:11\"}\n",
+  "stderr": ""
+}

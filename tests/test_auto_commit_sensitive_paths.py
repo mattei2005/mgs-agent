@@ -69,6 +69,18 @@ fi
             "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/other_credentials.py": 1,
             "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credentials.json": 1,
             "reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/token.json": 1,
+            "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md": 0,
+            "work/profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md": 1,
+            "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md.bak": 1,
+            "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector-other.md": 1,
+            "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-owner.json": 1,
+            "profiles/zeus-skills/ops/google-drive-agent-automation/references/credentials.json": 1,
+            "profiles/zeus-skills/ops/google-drive-agent-automation/references/token.json": 1,
+            "data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997.json": 0,
+            "work/data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997.json": 1,
+            "data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997.json.bak": 1,
+            "data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-other.json": 1,
+            "data/ares/creative-ops/30tb-archive/owner-connector/credentials.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

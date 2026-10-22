@@ -62,13 +62,173 @@
           "UnitFileState": "enabled"
         }
       }
+    },
+    "MatteiInc02": {
+      "host": "MatteiInc02",
+      "boot_id": "52496065-e13d-402e-88c0-786aaaa4739e",
+      "kernel": "5.15.0-198-generic",
+      "units": {
+        "nginx-rc.service": {
+          "MainPID": "1537",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "php83rc-fpm.service": {
+          "MainPID": "1024",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "apache2-rc.service": {
+          "MainPID": "1359",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mariadb.service": {
+          "MainPID": "1108",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "cron.service": {
+          "MainPID": "1306",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        }
+      }
+    },
+    "MatteiInc03JBF": {
+      "host": "MatteiInc03",
+      "boot_id": "e7bc01a9-4f05-49be-a52b-dfc5ccf01f9c",
+      "kernel": "5.15.0-198-generic",
+      "units": {
+        "nginx-rc.service": {
+          "MainPID": "2585",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "php83rc-fpm.service": {
+          "MainPID": "1023",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "apache2-rc.service": {
+          "MainPID": "2402",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mariadb.service": {
+          "MainPID": "1149",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "cron.service": {
+          "MainPID": "2347",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        }
+      }
+    },
+    "MatteiInc01": {
+      "host": "MatteiInc01",
+      "boot_id": "137247a5-71f5-4fc9-a1a5-ad3c6e206a53",
+      "kernel": "5.15.0-198-generic",
+      "units": {
+        "nginx-rc.service": {
+          "MainPID": "1793",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "php83rc-fpm.service": {
+          "MainPID": "1006",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "apache2-rc.service": {
+          "MainPID": "1504",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mariadb.service": {
+          "MainPID": "1114",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "cron.service": {
+          "MainPID": "1426",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mgs-finance-dash.service": {
+          "MainPID": "992",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mgs-finance-dash.socket": {
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        },
+        "mgs-postgresql18.service": {
+          "MainPID": "991",
+          "Result": "success",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "UnitFileState": "enabled"
+        }
+      }
     }
   },
-  "remaining": [
-    "MatteiInc01",
-    "MatteiInc02",
-    "MatteiInc03JBF"
-  ],
+  "remaining": [],
   "observations": [
     {
       "host": "Hestia-mail",
@@ -96,6 +256,51 @@
       "attempt": 1,
       "ssh_exit": 255,
       "diagnostic": "ssh: connect to host 46.4.95.117 port 22: Connection timed out\n"
+    },
+    {
+      "host": "MatteiInc01",
+      "attempt": 2,
+      "ssh_exit": 255,
+      "diagnostic": "ssh: connect to host 162.55.28.178 port 22: Connection timed out\n"
+    },
+    {
+      "host": "MatteiInc02",
+      "attempt": 2,
+      "ssh_exit": 0,
+      "new_boot": true,
+      "services_active": true,
+      "boot_id": "52496065-e13d-402e-88c0-786aaaa4739e",
+      "kernel": "5.15.0-198-generic"
+    },
+    {
+      "host": "MatteiInc03JBF",
+      "attempt": 2,
+      "ssh_exit": 255,
+      "diagnostic": "ssh: connect to host 46.4.95.117 port 22: Connection timed out\n"
+    },
+    {
+      "host": "MatteiInc01",
+      "attempt": 3,
+      "ssh_exit": 255,
+      "diagnostic": "ssh: connect to host 162.55.28.178 port 22: Connection timed out\n"
+    },
+    {
+      "host": "MatteiInc03JBF",
+      "attempt": 3,
+      "ssh_exit": 0,
+      "new_boot": true,
+      "services_active": true,
+      "boot_id": "e7bc01a9-4f05-49be-a52b-dfc5ccf01f9c",
+      "kernel": "5.15.0-198-generic"
+    },
+    {
+      "host": "MatteiInc01",
+      "attempt": 4,
+      "ssh_exit": 0,
+      "new_boot": true,
+      "services_active": true,
+      "boot_id": "137247a5-71f5-4fc9-a1a5-ad3c6e206a53",
+      "kernel": "5.15.0-198-generic"
     }
   ]
 }

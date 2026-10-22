@@ -44,6 +44,15 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/ares-skills/gr
 # Exact evidence path only: no auth store, sibling or backup is exempt.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^reports/codex-rootcause-20261016-1560486954515046455-evidence/staged/agent/credential_pool\.py$"
 
+# Reviewed owner-connector runbook, reconciled with its authorized audit trail
+# and canonical mirror. "private" describes network scope, not stored secrets.
+# Exact documentation path only; sibling credential/private files stay blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector\.md$"
+
+# Public-metadata HTTPS receipt from the same authorized recovery; reviewed
+# fields contain route/status evidence only, never OAuth credentials.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997\.json$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

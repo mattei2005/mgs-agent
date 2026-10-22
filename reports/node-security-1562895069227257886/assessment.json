@@ -1,0 +1,335 @@
+{
+  "id": "node-security-1562895069227257886",
+  "source_message_id": "1562895069227257886",
+  "source_thread_id": "1562582544292249772",
+  "observed_at": "2026-10-22T18:30:28.631914+00:00",
+  "status": "audit_complete_updates_not_authorized",
+  "source_image_versions": {
+    "22": "22.23.4",
+    "24": "24.22.1",
+    "26": "26.12.1"
+  },
+  "official_sources": [
+    "https://nodejs.org/en/blog/release/v22.23.4",
+    "https://nodejs.org/en/about/previous-releases",
+    "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases"
+  ],
+  "hosts": [
+    {
+      "label": "MatteiInc01",
+      "hostname": "MatteiInc01",
+      "binaries": {
+        "/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node": {
+          "aliases": [
+            "/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v22.23.2",
+            "stderr": ""
+          }
+        },
+        "/opt/bitninja-node-dojo/bin/node": {
+          "aliases": [
+            "/opt/bitninja-node-dojo/bin/node"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v10.24.1",
+            "stderr": ""
+          }
+        },
+        "/usr/bin/node": {
+          "aliases": [
+            "/usr/bin/node",
+            "/usr/bin/nodejs"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v18.20.8",
+            "stderr": ""
+          }
+        }
+      },
+      "running_node_processes": [
+        {
+          "pid": 992,
+          "exe": "/home/mgsfinance/runtime/node-v22.23.2-linux-x64/bin/node",
+          "version": {
+            "exit": 0,
+            "stdout": "v22.23.2",
+            "stderr": ""
+          },
+          "cwd": "/home/mgsfinance/releases/pg-auth-1545934831664242748",
+          "units": [
+            "mgs-finance-dash.service"
+          ],
+          "script_paths": [
+            "/home/mgsfinance/releases/pg-auth-1545934831664242748/server.mjs"
+          ]
+        },
+        {
+          "pid": 1720,
+          "exe": "/opt/bitninja-node-dojo/bin/node",
+          "version": {
+            "exit": 0,
+            "stdout": "v10.24.1",
+            "stderr": ""
+          },
+          "cwd": "/",
+          "units": [
+            "bitninja.service"
+          ],
+          "script_paths": []
+        }
+      ],
+      "policies": {
+        "nodejs": {
+          "installed": "18.20.8-1nodesource1",
+          "candidate": "18.20.8-1nodesource1"
+        },
+        "bitninja": {
+          "installed": "3.17.9-1",
+          "candidate": "3.17.9-1"
+        },
+        "bitninja-node-dojo": {
+          "installed": "1.0.2-1",
+          "candidate": "1.0.2-1"
+        }
+      },
+      "vendor_runtimes": [
+        {
+          "path": "/opt/bitninja-node-dojo/bin/node",
+          "version": "v10.24.1",
+          "owning_package": "bitninja-node-dojo: /opt/bitninja-node-dojo/bin/node"
+        }
+      ],
+      "vendor_packages": [
+        "bitninja\t3.17.9-1\tinstall ok installed",
+        "bitninja-dispatcher\t1.1.0-1\tinstall ok installed",
+        "bitninja-dojo\t2.8.6-1\tinstall ok installed",
+        "bitninja-mq\t1.1.0-1\tinstall ok installed",
+        "bitninja-node-dojo\t1.0.2-1\tinstall ok installed",
+        "bitninja-policier\t1.0.0-1\tinstall ok installed",
+        "bitninja-process-analysis\t1.1.1-1\tinstall ok installed",
+        "bitninja-python-dojo\t1.0.4-1\tinstall ok installed",
+        "bitninja-reliable-auto-update\t1.1.1-1\tinstall ok installed",
+        "bitninja-ssl-termination\t1.2.4\tinstall ok installed",
+        "bitninja-waf3\t1.1.2-1\tinstall ok installed"
+      ],
+      "node22_simulation": null
+    },
+    {
+      "label": "MatteiInc02",
+      "hostname": "MatteiInc02",
+      "binaries": {
+        "/usr/bin/node": {
+          "aliases": [
+            "/usr/bin/node",
+            "/usr/bin/nodejs"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v18.20.8",
+            "stderr": ""
+          }
+        }
+      },
+      "running_node_processes": [],
+      "policies": {
+        "nodejs": {
+          "installed": "18.20.8-1nodesource1",
+          "candidate": "18.20.8-1nodesource1"
+        },
+        "bitninja": {
+          "installed": "(none)",
+          "candidate": "3.15.9-1"
+        },
+        "bitninja-node-dojo": {
+          "installed": "(none)",
+          "candidate": "1.0.2-1"
+        }
+      },
+      "vendor_runtimes": [],
+      "vendor_packages": [],
+      "node22_simulation": null
+    },
+    {
+      "label": "MatteiInc03JBF",
+      "hostname": "MatteiInc03",
+      "binaries": {
+        "/opt/bitninja-node-dojo/bin/node": {
+          "aliases": [
+            "/opt/bitninja-node-dojo/bin/node"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v10.24.1",
+            "stderr": ""
+          }
+        },
+        "/usr/bin/node": {
+          "aliases": [
+            "/usr/bin/node",
+            "/usr/bin/nodejs"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v18.20.8",
+            "stderr": ""
+          }
+        }
+      },
+      "running_node_processes": [
+        {
+          "pid": 1492,
+          "exe": "/opt/bitninja-node-dojo/bin/node",
+          "version": {
+            "exit": 0,
+            "stdout": "v10.24.1",
+            "stderr": ""
+          },
+          "cwd": "/",
+          "units": [
+            "bitninja.service"
+          ],
+          "script_paths": []
+        }
+      ],
+      "policies": {
+        "nodejs": {
+          "installed": "18.20.8-1nodesource1",
+          "candidate": "18.20.8-1nodesource1"
+        },
+        "bitninja": {
+          "installed": "3.17.9-1",
+          "candidate": "3.17.9-1"
+        },
+        "bitninja-node-dojo": {
+          "installed": "1.0.2-1",
+          "candidate": "1.0.2-1"
+        }
+      },
+      "vendor_runtimes": [
+        {
+          "path": "/opt/bitninja-node-dojo/bin/node",
+          "version": "v10.24.1",
+          "owning_package": "bitninja-node-dojo: /opt/bitninja-node-dojo/bin/node"
+        }
+      ],
+      "vendor_packages": [
+        "bitninja\t3.17.9-1\tinstall ok installed",
+        "bitninja-dispatcher\t1.1.0-1\tinstall ok installed",
+        "bitninja-dojo\t2.8.6-1\tinstall ok installed",
+        "bitninja-mq\t1.1.0-1\tinstall ok installed",
+        "bitninja-node-dojo\t1.0.2-1\tinstall ok installed",
+        "bitninja-policier\t1.0.0-1\tinstall ok installed",
+        "bitninja-process-analysis\t1.1.1-1\tinstall ok installed",
+        "bitninja-python-dojo\t1.0.4-1\tinstall ok installed",
+        "bitninja-reliable-auto-update\t1.1.1-1\tinstall ok installed",
+        "bitninja-ssl-termination\t1.2.4\tinstall ok installed",
+        "bitninja-waf3\t1.1.2-1\tinstall ok installed"
+      ],
+      "node22_simulation": null
+    },
+    {
+      "label": "Hestia-mail",
+      "hostname": "server.boostingecon.com",
+      "binaries": {},
+      "running_node_processes": [],
+      "policies": {
+        "nodejs": {
+          "installed": "(none)",
+          "candidate": "18.19.1+dfsg-6ubuntu5"
+        }
+      },
+      "vendor_runtimes": [],
+      "vendor_packages": [],
+      "node22_simulation": null
+    },
+    {
+      "label": "Hostinger-agents",
+      "hostname": "srv1767265",
+      "binaries": {
+        "/usr/bin/node": {
+          "aliases": [
+            "/usr/bin/node",
+            "/usr/bin/nodejs"
+          ],
+          "version": {
+            "exit": 0,
+            "stdout": "v22.23.3",
+            "stderr": ""
+          }
+        }
+      },
+      "running_node_processes": [
+        {
+          "pid": 716144,
+          "exe": "/usr/bin/node",
+          "version": {
+            "exit": 0,
+            "stdout": "v22.23.3",
+            "stderr": ""
+          },
+          "cwd": "/root/.hermes/profiles/zeus/mcp/hostinger-vps",
+          "units": [
+            "zeus-gateway.service"
+          ],
+          "script_paths": [
+            "/root/mgs-agent/scripts/hostinger-vps-mcp-readonly.mjs"
+          ]
+        },
+        {
+          "pid": 1828414,
+          "exe": "/usr/bin/node",
+          "version": {
+            "exit": 0,
+            "stdout": "v22.23.3",
+            "stderr": ""
+          },
+          "cwd": "/root/.hermes/profiles/zeus/lsp/node_modules/pyright/dist",
+          "units": [
+            "zeus-gateway.service"
+          ],
+          "script_paths": [
+            "/root/.hermes/profiles/zeus/lsp/bin/pyright-langserver"
+          ]
+        }
+      ],
+      "policies": {
+        "nodejs": {
+          "installed": "22.23.3-1nodesource1",
+          "candidate": "22.23.4-1nodesource1"
+        }
+      },
+      "vendor_runtimes": [],
+      "vendor_packages": [],
+      "node22_simulation": {
+        "exit": 0,
+        "rows": [
+          "1 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.",
+          "Inst nodejs [22.23.3-1nodesource1] (22.23.4-1nodesource1 . nodistro:nodistro [amd64])"
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "hosts_audited": 5,
+    "hosts_with_discovered_node": 4,
+    "running_node_processes": 5
+  },
+  "confirmed_gaps": [
+    "Hostinger system/runtime22.23.3,22.23.4-1nodesource1 candidate;exact simulation1upgrade0new0removal.",
+    "Finance dashboard onMatteiInc01 runs isolated22.23.2;system Node update alone will not replace that runtime.",
+    "Three Mattei systemNode18.20.8 pinned toNodeSource18 branch;EOL,no newer candidate after fresh indexes;major migration needs compatibility/consumer audit.",
+    "BitNinja onInc01/03 owns embeddedNode10.24.1 inbitninja-node-dojo1.0.2-1,current vendor candidate. No evidence of vendor backports or certified CVE exemption;do not replace embedded binary manually.",
+    "Hestia host:noNode runtime/process found in tested paths and package/process inventory;do not install it for this advisory."
+  ],
+  "recommendation": "Prioritize Hostinger22.23.3→22.23.4 and isolated dashboard22.23.2→22.23.4 with rollback/canary and consumer restart plan. Separately resolve system18 consumers/migration and BitNinja vendor-supported remediation. No global major bump,no vendor binary replacement,no self gateway restart implied.",
+  "production_package_install_or_runtime_change": false,
+  "index_refresh": true,
+  "authorization": "Read-only status request only. Earlier PHP/reboot approval does not extend to Node updates.",
+  "coverage_limit": "Five known active hosts,not a new exhaustive provider-account or offline filesystem/runtime inventory.",
+  "research_tool_recovery": "Configured ddgs search backend lacks dependency;automatic Exa failover returned primary-source links. Direct official extraction verified22.23.4 security release;no runtime install/credential/billing/gateway change."
+}

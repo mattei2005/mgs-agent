@@ -1,0 +1,187 @@
+{
+  "status": "reboots_and_application_recovery_completed_with_journal_residual",
+  "authorization_message_id": "1562891945536393229",
+  "source_thread_id": "1562582544292249772",
+  "completed_at": "2026-10-22T18:27:30.705177+00:00",
+  "hosts": [
+    {
+      "host": "MatteiInc01",
+      "before_boot_id": "b9879eb3-7c8d-404c-802b-bfd8ad0ebdfb",
+      "boot_id": "137247a5-71f5-4fc9-a1a5-ad3c6e206a53",
+      "kernel": "5.15.0-198-generic",
+      "packages_preserved": true,
+      "reboot_marker": false,
+      "failed_units": [],
+      "boot_and_application_recovery_validated": true,
+      "http_checks": 150,
+      "php_versions": {
+        "/RunCloud/Packages/php83rc/sbin/php-fpm": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)"
+      },
+      "regressions": [],
+      "journal_errors": [
+        {
+          "time_usec": "1792693345793754",
+          "monotonic_usec": "5133010",
+          "transport": "kernel",
+          "message": "pci 0000:0e:00.0: Failed to read data"
+        },
+        {
+          "time_usec": "1792693345809317",
+          "monotonic_usec": "5148572",
+          "transport": "kernel",
+          "message": "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)"
+        },
+        {
+          "time_usec": "1792693345888760",
+          "monotonic_usec": "5228015",
+          "transport": "kernel",
+          "message": "snd_hda_intel 0000:0d:00.6: no codecs found!"
+        }
+      ],
+      "strict_journal_gate_clear": false,
+      "transient_timer": "not-found/inactive",
+      "backup_verified": true
+    },
+    {
+      "host": "MatteiInc02",
+      "before_boot_id": "35d0ba54-7422-4fc4-99aa-eea26c5a3214",
+      "boot_id": "52496065-e13d-402e-88c0-786aaaa4739e",
+      "kernel": "5.15.0-198-generic",
+      "packages_preserved": true,
+      "reboot_marker": false,
+      "failed_units": [],
+      "boot_and_application_recovery_validated": true,
+      "http_checks": 30,
+      "php_versions": {
+        "/RunCloud/Packages/php83rc/sbin/php-fpm": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)"
+      },
+      "regressions": [],
+      "journal_errors": [
+        {
+          "time_usec": "1792693215776441",
+          "monotonic_usec": "5118871",
+          "transport": "kernel",
+          "message": "pci 0000:0e:00.0: Failed to read data"
+        },
+        {
+          "time_usec": "1792693215792076",
+          "monotonic_usec": "5134506",
+          "transport": "kernel",
+          "message": "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)"
+        },
+        {
+          "time_usec": "1792693215925102",
+          "monotonic_usec": "5267532",
+          "transport": "kernel",
+          "message": "snd_hda_intel 0000:0d:00.6: no codecs found!"
+        },
+        {
+          "time_usec": "1792693508669635",
+          "monotonic_usec": "298012066",
+          "transport": "syslog",
+          "message": "error: kex_exchange_identification: banner line contains invalid characters"
+        }
+      ],
+      "strict_journal_gate_clear": false,
+      "transient_timer": "not-found/inactive",
+      "backup_verified": true
+    },
+    {
+      "host": "MatteiInc03JBF",
+      "before_boot_id": "002f364d-b8c9-4312-a1c2-2d07be3e13d8",
+      "boot_id": "e7bc01a9-4f05-49be-a52b-dfc5ccf01f9c",
+      "kernel": "5.15.0-198-generic",
+      "packages_preserved": true,
+      "reboot_marker": false,
+      "failed_units": [],
+      "boot_and_application_recovery_validated": true,
+      "http_checks": 40,
+      "php_versions": {
+        "/RunCloud/Packages/php83rc/sbin/php-fpm": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)"
+      },
+      "regressions": [],
+      "journal_errors": [
+        {
+          "time_usec": "1792693259924574",
+          "monotonic_usec": "5123180",
+          "transport": "kernel",
+          "message": "pci 0000:0e:00.0: Failed to read data"
+        },
+        {
+          "time_usec": "1792693259939290",
+          "monotonic_usec": "5137896",
+          "transport": "kernel",
+          "message": "hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)"
+        },
+        {
+          "time_usec": "1792693260076108",
+          "monotonic_usec": "5274715",
+          "transport": "kernel",
+          "message": "snd_hda_intel 0000:0d:00.6: no codecs found!"
+        }
+      ],
+      "strict_journal_gate_clear": false,
+      "transient_timer": "not-found/inactive",
+      "backup_verified": true
+    },
+    {
+      "host": "Hestia-mail",
+      "before_boot_id": "e60bf8df-6243-4e54-9f1a-84660390859c",
+      "boot_id": "266581bb-c980-4802-89f8-324a6b2972f9",
+      "kernel": "6.8.0-147-generic",
+      "packages_preserved": true,
+      "reboot_marker": false,
+      "failed_units": [],
+      "boot_and_application_recovery_validated": true,
+      "http_checks": 36,
+      "php_versions": {
+        "/usr/local/hestia/php/sbin/hestia-php": "PHP 8.5.12 (fpm-fcgi) (built: Oct 22 2026 02:06:17) (NTS)",
+        "/usr/sbin/php-fpm8.3": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 14:32:55)"
+      },
+      "regressions": [],
+      "journal_errors": [],
+      "strict_journal_gate_clear": true,
+      "transient_timer": "not-found/inactive",
+      "backup_verified": true
+    }
+  ],
+  "totals": {
+    "reboots_validated": 4,
+    "runcloud_applications": 110,
+    "http_checks": 256,
+    "php_fcgi_executions": 109,
+    "application_regressions": 0
+  },
+  "simultaneous_dispatch": {
+    "actual_timestamp_spread_seconds": 0.23942,
+    "first_actual_start_eastern": "2026-10-22T14:18:51.064148-04:00",
+    "evidence": "previous-boot systemd service journal from all four hosts"
+  },
+  "mail_tls_checks": {
+    "imaps993": {
+      "tls_verified": true,
+      "banner_ok": true
+    },
+    "smtps465": {
+      "tls_verified": true,
+      "ehlo_code": 250
+    },
+    "smtp_starttls587": {
+      "tls_verified": true,
+      "starttls_code": 220,
+      "ehlo_code": 250
+    }
+  },
+  "hostinger_and_agent_gateway_pids_unchanged": true,
+  "strict_zero_error_journal_gate_passed": false,
+  "residual": {
+    "mattei_kernel": "Three boot messages per Mattei attributed through PCI/sysfs/kernel context to AMD USB controller1022:15b8,portless USB hub,and AMD audio controller without codecs. Network links UP;all three RAID1 arrays per host[UU]. Prior-boot exact recurrence proven onInc02;old boot journals onInc01/03 lack these early messages,so historical identity not asserted. No driver/firmware repair performed.",
+    "inc02_ssh": "One malformed external SSH banner rejected from160.250.4.136;PID4234 correlated to banner exchange invalid format. Not our authenticated read-only probes;not proof of authentication or compromise. No firewall/SSH change.",
+    "baseline_application_issues": "Previously recorded DNS/TLS/redirect/403 limitations remain;no repair or broad security certification implied.",
+    "hestia": "New kernel6.8.0-147 active;no current-boot priority0..3 errors."
+  },
+  "cleanup": "Transient reboot units vanished across boot and were read back not-found/inactive. No file deletion.",
+  "scope": "Only four named Hetzner hosts. Agent Hostinger never rebooted. No additional package/kernel installation during reboot phase.",
+  "recommendation": "Keep the patched runtime and recovered services. Do not alter firmware/drivers merely to suppress initialization messages;separate exact confirmation required for any such system change.",
+  "evidence_root": "/root/mgs-agent/reports/php-security-20261021/reboot-1562891945536393229"
+}

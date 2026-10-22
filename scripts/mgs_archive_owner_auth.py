@@ -41,7 +41,7 @@ class Vault:
   current=self.item();fields=current.get('fields',[]);f=next((x for x in fields if x.get('id')=='refresh_token'),None)
   if not f:raise AuthError('VAULT_REFRESH_FIELD_MISSING')
   f['value']=value;payload={k:current[k] for k in ('title','category','fields','sections','tags','urls') if k in current}
-  op(['item','edit',self.cfg['item_id'],'--vault',self.cfg['vault_id'],'--format','json','-'],payload)
+  op(['item','edit',self.cfg['item_id'],'--vault',self.cfg['vault_id'],'--format','json'],payload)
   got=self.item();v={x['id']:x.get('value','') for x in got.get('fields',[]) if x.get('id')}
   if v.get('refresh_token')!=value or v.get('approval_message_id')!=APPROVAL:raise AuthError('VAULT_REFRESH_READBACK')
   return got.get('version')
@@ -68,7 +68,7 @@ class OwnerAuthorization:
   f=self.vault.fields()
   if f.get('approval_message_id')!=APPROVAL:raise AuthError('APPROVAL_BINDING')
   if not re.fullmatch(r'[0-9]+-[A-Za-z0-9_-]+\.apps\.googleusercontent\.com',f.get('client_id','')) or not f.get('client_secret'):raise AuthError('CLIENT_CONFIGURATION_REQUIRED')
-  return f
+  return dict(f)
  def begin(self,cookie,form,origin):
   if origin!=self.cfg['public_origin']:raise AuthError('ORIGIN_REJECTED')
   if not cookie or not form or not hmac.compare_digest(cookie,form) or cookie not in self.csrf or self.clock()-self.csrf.pop(cookie)>600:raise AuthError('CSRF_REJECTED')
@@ -87,6 +87,8 @@ class OwnerAuthorization:
   if user.get('emailAddress')!=self.cfg['owner_email'] or user.get('permissionId')!=self.cfg['owner_permission_id']:raise AuthError('OWNER_IDENTITY_MISMATCH')
   root=self.google.root(refreshed['access_token'],self.cfg['archive_root_id'])
   if root.get('id')!=self.cfg['archive_root_id'] or root.get('trashed') is not False or root.get('driveId') or root.get('mimeType')!='application/vnd.google-apps.folder' or root.get('capabilities',{}).get('canAddChildren') is not True or not any(o.get('emailAddress')==self.cfg['owner_email'] and o.get('permissionId')==self.cfg['owner_permission_id'] for o in root.get('owners',[])):raise AuthError('ARCHIVE_ROOT_BINDING')
+  current=self.vault.fields()
+  if any(current.get(k)!=pending['client'].get(k) for k in ('client_id','client_secret','approval_message_id')):raise AuthError('CREDENTIAL_ITEM_CHANGED_DURING_CONSENT')
   version=self.vault.save_refresh(refresh)
   return {'schema':'mgs.owner.connector.authorization.v1','approval_message_id':APPROVAL,'authorized_at':datetime.now(timezone.utc).isoformat(),'owner_email':user['emailAddress'],'owner_permission_id':user['permissionId'],'archive_root_id':root['id'],'granted_scope':DRIVE_SCOPE,'refresh_grant_verified':True,'item_version':version,'production_enabled':False}
 
@@ -115,8 +117,9 @@ def init()->dict:
 def handler(cfg,auth):
  class Handler(BaseHTTPRequestHandler):
   def log_message(self,format,*args):pass
-  def send(self,status,text,*,location=None,cookie=None,json_body=False):
-   self.send_response(status);self.send_header('Content-Type','application/json' if json_body else 'text/html; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Referrer-Policy','no-referrer');self.send_header('X-Content-Type-Options','nosniff');self.send_header('Content-Security-Policy',"default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'")
+  def send(self,status,text,*,location=None,cookie=None,json_body=False,referrer_policy='no-referrer',allow_google_redirect=False):
+   form_action="'self' https://accounts.google.com" if allow_google_redirect else "'self'"
+   self.send_response(status);self.send_header('Content-Type','application/json' if json_body else 'text/html; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Referrer-Policy',referrer_policy);self.send_header('X-Content-Type-Options','nosniff');self.send_header('Content-Security-Policy',"default-src 'none'; style-src 'unsafe-inline'; form-action "+form_action+"; frame-ancestors 'none'")
    if location:self.send_header('Location',location)
    if cookie:self.send_header('Set-Cookie','mgs_auth_csrf='+cookie+'; Path=/; Secure; HttpOnly; SameSite=Lax')
    self.end_headers();self.wfile.write(text.encode())
@@ -129,13 +132,17 @@ def handler(cfg,auth):
    if parsed.path=='/callback':
     query=parse_qs(parsed.query)
     if len(query.get('state',[]))!=1 or len(query.get('code',[]))!=1:return self.send(400,'Autorizacao nao concluida. Nenhuma credencial foi registrada.')
-    try:proof=auth.complete(query['state'][0],query['code'][0]);b.atomic_json(PROOF,proof)
+    try:
+     proof=auth.complete(query['state'][0],query['code'][0]);proof.update(report_infra_pending=True,source='private_google_callback')
+     b.atomic_json(PROOF,proof)
+     with (b.BASE/'logs/events-audit.jsonl').open('a') as audit:
+      audit.write(json.dumps({'at':b.now_iso(),'actor':'mgs-owner-connector-auth','action':'new_owner_oauth_saved_with_native_identity_root_and_refresh_readback','approval_message_id':APPROVAL,'owner_email':proof.get('owner_email'),'item_id':cfg.get('item_id'),'item_version':proof.get('item_version'),'production_enabled':False,'report_infra_pending':True})+'\n')
     except AuthError as e:return self.send(400,'<h1>Autorizacao nao aceita</h1><p>'+html.escape(str(e))+'</p><p>Nenhum arquivo de producao foi alterado. Volte ao inicio para uma nova autorizacao.</p>')
     return self.send(200,'<h1>Conta autorizada e renovacao testada</h1><p>Credencial salva no 1Password; pasta e proprietario verificados. Nenhum arquivo foi migrado ou apagado por esta pagina. A ativacao produtiva ainda depende do canario e handoff do executor.</p>')
    if parsed.path!='/':return self.send(404,'Nao encontrado')
    csrf=auth.issue_csrf()
    page='''<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Autorizacao privada - Arquivo 30 TB</title><style>body{font:18px system-ui;max-width:850px;margin:50px auto;padding:20px;line-height:1.5}code{overflow-wrap:anywhere;background:#eef;padding:4px}button{font-size:18px;padding:14px}li{margin:14px 0}</style><h1>Conector privado do arquivo 30 TB</h1><p>Esta e a configuracao inicial aprovada por Rodolfo. Nao e uma troca de hash no Apps Script e esta pagina nao migra ou exclui arquivos.</p><h2>1. Configuracao inicial Google</h2><p>No seu navegador normal, entre na conta administrativa do projeto <strong>mgs-core-prod</strong> e abra <a href="https://console.cloud.google.com/auth/clients?project=mgs-core-prod" target="_blank" rel="noopener">Google Auth Platform - Clientes</a>.</p><ol><li>Crie um cliente NOVO, tipo <strong>Aplicativo da Web</strong>, nome <strong>MGS Arquivo 30TB - Conector VPS</strong>. Nao reutilize cliente/token antigo.</li><li>URI de redirecionamento autorizada: <code>REDIRECT</code></li><li>Se o Google pedir configurar o aplicativo: nome MGS Arquivo 30TB, publico externo e suporte sob uma conta administradora valida. Para operacao duravel, nao deixar o app no modo de testes de sete dias; usar publicacao de uso privado conforme as regras Google. Se o Google bloquear publicacao/verificacao ou faltar acesso ao projeto, pare e informe a mensagem; nao mude billing ou IAM.</li></ol><h2>2. Guardar somente no 1Password</h2><p>No cofre <strong>MGS Conteudo</strong>, item <strong>MGS Drive 30TB - Owner Connector OAuth</strong>, preencha somente <strong>Client ID</strong> e <strong>Client Secret</strong> do cliente novo. Nao envie JSON, segredo ou codigo pelo Discord. O campo Refresh Token e preenchido automaticamente pelo servidor.</p><h2>3. Autorizar a conta dos 30 TB</h2><p>Depois de salvar o item, use o botao e escolha exclusivamente <strong>mgsdigitalcorp@gmail.com</strong>. O Google pedira acesso ao Drive; o conector valida o proprietario e a pasta e mantem producao desativada ate os testes reais. Os agentes continuam na Service Account.</p><form method="post" action="/start"><input type="hidden" name="csrf" value="CSRF"><button>Autorizar conta dos 30 TB</button></form></html>'''
-   return self.send(200,page.replace('REDIRECT',html.escape(cfg['redirect_uri'])).replace('CSRF',html.escape(csrf)),cookie=csrf)
+   return self.send(200,page.replace('REDIRECT',html.escape(cfg['redirect_uri'])).replace('CSRF',html.escape(csrf)),cookie=csrf,referrer_policy='same-origin',allow_google_redirect=True)
   def do_POST(self):
    if not self.valid_host() or urlsplit(self.path).path!='/start':return self.send(400,'Rota invalida')
    try:
@@ -144,7 +151,11 @@ def handler(cfg,auth):
     data=parse_qs(self.rfile.read(size).decode());cookies=SimpleCookie(self.headers.get('Cookie',''));cookie=cookies.get('mgs_auth_csrf');forms=data.get('csrf',[])
     if len(forms)!=1:raise AuthError('CSRF_REJECTED')
     url=auth.begin(cookie.value if cookie else '',forms[0],self.headers.get('Origin',''))
-   except (AuthError,ValueError) as e:return self.send(400,'<h1>Configuracao pendente</h1><p>'+html.escape(str(e))+'</p><p>Volte ao inicio e confira o cliente novo no 1Password. Nenhum arquivo foi alterado.</p>')
+   except (AuthError,ValueError) as e:
+    code=str(e) if isinstance(e,AuthError) else 'REQUEST_INVALID'
+    messages={'ORIGIN_REJECTED':'A origem desta solicitacao foi rejeitada. Volte a pagina inicial HTTPS e recarregue antes de tentar novamente.','CSRF_REJECTED':'A sessao desta pagina expirou ou nao corresponde ao formulario. Reabra a pagina inicial HTTPS.','CLIENT_CONFIGURATION_REQUIRED':'Primeiro crie o cliente novo em Google Auth Platform - Clientes, projeto mgs-core-prod, e salve Client ID e Client Secret somente no item do conector no 1Password. Depois volte a pagina inicial. Nenhum consentimento Google foi iniciado.'}
+    message=messages.get(code,'Configuracao ou solicitacao nao aceita. Volte a pagina inicial para conferir a etapa pendente.')
+    return self.send(400,'<h1>Configuracao pendente</h1><p>'+html.escape(code)+'</p><p>'+html.escape(message)+'</p><p>Nenhum arquivo foi alterado.</p><p><a href="/">Voltar ao inicio</a></p>')
    return self.send(303,'',location=url)
  return Handler
 

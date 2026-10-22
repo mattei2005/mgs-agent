@@ -1,0 +1,6 @@
+{
+  "host": "MatteiInc03JBF",
+  "exit": 0,
+  "stdout": "{\"observed_at\": 1792693565.6805518, \"dispatch_journal\": [{\"time_usec\": \"1792693131303568\", \"message\": \"Started /usr/bin/systemctl reboot --no-block.\"}, {\"time_usec\": \"1792693131309906\", \"message\": \"zeus-hetzner-reboot-1562891945536393229.service: Deactivated successfully.\"}], \"current_boot_errors\": [{\"time_usec\": \"1792693259924574\", \"monotonic_usec\": \"5123180\", \"transport\": \"kernel\", \"message\": \"pci 0000:0e:00.0: Failed to read data\"}, {\"time_usec\": \"1792693259939290\", \"monotonic_usec\": \"5137896\", \"transport\": \"kernel\", \"message\": \"hub 8-0:1.0: config failed, hub doesn't have any ports! (err -19)\"}, {\"time_usec\": \"1792693260076108\", \"monotonic_usec\": \"5274715\", \"transport\": \"kernel\", \"message\": \"snd_hda_intel 0000:0d:00.6: no codecs found!\"}], \"failed_units\": \"\", \"reboot_timer_loadstate\": \"LoadState=not-found\\nActiveState=inactive\", \"postboot_time\": \"2026-10-22 18:20:55\"}\n",
+  "stderr": ""
+}

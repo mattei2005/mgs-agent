@@ -17,6 +17,11 @@ class OwnerAuthTests(unittest.TestCase):
   url=self.auth.begin(self.csrf,self.csrf,self.cfg['public_origin']);q=urllib.parse.parse_qs(urllib.parse.urlsplit(url).query);return q['state'][0],q
  def test_begin_requires_exact_origin(self):
   with self.assertRaisesRegex(a.AuthError,'ORIGIN'):self.auth.begin(self.csrf,self.csrf,'https://evil.example')
+ def test_begin_rejects_null_and_missing_origins_before_vault(self):
+  for origin in ('null',''):
+   with self.subTest(origin=origin):
+    with self.assertRaisesRegex(a.AuthError,'ORIGIN_REJECTED'):self.auth.begin(self.csrf,self.csrf,origin)
+  self.v.fields.assert_not_called()
  def test_begin_requires_csrf_pair(self):
   with self.assertRaisesRegex(a.AuthError,'CSRF'):self.auth.begin('wrong',self.csrf,self.cfg['public_origin'])
  def test_begin_does_not_put_client_secret_in_link(self):
@@ -66,14 +71,27 @@ class OwnerAuthTests(unittest.TestCase):
   with self.assertRaises(a.AuthError):self.auth.complete(state,'OFFLINE_CODE')
   with self.assertRaisesRegex(a.AuthError,'STATE'):self.auth.complete(state,'OFFLINE_CODE')
   self.v.save_refresh.assert_not_called()
+ def test_changed_client_during_consent_is_not_mixed_with_refresh(self):
+  state,q=self.start();self.item['client_id']='456-replacement.apps.googleusercontent.com'
+  with self.assertRaisesRegex(a.AuthError,'CREDENTIAL_ITEM_CHANGED'):self.auth.complete(state,'OFFLINE_CODE')
+  self.v.save_refresh.assert_not_called()
+class VaultStdinTests(unittest.TestCase):
+ def test_edit_uses_stdin_without_create_only_dash_and_reconciles_secret_in_memory(self):
+  from unittest.mock import patch
+  import copy
+  before={'id':'fixture','vault':{'id':'vault'},'title':a.TITLE,'category':'API_CREDENTIAL','version':1,'fields':[{'id':'refresh_token','value':'','type':'CONCEALED'},{'id':'approval_message_id','value':a.APPROVAL,'type':'STRING'}]}
+  after=copy.deepcopy(before);after['version']=2;after['fields'][0]['value']='OFFLINE_REFRESH'
+  with patch.object(a,'op',side_effect=[before,after,after]) as op:
+   v=a.Vault({'item_id':'fixture','vault_id':'vault'});self.assertEqual(v.save_refresh('OFFLINE_REFRESH'),2);args,payload=op.call_args_list[1].args;self.assertEqual(args[:2],['item','edit']);self.assertNotIn('-',args);self.assertEqual(payload['fields'][0]['value'],'OFFLINE_REFRESH')
 class PrivateHttpTests(unittest.TestCase):
  def setUp(self):
   import threading,os,tempfile
   from unittest.mock import patch
   self.tmp=tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR','/root/.hermes/profiles/zeus/cache/scratch'));self.override=patch.object(a,'PROOF',Path(self.tmp.name)/'proof.json');self.override.start()
+  self.baseoverride=patch.object(a.b,'BASE',Path(self.tmp.name));self.baseoverride.start();(Path(self.tmp.name)/'logs').mkdir()
   self.cfg={'public_origin':'https://private.example:8443','port':0};self.auth=Mock();self.auth.issue_csrf.return_value='OFFLINE_CSRF';self.auth.begin.return_value='https://accounts.google.com/o/oauth2/v2/auth?client_id=fixture'
   self.server=a.ThreadingHTTPServer(('127.0.0.1',0),a.handler(self.cfg,self.auth));self.cfg['port']=self.server.server_port;self.thread=threading.Thread(target=self.server.serve_forever,daemon=True);self.thread.start()
- def tearDown(self):self.server.shutdown();self.server.server_close();self.thread.join();self.override.stop();self.tmp.cleanup()
+ def tearDown(self):self.server.shutdown();self.server.server_close();self.thread.join();self.override.stop();self.baseoverride.stop();self.tmp.cleanup()
  def request(self,method,path,body=None,headers=None):
   import http.client
   c=http.client.HTTPConnection('127.0.0.1',self.server.server_port,timeout=5);c.request(method,path,body=body,headers=headers or {});r=c.getresponse();result=(r.status,dict(r.getheaders()),r.read().decode());c.close();return result
@@ -81,6 +99,20 @@ class PrivateHttpTests(unittest.TestCase):
   status,headers,body=self.request('GET','/status');self.assertEqual(status,200);self.assertFalse(__import__('json').loads(body)['production_enabled']);self.assertNotIn('client_secret',body)
  def test_landing_page_is_private_setup_not_fake_oauth_link(self):
   self.cfg['redirect_uri']='https://private.example:8443/callback';status,headers,body=self.request('GET','/');self.assertEqual(status,200);self.assertIn('HttpOnly',headers['Set-Cookie']);self.assertIn('Secure',headers['Set-Cookie']);self.assertIn('no-store',headers['Cache-Control']);self.assertIn('mgs-core-prod',body);self.assertNotIn('OFFLINE_REFRESH',body)
+ def test_landing_referrer_policy_preserves_same_origin_form_post(self):
+  self.cfg['redirect_uri']='https://private.example:8443/callback';status,headers,body=self.request('GET','/')
+  self.assertEqual(status,200);self.assertEqual(headers['Referrer-Policy'],'same-origin')
+ def test_landing_allows_only_self_and_google_form_redirect(self):
+  self.cfg['redirect_uri']='https://private.example:8443/callback';status,headers,body=self.request('GET','/')
+  self.assertEqual(status,200);self.assertIn("form-action 'self' https://accounts.google.com;",headers['Content-Security-Policy'])
+ def test_callback_keeps_no_referrer_to_avoid_leaking_authorization_code(self):
+  self.auth.complete.side_effect=a.AuthError('STATE_INVALID_OR_EXPIRED')
+  status,headers,body=self.request('GET','/callback?state=fixture&code=fixture')
+  self.assertEqual(status,400);self.assertEqual(headers['Referrer-Policy'],'no-referrer');self.assertIn("form-action 'self';",headers['Content-Security-Policy'])
+ def test_origin_error_does_not_misdiagnose_vault_client(self):
+  self.auth.begin.side_effect=a.AuthError('ORIGIN_REJECTED')
+  status,headers,body=self.request('POST','/start','csrf=OFFLINE_CSRF',{'Origin':'null','Cookie':'mgs_auth_csrf=OFFLINE_CSRF'})
+  self.assertEqual(status,400);self.assertIn('ORIGIN_REJECTED',body);self.assertNotIn('confira o cliente novo no 1Password',body)
  def test_wrong_host_is_rejected(self):self.assertEqual(self.request('GET','/status',headers={'Host':'evil.example'})[0],400)
  def test_unknown_route_has_no_config_dump(self):self.assertEqual(self.request('GET','/config')[0],404)
  def test_callback_without_transaction_is_rejected(self):self.assertEqual(self.request('GET','/callback?code=x')[0],400);self.auth.complete.assert_not_called()
