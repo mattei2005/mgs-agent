@@ -2403,12 +2403,12 @@
     {
       "agent": "zeus",
       "id": "MGS-BACKUP-AUTOMATION-1562688137472249867",
-      "next_step": "Preservar producer/staging source e flags deleteSource:false. Implementar lane separada de backup no mesmo ownerworker/lock/budget, SA queue/reconciler em monitor existente, future-only sem historico implicito, retention preview apenas. Exercitar TDD e preflight live, publicar hash imutavel, parar SOMENTE no owner editor repin necessario; nenhuma exclusao ativada. Gates nativos2scheduled/newSHA/probe/publisher antes de promote. Source/archive tierIDs verificados via binding live; nao usar IDs em prose sem lookup.",
+      "next_step": "Codigo futuro de backups IMPLEMENTADO/PUBLICADO mas owner NAO repinou. Worker file 1L2EhFCbuWUcMGItMkpAkqVU0Aw5jtpU3 SHA d66ce978164bd525fa40de37df2672fe469413fa8e9c907f7d5af1d6d31b4c0f; plano 1vte8RC8024kiwIEqhvzbHQHfTaWh5VBQ SHA 698c4f3d8cbe5cfd4caa471371fa841925f863d5d4c963d48c2e4487d728da4a. Rodolfo deve trocar somentefileID/hash no Code.gs, salvar e executar mgsArquivoTeste (read-onlybackupProbe, sem outro move/delete). Sem manifesto/agendamento/Implantar/resetbudget. Apos pronto, ler owner heartbeat/probe nativos novo digest e trigger2456112746912022528, corpo blocked[]/canaryACKtrue; duas observacoes scheduled frescas pelo monitor existente83b148017b4d. Novo modulo mgs_backup_automation.resume_acceptance chama acceptor wholeDrive e promove SA/historicalpins; depois ativa future-onlyarchive (semTrash) e producer/reconciler; nao aceitar screenshot ou manualcomoagenda. No PINnovoativo neste checkpoint: SA508e4... ownerBF980. Campos/plan/binding IDs sao fonte, nao docs antigos. Pipeline usa mesmo lock/cap350/60min, prioriza UMbackup antes de varreduraMidia; manualcontroleSomenteProbe. Futuro cutoff salvo no plan, semhistorico implicito. Retention SOMENTEpreview48/14/8/12 protege source/naoVerificado/restoreGeneration, nenhumafuncaoTrash. Validar1backupreal+ACK/stream e recorrencia ANTESde lote/migracao100. Rollback pointers/config em backup-rollout-rollback-1562688137472249867.json; fonte doc secao1562688137472249867.",
       "objective": "Implementar produtor/reconciliador automaticos de backups e retention preview no arquivo Gmail, sem ativar exclusao",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "implementation_started",
+      "state": "backup_automation_published_awaiting_owner_editor_repin",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T04:47:44+00:00"
+      "updated_at": "2026-10-22T05:20:03+00:00"
     },
     {
       "agent": "zeus",
@@ -2483,12 +2483,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Limpeza autorizada1562683794958450761 executada/validada: raiz scratch/mgs-dr-restore-qj0i0h9c ausente, fingerprint/totais exatos, audit start/closure, deltaDF44583895040bytes(41.52GiB); fonte restore-temp-cleanup-execution-1562683794958450761.json. Backup remoto1Zlb+hash/restore proof preservados, 3gateways mesmos PIDs ativos, fonte e outroscratch foraDoEscopo. Nenhuma confirmacao de limpeza pendente nem nova limpeza proposta. Continuar backend da migracao original: produtor/arquivo automatico e retention owner-aware Gmail ainda NAO implementados/ativados; nao pedir novo piloto manual para repetir acesso/restaure, nao mover lote historico antes dos gates. SA pode baixar/editar backup Gmail mas canTrash/Delete false; manter SA canonica e ownercloud autorizado, sem fallback OAuth. SourceDR root/tiers/config/cadencia48/14/8/12, deleteSource:false e corporate productionMoves:false permanecem. OitoSheets e umBackup movidos/restaure validado nao sao migracao100%. Fonte canonica doc secao1562683794958450761.",
+      "next_step": "Codigo futuro de backups IMPLEMENTADO/PUBLICADO mas owner NAO repinou. Worker file 1L2EhFCbuWUcMGItMkpAkqVU0Aw5jtpU3 SHA d66ce978164bd525fa40de37df2672fe469413fa8e9c907f7d5af1d6d31b4c0f; plano 1vte8RC8024kiwIEqhvzbHQHfTaWh5VBQ SHA 698c4f3d8cbe5cfd4caa471371fa841925f863d5d4c963d48c2e4487d728da4a. Rodolfo deve trocar somentefileID/hash no Code.gs, salvar e executar mgsArquivoTeste (read-onlybackupProbe, sem outro move/delete). Sem manifesto/agendamento/Implantar/resetbudget. Apos pronto, ler owner heartbeat/probe nativos novo digest e trigger2456112746912022528, corpo blocked[]/canaryACKtrue; duas observacoes scheduled frescas pelo monitor existente83b148017b4d. Novo modulo mgs_backup_automation.resume_acceptance chama acceptor wholeDrive e promove SA/historicalpins; depois ativa future-onlyarchive (semTrash) e producer/reconciler; nao aceitar screenshot ou manualcomoagenda. No PINnovoativo neste checkpoint: SA508e4... ownerBF980. Campos/plan/binding IDs sao fonte, nao docs antigos. Pipeline usa mesmo lock/cap350/60min, prioriza UMbackup antes de varreduraMidia; manualcontroleSomenteProbe. Futuro cutoff salvo no plan, semhistorico implicito. Retention SOMENTEpreview48/14/8/12 protege source/naoVerificado/restoreGeneration, nenhumafuncaoTrash. Validar1backupreal+ACK/stream e recorrencia ANTESde lote/migracao100. Rollback pointers/config em backup-rollout-rollback-1562688137472249867.json; fonte doc secao1562688137472249867.",
       "objective": "Migrar integralmente aos 30 TB com IDs/acesso/backup/retencao/restaure e automacao futura comprovados",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "native_sheets_backup_pilot_and_temporary_cleanup_validated_backend_automation_pending",
+      "state": "backup_automation_published_awaiting_owner_editor_repin",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T04:32:11+00:00"
+      "updated_at": "2026-10-22T05:20:03+00:00"
     },
     {
       "agent": "zeus",
@@ -7072,5 +7072,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T04:56:41+00:00"
+  "updated_at": "2026-10-22T05:20:03+00:00"
 }
