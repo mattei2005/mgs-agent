@@ -163,7 +163,7 @@ def _move_checked_entry(d,entry,target_parent_id,expected_parent_id,*,technical=
 def move_stock(record,target_parent_id,expected_parent_id,token=None):
     if record.get('record_kind')!='mgs.logical.media.v1':return None
     d=drive(token,True);entry=mapping(record['id']);assert entry
-    if entry.get('mapping_kind')=='historical_verified' and record.get('stock_representation')=='retained_source':
+    if entry.get('mapping_kind')=='historical_verified':
         return move_historical_retained_stock(d,entry,target_parent_id,expected_parent_id)
     resolve_media(record['id'],token) # Recheck the immutable archive root/path proof.
     return _move_checked_entry(d,entry,target_parent_id,expected_parent_id)
@@ -215,12 +215,13 @@ def historical_media_record(entry,physical,stock):
     return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','mapping_kind':'historical_verified','stock_representation':'shortcut' if alias else 'retained_source','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':stock['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock['driveId'],'parents':list(stock['parents']),'trashed':False,'capabilities':{**stock.get('capabilities',{}),'canDownload':physical.get('capabilities',{}).get('canDownload',False)},'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry['jobId'],'lineage_id':entry.get('lineageId')}
 
 def move_historical_retained_stock(d,entry,target_parent_id,expected_parent_id):
-    physical=meta(d,entry['archiveId']);stock=meta(d,entry['sourceId']);before=historical_media_record(entry,physical,stock)
+    stock_id=entry.get('stockShortcutId') or entry['sourceId'];physical=meta(d,entry['archiveId']);stock=meta(d,stock_id);before=historical_media_record(entry,physical,stock);require_historical_ack(d,entry)
+    if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=entry['relativeParent']:raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
     if stock['parents']!=[expected_parent_id]:raise StorageError('HISTORICAL_STOCK_PARENT_CAS')
     destination=meta(d,target_parent_id);current=d.relative_parent(expected_parent_id,b.SOURCE_ROOT);target=d.relative_parent(target_parent_id,b.SOURCE_ROOT)
     if destination.get('driveId')!=b.SOURCE_DRIVE or destination.get('trashed') or destination.get('mimeType')!=b.FOLDER or current[:-1]!=target[:-1] or not target or target[-1] not in ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']:raise StorageError('HISTORICAL_STOCK_STATUS_SCOPE')
-    d.api('PATCH','files/'+entry['sourceId'],{'supportsAllDrives':'true','addParents':target_parent_id,'removeParents':expected_parent_id,'fields':'id,parents,driveId'},{})
-    after=historical_media_record(entry,meta(d,entry['archiveId']),meta(d,entry['sourceId']))
+    d.api('PATCH','files/'+stock_id,{'supportsAllDrives':'true','addParents':target_parent_id,'removeParents':expected_parent_id,'fields':'id,parents,driveId'},{})
+    after=historical_media_record(entry,meta(d,entry['archiveId']),meta(d,stock_id))
     if after['parents']!=[target_parent_id] or after['provider_metadata']['parents']!=physical['parents'] or after['md5Checksum']!=before['md5Checksum']:raise StorageError('HISTORICAL_STOCK_MOVE_READBACK')
     return after
 
