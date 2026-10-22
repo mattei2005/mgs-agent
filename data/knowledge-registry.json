@@ -10816,6 +10816,23 @@
       "updated_at": "2026-10-17T16:55:38+00:00"
     },
     {
+      "canonical_key": "drive.archive.runtime.provider-maximum",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "infrastructure",
+      "effective_at": "2026-10-22T13:18:38+00:00",
+      "id": "MGS-RUNTIME-QUOTA-MAX-1562815497794363423",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Teto Apps Script maximo oficial por classe de conta neste fluxo",
+      "updated_at": "2026-10-22T13:18:38+00:00"
+    },
+    {
       "canonical_key": "ares.creative.30tb.autonomous-requirements",
       "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
       "consumers": [
@@ -13806,5 +13823,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T05:20:03+00:00"
+  "updated_at": "2026-10-22T13:18:38+00:00"
 }
