@@ -1,0 +1,80 @@
+{
+  "source_message_id": "1562626826709241937",
+  "checked_at": "2026-10-22T01:23:04.008562+00:00",
+  "status": "audit_completed_with_named_frontend_findings",
+  "scope": {
+    "updated_runcloud_apps": 110,
+    "additional_registered_public_site": "spaziokitchensandbaths.com",
+    "targets": 111,
+    "desktop_mobile_home_views": 222,
+    "representative_article_targets": 77,
+    "article_views": 154,
+    "browser_visits": 376
+  },
+  "counts": {
+    "opened_home_domains": 107,
+    "http403_domains": 3,
+    "dns_failure_domains": 1,
+    "fatal_php_text_suspects": 0,
+    "page_horizontal_overflow_flags": 0
+  },
+  "blocked_domains": [
+    "allincraft.com",
+    "kievportal.com",
+    "portalbrasilnews.com"
+  ],
+  "dns_failure_domains": [
+    "bkp2.ducapes.com"
+  ],
+  "findings": [
+    {
+      "id": "finanzashispano_preloader",
+      "domain": "finanzashispano.com",
+      "status": "confirmed_interaction_dependent_loading",
+      "problem": "Preloader remains with document.readyState complete and no pending requests until pointer movement; overlay persists18s without interaction.",
+      "cause_confirmed": "34 delayed Rocket script tags; after harmless pointer movement body changes to loaded/loftloader-loaded and overlay stops intercepting.",
+      "caused_by_php_update": "not_proven",
+      "proposed_scope": "Reconcile preloader with delayed JavaScript and bounded timeout, no theme redesign."
+    },
+    {
+      "id": "financeadx_legacy_js",
+      "domain": "financeadx.com",
+      "status": "confirmed_missing_assets",
+      "problem": "Five distinct first-party JavaScript asset URLs404; browser chunk-loading and syntax errors on desktop/mobile. Home visually renders.",
+      "cause_confirmed": "Legacy home loads copied Elementor JavaScript while referenced original wp-content plugin assets are absent; source assets/index.html and runtime files have2023timestamps.",
+      "caused_by_php_update": "not_proven; no application files changed by the authorized PHP transaction",
+      "proposed_scope": "Repair the legacy home asset dependencies from trusted sources without blindly installing Elementor/Pro."
+    },
+    {
+      "id": "topfeed_article_image",
+      "domain": "topfeed.fun",
+      "status": "confirmed_missing_image",
+      "problem": "One representative article requests an image filename that returns404 on desktop/mobile.",
+      "cause_confirmed": "Exact requested file is absent; related same-title images exist under different scaled filenames.",
+      "caused_by_php_update": "not_proven",
+      "proposed_scope": "Correct only the stored image reference after exact attachment/content verification."
+    },
+    {
+      "id": "informegeral_footer_content",
+      "domain": "informegeral.com",
+      "status": "confirmed_bad_reference_and_empty_widgets",
+      "problem": "Footer image URL is malformed and points through demo/staging text; page also shows no-post/widget placeholder messages.",
+      "cause_confirmed": "Malformed browser currentSrc and rendered placeholder text confirmed; intended current content scope not established.",
+      "caused_by_php_update": "not_proven",
+      "proposed_scope": "Repair footer asset reference; review homepage/content intent separately, no automatic editorial production."
+    }
+  ],
+  "other_limits": [
+    "S4Blinds desktop hero video loaded with readyState4 and plays in controlled browser canary, but autoplay did not start in automation; not classified as a missing image or a proven server regression.",
+    "Contact-sheet suspicions about common JBF branding, intentional carousels, consent dialogs and normal text-over-image layout were not counted as defects.",
+    "Some root pages have default/control/empty content; intent was not inferred from screenshots.",
+    "No trustworthy full pre-update visual baseline exists for all targets; present findings are not automatically attributed to PHP.",
+    "This is frontend/runtime smoke evidence, not a forensic compromise audit or a guarantee of complete security.",
+    "Spazio public rendering was checked; its PHP package/security state is outside the earlier update scope."
+  ],
+  "sites_mutated": false,
+  "billing_credentials_or_permissions_changed": false,
+  "artifact_root": "/root/.hermes/profiles/zeus/artifacts/site-audit-1562626826709241937",
+  "evidence_sha256": "0a5bae9d69ea3e5ea69846105338e06f4b758d6227e8e701eeeaeee0c048c023",
+  "final_runtime_evidence": "/root/.hermes/profiles/zeus/artifacts/site-audit-1562626826709241937/final-runtime.json"
+}

@@ -34,4 +34,40 @@ class SourceIndependenceTests(unittest.TestCase):
   self.config=pathlib.Path(self.tmp.name)/'missing.json'
   with self.assertRaises((RuntimeError,FileNotFoundError)):self.collect()
   self.assertEqual(self.calls,[])
+ def corporate(self):
+  # Same native Sheet moved by Rodolfo; this is not an alternate identity.
+  sid='1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4'
+  self.cfg['spreadsheet_id']=sid;self.config.write_text(json.dumps(self.cfg))
+  self.metadata={'id':sid,'trashed':False,'parents':['16fP9b4bp3inB1Gze95znQLYq3rdtTEhp'],'owners':[{'permissionId':'03783617840924670288','emailAddress':'mgsdigitalcorp@gmail.com'}],'capabilities':{'canEdit':True},'permissions':[{'id':'07414359829876449782','type':'user','role':'writer','emailAddress':'mgsagent@mgs-core-prod.iam.gserviceaccount.com'}]}
+  old=self.api
+  def api(method,url,*args,**kwargs):
+   if '/drive/' in url:
+    self.calls.append((method,url));self.assertEqual(method,'GET');return 200,self.metadata
+   return old(method,url,*args,**kwargs)
+  self.api=api
+ def test_approved_corporate_same_id_collects_read_only(self):
+  self.corporate();r=self.collect();self.assertEqual(r['google_writes'],0);self.assertEqual(len(r['values']),3);self.assertEqual(r['spreadsheet_id'],self.cfg['spreadsheet_id'])
+ def reject_corporate(self):
+  with self.assertRaisesRegex(RuntimeError,'drive_preflight_'):self.collect()
+  self.assertEqual(len(self.calls),1,'Untrusted file must not reach Sheets')
+ def test_corporate_wrong_parent_rejected(self):
+  self.corporate();self.metadata['parents']=['wrong'];self.reject_corporate()
+ def test_corporate_wrong_owner_native_id_rejected(self):
+  self.corporate();self.metadata['owners'][0]['permissionId']='wrong';self.reject_corporate()
+ def test_corporate_wrong_owner_email_rejected(self):
+  self.corporate();self.metadata['owners'][0]['emailAddress']='wrong@example.com';self.reject_corporate()
+ def test_corporate_missing_sa_access_rejected(self):
+  self.corporate();self.metadata['permissions']=[];self.reject_corporate()
+ def test_corporate_wrong_sa_native_id_rejected(self):
+  self.corporate();self.metadata['permissions'][0]['id']='wrong';self.reject_corporate()
+ def test_corporate_wrong_file_id_rejected(self):
+  self.corporate();self.metadata['id']='another-sheet';self.reject_corporate()
+ def test_corporate_trashed_rejected(self):
+  self.corporate();self.metadata['trashed']=True;self.reject_corporate()
+ def test_corporate_readonly_capability_rejected(self):
+  self.corporate();self.metadata['capabilities']['canEdit']=False;self.reject_corporate()
+ def test_corporate_other_drive_rejected(self):
+  self.corporate();self.metadata['driveId']='unapproved-drive';self.reject_corporate()
+ def test_unrelated_mydrive_sheet_cannot_use_exception(self):
+  self.corporate();self.cfg['spreadsheet_id']='unapproved-sheet';self.config.write_text(json.dumps(self.cfg));self.metadata['id']='unapproved-sheet';self.reject_corporate()
 if __name__=='__main__':unittest.main()

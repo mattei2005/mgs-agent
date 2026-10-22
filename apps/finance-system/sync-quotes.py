@@ -25,8 +25,18 @@ def collect(extra_config=None):
  if cfg.get('automatic_sources')!=expected_sources or cfg.get('sheet_title')!='Sheet1' or cfg.get('drive_id')!='0AEwt4Ye690ocUk9PVA':raise RuntimeError('quote_formula_config_mismatch')
  if cfg.get('key')!='principal|Agosto 2026|I1' or cfg.get('periods')!=['2026-08'] or cfg.get('range')!='A1' or cfg.get('formula')!='=GOOGLEFINANCE("GBPUSD")':raise RuntimeError('quote_formula_GBP_config_mismatch')
  sid=cfg['spreadsheet_id'];token=service_account_access_token();project='mgs-core-prod'
- status,meta=api_json('GET','https://www.googleapis.com/drive/v3/files/'+sid+'?supportsAllDrives=true&fields=id,driveId,trashed',token,quota_project=project)
- if status!=200 or meta.get('trashed') or meta.get('driveId')!=cfg['drive_id']:raise RuntimeError('drive_preflight_failed_quotes_'+str(status))
+ status,meta=api_json('GET','https://www.googleapis.com/drive/v3/files/'+sid+'?supportsAllDrives=true&fields=id,driveId,trashed,parents,owners(permissionId,emailAddress),permissions(id,type,role,emailAddress),capabilities(canEdit)',token,quota_project=project)
+ # Rodolfo1562626527206838275 moved this SAME native Sheet to MGS-CORPORATIVO.
+ # No personal auth or arbitrary My Drive fallback: pin file, parent, owner and SA.
+ corporate=(sid=='1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4'
+  and meta.get('id')==sid and not meta.get('driveId')
+  and meta.get('parents')==['16fP9b4bp3inB1Gze95znQLYq3rdtTEhp']
+  and meta.get('owners')==[{'permissionId':'03783617840924670288','emailAddress':'mgsdigitalcorp@gmail.com'}]
+  and meta.get('capabilities',{}).get('canEdit') is True
+  and any(p.get('id')=='07414359829876449782' and p.get('type')=='user'
+   and p.get('emailAddress')=='mgsagent@mgs-core-prod.iam.gserviceaccount.com'
+   and p.get('role')=='writer' for p in meta.get('permissions',[])))
+ if status!=200 or meta.get('trashed') or not (meta.get('driveId')==cfg['drive_id'] or corporate):raise RuntimeError('drive_preflight_failed_quotes_'+str(status))
  params=urlencode({'ranges':"'Sheet1'!A1:C1",'includeGridData':'true','fields':'spreadsheetId,sheets(properties(title),data(startRow,startColumn,rowData(values(userEnteredValue,effectiveValue))))'})
  status,response=api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+sid+'?'+params,token,quota_project=project)
  if status!=200:raise RuntimeError('sheets_read_failed_quotes_'+str(status))

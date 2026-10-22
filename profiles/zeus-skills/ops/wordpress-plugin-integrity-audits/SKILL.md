@@ -47,6 +47,8 @@ Load this skill for WordPress checksum/source drift, a complete WordPress site a
 
 ## Topical references
 
+- For fleet-wide browser checks after PHP or kernel maintenance, load `references/post-runtime-fleet-browser-smoke.md`; reconcile every target, distinguish visual/browser artifacts from server regressions, and preserve named exceptions.
+
 - For recovered Imagify quota, controlled historical-error reprocessing, queue closure, unique-attachment counting and root-document permission exceptions, load `references/imagify-controlled-reprocessing.md`.
 
 - For Cloudflare Email Address Obfuscation attribution, a localized `email_off` bypass, and bare-edge readback, load `references/edge-email-obfuscation-and-cache-validation.md`.

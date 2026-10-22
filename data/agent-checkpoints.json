@@ -3313,12 +3313,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-QUOTES-1562630806940418121",
-      "next_step": "Causa comprovada: gate exige Shared Drive antigo; mesma Sheet movida para parent corporativo aprovado por 1562626527206838275. Candidato limitado ao coletor e 17 testes, coleta real SA passou. Node 279 passou; Python completo reexecutado silenciosamente apos timeout de transporte 420s. Publicar apenas apos ambos gates, backup/readback e fingerprints.",
+      "next_step": "Release quotes-location-1562630806940418121 committed. 279 Node/242 Python passaram; fonte real e wrapper validados, ok=true zero falhas/open=false. Taxas fixas, nominal, ledger e history iguais no retry; worker auxiliar ciclo saudavel pending=0. Sem cron/credencial/ACL/exclusao. Evidencia e rollback referenciados no relatorio; aguardar somente execucao rotineira existente.",
       "objective": "Recuperar coletor de cambio apos movimento corporativo autorizado mantendo SID, SA e taxas fixas",
-      "source": "apps/finance-system/private/quotes-location-1562630806940418121/real-source-stage.json",
-      "state": "validating_release",
+      "source": "reports/finance-quotes-location-1562630806940418121.md",
+      "state": "completed",
       "thread_id": "1498132022634483894",
-      "updated_at": "2026-10-22T01:15:46+00:00"
+      "updated_at": "2026-10-22T01:29:58+00:00"
     },
     {
       "agent": "zeus",
@@ -6513,12 +6513,12 @@
     {
       "agent": "zeus",
       "id": "sites-post-php-render-1562626826709241937",
-      "next_step": "Piloto Playwright em dois dominios; depois111alvos em lotes persistidos, home e artigo representativo quando houver. Validar CSS/JS/imagens/geometria e separar WAF/DNS/defeitos sem baseline de regressaoPHP.",
-      "objective": "Verificar abertura e renderizacao desktop/mobile das110aplicacoes atualizadas e Spazio cadastrado, sem mutacao de sites",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/site-audit-1562626826709241937/targets.json",
-      "state": "browser_pilot",
+      "next_step": "Auditoria111enderecos/376visitas concluida; quatro achados de frontend aguardam autorizacao propria para reparo. Nao atribuir aoPHP sem baseline nem certificar bloqueiosCloudflare/DNS. Evidencia duravel com screenshots fora doGit.",
+      "objective": "Auditar abertura e renderizacao dos sites apos PHP/reboot sem alterar producao",
+      "source": "reports/php-security-20261021/site-render-audit-1562626826709241937.json",
+      "state": "completed",
       "thread_id": "1562582544292249772",
-      "updated_at": "2026-10-22T00:44:50+00:00"
+      "updated_at": "2026-10-22T01:23:49+00:00"
     },
     {
       "agent": "zeus",
@@ -7032,5 +7032,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T01:15:46+00:00"
+  "updated_at": "2026-10-22T01:29:58+00:00"
 }
