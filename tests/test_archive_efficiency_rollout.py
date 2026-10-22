@@ -2,9 +2,10 @@ import contextlib,copy,hashlib,json,sys,unittest
 from pathlib import Path
 from unittest.mock import Mock,patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-import ares_archive_monitor_projection as p
-import ares_archive_efficiency_rollout as fast
-import mgs_backup_automation as a
+import importlib
+p=importlib.import_module('ares_archive_monitor_projection')
+fast=importlib.import_module('ares_archive_efficiency_rollout')
+a=importlib.import_module('mgs_backup_automation')
 class EfficiencyRegression(unittest.TestCase):
  def health(self,rows):return {'status':'blocked','owner_worker_status':'runtime_budget_paused','blocked':rows,'worker_ready':False}
  def test_rotating_known_retryable_receipts_do_not_realert_same_pause(self):
