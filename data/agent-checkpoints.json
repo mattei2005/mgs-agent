@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Canario nativo VPS 28d7ae13c0d2cb7a9c2bf6b2dbf1de31 criou 1p3JApigNjEXzIuX3nJFfFj_CBIHEgSPH; source1SAKghc8ha2NxjgRXHrIK4f-aJhdGhi_m preservado, full bytes/hash/acesso/ACK pela SA verificados. 98 testes passaram; bug fixture preexistente reproduzido no Git baseline e corrigido sem alterar seguranca producao. Contrato exclusive-handoff.json reserva filas legacy e aguarda420s; backups/corporativo preservados. Completar adocao de mappings/intents, suporte lineage e readonly heartbeat VPS, migracao historica incremental e scheduler silencioso em user paths; sem ativar writer paralelo nem ampliar retirada0s/max2. Depois avancar consumidores/catalogo/aliases e oldDrive apenasUPLOAD MANUAL; nao declarar pronto por canario.",
+      "next_step": "Canario real criado pela VPS e full SA hash/acesso/ACK passou; mesmos IDs preservados na revalidacao. Handoff exclusivo22:09Z apos reserva/dreno420s de9jobs; todos9 agoraSAverificados adotando copias sem recopia.385mappings historicos verificados;live/historico semconflito. Conectorativo3f78b5370025fa47783f929c54ba457dfc9b130097515dbf9ec3c2d83308b404,TiposVPSisolados;backup/corporativolegado preservados. Monitor83b148017b4d reutilizado sem novaagenda,ownerchildisolado,agentesSA. Validar2execucoesnativas, avancarbulkpriorizando1566processados sem confundir5860binarios, catalogo/aliases/consumidores/retirada0smax2. OldDriveRootaindaCRIATIVOS+DR+2fixtures;naodeclararUPLOADonly. CorrecaoreaderSA4GETsthreads,writerunico; testes182+80focadospassaram. ForegroundZeus ativo,sem mutacao paralela. Continuar autorizacao vigente;escalarsoCriticalexato.",
       "objective": "Entregar conector VPS e migracao de processados conforme pedido 1562940597411512364",
       "source": "context/drive-archive-owner-connector.md",
-      "state": "canary_verified_exclusive_writer_drain",
+      "state": "private_vps_active_legacy_jobs_adopted_bulk_and_consumers_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T21:51:40+00:00"
+      "updated_at": "2026-10-22T22:23:01+00:00"
     },
     {
       "agent": "ares",
@@ -2503,12 +2503,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Codigo futuro de backups IMPLEMENTADO/PUBLICADO mas owner NAO repinou. Worker file 1L2EhFCbuWUcMGItMkpAkqVU0Aw5jtpU3 SHA d66ce978164bd525fa40de37df2672fe469413fa8e9c907f7d5af1d6d31b4c0f; plano 1vte8RC8024kiwIEqhvzbHQHfTaWh5VBQ SHA 698c4f3d8cbe5cfd4caa471371fa841925f863d5d4c963d48c2e4487d728da4a. Rodolfo deve trocar somentefileID/hash no Code.gs, salvar e executar mgsArquivoTeste (read-onlybackupProbe, sem outro move/delete). Sem manifesto/agendamento/Implantar/resetbudget. Apos pronto, ler owner heartbeat/probe nativos novo digest e trigger2456112746912022528, corpo blocked[]/canaryACKtrue; duas observacoes scheduled frescas pelo monitor existente83b148017b4d. Novo modulo mgs_backup_automation.resume_acceptance chama acceptor wholeDrive e promove SA/historicalpins; depois ativa future-onlyarchive (semTrash) e producer/reconciler; nao aceitar screenshot ou manualcomoagenda. No PINnovoativo neste checkpoint: SA508e4... ownerBF980. Campos/plan/binding IDs sao fonte, nao docs antigos. Pipeline usa mesmo lock/cap350/60min, prioriza UMbackup antes de varreduraMidia; manualcontroleSomenteProbe. Futuro cutoff salvo no plan, semhistorico implicito. Retention SOMENTEpreview48/14/8/12 protege source/naoVerificado/restoreGeneration, nenhumafuncaoTrash. Validar1backupreal+ACK/stream e recorrencia ANTESde lote/migracao100. Rollback pointers/config em backup-rollout-rollback-1562688137472249867.json; fonte doc secao1562688137472249867.",
+      "next_step": "Supersedeinstrucaostaleownereditor: backupfuturojascheduledreal+ACKSAconcluido emcheckpointMGS-BACKUP-AUTOMATION-1562688137472249867; naopedirnovohash/Run/Ativar/consentimento. OAuthisoladoownerconcluidoeprivateVPScriativoativoaposcanario+handoffexclusivo1562940597411512364. AcompanharcheckpointARES-CREATIVE-30TB-1562078493498540042 econtext/drive-archive-owner-connector.md para bulk,consumidores,retirada0smax2eorganizacaoUPLOADonly. Corporativo8Sheets/163abas+referenciasjaIDsverificados; lanesbackup/corporativoAppsScriptpreservadas. OldDriveTopCRIATIVOS+DR+2fixturesaindapresentes. Nao ampliarCriticalSubset/exclusao/corporativo nem apresentar esta migracao como encerrada.",
       "objective": "Migrar integralmente aos 30 TB com IDs/acesso/backup/retencao/restaure e automacao futura comprovados",
-      "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "backup_automation_published_awaiting_owner_editor_repin",
+      "source": "context/drive-archive-owner-connector.md",
+      "state": "creative_owner_vps_active_whole_drive_migration_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T05:20:03+00:00"
+      "updated_at": "2026-10-22T22:23:01+00:00"
     },
     {
       "agent": "zeus",
@@ -7142,5 +7142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T21:51:40+00:00"
+  "updated_at": "2026-10-22T22:23:01+00:00"
 }

@@ -21,9 +21,19 @@ Rodolfo confirmou em `1562925903472762971` a criação e publicação de **três
 
 ## Estado de implantação
 
-**Autorizado, não implantado em produção.** Configuração/autenticação são uma fase separada da migração entregue. O Google recusou a entrada automatizada do usuário no navegador VPS antes de mostrar a senha: `This browser or app may not be secure`. Nenhuma senha foi preenchida, nenhum token antigo foi usado. É necessário usar o navegador normal do proprietário para a configuração Google inicial e consentimento; o PC não será executor permanente.
+**Executor privado ativo após canário e handoff exclusivo; migração integral ainda aberta.** A fase anterior de configuração/autenticação está concluída e permanece isolada: consentimento real, refresh salvo em 1Password e owner/root verificados. O OAuth não é identidade nem fallback dos agentes. O processo de autorização continua sem ações de mídia; a flag produtiva do executor fica no contrato separado `owner-connector/executor-contract.json`.
 
-O bootstrap deve permanecer privado no tailnet, sem Funnel, API pública de execução ou exposição de segredos. O fluxo atual permanece preservado até handoff validado.
+### Continuidade `1562940597411512364` — transporte e exclusividade
+
+- `scripts/mgs_archive_owner_transport.py` implementado e exercitado em Google real. Canário `28d7ae13c0d2cb7a9c2bf6b2dbf1de31`: origem `1SAKghc8ha2NxjgRXHrIK4f-aJhdGhi_m`, cópia criada pela VPS `1p3JApigNjEXzIuX3nJFfFj_CBIHEgSPH`; bytes completos/MD5/SHA-256, caminho, owner, acesso humano/SA e ACK verificados independentemente pela SA. A origem foi preservada; repetir a validação reutilizou o mesmo ID, sem recópia.
+- Após reserva nativa dos nove jobs legados, espera superior aos 420 segundos e readback de quiescência, os mesmos IDs/payloads foram transferidos para tipos `vps_backfill_request`/`vps_request`, que o Apps Script antigo não consome. Handoff aplicado em `2026-10-22T22:09:06.867076+00:00`; provas/snapshot/recibos anteriores em `owner-connector/exclusive-handoff.json`. O código antigo permanece para as lanes autorizadas de backup/corporativo, sem writer criativo paralelo.
+- Os nove jobs legados foram integralmente reconciliados e verificados pela SA, adotando suas cópias já existentes. Dois recibos antigos bloqueados (`REQUEST_CHANGED` e resposta ambígua de `files.create`) foram recuperados por IDs/markers reais; nenhum replay cego de cópia. O produtor tentou verificar um deles antes da adoção, gerando `RECEIPT_NOT_COPIED`; a execução explícita do consumidor exclusivo concluiu a adoção e eliminou esse bloqueio. Não tratá-lo como nova falha do Google.
+- Estado observado após recuperação: **385 mappings históricos verificados**, sem conflito entre mappings ativos e históricos. Não é uma medição de conclusão dos processados nem da migração total; manifesto preservado com 5.860 binários. Nenhuma retirada de mídia foi executada pelo conector.
+- O job existente `83b148017b4d` mantém agenda/identidade/destino. Seu monitor executa o componente proprietário como subprocesso isolado e depois mantém os consumidores com SA canônica. Configuração de recorrência não equivale a duas execuções nativas observadas: essa aceitação ainda precisa ser registrada. O monitor não exige outro editor/hash/Run/consentimento do proprietário.
+- Verificação SA de binários históricos passou a usar até quatro leitores GET/stream, sem alteração de bytes, membros, nomes, ACL, limites de lote ou writer. Index/ACK/retirada continuam serializados pelo lock canônico. Testes focados e integração do monitor passaram; a bateria completa corrente deve ser registrada no encerramento, sem confundi-la com prova de migração.
+- Pendências do objetivo: concluir cópia/adoção histórica com prioridade aos processados, consumidores/catálogo/aliases, organização final e retirada autorizada 0s/max2. O topo do Drive antigo ainda contém `CRIATIVOS`, `_DISASTER_RECOVERY` e duas fixtures antigas, portanto **não está reduzido a `UPLOAD MANUAL`**. Não remover estruturas/fixtures nem ampliar a autorização destrutiva existente sem o gate aplicável.
+
+O bootstrap deve permanecer privado no tailnet, sem Funnel, API pública de execução ou exposição de segredos.
 
 ## Bootstrap preparado e bloqueios de configuração inicial
 
