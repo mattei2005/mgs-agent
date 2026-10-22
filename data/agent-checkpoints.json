@@ -2403,12 +2403,12 @@
     {
       "agent": "zeus",
       "id": "MGS-CORPORATE-MANUAL-BATCH-1562623735889006674",
-      "next_step": "Lote de 3 Sheets raiz preparado em data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-corporate-batch-1562623735889006674/manifest.json. Inventario AdsPower por Grupo, pipeline gastos x receitas, MGS Financeiro Cotacoes Google Finance; snapshot/grid/ACLs e exclusao da fila criativa verificados. Operador deve mover apenas esses 3 pelo site na conta Gmail para MGS-CORPORATIVO. Apos movido, ler cada mesmo ID/destino/owner e ACL especifica (Geizian apenas no Inventario), verificar formulas/literais/formatos e SA write/read/restore por arquivo. Resultados GOOGLEFINANCE podem variar legitimamente; nao sobrescrever nem chamar valores iguais sem prova. Nada de pastas/backups/criativos neste lote; auto lane corporativa desligada.",
-      "objective": "Migracao corporativa manual assistida mantendo mesmos IDs, conteudo e acessos sob a meta integral autorizada",
+      "next_step": "Tres Sheets/116 abas verificadas via mesmas IDs/owner/ACL especifica (Geizian apenas Inventario), formulas/literais/estrutura/formatos iguais, write/read/restore SA por arquivo. Cotacoes tiveram apenas 3 resultados GOOGLEFINANCE atualizados e qualificados, sem sobrescrever; valores formatados nao sao integralmente iguais nessa Sheet. Provas data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-corporate-batch-1562623735889006674/batch-verification-1562626527206838275.json. Proximo lote: duas pastas referencias, nao backups/criativos.",
+      "objective": "Migracao corporativa manual assistida preservando IDs e acessos sob o objetivo integral",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "awaiting_owner_native_browser_move",
+      "state": "completed",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T00:37:49+00:00"
+      "updated_at": "2026-10-22T00:56:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2419,6 +2419,16 @@
       "state": "completed",
       "thread_id": "1562078493498540042",
       "updated_at": "2026-10-22T00:37:49+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "MGS-CORPORATE-MANUAL-REF-FOLDERS-1562626527206838275",
+      "next_step": "Mover pelo SITE, conta Gmail, apenas pastas Atena - Content Reference Maps e Meta Utility Templates para MGS-CORPORATIVO. Manifesto data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-reference-folders-1562626527206838275/manifest.json fecha 7 IDs (3 pastas/4 Sheets), snapshots gzip/hash de todos e ACL4. Ainda nao movidos. Apos movido, conferir mesmos 7 IDs, parents internos preservados, 2 parents raiz mudados, owner Gmail/ACL4 cada no, snapshots/formatos/Sheets e canario SA por arquivo; URLs de referencias da Atena mantem os mesmos IDs, CSVs locais intocados. Nao editar outras skills/OAuth antigo; fonte ativa SA. Corporate auto lane off; nao enfileirar esses IDs nem tocar _DISASTER_RECOVERY/CRIATIVOS/UPLOAD MANUAL neste lote.",
+      "objective": "Migracao corporativa manual assistida preservando IDs e acessos sob o objetivo integral",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "awaiting_owner_native_browser_folder_move",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T00:56:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2433,12 +2443,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Piloto manual concluido e validado em 1562623735889006674. Aguardar/validar lote MGS-CORPORATE-MANUAL-BATCH-1562623735889006674; nao enfileirar esses IDs nem reaplicar o piloto. Fonte ultima secao doc canonica e corporate-manual-index.json. Corporativo automatico desligado; criativos preservados no fluxo autorizado. Meta integral ainda aberta: referencias/templates/backups/consumidores/futuro staging/retencao continuam fases proprias. Sem nova ACL/credencial/delete ou mudanca de limite.",
+      "next_step": "Quatro Sheets individuais ja movidas e verificadas: ver corporate-manual-index.json. Agora aguardar/validar MGS-CORPORATE-MANUAL-REF-FOLDERS-1562626527206838275: duas pastas/7 IDs/4 Sheets congelados. Nao reaplicar lotes concluidos, nao criar copias, nao enfileirar IDs manuais pendentes. Auto lane corporativa off. Depois resolver backup/produtor/retencao/restore e acervo criativo preservando gates/IDs e sem ScopeShift ou exclusao nao confirmada. Fonte ultima secao doc canonica.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automacao integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "corporate_manual_pilot_verified_batch3_awaiting_operator",
+      "state": "corporate_manual_4sheets_verified_reference_folders_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T00:37:49+00:00"
+      "updated_at": "2026-10-22T00:56:17+00:00"
     },
     {
       "agent": "zeus",
@@ -7012,5 +7022,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T00:44:50+00:00"
+  "updated_at": "2026-10-22T00:56:17+00:00"
 }
