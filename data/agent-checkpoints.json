@@ -2402,6 +2402,16 @@
     },
     {
       "agent": "zeus",
+      "id": "MGS-CORPORATE-BACKUP-LAYOUT-1562643079188451401",
+      "next_step": "Orientar somente criacao de MGS-CORPORATIVO/_DISASTER_RECOVERY e subpastas vazias hourly,daily,weekly,monthly na conta Gmail. Plano backup-empty-layout-plan-1562643079188451401.json. NAO mover _DR original1DZ8QIirDnw-dNBbYllQ9p9L0fSzgsOO9 nem arquivos: uploader ainda usa SharedDrive0AE e ensure_folder por nome, retention ainda tier source; raiz movida faria nova arvore. Apos criacao, verificar IDs/owner/ACL4 e implementar/testar produtor-reconciler-retencao-restaure do arquivo Gmail com staging antigo preservado. SA move nativo test-only 31b falhou storageQuotaExceeded403, fonte intacta; nao repetir nem fallback OAuth. Fixture1XJQwSFFBymb2abJFx6zZO8pV35IK7BBS preservado/inventariado para limpeza autorizada. SA writer observada canTrash/canDelete false em SheetGmail; validar backup real antes de afirmar capacidade de retencao. Gates criticos para exclusao/credencial/billing permanecem.",
+      "objective": "Migracao integral aos 30 TB com conteudo/IDs/acessos e automacao futura comprovados",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "awaiting_owner_create_empty_destination_layout",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T02:06:41+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "MGS-CORPORATE-MANUAL-BATCH-1562623735889006674",
       "next_step": "Tres Sheets/116 abas verificadas via mesmas IDs/owner/ACL especifica (Geizian apenas Inventario), formulas/literais/estrutura/formatos iguais, write/read/restore SA por arquivo. Cotacoes tiveram apenas 3 resultados GOOGLEFINANCE atualizados e qualificados, sem sobrescrever; valores formatados nao sao integralmente iguais nessa Sheet. Provas data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-corporate-batch-1562623735889006674/batch-verification-1562626527206838275.json. Proximo lote: duas pastas referencias, nao backups/criativos.",
       "objective": "Migracao corporativa manual assistida preservando IDs e acessos sob o objetivo integral",
@@ -2423,12 +2433,12 @@
     {
       "agent": "zeus",
       "id": "MGS-CORPORATE-MANUAL-REF-FOLDERS-1562626527206838275",
-      "next_step": "Mover pelo SITE, conta Gmail, apenas pastas Atena - Content Reference Maps e Meta Utility Templates para MGS-CORPORATIVO. Manifesto data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-reference-folders-1562626527206838275/manifest.json fecha 7 IDs (3 pastas/4 Sheets), snapshots gzip/hash de todos e ACL4. Ainda nao movidos. Apos movido, conferir mesmos 7 IDs, parents internos preservados, 2 parents raiz mudados, owner Gmail/ACL4 cada no, snapshots/formatos/Sheets e canario SA por arquivo; URLs de referencias da Atena mantem os mesmos IDs, CSVs locais intocados. Nao editar outras skills/OAuth antigo; fonte ativa SA. Corporate auto lane off; nao enfileirar esses IDs nem tocar _DISASTER_RECOVERY/CRIATIVOS/UPLOAD MANUAL neste lote.",
-      "objective": "Migracao corporativa manual assistida preservando IDs e acessos sob o objetivo integral",
+      "next_step": "Movimento das duas pastas confirmado: exatamente 7 IDs/3 pastas/4 Sheets preservados, parents internos iguais, Gmail owner/ACL4 por no, 36 abas com valores/formulas/formatos autorais exatos e SA write/read/restore por arquivo. Evidencia data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-reference-folders-1562626527206838275/folder-batch-verification-1562643079188451401.json. Oito Sheets/163 abas totais ja validadas no indice manual; nao repetir movimentos nem editar skills da Atena/OAuth historico.",
+      "objective": "Migracao integral aos 30 TB com conteudo/IDs/acessos e automacao futura comprovados",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "awaiting_owner_native_browser_folder_move",
+      "state": "completed",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T00:56:17+00:00"
+      "updated_at": "2026-10-22T02:06:41+00:00"
     },
     {
       "agent": "zeus",
@@ -2443,12 +2453,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Quatro Sheets individuais ja movidas e verificadas: ver corporate-manual-index.json. Agora aguardar/validar MGS-CORPORATE-MANUAL-REF-FOLDERS-1562626527206838275: duas pastas/7 IDs/4 Sheets congelados. Nao reaplicar lotes concluidos, nao criar copias, nao enfileirar IDs manuais pendentes. Auto lane corporativa off. Depois resolver backup/produtor/retencao/restore e acervo criativo preservando gates/IDs e sem ScopeShift ou exclusao nao confirmada. Fonte ultima secao doc canonica.",
+      "next_step": "Oito Sheets/163 abas e 3 folder IDs preservados/validados, provas native-sheets-storage-acceptance-1562643079188451401.json e corporate-manual-index.json. Agora criar/verificar apenas layout vazio de backups, checkpoint MGS-CORPORATE-BACKUP-LAYOUT-1562643079188451401; nao mover raiz _DR antiga nem arquivos antes de adaptar upload/staging, archive reconciliation, retention e restore. Produtor ainda SharedDrive ensure_folder, SA nao move a Gmail por storageQuotaExceeded (probe tecnico inventariado, nao repetir). Nenhuma identidade alternativa, exclusao ou reset aprovado. Criativos mantidos no fluxo autorizado; migracao integral nao esta pronta. Ultima secao doc canonica tem diagnostico e proxima acao.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automacao integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "corporate_manual_4sheets_verified_reference_folders_pending",
+      "state": "all8_native_sheets_storage_verified_backup_empty_layout_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T00:56:17+00:00"
+      "updated_at": "2026-10-22T02:06:42+00:00"
     },
     {
       "agent": "zeus",
@@ -3413,12 +3423,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Ponto5 MonetizeMore ainda nao aplicado: USD705.00 na fonte e zero registrado. Explicar e resolver atribuicao do principal antes de preencher; nao reexecutar pontos1-4",
-      "objective": "Conferencia setembro x Dash ponto a ponto; pontos1-4 concluidos com fonte preservada",
-      "source": "reports/finance-september-google-complete-1562623875055886377.md;discord:1545426987756298340#1562623875055886377",
-      "state": "point4_google_complete_43_daily_values_60of60_controls",
+      "next_step": "Rodolfo confirma operacoes:wantabrand703.20 US-CC-ES/BOT ou parcelaBR-CAR-BR;finance1.80 USouGB. Totais/network eBOT ja verificados; nao pedir novoexport paraessaspartes nem lancar semcountry",
+      "objective": "Conferencia setembro x Dash: pontos1-4 concluidos; explicar receita M2 ausente com fonte viva",
+      "source": "reports/finance-september-point5-explanation-1562643300211621942.md;discord:1545426987756298340#1562643300211621942",
+      "state": "point5_m2_explained_network_sheet_60of60_bot_confirmed_country_pending",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-22T00:43:06+00:00"
+      "updated_at": "2026-10-22T02:06:07+00:00"
     },
     {
       "agent": "zeus",
@@ -7032,5 +7042,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T01:47:01+00:00"
+  "updated_at": "2026-10-22T02:06:42+00:00"
 }

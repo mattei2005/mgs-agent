@@ -9834,6 +9834,24 @@
       "updated_at": "2026-10-21T20:42:16+00:00"
     },
     {
+      "canonical_key": "mgs.whole-drive.30tb.manual_reference_folder_transfer",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "atena",
+        "zeus"
+      ],
+      "domain": "storage.google-drive",
+      "effective_at": "2026-10-22T02:06:42+00:00",
+      "id": "MGS-CORPORATE-NATIVE-FOLDER-MOVE-CAP-20261022",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Movimento nativo humano das duas arvores de referencias com IDs e ACL preservados",
+      "updated_at": "2026-10-22T02:06:42+00:00"
+    },
+    {
       "canonical_key": "policy.mgs-domain-scope.shared-agents",
       "canonical_source": "context/security-policies.md",
       "consumers": [
@@ -13701,5 +13719,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T01:47:01+00:00"
+  "updated_at": "2026-10-22T02:06:42+00:00"
 }
