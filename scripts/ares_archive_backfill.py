@@ -72,6 +72,26 @@ def prepare_first():
   result=enqueue(d,c,make_job(chosen,c,stage));stage['prepared_first_job']=result;stage['status']='owner_repin_required_hidden_first_batch_ready';b.atomic_json(location()/'stage.json',stage)
  return result
 
+def verify_asset(d,c,job,a,receipt):
+ target=next(x for x in receipt['assets'] if x['sourceId']==a['sourceId'] and x['role']=='historical');meta=d.meta(target['archiveId']);source_access(d,a,c)
+ if meta.get('trashed') or meta.get('driveId') or meta.get('name')!=a['name'] or meta.get('mimeType')!=a['mimeType'] or str(meta.get('size'))!=a['size'] or meta.get('md5Checksum')!=a['md5'] or not any(x.get('emailAddress')==b.ACCOUNT for x in meta.get('owners',[])) or len(meta.get('parents',[]))!=1 or d.relative_parent(meta['parents'][0],b.ARCHIVE_ROOT)!=a['relativeParent']:raise BackfillError('BACKFILL_COPY_IDENTITY_OR_PATH')
+ if any(x.get('type') in ['anyone','domain'] for x in meta.get('permissions',[])):raise BackfillError('BACKFILL_COPY_PUBLIC')
+ native_permissions=permissions(d,meta['id'])
+ if any(x.get('type') in ['anyone','domain'] for x in native_permissions):raise BackfillError('BACKFILL_COPY_PUBLIC')
+ writers={x.get('emailAddress') for x in native_permissions if x.get('role')=='writer'}
+ if not WRITERS<=writers or b.CANONICAL_SA not in writers:raise BackfillError('BACKFILL_COPY_HUMAN_ACCESS')
+ expected={k:a[k] for k in ['size','md5','sha256']}
+ if d.hashes(a['sourceId'])!=expected or d.hashes(meta['id'])!=expected:raise BackfillError('BACKFILL_BINARY_MISMATCH')
+ source_access(d,a,c)
+ return {'source_id':a['sourceId'],'archive_id':meta['id'],'archive_parent_id':meta['parents'][0],'name':a['name'],'mime_type':a['mimeType'],'relative_parent':a['relativeParent'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'owner':b.ACCOUNT,'verified':True,'job_id':job['jobId']}
+
+def verify_assets_readonly(d,c,job,receipt):
+ # Parallel GET/stream verification only; index, ACK and all writes stay serial.
+ if c.get('owner_executor_mode')!='vps' or len(job['assets'])<2:return [verify_asset(d,c,job,a,receipt) for a in job['assets']]
+ from concurrent.futures import ThreadPoolExecutor
+ with ThreadPoolExecutor(max_workers=min(4,len(job['assets'])),thread_name_prefix='mgs-sa-byte-proof') as pool:
+  return list(pool.map(lambda a:verify_asset(d,c,job,a,receipt),job['assets']))
+
 def verify_job(d,c,job,apply=False,request_type=None):
  if request_type not in [None,'backfill_request','vps_backfill_request']:raise BackfillError('BACKFILL_REQUEST_TYPE')
  req=d.one(c['requests_folder_id'],'request:'+job['jobId'])
@@ -82,18 +102,8 @@ def verify_job(d,c,job,apply=False,request_type=None):
  if not found:return {'status':'pending','job_id':job['jobId']}
  rm=d.meta(found['id']);b.require_publisher(rm,b.ACCOUNT)
  if rm.get('parents')!=[c['receipts_folder_id']]:raise BackfillError('BACKFILL_RECEIPT_PARENT')
- receipt=json.loads(d.raw(found['id']));b.validate_receipt(job,receipt);verified=[]
- for a in job['assets']:
-  target=next(x for x in receipt['assets'] if x['sourceId']==a['sourceId'] and x['role']=='historical');meta=d.meta(target['archiveId']);source_access(d,a,c)
-  if meta.get('trashed') or meta.get('driveId') or meta.get('name')!=a['name'] or meta.get('mimeType')!=a['mimeType'] or str(meta.get('size'))!=a['size'] or meta.get('md5Checksum')!=a['md5'] or not any(x.get('emailAddress')==b.ACCOUNT for x in meta.get('owners',[])) or len(meta.get('parents',[]))!=1 or d.relative_parent(meta['parents'][0],b.ARCHIVE_ROOT)!=a['relativeParent']:raise BackfillError('BACKFILL_COPY_IDENTITY_OR_PATH')
-  if any(x.get('type') in ['anyone','domain'] for x in meta.get('permissions',[])):raise BackfillError('BACKFILL_COPY_PUBLIC')
-  native_permissions=permissions(d,meta['id'])
-  if any(x.get('type') in ['anyone','domain'] for x in native_permissions):raise BackfillError('BACKFILL_COPY_PUBLIC')
-  writers={x.get('emailAddress') for x in native_permissions if x.get('role')=='writer'}
-  if not WRITERS<=writers or b.CANONICAL_SA not in writers:raise BackfillError('BACKFILL_COPY_HUMAN_ACCESS')
-  expected={k:a[k] for k in ['size','md5','sha256']}
-  if d.hashes(a['sourceId'])!=expected or d.hashes(meta['id'])!=expected:raise BackfillError('BACKFILL_BINARY_MISMATCH')
-  source_access(d,a,c);verified.append({'source_id':a['sourceId'],'archive_id':meta['id'],'archive_parent_id':meta['parents'][0],'name':a['name'],'mime_type':a['mimeType'],'relative_parent':a['relativeParent'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'owner':b.ACCOUNT,'verified':True,'job_id':job['jobId']})
+ receipt=json.loads(d.raw(found['id']));b.validate_receipt(job,receipt)
+ verified=verify_assets_readonly(d,c,job,receipt)
  result={'schema':'mgs.archive.backfill.verification.v1','status':'verified','job_id':job['jobId'],'assets':verified,'primary_identifiers_changed':False,'source_deleted':False,'verified_at':b.now_iso()}
  if apply:
   p=location();idx=obj(p/'backfill-index.json',{'mappings':{},'verified_jobs':{}})
