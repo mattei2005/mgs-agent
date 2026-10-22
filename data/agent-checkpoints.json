@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Confirmacao critica Rodolfo1562848227944955935=sim à exclusao origem sem24h após provas. Backups operacionais anteriores preservados em artifacts/immediate-retention-1562848227944955935. Implementarautoridadeversionada0s, mantercompatlegada e todosgates; testar/deploy/realcycle/readback no mesmo writer. Nao fabricar release nem apagarhistorico ainda semconsumidores. Semnovo ownerRun.",
-      "objective": "Drive antigo somenteUPLOAD MANUAL e acervo Ares nos30TB; retirada imediata apos validacao completa",
+      "next_step": "Rodolfo1562848227944955935 confirmou0s: aplicado/readback runtime authorityhash4ac1ac9ace8f801cf045cfbeb9fb37843860f8000058e33110566a0f2eca548a;120testsPASS;nao pedirnovaconfirmacao. Controllerrealreadonly13pares/0eligible/0delete;bloqueiaintakereleaselegit. Ainda faltam fullcopy+consumerhistorico+estoque/controleforaantigo antesDrivevazio. Googlefiles.list InternalError1tentativajob167e666c81fc1bc4081c0ebbdccbee2f/request1tRAQT1TpqvSh9ukmfamT2klJsn8gF490;retry nativo15:34:31Z foi aguardado mas bulk atingiu90.24/90 e pausou;estimativa15:53Z11:53Easternsemgarantia. Mesmo monitor83b148017b4d continua;nao zerarledger/aumentaracima90/faketrigger. Retomar receiptcopied/ACK e executar fluxoreal;nenhumDELETE novo nemownerRunnecessario. Provas immediate-retention-validation-1562848227944955935.json e transientobservations.",
+      "objective": "Drive antigo somenteUPLOAD MANUAL; processados nos30TB e retirada sem espera apos provas completas",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "immediate_retention_confirmed_implementing_policy_without_bypassing_gates",
+      "state": "confirmed_0s_policy_active_migration_consumer_work_and_native_budget_retry_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T15:23:10+00:00"
+      "updated_at": "2026-10-22T15:38:52+00:00"
     },
     {
       "agent": "ares",
@@ -4853,12 +4853,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-mass-1560295338257023118",
-      "next_step": "Receber pacotes locais restantes, validar individualmente, aplicar somente mesmosIDs, conferir todos58HTTP/DOM/categorias/bios/links e recalcular saídas genuínas sem alterar config/cacheglobal.",
-      "objective": "Revisão atual Raquel: imagens individuais, ajustes pontuais e fontes compatíveis com idioma e mercado; sem novo lote",
-      "source": "/root/.hermes/profiles/atena/work/seo-review-1562828122762649781/receipts-ready-auto-car23.json;/root/.hermes/profiles/atena/work/seo-review-1562828122762649781/receipts-ready-game15.json;discord:1560295338257023118#1562829266020868157",
-      "state": "38alvos reconciliados em subgrupos:36corpos atualizados e2preservados;13imagens substituídas nos mesmosids;readbackrestexato e camposprotegidospreservados.13trocasfontes game porportuguês+exceçõesrotuladas;internosnovos auto/car/game verificados. pendentes20alvos:7refinamentosfinanceiros,2imagensgamee11topfeedfonteses/imagens2. qa público final/score nativo ainda não concluídos;pendênciasanteriores preservadas.",
+      "next_step": "Receber duas imagens locais Game, aplicar e validar todos58;metas genuínas e duas passagens públicas;nenhum novo lote.",
+      "objective": "Concluir revisão pontual do lote atual, incluindo idioma das fontes e imagens próprias por assunto",
+      "source": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/review-1562828122762649781.json",
+      "state": "56alvos reconciliados;54corpos alterados;22imagens substituídas. topfeed11fontes es integradas, norma/primáriasenrotuladas, httpeurlrealconferidos nosapoiosesnovos. restam2alvosgame62738/62742;semnovoartigo. qafinal58/scores/cachecanônico ainda pendentes;histórico ua desktop preservado como diagnóstico, perfilmóvelcompleto agora reaplicado porbatch.",
       "thread_id": "1560295338257023118",
-      "updated_at": "2026-10-22T15:02:27+00:00"
+      "updated_at": "2026-10-22T15:38:34+00:00"
     },
     {
       "agent": "atena",
@@ -7112,5 +7112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T15:23:10+00:00"
+  "updated_at": "2026-10-22T15:38:52+00:00"
 }

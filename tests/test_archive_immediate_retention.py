@@ -47,4 +47,17 @@ class ImmediateRetention(unittest.TestCase):
   with self.assertRaisesRegex(r.NotReady,'ACTIVE_SOURCE_CLAIM'):self.call_ready()
  def test_default_auth_reads_raw_config_without_recursive_validation(self):
   with patch.object(self.b,'read_json',side_effect=self.fake_read),patch.object(self.b,'config_load',side_effect=AssertionError('RECURSIVE_CONFIG_LOAD')):self.assertEqual(r.authorization()['retention_seconds'],0)
+ def test_legacy_authority_remains_readable_while_zero_policy_is_active(self):
+  legacy={**self.auth,'confirmation_message_id':r.CONFIRMATION,'retention_seconds':86400}
+  def read(path,default=None):
+   if Path(path).name=='retirement-authorization-'+r.CONFIRMATION+'.json':return legacy
+   return self.fake_read(path,default)
+  with patch.object(self.b,'read_json',side_effect=read):
+   self.assertEqual(r.authorization(r.CONFIRMATION)['retention_seconds'],86400);self.assertEqual(r.authorization()['retention_seconds'],0)
+ def test_new_confirmation_does_not_raise_batch_limit(self):
+  self.auth['max_pairs_per_run']=3
+  with self.assertRaises(r.RetirementError):self.call_ready()
+ def test_new_confirmation_does_not_change_archive_root(self):
+  self.auth['archive_root_id']='differentArchive001'
+  with self.assertRaises(r.RetirementError):self.call_ready()
 if __name__=='__main__':unittest.main()

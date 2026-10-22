@@ -976,10 +976,28 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-CREATIVE-30TB-CLEANUP-IMMEDIATE-1562848227944955935",
+      "title": "Política confirmada: limpeza definitiva de novos pares verificados após 24h, dois pares por ciclo; histórico excluído",
+      "updated_at": "2026-10-22T15:38:52+00:00"
+    },
+    {
+      "canonical_key": "ares.creative.30tb.source_cleanup_proposal",
+      "canonical_source": "docs/ares-creative-30tb-source-cleanup-policy.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-ops",
+      "effective_at": "2026-10-22T15:38:52+00:00",
+      "id": "ARES-CREATIVE-30TB-CLEANUP-IMMEDIATE-1562848227944955935",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Política confirmada: limpeza definitiva de novos pares verificados após 24h, dois pares por ciclo; histórico excluído",
-      "updated_at": "2026-10-20T23:02:48+00:00"
+      "title": "Retirada automatica sem24h somente apos provas completas; demais gates e limites preservados",
+      "updated_at": "2026-10-22T15:38:52+00:00"
     },
     {
       "canonical_key": "ares.creative.30tb.source_cleanup_proposal",
@@ -13945,5 +13963,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T15:15:36+00:00"
+  "updated_at": "2026-10-22T15:38:52+00:00"
 }
