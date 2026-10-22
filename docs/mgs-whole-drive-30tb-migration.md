@@ -212,4 +212,13 @@ Resíduo CRIADO PELO PRÓPRIO TESTE/RECUPERAÇÃO, não pendência antiga: `/roo
 
 O piloto de armazenamento/recuperação está fechado; a iniciativa total NÃO. Próximo gate imediato: confirmação da limpeza exata do teste; em seguida continuar implementação e prova do produtor/arquivo/retention owner-aware, sem supor autoridade SA de trash no Gmail e sem orientar lote histórico antes dos gates. Política/source cadence48/14/8/12 e deleteSource:false permanecem. Não há mais processo de restore em background capaz de agir após a entrega.
 
+## Limpeza exata confirmada e concluída — 1562683794958450761
+
+O `sim` de Rodolfo confirmou somente o diretório temporário previamente mostrado, sem nova aprovação de retenção, backup ou outros scratch. Manifesto/ledger comprimido e hashes foram verificados; o preflight real do mesmo executor validou o fingerprint congelado, 203672 arquivos/21244 diretórios/nenhum symlink, ausência de mounts/referências e preservação do backup remoto/restore proof. Executor SHA b86d5f835e345a90843760307e962a7ef6a86062b890e6baff8d8f4b5edb316a, manifesto SHA 7dd2255d1c93eccf0c0fbe1eb2bf41bd29c0874d7a12bf6f727214f57db84d16. Auditoria start registrada antes da única remoção e closure depois.
+
+`/root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-qj0i0h9c` está ausente. Delta real de espaço livre 44583895040 bytes (41.52 GiB), distinto dos 41.53 GiB alocados estimados pelo inventário; diferença de operações concorrentes/overhead não atribuída, sem alegar ganho idêntico ao tamanho lógico. Os três gateways mantiveram os mesmos PIDs/estados ativos, os perfis vivos e comprovantes compactos ficaram presentes, o backup Gmail foi relido com mesmo ID/SHA e a rotina de backup permaneceu saudável. Não houve remoção em Google, outros scratch, source ou produção, nem mudança de política/cadência/credencial. O manifesto congelado permanece como histórico; a fonte atual de conclusão é `restore-temp-cleanup-execution-1562683794958450761.json` (completed_validated), com preflight separado e executor preservado em artefato compacto.
+
+Esta seção supersede SOMENTE a pendência de confirmação/limpeza da seção anterior. O piloto e sua recuperação continuam válidos; a automação/retention Gmail e migração integral continuam abertas sob a autorização original. Nenhuma nova tarefa de limpeza é proposta nesta fase.
+
+
 

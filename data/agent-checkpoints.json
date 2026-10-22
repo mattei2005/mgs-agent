@@ -2413,12 +2413,12 @@
     {
       "agent": "zeus",
       "id": "MGS-CORPORATE-BACKUP-PILOT-1562665022910500936",
-      "next_step": "Rodolfo pronto1562676006119280762. API confirmou file1ZlbYkAQN_YoRgvl0K3KCueGg80NQW1T2 agora weekly13lgWXECmJBKm_qnXpWXfshHhzcN46ouf, Gmail owner/ACL4/mesmos bytes/props. Primeiro readback03:56:49Z, canDownload/Edit true canTrash/Delete false no BINARIO. Source root/tiers/config intactos. Executar restore-test --remote-id EXATO, sem flags inventadas --no-discord/--json (parser nao aceita); saída JSON já padrão e restore não posta Discord. CLI/script em scratch wrapper só redireciona TemporaryDirectory do restore para TMPDIR e limpa HERMES_PROFILE na árvore de teste; nada vivo. Depois verificar novo PASS pós03:56:49Z e verify-pilot aceite. Full/DB restore materializado em produção não autorizado. Nenhum lote histórico nem retençãoGmail ativados.",
+      "next_step": "Arquivo1ZlbYkAQN_YoRgvl0K3KCueGg80NQW1T2 movido e sameID/bytes/props/ACL4/Gmail owner confirmados. PASS novo04:15Z apos03:56Z native readback; download6GB/MD5/SHA/descriptografia/componentes3profiles+MGS reais isolados; PGarchive list PASS, materializado nao. verify-pilot exit0. Transporte420s foi reconciliado/resumido em background SILENCIOSO, terminou exit0 consumido. Nao repetir piloto nem mover lote. Proxima etapa checkpoint MGS-RESTORE-TEMP-CLEANUP-1562676006119280762; depois implementar automacao/retençãoOwner ainda ausentes. Fonte doc secao1562676006119280762.",
       "objective": "Validar backup binario movido com mesmo ID, acesso SA e restore isolado no arquivo Gmail",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "native_move_verified_isolated_restore_in_progress",
+      "state": "completed_validated",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T03:58:00+00:00"
+      "updated_at": "2026-10-22T04:23:17+00:00"
     },
     {
       "agent": "zeus",
@@ -2462,13 +2462,23 @@
     },
     {
       "agent": "zeus",
-      "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Aguardar movimento humano nativo de UM arquivo mgs-dr-weekly-20261018T081508Z.zip.gpg, ID1ZlbYkAQN_YoRgvl0K3KCueGg80NQW1T2, source weekly114WuTvDTwdUoDRlBLfZr_3xLAqt4nI8S -> arquivo weekly13lgWXECmJBKm_qnXpWXfshHhzcN46ouf. Contrato backup-native-move-pilot.json congelou ID/version/hash nativo/prior restorePASS; nao recriar. Depois CLI mgs_backup_archive.py verify-pilot retorna2 ate novo restore; verificar owner/ACL4/bytes/appProps/ancestry/source. Checar disco real; mgs-offsite-backup.py --no-discord --json restore-test --remote-id EXATO, isolado, sem dropDB; apos PASS novo posterior ao primeiro native-move timestamp rodar verify-pilot novamente. Nao mover raiz/tier original nem outros backups antes de implementar/testar produtor+retencao futura. Automatic archive/retencao Gmail ainda NAO implementados; config e politica source48/14/8/12 intactas; sem OAuth alternativo/delecao/ativacao. Detalhes doc canonica secao1562665022910500936.",
-      "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automacao integral validada",
+      "id": "MGS-RESTORE-TEMP-CLEANUP-1562676006119280762",
+      "next_step": "Aguardar confirmacao critica de Rodolfo SOMENTE para remover /root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-qj0i0h9c, criado pelo teste/recuperacao Zeus:203672files/21244dirs/0symlinks,44591214592bytes alocados(41.53GiB), sem mount e zero processrefs, gpg-agent encerrado. Manifest compact restore-temp-cleanup-candidate-1562676006119280762.json aponta gzip completo byte-exato; fingerprint131338e1c7b8e52d34f956e866aee231f5d1f5b5031b0c9c37faeb80c8c63ad8. NAO limpar ate sim explicito apos escopo. Apos sim, revalidar target/fingerprint/totais/no references e backup remoto1Zlb+proofs foraDoAlvo; audit start/finish; remover SOMENTE raiz exata sem tocar pais/outroscratch/perfisVivos/source/Gmail; medir deltaDF. Nao pedir terceira confirmacao se escopo e metadata permanecem. Depois continuar automacao futura sob autorizacao original; nao alterar policy48/14/8/12/credencial/flags deleteSource:false. Background restore proc_cd09ecc01826 terminou/foi consumido; nao resta writer. ErroCLI --no-discord/--json foi corrigido em skill/mirror/doc; flags nao existem, JSON default. Snapshot de task doc secao1562676006119280762.",
+      "objective": "Remover somente residuos do proprio teste de recuperacao apos confirmacao critica, preservando copia remota e provas",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "all8_native_sheets_verified_backup_layout_bound_single_pilot_pending",
+      "state": "awaiting_explicit_critical_cleanup_confirmation",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T03:53:57+00:00"
+      "updated_at": "2026-10-22T04:23:17+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
+      "next_step": "Aguardar confirmacao critica de Rodolfo SOMENTE para remover /root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-qj0i0h9c, criado pelo teste/recuperacao Zeus:203672files/21244dirs/0symlinks,44591214592bytes alocados(41.53GiB), sem mount e zero processrefs, gpg-agent encerrado. Manifest compact restore-temp-cleanup-candidate-1562676006119280762.json aponta gzip completo byte-exato; fingerprint131338e1c7b8e52d34f956e866aee231f5d1f5b5031b0c9c37faeb80c8c63ad8. NAO limpar ate sim explicito apos escopo. Apos sim, revalidar target/fingerprint/totais/no references e backup remoto1Zlb+proofs foraDoAlvo; audit start/finish; remover SOMENTE raiz exata sem tocar pais/outroscratch/perfisVivos/source/Gmail; medir deltaDF. Nao pedir terceira confirmacao se escopo e metadata permanecem. Depois continuar automacao futura sob autorizacao original; nao alterar policy48/14/8/12/credencial/flags deleteSource:false. Background restore proc_cd09ecc01826 terminou/foi consumido; nao resta writer. ErroCLI --no-discord/--json foi corrigido em skill/mirror/doc; flags nao existem, JSON default. Snapshot de task doc secao1562676006119280762.",
+      "objective": "Migrar integralmente aos 30 TB com IDs/acesso/backup/retencao/restaure e automacao futura comprovados",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "native_sheets_and_one_backup_restore_verified_temporary_cleanup_confirmation_pending",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T04:23:18+00:00"
     },
     {
       "agent": "zeus",
@@ -3433,12 +3443,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPT-CLOSE-1562562282838429729",
-      "next_step": "Aguardar autorizacao dos5casos menores:NewsounDEMGSparaKelly;Zuout/principalFinNicolasparaMGS;WavesBee/principalFinIsliagoparaMGS. Preservar Yolokfx01-09 pela decisao1547678046553636905",
-      "objective": "Explicar ponto6 atribuicao gestores mantendo pontos1-5 e excecaoYolokfxativa",
-      "source": "reports/finance-september-point6-explanation-1562675688522129499.md;discord:1545426987756298340#1562675688522129499",
-      "state": "point6_explained_five_small_reassignments_proposed_yolokfx_exception_preserved",
+      "next_step": "Revalidar fonte e origem; plano por dia/gestor preservando gross;backup,ensaio,aplicacao/readback e reflexos em remuneracao. Explicar queYolo segue decisao anterior,nao total errado",
+      "objective": "Ponto6 setembro:NewsounDE Kelly;Zuout principal/Fin porG002MGS/G006Nicolas;WavesBee principal/Fin Isliago;Yolo preservar excecao",
+      "source": "reports/finance-september-point6-explanation-1562675688522129499.md;discord:1545426987756298340#1562684657601089557",
+      "state": "point6_three_site_reassignment_authorized_two_wavesbee_noop_yolo_preserved",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-10-22T04:06:00+00:00"
+      "updated_at": "2026-10-22T04:31:44+00:00"
     },
     {
       "agent": "zeus",
@@ -7052,5 +7062,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T04:06:00+00:00"
+  "updated_at": "2026-10-22T04:31:44+00:00"
 }

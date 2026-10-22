@@ -9869,6 +9869,23 @@
       "updated_at": "2026-10-22T03:53:58+00:00"
     },
     {
+      "canonical_key": "mgs.whole-drive.30tb.backup_native_move_restore",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "storage.google-drive",
+      "effective_at": "2026-10-22T04:23:18+00:00",
+      "id": "MGS-CORPORATE-BINARY-BACKUP-RESTORE-CAP-20261022",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Um backup GPG nativo movido ao Gmail preserva ID/bytes e leitura/recuperacao SA, sem autoridade SA trash",
+      "updated_at": "2026-10-22T04:23:18+00:00"
+    },
+    {
       "canonical_key": "mgs.whole-drive.30tb.manual_reference_folder_transfer",
       "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
       "consumers": [
@@ -13754,5 +13771,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T03:53:58+00:00"
+  "updated_at": "2026-10-22T04:23:18+00:00"
 }
