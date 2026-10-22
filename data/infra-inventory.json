@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-22T15:29:05-04:00",
+    "updated_at": "2026-10-22T19:42:43.169179+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -49817,6 +49817,46 @@
       "tailnet_mismatch_report_verified": true,
       "type": "script/data/skill/service",
       "updated_at": "2026-10-22T19:27:04.820922+00:00"
+    },
+    {
+      "id": "finance-sept-invalid-1562911529102475286",
+      "type": "finance-september-invalid-discount-settlement",
+      "authority": [
+        "1562911053489111184",
+        "1562911529102475286"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-22T19:42:43.169179+00:00",
+      "status": "applied_verified",
+      "report_path": "reports/finance-sept-invalid-1562911529102475286.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/sept-invalid-1562911529102475286",
+      "scenario_revision": 1693,
+      "postgres_audit_ids": [
+        "5048",
+        "5049"
+      ],
+      "rate_changes": {
+        "principal|Agosto 2026|L1": "0.0006024256",
+        "network|monthly|SB_REDE2_INVALID": "0.0007350630"
+      },
+      "targets": {
+        "CAD": "469.22",
+        "USD": "154.07"
+      },
+      "financial_rate_writes": 2,
+      "production_code_changes": 0,
+      "restarts": 0,
+      "browser_viewports": 2,
+      "backup": {
+        "path": "/home/zeus/mgs-finance-backups/1562911529102475286/before.dump",
+        "sha256": "5ecf5a2208cd53196713fa0570b79eb1a0636815d2425ae5be2d5c698e020674",
+        "catalog_validated": true,
+        "snapshot_sha256": "8683db575b9869b0574453eb7261f4502d7c6acb435e3ffa6aee595021782fc8"
+      },
+      "recovery_scenario": "recovery-sept-invalid-1562911529102475286",
+      "other_periods_preserved": true,
+      "ledger_preserved": true,
+      "skill_readback_sha256": "22a01777452f86ae25d2964fc505015759dc95567551be0534b5c9241a933b7f"
     }
   ],
   "profile_skill_references": [
