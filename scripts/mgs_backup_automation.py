@@ -110,6 +110,13 @@ def staged_blob(d,s,parent,key,kind,raw,name,mime):
 def publish():
  with b.queue_lock():
   p,s=load();d=b.Drive(True);c=b.config_load();b.preflight(d,c)
+  revision=s.get('runtime_quota_revision')
+  if revision and s.get('worker_sha256')==revision.get('worker_sha256'):
+   import mgs_archive_runtime_quota as quota
+   expected=quota.build(quota.SOURCE.read_bytes(),quota.POLICY.read_bytes())
+   if revision.get('authorization_message_id')!=quota.AUTH or sha(expected)!=s['worker_sha256'] or s.get('worker_source_path')!=str(quota.TARGET.relative_to(b.BASE)) or quota.TARGET.read_bytes()!=expected or d.raw(s['worker_file_id'])!=expected:raise b.ArchiveError('BACKUP_RUNTIME_QUOTA_REVISION_CHANGED')
+   b.require_publisher(d.meta(s['worker_file_id']),b.CANONICAL_SA)
+   return s
   base=b.BASE/'integrations/creative-archive-30tb/WorkerWholeDriveCorporateReceiptRecovery.js'
   if sha(base.read_bytes())!=BASE_SHA:raise b.ArchiveError('BACKUP_BASE_WORKER_CHANGED')
   fid=staged_blob(d,s,c['control_folder_id'],'backup-plan:'+s['plan_sha256'],'backup_plan',b.canonical(p),'backup-automation-plan-'+s['plan_sha256']+'.json','application/json');b.require_publisher(d.meta(fid),b.CANONICAL_SA)

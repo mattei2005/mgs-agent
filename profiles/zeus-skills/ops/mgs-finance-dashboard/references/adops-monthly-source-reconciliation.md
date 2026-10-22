@@ -115,6 +115,15 @@ For bounded native-currency reallocations through gross-pair overlays, retain or
 
 ## Gross-only corrections and manager-facing explanations
 
+### Screenshot-based attribution and complement previews
+
+1. Read each supplied image with `vision_analyze`; extract the manager/account, domain, native currency, gross `REVENUE`, visible filters and date coverage. Keep these observations separate from saved financial-Dash snapshots. Label an unseen date filter as unverified rather than inferring it from the amount; an owner-designated monthly target is a business instruction, not visual proof of the screenshot's period.
+2. Sum the extracted manager values with `decimal.Decimal` and reconcile that sum separately against any quoted provider total. Show a mismatch without inventing an omitted account or a coverage cause. Distinguish provider-versus-closing coverage from manager-versus-manager redistribution: they are different comparisons even when both involve the same domain.
+3. Trace missing-medium attribution back to the original source. Preserve literal `-` separately from a subsequently filled `g002-s`; the latter is a fallback decision, not evidence of original MGS ownership. Do not conclude that all G002 revenue is incorrect merely because some rows used this fallback.
+4. When the owner explicitly selects AdGroup amounts for named managers and the closing report for the site total, compute `manager subtotal = sum(selected manager targets)` and `MGS complement = authoritative closing total - manager subtotal`. Use the selected targets exactly; do not also add the AdGroup G002 value, distribute the gap proportionally or replace the closing total with the provider sum. Block a negative complement or mixed currencies for review.
+5. Present the proposed manager targets, subtotal, MGS complement and reconciled total. If showing the provider's MGS value, label the difference from the calculated complement as a separate coverage bridge. State whether the proposal covers the full month or only the disputed interval, and distinguish gross targets from remuneration and payments. Follow the main skill's preview gate before any financial write; a new full-month proposal must not be recorded as an already-applied subperiod exception.
+6. After acceptance, refresh the financial baseline and calculate each required change as `approved target minus existing effective amount`, not as another full revenue import. Monthly screenshots do not supply daily allocation: use supported daily detail or an explicitly governed monthly closing adjustment, never invented dates or an inferred daily split. Keep original source lineage and the payment ledger intact through the existing transaction/readback procedure.
+
 ### Bounded gross-overlay transaction
 
 1. Freeze a fresh source snapshot, target workspace, account registry and remuneration baseline. Resolve the displayed totals through the deployed `buildSimpleReview`/`accountModel`/`withGrossPairs` projection rather than a stale raw input scalar; a previous overlay may already supersede it.

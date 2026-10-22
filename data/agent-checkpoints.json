@@ -2482,6 +2482,16 @@
     },
     {
       "agent": "zeus",
+      "id": "MGS-RUNTIME-QUOTA-1562815497794363423",
+      "next_step": "Construir nova versao imutavel, testar guard/telemetria consumer e business, publicar/readback e solicitar somente repin owner necessario; preservar ledger e pins ativos ate aceite nativo",
+      "objective": "Aplicar teto oficial Apps Script: consumer90min e Workspace360min, sem alterar identidade/agendamento/exclusoes",
+      "source": "discord:message:1562815497794363423;docs/mgs-whole-drive-30tb-migration.md",
+      "state": "in_progress_authorized_maximum_quota",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T13:12:36+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
       "next_step": "Codigo futuro de backups IMPLEMENTADO/PUBLICADO mas owner NAO repinou. Worker file 1L2EhFCbuWUcMGItMkpAkqVU0Aw5jtpU3 SHA d66ce978164bd525fa40de37df2672fe469413fa8e9c907f7d5af1d6d31b4c0f; plano 1vte8RC8024kiwIEqhvzbHQHfTaWh5VBQ SHA 698c4f3d8cbe5cfd4caa471371fa841925f863d5d4c963d48c2e4487d728da4a. Rodolfo deve trocar somentefileID/hash no Code.gs, salvar e executar mgsArquivoTeste (read-onlybackupProbe, sem outro move/delete). Sem manifesto/agendamento/Implantar/resetbudget. Apos pronto, ler owner heartbeat/probe nativos novo digest e trigger2456112746912022528, corpo blocked[]/canaryACKtrue; duas observacoes scheduled frescas pelo monitor existente83b148017b4d. Novo modulo mgs_backup_automation.resume_acceptance chama acceptor wholeDrive e promove SA/historicalpins; depois ativa future-onlyarchive (semTrash) e producer/reconciler; nao aceitar screenshot ou manualcomoagenda. No PINnovoativo neste checkpoint: SA508e4... ownerBF980. Campos/plan/binding IDs sao fonte, nao docs antigos. Pipeline usa mesmo lock/cap350/60min, prioriza UMbackup antes de varreduraMidia; manualcontroleSomenteProbe. Futuro cutoff salvo no plan, semhistorico implicito. Retention SOMENTEpreview48/14/8/12 protege source/naoVerificado/restoreGeneration, nenhumafuncaoTrash. Validar1backupreal+ACK/stream e recorrencia ANTESde lote/migracao100. Rollback pointers/config em backup-rollout-rollback-1562688137472249867.json; fonte doc secao1562688137472249867.",
       "objective": "Migrar integralmente aos 30 TB com IDs/acesso/backup/retencao/restaure e automacao futura comprovados",
@@ -3589,6 +3599,16 @@
       "state": "concluído: gam24/09 completo,58grupos/audit2192, replay idempotente; despesas17meses audit2196-2212;34views/zerojs;backuprestore verificado",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-09-25T13:30:05+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FINANCE-YOLO-1562816076503449702",
+      "next_step": "Coletar setembro AdGroup diario e mensal; validar cinco alvos e complementos antes de backup, ensaio e aplicacao",
+      "objective": "Aplicar Yolo setembro por dia: cinco gestores pelos prints AdGroup, MGS complemento diario do fechamento; total CAD132197.18",
+      "source": "discord:1545426987756298340#1562816076503449702",
+      "state": "authorized_collecting_daily_sb_no_financial_writes",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-22T13:13:34+00:00"
     },
     {
       "agent": "zeus",
@@ -7072,5 +7092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T05:20:03+00:00"
+  "updated_at": "2026-10-22T13:13:35+00:00"
 }
