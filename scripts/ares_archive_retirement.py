@@ -11,6 +11,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import ares_archive_bridge as b
 CONFIRMATION='1562233890716786830'
+IMMEDIATE_CONFIRMATION='1562848227944955935'
 WRITERS={'newnicolasholanda@gmail.com','criativosevo@gmail.com','iallynitasc@gmail.com','mattei2005@gmail.com','isliago89@gmail.com','support@matteiservicesinc.com','georgeicaro2307@gmail.com','geizianpereira@gmail.com','joewillams2009@gmail.com'}
 class RetirementError(b.ArchiveError):pass
 class NotReady(RetirementError):pass
@@ -20,15 +21,19 @@ def _object(path,default=None):
     value=b.read_json(path,default)
     if not isinstance(value,dict):raise RetirementError('RETIREMENT_JSON_OBJECT_REQUIRED:'+Path(path).name)
     return value
-def authorization():
-    p=b.DATA/('retirement-authorization-'+CONFIRMATION+'.json');a=_object(p,{})
-    expected={'schema':'mgs.archive.retirement.authorization.v1','confirmation_message_id':CONFIRMATION,'confirmation_user_id':'344196393512075265','confirmation_thread_id':'1562078493498540042','source_drive_id':b.SOURCE_DRIVE,'source_root_id':b.SOURCE_ROOT,'archive_root_id':b.ARCHIVE_ROOT,'archive_owner':b.ACCOUNT,'retention_seconds':86400,'max_pairs_per_run':2,'include_historical':False,'exclude_validation_jobs':True,'permanent_source_deletion':True}
+def authorization(confirmation=None):
+    # Read raw config, not config_load(): the latter calls this validator.
+    if confirmation is None:confirmation=_object(b.CONFIG,{}).get('source_cleanup_confirmation_message_id',CONFIRMATION)
+    if confirmation not in (CONFIRMATION,IMMEDIATE_CONFIRMATION):raise RetirementError('RETIREMENT_UNKNOWN_CONFIRMATION')
+    p=b.DATA/('retirement-authorization-'+confirmation+'.json');a=_object(p,{})
+    expected={'schema':'mgs.archive.retirement.authorization.v1','confirmation_message_id':confirmation,'confirmation_user_id':'344196393512075265','confirmation_thread_id':'1562078493498540042','source_drive_id':b.SOURCE_DRIVE,'source_root_id':b.SOURCE_ROOT,'archive_root_id':b.ARCHIVE_ROOT,'archive_owner':b.ACCOUNT,'retention_seconds':0 if confirmation==IMMEDIATE_CONFIRMATION else 86400,'max_pairs_per_run':2,'include_historical':False,'exclude_validation_jobs':True,'permanent_source_deletion':True}
     if any(a.get(k)!=v for k,v in expected.items()):raise RetirementError('RETIREMENT_AUTHORITY_OR_SCOPE')
+    if confirmation==IMMEDIATE_CONFIRMATION and (a.get('supersedes_confirmation_message_id')!=CONFIRMATION or a.get('all_integrity_access_consumer_gates_preserved') is not True):raise RetirementError('RETIREMENT_IMMEDIATE_GATE_BINDING')
     return a
 
 def validate_active_policy(c):
-    a=authorization()
-    if c.get('delete_source') is not True or c.get('include_historical') is not False or c.get('prefer_archive_reads') is not True or c.get('queue_enabled') is not True or c.get('source_cleanup_authorization_sha256')!=digest(a) or c.get('source_cleanup_confirmation_message_id')!=CONFIRMATION or c.get('effective_after')!=a['effective_after'] or not re.fullmatch(r'[A-Za-z0-9_-]{8,}',str(c.get('retirements_folder_id',''))):raise RetirementError('RETIREMENT_ACTIVATION_NOT_PINNED')
+    a=authorization(c.get('source_cleanup_confirmation_message_id',CONFIRMATION))
+    if c.get('delete_source') is not True or c.get('include_historical') is not False or c.get('prefer_archive_reads') is not True or c.get('queue_enabled') is not True or c.get('source_cleanup_authorization_sha256')!=digest(a) or c.get('source_cleanup_confirmation_message_id')!=a['confirmation_message_id'] or c.get('effective_after')!=a['effective_after'] or not re.fullmatch(r'[A-Za-z0-9_-]{8,}',str(c.get('retirements_folder_id',''))):raise RetirementError('RETIREMENT_ACTIVATION_NOT_PINNED')
     return a
 
 def candidate_ready(job,index,rows,state,c,now,ack_created):
@@ -55,7 +60,8 @@ def candidate_ready(job,index,rows,state,c,now,ack_created):
     if len(releases)!=1:raise NotReady('RETIREMENT_INTAKE_NOT_RELEASED')
     if any(e.get('status')!='complete' and any(s.get('source_id') in {a['sourceId'] for a in assets} for s in e.get('batch',{}).get('sources',[])) for e in state.get('claims',{}).values()):raise NotReady('RETIREMENT_ACTIVE_SOURCE_CLAIM')
     since=max(b.timestamp(ack_created),b.timestamp(releases[0]['completed_at']))
-    if (b.timestamp(now)-since).total_seconds()<86400:raise NotReady('RETIREMENT_RETENTION_24H')
+    retention=validate_active_policy(c)['retention_seconds'] if c.get('source_cleanup_confirmation_message_id')==IMMEDIATE_CONFIRMATION else 86400
+    if (b.timestamp(now)-since).total_seconds()<retention:raise NotReady('RETIREMENT_RETENTION_24H' if retention==86400 else 'RETIREMENT_RELEASE_OR_ACK_IN_FUTURE')
     return {'row':row,'released_at':releases[0]['completed_at'],'ack_created_at':ack_created}
 
 def assert_delete_phase(intent):
@@ -78,7 +84,8 @@ def verified_receipt(d,c,job,asset,entry):
     if not fid:raise RetirementError('RETIREMENT_RECEIPT_MISSING')
     control_scope(d,c);m=d.meta(fid);b.require_publisher(m,b.CANONICAL_SA,'RETIREMENT_RECEIPT_AUTHOR');raw=d.raw(fid);r=json.loads(raw)
     if m.get('parents')!=[c['retirements_folder_id']] or m.get('driveId')!=b.SOURCE_DRIVE or m.get('properties',{}).get('mgsArchiveType')!='source_retirement_receipt' or hashlib.sha256(raw).hexdigest()!=m.get('properties',{}).get('sha256'):raise RetirementError('RETIREMENT_RECEIPT_SCOPE_OR_HASH')
-    if r.get('schema')!='mgs.archive.retirement.receipt.v1' or r.get('status')!='deleted_verified' or r.get('authorization_sha256')!=digest(authorization()) or r.get('confirmation_message_id')!=CONFIRMATION or r.get('job_id')!=job['jobId'] or r.get('source_id')!=asset['sourceId'] or r.get('archive_id')!=entry.get('archiveId') or r.get('frozen_asset')!=asset or r.get('delete_http_status') not in (200,204) or r.get('source_readback_http')!=404 or r.get('request_sha256')!=digest(job):raise RetirementError('RETIREMENT_RECEIPT_BINDING')
+    receipt_authority=authorization(r.get('confirmation_message_id'))
+    if r.get('schema')!='mgs.archive.retirement.receipt.v1' or r.get('status')!='deleted_verified' or r.get('authorization_sha256')!=digest(receipt_authority) or r.get('confirmation_message_id')!=receipt_authority['confirmation_message_id'] or r.get('job_id')!=job['jobId'] or r.get('source_id')!=asset['sourceId'] or r.get('archive_id')!=entry.get('archiveId') or r.get('frozen_asset')!=asset or r.get('delete_http_status') not in (200,204) or r.get('source_readback_http')!=404 or r.get('request_sha256')!=digest(job):raise RetirementError('RETIREMENT_RECEIPT_BINDING')
     b.validate_source_metadata(r['source_before'],asset,c)
     if r.get('verified_hashes')!={k:asset[k] for k in ['size','md5','sha256']}:raise RetirementError('RETIREMENT_BINARY_PROOF')
     if source_optional(d,asset['sourceId']) is not None:raise RetirementError('RETIRED_SOURCE_REAPPEARED')
@@ -167,12 +174,13 @@ def publish_receipt(d,c,job,asset,intent,path):
     if intent.get('phase') not in ['delete_accepted','complete'] or intent.get('delete_http_status') not in (200,204):raise RetirementError('RETIREMENT_NO_ACCEPTED_DELETE')
     if source_optional(d,asset['sourceId']) is not None:raise RetirementError('RETIREMENT_SOURCE_NOT_ABSENT')
     index=_object(b.DATA/'archive-index.json');entry=index['mappings'][asset['sourceId']];check_copy(d,asset,entry)
-    receipt={'schema':'mgs.archive.retirement.receipt.v1','status':'deleted_verified','job_id':job['jobId'],'source_id':asset['sourceId'],'archive_id':entry['archiveId'],'frozen_asset':asset,'source_before':intent['source_before'],'verified_hashes':intent['verified_hashes'],'request_sha256':digest(job),'authorization_sha256':digest(authorization()),'confirmation_message_id':CONFIRMATION,'delete_http_status':intent['delete_http_status'],'source_readback_http':404,'deleted_at':intent['delete_accepted_at'],'intent_file_id':intent['intent_file_id'],'source_physical_id_recoverable':False}
+    authority=authorization(intent.get('confirmation_message_id'))
+    receipt={'schema':'mgs.archive.retirement.receipt.v1','status':'deleted_verified','job_id':job['jobId'],'source_id':asset['sourceId'],'archive_id':entry['archiveId'],'frozen_asset':asset,'source_before':intent['source_before'],'verified_hashes':intent['verified_hashes'],'request_sha256':digest(job),'authorization_sha256':digest(authority),'confirmation_message_id':authority['confirmation_message_id'],'delete_http_status':intent['delete_http_status'],'source_readback_http':404,'deleted_at':intent['delete_accepted_at'],'intent_file_id':intent['intent_file_id'],'source_physical_id_recoverable':False}
     fid=d.upload_once(c['retirements_folder_id'],'retired-'+asset['sourceId']+'.json',b.canonical(receipt),'application/json','retired:'+asset['sourceId']+':'+job['jobId'],'source_retirement_receipt')
     entry['sourceRetirementReceipt']=fid;index['mappings'][asset['sourceId']]=entry;b.atomic_json(b.DATA/'archive-index.json',index);verified_receipt(d,c,job,asset,entry)
     intent.update(phase='complete',receipt_file_id=fid,completed_at=b.now_iso());b.atomic_json(path,intent)
     with (b.BASE/'logs/events-audit.jsonl').open('a') as f:
-        fcntl.flock(f,fcntl.LOCK_EX);f.write(json.dumps({'ts':b.now_iso(),'agent':'zeus','event':'ares_source_retirement_verified','source_id':asset['sourceId'],'archive_id':entry['archiveId'],'receipt_file_id':fid,'authority_message_id':CONFIRMATION,'binary_bytes':int(asset['size']),'workspace_quota_delta_measured':False})+'\n');f.flush()
+        fcntl.flock(f,fcntl.LOCK_EX);f.write(json.dumps({'ts':b.now_iso(),'agent':'zeus','event':'ares_source_retirement_verified','source_id':asset['sourceId'],'archive_id':entry['archiveId'],'receipt_file_id':fid,'authority_message_id':authority['confirmation_message_id'],'binary_bytes':int(asset['size']),'workspace_quota_delta_measured':False})+'\n');f.flush()
     return fid
 
 def retire_asset(d,c,job,asset,row_fingerprint):
@@ -195,7 +203,9 @@ def retire_asset(d,c,job,asset,row_fingerprint):
     if digest(current_row(job['lineageId']))!=row_fingerprint:raise RetirementError('RETIREMENT_BUSINESS_ROW_CHANGED')
     if intent.get('phase')=='prepared':
         if intent.get('etag')!=etag['etag'] or intent.get('row_fingerprint')!=row_fingerprint or intent.get('verified_hashes')!=expected:raise RetirementError('RETIREMENT_PREPARED_INTENT_DRIFT')
-    else:intent={'schema':'mgs.archive.retirement.intent.v1','phase':'prepared','job_id':job['jobId'],'source_id':asset['sourceId'],'archive_id':entry['archiveId'],'source_before':again,'verified_hashes':expected,'etag':etag['etag'],'authorization_sha256':digest(authorization()),'confirmation_message_id':CONFIRMATION,'row_fingerprint':row_fingerprint,'prepared_at':b.now_iso()}
+    else:
+        authority=authorization()
+        intent={'schema':'mgs.archive.retirement.intent.v1','phase':'prepared','job_id':job['jobId'],'source_id':asset['sourceId'],'archive_id':entry['archiveId'],'source_before':again,'verified_hashes':expected,'etag':etag['etag'],'authorization_sha256':digest(authority),'confirmation_message_id':authority['confirmation_message_id'],'row_fingerprint':row_fingerprint,'prepared_at':b.now_iso()}
     b.atomic_json(path,intent);payload=b.canonical(intent);iid=d.upload_once(c['retirements_folder_id'],'retirement-intent-'+asset['sourceId']+'.json',payload,'application/json','retirement-intent:'+asset['sourceId']+':'+job['jobId'],'source_retirement_intent');b.require_publisher(d.meta(iid),b.CANONICAL_SA)
     if d.raw(iid)!=payload:raise RetirementError('RETIREMENT_INTENT_READBACK')
     intent.update(phase='delete_started',intent_file_id=iid,delete_started_at=b.now_iso());b.atomic_json(path,intent)
@@ -224,7 +234,7 @@ def recover_accepted(d,c):
 def run_cycle(d,c,state,apply=False):
     result={'status':'disabled','enabled':False,'pairs_considered':0,'pairs_retired':0,'files_retired':0,'waiting':[],'blocked':[],'retention_seconds':86400,'max_pairs_per_run':2,'workspace_quota_delta_measured':False}
     if c.get('delete_source') is not True:return result
-    validate_active_policy(c);control_scope(d,c);result.update(status='ok',enabled=True)
+    policy=validate_active_policy(c);control_scope(d,c);result.update(status='ok',enabled=True,retention_seconds=policy['retention_seconds'],confirmation_message_id=policy['confirmation_message_id'])
     index=_object(b.DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}})
     for jid,verified in sorted(index['verified_jobs'].items(),key=lambda item:(item[1].get('verifiedAt',''),item[0])):
         if verified.get('kind')!='lineage' or verified.get('validationOnly') is True:continue
