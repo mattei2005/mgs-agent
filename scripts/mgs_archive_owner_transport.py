@@ -3,7 +3,7 @@
 Native SA requests/ACKs and independent full binary verification remain canonical.
 """
 from __future__ import annotations
-import argparse,contextlib,datetime,fcntl,hashlib,json,os,re,sys,time,urllib.request,urllib.parse,urllib.error,uuid
+import argparse,contextlib,datetime,fcntl,hashlib,json,os,re,sys,time,threading,urllib.request,urllib.parse,urllib.error,uuid
 from pathlib import Path
 from typing import Any
 import ares_archive_bridge as b
@@ -59,26 +59,31 @@ def select_canary(assets,queued,mapped,processed):
 
 class Journal:
  def __init__(self,path=STATE):
-  self.path=path;self.data:dict[str,Any]=b.read_json(path,{'schema':'mgs.owner.archive.journal.v1','intents':{}})
+  self._lock=threading.RLock();self.path=path;self.data:dict[str,Any]=b.read_json(path,{'schema':'mgs.owner.archive.journal.v1','intents':{}})
   if not isinstance(self.data,dict) or not isinstance(self.data.get('intents'),dict):raise TransportError('JOURNAL_SCHEMA')
- def save(self):b.atomic_json(self.path,self.data)
- def known_id(self,key):return self.data['intents'].get(key,{}).get('id')
+ def save(self):
+  with self._lock:b.atomic_json(self.path,self.data)
+ def known_id(self,key):
+  with self._lock:return self.data['intents'].get(key,{}).get('id')
  def allow_create(self,key):
-  if key in self.data['intents']:raise TransportError('AMBIGUOUS_CREATE_NO_REPLAY:'+key)
+  with self._lock:
+   if key in self.data['intents']:raise TransportError('AMBIGUOUS_CREATE_NO_REPLAY:'+key)
  def intent(self,key,binding):
-  old=self.data['intents'].get(key)
-  if old and old['binding']!=binding:raise TransportError('INTENT_BINDING')
-  if not old:self.data['intents'][key]={'binding':binding,'started_at':b.now_iso()};self.save()
+  with self._lock:
+   old=self.data['intents'].get(key)
+   if old and old['binding']!=binding:raise TransportError('INTENT_BINDING')
+   if not old:self.data['intents'][key]={'binding':binding,'started_at':b.now_iso()};self.save()
  def landed(self,key,fid):
-  old=self.data['intents'][key]
-  if old.get('id') and old['id']!=fid:raise TransportError('LANDED_ID_CONFLICT')
-  old.update(id=fid);self.save()
+  with self._lock:
+   old=self.data['intents'][key]
+   if old.get('id') and old['id']!=fid:raise TransportError('LANDED_ID_CONFLICT')
+   old.update(id=fid);self.save()
 
 class OwnerDrive(b.Drive):
  def __init__(self):
   self.cfg=auth.init();v=auth.Vault(self.cfg);f=auth.OwnerAuthorization(self.cfg,v,auth.Google()).client();p=b.read_json(auth.PROOF)
   if not p or p.get('approval_message_id')!=auth.APPROVAL or p.get('refresh_grant_verified') is not True or not f.get('refresh_token'):raise TransportError('OWNER_GRANT_NOT_READY')
-  self.google=auth.Google();self.credentials=f;self.base='https://www.googleapis.com/drive/v3/';self.sources=set();self.parents={b.ARCHIVE_ROOT};self.refresh()
+  self._auth_lock=threading.RLock();self.google=auth.Google();self.credentials=f;self.base='https://www.googleapis.com/drive/v3/';self.sources=set();self.parents={b.ARCHIVE_ROOT};self.refresh()
   root=self.meta(b.ARCHIVE_ROOT)
   if root.get('mimeType')!=b.FOLDER or root.get('driveId') or root.get('trashed') is not False or root.get('capabilities',{}).get('canAddChildren') is not True or not any(o.get('emailAddress')==b.ACCOUNT and o.get('permissionId')==b.PUBLISHER_PERMISSION_IDS[b.ACCOUNT] for o in root.get('owners',[])) or any(p.get('type') in ['anyone','domain'] for p in root.get('permissions',[])):raise TransportError('ROOT_NATIVE_BINDING')
  def refresh(self):
@@ -96,7 +101,9 @@ class OwnerDrive(b.Drive):
    elif path=='files':
     if not payload or payload.get('mimeType')!=b.FOLDER or len(payload.get('parents',[]))!=1 or payload['parents'][0] not in self.parents:raise TransportError('FOLDER_MUTATION_SCOPE')
    else:raise TransportError('OWNER_POST_FORBIDDEN')
-  if time.monotonic()>self.expiry:self.refresh()
+  if time.monotonic()>self.expiry:
+   with self._auth_lock:
+    if time.monotonic()>self.expiry:self.refresh()
   url=self.base+path+('?' + urllib.parse.urlencode(params) if params else '')
   body=b.canonical(payload) if payload is not None else None
   for attempt in range(3):
@@ -150,16 +157,23 @@ class OwnerDrive(b.Drive):
   b.require_publisher(self.meta(landed),b.ACCOUNT);return landed
 
 class Engine:
- def __init__(self,owner,c,manifest,stage,journal=None):self.owner=owner;self.c=c;self.manifest=manifest;self.stage=stage;self.journal=journal or Journal();self.folder_cache={};self.deadline:float|None=None
+ def __init__(self,owner,c,manifest,stage,journal=None):self.owner=owner;self.c=c;self.manifest=manifest;self.stage=stage;self.journal=journal or Journal();self.folder_cache={};self.deadline:float|None=None;self.folder_lock=threading.RLock();self.stop=threading.Event();self.created_ids=[]
+ def check_running(self):
+  if self.stop.is_set():raise TransportError('BATCH_STOPPED_ON_FIRST_FAILURE')
+  if self.deadline is not None and time.monotonic()>self.deadline:raise TransportError('COOPERATIVE_YIELD')
  def check_folder(self,fid,parent,name):
   m=self.owner.meta(fid)
-  if m.get('trashed') is not False or m.get('driveId') or m.get('mimeType')!=b.FOLDER or m.get('name')!=name or m.get('parents')!=[parent] or not any(o.get('permissionId')==b.PUBLISHER_PERMISSION_IDS[b.ACCOUNT] and o.get('emailAddress')==b.ACCOUNT for o in m.get('owners',[])):raise TransportError('DEST_FOLDER_SCOPE')
+  if m.get('trashed') is not False or m.get('driveId') or m.get('mimeType')!=b.FOLDER or m.get('name')!=name or m.get('parents')!=[parent] or not any(o.get('permissionId')==b.PUBLISHER_PERMISSION_IDS[b.ACCOUNT] and o.get('emailAddress')==b.ACCOUNT for o in m.get('owners',[])) or any(p.get('type') in ['anyone','domain'] for p in m.get('permissions',[])):raise TransportError('DEST_FOLDER_SCOPE')
   self.owner.parents.add(fid);return fid
  def ensure_path(self,names):
+  with self.folder_lock:
+   self.check_running();return self._ensure_path(names)
+ def _ensure_path(self,names):
   validate_path(names);parent=b.ARCHIVE_ROOT
   for name in names:
    cache=(parent,name)
-   if cache in self.folder_cache:parent=self.folder_cache[cache];continue
+   if cache in self.folder_cache:
+    fid=self.folder_cache[cache];self.check_folder(fid,parent,name);parent=fid;continue
    key='folder:'+hashlib.sha256(b.canonical([parent,name])).hexdigest();fid=self.journal.known_id(key)
    if not fid:
     q="'"+parent+"' in parents and trashed=false and mimeType='"+b.FOLDER+"' and name='"+name.replace('\\','\\\\').replace("'","\\'")+"'"
@@ -167,7 +181,7 @@ class Engine:
     if rows.get('nextPageToken') or len(rows.get('files',[]))>1:raise TransportError('DUPLICATE_DEST_FOLDER')
     if rows.get('files'):fid=rows['files'][0]['id']
     else:
-     self.journal.allow_create(key);self.journal.intent(key,{'parent':parent,'name':name})
+     self.check_running();self.journal.allow_create(key);self.journal.intent(key,{'parent':parent,'name':name})
      try:fid=self.owner.api('POST','files',{'fields':'id'},{'name':name,'mimeType':b.FOLDER,'parents':[parent]})['id'];self.journal.landed(key,fid)
      except b.ArchiveError:
       rows=self.owner.api('GET','files',{'q':q,'pageSize':2,'fields':'files(id),nextPageToken'})
@@ -176,7 +190,7 @@ class Engine:
    self.check_folder(fid,parent,name);self.folder_cache[cache]=fid;parent=fid
   return parent
  def copy_asset(self,a,j):
-  if self.deadline is not None and time.monotonic()>self.deadline:raise TransportError('COOPERATIVE_YIELD')
+  self.check_running()
   m=self.owner.meta(a['sourceId']);b.validate_source_metadata(m,a,self.c)
   if self.owner.relative_parent(a['sourceParentId'],b.SOURCE_ROOT)!=a['relativeParent']:raise TransportError('SOURCE_PATH')
   indexed=b.read_json(h.location()/'backfill-index.json',{}).get('mappings',{}).get(a['sourceId'])
@@ -202,15 +216,36 @@ class Engine:
     if legacy:
      previous=legacy.get('receipt_after_drain') or legacy.get('receipt_before') or {};reason=previous.get('reason','')
      if previous.get('status')!='blocked' or not (reason=='REQUEST_CHANGED' or reason.startswith('API call to drive.files.create failed with error:')):raise TransportError('LEGACY_COPY_INTENT_UNKNOWN_NO_REPLAY')
-    self.journal.allow_create(key);self.journal.intent(key,{'source':a['sourceId'],'parent':parent,'sha256':a['sha256'],'job_id':j['jobId']});self.owner.sources.add(a['sourceId'])
+    self.check_running();self.journal.allow_create(key);self.journal.intent(key,{'source':a['sourceId'],'parent':parent,'sha256':a['sha256'],'job_id':j['jobId']});self.owner.sources.add(a['sourceId'])
     try:
-     fid=self.owner.api('POST','files/'+a['sourceId']+'/copy',{'supportsAllDrives':'true','fields':'id'},{'name':a['name'],'parents':[parent],'properties':{'mgsArchivePilot':marker,'mgsArchiveJob':j['jobId'],'mgsArchiveExecutor':'private-vps-v1'}})['id'];self.journal.landed(key,fid);created=True
+     fid=self.owner.api('POST','files/'+a['sourceId']+'/copy',{'supportsAllDrives':'true','fields':'id'},{'name':a['name'],'parents':[parent],'properties':{'mgsArchivePilot':marker,'mgsArchiveJob':j['jobId'],'mgsArchiveExecutor':'private-vps-v1'}})['id'];self.journal.landed(key,fid);self.created_ids.append(fid);created=True
     except b.ArchiveError:
      rows=self.owner.api('GET','files',{'q':q,'pageSize':2,'fields':'files(id),nextPageToken'})
      if len(rows.get('files',[]))!=1 or rows.get('nextPageToken'):raise TransportError('COPY_AMBIGUOUS_NO_REPLAY') from None
      fid=rows['files'][0]['id'];self.journal.landed(key,fid)
   validate_copy(self.owner.meta(fid),a,parent,self.c);b.validate_source_metadata(self.owner.meta(a['sourceId']),a,self.c)
   return {'role':a['role'],'sourceId':a['sourceId'],'archiveId':fid,'archiveParentId':parent,'size':a['size'],'md5':a['md5'],'owner':b.ACCOUNT,'createdByVps':created}
+ def copy_assets_bounded(self,j):
+  # One canonical process/queue lease; at most four RPCs within its frozen job.
+  # No second executor or writer can claim work while this lease is held.
+  from concurrent.futures import ThreadPoolExecutor,wait,FIRST_COMPLETED
+  self.stop.clear();assets=j['assets'];results=[None]*len(assets);next_index=0
+  if not 1<=len(assets)<=8:raise TransportError('BOUNDED_BATCH_ASSET_SET')
+  with ThreadPoolExecutor(max_workers=min(4,len(assets)),thread_name_prefix='mgs-one-owner-lease') as pool:
+   pending={}
+   while next_index<min(4,len(assets)):
+    pending[pool.submit(self.copy_asset,assets[next_index],j)]=next_index;next_index+=1
+   while pending:
+    done,_=wait(pending,return_when=FIRST_COMPLETED)
+    try:
+     for future in done:results[pending.pop(future)]=future.result()
+    except Exception:
+     self.stop.set()
+     for future in pending:future.cancel()
+     raise
+    while len(pending)<4 and next_index<len(assets):
+     pending[pool.submit(self.copy_asset,assets[next_index],j)]=next_index;next_index+=1
+  return results
  def process(self,j,request_id):
   validate_job(j,self.c,self.manifest,self.stage)
   req=self.owner.meta(request_id);b.require_publisher(req,b.CANONICAL_SA);raw=self.owner.raw(request_id);props=req.get('properties',{})
@@ -219,7 +254,7 @@ class Engine:
   if old:
    b.require_publisher(self.owner.meta(old['id']),b.ACCOUNT);receipt=json.loads(self.owner.raw(old['id']))
    if receipt.get('status')=='copied':b.validate_receipt(j,receipt);return receipt
-  assets=[self.copy_asset(a,j) for a in j['assets']]
+  assets=self.copy_assets_bounded(j)
   if self.owner.raw(request_id)!=raw:raise TransportError('REQUEST_CHANGED')
   receipt={'schema':'mgs.archive.receipt.v1','jobId':j['jobId'],'kind':j['kind'],'status':'copied','assets':assets,'deleteSource':False,'completedAt':b.now_iso(),'executor':'private-vps-v1'}
   self.owner.write_json(self.c['receipts_folder_id'],'receipt:'+j['jobId'],'receipt',receipt,self.journal);return receipt
@@ -315,7 +350,7 @@ def run_tick(max_jobs=4,max_seconds=210,origin='foreground',produce=True):
   for j,fid in jobs[:max_jobs]:
    if time.monotonic()>engine.deadline:yielded=True;break
    try:
-    receipt=engine.process(j,fid);summary['copied_jobs'].append({'job_id':j['jobId'],'assets':len(receipt['assets']),'new_copies':sum(a.get('createdByVps') is True for a in receipt['assets'])})
+    before_created=len(engine.created_ids);receipt=engine.process(j,fid);summary['copied_jobs'].append({'job_id':j['jobId'],'assets':len(receipt['assets']),'new_copies':len(engine.created_ids)-before_created})
     if j['kind']=='backfill':verdict=h.verify_job(sa,c,j,True,request_type=REQUEST_TYPE)
     else:
      import ares_archive_automation as automation

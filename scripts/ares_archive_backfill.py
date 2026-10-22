@@ -47,6 +47,12 @@ def source_access(d,a,c):
  if not WRITERS<=humans:raise BackfillError('BACKFILL_SOURCE_HUMAN_ACL_NOT_PARITY')
  return m
 
+def check_sources_readonly(d,c,assets):
+ if c.get('owner_executor_mode')!='vps' or len(assets)<2:return [source_access(d,a,c) for a in assets]
+ from concurrent.futures import ThreadPoolExecutor
+ with ThreadPoolExecutor(max_workers=min(4,len(assets)),thread_name_prefix='mgs-sa-source-preflight') as pool:
+  return list(pool.map(lambda a:source_access(d,a,c),assets))
+
 def enqueue(d,c,job):
  p=location();(p/'jobs').mkdir(exist_ok=True);path=p/'jobs'/('job-'+job['jobId']+'.json');old=b.read_json(path)
  if old:
@@ -152,7 +158,7 @@ def cycle_locked(d,c,apply=False):
   for start in range(0,min(len(left),max(0,min(4,12-open_count))*8),8):
    chunk=left[start:start+8]
    try:
-    for asset in chunk:source_access(d,asset,c)
+    check_sources_readonly(d,c,chunk)
     result['queued_jobs'].append(enqueue(d,c,make_job(chunk,c,stage)))
    except b.ArchiveError as exc:result['blocked'].append({'source_ids':[a['sourceId'] for a in chunk],'reason':str(exc)[:220]});break
   result['verified_files']=len(idx['mappings'])
