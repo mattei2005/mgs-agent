@@ -2402,13 +2402,23 @@
     },
     {
       "agent": "zeus",
-      "id": "MGS-CORPORATE-MANUAL-PILOT-1562611397823569983",
-      "next_step": "Operador abriu origem/destino na conta Gmail. Piloto manual preparado para Sheet Auditoria DTR x Smart Bidding — IDs e Auto Principal Drip — 2026-09-24, ID1NOXGvM4W5DdGH5tjGjZd4j6Rpks0L-aHhzryDZ0po98, sourceVersion19, 11 abas. Baseline completo e ACL origem/destino congelados em manual-corporate-pilot-1562611397823569983/manifest.json. Lane corporativa desativada, sem activation remoto ou requests corporativos; SID excluido do manifesto criativo, sem pausar/trocar escopo criativos. Somente instrucao de Mover nativo pelo navegador para MGS-CORPORATIVO, mesma conta Gmail/mesmo ID; nada copiado/movido/excluido ainda. Apos resposta do operador, verificar parent/owner/native ACL4, snapshot completo valores/formulas/IDs de abas/formatacao, Sheets API200 e canario reversivel de escrita SA antes de aceitar e ampliar lote. Nao mover backups/CRIATIVOS/UPLOAD MANUAL neste piloto; objetivo integral nao foi reduzido.",
-      "objective": "Validar um movimento nativo manual de Sheet corporativa com mesmo ID e ACL aprovada, sem concorrencia nem mudar a meta integral",
+      "id": "MGS-CORPORATE-MANUAL-BATCH-1562623735889006674",
+      "next_step": "Lote de 3 Sheets raiz preparado em data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-corporate-batch-1562623735889006674/manifest.json. Inventario AdsPower por Grupo, pipeline gastos x receitas, MGS Financeiro Cotacoes Google Finance; snapshot/grid/ACLs e exclusao da fila criativa verificados. Operador deve mover apenas esses 3 pelo site na conta Gmail para MGS-CORPORATIVO. Apos movido, ler cada mesmo ID/destino/owner e ACL especifica (Geizian apenas no Inventario), verificar formulas/literais/formatos e SA write/read/restore por arquivo. Resultados GOOGLEFINANCE podem variar legitimamente; nao sobrescrever nem chamar valores iguais sem prova. Nada de pastas/backups/criativos neste lote; auto lane corporativa desligada.",
+      "objective": "Migracao corporativa manual assistida mantendo mesmos IDs, conteudo e acessos sob a meta integral autorizada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
       "state": "awaiting_owner_native_browser_move",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T23:44:54+00:00"
+      "updated_at": "2026-10-22T00:37:49+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "MGS-CORPORATE-MANUAL-PILOT-1562611397823569983",
+      "next_step": "Piloto validado com mesmo ID/owner/ACL, 11 abas e snapshot/grid integral iguais, SA write/read/restore J100 confirmado. Evidencia data/ares/creative-ops/30tb-archive/whole-drive-migration-1562459803186626571/manual-corporate-pilot-1562611397823569983/manual-move-verification-1562623735889006674.json. Nenhum outro arquivo foi movido nesta validacao. Proximo checkpoint MGS-CORPORATE-MANUAL-BATCH-1562623735889006674.",
+      "objective": "Migracao corporativa manual assistida mantendo mesmos IDs, conteudo e acessos sob a meta integral autorizada",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "completed",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T00:37:49+00:00"
     },
     {
       "agent": "zeus",
@@ -2423,12 +2433,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Primeiro aguardar/validar piloto manual controlado MGS-CORPORATE-MANUAL-PILOT-1562611397823569983; nao publicar requests para esse SID. Recibo owner BF recuperado em 22:32:13.750Z e accept-setup SA corporate_setup_verified: root/ACL4/canario origem/Sheets200. NAO pedir novo repin/Run. Fonte ultima secao docs/mgs-whole-drive-30tb-migration.md e owner-recovery-accepted-1562597039404228678.json. Mesmo monitor 83b148017b4d agora chama resume-acceptance para promover os dois pins somente apos scheduled nativo BF saudavel; pausa/manual/stale nao promovem, ledger e limites intactos. Gates de producao corporativa continuam fechados. Proxima fase sob autorizacao integral original: produtor/reconciliacao corporativa, consumidores das oito Sheets e backup/retencao/restore; retomar backfill criativo ja autorizado quando ready. Sem writer/cron paralelo, sem novas ACLs/credenciais/exclusoes, sem fake100. Resolver bloqueios seguros autonomamente; so interromper em gate critico/editor real.",
+      "next_step": "Piloto manual concluido e validado em 1562623735889006674. Aguardar/validar lote MGS-CORPORATE-MANUAL-BATCH-1562623735889006674; nao enfileirar esses IDs nem reaplicar o piloto. Fonte ultima secao doc canonica e corporate-manual-index.json. Corporativo automatico desligado; criativos preservados no fluxo autorizado. Meta integral ainda aberta: referencias/templates/backups/consumidores/futuro staging/retencao continuam fases proprias. Sem nova ACL/credencial/delete ou mudanca de limite.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automacao integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "corporate_setup_verified_awaiting_healthy_scheduled_bulk",
+      "state": "corporate_manual_pilot_verified_batch3_awaiting_operator",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T23:44:54+00:00"
+      "updated_at": "2026-10-22T00:37:49+00:00"
     },
     {
       "agent": "zeus",
@@ -6992,5 +7002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T00:29:47+00:00"
+  "updated_at": "2026-10-22T00:37:49+00:00"
 }
