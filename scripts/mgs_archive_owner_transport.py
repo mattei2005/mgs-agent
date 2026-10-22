@@ -337,11 +337,11 @@ def run_tick(max_jobs=4,max_seconds=210,origin='foreground',produce=True):
  return summary
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['prepare-canary','run-canary','activate','tick']);p.add_argument('--apply',action='store_true');args=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['prepare-canary','run-canary','activate','tick']);p.add_argument('--apply',action='store_true');p.add_argument('--max-jobs',type=int,default=4);p.add_argument('--max-seconds',type=int,default=210);p.add_argument('--origin',choices=['foreground','archive_monitor'],default='foreground');args=p.parse_args()
  if not args.apply:raise TransportError('APPLY_REQUIRED')
  if args.action=='prepare-canary':result=prepare_canary()
  elif args.action=='run-canary':result=run_canary()
  elif args.action=='activate':result=activate()
- else:result=run_tick()
+ else:result=run_tick(max_jobs=args.max_jobs,max_seconds=args.max_seconds,origin=args.origin)
  print(json.dumps(result,ensure_ascii=False));return 2 if result.get('status')=='blocked' else 0
 if __name__=='__main__':raise SystemExit(main())
