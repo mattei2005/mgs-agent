@@ -61,4 +61,20 @@ class ProtocolTests(unittest.TestCase):
  def test_source_duplicate_selection_excludes_all_existing_jobs_and_mappings(self):
   a=copy.deepcopy(self.asset);other=copy.deepcopy(a);other['sourceId']='OFFLINE_SOURCE02'
   selected=t.select_canary([a,other],{a['sourceId']},set(),{a['sourceId'],other['sourceId']});self.assertEqual(selected['sourceId'],other['sourceId'])
+ def test_live_lineage_preserves_canonical_identity(self):
+  c={**self.c,'delete_source':False,'queue_enabled':False,'effective_after':'2026-10-20T14:00:00+00:00'}
+  raw={**self.asset,'role':'original','sourceCreatedTime':'2026-10-22T00:00:00Z'};clean={**raw,'role':'clean','sourceId':'OFFLINE_SOURCE02'}
+  j=b.make_request(c,[raw,clean],kind='lineage',lineage_id='OFFLINE_LINEAGE01');self.assertTrue(t.validate_job(j,c,self.manifest,self.stage))
+  j['deleteSource']=True
+  with self.assertRaises(b.ArchiveError):t.validate_job(j,c,self.manifest,self.stage)
+ def test_vps_heartbeat_never_uses_legacy_digest_or_trigger(self):
+  import ares_archive_automation as a
+  c={**self.c,'owner_executor_mode':'vps','owner_executor_sha256':'d'*64};hb={'schema':'mgs.archive.private.owner.heartbeat.v1','workerSha256':'d'*64,'executor':'private-vps-v1','executorRunId':'e'*32,'status':'ok','blocked':[],'canaryAcknowledged':True,'deleteSource':False,'executedAt':'2026-10-22T00:00:00Z'}
+  self.assertTrue(a.heartbeat_ready(hb,c,'2026-10-22T00:01:00Z'))
+  self.assertFalse(a.heartbeat_ready({**hb,'workerSha256':'a'*64},c,'2026-10-22T00:01:00Z'))
+  self.assertFalse(a.heartbeat_ready({**hb,'blocked':[{'reason':'offline test'}]},c,'2026-10-22T00:01:00Z'))
+  self.assertFalse(a.heartbeat_ready(hb,c,'2026-10-22T01:01:00Z'))
+ def test_historical_verifier_rejects_unknown_request_type_before_api(self):
+  import ares_archive_backfill as h
+  with self.assertRaises(b.ArchiveError):h.verify_job(None,self.c,self.job,request_type='arbitrary')
 if __name__=='__main__':unittest.main()

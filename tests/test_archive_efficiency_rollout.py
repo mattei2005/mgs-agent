@@ -18,7 +18,7 @@ class EfficiencyRegression(unittest.TestCase):
   x=self.health([{'job_id':'one','reason':'OWNER_BLOCKED:'+p.READ}]);x['owner_worker_status']='ok';self.assertEqual(p.stable_incident(x,{'one'}),x)
  def test_native_retryability_requires_real_publisher_and_remaining_attempts(self):
   d=Mock();d.one.return_value={'id':'receipt'};d.meta.return_value={'parents':['receipts'],'properties':{'mgsArchiveKey':'receipt:one'}};x=self.health([{'job_id':'one','reason':'OWNER_BLOCKED:'+p.READ}]);body={'jobId':'one','status':'blocked','reason':p.READ,'attempts':1,'retryAfter':'2026-10-22T15:34:31.754Z'}
-  with patch.object(a.b,'require_publisher') as verify:
+  with patch.object(importlib.import_module('ares_archive_bridge'),'require_publisher') as verify:
    d.raw.return_value=json.dumps(body).encode();self.assertEqual(p.native_retryable_jobs(d,{'receipts_folder_id':'receipts'},x),{'one'});verify.assert_called_once()
    body.update(attempts=5,retryAfter=None);d.raw.return_value=json.dumps(body).encode();self.assertEqual(p.native_retryable_jobs(d,{'receipts_folder_id':'receipts'},x),set())
  def test_composer_requires_exact_previously_accepted_source(self):

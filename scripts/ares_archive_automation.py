@@ -65,7 +65,7 @@ def verification_snapshot(d,c,job):
     if request is None:raise bridge.ArchiveError('REQUEST_MISSING')
     meta=d.meta(request['id']);bridge.require_publisher(meta,bridge.CANONICAL_SA,'REQUEST_AUTHOR')
     body=d.raw(request['id']);props=meta.get('properties',{})
-    if meta.get('parents')!=[c['requests_folder_id']] or meta.get('driveId')!=c['source_drive_id'] or props.get('mgsArchiveType')!='request' or props.get('mgsArchiveKey')!='request:'+jid or body!=bridge.canonical(job) or hashlib.sha256(body).hexdigest()!=props.get('sha256'):
+    if meta.get('parents')!=[c['requests_folder_id']] or meta.get('driveId')!=c['source_drive_id'] or props.get('mgsArchiveType') not in (['request','vps_request'] if c.get('owner_executor_mode')=='vps' else ['request']) or props.get('mgsArchiveKey')!='request:'+jid or body!=bridge.canonical(job) or hashlib.sha256(body).hexdigest()!=props.get('sha256'):
         raise bridge.ArchiveError('REQUEST_SCOPE_OR_BODY_CHANGED')
     rf=d.one(c['receipts_folder_id'],'receipt:'+jid)
     if rf is None:return {'pending':True}
@@ -114,6 +114,8 @@ def reconcile_jobs(d,c,jobs,state,apply,verify=bridge.reconcile,limit=2):
 def heartbeat_ready(hb,c,now=None):
     try:age=(bridge.timestamp(now or bridge.now_iso())-bridge.timestamp(hb['executedAt'])).total_seconds()
     except (bridge.ArchiveError,KeyError,TypeError):return False
+    if c.get('owner_executor_mode')=='vps':
+        return (hb.get('schema')=='mgs.archive.private.owner.heartbeat.v1' and hb.get('executor')=='private-vps-v1' and hb.get('workerSha256')==c.get('owner_executor_sha256') and bool(re.fullmatch('[a-f0-9]{32}',str(hb.get('executorRunId','')))) and hb.get('deleteSource') is False and hb.get('status')=='ok' and not hb.get('blocked') and hb.get('canaryAcknowledged') is True and -60<=age<=1200)
     return (hb.get('schema')=='mgs.archive.heartbeat.v1' and hb.get('workerSha256')==c.get('worker_sha256') and hb.get('deleteSource') is False and hb.get('status')=='ok' and not hb.get('blocked') and hb.get('canaryAcknowledged') is True and bool(hb.get('triggerUid')) and -60<=age<=1200)
 
 
@@ -151,7 +153,7 @@ def _run_cycle(apply=False,reconcile_only=False,intake_state=None,allow_retireme
         d=bridge.Drive(apply);bridge.preflight(d,c)
         import ares_archive_retirement as retirement
         if apply and c.get('delete_source') and allow_retirement:retirement.recover_accepted(d,c)
-        beat=d.one(c['control_folder_id'],'heartbeat:worker-v1');hb={}
+        beat=d.one(c['control_folder_id'],'heartbeat:vps-owner-v1' if c.get('owner_executor_mode')=='vps' else 'heartbeat:worker-v1');hb={}
         if beat:
             bridge.require_publisher(d.meta(beat['id']),bridge.ACCOUNT,'HEARTBEAT_AUTHOR');hb=json.loads(d.raw(beat['id']))
         healthy=heartbeat_ready(hb,c)

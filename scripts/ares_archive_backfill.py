@@ -72,12 +72,12 @@ def prepare_first():
   result=enqueue(d,c,make_job(chosen,c,stage));stage['prepared_first_job']=result;stage['status']='owner_repin_required_hidden_first_batch_ready';b.atomic_json(location()/'stage.json',stage)
  return result
 
-def verify_job(d,c,job,apply=False,request_type='backfill_request'):
- if request_type not in ['backfill_request','vps_backfill_request']:raise BackfillError('BACKFILL_REQUEST_TYPE')
+def verify_job(d,c,job,apply=False,request_type=None):
+ if request_type not in [None,'backfill_request','vps_backfill_request']:raise BackfillError('BACKFILL_REQUEST_TYPE')
  req=d.one(c['requests_folder_id'],'request:'+job['jobId'])
  if not req:raise BackfillError('BACKFILL_REQUEST_MISSING')
  qm=d.meta(req['id']);b.require_publisher(qm,b.CANONICAL_SA)
- if qm.get('parents')!=[c['requests_folder_id']] or qm.get('properties',{}).get('mgsArchiveType')!=request_type or d.raw(req['id'])!=b.canonical(job):raise BackfillError('BACKFILL_REQUEST_CHANGED')
+ if qm.get('parents')!=[c['requests_folder_id']] or qm.get('properties',{}).get('mgsArchiveType') not in ([request_type] if request_type else ['backfill_request','vps_backfill_request'] if c.get('owner_executor_mode')=='vps' else ['backfill_request']) or d.raw(req['id'])!=b.canonical(job):raise BackfillError('BACKFILL_REQUEST_CHANGED')
  found=d.one(c['receipts_folder_id'],'receipt:'+job['jobId'])
  if not found:return {'status':'pending','job_id':job['jobId']}
  rm=d.meta(found['id']);b.require_publisher(rm,b.ACCOUNT)
@@ -116,11 +116,15 @@ def prioritize_pending_assets(assets,catalogue_rows):
 
 def cycle_locked(d,c,apply=False):
  m,stage=manifest_load();p=location();idx=obj(p/'backfill-index.json',{'mappings':{},'verified_jobs':{}});result={'status':'awaiting_owner_repin','migration_id':MIGRATION,'owner_ready':False,'verified_files':len(idx['mappings']),'total_files':len(m['assets']),'queued_jobs':[],'verified_jobs':[],'pending_jobs':[],'blocked':[],'historical_cleanup_enabled':False}
- beat=d.one(c['control_folder_id'],'heartbeat:worker-v1')
+ beat=d.one(c['control_folder_id'],'heartbeat:vps-owner-v1' if c.get('owner_executor_mode')=='vps' else 'heartbeat:worker-v1')
  if not beat:return result
  b.require_publisher(d.meta(beat['id']),b.ACCOUNT);hb=json.loads(d.raw(beat['id']));expected=stage.get('worker_sha256')
- if not expected or hb.get('workerSha256')!=expected:return result
- if not hb.get('triggerUid') or hb.get('status')!='ok' or hb.get('blocked'):raise BackfillError('BACKFILL_OWNER_HEARTBEAT_NOT_READY')
+ if c.get('owner_executor_mode')=='vps':
+  import ares_archive_automation as automation
+  if not automation.heartbeat_ready(hb,c):return result
+ else:
+  if not expected or hb.get('workerSha256')!=expected:return result
+  if not hb.get('triggerUid') or hb.get('status')!='ok' or hb.get('blocked'):raise BackfillError('BACKFILL_OWNER_HEARTBEAT_NOT_READY')
  age=(b.timestamp(b.now_iso())-b.timestamp(hb['executedAt'])).total_seconds()
  if not -60<=age<=1200:raise BackfillError('BACKFILL_OWNER_STALE')
  result.update(owner_ready=True,status='copying')
@@ -132,7 +136,7 @@ def cycle_locked(d,c,apply=False):
    else:result['pending_jobs'].append(job['jobId'])
   except b.ArchiveError as exc:result['blocked'].append({'job_id':job['jobId'],'reason':str(exc)[:220]})
  if apply and not result['blocked']:
-  idx=obj(p/'backfill-index.json',{'mappings':{},'verified_jobs':{}});already={a['sourceId'] for j in localjobs for a in j['assets']};left=[a for a in m['assets'] if a['sourceId'] not in already];open_count=sum(j['jobId'] not in idx['verified_jobs'] for j in localjobs)
+  idx=obj(p/'backfill-index.json',{'mappings':{},'verified_jobs':{}});already={a['sourceId'] for j in localjobs for a in j['assets']};left=[a for a in m['assets'] if a['sourceId'] not in already and a['sourceId'] not in idx['mappings']];open_count=sum(j['jobId'] not in idx['verified_jobs'] for j in localjobs)
   catalogue=[json.loads(line) for line in (b.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if line.strip()]
   left=prioritize_pending_assets(left,catalogue);result['queue_priority']='processed_catalogue_then_originals_then_auxiliaries'
   for start in range(0,min(len(left),max(0,min(4,12-open_count))*8),8):
