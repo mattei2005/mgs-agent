@@ -117,6 +117,7 @@ def prepare_pilot(d):
     p,s=corporate.load_plan();corporate.check_acl(corporate.h.permissions(d,meta['id']),corporate.desired(p,True))
     managed=sorted(children(d,binding['tiers'][tier]['source_id'],managed=True),key=lambda x:x['createdTime'],reverse=True);keep=binding['retention_count'][tier]
     if meta['id'] not in {x['id'] for x in managed[:keep]}:raise b.ArchiveError('BACKUP_PILOT_NOT_IN_RETAINED_SET')
+    if sum(x.get('name')==meta['name'] for x in managed)!=1:raise b.ArchiveError('BACKUP_PILOT_SOURCE_NAME_AMBIGUOUS')
     result={'schema':'mgs.corporate.backup.native.move.pilot.v1','status':'awaiting_owner_single_native_move','authorization_message_id':m.AUTH,'source_message_id':'1562665022910500936','file_id':meta['id'],'name':meta['name'],'mime_type':meta['mimeType'],'source_parent_id':binding['tiers'][tier]['source_id'],'destination_parent_id':binding['tiers'][tier]['archive_id'],'size':meta['size'],'md5':meta['md5Checksum'],'sha256':meta['sha256Checksum'],'created_time':meta['createdTime'],'source_version':meta['version'],'tier':tier,'mode':'full','expected_owner':b.ACCOUNT,'prior_full_restore_pass_at':restore['tested_at_utc'],'prior_full_restore_components':restore['components_validated'],'source_selected_in_retained_set':True,'metadata_before':meta,'bytes_downloaded_by_this_preflight':False,'archive_automatic_activation_performed':False,'source_root_must_remain':True,'post_move_restore_required':True,'prepared_at':b.now_iso()}
     validate_pilot_metadata(meta,result,moved=False);b.atomic_json(PILOT,result);return result
 
@@ -125,10 +126,20 @@ def verify_pilot(d):
     binding=load_binding();pilot=b.read_json(PILOT,{})
     if pilot.get('schema')!='mgs.corporate.backup.native.move.pilot.v1':raise b.ArchiveError('BACKUP_PILOT_REQUIRED')
     meta=native_meta(d,pilot['file_id']);validate_pilot_metadata(meta,pilot,moved=True);p,s=corporate.load_plan();corporate.check_acl(corporate.h.permissions(d,meta['id']),corporate.desired(p))
+    staging=native_meta(d,binding['source_root_id'])
+    if staging.get('driveId')!=b.SOURCE_DRIVE or staging.get('parents')!=[b.SOURCE_DRIVE] or staging.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
+    for tier,ids in binding['tiers'].items():
+        st=native_meta(d,ids['source_id'])
+        if st.get('driveId')!=b.SOURCE_DRIVE or st.get('parents')!=[binding['source_root_id']] or st.get('name')!=tier or st.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_TIER_CHANGED')
+    archive_root=native_meta(d,binding['archive_root_id']);archive_tier=native_meta(d,pilot['destination_parent_id'])
+    if archive_root.get('parents')!=[binding['corporate_root_id']] or archive_root.get('name')!='_DISASTER_RECOVERY' or archive_root.get('driveId') or archive_tier.get('parents')!=[binding['archive_root_id']] or archive_tier.get('name')!=pilot['tier'] or archive_tier.get('driveId'):raise b.ArchiveError('BACKUP_ARCHIVE_HIERARCHY_CHANGED')
+    for item in [archive_root,archive_tier]:
+        if item.get('mimeType')!=b.FOLDER or item.get('trashed') is not False or not any(x.get('emailAddress')==b.ACCOUNT for x in item.get('owners',[])):raise b.ArchiveError('BACKUP_ARCHIVE_FOLDER_OWNER_OR_TYPE')
+        corporate.check_acl(corporate.h.permissions(d,item['id']),corporate.desired(p))
     path=DATA/'backup-native-move-pilot-verification.json';previous=b.read_json(path,{})
     first=previous.get('native_move_first_verified_at') or b.now_iso();restore=b.read_json(BACKUP_STATE,{}).get('last_restore_test',{})
     restored=restore.get('status')=='PASS' and restore.get('remote_file_id')==pilot['file_id'] and restore.get('download_sha256')==pilot['sha256'] and bool(restore.get('tested_at_utc')) and b.timestamp(restore['tested_at_utc'])>=b.timestamp(first)
-    result={'schema':'mgs.corporate.backup.native.move.verification.v1','status':'verified' if restored else 'native_move_verified_restore_pending','file_id':meta['id'],'name':meta['name'],'same_id':True,'same_native_size_md5_sha256':True,'same_managed_properties':True,'owner_and_acl_verified':True,'source_staging_unchanged':True,'native_move_first_verified_at':first,'post_move_full_restore_verified':restored,'restore_proof':restore if restored else None,'archive_sa_capabilities':meta.get('capabilities'),'archive_retention_activated':False,'metadata':meta,'verified_at':b.now_iso(),'full_migration_complete':False};b.atomic_json(path,result);return result
+    result={'schema':'mgs.corporate.backup.native.move.verification.v1','status':'verified' if restored else 'native_move_verified_restore_pending','file_id':meta['id'],'name':meta['name'],'same_id':True,'same_native_size_md5_sha256':True,'same_managed_properties':True,'owner_and_acl_verified':True,'source_staging_unchanged':True,'native_move_first_verified_at':first,'post_move_full_restore_verified':restored,'restore_proof':restore if restored else None,'archive_sa_capabilities':meta.get('capabilities'),'archive_retention_activation_performed':False,'archive_retention_status':'not_proven_by_this_check','metadata':meta,'verified_at':b.now_iso(),'full_migration_complete':False};b.atomic_json(path,result);return result
 
 
 def main():
