@@ -95,6 +95,14 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 - Código fonte e produção com manifesto idêntico.
 - Backups existentes por readback.
 
+## Inventário operacional e mudança de nicho
+
+1. Para listar domínios da operação, partir de `context/acquisition.md`, aplicar as exclusões pedidas e deduplicar por domínio. Conferir uma rota SHEIN pública de cada site e informar idioma quando útil; não tratar os exemplos desta skill como inventário completo.
+2. Distinguir as provas: landing HTTP 200 com conteúdo SHEIN comprova disponibilidade; configuração ativa comprova publicação; campanha entregando exige dados de Campaign Ops. Não afirmar tráfego ativo somente porque a landing está online.
+3. Se a pergunta for sobre migração de cartão de crédito para SHEIN, separar implantação do site, indexação no Google e classificação dos anúncios. Uma dessas camadas não comprova as outras. Carregar `google-drive-agent-automation` e sua referência de Search Console para verificar propriedades, sitemaps enviados e inspeções de URLs.
+4. Comparar o domínio de referência e os demais com os mesmos critérios: URLs antigas ainda indexadas, URLs SHEIN descobertas/indexadas, último rastreamento, sitemap, robots e canonical. Procurar evidência histórica antes de afirmar que o mesmo trabalho foi ou não executado; ausência de registro ou acesso é lacuna, não prova de ausência da execução.
+5. Não apresentar 30 dias como prazo mínimo garantido para o Google reconhecer um novo nicho. Consultar a documentação oficial de recrawl (`https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl`): rastreamento pode levar dias a semanas, e envio de sitemap ou solicitação de rastreamento não garante indexação nem reclassificação publicitária. Manter diagnóstico somente leitura; submissão, remoção ou mudança de indexabilidade exige o escopo de escrita correspondente.
+
 ## Preflight e validadores sem falso negativo
 
 - Antes de confirmar quantas versões existem para todos os gestores, ler as configurações live com `slug`, modelo e `active`; configuração existente não significa rota publicada. A skill/checkpoint pode preceder expansões posteriores, portanto não afirmar ausência a partir desses registros.
