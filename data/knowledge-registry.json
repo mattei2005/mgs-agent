@@ -5471,10 +5471,10 @@
       "kind": "procedure",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO-REVIEW-GATES-1562829266020868157",
       "title": "QA SEO transversal: variação editorial e visual, bio localizada e dupla validação pública/categorias",
-      "updated_at": "2026-10-21T01:17:32+00:00"
+      "updated_at": "2026-10-22T14:16:51+00:00"
     },
     {
       "canonical_key": "content.seo-mass.1559930384852979796",
@@ -5511,6 +5511,24 @@
       "superseded_by": null,
       "title": "Lote SEO aprovado por Raquel: ajustes pontuais e publicação dos 30 artigos",
       "updated_at": "2026-10-15T13:01:44+00:00"
+    },
+    {
+      "canonical_key": "content.seo.batch-review-gates",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-22T14:16:51+00:00",
+      "id": "ATENA-SEO-REVIEW-GATES-1562829266020868157",
+      "kind": "procedure",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Revisão SEO: individualidade visual/editorial e fontes no idioma real do artigo, sem novo lote",
+      "updated_at": "2026-10-22T14:16:51+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -13874,5 +13892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T14:11:06+00:00"
+  "updated_at": "2026-10-22T14:16:51+00:00"
 }
