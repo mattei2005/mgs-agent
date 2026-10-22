@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Rodolfo1562835794601975811 pediu resolver tudo agora e propôs retirar sem24h. Continuar migracao/validacao NAO destrutivas no mesmo writer. Congelar processed-only porIDs/catalogo e manifestos; executar ciclohistorico; auditar consumer/intake/aliases. Nao mudar24hpara0nem executar nova retirada sem confirmacao critica adicional exata. Nao apagar controles/atalhos que consumidoresatuais usam; avaliar como manter somenteUploadManual sem quebrar Ares. Sem lote_DR como substituto doobjetivo.",
-      "objective": "Drive antigo somente UPLOAD MANUAL; acervo processado pelo Ares nos30TB com automacao e retirada validada",
+      "next_step": "Pedido1562835794601975811. Prioridadeprocessados aplicada no produtorsemnovoownerpin:105testsPASS,request1y4fX4MxO7dadh6kPDR210e2zsqbq3uVQ8tratadosrelidos,232historicverified no marco. Faltamcopias/restante+resolverhistorico+estoque/controleshoje dependemSharedDrive. Nao fingirDrivevazio. Proposal0snaoativo2978IDsarevalidarSHAf1502c892a6406b39f48c987fb54c5490f3c41143cfc849770dadb3834599356;pedirconfirmacaoextra paraDELETEimediato pósintegridade/acesso/consumidores,antesativar. Policyatual24hpreservada, semfabricarintakerelease.82refs404e46lixeirapreservados;ZIPmemberchecksumsreconciliados. Fonte docs ultima secao e processed-priority-validation-1562835794601975811.json.",
+      "objective": "Drive antigo somenteUPLOAD MANUAL; acervo Ares nos30TB com consumidores e retirada comprovados",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "executing_scope_reconciliation_immediate_cleanup_confirmation_pending",
+      "state": "processed_priority_active_copies_and_consumer_cutover_pending_0s_confirmation_required",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T14:34:06+00:00"
+      "updated_at": "2026-10-22T14:48:41+00:00"
     },
     {
       "agent": "ares",
@@ -7112,5 +7112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T14:34:15+00:00"
+  "updated_at": "2026-10-22T14:48:41+00:00"
 }

@@ -9916,10 +9916,27 @@
       "kind": "decision",
       "owner": "Rodolfo",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "MGS-ARES-UPLOAD-ONLY-1562835794601975811",
+      "title": "Entrega cobrada: acervo ja processado pelo Ares nos30TB, nao backups de infraestrutura",
+      "updated_at": "2026-10-22T14:48:41+00:00"
+    },
+    {
+      "canonical_key": "drive.archive.processed-ares.delivery-focus",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "creative-ops",
+      "effective_at": "2026-10-22T14:48:41+00:00",
+      "id": "MGS-ARES-UPLOAD-ONLY-1562835794601975811",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Entrega cobrada: acervo ja processado pelo Ares nos30TB, nao backups de infraestrutura",
-      "updated_at": "2026-10-22T14:11:06+00:00"
+      "title": "Estado final: Drive antigo somenteUploadManual e processados nos30TB;0s depende confirmacao critica",
+      "updated_at": "2026-10-22T14:48:41+00:00"
     },
     {
       "canonical_key": "mgs.whole-drive.30tb.backup_archive_automation_deployment",
@@ -13910,5 +13927,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T14:29:22+00:00"
+  "updated_at": "2026-10-22T14:48:41+00:00"
 }
