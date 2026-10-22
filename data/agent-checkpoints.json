@@ -673,12 +673,12 @@
     {
       "agent": "zeus",
       "id": "ARES-CREATIVE-30TB-1562078493498540042",
-      "next_step": "Recibo owner BF recuperado em 22:32:13.750Z e accept-setup SA corporate_setup_verified: root/ACL4/canario origem/Sheets200. NAO pedir novo repin/Run. Fonte ultima secao docs/mgs-whole-drive-30tb-migration.md e owner-recovery-accepted-1562597039404228678.json. Mesmo monitor 83b148017b4d agora chama resume-acceptance para promover os dois pins somente apos scheduled nativo BF saudavel; pausa/manual/stale nao promovem, ledger e limites intactos. Gates de producao corporativa continuam fechados. Proxima fase sob autorizacao integral original: produtor/reconciliacao corporativa, consumidores das oito Sheets e backup/retencao/restore; retomar backfill criativo ja autorizado quando ready. Sem writer/cron paralelo, sem novas ACLs/credenciais/exclusoes, sem fake100. Resolver bloqueios seguros autonomamente; so interromper em gate critico/editor real.",
-      "objective": "Migrar todo acervo aos 30 TB e retirar fontes historicas somente apos copias/acessos/consumidores completos",
+      "next_step": "CamadaBACKUPS futuros agora ativa e primeiroreal1.02GB verificado por stream+ACK; nativo90min sempausa; SA/historicalpins23b395aceitos. Sem mais cliques owner. Continuar restante do escopo integral original: acervo criativo/historico, consumidores corporativos e politica de retencao; nao declarar100nem liberar retirada/historico sem gatesproprios. Mesmofluxo/lock/monitor83b148017b4d; exclusoes de backups desativadas. Fonte doc ultima secao1562821632542900347 e live-backup-validation-1562821632542900347.json.",
+      "objective": "Migrar todo acervo aos30TB preservando IDs/acesso/consumidores e gates de limpeza",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "corporate_setup_verified_awaiting_healthy_scheduled_bulk",
+      "state": "backup_archive_automatic_verified_full_migration_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-21T23:02:46+00:00"
+      "updated_at": "2026-10-22T13:43:55+00:00"
     },
     {
       "agent": "ares",
@@ -2403,12 +2403,12 @@
     {
       "agent": "zeus",
       "id": "MGS-BACKUP-AUTOMATION-1562688137472249867",
-      "next_step": "Rodolfo1562821632542900347 pediu validacao agora. Segundo scheduled nativo13:34:29.654Z mesmo trigger/digest/probeok/90min. Executar acceptor/cycle existentes com locks; verificar ativacao/request/receipt/bytes/ACK do primeiro backup. Sem timer/writer paralelo; nao repetir ownerRun.",
-      "objective": "Validar agora recorrencia e primeiro backup automatico real, sem exclusoes",
+      "next_step": "Comprovado real09:40scheduled→mesmoID1ZsSK0Blm9zlhZL_h0-KE6NMUlPEIOSdb/1.02GB→streamSA SHA/MD5/tamanho/ownerACL/props→ACK17wvluSgCEua4Xb0hG6dDkqOaMInZmpo7→requestverified09:40:58. Duas amostras/teto90min/ativacao nativa/pins SA+histo aceitos. Nextjob7b812fd47760883d5adcbc828e399aba na mesma fila; monitor83b148017b4d scheduled. Sem mais Run/movehumano. Retencao SOMENTEpreview/deletesoff. Migracao integralhistorica/consumidores ainda aberta. Recibo live-backup-validation-1562821632542900347.json.",
+      "objective": "Backups futuros automaticos verificados sem exclusoes",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "validating_now_second_native_schedule_observed",
+      "state": "automatic_future_archive_first_real_backup_verified_retention_preview_only",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T13:35:40+00:00"
+      "updated_at": "2026-10-22T13:43:55+00:00"
     },
     {
       "agent": "zeus",
@@ -2483,12 +2483,12 @@
     {
       "agent": "zeus",
       "id": "MGS-RUNTIME-QUOTA-1562815497794363423",
-      "next_step": "Repin concluido por Rodolfo1562819463680757831: manual13:24:37Z e scheduled13:30:01Z mesmo23b395/teto5400000/pausedfalse/ACK/probeverified. NAO pedir editor/teste novamente. Monitor83b148017b4d aguarda segundo scheduled e aceita/ativa future-only pelo fluxo existente. Nullprobe AttributeError local corrigido+6regressoes;48Python+12VMpass; nenhum novo worker/ACL/limite/timer. Primeiro backupreal/ACK ainda aberto.",
-      "objective": "Aplicar teto oficial por conta e comprovar recorrencia90min Gmail sem exclusoes",
+      "next_step": "Componente teto90min comprovado no Google: native scheduled saudaveis13:30/13:34/13:40Z, mesmo trigger/digest, pausedfalse; primeirobackupreal arquivado+ACKSA. Nao pedir novo editor/teste. Monitor existente segue. Workspace360 e politica offline, nenhum projetoBusiness adicional alterado. Fonte ultima secao doc1562821632542900347.",
+      "objective": "Validar teto oficial90min Gmail e politicaWorkspace360min",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "owner90min_verified_first_healthy_scheduled_observed",
+      "state": "validated_owner90min_recurring_and_real_backup_archived",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T13:31:08+00:00"
+      "updated_at": "2026-10-22T13:43:55+00:00"
     },
     {
       "agent": "zeus",
@@ -7092,5 +7092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T13:35:40+00:00"
+  "updated_at": "2026-10-22T13:43:55+00:00"
 }
