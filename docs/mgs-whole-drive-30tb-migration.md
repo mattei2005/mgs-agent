@@ -1,5 +1,15 @@
 # Migração integral MGS-AGENTS → conta de 30 TB
 
+## Correção de avisos repetidos — 1562872769652334602
+
+A repetição após o teste manual era uma falha da notificação: o hash mudou legitimamente quando o owner confirmou a revisão nova, mas o prompt tratou qualquer `blocked` como novo alerta. Além disso, o classificador examinava só `owner_worker_status=runtime_budget_paused`; o teste manual retorna `ok` enquanto `runtimeBudget.bulk.paused` continua verdadeiro, deixando reaparecer o recibo antigo (mesmo pedido/attempt) como incidente novo.
+
+- Corrigida a projeção com o orçamento nativo de bulk, publisher/digest/ACK e janela de retry. Saúde continua `blocked`; erro novo, retry esgotado, integridade/permissão e janela vencida não são ocultados.
+- O mesmo cron `83b148017b4d` mantém agenda `10,25,40,55 * * * *`, enabled/destino/model/monitor/writer. Seu precheck local `ares-archive-notification-gate.py` emite `wakeAgent:false` somente para espera conhecida comprovada e frame local fresco. Prompt contém defesa `[SILENT]` para reconfirmação do mesmo incidente. Não há nova fonte Apps Script, novo ID/hash, trigger ou tarefa humana.
+- Preflight e readback cobrem 49 jobs Hermes dos três profiles, root/system crons e 20 linhas de timers; agenda futura do job expandida por oito datas civis, com zero delta de calendário e nenhuma colisão nova introduzida. Backup em `/root/.hermes/profiles/zeus/artifacts/notification-wait-1562872769652334602/`.
+- 151 testes Python passaram, incluindo manual-ok+bulk-paused, atraso do scheduler, unknown/exhausted/permissions, digest incorreto, snapshot vencido e recuperação. O precheck real já retornou `wakeAgent:false`; prova do tick nativo e estado final em `data/ares/creative-ops/30tb-archive/notification-wait-fix-1562872769652334602.json`.
+- Isso corrige entrega de alertas, não comprova retomada produtiva ou migração integral. Owner repin/manual já concluídos; manter o trabalho original, gates e ledger, sem novos cliques nem reset de quota.
+
 ## Correção de eficiência — 1562859075107164270 (teste manual verificado; aceitação agendada pendente)
 
 O owner executou a nova revisão em `2026-10-22T16:43:05.645Z`, confirmado pelas imagens da mensagem `1562869000965324812` e pelo heartbeat nativo relido pela SA: digest `56de68d1062dfc8d76a15502dfaca46a0fe9ab1ebc7efe33ae9f6fc48464cf2a`, status `ok`, modo `manual_probe_only`, ACK/probe verificados e zero cópias/movimentos/exclusões. O repin manual não está mais pendente; não solicitar outro Run nem executar mgsArquivoAtivar. Os pins SA/histórico permanecem anteriores até duas execuções agendadas saudáveis da revisão nova. O heartbeat manual ainda registra orçamento bulk pausado. Prova: `data/ares/creative-ops/30tb-archive/efficiency-owner-manual-proof-1562869000965324812.json`. O bloco abaixo preserva o histórico da publicação; suas instruções de repin já foram cumpridas.

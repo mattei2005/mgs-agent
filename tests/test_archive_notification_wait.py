@@ -4,7 +4,9 @@ from pathlib import Path
 from datetime import datetime,timezone,timedelta
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 p=importlib.import_module('ares_archive_monitor_projection')
-spec=importlib.util.spec_from_file_location('gate','/root/.hermes/profiles/zeus/scripts/ares-archive-notification-gate.py');g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
+spec=importlib.util.spec_from_file_location('gate','/root/.hermes/profiles/zeus/scripts/ares-archive-notification-gate.py')
+assert spec is not None and spec.loader is not None
+g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
 class NotificationWaitTests(unittest.TestCase):
  def setUp(self):
   self.now=datetime(2030,1,1,12,0,tzinfo=timezone.utc)

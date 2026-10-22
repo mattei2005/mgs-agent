@@ -41,6 +41,13 @@ Quando o auto-commit bloquear um path apenas por palavra sensível no nome:
 
 Evite branches como `if guardrail_blocked: SEND_ALERT=true` sem verificar primeira ocorrência ou anti-spam; isso transforma um único incidente em mentions a cada execução.
 
+## Separar mudança de amostra de mudança notificável
+
+- Quando um teste manual retorna `status:ok`, verificar separadamente o orçamento nativo de produção. `manual_probe_only` pode coexistir com `runtimeBudget.bulk.paused:true`; condicionar dedupe apenas ao status superior deixa escapar o mesmo incidente após um repin bem-sucedido.
+- Um monitor por hash detecta mudanças técnicas, não decide sozinho se houve fato novo para o usuário. Manter cobertura e `status:blocked`; para espera conhecida sem bloqueadores novos, usar precheck local `script` com último JSON `wakeAgent:false`, além da regra `[SILENT]` no prompt. Preservar monitor, agenda, destino e writer originais. Nunca usar `no_agent` para entregar a saúde JSON bruta na conversa.
+- Suprimir somente com snapshot local fresco, heartbeat nativo de publisher/digest/ACK válidos, quota explicitamente pausada, owner já repinado e erros antigos comprovadamente retryable. Manter permissões/integridade, retries esgotados, dados desconhecidos, nova decisão e janela estimada vencida investigáveis. Limitar a espera esperada à estimativa nativa mais uma tolerância explícita; isso não é um prazo de conclusão nem licença para ocultar um scheduler parado.
+- Depois do write pelo tool canônico, ler de volta o job exato e provar que schedule/enabled/delivery/monitor/model não mudaram. Exercitar o precheck e observar um tick agendado real sem inferência/entrega, em vez de declarar anti-spam resolvido apenas porque duas amostras de stdout coincidiram.
+
 ## Ativação do fix e drenagem segura do backlog
 
 O watcher persistente carrega regex/variáveis no startup. Editar o `.sh` no disco não altera o processo Bash já rodando:
