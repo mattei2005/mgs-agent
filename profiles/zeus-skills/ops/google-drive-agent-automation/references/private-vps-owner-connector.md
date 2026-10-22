@@ -69,11 +69,18 @@ If **Publish app** is disabled with a Branding-completion warning, inspect all B
 
 Treat this as a decision/verification gate, not a guaranteed publication recipe: follow the approved Google publication/verification path, observe the actual result, and escalate a verification or policy block rather than promising that publishing bypasses it. Do not ask for repeated short-lived consents as the permanent solution. Reuse a verified suitable publishing state without redundant clicks.
 
+Interpret each observed console state narrowly and advance only the missing layer:
+
+- **Audience → In production / Back to testing:** publication is complete; do not repeat publishing or return to Testing. This is not proof of brand verification, approved scopes or an owner grant.
+- **Branding → Your branding has been verified and is being shown to users:** brand verification/display is confirmed. Compare the actual home/privacy/terms URLs with the verified published pages; do not infer scope approval from this message.
+- **OAuth user cap:** the counter concerns authorizing accounts, not files or storage volume. Its presence does not establish whether branding or scopes are verified, and its value is not a substitute for the connector's authorization proof.
+- **Client fields present, but Refresh Token absent and authorization_saved false:** configuration exists, but the owner grant is still pending. Do not recreate credentials or restart completed console setup.
+
 Distinguish Google's **In production** publishing status from the connector's `production_enabled` flag. OAuth lifecycle readiness does not authorize media execution or writer cutover.
 
 ## 6. Obtain and verify the real owner grant
 
-After client and lifetime gates pass, open the private landing page afresh and instruct the operator to choose the **exact pinned Drive-owner account**, not the Cloud administrator or network administrator by habit.
+After client and lifetime gates pass, explicitly tell Rodolfo that the Cloud-console setup is complete and the next action is on a different page. Give the private **landing-page root** and its exact authorization-button label; do not direct him to a cached POST `/start` result, because a fresh landing page issues the current CSRF cookie/form pair. At Google's account selector, name the **exact pinned Drive-owner account**, not the Cloud or network administrator. A repeated Branding/Audience screenshot confirms that completed gate; it is not a reason to repeat its configuration. Ask for a short completion message or the error text only, never a callback URL or authorization code. Treat this as a handoff awaiting real consent, not a verified grant.
 
 Require:
 

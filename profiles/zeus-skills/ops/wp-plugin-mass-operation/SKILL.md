@@ -34,6 +34,12 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Publicar três páginas informativas de Branding OAuth em um site aprovado** → `references/oauth-branding-pages-publication.md`
 - **Migrar páginas e cards Lazy Blocks entre sites** → `references/lazyblocks-native-cross-site-migration.md`
 
+## Mutation and preservation gates
+
+- Persist created object IDs and completed mutation stages before validation; recover a failed post-write check against those same IDs rather than creating replacements or replaying completed writes.
+- Compare authored WordPress fields separately from computed `content.rendered`, because forms and widgets can change rendered HTML without an author edit. Preserve the original baseline and qualify any historical-revision fallback.
+- After a draft/status transition, read the published permalink and canonical again; a draft REST link can be a preview URL even when production uses pretty permalinks. Resolve cross-links only within the authorized objects, not by changing site-wide permalink settings.
+
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.
