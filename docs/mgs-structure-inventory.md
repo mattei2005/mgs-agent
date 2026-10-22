@@ -7,6 +7,13 @@
 
 ---
 
+## Revisão editorial — lote SEO Raquel, continuidade de 22/10/2026
+
+- Autoridade editorial: Raquel Oliveira, mensagens `1562828122762649781` e `1562829266020868157`, thread `1560295338257023118`; revisão do lote existente, sem novos artigos. Mesmos 58 IDs/URLs em quatro portais allowlisted; nenhum ajuste de permissão, credencial, plugin, locale, runtime ou dashboards.
+- Procedimentos próprios atualizados: `content-editorial-image-workflows` (especificidade, diversidade entre artigos, humanização pertinente e imagens legítimas de jogos); `content-site-vertical-operations/references/general-seo-category-drafts.md` (preservação de acertos, variação individual e idioma substantivo das fontes após redirects). Excerpt vazio é preservado por raw; fallback rendered deriva do corpo.
+- Registro de conhecimento: `ATENA-SEO-REVIEW-GATES-1562829266020868157` supersede o gate anterior na mesma chave; checkpoint `atena-seo-mass-1560295338257023118` mantém a retomada. Registry/checkpoint usam somente `mgs-knowledge-control.py`, com validação real.
+- Artefatos e adaptadores **locais desta tarefa**, sem alteração de runners globais: `/root/.hermes/profiles/atena/work/seo-review-1562828122762649781/`; baselines, propostas, mídia aprovada, hashes, intenções e readbacks por objeto. Produção limitada a conteúdo/mídia e derivações SEO nativas dos posts autorizados; não há publicação de posts novos nem purge global. Estado final/pendências vivem nos manifests e na fonte canônica apontada pelo checkpoint, não nesta nota histórica.
+
 ## Campaign Ops — CPV13 reentrada D1 em duas viradas (2026-10-17)
 
 - **Emenda posterior de Rodolfo na mesma thread:** `C32` foi corrigida literalmente para `C42`; budgets de C40/C41/C42 confirmados em USD30/dia. Somente C42 exigiu POST de USD25→USD30, seguido de GET e duas leituras estáveis; requests originais foram reconciliados sem repetir o write. Esta emenda supersede o budget USD25 da C42 mencionado abaixo, preservado como histórico. A C42 já estava no lote de 18/10: decidir entre repetir o D1 em 19/10 ou mover sua ativação para 19/10 permanece pendente de resposta explícita. Nenhuma agenda foi alterada por inferência. Audit `cpv13-c40-c41-c42-budget30-correction-20261017-rodolfo`.
