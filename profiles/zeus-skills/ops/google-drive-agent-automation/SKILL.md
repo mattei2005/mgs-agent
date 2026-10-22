@@ -84,6 +84,8 @@ Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment co
 - Plan temporary-space and recovery handling before the binary drill. Load `vps-maintenance-and-backup-governance` and follow its backup-retention reference's “Interrupted encrypted restore” procedure for verified input reuse and isolated replay. Keep transport recovery there rather than treating an observed timeout value as a permanent provider limit.
 - Keep assisted migration finite: after a representative pilot proves the needed ownership/access/recovery boundary, continue the approved backend integration and validate recurrence before guiding a historical batch. Do not request repeated manual moves merely to re-prove the same layer or let initial assistance become the unattended workflow.
 
+For the ordered future-backup producer/owner move/SA reconciliation and non-destructive retention preview, load `references/backup-owner-automation.md`. Keep published code, native owner acceptance, first real archive and destructive retention as separate gates.
+
 ## Required preflight
 
 1. Load `/root/mgs-agent/.env` without printing values.

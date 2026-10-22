@@ -214,6 +214,9 @@ def cycle(apply=True):
   p,s=load();d=b.Drive(apply);c=b.config_load();state=b.read_json(STATE,{})
   if state.get('schema')!='mgs.backup.archive.state.v1':raise b.ArchiveError('BACKUP_AUTOMATION_STATE_SCHEMA')
   out={'status':s['status'],'acceptance':acceptance['status'],'queued':[],'verified':[],'pending':[],'blocked':[],'archive_trash_enabled':False,'delete_source':False,'retention_preview_only':True}
+  owner_hb=heartbeat(d,c)
+  if owner_hb and owner_hb.get('workerSha256')==s.get('worker_sha256'):
+   for failure in owner_hb.get('backupArchive',{}).get('blocked',[]):out['blocked'].append({'component':'backup_owner',**failure})
   jobs=state.get('jobs',{});pending=[j for j in jobs.values() if not j.get('verified')];audit=[j for j in jobs.values() if j.get('verified')][-1:]
   if apply:
    for job in (pending[:1]+audit):
