@@ -3482,6 +3482,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-SEPT-INVALID-1562911529102475286",
+      "next_step": "Snapshot, calcular percentuais no motor, backup e aplicar dois controles com readback",
+      "objective": "Ajustar somente invalidos setembro: Rede1 CAD469.22 e Rede2 USD154.07, revshare separado preservado",
+      "source": "discord:message:1562911529102475286",
+      "state": "authorized_preflight",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-22T19:33:10+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-SEPTEMBER-EXPORT-1555267485928788099",
       "next_step": "Sem pendência destes pedidos. Preservar parâmetros globais e câmbio automático provisório até liquidação confirmada; conferência geral na semana do dia20, sem alteração da dash por este fluxo.",
       "objective": "Setembro com áreas funcionais do modelo, controles centrais e câmbio live, sem modificar a dash",
@@ -7132,5 +7142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T19:27:03+00:00"
+  "updated_at": "2026-10-22T19:33:10+00:00"
 }
