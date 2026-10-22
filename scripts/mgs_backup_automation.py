@@ -93,12 +93,26 @@ def prepare():
   p={'schema':'mgs.backup.archive.plan.v1','authorizationMessageId':AUTH,'migrationAuthorizationMessageId':m.AUTH,'sharingConfirmationMessageId':corp.APPROVAL,'account':b.ACCOUNT,'ownerPermissionId':cp['ownerPermissionId'],'saPermissionId':'07414359829876449782','sourceDriveId':b.SOURCE_DRIVE,'sourceRootId':binding['source_root_id'],'corporateRootId':binding['corporate_root_id'],'archiveRootId':binding['archive_root_id'],'tiers':{t:{'sourceId':binding['tiers'][t]['source_id'],'archiveId':binding['tiers'][t]['archive_id']} for t in TIERS},'bindingSha256':sha(binding),'futureCreatedNotBefore':b.now_iso(),'retentionCount':binding['retention_count'],'principals':cp['principals'],'setupReceiptId':cs['setup_receipt_id'],'pilotId':result['file_id'],'pilotSha256':result['metadata']['sha256Checksum'],'pilotParentId':result['metadata']['parents'][0],'deleteSource':False,'archiveTrashEnabled':False,'maxMovesPerTick':1}
   s={'schema':'mgs.backup.archive.stage.v1','status':'prepared_not_published','plan_sha256':sha(p),'automatic_archive_enabled':False,'owner_accepted':False,'archive_trash_enabled':False,'heartbeat_samples':[],'created_at':b.now_iso()};b.atomic_json(PLAN,p);b.atomic_json(STAGE,s);b.atomic_json(STATE,{'schema':'mgs.backup.archive.state.v1','jobs':{},'publications':{}});return s
 
+def staged_blob(d,s,parent,key,kind,raw,name,mime):
+ entry=s.setdefault('publication_intents',{}).get(key)
+ if entry:
+  if entry['sha256']!=sha(raw):raise b.ArchiveError('BACKUP_STAGED_BLOB_BODY_CHANGED')
+  found={'id':entry['file_id']} if entry.get('file_id') else d.one(parent,key)
+  if not found:raise b.ArchiveError('BACKUP_STAGED_PUBLICATION_UNCERTAIN_NO_REPLAY')
+  fid=found['id']
+ else:
+  s['publication_intents'][key]={'sha256':sha(raw),'status':'intent'};b.atomic_json(STAGE,s)
+  fid=d.upload_once(parent,name,raw,mime,key,kind)
+ meta=d.meta(fid);b.require_publisher(meta,b.CANONICAL_SA)
+ if meta.get('parents')!=[parent] or meta.get('properties',{}).get('mgsArchiveKey')!=key or meta.get('properties',{}).get('mgsArchiveType')!=kind or d.raw(fid)!=raw:raise b.ArchiveError('BACKUP_STAGED_PUBLICATION_READBACK')
+ s['publication_intents'][key].update(status='published',file_id=fid);b.atomic_json(STAGE,s);return fid
+
 def publish():
  with b.queue_lock():
   p,s=load();d=b.Drive(True);c=b.config_load();b.preflight(d,c)
   base=b.BASE/'integrations/creative-archive-30tb/WorkerWholeDriveCorporateReceiptRecovery.js'
   if sha(base.read_bytes())!=BASE_SHA:raise b.ArchiveError('BACKUP_BASE_WORKER_CHANGED')
-  fid=d.upload_once(c['control_folder_id'],'backup-automation-plan-'+s['plan_sha256']+'.json',b.canonical(p),'application/json','backup-plan:'+s['plan_sha256'],'backup_plan');b.require_publisher(d.meta(fid),b.CANONICAL_SA)
+  fid=staged_blob(d,s,c['control_folder_id'],'backup-plan:'+s['plan_sha256'],'backup_plan',b.canonical(p),'backup-automation-plan-'+s['plan_sha256']+'.json','application/json');b.require_publisher(d.meta(fid),b.CANONICAL_SA)
   raw=base.read_bytes()+b'\nvar MGS_BACKUP_PINS='+b.canonical({'planFileId':fid,'planSha256':s['plan_sha256']})+b';\n'+(b.BASE/'integrations/creative-archive-30tb/BackupArchiveExtension.js').read_bytes()
   source=b.BASE/'integrations/creative-archive-30tb/WorkerBackupArchive.js'
   if source.exists() and source.read_bytes()!=raw:raise b.ArchiveError('BACKUP_COMPOSITE_IMMUTABLE_SOURCE_CHANGED')
@@ -109,7 +123,7 @@ def publish():
   import subprocess
   check=subprocess.run(['node','--check',str(source)],capture_output=True,text=True)
   if check.returncode:raise b.ArchiveError('BACKUP_COMPOSITE_SYNTAX')
-  digest=sha(raw);wf=d.upload_once(c['control_folder_id'],'worker-backup-archive-'+digest+'.js',raw,'application/javascript','worker:'+digest,'worker_source');meta=d.meta(wf);b.require_publisher(meta,b.CANONICAL_SA)
+  digest=sha(raw);wf=staged_blob(d,s,c['control_folder_id'],'worker:'+digest,'worker_source',raw,'worker-backup-archive-'+digest+'.js','application/javascript');meta=d.meta(wf);b.require_publisher(meta,b.CANONICAL_SA)
   if sha(d.raw(wf))!=digest or d.raw(fid)!=b.canonical(p):raise b.ArchiveError('BACKUP_NATIVE_SOURCE_READBACK')
   s.update(status='owner_repin_required_backup_archive',worker_file_id=wf,worker_sha256=digest,worker_source_path=str(source.relative_to(b.BASE)),plan_file_id=fid,previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=c['worker_sha256'],published_at=b.now_iso());b.atomic_json(STAGE,s)
   whole=b.read_json(m.DATA/'stage.json',{});whole.update(worker_file_id=wf,worker_sha256=digest,worker_source_path=s['worker_source_path'],previous_active_worker_file_id=c['worker_file_id'],previous_active_worker_sha256=c['worker_sha256'],status=s['status'],owner_repin_confirmed=False,backup_archive_stage_path=str(STAGE.relative_to(b.BASE)));b.atomic_json(m.DATA/'stage.json',whole)
@@ -147,7 +161,7 @@ def resume_acceptance():
   if not owner_ready(hb,s,p) or c['worker_sha256']!=s['worker_sha256']:raise b.ArchiveError('BACKUP_ACCEPTANCE_CHANGED')
   state=b.read_json(STATE);activation={'schema':'mgs.backup.archive.activation.v1','authorizationMessageId':AUTH,'migrationAuthorizationMessageId':m.AUTH,'planSha256':s['plan_sha256'],'bindingSha256':p['bindingSha256'],'workerSha256':s['worker_sha256'],'archiveMovesEnabled':True,'archiveTrashEnabled':False,'deleteSource':False}
   fid=immutable(d,c['requests_folder_id'],'backup-activation:'+s['plan_sha256'],'backup_activation',activation,state)
-  s.update(owner_accepted=True,automatic_archive_enabled=True,status='automatic_future_archive_enabled_awaiting_first_eligible',activation_file_id=fid,accepted_at=s.get('accepted_at') or b.now_iso());b.atomic_json(STAGE,s)
+  s.update(owner_accepted=True,automatic_archive_enabled=True,status='future_backup_verified_retention_preview_only' if s.get('first_production_backup_verified_at') else 'automatic_future_archive_enabled_awaiting_first_eligible',activation_file_id=fid,accepted_at=s.get('accepted_at') or b.now_iso());b.atomic_json(STAGE,s)
   return {'status':'accepted_backup_future_archive','archive_trash_enabled':False}
 
 def reconcile(d,c,p,s,state,job):
@@ -224,6 +238,10 @@ def cycle(apply=True):
   protected={p['pilotId']};last=b.read_json(backup.BACKUP_STATE,{}).get('last_restore_test',{}).get('remote_file_id')
   if last:protected.add(last)
   preview=retention_preview(rows,p,protected);out['retention_preview_counts']={k:len(preview[k]) for k in ['archive_trash_candidates','source_expired_preserved','protected_expired','unverified_expired']};out['future_source_backlog']=len(future)
+  if s.get('automatic_archive_enabled') and any(j.get('verified') for j in jobs.values()):
+   out['status']='future_backup_verified_retention_preview_only'
+   if apply and s['status']!=out['status']:
+    s['status']=out['status'];s['first_production_backup_verified_at']=b.now_iso();b.atomic_json(STAGE,s)
   if out['blocked']:out['status']='blocked'
   if apply:
    b.atomic_json(m.DATA/'backup-retention-preview.json',preview);b.atomic_json(m.DATA/'backup-automation-last-tick.json',{'executed_at':b.now_iso(),**out});b.atomic_json(STATE,state)

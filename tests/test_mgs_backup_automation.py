@@ -49,4 +49,19 @@ class BackupAutomationTests(unittest.TestCase):
  def test_duplicate_native_ids_are_rejected(self):
   row={'id':'same','tier':'weekly','createdTime':'2026-10-18T00:00:00Z','location':'archive','verified':True}
   with self.assertRaises(self.a.b.ArchiveError):self.a.retention_preview([row,row],self.p,protected_ids=set())
+ def test_unresolved_job_publication_never_posts_again(self):
+  from unittest.mock import Mock,patch
+  d=Mock();d.one.return_value=None;body={'fixture':'offline'};state={'publications':{'key':{'sha256':self.a.sha(body),'status':'intent'}}}
+  with patch.object(self.a.b,'atomic_json'):
+   with self.assertRaisesRegex(self.a.b.ArchiveError,'NO_REPLAY'):self.a.immutable(d,'parent123','key','backup_ack',body,state)
+  d.upload_once.assert_not_called()
+ def test_unresolved_staged_worker_publication_never_posts_again(self):
+  from unittest.mock import Mock,patch
+  d=Mock();d.one.return_value=None;stage={'publication_intents':{'key':{'sha256':self.a.sha(b'offline'),'status':'intent'}}}
+  with patch.object(self.a.b,'atomic_json'):
+   with self.assertRaisesRegex(self.a.b.ArchiveError,'NO_REPLAY'):self.a.staged_blob(d,stage,'parent123','key','worker_source',b'offline','offline.js','application/javascript')
+  d.upload_once.assert_not_called()
+ def test_heartbeat_without_timestamp_is_not_ready(self):self.assertFalse(self.a.owner_ready({}, {},self.p))
+ def test_same_worker_manual_heartbeat_is_not_scheduled_proof(self):
+  hb={'executedAt':self.a.b.now_iso(),'workerSha256':'e'*64,'triggerUid':None,'status':'ok','blocked':[],'deleteSource':False,'canaryAcknowledged':True};self.assertFalse(self.a.owner_ready(hb,{'worker_sha256':'e'*64,'plan_sha256':'f'*64},self.p))
 if __name__=='__main__':unittest.main()

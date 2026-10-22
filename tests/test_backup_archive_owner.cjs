@@ -8,7 +8,7 @@ function fixture(){
  const c={account:p.account,sourceDriveId:p.sourceDriveId,requestsFolderId:'requests123',receiptsFolderId:'receipts123',controlFolderId:'control123',workerSha256:'f'.repeat(64),executionTriggerUid:'trigger123'};
  const j={schema:'mgs.backup.move.request.v1',jobId:'1'.repeat(32),authorizationMessageId:p.authorizationMessageId,migrationAuthorizationMessageId:p.migrationAuthorizationMessageId,planSha256:'e'.repeat(64),bindingSha256:p.bindingSha256,asset:a,receiptFileId:'receiptSlot123',deleteSource:false,archiveTrashEnabled:false};
  const store={sourceFile123:{id:a.sourceId,name:a.name,mimeType:a.mimeType,createdTime:a.sourceCreatedTime,parents:[a.sourceParentId],driveId:p.sourceDriveId,trashed:false,size:a.size,md5Checksum:a.md5,sha256Checksum:a.sha256,version:'1'}};
- const initial=JSON.stringify({schema:'mgs.backup.move.receipt.slot.v1',jobId:j.jobId,sourceId:a.sourceId,planSha256:j.planSha256,deleteSource:false,archiveTrashEnabled:false});
+ const initial=JSON.stringify({schema:'mgs.backup.move.receipt.slot.v1',status:'awaiting_owner',jobId:j.jobId,sourceId:a.sourceId,planSha256:j.planSha256,deleteSource:false,archiveTrashEnabled:false});
  store.receiptSlot123={id:'receiptSlot123',parents:[c.receiptsFolderId],driveId:p.sourceDriveId,trashed:false,properties:{mgsArchiveKey:'backup-receipt:'+j.jobId,mgsArchiveType:'backup_receipt_slot',sha256:hash(initial)},author:'sa',raw:initial};
  let data={},moves=0,writes=0,failReceipt=false,moveThrowsAfterLanding=false,probeReads=0;
  const props={getProperty:k=>data[k]||null,setProperty:(k,v)=>{data[k]=v;},deleteProperty:k=>{delete data[k];}};
