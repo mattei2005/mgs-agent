@@ -1,0 +1,361 @@
+{
+  "id": "hetzner-php-recheck-1562886130582552618",
+  "source_message_ids": [
+    "1562886130582552618",
+    "1562886174836793364",
+    "1562886203747999854"
+  ],
+  "thread_id": "1562582544292249772",
+  "observed_at": "2026-10-22T17:57:58.553998+00:00",
+  "status": "audit_completed_hestia_critical_confirmation_required",
+  "advisories": [
+    "CVE-2026-109618",
+    "CVE-2026-109619"
+  ],
+  "sources": [
+    "https://www.php.net/archive/2026.php#2026-10-21-5",
+    "https://status.hetzner.com/incident/f4144d55-38c3-48d1-8664-7a3429355cd7"
+  ],
+  "runcloud_hosts": [
+    {
+      "host": "MatteiInc01",
+      "observed_at": "2026-10-22T17:53:33.660743+00:00",
+      "active_fpm_versions": {
+        "/RunCloud/Packages/php82rc/sbin/php-fpm": "PHP 8.2.35 (fpm-fcgi) (built: Oct 21 2026 17:39:36)",
+        "/RunCloud/Packages/php83rc/sbin/php-fpm": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)",
+        "/RunCloud/Packages/php84rc/sbin/php-fpm": "PHP 8.4.27 (fpm-fcgi) (built: Oct 21 2026 15:24:30) (NTS)",
+        "/RunCloud/Packages/php85rc/sbin/php-fpm": "PHP 8.5.12 (fpm-fcgi) (built: Oct 21 2026 14:45:55) (NTS)"
+      },
+      "sites_http_runtime": "PHP 8.3.36",
+      "php83rc_package": "8.3.36-1+ubuntu22.04+1",
+      "apps": 75,
+      "http_checks": 150,
+      "fcgi_completed": 74,
+      "http_findings_unchanged": true,
+      "http_issues": [
+        {
+          "app": "allincraft",
+          "domain": "allincraft.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "allincraft.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        },
+        {
+          "app": "kievportal",
+          "domain": "kievportal.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "kievportal.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        },
+        {
+          "app": "mgs-finance-dash",
+          "domain": "dash.mgsdigitalcorp.com",
+          "origin": true,
+          "tls_verified": false,
+          "exit": 0,
+          "status": 403,
+          "final_host": "dash.mgsdigitalcorp.com",
+          "content_type": "text/html",
+          "error_kind": null
+        },
+        {
+          "app": "portalbrasilnews",
+          "domain": "portalbrasilnews.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "portalbrasilnews.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        },
+        {
+          "app": "prospecth",
+          "domain": "prospecthomeimprovement.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 0,
+          "status": 403,
+          "final_host": "prospecthomeimprovement.com",
+          "content_type": "text/html; charset=UTF-8",
+          "error_kind": null
+        }
+      ],
+      "old_deleted_php_processes": 0,
+      "legacy_fpm_inactive": {
+        "php74rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        },
+        "php80rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        },
+        "php81rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        }
+      },
+      "legacy_installed_not_certified": [
+        "php74rc",
+        "php80rc",
+        "php81rc"
+      ],
+      "apache_module_check_exit": 0,
+      "apache_php_modules": [],
+      "nginx_ok": true,
+      "fpm_ok": true,
+      "failed_units": "",
+      "reboot_required": false
+    },
+    {
+      "host": "MatteiInc02",
+      "observed_at": "2026-10-22T17:53:33.833364+00:00",
+      "active_fpm_versions": {
+        "/RunCloud/Packages/php82rc/sbin/php-fpm": "PHP 8.2.35 (fpm-fcgi) (built: Oct 21 2026 17:39:36)",
+        "/RunCloud/Packages/php83rc/sbin/php-fpm": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)",
+        "/RunCloud/Packages/php84rc/sbin/php-fpm": "PHP 8.4.27 (fpm-fcgi) (built: Oct 21 2026 15:24:30) (NTS)",
+        "/RunCloud/Packages/php85rc/sbin/php-fpm": "PHP 8.5.12 (fpm-fcgi) (built: Oct 21 2026 14:45:55) (NTS)"
+      },
+      "sites_http_runtime": "PHP 8.3.36",
+      "php83rc_package": "8.3.36-1+ubuntu22.04+1",
+      "apps": 15,
+      "http_checks": 30,
+      "fcgi_completed": 15,
+      "http_findings_unchanged": true,
+      "http_issues": [],
+      "old_deleted_php_processes": 0,
+      "legacy_fpm_inactive": {
+        "php74rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        },
+        "php80rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        },
+        "php81rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        }
+      },
+      "legacy_installed_not_certified": [
+        "php74rc",
+        "php80rc",
+        "php81rc"
+      ],
+      "apache_module_check_exit": 0,
+      "apache_php_modules": [],
+      "nginx_ok": true,
+      "fpm_ok": true,
+      "failed_units": "",
+      "reboot_required": false
+    },
+    {
+      "host": "MatteiInc03JBF",
+      "observed_at": "2026-10-22T17:53:33.812178+00:00",
+      "active_fpm_versions": {
+        "/RunCloud/Packages/php82rc/sbin/php-fpm": "PHP 8.2.35 (fpm-fcgi) (built: Oct 21 2026 17:39:36)",
+        "/RunCloud/Packages/php83rc/sbin/php-fpm": "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)",
+        "/RunCloud/Packages/php84rc/sbin/php-fpm": "PHP 8.4.27 (fpm-fcgi) (built: Oct 21 2026 15:24:30) (NTS)",
+        "/RunCloud/Packages/php85rc/sbin/php-fpm": "PHP 8.5.12 (fpm-fcgi) (built: Oct 21 2026 14:45:55) (NTS)"
+      },
+      "sites_http_runtime": "PHP 8.3.36",
+      "php83rc_package": "8.3.36-1+ubuntu22.04+1",
+      "apps": 20,
+      "http_checks": 40,
+      "fcgi_completed": 20,
+      "http_findings_unchanged": true,
+      "http_issues": [
+        {
+          "app": "bkp2-ducapes",
+          "domain": "bkp2.ducapes.com",
+          "origin": false,
+          "tls_verified": true,
+          "exit": 6,
+          "status": 0,
+          "final_host": "bkp2.ducapes.com",
+          "content_type": "",
+          "error_kind": "transport"
+        }
+      ],
+      "old_deleted_php_processes": 0,
+      "legacy_fpm_inactive": {
+        "php74rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        },
+        "php80rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        },
+        "php81rc-fpm": {
+          "MainPID": "0",
+          "ExecMainStartTimestamp": "n/a",
+          "ActiveState": "inactive"
+        }
+      },
+      "legacy_installed_not_certified": [
+        "php74rc",
+        "php80rc",
+        "php81rc"
+      ],
+      "apache_module_check_exit": 0,
+      "apache_php_modules": [],
+      "nginx_ok": true,
+      "fpm_ok": true,
+      "failed_units": "",
+      "reboot_required": false
+    }
+  ],
+  "hestia_host": {
+    "ip": "188.34.183.6",
+    "hostname": "server.boostingecon.com",
+    "running_fpm_versions": {
+      "/usr/local/hestia/php/sbin/hestia-php": [
+        "PHP 8.5.9 (fpm-fcgi) (built: Aug 13 2026 13:31:52) (NTS)",
+        "Copyright (c) The PHP Group"
+      ],
+      "/usr/sbin/php-fpm8.3": [
+        "PHP 8.3.31 (fpm-fcgi) (built: May 14 2026 16:00:09)",
+        "Copyright (c) The PHP Group"
+      ]
+    },
+    "installed": {
+      "hestia-php": "8.5.9-1+ubuntu24.04",
+      "php8.3": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-apcu": "5.1.28-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-bcmath": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-bz2": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-cli": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-common": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-curl": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-fpm": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-gd": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-imagick": "3.8.1-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-imap": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-intl": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-ldap": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-mbstring": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-mysql": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-opcache": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-pspell": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-readline": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-soap": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-xml": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-zip": "8.3.31-3+ubuntu24.04.1+deb.sury.org+1"
+    },
+    "candidates": {
+      "php8.3": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-bcmath": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-bz2": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-cli": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-common": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-curl": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-fpm": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-gd": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-imap": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-intl": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-ldap": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-mbstring": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-mysql": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-opcache": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-pspell": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-readline": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-soap": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-xml": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-zip": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "hestia-php": "8.5.12-1+ubuntu24.04"
+    },
+    "transaction": [
+      "php8.3=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-bcmath=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-bz2=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-cli=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-common=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-curl=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-fpm=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-gd=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-imap=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-intl=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-ldap=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-mbstring=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-mysql=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-opcache=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-pspell=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-readline=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-soap=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-xml=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "php8.3-zip=8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+      "hestia-php=8.5.12-1+ubuntu24.04"
+    ],
+    "simulation_rows": [
+      "20 upgraded, 0 newly installed, 0 to remove and 56 not upgraded.",
+      "Inst hestia-php [8.5.9-1+ubuntu24.04] (8.5.12-1+ubuntu24.04 apt repository:noble [amd64])",
+      "Inst php8.3-bcmath [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-zip [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-xml [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-soap [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-readline [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-pspell [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-opcache [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-mysql [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-mbstring [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-ldap [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-intl [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-imap [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-gd [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-curl [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-bz2 [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-fpm [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-cli [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64]) []",
+      "Inst php8.3-common [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [amd64])",
+      "Inst php8.3 [8.3.31-3+ubuntu24.04.1+deb.sury.org+1] (8.3.36-1+ubuntu24.04.1+deb.sury.org+1 PPA for PHP:24.04/noble [all])"
+    ],
+    "simulation_exit": 0,
+    "apt_refresh_ok": true,
+    "reboot_pending_preexisting": true,
+    "reboot_excluded": true,
+    "required_restart_services": [
+      "php8.3-fpm",
+      "hestia"
+    ],
+    "reason_not_fixed": "This host was not part of the prior approved three-Mattei plus local CLI update. Current web and embedded control-panel PHP remain below fixed releases; vendor patches are now available. Why its updater did not apply them was not established."
+  },
+  "totals": {
+    "hosts_audited": 4,
+    "runcloud_apps": 110,
+    "http_checks": 220,
+    "fcgi_completed": 109,
+    "hestia_proposed_upgrades": 20
+  },
+  "production_install_restart_or_config_change": false,
+  "changes": "APT index refresh on Hestia only; local read-only audit evidence and governance records. No credentials changed.",
+  "limitations": [
+    "Not a forensic compromise audit.",
+    "Not a provider-account exhaustive server inventory. Covers the four active known Hetzner hosts; retired agent 87.99.151.107 not probed.",
+    "Inactive installed legacy RunCloud PHP packages were not certified patched or removed.",
+    "Hestia backup/rollback must be acquired and validated before the confirmed package transaction."
+  ],
+  "tool_recovery": [
+    "1Password item get by UUID without vault failed; explicit MGS Conteúdo vault recovered. Duplicate Hestia panel titles resolved by exact ID without using panel credentials.",
+    "Initial Apache module collector used nonexistent conventional path; recovered from live MainPID /proc executable and reran full GET-only application checks.",
+    "Checkpoint help corrected to checkpoint-upsert; local diagnostic syntax error corrected without remote effects."
+  ]
+}
