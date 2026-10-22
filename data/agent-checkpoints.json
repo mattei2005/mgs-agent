@@ -2403,12 +2403,22 @@
     {
       "agent": "zeus",
       "id": "MGS-CORPORATE-BACKUP-LAYOUT-1562643079188451401",
-      "next_step": "Orientar somente criacao de MGS-CORPORATIVO/_DISASTER_RECOVERY e subpastas vazias hourly,daily,weekly,monthly na conta Gmail. Plano backup-empty-layout-plan-1562643079188451401.json. NAO mover _DR original1DZ8QIirDnw-dNBbYllQ9p9L0fSzgsOO9 nem arquivos: uploader ainda usa SharedDrive0AE e ensure_folder por nome, retention ainda tier source; raiz movida faria nova arvore. Apos criacao, verificar IDs/owner/ACL4 e implementar/testar produtor-reconciler-retencao-restaure do arquivo Gmail com staging antigo preservado. SA move nativo test-only 31b falhou storageQuotaExceeded403, fonte intacta; nao repetir nem fallback OAuth. Fixture1XJQwSFFBymb2abJFx6zZO8pV35IK7BBS preservado/inventariado para limpeza autorizada. SA writer observada canTrash/canDelete false em SheetGmail; validar backup real antes de afirmar capacidade de retencao. Gates criticos para exclusao/credencial/billing permanecem.",
-      "objective": "Migracao integral aos 30 TB com conteudo/IDs/acessos e automacao futura comprovados",
+      "next_step": "Cinco pastas criadas confirmadas por readback owner Gmail/ACL4/hierarquia/tiers vazios. backup-archive-binding.json com publictags nativos de ownerworker, IDs source/arquivo, config intacta. Bind real e replay sem mudanca de versoes passaram. Novo controlador +14testes e5suites regressao OK. Agora checkpoint MGS-CORPORATE-BACKUP-PILOT-1562665022910500936. Nao orientar lote nem cutover; source root e tiers permanecem.",
+      "objective": "Migrar integralmente aos 30 TB com IDs/acesso/backup/retencao/restaure e automacao futura comprovados",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "awaiting_owner_create_empty_destination_layout",
+      "state": "completed",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T02:06:41+00:00"
+      "updated_at": "2026-10-22T03:53:57+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "MGS-CORPORATE-BACKUP-PILOT-1562665022910500936",
+      "next_step": "Rodolfo pronto1562676006119280762. API confirmou file1ZlbYkAQN_YoRgvl0K3KCueGg80NQW1T2 agora weekly13lgWXECmJBKm_qnXpWXfshHhzcN46ouf, Gmail owner/ACL4/mesmos bytes/props. Primeiro readback03:56:49Z, canDownload/Edit true canTrash/Delete false no BINARIO. Source root/tiers/config intactos. Executar restore-test --remote-id EXATO, sem flags inventadas --no-discord/--json (parser nao aceita); saída JSON já padrão e restore não posta Discord. CLI/script em scratch wrapper só redireciona TemporaryDirectory do restore para TMPDIR e limpa HERMES_PROFILE na árvore de teste; nada vivo. Depois verificar novo PASS pós03:56:49Z e verify-pilot aceite. Full/DB restore materializado em produção não autorizado. Nenhum lote histórico nem retençãoGmail ativados.",
+      "objective": "Validar backup binario movido com mesmo ID, acesso SA e restore isolado no arquivo Gmail",
+      "source": "docs/mgs-whole-drive-30tb-migration.md",
+      "state": "native_move_verified_isolated_restore_in_progress",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-22T03:58:00+00:00"
     },
     {
       "agent": "zeus",
@@ -2453,12 +2463,12 @@
     {
       "agent": "zeus",
       "id": "MGS-WHOLE-DRIVE-30TB-1562459803186626571",
-      "next_step": "Oito Sheets/163 abas e 3 folder IDs preservados/validados, provas native-sheets-storage-acceptance-1562643079188451401.json e corporate-manual-index.json. Agora criar/verificar apenas layout vazio de backups, checkpoint MGS-CORPORATE-BACKUP-LAYOUT-1562643079188451401; nao mover raiz _DR antiga nem arquivos antes de adaptar upload/staging, archive reconciliation, retention e restore. Produtor ainda SharedDrive ensure_folder, SA nao move a Gmail por storageQuotaExceeded (probe tecnico inventariado, nao repetir). Nenhuma identidade alternativa, exclusao ou reset aprovado. Criativos mantidos no fluxo autorizado; migracao integral nao esta pronta. Ultima secao doc canonica tem diagnostico e proxima acao.",
+      "next_step": "Aguardar movimento humano nativo de UM arquivo mgs-dr-weekly-20261018T081508Z.zip.gpg, ID1ZlbYkAQN_YoRgvl0K3KCueGg80NQW1T2, source weekly114WuTvDTwdUoDRlBLfZr_3xLAqt4nI8S -> arquivo weekly13lgWXECmJBKm_qnXpWXfshHhzcN46ouf. Contrato backup-native-move-pilot.json congelou ID/version/hash nativo/prior restorePASS; nao recriar. Depois CLI mgs_backup_archive.py verify-pilot retorna2 ate novo restore; verificar owner/ACL4/bytes/appProps/ancestry/source. Checar disco real; mgs-offsite-backup.py --no-discord --json restore-test --remote-id EXATO, isolado, sem dropDB; apos PASS novo posterior ao primeiro native-move timestamp rodar verify-pilot novamente. Nao mover raiz/tier original nem outros backups antes de implementar/testar produtor+retencao futura. Automatic archive/retencao Gmail ainda NAO implementados; config e politica source48/14/8/12 intactas; sem OAuth alternativo/delecao/ativacao. Detalhes doc canonica secao1562665022910500936.",
       "objective": "Migrar todo MGS-AGENTS aos 30 TB com upload/staging no antigo e automacao integral validada",
       "source": "docs/mgs-whole-drive-30tb-migration.md",
-      "state": "all8_native_sheets_storage_verified_backup_empty_layout_pending",
+      "state": "all8_native_sheets_verified_backup_layout_bound_single_pilot_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-22T02:06:42+00:00"
+      "updated_at": "2026-10-22T03:53:57+00:00"
     },
     {
       "agent": "zeus",
@@ -7042,5 +7052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T03:27:53+00:00"
+  "updated_at": "2026-10-22T03:58:00+00:00"
 }

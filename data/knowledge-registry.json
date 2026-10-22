@@ -9852,6 +9852,23 @@
       "updated_at": "2026-10-21T20:42:16+00:00"
     },
     {
+      "canonical_key": "mgs.whole-drive.30tb.backup_destination_layout",
+      "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "storage.google-drive",
+      "effective_at": "2026-10-22T03:53:58+00:00",
+      "id": "MGS-CORPORATE-BACKUP-LAYOUT-CAP-20261022",
+      "kind": "capability",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Layout Gmail de backups verificado e vinculado sem redirecionar uploader source",
+      "updated_at": "2026-10-22T03:53:58+00:00"
+    },
+    {
       "canonical_key": "mgs.whole-drive.30tb.manual_reference_folder_transfer",
       "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
       "consumers": [
@@ -13737,5 +13754,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-22T03:27:53+00:00"
+  "updated_at": "2026-10-22T03:53:58+00:00"
 }

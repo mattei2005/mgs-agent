@@ -86,7 +86,7 @@ def bind_layout(d):
         if any(observed.get('properties',{}).get(k)!=v for k,v in wanted.items()) or observed.get('parents')!=meta['parents'] or not any(x.get('emailAddress')==b.ACCOUNT for x in observed.get('owners',[])):raise b.ArchiveError('BACKUP_LAYOUT_TAG_READBACK')
         corporate.check_acl(corporate.h.permissions(d,meta['id']),corporate.desired(p))
     source=next(x for x in p['allowedSourceRoots'] if x['name']=='_DISASTER_RECOVERY');sm=native_meta(d,source['id'])
-    if cfg['drive_root_id']!=b.SOURCE_DRIVE or cfg['drive_folder_name']!='_DISASTER_RECOVERY' or sm.get('parents')!=[b.SOURCE_DRIVE] or sm.get('driveId')!=b.SOURCE_DRIVE:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
+    if cfg['drive_root_id']!=b.SOURCE_DRIVE or cfg['drive_folder_name']!='_DISASTER_RECOVERY' or sm.get('parents')!=[b.SOURCE_DRIVE] or sm.get('driveId')!=b.SOURCE_DRIVE or sm.get('name')!='_DISASTER_RECOVERY':raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
     source_tiers=children(d,source['id']);byname={x['name']:x for x in source_tiers}
     if len(source_tiers)!=4 or set(byname)!=set(TIERS) or any(x['mimeType']!=b.FOLDER for x in source_tiers):raise b.ArchiveError('BACKUP_SOURCE_TIER_LAYOUT')
     result={'schema':'mgs.corporate.backup.archive.binding.v1','status':'layout_bound_archive_activation_pending','account':b.ACCOUNT,'authorization_message_id':m.AUTH,'source_message_id':'1562665022910500936','source_drive_id':b.SOURCE_DRIVE,'source_root_id':source['id'],'corporate_root_id':s['root_id'],'archive_root_id':layout['root']['id'],'tiers':{t:{'source_id':byname[t]['id'],'archive_id':layout[t]['id']} for t in TIERS},'backup_config_sha256':hashlib.sha256(BACKUP_CONFIG.read_bytes()).hexdigest(),'retention_count':cfg['retention_count'],'source_staging_unchanged':True,'owner_code_folder_tags_verified':True,'archive_activation_performed':False,'retention_mutation_performed':False,'verified_at':b.now_iso()}
@@ -127,7 +127,7 @@ def verify_pilot(d):
     if pilot.get('schema')!='mgs.corporate.backup.native.move.pilot.v1':raise b.ArchiveError('BACKUP_PILOT_REQUIRED')
     meta=native_meta(d,pilot['file_id']);validate_pilot_metadata(meta,pilot,moved=True);p,s=corporate.load_plan();corporate.check_acl(corporate.h.permissions(d,meta['id']),corporate.desired(p))
     staging=native_meta(d,binding['source_root_id'])
-    if staging.get('driveId')!=b.SOURCE_DRIVE or staging.get('parents')!=[b.SOURCE_DRIVE] or staging.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
+    if staging.get('driveId')!=b.SOURCE_DRIVE or staging.get('parents')!=[b.SOURCE_DRIVE] or staging.get('name')!='_DISASTER_RECOVERY' or staging.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
     for tier,ids in binding['tiers'].items():
         st=native_meta(d,ids['source_id'])
         if st.get('driveId')!=b.SOURCE_DRIVE or st.get('parents')!=[binding['source_root_id']] or st.get('name')!=tier or st.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_TIER_CHANGED')
