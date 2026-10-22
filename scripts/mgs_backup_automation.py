@@ -110,6 +110,13 @@ def staged_blob(d,s,parent,key,kind,raw,name,mime):
 def publish():
  with b.queue_lock():
   p,s=load();d=b.Drive(True);c=b.config_load();b.preflight(d,c)
+  efficiency=s.get('efficiency_revision')
+  if efficiency and s.get('worker_sha256')==efficiency.get('worker_sha256'):
+   import ares_archive_efficiency_rollout as fast
+   expected=fast.build(fast.BASE.read_bytes(),fast.EXTENSION.read_bytes())
+   if efficiency.get('authorization_message_id')!=fast.AUTH or sha(expected)!=s['worker_sha256'] or s.get('worker_source_path')!=str(fast.TARGET.relative_to(b.BASE)) or fast.TARGET.read_bytes()!=expected or d.raw(s['worker_file_id'])!=expected:raise b.ArchiveError('BACKUP_EFFICIENCY_REVISION_CHANGED')
+   b.require_publisher(d.meta(s['worker_file_id']),b.CANONICAL_SA)
+   return s
   revision=s.get('runtime_quota_revision')
   if revision and s.get('worker_sha256')==revision.get('worker_sha256'):
    import mgs_archive_runtime_quota as quota
@@ -170,7 +177,9 @@ def resume_acceptance():
   p,s=load();d=b.Drive(True);c=b.config_load();hb=heartbeat(d,c)
   if not owner_ready(hb,s,p) or c['worker_sha256']!=s['worker_sha256']:raise b.ArchiveError('BACKUP_ACCEPTANCE_CHANGED')
   state=b.read_json(STATE);activation={'schema':'mgs.backup.archive.activation.v1','authorizationMessageId':AUTH,'migrationAuthorizationMessageId':m.AUTH,'planSha256':s['plan_sha256'],'bindingSha256':p['bindingSha256'],'workerSha256':s['worker_sha256'],'archiveMovesEnabled':True,'archiveTrashEnabled':False,'deleteSource':False}
-  fid=immutable(d,c['requests_folder_id'],'backup-activation:'+s['plan_sha256'],'backup_activation',activation,state)
+  activation_key='backup-activation:'+s['plan_sha256']
+  if s.get('efficiency_revision',{}).get('backup_activation_key_versioned'):activation_key='backup-activation-v2:'+hashlib.sha256((s['plan_sha256']+'|'+s['worker_sha256']).encode()).hexdigest()
+  fid=immutable(d,c['requests_folder_id'],activation_key,'backup_activation',activation,state)
   s.update(owner_accepted=True,automatic_archive_enabled=True,status='future_backup_verified_retention_preview_only' if s.get('first_production_backup_verified_at') else 'automatic_future_archive_enabled_awaiting_first_eligible',activation_file_id=fid,accepted_at=s.get('accepted_at') or b.now_iso());b.atomic_json(STAGE,s)
   return {'status':'accepted_backup_future_archive','archive_trash_enabled':False}
 

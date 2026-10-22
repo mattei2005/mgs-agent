@@ -44,7 +44,7 @@ function mgsArchiveFastPause(c,runtime){
 mgsArchiveEnsurePath=function(c,names){
  var parent=c.archiveRootId,prefix=[];var props=PropertiesService.getScriptProperties();
  for(var i=0;i<names.length;i++){
-  var name=names[i];if(typeof name!=='string' || !name || name==='.' || name==='..' || /[\/\\\x00]/.test(name))throw new Error('ARCHIVE_FOLDER_NAME');
+  var name=names[i];if(typeof name!=='string' || !name || name.indexOf('\x00')>=0)throw new Error('ARCHIVE_FOLDER_NAME');
   prefix.push(name);var cacheKey=JSON.stringify([c.archiveRootId,prefix]);
   var cached=MGS_ARCHIVE_FAST && MGS_ARCHIVE_FAST.folders[cacheKey];
   if(cached){var cm=mgsArchiveMeta(cached);if(cm.trashed || cm.driveId || cm.name!==name || !cm.parents || cm.parents.length!==1 || cm.parents[0]!==parent || !(cm.owners || []).some(function(o){return o.emailAddress===c.account;}))throw new Error('ARCHIVE_FOLDER_CACHE_DRIFT');parent=cached;continue;}

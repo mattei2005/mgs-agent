@@ -25,7 +25,7 @@ def build(raw,extension):
  ("      } catch(error) {\n        var reason=String(error && error.message || error).slice(0,240);", "      } catch(error) {\n        if(error.mgsArchiveCooperativeYield){summary.yielded=true;break;}\n        var reason=String(error && error.message || error).slice(0,240);"),
  ("  var page=Drive.Files.list({q:q,pageSize:2,fields:'nextPageToken,files(id)'});", "  var page=mgsArchiveFastRead(function(){return Drive.Files.list({q:q,pageSize:2,fields:'nextPageToken,files(id)'});});"),
  ("    mgsArchiveWriteHeartbeat(c,summary);console.log(JSON.stringify(summary));return summary;", "    if(!rows.length && !summary.blocked.length && summary.canaryAcknowledged)summary.backfillTree=mgsArchiveFastFinalizeTree(c,summary,start);\n    if(summary.blocked.length)summary.status='blocked';\n    mgsArchiveWriteHeartbeat(c,summary);console.log(JSON.stringify(summary));return summary;"),
- ("  var f=mgsArchiveOne(c.requestsFolderId,'backup-activation:'+MGS_BACKUP_PINS.planSha256);if(!f)return out;\n  var act=mgsCorporateSaObject(c,f,'backup-activation:'+MGS_BACKUP_PINS.planSha256,'backup_activation').body;", "  var activationKey='backup-activation:'+MGS_BACKUP_PINS.planSha256+':'+c.workerSha256;\n  var f=mgsArchiveOne(c.requestsFolderId,activationKey);if(!f){out.status='awaiting_sa_reacceptance';return out;}\n  var act=mgsCorporateSaObject(c,f,activationKey,'backup_activation').body;")]
+ ("  var f=mgsArchiveOne(c.requestsFolderId,'backup-activation:'+MGS_BACKUP_PINS.planSha256);if(!f)return out;\n  var act=mgsCorporateSaObject(c,f,'backup-activation:'+MGS_BACKUP_PINS.planSha256,'backup_activation').body;", "  var activationKey='backup-activation-v2:'+mgsArchiveHash(MGS_BACKUP_PINS.planSha256+'|'+c.workerSha256);\n  var f=mgsArchiveOne(c.requestsFolderId,activationKey);if(!f){out.status='awaiting_sa_reacceptance';return out;}\n  var act=mgsCorporateSaObject(c,f,activationKey,'backup_activation').body;")]
  for old,new in changes:
   if text.count(old)!=1:raise b.ArchiveError('EFFICIENCY_REPLACEMENT_COUNT:'+old[:80])
   text=text.replace(old,new)
@@ -33,14 +33,16 @@ def build(raw,extension):
 
 def prepare():
  raw=build(BASE.read_bytes(),EXTENSION.read_bytes())
- if TARGET.exists() and TARGET.read_bytes()!=raw:raise b.ArchiveError('EFFICIENCY_IMMUTABLE_SOURCE_CHANGED')
+ if TARGET.exists() and TARGET.read_bytes()!=raw:
+  stage=b.read_json(a.STAGE,{})
+  if stage.get('worker_sha256')==sha(TARGET.read_bytes()):raise b.ArchiveError('EFFICIENCY_IMMUTABLE_SOURCE_CHANGED')
  TARGET.write_bytes(raw);subprocess.run(['node','--check',str(TARGET)],capture_output=True,check=True)
  return {'authorization_message_id':AUTH,'worker_sha256':sha(raw),'worker_source_path':str(TARGET.relative_to(b.BASE)),'status':'prepared_not_owner_deployed','base_worker_sha256':BASE_SHA}
 
 def sync_whole(s):
  whole=b.read_json(a.m.DATA/'stage.json',{})
  if whole.get('worker_sha256') not in [BASE_SHA,s['worker_sha256']]:raise b.ArchiveError('EFFICIENCY_WHOLE_STAGE_DRIFT')
- whole.update(worker_file_id=s['worker_file_id'],worker_sha256=s['worker_sha256'],worker_source_path=s['worker_source_path'],previous_active_worker_file_id=s['previous_active_worker_file_id'],previous_active_worker_sha256=BASE_SHA,status=s['status'],owner_repin_confirmed=False,efficiency_authorization_message_id=AUTH)
+ whole.update(worker_file_id=s['worker_file_id'],worker_sha256=s['worker_sha256'],worker_source_path=s['worker_source_path'],previous_active_worker_file_id=s['previous_active_worker_file_id'],previous_active_worker_sha256=BASE_SHA,status=s['status'],owner_repin_confirmed=s.get('owner_accepted') is True,efficiency_authorization_message_id=AUTH)
  b.atomic_json(a.m.DATA/'stage.json',whole)
 
 def publish():
