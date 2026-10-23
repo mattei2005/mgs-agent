@@ -69,7 +69,7 @@ def verify_stock_root(d):
     return meta
 
 def stock_parent(d,parent):
-    verify_stock_root(d)
+    if active():verify_stock_root(d)
     return d.relative_parent(parent,stock_root())
 
 def staging_relative_parent(d,parent):

@@ -11,6 +11,7 @@ import sys,json,hashlib,urllib.parse,urllib.request
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import ares_archive_bridge as b
+import ares_archive_locations as locations
 SHORTCUT='application/vnd.google-apps.shortcut'
 class StorageError(b.ArchiveError):pass
 
@@ -20,9 +21,9 @@ def media_record(entry,physical,stock):
     if str(physical.get('size'))!=str(entry.get('size')) or physical.get('md5Checksum')!=entry.get('md5') or (physical.get('sha256Checksum') is not None and physical['sha256Checksum']!=entry['sha256']):raise StorageError('ARCHIVE_CONTENT_CHANGED')
     if len(physical.get('parents',[]))!=1 or (entry.get('archiveParentId') and physical['parents']!=[entry['archiveParentId']]):raise StorageError('ARCHIVE_PARENT_CHANGED')
     if any(p.get('type') in ['domain','anyone'] for p in physical.get('permissions',[])):raise StorageError('ARCHIVE_PUBLIC')
-    if stock.get('id')!=entry.get('stockShortcutId') or stock.get('mimeType')!=SHORTCUT or stock.get('driveId')!=b.SOURCE_DRIVE or stock.get('trashed') is not False or len(stock.get('parents',[]))!=1 or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or stock.get('name')!=physical['name']:raise StorageError('STOCK_SHORTCUT_CHANGED')
+    if stock.get('id')!=entry.get('stockShortcutId') or stock.get('mimeType')!=SHORTCUT or not locations.stock_metadata_allowed(stock) or stock.get('trashed') is not False or len(stock.get('parents',[]))!=1 or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or stock.get('name')!=physical['name']:raise StorageError('STOCK_SHORTCUT_CHANGED')
     capabilities={**stock.get('capabilities',{}),'canDownload':physical.get('capabilities',{}).get('canDownload',False)}
-    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':physical['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock['driveId'],'parents':list(stock['parents']),'trashed':False,'capabilities':capabilities,'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry.get('jobId'),'lineage_id':entry['lineageId']}
+    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':physical['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock.get('driveId'),'parents':list(stock['parents']),'trashed':False,'capabilities':capabilities,'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry.get('jobId'),'lineage_id':entry['lineageId']}
 
 def require_registered_mapping(entry,index):
     job=index.get('verified_jobs',{}).get(entry.get('jobId'))
@@ -84,12 +85,12 @@ def resolve_media(source_id,token=None):
         d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry.get('stockShortcutId') or source_id)
         require_historical_ack(d,entry)
         if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=entry['relativeParent']:raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
-        d.relative_parent(stock['parents'][0],b.SOURCE_ROOT)
+        locations.stock_parent(d,stock['parents'][0])
         return historical_media_record(entry,physical,stock)
     if not entry.get('stockShortcutId'):raise StorageError('ARCHIVE_STOCK_ALIAS_NOT_READY')
     d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry['stockShortcutId'])
     if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=entry['relativeParent']:raise StorageError('ARCHIVE_PATH_CHANGED')
-    d.relative_parent(stock['parents'][0],b.SOURCE_ROOT)
+    locations.stock_parent(d,stock['parents'][0])
     return media_record(entry,physical,stock)
 
 def project_stock(rows,token=None):
@@ -151,8 +152,8 @@ def _move_checked_entry(d,entry,target_parent_id,expected_parent_id,*,technical=
     physical=meta(d,entry['archiveId']);stock=meta(d,entry['stockShortcutId']);before=media_record(entry,physical,stock)
     if before['parents']!=[expected_parent_id]:raise StorageError('STOCK_PARENT_CAS')
     destination=meta(d,target_parent_id)
-    if destination.get('driveId')!=b.SOURCE_DRIVE or destination.get('trashed') or destination.get('mimeType')!=b.FOLDER:raise StorageError('STOCK_DESTINATION_SCOPE')
-    current_path=d.relative_parent(expected_parent_id,b.SOURCE_ROOT);new_path=d.relative_parent(target_parent_id,b.SOURCE_ROOT)
+    if not locations.stock_metadata_allowed(destination) or destination.get('trashed') or destination.get('mimeType')!=b.FOLDER:raise StorageError('STOCK_DESTINATION_SCOPE')
+    current_path=locations.stock_parent(d,expected_parent_id);new_path=locations.stock_parent(d,target_parent_id)
     if current_path[:-1]!=new_path[:-1] or new_path[-1] not in ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']:raise StorageError('STOCK_STATUS_SCOPE')
     if technical and current_path[:2]!=['00_ARQUIVO_CONTROLE','TEST_INPUTS_INTAKE_AUTOMATION']:raise StorageError('TECHNICAL_STOCK_SCOPE')
     params={'supportsAllDrives':'true','addParents':target_parent_id,'removeParents':expected_parent_id,'fields':'id,parents,driveId'};d.api('PATCH','files/'+entry['stockShortcutId'],params,{})
@@ -208,18 +209,18 @@ def historical_media_record(entry,physical,stock):
     if str(physical.get('size'))!=str(entry['size']) or physical.get('md5Checksum')!=entry['md5'] or (physical.get('sha256Checksum') is not None and physical['sha256Checksum']!=entry['sha256']) or any(p.get('type') in ['anyone','domain'] for p in physical.get('permissions',[])):raise StorageError('HISTORICAL_PROVIDER_CONTENT_OR_PUBLIC')
     if entry.get('mimeType') and physical.get('mimeType')!=entry['mimeType']:raise StorageError('HISTORICAL_PROVIDER_MIME')
     alias=bool(entry.get('stockShortcutId'))
-    if stock.get('id')!=(entry['stockShortcutId'] if alias else entry['sourceId']) or stock.get('trashed') is not False or stock.get('driveId')!=b.SOURCE_DRIVE or len(stock.get('parents',[]))!=1:raise StorageError('HISTORICAL_STOCK_IDENTITY')
+    if stock.get('id')!=(entry['stockShortcutId'] if alias else entry['sourceId']) or stock.get('trashed') is not False or not locations.stock_metadata_allowed(stock) or len(stock.get('parents',[]))!=1:raise StorageError('HISTORICAL_STOCK_IDENTITY')
     if alias:
         if stock.get('mimeType')!=SHORTCUT or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId']:raise StorageError('HISTORICAL_ALIAS_TARGET')
     elif str(stock.get('size'))!=str(entry['size']) or stock.get('mimeType')!=physical.get('mimeType') or stock.get('md5Checksum')!=entry['md5'] or (stock.get('sha256Checksum') is not None and stock['sha256Checksum']!=entry['sha256']):raise StorageError('HISTORICAL_RETAINED_SOURCE_CONTENT')
-    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','mapping_kind':'historical_verified','stock_representation':'shortcut' if alias else 'retained_source','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':stock['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock['driveId'],'parents':list(stock['parents']),'trashed':False,'capabilities':{**stock.get('capabilities',{}),'canDownload':physical.get('capabilities',{}).get('canDownload',False)},'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry['jobId'],'lineage_id':entry.get('lineageId')}
+    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','mapping_kind':'historical_verified','stock_representation':'shortcut' if alias else 'retained_source','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':stock['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock.get('driveId'),'parents':list(stock['parents']),'trashed':False,'capabilities':{**stock.get('capabilities',{}),'canDownload':physical.get('capabilities',{}).get('canDownload',False)},'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry['jobId'],'lineage_id':entry.get('lineageId')}
 
 def move_historical_retained_stock(d,entry,target_parent_id,expected_parent_id):
     stock_id=entry.get('stockShortcutId') or entry['sourceId'];physical=meta(d,entry['archiveId']);stock=meta(d,stock_id);before=historical_media_record(entry,physical,stock);require_historical_ack(d,entry)
     if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=entry['relativeParent']:raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
     if stock['parents']!=[expected_parent_id]:raise StorageError('HISTORICAL_STOCK_PARENT_CAS')
-    destination=meta(d,target_parent_id);current=d.relative_parent(expected_parent_id,b.SOURCE_ROOT);target=d.relative_parent(target_parent_id,b.SOURCE_ROOT)
-    if destination.get('driveId')!=b.SOURCE_DRIVE or destination.get('trashed') or destination.get('mimeType')!=b.FOLDER or current[:-1]!=target[:-1] or not target or target[-1] not in ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']:raise StorageError('HISTORICAL_STOCK_STATUS_SCOPE')
+    destination=meta(d,target_parent_id);current=locations.stock_parent(d,expected_parent_id);target=locations.stock_parent(d,target_parent_id)
+    if not locations.stock_metadata_allowed(destination) or destination.get('trashed') or destination.get('mimeType')!=b.FOLDER or current[:-1]!=target[:-1] or not target or target[-1] not in ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']:raise StorageError('HISTORICAL_STOCK_STATUS_SCOPE')
     d.api('PATCH','files/'+stock_id,{'supportsAllDrives':'true','addParents':target_parent_id,'removeParents':expected_parent_id,'fields':'id,parents,driveId'},{})
     after=historical_media_record(entry,meta(d,entry['archiveId']),meta(d,stock_id))
     if after['parents']!=[target_parent_id] or after['provider_metadata']['parents']!=physical['parents'] or after['md5Checksum']!=before['md5Checksum']:raise StorageError('HISTORICAL_STOCK_MOVE_READBACK')

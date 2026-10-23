@@ -16,7 +16,7 @@ POLICY=HOME/'policy.json'
 STATE=HOME/'state.json'
 COUNTS={'hourly':48,'daily':14,'weekly':8,'monthly':12}
 
-def validate_policy(value,p):
+def validate_policy(value,p) -> dict:
     expected={'schema':'mgs.archive.backup.retention.v1','confirmation_message_id':AUTH,'confirmation_user_id':'344196393512075265','confirmation_thread_id':'1562078493498540042','archive_root_id':p['archiveRootId'],'account':b.ACCOUNT,'retention_count':COUNTS,'action':'trash_only','permanent_delete':False,'protect_latest_pass_restore':True,'protect_pilot':True}
     if not isinstance(value,dict) or any(value.get(k)!=v for k,v in expected.items()):raise b.ArchiveError('RETENTION_POLICY_BINDING')
     if type(value.get('active')) is not bool:raise b.ArchiveError('RETENTION_ACTIVE_TYPE')
@@ -76,13 +76,13 @@ def tick(apply=False,max_files=1):
     with (t.HOME/'backup-lane'/'backup-lane.lock').open('a+') as lane:
         fcntl.flock(lane,fcntl.LOCK_EX)
         with b.queue_lock():
-            p,s=a.load();policy=b.read_json(POLICY);validate_policy(policy,p)
+            p,s=a.load();policy=validate_policy(b.read_json(POLICY),p)
             sa=b.Drive();view=inspect(sa,p)
             out={'schema':'mgs.archive.backup.retention.tick.v1','executed_at':b.now_iso(),'status':'ok','active':policy['active'],'confirmation_message_id':AUTH,'action':'trash_only','permanent_delete':False,'candidates':view['candidates'],'protected_ids':view['protected_ids'],'trashed':[],'blocked':[]}
             if not apply:return out
             if not policy['active']:raise b.ArchiveError('RETENTION_NOT_ACTIVE')
             state=b.read_json(STATE,{'schema':'mgs.archive.backup.retention.state.v1','intents':{}})
-            if state.get('schema')!='mgs.archive.backup.retention.state.v1':raise b.ArchiveError('RETENTION_STATE_SCHEMA')
+            if not isinstance(state,dict) or state.get('schema')!='mgs.archive.backup.retention.state.v1' or not isinstance(state.get('intents'),dict):raise b.ArchiveError('RETENTION_STATE_SCHEMA')
             owner=t.OwnerDrive()
             # Reconcile previously landed intents, never resubmit them.
             for fid,intent in state['intents'].items():
