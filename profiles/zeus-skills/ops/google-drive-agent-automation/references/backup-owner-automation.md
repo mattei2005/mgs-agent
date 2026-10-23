@@ -29,6 +29,10 @@ Use this sequence after owner setup or repinning is complete and the original au
 
 Generate retention preview across source and archive IDs without duplicates, using unchanged per-tier counts. Keep source-expired/unverified data and the last restore-proven generation protected. A preview candidate is NOT a trash command. Do not implement/activate owner deletion or reinterpret `canEdit`/`canDownload` as `canTrash`; separately confirmed archive-retention mutation is still required.
 
+## Confirmed private-owner retention execution
+
+After the separate destructive confirmation, keep retention in a **separate versioned policy** rather than rewriting immutable historical move plans/ACKs whose trash flag was false. Use the approved tier counts, trash only, and protect both the pilot and the latest actual isolated PASS restore generation. Compute the union of source/archive IDs without duplicates; preserve source-expired and unverified files. Accept current direct-to-archive backups only through their exact native canonical-SA direct-upload ACK, full-stream proof, parent/root and checksums—not the owner slot alone. Immediately before each bounded trash RPC, recompute eligibility/protection, verify the exact native ACK and metadata/version CAS, journal the intent, and read back the same ID through owner and SA with `trashed:true`, unchanged bytes/properties/parent and no permanent DELETE. Reconcile an unknown outcome without replay. Preserve recurrence on the existing monitor and distinguish confirmed/active policy, actual trash execution, zero-current-candidate validation and the independent move lane's still-immutable trash-disabled contract.
+
 ## Current entry points
 
 - `scripts/mgs_backup_automation.py prepare|publish|preview|tick`
