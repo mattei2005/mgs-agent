@@ -92,3 +92,11 @@ Pendências materiais: terminar todos os binários, migrar controles/slots e doc
 - Pergunta Critical Subset feita na origem: aplicar no destino a retenção 48 horários/14 diários/8 semanais/12 mensais, protegendo o último restore validado e usando somente lixeira. **Ainda não confirmada, implementada ou ativada**; `archive_trash_enabled:false` e preview-only preservados. Essa decisão é separada da migração já autorizada e não impede transferências seguras. Não pedir novamente OAuth, aprovação de cópia histórica ou extensão aos backups.
 - REPORT-INFRA `1563100493679558697`; inventário `whole-drive-continuation-1563087441114701906`. Aprendizado de escopos do controle e slots mutáveis salvo na referência privada da skill Google Drive e mirror, com readback.
 
+## Recuperação do monitor — fonte técnica migrada em 2026-10-23
+
+O `SOURCE_CHANGED` do job `8629437adc61cfe9236da37549f0ecce`, detectado às `10:12:50Z`, era a validação das duas imagens `validationOnly` que foram movidas com os controles já autorizados. O snapshot e o readback integral anteriores incluem os mesmos IDs/bytes; a localização mudou legitimamente para `_MGS_CONTROLE` nos 30 TB. Não é quota, alteração de conteúdo nem nova tentativa owner.
+
+Corrigido somente o reconciliador SA em `ares_archive_bridge.py`: admite essas fontes técnicas apenas com membership exata no snapshot congelado e comprovante de cutover, parents antigo/novo vinculados, owner/publisher nativos, propriedades, ancestria, hashes e streams integrais. Fontes de produção continuam no contrato original. Nenhum request, recibo ou ACK foi reescrito; a releitura confirmou os mesmos três IDs e hashes de corpo. Nenhuma recópia/exclusão, mudança de flag, agenda, credencial ou novo writer.
+
+Prova: `owner-connector/control-store/cutover/validation-fixture-source-recovery.json`; job exato revalidado às `10:17:43Z`. Passaram 139 testes focados, incluindo nove novos e suas recusas de drift. Monitor completo real às `10:20:28.843169Z` retornou `status:ok`, `blocked:[]`, exit 0. Esta é recuperação integral desse incidente, não conclusão da migração. Acervo, estoque/consumidores/layout e gates de retirada/retention permanecem como no checkpoint anterior.
+

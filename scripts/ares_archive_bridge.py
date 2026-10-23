@@ -112,6 +112,64 @@ def validate_source_metadata(meta,a,c):
     if current!=frozen and native!=a['sha256']:raise ArchiveError('SOURCE_VERSION_WITHOUT_CONTENT_PROOF')
     return True
 
+def validate_reconciliation_source(d,meta,a,c,job):
+    """Accept only frozen test controls relocated by the verified control cutover.
+
+    Production media keeps the original source contract. Never rewrite its job
+    or project a synthetic Shared Drive response for an actual My Drive file.
+    """
+    if meta.get('driveId')==c['source_drive_id'] or job.get('validationOnly') is not True:
+        return validate_source_metadata(meta,a,c)
+    home=DATA/'owner-connector/control-store'
+    binding=read_json(home/'binding.json',{})
+    snapshot=read_json(home/'cutover/source-snapshot.json',{})
+    proof=read_json(home/'cutover/verified-files.json',{})
+    if (binding.get('schema')!='mgs.private.control.binding.v1'
+        or binding.get('approval_message_id')!='1562972150455992431'
+        or binding.get('production_enabled') is not True
+        or binding.get('migration_pending') is not False
+        or not binding.get('cutover_verified_at')
+        or binding.get('root_id')!=c.get('control_folder_id')
+        or snapshot.get('schema')!='mgs.private.control.cutover.snapshot.v1'
+        or snapshot.get('approval_message_id')!=binding['approval_message_id']
+        or snapshot.get('new_control_root')!=binding['root_id']
+        or proof.get('schema')!='mgs.private.control.cutover.files.v1'):
+        raise ArchiveError('VALIDATION_CONTROL_CUTOVER_BINDING')
+    rows=[x for x in snapshot.get('files',[]) if x.get('id')==a['sourceId']]
+    receipts=[x for x in proof.get('files',[]) if x.get('id')==a['sourceId']]
+    if len(rows)!=1 or len(receipts)!=1:raise ArchiveError('VALIDATION_CONTROL_MEMBERSHIP')
+    row=rows[0];receipt=receipts[0];parent=binding.get('folder_map',{}).get(a['sourceParentId'])
+    if (not parent or parent not in binding.get('parent_ids',[])
+        or row.get('old_parent')!=a['sourceParentId'] or row.get('new_parent')!=parent
+        or row.get('sha256')!=a['sha256'] or row.get('size')!=a['size']
+        or row.get('name')!=a['name'] or row.get('mime')!=a['mimeType']
+        or row.get('verification_kind')!='full_bytes'
+        or row.get('publisher_permission_id')!=PUBLISHER_PERMISSION_IDS[CANONICAL_SA]
+        or row.get('properties',{}).get('mgsArchiveType')!='archive_test_media'
+        or meta.get('properties')!=row.get('properties')
+        or receipt.get('new_parent')!=parent or receipt.get('sha256')!=a['sha256']
+        or receipt.get('verified') is not True or receipt.get('publisher_preserved') is not True):
+        raise ArchiveError('VALIDATION_CONTROL_CUTOVER_PROOF')
+    expected={'id':a['sourceId'],'name':a['name'],'mimeType':a['mimeType'],
+              'size':a['size'],'md5Checksum':a['md5'],'sha256Checksum':a['sha256'],
+              'createdTime':a['sourceCreatedTime']}
+    if (any(meta.get(k)!=v for k,v in expected.items()) or meta.get('parents')!=[parent]
+        or not control_object_scope(meta,parent) or meta.get('trashed') is not False):
+        raise ArchiveError('VALIDATION_CONTROL_SOURCE_CHANGED')
+    require_publisher(meta,CANONICAL_SA,'VALIDATION_CONTROL_PUBLISHER')
+    current=meta.get('version');frozen=a.get('version')
+    if (not isinstance(current,str) or not isinstance(frozen,str)
+        or not re.fullmatch(r'[0-9]+',current) or not re.fullmatch(r'[0-9]+',frozen)
+        or int(current)<int(frozen)):raise ArchiveError('SOURCE_VERSION_INVALID')
+    root=d.meta(binding['root_id'])
+    if (root.get('id')!=binding['root_id'] or root.get('parents')!=[c['archive_root_id']]
+        or root.get('mimeType')!=FOLDER or root.get('driveId') or root.get('trashed') is not False
+        or not any(x.get('emailAddress')==ACCOUNT for x in root.get('owners',[]))
+        or any(x.get('type') in ['anyone','domain'] for x in root.get('permissions',[]))):
+        raise ArchiveError('VALIDATION_CONTROL_ROOT')
+    d.relative_parent(parent,binding['root_id'])
+    return True
+
 def validate_receipt(job,r):
     if r.get('schema')!='mgs.archive.receipt.v1' or r.get('jobId')!=job['jobId'] or r.get('status')!='copied' or r.get('deleteSource') is not False: raise ArchiveError('RECEIPT_NOT_COPIED')
     expected={(a['role'],a['sourceId']) for a in job['assets']}
@@ -348,10 +406,10 @@ def reconcile(d,c,job_id,apply=False):
         import ares_archive_retirement as retirement
         source=retirement.source_state(d,c,job,a)
         retired=source.get('record_kind')=='mgs.source.retirement.v1'
-        if not retired:validate_source_metadata(source,a,c)
+        if not retired:validate_reconciliation_source(d,source,a,c,job)
         expected={k:a[k] for k in ('size','md5','sha256')}
         if d.hashes(m['id'])!=expected or (not retired and d.hashes(a['sourceId'])!=expected):raise ArchiveError('BINARY_INTEGRITY')
-        if not retired:validate_source_metadata(d.meta(a['sourceId']),a,c)
+        if not retired:validate_reconciliation_source(d,d.meta(a['sourceId']),a,c,job)
         verified.append({'sourceId':a['sourceId'],'archiveId':m['id'],'owner':ACCOUNT,'verified':True,'role':a['role'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'jobId':job_id,'lineageId':job['lineageId'],'relativeParent':a['relativeParent']})
     result={'status':'verified','kind':job['kind'],'jobId':job_id,'assets':verified,'verifiedAt':now_iso(),'deleteSource':False,'inventoryIdentifiersChanged':False}
     if apply:
