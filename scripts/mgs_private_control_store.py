@@ -50,6 +50,11 @@ def owner_slot(j):
   if meta.get('parents')!=[j['parent_id']] or meta.get('driveId') or meta.get('mimeType')!=j['mime'] or not any(x.get('emailAddress')==b.ACCOUNT for x in meta.get('owners',[])):raise b.ArchiveError('CONTROL_SLOT_READBACK')
   return {'schema':'mgs.private.control.slot.response.v1','file_id':fid,'parent_id':j['parent_id'],'key':j['key'],'sha256':j['sha256']}
 
+def publication_properties(kind,digest):
+ props={'mgsArchiveType':kind,'sha256':digest}
+ if kind in {'request','vps_request','vps_backfill_request','vps_backup_move_request'}:props['mgsArchiveState']='queued'
+ return props
+
 def publish_sa(d,parent,name,data,mime,key,kind):
  c=b.read_json(CONFIG,{});j={'schema':'mgs.private.control.slot.request.v1','parent_id':parent,'key':key,'kind':kind,'mime':mime,'name':name,'size':len(data),'sha256':hashlib.sha256(data).hexdigest()};validate_request(j,c)
  old=d.one(parent,key)
@@ -72,8 +77,9 @@ def publish_sa(d,parent,name,data,mime,key,kind):
   with urllib.request.urlopen(request,timeout=90) as r:json.load(r)
  except Exception:
   if d.raw(fid)!=data:raise b.ArchiveError('CONTROL_SA_PUBLICATION_UNKNOWN') from None
- d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id'},{'properties':{'mgsArchiveType':kind,'sha256':j['sha256']}})
+ d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id'},{'properties':publication_properties(kind,j['sha256'])})
  after=d.meta(fid);b.require_publisher(after,b.CANONICAL_SA)
+ if any(after.get('properties',{}).get(k)!=v for k,v in publication_properties(kind,j['sha256']).items()):raise b.ArchiveError('CONTROL_SA_PUBLICATION_PROPERTIES_READBACK')
  if after.get('parents')!=[parent] or after.get('driveId') or after.get('properties',{}).get('sha256')!=j['sha256'] or after['properties'].get('mgsArchiveType')!=kind or d.raw(fid)!=data:raise b.ArchiveError('CONTROL_SA_PUBLICATION_READBACK')
  return fid
 

@@ -19,4 +19,10 @@ class SlotScope(unittest.TestCase):
   j={**self.j,'kind':'stock_layout_snapshot'};self.assertTrue(c.validate_request(j,self.binding))
   with self.assertRaises(c.b.ArchiveError):c.validate_request({**j,'parent_id':'FOREIGN'},self.binding)
   with self.assertRaises(c.b.ArchiveError):c.validate_request({**j,'mime':'video/mp4'},self.binding)
+ def test_new_private_requests_are_natively_claimable(self):
+  for kind in ['request','vps_request','vps_backfill_request','vps_backup_move_request']:
+   self.assertEqual(c.publication_properties(kind,'a'*64)['mgsArchiveState'],'queued')
+ def test_nonrequest_documents_never_get_queue_state(self):
+  for kind in ['stock_layout_snapshot','backfill_ack','backup_ack','receipt']:
+   self.assertNotIn('mgsArchiveState',c.publication_properties(kind,'a'*64))
 if __name__=='__main__':unittest.main()
