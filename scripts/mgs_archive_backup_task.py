@@ -29,6 +29,10 @@ def supervise():
     # persisted intent/ID/receipt before any mutation. Preserve the failed log.
     b.atomic_json(HOME/('failed-task-'+state.get('run_id','unknown')+'.json'),{**state,'detected_at':now,'reason':'child_lost_without_result','retry_strategy':'same bound journal, native reconciliation before move'})
    if prior and (prior.get('schema')!='mgs.private.backup.heartbeat.v1' or prior.get('status')!='ok' or prior.get('blocked')):return {'status':'blocked','blocked':prior.get('blocked') or [{'component':'private_backup_child','reason':'PRIVATE_BACKUP_CHILD_RESULT_INVALID'}],'sa_cycle':{'status':'private_backup_child_failed','blocked':[]}}
+   if prior:
+    # A completed valid native child closes the lost-result recovery episode.
+    # Keeping its old retry count forever skipped the normal SA cycle.
+    recovery_attempts=0
   # An explicitly supervised foreground drain/canary can own the same lane.
   with (HOME/'backup-lane.lock').open('a+') as lane:
    try:fcntl.flock(lane,fcntl.LOCK_EX|fcntl.LOCK_NB)

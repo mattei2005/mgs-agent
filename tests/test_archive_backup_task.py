@@ -14,4 +14,9 @@ class BackupTasks(unittest.TestCase):
  def test_idle_lane_runs_canonical_producer_then_exact_private_child(self):
   with tempfile.TemporaryDirectory() as tmp,patch.object(t,'HOME',Path(tmp)),patch.object(t,'start_ticks',return_value='NEW'),patch.object(t.a,'cycle',return_value={'status':'ok','blocked':[]}) as cycle,patch.object(t.subprocess,'run',side_effect=[Mock(returncode=0),Mock(returncode=0,stdout='456\n')]) as spawn:
    out=t.supervise();cycle.assert_called_once_with(apply=True);self.assertTrue(out['in_progress']);args=spawn.call_args_list[0].args[0];self.assertEqual(args[0],'systemd-run');self.assertEqual(args[-3:],[str(t.b.BASE/'scripts/mgs_private_backup_transport.py'),'tick','--apply']);state=json.loads((Path(tmp)/'background-task.json').read_text());self.assertEqual(state['pid'],456);self.assertEqual(state['start_ticks'],'NEW')
+ def test_successful_child_resets_recovery_and_resumes_sa_cycle(self):
+  with tempfile.TemporaryDirectory() as tmp,patch.object(t,'HOME',Path(tmp)),patch.object(t,'start_ticks',side_effect=[None,'NEW']),patch.object(t.a,'cycle',return_value={'status':'ok','blocked':[]}) as cycle,patch.object(t.subprocess,'run',side_effect=[Mock(returncode=0),Mock(returncode=0,stdout='456\n')]):
+   result=Path(tmp)/'last.json';result.write_text(json.dumps({'schema':'mgs.private.backup.heartbeat.v1','status':'ok','blocked':[],'moved':[]}))
+   (Path(tmp)/'background-task.json').write_text(json.dumps({'pid':123,'start_ticks':'OLD','recovery_attempts':1,'result_path':str(result)}))
+   out=t.supervise();cycle.assert_called_once_with(apply=True);self.assertEqual(out['sa_cycle']['status'],'ok');self.assertEqual(json.loads((Path(tmp)/'background-task.json').read_text())['recovery_attempts'],0)
 if __name__=='__main__':unittest.main()
