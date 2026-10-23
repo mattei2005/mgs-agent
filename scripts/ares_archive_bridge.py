@@ -125,7 +125,7 @@ def validate_reconciliation_source(d,meta,a,c,job):
         if locations.active():
             import mgs_archive_layout_cutover as layout
             frozen=read_json(layout.SNAPSHOT,{}).get('objects',{})
-            if a['sourceId'] in frozen:return layout.verify_relocated(d,meta,a)
+            if a['sourceId'] in frozen:return layout.verify_relocated(d,meta,a,job=job)
     if meta.get('driveId')==c['source_drive_id'] or job.get('validationOnly') is not True:
         return validate_source_metadata(meta,a,c)
     home=DATA/'owner-connector/control-store'
