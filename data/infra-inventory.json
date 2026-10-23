@@ -52783,12 +52783,26 @@
         "tests_passed": 53,
         "source_pattern_and_long_literal_scan": "PASS",
         "bash_syntax_and_git_diff_check": "PASS",
-        "sibling_and_copy_negative_cases": "PASS"
+        "sibling_and_copy_negative_cases": "PASS",
+        "validated_commit": "66f22a9fa7bc65c96de4648f78f882cb514b8c15",
+        "remote_main_equals_head": true,
+        "monitor_dry_run_failures": 0,
+        "persistent_service": "active/running",
+        "persistent_batch_target": 10,
+        "persistent_max_wait": 600,
+        "restart_lock_race": "Recovered after asynchronous push released inherited watcher lock; persistent service rechecked active"
       },
-      "state": "tests_passed_awaiting_native_watcher_and_remote_validation",
+      "state": "resolved_validated",
       "credentials_changed": false,
       "manual_commit_or_push": false,
-      "report_infra_status": "pending_validation"
+      "report_infra_status": "sent_and_get_verified",
+      "report_infra": {
+        "message_id": "1563020860636528701",
+        "channel_id": "1498132022634483894",
+        "readback_verified": true,
+        "content_empty": true,
+        "mentions": 0
+      }
     },
     {
       "id": "autopush-direct-backup-source-1563011855641739308",
