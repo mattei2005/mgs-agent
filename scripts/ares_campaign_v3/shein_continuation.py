@@ -31,9 +31,71 @@ def schedule_matches(expected, observed):
     if a==b:return True
     context=APPROVED_RESUME.get()
     if not context or (context.get('verified') or {}).get('verified') is not True:return False
+    accepted=context['verified'].get('accepted_schedule')
+    if accepted:
+        return (a == datetime.fromisoformat(accepted['expected']).astimezone(timezone.utc)
+                and b == datetime.fromisoformat(accepted['observed']).astimezone(timezone.utc))
     preserved=context['descriptor'].get('preserved_start_time')
     approved=context['state']['manifest']['campaigns'][0]['start_time']
     return bool(preserved and str(expected)==approved and b==datetime.fromisoformat(preserved).astimezone(timezone.utc) and 0 <= (b-a).total_seconds() <= 1)
+
+
+def reviewed_schedule_proof(descriptor, state, checkpoint, *, get_message):
+    """Exact observed time explicitly reviewed in origin, never a tolerance."""
+    from zoneinfo import ZoneInfo
+    from .shein_copy_schedule import _instant
+    if (descriptor.get('late_activation_authorized') is not True
+            or descriptor.get('reviewed_observed_copy_time') is not True
+            or descriptor.get('recovery_review_content', '').strip().lower() != 'sim'):
+        raise ValueError('explicit exact schedule review required')
+    aid=str(descriptor['account_id']);account=state.get('account') or {}
+    if account.get('id') != 'act_'+aid or str(checkpoint.get('account_id')) != aid or checkpoint.get('status') != 'COMPLETE':
+        raise ValueError('reviewed schedule account/copy provenance unavailable')
+    expected=state['request']['start_time'];observed=descriptor['preserved_start_time']
+    a,b=_instant(expected),_instant(observed);zone=ZoneInfo(account['timezone_name'])
+    if not a < b or a.astimezone(zone).date() != b.astimezone(zone).date():
+        raise ValueError('reviewed schedule outside original local day')
+    shells=state['manifest']['campaigns'];targets=state['target_manifest']['campaigns']
+    cids=[];sids=[];numbers=[]
+    if not shells or len(shells) != len(targets):raise ValueError('reviewed schedule manifest coverage missing')
+    for shell,target in zip(shells,targets):
+        if any(str(x.get('account_id')) != aid or _instant(x['start_time']) != a for x in [shell,target]):
+            raise ValueError('reviewed schedule manifest mismatch')
+        key=shell['idempotency_key']
+        if target['idempotency_key'] != key:raise ValueError('reviewed target slot mismatch')
+        bundles=[v for v in checkpoint['bundles'] if key in v.get('idempotency_keys',[])]
+        if len(bundles) != 1:raise ValueError('reviewed copy slot ambiguous')
+        bundle=bundles[0];index=bundle['idempotency_keys'].index(key)
+        window=bundle['timings']['adset_copy']
+        if (bundle.get('status') != 'COMPLETE' or not _instant(window['started_at']).replace(microsecond=0) <= b <= _instant(window['finished_at'])):
+            raise ValueError('reviewed time outside exact native copy window')
+        rows={r['name']:r['body'] for r in bundle['readback_results'] if r.get('code')==200}
+        campaign=rows['readback_campaign_'+str(index+1)];adsets=rows['readback_adsets_'+str(index+1)]['data']
+        cid=str(bundle['campaign_ids'][index]);sid=str(bundle['adset_ids'][index])
+        if (str(campaign.get('id')) != cid or str(campaign.get('account_id')) != aid
+                or _instant(campaign['start_time']) != b or len(adsets) != 1
+                or str(adsets[0]['id']) != sid or _instant(adsets[0]['start_time']) != b):
+            raise ValueError('reviewed exact campaign/adset schedule provenance mismatch')
+        cids.append(cid);sids.append(sid);numbers.append(str(int(shell['name'].split(' - ')[0])))
+    prompt_id=str(descriptor.get('schedule_review_prompt_message_id') or '')
+    review_id=str(descriptor.get('recovery_review_message_id') or '')
+    if not all(re.fullmatch(r'[0-9]{17,20}',x) for x in [prompt_id,review_id]):raise ValueError('schedule review prompt missing')
+    origin=descriptor['source_thread_id']
+    prompt=get_message('/channels/'+origin+'/messages/'+prompt_id)
+    previous=get_message('/channels/'+origin+'/messages?before='+review_id+'&limit=100')
+    time_label=b.astimezone(zone).strftime('%Hh%Mmin%Ss')
+    question='Você autoriza manter **'+time_label+'** nas '+ '/'.join(numbers)+' e concluir a ativação agora, sem recriá-las?'
+    if (not isinstance(previous,list) or not any(str(x.get('id')) == prompt_id for x in previous)
+            or any(int(x.get('id',0)) > int(prompt_id) and not (
+                str((x.get('author') or {}).get('id')) == '1508864261504630925'
+                and (x.get('author') or {}).get('bot')
+                and x.get('content','').startswith('💾 Self-improvement review:')) for x in previous)
+            or str(prompt.get('id')) != prompt_id or str(prompt.get('channel_id')) != origin
+            or str((prompt.get('author') or {}).get('id')) != '1508864261504630925'
+            or not (prompt.get('author') or {}).get('bot') or question not in prompt.get('content','')):
+        raise ValueError('exact preceding Ares schedule question unconfirmed')
+    return {'expected':expected,'observed':observed,'campaign_ids':cids,'adset_ids':sids,
+            'prompt_message_id':prompt_id,'review_message_id':review_id,'schedule_writes':0,'manifest_mutations':0}
 
 
 def _late_review_context(account_id):
@@ -92,7 +154,7 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
         raise ValueError('continuation does not match exact existing confirmed shell IDs and order')
     if quantity > 1 and (len(state['manifest'].get('campaigns') or [])!=quantity or len(state['target_manifest'].get('campaigns') or [])!=quantity):
         raise ValueError('continuation batch does not cover both sealed manifests')
-    if descriptor.get('preserved_start_time'):
+    if descriptor.get('preserved_start_time') and descriptor.get('reviewed_observed_copy_time') is not True:
         expected=datetime.fromisoformat(state['manifest']['campaigns'][0]['start_time']).astimezone(timezone.utc)
         preserved=datetime.fromisoformat(descriptor['preserved_start_time']).astimezone(timezone.utc)
         if not 0 <= (preserved-expected).total_seconds() <= 1:
@@ -119,7 +181,10 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
             or review.get('content') != descriptor['recovery_review_content']):
             raise ValueError('late recovery human review identity/content unconfirmed')
         review_authority = _authorize_late_reviewer(descriptor, original, reviewer)
+    accepted_schedule = (reviewed_schedule_proof(descriptor, state, checkpoint, get_message=get_message)
+                         if descriptor.get('reviewed_observed_copy_time') is True else None)
     return {'verified':True,'request_id':original['request_id'],'account_id':str(descriptor['account_id']),
+            'accepted_schedule':accepted_schedule,
             'campaign_ids':cids,'adset_ids':sids,'source_message_id':mid,'source_thread_id':descriptor['source_thread_id'],
             'start_now':True,'late_activation_authorized':late,'original_execution_started_at':state.get('execution_started_at'),
             'creation_payload_digest':content_digest(state['manifest']),'target_payload_digest':content_digest(state['target_manifest']),
