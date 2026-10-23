@@ -15,7 +15,7 @@ class RelocatedValidationSource(unittest.TestCase):
         self.c = dict(source_drive_id=b.SOURCE_DRIVE, control_folder_id='ROOT',
                       archive_root_id=b.ARCHIVE_ROOT)
         self.job = dict(validationOnly=True, kind='lineage')
-        self.meta = dict(id='SOURCE', parents=['NEW'], name='test.png', mimeType='image/png',
+        self.meta: dict = dict(id='SOURCE', parents=['NEW'], name='test.png', mimeType='image/png',
                          size='10', md5Checksum='a'*32, sha256Checksum='b'*64,
                          createdTime='CREATED', version='3', trashed=False,
                          owners=[dict(emailAddress=b.ACCOUNT)], permissions=[],

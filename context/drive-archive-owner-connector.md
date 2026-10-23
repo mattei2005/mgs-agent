@@ -100,3 +100,9 @@ Corrigido somente o reconciliador SA em `ares_archive_bridge.py`: admite essas f
 
 Prova: `owner-connector/control-store/cutover/validation-fixture-source-recovery.json`; job exato revalidado às `10:17:43Z`. Passaram 139 testes focados, incluindo nove novos e suas recusas de drift. Monitor completo real às `10:20:28.843169Z` retornou `status:ok`, `blocked:[]`, exit 0. Esta é recuperação integral desse incidente, não conclusão da migração. Acervo, estoque/consumidores/layout e gates de retirada/retention permanecem como no checkpoint anterior.
 
+### Cobertura das fixtures de intake — 2026-10-23 10:42Z
+
+O slice seguinte identificou `VALIDATION_CONTROL_CUTOVER_PROOF` no job técnico `c96d0b8f41ff54cdb296fe8a09de4788`: ambas as fontes congeladas usam `intake_test_media`, enquanto a correção anterior admitia somente `archive_test_media`. A SA confirmou os mesmos IDs/parents/hashes/propriedades do snapshot e os recibos de cutover válidos. Não é quota, perda de bytes nem nova falha de cópia owner. A origem foreground já havia finalizado; nenhum writer paralelo foi iniciado.
+
+O reconciliador agora cobre exatamente as duas classes técnicas congeladas, mantendo membership, publisher nativo, owner, parents, ancestry, propriedades e hashes estritos; mídia produtiva continua sem bypass. Foram executados 112 testes focados, incluindo 20 de fontes técnicas e recusas para ambas as classes. O job exato passou novamente com streams integrais de fonte/destino e apply idempotente sob queue lock; request/receipt/ACK conservaram IDs e hashes. Prova `owner-connector/control-store/cutover/intake-fixture-source-recovery-c96d0b8f.json`. Monitor completo real retornou `status:ok`, `blocked:[]` às `10:47:43.250265Z`. Escopo, flags, agendas e gates destrutivos preservados. Migração integral permanece aberta; esta recuperação não é sua conclusão.
+
