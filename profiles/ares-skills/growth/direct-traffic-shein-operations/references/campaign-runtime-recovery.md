@@ -24,6 +24,10 @@ Use quando uma conta permitida falhar no guard técnico, um objeto criado não t
 
 Execute no repositório e use `PYTHONPATH=/root/mgs-agent/scripts` quando necessário. Testes offline e dry-run não comprovam criação ou serving: retome o request autorizado e exija QA/readback reais. Recusa de outra chamada exige novo diagnóstico pontual, não acesso genérico.
 
+## 4. Horário nativo divergente explicitamente aceito
+
+Quando a cópia programada atravessar o horário e a Meta fixar outro timestamp, não aplicar tolerância NOW nem reescrever manifests. Após review humano específico aceitando o horário real e ativação dos mesmos IDs, usar descriptor `shein_continuation` com `reviewed_observed_copy_time=true`, `preserved_start_time` literal e `schedule_review_prompt_message_id`, além das provas originais e do review. A rota valida por GET a pergunta anterior exata do Ares na mesma origem, o `sim` humano/permissões live, todos os números/IDs, conta/fuso/dia, ambos manifests imutáveis e o timestamp exato de campanha/conjunto dentro da janela nativa `adset_copy` persistida. A exceção é um par esperado→observado naquele request; outro segundo ou drift continua recusado. Não aceitar aprovação genérica, resetar SLA, alterar manifests, fazer schedule write ou recriar objetos. QA completo e ativação continuam no Engine. Testar `test_shein_reviewed_observed_schedule.py` e regressões de continuation/schedule antes da retomada; testes não provam ativação/serving. Restauração de horário passado pode ser recusada pela Meta com `100/1487057`; preservar a evidência sem repetir o update.
+
 ## 3. Ativação parcial sem replay
 
 1. Após erro de transporte ou de status, releia `state.phase`, `media_qa`, `qa_proof` e `media_postprocess_complete`. Para `ACTIVATION_PENDING` com QA completo, abra também `engine-v3/state/activation/<request_id>-<account_id>.json`: o checkpoint de criação pode continuar `COMPLETE` sem conter o erro da ativação. Não diagnostique o renderer pelo erro genérico de topo.

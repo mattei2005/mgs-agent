@@ -1543,12 +1543,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1563285235666391112",
-      "next_step": "Concluir fila234/222 pelo mesmo runner e verificar20IDs/budget/status/mídia; preservar warnings de fontes21/81 e horário efetivo de cada grupo.",
-      "objective": "Concluir20cópias USD45 e ativar235/252 conforme mensagem original",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1563285235666391112/aggregate-receipt.json",
-      "state": "review1563289492574445629 validado;277/278 active mesmosids com início16:30:05 e6ads/qa.16cópias concluídas; fila234/222 aguardando consumo. manutenção separada exact-reviewed schedule validada54testes,backups,report retificado/get.",
+      "next_step": "Pedido concluído; não recriar/reexecutar. Aguardar somente revisão Meta dos5anúncios; sem monitor/cron novo.",
+      "objective": "Concluir ativação235/252 e20duplicações USD45/dia autorizadas por Nicolas",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1563285235666391112/aggregate-receipt.json",
+      "state": "complete_verified;235/252 active com parâmetros preservados;20cópias/50ads qa;usd900.0/dia no lote;239→263,264; 102→265,266; 21→267,268; 254→269,270; 184→271,272; 81→273,274; 115→275,276; 247→277,278; 234→281,282; 222→279,280;45ads effective active/5pending_review. 277/278mesmosids,16:30:05 autorizado;22216:40:30;23416:42:57ny. posts novos;21: flags opcionais idade/gênero omitidas; 81: flags opcionais idade/gênero omitidas.",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-10-23T20:39:44+00:00"
+      "updated_at": "2026-10-23T20:44:49+00:00"
     },
     {
       "agent": "ares",
@@ -7242,5 +7242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T20:39:44+00:00"
+  "updated_at": "2026-10-23T20:44:49+00:00"
 }
