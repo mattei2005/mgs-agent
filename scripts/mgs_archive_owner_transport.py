@@ -345,7 +345,10 @@ def run_tick(max_jobs=4,max_seconds=210,origin='foreground',produce=True):
   execution_start=time.monotonic();summary['queue_wait_seconds']=round(execution_start-start,3)
   c=b.config_load();contract=object_file(CONTRACT);handoff=object_file(HOME/'exclusive-handoff.json')
   if c.get('owner_executor_mode')!='vps' or c.get('owner_executor_sha256')!=code_hash() or not contract or contract.get('production_enabled') is not True or contract.get('engine_sha256')!=code_hash() or handoff.get('phase')!='exclusive' or contract.get('approval_message_id')!=auth.APPROVAL:raise TransportError('OWNER_EXECUTION_NOT_ACTIVE_OR_CODE_DRIFT')
-  owner=OwnerDrive();sa=b.Drive(True);manifest,stage=h.manifest_load();engine=Engine(owner,c,manifest,stage);engine.deadline=execution_start+max_seconds;rows=owner.listing(c['requests_folder_id']);jobs=[]
+  owner=OwnerDrive();sa=b.Drive(True)
+  from mgs_archive_read_admission import bounded_hashes
+  sa.hashes=bounded_hashes(sa.hashes)
+  manifest,stage=h.manifest_load();engine=Engine(owner,c,manifest,stage);engine.deadline=execution_start+max_seconds;rows=owner.listing(c['requests_folder_id']);jobs=[]
   for row in rows:
    p=row.get('properties',{})
    if p.get('mgsArchiveState')!='queued':continue

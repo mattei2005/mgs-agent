@@ -84,8 +84,9 @@ def move_one(owner,sa,c,p,s,job,journal):
   cp,_=a.corp.load_plan();a.corp.check_acl(a.corp.h.permissions(sa,x['sourceId']),a.corp.desired(cp,True))
   folder=backup.native_meta(owner,x['destinationParentId'])
   if folder.get('driveId') or folder.get('parents')!=[p['archiveRootId']] or folder.get('name')!=x['tier'] or folder.get('trashed') is not False or not any(z.get('permissionId')==p['ownerPermissionId'] for z in folder.get('owners',[])):raise b.ArchiveError('PRIVATE_BACKUP_DESTINATION_FOLDER')
-  hashes=sa.hashes(x['sourceId'])
+  source_before=backup.native_meta(sa,x['sourceId']);hashes=sa.hashes(x['sourceId'])
   if hashes!={k:x[k] for k in ['size','md5','sha256']}:raise b.ArchiveError('PRIVATE_BACKUP_SOURCE_STREAM')
+  if backup.native_meta(sa,x['sourceId'])!=source_before:raise b.ArchiveError('PRIVATE_BACKUP_SOURCE_CHANGED_DURING_STREAM')
   journal.intent(key,{'job_id':j['jobId'],'source_id':x['sourceId'],'old_parent':x['sourceParentId'],'new_parent':x['destinationParentId'],'request_sha256':a.sha(j)});owner.move_binding=x
   try:owner.api('PATCH','files/'+x['sourceId'],{'supportsAllDrives':'true','addParents':x['destinationParentId'],'removeParents':x['sourceParentId'],'fields':'id'},{})
   except b.ArchiveError:
@@ -150,10 +151,19 @@ def enqueue_historical_locked(sa,c,p,s,state):
   return jid
 
 def tick():
- with b.queue_lock():
+ HOME.mkdir(parents=True,exist_ok=True)
+ with (HOME/'backup-lane.lock').open('a+') as lane:
+  import fcntl
+  fcntl.flock(lane,fcntl.LOCK_EX)
+  return tick_claimed()
+
+def tick_claimed():
+ with b.queue_lock() as writer_lease:
   p,s=a.load();c=b.config_load();handoff=b.read_json(HOME/'handoff.json',{});approval=b.read_json(t.HOME/'whole-drive-scope-confirmation-1562972150455992431.json',{})
   if approval.get('backup_lane_extension_authorized') is not True or s.get('owner_executor_mode') not in ['vps_handoff','vps'] or handoff.get('phase') not in ['canary_pending','active']:raise b.ArchiveError('PRIVATE_BACKUP_NOT_AUTHORIZED_OR_READY')
   owner=Owner();sa=b.Drive(True);state=b.read_json(a.STATE);journal=t.Journal(HOME/'journal.json');done=[];blocked=[]
+  from mgs_archive_read_admission import backup_read_hashes
+  sa.hashes=backup_read_hashes(sa.hashes,writer_lease)
   enqueue_historical_locked(sa,c,p,s,state)
   candidates=[j for j in state['jobs'].values() if not j.get('verified') and j.get('request_file_id')]
   candidates.sort(key=lambda j:j['body']['asset']['sourceCreatedTime'])

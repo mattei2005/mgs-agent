@@ -153,7 +153,7 @@ def atomic_json(path,value):
 def queue_lock():
     DATA.mkdir(parents=True,exist_ok=True)
     with (DATA/'.queue.lock').open('a+') as f:
-        fcntl.flock(f,fcntl.LOCK_EX);yield
+        fcntl.flock(f,fcntl.LOCK_EX);yield f
 
 class Drive:
     def __init__(self,write=False):
