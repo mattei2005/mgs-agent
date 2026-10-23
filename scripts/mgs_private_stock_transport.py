@@ -20,11 +20,12 @@ def check_ack(sa,c,entry,index):
     if len(matches)!=1 or any(matches[0].get(k)!=entry.get(k) for k in ['sourceId','archiveId','size','md5','sha256','jobId','lineageId']):raise b.ArchiveError('STOCK_TRANSFER_NATIVE_ACK_BYTES')
     return found['id']
 
-def tick(max_files=4):
+def tick(max_files=4,defer_if_busy=False):
     if not 1<=max_files<=4:raise b.ArchiveError('STOCK_TRANSFER_BATCH_BOUND')
     if not loc.active():return {'status':'inactive','blocked':[],'transferred':[]}
     HOME.mkdir(parents=True,exist_ok=True)
-    with b.queue_lock():
+    with b.queue_lock(blocking=not defer_if_busy) as lease:
+        if lease is None:return {'status':'ok','blocked':[],'deferred_to_existing_writer':True}
         sa=b.Drive(True);owner=t.OwnerDrive();journal=t.Journal(HOME/'journal.json');c=b.config_load();index=b.read_json(b.DATA/'archive-index.json',{});snapshot=b.read_json(layout.SNAPSHOT,{});done=[]
         rows=[e for e in index.get('mappings',{}).values() if e.get('stockShortcutId') and e.get('stockTransferredToArchive') is not True and index['verified_jobs'].get(e.get('jobId'),{}).get('validationOnly') is not True]
         for entry in rows[:max_files]:
@@ -51,6 +52,6 @@ def tick(max_files=4):
         out={'status':'ok','blocked':[],'transferred':done,'remaining':max(0,len(rows)-len(done)),'same_ids':True,'executed_at':b.now_iso()};b.atomic_json(HOME/'last-tick.json',out);return out
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--max-files',type=int,default=4);args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--max-files',type=int,default=4);p.add_argument('--defer-if-busy',action='store_true');args=p.parse_args()
     if not args.apply:raise SystemExit('APPLY_REQUIRED')
-    print(json.dumps(tick(args.max_files),ensure_ascii=False))
+    print(json.dumps(tick(args.max_files,args.defer_if_busy),ensure_ascii=False))

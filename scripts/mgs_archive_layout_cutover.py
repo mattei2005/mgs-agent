@@ -5,13 +5,14 @@ No binary copy, DELETE, trash, permission write or credential change. Keeps the
 existing upload ID and all stock IDs; staging remains temporary below intake.
 """
 from __future__ import annotations
-import argparse,fcntl,hashlib,json,urllib.request,urllib.parse,urllib.error
+import argparse,fcntl,hashlib,json,time,urllib.request,urllib.parse,urllib.error
 import ares_archive_bridge as b
 import ares_archive_backfill as h
 import ares_archive_locations as loc
 import mgs_archive_owner_transport as t
 import mgs_private_backup_transport as bt
 import mgs_backup_automation as ba
+import mgs_whole_drive_migration as whole
 AUTH='1563192086025474101'
 HOME=t.HOME/'stock-layout'
 SNAPSHOT=HOME/'source-snapshot.json'
@@ -36,6 +37,52 @@ def descendants(rows,root,exclude=()):
     return selected
 
 def native(d,fid):return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':FIELDS})
+
+def owned_inventory(sa):
+    current={};page=None
+    while True:
+        params={'q':"trashed=false and '"+b.ACCOUNT+"' in owners",'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':1000,'fields':'nextPageToken,files('+FIELDS+')'}
+        if page:params['pageToken']=page
+        value=sa.api('GET','files',params);current.update({x['id']:x for x in value.get('files',[])});page=value.get('nextPageToken')
+        if not page:return current
+
+def propagated_inventory(sa,expected_ids,max_seconds=1800):
+    """Google can return a moved folder before its children change ownership.
+    Observe the same IDs; never replay the folder move to cure propagation.
+    """
+    deadline=time.monotonic()+max_seconds;observations=[]
+    while True:
+        current=owned_inventory(sa)
+        missing=[fid for fid in expected_ids if fid not in current or current[fid].get('driveId') or not any(o.get('emailAddress')==b.ACCOUNT and o.get('permissionId')==b.PUBLISHER_PERMISSION_IDS[b.ACCOUNT] for o in current[fid].get('owners',[]))]
+        observations.append({'at':b.now_iso(),'pending_native_ownership':len(missing),'expected_count':len(expected_ids)})
+        b.atomic_json(HOME/'propagation-observations.json',observations)
+        if not missing:return current
+        if time.monotonic()>=deadline:raise b.ArchiveError('LAYOUT_DESCENDANT_PROPAGATION_PENDING:'+str(len(missing)))
+        time.sleep(15)
+
+def content_evidence(sa,objects,index):
+    live=b.read_json(b.DATA/'archive-index.json',{}).get('mappings',{});out={}
+    for fid,meta in objects.items():
+        mime=meta['mimeType']
+        if mime in [b.FOLDER,'application/vnd.google-apps.shortcut']:continue
+        if meta.get('properties',{}).get('mgsArchiveKey')=='heartbeat:worker-v1' and meta.get('properties',{}).get('mgsArchiveType')=='heartbeat':
+            b.require_publisher(sa.meta(fid),b.ACCOUNT)
+            body=json.loads(sa.raw(fid))
+            if body.get('schema')!='mgs.archive.heartbeat.v1' or body.get('deleteSource') is not False or body.get('triggerUid')!='2456112746912022528' or not body.get('workerSha256'):raise b.ArchiveError('LAYOUT_LEGACY_HEARTBEAT_SCOPE')
+            out[fid]={'kind':'mutable_legacy_heartbeat','body_before':body};continue
+        if mime=='application/vnd.google-apps.spreadsheet':
+            out[fid]={'kind':'sheet','snapshot':whole.snapshot(sa,fid)[0],'grid':whole.sheets_get(sa,fid,params={'includeGridData':'true'})};continue
+        if mime.startswith('application/vnd.google-apps.'):raise b.ArchiveError('LAYOUT_NATIVE_DOCUMENT_SNAPSHOT_REQUIRED:'+fid)
+        entry=index.get('mappings',{}).get(fid) or live.get(fid)
+        if entry:
+            expected={k:entry[k] for k in ['size','md5','sha256']}
+            if entry.get('verified') is not True or meta.get('size')!=expected['size'] or meta.get('md5Checksum')!=expected['md5'] or meta.get('sha256Checksum')!=expected['sha256']:raise b.ArchiveError('LAYOUT_PRIOR_FULL_BYTE_PROOF_DRIFT:'+fid)
+            out[fid]={'kind':'prior_full_streams','hashes':expected,'job_id':entry.get('job_id') or entry.get('jobId')}
+        else:
+            hashes=sa.hashes(fid)
+            if hashes['size']!=meta.get('size') or hashes['md5']!=meta.get('md5Checksum') or (meta.get('sha256Checksum') and hashes['sha256']!=meta['sha256Checksum']):raise b.ArchiveError('LAYOUT_AUXILIARY_BYTE_PROOF')
+            out[fid]={'kind':'full_stream_required_after_move','hashes':hashes}
+    return out
 
 def unchanged(before,after,*,parent=None):
     fields=['id','name','mimeType','size','md5Checksum','sha256Checksum','createdTime','properties','appProperties','shortcutDetails']
@@ -106,7 +153,7 @@ def apply():
             fcntl.flock(backup_lock,fcntl.LOCK_EX)
             with b.queue_lock():
                 manifest,stage=h.manifest_load();idx=b.read_json(h.location()/'backfill-index.json',{});historical=b.read_json(bt.HOME/'historical-manifest.json',{});bs=b.read_json(ba.STATE,{})
-                if set(idx.get('mappings',{}))!={x['sourceId'] for x in manifest['assets']}:raise b.ArchiveError('LAYOUT_ALL_HISTORICAL_BYTES_REQUIRED')
+                if set(idx.get('mappings',{}))!={x['sourceId'] for x in manifest['assets']} or any(x.get('verified') is not True for x in idx.get('mappings',{}).values()):raise b.ArchiveError('LAYOUT_ALL_HISTORICAL_BYTES_REQUIRED')
                 verified={x['body']['asset']['sourceId'] for x in bs.get('jobs',{}).values() if x.get('verified')}
                 if not {x['sourceId'] for x in historical.get('assets',[])}<=verified:raise b.ArchiveError('LAYOUT_ALL_BACKUPS_REQUIRED')
                 intake=b.read_json(b.DATA/'intake-state.json',{'claims':{}})
@@ -117,6 +164,9 @@ def apply():
                     rows=all_shared(sa);objects=descendants(rows,b.SOURCE_ROOT,exclude=[loc.UPLOAD]);tops=[x for x in objects.values() if x.get('parents')==[b.SOURCE_ROOT]]
                     if any(x.get('mimeType')!=b.FOLDER for x in tops):raise b.ArchiveError('LAYOUT_TOP_BINARY_SCOPE')
                     snapshot={'schema':'mgs.archive.stock.snapshot.v1','approval_message_id':loc.APPROVAL,'execution_confirmation_message_id':AUTH,'frozen_at':b.now_iso(),'source_root':native(sa,b.SOURCE_ROOT),'stock_root_id':binding['stock_root_id'],'upload':native(sa,loc.UPLOAD),'objects':objects,'top_folders':tops,'old_root_children':[x for x in rows if x.get('parents')==[b.SOURCE_DRIVE]]}
+                    snapshot['content_evidence']=content_evidence(sa,objects,idx)
+                    fixtures={x['id']:x for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,ba.load()[0]['sourceRootId']]}
+                    snapshot['root_fixture_content']=content_evidence(sa,fixtures,idx)
                     b.atomic_json(SNAPSHOT,snapshot)
                 # Freeze native immutable SA proof before any folder moves.
                 fid=sa.upload_once(c['control_folder_id'],'stock-layout-source-'+ba.sha(snapshot)+'.json',b.canonical(snapshot),'application/json','stock-layout-snapshot:'+ba.sha(snapshot),'stock_layout_snapshot')
@@ -134,21 +184,30 @@ def apply():
                     if row['id'] in [b.SOURCE_ROOT,p['sourceRootId']]:continue
                     if row.get('properties',{}).get('validationOnly')!='true':raise b.ArchiveError('LAYOUT_UNEXPECTED_ROOT_OBJECT:'+row['id'])
                     move_once(owner,sa,journal,row['id'],b.SOURCE_DRIVE,p['corporateRootId'])
-                # One My Drive listing, joined by exact IDs; never name-match.
-                current={};page=None
-                while True:
-                    params={'q':"trashed=false and '"+b.ACCOUNT+"' in owners",'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':1000,'fields':'nextPageToken,files('+FIELDS+')'}
-                    if page:params['pageToken']=page
-                    value=sa.api('GET','files',params);current.update({x['id']:x for x in value.get('files',[])});page=value.get('nextPageToken')
-                    if not page:break
+                # Full native listing joined by exact IDs, with bounded Google
+                # ownership-propagation recovery. No repeated moves or copies.
+                fixture_ids={x['id'] for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,p['sourceRootId']]}
+                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids)
                 writers=h.WRITERS|{b.CANONICAL_SA};verified_objects={}
                 for key,before in snapshot['objects'].items():
                     after=current.get(key)
                     if not after:raise b.ArchiveError('LAYOUT_MISSING_SAME_ID:'+key)
                     new_parent=[binding['stock_root_id']] if before.get('parents')==[b.SOURCE_ROOT] else None
-                    unchanged(before,after,parent=new_parent)
+                    mutable=snapshot['content_evidence'].get(key,{}).get('kind')=='mutable_legacy_heartbeat'
+                    if mutable:
+                        if any(before.get(k)!=after.get(k) for k in ['id','name','mimeType','createdTime','properties']) or after.get('parents')!=(new_parent or before['parents']) or after.get('trashed') is not False:raise b.ArchiveError('LAYOUT_MUTABLE_HEARTBEAT_METADATA')
+                        b.require_publisher(sa.meta(key),b.ACCOUNT);old_body=snapshot['content_evidence'][key]['body_before'];new_body=json.loads(sa.raw(key))
+                        if any(new_body.get(k)!=old_body.get(k) for k in ['schema','workerSha256','triggerUid','deleteSource']) or new_body.get('deleteSource') is not False:raise b.ArchiveError('LAYOUT_MUTABLE_HEARTBEAT_PROTOCOL')
+                    else:unchanged(before,after,parent=new_parent)
                     if after.get('driveId') or not any(x.get('emailAddress')==b.ACCOUNT for x in after.get('owners',[])) or any(x.get('type') in ['anyone','domain'] for x in after.get('permissions',[])) or not writers<={x.get('emailAddress') for x in after.get('permissions',[]) if x.get('role')=='writer'}:raise b.ArchiveError('LAYOUT_OWNER_OR_ACCESS:'+key)
-                    verified_objects[key]={'id':key,'parents':after['parents'],'version':after['version'],'same_id':True,'content_unchanged':True,'human_sa_access_verified':True}
+                    verified_objects[key]={'id':key,'parents':after['parents'],'version':after['version'],'same_id':True,'content_unchanged':not mutable,'expected_legacy_heartbeat_transition':mutable,'human_sa_access_verified':True}
+                for key,evidence in {**snapshot['content_evidence'],**snapshot['root_fixture_content']}.items():
+                    if evidence['kind']=='full_stream_required_after_move' and sa.hashes(key)!=evidence['hashes']:raise b.ArchiveError('LAYOUT_AUXILIARY_POST_MOVE_BYTES:'+key)
+                    if evidence['kind']=='sheet' and (whole.snapshot(sa,key)[0]!=evidence['snapshot'] or whole.sheets_get(sa,key,params={'includeGridData':'true'})!=evidence['grid']):raise b.ArchiveError('LAYOUT_SHEET_POST_MOVE_CONTENT:'+key)
+                for row in snapshot['old_root_children']:
+                    if row['id'] not in fixture_ids:continue
+                    unchanged(row,current[row['id']],parent=[p['corporateRootId']])
+                    cp,_=ba.corp.load_plan();ba.corp.check_acl(h.permissions(sa,row['id']),ba.corp.desired(cp))
                 proof={'schema':'mgs.archive.stock.verification.v1','status':'same_ids_verified','snapshot_sha256':ba.sha(snapshot),'native_snapshot_id':fid,'stock_root_id':binding['stock_root_id'],'verified_at':b.now_iso(),'objects':verified_objects,'binary_copies_created':0,'files_deleted':0}
                 b.atomic_json(PROOF,proof)
                 accepted={**binding,'phase':'consumer_canary','same_ids_verified':True,'consumer_canary_verified':False,'acceptance_proof':str(PROOF),'active':True,'native_snapshot_id':fid,'snapshot_sha256':proof['snapshot_sha256']}

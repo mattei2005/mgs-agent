@@ -82,12 +82,15 @@ def trash_once(owner,fid,parent,expected):
         pass
     return backup.native_meta(owner,fid)
 
-def tick(apply=False,max_files=1):
+def tick(apply=False,max_files=1,defer_if_busy=False):
     if not 1<=max_files<=2:raise b.ArchiveError('RETENTION_BATCH_BOUNDS')
     HOME.mkdir(parents=True,exist_ok=True)
     with (t.HOME/'backup-lane'/'backup-lane.lock').open('a+') as lane:
-        fcntl.flock(lane,fcntl.LOCK_EX)
-        with b.queue_lock():
+        deferred={'status':'ok','active':b.read_json(POLICY,{}).get('active') is True,'blocked':[],'deferred_to_existing_writer':True}
+        try:fcntl.flock(lane,fcntl.LOCK_EX | (fcntl.LOCK_NB if defer_if_busy else 0))
+        except BlockingIOError:return deferred
+        with b.queue_lock(blocking=not defer_if_busy) as lease:
+            if lease is None:return deferred
             p,s=a.load();policy=validate_policy(b.read_json(POLICY),p)
             sa=b.Drive();view=inspect(sa,p)
             out={'schema':'mgs.archive.backup.retention.tick.v1','executed_at':b.now_iso(),'status':'ok','active':policy['active'],'confirmation_message_id':AUTH,'action':'trash_only','permanent_delete':False,'candidates':view['candidates'],'protected_ids':view['protected_ids'],'trashed':[],'blocked':[]}
@@ -124,7 +127,7 @@ def tick(apply=False,max_files=1):
             b.atomic_json(HOME/'last-tick.json',out);return out
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','activate','preview','tick']);parser.add_argument('--apply',action='store_true');parser.add_argument('--max-files',type=int,default=1);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','activate','preview','tick']);parser.add_argument('--apply',action='store_true');parser.add_argument('--max-files',type=int,default=1);parser.add_argument('--defer-if-busy',action='store_true');args=parser.parse_args()
     if args.action in ['activate','tick'] and not args.apply:raise SystemExit('APPLY_REQUIRED')
-    result=prepare(args.action=='activate') if args.action in ['prepare','activate'] else tick(args.action=='tick',args.max_files)
+    result=prepare(args.action=='activate') if args.action in ['prepare','activate'] else tick(args.action=='tick',args.max_files,args.defer_if_busy)
     print(json.dumps(result,ensure_ascii=False))

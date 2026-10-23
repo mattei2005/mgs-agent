@@ -214,10 +214,14 @@ def atomic_json(path,value):
     if read_json(path)!=value: raise ArchiveError('LOCAL_READBACK')
 
 @contextlib.contextmanager
-def queue_lock():
+def queue_lock(blocking=True):
     DATA.mkdir(parents=True,exist_ok=True)
     with (DATA/'.queue.lock').open('a+') as f:
-        fcntl.flock(f,fcntl.LOCK_EX);yield f
+        try:fcntl.flock(f,fcntl.LOCK_EX | (0 if blocking else fcntl.LOCK_NB))
+        except BlockingIOError:
+            yield None;return
+        try:yield f
+        finally:fcntl.flock(f,fcntl.LOCK_UN)
 
 class Drive:
     def __init__(self,write=False):

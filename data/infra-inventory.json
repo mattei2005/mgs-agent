@@ -907,10 +907,28 @@
         "tests/test_auto_commit_empty_index.py"
       ],
       "partial_effects": "Index empty; blocked batch never started commit/push; origin owns Drive migration, not watcher recovery",
-      "state": "correction_applied_pending_live_validation",
+      "state": "resolved_validated",
+      "validation": {
+        "tests_passed": 17,
+        "source_and_regressions_commit": "f2a2f46fc62837c6988d5721a762f81d7c5d33e4",
+        "validated_head": "c0fb9889d9274e0fb961328f08ec2b0339f2ab74",
+        "remote_main_equals_head": true,
+        "monitor_dry_run_failures": 0,
+        "persistent_service": "active/running",
+        "persistent_batch_target": 10,
+        "persistent_max_wait": 600,
+        "sibling_credential_negative_cases": "PASS"
+      },
       "credentials_changed": false,
       "manual_commit_or_push": false,
-      "report_infra_status": "pending"
+      "report_infra_status": "sent_and_get_verified",
+      "report_infra": {
+        "message_id": "1563202310987972699",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "mentions": 0,
+        "readback_verified": true
+      }
     },
     {
       "additional_out_of_scope_findings": "Two concurrent Playwright embeddedNode24.17.0 and24.18.1 onHostinger observed aftersystempatch;SDKbundles notupdated. OriginalsystemNode18 andBitNinja remainoutsidefirstlot.",
