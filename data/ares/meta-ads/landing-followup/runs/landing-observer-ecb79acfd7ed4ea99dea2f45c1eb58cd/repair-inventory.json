@@ -1,0 +1,73 @@
+{
+  "scope_id": "aa91d3f1d03c746b9950b8ec4c86f7ee5955e488e6e1ef38c726345bd50674bb",
+  "owner": "landing-observer-ecb79acfd7ed4ea99dea2f45c1eb58cd",
+  "repair": "Read-only native base selection for multiple normal Chrome windows; shared helper in observer and repair; new target uniqueness and baseline preservation unchanged.",
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/landing_lean.py",
+      "sha256": "0c504962a1025a0dfad66f3aa61f5b94df8cd61a7f62b99b5613d4450dab1d37",
+      "bytes": 20937
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-direct-traffic-repair.py",
+      "sha256": "9dc6519cee4f60991cddc0c128e8b2a89e0487d0598d3fe9c399e388468a3d56",
+      "bytes": 8897
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_direct_traffic_landing_lean.py",
+      "sha256": "c7ae66305decdd51cc4f676814fdcf426cc88c06bab08cba5f1a05b650575b59",
+      "bytes": 13339
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_direct_traffic_landing_repair.py",
+      "sha256": "2b5e72467b333371cf8f1f4d0db7b3dda796bad55f265c4bfc8e40150a62cb4e",
+      "bytes": 2504
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/skills/growth/landing-followup-operations/SKILL.md",
+      "sha256": "85f0d9a88250fb51987bf718e1edbf37f05d7637b1148f2e69ff824547d9515d",
+      "bytes": 28401
+    }
+  ],
+  "tests": [
+    "Ran 385 tests in 13.174s",
+    "OK"
+  ],
+  "result": {
+    "state": "FINITE_PASS_SETTLED",
+    "transition": {
+      "state": "FINITE_PASS_SETTLED",
+      "changed": []
+    },
+    "results": [
+      {
+        "job": "4f248c31f772df8e7f4605d7d89d5fba07a9a59fddb676ed802bfdf82f397768",
+        "idx": 0,
+        "result": "PASS"
+      },
+      {
+        "job": "4f248c31f772df8e7f4605d7d89d5fba07a9a59fddb676ed802bfdf82f397768",
+        "idx": 1,
+        "result": "PASS"
+      },
+      {
+        "job": "4f248c31f772df8e7f4605d7d89d5fba07a9a59fddb676ed802bfdf82f397768",
+        "idx": 2,
+        "result": "PASS"
+      },
+      {
+        "job": "4f248c31f772df8e7f4605d7d89d5fba07a9a59fddb676ed802bfdf82f397768",
+        "idx": 3,
+        "result": "PASS"
+      },
+      {
+        "job": "4f248c31f772df8e7f4605d7d89d5fba07a9a59fddb676ed802bfdf82f397768",
+        "idx": 4,
+        "result": "PASS"
+      }
+    ]
+  },
+  "external_posts_this_session": false,
+  "infra_report": "LOCAL_DRY_RUN_ONLY_USER_FORBIDS_EXTERNAL_POST",
+  "campaign_or_shared_configuration_writes": false
+}
