@@ -226,7 +226,11 @@ def apply():
                         for slot in context['slots']:upload.validate_slot(sa,context,slot)
                     tops=sa.listing(b.SOURCE_DRIVE)
                     if len(tops)!=1 or tops[0]['id']!=loc.UPLOAD:raise b.ArchiveError('LAYOUT_ROOT_NOT_UPLOAD_ONLY')
-                    proof.update(consumer_canary={'source_id':source_id,'provider_id':record['provider_id'],'stock_file_id':record['stock_file_id'],'full_stream_verified':True,'upload_slots_verified':len(context['slots'])},root_only_upload_verified=True)
+                    residual=all_shared(sa);intake_tree=descendants(residual,loc.UPLOAD)
+                    if {x['id'] for x in residual}!={loc.UPLOAD}|set(intake_tree):raise b.ArchiveError('LAYOUT_ORPHAN_SHARED_OBJECT_OUTSIDE_INTAKE')
+                    processed_ids=set(idx['mappings'])|set(b.read_json(b.DATA/'archive-index.json',{}).get('mappings',{}))
+                    if processed_ids&set(intake_tree):raise b.ArchiveError('LAYOUT_PROCESSED_MEDIA_STILL_IN_OLD_DRIVE')
+                    proof.update(consumer_canary={'source_id':source_id,'provider_id':record['provider_id'],'stock_file_id':record['stock_file_id'],'full_stream_verified':True,'upload_slots_verified':len(context['slots'])},root_only_upload_verified=True,all_residual_shared_objects_under_intake=True,residual_shared_object_count=len(residual),old_drive_processed_media_count=0)
                     b.atomic_json(PROOF,proof);accepted.update(phase='active',consumer_canary_verified=True,accepted_at=b.now_iso());b.atomic_json(loc.BINDING,accepted)
                     c.update(control_cutover_in_progress=False,whole_drive_layout_complete=True);b.atomic_json(b.CONFIG,c)
                     return {'status':'layout_active','stock_objects_verified':len(verified_objects),'upload_only':True,'proof':str(PROOF)}

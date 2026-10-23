@@ -82,6 +82,19 @@ def trash_once(owner,fid,parent,expected):
         pass
     return backup.native_meta(owner,fid)
 
+def verify_recorded_trash(sa,c,p,job,actual):
+    """A confirmed trash is a disposition, not a corrupted migration.
+    Require its exact post-write receipt plus the original immutable SA ACK.
+    """
+    validate_policy(b.read_json(POLICY),p);fid=job['body']['asset']['sourceId'];intent=b.read_json(STATE,{}).get('intents',{}).get(fid,{})
+    if job.get('verified') is not True or intent.get('status')!='verified' or intent.get('confirmation_message_id')!=AUTH or intent.get('job_id')!=job['jobId'] or intent.get('ack_id')!=job.get('ack_file_id') or actual!=intent.get('metadata_after') or actual.get('trashed') is not True:raise b.ArchiveError('RETENTION_TRASH_DISPOSITION_PROOF_REQUIRED')
+    asset=job['body']['asset']
+    if actual.get('parents')!=[asset['destinationParentId']] or actual.get('driveId') or any(str(actual.get(k))!=str(asset[v]) for k,v in [('id','sourceId'),('size','size'),('md5Checksum','md5'),('sha256Checksum','sha256'),('name','name'),('createdTime','sourceCreatedTime')]) or actual.get('appProperties')!=asset['managedProperties']:raise b.ArchiveError('RETENTION_TRASH_DISPOSITION_BYTES')
+    ack,_=a.queue_object(sa,c,job['ack_file_id'],'backup-ack:'+job['jobId'],'backup_ack',b.CANONICAL_SA)
+    if ack.get('status')!='verified' or ack.get('archiveId')!=fid or ack.get('sha256')!=asset['sha256'] or ack.get('requestSha256')!=a.sha(job['body']):raise b.ArchiveError('RETENTION_TRASH_DISPOSITION_NATIVE_ACK')
+    cp,_=a.corp.load_plan();a.corp.check_acl(a.corp.h.permissions(sa,fid),a.corp.desired(cp))
+    return True
+
 def tick(apply=False,max_files=1,defer_if_busy=False):
     if not 1<=max_files<=2:raise b.ArchiveError('RETENTION_BATCH_BOUNDS')
     HOME.mkdir(parents=True,exist_ok=True)

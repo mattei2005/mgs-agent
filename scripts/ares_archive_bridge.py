@@ -114,10 +114,11 @@ def validate_source_metadata(meta,a,c):
     return True
 
 def validate_reconciliation_source(d,meta,a,c,job):
-    """Accept only frozen test controls relocated by the verified control cutover.
+    """Reconcile exact frozen same-ID relocations under their native proofs.
 
-    Production media keeps the original source contract. Never rewrite its job
-    or project a synthetic Shared Drive response for an actual My Drive file.
+    Stock requires the separately accepted whole-Drive snapshot; technical
+    controls require their exact control cutover. Other production keeps the
+    original source contract. Never synthesize a Shared Drive API response.
     """
     if meta.get('driveId')!=c['source_drive_id']:
         import ares_archive_locations as locations

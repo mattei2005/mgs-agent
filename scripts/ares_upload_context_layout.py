@@ -52,14 +52,18 @@ def validate_slot(d,c,slot):
     return {'operation':slot['operation'],'manager_code':slot['manager_code'],'manager_name':slot['manager_name']}
 
 def apply_layout(d,c,rows):
-    check_folder(d,c,c['upload_root_id'],c['source_root_id'],'UPLOAD MANUAL')
+    import ares_archive_locations as locations
+    check_folder(d,c,c['upload_root_id'],locations.upload_parent() if locations.active() else c['source_root_id'],'UPLOAD MANUAL')
     if len({(r['operation'],r['manager_code']) for r in rows})!=len(rows):raise LayoutError('DUPLICATE_SLOT')
     for r in rows:
         if not OPERATION.fullmatch(r['operation']) or MANAGERS.get(r['manager_code'])!=r['manager_name']:raise LayoutError('UNREGISTERED_SLOT')
     for op in sorted({r['operation'] for r in rows}):
         candidates=[r['source_operation_folder_id'] for r in rows if r['operation']==op]
         if len(set(candidates))!=1:raise LayoutError('AMBIGUOUS_SOURCE_OPERATION')
-        check_folder(d,c,candidates[0],c['source_root_id'],op)
+        if locations.active():
+            operation=locations.assert_stock_file(d,candidates[0],locations.stock_root())
+            if operation.get('name')!=op or operation.get('mimeType')!=FOLDER:raise LayoutError('STOCK_OPERATION_SCOPE')
+        else:check_folder(d,c,candidates[0],c['source_root_id'],op)
     # Validate every pre-existing target before the first additive write.
     for op in sorted({r['operation'] for r in rows}):
         existing=find(d,c['upload_root_id'],op)

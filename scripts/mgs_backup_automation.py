@@ -201,7 +201,11 @@ def reconcile(d,c,p,s,state,job):
   return 'awaiting_owner'
  body,_=queue_object(d,c,rid,'backup-receipt:'+job['jobId'],'backup_move_receipt',b.ACCOUNT)
  if body.get('schema')!='mgs.backup.move.receipt.v1' or body.get('status')!='moved' or body.get('jobId')!=job['jobId'] or body.get('requestSha256')!=sha(job['body']) or body.get('planSha256')!=s['plan_sha256'] or body.get('sourceId')!=a['sourceId'] or body.get('archiveId')!=a['sourceId'] or body.get('destinationParentId')!=a['destinationParentId'] or body.get('deleteSource') is not False or body.get('archiveTrashEnabled') is not False:raise b.ArchiveError('BACKUP_OWNER_RECEIPT_BINDING')
- actual=backup.native_meta(d,a['sourceId']);check_content(actual,a);cp,cs=corp.load_plan()
+ actual=backup.native_meta(d,a['sourceId'])
+ if actual.get('trashed') is True and job.get('verified') is True:
+  import mgs_archive_backup_retention as retention
+  retention.verify_recorded_trash(d,c,p,job,actual);return 'retained_in_trash'
+ check_content(actual,a);cp,cs=corp.load_plan()
  if actual.get('driveId') or actual.get('parents')!=[a['destinationParentId']] or not any(x.get('permissionId')==p['ownerPermissionId'] and x.get('emailAddress')==p['account'] for x in actual.get('owners',[])) or actual.get('appProperties')!=a['managedProperties']:raise b.ArchiveError('BACKUP_ARCHIVE_NATIVE_BINDING')
  corp.check_acl(corp.h.permissions(d,actual['id']),corp.desired(cp));fingerprint=sha({'metadata':actual,'receipt':body,'request':job['body']})
  if job.get('verified') and job.get('fingerprint')==fingerprint:return 'cached'
@@ -247,7 +251,7 @@ def cycle(apply=True):
    for job in (pending[:1]+audit):
     if not job.get('request_file_id'):continue
     try:
-     status=reconcile(d,c,p,s,state,job);out['verified' if status in ['verified','cached'] else 'pending'].append(job['jobId'])
+     status=reconcile(d,c,p,s,state,job);out['verified' if status in ['verified','cached','retained_in_trash'] else 'pending'].append(job['jobId'])
     except b.ArchiveError as error:out['blocked'].append({'job_id':job['jobId'],'reason':str(error)[:180]})
   rows=[];future=[]
   for tier in TIERS:
