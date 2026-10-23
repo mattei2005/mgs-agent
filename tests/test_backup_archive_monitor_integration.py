@@ -10,7 +10,7 @@ class MonitorIntegration(unittest.TestCase):
  def run_case(self,blocked):
   result={'status':'ok','reconciliation':{'blocked':[]},'production':{'blocked':[]},'retirement':{'blocked':[]},'historical_backfill':{},'queue_enabled':False,'worker_ready':True,'delete_source':False,'worker_trigger_uid':'fixture-trigger','owner_worker_status':'ok','owner_worker_sha256':'fixture-worker'}
   output=io.StringIO()
-  with patch.object(monitor.time,'sleep'),patch.object(monitor.backup_archive,'cycle',return_value={'status':'owner_repin_required_backup_archive','blocked':blocked,'archive_trash_enabled':False}) as cycle,patch.object(monitor.whole_drive,'resume_acceptance',return_value={'status':'not_applicable'}),patch.object(monitor.automation,'run_cycle',return_value=result),contextlib.redirect_stdout(output):
+  with patch.object(monitor.time,'sleep'),patch.object(monitor,'private_owner_tick',return_value=None),patch.object(monitor,'private_backup_tick',return_value=None),patch.object(monitor.bridge,'config_load',return_value={'owner_executor_mode':'vps','owner_executor_scheduler_job_id':'OFFLINE_JOB'}),patch.object(monitor.bridge,'read_json',return_value={}),patch.object(monitor.bridge,'atomic_json'),patch.object(monitor.backup_archive,'cycle',return_value={'status':'owner_repin_required_backup_archive','blocked':blocked,'archive_trash_enabled':False}) as cycle,patch.object(monitor.whole_drive,'resume_acceptance',return_value={'status':'not_applicable'}),patch.object(monitor.automation,'run_cycle',return_value=result),contextlib.redirect_stdout(output):
    self.assertEqual(monitor.main(),0);cycle.assert_called_once_with(apply=True)
   return json.loads(output.getvalue())
  def test_pending_owner_stage_is_explicit_without_fake_activation(self):

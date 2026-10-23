@@ -50,6 +50,13 @@ Resultado esperado:
 - Sem `fatal: pathspec` novo no journal
 - Próxima execução do `monitor-vps-health.py` limpa `alerts.service_mgs-autocommit` e para o vermelho/verde recorrente.
 
+## Bloqueio pré-commit por nome sensível
+
+- Diferencie rejeição remota de bloqueio local: `BLOQUEADO: arquivo sensível` sem novo `auto-push START` significa que o commit nem começou. Confirme conectividade e SHA remoto com `git ls-remote`; um serviço `active` não prova que o lote foi publicado.
+- Para fonte/teste cujo nome contém `private`, reconcilie a autorização de origem, leia integralmente os arquivos e procure credenciais sem imprimir valores. Quando for falso positivo comprovado, acrescente somente exceções de paths exatos, ancoradas, com regressões que mantenham irmãos, prefixo `work/`, `.bak` e arquivos de credenciais bloqueados. Não renomeie código ainda em edição por outra sessão nem amplie por diretório/extensão.
+- O watcher carrega o regex apenas no início; editar seu script não atualiza o processo residente. Valide com o mesmo entrypoint e lock exclusivo, opcionalmente usando `MGS_AUTOCOMMIT_BATCH_TARGET=1` em uma única execução limitada, e restaure o serviço com os defaults permanentes. Não use `git add`, commit ou push manual para simular recuperação.
+- Exija um novo commit automático, confirmação no log de push, readback do SHA remoto e monitor sem falhas. Preserve alterações operacionais concorrentes e não afirme working tree limpo enquanto seus produtores continuam ativos.
+
 ## Regra operacional
 
 Quando alerta vermelho/verde de service incomodar por flapping, não silenciar o monitor primeiro. Investigar `journalctl -u <service>` e corrigir a causa do restart loop. Só ajustar debounce/threshold se o service estiver saudável e o alerta for realmente falso positivo.

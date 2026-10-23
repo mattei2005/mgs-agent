@@ -28,6 +28,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Consolidar usuários/admins WordPress RunCloud com reatribuição e 1Password** → `references/runcloud-wordpress-user-consolidation.md`
 - **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
 - **Auditar artigos WordPress irrelevantes/spam** → `references/wordpress-irrelevant-posts-incident-audit.md`
+- **Auditar SEO/indexação de todos os artigos e corrigir sitemap XML obsoleto em WP Fastest Cache** → `references/article-seo-indexing-sitemap-audit.md`
 - **Investigar árvores de plugins com versões misturadas** → `references/wordpress-plugin-mixed-version-forensics.md`
 - **Recuperar fatal de `wp-content/db.php`/drop-in no admin** → `references/wordpress-db-dropin-fatal-recovery.md`
 - **Instalar/enforçar WP 2FA em todo o portfólio** → `references/wp2fa-mass-enforcement-rollout.md`

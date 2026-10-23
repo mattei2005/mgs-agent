@@ -32,6 +32,11 @@ HISTORICAL_EVIDENCE_SHA256 = {
     # firewall history. Audit authority 1559206352956432395. No parent exemption.
     "data/adspower-warming-20261008/delivery-amendment-1559206352956432395/inventory-before.json":
         "aebab065306cc85eac7bab53efdf3eae1c4affac46da2d324b371974e543f437",
+    # Audited PHP recheck: the sole hit explicitly says the retired agent was
+    # NOT probed. Hash reconciled with infra-inventory record
+    # hetzner-php-recheck-1562886130582552618; no reports/ directory exemption.
+    "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json":
+        "1bd0e08c60977607a2689aaeca409ca1f866a7b18ae50562ae9005df05de2d6d",
 }
 
 PROFILE_NAMES = ("zeus", "atena", "ares")

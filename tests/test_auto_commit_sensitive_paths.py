@@ -81,6 +81,16 @@ fi
             "data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997.json.bak": 1,
             "data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-other.json": 1,
             "data/ares/creative-ops/30tb-archive/owner-connector/credentials.json": 1,
+            "scripts/mgs_private_backup_transport.py": 0,
+            "tests/test_private_backup_transport.py": 0,
+            "work/scripts/mgs_private_backup_transport.py": 1,
+            "work/tests/test_private_backup_transport.py": 1,
+            "scripts/mgs_private_backup_transport.py.bak": 1,
+            "tests/test_private_backup_transport.py.bak": 1,
+            "scripts/mgs_private_backup_transport_other.py": 1,
+            "tests/test_private_backup_transport_other.py": 1,
+            "scripts/private_backup_credentials.json": 1,
+            "tests/private_backup_token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

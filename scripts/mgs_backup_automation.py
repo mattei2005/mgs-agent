@@ -61,13 +61,16 @@ def retention_preview(rows,p,protected_ids):
 def queue_object(d,c,fid,key,kind,author):
  meta=d.meta(fid);b.require_publisher(meta,author)
  parent=c['receipts_folder_id'] if kind in ['backup_move_receipt','backup_receipt_slot'] else c['control_folder_id'] if kind=='backup_plan' else c['requests_folder_id']
- if meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('parents')!=[parent] or meta.get('properties',{}).get('mgsArchiveKey')!=key or meta.get('properties',{}).get('mgsArchiveType')!=kind:raise b.ArchiveError('BACKUP_QUEUE_OBJECT_SCOPE')
+ allowed=[kind]
+ if kind=='backup_move_request' and b.read_json(STAGE,{}).get('owner_executor_mode') in ['vps_handoff','vps']:allowed.append('vps_backup_move_request')
+ if meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('parents')!=[parent] or meta.get('properties',{}).get('mgsArchiveKey')!=key or meta.get('properties',{}).get('mgsArchiveType') not in allowed:raise b.ArchiveError('BACKUP_QUEUE_OBJECT_SCOPE')
  raw=d.raw(fid)
  if sha(raw)!=meta.get('properties',{}).get('sha256'):raise b.ArchiveError('BACKUP_QUEUE_OBJECT_DIGEST')
  return json.loads(raw),meta
 
 def immutable(d,parent,key,kind,body,state):
  """Crash-safe publication journal. An unresolved create never gets replayed."""
+ if state.get('schema')!='mgs.backup.archive.state.v1' or not isinstance(state.get('jobs'),dict):raise b.ArchiveError('BACKUP_IMMUTABLE_STATE_SCHEMA')
  entry=state.setdefault('publications',{}).get(key)
  raw=b.canonical(body)
  if entry and entry['sha256']!=sha(raw):raise b.ArchiveError('BACKUP_IMMUTABLE_BODY_CHANGED')
@@ -161,6 +164,7 @@ def owner_ready(hb,s,p):
 
 def resume_acceptance():
  if not STAGE.exists():return {'status':'not_prepared'}
+ if b.read_json(STAGE,{}).get('owner_executor_mode') in ['vps_handoff','vps']:return {'status':'private_backup_handoff' if b.read_json(STAGE,{})['owner_executor_mode']=='vps_handoff' else 'private_backup_active'}
  with b.queue_lock():
   p,s=load()
   if not s.get('worker_sha256'):return {'status':'not_published'}
@@ -221,7 +225,8 @@ def enqueue(d,c,p,s,state,meta,tier):
  slotid=immutable(d,c['receipts_folder_id'],'backup-receipt:'+jid,'backup_receipt_slot',slot,state)
  body={'schema':'mgs.backup.move.request.v1','jobId':jid,'authorizationMessageId':AUTH,'migrationAuthorizationMessageId':m.AUTH,'planSha256':s['plan_sha256'],'bindingSha256':p['bindingSha256'],'asset':a,'receiptFileId':slotid,'deleteSource':False,'archiveTrashEnabled':False}
  state['jobs'][jid]={'jobId':jid,'body':body,'verified':False};b.atomic_json(STATE,state)
- fid=immutable(d,c['requests_folder_id'],'backup-move:'+jid,'backup_move_request',body,state);state['jobs'][jid]['request_file_id']=fid;b.atomic_json(STATE,state)
+ request_type='vps_backup_move_request' if s.get('owner_executor_mode') in ['vps_handoff','vps'] else 'backup_move_request'
+ fid=immutable(d,c['requests_folder_id'],'backup-move:'+jid,request_type,body,state);state['jobs'][jid]['request_file_id']=fid;b.atomic_json(STATE,state)
  d.api('PATCH','files/'+fid,{'supportsAllDrives':'true','fields':'id,properties'},{'properties':{'mgsArchiveState':'queued'}})
  if d.meta(fid).get('properties',{}).get('mgsArchiveState')!='queued':raise b.ArchiveError('BACKUP_QUEUE_MARKER_READBACK')
  return jid
@@ -234,7 +239,7 @@ def cycle(apply=True):
   if state.get('schema')!='mgs.backup.archive.state.v1':raise b.ArchiveError('BACKUP_AUTOMATION_STATE_SCHEMA')
   out={'status':s['status'],'acceptance':acceptance['status'],'queued':[],'verified':[],'pending':[],'blocked':[],'archive_trash_enabled':False,'delete_source':False,'retention_preview_only':True}
   owner_hb=heartbeat(d,c)
-  if owner_hb and owner_hb.get('workerSha256')==s.get('worker_sha256'):
+  if s.get('owner_executor_mode') not in ['vps_handoff','vps'] and owner_hb and owner_hb.get('workerSha256')==s.get('worker_sha256'):
    for failure in owner_hb.get('backupArchive',{}).get('blocked',[]):out['blocked'].append({'component':'backup_owner',**failure})
   jobs=state.get('jobs',{});pending=[j for j in jobs.values() if not j.get('verified')];audit=[j for j in jobs.values() if j.get('verified')][-1:]
   if apply:

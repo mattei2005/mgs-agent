@@ -53,6 +53,11 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^profiles/zeus-skills/op
 # fields contain route/status evidence only, never OAuth credentials.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/ares/creative-ops/30tb-archive/owner-connector/private-https-recovery-1562905531394301997\.json$"
 
+# Reviewed backup transport source and offline contract tests from the approved
+# whole-drive migration. "private" names the network lane, not credential data.
+# Exact code paths only; sibling secrets, editor copies and work mirrors stay blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_backup_transport\.py$|^tests/test_private_backup_transport\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

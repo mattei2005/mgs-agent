@@ -76,6 +76,29 @@ class HistoricalEvidenceTests(unittest.TestCase):
             with self.subTest(relative=relative):
                 self.assertEqual(hashlib.sha256((guard.REPO / relative).read_bytes()).hexdigest(), expected)
 
+    def test_php_recheck_registration_is_exact_negative_evidence(self):
+        relative = "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json"
+        content = (guard.REPO / relative).read_bytes()
+        hits = [line for line in content.decode().splitlines() if guard.RETIRED_HOST in line]
+        self.assertEqual(len(hits), 1)
+        self.assertIn(f"retired agent {guard.RETIRED_HOST} not probed.", hits[0])
+        self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+        self.assertFalse(any(relative.startswith(prefix) for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+        self.assertEqual(self.scan(relative, content, relative, content), [])
+        self.assertEqual(
+            self.scan(relative, content + b" changed", relative, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_php_report_sibling_connection_target_still_blocks(self):
+        relative = "reports/php-security-20261021/connection.json"
+        evidence = "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(
+            self.scan(relative, content, evidence, content),
+            [f"repo:{relative}"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
