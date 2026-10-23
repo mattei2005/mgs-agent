@@ -52769,7 +52769,7 @@
       "type": "autocommit_guardrail_recovery",
       "actor": "zeus",
       "source_alert_id": "1563011855641739308",
-      "updated_at": "2026-10-23T02:15:27.493314+00:00",
+      "updated_at": "2026-10-23T02:16:40.972164+00:00",
       "origin_session_id": "20261022_195537_c9510c",
       "origin_thread_id": "1562078493498540042",
       "origin_authorization_message_id": "1562972150455992431",
@@ -52787,16 +52787,29 @@
       "validation": {
         "tests_passed": 16,
         "source_secret_pattern_and_literal_scan": "PASS",
-        "sibling_credential_negative_cases": "PASS"
+        "sibling_credential_negative_cases": "PASS",
+        "validated_commit": "55846e3d7112da4075f8de6b132140bce3f1c6c4",
+        "remote_main_equals_head": true,
+        "monitor_dry_run_failures": 0,
+        "persistent_service": "active/running",
+        "persistent_batch_target": 10,
+        "persistent_max_wait": 600
       },
-      "state": "tests_passed_awaiting_real_watcher_commit_and_remote_readback",
+      "state": "resolved_validated",
       "credentials_changed": false,
       "manual_commit_or_push": false,
-      "report_infra_status": "pending_canonical_helper",
+      "report_infra_status": "sent_and_get_verified",
       "hashes": {
         "scripts/auto-commit-watcher.sh": "f4a5777ed0bfbf8ce21abb374b9c05cc4e619f3c456e872de78735d1ed4cfa44",
         "tests/test_auto_commit_sensitive_paths.py": "bcc3d316f9bd6179c2ea9735c094ad3d4eccacadde74693932fb7d640afe55a1",
         "tests/test_auto_commit_empty_index.py": "01cdd036fcdf4b23b456889240f5ac41ccd9a77ca198413c5ee3888493450a0c"
+      },
+      "report_infra": {
+        "message_id": "1563013164185030737",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "mentions": 0,
+        "readback_verified": true
       }
     }
   ],

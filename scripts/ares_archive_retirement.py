@@ -76,14 +76,14 @@ def source_optional(d,sid):
 
 def control_scope(d,c):
     m=d.meta(c['retirements_folder_id'])
-    if m.get('mimeType')!=b.FOLDER or m.get('driveId')!=b.SOURCE_DRIVE or m.get('parents')!=[c['control_folder_id']] or m.get('trashed'):raise RetirementError('RETIREMENT_CONTROL_FOLDER_SCOPE')
+    if m.get('mimeType')!=b.FOLDER or not b.control_object_scope(m,c['control_folder_id']):raise RetirementError('RETIREMENT_CONTROL_FOLDER_SCOPE')
 
 def verified_receipt(d,c,job,asset,entry):
     if job.get('kind')!='lineage' or job.get('validationOnly') is True:raise RetirementError('RETIREMENT_RECEIPT_NOT_PRODUCTION')
     fid=entry.get('sourceRetirementReceipt')
     if not fid:raise RetirementError('RETIREMENT_RECEIPT_MISSING')
     control_scope(d,c);m=d.meta(fid);b.require_publisher(m,b.CANONICAL_SA,'RETIREMENT_RECEIPT_AUTHOR');raw=d.raw(fid);r=json.loads(raw)
-    if m.get('parents')!=[c['retirements_folder_id']] or m.get('driveId')!=b.SOURCE_DRIVE or m.get('properties',{}).get('mgsArchiveType')!='source_retirement_receipt' or hashlib.sha256(raw).hexdigest()!=m.get('properties',{}).get('sha256'):raise RetirementError('RETIREMENT_RECEIPT_SCOPE_OR_HASH')
+    if not b.control_object_scope(m,c['retirements_folder_id']) or m.get('properties',{}).get('mgsArchiveType')!='source_retirement_receipt' or hashlib.sha256(raw).hexdigest()!=m.get('properties',{}).get('sha256'):raise RetirementError('RETIREMENT_RECEIPT_SCOPE_OR_HASH')
     receipt_authority=authorization(r.get('confirmation_message_id'))
     if r.get('schema')!='mgs.archive.retirement.receipt.v1' or r.get('status')!='deleted_verified' or r.get('authorization_sha256')!=digest(receipt_authority) or r.get('confirmation_message_id')!=receipt_authority['confirmation_message_id'] or r.get('job_id')!=job['jobId'] or r.get('source_id')!=asset['sourceId'] or r.get('archive_id')!=entry.get('archiveId') or r.get('frozen_asset')!=asset or r.get('delete_http_status') not in (200,204) or r.get('source_readback_http')!=404 or r.get('request_sha256')!=digest(job):raise RetirementError('RETIREMENT_RECEIPT_BINDING')
     b.validate_source_metadata(r['source_before'],asset,c)

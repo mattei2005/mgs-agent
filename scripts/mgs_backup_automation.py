@@ -63,7 +63,7 @@ def queue_object(d,c,fid,key,kind,author):
  parent=c['receipts_folder_id'] if kind in ['backup_move_receipt','backup_receipt_slot'] else c['control_folder_id'] if kind=='backup_plan' else c['requests_folder_id']
  allowed=[kind]
  if kind=='backup_move_request' and b.read_json(STAGE,{}).get('owner_executor_mode') in ['vps_handoff','vps']:allowed.append('vps_backup_move_request')
- if meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('parents')!=[parent] or meta.get('properties',{}).get('mgsArchiveKey')!=key or meta.get('properties',{}).get('mgsArchiveType') not in allowed:raise b.ArchiveError('BACKUP_QUEUE_OBJECT_SCOPE')
+ if not b.control_object_scope(meta,parent) or meta.get('properties',{}).get('mgsArchiveKey')!=key or meta.get('properties',{}).get('mgsArchiveType') not in allowed:raise b.ArchiveError('BACKUP_QUEUE_OBJECT_SCOPE')
  raw=d.raw(fid)
  if sha(raw)!=meta.get('properties',{}).get('sha256'):raise b.ArchiveError('BACKUP_QUEUE_OBJECT_DIGEST')
  return json.loads(raw),meta
@@ -150,7 +150,7 @@ def heartbeat(d,c):
  f=d.one(c['control_folder_id'],'heartbeat:worker-v1')
  if not f:return None
  meta=d.meta(f['id']);b.require_publisher(meta,b.ACCOUNT)
- if meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('parents')!=[c['control_folder_id']]:raise b.ArchiveError('BACKUP_HEARTBEAT_SCOPE')
+ if not b.control_object_scope(meta,c['control_folder_id']):raise b.ArchiveError('BACKUP_HEARTBEAT_SCOPE')
  return json.loads(d.raw(f['id']))
 
 def owner_ready(hb,s,p):

@@ -196,6 +196,10 @@ class Drive:
         return {'size':str(size),'md5':md5.hexdigest(),'sha256':sha.hexdigest()}
     def one(self,parent,key):
         matches=self.listing(parent,key=key)
+        binding=read_json(DATA/'owner-connector/control-store/binding.json',{})
+        target=binding.get('folder_map',{}).get(parent)
+        if binding.get('migration_pending') is True and target and target!=parent:
+            matches+=self.listing(target,key=key)
         if len(matches)>1:raise ArchiveError('DUPLICATE_QUEUE_OBJECT')
         return matches[0] if matches else None
     def folder(self,parent,name,key):
@@ -249,9 +253,14 @@ class Drive:
 
 def control_object_scope(metadata,parent):
     """Exact control-parent storage binding; never relax media source checks."""
-    if metadata.get('parents')!=[parent] or metadata.get('trashed'):return False
     binding=read_json(DATA/'owner-connector/control-store/binding.json',{})
-    if parent not in binding.get('parent_ids',[]):return metadata.get('driveId')==SOURCE_DRIVE
+    parents=[parent]
+    target=binding.get('folder_map',{}).get(parent)
+    if binding.get('migration_pending') is True and target:parents.append(target)
+    if len(metadata.get('parents',[]))!=1 or metadata['parents'][0] not in parents or metadata.get('trashed'):return False
+    effective_parent=metadata['parents'][0]
+    if effective_parent not in binding.get('parent_ids',[]):return metadata.get('driveId')==SOURCE_DRIVE
+    if binding.get('production_enabled') is True and binding.get('migration_pending') is True and metadata.get('driveId')==SOURCE_DRIVE:return True
     return binding.get('production_enabled') is True and not metadata.get('driveId') and any(x.get('emailAddress')==ACCOUNT for x in metadata.get('owners',[])) and not any(x.get('type') in ['anyone','domain'] for x in metadata.get('permissions',[]))
 
 def asset_snapshot(d,c,fid,role,canary=False):

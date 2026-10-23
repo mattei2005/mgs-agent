@@ -44,7 +44,7 @@ class Owner(t.OwnerDrive):
   except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError):raise b.ArchiveError('PRIVATE_BACKUP_PATCH_RESPONSE_AMBIGUOUS') from None
  def publish_slot(self,c,j,p,metadata,journal):
   fid=j['receiptFileId'];old=self.meta(fid);key='backup-receipt:'+j['jobId'];prior=json.loads(self.raw(fid))
-  if old.get('driveId')!=b.SOURCE_DRIVE or old.get('parents')!=[c['receipts_folder_id']] or old.get('properties',{}).get('mgsArchiveKey')!=key:raise b.ArchiveError('PRIVATE_BACKUP_RECEIPT_SLOT_SCOPE')
+  if not b.control_object_scope(old,c['receipts_folder_id']) or old.get('properties',{}).get('mgsArchiveKey')!=key:raise b.ArchiveError('PRIVATE_BACKUP_RECEIPT_SLOT_SCOPE')
   if prior.get('status')=='moved':
    b.require_publisher(old,b.ACCOUNT)
    if prior.get('requestSha256')!=a.sha(j) or prior.get('archiveId')!=j['asset']['sourceId']:raise b.ArchiveError('PRIVATE_BACKUP_OLD_RECEIPT')
@@ -71,7 +71,7 @@ def move_one(owner,sa,c,p,s,job,journal):
   binding=b.read_json(HOME/'historical-manifest-binding.json',{});fid=binding.get('file_id')
   if not fid:raise b.ArchiveError('PRIVATE_BACKUP_HISTORICAL_UNPUBLISHED')
   manifest_meta=owner.meta(fid);b.require_publisher(manifest_meta,b.CANONICAL_SA);raw=owner.raw(fid)
-  if manifest_meta.get('driveId')!=b.SOURCE_DRIVE or manifest_meta.get('parents')!=[c['control_folder_id']] or a.sha(raw)!=binding.get('sha256'):raise b.ArchiveError('PRIVATE_BACKUP_HISTORICAL_PROVENANCE')
+  if not b.control_object_scope(manifest_meta,c['control_folder_id']) or a.sha(raw)!=binding.get('sha256'):raise b.ArchiveError('PRIVATE_BACKUP_HISTORICAL_PROVENANCE')
   historical=json.loads(raw)
  validate_job(j,p,s['plan_sha256'],historical);request=sa.meta(job['request_file_id']);b.require_publisher(request,b.CANONICAL_SA)
  if request.get('parents')!=[c['requests_folder_id']] or request.get('properties',{}).get('mgsArchiveType')!=TYPE or sa.raw(request['id'])!=b.canonical(j):raise b.ArchiveError('PRIVATE_BACKUP_REQUEST_PROVENANCE')

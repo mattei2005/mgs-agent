@@ -162,7 +162,7 @@ class Engine:
   self.owner=owner;self.c=c;self.manifest=manifest;self.stage=stage;self.journal=journal or Journal();self.folder_cache={};self.deadline:float|None=None;self.folder_lock=threading.RLock();self.stop=threading.Event();self.created_ids=[]
   if stage and stage.get('metadata_reconciliation_sha256'):
    fid=stage['metadata_reconciliation_file_id'];meta=owner.meta(fid);b.require_publisher(meta,b.CANONICAL_SA);raw=owner.raw(fid)
-   if meta.get('parents')!=[c['control_folder_id']] or meta.get('driveId')!=b.SOURCE_DRIVE or meta.get('properties',{}).get('mgsArchiveType')!='backfill_metadata_reconciliation' or hashlib.sha256(raw).hexdigest()!=stage['metadata_reconciliation_sha256']:raise TransportError('NATIVE_METADATA_RECONCILIATION_PROVENANCE')
+   if not b.control_object_scope(meta,c['control_folder_id']) or meta.get('properties',{}).get('mgsArchiveType')!='backfill_metadata_reconciliation' or hashlib.sha256(raw).hexdigest()!=stage['metadata_reconciliation_sha256']:raise TransportError('NATIVE_METADATA_RECONCILIATION_PROVENANCE')
  def check_running(self):
   if self.stop.is_set():raise TransportError('BATCH_STOPPED_ON_FIRST_FAILURE')
   if self.deadline is not None and time.monotonic()>self.deadline:raise TransportError('COOPERATIVE_YIELD')

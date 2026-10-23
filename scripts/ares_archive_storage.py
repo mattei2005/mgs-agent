@@ -229,7 +229,7 @@ def require_historical_ack(d,entry):
     c=b.config_load();found=d.one(c['requests_folder_id'],'backfill-ack:'+entry['jobId'])
     if not found:raise StorageError('HISTORICAL_NATIVE_ACK_REQUIRED')
     metadata=d.meta(found['id']);b.require_publisher(metadata,b.CANONICAL_SA);raw=d.raw(found['id']);ack=json.loads(raw)
-    if metadata.get('parents')!=[c['requests_folder_id']] or metadata.get('driveId')!=b.SOURCE_DRIVE or metadata.get('properties',{}).get('mgsArchiveType')!='backfill_ack' or metadata.get('properties',{}).get('sha256')!=hashlib.sha256(raw).hexdigest() or ack.get('schema')!='mgs.archive.backfill.ack.v1' or ack.get('status')!='verified' or ack.get('deleteSource') is not False or ack.get('jobId')!=entry['jobId']:raise StorageError('HISTORICAL_NATIVE_ACK_SCOPE')
+    if not b.control_object_scope(metadata,c['requests_folder_id']) or metadata.get('properties',{}).get('mgsArchiveType')!='backfill_ack' or metadata.get('properties',{}).get('sha256')!=hashlib.sha256(raw).hexdigest() or ack.get('schema')!='mgs.archive.backfill.ack.v1' or ack.get('status')!='verified' or ack.get('deleteSource') is not False or ack.get('jobId')!=entry['jobId']:raise StorageError('HISTORICAL_NATIVE_ACK_SCOPE')
     matches=[a for a in ack.get('assets',[]) if a.get('source_id')==entry['sourceId']]
     if len(matches)!=1 or any(matches[0].get(k)!=entry[v] for k,v in [('archive_id','archiveId'),('size','size'),('md5','md5'),('sha256','sha256')]):raise StorageError('HISTORICAL_NATIVE_ACK_MAPPING')
     return True
