@@ -65,19 +65,19 @@ def verification_snapshot(d,c,job):
     if request is None:raise bridge.ArchiveError('REQUEST_MISSING')
     meta=d.meta(request['id']);bridge.require_publisher(meta,bridge.CANONICAL_SA,'REQUEST_AUTHOR')
     body=d.raw(request['id']);props=meta.get('properties',{})
-    if meta.get('parents')!=[c['requests_folder_id']] or meta.get('driveId')!=c['source_drive_id'] or props.get('mgsArchiveType') not in (['request','vps_request'] if c.get('owner_executor_mode')=='vps' else ['request']) or props.get('mgsArchiveKey')!='request:'+jid or body!=bridge.canonical(job) or hashlib.sha256(body).hexdigest()!=props.get('sha256'):
+    if not bridge.control_object_scope(meta,c['requests_folder_id']) or props.get('mgsArchiveType') not in (['request','vps_request'] if c.get('owner_executor_mode')=='vps' else ['request']) or props.get('mgsArchiveKey')!='request:'+jid or body!=bridge.canonical(job) or hashlib.sha256(body).hexdigest()!=props.get('sha256'):
         raise bridge.ArchiveError('REQUEST_SCOPE_OR_BODY_CHANGED')
     rf=d.one(c['receipts_folder_id'],'receipt:'+jid)
     if rf is None:return {'pending':True}
     rm=d.meta(rf['id']);bridge.require_publisher(rm,bridge.ACCOUNT,'RECEIPT_AUTHOR')
-    if rm.get('parents')!=[c['receipts_folder_id']] or rm.get('driveId')!=c['source_drive_id'] or rm.get('properties',{}).get('mgsArchiveType')!='receipt':raise bridge.ArchiveError('RECEIPT_SCOPE')
+    if not bridge.control_object_scope(rm,c['receipts_folder_id']) or rm.get('properties',{}).get('mgsArchiveType')!='receipt':raise bridge.ArchiveError('RECEIPT_SCOPE')
     receipt=json.loads(d.raw(rf['id']))
     if receipt.get('status')=='blocked':raise bridge.ArchiveError('OWNER_BLOCKED:'+str(receipt.get('reason','UNKNOWN'))[:160])
     bridge.validate_receipt(job,receipt)
     ackfile=d.one(c['requests_folder_id'],'ack:'+jid);ackmeta=None;ack=None
     if ackfile:
         ackmeta=d.meta(ackfile['id']);bridge.require_publisher(ackmeta,bridge.CANONICAL_SA,'ACK_AUTHOR');ack=json.loads(d.raw(ackfile['id']))
-        if ackmeta.get('parents')!=[c['requests_folder_id']] or ackmeta.get('driveId')!=c['source_drive_id'] or ack.get('schema')!='mgs.archive.ack.v1' or ack.get('jobId')!=jid or ack.get('kind')!=job['kind'] or ack.get('status')!='verified' or ack.get('deleteSource') is not False:raise bridge.ArchiveError('ACK_SCOPE')
+        if not bridge.control_object_scope(ackmeta,c['requests_folder_id']) or ack.get('schema')!='mgs.archive.ack.v1' or ack.get('jobId')!=jid or ack.get('kind')!=job['kind'] or ack.get('status')!='verified' or ack.get('deleteSource') is not False:raise bridge.ArchiveError('ACK_SCOPE')
     media=[]
     for asset in job['assets']:
         copied=next(x for x in receipt['assets'] if x['sourceId']==asset['sourceId'] and x['role']==asset['role'])
