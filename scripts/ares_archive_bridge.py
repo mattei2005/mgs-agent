@@ -204,11 +204,18 @@ class Drive:
             m=self.meta(old['id'])
             if m['mimeType']!=FOLDER or m['parents']!=[parent]:raise ArchiveError('FOLDER_SCOPE')
             return m['id']
+        binding=read_json(DATA/'owner-connector/control-store/binding.json',{})
+        if parent in binding.get('parent_ids',[]):raise ArchiveError('CONTROL_FOLDER_REQUIRES_PRIVATE_PROVISION')
         made=self.api('POST','files',{'supportsAllDrives':'true','fields':'id'}, {'name':name,'mimeType':FOLDER,'parents':[parent],'properties':{'mgsArchiveKey':key,'mgsArchiveType':'control'}})
         fid=made['id'];m=self.meta(fid)
         if m['parents']!=[parent] or m['mimeType']!=FOLDER:raise ArchiveError('FOLDER_READBACK')
         return fid
     def upload_once(self,parent,name,data,mime,key,kind):
+        binding=read_json(DATA/'owner-connector/control-store/binding.json',{})
+        if parent in binding.get('parent_ids',[]):
+            if binding.get('production_enabled') is not True:raise ArchiveError('PRIVATE_CONTROL_STORE_NOT_ACTIVE')
+            import mgs_private_control_store
+            return mgs_private_control_store.publish_sa(self,parent,name,data,mime,key,kind)
         existing=self.one(parent,key)
         if existing:
             fid=existing['id']
@@ -239,6 +246,13 @@ class Drive:
             if m.get('trashed') or len(m.get('parents',[]))!=1:raise ArchiveError('ANCESTRY')
             out.append(m['name']);cur=m['parents'][0]
         raise ArchiveError('ANCESTRY_LIMIT')
+
+def control_object_scope(metadata,parent):
+    """Exact control-parent storage binding; never relax media source checks."""
+    if metadata.get('parents')!=[parent] or metadata.get('trashed'):return False
+    binding=read_json(DATA/'owner-connector/control-store/binding.json',{})
+    if parent not in binding.get('parent_ids',[]):return metadata.get('driveId')==SOURCE_DRIVE
+    return binding.get('production_enabled') is True and not metadata.get('driveId') and any(x.get('emailAddress')==ACCOUNT for x in metadata.get('owners',[])) and not any(x.get('type') in ['anyone','domain'] for x in metadata.get('permissions',[]))
 
 def asset_snapshot(d,c,fid,role,canary=False):
     m=d.meta(fid)

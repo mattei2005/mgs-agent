@@ -58,6 +58,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/ares/creative-ops/
 # Exact code paths only; sibling secrets, editor copies and work mirrors stay blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_backup_transport\.py$|^tests/test_private_backup_transport\.py$"
 
+# Reviewed control-slot source, offline tests and HTTP transport from the same
+# authorized migration. Exact code paths only, never runtime grants or siblings.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_control_store\.py$|^tests/test_private_control_store\.py$|^scripts/mgs_private_drive_http\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

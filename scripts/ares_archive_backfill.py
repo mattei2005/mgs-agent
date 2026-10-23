@@ -110,6 +110,44 @@ def verify_asset(d,c,job,a,receipt):
  source_access(d,a,c)
  return {'source_id':a['sourceId'],'archive_id':meta['id'],'archive_parent_id':meta['parents'][0],'name':a['name'],'mime_type':a['mimeType'],'relative_parent':a['relativeParent'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'owner':b.ACCOUNT,'verified':True,'job_id':job['jobId']}
 
+class FolderReadScope:
+ """One verification phase: share folder GETs, then refetch every folder.
+ File metadata, permissions and all binary streams are deliberately uncached.
+ """
+ def __init__(self,drive):
+  import threading
+  self.drive=drive;self.lock=threading.Lock();self.folders={}
+ def __getattr__(self,name):return getattr(self.drive,name)
+ def meta(self,fid):return self.drive.meta(fid)
+ def folder_meta(self,fid):
+  from concurrent.futures import Future
+  with self.lock:
+   pending=self.folders.get(fid);leader=pending is None
+   if leader:pending=Future();self.folders[fid]=pending
+  if leader:
+   try:
+    row=self.drive.meta(fid)
+    if row.get('mimeType')!=b.FOLDER or row.get('trashed'):raise BackfillError('FOLDER_PHASE_SCOPE')
+    pending.set_result(row)
+   except BaseException as exc:pending.set_exception(exc);raise
+  return pending.result()
+ def relative_parent(self,parent,root):
+  current=parent;names=[];seen=set()
+  for _ in range(30):
+   if current==root:return list(reversed(names))
+   if current in seen:raise BackfillError('FOLDER_PHASE_CYCLE')
+   seen.add(current);row=self.folder_meta(current)
+   if len(row.get('parents',[]))!=1:raise BackfillError('FOLDER_PHASE_PARENT')
+   names.append(row['name']);current=row['parents'][0]
+  raise BackfillError('FOLDER_PHASE_DEPTH')
+ def validate_folders(self):
+  from concurrent.futures import ThreadPoolExecutor
+  snapshot=list(self.folders.items())
+  def check(item):
+   fid,pending=item
+   if self.drive.meta(fid)!=pending.result():raise BackfillError('FOLDER_CHANGED_DURING_VERIFICATION')
+  with ThreadPoolExecutor(max_workers=4,thread_name_prefix='mgs-sa-folder-postcheck') as pool:list(pool.map(check,snapshot))
+
 def verify_assets_readonly(d,c,job,receipt):
  # Parallel GET/stream verification only; index, ACK and all writes stay serial.
  if c.get('owner_executor_mode')!='vps' or len(job['assets'])<2:return [verify_asset(d,c,job,a,receipt) for a in job['assets']]

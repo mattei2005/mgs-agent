@@ -91,6 +91,20 @@ fi
             "tests/test_private_backup_transport_other.py": 1,
             "scripts/private_backup_credentials.json": 1,
             "tests/private_backup_token.json": 1,
+            "scripts/mgs_private_control_store.py": 0,
+            "tests/test_private_control_store.py": 0,
+            "scripts/mgs_private_drive_http.py": 0,
+            "work/scripts/mgs_private_control_store.py": 1,
+            "work/tests/test_private_control_store.py": 1,
+            "work/scripts/mgs_private_drive_http.py": 1,
+            "scripts/mgs_private_control_store.py.bak": 1,
+            "tests/test_private_control_store.py.bak": 1,
+            "scripts/mgs_private_drive_http.py.bak": 1,
+            "scripts/mgs_private_control_store_other.py": 1,
+            "tests/test_private_control_store_other.py": 1,
+            "scripts/mgs_private_drive_http_other.py": 1,
+            "scripts/private_control_credentials.json": 1,
+            "data/private_control_token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):
