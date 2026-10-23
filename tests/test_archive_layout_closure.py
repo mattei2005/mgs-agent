@@ -85,4 +85,31 @@ class LayoutClosure(unittest.TestCase):
   with patch.object(layout,'owned_inventory',return_value={}),patch.object(b,'atomic_json'),self.assertRaises(b.ArchiveError):layout.propagated_inventory(Mock(),{'x'},0)
  def test_unknown_operation_stock_folder_rejected(self):
   with patch.object(b,'read_json',return_value={'slots':[{'operation':'SHEIN_US_EN'}]}),self.assertRaises(b.ArchiveError):stock.destination_folder(Mock(),Mock(),Mock(),{'relativeParent':['UNKNOWN','VID','01_READY']})
+ def test_acl_gate_rejects_without_explicit_confirmation(self):
+  proposal={'action':'restore_same_inherited_upload_roles_after_parent_move','target_id':loc.UPLOAD}
+  with patch.object(b,'read_json',side_effect=[proposal,{'approved':False}]),self.assertRaisesRegex(b.ArchiveError,'SHARING_CONFIRMATION_REQUIRED'):layout.require_upload_access_confirmation()
+ def test_acl_gate_rejects_different_approver(self):
+  proposal={'action':'restore_same_inherited_upload_roles_after_parent_move','target_id':loc.UPLOAD}
+  approval={'approved':True,'author_id':'other','thread_id':'1562078493498540042','confirmation_message_id':'reply','proposal_sha256':layout.ba.sha(proposal)}
+  with patch.object(b,'read_json',side_effect=[proposal,approval]),self.assertRaises(b.ArchiveError):layout.require_upload_access_confirmation()
+ def test_acl_gate_exact_proposal_and_rodolfo_required(self):
+  proposal={'action':'restore_same_inherited_upload_roles_after_parent_move','target_id':loc.UPLOAD}
+  approval={'approved':True,'author_id':'344196393512075265','thread_id':'1562078493498540042','confirmation_message_id':'reply','proposal_sha256':layout.ba.sha(proposal)}
+  with patch.object(b,'read_json',side_effect=[proposal,approval]):self.assertEqual(layout.require_upload_access_confirmation(),(proposal,approval))
+ def test_acl_gate_cannot_make_move_without_approval(self):
+  with patch.object(layout,'require_upload_access_confirmation',side_effect=b.ArchiveError('missing')),patch.object(layout,'move_once') as move:
+   with self.assertRaises(b.ArchiveError):layout.move_upload_preserving_access(Mock(),Mock(),Mock(),{})
+   move.assert_not_called()
+ def test_acl_group_or_public_not_accepted(self):
+  for kind in ['anyone','domain','group']:
+   with self.assertRaises(b.ArchiveError):layout.acl_identity([{'type':kind,'id':'id','emailAddress':'x','role':'writer'}])
+ def test_scoped_inventory_requires_exact_parents(self):
+  d=Mock()
+  with self.assertRaisesRegex(b.ArchiveError,'EXACT_PARENT_SCOPE'):layout.owned_inventory(d,[])
+  d.api.assert_not_called()
+ def test_explicit_expected_folder_rename_only(self):
+  before={'id':'f','name':'old','mimeType':b.FOLDER,'parents':['p'],'version':'1','trashed':False}
+  after={**before,'name':'retired','version':'2','parents':['q']}
+  self.assertTrue(layout.unchanged(before,after,parent=['q'],expected_name='retired'))
+  with self.assertRaises(b.ArchiveError):layout.unchanged(before,{**after,'properties':{'injected':'true'}},parent=['q'],expected_name='retired')
 if __name__=='__main__':unittest.main()
