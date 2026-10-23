@@ -42,6 +42,7 @@ REQUEST_FIELDS = {'request_id', 'account', 'source_number', 'budget_usd', 'start
 REQUEST_FIELDS.update({'quantity', 'preserve_posts', 'start_now', 'budget_from_reference', 'start_next_midnight', 'target_number', 'replaces_campaign_id'})
 REQUEST_FIELDS.update({'bid_strategy', 'bid_usd', 'campaign_groups', 'manager_media_folder_id'})
 REQUEST_FIELDS.update({'source_account', 'source_campaign_id', 'website_url', 'primary_text', 'target_page_id'})
+REQUEST_FIELDS.add('target_quiz_version')
 CURRENT_PROFILE: ContextVar[dict[str, Any] | None] = ContextVar('shein_account_profile', default=None)
 
 
@@ -99,6 +100,8 @@ def aware_time(value: Any) -> datetime:
 
 
 def validate_request(request: dict[str, Any]) -> None:
+    from .shein_quiz_delta import validate_intent as validate_quiz_delta
+    validate_quiz_delta(request)
     from .shein_reference import validate_intent
     validate_intent(request)
     if set(request) - REQUEST_FIELDS:

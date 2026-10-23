@@ -168,7 +168,8 @@ def _build_one(request, source, number, account_config):
     if naming.get('enabled') is True:
         from .shein_naming import product_label, campaign_name
         chosen_product = request.get('product_label') if mode != 'pure_clone' and request.get('product_label') else product_label(campaign['name'])
-        name = campaign_name(number, start.isoformat(), p['timezone'], p['destination_base'], chosen_product, campaign['bid_strategy'], new, naming, copy_source_number=sn if mode in {'pure_clone','clone_prestaged'} else None)
+        from .shein_quiz_delta import target_base
+        name = campaign_name(number, start.isoformat(), p['timezone'], target_base(request, p), chosen_product, campaign['bid_strategy'], new, naming, copy_source_number=sn if mode in {'pure_clone','clone_prestaged'} else None)
     source_ads = sorted(source['ads'], key=lambda a: str(a.get('name', '')))
     if not 1 <= len(source_ads) <= 5:
         raise ValueError('source requires 1..5 ads')
@@ -219,6 +220,8 @@ def _build_one(request, source, number, account_config):
                 cp = full_creative(cr, story, tags, cname, _individual_dof(cr)) if cr.get('asset_feed_spec') else {
                 'name': cname, 'object_story_id': cr['effective_object_story_id'], 'url_tags': tags,
                 'degrees_of_freedom_spec': _individual_dof(cr)}
+            from .shein_quiz_delta import apply as apply_quiz_delta
+            cp = apply_quiz_delta(cp, request, p)
             if cr.get('contextual_multi_ads') is not None:
                 cp['contextual_multi_ads'] = copy.deepcopy(cr['contextual_multi_ads'])
             ads.append({'name': ad['name'], 'source_ad_id': str(ad['id']), 'creative_payload': cp})
