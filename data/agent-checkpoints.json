@@ -2603,12 +2603,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-G006-YOLO02-ACTIVATE-1563031426381774959",
-      "next_step": "Congelar hierarquias e invariantes; testar ativador e dry-run; auditar e registrar one-shot",
-      "objective": "Ativar as 100 campanhas nominais de Nicolas em 23/10/2026 00:15 America/New_York, status-only",
+      "next_step": "One-shot inicia00:13, aguarda sem lease, valida autoridade e drift, ativa somente campanhas a partir00:15, confirma lote por GET e publica resultado nesta thread",
+      "objective": "Ativar as 100 campanhas nominais em 23/10/2026 00:15 America/New_York, status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/manual-campaign-actions/shein-g006-yolo02-activate-20261023-0015-1563031426381774959/request.json",
-      "state": "intake live validado: 100 ids unicos, todas paused; autoridade e identidade da conta confirmadas; nenhum write meta",
+      "state": "scheduled: agenda deterministica enabled/no_agent, ids e hierarquia congelados; 100 campanhas paused, 100 conjuntos e 249 anuncios verificados; 19 testes; dry-run live sem writes; um anuncio pausado da181 preservado",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-10-23T03:31:00+00:00"
+      "updated_at": "2026-10-23T03:42:59+00:00"
     },
     {
       "agent": "zeus",
@@ -7182,5 +7182,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T03:31:00+00:00"
+  "updated_at": "2026-10-23T03:42:59+00:00"
 }
