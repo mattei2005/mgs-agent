@@ -51,10 +51,16 @@ class BackupAutomationTests(unittest.TestCase):
   with self.assertRaises(self.a.b.ArchiveError):self.a.retention_preview([row,row],self.p,protected_ids=set())
  def test_unresolved_job_publication_never_posts_again(self):
   from unittest.mock import Mock,patch
-  d=Mock();d.one.return_value=None;body={'fixture':'offline'};state={'publications':{'key':{'sha256':self.a.sha(body),'status':'intent'}}}
+  d=Mock();d.one.return_value=None;body={'fixture':'offline'};state={'schema':'mgs.backup.archive.state.v1','jobs':{},'publications':{'key':{'sha256':self.a.sha(body),'status':'intent'}}}
   with patch.object(self.a.b,'atomic_json'):
    with self.assertRaisesRegex(self.a.b.ArchiveError,'NO_REPLAY'):self.a.immutable(d,'parent123','key','backup_ack',body,state)
   d.upload_once.assert_not_called()
+ def test_sidecar_cannot_overwrite_canonical_state(self):
+  from unittest.mock import Mock,patch
+  d=Mock()
+  with patch.object(self.a.b,'atomic_json') as write:
+   with self.assertRaisesRegex(self.a.b.ArchiveError,'STATE_SCHEMA'):self.a.immutable(d,'parent123','key','backup_ack',{'fixture':'offline'},{'publications':{}})
+   write.assert_not_called();d.one.assert_not_called();d.upload_once.assert_not_called()
  def test_unresolved_staged_worker_publication_never_posts_again(self):
   from unittest.mock import Mock,patch
   d=Mock();d.one.return_value=None;stage={'publication_intents':{'key':{'sha256':self.a.sha(b'offline'),'status':'intent'}}}

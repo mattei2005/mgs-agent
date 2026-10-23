@@ -164,7 +164,8 @@ def owner_ready(hb,s,p):
 
 def resume_acceptance():
  if not STAGE.exists():return {'status':'not_prepared'}
- if b.read_json(STAGE,{}).get('owner_executor_mode') in ['vps_handoff','vps']:return {'status':'private_backup_handoff' if b.read_json(STAGE,{})['owner_executor_mode']=='vps_handoff' else 'private_backup_active'}
+ _,current_stage=load()
+ if current_stage.get('owner_executor_mode') in ['vps_handoff','vps']:return {'status':'private_backup_handoff' if current_stage['owner_executor_mode']=='vps_handoff' else 'private_backup_active'}
  with b.queue_lock():
   p,s=load()
   if not s.get('worker_sha256'):return {'status':'not_published'}
