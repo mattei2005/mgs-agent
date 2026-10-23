@@ -5,11 +5,21 @@ module never authenticates, copies, moves, changes permissions or deletes.
 """
 from __future__ import annotations
 import re
+import contextlib
+from contextvars import ContextVar
 from pathlib import Path
 import ares_archive_bridge as b
 BINDING=b.DATA/'owner-connector'/'stock-layout-binding.json'
 APPROVAL='1562972150455992431'
 UPLOAD='1ARBvLammWUHuAclNmcriwkkgeedKryBd'
+_CANARY=ContextVar('stock_layout_internal_canary',default=False)
+
+@contextlib.contextmanager
+def internal_canary():
+    if b.read_json(b.CONFIG,{}).get('control_cutover_in_progress') is not True:raise b.ArchiveError('STOCK_CANARY_BARRIER_REQUIRED')
+    token=_CANARY.set(True)
+    try:yield
+    finally:_CANARY.reset(token)
 
 def validate(value):
     if not isinstance(value,dict) or value.get('schema')!='mgs.archive.stock.layout.v1' or value.get('approval_message_id')!=APPROVAL:
@@ -19,7 +29,8 @@ def validate(value):
     stock=value.get('stock_root_id')
     if not isinstance(stock,str) or not re.fullmatch('[A-Za-z0-9_-]{8,}',stock) or stock in set(expected.values()):raise b.ArchiveError('STOCK_LAYOUT_ROOT')
     if type(value.get('active')) is not bool:raise b.ArchiveError('STOCK_LAYOUT_ACTIVE_TYPE')
-    if value['active'] and (value.get('same_ids_verified') is not True or value.get('consumer_canary_verified') is not True or not value.get('acceptance_proof')):
+    canary=value.get('phase')=='consumer_canary' and _CANARY.get() is True
+    if value['active'] and (value.get('same_ids_verified') is not True or (value.get('consumer_canary_verified') is not True and not canary) or not value.get('acceptance_proof')):
         raise b.ArchiveError('STOCK_LAYOUT_ACCEPTANCE_REQUIRED')
     return value
 
@@ -39,6 +50,12 @@ def token_drive(token):
 
 def creatives_for_token(token):
     return verify_stock_root(token_drive(token))
+
+def stock_scope_for_token(token,meta):
+    """Require native owner/ancestry, not a name-only My Drive acceptance."""
+    if not active():return meta.get('driveId')==b.SOURCE_DRIVE and not meta.get('trashed')
+    native=assert_stock_file(token_drive(token),meta.get('stock_file_id') or meta['id'])
+    return native.get('name')==meta.get('name') and native.get('parents')==meta.get('parents')
 
 def assert_stock_file(d,fid,expected_parent=None):
     meta=d.meta(fid)

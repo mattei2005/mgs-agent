@@ -118,6 +118,12 @@ def validate_reconciliation_source(d,meta,a,c,job):
     Production media keeps the original source contract. Never rewrite its job
     or project a synthetic Shared Drive response for an actual My Drive file.
     """
+    if meta.get('driveId')!=c['source_drive_id']:
+        import ares_archive_locations as locations
+        if locations.active():
+            import mgs_archive_layout_cutover as layout
+            frozen=read_json(layout.SNAPSHOT,{}).get('objects',{})
+            if a['sourceId'] in frozen:return layout.verify_relocated(d,meta,a)
     if meta.get('driveId')==c['source_drive_id'] or job.get('validationOnly') is not True:
         return validate_source_metadata(meta,a,c)
     home=DATA/'owner-connector/control-store'
@@ -186,7 +192,7 @@ def record_verified_job(index,job,result):
             if prev and any(prev.get(k)!=entry[k] for k in ('archiveId','sha256','lineageId')):raise ArchiveError('MAPPING_CONFLICT')
         for entry in result['assets']:
             previous=index['mappings'].get(entry['sourceId'],{});stored=dict(entry)
-            for key in ('stockShortcutId','stockAliasVerifiedAt','sourceRetirementReceipt'):
+            for key in ('stockShortcutId','stockAliasVerifiedAt','sourceRetirementReceipt','stockTransferredToArchive','stockTransferReceiptId','stockTransferVerifiedAt'):
                 if key in previous:stored[key]=previous[key]
             index['mappings'][entry['sourceId']]=stored
     index['verified_jobs'][job['jobId']]=result

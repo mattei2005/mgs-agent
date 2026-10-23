@@ -937,7 +937,8 @@ def drive_inventory(token: str) -> dict[str, Any]:
     caps = root.get("capabilities") or {}
     if root.get("driveId") != DRIVE_ID or root.get("trashed") or not all(caps.get(name) for name in ("canDownload", "canEdit", "canMoveItemWithinDrive")):
         raise DailyBlocked("drive_root", "canonical Shared Drive identity or capabilities failed")
-    creatives = one_folder(drive_children(token, DRIVE_ID), "CRIATIVOS", "drive_creatives")
+    import ares_archive_locations as locations
+    creatives = locations.creatives_for_token(token) if locations.active() else one_folder(drive_children(token, DRIVE_ID), "CRIATIVOS", "drive_creatives")
     operation = one_folder(drive_children(token, creatives["id"]), "CAR_BR_BR", "drive_operation")
     files: list[dict[str, Any]] = []
     counts: dict[str, int] = {}

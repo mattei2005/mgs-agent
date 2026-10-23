@@ -893,6 +893,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-stock-source-1563200603172249671",
+      "actor": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "source_alert_id": "1563200603172249671",
+      "origin_session_id": "20261023_092356_d87054a6",
+      "origin_thread_id": "1562078493498540042",
+      "reviewed_exact_path": "scripts/mgs_private_stock_transport.py",
+      "cause": "private filename false positive on reviewed credential-free Python source",
+      "paths": [
+        "scripts/auto-commit-watcher.sh",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "tests/test_auto_commit_empty_index.py"
+      ],
+      "partial_effects": "Index empty; blocked batch never started commit/push; origin owns Drive migration, not watcher recovery",
+      "state": "correction_applied_pending_live_validation",
+      "credentials_changed": false,
+      "manual_commit_or_push": false,
+      "report_infra_status": "pending"
+    },
+    {
       "additional_out_of_scope_findings": "Two concurrent Playwright embeddedNode24.17.0 and24.18.1 onHostinger observed aftersystempatch;SDKbundles notupdated. OriginalsystemNode18 andBitNinja remainoutsidefirstlot.",
       "agent": "zeus",
       "authorization_message_id": "1562896598286078085",

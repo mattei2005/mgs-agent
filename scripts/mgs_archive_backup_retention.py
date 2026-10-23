@@ -30,15 +30,27 @@ def protected(p):
 def select(rows,p,protected_ids):
     return a.retention_preview(rows,p,protected_ids)['archive_trash_candidates']
 
+def direct_ack(sa,c,p,meta,tier):
+    found=sa.one(c['control_folder_id'],'direct-backup-ack:'+meta['id'])
+    if not found:return None
+    native=sa.meta(found['id']);b.require_publisher(native,b.CANONICAL_SA);raw=sa.raw(found['id']);ack=json.loads(raw)
+    expected={'schema':'mgs.backup.direct.archive.ack.v1','status':'verified','file_id':meta['id'],'parent_id':p['tiers'][tier]['archiveId'],'archive_root_id':p['archiveRootId'],'size':meta['size'],'md5':meta['md5Checksum'],'sha256':meta['sha256Checksum'],'tier':tier,'canonical_sa_upload':True,'independent_sa_stream_verified':True}
+    if not b.control_object_scope(native,c['control_folder_id']) or native.get('properties',{}).get('mgsArchiveType')!='backup_direct_ack' or native.get('properties',{}).get('sha256')!=a.sha(raw) or any(ack.get(k)!=v for k,v in expected.items()):raise b.ArchiveError('RETENTION_DIRECT_ACK_BINDING')
+    asset={'sourceId':meta['id'],'name':meta['name'],'mimeType':meta['mimeType'],'sourceCreatedTime':meta['createdTime'],'size':meta['size'],'md5':meta['md5Checksum'],'sha256':meta['sha256Checksum'],'version':meta['version'],'destinationParentId':meta['parents'][0]}
+    return {'direct':True,'ack_file_id':found['id'],'jobId':'direct:'+meta['id'],'body':{'asset':asset},'ack':ack}
+
 def inspect(sa,p):
     state=b.read_json(a.STATE,{});jobs=state.get('jobs',{})
     verified={j['body']['asset']['sourceId']:j for j in jobs.values() if j.get('verified') is True and j.get('ack_file_id')}
-    protected_ids,restore=protected(p);rows=[];metas={}
+    protected_ids,restore=protected(p);rows=[];metas={};c=b.config_load()
     for tier in backup.TIERS:
         for location,parent in [('source',p['tiers'][tier]['sourceId']),('archive',p['tiers'][tier]['archiveId'])]:
             for meta in backup.children(sa,parent,managed=True):
                 props=meta.get('appProperties',{})
                 if props.get('tier')!=tier or props.get('mgs_dr')!='true' or props.get('sha256')!=meta.get('sha256Checksum') or meta.get('parents')!=[parent]:raise b.ArchiveError('RETENTION_MANAGED_INVENTORY')
+                if location=='archive' and meta['id'] not in verified and meta['id'] not in protected_ids:
+                    direct=direct_ack(sa,c,p,meta,tier)
+                    if direct:verified[meta['id']]=direct
                 rows.append({'id':meta['id'],'tier':tier,'createdTime':meta['createdTime'],'location':location,'verified':meta['id'] in verified or meta['id']==p['pilotId']});metas[meta['id']]=meta
     candidates=select(rows,p,protected_ids)
     return {'rows':rows,'metadata':metas,'candidates':candidates,'protected_ids':sorted(protected_ids),'restore':restore,'jobs':verified}
@@ -97,8 +109,11 @@ def tick(apply=False,max_files=1):
                 if fid not in fresh['candidates'] or fid in fresh['protected_ids']:raise b.ArchiveError('RETENTION_SELECTION_CHANGED')
                 expected=fresh['metadata'][fid];job=fresh['jobs'][fid];asset=job['body']['asset']
                 a.check_content(expected,asset)
-                ack,ackmeta=a.queue_object(sa,b.config_load(),job['ack_file_id'],'backup-ack:'+job['jobId'],'backup_ack',b.CANONICAL_SA)
-                if ack.get('status')!='verified' or ack.get('archiveId')!=fid or ack.get('sha256')!=asset['sha256'] or ack.get('requestSha256')!=a.sha(job['body']):raise b.ArchiveError('RETENTION_NATIVE_ACK_REQUIRED')
+                if job.get('direct') is True:
+                    if direct_ack(sa,b.config_load(),p,expected,expected['appProperties']['tier'])!=job:raise b.ArchiveError('RETENTION_DIRECT_ACK_CHANGED')
+                else:
+                    ack,ackmeta=a.queue_object(sa,b.config_load(),job['ack_file_id'],'backup-ack:'+job['jobId'],'backup_ack',b.CANONICAL_SA)
+                    if ack.get('status')!='verified' or ack.get('archiveId')!=fid or ack.get('sha256')!=asset['sha256'] or ack.get('requestSha256')!=a.sha(job['body']):raise b.ArchiveError('RETENTION_NATIVE_ACK_REQUIRED')
                 state['intents'][fid]={'status':'intent','confirmation_message_id':AUTH,'metadata_before':expected,'job_id':job['jobId'],'ack_id':job['ack_file_id'],'protected_ids':fresh['protected_ids'],'started_at':b.now_iso()};b.atomic_json(STATE,state)
                 actual=trash_once(owner,fid,asset['destinationParentId'],expected)
                 reread=backup.native_meta(sa,fid)

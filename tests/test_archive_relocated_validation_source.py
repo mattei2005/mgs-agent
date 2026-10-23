@@ -48,6 +48,7 @@ class RelocatedValidationSource(unittest.TestCase):
     def validate(self):
         def read(path, default=None):
             return {'binding.json':self.binding, 'source-snapshot.json':self.snapshot,
+                    'stock-layout-binding.json':None,
                     'verified-files.json':self.verified}[Path(path).name]
         with patch.object(b,'read_json',side_effect=read):
             return b.validate_reconciliation_source(self.d,self.meta,self.asset,self.c,self.job)

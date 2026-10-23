@@ -115,7 +115,8 @@ def check_copy(d,asset,entry):
     import ares_archive_storage as storage
     record=storage.media_record(entry,storage.meta(d,entry['archiveId']),storage.meta(d,entry['stockShortcutId']))
     if record['name']!=asset['name'] or record['mimeType']!=asset['mimeType'] or d.relative_parent(record['provider_metadata']['parents'][0],b.ARCHIVE_ROOT)!=asset['relativeParent']:raise RetirementError('RETIREMENT_ARCHIVE_PATH')
-    stock_path=d.relative_parent(record['stock_metadata']['parents'][0],b.SOURCE_ROOT)
+    import ares_archive_locations as locations
+    stock_path=locations.stock_parent(d,record['stock_metadata']['parents'][0])
     allowed_status=['99_LEGACY'] if asset['role']=='original' else ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']
     if len(stock_path)!=3 or stock_path[:2]!=asset['relativeParent'][:2] or stock_path[-1] not in allowed_status:raise RetirementError('RETIREMENT_STOCK_PATH')
     permissions=record['provider_metadata'].get('permissions',[]);writers={p.get('emailAddress') for p in permissions if p.get('role')=='writer'}
@@ -240,9 +241,18 @@ def run_cycle(d,c,state,apply=False):
         if verified.get('kind')!='lineage' or verified.get('validationOnly') is True:continue
         job=_object(b.DATA/'jobs'/('job-'+jid+'.json'));entries=[index['mappings'].get(a['sourceId'],{}) for a in job['assets']]
         if entries and all(e.get('sourceRetirementReceipt') for e in entries):continue
+        import ares_archive_locations as locations
+        if locations.active():
+            import mgs_archive_layout_cutover as layout
+            frozen=b.read_json(layout.SNAPSHOT,{}).get('objects',{})
+            if all(a['sourceId'] in frozen for a in job['assets']):
+                for asset in job['assets']:layout.verify_relocated(d,d.meta(asset['sourceId']),asset)
+                result.setdefault('same_id_migrated_pairs_preserved',[]).append(jid)
+                continue
         if result['pairs_considered']>=14 or result['pairs_retired']>=2:break
         result['pairs_considered']+=1
         try:
+            if locations.active() and any(e.get('stockTransferredToArchive') is not True for e in entries):raise NotReady('RETIREMENT_STOCK_TRANSFER_PENDING')
             ack=d.one(c['requests_folder_id'],'ack:'+jid)
             if not ack:raise NotReady('RETIREMENT_ACK_MISSING')
             am=d.meta(ack['id']);b.require_publisher(am,b.CANONICAL_SA)

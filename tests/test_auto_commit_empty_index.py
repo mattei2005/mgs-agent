@@ -147,6 +147,23 @@ exec {self.real_git} "$@"
         self.run_until("Commit OK:")
         self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
 
+    def test_reviewed_stock_transport_source_commits(self):
+        name = "scripts/mgs_private_stock_transport.py"
+        path = self.repo / name
+        path.parent.mkdir(parents=True)
+        path.write_text("# Synthetic offline source fixture; no credentials.\n")
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
+
+    def test_stock_transport_exception_does_not_allow_sibling_secrets(self):
+        base = self.repo / "scripts"
+        base.mkdir()
+        (base / "mgs_private_stock_transport.py").write_text("# Synthetic fixture.\n")
+        (base / "private_stock_credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_control_scope_exception_does_not_allow_sibling_secrets(self):
         base = self.repo / "tests"
         base.mkdir()

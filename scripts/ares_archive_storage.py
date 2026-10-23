@@ -58,6 +58,7 @@ def require_lineage_available(row):
     if not is_new:return True
     entry=mapping(row['asset_drive_id'])
     if not entry or not entry.get('stockShortcutId'):raise StorageError('ARCHIVE_PENDING_BEFORE_CAMPAIGN')
+    if locations.active() and entry.get('mapping_kind')!='historical_verified' and entry.get('stockTransferredToArchive') is not True:raise StorageError('ARCHIVE_STOCK_TRANSFER_PENDING')
     intake=b.read_json(b.DATA/'intake-state.json',{'claims':{}})
     for claim in intake.get('claims',{}).values():
         if claim.get('status')!='complete' and any(s.get('source_id')==row.get('source_drive_id') for s in claim['batch']['sources']):raise StorageError('INTAKE_BATCH_NOT_RELEASED')
@@ -121,6 +122,10 @@ def ensure_shortcuts(d,job_id):
     b.require_publisher(d.meta(ack['id']),b.CANONICAL_SA)
     for asset in job['assets']:
         entry=index['mappings'][asset['sourceId']];require_registered_mapping(entry,index);expected=next(a for a in frozen['assets'] if a['sourceId']==entry['sourceId'])
+        if locations.active() and entry.get('stockShortcutId'):
+            current_stock=meta(d,entry['stockShortcutId'])
+            if locations.stock_metadata_allowed(current_stock):
+                locations.stock_parent(d,current_stock['parents'][0]);media_record(entry,meta(d,entry['archiveId']),current_stock);made.append(current_stock['id']);continue
         if entry.get('sourceRetirementReceipt'):
             import ares_archive_retirement as retirement
             retirement.verified_receipt(d,b.config_load(),frozen,expected,entry)
@@ -142,7 +147,14 @@ def ensure_shortcuts(d,job_id):
                 landed=d.one(source['parents'][0],key)
                 if not landed:raise
                 sid=landed['id']
-        stock=meta(d,sid);physical=meta(d,entry['archiveId']);candidate={**entry,'stockShortcutId':sid};media_record(candidate,physical,stock)
+        stock=meta(d,sid);physical=meta(d,entry['archiveId']);candidate={**entry,'stockShortcutId':sid}
+        if locations.active() and stock.get('driveId')==b.SOURCE_DRIVE:
+            # SA creates the bounded alias in temporary staging. The isolated
+            # owner lane moves this SAME ID to archive stock on the next tick.
+            b.require_publisher(stock,b.CANONICAL_SA)
+            if stock.get('mimeType')!=SHORTCUT or stock.get('parents')!=source['parents'] or stock.get('shortcutDetails',{}).get('targetId')!=entry['archiveId'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or stock.get('name')!=physical.get('name') or physical.get('md5Checksum')!=entry['md5'] or physical.get('size')!=str(entry['size']) or not any(o.get('emailAddress')==b.ACCOUNT for o in physical.get('owners',[])):raise StorageError('PENDING_STOCK_ALIAS_BINDING')
+            entry['stockTransferredToArchive']=False
+        else:media_record(candidate,physical,stock)
         if not entry.get('stockShortcutId') and stock['parents']!=source['parents']:raise StorageError('ALIAS_PARENT_READBACK')
         entry.update(stockShortcutId=sid,stockAliasVerifiedAt=b.now_iso());index['mappings'][entry['sourceId']]=entry
         b.atomic_json(b.DATA/'archive-index.json',index);b.atomic_json(b.DATA/'jobs'/('shortcut-intent-'+entry['sourceId']+'.json'),{'status':'verified','source_id':entry['sourceId'],'stock_shortcut_id':sid,'at':b.now_iso()});made.append(sid)

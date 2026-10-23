@@ -551,7 +551,8 @@ def drive_inventory(token: str) -> dict[str, Any]:
     required_caps = {"canDownload", "canEdit", "canMoveItemWithinDrive"}
     if root_meta.get("driveId") != DRIVE_ID or root_meta.get("trashed") or not all((root_meta.get("capabilities") or {}).get(key) for key in required_caps):
         raise Stop("drive_root_preflight", {"root": root_meta, "required_caps": sorted(required_caps)})
-    creatives = find_folder(drive_list_children(token, DRIVE_ROOT_ID), "CRIATIVOS", "drive_creatives")
+    import ares_archive_locations as locations
+    creatives = locations.creatives_for_token(token) if locations.active() else find_folder(drive_list_children(token, DRIVE_ROOT_ID), "CRIATIVOS", "drive_creatives")
     operation = find_folder(drive_list_children(token, creatives["id"]), "CAR_BR_BR", "drive_operation")
     types: dict[str, dict[str, Any]] = {}
     all_ready: list[dict[str, Any]] = []

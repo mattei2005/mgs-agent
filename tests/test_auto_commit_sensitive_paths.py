@@ -121,6 +121,12 @@ fi
             "tests/test_private_control_scope_other.py": 1,
             "tests/private_control_scope_credentials.json": 1,
             "tests/private_control_scope_token.json": 1,
+            "scripts/mgs_private_stock_transport.py": 0,
+            "work/scripts/mgs_private_stock_transport.py": 1,
+            "scripts/mgs_private_stock_transport.py.bak": 1,
+            "scripts/mgs_private_stock_transport_other.py": 1,
+            "scripts/private_stock_credentials.json": 1,
+            "data/private_stock_token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

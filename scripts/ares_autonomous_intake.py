@@ -92,7 +92,8 @@ def complete(state,bid,owner,proofs):
 
 def batch_archive_ready(entry,index):
     ids=entry.get('archive_source_ids')
-    return isinstance(ids,list) and all(index.get('mappings',{}).get(sid,{}).get('verified') is True and bool(index['mappings'][sid].get('stockShortcutId')) for sid in ids)
+    import ares_archive_locations as locations
+    return isinstance(ids,list) and all(index.get('mappings',{}).get(sid,{}).get('verified') is True and bool(index['mappings'][sid].get('stockShortcutId')) and (not locations.active() or index['mappings'][sid].get('stockTransferredToArchive') is True) for sid in ids)
 
 def health(now=None):
     cfg=bridge.read_json(CONFIG,{})
@@ -178,7 +179,8 @@ def monitor(polls=3,interval=20):
     if test.get('status')=='pending':return {'status':'selftest','manifest':str(DATA/'intake-selftest-1562188030205362227.json'),'run_id':'1562188030205362227'}
     if cfg.get('live_treatment_enabled') is not True:return {'status':'live_treatment_disabled','pending':0}
     manifest=bridge.read_json(DATA/'upload-context-layout.json');assert isinstance(manifest,dict)
-    d=bridge.Drive();scope=bridge.config_load();layout.check_folder(d,manifest,manifest['upload_root_id'],bridge.SOURCE_ROOT,'UPLOAD MANUAL')
+    import ares_archive_locations as locations
+    d=bridge.Drive();scope=bridge.config_load();layout.check_folder(d,manifest,manifest['upload_root_id'],locations.upload_parent(),'UPLOAD MANUAL')
     with locked_state() as state:
         # Resume the same durable batch; never allocate a replacement on timeout.
         active=[x for x in state['claims'].values() if x['status']!='complete']

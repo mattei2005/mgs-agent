@@ -914,6 +914,8 @@ def backup(mode: str, *, apply_retention_policy: bool = True, private_archive_ca
                 uploaded=drive.upload_resumable(tier_folder,encrypted,tier=tier,mode=mode,sha256=encrypted_sha,existing_id=slot)
             else:
                 root_meta = validate_drive_root(drive, config)
+                import ares_archive_locations as archive_locations
+                if archive_locations.active():raise RuntimeError('archive direct upload required after whole-Drive cutover; no Shared Drive fallback')
                 dr_root = drive.ensure_folder(config["drive_root_id"], config["drive_folder_name"], "root")
                 tier_folder = drive.ensure_folder(dr_root, tier, tier)
                 uploaded = drive.upload_resumable(tier_folder, encrypted, tier=tier, mode=mode, sha256=encrypted_sha)

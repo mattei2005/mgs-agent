@@ -44,6 +44,7 @@ def validate_groups(request):
 
 
 def manager_folder(request, profile, base, ops, drive_token):
+    import ares_archive_locations as locations
     policy=json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text()).get('grouped_manager_media_policy') or {}
     if policy.get('enabled') is not True or policy.get('approved_by')!='344196393512075265':
         raise ValueError('approved grouped manager media policy unavailable')
@@ -52,7 +53,7 @@ def manager_folder(request, profile, base, ops, drive_token):
     names={str(x.get('manager_name')).casefold() for x in json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json').read_text())['accounts'] if x.get('manager_code')==profile['manager_code']}
     if request.get('source_account'):
         names |= {name + ' - usados' for name in names}
-    if folder.get('trashed') or folder.get('driveId')!='0AEwt4Ye690ocUk9PVA' or folder.get('name','').casefold() not in names or len(folder.get('parents') or [])!=1:
+    if folder.get('trashed') or not locations.stock_scope_for_token(drive_token,folder) or folder.get('name','').casefold() not in names or len(folder.get('parents') or [])!=1:
         raise ValueError('manager folder identity, partition or Shared Drive mismatch')
     parent=ops.drive_file_readback(drive_token,folder['parents'][0])
     if request.get('source_account') and folder['name'].casefold().endswith(' - usados'):
@@ -60,14 +61,14 @@ def manager_folder(request, profile, base, ops, drive_token):
         vid = (drive.get('folders') or {}).get('VID') or {}
         if (parent.get('id') != vid.get('folder_id') or parent.get('name') != 'VID'
                 or parent.get('parents') != [drive.get('pool_id')] or parent.get('trashed')
-                or parent.get('driveId') != '0AEwt4Ye690ocUk9PVA'):
+                or not locations.stock_scope_for_token(drive_token,parent)):
             raise ValueError('manager USED folder must belong to canonical operation VID')
         pool = ops.drive_file_readback(drive_token, drive['pool_id'])
         if (pool.get('name') != 'SHEIN_US_' + profile['language'] or pool.get('trashed')
-                or pool.get('driveId') != '0AEwt4Ye690ocUk9PVA' or len(pool.get('parents') or []) != 1):
+                or not locations.stock_scope_for_token(drive_token,pool) or len(pool.get('parents') or []) != 1):
             raise ValueError('manager USED pool language/Shared Drive mismatch')
         parent = ops.drive_file_readback(drive_token, pool['parents'][0])
-    if parent.get('name')!='CRIATIVOS' or parent.get('driveId')!='0AEwt4Ye690ocUk9PVA' or parent.get('trashed'):
+    if parent.get('name')!='CRIATIVOS' or (parent.get('id')!=locations.stock_root() if locations.active() else parent.get('driveId')!='0AEwt4Ye690ocUk9PVA') or parent.get('trashed'):
         raise ValueError('manager folder must be direct child of canonical CRIATIVOS')
     return folder
 
@@ -144,8 +145,9 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     work_dir=Path(work_dir);work_dir.mkdir(parents=True,exist_ok=True)
     proof_dir=base/'data/ares/meta-ads/audit/shein/campaigns/intake'/request['request_id'];proof_dir.mkdir(parents=True,exist_ok=True)
     def download(row):
+        import ares_archive_locations as locations
         f=ops.drive_file_readback(dt,row['asset_drive_id'])
-        if f.get('driveId')!='0AEwt4Ye690ocUk9PVA' or f.get('trashed') or f.get('name')!=row['canonical_filename'] or f.get('parents')!=[folder['id']]:raise ValueError('selected file live identity/folder mismatch')
+        if not locations.stock_scope_for_token(dt,f) or f.get('trashed') or f.get('name')!=row['canonical_filename'] or f.get('parents')!=[folder['id']]:raise ValueError('selected file live identity/folder mismatch')
         path=work_dir/row['canonical_filename']
         if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest()!=row['clean_checksum']:
             with urlopen(Request('https://www.googleapis.com/drive/v3/files/'+f.get('provider_id',row['asset_drive_id'])+'?alt=media&supportsAllDrives=true',headers={'Authorization':'Bearer '+dt}),timeout=180) as response:

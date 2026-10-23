@@ -76,7 +76,8 @@ def drive_inventory(token: str) -> dict[str, Any]:
     caps = root.get("capabilities") or {}
     if root.get("driveId") != DRIVE_ID or root.get("trashed") or not all(caps.get(key) for key in ("canDownload", "canEdit", "canMoveItemWithinDrive")):
         raise RuntimeError("canonical Drive root/capabilities mismatch")
-    creatives = one_folder(drive_children(token, DRIVE_ID), "CRIATIVOS")
+    import ares_archive_locations as locations
+    creatives = locations.creatives_for_token(token) if locations.active() else one_folder(drive_children(token, DRIVE_ID), "CRIATIVOS")
     operation = one_folder(drive_children(token, creatives["id"]), "CC_US_EN")
     video = one_folder(drive_children(token, operation["id"]), "VID")
     ready = one_folder(drive_children(token, video["id"]), "01_READY")

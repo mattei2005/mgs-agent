@@ -127,7 +127,8 @@ def verify_pilot(d):
     if pilot.get('schema')!='mgs.corporate.backup.native.move.pilot.v1':raise b.ArchiveError('BACKUP_PILOT_REQUIRED')
     meta=native_meta(d,pilot['file_id']);validate_pilot_metadata(meta,pilot,moved=True);p,s=corporate.load_plan();corporate.check_acl(corporate.h.permissions(d,meta['id']),corporate.desired(p))
     staging=native_meta(d,binding['source_root_id'])
-    if staging.get('driveId')!=b.SOURCE_DRIVE or staging.get('parents')!=[b.SOURCE_DRIVE] or staging.get('name')!='_DISASTER_RECOVERY' or staging.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
+    import ares_archive_locations as locations
+    if staging.get('driveId')!=b.SOURCE_DRIVE or staging.get('parents')!=[locations.UPLOAD if locations.active() else b.SOURCE_DRIVE] or staging.get('name')!='_DISASTER_RECOVERY' or staging.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
     for tier,ids in binding['tiers'].items():
         st=native_meta(d,ids['source_id'])
         if st.get('driveId')!=b.SOURCE_DRIVE or st.get('parents')!=[binding['source_root_id']] or st.get('name')!=tier or st.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_TIER_CHANGED')

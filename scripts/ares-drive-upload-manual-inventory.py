@@ -224,7 +224,12 @@ def placement_fit(width: int | None, height: int | None) -> str:
     return "UNKNOWN"
 
 
-def inventory(client: DriveClient) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def resolve_upload_root(client: DriveClient) -> dict[str, Any]:
+    import ares_archive_locations as locations
+    if locations.active():
+        upload=locations.token_drive(client.token).meta(locations.UPLOAD)
+        if upload.get('parents')!=[ROOT_FOLDER_ID] or upload.get('driveId')!=ROOT_FOLDER_ID or upload.get('name')!=UPLOAD_FOLDER_NAME or upload.get('mimeType')!=FOLDER_MIME or upload.get('trashed') is not False:raise RuntimeError('canonical upload root identity mismatch')
+        return upload
     root_children = client.list_children(ROOT_FOLDER_ID)
     creatives = next(
         (
@@ -251,6 +256,11 @@ def inventory(client: DriveClient) -> tuple[list[dict[str, Any]], dict[str, Any]
             f"{UPLOAD_FOLDER_NAME} not found under MGS-AGENTS/{CREATIVES_FOLDER_NAME}"
         )
 
+    return upload
+
+
+def inventory(client: DriveClient) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    upload=resolve_upload_root(client)
     queue = collections.deque(
         [(upload["id"], f"{CREATIVES_FOLDER_NAME}/{UPLOAD_FOLDER_NAME}")]
     )

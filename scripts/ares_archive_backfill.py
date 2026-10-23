@@ -224,7 +224,10 @@ def cycle_locked(d,c,apply=False):
    except b.ArchiveError as exc:result['blocked'].append({'source_ids':[a['sourceId'] for a in chunk],'reason':str(exc)[:220]});break
   result['verified_files']=len(idx['mappings'])
  if result['blocked']:result['status']='blocked'
- if result['verified_files']==len(m['assets']):result['status']='all_bytes_verified_consumer_cutover_pending'
+ if result['verified_files']==len(m['assets']):
+  import ares_archive_locations as locations
+  value=locations.active()
+  result['status']='all_bytes_verified_layout_verified' if value and c.get('whole_drive_layout_complete') is True else 'all_bytes_verified_consumer_cutover_pending'
  if apply:b.atomic_json(p/'last-tick.json',{'executed_at':b.now_iso(),**result})
  return result
 

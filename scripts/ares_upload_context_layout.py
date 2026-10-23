@@ -39,8 +39,13 @@ def ensure(d,c,parent,name,key):
     check_folder(d,c,fid,parent,name);return fid
 
 def validate_slot(d,c,slot):
-    check_folder(d,c,c['upload_root_id'],c['source_root_id'],'UPLOAD MANUAL')
-    check_folder(d,c,slot['source_operation_folder_id'],c['source_root_id'],slot['operation'])
+    import ares_archive_locations as locations
+    check_folder(d,c,c['upload_root_id'],locations.upload_parent() if locations.active() else c['source_root_id'],'UPLOAD MANUAL')
+    if locations.active():
+        operation=locations.assert_stock_file(d,slot['source_operation_folder_id'],locations.stock_root())
+        if operation.get('name')!=slot['operation'] or operation.get('mimeType')!=FOLDER:raise LayoutError('STOCK_OPERATION_SCOPE')
+    else:
+        check_folder(d,c,slot['source_operation_folder_id'],c['source_root_id'],slot['operation'])
     check_folder(d,c,slot['operation_upload_folder_id'],c['upload_root_id'],slot['operation'])
     check_folder(d,c,slot['folder_id'],slot['operation_upload_folder_id'],slot['manager_name'])
     if MANAGERS.get(slot['manager_code'])!=slot['manager_name']:raise LayoutError('SLOT_MANAGER_CHANGED')

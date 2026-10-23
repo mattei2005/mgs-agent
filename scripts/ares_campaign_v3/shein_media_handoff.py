@@ -44,6 +44,7 @@ def ready_status(value):
 
 
 def load_ready_assets(request, profile, base, common, token):
+    import ares_archive_locations as locations
     refs = request.get('asset_refs') or []
     if not refs or len({r['asset_id'] for r in refs}) != len(refs) or len({r['checksum'] for r in refs}) != len(refs):
         raise ValueError('new media requires unique pre-staged asset references from Creative Ops')
@@ -80,7 +81,7 @@ def load_ready_assets(request, profile, base, common, token):
             raise ValueError('asset checksum or previous-use conflict')
         media = registry.require_ready(profile['account_id'], ref['asset_id'], ref['checksum'], required_variants=('vertical',))
         file = ops.drive_file_readback(drive_token, row['asset_drive_id'])
-        if file.get('driveId') != '0AEwt4Ye690ocUk9PVA' or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
+        if not locations.stock_scope_for_token(drive_token,file) or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
             raise ValueError('Drive identity/parent/name mismatch')
         parent_id = file['parents'][0]
         if manager and parent_id != manager['id']:
@@ -91,13 +92,14 @@ def load_ready_assets(request, profile, base, common, token):
         if not manager and (ready.get('name') != '01_READY' or len(ready.get('parents') or []) != 1):
             raise ValueError('canonical READY folder identity mismatch')
         q = "'" + ready['parents'][0] + "' in parents and name = '02_TESTING' and trashed = false"
+        testing = []
         if manager:
             testing = [manager]
         elif ready['parents'][0] not in testing_cache:
             testing_cache[ready['parents'][0]] = _get('https://www.googleapis.com/drive/v3/files?' + urlencode({'q': q, 'fields': 'files(id,name,driveId)', 'supportsAllDrives': 'true', 'includeItemsFromAllDrives': 'true'}), drive_token)
         if not manager:
             testing = testing_cache[ready['parents'][0]].get('files') or []
-        if len(testing) != 1 or testing[0].get('driveId') != '0AEwt4Ye690ocUk9PVA':
+        if len(testing) != 1 or (not locations.stock_scope_for_token(drive_token,ops.drive_file_readback(drive_token,testing[0]['id'])) if locations.active() else testing[0].get('driveId') != '0AEwt4Ye690ocUk9PVA'):
             raise ValueError('canonical TESTING destination missing or ambiguous')
         h, video, _ = common.graph_get(media['vertical_video_id'], token, {'fields': 'id,title,status,thumbnails'})
         if h != 200 or not ready_status(video) or ref['asset_id'] not in str(video.get('title')) or ref['checksum'][:10] not in str(video.get('title')):
