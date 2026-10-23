@@ -229,7 +229,7 @@ def prepare():
         binding={'schema':'mgs.archive.stock.layout.v1','approval_message_id':loc.APPROVAL,'execution_confirmation_message_id':AUTH,'source_drive_id':b.SOURCE_DRIVE,'staging_root_id':b.SOURCE_ROOT,'archive_root_id':b.ARCHIVE_ROOT,'upload_root_id':loc.UPLOAD,'owner':b.ACCOUNT,'stock_root_id':fid,'active':False,'phase':'prepared','same_ids_verified':False,'consumer_canary_verified':False,'acceptance_proof':str(PROOF),'prepared_at':b.now_iso()}
         loc.validate(binding);b.atomic_json(loc.BINDING,binding);return binding
 
-def verify_relocated(d,meta,asset):
+def verify_relocated(d,meta,asset,job=None):
     binding=loc.active()
     if not binding or not binding.get('same_ids_verified'):raise b.ArchiveError('LAYOUT_RELOCATION_NOT_ACTIVE')
     snapshot=b.read_json(SNAPSHOT,{});proof=b.read_json(PROOF,{})
@@ -239,7 +239,28 @@ def verify_relocated(d,meta,asset):
     for field,key in [('id','sourceId'),('name','name'),('size','size'),('mimeType','mimeType'),('md5Checksum','md5'),('sha256Checksum','sha256'),('createdTime','sourceCreatedTime')]:
         if str(before.get(field))!=str(asset.get(key)) or meta.get(field)!=before.get(field):raise b.ArchiveError('LAYOUT_RELOCATION_FROZEN_CONTENT')
     unchanged(before,meta)
-    if not loc.stock_metadata_allowed(meta) or loc.stock_parent(d,meta['parents'][0])!=asset['relativeParent']:raise b.ArchiveError('LAYOUT_RELOCATION_NATIVE_SCOPE')
+    expected_relative=asset['relativeParent']
+    # The original pilot deliberately used [] for its ARCHIVE destination,
+    # not its source path. Never rewrite that immutable request or generalize
+    # the exception to production. Its source ancestry is frozen independently
+    # in the accepted same-ID stock snapshot, whose native bytes are checked below.
+    if (job is not None and job.get('jobId')=='526d7a2a007c1fed4b2a9147f92d62b4'
+        and job.get('kind')=='canary' and job.get('lineageId')=='PILOT-ONLY'
+        and job.get('assets')==[asset] and asset['sourceId']==b.PILOT
+        and asset.get('md5')==b.PILOT_MD5 and asset.get('sha256')==b.PILOT_SHA
+        and expected_relative==[]):
+        reverse=[];seen=set();parent=asset['sourceParentId']
+        for _ in range(30):
+            if parent==b.SOURCE_ROOT:break
+            row=snapshot.get('objects',{}).get(parent,{})
+            if (parent in seen or row.get('id')!=parent or row.get('mimeType')!=b.FOLDER
+                or row.get('driveId')!=b.SOURCE_DRIVE or row.get('trashed') is not False
+                or len(row.get('parents',[]))!=1 or not isinstance(row.get('name'),str)):
+                raise b.ArchiveError('LAYOUT_RELOCATION_PILOT_FROZEN_ANCESTRY')
+            seen.add(parent);reverse.append(row['name']);parent=row['parents'][0]
+        else:raise b.ArchiveError('LAYOUT_RELOCATION_PILOT_FROZEN_ANCESTRY')
+        expected_relative=list(reversed(reverse))
+    if not loc.stock_metadata_allowed(meta) or loc.stock_parent(d,meta['parents'][0])!=expected_relative:raise b.ArchiveError('LAYOUT_RELOCATION_NATIVE_SCOPE')
     # Independent SA native snapshot/receipt provenance remains required.
     fid=proof.get('native_snapshot_id');native_meta=d.meta(fid);b.require_publisher(native_meta,b.CANONICAL_SA)
     if not b.control_object_scope(native_meta,b.config_load()['control_folder_id']) or ba.sha(d.raw(fid))!=proof['snapshot_sha256']:raise b.ArchiveError('LAYOUT_RELOCATION_NATIVE_PROOF')
