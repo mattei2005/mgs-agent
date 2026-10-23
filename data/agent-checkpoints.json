@@ -1132,6 +1132,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-INTAKE-1563285734503358485",
+      "next_step": "Inventariar origem real, conferir estabilidade e claims, revisar midia e congelar plano",
+      "objective": "Tratar 25 criativos US-CC-EN de Nicolas e entregar na pasta Nicolas preservando originais e reserva",
+      "source": "discord:1563285734503358485",
+      "state": "preflight e descoberta do lote; nenhum write drive realizado",
+      "thread_id": "1563285734503358485",
+      "updated_at": "2026-10-23T20:20:06+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
       "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
@@ -1529,6 +1539,16 @@
       "state": "complete_verified: c011 id120256544454230460 active na conta1877104513669062, usd100/dia cost_cap usd0.85, start2026-10-17t10:53:58-0400, 1conjunto e2anuncios configurados/effectiveactive. qa semantico e midia verificados com ids iguais ao checkpoint; fontec08 permanece active usd30 maxvol. novos posts, sem prova social herdada. ressalva: meta omitiu flags opcionais de sugestao age/gender; demais gates preservados. mesmo request e e2e originais, continuacao tardia revisada via mensagem1561028977953476701, engine_replayed=false. manutencao separada validada86tests; habilidade atualizada e readback verificado.",
       "thread_id": "1558133823969955851",
       "updated_at": "2026-10-17T14:59:09+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1563285235666391112",
+      "next_step": "Ativação status-only validada; depois dry-run/execute central sequencial por fonte e recibo agregado.",
+      "objective": "Ativar 235 e 252 antes de duplicar 2x cada fonte 239,102,21,254,184,81,115,247,234,222; USD45/dia cada; 23/10/2026 16:30 NY",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1563285235666391112",
+      "state": "preflight e intake em andamento; preservar request e ids por fonte.",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-23T20:18:32+00:00"
     },
     {
       "agent": "ares",
@@ -7222,5 +7242,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T20:07:45+00:00"
+  "updated_at": "2026-10-23T20:20:06+00:00"
 }
