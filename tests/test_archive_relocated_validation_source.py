@@ -91,4 +91,15 @@ class RelocatedValidationSource(unittest.TestCase):
         self.job['validationOnly']=False
         self.assertTrue(self.validate())
 
+    def test_unknown_control_media_type_rejected(self):
+        self.meta['properties']['mgsArchiveType']='production_media'
+        self.row['properties']=copy.deepcopy(self.meta['properties'])
+        with self.assertRaises(b.ArchiveError):self.validate()
+
+class RelocatedIntakeValidationSource(RelocatedValidationSource):
+    def setUp(self):
+        super().setUp()
+        self.meta['properties']['mgsArchiveType']='intake_test_media'
+        self.row['properties']=copy.deepcopy(self.meta['properties'])
+
 if __name__=='__main__':unittest.main()

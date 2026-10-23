@@ -145,7 +145,7 @@ def validate_reconciliation_source(d,meta,a,c,job):
         or row.get('name')!=a['name'] or row.get('mime')!=a['mimeType']
         or row.get('verification_kind')!='full_bytes'
         or row.get('publisher_permission_id')!=PUBLISHER_PERMISSION_IDS[CANONICAL_SA]
-        or row.get('properties',{}).get('mgsArchiveType')!='archive_test_media'
+        or row.get('properties',{}).get('mgsArchiveType') not in ('archive_test_media','intake_test_media')
         or meta.get('properties')!=row.get('properties')
         or receipt.get('new_parent')!=parent or receipt.get('sha256')!=a['sha256']
         or receipt.get('verified') is not True or receipt.get('publisher_preserved') is not True):
