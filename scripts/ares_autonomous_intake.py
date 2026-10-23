@@ -175,6 +175,8 @@ def monitor(polls=3,interval=20):
     cfg=bridge.read_json(CONFIG,{})
     if cfg.get('enabled') is not True:return {'status':'disabled','pending':0}
     if cfg.get('authority_message_id')!='1562188030205362227' or cfg.get('source_root_id')!=bridge.SOURCE_ROOT:raise IntakeError('AUTHORITY_SCOPE')
+    if bridge.read_json(bridge.CONFIG,{}).get('control_cutover_in_progress') is True:
+        return {'status':'deferred_to_archive_cutover','pending':0,'delete_source':False}
     test=bridge.read_json(DATA/'intake-selftest-1562188030205362227.json',{})
     if test.get('status')=='pending':return {'status':'selftest','manifest':str(DATA/'intake-selftest-1562188030205362227.json'),'run_id':'1562188030205362227'}
     if cfg.get('live_treatment_enabled') is not True:return {'status':'live_treatment_disabled','pending':0}

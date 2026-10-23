@@ -208,6 +208,10 @@ Na política `SHEIN-US-DIRECT.json#/request_defaults/expired_explicit_start_poli
 
 Essa normalização é do intake/preflight antes do write; jamais regenerar campanha, sobrescrever manifest selado ou trocar IDs depois de efeito parcial. Se já há objetos, reconciliar e continuar o mesmo request/IDs pela recuperação central. O estado da execução e o relógio E2E original são preservados; a regra não remove QA, quotas ou outros gates.
 
+### Delta explícito de quiz V1/V2/V3
+
+Para duplicação com troca de versão somente no alvo, carregar `references/quiz-version-clone-delta.md`: intake `target_quiz_version`, mesma conta/site/gestor, posts novos, naming e QA completos, sem alterar a fonte. A referência também cobre restauração de placements omitidos pela cópia nativa, sem afrouxar QA ou SLA.
+
 ### Recovery de responsabilidade do Ares
 
 Antes de pedir autorização de reparo de delegação, consultar `SHEIN-US-DIRECT.json#/page_delegation_repair_authorizations` pela Page e conta exatas. Quando Rodolfo conceder autorização durável, persistir o recorte canônico e validar o registro; não repetir a pergunta dentro desse recorte nem ampliar a autorização para outros ativos. Separar aprovação de acesso técnico: após o operador informar que resolveu o acesso, refazer as leituras corporativa e administrativa atuais, aplicar somente as tarefas ausentes já autorizadas e validar com a identidade corporativa original. Uma falha corporativa remanescente não comprova que a correção administrativa falhou. Retomar o pedido original, não abrir nova duplicação nem substituir sua origem pela mensagem de recuperação. Usar a receita de preflight e delegação em `references/general-campaign-fast-route.md`.

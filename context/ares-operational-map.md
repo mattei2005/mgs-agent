@@ -4,7 +4,7 @@
 > Dono executivo: Rodolfo Mattei
 > Agente: Ares
 > Área: Creative Operations + Growth / Media Buying
-> Atualização: Shared Drive `MGS-AGENTS` canônico e cutover integral validados em 2026-07-15/16.
+> Atualização: estoque permanente nos 30 TB e intake no Shared Drive, cutover same-ID validado em 2026-10-23. Contrato ativo em `context/drive-archive-owner-connector.md`.
 
 ## 1. Regra de uso
 
@@ -311,7 +311,7 @@ Creative Ops e Campaign Ops compartilham o mesmo estado no Ares.
 
 ## 5. Intake e Drive
 
-Raiz operacional atual validada por API/readback:
+Entrada temporária atual, validada por API/readback:
 
 ```text
 Shared Drive: MGS-AGENTS
@@ -319,17 +319,20 @@ ID: 0AEwt4Ye690ocUk9PVA
 URL: https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
 ```
 
-Esta é a única raiz operacional. O Workspace é administrado por `support@matteiservicesinc.com`; nomes, caminhos e estrutura permanecem iguais aos validados no cutover.
+O Shared Drive antigo contém exclusivamente `UPLOAD MANUAL` na raiz; seu ID preservado é `1ARBvLammWUHuAclNmcriwkkgeedKryBd`. Enviar na subpasta **operação → gestor** cadastrada; arquivos soltos e pastas legadas fora do registro não são intake automático. `_PROCESSAMENTO` é staging temporário, não estoque permanente. O Workspace continua administrado por `support@matteiservicesinc.com`.
+
+O estoque permanente fica no Drive de 30 TB, conta `mgsdigitalcorp@gmail.com`, pasta `CRIATIVOS` de ID `1GhJTEk2ZL15J5Ko3haWU5kfnVVffPq1h`, abaixo do arquivo `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`. Pastas, binários e atalhos foram movidos com os mesmos IDs; não exigir `driveId` do Shared Drive para esses objetos My Drive. Resolver estoque/staging pelo contrato ativo `scripts/ares_archive_locations.py`, mídia pelo `ares_archive_storage.py`, preservando namespace lógico, linhagens e ACKs. Agentes permanecem exclusivamente com a SA canônica; o owner é componente isolado, nunca fallback de autenticação.
 
 ```text
-MGS-AGENTS/CRIATIVOS/
-├── UPLOAD MANUAL      # fila temporária, inclusive arquivos >10 MB
+30 TB / arquivo / CRIATIVOS/
 ├── GEIZIAN            # cópias para upload do gestor; ignorar no pool canônico
 ├── LIBRARY META       # referências; nunca asset final automático
 └── <OPERAÇÃO>/
     ├── IMG/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
     └── VID/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
 ```
+
+`MGS-AGENTS/CRIATIVOS/...` permanece namespace lógico dos registros históricos, não localização física atual do estoque. Backups geridos ficam no corporativo dos 30 TB em `_DISASTER_RECOVERY`; os 23 arquivos antigos sem tags foram preservados separadamente em `_DR_LEGADO`, privados, fora da retenção destrutiva gerida.
 
 Regras:
 

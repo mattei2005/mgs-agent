@@ -143,4 +143,10 @@ class LayoutClosure(unittest.TestCase):
   with self.assertRaises(b.ArchiveError):self.legacy_fixture(changed=True)
  def test_pending_managed_backup_cannot_be_reclassified_legacy(self):
   with self.assertRaises(b.ArchiveError):self.legacy_fixture(managed=True)
+ def test_intake_defers_during_authorized_cutover_without_credentials(self):
+  import importlib
+  intake=importlib.import_module('ares_autonomous_intake')
+  cfg={'enabled':True,'authority_message_id':'1562188030205362227','source_root_id':b.SOURCE_ROOT}
+  with patch.object(b,'read_json',side_effect=[cfg,{'control_cutover_in_progress':True}]),patch.object(b,'Drive') as auth:
+   result=intake.monitor();self.assertEqual(result['status'],'deferred_to_archive_cutover');auth.assert_not_called()
 if __name__=='__main__':unittest.main()
