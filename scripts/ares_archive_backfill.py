@@ -69,8 +69,10 @@ def source_access(d,a,c):
 def check_sources_readonly(d,c,assets):
  if c.get('owner_executor_mode')!='vps' or len(assets)<2:return [source_access(d,a,c) for a in assets]
  from concurrent.futures import ThreadPoolExecutor
+ scope=FolderReadScope(d)
  with ThreadPoolExecutor(max_workers=min(4,len(assets)),thread_name_prefix='mgs-sa-source-preflight') as pool:
-  return list(pool.map(lambda a:source_access(d,a,c),assets))
+  result=list(pool.map(lambda a:source_access(scope,a,c),assets))
+ scope.validate_folders();return result
 
 def enqueue(d,c,job):
  p=location();(p/'jobs').mkdir(exist_ok=True);path=p/'jobs'/('job-'+job['jobId']+'.json');old=b.read_json(path)
@@ -152,8 +154,10 @@ def verify_assets_readonly(d,c,job,receipt):
  # Parallel GET/stream verification only; index, ACK and all writes stay serial.
  if c.get('owner_executor_mode')!='vps' or len(job['assets'])<2:return [verify_asset(d,c,job,a,receipt) for a in job['assets']]
  from concurrent.futures import ThreadPoolExecutor
+ scope=FolderReadScope(d)
  with ThreadPoolExecutor(max_workers=min(4,len(job['assets'])),thread_name_prefix='mgs-sa-byte-proof') as pool:
-  return list(pool.map(lambda a:verify_asset(d,c,job,a,receipt),job['assets']))
+  result=list(pool.map(lambda a:verify_asset(scope,c,job,a,receipt),job['assets']))
+ scope.validate_folders();return result
 
 def verify_job(d,c,job,apply=False,request_type=None):
  if request_type not in [None,'backfill_request','vps_backfill_request']:raise BackfillError('BACKFILL_REQUEST_TYPE')
