@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Same-ID stock/layout migration under approved whole-Drive authority.
 
-No binary copy, DELETE, trash, permission write or credential change. Keeps the
-existing upload ID and all stock IDs; staging remains temporary below intake.
+No binary copy, DELETE, trash or credential change. Keeps existing IDs. A
+separate explicit sharing confirmation is mandatory before restoring the same
+inherited upload roles as direct roles; whole-Drive scope alone does not grant it.
 """
 from __future__ import annotations
 import argparse,fcntl,hashlib,json,time,urllib.request,urllib.parse,urllib.error
@@ -18,6 +19,8 @@ HOME=t.HOME/'stock-layout'
 SNAPSHOT=HOME/'source-snapshot.json'
 PROOF=HOME/'verification.json'
 JOURNAL=HOME/'journal.json'
+ACCESS_PROPOSAL=HOME/'upload-access-proposal.json'
+ACCESS_APPROVAL=HOME/'upload-access-approval.json'
 FIELDS='id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,createdTime,trashed,owners(emailAddress,permissionId),permissions(type,emailAddress,role),properties,appProperties,shortcutDetails(targetId)'
 
 def all_shared(d):
@@ -37,6 +40,74 @@ def descendants(rows,root,exclude=()):
     return selected
 
 def native(d,fid):return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':FIELDS})
+
+def detailed_permissions(d,fid):
+    out=[];page=None
+    while True:
+        params={'supportsAllDrives':'true','pageSize':100,'fields':'nextPageToken,permissions(id,emailAddress,type,role,permissionDetails(permissionType,role,inherited,inheritedFrom))'}
+        if page:params['pageToken']=page
+        value=d.api('GET','files/'+fid+'/permissions',params);out.extend(value.get('permissions',[]));page=value.get('nextPageToken')
+        if not page:return out
+
+def acl_identity(rows):
+    if any(x.get('type')!='user' or not x.get('id') or not x.get('emailAddress') for x in rows):raise b.ArchiveError('LAYOUT_ACL_UNKNOWN_PRINCIPAL_TYPE')
+    return {x['id']:(x['emailAddress'],x['role']) for x in rows}
+
+def require_upload_access_confirmation():
+    proposal=b.read_json(ACCESS_PROPOSAL,{})
+    approval=b.read_json(ACCESS_APPROVAL,{})
+    if proposal.get('target_id')!=loc.UPLOAD or proposal.get('action')!='restore_same_inherited_upload_roles_after_parent_move':raise b.ArchiveError('UPLOAD_ACCESS_PROPOSAL_REQUIRED')
+    if approval.get('approved') is not True or approval.get('author_id')!='344196393512075265' or approval.get('thread_id')!='1562078493498540042' or not approval.get('confirmation_message_id') or approval.get('proposal_sha256')!=ba.sha(proposal):raise b.ArchiveError('UPLOAD_ACCESS_SHARING_CONFIRMATION_REQUIRED')
+    return proposal,approval
+
+def move_upload_preserving_access(owner,sa,journal,snapshot):
+    """Restore only the same seven folder-level inherited roles after moving.
+    Google deduplicates an equal-role pre-grant into inheritance; a 200 before
+    the move is NOT a pinned direct permission. Never add Drive membership.
+    """
+    proposal,approval=require_upload_access_confirmation()
+    before=snapshot['upload_permissions'];expected=acl_identity(before)
+    if expected!=acl_identity(proposal['permissions_before']):raise b.ArchiveError('UPLOAD_ACCESS_CONFIRMED_SCOPE_DRIFT')
+    inherited=[x for x in before if any(z.get('inherited') is True and z.get('inheritedFrom')==b.SOURCE_ROOT for z in x.get('permissionDetails',[]))]
+    if any(x['emailAddress'] not in h.WRITERS or x['role']!='fileOrganizer' for x in inherited):raise b.ArchiveError('UPLOAD_ACL_UNAPPROVED_INHERITED_PRINCIPAL')
+    moving:dict=b.read_json(HOME/'upload-access-move.json',{'schema':'mgs.upload.access.move.v1','attempt':0,'status':'prepared'})
+    if moving.get('status')=='rolled_back':
+        if native(sa,loc.UPLOAD).get('parents')!=[b.SOURCE_ROOT] or acl_identity(detailed_permissions(sa,loc.UPLOAD))!=expected:raise b.ArchiveError('UPLOAD_ACL_ROLLBACK_DRIFT')
+        moving.update(attempt=int(moving['attempt'])+1,status='prepared')
+    path=HOME/('upload-move-attempt-'+str(moving['attempt'])+'.json');moving['journal_path']=str(path);b.atomic_json(HOME/'upload-access-move.json',moving)
+    uj=t.Journal(path)
+    move_once(owner,sa,uj,loc.UPLOAD,b.SOURCE_ROOT,b.SOURCE_DRIVE)
+    if moving.get('status')=='accepted':
+        if acl_identity(detailed_permissions(sa,loc.UPLOAD))!=expected:raise b.ArchiveError('UPLOAD_ACL_CONCURRENT_CHANGE_AFTER_ACCEPTANCE')
+        return moving
+    try:
+        for who in inherited:
+            deadline=time.monotonic()+60
+            while True:
+                current=acl_identity(detailed_permissions(sa,loc.UPLOAD))
+                if any(pid not in expected or value!=expected[pid] for pid,value in current.items()):raise b.ArchiveError('UPLOAD_ACL_UNEXPECTED_ROLE_OR_PRINCIPAL')
+                native_row=next((x for x in detailed_permissions(sa,loc.UPLOAD) if x['id']==who['id']),None)
+                if native_row is None:break
+                if any(x.get('inherited') is False for x in native_row.get('permissionDetails',[])):break
+                if time.monotonic()>=deadline:raise b.ArchiveError('UPLOAD_ACL_INHERITANCE_PROPAGATION_PENDING')
+                time.sleep(2)
+            if native_row is None:
+                key='permission:'+who['id'];uj.intent(key,{'file_id':loc.UPLOAD,'native_permission_id':who['id'],'email':who['emailAddress'],'role':who['role'],'authority':approval['confirmation_message_id']})
+                response=sa.api('POST','files/'+loc.UPLOAD+'/permissions',{'supportsAllDrives':'true','sendNotificationEmail':'false','fields':'id,emailAddress,role'},{'type':'user','emailAddress':who['emailAddress'],'role':who['role']})
+                if (response.get('id'),response.get('emailAddress'),response.get('role'))!=(who['id'],who['emailAddress'],who['role']):raise b.ArchiveError('UPLOAD_ACL_NATIVE_ID_OR_ROLE_CHANGED')
+                actual=next((x for x in detailed_permissions(sa,loc.UPLOAD) if x['id']==who['id']),None)
+                if not actual or actual['role']!=who['role'] or not any(x.get('inherited') is False for x in actual.get('permissionDetails',[])):raise b.ArchiveError('UPLOAD_ACL_DIRECT_READBACK_PENDING')
+                uj.landed(key,who['id'])
+        after=detailed_permissions(sa,loc.UPLOAD)
+        if acl_identity(after)!=expected:raise b.ArchiveError('UPLOAD_ACL_EFFECTIVE_ACCESS_CHANGED')
+        moving.update(status='accepted',verified_at=b.now_iso(),before=before,after=after,same_existing_permission_ids_and_roles=True,new_principals_added=0,drive_membership_changes=0);b.atomic_json(HOME/'upload-access-move.json',moving);return moving
+    except Exception:
+        # Source root is still outside intake at this point. Restore its old
+        # parent immediately if ACL restoration cannot be proven, without
+        # deleting grants or changing anybody's role.
+        rollback=t.Journal(HOME/('upload-rollback-'+str(moving['attempt'])+'.json'))
+        move_once(owner,sa,rollback,loc.UPLOAD,b.SOURCE_DRIVE,b.SOURCE_ROOT)
+        moving.update(status='rolled_back',rollback_at=b.now_iso(),access_restored=acl_identity(detailed_permissions(sa,loc.UPLOAD))==expected);b.atomic_json(HOME/'upload-access-move.json',moving);raise
 
 def owned_inventory(sa,parent_ids):
     # Only exact approved frozen parent IDs, never an account-wide owner scan.
@@ -89,8 +160,11 @@ def content_evidence(sa,objects,index):
             out[fid]={'kind':'full_stream_required_after_move','hashes':hashes}
     return out
 
-def unchanged(before,after,*,parent=None):
+def unchanged(before,after,*,parent=None,expected_name=None):
     fields=['id','name','mimeType','size','md5Checksum','sha256Checksum','createdTime','properties','appProperties','shortcutDetails']
+    if expected_name is not None:
+        fields.remove('name')
+        if after.get('name')!=expected_name:raise b.ArchiveError('LAYOUT_RENAME_READBACK')
     if any(before.get(k)!=after.get(k) for k in fields) or after.get('trashed') is not False:raise b.ArchiveError('LAYOUT_CONTENT_OR_ID_CHANGED:'+before['id'])
     if after.get('parents')!=(parent if parent is not None else before.get('parents')):raise b.ArchiveError('LAYOUT_PARENT_CHANGED:'+before['id'])
     if not str(after.get('version','')).isdigit() or int(after['version'])<int(before['version']):raise b.ArchiveError('LAYOUT_VERSION_CHANGED')
@@ -163,12 +237,16 @@ def apply():
                 if not {x['sourceId'] for x in historical.get('assets',[])}<=verified:raise b.ArchiveError('LAYOUT_ALL_BACKUPS_REQUIRED')
                 intake=b.read_json(b.DATA/'intake-state.json',{'claims':{}})
                 if any(x.get('status')!='complete' for x in intake.get('claims',{}).values()):raise b.ArchiveError('LAYOUT_ACTIVE_INTAKE_CLAIM')
-                sa=b.Drive(True);owner=t.OwnerDrive();journal=t.Journal(JOURNAL);c=b.config_load()
+                require_upload_access_confirmation()
+                sa=b.Drive(True);owner=t.OwnerDrive();journal=t.Journal(JOURNAL);c=b.config_load();p,_=ba.load()
                 snapshot=b.read_json(SNAPSHOT)
                 if snapshot is None:
                     rows=all_shared(sa);objects=descendants(rows,b.SOURCE_ROOT,exclude=[loc.UPLOAD]);tops=[x for x in objects.values() if x.get('parents')==[b.SOURCE_ROOT]]
                     if any(x.get('mimeType')!=b.FOLDER for x in tops):raise b.ArchiveError('LAYOUT_TOP_BINARY_SCOPE')
                     snapshot={'schema':'mgs.archive.stock.snapshot.v1','approval_message_id':loc.APPROVAL,'execution_confirmation_message_id':AUTH,'frozen_at':b.now_iso(),'source_root':native(sa,b.SOURCE_ROOT),'stock_root_id':binding['stock_root_id'],'upload':native(sa,loc.UPLOAD),'objects':objects,'top_folders':tops,'old_root_children':[x for x in rows if x.get('parents')==[b.SOURCE_DRIVE]]}
+                    snapshot['upload_permissions']=detailed_permissions(sa,loc.UPLOAD)
+                    if any(ba.backup.children(sa,x['sourceId']) for x in p['tiers'].values()):raise b.ArchiveError('LAYOUT_BACKUP_SOURCE_STAGING_NOT_EMPTY')
+                    snapshot['backup_staging']={'root':native(sa,p['sourceRootId']),'tiers':[native(sa,x['sourceId']) for x in p['tiers'].values()]}
                     snapshot['content_evidence']=content_evidence(sa,objects,idx)
                     fixtures={x['id']:x for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,ba.load()[0]['sourceRootId']]}
                     snapshot['root_fixture_content']=content_evidence(sa,fixtures,idx)
@@ -180,11 +258,11 @@ def apply():
                 c.update(control_cutover_in_progress=True);b.atomic_json(b.CONFIG,c)
                 transition={**binding,'phase':'transition','native_snapshot_id':fid};b.atomic_json(loc.BINDING,transition)
                 for row in snapshot['top_folders']:move_once(owner,sa,journal,row['id'],b.SOURCE_ROOT,binding['stock_root_id'])
-                move_once(owner,sa,journal,loc.UPLOAD,b.SOURCE_ROOT,b.SOURCE_DRIVE)
+                move_upload_preserving_access(owner,sa,journal,snapshot)
                 move_once(owner,sa,journal,b.SOURCE_ROOT,b.SOURCE_DRIVE,loc.UPLOAD,name='_PROCESSAMENTO')
-                # Empty backup staging stays transient below intake; direct
-                # uploads already use archive-owned slots. Preserve tier IDs.
-                p,_=ba.load();move_once(owner,sa,journal,p['sourceRootId'],b.SOURCE_DRIVE,loc.UPLOAD)
+                # Retire empty legacy backup staging privately in the corporate
+                # archive. Never expose its former private tree under intake.
+                move_once(owner,sa,journal,p['sourceRootId'],b.SOURCE_DRIVE,p['corporateRootId'],name='_DR_STAGING_LEGACY')
                 for row in snapshot['old_root_children']:
                     if row['id'] in [b.SOURCE_ROOT,p['sourceRootId']]:continue
                     if row.get('properties',{}).get('validationOnly')!='true':raise b.ArchiveError('LAYOUT_UNEXPECTED_ROOT_OBJECT:'+row['id'])
@@ -192,8 +270,9 @@ def apply():
                 # Full native listing joined by exact IDs, with bounded Google
                 # ownership-propagation recovery. No repeated moves or copies.
                 fixture_ids={x['id'] for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,p['sourceRootId']]}
-                parent_scope={parent for x in snapshot['objects'].values() for parent in x.get('parents',[]) if parent!=b.SOURCE_ROOT}|{binding['stock_root_id'],p['corporateRootId']}
-                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids,parent_ids=parent_scope)
+                backup_folder_ids={p['sourceRootId']}|{x['sourceId'] for x in p['tiers'].values()}
+                parent_scope={parent for x in snapshot['objects'].values() for parent in x.get('parents',[]) if parent!=b.SOURCE_ROOT}|{binding['stock_root_id'],p['corporateRootId'],p['sourceRootId']}
+                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids|backup_folder_ids,parent_ids=parent_scope)
                 writers=h.WRITERS|{b.CANONICAL_SA};verified_objects={}
                 for key,before in snapshot['objects'].items():
                     after=current.get(key)
@@ -214,7 +293,11 @@ def apply():
                     if row['id'] not in fixture_ids:continue
                     unchanged(row,current[row['id']],parent=[p['corporateRootId']])
                     cp,_=ba.corp.load_plan();ba.corp.check_acl(h.permissions(sa,row['id']),ba.corp.desired(cp))
-                proof={'schema':'mgs.archive.stock.verification.v1','status':'same_ids_verified','snapshot_sha256':ba.sha(snapshot),'native_snapshot_id':fid,'stock_root_id':binding['stock_root_id'],'verified_at':b.now_iso(),'objects':verified_objects,'binary_copies_created':0,'files_deleted':0}
+                legacy=snapshot['backup_staging'];unchanged(legacy['root'],current[p['sourceRootId']],parent=[p['corporateRootId']],expected_name='_DR_STAGING_LEGACY')
+                for row in [legacy['root']]+legacy['tiers']:
+                    if row['id']!=p['sourceRootId']:unchanged(row,current[row['id']])
+                    cp,_=ba.corp.load_plan();ba.corp.check_acl(h.permissions(sa,row['id']),ba.corp.desired(cp))
+                proof={'schema':'mgs.archive.stock.verification.v1','status':'same_ids_verified','snapshot_sha256':ba.sha(snapshot),'native_snapshot_id':fid,'stock_root_id':binding['stock_root_id'],'verified_at':b.now_iso(),'objects':verified_objects,'binary_copies_created':0,'files_deleted':0,'backup_staging_same_ids_retired_privately':True,'backup_staging_retired_parent_id':p['corporateRootId'],'backup_staging_retired_name':'_DR_STAGING_LEGACY','upload_existing_access_restored':True}
                 b.atomic_json(PROOF,proof)
                 accepted={**binding,'phase':'consumer_canary','same_ids_verified':True,'consumer_canary_verified':False,'acceptance_proof':str(PROOF),'active':True,'native_snapshot_id':fid,'snapshot_sha256':proof['snapshot_sha256']}
                 # In-process canary context only. Other consumers fail closed;
