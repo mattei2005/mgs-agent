@@ -59,10 +59,10 @@ class BackupArchiveTests(unittest.TestCase):
         a=self.a;binding={'source_root_id':'legacyRoot123','corporate_root_id':self.root,'archive_root_id':'archiveRoot123','tiers':{t:{'source_id':'source'+t,'archive_id':'tierFolder'+t} for t in a.TIERS}}
         pilot={**self.contract,'schema':'mgs.corporate.backup.native.move.pilot.v1'}
         moved={**self.meta,'parents':['tierFolderweekly'],'owners':[{'emailAddress':a.b.ACCOUNT}],'version':'2'};moved.pop('driveId')
-        legacy={'id':'legacyRoot123','name':'_DR_STAGING_LEGACY','mimeType':a.b.FOLDER,'parents':[self.root],'trashed':False,'owners':[{'emailAddress':'other' if wrong_owner else a.b.ACCOUNT}]}
+        legacy={'id':'legacyRoot123','name':'_DR_LEGADO','mimeType':a.b.FOLDER,'parents':[self.root],'trashed':False,'owners':[{'emailAddress':'other' if wrong_owner else a.b.ACCOUNT}]}
         meta={x['id']:x for x in self.folders};meta[moved['id']]=moved;meta[legacy['id']]=legacy
         for t in a.TIERS:meta['source'+t]={'id':'source'+t,'name':t,'parents':['legacyRoot123'],'trashed':False,'owners':[{'emailAddress':a.b.ACCOUNT}]}
-        proof={'backup_staging_same_ids_retired_privately':proof_ok,'backup_staging_retired_parent_id':self.root,'backup_staging_retired_name':'_DR_STAGING_LEGACY'}
+        proof={'backup_staging_same_ids_retired_privately':proof_ok,'backup_staging_retired_parent_id':self.root,'backup_staging_retired_name':'_DR_LEGADO'}
         def read(path,default=None):return pilot if path==a.PILOT else proof if str(path)=='proof' else {}
         with patch.object(a,'load_binding',return_value=binding),patch.object(a.b,'read_json',side_effect=read),patch.object(a.b,'atomic_json'),patch.object(a,'native_meta',side_effect=lambda d,fid:meta[fid]),patch.object(a.corporate,'load_plan',return_value=({},{})),patch.object(a.corporate,'check_acl'),patch.object(a.corporate,'desired',return_value={}),patch.object(a.corporate.h,'permissions',return_value=[]),patch.object(a,'children',return_value=[{'id':'unexpected'}] if nonempty else []),patch.object(loc,'active',return_value={'acceptance_proof':'proof'}):return a.verify_pilot(Mock())
     def test_retired_staging_same_ids_in_private_corporate_archive(self):

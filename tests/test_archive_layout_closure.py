@@ -133,4 +133,14 @@ class LayoutClosure(unittest.TestCase):
  def test_same_existing_upload_role_restored_after_move(self):self.upload_move_fixture()
  def test_denied_upload_restore_rolls_back_parent_and_access(self):self.upload_move_fixture(deny=True)
  def test_permission_response_identity_drift_rolls_back(self):self.upload_move_fixture(wrong_id=True)
+ def legacy_fixture(self,*,managed=False,changed=False):
+  m={'id':'legacy-file','name':'mgs-dr-hourly-20260716T062554Z.zip.gpg','mimeType':'application/pgp-encrypted','parents':['legacy-hourly'],'driveId':b.SOURCE_DRIVE,'trashed':False,'version':'1','size':'10','md5Checksum':'a'*32,'sha256Checksum':'b'*64,'appProperties':{'mgs_dr':'true'} if managed else {}}
+  d=Mock();d.hashes.return_value={'size':'10','md5':'c'*32 if changed else 'a'*32,'sha256':'b'*64}
+  with patch.object(layout.ba.backup,'children',return_value=[{'id':'legacy-file'}]),patch.object(layout,'native',return_value=m):return layout.freeze_legacy_backups(d,{'tiers':{'hourly':{'sourceId':'legacy-hourly'}}})
+ def test_untagged_legacy_backup_preserved_without_fake_managed_tags(self):
+  result=self.legacy_fixture()['legacy-file'];self.assertEqual(result['metadata']['appProperties'],{});self.assertEqual(result['classification'],'untagged_legacy_encrypted_backup_preserve_only')
+ def test_legacy_freeze_rejects_byte_drift(self):
+  with self.assertRaises(b.ArchiveError):self.legacy_fixture(changed=True)
+ def test_pending_managed_backup_cannot_be_reclassified_legacy(self):
+  with self.assertRaises(b.ArchiveError):self.legacy_fixture(managed=True)
 if __name__=='__main__':unittest.main()

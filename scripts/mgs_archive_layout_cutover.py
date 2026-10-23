@@ -6,7 +6,7 @@ separate explicit sharing confirmation is mandatory before restoring the same
 inherited upload roles as direct roles; whole-Drive scope alone does not grant it.
 """
 from __future__ import annotations
-import argparse,fcntl,hashlib,json,time,urllib.request,urllib.parse,urllib.error
+import argparse,fcntl,hashlib,json,time,re,concurrent.futures,urllib.request,urllib.parse,urllib.error
 import ares_archive_bridge as b
 import ares_archive_backfill as h
 import ares_archive_locations as loc
@@ -21,6 +21,7 @@ PROOF=HOME/'verification.json'
 JOURNAL=HOME/'journal.json'
 ACCESS_PROPOSAL=HOME/'upload-access-proposal.json'
 ACCESS_APPROVAL=HOME/'upload-access-approval.json'
+LEGACY_BACKUP_NAME='_DR_LEGADO'
 FIELDS='id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,createdTime,trashed,owners(emailAddress,permissionId),permissions(type,emailAddress,role),properties,appProperties,shortcutDetails(targetId)'
 
 def all_shared(d):
@@ -40,6 +41,26 @@ def descendants(rows,root,exclude=()):
     return selected
 
 def native(d,fid):return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':FIELDS})
+
+def freeze_legacy_backups(sa,p):
+    """Preserve untagged encrypted legacy files; never relabel them managed.
+    The managed 69-file manifest is immutable and excludes this older class.
+    Whole-Drive authority covers preservation, not extra destructive retention.
+    """
+    files={};cache=b.read_json(HOME/'legacy-backup-source-preflight.json',{}).get('files',{})
+    for tier,value in p['tiers'].items():
+        for row in ba.backup.children(sa,value['sourceId']):
+            m=native(sa,row['id'])
+            if m.get('appProperties',{}).get('mgs_dr')=='true':raise b.ArchiveError('LAYOUT_MANAGED_BACKUP_STILL_PENDING')
+            if m.get('driveId')!=b.SOURCE_DRIVE or m.get('parents')!=[value['sourceId']] or m.get('trashed') is not False or m.get('mimeType')!='application/pgp-encrypted' or not re.fullmatch('mgs-dr-'+tier+'-[0-9]{8}T[0-9]{6}Z\\.zip\\.gpg',m.get('name','')):raise b.ArchiveError('LAYOUT_UNKNOWN_LEGACY_BACKUP')
+            files[m['id']]={'metadata':m,'tier':tier,'classification':'untagged_legacy_encrypted_backup_preserve_only'}
+    def one(item):
+        fid,row=item;m=row['metadata'];cached=cache.get(fid,{})
+        if cached.get('metadata')==m and cached.get('hashes') and cached.get('classification')==row['classification']:return fid,cached
+        hashes=sa.hashes(fid)
+        if hashes['size']!=m.get('size') or hashes['md5']!=m.get('md5Checksum') or (m.get('sha256Checksum') is not None and hashes['sha256']!=m['sha256Checksum']):raise b.ArchiveError('LAYOUT_LEGACY_SOURCE_BYTES')
+        unchanged(m,native(sa,fid));return fid,{**row,'hashes':hashes}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:return dict(pool.map(one,files.items()))
 
 def detailed_permissions(d,fid):
     out=[];page=None
@@ -245,8 +266,8 @@ def apply():
                     if any(x.get('mimeType')!=b.FOLDER for x in tops):raise b.ArchiveError('LAYOUT_TOP_BINARY_SCOPE')
                     snapshot={'schema':'mgs.archive.stock.snapshot.v1','approval_message_id':loc.APPROVAL,'execution_confirmation_message_id':AUTH,'frozen_at':b.now_iso(),'source_root':native(sa,b.SOURCE_ROOT),'stock_root_id':binding['stock_root_id'],'upload':native(sa,loc.UPLOAD),'objects':objects,'top_folders':tops,'old_root_children':[x for x in rows if x.get('parents')==[b.SOURCE_DRIVE]]}
                     snapshot['upload_permissions']=detailed_permissions(sa,loc.UPLOAD)
-                    if any(ba.backup.children(sa,x['sourceId']) for x in p['tiers'].values()):raise b.ArchiveError('LAYOUT_BACKUP_SOURCE_STAGING_NOT_EMPTY')
                     snapshot['backup_staging']={'root':native(sa,p['sourceRootId']),'tiers':[native(sa,x['sourceId']) for x in p['tiers'].values()]}
+                    snapshot['legacy_backups']=freeze_legacy_backups(sa,p)
                     snapshot['content_evidence']=content_evidence(sa,objects,idx)
                     fixtures={x['id']:x for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,ba.load()[0]['sourceRootId']]}
                     snapshot['root_fixture_content']=content_evidence(sa,fixtures,idx)
@@ -260,9 +281,10 @@ def apply():
                 for row in snapshot['top_folders']:move_once(owner,sa,journal,row['id'],b.SOURCE_ROOT,binding['stock_root_id'])
                 move_upload_preserving_access(owner,sa,journal,snapshot)
                 move_once(owner,sa,journal,b.SOURCE_ROOT,b.SOURCE_DRIVE,loc.UPLOAD,name='_PROCESSAMENTO')
-                # Retire empty legacy backup staging privately in the corporate
-                # archive. Never expose its former private tree under intake.
-                move_once(owner,sa,journal,p['sourceRootId'],b.SOURCE_DRIVE,p['corporateRootId'],name='_DR_STAGING_LEGACY')
+                # Move the entire legacy tree privately, including untagged
+                # older ciphertext excluded by managed-only inventory. Never
+                # expose it below intake or stamp fabricated managed metadata.
+                move_once(owner,sa,journal,p['sourceRootId'],b.SOURCE_DRIVE,p['corporateRootId'],name=LEGACY_BACKUP_NAME)
                 for row in snapshot['old_root_children']:
                     if row['id'] in [b.SOURCE_ROOT,p['sourceRootId']]:continue
                     if row.get('properties',{}).get('validationOnly')!='true':raise b.ArchiveError('LAYOUT_UNEXPECTED_ROOT_OBJECT:'+row['id'])
@@ -272,7 +294,8 @@ def apply():
                 fixture_ids={x['id'] for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,p['sourceRootId']]}
                 backup_folder_ids={p['sourceRootId']}|{x['sourceId'] for x in p['tiers'].values()}
                 parent_scope={parent for x in snapshot['objects'].values() for parent in x.get('parents',[]) if parent!=b.SOURCE_ROOT}|{binding['stock_root_id'],p['corporateRootId'],p['sourceRootId']}
-                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids|backup_folder_ids,parent_ids=parent_scope)
+                legacy_ids=set(snapshot.get('legacy_backups',{}));parent_scope.update(x['sourceId'] for x in p['tiers'].values())
+                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids|backup_folder_ids|legacy_ids,parent_ids=parent_scope)
                 writers=h.WRITERS|{b.CANONICAL_SA};verified_objects={}
                 for key,before in snapshot['objects'].items():
                     after=current.get(key)
@@ -293,11 +316,17 @@ def apply():
                     if row['id'] not in fixture_ids:continue
                     unchanged(row,current[row['id']],parent=[p['corporateRootId']])
                     cp,_=ba.corp.load_plan();ba.corp.check_acl(h.permissions(sa,row['id']),ba.corp.desired(cp))
-                legacy=snapshot['backup_staging'];unchanged(legacy['root'],current[p['sourceRootId']],parent=[p['corporateRootId']],expected_name='_DR_STAGING_LEGACY')
+                legacy=snapshot['backup_staging'];unchanged(legacy['root'],current[p['sourceRootId']],parent=[p['corporateRootId']],expected_name=LEGACY_BACKUP_NAME)
                 for row in [legacy['root']]+legacy['tiers']:
                     if row['id']!=p['sourceRootId']:unchanged(row,current[row['id']])
                     cp,_=ba.corp.load_plan();ba.corp.check_acl(h.permissions(sa,row['id']),ba.corp.desired(cp))
-                proof={'schema':'mgs.archive.stock.verification.v1','status':'same_ids_verified','snapshot_sha256':ba.sha(snapshot),'native_snapshot_id':fid,'stock_root_id':binding['stock_root_id'],'verified_at':b.now_iso(),'objects':verified_objects,'binary_copies_created':0,'files_deleted':0,'backup_staging_same_ids_retired_privately':True,'backup_staging_retired_parent_id':p['corporateRootId'],'backup_staging_retired_name':'_DR_STAGING_LEGACY','upload_existing_access_restored':True}
+                def verify_legacy(item):
+                    key,row=item;after=current[key];unchanged(row['metadata'],after)
+                    if sa.hashes(key)!=row['hashes']:raise b.ArchiveError('LAYOUT_LEGACY_DESTINATION_BYTES')
+                    if after.get('driveId') or not any(x.get('emailAddress')==b.ACCOUNT for x in after.get('owners',[])):raise b.ArchiveError('LAYOUT_LEGACY_DESTINATION_OWNER')
+                    cp,_=ba.corp.load_plan();ba.corp.check_acl(h.permissions(sa,key),ba.corp.desired(cp));return key,{'tier':row['tier'],'hashes':row['hashes'],'same_id':True,'full_source_and_archive_streams_verified':True,'restore_status':'not_drilled_legacy_preservation_only','destructive_retention_authorized':False}
+                with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:legacy_proof=dict(pool.map(verify_legacy,snapshot.get('legacy_backups',{}).items()))
+                proof={'schema':'mgs.archive.stock.verification.v1','status':'same_ids_verified','snapshot_sha256':ba.sha(snapshot),'native_snapshot_id':fid,'stock_root_id':binding['stock_root_id'],'verified_at':b.now_iso(),'objects':verified_objects,'binary_copies_created':0,'files_deleted':0,'backup_staging_same_ids_retired_privately':True,'backup_staging_retired_parent_id':p['corporateRootId'],'backup_staging_retired_name':LEGACY_BACKUP_NAME,'legacy_backups_preserved':legacy_proof,'upload_existing_access_restored':True}
                 b.atomic_json(PROOF,proof)
                 accepted={**binding,'phase':'consumer_canary','same_ids_verified':True,'consumer_canary_verified':False,'acceptance_proof':str(PROOF),'active':True,'native_snapshot_id':fid,'snapshot_sha256':proof['snapshot_sha256']}
                 # In-process canary context only. Other consumers fail closed;

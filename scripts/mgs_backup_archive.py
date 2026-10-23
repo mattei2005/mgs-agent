@@ -128,11 +128,11 @@ def verify_pilot(d):
     meta=native_meta(d,pilot['file_id']);validate_pilot_metadata(meta,pilot,moved=True);p,s=corporate.load_plan();corporate.check_acl(corporate.h.permissions(d,meta['id']),corporate.desired(p))
     staging=native_meta(d,binding['source_root_id'])
     import ares_archive_locations as locations
-    layout=locations.active()
+    layout=locations.active();proof={}
     if layout:
         proof=b.read_json(Path(layout['acceptance_proof']),{})
-        if proof.get('backup_staging_same_ids_retired_privately') is not True or proof.get('backup_staging_retired_parent_id')!=binding['corporate_root_id'] or proof.get('backup_staging_retired_name')!='_DR_STAGING_LEGACY':raise b.ArchiveError('BACKUP_RETIRED_STAGING_PROOF_REQUIRED')
-        if staging.get('driveId') or staging.get('parents')!=[binding['corporate_root_id']] or staging.get('name')!='_DR_STAGING_LEGACY' or staging.get('trashed') is not False or not any(x.get('emailAddress')==b.ACCOUNT for x in staging.get('owners',[])):raise b.ArchiveError('BACKUP_RETIRED_STAGING_CHANGED')
+        if proof.get('backup_staging_same_ids_retired_privately') is not True or proof.get('backup_staging_retired_parent_id')!=binding['corporate_root_id'] or proof.get('backup_staging_retired_name')!='_DR_LEGADO':raise b.ArchiveError('BACKUP_RETIRED_STAGING_PROOF_REQUIRED')
+        if staging.get('driveId') or staging.get('parents')!=[binding['corporate_root_id']] or staging.get('name')!='_DR_LEGADO' or staging.get('trashed') is not False or not any(x.get('emailAddress')==b.ACCOUNT for x in staging.get('owners',[])):raise b.ArchiveError('BACKUP_RETIRED_STAGING_CHANGED')
         corporate.check_acl(corporate.h.permissions(d,staging['id']),corporate.desired(p))
     elif staging.get('driveId')!=b.SOURCE_DRIVE or staging.get('parents')!=[b.SOURCE_DRIVE] or staging.get('name')!='_DISASTER_RECOVERY' or staging.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_STAGING_CHANGED')
     for tier,ids in binding['tiers'].items():
@@ -140,7 +140,14 @@ def verify_pilot(d):
         expected_drive=None if layout else b.SOURCE_DRIVE
         if st.get('driveId')!=expected_drive or st.get('parents')!=[binding['source_root_id']] or st.get('name')!=tier or st.get('trashed') is not False:raise b.ArchiveError('BACKUP_SOURCE_TIER_CHANGED')
         if layout:
-            if not any(x.get('emailAddress')==b.ACCOUNT for x in st.get('owners',[])) or children(d,st['id']):raise b.ArchiveError('BACKUP_RETIRED_STAGING_NOT_PRIVATE_OR_EMPTY')
+            rows=children(d,st['id']);legacy=proof.get('legacy_backups_preserved',{});expected={fid for fid,row in legacy.items() if row.get('tier')==tier}
+            if not any(x.get('emailAddress')==b.ACCOUNT for x in st.get('owners',[])) or {x['id'] for x in rows}!=expected:raise b.ArchiveError('BACKUP_RETIRED_STAGING_LEGACY_MEMBERSHIP')
+            for row in rows:
+                saved=legacy[row['id']]
+                if saved.get('same_id') is not True or saved.get('full_source_and_archive_streams_verified') is not True:raise b.ArchiveError('BACKUP_LEGACY_STREAM_PROOF_REQUIRED')
+                actual=native_meta(d,row['id'])
+                if actual.get('driveId') or actual.get('trashed') is not False or actual.get('parents')!=[st['id']] or str(actual.get('size'))!=saved['hashes']['size'] or actual.get('md5Checksum')!=saved['hashes']['md5'] or (actual.get('sha256Checksum') is not None and actual['sha256Checksum']!=saved['hashes']['sha256']):raise b.ArchiveError('BACKUP_LEGACY_NATIVE_BYTES')
+                corporate.check_acl(corporate.h.permissions(d,actual['id']),corporate.desired(p))
             corporate.check_acl(corporate.h.permissions(d,st['id']),corporate.desired(p))
     archive_root=native_meta(d,binding['archive_root_id']);archive_tier=native_meta(d,pilot['destination_parent_id'])
     if archive_root.get('parents')!=[binding['corporate_root_id']] or archive_root.get('name')!='_DISASTER_RECOVERY' or archive_root.get('driveId') or archive_tier.get('parents')!=[binding['archive_root_id']] or archive_tier.get('name')!=pilot['tier'] or archive_tier.get('driveId'):raise b.ArchiveError('BACKUP_ARCHIVE_HIERARCHY_CHANGED')
