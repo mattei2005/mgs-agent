@@ -5862,6 +5862,16 @@
     },
     {
       "agent": "ares",
+      "id": "landing-observer-bd688caabf2a4e0c93c1e6add4ecabfc",
+      "next_step": "Restabelecer TLS entre Cloudflare e origem do site por responsável autorizado. Não repetir observação nem iniciar política 3+1+1 antes de resolver a causa; retomar o mesmo job/índice, scope, request e histórico pela rota suportada, sem reabrir aprovados. Nenhum POST externo nesta sessão.",
+      "objective": "Observar o lote congelado SHEIN G004 C197 no PC1, sem writes de campanha nem envio externo nesta sessão.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/landing-followup/runs/landing-observer-bd688caabf2a4e0c93c1e6add4ecabfc/d902b6e46ac83351/0-1/lean-result.json",
+      "state": "blocked_external_origin_tls: 1/1 destino preparado; tentativa 1 error, não no_ad; leitura visual pc1 identificou cloudflare 525 ssl handshake failed; artigo e anúncio não verificados; aba própria fechada, demais preservadas e lease pc1 liberada; processo encerrado.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-10-23T17:15:14+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "landing-observer-ecb79acfd7ed4ea99dea2f45c1eb58cd",
       "next_step": "Consumidor independente entrega a conclusao PREPARED; nao reabrir os links aprovados. Sem POST externo nesta sessao.",
       "objective": "Observar o lote congelado SHEIN C187-C191 no PC1, com destinos completos e provas reais.",
@@ -7182,5 +7192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T16:50:51+00:00"
+  "updated_at": "2026-10-23T17:15:14+00:00"
 }

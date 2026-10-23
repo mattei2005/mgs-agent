@@ -1,0 +1,415 @@
+{
+  "result": "ERROR",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g004-s&utm_campaign=b01fb04c197&utm_adgroup=b01fb04c197g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g004-s&utm_campaign=b01fb04c197&utm_adgroup=b01fb04c197g01&nocache",
+    "mapping_source": "/root/mgs-agent/data/ares/meta-ads/landing-followup/runs/landing-observer-63c76133db1e4fac990d16bebe1e4d06/live-quiz-options.json#268c9496-460a-4989-9f60-d83401798b8d; canonical mgs_direct_quiz_landings readback; context/acquisition.md#runtime-validado; active=1 country=us slug=sh3-g004 manager=G004; destination_a_url=destination_b_url; original campaign query retained",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [
+      {
+        "at": 1792775571.4431627,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome New Tab page is visible; no website content, gate, article, or ad overlay is currently displayed."
+      },
+      {
+        "at": 1792775577.2311018,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome desktop New Tab page is visible; no website gate, rewarded content, article body, or network ad is displayed."
+      },
+      {
+        "at": 1792775583.5899646,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Foreground Chrome window displays the Google New Tab page; no website gate, rewarded content, article body, or network ad is visible."
+      },
+      {
+        "at": 1792775589.8216643,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Active normal Chrome desktop viewport showing the Google New Tab page; no site gate, article, rewarded overlay, or network ad is visible."
+      },
+      {
+        "at": 1792775595.959414,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Active normal Chrome desktop viewport showing the Google New Tab page; no site gate, article, rewarded overlay, or network ad is visible."
+      },
+      {
+        "at": 1792775602.2310472,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Active normal Chrome window displaying the Google New Tab page; no website gate, rewarded overlay, network ad, or article body is visible."
+      },
+      {
+        "at": 1792775609.1272748,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Active normal Chrome window showing the Google New Tab page; no website gate, rewarded content, article body, or network ad is visible."
+      },
+      {
+        "at": 1792775615.3685155,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Active normal Chrome window showing the Google New Tab page; no site gate, rewarded content, article body, or network ad is visible."
+      },
+      {
+        "at": 1792775620.365499,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Normal Chrome desktop viewport shows a Cloudflare Error 525 page stating “SSL handshake failed” for yolokfx.com; the host has an error and no site content, gate, rewarded overlay, article, or network ad is visible."
+      },
+      {
+        "at": 1792775624.9624698,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare SSL handshake failed page with Error code 525 for yolokfx.com; the host is in error state and no site content, gate, rewarded overlay, or network ad is visible."
+      },
+      {
+        "at": 1792775629.896978,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare Error 525 page stating “SSL handshake failed” for yolokfx.com; the origin host has an SSL/TLS connection error."
+      },
+      {
+        "at": 1792775634.6730094,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare Error 525 page stating “SSL handshake failed” for yolokfx.com; the browser and Cloudflare are working, but the host has an error."
+      },
+      {
+        "at": 1792775639.8895724,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Normal Chrome desktop viewport shows a Cloudflare SSL handshake failed page (Error code 525) for yolokfx.com; no site gate, rewarded content, article body, or network ad is visible."
+      },
+      {
+        "at": 1792775645.4658883,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare SSL handshake failed page with Error code 525 for yolokfx.com; no site gate, rewarded content, article body, or network ad is visible."
+      },
+      {
+        "at": 1792775651.900382,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare SSL handshake failed page with Error code 525; the browser and Cloudflare are working, but the host has an error."
+      },
+      {
+        "at": 1792775657.7256343,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome is displaying a Cloudflare Error 525 page stating “SSL handshake failed”; the browser and Cloudflare are working, but the yolokfx.com host has an error."
+      },
+      {
+        "at": 1792775662.9595704,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare Error 525 page stating “SSL handshake failed” for yolokfx.com; the host has an error, and no site gate, rewarded content, network ad, or article body is visible."
+      },
+      {
+        "at": 1792775668.920654,
+        "gate": false,
+        "rewarded": false,
+        "article": false,
+        "description": "Chrome displays a Cloudflare SSL handshake failed page with Error code 525 for yolokfx.com; the host is reporting an error."
+      }
+    ],
+    "phase_seconds": {
+      "mechanical_total": 138.59686810700805
+    },
+    "device_mode": "DESKTOP",
+    "desktop_view": {
+      "desktop_view": true,
+      "device_toolbar_visible": false,
+      "viewport_bounds": [
+        0,
+        120,
+        2560,
+        1272
+      ],
+      "device_mode": "DESKTOP",
+      "verified": true,
+      "verified_at": 1792775557.173173,
+      "source": "native_and_visual_desktop"
+    },
+    "normal_opening": {
+      "state": "NAVIGATION_SUBMITTED",
+      "baseline": [
+        {
+          "pid": 18224,
+          "window_id": 263324,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 383116,
+          "window_id": 25494996,
+          "app_name": "CredentialUIBroker.exe"
+        },
+        {
+          "pid": 18224,
+          "window_id": 1639374,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 384564,
+          "window_id": 197536,
+          "app_name": "Discord.exe"
+        },
+        {
+          "pid": 18224,
+          "window_id": 1181158,
+          "app_name": "chrome.exe"
+        },
+        {
+          "pid": 24268,
+          "window_id": 1705338,
+          "app_name": "1Password.exe"
+        },
+        {
+          "pid": 14788,
+          "window_id": 196948,
+          "app_name": "cua-driver.exe"
+        },
+        {
+          "pid": 24396,
+          "window_id": 131758,
+          "app_name": "SystemSettings.exe"
+        },
+        {
+          "pid": 27320,
+          "window_id": 1572930,
+          "app_name": "ApplicationFrameHost.exe"
+        },
+        {
+          "pid": 18216,
+          "window_id": 66572,
+          "app_name": "TextInputHost.exe"
+        },
+        {
+          "pid": 9632,
+          "window_id": 65984,
+          "app_name": "explorer.exe"
+        }
+      ],
+      "base": {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g004-s&utm_campaign=b01fb04c197&utm_adgroup=b01fb04c197g01&nocache",
+      "url_submission_attempted": true,
+      "opened_intent_at": 1792775541.8368893,
+      "target": {
+        "pid": 18224,
+        "window_id": 18941806,
+        "app_name": "chrome.exe"
+      },
+      "new_window_created": true,
+      "new_tab_created": true,
+      "browser_mode": "NORMAL",
+      "blank_opened_at": 1792775550.3141255,
+      "desktop_view": {
+        "desktop_view": true,
+        "device_toolbar_visible": false,
+        "viewport_bounds": [
+          0,
+          120,
+          2560,
+          1272
+        ],
+        "device_mode": "DESKTOP",
+        "verified": true,
+        "verified_at": 1792775557.173173,
+        "source": "native_and_visual_desktop"
+      },
+      "opened_at": 1792775567.964927
+    },
+    "opened_at": 1792775567.964927,
+    "human_action_required": true,
+    "required_action": "Revisar a liberação do artigo pelo rewarded; CTA único não levou a artigo legível dentro do prazo. Não repetir visualização publicitária automaticamente.",
+    "diagnosis": "ValueError: Rewarded/article release not confirmed within bounded wait; no repeated CTA",
+    "tab_closed_verified": true,
+    "other_tabs_preserved": true,
+    "new_tab_identity": {
+      "pid": 18224,
+      "window_id": 18941806,
+      "app_name": "chrome.exe"
+    },
+    "closed_at": 1792775673.82116,
+    "before_windows": [
+      {
+        "pid": 18224,
+        "window_id": 18941806,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 383116,
+        "window_id": 25494996,
+        "app_name": "CredentialUIBroker.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 1639374,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 384564,
+        "window_id": 197536,
+        "app_name": "Discord.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 1181158,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 24268,
+        "window_id": 1705338,
+        "app_name": "1Password.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "after_windows": [
+      {
+        "pid": 18224,
+        "window_id": 263324,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 383116,
+        "window_id": 25494996,
+        "app_name": "CredentialUIBroker.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 1639374,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 384564,
+        "window_id": 197536,
+        "app_name": "Discord.exe"
+      },
+      {
+        "pid": 18224,
+        "window_id": 1181158,
+        "app_name": "chrome.exe"
+      },
+      {
+        "pid": 24268,
+        "window_id": 1705338,
+        "app_name": "1Password.exe"
+      },
+      {
+        "pid": 14788,
+        "window_id": 196948,
+        "app_name": "cua-driver.exe"
+      },
+      {
+        "pid": 24396,
+        "window_id": 131758,
+        "app_name": "SystemSettings.exe"
+      },
+      {
+        "pid": 27320,
+        "window_id": 1572930,
+        "app_name": "ApplicationFrameHost.exe"
+      },
+      {
+        "pid": 18216,
+        "window_id": 66572,
+        "app_name": "TextInputHost.exe"
+      },
+      {
+        "pid": 9632,
+        "window_id": 65984,
+        "app_name": "explorer.exe"
+      }
+    ],
+    "tab_open_seconds": 105.8562331199646
+  },
+  "batch_scope": "8510c795fef3f64382a366e6e3c5db45548258639dee7e1a0b93bf4db0071a0b"
+}
