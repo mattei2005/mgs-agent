@@ -302,6 +302,7 @@ class Drive:
         tier: str,
         mode: str,
         sha256: str,
+        existing_id: str | None = None,
     ) -> dict[str, Any]:
         mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
         metadata = {
@@ -314,6 +315,11 @@ class Drive:
                 "sha256": sha256,
             },
         }
+        if existing_id:
+            before=self.metadata(existing_id)
+            if before.get('parents')!=[parent_id] or before.get('driveId') or before.get('name')!=path.name or before.get('mimeType')!='application/pgp-encrypted' or int(before.get('size') or 0)!=0:
+                raise RuntimeError('private backup slot pre-upload binding mismatch')
+            metadata.pop('parents')
         params = {
             "uploadType": "resumable",
             "supportsAllDrives": "true",
@@ -327,10 +333,10 @@ class Drive:
             "User-Agent": "mgs-disaster-recovery",
         }
         request = urllib.request.Request(
-            "https://www.googleapis.com/upload/drive/v3/files?" + urllib.parse.urlencode(params),
+            "https://www.googleapis.com/upload/drive/v3/files" + ('/'+existing_id if existing_id else '') + "?" + urllib.parse.urlencode(params),
             data=json.dumps(metadata).encode(),
             headers=headers,
-            method="POST",
+            method="PATCH" if existing_id else "POST",
         )
         with urllib.request.urlopen(request, timeout=90) as response:
             session_url = response.headers["Location"]
@@ -884,7 +890,7 @@ def acquire_lock(config: dict[str, Any], *, timeout_seconds: float = 600.0):
         raise
 
 
-def backup(mode: str, *, apply_retention_policy: bool = True) -> dict[str, Any]:
+def backup(mode: str, *, apply_retention_policy: bool = True, private_archive_canary: bool = False) -> dict[str, Any]:
     config = load_config()
     lock = acquire_lock(config)
     started = time.monotonic()
@@ -900,12 +906,19 @@ def backup(mode: str, *, apply_retention_policy: bool = True) -> dict[str, Any]:
             encrypted_sha = sha256_file(encrypted)
             encrypted_md5 = md5_file(encrypted)
             drive = drive_client(config)
-            root_meta = validate_drive_root(drive, config)
-            dr_root = drive.ensure_folder(config["drive_root_id"], config["drive_folder_name"], "root")
-            tier_folder = drive.ensure_folder(dr_root, tier, tier)
-            uploaded = drive.upload_resumable(tier_folder, encrypted, tier=tier, mode=mode, sha256=encrypted_sha)
+            import mgs_private_backup_upload as private_archive
+            direct=private_archive.destination(drive,tier,canary=private_archive_canary)
+            if private_archive_canary and not direct:raise RuntimeError('private backup canary is not prepared')
+            if direct:
+                root_meta=direct['root'];tier_folder=direct['parent_id'];slot=private_archive.reserve_slot(tier_folder,encrypted,tier,mode,encrypted_sha,encrypted_md5,canary=private_archive_canary)
+                uploaded=drive.upload_resumable(tier_folder,encrypted,tier=tier,mode=mode,sha256=encrypted_sha,existing_id=slot)
+            else:
+                root_meta = validate_drive_root(drive, config)
+                dr_root = drive.ensure_folder(config["drive_root_id"], config["drive_folder_name"], "root")
+                tier_folder = drive.ensure_folder(dr_root, tier, tier)
+                uploaded = drive.upload_resumable(tier_folder, encrypted, tier=tier, mode=mode, sha256=encrypted_sha)
             readback = drive.metadata(uploaded["id"])
-            if readback.get("parents") != [tier_folder] or readback.get("driveId") != config["drive_root_id"]:
+            if readback.get("parents") != [tier_folder] or (bool(readback.get('driveId')) if direct else readback.get("driveId") != config["drive_root_id"]):
                 raise RuntimeError("Drive upload placement readback mismatch")
             if int(readback.get("size") or 0) != encrypted.stat().st_size:
                 raise RuntimeError("Drive upload size readback mismatch")
@@ -913,7 +926,11 @@ def backup(mode: str, *, apply_retention_policy: bool = True) -> dict[str, Any]:
                 raise RuntimeError("Drive upload MD5 readback mismatch")
             if (readback.get("appProperties") or {}).get("sha256") != encrypted_sha:
                 raise RuntimeError("Drive upload SHA-256 property readback mismatch")
-            trashed = apply_retention(drive, tier_folder, int(config["retention_count"][tier])) if apply_retention_policy else []
+            if direct:
+                import ares_archive_bridge as archive_bridge
+                verifier=archive_bridge.Drive();hashes=verifier.hashes(uploaded['id'])
+                if hashes!={'size':str(encrypted.stat().st_size),'md5':encrypted_md5,'sha256':encrypted_sha}:raise RuntimeError('private backup independent SA stream mismatch')
+            trashed = apply_retention(drive, tier_folder, int(config["retention_count"][tier])) if apply_retention_policy and not direct else []
             result = {
                 "status": "PASS",
                 "mode": mode,
@@ -926,12 +943,17 @@ def backup(mode: str, *, apply_retention_policy: bool = True) -> dict[str, Any]:
                 "encrypted_sha256": encrypted_sha,
                 "encrypted_md5": encrypted_md5,
                 "public_key_fingerprint": fingerprint,
-                "drive_id": root_meta["driveId"],
+                "drive_id": root_meta.get("driveId"),
+                "storage_backend": "private_owner_slot_sa_upload" if direct else "canonical_shared_drive",
+                "archive_root_id": root_meta['id'] if direct else None,
                 "tier_folder_id": tier_folder,
                 "retention_trashed_count": len(trashed),
-                "retention_applied": apply_retention_policy,
+                "retention_applied": bool(apply_retention_policy and not direct),
+                "archive_retention_preview_only": bool(direct),
+                "archive_sha256_stream_verified": bool(direct),
                 "bundle": manifest,
             }
+            if direct:result['archive_native_ack']=private_archive.publish_ack(result)
             state = state_load(config)
             state["last_success"][mode] = result
             state["updated_at_utc"] = iso_now()

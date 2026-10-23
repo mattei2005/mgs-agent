@@ -62,6 +62,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_bac
 # authorized migration. Exact code paths only, never runtime grants or siblings.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_control_store\.py$|^tests/test_private_control_store\.py$|^scripts/mgs_private_drive_http\.py$"
 
+# Reviewed direct-backup slot source and offline tests from the same approved
+# migration; no embedded credentials. Exact paths only, never runtime bindings.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_backup_upload\.py$|^tests/test_private_backup_upload\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

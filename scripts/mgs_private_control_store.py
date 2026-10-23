@@ -11,7 +11,7 @@ import ares_archive_bridge as b
 HOME=b.DATA/'owner-connector'/'control-store'
 CONFIG=HOME/'binding.json'
 MAX_BYTES=12000000
-ALLOWED_KINDS={'vps_request','vps_backfill_request','request','receipt','ack','backfill_ack','backfill_manifest','backfill_metadata_reconciliation','backup_move_receipt','backup_receipt_slot','backup_ack','vps_backup_move_request','backup_plan','private_backup_historical_manifest','retirement_receipt','retirement_authorization','vps_heartbeat','vps_backup_heartbeat','control_store_canary','worker_source','authorization','lineage_map'}
+ALLOWED_KINDS={'vps_request','vps_backfill_request','request','receipt','ack','backfill_ack','backfill_manifest','backfill_metadata_reconciliation','backup_move_receipt','backup_receipt_slot','backup_ack','backup_direct_ack','vps_backup_move_request','backup_plan','private_backup_historical_manifest','retirement_receipt','source_retirement_receipt','retirement_authorization','vps_heartbeat','vps_backup_heartbeat','control_store_canary','worker_source','authorization','lineage_map'}
 
 def validate_request(j,c):
  if c.get('schema')!='mgs.private.control.binding.v1' or c.get('approval_message_id')!='1562972150455992431' or j.get('schema')!='mgs.private.control.slot.request.v1' or j.get('parent_id') not in c.get('parent_ids',[]) or j.get('kind') not in ALLOWED_KINDS or j.get('mime') not in ['application/json','application/javascript']:raise b.ArchiveError('CONTROL_SLOT_SCOPE')
