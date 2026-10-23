@@ -1,0 +1,52 @@
+{
+  "result": "ERROR",
+  "evidence": {
+    "observation_mode": "LEAN_NORMAL_NEW_TAB",
+    "observed_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g005-s&utm_campaign=b01fb03c187&utm_adgroup=b01fb03c187g01&nocache",
+    "resolved_landing_url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g005-s&utm_campaign=b01fb03c187&utm_adgroup=b01fb03c187g01&nocache",
+    "mapping_source": "Read-only HTTP200 https://yolokfx.com/quiz/us/sh2-g005/; data-mgs-dq-cta A=B=https://yolokfx.com/rec-us-app-shein-circle-of-style/; html_sha256=50010a6847b88bd5eeb1dd7d9392b5a86a91619425cf17e68e33a676684602aa",
+    "dwell_policy": {
+      "enabled": true,
+      "authority_message_id": "1561037521234952253",
+      "authority_thread_id": "1559932317861158993",
+      "effective_at_epoch": 1792339462.124,
+      "device_mode": "DESKTOP",
+      "device_emulation": false,
+      "new_normal_tab_required": true,
+      "verify_before_navigation": true,
+      "observation_seconds": 25,
+      "historical_mobile_receipts_unchanged": true,
+      "supersedes": "iPhone16 mobile emulation for all new observations; retry only pending targets; never reopen passed",
+      "minimum_seconds": 20,
+      "maximum_seconds": 30,
+      "target_seconds": 22,
+      "applies_to": "PASS_AND_NO_AD_NEW_VISITS",
+      "measure": "OBSERVATION_AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+      "rewarded_wait_counted_in_observation": false,
+      "timing_authority_message_id": "1561047502944477287",
+      "historical_receipts_unchanged": true,
+      "rewarded_gate": {
+        "enabled": true,
+        "authority_message_id": "1561047502944477287",
+        "effective_at_epoch": 1792253127.562,
+        "allowed_site_cta": "CLAIM MY FREE PRODUCTS",
+        "maximum_gate_clicks": 1,
+        "maximum_wait_seconds": 180,
+        "observation_target_seconds": 25,
+        "observation_clock_starts": "AFTER_ARTICLE_RELEASE_AND_VERIFIED_SCROLL",
+        "ad_creative_clicks": false,
+        "advertiser_link_clicks": false,
+        "wait_without_repeated_cta": true
+      }
+    },
+    "rewarded_authority_message_id": "1561047502944477287",
+    "rewarded_trace": [],
+    "phase_seconds": {
+      "mechanical_total": 5.8262220910110045
+    },
+    "diagnosis": "ValueError: Unique normal Chrome base required; preserve user windows",
+    "no_tab_opened": true,
+    "browser_inputs_zero_verified": true
+  },
+  "batch_scope": "aa91d3f1d03c746b9950b8ec4c86f7ee5955e488e6e1ef38c726345bd50674bb"
+}

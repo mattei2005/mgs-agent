@@ -28,12 +28,20 @@ class ProbeBaseTests(unittest.TestCase):
             calls.append(args)
             return self.snapshot(private=args['window_id']==20)
         self.assertEqual(module.probe_base_window(call,[self.window(10),self.window(20)]),10)
-        self.assertEqual([a['window_id'] for a in calls],[10,20])
+        self.assertEqual([a['window_id'] for a in calls],[10])
         self.assertTrue(all(a['action']=='capture' and a['mode']=='ax' for a in calls))
 
-    def test_two_normal_windows_fail_without_input(self):
-        with self.assertRaisesRegex(ValueError,'no opening input'):
-            module.probe_base_window(lambda args:self.snapshot(),[self.window(10),self.window(20)])
+    def test_two_normal_windows_choose_stable_identity_without_input(self):
+        calls=[]
+        def call(args):calls.append(args);return self.snapshot()
+        self.assertEqual(module.probe_base_window(call,[self.window(20),self.window(10)]),10)
+        self.assertTrue(all(a['action']=='capture' for a in calls))
+
+    def test_private_first_is_skipped_without_input(self):
+        calls=[]
+        def call(args):calls.append(args);return self.snapshot(args['window_id']==10)
+        self.assertEqual(module.probe_base_window(call,[self.window(10),self.window(20)]),20)
+        self.assertEqual([a['window_id'] for a in calls],[10,20])
 
     def test_unreadable_or_no_browser_fails_closed(self):
         for baseline in ([],[self.window(10),self.window(20)]):

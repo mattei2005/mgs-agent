@@ -17,7 +17,7 @@ import time
 from ares_campaign_v3 import landing_followup as core
 from ares_campaign_v3.landing_desktop import windows,identity,all_elements,safe_windows
 from ares_campaign_v3.landing_reliability import approve_repair
-from ares_campaign_v3.landing_lean import lean_enabled,open_blank_normal,close_normal
+from ares_campaign_v3.landing_lean import lean_enabled,open_blank_normal,close_normal,normal_base_window
 
 
 def load(name,path):
@@ -31,18 +31,8 @@ def require_desktop_available(q,key):
 
 
 def probe_base_window(call,baseline):
-    """Resolve a unique normal Chrome using read-only native snapshots only."""
-    chrome=[w for w in baseline if w.get('app_name','').lower()=='chrome.exe']
-    if len(chrome)==1:return int(chrome[0]['window_id'])
-    normal=[]
-    for w in chrome:
-        snap=call({'action':'capture','mode':'ax','pid':w['pid'],'window_id':w['window_id']})
-        elements=all_elements(snap)
-        address=any(e.get('role')=='Edit' and e.get('label')=='Address and search bar' for e in elements)
-        private=any('incognito' in str(e.get('label','')).lower() for e in elements)
-        if address and not private:normal.append(w)
-    if len(normal)!=1:raise ValueError('unique normal Chrome base not proven; no opening input')
-    return int(normal[0]['window_id'])
+    """Use the observer's read-only native base selection, including multiwindow."""
+    return int(normal_base_window(call,baseline)['window_id'])
 
 
 def archive_reconciled_probe(q,key,idx,target):

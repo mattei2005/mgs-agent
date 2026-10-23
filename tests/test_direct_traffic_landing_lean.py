@@ -16,6 +16,19 @@ class Fake:
   if a['action']=='capture':return {'elements':[{'role':'Edit','label':self.typed},{'role':'Document','label':'Landing rendered' if self.loaded else 'New Tab'},{'role':'Button','label':'Incognito' if self.incognito else 'Profile'},{'index':1,'role':'Button','label':'Minimize','bounds':[100,0,40,40]},{'index':2,'role':'Button','label':'Restore','bounds':[140,0,40,40]},{'index':3,'role':'Button','label':'Close','bounds':[180,0,40,40]}]}
   return {'ok':True,'effect':'confirmed','elements':[{'index':40,'role':'Document','label':'Rendered landing','bounds':[0,121,2560,1271]}]}
 class LeanTests(unittest.TestCase):
+ def test_multiple_baseline_windows_preserved(self):
+  other=dict(BASE,window_id=20)
+  class Multiple(Fake):
+   def __call__(self,a):
+    out=super().__call__(a)
+    if a['action']=='list_windows':out['windows'].append(other)
+    if a['action']=='capture':out['elements'].append({'role':'Edit','label':'Address and search bar'})
+    return out
+  f=Multiple();p=open_normal(f,'https://example.invalid/x');e=close_normal(f,p)
+  self.assertEqual(p['base'],BASE)
+  self.assertEqual({w['window_id'] for w in p['baseline']},{10,20})
+  self.assertTrue(e['tab_closed_verified']);self.assertTrue(e['other_tabs_preserved'])
+  self.assertEqual(sum(a.get('keys')=='ctrl+n' for a in f.calls),1)
  def visual(self,**kw):
   d=dict(network_ad_visible=True,active_normal_chrome=True,unobstructed=True,landing_loaded=True,description='Capital One rendered artwork');d.update(kw);return {'success':True,'analysis':json.dumps(d)}
  def test_normal_not_incognito(self):

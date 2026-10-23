@@ -4,11 +4,25 @@ Only public computer_use and vision_analyze handlers; no page/CDP ad heuristics.
 import json,time
 from .landing_desktop import windows,identity,safe_windows,all_elements,escalates
 
+def normal_base_window(call,baseline,base_window=None):
+    """Select an exact native base; never close or navigate existing tabs."""
+    chrome=[w for w in baseline if w.get('app_name','').lower()=='chrome.exe' and (base_window is None or int(w['window_id'])==int(base_window))]
+    if len(chrome)==1:return chrome[0]
+    # Multiple normal windows are not ambiguous ownership: only the newly
+    # enumerated window will belong to us. Inspect chrome read-only and choose
+    # a stable native identity, retaining every baseline window for close checks.
+    for w in sorted(chrome,key=identity):
+        snap=call(dict(action='capture',mode='ax',pid=w['pid'],window_id=w['window_id']))
+        es=all_elements(snap)
+        address=any(e.get('role')=='Edit' and e.get('label')=='Address and search bar' for e in es)
+        private=any('incognito' in str(e.get('label','')).lower() for e in es)
+        if address and not private:return w
+    raise ValueError('Normal Chrome base not proven; no opening input')
+
 def open_blank_normal(call,on_owned=lambda p:None,base_window=None):
     before=windows(call);known={identity(w) for w in before}
-    candidates=[w for w in before if w.get('app_name','').lower()=='chrome.exe' and (base_window is None or int(w['window_id'])==int(base_window))]
-    if len(candidates)!=1:raise ValueError('Unique normal Chrome base required; preserve user windows')
-    base=candidates[0];proof: dict=dict(state='NORMAL_OPEN_INTENT',baseline=safe_windows(before),url=None,url_submission_attempted=False,opened_intent_at=time.time())
+    base=normal_base_window(call,before,base_window)
+    proof: dict=dict(state='NORMAL_OPEN_INTENT',baseline=safe_windows(before),base=safe_windows([base])[0],url=None,url_submission_attempted=False,opened_intent_at=time.time())
     on_owned(proof)
     call(dict(action='capture',mode='ax',pid=base['pid'],window_id=base['window_id']))
     out=call(dict(action='key',keys='ctrl+n'))
