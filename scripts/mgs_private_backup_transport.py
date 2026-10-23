@@ -84,9 +84,12 @@ def move_one(owner,sa,c,p,s,job,journal):
   cp,_=a.corp.load_plan();a.corp.check_acl(a.corp.h.permissions(sa,x['sourceId']),a.corp.desired(cp,True))
   folder=backup.native_meta(owner,x['destinationParentId'])
   if folder.get('driveId') or folder.get('parents')!=[p['archiveRootId']] or folder.get('name')!=x['tier'] or folder.get('trashed') is not False or not any(z.get('permissionId')==p['ownerPermissionId'] for z in folder.get('owners',[])):raise b.ArchiveError('PRIVATE_BACKUP_DESTINATION_FOLDER')
-  source_before=backup.native_meta(sa,x['sourceId']);hashes=sa.hashes(x['sourceId'])
-  if hashes!={k:x[k] for k in ['size','md5','sha256']}:raise b.ArchiveError('PRIVATE_BACKUP_SOURCE_STREAM')
-  if backup.native_meta(sa,x['sourceId'])!=source_before:raise b.ArchiveError('PRIVATE_BACKUP_SOURCE_CHANGED_DURING_STREAM')
+  # Preserve the original native-move protocol: this is the SAME file ID,
+  # not a copy. Google source SHA/MD5/size and the original SA appProperties
+  # bind the pre-move bytes; canonical SA fully streams that same ID AFTER
+  # its parent move in a.reconcile(). Media copies still stream both IDs.
+  source_before=backup.native_meta(sa,x['sourceId']);a.check_content(source_before,x)
+  if source_before.get('driveId')!=b.SOURCE_DRIVE or source_before.get('parents')!=[x['sourceParentId']] or source_before.get('appProperties')!=x['managedProperties']:raise b.ArchiveError('PRIVATE_BACKUP_NATIVE_SOURCE_BINDING')
   journal.intent(key,{'job_id':j['jobId'],'source_id':x['sourceId'],'old_parent':x['sourceParentId'],'new_parent':x['destinationParentId'],'request_sha256':a.sha(j)});owner.move_binding=x
   try:owner.api('PATCH','files/'+x['sourceId'],{'supportsAllDrives':'true','addParents':x['destinationParentId'],'removeParents':x['sourceParentId'],'fields':'id'},{})
   except b.ArchiveError:
