@@ -115,6 +115,12 @@ fi
             "tests/test_private_backup_upload_other.py": 1,
             "scripts/private_backup_upload_credentials.json": 1,
             "data/private_backup_upload_token.json": 1,
+            "tests/test_private_control_scope.py": 0,
+            "work/tests/test_private_control_scope.py": 1,
+            "tests/test_private_control_scope.py.bak": 1,
+            "tests/test_private_control_scope_other.py": 1,
+            "tests/private_control_scope_credentials.json": 1,
+            "tests/private_control_scope_token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

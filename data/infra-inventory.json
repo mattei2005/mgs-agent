@@ -52765,6 +52765,32 @@
       }
     },
     {
+      "id": "autopush-control-scope-test-1563019403472146483",
+      "type": "autocommit_guardrail_recovery",
+      "actor": "zeus",
+      "source_alert_id": "1563019403472146483",
+      "origin_session_id": "20261022_195537_c9510c",
+      "origin_thread_id": "1562078493498540042",
+      "origin_authorization_message_id": "1562972150455992431",
+      "cause": "Sensitive filename false positive on reviewed offline control-scope regression test",
+      "paths": [
+        "scripts/auto-commit-watcher.sh",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "tests/test_auto_commit_empty_index.py"
+      ],
+      "reviewed_exact_paths": ["tests/test_private_control_scope.py"],
+      "validation": {
+        "tests_passed": 53,
+        "source_pattern_and_long_literal_scan": "PASS",
+        "bash_syntax_and_git_diff_check": "PASS",
+        "sibling_and_copy_negative_cases": "PASS"
+      },
+      "state": "tests_passed_awaiting_native_watcher_and_remote_validation",
+      "credentials_changed": false,
+      "manual_commit_or_push": false,
+      "report_infra_status": "pending_validation"
+    },
+    {
       "id": "autopush-direct-backup-source-1563011855641739308",
       "type": "autocommit_guardrail_recovery",
       "actor": "zeus",

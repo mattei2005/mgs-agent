@@ -139,6 +139,23 @@ exec {self.real_git} "$@"
         self.run_until("Commit OK:")
         self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()), names)
 
+    def test_reviewed_private_control_scope_test_commits(self):
+        name = "tests/test_private_control_scope.py"
+        path = self.repo / name
+        path.parent.mkdir(parents=True)
+        path.write_text("# Synthetic offline test fixture; no credentials.\n")
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
+
+    def test_control_scope_exception_does_not_allow_sibling_secrets(self):
+        base = self.repo / "tests"
+        base.mkdir()
+        (base / "test_private_control_scope.py").write_text("# Synthetic fixture.\n")
+        (base / "private_control_scope_credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_direct_backup_exception_does_not_allow_runtime_secrets(self):
         base = self.repo / "scripts"
         base.mkdir()
