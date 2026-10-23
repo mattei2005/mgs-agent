@@ -10029,6 +10029,24 @@
       "updated_at": "2026-10-23T14:10:24+00:00"
     },
     {
+      "canonical_key": "google.archive30tb.upload_manual.existing_access_restoration",
+      "canonical_source": "context/drive-archive-owner-connector.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "google-archive",
+      "effective_at": "2026-10-23T18:23:05.900Z",
+      "id": "MGS-30TB-UPLOAD-ACCESS-RESTORE-1563256468118183967",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Reposição exata dos sete acessos herdados da UPLOAD MANUAL durante o cutover",
+      "updated_at": "2026-10-23T18:44:35+00:00"
+    },
+    {
       "canonical_key": "drive.archive.processed-ares.delivery-focus",
       "canonical_source": "docs/mgs-whole-drive-30tb-migration.md",
       "consumers": [
@@ -14087,5 +14105,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T18:24:25+00:00"
+  "updated_at": "2026-10-23T18:44:35+00:00"
 }
