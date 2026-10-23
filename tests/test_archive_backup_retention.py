@@ -37,4 +37,22 @@ class Retention(unittest.TestCase):
   with patch.object(r.backup,'native_meta',return_value=meta),patch.object(r.urllib.request,'urlopen') as rpc:
    with self.assertRaises(b.ArchiveError):r.trash_once(Mock(),'x','dest',meta)
    rpc.assert_not_called()
+ def disposition(self,*,valid=True,actual_change=None,ack_change=None):
+  asset={'sourceId':'file','destinationParentId':'dest','name':'backup','mimeType':'application/pgp-encrypted','sourceCreatedTime':'time','size':'10','md5':'a'*32,'sha256':'b'*64,'managedProperties':{'mgs_dr':'true'}}
+  job={'jobId':'job','verified':True,'ack_file_id':'ack','body':{'asset':asset}}
+  actual={'id':'file','parents':['dest'],'trashed':True,'name':'backup','createdTime':'time','size':'10','md5Checksum':'a'*32,'sha256Checksum':'b'*64,'appProperties':asset['managedProperties']}
+  if actual_change:actual.update(actual_change)
+  intent={'status':'verified','confirmation_message_id':r.AUTH if valid else 'wrong','job_id':'job','ack_id':'ack','metadata_after':actual}
+  ack={'status':'verified','archiveId':'file','sha256':'b'*64,'requestSha256':r.a.sha(job['body'])}
+  if ack_change:ack.update(ack_change)
+  def read(path,default=None):return self.policy if path==r.POLICY else {'intents':{'file':intent}}
+  with patch.object(b,'read_json',side_effect=read),patch.object(r.a,'queue_object',return_value=(ack,{})),patch.object(r.a.corp,'load_plan',return_value=({},{})),patch.object(r.a.corp,'check_acl'),patch.object(r.a.corp,'desired',return_value={}),patch.object(r.a.corp.h,'permissions',return_value=[]):
+   return r.verify_recorded_trash(Mock(),{},self.p,job,actual)
+ def test_confirmed_trashed_migration_is_reconciled(self):self.assertTrue(self.disposition())
+ def test_unconfirmed_trash_is_not_accepted(self):
+  with self.assertRaises(b.ArchiveError):self.disposition(valid=False)
+ def test_trash_byte_drift_is_not_excused(self):
+  with self.assertRaises(b.ArchiveError):self.disposition(actual_change={'md5Checksum':'c'*32})
+ def test_trash_native_ack_must_match(self):
+  with self.assertRaises(b.ArchiveError):self.disposition(ack_change={'archiveId':'other'})
 if __name__=='__main__':unittest.main()

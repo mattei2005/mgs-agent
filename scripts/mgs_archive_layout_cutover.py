@@ -38,21 +38,26 @@ def descendants(rows,root,exclude=()):
 
 def native(d,fid):return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':FIELDS})
 
-def owned_inventory(sa):
-    current={};page=None
-    while True:
-        params={'q':"trashed=false and '"+b.ACCOUNT+"' in owners",'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':1000,'fields':'nextPageToken,files('+FIELDS+')'}
-        if page:params['pageToken']=page
-        value=sa.api('GET','files',params);current.update({x['id']:x for x in value.get('files',[])});page=value.get('nextPageToken')
-        if not page:return current
+def owned_inventory(sa,parent_ids):
+    # Only exact approved frozen parent IDs, never an account-wide owner scan.
+    if not parent_ids:raise b.ArchiveError('LAYOUT_EXACT_PARENT_SCOPE_REQUIRED')
+    current={};parents=sorted(set(parent_ids))
+    for start in range(0,len(parents),30):
+        query='trashed=false and ('+' or '.join("'"+fid+"' in parents" for fid in parents[start:start+30])+')';page=None
+        while True:
+            params={'q':query,'supportsAllDrives':'true','includeItemsFromAllDrives':'true','pageSize':1000,'fields':'nextPageToken,files('+FIELDS+')'}
+            if page:params['pageToken']=page
+            value=sa.api('GET','files',params);current.update({x['id']:x for x in value.get('files',[])});page=value.get('nextPageToken')
+            if not page:break
+    return current
 
-def propagated_inventory(sa,expected_ids,max_seconds=1800):
+def propagated_inventory(sa,expected_ids,max_seconds=1800,parent_ids=None):
     """Google can return a moved folder before its children change ownership.
     Observe the same IDs; never replay the folder move to cure propagation.
     """
     deadline=time.monotonic()+max_seconds;observations=[]
     while True:
-        current=owned_inventory(sa)
+        current=owned_inventory(sa,parent_ids)
         missing=[fid for fid in expected_ids if fid not in current or current[fid].get('driveId') or not any(o.get('emailAddress')==b.ACCOUNT and o.get('permissionId')==b.PUBLISHER_PERMISSION_IDS[b.ACCOUNT] for o in current[fid].get('owners',[]))]
         observations.append({'at':b.now_iso(),'pending_native_ownership':len(missing),'expected_count':len(expected_ids)})
         b.atomic_json(HOME/'propagation-observations.json',observations)
@@ -187,7 +192,8 @@ def apply():
                 # Full native listing joined by exact IDs, with bounded Google
                 # ownership-propagation recovery. No repeated moves or copies.
                 fixture_ids={x['id'] for x in snapshot['old_root_children'] if x['id'] not in [b.SOURCE_ROOT,p['sourceRootId']]}
-                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids)
+                parent_scope={parent for x in snapshot['objects'].values() for parent in x.get('parents',[]) if parent!=b.SOURCE_ROOT}|{binding['stock_root_id'],p['corporateRootId']}
+                current=propagated_inventory(sa,set(snapshot['objects'])|fixture_ids,parent_ids=parent_scope)
                 writers=h.WRITERS|{b.CANONICAL_SA};verified_objects={}
                 for key,before in snapshot['objects'].items():
                     after=current.get(key)
