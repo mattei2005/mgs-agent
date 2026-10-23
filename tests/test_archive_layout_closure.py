@@ -64,4 +64,25 @@ class LayoutClosure(unittest.TestCase):
    self.assertEqual(stock.tick()['status'],'inactive');owner.assert_not_called()
  def test_wrong_stock_batch_rejected(self):
   with self.assertRaises(b.ArchiveError):stock.tick(5)
+ def test_get500_retries_without_mutation(self):
+  d=b.Drive.__new__(b.Drive);d.base='https://www.googleapis.com/drive/v3/';d.token='fixture';d.api_json=Mock(side_effect=[(500,{}),(200,{'id':'same'})])
+  with patch.object(b.time,'sleep') as sleep:
+   self.assertEqual(d.api('GET','files/same'),{'id':'same'});self.assertEqual(d.api_json.call_count,2);sleep.assert_called_once_with(1)
+ def test_mutations500_never_replayed(self):
+  for method in ['POST','PATCH']:
+   d=b.Drive.__new__(b.Drive);d.base='https://www.googleapis.com/drive/v3/';d.token='fixture';d.api_json=Mock(return_value=(500,{}))
+   with self.assertRaises(b.ArchiveError):d.api(method,'files',payload={})
+   self.assertEqual(d.api_json.call_count,1)
+ def test_read500_attempts_bounded(self):
+  d=b.Drive.__new__(b.Drive);d.base='https://www.googleapis.com/drive/v3/';d.token='fixture';d.api_json=Mock(return_value=(500,{}))
+  with patch.object(b.time,'sleep'),self.assertRaises(b.ArchiveError):d.api('GET','files')
+  self.assertEqual(d.api_json.call_count,3)
+ def test_folder_ownership_propagation_no_move_replay(self):
+  owned={'id':'x','owners':[{'emailAddress':b.ACCOUNT,'permissionId':b.PUBLISHER_PERMISSION_IDS[b.ACCOUNT]}]}
+  with patch.object(layout,'owned_inventory',side_effect=[{}, {'x':owned}]),patch.object(b,'atomic_json'),patch.object(layout.time,'sleep') as sleep:
+   self.assertEqual(layout.propagated_inventory(Mock(),{'x'})['x'],owned);sleep.assert_called_once_with(15)
+ def test_folder_ownership_wait_is_bounded(self):
+  with patch.object(layout,'owned_inventory',return_value={}),patch.object(b,'atomic_json'),self.assertRaises(b.ArchiveError):layout.propagated_inventory(Mock(),{'x'},0)
+ def test_unknown_operation_stock_folder_rejected(self):
+  with patch.object(b,'read_json',return_value={'slots':[{'operation':'SHEIN_US_EN'}]}),self.assertRaises(b.ArchiveError):stock.destination_folder(Mock(),Mock(),Mock(),{'relativeParent':['UNKNOWN','VID','01_READY']})
 if __name__=='__main__':unittest.main()

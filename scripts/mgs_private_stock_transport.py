@@ -10,6 +10,30 @@ import mgs_archive_owner_transport as t
 import mgs_archive_layout_cutover as layout
 HOME=t.HOME/'stock-lane'
 
+def destination_folder(owner,sa,journal,entry):
+    names=entry['relativeParent'];t.validate_path(names)
+    context=b.read_json(b.DATA/'upload-context-layout.json',{});operations={x['operation'] for x in context.get('slots',[])}
+    if len(names)!=3 or names[0] not in operations or names[1] not in ['IMG','VID'] or names[2] not in ['99_LEGACY','01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']:raise b.ArchiveError('STOCK_TRANSFER_REGISTERED_PATH_REQUIRED')
+    parent=loc.stock_root();loc.verify_stock_root(sa);owner.parents.add(parent)
+    for name in names:
+        rows=[x for x in owner.listing(parent) if x.get('name')==name]
+        if len(rows)>1 or (rows and rows[0].get('mimeType')!=b.FOLDER):raise b.ArchiveError('STOCK_TRANSFER_FOLDER_AMBIGUOUS')
+        if rows:fid=rows[0]['id']
+        else:
+            key='stock-folder:'+layout.ba.sha([parent,name]);fid=journal.known_id(key)
+            if not fid:
+                journal.allow_create(key);journal.intent(key,{'parent':parent,'name':name,'stock_root':loc.stock_root()})
+                try:fid=owner.api('POST','files',{'fields':'id'},{'name':name,'mimeType':b.FOLDER,'parents':[parent],'properties':{'mgsArchiveKey':key,'mgsArchiveType':'stock_folder'}})['id']
+                except b.ArchiveError:
+                    landed=owner.one(parent,key)
+                    if not landed:raise b.ArchiveError('STOCK_TRANSFER_FOLDER_UNKNOWN_NO_REPLAY') from None
+                    fid=landed['id']
+                journal.landed(key,fid)
+        actual=loc.assert_stock_file(sa,fid,parent)
+        if actual.get('name')!=name or actual.get('mimeType')!=b.FOLDER:raise b.ArchiveError('STOCK_TRANSFER_FOLDER_READBACK')
+        owner.parents.add(fid);parent=fid
+    return parent
+
 def check_ack(sa,c,entry,index):
     storage.require_registered_mapping(entry,index)
     found=sa.one(c['requests_folder_id'],'ack:'+entry['jobId'])
@@ -33,7 +57,7 @@ def tick(max_files=4,defer_if_busy=False):
             if stock.get('mimeType')!=storage.SHORTCUT or stock.get('shortcutDetails',{}).get('targetId')!=entry['archiveId'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or stock.get('trashed') is not False:raise b.ArchiveError('STOCK_TRANSFER_ALIAS_BINDING')
             if stock.get('driveId')==b.SOURCE_DRIVE:
                 if loc.staging_relative_parent(sa,stock['parents'][0])!=entry['relativeParent']:raise b.ArchiveError('STOCK_TRANSFER_STAGING_PATH')
-                destination=loc.stock_folder_for_path(sa,entry['relativeParent'])
+                destination=destination_folder(owner,sa,journal,entry)
                 layout.move_once(owner,sa,journal,sid,stock['parents'][0],destination)
             else:
                 frozen=snapshot.get('objects',{}).get(sid)

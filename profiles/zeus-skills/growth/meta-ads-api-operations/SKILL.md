@@ -458,6 +458,12 @@ Full workflow, correct `ad_accounts` route, ProcessSingleton reuse, BM target co
 
 ## Meta Business Manager inventory / asset access audits
 
+### Cross-reference BM accounts with the Smart Bidding domain catalog
+
+For a Zeus-authorized Digital Trust inventory, paginate only the named BM's owned/client edges, then cross-reference the exact account IDs with the SB corporate domain catalog and its account registrations. Resolve the frontend's current read route before use; the validated account route is `GET /accounts/Facebook` with explicit `companies[]=digital-trust`, `companies[]=digital-trust-2` and `source=Facebook`. That response is credential-bearing (`ACCESS_TOKEN`, `APP_SECRET`): keep raw objects only in process memory and persist/output only allowlisted account identity, domain and active fields. Join `ACCOUNT_ID` after removing only the documented `act_` prefix; names alone can miss aliases such as `Conecta` mapped to `conectageral`.
+
+Report exact SB-registered IDs separately from additional BM accounts whose names match catalog publishers; a naming match is not verified registration or proof of current delivery. Preserve accounts with generic names as unmapped rather than assigning them by guess. Include registered inactive publishers when the request is catalog-wide, and distinguish account enablement from campaigns spending. On a 403 from a narrower operational SB identity, diagnose its validity/access and use Zeus's existing approved administrative route for this Zeus audit; never widen Ares's catalog authority or rotate production references. Generate one Ads Manager link per verified Meta account ID and assert link-ID set equality and unique counts before delivery.
+
 Use this skill not only for campaign operations, but also when Rodolfo asks to inventory a Meta Business Manager: ad accounts, people/users, pixels/datasets, pages, system users, and asset-to-account relationships.
 
 Critical rules for BM audits:

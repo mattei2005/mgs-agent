@@ -16,6 +16,7 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+import time
 import urllib.parse
 import urllib.request
 import uuid
@@ -230,11 +231,19 @@ class Drive:
         load_env();self.api_json=api_json
         self.token=service_account_access_token('https://www.googleapis.com/auth/drive' if write else 'https://www.googleapis.com/auth/drive.readonly')
         self.base='https://www.googleapis.com/drive/v3/'
-    def api(self,method,path,params=None,payload=None):
+    def api(self,method,path,params=None,payload=None) -> dict:
         url=self.base+path+('?' + urllib.parse.urlencode(params) if params else '')
-        status,data=self.api_json(method,url,self.token,payload)
-        if status not in (200,201): raise ArchiveError('DRIVE_HTTP_'+str(status))
-        return data
+        for attempt in range(3 if method=='GET' else 1):
+            status,data=self.api_json(method,url,self.token,payload)
+            if status in (200,201):
+                if not isinstance(data,dict):raise ArchiveError('DRIVE_RESPONSE_INVALID')
+                return data
+            # Retry only a read known to have no external mutation. An unknown
+            # POST/PATCH is never replayed; 429 retains its separate cooldown.
+            if method=='GET' and status in (500,502,503,504) and attempt<2:
+                time.sleep(2**attempt);continue
+            raise ArchiveError('DRIVE_HTTP_'+str(status))
+        raise ArchiveError('DRIVE_READ_ATTEMPTS_EXHAUSTED')
     def meta(self,fid):
         return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
     def listing(self,parent,*,key=None,kind=None):

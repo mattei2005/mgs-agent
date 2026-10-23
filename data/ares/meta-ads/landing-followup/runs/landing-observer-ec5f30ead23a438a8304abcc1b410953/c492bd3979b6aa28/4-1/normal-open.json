@@ -1,5 +1,5 @@
 {
-  "state": "OWNED_NORMAL_NEW_WINDOW",
+  "state": "OPENED_NORMAL",
   "baseline": [
     {
       "pid": 18224,
@@ -63,7 +63,7 @@
     "app_name": "chrome.exe"
   },
   "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_medium=g001-s&utm_campaign=b01fb05c120&utm_adgroup=b01fb05c120g01&nocache",
-  "url_submission_attempted": false,
+  "url_submission_attempted": true,
   "opened_intent_at": 1792767356.8260624,
   "target": {
     "pid": 18224,
@@ -73,5 +73,20 @@
   "new_window_created": true,
   "new_tab_created": true,
   "browser_mode": "NORMAL",
-  "blank_opened_at": 1792767365.6865816
+  "blank_opened_at": 1792767365.6865816,
+  "desktop_view": {
+    "desktop_view": true,
+    "device_toolbar_visible": false,
+    "viewport_bounds": [
+      0,
+      120,
+      2560,
+      1272
+    ],
+    "device_mode": "DESKTOP",
+    "verified": true,
+    "verified_at": 1792767372.17264,
+    "source": "native_and_visual_desktop"
+  },
+  "opened_at": 1792767385.9009607
 }
