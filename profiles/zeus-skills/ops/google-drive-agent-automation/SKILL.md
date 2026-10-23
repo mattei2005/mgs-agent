@@ -55,7 +55,19 @@ For storage-capacity or migration questions, classify the actual Drive with read
 
 ## Cross-account cloud connector gates
 
-For an explicitly approved owner-account connector, preserve the canonical SA for agents and keep the separate owner execution bounded to the approved account and roots. Keep steady-state processing in the cloud; do not introduce an operator computer or per-file approvals into an authorized unattended workflow. When Rodolfo asks to finish the automation and notify him only at completion, continue through the authorized non-critical integration and validation gates without milestone messages or renewed routine approvals. Interrupt only for a real decision/security gate; once owner setup and cloud execution are verified, do not ask him to repeat Google clicks merely to prove another internal layer.
+For an explicitly approved owner-account connector, preserve the canonical SA for agents and keep the separate owner execution bounded to the approved account and roots. Keep steady-state processing in the cloud; do not introduce an operator computer or per-file approvals into an authorized unattended workflow. When Rodolfo asks to finish the automation and notify him only at completion, execute the remaining acceptance gates rather than repeatedly returning plans or partial-progress summaries. Interrupt only for a real decision/security gate; once owner setup and cloud execution are verified, do not ask him to repeat Google clicks merely to prove another internal layer.
+
+### Whole-Drive completion preflight
+
+Before a long whole-Drive migration:
+
+1. Recover one completion ledger covering historical bytes, backups, controls, stock/shortcuts, active consumers, source retirement and the exact intake exception. Keep byte-copy completion distinct from final-layout completion.
+2. Preflight the final topology before bulk execution: inspect compiled parent/owner pins, intake-folder inheritance, private backup ACLs and consumer resolution. Surface any genuinely new sharing/credential/destructive gate early, not after hours of copying; broad migration approval does not override an explicit exclusion.
+3. Keep independent authorized transfers progressing while a separate decision is pending. Ask once for the precise missing scope, preserve already-approved work, and never turn an internal validator failure into another owner-setup request.
+4. Prioritize the next unproven delivery gate. Bound investigation to a reproduced failure or concrete dependency; do not let speculative redesign, repeated context reads or documentation replace real execution and readback.
+5. Before reporting, join each frozen manifest's unique source IDs to verified evidence, consume or safely quiesce supervised bursts, and state any unresolved gate separately. Do not call the whole migration complete from a green monitor, a test count or one finished data class.
+
+### Connector acceptance gates
 
 1. Inspect the actual project manifest before the first owner run. Declare the scopes needed by dynamically loaded code explicitly and check them before executing the worker; automatic scope inference cannot see remote code.
 2. Bind both publishers with Google-native `permissionId` values derived from trusted API identity/ownership metadata. Require exact pinned IDs, preserve leading zeros, and reject contradictory visible emails. An omitted cross-account email is not proof of an unauthorized publisher, but email/display name alone is not sufficient proof either.
