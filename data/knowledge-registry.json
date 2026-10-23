@@ -9686,10 +9686,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei / Ares",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "LANDING-PAUSED-1563256361544843305",
       "title": "Observador em desktop normal sem emulacao; repetir pendencias preservando aprovados e tempo20-30s",
-      "updated_at": "2026-10-18T16:22:56+00:00"
+      "updated_at": "2026-10-23T18:24:25+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.landing-followup.procedure",
@@ -9795,6 +9795,24 @@
       "superseded_by": null,
       "title": "Acompanhamentos na thread de Rodolfo incluem nome e link da thread de origem",
       "updated_at": "2026-10-18T15:59:48+00:00"
+    },
+    {
+      "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
+      "canonical_source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-23T18:24:25+00:00",
+      "id": "LANDING-PAUSED-1563256361544843305",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Acompanhamento automático de links pausado por Rodolfo até nova autorização; criação de campanhas preservada",
+      "updated_at": "2026-10-23T18:24:25+00:00"
     },
     {
       "canonical_key": "growth.direct-traffic.landing-followup.repeated-report-diagnosis",
@@ -14069,5 +14087,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T14:10:24+00:00"
+  "updated_at": "2026-10-23T18:24:25+00:00"
 }

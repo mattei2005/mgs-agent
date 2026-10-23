@@ -1282,6 +1282,26 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-LANDING-OPERATOR-1563255882094223473",
+      "next_step": "Nenhuma ação neste link; não reabrir. Resolução humana não equivale a PASS automatizado.",
+      "objective": "Encerrar acompanhamento b01fb04c197 por confirmação manual de Rodolfo",
+      "source": "data/ares/meta-ads/audit/landing-operator-resolution-1563255882094223473/verification.json;discord:message:1563255882094223473",
+      "state": "complete;resolved_by_operator;1 alvo;0 pendências no pedido;tentativa e evidência preservadas;readback independente verificado;sem nova visita",
+      "thread_id": "1561423880780910668",
+      "updated_at": "2026-10-23T18:22:00+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-LANDING-PAUSE-1563256361544843305",
+      "next_step": "Manter pausado. Retomar somente após novo pedido explícito de Rodolfo, revalidando escopo e sem backfill automático dos pedidos durante a pausa.",
+      "objective": "Pausar serviço automático de acompanhamento de links até Rodolfo autorizar retomada",
+      "source": "data/ares/meta-ads/policies/direct-traffic-landing-followup.json;data/ares/meta-ads/audit/landing-pause-1563256361544843305/verification.json;discord:message:1563256361544843305",
+      "state": "paused_by_rodolfo;intake e observador bloqueados pela política;timers parados e disabled;nenhuma execução/lease pc1 ativa;histórico preservado;criação de campanhas sem alteração",
+      "thread_id": "1561423880780910668",
+      "updated_at": "2026-10-23T18:24:25+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-LANDING-SOURCE-VARIANT-1561385193653280868",
       "next_step": "Nenhuma pendencia neste pedido; nao reabrir. Regra sem utm_source vigente somente no observador.",
       "objective": "Teste C138 C139 C140 sem source e encerramento por Rodolfo",
@@ -7192,5 +7212,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-23T17:15:14+00:00"
+  "updated_at": "2026-10-23T18:24:25+00:00"
 }

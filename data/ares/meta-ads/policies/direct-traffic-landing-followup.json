@@ -1,7 +1,21 @@
 {
   "schema_version": 3,
   "canonical_key": "growth.direct-traffic.post-creation-landing-observation",
-  "status": "ACTIVE_FOR_NEW_REQUESTS",
+  "status": "PAUSED_BY_RODOLFO",
+  "operator_pause": {
+    "active": true,
+    "authority_user_id": "344196393512075265",
+    "authority_message_id": "1563256361544843305",
+    "authority_thread_id": "1561423880780910668",
+    "statement": "Ares pausa esse serviço de abrir os links para os próximos pedidos, pois a SB vai lançar uma tech que não vai precisar disso mais ....deixa pausado por enquanto até eu avisar.",
+    "scope": "POST_CREATION_LANDING_FOLLOWUP_INTAKE_AND_OBSERVER",
+    "previous_status": "ACTIVE_FOR_NEW_REQUESTS",
+    "supersedes_execution_authority": "LANDING-DESKTOP-1561409616343203882",
+    "resume_requires": "EXPLICIT_NEW_AUTHORIZATION_FROM_RODOLFO",
+    "campaign_creation_unchanged": true,
+    "historical_jobs_and_evidence_preserved": true,
+    "timers_disabled": ["ares-landing-followup.timer", "ares-landing-intake.timer"]
+  },
   "approved_by": "344196393512075265",
   "approval_message_id": "1559951763019145247",
   "approval_thread_id": "1559932317861158993",
