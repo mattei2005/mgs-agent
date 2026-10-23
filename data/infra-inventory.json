@@ -50386,6 +50386,84 @@
         "/root/mgs-agent/tests/test_auto_commit_sensitive_paths.py",
         "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/autocommit-service-flapping-pathspec-2026-07-09.md"
       ]
+    },
+    {
+      "id": "vizioid-finance-draft-menu-1562986239601156216",
+      "agent": "zeus",
+      "type": "wordpress_content_quarantine_and_native_mobile_navigation",
+      "authorities": [
+        "1562986239601156216",
+        "1562986573576937582"
+      ],
+      "domain": "vizioid.com",
+      "updated_at": "2026-10-23T00:38:26.493554+00:00",
+      "status": "verified",
+      "financial_posts_draft": 204,
+      "preserved_published_posts": 32,
+      "public_financial_urls_end404": 204,
+      "menu_widget": "nav_menu-1",
+      "menu_id": 209,
+      "sidebar": "jbf_server_drawer",
+      "mobile_desktop_widths_verified": [
+        320,
+        390,
+        430,
+        1280
+      ],
+      "backup_path": "/home/runcloud/mgs-backups/vizioid-finance-draft-1562986239601156216/database-before.sql",
+      "backup_sha256": "4b56d84aa2c52724b7783204940fd7e1c3891a870f280b1b044c60fd518d30e4",
+      "evidence_path": "/root/.hermes/profiles/zeus/reports/vizioid-finance-draft-1562986239601156216",
+      "report_path": "/root/mgs-agent/reports/vizioid-finance-draft-menu-1562986239601156216.md",
+      "canonical_decision": "acquisition.vizioid.editorial-finance-policy",
+      "report_infra_status": "delivered_exact_embed_readback_verified",
+      "report_infra_message_id": "1562988587757076551"
+    },
+    {
+      "id": "alerts-infra-autorecovery-1562987234351644764",
+      "type": "monitoring_auto_recovery",
+      "updated_at": "2026-10-23T00:39:54.619186+00:00",
+      "authority_message_id": "1562987234351644764",
+      "voice_reaffirmation_message_id": "1562987037370617896",
+      "source_thread_id": "1562985583545032785",
+      "paths": [
+        "scripts/alerts-infra-failed-alert-resolver.py",
+        "scripts/monitor-auto-push.sh",
+        "tests/test_alerts_infra_failed_alert_resolver.py",
+        "tests/test_monitor_auto_push_race.py",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md"
+      ],
+      "validation": {
+        "tests_passed": 55,
+        "test_environment": "isolated uv Python3.12 pytest; system pytest missing recovered without production package change",
+        "live_dry_run_state_unchanged": true,
+        "live_resolver_cycle": "handled=0 skipped=1; no failure alert pending in new cursor window",
+        "live_autopush_failures": 0,
+        "auto_push_threshold": 1,
+        "positive_failure_flow": "isolated Git+HTTP fixtures; no induced production outage",
+        "skill_runtime_mirror_equal": true
+      },
+      "policy": {
+        "first_detection": true,
+        "known_source_channel_only": true,
+        "pending_silent_retry": true,
+        "resolved_requires_terminal_readback_claim": true,
+        "blocked_escalated_not_done": true,
+        "credential_billing_critical_gates_preserved": true,
+        "no_gateway_restart": true,
+        "schedule_changed": false,
+        "resolver_schedule": "2-57/5 * * * *",
+        "autopush_schedule": "11,26,41,56 * * * *"
+      },
+      "sha256": {
+        "scripts/alerts-infra-failed-alert-resolver.py": "cd185b8e555a08a2f898a906c9c09a40bc5b324626be1576824d9b6c3cf728e4",
+        "scripts/monitor-auto-push.sh": "5f2681a1415e1823b36802343543b6f69946a4704e1d7c530fe4d0bfdf92fcce",
+        "tests/test_alerts_infra_failed_alert_resolver.py": "3d9bb30581a3122278deec34325f532c1f97cdb2b05ff454eedb57b544220c68",
+        "tests/test_monitor_auto_push_race.py": "04a4a043afc3f269ca5963befcda3bdf8e510ab1b9a15c3fc3eeb8d1948421a8",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/route-pack-06.md": "832eed22adab456e59d99d50523791d8ef174b954c9960fdaa87b2005ff6c4a9",
+        "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md": "832eed22adab456e59d99d50523791d8ef174b954c9960fdaa87b2005ff6c4a9"
+      },
+      "rollback_backup": "/root/.hermes/profiles/zeus/cache/scratch/alerts-autorecovery-20261022T203454"
     }
   ],
   "profile_skill_references": [
@@ -51868,8 +51946,8 @@
   "scripts": [
     {
       "path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
-      "size_bytes": 20396,
-      "modified_at": "2026-10-03T17:59:26-04:00"
+      "size_bytes": 24358,
+      "modified_at": "2026-10-23T00:35:55.410909+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-build-creative-copy-queue.py",
@@ -53233,8 +53311,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
-      "size_bytes": 17712,
-      "modified_at": "2026-10-16T20:28:11-04:00"
+      "size_bytes": 17949,
+      "modified_at": "2026-10-23T00:38:15.475966+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",

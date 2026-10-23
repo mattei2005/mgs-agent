@@ -27,6 +27,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Diagnosticar abilities Yoast, papel e transporte de input** → `references/yoast-abilities-role-diagnostics.md`
 - **Consolidar usuários/admins WordPress RunCloud com reatribuição e 1Password** → `references/runcloud-wordpress-user-consolidation.md`
 - **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
+- **Menu mobile JBF abre vazio apesar de menu principal existir** → `references/jbf-empty-mobile-drawer-native-widget.md`
 - **Auditar artigos WordPress irrelevantes/spam** → `references/wordpress-irrelevant-posts-incident-audit.md`
 - **Auditar SEO/indexação de todos os artigos e corrigir sitemap XML obsoleto em WP Fastest Cache** → `references/article-seo-indexing-sitemap-audit.md`
 - **Investigar árvores de plugins com versões misturadas** → `references/wordpress-plugin-mixed-version-forensics.md`

@@ -162,12 +162,14 @@ class AutoPushRaceTests(unittest.TestCase):
         self.git("remote", "set-url", "origin", str(self.base / "absent.git"))
         self.assertIn("repo_failures=1", self.run_monitor())
 
-    def test_three_failure_cycles_alert_once_and_recovery_clears(self):
+    def test_first_failure_alerts_once_without_mention_and_recovery_clears(self):
         self.start(age=300)
         for count in (1, 2, 3, 4):
             self.run_monitor(dry=False)
             self.assertEqual(json.loads(self.state.read_text())["consecutive_failures"], count)
-            self.assertEqual(len(self.requests), 0 if count < 3 else 1)
+            self.assertEqual(len(self.requests), 1)
+        self.assertEqual(self.requests[0]['content'], '')
+        self.assertEqual(self.requests[0]['allowed_mentions']['users'], [])
         self.git("push", "-q", "origin", "HEAD:main")
         self.run_monitor(dry=False)
         self.assertEqual(json.loads(self.state.read_text())["consecutive_failures"], 0)

@@ -342,9 +342,10 @@ def run_tick(max_jobs=4,max_seconds=210,origin='foreground',produce=True):
  if not 1<=max_jobs<=4 or not 30<=max_seconds<=300:raise TransportError('TICK_BOUNDS')
  start=time.monotonic();summary={'schema':'mgs.archive.private.owner.tick.v1','run_id':uuid.uuid4().hex,'started_at':b.now_iso(),'status':'ok','copied_jobs':[],'verified_jobs':[],'blocked':[],'source_deleted':False,'origin':origin}
  with b.queue_lock():
+  execution_start=time.monotonic();summary['queue_wait_seconds']=round(execution_start-start,3)
   c=b.config_load();contract=object_file(CONTRACT);handoff=object_file(HOME/'exclusive-handoff.json')
   if c.get('owner_executor_mode')!='vps' or c.get('owner_executor_sha256')!=code_hash() or not contract or contract.get('production_enabled') is not True or contract.get('engine_sha256')!=code_hash() or handoff.get('phase')!='exclusive' or contract.get('approval_message_id')!=auth.APPROVAL:raise TransportError('OWNER_EXECUTION_NOT_ACTIVE_OR_CODE_DRIFT')
-  owner=OwnerDrive();sa=b.Drive(True);manifest,stage=h.manifest_load();engine=Engine(owner,c,manifest,stage);engine.deadline=start+max_seconds;rows=owner.listing(c['requests_folder_id']);jobs=[]
+  owner=OwnerDrive();sa=b.Drive(True);manifest,stage=h.manifest_load();engine=Engine(owner,c,manifest,stage);engine.deadline=execution_start+max_seconds;rows=owner.listing(c['requests_folder_id']);jobs=[]
   for row in rows:
    p=row.get('properties',{})
    if p.get('mgsArchiveState')!='queued':continue
@@ -372,7 +373,7 @@ def run_tick(max_jobs=4,max_seconds=210,origin='foreground',produce=True):
    if summary['historical_producer'].get('blocked'):
     summary['blocked'].extend(summary['historical_producer']['blocked']);summary['status']='blocked'
     heartbeat(owner,c,engine.journal,run_id=summary['run_id'],origin=origin,completed=summary['verified_jobs'],blocked=summary['blocked'],yielded=yielded)
-  summary.update(completed_at=b.now_iso(),elapsed_seconds=round(time.monotonic()-start,3),yielded=yielded);b.atomic_json(HOME/'last-owner-tick.json',summary)
+  summary.update(completed_at=b.now_iso(),elapsed_seconds=round(time.monotonic()-start,3),execution_seconds=round(time.monotonic()-execution_start,3),yielded=yielded);b.atomic_json(HOME/'last-owner-tick.json',summary)
   history=HOME/'run-history';history.mkdir(exist_ok=True);b.atomic_json(history/(summary['run_id']+'.json'),summary)
  return summary
 

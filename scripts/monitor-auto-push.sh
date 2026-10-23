@@ -27,7 +27,7 @@ PUSH_LOG="${BASE_DIR}/logs/auto-push.log"
 AUTO_COMMIT_LOG="${BASE_DIR}/logs/auto-commit-watcher.log"
 STATE_FILE="${BASE_DIR}/data/auto-push-monitor.json"
 WINDOW_MINUTES="${WINDOW_MINUTES:-60}"
-THRESHOLD="${THRESHOLD:-3}"
+THRESHOLD="${THRESHOLD:-1}"
 ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 PUSH_GRACE_SECONDS=120
 
@@ -54,7 +54,7 @@ if [[ ! -f "$STATE_FILE" ]]; then
   "_meta": {
     "description": "Estado do monitor de auto-push. Atualizado a cada execução do cron monitor-auto-push.sh",
     "created": "auto",
-    "threshold": 3,
+    "threshold": 1,
     "anti_spam_window_hours": 2
   },
   "last_check": null,
@@ -317,7 +317,7 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
             --arg n "$NEW_CONSECUTIVE" \
             --arg detail "$LAST_DETAIL" \
             --arg ok_ts "${LAST_OK_TS:-nunca}" \
-            '{content:"<@344196393512075265> alerta de auto-push", embeds:[{title:"Auto-push falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último push OK", value:$ok_ts, inline:true}, {name:"Último erro", value:("```text\n"+$detail+"\n```"), inline:false}, {name:"Ação", value:"Intervenção automática do Zeus acionada na 3ª falha; investigar causa-raiz, corrigir e validar.", inline:false}]}]}')
+            '{content:"", allowed_mentions:{parse:[],users:[],roles:[],replied_user:false}, embeds:[{title:"Auto-push falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último push OK", value:$ok_ts, inline:true}, {name:"Último erro", value:("```text\n"+$detail+"\n```"), inline:false}, {name:"Ação", value:"Intervenção automática do Zeus desde a primeira falha detectada; investigar causa-raiz, corrigir, repetir e validar. Escalar somente bloqueio decisório/Critical Subset.", inline:false}]}]}')
         post_discord_payload "$PAYLOAD" >/dev/null || exit 2
     else
         ALERT_TS="$LAST_ALERT"
@@ -327,7 +327,8 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
        --argjson c "$NEW_CONSECUTIVE" \
        --arg at "$ALERT_TS" \
        --argjson fd "$FAILURE_JSON" \
-       '.last_check = $ts | .consecutive_failures = $c | .last_alert_sent = $at | .last_failure_details = $fd' \
+       --argjson threshold "$THRESHOLD" \
+       '.last_check = $ts | .consecutive_failures = $c | .last_alert_sent = $at | .last_failure_details = $fd | ._meta.threshold = $threshold' \
        "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
 
 else
@@ -349,8 +350,8 @@ else
         log "OK: zero falhas detectadas na janela de ${WINDOW_MINUTES}min"
     fi
 
-    jq --arg ts "$NOW_ISO" \
-       '.last_check = $ts | .consecutive_failures = 0 | .last_failure_details = []' \
+    jq --arg ts "$NOW_ISO" --argjson threshold "$THRESHOLD" \
+       '.last_check = $ts | .consecutive_failures = 0 | .last_failure_details = [] | ._meta.threshold = $threshold' \
        "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
 fi
 

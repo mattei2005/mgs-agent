@@ -67,6 +67,10 @@ O readback desta expansão substitui a descrição antiga limitada a V1/V2 G002 
 
 Mavroa e BoostingEcon operam `mgs-direct-quiz` v1.2.1 com idioma espanhol explícito e treze rotas físicas validadas em cada site. WordPress é mantido apenas como plano de controle para edição, duplicação e publicação.
 
+### Vizioid — escopo editorial sem finanças
+
+Decisão ativa de Rodolfo em 2026-10-22 (`discord:1562971403525816392#1562986239601156216`): `vizioid.com` não deve manter conteúdo financeiro publicado. Conteúdos financeiros identificados devem ficar em **rascunho**, preservando texto, mídia, IDs e possibilidade de rollback; não excluir nem republicar automaticamente. Preservar SHEIN, moda, tendências, tecnologia/lifestyle e compras não financeiras. A decisão é específica do Vizioid, não autoriza alterações nos demais domínios. Evidência da aplicação e dos controles: `reports/vizioid-finance-draft-menu-1562986239601156216.md`. Esta decisão substitui qualquer inferência anterior de que a alocação SHEIN coexistiria com publicação financeira no Vizioid; o histórico técnico anterior permanece como baseline, não verdade ativa.
+
 ### Quiz de oferta — DicasFinancas BR-CC
 
 `dicasfinancas.info` usa o plugin próprio `mgs-offer-quiz` v1.4.1 para uma landing V1 com paridade visual e textual validada contra a referência SoliciteFácil no viewport 390×844. O botão/formulário secundário de email permanece removido por instrução de Rodolfo. A prova social usa contador real diário compartilhado entre G001–G006: o primeiro page view exibe `1.892`, cada acesso seguinte soma `+1`, e a base reinicia automaticamente em cada nova data de `America/Sao_Paulo`:
