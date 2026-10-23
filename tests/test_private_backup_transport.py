@@ -21,4 +21,12 @@ class BackupContractTests(unittest.TestCase):
   with self.assertRaises(t.b.ArchiveError):t.move_decision({'driveId':t.b.SOURCE_DRIVE,'parents':[self.a['sourceParentId']]},self.a,True)
   self.assertEqual(t.move_decision({'parents':[self.a['destinationParentId']]},self.a,True),'reconcile_landed')
   with self.assertRaises(t.b.ArchiveError):t.move_decision({'parents':['OUTSIDE']},self.a,True)
+ def test_historical_requires_its_exact_additional_manifest(self):
+  j=copy.deepcopy(self.j);j['asset']['sourceCreatedTime']='2026-09-01T00:00:00Z';j['jobId']=t.a.job_id(self.p,j['asset'])
+  with self.assertRaises(t.b.ArchiveError):t.validate_job(j,self.p,'d'*64)
+  manifest={'approval_message_id':t.APPROVAL,'plan_sha256':'d'*64,'assets':[j['asset']]};j.update(wholeDriveAuthorizationMessageId=t.APPROVAL,historicalManifestSha256=t.a.sha(manifest))
+  self.assertTrue(t.validate_job(j,self.p,'d'*64,manifest))
+  with self.assertRaises(t.b.ArchiveError):t.validate_job(j,self.p,'d'*64)
+  j['historicalManifestSha256']='e'*64
+  with self.assertRaises(t.b.ArchiveError):t.validate_job(j,self.p,'d'*64,manifest)
 if __name__=='__main__':unittest.main()
