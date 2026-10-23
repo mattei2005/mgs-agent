@@ -15,4 +15,8 @@ class SlotScope(unittest.TestCase):
  def test_unapproved_binding_rejected(self):
   self.binding['approval_message_id']='different'
   with self.assertRaises(c.b.ArchiveError):c.validate_request(self.j,self.binding)
+ def test_stock_snapshot_is_json_only_and_parent_bounded(self):
+  j={**self.j,'kind':'stock_layout_snapshot'};self.assertTrue(c.validate_request(j,self.binding))
+  with self.assertRaises(c.b.ArchiveError):c.validate_request({**j,'parent_id':'FOREIGN'},self.binding)
+  with self.assertRaises(c.b.ArchiveError):c.validate_request({**j,'mime':'video/mp4'},self.binding)
 if __name__=='__main__':unittest.main()

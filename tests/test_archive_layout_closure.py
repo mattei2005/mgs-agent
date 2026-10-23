@@ -112,4 +112,25 @@ class LayoutClosure(unittest.TestCase):
   after={**before,'name':'retired','version':'2','parents':['q']}
   self.assertTrue(layout.unchanged(before,after,parent=['q'],expected_name='retired'))
   with self.assertRaises(b.ArchiveError):layout.unchanged(before,{**after,'properties':{'injected':'true'}},parent=['q'],expected_name='retired')
+ def upload_move_fixture(self,*,deny=False,wrong_id=False):
+  who={'id':'0001','emailAddress':'newnicolasholanda@gmail.com','type':'user','role':'fileOrganizer','permissionDetails':[{'inherited':True,'inheritedFrom':b.SOURCE_ROOT,'role':'fileOrganizer'}]}
+  before=[who];state={'rows':before};d=Mock();owner=Mock();journal=Mock()
+  def move(o,sa,j,fid,old,new):
+   state['rows']=[] if new==b.SOURCE_DRIVE else before
+   return {'id':loc.UPLOAD,'parents':[new]}
+  def rpc(method,path,params,payload):
+   self.assertEqual(method,'POST');self.assertEqual(path,'files/'+loc.UPLOAD+'/permissions');self.assertEqual(params['sendNotificationEmail'],'false');self.assertEqual(payload['role'],who['role']);self.assertEqual(payload['emailAddress'],who['emailAddress'])
+   if deny:raise b.ArchiveError('FIXTURE_PERMISSION_DENIED')
+   state['rows']=[{**who,'permissionDetails':[{'inherited':False,'role':'fileOrganizer'}]}]
+   return {**who,'id':'other' if wrong_id else who['id']}
+  d.api.side_effect=rpc
+  with patch.object(layout,'require_upload_access_confirmation',return_value=({'permissions_before':before},{'confirmation_message_id':'approved-fixture'})),patch.object(b,'read_json',side_effect=lambda p,default=None:default),patch.object(b,'atomic_json'),patch.object(layout.t,'Journal',return_value=journal),patch.object(layout,'detailed_permissions',side_effect=lambda sa,fid:state['rows']),patch.object(layout,'move_once',side_effect=move) as mover:
+   if deny or wrong_id:
+    with self.assertRaises(b.ArchiveError):layout.move_upload_preserving_access(owner,d,journal,{'upload_permissions':before})
+    self.assertEqual(state['rows'],before);self.assertEqual(mover.call_count,2)
+   else:
+    result=layout.move_upload_preserving_access(owner,d,journal,{'upload_permissions':before});self.assertTrue(result['same_existing_permission_ids_and_roles']);self.assertEqual(result['new_principals_added'],0);self.assertEqual(mover.call_count,1)
+ def test_same_existing_upload_role_restored_after_move(self):self.upload_move_fixture()
+ def test_denied_upload_restore_rolls_back_parent_and_access(self):self.upload_move_fixture(deny=True)
+ def test_permission_response_identity_drift_rolls_back(self):self.upload_move_fixture(wrong_id=True)
 if __name__=='__main__':unittest.main()
