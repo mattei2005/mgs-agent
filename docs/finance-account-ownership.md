@@ -57,6 +57,12 @@ Rodolfo esclareceu que novas operações e mudanças podem surgir durante o mês
 - **Exclusão SMS explicitada na autorização:** jamais transportar a reconciliação de comissões maio–setembro, custos mensais históricos, ajustes de ledger ou a mensagem explicativa dos gestores para outubro+. Outubro e meses posteriores usam consumo diário verificado do SMS Funnel; crédito comprado é pré-pago, não despesa operacional. A referência antiga deR$30mil foi excluída do resultado pelo motor desde outubro, antes do rateio e cálculo dos gestores; histórico e créditos reais preservados. Registros de pagamento/saldo anterior seguem o ledger normal, sem lançar de novo a diferença histórica.
 - Validação/rollback: `reports/finance-monthroll-1555579357651537931.md`;443testes, restore isolado, stage real de viradas,15competências,8vistas autenticadas e5gestores; sem duplicação. Esta conclusão supersede o estado anterior de política ainda não implementada.
 
+## Growpowerhub US / G004 — 1563528749830377524
+
+Rodolfo confirmou `US SHEIN EN` e `G004` para a conta Meta `1419148446852410`, nome exato `Growpowerhub-US-SHEIN-EN-04-G004`, após a pendência de gastos de23/10/2026. Vincular ao site existente Growpowerhub / `growpowerhub.com`, país US, operação `us-shein-en`, gestor Joe/G004. Em outubro, incluir US entre os países do cadastro nativo, preservando DE e `de-cc-de`; habilitar a atribuição dos custos nativos da conta ao gestor confirmado. Não transferir a titularidade MGS do site, mudar status/rateio, duplicar site ou conta, nem reescrever meses anteriores. Continuidade futura segue o rollover mensal canônico, sem cópia antecipada. A regra de receita US já confirmada permanece; G004 aqui identifica a conta e seus gastos, não toda a receita do domínio.
+
+Estado de execução: checkpoint `ZEUS-FINANCE-GROWPOWER-G004-1563528749830377524`; decisão não substitui o readback produtivo. Causa verificada: havia vínculo automático US, mas o cadastro nativo materializava apenas dias DE; sem receita US em23/10, faltava o destino diário do gasto. A correção de cadastro deve preceder a retomada da cadeia gastos → receita.
+
 ## Limites de cálculo e UI
 - Contas de anúncio: identidade, site e gestor, sem painel de gastos.
 - Relatório Diário: gastos por conta/gestor/dia em moeda original, incluídos uma única vez na Mídia do site.
