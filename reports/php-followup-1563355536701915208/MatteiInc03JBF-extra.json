@@ -1,0 +1,262 @@
+{
+  "observed_at": "2026-10-24T01:01:42.700087+00:00",
+  "files": [
+    {
+      "path": "/etc/php83rc/php.ini",
+      "sha256": "17aea86169ac0fd342b93bbdf0bf30640c8004529d6dc4fd757f490da47920f0",
+      "mode": "0o644",
+      "settings": [
+        {
+          "line": 1442,
+          "value": "session.serialize_handler = php"
+        }
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "file": "/etc/php83rc/fpm.d/growpowerhub.conf",
+      "sections": [
+        "growpowerhub"
+      ],
+      "listen": [
+        "/var/run/growpowerhub.sock"
+      ],
+      "realpath": [
+        "/run/growpowerhub.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zyclor.conf",
+      "sections": [
+        "zyclor"
+      ],
+      "listen": [
+        "/var/run/zyclor.sock"
+      ],
+      "realpath": [
+        "/run/zyclor.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finance-ducapes.conf",
+      "sections": [
+        "finance-ducapes"
+      ],
+      "listen": [
+        "/var/run/finance-ducapes.sock"
+      ],
+      "realpath": [
+        "/run/finance-ducapes.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/mavroa.conf",
+      "sections": [
+        "mavroa"
+      ],
+      "listen": [
+        "/var/run/mavroa.sock"
+      ],
+      "realpath": [
+        "/run/mavroa.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/helixenit.conf",
+      "sections": [
+        "helixenit"
+      ],
+      "listen": [
+        "/var/run/helixenit.sock"
+      ],
+      "realpath": [
+        "/run/helixenit.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/ducapes.conf",
+      "sections": [
+        "ducapes"
+      ],
+      "listen": [
+        "/var/run/ducapes.sock"
+      ],
+      "realpath": [
+        "/run/ducapes.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/yolokfx.conf",
+      "sections": [
+        "yolokfx"
+      ],
+      "listen": [
+        "/var/run/yolokfx.sock"
+      ],
+      "realpath": [
+        "/run/yolokfx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/cephyric.conf",
+      "sections": [
+        "cephyric"
+      ],
+      "listen": [
+        "/var/run/cephyric.sock"
+      ],
+      "realpath": [
+        "/run/cephyric.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/jobscana.conf",
+      "sections": [
+        "jobscana"
+      ],
+      "listen": [
+        "/var/run/jobscana.sock"
+      ],
+      "realpath": [
+        "/run/jobscana.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/apexwalletde.conf",
+      "sections": [
+        "apexwalletde"
+      ],
+      "listen": [
+        "/var/run/apexwalletde.sock"
+      ],
+      "realpath": [
+        "/run/apexwalletde.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/escalatepower.conf",
+      "sections": [
+        "escalatepower"
+      ],
+      "listen": [
+        "/var/run/escalatepower.sock"
+      ],
+      "realpath": [
+        "/run/escalatepower.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/FinanceADX.conf",
+      "sections": [
+        "FinanceADX"
+      ],
+      "listen": [
+        "/var/run/FinanceADX.sock"
+      ],
+      "realpath": [
+        "/run/FinanceADX.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/FinanceADX_bkp.conf",
+      "sections": [
+        "FinanceADX_bkp"
+      ],
+      "listen": [
+        "/var/run/FinanceADX_bkp.sock"
+      ],
+      "realpath": [
+        "/run/FinanceADX_bkp.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/marevelx.conf",
+      "sections": [
+        "marevelx"
+      ],
+      "listen": [
+        "/var/run/marevelx.sock"
+      ],
+      "realpath": [
+        "/run/marevelx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/xyvlov.conf",
+      "sections": [
+        "xyvlov"
+      ],
+      "listen": [
+        "/var/run/xyvlov.sock"
+      ],
+      "realpath": [
+        "/run/xyvlov.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/boostingecon.conf",
+      "sections": [
+        "boostingecon"
+      ],
+      "listen": [
+        "/var/run/boostingecon.sock"
+      ],
+      "realpath": [
+        "/run/boostingecon.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/infinitynexx.conf",
+      "sections": [
+        "infinitynexx"
+      ],
+      "listen": [
+        "/var/run/infinitynexx.sock"
+      ],
+      "realpath": [
+        "/run/infinitynexx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/mobileapp.conf",
+      "sections": [
+        "mobileapp"
+      ],
+      "listen": [
+        "/var/run/mobileapp.sock"
+      ],
+      "realpath": [
+        "/run/mobileapp.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/vizioid.conf",
+      "sections": [
+        "vizioid"
+      ],
+      "listen": [
+        "/var/run/vizioid.sock"
+      ],
+      "realpath": [
+        "/run/vizioid.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/bkp2-ducapes.conf",
+      "sections": [
+        "bkp2-ducapes"
+      ],
+      "listen": [
+        "/var/run/bkp2-ducapes.sock"
+      ],
+      "realpath": [
+        "/run/bkp2-ducapes.sock"
+      ]
+    }
+  ],
+  "socket_conflicts": [],
+  "webserver_advisory_overrides": [],
+  "root_user_ini_settings": [],
+  "apache_php_modules": []
+}

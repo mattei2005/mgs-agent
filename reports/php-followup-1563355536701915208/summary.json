@@ -1,0 +1,217 @@
+{
+  "id": "php-followup-1563355536701915208",
+  "source_message_id": "1563355536701915208",
+  "thread_id": "1563354663330517062",
+  "observed_at": "2026-10-24T01:02:47.822272+00:00",
+  "status": "audit_completed_preventive_config_confirmation_pending",
+  "hosts_audited": [
+    {
+      "target": "MatteiInc01",
+      "os": "Ubuntu 22.04.5 LTS",
+      "active_php": [
+        {
+          "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+          "version": "8.3.36",
+          "baseline_upload_progress": "On",
+          "request_level_effective_setting_proven": false
+        }
+      ],
+      "reboot_required": false,
+      "failed_units": [],
+      "legacy_fpm_active": [],
+      "runcloud_pool_count": 75
+    },
+    {
+      "target": "MatteiInc02",
+      "os": "Ubuntu 22.04.5 LTS",
+      "active_php": [
+        {
+          "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+          "version": "8.3.36",
+          "baseline_upload_progress": "On",
+          "request_level_effective_setting_proven": false
+        }
+      ],
+      "reboot_required": false,
+      "failed_units": [],
+      "legacy_fpm_active": [],
+      "runcloud_pool_count": 15
+    },
+    {
+      "target": "MatteiInc03JBF",
+      "os": "Ubuntu 22.04.5 LTS",
+      "active_php": [
+        {
+          "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+          "version": "8.3.36",
+          "baseline_upload_progress": "On",
+          "request_level_effective_setting_proven": false
+        }
+      ],
+      "reboot_required": false,
+      "failed_units": [],
+      "legacy_fpm_active": [],
+      "runcloud_pool_count": 20
+    },
+    {
+      "target": "Hestia-mail",
+      "os": "Ubuntu 24.04.4 LTS",
+      "active_php": [
+        {
+          "exe": "/usr/local/hestia/php/sbin/hestia-php",
+          "version": "8.5.12",
+          "baseline_upload_progress": "On",
+          "request_level_effective_setting_proven": false
+        },
+        {
+          "exe": "/usr/sbin/php-fpm8.3",
+          "version": "8.3.36",
+          "baseline_upload_progress": "On",
+          "request_level_effective_setting_proven": false
+        }
+      ],
+      "reboot_required": false,
+      "failed_units": [],
+      "legacy_fpm_active": [],
+      "runcloud_pool_count": null
+    },
+    {
+      "target": "Hostinger-agent",
+      "os": "Ubuntu 24.04.5 LTS",
+      "active_php": [],
+      "reboot_required": false,
+      "failed_units": [],
+      "legacy_fpm_active": [],
+      "runcloud_pool_count": null,
+      "cli_package": "8.3.6-0ubuntu0.24.04.13",
+      "ubuntu_backport_for_original_cves_verified": true,
+      "php_web_runtime_observed": false
+    }
+  ],
+  "totals": {
+    "known_hosts_audited": 5,
+    "active_php_runtime_binaries": 5,
+    "runcloud_pools": 110,
+    "proposed_ini_files": 5
+  },
+  "original_cves": {
+    "ids": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "patched_on_all_five_known_hosts": true
+  },
+  "new_advisory": {
+    "id": "CVE-2026-115560",
+    "source": "https://www.php.net/",
+    "date": "2026-10-23",
+    "baseline_upload_progress": "On on all five active web/panel runtime binaries",
+    "baseline_serialize_handler": "php",
+    "specific_exploit_preconditions_confirmed": false,
+    "recommendation": "Disable upload progress preventively on four web/panel hosts; retain current PHP branch; backup and validate config plus HTTP after service reload/restart."
+  },
+  "proposed_critical_change": {
+    "files": [
+      {
+        "host": "MatteiInc01",
+        "path": "/etc/php83rc/php.ini",
+        "sha256": "17aea86169ac0fd342b93bbdf0bf30640c8004529d6dc4fd757f490da47920f0",
+        "mode": "0o664",
+        "settings": [
+          {
+            "line": 1442,
+            "value": "session.serialize_handler = php"
+          }
+        ],
+        "proposed_setting": "session.upload_progress.enabled = 0"
+      },
+      {
+        "host": "MatteiInc02",
+        "path": "/etc/php83rc/php.ini",
+        "sha256": "17aea86169ac0fd342b93bbdf0bf30640c8004529d6dc4fd757f490da47920f0",
+        "mode": "0o664",
+        "settings": [
+          {
+            "line": 1442,
+            "value": "session.serialize_handler = php"
+          }
+        ],
+        "proposed_setting": "session.upload_progress.enabled = 0"
+      },
+      {
+        "host": "MatteiInc03JBF",
+        "path": "/etc/php83rc/php.ini",
+        "sha256": "17aea86169ac0fd342b93bbdf0bf30640c8004529d6dc4fd757f490da47920f0",
+        "mode": "0o644",
+        "settings": [
+          {
+            "line": 1442,
+            "value": "session.serialize_handler = php"
+          }
+        ],
+        "proposed_setting": "session.upload_progress.enabled = 0"
+      },
+      {
+        "host": "Hestia-mail",
+        "path": "/etc/php/8.3/fpm/php.ini",
+        "sha256": "80991a5f3341253ecb975f9679a5e5184873c80a74206f57a62043263d536b8d",
+        "mode": "0o644",
+        "settings": [
+          {
+            "line": 1442,
+            "value": "session.serialize_handler = php"
+          }
+        ],
+        "proposed_setting": "session.upload_progress.enabled = 0"
+      },
+      {
+        "host": "Hestia-mail",
+        "path": "/usr/local/hestia/php/lib/php.ini",
+        "sha256": "c380b5e5858b6e309d47e33bf057c0da7259b94cb5650ed7992dc3513bff2e6e",
+        "mode": "0o644",
+        "settings": [
+          {
+            "line": 1435,
+            "value": "session.serialize_handler = php"
+          }
+        ],
+        "proposed_setting": "session.upload_progress.enabled = 0"
+      }
+    ],
+    "service_scope": [
+      "MatteiInc01:php83rc-fpm",
+      "MatteiInc02:php83rc-fpm",
+      "MatteiInc03JBF:php83rc-fpm",
+      "Hestia-mail:php8.3-fpm",
+      "Hestia-mail:hestia"
+    ],
+    "gate": "Explicit owner confirmation for system-file and mass-impact change required. No mutation performed.",
+    "excluded": [
+      "Hostinger PHP CLI config",
+      "OS upgrade",
+      "package upgrade",
+      "host reboot",
+      "database or gateway restart",
+      "site content/plugin/theme changes"
+    ]
+  },
+  "coverage_limits": [
+    "All five currently known active MGS hosts inspected directly, not exhaustive provider-account discovery. RunCloud API HTTP429; Retry-After1618917 seconds honored by stopping API calls.",
+    "Fresh FPM -i/config/pool checks do not prove every request-level application setting; user INI scan limited to application-root paths.",
+    "No compromise investigation, exploitation test or exhaustive frontend audit performed."
+  ],
+  "production_mutations": false,
+  "evidence_files": [
+    "Hestia-mail-extra.json",
+    "Hestia-mail.json",
+    "Hostinger-agent.json",
+    "MatteiInc01-extra.json",
+    "MatteiInc01.json",
+    "MatteiInc02-extra.json",
+    "MatteiInc02.json",
+    "MatteiInc03JBF-extra.json",
+    "MatteiInc03JBF.json",
+    "collection.json",
+    "php-official-20261023.txt"
+  ]
+}

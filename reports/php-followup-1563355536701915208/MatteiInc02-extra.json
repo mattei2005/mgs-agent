@@ -1,0 +1,202 @@
+{
+  "observed_at": "2026-10-24T01:01:42.762565+00:00",
+  "files": [
+    {
+      "path": "/etc/php83rc/php.ini",
+      "sha256": "17aea86169ac0fd342b93bbdf0bf30640c8004529d6dc4fd757f490da47920f0",
+      "mode": "0o664",
+      "settings": [
+        {
+          "line": 1442,
+          "value": "session.serialize_handler = php"
+        }
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "file": "/etc/php83rc/fpm.d/gamehubad.conf",
+      "sections": [
+        "gamehubad"
+      ],
+      "listen": [
+        "/var/run/gamehubad.sock"
+      ],
+      "realpath": [
+        "/run/gamehubad.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/financiarveiculo.conf",
+      "sections": [
+        "financiarveiculo"
+      ],
+      "listen": [
+        "/var/run/financiarveiculo.sock"
+      ],
+      "realpath": [
+        "/run/financiarveiculo.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/financiamentoautoadx.conf",
+      "sections": [
+        "financiamentoautoadx"
+      ],
+      "listen": [
+        "/var/run/financiamentoautoadx.sock"
+      ],
+      "realpath": [
+        "/run/financiamentoautoadx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/cliquetsr.conf",
+      "sections": [
+        "cliquetsr"
+      ],
+      "listen": [
+        "/var/run/cliquetsr.sock"
+      ],
+      "realpath": [
+        "/run/cliquetsr.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/cliquetsrf.conf",
+      "sections": [
+        "cliquetsrf"
+      ],
+      "listen": [
+        "/var/run/cliquetsrf.sock"
+      ],
+      "realpath": [
+        "/run/cliquetsrf.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/creditoparaveiculo.conf",
+      "sections": [
+        "creditoparaveiculo"
+      ],
+      "listen": [
+        "/var/run/creditoparaveiculo.sock"
+      ],
+      "realpath": [
+        "/run/creditoparaveiculo.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/openzedsr.conf",
+      "sections": [
+        "openzedsr"
+      ],
+      "listen": [
+        "/var/run/openzedsr.sock"
+      ],
+      "realpath": [
+        "/run/openzedsr.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/all-autolan.conf",
+      "sections": [
+        "all-autolan"
+      ],
+      "listen": [
+        "/var/run/all-autolan.sock"
+      ],
+      "realpath": [
+        "/run/all-autolan.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/gamingadx.conf",
+      "sections": [
+        "gamingadx"
+      ],
+      "listen": [
+        "/var/run/gamingadx.sock"
+      ],
+      "realpath": [
+        "/run/gamingadx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/gamezonead.conf",
+      "sections": [
+        "gamezonead"
+      ],
+      "listen": [
+        "/var/run/gamezonead.sock"
+      ],
+      "realpath": [
+        "/run/gamezonead.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/openzedsrf.conf",
+      "sections": [
+        "openzedsrf"
+      ],
+      "listen": [
+        "/var/run/openzedsrf.sock"
+      ],
+      "realpath": [
+        "/run/openzedsrf.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/carcreditad.conf",
+      "sections": [
+        "carcreditad"
+      ],
+      "listen": [
+        "/var/run/carcreditad.sock"
+      ],
+      "realpath": [
+        "/run/carcreditad.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/autocreditadxx.conf",
+      "sections": [
+        "autocreditadxx"
+      ],
+      "listen": [
+        "/var/run/autocreditadxx.sock"
+      ],
+      "realpath": [
+        "/run/autocreditadxx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/datinghubpro.conf",
+      "sections": [
+        "datinghubpro"
+      ],
+      "listen": [
+        "/var/run/datinghubpro.sock"
+      ],
+      "realpath": [
+        "/run/datinghubpro.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/autolendpro.conf",
+      "sections": [
+        "autolendpro"
+      ],
+      "listen": [
+        "/var/run/autolendpro.sock"
+      ],
+      "realpath": [
+        "/run/autolendpro.sock"
+      ]
+    }
+  ],
+  "socket_conflicts": [],
+  "webserver_advisory_overrides": [],
+  "root_user_ini_settings": [],
+  "apache_php_modules": []
+}

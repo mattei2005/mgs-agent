@@ -1,0 +1,250 @@
+{
+  "observed_at": "2026-10-24T01:01:43.131181+00:00",
+  "files": [
+    {
+      "path": "/etc/php/8.3/fpm/php.ini",
+      "sha256": "80991a5f3341253ecb975f9679a5e5184873c80a74206f57a62043263d536b8d",
+      "mode": "0o644",
+      "settings": [
+        {
+          "line": 1442,
+          "value": "session.serialize_handler = php"
+        }
+      ]
+    },
+    {
+      "path": "/usr/local/hestia/php/lib/php.ini",
+      "sha256": "c380b5e5858b6e309d47e33bf057c0da7259b94cb5650ed7992dc3513bff2e6e",
+      "mode": "0o644",
+      "settings": [
+        {
+          "line": 1435,
+          "value": "session.serialize_handler = php"
+        }
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/financeadx.com.conf",
+      "sections": [
+        "financeadx.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-financeadx.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-financeadx.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/memivi.com.conf",
+      "sections": [
+        "memivi.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-memivi.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-memivi.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/marketingdigitalad.com.conf",
+      "sections": [
+        "marketingdigitalad.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-marketingdigitalad.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-marketingdigitalad.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/dummy.conf",
+      "sections": [
+        "www"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-dummy.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-dummy.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/server.boostingecon.com.conf",
+      "sections": [
+        "server.boostingecon.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-server.boostingecon.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-server.boostingecon.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/s4blindsandshades.com.conf",
+      "sections": [
+        "s4blindsandshades.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-s4blindsandshades.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-s4blindsandshades.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/matteiservicesinc.com.conf",
+      "sections": [
+        "matteiservicesinc.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-matteiservicesinc.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-matteiservicesinc.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/www.conf",
+      "sections": [
+        "www"
+      ],
+      "listen": [
+        "/run/php/www.sock"
+      ],
+      "realpath": [
+        "/run/php/www.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/mail.digitaltrustadx.com.conf",
+      "sections": [
+        "mail.digitaltrustadx.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-mail.digitaltrustadx.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-mail.digitaltrustadx.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/teste.com.conf",
+      "sections": [
+        "teste.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-teste.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-teste.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/mail.s4blindsandshades.com.conf",
+      "sections": [
+        "mail.s4blindsandshades.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-mail.s4blindsandshades.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-mail.s4blindsandshades.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/causdigitalmarketing.com.conf",
+      "sections": [
+        "causdigitalmarketing.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-causdigitalmarketing.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-causdigitalmarketing.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/mail.matteiservicesinc.com.conf",
+      "sections": [
+        "mail.matteiservicesinc.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-mail.matteiservicesinc.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-mail.matteiservicesinc.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/mail.causdigitalmarketing.com.conf",
+      "sections": [
+        "mail.causdigitalmarketing.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-mail.causdigitalmarketing.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-mail.causdigitalmarketing.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/mta-sts.matteiservicesinc.com.conf",
+      "sections": [
+        "mta-sts.matteiservicesinc.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-mta-sts.matteiservicesinc.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-mta-sts.matteiservicesinc.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/digitaltrustadx.com.conf",
+      "sections": [
+        "digitaltrustadx.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-digitaltrustadx.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-digitaltrustadx.com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php/8.3/fpm/pool.d/mail.financeadx.com.conf",
+      "sections": [
+        "mail.financeadx.com"
+      ],
+      "listen": [
+        "/run/php/php8.3-fpm-mail.financeadx.com.sock"
+      ],
+      "realpath": [
+        "/run/php/php8.3-fpm-mail.financeadx.com.sock"
+      ]
+    },
+    {
+      "file": "/usr/local/hestia/php/etc/php-fpm.conf",
+      "sections": [
+        "global",
+        "www"
+      ],
+      "listen": [
+        "/run/hestia-php.sock"
+      ],
+      "realpath": [
+        "/run/hestia-php.sock"
+      ]
+    }
+  ],
+  "socket_conflicts": [],
+  "webserver_advisory_overrides": [],
+  "root_user_ini_settings": [],
+  "apache_php_modules": []
+}

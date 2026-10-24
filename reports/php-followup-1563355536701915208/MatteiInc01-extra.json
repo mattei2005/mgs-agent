@@ -1,0 +1,922 @@
+{
+  "observed_at": "2026-10-24T01:01:42.598225+00:00",
+  "files": [
+    {
+      "path": "/etc/php83rc/php.ini",
+      "sha256": "17aea86169ac0fd342b93bbdf0bf30640c8004529d6dc4fd757f490da47920f0",
+      "mode": "0o664",
+      "settings": [
+        {
+          "line": 1442,
+          "value": "session.serialize_handler = php"
+        }
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "file": "/etc/php83rc/fpm.d/seuprimeiroempregoam.conf",
+      "sections": [
+        "seuprimeiroempregoam"
+      ],
+      "listen": [
+        "/var/run/seuprimeiroempregoam.sock"
+      ],
+      "realpath": [
+        "/run/seuprimeiroempregoam.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/portalFolhadasbd.conf",
+      "sections": [
+        "portalFolhadasbd"
+      ],
+      "listen": [
+        "/var/run/portalFolhadasbd.sock"
+      ],
+      "realpath": [
+        "/run/portalFolhadasbd.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/receitasdescomplicada.conf",
+      "sections": [
+        "receitasdescomplicada"
+      ],
+      "listen": [
+        "/var/run/receitasdescomplicada.sock"
+      ],
+      "realpath": [
+        "/run/receitasdescomplicada.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/vagaaqui.conf",
+      "sections": [
+        "vagaaqui"
+      ],
+      "listen": [
+        "/var/run/vagaaqui.sock"
+      ],
+      "realpath": [
+        "/run/vagaaqui.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/app-portalrelevante-com.conf",
+      "sections": [
+        "app-portalrelevante-com"
+      ],
+      "listen": [
+        "/var/run/app-portalrelevante-com.sock"
+      ],
+      "realpath": [
+        "/run/app-portalrelevante-com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/wr-wrnoticia.conf",
+      "sections": [
+        "wr-wrnoticia"
+      ],
+      "listen": [
+        "/var/run/wr-wrnoticia.sock"
+      ],
+      "realpath": [
+        "/run/wr-wrnoticia.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/newsoun-de.conf",
+      "sections": [
+        "newsoun-de"
+      ],
+      "listen": [
+        "/var/run/newsoun-de.sock"
+      ],
+      "realpath": [
+        "/run/newsoun-de.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/newsfolha.conf",
+      "sections": [
+        "newsfolha"
+      ],
+      "listen": [
+        "/var/run/newsfolha.sock"
+      ],
+      "realpath": [
+        "/run/newsfolha.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/app-conectageral.conf",
+      "sections": [
+        "app-conectageral"
+      ],
+      "listen": [
+        "/var/run/app-conectageral.sock"
+      ],
+      "realpath": [
+        "/run/app-conectageral.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/informegeral.conf",
+      "sections": [
+        "informegeral"
+      ],
+      "listen": [
+        "/var/run/informegeral.sock"
+      ],
+      "realpath": [
+        "/run/informegeral.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/wrnoticia-home.conf",
+      "sections": [
+        "wrnoticia-home"
+      ],
+      "listen": [
+        "/var/run/wrnoticia-home.sock"
+      ],
+      "realpath": [
+        "/run/wrnoticia-home.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/sscorexboost-jobs.conf",
+      "sections": [
+        "sscorexboost-jobs"
+      ],
+      "listen": [
+        "/var/run/sscorexboost-jobs.sock"
+      ],
+      "realpath": [
+        "/run/sscorexboost-jobs.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/seniormenu.conf",
+      "sections": [
+        "seniormenu"
+      ],
+      "listen": [
+        "/var/run/seniormenu.sock"
+      ],
+      "realpath": [
+        "/run/seniormenu.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/lyzmo.conf",
+      "sections": [
+        "lyzmo"
+      ],
+      "listen": [
+        "/var/run/lyzmo.sock"
+      ],
+      "realpath": [
+        "/run/lyzmo.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/portalbrasilnews.conf",
+      "sections": [
+        "portalbrasilnews"
+      ],
+      "listen": [
+        "/var/run/portalbrasilnews.sock"
+      ],
+      "realpath": [
+        "/run/portalbrasilnews.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/wavesbee.conf",
+      "sections": [
+        "wavesbee"
+      ],
+      "listen": [
+        "/var/run/wavesbee.sock"
+      ],
+      "realpath": [
+        "/run/wavesbee.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/s4blindsandshades.conf",
+      "sections": [
+        "s4blindsandshades"
+      ],
+      "listen": [
+        "/var/run/s4blindsandshades.sock"
+      ],
+      "realpath": [
+        "/run/s4blindsandshades.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/digitaltrustadx.conf",
+      "sections": [
+        "digitaltrustadx"
+      ],
+      "listen": [
+        "/var/run/digitaltrustadx.sock"
+      ],
+      "realpath": [
+        "/run/digitaltrustadx.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/consultarfinanca.conf",
+      "sections": [
+        "consultarfinanca"
+      ],
+      "listen": [
+        "/var/run/consultarfinanca.sock"
+      ],
+      "realpath": [
+        "/run/consultarfinanca.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zuploader.conf",
+      "sections": [
+        "zuploader"
+      ],
+      "listen": [
+        "/var/run/zuploader.sock"
+      ],
+      "realpath": [
+        "/run/zuploader.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/kievportal.conf",
+      "sections": [
+        "kievportal"
+      ],
+      "listen": [
+        "/var/run/kievportal.sock"
+      ],
+      "realpath": [
+        "/run/kievportal.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/seuprimeiroempleo.conf",
+      "sections": [
+        "seuprimeiroempleo"
+      ],
+      "listen": [
+        "/var/run/seuprimeiroempleo.sock"
+      ],
+      "realpath": [
+        "/run/seuprimeiroempleo.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/dicasfinancas.conf",
+      "sections": [
+        "dicasfinancas"
+      ],
+      "listen": [
+        "/var/run/dicasfinancas.sock"
+      ],
+      "realpath": [
+        "/run/dicasfinancas.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/sunshinebeautysupplier.conf",
+      "sections": [
+        "sunshinebeautysupplier"
+      ],
+      "listen": [
+        "/var/run/sunshinebeautysupplier.sock"
+      ],
+      "realpath": [
+        "/run/sunshinebeautysupplier.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/bkp-folhadaterra.conf",
+      "sections": [
+        "bkp-folhadaterra"
+      ],
+      "listen": [
+        "/var/run/bkp-folhadaterra.sock"
+      ],
+      "realpath": [
+        "/run/bkp-folhadaterra.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/jobs-conectageral.conf",
+      "sections": [
+        "jobs-conectageral"
+      ],
+      "listen": [
+        "/var/run/jobs-conectageral.sock"
+      ],
+      "realpath": [
+        "/run/jobs-conectageral.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/careersjobsad.conf",
+      "sections": [
+        "careersjobsad"
+      ],
+      "listen": [
+        "/var/run/careersjobsad.sock"
+      ],
+      "realpath": [
+        "/run/careersjobsad.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/jobs-deolhonoworld-com.conf",
+      "sections": [
+        "jobs-deolhonoworld-com"
+      ],
+      "listen": [
+        "/var/run/jobs-deolhonoworld-com.sock"
+      ],
+      "realpath": [
+        "/run/jobs-deolhonoworld-com.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/revistacafe.conf",
+      "sections": [
+        "revistacafe"
+      ],
+      "listen": [
+        "/var/run/revistacafe.sock"
+      ],
+      "realpath": [
+        "/run/revistacafe.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finanzas-lyzmo.conf",
+      "sections": [
+        "finanzas-lyzmo"
+      ],
+      "listen": [
+        "/var/run/finanzas-lyzmo.sock"
+      ],
+      "realpath": [
+        "/run/finanzas-lyzmo.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/marketingdigitalad.conf",
+      "sections": [
+        "marketingdigitalad"
+      ],
+      "listen": [
+        "/var/run/marketingdigitalad.sock"
+      ],
+      "realpath": [
+        "/run/marketingdigitalad.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/eng-wrnoticia.conf",
+      "sections": [
+        "eng-wrnoticia"
+      ],
+      "listen": [
+        "/var/run/eng-wrnoticia.sock"
+      ],
+      "realpath": [
+        "/run/eng-wrnoticia.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finanzas-conectageral.conf",
+      "sections": [
+        "finanzas-conectageral"
+      ],
+      "listen": [
+        "/var/run/finanzas-conectageral.sock"
+      ],
+      "realpath": [
+        "/run/finanzas-conectageral.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/bahuye.conf",
+      "sections": [
+        "bahuye"
+      ],
+      "listen": [
+        "/var/run/bahuye.sock"
+      ],
+      "realpath": [
+        "/run/bahuye.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/ziwus.conf",
+      "sections": [
+        "ziwus"
+      ],
+      "listen": [
+        "/var/run/ziwus.sock"
+      ],
+      "realpath": [
+        "/run/ziwus.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/newsoun.conf",
+      "sections": [
+        "newsoun"
+      ],
+      "listen": [
+        "/var/run/newsoun.sock"
+      ],
+      "realpath": [
+        "/run/newsoun.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/jislainemattei.conf",
+      "sections": [
+        "jislainemattei"
+      ],
+      "listen": [
+        "/var/run/jislainemattei.sock"
+      ],
+      "realpath": [
+        "/run/jislainemattei.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/newsfolha-jobs.conf",
+      "sections": [
+        "newsfolha-jobs"
+      ],
+      "listen": [
+        "/var/run/newsfolha-jobs.sock"
+      ],
+      "realpath": [
+        "/run/newsfolha-jobs.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zerhu.conf",
+      "sections": [
+        "zerhu"
+      ],
+      "listen": [
+        "/var/run/zerhu.sock"
+      ],
+      "realpath": [
+        "/run/zerhu.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/prospecth.conf",
+      "sections": [
+        "prospecth"
+      ],
+      "listen": [
+        "/var/run/prospecth.sock"
+      ],
+      "realpath": [
+        "/run/prospecth.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finanzashispano.conf",
+      "sections": [
+        "finanzashispano"
+      ],
+      "listen": [
+        "/var/run/finanzashispano.sock"
+      ],
+      "realpath": [
+        "/run/finanzashispano.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zuout.conf",
+      "sections": [
+        "zuout"
+      ],
+      "listen": [
+        "/var/run/zuout.sock"
+      ],
+      "realpath": [
+        "/run/zuout.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/portalrelevante-finanzas.conf",
+      "sections": [
+        "portalrelevante-finanzas"
+      ],
+      "listen": [
+        "/var/run/portalrelevante-finanzas.sock"
+      ],
+      "realpath": [
+        "/run/portalrelevante-finanzas.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/es-wrnoticia.conf",
+      "sections": [
+        "es-wrnoticia"
+      ],
+      "listen": [
+        "/var/run/es-wrnoticia.sock"
+      ],
+      "realpath": [
+        "/run/es-wrnoticia.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/topfeed.conf",
+      "sections": [
+        "topfeed"
+      ],
+      "listen": [
+        "/var/run/topfeed.sock"
+      ],
+      "realpath": [
+        "/run/topfeed.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/sotuz.conf",
+      "sections": [
+        "sotuz"
+      ],
+      "listen": [
+        "/var/run/sotuz.sock"
+      ],
+      "realpath": [
+        "/run/sotuz.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finanzas-eggbev.conf",
+      "sections": [
+        "finanzas-eggbev"
+      ],
+      "listen": [
+        "/var/run/finanzas-eggbev.sock"
+      ],
+      "realpath": [
+        "/run/finanzas-eggbev.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/es-seuprimeiroempregoam.conf",
+      "sections": [
+        "es-seuprimeiroempregoam"
+      ],
+      "listen": [
+        "/var/run/es-seuprimeiroempregoam.sock"
+      ],
+      "realpath": [
+        "/run/es-seuprimeiroempregoam.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finanzas-topfeed.conf",
+      "sections": [
+        "finanzas-topfeed"
+      ],
+      "listen": [
+        "/var/run/finanzas-topfeed.sock"
+      ],
+      "realpath": [
+        "/run/finanzas-topfeed.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zuout-finanzas.conf",
+      "sections": [
+        "zuout-finanzas"
+      ],
+      "listen": [
+        "/var/run/zuout-finanzas.sock"
+      ],
+      "realpath": [
+        "/run/zuout-finanzas.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finanzas-wavesbee.conf",
+      "sections": [
+        "finanzas-wavesbee"
+      ],
+      "listen": [
+        "/var/run/finanzas-wavesbee.sock"
+      ],
+      "realpath": [
+        "/run/finanzas-wavesbee.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zytiva-finanzas.conf",
+      "sections": [
+        "zytiva-finanzas"
+      ],
+      "listen": [
+        "/var/run/zytiva-finanzas.sock"
+      ],
+      "realpath": [
+        "/run/zytiva-finanzas.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/financescredit.conf",
+      "sections": [
+        "financescredit"
+      ],
+      "listen": [
+        "/var/run/financescredit.sock"
+      ],
+      "realpath": [
+        "/run/financescredit.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/zytiva.conf",
+      "sections": [
+        "zytiva"
+      ],
+      "listen": [
+        "/var/run/zytiva.sock"
+      ],
+      "realpath": [
+        "/run/zytiva.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/mgs-finance-dash.conf",
+      "sections": [
+        "mgs-finance-dash"
+      ],
+      "listen": [
+        "/var/run/mgs-finance-dash-php.sock"
+      ],
+      "realpath": [
+        "/run/mgs-finance-dash-php.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/newsoun-finanzas.conf",
+      "sections": [
+        "newsoun-finanzas"
+      ],
+      "listen": [
+        "/var/run/newsoun-finanzas.sock"
+      ],
+      "realpath": [
+        "/run/newsoun-finanzas.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/allincraft.conf",
+      "sections": [
+        "allincraft"
+      ],
+      "listen": [
+        "/var/run/allincraft.sock"
+      ],
+      "realpath": [
+        "/run/allincraft.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/esp-noticiainforme.conf",
+      "sections": [
+        "esp-noticiainforme"
+      ],
+      "listen": [
+        "/var/run/esp-noticiainforme.sock"
+      ],
+      "realpath": [
+        "/run/esp-noticiainforme.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/conectageral.conf",
+      "sections": [
+        "conectageral"
+      ],
+      "listen": [
+        "/var/run/conectageral.sock"
+      ],
+      "realpath": [
+        "/run/conectageral.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/tapsaga.conf",
+      "sections": [
+        "tapsaga"
+      ],
+      "listen": [
+        "/var/run/tapsaga.sock"
+      ],
+      "realpath": [
+        "/run/tapsaga.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/scorexboost.conf",
+      "sections": [
+        "scorexboost"
+      ],
+      "listen": [
+        "/var/run/scorexboost.sock"
+      ],
+      "realpath": [
+        "/run/scorexboost.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/matteiservicesinc.conf",
+      "sections": [
+        "matteiservicesinc"
+      ],
+      "listen": [
+        "/var/run/matteiservicesinc.sock"
+      ],
+      "realpath": [
+        "/run/matteiservicesinc.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/noticiainforme.conf",
+      "sections": [
+        "noticiainforme"
+      ],
+      "listen": [
+        "/var/run/noticiainforme.sock"
+      ],
+      "realpath": [
+        "/run/noticiainforme.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finance-topfeed.conf",
+      "sections": [
+        "finance-topfeed"
+      ],
+      "listen": [
+        "/var/run/finance-topfeed.sock"
+      ],
+      "realpath": [
+        "/run/finance-topfeed.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/financespost.conf",
+      "sections": [
+        "financespost"
+      ],
+      "listen": [
+        "/var/run/financespost.sock"
+      ],
+      "realpath": [
+        "/run/financespost.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/finance-wantabrand.conf",
+      "sections": [
+        "finance-wantabrand"
+      ],
+      "listen": [
+        "/var/run/finance-wantabrand.sock"
+      ],
+      "realpath": [
+        "/run/finance-wantabrand.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/wantabrand.conf",
+      "sections": [
+        "wantabrand"
+      ],
+      "listen": [
+        "/var/run/wantabrand.sock"
+      ],
+      "realpath": [
+        "/run/wantabrand.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/amazingxjobs.conf",
+      "sections": [
+        "amazingxjobs"
+      ],
+      "listen": [
+        "/var/run/amazingxjobs.sock"
+      ],
+      "realpath": [
+        "/run/amazingxjobs.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/growthnetworkinc.conf",
+      "sections": [
+        "growthnetworkinc"
+      ],
+      "listen": [
+        "/var/run/growthnetworkinc.sock"
+      ],
+      "realpath": [
+        "/run/growthnetworkinc.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/folhadaterra.conf",
+      "sections": [
+        "folhadaterra"
+      ],
+      "listen": [
+        "/var/run/folhadaterra.sock"
+      ],
+      "realpath": [
+        "/run/folhadaterra.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/deolho.conf",
+      "sections": [
+        "deolho"
+      ],
+      "listen": [
+        "/var/run/deolho.sock"
+      ],
+      "realpath": [
+        "/run/deolho.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/eggbev.conf",
+      "sections": [
+        "eggbev"
+      ],
+      "listen": [
+        "/var/run/eggbev.sock"
+      ],
+      "realpath": [
+        "/run/eggbev.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/prospectcleaning.conf",
+      "sections": [
+        "prospectcleaning"
+      ],
+      "listen": [
+        "/var/run/prospectcleaning.sock"
+      ],
+      "realpath": [
+        "/run/prospectcleaning.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/everythingtented.conf",
+      "sections": [
+        "everythingtented"
+      ],
+      "listen": [
+        "/var/run/everythingtented.sock"
+      ],
+      "realpath": [
+        "/run/everythingtented.sock"
+      ]
+    },
+    {
+      "file": "/etc/php83rc/fpm.d/portalrelevante.conf",
+      "sections": [
+        "portalrelevante"
+      ],
+      "listen": [
+        "/var/run/portalrelevante.sock"
+      ],
+      "realpath": [
+        "/run/portalrelevante.sock"
+      ]
+    }
+  ],
+  "socket_conflicts": [],
+  "webserver_advisory_overrides": [],
+  "root_user_ini_settings": [],
+  "apache_php_modules": []
+}
