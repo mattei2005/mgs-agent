@@ -51072,6 +51072,41 @@
       "status": "recovered_validated",
       "thread_id": "1562078493498540042",
       "updated_at": "2026-10-23T21:18:51.030867+00:00"
+    },
+    {
+      "id": "zeus-finance-growpower-g004-1563528749830377524",
+      "agent": "zeus",
+      "type": "finance_account_country_manager_recovery",
+      "authorization_message_id": "1563528749830377524",
+      "thread_id": "1545426987756298340",
+      "status": "completed_verified",
+      "updated_at": "2026-10-24T12:49:11.916378+00:00",
+      "report_path": "reports/finance-growpower-g004-1563528749830377524.md",
+      "evidence_path": "apps/finance-system/private/growpower-g004-1563528749830377524",
+      "account_id": "1419148446852410",
+      "countries": [
+        "DE",
+        "US"
+      ],
+      "manager": "G004",
+      "backup": "/home/mgsfinance/releases/pg-auth-1545934831664242748/private/growpower-g004-1563528749830377524/apply-960-1792845344950.json.gz",
+      "backup_sha256": "58b8d086d582713d0257872656e47e3b21ecdd56f904d7d90ffa5059290da127",
+      "validation": {
+        "readback": true,
+        "amount_usd": "8.85",
+        "cutoff": "2026-10-23",
+        "revision": 964,
+        "browser_widths": [
+          1440,
+          390
+        ],
+        "replay_changed_fields": 0,
+        "receipt_id": "1563534009416425483"
+      },
+      "files": {
+        "docs/finance-account-ownership.md": "81e7bb2b7ee4fd1a68790ebf87ff0d919fb887e0e6d5329101ccc38afc164920",
+        "reports/finance-growpower-g004-1563528749830377524.md": "a1345af6fc95b325955799625030d646775a7b057ea2e4491d7b10f820d83c40"
+      }
     }
   ],
   "profile_skill_references": [
@@ -58625,5 +58660,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "last_updated": "2026-10-24T12:49:11.916378+00:00"
 }
