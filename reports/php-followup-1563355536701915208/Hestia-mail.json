@@ -1,0 +1,283 @@
+{
+  "observed_at": "2026-10-24T01:00:13.803300+00:00",
+  "host": "server.boostingecon.com",
+  "kernel": "6.8.0-147-generic",
+  "uid": 0,
+  "os": {
+    "PRETTY_NAME": "Ubuntu 24.04.4 LTS",
+    "VERSION_ID": "24.04",
+    "ID": "ubuntu"
+  },
+  "runtime_processes": [
+    {
+      "pid": 1385,
+      "exe": "/usr/sbin/php-fpm8.3",
+      "title": "php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)"
+    },
+    {
+      "pid": 61557,
+      "exe": "/usr/local/hestia/php/sbin/hestia-php",
+      "title": "php-fpm: master process (/usr/local/hestia/php/etc/php-fpm.conf)"
+    }
+  ],
+  "runtimes": [
+    {
+      "exe": "/usr/local/hestia/php/sbin/hestia-php",
+      "running_pids": [
+        61557
+      ],
+      "version_exit": 0,
+      "version": [
+        "PHP 8.5.12 (fpm-fcgi) (built: Oct 22 2026 02:06:17) (NTS)",
+        "Copyright (c) The PHP Group"
+      ],
+      "info_exit": 0,
+      "info": [
+        "PHP Version => 8.5.12",
+        "Loaded Configuration File => /usr/local/hestia/php/lib/php.ini",
+        "Scan this dir for additional .ini files => (none)",
+        "Additional .ini files parsed => (none)",
+        "PHP Version => 8.5.12",
+        "session.serialize_handler => php => php",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "config_test_exit": 0,
+      "pool_relevant_config": [],
+      "owning_packages": [
+        "hestia-php: /usr/local/hestia/php/sbin/hestia-php"
+      ]
+    },
+    {
+      "exe": "/usr/sbin/php-fpm8.3",
+      "running_pids": [
+        1385
+      ],
+      "version_exit": 0,
+      "version": [
+        "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 14:32:55)",
+        "Copyright (c) The PHP Group"
+      ],
+      "info_exit": 0,
+      "info": [
+        "PHP Version => 8.3.36",
+        "Loaded Configuration File => /etc/php/8.3/fpm/php.ini",
+        "Scan this dir for additional .ini files => /etc/php/8.3/fpm/conf.d",
+        "Additional .ini files parsed => /etc/php/8.3/fpm/conf.d/10-mysqlnd.ini,",
+        "PHP Version => 8.3.36",
+        "session.serialize_handler => php => php",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "config_test_exit": 0,
+      "pool_relevant_config": [],
+      "owning_packages": [
+        "php8.3-fpm: /usr/sbin/php-fpm8.3"
+      ]
+    }
+  ],
+  "php_packages": {
+    "hestia-php": "8.5.12-1+ubuntu24.04",
+    "php-common": "2:101~+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-apcu": "5.1.28-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-bcmath": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-bz2": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-cli": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-common": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-curl": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-fpm": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-gd": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-imagick": "3.8.1-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-imap": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-intl": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-ldap": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-mbstring": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-mysql": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-opcache": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-pspell": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-readline": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-soap": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-xml": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1",
+    "php8.3-zip": "8.3.36-1+ubuntu24.04.1+deb.sury.org+1"
+  },
+  "services": {
+    "hestia-iptables.service": {
+      "MainPID": "0",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:19:10 UTC",
+      "ActiveState": "active",
+      "SubState": "exited"
+    },
+    "hestia.service": {
+      "MainPID": "0",
+      "ExecMainStartTimestamp": "",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "nginx.service": {
+      "MainPID": "1606",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:19:17 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "php8.3-fpm.service": {
+      "MainPID": "1385",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:19:16 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "phpsessionclean.service": {
+      "MainPID": "0",
+      "ExecMainStartTimestamp": "Sat 2026-10-24 00:39:00 UTC",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    }
+  },
+  "failed_units": [],
+  "reboot_required": false,
+  "dpkg_audit": "",
+  "legacy_fpm_active": [],
+  "runcloud_apps": [],
+  "explicit_advisory_settings": [
+    {
+      "file": "/etc/php/8.3/cli/php.ini",
+      "line": 1442,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php/8.3/fpm/php.ini",
+      "line": 1442,
+      "setting": "session.serialize_handler = php"
+    }
+  ],
+  "cli": {
+    "/usr/bin/php": {
+      "exit": 0,
+      "version": [
+        "PHP 8.3.36 (cli) (built: Oct 21 2026 14:32:55) (NTS)"
+      ]
+    },
+    "/usr/bin/php8.3": {
+      "exit": 0,
+      "version": [
+        "PHP 8.3.36 (cli) (built: Oct 21 2026 14:32:55) (NTS)"
+      ]
+    }
+  },
+  "ubuntu_cve_changelog": [
+    {
+      "file": "/usr/share/doc/php8.3-readline/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-bcmath/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-cli/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-opcache/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-soap/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-zip/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-xml/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-curl/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-bz2/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-imap/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-mbstring/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-intl/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-gd/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-fpm/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-pspell/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-ldap/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-common/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-mysql/changelog.Debian.gz",
+      "hits": [
+        "+ (CVE-2026-109618, CVE-2026-109619): Avoid state corruption via"
+      ]
+    }
+  ],
+  "target": "Hestia-mail",
+  "exit": 0
+}

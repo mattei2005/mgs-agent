@@ -1,0 +1,2954 @@
+{
+  "observed_at": "2026-10-24T01:00:13.051653+00:00",
+  "host": "MatteiInc01",
+  "kernel": "5.15.0-198-generic",
+  "uid": 0,
+  "os": {
+    "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+    "VERSION_ID": "22.04",
+    "ID": "ubuntu"
+  },
+  "runtime_processes": [
+    {
+      "pid": 1006,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: master process (/etc/php83rc/php-fpm.conf)"
+    },
+    {
+      "pid": 1570763,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool prospectcleaning"
+    },
+    {
+      "pid": 2027506,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool zytiva-finanzas"
+    },
+    {
+      "pid": 2102468,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool newsoun-finanzas"
+    },
+    {
+      "pid": 2143099,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finanzas-lyzmo"
+    },
+    {
+      "pid": 2173328,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool newsoun-de"
+    },
+    {
+      "pid": 2190891,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finanzas-conectageral"
+    },
+    {
+      "pid": 2234174,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool informegeral"
+    },
+    {
+      "pid": 2419009,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finanzas-wavesbee"
+    },
+    {
+      "pid": 2487175,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool bkp-folhadaterra"
+    },
+    {
+      "pid": 2495784,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool prospecth"
+    },
+    {
+      "pid": 2523994,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finanzashispano"
+    },
+    {
+      "pid": 2545933,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool jobs-conectageral"
+    },
+    {
+      "pid": 2548833,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool app-portalrelevante-com"
+    },
+    {
+      "pid": 2549327,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool ziwus"
+    },
+    {
+      "pid": 2550134,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool app-conectageral"
+    },
+    {
+      "pid": 2553016,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool zuploader"
+    },
+    {
+      "pid": 2575399,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool scorexboost"
+    },
+    {
+      "pid": 2587905,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool es-seuprimeiroempregoam"
+    },
+    {
+      "pid": 2589039,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool zuout-finanzas"
+    },
+    {
+      "pid": 2604584,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool growthnetworkinc"
+    },
+    {
+      "pid": 2607365,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool es-wrnoticia"
+    },
+    {
+      "pid": 2642835,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool zerhu"
+    },
+    {
+      "pid": 2652629,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool everythingtented"
+    },
+    {
+      "pid": 2673497,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool consultarfinanca"
+    },
+    {
+      "pid": 2680796,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool bahuye"
+    },
+    {
+      "pid": 2686073,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool digitaltrustadx"
+    },
+    {
+      "pid": 2686074,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool kievportal"
+    },
+    {
+      "pid": 2688118,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finance-topfeed"
+    },
+    {
+      "pid": 2692094,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool sotuz"
+    },
+    {
+      "pid": 2692308,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finance-wantabrand"
+    },
+    {
+      "pid": 2693456,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool eng-wrnoticia"
+    },
+    {
+      "pid": 2699423,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool portalbrasilnews"
+    },
+    {
+      "pid": 2707810,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finanzas-eggbev"
+    },
+    {
+      "pid": 2709216,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool matteiservicesinc"
+    },
+    {
+      "pid": 2710011,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool portalrelevante-finanzas"
+    },
+    {
+      "pid": 2714305,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool portalrelevante"
+    },
+    {
+      "pid": 2715490,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool esp-noticiainforme"
+    },
+    {
+      "pid": 2716468,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool lyzmo"
+    },
+    {
+      "pid": 2717187,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool dicasfinancas"
+    },
+    {
+      "pid": 2719283,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool newsoun"
+    },
+    {
+      "pid": 2719628,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool allincraft"
+    },
+    {
+      "pid": 2720372,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool sunshinebeautysupplier"
+    },
+    {
+      "pid": 2720813,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool noticiainforme"
+    },
+    {
+      "pid": 2723582,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool seuprimeiroempregoam"
+    },
+    {
+      "pid": 2725273,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool s4blindsandshades"
+    },
+    {
+      "pid": 2727966,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool topfeed"
+    },
+    {
+      "pid": 2730610,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool wr-wrnoticia"
+    },
+    {
+      "pid": 2730902,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool zuout"
+    },
+    {
+      "pid": 2731051,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool jislainemattei"
+    },
+    {
+      "pid": 2731328,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool wrnoticia-home"
+    },
+    {
+      "pid": 2732141,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool newsfolha"
+    },
+    {
+      "pid": 2735547,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool seniormenu"
+    },
+    {
+      "pid": 2736062,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool conectageral"
+    },
+    {
+      "pid": 2737305,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool financespost"
+    },
+    {
+      "pid": 2737983,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool tapsaga"
+    },
+    {
+      "pid": 2738108,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool amazingxjobs"
+    },
+    {
+      "pid": 2738416,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool finanzas-topfeed"
+    },
+    {
+      "pid": 2738858,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool portalFolhadasbd"
+    },
+    {
+      "pid": 2738859,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool zytiva"
+    },
+    {
+      "pid": 2740201,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool careersjobsad"
+    },
+    {
+      "pid": 2740593,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool wantabrand"
+    },
+    {
+      "pid": 2743214,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool jobs-deolhonoworld-com"
+    },
+    {
+      "pid": 2744585,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool financescredit"
+    },
+    {
+      "pid": 2747923,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool wavesbee"
+    },
+    {
+      "pid": 2748252,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool receitasdescomplicada"
+    },
+    {
+      "pid": 2749065,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool sscorexboost-jobs"
+    },
+    {
+      "pid": 2749397,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool marketingdigitalad"
+    },
+    {
+      "pid": 2749581,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool newsfolha-jobs"
+    },
+    {
+      "pid": 2750395,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool deolho"
+    },
+    {
+      "pid": 2750409,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool folhadaterra"
+    },
+    {
+      "pid": 2750410,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool revistacafe"
+    },
+    {
+      "pid": 2750923,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool seuprimeiroempleo"
+    },
+    {
+      "pid": 2750924,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool vagaaqui"
+    },
+    {
+      "pid": 2750998,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool eggbev"
+    },
+    {
+      "pid": 2751119,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool receitasdescomplicada"
+    }
+  ],
+  "runtimes": [
+    {
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "running_pids": [
+        1006,
+        1570763,
+        2027506,
+        2102468,
+        2143099,
+        2173328,
+        2190891,
+        2234174,
+        2419009,
+        2487175,
+        2495784,
+        2523994,
+        2545933,
+        2548833,
+        2549327,
+        2550134,
+        2553016,
+        2575399,
+        2587905,
+        2589039,
+        2604584,
+        2607365,
+        2642835,
+        2652629,
+        2673497,
+        2680796,
+        2686073,
+        2686074,
+        2688118,
+        2692094,
+        2692308,
+        2693456,
+        2699423,
+        2707810,
+        2709216,
+        2710011,
+        2714305,
+        2715490,
+        2716468,
+        2717187,
+        2719283,
+        2719628,
+        2720372,
+        2720813,
+        2723582,
+        2725273,
+        2727966,
+        2730610,
+        2730902,
+        2731051,
+        2731328,
+        2732141,
+        2735547,
+        2736062,
+        2737305,
+        2737983,
+        2738108,
+        2738416,
+        2738858,
+        2738859,
+        2740201,
+        2740593,
+        2743214,
+        2744585,
+        2747923,
+        2748252,
+        2749065,
+        2749397,
+        2749581,
+        2750395,
+        2750409,
+        2750410,
+        2750923,
+        2750924,
+        2750998,
+        2751119
+      ],
+      "version_exit": 0,
+      "version": [
+        "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)",
+        "Copyright (c) The PHP Group"
+      ],
+      "info_exit": 0,
+      "info": [
+        "PHP Version => 8.3.36",
+        "Loaded Configuration File => /etc/php83rc/php.ini",
+        "Scan this dir for additional .ini files => /etc/php83rc/conf.d",
+        "Additional .ini files parsed => /etc/php83rc/conf.d/10mysqlnd.ini,",
+        "PHP Version => 8.3.36",
+        "session.serialize_handler => php => php",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "config_test_exit": 0,
+      "pool_relevant_config": [
+        "[global]",
+        "[allincraft]",
+        "listen = /var/run/allincraft.sock",
+        "[amazingxjobs]",
+        "listen = /var/run/amazingxjobs.sock",
+        "[app-conectageral]",
+        "listen = /var/run/app-conectageral.sock",
+        "[app-portalrelevante-com]",
+        "listen = /var/run/app-portalrelevante-com.sock",
+        "[bahuye]",
+        "listen = /var/run/bahuye.sock",
+        "[bkp-folhadaterra]",
+        "listen = /var/run/bkp-folhadaterra.sock",
+        "[careersjobsad]",
+        "listen = /var/run/careersjobsad.sock",
+        "[conectageral]",
+        "listen = /var/run/conectageral.sock",
+        "[consultarfinanca]",
+        "listen = /var/run/consultarfinanca.sock",
+        "[deolho]",
+        "listen = /var/run/deolho.sock",
+        "[dicasfinancas]",
+        "listen = /var/run/dicasfinancas.sock",
+        "[digitaltrustadx]",
+        "listen = /var/run/digitaltrustadx.sock",
+        "[eggbev]",
+        "listen = /var/run/eggbev.sock",
+        "[eng-wrnoticia]",
+        "listen = /var/run/eng-wrnoticia.sock",
+        "[es-seuprimeiroempregoam]",
+        "listen = /var/run/es-seuprimeiroempregoam.sock",
+        "[es-wrnoticia]",
+        "listen = /var/run/es-wrnoticia.sock",
+        "[esp-noticiainforme]",
+        "listen = /var/run/esp-noticiainforme.sock",
+        "[everythingtented]",
+        "listen = /var/run/everythingtented.sock",
+        "[finance-topfeed]",
+        "listen = /var/run/finance-topfeed.sock",
+        "[finance-wantabrand]",
+        "listen = /var/run/finance-wantabrand.sock",
+        "[financescredit]",
+        "listen = /var/run/financescredit.sock",
+        "[financespost]",
+        "listen = /var/run/financespost.sock",
+        "[finanzas-conectageral]",
+        "listen = /var/run/finanzas-conectageral.sock",
+        "[finanzas-eggbev]",
+        "listen = /var/run/finanzas-eggbev.sock",
+        "[finanzas-lyzmo]",
+        "listen = /var/run/finanzas-lyzmo.sock",
+        "[finanzas-topfeed]",
+        "listen = /var/run/finanzas-topfeed.sock",
+        "[finanzas-wavesbee]",
+        "listen = /var/run/finanzas-wavesbee.sock",
+        "[finanzashispano]",
+        "listen = /var/run/finanzashispano.sock",
+        "[folhadaterra]",
+        "listen = /var/run/folhadaterra.sock",
+        "[growthnetworkinc]",
+        "listen = /var/run/growthnetworkinc.sock",
+        "[informegeral]",
+        "listen = /var/run/informegeral.sock",
+        "[jislainemattei]",
+        "listen = /var/run/jislainemattei.sock",
+        "[jobs-conectageral]",
+        "listen = /var/run/jobs-conectageral.sock",
+        "[jobs-deolhonoworld-com]",
+        "listen = /var/run/jobs-deolhonoworld-com.sock",
+        "[kievportal]",
+        "listen = /var/run/kievportal.sock",
+        "[lyzmo]",
+        "listen = /var/run/lyzmo.sock",
+        "[marketingdigitalad]",
+        "listen = /var/run/marketingdigitalad.sock",
+        "[matteiservicesinc]",
+        "listen = /var/run/matteiservicesinc.sock",
+        "[mgs-finance-dash]",
+        "listen = /var/run/mgs-finance-dash-php.sock",
+        "[newsfolha-jobs]",
+        "listen = /var/run/newsfolha-jobs.sock",
+        "[newsfolha]",
+        "listen = /var/run/newsfolha.sock",
+        "[newsoun-de]",
+        "listen = /var/run/newsoun-de.sock",
+        "[newsoun-finanzas]",
+        "listen = /var/run/newsoun-finanzas.sock",
+        "[newsoun]",
+        "listen = /var/run/newsoun.sock",
+        "[noticiainforme]",
+        "listen = /var/run/noticiainforme.sock",
+        "[portalFolhadasbd]",
+        "listen = /var/run/portalFolhadasbd.sock",
+        "[portalbrasilnews]",
+        "listen = /var/run/portalbrasilnews.sock",
+        "[portalrelevante-finanzas]",
+        "listen = /var/run/portalrelevante-finanzas.sock",
+        "[portalrelevante]",
+        "listen = /var/run/portalrelevante.sock",
+        "[prospectcleaning]",
+        "listen = /var/run/prospectcleaning.sock",
+        "[prospecth]",
+        "listen = /var/run/prospecth.sock",
+        "[receitasdescomplicada]",
+        "listen = /var/run/receitasdescomplicada.sock",
+        "[revistacafe]",
+        "listen = /var/run/revistacafe.sock",
+        "[s4blindsandshades]",
+        "listen = /var/run/s4blindsandshades.sock",
+        "[scorexboost]",
+        "listen = /var/run/scorexboost.sock",
+        "[seniormenu]",
+        "listen = /var/run/seniormenu.sock",
+        "[seuprimeiroempleo]",
+        "listen = /var/run/seuprimeiroempleo.sock",
+        "[seuprimeiroempregoam]",
+        "listen = /var/run/seuprimeiroempregoam.sock",
+        "[sotuz]",
+        "listen = /var/run/sotuz.sock",
+        "[sscorexboost-jobs]",
+        "listen = /var/run/sscorexboost-jobs.sock",
+        "[sunshinebeautysupplier]",
+        "listen = /var/run/sunshinebeautysupplier.sock",
+        "[tapsaga]",
+        "listen = /var/run/tapsaga.sock",
+        "[topfeed]",
+        "listen = /var/run/topfeed.sock",
+        "[vagaaqui]",
+        "listen = /var/run/vagaaqui.sock",
+        "[wantabrand]",
+        "listen = /var/run/wantabrand.sock",
+        "[wavesbee]",
+        "listen = /var/run/wavesbee.sock",
+        "[wr-wrnoticia]",
+        "listen = /var/run/wr-wrnoticia.sock",
+        "[wrnoticia-home]",
+        "listen = /var/run/wrnoticia-home.sock",
+        "[zerhu]",
+        "listen = /var/run/zerhu.sock",
+        "[ziwus]",
+        "listen = /var/run/ziwus.sock",
+        "[zuout-finanzas]",
+        "listen = /var/run/zuout-finanzas.sock",
+        "[zuout]",
+        "listen = /var/run/zuout.sock",
+        "[zuploader]",
+        "listen = /var/run/zuploader.sock",
+        "[zytiva-finanzas]",
+        "listen = /var/run/zytiva-finanzas.sock",
+        "[zytiva]",
+        "listen = /var/run/zytiva.sock",
+        "[emptypool]",
+        "listen = /var/run/php83rc.empty.sock"
+      ],
+      "owning_packages": [
+        "php83rc: /RunCloud/Packages/php83rc/sbin/php-fpm"
+      ]
+    }
+  ],
+  "php_packages": {
+    "php74rc": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-bcmath": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-common": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-compression": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-curl": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-essentials": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-gd": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-imap": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-intl": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-json": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-mbstring": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-mysql": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-mysqli": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-opcache": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-pecl-igbinary": "3.2.9-1+ubuntu22.04+2",
+    "php74rc-pecl-memcache": "8.0-1+ubuntu22.04+1",
+    "php74rc-pecl-memcached": "3.2.0-1+ubuntu22.04+2",
+    "php74rc-pecl-msgpack": "2.1.2-1+ubuntu22.04+1",
+    "php74rc-pecl-redis": "5.3.7-1+ubuntu22.04+2",
+    "php74rc-pecl-swoole": "4.8.12-1+ubuntu22.04+1",
+    "php74rc-process": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-pspell": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-realpath-turbo": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-soap": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-sodium": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-sqlite": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-tidy": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-xml": "7.4.33-1+ubuntu22.04+1",
+    "php80rc": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-bcmath": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-common": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-compression": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-curl": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-essentials": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-gd": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-imap": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-intl": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-mbstring": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-mysql": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-mysqli": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-opcache": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-pecl-igbinary": "3.2.15-1+ubuntu22.04+1",
+    "php80rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php80rc-pecl-memcached": "3.2.0-1+ubuntu22.04+2",
+    "php80rc-pecl-msgpack": "2.2.0-1+ubuntu22.04+1",
+    "php80rc-pecl-redis": "6.0.2-1+ubuntu22.04+1",
+    "php80rc-pecl-swoole": "5.1.1-1+ubuntu22.04+1",
+    "php80rc-pecl-timezonedb": "2023.3-1+ubuntu22.04+1",
+    "php80rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php80rc-process": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-pspell": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-realpath-turbo": "8.0.30-1+ubuntu22.04+1",
+    "php80rc-soap": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-sodium": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-sqlite": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-tidy": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-xml": "8.0.30-1+ubuntu22.04+2",
+    "php81rc": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-bcmath": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-common": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-compression": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-curl": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-essentials": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-gd": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-imap": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-intl": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-mbstring": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-mysql": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-mysqli": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-opcache": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php81rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php81rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php81rc-pecl-msgpack": "3.0.0-1+ubuntu22.04+1",
+    "php81rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php81rc-pecl-swoole": "6.1.6-1+ubuntu22.04+1",
+    "php81rc-pecl-timezonedb": "2025.2.2-1+ubuntu22.04+1",
+    "php81rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php81rc-process": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-pspell": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-realpath-turbo": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-soap": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-sodium": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-sqlite": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-tidy": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-xml": "8.1.34-1+ubuntu22.04+1",
+    "php82rc": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-bcmath": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-common": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-compression": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-curl": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-essentials": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-gd": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-imap": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-intl": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-mbstring": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-mysql": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-mysqli": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-opcache": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php82rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php82rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php82rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php82rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php82rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php82rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php82rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php82rc-process": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-pspell": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-realpath-turbo": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-soap": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-sodium": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-sqlite": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-tidy": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-xml": "8.2.35-1+ubuntu22.04+1",
+    "php83rc": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-bcmath": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-common": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-compression": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-curl": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-essentials": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-gd": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-imap": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-intl": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-mbstring": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-mysql": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-mysqli": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-opcache": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php83rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php83rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php83rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php83rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php83rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php83rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php83rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php83rc-process": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-pspell": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-realpath-turbo": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-soap": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-sodium": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-sqlite": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-tidy": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-xml": "8.3.36-1+ubuntu22.04+1",
+    "php84rc": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-bcmath": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-common": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-compression": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-curl": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-essentials": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-gd": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-intl": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-mbstring": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-mysql": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-mysqli": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-opcache": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php84rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php84rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php84rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php84rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php84rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php84rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php84rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php84rc-process": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-realpath-turbo": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-soap": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-sodium": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-sqlite": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-tidy": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-xml": "8.4.27-1+ubuntu22.04+1",
+    "php85rc": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-bcmath": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-common": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-compression": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-curl": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-essentials": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-gd": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-intl": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-mbstring": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-mysql": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-mysqli": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php85rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php85rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php85rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php85rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php85rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php85rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php85rc-process": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-realpath-turbo": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-soap": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-sodium": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-sqlite": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-tidy": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-xml": "8.5.12-1+ubuntu22.04+1"
+  },
+  "services": {
+    "apache2-rc.service": {
+      "MainPID": "1504",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:22:43 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "nginx-rc.service": {
+      "MainPID": "1793",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:22:43 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "php83rc-fpm.service": {
+      "MainPID": "1006",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:22:26 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "runcloud-agent.service": {
+      "MainPID": "995",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:22:26 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    }
+  },
+  "failed_units": [],
+  "reboot_required": false,
+  "dpkg_audit": "",
+  "legacy_fpm_active": [],
+  "runcloud_apps": [
+    {
+      "name": "allincraft",
+      "roots": [
+        "/home/runcloud/webapps/allincraft",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/allincraft.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "allincraft.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "allincraft.com",
+        "www.allincraft.com"
+      ]
+    },
+    {
+      "name": "allincraft.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "amazingxjobs",
+      "roots": [
+        "/home/runcloud/webapps/amazingxjobs",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "amazingxjobs.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "amazingxjobs.com",
+        "www.amazingxjobs.com"
+      ]
+    },
+    {
+      "name": "amazingxjobs.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "app-conectageral",
+      "roots": [
+        "/home/runcloud/webapps/app-conectageral",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "app-conectageral.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "app.conectageral.com",
+        "www.app.conectageral.com"
+      ]
+    },
+    {
+      "name": "app-conectageral.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "app-portalrelevante-com",
+      "roots": [
+        "/home/runcloud/webapps/app-portalrelevante-com",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/app-portalrelevante-com.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "app-portalrelevante-com.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "app.portalrelevante.com",
+        "www.app.portalrelevante.com"
+      ]
+    },
+    {
+      "name": "app-portalrelevante-com.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "bahuye",
+      "roots": [
+        "/home/runcloud/webapps/bahuye",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "bahuye.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "bahuye.net",
+        "www.bahuye.net"
+      ]
+    },
+    {
+      "name": "bahuye.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "bkp-folhadaterra",
+      "roots": [
+        "/home/runcloud/webapps/bkp-folhadaterra",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/bkp-folhadaterra.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "bkp-folhadaterra.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "bkp.folhadaterra.com.br",
+        "www.bkp.folhadaterra.com.br"
+      ]
+    },
+    {
+      "name": "bkp-folhadaterra.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "careersjobsad",
+      "roots": [
+        "/home/runcloud/webapps/careersjobsad",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/careersjobsad.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "careersjobsad.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "careersjobsad.com",
+        "www.careersjobsad.com"
+      ]
+    },
+    {
+      "name": "careersjobsad.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "conectageral",
+      "roots": [
+        "/home/runcloud/webapps/conectageral",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "conectageral.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "conectageral.com",
+        "www.conectageral.com"
+      ]
+    },
+    {
+      "name": "conectageral.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "consultarfinanca",
+      "roots": [
+        "/home/runcloud/webapps/consultarfinanca",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "consultarfinanca.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "consultarfinanca.info",
+        "www.consultarfinanca.info"
+      ]
+    },
+    {
+      "name": "consultarfinanca.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "deolho",
+      "roots": [
+        "/home/runcloud/webapps/deolho",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/deolho.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "deolho.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "deolhonoworld.com",
+        "www.deolhonoworld.com"
+      ]
+    },
+    {
+      "name": "deolho.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "dicasfinancas",
+      "roots": [
+        "/home/runcloud/webapps/dicasfinancas",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/dicasfinancas.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "dicasfinancas.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "dicasfinancas.info",
+        "www.dicasfinancas.info"
+      ]
+    },
+    {
+      "name": "dicasfinancas.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "digitaltrustadx",
+      "roots": [
+        "/home/runcloud/webapps/digitaltrustadx",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "digitaltrustadx.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "digitaltrustadx.com",
+        "www.digitaltrustadx.com"
+      ]
+    },
+    {
+      "name": "digitaltrustadx.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "eggbev",
+      "roots": [
+        "/home/runcloud/webapps/eggbev",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "eggbev.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "eggbev.com",
+        "www.eggbev.com"
+      ]
+    },
+    {
+      "name": "eggbev.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "eng-wrnoticia",
+      "roots": [
+        "/home/runcloud/webapps/eng-wrnoticia",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/eng-wrnoticia.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "eng-wrnoticia.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "eng.wrnoticia.com",
+        "www.eng.wrnoticia.com"
+      ]
+    },
+    {
+      "name": "eng-wrnoticia.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "es-seuprimeiroempregoam",
+      "roots": [
+        "/home/runcloud/webapps/es-seuprimeiroempregoam",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/es-seuprimeiroempregoam.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "es-seuprimeiroempregoam.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "es.seuprimeiroempregoam.com",
+        "www.es.seuprimeiroempregoam.com"
+      ]
+    },
+    {
+      "name": "es-seuprimeiroempregoam.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "es-wrnoticia",
+      "roots": [
+        "/home/runcloud/webapps/es-wrnoticia",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/es-wrnoticia.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "es-wrnoticia.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "es.wrnoticia.com",
+        "www.es.wrnoticia.com"
+      ]
+    },
+    {
+      "name": "es-wrnoticia.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "esp-noticiainforme",
+      "roots": [
+        "/home/runcloud/webapps/esp-noticiainforme",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/esp-noticiainforme.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "esp-noticiainforme.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "esp.noticiainforme.com",
+        "www.esp.noticiainforme.com"
+      ]
+    },
+    {
+      "name": "esp-noticiainforme.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "everythingtented",
+      "roots": [
+        "/home/runcloud/webapps/everythingtented",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "everythingtented.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "everythingtented.com",
+        "www.everythingtented.com"
+      ]
+    },
+    {
+      "name": "everythingtented.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finance-topfeed",
+      "roots": [
+        "/home/runcloud/webapps/finance-topfeed",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finance-topfeed.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finance.topfeed.fun",
+        "www.finance.topfeed.fun"
+      ]
+    },
+    {
+      "name": "finance-topfeed.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finance-wantabrand",
+      "roots": [
+        "/home/runcloud/webapps/finance-wantabrand",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finance-wantabrand.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finance.wantabrand.com",
+        "www.finance.wantabrand.com"
+      ]
+    },
+    {
+      "name": "finance-wantabrand.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "financescredit",
+      "roots": [
+        "/home/runcloud/webapps/financescredit",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/financescredit.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "financescredit.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "financescredit.com",
+        "www.financescredit.com"
+      ]
+    },
+    {
+      "name": "financescredit.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "financespost",
+      "roots": [
+        "/home/runcloud/webapps/financespost",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/financespost.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "financespost.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "financespost.com",
+        "www.financespost.com"
+      ]
+    },
+    {
+      "name": "financespost.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-conectageral",
+      "roots": [
+        "/home/runcloud/webapps/finanzas-conectageral",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-conectageral.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.conectageral.com",
+        "www.finanzas.conectageral.com"
+      ]
+    },
+    {
+      "name": "finanzas-conectageral.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-eggbev",
+      "roots": [
+        "/home/runcloud/webapps/finanzas-eggbev",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-eggbev.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.eggbev.com",
+        "www.finanzas.eggbev.com"
+      ]
+    },
+    {
+      "name": "finanzas-eggbev.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-lyzmo",
+      "roots": [
+        "/home/runcloud/webapps/finanzas-lyzmo",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-lyzmo.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.lyzmo.com",
+        "www.finanzas.lyzmo.com"
+      ]
+    },
+    {
+      "name": "finanzas-lyzmo.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-topfeed",
+      "roots": [
+        "/home/runcloud/webapps/finanzas-topfeed",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-topfeed.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.topfeed.fun",
+        "www.finanzas.topfeed.fun"
+      ]
+    },
+    {
+      "name": "finanzas-topfeed.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzas-wavesbee",
+      "roots": [
+        "/home/runcloud/webapps/finanzas-wavesbee",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/finanzas-wavesbee.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "finanzas-wavesbee.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.wavesbee.com",
+        "www.finanzas.wavesbee.com"
+      ]
+    },
+    {
+      "name": "finanzas-wavesbee.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "finanzashispano",
+      "roots": [
+        "/home/runcloud/webapps/finanzashispano",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/finanzashispano.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "finanzashispano.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzashispano.com",
+        "www.finanzashispano.com"
+      ]
+    },
+    {
+      "name": "finanzashispano.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "folhadaterra",
+      "roots": [
+        "/home/runcloud/webapps/folhadaterra",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/folhadaterra.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "folhadaterra.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "folhadaterra.com.br",
+        "www.folhadaterra.com.br"
+      ]
+    },
+    {
+      "name": "folhadaterra.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "growthnetworkinc",
+      "roots": [
+        "/home/runcloud/webapps/growthnetworkinc",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/growthnetworkinc.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "growthnetworkinc.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "growthnetworkinc.com",
+        "www.growthnetworkinc.com"
+      ]
+    },
+    {
+      "name": "growthnetworkinc.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "informegeral",
+      "roots": [
+        "/home/runcloud/webapps/informegeral",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/informegeral.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "informegeral.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "informegeral.com",
+        "www.informegeral.com"
+      ]
+    },
+    {
+      "name": "informegeral.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "jislainemattei",
+      "roots": [
+        "/home/runcloud/webapps/jislainemattei",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/jislainemattei.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "jislainemattei.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "jislainemattei.com",
+        "www.jislainemattei.com"
+      ]
+    },
+    {
+      "name": "jislainemattei.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "jobs-conectageral",
+      "roots": [
+        "/home/runcloud/webapps/jobs-conectageral",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "jobs-conectageral.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "jobs.conectageral.com",
+        "www.jobs.conectageral.com"
+      ]
+    },
+    {
+      "name": "jobs-conectageral.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "jobs-deolhonoworld-com",
+      "roots": [
+        "/home/runcloud2/webapps/jobs-deolhonoworld-com",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/jobs-deolhonoworld-com.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "jobs-deolhonoworld-com.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "jobs.deolhonoworld.com"
+      ]
+    },
+    {
+      "name": "jobs-deolhonoworld-com.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "kievportal",
+      "roots": [
+        "/home/runcloud/webapps/kievportal",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/kievportal.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "kievportal.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "kievportal.com",
+        "www.kievportal.com"
+      ]
+    },
+    {
+      "name": "kievportal.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "lyzmo",
+      "roots": [
+        "/home/runcloud/webapps/lyzmo",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "lyzmo.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "lyzmo.com",
+        "www.lyzmo.com"
+      ]
+    },
+    {
+      "name": "lyzmo.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "marketingdigitalad",
+      "roots": [
+        "/home/runcloud/webapps/marketingdigitalad",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/marketingdigitalad.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "marketingdigitalad.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "marketingdigitalad.com",
+        "www.marketingdigitalad.com"
+      ]
+    },
+    {
+      "name": "marketingdigitalad.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "matteiservicesinc",
+      "roots": [
+        "/home/runcloud/webapps/matteiservicesinc",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/matteiservicesinc.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "matteiservicesinc.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "matteiservicesinc.com",
+        "www.matteiservicesinc.com"
+      ]
+    },
+    {
+      "name": "matteiservicesinc.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "mgs-finance-dash",
+      "roots": [
+        "/home/mgsfinance/webapps/mgs-finance-dash/public-gate",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/mgs-finance-dash-php.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "mgs-finance-dash.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "dash.mgsdigitalcorp.com"
+      ]
+    },
+    {
+      "name": "mgs-finance-dash.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsfolha-jobs",
+      "roots": [
+        "/home/runcloud/webapps/newsfolha-jobs",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/newsfolha-jobs.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "newsfolha-jobs.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "jobs.newsfolha.com",
+        "www.jobs.newsfolha.com"
+      ]
+    },
+    {
+      "name": "newsfolha-jobs.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsfolha",
+      "roots": [
+        "/home/runcloud/webapps/newsfolha",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/newsfolha.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "newsfolha.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "newsfolha.com",
+        "www.newsfolha.com"
+      ]
+    },
+    {
+      "name": "newsfolha.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsoun-de",
+      "roots": [
+        "/home/runcloud/webapps/newsoun-de",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsoun-de.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "de.newsoun.com",
+        "www.de.newsoun.com"
+      ]
+    },
+    {
+      "name": "newsoun-de.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsoun-finanzas",
+      "roots": [
+        "/home/runcloud/webapps/newsoun-finanzas",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsoun-finanzas.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.newsoun.com",
+        "www.finanzas.newsoun.com"
+      ]
+    },
+    {
+      "name": "newsoun-finanzas.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsoun",
+      "roots": [
+        "/home/runcloud/webapps/newsoun",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "newsoun.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "newsoun.com",
+        "www.newsoun.com"
+      ]
+    },
+    {
+      "name": "newsoun.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "noticiainforme",
+      "roots": [
+        "/home/runcloud/webapps/noticiainforme",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/noticiainforme.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "noticiainforme.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "noticiainforme.com",
+        "www.noticiainforme.com"
+      ]
+    },
+    {
+      "name": "noticiainforme.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "portalFolhadasbd",
+      "roots": [
+        "/home/runcloud/webapps/portalFolhadasbd",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/portalFolhadasbd.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "portalFolhadasbd.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "portal.folhadaterra.com.br",
+        "www.portal.folhadaterra.com.br"
+      ]
+    },
+    {
+      "name": "portalFolhadasbd.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "portalbrasilnews",
+      "roots": [
+        "/home/runcloud/webapps/portalbrasilnews",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/portalbrasilnews.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "portalbrasilnews.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "portalbrasilnews.com",
+        "www.portalbrasilnews.com"
+      ]
+    },
+    {
+      "name": "portalbrasilnews.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "portalrelevante-finanzas",
+      "roots": [
+        "/home/runcloud/webapps/portalrelevante-finanzas",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "portalrelevante-finanzas.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.portalrelevante.com",
+        "www.finanzas.portalrelevante.com"
+      ]
+    },
+    {
+      "name": "portalrelevante-finanzas.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "portalrelevante",
+      "roots": [
+        "/home/runcloud/webapps/portalrelevante",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "portalrelevante.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "portalrelevante.com",
+        "www.portalrelevante.com"
+      ]
+    },
+    {
+      "name": "portalrelevante.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "prospectcleaning",
+      "roots": [
+        "/home/runcloud/webapps/prospectcleaning",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/prospectcleaning.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "prospectcleaning.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "prospectcleaning.com",
+        "www.prospectcleaning.com"
+      ]
+    },
+    {
+      "name": "prospectcleaning.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "prospecth",
+      "roots": [
+        "/home/runcloud/webapps/prospecth",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/prospecth.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "prospecth.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "prospecthomeimprovement.com",
+        "www.prospecthomeimprovement.com"
+      ]
+    },
+    {
+      "name": "prospecth.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "receitasdescomplicada",
+      "roots": [
+        "/home/runcloud/webapps/receitasdescomplicada",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/receitasdescomplicada.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "receitasdescomplicada.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "receitasdescomplicada.com.br",
+        "www.receitasdescomplicada.com.br"
+      ]
+    },
+    {
+      "name": "receitasdescomplicada.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "revistacafe",
+      "roots": [
+        "/home/runcloud/webapps/revistacafe",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/revistacafe.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "revistacafe.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "revistacafe.com.br",
+        "www.revistacafe.com.br"
+      ]
+    },
+    {
+      "name": "revistacafe.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "s4blindsandshades",
+      "roots": [
+        "/home/runcloud/webapps/s4blindsandshades",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/s4blindsandshades.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "s4blindsandshades.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "s4blindsandshades.com",
+        "www.s4blindsandshades.com"
+      ]
+    },
+    {
+      "name": "s4blindsandshades.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "scorexboost",
+      "roots": [
+        "/home/runcloud/webapps/scorexboost",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/scorexboost.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "scorexboost.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "scorexboost.com",
+        "www.scorexboost.com"
+      ]
+    },
+    {
+      "name": "scorexboost.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "seniormenu",
+      "roots": [
+        "/home/runcloud/webapps/seniormenu",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "seniormenu.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "seniormenu.com",
+        "www.seniormenu.com"
+      ]
+    },
+    {
+      "name": "seniormenu.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "seuprimeiroempleo",
+      "roots": [
+        "/home/runcloud/webapps/seuprimeiroempleo",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "seuprimeiroempleo.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "empleo.seuprimeiroempregoam.com",
+        "www.empleo.seuprimeiroempregoam.com"
+      ]
+    },
+    {
+      "name": "seuprimeiroempleo.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "seuprimeiroempregoam",
+      "roots": [
+        "/home/runcloud/webapps/seuprimeiroempregoam",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "seuprimeiroempregoam.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "seuprimeiroempregoam.com",
+        "www.seuprimeiroempregoam.com"
+      ]
+    },
+    {
+      "name": "seuprimeiroempregoam.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "sotuz",
+      "roots": [
+        "/home/runcloud/webapps/sotuz",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "sotuz.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "sotuz.com",
+        "www.sotuz.com"
+      ]
+    },
+    {
+      "name": "sotuz.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "sscorexboost-jobs",
+      "roots": [
+        "/home/runcloud/webapps/sscorexboost-jobs",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/sscorexboost-jobs.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "sscorexboost-jobs.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "jobs.scorexboost.com",
+        "www.jobs.scorexboost.com"
+      ]
+    },
+    {
+      "name": "sscorexboost-jobs.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "sunshinebeautysupplier",
+      "roots": [
+        "/home/runcloud/webapps/sunshinebeautysupplier",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "sunshinebeautysupplier.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "sunshinebeautysupplier.com",
+        "www.sunshinebeautysupplier.com"
+      ]
+    },
+    {
+      "name": "sunshinebeautysupplier.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "tapsaga",
+      "roots": [
+        "/home/runcloud/webapps/tapsaga",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/tapsaga.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "tapsaga.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "tapsaga.com",
+        "www.tapsaga.com"
+      ]
+    },
+    {
+      "name": "tapsaga.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "topfeed",
+      "roots": [
+        "/home/runcloud/webapps/topfeed",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "topfeed.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "topfeed.fun",
+        "www.topfeed.fun"
+      ]
+    },
+    {
+      "name": "topfeed.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "vagaaqui",
+      "roots": [
+        "/home/runcloud/webapps/vagaaqui",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/vagaaqui.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "vagaaqui.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "vagaaqui.com",
+        "www.vagaaqui.com"
+      ]
+    },
+    {
+      "name": "vagaaqui.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "wantabrand",
+      "roots": [
+        "/home/runcloud2/webapps/wantabrand",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "wantabrand.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "wantabrand.com",
+        "www.wantabrand.com"
+      ]
+    },
+    {
+      "name": "wantabrand.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "wavesbee",
+      "roots": [
+        "/home/runcloud/webapps/wavesbee",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "wavesbee.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "wavesbee.com",
+        "www.wavesbee.com"
+      ]
+    },
+    {
+      "name": "wavesbee.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "wr-wrnoticia",
+      "roots": [
+        "/home/runcloud/webapps/wr-wrnoticia",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/wr-wrnoticia.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "wr-wrnoticia.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "wr.wrnoticia.com",
+        "www.wr.wrnoticia.com"
+      ]
+    },
+    {
+      "name": "wr-wrnoticia.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "wrnoticia-home",
+      "roots": [
+        "/home/runcloud/webapps/wrnoticia-home",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/wrnoticia-home.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "wrnoticia-home.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "wrnoticia.com",
+        "www.wrnoticia.com"
+      ]
+    },
+    {
+      "name": "wrnoticia-home.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zerhu",
+      "roots": [
+        "/home/runcloud/webapps/zerhu",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zerhu.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "www.zerhu.com",
+        "zerhu.com"
+      ]
+    },
+    {
+      "name": "zerhu.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "ziwus",
+      "roots": [
+        "/home/runcloud/webapps/ziwus",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "ziwus.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "www.ziwus.com",
+        "ziwus.com"
+      ]
+    },
+    {
+      "name": "ziwus.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zuout-finanzas",
+      "roots": [
+        "/home/runcloud/webapps/zuout-finanzas",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zuout-finanzas.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.zuout.com",
+        "www.finanzas.zuout.com"
+      ]
+    },
+    {
+      "name": "zuout-finanzas.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zuout",
+      "roots": [
+        "/home/runcloud/webapps/zuout",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zuout.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "www.zuout.com",
+        "zuout.com"
+      ]
+    },
+    {
+      "name": "zuout.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zuploader",
+      "roots": [
+        "/home/runcloud/webapps/zuploader",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zuploader.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "www.zuploader.com",
+        "zuploader.com"
+      ]
+    },
+    {
+      "name": "zuploader.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zytiva-finanzas",
+      "roots": [
+        "/home/runcloud/webapps/zytiva-finanzas",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zytiva-finanzas.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "finanzas.zytiva.com",
+        "www.finanzas.zytiva.com"
+      ]
+    },
+    {
+      "name": "zytiva-finanzas.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zytiva",
+      "roots": [
+        "/home/runcloud/webapps/zytiva",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "zytiva.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "www.zytiva.com",
+        "zytiva.com"
+      ]
+    },
+    {
+      "name": "zytiva.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    }
+  ],
+  "explicit_advisory_settings": [
+    {
+      "file": "/etc/php85rc/php.ini",
+      "line": 1365,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php84rc/php.ini",
+      "line": 1352,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php83rc/php.ini",
+      "line": 1442,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php81rc/php.ini",
+      "line": 1423,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php80rc/php.ini",
+      "line": 1409,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php82rc/php.ini",
+      "line": 1432,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php74rc/php.ini",
+      "line": 1400,
+      "setting": "session.serialize_handler = php"
+    }
+  ],
+  "cli": {
+    "/usr/bin/php": {
+      "exit": 0,
+      "version": [
+        "PHP 8.1.34 (cli) (built: Jan 12 2026 06:15:00) (NTS)"
+      ]
+    }
+  },
+  "ubuntu_cve_changelog": [],
+  "target": "MatteiInc01",
+  "exit": 0
+}

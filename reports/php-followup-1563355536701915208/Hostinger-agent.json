@@ -1,0 +1,91 @@
+{
+  "observed_at": "2026-10-24T01:00:11.140956+00:00",
+  "host": "srv1767265",
+  "kernel": "6.8.0-147-generic",
+  "uid": 0,
+  "os": {
+    "PRETTY_NAME": "Ubuntu 24.04.5 LTS",
+    "VERSION_ID": "24.04",
+    "ID": "ubuntu"
+  },
+  "runtime_processes": [],
+  "runtimes": [],
+  "php_packages": {
+    "php-cli": "2:8.3+93ubuntu2",
+    "php-common": "2:93ubuntu2",
+    "php8.3-cli": "8.3.6-0ubuntu0.24.04.13",
+    "php8.3-common": "8.3.6-0ubuntu0.24.04.13",
+    "php8.3-opcache": "8.3.6-0ubuntu0.24.04.13",
+    "php8.3-readline": "8.3.6-0ubuntu0.24.04.13"
+  },
+  "services": {
+    "phpsessionclean.service": {
+      "MainPID": "0",
+      "ExecMainStartTimestamp": "Fri 2026-10-23 20:39:13 EDT",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    }
+  },
+  "failed_units": [],
+  "reboot_required": false,
+  "dpkg_audit": "",
+  "legacy_fpm_active": [],
+  "runcloud_apps": [],
+  "explicit_advisory_settings": [
+    {
+      "file": "/etc/php/8.3/cli/php.ini",
+      "line": 1442,
+      "setting": "session.serialize_handler = php"
+    }
+  ],
+  "cli": {
+    "/usr/bin/php": {
+      "exit": 0,
+      "version": [
+        "PHP 8.3.6 (cli) (built: Oct 19 2026 15:16:58) (NTS)"
+      ]
+    },
+    "/usr/bin/php8.3": {
+      "exit": 0,
+      "version": [
+        "PHP 8.3.6 (cli) (built: Oct 19 2026 15:16:58) (NTS)"
+      ]
+    }
+  },
+  "ubuntu_cve_changelog": [
+    {
+      "file": "/usr/share/doc/php8.3-opcache/changelog.Debian.gz",
+      "hits": [
+        "- debian/patches/CVE-2026-109618_109619.patch: Avoid state corruption via",
+        "    - CVE-2026-109618",
+        "    - CVE-2026-109619"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-cli/changelog.Debian.gz",
+      "hits": [
+        "- debian/patches/CVE-2026-109618_109619.patch: Avoid state corruption via",
+        "    - CVE-2026-109618",
+        "    - CVE-2026-109619"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-readline/changelog.Debian.gz",
+      "hits": [
+        "- debian/patches/CVE-2026-109618_109619.patch: Avoid state corruption via",
+        "    - CVE-2026-109618",
+        "    - CVE-2026-109619"
+      ]
+    },
+    {
+      "file": "/usr/share/doc/php8.3-common/changelog.Debian.gz",
+      "hits": [
+        "- debian/patches/CVE-2026-109618_109619.patch: Avoid state corruption via",
+        "    - CVE-2026-109618",
+        "    - CVE-2026-109619"
+      ]
+    }
+  ],
+  "target": "Hostinger-agent",
+  "exit": 0
+}

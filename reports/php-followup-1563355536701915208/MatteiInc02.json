@@ -1,0 +1,864 @@
+{
+  "observed_at": "2026-10-24T01:00:13.399973+00:00",
+  "host": "MatteiInc02",
+  "kernel": "5.15.0-198-generic",
+  "uid": 0,
+  "os": {
+    "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+    "VERSION_ID": "22.04",
+    "ID": "ubuntu"
+  },
+  "runtime_processes": [
+    {
+      "pid": 1024,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: master process (/etc/php83rc/php-fpm.conf)"
+    },
+    {
+      "pid": 263124,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool cliquetsr"
+    },
+    {
+      "pid": 263129,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool cliquetsrf"
+    },
+    {
+      "pid": 265587,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool openzedsr"
+    },
+    {
+      "pid": 280059,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool datinghubpro"
+    },
+    {
+      "pid": 281455,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool all-autolan"
+    },
+    {
+      "pid": 283975,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool openzedsrf"
+    },
+    {
+      "pid": 284124,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool autocreditadxx"
+    },
+    {
+      "pid": 285970,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool financiarveiculo"
+    },
+    {
+      "pid": 286084,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool financiamentoautoadx"
+    },
+    {
+      "pid": 286230,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool autolendpro"
+    },
+    {
+      "pid": 286360,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool gamehubad"
+    },
+    {
+      "pid": 286668,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool carcreditad"
+    },
+    {
+      "pid": 286970,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool gamingadx"
+    },
+    {
+      "pid": 287099,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool gamezonead"
+    },
+    {
+      "pid": 287264,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool creditoparaveiculo"
+    },
+    {
+      "pid": 287270,
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "title": "php-fpm: pool gamezonead"
+    }
+  ],
+  "runtimes": [
+    {
+      "exe": "/RunCloud/Packages/php83rc/sbin/php-fpm",
+      "running_pids": [
+        1024,
+        263124,
+        263129,
+        265587,
+        280059,
+        281455,
+        283975,
+        284124,
+        285970,
+        286084,
+        286230,
+        286360,
+        286668,
+        286970,
+        287099,
+        287264,
+        287270
+      ],
+      "version_exit": 0,
+      "version": [
+        "PHP 8.3.36 (fpm-fcgi) (built: Oct 21 2026 16:02:34)",
+        "Copyright (c) The PHP Group"
+      ],
+      "info_exit": 0,
+      "info": [
+        "PHP Version => 8.3.36",
+        "Loaded Configuration File => /etc/php83rc/php.ini",
+        "Scan this dir for additional .ini files => /etc/php83rc/conf.d",
+        "Additional .ini files parsed => /etc/php83rc/conf.d/10mysqlnd.ini,",
+        "PHP Version => 8.3.36",
+        "session.serialize_handler => php => php",
+        "session.upload_progress.enabled => On => On"
+      ],
+      "config_test_exit": 0,
+      "pool_relevant_config": [
+        "[global]",
+        "[all-autolan]",
+        "listen = /var/run/all-autolan.sock",
+        "[autocreditadxx]",
+        "listen = /var/run/autocreditadxx.sock",
+        "[autolendpro]",
+        "listen = /var/run/autolendpro.sock",
+        "[carcreditad]",
+        "listen = /var/run/carcreditad.sock",
+        "[cliquetsr]",
+        "listen = /var/run/cliquetsr.sock",
+        "[cliquetsrf]",
+        "listen = /var/run/cliquetsrf.sock",
+        "[creditoparaveiculo]",
+        "listen = /var/run/creditoparaveiculo.sock",
+        "[datinghubpro]",
+        "listen = /var/run/datinghubpro.sock",
+        "[financiamentoautoadx]",
+        "listen = /var/run/financiamentoautoadx.sock",
+        "[financiarveiculo]",
+        "listen = /var/run/financiarveiculo.sock",
+        "[gamehubad]",
+        "listen = /var/run/gamehubad.sock",
+        "[gamezonead]",
+        "listen = /var/run/gamezonead.sock",
+        "[gamingadx]",
+        "listen = /var/run/gamingadx.sock",
+        "[openzedsr]",
+        "listen = /var/run/openzedsr.sock",
+        "[openzedsrf]",
+        "listen = /var/run/openzedsrf.sock",
+        "[emptypool]",
+        "listen = /var/run/php83rc.empty.sock"
+      ],
+      "owning_packages": [
+        "php83rc: /RunCloud/Packages/php83rc/sbin/php-fpm"
+      ]
+    }
+  ],
+  "php_packages": {
+    "php74rc": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-bcmath": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-common": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-compression": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-curl": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-essentials": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-gd": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-imap": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-intl": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-json": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-mbstring": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-mysql": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-mysqli": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-opcache": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-pecl-igbinary": "3.2.9-1+ubuntu22.04+2",
+    "php74rc-pecl-memcache": "8.0-1+ubuntu22.04+1",
+    "php74rc-pecl-memcached": "3.2.0-1+ubuntu22.04+2",
+    "php74rc-pecl-msgpack": "2.1.2-1+ubuntu22.04+1",
+    "php74rc-pecl-redis": "5.3.7-1+ubuntu22.04+2",
+    "php74rc-pecl-swoole": "4.8.12-1+ubuntu22.04+1",
+    "php74rc-process": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-pspell": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-realpath-turbo": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-soap": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-sodium": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-sqlite": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-tidy": "7.4.33-1+ubuntu22.04+1",
+    "php74rc-xml": "7.4.33-1+ubuntu22.04+1",
+    "php80rc": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-bcmath": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-common": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-compression": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-curl": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-essentials": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-gd": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-imap": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-intl": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-mbstring": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-mysql": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-mysqli": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-opcache": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-pecl-igbinary": "3.2.15-1+ubuntu22.04+1",
+    "php80rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php80rc-pecl-memcached": "3.2.0-1+ubuntu22.04+2",
+    "php80rc-pecl-msgpack": "2.2.0-1+ubuntu22.04+1",
+    "php80rc-pecl-redis": "6.0.2-1+ubuntu22.04+1",
+    "php80rc-pecl-swoole": "5.1.1-1+ubuntu22.04+1",
+    "php80rc-pecl-timezonedb": "2023.3-1+ubuntu22.04+1",
+    "php80rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php80rc-process": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-pspell": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-realpath-turbo": "8.0.30-1+ubuntu22.04+1",
+    "php80rc-soap": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-sodium": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-sqlite": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-tidy": "8.0.30-1+ubuntu22.04+2",
+    "php80rc-xml": "8.0.30-1+ubuntu22.04+2",
+    "php81rc": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-bcmath": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-common": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-compression": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-curl": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-essentials": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-gd": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-imap": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-intl": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-mbstring": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-mysql": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-mysqli": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-opcache": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php81rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php81rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php81rc-pecl-msgpack": "3.0.0-1+ubuntu22.04+1",
+    "php81rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php81rc-pecl-swoole": "6.1.6-1+ubuntu22.04+1",
+    "php81rc-pecl-timezonedb": "2025.2.2-1+ubuntu22.04+1",
+    "php81rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php81rc-process": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-pspell": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-realpath-turbo": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-soap": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-sodium": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-sqlite": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-tidy": "8.1.34-1+ubuntu22.04+1",
+    "php81rc-xml": "8.1.34-1+ubuntu22.04+1",
+    "php82rc": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-bcmath": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-common": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-compression": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-curl": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-essentials": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-gd": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-imap": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-intl": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-mbstring": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-mysql": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-mysqli": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-opcache": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php82rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php82rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php82rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php82rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php82rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php82rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php82rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php82rc-process": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-pspell": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-realpath-turbo": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-soap": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-sodium": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-sqlite": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-tidy": "8.2.35-1+ubuntu22.04+1",
+    "php82rc-xml": "8.2.35-1+ubuntu22.04+1",
+    "php83rc": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-bcmath": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-common": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-compression": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-curl": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-essentials": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-gd": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-imap": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-intl": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-mbstring": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-mysql": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-mysqli": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-opcache": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php83rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php83rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php83rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php83rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php83rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php83rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php83rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php83rc-process": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-pspell": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-realpath-turbo": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-soap": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-sodium": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-sqlite": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-tidy": "8.3.36-1+ubuntu22.04+1",
+    "php83rc-xml": "8.3.36-1+ubuntu22.04+1",
+    "php84rc": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-bcmath": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-common": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-compression": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-curl": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-essentials": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-gd": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-intl": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-mbstring": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-mysql": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-mysqli": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-opcache": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php84rc-pecl-memcache": "8.2-1+ubuntu22.04+1",
+    "php84rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php84rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php84rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php84rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php84rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php84rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php84rc-process": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-realpath-turbo": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-soap": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-sodium": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-sqlite": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-tidy": "8.4.27-1+ubuntu22.04+1",
+    "php84rc-xml": "8.4.27-1+ubuntu22.04+1",
+    "php85rc": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-bcmath": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-common": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-compression": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-curl": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-essentials": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-gd": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-intl": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-mbstring": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-mysql": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-mysqli": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-pecl-igbinary": "3.2.17RC1-1+ubuntu22.04+1",
+    "php85rc-pecl-memcached": "3.4.0-1+ubuntu22.04+1",
+    "php85rc-pecl-msgpack": "3.0.1-1+ubuntu22.04+1",
+    "php85rc-pecl-redis": "6.3.0-1+ubuntu22.04+1",
+    "php85rc-pecl-swoole": "6.2.1-1+ubuntu22.04+1",
+    "php85rc-pecl-timezonedb": "2026.1-1+ubuntu22.04+1",
+    "php85rc-pecl-xmlrpc": "1.0.0RC3-1+ubuntu22.04+1",
+    "php85rc-process": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-realpath-turbo": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-soap": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-sodium": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-sqlite": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-tidy": "8.5.12-1+ubuntu22.04+1",
+    "php85rc-xml": "8.5.12-1+ubuntu22.04+1"
+  },
+  "services": {
+    "apache2-rc.service": {
+      "MainPID": "1359",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:20:33 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "nginx-rc.service": {
+      "MainPID": "1537",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:20:33 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "php83rc-fpm.service": {
+      "MainPID": "1024",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:20:16 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    },
+    "runcloud-agent.service": {
+      "MainPID": "992",
+      "ExecMainStartTimestamp": "Thu 2026-10-22 18:20:16 UTC",
+      "ActiveState": "active",
+      "SubState": "running"
+    }
+  },
+  "failed_units": [],
+  "reboot_required": false,
+  "dpkg_audit": "",
+  "legacy_fpm_active": [],
+  "runcloud_apps": [
+    {
+      "name": "all-autolan",
+      "roots": [
+        "/home/runcloud/webapps/all-autolan",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/all-autolan.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "all-autolan.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "allautolan.matteiservicesinc.com",
+        "www.allautolan.matteiservicesinc.com"
+      ]
+    },
+    {
+      "name": "all-autolan.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "autocreditadxx",
+      "roots": [
+        "/home/runcloud2/webapps/autocreditadxx",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/autocreditadxx.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "autocreditadxx.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "autocreditadx.com",
+        "www.autocreditadx.com"
+      ]
+    },
+    {
+      "name": "autocreditadxx.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "autolendpro",
+      "roots": [
+        "/home/runcloud2/webapps/autolendpro",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/autolendpro.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "autolendpro.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "autolendpro.com",
+        "www.autolendpro.com"
+      ]
+    },
+    {
+      "name": "autolendpro.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "carcreditad",
+      "roots": [
+        "/home/runcloud2/webapps/carcreditad",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/carcreditad.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "carcreditad.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "carcreditad.com",
+        "www.carcreditad.com"
+      ]
+    },
+    {
+      "name": "carcreditad.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "cliquetsr",
+      "roots": [
+        "/home/runcloud/webapps/cliquetsr",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "cliquetsr.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "sr.cliquet.com",
+        "www.sr.cliquet.com"
+      ]
+    },
+    {
+      "name": "cliquetsr.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "cliquetsrf",
+      "roots": [
+        "/home/runcloud/webapps/cliquetsrf",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "cliquetsrf.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "srf.cliquet.com",
+        "www.srf.cliquet.com"
+      ]
+    },
+    {
+      "name": "cliquetsrf.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "creditoparaveiculo",
+      "roots": [
+        "/home/runcloud2/webapps/creditoparaveiculo",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/creditoparaveiculo.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "creditoparaveiculo.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "creditoparaveiculo.com",
+        "www.creditoparaveiculo.com"
+      ]
+    },
+    {
+      "name": "creditoparaveiculo.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "datinghubpro",
+      "roots": [
+        "/home/runcloud/webapps/datinghubpro",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "datinghubpro.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "datinghubpro.com",
+        "www.datinghubpro.com"
+      ]
+    },
+    {
+      "name": "datinghubpro.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "financiamentoautoadx",
+      "roots": [
+        "/home/runcloud2/webapps/financiamentoautoadx",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/financiamentoautoadx.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "financiamentoautoadx.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "financiamentoautoadx.com",
+        "www.financiamentoautoadx.com"
+      ]
+    },
+    {
+      "name": "financiamentoautoadx.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "financiarveiculo",
+      "roots": [
+        "/home/runcloud2/webapps/financiarveiculo",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/financiarveiculo.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "financiarveiculo.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "financiarveiculo.com",
+        "www.financiarveiculo.com"
+      ]
+    },
+    {
+      "name": "financiarveiculo.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "gamehubad",
+      "roots": [
+        "/home/runcloud2/webapps/gamehubad",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/gamehubad.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "gamehubad.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "gamehubad.com",
+        "www.gamehubad.com"
+      ]
+    },
+    {
+      "name": "gamehubad.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "gamezonead",
+      "roots": [
+        "/home/runcloud2/webapps/gamezonead",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/gamezonead.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "gamezonead.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "gamezonead.com",
+        "www.gamezonead.com"
+      ]
+    },
+    {
+      "name": "gamezonead.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "gamingadx",
+      "roots": [
+        "/home/runcloud2/webapps/gamingadx",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [
+        "unix:/var/run/gamingadx.sock"
+      ],
+      "domains": []
+    },
+    {
+      "name": "gamingadx.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "gamingadx.com",
+        "www.gamingadx.com"
+      ]
+    },
+    {
+      "name": "gamingadx.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "openzedsr",
+      "roots": [
+        "/home/runcloud/webapps/openzedsr",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "openzedsr.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "sr.openzed.com",
+        "www.sr.openzed.com"
+      ]
+    },
+    {
+      "name": "openzedsr.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "openzedsrf",
+      "roots": [
+        "/home/runcloud/webapps/openzedsrf",
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": []
+    },
+    {
+      "name": "openzedsrf.domains",
+      "roots": [
+        "/opt/RunCloud/letsencrypt"
+      ],
+      "fastcgi_pass": [],
+      "domains": [
+        "srf.openzed.com",
+        "www.srf.openzed.com"
+      ]
+    },
+    {
+      "name": "openzedsrf.ssl",
+      "roots": [],
+      "fastcgi_pass": [],
+      "domains": []
+    }
+  ],
+  "explicit_advisory_settings": [
+    {
+      "file": "/etc/php74rc/php.ini",
+      "line": 1400,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php82rc/php.ini",
+      "line": 1432,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php80rc/php.ini",
+      "line": 1409,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php83rc/php.ini",
+      "line": 1442,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php85rc/php.ini",
+      "line": 1365,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php81rc/php.ini",
+      "line": 1423,
+      "setting": "session.serialize_handler = php"
+    },
+    {
+      "file": "/etc/php84rc/php.ini",
+      "line": 1352,
+      "setting": "session.serialize_handler = php"
+    }
+  ],
+  "cli": {
+    "/usr/bin/php": {
+      "exit": 0,
+      "version": [
+        "PHP 8.1.34 (cli) (built: Jan 12 2026 06:15:00) (NTS)"
+      ]
+    }
+  },
+  "ubuntu_cve_changelog": [],
+  "target": "MatteiInc02",
+  "exit": 0
+}
