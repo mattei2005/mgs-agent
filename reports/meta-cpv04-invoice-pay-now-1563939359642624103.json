@@ -1,0 +1,129 @@
+{
+  "request_message": "1563939359642624103",
+  "verified_at": "2026-10-25T11:37:53.259614-04:00",
+  "source": "Meta Graph v26.0 complete Business invoice pagination, joined by exact ad_account_ids; account identity and current balance GET",
+  "business_invoices_enumerated": 152,
+  "matched_invoices": [
+    {
+      "id": "1669066641561935",
+      "invoice_id": "26877313",
+      "ad_account_ids": [
+        "2633813727134360"
+      ],
+      "currency": "USD",
+      "amount": "3708813",
+      "amount_due": {
+        "amount": "0.00",
+        "amount_in_hundredths": "0",
+        "currency": "USD",
+        "offsetted_amount": "0"
+      },
+      "payment_status": "Paid",
+      "invoice_date": "2026-10-02T00:05:58+0000",
+      "billing_period": "2026-09-01",
+      "due_date": "2026-10-31T07:00:00+0000",
+      "amount_major": "37088.13",
+      "due_major": "0"
+    },
+    {
+      "id": "1341938591070069",
+      "invoice_id": "26826776",
+      "ad_account_ids": [
+        "2633813727134360"
+      ],
+      "currency": "USD",
+      "amount": "875024",
+      "amount_due": {
+        "amount": "0.00",
+        "amount_in_hundredths": "0",
+        "currency": "USD",
+        "offsetted_amount": "0"
+      },
+      "payment_status": "Paid",
+      "invoice_date": "2026-09-02T00:43:14+0000",
+      "billing_period": "2026-08-01",
+      "due_date": "2026-10-01T07:00:00+0000",
+      "amount_major": "8750.24",
+      "due_major": "0"
+    },
+    {
+      "id": "1537836513982425",
+      "invoice_id": "26790129",
+      "ad_account_ids": [
+        "2633813727134360"
+      ],
+      "currency": "USD",
+      "amount": "554268",
+      "amount_due": {
+        "amount": "0.00",
+        "amount_in_hundredths": "0",
+        "currency": "USD",
+        "offsetted_amount": "0"
+      },
+      "payment_status": "Paid",
+      "invoice_date": "2026-08-02T00:25:41+0000",
+      "billing_period": "2026-07-01",
+      "due_date": "2026-08-31T07:00:00+0000",
+      "amount_major": "5542.68",
+      "due_major": "0"
+    },
+    {
+      "id": "1337667648556983",
+      "invoice_id": "26715756",
+      "ad_account_ids": [
+        "2633813727134360"
+      ],
+      "currency": "USD",
+      "amount": "7345",
+      "amount_due": {
+        "amount": "0.00",
+        "amount_in_hundredths": "0",
+        "currency": "USD",
+        "offsetted_amount": "0"
+      },
+      "payment_status": "Paid",
+      "invoice_date": "2026-07-02T03:22:46+0000",
+      "billing_period": "2026-06-01",
+      "due_date": "2026-07-31T07:00:00+0000",
+      "amount_major": "73.45",
+      "due_major": "0"
+    }
+  ],
+  "account": {
+    "account_id": "2633813727134360",
+    "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+    "business": {
+      "id": "155263197283282",
+      "name": "Digital Trust"
+    },
+    "currency": "USD",
+    "balance": "2261230",
+    "timezone_name": "America/Sao_Paulo",
+    "id": "act_2633813727134360",
+    "funding": {
+      "type": 4,
+      "display_string": "monthly invoicing"
+    }
+  },
+  "current_balance": "22612.3",
+  "current_october_spend": [
+    {
+      "account_id": "2633813727134360",
+      "account_currency": "USD",
+      "spend": "31405.24",
+      "date_start": "2026-10-01",
+      "date_stop": "2026-10-25"
+    }
+  ],
+  "screenshot": {
+    "balance": "22612.30",
+    "amount_you_can_pay_now": "7312.05",
+    "difference": "15300.25",
+    "period": "2026-10-01 to 2026-10-25",
+    "method_selected": "American Express •••• 3005"
+  },
+  "difference_matches_any_invoice_total": [],
+  "difference_matches_any_invoice_due": [],
+  "unpaid_invoice_due_total": "0",
+  "meta_writes": 0
+}
