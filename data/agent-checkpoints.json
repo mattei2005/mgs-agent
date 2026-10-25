@@ -3462,6 +3462,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-RECOVERY-1563920408531435650",
+      "next_step": "Testar correção de replay em candidato isolado, publicar sob locks e retomar cadeia com readback.",
+      "objective": "Corrigir bloqueio técnico e fechar gastos/GAM de 24/10 preservando SMS e classificações aprovadas.",
+      "source": "discord:1563920408531435650",
+      "state": "diagnóstico confirmado: rollover esquece proteção de site após omitir do recibo; tenta regredir growpowerhub us para de. nenhuma corrupção persistida; cálculo atual passa.",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-10-25T14:23:24+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-RELEASE-GUARD-1551985522380111956",
       "next_step": "Proteção encerrada; confirmar separadamente competência/vigência de J2fixo5.08 antes de reparar cotação automática; não restaurar fórmula nem aplicar taxa globalmente por inferência.",
       "objective": "Automatizar publicação coordenada sem perder execuções financeiras agendadas",
@@ -7272,5 +7282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-24T12:49:30+00:00"
+  "updated_at": "2026-10-25T14:23:24+00:00"
 }
