@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-25T14:15:35-04:00",
+    "updated_at": "2026-10-25T15:15:21.460104-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -52688,6 +52688,13 @@
     },
     {
       "entry": "47 7 * * * /usr/bin/flock -n /var/lock/ares-shein-daily-scheduler.lock /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-daily-cron.py >> /root/mgs-agent/logs/ares-shein-daily-report.log 2>&1"
+    },
+    {
+      "entry": "Hermes zeus 2ee720363d7d: 2 8,14,21 * * * America/New_York",
+      "job_id": "2ee720363d7d",
+      "description": "47 IDs; API C/E/G/H, new-card instrument D,39 UI Pay now modals F each tick; zero payments.",
+      "updated_at": "2026-10-25T15:15:21.460104-04:00",
+      "contract": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json"
     }
   ],
   "scripts": [
@@ -54555,6 +54562,31 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/publish_pay_now.py",
+      "size_bytes": 10339,
+      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_pay_now.py",
+      "size_bytes": 7884,
+      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py",
+      "size_bytes": 11448,
+      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py",
+      "size_bytes": 5359,
+      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+      "size_bytes": 6365,
+      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
     }
   ],
   "skills_mgs": [
@@ -56878,7 +56910,24 @@
       {
         "name": "meta-manual-payments-planning",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "version": "0.3.0",
+        "updated_at": "2026-10-25T15:15:21.460104-04:00",
+        "pay_now_column": "F",
+        "balance_column": "G",
+        "spend_column": "H",
+        "credit_line_pay_now_accounts": 39,
+        "authority": "1563981039230255186",
+        "validation_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186/closure.json",
+        "cron_job_id": "2ee720363d7d",
+        "automation_scripts": [
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/publish_pay_now.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_pay_now.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py"
+        ]
       },
       {
         "name": "mgs-company-os-architecture",
@@ -58763,6 +58812,18 @@
       "size_bytes": 13564,
       "md5": "afdcfc5959759a5106b8aab48e72b14a",
       "modified_at": "2026-10-09T11:42:46-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/pc1-pay-now-ledger.json",
+      "description": "Approved Meta workbook contract, actual Pay now evidence or window hint requiring live revalidation; no credentials."
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/pc1-browser-surface.json",
+      "description": "Approved Meta workbook contract, actual Pay now evidence or window hint requiring live revalidation; no credentials."
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "description": "Approved Meta workbook contract, actual Pay now evidence or window hint requiring live revalidation; no credentials."
     }
   ],
   "mu_plugin_canonical": {

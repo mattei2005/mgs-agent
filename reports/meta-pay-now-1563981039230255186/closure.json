@@ -1,0 +1,23 @@
+{
+  "status": "pay_now_published_verified",
+  "source_message": "1563981039230255186",
+  "accounts": 39,
+  "sum_usd": "195514.29",
+  "column": "F",
+  "balance_column": "G",
+  "spend_column": "H",
+  "all_47_ids_and_links_validated": true,
+  "other_sheet_properties_preserved": true,
+  "api_refresh_after_insertion": "PASS C/E/G/H preserving F",
+  "skill_version": "0.3.0",
+  "skill_files_mirrored": 11,
+  "job_id": "2ee720363d7d",
+  "job_enabled": true,
+  "next_run_at": "2026-10-25T21:02:00-04:00",
+  "old_api_tick_observed": true,
+  "new_pay_now_scheduled_cycle_observed": false,
+  "inventory_readback": true,
+  "payments_executed": 0,
+  "verified_at": "2026-10-25T15:15:21.460104-04:00",
+  "recovered_internal_inventory_gate": "infra-discovery.sh regenerated a minimal inventory at14:15 and removed native cron annotation; upsert restored existing authorized job, no schedule duplication or Meta action."
+}
