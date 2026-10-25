@@ -1,0 +1,112 @@
+{
+  "receipt": {
+    "status": "corrected_with_explicit_remaining_verification_gap",
+    "request_message": "1563939770722156567",
+    "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+    "sheet_id": 271321738,
+    "corrected_account": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+    "corrected_value": 2000,
+    "currency": "USD",
+    "card": "Mastercard •••• 2311",
+    "date": "2026-10-22",
+    "excluded_ad_credit_values": [
+      3.54,
+      0.07
+    ],
+    "counts": {
+      "card_method_verified": 1,
+      "payment_method_unverified_value_withheld": 6,
+      "no_charge_record": 1
+    },
+    "other_sheet_fields_unchanged": true,
+    "links_averages_balances_spend_totals_preserved": true,
+    "rule_saved": "meta-ads-api-operations/SKILL.md and references/meta-card-billing-risk-analysis-2026-09-09.md",
+    "blocker": "Graph card method absent; current PC1 Chrome read reached Facebook authentication gate. No authentication or billing mutation attempted.",
+    "validator_recovery": "Only normalize verified Google RGB float precision and mirrored backgroundColorStyle; no values/formats replayed.",
+    "meta_writes": 0,
+    "verified_at": "2026-10-25T11:47:37.795774-04:00"
+  },
+  "changes": [
+    {
+      "account_id": "1046241194533786",
+      "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+      "row": 3,
+      "before_value": {
+        "numberValue": 1303
+      },
+      "after_value": null,
+      "status": "payment_method_unverified_value_withheld"
+    },
+    {
+      "account_id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "row": 4,
+      "before_value": {
+        "numberValue": 900
+      },
+      "after_value": null,
+      "status": "payment_method_unverified_value_withheld"
+    },
+    {
+      "account_id": "1481815942722118",
+      "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "row": 5,
+      "before_value": {
+        "numberValue": 3.54
+      },
+      "after_value": {
+        "numberValue": 2000
+      },
+      "status": "card_method_verified"
+    },
+    {
+      "account_id": "1762774024309795",
+      "name": "Financeadx-CA-CC-EN-01",
+      "row": 6,
+      "before_value": {
+        "numberValue": 293.13
+      },
+      "after_value": null,
+      "status": "payment_method_unverified_value_withheld"
+    },
+    {
+      "account_id": "648687381127947",
+      "name": "Financeadx-MX-CC-ES-01",
+      "row": 7,
+      "before_value": {
+        "numberValue": 741.18
+      },
+      "after_value": null,
+      "status": "payment_method_unverified_value_withheld"
+    },
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "row": 8,
+      "before_value": null,
+      "after_value": null,
+      "status": "no_charge_record"
+    },
+    {
+      "account_id": "1052719314075904",
+      "name": "Infinitynexx-MX-CC-ES-01-G001",
+      "row": 9,
+      "before_value": {
+        "numberValue": 6.61
+      },
+      "after_value": null,
+      "status": "payment_method_unverified_value_withheld"
+    },
+    {
+      "account_id": "1290644206529750",
+      "name": "OpenzedFinanzas-ES-CC-ES-02",
+      "row": 10,
+      "before_value": {
+        "numberValue": 1133.12
+      },
+      "after_value": null,
+      "status": "payment_method_unverified_value_withheld"
+    }
+  ],
+  "screenshot_source": "/root/.hermes/profiles/zeus/cache/images/img_89451f5bfbdc.png"
+}
