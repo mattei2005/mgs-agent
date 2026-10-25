@@ -1,0 +1,4133 @@
+{
+  "receipt": {
+    "status": "completed_validated",
+    "authorization_messages": [
+      "1563937040809201687",
+      "1563938261875953840"
+    ],
+    "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+    "sheet_id": 271321738,
+    "accounts": 47,
+    "last_charge_column": "D",
+    "last_charges_found": 7,
+    "last_charge_accounts_without_record": [
+      "Growpowerhub-US-SHEIN-EN-04-G004"
+    ],
+    "daily_average_column": "E",
+    "daily_average_period": {
+      "since": "2026-10-22",
+      "until": "2026-10-24",
+      "days": 3,
+      "current_day_excluded": true
+    },
+    "balance_column": "F",
+    "october_spend_column": "G",
+    "named_account_reconciliation": {
+      "read_at": "2026-10-25T11:32:01.297259-04:00",
+      "balance": "22612.3",
+      "october_spend": "31397.56",
+      "october_paid_event": "8785.26",
+      "unreconciled_difference": "0.00"
+    },
+    "totals": {
+      "average_daily": 29136.29,
+      "balance": 875883.47,
+      "october_spend": 713912.88
+    },
+    "all_account_links_preserved": true,
+    "other_tabs_unchanged": true,
+    "meta_writes": 0,
+    "verified_at": "2026-10-25T11:35:01.337365-04:00"
+  },
+  "charges": [
+    {
+      "account": {
+        "account_id": "1046241194533786",
+        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "balance": "37239",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1046241194533786",
+        "funding": {
+          "type": 1,
+          "display_string": "Mastercard *5132"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T12:28:48.270721-03:00",
+      "event_count": 37,
+      "billing_events": [
+        {
+          "event_time": "2026-10-24T23:58:28+0000",
+          "date_time_in_timezone": "10/24/2026 at 8:58 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 130300,
+            "currency": "USD"
+          },
+          "payment_amount": "1303"
+        },
+        {
+          "event_time": "2026-10-23T02:16:53+0000",
+          "date_time_in_timezone": "10/22/2026 at 11:16 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-21T12:16:49+0000",
+          "date_time_in_timezone": "10/21/2026 at 9:16 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 130300,
+            "currency": "USD"
+          },
+          "payment_amount": "1303"
+        },
+        {
+          "event_time": "2026-10-20T07:31:35+0000",
+          "date_time_in_timezone": "10/20/2026 at 4:31 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 18506,
+            "currency": "USD"
+          },
+          "payment_amount": "185.06"
+        },
+        {
+          "event_time": "2026-10-18T20:59:30+0000",
+          "date_time_in_timezone": "10/18/2026 at 5:59 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 11522,
+            "currency": "USD"
+          },
+          "payment_amount": "115.22"
+        },
+        {
+          "event_time": "2026-10-18T18:03:48+0000",
+          "date_time_in_timezone": "10/18/2026 at 3:03 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-17T12:34:18+0000",
+          "date_time_in_timezone": "10/17/2026 at 9:34 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 84700,
+            "currency": "USD"
+          },
+          "payment_amount": "847"
+        },
+        {
+          "event_time": "2026-10-15T21:27:00+0000",
+          "date_time_in_timezone": "10/15/2026 at 6:27 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 93209,
+            "currency": "USD"
+          },
+          "payment_amount": "932.09"
+        },
+        {
+          "event_time": "2026-10-14T04:11:30+0000",
+          "date_time_in_timezone": "10/14/2026 at 1:11 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 55400,
+            "currency": "USD"
+          },
+          "payment_amount": "554"
+        },
+        {
+          "event_time": "2026-10-12T13:50:41+0000",
+          "date_time_in_timezone": "10/12/2026 at 10:50 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 46333,
+            "currency": "USD"
+          },
+          "payment_amount": "463.33"
+        },
+        {
+          "event_time": "2026-10-10T10:45:53+0000",
+          "date_time_in_timezone": "10/10/2026 at 7:45 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-04T03:40:52+0000",
+          "date_time_in_timezone": "10/4/2026 at 12:40 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 130300,
+            "currency": "USD"
+          },
+          "payment_amount": "1303"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 12,
+        "update_campaign_budget": 25
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-24T23:58:28+0000",
+        "date_time_in_timezone": "10/24/2026 at 8:58 PM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 130300,
+          "currency": "USD"
+        },
+        "payment_amount": "1303"
+      }
+    },
+    {
+      "account": {
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "balance": "86419",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1150399088163771",
+        "funding": {
+          "type": 1,
+          "display_string": "Mastercard *2311"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T12:28:49.727067-03:00",
+      "event_count": 18,
+      "billing_events": [
+        {
+          "event_time": "2026-10-23T21:29:33+0000",
+          "date_time_in_timezone": "10/23/2026 at 6:29 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-22T08:30:28+0000",
+          "date_time_in_timezone": "10/22/2026 at 5:30 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-20T14:10:58+0000",
+          "date_time_in_timezone": "10/20/2026 at 11:10 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-18T20:57:52+0000",
+          "date_time_in_timezone": "10/18/2026 at 5:57 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 60760,
+            "currency": "USD"
+          },
+          "payment_amount": "607.6"
+        },
+        {
+          "event_time": "2026-10-17T21:51:45+0000",
+          "date_time_in_timezone": "10/17/2026 at 6:51 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-17T07:31:57+0000",
+          "date_time_in_timezone": "10/17/2026 at 4:31 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 23091,
+            "currency": "USD"
+          },
+          "payment_amount": "230.91"
+        },
+        {
+          "event_time": "2026-10-15T17:05:56+0000",
+          "date_time_in_timezone": "10/15/2026 at 2:05 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-13T21:49:05+0000",
+          "date_time_in_timezone": "10/13/2026 at 6:49 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 24523,
+            "currency": "USD"
+          },
+          "payment_amount": "245.23"
+        },
+        {
+          "event_time": "2026-10-13T13:29:18+0000",
+          "date_time_in_timezone": "10/13/2026 at 10:29 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 57130,
+            "currency": "USD"
+          },
+          "payment_amount": "571.3"
+        },
+        {
+          "event_time": "2026-10-12T13:50:20+0000",
+          "date_time_in_timezone": "10/12/2026 at 10:50 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 50276,
+            "currency": "USD"
+          },
+          "payment_amount": "502.76"
+        },
+        {
+          "event_time": "2026-10-11T17:11:21+0000",
+          "date_time_in_timezone": "10/11/2026 at 2:11 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-09T21:57:56+0000",
+          "date_time_in_timezone": "10/9/2026 at 6:57 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-08T10:40:58+0000",
+          "date_time_in_timezone": "10/8/2026 at 7:40 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-06T16:27:46+0000",
+          "date_time_in_timezone": "10/6/2026 at 1:27 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-04T22:14:27+0000",
+          "date_time_in_timezone": "10/4/2026 at 7:14 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-03T11:29:28+0000",
+          "date_time_in_timezone": "10/3/2026 at 8:29 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        },
+        {
+          "event_time": "2026-10-01T18:23:28+0000",
+          "date_time_in_timezone": "10/1/2026 at 3:23 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 90000,
+            "currency": "USD"
+          },
+          "payment_amount": "900"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 17,
+        "update_campaign_budget": 1
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-23T21:29:33+0000",
+        "date_time_in_timezone": "10/23/2026 at 6:29 PM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 90000,
+          "currency": "USD"
+        },
+        "payment_amount": "900"
+      }
+    },
+    {
+      "account": {
+        "account_id": "1481815942722118",
+        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/New_York",
+        "balance": "177282",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1481815942722118",
+        "funding": {
+          "type": 1,
+          "display_string": "Mastercard *2311"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T11:28:50.299606-04:00",
+      "event_count": 712,
+      "billing_events": [
+        {
+          "event_time": "2026-10-24T10:28:39+0000",
+          "date_time_in_timezone": "10/24/2026 at 6:28 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 354,
+            "currency": "USD"
+          },
+          "payment_amount": "3.54"
+        },
+        {
+          "event_time": "2026-10-24T10:28:37+0000",
+          "date_time_in_timezone": "10/24/2026 at 6:28 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 7,
+            "currency": "USD"
+          },
+          "payment_amount": "0.07"
+        },
+        {
+          "event_time": "2026-10-23T01:39:50+0000",
+          "date_time_in_timezone": "10/22/2026 at 9:39 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-21T09:31:57+0000",
+          "date_time_in_timezone": "10/21/2026 at 5:31 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-20T14:40:09+0000",
+          "date_time_in_timezone": "10/20/2026 at 10:40 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 166441,
+            "currency": "USD"
+          },
+          "payment_amount": "1664.41"
+        },
+        {
+          "event_time": "2026-10-19T21:51:15+0000",
+          "date_time_in_timezone": "10/19/2026 at 5:51 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-19T01:04:44+0000",
+          "date_time_in_timezone": "10/18/2026 at 9:04 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-18T12:45:14+0000",
+          "date_time_in_timezone": "10/18/2026 at 8:45 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-17T15:01:13+0000",
+          "date_time_in_timezone": "10/17/2026 at 11:01 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-16T21:46:43+0000",
+          "date_time_in_timezone": "10/16/2026 at 5:46 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-16T03:14:51+0000",
+          "date_time_in_timezone": "10/15/2026 at 11:14 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 169855,
+            "currency": "USD"
+          },
+          "payment_amount": "1698.55"
+        },
+        {
+          "event_time": "2026-10-15T20:07:33+0000",
+          "date_time_in_timezone": "10/15/2026 at 4:07 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 1260,
+            "currency": "USD"
+          },
+          "payment_amount": "12.6"
+        },
+        {
+          "event_time": "2026-10-15T20:05:44+0000",
+          "date_time_in_timezone": "10/15/2026 at 4:05 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-15T02:57:31+0000",
+          "date_time_in_timezone": "10/14/2026 at 10:57 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-14T14:30:55+0000",
+          "date_time_in_timezone": "10/14/2026 at 10:30 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 127612,
+            "currency": "USD"
+          },
+          "payment_amount": "1276.12"
+        },
+        {
+          "event_time": "2026-10-14T04:15:07+0000",
+          "date_time_in_timezone": "10/14/2026 at 12:15 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 55951,
+            "currency": "USD"
+          },
+          "payment_amount": "559.51"
+        },
+        {
+          "event_time": "2026-10-13T21:48:38+0000",
+          "date_time_in_timezone": "10/13/2026 at 5:48 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 131380,
+            "currency": "USD"
+          },
+          "payment_amount": "1313.8"
+        },
+        {
+          "event_time": "2026-10-13T13:28:38+0000",
+          "date_time_in_timezone": "10/13/2026 at 9:28 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 198462,
+            "currency": "USD"
+          },
+          "payment_amount": "1984.62"
+        },
+        {
+          "event_time": "2026-10-13T01:25:28+0000",
+          "date_time_in_timezone": "10/12/2026 at 9:25 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 159496,
+            "currency": "USD"
+          },
+          "payment_amount": "1594.96"
+        },
+        {
+          "event_time": "2026-10-12T13:44:56+0000",
+          "date_time_in_timezone": "10/12/2026 at 9:44 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 162366,
+            "currency": "USD"
+          },
+          "payment_amount": "1623.66"
+        },
+        {
+          "event_time": "2026-10-11T15:19:14+0000",
+          "date_time_in_timezone": "10/11/2026 at 11:19 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 83500,
+            "currency": "USD"
+          },
+          "payment_amount": "835"
+        },
+        {
+          "event_time": "2026-10-11T07:04:43+0000",
+          "date_time_in_timezone": "10/11/2026 at 3:04 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 1351,
+            "currency": "USD"
+          },
+          "payment_amount": "13.51"
+        },
+        {
+          "event_time": "2026-10-10T23:23:20+0000",
+          "date_time_in_timezone": "10/10/2026 at 7:23 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 102437,
+            "currency": "USD"
+          },
+          "payment_amount": "1024.37"
+        },
+        {
+          "event_time": "2026-10-10T17:49:45+0000",
+          "date_time_in_timezone": "10/10/2026 at 1:49 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-10T00:50:45+0000",
+          "date_time_in_timezone": "10/9/2026 at 8:50 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-09T18:49:11+0000",
+          "date_time_in_timezone": "10/9/2026 at 2:49 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-09T13:27:16+0000",
+          "date_time_in_timezone": "10/9/2026 at 9:27 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-09T08:18:13+0000",
+          "date_time_in_timezone": "10/9/2026 at 4:18 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-09T04:32:21+0000",
+          "date_time_in_timezone": "10/9/2026 at 12:32 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-08T20:08:51+0000",
+          "date_time_in_timezone": "10/8/2026 at 4:08 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-08T12:58:22+0000",
+          "date_time_in_timezone": "10/8/2026 at 8:58 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-07T22:31:21+0000",
+          "date_time_in_timezone": "10/7/2026 at 6:31 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-07T13:09:54+0000",
+          "date_time_in_timezone": "10/7/2026 at 9:09 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-06T04:43:46+0000",
+          "date_time_in_timezone": "10/6/2026 at 12:43 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-06T21:52:55+0000",
+          "date_time_in_timezone": "10/6/2026 at 5:52 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-06T14:56:19+0000",
+          "date_time_in_timezone": "10/6/2026 at 10:56 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-05T17:29:47+0000",
+          "date_time_in_timezone": "10/5/2026 at 1:29 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-05T05:34:42+0000",
+          "date_time_in_timezone": "10/5/2026 at 1:34 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-04T18:57:59+0000",
+          "date_time_in_timezone": "10/4/2026 at 2:57 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-04T03:24:12+0000",
+          "date_time_in_timezone": "10/3/2026 at 11:24 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-03T16:15:21+0000",
+          "date_time_in_timezone": "10/3/2026 at 12:15 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-03T04:54:32+0000",
+          "date_time_in_timezone": "10/3/2026 at 12:54 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-02T19:12:48+0000",
+          "date_time_in_timezone": "10/2/2026 at 3:12 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-02T04:42:44+0000",
+          "date_time_in_timezone": "10/2/2026 at 12:42 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        },
+        {
+          "event_time": "2026-10-01T12:49:13+0000",
+          "date_time_in_timezone": "10/1/2026 at 8:49 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 200000,
+            "currency": "USD"
+          },
+          "payment_amount": "2000"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 45,
+        "update_campaign_budget": 667
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-24T10:28:39+0000",
+        "date_time_in_timezone": "10/24/2026 at 6:28 AM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 354,
+          "currency": "USD"
+        },
+        "payment_amount": "3.54"
+      }
+    },
+    {
+      "account": {
+        "account_id": "1762774024309795",
+        "name": "Financeadx-CA-CC-EN-01",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/Toronto",
+        "balance": "28929",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1762774024309795",
+        "funding": {
+          "type": 1,
+          "display_string": "American Express *8013"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T11:29:54.850842-04:00",
+      "event_count": 2,
+      "billing_events": [
+        {
+          "event_time": "2026-10-18T23:27:46+0000",
+          "date_time_in_timezone": "10/18/2026 at 7:27 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 29313,
+            "currency": "USD"
+          },
+          "payment_amount": "293.13"
+        },
+        {
+          "event_time": "2026-10-12T13:55:57+0000",
+          "date_time_in_timezone": "10/12/2026 at 9:55 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 59625,
+            "currency": "USD"
+          },
+          "payment_amount": "596.25"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 2
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-18T23:27:46+0000",
+        "date_time_in_timezone": "10/18/2026 at 7:27 PM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 29313,
+          "currency": "USD"
+        },
+        "payment_amount": "293.13"
+      }
+    },
+    {
+      "account": {
+        "account_id": "648687381127947",
+        "name": "Financeadx-MX-CC-ES-01",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/Mexico_City",
+        "balance": "30338",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_648687381127947",
+        "funding": {
+          "type": 1,
+          "display_string": "American Express *8013"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T09:29:55.481569-06:00",
+      "event_count": 5,
+      "billing_events": [
+        {
+          "event_time": "2026-10-23T14:53:30+0000",
+          "date_time_in_timezone": "10/23/2026 at 8:53 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 74118,
+            "currency": "USD"
+          },
+          "payment_amount": "741.18"
+        },
+        {
+          "event_time": "2026-10-18T20:59:56+0000",
+          "date_time_in_timezone": "10/18/2026 at 2:59 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 48724,
+            "currency": "USD"
+          },
+          "payment_amount": "487.24"
+        },
+        {
+          "event_time": "2026-10-15T21:25:23+0000",
+          "date_time_in_timezone": "10/15/2026 at 3:25 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 50819,
+            "currency": "USD"
+          },
+          "payment_amount": "508.19"
+        },
+        {
+          "event_time": "2026-10-12T13:53:44+0000",
+          "date_time_in_timezone": "10/12/2026 at 7:53 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 82144,
+            "currency": "USD"
+          },
+          "payment_amount": "821.44"
+        },
+        {
+          "event_time": "2026-10-08T04:02:00+0000",
+          "date_time_in_timezone": "10/7/2026 at 10:02 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 100000,
+            "currency": "USD"
+          },
+          "payment_amount": "1000"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 5
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-23T14:53:30+0000",
+        "date_time_in_timezone": "10/23/2026 at 8:53 AM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 74118,
+          "currency": "USD"
+        },
+        "payment_amount": "741.18"
+      }
+    },
+    {
+      "account": {
+        "account_id": "1419148446852410",
+        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/New_York",
+        "balance": "2251",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1419148446852410",
+        "funding": {
+          "type": 1,
+          "display_string": "American Express *2075"
+        }
+      },
+      "window": "2026-09-01 through current readback",
+      "read_at": "2026-10-25T11:29:56.105188-04:00",
+      "event_count": 0,
+      "billing_events": [],
+      "event_types": {},
+      "latest_successful_charge": null
+    },
+    {
+      "account": {
+        "account_id": "1052719314075904",
+        "name": "Infinitynexx-MX-CC-ES-01-G001",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/Mexico_City",
+        "balance": "15881",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1052719314075904",
+        "funding": {
+          "type": 1,
+          "display_string": "American Express *2075"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T09:29:56.870615-06:00",
+      "event_count": 5,
+      "billing_events": [
+        {
+          "event_time": "2026-10-14T12:26:37+0000",
+          "date_time_in_timezone": "10/14/2026 at 6:26 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 661,
+            "currency": "USD"
+          },
+          "payment_amount": "6.61"
+        },
+        {
+          "event_time": "2026-10-14T04:13:20+0000",
+          "date_time_in_timezone": "10/13/2026 at 10:13 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 35648,
+            "currency": "USD"
+          },
+          "payment_amount": "356.48"
+        },
+        {
+          "event_time": "2026-10-07T23:55:08+0000",
+          "date_time_in_timezone": "10/7/2026 at 5:55 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 91100,
+            "currency": "USD"
+          },
+          "payment_amount": "911"
+        }
+      ],
+      "event_types": {
+        "update_campaign_budget": 2,
+        "ad_account_billing_charge": 3
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-14T12:26:37+0000",
+        "date_time_in_timezone": "10/14/2026 at 6:26 AM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 661,
+          "currency": "USD"
+        },
+        "payment_amount": "6.61"
+      }
+    },
+    {
+      "account": {
+        "account_id": "1290644206529750",
+        "name": "OpenzedFinanzas-ES-CC-ES-02",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "Europe/Madrid",
+        "balance": "51378",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_1290644206529750",
+        "funding": {
+          "type": 1,
+          "display_string": "American Express *3345"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T16:29:57.815486+01:00",
+      "event_count": 7,
+      "billing_events": [
+        {
+          "event_time": "2026-10-23T14:52:54+0000",
+          "date_time_in_timezone": "10/23/2026 at 4:52 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 113312,
+            "currency": "USD"
+          },
+          "payment_amount": "1133.12"
+        },
+        {
+          "event_time": "2026-10-18T23:27:07+0000",
+          "date_time_in_timezone": "10/19/2026 at 1:27 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 84993,
+            "currency": "USD"
+          },
+          "payment_amount": "849.93"
+        },
+        {
+          "event_time": "2026-10-15T21:25:58+0000",
+          "date_time_in_timezone": "10/15/2026 at 11:25 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 56655,
+            "currency": "USD"
+          },
+          "payment_amount": "566.55"
+        },
+        {
+          "event_time": "2026-10-13T21:51:54+0000",
+          "date_time_in_timezone": "10/13/2026 at 11:51 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 32814,
+            "currency": "USD"
+          },
+          "payment_amount": "328.14"
+        },
+        {
+          "event_time": "2026-10-12T14:00:17+0000",
+          "date_time_in_timezone": "10/12/2026 at 4:00 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 82797,
+            "currency": "USD"
+          },
+          "payment_amount": "827.97"
+        },
+        {
+          "event_time": "2026-10-08T04:42:15+0000",
+          "date_time_in_timezone": "10/8/2026 at 6:42 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 23992,
+            "currency": "USD"
+          },
+          "payment_amount": "239.92"
+        },
+        {
+          "event_time": "2026-10-06T21:01:07+0000",
+          "date_time_in_timezone": "10/6/2026 at 11:01 PM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 122355,
+            "currency": "USD"
+          },
+          "payment_amount": "1223.55"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 7
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-23T14:52:54+0000",
+        "date_time_in_timezone": "10/23/2026 at 4:52 PM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 113312,
+          "currency": "USD"
+        },
+        "payment_amount": "1133.12"
+      }
+    },
+    {
+      "account": {
+        "account_id": "2633813727134360",
+        "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "currency": "USD",
+        "timezone_name": "America/Sao_Paulo",
+        "balance": "2255440",
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE",
+          "MANAGE"
+        ],
+        "id": "act_2633813727134360",
+        "funding": {
+          "type": 4,
+          "display_string": "monthly invoicing"
+        }
+      },
+      "window": "2026-10-01 through current readback",
+      "read_at": "2026-10-25T12:29:58.313591-03:00",
+      "event_count": 9,
+      "billing_events": [
+        {
+          "event_time": "2026-10-23T14:30:08+0000",
+          "date_time_in_timezone": "10/23/2026 at 11:30 AM",
+          "event_type": "ad_account_billing_charge",
+          "translated_event_type": "Account billed",
+          "extra_keys": [
+            "currency",
+            "new_value",
+            "transaction_id",
+            "action",
+            "type"
+          ],
+          "extra": {
+            "type": "payment_amount",
+            "new_value": 878526,
+            "currency": "USD"
+          },
+          "payment_amount": "8785.26"
+        }
+      ],
+      "event_types": {
+        "ad_account_billing_charge": 1,
+        "update_campaign_budget": 8
+      },
+      "latest_successful_charge": {
+        "event_time": "2026-10-23T14:30:08+0000",
+        "date_time_in_timezone": "10/23/2026 at 11:30 AM",
+        "event_type": "ad_account_billing_charge",
+        "translated_event_type": "Account billed",
+        "extra_keys": [
+          "currency",
+          "new_value",
+          "transaction_id",
+          "action",
+          "type"
+        ],
+        "extra": {
+          "type": "payment_amount",
+          "new_value": 878526,
+          "currency": "USD"
+        },
+        "payment_amount": "8785.26"
+      }
+    }
+  ],
+  "averages": {
+    "request_message": "1563938261875953840",
+    "checked_at": "2026-10-25T11:33:19.717476-04:00",
+    "accounts": [
+      {
+        "row": 3,
+        "account_id": "1046241194533786",
+        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1046241194533786",
+            "account_currency": "USD",
+            "spend": "583.63",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1046241194533786",
+            "account_currency": "USD",
+            "spend": "696.24",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1046241194533786",
+            "account_currency": "USD",
+            "spend": "709.08",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "1988.95",
+        "average_daily": "662.98",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 4,
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1150399088163771",
+            "account_currency": "USD",
+            "spend": "561.91",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1150399088163771",
+            "account_currency": "USD",
+            "spend": "517.75",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1150399088163771",
+            "account_currency": "USD",
+            "spend": "497.9",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "1577.56",
+        "average_daily": "525.85",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 5,
+        "account_id": "1481815942722118",
+        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1481815942722118",
+            "account_currency": "USD",
+            "spend": "632.39",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1481815942722118",
+            "account_currency": "USD",
+            "spend": "921.5",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1481815942722118",
+            "account_currency": "USD",
+            "spend": "557.82",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "2111.71",
+        "average_daily": "703.90",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 6,
+        "account_id": "1762774024309795",
+        "name": "Financeadx-CA-CC-EN-01",
+        "currency": "USD",
+        "timezone": "America/Toronto",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1762774024309795",
+            "account_currency": "USD",
+            "spend": "43.32",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1762774024309795",
+            "account_currency": "USD",
+            "spend": "42.95",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1762774024309795",
+            "account_currency": "USD",
+            "spend": "40.12",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "126.39",
+        "average_daily": "42.13",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 7,
+        "account_id": "648687381127947",
+        "name": "Financeadx-MX-CC-ES-01",
+        "currency": "USD",
+        "timezone": "America/Mexico_City",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "648687381127947",
+            "account_currency": "USD",
+            "spend": "139.96",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "648687381127947",
+            "account_currency": "USD",
+            "spend": "158.04",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "648687381127947",
+            "account_currency": "USD",
+            "spend": "140.82",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "438.82",
+        "average_daily": "146.27",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 8,
+        "account_id": "1419148446852410",
+        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1419148446852410",
+            "account_currency": "USD",
+            "spend": "8.85",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1419148446852410",
+            "account_currency": "USD",
+            "spend": "11.83",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "20.68",
+        "average_daily": "6.89",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 9,
+        "account_id": "1052719314075904",
+        "name": "Infinitynexx-MX-CC-ES-01-G001",
+        "currency": "USD",
+        "timezone": "America/Mexico_City",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 10,
+        "account_id": "1290644206529750",
+        "name": "OpenzedFinanzas-ES-CC-ES-02",
+        "currency": "USD",
+        "timezone": "Europe/Madrid",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1290644206529750",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "231.59"
+          },
+          {
+            "account_id": "1290644206529750",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "252.34"
+          },
+          {
+            "account_id": "1290644206529750",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "248.66"
+          }
+        ],
+        "total_3_days": "732.59",
+        "average_daily": "244.20",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 14,
+        "account_id": "1753257812779707",
+        "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1753257812779707",
+            "account_currency": "USD",
+            "spend": "45.76",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1753257812779707",
+            "account_currency": "USD",
+            "spend": "47.85",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1753257812779707",
+            "account_currency": "USD",
+            "spend": "60.65",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "154.26",
+        "average_daily": "51.42",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 15,
+        "account_id": "1107653168698121",
+        "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1107653168698121",
+            "account_currency": "USD",
+            "spend": "980.2",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1107653168698121",
+            "account_currency": "USD",
+            "spend": "386.63",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1107653168698121",
+            "account_currency": "USD",
+            "spend": "355.05",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "1721.88",
+        "average_daily": "573.96",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 16,
+        "account_id": "2633813727134360",
+        "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "2633813727134360",
+            "account_currency": "USD",
+            "spend": "1191.98",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "2633813727134360",
+            "account_currency": "USD",
+            "spend": "1162.14",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "2633813727134360",
+            "account_currency": "USD",
+            "spend": "1138.36",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "3492.48",
+        "average_daily": "1164.16",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 17,
+        "account_id": "2039876850230678",
+        "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 18,
+        "account_id": "1851640026221079",
+        "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1851640026221079",
+            "account_currency": "USD",
+            "spend": "343.18",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1851640026221079",
+            "account_currency": "USD",
+            "spend": "318.34",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1851640026221079",
+            "account_currency": "USD",
+            "spend": "336.28",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "997.8",
+        "average_daily": "332.60",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 19,
+        "account_id": "1001115192056600",
+        "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1001115192056600",
+            "account_currency": "USD",
+            "spend": "208.44",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1001115192056600",
+            "account_currency": "USD",
+            "spend": "442.49",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1001115192056600",
+            "account_currency": "USD",
+            "spend": "321.9",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "972.83",
+        "average_daily": "324.28",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 20,
+        "account_id": "1018267074603840",
+        "name": "Escalatepower-US-SHEIN-EN-01-G001",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1018267074603840",
+            "account_currency": "USD",
+            "spend": "49.6",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1018267074603840",
+            "account_currency": "USD",
+            "spend": "37.97",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1018267074603840",
+            "account_currency": "USD",
+            "spend": "116.65",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "204.22",
+        "average_daily": "68.07",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 21,
+        "account_id": "1062887799996139",
+        "name": "Escalatepower-US-SHEIN-EN-02-G002",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1062887799996139",
+            "account_currency": "USD",
+            "spend": "29.65",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1062887799996139",
+            "account_currency": "USD",
+            "spend": "36.4",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1062887799996139",
+            "account_currency": "USD",
+            "spend": "48.78",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "114.83",
+        "average_daily": "38.28",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 22,
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1062446663435585",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "87.8"
+          },
+          {
+            "account_id": "1062446663435585",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "77.15"
+          },
+          {
+            "account_id": "1062446663435585",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "72.04"
+          }
+        ],
+        "total_3_days": "236.99",
+        "average_daily": "79.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 23,
+        "account_id": "2031917360813819",
+        "name": "Escalatepower-US-SHEIN-EN-04-G004",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "2031917360813819",
+            "account_currency": "USD",
+            "spend": "14.65",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "2031917360813819",
+            "account_currency": "USD",
+            "spend": "12.91",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "2031917360813819",
+            "account_currency": "USD",
+            "spend": "27.64",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "55.2",
+        "average_daily": "18.40",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 24,
+        "account_id": "897046653487466",
+        "name": "Escalatepower-US-SHEIN-EN-05-G005",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "897046653487466",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "18.64"
+          },
+          {
+            "account_id": "897046653487466",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "23.46"
+          },
+          {
+            "account_id": "897046653487466",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "15.13"
+          }
+        ],
+        "total_3_days": "57.23",
+        "average_daily": "19.08",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 25,
+        "account_id": "1498990138663094",
+        "name": "Escalatepower-US-SHEIN-EN-06-G006",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1498990138663094",
+            "account_currency": "USD",
+            "spend": "75.24",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1498990138663094",
+            "account_currency": "USD",
+            "spend": "81.47",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1498990138663094",
+            "account_currency": "USD",
+            "spend": "83.92",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "240.63",
+        "average_daily": "80.21",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 26,
+        "account_id": "814915838330687",
+        "name": "Helixenit-MX-CC-ES-01",
+        "currency": "USD",
+        "timezone": "America/Mexico_City",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "814915838330687",
+            "account_currency": "USD",
+            "spend": "59.96",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "814915838330687",
+            "account_currency": "USD",
+            "spend": "73.3",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "814915838330687",
+            "account_currency": "USD",
+            "spend": "27.35",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "160.61",
+        "average_daily": "53.54",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 27,
+        "account_id": "3188620887977617",
+        "name": "Infinitynexx-MX-CC-ES-01",
+        "currency": "USD",
+        "timezone": "America/Mexico_City",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 28,
+        "account_id": "3752157451670648",
+        "name": "Lyzmo-US-CC-EN-01",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 29,
+        "account_id": "4511685129081248",
+        "name": "Mavroa-US-SHEIN-ES-01-G001",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "4511685129081248",
+            "account_currency": "USD",
+            "spend": "60.73",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "4511685129081248",
+            "account_currency": "USD",
+            "spend": "57.88",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "4511685129081248",
+            "account_currency": "USD",
+            "spend": "48.71",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "167.32",
+        "average_daily": "55.77",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 30,
+        "account_id": "1414197490675732",
+        "name": "Mavroa-US-SHEIN-ES-02-G002",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1414197490675732",
+            "account_currency": "USD",
+            "spend": "56.76",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1414197490675732",
+            "account_currency": "USD",
+            "spend": "50.15",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1414197490675732",
+            "account_currency": "USD",
+            "spend": "53.14",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "160.05",
+        "average_daily": "53.35",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 31,
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1543098427832443",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "28.36"
+          },
+          {
+            "account_id": "1543098427832443",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "58.94"
+          },
+          {
+            "account_id": "1543098427832443",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "52.4"
+          }
+        ],
+        "total_3_days": "139.7",
+        "average_daily": "46.57",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 32,
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "2852476828464907",
+            "account_currency": "USD",
+            "spend": "33.64",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "2852476828464907",
+            "account_currency": "USD",
+            "spend": "17.15",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "2852476828464907",
+            "account_currency": "USD",
+            "spend": "44.68",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "95.47",
+        "average_daily": "31.82",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 33,
+        "account_id": "1829406761389732",
+        "name": "Mavroa-US-SHEIN-ES-05-G005",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1829406761389732",
+            "account_currency": "USD",
+            "spend": "18.16",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1829406761389732",
+            "account_currency": "USD",
+            "spend": "17.73",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1829406761389732",
+            "account_currency": "USD",
+            "spend": "17.98",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "53.87",
+        "average_daily": "17.96",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 34,
+        "account_id": "937846586033361",
+        "name": "Mavroa-US-SHEIN-ES-06-G006",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "937846586033361",
+            "account_currency": "USD",
+            "spend": "43.47",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "937846586033361",
+            "account_currency": "USD",
+            "spend": "41.81",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "937846586033361",
+            "account_currency": "USD",
+            "spend": "39.13",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "124.41",
+        "average_daily": "41.47",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 35,
+        "account_id": "336562339356179",
+        "name": "Openzed-US-CC-EN-01",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 36,
+        "account_id": "1744611463000838",
+        "name": "Openzed-US-CC-EN-03",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1744611463000838",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "428.47"
+          },
+          {
+            "account_id": "1744611463000838",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "561.94"
+          },
+          {
+            "account_id": "1744611463000838",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "622.48"
+          }
+        ],
+        "total_3_days": "1612.89",
+        "average_daily": "537.63",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 37,
+        "account_id": "1245683183659911",
+        "name": "OpenzedFinanzas-US-CC-ES-01",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 38,
+        "account_id": "311204101516831",
+        "name": "Topfeed-US-CC-EN-01",
+        "currency": "USD",
+        "timezone": "America/Sao_Paulo",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 39,
+        "account_id": "1526280818302320",
+        "name": "Vizioid-US-SHEIN-EN-01-G001",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1526280818302320",
+            "account_currency": "USD",
+            "spend": "105.24",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1526280818302320",
+            "account_currency": "USD",
+            "spend": "109.94",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1526280818302320",
+            "account_currency": "USD",
+            "spend": "90.19",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "305.37",
+        "average_daily": "101.79",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 40,
+        "account_id": "536294549227786",
+        "name": "Vizioid-US-SHEIN-EN-02-G002",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "536294549227786",
+            "account_currency": "USD",
+            "spend": "137.88",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "536294549227786",
+            "account_currency": "USD",
+            "spend": "36.49",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "536294549227786",
+            "account_currency": "USD",
+            "spend": "47.46",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "221.83",
+        "average_daily": "73.94",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 41,
+        "account_id": "1085117577390237",
+        "name": "Vizioid-US-SHEIN-EN-03-G003",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1085117577390237",
+            "account_currency": "USD",
+            "spend": "117.6",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1085117577390237",
+            "account_currency": "USD",
+            "spend": "80.55",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1085117577390237",
+            "account_currency": "USD",
+            "spend": "63.73",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "261.88",
+        "average_daily": "87.29",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 42,
+        "account_id": "1736068407518263",
+        "name": "Vizioid-US-SHEIN-EN-04-G004",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1736068407518263",
+            "account_currency": "USD",
+            "spend": "9.48",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1736068407518263",
+            "account_currency": "USD",
+            "spend": "4.44",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1736068407518263",
+            "account_currency": "USD",
+            "spend": "5.01",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "18.93",
+        "average_daily": "6.31",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 43,
+        "account_id": "1877104513669062",
+        "name": "Vizioid-US-SHEIN-EN-05-G005",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1877104513669062",
+            "account_currency": "USD",
+            "spend": "171.55",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1877104513669062",
+            "account_currency": "USD",
+            "spend": "41.17",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1877104513669062",
+            "account_currency": "USD",
+            "spend": "29.98",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "242.7",
+        "average_daily": "80.90",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 44,
+        "account_id": "869857549542755",
+        "name": "Vizioid-US-SHEIN-EN-06-G006",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "869857549542755",
+            "account_currency": "USD",
+            "spend": "96.06",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "869857549542755",
+            "account_currency": "USD",
+            "spend": "97.93",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "869857549542755",
+            "account_currency": "USD",
+            "spend": "92.74",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "286.73",
+        "average_daily": "95.58",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 45,
+        "account_id": "7840111366055613",
+        "name": "Yolokfx-US-SHEIN-EN-01-G002",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "7840111366055613",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "3645.51"
+          },
+          {
+            "account_id": "7840111366055613",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "3541.72"
+          },
+          {
+            "account_id": "7840111366055613",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "3771"
+          }
+        ],
+        "total_3_days": "10958.23",
+        "average_daily": "3652.74",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 46,
+        "account_id": "1583000095650153",
+        "name": "Yolokfx-US-SHEIN-EN-02-G006",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1583000095650153",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "6591.03"
+          },
+          {
+            "account_id": "1583000095650153",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "6649.15"
+          },
+          {
+            "account_id": "1583000095650153",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "5928.33"
+          }
+        ],
+        "total_3_days": "19168.51",
+        "average_daily": "6389.50",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 47,
+        "account_id": "2429758060563333",
+        "name": "Yolokfx-US-SHEIN-EN-03-G005",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "2429758060563333",
+            "account_currency": "USD",
+            "spend": "4652.17",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "2429758060563333",
+            "account_currency": "USD",
+            "spend": "4564.44",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "2429758060563333",
+            "account_currency": "USD",
+            "spend": "4672.8",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "13889.41",
+        "average_daily": "4629.80",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 48,
+        "account_id": "781612907182683",
+        "name": "Yolokfx-US-SHEIN-EN-04-G004",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "781612907182683",
+            "account_currency": "USD",
+            "spend": "1997.23",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "781612907182683",
+            "account_currency": "USD",
+            "spend": "2147.53",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "781612907182683",
+            "account_currency": "USD",
+            "spend": "1843.99",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "5988.75",
+        "average_daily": "1996.25",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 49,
+        "account_id": "787796726891306",
+        "name": "Yolokfx-US-SHEIN-EN-05-G001",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "787796726891306",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "2135.83"
+          },
+          {
+            "account_id": "787796726891306",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "1940.02"
+          },
+          {
+            "account_id": "787796726891306",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "2016.74"
+          }
+        ],
+        "total_3_days": "6092.59",
+        "average_daily": "2030.86",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 50,
+        "account_id": "1600310064116258",
+        "name": "Yolokfx-US-SHEIN-EN-06-G003",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "1600310064116258",
+            "account_currency": "USD",
+            "spend": "3507.05",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22"
+          },
+          {
+            "account_id": "1600310064116258",
+            "account_currency": "USD",
+            "spend": "3850.5",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23"
+          },
+          {
+            "account_id": "1600310064116258",
+            "account_currency": "USD",
+            "spend": "4723.26",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24"
+          }
+        ],
+        "total_3_days": "12080.81",
+        "average_daily": "4026.94",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 51,
+        "account_id": "908704754163659",
+        "name": "Zuout-US-CC-EN-01",
+        "currency": "USD",
+        "timezone": "America/New_York",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [
+          {
+            "account_id": "908704754163659",
+            "date_start": "2026-10-22",
+            "date_stop": "2026-10-22",
+            "account_currency": "USD",
+            "spend": "52.26"
+          },
+          {
+            "account_id": "908704754163659",
+            "date_start": "2026-10-23",
+            "date_stop": "2026-10-23",
+            "account_currency": "USD",
+            "spend": "49.82"
+          },
+          {
+            "account_id": "908704754163659",
+            "date_start": "2026-10-24",
+            "date_stop": "2026-10-24",
+            "account_currency": "USD",
+            "spend": "31.72"
+          }
+        ],
+        "total_3_days": "133.8",
+        "average_daily": "44.60",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      },
+      {
+        "row": 52,
+        "account_id": "26632890069640784",
+        "name": "Zytiva-GB-CC-EN-02",
+        "currency": "USD",
+        "timezone": "Europe/London",
+        "period": {
+          "since": "2026-10-22",
+          "until": "2026-10-24"
+        },
+        "daily": [],
+        "total_3_days": "0",
+        "average_daily": "0.00",
+        "zero_spend_dates_in_denominator": true,
+        "reconciled": true
+      }
+    ]
+  },
+  "target_reconciliation": {
+    "account": {
+      "account_id": "2633813727134360",
+      "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
+      "currency": "USD",
+      "balance": "2261230",
+      "timezone_name": "America/Sao_Paulo",
+      "id": "act_2633813727134360",
+      "funding": {
+        "type": 4,
+        "display_string": "monthly invoicing"
+      }
+    },
+    "read_at": "2026-10-25T11:32:01.297259-04:00",
+    "balance": "22612.3",
+    "october_spend": "31397.56",
+    "october_paid_event": "8785.26",
+    "spend_minus_payment": "22612.30",
+    "unreconciled_difference": "0.00",
+    "daily": [
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-01",
+        "date_stop": "2026-10-01",
+        "spend": "1566.07"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-02",
+        "date_stop": "2026-10-02",
+        "spend": "1317.61"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-03",
+        "date_stop": "2026-10-03",
+        "spend": "1410.32"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-04",
+        "date_stop": "2026-10-04",
+        "spend": "1432.38"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-05",
+        "date_stop": "2026-10-05",
+        "spend": "1336.24"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-06",
+        "date_stop": "2026-10-06",
+        "spend": "1328.3"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-07",
+        "date_stop": "2026-10-07",
+        "spend": "1301.04"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-08",
+        "date_stop": "2026-10-08",
+        "spend": "1328.76"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-09",
+        "date_stop": "2026-10-09",
+        "spend": "1313.09"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-10",
+        "date_stop": "2026-10-10",
+        "spend": "1301.61"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-11",
+        "date_stop": "2026-10-11",
+        "spend": "1326.94"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-12",
+        "date_stop": "2026-10-12",
+        "spend": "1659.75"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-13",
+        "date_stop": "2026-10-13",
+        "spend": "1159.43"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-14",
+        "date_stop": "2026-10-14",
+        "spend": "1122.25"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-15",
+        "date_stop": "2026-10-15",
+        "spend": "1104.42"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-16",
+        "date_stop": "2026-10-16",
+        "spend": "1137.41"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-17",
+        "date_stop": "2026-10-17",
+        "spend": "1245.12"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-18",
+        "date_stop": "2026-10-18",
+        "spend": "1332.53"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-19",
+        "date_stop": "2026-10-19",
+        "spend": "1278.86"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-20",
+        "date_stop": "2026-10-20",
+        "spend": "1039.23"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-21",
+        "date_stop": "2026-10-21",
+        "spend": "1316.84"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-22",
+        "date_stop": "2026-10-22",
+        "spend": "1191.98"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-23",
+        "date_stop": "2026-10-23",
+        "spend": "1162.14"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-24",
+        "date_stop": "2026-10-24",
+        "spend": "1138.34"
+      },
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-25",
+        "date_stop": "2026-10-25",
+        "spend": "546.9"
+      }
+    ],
+    "aggregate": [
+      {
+        "account_id": "2633813727134360",
+        "account_currency": "USD",
+        "date_start": "2026-10-01",
+        "date_stop": "2026-10-25",
+        "spend": "31397.56"
+      }
+    ],
+    "daily_aggregate_reconciled": true,
+    "interpretation": "Current monthly-invoicing funding does not contradict a one-time card payment. Payment event proves amount/date, not card suffix or invoice allocation. Fresh coherent GET batch reconciles October spend 31397.56 minus successful payment 8785.26 to current balance 22612.30 exactly; an earlier time-separated comparison had a temporary mismatch and must not be reused."
+  },
+  "target_invoices": {
+    "count_all": 152,
+    "matched": [
+      {
+        "id": "1669066641561935",
+        "invoice_id": "26877313",
+        "ad_account_ids": [
+          "2633813727134360"
+        ],
+        "currency": "USD",
+        "amount": "3708813",
+        "amount_due": {
+          "amount": "0.00",
+          "amount_in_hundredths": "0",
+          "currency": "USD",
+          "offsetted_amount": "0"
+        },
+        "payment_status": "Paid",
+        "invoice_date": "2026-10-02T00:05:58+0000",
+        "billing_period": "2026-09-01",
+        "due_date": "2026-10-31T07:00:00+0000"
+      },
+      {
+        "id": "1341938591070069",
+        "invoice_id": "26826776",
+        "ad_account_ids": [
+          "2633813727134360"
+        ],
+        "currency": "USD",
+        "amount": "875024",
+        "amount_due": {
+          "amount": "0.00",
+          "amount_in_hundredths": "0",
+          "currency": "USD",
+          "offsetted_amount": "0"
+        },
+        "payment_status": "Paid",
+        "invoice_date": "2026-09-02T00:43:14+0000",
+        "billing_period": "2026-08-01",
+        "due_date": "2026-10-01T07:00:00+0000"
+      },
+      {
+        "id": "1537836513982425",
+        "invoice_id": "26790129",
+        "ad_account_ids": [
+          "2633813727134360"
+        ],
+        "currency": "USD",
+        "amount": "554268",
+        "amount_due": {
+          "amount": "0.00",
+          "amount_in_hundredths": "0",
+          "currency": "USD",
+          "offsetted_amount": "0"
+        },
+        "payment_status": "Paid",
+        "invoice_date": "2026-08-02T00:25:41+0000",
+        "billing_period": "2026-07-01",
+        "due_date": "2026-08-31T07:00:00+0000"
+      },
+      {
+        "id": "1337667648556983",
+        "invoice_id": "26715756",
+        "ad_account_ids": [
+          "2633813727134360"
+        ],
+        "currency": "USD",
+        "amount": "7345",
+        "amount_due": {
+          "amount": "0.00",
+          "amount_in_hundredths": "0",
+          "currency": "USD",
+          "offsetted_amount": "0"
+        },
+        "payment_status": "Paid",
+        "invoice_date": "2026-07-02T03:22:46+0000",
+        "billing_period": "2026-06-01",
+        "due_date": "2026-07-31T07:00:00+0000"
+      }
+    ]
+  }
+}
