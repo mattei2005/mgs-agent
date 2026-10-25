@@ -57189,6 +57189,8 @@
         "knowledge_registry_id": "finance-meta-manual-card-payments-20261025",
         "validation_report": "/root/mgs-agent/reports/meta-manual-payments-skill-validation-1563943171392667679.json",
         "validation": "snapshot_readback_pass; 47 accounts; 8 card/39 credit-line; totals E/F/G and all billing links checked; no writes or payments",
+        "api_card_retry_report": "/root/mgs-agent/reports/meta-card-api-retry-1563948130024693871.json",
+        "api_card_retry_result": "Eight account edges fully paginated; 92 generic charge events; historical card instrument not exposed; CALYPSO/TAO/TAO_AD_ACCOUNT control probes equivalent; transactions edge unsupported. No Sheet or Meta writes; six instrument gaps preserved.",
         "updated_at": "2026-10-25T12:00:33.864854-04:00"
       }
     ]
