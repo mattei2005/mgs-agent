@@ -6123,12 +6123,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust-1563926766286803004",
-      "next_step": "PC1 confirmou sete cobranças no cartão e Grow sem cobrança localizada; seis lacunas de instrumento resolvidas. Refresh manual real das 47 contas e readback PASS. Job nativo 2ee720363d7d habilitado 08:02/14:02/21:02 America/New_York; Zeus verifica primeiro tick natural (próximo 2026-10-25T14:02:00-04:00) sem delegar observação a Rodolfo. Competência mensal permanece outubro/2026; média móvel 3 dias completos. Pay now parcial continua sem causa comprovada. Fontes e automação nunca autorizam pagamentos.",
-      "objective": "Planilha para pagamentos manuais Meta com diversos cartões, atualizada 3x/dia; zero autorização permanente de billing.",
-      "source": "reports/meta-manual-payments-scheduling-1563960345826037821/closure.json",
-      "state": "scheduled_manual_validation_pass_first_tick_pending",
+      "next_step": "Fonte/autorização 1563981039230255186. Escopo live congelado em reports/meta-pay-now-1563981039230255186/targets.json; 39 linhas. Coletar modal, verificar identidade e valor, publicar F com readback e adaptar refresh/validator ao deslocamento F→G e G→H. Primeiro tick natural do job 2ee720363d7d já observado ok às 14:03 em 25/10.",
+      "objective": "Ler no PC1 o modal Pay now das 39 contas de linha e inserir o valor permitido em nova coluna F, antes do current balance; nenhum pagamento.",
+      "source": "reports/meta-pay-now-1563981039230255186/targets.json",
+      "state": "collecting_pay_now",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-25T17:48:43+00:00"
+      "updated_at": "2026-10-25T18:25:09+00:00"
     },
     {
       "agent": "zeus",
@@ -7292,5 +7292,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-25T17:48:43+00:00"
+  "updated_at": "2026-10-25T18:25:09+00:00"
 }
