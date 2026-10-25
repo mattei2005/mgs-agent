@@ -66,6 +66,9 @@ Official activity model: <https://developers.facebook.com/documentation/ads-comm
 
 `/{business_id}/business_invoices` returns invoices for monthly-invoicing legal entities. Join every result to requested targets through exact `ad_account_ids`.
 
+- Request an explicit projection such as `id,invoice_id,ad_account_ids,currency,amount,amount_due,payment_status,invoice_date,billing_period,due_date`; the default edge can return only `id`, so an empty account join on that projection is not invoice-absence evidence. Parse `amount` as minor units and `amount_due.amount_in_hundredths` using its own currency.
+- Keep recurring funding distinct from a one-time payment: `type=4` monthly invoicing can coexist with an `ad_account_billing_charge/payment_amount` event. Verify amount/date from the event, and attribute a card or invoice only when the source actually exposes it. Before explaining a spend-minus-payment versus balance discrepancy, refresh the exact account balance and daily/aggregate Insights in one bounded GET-only batch; mixed-time source projections can temporarily disagree. Preserve the earlier receipt and report a cause only when proved. A cent-exact reconciliation of current October spend minus the successful payment to current balance supports the current-month reconciliation, not an invented transaction-to-invoice allocation.
+
 Interpretation:
 
 - Invoice rows overlapping the target IDs are invoice evidence for those accounts.
@@ -73,6 +76,11 @@ Interpretation:
 - It does **not** mean no card charges occurred; use account activities for that.
 
 Official reference: <https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/business/business_invoices>
+
+### Latest-charge and three-closed-day Sheet columns
+
+- For a latest-charge column, select the newest successful `ad_account_billing_charge` with a numeric `payment_amount`, not a decline, threshold, account balance or current default-card field. Keep the event time/account timezone in the cell note. If the recent window has no charge, inspect the bounded earlier/account history before leaving an explicit no-record gap; never substitute zero. Do not sum one last charge from unrelated accounts as if it were a monthly payment total.
+- For a three-day daily average, use the last three fully closed dates in each account's timezone, exclude the partial current day, include zero-spend dates in the denominator of three, and reconcile daily spend against an independent aggregate. Publish numeric two-decimal averages, document the exact dates, and label subtotal formulas as the sum of displayed account averages. When inserting columns, preserve account links/notes and verify shifted balance/month-spend formulas, every retained account row and computed subtotals after the final write.
 
 ## High-volume activity recovery
 
@@ -91,9 +99,11 @@ The recovery completed 40/40 daily windows for the high-volume account, covering
 
 ## Reconciliation semantics
 
-Never assert:
+Never assume the following as a general accounting identity or force the sources to equal:
 
 `period spend = settled card charges + current Meta balance`
+
+An independently observed, cent-exact reconciliation may be reported for its exact account, period and coherent readback; it does not establish card identity, invoice allocation or a general rule for other accounts.
 
 Possible deltas include:
 
