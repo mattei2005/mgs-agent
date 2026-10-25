@@ -56912,7 +56912,7 @@
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
         "version": "0.3.0",
-        "updated_at": "2026-10-25T15:15:21.460104-04:00",
+        "updated_at": "2026-10-25T15:37:30.329568-04:00",
         "pay_now_column": "F",
         "balance_column": "G",
         "spend_column": "H",
@@ -56927,7 +56927,11 @@
           "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
           "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_pay_now.py",
           "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py"
-        ]
+        ],
+        "repeated_header_range": "A13:H13",
+        "credit_line_group_title": "A12",
+        "repeated_header_authority": "1563999324587819020",
+        "publisher_repeated_headers_preserved": true
       },
       {
         "name": "mgs-company-os-architecture",

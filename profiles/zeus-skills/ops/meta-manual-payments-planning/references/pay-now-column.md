@@ -2,6 +2,10 @@
 
 Autorização de Rodolfo: `1563981039230255186`, thread `1563926766286803004`. Leitura dos modais das 39 contas de linha da mesma aba, sem pagar, trocar cartão, preencher dados ou avançar Next. Nova F antes do antigo current balance; G agora balance e H gasto de outubro. Schema anterior fica explicitamente supersedido; não inserir outra F em ticks futuros.
 
+## Cabeçalho do bloco de linha
+
+Pedido `1563999324587819020`: repetir os oito títulos A:H na linha 13. O título de grupo LINHA DE CRÉDITO fica em A12, antes do cabeçalho repetido; contas e fórmulas não mudam de linha. No publisher, reconhecer cabeçalhos pela combinação A=Nome da conta/B=Forma de pagamento, e não somente i==0, para preservar também F13 em cada refresh. Não limpar essa célula como se fosse uma linha vazia ou uma conta fora do escopo.
+
 ## Execução exercitada
 
 - `scripts/read_pc1_pay_now.py --account-ids <lote> --run-dir <dir>` abre aba própria, usa lease global PC1, navega nos links aprovados e clica somente no único Pay now da página inicial. Captura o modal Make a payment e extrai Amount you can pay now, Amount e Spending from. Não seleciona rádio/cartão, não edita valor e nunca clica Pay now final ou Next. Escape fecha o modal; finally fecha só a aba criada e libera lease.

@@ -59,7 +59,7 @@ def main():
    cells=r.setdefault('values',[])
    while len(cells)<8:cells.append({})
    cell=copy.deepcopy(cells[6]);cell.pop('userEnteredValue',None);cell.pop('note',None)
-   if i==0:
+   if i==0 or(cells[0].get('userEnteredValue',{}).get('stringValue')=='Nome da conta'and cells[1].get('userEnteredValue',{}).get('stringValue')=='Forma de pagamento'):
     cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte: modal Make a payment > Amount you can pay now, no PC1; somente as 39 contas de linha de crédito. Cada nota informa período e hora da leitura real. Não é current balance, invoice fechada ou limite disponível no emissor do cartão. Nenhum pagamento executado.'
    else:
     mt=re.search(r'^ID da conta: (\d+)\b',cells[0].get('note',''));label=cells[0].get('userEnteredValue',{}).get('stringValue','')
