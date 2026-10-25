@@ -1,6 +1,7 @@
 """Immutable inventory evidence must not disable operational host protection."""
 import hashlib
 import importlib.util
+import json
 import subprocess
 import tempfile
 import unittest
@@ -87,6 +88,33 @@ class HistoricalEvidenceTests(unittest.TestCase):
         self.assertEqual(self.scan(relative, content, relative, content), [])
         self.assertEqual(
             self.scan(relative, content + b" changed", relative, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_payment_schedule_snapshot_registration_is_exact_removed_history(self):
+        relative = "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json"
+        content = (guard.REPO / relative).read_bytes()
+        self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+        records = json.loads(content)["runtime_artifacts"]
+        hits = [row for row in records if guard.RETIRED_HOST in json.dumps(row)]
+        self.assertEqual(len(hits), 1)
+        self.assertEqual(hits[0]["id"], "runcloud-retired-ssh-allow-removal-20260712")
+        self.assertEqual(hits[0]["status"], "removed_validated")
+        self.assertIn(guard.RETIRED_HOST, hits[0]["removed_rule"])
+        self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+        self.assertFalse(any(relative.startswith(prefix) for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+        self.assertEqual(self.scan(relative, content, relative, content), [])
+        self.assertEqual(
+            self.scan(relative, content + b" changed", relative, content),
+            [f"repo:{relative}"],
+        )
+
+    def test_payment_schedule_sibling_connection_target_still_blocks(self):
+        evidence = "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json"
+        relative = "reports/meta-manual-payments-scheduling-1563960345826037821/connection.json"
+        content = guard.RETIRED_HOST.encode()
+        self.assertEqual(
+            self.scan(relative, content, evidence, content),
             [f"repo:{relative}"],
         )
 

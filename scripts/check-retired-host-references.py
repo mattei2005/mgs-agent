@@ -37,6 +37,11 @@ HISTORICAL_EVIDENCE_SHA256 = {
     # hetzner-php-recheck-1562886130582552618; no reports/ directory exemption.
     "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json":
         "1bd0e08c60977607a2689aaeca409ca1f866a7b18ae50562ae9005df05de2d6d",
+    # Authorized schedule pre-change inventory (1563960345826037821): its
+    # sole hit is removed_validated firewall history, identical to the live
+    # canonical inventory record. Preserve only this exact immutable snapshot.
+    "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json":
+        "ec73c34f09b9c3a8e80f32246d68242ee6187b1d11b9741c06ffc1e0642e3123",
 }
 
 PROFILE_NAMES = ("zeus", "atena", "ares")
