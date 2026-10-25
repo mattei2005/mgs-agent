@@ -1,0 +1,66 @@
+{
+  "request_message": "1563943171392667679",
+  "skill": "meta-manual-payments-planning",
+  "verified_at": "2026-10-25T11:59:46.392353-04:00",
+  "live_workbook_readback": {
+    "status": "snapshot_readback_pass",
+    "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+    "sheet_id": 271321738,
+    "business_id": "155263197283282",
+    "currency": "USD",
+    "accounts": 47,
+    "groups": {
+      "Cartão de crédito": 8,
+      "Linha de crédito": 39
+    },
+    "card_charge_values_present": 1,
+    "card_charge_blank_rows": [
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "totals_validated_columns": [
+      "E",
+      "F",
+      "G"
+    ],
+    "all_account_billing_links_checked": true,
+    "historical_instrument_not_revalidated_by_this_script": true,
+    "google_write_calls": 0,
+    "meta_calls": 0,
+    "payments_executed": 0
+  },
+  "files": [
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/SKILL.md",
+      "sha256": "43bbe2ff7dacb3d297a2a9fd546c8d2730f8a4db1c88ceba5271ee94ba7720b5"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/collection-and-workbook.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/references/collection-and-workbook.md",
+      "sha256": "1c5b3aa20ec59a660b2181834590e95459d20a45305627bff6f5a13a2c79ff52"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/digital-trust-baseline.md",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/references/digital-trust-baseline.md",
+      "sha256": "27a5938992502e7a5d3b86f400ff580d80d103a72a00822cb3fac35e1681e381"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+      "mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+      "sha256": "499645dead6b6619bbda979acaa715aec01eb78b83cd8c215ce9311b4969f4ad"
+    }
+  ],
+  "scope": "planning/read-only validation; no payment automation or cron",
+  "known_pending": [
+    "six card instrument verifications",
+    "one account without billing event",
+    "Pay now partial-amount reason unproven"
+  ],
+  "generic_meta_route_updated": true
+}

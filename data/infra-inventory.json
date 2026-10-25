@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-25T10:58:02-04:00",
+    "updated_at": "2026-10-25T12:00:33.864854-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -57176,6 +57176,20 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/zeus/skills/yuanbao/SKILL.md"
+      },
+      {
+        "name": "meta-manual-payments-planning",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "purpose": "Apoiar pagamentos manuais Meta por diversos cartões, com planilha, cobrança cartão-only, média de 3 dias, invoices e reconciliação; planejamento não autoriza billing.",
+        "reference_implementation": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+        "versioned_mirror": "/root/mgs-agent/profiles/zeus-skills/ops/meta-manual-payments-planning",
+        "authority_message": "1563943171392667679",
+        "source_thread": "1563926766286803004",
+        "knowledge_registry_id": "finance-meta-manual-card-payments-20261025",
+        "validation_report": "/root/mgs-agent/reports/meta-manual-payments-skill-validation-1563943171392667679.json",
+        "validation": "snapshot_readback_pass; 47 accounts; 8 card/39 credit-line; totals E/F/G and all billing links checked; no writes or payments",
+        "updated_at": "2026-10-25T12:00:33.864854-04:00"
       }
     ]
   },

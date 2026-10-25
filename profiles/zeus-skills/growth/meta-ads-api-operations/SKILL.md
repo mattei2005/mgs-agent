@@ -138,6 +138,8 @@ API fields, activity parsing, pagination recovery and reconciliation details: `r
 
 ### Billing inventory in an existing spreadsheet
 
+For Rodolfo's recurring **manual card-payment planning**, load `meta-manual-payments-planning`: it is the dedicated canonical owner of the workbook, card-only charge evidence, three-closed-day averages, invoice/Pay now distinctions and multi-card planning. This generic skill remains the owner of shared Meta transport and API primitives; creating a planning skill never authorizes billing writes.
+
 1. Load `google-drive-agent-automation` for Google authentication and publication gates. Freeze the named BM's complete account-ID set before collecting payment and spend fields; include inactive, zero-spend and unidentified-funding accounts unless the user requested a narrower set. Use bounded GET-only Graph batches and persist sanitized results after each batch so collection and publication can resume independently.
 2. Preserve the requested column count and order. For an account/payment/default-card/balance/month-spend report, create one new operational tab, sort by exact account name with account ID as the tie-breaker, and keep distinct same-name accounts as separate rows. Put account IDs, source timezone and exact-account links in cell notes/link formatting rather than adding unsolicited technical columns or altering names.
 3. Keep financial cells numeric and display each row's original currency explicitly with a Sheets number format such as `"USD" #,##0.00`. Do not silently convert currencies or calculate a mixed-currency grand total. Document `balance` as the current Meta account balance, not overdue invoices or monthly spend; obtain the requested month's spend from Insights rather than lifetime `amount_spent`.

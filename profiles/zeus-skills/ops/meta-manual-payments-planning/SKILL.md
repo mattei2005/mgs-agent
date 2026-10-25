@@ -19,7 +19,7 @@ Esta é a skill dona do fluxo de apoio financeiro a Rodolfo: inventariar contas 
 
 Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1563926766286803004`. Essa finalidade é estratégia de planejamento, não uma autorização permanente para efetuar pagamentos, escolher cartões, alterar billing, budgets, permissões ou credenciais. Rodolfo decide e executa os pagamentos; qualquer execução futura por Zeus continua sujeita à autorização específica e à confirmação adicional de billing do `AGENT.md`.
 
-## Quando usar
+## When to Use
 
 - Planilha de contas, saldos, últimas cobranças no cartão, gasto mensal ou média diária para decidir pagamentos manuais.
 - Distribuir pagamentos entre cartões disponíveis e diminuir utilização da linha de crédito, sem alterar a forma padrão por inferência.
@@ -87,6 +87,10 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 - Não clicar em Pay now final, cadastrar cartão, mudar default, pagar invoice ou automatizar transferências por causa desta skill. Uma eventual execução futura deve obter o gate de billing específico e sua confirmação adicional.
 - Quando Rodolfo informar que pagou, confirmar transação e saldo de forma read-only. Registrar confirmado, pendente ou não localizado; não descontar apenas porque o usuário planejou pagar, nem repetir uma cobrança ambígua.
 - Não instalar cron/refresh automático por padrão. A planilha é fotografia datada até haver autorização explícita e validação de um processo recorrente.
+
+## Validação executável somente leitura
+
+Usar `terminal(command="python3 /root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py --spreadsheet-id <ID> --sheet-id <GID> --business-id <BM_ID>", timeout=180)` depois da publicação. O helper usa a SA canônica, confere schema, IDs, links de billing, fórmulas calculadas e totais; reporta campos de cartão vazios sem fingir que validou o instrumento. Não coleta novos gastos, não atualiza a aba e não executa pagamentos. A saída é evidência de estrutura/readback do snapshot, não refresh financeiro.
 
 ## Verificação e entrega
 
