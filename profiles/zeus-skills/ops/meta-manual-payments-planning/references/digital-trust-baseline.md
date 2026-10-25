@@ -50,7 +50,9 @@ Conta `Eggbev-US-CC-EN-03 (FAX-US-02)`, ID `1481815942722118`:
 - Esses eventos de crédito e cartão tinham o mesmo tipo genérico `ad_account_billing_charge`, `payment_amount`, `action=67` na API consultada. Nunca reutilizar esse triplo como prova de cartão.
 - A correção do cartão veio de **API + print**, não da API sozinha. A imagem recortada não mostrava nome de conta; o vínculo foi reconciliado pela célula única USD 3.54, contexto humano e sequência de eventos/valores/datas.
 
-## Estado pendente a preservar na retomada
+## Histórico de pendências e resolução posterior
+
+**Supersessão explícita:** as seis lacunas de instrumento listadas abaixo foram resolvidas pela consulta autenticada do PC1 autorizada em `1563960055504838767`, com fonte `reports/meta-pc1-card-methods-1563960055504838767.json`. Sete cobranças foram positivamente identificadas como cartão e publicadas na coluna D; Growpowerhub permaneceu sem cobrança localizada. O motivo do valor parcial do Pay now continua não comprovado. O estado corrente está no ledger `data/meta-manual-payments/pc1-card-ledger.json`, no checkpoint da iniciativa e no readback live, não nesta seção histórica.
 
 Após aplicar o critério cartão-only, havia uma cobrança positivamente verificada (Eggbev), seis células D sem valor por instrumento não comprovado e uma conta sem evento localizado. As seis lacunas eram:
 
@@ -63,7 +65,7 @@ Após aplicar o critério cartão-only, havia uma cobrança positivamente verifi
 
 Growpowerhub-US-SHEIN-EN-04-G004 (`1419148446852410`) tinha zero eventos BUDGET retornados no histórico completo, portanto D ficou vazia com nota, não zero numérico.
 
-Criar esta skill não preenche essas lacunas. Revalidar tudo live ao retomar; não confundir o baseline com um monitor ou com validação atual de cartões.
+A criação inicial da skill não havia preenchido essas lacunas; a resolução posterior pelo PC1 está documentada acima. Revalidar tudo live ao retomar; não confundir o baseline histórico com um monitor ou com validação atual de cartões.
 
 ## Evidência local preservada
 

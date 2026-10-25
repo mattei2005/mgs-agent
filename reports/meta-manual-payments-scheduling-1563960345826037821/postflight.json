@@ -1,0 +1,2026 @@
+{
+  "timezone": "America/New_York",
+  "civil_dates": 8,
+  "start": "2026-10-25T00:00:00-04:00",
+  "end": "2026-11-02T00:00:00-05:00",
+  "selected": {
+    "minute": 2,
+    "schedule": "2 8,14,21 * * *",
+    "operational_conflicts": [],
+    "baseline_collisions": [
+      {
+        "source": "root",
+        "name": "monitor_honcho_billing_watch.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "alerts-infra-failed-alert-resolver.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "monitor_hermes_pending_writes.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "finalize-hermes-structural-write.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "hermes-news-explainer-watchdog.py",
+        "count": 24
+      },
+      {
+        "source": "hermes:zeus",
+        "name": "b013-dtr-link-watch",
+        "count": 24
+      }
+    ],
+    "baseline_score": 144
+  },
+  "candidates": [
+    {
+      "minute": 0,
+      "schedule": "0 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "track-article-cost.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "cleanup-zombie-sessions.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "pendencia-render-md.sh",
+          "count": 8
+        },
+        {
+          "source": "root",
+          "name": "chat-log.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "sync-sb-sms-revenue-daily.sh",
+          "count": 8
+        },
+        {
+          "source": "root",
+          "name": "refresh-sb-restricted-history-sheet.py",
+          "count": 16
+        },
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "count": 8
+        },
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "MGS DR monitor SLA",
+          "count": 24
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-cron-stale-logs.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "discord-archive-stale-agent-threads.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 240
+    },
+    {
+      "minute": 1,
+      "schedule": "1 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "hermes:ares",
+          "name": "Creditoparaveiculo 13 G006 Diario",
+          "count": 24
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 2,
+      "schedule": "2 8,14,21 * * *",
+      "operational_conflicts": [],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "b013-dtr-link-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 3,
+      "schedule": "3 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "count": 1
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "count": 8
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 4,
+      "schedule": "4 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-runcloud.py",
+          "count": 16
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-hermes-memory-capacity.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 5,
+      "schedule": "5 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "dtr-sb-restricted-summary.py",
+          "count": 8
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "root command",
+          "count": 24
+        }
+      ],
+      "baseline_score": 192
+    },
+    {
+      "minute": 6,
+      "schedule": "6 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "hermes:ares",
+          "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+          "count": 24
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 7,
+      "schedule": "7 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-webshare-status.sh",
+          "count": 16
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "Hermes MGS patch watchdog",
+          "count": 14
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "check-pending-reports.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 8,
+      "schedule": "8 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "count": 1
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "count": 8
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 9,
+      "schedule": "9 8,14,21 * * *",
+      "operational_conflicts": [],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "/etc/cron.d/php",
+          "name": "root [",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 10,
+      "schedule": "10 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "contract:Eggbev-US-CC-EN-BOT.json",
+          "name": "roas_cycle",
+          "count": 16
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "Ares arquivo 30TB · reconciliação cloud",
+          "count": 24
+        }
+      ],
+      "baseline_score": 192
+    },
+    {
+      "minute": 11,
+      "schedule": "11 8,14,21 * * *",
+      "operational_conflicts": [],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-auto-push.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "b013-dtr-link-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 168
+    },
+    {
+      "minute": 12,
+      "schedule": "12 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "hermes:ares",
+          "name": "Ares criativos · intake contextual autônomo",
+          "count": 24
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-sb-messenger-token-invalid.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 168
+    },
+    {
+      "minute": 13,
+      "schedule": "13 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "count": 1
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 14,
+      "schedule": "14 8,14,21 * * *",
+      "operational_conflicts": [],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "sb-restricted-transition-monitor.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-hermes-memory-capacity.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 15,
+      "schedule": "15 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "track-article-cost.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "sb-broadcast-template-repair.sh",
+          "count": 24
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-cron-stale-logs.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "discord-archive-stale-agent-threads.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "root command",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 264
+    },
+    {
+      "minute": 16,
+      "schedule": "16 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "contract:Eggbev-US-CC-EN-BOT.json",
+          "name": "page_lead_guardrail",
+          "count": 8
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-service-restarts.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 17,
+      "schedule": "17 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "sync-sb-messenger-revenue-sheet.py",
+          "count": 8
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "/etc/crontab",
+          "name": "root cd",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 18,
+      "schedule": "18 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-sms-funnel-balance.py",
+          "count": 1
+        },
+        {
+          "source": "root",
+          "name": "finance_gam_revenue_sync.py",
+          "count": 8
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor-tool-loops.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "meta-app-roles-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 144
+    },
+    {
+      "minute": 19,
+      "schedule": "19 8,14,21 * * *",
+      "operational_conflicts": [
+        {
+          "source": "root",
+          "name": "monitor-drive-auth-unified.py",
+          "count": 24
+        }
+      ],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        }
+      ],
+      "baseline_score": 96
+    },
+    {
+      "minute": 20,
+      "schedule": "20 8,14,21 * * *",
+      "operational_conflicts": [],
+      "baseline_collisions": [
+        {
+          "source": "root",
+          "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor-vps-health.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "hermes:zeus",
+          "name": "b013-dtr-link-watch",
+          "count": 24
+        }
+      ],
+      "baseline_score": 192
+    }
+  ],
+  "entries": [
+    {
+      "source": "root",
+      "name": "sync-souls.sh",
+      "expr": "*/5 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2316,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-auto-push.sh",
+      "expr": "11,26,41,56 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-yoast-health-eggbev.sh",
+      "expr": "23 10 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "check-pending-reports.sh",
+      "expr": "7,22,37,52 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-service-restarts.sh",
+      "expr": "1-56/5 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2316,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-gpt55-oauth-cost.sh",
+      "expr": "54 11 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-tool-loops.sh",
+      "expr": "3-58/5 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2316,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "infra-discovery.sh",
+      "expr": "0 5 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-updates.sh",
+      "expr": "37 8,14,20 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 24,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "track-article-cost.sh",
+      "expr": "*/15 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "cleanup-zombie-sessions.sh",
+      "expr": "0 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "housekeeping-bak-cleanup.sh",
+      "expr": "44 20 * * 2,5",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "pendencia-render-md.sh",
+      "expr": "0 8 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "chat-log.sh",
+      "expr": "0 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "cron-control-plane.py",
+      "expr": "32 8 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-cron-stale-logs.sh",
+      "expr": "*/15 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer.py",
+      "expr": "*/5 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2316,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-webshare-status.sh",
+      "expr": "7 8,14,20 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 24,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "mgs-safety-backup.sh",
+      "expr": "41 3 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor_honcho_billing_watch.py",
+      "expr": "* * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 11580,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-honcho-health.sh",
+      "expr": "54 2,8,14,20 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 32,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-discord-thread-archive-warnings.py",
+      "expr": "16 9 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "discord-archive-stale-agent-threads.py",
+      "expr": "*/15 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-vps-health.py",
+      "expr": "*/5 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2316,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-page-health-sync.sh",
+      "expr": "30 7,15 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 16,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "alerts-infra-failed-alert-resolver.py",
+      "expr": "2-57/5 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2316,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-daily-match-audit.sh",
+      "expr": "20 6 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-op-rate-limit.py",
+      "expr": "39 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-drive-auth-unified.py",
+      "expr": "19,49 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 386,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sync-sb-sms-revenue-daily.sh",
+      "expr": "0 8 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sync-smsfunnel-cost-daily.sh",
+      "expr": "8 9 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor_hermes_pending_writes.py",
+      "expr": "* * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 11580,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "finalize-hermes-structural-write.py",
+      "expr": "* * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 11580,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "dtr-sb-restricted-summary.py",
+      "expr": "5 8 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sb-restricted-transition-monitor.py",
+      "expr": "14,29,44,59 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "refresh-sb-restricted-history-sheet.py",
+      "expr": "0 8,14,20 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 24,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "expr": "24 0,1,7-23 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 153,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-sms-funnel-balance.py",
+      "expr": "3-58/5 13,14 * * 5",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 24,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-hermes-memory-capacity.py",
+      "expr": "4,14,24,34,44,54 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 1158,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "hermes-news-explainer-watchdog.py",
+      "expr": "* * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 11580,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "hermes-context-cost-audit.py",
+      "expr": "47 4 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "expr": "0 8 * * *",
+      "declared_timezone": "America/Sao_Paulo",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "expr": "*/15 * * * *",
+      "declared_timezone": "America/Sao_Paulo",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sb-broadcast-template-repair.sh",
+      "expr": "21 * * * *",
+      "declared_timezone": "America/Sao_Paulo",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "sync-sb-messenger-revenue-sheet.py",
+      "expr": "17 8 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "expr": "12,27,42,57 * * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "root",
+      "name": "monitor-sb-messenger-token-invalid.py",
+      "expr": "5 0 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "finance_media_spend_sync.py",
+      "expr": "3 9 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "expr": "3,8,18,28 8 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 32,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "finance_gam_revenue_sync.py",
+      "expr": "22,31,41 9 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 24,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "finance-month-rollover.py",
+      "expr": "4 23 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "finance-readonly-health.py",
+      "expr": "34 * * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "monitor-runcloud.py",
+      "expr": "4 0-23/2 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 96,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "root",
+      "name": "shein-daily-cron.py",
+      "expr": "47 7 * * *",
+      "declared_timezone": "America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "root cd",
+      "expr": "17 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "root test",
+      "expr": "25 6 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "root test",
+      "expr": "47 6 * * 7",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/crontab",
+      "name": "root test",
+      "expr": "52 6 1 * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 1,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/cron.d/php",
+      "name": "root [",
+      "expr": "09,39 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 386,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "name": "root test",
+      "expr": "30 3 * * 0",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/cron.d/e2scrub_all",
+      "name": "root test",
+      "expr": "10 3 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/cron.d/monarx-update",
+      "name": "root apt-get",
+      "expr": "20 4 * * 2",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 1,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "root command",
+      "expr": "5-55/10 * * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 1158,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "/etc/cron.d/sysstat",
+      "name": "root command",
+      "expr": "59 23 * * *",
+      "declared_timezone": "host America/New_York",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "Hermes MGS patch watchdog",
+      "id": "44671121f3cc",
+      "expr": null,
+      "interval": 360,
+      "next": "2026-10-25T14:07:40.408637-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 32,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "meta-app-roles-watch",
+      "id": "0cc7ed1e587e",
+      "expr": "*/3 0,8-23 * * *",
+      "interval": null,
+      "next": "2026-10-25T13:48:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2720,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "b013-dtr-link-watch",
+      "id": "498fb0d95e10",
+      "expr": "2-59/9 0,8-23 * * *",
+      "interval": null,
+      "next": "2026-10-25T13:47:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 952,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "MGS DR backup horário",
+      "id": "3ff8bd8ca40d",
+      "expr": "23 * * * *",
+      "interval": null,
+      "next": "2026-10-25T14:23:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "MGS DR backup completo",
+      "id": "f0222c3bfcf0",
+      "expr": "15 4 * * *",
+      "interval": null,
+      "next": "2026-10-26T04:15:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "MGS DR restore semanal",
+      "id": "940e9827b1ac",
+      "expr": "45 5 * * 0",
+      "interval": null,
+      "next": "2026-11-01T05:45:00-05:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 2,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "MGS DR monitor SLA",
+      "id": "453bfdd275b0",
+      "expr": "*/30 * * * *",
+      "interval": null,
+      "next": "2026-10-25T14:00:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 386,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "SB Utility Candidate Reservoir",
+      "id": "62dfebef142b",
+      "expr": "30 6 * * *",
+      "interval": null,
+      "next": "2026-10-26T06:30:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 8,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "Financeiro · câmbio automático",
+      "id": "685397627b29",
+      "expr": "26,56 * * * *",
+      "interval": null,
+      "next": "2026-10-25T13:56:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 386,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "meta-app-roles-watch overnight",
+      "id": "fb40054022fa",
+      "expr": "*/10 1-7 * * *",
+      "interval": null,
+      "next": "2026-10-26T01:00:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 342,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "b013-dtr-link-watch overnight",
+      "id": "f42618f5ced7",
+      "expr": "2-59/10 1-7 * * *",
+      "interval": null,
+      "next": "2026-10-26T01:02:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 342,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "F011 descarte condicional dois backups",
+      "id": "be0c6fd23c82",
+      "expr": null,
+      "interval": null,
+      "next": "2026-11-05T00:05:47-05:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 0,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:zeus",
+      "name": "Ares arquivo 30TB · reconciliação cloud",
+      "id": "83b148017b4d",
+      "expr": "10,25,40,55 * * * *",
+      "interval": null,
+      "next": "2026-10-25T13:55:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
+    },
+    {
+      "source": "hermes:ares",
+      "name": "Creditoparaveiculo 13 G006 Diario",
+      "id": "41712f74f949",
+      "expr": "1 * * * *",
+      "interval": null,
+      "next": "2026-10-25T14:01:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:ares",
+      "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
+      "id": "69dfca2b9719",
+      "expr": "6 * * * *",
+      "interval": null,
+      "next": "2026-10-25T14:06:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 193,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "hermes:ares",
+      "name": "Ares criativos · intake contextual autônomo",
+      "id": "528c5710269d",
+      "expr": "12,27,42,57 * * * *",
+      "interval": null,
+      "next": "2026-10-25T13:57:00-04:00",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 772,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "contract:Eggbev-US-CC-EN-BOT.json",
+      "name": "page_lead_guardrail",
+      "expr": "16 8,20 * * *",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 16,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "contract:Eggbev-US-CC-EN-BOT.json",
+      "name": "roas_cycle",
+      "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 104,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    }
+  ],
+  "systemd_timers": [
+    {
+      "unit": "sysstat-collect.timer",
+      "next": 1792950600000000,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "phpsessionclean.timer",
+      "next": 1792951740000000,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "fwupd-refresh.timer",
+      "next": 1792952992563056,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "ua-timer.timer",
+      "next": 1792957328434217,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "motd-news.timer",
+      "next": 1792962763576529,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "apt-daily.timer",
+      "next": 1792963108484246,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "sysstat-summary.timer",
+      "next": 1792987620000000,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "fstrim.timer",
+      "next": 1792987628716240,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "logrotate.timer",
+      "next": 1792992396693373,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "dpkg-db-backup.timer",
+      "next": 1792996943291690,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "apt-daily-upgrade.timer",
+      "next": 1793010323368059,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "man-db.timer",
+      "next": 1793020062465354,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "update-notifier-download.timer",
+      "next": 1793022572233496,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "systemd-tmpfiles-clean.timer",
+      "next": 1793023116516576,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "update-notifier-motd.timer",
+      "next": 1793519575195502,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "e2scrub_all.timer",
+      "next": 1793520639606071,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "apport-autoreport.timer",
+      "next": null,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    },
+    {
+      "unit": "snapd.snap-repair.timer",
+      "next": null,
+      "baseline": "OS infrastructure timer; no custom Meta/Sheets/PC1 timer found"
+    }
+  ],
+  "application_contracts": [
+    {
+      "source": "contract:Eggbev-US-CC-EN-BOT.json",
+      "name": "page_lead_guardrail",
+      "expr": "16 8,20 * * *",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 16,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    },
+    {
+      "source": "contract:Eggbev-US-CC-EN-BOT.json",
+      "name": "page_restriction_guardrail",
+      "expr": "3-58/5 * * * *",
+      "physical_timezone": "America/New_York"
+    },
+    {
+      "source": "contract:Eggbev-US-CC-EN-BOT.json",
+      "name": "roas_cycle",
+      "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
+      "physical_timezone": "America/New_York",
+      "ticks_8d": 104,
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
+    }
+  ],
+  "resource_isolation": "Dedicated workbook writer.lock; PC1 shared lease; Meta reads only; one native cron job, no parallel writers. New payment events require native UI evidence; no billing mutations."
+}

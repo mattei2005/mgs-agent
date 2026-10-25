@@ -1,0 +1,84 @@
+{
+  "status": "scheduled_and_manual_live_refresh_validated",
+  "authorizations": [
+    "1563960055504838767",
+    "1563960345826037821"
+  ],
+  "cron_job_id": "2ee720363d7d",
+  "schedule": "2 8,14,21 * * *",
+  "timezone": "America/New_York",
+  "physical_times": [
+    "08:02",
+    "14:02",
+    "21:02"
+  ],
+  "requested_times_approximate": [
+    "08:00",
+    "14:00",
+    "21:00"
+  ],
+  "next_run_at": "2026-10-25T14:02:00-04:00",
+  "first_natural_tick_verified": false,
+  "accounts": 47,
+  "ui_reviewed": 8,
+  "card_charges_verified": 7,
+  "without_charge_located": 1,
+  "last_manual_refresh": {
+    "status": "updated_validated",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261025T134439224187",
+    "collected_at": "2026-10-25T13:44:38.255406-04:00",
+    "accounts": 47
+  },
+  "global_schedule_audit": {
+    "entries": 82,
+    "civil_dates": 8,
+    "systemd_timers": 18,
+    "operational_collisions": 0,
+    "baseline_collisions": [
+      {
+        "source": "root",
+        "name": "monitor_honcho_billing_watch.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "alerts-infra-failed-alert-resolver.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "monitor_hermes_pending_writes.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "finalize-hermes-structural-write.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "hermes-news-explainer-watchdog.py",
+        "count": 24
+      },
+      {
+        "source": "hermes:zeus",
+        "name": "b013-dtr-link-watch",
+        "count": 24
+      }
+    ]
+  },
+  "skill_files_mirrored": [
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/digital-trust-baseline.md",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/collection-and-workbook.md",
+    "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/recurring-refresh.md"
+  ],
+  "inventory_readback": true,
+  "payments_executed": 0,
+  "verified_at": "2026-10-25T13:48:43.395100-04:00",
+  "remaining_unrelated_gap": "Reason for Pay now permitting less than balance is unproven; invoice September paid."
+}

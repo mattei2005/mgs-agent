@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-25T12:55:23-04:00",
+    "updated_at": "2026-10-25T13:48:43.395100-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -52685,6 +52685,16 @@
     },
     {
       "entry": "47 7 * * * /usr/bin/flock -n /var/lock/ares-shein-daily-scheduler.lock /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-daily-cron.py >> /root/mgs-agent/logs/ares-shein-daily-report.log 2>&1"
+    },
+    {
+      "job_id": "2ee720363d7d",
+      "agent": "zeus",
+      "entry": "Hermes zeus: 2 8,14,21 * * * America/New_York",
+      "description": "Atualiza a planilha Digital Trust 3x/dia: API para métricas, PC1 para instrumento de novo pagamento, nenhuma ação de billing.",
+      "enabled": true,
+      "source": "/root/.hermes/profiles/zeus/cron/jobs.json",
+      "contract": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "updated_at": "2026-10-25T13:48:43.395100-04:00"
     }
   ],
   "scripts": [
@@ -54552,6 +54562,24 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py",
+      "size_bytes": 10940,
+      "modified_at": "2026-10-25T13:25:18.857758-04:00",
+      "description": "Suporte da atualização recorrente autorizada da planilha de pagamentos Meta; zero pagamentos Meta."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
+      "size_bytes": 5117,
+      "modified_at": "2026-10-25T13:42:43.468748-04:00",
+      "description": "Suporte da atualização recorrente autorizada da planilha de pagamentos Meta; zero pagamentos Meta."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py",
+      "size_bytes": 5359,
+      "modified_at": "2026-10-25T13:38:08.073468-04:00",
+      "description": "Suporte da atualização recorrente autorizada da planilha de pagamentos Meta; zero pagamentos Meta."
     }
   ],
   "skills_mgs": [
@@ -56875,7 +56903,22 @@
       {
         "name": "meta-manual-payments-planning",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "updated_at": "2026-10-25T13:48:43.395100-04:00",
+        "version": "0.2.0",
+        "cron_job_id": "2ee720363d7d",
+        "cron_schedule": "2 8,14,21 * * *",
+        "timezone": "America/New_York",
+        "automation_scripts": [
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
+          "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py"
+        ],
+        "ui_instrument_validation": "Eight accounts read on authenticated PC1; seven card charges verified and published, one no-charge located; Advertising credit excluded.",
+        "recurrence_authority": "1563960345826037821",
+        "source_thread": "1563926766286803004",
+        "schedule_validation": "Enabled native job, manual live refresh/readback PASS; zero non-baseline collisions over eight civil dates including DST; first natural tick pending.",
+        "proof_report": "/root/mgs-agent/reports/meta-pc1-card-methods-1563960055504838767.json"
       },
       {
         "name": "mgs-company-os-architecture",
@@ -58760,6 +58803,21 @@
       "size_bytes": 13564,
       "md5": "afdcfc5959759a5106b8aab48e72b14a",
       "modified_at": "2026-10-09T11:42:46-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "description": "Contrato/ledger/estado do refresh Meta read-only + Sheets autorizado; sem tokens ou números completos de cartão.",
+      "modified_at": "2026-10-25T13:46:55.904009-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/pc1-card-ledger.json",
+      "description": "Contrato/ledger/estado do refresh Meta read-only + Sheets autorizado; sem tokens ou números completos de cartão.",
+      "modified_at": "2026-10-25T13:44:21.496849-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/last-refresh.json",
+      "description": "Contrato/ledger/estado do refresh Meta read-only + Sheets autorizado; sem tokens ou números completos de cartão.",
+      "modified_at": "2026-10-25T13:44:40.040868-04:00"
     }
   ],
   "mu_plugin_canonical": {
