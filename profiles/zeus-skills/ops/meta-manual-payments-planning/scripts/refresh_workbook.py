@@ -33,9 +33,14 @@ def main():
   s,d=g.api_json(method,url,gt,payload,quota_project='mgs-core-prod')
   if s!=200:raise RuntimeError('google_http_'+str(s)+':'+str(d.get('error',{}).get('status')))
   return d
- sheet=contract['spreadsheet_id'];sid=contract['sheet_id'];bm=contract['business_id'];apiroot='https://sheets.googleapis.com/v4/spreadsheets/'+sheet;rng="'"+contract['sheet_title']+"'!A:G"
+ sheet=contract['spreadsheet_id'];sid=contract['sheet_id'];bm=contract['business_id'];apiroot='https://sheets.googleapis.com/v4/spreadsheets/'+sheet;rng="'"+contract['sheet_title']+"'!A:H"
  gridurl=apiroot+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(properties,basicFilter,bandedRanges,data(rowData(values(userEnteredValue,userEnteredFormat,note))))'
  before=google('GET',gridurl);rows=before['sheets'][0]['data'][0]['rowData'];assert before['sheets'][0]['properties']['sheetId']==sid
+ headers=[c.get('userEnteredValue',{}).get('stringValue','')for c in rows[0]['values']]
+ def column(prefix):
+  matches=[i for i,h in enumerate(headers)if h.startswith(prefix)];assert len(matches)==1,'header_not_unique_'+prefix;return matches[0]
+ avgcol=column('Média diária');balancecol=column('Saldo a pagar');monthcol=column('Total já gasto');financial=[(avgcol,'average_daily'),(balancecol,'balance'),(monthcol,'month_spend')]
+ assert (avgcol,balancecol,monthcol)in [(4,5,6),(4,6,7)],'unapproved_financial_schema'
  targets=[]
  for ri,r in enumerate(rows):
   c=r.get('values',[])
@@ -105,16 +110,16 @@ def main():
   for p in planned:
    ri=p['row'];cells=erows[ri]['values'];cells[2]['userEnteredValue']={'stringValue':p['default']}
    req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':ri,'columnIndex':2},'rows':[{'values':[cells[2]]}],'fields':'userEnteredValue'}})
-   for col,key in [(4,'average_daily'),(5,'balance'),(6,'month_spend')]:
+   for col,key in financial:
     cells[col]['userEnteredValue']={'numberValue':float(Decimal(p[key]))};oldnote=cells[col].get('note','')
     note='Atualizado '+nowstamp+'. Fonte Meta Graph v26.0; moeda USD; conta '+p['id']+'; fuso '+p['timezone']+'. '
-    if col==4:note+='Média de '+p['average_period']['since']+' a '+p['average_period']['until']+' (3 dias completos, zeros incluídos), diário/agregado reconciliados.'
-    elif col==5:note+='Current balance; não é invoice vencida nem Amount you can pay now.'
+    if col==avgcol:note+='Média de '+p['average_period']['since']+' a '+p['average_period']['until']+' (3 dias completos, zeros incluídos), diário/agregado reconciliados.'
+    elif col==balancecol:note+='Current balance; não é invoice vencida nem Amount you can pay now.'
     else:note+='Gasto de '+p['month_period']['since']+' a '+p['month_period']['until']+'; dia aberto parcial quando aplicável; diário/agregado reconciliados.'
-    if p['id']=='2633813727134360'and col==5 and 'Conciliação de outubro'in oldnote:note+=' Histórico da conciliação anterior: '+oldnote[oldnote.find('Conciliação de outubro'):]
+    if p['id']=='2633813727134360'and col==balancecol and 'Conciliação de outubro'in oldnote:note+=' Histórico da conciliação anterior: '+oldnote[oldnote.find('Conciliação de outubro'):]
     cells[col]['note']=note
-   req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':ri,'columnIndex':4},'rows':[{'values':cells[4:7]}],'fields':'userEnteredValue,note'}})
-  for col in (4,5,6):erows[0]['values'][col]['note']='Atualização automática 3x/dia America/New_York. Última coleta: '+nowstamp+'. Média: três dias completos anteriores, nos fusos das contas. Gasto mensal fixado em outubro/2026 conforme contrato. Fonte Meta; nenhuma cobrança executada.';req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':col},'rows':[{'values':[erows[0]['values'][col]]}],'fields':'note'}})
+    req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':ri,'columnIndex':col},'rows':[{'values':[cells[col]]}],'fields':'userEnteredValue,note'}})
+  for col,_ in financial:erows[0]['values'][col]['note']='Atualização automática 3x/dia America/New_York. Última coleta: '+nowstamp+'. Média: três dias completos anteriores, nos fusos das contas. Gasto mensal fixado em outubro/2026 conforme contrato. Fonte Meta; nenhuma cobrança executada.';req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':col},'rows':[{'values':[erows[0]['values'][col]]}],'fields':'note'}})
   google('POST',apiroot+':batchUpdate',{'requests':req});after=google('GET',gridurl);assert after==expected,'sheet_full_readback_mismatch'
   save(run/'receipt.json',{'status':'updated_validated','accounts':len(planned),'collected_at':nowstamp,'completed_at':datetime.now().astimezone().isoformat(),'pending_ui':[],'meta_writes':0,'payment_actions':0,'full_grid_exact_readback':True})
   save(HOME/'last-refresh.json',{'status':'updated_validated','run_dir':str(run),'collected_at':nowstamp,'accounts':len(planned)})

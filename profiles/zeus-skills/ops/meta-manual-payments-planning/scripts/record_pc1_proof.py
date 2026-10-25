@@ -27,7 +27,7 @@ def main():
  evidence=rp.parent/('verified-'+aid+'.png');shutil.copy2(rec['screenshot'],evidence);os.chmod(evidence,0o600)
  entry={'account_id':aid,'business_id':a.verified_business_id,'ui_url_account_id_verified':True,'read_at':rec.get('read_at')or datetime.fromtimestamp(rp.stat().st_mtime).astimezone().isoformat(),'screenshot':str(evidence),'receipt':str(rp),'rows':events,'latest_card':latest,'status':'verified_card'if latest else'no_charge_located','no_recent_spending_message':not bool(events)}
  g.load_env();assert all(os.getenv(k)=='service_account'for k in ['ARES_DRIVE_AUTH_MODE','MGS_DRIVE_AUTH_PRIMARY','MGS_GOOGLE_SHEETS_AUTH_MODE','MGS_META_APP_ROLES_GOOGLE_AUTH_MODE']);sa=g.load_service_account();assert sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com'and sa['project_id']=='mgs-core-prod';tok=g.service_account_access_token()
- root='https://sheets.googleapis.com/v4/spreadsheets/'+contract['spreadsheet_id'];rng="'"+contract['sheet_title']+"'!A:G";url=root+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(properties,basicFilter,bandedRanges,data(rowData(values(userEnteredValue,userEnteredFormat,note))))'
+ root='https://sheets.googleapis.com/v4/spreadsheets/'+contract['spreadsheet_id'];rng="'"+contract['sheet_title']+"'!A:H";url=root+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(properties,basicFilter,bandedRanges,data(rowData(values(userEnteredValue,userEnteredFormat,note))))'
  def api(m,u,d=None):
   s,b=g.api_json(m,u,tok,d,quota_project='mgs-core-prod');assert s==200;return b
  with (H/'writer.lock').open('a')as lock:
