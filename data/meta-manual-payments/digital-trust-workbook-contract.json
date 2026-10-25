@@ -78,9 +78,9 @@
     "14:02",
     "21:02"
   ],
-  "native_schedule_state": "enabled_scheduled_first_natural_tick_pending",
+  "native_schedule_state": "enabled_api_tick_observed_new_pay_now_cycle_pending",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-10-25T14:02:00-04:00",
+  "next_run_at": "2026-10-25T21:02:00-04:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1563981039230255186",
   "pay_now_account_ids": [
@@ -125,5 +125,8 @@
     "26632890069640784"
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
-  "layout_version": 2
+  "layout_version": 2,
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186",
+  "pay_now_updated_each_tick": true,
+  "pay_now_collection_policy": "Read each of the39 actual PC1 modals each tick; verify screenshots then publish F only. Preserve individual timestamps and fail closed on missing identity/values. No payments."
 }

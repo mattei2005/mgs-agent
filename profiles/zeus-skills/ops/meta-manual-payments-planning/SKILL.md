@@ -1,7 +1,7 @@
 ---
 name: meta-manual-payments-planning
 description: "Use when planning manual Meta card payments."
-version: 0.2.0
+version: 0.3.0
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -74,7 +74,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 ### 5. Publicar no mesmo workbook
 
 - Preservar ID do workbook/aba, contas, notas, links, fórmulas e outras abas; backup imutável antes de cada mudança e diário de recuperação separado.
-- Layout padrão já aprovado neste fluxo: **A Nome da conta; B Forma de pagamento; C Cartão default; D Última cobrança no cartão; E Média diária dos últimos 3 dias; F Saldo a pagar; G Gasto do mês**. Identificar a coluna pelo header/schema, não continuar usando a antiga letra E após inserções.
+- Layout atual, supersedendo o schema anterior de sete colunas por pedido `1563981039230255186`: **A Nome; B Forma; C Cartão default; D Última cobrança no cartão; E Média diária; F Disponível para pagar no cartão (Pay now); G Saldo a pagar; H Gasto do mês**. F é exclusivamente o valor literalmente exibido no modal das 39 contas de linha, com período/hora da leitura; não é limite do emissor nem balance. Resolver colunas por header/schema, nunca por antigas letras após inserções. Procedimento e automação em `references/pay-now-column.md`.
 - Separar blocos de cartão e linha, ordenar por nome exato/ID e colocar subtotais abaixo dos blocos e total geral abaixo. D não recebe soma que pareça total mensal de pagamentos. Valores em moeda original explícita, sem total misto.
 - Exclusão de linhas zero somente sob pedido específico e com a coluna de gasto mensal corretamente resolvida. Não excluir automaticamente contas novas/inativas; preservar as removidas no backup e validar todos os IDs restantes.
 - Nomes das contas são clicáveis para Billing & payments, não Summary. Usar URL de billing validada com BM e `asset_id` exatos; preservar nomes e IDs em notas, sem normalizá-los ou inferir parâmetros ocultos de prints.

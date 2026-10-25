@@ -1,5 +1,7 @@
 # Atualização recorrente autorizada — Digital Trust
 
+**Supersessão de schema e extensão autorizada:** pedido `1563981039230255186` adicionou F Pay now, deslocando balance para G e gasto para H. Em cada tick integrar também a coleta dos 39 modais pelo procedimento `references/pay-now-column.md`, com inspeção visual real e publicação limitada à nova F. Nunca inserir outra coluna. O primeiro tick natural do schema anterior executou ok em 25/10 às 14:03; isso não comprova execução natural do novo ciclo de modais.
+
 ## Escopo e relógio
 
 - Rodolfo autorizou a leitura do PC1 e completar a planilha em `1563960055504838767`; adicionou três atualizações diárias em `1563960345826037821`, na thread `1563926766286803004`.
@@ -14,7 +16,7 @@
 
 Todos os scripts ficam em `/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/`, com mirror versionado no MGS:
 
-1. `refresh_workbook.py`: coleta real de Meta e Sheets, sem `--apply` é dry-run. Atualiza C (default atual), E (média), F (balance), G (gasto de outubro), notas e readback exato quando usado com `--apply`. Não classifica pagamentos genéricos como cartão, não muda Meta e não apaga linhas. Pareia Insights diário/agregado e bloqueia drift de grupo ou IDs em vez de silenciosamente mover/excluir contas.
+1. `refresh_workbook.py`: coleta real de Meta e Sheets, sem `--apply` é dry-run. Atualiza C (default atual), E (média), G (balance), H (gasto de outubro), notas e readback exato quando usado com `--apply`. Não classifica pagamentos genéricos como cartão, não muda Meta e não apaga linhas. Pareia Insights diário/agregado e bloqueia drift de grupo ou IDs em vez de silenciosamente mover/excluir contas.
 2. `read_pc1_billing_history.py`: navegação UI somente leitura, em aba própria do Chrome Meta já logado; argumentos `--pid <fresh> --window-id <fresh> --mode read --account-id <ID permitido>`. Resolve runtime atual pelo launcher Hermes, usa a lease compartilhada, captura AX com `mode=ax` e pixels separadamente para prova. `mode=som` no handler programático exercitado retornou imagem sem árvore; não tratar como página vazia. Os rótulos Current balance/Payment history podem faltar no AX mesmo com a tabela completa Date/Payment method/Amount/Status; exigir o conteúdo e a conta corretos, não só um título. Fecha apenas a aba criada e libera a lease em finally.
 3. `record_pc1_proof.py`: depois da inspeção visual real, grava prova de instrumento no ledger e só D na conta exata, com readback integral. Exige `--receipt <...-receipt.json> --verified-account-id <ID> --verified-business-id 155263197283282 --visual-account-verified`. **Não passar essas flags sem ler o screenshot via vision_analyze e verificar conta/URL.** A CLI não faz OCR nem transforma uma flag em evidência.
 4. `validate_workbook_readonly.py`: verifica schema, moeda, IDs, todos os links de billing, subtotais e total calculados; não prova instrumento histórico por si só.
@@ -32,7 +34,7 @@ Ledger de instrumento: `/root/mgs-agent/data/meta-manual-payments/pc1-card-ledge
 5. No histórico, excluir Advertising credit e Failed/declines; selecionar o primeiro Paid explicitamente no cartão. Se os três registros recentes forem todos créditos e não houver cartão, abrir **View all activity** por uma captura/index fresco, somente leitura, e verificar histórico suficiente; não assumir que não existe pagamento anterior. O recorder bloqueia uma tabela não vazia sem cartão confirmado. Uma UI com “You have no recent spending” é evidência limitada de ausência de gastos recentes, não ausência universal de histórico.
 6. Somente após a prova visual, executar `record_pc1_proof.py` com os IDs realmente conferidos. Ele valida o parsing de data/meio/valor/status, guarda fonte/cópia da imagem e atualiza o campo D e ledger sob lock. Depois repetir a coleta/API para revalidar eventos que possam ter chegado durante a leitura. Fazer no máximo duas reconciliações de uma mesma chegada concorrente; não entrar em loop nem efetuar pagamentos.
 7. Sem pendências, executar `refresh_workbook.py --apply`. Exigir `updated_validated`, receipt persistido e readback integral. Uma falha após write exige reconciliar o run_dir e o alvo antes de repetir; nunca repetir insert/delete às cegas. O helper não faz insert/delete.
-8. Executar o validador read-only com spreadsheet `1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU`, sheet `271321738`, business `155263197283282`; exigir PASS para os 47 IDs, E/F/G e todos os links. Reportar o snapshot atual, não o valor do último plano dry-run.
+8. Executar o validador read-only com spreadsheet `1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU`, sheet `271321738`, business `155263197283282`; exigir PASS para os 47 IDs, E/F/G/H e todos os links. Reportar o snapshot atual, não o valor do último plano dry-run.
 9. A entrega normal é um resumo curto na thread de origem, sem anexo/mention e sem traces. Se houver gate, preservar prova anterior como histórica, explicar exatamente o que não foi atualizado, o motivo e dependência; não declarar atualização integral, logoff global do PC1 ou necessidade de novo login só por uma janela.
 
 ## Recuperações e limites
