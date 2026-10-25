@@ -12,6 +12,9 @@ export function planRollover(source,target,registry,{protectedSites=[],previous=
   const row=pick(src);assert.ok(row.id&&row.name);const index=additions.findIndex(x=>x.kind==='site'&&x.id===row.id),existing=index<0?null:additions[index],prior=oldSites.get(row.id);
   // Human/API target changes win. A differently authorized assignment is also explicit.
   if(existing&&(protectedSet.has(row.id)||['assignment_authority','network_authorization','network_additional_authorization'].some(k=>existing[k]&&src[k]&&existing[k]!==src[k]))){preserved.push({kind:'site',id:row.id});continue;}
+  // A previous receipt omits target-specific/protected sites. Absence is not
+  // permission to inherit again on the next daily check; preserve that target.
+  if(existing&&previous&&!prior){preserved.push({kind:'site',id:row.id,reason:'target_not_in_inherited_receipt'});continue;}
   if(existing&&prior&&!same(pick(existing),prior)){preserved.push({kind:'site',id:row.id,reason:'target_changed_after_rollover'});continue;}
   const merged=existing?{...existing,...row}:row;
   // A setting removed from source may be intentionally target-specific; never erase by absence.
