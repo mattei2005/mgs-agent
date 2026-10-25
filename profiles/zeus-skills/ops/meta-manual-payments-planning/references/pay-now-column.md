@@ -1,4 +1,6 @@
-# Coluna F — Pay now das contas de linha
+# Coluna Pay now das contas de linha
+
+**Supersessão de letras:** por `1564022485366734969`, Pay now agora fica em **H**, após Invoice E e Setembro F. As menções a F/G/H abaixo documentam a implantação anterior; para execução atual prevalece `references/september-invoices.md` e o header live. Não inserir outra coluna Pay now. Ordenação humana é permitida: vincular ID/nome e descobrir a linha atual, nunca exigir o row_index antigo.
 
 Autorização de Rodolfo: `1563981039230255186`, thread `1563926766286803004`. Leitura dos modais das 39 contas de linha da mesma aba, sem pagar, trocar cartão, preencher dados ou avançar Next. Nova F antes do antigo current balance; G agora balance e H gasto de outubro. Schema anterior fica explicitamente supersedido; não inserir outra F em ticks futuros.
 

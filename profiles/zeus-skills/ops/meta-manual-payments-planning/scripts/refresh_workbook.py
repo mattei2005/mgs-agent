@@ -82,7 +82,7 @@ def main():
   assert abs(totals[0]-totals[1])<=Decimal('.01')and abs(totals[2]-totals[3])<=Decimal('.01'),'insights_daily_aggregate_mismatch'
   funding=a.get('funding_source_details')or{};typ=funding.get('type');method='Cartão de crédito'if typ==1 else'Linha de crédito'if typ==4 and funding.get('display_string')=='monthly invoicing'else'Não identificado pela Meta'
   # Stop structural drift rather than silently moving or dropping authorized accounts.
-  assert t['cells'][1]['userEnteredValue']['stringValue']==method,'funding_group_changed_requires_skill_regroup'
+  assert t['cells'][1]['userEnteredValue']['stringValue']==method,'funding_group_changed_requires_skill_regroup:account='+t['id']+';sheet='+t['cells'][1]['userEnteredValue']['stringValue']+';live='+method
   default=funding.get('display_string','')if method=='Cartão de crédito'else'Não se aplica'if method=='Linha de crédito'else'Não disponível'
   if method=='Cartão de crédito':
    if default:assert re.fullmatch(r'(American Express|Mastercard|MasterCard|Visa|Discover) \*\d{4}',default)

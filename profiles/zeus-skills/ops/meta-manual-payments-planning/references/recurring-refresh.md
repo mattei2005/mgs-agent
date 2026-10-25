@@ -1,5 +1,7 @@
 # Atualização recorrente autorizada — Digital Trust
 
+**Schema atual supersede letras antigas:** seguir `references/september-invoices.md`: E Invoice/F Setembro/G média/H Pay now/I balance/J outubro. Executar refresh_september_invoices.py --apply em cada tick antes do restante. Funding divergente é gate do restante, não falha da coleta de invoices; manter o snapshot e informar bloqueio exato, sem reorganização/billing implícitos.
+
 **Supersessão de schema e extensão autorizada:** pedido `1563981039230255186` adicionou F Pay now, deslocando balance para G e gasto para H. Em cada tick integrar também a coleta dos 39 modais pelo procedimento `references/pay-now-column.md`, com inspeção visual real e publicação limitada à nova F. Nunca inserir outra coluna. O primeiro tick natural do schema anterior executou ok em 25/10 às 14:03; isso não comprova execução natural do novo ciclo de modais.
 
 ## Escopo e relógio

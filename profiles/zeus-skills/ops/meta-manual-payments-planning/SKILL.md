@@ -1,7 +1,7 @@
 ---
 name: meta-manual-payments-planning
 description: "Use when planning manual Meta card payments."
-version: 0.3.0
+version: 0.4.0
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -74,7 +74,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 ### 5. Publicar no mesmo workbook
 
 - Preservar ID do workbook/aba, contas, notas, links, fórmulas e outras abas; backup imutável antes de cada mudança e diário de recuperação separado.
-- Layout atual, supersedendo o schema anterior de sete colunas por pedido `1563981039230255186`: **A Nome; B Forma; C Cartão default; D Última cobrança no cartão; E Média diária; F Disponível para pagar no cartão (Pay now); G Saldo a pagar; H Gasto do mês**. F é exclusivamente o valor literalmente exibido no modal das 39 contas de linha, com período/hora da leitura; não é limite do emissor nem balance. Resolver colunas por header/schema, nunca por antigas letras após inserções. Procedimento e automação em `references/pay-now-column.md`.
+- Layout atual por pedido `1564022485366734969`, supersedendo as versões de sete/oito colunas: **A Nome; B Forma; C Cartão default; D Última cobrança no cartão; E Invoice; F Setembro — saldo em aberto; G Média diária; H Pay now; I Saldo a pagar; J Gasto de outubro**. Resolver sempre pelo header. Invoice/Setembro são dados live de setembro/2026, não os valores históricos do print. H é somente valor do modal, com hora/período reais; não é limite do emissor nem balance. Procedimento atual em `references/september-invoices.md`; coleta UI em `references/pay-now-column.md`, respeitando o novo mapeamento.
 - Separar blocos de cartão e linha, ordenar por nome exato/ID e colocar subtotais abaixo dos blocos e total geral abaixo. D não recebe soma que pareça total mensal de pagamentos. Valores em moeda original explícita, sem total misto.
 - Exclusão de linhas zero somente sob pedido específico e com a coluna de gasto mensal corretamente resolvida. Não excluir automaticamente contas novas/inativas; preservar as removidas no backup e validar todos os IDs restantes.
 - Nomes das contas são clicáveis para Billing & payments, não Summary. Usar URL de billing validada com BM e `asset_id` exatos; preservar nomes e IDs em notas, sem normalizá-los ou inferir parâmetros ocultos de prints.
