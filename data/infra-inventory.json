@@ -893,6 +893,19 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-daily-recovery-1563920408531435650",
+      "agent": "zeus",
+      "type": "finance_rollover_replay_fix",
+      "authority_message_id": "1563920408531435650",
+      "status": "recovered_verified",
+      "report_path": "/root/mgs-agent/reports/finance-daily-recovery-1563920408531435650.md",
+      "paths": ["scripts/finance-month-rollover-core.mjs", "tests/finance-month-rollover.test.mjs", "apps/finance-system/private/daily-recovery-1563920408531435650"],
+      "verification": {"financial_date": "2026-10-24", "revision": 972, "gam_audit_id": "5142", "tests_passed": 533, "manager_checks": 15, "spend_replay_changed_fields": 0, "gam_replay": "already_applied", "browser_desktop_mobile": true, "sms_preserved": true, "core_sha256": "3be5b934ace9b616c2eb648cc041d527e6d424a1791a1a948e53b74e9519bfb5"},
+      "backup": "apps/finance-system/private/daily-recovery-1563920408531435650/before",
+      "restarts": false,
+      "cron_changed": false
+    },
+    {
       "id": "drive-trash-purge-1563588372872699927",
       "agent": "zeus",
       "type": "confirmed_permanent_old_drive_trash_purge",
