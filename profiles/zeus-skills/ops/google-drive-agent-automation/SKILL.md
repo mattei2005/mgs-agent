@@ -155,6 +155,8 @@ For Search Console API enablement, Service Usage IAM, property access and read-o
 
 ### Source-to-Sheet financial reconciliation
 
+- For two-decimal monetary subtotals and grand totals, publish `ROUND(SUM(...),2)` and validate computed Sheets values against independently calculated Decimal totals. Raw `SUM` can return binary floating artifacts even when the displayed cents look correct. If values already landed before this gate fails, read back the exact formula cells and correct only those formulas; preserve the original snapshot, account rows, notes, links and formatting instead of replaying the dataset.
+
 - Match the exact spreadsheet, numeric tab ID, headers and unique account row before writing; use issuer/product plus the displayed card suffix rather than row position alone. Keep credentials and full card numbers out of evidence and Sheets.
 - Treat each financial field independently: balance owed, available credit, available to spend, spending limit and Pay Over Time limit are not interchangeable. Publish only a source-explicit value with its original meaning; never infer a total limit from a balance or a blank detail panel.
 - Write only authorized, verified differences and preserve unknown fields, formulas and formatting. When the source already matches the Sheet, report a verified no-op rather than claiming an update. When only one field is verified, report partial field coverage and identify any preserved older value as unvalidated.

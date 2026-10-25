@@ -1,0 +1,41 @@
+{
+  "status": "completed_validated",
+  "authorization_message": "1563929190414160013",
+  "sheet_id": 271321738,
+  "groups": [
+    {
+      "label": "Cartão de crédito",
+      "count": 8,
+      "start_row": 3,
+      "end_row": 10,
+      "subtotal_row": 11,
+      "totals": [
+        "4297.17",
+        "108550.04"
+      ]
+    },
+    {
+      "label": "Linha de crédito",
+      "count": 39,
+      "start_row": 14,
+      "end_row": 52,
+      "subtotal_row": 53,
+      "totals": [
+        "871528.40",
+        "605309.34"
+      ]
+    }
+  ],
+  "grand_total_row": 55,
+  "totals": {
+    "currency": "USD",
+    "balance": "875825.57",
+    "october_spend": "713859.38"
+  },
+  "accounts_preserved": 47,
+  "formulas_computed_and_validated": true,
+  "account_values_notes_links_formats_preserved": true,
+  "other_tabs_unchanged": true,
+  "recovery": "Google Sheets binary floating SUM artifacts; only six formulas corrected to ROUND(SUM(...),2), exact readback validated. No data replay.",
+  "verified_at": "2026-10-25T10:58:12.035157-04:00"
+}

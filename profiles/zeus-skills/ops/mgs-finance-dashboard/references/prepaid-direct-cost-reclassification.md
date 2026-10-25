@@ -8,9 +8,11 @@ Rodolfo1555579357651537931 explicitly excludes the May–September retrospective
 
 The corrected engine normalizes legacy `company|121` to archived/non-P&L for October+ **before `prepare_catalog` and manager allocation**, not just in the final cash display. A residual BRL30000 template was otherwise charged in parallel with daily usage. Preserve its original stored amount/history, do not invent a real purchase from a template, keep real prepaid credits untouched, and block reactivation through the expense API. Reject historical SMS-reconciliation facts in a new month. Validate owner cash, general allocation, every manager, month-scoped notes and authenticated browser; excluding only the company total is insufficient. `reports/finance-monthroll-1555579357651537931.md` records15periods,8viewports and preserved September notes/ledger.
 
-## Official total versus missing detail — bounded owner disposition
+## Official total versus detail reconciliation
 
-When the official SMS Funnel `messages-report`/dashboard total exceeds the paginated `sent=true` details, keep the official total authoritative and the unmatched amount explicitly unallocated until an owner disposition exists. Verify the discrepancy on the vendor's own live surfaces; a detail mismatch is not automatically WordPress drift. For an explicit one-day residual assignment, preserve observed sequence counts, add only the exact authorized residual to the named manager, and include the date/count/cost/authority in separate source lineage. Never fabricate a message row or make a one-off G002 assignment a perpetual fallback. Use the canonical SMS rehearse/apply/verify and idempotent replay, then resume GAM only after the SMS state and database readback agree. The date-bound 06/10 disposition is recorded in `/root/mgs-agent/reports/finance-sms-residual-1557401256098664584.md`; it is not a future-date mapping rule.
+Use the authenticated SMS Funnel dashboard total for the identical period and timezone. Preserve observed manager counts and record a stable source/detail variance separately as `sms_dashboard_reconciliation`, without a manager; this reconciles company cost without changing individual commissions. A properly recorded variance does not leave the financial day pending or require Rodolfo to choose the source again. Missing or unstable dashboard data, incomplete/duplicate/wrong-date detail and unknown sequences still block acceptance. Follow the active source policy in `docs/finance-sms-dashboard-source-policy.md` rather than imposing exact detail equality or treating WordPress as the accounting total.
+
+Apply a residual to a named manager only under an explicit, bounded owner disposition. Preserve observed sequence counts and record the authorized difference separately with its exact scope and provenance; never fabricate message rows or turn a one-off assignment into a permanent G002 fallback. Verify the real financial write and idempotent replay before resuming dependent imports.
 
 ## Accounting model
 
@@ -35,7 +37,21 @@ When the official SMS Funnel `messages-report`/dashboard total exceeds the pagin
 - Commission deltas can move by one cent per manager because the engines round individual payables at different boundaries. Never alter the direct cost or invent a balancing fact to force a manager cell.
 - Permit only explicitly enumerated one-cent outcomes proven in stage and authorized by Rodolfo; validate the company-profit bridge from the actual payable deltas. General cent tolerances remain forbidden.
 
-## Execution gates
+## Read-only monthly SMS recheck
+
+Use this branch for “is this month's SMS correct?”; it is an audit, not permission to repeat the historical reclassification or modify payments.
+
+1. Resolve the approved month's source plan and completion evidence through the registry/checkpoint. Use the old plan only for approved manager allocation and provenance; obtain fresh vendor totals and current financial state before answering.
+2. Reuse `scripts/sync-smsfunnel-cost-daily.py` as an imported module, not its write-capable main routine. Load the canonical environment, call `authenticated_session()`, then `fetch_dashboard_day(session, headers, date)` for every closed date in the requested month. Persist only date/count/source-hash evidence, verify unique-date coverage against the calendar, and sum in code. The `/daily-sents` response contains eight consecutive buckets starting at the requested date: the helper validates weekday labels and selects the first bucket; summing all eight on each request would overlap dates. Do not persist message bodies, phone numbers or credentials.
+3. Verify the applicable unit price with the vendor and the approved closing basis. Calculate cost in integer cents or `Decimal`; if pricing changed within the period, reconcile each applicable interval rather than applying the latest price to the whole month.
+4. Read the actual monthly workspace from the finance PostgreSQL host using `openPostgres({options:'-c default_transaction_read_only=on'})` under release admission. Match each approved `direct_monthly_cost` by exact ID, period, site, manager, original BRL amount and currency. Require unique IDs and exactly one matching calculated fact per cost. Check for daily costs or reconciliation rows that could recognize the same consumption again; total parity alone does not prove absence of duplicate charges.
+5. Recalculate the saved workspace in memory with `calculate({period, overrides, additions})`, without committing. Compare its SMS facts to the persisted result. Invoke `managerView` for all five external managers and inspect the exact SMS objects in `blocks[].monthly_closing_adjustments`; a string search for an SMS ID anywhere in the response is not proof that the cost reaches the manager's financial block. Verify each summary control and keep G002 as the company/noncommissioned share.
+6. Verify the original recharge row and all its charges remain archived, while its calculated company-expense BRL/USD contribution is zero. Distinguish prepaid purchases, consumed cost, historical payable adjustments and personal reimbursements. A recharge/consumption difference is not by itself an accounting error or a payment to execute. Check that historical monthly SMS facts were not copied into the following daily-consumption month.
+7. Aggregate vendor-versus-Dash totals and the signed difference in code. Report the verdict first, then covered dates/send quantity/unit price/recognized cost, approved manager breakdown when useful, and whether recargas were excluded from double charging. State that financial values were unchanged. Distinguish a fresh total reconciliation plus approved-allocation readback from a fresh message-by-message attribution audit; perform full detail pagination only when attribution is disputed or the existing evidence is insufficient.
+
+## Mutation execution gates
+
+Use these only for an authorized reclassification or financial correction, not a read-only monthly recheck.
 
 1. Capture a production DB/code backup and verify hashes.
 2. Restore an isolated PostgreSQL database and run RED/GREEN tests.
