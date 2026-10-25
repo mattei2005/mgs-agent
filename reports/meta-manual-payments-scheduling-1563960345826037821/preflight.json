@@ -3,7 +3,44 @@
   "civil_dates": 8,
   "start": "2026-10-25T00:00:00-04:00",
   "end": "2026-11-02T00:00:00-05:00",
-  "selected": null,
+  "selected": {
+    "minute": 2,
+    "schedule": "2 8,14,21 * * *",
+    "operational_conflicts": [],
+    "baseline_collisions": [
+      {
+        "source": "root",
+        "name": "monitor_honcho_billing_watch.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "alerts-infra-failed-alert-resolver.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "monitor_hermes_pending_writes.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "finalize-hermes-structural-write.py",
+        "count": 24
+      },
+      {
+        "source": "root",
+        "name": "hermes-news-explainer-watchdog.py",
+        "count": 24
+      },
+      {
+        "source": "hermes:zeus",
+        "name": "b013-dtr-link-watch",
+        "count": 24
+      }
+    ],
+    "baseline_score": 144
+  },
   "candidates": [
     {
       "minute": 0,
@@ -31,18 +68,8 @@
         },
         {
           "source": "root",
-          "name": "hermes-news-explainer.py",
-          "count": 24
-        },
-        {
-          "source": "root",
           "name": "sync-sb-sms-revenue-daily.sh",
           "count": 8
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
         },
         {
           "source": "root",
@@ -78,6 +105,11 @@
         },
         {
           "source": "root",
+          "name": "hermes-news-explainer.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "monitor_honcho_billing_watch.py",
           "count": 24
         },
@@ -98,6 +130,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -107,17 +144,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 192
+      "baseline_score": 240
     },
     {
       "minute": 1,
       "schedule": "1 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "hermes:ares",
           "name": "Creditoparaveiculo 13 G006 Diario",
@@ -142,27 +174,21 @@
         },
         {
           "source": "root",
-          "name": "hermes-news-explainer-watchdog.py",
-          "count": 24
-        }
-      ],
-      "baseline_score": 96
-    },
-    {
-      "minute": 2,
-      "schedule": "2 8,14,21 * * *",
-      "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "alerts-infra-failed-alert-resolver.py",
+          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
           "source": "root",
-          "name": "finalize-hermes-structural-write.py",
+          "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         }
       ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 2,
+      "schedule": "2 8,14,21 * * *",
+      "operational_conflicts": [],
       "baseline_collisions": [
         {
           "source": "root",
@@ -171,7 +197,17 @@
         },
         {
           "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
@@ -185,17 +221,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 96
+      "baseline_score": 144
     },
     {
       "minute": 3,
       "schedule": "3 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "root",
           "name": "monitor-sms-funnel-balance.py",
@@ -225,6 +256,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -234,17 +270,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 120
+      "baseline_score": 144
     },
     {
       "minute": 4,
       "schedule": "4 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "root",
           "name": "monitor-runcloud.py",
@@ -264,6 +295,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "monitor-hermes-memory-capacity.py",
           "count": 24
         },
@@ -273,22 +309,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 96
+      "baseline_score": 120
     },
     {
       "minute": 5,
       "schedule": "5 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "hermes-news-explainer.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "root",
           "name": "dtr-sb-restricted-summary.py",
@@ -299,6 +325,11 @@
         {
           "source": "root",
           "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
           "count": 24
         },
         {
@@ -318,6 +349,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -327,17 +363,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 144
+      "baseline_score": 192
     },
     {
       "minute": 6,
       "schedule": "6 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "hermes:ares",
           "name": "Creditoparaveiculo 13 G006 Intraday 2h contínuo",
@@ -362,6 +393,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -371,7 +407,7 @@
           "count": 24
         }
       ],
-      "baseline_score": 120
+      "baseline_score": 144
     },
     {
       "minute": 7,
@@ -379,23 +415,8 @@
       "operational_conflicts": [
         {
           "source": "root",
-          "name": "check-pending-reports.sh",
-          "count": 24
-        },
-        {
-          "source": "root",
           "name": "monitor-webshare-status.sh",
           "count": 16
-        },
-        {
-          "source": "root",
-          "name": "alerts-infra-failed-alert-resolver.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
         },
         {
           "source": "hermes:zeus",
@@ -406,7 +427,17 @@
       "baseline_collisions": [
         {
           "source": "root",
+          "name": "check-pending-reports.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "monitor_honcho_billing_watch.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
           "count": 24
         },
         {
@@ -416,21 +447,21 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         }
       ],
-      "baseline_score": 72
+      "baseline_score": 144
     },
     {
       "minute": 8,
       "schedule": "8 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "root",
           "name": "monitor-sms-funnel-balance.py",
@@ -460,27 +491,21 @@
         },
         {
           "source": "root",
-          "name": "hermes-news-explainer-watchdog.py",
-          "count": 24
-        }
-      ],
-      "baseline_score": 96
-    },
-    {
-      "minute": 9,
-      "schedule": "9 8,14,21 * * *",
-      "operational_conflicts": [
-        {
-          "source": "root",
           "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
-          "source": "/etc/cron.d/php",
-          "name": "root [",
+          "source": "root",
+          "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         }
       ],
+      "baseline_score": 120
+    },
+    {
+      "minute": 9,
+      "schedule": "9 8,14,21 * * *",
+      "operational_conflicts": [],
       "baseline_collisions": [
         {
           "source": "root",
@@ -494,7 +519,17 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
+          "count": 24
+        },
+        {
+          "source": "/etc/cron.d/php",
+          "name": "root [",
           "count": 24
         },
         {
@@ -503,22 +538,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 96
+      "baseline_score": 144
     },
     {
       "minute": 10,
       "schedule": "10 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "hermes-news-explainer.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "contract:Eggbev-US-CC-EN-BOT.json",
           "name": "roas_cycle",
@@ -529,6 +554,11 @@
         {
           "source": "root",
           "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
           "count": 24
         },
         {
@@ -548,6 +578,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -557,18 +592,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 144
+      "baseline_score": 192
     },
     {
       "minute": 11,
       "schedule": "11 8,14,21 * * *",
-      "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        }
-      ],
+      "operational_conflicts": [],
       "baseline_collisions": [
         {
           "source": "root",
@@ -592,6 +621,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -601,22 +635,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 144
+      "baseline_score": 168
     },
     {
       "minute": 12,
       "schedule": "12 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "alerts-infra-failed-alert-resolver.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "hermes:ares",
           "name": "Ares criativos · intake contextual autônomo",
@@ -631,7 +655,17 @@
         },
         {
           "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
@@ -650,17 +684,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 120
+      "baseline_score": 168
     },
     {
       "minute": 13,
       "schedule": "13 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "root",
           "name": "monitor-sms-funnel-balance.py",
@@ -685,22 +714,21 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         }
       ],
-      "baseline_score": 96
+      "baseline_score": 120
     },
     {
       "minute": 14,
       "schedule": "14 8,14,21 * * *",
-      "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        }
-      ],
+      "operational_conflicts": [],
       "baseline_collisions": [
         {
           "source": "root",
@@ -710,6 +738,11 @@
         {
           "source": "root",
           "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
@@ -728,7 +761,7 @@
           "count": 24
         }
       ],
-      "baseline_score": 120
+      "baseline_score": 144
     },
     {
       "minute": 15,
@@ -737,16 +770,6 @@
         {
           "source": "root",
           "name": "track-article-cost.sh",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "hermes-news-explainer.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
@@ -764,6 +787,11 @@
         {
           "source": "root",
           "name": "monitor-cron-stale-logs.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
           "count": 24
         },
         {
@@ -788,6 +816,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -802,17 +835,12 @@
           "count": 24
         }
       ],
-      "baseline_score": 216
+      "baseline_score": 264
     },
     {
       "minute": 16,
       "schedule": "16 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "contract:Eggbev-US-CC-EN-BOT.json",
           "name": "page_lead_guardrail",
@@ -837,11 +865,16 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         }
       ],
-      "baseline_score": 96
+      "baseline_score": 120
     },
     {
       "minute": 17,
@@ -849,23 +882,8 @@
       "operational_conflicts": [
         {
           "source": "root",
-          "name": "alerts-infra-failed-alert-resolver.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
-        {
-          "source": "root",
           "name": "sync-sb-messenger-revenue-sheet.py",
           "count": 8
-        },
-        {
-          "source": "/etc/crontab",
-          "name": "root cd",
-          "count": 24
         }
       ],
       "baseline_collisions": [
@@ -876,26 +894,36 @@
         },
         {
           "source": "root",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "monitor_hermes_pending_writes.py",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
           "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
+        },
+        {
+          "source": "/etc/crontab",
+          "name": "root cd",
+          "count": 24
         }
       ],
-      "baseline_score": 72
+      "baseline_score": 144
     },
     {
       "minute": 18,
       "schedule": "18 8,14,21 * * *",
       "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
-          "count": 24
-        },
         {
           "source": "root",
           "name": "monitor-sms-funnel-balance.py",
@@ -925,6 +953,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -934,7 +967,7 @@
           "count": 24
         }
       ],
-      "baseline_score": 120
+      "baseline_score": 144
     },
     {
       "minute": 19,
@@ -943,11 +976,6 @@
         {
           "source": "root",
           "name": "monitor-drive-auth-unified.py",
-          "count": 24
-        },
-        {
-          "source": "root",
-          "name": "finalize-hermes-structural-write.py",
           "count": 24
         }
       ],
@@ -964,31 +992,30 @@
         },
         {
           "source": "root",
-          "name": "hermes-news-explainer-watchdog.py",
-          "count": 24
-        }
-      ],
-      "baseline_score": 72
-    },
-    {
-      "minute": 20,
-      "schedule": "20 8,14,21 * * *",
-      "operational_conflicts": [
-        {
-          "source": "root",
-          "name": "hermes-news-explainer.py",
+          "name": "finalize-hermes-structural-write.py",
           "count": 24
         },
         {
           "source": "root",
-          "name": "finalize-hermes-structural-write.py",
+          "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         }
       ],
+      "baseline_score": 96
+    },
+    {
+      "minute": 20,
+      "schedule": "20 8,14,21 * * *",
+      "operational_conflicts": [],
       "baseline_collisions": [
         {
           "source": "root",
           "name": "sync-souls.sh",
+          "count": 24
+        },
+        {
+          "source": "root",
+          "name": "hermes-news-explainer.py",
           "count": 24
         },
         {
@@ -1008,6 +1035,11 @@
         },
         {
           "source": "root",
+          "name": "finalize-hermes-structural-write.py",
+          "count": 24
+        },
+        {
+          "source": "root",
           "name": "hermes-news-explainer-watchdog.py",
           "count": 24
         },
@@ -1017,7 +1049,7 @@
           "count": 24
         }
       ],
-      "baseline_score": 144
+      "baseline_score": 192
     }
   ],
   "entries": [
@@ -1028,7 +1060,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2316,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1037,7 +1070,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1046,7 +1080,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1055,7 +1090,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1064,7 +1100,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2316,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1073,7 +1110,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1082,7 +1120,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2316,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1091,7 +1130,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1100,7 +1140,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 24,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1109,7 +1150,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1118,7 +1160,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1127,7 +1170,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1136,7 +1180,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1145,7 +1190,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1154,7 +1200,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1163,7 +1210,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1172,7 +1220,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2316,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1181,7 +1230,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 24,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1190,7 +1240,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1199,7 +1250,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 11580,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1208,7 +1260,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 32,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1217,7 +1270,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1226,7 +1280,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1235,7 +1290,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2316,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1244,7 +1300,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 16,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1253,7 +1310,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2316,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1262,7 +1320,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1271,7 +1330,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1280,7 +1340,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 386,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1289,7 +1350,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1298,7 +1360,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1307,7 +1370,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 11580,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1316,7 +1380,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 11580,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1325,7 +1390,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1334,7 +1400,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1343,7 +1410,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 24,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1352,7 +1420,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 153,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1361,7 +1430,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 24,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1370,7 +1440,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 1158,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1379,7 +1450,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 11580,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1388,7 +1460,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1397,7 +1470,8 @@
       "declared_timezone": "America/Sao_Paulo",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1406,7 +1480,8 @@
       "declared_timezone": "America/Sao_Paulo",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1415,7 +1490,8 @@
       "declared_timezone": "America/Sao_Paulo",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1424,7 +1500,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1433,7 +1510,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "root",
@@ -1442,7 +1520,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1451,7 +1530,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1460,7 +1540,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 32,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1469,7 +1550,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 24,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1478,7 +1560,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1487,7 +1570,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1496,7 +1580,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 96,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "root",
@@ -1505,7 +1590,8 @@
       "declared_timezone": "America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "/etc/crontab",
@@ -1514,7 +1600,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/crontab",
@@ -1523,7 +1610,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/crontab",
@@ -1532,7 +1620,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/crontab",
@@ -1541,7 +1630,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 1,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/cron.d/php",
@@ -1550,7 +1640,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 386,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/cron.d/e2scrub_all",
@@ -1559,7 +1650,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/cron.d/e2scrub_all",
@@ -1568,7 +1660,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/cron.d/monarx-update",
@@ -1577,7 +1670,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 1,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/cron.d/sysstat",
@@ -1586,7 +1680,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 1158,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "/etc/cron.d/sysstat",
@@ -1595,7 +1690,8 @@
       "declared_timezone": "host America/New_York",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "hermes:zeus",
@@ -1606,7 +1702,8 @@
       "next": "2026-10-25T14:07:40.408637-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 32,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1614,10 +1711,11 @@
       "id": "0cc7ed1e587e",
       "expr": "*/3 0,8-23 * * *",
       "interval": null,
-      "next": "2026-10-25T13:36:00-04:00",
+      "next": "2026-10-25T13:39:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2720,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "hermes:zeus",
@@ -1625,10 +1723,11 @@
       "id": "498fb0d95e10",
       "expr": "2-59/9 0,8-23 * * *",
       "interval": null,
-      "next": "2026-10-25T13:38:00-04:00",
+      "next": "2026-10-25T13:47:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 952,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "hermes:zeus",
@@ -1639,7 +1738,8 @@
       "next": "2026-10-25T14:23:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1650,7 +1750,8 @@
       "next": "2026-10-26T04:15:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1661,7 +1762,8 @@
       "next": "2026-11-01T05:45:00-05:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 2,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1672,7 +1774,8 @@
       "next": "2026-10-25T14:00:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 386,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1683,7 +1786,8 @@
       "next": "2026-10-26T06:30:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 8,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1694,7 +1798,8 @@
       "next": "2026-10-25T13:56:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 386,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1705,7 +1810,8 @@
       "next": "2026-10-26T01:00:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 342,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1716,7 +1822,8 @@
       "next": "2026-10-26T01:02:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 342,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1727,7 +1834,8 @@
       "next": "2026-11-05T00:05:47-05:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 0,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:zeus",
@@ -1738,7 +1846,8 @@
       "next": "2026-10-25T13:40:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": true
+      "baseline": true,
+      "baseline_reason": "OS maintenance or dense existing infrastructure/dispatch/watch lane; not a fixed financial/campaign operational report"
     },
     {
       "source": "hermes:ares",
@@ -1749,7 +1858,8 @@
       "next": "2026-10-25T14:01:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:ares",
@@ -1760,7 +1870,8 @@
       "next": "2026-10-25T14:06:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 193,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "hermes:ares",
@@ -1771,7 +1882,8 @@
       "next": "2026-10-25T13:42:00-04:00",
       "physical_timezone": "America/New_York",
       "ticks_8d": 772,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "contract:Eggbev-US-CC-EN-BOT.json",
@@ -1779,7 +1891,8 @@
       "expr": "16 8,20 * * *",
       "physical_timezone": "America/New_York",
       "ticks_8d": 16,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "contract:Eggbev-US-CC-EN-BOT.json",
@@ -1787,7 +1900,8 @@
       "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
       "physical_timezone": "America/New_York",
       "ticks_8d": 104,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     }
   ],
   "systemd_timers": [
@@ -1889,7 +2003,8 @@
       "expr": "16 8,20 * * *",
       "physical_timezone": "America/New_York",
       "ticks_8d": 16,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     },
     {
       "source": "contract:Eggbev-US-CC-EN-BOT.json",
@@ -1903,7 +2018,8 @@
       "expr": "10 0,5,6,8,10,12,13,14,16,18,20,22,23 * * *",
       "physical_timezone": "America/New_York",
       "ticks_8d": 104,
-      "baseline": false
+      "baseline": false,
+      "baseline_reason": "non-baseline operational schedule"
     }
   ],
   "resource_isolation": "Dedicated workbook writer.lock; PC1 shared lease; Meta reads only; one native cron job, no parallel writers. New payment events require native UI evidence; no billing mutations."
