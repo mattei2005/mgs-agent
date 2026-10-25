@@ -1,0 +1,186 @@
+{
+  "alert_id": "1563906900519821383",
+  "job_id": "685397627b29",
+  "updated_at": "2026-10-25T13:35:57.129174+00:00",
+  "diagnosis": "Falha de transporte na leitura Google Sheets: api_json retorna status0 para URLError/TimeoutError/socket.timeout; subtipo original nao preservado pelo coletor. Releitura Drive e Sheets HTTP200. Causa interna externa nao comprovada.",
+  "recovery": "Wrapper canonico Zeus --now, apos reconciliar lock, checkpoint e snapshot remoto; nenhum writer concorrente encontrado.",
+  "verification": {
+    "checks": {
+      "nominal_hash": true,
+      "fixed_hash": true,
+      "ledger_hash": true,
+      "history_hash": true,
+      "ok": true,
+      "failures_zero": true,
+      "alert_closed": true,
+      "remote_timestamp_match": true,
+      "fresh_recovery": true
+    },
+    "pass": true,
+    "fixed_count": 1112,
+    "state": {
+      "ok": true,
+      "consecutive_failures": 0,
+      "updated_at": "2026-10-25T13:34:52.377320+00:00",
+      "result": {
+        "changed": false,
+        "periods": [],
+        "updated_at": "2026-10-25T13:34:52.377320+00:00"
+      }
+    },
+    "alert": {
+      "reported": 0,
+      "open": false
+    },
+    "verified_at": "2026-10-25T13:35:01.045750+00:00"
+  },
+  "source_http": [
+    {
+      "api": "drive",
+      "method": "GET",
+      "http": 200,
+      "error_type": null
+    },
+    {
+      "api": "sheets",
+      "method": "GET",
+      "http": 200,
+      "error_type": null
+    }
+  ],
+  "google_writes": 0,
+  "tests": {
+    "python_source": 17,
+    "node_manual_quotes": 4,
+    "failed": 0
+  },
+  "production_code_changed": false,
+  "cron_changed": false,
+  "credential_or_permission_changed": false,
+  "recurrence_control": "Rotina existente mantida; fonte validada e incidente encerrado. Nao foi alterado transporte/retry nem ha garantia contra nova indisponibilidade externa.",
+  "before": {
+    "nominal_hash": "48136fc0ebe35ef7e60615db461b48eff7137ca005a7c7d77928ecf3fcbeff6e",
+    "fixed_hash": "c4b3703cfd1e552308a83c2fc32dbd6139834277a354304c78a09fea5d7bbbb3",
+    "fixed_count": 1112,
+    "ledger_hash": "e010263e3b2da3ab5948c5caf16d891cdcb8c0415c46615d166fca3d1c94bda3",
+    "history_hash": "942f09bf424684765dca015259fdaad8ad27c779a45f90eb72e132eb9794c949",
+    "workspaces": [
+      {
+        "id": "workspace-2026-08",
+        "revision": 565
+      },
+      {
+        "id": "workspace-2026-09",
+        "revision": 1696
+      },
+      {
+        "id": "workspace-2026-10",
+        "revision": 970
+      }
+    ],
+    "quotes": {
+      "updated_at": "2026-10-25T12:56:55.844583+00:00",
+      "source": "Google Sheets / GOOGLEFINANCE",
+      "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+      "values": {
+        "principal|CAIXA SINTETICO|J2": 4.915547999999999,
+        "principal|Agosto 2026|H1": 1.40024997,
+        "principal|Agosto 2026|I1": 1.33745
+      },
+      "formulas": {
+        "principal|CAIXA SINTETICO|J2": "=GOOGLEFINANCE(\"USDBRL\")*99%",
+        "principal|Agosto 2026|H1": "=GOOGLEFINANCE(\"USDCAD\")",
+        "principal|Agosto 2026|I1": "=GOOGLEFINANCE(\"GBPUSD\")"
+      },
+      "extra_sources": {
+        "principal|CAIXA SINTETICO|J2": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "B1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|H1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "C1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|I1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "A1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote",
+          "periods": [
+            "2026-08"
+          ]
+        }
+      },
+      "google_writes": 0
+    }
+  },
+  "after": {
+    "nominal_hash": "48136fc0ebe35ef7e60615db461b48eff7137ca005a7c7d77928ecf3fcbeff6e",
+    "fixed_hash": "c4b3703cfd1e552308a83c2fc32dbd6139834277a354304c78a09fea5d7bbbb3",
+    "fixed_count": 1112,
+    "ledger_hash": "e010263e3b2da3ab5948c5caf16d891cdcb8c0415c46615d166fca3d1c94bda3",
+    "history_hash": "942f09bf424684765dca015259fdaad8ad27c779a45f90eb72e132eb9794c949",
+    "workspaces": [
+      {
+        "id": "workspace-2026-08",
+        "revision": 565
+      },
+      {
+        "id": "workspace-2026-09",
+        "revision": 1696
+      },
+      {
+        "id": "workspace-2026-10",
+        "revision": 970
+      }
+    ],
+    "quotes": {
+      "updated_at": "2026-10-25T13:34:52.377320+00:00",
+      "source": "Google Sheets / GOOGLEFINANCE",
+      "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+      "values": {
+        "principal|CAIXA SINTETICO|J2": 4.915547999999999,
+        "principal|Agosto 2026|H1": 1.40024997,
+        "principal|Agosto 2026|I1": 1.33745
+      },
+      "formulas": {
+        "principal|CAIXA SINTETICO|J2": "=GOOGLEFINANCE(\"USDBRL\")*99%",
+        "principal|Agosto 2026|H1": "=GOOGLEFINANCE(\"USDCAD\")",
+        "principal|Agosto 2026|I1": "=GOOGLEFINANCE(\"GBPUSD\")"
+      },
+      "extra_sources": {
+        "principal|CAIXA SINTETICO|J2": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "B1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|H1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "C1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote"
+        },
+        "principal|Agosto 2026|I1": {
+          "spreadsheet_id": "1Zk-b8OoaDHrvFtuerf5IuO2jx-phVWXMYi79yqVTZX4",
+          "range": "A1",
+          "sheet_title": "Sheet1",
+          "purpose": "provisional_market_quote",
+          "periods": [
+            "2026-08"
+          ]
+        }
+      },
+      "google_writes": 0
+    }
+  },
+  "wrapper": {
+    "returncode": 0,
+    "stdout": "Câmbio financeiro: sincronização recuperada e validada. Taxas fixadas preservadas.\n",
+    "stderr": ""
+  }
+}

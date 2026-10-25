@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-25T05:00:01-04:00",
+    "updated_at": "2026-10-25T13:35:57.129174+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -51135,6 +51135,51 @@
         "docs/finance-account-ownership.md": "81e7bb2b7ee4fd1a68790ebf87ff0d919fb887e0e6d5329101ccc38afc164920",
         "reports/finance-growpower-g004-1563528749830377524.md": "a1345af6fc95b325955799625030d646775a7b057ea2e4491d7b10f820d83c40"
       }
+    },
+    {
+      "id": "finance-quotes-recovery-1563906900519821383",
+      "agent": "zeus",
+      "type": "finance_quote_transient_transport_recovery",
+      "source_alert_id": "1563906900519821383",
+      "job_id": "685397627b29",
+      "status": "recovered_verified",
+      "updated_at": "2026-10-25T13:35:57.129174+00:00",
+      "report_path": "/root/mgs-agent/reports/finance-quotes-recovery-1563906900519821383.json",
+      "code_or_cron_changed": false,
+      "verification": {
+        "checks": {
+          "nominal_hash": true,
+          "fixed_hash": true,
+          "ledger_hash": true,
+          "history_hash": true,
+          "ok": true,
+          "failures_zero": true,
+          "alert_closed": true,
+          "remote_timestamp_match": true,
+          "fresh_recovery": true
+        },
+        "pass": true,
+        "fixed_count": 1112,
+        "state": {
+          "ok": true,
+          "consecutive_failures": 0,
+          "updated_at": "2026-10-25T13:34:52.377320+00:00",
+          "result": {
+            "changed": false,
+            "periods": [],
+            "updated_at": "2026-10-25T13:34:52.377320+00:00"
+          }
+        },
+        "alert": {
+          "reported": 0,
+          "open": false
+        },
+        "verified_at": "2026-10-25T13:35:01.045750+00:00"
+      },
+      "authority_message_ids": [
+        "1562987037370617896",
+        "1562987234351644764"
+      ]
     }
   ],
   "profile_skill_references": [
