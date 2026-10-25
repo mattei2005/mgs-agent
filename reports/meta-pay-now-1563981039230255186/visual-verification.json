@@ -1,10 +1,10 @@
 {
-  "verified_at": "2026-10-25T14:35:24.806710-04:00",
+  "verified_at": "2026-10-25T15:05:08.538146-04:00",
   "method": "Actual modal screenshots read with vision_analyze; URL business_id + asset_id and literal amount matched. Account names kept from frozen API/Sheet source, not normalized from OCR.",
   "verified_account_ids": [
-    "2633813727134360",
     "1753257812779707",
     "1107653168698121",
+    "2633813727134360",
     "2039876850230678",
     "1851640026221079",
     "1001115192056600",
@@ -25,6 +25,19 @@
     "937846586033361",
     "336562339356179",
     "1744611463000838",
-    "311204101516831"
-  ]
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "787796726891306",
+    "1600310064116258"
+  ],
+  "ocr_reconciliation": "Full-image OCR errors were not normalized. Each conflicting URL identifier was re-read in native-resolution tight crops; literal IDs then matched. 1245683183659911 required tighter crop (430,22,760,48)."
 }
