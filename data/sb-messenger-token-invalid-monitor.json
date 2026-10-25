@@ -458,7 +458,12 @@
     723353,
     723474,
     723480,
-    723499
+    723499,
+    724148,
+    724171,
+    724177,
+    724198,
+    724215
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -697,9 +702,9 @@
     "digital-trust|boostingecon|30|1762": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-23T20:09:06.000Z",
+        "created_at": "2026-10-25T00:07:35.000Z",
         "domain": "boostingecon",
-        "notification_id": 722317,
+        "notification_id": 724215,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 1,
@@ -723,7 +728,8 @@
         719355,
         720180,
         720872,
-        722317
+        722317,
+        724215
       ],
       "opened_at": "2026-10-20T16:12:14-04:00",
       "repeat_count": 0,
@@ -2443,9 +2449,9 @@
     "digital-trust|openzed|16|908": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-23T20:07:51.000Z",
+        "created_at": "2026-10-25T00:06:39.000Z",
         "domain": "openzed",
-        "notification_id": 722279,
+        "notification_id": 724177,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 14,
@@ -2476,7 +2482,8 @@
         718244,
         719349,
         720833,
-        722279
+        722279,
+        724177
       ],
       "opened_at": "2026-10-06T12:12:13-04:00",
       "repeat_count": 0,
@@ -2589,9 +2596,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-23T20:07:52.000Z",
+        "created_at": "2026-10-25T00:06:40.000Z",
         "domain": "spe",
-        "notification_id": 722299,
+        "notification_id": 724198,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 7,
@@ -2654,7 +2661,8 @@
         719313,
         720149,
         720853,
-        722299
+        722299,
+        724198
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -2694,9 +2702,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-23T20:07:28.000Z",
+        "created_at": "2026-10-25T00:06:24.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 722272,
+        "notification_id": 724171,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -2735,7 +2743,8 @@
         719295,
         720120,
         720812,
-        722272
+        722272,
+        724171
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -2775,9 +2784,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-24T00:05:17.000Z",
+        "created_at": "2026-10-25T00:06:14.000Z",
         "domain": "topfeed",
-        "notification_id": 723136,
+        "notification_id": 724148,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -2808,7 +2817,8 @@
         719275,
         720099,
         721639,
-        723136
+        723136,
+        724148
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -3366,19 +3376,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-24T19:57:12-04:00",
+  "last_check": "2026-10-24T20:12:13-04:00",
   "last_delivery": {
-    "at": "2026-10-24T12:12:13-04:00",
+    "at": "2026-10-24T20:12:13-04:00",
     "cursor_ids": [
-      723474,
-      723480,
-      723499
+      724148,
+      724171,
+      724177,
+      724198,
+      724215
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 723499,
+  "last_seen_id": 724215,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
