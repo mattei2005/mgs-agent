@@ -140,6 +140,8 @@ Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma va
 - No V3 estático, o contêiner da imagem é `span.mgs-dq-category-image` e o `<img>` fica aninhado; leia `currentSrc`, `complete` e `naturalWidth/naturalHeight` no `<img>`. O texto da categoria está em `.mgs-dq-category-name`. Não procure uma classe de imagem diretamente no `<img>`, porque isso produz falso negativo apesar de a página estar correta.
 - Em artigos com CSS inline, nomes como `cnh-rec-quiz-wrap`, `cnh-rec-logo` e `cnh-rec-headline` aparecem primeiro dentro do `<style>`. Ao validar a ordem visual, ancore no `<section class="cnh-rec-quiz-wrap">` renderizado ou consulte o DOM; nunca use a primeira ocorrência textual do nome da classe no HTML inteiro.
 - Um falso negativo do validador não autoriza alterar produção novamente. Inspecione o DOM real, corrija o seletor e repita a leitura antes de concluir que existe regressão.
+- Ao comparar RECs por screenshots, abra as duas URLs e confira o DOM antes de concluir que logo, selo, avaliação ou conteúdo estão ausentes. Recorte e ausência de impressão publicitária não provam ausência de componente; diferencie slot configurado, iframe carregado e anúncio efetivamente exibido. Não altere monetização por diferença isolada de impressão.
+- Se a URL com parâmetros mostrar a copy nova e a URL limpa parecer antiga, compare a URL limpa por HTTP independente e pelo navegador com cache desabilitado antes de purgar produção. Cache local do navegador pode simular cache público obsoleto.
 
 ## Preservação de configurações existentes em upgrades
 
