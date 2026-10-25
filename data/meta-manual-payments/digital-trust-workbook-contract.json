@@ -2,7 +2,8 @@
   "authorization_messages": [
     "1563960055504838767",
     "1563960345826037821",
-    "1563981039230255186"
+    "1563981039230255186",
+    "1564022485366734969"
   ],
   "thread_id": "1563926766286803004",
   "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
@@ -78,7 +79,7 @@
     "14:02",
     "21:02"
   ],
-  "native_schedule_state": "enabled_api_tick_observed_new_pay_now_cycle_pending",
+  "native_schedule_state": "enabled_invoices_independent_general_refresh_funding_gate",
   "cadence_authority_message": "1563960345826037821",
   "next_run_at": "2026-10-25T21:02:00-04:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -125,8 +126,43 @@
     "26632890069640784"
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
-  "layout_version": 2,
+  "layout_version": 3,
   "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186",
   "pay_now_updated_each_tick": true,
-  "pay_now_collection_policy": "Read each of the39 actual PC1 modals each tick; verify screenshots then publish F only. Preserve individual timestamps and fail closed on missing identity/values. No payments."
+  "pay_now_collection_policy": "Read each of the39 actual PC1 modals each tick; verify screenshots then publish F only. Preserve individual timestamps and fail closed on missing identity/values. No payments.",
+  "schema": {
+    "A": "Nome",
+    "B": "Forma",
+    "C": "Default",
+    "D": "Última cobrança no cartão",
+    "E": "Invoice",
+    "F": "Setembro — saldo em aberto",
+    "G": "Média diária",
+    "H": "Pay now",
+    "I": "Saldo a pagar",
+    "J": "Outubro2026"
+  },
+  "september_period": "2026-09-01",
+  "september_authority_message": "1564022485366734969",
+  "invoice_policy": "Use current amount_due of September invoices; Paid=0; preserve literal invoice number and original amount/status in notes. Never infer from spend/balance/Pay now.",
+  "pending_outside_invoice_account_ids": [
+    "1254066319219582",
+    "2422027798240533",
+    "1034081997659047",
+    "392558193256993",
+    "1542257646409395",
+    "1430034464330819"
+  ],
+  "pending_sheet_reclassification": {
+    "id": "1543098427832443",
+    "sheet_name": "Mavroa-US-SHEIN-ES-03-G003",
+    "live_name": "Mavroa-US-SHEIN-ES-03-G003",
+    "sheet_method": "Linha de crédito",
+    "live_method": "Cartão de crédito",
+    "funding_type": 1,
+    "funding_details_present": true
+  },
+  "invoice_refresh_each_tick": true,
+  "general_refresh_blocker": "1543098427832443 funding type1/live card vs Sheet credit line; no Meta billing mutation by Zeus; decision required before group reorganization.",
+  "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json"
 }

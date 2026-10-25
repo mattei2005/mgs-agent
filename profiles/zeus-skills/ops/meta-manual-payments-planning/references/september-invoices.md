@@ -16,7 +16,7 @@ Atual: A Nome, B Forma, C Default, D Última cobrança no cartão, E Invoice, F 
 - Invoice compartilhada entre múltiplas contas ou múltiplas invoices para a mesma conta neste recorte bloqueia alocação automática, em vez de duplicar total ou inventar rateio.
 - Enumerar toda a BM não autoriza reinserir contas antes excluídas do workbook. A coluna mostra o recorte de47 contas; header/total anotam a diferença contra a BM inteira e o ledger preserva a lista fora do recorte para decisão.
 
-Fonte histórica da implantação (não estado corrente): `reports/meta-september-invoices-1564022485366734969/publication/`. Foram152 invoices em2 páginas,28 de setembro:26 Unpaid e2 Paid. Na aba,20 pendentes somaramUSD275644.71; BM inteiraUSD283813.02, com6 contas fora da aba totalizandoUSD8168.31. CPV04 invoice26877313 e Topfeed invoice26898588 estavam Paid. Revalidar antes de responder.
+Fonte histórica da implantação (não estado corrente): `reports/meta-september-invoices-1564022485366734969/publication/`. Foram152 invoices em2 páginas,28 de setembro:26 Unpaid e2 Paid. Na aba,20 pendentes somaramUSD275644.71; BM inteiraUSD283813.02, com6 contas fora da aba totalizandoUSD8168.31. CPV04 invoice26877313 e Yolokfx-US-SHEIN-EN-01-G002 invoice26891526 estavam Paid. Revalidar antes de responder.
 
 ## Cada tick e compatibilidade
 

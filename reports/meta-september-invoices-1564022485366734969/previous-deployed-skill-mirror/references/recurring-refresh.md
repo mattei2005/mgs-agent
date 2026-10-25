@@ -1,0 +1,48 @@
+# Atualização recorrente autorizada — Digital Trust
+
+**Schema atual supersede letras antigas:** seguir `references/september-invoices.md`: E Invoice/F Setembro/G média/H Pay now/I balance/J outubro. Executar refresh_september_invoices.py --apply em cada tick antes do restante. Funding divergente é gate do restante, não falha da coleta de invoices; manter o snapshot e informar bloqueio exato, sem reorganização/billing implícitos.
+
+**Supersessão de schema e extensão autorizada:** pedido `1563981039230255186` adicionou F Pay now, deslocando balance para G e gasto para H. Em cada tick integrar também a coleta dos 39 modais pelo procedimento `references/pay-now-column.md`, com inspeção visual real e publicação limitada à nova F. Nunca inserir outra coluna. O primeiro tick natural do schema anterior executou ok em 25/10 às 14:03; isso não comprova execução natural do novo ciclo de modais.
+
+## Escopo e relógio
+
+- Rodolfo autorizou a leitura do PC1 e completar a planilha em `1563960055504838767`; adicionou três atualizações diárias em `1563960345826037821`, na thread `1563926766286803004`.
+- Preferência temporal vigente: America/New_York (Eastern), inclusive DST. Pedidos: cerca de 08h, 14h e 21h. A auditoria global selecionou minuto 02: **08:02, 14:02, 21:02**, cron `2 8,14,21 * * *`.
+- O inventário global incluiu root, /etc/crontab, /etc/cron.d, todos os profiles Hermes e default, systemd timers e contratos de schedulers registrados. Oito datas civis, incluindo a virada DST de novembro, foram expandidas. Nenhuma colisão operacional no minuto escolhido; baselines inevitáveis de infraestrutura foram registradas no relatório, sem disputa do writer da planilha ou da lease PC1.
+- A primeira expansão timezone-aware do croniter ficou presa no horizonte DST; o diagnóstico foi isolado sem writer externo e corrigido na auditoria para expansão civil-naive monotônica com fold explícito e limite de iterações. Não alterar o scheduler Hermes para corrigir um auditor. Relatórios em `reports/meta-manual-payments-scheduling-1563960345826037821/`.
+- Contrato canônico: `/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json`. Preservar as 47 contas congeladas; não adicionar/remover contas nem excluir novos zeros automaticamente.
+- O campo mensal continua **outubro/2026**, como solicitado na criação. A média de três dias completos e o balance são correntes. Não trocar competência/aba implicitamente na virada mensal; explicar essa distinção e obter pedido para novo mês quando necessário.
+- A autorização é para atualizar dados e evidência. **Não autoriza nenhuma cobrança, cadastro de cartão, troca de default, invoice payment ou alteração de linha/budget/permissão.**
+
+## Artefatos executáveis
+
+Todos os scripts ficam em `/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/`, com mirror versionado no MGS:
+
+1. `refresh_workbook.py`: coleta real de Meta e Sheets, sem `--apply` é dry-run. Atualiza C (default atual), E (média), G (balance), H (gasto de outubro), notas e readback exato quando usado com `--apply`. Não classifica pagamentos genéricos como cartão, não muda Meta e não apaga linhas. Pareia Insights diário/agregado e bloqueia drift de grupo ou IDs em vez de silenciosamente mover/excluir contas.
+2. `read_pc1_billing_history.py`: navegação UI somente leitura, em aba própria do Chrome Meta já logado; argumentos `--pid <fresh> --window-id <fresh> --mode read --account-id <ID permitido>`. Resolve runtime atual pelo launcher Hermes, usa a lease compartilhada, captura AX com `mode=ax` e pixels separadamente para prova. `mode=som` no handler programático exercitado retornou imagem sem árvore; não tratar como página vazia. Os rótulos Current balance/Payment history podem faltar no AX mesmo com a tabela completa Date/Payment method/Amount/Status; exigir o conteúdo e a conta corretos, não só um título. Fecha apenas a aba criada e libera a lease em finally.
+3. `record_pc1_proof.py`: depois da inspeção visual real, grava prova de instrumento no ledger e só D na conta exata, com readback integral. Exige `--receipt <...-receipt.json> --verified-account-id <ID> --verified-business-id 155263197283282 --visual-account-verified`. **Não passar essas flags sem ler o screenshot via vision_analyze e verificar conta/URL.** A CLI não faz OCR nem transforma uma flag em evidência.
+4. `validate_workbook_readonly.py`: verifica schema, moeda, IDs, todos os links de billing, subtotais e total calculados; não prova instrumento histórico por si só.
+
+Ledger de instrumento: `/root/mgs-agent/data/meta-manual-payments/pc1-card-ledger.json`. Estado da última atualização: `last-refresh.json` no mesmo diretório. Planos, snapshots e receipts de cada tentativa ficam em `/root/mgs-agent/reports/meta-manual-payments-runs/`, com permissões protegidas. Writer compartilhado: `data/meta-manual-payments/writer.lock`; PC1 também exige a lease global. Segredos ficam somente em memória/1Password, nunca em stdout/receipts.
+
+## Procedimento por execução
+
+1. Carregar esta skill e o contrato. Executar com `terminal`:
+   `python3 /root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py`
+   O helper coleta as 47 contas, as janelas mensal e de três dias, funding/balance e verifica novos eventos de cobrança desde a prova UI de cada conta de cartão.
+2. `dry_run_pass` sem `pending_ui_accounts`: a prova histórica UI continua preservada e a API não retornou evento posterior que exija reclassificação. Não abrir oito contas desnecessariamente; isso é uma verificação de mudança, não identificação de instrumento pela API. Não reescrever a data original da prova para fingir uma nova leitura UI.
+3. `needs_pc1_payment_history`: para **cada** conta pendente, descobrir novamente Chrome Meta via wrapper `mgs-pc1-cua-driver-ssh.sh call list_windows`, reduzir metadados seguros e usar janela/perfil corretos. Resolver o Python atual da primeira linha do launcher `hermes` e executar o worker com esse interpreter. Não usar PID, window ID ou checkout de uma execução passada. A lease é adquirida pelo worker e deve estar livre ou pertencer a esta execução; não contornar outro agente.
+4. Ler o screenshot retornado com `vision_analyze`. Exigir `business_id=155263197283282` e `asset_id` exato da conta, além do seletor de conta. Recortar a barra de URL se um dígito ficar ambíguo; preservar token literalmente, não corrigir OCR por suposição. O próprio AX pode omitir o título/ID do seletor.
+5. No histórico, excluir Advertising credit e Failed/declines; selecionar o primeiro Paid explicitamente no cartão. Se os três registros recentes forem todos créditos e não houver cartão, abrir **View all activity** por uma captura/index fresco, somente leitura, e verificar histórico suficiente; não assumir que não existe pagamento anterior. O recorder bloqueia uma tabela não vazia sem cartão confirmado. Uma UI com “You have no recent spending” é evidência limitada de ausência de gastos recentes, não ausência universal de histórico.
+6. Somente após a prova visual, executar `record_pc1_proof.py` com os IDs realmente conferidos. Ele valida o parsing de data/meio/valor/status, guarda fonte/cópia da imagem e atualiza o campo D e ledger sob lock. Depois repetir a coleta/API para revalidar eventos que possam ter chegado durante a leitura. Fazer no máximo duas reconciliações de uma mesma chegada concorrente; não entrar em loop nem efetuar pagamentos.
+7. Sem pendências, executar `refresh_workbook.py --apply`. Exigir `updated_validated`, receipt persistido e readback integral. Uma falha após write exige reconciliar o run_dir e o alvo antes de repetir; nunca repetir insert/delete às cegas. O helper não faz insert/delete.
+8. Executar o validador read-only com spreadsheet `1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU`, sheet `271321738`, business `155263197283282`; exigir PASS para os 47 IDs, E/F/G/H e todos os links. Reportar o snapshot atual, não o valor do último plano dry-run.
+9. A entrega normal é um resumo curto na thread de origem, sem anexo/mention e sem traces. Se houver gate, preservar prova anterior como histórica, explicar exatamente o que não foi atualizado, o motivo e dependência; não declarar atualização integral, logoff global do PC1 ou necessidade de novo login só por uma janela.
+
+## Recuperações e limites
+
+- API/Sheets coletadas e UI são fases diferentes. Fonte de default atual não substitui instrumento da cobrança; o método deve ficar na nota de D, mesmo quando diferente de C.
+- O PC1 confirmou em 25/10 os sete pagamentos na planilha, incluindo USD 6.61 realmente no AMEX •••• 2075. Portanto nem valor pequeno prova Advertising credit. Financeadx CA e Openzed ES pagaram no Visa •••• 7851, distinto do default mostrado na coleta anterior. Evidência: `reports/meta-pc1-card-methods-1563960055504838767.json`.
+- Se a API indicar mudança de grupo/funding dentro do escopo autorizado, ler a fonte e reorganizar os mesmos 47 IDs com a skill principal antes de retomar, mantendo backup e fórmulas; não alterar billing, reduzir escopo ou perder contas.
+- Autenticação/2FA/lease bloqueada: investigar dentro da autoridade, respeitar cooldown e preservar sessão. Nunca preencher segredo por CUA, desativar segurança, reiniciar gateway ou mudar credencial para concluir um tick.
+- Nem ausência de novo evento genérico nem um total reconciliado prova alocação de invoice ou liberação de crédito. Cobranças, saldo e invoices continuam medidas separadas.

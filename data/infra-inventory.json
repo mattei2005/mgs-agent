@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-25T15:15:21.460104-04:00",
+    "updated_at": "2026-10-25T17:22:35.939301-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -52692,8 +52692,8 @@
     {
       "entry": "Hermes zeus 2ee720363d7d: 2 8,14,21 * * * America/New_York",
       "job_id": "2ee720363d7d",
-      "description": "47 IDs; API C/E/G/H, new-card instrument D,39 UI Pay now modals F each tick; zero payments.",
-      "updated_at": "2026-10-25T15:15:21.460104-04:00",
+      "description": "Invoice E/September F update first; general C/G/I/J + UI H gated on live funding consistency.47 IDs unchanged; no payments.",
+      "updated_at": "2026-10-25T17:22:35.939301-04:00",
       "contract": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json"
     }
   ],
@@ -54565,28 +54565,38 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/publish_pay_now.py",
-      "size_bytes": 10339,
-      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+      "size_bytes": 10748,
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_pay_now.py",
       "size_bytes": 7884,
-      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py",
-      "size_bytes": 11448,
-      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+      "size_bytes": 11548,
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py",
       "size_bytes": 5359,
-      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
-      "size_bytes": 6365,
-      "description": "Manual-payments workbook read/UI/publish/validation; no Meta payment actions."
+      "size_bytes": 6872,
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
+      "size_bytes": 5117,
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_september_invoices.py",
+      "size_bytes": 11994,
+      "description": "Meta workbook read-only collection/PC1 evidence/narrow Sheets publication; schema by headers, zero payment actions."
     }
   ],
   "skills_mgs": [
@@ -56911,14 +56921,14 @@
         "name": "meta-manual-payments-planning",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
-        "version": "0.3.0",
-        "updated_at": "2026-10-25T15:37:30.329568-04:00",
+        "version": "0.4.0",
+        "updated_at": "2026-10-25T17:22:35.939301-04:00",
         "pay_now_column": "F",
         "balance_column": "G",
         "spend_column": "H",
         "credit_line_pay_now_accounts": 39,
-        "authority": "1563981039230255186",
-        "validation_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186/closure.json",
+        "authority": "1564022485366734969",
+        "validation_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
         "cron_job_id": "2ee720363d7d",
         "automation_scripts": [
           "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/record_pc1_proof.py",
@@ -56931,7 +56941,21 @@
         "repeated_header_range": "A13:H13",
         "credit_line_group_title": "A12",
         "repeated_header_authority": "1563999324587819020",
-        "publisher_repeated_headers_preserved": true
+        "publisher_repeated_headers_preserved": true,
+        "schema": {
+          "A": "Nome",
+          "B": "Forma",
+          "C": "Default",
+          "D": "Última cobrança no cartão",
+          "E": "Invoice",
+          "F": "Setembro — saldo em aberto",
+          "G": "Média diária",
+          "H": "Pay now",
+          "I": "Saldo a pagar",
+          "J": "Outubro2026"
+        },
+        "invoice_refresh_script": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_september_invoices.py",
+        "current_general_gate": "1543098427832443 funding type1/live card vs Sheet credit line; no Meta billing mutation by Zeus; decision required before group reorganization."
       },
       {
         "name": "mgs-company-os-architecture",
@@ -58828,6 +58852,10 @@
     {
       "path": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
       "description": "Approved Meta workbook contract, actual Pay now evidence or window hint requiring live revalidation; no credentials."
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-manual-payments/september-invoice-ledger.json",
+      "description": "Current September invoice identity/status/outstanding by account plus exact uncovered account scope; no credentials."
     }
   ],
   "mu_plugin_canonical": {
