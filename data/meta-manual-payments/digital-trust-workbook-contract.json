@@ -69,5 +69,14 @@
   ],
   "payments_authorized": false,
   "period_policy": "Preserve requested October/2026 spend; rolling 3-closed-day average and current balances. Do not switch reporting month, add/drop accounts, or change billing implicitly.",
-  "created_at": "2026-10-25T13:25:35.362656-04:00"
+  "created_at": "2026-10-25T13:25:35.362656-04:00",
+  "cron_job_id": "2ee720363d7d",
+  "cron_expression": "2 8,14,21 * * *",
+  "physical_times": [
+    "08:02",
+    "14:02",
+    "21:02"
+  ],
+  "native_schedule_state": "paused_pre_activation_validation",
+  "cadence_authority_message": "1563960345826037821"
 }

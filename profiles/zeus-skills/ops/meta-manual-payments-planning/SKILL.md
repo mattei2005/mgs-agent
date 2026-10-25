@@ -1,7 +1,7 @@
 ---
 name: meta-manual-payments-planning
 description: "Use when planning manual Meta card payments."
-version: 0.1.0
+version: 0.2.0
 author: Rodolfo Mattei, Hermes Agent
 license: Proprietary
 platforms: [linux]
@@ -86,7 +86,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 - Antes de qualquer proposta, fornecer fonte/data, contas exatas, cartões propostos, valores, disponibilidade conhecida e lacunas. Proposta não é pagamento autorizado.
 - Não clicar em Pay now final, cadastrar cartão, mudar default, pagar invoice ou automatizar transferências por causa desta skill. Uma eventual execução futura deve obter o gate de billing específico e sua confirmação adicional.
 - Quando Rodolfo informar que pagou, confirmar transação e saldo de forma read-only. Registrar confirmado, pendente ou não localizado; não descontar apenas porque o usuário planejou pagar, nem repetir uma cobrança ambígua.
-- Não instalar cron/refresh automático por padrão. A planilha é fotografia datada até haver autorização explícita e validação de um processo recorrente.
+- Recorrência foi autorizada por Rodolfo na mensagem `1563960345826037821`: atualizar esta planilha três vezes ao dia, por volta de 08h, 14h e 21h. Contrato e escopo em `data/meta-manual-payments/digital-trust-workbook-contract.json`; horários físicos e runbook em `references/recurring-refresh.md`. Somente este recorte tem autorização recorrente; outros workbooks/cadências continuam snapshots até pedido específico. Atualização é leitura Meta/PC1 e escrita Sheets, nunca pagamento ou mudança de billing.
 
 ## Validação executável somente leitura
 
