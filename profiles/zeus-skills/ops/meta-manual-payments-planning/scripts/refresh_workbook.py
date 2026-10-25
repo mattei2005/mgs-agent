@@ -33,14 +33,14 @@ def main():
   s,d=g.api_json(method,url,gt,payload,quota_project='mgs-core-prod')
   if s!=200:raise RuntimeError('google_http_'+str(s)+':'+str(d.get('error',{}).get('status')))
   return d
- sheet=contract['spreadsheet_id'];sid=contract['sheet_id'];bm=contract['business_id'];apiroot='https://sheets.googleapis.com/v4/spreadsheets/'+sheet;rng="'"+contract['sheet_title']+"'!A:H"
+ sheet=contract['spreadsheet_id'];sid=contract['sheet_id'];bm=contract['business_id'];apiroot='https://sheets.googleapis.com/v4/spreadsheets/'+sheet;rng="'"+contract['sheet_title']+"'!A:J"
  gridurl=apiroot+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(properties,basicFilter,bandedRanges,data(rowData(values(userEnteredValue,userEnteredFormat,note))))'
  before=google('GET',gridurl);rows=before['sheets'][0]['data'][0]['rowData'];assert before['sheets'][0]['properties']['sheetId']==sid
  headers=[c.get('userEnteredValue',{}).get('stringValue','')for c in rows[0]['values']]
  def column(prefix):
   matches=[i for i,h in enumerate(headers)if h.startswith(prefix)];assert len(matches)==1,'header_not_unique_'+prefix;return matches[0]
  avgcol=column('Média diária');balancecol=column('Saldo a pagar');monthcol=column('Total já gasto');financial=[(avgcol,'average_daily'),(balancecol,'balance'),(monthcol,'month_spend')]
- assert (avgcol,balancecol,monthcol)in [(4,5,6),(4,6,7)],'unapproved_financial_schema'
+ assert (avgcol,balancecol,monthcol)in [(4,5,6),(4,6,7),(6,8,9)],'unapproved_financial_schema'
  targets=[]
  for ri,r in enumerate(rows):
   c=r.get('values',[])

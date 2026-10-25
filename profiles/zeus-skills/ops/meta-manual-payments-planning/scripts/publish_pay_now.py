@@ -16,7 +16,7 @@ def main():
  g.load_env();assert all(os.getenv(k)=='service_account'for k in ['ARES_DRIVE_AUTH_MODE','MGS_DRIVE_AUTH_PRIMARY','MGS_GOOGLE_SHEETS_AUTH_MODE','MGS_META_APP_ROLES_GOOGLE_AUTH_MODE']);sa=g.load_service_account();assert sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com'and sa['project_id']=='mgs-core-prod';tok=g.service_account_access_token()
  def api(m,u,d=None):
   status,data=g.api_json(m,u,tok,d,quota_project='mgs-core-prod');assert status==200,'google_http_'+str(status);return data
- root='https://sheets.googleapis.com/v4/spreadsheets/'+c['spreadsheet_id'];sid=c['sheet_id'];rng="'"+c['sheet_title']+"'!A:I";url=root+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(properties,basicFilter,bandedRanges,data(rowData(values(userEnteredValue,userEnteredFormat,note))))'
+ root='https://sheets.googleapis.com/v4/spreadsheets/'+c['spreadsheet_id'];sid=c['sheet_id'];rng="'"+c['sheet_title']+"'!A:K";url=root+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(properties,basicFilter,bandedRanges,data(rowData(values(userEnteredValue,userEnteredFormat,note))))'
  drive=api('GET','https://www.googleapis.com/drive/v3/files/'+c['spreadsheet_id']+'?supportsAllDrives=true&fields=trashed,capabilities(canEdit)');assert not drive.get('trashed')and drive['capabilities']['canEdit']
  def scope(book):
   sh=book['sheets'][0];assert sh['properties']['sheetId']==sid;rows=sh['data'][0]['rowData'];allids=[];ts=[]
@@ -36,7 +36,7 @@ def main():
  frozen=json.loads((B/'targets.json').read_text());assert frozen==targets,'credit_line_target_drift';v=json.loads((B/'visual-verification.json').read_text());assert set(v['verified_account_ids'])=={t['account_id']for t in targets}and len(v['verified_account_ids'])==len(targets),'visual_identity_verification_incomplete';entries={}
  for t in targets:
   aid=t['account_id'];r=json.loads((B/(aid+'-receipt.json')).read_text());assert r['status']=='modal_read'and r['account_id']==aid and r['business_id']==c['business_id']and r['payments_executed']==0;assert Path(r['modal']['screenshot']).is_file();ls=r['modal_labels'];assert 'Amount you can pay now'in ls and 'Make a payment'in ls;amount=ls[ls.index('Amount')+1];assert re.fullmatch(r'\$[0-9,]+\.\d{2}',amount),'amount_not_explicit';dec=Decimal(amount.replace('$','').replace(',',''));assert dec>=0;period=next(s for s in ls if s.startswith('Spending from '));entries[aid]={'account_id':aid,'name':t['name'],'amount':str(dec),'currency':'USD','period_label':period,'read_at':r['read_at'],'receipt':str(B/(aid+'-receipt.json')),'screenshot':r['modal']['screenshot'],'visual_account_verified':True}
- total=sum((Decimal(x['amount'])for x in entries.values()),Decimal(0));heads=[x.get('userEnteredValue',{}).get('stringValue','')for x in rows[0]['values']];existing=len(heads)>5 and heads[5]==HEADER
+ total=sum((Decimal(x['amount'])for x in entries.values()),Decimal(0));heads=[x.get('userEnteredValue',{}).get('stringValue','')for x in rows[0]['values']];existing=HEADER in heads;paycol=heads.index(HEADER)if existing else 5;balancecol=heads.index('Saldo a pagar');width=len(heads)
  assert existing or heads[5:7]==['Saldo a pagar','Total já gasto em outubro'],'unexpected_schema'
  if not a.apply:print(json.dumps({'status':'pay_now_plan_pass','accounts':len(entries),'sum_usd':str(total),'insert_required':not existing,'sheet_writes':0}));return
  with (H/'writer.lock').open('a')as lock:
@@ -53,12 +53,12 @@ def main():
    for i,r in enumerate(rows):
     for col,cell in enumerate(r.get('values',[])):
      nc=col if col<5 else col+1;actual=irows[i].get('values',[]);assert shifted(cell)==(actual[nc]if nc<len(actual)else{}),'existing_cell_not_preserved_after_insert_'+str((i,col))
-   before=inserted;rows=irows
+   before=inserted;rows=irows;width+=1;balancecol+=1
   expected=copy.deepcopy(before);erows=expected['sheets'][0]['data'][0]['rowData'];req=[]
   for i,r in enumerate(erows):
    cells=r.setdefault('values',[])
-   while len(cells)<8:cells.append({})
-   cell=copy.deepcopy(cells[6]);cell.pop('userEnteredValue',None);cell.pop('note',None)
+   while len(cells)<width:cells.append({})
+   cell=copy.deepcopy(cells[balancecol]);cell.pop('userEnteredValue',None);cell.pop('note',None)
    if i==0 or(cells[0].get('userEnteredValue',{}).get('stringValue')=='Nome da conta'and cells[1].get('userEnteredValue',{}).get('stringValue')=='Forma de pagamento'):
     cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte: modal Make a payment > Amount you can pay now, no PC1; somente as 39 contas de linha de crédito. Cada nota informa período e hora da leitura real. Não é current balance, invoice fechada ou limite disponível no emissor do cartão. Nenhum pagamento executado.'
    else:
@@ -66,9 +66,9 @@ def main():
     if mt and mt[1]in entries:
      e=entries[mt[1]];cell['userEnteredValue']={'numberValue':float(Decimal(e['amount']))};cell['note']='Amount you can pay now: USD '+e['amount']+'. '+e['period_label']+'. Leitura PC1 autenticada: '+e['read_at']+'. Conta '+e['account_id']+'; BM '+c['business_id']+'; URL/conta e valor verificados visualmente. É o valor permitido neste modal, não current balance nem limite do cartão. Nenhum pagamento realizado. Fonte: '+e['receipt']
     elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL'):
-     fv=cells[6]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])G(?=\d)','F',fv)};cell['note']='Soma dos valores literalmente exibidos no Pay now das 39 contas de linha de crédito. Leituras sequenciais com horário individual nas notas; não é limite de cartão nem promessa de liquidação simultânea.'
+     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma dos valores literalmente exibidos no Pay now das 39 contas de linha de crédito. Leituras sequenciais com horário individual nas notas; não é limite de cartão nem promessa de liquidação simultânea.'
     elif mt:cell['note']='Não coletado: esta coluna foi solicitada somente para as contas cuja forma de pagamento é linha de crédito. Vazio não significa zero.'
-   cells[5]=cell;req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':i,'columnIndex':5},'rows':[{'values':[cell]}],'fields':'userEnteredValue,userEnteredFormat,note'}})
+   cells[paycol]=cell;req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':i,'columnIndex':paycol},'rows':[{'values':[cell]}],'fields':'userEnteredValue,userEnteredFormat,note'}})
   # Structural width is explicit; only the authorized column changes.
   api('POST',root+':batchUpdate',{'requests':req});after=api('GET',url)
   def normalized(book):
