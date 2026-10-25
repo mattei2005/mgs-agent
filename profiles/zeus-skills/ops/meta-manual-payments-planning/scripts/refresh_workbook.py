@@ -111,7 +111,7 @@ def main():
     if col==4:note+='Média de '+p['average_period']['since']+' a '+p['average_period']['until']+' (3 dias completos, zeros incluídos), diário/agregado reconciliados.'
     elif col==5:note+='Current balance; não é invoice vencida nem Amount you can pay now.'
     else:note+='Gasto de '+p['month_period']['since']+' a '+p['month_period']['until']+'; dia aberto parcial quando aplicável; diário/agregado reconciliados.'
-    if p['id']=='2633813727134360'and col==5 and 'Conciliação de outubro'in oldnote:note+=' Histórico da conciliação anterior: '+oldnote
+    if p['id']=='2633813727134360'and col==5 and 'Conciliação de outubro'in oldnote:note+=' Histórico da conciliação anterior: '+oldnote[oldnote.find('Conciliação de outubro'):]
     cells[col]['note']=note
    req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':ri,'columnIndex':4},'rows':[{'values':cells[4:7]}],'fields':'userEnteredValue,note'}})
   for col in (4,5,6):erows[0]['values'][col]['note']='Atualização automática 3x/dia America/New_York. Última coleta: '+nowstamp+'. Média: três dias completos anteriores, nos fusos das contas. Gasto mensal fixado em outubro/2026 conforme contrato. Fonte Meta; nenhuma cobrança executada.';req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':col},'rows':[{'values':[erows[0]['values'][col]]}],'fields':'note'}})
