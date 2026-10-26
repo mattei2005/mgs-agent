@@ -56937,7 +56937,15 @@
       {
         "name": "meta-manual-payments-planning",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "purpose": "Digital Trust manual-payment planning: live funding regroup to cards; priority G/H/I/J; 47 accounts preserved; Meta GET-only and canonical SA Sheets writes.",
+        "reference_implementation": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/regroup_funding.py",
+        "contract": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "cron_job_id": "2ee720363d7d",
+        "latest_authority_message": "1564115318887161857",
+        "last_validated": "2026-10-26T00:11:17-04:00",
+        "validation": "47 IDs,9 card/38 line;38 real Pay now modals visually verified; F/G/H/I/J totals and links PASS; no payment/billing writes. Latest post-midnight API refresh blocked on Meta monthly daily/aggregate USD0.04 difference for1762774024309795; preserved validated23:36 snapshot. D Eggbev1481815942722118 pending due AX/pixel capture mismatch.",
+        "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261025T231911387333/visual-verification.json"
       },
       {
         "name": "mgs-company-os-architecture",

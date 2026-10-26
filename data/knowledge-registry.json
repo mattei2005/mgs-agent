@@ -13232,6 +13232,23 @@
       "updated_at": "2026-10-03T00:31:43+00:00"
     },
     {
+      "canonical_key": "finance.meta.manual-payments.live-funding-regroup",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-26T04:12:10+00:00",
+      "id": "finance-meta-funding-regroup-priority-20261026",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Priorizar G/H/I/J e mover defaults cartão ao bloco superior",
+      "updated_at": "2026-10-26T04:12:10+00:00"
+    },
+    {
       "canonical_key": "finance.meta.manual-card-payments-planning",
       "canonical_source": "profiles/zeus-skills/ops/meta-manual-payments-planning/SKILL.md",
       "consumers": [
@@ -13277,10 +13294,27 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-pay-now-dynamic-20261026",
+      "title": "Coluna de valor permitido no Pay now para39 contas de linha",
+      "updated_at": "2026-10-26T04:12:10+00:00"
+    },
+    {
+      "canonical_key": "finance.meta.manual-payments.pay-now-column",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-26T04:12:10+00:00",
+      "id": "finance-meta-pay-now-dynamic-20261026",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Coluna de valor permitido no Pay now para39 contas de linha",
-      "updated_at": "2026-10-25T19:14:16+00:00"
+      "title": "Pay now segue IDs atuais de linha; contagem dinâmica por funding",
+      "updated_at": "2026-10-26T04:12:10+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.september-invoices",
@@ -14210,5 +14244,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-25T21:22:36+00:00"
+  "updated_at": "2026-10-26T04:12:10+00:00"
 }

@@ -6123,12 +6123,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Reagrupar conta transferida para cartão, atualizar métricas e coletar todos os modais de linha.",
-      "objective": "Atualizar mesma planilha Digital Trust: reagrupar por funding live, prioridade G/H/I/J e invoices correntes, sem pagamento ou alteração Meta.",
+      "next_step": "Próximo tick08:02 repete conciliação dos mesmos47 IDs e baixa Meta. Não reusar rota D divergente sem prova de captura coerente; preservar dados anteriores e reportar cobertura exata.",
+      "objective": "Atualizar mesma planilha Digital Trust, reagrupar funding live e priorizar G/H/I/J, sem alterar Meta/billing.",
       "source": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
-      "state": "em execução por autorização 1564115318887161857; invoices coletadas e publicadas, ainda unpaid na meta; validar funding e pc1.",
+      "state": "47 ids e totais f/g/h/i/j pass;9 cartão/38 linha;mavroa movida ao cartão;38 modais h conferidos/publicados;g/i/j snapshot validado23:36edt. nova coleta pós-meia-noite bloqueou por diferença meta usd0.04 em1762774024309795;sem write dessa tentativa. setembro ainda unpaid; informe de pagamento do dono preservado. d eggbev1481815942722118 pendente por captura ax/pixels divergente;rota interrompida após4 falhas.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-26T03:17:27+00:00"
+      "updated_at": "2026-10-26T04:12:10+00:00"
     },
     {
       "agent": "zeus",
@@ -7302,5 +7302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T03:17:27+00:00"
+  "updated_at": "2026-10-26T04:12:10+00:00"
 }

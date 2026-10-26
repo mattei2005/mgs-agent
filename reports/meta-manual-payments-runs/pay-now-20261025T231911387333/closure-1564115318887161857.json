@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-10-26T00:13:20.629797-04:00",
+  "agent": "zeus",
+  "event": "meta_manual_payments_refresh_and_funding_regroup",
+  "source_message": "1564115318887161857",
+  "thread_id": "1563926766286803004",
+  "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+  "sheet_id": 271321738,
+  "accounts": 47,
+  "groups": {
+    "card": 9,
+    "credit_line": 38
+  },
+  "changed_funding_account": "1543098427832443",
+  "ui_modals_verified": 38,
+  "pay_now_usd": "194744.89",
+  "last_validated_metrics_at": "2026-10-25T23:36:24.445740-04:00",
+  "pending": [
+    "D card-history proof1481815942722118: AX/pixels mismatch",
+    "Later Meta Insights1762774024309795: daily1125.24 vs aggregate1125.28; cause unproven; old validated metrics preserved",
+    "September invoice provider settlement pending"
+  ],
+  "meta_writes": 0,
+  "payments_executed": 0,
+  "cron_job_id": "2ee720363d7d",
+  "cadence_unchanged": "2 8,14,21 * * *",
+  "skill_hashes": {
+    "SKILL.md": "c40e4770e1b1782e88e4f7f2a2d09a8dd33e8237aa5dcc55b8dee23169e09ad4",
+    "references/funding-regroup-priority.md": "4da95afdb42fa72cdc4f57e1cc379a321fc98a0cedc137bdf5ef6db64ebaec2a",
+    "scripts/regroup_funding.py": "06a23196f448a5711890a3afcb43cf5b3628f6e75882d5c9928e17b90947fbea",
+    "scripts/refresh_workbook.py": "ad2e76155ba00b8776e95cd50be1c6fdcdedf8376468f5b1a99125e28cb6c81d",
+    "scripts/publish_pay_now.py": "d8cf4e166c3efc92de22386a26709815b87809f39c5c56e5e26956f72e73cff8",
+    "scripts/read_pc1_billing_history.py": "722b155ea7dac04c832f2c494af4d6a842e6ae647ea7b24cc085b9f7fc820928",
+    "scripts/refresh_september_invoices.py": "eec7c894fc56da5035391ec3a3deb5a52ac579f6ff64ad77e7ac72fb1ca8977d",
+    "scripts/validate_workbook_readonly.py": "4e3c41b56bcd2b3dec808c7a673ac0d9567834492c0e08f950b9c6013bf6986a"
+  },
+  "report_status": "prepared"
+}
