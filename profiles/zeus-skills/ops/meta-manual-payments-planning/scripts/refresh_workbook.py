@@ -122,9 +122,10 @@ def main():
     req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':ri,'columnIndex':col},'rows':[{'values':[cells[col]]}],'fields':'userEnteredValue,note'}})
   for col,_ in financial:erows[0]['values'][col]['note']='Atualização automática 3x/dia America/New_York. Última coleta: '+nowstamp+'. Média: três dias completos anteriores, nos fusos das contas. Gasto mensal fixado em outubro/2026 conforme contrato. Fonte Meta; nenhuma cobrança executada.';req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':col},'rows':[{'values':[erows[0]['values'][col]]}],'fields':'note'}})
   google('POST',apiroot+':batchUpdate',{'requests':req});after=google('GET',gridurl);assert after==expected,'sheet_full_readback_mismatch'
-  save(run/'receipt.json',{'status':'updated_validated','accounts':len(planned),'collected_at':nowstamp,'completed_at':datetime.now().astimezone().isoformat(),'pending_ui':[],'meta_writes':0,'payment_actions':0,'full_grid_exact_readback':True})
-  save(HOME/'last-refresh.json',{'status':'updated_validated','run_dir':str(run),'collected_at':nowstamp,'accounts':len(planned)})
- print(json.dumps({'status':'updated_validated','accounts':len(planned),'run_dir':str(run),'meta_writes':0,'payments_executed':0,'snapshot_at':nowstamp},ensure_ascii=False));return 0
+  status='updated_metrics_pending_card_history'if pending else'updated_validated'
+  save(run/'receipt.json',{'status':status,'accounts':len(planned),'collected_at':nowstamp,'completed_at':datetime.now().astimezone().isoformat(),'pending_ui':pending,'meta_writes':0,'payment_actions':0,'full_grid_exact_readback':True})
+  save(HOME/'last-refresh.json',{'status':status,'run_dir':str(run),'collected_at':nowstamp,'accounts':len(planned),'pending_ui':pending})
+ print(json.dumps({'status':status,'accounts':len(planned),'run_dir':str(run),'meta_writes':0,'payments_executed':0,'snapshot_at':nowstamp,'pending_ui':pending},ensure_ascii=False));return 0
 
 if __name__=='__main__':
  try:sys.exit(main())
