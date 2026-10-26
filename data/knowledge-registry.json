@@ -5524,10 +5524,10 @@
       "kind": "decision",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO100-EXECUTE-1564353146120310928",
       "title": "Lote SEO replanejado:3artigos porportal,lista nominal antes da producao,aprovacao pendente",
-      "updated_at": "2026-10-26T16:53:32+00:00"
+      "updated_at": "2026-10-26T19:03:06+00:00"
     },
     {
       "canonical_key": "content.seo.batch-review-gates",
@@ -5618,6 +5618,23 @@
       "superseded_by": "ATENA-SEO-HUMANIZATION-GATES-1564263729707614330",
       "title": "Revisão SEO: individualidade visual/editorial e fontes no idioma real do artigo, sem novo lote",
       "updated_at": "2026-10-26T13:57:50+00:00"
+    },
+    {
+      "canonical_key": "content.seo-batch.1564289742567112795.brief",
+      "canonical_source": "/root/.hermes/profiles/atena/work/seo100-1564353146120310928/manifest.json",
+      "consumers": [
+        "atena"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-26T19:03:06+00:00",
+      "id": "ATENA-SEO100-EXECUTE-1564353146120310928",
+      "kind": "decision",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Raquel autoriza produzir/publicar100 SEO:84pautasaprovadas+16emportaisjamencionados",
+      "updated_at": "2026-10-26T19:03:06+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -14333,5 +14350,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T16:53:32+00:00"
+  "updated_at": "2026-10-26T19:03:06+00:00"
 }
