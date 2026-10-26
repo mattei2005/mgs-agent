@@ -1,6 +1,13 @@
 {
-  "status": "updated_validated",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261025T151202112729",
-  "collected_at": "2026-10-25T15:12:00.988156-04:00",
-  "accounts": 47
+  "status": "updated_metrics_pending_card_history",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261025T233626173580",
+  "collected_at": "2026-10-25T23:36:24.445740-04:00",
+  "accounts": 47,
+  "pending_ui": [
+    {
+      "account_id": "1481815942722118",
+      "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ]
 }

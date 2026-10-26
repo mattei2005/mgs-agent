@@ -25,7 +25,7 @@ def save(path,data):
  path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_suffix(path.suffix+'.next');tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2));os.chmod(tmp,0o600);os.replace(tmp,path)
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--apply',action='store_true');args=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--apply',action='store_true');p.add_argument('--allow-history-pending',action='store_true',help='Publish independently verified C/G/I/J while preserving unverified historical D');args=p.parse_args()
  contract=json.loads((HOME/'digital-trust-workbook-contract.json').read_text());ledger=json.loads((HOME/'pc1-card-ledger.json').read_text());g.load_env()
  assert all(os.getenv(k)=='service_account'for k in ['ARES_DRIVE_AUTH_MODE','MGS_DRIVE_AUTH_PRIMARY','MGS_GOOGLE_SHEETS_AUTH_MODE','MGS_META_APP_ROLES_GOOGLE_AUTH_MODE'])
  sa=g.load_service_account();assert sa['project_id']=='mgs-core-prod'and sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com';gt=g.service_account_access_token()
@@ -101,7 +101,7 @@ def main():
   planned.append({'id':t['id'],'name':a['name'],'row':t['row'],'method':method,'default':default,'balance':str(balance),'month_spend':str(totals[1]),'average_daily':str(average),'average_period':plan['average'],'month_period':plan['month'],'timezone':a['timezone_name']})
  run=ROOT/'reports/meta-manual-payments-runs'/datetime.now().strftime('%Y%m%dT%H%M%S%f');run.mkdir(parents=True)
  save(run/'plan.json',{'contract':contract,'before':before,'planned':planned,'pending_ui':pending,'collected_at':nowstamp})
- if pending:
+ if pending and not(args.apply and args.allow_history_pending):
   print(json.dumps({'status':'needs_pc1_payment_history','run_dir':str(run),'pending_ui_accounts':pending,'sheet_writes':0},ensure_ascii=False));return 3
  if not args.apply:
   print(json.dumps({'status':'dry_run_pass','run_dir':str(run),'accounts':len(planned),'pending_ui_accounts':[],'sheet_writes':0},ensure_ascii=False));return 0
