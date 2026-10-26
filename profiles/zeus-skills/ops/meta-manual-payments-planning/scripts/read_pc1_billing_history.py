@@ -57,12 +57,12 @@ try:
    time.sleep(2)
  time.sleep(2);es,text=cap()
  tag=args.account_id or'inspect';p=B/(tag+'.txt');p.write_text(text);os.chmod(p,0o600)
- vision=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id})
+ vision=call({'action':'capture','mode':'som','pid':args.pid,'window_id':args.window_id})
  snap={'status':'read','receipt_path':str(B/(tag+'-receipt.json')),'read_at':datetime.now().astimezone().isoformat(),'no_recent_spending_message':'You have no recent spending.'in text,'account_requested':args.account_id,'text_path':str(p),'elements_path':last.get('elements_file'),'screenshot':vision.get('screenshot_path'),'headings':[e.get('label')for e in es if e.get('role')in ['Heading','Document']],'billing_excerpt':safe_excerpt(es,text),'payment_controls':[{'index':e.get('index'),'role':e.get('role'),'label':e.get('label')}for e in es if e.get('label')in ['View all activity','View transaction history','Payment activity','Payment history','Accounts']]}
  (B/(tag+'-receipt.json')).write_text(json.dumps(snap,ensure_ascii=False,indent=2));print(json.dumps(snap,ensure_ascii=False))
 except Exception as e:
  try:
-  es,text=cap();failure_image=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id}).get('screenshot_path')
+  es,text=cap();failure_image=call({'action':'capture','mode':'som','pid':args.pid,'window_id':args.window_id}).get('screenshot_path')
  except Exception:failure_image=None
  print(json.dumps({'status':'blocked','reason':str(e),'screenshot':failure_image,'elements_path':last.get('elements_file')},ensure_ascii=False))
 finally:

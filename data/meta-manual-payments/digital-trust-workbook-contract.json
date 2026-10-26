@@ -71,6 +71,10 @@
     "21:00"
   ],
   "payments_authorized": false,
+  "funding_regroup_authority": "1564115318887161857",
+  "funding_regroup_policy": "Read live funding; automatically move line-to-card accounts to upper card block in same worksheet, preserving all 47 IDs, data, notes, links and recalculated totals. Never change Meta billing. Reverse/unknown transitions remain fail-closed.",
+  "priority_columns": ["G", "H", "I", "J"],
+  "september_owner_payment_report": {"source_message": "1564115318887161857", "report": "Rodolfo informou invoices de setembro pagas na quinta-feira; espera baixa no dia seguinte à mensagem.", "verification": "Owner-reported paid, provider settlement pending; preserve live amount_due until Meta confirms."},
   "period_policy": "Preserve requested October/2026 spend; rolling 3-closed-day average and current balances. Do not switch reporting month, add/drop accounts, or change billing implicitly.",
   "created_at": "2026-10-25T13:25:35.362656-04:00",
   "cron_job_id": "2ee720363d7d",
@@ -129,7 +133,7 @@
   "layout_version": 3,
   "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186",
   "pay_now_updated_each_tick": true,
-  "pay_now_collection_policy": "Read each of the39 actual PC1 modals each tick; verify screenshots then publish F only. Preserve individual timestamps and fail closed on missing identity/values. No payments.",
+  "pay_now_collection_policy": "Read every current credit-line target from live funding each tick; verify all screenshots then publish H only. Preserve individual timestamps and fail closed on missing identity/values. No payments.",
   "schema": {
     "A": "Nome",
     "B": "Forma",

@@ -60,13 +60,13 @@ def main():
    while len(cells)<width:cells.append({})
    cell=copy.deepcopy(cells[balancecol]);cell.pop('userEnteredValue',None);cell.pop('note',None)
    if i==0 or(cells[0].get('userEnteredValue',{}).get('stringValue')=='Nome da conta'and cells[1].get('userEnteredValue',{}).get('stringValue')=='Forma de pagamento'):
-    cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte: modal Make a payment > Amount you can pay now, no PC1; somente as 39 contas de linha de crédito. Cada nota informa período e hora da leitura real. Não é current balance, invoice fechada ou limite disponível no emissor do cartão. Nenhum pagamento executado.'
+    cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte: modal Make a payment > Amount you can pay now, no PC1; somente as '+str(len(entries))+' contas de linha de crédito. Cada nota informa período e hora da leitura real. Não é current balance, invoice fechada ou limite disponível no emissor do cartão. Nenhum pagamento executado.'
    else:
     mt=re.search(r'^ID da conta: (\d+)\b',cells[0].get('note',''));label=cells[0].get('userEnteredValue',{}).get('stringValue','')
     if mt and mt[1]in entries:
      e=entries[mt[1]];cell['userEnteredValue']={'numberValue':float(Decimal(e['amount']))};cell['note']='Amount you can pay now: USD '+e['amount']+'. '+e['period_label']+'. Leitura PC1 autenticada: '+e['read_at']+'. Conta '+e['account_id']+'; BM '+c['business_id']+'; URL/conta e valor verificados visualmente. É o valor permitido neste modal, não current balance nem limite do cartão. Nenhum pagamento realizado. Fonte: '+e['receipt']
     elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL'):
-     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma dos valores literalmente exibidos no Pay now das 39 contas de linha de crédito. Leituras sequenciais com horário individual nas notas; não é limite de cartão nem promessa de liquidação simultânea.'
+     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma dos valores literalmente exibidos no Pay now das '+str(len(entries))+' contas de linha de crédito. Leituras sequenciais com horário individual nas notas; não é limite de cartão nem promessa de liquidação simultânea.'
     elif mt:cell['note']='Não coletado: esta coluna foi solicitada somente para as contas cuja forma de pagamento é linha de crédito. Vazio não significa zero.'
    cells[paycol]=cell;req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':i,'columnIndex':paycol},'rows':[{'values':[cell]}],'fields':'userEnteredValue,userEnteredFormat,note'}})
   # Structural width is explicit; only the authorized column changes.
