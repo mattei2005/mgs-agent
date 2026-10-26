@@ -6,6 +6,12 @@ Use when an authorized request identifies country, vertical and language and ask
 
 Rodolfo aprovou a integração em `1562104715271999589`. Aplicar `shared-drive-30tb-archive-queue.md` depois de completar todos os gates deste pack, não no lugar deles. Enquanto `queue_enabled=false`, manter o comportamento atual. Quando habilitada, a fila recebe somente a linhagem nova totalmente verificada e posterior ao corte, sem pedir aprovação por arquivo; originais, nomes, reservas e IDs primários permanecem intactos. O ACK de arquivo é uma camada separada de prova; nenhum gatilho ou exclusão é inferido desta regra.
 
+## Localização física após cutover do estoque
+
+Consultar `ares_archive_locations.active()` e o binding vivo antes de resolver pastas. Com o cutover ativo, `UPLOAD MANUAL` permanece no Shared Drive e `SOURCE_ROOT` é `_PROCESSAMENTO` temporário; o estoque final é `stock_root()` nos 30 TB. Preservar o namespace lógico e a autenticação SA. Tratar/validar o par RAW+clean no staging autorizado e usar exclusivamente o conector isolado existente para arquivo e transferência dos atalhos; nunca subir binários My Drive diretamente pela SA nem carregar OAuth do owner no agente.
+
+Concluir a entrega somente após ACK nativo, mapping verificado e `stockTransferredToArchive=true` de cada membro do par. Conferir os IDs físicos de provider/atalho, nome, parent permanente, hashes e reserva pelo catálogo `ares_archive_storage`; o readback do staging, sozinho, não prova entrega final. Na resposta, apontar a pasta permanente real retornada por `stock_folder_for_path`, não `_PROCESSAMENTO` nem a antiga localização lógica. Executores de cópia e transferência continuam processos isolados com o lease canônico e seus limites de lote, sem writer paralelo.
+
 ## Durable execution pattern
 
 1. Resolve the live hierarchy from the configured root and confirm `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; never assume the root ID is itself `CRIATIVOS`.

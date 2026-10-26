@@ -683,12 +683,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-1564295300414443555",
-      "next_step": "Validar destino, LEGACY e inventário; concluir transporte isolado e auditoria permanente",
+      "next_step": "Consumir processo publish_transport_audit já ativo; validar ACK/atalhos no destino e auditoria final antes de concluir",
       "objective": "Tratar e mover 60 imagens Kelly SHEIN US EN preservando originais e reserva",
-      "source": "data/ares/creative-ops/executions/intake-1564295300414443555/plan.json",
-      "state": "60 fontes estáveis; 60 clean=true; plano congelado sem duplicatas; execução em andamento",
+      "source": "data/ares/creative-ops/executions/intake-1564295300414443555/state.json",
+      "state": "60/60 clean e readback verificados; originais legacy e inventário 60/60; transferência ao acervo definitivo em andamento no mesmo executor",
       "thread_id": "1564295300414443555",
-      "updated_at": "2026-10-26T15:19:50+00:00"
+      "updated_at": "2026-10-26T15:38:15+00:00"
     },
     {
       "agent": "zeus",
@@ -7322,5 +7322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T15:19:50+00:00"
+  "updated_at": "2026-10-26T15:38:15+00:00"
 }
