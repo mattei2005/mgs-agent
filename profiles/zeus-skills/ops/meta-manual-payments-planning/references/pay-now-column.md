@@ -4,6 +4,10 @@
 
 Autorização de Rodolfo: `1563981039230255186`, thread `1563926766286803004`. Leitura dos modais das 39 contas de linha da mesma aba, sem pagar, trocar cartão, preencher dados ou avançar Next. Nova F antes do antigo current balance; G agora balance e H gasto de outubro. Schema anterior fica explicitamente supersedido; não inserir outra F em ticks futuros.
 
+## Regra atual: botão indisponível → balance do topo em H
+
+Rodolfo `1564373157727576245` supersede a regra anterior que exigia modal em todos os targets. Na conta/BM autenticadas e corretas, Pay now explicitamente desabilitado/financeiramente indisponível significa usar em H o Current balance visível no topo (outubro ainda aberto), com pixels+AX e horário reais. Não clicar o botão, não publicar zero e não inventar modal. Guardar receipt `current_balance_pay_now_unavailable` e marcar a fonte na nota. O relato do dono explica a baixa das invoices; F/status continuam dependentes do amount_due live. Login/2FA, página incompleta, erro e bloqueio temporário de recurso Facebook não são indisponibilidade financeira. Pay now habilitado continua exigindo modal literal. Não reutilizar snapshot anterior como atual. Esta seção prevalece sobre menções históricas abaixo a “todos os modais” ou proibição genérica de balance em H.
+
 ## Cabeçalho do bloco de linha
 
 Pedido `1563999324587819020`: repetir os oito títulos A:H na linha 13. O título de grupo LINHA DE CRÉDITO fica em A12, antes do cabeçalho repetido; contas e fórmulas não mudam de linha. No publisher, reconhecer cabeçalhos pela combinação A=Nome da conta/B=Forma de pagamento, e não somente i==0, para preservar também F13 em cada refresh. Não limpar essa célula como se fosse uma linha vazia ou uma conta fora do escopo.

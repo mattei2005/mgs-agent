@@ -10,6 +10,26 @@ import mgs_google_workspace_auth as g
 H=Path('/root/mgs-agent/data/meta-manual-payments');REPORTS=Path('/root/mgs-agent/reports');HEADER='Disponível para pagar no cartão (Pay now)'
 def save(p,d):
  p.parent.mkdir(parents=True,exist_ok=True);tmp=p.with_suffix(p.suffix+'.next');tmp.write_text(json.dumps(d,ensure_ascii=False,indent=2));os.chmod(tmp,0o600);os.replace(tmp,p)
+def verified_entry(r,t,c,v,receipt_path):
+ aid=t['account_id']
+ assert r['account_id']==aid and r['business_id']==c['business_id']and r['payments_executed']==0
+ if r['status']=='current_balance_pay_now_unavailable':
+  proof=v.get('disabled_balance_checks',{}).get(aid,{})
+  assert proof.get('pay_now_visually_disabled')is True and proof.get('valid_billing_page')is True,'disabled_button_visual_proof_missing'
+  assert proof.get('business_id')==c['business_id']and proof.get('asset_id')==aid,'disabled_identity_mismatch'
+  dec=Decimal(r['amount']);assert dec>=0 and Decimal(proof['balance_usd'])==dec,'disabled_balance_visual_mismatch'
+  assert r['pay_now_ax_button_count']==0 and Path(r['page']['screenshot']).is_file()
+  ls=Path(r['page']['text_path']).read_text().splitlines();ai=ls.index('+ any applicable fees');amount=ls[ai-1]
+  assert re.fullmatch(r'\$[0-9,]+\.\d{2}',amount)and Decimal(amount.replace('$','').replace(',',''))==dec,'disabled_balance_ax_mismatch'
+  assert not re.search(r'You.re Temporarily Blocked|temporarily blocked|going too fast|Enter the 6-digit code', '\n'.join(ls),re.I),'provider_gate_not_financial_disable'
+  source='current_balance_pay_now_unavailable';period=r['period'];screenshot=r['page']['screenshot']
+ else:
+  assert r['status']=='modal_read'and Path(r['modal']['screenshot']).is_file()
+  ls=r['modal_labels'];assert 'Amount you can pay now'in ls and 'Make a payment'in ls
+  amount=ls[ls.index('Amount')+1];assert re.fullmatch(r'\$[0-9,]+\.\d{2}',amount),'amount_not_explicit';dec=Decimal(amount.replace('$','').replace(',',''));assert dec>=0
+  source='pay_now_modal';period=next(s for s in ls if s.startswith('Spending from '));screenshot=r['modal']['screenshot']
+ return {'account_id':aid,'name':t['name'],'amount':str(dec),'currency':'USD','source':source,'period_label':period,'read_at':r['read_at'],'receipt':str(receipt_path),'screenshot':screenshot,'visual_account_verified':True}
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--run-dir');p.add_argument('--prepare',action='store_true');p.add_argument('--apply',action='store_true');p.add_argument('--insert-column-if-needed',action='store_true');a=p.parse_args();assert not(a.prepare and a.apply)
  c=json.loads((H/'digital-trust-workbook-contract.json').read_text());assert c['business_id']=='155263197283282'and c['payments_authorized']is False

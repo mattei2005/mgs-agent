@@ -105,6 +105,14 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Alteração de cron exige readback `enabled/state/schedule/script/deliver/no_agent` e REPORT-INFRA.
 - Cutover de credencial exige percorrer a cadeia completa `job → wrapper → módulo → account/operation contract → item do cofre → cache`. `last_status=ok` não prova uso do token novo quando a credencial antiga ainda existe, pois um hardcode residual pode manter o job verde. Validar cada consumidor ativo por import/readback do item, remover nomes antigos dos caches e executar dry-run live sem postagem/write antes de aposentar o rollback.
 
+## Pausa nominal imediata — rota curta
+
+1. Para pedido somente de pausa, resolva thread → operação → conta e valide autoridade/escopo; leia do contrato apenas os campos necessários de conta, estratégia, credencial e coordenação. Não despeje o contrato ou registry inteiro: histórico e árvores de agendamento extensas ocultam o binding atual e atrasam a interrupção de gasto.
+2. Reutilize a descoberta live e a coordenação descritas na seção de exclusão pontual abaixo, mas aplique exclusivamente `status=PAUSED`. Busque candidatos somente na conta resolvida, percorra a paginação e valide o wrapper completo; sufixos de duplicação podem conter o número da campanha fonte e não identificam o alvo. Memória de uma pausa anterior não prova o estado atual.
+3. Localize a coordenação pelo runner/helper vigente do recorte; não transforme a busca do lock em varreduras sucessivas de runners de criação, inventário e portfólio. Adquira a coordenação, releia os IDs exatos, preserve o budget live individual e persista autorização, origem, estado anterior e `IN_FLIGHT` com flush/fsync antes de `graph_post_once`. Não altere filhos, budget, nome, tracking ou ciclo D1.
+4. Se o alvo já estiver pausado, valide por GET e conclua sem POST. Após o write, faça GET do mesmo ID, confira `status`, `configured_status`, `effective_status`, conta, nome e budget; só declare pausa efetiva quando confirmada. Resposta ambígua exige readback antes de retry, mantendo o mesmo request. Não marque a coordenação COMPLETE enquanto houver alvo pendente.
+5. Encerre em uma frase com campanhas, alias da conta, status confirmado na Meta e budgets preservados. Sem pedido de ativação futura, não entre na receita de agendamento nem crie jobs, novas campanhas ou revisão de performance como efeito lateral.
+
 ## Exclusão pontual de campanha solicitada pelo operador
 
 1. Resolva operação e conta pelo contrato da conversa, valide autoridade e os gates aplicáveis. Faça descoberta restrita ao contrato e ao helper existente; não procure runners de criação, relatórios ou inventário global para um pedido somente de status.

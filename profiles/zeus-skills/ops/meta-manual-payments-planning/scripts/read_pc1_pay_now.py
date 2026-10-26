@@ -60,11 +60,26 @@ try:
   while True:
    cap()
    if any(e.get('role')in ['Heading','Document']and re.search(r'Log into Facebook|Log in to Facebook|Enter your password|Confirm it.s you',e.get('label',''),re.I)for e in es):raise RuntimeError('facebook_authentication_gate')
-   if 'Digital Trust'in text and any(e.get('label')=='Pay now'and e.get('role')=='Button'for e in es):break
+   if re.search(r'You.re Temporarily Blocked|temporarily blocked|going too fast|temporarily unavailable',text,re.I):raise RuntimeError('facebook_temporary_feature_block')
+   paybuttons=[e for e in es if e.get('label')=='Pay now'and e.get('role')=='Button']
+   if 'Digital Trust'in text and (paybuttons or ('Credit line'in text and '+ any applicable fees'in text)):
+    time.sleep(2);cap();break
    if time.monotonic()>deadline:raise RuntimeError('billing_pay_now_not_ready_'+aid)
    time.sleep(1.5)
   # UI navigation request alone is not identity proof: persist page and URL AX.
   page=snap(aid,'page');identity=[{k:e.get(k)for k in ['index','role','label','value']}for e in es if e.get('role')in ['Document','Edit','ComboBox','Heading']]
+  buttons=[e for e in es if e.get('label')=='Pay now'and e.get('role')=='Button']
+  if not buttons:
+   # Disabled billing control is omitted by this AX backend. Pixels MUST
+   # independently prove the grey Pay now button before publication.
+   labels=[e.get('label','')for e in es if e.get('role')!='TabItem']
+   ai=labels.index('+ any applicable fees');amount_text=labels[ai-1]
+   assert re.fullmatch(r'\$[0-9,]+\.\d{2}',amount_text),'top_balance_not_explicit'
+   rec={'status':'current_balance_pay_now_unavailable','source':'current_balance_pay_now_unavailable','account_id':aid,'name':targets[aid]['name'],'business_id':contract['business_id'],'requested_url':url,'read_at':datetime.now().astimezone().isoformat(),'page':page,'identity_ax':identity,'amount':str(Decimal(amount_text.replace('$','').replace(',',''))),'currency':'USD','period':'Current balance; October/2026 open; Pay now disabled (visual verification required)','pay_now_ax_button_count':0,'payments_executed':0}
+   rp=B/(aid+'-receipt.json');rp.write_text(json.dumps(rec,ensure_ascii=False,indent=2));os.chmod(rp,0o600)
+   out.append({'account_id':aid,'receipt':str(rp),'page_screenshot':page['screenshot'],'source':rec['source'],'amount':rec['amount']})
+   print(json.dumps({'status':'account_disabled_balance_captured',**out[-1]},ensure_ascii=False),flush=True)
+   continue
   click_exact('Pay now');deadline=time.monotonic()+35
   while True:
    cap()
