@@ -3,7 +3,8 @@
     "1563960055504838767",
     "1563960345826037821",
     "1563981039230255186",
-    "1564022485366734969"
+    "1564022485366734969",
+    "1564115318887161857"
   ],
   "thread_id": "1563926766286803004",
   "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
@@ -79,7 +80,7 @@
     "14:02",
     "21:02"
   ],
-  "native_schedule_state": "enabled_invoices_independent_general_refresh_funding_gate",
+  "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
   "next_run_at": "2026-10-25T21:02:00-04:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
@@ -102,7 +103,6 @@
     "3752157451670648",
     "4511685129081248",
     "1414197490675732",
-    "1543098427832443",
     "2852476828464907",
     "1829406761389732",
     "937846586033361",
@@ -153,16 +153,9 @@
     "1542257646409395",
     "1430034464330819"
   ],
-  "pending_sheet_reclassification": {
-    "id": "1543098427832443",
-    "sheet_name": "Mavroa-US-SHEIN-ES-03-G003",
-    "live_name": "Mavroa-US-SHEIN-ES-03-G003",
-    "sheet_method": "Linha de crédito",
-    "live_method": "Cartão de crédito",
-    "funding_type": 1,
-    "funding_details_present": true
-  },
+  "pending_sheet_reclassification": null,
   "invoice_refresh_each_tick": true,
-  "general_refresh_blocker": "1543098427832443 funding type1/live card vs Sheet credit line; no Meta billing mutation by Zeus; decision required before group reorganization.",
-  "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json"
+  "general_refresh_blocker": null,
+  "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261025T231838109427"
 }

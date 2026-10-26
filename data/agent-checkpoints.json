@@ -6122,6 +6122,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-manual-payments-digital-trust",
+      "next_step": "Reagrupar conta transferida para cartão, atualizar métricas e coletar todos os modais de linha.",
+      "objective": "Atualizar mesma planilha Digital Trust: reagrupar por funding live, prioridade G/H/I/J e invoices correntes, sem pagamento ou alteração Meta.",
+      "source": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "state": "em execução por autorização 1564115318887161857; invoices coletadas e publicadas, ainda unpaid na meta; validar funding e pc1.",
+      "thread_id": "1563926766286803004",
+      "updated_at": "2026-10-26T03:17:27+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-manual-payments-digital-trust-1563926766286803004",
       "next_step": "Invoice/Setembro publicados e validados,20 pendentes na abaUSD275644.71; BM26 pendentesUSD283813.02;6 contas fora somamUSD8168.31. Paid: CPV04/26877313 e Yolokfx01/26891526 zerados em F. General API gate: Mavroa03/1543098427832443 agora funding tipo1/cartão vs Sheet linha. Aguardar decisão de inclusão das6 e reclassificação da Mavroa sem alterar Meta. Invoices atualizam independentemente3x/dia; restante permanece bloqueado, não declarar green integral. Fonte closure.",
       "objective": "Invoice E e Setembro F atuais na mesma aba; demais campos G/H/I/J preservados e47 IDs congeladas.",
@@ -7292,5 +7302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-25T21:22:36+00:00"
+  "updated_at": "2026-10-26T03:17:27+00:00"
 }
