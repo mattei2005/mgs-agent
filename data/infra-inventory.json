@@ -898,7 +898,7 @@
       "authority_message_id": "1562141828449439838",
       "thread_id": "1562078493498540042",
       "batch_thread_id": "1564295300414443555",
-      "status": "recovered_validated_report_pending",
+      "status": "recovered_validated",
       "paths": [
         "scripts/mgs_private_control_store.py",
         "tests/test_private_control_store.py",
@@ -919,7 +919,9 @@
       "inventory_sha256_after": "9dcdc6aa272f90ff67d01ae9d4402ccd59d718ae3862ea6815c8c63f257f5670",
       "skill_canonical_mirror_sha256": "1a267072b729f03d8b7bba44469f458bec809ea1e8cf6d2694b7c45e1314eb59",
       "verification_receipt": "/root/.hermes/profiles/zeus/artifacts/archive-link-recovery-20261026/final-verification.json",
-      "report_infra_status": "pending"
+      "report_infra_status": "verified",
+      "report_infra_message_id": "1564327560018534432",
+      "report_infra_channel_id": "1498132022634483894"
     },
     {
       "id": "meta-manual-payments-recovery-1564273144729051199",

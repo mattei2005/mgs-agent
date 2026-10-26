@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-ARCHIVE-LINK-RECOVERY-20261026",
-      "next_step": "Validar URLs canonicas das linhagens ja arquivadas do lote Kelly; corrigir somente webViewLink stale com lock e rollback; repetir monitor original",
+      "next_step": "Sem acao do Rodolfo. Monitor original status ok sem blocked; 60 webViewLinks corrigidos com bytes/ACK nativos; broker JSON source_retirement_intent corrigido; 36 testes PASS; 2 pares/4 retiradas autorizadas com recibos e download pos-retirada verificados. Demais pares seguem somente rotina/limites originais. REPORT-INFRA 1564327560018534432 relido.",
       "objective": "Recuperar bloqueio UNMEDIATED_SOURCE_REFERENCE sem alterar writer, IDs ou gates",
-      "source": "data/ares/creative-ops/30tb-archive/notification-health.json",
-      "state": "investigating_reproduced",
+      "source": "/root/.hermes/profiles/zeus/artifacts/archive-link-recovery-20261026/final-verification.json",
+      "state": "recovered_validated",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-10-26T17:01:35+00:00"
+      "updated_at": "2026-10-26T17:19:32+00:00"
     },
     {
       "agent": "zeus",
@@ -7332,5 +7332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T17:01:35+00:00"
+  "updated_at": "2026-10-26T17:19:32+00:00"
 }
