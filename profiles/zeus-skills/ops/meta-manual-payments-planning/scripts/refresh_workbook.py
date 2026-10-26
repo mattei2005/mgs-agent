@@ -87,8 +87,9 @@ def main():
   if method=='Cartão de crédito':
    if default:assert re.fullmatch(r'(American Express|Mastercard|MasterCard|Visa|Discover) \*\d{4}',default)
    default=default.replace(' *',' •••• ')if default else'Não identificado pela Meta'
-   proof=ledger['accounts'].get(t['id']);assert proof
-   since=datetime.fromisoformat(proof['read_at']);params={'business_id':bm,'category':'BUDGET','since':int(since.timestamp()),'until':int(datetime.now().timestamp()),'fields':'event_time,event_type,extra_data','limit':100};has_new=False
+   proof=ledger['accounts'].get(t['id'])
+   if not proof:pending.append({'account_id':t['id'],'name':a['name'],'reason':'no_prior_pc1_card_history_proof'})
+   since=datetime.fromisoformat(proof['read_at'])if proof else datetime.now().astimezone();params={'business_id':bm,'category':'BUDGET','since':int(since.timestamp()),'until':int(datetime.now().timestamp()),'fields':'event_time,event_type,extra_data','limit':100};has_new=False
    while True:
     ev=graph('act_'+t['id']+'/activities',params)
     for e in ev.get('data',[]):

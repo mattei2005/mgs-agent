@@ -258,6 +258,30 @@
       "latest_card": null,
       "status": "no_charge_located",
       "no_recent_spending_message": true
+    },
+    "1543098427832443": {
+      "account_id": "1543098427832443",
+      "business_id": "155263197283282",
+      "ui_url_account_id_verified": true,
+      "read_at": "2026-10-25T23:19:41.745822-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261025T231912057296/verified-1543098427832443.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261025T231912057296/1543098427832443-receipt.json",
+      "rows": [
+        {
+          "date": "Oct 25, 2026",
+          "method": "MasterCard ···· 5768",
+          "amount": "399.02",
+          "status": "Paid"
+        }
+      ],
+      "latest_card": {
+        "date": "Oct 25, 2026",
+        "method": "MasterCard ···· 5768",
+        "amount": "399.02",
+        "status": "Paid"
+      },
+      "status": "verified_card",
+      "no_recent_spending_message": false
     }
   }
 }

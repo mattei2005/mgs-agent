@@ -25,7 +25,7 @@ def main():
    if cells and(mt:=re.search(r'^ID da conta: (\d+)\b',cells[0].get('note',''))):
     allids.append(mt[1])
     if cells[1]['userEnteredValue']['stringValue']=='Linha de crédito':ts.append({'account_id':mt[1],'name':cells[0]['userEnteredValue']['stringValue'],'row_index':i})
-  assert len(allids)==len(set(allids))and set(allids)==set(c['account_ids']),'account_scope_drift';assert len(ts)==39,'credit_line_scope_drift';return rows,ts
+  assert len(allids)==len(set(allids))and set(allids)==set(c['account_ids']),'account_scope_drift';assert {x['account_id']for x in ts}==set(c['pay_now_account_ids']),'credit_line_scope_drift';return rows,ts
  B=Path(a.run_dir)if a.run_dir else REPORTS/'meta-manual-payments-runs'/('pay-now-'+datetime.now().strftime('%Y%m%dT%H%M%S%f'));B.mkdir(parents=True,exist_ok=True)
  before=api('GET',url);rows,targets=scope(before)
  if a.prepare:
