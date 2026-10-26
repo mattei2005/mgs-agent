@@ -893,6 +893,35 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ares-archive-link-recovery-20261026",
+      "actor": "zeus",
+      "authority_message_id": "1562141828449439838",
+      "thread_id": "1562078493498540042",
+      "batch_thread_id": "1564295300414443555",
+      "status": "recovered_validated_report_pending",
+      "paths": [
+        "scripts/mgs_private_control_store.py",
+        "tests/test_private_control_store.py",
+        "data/ares/creative-ops/inventory/assets.jsonl",
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md",
+        "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md",
+        "/root/.hermes/profiles/zeus/artifacts/archive-link-recovery-20261026/"
+      ],
+      "changes": "60 stale webViewLink values redirected to native verified permanent archive URLs; exact JSON source_retirement_intent kind admitted by control slot contract without widening parents or deletion policy",
+      "focused_tests_passed": 36,
+      "native_retirement_files_verified": 4,
+      "native_retirement_pairs_verified": 2,
+      "post_retirement_consumer_full_download_verified": true,
+      "existing_schedules_and_limits_preserved": true,
+      "credentials_permissions_campaigns_modified": false,
+      "code_sha256": "0022cbd3973d0cab0b86cfde7e5ed3c877f7a3f62dd4637706c2dcdf647d2567",
+      "test_sha256": "ce7c0e5ae012befc1ddbba09d05d0c667e8c29feb3c7bbfda2648cb18b4937a2",
+      "inventory_sha256_after": "9dcdc6aa272f90ff67d01ae9d4402ccd59d718ae3862ea6815c8c63f257f5670",
+      "skill_canonical_mirror_sha256": "1a267072b729f03d8b7bba44469f458bec809ea1e8cf6d2694b7c45e1314eb59",
+      "verification_receipt": "/root/.hermes/profiles/zeus/artifacts/archive-link-recovery-20261026/final-verification.json",
+      "report_infra_status": "pending"
+    },
+    {
       "id": "meta-manual-payments-recovery-1564273144729051199",
       "agent": "zeus",
       "type": "meta_billing_readonly_collection_recovery",
