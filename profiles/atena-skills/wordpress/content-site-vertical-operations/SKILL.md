@@ -41,6 +41,8 @@ Se o site key existente conflitar com o pedido atual:
 
 ## Padrão seguro de novo site_key
 
+Antes de criar ou reutilizar um `site_key`, resolva a tupla **domínio exato + idioma + país + vertical** para um único contexto compatível. Não selecione o primeiro registro do domínio: um portal pode atender mercados e idiomas diferentes. Registre a rota por artigo e mantenha o ID da categoria explícito no manifesto; `default_category` não substitui essa resolução.
+
 Ao criar uma variação para novo país/idioma/vertical:
 
 - preserve o key existente sem alteração destrutiva;
@@ -181,7 +183,9 @@ Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de art
 
 ### Planejamento nominal e revisão de escopo
 
-Quando Raquel pedir a lista antes de executar, entregue as pautas completas, agrupadas por portal, com quantidade, título proposto, categoria e intenção de busca. Registre idioma e país por artigo; em portal misto, o cabeçalho deve mostrar todas as combinações usadas ou identificar cada item, nunca herdar apenas o mercado da primeira linha. Mantenha a produção, as imagens e os writes suspensos até a aprovação exigida; uma alteração de distribuição não aprova automaticamente as pautas nem revoga essa pausa.
+Quando Raquel pedir a lista antes de executar, entregue as pautas completas, agrupadas por portal, com quantidade, título proposto, categoria e intenção de busca. Registre idioma e país por artigo; em portal misto, o cabeçalho deve mostrar todas as combinações usadas ou identificar cada item, nunca herdar apenas o mercado da primeira linha. Mantenha a produção, as imagens e os writes suspensos até a aprovação exigida; uma alteração de distribuição, sem comando explícito de execução, não aprova automaticamente as pautas nem revoga essa pausa.
+
+Quando Raquel autorizar expressamente executar e completar um novo total com distribuição livre entre portais já mencionados, preserve as pautas aprovadas e calcule por código a quantidade complementar. Escolha os complementos somente entre os alvos admitidos desse conjunto, verificando categoria, idioma/país e sobreposição de intenção; distribuição livre não dispensa esses critérios. Atualize o manifesto e o checkpoint com a aprovação, as cotas resultantes e os itens acrescentados e prossiga sem exigir outra aprovação apenas para os complementos já autorizados. Preserve os demais requisitos e não trate o novo total como um segundo lote somado ao plano aprovado.
 
 Ao receber uma nova distribuição, substitua somente os critérios explicitamente alterados, marque a versão anterior como supersedida e reconcilie manifesto, totais e trabalhos delegados antes de continuar. Diferencie cota nova por portal de saldo faltante por categoria: apresente complementos fora das lacunas como expansão proposta, sem inventar déficit. Não use o agrupamento do briefing como prova da vertical ativa; confronte o menu e o acervo e exponha qualquer adaptação proposta antes da produção. A receita está em `references/general-seo-category-drafts.md`, seção Planejamento aprovado, limites e datas editoriais.
 
