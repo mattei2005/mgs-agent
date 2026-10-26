@@ -19,6 +19,12 @@ class SlotScope(unittest.TestCase):
   j={**self.j,'kind':'stock_layout_snapshot'};self.assertTrue(c.validate_request(j,self.binding))
   with self.assertRaises(c.b.ArchiveError):c.validate_request({**j,'parent_id':'FOREIGN'},self.binding)
   with self.assertRaises(c.b.ArchiveError):c.validate_request({**j,'mime':'video/mp4'},self.binding)
+ def test_retirement_intent_is_json_only_and_preserves_scope(self):
+  j={**self.j,'kind':'source_retirement_intent','key':'retirement-intent:offline:job','name':'retirement-intent-offline.json'}
+  self.assertTrue(c.validate_request(j,self.binding))
+  for k,v in [('parent_id','FOREIGN'),('mime','application/javascript'),('mime','video/mp4'),('size',c.MAX_BYTES+1),('sha256','invalid')]:
+   with self.subTest(k=k,value=v),self.assertRaises(c.b.ArchiveError):c.validate_request({**j,k:v},self.binding)
+  self.assertNotIn('mgsArchiveState',c.publication_properties(j['kind'],j['sha256']))
  def test_new_private_requests_are_natively_claimable(self):
   for kind in ['request','vps_request','vps_backfill_request','vps_backup_move_request']:
    self.assertEqual(c.publication_properties(kind,'a'*64)['mgsArchiveState'],'queued')
