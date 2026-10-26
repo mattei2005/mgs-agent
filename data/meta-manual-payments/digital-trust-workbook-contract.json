@@ -91,7 +91,11 @@
   "pending_card_history": null,
   "card_history_recovery": {
     "source_message": "1564273144729051199",
-    "resolved_account_ids": ["1046241194533786", "1481815942722118", "1543098427832443"],
+    "resolved_account_ids": [
+      "1046241194533786",
+      "1481815942722118",
+      "1543098427832443"
+    ],
     "evidence": "pc1-card-ledger.json; AX and pixels show real transaction methods after bounded, fresh-element targeted history scroll.",
     "supersedes": "blocked_capture_parity for1481815942722118; prior captures preserved as historical evidence."
   },
@@ -186,5 +190,5 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261026T101306980370"
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261026T140247123568"
 }

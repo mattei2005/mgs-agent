@@ -136,6 +136,17 @@ Use this route when Rodolfo asks which accounts use cards, their current default
 
 API fields, activity parsing, pagination recovery and reconciliation details: `references/meta-card-billing-risk-analysis-2026-09-09.md`.
 
+### Read-only diagnosis of payment-form validation errors
+
+Use this branch when Rodolfo asks to investigate an error while adding a payment method; do not start the spend/workbook workflow unless requested.
+
+1. Read the supplied screenshot, preserve the exact error text, and resolve the named account to its live ID and Business. For PC1, load `secure-remote-windows-automation`, acquire the shared desktop lease, and inspect the approved Chrome window in an owned tab. Reduce window discovery output before printing: browser titles can contain OAuth callback codes even when the target window is unrelated to authentication.
+2. Open the exact account's Billing details and record the current funding method. Inspect the form without entering card data or submitting it. For an authorized inspection, the path `Add payment method → Debit or credit card → Next` can expose the blank form; treat `Save`, final payment submission and any billing edit as mutation boundaries, not diagnostic clicks. Verify the current screen before each transition rather than assuming button semantics remain unchanged.
+3. For country/address errors, distinguish the card's billing address, the account's payment profile, and the Business's legal entity. When Billing details has no Business info section, inspect `Legal entities → exact entity → Addresses` and identify any `Default billing` label. This proves the entity's address, not that the same country is populated or accepted in the account's payment profile. Do not infer billing country from an account-name suffix, dollar sign or timezone.
+4. Supplement UI evidence with a narrow account GET using supported fields such as `account_id,name,currency,timezone_name,business,business_country_code,business_state,business_zip,business_city`. Preserve the distinction between omitted keys, explicit empty values and returned values: an omitted country is a visibility gap, not proof that the stored country is missing. Neither an omitted field nor an absent country selector establishes a root cause.
+5. State whether the error was reproduced by an authorized submission or only observed in the user's screenshot. A blank form without an error does not prove recovery; a country-validation message does not establish an issuer decline or rule out a card problem. Do not save an unconfirmed cause or an untested workaround as a reliable fix.
+6. Report in concise numbered **Problema, Causa, Solução** groups, marking unproven causes explicitly. If escalation is necessary, supply the exact account/payment-account ID and the observed field/error mismatch without card details; do not change legal-entity country or recreate an account as a speculative repair. Close only tabs created by the investigation, verify the remaining window, release the lease, and state whether any billing mutation or payment occurred.
+
 ### Billing inventory in an existing spreadsheet
 
 For Rodolfo's recurring **manual card-payment planning**, load `meta-manual-payments-planning`: it is the dedicated canonical owner of the workbook, card-only charge evidence, three-closed-day averages, invoice/Pay now distinctions and multi-card planning. This generic skill remains the owner of shared Meta transport and API primitives; creating a planning skill never authorizes billing writes.
