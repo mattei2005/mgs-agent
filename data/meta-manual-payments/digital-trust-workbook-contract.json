@@ -82,7 +82,9 @@
   "latest_refresh_qualification": {
     "validated_metrics_at": "2026-10-26T14:11:04.262075-04:00",
     "status": "metrics_validated_pay_now_partial_provider_block",
-    "pending_ui": ["H: 34 of 38 current credit-line targets preserved from prior snapshot; Facebook temporary feature block confirmed in AX and pixels. No global logout or 2FA gate observed."],
+    "pending_ui": [
+      "H: 34 of 38 current credit-line targets preserved from prior snapshot; Facebook temporary feature block confirmed in AX and pixels. No global logout or 2FA gate observed."
+    ],
     "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T141106242028",
     "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T140332972496",
     "action": "C/G/I/J refreshed and reconciled for all 47 accounts. E/F September live due USD275644.71 across20 unpaid invoices in this worksheet; owner-reported payment not yet settled by Meta. H updated only for4 individually pixel-verified modals with original collection times; remaining34 H cells unchanged. D preserved, no new generic payment events requiring UI history; one prior blank remains.47 IDs,9 card/38 credit-line groups, totals F/G/H/I/J and billing links validated. PC1 lease released. No payment or billing change.",
@@ -191,5 +193,5 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261026T140247123568"
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261026T162122993405"
 }
