@@ -51403,7 +51403,7 @@
       "job_id": "e62aff868def",
       "source_message": "1564378267862044806",
       "scheduled_at": "2026-10-26T17:13:10.025281-04:00",
-      "status": "scheduled_verified_not_yet_executed",
+      "status": "paused_superseded_by_completed_foreground",
       "deliver": "discord:1496267442899521627:1563926766286803004",
       "repeat": 1,
       "scope": "Same47accounts/workbook;resume31H missing plus refreshothermetrics;noMeta/billingwrites",
@@ -51416,7 +51416,9 @@
         "monitor_hermes_pending_writes.py",
         "finalize-hermes-structural-write.py",
         "hermes-news-explainer-watchdog.py"
-      ]
+      ],
+      "superseded_by": "meta-accounts-list-h-and-active-invoices-1564382301155098717",
+      "last_verified_at": "2026-10-26T17:27:20.929226-04:00"
     },
     {
       "id": "meta-billing-accounts-search-test-1564379257491296286",
@@ -51441,6 +51443,61 @@
       },
       "evidence": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/verified-results.json",
       "updated_at": "2026-10-26T16:52:52.207551-04:00"
+    },
+    {
+      "id": "meta-accounts-list-h-and-active-invoices-1564382301155098717",
+      "agent": "zeus",
+      "type": "skill_script_contract_cron_prompt",
+      "authority_messages": [
+        "1564382301155098717",
+        "1564382678168502295"
+      ],
+      "updated_at": "2026-10-26T17:27:20.929226-04:00",
+      "status": "deployed_snapshot_verified",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/accounts-list-search.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/recurring-refresh.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/september-invoices.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_list.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/publish_pay_now.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_september_invoices.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py"
+      ],
+      "verification": {
+        "accounts": 47,
+        "h_pixel_verified_published": 38,
+        "invoice_E_visible_numbers": 0,
+        "september_due_usd": "0.00",
+        "parser_real_source_checks": 152,
+        "invoice_rule_fixture_tests": 7,
+        "deployed_collector_live_canary": true,
+        "mirror_sha256": {
+          "SKILL.md": "44360e4d610b0c4859865745346c499a6012dfa40576711b0fc37fe9f10a9567",
+          "references/accounts-list-search.md": "bfc9f9483fafed395661f50b574268cca440e07c1b6a49419fb112d85df99385",
+          "references/recurring-refresh.md": "0f24c65261ac8d2a1d71a28ba999353d1287f41e361576f7bdc5733b1375d77a",
+          "references/september-invoices.md": "1b0b4d26369642249ca48f22fe067577da5c8b8ca00a5be5fc5f57a7f7dffb4f",
+          "scripts/read_pc1_accounts_list.py": "f5e1bff0cc59a5537e1d2a24e2f0719e84f2426f8b7c1634fdaf480cd350f604",
+          "scripts/publish_pay_now.py": "00b110ec459006086e98c040aebcceb1b390f70544e742a3367ea440b4408dd9",
+          "scripts/refresh_september_invoices.py": "f1a0a0d8fc1f91bcc234c47ef343e5dc757f64df3b2e99f28c26fe1c11e3d779",
+          "scripts/validate_workbook_readonly.py": "79371842faff92629b0ddb71565d8c433e39ad99435a3dc8daa8061f461a4ef0"
+        },
+        "totals": {
+          "label": "TOTAL GERAL — 47 contas",
+          "F": 0,
+          "G": 31018.76,
+          "H": 531179.36,
+          "I": 534176.13,
+          "J": 755260.99
+        },
+        "full_grid_readback": true,
+        "all_billing_links": 47,
+        "meta_writes": 0,
+        "payments": 0
+      },
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717",
+      "cron": "2ee720363d7dpromptupdated;schedule2 8,14,21 * * *unchanged",
+      "retry": "e62aff868defpausedsuperseded,noexecution"
     }
   ],
   "profile_skill_references": [

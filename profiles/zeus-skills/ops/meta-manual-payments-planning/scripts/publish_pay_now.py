@@ -100,7 +100,7 @@ def main():
      elif e['source']=='current_balance_pay_now_unavailable':
       detail='Current balance do topo: USD '+e['amount']+'. Pay now comprovadamente desabilitado na página válida. Usado como saldo a pagar de outubro ainda aberto conforme Rodolfo1564373157727576245; não é leitura de modal.'
      else:detail='Amount you can pay now: USD '+e['amount']+'. '+e['period_label']+'. Valor literal permitido no modal.'
-     cell['note']=detail+' Fonte '+e['source']+'. Leitura PC1 autenticada: '+e['read_at']+'. Conta '+e['account_id']+'; BM '+c['business_id']+'; URL/conta, botão e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: '+e['receipt']
+     cell['note']=detail+' Fonte '+e['source']+'. Leitura PC1 autenticada: '+e['read_at']+'. Conta '+e['account_id']+'; BM '+c['business_id']+'; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: '+e['receipt']
     elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL'):
      fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma H das '+str(len(targets))+' contas de linha; '+str(len(entries))+' atualizadas, '+str(len(targets)-len(entries))+' históricas preservadas: Current balance da Accounts list por1564382301155098717, ou outra fonte explicitada individualmente. Leituras sequenciais com fonte/hora individual; não é limite de cartão nem promessa de liquidação simultânea.'
     elif mt and mt[1]in targetids:

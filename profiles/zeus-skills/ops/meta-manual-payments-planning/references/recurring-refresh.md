@@ -1,5 +1,7 @@
 # Atualização recorrente autorizada — Digital Trust
 
+**Rota atual supersede coleta de modais abaixo:** por `1564382301155098717`, usar `references/accounts-list-search.md`: preparar targets live, coletar Current balance da linha Accounts com nome/ID exatos, verificar pixels e publicar H com fonte `accounts_list_current_balance`. Não abrir detalhes/modais para uma simples consulta de saldo. Manter47IDs,cadência e valores com fonte/hora reais. A regra E por `1564382678168502295` também supersede instruções históricas: invoice paga/due0 fica em branco; a competência acompanha a última invoice de mês fechado realmente gerada pela Meta (normalmente perto do dia2), sem inventar invoice de outubro nem alterar J implicitamente.
+
 **Schema atual supersede letras antigas:** seguir `references/september-invoices.md`: E Invoice/F Setembro/G média/H Pay now/I balance/J outubro. Executar refresh_september_invoices.py --apply em cada tick antes do restante. Funding divergente é gate do restante, não falha da coleta de invoices; manter o snapshot e informar bloqueio exato, sem reorganização/billing implícitos.
 
 **Supersessão de schema e extensão autorizada:** pedido `1563981039230255186` adicionou F Pay now, deslocando balance para G e gasto para H. Em cada tick integrar também a coleta dos 39 modais pelo procedimento `references/pay-now-column.md`, com inspeção visual real e publicação limitada à nova F. Nunca inserir outra coluna. O primeiro tick natural do schema anterior executou ok em 25/10 às 14:03; isso não comprova execução natural do novo ciclo de modais.

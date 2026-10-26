@@ -21,7 +21,8 @@ def main():
  rng="'"+matches[0]['title'].replace("'","''")+"'!A:J";enc=quote(rng,safe='!:');forms=get(root+'/values/'+enc+'?valueRenderOption=FORMULA')['values'];vals=get(root+'/values/'+enc+'?valueRenderOption=UNFORMATTED_VALUE')['values'];grid=get(root+'?includeGridData=true&ranges='+quote(rng,safe='')+'&fields=sheets(data(rowData(values(note,userEnteredFormat(textFormat.link,numberFormat)))))')['sheets'][0]['data'][0]['rowData']
  september=len(forms[0])==10;pay=len(forms[0])in (8,10);expected=['Nome da conta','Forma de pagamento','Cartão usado como default','Última cobrança no cartão','Média diária','Saldo a pagar','Total']
  if pay:expected.insert(5,'Disponível para pagar no cartão')
- if september:expected[4:4]=['Invoice','Setembro']
+ if september:
+  month_headers=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];assert forms[0][5]in [m+' — saldo em aberto'for m in month_headers],'invoice_period_header_invalid';expected[4:4]=['Invoice',forms[0][5]]
  assert len(forms[0])==len(expected)and all(str(v).startswith(pre)for v,pre in zip(forms[0],expected)),'header_schema_mismatch'
  width=len(expected);paycol=7 if september else 5;metrics=(6 if september else 4,width-2,width-1);special=((paycol,)if pay else())+((5,)if september else());financial=tuple(sorted(metrics+special));assert len(forms)==len(vals)
  accounts=[];ids=set();groups=Counter();totals=[];currencies=set()

@@ -18,6 +18,10 @@ Atual: A Nome, B Forma, C Default, D Última cobrança no cartão, E Invoice, F 
 
 Fonte histórica da implantação (não estado corrente): `reports/meta-september-invoices-1564022485366734969/publication/`. Foram152 invoices em2 páginas,28 de setembro:26 Unpaid e2 Paid. Na aba,20 pendentes somaramUSD275644.71; BM inteiraUSD283813.02, com6 contas fora da aba totalizandoUSD8168.31. CPV04 invoice26877313 e Yolokfx-US-SHEIN-EN-01-G002 invoice26891526 estavam Paid. Revalidar antes de responder.
 
+## Competência após a virada
+
+Por `1564382678168502295`, o runner usa `invoice_period_mode=latest_closed_generated`: seleciona a competência fechada mais recente que **exista realmente** em business_invoices. Se novembro começar sem invoice de outubro gerada, E permanece vazia após a baixa de setembro; não criar número previsto. Quando a Meta gerar outubro, selecionar essa competência e manter o header de F coerente com seu amount_due; J continua outubro conforme contrato separado. Se existir invoice antiga ainda aberta durante a troca, bloquear a troca para conciliação em vez de apagar a dívida. A rotina já existente faz a consulta, sem novo cron do dia2. As referências abaixo a setembro documentam o período inicial.
+
 ## Cada tick e compatibilidade
 
 No mesmo job3x/dia, executar primeiro refresh_september_invoices.py --apply. Depois o fluxo normal de API/cartão/Pay now e validador. O fluxo de API escreve C/G/I/J; publisher UI resolve H pelo header e não toca E/F. Instrumento histórico continua somente D com prova PC1.

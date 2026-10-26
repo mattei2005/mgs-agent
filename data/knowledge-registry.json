@@ -13338,6 +13338,23 @@
       "updated_at": "2026-10-03T00:31:43+00:00"
     },
     {
+      "canonical_key": "finance.meta.manual-payments.pay-now-column",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-26T21:27:21+00:00",
+      "id": "finance-meta-accounts-list-current-balance-20261026",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SaldoH pela buscaAccounts comIDexato,substitui abertura de detalhes",
+      "updated_at": "2026-10-26T21:27:21+00:00"
+    },
+    {
       "canonical_key": "finance.meta.manual-payments.live-funding-regroup",
       "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
       "consumers": [
@@ -13353,6 +13370,23 @@
       "superseded_by": null,
       "title": "Priorizar G/H/I/J e mover defaults cartão ao bloco superior",
       "updated_at": "2026-10-26T04:12:10+00:00"
+    },
+    {
+      "canonical_key": "finance.meta.manual-payments.september-invoices",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-26T21:27:21+00:00",
+      "id": "finance-meta-invoices-pending-only-period-follow-20261026",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "E apenas invoices pendentes;pagas vazias;próxima competência só após geraçãoMeta",
+      "updated_at": "2026-10-26T21:27:21+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-card-payments-planning",
@@ -13417,10 +13451,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-accounts-list-current-balance-20261026",
       "title": "H usa balance do topo se Pay now realmente indisponível;modal se habilitado",
-      "updated_at": "2026-10-26T20:35:57+00:00"
+      "updated_at": "2026-10-26T21:27:21+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.pay-now-column",
@@ -13451,10 +13485,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-invoices-pending-only-period-follow-20261026",
       "title": "Invoice e saldo aberto de setembro na planilha Digital Trust",
-      "updated_at": "2026-10-25T21:22:36+00:00"
+      "updated_at": "2026-10-26T21:27:21+00:00"
     },
     {
       "canonical_key": "finance.daily.partial-fixed-costs",
@@ -14367,5 +14401,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T20:35:57+00:00"
+  "updated_at": "2026-10-26T21:27:21+00:00"
 }
