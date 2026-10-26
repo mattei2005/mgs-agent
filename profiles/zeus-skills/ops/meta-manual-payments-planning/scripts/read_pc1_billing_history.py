@@ -47,7 +47,7 @@ try:
   assert args.account_id in contract['account_ids'] and contract['business_id']=='155263197283282'
   action({'action':'key','keys':'ctrl+t'});created=True
   url='https://adsmanager.facebook.com/adsmanager/billing_hub/accounts/details/?business_id=155263197283282&asset_id='+args.account_id
-  action({'action':'type','text':url});action({'action':'key','keys':'return'})
+  action({'action':'key','keys':'ctrl+l'});action({'action':'type','text':url});action({'action':'key','keys':'return'})
   end=time.monotonic()+55
   while True:
    es,text=cap()
@@ -55,12 +55,16 @@ try:
    if 'Digital Trust'in text and ('\nDate\nPayment method\nAmount\nStatus\n'in text or 'No payment activity'in text or 'No transactions'in text or 'You have no recent spending.'in text):break
    if time.monotonic()>end:raise RuntimeError('billing_page_not_verified')
    time.sleep(2)
+ time.sleep(2);es,text=cap()
  tag=args.account_id or'inspect';p=B/(tag+'.txt');p.write_text(text);os.chmod(p,0o600)
  vision=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id})
  snap={'status':'read','receipt_path':str(B/(tag+'-receipt.json')),'read_at':datetime.now().astimezone().isoformat(),'no_recent_spending_message':'You have no recent spending.'in text,'account_requested':args.account_id,'text_path':str(p),'elements_path':last.get('elements_file'),'screenshot':vision.get('screenshot_path'),'headings':[e.get('label')for e in es if e.get('role')in ['Heading','Document']],'billing_excerpt':safe_excerpt(es,text),'payment_controls':[{'index':e.get('index'),'role':e.get('role'),'label':e.get('label')}for e in es if e.get('label')in ['View all activity','View transaction history','Payment activity','Payment history','Accounts']]}
  (B/(tag+'-receipt.json')).write_text(json.dumps(snap,ensure_ascii=False,indent=2));print(json.dumps(snap,ensure_ascii=False))
 except Exception as e:
- print(json.dumps({'status':'blocked','reason':str(e),'screenshot':last.get('screenshot_path'),'elements_path':last.get('elements_file')},ensure_ascii=False))
+ try:
+  es,text=cap();failure_image=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id}).get('screenshot_path')
+ except Exception:failure_image=None
+ print(json.dumps({'status':'blocked','reason':str(e),'screenshot':failure_image,'elements_path':last.get('elements_file')},ensure_ascii=False))
 finally:
  if created:
   try:cap();action({'action':'key','keys':'ctrl+w'})
