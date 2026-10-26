@@ -179,6 +179,16 @@ Antes de escalar o lote, monte uma matriz por portal com identidade/capacidades 
 
 Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de artigos, mínimo de palavras, posição da imagem, relação entre imagem interna e destacada, fontes externas e status solicitado. Exigências explícitas do briefing prevalecem sobre o padrão inferido do corpus; não reduza um mínimo de palavras nem altere a posição da imagem para imitar referências mais curtas. Não confunda rascunho no WordPress com arquivo local de texto.
 
+### Planejamento nominal e revisão de escopo
+
+Quando Raquel pedir a lista antes de executar, entregue as pautas completas, agrupadas por portal, com quantidade, título proposto, categoria e intenção de busca. Registre idioma e país por artigo; em portal misto, o cabeçalho deve mostrar todas as combinações usadas ou identificar cada item, nunca herdar apenas o mercado da primeira linha. Mantenha a produção, as imagens e os writes suspensos até a aprovação exigida; uma alteração de distribuição não aprova automaticamente as pautas nem revoga essa pausa.
+
+Ao receber uma nova distribuição, substitua somente os critérios explicitamente alterados, marque a versão anterior como supersedida e reconcilie manifesto, totais e trabalhos delegados antes de continuar. Diferencie cota nova por portal de saldo faltante por categoria: apresente complementos fora das lacunas como expansão proposta, sem inventar déficit. Não use o agrupamento do briefing como prova da vertical ativa; confronte o menu e o acervo e exponha qualquer adaptação proposta antes da produção. A receita está em `references/general-seo-category-drafts.md`, seção Planejamento aprovado, limites e datas editoriais.
+
+### Relatório verificável de lotes SEO da Raquel
+
+Quando solicitado o relatório detalhado de publicação, agrupe por portal e identifique idioma/país antes de cada conjunto. Preserve a ordem dos campos: número, título, caracteres do título, URL pública completa, categoria, palavra-chave foco, tags, palavras, excerpt/primeira frase, caracteres do excerpt, meta description, caracteres da meta, Yoast SEO, Yoast Legibilidade, data e status. Use valores cadastrados e contagens reais; não substitua título do post por título SEO nem data de publicação por data de execução. Informe as classificações reais Verde/Laranja/Vermelho e use `Não verificado` quando não houver prova. Reserve `OK` para validação pública final. Preserve esses campos em uma apresentação legível compatível com o canal, sem anexos não solicitados.
+
 Diferencie quantidade nova de meta final da categoria. Para completar uma categoria, inventarie os posts publicados e classifique pelos termos reais: inclua P1 existentes e exclua REC quando o briefing assim determinar, sem modificar ou remover os excluídos. Calcule a diferença e o total do lote por código antes de confirmar a quantidade; `category.count` sozinho pode incluir classes que não contam para a meta. A presença de P1 no acervo não transforma os novos artigos SEO em REC/P1. Reconcilie a contagem elegível novamente no encerramento.
 
 ### Regras editoriais permanentes para SEO
