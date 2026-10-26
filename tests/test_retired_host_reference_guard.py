@@ -118,6 +118,38 @@ class HistoricalEvidenceTests(unittest.TestCase):
             [f"repo:{relative}"],
         )
 
+    def test_payment_followup_snapshots_are_exact_removed_history(self):
+        relatives = (
+            "reports/meta-pay-now-1563981039230255186/inventory-pre-update.json",
+            "reports/meta-september-invoices-1564022485366734969/inventory-before.json",
+            "reports/meta-sheet-subtitle-1563999324587819020/inventory-before.json",
+        )
+        canonical = json.loads((guard.REPO / "data/infra-inventory.json").read_text())
+        removed = [row for row in canonical["runtime_artifacts"]
+                   if row.get("id") == "runcloud-retired-ssh-allow-removal-20260712"]
+        self.assertEqual(len(removed), 1)
+        self.assertEqual(removed[0]["status"], "removed_validated")
+        for relative in relatives:
+            with self.subTest(relative=relative):
+                content = (guard.REPO / relative).read_bytes()
+                self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+                hits = [row for row in json.loads(content)["runtime_artifacts"]
+                        if guard.RETIRED_HOST in json.dumps(row)]
+                self.assertEqual(hits, removed)
+                self.assertIn(relative, guard.HISTORICAL_EVIDENCE_SHA256)
+                self.assertFalse(any(relative.startswith(prefix)
+                                     for prefix in guard.REPO_ALLOWLIST_PREFIXES))
+                self.assertEqual(self.scan(relative, content, relative, content), [])
+                self.assertEqual(
+                    self.scan(relative, content + b" changed", relative, content),
+                    [f"repo:{relative}"],
+                )
+                sibling = str(Path(relative).with_name("connection.json"))
+                self.assertEqual(
+                    self.scan(sibling, guard.RETIRED_HOST.encode(), relative, content),
+                    [f"repo:{sibling}"],
+                )
+
     def test_php_report_sibling_connection_target_still_blocks(self):
         relative = "reports/php-security-20261021/connection.json"
         evidence = "reports/php-security-20261021/hetzner-recheck-1562886130582552618.json"

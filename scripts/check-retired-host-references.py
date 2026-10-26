@@ -42,6 +42,16 @@ HISTORICAL_EVIDENCE_SHA256 = {
     # canonical inventory record. Preserve only this exact immutable snapshot.
     "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json":
         "ec73c34f09b9c3a8e80f32246d68242ee6187b1d11b9741c06ffc1e0642e3123",
+    # Authorized before-images reconciled with REPORT-INFRA 1563994125924176056,
+    # 1564026420827791371 and 1563999971219603627. Each has exactly one hit:
+    # the unchanged canonical removed_validated firewall history, not a target.
+    # Preserve exact bytes only; changed snapshots and siblings still fail.
+    "reports/meta-pay-now-1563981039230255186/inventory-pre-update.json":
+        "57d7d665cda7979f29abda806ba70cb245337a13e67ff854c6b75a5a6d1dcbfd",
+    "reports/meta-september-invoices-1564022485366734969/inventory-before.json":
+        "d7cc803898a2f4d28ceaa39d2d0a24f59c43bf7721add9ca3c6b1b3bacf8cead",
+    "reports/meta-sheet-subtitle-1563999324587819020/inventory-before.json":
+        "9672a1417db6d00da92f1edd3575aec206415a39b6fc96b07f1043b7d94a6519",
 }
 
 PROFILE_NAMES = ("zeus", "atena", "ares")
