@@ -1,0 +1,71 @@
+{
+  "status": "five_account_search_test_pass",
+  "accounts": [
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "read_at": "2026-10-26T16:49:42.897074-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/2852476828464907.png",
+      "text_path": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/2852476828464907.txt",
+      "ui_surface": "Billing & payments > Accounts > Ad accounts; search by exact account name",
+      "meta_writes": 0,
+      "sheets_writes": 0,
+      "current_balance_usd": "492.48",
+      "visual_id_name_balance_verified": true
+    },
+    {
+      "account_id": "1018267074603840",
+      "name": "Escalatepower-US-SHEIN-EN-01-G001",
+      "read_at": "2026-10-26T16:50:01.834269-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/1018267074603840.png",
+      "text_path": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/1018267074603840.txt",
+      "ui_surface": "Billing & payments > Accounts > Ad accounts; search by exact account name",
+      "meta_writes": 0,
+      "sheets_writes": 0,
+      "current_balance_usd": "312.38",
+      "visual_id_name_balance_verified": true
+    },
+    {
+      "account_id": "3188620887977617",
+      "name": "Infinitynexx-MX-CC-ES-01",
+      "read_at": "2026-10-26T16:50:24.537085-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/3188620887977617.png",
+      "text_path": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/3188620887977617.txt",
+      "ui_surface": "Billing & payments > Accounts > Ad accounts; search by exact account name",
+      "meta_writes": 0,
+      "sheets_writes": 0,
+      "current_balance_usd": "0.66",
+      "visual_id_name_balance_verified": true
+    },
+    {
+      "account_id": "1753257812779707",
+      "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
+      "read_at": "2026-10-26T16:50:46.139543-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/1753257812779707.png",
+      "text_path": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/1753257812779707.txt",
+      "ui_surface": "Billing & payments > Accounts > Ad accounts; search by exact account name",
+      "meta_writes": 0,
+      "sheets_writes": 0,
+      "current_balance_usd": "1161.16",
+      "visual_id_name_balance_verified": true
+    },
+    {
+      "account_id": "1829406761389732",
+      "name": "Mavroa-US-SHEIN-ES-05-G005",
+      "read_at": "2026-10-26T16:51:08.352018-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/1829406761389732.png",
+      "text_path": "/root/mgs-agent/reports/meta-billing-accounts-search-1564379257491296286/1829406761389732.txt",
+      "ui_surface": "Billing & payments > Accounts > Ad accounts; search by exact account name",
+      "meta_writes": 0,
+      "sheets_writes": 0,
+      "current_balance_usd": "138.91",
+      "visual_id_name_balance_verified": true
+    }
+  ],
+  "verified_count": 5,
+  "same_owned_tab": true,
+  "details_opened": 0,
+  "meta_writes": 0,
+  "sheets_writes": 0,
+  "notes": "Each screenshot inspected via vision_analyze; Infinitynexx prefix returned two rows, exact ID disambiguated. Initial AX lookup expected placeholder; corrected to unique Edit Search; no provider/auth block in successful five searches."
+}
