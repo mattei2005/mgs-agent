@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ARES-ARCHIVE-LINK-RECOVERY-20261026",
+      "next_step": "Validar URLs canonicas das linhagens ja arquivadas do lote Kelly; corrigir somente webViewLink stale com lock e rollback; repetir monitor original",
+      "objective": "Recuperar bloqueio UNMEDIATED_SOURCE_REFERENCE sem alterar writer, IDs ou gates",
+      "source": "data/ares/creative-ops/30tb-archive/notification-health.json",
+      "state": "investigating_reproduced",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-10-26T17:01:35+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ARES-ARCHIVE-PILOT-SCOPE-20261023",
       "next_step": "Nenhuma acao humana. Job exato/streams/ACK e monitor completo OK; 94 testes. Inventario/audit/skill/mirror validados. REPORT-INFRA1563300733984575712 relido: embed unico silencioso.",
       "objective": "Recuperar LAYOUT_RELOCATION_NATIVE_SCOPE no piloto original sem reescrever request nem recopia",
@@ -7322,5 +7332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T16:56:42+00:00"
+  "updated_at": "2026-10-26T17:01:35+00:00"
 }
