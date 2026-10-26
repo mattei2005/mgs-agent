@@ -13,7 +13,16 @@ def save(p,d):
 def verified_entry(r,t,c,v,receipt_path):
  aid=t['account_id']
  assert r['account_id']==aid and r['business_id']==c['business_id']and r['payments_executed']==0
- if r['status']=='current_balance_pay_now_unavailable':
+ if r['status']=='accounts_list_read':
+  assert '1564382301155098717'in c.get('authorization_messages',[]),'accounts_list_publication_not_authorized'
+  proof=v.get('accounts_list_checks',{}).get(aid,{})
+  assert proof.get('valid_billing_list')is True and proof.get('business_id')==c['business_id']and proof.get('row_account_id')==aid,'accounts_list_visual_identity_missing'
+  assert proof.get('name')==t['name']and r['name']==t['name'],'accounts_list_exact_name_mismatch'
+  dec=Decimal(r['amount']);assert dec>=0 and Decimal(proof['balance_usd'])==dec,'accounts_list_visual_balance_mismatch'
+  assert Path(r['screenshot']).is_file();ls=Path(r['text_path']).read_text().splitlines();prefix=t['name']+' ID: '+aid+' ';matches=[l for l in ls if l.startswith(prefix)and re.search(r'\$[0-9,]+\.\d{2}',l)];assert len(matches)==1,'accounts_list_exact_row_not_unique'
+  amount=re.search(r'\$([0-9,]+\.\d{2})',matches[0])[1];assert Decimal(amount.replace(',',''))==dec,'accounts_list_ax_balance_mismatch'
+  source='accounts_list_current_balance';period='Current balance da linha Accounts; leitura autorizada1564382301155098717; não é valor de modal';screenshot=r['screenshot']
+ elif r['status']=='current_balance_pay_now_unavailable':
   proof=v.get('disabled_balance_checks',{}).get(aid,{})
   assert proof.get('pay_now_visually_disabled')is True and proof.get('valid_billing_page')is True,'disabled_button_visual_proof_missing'
   assert proof.get('business_id')==c['business_id']and proof.get('asset_id')==aid,'disabled_identity_mismatch'
@@ -81,17 +90,19 @@ def main():
    while len(cells)<width:cells.append({})
    cell=copy.deepcopy(cells[balancecol]);cell.pop('userEnteredValue',None);cell.pop('note',None)
    if i==0 or(cells[0].get('userEnteredValue',{}).get('stringValue')=='Nome da conta'and cells[1].get('userEnteredValue',{}).get('stringValue')=='Forma de pagamento'):
-    cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte H nas '+str(len(targets))+' contas de linha; '+str(len(entries))+' verificadas nesta publicação, '+str(len(targets)-len(entries))+' preservadas com timestamp anterior: valor literal do modal Pay now quando habilitado; Current balance do topo quando botão comprovadamente desabilitado (regra Rodolfo1564373157727576245). Cada nota distingue fonte e hora da leitura real. Não é limite do cartão. Nenhum pagamento executado.'
+    cell['userEnteredValue']={'stringValue':HEADER};cell['note']='Fonte H nas '+str(len(targets))+' contas de linha; '+str(len(entries))+' verificadas nesta publicação, '+str(len(targets)-len(entries))+' preservadas com timestamp anterior: Current balance da lista Accounts autorizado1564382301155098717; modal ou balance topo quando explicitamente registrados na nota. Cada nota distingue fonte e hora da leitura real. Não é limite do cartão. Nenhum pagamento executado.'
    else:
     mt=re.search(r'^ID da conta: (\d+)\b',cells[0].get('note',''));label=cells[0].get('userEnteredValue',{}).get('stringValue','')
     if mt and mt[1]in entries:
      e=entries[mt[1]];cell['userEnteredValue']={'numberValue':float(Decimal(e['amount']))}
-     if e['source']=='current_balance_pay_now_unavailable':
+     if e['source']=='accounts_list_current_balance':
+      detail='Current balance da linha Accounts: USD '+e['amount']+'. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado.'
+     elif e['source']=='current_balance_pay_now_unavailable':
       detail='Current balance do topo: USD '+e['amount']+'. Pay now comprovadamente desabilitado na página válida. Usado como saldo a pagar de outubro ainda aberto conforme Rodolfo1564373157727576245; não é leitura de modal.'
      else:detail='Amount you can pay now: USD '+e['amount']+'. '+e['period_label']+'. Valor literal permitido no modal.'
      cell['note']=detail+' Fonte '+e['source']+'. Leitura PC1 autenticada: '+e['read_at']+'. Conta '+e['account_id']+'; BM '+c['business_id']+'; URL/conta, botão e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: '+e['receipt']
     elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL'):
-     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma H das '+str(len(targets))+' contas de linha; '+str(len(entries))+' atualizadas, '+str(len(targets)-len(entries))+' históricas preservadas: modal se Pay now habilitado; balance do topo se comprovadamente desabilitado (regra1564373157727576245). Leituras sequenciais com fonte/hora individual; não é limite de cartão nem promessa de liquidação simultânea.'
+     fv=cells[balancecol]['userEnteredValue']['formulaValue'];cell['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])'+chr(65+balancecol)+r'(?=\d)',chr(65+paycol),fv)};cell['note']='Soma H das '+str(len(targets))+' contas de linha; '+str(len(entries))+' atualizadas, '+str(len(targets)-len(entries))+' históricas preservadas: Current balance da Accounts list por1564382301155098717, ou outra fonte explicitada individualmente. Leituras sequenciais com fonte/hora individual; não é limite de cartão nem promessa de liquidação simultânea.'
     elif mt and mt[1]in targetids:
      # Partial recovery must preserve missing values AND their historical notes.
      continue

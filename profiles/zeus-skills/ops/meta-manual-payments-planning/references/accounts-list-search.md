@@ -2,7 +2,7 @@
 
 ## Autoridade e resultado
 
-Rodolfo autorizou testar cerca de cinco contas na mensagem `1564379257491296286`, thread `1563926766286803004`, usando Billing & payments > Accounts > Ad accounts e busca por nome. Teste somente leitura concluído em cinco contas, com pixels e AX reconciliados, em uma única aba própria e zero páginas de detalhes abertas. Evidência: `reports/meta-billing-accounts-search-1564379257491296286/collection.json` e `verified-results.json`. Esta autorização de teste não é rollout automático no workbook, na recorrência ou nova regra de H.
+Rodolfo autorizou testar cerca de cinco contas na mensagem `1564379257491296286`, thread `1563926766286803004`, usando Billing & payments > Accounts > Ad accounts e busca por nome. Teste somente leitura concluído em cinco contas, com pixels e AX reconciliados, em uma única aba própria e zero páginas de detalhes abertas. Evidência: `reports/meta-billing-accounts-search-1564379257491296286/collection.json` e `verified-results.json`. O teste inicial não autorizava rollout. **Autorização posterior `1564382301155098717` (“pode terminar o resto então”) aprovou concluir o mesmo workbook/38H pela busca Accounts validada.** Nesta recuperação, H recebe o Current balance da linha exata, com fonte `accounts_list_current_balance`, sem fingir leitura do modal ou prova de botão desabilitado. Preservar47IDs,moeda,notas/horários e demais colunas. A autorização não altera billing/cadência nem permite confundir a medida com limite do cartão.
 
 ## Procedimento validado
 
@@ -15,6 +15,6 @@ Rodolfo autorizou testar cerca de cinco contas na mensagem `1564379257491296286`
 
 ## Limite semântico
 
-A coluna da lista é **Current balance**. Sua leitura bem-sucedida prova o saldo exibido, não o valor permitido no modal Pay now, o status de invoice, pagamento efetuado nem a indisponibilidade financeira do botão. Para publicar H por essa fonte, preservar o gate vigente `1564373157727576245` ou obter aprovação explícita para nova regra; não substituir automaticamente todos os H apenas porque os saldos da lista foram encontrados. I/current balance pode usar essa evidência sob pedido de publicação, sem inventar uma equivalência com o modal.
+A coluna da lista é **Current balance**. Sua leitura bem-sucedida prova o saldo exibido, não o valor permitido no modal Pay now, o status de invoice, pagamento efetuado nem a indisponibilidade financeira do botão. A publicação H da recuperação foi autorizada explicitamente em `1564382301155098717`; usar o saldo literal da lista com a nova fonte declarada e sem atribuir o rótulo Amount you can pay now. Fora desse escopo, preservar o gate vigente ou obter aprovação explícita; o teste isolado não seria autorização. I/current balance pode usar essa evidência sob pedido de publicação, sem inventar uma equivalência com o modal.
 
 O teste de cinco contas não alterou Sheets, Meta billing, cron nem a regra já agendada. Não copiar valores históricos desta referência como se fossem atuais.

@@ -37,7 +37,8 @@ def main():
    if pay:
     if row[1]=='Linha de crédito':
      sn=cells[paycol].get('note','');modal='Amount you can pay now'in sn;disabled=all(x in sn for x in ['current_balance_pay_now_unavailable','1564373157727576245','Pay now comprovadamente desabilitado','Leitura PC1 autenticada:'])
-     assert numeric(row[paycol])and(modal or disabled),'credit_line_pay_now_missing_or_no_source_note'
+     listing=all(x in sn for x in ['accounts_list_current_balance','1564382301155098717','Current balance da linha Accounts:','Leitura PC1 autenticada:'])
+     assert numeric(row[paycol])and(modal or disabled or listing),'credit_line_pay_now_missing_or_no_source_note'
     else:assert row[paycol]=='','pay_now_scope_includes_unrequested_card_account'
    if september:
     if row[1]=='Linha de crédito':assert numeric(row[5]),'september_due_missing'
