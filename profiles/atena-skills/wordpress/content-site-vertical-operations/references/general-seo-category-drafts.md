@@ -130,7 +130,15 @@ Inspecione também o trecho final de `content.raw` em várias referências. Card
 - Use parágrafos curtos e o número de H2s medido.
 - Não acrescente lista, tabela ou FAQ se o padrão dominante não usa esses blocos.
 - Quando o artigo autorizado já tiver tabela, preserve o `<table>` completo dentro do bloco nativo `<!-- wp:table --><figure class="wp-block-table">...</figure><!-- /wp:table -->` quando necessário ao estilo do tema. Prove no canônico que o `overflow-x:auto` fica no contêiner, sem expandir a página, e que a primeira e a última colunas continuam acessíveis. Não esconda overflow no body nem corte/reduza informação para passar o QA; wrappers preservam texto, células e fontes, mas exigem novo hash/readback e análise sobre o corpo final.
-- Deixe `excerpt` explicitamente vazio quando o corpus usa fallback do primeiro parágrafo.
+- Deixe `excerpt` explicitamente vazio quando o corpus usa fallback do primeiro parágrafo **somente se o briefing não exigir o resumo cadastrado**. Quando exigir igualdade entre excerpt, primeira frase e resumo WordPress, envie o texto explicitamente no campo `excerpt` e confira `excerpt.raw` e a primeira frase pública; fallback não comprova preenchimento.
+
+### Planejamento aprovado, limites e datas editoriais
+
+Para lotes que exigem uma lista antes da execução, entregue um manifesto com portal, idioma/país confirmado, ID/nome real da categoria, título proposto e intenção específica por artigo. Some e deduplique por código e compare ao histórico dos lotes anteriores e ao acervo público; comece a produção e os writes somente após a aprovação exigida. Divergência de menu/categoria é achado de preflight, não autorização para corrigir a navegação ou preencher um termo vazio paralelo.
+
+Quando o briefing estabelecer título SEO até 60 caracteres, meta description até 150 e excerpt/primeira frase até 100, conte Unicode incluindo espaços e pontuação nos campos finais exatos e exija a palavra-chave principal nos três. Valide separadamente título do post e título SEO: um não comprova o outro. Refaça contagens após qualquer ajuste e após o readback, registrando valores cadastrados, não apenas os propostos. A primeira frase deve coincidir com o excerpt explícito; preserve somente a normalização tipográfica de renderização já permitida no QA.
+
+Quando o usuário pedir datas variadas como em lotes anteriores, recupere a decisão e os valores efetivamente usados antes de definir o calendário. Registre a janela e os horários como proposta até a aprovação, preserve o instante técnico real de criação/execução no audit e confira data local, GMT, data pública e schema após publicar. Uma data editorial retroativa não autoriza atribuir conhecimento de fatos divulgados depois dela nem tratar o instante de execução como histórico; para notícias factuais, escolha uma data compatível com a divulgação das fontes. Não altere datas do acervo preexistente para acomodar o novo lote.
 
 Use a mesma mídia no corpo e em `featured_media` quando o briefing exigir; sem instrução explícita, siga a relação confirmada no corpus. Compare o ID de mídia, não apenas URLs, pois o corpo pode usar uma derivada da mesma imagem. Use o tamanho WordPress `large`, não a URL original, para o bloco do corpo:
 
