@@ -7,6 +7,12 @@
 
 ---
 
+## Aprovação editorial condicionada — lote58 Raquel
+
+- Autoridade: Raquel Oliveira, mensagem `1564263729707614330`, thread `1560295338257023118`. Fonte canônica `data/atena/seo-mass-1560295338257023118/approval-1564263729707614330.json`: aprovação editorial com ajustes visuais e técnicos pendentes; sem próximo lote.
+- Registro `ATENA-SEO58-APPROVAL-1564263729707614330` supersede explicitamente a entrega anterior; checkpoint `atena-seo-mass-1560295338257023118` atualizado pelo controlador e validado. Nenhuma mudança de permissão, credencial, plugin/runtime, locale ou dashboards.
+- Skills próprias: preferência por imagens humanizadas/contextuais sem textos e não predominância de gráficos/painéis; naturalidade editorial e preservação dos aprovados em `content-editorial-image-workflows` e `content-site-vertical-operations/references/general-seo-category-drafts.md`, relidas após patch. Workspace de auditoria e ajustes escopados: `/root/.hermes/profiles/atena/work/seo-close-1564263729707614330/`.
+
 ## Revisão editorial — lote SEO Raquel, continuidade de 22/10/2026
 
 - Autoridade editorial: Raquel Oliveira, mensagens `1562828122762649781` e `1562829266020868157`, thread `1560295338257023118`; revisão do lote existente, sem novos artigos. Mesmos 58 IDs/URLs em quatro portais allowlisted; nenhum ajuste de permissão, credencial, plugin, locale, runtime ou dashboards.

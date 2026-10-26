@@ -98,7 +98,17 @@ Fonte: Raquel, `discord:1560295338257023118#1562828122762649781`.
 - Para jogos identificados, exija leitura visual do universo digital pertinente: maquete de prédios, peças de madeira/tabuleiro e cabana realista não substituem imagens adequadas de Roblox, Brawl Stars e Minecraft. Não fabrique screenshot, interface ou identidade do jogo; use fonte legítima e verificável ou cena editorial humanizada que mostre o contexto real sem afirmar que tela genérica comprova o jogo.
 - Prefira pessoas em ação e situações naturais quando compatíveis com o tema, sem impor presença humana artificial em todas as imagens. Varie ação, ambiente, perspectiva, enquadramento, elementos e composição; evite metáforas abstratas e cenas intercambiáveis.
 - Compare diversidade ENTRE artigos; neste lote SEO preserve a destacada igual à primeira imagem interna do próprio artigo e a posição aprovada. Substitua só assets realmente inadequados e reinspecione cada final antes do upload.
-- Não aprove uma foto financeira só porque passou a ter pessoas: casal com notebook, atendimento e papéis podem continuar intercambiáveis. Quando a cena humana for pertinente mas insuficiente para comunicar a intenção, use como opção um painel editorial determinístico fora da fotografia, com conceitos, condições ou exemplos já sustentados no corpo. Varie a arquitetura informativa conforme o tema; não transforme foto + painel em template obrigatório. Não sobreponha dados a telas/documentos, não imite interface bancária e não apresente exemplo hipotético como oferta ou cálculo de taxa real. Calcule valores em código e confira cada arquivo final, incluindo legibilidade, fonte factual e ALT no idioma do artigo.
+- Não aprove uma foto financeira só porque passou a ter pessoas: casal com notebook, atendimento e papéis podem continuar intercambiáveis. Comunique a intenção por ações, ambiente e enquadramento próprios, não por objetos recorrentes.
+
+### Direção visual vigente: naturalidade e preferência por ausência de texto
+
+Fonte: Raquel, `discord:1560295338257023118#1564263729707614330`. Esta revisão supersede a sugestão anterior de acrescentar painéis para tornar fotos financeiras específicas; não amplia proibições sobre infográficos úteis nem exige refação geral.
+
+- Priorize imagens realistas, humanizadas e contextualizadas, com pessoas, ambientes, ações e situações cotidianas quando pertinentes. Prefira não utilizar textos: o assunto deve ser comunicado visualmente, sem criar falsa interface ou evidência documental.
+- Compare o conjunto por portal, especialmente financeiro: tabelas, gráficos, números, textos e painéis técnicos não devem predominar. Mescle fotografias, composições criativas e infográficos; use gráficos/tabelas somente se agregarem valor demonstrável, sem impor quota artificial.
+- Preserve imagens corretas e diversas; substitua somente as excessivamente técnicas, inadequadas ou repetitivas. Registre decisão e motivo por artigo, comparando cenários, objetos, enquadramentos e conceitos entre todos os assets.
+- Mantenha a imagem destacada igual à primeira imagem do artigo, com ALT factual no idioma e validação real pública/OG após a troca. Cache social antigo é pendência técnica separada; não equivale a upload falho nem autoriza purge global.
+- Quando infográfico for realmente necessário, use somente conceitos e dados sustentados no corpo; calcule valores em código e não apresente hipótese como oferta real. Sua inclusão deve continuar excepcional à preferência por imagem sem textos.
 
 ## Comparação de alternativas geradas
 

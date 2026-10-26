@@ -278,6 +278,15 @@ Correção editorial de Raquel, fonte `discord:1560295338257023118#1562273124030
 
 Complemento de Raquel `discord:1560295338257023118#1562828122762649781`: mantenha o próximo lote parado até revisar o atual; preserve o que já está bom. Em cada artigo, justifique apenas mudanças necessárias. Compare aberturas, desenvolvimento, transições e principalmente conclusões entre os pares: não repetir explicação → exemplo → checklist → fecho cauteloso. A intenção de busca define a estrutura, sem variação artificial. Reforce links internos úteis entre os novos artigos, sobretudo onde a cobertura estiver fraca; confirme destino/conteúdo/mercado, sem inserir links só para cumprir quota. Mantenha fontes oficiais contextualizadas, exemplos concretos e QA público de publicação, categorias, imagem destacada igual à primeira interna, links, idioma e bio por portal. A comparação visual e o critério de imagem humanizada compatível estão em `content-editorial-image-workflows`, seção Gate de especificidade reforçado pela revisão humana.
 
+## Aprovação editorial condicionada e próximos lotes
+
+Fonte: Raquel, `discord:1560295338257023118#1564263729707614330`. Registre a aprovação editorial do lote de 58 sem confundi-la com conclusão técnica. Preserve os textos aprovados; esta aprovação não autoriza iniciar o próximo lote antes de concluir os ajustes pontuais nem configura um novo briefing.
+
+- Nos próximos lotes, varie ritmo, introduções, desenvolvimento e principalmente conclusões; compare ressalvas e construções recorrentes para evitar aparência de escrita padronizada. Não use variação artificial ou reescrita desnecessária como meta.
+- Preserve fontes oficiais contextualizadas, profundidade e linkagem interna estratégica. A direção visual vigente está em `content-editorial-image-workflows`, seção Direção visual vigente.
+- Separe imagem/corpo/featured corretos de prévia social em cache; confira OG e Twitter no canônico. Não refaça upload ou corpo para contornar cache e não execute purge/configuração fora dos gates técnicos.
+- Confira metadados, canonical, schema e indexabilidade efetiva no HTML/headers e sitemap. Indexabilidade não comprova indexação no buscador: sem evidência de Search Console, declare a indexação efetiva não confirmada. Datas e `html lang` do template e erro 403 de arquivo de autoria exigem diagnóstico e encaminhamento técnico quando fora do acesso editorial.
+
 ## 12. Relatório ao Rodolfo
 
 Liste por categoria:
