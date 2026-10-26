@@ -16,8 +16,8 @@ Use esta skill para estruturar, revisar ou manter leitura intraday, relatório d
 ## Disclosure progressivo
 
 1. Identifique a operação, a conta e o pedido exato.
-2. Abra primeiro o arquivo vivo em `/root/mgs-agent/data/ares/meta-ads/operations/` e a conta em `accounts/`.
-3. Carregue a skill específica da estratégia/operação, quando existir.
+2. Resolva primeiro thread → conta pelo binding canônico da operação e confira a conta no catálogo vigente; depois abra somente o contrato e as políticas desse recorte. Consulte `accounts/` quando o contrato apontar esse registro. Em operações com catálogo corporativo, a ausência de um arquivo individual não comprova falta de acesso: confirme o binding de credencial vigente e a identidade por GET, sem usar outra conta como fallback.
+3. Carregue a skill específica da estratégia/operação, quando existir. Para SHEIN, siga a receita e o renderer específicos; não redescubra o layout em exemplos históricos desta skill genérica.
 4. Para layout de relatório, abra `references/current-reporting-contract.md`.
 5. Para falhas conhecidas, abra `references/current-operational-pitfalls.md`.
 6. Evidência histórica nunca vira regra ativa por semelhança.

@@ -24,6 +24,12 @@ Aos 08:02/14:02/21:02 America/New_York, o job existente `2ee720363d7d` deve, al�
 
 Caso lease/auth/UI bloqueie uma conta, preservar a fotografia anterior e declarar quais campos ficaram históricos. Nunca completar lacuna com balance/Insights ou marcar atualização integral. Nenhuma etapa de cobrança é autorizada.
 
+## Reautenticação reaparece durante a coleta
+
+- Tratar “já autentiquei” como gatilho para validar a mesma sessão, não como prova de liberação de todas as contas. Mesmo após modais válidos, a navegação seguinte pode redirecionar para `/security/twofactor/reauth/` e pedir “Enter the 6-digit code” sem um Heading `Confirm it's you`; inspecionar URL final e texto completo antes de classificar um timeout como falha de billing ou captura.
+- Se pixels e AX confirmarem esse gate, distinguir autenticação inicialmente funcional de nova reautenticação pendente. Não alegar logout global, não tentar códigos por CUA, não tocar credenciais e não publicar cobertura parcial como completa. Preservar as leituras verificadas no mesmo run_dir e manter H anterior até completar o conjunto exato de targets.
+- Para handoff humano, abrir apenas uma aba própria no Chrome aprovado com o destino exato, verificar o gate e liberar a lease. Informar a tela e pedir autenticação nessa mesma aba, sem solicitar código em chat. Na retomada, reconciliar os receipts existentes, coletar só os targets faltantes e validar todos antes de publicar.
+
 ## Prioridade de entrega
 
 Publicar o resultado pedido assim que as leituras e validações essenciais estiverem prontas; não manter os valores coletados invisíveis enquanto se desenvolve infraestrutura auxiliar. Primeiro o pedido e readback; depois fechar o mínimo de compatibilidade/registro, sem ampliar o trabalho. Rodolfo corrigiu a demora na mensagem `1563992655468429466`.
