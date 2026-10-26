@@ -24,7 +24,15 @@ Em instalações inspecionadas do Yoast 28.3/28.6, o `WP_REST_Posts_Controller::
 - Não use `singleDeleteCache`, toolbar ou purge global como fallback por parecerem targeted: podem chamar CDN/Varnish global mesmo com argumentos de pais desligados.
 - Sem API semântica segura, mantenha a divergência como pendência e escale a dependência. Não contorne o Critical Subset com primitiva física direta, config temporária, método protegido ou resave artificial de conteúdo.
 - Registre cache incidental e derivados UAG/otimização de mídia. Se `_uag_page_assets` ou Imagify mudar entre pre-read e write, reconcilie o delta observado, preserve o manifesto antigo e prepare nova revisão estrita; não relaxe automaticamente o hash completo nem restaure caches derivados.
-- Após encerrar a correção social, capture um baseline NOVO para análise/persistência de scores sobre o corpo final; não reutilize snapshots anteriores à derivação de imagem.
+- Após encerrar a correção social, capture um baseline NOVO para eventual análise/persistência de scores sobre o corpo final; não reutilize snapshots anteriores à derivação de imagem. Preserve scores existentes quando a operação autorizada for somente derivação social; esse save não constitui recálculo linguístico.
+
+## Fechamento depois de substituições parciais
+
+1. Monte a expectativa final a partir do manifesto original mais os receipts de mídia efetivamente aplicados, indexados por domínio/ID. Atualize somente os attachments autorizados e preserve o manifesto original; usar a mídia antiga como expectativa produz falso erro de featured no novo QA.
+2. Conclua o reparo nativo autorizado antes da última coleta pública completa. Salve cada rodada em diretório distinto, pois reusar o resultado anterior mistura estados pré e pós-reparo e impede provar qual imagem foi servida.
+3. Recolha o canônico sem query e confira novamente OG, fallback Twitter e Article.image resolvido por ImageObject. Faça readback nativo/REST em separado; mesmo após o reparo interno correto, HTML antigo pode permanecer público.
+4. Reconte por conjuntos de domínio/ID os alvos pendentes e a distribuição por portal na rodada final. Reconcilie contra a anterior com resolvidos, persistentes e novos; substituições legítimas podem mudar a quantidade de prévias divergentes, portanto não reutilize o total histórico no relatório ou handoff.
+5. Entregue links dos artigos realmente alterados e separe revisão visual concluída, derivação nativa corrigida e pendências públicas. Não declare o lote tecnicamente liberado quando a aprovação humana continuar condicionada a essas pendências.
 
 ## Transporte em lote
 

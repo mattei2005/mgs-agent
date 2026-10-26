@@ -1,0 +1,56 @@
+{
+  "status": "modal_read",
+  "account_id": "1001115192056600",
+  "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
+  "business_id": "155263197283282",
+  "requested_url": "https://adsmanager.facebook.com/adsmanager/billing_hub/accounts/details/?business_id=155263197283282&asset_id=1001115192056600",
+  "read_at": "2026-10-26T10:00:18.807914-04:00",
+  "page": {
+    "text_path": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842/1001115192056600-page.txt",
+    "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842/1001115192056600-page.png",
+    "elements_path": "/root/.hermes/profiles/zeus/cache/computer_use/elements_c4492f7f7a684d59ad742f91ba4cddbc.json"
+  },
+  "modal": {
+    "text_path": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842/1001115192056600-modal.txt",
+    "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842/1001115192056600-modal.png",
+    "elements_path": "/root/.hermes/profiles/zeus/cache/computer_use/elements_9a13f0f0126b43c693c9b6a01370d658.json"
+  },
+  "identity_ax": [
+    {
+      "index": 6,
+      "role": "Edit",
+      "label": "Address and search bar",
+      "value": null
+    },
+    {
+      "index": 51,
+      "role": "Document",
+      "label": "(99) Ads Manager",
+      "value": null
+    },
+    {
+      "index": 81,
+      "role": "ComboBox",
+      "label": "Digital Trust",
+      "value": null
+    }
+  ],
+  "payments_executed": 0,
+  "modal_labels": [
+    "Make a payment",
+    "Close",
+    "This is what you can pay towards your outstanding balance.",
+    "Amount you can pay now",
+    "Spending from Oct 1, 2026 - Oct 26, 2026",
+    "Amount",
+    "$1,390.75",
+    "Add payment method",
+    "Debit or credit card + more radio",
+    "radio",
+    "Next"
+  ],
+  "amount": "1390.75",
+  "period": "Spending from Oct 1, 2026 - Oct 26, 2026",
+  "currency": "USD",
+  "currency_source": "Exact-account Meta currency read validated by workbook contract; dollar sign explicitly displayed in modal"
+}

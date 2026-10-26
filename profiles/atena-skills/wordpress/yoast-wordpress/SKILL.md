@@ -63,6 +63,10 @@ bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh 
 ```
 Não extrapole o exemplo para outros hosts, owners ou idiomas. Use a receita de `references/yoast-score-architecture.md` para escolher cálculo, transporte e readbacks compatíveis.
 
+## § Imagem social após troca de mídia
+
+Após alterar `featured_media`, confira nesta ordem o attachment/primeira imagem interna, a derivação social nativa (`yoast_head_json`/indexable) e o HTML canônico com OG e imagem resolvida do schema. Faça essa verificação no primeiro artigo real de cada instalação antes de expandir a troca, pois o save REST pode deixar a derivação apontando à thumbnail anterior. Corrija somente pela rota nativa inspecionada e autorizada, sem regravar texto ou fabricar mudança de score para provocar hooks. Derivação interna correta não encerra pendência no HTML público nem autoriza purge. A receita e os gates estão em `references/social-image-after-featured-rest.md`.
+
 ## Preflight de análise e persistência
 
 1. Resolva os IDs autorizados, instalação, owner, prefixo, versão Yoast, schema REST e transporte real antes de executar o scorer. Não derive webroot do `site_key` nem reutilize um wrapper que fixa outro host/idioma. Diferencie parametrização de adaptador local já autorizada de alteração do scorer compartilhado, acesso, plugin ou runtime; estas últimas seguem o escalonamento próprio.

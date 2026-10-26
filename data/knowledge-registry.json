@@ -5513,6 +5513,24 @@
       "updated_at": "2026-10-22T14:16:51+00:00"
     },
     {
+      "canonical_key": "content.seo.batch-review-gates",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-26T13:57:50+00:00",
+      "id": "ATENA-SEO-HUMANIZATION-GATES-1564263729707614330",
+      "kind": "procedure",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Aprovação condicionada:preservar textos,naturalidade,imagens sem textos e distinção indexável/indexado",
+      "updated_at": "2026-10-26T13:57:50+00:00"
+    },
+    {
       "canonical_key": "content.seo-mass.1559930384852979796",
       "canonical_source": "data/atena/seo-mass-1559930384852979796/decision.json",
       "consumers": [
@@ -5561,10 +5579,10 @@
       "kind": "procedure",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO-HUMANIZATION-GATES-1564263729707614330",
       "title": "Revisão SEO: individualidade visual/editorial e fontes no idioma real do artigo, sem novo lote",
-      "updated_at": "2026-10-22T14:16:51+00:00"
+      "updated_at": "2026-10-26T13:57:50+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -5579,10 +5597,10 @@
       "kind": "decision",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO58-VISUAL-DELIVERY-1564263729707614330",
       "title": "Lote58 aprovado editorialmente por Raquel; ajustes visuais e técnicos condicionam encerramento",
-      "updated_at": "2026-10-26T13:08:05+00:00"
+      "updated_at": "2026-10-26T13:57:50+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -5691,6 +5709,24 @@
       "superseded_by": "ATENA-SEO58-REVIEW-1562828122762649781",
       "title": "58 artigos corrigidos e dupla validação pública;6prévias em cache e dependências técnicas explícitas;sem próximo lote",
       "updated_at": "2026-10-22T15:15:36+00:00"
+    },
+    {
+      "canonical_key": "content.seo-batch.1560295338257023118.delivery",
+      "canonical_source": "data/atena/seo-mass-1560295338257023118/visual-final-verification-1564263729707614330.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-26T13:57:50+00:00",
+      "id": "ATENA-SEO58-VISUAL-DELIVERY-1564263729707614330",
+      "kind": "source",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "17 imagens substituídas41preservadas;58HTTP/canonical/inline conferidos;pendências técnicas explícitas",
+      "updated_at": "2026-10-26T13:57:50+00:00"
     },
     {
       "canonical_key": "atena.wordpress.dedicated_access_contract",
@@ -14262,5 +14298,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T13:08:05+00:00"
+  "updated_at": "2026-10-26T13:57:50+00:00"
 }
