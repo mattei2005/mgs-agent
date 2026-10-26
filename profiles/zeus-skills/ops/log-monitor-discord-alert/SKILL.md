@@ -55,6 +55,13 @@ Completion criterion: only the procedure and evidence required for the current a
 - High-cardinality Discord alerts must be organized at the renderer/source as a compact aligned monospace table: one row per comparable entity, contextual columns, bounded width, and `+N` summaries for omitted rows or IDs. Do not emit long nested bullet lists with repeated CTA/message prose. Validate the renderer with a realistic fixture before the next production cycle; the detailed pattern is in `references/route-pack-03.md`.
 - For destructive housekeeping, verify behavior in a temporary fixture first: canonical file preserved, latest backup per family preserved, singleton family preserved, and only eligible older backups removed.
 
+## Retentativas adiadas de operações
+
+- Quando Rodolfo pedir para esperar um intervalo e tentar de novo, agendar **uma execução real e única da operação**, não apenas um lembrete; preservar a recorrência existente, o escopo aprovado e o checkpoint. Retomar somente as etapas faltantes após reconciliar efeitos já publicados.
+- Classificar colisões por finalidade e recurso, não apenas por frequência: um intake de criativos ou outro trabalho de negócio continua operacional mesmo executando a cada poucos minutos. A exceção de baseline densa vale somente para infraestrutura identificada; frequência alta, sozinha, não libera o minuto.
+- Antes de confirmar o horário, validar o instante efetivamente persistido e auditar esse minuto novamente; o tempo gasto no preflight pode deslocar uma agenda relativa. Se for preciso mudar de slot, atualizar o mesmo job e comunicar o horário ajustado, sem criar uma segunda tentativa.
+- Separar agendamento validado de recuperação concluída: confirmar brevemente a hora e a entrega na origem; só declarar a operação recuperada depois da execução e do readback do alvo. Ver receita em `references/route-pack-03.md`, seção **Native Hermes one-shot readback**.
+
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.

@@ -1,0 +1,373 @@
+{
+  "at": "2026-10-26T16:42:10.025281-04:00",
+  "profiles": {
+    "/root/.hermes/cron/jobs.json": "absent",
+    "/root/.hermes/profiles/zeus/cron/jobs.json": 24,
+    "/root/.hermes/profiles/atena/cron/jobs.json": 1,
+    "/root/.hermes/profiles/ares/cron/jobs.json": 21
+  },
+  "physical_jobs": 79,
+  "timers": 18,
+  "application_contracts": 5,
+  "civil_dates_expanded": 8,
+  "expanded_starts": 78096,
+  "candidates": [
+    {
+      "delay_minutes": 30,
+      "target": "2026-10-26T17:12:10.025281-04:00",
+      "operational": [],
+      "baseline": [
+        {
+          "source": "linux",
+          "name": "monitor_honcho_billing_watch.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "cron": "2-57/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_hermes_pending_writes.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "finalize-hermes-structural-write.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer-watchdog.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor-sb-messenger-token-invalid.py",
+          "cron": "12,27,42,57 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "cron": "*/3 0,8-23 * * *",
+          "kind": "cron",
+          "next": "2026-10-26T16:42:00-04:00",
+          "interval": null,
+          "tz": "America/New_York",
+          "id": "0cc7ed1e587e",
+          "dense_baseline": true
+        },
+        {
+          "source": "ares",
+          "name": "Ares criativos · intake contextual autônomo",
+          "cron": "12,27,42,57 * * * *",
+          "kind": "cron",
+          "next": "2026-10-26T16:42:00-04:00",
+          "interval": null,
+          "tz": "America/New_York",
+          "id": "528c5710269d",
+          "dense_baseline": true
+        }
+      ]
+    },
+    {
+      "delay_minutes": 31,
+      "target": "2026-10-26T17:13:10.025281-04:00",
+      "operational": [],
+      "baseline": [
+        {
+          "source": "linux",
+          "name": "monitor-tool-loops.sh",
+          "cron": "3-58/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_honcho_billing_watch.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_hermes_pending_writes.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "finalize-hermes-structural-write.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer-watchdog.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        }
+      ]
+    },
+    {
+      "delay_minutes": 32,
+      "target": "2026-10-26T17:14:10.025281-04:00",
+      "operational": [],
+      "baseline": [
+        {
+          "source": "linux",
+          "name": "monitor_honcho_billing_watch.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_hermes_pending_writes.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "finalize-hermes-structural-write.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "sb-restricted-transition-monitor.py",
+          "cron": "14,29,44,59 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor-hermes-memory-capacity.py",
+          "cron": "4,14,24,34,44,54 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer-watchdog.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        }
+      ]
+    },
+    {
+      "delay_minutes": 33,
+      "target": "2026-10-26T17:15:10.025281-04:00",
+      "operational": [],
+      "baseline": [
+        {
+          "source": "linux",
+          "name": "sync-souls.sh",
+          "cron": "*/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "track-article-cost.sh",
+          "cron": "*/15 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor-cron-stale-logs.sh",
+          "cron": "*/15 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer.py",
+          "cron": "*/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_honcho_billing_watch.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "discord-archive-stale-agent-threads.py",
+          "cron": "*/15 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor-vps-health.py",
+          "cron": "*/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_hermes_pending_writes.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "finalize-hermes-structural-write.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer-watchdog.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "sb-broadcast-template-repair.sh",
+          "cron": "*/15 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "zeus",
+          "name": "meta-app-roles-watch",
+          "cron": "*/3 0,8-23 * * *",
+          "kind": "cron",
+          "next": "2026-10-26T16:42:00-04:00",
+          "interval": null,
+          "tz": "America/New_York",
+          "id": "0cc7ed1e587e",
+          "dense_baseline": true
+        },
+        {
+          "source": "/etc/cron.d/sysstat",
+          "name": "system cron",
+          "cron": "5-55/10 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        }
+      ]
+    },
+    {
+      "delay_minutes": 34,
+      "target": "2026-10-26T17:16:10.025281-04:00",
+      "operational": [],
+      "baseline": [
+        {
+          "source": "linux",
+          "name": "monitor-service-restarts.sh",
+          "cron": "1-56/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_honcho_billing_watch.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_hermes_pending_writes.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "finalize-hermes-structural-write.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer-watchdog.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        }
+      ]
+    },
+    {
+      "delay_minutes": 35,
+      "target": "2026-10-26T17:17:10.025281-04:00",
+      "operational": [
+        {
+          "source": "/etc/crontab",
+          "name": "system cron",
+          "cron": "17 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": false
+        }
+      ],
+      "baseline": [
+        {
+          "source": "linux",
+          "name": "monitor_honcho_billing_watch.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "alerts-infra-failed-alert-resolver.py",
+          "cron": "2-57/5 * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "monitor_hermes_pending_writes.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "finalize-hermes-structural-write.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        },
+        {
+          "source": "linux",
+          "name": "hermes-news-explainer-watchdog.py",
+          "cron": "* * * * *",
+          "tz": "America/New_York",
+          "dense_baseline": true
+        }
+      ]
+    }
+  ],
+  "resource_policy": "same47IDs,samewriter.lock,globalPC1lease,no parallel writer;regular21:02 unchanged;stop on provider/auth block"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/root/mgs-agent/data/finance-gam-revenue-contract.json",
+    "schedule": "3,8,18,28 8 * * *"
+  },
+  {
+    "path": "/root/mgs-agent/data/finance-media-spend-contract.json",
+    "schedule": "3 9 * * *"
+  },
+  {
+    "path": "/root/mgs-agent/data/finance-sms-usage-contract.json",
+    "schedule": "8 9 * * *"
+  },
+  {
+    "path": "/root/mgs-agent/data/finance-month-rollover-contract.json",
+    "schedule": "4 23 * * *"
+  },
+  {
+    "path": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+    "cron_expression": "2 8,14,21 * * *",
+    "cron_job_id": "2ee720363d7d"
+  }
+]

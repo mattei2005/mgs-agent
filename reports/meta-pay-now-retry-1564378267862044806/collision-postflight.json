@@ -1,0 +1,18 @@
+{
+  "job_id": "e62aff868def",
+  "scheduled_at": "2026-10-26T17:13:10.025281-04:00",
+  "enabled": true,
+  "repeat": 1,
+  "same_thread_delivery": true,
+  "regular_cron_unchanged": true,
+  "operational_collisions": [],
+  "baseline_names": [
+    "monitor-tool-loops.sh",
+    "monitor_honcho_billing_watch.py",
+    "monitor_hermes_pending_writes.py",
+    "finalize-hermes-structural-write.py",
+    "hermes-news-explainer-watchdog.py"
+  ],
+  "slot_reason": "17:12 had Ares creative intake operational start,not an infra baseline;shifted one minute to17:13. Dense frequency alone not a baseline exemption.",
+  "locks": "samewriter.lock and PC1globallease;single retry,stop on provider block"
+}

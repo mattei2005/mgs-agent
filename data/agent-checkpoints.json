@@ -6153,12 +6153,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Sem retry UI imediato/bypass;próximo tick existente21:02EDT verifica liberação. Retomar mesmos31faltantes no run_dir e verificar pixels antes de publicar H completo;usar nova coleta API/invoices nos demais campos. Sem novo writer/cron ou mudança billing.",
-      "objective": "Atualizar47 contas com regra H do pedido1564373157727576245,sem billing.",
+      "next_step": "No tick17:13revalidar liberaçãoUI numa conta,retomar31faltantes no mesmo run_dir;inspecionar pixels reais antes de publicar. Atualizar demais métricas47 e validar;pararsem bypass se bloqueio persistir. Entregar resumo na origem.",
+      "objective": "Concluir atualização47 contas,regraH indisponível usa balance,sem pagamento.",
       "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T162233768844",
-      "state": "regra/collector/publisher/validator atualizados,sync hash7arquivos e35testes reais pass. e/f setembro agora live0due/0unpaid;c/g/i/j47contas16:31edt reconciliados;d preservado sem novo evento que exija ui. h7/38 com balance topo+pay now cinza pixels/ax,31históricos preservados por facebook temporarily blocked going too fast. todos47ids,grupos9cartão38linha,links e totais f/g/h/i/j pass. não integral devido h31;lease pc1livre;nenhum pagamento.",
+      "state": "snapshot16:31validado47contas;h7fresh/31históricos por temporaryfeatureblock;setembrodue0. retryúnico autorizado1564378267862044806 criado e readback e62aff868def,26/10/2026 17:13:10edt,repeat1,entrega mesma thread.17:12conflitavaaresintake;17:13zerooperacionais,5baselinesinfra,writer/leasepreservados;rotina21:02inalterada.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-26T20:35:57+00:00"
+      "updated_at": "2026-10-26T20:43:41+00:00"
     },
     {
       "agent": "zeus",
@@ -7332,5 +7332,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T20:35:57+00:00"
+  "updated_at": "2026-10-26T20:43:41+00:00"
 }

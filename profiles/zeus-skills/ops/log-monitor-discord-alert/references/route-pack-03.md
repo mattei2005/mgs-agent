@@ -77,6 +77,14 @@ When a cron wrapper tees an internal canonical log but root redirects stdout to 
 
 ## Native Hermes one-shot readback
 
+For a user-requested delayed retry:
+
+1. Read the current operation checkpoint, frozen target set, previous receipts and existing dispatcher. Preserve already-verified work, the regular schedule, writer lock and shared browser lease; the delayed retry is not a second operation or authorization to bypass a provider block.
+2. Audit root/system crons, timers, every operational Hermes profile and registered application dispatchers. Identify each colliding job's purpose before allowing a dense-baseline exemption: business intake and campaign work remain operational regardless of minute density. Use bounded civil-time expansion across DST rather than an unbounded timezone-aware iterator.
+3. Create one finite job with a self-contained execution prompt: exact source/checkpoint, missing stage, publication/readback gates, stop conditions and original delivery thread. The prompt must perform the operation, not notify the user to do it. At wake-up, probe provider clearance once before resuming a previously blocked UI batch; a persisted provider block requires a qualified result, not a bypass.
+4. Read back the scheduler's actual next-run instant and audit that exact minute against fresh inventory. Exclude only this retry's exact job ID. If a collision is discovered after creation, update the same job to the nearest compatible free slot and re-read it; do not recreate or leave both jobs enabled.
+5. Preserve the checkpoint's pending status until the real execution validates the external result. Confirm the verified time concisely in the origin conversation, disclosing any slot adjustment; deliver the eventual completion or precise remaining blocker there.
+
 Validate the exact job ID against its persisted schedule, enabled/state, next run, repeat, delivery and model/provider bindings; do not recreate a job after a local assertion fails. The tool's `pinned: false` can be a derived display value and the native JSON may omit `pinned`. A following-main job has null model/provider bindings; validate the documented default without requiring a missing persisted field or rewriting the scheduler just to satisfy the assertion. A post-write global calendar audit must exclude only the exact newly created job ID, preserve all other root/profile entries and distinguish unavoidable infrastructure baselines from operational collisions. For delivery-only changes, compare the immutable schedule/execution contract (including `repeat.times`), not mutable lifecycle counters such as `repeat.completed`, `last_run_at` or `next_run_at`: a normal concurrent tick can change those counters without changing the schedule. After a validation assertion fails, read back the exact job and any already-posted messages before retrying; do not duplicate successful external writes.
 
 ## Atualizar infra-inventory.json
