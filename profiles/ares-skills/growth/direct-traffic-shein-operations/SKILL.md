@@ -319,6 +319,10 @@ Conclusão: produto visual, idioma e claim não dependem do nome bruto.
 
 ## Relatórios e otimização
 
+### Paralelismo do Intraday pontual
+
+Depois de validar autor/origem, gates, identidade Meta e data civil, prepare o request e a sessão Ares isolados; execute a coleta HTTP e a captura DOM RPS como etapas independentes em paralelo quando o preflight visual não tiver bloqueio conhecido. Preserve os interpretadores próprios e a persistência de cada camada; espere ambas concluírem antes de refresh, materialização e validação. Isso reduz a defasagem entre financeiro e RPS sem misturar fontes ou repetir uma camada já concluída. Receita: `references/canonical-report-renderer.md`, seção `Reuso dos coletores do Diário para Intraday de uma conta`.
+
 ### Lotes por gestor e fusos diferentes
 
 1. Diferencie aprovação de padrão de pedido de envio: atualizar o layout não publica relatórios; quando o usuário aprovar a amostra e pedir os demais gestores, execute a coleta e entrega das contas desses gestores, sem repetir a amostra já concluída nem pedir nova confirmação do mesmo layout.
