@@ -285,6 +285,8 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 
 ## Arquivos de referência
 
+- `references/public-readonly-technical-audit.md` — auditoria pública sem credenciais/escritas: HTML/head, robots, imagens sociais/schema, datas principais, sitemaps e reconciliação determinística.
+
 - `references/targeted-cache-readonly-diagnostics.md` — prova de camada WPFC por corpo/hash, Reflection de efeitos CDN/Yoast/nginx e distinção entre API URL e primitiva de arquivo; diagnóstico sem purge.
 - `references/general-seo-category-drafts.md` — procedimento para analisar uma categoria completa, reproduzir seu padrão mensurável e criar lotes de artigos SEO em draft com mídia, links, Yoast e readback.
 - `references/wordpress-author-profiles.md` — padronização segura de nome e biografia de autores, inclusive em lotes multi-site, preservando identidade e credenciais.
