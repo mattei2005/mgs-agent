@@ -1,0 +1,26 @@
+{
+  "status": "partial_visual_verification",
+  "verified_at": "2026-10-26T14:10:51.800695-04:00",
+  "business_id": "155263197283282",
+  "observed_amounts_usd": {
+    "3188620887977617": "0.43",
+    "2031917360813819": "49.00",
+    "897046653487466": "55.26",
+    "1829406761389732": "45.75"
+  },
+  "method": "Each real full modal image inspected with vision_analyze; URL business_id and asset_id, Make a payment, Amount you can pay now, Amount and spending period confirmed.",
+  "ocr_diagnostic": {
+    "account_id": "897046653487466",
+    "original_full_and_wide_crop_reading": "897046553487466",
+    "resolved_native_crop": [
+      480,
+      25,
+      850,
+      48
+    ],
+    "native_crop_reading": "897046653487466",
+    "source": "vision_analyze actual pixels, not filename"
+  },
+  "blocker": "Facebook You are Temporarily Blocked / going too fast, on target1062887799996139; AX and screenshot agree. No login/2FA gate. UI collection stopped; no bypass/retry.",
+  "all_targets_verified": false
+}

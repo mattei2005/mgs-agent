@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-10-26T14:12:48.543410-04:00",
+  "agent": "zeus",
+  "event": "meta_manual_payments_scheduled_refresh_partial",
+  "thread_id": "1563926766286803004",
+  "business_id": "155263197283282",
+  "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+  "sheet_id": 271321738,
+  "accounts": 47,
+  "groups": {
+    "card": 9,
+    "credit_line": 38
+  },
+  "metrics_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T141106242028",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T140332972496",
+  "pay_now_updated": 4,
+  "pay_now_preserved": 34,
+  "blocker": "facebook_temporary_feature_block_AX_and_pixels_confirmed",
+  "retry": "Existing21:02 America/New_York tick; no immediate bypass or new writer",
+  "september_due_usd": "275644.71",
+  "insights_initial_mismatch_usd": "0.08",
+  "insights_final_reconciled": true,
+  "card_history_new_pending": [],
+  "snapshot_validation": "47 IDs,9 card/38 credit-line, totals F/G/H/I/J and links PASS; H freshness4/38 only",
+  "payments_executed": 0,
+  "billing_writes": 0,
+  "scope_and_schedule_preserved": true,
+  "report_infra": "deferred; scheduled task explicitly requires automatic final-only delivery, no direct message publication; operational runtime qualification only, no script/skill/config/scheduler change"
+}
