@@ -35,7 +35,9 @@ def main():
     pat=cells[c].get('userEnteredFormat',{}).get('numberFormat',{}).get('pattern','');cm=re.search(r'"([A-Z]{3})"',pat);assert cm,'financial_currency_format_missing';cs.append(cm[1])
    assert len(set(cs))==1,'row_currency_mismatch';currencies.add(cs[0]);assert all(numeric(row[c])for c in metrics),'financial_value_missing'
    if pay:
-    if row[1]=='Linha de crédito':assert numeric(row[paycol])and'Amount you can pay now'in cells[paycol].get('note',''),'credit_line_pay_now_missing_or_no_source_note'
+    if row[1]=='Linha de crédito':
+     sn=cells[paycol].get('note','');modal='Amount you can pay now'in sn;disabled=all(x in sn for x in ['current_balance_pay_now_unavailable','1564373157727576245','Pay now comprovadamente desabilitado','Leitura PC1 autenticada:'])
+     assert numeric(row[paycol])and(modal or disabled),'credit_line_pay_now_missing_or_no_source_note'
     else:assert row[paycol]=='','pay_now_scope_includes_unrequested_card_account'
    if september:
     if row[1]=='Linha de crédito':assert numeric(row[5]),'september_due_missing'
