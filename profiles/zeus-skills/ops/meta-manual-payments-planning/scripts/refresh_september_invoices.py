@@ -63,8 +63,10 @@ def main():
     elif method=='Linha de crédito':
      sc['userEnteredValue']={'numberValue':0};ic['note']='Nenhuma invoice de setembro/2026 vinculada a esta conta na enumeração completa da BM em '+stamp;sc['note']=ic['note']+'. Nenhum saldo de invoice de setembro localizado; não é gasto mensal nem current balance.'
     else:ic['note']='Sem invoice de setembro vinculada a esta conta na BM; pagamento padrão por cartão.';sc['note']=ic['note']
-   elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL'):
+   elif label.startswith('TOTAL LINHA')or label.startswith('TOTAL GERAL')or(label.startswith('TOTAL CARTÃO')and any(r.get('values')and r['values'][0].get('note','').startswith('ID da conta: ')and r['values'][1].get('userEnteredValue',{}).get('stringValue')=='Cartão de crédito'and'numberValue'in r['values'][5].get('userEnteredValue',{})for r in erows)):
     fv=cells[6]['userEnteredValue']['formulaValue'];sc['userEnteredValue']={'formulaValue':re.sub(r'(?<![A-Za-z])G(?=\d)','F',fv)};sc['note']='Total de saldos em aberto de setembro apenas das contas existentes nesta aba; exclui '+str(len(outside))+' contas fora do recorte. Consulta '+stamp
+   if c.get('september_owner_payment_report')and(label=='Nome da conta'or(match and Decimal(by.get(match[1],{}).get('due','0'))>0)):
+    sc['note']=sc.get('note','')+' Pagamento informado por Rodolfo na mensagem1564115318887161857: invoices de setembro pagas na quinta-feira; baixa ainda pendente de confirmação da Meta quando amount_due permanece maior que zero. Nenhum novo pagamento autorizado.'
    cells[4:6]=[ic,sc];req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':i,'columnIndex':4},'rows':[{'values':[ic,sc]}],'fields':'userEnteredValue,userEnteredFormat,note'}})
   api('POST',root+':batchUpdate',{'requests':req});after=api('GET',url)
   def normalize(book):

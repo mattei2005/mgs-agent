@@ -79,7 +79,17 @@ def main():
    assert not d.get('paging',{}).get('next')
    for x in d.get('data',[]):assert x['account_id']==t['id']and x['account_currency']=='USD'
   totals=[sum((Decimal(x['spend'])for x in b.get('data',[])),Decimal(0))for b in bodies]
-  assert abs(totals[0]-totals[1])<=Decimal('.01')and abs(totals[2]-totals[3])<=Decimal('.01'),'insights_daily_aggregate_mismatch'
+  for attempt in range(2):
+   if abs(totals[0]-totals[1])<=Decimal('.01')and abs(totals[2]-totals[3])<=Decimal('.01'):break
+   diagnostic=ROOT/'reports/meta-manual-payments-runs'/('insights-reconcile-'+datetime.now().strftime('%Y%m%dT%H%M%S%f')+'.json')
+   record={'account_id':t['id'],'before_totals':[str(v)for v in totals],'attempt':attempt+1,'month_period':plan['month'],'average_period':plan['average'],'read_at':datetime.now().astimezone().isoformat(),'meta_writes':0}
+   bodies=batch(requests_meta[i*4:i*4+4])
+   for body in bodies:
+    assert not body.get('paging',{}).get('next')
+    for x in body.get('data',[]):assert x['account_id']==t['id']and x['account_currency']=='USD'
+   totals=[sum((Decimal(x['spend'])for x in b.get('data',[])),Decimal(0))for b in bodies]
+   record['after_totals']=[str(v)for v in totals];save(diagnostic,record)
+  assert abs(totals[0]-totals[1])<=Decimal('.01')and abs(totals[2]-totals[3])<=Decimal('.01'),'insights_daily_aggregate_mismatch:account='+t['id']+';month_daily='+str(totals[0])+';month_total='+str(totals[1])+';avg_daily='+str(totals[2])+';avg_total='+str(totals[3])
   funding=a.get('funding_source_details')or{};typ=funding.get('type');method='Cartão de crédito'if typ==1 else'Linha de crédito'if typ==4 and funding.get('display_string')=='monthly invoicing'else'Não identificado pela Meta'
   # Stop structural drift rather than silently moving or dropping authorized accounts.
   assert t['cells'][1]['userEnteredValue']['stringValue']==method,'funding_group_changed_requires_skill_regroup:account='+t['id']+';sheet='+t['cells'][1]['userEnteredValue']['stringValue']+';live='+method

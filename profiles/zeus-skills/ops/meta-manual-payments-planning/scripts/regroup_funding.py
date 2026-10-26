@@ -35,11 +35,11 @@ def build(before,funding):
   i=aid(r);cs=r['values'];live=funding[i];old=cs[1]['userEnteredValue']['stringValue'];method=live['method'];assert live['name']==label(r),'account_name_drift'
   if old!=method:
    assert old=='Linha de crédito'and method=='Cartão de crédito','unapproved_reverse_or_unknown_transition'
-   assert not cs[5].get('userEnteredValue',{}).get('numberValue',0),'nonzero_invoice_requires_card_subtotal_design'
+   # Existing September debt belongs to the account even after its default changes.
    changes.append({'id':i,'name':live['name'],'from':old,'to':method})
    cs[1]['userEnteredValue']={'stringValue':method};cs[2]['userEnteredValue']={'stringValue':live['default']}
    cs[7].pop('userEnteredValue',None);cs[7]['note']='Fora do recorte Pay now: funding padrão atual é cartão; valor anterior preservado no backup. Nenhum billing alterado.'
-   cs[5].pop('userEnteredValue',None)
+   if not cs[4].get('userEnteredValue'):cs[5].pop('userEnteredValue',None)
   groups[method].append(r)
  if not changes:return b,changes,groups
  # Preserve every pre-existing relative order; insert newly-card accounts by exact name.
@@ -53,6 +53,7 @@ def build(before,funding):
   if method=='Linha de crédito':out.append(headers[1])
   start=len(out)+1;out.extend(groups[method]);end=len(out);positions[method]=(start,end)
   sub=copy.deepcopy(template[total]);cs=sub['values'];cols=[6,8,9]if method=='Cartão de crédito'else[5,6,7,8,9]
+  if method=='Cartão de crédito'and any('numberValue'in r['values'][5].get('userEnteredValue',{})for r in groups[method]):cols.insert(0,5)
   for col in cols:
    letter=chr(65+col);cs[col]['userEnteredValue']={'formulaValue':f'=ROUND(SUM({letter}{start}:{letter}{end}),2)'}
   subpos[method]=len(out)+1;out.append(sub)

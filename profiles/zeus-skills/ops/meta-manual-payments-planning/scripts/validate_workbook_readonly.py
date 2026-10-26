@@ -43,7 +43,7 @@ def main():
    accounts.append({'row':i+1,'id':aid,'method':row[1],'values':row});groups[row[1]]+=1
   elif str(row[0]).startswith('TOTAL'):
    for c in financial:
-    if c in special and row[0]=='TOTAL CARTÃO DE CRÉDITO':assert row[c]=='';continue
+    if c in special and row[0]=='TOTAL CARTÃO DE CRÉDITO'and not(c==5 and september and any(x['method']=='Cartão de crédito'and numeric(x['values'][5])for x in accounts)):assert row[c]=='';continue
     assert len(forms[i])>c and str(forms[i][c]).startswith('=ROUND(SUM('),'total_formula_missing_round_sum'
    totals.append(row)
  assert accounts and totals and len(currencies)==1,'empty_or_mixed_currency_scope'
@@ -53,7 +53,7 @@ def main():
   if not groups[group]:continue
   sub=[r for r in totals if r[0]==label];assert len(sub)==1,'subtotal_not_unique'
   for c in financial:
-   if c in special and group=='Cartão de crédito':continue
+   if c in special and group=='Cartão de crédito'and not(c==5 and september and any(x['method']==group and numeric(x['values'][5])for x in accounts)):continue
    assert money(sub[0][c])==sum((money(x['values'][c])for x in accounts if x['method']==group),Decimal(0)),'subtotal_mismatch'
  contract_path='/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json'
  from pathlib import Path

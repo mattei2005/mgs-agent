@@ -33,7 +33,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 2. Carregar `meta-ads-api-operations` para transporte Meta, leitura segura de 1Password e cobertura BM-admin. Usar a credencial administrativa existente aprovada; um token operacional restrito não prova inventário completo. Não trocar referências de produção.
 3. Carregar `google-drive-agent-automation` antes de Sheets: somente SA `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`. Conferir os quatro seletores `service_account`, Drive `canEdit` e Sheets HTTP 200. Não usar OAuth pessoal/browser Google como fallback.
 4. APIs/dashboards/recibos live são fonte de estado; screenshots são evidência limitada ao conteúdo visível. Ler imagens com `vision_analyze`. Nunca confundir nome de conta, posição de linha, pagamento atual e transação histórica.
-5. Para endpoints e evidência do workbook existente, carregar `references/collection-and-workbook.md`. Para retomada e limites comprovados do caso inicial, carregar `references/digital-trust-baseline.md`; valores históricos dessa referência nunca substituem coleta atual.
+5. Para prioridades G/H/I/J e reorganização automática linha→cartão, carregar `references/funding-regroup-priority.md`; esta autorização nova supersede o gate antigo e as contagens/posições fixas, sem mudar billing. Para endpoints e evidência do workbook existente, carregar `references/collection-and-workbook.md`. Para retomada e limites comprovados do caso inicial, carregar `references/digital-trust-baseline.md`; valores históricos dessa referência nunca substituem coleta atual.
 
 ## Procedimento
 
