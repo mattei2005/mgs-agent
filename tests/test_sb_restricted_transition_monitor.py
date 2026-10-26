@@ -31,6 +31,57 @@ def row(page_id, date, status='Broadcast', name=None):
 
 
 class TransitionComparisonTest(unittest.TestCase):
+    def test_initial_auth_wall_gets_one_existing_session_recheck(self):
+        calls = []
+        sleeps = []
+
+        async def getter():
+            calls.append(1)
+            if len(calls) == 1:
+                raise RuntimeError(
+                    'SB canonical login required; existing session reached '
+                    'authentication wall; no credential changed'
+                )
+            return ['publisher'], [{'ID': 'row'}]
+
+        async def fake_sleep(seconds):
+            sleeps.append(seconds)
+
+        result = asyncio.run(monitor.get_sb_with_retry(getter, sleep_fn=fake_sleep))
+        self.assertEqual(result, (['publisher'], [{'ID': 'row'}]))
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(sleeps, [5])
+
+    def test_persistent_auth_wall_stops_after_one_recheck(self):
+        calls = []
+        sleeps = []
+
+        async def getter():
+            calls.append(1)
+            raise RuntimeError(
+                'SB canonical login required; existing session reached '
+                'authentication wall; no credential changed'
+            )
+
+        async def fake_sleep(seconds):
+            sleeps.append(seconds)
+
+        with self.assertRaisesRegex(RuntimeError, 'canonical login required'):
+            asyncio.run(monitor.get_sb_with_retry(getter, sleep_fn=fake_sleep))
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(sleeps, [5])
+
+    def test_failed_bounded_spa_refresh_is_not_retried(self):
+        calls = []
+
+        async def getter():
+            calls.append(1)
+            raise RuntimeError('SB canonical login required after bounded refresh: SPA did not advance authentication; no credential changed')
+
+        with self.assertRaisesRegex(RuntimeError, 'canonical login required'):
+            asyncio.run(monitor.get_sb_with_retry(getter))
+        self.assertEqual(len(calls), 1)
+
     def test_sb_fetch_retries_transient_401_then_succeeds(self):
         calls = []
         sleeps = []

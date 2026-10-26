@@ -80,7 +80,17 @@ async def get_sb_with_retry(getter, attempts=SB_FETCH_RETRY_ATTEMPTS, sleep_fn=a
         try:
             return await getter()
         except Exception as exc:
-            if attempt >= attempts or not transient_sb_error(exc):
+            # Live incidents recovered on a fresh leased read without login or
+            # credential changes. Recheck this exact initial auth-wall once;
+            # persistent expiry and failed bounded SPA refresh still fail closed.
+            initial_auth_wall = (
+                attempt == 1
+                and str(exc) == (
+                    'SB canonical login required; existing session reached '
+                    'authentication wall; no credential changed'
+                )
+            )
+            if attempt >= attempts or not (initial_auth_wall or transient_sb_error(exc)):
                 raise
             delay = SB_FETCH_RETRY_DELAYS[min(attempt - 1, len(SB_FETCH_RETRY_DELAYS) - 1)]
             print(

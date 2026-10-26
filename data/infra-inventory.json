@@ -47067,6 +47067,32 @@
       "agent": "zeus",
       "credential_changed": false,
       "id": "sb-restricted-recovery-1561808667794210988",
+      "subsequent_recovery_1564383140468756632": {
+        "updated_at": "2026-10-26T17:06:12-04:00",
+        "status": "recovered_verified",
+        "script_path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
+        "test_path": "/root/mgs-agent/tests/test_sb_restricted_transition_monitor.py",
+        "change": "One five-second existing-session recheck only for the exact initial auth-wall error. Persistent auth-wall, failed SPA refresh and scope errors remain fail-closed; no login or credential change.",
+        "validation": {
+          "unit_tests_passed": 12,
+          "guarded_apply_exit": 0,
+          "publishers": 54,
+          "active_users": 73,
+          "scoped_rows": 2893,
+          "sheet_state_rows": 522,
+          "exact_identity_fb_status_date_readback": true,
+          "state_last_check": "2026-10-26T17:05:53-04:00",
+          "watchdog_target": "OK",
+          "watchdog_problems": 0,
+          "discord_posts": 0
+        },
+        "recurrence_risk": "Bounded retry regression-tested for transient and persistent auth-wall. Underlying Auth0 invalidation cause and long-term nonrecurrence are not proven.",
+        "backup": "/root/.hermes/profiles/zeus/cache/scratch/sb-restricted-1564383140468756632-backup",
+        "report_infra": {
+          "status": "pending",
+          "reason": "Current resolver request prohibits direct Discord posting; final reply is delivered by monitor."
+        }
+      },
       "paths": [
         "/root/mgs-agent/data/cron-stale-logs-state.json",
         "/root/mgs-agent/data/sb-restricted-transition-state.json"
@@ -54592,8 +54618,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sb-restricted-transition-monitor.py",
-      "size_bytes": 25909,
-      "modified_at": "2026-10-03T00:26:16-04:00"
+      "size_bytes": 26441,
+      "modified_at": "2026-10-26T17:05:27-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sb-set-restricted-until.py",
@@ -58791,8 +58817,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 997811,
-      "md5": "f84e32f882a83a594ed6e3997bb13fac",
-      "modified_at": "2026-10-26T16:44:17-04:00"
+      "md5": "e0d28238e5acb0afacf88a763b8f1c6d",
+      "modified_at": "2026-10-26T17:05:53-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
