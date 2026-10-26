@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-25T17:22:35.939301-04:00",
+    "updated_at": "2026-10-26T00:21:38.053364+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -9361,27 +9361,86 @@
     {
       "agent": "zeus",
       "guard_script": "/root/mgs-agent/scripts/check-retired-host-references.py",
-      "guard_sha256": "49e1689faba1466c47ab97cd99eafcfd9543e321d9359e2b92846d158b12e20b",
+      "guard_sha256": "dae7e9217a27329f633c6d8b119005121b72c4f3a5bff949d2e9e80c41a052cc",
       "id": "retired-host-local-cleanup-guard-20260712",
       "integrated_into": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
       "integration_sha256": "67fab2990b18771e252e0859def19de98b9c4d56b83aae4bfa175b2f19503272",
       "last_recovery": {
-        "correction": "Existing exact path + SHA256 exemption; no directory exemption. Evidence preserved unchanged.",
-        "evidence_sha256": "ec73c34f09b9c3a8e80f32246d68242ee6187b1d11b9741c06ffc1e0642e3123",
-        "exact_evidence": "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json",
-        "gateway_pids_unchanged": true,
-        "root_cause": "Immutable authorized inventory before-image misclassified as an operational retired-host target; sole hit is removed_validated firewall history, identical to canonical inventory.",
-        "source_alert_id": "1563977706129989734",
-        "reconciled_report_message_id": "1563972596654145770",
-        "cron_job_id": "44671121f3cc",
-        "rollback_path": "/root/.hermes/profiles/zeus/cache/scratch/watchdog-1563977706129989734",
-        "validation": "11 guard regression tests passed, including changed evidence and sibling target rejection; native watchdog retry success, 727 Hermes tests in 35 files passed, py_compile passed; state ok at 2026-10-25T14:15:21-04:00, failure_streak=0. DRY_RUN suppressed Discord recovery delivery only; runtime patch application disabled; 360m interval preserved."
+        "source_alert_id": "1564070086703190067",
+        "root_cause": "Three authorized inventory before-images misclassified as operational targets; each sole hit is the exact canonical removed_validated firewall record.",
+        "correction": "Exact immutable path+SHA256 registrations only; no directory exemption, no historical evidence changes. Modified snapshots and sibling targets remain rejected.",
+        "evidence_sha256": {
+          "reports/meta-pay-now-1563981039230255186/inventory-pre-update.json": "57d7d665cda7979f29abda806ba70cb245337a13e67ff854c6b75a5a6d1dcbfd",
+          "reports/meta-september-invoices-1564022485366734969/inventory-before.json": "d7cc803898a2f4d28ceaa39d2d0a24f59c43bf7721add9ca3c6b1b3bacf8cead",
+          "reports/meta-sheet-subtitle-1563999324587819020/inventory-before.json": "9672a1417db6d00da92f1edd3575aec206415a39b6fc96b07f1043b7d94a6519"
+        },
+        "origin_reports_readback": [
+          "1563994125924176056",
+          "1564026420827791371",
+          "1563999971219603627"
+        ],
+        "validation": {
+          "guard_regression_tests_passed": 12,
+          "hermes_tests_passed": 727,
+          "hermes_files": 35,
+          "failed": 0,
+          "native_retry": {
+            "claimed": true,
+            "success": true,
+            "error": null,
+            "output_path": "/root/.hermes/profiles/zeus/cron/output/44671121f3cc/2026-10-25_20-20-43.md",
+            "last_status": "ok",
+            "failure_streak": 0,
+            "last_run_at": "2026-10-25T20:20:43.986694-04:00",
+            "next_run_at": "2026-10-26T02:20:43.986694-04:00",
+            "schedule_definition_preserved": true,
+            "schedule": {
+              "kind": "interval",
+              "minutes": 360,
+              "display": "every 360m"
+            },
+            "state": {
+              "status": "ok",
+              "last_failure_rc": 0,
+              "last_alert_sent": null,
+              "last_check": "2026-10-25T20:20:43-04:00"
+            },
+            "runtime": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+            "runtime_patch_application_disabled": true,
+            "discord_recovery_post_suppressed": true
+          },
+          "gateway_pids_unchanged": true
+        },
+        "rollback_path": "/root/.hermes/profiles/zeus/cache/scratch/watchdog-1564070086703190067/backup",
+        "recurrence_limit": "Only audited exact bytes are exempted. Newly created or changed evidence continues to fail closed pending reconciliation.",
+        "report_infra": {
+          "status": "posted_verified",
+          "message_id": "1564071475911073873",
+          "channel_id": "1498132022634483894",
+          "content_empty": true,
+          "mentions_empty": true,
+          "embeds": 1
+        }
       },
       "scope": "Removed the retired endpoint from current operational docs/profile references and hashed known-host entries; preserved audit, Discord imports, backups, browser history and inventory evidence.",
       "status": "deployed_validated",
       "type": "security_guard_and_operational_reference_cleanup",
-      "updated_at": "2026-07-12T20:49:52-04:00",
-      "validation": "Operational profile hits=0; root crontab=0; systemd and system cron hits=0; hashed known-host matches=0; git tracked literal remains only in infra inventory evidence; guard positive path PASS; fail-closed fixture PASS; full Hermes MGS guard 244 tests PASS."
+      "updated_at": "2026-10-26T00:21:38.053364+00:00",
+      "validation": "Operational profile hits=0; root crontab=0; systemd and system cron hits=0; hashed known-host matches=0; git tracked literal remains only in infra inventory evidence; guard positive path PASS; fail-closed fixture PASS; full Hermes MGS guard 244 tests PASS.",
+      "recovery_history": [
+        {
+          "correction": "Existing exact path + SHA256 exemption; no directory exemption. Evidence preserved unchanged.",
+          "evidence_sha256": "ec73c34f09b9c3a8e80f32246d68242ee6187b1d11b9741c06ffc1e0642e3123",
+          "exact_evidence": "reports/meta-manual-payments-scheduling-1563960345826037821/inventory-pre-update.json",
+          "gateway_pids_unchanged": true,
+          "root_cause": "Immutable authorized inventory before-image misclassified as an operational retired-host target; sole hit is removed_validated firewall history, identical to canonical inventory.",
+          "source_alert_id": "1563977706129989734",
+          "reconciled_report_message_id": "1563972596654145770",
+          "cron_job_id": "44671121f3cc",
+          "rollback_path": "/root/.hermes/profiles/zeus/cache/scratch/watchdog-1563977706129989734",
+          "validation": "11 guard regression tests passed, including changed evidence and sibling target rejection; native watchdog retry success, 727 Hermes tests in 35 files passed, py_compile passed; state ok at 2026-10-25T14:15:21-04:00, failure_streak=0. DRY_RUN suppressed Discord recovery delivery only; runtime patch application disabled; 360m interval preserved."
+        }
+      ]
     },
     {
       "agent": "zeus",
@@ -53400,8 +53459,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/check-retired-host-references.py",
-      "size_bytes": 5692,
-      "modified_at": "2026-10-25T14:13:33-04:00"
+      "size_bytes": 6466,
+      "modified_at": "2026-10-26T00:18:51.233293+00:00",
+      "sha256": "dae7e9217a27329f633c6d8b119005121b72c4f3a5bff949d2e9e80c41a052cc"
     },
     {
       "path": "/root/mgs-agent/scripts/clean-creative-metadata.py",
