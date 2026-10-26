@@ -187,8 +187,10 @@ Aplique ao preparar, revisar e liberar cada artigo:
 4. Varie formatos, quantidade de itens, aberturas, expressões e sequência de seções conforme a intenção. Não transforme listas de oito itens em template obrigatório nem produza traduções quase idênticas entre portais. Preserve a identidade de categorias consolidadas, especialmente moda; esta diversificação SEO não substitui os contratos REC/P1.
 5. Combine intenção/palavra-chave com benefício ou motivo claro para clicar quando houver ganho real, sem clickbait. Preserve títulos aprovados quando não precisarem de ajuste.
 6. Preserve profundidade e naturalidade dos artigos aprovados; execute correções pontuais sem reconstrução desnecessária. Após localizar o último ajuste, valide novamente o corpo final exato.
-7. Preserve imagens aprovadas e a posição pedida após a abertura, com ALT factual. Resolução, relevância específica, naturalidade, contexto local, iluminação e saturação são critérios de refinamento, não motivo para substituir automaticamente toda a mídia.
+7. Preserve imagens aprovadas e a posição pedida após a abertura, com ALT factual. Resolução, relevância específica, naturalidade, contexto local, iluminação e saturação são critérios de refinamento, não motivo para substituir automaticamente toda a mídia. Aplique a direção de fotografia humanizada preferencialmente sem textos e a comparação entre artigos de `content-editorial-image-workflows`; uma pequena foto dentro de um grande painel não resolve predominância técnica.
 8. Separe aprovação editorial, publicação e validação do Yoast. Metadados corretos não comprovam notas persistidas; registre divergências editor/frontend como pendência, usando `yoast-wordpress` para diagnóstico, sem declarar verde nem reescrever texto para mascarar ausência de análise.
+9. Registre aprovação editorial condicionada sem reabrir os textos já aprovados nem declarar encerramento técnico. Varie ritmo, introduções, desenvolvimento e sobretudo conclusões nos próximos lotes; evite ressalvas recorrentes sem fabricar diferenças. Conclua apenas ajustes justificados no lote atual e só avance quando as condições humanas estiverem atendidas e houver briefing/autorização para o seguinte.
+10. No fechamento técnico, confira separadamente imagem interna/destacada, OG, imagem de schema, idioma HTML/schema/OG e apresentação das datas. Compare instantes reais antes de corrigir datas: nomes de meses em outro idioma não autorizam alterar publicação ou modificação. Não atribua divergência ao cache sem prova da camada nem confunda indexabilidade pública com indexação no Google. Use `references/public-readonly-technical-audit.md` para a coleta e reconciliação.
 
 A receita de execução e os testes por objeto estão em `references/general-seo-category-drafts.md`.
 
@@ -243,8 +245,8 @@ Valide assim:
 1. REST do post confirma título/conteúdo/excerpt/meta.
 2. URL pública com `Cache-Control: no-cache` ou query cache-buster mostra o conteúdo novo.
 3. Browser/DOM confirma elementos visíveis essenciais: título, CTAs, FAQ/details, tabela e links.
-4. Se a URL canônica continuar stale e Rodolfo precisa revisar agora, purgue cache/APO ou use um novo slug limpo e valide esse slug antes de reportar pronto.
-5. Informe no relatório quando cache/slug novo fez parte do reparo.
+4. Se somente a variante fresca refletir a atualização, mantenha a URL canônica como pendente e diagnostique a camada real. Não troque o slug, reenvie o corpo nem faça novo upload para contornar cache: isso altera o alvo ou cria efeitos editoriais desnecessários. Invalidação deve seguir escopo técnico autorizado e os gates críticos aplicáveis; urgência de revisão não os substitui.
+5. Depois de eventual reparo autorizado, valide novamente a URL canônica original e suas prévias sociais. Informe o que mudou e o que permanece pendente; a variante com query não comprova propagação.
 
 ## CTA final por referência/screenshot
 

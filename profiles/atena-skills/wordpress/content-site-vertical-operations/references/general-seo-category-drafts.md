@@ -280,11 +280,11 @@ Complemento de Raquel `discord:1560295338257023118#1562828122762649781`: mantenh
 
 ## Aprovação editorial condicionada e próximos lotes
 
-Fonte: Raquel, `discord:1560295338257023118#1564263729707614330`. Registre a aprovação editorial do lote de 58 sem confundi-la com conclusão técnica. Preserve os textos aprovados; esta aprovação não autoriza iniciar o próximo lote antes de concluir os ajustes pontuais nem configura um novo briefing.
+Registre separadamente aprovação editorial, ajustes solicitados e condições de encerramento. Preserve os textos aprovados; uma aprovação condicionada não encerra pendências técnicas, autoriza refação geral ou constitui briefing do próximo lote.
 
 - Nos próximos lotes, varie ritmo, introduções, desenvolvimento e principalmente conclusões; compare ressalvas e construções recorrentes para evitar aparência de escrita padronizada. Não use variação artificial ou reescrita desnecessária como meta.
 - Preserve fontes oficiais contextualizadas, profundidade e linkagem interna estratégica. A direção visual vigente está em `content-editorial-image-workflows`, seção Direção visual vigente.
-- Separe imagem/corpo/featured corretos de prévia social em cache; confira OG e Twitter no canônico. Não refaça upload ou corpo para contornar cache e não execute purge/configuração fora dos gates técnicos.
+- Separe imagem/corpo/featured corretos de divergências na prévia social; confira OG e Twitter no canônico. Trate cache como hipótese até identificar a camada responsável. Não refaça upload ou corpo para contornar a divergência e não execute purge/configuração fora dos gates técnicos. Se `twitter:image` estiver ausente, registre o fallback de OG e calcule a união dos artigos afetados, não a soma dos canais. Use `public-readonly-technical-audit.md` para a receita de coleta.
 - Confira metadados, canonical, schema e indexabilidade efetiva no HTML/headers e sitemap. Indexabilidade não comprova indexação no buscador: sem evidência de Search Console, declare a indexação efetiva não confirmada. Datas e `html lang` do template e erro 403 de arquivo de autoria exigem diagnóstico e encaminhamento técnico quando fora do acesso editorial.
 
 ## 12. Relatório ao Rodolfo

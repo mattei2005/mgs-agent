@@ -1,0 +1,199 @@
+{
+  "request_id": "1564263729707614330",
+  "thread_id": "1560295338257023118",
+  "editorial_owner": "Atena / Raquel Oliveira",
+  "technical_owner": "Zeus / Tech",
+  "status": "diagnosed_no_technical_write",
+  "next_batch_started": false,
+  "source": "/root/.hermes/profiles/atena/work/seo-close-1564263729707614330/technical/results58.json",
+  "summary": {
+    "request_id": "1564263729707614330",
+    "generated_at_utc": "2026-10-26T13:11:29.204109+00:00",
+    "read_only": true,
+    "network_methods": [
+      "GET"
+    ],
+    "authenticated_requests": 0,
+    "production_writes": 0,
+    "cache_bypass_or_purge": false,
+    "source_manifest": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/review-final-verification-1562828122762649781.json",
+    "source_sha256": "915d767719f386fb710ad7d73ff7be715d1b519c9cc9463fdf390617fee7151b",
+    "expected_articles": 58,
+    "audited_articles": 58,
+    "unique_articles": 58,
+    "by_domain": {
+      "autocreditadx.com": {
+        "articles": 15,
+        "http200": 15,
+        "canonical_self": 15,
+        "og_featured_correct": 9,
+        "twitter_effective_correct": 9,
+        "sitemap_present": 15,
+        "noindex": 0,
+        "html_languages": {
+          "pt-BR": 15
+        }
+      },
+      "carcreditad.com": {
+        "articles": 15,
+        "http200": 15,
+        "canonical_self": 15,
+        "og_featured_correct": 10,
+        "twitter_effective_correct": 10,
+        "sitemap_present": 15,
+        "noindex": 0,
+        "html_languages": {
+          "pt-BR": 15
+        }
+      },
+      "finanzas.topfeed.fun": {
+        "articles": 11,
+        "http200": 11,
+        "canonical_self": 11,
+        "og_featured_correct": 11,
+        "twitter_effective_correct": 11,
+        "sitemap_present": 11,
+        "noindex": 0,
+        "html_languages": {
+          "pt-BR": 11
+        }
+      },
+      "gamehubad.com": {
+        "articles": 17,
+        "http200": 17,
+        "canonical_self": 17,
+        "og_featured_correct": 10,
+        "twitter_effective_correct": 10,
+        "sitemap_present": 17,
+        "noindex": 0,
+        "html_languages": {
+          "pt-BR": 17
+        }
+      }
+    },
+    "codes": {
+      "AUTHOR_ATENA_HTTP_NOT_200": {
+        "count": 1,
+        "article_count": 0,
+        "by_domain": {
+          "gamehubad.com": 1
+        }
+      },
+      "PUBLIC_OG_FEATURED_DIVERGENCE": {
+        "count": 18,
+        "article_count": 18,
+        "by_domain": {
+          "autocreditadx.com": 6,
+          "carcreditad.com": 5,
+          "gamehubad.com": 7
+        }
+      },
+      "PUBLIC_TWITTER_FEATURED_DIVERGENCE": {
+        "count": 18,
+        "article_count": 18,
+        "by_domain": {
+          "autocreditadx.com": 6,
+          "carcreditad.com": 5,
+          "gamehubad.com": 7
+        }
+      },
+      "SCHEMA_ARTICLE_IMAGE_FEATURED_DIVERGENCE": {
+        "count": 4,
+        "article_count": 4,
+        "by_domain": {
+          "carcreditad.com": 1,
+          "gamehubad.com": 3
+        }
+      },
+      "SITEMAP_LASTMOD_REST_DIVERGENCE": {
+        "count": 47,
+        "article_count": 47,
+        "by_domain": {
+          "autocreditadx.com": 15,
+          "carcreditad.com": 15,
+          "gamehubad.com": 17
+        }
+      },
+      "SITEMAP_LISTED_CHILD_HTTP_NOT_200": {
+        "count": 8,
+        "article_count": 0,
+        "by_domain": {
+          "autocreditadx.com": 8
+        }
+      },
+      "TOPFEED_HTML_LANG_NOT_ES": {
+        "count": 11,
+        "article_count": 11,
+        "by_domain": {
+          "finanzas.topfeed.fun": 11
+        }
+      },
+      "TOPFEED_OG_LOCALE_NOT_ES": {
+        "count": 11,
+        "article_count": 11,
+        "by_domain": {
+          "finanzas.topfeed.fun": 11
+        }
+      },
+      "TOPFEED_SCHEMA_LANGUAGE_NOT_ES": {
+        "count": 11,
+        "article_count": 11,
+        "by_domain": {
+          "finanzas.topfeed.fun": 11
+        }
+      },
+      "TOPFEED_VISIBLE_DATE_LANGUAGE_NOT_ES": {
+        "count": 11,
+        "article_count": 11,
+        "by_domain": {
+          "finanzas.topfeed.fun": 11
+        }
+      }
+    },
+    "unique_articles_with_technical_blockers": 29,
+    "google_indexing_status": "not_verified_no_search_console",
+    "technical_release": "blocked_pending_scoped_technical_decision",
+    "scope_limits": [
+      "No WP admin, database, protected postmeta or native editor inspection; public REST/head only.",
+      "No Google Search Console access; sitemap presence and HTTP 200 are not proof of Google indexing.",
+      "HTML lang and schema report served values, not the causal global locale or plugin configuration.",
+      "Social divergence alone does not prove a cache cause.",
+      "Images compared by actual public attachment ID and enumerated size URLs, never guessed filename normalization."
+    ],
+    "verified_checks": {
+      "http200": 58,
+      "canonical_self": 58,
+      "title_present_once": 58,
+      "description_present_once": 58,
+      "title_matches_native_rest": 58,
+      "description_matches_native_rest": 58,
+      "schema_json_valid": 58,
+      "schema_article_present": 58,
+      "schema_article_image_matches_featured": 54,
+      "featured_matches_approved": 58,
+      "first_inline_matches_featured": 58,
+      "native_rest_og_matches_featured": 58,
+      "sitemap_present": 58,
+      "googlebot_allowed_by_robots_txt": 58
+    },
+    "twitter_image_sources": {
+      "og_fallback": 58
+    },
+    "topfeed_numeric_dates_consistent": 11,
+    "article_date_metas_and_schema_consistent": 58
+  },
+  "target_manifest": "/root/.hermes/profiles/atena/work/seo-close-1564263729707614330/technical/aggregated-by-code.json",
+  "handoff_prior_message_ids": [
+    "1562300838469177425",
+    "1562870174015688706"
+  ],
+  "prior_handoff_threads_checked": true,
+  "prior_handoff_thread_result": "No anchored thread on either exact Discord message; no technical response evidenced by those anchors.",
+  "limitations": [
+    "Social mismatch alone does not establish causal cache layer.",
+    "Topfeed numeric dates agree with REST/head; translate display/locale, do not invent or backdate timestamps.",
+    "No Search Console confirmation of Google indexing.",
+    "Critical Subset unchanged; no cache deletion, security/runtime/plugin/global locale modification authorized by inference."
+  ],
+  "image_revision": "17 necessary replacements selected;41 preserved. Local replacement generation in progress, no WP image change yet."
+}

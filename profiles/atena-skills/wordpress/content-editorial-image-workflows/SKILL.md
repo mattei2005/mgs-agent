@@ -102,13 +102,22 @@ Fonte: Raquel, `discord:1560295338257023118#1562828122762649781`.
 
 ### Direção visual vigente: naturalidade e preferência por ausência de texto
 
-Fonte: Raquel, `discord:1560295338257023118#1564263729707614330`. Esta revisão supersede a sugestão anterior de acrescentar painéis para tornar fotos financeiras específicas; não amplia proibições sobre infográficos úteis nem exige refação geral.
+Use esta direção em produção e revisão de lotes. Comunique especificidade pela cena, ação e enquadramento, não acrescentando painéis por padrão; infográficos úteis continuam permitidos, sem exigir refação geral.
 
 - Priorize imagens realistas, humanizadas e contextualizadas, com pessoas, ambientes, ações e situações cotidianas quando pertinentes. Prefira não utilizar textos: o assunto deve ser comunicado visualmente, sem criar falsa interface ou evidência documental.
 - Compare o conjunto por portal, especialmente financeiro: tabelas, gráficos, números, textos e painéis técnicos não devem predominar. Mescle fotografias, composições criativas e infográficos; use gráficos/tabelas somente se agregarem valor demonstrável, sem impor quota artificial.
-- Preserve imagens corretas e diversas; substitua somente as excessivamente técnicas, inadequadas ou repetitivas. Registre decisão e motivo por artigo, comparando cenários, objetos, enquadramentos e conceitos entre todos os assets.
+- Preserve imagens corretas e diversas; substitua somente as excessivamente técnicas, inadequadas ou repetitivas. Registre decisão e motivo por artigo, comparando cenários, objetos, enquadramentos e conceitos entre todos os assets. Avalie a composição inteira: uma miniatura humana subordinada a um grande painel continua sendo uma peça predominantemente técnica. Não reprove automaticamente screenshots ou interfaces nativas pertinentes de jogos/aplicativos como se fossem painéis editoriais; confirme origem, contexto e ausência de interface fabricada.
 - Mantenha a imagem destacada igual à primeira imagem do artigo, com ALT factual no idioma e validação real pública/OG após a troca. Cache social antigo é pendência técnica separada; não equivale a upload falho nem autoriza purge global.
 - Quando infográfico for realmente necessário, use somente conceitos e dados sustentados no corpo; calcule valores em código e não apresente hipótese como oferta real. Sua inclusão deve continuar excepcional à preferência por imagem sem textos.
+
+## Sequência para substituir imagens de textos aprovados
+
+1. Congele o manifesto dos posts existentes e leia a mídia atual; compare destacada e primeira imagem por ID, incluindo as variantes realmente enumeradas no attachment.
+2. Inspecione o conjunto antes de gerar. Registre por artigo cena observada, preservar/trocar e motivo concreto; planeje cenas novas somente para o subconjunto que precisa de troca. Reutilize uma foto-base sem painel apenas se o arquivo original tiver resolução suficiente e passar no QA; não amplie automaticamente um recorte de miniatura.
+3. Gere ou prepare somente as substitutas justificadas. Separe plano de cena, arquivo gerado e aprovação visual; nenhum desses estados comprova upload ou aplicação no WordPress. Redija o ALT da imagem final observada, não do prompt.
+4. Antes do write autorizado, faça novo `GET` com `context=edit` e preserve o baseline. Substitua apenas o bloco de imagem identificado e `featured_media`; compare byte a byte todo o raw restante para proteger texto, fontes, links, CTAs e posição aprovados. Pare diante de múltiplos blocos ambíguos ou edição concorrente, em vez de usar regex amplo.
+5. Após aplicar, releia mídia e post exatos e confira arquivo original, variante interna, ALT, destacada e corpo público. Preserve IDs/URLs dos artigos; não substitua o artigo inteiro por um fragmento sem os demais blocos.
+6. Confira OG e a imagem efetiva do schema separadamente. Uma imagem correta no corpo não comprova prévia atual; registre divergência técnica sem repetir upload, regravar texto ou declarar cache como causa não demonstrada.
 
 ## Comparação de alternativas geradas
 
