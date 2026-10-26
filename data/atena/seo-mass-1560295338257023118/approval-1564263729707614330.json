@@ -1,0 +1,27 @@
+{
+  "id": "ATENA-SEO58-APPROVAL-1564263729707614330",
+  "canonical_key": "content.seo-batch.1560295338257023118.delivery",
+  "thread_id": "1560295338257023118",
+  "authority_message_id": "1564263729707614330",
+  "requester_discord_id": "1496254952501280974",
+  "requester": "Raquel Oliveira",
+  "editorial_approval": "approved_conditioned_on_targeted_adjustments",
+  "batch_size": 58,
+  "same_existing_ids_and_urls": true,
+  "full_batch_unconditionally_ready": false,
+  "next_batch_started": false,
+  "prior_verified_source": "data/atena/seo-mass-1560295338257023118/review-final-verification-1562828122762649781.json",
+  "approved_texts": "Preservar; não refazer textos aprovados nem alterar artificialmente.",
+  "requested_visual_revision": "Preferir imagens realistas humanizadas contextuais sem textos. Revisar excesso de tabelas/gráficos/números/textos e semelhança, sobretudo Topfeed; substituir apenas quando necessário. Manter destacada igual à primeira imagem interna.",
+  "pending_gates": [
+    "Revisão visual do conjunto e aplicação das substituições justificadas com QA e readback",
+    "Topfeed: diagnóstico e correção técnica de datas e idioma HTML ainda em português, sem inferir alteração das datas reais dos posts",
+    "GameHub: arquivo público da autora ATENA com erro 403",
+    "Cache: validar imagens atualizadas em OG/Twitter no canônico e separar cache externo da imagem interna",
+    "SEO: validação de metadados, canonical, schema, indexabilidade e evidência de indexação quando disponível"
+  ],
+  "future_editorial_direction": "Variar ritmo, introduções, desenvolvimento e principalmente conclusões; evitar ressalvas e construções repetitivas, mantendo fontes oficiais contextualizadas, profundidade e links internos estratégicos.",
+  "technical_authority": "Diagnóstico somente leitura e encaminhamento a Zeus/Tech para dependências fora do Editor; Critical Subset, credenciais, runtime/plugin, segurança e configurações globais não liberados por inferência.",
+  "workspace": "/root/.hermes/profiles/atena/work/seo-close-1564263729707614330",
+  "status": "targeted_visual_and_technical_audit_in_progress"
+}

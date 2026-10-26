@@ -5568,6 +5568,24 @@
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
+      "canonical_source": "data/atena/seo-mass-1560295338257023118/approval-1564263729707614330.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-26T13:08:05+00:00",
+      "id": "ATENA-SEO58-APPROVAL-1564263729707614330",
+      "kind": "decision",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Lote58 aprovado editorialmente por Raquel; ajustes visuais e técnicos condicionam encerramento",
+      "updated_at": "2026-10-26T13:08:05+00:00"
+    },
+    {
+      "canonical_key": "content.seo-batch.1560295338257023118.delivery",
       "canonical_source": "data/atena/seo-mass-1560295338257023118/final-verification-cache13-closed.json",
       "consumers": [
         "atena",
@@ -5633,10 +5651,10 @@
       "kind": "source",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO58-APPROVAL-1564263729707614330",
       "title": "58 artigos revisados nos mesmos IDs:24 imagens substituídas, fontes por idioma e dupla QA;pendências técnicas explícitas;sem próximo lote",
-      "updated_at": "2026-10-22T16:45:18+00:00"
+      "updated_at": "2026-10-26T13:08:05+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -14244,5 +14262,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T04:12:10+00:00"
+  "updated_at": "2026-10-26T13:08:05+00:00"
 }
