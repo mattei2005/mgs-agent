@@ -6123,22 +6123,22 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Rodolfo concluir reautenticação na aba própria deixada PC1. Retomar mesmo run_dir pay-now-20261026T091253613842 sem duplicar receipts, validar identidade de todos38 modais antes de publicar H;depois renovar G/I/J e readback. Não pedir código em chat/não automatizar segredo por CUA. Dois checkpoints históricos da thread não redefinem regra vigente de regroup.",
-      "objective": "Atualizar mesma planilha Digital Trust, 47 IDs, priorizar G/H/I/J sem pagamentos nem alterações de billing.",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842",
-      "state": "em 26/10 09:14 eastern g/i/j publicados nas47 contas e readback pass;9 cartão/38 linha. g usd31000.92, i usd899054.64,j usd744023.36. e/f atualizadas:20 invoices unpaid usd275644.71. h:2/38 modais novos verificados (1753257812779707 e3188620887977617);nenhum h novo publicado. na conta2031917360813819 meta redirecionou para /security/twofactor/reauth/ e pediu6 dígitos ao rodolfo;gate confirmado em ax/pixels. aba própria deixada no chrome pc1 pid473000/window132284 e lease liberada. d pendente também para1046241194533786,1481815942722118,1543098427832443;prior preservado.",
+      "next_step": "Manter rotina existente08:02/14:02/21:02Eastern, funding line-to-card e mesmo47 IDs. Revalidar baixa Meta sem zerar F por relato. Para histórico abaixo viewport usar --history-scroll-ticks5..12 com índice fresco de View all activity; código de saída2 em bloqueio. Checkpoint de invoice anterior está supersedido por este.",
+      "objective": "Atualizar mesma planilha Digital Trust com47 IDs, G/H/I/J e histórico cartão, sem executar pagamentos/billing.",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T102620883817",
+      "state": "recovery completo validado26/10:api g/i/j47 contas10:26edt;h38/38 modais publicados10:14edt preservando leitura09:13–10:12;9 cartão/38 linha. totais g31005.79,h200854.30,i900406.97,j745470.34 usd. d lacunas cpv13/eggbev03/mavroa03 resolvidas com cartão explícito nos pixels/ax e recorder/readback. api final updated_validated pending_ui=[];validador47 ids/totais/links pass. setembro ainda20unpaid usd275644.71;baixa meta não confirmada. nenhum pagamento/billing/credencial alterado.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-26T13:21:28+00:00"
+      "updated_at": "2026-10-26T14:28:49+00:00"
     },
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust-1563926766286803004",
-      "next_step": "Invoice/Setembro publicados e validados,20 pendentes na abaUSD275644.71; BM26 pendentesUSD283813.02;6 contas fora somamUSD8168.31. Paid: CPV04/26877313 e Yolokfx01/26891526 zerados em F. General API gate: Mavroa03/1543098427832443 agora funding tipo1/cartão vs Sheet linha. Aguardar decisão de inclusão das6 e reclassificação da Mavroa sem alterar Meta. Invoices atualizam independentemente3x/dia; restante permanece bloqueado, não declarar green integral. Fonte closure.",
-      "objective": "Invoice E e Setembro F atuais na mesma aba; demais campos G/H/I/J preservados e47 IDs congeladas.",
-      "source": "reports/meta-september-invoices-1564022485366734969/closure.json",
-      "state": "invoices_published_general_funding_gate",
+      "next_step": "Consultar meta-manual-payments-digital-trust e contrato canônico;inclusão das6 contas externas continua não autorizada e não foi aplicada.",
+      "objective": "Checkpoint histórico da implantação Invoice/Setembro;continuidade consolidada no checkpoint meta-manual-payments-digital-trust.",
+      "source": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "state": "superseded pelo checkpoint meta-manual-payments-digital-trust em26/10;antigo bloqueio funding resolvido sob1564115318887161857;g/h/i/j atuais47 contas/38 modais validados e d sem pendências api na coleta10:26edt.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-25T21:22:36+00:00"
+      "updated_at": "2026-10-26T14:28:49+00:00"
     },
     {
       "agent": "zeus",
@@ -7302,5 +7302,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T13:57:50+00:00"
+  "updated_at": "2026-10-26T14:28:49+00:00"
 }

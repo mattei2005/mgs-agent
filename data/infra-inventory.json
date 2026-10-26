@@ -893,6 +893,32 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "meta-manual-payments-recovery-1564273144729051199",
+      "agent": "zeus",
+      "type": "meta_billing_readonly_collection_recovery",
+      "authority_message_id": "1564273144729051199",
+      "status": "recovered_verified",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_billing_history.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/recurring-refresh.md",
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json"
+      ],
+      "verification": {
+        "accounts": 47,
+        "pay_now_modals_verified_published": 38,
+        "card_history_gaps_resolved": 3,
+        "history_scroll_ticks_supported": "0..12; fresh unique View all activity target",
+        "canonical_worker_live_probe": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261026T102706975960/1481815942722118-receipt.json",
+        "final_metrics": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T102620883817",
+        "pay_now": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842",
+        "full_grid_readback": true,
+        "pending_card_history": false,
+        "meta_mutations": 0
+      },
+      "restarts": false,
+      "cron_changed": false
+    },
+    {
       "id": "finance-daily-recovery-1563920408531435650",
       "agent": "zeus",
       "type": "finance_rollover_replay_fix",

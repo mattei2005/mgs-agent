@@ -80,19 +80,20 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "validated_metrics_at": "2026-10-25T23:36:24.445740-04:00",
-    "later_attempt": "blocked_insights_daily_aggregate_mismatch",
-    "account_id": "1762774024309795",
-    "account_name": "Financeadx-CA-CC-EN-01",
-    "month_daily_usd": "1125.24",
-    "month_aggregate_usd": "1125.28",
-    "action": "Preserved prior fully reconciled G/I/J snapshot; later failed attempt made no Sheet metrics write. Cause of provider discrepancy unproven; two bounded exact-account rereads persisted."
+    "validated_metrics_at": "2026-10-26T10:26:18.168003-04:00",
+    "status": "updated_validated",
+    "pending_ui": [],
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T102620883817",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T091253613842",
+    "action": "All 47 account G/I/J metrics reconciled and published; all 38 H modals visually verified and published with original individual times; three pending D proofs recorded from real card transaction rows. Meta reauthentication recovered. No payments or billing changes.",
+    "supersedes_previous_qualification": "2026-10-25T23:36:24.445740-04:00; prior USD0.04 Insights mismatch no longer reproduced in verified refresh. Historical evidence preserved in prior run reports and Git."
   },
-  "pending_card_history": {
-    "account_id": "1481815942722118",
-    "status": "blocked_capture_parity",
-    "consecutive_failed_attempts": 4,
-    "dependency": "Prove target-aware AX/pixel parity before another same-route attempt; do not infer Meta logout or change credentials. D prior value retained with explicit note; G/H/I/J independent."
+  "pending_card_history": null,
+  "card_history_recovery": {
+    "source_message": "1564273144729051199",
+    "resolved_account_ids": ["1046241194533786", "1481815942722118", "1543098427832443"],
+    "evidence": "pc1-card-ledger.json; AX and pixels show real transaction methods after bounded, fresh-element targeted history scroll.",
+    "supersedes": "blocked_capture_parity for1481815942722118; prior captures preserved as historical evidence."
   },
   "september_owner_payment_report": {
     "source_message": "1564115318887161857",

@@ -9,7 +9,7 @@ os.environ['HERMES_CUA_DRIVER_CMD']='/root/mgs-agent/scripts/mgs-pc1-cua-driver-
 from tools.computer_use_tool import handle_computer_use,release_computer_use_session
 from tools.computer_use import cua_backend
 cua_backend._cua_configured_ax_max_elements=lambda:2200
-P=argparse.ArgumentParser();P.add_argument('--pid',type=int,required=True);P.add_argument('--window-id',type=int,required=True);P.add_argument('--mode',choices=['inspect','read'],default='inspect');P.add_argument('--account-id');args=P.parse_args()
+P=argparse.ArgumentParser();P.add_argument('--pid',type=int,required=True);P.add_argument('--window-id',type=int,required=True);P.add_argument('--mode',choices=['inspect','read'],default='inspect');P.add_argument('--account-id');P.add_argument('--history-scroll-ticks',type=int,default=0);args=P.parse_args();assert 0<=args.history_scroll_ticks<=12
 SESSION=os.environ['HERMES_SESSION_ID'];LOCK='/root/mgs-agent/scripts/mgs-pc1-computer-use-lock.py';B=Path('/root/mgs-agent/reports/meta-manual-payments-runs')/('pc1-'+datetime.now().strftime('%Y%m%dT%H%M%S%f'));B.mkdir(parents=True,exist_ok=True)
 lease=subprocess.run([sys.executable,LOCK,'acquire','--agent','zeus','--session-id',SESSION,'--thread-id','1563926766286803004','--ttl','900'],capture_output=True,text=True)
 if lease.returncode:print(json.dumps({'status':'blocked','reason':'pc1_lease_busy'}));sys.exit(2)
@@ -56,6 +56,9 @@ try:
    if time.monotonic()>end:raise RuntimeError('billing_page_not_verified')
    time.sleep(2)
  time.sleep(2);es,text=cap()
+ if args.mode=='read' and args.history_scroll_ticks:
+  scroll_targets=[e for e in es if e.get('label')=='View all activity' and e.get('role')=='Hyperlink'];assert len(scroll_targets)==1,'history_scroll_target_not_unique'
+  action({'action':'scroll','element':scroll_targets[0]['index'],'direction':'down','amount':args.history_scroll_ticks});time.sleep(1);es,text=cap()
  tag=args.account_id or'inspect';p=B/(tag+'.txt');p.write_text(text);os.chmod(p,0o600)
  vision=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id})
  snap={'status':'read','receipt_path':str(B/(tag+'-receipt.json')),'read_at':datetime.now().astimezone().isoformat(),'no_recent_spending_message':'You have no recent spending.'in text,'account_requested':args.account_id,'text_path':str(p),'elements_path':last.get('elements_file'),'screenshot':vision.get('screenshot_path'),'headings':[e.get('label')for e in es if e.get('role')in ['Heading','Document']],'billing_excerpt':safe_excerpt(es,text),'payment_controls':[{'index':e.get('index'),'role':e.get('role'),'label':e.get('label')}for e in es if e.get('label')in ['View all activity','View transaction history','Payment activity','Payment history','Accounts']]}
@@ -64,7 +67,7 @@ except Exception as e:
  try:
   es,text=cap();failure_image=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id}).get('screenshot_path')
  except Exception:failure_image=None
- print(json.dumps({'status':'blocked','reason':str(e),'screenshot':failure_image,'elements_path':last.get('elements_file')},ensure_ascii=False))
+ print(json.dumps({'status':'blocked','reason':str(e),'screenshot':failure_image,'elements_path':last.get('elements_file')},ensure_ascii=False));sys.exit(2)
 finally:
  if created:
   try:cap();action({'action':'key','keys':'ctrl+w'})
