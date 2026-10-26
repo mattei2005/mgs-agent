@@ -124,6 +124,10 @@ Se o pedido autorizar explicitamente drafts como fallback por falta de configura
 5. Faça revisão editorial independente página a página para intenção de busca, especificidade, naturalidade, fidelidade às fontes e claims. Corrija os itens reprovados e repita o QA determinístico no artefato final exato.
 6. Reporte separadamente o que está pronto em draft e o que continua público. Nunca use “13/13 concluído” para sugerir publicação quando `production_writes=0`.
 
+## Diagnóstico somente leitura de menus localizados
+
+Antes de classificar uma categoria vazia como oportunidade editorial, confronte o href literal do menu de cada homepage localizada com o ID REST, o arquivo público, a mensagem de ausência de posts e o idioma efetivamente renderizado. Um menu EN/ES pode apontar para um termo alemão vazio enquanto a tradução correta já contém o acervo. Use canonical, hreflang e alternate REST para sustentar a divergência pública; não afirme idioma nativo do termo sem leitura Polylang autorizada. Registre separadamente lacuna real, termo fora do idioma e categoria preenchida ausente do menu. Resolva mercado com fonte canônica e corpus/tags de país, nunca pelo locale ou sufixo de slug; um termo vazio pode continuar sem país resolvido. Relate a dependência sem alterar menu/taxonomia nem transformar uma auditoria pública em produção.
+
 ## Taxonomia e validação
 
 O par canônico `lang_*` + país é obrigatório independentemente do tipo de artigo e identifica somente idioma/mercado; não é um limite de duas tags. Preserve tags temáticas/SEO pertinentes, `atena_agent` e as classes obrigatórias do contrato REC/P1/SEO. Ao corrigir idioma/país, remova apenas identificadores alternativos dessas classes, nunca as demais tags válidas. Detalhes e resolução de IDs: `references/general-seo-category-drafts.md`, seção 8.
