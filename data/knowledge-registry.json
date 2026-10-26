@@ -13412,15 +13412,32 @@
         "zeus"
       ],
       "domain": "finance",
-      "effective_at": "2026-10-26T04:12:10+00:00",
-      "id": "finance-meta-pay-now-dynamic-20261026",
+      "effective_at": "2026-10-26T20:35:57+00:00",
+      "id": "finance-meta-pay-now-disabled-balance-20261026",
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "H usa balance do topo se Pay now realmente indisponível;modal se habilitado",
+      "updated_at": "2026-10-26T20:35:57+00:00"
+    },
+    {
+      "canonical_key": "finance.meta.manual-payments.pay-now-column",
+      "canonical_source": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-26T04:12:10+00:00",
+      "id": "finance-meta-pay-now-dynamic-20261026",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "finance-meta-pay-now-disabled-balance-20261026",
       "title": "Pay now segue IDs atuais de linha; contagem dinâmica por funding",
-      "updated_at": "2026-10-26T04:12:10+00:00"
+      "updated_at": "2026-10-26T20:35:57+00:00"
     },
     {
       "canonical_key": "finance.meta.manual-payments.september-invoices",
@@ -14350,5 +14367,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-26T19:03:06+00:00"
+  "updated_at": "2026-10-26T20:35:57+00:00"
 }

@@ -28,6 +28,14 @@ Aos 08:02/14:02/21:02 America/New_York, o job existente `2ee720363d7d` deve, al�
 
 Caso lease/auth/UI bloqueie uma conta, preservar a fotografia anterior e declarar quais campos ficaram históricos. Nunca completar lacuna com balance/Insights ou marcar atualização integral. Nenhuma etapa de cobrança é autorizada.
 
+## Recuperação parcial explícita e validação de duas fontes
+
+- O collector aceita página Billing válida com Credit line e balance explícito, mesmo quando o Pay now cinza está omitido pelo AX. Produz receipt `current_balance_pay_now_unavailable` sem clicar; isso é candidato até inspeção dos pixels. Login/erro/`temporarily blocked` interrompem a rota; não contornar limitação do provedor com outro perfil/endpoint de UI.
+- No manifest visual, `disabled_balance_checks[account_id]` exige `pay_now_visually_disabled=true`, `valid_billing_page=true`, `business_id`, `asset_id` e `balance_usd` realmente conferidos. A ausência de Button no AX sozinha não autoriza publicação. Fonte e hora originais ficam na nota de H.
+- Se um bloqueio do provedor interromper o conjunto, `publish_pay_now.py --run-dir <mesmo-dir> --verified-only --apply` publica somente os receipts já conferidos e preserva valores/notas de todos os targets faltantes. Totais e header qualificam a mistura de leituras novas/históricas. Sem `--verified-only`, o gate de conjunto completo permanece. Nunca chamar uma entrega parcial de atualização integral.
+- `validate_workbook_readonly.py` valida as duas fontes de H, IDs, links e fórmulas; seu PASS prova a estrutura/snapshot, não a atualidade dos H preservados. `test_pay_now_sources.py --run-dir <dir>` exercita receipts reais e rejeições de prova ausente, valor/ID divergente e botão acionável.
+- `Meta HTTP500/code1/subcode99`, erro de child batch e divergência de Insights são estados distintos: não inventar causa única. Manter recibos, verificar a mesma conta/período por GET diário/agregado, repetir somente leitura de forma limitada e publicar API apenas após reconciliação. A recuperação de API não remove bloqueio de UI.
+
 ## Reautenticação reaparece durante a coleta
 
 - Tratar “já autentiquei” como gatilho para validar a mesma sessão, não como prova de liberação de todas as contas. Mesmo após modais válidos, a navegação seguinte pode redirecionar para `/security/twofactor/reauth/` e pedir “Enter the 6-digit code” sem um Heading `Confirm it's you`; inspecionar URL final e texto completo antes de classificar um timeout como falha de billing ou captura.

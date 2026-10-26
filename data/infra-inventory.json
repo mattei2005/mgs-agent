@@ -51327,6 +51327,48 @@
         "1562987037370617896",
         "1562987234351644764"
       ]
+    },
+    {
+      "id": "meta-pay-now-disabled-balance-1564373157727576245",
+      "agent": "zeus",
+      "type": "skill_script_contract",
+      "authority_message_id": "1564373157727576245",
+      "updated_at": "2026-10-26T16:35:56.812155-04:00",
+      "status": "rule_deployed_snapshot_partial_provider_block",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/pay-now-column.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/funding-regroup-priority.md",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_pay_now.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/publish_pay_now.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/validate_workbook_readonly.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/test_pay_now_sources.py",
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json"
+      ],
+      "verification": {
+        "mirror_sha256": {
+          "SKILL.md": "ee5b6799e1a3dd5733a5ffd86df358a8bec037eddef79e976b8970e3469ebae6",
+          "references/pay-now-column.md": "487317ce9a01699bdbd4885ef94afd71e8d7f06fedf93ead06588d3001f94caa",
+          "references/funding-regroup-priority.md": "6d9eac13f7059cc458edab7a2a23672737c9ecf9dcab52313c20abb6a4910f2f",
+          "scripts/read_pc1_pay_now.py": "954302556e3564bd7c9f5287e62cdad415907b26baf6eba789a096a1a918c704",
+          "scripts/publish_pay_now.py": "d2bfffbba36e3d497d414331d4c300a5be95623c3fa0c64cfc0746b0f0b0d048",
+          "scripts/validate_workbook_readonly.py": "ff203d4a6b5b6c6adf1f977627bf51195d85f66f284712f81c9b00600f6ac4f8",
+          "scripts/test_pay_now_sources.py": "fa4e958c21fe745daf9a6ee5e755733190f4a307c59d137eced20a38b2d450bc"
+        },
+        "api_accounts_refreshed": 47,
+        "fresh_h": 7,
+        "preserved_h": 31,
+        "september_due_usd": "0.00",
+        "full_grid_readback": true,
+        "financial_totals_links_pass": true,
+        "real_receipt_checks": 35,
+        "payments": 0,
+        "meta_writes": 0
+      },
+      "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T162233768844",
+      "provider_block": "Facebook You are Temporarily Blocked; going too fast. UI stopped; next existing tick only.",
+      "cron_changed": false,
+      "restarts": false
     }
   ],
   "profile_skill_references": [

@@ -4,7 +4,8 @@
     "1563960345826037821",
     "1563981039230255186",
     "1564022485366734969",
-    "1564115318887161857"
+    "1564115318887161857",
+    "1564373157727576245"
   ],
   "thread_id": "1563926766286803004",
   "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
@@ -80,16 +81,58 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "validated_metrics_at": "2026-10-26T14:11:04.262075-04:00",
-    "status": "metrics_validated_pay_now_partial_provider_block",
-    "pending_ui": [
-      "H: 34 of 38 current credit-line targets preserved from prior snapshot; Facebook temporary feature block confirmed in AX and pixels. No global logout or 2FA gate observed."
+    "validated_metrics_at": "2026-10-26T16:31:55.215274-04:00",
+    "status": "metrics_validated_h_partial_provider_block",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T163157348922",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T162233768844",
+    "fresh_h_account_ids": [
+      "1753257812779707",
+      "3188620887977617",
+      "2031917360813819",
+      "897046653487466",
+      "1829406761389732",
+      "1062887799996139",
+      "1018267074603840"
     ],
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T141106242028",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T140332972496",
-    "action": "C/G/I/J refreshed and reconciled for all 47 accounts. E/F September live due USD275644.71 across20 unpaid invoices in this worksheet; owner-reported payment not yet settled by Meta. H updated only for4 individually pixel-verified modals with original collection times; remaining34 H cells unchanged. D preserved, no new generic payment events requiring UI history; one prior blank remains.47 IDs,9 card/38 credit-line groups, totals F/G/H/I/J and billing links validated. PC1 lease released. No payment or billing change.",
-    "supersedes_previous_qualification": "2026-10-26T10:26:18.168003-04:00; initial USD0.08 Insights mismatch on1085117577390237 no longer reproduced in final reconciled refresh. Earlier snapshots and original OCR diagnostics preserved. H is partial in this tick, not a fresh38-account snapshot.",
-    "retry_policy": "No immediate UI retry or bypass of provider temporary block; preserve existing08:02/14:02/21:02 America/New_York cadence and same47 IDs. Existing next tick may revalidate provider clearance; no new job/writer."
+    "pending_h_account_ids": [
+      "1001115192056600",
+      "1062446663435585",
+      "1085117577390237",
+      "1107653168698121",
+      "1245683183659911",
+      "1414197490675732",
+      "1498990138663094",
+      "1526280818302320",
+      "1583000095650153",
+      "1600310064116258",
+      "1736068407518263",
+      "1744611463000838",
+      "1851640026221079",
+      "1877104513669062",
+      "2039876850230678",
+      "2429758060563333",
+      "2633813727134360",
+      "26632890069640784",
+      "2852476828464907",
+      "311204101516831",
+      "336562339356179",
+      "3752157451670648",
+      "4511685129081248",
+      "536294549227786",
+      "781612907182683",
+      "7840111366055613",
+      "787796726891306",
+      "814915838330687",
+      "869857549542755",
+      "908704754163659",
+      "937846586033361"
+    ],
+    "pending_ui": [
+      "31 H preserved historical; Facebook temporarly blocked using feature too fast. AX+pixels confirmed; no auth gate."
+    ],
+    "action": "47 accounts C/G/I/J refreshed and daily/aggregate reconciled; D unchanged with no new generic event needing UI. September E/F live0unpaid/due0 confirmed16:21EDT. H7/38 fresh top balances,31 preserved. Full grid publication readback and F/G/H/I/J totals/47links validation PASS. PC1 lease released; no Meta writes/payment/billing.",
+    "retry_policy": "Stop immediate UI reads; no alternate-profile bypass. Existing 21:02Eastern tick revalidates provider clearance; same run can resume missing31 then publish full. No new job or parallel writer.",
+    "api_recovery": "InitialHTTP500/code1/subcode99, separate USD0.06 daily/aggregate difference and batch child960; exact account1526280818302320 GET later200 with daily=aggregate1781.16, then full47-account refresh updated_validated. No tolerance relaxed or fake values."
   },
   "pending_card_history": null,
   "card_history_recovery": {
@@ -165,7 +208,7 @@
   "layout_version": 3,
   "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186",
   "pay_now_updated_each_tick": true,
-  "pay_now_collection_policy": "Read every current credit-line target from live funding each tick; verify all screenshots then publish H only. Preserve individual timestamps and fail closed on missing identity/values. No payments.",
+  "pay_now_collection_policy": "Read all current credit-line IDs; enabled Pay now => literal modal; explicitly disabled Pay now on valid authenticated Billing => top balance per1564373157727576245. Require actual pixels+AX, exact identity, source/time. Auth/errors/provider temporary block never permit fallback. Preserve individually verified partial publication and original timestamps. No payment/billing.",
   "schema": {
     "A": "Nome",
     "B": "Forma",
@@ -193,5 +236,6 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261026T162122993405"
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261026T162122993405",
+  "pay_now_rule_authority_message": "1564373157727576245"
 }
