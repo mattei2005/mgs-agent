@@ -160,5 +160,64 @@ class HistoricalEvidenceTests(unittest.TestCase):
         )
 
 
+    def inventory_fixture(self):
+        relative = "reports/meta-manual-payments-runs/pay-now-20261027T080326229843/inventory-before-closure.json"
+        inventory = json.loads((guard.REPO / relative).read_text())
+        removed = [row for row in inventory["runtime_artifacts"]
+                   if guard.RETIRED_HOST in json.dumps(row)]
+        self.assertEqual(len(removed), 1)
+        canonical = json.loads((guard.REPO / "data/infra-inventory.json").read_text())
+        self.assertEqual(removed, [row for row in canonical["runtime_artifacts"]
+                                  if row.get("id") == "runcloud-retired-ssh-allow-removal-20260712"])
+        return {"_meta": inventory["_meta"], "runtime_artifacts": removed}
+
+    def test_new_inventory_before_image_accepts_only_pinned_history(self):
+        relative = "reports/future-authorized-run/inventory-before-closure.json"
+        inventory = self.inventory_fixture()
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [])
+        inventory["_meta"]["updated_at"] = "later snapshot"
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [])
+
+    def test_inventory_additional_targets_still_block(self):
+        relative = "reports/future-authorized-run/inventory-before-closure.json"
+        for location in ("runtime_artifacts", "scripts", "connection"):
+            with self.subTest(location=location):
+                inventory = self.inventory_fixture()
+                if location == "runtime_artifacts":
+                    inventory[location].append({"target": guard.RETIRED_HOST})
+                else:
+                    inventory[location] = {"target": guard.RETIRED_HOST}
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
+
+    def test_inventory_modified_removed_record_still_blocks(self):
+        relative = "reports/future-authorized-run/inventory-before-closure.json"
+        inventory = self.inventory_fixture()
+        inventory["runtime_artifacts"][0]["status"] = "active"
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
+
+    def test_inventory_sibling_and_non_inventory_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("reports/future-run/connection.json", "scripts/inventory-before.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_inventory_missing_provenance_still_blocks(self):
+        relative = "reports/future-run/inventory-before.json"
+        inventory = self.inventory_fixture()
+        inventory["_meta"] = {}
+        self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
+
+    def test_inventory_json_escaped_additional_target_still_blocks(self):
+        relative = "reports/future-run/inventory-before.json"
+        inventory = self.inventory_fixture()
+        inventory["connection"] = {"target": guard.RETIRED_HOST}
+        content = json.dumps(inventory).encode()
+        needle = guard.RETIRED_HOST.encode()
+        index = content.rfind(needle)
+        content = content[:index + 1] + b"\\u0037" + content[index + 2:]
+        self.assertEqual(content.decode().count(guard.RETIRED_HOST), 1)
+        self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+
 if __name__ == "__main__":
     unittest.main()

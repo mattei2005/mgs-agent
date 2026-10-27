@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import subprocess
 import sys
@@ -53,6 +54,47 @@ HISTORICAL_EVIDENCE_SHA256 = {
     "reports/meta-sheet-subtitle-1563999324587819020/inventory-before.json":
         "9672a1417db6d00da92f1edd3575aec206415a39b6fc96b07f1043b7d94a6519",
 }
+
+# Inventory before-images recur during authorized operations. Recognize only
+# the pinned, already-removed firewall record, never a directory or live target.
+REMOVED_FIREWALL_RECORD_SHA256 = "5671c8b06110f9417fd6dd7a7cf2a84e9f79d15d7a0a798089495b5efa84bf2a"
+
+
+def historical_inventory_only(path: Path, relative: str) -> bool:
+    parts = Path(relative).parts
+    if (not parts or parts[0] not in {"data", "reports"}
+            or not path.name.startswith(("inventory-before", "inventory-pre-"))
+            or path.suffix != ".json"):
+        return False
+    try:
+        if path.stat().st_size > MAX_FILE_BYTES:
+            return False
+        content = path.read_text(encoding="utf-8")
+        if content.count(RETIRED_HOST) != 1:
+            return False
+        inventory = json.loads(content)
+        if not isinstance(inventory, dict):
+            return False
+        metadata = inventory.get("_meta")
+        if (not isinstance(metadata, dict)
+                or metadata.get("generated_by") != "infra-discovery.sh"):
+            return False
+        records = inventory.get("runtime_artifacts")
+        if not isinstance(records, list):
+            return False
+        hits = [record for record in records if RETIRED_HOST in json.dumps(record)]
+        if len(hits) != 1:
+            return False
+        encoded = json.dumps(hits[0], sort_keys=True, separators=(",", ":")).encode()
+        if hashlib.sha256(encoded).hexdigest() != REMOVED_FIREWALL_RECORD_SHA256:
+            return False
+        # Re-scan the entire parsed document, keys included. JSON-escaped
+        # additional connection addresses must also remain blocking.
+        inventory["runtime_artifacts"] = [record for record in records if record is not hits[0]]
+        return RETIRED_HOST not in json.dumps(inventory)
+    except (OSError, UnicodeError, ValueError, TypeError):
+        return False
+
 
 PROFILE_NAMES = ("zeus", "atena", "ares")
 PROFILE_OPERATIONAL_NAMES = ("config.yaml", "SOUL.md", "skills", "scripts", "cron")
@@ -111,7 +153,7 @@ def tracked_repo_failures(failures: list[str]) -> None:
                     continue
             except OSError:
                 pass
-        if read_contains(path):
+        if read_contains(path) and not historical_inventory_only(path, relative):
             failures.append(f"repo:{relative}")
 
 
