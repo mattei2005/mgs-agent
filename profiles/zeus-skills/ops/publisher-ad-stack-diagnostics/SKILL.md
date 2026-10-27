@@ -209,6 +209,8 @@ For comparable identifiers, use one compact monospaced block rather than multipl
 
 ## Supporting references
 
+- For claims that a missing subtitle or fast scrolling caused low `rec_top` viewability, use `references/rec-top-viewability-subtitle-diagnosis.md`: reproduce coherent mobile traffic, separate subtitle DOM presence from rewarded/blur visibility, and validate `lazyAdTop` before calling absent pre-gate requests a defect. Require GAM evidence or a controlled experiment for causal revenue claims.
+
 - See `references/jbf-builder-gam-network-audit-2026-08-21.md` for the validated stale-builder diagnosis pattern, exact evidence model, and canary limits from a Cliquet-family incident.
 
 ## Verification checklist
