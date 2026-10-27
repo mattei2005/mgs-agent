@@ -8,6 +8,14 @@ A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digita
 
 O app `minibot` (`1299247318762949`) permanece autorizado como dependência técnica, inclusive quando seu proprietário é outro portfólio. Ownership, aprovação, credencial ou capacidade técnica desse app não autorizam leitura/operação de contas, sites ou inventários do portfólio proprietário. Não revogar app, tokens ou permissões Meta neste cutover.
 
+## Esclarecimento vigente — sites cadastrados na SB
+
+Rodolfo reafirmou na mensagem `1564745626388922459`, thread `1564744929660637264`: “os sites dentro da SB, podemos atuar”. O cadastro do host no catálogo corporativo Smart Bidding é critério suficiente de inclusão no escopo operacional do Ares; não exigir também cadastro editorial em `data/sites.json`, presença na allowlist geral da Atena ou outra comprovação independente de propriedade. Permanecem a validação do host exato no snapshot autorizado, a autoridade do solicitante e os gates da ação concreta.
+
+Pedidos genéricos como identificar quais sites rodam SHEIN devem começar pelo catálogo positivo do Ares (`list --agent ares` e `data/ares/sb-publisher-scope.json`) e pelas fontes operacionais autorizadas. A ausência de um domínio explícito nesse tipo de inventário não é motivo para recusa. SHEIN é uma vertical/produto, não um domínio-alvo. O cadastro na SB não prova, sozinho, que o site roda SHEIN: confirmar essa classificação com evidência operacional.
+
+Se houver evidência de cadastro corporativo SB que ainda não consta no snapshot local, tratar como pendência de atualização/readback por Zeus, não como prova de que o site não pertence à operação. Não contornar o checker nem enumerar provedores globais. Esta clarificação supersede a interpretação de que apenas o cadastro institucional geral comprova o escopo do Ares; não amplia o escopo da Atena, contas Meta, billing, credenciais ou Critical Subset.
+
 ## Gate obrigatório anterior à ferramenta
 
 - Conta de anúncio: `python3 /root/mgs-agent/scripts/mgs-ares-asset-scope.py check-account <ID-ou-act_ID> --json`; exigir allowed=true antes de qualquer consulta de campanhas, gasto, billing, permissões ou write.

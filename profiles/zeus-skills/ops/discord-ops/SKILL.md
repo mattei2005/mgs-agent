@@ -20,6 +20,12 @@ Completion criterion: only the procedure and evidence required for the current a
 
 Quando Rodolfo pedir para ler uma thread e corrigir a resposta de outro agente, diagnosticar o pedido e a execução exatos antes de atribuir erro ao agente. Publicar a retificação na thread indicada, sem apagar ou se passar pelo autor original, e validar o conteúdo entregue; explicar apenas na conversa atual não satisfaz o pedido. Distinguir resposta corrigida, bloqueio resolvido e entrega operacional concluída. Após confirmação, reler o alvo e a continuidade da origem antes de escrever ou acionar o executor: confirmações do mesmo pedido em duas threads correspondem a uma única recuperação, não a duas execuções. Não descrever o relatório como retomado apenas porque existe uma sessão dona ou um payload de handoff preparado; exigir envio confirmado e atividade nova do executor. Receita de leitura, correlação de sessão e investigação de recusa: `references/route-pack-03.md`, seção **Investigar e retificar resposta de outro agente**.
 
+## Corrigir documentação de escopo de outro agente
+
+Quando Rodolfo corrigir uma recusa e pedir atualização da documentação, compare primeiro a regra específica do agente com o gate executável; não transforme automaticamente a correção em ampliação de permissões. Para Ares, consulte `context/ares-asset-scope.md`, o catálogo positivo SB e `mgs-domain-scope.py list --agent ares` antes de exigir cadastro institucional adicional. Uma consulta por vertical, como SHEIN, não fornece nem exige por si só um domínio explícito: comece pelo catálogo autorizado e confirme a classificação com evidência operacional.
+
+Atualize a fonte canônica, o trecho conflitante do SOUL vivo e seu espelho versionado; confira igualdade dos espelhos, limite de contexto e testes do gate. Registre a supersessão pelo controlador institucional quando a regra mudar. Feche distinguindo documentação persistida, gate validado e comportamento observado: editar arquivos não prova que uma sessão já aberta incorporou a correção, nem que a tarefa operacional recusada foi retomada. Não execute campanhas, resete sessões ou acorde o agente apenas para comprovar uma atualização documental. Receita e diagnóstico de recusas: `references/route-pack-03.md`, seção **Investigar e retificar resposta de outro agente**.
+
 ## Resumos executivos de threads para Rodolfo
 
 Quando Rodolfo pedir para resumir threads ou disser que há informação demais, leia as fontes e entregue uma síntese para decisão, não outro relatório técnico:

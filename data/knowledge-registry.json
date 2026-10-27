@@ -1851,10 +1851,28 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-DIGITAL-TRUST-SB-SCOPE-20261027",
+      "title": "Ares: contas Digital Trust e hosts corporativos SB; exceção somente do app técnico",
+      "updated_at": "2026-10-27T21:02:01+00:00"
+    },
+    {
+      "canonical_key": "permissions.ares.operational.asset_scope",
+      "canonical_source": "context/ares-asset-scope.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-27T21:02:01+00:00",
+      "id": "ARES-DIGITAL-TRUST-SB-SCOPE-20261027",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Ares: contas Digital Trust e hosts corporativos SB; exceção somente do app técnico",
-      "updated_at": "2026-10-20T15:55:07+00:00"
+      "title": "Ares: cadastro corporativo SB basta para escopo de sites; inventário SHEIN não exige domínio explícito",
+      "updated_at": "2026-10-27T21:02:01+00:00"
     },
     {
       "canonical_key": "ares.strategy-family.direct-traffic-car",
@@ -14723,5 +14741,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T19:51:46+00:00"
+  "updated_at": "2026-10-27T21:02:01+00:00"
 }
