@@ -1503,12 +1503,12 @@
     {
       "agent": "ares",
       "id": "ARES-SB-SHEIN-1564744929660637264",
-      "next_step": "Responder a Rodolfo com Fcp-team confirmado e limitações por grupo, fonte SB de 28/09 a 27/10/2026. Não ampliar janela/Meta/companies ou alterar campanhas. Pesquisa adicional nos inconclusivos depende de novo escopo solicitado.",
-      "objective": "Identificar quais dos oito publishers Atual FNC da imagem operam SHEIN.",
-      "source": "reports/ares/sb-readback-1564748074062975048.json;discord:1564744929660637264/1564749394794782720",
-      "state": "análise concluída dentro do recorte disponível: projeção zeus validada por ares, 8/8 publishers http201 e 6948 linhas com identidades/datas verificadas. fcp-team confirma shein pela conta 01 - fcp - shein - us: 793 linhas explícitas, 762 com entrega, última 23/10/2026. fincfrog car; fincpro car/emp. naboojobs e sapogamer app/produtos sem prova suficiente de shein. fincben, finchettin e jupalu sem linhas no período. não afirmar ausência definitiva nem atividade hoje.",
+      "next_step": "Entregar identificação operacional dos três sites com país e evidência de idioma, explicitando que idiomas das páginas não comprovam entrega de todos os conjuntos. Demais sites: car/emp ou sem dados no recorte; nenhuma ampliação Meta.",
+      "objective": "Identificar sites SHEIN, países e idiomas por adgroup, conforme correção de Rodolfo.",
+      "source": "reports/ares/sb-adgroup-classification-1564750129930706995.json;reports/ares/sb-readback-1564748074062975048.json;discord:1564744929660637264/1564750129930706995",
+      "state": "reanálise por adgroup_name/utm/campanha/país concluída nos 8 publishers e 6948 linhas. fcp-team us com conta shein e en em parte do tracking; naboojobs us com produtos/wishlist e marcadores esp; sapogamer mx com produtos/wishlist. leitura pública dos três hosts confirma funis shein e páginas: fcp e naboo us inglês/espanhol, sapo méxico espanhol. separar idioma disponível no funil de idioma de entrega por adgroup; sem join direto de destino nesta projeção. supersede limitação metodológica anterior de buscar somente literal shein.",
       "thread_id": "1564744929660637264",
-      "updated_at": "2026-10-27T21:16:09+00:00"
+      "updated_at": "2026-10-27T21:20:51+00:00"
     },
     {
       "agent": "ares",
@@ -7522,5 +7522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:16:09+00:00"
+  "updated_at": "2026-10-27T21:20:51+00:00"
 }

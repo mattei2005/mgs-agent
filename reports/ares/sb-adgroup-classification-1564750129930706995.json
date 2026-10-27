@@ -1,0 +1,158 @@
+{
+  "source": "/root/mgs-agent/reports/ares/sb-readback-1564748074062975048.json",
+  "request_message_id": "1564750129930706995",
+  "window": {
+    "initialDate": "2026-09-28T00:00:00.000Z",
+    "finalDate": "2026-10-27T23:59:59.999Z",
+    "currency": "USD"
+  },
+  "publishers": [
+    {
+      "publisherId": "atual-fnc_fcp-team",
+      "site": "Fcp-team",
+      "rows": 826,
+      "named_adgroup_rows": 793,
+      "country_counts": {
+        "us": 793
+      },
+      "wishlist_adgroup_count": 204,
+      "last_wishlist_delivery_date": "2026-10-23",
+      "explicit_esp_rows": 0,
+      "examples": [
+        "BARRACA event_add_to_wishlist (b01fb02c319g01) 16-10",
+        "BARRACA event_add_to_wishlist (b01fb02c320g01) 16-10",
+        "BEDSIDE_RAIL event_add_to_wishlist (b01fb02c08g01) 23-09"
+      ]
+    },
+    {
+      "publisherId": "atual-fnc_fincben",
+      "site": "Fincben",
+      "rows": 0,
+      "named_adgroup_rows": 0,
+      "country_counts": {},
+      "wishlist_adgroup_count": 0,
+      "last_wishlist_delivery_date": null,
+      "explicit_esp_rows": 0,
+      "examples": []
+    },
+    {
+      "publisherId": "atual-fnc_fincfrog",
+      "site": "fincfrog",
+      "rows": 909,
+      "named_adgroup_rows": 826,
+      "country_counts": {
+        "br": 826
+      },
+      "wishlist_adgroup_count": 0,
+      "last_wishlist_delivery_date": null,
+      "explicit_esp_rows": 0,
+      "examples": [
+        "BR01_CAR_CHAT(b01fb10c01g01)",
+        "BR01_CAR_CHAT(b01fb10c151g01)",
+        "BR01_CAR_CHAT(b01fb10c154g01)"
+      ]
+    },
+    {
+      "publisherId": "atual-fnc_finchettin",
+      "site": "finchettin",
+      "rows": 0,
+      "named_adgroup_rows": 0,
+      "country_counts": {},
+      "wishlist_adgroup_count": 0,
+      "last_wishlist_delivery_date": null,
+      "explicit_esp_rows": 0,
+      "examples": []
+    },
+    {
+      "publisherId": "atual-fnc_fincpro",
+      "site": "Fincpro",
+      "rows": 573,
+      "named_adgroup_rows": 573,
+      "country_counts": {
+        "us": 573
+      },
+      "wishlist_adgroup_count": 0,
+      "last_wishlist_delivery_date": null,
+      "explicit_esp_rows": 0,
+      "examples": [
+        "CAR-US CompleteRegistration 08/10 — C1",
+        "CAR-US CompleteRegistration 08/10 — C2",
+        "CAR-US CompleteRegistration 08/10 — C2 — c261 Cópia 13/10 #1"
+      ]
+    },
+    {
+      "publisherId": "atual-fnc_jupalu",
+      "site": "Jupalu",
+      "rows": 0,
+      "named_adgroup_rows": 0,
+      "country_counts": {},
+      "wishlist_adgroup_count": 0,
+      "last_wishlist_delivery_date": null,
+      "explicit_esp_rows": 0,
+      "examples": []
+    },
+    {
+      "publisherId": "atual-fnc_naboojobs",
+      "site": "Naboojobs",
+      "rows": 4555,
+      "named_adgroup_rows": 4442,
+      "country_counts": {
+        "us": 4442
+      },
+      "wishlist_adgroup_count": 826,
+      "last_wishlist_delivery_date": "2026-10-27",
+      "explicit_esp_rows": 2005,
+      "examples": [
+        "AIRMATTRESS event_add_to_wishlist (b01fb03c58g01) 12-09",
+        "BEDSIDERAIL event_add_to_wishlist (b01fb03c01g01) 27-09",
+        "BEDSIDERAIL event_add_to_wishlist (b01fb03c07g01) 27-09"
+      ]
+    },
+    {
+      "publisherId": "atual-fnc_sapogamer",
+      "site": "Sapogamer",
+      "rows": 85,
+      "named_adgroup_rows": 23,
+      "country_counts": {
+        "mx": 23
+      },
+      "wishlist_adgroup_count": 7,
+      "last_wishlist_delivery_date": "2026-10-11",
+      "explicit_esp_rows": 0,
+      "examples": [
+        "SAPO_MX_ANDADOR_COM_RODAS event_add_to_wishlist (b01fb01c02g01) 30-09",
+        "SAPO_MX_ANDADOR_COM_RODAS event_add_to_wishlist (b01fb01c04g01) 01-10",
+        "SAPO_MX_VACUUM_SOFA event_add_to_wishlist (b01fb01c01g01) 30-09"
+      ]
+    }
+  ],
+  "public_shein_language_evidence": {
+    "fcp-team.com": {
+      "english": "https://fcp-team.com/us-app-shein-free-trial-review-guide/",
+      "spanish": "https://fcp-team.com/us-es-app-shein-prueba-gratuita-informe/",
+      "evidence": "Public homepage and WordPress public read HTTP200: SHEIN titles/US routes in English and Spanish. Does not prove delivery of both languages."
+    },
+    "naboojobs.com": {
+      "english": "https://naboojobs.com/us-app-shein-free-trial-review-guide/",
+      "spanish": "https://naboojobs.com/us-es-app-shein-prueba-gratuita-informe/",
+      "evidence": "Public homepage and WordPress public read HTTP200: SHEIN US pages in both languages. Spanish also explicit ESP in SB adgroups/campaigns; no universal English marker in other adgroups."
+    },
+    "sapogamer.com": {
+      "spanish": "https://sapogamer.com/mx-app-shein-prueba-gratuita-bitacora/",
+      "evidence": "WordPress public read HTTP200: Spanish SHEIN Mexico article title and route. COUNTRY=mx and wishlist products in SB; no language field or direct destination join in SB projection."
+    }
+  },
+  "operational_shein_sites": [
+    "Fcp-team",
+    "Naboojobs",
+    "Sapogamer"
+  ],
+  "classification_basis": "Fcp explicit SHEIN account; Naboo/Sapo convergent wishlist product adgroups, country and public SHEIN funnels. No direct per-adgroup destination linkage in supplied projection. Countries are SB observations; site-language availability is not proof of per-adgroup delivery language.",
+  "tests": {
+    "all_8_publishers": true,
+    "row_count_6948": true,
+    "date_identity_validation": true,
+    "esp_marker_positive": true,
+    "spanish_product_EN_not_classified_english": true
+  }
+}
