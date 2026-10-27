@@ -38,6 +38,10 @@ Completion criterion: only the procedure and evidence required for the current a
 
 ## Mutation and preservation gates
 
+- When an immutable native-route pin refers to a positional inventory index that drifted, relocate only by a unique exact original record hash **and** the same record ID/domain/webroot/server. Preserve the original hash and history, revalidate the native installation in read-only mode, and bind the next stage to a separate fresh relocation artifact. Never repin to whichever record now occupies the old index, weaken the source guard, or rewrite another agent's historical adapter to force passage.
+- Preserve read failures structurally even when `str(exception)` is empty: include exception class and explicit unverified status, and aggregate gaps by key/status presence rather than truthiness of the error text. After a collector fix, supersede the erroneous summary with a corrected machine-readable artifact; do not convert an empty AssertionError message into successful coverage.
+- For category-cache reconciliation, derive pagination from the native category link, not a stale public canonical that may name another language/slug. A translated canonical can make the collector request a nonexistent page 2; recheck the native path and separate this collection defect from a real production 404 before requesting any purge.
+
 - Persist created object IDs and completed mutation stages before validation; recover a failed post-write check against those same IDs rather than creating replacements or replaying completed writes.
 - Compare authored WordPress fields separately from computed `content.rendered`, because forms and widgets can change rendered HTML without an author edit. Preserve the original baseline and qualify any historical-revision fallback.
 - After a draft/status transition, read the published permalink and canonical again; a draft REST link can be a preview URL even when production uses pretty permalinks. Resolve cross-links only within the authorized objects, not by changing site-wide permalink settings.

@@ -4963,12 +4963,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-us-app-1564672804484423801",
-      "next_step": "Congelar IDs/nomes por conta; validar transformação e invariantes; executar somente name com lease e readback; preservar bloqueios externos de históricos sem restaurar status.",
-      "objective": "Adicionar (US_APP) aos nomes de todas as campanhas SHEIN sem marcador, incluindo estados históricos, sem alterar outros campos.",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/us-app-audit-1564671291544313937.py",
-      "state": "autorizado: rodolfo 1564672804484423801. preparando inventário live e dry-run literal em 36 contas; nenhum write meta deste pedido iniciado.",
+      "next_step": "Dry-run literal por ID, pré-leitura de configuração/filhos; executar só name sob lease, GET após cada lote e consolidar recusas históricas sem restaurar status.",
+      "objective": "Adicionar (US_APP) aos nomes das campanhas de tráfego direto SHEIN sem marcador em todos os estados, sem alterar outros campos.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/shein-us-app-1564672804484423801/discovery.json",
+      "state": "escopo esclarecido por rodolfo 1564673811821895731: campanhas shein com event_add_to_wishlist, em active/paused/archived/deleted. 940 candidatas no inventário live; preservar 2731 nomes históricos sem evento, incluindo crédito/cartão. nenhum write meta iniciado.",
       "thread_id": "1564665948882079774",
-      "updated_at": "2026-10-27T16:11:58+00:00"
+      "updated_at": "2026-10-27T16:16:00+00:00"
     },
     {
       "agent": "ares",
@@ -7412,5 +7412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:11:58+00:00"
+  "updated_at": "2026-10-27T16:16:00+00:00"
 }

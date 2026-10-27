@@ -59,6 +59,8 @@ REC/P1, edição/publicação WordPress e artigos SEO pertencem à Atena. Se pre
 
 Zeus só entra quando houver exceção, erro recorrente, risco técnico, usuário sem autorização ou conflito operacional.
 
+Raquel tem autonomia permanente para solicitar limpeza de cache neste pedido e em pedidos futuros (Rodolfo `1564671680444370955`), conforme `data/atena/editorial-manager-authority.json#/cache_request_authority`. Atena mantém conteúdo/QA e Zeus apoia a execução técnica na origem, sem aprovação editorial genérica adicional do CEO; preservar o escopo humano por URL, os gates críticos e a exclusão de Finance/Router/credenciais.
+
 ## Tech / WordPress / Pixel
 
 Montar/configurar site WordPress e configurar pixel de Facebook Ads/Google Ads continuam sob responsabilidade do Rodolfo. Zeus pode ajudar como apoio técnico/orquestrador quando Rodolfo solicitar ou quando houver problema operacional.
