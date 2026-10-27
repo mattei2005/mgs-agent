@@ -1,0 +1,23 @@
+{
+  "authority_message_id": "1564747521354629371",
+  "thread_id": "1564746043768311910",
+  "scope": "SHEIN SLA performance only; no Meta campaign execution",
+  "tests_command": "PYTHONPATH=scripts:tests runtime/ares-media-qa/bin/python -m unittest test_shein_now_intent test_shein_single_media_activation test_shein_batch_barrier_activation test_shein_reviewed_observed_schedule test_shein_cross_account_reference -q",
+  "test_output": "----------------------------------------------------------------------\nRan 58 tests in 3.795s\n\nOK",
+  "test_exit_code": 0,
+  "meta_network_calls": 0,
+  "meta_writes": 0,
+  "gateway_restarts": 0,
+  "policy": {
+    "enabled": true,
+    "target_seconds": 144,
+    "late_activation_allowed": true,
+    "original_clock_preserved": true
+  },
+  "registry_id": "ARES-SHEIN-SLA-PERFORMANCE-ONLY-1564747521354629371",
+  "supersedes": "ARES-SHEIN-SINGLE-CAMPAIGN-E2E-144-20261008",
+  "remaining_limitations": [
+    "Offline transport verifies activation logic, not a new live campaign or serving",
+    "Material schedule/scope decisions and all QA/authority/quota gates remain in force"
+  ]
+}

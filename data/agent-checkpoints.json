@@ -1502,6 +1502,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SB-SHEIN-1564744929660637264",
+      "next_step": "Zeus fornece projeção sanitizada de dados SB dos oito publishers exatos usando identidade própria autorizada, sem grant nem credenciais compartilhadas. Ares valida cobertura/identidade/datas, classifica SHEIN com evidência e responde na origem.",
+      "objective": "Identificar quais dos oito publishers Atual FNC da imagem operam SHEIN.",
+      "source": "reports/ares/sb-catalog-1564744929660637264.json;reports/ares/sb-shein-classification-1564744929660637264.json;discord:1564744929660637264/1564748074062975048",
+      "state": "cadastro reconciliado por zeus e evidência lida; gate 8/8 permitido. consultas operacionais canônicas sb retornaram http 403 em relatórios de dois publishers e pricing, mesmo após renovação automática da autenticação. classificação permanece indisponível, não negativa. novo handoff de readback operacional enviado a zeus e confirmado por get.",
+      "thread_id": "1564744929660637264",
+      "updated_at": "2026-10-27T21:11:47+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SB-SPEND-32K-1561769613572706344",
       "next_step": "Se solicitado, propor redução por campanha com dados atuais de rentabilidade e maturidade, separando direto/BOT/retenção e preservando receita sem atribuição; apresentar impacto estimado sem prometer economia ou lucro preservado. Execução depende de pedido específico.",
       "objective": "Analisar redução do gasto diário consolidado da SB para no máximo USD32000, conforme objetivo informado por Rodolfo após conversa com gestores.",
@@ -1869,6 +1879,16 @@
       "state": "completed",
       "thread_id": "1560303769680355525",
       "updated_at": "2026-10-15T21:32:04+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-SLA-1564747521354629371",
+      "next_step": "Proximo pedido autorizado segue runner normal, mesmo request/IDs e clock original; nenhum canario live ou campanha historica foi executado nesta manutencao.",
+      "objective": "Remover expiracao de autorizacao por atraso E2E SHEIN, preservando QA e demais gates",
+      "source": "reports/ares/shein-sla-1564747521354629371/validation.json",
+      "state": "concluido: codigo/config shein corrigidos; sla144 apenas metrica; 58 testes offline pass; policy anterior supersedida; skills live e canonicas atualizadas somente no delta; inventario e report-infra 1564748496962068632 com get validado; zero meta/restart.",
+      "thread_id": "1564746043768311910",
+      "updated_at": "2026-10-27T21:12:46+00:00"
     },
     {
       "agent": "ares",
@@ -4132,6 +4152,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SB-CATALOG-1564744929660637264",
+      "next_step": "Ares retoma a classificação operacional SHEIN na thread 1564744929660637264 usando somente os oito alvos e os gates aprovados; Zeus não inicia writer de campanha.",
+      "objective": "Reconciliar somente os oito publishers da imagem Atual FNC solicitada por Rodolfo.",
+      "source": "reports/ares/sb-catalog-1564744929660637264.json;discord:1185714635991679006/1564744929660637264/1564748074062975048",
+      "state": "recuperação técnica concluída: oito publishers/hosts confirmados na sb ao vivo e reconciliados nos snapshots e guards. checker 8/8; 63 testes aprovados. report-infra 1564747982199328881 e handoff ares 1564748074062975048 publicados com readback exato. inventário, audit e aprendizado na skill registrados e validados. classificação shein ainda é entrega funcional pendente do ares.",
+      "thread_id": "1564746799074517123",
+      "updated_at": "2026-10-27T21:10:38+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-SB-RESTRICTION-HISTORY-20260827",
       "next_step": "Operação normal automática às 08:00, 14:00 e 20:00 ET; nenhuma ação pendente.",
       "objective": "Manter na planilha Paginas Restritas - Atualizacoes uma aba por página com contagem de entradas, saídas confirmadas, renovações e estado atual, atualizada exatamente às 08:00, 14:00 e 20:00 ET.",
@@ -5113,12 +5143,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-mass-1560295338257023118",
-      "next_step": "Solicitar somente decisão específica Rodolfo sobre exceção pública GET/HEAD /author/atena/ ID6, MU dedicado+staging/rollbackexatos;preservarhardeningglobal. Seaprovada,re-preflight/propagaçãoFPM/testespositivosnegativos/QA;semnovaaprovaçãorotineiradeconteúdo/cache.",
-      "objective": "Concluir lote58;restanteúnicoexceçãodesegurançapáginaautorGame",
-      "source": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/localization-public-resolution-1564725082071236611.json",
-      "state": "idioma11topfeedaplicado viawpcodejáinstalado id54178:canário54104eexpansãomesmoid;431testeslocais/24pins/104hooks/45hashes;11httpnormal+22dom390/1280pass;11posts/meta/termos/indexables/options/datasidênticos;localeglobalptpreservado.semreplay23. nova58http/canonical/og/schema/inlinecorretos. autorgame403ativo;158testeslocaiselintappcandidatopass,nenhumwritehardening.",
+      "next_step": "Revalidar2alvos/source/owner/symlink/FPMOPcache;backupbaseline/negativos;deployatômicocanáriodaexceção;readbacknativo/origem/público/DOMecontroles;rollbackescopadosefalhar,semglobal.",
+      "objective": "Aplicar exceção específica de autoria GameHub aprovada;fechar lote58comprova pública",
+      "source": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/author-execution-1564747634541989940/authority.json",
+      "state": "rodolfo344196393512075265confirmou1564747634541989940porgetaexceção get/head/author/atena/id6+rollbackprevistos. únicoparent58.23cachese11localejáconcluídos,nãorepetir. preflightsegurançareabertoantesdewrite;novaaprovaçãoealvosregistrados.",
       "thread_id": "1560295338257023118",
-      "updated_at": "2026-10-27T19:51:22+00:00"
+      "updated_at": "2026-10-27T21:09:53+00:00"
     },
     {
       "agent": "atena",
@@ -7492,5 +7522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:00:20+00:00"
+  "updated_at": "2026-10-27T21:12:46+00:00"
 }

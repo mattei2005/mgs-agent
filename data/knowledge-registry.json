@@ -1869,10 +1869,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SB-ATUAL-FNC-EXACT-20261027",
       "title": "Ares: cadastro corporativo SB basta para escopo de sites; inventário SHEIN não exige domínio explícito",
-      "updated_at": "2026-10-27T21:02:01+00:00"
+      "updated_at": "2026-10-27T21:08:11+00:00"
     },
     {
       "canonical_key": "ares.strategy-family.direct-traffic-car",
@@ -3325,6 +3325,24 @@
       "superseded_by": null,
       "title": "Editores padrao de sheets de gestores: dois comuns e adicional Nicolas em G006; somente arquivo",
       "updated_at": "2026-10-27T15:19:09+00:00"
+    },
+    {
+      "canonical_key": "permissions.ares.operational.asset_scope",
+      "canonical_source": "context/ares-asset-scope.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-27T21:08:11+00:00",
+      "id": "ARES-SB-ATUAL-FNC-EXACT-20261027",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Ares: oito publishers Atual FNC explicitamente pedidos e confirmados na SB",
+      "updated_at": "2026-10-27T21:08:11+00:00"
     },
     {
       "canonical_key": "ares.shein.reporting.ui-auth-recovery",
@@ -4918,10 +4936,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SHEIN-SLA-PERFORMANCE-ONLY-1564747521354629371",
       "title": "SHEIN uma campanha: alvo maximo E2E 144 segundos com QA completo",
-      "updated_at": "2026-10-08T16:57:01+00:00"
+      "updated_at": "2026-10-27T21:10:42+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.reporting.on-demand-default-layout",
@@ -4940,6 +4958,25 @@
       "superseded_by": "ARES-SHEIN-ALL-ACCOUNTS-REPORT-12COL-20261015",
       "title": "SHEIN seis canais: modelo provisório de relatório alinhado à referência G003",
       "updated_at": "2026-10-15T15:14:52+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.single-campaign.e2e-target",
+      "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-27T21:10:42+00:00",
+      "id": "ARES-SHEIN-SLA-PERFORMANCE-ONLY-1564747521354629371",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN 144s como meta, sem expirar autorizacao original nem reconfirmar por atraso tecnico",
+      "updated_at": "2026-10-27T21:10:42+00:00"
     },
     {
       "canonical_key": "ares.shein.source-setup-tracking-preservation",
@@ -14741,5 +14778,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:02:01+00:00"
+  "updated_at": "2026-10-27T21:10:42+00:00"
 }

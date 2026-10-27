@@ -140,7 +140,7 @@ class SBConfidentialityTests(unittest.TestCase):
         with patch.object(sb, 'get_access_token') as credentials, patch.object(sb.requests, 'request') as http:
             status, companies, metadata = sb.api_request('GET', '/company')
             self.assertEqual(status, 200)
-            self.assertEqual({c['companyId'] for c in companies}, {'digital-trust', 'digital-trust-2'})
+            self.assertEqual({c['companyId'] for c in companies}, {'digital-trust', 'digital-trust-2', 'atual-fnc'})
             self.assertEqual(metadata['network_requests'], 0)
             credentials.assert_not_called()
             http.assert_not_called()

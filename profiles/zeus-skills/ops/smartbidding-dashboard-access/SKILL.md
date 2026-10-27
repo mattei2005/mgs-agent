@@ -19,6 +19,7 @@ Use for SB dashboard access, Auth0/BotGuard troubleshooting, Messenger Page/Broa
 
 - Treat `/company` as a credential-bearing response, not safe dashboard metadata: its nested publisher objects can include VPS/WordPress passwords and company Discord tokens, including companies outside MGS. Before any logging, preview, serialization or tool output, filter to the authorized companies and allowlist only `companyId`, company `name`, and publisher `publisherId/name/url/active`. Never print the raw response, a first-row sample or a truncated prefix; truncation preserves secrets that occur early in the payload.
 - Keep authenticated request headers only in memory. Inspect API shape through projected keys/counts, not raw objects; the same boundary applies when debugging a collector failure.
+- For screenshot-only publisher reconciliation, resolve the exact company heading and every visible label against live SB identity fields; a company group is not a site alias. If Rodolfo has explicitly authorized those targets, reconcile the exact finite set across the positive publisher snapshot, Ares asset/domain overrides and executable company guard, then test local projection and negative cases. Never add unseen siblings or other companies, infer SHEIN from registration, widen Atena/Meta, or claim that documentation alone recovered the blocked lookup.
 
 ## Audit delivery and acceptance
 

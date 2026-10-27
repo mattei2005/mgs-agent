@@ -1,0 +1,18 @@
+{
+  "request_id": "ARES-SB-SHEIN-1564744929660637264",
+  "source_thread_id": "1564744929660637264",
+  "source_message_id": "1564746487416623246",
+  "catalog_evidence": "/root/mgs-agent/reports/ares/sb-catalog-1564744929660637264.json",
+  "domain_gate": "8/8 allowed via mgs-domain-scope.py filter --agent ares",
+  "report_window": {"initialDate":"2026-09-28T00:00:00.000Z","finalDate":"2026-10-27T23:59:59.999Z","currency":"USD"},
+  "read_attempts": [
+    {"publisherId":"atual-fnc_fcp-team","method":"POST","route":"/report/performance_per_domain","http":404},
+    {"publisherId":"atual-fnc_fcp-team","method":"POST","route":"/report/performance_per_campaigns","http":403,"auth_refresh_retry":"performed by canonical helper"},
+    {"publisherId":"atual-fnc_fincben","method":"POST","route":"/report/performance_per_campaigns","http":403,"auth_refresh_retry":"performed by canonical helper"},
+    {"publisherId":"atual-fnc_fcp-team","method":"GET","route":"/pricing/atual-fnc_fcp-team?should_update_metrics=0","http":403,"auth_refresh_retry":"performed by canonical helper"}
+  ],
+  "classification_status":"unavailable_permission_denied",
+  "classification":null,
+  "limitations":["Catalog reconciliation succeeded but operational reads tested returned Forbidden. Catalog inclusion does not prove SHEIN. No Meta query, alternate credential, access grant, or campaign write performed. Other six publishers were not tested after independent access denials."],
+  "next_action":"Zeus to supply credential-free publisher-scoped SB report evidence for exactly the eight reconciled publishers using own authorized identity; identify SHEIN from operational VERTICAL, tracking or campaign fields and distinguish recent delivery from historical records. No credential sharing or permission write requested."
+}

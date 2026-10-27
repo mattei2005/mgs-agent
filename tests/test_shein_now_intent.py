@@ -77,6 +77,55 @@ class NowCentralActivationTests(single_tests.SingleCentralActivationTests):
         self.proof['execution_started_at']=(datetime.now(timezone.utc)-timedelta(seconds=145)).isoformat()
         out=self.activate();self.assertEqual(out['status'],'E2E_TARGET_EXCEEDED');self.assertEqual(self.transport.posts,[]);self.assertEqual(self.trees[0]['campaign']['status'],'PAUSED')
 
+    def allow_late_original_request(self):
+        self.config['shein_execution_sla']['late_activation_allowed']=True
+        self.proof['execution_started_at']=(datetime.now(timezone.utc)-timedelta(seconds=180)).isoformat()
+
+    def test_late_original_request_activates_without_human_reconfirmation_and_records_sla(self):
+        import json
+        from pathlib import Path
+        self.allow_late_original_request()
+        origin=self.proof['execution_started_at']
+        out=self.activate()
+        self.assertEqual(out['status'],'COMPLETE_FUTURE_ACTIVE')
+        self.assertEqual(len(self.transport.posts),3)
+        self.assertTrue(all(body=={'status':'ACTIVE'} for _,body in self.transport.posts))
+        state=json.loads(Path(out['activation_state']).read_text())
+        self.assertEqual(state['execution_sla']['execution_started_at'],origin)
+        self.assertTrue(state['execution_sla']['target_exceeded'])
+        self.assertFalse(state['execution_sla']['activation_blocking'])
+        self.assertNotIn('continuation_authorization',state)
+        self.assertEqual(self.proof['execution_started_at'],origin)
+        self.activate()
+        self.assertEqual(len(self.transport.posts),3)
+
+    def test_late_original_request_still_rejects_budget_drift(self):
+        self.allow_late_original_request()
+        self.trees[0]['campaign']['daily_budget']='9900'
+        with self.assertRaisesRegex(ValueError,'budget/bid drift'):self.activate()
+        self.assertEqual(self.transport.posts,[])
+
+    def test_late_original_request_still_requires_media_qa(self):
+        self.allow_late_original_request()
+        self.proof.pop('media_qa')
+        with self.assertRaisesRegex(ValueError,'media QA proof'):self.activate()
+        self.assertEqual(self.transport.posts,[])
+
+    def test_late_original_request_still_requires_original_sla_clock(self):
+        self.allow_late_original_request()
+        self.proof.pop('execution_started_at')
+        with self.assertRaisesRegex(ValueError,'SLA clock missing'):self.activate()
+        self.assertEqual(self.transport.posts,[])
+
+    def test_late_original_request_reconciles_partial_activation_without_replaying_children(self):
+        from ares_campaign_v3.transport import BatchTransportError
+        self.allow_late_original_request()
+        self.transport.fail_post_number=3
+        self.transport.apply_then_fail=True
+        with self.assertRaises(BatchTransportError):self.activate()
+        self.assertEqual(self.activate()['status'],'COMPLETE_FUTURE_ACTIVE')
+        self.assertEqual(len(self.transport.posts),3)
+
 # Run only the explicit NOW cases for these fixture subclasses.
 for name in list(single_tests.SingleRunnerQATests.__dict__):
     if name.startswith('test_'):setattr(NowRunnerTests,name,None)

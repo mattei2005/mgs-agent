@@ -44,7 +44,7 @@ class AresScopeTests(unittest.TestCase):
     with self.subTest(path=path,params=params),self.assertRaises(scope.ScopeError):scope.enforce_meta_path(path,params,method)
  def test_ares_domain_scope_matches_approved_catalog(self):
   d=domains.load_registry(BASE/'data/mgs-domain-scope.json');a=scope.load_scope()
-  self.assertEqual(domains.domains_for_agent(d,'ares'),a['domains']);self.assertEqual(len(a['domains']),52)
+  self.assertEqual(domains.domains_for_agent(d,'ares'),a['domains']);self.assertEqual(len(a['domains']),60)
  def test_atena_unchanged(self):
   d=domains.load_registry(BASE/'data/mgs-domain-scope.json');self.assertEqual(domains.domains_for_agent(d,'atena'),d['domains']);self.assertEqual(len(d['domains']),58)
  def test_synthetic_agent_domain_override(self):

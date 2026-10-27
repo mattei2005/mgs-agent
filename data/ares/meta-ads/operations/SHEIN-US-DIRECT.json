@@ -462,8 +462,10 @@
         "same original request, immutable manifests, campaign/adset/ad IDs, budget and bid",
         "fresh authority check before activation",
         "complete semantic/media QA and live pre-read/readback",
-        "original E2E clock and SLA breach preserved; explicit reviewed continuation only"
+        "original E2E clock and SLA breach preserved; review only when a separate material schedule/scope decision requires it"
       ],
+      "performance_delay_policy": "shein_execution_sla.late_activation_allowed=true supersedes human reconfirmation solely for technical delay; resume the same originally authorized request with all QA/authority/readback gates",
+      "performance_delay_policy_authority_message_id": "1564747521354629371",
       "excluded_and_critical_subset_unchanged": true
     }
   },

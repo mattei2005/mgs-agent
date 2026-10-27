@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "active",
+  "owner": "Rodolfo Mattei",
+  "authorized_by_discord_id": "344196393512075265",
+  "authority_message_id": "1564748349431881972",
+  "source_thread_id": "1564744929660637264",
+  "guild_id": "1185714635991679006",
+  "agent": "ares",
+  "access_level": "limited",
+  "permanent": true,
+  "current_and_future_requests": true,
+  "approval_authority": "zeus",
+  "new_rodolfo_approval_required": false,
+  "requester_eligibility": {
+    "human_only": true,
+    "require_real_discord_user_id": true,
+    "require_live_guild_membership": true,
+    "require_live_effective_view_and_send_permission_in_origin": true,
+    "require_real_parent_and_private_thread_access_when_applicable": true,
+    "origin": "Ares operational channels and their threads; no global Zeus or Atena access",
+    "existing_named_user_whitelist_not_required_for_scoped_approval": true,
+    "display_name_role_label_or_self_claim_is_not_proof": true
+  },
+  "site_eligibility": {
+    "source": "corporate Smart Bidding dashboard",
+    "any_registered_site": true,
+    "not_limited_to_current_companies_or_eight_Atual_FNC_publishers": true,
+    "require_exact_publisher_to_host_identity": true,
+    "registered_active_and_inactive_publishers_in_scope": true,
+    "missing_local_snapshot": "Zeus validates exact SB registration and updates the positive snapshot and applicable guard under this standing authority; no additional CEO approval for the same proven SB site",
+    "no_inferred_subdomains_or_unknown_targets": true,
+    "no_global_hosting_or_other_provider_inventory_enumeration": true
+  },
+  "authorized_scope": "Authorize each explicit member request concerning a proven SB site within the responsible agent's existing noncritical operational remit; retain the requested scope and one executor. Membership/site authorization does not itself authorize unrelated objects, autonomous production, accounts or sensitive actions.",
+  "individual_grant_protocol": {
+    "verify_before_approval_and_sensitive_execution": true,
+    "record_requester_origin_target_request_and_authority_in_audit": true,
+    "grant_level": "limited_to_the_proven_origin_SB_site_and_explicit_request",
+    "no_unrestricted_global_user_promotion": true,
+    "preserve_gateway_user_allowlist": true,
+    "if_transport_blocks_new_user": "Zeus applies a separately traceable individual scoped grant through the existing authorization process under this standing delegation; never replace the gateway allowlist with wildcard or disable authorization",
+    "no_eager_bulk_member_or_domain_enrollment": true
+  },
+  "preserved_limits": {
+    "critical_subset_unchanged": true,
+    "credentials_and_billing_not_delegated": true,
+    "budget_and_campaign_account_partition_gates_unchanged": true,
+    "finance_and_router_explicit_rodolfo_gate_unchanged": true,
+    "meta_operational_business_and_account_scope_unchanged": true,
+    "other_agents_authority_and_private_data_scope_unchanged": true,
+    "no_discord_permission_or_ownership_changes": true
+  },
+  "activation": {
+    "delegation_is_effective_for_Zeus_scoped_approval": true,
+    "not_a_gateway_wildcard_or_dynamic_membership_implementation": true,
+    "existing_sessions_must_consult_current_canonical_policy": true
+  }
+}

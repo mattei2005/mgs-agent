@@ -191,14 +191,19 @@ def activate(engine,target,creation,proof):
     transport=engine.transport_factory(aid)
     sla = engine.config.get('shein_execution_sla') or {}
     def deadline_exceeded():
-        # Reviewed recovery is an explicit new continuation, not a reset of E2E.
-        if continuation and continuation.get('late_activation_authorized') is True:
-            return False
         if sla.get('enabled') is not True or len(target.campaigns) != int(sla.get('quantity', 1)):
             return False
         origin = proof.get('execution_started_at')
         if not origin: raise ValueError('SLA clock missing from original request proof')
-        return (datetime.now(timezone.utc) - datetime.fromisoformat(origin).astimezone(timezone.utc)).total_seconds() > int(sla['target_seconds'])
+        elapsed = (datetime.now(timezone.utc) - datetime.fromisoformat(origin).astimezone(timezone.utc)).total_seconds()
+        blocking = sla.get('late_activation_allowed') is not True
+        state['execution_sla'] = {'execution_started_at': origin, 'elapsed_seconds': elapsed,
+            'target_seconds': int(sla['target_seconds']), 'target_exceeded': elapsed > int(sla['target_seconds']),
+            'activation_blocking': blocking}
+        # Performance target is not authorization expiry. Never reset the original clock.
+        if not blocking or (continuation and continuation.get('late_activation_authorized') is True):
+            return False
+        return state['execution_sla']['target_exceeded']
     def hold():
         state.update(phase='E2E_TARGET_EXCEEDED',stage='activation_held',reason='complete QA exceeded original request E2E target; no late activation')
         atomic(state_path,state);engine.writer_leases.mark(aid,rid,'ACTIVATION_PENDING')

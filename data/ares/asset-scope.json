@@ -4,10 +4,10 @@
   "owner": "Rodolfo Mattei",
   "authorization_message_id": "1562127427151339701",
   "source_thread_id": "1562104297926295623",
-  "updated_at": "2026-10-20T15:40:12.895321+00:00",
+  "updated_at": "2026-10-27T21:08:02.333921+00:00",
   "operational_business_id": "155263197283282",
   "operational_business_name": "Digital Trust",
-  "domain_source": "Smart Bidding corporate catalog digital-trust + digital-trust-2; all registered publishers, not only active",
+  "domain_source": "Smart Bidding corporate catalog digital-trust + digital-trust-2; all registered publishers, not only active; exact eight Atual FNC image targets authorized by Rodolfo 1564745626388922459 + 1564746487416623246, live readback reports/ares/sb-catalog-1564744929660637264.json",
   "domains": [
     "autocreditadx.com",
     "boostingecon.com",
@@ -22,6 +22,7 @@
     "eggbev.com",
     "empleo.seuprimeiroempregoam.com",
     "escalatepower.com",
+    "fcp-team.com",
     "finance.ducapes.com",
     "finance.topfeed.fun",
     "finance.wantabrand.com",
@@ -39,19 +40,26 @@
     "finanzas.wavesbee.com",
     "finanzas.zuout.com",
     "finanzas.zytiva.com",
+    "fincben.com",
+    "fincfrog.com",
     "fincgriffin.com",
+    "finchettin.com",
+    "fincpro.com",
     "gamezonead.com",
     "gamingadx.com",
     "growpowerhub.com",
     "helixenit.net",
     "infinitynexx.com",
     "jobscana.com",
+    "jupalu.com",
     "lyzmo.com",
     "marevelx.com",
     "mavroa.com",
+    "naboojobs.com",
     "newsoun.com",
     "openzed.com",
     "portalrelevante.com",
+    "sapogamer.com",
     "seuprimeiroempregoam.com",
     "topfeed.fun",
     "vizioid.com",
@@ -1476,5 +1484,23 @@
       "app_ownership_grants_no_operational_account_scope": true
     }
   ],
-  "permission_or_credential_changes_authorized": false
+  "permission_or_credential_changes_authorized": false,
+  "sb_catalog_reconciliation": {
+    "authorization_message_ids": [
+      "1564745626388922459",
+      "1564746487416623246"
+    ],
+    "evidence": "reports/ares/sb-catalog-1564744929660637264.json",
+    "companyId": "atual-fnc",
+    "publisherIds": [
+      "atual-fnc_fcp-team",
+      "atual-fnc_fincben",
+      "atual-fnc_fincfrog",
+      "atual-fnc_finchettin",
+      "atual-fnc_fincpro",
+      "atual-fnc_jupalu",
+      "atual-fnc_naboojobs",
+      "atual-fnc_sapogamer"
+    ]
+  }
 }

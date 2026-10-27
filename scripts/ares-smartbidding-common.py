@@ -263,8 +263,22 @@ def _scoped_catalog() -> list[dict]:
     companies = stored.get('companies')
     if stored.get('schema_version') != 1 or stored.get('status') != 'active' or not isinstance(companies, list):
         raise ValueError('Catálogo corporativo SB inválido; consulta negada.')
-    if {c.get('companyId') for c in companies} != {'digital-trust', 'digital-trust-2'} or len(companies) != 2:
+    company_ids = {c.get('companyId') for c in companies}
+    if len(company_ids) != len(companies) or company_ids not in (
+        {'digital-trust', 'digital-trust-2'},
+        {'digital-trust', 'digital-trust-2', 'atual-fnc'},
+    ):
         raise ValueError('Catálogo corporativo SB inválido; consulta negada.')
+    # Rodolfo's image authorizes these exact eight entries, not the entire company.
+    atual = next((c for c in companies if c.get('companyId') == 'atual-fnc'), None)
+    if atual is not None:
+        exact_ids = {'atual-fnc_' + slug for slug in (
+            'fcp-team', 'fincben', 'fincfrog', 'finchettin',
+            'fincpro', 'jupalu', 'naboojobs', 'sapogamer',
+        )}
+        rows = atual.get('publishers') or []
+        if len(rows) != len(exact_ids) or {p.get('publisherId') for p in rows} != exact_ids:
+            raise ValueError('Catálogo Atual FNC fora dos oito alvos autorizados; consulta negada.')
     hosts = set()
     for company in companies:
         for publisher in company.get('publishers') or []:

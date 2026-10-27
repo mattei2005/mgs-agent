@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-27T17:04:02-04:00",
+    "updated_at": "2026-10-27T17:04:25-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -892,6 +892,76 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "ares-shein-sla-performance-only-1564747521354629371",
+      "agent": "ares",
+      "type": "campaign-engine-maintenance",
+      "authority_message_id": "1564747521354629371",
+      "source_thread_id": "1564746043768311910",
+      "status": "active_offline_regression_verified",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/engine-v3/config.json#/shein_execution_sla",
+      "policy": "144 seconds performance target only; same authorized request can activate after technical delay without human reconfirmation",
+      "implementation": "/root/mgs-agent/scripts/ares_campaign_v3/activation.py",
+      "tests": "/root/mgs-agent/tests/test_shein_now_intent.py",
+      "validation": "/root/mgs-agent/reports/ares/shein-sla-1564747521354629371/validation.json",
+      "rollback": "/root/mgs-agent/reports/ares/shein-sla-1564747521354629371/rollback",
+      "tests_passed": 58,
+      "meta_writes": 0,
+      "gateway_restarts": 0,
+      "preserved": ["original request clock", "authority", "immutable manifests and IDs", "semantic and rendered media QA", "budget and bid", "commercial schedule", "quota", "pre-read and readback", "critical subset"]
+    },
+{
+      "id": "ares-sb-atual-fnc-exact-1564746487416623246",
+      "agent": "zeus",
+      "type": "exact_authorized_sb_catalog_reconciliation",
+      "source_message_ids": [
+            "1564745626388922459",
+            "1564746487416623246"
+      ],
+      "handoff_message_id": "1564746799074517123",
+      "status": "catalog_recovered_handoff_delivered",
+      "updated_at": "2026-10-27T21:09:33.684870+00:00",
+      "paths": [
+            "context/ares-asset-scope.md",
+            "data/ares/asset-scope.json",
+            "data/ares/sb-publisher-scope.json",
+            "data/mgs-domain-scope.json",
+            "scripts/ares-smartbidding-common.py",
+            "tests/test_mgs_ares_asset_scope.py",
+            "tests/test_ares_confidentiality_routes.py",
+            "tests/test_sb_atual_fnc_catalog_reconciliation.py",
+            "reports/ares/sb-catalog-1564744929660637264.json",
+            "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md"
+      ],
+      "evidence": "reports/ares/sb-catalog-1564744929660637264.json",
+      "validation": {
+            "sb_live_http": 200,
+            "exact_image_publishers": 8,
+            "ares_hosts_after": 60,
+            "tests_passed": 63,
+            "atena_meta_original_companies_preserved": true,
+            "extra_publisher_and_company_fail_closed": true,
+            "test_recovery": "Updated obsolete two-company assertion; confidentiality tests pass in actual Ares profile context (initial Zeus context caused four mocked Meta transport errors)."
+      },
+      "knowledge_registry_id": "ARES-SB-ATUAL-FNC-EXACT-20261027",
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/sb_catalog_recovery_1564746799074517123_before.json",
+      "report_infra_pending": false,
+      "no_campaign_billing_credential_changes": true,
+      "report_infra": {
+            "channel_id": "1498132022634483894",
+            "message_id": "1564747982199328881",
+            "readback_exact": true,
+            "content_empty": true,
+            "mentions": 0
+      },
+      "handoff": {
+            "channel_id": "1564744929660637264",
+            "message_id": "1564748074062975048",
+            "readback_exact": true,
+            "ares_mentioned": true,
+            "classification_still_owned_by": "ares"
+      }
+},
     {
       "id": "ares-sb-domain-documentation-1564745626388922459",
       "agent": "zeus",
@@ -60619,8 +60689,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 52907,
-      "md5": "e2a728d8f6a5a29e30ebfce9947ccdb6",
-      "modified_at": "2026-10-27T16:55:27-04:00"
+      "md5": "8205abc6bfc9cfdb9db7fa91080a660d",
+      "modified_at": "2026-10-27T17:04:28-04:00"
     },
     {
       "path": "/root/mgs-agent/data/browser-resource-budget.json",
@@ -61045,8 +61115,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 2894154,
-      "md5": "16183a8380787bddc177c162bf187834",
-      "modified_at": "2026-10-27T17:03:07-04:00"
+      "md5": "ad0a6dfc3c8b02837548becfe26c9206",
+      "modified_at": "2026-10-27T17:04:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -61794,9 +61864,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 23303,
-      "md5": "c4b22f157d767dc8e7ab06396fbd7fc3",
-      "modified_at": "2026-10-27T16:27:47-04:00"
+      "size_bytes": 23612,
+      "md5": "3a2dcb56216e582554dc5c1726fb5eb6",
+      "modified_at": "2026-10-27T17:04:24-04:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",

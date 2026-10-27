@@ -4,7 +4,7 @@ Status: canônico ativo. Autoridade: Rodolfo Mattei, mensagem `15621274271513397
 
 ## Limite e precedência
 
-A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digital Trust (`155263197283282`) e hosts corporativos cadastrados no catálogo Smart Bidding das companies `digital-trust` e `digital-trust-2`. O catálogo inclui publishers cadastrados, ativos ou inativos; acesso de usuário mais estreito não redefine o catálogo corporativo. Esta regra supersede para Ares o escopo geral baseado apenas no cadastro institucional de sites; Atena não muda.
+A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digital Trust (`155263197283282`) e hosts corporativos cadastrados no catálogo Smart Bidding das companies `digital-trust` e `digital-trust-2`, mais os oito publishers de `atual-fnc` explicitamente pedidos por Rodolfo e discriminados abaixo. O catálogo inclui publishers cadastrados, ativos ou inativos; acesso de usuário mais estreito não redefine o catálogo corporativo. Esta regra supersede para Ares o escopo geral baseado apenas no cadastro institucional de sites; Atena não muda.
 
 O app `minibot` (`1299247318762949`) permanece autorizado como dependência técnica, inclusive quando seu proprietário é outro portfólio. Ownership, aprovação, credencial ou capacidade técnica desse app não autorizam leitura/operação de contas, sites ou inventários do portfólio proprietário. Não revogar app, tokens ou permissões Meta neste cutover.
 
@@ -15,6 +15,21 @@ Rodolfo reafirmou na mensagem `1564745626388922459`, thread `1564744929660637264
 Pedidos genéricos como identificar quais sites rodam SHEIN devem começar pelo catálogo positivo do Ares (`list --agent ares` e `data/ares/sb-publisher-scope.json`) e pelas fontes operacionais autorizadas. A ausência de um domínio explícito nesse tipo de inventário não é motivo para recusa. SHEIN é uma vertical/produto, não um domínio-alvo. O cadastro na SB não prova, sozinho, que o site roda SHEIN: confirmar essa classificação com evidência operacional.
 
 Se houver evidência de cadastro corporativo SB que ainda não consta no snapshot local, tratar como pendência de atualização/readback por Zeus, não como prova de que o site não pertence à operação. Não contornar o checker nem enumerar provedores globais. Esta clarificação supersede a interpretação de que apenas o cadastro institucional geral comprova o escopo do Ares; não amplia o escopo da Atena, contas Meta, billing, credenciais ou Critical Subset.
+
+## Reconciliação exata — Atual FNC
+
+Autoridade rastreável: Rodolfo `1564745626388922459` (sites dentro da SB) e reiteração com a imagem `1564746487416623246`, thread `1564744929660637264`. Readback ao vivo da SB confirmou oito correspondências exatas na company `atual-fnc`; não são aliases de `digital-trust`. Evidência: `reports/ares/sb-catalog-1564744929660637264.json`. A antiga limitação do catálogo a apenas duas companies fica supersedida **somente para estes oito cadastros expressamente pedidos**; não incluir outro publisher dessa company por inferência. Cadastro SB comprova identidade/escopo, não comprova SHEIN nem concede contas Meta, billing, credenciais ou gates de write.
+
+- `Fcp-team` → `atual-fnc_fcp-team` → `fcp-team.com`
+- `Fincben` → `atual-fnc_fincben` → `fincben.com`
+- `fincfrog` → `atual-fnc_fincfrog` → `fincfrog.com`
+- `finchettin` → `atual-fnc_finchettin` → `finchettin.com`
+- `Fincpro` → `atual-fnc_fincpro` → `fincpro.com`
+- `Jupalu` → `atual-fnc_jupalu` → `jupalu.com`
+- `Naboojobs` → `atual-fnc_naboojobs` → `naboojobs.com`
+- `Sapogamer` → `atual-fnc_sapogamer` → `sapogamer.com`
+
+O checker e a projeção local incluem exatamente estes oito hosts para Ares; o escopo de Atena permanece inalterado. Demais cadastros de outras companies continuam fora do snapshot até pedido explícito e readback Zeus.
 
 ## Gate obrigatório anterior à ferramenta
 
