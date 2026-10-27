@@ -12193,6 +12193,26 @@
       },
       "id": "mgs-disaster-recovery-offsite-20260716",
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
+      "lock_contention_recovery_20261027": {
+        "source_message_id": "1564560553446215712",
+        "cause": "Full backup took 1101.472s and retained the exclusive lock until 04:33:56 EDT; hourly wait expired at 04:33:29 after 600s.",
+        "correction": "Bounded shared lock wait increased from 600s to 1800s, below verified live native script budget 3600s; exclusivity, schedules, credentials, storage and retention unchanged.",
+        "supersedes_active_lock_budget_of": "lock_contention_recovery",
+        "lock_timeout_seconds": 1800,
+        "regression_tests": "16 passed; real flock serialization/release and timeout; simulated 1050s overlap succeeds; 1800s bound enforced; old 600s behavior reproduced failing the new overlap test.",
+        "hourly_retry": {
+          "cron_id": "3ff8bd8ca40d",
+          "last_run_at": "2026-10-27T04:54:09.381355-04:00",
+          "last_status": "ok",
+          "failure_streak": 0,
+          "remote_file_id": "1uBuj-QXBxqjKIhdDpdgHCKYoboIh5FDX",
+          "remote_size_bytes": 1195015186,
+          "duration_seconds": 189.495
+        },
+        "verification": "Canonical Google SA helper exact GET readback quick/full: HTTP 200, ID, size, MD5, SHA256 property, placement, not trashed PASS; producer independent SA stream verification true; DR healthy=true issues=[].",
+        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/dr-recovery-1564560553446215712",
+        "status": "recovered_validated"
+      },
       "lock_contention_recovery": {
         "cause": "Daily full backup held the shared exclusive lock from 04:16 to 04:27 EDT; hourly backup at 04:24 failed immediately.",
         "correction": "Shared acquire_lock waits up to 600 seconds; exclusive serialization, schedules and retention preserved.",
