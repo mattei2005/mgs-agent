@@ -1,0 +1,25 @@
+{
+  "id": "ATENA-RAQUEL-EDITORIAL-AUTHORITY-1560305141431668887",
+  "canonical_key": "content.operations.raquel.editorial-batch-authority",
+  "owner": "Content Operations / Rodolfo Mattei",
+  "authority_discord_id": "344196393512075265",
+  "authority_message_id": "1560305141431668887",
+  "source_thread_id": "1560295338257023118",
+  "decision": "Raquel Oliveira é a gestora de conteúdo e está permanentemente autorizada a solicitar e liberar pedidos editoriais como este lote SEO e semelhantes. Não exigir nova aprovação de Rodolfo para a mesma rotina editorial.",
+  "application_to_current_request": "Rodolfo mandou executar após a exposição dos bloqueios de integração mínima dos quatro portais e inclusão das duas novas categorias no menu. Integrar com dados reais confirmados e concluir o lote de 58 artigos autorizado por Raquel, sem exigir nova autorização editorial.",
+  "within_scope": [
+    "Análise de nicho e categorias, pesquisa, pauta, produção e QA editorial",
+    "Criação de categorias e tags compatíveis com o briefing",
+    "Publicação editorial quando expressamente autorizada por Raquel",
+    "Integração mínima de portal MGS allowlisted necessária ao pedido, preservando configurações existentes e usando somente dados técnicos/identidade/credencial dedicados confirmados",
+    "Acionar apoio técnico para menus ou dependências que o perfil editorial não possa executar, sem transferir a Raquel a obrigação de renovar a autorização editorial"
+  ],
+  "limits_unchanged": [
+    "Identidade real e permissões vigentes em authorized-users.json; não promover outros usuários nem alterar o registry de acesso",
+    "Gate canônico de domínio e proibição de enumerar inventários globais",
+    "Critical Subset, credenciais, mudança de função, plugin/runtime e alterações estruturais seguem gates e escalonamento próprios",
+    "Dash financeira e Dash Router exigem pedido explícito de Rodolfo específico para ação e sistema",
+    "Não inventar valores críticos nem contornar site_key ausente com publicação REST direta antes da integração confirmada"
+  ],
+  "procedure_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md"
+}
