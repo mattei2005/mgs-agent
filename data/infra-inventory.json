@@ -893,6 +893,45 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ares-sb-member-authority-1564748349431881972",
+      "agent": "zeus",
+      "type": "standing_scoped_authorization_delegation",
+      "source_message_id": "1564748349431881972",
+      "source_thread_id": "1564744929660637264",
+      "canonical_source": "/root/mgs-agent/data/ares/sb-site-member-authority.json",
+      "paths": [
+        "/root/mgs-agent/data/authorized-users.json",
+        "/root/mgs-agent/context/permissions-matrix.md",
+        "/root/mgs-agent/context/ares-asset-scope.md",
+        "/root/mgs-agent/context/ares-operational-map.md",
+        "/root/.hermes/profiles/ares/SOUL.md",
+        "/root/mgs-agent/profiles/ares-soul.md",
+        "/root/mgs-agent/data/knowledge-registry.json"
+      ],
+      "status": "delegation_persisted_and_validated",
+      "summary": "Zeus pode autorizar pedidos de qualquer membro humano comprovado da origem Ares sobre qualquer site corporativo SB, sem novo OK de Rodolfo. Reconciliação de alvo SB comprovado incluída, com grants individuais limitados e gates críticos preservados.",
+      "validation": {
+        "policy_and_access_registry_readback": true,
+        "knowledge_schema_ok": true,
+        "unique_active_records": true,
+        "domain_scope_tests": 9,
+        "ares_asset_scope_tests": 13,
+        "soul_mirror_equal": true,
+        "gateway_wildcard_or_new_individual_grants_applied": false,
+        "new_SB_sites_eagerly_enrolled": false,
+        "campaign_or_credentials_modified": false
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1564749110303531164",
+        "readback_exact": true,
+        "content_empty": true,
+        "embed_count": 1,
+        "mentions": 0
+      }
+    },
+    {
       "id": "ares-shein-sla-performance-only-1564747521354629371",
       "agent": "ares",
       "type": "campaign-engine-maintenance",

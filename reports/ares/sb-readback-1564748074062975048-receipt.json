@@ -1,0 +1,23 @@
+{
+  "request_id": "SB-READBACK-1564748074062975048",
+  "state": "readback_verified_delivered_to_origin",
+  "projection_path": "/root/mgs-agent/reports/ares/sb-readback-1564748074062975048.json",
+  "projection_sha256": "62de54d9f85f6648a340bc76f68c9b1a737d31d47565979f93b2a2f42ace4797",
+  "validation": {
+    "exact_publishers": 8,
+    "http_201": 8,
+    "projected_rows": 6948,
+    "excluded_out_of_window_rows": 164,
+    "identity_rejections": 0,
+    "date_bounds_valid": true,
+    "publisher_set_equality": true,
+    "row_fields_allowlisted": true
+  },
+  "origin_message_id": "1564749364365099129",
+  "origin_channel_id": "1564744929660637264",
+  "exact_message_readback": true,
+  "ares_mentioned": true,
+  "functional_owner": "ares",
+  "next_step": "Ares classifies from projection and answers human in origin; downstream completion not yet verified",
+  "timestamp": "2026-10-27T21:15:39.229559+00:00"
+}

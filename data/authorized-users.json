@@ -300,6 +300,19 @@
         "read_only_audit"
       ],
       "authorization_policy": {
+        "sb_site_member_requests": {
+          "status": "active",
+          "access_level": "limited",
+          "canonical_source": "data/ares/sb-site-member-authority.json",
+          "authority_message_id": "1564748349431881972",
+          "source_thread_id": "1564744929660637264",
+          "authorized_by_discord_id": "344196393512075265",
+          "approval_authority": "zeus",
+          "new_rodolfo_approval_required": false,
+          "scope": "Any human member with proven live access to an Ares origin channel/thread may have an explicit request concerning any proven corporate SB site authorized by Zeus, without additional CEO approval. Apply an individual scoped grant, not a global whitelist promotion; existing critical and action-specific gates remain.",
+          "gateway_allowlist_unchanged": true,
+          "critical_subset_unchanged": true
+        },
         "creative_operations": "All authorized Ares users may operate Creative Ops.",
         "campaign_operations": "All authorized Ares users may operate Campaign Ops; Kelly is also a campaign manager and Geizian is authorized in both modules.",
         "sensitive_writes": "Budget, billing, credentials, pixel/CAPI and out-of-playbook production remain subject to their specific approval gates."

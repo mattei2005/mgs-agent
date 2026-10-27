@@ -3334,15 +3334,51 @@
         "zeus"
       ],
       "domain": "security",
-      "effective_at": "2026-10-27T21:08:11+00:00",
-      "id": "ARES-SB-ATUAL-FNC-EXACT-20261027",
+      "effective_at": "2026-10-27T21:13:52+00:00",
+      "id": "ARES-SB-ANY-REGISTERED-SITE-20261027",
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Qualquer site corporativo SB: Zeus reconcilia alvo comprovado sob delegação permanente de membros",
+      "updated_at": "2026-10-27T21:13:52+00:00"
+    },
+    {
+      "canonical_key": "permissions.ares.operational.asset_scope",
+      "canonical_source": "context/ares-asset-scope.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-27T21:08:11+00:00",
+      "id": "ARES-SB-ATUAL-FNC-EXACT-20261027",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-SB-ANY-REGISTERED-SITE-20261027",
       "title": "Ares: oito publishers Atual FNC explicitamente pedidos e confirmados na SB",
-      "updated_at": "2026-10-27T21:08:11+00:00"
+      "updated_at": "2026-10-27T21:13:52+00:00"
+    },
+    {
+      "canonical_key": "permissions.ares.sb_site_channel_members",
+      "canonical_source": "data/ares/sb-site-member-authority.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-10-27T21:13:52+00:00",
+      "id": "ARES-SB-SITE-MEMBER-AUTHORITY-20261027",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Zeus pode autorizar pedidos de qualquer membro da origem Ares sobre qualquer site SB sem novo OK do CEO",
+      "updated_at": "2026-10-27T21:13:52+00:00"
     },
     {
       "canonical_key": "ares.shein.reporting.ui-auth-recovery",
@@ -14778,5 +14814,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:10:42+00:00"
+  "updated_at": "2026-10-27T21:13:52+00:00"
 }

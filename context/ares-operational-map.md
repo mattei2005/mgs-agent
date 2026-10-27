@@ -10,6 +10,8 @@
 
 Escopo operacional obrigatório e mais restritivo: `context/ares-asset-scope.md` + `data/ares/asset-scope.json` — somente contas Digital Trust e hosts corporativos do catálogo SB; app técnico não amplia contas/domínios. Cadastro na SB basta para o escopo de sites do Ares, sem exigir cadastro editorial adicional. Pedidos de identificar sites por vertical (ex.: SHEIN) começam pelo catálogo positivo, não por recusa de domínio ausente. Reafirmação de Rodolfo: `1564745626388922459`.
 
+Delegação permanente `1564748349431881972`: Zeus pode autorizar pedidos de qualquer membro humano com acesso live comprovado à origem Ares sobre qualquer site cadastrado na SB, sem novo OK de Rodolfo. Autoridade canônica: `data/ares/sb-site-member-authority.json`; registro em `data/authorized-users.json`. Novos sites exigem readback exato e reconciliação do snapshot, não nova autorização do CEO. Preservar grant individual limitado, gates específicos e Critical Subset; não conceder acesso global Zeus/Atena.
+
 Antes de busca ampla por `drive`, `creative`, `reference`, `video`, `meta`, `campaign`, `UPLOAD`, `budget`, `roi`, `canva` ou nomes soltos, abrir este mapa e escolher a fonte específica.
 
 Busca ampla só quando a fonte indicada não existir, o termo for novo, houver auditoria de drift ou Rodolfo pedir para procurar em tudo.

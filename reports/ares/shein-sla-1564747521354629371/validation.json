@@ -16,6 +16,7 @@
   },
   "registry_id": "ARES-SHEIN-SLA-PERFORMANCE-ONLY-1564747521354629371",
   "supersedes": "ARES-SHEIN-SINGLE-CAMPAIGN-E2E-144-20261008",
+  "knowledge_regression": {"passed": 20, "failed": 1, "case": "KR-014", "cause": "pre-existing stale expected release_version 3.6.1; rollback and current config both 3.6.8; outside SLA maintenance scope", "schema_errors": []},
   "remaining_limitations": [
     "Offline transport verifies activation logic, not a new live campaign or serving",
     "Material schedule/scope decisions and all QA/authority/quota gates remain in force"

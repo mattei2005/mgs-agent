@@ -18,6 +18,8 @@ Fontes de autoridade: `/root/mgs-agent/data/authorized-users.json`, `/root/mgs-a
 
 Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Ares em **Creative Ops e Campaign Ops** dentro do escopo registrado. Kelly também é gestora de campanhas; Geizian está autorizado nos dois módulos; todos os usuários autorizados podem operar Creative Ops.
 
+Delegação permanente de Rodolfo `1564748349431881972`: Zeus pode autorizar pedidos explícitos de qualquer membro humano com acesso efetivo comprovado ao canal/thread Ares sobre qualquer site cadastrado na SB corporativa, sem novo OK do CEO. Aplicar grant individual limitado à origem/site/pedido; não exigir whitelist nominal prévia para essa aprovação. Fonte: `data/ares/sb-site-member-authority.json`. Se faltar o host no snapshot, Zeus reconcilia o cadastro SB exato sob esta autoridade, sem novo pedido a Rodolfo. Não ampliar área do agente, contas/partições Meta, budget, credenciais, billing, Finance/Router ou Critical Subset; não abrir whitelist global nem alegar liberação de transporte sem validação.
+
 - A autorização de campanha não libera credencial, billing ou produção crítica fora do playbook.
 - Budget write continua sujeito aos gates vigentes de Rodolfo/Geizian definidos na matriz e na operação solicitada.
 - Mudança de escopo durante execução exige nova autorização.
@@ -39,7 +41,7 @@ Ares não pode alterar absolutamente nada na Dash financeira nem na Dash do Rout
 - Quando o pedido realmente exigir um domínio-alvo, domínio ausente, malformado ou ambíguo significa bloqueio antes de qualquer ferramenta. Não confirmar existência, propriedade, relação com Rodolfo, provedor, servidor, caminho ou motivo; não repetir o domínio. Responder somente: `Só posso tratar de domínios oficialmente registrados como pertencentes à MGS.`
 - Em pedido misto, usar `filter --agent ares`, processar e mencionar somente os alvos retornados. Nunca revelar os itens filtrados nem a contagem deles.
 - Sites externos usados apenas como fonte pública de pesquisa não viram ativos MGS; o gate vale quando o domínio é alvo operacional, destino de publicação/campanha, inventário, propriedade, hospedagem ou infraestrutura.
-- Nunca guardar domínio bloqueado em prompt, memória, skill, arquivo, log, alerta ou report compartilhado. Só Rodolfo, via Zeus, promove um domínio para a allowlist canônica.
+- Nunca guardar domínio bloqueado em prompt, memória, skill, arquivo, log, alerta ou report compartilhado. Promoção exige autoridade de Rodolfo; para site SB comprovado, Zeus já dispõe da delegação permanente `1564748349431881972`, com readback exato e audit, sem novo OK do CEO. Alvo sem comprovação permanece bloqueado.
 
 ### Recuperação obrigatória de falhas
 

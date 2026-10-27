@@ -4,7 +4,7 @@ Status: canônico ativo. Autoridade: Rodolfo Mattei, mensagem `15621274271513397
 
 ## Limite e precedência
 
-A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digital Trust (`155263197283282`) e hosts corporativos cadastrados no catálogo Smart Bidding das companies `digital-trust` e `digital-trust-2`, mais os oito publishers de `atual-fnc` explicitamente pedidos por Rodolfo e discriminados abaixo. O catálogo inclui publishers cadastrados, ativos ou inativos; acesso de usuário mais estreito não redefine o catálogo corporativo. Esta regra supersede para Ares o escopo geral baseado apenas no cadastro institucional de sites; Atena não muda.
+A operação MGS do Ares é exclusivamente sobre contas de anúncio da BM Digital Trust (`155263197283282`) e hosts comprovadamente cadastrados no catálogo corporativo Smart Bidding. A autorização vigente de Rodolfo `1564748349431881972` abrange qualquer site SB, não apenas companies ou lotes já espelhados localmente; o snapshot continua sendo o conjunto positivo executável até cada reconciliação exata por Zeus. O catálogo inclui publishers cadastrados, ativos ou inativos; acesso de usuário mais estreito não redefine o catálogo corporativo. Esta regra supersede para Ares o escopo geral baseado apenas no cadastro institucional de sites; Atena não muda.
 
 O app `minibot` (`1299247318762949`) permanece autorizado como dependência técnica, inclusive quando seu proprietário é outro portfólio. Ownership, aprovação, credencial ou capacidade técnica desse app não autorizam leitura/operação de contas, sites ou inventários do portfólio proprietário. Não revogar app, tokens ou permissões Meta neste cutover.
 
@@ -18,7 +18,7 @@ Se houver evidência de cadastro corporativo SB que ainda não consta no snapsho
 
 ## Reconciliação exata — Atual FNC
 
-Autoridade rastreável: Rodolfo `1564745626388922459` (sites dentro da SB) e reiteração com a imagem `1564746487416623246`, thread `1564744929660637264`. Readback ao vivo da SB confirmou oito correspondências exatas na company `atual-fnc`; não são aliases de `digital-trust`. Evidência: `reports/ares/sb-catalog-1564744929660637264.json`. A antiga limitação do catálogo a apenas duas companies fica supersedida **somente para estes oito cadastros expressamente pedidos**; não incluir outro publisher dessa company por inferência. Cadastro SB comprova identidade/escopo, não comprova SHEIN nem concede contas Meta, billing, credenciais ou gates de write.
+Autoridade rastreável do lote histórico: Rodolfo `1564745626388922459` (sites dentro da SB) e reiteração com a imagem `1564746487416623246`, thread `1564744929660637264`. Readback ao vivo da SB confirmou oito correspondências exatas na company `atual-fnc`; não são aliases de `digital-trust`. Evidência: `reports/ares/sb-catalog-1564744929660637264.json`. Naquele lote foram incluídos somente os oito cadastros expressamente pedidos. A exigência de novo OK pessoal de Rodolfo para outros sites SB foi posteriormente supersedida pela delegação `1564748349431881972`, descrita abaixo; a exigência de readback exato permanece. Cadastro SB comprova identidade/escopo, não comprova SHEIN nem concede contas Meta, billing, credenciais ou gates de write.
 
 - `Fcp-team` → `atual-fnc_fcp-team` → `fcp-team.com`
 - `Fincben` → `atual-fnc_fincben` → `fincben.com`
@@ -29,7 +29,13 @@ Autoridade rastreável: Rodolfo `1564745626388922459` (sites dentro da SB) e rei
 - `Naboojobs` → `atual-fnc_naboojobs` → `naboojobs.com`
 - `Sapogamer` → `atual-fnc_sapogamer` → `sapogamer.com`
 
-O checker e a projeção local incluem exatamente estes oito hosts para Ares; o escopo de Atena permanece inalterado. Demais cadastros de outras companies continuam fora do snapshot até pedido explícito e readback Zeus.
+O checker e a projeção local incluem estes oito hosts para Ares; o escopo de Atena permanece inalterado. A reconciliação acima documenta o lote executado, não um teto permanente de autorização.
+
+## Delegação vigente — qualquer membro e qualquer site SB
+
+A decisão posterior de Rodolfo `1564748349431881972`, nesta mesma thread, supersede a exigência de novo pedido/OK pessoal do CEO para cada novo cadastro ou solicitante: Zeus pode autorizar pedidos explícitos de qualquer membro humano com acesso efetivo comprovado ao canal/thread Ares sobre qualquer site cadastrado na SB corporativa. Fonte canônica e limites: `data/ares/sb-site-member-authority.json`; registro de acesso em `data/authorized-users.json`. O escopo autorizado não se limita às companies e aos oito cadastros do snapshot histórico descrito acima.
+
+Para alvo SB ainda ausente do snapshot, Zeus comprova a correspondência exata no dashboard e reconcilia o cadastro positivo/guard sob esta autoridade permanente, sem pedir novamente a Rodolfo. Até concluir esse readback, não contornar o checker; ausência local é pendência de reconciliação, não exigência de nova autorização do CEO. Validar ID individual e permissões live, registrar o grant limitado à origem/site/pedido e preservar os gates da ação, Critical Subset, contas Meta, billing, credenciais, Finance/Router e escopo dos demais agentes.
 
 ## Gate obrigatório anterior à ferramenta
 

@@ -1503,12 +1503,12 @@
     {
       "agent": "ares",
       "id": "ARES-SB-SHEIN-1564744929660637264",
-      "next_step": "Zeus fornece projeção sanitizada de dados SB dos oito publishers exatos usando identidade própria autorizada, sem grant nem credenciais compartilhadas. Ares valida cobertura/identidade/datas, classifica SHEIN com evidência e responde na origem.",
+      "next_step": "Responder a Rodolfo com Fcp-team confirmado e limitações por grupo, fonte SB de 28/09 a 27/10/2026. Não ampliar janela/Meta/companies ou alterar campanhas. Pesquisa adicional nos inconclusivos depende de novo escopo solicitado.",
       "objective": "Identificar quais dos oito publishers Atual FNC da imagem operam SHEIN.",
-      "source": "reports/ares/sb-catalog-1564744929660637264.json;reports/ares/sb-shein-classification-1564744929660637264.json;discord:1564744929660637264/1564748074062975048",
-      "state": "cadastro reconciliado por zeus e evidência lida; gate 8/8 permitido. consultas operacionais canônicas sb retornaram http 403 em relatórios de dois publishers e pricing, mesmo após renovação automática da autenticação. classificação permanece indisponível, não negativa. novo handoff de readback operacional enviado a zeus e confirmado por get.",
+      "source": "reports/ares/sb-readback-1564748074062975048.json;discord:1564744929660637264/1564749394794782720",
+      "state": "análise concluída dentro do recorte disponível: projeção zeus validada por ares, 8/8 publishers http201 e 6948 linhas com identidades/datas verificadas. fcp-team confirma shein pela conta 01 - fcp - shein - us: 793 linhas explícitas, 762 com entrega, última 23/10/2026. fincfrog car; fincpro car/emp. naboojobs e sapogamer app/produtos sem prova suficiente de shein. fincben, finchettin e jupalu sem linhas no período. não afirmar ausência definitiva nem atividade hoje.",
       "thread_id": "1564744929660637264",
-      "updated_at": "2026-10-27T21:11:47+00:00"
+      "updated_at": "2026-10-27T21:16:09+00:00"
     },
     {
       "agent": "ares",
@@ -7522,5 +7522,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:12:46+00:00"
+  "updated_at": "2026-10-27T21:16:09+00:00"
 }
