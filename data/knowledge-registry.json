@@ -5493,6 +5493,25 @@
       "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
+      "canonical_key": "content.wordpress.public-canonical-cache-completion",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/targeted-cache-readonly-diagnostics.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations",
+        "zeus"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T16:54:39+00:00",
+      "id": "ATENA-AUTONOMOUS-PUBLIC-CACHE-1564683223232159856",
+      "kind": "procedure",
+      "owner": "Raquel Oliveira / Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Atena resolve cache e validação pública ponta a ponta sem encaminhamento rotineiro ao Zeus",
+      "updated_at": "2026-10-27T16:54:39+00:00"
+    },
+    {
       "canonical_key": "content.editorial.taxonomy.language-country-and-topics",
       "canonical_source": "data/atena/editorial-taxonomy-policy.json",
       "consumers": [
@@ -5524,10 +5543,10 @@
       "kind": "procedure",
       "owner": "Raquel Oliveira / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-AUTONOMOUS-PUBLIC-CACHE-1564683223232159856",
       "title": "Conclusão editorial somente na URL pública normal, com renovação seletiva de cache e escalada sem loops",
-      "updated_at": "2026-10-27T16:50:33+00:00"
+      "updated_at": "2026-10-27T16:54:39+00:00"
     },
     {
       "canonical_key": "content.operations.raquel.editorial-batch-authority",
@@ -14614,5 +14633,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:50:33+00:00"
+  "updated_at": "2026-10-27T16:54:39+00:00"
 }

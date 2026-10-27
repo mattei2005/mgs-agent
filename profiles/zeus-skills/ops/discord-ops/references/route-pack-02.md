@@ -1,3 +1,7 @@
+### Transporte literal de mensagens Discord
+
+Construa mensagens com Markdown e valores monetários como payload JSON literal em arquivo de trabalho ou em um programa Python, e entregue o JSON ao transporte por stdin com `subprocess.run(..., shell=False)`. Nunca coloque o texto da mensagem dentro de um `python -c` envolvido por aspas duplas no shell: backticks podem virar substituição de comandos e `$45` pode ser expandido, removendo nomes, parâmetros e valores antes do POST. Antes de enviar, valide comprimento e allowlist de mentions. Se o POST já tiver publicado conteúdo corrompido, não faça uma segunda cópia nem apague o histórico: edite a própria mensagem por ID e confirme igualdade exata do conteúdo via GET antes de declarar entrega concluída.
+
 ### Mentions cross-agent em canal de outro agente
 
 **Destinatário antes do handoff:** em thread compartilhada, uma continuação sem mention pode continuar dirigida ao agente executor da conversa. Não interpretar o simples recebimento pelo Zeus, nem “quando terminar, informa na thread”, como autorização para Zeus intervir ou encaminhar. Exigir pedido novo inequivocamente dirigido ao Zeus para coordenação/handoff; caso contrário, não publicar mensagens adicionais nem mencionar o executor.
