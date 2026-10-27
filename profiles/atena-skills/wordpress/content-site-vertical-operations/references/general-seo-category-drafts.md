@@ -258,6 +258,7 @@ Faça GET autenticado por ID com `context=edit` e compare contra o payload:
 Depois valide `content.rendered`:
 
 - diferencie tipografia do WordPress de alteração semântica: `wptexturize` pode converter apóstrofo ASCII em aspas curvas. Normalize somente essa tipografia e whitespace na comparação visual da primeira frase; mantenha a exigência de `content.raw` byte a byte;
+- ao comparar parágrafos com links ou ênfase inline, extraia o texto contínuo do elemento (`textContent` ou equivalente), sem inserir um espaço artificial entre todos os eventos `handle_data` do parser. Um espaço criado antes de vírgula após `</a>` produz falso bloco ausente; confirme a diferença no DOM e corrija o comparador, não o artigo correto;
 - detecte placeholders por marcadores delimitados, não por palavras comuns: um regex case-insensitive para `TODO` também encontra «todo» em espanhol e produz falso bloqueio;
 - remova IDs numéricos de citação dentro de links quando não existir lista correspondente; preserve a fonte contextual nomeada e seu href;
 - palavras/H2/parágrafos continuam na faixa;
