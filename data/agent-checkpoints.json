@@ -4962,6 +4962,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-us-app-1564672804484423801",
+      "next_step": "Congelar IDs/nomes por conta; validar transformação e invariantes; executar somente name com lease e readback; preservar bloqueios externos de históricos sem restaurar status.",
+      "objective": "Adicionar (US_APP) aos nomes de todas as campanhas SHEIN sem marcador, incluindo estados históricos, sem alterar outros campos.",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/us-app-audit-1564671291544313937.py",
+      "state": "autorizado: rodolfo 1564672804484423801. preparando inventário live e dry-run literal em 36 contas; nenhum write meta deste pedido iniciado.",
+      "thread_id": "1564665948882079774",
+      "updated_at": "2026-10-27T16:11:58+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-utm-audit-1559593111624220762",
       "next_step": "Nenhuma ação Meta pendente. Em nova conferência, separar PAUSED/ACTIVE do histórico ARCHIVED/DELETED e consultar estado live; não promover este encerramento para regra global fora do incidente.",
       "objective": "Localizar e conferir as duas utm_adgroup duplicadas do alerta SHEIN.",
@@ -7402,5 +7412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:06:12+00:00"
+  "updated_at": "2026-10-27T16:11:58+00:00"
 }

@@ -100,12 +100,21 @@
             "origin_agent": "atena",
             "origin_channel_id": "1496267571543019653",
             "canonical_source": "data/atena/editorial-manager-authority.json",
-            "description": "Autonomia permanente para conversar, decidir, solicitar e aprovar conteúdo e correções técnicas localizadas, seguras e reversíveis necessárias à entrega editorial em portais MGS autorizados; apoio técnico Zeus na origem Atena. Sem acesso global Zeus, Critical Subset ou demais áreas."
+            "description": "Autonomia permanente para conversar, decidir, solicitar e aprovar conteúdo e correções técnicas localizadas, seguras e reversíveis necessárias à entrega editorial em portais MGS autorizados; apoio técnico Zeus na origem Atena. Sem acesso global Zeus, Critical Subset ou demais áreas. Inclui pedidos atuais e futuros de limpeza de cache conforme adendo 1564671680444370955; escopo atual por URL, preservando gates críticos."
           },
           "authorized_by_discord_id": "344196393512075265",
           "authority_message_id": "1564661630766424096",
           "source_thread_id": "1564660286164570125",
-          "critical_subset_unchanged": true
+          "critical_subset_unchanged": true,
+          "cache_request_authority": {
+            "canonical_source": "data/atena/editorial-manager-authority.json#/cache_request_authority",
+            "authority_message_id": "1564671680444370955",
+            "source_thread_id": "1564289742567112795",
+            "permanent": true,
+            "current_and_future_requests": true,
+            "generic_editorial_approval_not_required": true,
+            "critical_subset_unchanged": true
+          }
         },
         {
           "discord_id": "344196393512075265",
@@ -193,7 +202,11 @@
           "name": "shein-g001",
           "manager": "Icaro",
           "manager_discord_id": "409878085807112207",
-          "sites": ["yolokfx.com", "vizioid.com", "mavroa.com"],
+          "sites": [
+            "yolokfx.com",
+            "vizioid.com",
+            "mavroa.com"
+          ],
           "purpose": "SHEIN US direct traffic Campaign Ops for G001-owned accounts and advertiser profiles"
         },
         "shein_g002": {
@@ -201,7 +214,11 @@
           "name": "shein-g002",
           "manager": "Geizian",
           "manager_discord_id": "321263240782807040",
-          "sites": ["yolokfx.com", "vizioid.com", "mavroa.com"],
+          "sites": [
+            "yolokfx.com",
+            "vizioid.com",
+            "mavroa.com"
+          ],
           "purpose": "SHEIN US direct traffic Campaign Ops for G002-owned accounts and advertiser profiles"
         },
         "shein_g003": {
@@ -209,7 +226,11 @@
           "name": "shein-g003",
           "manager": "Isliago",
           "manager_discord_id": "432898782188011543",
-          "sites": ["yolokfx.com", "vizioid.com", "mavroa.com"],
+          "sites": [
+            "yolokfx.com",
+            "vizioid.com",
+            "mavroa.com"
+          ],
           "purpose": "SHEIN US direct traffic Campaign Ops for G003-owned accounts and advertiser profiles"
         },
         "shein_g004": {
@@ -217,7 +238,11 @@
           "name": "shein-g004",
           "manager": "Joe",
           "manager_discord_id": "1214246869484576890",
-          "sites": ["yolokfx.com", "vizioid.com", "mavroa.com"],
+          "sites": [
+            "yolokfx.com",
+            "vizioid.com",
+            "mavroa.com"
+          ],
           "purpose": "SHEIN US direct traffic Campaign Ops for G004-owned accounts and advertiser profiles"
         },
         "shein_g005": {
@@ -225,7 +250,11 @@
           "name": "shein-g005",
           "manager": "Kelly",
           "manager_discord_id": "1291113428982693940",
-          "sites": ["yolokfx.com", "vizioid.com", "mavroa.com"],
+          "sites": [
+            "yolokfx.com",
+            "vizioid.com",
+            "mavroa.com"
+          ],
           "purpose": "SHEIN US direct traffic Campaign Ops for G005-owned accounts and advertiser profiles"
         },
         "shein_g006": {
@@ -233,7 +262,11 @@
           "name": "shein-g006",
           "manager": "Nicolas",
           "manager_discord_id": "1055570806945620030",
-          "sites": ["yolokfx.com", "vizioid.com", "mavroa.com"],
+          "sites": [
+            "yolokfx.com",
+            "vizioid.com",
+            "mavroa.com"
+          ],
           "purpose": "SHEIN US direct traffic Campaign Ops for G006-owned accounts and advertiser profiles"
         }
       },

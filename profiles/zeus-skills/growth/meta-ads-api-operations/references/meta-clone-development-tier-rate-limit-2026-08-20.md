@@ -51,7 +51,9 @@ Official source: https://developers.facebook.com/docs/marketing-api/access/
 
 ### 3. Native clone: asynchronous deep copy
 
-Use `POST /{campaign_id}/copies` with `deep_copy=true` and `status_option=PAUSED`. Meta permits up to 3 child ads synchronously and 51 asynchronously. For sources above the synchronous threshold, put the copies operation in `/{ad_account_id}/async_batch_requests`, poll the request set with bounded backoff, then use the returned source-to-copy ID map for precise patches and readback.
+Use `POST /{campaign_id}/copies` with `deep_copy=true` and `status_option=PAUSED`. Derive the synchronous limit from the live response, not an assumed count of child ads: a real 1-campaign/1-adset/3-ad source returned `100/1885194`, stating that the total campaigns, adsets and ads must be fewer than 3. Reconcile all account campaign IDs and returned IDs before changing transport. Never shrink the approved hierarchy merely to fit that threshold.
+
+For a single deep-copy operation, use the documented Graph-root `asyncbatch` shape (`method`, `relative_url`, `name`, URL-encoded `body`) and persist `async_sessions[].id` before polling the session's `status`, `percent_completed`, `result` and `error_code`. The account `async_batch_requests`/`adbatch` surface can reject a one-element batch with code `194` (`param adbatch has too few elements`); do not pad it with another campaign write. A returned async session ID proves submission, not successful copying. Parse its real result and preserve any copied IDs before normalization/readback. Repeated terminal `FAILED`, transient code `2` remains a generic Meta failure, not proof of a profile advertising restriction or successful write capability. Permit only bounded retry after a complete no-new-ID reconciliation, never blind resubmission.
 
 Official sources:
 
