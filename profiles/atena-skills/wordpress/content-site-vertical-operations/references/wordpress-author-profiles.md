@@ -97,6 +97,15 @@ Após cada write, confirme:
 
 A página pública complementa, mas não substitui, o readback autenticado: tema/cache pode ocultar ou transformar campos. Quando houver cache, use cache-buster/no-cache antes de concluir.
 
+## Diagnóstico de biografia em portal multilíngue
+
+- Comprove suporte e mapeamento no código instalado antes de propor chaves localizadas; inspecione somente usermeta de descrição da identidade própria autorizada e capture Reflection/linhas/SHA-256 dos métodos pertinentes e callbacks de `get_user_metadata`/`get_the_author_description`.
+- Diferencie campo de formulário e chave persistida: o idioma padrão pode usar `description` mesmo quando o formulário usa um sufixo. Mudar a bio desse idioma pode ser inseparável de mudar a bio global; preservar configuração de idioma/locale não significa preservar o valor da bio padrão.
+- Inspecione o save nativo antes de usá-lo como transporte parcial: um handler que percorre todos os idiomas e trata campos omitidos como vazio pode apagar outra bio ou criar linhas vazias. Não invoque hooks artificialmente nem use esse save para prometer zero escrita em idiomas preservados.
+- Registre separadamente campo nativo implementado, linha de usermeta existente e registro REST. Linha ausente não exige necessariamente plugin/registro novo, mas suporte nativo também não comprova endpoint REST localizado nem concede autorização de write.
+- Em probes guardados, registre o idioma efetivamente resolvido por `pll_current_language()`. Alterar apenas REQUEST_URI e continuar no idioma padrão não valida o frontend localizado; mantenha essa limitação explícita, sem forçar runtime/locale para fabricar aprovação.
+- Preserve diagnóstico como somente leitura: nenhum save de teste, novo registro de strings, plugin/hook/config/role/runtime. Se faltar rota comprovada ou se o pedido exigir separar armazenamentos que o código nativo compartilha, encaminhe somente essa dependência a Tech.
+
 ## 6. Relatório
 
 Separe:
