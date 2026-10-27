@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "policy_id": "ARES-REPORT-SHEETS-DEFAULT-EDITORS-1564658329366700234",
+  "canonical_key": "ares.reporting.google-sheets.default-editors",
+  "status": "active",
+  "owner": "Rodolfo Mattei",
+  "authorized_by_discord_id": "344196393512075265",
+  "source_thread_id": "1558147479432601670",
+  "source_message_id": "1564658329366700234",
+  "scope": "Google Sheets de relatórios de Campaign Ops criados pelo Ares a pedido de gestores autorizados, semelhantes a Intraday e histórico de performance. Revisões supervisionadas por Rodolfo no mesmo pedido também estão cobertas.",
+  "auth_mode": "service_account",
+  "service_account_email": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+  "project_id": "mgs-core-prod",
+  "shared_drive_id": "0AEwt4Ye690ocUk9PVA",
+  "permission_type": "user",
+  "permission_role": "writer",
+  "grant_scope": "individual_spreadsheet_file_only",
+  "default_editors": [
+    "mattei2005@gmail.com",
+    "geizianpereira@gmail.com"
+  ],
+  "scoped_additions": [
+    {
+      "manager_code": "G006",
+      "manager_discord_id": "1055570806945620030",
+      "requester_discord_id": "1055570806945620030",
+      "context_requirement": "Pedido do Nicolas em canal ou thread cujo binding canônico da operação/relatório identifique Nicolas como gestor G006. Validar remetente e origem reais, não apenas display name ou rótulo do canal.",
+      "editors": [
+        "newnicolasholanda@gmail.com"
+      ]
+    }
+  ],
+  "current_pending_file_application": {
+    "spreadsheet_id": "1QbGJXNZJlJM0Ljn5NCaHBFSZeJo23eyc2M1tSx3XyUg",
+    "pending_request_message_id": "1564657637864247337",
+    "editors": [
+      "mattei2005@gmail.com",
+      "geizianpereira@gmail.com",
+      "newnicolasholanda@gmail.com"
+    ],
+    "reason": "Autorização de Rodolfo resolve o pedido pendente do Nicolas e aplica os editores padrão à planilha do mesmo diálogo."
+  },
+  "reconciliation": {
+    "preserve_existing_writer_or_higher": true,
+    "do_not_downgrade_inherited_permissions": true,
+    "read_before_write": true,
+    "readback_exact_permission_required": true,
+    "ambiguous_post_requires_readback_before_retry": true,
+    "notify_new_recipient": true
+  },
+  "exclusions": [
+    "Não adicionar membros ao Shared Drive nem conceder acesso a pastas, raiz ou outros arquivos.",
+    "Não criar acesso público, anyone, domain-wide ou link público.",
+    "Não compartilhar em massa relatórios anteriores; aplicar prospectivamente, exceto a planilha pendente identificada acima.",
+    "Não adicionar outros e-mails nem presumir os e-mails de outros gestores sem autorização própria.",
+    "Não alterar o cadastro global de usuários, privilégios dos agentes, billing, credenciais, Meta, campanhas ou recorrência.",
+    "Preservar o acesso herdado já suficiente; não duplicar grants nem reduzir organizer a writer."
+  ],
+  "supersedes": null
+}

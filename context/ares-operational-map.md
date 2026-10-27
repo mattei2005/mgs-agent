@@ -41,6 +41,7 @@ Inventário unificado                    /root/mgs-agent/data/ares/creative-ops/
 Intake Drive read-only                  /root/mgs-agent/scripts/ares-drive-upload-manual-inventory.py
 Dados Meta Ads                          /root/mgs-agent/data/ares/meta-ads/
 Relatórios gerais Meta / billing         meta-ads-account-visualization/references/scoped-generic-reporting.md; scripts/ares-scoped-report.py
+Planilhas Google de relatórios          xlsx/references/mgs-google-sheets-report-export.md; editores padrão: data/ares/reporting/google-sheets-sharing-policy.json
 Catálogo positivo SB                    /root/mgs-agent/data/ares/sb-publisher-scope.json; ares-smartbidding-common.py sem catálogo HTTP global
 Scripts Ares                            /root/mgs-agent/scripts/ares-*
 Logs Ares                               /root/.hermes/profiles/ares/logs/
