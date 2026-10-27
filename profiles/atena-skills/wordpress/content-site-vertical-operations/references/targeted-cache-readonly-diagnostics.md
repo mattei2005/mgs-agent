@@ -44,6 +44,14 @@ No parser do corpo publicado, exclua também o contador `Post Views` injetado pe
 2. Leia as opções e os eventos realmente cobertos pela implementação instalada. Uma opção de limpeza ao atualizar posts não comprova invalidação após mudança de biografia, nem cobertura de categorias, paginação ou XMLs; confirme cada dependência na URL normal após o evento correspondente.
 3. Distinga reparo pontual de prevenção: renovar uma cópia antiga comprova somente aquele reparo. Só declare recorrência corrigida depois de exercitar o acionamento automático no escopo autorizado e observar a nova versão pública; mudança de configuração ou integração mantém seus próprios gates.
 
+## Cache de borda sem acesso SSH à origem
+
+Quando o diagnóstico apontar uma camada de borda e faltar uma rota SSH certificada, continue a investigação pelas fontes canônicas e pela API seletiva aprovada, em vez de declarar a origem insolúvel. Confirme a zona exata e o escopo da identidade/credencial pelo fluxo oficial, consultando somente os domínios-alvo; credencial válida em uma conta não comprova acesso à zona em outra. Não invente zone-ID, servidor ou webroot e nunca registre o segredo.
+
+Antes de invalidar, confirme os efeitos da API e grave uma intenção com a lista literal de URLs. Quando o mecanismo aprovado aceitar `files`, envie somente os alvos comprovadamente antigos; não use limpeza global, host, prefixo ou wildcard. Valide as mesmas URLs normais depois da operação, com a alteração editorial esperada presente e, quando expostos, os estados de cache antes/depois. Um ciclo HIT antigo → MISS atualizado → HIT atualizado pode comprovar renovação pela borda, mas não autoriza afirmar exclusão local nem correção da causa de recorrência. Compare também os campos protegidos antes/depois e encerre somente os gates demonstrados.
+
+Se a listagem atualizada já contém os artigos, mas o canonical continua errado também na representação fresca ou REST, trate isso como defeito nativo de SEO separado. Não repita purge para mascará-lo: investigue e corrija somente o campo/objeto exato coberto pela autoridade, preservando home/siteurl, demais termos e configurações globais. A presença em categoria pode ser comprovada sem que todo o QA da categoria ou do artigo esteja concluído.
+
 ## Preflight somente leitura
 
 - Faça gate do domínio antes de consultar host, credencial ou endpoint; use somente os owners/webroots/pins confirmados. Não execute inventário global ou `nginx -T` para resolver um único vhost.
