@@ -2,6 +2,10 @@
 
 Use when AdOps attributes poor `rec_top` performance to fast scrolling, missing subtitles, or title/CTA layout.
 
+## First resolve the layout question
+
+When the owner says the ad appears before/after the subtitle or differs from a reference site, compare that exact spatial order first: title → ad container → subtitle → CTA. Use the same device and traffic parameters on both pages, inspect actual inserted nodes and geometry, and state any no-fill or missing-slot limitation. Do not replace a placement check with a broad viewability/revenue investigation or demand GAM reports to answer DOM order. Keep the user-facing answer short; only expand into performance causality if that remains the actual question.
+
 ## Separate mechanisms from demonstrated causes
 
 - Google display viewability normally requires at least 50% of the creative in the viewport for one continuous second; large-format exceptions exist. Cite https://support.google.com/admanager/answer/4524488 and https://support.google.com/admanager/answer/6123466. Google specifically notes that immediate scrolling and late lazy loading can reduce top-slot viewability.
