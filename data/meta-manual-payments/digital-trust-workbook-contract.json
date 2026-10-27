@@ -153,7 +153,13 @@
     "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T210404926476/closure.json",
     "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
   },
-  "pending_card_history": {"status": "pending_historical_instrument", "account_ids": ["1543098427832443"], "reason": "new_generic_payment_since_pc1_proof; D preserved, no classification from default/event"},
+  "pending_card_history": {
+    "status": "pending_historical_instrument",
+    "account_ids": [
+      "1543098427832443"
+    ],
+    "reason": "new_generic_payment_since_pc1_proof; D preserved, no classification from default/event"
+  },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
     "resolved_account_ids": [
