@@ -41,6 +41,15 @@ Autenticação válida, permissão declarada e ativação do `site_key` são res
 4. Mantenha esse item no manifesto e retome seus IDs; o piloto não autoriza publicação quando o briefing pede apenas draft nem cria justificativa para excluir um post de teste extra.
 5. Use helpers parametrizados pelo manifesto vigente, não dependências físicas de diretórios de trabalho de um lote anterior. Preserve a versão já exercitada e valide contagem, identidade e idioma na cópia reutilizável antes de executá-la.
 
+### Revisão paralela e reconciliação antes do primeiro upload
+
+1. Reconcilie `expected_ids` do manifesto com os `local_id` lidos nos JSONs. Exija igualdade dos conjuntos, ausência de IDs repetidos e corpo completo por item; contar arquivos ou somar resumos dos redatores pode ocultar uma falta compensada por duplicidade.
+2. Execute o contrato determinístico sobre cada JSON exato e registre contagens, limites de campos e evidências. Classifique esse resultado como validação local, não como revisão editorial independente nem comprovação de publicação.
+3. Distribua a revisão independente em faixas exclusivas e defina um contrato único de saída antes da delegação: `articles` com `local_id`, `decision` (`approved` ou `blocked`), `article_sha256`, `findings`, `corrections`, `limitations` e `sources_checked`. Preserve snapshots antes das correções e gere o hash somente após revalidar o JSON final. Use o mesmo algoritmo e serialização determinística no revisor e no consumidor; duas serializações diferentes do mesmo objeto produzem hashes distintos.
+4. Mantenha redação/revisão, imagem e preflight técnico com ownership separado. Enquanto revisores editam os artigos, registre melhorias de prompts e composição em overrides próprios da frente visual; não sobrescreva o JSON compartilhado para ajustar somente a imagem. A geração local pode avançar em paralelo, mas o upload continua condicionado ao texto final aprovado e ao QA visual final do responsável.
+5. Ao consolidar os retornos, releia os relatórios e os arquivos finais, compare os conjuntos de IDs e confira os hashes atuais. Revalide apenas as aprovações invalidadas por mudanças; não aceite o relato do trabalhador como substituto da prova nem reescreva os itens já corretos.
+6. Antes de liberar writes, exercite o bloqueio sem realizar upload: aprovação ausente, decisão bloqueada ou hash divergente deve impedir a operação. Registre separadamente esse teste negativo, o preflight somente leitura e o canário real; testar o guard não comprova que criação, persistência de scores ou publicação funcionaram.
+
 ## Entrega exclusivamente local, quando expressamente solicitada
 
 Quando o briefing limitar a tarefa a JSONs locais, aplique o gate de domínio e use a REST pública para inventário; não consulte vault, não teste credenciais, não crie categoria e não altere configuração para produzir texto. Registre separadamente a cobertura pública completa e a impossibilidade de inventariar drafts/privados. A ausência de acesso a `excerpt.raw` deve permanecer explícita: `excerpt.rendered` pode ser fallback automático e não prova que o raw esteja preenchido.

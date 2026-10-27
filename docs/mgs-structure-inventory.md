@@ -7,6 +7,12 @@
 
 ---
 
+## Retomada editorial — lote100 Raquel
+
+- Autoridade: Raquel Oliveira, mensagens `1564353146120310928` e `1564463858796593215`, thread `1564289742567112795`; produzir/publicar/validar os mesmos 100 artigos do manifesto aprovado, sem novo lote. Gate canônico reconfirmou os 35 portais; nenhum alvo externo foi incorporado.
+- Workspace e adaptadores locais exclusivos da tarefa: `/root/.hermes/profiles/atena/work/seo100-1564353146120310928/`. Novo `publish_batch_v2.py` é manifest-scoped, retomável por recibos/intenções e bloqueia uploads/criação sem revisão independente do hash exato e aprovação visual final do responsável. Não altera runners compartilhados, configuração de sites, credenciais, função, plugins/runtime, locale global, menus ou cache.
+- Pré-execução exercitada: 100 JSONs únicos com corpos completos passaram no contrato local; mínimo alfabético 1003 e nenhum parágrafo longo idêntico entre artigos. Guard de publicação bloqueou corretamente na ausência da revisão independente. Transporte autenticado somente leitura e consultas `status=any` revalidados em três contextos; zero write remoto nesta etapa. Revisão independente, imagens e inspeção nativa seguem em frentes separadas; o checkpoint `atena-seo-plan-1564289742567112795` conserva o estado vigente, sem declarar publicação ou notas antes do readback.
+
 ## Aprovação editorial condicionada — lote58 Raquel
 
 - Autoridade: Raquel Oliveira, mensagem `1564263729707614330`, thread `1560295338257023118`. Fonte canônica `data/atena/seo-mass-1560295338257023118/approval-1564263729707614330.json`: aprovação editorial com ajustes visuais e técnicos pendentes; sem próximo lote.
