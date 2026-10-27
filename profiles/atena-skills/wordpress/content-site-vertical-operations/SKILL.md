@@ -47,6 +47,8 @@ Se o site key existente conflitar com o pedido atual:
 
 Antes de criar ou reutilizar um `site_key`, resolva a tupla **domínio exato + idioma + país + vertical** para um único contexto compatível. Não selecione o primeiro registro do domínio: um portal pode atender mercados e idiomas diferentes. Registre a rota por artigo e mantenha o ID da categoria explícito no manifesto; `default_category` não substitui essa resolução.
 
+Ao revalidar um alvo cujo registro canônico mudou de posição, resolva-o pelo identificador imutável e pelo hash exato já aprovado, dentro da coleção canônica indicada. Exija ocorrência única e confira domínio, instalação, owner e caminho; registre a nova posição em um binding local sem editar a evidência histórica. Não use o índice do array como identidade nem aceite apenas coincidência de domínio, pois inserções deslocam registros sem mudar seu conteúdo. Se o conteúdo/hash mudou de fato, reconcilie a mudança antes de operar; não repine nem desative o guard para fazê-lo passar.
+
 Ao criar uma variação para novo país/idioma/vertical:
 
 - preserve o key existente sem alteração destrutiva;
@@ -186,6 +188,14 @@ Antes de escalar o lote, monte uma matriz por portal com identidade/capacidades 
 Monte um manifesto por portal com idioma, categoria exclusiva, quantidade de artigos, mínimo de palavras, posição da imagem, relação entre imagem interna e destacada, fontes externas e status solicitado. Exigências explícitas do briefing prevalecem sobre o padrão inferido do corpus; não reduza um mínimo de palavras nem altere a posição da imagem para imitar referências mais curtas. Não confunda rascunho no WordPress com arquivo local de texto.
 
 Vincule a revisão editorial independente à revisão exata do artigo e a aprovação visual final do responsável ao caminho, variante e hash da imagem. Bloqueie o primeiro upload se faltar uma dessas aprovações ou se os arquivos tiverem mudado; um sinalizador genérico de lote não comprova os bytes que serão enviados. Em trabalho paralelo, atribua faixas exclusivas de artigos aos revisores e mantenha ajustes de conceito visual em arquivo separado, evitando que dois trabalhadores sobrescrevam o mesmo JSON. Consulte a receita de revisão paralela em `references/general-seo-category-drafts.md`.
+
+### Retomada para concluir um lote autorizado
+
+Ao receber ordem para concluir, recupere o manifesto, os recibos e as provas atuais e transforme o saldo em etapas executáveis. Termine a primeira etapa ainda não comprovada; não substitua publicação, correção ou QA por outra rodada de planejamento, documentação, readiness ou encaminhamento. Um adaptador local que só passa em testes negativos não comprova publicação. Se um contrato antigo exigir um executor que já não é o responsável autorizado, adapte explicitamente a proveniência da prova ao ownership vigente, preservando os controles reais; não invente callback de outro agente nem mantenha uma espera artificial por ele.
+
+Antes de paralelizar, atribua um único writer por alvo e tipo de alteração, calcule em código a união e as interseções das faixas e reserve a integração do relatório a um executor. Se o pedido abranger outra thread, leia a continuidade dela antes de criar trabalho: preserve o writer já ativo, vincule a nova ordem e mantenha resultados separados por lote, pois uma nova conversa não é um novo conjunto de artigos.
+
+Comunique somente resultado material, decisão necessária ou entrega. Não repita confirmações de execução a cada callback. Só apresente bloqueio quando a operação exata estiver impedida: explique alvo, causa comprovada e decisão necessária, sem ressalva genérica que faça a rotina parecer parada.
 
 ### Planejamento nominal e revisão de escopo
 
