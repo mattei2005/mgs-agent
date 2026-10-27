@@ -4,12 +4,25 @@ Use this branch when public evidence is insufficient and no approved SSH route e
 
 ## Decision order
 
-1. Use public/origin probes for behavior that does not require authentication.
-2. Use an existing WordPress application password for authenticated REST reads.
-3. Use an existing WordPress administrator credential for read-only admin pages that REST does not expose.
-4. Propose a temporary provider SSH credential only after the REST/admin evidence is exhausted and the complete one-shot collector is frozen.
+1. Fix the literal domain, exact target URLs, requested operation and current executor. Distinguish an access-only inquiry from authority to carry out the maintenance; keep an existing operator in place.
+2. Read the domain's current canonical site/access record and its referenced infrastructure artifacts. Use historical notes only as leads and do not infer a native endpoint from a public warning path.
+3. Use public/origin probes for behavior that does not require authentication, then an existing WordPress application password for authenticated REST reads.
+4. Use an existing approved admin session or credential-fill route for read-only admin pages only when that inspection is authorized and necessary; do not open or clone a protected browser profile merely because it is listed in inventory.
+5. For an existing-access-only request, stop after a bounded capability certificate when the requested operation remains unavailable. Do not turn the lookup into installation, a snippet, credential creation, account elevation, a login workaround or maintenance execution.
+6. Consider temporary provider SSH only under a separate provisioning scope, after the existing REST/admin evidence is exhausted and the complete one-shot collector is frozen. An existing-access-only request does not authorize that fallback.
 
-Never use REST or admin login to bypass Critical confirmation for credentials, file deletion, vendor-code replacement, firewall changes, or destructive database work.
+Resolve confirmation authority from the current canonical policy. Preserve the applicable credential, file-deletion, vendor-code, firewall and destructive-database gates without resurrecting a superseded CEO-only gate for an explicitly delegated operation.
+
+## Certify existing maintenance access without taking over execution
+
+1. **Resolve only relevant credential references.** Use the approved Service Account wrapper, for example `mgs-op-with-service-account.sh item get '<exact-item>' --vault '<vault>' --format json`, capturing the result in process memory. If metadata discovery is needed, filter by the literal domain, intended application and credential category before fetching item contents. A matching domain in a broadcast/dashboard item is not a hosting-access candidate; omit those unrelated records from the evidence.
+2. **Prove the existing identity using GETs.** Read `/wp-json/wp/v2/users/me?context=edit` and `/wp-json/`; compare the returned user ID/roles and `home`/site URL against the requested installation. Inspect `/wp-json/wp/v2/plugins` only as needed for the installed maintenance component. Record status, identity and component metadata, never Authorization headers or raw credential objects.
+3. **Check coverage, not just the role name.** Inspect the advertised route index and, when available, GET `/wp-json/wp-abilities/v1/abilities`. Record the actual returned names/count and pagination rather than a remembered inventory. A site-health cache test, an unrelated vendor cache endpoint or read-only site/user/SEO abilities do not prove origin filesystem access or selective page-cache invalidation. Do not run an ability merely to discover its existence.
+4. **Certify the operation's complete native chain.** Require a referenced existing transport, actual host, current webroot, filesystem owner, matching WordPress installation identity, and coverage for each required stage: read exact cache objects, create a private hash-verified backup, invalidate only the approved regenerable objects and read back the literal canonical URLs. Keep an unproved stage explicitly uncertified; REST Administrator authentication alone cannot fill these fields.
+5. **Return a bounded capability receipt.** Include exact URLs, certified transport and secret-free 1Password/helper references, proved identity, required stages covered or missing, evidence pointers and the unchanged production executor. Keep host/webroot/owner null when not established. Do not issue guessed SSH connections, reinterpret a warning as a binding or treat an old authenticated-browser marker as current proof.
+6. **Escalate only the missing provision.** State that no suitable route was certified in the consulted sources, not that none can exist. Ask for the one existing maintenance-channel reference and its identity proof. Name the accountable internal technical owner separately from the hosting credential custodian, and label the custodian unknown if the sources do not identify them. Do not ask again for editorial/cache approval that is already valid.
+
+This procedure certifies access and produces a handoff receipt; it does not establish a repair method when no suitable transport was found.
 
 ## 1Password handling
 
@@ -20,18 +33,15 @@ Never use REST or admin login to bypass Critical confirmation for credentials, f
 
 ## Read-only WordPress admin collection
 
-When an owned WordPress login has an image CAPTCHA:
+When an authorized WordPress inspection requires browser authentication:
 
-1. Fetch `wp-login.php` and preserve that HTTP session.
-2. Extract the CAPTCHA data URI from the form.
-3. Classify it locally with a bounded OCR retry loop; `ddddocr` is a practical in-process engine for small generated CAPTCHA images.
-4. Submit username, password, CAPTCHA answer, hidden form fields, redirect target, and test cookie through the same session.
-5. Require both a `/wp-admin` destination and a `wordpress_logged_in*` cookie before collecting evidence.
-6. If WPS Hide Login or an equivalent plugin makes the stored `/wp-admin/` URL return a themed `404`, resolve the authorized custom login option in-process through an existing internal read route; never print or persist the hidden slug. If no internal route exists and 1Password lacks the exact URL, stop rather than probing guessed paths.
-7. If the password step leads to a 2FA challenge, resolve the saved OTP in-process from the same 1Password item, submit it through the same session, and never log the code or cookies.
-8. Retry only a CAPTCHA-specific failure; stop on credential, policy, lockout, or unexpected-host errors.
+1. Open only the certified login URL using the approved browser/profile route and preserve its exclusive lock. Use the approved credential-vault fill mechanism for passwords and supported codes; never type or paste them through DOM automation, shell arguments or the clipboard.
+2. If a CAPTCHA appears, have the user complete it in the browser. Do not OCR, solve, bypass or repeatedly submit the challenge automatically.
+3. Verify the expected authenticated account and actual WordPress admin UI before collecting read-only evidence. A successful REST application-password request does not establish a browser cookie session; do not serialize session cookies as a bridge.
+4. If a hidden-login plugin makes the stored admin URL return a themed `404`, resolve the exact authorized login route from a current canonical reference or existing internal read route. If neither supplies it, stop rather than probing guessed paths.
+5. Stop on credential failure, lockout, unexpected-host redirects or an unsupported authentication challenge. Do not disable CAPTCHA, weaken 2FA, change roles or create SSH access merely to collect admin evidence.
 
-Do not disable CAPTCHA or create SSH access merely to read update/cache state.
+An access-only inquiry that excludes a new login must remain a lookup even when valid administrator credentials exist.
 
 ## Exact update inventory
 
