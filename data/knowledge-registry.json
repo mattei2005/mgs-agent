@@ -3239,6 +3239,23 @@
       "updated_at": "2026-10-08T00:15:52+00:00"
     },
     {
+      "canonical_key": "ares.reporting.google-sheets.scoped-snapshot-export",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/productivity/xlsx/references/mgs-google-sheets-report-export.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.reporting.google-sheets",
+      "effective_at": "2026-10-27T15:05:07+00:00",
+      "id": "ARES-NATIVE-SHEETS-REPORT-EXPORT-20261027",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Exportacao nativa de relatorio preservado: SA corporativa, duas abas filtraveis e readback integral",
+      "updated_at": "2026-10-27T15:05:07+00:00"
+    },
+    {
       "canonical_key": "growth.openzedfinanzas.es-cc-es-03.discord-route",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -14470,5 +14487,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T10:37:52+00:00"
+  "updated_at": "2026-10-27T15:05:07+00:00"
 }
