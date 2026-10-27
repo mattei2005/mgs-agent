@@ -1712,6 +1712,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G006-ALL-HISTORY-1564645424672022590",
+      "next_step": "Nenhuma execucao pendente. Eventual revisao/reativacao exige novo pedido explicito; nao reativar pelo ranking.",
+      "objective": "Intraday pontual de todas as campanhas com entrega historica; pausadas com algum dia fechado de ROI real >40%, sem alterar formato ou campanhas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/reports/shein-all-history-1564645424672022590",
+      "state": "complete_get_verified: 302 campanhas (44 active,236 paused,22 archived);155 pausadas >40%;85 mensagens verificadas;historico em8janelas7d;61 roi acumulado pre-pausa>40%,59 com dia da pausa<40%. cronologia15/28 inconclusiva;3 picos com gasto<usd1;diferencausd0.14 entre agregacoes meta somente5ativas.170 testes renderer aprovados. nenhum write meta/cron/budget. skill procedimental atualizada, sem regra analitica.",
+      "thread_id": "1558147479432601670",
+      "updated_at": "2026-10-27T14:52:32+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-GEIZIAN-AUTHORITY-FIX-1558217596346835120",
       "next_step": "Sem pendência. Zeus validou independentemente a correção, 167 testes, live Meta e refresh Ares-only. prompt_pin do turno real G002 corresponde ao YAML normalizado; autoridade SHEIN e late_recovery_review consumidos; não repetir criação/ativação.",
       "objective": "Corrigir bloqueio de autoridade SHEIN Geizian e validar retomada C007 sem nova copia",
@@ -7362,5 +7372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T12:56:56+00:00"
+  "updated_at": "2026-10-27T14:52:32+00:00"
 }
