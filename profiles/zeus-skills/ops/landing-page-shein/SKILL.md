@@ -142,6 +142,13 @@ Se o browser harness não iniciar o Chrome, não reduzir a validação a HTML es
 
 Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma variante oficial adequada. Se não houver, criar derivação lossless: preservar símbolo e cores da marca, recolorir apenas o texto branco para tom escuro, recortar o alpha visível, adicionar margem curta, salvar em resolução web/retina, importar como novo attachment e validar por screenshot. Não sobrescrever nem excluir o asset original.
 
+## Subtítulo nativo JBF versus parágrafo no corpo
+
+- Quando o pedido for mover a introdução cinza para o subtítulo nativo, verificar primeiro o campo `_jbf_secondary_title`, a caixa lateral `Jbf secondary title` e a renderização de `.jd-post-header`; `.cnh-article-subtitle` no `post_content` continua sendo conteúdo do corpo. Não substituir o campo nativo por `post_excerpt` nem mover anúncios para simular o resultado.
+- Antes de preencher o campo, comparar a opção bruta `get_option('jbf_secondary_title_title_format', sentinel)` com `jbf_secondary_title_get_setting('title_format')` e ler o filtro `jbf_secondary_title_auto_show`. O helper pode mostrar um default correto enquanto o filtro usa diretamente uma opção inexistente; preencher o meta nesse estado faz título e subtítulo desaparecerem. Não tratar o default do helper como prova de configuração persistida. Configurar o formato global do tema é escopo distinto de editar um único artigo: pedir autorização quando o pedido original só cobrir a migração do texto.
+- Fazer backup privado do post/meta, mover o texto original sem reescrever a copy, retirar somente o grupo correspondente do corpo e validar o campo em processo novo. Comparar texto autoral com o raw original: `wptexturize` pode trocar apóstrofos na exibição. Comparar mapas de meta por chave, não pela ordem dos registros.
+- Testar a URL pública com título, subtítulo nativo único, ausência da duplicata no corpo e posição do anúncio. Se o título/subtítulo sumirem, restaurar imediatamente conteúdo e meta anteriores, validar o rollback público e não repetir a mutação antes de resolver o bloqueio. Preservar wrappers, regras de anúncio, CTAs e demais sites.
+
 ## Seletores confiáveis no QA das páginas públicas
 
 - No V3 estático, o contêiner da imagem é `span.mgs-dq-category-image` e o `<img>` fica aninhado; leia `currentSrc`, `complete` e `naturalWidth/naturalHeight` no `<img>`. O texto da categoria está em `.mgs-dq-category-name`. Não procure uma classe de imagem diretamente no `<img>`, porque isso produz falso negativo apesar de a página estar correta.
