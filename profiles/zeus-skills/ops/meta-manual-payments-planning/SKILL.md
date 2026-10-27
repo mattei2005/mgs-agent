@@ -84,6 +84,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 - Exclusão de linhas zero somente sob pedido específico e com a coluna de gasto mensal corretamente resolvida. Não excluir automaticamente contas novas/inativas; preservar as removidas no backup e validar todos os IDs restantes.
 - Nomes das contas são clicáveis para Billing & payments, não Summary. Usar URL de billing validada com BM e `asset_id` exatos; preservar nomes e IDs em notas, sem normalizá-los ou inferir parâmetros ocultos de prints.
 - Totais financeiros usam `ROUND(SUM(...),2)`; validar resultado calculado independentemente com Decimal. Ler effective formatting quando cores sinalizam pendências e tolerar apenas quantização RGB comprovada.
+- Validar vazio e zero por campo e grupo, não por um acesso obrigatório a `userEnteredValue`: F pode permanecer vazia em conta de cartão sem invoice, enquanto uma linha com saldo de invoice confirmado pode exigir zero explícito. Preservar essa apresentação; célula omitida pela API não autoriza preencher zero nem declarar saldo desconhecido como quitado. Usar o contrato e a evidência de invoices para decidir qual estado é válido.
 - Depois de inserir/reordenar colunas, ler de volta todos os valores/fórmulas, IDs, links, notas relevantes, moedas, blocos e subtotais; confirmar preservação de outras abas. Se um write já ocorreu, recuperar apenas a camada faltante, nunca reaplicar non-idempotent inserts ou reescrever o dataset às cegas.
 
 ### 6. Apoio ao pagamento manual e acompanhamento
