@@ -195,6 +195,7 @@ Para CTA externo padronizado pela categoria, valide separadamente o destino ofic
 4. Verifique conflito do slug de mídia.
 5. Faça upload, depois grave `title`, `alt_text`, `caption=""` e `description=""` explicitamente.
 6. Leia a mídia por ID e capture a URL `large`; exija HTTP `200` e `Content-Type` de imagem tanto na original quanto na derivada.
+   - Se `large` não existir nos tamanhos realmente enumerados pelo attachment, não invente URL, não repita upload nem altere registro de imagens/plugin. Em temas que retornem um equivalente nativo confirmado, como `jbf_server_large`, registre nome/dimensões/crop e use sua URL literal com o `sizeSlug` correspondente. Valide a mesma mídia, transporte e renderização; sem equivalente comprovado, bloqueie o alvo. Em retomada após upload concluído, releia o ID já recebido e reconcilie metadados/transporte antes de continuar, sem novo POST de mídia.
 
 Não faça uploads antecipados enquanto o texto ainda pode ser abandonado: mídia órfã transforma uma reprovação editorial em cleanup destrutivo.
 
