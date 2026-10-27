@@ -332,6 +332,7 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 - `references/targeted-cache-readonly-diagnostics.md` — prova de camada WPFC por corpo/hash, Reflection de efeitos CDN/Yoast/nginx e distinção entre API URL e primitiva de arquivo; diagnóstico sem purge.
 - `references/general-seo-category-drafts.md` — procedimento para analisar uma categoria completa, reproduzir seu padrão mensurável e criar lotes de artigos SEO em draft com mídia, links, Yoast e readback.
 - `references/wordpress-author-profiles.md` — padronização segura de nome e biografia de autores, inclusive em lotes multi-site, preservando identidade e credenciais.
+- `references/scoped-author-security-exception-qa.md` — somente após decisão de segurança específica: guards por requisição, cache/OPcache, estágio atômico, controles negativos e limites da página-base.
 - `references/existing-wordpress-content-replacement.md` — receita para trocar conteúdo demo em posts/páginas/CPTs existentes, preservando blocos, mídia, metadata suportada, rollback e QA desktop/mobile.
 - `references/eggbev-car-br-manual-rec-p1-2026-07-01.md` — caso Eggbev CAR BR/PT-BR, novo site_key seguro e padrão de CTA final com Itaú, Banco do Brasil e Creditas.
 - `references/eggbev-car-br-reference-model-1-cache-2026-07-01.md` — correção de modelo CAR BR: fidelidade estrutural a referência, bloco final REC com FAQ/CTAs e validação de cache Cloudflare APO.

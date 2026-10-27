@@ -5584,6 +5584,24 @@
       "updated_at": "2026-10-19T17:08:43+00:00"
     },
     {
+      "canonical_key": "content.wordpress.scoped-author-security-exception-qa",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/scoped-author-security-exception-qa.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T21:21:02+00:00",
+      "id": "ATENA-AUTHOR-SECURITY-EXCEPTION-QA-1564747634541989940",
+      "kind": "procedure",
+      "owner": "Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Exceçãoauthoraprovada:cache-request-local/FPMreal/estágioatômico/negativoselimites",
+      "updated_at": "2026-10-27T21:21:02+00:00"
+    },
+    {
       "canonical_key": "content.wordpress.public-canonical-cache-completion",
       "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/targeted-cache-readonly-diagnostics.md",
       "consumers": [
@@ -5965,6 +5983,24 @@
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
+      "canonical_source": "data/atena/seo-mass-1560295338257023118/author-public-resolution-1564747634541989940.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T21:21:02+00:00",
+      "id": "ATENA-SEO58-AUTHOR-BASE-PUBLIC-1564747634541989940",
+      "kind": "source",
+      "owner": "Rodolfo Mattei / Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Lote58:página-baseautoraGame200comexceçãorestrita;58artigosvalidados;paginação2foraescopo403",
+      "updated_at": "2026-10-27T21:21:02+00:00"
+    },
+    {
+      "canonical_key": "content.seo-batch.1560295338257023118.delivery",
       "canonical_source": "data/atena/seo-mass-1560295338257023118/public-cache-resolution-1564709534868705494.json",
       "consumers": [
         "atena",
@@ -6012,10 +6048,10 @@
       "kind": "source",
       "owner": "Raquel Oliveira / Atena",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO58-AUTHOR-BASE-PUBLIC-1564747634541989940",
       "title": "Lote58:idioma11Topfeed e22DOMsconcluídos;58HTTP/OG/schema/inlinecorretos;sóautorGame403segurançapendente",
-      "updated_at": "2026-10-27T19:51:22+00:00"
+      "updated_at": "2026-10-27T21:21:02+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -14814,5 +14850,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:13:52+00:00"
+  "updated_at": "2026-10-27T21:21:02+00:00"
 }
