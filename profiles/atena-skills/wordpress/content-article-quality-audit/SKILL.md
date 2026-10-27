@@ -171,9 +171,17 @@ IP LEGADO CANONICALIZADO
 OK
 ```
 
+## Fontes públicas: transporte, conteúdo e aderência factual
+
+- Registre separadamente HTTP/URL final efetivamente observados, recuperação de conteúdo substantivo e sustentação do trecho citado. Texto obtido pelo extrator sem status/frescor expostos não autoriza declarar GET direto 200 ou recurso atual comprovado.
+- Não rotule 403, desafio 202 vazio, falha TLS ou timeout como link morto/404. Use tentativas independentes limitadas e mantenha a limitação explícita; não troque hrefs só para esconder uma barreira de acesso.
+- Compare o parágrafo exato com a fonte lida. Não equipare automaticamente materiais, termos legais ou características parecidas. Se um termo não estiver sustentado, registre a lacuna e prepare a menor correção editorial com revisão/hash/análise correspondentes; não fabrique apoio factual ou recalcule uma nota fixa.
+
 ## Escrita em Google Sheets
 
-Se houver credencial/API do Google, usar API. Se não houver, usar edição pública/browser paste, mas sempre validar por export CSV/readback.
+Drive e Sheets usam exclusivamente a Service Account corporativa `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, pelo helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`. Confirme a identidade/projeto e use somente os IDs de arquivos do escopo. Falha de acesso/API bloqueia a escrita externa: não usar token pessoal, consentimento de navegador, edição pública/browser paste ou outra identidade como fallback. Preserve o snapshot local e reporte o bloqueio. Arquivos novos de automação vão para `MGS-AGENTS`; Sheets existentes precisam estar compartilhadas com a SA.
+
+Valide o range escrito por GET da API e igualdade integral com a base local; export CSV é evidência complementar quando disponível, não substituto da identidade canônica.
 
 Antes de recriar uma aba:
 
