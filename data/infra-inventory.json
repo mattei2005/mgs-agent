@@ -893,6 +893,38 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "raquel-editorial-technical-authority-1564661630766424096",
+      "actor": "zeus",
+      "status": "authority_validated_notification_verified",
+      "authority_message_id": "1564661630766424096",
+      "source_thread_id": "1564660286164570125",
+      "delegate_discord_id": "1496254952501280974",
+      "operational_thread_id": "1564289742567112795",
+      "notification_message_id": "1564662431802720280",
+      "notification_readback_verified": true,
+      "report_infra_message_id": "1564662637252444292",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_readback_verified": true,
+      "paths": [
+        "data/atena/editorial-manager-authority.json",
+        "data/atena/authority-history/ATENA-RAQUEL-EDITORIAL-AUTHORITY-1560305141431668887.json",
+        "data/authorized-users.json",
+        "context/permissions-matrix.md",
+        "data/knowledge-registry.json",
+        "data/agent-checkpoints.json#ZEUS-RAQUEL-AUTHORITY-1564661630766424096"
+      ],
+      "changes": "Autonomia permanente de Raquel em conteúdo e dependências técnicas localizadas não críticas; planos atuais dependem da decisão dela. Histórico e supersessão institucional preservados. Critical Subset e confirmação específica de Rodolfo para exclusões mantidos; sem novo acesso global Zeus.",
+      "critical_subset_unchanged": true,
+      "production_maintenance_executed": false,
+      "report_infra_status": "verified",
+      "institutional_regression": {
+        "passed": 20,
+        "failed": 1,
+        "known_preexisting_case": "KR-014",
+        "diagnosis": "Fixture expects Campaign Engine 3.6.1; live 3.6.8. Reconciled against audit 2026-10-22 apps_script_runtime_quota_maximum_published and existing inventory. Unrelated to Raquel authority; no engine or fixture changes."
+      }
+    },
+    {
       "id": "zeus-seo100-public-readonly-1564558610263187547",
       "infinity_bio_addendum": {
         "handoff_message_id": "1564579155444506695",

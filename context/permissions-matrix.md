@@ -47,6 +47,14 @@ Remover/mover arquivo estrutural         Zeus/Tech                Rodolfo aprova
 Criar agente novo                       Zeus/Rodolfo             Rodolfo.
 ```
 
+### Autonomia de Raquel — conteúdo e dependências técnicas localizadas
+
+Autoridade: Rodolfo Mattei, mensagem `1564661630766424096`, thread `1564660286164570125`. Fonte canônica única do escopo: `data/atena/editorial-manager-authority.json`; identidade e acesso em `data/authorized-users.json`. Supersede o limite anterior que exigia nova decisão de Rodolfo para toda dependência estrutural de conteúdo.
+
+- Raquel Oliveira (`1496254952501280974`) pode conversar, decidir, solicitar e aprovar a rotina editorial e as correções técnicas localizadas, seguras e reversíveis necessárias à entrega pública em portais MGS autorizados, inclusive categorias/traduções/menus, representações de cache/sitemap, idioma exibido, datas, bios e layout pontual apresentados nas threads `1564508692701909014` e `1564558610263187547`, dentro dos limites da fonte canônica.
+- Atena mantém conteúdo e QA final; Zeus executa o apoio técnico quando Raquel autorizar o plano delimitado na origem Atena. Não exigir novo OK editorial ou técnico não crítico do CEO para o mesmo recorte. Esta delegação não aprova automaticamente os pacotes pendentes e não concede acesso global ao canal privado Zeus.
+- Critical Subset de `AGENT.md` permanece integral: em especial, excluir arquivo/cache exige confirmação adicional específica de Rodolfo sobre os alvos exatos, inclusive no rollback. Credenciais, permissões, billing/budget, campanhas, monetização, upgrades de plugins/runtime, locale global, migração de acervo e mudanças amplas continuam excluídos. Dash financeira e Router preservam a regra exclusiva abaixo. Manter backup, canário, escopo exato, executor único e readback nativo/público.
+
 ### Exceção ativa por operação
 
 - **Eggbev-US-CC-EN-BOT / Eggbev-US-CC-EN-01-G006:** por decisões explícitas de Rodolfo em 30/08/2026 e 31/08/2026, Nicolas pode definir, reduzir ou aumentar budgets de campanha — inclusive a baseline de USD45 — e autorizar, por pedido, início imediato sem schedule para criação ou clone, sem nova aprovação do Rodolfo. Cada write continua exigindo instrução explícita do Nicolas ou política operacional aprovada, resumo final/OK do pedido, pré-leitura e readback Meta. O início padrão permanece no próximo dia às 00:00 ET; pedidos imediatos exigem request ID allowlisted e horário Meta-safe atualizado no execute. A delegação não autoriza billing, `account_spend_limit`, credenciais, automação recorrente nem escala automática sem regra própria aprovada.

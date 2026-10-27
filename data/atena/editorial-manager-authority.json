@@ -1,25 +1,49 @@
 {
-  "id": "ATENA-RAQUEL-EDITORIAL-AUTHORITY-1560305141431668887",
+  "id": "ATENA-RAQUEL-EDITORIAL-TECHNICAL-AUTHORITY-1564661630766424096",
   "canonical_key": "content.operations.raquel.editorial-batch-authority",
+  "status": "active",
   "owner": "Content Operations / Rodolfo Mattei",
+  "delegate": "Raquel Oliveira",
+  "delegate_discord_id": "1496254952501280974",
   "authority_discord_id": "344196393512075265",
-  "authority_message_id": "1560305141431668887",
-  "source_thread_id": "1560295338257023118",
-  "decision": "Raquel Oliveira é a gestora de conteúdo e está permanentemente autorizada a solicitar e liberar pedidos editoriais como este lote SEO e semelhantes. Não exigir nova aprovação de Rodolfo para a mesma rotina editorial.",
-  "application_to_current_request": "Rodolfo mandou executar após a exposição dos bloqueios de integração mínima dos quatro portais e inclusão das duas novas categorias no menu. Integrar com dados reais confirmados e concluir o lote de 58 artigos autorizado por Raquel, sem exigir nova autorização editorial.",
+  "authority_message_id": "1564661630766424096",
+  "source_thread_id": "1564660286164570125",
+  "operational_source_thread_id": "1564289742567112795",
+  "authority_message_text": "De autonomia pra Raquel poder conversar e tomar esse tipo de decisao...... caso tenha ficado algo pendente, esclareca na thread la da Atena e menciona a Raquel por favor.",
+  "supersedes": "ATENA-RAQUEL-EDITORIAL-AUTHORITY-1560305141431668887",
+  "previous_authority_source": "data/atena/authority-history/ATENA-RAQUEL-EDITORIAL-AUTHORITY-1560305141431668887.json",
+  "decision": "Raquel Oliveira tem autonomia permanente para conversar, decidir, solicitar e aprovar a rotina editorial e as dependências técnicas localizadas, seguras e reversíveis necessárias à entrega e validação pública do conteúdo nos portais MGS autorizados, inclusive os tipos de correção apresentados nas threads 1564508692701909014 e 1564558610263187547. Não exigir nova aprovação de Rodolfo para decisões não críticas dentro deste recorte. Esta delegação transfere a decisão a Raquel; não é aprovação automática dos pacotes pendentes nem dispensa os gates críticos.",
   "within_scope": [
-    "Análise de nicho e categorias, pesquisa, pauta, produção e QA editorial",
-    "Criação de categorias e tags compatíveis com o briefing",
-    "Publicação editorial quando expressamente autorizada por Raquel",
-    "Integração mínima de portal MGS allowlisted necessária ao pedido, preservando configurações existentes e usando somente dados técnicos/identidade/credencial dedicados confirmados",
-    "Acionar apoio técnico para menus ou dependências que o perfil editorial não possa executar, sem transferir a Raquel a obrigação de renovar a autorização editorial"
+    "Análise de nicho e categorias, pesquisa, pauta, produção, revisão, QA e publicação editorial expressamente autorizada por Raquel",
+    "Categorias e tags compatíveis com o briefing e integração mínima de portal MGS allowlisted com identidade e dados reais confirmados, preservando registros existentes",
+    "Categorias por idioma, relações nativas de tradução e inclusão ou mapeamento localizado de menus necessários ao conteúdo, preservando acervo, demais idiomas e configurações globais",
+    "Aprovar planos técnicos delimitados para corrigir representações antigas de HTML, categorias e sitemaps, apresentação localizada de idioma em HTML/schema, data exibida, biografia de autor e geometria pontual de rodapé/layout",
+    "Decidir sobre os ajustes de categorias/menus ES079–084 em Mavroa e Boostingecon e sobre o pacote técnico do lote100 e apresentação Infinity3, dentro dos limites e gates descritos neste documento",
+    "Solicitar apoio técnico a Zeus na thread de origem da Atena; Zeus pode avaliar e executar a decisão não crítica autenticada de Raquel no mesmo escopo, mantendo Atena como dona editorial e do QA final"
+  ],
+  "execution_controls": [
+    "Identificar Raquel pelo Discord ID real e reconciliar pedido, canal/thread, alvo, escopo e checkpoint antes de escrever",
+    "Manter a conversa e a decisão com Raquel na origem Atena; não conceder acesso global ao canal privado Zeus nem autoridade em outras áreas",
+    "Explicar problema, causa comprovada ou incerteza, recomendação, impacto e pendência em linguagem simples",
+    "Pedido ou aprovação explícita de Raquel para o plano técnico delimitado; não inferir aceitação do pacote apenas da delegação de Rodolfo",
+    "Preservar IDs, URLs, briefing e textos aprovados; backup/snapshot, canário por mecanismo, menor alteração reversível, readback nativo e público, validação mobile/desktop e rollback previamente admissível",
+    "Um único executor de escrita por alvo; nenhuma gravação concorrente de perfil/bio ou repetição de publicação",
+    "Quando houver exclusão de arquivo/cache no plano ou no rollback, interromper essa etapa até a confirmação Critical Subset específica de Rodolfo sobre a lista exata",
+    "Não confundir post publicado, cadastro corrigido ou cache renovado com aceite público integral; manter pendências reais no relatório"
   ],
   "limits_unchanged": [
-    "Identidade real e permissões vigentes em authorized-users.json; não promover outros usuários nem alterar o registry de acesso",
-    "Gate canônico de domínio e proibição de enumerar inventários globais",
-    "Critical Subset, credenciais, mudança de função, plugin/runtime e alterações estruturais seguem gates e escalonamento próprios",
-    "Dash financeira e Dash Router exigem pedido explícito de Rodolfo específico para ação e sistema",
-    "Não inventar valores críticos nem contornar site_key ausente com publicação REST direta antes da integração confirmada"
+    "Critical Subset de AGENT.md permanece integral e exige confirmação adicional específica de Rodolfo; autonomia de Raquel não o revoga nem o delega",
+    "Não alterar senha/token/chave, identidade, função/roles, permissões, whitelist ou outros usuários; não modificar skills de outros agentes por inferência desta delegação",
+    "Sem billing, pagamentos, budget, campanhas, pixels/CAPI, blocos/loader de monetização, upgrade ou substituição de plugin/runtime, locale global ou idioma padrão",
+    "Sem exclusão implícita de arquivo/diretório, limpeza global, migração de acervo, alteração estrutural ampla ou ampliação para portais/mercados fora do pedido",
+    "Gate canônico de domínio e proibição de enumerar inventários globais permanecem; não contornar site_key ausente nem inventar credencial, webroot ou valor crítico",
+    "Dash financeira e Dash Router continuam exigindo pedido explícito de Rodolfo específico para ação e sistema",
+    "Ausência de renderer ou causa ainda incerta exige diagnóstico antes de propor alteração; não autorizar SQL/indexable, instalação ou troca de renderer por suposição"
   ],
+  "pending_cases": {
+    "ES079-084": "Raquel pode decidir o plano localizado de categorias, tradução e menus nos dois portais; execução técnica e publicação editorial continuam etapas distintas.",
+    "SEO100": "Raquel pode decidir o pacote técnico delimitado; qualquer exclusão de cache/arquivo depende antes da confirmação crítica específica de Rodolfo.",
+    "Infinity3": "Raquel pode alinhar e decidir a necessidade da renovação; a exclusão dos três arquivos HTML identificados continua bloqueada até confirmação crítica específica de Rodolfo. Não regravar bios já corretas nem alterar SQL/renderer por inferência."
+  },
   "procedure_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/general-seo-category-drafts.md"
 }

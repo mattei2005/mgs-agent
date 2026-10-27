@@ -5523,10 +5523,29 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei / Content Operations",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-RAQUEL-EDITORIAL-TECHNICAL-AUTHORITY-1564661630766424096",
+      "title": "Raquel gestora de conteúdo: autoridade permanente para lotes SEO e pedidos editoriais semelhantes",
+      "updated_at": "2026-10-27T15:29:18+00:00"
+    },
+    {
+      "canonical_key": "content.operations.raquel.editorial-batch-authority",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations",
+        "zeus"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T15:29:18+00:00",
+      "id": "ATENA-RAQUEL-EDITORIAL-TECHNICAL-AUTHORITY-1564661630766424096",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Content Operations",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Raquel gestora de conteúdo: autoridade permanente para lotes SEO e pedidos editoriais semelhantes",
-      "updated_at": "2026-10-15T15:00:58+00:00"
+      "title": "Raquel: autonomia editorial e decisões técnicas localizadas, preservando Critical Subset",
+      "updated_at": "2026-10-27T15:29:18+00:00"
     },
     {
       "canonical_key": "content.seo.batch-review-gates",
@@ -14521,5 +14540,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T15:27:43+00:00"
+  "updated_at": "2026-10-27T15:29:18+00:00"
 }

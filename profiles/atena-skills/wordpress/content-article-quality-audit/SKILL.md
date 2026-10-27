@@ -206,6 +206,14 @@ Drive e Sheets usam exclusivamente a Service Account corporativa `mgsagent@mgs-c
 
 Valide o range escrito por GET da API e igualdade integral com a base local; export CSV é evidência complementar quando disponível, não substituto da identidade canônica.
 
+### Apresentação de planilhas para revisão humana
+
+Quando a gestora pedir reorganização, aplique o formato solicitado sem mudar os resultados da auditoria: domínio na primeira coluna, linhas de subtítulo por domínio, categorias/tags apenas com nomes e IDs técnicos fora da apresentação. Preserve a relação interna artigo → linha em artefato local, incluindo os ainda não publicados, e conte somente artigos, nunca as linhas de subtítulo. Traduza cada pendência a partir da evidência atual do objeto, diferenciando defeito observado, falta de comprovação e dependência de autorização; não exponha dicionários, flags ou pendências históricas já supersedidas. Mantenha limitações aceitas do Yoast separadas de bloqueios reais.
+
+Antes de reestruturar, salve valores/formatação/permissões, confira fórmulas, notas, proteções e alterações humanas concorrentes. Use somente a Service Account canônica. Compartilhamento individual com a própria gestora autorizada deve preservar os demais acessos e ser confirmado pelo GET da permissão exata. Após o write, compare todas as células com a intenção, valide agrupamentos, IDs removidos, estados preservados e uma linha além do fim. Registre o novo contrato de apresentação na continuidade da tarefa; nenhum atualizador legado pode reintroduzir o formato antigo ou sobrescrever edições humanas sem reconciliação.
+
+**Pitfall de Google Sheets:** uma célula mesclada não pode atravessar a fronteira entre colunas congeladas e não congeladas. Para subtítulos mesclados na largura inteira, congele apenas o cabeçalho ou mantenha todas as colunas da mesclagem do mesmo lado. Uma rejeição de batch por esse conflito exige GET para confirmar o estado, preservação da intenção anterior e envio de uma nova intenção corrigida, sem replay cego.
+
 Para atualizar o relatório:
 
 1. Reutilize o Spreadsheet ID e a aba confirmados; preserve outras abas, colunas humanas e ACLs. Recriação ou limpeza ampla não é pré-requisito de atualização.

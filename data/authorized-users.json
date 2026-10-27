@@ -93,7 +93,19 @@
           "name": "Raquel Oliveira",
           "discord_role": "Conteudo",
           "added": "2026-04-21",
-          "added_by": "rodolfo"
+          "added_by": "rodolfo",
+          "access_level": "full",
+          "scope": {
+            "type": "content_operations_and_scoped_noncritical_technical_dependencies",
+            "origin_agent": "atena",
+            "origin_channel_id": "1496267571543019653",
+            "canonical_source": "data/atena/editorial-manager-authority.json",
+            "description": "Autonomia permanente para conversar, decidir, solicitar e aprovar conteúdo e correções técnicas localizadas, seguras e reversíveis necessárias à entrega editorial em portais MGS autorizados; apoio técnico Zeus na origem Atena. Sem acesso global Zeus, Critical Subset ou demais áreas."
+          },
+          "authorized_by_discord_id": "344196393512075265",
+          "authority_message_id": "1564661630766424096",
+          "source_thread_id": "1564660286164570125",
+          "critical_subset_unchanged": true
         },
         {
           "discord_id": "344196393512075265",
