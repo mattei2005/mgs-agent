@@ -3292,6 +3292,23 @@
       "updated_at": "2026-10-22T18:12:33+00:00"
     },
     {
+      "canonical_key": "ares.reporting.google-sheets.default-editors",
+      "canonical_source": "/root/mgs-agent/data/ares/reporting/google-sheets-sharing-policy.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.reporting.google-sheets",
+      "effective_at": "2026-10-27T15:19:09+00:00",
+      "id": "ARES-REPORT-SHEETS-DEFAULT-EDITORS-1564658329366700234",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Editores padrao de sheets de gestores: dois comuns e adicional Nicolas em G006; somente arquivo",
+      "updated_at": "2026-10-27T15:19:09+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reporting.ui-auth-recovery",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/canonical-report-renderer.md",
       "consumers": [
@@ -14487,5 +14504,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T15:05:07+00:00"
+  "updated_at": "2026-10-27T15:19:09+00:00"
 }
