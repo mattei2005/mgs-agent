@@ -1,5 +1,19 @@
 # Diagnóstico somente leitura de invalidação targeted
 
+## Regra ativa de conclusão pública
+
+**Aprovação:** Rodolfo Mattei, mensagem `1564682255702687765`, thread `1564289742567112795`, em resposta à proposta de renovação seletiva e conclusão pública. Esta seção torna a proposta ativa como procedimento editorial; não concede nova permissão técnica, não aprova novos alvos de exclusão e não altera configurações de produção.
+
+**Princípio:** uma publicação ou alteração só está concluída quando a versão atual estiver comprovada na URL pública normal. Cache atualizado é permitido e desejável; não manter o site sem cache nem exigir limpeza manual em toda publicação quando a invalidação automática já funcionou.
+
+1. **Mapear dependências reais.** Antes do QA final, registrar URLs literais, IDs e alteração esperada. Texto/imagem afeta o artigo; biografia afeta as páginas que exibem aquela biografia; publicação e mudança de categoria podem afetar artigo, listagens/paginação e partições de sitemap relacionadas. Comprovar cada dependência; o domínio inteiro nunca é a lista implícita de limpeza.
+2. **Verificar a renovação automática.** Depois do save, conferir se a URL normal já mostra a mudança. Se estiver correta, não purgar de novo. Se estiver antiga, identificar a camada e o mecanismo real com a matriz e os gates abaixo. Acionar apenas a invalidação seletiva já autorizada, ou entregar ao Zeus os alvos e o bloqueio exatos. Preservar conteúdo, mídia, datas, SEO, perfis, demais caches e configurações; autorização editorial e autonomia de Raquel para pedir cache não dispensam Critical Subset.
+3. **Validar como visitante.** Exigir GET/DOM do endereço canônico normal, sem login e sem query especial, mostrando a alteração esperada. Para apresentação visual, verificar também desktop e celular. Query-buster, REST correto, status publicado, nota Yoast ou recibo de handoff são diagnósticos/etapas, nunca substitutos do resultado público. Renovação de origem não comprova renovação de outra camada que ainda sirva a cópia antiga.
+4. **Encerrar somente os critérios comprovados.** Registrar URL, evidência, camada/mecanismo, resultado e preservação. Não promover o lote inteiro a OK porque um artigo, sitemap ou canário passou. Manter abertas somente as pendências reais; permitir que Raquel continue os pedidos/conversa e que trabalhos independentes já autorizados avancem.
+5. **Evitar recorrência e loops.** Se a versão continuar antiga após a operação validada ou o problema reaparecer, reconciliar o estado sem repetir o write cegamente. Manter a pendência e encaminhar ao Zeus a prova e a execução já feita. Não refazer/republicar o texto, duplicar posts, ampliar para purge global nem marcar OK para contornar cache. Correção de configuração/integração exige escopo e gate próprios; uma limpeza bem-sucedida não prova correção da causa.
+
+**Fluxo:** alterou → verificou/renovou o cache afetado → comprovou na página pública → concluiu o critério correspondente.
+
 ## Rotina editorial e autorização já vigente
 
 Classifique separadamente o objetivo editorial de renovar a representação pública e os efeitos reais do mecanismo escolhido. Consulte a autoridade canônica vigente antes do write: uma aprovação de manutenção localizada não substitui a confirmação crítica exigida para exclusão de arquivos, mesmo que sejam caches reproduzíveis. Prefira uma API semântica nativa por URL somente quando a inspeção comprovar efeitos compatíveis com a lista exata autorizada; o nome do método não prova isolamento. Não repita a autorização não crítica já concedida nem converta esse aceite em permissão de purge global/CDN, alteração de configuração ou exclusão física. Se não houver mecanismo compatível com os gates atuais, registre a lista e a dependência específica para o executor técnico, sem executar uma alternativa mais ampla.

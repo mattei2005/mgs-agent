@@ -2802,6 +2802,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ATENA-PUBLIC-CACHE-RULE-1564682255702687765",
+      "next_step": "Atena recebeu aviso1564682964766556353 com readback e deve carregar a documentação atual para a conversa com Raquel. Regra ativa no registry; REPORT-INFRA1564682962820268215 relido. Demais pendências do lote continuam abertas; não executar novo purge/config por esta aprovação.",
+      "objective": "Aplicar regra aprovada de conclusão pública e renovação seletiva na documentação Atena, registrar e avisar na origem, sem novo purge ou ampliação de autoridade.",
+      "source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/targeted-cache-readonly-diagnostics.md",
+      "state": "completed_documented_validated_atena_notified",
+      "thread_id": "1564289742567112795",
+      "updated_at": "2026-10-27T16:51:29+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ATENA-WORDPRESS-ACCESS-20260920",
       "next_step": "Zeus monitora regressões de autenticação; qualquer novo site exige integração explícita em data/sites.json antes de publicação automatizada.",
       "objective": "Criar usuário dedicado Atena com função Editor e senha de aplicativo única nos 45 WordPress ativos MGS, armazenar cada credencial no 1Password e atualizar a documentação operacional da Atena.",
@@ -7432,5 +7442,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:44:47+00:00"
+  "updated_at": "2026-10-27T16:51:29+00:00"
 }

@@ -5511,6 +5511,25 @@
       "updated_at": "2026-10-15T13:38:27+00:00"
     },
     {
+      "canonical_key": "content.wordpress.public-canonical-cache-completion",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/targeted-cache-readonly-diagnostics.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations",
+        "zeus"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T16:50:33+00:00",
+      "id": "ATENA-PUBLIC-CACHE-COMPLETION-1564682255702687765",
+      "kind": "procedure",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conclusão editorial somente na URL pública normal, com renovação seletiva de cache e escalada sem loops",
+      "updated_at": "2026-10-27T16:50:33+00:00"
+    },
+    {
       "canonical_key": "content.operations.raquel.editorial-batch-authority",
       "canonical_source": "data/atena/editorial-manager-authority.json",
       "consumers": [
@@ -14595,5 +14614,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:12:19+00:00"
+  "updated_at": "2026-10-27T16:50:33+00:00"
 }

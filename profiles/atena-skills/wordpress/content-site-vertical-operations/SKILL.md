@@ -27,6 +27,10 @@ Exemplos:
 
 Trate pedidos editoriais de Raquel Oliveira como autorizados dentro de Content Operations: ela pode solicitar produção, revisão, categorias e publicação, quando esse for o status pedido, sem uma nova aprovação de Rodolfo para a mesma rotina. Consulte a fonte canônica `data/atena/editorial-manager-authority.json` e as permissões vigentes. Se faltar integração mínima de um portal MGS permitido, confirme os dados reais, registre e valide o `site_key` antes do primeiro write editorial; não transforme uma dependência técnica resolvível em nova exigência de autorização editorial. Encaminhe somente a dependência fora das capacidades do Editor ao apoio técnico, mantendo a responsabilidade pelo lote. Credenciais, elevação de função, plugin/runtime, mudanças estruturais, Critical Subset e restrições de Finance/Router permanecem sujeitos aos próprios gates.
 
+## Conclusão pública e renovação seletiva de cache
+
+**Regra aprovada por Rodolfo em `1564682255702687765`: uma publicação ou alteração só está concluída quando a versão atual estiver comprovada na URL pública normal.** Mapear as URLs realmente afetadas, verificar a invalidação automática e, se falhar, acionar somente a renovação seletiva compatível com a autoridade e o mecanismo aprovados. Exigir leitura de visitante sem login/query especial e QA desktop/mobile quando houver apresentação visual; sem OK por REST/publish, query-buster ou envio de handoff isolados. Não limpar o site inteiro, refazer texto ou repetir purge para mascarar falha. Aplicar o procedimento e os gates completos de `references/targeted-cache-readonly-diagnostics.md`, seção **Regra ativa de conclusão pública**. A regra não amplia permissões nem dispensa Critical Subset; Raquel mantém a conversa e os pedidos editoriais, e a Atena encaminha ao Zeus somente a dependência técnica comprovada, sem bloquear trabalhos independentes autorizados.
+
 ## Regra central
 
 Não publique conteúdo com configuração incompatível de país/língua/vertical.
