@@ -13,6 +13,10 @@ Autorização: Rodolfo Mattei, mensagem `1564115318887161857`, thread `156392676
 7. Reconciliar Insights diário/agregado por conta. Se diferirem, fazer no máximo duas novas leituras limitadas à mesma conta/período, registrar os totais anteriores/posteriores sem URLs tokenizadas e manter a tolerância monetária existente. Se persistir, preservar o snapshot anterior e reportar a conta, campo e diferença; não atribuir automaticamente a arredondamento ou virada de dia sem prova.
 8. Validar 47 IDs, agrupamento, G/I/J de todas as contas, H de todas as linhas atuais, fórmulas/links e preservação das outras abas. Cobertura parcial de D fica explícita. Manter cadência anterior, sem criar writer paralelo.
 
+## Parsing seguro de funding
+
+- Aceitar também a variante literal `VISA *dddd` no display live tipo1, além de `Visa *dddd`, preservando a bandeira e o final recebidos. A Meta pode mudar somente a capitalização; uma rejeição do parser não prova mudança de billing. Manter fullmatch, quatro dígitos e allowlist de bandeiras; nunca aceitar texto livre ou normalizar identificadores. Aplicar o mesmo parser em regroup e refresh, testar variantes válidas/inválidas e repetir o fluxo autorizado com readback.
+
 ## Identificação e pixels
 
 - Filename e URL solicitada não provam identidade final. Ler pixels e AX da conta/BM reais.

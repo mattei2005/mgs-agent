@@ -83,7 +83,7 @@ def main():
   for i,child in zip(ids,ds):
    d=json.loads(child['body']);assert child['code']==200 and d['account_id']==i and d['business']['id']==c['business_id']and d['currency']=='USD'
    f=d.get('funding_source_details')or{};typ=f.get('type');assert typ in [1,4],'unknown_funding';method='Cartão de crédito'if typ==1 else'Linha de crédito';display=f.get('display_string','')
-   if typ==1:assert not display or re.fullmatch(r'(American Express|Mastercard|MasterCard|Visa|Discover) \*\d{4}',display),'unrecognized_card_display'
+   if typ==1:assert not display or re.fullmatch(r'(American Express|Mastercard|MasterCard|Visa|VISA|Discover) \*\d{4}',display),'unrecognized_card_display'
    else:assert display=='monthly invoicing'
    funding[i]={'name':d['name'],'method':method,'default':display.replace(' *',' •••• ')if display and typ==1 else'Não identificado pela Meta'if typ==1 else'Não se aplica'}
  before=api('GET',url);assert before['sheets'][0]['properties']['sheetId']==c['sheet_id'];expected,changes,groups=build(before,funding)

@@ -95,7 +95,7 @@ def main():
   assert t['cells'][1]['userEnteredValue']['stringValue']==method,'funding_group_changed_requires_skill_regroup:account='+t['id']+';sheet='+t['cells'][1]['userEnteredValue']['stringValue']+';live='+method
   default=funding.get('display_string','')if method=='Cartão de crédito'else'Não se aplica'if method=='Linha de crédito'else'Não disponível'
   if method=='Cartão de crédito':
-   if default:assert re.fullmatch(r'(American Express|Mastercard|MasterCard|Visa|Discover) \*\d{4}',default)
+   if default:assert re.fullmatch(r'(American Express|Mastercard|MasterCard|Visa|VISA|Discover) \*\d{4}',default)
    default=default.replace(' *',' •••• ')if default else'Não identificado pela Meta'
    proof=ledger['accounts'].get(t['id'])
    if not proof:pending.append({'account_id':t['id'],'name':a['name'],'reason':'no_prior_pc1_card_history_proof'})
