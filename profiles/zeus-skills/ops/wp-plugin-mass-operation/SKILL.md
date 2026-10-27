@@ -45,7 +45,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - For category-cache reconciliation, derive pagination from the native category link, not a stale public canonical that may name another language/slug. A translated canonical can make the collector request a nonexistent page 2; recheck the native path and separate this collection defect from a real production 404 before requesting any purge.
 
 - Persist created object IDs and completed mutation stages before validation; recover a failed post-write check against those same IDs rather than creating replacements or replaying completed writes.
-- Compare authored WordPress fields separately from computed `content.rendered`, because forms and widgets can change rendered HTML without an author edit. Preserve the original baseline and qualify any historical-revision fallback.
+- Compare authored WordPress fields separately from computed `content.rendered`, because forms and widgets can change rendered HTML without an author edit. Apply the same distinction to excerpts: an empty `excerpt.raw` produces an automatic `excerpt.rendered` that legitimately changes after a content edit. Preserve the authored excerpt, not its derived preview; if a post-write guard fails on that preview, reconcile the persisted target and revalidate without replaying the POST. Preserve the original baseline and qualify any historical-revision fallback.
 - After a draft/status transition, read the published permalink and canonical again; a draft REST link can be a preview URL even when production uses pretty permalinks. Resolve cross-links only within the authorized objects, not by changing site-wide permalink settings.
 
 ## Context-efficiency guardrails
