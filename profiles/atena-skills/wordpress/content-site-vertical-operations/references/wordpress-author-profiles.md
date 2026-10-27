@@ -99,6 +99,8 @@ A página pública complementa, mas não substitui, o readback autenticado: tema
 
 No QA da bio pública, capture o componente completo de autoria, não só o pai imediato do link: o texto pode estar em um parágrafo irmão dentro de `.jd-box .info`. Exija a frase canônica em elemento realmente renderizado (geometria e estilos visíveis), separadamente em mobile e desktop; não use apenas schema, campo de cadastro ou a concatenação dos dois viewports. Diferencie erro local de seletor, cache antigo e ausência real de renderização antes de propor qualquer mudança em produção.
 
+Ao trocar perfis de navegador, configure viewport/screen, UA e touch coerentes em cada navegação. Aguarde fontes e várias leituras estáveis de `innerWidth/clientWidth/scrollWidth` antes de classificar overflow; preserve uma medição transitória anterior e só superseda com observação real estável, sem esconder excesso por CSS ou desconsiderar overflow persistente.
+
 ## Diagnóstico de biografia em portal multilíngue
 
 Quando houver autorização editorial para executar a rota nativa comprovada, siga também `references/minimal-native-multilingual-own-bio-write.md`: intenção anti-replay, sanitização stock, apenas chaves próprias aprovadas, preservação privada dos demais dados e readback independente. O diagnóstico abaixo não concede essa autorização nem garante a apresentação pública.
