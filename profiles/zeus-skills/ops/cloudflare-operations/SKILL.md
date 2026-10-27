@@ -30,6 +30,10 @@ Use this skill when Rodolfo asks to:
 
 Do not use this skill for WordPress application cache, RunCloud cache, plugin cache, browser cache, or CDN providers other than Cloudflare unless Rodolfo explicitly says Cloudflare is involved.
 
+## Scoped access-discovery handoffs
+
+When the operator asks only to certify an existing credential route, keep the handoff read-only and preserve that operator as executor. Verify approved tokens and query only the exact target zone; never issue a test purge, repeat origin invalidation, create/rotate a token, elevate a role, or enumerate all Cloudflare zones. Reduce 1Password metadata to the approved Cloudflare identities and literal target-specific candidates before printing or persisting; do not expose unrelated domain/app credential catalogs merely because their titles match Cloudflare. An active token plus HTTP-200/zero exact-zone results proves no visible target binding through that token, not an invalid token, absence of the zone everywhere, the owning account, or purge permission. Public nameservers confirm DNS delegation, not account ownership. If no route is certified, return the single missing existing identity/zone/credential capability and its internal owner; do not reopen editorial approval or touch targets already completed by the operator.
+
 ## Routine Cache Purge Fast Path
 
 For a direct cache-purge request from Rodolfo, loading this skill completes the procedural lookup. Execute from this documented procedure immediately; do **not** search the repository for Cloudflare scripts, reopen `AGENT.md`, or run broad confirmation-rule searches when the request and zone scope are already clear.
