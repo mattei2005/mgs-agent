@@ -23,6 +23,42 @@ spec.loader.exec_module(mod)
 
 
 class OffsiteBackupTests(unittest.TestCase):
+    def test_default_lock_budget_survives_full_backup_overlap(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            # Simulate release after 1050s: the former 600s budget failed here.
+            clock = [0.0]
+            attempts = [0]
+
+            def try_lock(handle, flags):
+                attempts[0] += 1
+                if attempts[0] <= 3:
+                    raise BlockingIOError('full backup owns lock')
+
+            def advance(seconds):
+                clock[0] += 350.0
+
+            with patch.object(mod.time, 'monotonic', side_effect=lambda: clock[0]), \
+                 patch.object(mod.time, 'sleep', side_effect=advance), \
+                 patch.object(mod.fcntl, 'flock', side_effect=try_lock):
+                acquired = mod.acquire_lock({'lock_path': str(Path(raw) / 'backup.lock')})
+                acquired.close()
+            self.assertEqual(clock[0], 1050.0)
+            self.assertEqual(attempts[0], 4)
+
+    def test_default_lock_budget_remains_bounded(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            clock = [0.0]
+
+            def advance(seconds):
+                clock[0] += 600.0
+
+            with patch.object(mod.time, 'monotonic', side_effect=lambda: clock[0]), \
+                 patch.object(mod.time, 'sleep', side_effect=advance), \
+                 patch.object(mod.fcntl, 'flock', side_effect=BlockingIOError('held')):
+                with self.assertRaisesRegex(RuntimeError, 'lock wait exceeded 1800s'):
+                    mod.acquire_lock({'lock_path': str(Path(raw) / 'backup.lock')})
+            self.assertEqual(clock[0], 1800.0)
+
     def test_lock_waits_for_real_holder_without_truncating(self) -> None:
         with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
             lock_path = Path(raw) / 'backup.lock'

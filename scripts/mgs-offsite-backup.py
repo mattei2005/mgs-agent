@@ -864,8 +864,12 @@ def apply_retention(drive: Drive, folder_id: str, keep: int) -> list[str]:
     return trashed
 
 
-def acquire_lock(config: dict[str, Any], *, timeout_seconds: float = 600.0):
-    """Serialize scheduled backup/restore overlaps without an unbounded wait."""
+def acquire_lock(config: dict[str, Any], *, timeout_seconds: float = 1800.0):
+    """Serialize overlaps, allowing the 18-minute full backup to finish.
+
+    Keep the wait bounded and below the native cron's 3600-second script
+    budget; the hourly backup still has 1800 seconds left to execute.
+    """
     if timeout_seconds < 0:
         raise ValueError("lock timeout must be non-negative")
     path = Path(config["lock_path"])
