@@ -4102,6 +4102,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-SEO100-CACHE-EXECUTE-1564677701640658947",
+      "next_step": "27 caches limpos e validados; manter categorias/pendências não incluídas abertas. Regras Atena e exclusão de sitemap do cache são propostas, não implantadas. Preservar26 registros diagnósticos de import collision como supersedidos. Inventário/REPORT-INFRA e handoffAtena antes do encerramento.",
+      "objective": "Executar somente os27 caches explicitamente delimitados e aprovados; categorias ainda sem gate exato; sugerir regra Atena, sem implantá-la por inferência.",
+      "source": "/root/.hermes/profiles/zeus/work/seo100-cache-execute-1564677701640658947",
+      "state": "approved_exact27_completed_validated_other_QA_pending",
+      "thread_id": "1564289742567112795",
+      "updated_at": "2026-10-27T16:40:27.726019+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-SEO100-PUBLIC-QA-1564558610263187547",
       "next_step": "Autonomia 1564671680444370955 persistida e validada; origem Atena informada com readback 1564674795180658799–1564674816039059599. Exclusão dos 27 arquivos em cache-current/critical-exact-27.json depende somente da confirmação Critical Subset exata de Rodolfo na mensagem 1564674809068126309; antes de executar, revalidar hashes/alvos e abortar drift. Demais casos não foram promovidos a sucesso. Implementação ES não crítica segue autorizada e ainda pendente na thread 1564508692701909014; identidade já recuperada, sem duplicar executor.",
       "objective": "Autoridade permanente de pedidos de cache de Raquel e apoio técnico localizado SEO100; apenas URLs específicas",
@@ -4973,12 +4983,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-us-app-1564672804484423801",
-      "next_step": "GET dos 20 IDs incertos e retomar somente nomes ausentes sob a mesma lease/request; concluir demais 399 e validar invariantes finais de todos os 940.",
-      "objective": "Adicionar (US_APP) nos nomes das 940 campanhas SHEIN do recorte aprovado, todos os estados, sem outras alterações.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/shein-us-app-1564672804484423801/state.json",
-      "state": "dry-run 940 concluído; canário active/paused/archived/deleted confirmou que name é editável nos quatro estados. lote interrompido pelo limite de duração da ferramenta: 521 ids verified, 20 name_write_in_flight, 399 planned. nenhum executor ficou ativo. reconciliando os 20 ids exatos antes de retomar o mesmo request; não recriar nem restaurar status.",
+      "next_step": "Nenhuma pendência de renomeação no recorte. Aguardar decisão separada de Rodolfo sobre regra de nomenclatura/criação/duplicação e eventual reorganização de sufixos legados; não promover esta execução a mudança automática de estratégia ou SB.",
+      "objective": "Adicionar (US_APP) nos nomes das campanhas SHEIN autorizadas, todos os estados, sem outras alterações.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/shein-us-app-1564672804484423801/final-verification.json",
+      "state": "complete: 940 nomes confirmados na meta em 18 contas (283 active, 587 paused, 42 archived, 28 deleted). pré/pós-leituras e conferência consolidada preservaram status, budgets, bids, horários, conjuntos/anúncios/creative ids. auditoria live final das 36 contas às 12:38 edt: zero campanhas do recorte com event_add_to_wishlist sem marcador; 2731 históricos sem evento permanecem idênticos. inserção literal conservou texto legado posterior ao evento em 138 nomes. sb não alterada nem reprocessamento verificado. canário confirmou edição name-only nos quatro estados; interrupção de transporte reconciliada por get sem replay cego.",
       "thread_id": "1564665948882079774",
-      "updated_at": "2026-10-27T16:29:34+00:00"
+      "updated_at": "2026-10-27T16:39:23+00:00"
     },
     {
       "agent": "ares",
@@ -7419,18 +7429,8 @@
       "state": "encerramento final por declaração direta de rodolfo1556490557017034913: arquivo entregue ao amigo e site excluído do runcloud. sem confirmação técnica independente e sem tarefas pendentes.",
       "thread_id": "1556015743831646349",
       "updated_at": "2026-10-05T02:19:00+00:00"
-    },
-    {
-      "agent": "zeus",
-      "id": "ZEUS-SEO100-CACHE-EXECUTE-1564677701640658947",
-      "objective": "Executar somente os27 caches explicitamente delimitados e aprovados; categorias ainda sem gate exato; sugerir regra Atena, sem implantá-la por inferência.",
-      "state": "backups_verified_no_deletions",
-      "next_step": "Executar um canário XML e um HTML com validação pública; nenhum alvo adicional.",
-      "source": "/root/.hermes/profiles/zeus/work/seo100-cache-execute-1564677701640658947",
-      "thread_id": "1564289742567112795",
-      "updated_at": "2026-10-27T16:34:35.208956+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:34:35.209127+00:00"
+  "updated_at": "2026-10-27T16:40:27.726093+00:00"
 }
