@@ -1,0 +1,87 @@
+{
+  "domain": "yolokfx.com",
+  "before": {
+    "url": "https://yolokfx.com/rec-us-app-shein-circle-of-style/?utm_source=facebook&utm_medium=g002-s",
+    "device": "mob",
+    "targeting": {
+      "country": "us",
+      "device": "mob",
+      "page_type": "rec",
+      "pathname": "rec-us-app-shein-circle-of-style",
+      "utm_source": "facebook"
+    },
+    "adInserterKeys": [
+      "isSPA",
+      "adDensity",
+      "containerContentAds",
+      "containerSidebarAds",
+      "mapping",
+      "adSpacingQueries"
+    ],
+    "rewardMappings": [
+      {
+        "name": "shein-rewarded",
+        "lazyAdTop": true,
+        "targeting": {
+          "device": "mob",
+          "pathname": "rec-us-app-shein-circle-of-style",
+          "utm_source": [
+            "facebook"
+          ]
+        },
+        "modalType": "blur"
+      },
+      {
+        "name": "blur-content",
+        "lazyAdTop": null,
+        "targeting": {
+          "utm_source": [
+            "google",
+            "facebook",
+            "mct",
+            "email",
+            "sms",
+            "pushalert"
+          ],
+          "device": "mob",
+          "page_type": "p1"
+        },
+        "modalType": "blur"
+      }
+    ],
+    "requester": {
+      "shouldInsertAds": true,
+      "adRewardedInfoKeys": [
+        "slot",
+        "callback",
+        "timeout",
+        "btnLabel",
+        "btn",
+        "href",
+        "target",
+        "attempts"
+      ],
+      "ads": []
+    },
+    "blurs": [],
+    "modalButtons": [
+      {
+        "tag": "BUTTON",
+        "text": "CLAIM MY FREE PRODUCTS",
+        "class": "card-offerwall-cta",
+        "rect": {
+          "x": 75.94781494140625,
+          "y": 411.0477294921875,
+          "width": 260.1043701171875,
+          "height": 73.52951049804688,
+          "top": 411.0477294921875,
+          "right": 336.05218505859375,
+          "bottom": 484.5772399902344,
+          "left": 75.94781494140625
+        }
+      }
+    ],
+    "slots": [],
+    "resources": []
+  }
+}

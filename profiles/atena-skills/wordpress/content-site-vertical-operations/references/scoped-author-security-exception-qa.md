@@ -4,7 +4,7 @@ Use somente após decisão humana específica para alterar a proteção de autor
 
 ## Preflight e bytes
 
-1. Confira a mensagem humana real, a lista exata de URLs/autor/métodos e os dois caminhos de implementação/estágio/rollback. Resolva domínio, instalação, owner, ausência de symlink e estado anterior; se houver intent/arquivo inesperado, reconcilie sem sobrescrever/repetir.
+1. Antes de delimitar a exceção, levante os links nativos de paginação e o conjunto de artigos do autor; inclua no plano o percurso completo necessário ao pedido, em vez de descobrir uma segunda rota só depois da implantação. Exija escopo humano explícito para esse conjunto finito, sem wildcard para autores ou páginas futuras. Confira a mensagem humana real, a lista exata de URLs/autor/métodos e os dois caminhos de implementação/estágio/rollback. Resolva domínio, instalação, owner, ausência de symlink e estado anterior; se houver intent/arquivo inesperado, reconcilie sem sobrescrever/repetir.
 2. Leia o método e o hook efetivamente registrados do fornecedor, versão, prioridade, valor salvo/efetivo e SHA do arquivo. A exceção deve remover somente o callback conhecido da memória daquela requisição após guards completos; não alterar a opção, chamar save de segurança ou desativar o plugin globalmente.
 3. Teste o código contra o método capturado e doubles declarados, com positivos e negativos. Preservar os artefatos anteriores e registrar supersessão de hash/expectativa quando um safeguard precisar de revisão; teste local não comprova produção.
 
@@ -21,7 +21,7 @@ Use somente após decisão humana específica para alterar a proteção de autor
 2. Prepare rollback pelos bytes inertes no mesmo alvo e pelo mesmo estágio aprovado, sem remover arquivo/diretório ou restaurar opções globais. Não declare rollback produtivo testado se só houve lint/harness ou se não foi acionado.
 3. Exija GET/HEAD normais sem login/query na origem e no público, nome/biografia nativos, canonical e desktop/mobile. Compare estados nativos protegidos e fornecedor/opção/hooks antes/depois.
 4. Compare negativos reais com o baseline, sem impor403 quando o mecanismo já retorna404/redirect. Inclua enumeração, REST/users, outro autor real, queries de tracking/autor, paginação/feed e métodos fora da allowlist; não siga redirects para classificar bypass.
-5. Inspecione a navegação visível. Se a página-base aponta a uma paginação ainda bloqueada por exclusão explícita do contrato, registre e informe a limitação; não libere silenciosamente a rota nem declare o arquivo inteiro irrestrito. Diferencie conclusão da URL autorizada de conclusão incondicional do lote.
+5. Inspecione a navegação visível e exercite os links reais de ida/volta. Confira em código que a união dos artigos nas páginas aprovadas corresponde ao conjunto nativo esperado, sem duplicatas ou lacunas, nos dois perfis de viewport. Se uma paginação continua bloqueada por exclusão explícita do contrato, registre e informe a limitação; não libere silenciosamente a rota nem declare o arquivo inteiro irrestrito. Ao completar uma paginação autorizada, use allowlist de caminho e valor nativo de `paged` coerentes; mantenha autor/host/métodos/query e demais negativos protegidos. O rollback dessa extensão deve restaurar a versão anterior que já funcionava na página-base, não desativar toda a correção.
 
 ## Continuidade
 

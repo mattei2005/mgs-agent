@@ -1,0 +1,146 @@
+{
+  "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.7827.55 Mobile Safari/537.36",
+  "width": 412,
+  "wrapperKeys": [
+    "config",
+    "targetingKeys",
+    "adInserter",
+    "botDetector",
+    "captcher",
+    "messenger",
+    "consentWarner",
+    "experimenter",
+    "pixelManager",
+    "pushAlert",
+    "pricing",
+    "refresher",
+    "requester",
+    "styler",
+    "tagManager",
+    "tracker",
+    "urlBroker",
+    "geolocator",
+    "rewarded",
+    "draining"
+  ],
+  "configKeys": [
+    "pixels",
+    "general",
+    "pricing",
+    "pushAlert",
+    "requester",
+    "tagManager",
+    "botDetector",
+    "experimenter",
+    "adInserter",
+    "refresher",
+    "tracker"
+  ],
+  "requesterKeys": [
+    "revampMapping",
+    "rewardedAdsMapping",
+    "marginDesktop",
+    "marginMobile",
+    "customSlotIds",
+    "stickyTop",
+    "interstitialEnabled",
+    "anchorEnabled",
+    "limitAdContent",
+    "lazyAnchor",
+    "keyValues",
+    "ignoreAdRules"
+  ],
+  "generalKeys": [
+    "domain",
+    "company",
+    "country",
+    "vertical",
+    "networkCode",
+    "version"
+  ],
+  "requester": {
+    "rewardedAdsMapping": [
+      {
+        "name": "shein-rewarded",
+        "modal": {
+          "type": "blur",
+          "title": "Good news!!! Free SHEIN products are available!",
+          "offset": false,
+          "ctaText": "CLAIM MY FREE PRODUCTS",
+          "ctaColor": "#2e8b57",
+          "subtitle": " ",
+          "disclaimer": "You will see a sponsored ad.",
+          "elementToBlur": [
+            ".entry-content",
+            ".post-content"
+          ]
+        },
+        "lazyAdTop": true,
+        "targeting": {
+          "device": "mob",
+          "pathname": "rec-us-app-shein-circle-of-style",
+          "utm_source": [
+            "facebook"
+          ]
+        }
+      },
+      {
+        "name": "blur-content",
+        "targeting": {
+          "utm_source": [
+            "google",
+            "facebook",
+            "mct",
+            "email",
+            "sms",
+            "pushalert"
+          ],
+          "device": "mob",
+          "page_type": "p1"
+        },
+        "modal": {
+          "type": "blur",
+          "title": "Unlock your credit offer",
+          "subtitle": "Take action to continue accessing your recommendation on this site",
+          "ctaText": "Unlock Offer",
+          "ctaColor": "#0581c6",
+          "disclaimer": "View short AD",
+          "offset": true,
+          "elementToBlur": [
+            ".jd-post-content",
+            "#chat-box"
+          ]
+        }
+      }
+    ],
+    "interstitialEnabled": true,
+    "anchorEnabled": false,
+    "limitAdContent": 0,
+    "lazyAnchor": true
+  },
+  "runtimeRequesterKeys": [
+    "adAnchorDisplayed",
+    "adRewardedInfo",
+    "adManualInterstititalInfo",
+    "targetingKeys",
+    "config",
+    "generalConfig",
+    "tagManager",
+    "pricing",
+    "refresher",
+    "tracker",
+    "styler",
+    "adInserter",
+    "pixelManager",
+    "shouldInsertAds",
+    "observerToDisplayAd",
+    "observerSidebar",
+    "stickedAdList",
+    "ads",
+    "defaultBodyPaddingBottom"
+  ],
+  "slots": [],
+  "adDOM": [],
+  "device": "mobile",
+  "http": 200
+}

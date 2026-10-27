@@ -1,0 +1,253 @@
+{
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+  "width": 1280,
+  "wrapperKeys": [
+    "config",
+    "targetingKeys",
+    "adInserter",
+    "botDetector",
+    "captcher",
+    "messenger",
+    "consentWarner",
+    "experimenter",
+    "pixelManager",
+    "pushAlert",
+    "pricing",
+    "refresher",
+    "requester",
+    "styler",
+    "tagManager",
+    "tracker",
+    "urlBroker",
+    "geolocator",
+    "rewarded",
+    "draining"
+  ],
+  "configKeys": [
+    "pixels",
+    "general",
+    "pricing",
+    "pushAlert",
+    "requester",
+    "tagManager",
+    "botDetector",
+    "experimenter",
+    "adInserter",
+    "refresher",
+    "tracker"
+  ],
+  "requesterKeys": [
+    "revampMapping",
+    "rewardedAdsMapping",
+    "marginDesktop",
+    "marginMobile",
+    "customSlotIds",
+    "stickyTop",
+    "interstitialEnabled",
+    "anchorEnabled",
+    "limitAdContent",
+    "lazyAnchor",
+    "keyValues",
+    "ignoreAdRules"
+  ],
+  "generalKeys": [
+    "domain",
+    "company",
+    "country",
+    "vertical",
+    "networkCode",
+    "version"
+  ],
+  "requester": {
+    "rewardedAdsMapping": [
+      {
+        "name": "shein-rewarded",
+        "modal": {
+          "type": "blur",
+          "title": "Good news!!! Free SHEIN products are available!",
+          "offset": false,
+          "ctaText": "CLAIM MY FREE PRODUCTS",
+          "ctaColor": "#2e8b57",
+          "subtitle": " ",
+          "disclaimer": "You will see a sponsored ad.",
+          "elementToBlur": [
+            ".entry-content",
+            ".post-content"
+          ]
+        },
+        "lazyAdTop": true,
+        "targeting": {
+          "device": "mob",
+          "pathname": "rec-us-app-shein-circle-of-style",
+          "utm_source": [
+            "facebook"
+          ]
+        }
+      },
+      {
+        "name": "blur-content",
+        "targeting": {
+          "utm_source": [
+            "google",
+            "facebook",
+            "mct",
+            "email",
+            "sms",
+            "pushalert"
+          ],
+          "device": "mob",
+          "page_type": "p1"
+        },
+        "modal": {
+          "type": "blur",
+          "title": "Unlock your credit offer",
+          "subtitle": "Take action to continue accessing your recommendation on this site",
+          "ctaText": "Unlock Offer",
+          "ctaColor": "#0581c6",
+          "disclaimer": "View short AD",
+          "offset": true,
+          "elementToBlur": [
+            ".jd-post-content",
+            "#chat-box"
+          ]
+        }
+      }
+    ],
+    "interstitialEnabled": false,
+    "anchorEnabled": false,
+    "limitAdContent": 0,
+    "lazyAnchor": true
+  },
+  "runtimeRequesterKeys": [
+    "adAnchorDisplayed",
+    "adRewardedInfo",
+    "adManualInterstititalInfo",
+    "targetingKeys",
+    "config",
+    "generalConfig",
+    "tagManager",
+    "pricing",
+    "refresher",
+    "tracker",
+    "styler",
+    "adInserter",
+    "pixelManager",
+    "shouldInsertAds",
+    "observerToDisplayAd",
+    "observerSidebar",
+    "stickedAdList",
+    "ads",
+    "defaultBodyPaddingBottom"
+  ],
+  "slots": [
+    {
+      "id": "jbf_digital-trust_vizioid_desk_us_top",
+      "path": "/21922122164/jbf_digital-trust_vizioid_desk_us_top",
+      "sizes": [
+        {
+          "w": 728,
+          "h": 90
+        }
+      ]
+    },
+    {
+      "id": "gpt_unit_/21922122164/jbf_digital-trust_vizioid_desk_us_interstitial_0",
+      "path": "/21922122164/jbf_digital-trust_vizioid_desk_us_interstitial",
+      "sizes": [
+        {
+          "w": 1,
+          "h": 1
+        }
+      ]
+    },
+    {
+      "id": "jbf_digital-trust_vizioid_desk_us_sidebar_1",
+      "path": "/21922122164/jbf_digital-trust_vizioid_desk_us_sidebar/1",
+      "sizes": [
+        {
+          "w": 120,
+          "h": 600
+        },
+        {
+          "w": 160,
+          "h": 600
+        },
+        {
+          "w": 300,
+          "h": 600
+        },
+        {
+          "w": 336,
+          "h": 280
+        },
+        {
+          "w": 300,
+          "h": 250
+        },
+        {
+          "w": 336,
+          "h": 250
+        },
+        {
+          "w": 250,
+          "h": 250
+        }
+      ]
+    }
+  ],
+  "adDOM": [
+    {
+      "id": "jbf_digital-trust_vizioid_desk_us_top",
+      "class": "ad-unit top unfilled",
+      "device": "desk",
+      "name": "v1.1 desk top inside post",
+      "position": "top",
+      "rect": {
+        "x": 62.5,
+        "y": 64,
+        "width": 1140,
+        "height": 0,
+        "top": 64,
+        "right": 1202.5,
+        "bottom": 64,
+        "left": 62.5
+      }
+    },
+    {
+      "id": "jbf_digital-trust_vizioid_desk_us_sidebar_1",
+      "class": "ad-unit unfilled",
+      "device": null,
+      "name": null,
+      "position": "sidebar",
+      "rect": {
+        "x": 817.5,
+        "y": 64,
+        "width": 385,
+        "height": 250,
+        "top": 64,
+        "right": 1202.5,
+        "bottom": 314,
+        "left": 817.5
+      }
+    },
+    {
+      "id": "",
+      "class": "ad-unit",
+      "device": null,
+      "name": null,
+      "position": "sidebar",
+      "rect": {
+        "x": 817.5,
+        "y": 2114,
+        "width": 385,
+        "height": 0,
+        "top": 2114,
+        "right": 1202.5,
+        "bottom": 2114,
+        "left": 817.5
+      }
+    }
+  ],
+  "device": "desktop",
+  "http": 200
+}
