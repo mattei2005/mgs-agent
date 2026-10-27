@@ -83,11 +83,11 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_metrics_updated_h_blocked_capture_parity",
-    "validated_metrics_at": "2026-10-26T21:03:58.912493-04:00",
-    "verified_at": "2026-10-26T21:07:28.342279-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T210402919334",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T210404926476",
+    "status": "partial_metrics_validated_native_auth_surface_blocked",
+    "validated_metrics_at": "2026-10-26T21:47:00.950130-04:00",
+    "verified_at": "2026-10-26T21:52:20.070713-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T214704129032",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T214632743625",
     "fresh_h_account_ids": [],
     "pending_h_account_ids": [
       "1753257812779707",
@@ -138,20 +138,17 @@
     ],
     "h_preserved_read_at_min": "2026-10-26T16:49:42.897074-04:00",
     "h_preserved_read_at_max": "2026-10-26T17:18:49.099356-04:00",
-    "action": "E/F and C/G/I/J47 refreshed; H38 entirely preserved with original times after first Accounts collector stopped: wrong surface/pixels and Windows Security AX; no retry/bypass. D preserved8numeric1blank; Mavroa new generic event instrument unverified.47IDs,9card38line and F/G/H/I/J formulas/links readbackPASS; structure not H freshness.",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T214632743625/closure-current.json",
     "totals_usd": {
-      "label": "TOTAL GERAL — 47 contas",
-      "F": 0,
-      "G": 31017.44,
-      "H": 531179.36,
-      "I": 502104.57,
-      "J": 761419.15
+      "average_daily": "31017.70",
+      "balance": "493980.87",
+      "month_spend": "762800.74"
     },
     "payments_executed": 0,
     "meta_writes": 0,
-    "cron_changes": 0,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T210404926476/closure.json",
-    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
+    "report_infra_status": "verified",
+    "action": "E/F and C/G/I/J refreshed47; H38 preserved. Native Google passkey AX and input/capture mismatch; no Meta login failure proven. Collector pre-input native-auth guard tested; D historical pending for Mavroa03.",
+    "report_infra_message_id": "1564456688159952999"
   },
   "pending_card_history": {
     "status": "pending_historical_instrument",

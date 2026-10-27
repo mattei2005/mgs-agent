@@ -31,11 +31,12 @@ def act(x):
 def snap(label):
  tp=B/(label+'.txt');tp.write_text(text);os.chmod(tp,0o600);v=call({'action':'capture','mode':'vision','pid':pid,'window_id':wid});sp=v.get('screenshot_path');assert sp and Path(sp).is_file(),'missing_pixels';pp=B/(label+'.png');shutil.copy2(sp,pp);os.chmod(pp,0o600);return str(pp)
 def gate():
+ if re.search(r'^Windows Security$',text,re.M):raise RuntimeError('native_auth_surface_conflict_no_input')
  if re.search(r'temporarily blocked|going too fast|Enter the 6-digit code|Confirm it.s you|Log into Facebook|Log in to Facebook',text,re.I):raise RuntimeError('provider_or_auth_gate')
 def search():
  return [e for e in es if e.get('role')in ['Edit','TextField','SearchBox']and re.search(r'Search by name|^Search$',e.get('label',''),re.I)]
 try:
- w=subprocess.run(['/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh','call','list_windows'],capture_output=True,text=True,timeout=45);windows=json.loads(w.stdout)['windows'];surface=B/'pc1-surface.json';surface=surface if surface.exists()else H/'pc1-browser-surface.json';known=json.loads(surface.read_text());ws=[x for x in windows if x.get('pid')==known['pid']and x.get('window_id')==known['window_id']and not x.get('minimized')and'chrome'in str(x.get('app_name','')).lower()];assert len(ws)==1,'approved_chrome_not_live';pid=ws[0]['pid'];wid=ws[0]['window_id'];cap();act({'action':'key','keys':'ctrl+t'});created=True
+ w=subprocess.run(['/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh','call','list_windows'],capture_output=True,text=True,timeout=45);windows=json.loads(w.stdout)['windows'];surface=B/'pc1-surface.json';surface=surface if surface.exists()else H/'pc1-browser-surface.json';known=json.loads(surface.read_text());ws=[x for x in windows if x.get('pid')==known['pid']and x.get('window_id')==known['window_id']and not x.get('minimized')and'chrome'in str(x.get('app_name','')).lower()];assert len(ws)==1,'approved_chrome_not_live';pid=ws[0]['pid'];wid=ws[0]['window_id'];cap();gate();act({'action':'key','keys':'ctrl+t'});created=True
  url='https://adsmanager.facebook.com/adsmanager/billing_hub/accounts?asset_id=2852476828464907&business_id=155263197283282&payment_account_id=2852476828464907&placement=BILLING_HUB&session_id=upl_1793047342_61c89fd3-1293-4191-aab6-314f3793aac2'
  act({'action':'key','keys':'ctrl+l'});act({'action':'type','text':url});act({'action':'key','keys':'return'});deadline=time.monotonic()+70
  while True:

@@ -1,0 +1,85 @@
+{
+  "status": "partial_metrics_validated_native_auth_surface_blocked",
+  "source_message": "1564454968478535682",
+  "thread_id": "1563926766286803004",
+  "verified_at": "2026-10-26T21:52:20.070713-04:00",
+  "metrics_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T214704129032",
+  "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261026T214630140699",
+  "accounts": 47,
+  "metrics_collected_at": "2026-10-26T21:47:00.950130-04:00",
+  "totals_usd": {
+    "average_daily": "31017.70",
+    "balance": "493980.87",
+    "month_spend": "762800.74"
+  },
+  "h_new_readings": 0,
+  "h_preserved": 38,
+  "h_collection_error": "accounts_search_not_ready",
+  "diagnosis": {
+    "initial_pixels": "Meta Accounts",
+    "ax_native_auth": "Windows Security; Google passkey",
+    "failed_collector_pixels": "different non-Meta domain",
+    "root_cause": "capture/input surface mismatch demonstrated; native auth coexists but causal role unproven",
+    "required_owner_action": "finish or close native Google passkey dialog on PC1 and leave approved Meta Chrome available; no secret in chat"
+  },
+  "pending_card_history": [
+    "1543098427832443"
+  ],
+  "guard_tests": [
+    {
+      "input_class": "native_auth",
+      "expected": "native_auth_surface_conflict_no_input",
+      "actual": "native_auth_surface_conflict_no_input"
+    },
+    {
+      "input_class": "provider_or_ready",
+      "expected": null,
+      "actual": null
+    },
+    {
+      "input_class": "provider_or_ready",
+      "expected": "provider_or_auth_gate",
+      "actual": "provider_or_auth_gate"
+    },
+    {
+      "input_class": "provider_or_ready",
+      "expected": "provider_or_auth_gate",
+      "actual": "provider_or_auth_gate"
+    }
+  ],
+  "validation": {
+    "status": "snapshot_readback_pass",
+    "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+    "sheet_id": 271321738,
+    "business_id": "155263197283282",
+    "currency": "USD",
+    "accounts": 47,
+    "groups": {
+      "Cartão de crédito": 9,
+      "Linha de crédito": 38
+    },
+    "card_charge_values_present": 8,
+    "card_charge_blank_rows": [
+      8
+    ],
+    "totals_validated_columns": [
+      "F",
+      "G",
+      "H",
+      "I",
+      "J"
+    ],
+    "pay_now_values_present": 38,
+    "september_due_usd": "0.00",
+    "all_account_billing_links_checked": true,
+    "historical_instrument_not_revalidated_by_this_script": true,
+    "google_write_calls": 0,
+    "meta_calls": 0,
+    "payments_executed": 0
+  },
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "lease_released": true,
+  "report_infra_status": "verified",
+  "report_infra_message_id": "1564456688159952999"
+}
