@@ -101,6 +101,8 @@ No QA da bio pública, capture o componente completo de autoria, não só o pai 
 
 ## Diagnóstico de biografia em portal multilíngue
 
+Quando houver autorização editorial para executar a rota nativa comprovada, siga também `references/minimal-native-multilingual-own-bio-write.md`: intenção anti-replay, sanitização stock, apenas chaves próprias aprovadas, preservação privada dos demais dados e readback independente. O diagnóstico abaixo não concede essa autorização nem garante a apresentação pública.
+
 - Comprove suporte e mapeamento no código instalado antes de propor chaves localizadas; inspecione somente usermeta de descrição da identidade própria autorizada e capture Reflection/linhas/SHA-256 dos métodos pertinentes e callbacks de `get_user_metadata`/`get_the_author_description`.
 - Diferencie campo de formulário e chave persistida: o idioma padrão pode usar `description` mesmo quando o formulário usa um sufixo. Mudar a bio desse idioma pode ser inseparável de mudar a bio global; preservar configuração de idioma/locale não significa preservar o valor da bio padrão.
 - Inspecione o save nativo antes de usá-lo como transporte parcial: um handler que percorre todos os idiomas e trata campos omitidos como vazio pode apagar outra bio ou criar linhas vazias. Não invoque hooks artificialmente nem use esse save para prometer zero escrita em idiomas preservados.
