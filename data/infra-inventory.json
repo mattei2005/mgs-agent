@@ -51666,6 +51666,52 @@
         "payments_executed": 0,
         "meta_writes": 0
       }
+    },
+    {
+      "id": "meta-manual-payments-refresh-1564617085001408595",
+      "agent": "zeus",
+      "type": "authorized_financial_snapshot_recovery",
+      "authority_message_id": "1564617085001408595",
+      "updated_at": "2026-10-27T08:57:16.607920-04:00",
+      "status": "full_refresh_validated",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/data/meta-manual-payments/last-refresh.json",
+        "/root/mgs-agent/data/meta-manual-payments/pc1-card-ledger.json",
+        "/root/mgs-agent/data/meta-manual-payments/pc1-pay-now-ledger.json"
+      ],
+      "verification": {
+        "accounts": 47,
+        "groups": {
+          "Cartão de crédito": 9,
+          "Linha de crédito": 38
+        },
+        "h_fresh": 38,
+        "h_preserved": 0,
+        "historical_card_instrument_pending": 0,
+        "card_proofs_updated": 3,
+        "card_no_charge_located": [
+          {
+            "account_id": "1419148446852410",
+            "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+            "reason": "no_charge_located",
+            "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+          }
+        ],
+        "source_to_live_sheet_exact": true,
+        "totals_validated_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0,
+        "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646/closure-current.json"
+      }
     }
   ],
   "profile_skill_references": [

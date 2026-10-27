@@ -1,0 +1,133 @@
+{
+  "qualification": {
+    "status": "full_refresh_validated",
+    "validated_metrics_at": "2026-10-27T08:55:33.894762-04:00",
+    "verified_at": "2026-10-27T08:56:56.271523-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T085536489444",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646",
+    "fresh_h_account_ids": [
+      "1001115192056600",
+      "1018267074603840",
+      "1062446663435585",
+      "1062887799996139",
+      "1085117577390237",
+      "1107653168698121",
+      "1245683183659911",
+      "1414197490675732",
+      "1498990138663094",
+      "1526280818302320",
+      "1583000095650153",
+      "1600310064116258",
+      "1736068407518263",
+      "1744611463000838",
+      "1753257812779707",
+      "1829406761389732",
+      "1851640026221079",
+      "1877104513669062",
+      "2031917360813819",
+      "2039876850230678",
+      "2429758060563333",
+      "2633813727134360",
+      "26632890069640784",
+      "2852476828464907",
+      "311204101516831",
+      "3188620887977617",
+      "336562339356179",
+      "3752157451670648",
+      "4511685129081248",
+      "536294549227786",
+      "781612907182683",
+      "7840111366055613",
+      "787796726891306",
+      "814915838330687",
+      "869857549542755",
+      "897046653487466",
+      "908704754163659",
+      "937846586033361"
+    ],
+    "pending_h_account_ids": [],
+    "pending_ui": [],
+    "h_read_at_min": "2026-10-27T08:31:57.833115-04:00",
+    "h_read_at_max": "2026-10-27T08:50:51.025765-04:00",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646/closure-current.json",
+    "totals_usd": {
+      "average_daily": "30842.87",
+      "balance": "490826.58",
+      "month_spend": "772067.26"
+    },
+    "payments_executed": 0,
+    "meta_writes": 0,
+    "report_infra_status": "verified",
+    "action": "47 metrics refreshed; H38 fresh Accounts list readings with exact ID/name, AX and pixels; D3 latest card proofs updated, no pending history events; paid invoices E blank/F0; shared PC1 lease released.",
+    "average_period": {
+      "since": "2026-10-24",
+      "until": "2026-10-26"
+    },
+    "card_no_charge_located": [
+      {
+        "account_id": "1419148446852410",
+        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "reason": "no_charge_located",
+        "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+      }
+    ],
+    "report_infra_message_id": "1564624027492818945"
+  },
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 9,
+    "Linha de crédito": 38
+  },
+  "metrics_source_to_live_sheet_exact": true,
+  "h_source_to_live_sheet_exact": true,
+  "card_ledger_to_sheet_exact": true,
+  "validator": {
+    "status": "snapshot_readback_pass",
+    "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+    "sheet_id": 271321738,
+    "business_id": "155263197283282",
+    "currency": "USD",
+    "accounts": 47,
+    "groups": {
+      "Cartão de crédito": 9,
+      "Linha de crédito": 38
+    },
+    "card_charge_values_present": 8,
+    "card_charge_blank_rows": [
+      8
+    ],
+    "totals_validated_columns": [
+      "F",
+      "G",
+      "H",
+      "I",
+      "J"
+    ],
+    "pay_now_values_present": 38,
+    "september_due_usd": "0.00",
+    "all_account_billing_links_checked": true,
+    "historical_instrument_not_revalidated_by_this_script": true,
+    "google_write_calls": 0,
+    "meta_calls": 0,
+    "payments_executed": 0
+  },
+  "h_new_readings": 38,
+  "h_historical_preserved": 0,
+  "history_new_proofs": 3,
+  "card_no_charge_located": [
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+    }
+  ],
+  "lease_free": true,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cli_diagnostic_recovered": "checkpoint --help invalid subcommand corrected to checkpoint-upsert --help; no effect on financial execution",
+  "recovered_internal_diagnostics": [
+    "Knowledge CLI subcommand corrected before checkpoint write.",
+    "Inventory readback tolerated preexisting entries lacking id; exact landed entry reconciled without duplicate."
+  ]
+}

@@ -83,95 +83,83 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_metrics_validated_native_auth_surface_blocked",
-    "validated_metrics_at": "2026-10-27T08:03:20.774782-04:00",
-    "verified_at": "2026-10-27T08:05:59.323043-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T080323886195",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843",
-    "fresh_h_account_ids": [],
-    "pending_h_account_ids": [
-      "1753257812779707",
-      "1107653168698121",
-      "2633813727134360",
-      "2039876850230678",
-      "1851640026221079",
+    "status": "full_refresh_validated",
+    "validated_metrics_at": "2026-10-27T08:55:33.894762-04:00",
+    "verified_at": "2026-10-27T08:56:56.271523-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T085536489444",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646",
+    "fresh_h_account_ids": [
       "1001115192056600",
       "1018267074603840",
-      "1062887799996139",
       "1062446663435585",
-      "2031917360813819",
-      "897046653487466",
+      "1062887799996139",
+      "1085117577390237",
+      "1107653168698121",
+      "1245683183659911",
+      "1414197490675732",
       "1498990138663094",
-      "814915838330687",
+      "1526280818302320",
+      "1583000095650153",
+      "1600310064116258",
+      "1736068407518263",
+      "1744611463000838",
+      "1753257812779707",
+      "1829406761389732",
+      "1851640026221079",
+      "1877104513669062",
+      "2031917360813819",
+      "2039876850230678",
+      "2429758060563333",
+      "2633813727134360",
+      "26632890069640784",
+      "2852476828464907",
+      "311204101516831",
       "3188620887977617",
+      "336562339356179",
       "3752157451670648",
       "4511685129081248",
-      "1414197490675732",
-      "2852476828464907",
-      "1829406761389732",
-      "937846586033361",
-      "336562339356179",
-      "1744611463000838",
-      "1245683183659911",
-      "311204101516831",
-      "1526280818302320",
       "536294549227786",
-      "1085117577390237",
-      "1736068407518263",
-      "1877104513669062",
-      "869857549542755",
-      "7840111366055613",
-      "1583000095650153",
-      "2429758060563333",
       "781612907182683",
+      "7840111366055613",
       "787796726891306",
-      "1600310064116258",
+      "814915838330687",
+      "869857549542755",
+      "897046653487466",
       "908704754163659",
-      "26632890069640784"
+      "937846586033361"
     ],
-    "pending_ui": [
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "648687381127947",
-        "name": "Financeadx-MX-CC-ES-01",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
-    ],
-    "h_preserved_read_at_min": "2026-10-26T16:49:42.897074-04:00",
-    "h_preserved_read_at_max": "2026-10-26T17:18:49.099356-04:00",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843/closure-current.json",
+    "pending_h_account_ids": [],
+    "pending_ui": [],
+    "h_read_at_min": "2026-10-27T08:31:57.833115-04:00",
+    "h_read_at_max": "2026-10-27T08:50:51.025765-04:00",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646/closure-current.json",
     "totals_usd": {
-      "average_daily": "30839.48",
-      "balance": "489879.63",
-      "month_spend": "771155.61"
+      "average_daily": "30842.87",
+      "balance": "490826.58",
+      "month_spend": "772067.26"
     },
     "payments_executed": 0,
     "meta_writes": 0,
     "report_infra_status": "verified",
-    "action": "E/F and C/G/I/J refreshed47; invoices pending0; H38 preserved. Before any input, AX Windows Security / Choose a passkey / google.com while pixels show Meta Accounts; no Meta logout proven. D3 historical instrument pending; lease free.",
+    "action": "47 metrics refreshed; H38 fresh Accounts list readings with exact ID/name, AX and pixels; D3 latest card proofs updated, no pending history events; paid invoices E blank/F0; shared PC1 lease released.",
     "average_period": {
       "since": "2026-10-24",
       "until": "2026-10-26"
     },
-    "report_infra_message_id": "1564611165005287545"
+    "card_no_charge_located": [
+      {
+        "account_id": "1419148446852410",
+        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "reason": "no_charge_located",
+        "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+      }
+    ],
+    "report_infra_message_id": "1564624027492818945"
   },
   "pending_card_history": {
-    "status": "pending_historical_instrument",
-    "account_ids": [
-      "1150399088163771",
-      "648687381127947",
-      "1543098427832443"
-    ],
-    "reason": "new_generic_payment_since_pc1_proof; D preserved, no classification from default/event"
+    "status": "verified_no_new_generic_events",
+    "account_ids": [],
+    "reason": "Three pending instruments resolved from actual PC1 transaction pixels; final API refresh pending_ui empty. Blank no-charge account remains explicitly qualified."
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -244,7 +232,7 @@
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
   "layout_version": 3,
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-pay-now-1563981039230255186",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646",
   "pay_now_updated_each_tick": true,
   "pay_now_collection_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
   "schema": {
