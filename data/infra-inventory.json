@@ -892,6 +892,164 @@
     }
   ],
   "runtime_artifacts": [
+{
+  "id": "meta-manual-payments-refresh-20261027-1402",
+  "agent": "zeus",
+  "type": "authorized_recurring_financial_snapshot",
+  "status": "partial_metrics_validated_native_auth_surface_blocked",
+  "updated_at": "2026-10-27T14:06:52.881613-04:00",
+  "paths": [
+    "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+    "/root/mgs-agent/data/meta-manual-payments/last-refresh.json"
+  ],
+  "verification": {
+    "status": "partial_metrics_validated_native_auth_surface_blocked",
+    "validated_metrics_at": "2026-10-27T14:03:27.498663-04:00",
+    "verified_at": "2026-10-27T14:06:52.881613-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T140330096695",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514",
+    "accounts": 47,
+    "groups": {
+      "Cartão de crédito": 12,
+      "Linha de crédito": 35
+    },
+    "source_to_live_sheet_cgij_exact": true,
+    "full_grid_narrow_write_readback": true,
+    "totals_validated_columns": [
+      "F",
+      "G",
+      "H",
+      "I",
+      "J"
+    ],
+    "fresh_h_account_ids": [],
+    "pending_h_account_ids": [
+      "336562339356179",
+      "3752157451670648",
+      "2039876850230678",
+      "311204101516831",
+      "26632890069640784",
+      "1526280818302320",
+      "1085117577390237",
+      "3188620887977617",
+      "1498990138663094",
+      "937846586033361",
+      "536294549227786",
+      "4511685129081248",
+      "814915838330687",
+      "1851640026221079",
+      "1744611463000838",
+      "1001115192056600",
+      "1829406761389732",
+      "2031917360813819",
+      "1062887799996139",
+      "897046653487466",
+      "1736068407518263",
+      "2633813727134360",
+      "1018267074603840",
+      "1753257812779707",
+      "908704754163659",
+      "869857549542755",
+      "1414197490675732",
+      "1245683183659911",
+      "1107653168698121",
+      "787796726891306",
+      "781612907182683",
+      "1583000095650153",
+      "2429758060563333",
+      "1600310064116258",
+      "7840111366055613"
+    ],
+    "h_preserved_from_initial_snapshot": true,
+    "historical_h_note_read_at_min": "2026-10-27T08:31:57.833115-04:00",
+    "historical_h_note_read_at_max": "2026-10-27T08:50:51.025765-04:00",
+    "h_preexisting_value_note_discrepancies": [
+      {
+        "account_id": "1526280818302320",
+        "name": "Vizioid-US-SHEIN-EN-01-G001",
+        "sheet_amount": "0",
+        "historical_ledger_amount": "1839.96",
+        "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
+      },
+      {
+        "account_id": "1085117577390237",
+        "name": "Vizioid-US-SHEIN-EN-03-G003",
+        "sheet_amount": "0",
+        "historical_ledger_amount": "1686.72",
+        "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
+      }
+    ],
+    "pending_ui": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1877104513669062",
+        "name": "Vizioid-US-SHEIN-EN-05-G005",
+        "reason": "no_prior_pc1_card_history_proof"
+      }
+    ],
+    "card_blank_rows": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1419148446852410",
+        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+        "reason": "no_charge_located"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1877104513669062",
+        "name": "Vizioid-US-SHEIN-EN-05-G005",
+        "reason": "no_prior_pc1_card_history_proof"
+      }
+    ],
+    "card_charge_values_present": 8,
+    "totals_usd": {
+      "average_daily": "30858.57",
+      "balance": "488873.29",
+      "month_spend": "778339.14"
+    },
+    "average_period": [
+      {
+        "since": "2026-10-24",
+        "until": "2026-10-26"
+      }
+    ],
+    "invoice_period": "2026-09-01",
+    "invoice_due_usd": "0.00",
+    "visible_invoice_numbers": 0,
+    "native_guard_blocked_before_input": true,
+    "capture_parity": "AX has Windows Security / Choose a passkey / google.com while pixels show Meta Accounts Digital Trust; no keyboard or navigation allowed",
+    "lease_free": true,
+    "owned_tabs_created": 0,
+    "payments_executed": 0,
+    "meta_writes": 0,
+    "cron_changes": 0,
+    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514/closure-current.json",
+    "workbook_sheet_count": 2
+  }
+},
     {
       "id": "raquel-editorial-technical-authority-1564661630766424096",
       "actor": "zeus",
