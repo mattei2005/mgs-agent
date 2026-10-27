@@ -12,7 +12,7 @@ Use somente quando a fonte canônica autorizar corrigir a apresentação localiz
 
 ## Inspeção e preparação
 
-1. Leia as classes/métodos e a árvore de efeitos realmente instalados, inclusive hooks genéricos, termos privados, erros, caches internos e integrações SEO. Registre hashes, callbacks, flags e transporte real; não invente REST para CPT privado.
+1. Leia as classes/métodos e a árvore de efeitos realmente instalados, inclusive hooks genéricos, termos privados, erros, caches internos e integrações SEO. Registre hashes, callbacks, flags e transporte real; não invente REST para CPT privado. Antes de criar qualquer canário WPCode, confirme na identidade dedicada `wpcode_edit_snippets` e `wpcode_activate_snippets`, incluindo o segundo check com a instância real do snippet/tipo. Renderer instalado e SSH disponível não substituem a capacidade: `WPCode_Snippet::save()` pode recusar ativação e ainda persistir outros campos. Não invoque o save como teste de permissão nem use SQL, troca de identidade ou filtros de capacidades para contorná-lo. Confira separadamente `edit_css` para um renderer CSS nativo já existente; essa capacidade não libera PHP/WPCode nem dispensa escopo, efeitos indiretos e canário de layout.
 2. Teste o código local com grafos capturados e contextos positivos/negativos. Faça lint no PHP do aplicativo por stdin sem salvar arquivo remoto. Testes com stubs não provam persistência WordPress ou apresentação pública.
 3. Fotografe posts, todas as postmetas, termos, indexables e opções globais protegidas, além dos snippets/erros/opções de cache existentes. Se houver outro snippet ativo ou erro alheio incompatível com a inspeção, reconcilie antes de executar.
 
