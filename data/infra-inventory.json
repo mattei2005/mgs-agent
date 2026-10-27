@@ -51632,6 +51632,40 @@
         "h_preserved": 38,
         "payments_executed": 0
       }
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261027-0802",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_metrics_validated_native_auth_surface_blocked",
+      "updated_at": "2026-10-27T08:05:59.323043-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/data/meta-manual-payments/last-refresh.json"
+      ],
+      "verification": {
+        "accounts": 47,
+        "groups": {
+          "Cartão de crédito": 9,
+          "Linha de crédito": 38
+        },
+        "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843/closure-current.json",
+        "source_to_sheet_exact": true,
+        "totals_validated_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "h_fresh": 0,
+        "h_preserved": 38,
+        "historical_instrument_pending": 3,
+        "native_guard_blocked_before_input": true,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0
+      }
     }
   ],
   "profile_skill_references": [

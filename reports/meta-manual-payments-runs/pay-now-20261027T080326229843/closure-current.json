@@ -1,0 +1,385 @@
+{
+  "qualification": {
+    "status": "partial_metrics_validated_native_auth_surface_blocked",
+    "validated_metrics_at": "2026-10-27T08:03:20.774782-04:00",
+    "verified_at": "2026-10-27T08:05:59.323043-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T080323886195",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843",
+    "fresh_h_account_ids": [],
+    "pending_h_account_ids": [
+      "1753257812779707",
+      "1107653168698121",
+      "2633813727134360",
+      "2039876850230678",
+      "1851640026221079",
+      "1001115192056600",
+      "1018267074603840",
+      "1062887799996139",
+      "1062446663435585",
+      "2031917360813819",
+      "897046653487466",
+      "1498990138663094",
+      "814915838330687",
+      "3188620887977617",
+      "3752157451670648",
+      "4511685129081248",
+      "1414197490675732",
+      "2852476828464907",
+      "1829406761389732",
+      "937846586033361",
+      "336562339356179",
+      "1744611463000838",
+      "1245683183659911",
+      "311204101516831",
+      "1526280818302320",
+      "536294549227786",
+      "1085117577390237",
+      "1736068407518263",
+      "1877104513669062",
+      "869857549542755",
+      "7840111366055613",
+      "1583000095650153",
+      "2429758060563333",
+      "781612907182683",
+      "787796726891306",
+      "1600310064116258",
+      "908704754163659",
+      "26632890069640784"
+    ],
+    "pending_ui": [
+      {
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "648687381127947",
+        "name": "Financeadx-MX-CC-ES-01",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
+    "h_preserved_read_at_min": "2026-10-26T16:49:42.897074-04:00",
+    "h_preserved_read_at_max": "2026-10-26T17:18:49.099356-04:00",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843/closure-current.json",
+    "totals_usd": {
+      "average_daily": "30839.48",
+      "balance": "489879.63",
+      "month_spend": "771155.61"
+    },
+    "payments_executed": 0,
+    "meta_writes": 0,
+    "report_infra_status": "verified",
+    "action": "E/F and C/G/I/J refreshed47; invoices pending0; H38 preserved. Before any input, AX Windows Security / Choose a passkey / google.com while pixels show Meta Accounts; no Meta logout proven. D3 historical instrument pending; lease free.",
+    "average_period": {
+      "since": "2026-10-24",
+      "until": "2026-10-26"
+    },
+    "report_infra_message_id": "1564611165005287545"
+  },
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 9,
+    "Linha de crédito": 38
+  },
+  "snapshot_readback_pass": true,
+  "metrics_source_to_live_sheet_exact": true,
+  "invoice_pending_count": 0,
+  "invoice_due_usd": "0.00",
+  "h_new_readings": 0,
+  "h_historical_preserved": 38,
+  "h_preserved_notes": [
+    {
+      "account_id": "336562339356179",
+      "note": "Current balance da linha Accounts: USD 0.00. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:17:49.236066-04:00. Conta 336562339356179; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/336562339356179-receipt.json",
+      "value": {
+        "numberValue": 0
+      }
+    },
+    {
+      "account_id": "3752157451670648",
+      "note": "Current balance da linha Accounts: USD 0.00. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:09:02.465662-04:00. Conta 3752157451670648; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/3752157451670648-receipt.json",
+      "value": {
+        "numberValue": 0
+      }
+    },
+    {
+      "account_id": "3188620887977617",
+      "note": "Current balance da linha Accounts: USD 0.66. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:50:24.537085-04:00. Conta 3188620887977617; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/3188620887977617-receipt.json",
+      "value": {
+        "numberValue": 0.66
+      }
+    },
+    {
+      "account_id": "4511685129081248",
+      "note": "Current balance da linha Accounts: USD 7.00. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:17:12.941094-04:00. Conta 4511685129081248; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/4511685129081248-receipt.json",
+      "value": {
+        "numberValue": 7
+      }
+    },
+    {
+      "account_id": "1829406761389732",
+      "note": "Current balance da linha Accounts: USD 138.91. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:51:08.352018-04:00. Conta 1829406761389732; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1829406761389732-receipt.json",
+      "value": {
+        "numberValue": 138.91
+      }
+    },
+    {
+      "account_id": "2031917360813819",
+      "note": "Current balance da linha Accounts: USD 148.49. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:58:27.452804-04:00. Conta 2031917360813819; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/2031917360813819-receipt.json",
+      "value": {
+        "numberValue": 148.49
+      }
+    },
+    {
+      "account_id": "1062887799996139",
+      "note": "Current balance da linha Accounts: USD 151.94. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:59:05.535624-04:00. Conta 1062887799996139; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1062887799996139-receipt.json",
+      "value": {
+        "numberValue": 151.94
+      }
+    },
+    {
+      "account_id": "897046653487466",
+      "note": "Current balance da linha Accounts: USD 166.71. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:58:47.306030-04:00. Conta 897046653487466; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/897046653487466-receipt.json",
+      "value": {
+        "numberValue": 166.71
+      }
+    },
+    {
+      "account_id": "1736068407518263",
+      "note": "Current balance da linha Accounts: USD 250.56. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:59:24.176584-04:00. Conta 1736068407518263; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1736068407518263-receipt.json",
+      "value": {
+        "numberValue": 250.56
+      }
+    },
+    {
+      "account_id": "1018267074603840",
+      "note": "Current balance da linha Accounts: USD 312.38. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:50:01.834269-04:00. Conta 1018267074603840; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1018267074603840-receipt.json",
+      "value": {
+        "numberValue": 312.38
+      }
+    },
+    {
+      "account_id": "2852476828464907",
+      "note": "Current balance da linha Accounts: USD 492.48. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:49:42.897074-04:00. Conta 2852476828464907; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/2852476828464907-receipt.json",
+      "value": {
+        "numberValue": 492.48
+      }
+    },
+    {
+      "account_id": "937846586033361",
+      "note": "Current balance da linha Accounts: USD 574.24. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:59:43.073047-04:00. Conta 937846586033361; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/937846586033361-receipt.json",
+      "value": {
+        "numberValue": 574.24
+      }
+    },
+    {
+      "account_id": "1498990138663094",
+      "note": "Current balance da linha Accounts: USD 769.36. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:00:04.373148-04:00. Conta 1498990138663094; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1498990138663094-receipt.json",
+      "value": {
+        "numberValue": 769.36
+      }
+    },
+    {
+      "account_id": "2039876850230678",
+      "note": "Current balance da linha Accounts: USD 846.51. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:02:10.793002-04:00. Conta 2039876850230678; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/2039876850230678-receipt.json",
+      "value": {
+        "numberValue": 846.51
+      }
+    },
+    {
+      "account_id": "1062446663435585",
+      "note": "Current balance da linha Accounts: USD 1024.38. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:16:52.395090-04:00. Conta 1062446663435585; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1062446663435585-receipt.json",
+      "value": {
+        "numberValue": 1024.38
+      }
+    },
+    {
+      "account_id": "1753257812779707",
+      "note": "Current balance da linha Accounts: USD 1161.16. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T16:50:46.139543-04:00. Conta 1753257812779707; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1753257812779707-receipt.json",
+      "value": {
+        "numberValue": 1161.16
+      }
+    },
+    {
+      "account_id": "869857549542755",
+      "note": "Current balance da linha Accounts: USD 1266.73. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:17:31.115987-04:00. Conta 869857549542755; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/869857549542755-receipt.json",
+      "value": {
+        "numberValue": 1266.73
+      }
+    },
+    {
+      "account_id": "908704754163659",
+      "note": "Current balance da linha Accounts: USD 1270.39. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:03:09.183847-04:00. Conta 908704754163659; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/908704754163659-receipt.json",
+      "value": {
+        "numberValue": 1270.39
+      }
+    },
+    {
+      "account_id": "1414197490675732",
+      "note": "Current balance da linha Accounts: USD 1486.78. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:03:27.222737-04:00. Conta 1414197490675732; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1414197490675732-receipt.json",
+      "value": {
+        "numberValue": 1486.78
+      }
+    },
+    {
+      "account_id": "1085117577390237",
+      "note": "Current balance da linha Accounts: USD 1634.53. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:04:52.191024-04:00. Conta 1085117577390237; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1085117577390237-receipt.json",
+      "value": {
+        "numberValue": 1634.53
+      }
+    },
+    {
+      "account_id": "1526280818302320",
+      "note": "Current balance da linha Accounts: USD 1784.30. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:05:11.808956-04:00. Conta 1526280818302320; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1526280818302320-receipt.json",
+      "value": {
+        "numberValue": 1784.3
+      }
+    },
+    {
+      "account_id": "1877104513669062",
+      "note": "Current balance da linha Accounts: USD 2924.17. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:18:07.372808-04:00. Conta 1877104513669062; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1877104513669062-receipt.json",
+      "value": {
+        "numberValue": 2924.17
+      }
+    },
+    {
+      "account_id": "814915838330687",
+      "note": "Current balance da linha Accounts: USD 3052.75. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:06:09.916921-04:00. Conta 814915838330687; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/814915838330687-receipt.json",
+      "value": {
+        "numberValue": 3052.75
+      }
+    },
+    {
+      "account_id": "311204101516831",
+      "note": "Current balance da linha Accounts: USD 3956.30. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:08:43.449057-04:00. Conta 311204101516831; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/311204101516831-receipt.json",
+      "value": {
+        "numberValue": 3956.3
+      }
+    },
+    {
+      "account_id": "1001115192056600",
+      "note": "Current balance da linha Accounts: USD 4146.75. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:06:27.538925-04:00. Conta 1001115192056600; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1001115192056600-receipt.json",
+      "value": {
+        "numberValue": 4146.75
+      }
+    },
+    {
+      "account_id": "536294549227786",
+      "note": "Current balance da linha Accounts: USD 5038.87. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:08:05.243780-04:00. Conta 536294549227786; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/536294549227786-receipt.json",
+      "value": {
+        "numberValue": 5038.87
+      }
+    },
+    {
+      "account_id": "26632890069640784",
+      "note": "Current balance da linha Accounts: USD 5091.19. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:08:26.661372-04:00. Conta 26632890069640784; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/26632890069640784-receipt.json",
+      "value": {
+        "numberValue": 5091.19
+      }
+    },
+    {
+      "account_id": "1851640026221079",
+      "note": "Current balance da linha Accounts: USD 7704.12. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:11:37.760637-04:00. Conta 1851640026221079; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1851640026221079-receipt.json",
+      "value": {
+        "numberValue": 7704.12
+      }
+    },
+    {
+      "account_id": "1245683183659911",
+      "note": "Current balance da linha Accounts: USD 9011.55. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:18:30.162405-04:00. Conta 1245683183659911; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1245683183659911-receipt.json",
+      "value": {
+        "numberValue": 9011.55
+      }
+    },
+    {
+      "account_id": "1744611463000838",
+      "note": "Current balance da linha Accounts: USD 11178.98. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:09:21.727552-04:00. Conta 1744611463000838; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1744611463000838-receipt.json",
+      "value": {
+        "numberValue": 11178.98
+      }
+    },
+    {
+      "account_id": "2633813727134360",
+      "note": "Current balance da linha Accounts: USD 16866.62. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:18:49.099356-04:00. Conta 2633813727134360; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/2633813727134360-receipt.json",
+      "value": {
+        "numberValue": 16866.62
+      }
+    },
+    {
+      "account_id": "1107653168698121",
+      "note": "Current balance da linha Accounts: USD 24252.46. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:12:15.660939-04:00. Conta 1107653168698121; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1107653168698121-receipt.json",
+      "value": {
+        "numberValue": 24252.46
+      }
+    },
+    {
+      "account_id": "787796726891306",
+      "note": "Current balance da linha Accounts: USD 32499.08. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:12:36.442932-04:00. Conta 787796726891306; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/787796726891306-receipt.json",
+      "value": {
+        "numberValue": 32499.08
+      }
+    },
+    {
+      "account_id": "781612907182683",
+      "note": "Current balance da linha Accounts: USD 36058.47. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:12:53.455496-04:00. Conta 781612907182683; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/781612907182683-receipt.json",
+      "value": {
+        "numberValue": 36058.47
+      }
+    },
+    {
+      "account_id": "1583000095650153",
+      "note": "Current balance da linha Accounts: USD 71692.30. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:15:26.083660-04:00. Conta 1583000095650153; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1583000095650153-receipt.json",
+      "value": {
+        "numberValue": 71692.3
+      }
+    },
+    {
+      "account_id": "2429758060563333",
+      "note": "Current balance da linha Accounts: USD 88353.81. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:13:13.604905-04:00. Conta 2429758060563333; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/2429758060563333-receipt.json",
+      "value": {
+        "numberValue": 88353.81
+      }
+    },
+    {
+      "account_id": "1600310064116258",
+      "note": "Current balance da linha Accounts: USD 93816.06. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:14:44.330280-04:00. Conta 1600310064116258; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/1600310064116258-receipt.json",
+      "value": {
+        "numberValue": 93816.06
+      }
+    },
+    {
+      "account_id": "7840111366055613",
+      "note": "Current balance da linha Accounts: USD 102048.37. Método aprovado por Rodolfo1564382301155098717 para concluir H; nome e ID exatos da linha conferidos. Não é leitura de modal nem prova de Pay now desabilitado. Fonte accounts_list_current_balance. Leitura PC1 autenticada: 2026-10-26T17:15:02.981463-04:00. Conta 7840111366055613; BM 155263197283282; BM/conta e valor verificados visualmente. Não é limite do cartão. Nenhum pagamento realizado. Evidência: /root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/7840111366055613-receipt.json",
+      "value": {
+        "numberValue": 102048.37
+      }
+    }
+  ],
+  "blocking_evidence": {
+    "ax": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843/blocked.txt",
+    "pixels": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T080326229843/blocked.png",
+    "reason": "native_auth_surface_conflict_no_input",
+    "windows_security_in_ax": true,
+    "pixel_surface": "Meta Billing & payments / Accounts / Digital Trust; native dialog not visible",
+    "action_inputs": 0,
+    "created_tab": false
+  },
+  "lease_status": {
+    "ok": true,
+    "locked": false
+  },
+  "report_infra": {
+    "message_id": "1564611165005287545",
+    "channel_id": "1498132022634483894",
+    "http_status": 200,
+    "content_empty": true,
+    "mentions": [],
+    "embed_fields_verified": true,
+    "verified_at": "2026-10-27T08:06:26.976872-04:00"
+  }
+}
