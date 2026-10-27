@@ -1502,6 +1502,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SB-ROI3D-1564752746890924225",
+      "next_step": "Validar normalização, conservação financeira e ROI com Decimal; produzir ranking completo e destacar top com investimento mínimo analítico de USD30, separando ROI alto com base residual. Fcp sem linhas e Sapo sem campanha atribuída nos três dias. Informar corte17:14EDT e 27/10 parcial.",
+      "objective": "Ranquear melhores campanhas dos três sites SHEIN por ROI acumulado dos últimos três dias.",
+      "source": "reports/ares/sb-readback-1564748074062975048.json;discord:1564744929660637264/1564752746890924225",
+      "state": "janela definida 25–27/10/2026, hoje parcial, usd. projeção sb autorizada de 17:14 edt cobre os três sites. detectada receita replicada por anúncio em 108 grupos naboojobs, métricas monetização constantes dentro de cada grupo; investimento distinto por anúncio, sem colisões de ad_name nem identidades conflitantes. normalizar receita uma vez por adgroup/data e somar investimento antes do ranking. sem meta, pois pedido é sb e contas não ampliadas.",
+      "thread_id": "1564744929660637264",
+      "updated_at": "2026-10-27T21:30:17+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SB-SHEIN-1564744929660637264",
       "next_step": "Entregar identificação operacional dos três sites com país e evidência de idioma, explicitando que idiomas das páginas não comprovam entrega de todos os conjuntos. Demais sites: car/emp ou sem dados no recorte; nenhuma ampliação Meta.",
       "objective": "Identificar sites SHEIN, países e idiomas por adgroup, conforme correção de Rodolfo.",
@@ -7522,5 +7532,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T21:21:02+00:00"
+  "updated_at": "2026-10-27T21:30:17+00:00"
 }
