@@ -83,11 +83,13 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "all_requested_metrics_and_h_validated",
-    "validated_metrics_at": "2026-10-26T17:21:56.685418-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T172159115295",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717",
-    "fresh_h_account_ids": [
+    "status": "partial_metrics_updated_h_blocked_capture_parity",
+    "validated_metrics_at": "2026-10-26T21:03:58.912493-04:00",
+    "verified_at": "2026-10-26T21:07:28.342279-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T210402919334",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T210404926476",
+    "fresh_h_account_ids": [],
+    "pending_h_account_ids": [
       "1753257812779707",
       "1107653168698121",
       "2633813727134360",
@@ -127,22 +129,31 @@
       "908704754163659",
       "26632890069640784"
     ],
-    "pending_h_account_ids": [],
-    "pending_ui": [],
-    "action": "47IDs retained,9card38line. C/G/I/J refreshed17:21Eastern,daily/aggregate reconciled. H38/38read from exactAccounts-list rows,pixel+AX verified,published17:21;readtimes16:49–17:18 retained. E invoice numbers allblank47;FSeptemberdue0confirmedlive;October invoices onlyoncegenerated. D historical preserved8numeric1blank,nonewgenericpaymentrequiresUI;blank is not zero. TotalsF/G/H/I/J andall47links readbackPASS. NoMeta/payout/billingwrites.",
+    "pending_ui": [
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
+    "h_preserved_read_at_min": "2026-10-26T16:49:42.897074-04:00",
+    "h_preserved_read_at_max": "2026-10-26T17:18:49.099356-04:00",
+    "action": "E/F and C/G/I/J47 refreshed; H38 entirely preserved with original times after first Accounts collector stopped: wrong surface/pixels and Windows Security AX; no retry/bypass. D preserved8numeric1blank; Mavroa new generic event instrument unverified.47IDs,9card38line and F/G/H/I/J formulas/links readbackPASS; structure not H freshness.",
     "totals_usd": {
       "label": "TOTAL GERAL — 47 contas",
       "F": 0,
-      "G": 31018.76,
+      "G": 31017.44,
       "H": 531179.36,
-      "I": 534176.13,
-      "J": 755260.99
+      "I": 502104.57,
+      "J": 761419.15
     },
-    "recurring_job": "2ee720363d7d;prompt nowAccounts-list primary,samecadence,next21:02",
-    "retry_policy": "e62aff868def paused/supersededbycompletedforeground,neverexecuted;donotresumeextra.",
-    "deployed_collector_canary": "/root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717/deployed-canary/2852476828464907-receipt.json"
+    "payments_executed": 0,
+    "meta_writes": 0,
+    "cron_changes": 0,
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T210404926476/closure.json",
+    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
   },
-  "pending_card_history": null,
+  "pending_card_history": {"status": "pending_historical_instrument", "account_ids": ["1543098427832443"], "reason": "new_generic_payment_since_pc1_proof; D preserved, no classification from default/event"},
   "card_history_recovery": {
     "source_message": "1564273144729051199",
     "resolved_account_ids": [

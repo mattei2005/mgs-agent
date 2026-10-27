@@ -51498,6 +51498,49 @@
       "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/accounts-list-1564382301155098717",
       "cron": "2ee720363d7dpromptupdated;schedule2 8,14,21 * * *unchanged",
       "retry": "e62aff868defpausedsuperseded,noexecution"
+    },
+    {
+      "id": "meta-manual-payments-20261026-2102-visa-parser-partial-refresh",
+      "agent": "zeus",
+      "type": "skill_parser_recovery_recurring_snapshot",
+      "updated_at": "2026-10-26T21:07:28.342279-04:00",
+      "status": "partial_metrics_updated_h_blocked_capture_parity",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/regroup_funding.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/refresh_workbook.py",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/funding-regroup-priority.md",
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json"
+      ],
+      "root_cause": "Live type1 VISA *8488 rejected by case-sensitive allowlist; exact literal VISA added to both parsers without changing source/IDs.",
+      "validation": {
+        "parser_checks": 16,
+        "live_funding_accounts": 47,
+        "groups": {
+          "card": 9,
+          "credit_line": 38
+        },
+        "full_grid_readback": true,
+        "formula_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "h_fresh": 0,
+        "h_preserved": 38,
+        "lease_released": true,
+        "meta_writes": 0,
+        "payments": 0,
+        "cron_changes": 0,
+        "mirror_sha256": {
+          "scripts/regroup_funding.py": "d673d1592fdc4a07394c6db0a259df2e6b6344c84af711e55994eb1ccd026f64",
+          "scripts/refresh_workbook.py": "a25e5dc63f8f2785c9551ba321ac25f395079a9c6fe052b4515fac7d76c6d631",
+          "references/funding-regroup-priority.md": "44733acebc0a1fe98b06529ba04188bcc18208453ddd8daae1f5fce0fee69976"
+        }
+      },
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261026T210404926476/closure.json",
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
     }
   ],
   "profile_skill_references": [

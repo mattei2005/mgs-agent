@@ -1,0 +1,41 @@
+{
+  "status": "partial_metrics_updated_h_blocked_capture_parity",
+  "verified_at": "2026-10-26T21:07:28.342279-04:00",
+  "accounts": 47,
+  "groups": {
+    "card": 9,
+    "credit_line": 38
+  },
+  "totals_usd": {
+    "label": "TOTAL GERAL — 47 contas",
+    "F": 0,
+    "G": 31017.44,
+    "H": 531179.36,
+    "I": 502104.57,
+    "J": 761419.15
+  },
+  "all_h_values_and_notes_preserved_exactly": true,
+  "h_fresh_accounts": 0,
+  "h_preserved_accounts": 38,
+  "h_old_read_at_min": "2026-10-26T16:49:42.897074-04:00",
+  "h_old_read_at_max": "2026-10-26T17:18:49.099356-04:00",
+  "blocked_layer": "PC1 Accounts list navigation: accounts_search_not_ready; pixels show unrelated preexisting Ollo page, AX also includes Windows Security passkey chooser. Not evidence of Meta logout or provider financial disable. No retries/profile swaps/reloads.",
+  "owned_tab_close_attempted_by_worker_finally": true,
+  "owned_tab_close_independently_confirmed": false,
+  "lease_released_confirmed": true,
+  "pending_D_generic_event_account_ids": [
+    "1543098427832443"
+  ],
+  "blank_D_accounts": [
+    {
+      "id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004"
+    }
+  ],
+  "metrics_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261026T210402919334",
+  "invoices_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261026T210336380173",
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
+}
