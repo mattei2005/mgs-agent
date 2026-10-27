@@ -74,6 +74,15 @@ agent:
 
 Pitfall validado no Ares em 2026-07-12: `approvals.mode: off` e uma regra no SOUL estavam corretos, mas o Ares continuou exibindo `Hermes needs your input` porque `clarify` permanecia disponível no schema do agente já ativo. A correção efetiva foi desabilitar o toolset `clarify` em todos os profiles ativos e validar a resolução real, não apenas o YAML.
 
+## Recovery localizado: espera viva de provedor sem progresso
+
+- Antes de tratar `admission_conflict` como lease órfã, correlacionar a sessão/geração com `session_turn_leases`, PID vivo, atividade recente e `agent.log`. Conflito enquanto o turno continua vivo pode ser apenas sintoma de notificações concorrentes recusadas, não causa do bloqueio.
+- Se o mesmo turno ficou repetindo chamadas sem progresso e existe autorização para recuperação localizada, preferir o controle nativo `session.redirect` na geração exata. Durante uma chamada ao modelo, ele cancela somente a requisição atual e mantém tarefa, sessão, histórico e filhos; durante ferramenta, degrada para steer. Não usar `/stop`, limpar lease, editar SQLite, resetar sessão ou reiniciar gateway como primeira tentativa equivalente: esses caminhos têm efeitos diferentes.
+- Usar `discover_gateway_endpoint(home)` + `attachable` e `connect_gateway(endpoint=...)`, nunca o caminho que pode iniciar um gateway ausente. `GatewayClient.rpc` recebe parâmetros como keywords. Ler `session.resume`, reduzir o snapshot a sessão/geração/revisão/estado e não imprimir prompt, histórico inteiro, tickets ou credential hints.
+- Registrar a geração, identidade do pedido humano e fontes/checkpoint no redirect, exigindo reconciliação de side effects e mensagens pendentes sem replay. Readback do ack `redirected` sozinho não fecha recovery: exigir uma nova resposta real do provedor e ferramentas do executor na mesma sessão/geração; resposta humana entregue e conclusão do negócio são gates separados. Um avanço isolado seguido de nova espera sem progresso prova recuperação parcial, não estabilidade; não transformar redirects em loop nem declarar recuperação integral antes da resposta pendente.
+- Não aumentar o contexto nem culpar seu tamanho apenas por estimativa heurística do watchdog; comparar com tokens reais do provedor. Um payload grande pode voltar a funcionar após o redirect sem compactação.
+- Falha rotineira deve ser recuperada dentro da autoridade vigente sem criar outra thread pública de suporte ou fazer o humano coordenar o handoff. Quando houver dependência técnica real, manter a comunicação no pedido original e escalar somente o bloqueio que não pode ser resolvido com segurança; essa preferência não amplia permissões nem o Critical Subset.
+
 ## 5.1 Mensagens enviadas enquanto o agente está ocupado
 
 Use quando o usuário disser que uma segunda mensagem enviada durante “digitando” só é processada depois da primeira resposta, ou quando quiser consolidar complementos no turno em andamento.
