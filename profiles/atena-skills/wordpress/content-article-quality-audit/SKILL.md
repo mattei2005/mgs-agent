@@ -18,11 +18,17 @@ Use esta skill quando Rodolfo ou Raquel pedir conferência/auditoria de artigos 
 
 Esta skill é de **Content Operations** e pertence à Atena. Zeus pode auditar/orquestrar quando houver erro recorrente, divergência de contagem ou risco técnico.
 
-## Fonte canônica de URLs
+## Definir cobertura antes da coleta
 
-A fonte 100% para contagem/lista de posts publicados é o plugin autenticado `yydev-show-pages`.
+1. Classifique o pedido como inventário completo do site, lote fechado de artigos ou revisão de IDs existentes.
+2. Para lote fechado, use o manifesto autorizado como denominador: preserve os IDs esperados, inclusive bloqueados e ainda não criados. Confira unicidade e cobertura em código; não enumere o site inteiro para reconstruir um lote conhecido.
+3. Para inventário completo de um site autorizado, use a lista autenticada de `yydev-show-pages` e reconcilie os IDs com os registros consultados. Uma contagem isolada ou um sitemap não prova cobertura integral.
+4. Filtre registros institucionais por ID, chave ou fonte editorial pertinente **antes** de emitir saída; um lookup de continuidade não deve virar dump de registro global ou inventário de outros escopos.
 
-Fluxo obrigatório:
+## Inventário completo de um site
+
+Quando esse for o escopo autorizado, consulte `yydev-show-pages`:
+
 
 1. Logar no WordPress do domínio.
 2. Abrir no navegador:
@@ -39,6 +45,15 @@ There are xxx published posts
 
 4. Usar essa lista/contagem como referência para cobertura.
 5. Só usar `post-sitemap.xml` como fallback/proxy quando não houver sessão WP Admin. Se usar sitemap, reportar que ele pode esconder posts e não é validação 100%.
+
+## Estados e evidências por artigo
+
+- Separe conteúdo preparado, cadastro confirmado, `publish` observado e QA público aprovado. HTTP 200, gravação de metadata ou score isolado não encerra o artigo.
+- Vincule cada aceite ao domínio, post ID, URL, status e hash do corpo atual, com caminhos e hashes de evidências reais. Uma revisão de corpo exige nova análise e novas provas; não reaproveite silenciosamente o aceite anterior.
+- Defina os gates pelo briefing antes de escrever o relatório. Quando `Não verificado` for expressamente aceito para uma métrica, mantenha a limitação explícita, sem nota/cor inventada nem bloqueio adicional não solicitado; isso não dispensa os demais gates ou supersede contratos com exigência de score mínimo.
+- Use rótulos distintos para falta de comprovação e defeito observado: ausência nas páginas de arquivo consultadas não prova ausência no arquivo inteiro; divergência de HTML/schema pode exigir diagnóstico mesmo com cadastro correto.
+- Superseda uma pendência histórica somente com prova atual do mesmo objeto e gate. Preserve o histórico e os outros blockers; resolver a bio não aprova automaticamente sitemap, idioma ou layout.
+- Grave cada nova coleta em arquivo/label próprio. Não sobrescreva evidências referenciadas por aceites com hash, pois isso invalida sua proveniência.
 
 ## Colunas padrão da planilha
 
@@ -183,18 +198,19 @@ Drive e Sheets usam exclusivamente a Service Account corporativa `mgsagent@mgs-c
 
 Valide o range escrito por GET da API e igualdade integral com a base local; export CSV é evidência complementar quando disponível, não substituto da identidade canônica.
 
-Antes de recriar uma aba:
+Para atualizar o relatório:
 
-1. Limpar o range usado, por exemplo `A1:J1000`.
-2. Colar a tabela final a partir de `A1`.
-3. Reexportar CSV da aba.
-4. Validar que o CSV remoto bate com a base local.
+1. Reutilize o Spreadsheet ID e a aba confirmados; preserve outras abas, colunas humanas e ACLs. Recriação ou limpeza ampla não é pré-requisito de atualização.
+2. Monte a matriz completa em snapshot local, na ordem de colunas pedida, antes do write. Envie valores `RAW` e formato `TEXT` para preservar URLs, identificadores e datas literais, sem fórmulas ou coerção numérica.
+3. Confira por GET a igualdade de todas as células e a quantidade exata de linhas; leia também uma linha além do fim esperado para detectar resíduos.
+4. Se houver linhas antigas excedentes, limpe somente o intervalo residual confirmado e autorizado. Revalide valores e formatação após a escrita; alguns writes normalizam o formato de célula.
+5. Rotule snapshots de progresso como progresso e mantenha timestamps de observação, pois GETs entre vários sites não formam uma transação única.
 
 ## Validação final obrigatória
 
 Antes de dizer que terminou:
 
-- [ ] contagem da planilha bate com o `yydev-show-pages` quando houver sessão WP Admin;
+- [ ] cobertura e IDs batem com o manifesto do lote fechado; em inventário completo, foram reconciliados com `yydev-show-pages` quando disponível;
 - [ ] se usou sitemap, reportou que é fallback e listou diferenças;
 - [ ] coluna B está A-Z se Rodolfo pediu ordenação;
 - [ ] sem linhas totalmente vazias;
@@ -206,22 +222,8 @@ Antes de dizer que terminou:
 - [ ] `Links nos botões` preenchido;
 - [ ] `Alerta links` preenchido;
 - [ ] `Tags faltando` preenchida quando existir essa coluna;
-- [ ] readback CSV bate com a base final.
+- [ ] GET da API confirma integralmente a matriz final e detecta linhas excedentes; CSV, quando usado, também bate com a base local.
 
-## Handoff Zeus → Atena
+## Entrega e escalonamento
 
-Esta skill nasceu da auditoria Zeus/Rodolfo em 2026-07 sobre 4 sites:
-
-- `cliquet.com`
-- `finanzas.cliquet.com`
-- `openzed.com`
-- `finanzas.openzed.com`
-
-Lições principais:
-
-- sitemap pode subcontar; plugin autenticado `yydev-show-pages` é a fonte 100%;
-- rota REST por slug pode falhar; usar post ID;
-- related posts/widgets podem contaminar CTA; extrair só corpo editorial;
-- links internos podem redirecionar para URL canônica; seguir redirect antes de classificar;
-- tag vazia em artigo interno é erro de auditoria, salvo confirmação real `tags: []`;
-- Rodolfo quer coluna de faltantes por classe genérica, não chute exato de país/vertical.
+Entregue o relatório solicitado e os bloqueios materiais, não o trace completo da coleta. Informe falha, efeito parcial e limitação de prova sem transformar hipótese em causa. Encaminhe dependências técnicas com URLs/IDs/evidências delimitados, separando-as da autorização editorial; um retorno técnico não amplia o escopo autorizado.

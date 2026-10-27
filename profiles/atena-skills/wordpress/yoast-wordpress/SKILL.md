@@ -96,8 +96,9 @@ Diagnóstico não equivale a reparo: mantenha hipótese, evidência humana, leit
 2. Run Python diagnostic to identify violations (sentence length, transitions, passive voice)
 3. Rewrite only the violated rules
 4. Validate against the article's own contract and explicit brief. The 450–500-word and subtitle ≤100-character limits apply only to REC when its contract requires them; do not apply them to long-form SEO or P1.
-5. Aplique o menor payload editorial autorizado e valide por GET no mesmo ID.
-6. Recalcule o corpo final pela rota aprovada no preflight e confirme as duas camadas persistidas; não invoque automaticamente um wrapper de outro contexto.
+5. Defina a política de datas antes do write: preserve `date/date_gmt` de publicação e registre que um save normal pode avançar `modified/modified_gmt`. Não imponha preservação das quatro datas quando o briefing exige apenas manter a publicação; se a imutabilidade técnica também for exigida, trate-a como gate próprio, sem retroagir timestamps.
+6. Aplique o menor payload editorial autorizado e valide por GET no mesmo ID. Em correção pontual, comprove que o inverso do diff recupera o corpo anterior e que mídia, hrefs e campos protegidos permanecem iguais.
+7. Recalcule o corpo final pela rota aprovada no preflight e confirme as duas camadas persistidas; não invoque automaticamente um wrapper de outro contexto. Mesmo que o novo cálculo repita as notas anteriores, mantenha a nova prova de input/hash e não provoque writes artificiais só para gerar um evento.
 
 **Retomada parcial de reparo:** reconcilie primeiro a intenção existente com o hash do corpo lido no ID exato; intenção gravada exige readback, nunca replay cego. Se uma normalização nativa de `comment_status` tiver sido explicitamente aceita, limite a exceção ao par exato `''` → `closed`, sem restaurar vazio, abrir comentários ou mudar configuração. Para uma nova revisão editorial, crie snapshots/diffs/manifesta de hash em diretório novo; preserve o bloqueio histórico e reconcilie source JSON, payload e receipt com o corpo real antes de preparar o adaptador de análise. Ao substituir uma revisão já calculada, use novo manifesto/work-dir em vez de alterar um manifest-lock existente.
 
