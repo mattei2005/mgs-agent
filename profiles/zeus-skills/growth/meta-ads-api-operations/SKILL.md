@@ -20,7 +20,7 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 ## Safety model
 
 1. **Read-only and dry-run first.** Always verify token/account/campaign visibility before write.
-2. **Never print credentials.** 1Password tokens/proxies may be used internally only; report field names and lengths at most.
+2. **Project Graph output before printing or saving it.** Keep 1Password tokens/proxies and raw Graph responses in process memory; emit only allowlisted identity/result fields. Consume `paging.next` internally and report `has_more` or cursor progress instead of the URL, because Graph embeds access tokens in pagination links even on ordinary campaign GETs. Apply the same projection to nested batch bodies and exception messages; removing a top-level `access_token` key alone is insufficient.
 3. **Write tests must be controlled.** Campaigns/adsets/ads should be created `PAUSED`, with budget guardrails and a known loser/source campaign.
 4. **Reconcile partials immediately; do not delete implicitly.** If a write fails after materializing objects, read back and journal their exact IDs/statuses, keep the authorized paused-test objects non-delivering, and recover only missing layers within the original scope. Delete/archive only when that cleanup action is explicitly authorized and any required confirmation is satisfied; verify the actual terminal status by GET. A creation failure alone does not authorize deletion.
 5. **Interpret failures by endpoint.** If campaign/adset/adcreative creation succeeds but `POST /ads` fails, do not call it a general account/IP failure.
@@ -158,6 +158,14 @@ For Rodolfo's recurring **manual card-payment planning**, load `meta-manual-paym
 5. Publish the exact date range, collection timestamp, account-timezone convention and open-day qualification in header/cell notes. Identify a one-off export as a snapshot, not an automatic refresh. Verify every output row, per-row currency format and account-ID note against the frozen source, reconcile account-ID set equality, and confirm the previous tabs' values/formulas and properties remain unchanged before returning the direct new-tab link.
 
 ## Standard diagnostic flow
+
+### Advertiser-restriction checks with an identical-clone canary
+
+1. Resolve the supplied thread to its operation/account registry, then verify the actual operational token actor with `GET /me?fields=id,name` and the account with `GET /act_{id}?fields=id,name,account_status,disable_reason`. Keep **profile identity**, **ad-account state**, **write permission**, and **delivery eligibility** as separate findings: HTTP 200 and an active account do not establish that the profile can advertise.
+2. Check the operation's effective per-mode status policy and the canonical runner's canary support before broad campaign scans, manifest construction or a promise to execute. If the technical-test contract requires `PAUSED` but live prevalidation requires `ACTIVE`, identify a local policy conflict, not a Meta rejection. Do not activate the test, edit a copied config to weaken the gate, or substitute a direct writer; resolve the narrow exception through the authorized owner before continuing. Do not encode the current conflict as a permanent claim that the engine cannot run paused tests.
+3. Select a real populated source, not merely the newest campaign or a row marked `ACTIVE`. Read and paginate `/{source_campaign_id}/adsets` and `/ads`; require the expected nonempty hierarchy before sealing the scope. If a candidate is an empty shell, discover a populated candidate through `act_{id}/ads?fields=id,campaign{id,name,status,daily_budget},adset_id`, then enumerate that exact campaign fully. Freeze source IDs/configuration, exact child counts, budget, Page eligibility, target name and the authorized one-copy scope.
+4. Use the canonical native-copy path only after its gates pass; retain source media, copy, targeting and tracking according to the operation's exact-clone contract. Reconcile every returned or potentially materialized ID before retrying; never treat `execution_options=[validate_only]` on `/copies` as a safe dry-run, because copy endpoints can create real objects despite that parameter.
+5. Report the furthest stage actually exercised: **local prevalidation only**, **Meta copy submitted and rejected**, **copy created but incomplete**, or **complete paused hierarchy verified**. A local block means write eligibility remains untested; a complete paused copy proves that write route, not auction entry or unrestricted delivery. Preserve partials and the original campaign; cleanup and activation remain separate scopes.
 
 ### Fast status check for Ares OpenzedFinanzas-CC-ES
 

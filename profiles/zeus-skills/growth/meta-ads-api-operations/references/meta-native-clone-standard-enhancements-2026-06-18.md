@@ -52,4 +52,4 @@ Use precise wording:
 
 ## Safety
 
-Writes still require explicit approval. Partial objects created during tests must remain `PAUSED` and be cleaned up (`DELETED`) with GET verification before reporting completion.
+Require authorization for the exact technical write scope and the operation's applicable execution gates. Keep partial test objects `PAUSED`, record their IDs and reconcile them by GET before retrying. A failed test does not authorize cleanup: delete/archive only under separate explicit authorization and any required critical confirmation, then verify the exact terminal status. Report a blocked test or a completed test with preserved residue honestly rather than making deletion a prerequisite for reporting its result.

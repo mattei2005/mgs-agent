@@ -20,6 +20,22 @@ Completion criterion: only the procedure and evidence required for the current a
 
 Quando Rodolfo pedir para ler uma thread e corrigir a resposta de outro agente, diagnosticar o pedido e a execução exatos antes de atribuir erro ao agente. Publicar a retificação na thread indicada, sem apagar ou se passar pelo autor original, e validar o conteúdo entregue; explicar apenas na conversa atual não satisfaz o pedido. Distinguir resposta corrigida, bloqueio resolvido e entrega operacional concluída. Após confirmação, reler o alvo e a continuidade da origem antes de escrever ou acionar o executor: confirmações do mesmo pedido em duas threads correspondem a uma única recuperação, não a duas execuções. Não descrever o relatório como retomado apenas porque existe uma sessão dona ou um payload de handoff preparado; exigir envio confirmado e atividade nova do executor. Receita de leitura, correlação de sessão e investigação de recusa: `references/route-pack-03.md`, seção **Investigar e retificar resposta de outro agente**.
 
+## Resumos executivos de threads para Rodolfo
+
+Quando Rodolfo pedir para resumir threads ou disser que há informação demais, leia as fontes e entregue uma síntese para decisão, não outro relatório técnico:
+
+1. Abra com uma frase dizendo o assunto comum e o impacto prático.
+2. Agrupe por problema ou decisão, separando **Problema, Solução recomendada e Quem decide**; não resuma mensagem por mensagem.
+3. Diferencie publicação, validação pública e conclusão. Não trate pendência de apresentação como texto errado nem some grupos sobrepostos.
+4. Feche com o que já foi feito, o que continua pendente e a recomendação operacional. Use poucos números essenciais e links das fontes; deixe hashes, IDs internos, testes e caminhos fora do corpo.
+5. Informe que o estado vem dos últimos registros consultados quando não houve verificação produtiva nova. Não execute nem interprete o pedido de resumo como aprovação.
+
+O quadro de cobertura de leitura é apropriado quando ele pede auditoria ou pergunta se tudo foi lido; não o use como resposta padrão a um pedido de resumo simples. Receita de leitura e resolução da origem: `references/route-pack-03.md`.
+
+## Delegação de decisões e comunicação na origem
+
+Quando Rodolfo transferir a decisão a uma gestora, separe **autoridade delegada**, **aprovação do plano** e **execução validada**. Persistir a autoridade não aprova automaticamente os planos pendentes. Consulte a fonte canônica atual, não uma lista de permissões copiada para a skill. Depois, esclareça as pendências na thread operacional indicada e mencione a pessoa solicitada com allowlist explícita de usuários; não acorde outro bot apenas para anunciar a decisão. Preserve limites críticos, escopo por área e acesso privado. Fluxo de persistência, publicação e readback: `references/route-pack-03.md`, seção **Comunicar delegação e encaminhar decisões pendentes**.
+
 ## Operational route packs
 
 - **Referências recentes → Escopo por agente/thread antes de reportar pendências** → `references/route-pack-01.md`

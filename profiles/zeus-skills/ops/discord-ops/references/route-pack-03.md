@@ -8,7 +8,7 @@
 ### Recuperar e consolidar continuidade de thread grande
 
 Quando Rodolfo disser que quer “continuar de onde paramos” em uma thread longa:
-1. Importar a thread inteira/maior limite via `import-discord-thread.py --profile zeus --limit 1000 '<id-ou-link>'`.
+1. Resolver primeiro o ID real do canal/thread na fonte canônica ou no link Discord. Não usar automaticamente o ID de um comando, lote ou workspace como `channel_id`: todos podem ter formato de snowflake, mas identificam objetos diferentes. Se o lookup não localizar o canal, conferir `source_thread_id`/`thread_id` no checkpoint ou inventário antes de repetir a consulta ou declarar falta de acesso. Com a origem resolvida, importar via `import-discord-thread.py --profile zeus --limit 1000 '<id-ou-link>'`.
 2. Confirmar completude antes de dizer “li tudo”: comparar a contagem importada com o início real da thread. Se usar `discord.fetch_messages`, paginar com `before=<oldest_message_id>` até alcançar a mensagem de criação; um lote com exatamente o limite solicitado é sinal de paginação pendente, não de thread completa.
 3. Inventariar anexos separadamente das mensagens. “Li N/N mensagens” não significa “reanálise N/N screenshots”. Reabrir os anexos relevantes; se o CDN expirou, procurar a cópia local no `image_cache` por tamanho/timestamp e declarar qualquer anexo que continue inacessível.
 4. Resumir o histórico em fases, não mensagem por mensagem.
@@ -18,7 +18,7 @@ Quando Rodolfo disser que quer “continuar de onde paramos” em uma thread lon
 
 Pitfall de confiança: não use a conclusão das últimas mensagens como substituto da leitura integral quando Rodolfo perguntou explicitamente se tudo foi lido. Informe a cobertura exata (`mensagens lidas/total`, `anexos reabertos/total`) e corrija imediatamente uma afirmação anterior ampla demais.
 
-Formato preferido de report para Rodolfo:
+Formato de cobertura quando Rodolfo pedir auditoria da leitura ou confirmação de completude; para resumo simples, aplicar a síntese executiva do SKILL.md, sem este bloco técnico:
 
 ```text
 Thread importada     <id>
@@ -87,6 +87,16 @@ Playbook de limpeza pós-incidente: `references/discord-shared-thread-loop-clean
 3. **Validar o escopo exato.** Para inclusão autorizada de domínio, conferir sua presença literal na fonte de ownership e na allowlist, executar `mgs-domain-scope.py validate --json` e o `check --agent <agente> <alvo> --json` para cada consumidor. Comparar conjuntos de domínios e políticas com o snapshot anterior: somente o alvo aprovado deve ser acrescentado; remoções e alterações de política devem estar ausentes. Testar o host exato, o alias www conforme a política existente e a continuidade da negação para subdomínio implícito e host alheio. Não editar credenciais, campanhas ou budgets para validar o gate. Ao testar o cadastro produtivo, comparar a quantidade retornada pelo validador com a cardinalidade da allowlist real, sem congelar um total histórico: uma inclusão autorizada não deve quebrar o teste por contagem obsoleta. Manter a prova independente do delta exato autorizado e os testes negativos; contagem dinâmica não substitui autorização.
 4. **Manter um único dono da retomada.** Se a origem já conduz a mesma recuperação autorizada, registrar o vínculo com essa execução e não iniciar outro relatório ou enviar outro handoff. Distinguir payload preparado, mensagem enviada, executor ativo e entrega validada. A ausência de prova de envio continua sendo uma pendência; não convertê-la em sucesso por atribuição de ownership. Quando couber um handoff novo autorizado, usar a receita de `references/route-pack-02.md` e verificar tanto a mensagem quanto a atividade posterior do destinatário.
 5. **Fechar somente a camada comprovada.** Registrar audit, checkpoint e inventário da ação efetivamente executada ou reconciliada; conferir o REPORT-INFRA correspondente sem duplicar uma publicação já confirmada. No resumo ao usuário, separar cadastro liberado, retomada confirmada e relatório entregue. Se a entrega ainda não existir, manter o checkpoint aberto com o último estágio comprovado e o próximo passo, sem exigir que o usuário repita o pedido original.
+
+### Comunicar delegação e encaminhar decisões pendentes
+
+1. **Delimitar a decisão nova.** Ler a autoridade vigente, a fonte operacional e as mensagens recentes da origem. Interpretar a delegação à luz dos tipos de decisão que Rodolfo acabou de discutir; não ampliar para administração global nem converter autonomia em aprovação dos pacotes.
+2. **Persistir antes de anunciar.** Aplicar o fluxo canônico de `context/knowledge-governance.md`: preservar o histórico, atualizar a fonte de autoridade e o recorte do usuário no registry de acesso, registrar o sucessor com `mgs-knowledge-control.py register --supersedes <registro-anterior>` e validar a unicidade ativa. Não adicionar o delegado à whitelist global do Zeus quando o pedido se restringir à operação de outro agente.
+3. **Separar quem decide de quem executa.** Manter a gestora como dona das decisões da área, o agente de origem como dono da entrega e o apoio técnico com executor único. Encaminhar a confirmação crítica à autoridade exigida pela política atual; não pedir novamente ao CEO a mesma decisão não crítica que ele acabou de delegar.
+4. **Publicar o esclarecimento útil.** Na thread de origem confirmada, explicar em linguagem simples a autonomia concedida, cada plano ainda pendente, a recomendação, os limites e a pergunta concreta para a gestora. Não republicar o diagnóstico inteiro nem reabrir a aprovação editorial já válida.
+5. **Restringir as notificações.** Montar o payload para `discord-bot-post.py --channel-id <thread_id>` com `allowed_mentions.parse=[]`, `allowed_mentions.users=[<id-real-da-pessoa>]`, `allowed_mentions.roles=[]` e `replied_user=false`. Validar o tamanho UTF-16 antes do envio. Uma mention humana solicitada não autoriza também uma mention de bot.
+6. **Verificar a entrega exata.** Fazer GET da mensagem retornada e comparar canal, autor, conteúdo e pessoa mencionada com o payload. Atualizar o checkpoint do apoio técnico para refletir a nova autoridade e o estágio real, sem sobrescrever o checkpoint de outro agente que esteja escrevendo. Concluir inventário/audit/REPORT conforme a política vigente.
+7. **Encerrar na camada comprovada.** Informar a Rodolfo que a autonomia foi registrada e onde a comunicação foi entregue, com link. Dizer que os planos aguardam decisão da gestora quando aplicável; não apresentar a notificação como manutenção iniciada ou problema resolvido.
 
 ### Limpeza pós-loop de regras persistidas
 
