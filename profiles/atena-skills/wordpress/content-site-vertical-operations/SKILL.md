@@ -256,7 +256,11 @@ Quando o pedido envolver nome ou biografia do autor:
 
 Use `references/wordpress-author-profiles.md` para o fluxo REST/WP-CLI e o QA de operações multi-site.
 
-## Validação de cache em Eggbev/Cloudflare APO
+## Invalidação localizada e validação de cache
+
+Em correções editoriais, limite a limpeza às **URLs específicas afetadas**, nunca ao site inteiro por conveniência. Antes de qualquer execução ou handoff, enumere os URLs literais com a evidência da divergência e identifique a camada responsável. Não substitua esse escopo por purge de host, prefixo, wildcard ou global; métodos apresentados como “por URL” também precisam ter seus efeitos indiretos inspecionados. Encaminhe a dependência técnica ao executor responsável com essa restrição explícita e preserve os gates críticos vigentes para eventual exclusão de arquivos. Confirme depois as mesmas URLs canônicas, sem query; encaminhamento ou chamada aceita não comprova limpeza. Use `references/targeted-cache-readonly-diagnostics.md` para o preflight técnico.
+
+### Eggbev/Cloudflare APO
 
 Após atualizar conteúdo publicado no Eggbev, não confie apenas na resposta REST ou no WordPress admin. O Cloudflare APO pode servir HTML antigo em URL canônica com `cf-cache-status: HIT`.
 

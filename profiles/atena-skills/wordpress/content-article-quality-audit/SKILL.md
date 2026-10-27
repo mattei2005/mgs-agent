@@ -200,6 +200,9 @@ OK
 - Registre separadamente HTTP/URL final efetivamente observados, recuperação de conteúdo substantivo e sustentação do trecho citado. Texto obtido pelo extrator sem status/frescor expostos não autoriza declarar GET direto 200 ou recurso atual comprovado.
 - Não rotule 403, desafio 202 vazio, falha TLS ou timeout como link morto/404. Use tentativas independentes limitadas e mantenha a limitação explícita; não troque hrefs só para esconder uma barreira de acesso.
 - Compare o parágrafo exato com a fonte lida. Não equipare automaticamente materiais, termos legais ou características parecidas. Se um termo não estiver sustentado, registre a lacuna e prepare a menor correção editorial com revisão/hash/análise correspondentes; não fabrique apoio factual ou recalcule uma nota fixa.
+- Confira o conteúdo e o destino final mesmo com HTTP 200: uma página de erro devolvida com sucesso não comprova acesso à fonte original e tampouco é um HTTP 404. Preserve o código real, a URL final e o significado editorial da resposta em campos separados.
+- Identifique a rota de comprovação: status de navegação observado no navegador com documento substantivo pode provar acesso por essa rota, mas não equivale a GET direto sem cache. Registre quando status, frescor ou URL final não forem expostos pelo extrator; recuperação substantiva e transporte são provas distintas.
+- Para encerrar uma pendência de fonte, confira o hash da evidência e releia o post exato, vinculando domínio, ID, URL, status, hash do corpo e href citado à revisão avaliada. Atualize somente o gate demonstrado; se o artigo tiver outras fontes pendentes, não feche o gate agregado de links. Deduplique URLs e artigos separadamente, pois uma fonte pode sustentar vários artigos e um artigo pode citar várias fontes.
 
 ## Escrita em Google Sheets
 
@@ -230,6 +233,7 @@ Para atualizar o relatório:
 3. Confira por GET a igualdade de todas as células e a quantidade exata de linhas; leia também uma linha além do fim esperado para detectar resíduos.
 4. Se houver linhas antigas excedentes, limpe somente o intervalo residual confirmado e autorizado. Revalide valores e formatação após a escrita; alguns writes normalizam o formato de célula.
 5. Rotule snapshots de progresso como progresso e mantenha timestamps de observação, pois GETs entre vários sites não formam uma transação única.
+6. Para resolver apenas algumas pendências em uma planilha já revisada pela gestora, faça um patch nas células correspondentes em vez de regenerar a matriz inteira. Localize cada artigo pelos cabeçalhos e pela identidade conferida, releia as células imediatamente antes do write e retire somente a explicação supersedida pela nova prova. Preserve comentários/texto humano adicional, demais pendências e status; se a edição humana não puder ser separada com segurança, interrompa somente aquela célula. Valide por GET os ranges alterados e registre before/after, sem promover o artigo inteiro a OK por ter encerrado um único gate.
 
 ## Validação final obrigatória
 
