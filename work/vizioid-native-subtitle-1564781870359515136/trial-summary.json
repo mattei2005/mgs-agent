@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-10-27T23:31:44.946502+00:00",
+  "agent": "zeus",
+  "action": "vizioid_native_subtitle_trial_rolled_back_validated",
+  "authority_message_id": "1564781870359515136",
+  "thread_id": "1564760403173707789",
+  "post_id": 9001,
+  "target": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+  "requested_scope": "Move original body intro to existing native subtitle field and retest ad order on this post only",
+  "confirmed_native_field": "_jbf_secondary_title",
+  "confirmed_before": "Native subtitle empty; grey intro inside post_content",
+  "trial_result": "Native field filled and body duplicate removed; live title and subtitle disappeared",
+  "root_cause": "jbf_secondary_title_auto_show reads missing raw jbf_secondary_title_title_format option; settings helper returned default but filter did not",
+  "recovery": "Exact original post_content and native subtitle restored; public H1/body introduction and CTA URLs verified",
+  "native_subtitles_nonempty_after_rollback": 0,
+  "global_config_writes": 0,
+  "ad_stack_writes": 0,
+  "other_sites_changed": false,
+  "remaining_change": "Revision/history and private backup from reversible trial; no final editorial difference",
+  "backup_remote": "/home/runcloud/backups/vizioid-native-subtitle-1564781870359515136",
+  "decision_required": "Authorize configuring native subtitle title_format on Vizioid, then repeat same post migration; no other site or ad-stack changes",
+  "skill_learning": "landing-page-shein: native subtitle field, raw option preflight, backup and public rollback"
+}
