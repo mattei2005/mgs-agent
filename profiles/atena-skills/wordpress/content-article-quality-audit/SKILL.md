@@ -58,10 +58,11 @@ There are xxx published posts
 ## Explicar pendências de um relatório existente
 
 1. Localize o checkpoint da iniciativa e siga seu índice até a projeção e o relatório atuais. Não use os contadores iniciais do manifesto nem uma mensagem antiga como estado vigente: o manifesto pode preservar o plano enquanto os recibos registram a execução posterior.
-2. Leia a aba exata da planilha pela API e selecione por nomes de cabeçalho o ID local, status e etapa/pendências. Agregue os motivos por código antes de emitir saída; não imprima todas as células nem o registro institucional inteiro para responder uma pergunta de andamento.
+2. Leia a aba exata da planilha pela API e resolva as colunas pelo nome do cabeçalho vigente, não por posição fixa. Se os IDs técnicos tiverem sido retirados da apresentação, recupere a associação artigo → linha do contrato local e confira domínio, título e URL antes de usar o mapeamento: a gestora pode ter reordenado linhas. Não recrie a coluna de ID nem use o número da linha como identidade. Agregue os motivos por artigo antes de emitir saída; não imprima todas as células nem o registro institucional inteiro para responder uma pergunta de andamento.
 3. Reconcilie os motivos com as evidências atuais por artigo. Use o relatório consolidado para os totais, mas a prova mais recente do mesmo objeto/gate para saber o que ainda falta; um diagnóstico antigo de biografia ou layout pode ter sido supersedido sem encerrar outros gates. Não apresente uma coleta histórica como nova verificação pública.
 4. Agrupe a explicação em linguagem editorial: presença em categoria/sitemap; autoria; idioma/datas/canonical; layout; fontes externas. Separe falta de comprovação de defeito confirmado e indique quais grupos dependem de execução editorial, manutenção técnica ou decisão humana. Não atribua todos os casos a cache nem trate indexação no Google como requisito automático de QA.
 5. Abra com a distinção entre publicado e validado; mantenha artigos ainda não publicados em grupo separado. Dê um exemplo específico apenas quando sustentado pela evidência atual. Se informar contagens por motivo, deduplique por ID e avise que os grupos podem se sobrepor; não some pendências sobrepostas como se fossem artigos diferentes.
+6. Ao explicar cache, diga primeiro qual objeto está desatualizado e se pertence à produção atual: por exemplo, cópia da página anterior à correção da biografia ou listagem anterior à publicação. Evite apenas “versão antiga”, pois isso pode parecer reaproveitamento de texto de outro lote. Separe cópia pública desatualizada de defeito real de idioma, data ou layout; não recomende reescrever o artigo nem regravar um cadastro já correto para corrigir sua representação pública.
 
 ## Colunas padrão da planilha
 
@@ -210,7 +211,15 @@ Valide o range escrito por GET da API e igualdade integral com a base local; exp
 
 Quando a gestora pedir reorganização, aplique o formato solicitado sem mudar os resultados da auditoria: domínio na primeira coluna, linhas de subtítulo por domínio, categorias/tags apenas com nomes e IDs técnicos fora da apresentação. Preserve a relação interna artigo → linha em artefato local, incluindo os ainda não publicados, e conte somente artigos, nunca as linhas de subtítulo. Traduza cada pendência a partir da evidência atual do objeto, diferenciando defeito observado, falta de comprovação e dependência de autorização; não exponha dicionários, flags ou pendências históricas já supersedidas. Mantenha limitações aceitas do Yoast separadas de bloqueios reais.
 
-Antes de reestruturar, salve valores/formatação/permissões, confira fórmulas, notas, proteções e alterações humanas concorrentes. Use somente a Service Account canônica. Compartilhamento individual com a própria gestora autorizada deve preservar os demais acessos e ser confirmado pelo GET da permissão exata. Após o write, compare todas as células com a intenção, valide agrupamentos, IDs removidos, estados preservados e uma linha além do fim. Registre o novo contrato de apresentação na continuidade da tarefa; nenhum atualizador legado pode reintroduzir o formato antigo ou sobrescrever edições humanas sem reconciliação.
+Execute a reorganização nesta ordem:
+
+1. Leia os valores, a estrutura/formatação e as permissões do arquivo exato; preserve esse estado e confira fórmulas, notas, mesclagens e proteções antes de montar a transformação.
+2. Resolva as colunas pelo cabeçalho e prepare a matriz final local. Preserve títulos, URLs, notas reais, datas e status; remova IDs apenas da exibição de categorias/tags e das colunas dispensadas, mantendo a rastreabilidade local.
+3. Agrupe os artigos por domínio e insira subtítulos visualmente destacados, sem tratá-los como registros. Para esse formato de revisão, substitua a numeração pelo domínio na primeira coluna e evite duplicar a antiga coluna Portal.
+4. Prepare pendências curtas e específicas a partir dos gates atuais. Identifique separadamente o que falta comprovar, o defeito observado e quem precisa decidir ou intervir. Não transforme limite de acesso a uma fonte em link quebrado nem nota não verificada aceita no briefing em reprovação editorial.
+5. Use somente a Service Account canônica. Para alterar o acesso da própria gestora autorizada, localize sua permissão pelo e-mail exato, atualize o papel dessa permissão sem criar duplicata e confirme-o por GET; preserve os demais acessos.
+6. Releia os dados imediatamente antes do write. Se houver edição humana desde o snapshot, reconcilie-a antes de aplicar a transformação. Após o write, compare todas as células com a intenção, valide texto literal, agrupamentos, IDs removidos, estados preservados e uma linha além do fim.
+7. Registre o novo contrato de apresentação e o mapeamento interno na continuidade da tarefa. Não execute um atualizador remoto que ainda emita o esquema antigo; adapte e teste sua projeção antes de reutilizá-lo, preservando as edições humanas.
 
 **Pitfall de Google Sheets:** uma célula mesclada não pode atravessar a fronteira entre colunas congeladas e não congeladas. Para subtítulos mesclados na largura inteira, congele apenas o cabeçalho ou mantenha todas as colunas da mesclagem do mesmo lado. Uma rejeição de batch por esse conflito exige GET para confirmar o estado, preservação da intenção anterior e envio de uma nova intenção corrigida, sem replay cego.
 
@@ -230,7 +239,7 @@ Antes de dizer que terminou:
 - [ ] se usou sitemap, reportou que é fallback e listou diferenças;
 - [ ] coluna B está A-Z se Rodolfo pediu ordenação;
 - [ ] sem linhas totalmente vazias;
-- [ ] coluna B sem vazio;
+- [ ] título preenchido em cada linha de artigo; linhas de subtítulo identificadas separadamente e excluídas das contagens e dos testes de campos obrigatórios;
 - [ ] `Tags REC` sem vazio para URL interna;
 - [ ] `Tags P1` sem vazio para P1 interna;
 - [ ] `SEM TAGS NO WP` só quando `/posts/{id}` confirmou `tags: []`;
