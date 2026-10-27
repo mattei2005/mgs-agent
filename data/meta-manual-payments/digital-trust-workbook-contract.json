@@ -83,83 +83,161 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "full_refresh_validated",
-    "validated_metrics_at": "2026-10-27T08:55:33.894762-04:00",
-    "verified_at": "2026-10-27T08:56:56.271523-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T085536489444",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646",
-    "fresh_h_account_ids": [
-      "1001115192056600",
-      "1018267074603840",
-      "1062446663435585",
-      "1062887799996139",
-      "1085117577390237",
-      "1107653168698121",
-      "1245683183659911",
-      "1414197490675732",
-      "1498990138663094",
-      "1526280818302320",
-      "1583000095650153",
-      "1600310064116258",
-      "1736068407518263",
-      "1744611463000838",
-      "1753257812779707",
-      "1829406761389732",
-      "1851640026221079",
-      "1877104513669062",
-      "2031917360813819",
-      "2039876850230678",
-      "2429758060563333",
-      "2633813727134360",
-      "26632890069640784",
-      "2852476828464907",
-      "311204101516831",
-      "3188620887977617",
+    "status": "partial_metrics_validated_native_auth_surface_blocked",
+    "validated_metrics_at": "2026-10-27T14:03:27.498663-04:00",
+    "verified_at": "2026-10-27T14:06:52.881613-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T140330096695",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514",
+    "accounts": 47,
+    "groups": {
+      "Cartão de crédito": 12,
+      "Linha de crédito": 35
+    },
+    "source_to_live_sheet_cgij_exact": true,
+    "full_grid_narrow_write_readback": true,
+    "totals_validated_columns": [
+      "F",
+      "G",
+      "H",
+      "I",
+      "J"
+    ],
+    "fresh_h_account_ids": [],
+    "pending_h_account_ids": [
       "336562339356179",
       "3752157451670648",
-      "4511685129081248",
+      "2039876850230678",
+      "311204101516831",
+      "26632890069640784",
+      "1526280818302320",
+      "1085117577390237",
+      "3188620887977617",
+      "1498990138663094",
+      "937846586033361",
       "536294549227786",
-      "781612907182683",
-      "7840111366055613",
-      "787796726891306",
+      "4511685129081248",
       "814915838330687",
-      "869857549542755",
+      "1851640026221079",
+      "1744611463000838",
+      "1001115192056600",
+      "1829406761389732",
+      "2031917360813819",
+      "1062887799996139",
       "897046653487466",
+      "1736068407518263",
+      "2633813727134360",
+      "1018267074603840",
+      "1753257812779707",
       "908704754163659",
-      "937846586033361"
+      "869857549542755",
+      "1414197490675732",
+      "1245683183659911",
+      "1107653168698121",
+      "787796726891306",
+      "781612907182683",
+      "1583000095650153",
+      "2429758060563333",
+      "1600310064116258",
+      "7840111366055613"
     ],
-    "pending_h_account_ids": [],
-    "pending_ui": [],
-    "h_read_at_min": "2026-10-27T08:31:57.833115-04:00",
-    "h_read_at_max": "2026-10-27T08:50:51.025765-04:00",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T083055582646/closure-current.json",
-    "totals_usd": {
-      "average_daily": "30842.87",
-      "balance": "490826.58",
-      "month_spend": "772067.26"
-    },
-    "payments_executed": 0,
-    "meta_writes": 0,
-    "report_infra_status": "verified",
-    "action": "47 metrics refreshed; H38 fresh Accounts list readings with exact ID/name, AX and pixels; D3 latest card proofs updated, no pending history events; paid invoices E blank/F0; shared PC1 lease released.",
-    "average_period": {
-      "since": "2026-10-24",
-      "until": "2026-10-26"
-    },
-    "card_no_charge_located": [
+    "h_preserved_from_initial_snapshot": true,
+    "historical_h_note_read_at_min": "2026-10-27T08:31:57.833115-04:00",
+    "historical_h_note_read_at_max": "2026-10-27T08:50:51.025765-04:00",
+    "h_preexisting_value_note_discrepancies": [
+      {
+        "account_id": "1526280818302320",
+        "name": "Vizioid-US-SHEIN-EN-01-G001",
+        "sheet_amount": "0",
+        "historical_ledger_amount": "1839.96",
+        "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
+      },
+      {
+        "account_id": "1085117577390237",
+        "name": "Vizioid-US-SHEIN-EN-03-G003",
+        "sheet_amount": "0",
+        "historical_ledger_amount": "1686.72",
+        "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
+      }
+    ],
+    "pending_ui": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1877104513669062",
+        "name": "Vizioid-US-SHEIN-EN-05-G005",
+        "reason": "no_prior_pc1_card_history_proof"
+      }
+    ],
+    "card_blank_rows": [
+      {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
       {
         "account_id": "1419148446852410",
         "name": "Growpowerhub-US-SHEIN-EN-04-G004",
-        "reason": "no_charge_located",
-        "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+        "reason": "no_charge_located"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "no_prior_pc1_card_history_proof"
+      },
+      {
+        "account_id": "1877104513669062",
+        "name": "Vizioid-US-SHEIN-EN-05-G005",
+        "reason": "no_prior_pc1_card_history_proof"
       }
     ],
-    "report_infra_message_id": "1564624027492818945"
+    "card_charge_values_present": 8,
+    "totals_usd": {
+      "average_daily": "30858.57",
+      "balance": "488873.29",
+      "month_spend": "778339.14"
+    },
+    "average_period": [
+      {
+        "since": "2026-10-24",
+        "until": "2026-10-26"
+      }
+    ],
+    "invoice_period": "2026-09-01",
+    "invoice_due_usd": "0.00",
+    "visible_invoice_numbers": 0,
+    "native_guard_blocked_before_input": true,
+    "capture_parity": "AX has Windows Security / Choose a passkey / google.com while pixels show Meta Accounts Digital Trust; no keyboard or navigation allowed",
+    "lease_free": true,
+    "owned_tabs_created": 0,
+    "payments_executed": 0,
+    "meta_writes": 0,
+    "cron_changes": 0,
+    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514/closure-current.json",
+    "workbook_sheet_count": 2
   },
   "pending_card_history": {
-    "status": "verified_no_new_generic_events",
-    "account_ids": [],
-    "reason": "Three pending instruments resolved from actual PC1 transaction pixels; final API refresh pending_ui empty. Blank no-charge account remains explicitly qualified."
+    "status": "blocked_native_auth_surface_conflict",
+    "account_ids": [
+      "1062446663435585",
+      "1543098427832443",
+      "2852476828464907",
+      "1877104513669062"
+    ],
+    "reason": "PC1 AX Windows Security Google passkey conflicts with Meta pixels; no input. Three new card-funded accounts need instrument proof; Mavroa03 has new generic event. Metrics independent updated."
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -199,7 +277,6 @@
     "1001115192056600",
     "1018267074603840",
     "1062887799996139",
-    "1062446663435585",
     "2031917360813819",
     "897046653487466",
     "1498990138663094",
@@ -208,7 +285,6 @@
     "3752157451670648",
     "4511685129081248",
     "1414197490675732",
-    "2852476828464907",
     "1829406761389732",
     "937846586033361",
     "336562339356179",
@@ -219,7 +295,6 @@
     "536294549227786",
     "1085117577390237",
     "1736068407518263",
-    "1877104513669062",
     "869857549542755",
     "7840111366055613",
     "1583000095650153",
@@ -262,7 +337,7 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261027T083023551454",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261027T140259872891",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-09-01",
