@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-27T12:16:02-04:00",
+    "updated_at": "2026-10-27T16:23:52.691040+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -51749,8 +51749,8 @@
       "id": "zeus-eggbev-canary-1564670170285473863",
       "agent": "zeus",
       "type": "authorized_meta_paused_native_clone_diagnostic",
-      "status": "test_closed_meta_generic_error_no_copy",
-      "updated_at": "2026-10-27T16:10:16.854470+00:00",
+      "status": "complete_paused_verified",
+      "updated_at": "2026-10-27T16:23:52.691040+00:00",
       "authority_message_id": "1564670170285473863",
       "status_exception_message_id": "1564665188622405805",
       "source_thread_id": "1564661343574040789",
@@ -51759,36 +51759,329 @@
         "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/checkpoints/zeus-eggbev-canary-1564670170285473863-1034081997659047.json"
       ],
       "verification": {
-        "status": "TEST_COMPLETED_META_COPY_FAILED",
-        "source_id": "120249822420250629",
-        "source_name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP01",
-        "source_adsets": 1,
-        "source_ads": 3,
-        "source_unchanged": true,
-        "new_campaigns": [],
-        "new_campaign_count": 0,
-        "failed_async_sessions": [
-          "1643529694070405",
-          "2560157931149088"
-        ],
-        "final_error": {
-          "message": "An unexpected error has occurred. Please retry your request later.",
-          "type": "OAuthException",
-          "is_transient": true,
-          "code": 2,
-          "fbtrace_id": "Aye0mBW4kCUjiWisO-mpOCm"
+        "status": "COMPLETE_PAUSED_VERIFIED",
+        "verified_at_utc": "2026-10-27T16:22:38.417018+00:00",
+        "supersedes": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/diagnostics/zeus-eggbev-canary-1564670170285473863/final-proof.json",
+        "request_id": "zeus-eggbev-canary-1564670170285473863",
+        "recovery_authorization_message_id": "1564673142612430849",
+        "account_id": "1034081997659047",
+        "token_actor": {
+          "id": "964942296621431",
+          "name": "Carla Nunes"
         },
-        "restoration": {
-          "lease_restored": true,
-          "original_request_unchanged": true,
+        "source_campaign_id": "120249822420250629",
+        "source_campaign_name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP01",
+        "campaign_id": "120250886678810629",
+        "campaign_name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP06",
+        "daily_budget_minor": "4500",
+        "currency": "USD",
+        "adset_ids": [
+          "120250886679690629"
+        ],
+        "ad_pairs": [
+          {
+            "source_ad_id": "120249822638100629",
+            "target_ad_id": "120250886728110629",
+            "source_creative_id": "1424776819501733",
+            "target_creative_id": "2128058434768249",
+            "source_post_id": "804761166056807_122140986219068819",
+            "target_post_id": "804761166056807_122147560617068819"
+          },
+          {
+            "source_ad_id": "120249822637970629",
+            "target_ad_id": "120250886729710629",
+            "source_creative_id": "1807959403976059",
+            "target_creative_id": "2120989198506464",
+            "source_post_id": "804761166056807_122140986183068819",
+            "target_post_id": "804761166056807_122147560707068819"
+          },
+          {
+            "source_ad_id": "120249822637950629",
+            "target_ad_id": "120250886734280629",
+            "source_creative_id": "1862893138028264",
+            "target_creative_id": "1646525183872732",
+            "source_post_id": "804761166056807_122140986195068819",
+            "target_post_id": "804761166056807_122147560809068819"
+          }
+        ],
+        "ad_statuses": [
+          {
+            "id": "120250886728110629",
+            "name": "AD 01 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_051",
+            "status": "PAUSED",
+            "effective_status": "PENDING_REVIEW",
+            "source_ad_id": "120249822638100629"
+          },
+          {
+            "id": "120250886734280629",
+            "name": "AD 03 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_114",
+            "status": "PAUSED",
+            "effective_status": "PENDING_REVIEW",
+            "source_ad_id": "120249822637950629"
+          },
+          {
+            "id": "120250886729710629",
+            "name": "AD 02 - CC_US_EN_VID_AVAILABLE_LIMIT_PV_012",
+            "status": "PAUSED",
+            "effective_status": "PENDING_REVIEW",
+            "source_ad_id": "120249822637970629"
+          }
+        ],
+        "feature_projection": [
+          {
+            "target_ad_id": "120250886728110629",
+            "source_flags_preserved": true,
+            "additional_disabled_defaults": 0
+          },
+          {
+            "target_ad_id": "120250886729710629",
+            "source_flags_preserved": true,
+            "additional_disabled_defaults": 0
+          },
+          {
+            "target_ad_id": "120250886734280629",
+            "source_flags_preserved": true,
+            "additional_disabled_defaults": 0
+          }
+        ],
+        "verified": {
+          "exact_one_new_campaign": true,
+          "one_adset_three_ads": true,
+          "all_configured_paused": true,
+          "no_ad_issues_returned": true,
+          "source_unchanged": true,
+          "copy_page_utm_messenger_json_equal": true,
+          "targeting_pixel_event_bid_attribution_budget_equal": true,
+          "video_variants_binary_identical": 6,
+          "old_lease_request_checkpoint_restored": true,
           "production_config_unchanged": true
         },
-        "protected_original_files_match": true,
-        "production_config_unchanged": true,
-        "meta_request_was_submitted": true,
-        "write_capability_proven": false,
-        "current_profile_restriction_proven": false
-      }
+        "diagnosis": {
+          "precise_failure": "100/1815675 Non-Messenger Ad in Messenger Ad Set",
+          "actual_boundary": "campaign and adset native shallow copies succeed; native ad copy without explicit Messenger CTA fails",
+          "fix": "preserve native-copy lineage and source payload; omit reasons_to_shop/shops_bundle; restore canonical asset_feed_spec.call_to_actions APPLY_NOW with app_destination=MESSENGER",
+          "prior_same_source_success_evidence": "data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-recovery-summary.json",
+          "bulk_code_2_internal_cause": "not independently exposed by Meta; stepwise isolation and successful corrected ads prove the actionable compatibility boundary"
+        },
+        "limits": {
+          "delivery_or_auction_tested": false,
+          "post_social_proof_preserved": false,
+          "new_creative_video_post_ids": "Meta rematerialized; six video binaries are identical; no new asset uploaded",
+          "pending_review": true,
+          "production_rollout": "no global engine/config or recurring job changed; corrected canonical explicit-ad route independently prevalidated and compiled"
+        }
+      },
+      "status_history": [
+        {
+          "status": "test_closed_meta_generic_error_no_copy",
+          "verification": {
+            "status": "TEST_COMPLETED_META_COPY_FAILED",
+            "source_id": "120249822420250629",
+            "source_name": "163 - Aria Kensington - ENG - US - (pg_8348) C003 DUP01",
+            "source_adsets": 1,
+            "source_ads": 3,
+            "source_unchanged": true,
+            "new_campaigns": [],
+            "new_campaign_count": 0,
+            "failed_async_sessions": [
+              "1643529694070405",
+              "2560157931149088"
+            ],
+            "final_error": {
+              "message": "An unexpected error has occurred. Please retry your request later.",
+              "type": "OAuthException",
+              "is_transient": true,
+              "code": 2,
+              "fbtrace_id": "Aye0mBW4kCUjiWisO-mpOCm"
+            },
+            "restoration": {
+              "lease_restored": true,
+              "original_request_unchanged": true,
+              "production_config_unchanged": true
+            },
+            "protected_original_files_match": true,
+            "production_config_unchanged": true,
+            "meta_request_was_submitted": true,
+            "write_capability_proven": false,
+            "current_profile_restriction_proven": false
+          },
+          "superseded_at": "2026-10-27T16:23:52.691040+00:00"
+        }
+      ],
+      "recovery_authority_message_id": "1564673142612430849",
+      "active_proof": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/diagnostics/zeus-eggbev-canary-1564670170285473863/recovery-final-proof.json",
+      "canonical_corrected_route_validation": "/root/mgs-agent/data/ares/meta-ads/audit/eggbev/diagnostics/zeus-eggbev-canary-1564670170285473863/corrected-canonical-route-verification.json"
+    },
+    {
+      "id": "zeus-raquel-cache-authority-1564671680444370955",
+      "agent": "zeus",
+      "type": "permanent_cache_request_delegation_and_targeted_readonly_reconciliation",
+      "status": "authority_active_cache_file_deletion_pending_exact_critical_confirmation",
+      "updated_at": "2026-10-27T16:19:41.198319+00:00",
+      "authority_message_id": "1564671680444370955",
+      "authority_source_thread_id": "1564289742567112795",
+      "operational_thread_id": "1564558610263187547",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "registry_id": "ATENA-RAQUEL-EDITORIAL-CACHE-AUTHORITY-1564671680444370955",
+      "restriction_message_id": "1564670035593797776",
+      "artifacts": [
+        {
+          "path": "/root/mgs-agent/data/atena/editorial-manager-authority.json",
+          "sha256": "341f4b1788b88124b48160300e58a06cfca77c98615ee1a1df93bc825881fd4d",
+          "bytes": 8891
+        },
+        {
+          "path": "/root/mgs-agent/data/atena/authority-history/ATENA-RAQUEL-EDITORIAL-TECHNICAL-AUTHORITY-1564661630766424096.json",
+          "sha256": "a191de6e3d51043ef02ce69683ef1ff4dff7f802716f5cf9519157ea9cf9aab1",
+          "bytes": 5921
+        },
+        {
+          "path": "/root/mgs-agent/data/authorized-users.json",
+          "sha256": "d25a03f28712bf5375b1418611c1c88be6e143fdae0f1c577b050a05189c2b2e",
+          "bytes": 16591
+        },
+        {
+          "path": "/root/mgs-agent/context/permissions-matrix.md",
+          "sha256": "bd84810378ed6aca5bf5fa626949660a9850fe36d941bf4a3ad50af2fc1f297a",
+          "bytes": 12251
+        },
+        {
+          "path": "/root/mgs-agent/context/routes.md",
+          "sha256": "1e09c50c0abb70643c04babd4bc41c4a018eb4ea555e99ef21b6facb1cd3c1d5",
+          "bytes": 18673
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md",
+          "sha256": "eb25f2c996f26f5a519d8630b9398050c9e5cb57f168d10aa61ab1d2024ae1dd",
+          "bytes": 5338
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/SKILL.md",
+          "sha256": "eb25f2c996f26f5a519d8630b9398050c9e5cb57f168d10aa61ab1d2024ae1dd",
+          "bytes": 5338
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/reconcile_es.py",
+          "sha256": "83264a6b83cfd3890bc2d14226ffecfa450152cabe456b87f281bb2cf3cb36be",
+          "bytes": 7238
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/recheck_cache.py",
+          "sha256": "0af9871735a28254ca447298c8144c563992c2b024462522d391292556581e4b",
+          "bytes": 7552
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/finalize_reconciliation.py",
+          "sha256": "852ef74d6ed69423a008c94e66704aa1cdf4712d43c83201afcf1505ea5cb219",
+          "bytes": 6381
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/apply_authority.py",
+          "sha256": "90125c43d4f32b2bc252071ee7eae330b0885004ebf09d084791aea487ec9dc1",
+          "bytes": 5529
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/cache-current/exact-url-reconciliation-v2.json",
+          "sha256": "d0268eee7ee4f358f7c0f4073441779722c97a23f06d8cb7e3de32074fd02e5e",
+          "bytes": 488941
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/cache-current/critical-exact-27.json",
+          "sha256": "93fd057584ad00c68129ddcc1490977eaeee9e468d7f89e64d795fc6cff59c70",
+          "bytes": 69419
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/es6-source-reconciliation.json",
+          "sha256": "a3aa0cdc7d933c1546d036947e90483b460e62d48ddd9f8c2b79746add1caeb8",
+          "bytes": 2503
+        }
+      ],
+      "validation": {
+        "canonical_registry_unique_active": true,
+        "authority_history_preserved": true,
+        "source_record_hashes_unchanged": true,
+        "es_records_old_to_new_indices": {
+          "mavroa.com": [
+            436,
+            438
+          ],
+          "boostingecon.com": [
+            437,
+            439
+          ]
+        },
+        "native_es_readonly_verified": 2,
+        "es_categories_menus_applied": false,
+        "public_urls_inspected": 160,
+        "public_requests": 324,
+        "file_access_uncertified_domains": 6,
+        "critical_exact_files_proposed": 27,
+        "deletion_or_purge_commands_executed": 0,
+        "editorial_bio_body_writes_executed": 0,
+        "unrelated_global_permissions_unchanged": true
+      },
+      "critical_manifest": {
+        "path": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738/cache-current/critical-exact-27.json",
+        "sha256": "93fd057584ad00c68129ddcc1490977eaeee9e468d7f89e64d795fc6cff59c70"
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1564674264190296118",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "embed_count": 1,
+        "embed_title": "REPORT-INFRA — modificada",
+        "field_names": [
+          "Ação",
+          "Tipo",
+          "Host",
+          "Path",
+          "Motivo",
+          "Evidência",
+          "Pendências Hermes",
+          "Horário"
+        ],
+        "mentions": 0,
+        "readback_ok": true
+      },
+      "delivery_receipts": [
+        {
+          "part": 1,
+          "channel_id": "1564289742567112795",
+          "message_id": "1564674795180658799",
+          "readback_exact": true,
+          "link": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564674795180658799"
+        },
+        {
+          "part": 2,
+          "channel_id": "1564289742567112795",
+          "message_id": "1564674802269163575",
+          "readback_exact": true,
+          "link": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564674802269163575"
+        },
+        {
+          "part": 3,
+          "channel_id": "1564289742567112795",
+          "message_id": "1564674809068126309",
+          "readback_exact": true,
+          "link": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564674809068126309"
+        },
+        {
+          "part": 4,
+          "channel_id": "1564289742567112795",
+          "message_id": "1564674816039059599",
+          "readback_exact": true,
+          "link": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564674816039059599"
+        },
+        {
+          "part": 5,
+          "channel_id": "1564508692701909014",
+          "message_id": "1564674823622234245",
+          "readback_exact": true,
+          "link": "https://discord.com/channels/1185714635991679006/1564508692701909014/1564674823622234245"
+        }
+      ],
+      "work_root": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738"
     }
   ],
   "profile_skill_references": [
