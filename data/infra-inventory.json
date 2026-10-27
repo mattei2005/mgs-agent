@@ -1048,7 +1048,9 @@
         "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
         "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514/closure-current.json",
         "workbook_sheet_count": 2
-      }
+      },
+      "recovered_by": "meta-manual-payments-refresh-1564709772341682277",
+      "recovery_report_message_id": "1564716839790059602"
     },
     {
       "id": "raquel-editorial-technical-authority-1564661630766424096",
@@ -53920,6 +53922,122 @@
         "readback_exact": true,
         "url": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564709234925637825"
       }
+    },
+    {
+      "id": "meta-manual-payments-refresh-1564709772341682277",
+      "agent": "zeus",
+      "type": "authorized_financial_snapshot_recovery",
+      "authority_message_id": "1564709772341682277",
+      "status": "full_refresh_validated",
+      "updated_at": "2026-10-27T15:06:04.819578-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/data/meta-manual-payments/pc1-card-ledger.json",
+        "/root/mgs-agent/data/meta-manual-payments/pc1-pay-now-ledger.json",
+        "/root/mgs-agent/data/meta-manual-payments/last-refresh.json"
+      ],
+      "verification": {
+        "status": "full_refresh_validated",
+        "authority_message_id": "1564709772341682277",
+        "validated_metrics_at": "2026-10-27T15:04:19.771480-04:00",
+        "verified_at": "2026-10-27T15:06:04.819578-04:00",
+        "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T150425814457",
+        "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T143910516361",
+        "accounts": 47,
+        "groups": {
+          "Cartão de crédito": 12,
+          "Linha de crédito": 35
+        },
+        "source_to_live_sheet_cgij_exact": true,
+        "h_source_to_live_sheet_and_note_exact": true,
+        "d_ledger_to_live_sheet_exact": true,
+        "full_grid_narrow_write_readback": true,
+        "totals_validated_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "fresh_h_account_ids": [
+          "1001115192056600",
+          "1018267074603840",
+          "1062887799996139",
+          "1085117577390237",
+          "1107653168698121",
+          "1245683183659911",
+          "1414197490675732",
+          "1498990138663094",
+          "1526280818302320",
+          "1583000095650153",
+          "1600310064116258",
+          "1736068407518263",
+          "1744611463000838",
+          "1753257812779707",
+          "1829406761389732",
+          "1851640026221079",
+          "2031917360813819",
+          "2039876850230678",
+          "2429758060563333",
+          "2633813727134360",
+          "26632890069640784",
+          "311204101516831",
+          "3188620887977617",
+          "336562339356179",
+          "3752157451670648",
+          "4511685129081248",
+          "536294549227786",
+          "781612907182683",
+          "7840111366055613",
+          "787796726891306",
+          "814915838330687",
+          "869857549542755",
+          "897046653487466",
+          "908704754163659",
+          "937846586033361"
+        ],
+        "pending_h_account_ids": [],
+        "fresh_h_count": 35,
+        "h_read_at_min": "2026-10-27T14:40:11.349099-04:00",
+        "h_read_at_max": "2026-10-27T14:58:04.375632-04:00",
+        "h_sum_usd": "485428.66",
+        "pending_ui": [],
+        "card_blank_rows": [
+          {
+            "account_id": "1419148446852410",
+            "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+            "reason": "no_charge_located",
+            "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+          }
+        ],
+        "card_proofs_updated": 4,
+        "average_period": [
+          {
+            "since": "2026-10-24",
+            "until": "2026-10-26"
+          }
+        ],
+        "totals_usd": {
+          "average_daily": "30859.71",
+          "balance": "490046.40",
+          "month_spend": "779483.14"
+        },
+        "invoice_period": "2026-09-01",
+        "invoice_due_usd": "0.00",
+        "visible_invoice_numbers": 0,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0,
+        "other_sheet_properties_unchanged": true,
+        "workbook_sheet_count": 2,
+        "report_infra_status": "sent_verified",
+        "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T143910516361/closure-current.json",
+        "report_infra_message_id": "1564716839790059602",
+        "report_infra_readback": true
+      },
+      "report_infra_message_id": "1564716839790059602",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
