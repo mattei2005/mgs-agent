@@ -893,6 +893,20 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-vizioid-native-subtitle-1564787221461082113",
+      "agent": "zeus",
+      "type": "wordpress_native_subtitle_configuration",
+      "status": "validated_mobile_order",
+      "authority_message_id": "1564787221461082113",
+      "thread_id": "1564760403173707789",
+      "target": "https://vizioid.com/rec-us-app-shein-circle-of-style/",
+      "post_id": 9001,
+      "changes": ["Persisted previously missing jbf_secondary_title_title_format option on Vizioid", "Moved original grey introduction to _jbf_secondary_title", "Removed only duplicated introductory group from post_content"],
+      "validated": {"mobile_bare_order": "title -> native subtitle -> displayed ad -> CTAs", "mobile_facebook_top_container_after_subtitle": true, "mobile_facebook_fill_observed": false, "desktop_rule_preserved": true, "body_rest_exact": true, "other_sites_changed": false, "ad_stack_changes": 0, "theme_file_changes": 0},
+      "backup": "/home/runcloud/backups/vizioid-native-subtitle-1564787221461082113",
+      "evidence": "/root/mgs-agent/work/vizioid-native-subtitle-1564787221461082113/final-summary.json"
+    },
+    {
       "id": "ares-sb-member-authority-1564748349431881972",
       "agent": "zeus",
       "type": "standing_scoped_authorization_delegation",
