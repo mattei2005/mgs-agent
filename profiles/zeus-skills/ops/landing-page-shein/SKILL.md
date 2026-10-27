@@ -14,7 +14,7 @@ metadata:
 
 ## When to Use
 
-Use quando Rodolfo pedir criação, edição, duplicação, implantação, auditoria ou melhoria da interface das landing pages SHEIN no WordPress. Não usar para funis com lead/SMS nem para o plugin do Creditoparaveiculo.
+Use quando Rodolfo pedir URLs, criação, edição, duplicação, implantação, auditoria ou melhoria das landing pages SHEIN no WordPress, incluindo identificação e comparação dos RECs de destino. Não usar para funis com lead/SMS nem para o plugin do Creditoparaveiculo.
 
 ## Escopo
 
@@ -95,6 +95,13 @@ Desde a v1.1.1, WordPress é o plano de controle e cada landing ativa é entregu
 - Código fonte e produção com manifesto idêntico.
 - Backups existentes por readback.
 
+## Entrega de URLs por site
+
+1. Para pedidos de “landing pages de todos os sites SHEIN” sem menção a quiz, modelo ou gestor, entregar primeiro as URLs finais dos RECs, uma por domínio. Rodolfo distingue esse destino das entradas `/quiz/.../`; não substituir o pedido por uma lista V1/V2/V3 G002.
+2. Resolver os domínios em `context/acquisition.md` e confirmar o destino no `href` dos CTAs da landing pública; não montar o slug apenas por analogia com outro site. Deduplicar destinos por domínio antes de contar.
+3. Fazer GET de cada destino, seguindo redirects, e conferir URL efetiva e conteúdo SHEIN. Entregar bullets curtos com nome do site e URL limpa, sem acrescentar UTMs de campanha. Se houver destinos diferentes entre configurações, explicitar a diferença em vez de escolher um silenciosamente.
+4. Delimitar a evidência: HTTP 200 comprova disponibilidade, não equivalência visual/editorial nem funcionamento de CTAs. Pedidos para conferir o “padrão do Yolo” exigem a comparação de REC abaixo, não repetir o teste de status.
+
 ## Inventário operacional e mudança de nicho
 
 1. Para listar domínios da operação, partir de `context/acquisition.md`, aplicar as exclusões pedidas e deduplicar por domínio. Conferir uma rota SHEIN pública de cada site e informar idioma quando útil; não tratar os exemplos desta skill como inventário completo.
@@ -140,7 +147,9 @@ Se o logo oficial tiver texto branco sobre card branco, procurar primeiro uma va
 - No V3 estático, o contêiner da imagem é `span.mgs-dq-category-image` e o `<img>` fica aninhado; leia `currentSrc`, `complete` e `naturalWidth/naturalHeight` no `<img>`. O texto da categoria está em `.mgs-dq-category-name`. Não procure uma classe de imagem diretamente no `<img>`, porque isso produz falso negativo apesar de a página estar correta.
 - Em artigos com CSS inline, nomes como `cnh-rec-quiz-wrap`, `cnh-rec-logo` e `cnh-rec-headline` aparecem primeiro dentro do `<style>`. Ao validar a ordem visual, ancore no `<section class="cnh-rec-quiz-wrap">` renderizado ou consulte o DOM; nunca use a primeira ocorrência textual do nome da classe no HTML inteiro.
 - Um falso negativo do validador não autoriza alterar produção novamente. Inspecione o DOM real, corrija o seletor e repita a leitura antes de concluir que existe regressão.
-- Ao comparar RECs por screenshots, abra as duas URLs e confira o DOM antes de concluir que logo, selo, avaliação ou conteúdo estão ausentes. Recorte e ausência de impressão publicitária não provam ausência de componente; diferencie slot configurado, iframe carregado e anúncio efetivamente exibido. Não altere monetização por diferença isolada de impressão.
+- Ao comparar RECs, abra referência e alvo no mesmo viewport mobile e confronte H1/subtítulo, `.cnh-rec-headline`, `.cnh-rec-question`, rótulos/ícones/URLs dos CTAs, avaliação, logo, selo, ordem dos blocos e títulos/CTAs do restante do artigo. Leia o DOM renderizado e inspecione screenshots: classes CSS e estrutura iguais não comprovam paridade de copy, e uma réplica do quiz V3 não comprova paridade do REC.
+- Antes de capturar screenshots, aguarde o preloader desaparecer e confirme que o conteúdo está visível, não apenas presente no DOM; `document.readyState=complete` e `wait_for_load()` podem anteceder a remoção do overlay. Guarde uma captura distinta por domínio para não comparar arquivos sobrescritos. Se a captura mostrar somente o logo do preloader, aguarde e recapture antes de concluir que faltam componentes.
+- Recorte e ausência de impressão publicitária não provam ausência de componente; diferencie slot configurado, iframe carregado e anúncio efetivamente exibido. Não altere monetização por diferença isolada de impressão. Relate diferenças confirmadas separadamente da causa histórica ainda não apurada; uma versão pública divergente, sozinha, não identifica autor, data da alteração nem cache como causa.
 - Se a URL com parâmetros mostrar a copy nova e a URL limpa parecer antiga, compare a URL limpa por HTTP independente e pelo navegador com cache desabilitado antes de purgar produção. Cache local do navegador pode simular cache público obsoleto.
 
 ## Preservação de configurações existentes em upgrades
