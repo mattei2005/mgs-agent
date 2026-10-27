@@ -892,164 +892,164 @@
     }
   ],
   "runtime_artifacts": [
-{
-  "id": "meta-manual-payments-refresh-20261027-1402",
-  "agent": "zeus",
-  "type": "authorized_recurring_financial_snapshot",
-  "status": "partial_metrics_validated_native_auth_surface_blocked",
-  "updated_at": "2026-10-27T14:06:52.881613-04:00",
-  "paths": [
-    "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
-    "/root/mgs-agent/data/meta-manual-payments/last-refresh.json"
-  ],
-  "verification": {
-    "status": "partial_metrics_validated_native_auth_surface_blocked",
-    "validated_metrics_at": "2026-10-27T14:03:27.498663-04:00",
-    "verified_at": "2026-10-27T14:06:52.881613-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T140330096695",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514",
-    "accounts": 47,
-    "groups": {
-      "Cartão de crédito": 12,
-      "Linha de crédito": 35
+    {
+      "id": "meta-manual-payments-refresh-20261027-1402",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_metrics_validated_native_auth_surface_blocked",
+      "updated_at": "2026-10-27T14:06:52.881613-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/data/meta-manual-payments/last-refresh.json"
+      ],
+      "verification": {
+        "status": "partial_metrics_validated_native_auth_surface_blocked",
+        "validated_metrics_at": "2026-10-27T14:03:27.498663-04:00",
+        "verified_at": "2026-10-27T14:06:52.881613-04:00",
+        "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T140330096695",
+        "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514",
+        "accounts": 47,
+        "groups": {
+          "Cartão de crédito": 12,
+          "Linha de crédito": 35
+        },
+        "source_to_live_sheet_cgij_exact": true,
+        "full_grid_narrow_write_readback": true,
+        "totals_validated_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "fresh_h_account_ids": [],
+        "pending_h_account_ids": [
+          "336562339356179",
+          "3752157451670648",
+          "2039876850230678",
+          "311204101516831",
+          "26632890069640784",
+          "1526280818302320",
+          "1085117577390237",
+          "3188620887977617",
+          "1498990138663094",
+          "937846586033361",
+          "536294549227786",
+          "4511685129081248",
+          "814915838330687",
+          "1851640026221079",
+          "1744611463000838",
+          "1001115192056600",
+          "1829406761389732",
+          "2031917360813819",
+          "1062887799996139",
+          "897046653487466",
+          "1736068407518263",
+          "2633813727134360",
+          "1018267074603840",
+          "1753257812779707",
+          "908704754163659",
+          "869857549542755",
+          "1414197490675732",
+          "1245683183659911",
+          "1107653168698121",
+          "787796726891306",
+          "781612907182683",
+          "1583000095650153",
+          "2429758060563333",
+          "1600310064116258",
+          "7840111366055613"
+        ],
+        "h_preserved_from_initial_snapshot": true,
+        "historical_h_note_read_at_min": "2026-10-27T08:31:57.833115-04:00",
+        "historical_h_note_read_at_max": "2026-10-27T08:50:51.025765-04:00",
+        "h_preexisting_value_note_discrepancies": [
+          {
+            "account_id": "1526280818302320",
+            "name": "Vizioid-US-SHEIN-EN-01-G001",
+            "sheet_amount": "0",
+            "historical_ledger_amount": "1839.96",
+            "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
+          },
+          {
+            "account_id": "1085117577390237",
+            "name": "Vizioid-US-SHEIN-EN-03-G003",
+            "sheet_amount": "0",
+            "historical_ledger_amount": "1686.72",
+            "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
+          }
+        ],
+        "pending_ui": [
+          {
+            "account_id": "1062446663435585",
+            "name": "Escalatepower-US-SHEIN-EN-03-G003",
+            "reason": "no_prior_pc1_card_history_proof"
+          },
+          {
+            "account_id": "1543098427832443",
+            "name": "Mavroa-US-SHEIN-ES-03-G003",
+            "reason": "new_generic_payment_since_pc1_proof"
+          },
+          {
+            "account_id": "2852476828464907",
+            "name": "Mavroa-US-SHEIN-ES-04-G004",
+            "reason": "no_prior_pc1_card_history_proof"
+          },
+          {
+            "account_id": "1877104513669062",
+            "name": "Vizioid-US-SHEIN-EN-05-G005",
+            "reason": "no_prior_pc1_card_history_proof"
+          }
+        ],
+        "card_blank_rows": [
+          {
+            "account_id": "1062446663435585",
+            "name": "Escalatepower-US-SHEIN-EN-03-G003",
+            "reason": "no_prior_pc1_card_history_proof"
+          },
+          {
+            "account_id": "1419148446852410",
+            "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+            "reason": "no_charge_located"
+          },
+          {
+            "account_id": "2852476828464907",
+            "name": "Mavroa-US-SHEIN-ES-04-G004",
+            "reason": "no_prior_pc1_card_history_proof"
+          },
+          {
+            "account_id": "1877104513669062",
+            "name": "Vizioid-US-SHEIN-EN-05-G005",
+            "reason": "no_prior_pc1_card_history_proof"
+          }
+        ],
+        "card_charge_values_present": 8,
+        "totals_usd": {
+          "average_daily": "30858.57",
+          "balance": "488873.29",
+          "month_spend": "778339.14"
+        },
+        "average_period": [
+          {
+            "since": "2026-10-24",
+            "until": "2026-10-26"
+          }
+        ],
+        "invoice_period": "2026-09-01",
+        "invoice_due_usd": "0.00",
+        "visible_invoice_numbers": 0,
+        "native_guard_blocked_before_input": true,
+        "capture_parity": "AX has Windows Security / Choose a passkey / google.com while pixels show Meta Accounts Digital Trust; no keyboard or navigation allowed",
+        "lease_free": true,
+        "owned_tabs_created": 0,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0,
+        "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+        "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514/closure-current.json",
+        "workbook_sheet_count": 2
+      }
     },
-    "source_to_live_sheet_cgij_exact": true,
-    "full_grid_narrow_write_readback": true,
-    "totals_validated_columns": [
-      "F",
-      "G",
-      "H",
-      "I",
-      "J"
-    ],
-    "fresh_h_account_ids": [],
-    "pending_h_account_ids": [
-      "336562339356179",
-      "3752157451670648",
-      "2039876850230678",
-      "311204101516831",
-      "26632890069640784",
-      "1526280818302320",
-      "1085117577390237",
-      "3188620887977617",
-      "1498990138663094",
-      "937846586033361",
-      "536294549227786",
-      "4511685129081248",
-      "814915838330687",
-      "1851640026221079",
-      "1744611463000838",
-      "1001115192056600",
-      "1829406761389732",
-      "2031917360813819",
-      "1062887799996139",
-      "897046653487466",
-      "1736068407518263",
-      "2633813727134360",
-      "1018267074603840",
-      "1753257812779707",
-      "908704754163659",
-      "869857549542755",
-      "1414197490675732",
-      "1245683183659911",
-      "1107653168698121",
-      "787796726891306",
-      "781612907182683",
-      "1583000095650153",
-      "2429758060563333",
-      "1600310064116258",
-      "7840111366055613"
-    ],
-    "h_preserved_from_initial_snapshot": true,
-    "historical_h_note_read_at_min": "2026-10-27T08:31:57.833115-04:00",
-    "historical_h_note_read_at_max": "2026-10-27T08:50:51.025765-04:00",
-    "h_preexisting_value_note_discrepancies": [
-      {
-        "account_id": "1526280818302320",
-        "name": "Vizioid-US-SHEIN-EN-01-G001",
-        "sheet_amount": "0",
-        "historical_ledger_amount": "1839.96",
-        "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
-      },
-      {
-        "account_id": "1085117577390237",
-        "name": "Vizioid-US-SHEIN-EN-03-G003",
-        "sheet_amount": "0",
-        "historical_ledger_amount": "1686.72",
-        "classification": "preexisting_sheet_change_unattributed; preserved; not provider-revalidated"
-      }
-    ],
-    "pending_ui": [
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "no_prior_pc1_card_history_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "no_prior_pc1_card_history_proof"
-      },
-      {
-        "account_id": "1877104513669062",
-        "name": "Vizioid-US-SHEIN-EN-05-G005",
-        "reason": "no_prior_pc1_card_history_proof"
-      }
-    ],
-    "card_blank_rows": [
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "no_prior_pc1_card_history_proof"
-      },
-      {
-        "account_id": "1419148446852410",
-        "name": "Growpowerhub-US-SHEIN-EN-04-G004",
-        "reason": "no_charge_located"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "no_prior_pc1_card_history_proof"
-      },
-      {
-        "account_id": "1877104513669062",
-        "name": "Vizioid-US-SHEIN-EN-05-G005",
-        "reason": "no_prior_pc1_card_history_proof"
-      }
-    ],
-    "card_charge_values_present": 8,
-    "totals_usd": {
-      "average_daily": "30858.57",
-      "balance": "488873.29",
-      "month_spend": "778339.14"
-    },
-    "average_period": [
-      {
-        "since": "2026-10-24",
-        "until": "2026-10-26"
-      }
-    ],
-    "invoice_period": "2026-09-01",
-    "invoice_due_usd": "0.00",
-    "visible_invoice_numbers": 0,
-    "native_guard_blocked_before_input": true,
-    "capture_parity": "AX has Windows Security / Choose a passkey / google.com while pixels show Meta Accounts Digital Trust; no keyboard or navigation allowed",
-    "lease_free": true,
-    "owned_tabs_created": 0,
-    "payments_executed": 0,
-    "meta_writes": 0,
-    "cron_changes": 0,
-    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T140332054514/closure-current.json",
-    "workbook_sheet_count": 2
-  }
-},
     {
       "id": "raquel-editorial-technical-authority-1564661630766424096",
       "actor": "zeus",
@@ -52088,7 +52088,7 @@
       "id": "zeus-raquel-cache-authority-1564671680444370955",
       "agent": "zeus",
       "type": "permanent_cache_request_delegation_and_targeted_readonly_reconciliation",
-      "status": "authority_active_cache_file_deletion_pending_exact_critical_confirmation",
+      "status": "historical_authority_snapshot_superseded",
       "updated_at": "2026-10-27T16:19:41.198319+00:00",
       "authority_message_id": "1564671680444370955",
       "authority_source_thread_id": "1564289742567112795",
@@ -52253,7 +52253,10 @@
           "link": "https://discord.com/channels/1185714635991679006/1564508692701909014/1564674823622234245"
         }
       ],
-      "work_root": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738"
+      "work_root": "/root/.hermes/profiles/zeus/work/seo100-public-1564558610263187547/resume-1564670925863919738",
+      "authority_interpretation_superseded_by": "zeus-raquel-content-cache-governance-1564706598130032710",
+      "historical_status_before_supersession": "authority_active_cache_file_deletion_pending_exact_critical_confirmation",
+      "runtime_outcome_not_reassessed_by_this_governance_task": true
     },
     {
       "id": "zeus-seo100-exact-cache-execution-1564677701640658947",
@@ -53787,6 +53790,135 @@
         "channel_id": "1498132022634483894",
         "message_id": "1564684055465824380",
         "readback_ok": true
+      }
+    },
+    {
+      "id": "zeus-raquel-content-cache-governance-1564706598130032710",
+      "agent": "zeus",
+      "type": "canonical_delegated_confirmation_governance_correction",
+      "status": "active_validated_governance_only_execution_atena",
+      "source_message_ids": [
+        "1564705532424495105",
+        "1564706598130032710"
+      ],
+      "source_thread_id": "1564289742567112795",
+      "trigger_message_id": "1564707848452309197",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "registry_id": "ATENA-RAQUEL-CONTENT-CACHE-DELEGATION-1564706598130032710",
+      "supersedes_authority_id": "ATENA-RAQUEL-EDITORIAL-CACHE-AUTHORITY-1564671680444370955",
+      "updated_at": "2026-10-27T18:36:16.436241+00:00",
+      "work_root": "/root/.hermes/profiles/zeus/work/raquel-cache-governance-1564707848452309197",
+      "paths": [
+        {
+          "path": "/root/mgs-agent/data/atena/editorial-manager-authority.json",
+          "sha256": "8a413f17c4ffe60a14945b0faa972f15901fc2e982344243091d94d995526328",
+          "bytes": 11898
+        },
+        {
+          "path": "/root/mgs-agent/data/atena/authority-history/ATENA-RAQUEL-EDITORIAL-CACHE-AUTHORITY-1564671680444370955.json",
+          "sha256": "341f4b1788b88124b48160300e58a06cfca77c98615ee1a1df93bc825881fd4d",
+          "bytes": 8891
+        },
+        {
+          "path": "/root/mgs-agent/data/authorized-users.json",
+          "sha256": "66728ec1c3a3f1d0e506c4dae7343949c71671dc0e756e1e21b01118ab3794f9",
+          "bytes": 17029
+        },
+        {
+          "path": "/root/mgs-agent/context/permissions-matrix.md",
+          "sha256": "ae03925ea61af4978a58238f93f1ec1e8d3f8aab6ebed770ffec690c057a380d",
+          "bytes": 12566
+        },
+        {
+          "path": "/root/mgs-agent/context/routes.md",
+          "sha256": "5cf6c1e9edcf2e22d8de898b8189f87d7838ddad3d3cd95bcec15765083998c9",
+          "bytes": 19157
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/raquel-cache-governance-1564707848452309197/human-authority-readback.json",
+          "sha256": "78c7491e142cfc08968b2bf05401f946b642686a4efa203ff341d30d10b72d8d",
+          "bytes": 4325
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/raquel-cache-governance-1564707848452309197/governance-regression.json",
+          "sha256": "15bf6b646df5fde1407a6b1d5896b39f61a988c947818879c67dacece8bb07b1",
+          "bytes": 203
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/raquel-cache-governance-1564707848452309197/align_authority.py",
+          "sha256": "53f64dd2591b8760ff0f79c74b95bedad724a092844ca67e34a95693e81c3839",
+          "bytes": 8895
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/work/raquel-cache-governance-1564707848452309197/validate_governance.py",
+          "sha256": "b94e38d8b0d27859e173d9a9a3129446cf88b393110ee4dc82b63b8f4349ca4e",
+          "bytes": 4509
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md",
+          "sha256": "060513985ca9bdf472b803d817d2a77a756de4f965b09655e1e4471f4840a8b7",
+          "bytes": 7717
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/SKILL.md",
+          "sha256": "060513985ca9bdf472b803d817d2a77a756de4f965b09655e1e4471f4840a8b7",
+          "bytes": 7717
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md",
+          "sha256": "58049046639056573ad3c7f8d3858ccf2ffd8d7271698e068329c2739bbba44a",
+          "bytes": 6027
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-plugin-mass-operation/SKILL.md",
+          "sha256": "58049046639056573ad3c7f8d3858ccf2ffd8d7271698e068329c2739bbba44a",
+          "bytes": 6027
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/wordpress-plugin-integrity-audits/SKILL.md",
+          "sha256": "e2f91ae459fb9daa6a00c0be1d9912bdc5f73d4ed3fb59fa709b3b476696d57a",
+          "bytes": 40603
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/wordpress-plugin-integrity-audits/SKILL.md",
+          "sha256": "e2f91ae459fb9daa6a00c0be1d9912bdc5f73d4ed3fb59fa709b3b476696d57a",
+          "bytes": 40603
+        }
+      ],
+      "scope": {
+        "permanent_contentops_and_selective_regenerable_cache_approval": true,
+        "not_limited_to_current14": true,
+        "additional_ceo_confirmation_each_equivalent_cache_request": false,
+        "general_file_deletion_or_credential_or_critical_runtime_exemption": false,
+        "global_purge_permitted": false,
+        "Finance_Router_permitted": false,
+        "new_targets_implicitly_added_to_manifest14": false,
+        "production_executor": "atena",
+        "zeus_production_executor_started": false
+      },
+      "validation": {
+        "tests_run": 9,
+        "failures": 0,
+        "errors": 0,
+        "status": "PASS",
+        "canonical_id": "ATENA-RAQUEL-CONTENT-CACHE-DELEGATION-1564706598130032710",
+        "zeus_production_cache_executor_started": false
+      },
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1564709130692858108",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "embed_count": 1,
+        "embed_title": "REPORT-INFRA — modificada",
+        "mentions": 0,
+        "readback_ok": true
+      },
+      "origin_delivery": {
+        "message_id": "1564709234925637825",
+        "channel_id": "1564289742567112795",
+        "readback_exact": true,
+        "url": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564709234925637825"
       }
     }
   ],

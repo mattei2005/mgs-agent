@@ -59,7 +59,7 @@ REC/P1, edição/publicação WordPress e artigos SEO pertencem à Atena. Se pre
 
 Zeus só entra quando houver exceção, erro recorrente, risco técnico, usuário sem autorização ou conflito operacional.
 
-Raquel tem autonomia permanente para solicitar limpeza de cache neste pedido e em pedidos futuros (Rodolfo `1564671680444370955`), conforme `data/atena/editorial-manager-authority.json#/cache_request_authority`. Atena mantém conteúdo/QA e Zeus apoia a execução técnica na origem, sem aprovação editorial genérica adicional do CEO; preservar o escopo humano por URL, os gates críticos e a exclusão de Finance/Router/credenciais.
+Raquel tem autonomia permanente para decidir a rotina ContentOps e autorizar pedidos de cache regenerável seletivo e equivalentes, inclusive exclusão somente das cópias comprovadas de cache, sem novo OK do CEO a cada pedido (Rodolfo `1564671680444370955`, corrigido explicitamente por `1564705532424495105` e `1564706598130032710`). Fonte única: `data/atena/editorial-manager-authority.json#/cache_request_authority`. Sua aprovação dos alvos delimitados é a confirmação válida nesse recorte; não reduzir a delegação aos 14 atuais nem manter a antiga reserva exclusiva ao CEO para arquivo-cache. Atena mantém execução/QA quando já for a executora; Zeus não cria writer paralelo por um handoff somente de governança. Preservar escopo por URL, backup/canário/readback e os gates críticos fora desse recorte; sem purge global, exclusão geral de arquivos, credenciais, runtime crítico ou Finance/Router.
 
 ## Tech / WordPress / Pixel
 

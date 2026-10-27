@@ -100,7 +100,7 @@
             "origin_agent": "atena",
             "origin_channel_id": "1496267571543019653",
             "canonical_source": "data/atena/editorial-manager-authority.json",
-            "description": "Autonomia permanente para conversar, decidir, solicitar e aprovar conteúdo e correções técnicas localizadas, seguras e reversíveis necessárias à entrega editorial em portais MGS autorizados; apoio técnico Zeus na origem Atena. Sem acesso global Zeus, Critical Subset ou demais áreas. Inclui pedidos atuais e futuros de limpeza de cache conforme adendo 1564671680444370955; escopo atual por URL, preservando gates críticos."
+            "description": "Gestora de Content Operations com autonomia permanente para rotina editorial, dependências técnicas localizadas seguras/reversíveis e pedidos equivalentes, incluindo aprovação de limpeza/invalidação e exclusão seletiva de cópias comprovadas de cache regenerável; sem novo OK do CEO a cada operação equivalente. Sem acesso global Zeus, exclusão geral de arquivos, credenciais, runtime crítico ou Finance/Router; escopo e controles na autoridade canônica."
           },
           "authorized_by_discord_id": "344196393512075265",
           "authority_message_id": "1564661630766424096",
@@ -108,12 +108,20 @@
           "critical_subset_unchanged": true,
           "cache_request_authority": {
             "canonical_source": "data/atena/editorial-manager-authority.json#/cache_request_authority",
-            "authority_message_id": "1564671680444370955",
+            "authority_message_id": "1564706598130032710",
             "source_thread_id": "1564289742567112795",
             "permanent": true,
             "current_and_future_requests": true,
             "generic_editorial_approval_not_required": true,
-            "critical_subset_unchanged": true
+            "critical_subset_unchanged": true,
+            "ratification_message_ids": [
+              "1564705532424495105",
+              "1564706598130032710"
+            ],
+            "selective_regenerable_cache_file_deletion_delegated": true,
+            "additional_ceo_confirmation_required": false,
+            "exact_target_confirmation_authority_discord_id": "1496254952501280974",
+            "critical_subset_general_preserved": true
           }
         },
         {

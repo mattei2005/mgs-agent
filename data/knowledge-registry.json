@@ -5553,6 +5553,25 @@
       "canonical_source": "data/atena/editorial-manager-authority.json",
       "consumers": [
         "atena",
+        "content-site-vertical-operations",
+        "zeus"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T18:25:23.837000+00:00",
+      "id": "ATENA-RAQUEL-CONTENT-CACHE-DELEGATION-1564706598130032710",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Raquel: aprovação permanente ContentOps e cache regenerável seletivo; sem novo CEO a cada pedido equivalente",
+      "updated_at": "2026-10-27T18:32:43+00:00"
+    },
+    {
+      "canonical_key": "content.operations.raquel.editorial-batch-authority",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "consumers": [
+        "atena",
         "content-site-vertical-operations"
       ],
       "domain": "content.operations",
@@ -5580,10 +5599,10 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei / Content Operations",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-RAQUEL-CONTENT-CACHE-DELEGATION-1564706598130032710",
       "title": "Raquel: pedidos permanentes de limpeza de cache atual e futuros; escopo e Critical Subset preservados",
-      "updated_at": "2026-10-27T16:12:19+00:00"
+      "updated_at": "2026-10-27T18:32:43+00:00"
     },
     {
       "canonical_key": "content.operations.raquel.editorial-batch-authority",
@@ -14633,5 +14652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T16:54:39+00:00"
+  "updated_at": "2026-10-27T18:32:43+00:00"
 }

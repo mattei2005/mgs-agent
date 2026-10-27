@@ -36,6 +36,10 @@ O quadro de cobertura de leitura é apropriado quando ele pede auditoria ou perg
 
 Quando Rodolfo transferir a decisão a uma gestora, separe **autoridade delegada**, **aprovação do plano** e **execução validada**. Persistir a autoridade não aprova automaticamente os planos pendentes. Consulte a fonte canônica atual, não uma lista de permissões copiada para a skill. Depois, esclareça as pendências na thread operacional indicada e mencione a pessoa solicitada com allowlist explícita de usuários; não acorde outro bot apenas para anunciar a decisão. Preserve limites críticos, escopo por área e acesso privado. Fluxo de persistência, publicação e readback: `references/route-pack-03.md`, seção **Comunicar delegação e encaminhar decisões pendentes**.
 
+## Authority corrections in ContentOps handoffs
+
+For Raquel editorial/selective-cache requests, resolve the current `data/atena/editorial-manager-authority.json` before applying a historical CEO-only file-cache gate. The confirmation authority for proven regenerable selective cache is delegated there; do not narrow a permanent CEO correction to the example manifest or repeatedly request CEO approval for equivalent ContentOps work. Keep exact-target approval, backup/canary/readback, general file-deletion/credential/runtime/Finance/Router limits, and the current executor. A governance-only handoff does not transfer execution or authorize a parallel writer. Persist the supersession and correct Zeus-owned pending checkpoints so an obsolete hold cannot revive on resume.
+
 ## Operational route packs
 
 - **Referências recentes → Escopo por agente/thread antes de reportar pendências** → `references/route-pack-01.md`
