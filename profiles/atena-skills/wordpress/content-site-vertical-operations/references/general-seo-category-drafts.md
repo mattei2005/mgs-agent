@@ -266,6 +266,7 @@ Depois valide `content.rendered`:
 - detecte placeholders por marcadores delimitados, não por palavras comuns: um regex case-insensitive para `TODO` também encontra «todo» em espanhol e produz falso bloqueio;
 - remova IDs numéricos de citação dentro de links quando não existir lista correspondente; preserve a fonte contextual nomeada e seu href;
 - palavras/H2/parágrafos continuam na faixa;
+- ao excluir mídia da contagem, não descarte todo `<figure>`: o wrapper Gutenberg `figure.wp-block-table` contém texto editorial de células. Conte `td`/`th` uma única vez e exclua ALT/arquivos/imagens e widgets, sem remover as palavras da tabela;
 - exemplos financeiros mantêm quantias e percentuais em notação legível, sem escrever números por extenso para elevar a contagem alfabética; refaça a prova conservadora após essa normalização;
 - abertura curta preservada;
 - uma imagem, ID, URL e alt esperados;
