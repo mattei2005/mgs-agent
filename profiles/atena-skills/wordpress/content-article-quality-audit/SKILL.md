@@ -55,6 +55,14 @@ There are xxx published posts
 - Superseda uma pendência histórica somente com prova atual do mesmo objeto e gate. Preserve o histórico e os outros blockers; resolver a bio não aprova automaticamente sitemap, idioma ou layout.
 - Grave cada nova coleta em arquivo/label próprio. Não sobrescreva evidências referenciadas por aceites com hash, pois isso invalida sua proveniência.
 
+## Explicar pendências de um relatório existente
+
+1. Localize o checkpoint da iniciativa e siga seu índice até a projeção e o relatório atuais. Não use os contadores iniciais do manifesto nem uma mensagem antiga como estado vigente: o manifesto pode preservar o plano enquanto os recibos registram a execução posterior.
+2. Leia a aba exata da planilha pela API e selecione por nomes de cabeçalho o ID local, status e etapa/pendências. Agregue os motivos por código antes de emitir saída; não imprima todas as células nem o registro institucional inteiro para responder uma pergunta de andamento.
+3. Reconcilie os motivos com as evidências atuais por artigo. Use o relatório consolidado para os totais, mas a prova mais recente do mesmo objeto/gate para saber o que ainda falta; um diagnóstico antigo de biografia ou layout pode ter sido supersedido sem encerrar outros gates. Não apresente uma coleta histórica como nova verificação pública.
+4. Agrupe a explicação em linguagem editorial: presença em categoria/sitemap; autoria; idioma/datas/canonical; layout; fontes externas. Separe falta de comprovação de defeito confirmado e indique quais grupos dependem de execução editorial, manutenção técnica ou decisão humana. Não atribua todos os casos a cache nem trate indexação no Google como requisito automático de QA.
+5. Abra com a distinção entre publicado e validado; mantenha artigos ainda não publicados em grupo separado. Dê um exemplo específico apenas quando sustentado pela evidência atual. Se informar contagens por motivo, deduplique por ID e avise que os grupos podem se sobrepor; não some pendências sobrepostas como se fossem artigos diferentes.
+
 ## Colunas padrão da planilha
 
 Para auditoria REC/P1 completa, usar:
