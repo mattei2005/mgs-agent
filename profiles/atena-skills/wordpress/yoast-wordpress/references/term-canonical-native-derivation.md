@@ -1,0 +1,9 @@
+# Canonical de termo: entrada correta, derivação antiga
+
+1. Compare o link nativo do termo, os campos SEO de entrada, a derivação do Yoast e o HTML público normal. Um canonical errado também na REST pode ser derivação antiga; não trate automaticamente como cache nem imponha um override para esconder a causa.
+2. Inspecione a versão e o código instalados do watcher/builder de termos e a capacidade real do usuário dedicado. Não presuma o storage da taxonomia, um row-ID de indexable ou a exposição de campos SEO pela REST.
+3. Quando o link e as entradas já estiverem corretos e a implementação comprovar que o save nativo reconstrói aquela derivação, use a menor atualização nativa por termo. Um save do nome atual, inalterado, só é uma receita válida nesse contexto inspecionado; confirme previamente os demais hooks e efeitos. Não use SQL manual, hook próprio, rename artificial ou alteração de home/siteurl/locale.
+4. Preserve por snapshots nome, slug, descrição, parent, contagens, metas de entrada, termos alheios, navegação e posts associados. Grave intenção, recibo e GET independente antes de expandir para o próximo termo.
+5. Se a derivação correta ainda não aparecer na URL pública normal, diagnostique a camada de entrega e renove somente os URLs comprovadamente afetados dentro da autoridade vigente. Não repetir saves para mascarar cache nem usar purge global.
+6. Exija concordância entre a derivação nativa e o canonical do HTML normal, além dos cartões esperados e QA desktop/mobile. Uma API anônima bloqueada não prova falha da página pública: mantenha o limite explícito e use a leitura autenticada aprovada para dados nativos, sem chamar isso de REST pública 200.
+7. Encerre apenas o gate de canonical/categoria demonstrado. Presença em categoria, autoria, idioma, datas e aceite do artigo inteiro continuam critérios separados.
