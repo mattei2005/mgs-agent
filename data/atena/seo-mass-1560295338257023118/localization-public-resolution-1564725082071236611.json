@@ -1,0 +1,1486 @@
+{
+  "id": "ATENA-SEO58-LOCALE-PUBLIC-1564725082071236611",
+  "thread_id": "1560295338257023118",
+  "writer_session_id": "20261027_124909_a17ca119",
+  "updated_at_utc": "2026-10-27T19:51:22.466921+00:00",
+  "status": "public_article_criteria_resolved_author_security_pending",
+  "full_batch_unconditionally_ready": false,
+  "same_58_ids_urls": true,
+  "articles": 58,
+  "http200_canonical_self_images_og_schema_inline_verified": 58,
+  "topfeed_localized_documents_verified": 11,
+  "desktop_mobile_checks_localization": 22,
+  "native_protected_topfeed_posts_meta_terms_indexables_options_verified": 11,
+  "other_47_native_protected_preservation": 47,
+  "real_publication_modification_dates_preserved": true,
+  "native_renderer": {
+    "site_key": "topfeed_loans_us_es",
+    "snippet_id": 54178,
+    "code_sha256": "5611c8463ac202f697a91ac1e250c154b3362221465ec4f58cea514bc2567ad9",
+    "status": "publish",
+    "localized_html": "es",
+    "localized_og_locale": "es_US",
+    "global_locale_preserved": "pt_BR",
+    "institutional_schema_language_preserved": "pt-BR",
+    "extra_cache_operations_for_locale": 0
+  },
+  "historical_cache23_not_repeated": true,
+  "remaining": [
+    {
+      "url": "https://gamehubad.com/author/atena/",
+      "author_id": 6,
+      "http": 403,
+      "cause": "CSEG_Hardening::block_author_scan security runtime, not cache",
+      "decision_owner": "Rodolfo Mattei",
+      "status": "awaiting_specific_security_exception_decision",
+      "operation_proposed": {
+        "active_target": "/home/runcloud2/webapps/gamehubad/wp-content/mu-plugins/mgs-gamehubad-author-atena-exception.php",
+        "staging_target": "/home/runcloud2/webapps/gamehubad/wp-content/mu-plugins/.mgs-gamehubad-author-atena-exception.stage",
+        "active_sha256": "0ce4dfe3bfc60dffa22252e5bef3229920ece25aba7f6e7d6b30d6485f055cd0",
+        "rollback_inert_sha256": "84f0fe189fe97194de3cdc1cff50fac1ea7911c13374dc30f60c3b3c5f30e772",
+        "request_scope": "Only anonymous HTTPS GET/HEAD, literal /author/atena/ and ID6, no query; others excluded",
+        "effect": "Request-local removal of only block_author_scan priority1 after exact guards; hardening option stays1",
+        "rollback": "Same target replaced by inert PHP bytes, using the same non-PHP staging target and atomic rename; retain file, do not globally disable protections",
+        "pre_deploy_remaining_gates": [
+          "Explicit security decision including both literal paths and rollback",
+          "Re-preflight source/root/owner/no-symlink/absence of targets",
+          "Validate application PHP-FPM OPcache propagation and safe staging/atomic replacement",
+          "Native/public/desktop/mobile positive and negative controls"
+        ]
+      },
+      "candidate_and_tests": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/author-implementation/DECISAO-QA.md",
+      "fresh_native_preflight": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/author-preflight/native.json",
+      "public_negative_baseline": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/author-preflight/public-controls-current.json",
+      "local_php_cases_passed": 158,
+      "application_cli_lint_passed": true,
+      "deployed": false,
+      "hardening_modified": false
+    }
+  ],
+  "google_indexing": "not verified; no Search Console; not silently promoted",
+  "previous_canonical_source": "/root/mgs-agent/data/atena/seo-mass-1560295338257023118/public-cache-resolution-1564709534868705494.json",
+  "previous_source_sha256": "5df199a58926645a698a59932e33404bddcd275095092c970530f88b0c7bc816",
+  "evidence": {
+    "final_normal58": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58-verification.json",
+    "locale11_acceptance": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/acceptance11.json",
+    "native_final11": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/readback-final-native.json",
+    "public11": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/public11-verification.json",
+    "receipts": [
+      {
+        "path": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/receipts/activate.json",
+        "sha256": "7f4b4362aedd2b64516dedbd59f5216cee19057a81fa809dbfbc4d97e1027971"
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/receipts/activate11.json",
+        "sha256": "53bc837ccf343af6cce3c294a8099617d08ae4b9284f0a5aced60e71ccda5cd4"
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/receipts/create.json",
+        "sha256": "3341c3b85be06814dbc9dcf6aeeda72f91514411546dd896c0dbb6683dd7e1f2"
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/receipts/deactivate.json",
+        "sha256": "4f8212431bb6ba8892dce45a9be022e662944cc7d289e1e0ae21051aa4ea67cb"
+      },
+      {
+        "path": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/receipts/expand.json",
+        "sha256": "e499e0bb4ad152f62e43306b243201dd4cda633fe1c7b16e774cee1321e706f4"
+      }
+    ],
+    "security_decision": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/author-preflight/decision-needed.json"
+  },
+  "results": [
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90134,
+      "url": "https://autocreditadx.com/consorcio-ou-financiamento-de-carro-como-decidir/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 11, 2026",
+      "dates_native": {
+        "date": "2026-10-11T08:11:00",
+        "date_gmt": "2026-10-11T12:11:00",
+        "modified": "2026-10-22T10:47:19",
+        "modified_gmt": "2026-10-22T14:47:19"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90134/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90136,
+      "url": "https://autocreditadx.com/lance-no-consorcio-de-carro-livre-fixo-e-embutido/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 6, 2026",
+      "dates_native": {
+        "date": "2026-10-06T11:28:07",
+        "date_gmt": "2026-10-06T15:28:07",
+        "modified": "2026-10-26T09:41:05",
+        "modified_gmt": "2026-10-26T13:41:05"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90136/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90138,
+      "url": "https://autocreditadx.com/carro-usado-no-consorcio-da-escolha-ao-pagamento/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 1, 2026",
+      "dates_native": {
+        "date": "2026-10-01T14:45:14",
+        "date_gmt": "2026-10-01T18:45:14",
+        "modified": "2026-10-22T10:47:21",
+        "modified_gmt": "2026-10-22T14:47:21"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90138/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90140,
+      "url": "https://autocreditadx.com/quanto-custa-um-consorcio-de-carro-alem-da-parcela/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 26, 2026",
+      "dates_native": {
+        "date": "2026-09-26T17:02:21",
+        "date_gmt": "2026-09-26T21:02:21",
+        "modified": "2026-10-22T10:47:27",
+        "modified_gmt": "2026-10-22T14:47:27"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90140/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90142,
+      "url": "https://autocreditadx.com/reajuste-no-consorcio-de-carro-por-que-a-parcela-muda/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 21, 2026",
+      "dates_native": {
+        "date": "2026-09-21T09:19:28",
+        "date_gmt": "2026-09-21T13:19:28",
+        "modified": "2026-10-26T09:41:12",
+        "modified_gmt": "2026-10-26T13:41:12"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90142/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90144,
+      "url": "https://autocreditadx.com/como-verificar-uma-administradora-de-consorcio-de-veiculos/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 13, 2026",
+      "dates_native": {
+        "date": "2026-10-13T12:36:35",
+        "date_gmt": "2026-10-13T16:36:35",
+        "modified": "2026-10-26T09:48:41",
+        "modified_gmt": "2026-10-26T13:48:41"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90144/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90146,
+      "url": "https://autocreditadx.com/cota-contemplada-de-carro-o-que-conferir-antes-de-comprar/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 8, 2026",
+      "dates_native": {
+        "date": "2026-10-08T15:53:42",
+        "date_gmt": "2026-10-08T19:53:42",
+        "modified": "2026-10-22T10:47:29",
+        "modified_gmt": "2026-10-22T14:47:29"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90146/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90148,
+      "url": "https://autocreditadx.com/cancelar-consorcio-de-carro-quando-o-dinheiro-volta/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 3, 2026",
+      "dates_native": {
+        "date": "2026-10-03T18:10:49",
+        "date_gmt": "2026-10-03T22:10:49",
+        "modified": "2026-10-22T10:47:32",
+        "modified_gmt": "2026-10-22T14:47:32"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90148/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90150,
+      "url": "https://autocreditadx.com/parcela-do-consorcio-atrasada-o-que-muda-para-o-carro/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 28, 2026",
+      "dates_native": {
+        "date": "2026-09-28T10:27:56",
+        "date_gmt": "2026-09-28T14:27:56",
+        "modified": "2026-10-22T10:47:39",
+        "modified_gmt": "2026-10-22T14:47:39"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90150/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90152,
+      "url": "https://autocreditadx.com/consorcio-de-moto-vale-a-pena-para-quem-vai-trabalhar/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 23, 2026",
+      "dates_native": {
+        "date": "2026-09-23T13:44:03",
+        "date_gmt": "2026-09-23T17:44:03",
+        "modified": "2026-10-22T10:47:41",
+        "modified_gmt": "2026-10-22T14:47:41"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90152/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90154,
+      "url": "https://autocreditadx.com/fui-contemplado-no-consorcio-como-liberar-o-credito-do-carro/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 18, 2026",
+      "dates_native": {
+        "date": "2026-09-18T16:01:10",
+        "date_gmt": "2026-09-18T20:01:10",
+        "modified": "2026-10-26T09:41:19",
+        "modified_gmt": "2026-10-26T13:41:19"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90154/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90156,
+      "url": "https://autocreditadx.com/usar-consorcio-para-quitar-financiamento-de-carro-cuidados/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 10, 2026",
+      "dates_native": {
+        "date": "2026-10-10T08:18:17",
+        "date_gmt": "2026-10-10T12:18:17",
+        "modified": "2026-10-26T09:41:27",
+        "modified_gmt": "2026-10-26T13:41:27"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90156/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90158,
+      "url": "https://autocreditadx.com/como-escolher-o-valor-da-carta-de-credito-para-carro/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 5, 2026",
+      "dates_native": {
+        "date": "2026-10-05T11:35:24",
+        "date_gmt": "2026-10-05T15:35:24",
+        "modified": "2026-10-22T10:47:49",
+        "modified_gmt": "2026-10-22T14:47:49"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90158/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90160,
+      "url": "https://autocreditadx.com/assembleia-de-consorcio-de-carro-como-ler-o-resultado/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 30, 2026",
+      "dates_native": {
+        "date": "2026-09-30T14:52:31",
+        "date_gmt": "2026-09-30T18:52:31",
+        "modified": "2026-10-26T09:41:34",
+        "modified_gmt": "2026-10-26T13:41:34"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90160/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "autocreditadx.com",
+      "post_id": 90162,
+      "url": "https://autocreditadx.com/antecipar-parcelas-do-consorcio-de-carro-vale-a-pena/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 25, 2026",
+      "dates_native": {
+        "date": "2026-09-25T17:09:38",
+        "date_gmt": "2026-09-25T21:09:38",
+        "modified": "2026-10-26T09:41:41",
+        "modified_gmt": "2026-10-26T13:41:41"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/autocreditadx.com/90162/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90166,
+      "url": "https://carcreditad.com/quanto-custa-manter-carro-orcamento-mensal/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 11, 2026",
+      "dates_native": {
+        "date": "2026-10-11T08:11:00",
+        "date_gmt": "2026-10-11T12:11:00",
+        "modified": "2026-10-26T09:41:59",
+        "modified_gmt": "2026-10-26T13:41:59"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90166/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90168,
+      "url": "https://carcreditad.com/etanol-ou-gasolina-custo-quilometro/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 6, 2026",
+      "dates_native": {
+        "date": "2026-10-06T11:28:07",
+        "date_gmt": "2026-10-06T15:28:07",
+        "modified": "2026-10-22T10:47:55",
+        "modified_gmt": "2026-10-22T14:47:55"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90168/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90170,
+      "url": "https://carcreditad.com/posto-barato-desvio-abastecer/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 1, 2026",
+      "dates_native": {
+        "date": "2026-10-01T14:45:14",
+        "date_gmt": "2026-10-01T18:45:14",
+        "modified": "2026-10-22T10:48:27",
+        "modified_gmt": "2026-10-22T14:48:27"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90170/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90172,
+      "url": "https://carcreditad.com/consumo-inmetro-escolher-carro/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 26, 2026",
+      "dates_native": {
+        "date": "2026-09-26T17:02:21",
+        "date_gmt": "2026-09-26T21:02:21",
+        "modified": "2026-10-22T10:48:47",
+        "modified_gmt": "2026-10-22T14:48:47"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90172/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90174,
+      "url": "https://carcreditad.com/manutencao-carro-roda-pouco/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 21, 2026",
+      "dates_native": {
+        "date": "2026-09-21T09:19:28",
+        "date_gmt": "2026-09-21T13:19:28",
+        "modified": "2026-10-22T10:49:18",
+        "modified_gmt": "2026-10-22T14:49:18"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90174/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90176,
+      "url": "https://carcreditad.com/orcamento-oficina-comparar-servicos/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 13, 2026",
+      "dates_native": {
+        "date": "2026-10-13T12:36:35",
+        "date_gmt": "2026-10-13T16:36:35",
+        "modified": "2026-10-22T10:49:39",
+        "modified_gmt": "2026-10-22T14:49:39"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90176/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90178,
+      "url": "https://carcreditad.com/pneu-barato-economico-comparar-compra/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 8, 2026",
+      "dates_native": {
+        "date": "2026-10-08T15:53:42",
+        "date_gmt": "2026-10-08T19:53:42",
+        "modified": "2026-10-20T21:57:59",
+        "modified_gmt": "2026-10-21T01:57:59"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90178/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90180,
+      "url": "https://carcreditad.com/seguro-carro-comparar-propostas-coberturas/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 3, 2026",
+      "dates_native": {
+        "date": "2026-10-03T18:10:49",
+        "date_gmt": "2026-10-03T22:10:49",
+        "modified": "2026-10-22T10:50:11",
+        "modified_gmt": "2026-10-22T14:50:11"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90180/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90182,
+      "url": "https://carcreditad.com/franquia-seguro-carro-reserva/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 28, 2026",
+      "dates_native": {
+        "date": "2026-09-28T10:27:56",
+        "date_gmt": "2026-09-28T14:27:56",
+        "modified": "2026-10-22T10:50:41",
+        "modified_gmt": "2026-10-22T14:50:41"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90182/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90184,
+      "url": "https://carcreditad.com/carro-usado-custo-primeiro-ano/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 23, 2026",
+      "dates_native": {
+        "date": "2026-09-23T13:44:03",
+        "date_gmt": "2026-09-23T17:44:03",
+        "modified": "2026-10-22T10:51:01",
+        "modified_gmt": "2026-10-22T14:51:01"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90184/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90186,
+      "url": "https://carcreditad.com/trocar-carro-manter-atual-depreciacao/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 18, 2026",
+      "dates_native": {
+        "date": "2026-09-18T16:01:10",
+        "date_gmt": "2026-09-18T20:01:10",
+        "modified": "2026-10-22T10:51:25",
+        "modified_gmt": "2026-10-22T14:51:25"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90186/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90188,
+      "url": "https://carcreditad.com/quitar-financiamento-carro-reserva/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 10, 2026",
+      "dates_native": {
+        "date": "2026-10-10T08:18:17",
+        "date_gmt": "2026-10-10T12:18:17",
+        "modified": "2026-10-26T09:42:36",
+        "modified_gmt": "2026-10-26T13:42:36"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90188/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90190,
+      "url": "https://carcreditad.com/viagem-carro-orcamento-combustivel-pedagio/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 5, 2026",
+      "dates_native": {
+        "date": "2026-10-05T11:35:24",
+        "date_gmt": "2026-10-05T15:35:24",
+        "modified": "2026-10-22T10:51:46",
+        "modified_gmt": "2026-10-22T14:51:46"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90190/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90192,
+      "url": "https://carcreditad.com/carro-pouco-uso-vale-pena-garagem/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 30, 2026",
+      "dates_native": {
+        "date": "2026-09-30T14:52:31",
+        "date_gmt": "2026-09-30T18:52:31",
+        "modified": "2026-10-22T10:52:07",
+        "modified_gmt": "2026-10-22T14:52:07"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90192/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "carcreditad.com",
+      "post_id": 90194,
+      "url": "https://carcreditad.com/segundo-carro-familia-custo-decisao/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 25, 2026",
+      "dates_native": {
+        "date": "2026-09-25T17:09:38",
+        "date_gmt": "2026-09-25T21:09:38",
+        "modified": "2026-10-22T10:52:28",
+        "modified_gmt": "2026-10-22T14:52:28"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/carcreditad.com/90194/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54104,
+      "url": "https://finanzas.topfeed.fun/apr-prestamo-personal-costo-real-eeuu/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "octubre 11, 2026",
+      "dates_native": {
+        "date": "2026-10-11T08:11:00",
+        "date_gmt": "2026-10-11T08:11:00",
+        "modified": "2026-10-26T13:40:21",
+        "modified_gmt": "2026-10-26T13:40:21"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54104/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54106,
+      "url": "https://finanzas.topfeed.fun/plazo-prestamo-cuota-costo-total/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "octubre 6, 2026",
+      "dates_native": {
+        "date": "2026-10-06T11:28:07",
+        "date_gmt": "2026-10-06T11:28:07",
+        "modified": "2026-10-26T13:40:29",
+        "modified_gmt": "2026-10-26T13:40:29"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54106/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54108,
+      "url": "https://finanzas.topfeed.fun/relacion-deuda-ingreso-cuota-prestamo/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "octubre 1, 2026",
+      "dates_native": {
+        "date": "2026-10-01T14:45:14",
+        "date_gmt": "2026-10-01T14:45:14",
+        "modified": "2026-10-22T15:22:31",
+        "modified_gmt": "2026-10-22T15:22:31"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54108/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54110,
+      "url": "https://finanzas.topfeed.fun/prestamo-personal-rechazado-aviso-respuesta/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "septiembre 26, 2026",
+      "dates_native": {
+        "date": "2026-09-26T17:02:21",
+        "date_gmt": "2026-09-26T17:02:21",
+        "modified": "2026-10-26T13:40:35",
+        "modified_gmt": "2026-10-26T13:40:35"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54110/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54112,
+      "url": "https://finanzas.topfeed.fun/cofirmar-prestamo-personal-riesgos-preguntas/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "septiembre 21, 2026",
+      "dates_native": {
+        "date": "2026-09-21T09:19:28",
+        "date_gmt": "2026-09-21T09:19:28",
+        "modified": "2026-10-22T15:22:34",
+        "modified_gmt": "2026-10-22T15:22:34"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54112/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54114,
+      "url": "https://finanzas.topfeed.fun/pagos-automaticos-prestamo-autorizar-detener/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "octubre 13, 2026",
+      "dates_native": {
+        "date": "2026-10-13T12:36:35",
+        "date_gmt": "2026-10-13T12:36:35",
+        "modified": "2026-10-26T13:40:42",
+        "modified_gmt": "2026-10-26T13:40:42"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54114/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54116,
+      "url": "https://finanzas.topfeed.fun/estafas-prestamos-cargo-adelantado-senales/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "octubre 8, 2026",
+      "dates_native": {
+        "date": "2026-10-08T15:53:42",
+        "date_gmt": "2026-10-08T15:53:42",
+        "modified": "2026-10-22T15:22:38",
+        "modified_gmt": "2026-10-22T15:22:38"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54116/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54118,
+      "url": "https://finanzas.topfeed.fun/prestamos-pal-cooperativas-federales-diferencias/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "octubre 3, 2026",
+      "dates_native": {
+        "date": "2026-10-03T18:10:49",
+        "date_gmt": "2026-10-03T18:10:49",
+        "modified": "2026-10-26T13:40:48",
+        "modified_gmt": "2026-10-26T13:40:48"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54118/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54120,
+      "url": "https://finanzas.topfeed.fun/aviso-cobro-prestamo-validacion-deuda/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "septiembre 28, 2026",
+      "dates_native": {
+        "date": "2026-09-28T10:27:56",
+        "date_gmt": "2026-09-28T10:27:56",
+        "modified": "2026-10-22T15:22:42",
+        "modified_gmt": "2026-10-22T15:22:42"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54120/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54122,
+      "url": "https://finanzas.topfeed.fun/prestamo-personal-garantia-sin-garantia-riesgo/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "septiembre 23, 2026",
+      "dates_native": {
+        "date": "2026-09-23T13:44:03",
+        "date_gmt": "2026-09-23T13:44:03",
+        "modified": "2026-10-22T15:22:44",
+        "modified_gmt": "2026-10-22T15:22:44"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54122/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "finanzas.topfeed.fun",
+      "post_id": 54124,
+      "url": "https://finanzas.topfeed.fun/refinanciar-prestamo-personal-costo-futuro/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "es",
+      "og_locale": [
+        "es_US"
+      ],
+      "date": "septiembre 18, 2026",
+      "dates_native": {
+        "date": "2026-09-18T16:01:10",
+        "date_gmt": "2026-09-18T16:01:10",
+        "modified": "2026-10-26T13:40:54",
+        "modified_gmt": "2026-10-26T13:40:54"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/finanzas.topfeed.fun/54124/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62716,
+      "url": "https://gamehubad.com/proteger-conta-roblox-verificacao-recuperacao/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 11, 2026",
+      "dates_native": {
+        "date": "2026-10-11T08:11:00",
+        "date_gmt": "2026-10-11T12:11:00",
+        "modified": "2026-10-22T10:55:10",
+        "modified_gmt": "2026-10-22T14:55:10"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62716/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62718,
+      "url": "https://gamehubad.com/controles-parentais-roblox-roteiro-familia/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 6, 2026",
+      "dates_native": {
+        "date": "2026-10-06T11:28:07",
+        "date_gmt": "2026-10-06T15:28:07",
+        "modified": "2026-10-22T10:55:33",
+        "modified_gmt": "2026-10-22T14:55:33"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62718/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62720,
+      "url": "https://gamehubad.com/roblox-travando-celular-ajustar-graficos/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 1, 2026",
+      "dates_native": {
+        "date": "2026-10-01T14:45:14",
+        "date_gmt": "2026-10-01T18:45:14",
+        "modified": "2026-10-22T10:56:10",
+        "modified_gmt": "2026-10-22T14:56:10"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62720/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62722,
+      "url": "https://gamehubad.com/primeiro-obby-roblox-studio-construcao-teste/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 26, 2026",
+      "dates_native": {
+        "date": "2026-09-26T17:02:21",
+        "date_gmt": "2026-09-26T21:02:21",
+        "modified": "2026-10-22T10:56:47",
+        "modified_gmt": "2026-10-22T14:56:47"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62722/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62724,
+      "url": "https://gamehubad.com/denunciar-roblox-bloquear-abordagem-suspeita/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 21, 2026",
+      "dates_native": {
+        "date": "2026-09-21T09:19:28",
+        "date_gmt": "2026-09-21T13:19:28",
+        "modified": "2026-10-22T10:57:11",
+        "modified_gmt": "2026-10-22T14:57:11"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62724/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62726,
+      "url": "https://gamehubad.com/erro-conexao-roblox-diagnostico-rede/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 13, 2026",
+      "dates_native": {
+        "date": "2026-10-13T12:36:35",
+        "date_gmt": "2026-10-13T16:36:35",
+        "modified": "2026-10-22T10:57:37",
+        "modified_gmt": "2026-10-22T14:57:37"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62726/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62728,
+      "url": "https://gamehubad.com/hud-sensibilidade-free-fire-ajuste-pessoal/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 8, 2026",
+      "dates_native": {
+        "date": "2026-10-08T15:53:42",
+        "date_gmt": "2026-10-08T19:53:42",
+        "modified": "2026-10-22T10:58:01",
+        "modified_gmt": "2026-10-22T14:58:01"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62728/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62730,
+      "url": "https://gamehubad.com/free-fire-travando-graficos-gravacao-testes/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 3, 2026",
+      "dates_native": {
+        "date": "2026-10-03T18:10:49",
+        "date_gmt": "2026-10-03T22:10:49",
+        "modified": "2026-10-22T10:58:25",
+        "modified_gmt": "2026-10-22T14:58:25"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62730/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62732,
+      "url": "https://gamehubad.com/trocar-celular-conta-free-fire-vinculo-recuperacao/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 28, 2026",
+      "dates_native": {
+        "date": "2026-09-28T10:27:56",
+        "date_gmt": "2026-09-28T14:27:56",
+        "modified": "2026-10-22T10:58:50",
+        "modified_gmt": "2026-10-22T14:58:50"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62732/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62734,
+      "url": "https://gamehubad.com/escolher-brawler-mapa-modo-perguntas/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 23, 2026",
+      "dates_native": {
+        "date": "2026-09-23T13:44:03",
+        "date_gmt": "2026-09-23T17:44:03",
+        "modified": "2026-10-22T10:59:26",
+        "modified_gmt": "2026-10-22T14:59:26"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62734/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62736,
+      "url": "https://gamehubad.com/brawl-stars-municao-posicionamento-mira/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 18, 2026",
+      "dates_native": {
+        "date": "2026-09-18T16:01:10",
+        "date_gmt": "2026-09-18T20:01:10",
+        "modified": "2026-10-22T10:59:59",
+        "modified_gmt": "2026-10-22T14:59:59"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62736/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62738,
+      "url": "https://gamehubad.com/supercell-id-brawl-stars-proteger-progresso/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 10, 2026",
+      "dates_native": {
+        "date": "2026-10-10T08:18:17",
+        "date_gmt": "2026-10-10T12:18:17",
+        "modified": "2026-10-26T09:43:16",
+        "modified_gmt": "2026-10-26T13:43:16"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62738/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62740,
+      "url": "https://gamehubad.com/compras-jogos-android-orcamento-verificacao/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 5, 2026",
+      "dates_native": {
+        "date": "2026-10-05T11:35:24",
+        "date_gmt": "2026-10-05T15:35:24",
+        "modified": "2026-10-20T22:15:59",
+        "modified_gmt": "2026-10-21T02:15:59"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62740/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62742,
+      "url": "https://gamehubad.com/apk-jogo-download-seguro-android/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 30, 2026",
+      "dates_native": {
+        "date": "2026-09-30T14:52:31",
+        "date_gmt": "2026-09-30T18:52:31",
+        "modified": "2026-10-26T09:43:54",
+        "modified_gmt": "2026-10-26T13:43:54"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62742/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62744,
+      "url": "https://gamehubad.com/celular-esquentando-jogar-cuidados-temperatura/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 25, 2026",
+      "dates_native": {
+        "date": "2026-09-25T17:09:38",
+        "date_gmt": "2026-09-25T21:09:38",
+        "modified": "2026-10-22T11:00:25",
+        "modified_gmt": "2026-10-22T15:00:25"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62744/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62746,
+      "url": "https://gamehubad.com/minecraft-sobrevivencia-primeira-noite/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "setembro 20, 2026",
+      "dates_native": {
+        "date": "2026-09-20T09:26:45",
+        "date_gmt": "2026-09-20T13:26:45",
+        "modified": "2026-10-22T11:01:02",
+        "modified_gmt": "2026-10-22T15:01:02"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62746/canonical.body",
+      "passed": true
+    },
+    {
+      "domain": "gamehubad.com",
+      "post_id": 62748,
+      "url": "https://gamehubad.com/stardew-valley-primavera-rotina-iniciantes/",
+      "http200": true,
+      "canonical_self": true,
+      "og_correct": true,
+      "schema_image_correct": true,
+      "inline_correct": true,
+      "noindex": false,
+      "html_lang": "pt-BR",
+      "og_locale": [
+        "pt_BR"
+      ],
+      "date": "outubro 12, 2026",
+      "dates_native": {
+        "date": "2026-10-12T12:43:52",
+        "date_gmt": "2026-10-12T16:43:52",
+        "modified": "2026-10-22T11:01:40",
+        "modified_gmt": "2026-10-22T15:01:40"
+      },
+      "http_evidence": "/root/.hermes/profiles/atena/work/seo58-resolution-1564684051011600467/locale-execution/final58/articles/gamehubad.com/62748/canonical.body",
+      "passed": true
+    }
+  ]
+}

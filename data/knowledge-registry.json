@@ -5512,6 +5512,24 @@
       "updated_at": "2026-10-27T16:54:39+00:00"
     },
     {
+      "canonical_key": "content.wordpress.localized-document-language-existing-renderer",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/localized-document-language-existing-renderer.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T19:51:46+00:00",
+      "id": "ATENA-DOCUMENT-LANGUAGE-EXISTING-RENDERER-1564725082071236611",
+      "kind": "procedure",
+      "owner": "Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Localização por documento em renderer instalado:WPCode/canário/slashing/QAsemalterarlocaleglobal",
+      "updated_at": "2026-10-27T19:51:46+00:00"
+    },
+    {
       "canonical_key": "content.editorial.taxonomy.language-country-and-topics",
       "canonical_source": "data/atena/editorial-taxonomy-policy.json",
       "consumers": [
@@ -5867,10 +5885,10 @@
       "kind": "source",
       "owner": "Raquel Oliveira / Atena",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO58-LOCALE-PUBLIC-1564725082071236611",
       "title": "Lote58:21OG/5schemae2XMLcorrigidos;58imagenssociaisnormaiscorretas;idioma11eautorpendentes",
-      "updated_at": "2026-10-27T18:46:30+00:00"
+      "updated_at": "2026-10-27T19:51:22+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -5889,6 +5907,24 @@
       "superseded_by": "ATENA-SEO58-REVISION-1562273124030873610",
       "title": "58 artigos publicados e58 URLs nos sitemaps canônicos;cache13 autorizado concluído",
       "updated_at": "2026-10-21T01:29:21+00:00"
+    },
+    {
+      "canonical_key": "content.seo-batch.1560295338257023118.delivery",
+      "canonical_source": "data/atena/seo-mass-1560295338257023118/localization-public-resolution-1564725082071236611.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-27T19:51:22+00:00",
+      "id": "ATENA-SEO58-LOCALE-PUBLIC-1564725082071236611",
+      "kind": "source",
+      "owner": "Raquel Oliveira / Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Lote58:idioma11Topfeed e22DOMsconcluídos;58HTTP/OG/schema/inlinecorretos;sóautorGame403segurançapendente",
+      "updated_at": "2026-10-27T19:51:22+00:00"
     },
     {
       "canonical_key": "content.seo-batch.1560295338257023118.delivery",
@@ -14687,5 +14723,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T19:21:13+00:00"
+  "updated_at": "2026-10-27T19:51:46+00:00"
 }

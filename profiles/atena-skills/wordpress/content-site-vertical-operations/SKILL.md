@@ -326,6 +326,7 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 ## Arquivos de referência
 
 - `references/local-batch-source-evidence-qa.md` — evidências por artigo, recuperação de shell/PDF escaneado e validação final de lotes locais.
+- `references/localized-document-language-existing-renderer.md` — localização por documento usando renderer instalado, efeitos do save WPCode, slashing/ativação em processos separados, canário e QA público preservando locale global.
 - `references/public-readonly-technical-audit.md` — auditoria pública sem credenciais/escritas: HTML/head, robots, imagens sociais/schema, datas principais, sitemaps e reconciliação determinística.
 
 - `references/targeted-cache-readonly-diagnostics.md` — prova de camada WPFC por corpo/hash, Reflection de efeitos CDN/Yoast/nginx e distinção entre API URL e primitiva de arquivo; diagnóstico sem purge.
