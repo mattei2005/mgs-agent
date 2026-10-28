@@ -245,6 +245,40 @@ class GoogleClient:
         )
 
 
+async def capture_report_route(route, future, request_payload: dict) -> None:
+    """Fetch the native report once without Chromium's evictable body cache.
+
+    Keep the dashboard's exact request/auth/scope and fulfill the same request
+    from the retained API response. Never replay a request after a body error.
+    """
+    if route.request.method != "POST" or future.done():
+        await route.continue_()
+        return
+    response = None
+    try:
+        body = route.request.post_data_json
+        if not isinstance(body, dict):
+            raise RuntimeError("Smart Bidding report request is not an object")
+        request_payload.update(body)
+        response = await route.fetch(max_redirects=0, max_retries=0, timeout=120000)
+        if response.status not in (200, 201):
+            retry_after = response.headers.get("retry-after", "")
+            raise RuntimeError(
+                f"Smart Bidding report HTTP {response.status}; Retry-After={retry_after}"
+            )
+        data = await response.json()
+        await route.fulfill(response=response)
+        if not future.done():
+            future.set_result(data)
+    except Exception as exc:
+        if not future.done():
+            future.set_exception(exc)
+        await route.abort()
+    finally:
+        if response is not None:
+            await response.dispose()
+
+
 async def fetch_live_report() -> tuple[list[dict], dict]:
     if not SB_STATE.exists() or SB_STATE.stat().st_size < 1000:
         raise RuntimeError("Smart Bidding authenticated state is unavailable")
@@ -266,27 +300,10 @@ async def fetch_live_report() -> tuple[list[dict], dict]:
             future = asyncio.get_running_loop().create_future()
             request_payload: dict = {}
 
-            async def on_response(response) -> None:
-                if response.url.split("?")[0] == REPORT_API and not future.done():
-                    if response.status not in (200, 201):
-                        future.set_exception(RuntimeError(f"Smart Bidding report HTTP {response.status}"))
-                        return
-                    try:
-                        future.set_result(await response.json())
-                    except Exception as exc:
-                        future.set_exception(exc)
+            async def on_report(route) -> None:
+                await capture_report_route(route, future, request_payload)
 
-            async def on_request(request) -> None:
-                if request.url.split("?")[0] == REPORT_API:
-                    try:
-                        body = request.post_data_json
-                        if isinstance(body, dict):
-                            request_payload.update(body)
-                    except Exception:
-                        pass
-
-            page.on("response", on_response)
-            page.on("request", on_request)
+            await page.route(lambda url: url.split("?")[0] == REPORT_API, on_report)
             await page.goto(DASHBOARD_URL, wait_until="domcontentloaded", timeout=120000)
             data = await asyncio.wait_for(future, timeout=120)
             rows = data if isinstance(data, list) else next(

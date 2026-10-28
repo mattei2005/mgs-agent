@@ -15280,7 +15280,7 @@
         "exact-cent readback with automatic value rollback"
       ],
       "id": "zeus-sb-messenger-revenue-sheet-daily-sync-20260808",
-      "last_change": "2026-09-16: replaced the stale append-only-Sheet denominator gate with a live-source coverage gate (minimum 100 matched rows and 95% source profiles mapped); reran and independently verified the failed daily sync.",
+      "last_change": "2026-10-28: replaced Chromium response-body cache reads with a single intercepted native request via route.fetch/fulfill; no request replay, redirects or scope changes. Recovered alert 1564976324366311435 under the existing cron lock.",
       "log": "/root/mgs-agent/logs/sync-sb-messenger-revenue-sheet.log",
       "owner": "Zeus/Revenue Tech",
       "previous_report": "discord:#alerts-infra/1546134307003957300",
@@ -15288,14 +15288,33 @@
       "risk": "medium",
       "schedule": "17 8 * * * America/New_York",
       "script": "/root/mgs-agent/scripts/sync-sb-messenger-revenue-sheet.py",
-      "script_sha256": "5d0fa133474fc2ba7af59c330dbb0a6aaa9bef012164776bd04f9242d60d1db4",
+      "script_sha256": "aa0da00452021d918b71704c1683625bd58ceabdb4e5ed97f4dd8d43318b73f6",
       "source": "Smart Bidding Messenger Daily / report/messenger; daily revenue sync keeps its seven-day window while --invest-3d-json returns finalDate separately as partial today plus exactly the three preceding complete dates",
       "source_report": "discord:#alerts-infra/1549758862117179397",
       "state": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
       "target": "Google Sheet 1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY / gid 542936436 / Migracao 22/06 / column C",
       "type": "scheduled_revenue_sheet_sync",
-      "updated_at": "2026-09-16T08:27:05-04:00",
-      "validation": "12/12 targeted tests PASS; canonical Drive auth PASS; live dry-run DRY_RUN_OK; recovery apply and independent readback SYNC_OK for 2026-09-10..2026-09-16 with 45 publishers, 7,262 API rows, 121/121 source profiles mapped, 121 rows written, exact-cent readback, reversible canary and pre-write backup."
+      "updated_at": "2026-10-28T08:27:21-04:00",
+      "recovery_1564976324366311435": {
+        "status": "recovered_validated",
+        "source_alert": "https://discord.com/channels/1185714635991679006/1498132022634483894/1564976324366311435",
+        "root_cause": "Chromium inspector cache evicted the Messenger response body; reproduced with original collector, before any Sheet write.",
+        "rollback_backup": "/root/mgs-agent/backups/sb-messenger-cache-recovery-1564976324366311435",
+        "independent_receipt": "/root/mgs-agent/backups/sb-messenger-cache-recovery-1564976324366311435/independent-readback.json",
+        "regression_test": "/root/mgs-agent/tests/test_sb_messenger_report_capture.py",
+        "report_infra": {
+          "message_id": "1564979150610108488",
+          "channel_id": "1498132022634483894",
+          "http": 200,
+          "readback_ok": true,
+          "content_empty": true,
+          "embed_count": 1,
+          "mentions": 0,
+          "thread_created": false
+        },
+        "next_step": "Continue unchanged daily schedule at 08:17 America/New_York; no operator action."
+      },
+      "validation": "39 tests and 6 subtests PASS; live dry-run and apply collected 11,104 rows across 51 publishers for 2026-10-22..2026-10-28 without inspector-cache access. SYNC_OK: 188 Sheet rows, BRL 180666.75, exact-cent full-column readback, reversible canary, pre-write backup. Independent Sheets HTTP 200 readback confirmed rows/total and unchanged non-C values."
     },
     {
       "adops_pending": false,

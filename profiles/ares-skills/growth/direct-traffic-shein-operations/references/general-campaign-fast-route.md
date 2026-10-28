@@ -37,7 +37,7 @@ Pedidos equivalentes de Rodolfo e dos gestores autorizados seguem o mesmo intake
 ## Fontes e resolução rápida
 
 - Nome exato/ID → gestor/canal: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json`.
-- Parâmetros e prontidão de cada conta: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json`.
+- Parâmetros e prontidão de cada conta: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-profiles.json`. O campo `profiles` é um mapa indexado pelo account ID, não uma lista: resolver por `profiles[account_id]` e validar `profile.account_id == account_id`. Ao projetar vários registros, iterar `.items()`/`.values()` após conferir o tipo; iterar diretamente o mapa devolve strings e causa falha local antes de qualquer consulta/write. Não classificar esse erro de schema como falha Meta ou credencial. Testar o tipo do mapa e a identidade de todas as entradas selecionadas antes da execução.
 - Registro dos modos e guardrails: `data/ares/meta-ads/engine-v3/config.json`.
 - Catálogo independente de Páginas BM: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-pages.json`; `page-lookup --page <nome-exato-ou-ID>` filtra apenas o registro necessário. Cobertura da API é declarada no snapshot; IDs conhecidos sem nome/acesso não são inventados nem apresentados como inventário administrativo completo.
 - Autoridade: `authorized-users.json`, `permissions-matrix.md` e `SHEIN-US-DIRECT.json#/manager_channels`.

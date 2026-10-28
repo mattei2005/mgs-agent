@@ -499,7 +499,9 @@
     727329,
     727341,
     727362,
-    727383
+    727383,
+    727401,
+    727431
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2725,6 +2727,36 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|portalrelevante|23|287": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-28T12:13:16.000Z",
+        "domain": "portalrelevante",
+        "notification_id": 727431,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 8
+        },
+        "pages": 8,
+        "segurador_id": "287",
+        "segurador_name": "Luana Ferreira Gomes",
+        "source": "page_token",
+        "user_email": "disparosportal@gmail.com",
+        "user_id": "23",
+        "user_name": "Disparos Portal US-CC-ES"
+      },
+      "last_sent_at": "2026-10-28T08:27:16-04:00",
+      "message_ids": [
+        "1564978856383873025"
+      ],
+      "notification_ids": [
+        727431
+      ],
+      "opened_at": "2026-10-28T08:27:15-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|spe|7|527": {
       "alert": {
         "company": "digital-trust",
@@ -3121,6 +3153,38 @@
         700748
       ],
       "opened_at": "2026-09-17T20:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|wavesbee|9|241": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-28T12:13:09.000Z",
+        "domain": "wavesbee",
+        "notification_id": 727401,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 36,
+          "Broadcast": 90,
+          "Ready": 9
+        },
+        "pages": 135,
+        "segurador_id": "241",
+        "segurador_name": "Joao Italo",
+        "source": "page_token",
+        "user_email": "disparoswavesbeeen@gmail.com",
+        "user_id": "9",
+        "user_name": "Disparos Wavesbee US-CC-EN"
+      },
+      "last_sent_at": "2026-10-28T08:27:16-04:00",
+      "message_ids": [
+        "1564978860943220736"
+      ],
+      "notification_ids": [
+        727401
+      ],
+      "opened_at": "2026-10-28T08:27:15-04:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -3548,35 +3612,24 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-28T08:12:18-04:00",
+  "last_check": "2026-10-28T08:27:16-04:00",
   "last_delivery": {
-    "at": "2026-10-28T08:12:18-04:00",
+    "at": "2026-10-28T08:27:16-04:00",
     "cursor_ids": [
-      727217,
-      727232,
-      727253,
-      727275,
-      727306,
-      727329,
-      727341,
-      727362,
-      727383
+      727401,
+      727431
     ],
     "message_ids": [
-      "1564975078029000836",
-      "1564975084006023189",
-      "1564975087902265407",
-      "1564975092214267979"
+      "1564978856383873025",
+      "1564978860943220736"
     ],
     "notification_ids": [
-      727253,
-      727275,
-      727306,
-      727362
+      727401,
+      727431
     ]
   },
   "last_error": null,
-  "last_seen_id": 727383,
+  "last_seen_id": 727431,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

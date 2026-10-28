@@ -2132,6 +2132,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO-REACTIVATE-1564977389317128245",
+      "next_step": "Concluido;nenhuma recorrencia ou avisoIntraday criado;ativacao nao comprova entrega",
+      "objective": "Religar27quedasrecentes+20ROIrealfechado27/10>=30;47IDsautorizados",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/status-changes/ARES-YOLO-REACTIVATE-1564977389317128245/consolidated-final-readback.json",
+      "state": "complete:47/47statusconfigured/effectiveactive emgetconsolidado28/10 08:27edt;43reativadas4jaativas;27+20gruposdisjuntos;budgetlanceprogramacaofilhosidscreativespreservados;zero criacoes e zero budgetwrites;falha local de schema antes de chamadas corrigida e teste pass",
+      "thread_id": "1564704836350509158",
+      "updated_at": "2026-10-28T12:28:02+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-YOLO02-G006-INTRADAY-ROI-SORT-20261016",
       "next_step": "Entregar texto canônico nesta resposta; próximos pedidos usam account_sort_overrides sem cron.",
       "objective": "Intraday atual e ranking persistente ROI estimado decrescente Yolokfx02 G006",
@@ -7552,5 +7562,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T12:12:31+00:00"
+  "updated_at": "2026-10-28T12:28:02+00:00"
 }
