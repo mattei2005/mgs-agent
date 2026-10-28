@@ -99,6 +99,8 @@ A página pública complementa, mas não substitui, o readback autenticado: tema
 
 No QA da bio pública, capture o componente completo de autoria, não só o pai imediato do link: o texto pode estar em um parágrafo irmão dentro de `.jd-box .info`. Exija a frase canônica em elemento realmente renderizado (geometria e estilos visíveis), separadamente em mobile e desktop; não use apenas schema, campo de cadastro ou a concatenação dos dois viewports. Diferencie erro local de seletor, cache antigo e ausência real de renderização antes de propor qualquer mudança em produção.
 
+Em retomadas de autoria, revalide cada artigo: páginas do mesmo autor podem misturar bio antiga e bio correta enquanto o perfil nativo já está conforme. Não regrave o usuário nem invalide os irmãos corretos; quando a URL normal antiga for HIT de APO, a variante diagnóstica mostrar o texto atual e a zona exata estiver validada, renove somente esse URL pela API seletiva autorizada e comprove MISS atualizado → HIT atualizado. Conte bio apenas no DOM visível do artigo ou perfil realmente acessível: frase em JSON-LD não prova bio renderizada. Se o HTML normal e diagnóstico continuarem errados sob DYNAMIC/via Caddy, preserve a incerteza da camada e resolva o transporte de origem, sem purge de borda por tentativa.
+
 Ao trocar perfis de navegador, configure viewport/screen, UA e touch coerentes em cada navegação. Aguarde fontes e várias leituras estáveis de `innerWidth/clientWidth/scrollWidth` antes de classificar overflow; preserve uma medição transitória anterior e só superseda com observação real estável, sem esconder excesso por CSS ou desconsiderar overflow persistente.
 
 ## Diagnóstico de biografia em portal multilíngue
