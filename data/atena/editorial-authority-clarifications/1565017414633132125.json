@@ -1,0 +1,25 @@
+{
+  "id": "ATENA-RAQUEL-TECHNICAL-CONTINUATION-1565017414633132125",
+  "kind": "procedure",
+  "scope": "Application of existing Content Operations authority; no new global permission",
+  "authority": {
+    "author_id": "344196393512075265",
+    "name": "Rodolfo Mattei",
+    "message_id": "1565017414633132125",
+    "thread_id": "1564289742567112795",
+    "text": "Voce nao precisa pedir autorizacao pra isso.... Raquel esta autorizada para pedidos como esse - coloque como regra.",
+    "verified_by": "Discord fetch_messages exact author/message readback"
+  },
+  "existing_authority_source": "/root/mgs-agent/data/atena/editorial-manager-authority.json",
+  "procedure_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/SKILL.md#continuidade-autorizada-e-apoio-tecnico",
+  "rule": "Pedidos de Raquel para continuar/concluir correcoes localizadas de ContentOps cobertas pela autoridade vigente nao exigem nova aprovacao generica de Rodolfo ou outra confirmacao para pedir apoio tecnico. Capacidade ou transporte ausentes devem ser resolvidos com o executor tecnico autorizado, com alvos e provas exatos, mantendo Atena como dona da coordenacao e QA final; nao devem ser apresentados como falta de autorizacao editorial.",
+  "supersedes_interpretation": "Waiting for a fresh generic CEO or editorial approval merely because Atena lacks execution capability for an already authorized scoped dependency",
+  "unchanged": [
+    "Existing authority and exact scope, backup, canary and public readback controls",
+    "No change to credentials, roles, permissions, whitelist or execution identity",
+    "Critical Subset and Finance/Router restrictions",
+    "No global purge, runtime deployment or structural change authorized by this procedural clarification"
+  ],
+  "permission_files_modified": false,
+  "production_changes_performed_by_this_rule_save": false
+}
