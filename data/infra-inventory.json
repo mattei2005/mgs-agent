@@ -893,6 +893,32 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-sb-facebook-onhold-1564795862478229638",
+      "agent": "zeus",
+      "type": "one_shot_facebook_availability_sb_status_reclassification",
+      "status": "validated",
+      "authority_message_id": "1564795862478229638",
+      "thread_id": "1564789767420252264",
+      "path": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027",
+      "checkpoint_id": "SB-FB-ONHOLD-20261027",
+      "scope": "1625 frozen On-hold SB IDs; digital-trust + digital-trust-2; 29 affected publishers",
+      "execution": "Authenticated PC1 existing profile kwhvicu; two scan tabs; private local CDP; no profile/credential mutation or cron; SB STATUS-only batches after canaries",
+      "results": {
+        "facebook_checked": 1625,
+        "broadcast": 1536,
+        "blocked": 89,
+        "inconclusive": 0,
+        "sb_exact_id_readbacks": 1625,
+        "restriction_dates_preserved": 50,
+        "non_status_configuration_changes": 0,
+        "outside_target_status_changes": 0,
+        "fiona_maxwell": "Blocked"
+      },
+      "backup": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/apply-backup.json",
+      "evidence": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/final.json",
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/dtr-sb-page-id-step1-facebook-availability-blocked-2026-07-06.md"
+    },
+    {
       "id": "meta-manual-payments-refresh-20261027-2102",
       "agent": "zeus",
       "type": "authorized_recurring_financial_snapshot",
