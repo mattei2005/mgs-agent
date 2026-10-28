@@ -1,0 +1,28 @@
+{
+  "authorization": "1564993370240057388",
+  "thread_id": "1563926766286803004",
+  "objective": "Fresh complete refresh same47 IDs no payments/billing",
+  "started_at": "2026-10-28T09:26:17.070049-04:00",
+  "steps": [
+    {
+      "script": "regroup_funding.py",
+      "exit": 0,
+      "result": "{\"status\": \"regroup_validated\", \"accounts\": 47, \"groups\": {\"Cart\u00e3o de cr\u00e9dito\": 12, \"Linha de cr\u00e9dito\": 35}, \"changes\": [], \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261028T092622914867\", \"meta_writes\": 0, \"payments_executed\": 0}"
+    },
+    {
+      "script": "refresh_september_invoices.py",
+      "exit": 0,
+      "result": "{\"status\": \"september_invoices_updated_validated\", \"accounts\": 47, \"new_columns\": \"E Invoice; F Setembro \u2014 saldo em aberto\", \"invoice_period\": \"2026-09-01\", \"visible_invoice_numbers\": 0, \"unpaid_in_tab\": 0, \"tab_due_usd\": \"0\", \"unpaid_bm\": 0, \"bm_due_usd\": \"0\", \"outside_accounts\": [], \"full_grid_readback\": true, \"prior_cells_preserved\": true, \"payments_executed\": 0, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/september-20261028T092628157925\"}"
+    },
+    {
+      "script": "refresh_workbook.py",
+      "exit": 0,
+      "result": "{\"status\": \"updated_metrics_pending_card_history\", \"accounts\": 47, \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/20261028T092655403332\", \"meta_writes\": 0, \"payments_executed\": 0, \"snapshot_at\": \"2026-10-28T09:26:49.616190-04:00\", \"pending_ui\": [{\"account_id\": \"1481815942722118\", \"name\": \"Eggbev-US-CC-EN-03 (FAX-US-02)\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1062446663435585\", \"name\": \"Escalatepower-US-SHEIN-EN-03-G003\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1543098427832443\", \"name\": \"Mavroa-US-SHEIN-ES-03-G003\", \"reason\": \"new_generic_payment_since_pc1_proof\"}, {\"account_id\": \"1290644206529750\", \"name\": \"OpenzedFinanzas-ES-CC-ES-02\", \"reason\": \"new_generic_payment_since_pc1_proof\"}]}"
+    },
+    {
+      "script": "publish_pay_now.py",
+      "exit": 0,
+      "result": "{\"status\": \"prepared\", \"run_dir\": \"/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946\", \"credit_line_accounts\": 35, \"sheet_writes\": 0}"
+    }
+  ]
+}
