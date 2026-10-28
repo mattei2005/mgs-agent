@@ -1112,6 +1112,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV03-DUPLICATE-1565063126771040317",
+      "next_step": "Rodolfo confirma onboarding separado da conta03 e escopo de budget/ativacao de Nicolas; Nicolas esclarece horario. Ares conclui onboarding aprovado fora da transacao, valida fonte/Page/conta live, apresenta resumo para OK e retoma o mesmo request pelo Engine central.",
+      "objective": "Duplicar uma vez a campanha literal 219 - Brunetz Finance - ENG - US - (pg_23150) - 00x5 na Eggbev-US-CC-EN-03 com USD20/dia e inicio solicitado imediato/28-10-26 2:30",
+      "source": "data/ares/meta-ads/requests/eggbev03-duplicate-1565063126771040317.json",
+      "state": "pedido preservado sem writes meta. conta 03 allowed=true, porem sem contrato de conta bot, consumer e registro engine v3; referencia de credencial anunciante nao resolvida. excecao financeira/inicio imediato de nicolas registrada explicitamente para conta01, nao expandida. horario literal ambiguo; fonte live ainda nao consultada.",
+      "thread_id": "1565032671669919827",
+      "updated_at": "2026-10-28T18:04:13+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-ESCALATEPOWER-ONBOARDING-1559929154030276730",
       "next_step": "Receber os pedidos de campanhas sem renovar aprovação por cadastro; validar parâmetros materiais pela rota central. G006 campanha 120252795396560042 tem nome b01fb06c01 e destino/adset b01fb02c01: não usar como fonte sem conciliação, não alterada neste onboarding. Regressão global KR-014 esperava release antiga, preexistente e fora do escopo.",
       "objective": "Mapear e validar as seis Pages e contas Escalatepower SHEIN autorizadas por Rodolfo",
@@ -6463,12 +6473,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Manter mesmo job2ee720363d7d e contrato;próximo tick revalida fontes e superfície. Não criar outro writer. Nenhuma autenticação necessária nesta recuperação.",
-      "objective": "Atualizar mesmos47IDs integralmente após autenticação; nenhum pagamento/billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946/closure-current.json",
-      "state": "concluído e validado:47/47 métricas09:53et;35/35h novas09:27–09:45et accounts pixels+ax;4provas d resolvidas;growpowerhub04 sem cobrança localizada permanece vazio;invoices setembro0;ids links totaisf/g/h/i/j pass;lease livre;zero meta writes/pagamentos.",
+      "next_step": "Coletar Accounts36targets em lotes6 com pixels;resolverD;readbackfinal.",
+      "objective": "Refresh recorrente mesmos47IDs;sem pagamentos/billing",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T140324791994",
+      "state": "em execução14:02et;funding47ids11cartão36linha;invoices setembro0;cgij atualizados14:03;d pendente mavroa02;h ainda histórico.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-28T13:55:03+00:00"
+      "updated_at": "2026-10-28T18:03:47+00:00"
     },
     {
       "agent": "zeus",
@@ -7662,5 +7672,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T17:23:22+00:00"
+  "updated_at": "2026-10-28T18:04:13+00:00"
 }

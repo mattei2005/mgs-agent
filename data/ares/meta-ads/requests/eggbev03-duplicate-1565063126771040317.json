@@ -1,0 +1,62 @@
+{
+  "request_id": "eggbev03-duplicate-1565063126771040317",
+  "status": "WAITING_ACCOUNT_ONBOARDING_AUTHORITY_AND_START_CLARIFICATION",
+  "source": {
+    "platform": "discord",
+    "guild_id": "1185714635991679006",
+    "parent_channel_id": "1539422731727147079",
+    "thread_id": "1565032671669919827",
+    "message_id": "1565063126771040317",
+    "sender_display_name": "Nicolas Holanda",
+    "expected_sender_discord_id": "1055570806945620030",
+    "sender_live_identity_verified": false
+  },
+  "target": {
+    "account_id": "1481815942722118",
+    "operational_name": "Eggbev-US-CC-EN-03",
+    "internal_note_is_not_operational_alias": true,
+    "corporate_scope_check": {
+      "allowed": true,
+      "business_id": "155263197283282"
+    }
+  },
+  "intake": {
+    "mode": "pure_clone",
+    "quantity": 1,
+    "source_campaign_name_literal": "219 - Brunetz Finance - ENG - US - (pg_23150) - 00x5",
+    "source_campaign_id": null,
+    "daily_budget_currency_requested": "USD",
+    "daily_budget_major_requested": "20.00",
+    "requested_activation": "coloque para ativar o quanto antes",
+    "requested_date_time_literal": "28/10/26 2:30",
+    "resolved_start_time": null,
+    "final_summary_approved": false
+  },
+  "read_only_findings": {
+    "target_account_contract_exists": false,
+    "target_account_engine_registration_exists": false,
+    "bot_consumer_registered_target_account": false,
+    "existing_bot_operation_account_id": "1034081997659047",
+    "existing_nicolas_budget_and_immediate_start_delegation_explicit_account": "1034081997659047",
+    "target_advertiser_credential_reference_resolved": false,
+    "live_meta_preflight_performed": false
+  },
+  "blockers": [
+    "Account 03 is in corporate scope and bound to this thread but has no account-specific BOT execution contract or Engine v3 registration. Do not reuse account 01 identity, credential, state or write authorization.",
+    "Current recorded financial/immediate-start exception explicitly names account 01. Rodolfo must explicitly confirm the corresponding scope for account 03 before budget/activation writes.",
+    "Literal date/time is ambiguous against the instruction to activate as soon as possible; retain it unchanged until Nicolas confirms the intended time and timezone."
+  ],
+  "next_actions": [
+    "Obtain Rodolfo's explicit approval for separate account-03 onboarding and Nicolas budget/immediate-start authority, without billing, credential changes or automation.",
+    "Complete approved account-scoped onboarding outside the campaign transaction, resolving the correct existing advertiser credential and validating account identity, USD currency, timezone, source campaign and Page eligibility in read-only.",
+    "Confirm literal start intent with Nicolas, then prepare and present the final exact plan for request approval before any Meta write.",
+    "Execute only through central Engine v3 after all gates pass; preserve this request ID and read back all created objects."
+  ],
+  "external_side_effects": {
+    "meta_api_calls": 0,
+    "meta_writes": 0,
+    "created_campaign_ids": [],
+    "created_adset_ids": [],
+    "created_ad_ids": []
+  }
+}
