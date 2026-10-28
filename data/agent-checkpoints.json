@@ -2673,12 +2673,12 @@
     {
       "agent": "zeus",
       "id": "SB-FB-ONHOLD-20261027",
-      "next_step": "Aplicar Broadcast1536 e Blocked89 com canario de cada status; preservar50datas; readback completo por ID",
-      "objective": "Reclassificar as1625 paginas originais pelo Facebook autenticado; preservar restricoes e outros campos",
-      "source": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/scan-final-summary.json",
-      "state": "scan_complete1625;1536visible;89unavailable;0inconclusive;name_changed_clara_to_choiceoffers_resolved_by_original_id_redirect_and_actual_content;sb_writes0",
+      "next_step": "Encerrado:1625checadas e relidas;1536Broadcast;89Blocked incl.Fiona;0inconclusivas;50datas preservadas;sem mudancas fora do alvo;backup e inventario;REPORT-INFRA1564814952311562282 validado;nao repetir writer",
+      "objective": "Reclassificacao das1625 paginas originais On-hold por disponibilidade Facebook autenticada; somente status SB",
+      "source": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/independent-readback.json",
+      "state": "completed",
       "thread_id": "1564789767420252264",
-      "updated_at": "2026-10-28T01:31:21+00:00"
+      "updated_at": "2026-10-28T01:36:30+00:00"
     },
     {
       "agent": "zeus",
@@ -7542,5 +7542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T01:31:21+00:00"
+  "updated_at": "2026-10-28T01:36:30+00:00"
 }
