@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T14:08:08.691454-04:00",
+    "updated_at": "2026-10-28T14:11:53.755339-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -55451,8 +55451,8 @@
       "id": "meta-b0069-cutover-1565063938130059275",
       "agent": "zeus",
       "type": "app_monitor_cutover",
-      "status": "validated_manual_cycles",
-      "updated_at": "2026-10-28T14:08:08.691454-04:00",
+      "status": "validated",
+      "updated_at": "2026-10-28T14:11:53.755339-04:00",
       "source_message_id": "1565063938130059275",
       "thread_id": "1565005187914141757",
       "replacements": {
@@ -55495,7 +55495,34 @@
       "script_changes": false,
       "gateway_restart": false,
       "knowledge_id": "decision-meta-roles-b0069-20261028",
-      "checkpoint_id": "meta-b0069-1565063938130059275"
+      "checkpoint_id": "meta-b0069-1565063938130059275",
+      "scheduled_cycle": "10 active routes processed, zero errors; B006-9 healthy",
+      "final_readback": {
+        "roles": 7,
+        "assigned": 11,
+        "present": 7,
+        "missing": [
+          "SobiRin Kemana Mana",
+          "Isidoro Cristina Barbosa Martins",
+          "Anre Kameza",
+          "Jayadi Thaha Patonangi"
+        ],
+        "sheet_mismatches": [],
+        "alert_card_id": "1565065350683426819",
+        "alert_message_ids": [
+          "1565065350683426819",
+          "1565065352122208359",
+          "1565065353581822143"
+        ],
+        "automatic_users_table_rows": 7,
+        "preserved_pauses": [
+          "B009-5",
+          "B011-8"
+        ],
+        "report_message_id": "1565064647151714305"
+      },
+      "report_message_id": "1565064647151714305",
+      "report_readback": "PASS exact channel/message, one native embed, empty content, zero mentions/thread"
     }
   ],
   "profile_skill_references": [
