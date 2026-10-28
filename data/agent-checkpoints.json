@@ -2673,12 +2673,12 @@
     {
       "agent": "zeus",
       "id": "SB-FB-ONHOLD-20261027",
-      "next_step": "Scan autenticado PC1 com checkpoint por pagina, backup, canario e readback SB por ID; autorizacao1564795862478229638",
-      "objective": "Verificar exatamente 1625 paginas On-hold no Facebook autenticado; conteudo visivel=Broadcast, aviso indisponivel=Blocked, inconclusivas sem alteracao; preservar restricoes",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/sb-onhold-change-scope-1564790320040779928.json",
-      "state": "authorized;1625_frozen;pilot_9_visible_1_unavailable;bulk_not_started",
+      "next_step": "Consumir scan completo; recuperar somente inconclusivas tecnicas; gerar plano e aplicar canarios + lotes SB com readback",
+      "objective": "Verificar exatamente1625 paginas Facebook autenticado e aplicar status aprovado com preservacao de restricoes",
+      "source": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/before.json",
+      "state": "running;fresh_snapshot1625;29sites;50restriction_dates;pc1_authenticated_scan_started;no_sb_writes",
       "thread_id": "1564789767420252264",
-      "updated_at": "2026-10-28T00:20:44+00:00"
+      "updated_at": "2026-10-28T00:24:46+00:00"
     },
     {
       "agent": "zeus",
@@ -7542,5 +7542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T00:20:44+00:00"
+  "updated_at": "2026-10-28T00:24:46+00:00"
 }
