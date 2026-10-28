@@ -17,7 +17,7 @@
     "source": "https://api.jbfdigital.com.br/notification",
     "target_channel_id": "1521350832426188961"
   },
-  "consecutive_failures": 0,
+  "consecutive_failures": 1,
   "daily": {
     "date": "2026-10-28",
     "last_result": {
@@ -3643,7 +3643,7 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-28T13:27:13-04:00",
+  "last_check": "2026-10-28T13:42:14-04:00",
   "last_delivery": {
     "at": "2026-10-28T12:12:15-04:00",
     "cursor_ids": [
@@ -3656,7 +3656,11 @@
       727563
     ]
   },
-  "last_error": null,
+  "last_error": {
+    "at": "2026-10-28T13:42:14-04:00",
+    "message": "APIRequestContext.get: read ECONNRESET\nCall log:\n  - → GET https://api.jbfdigital.com.br/campaigns/Messenger?companies[]=digital-trust-2_amazing&companies[]=digital-trust-2_wantabrand&companies[]=digital-trust-2_wantabrandfinance&companies[]=digital-trust_autocreditadx&companies[]=digital-trust_boostingecon&companies[]=digital-trust_carcreditad&companies[]=digital-trust_cephyric&companies[]=digital-trust_cliquet&companies[]=digital-trust_cliquetfinanzas&companies[]=digital-trust_conectageral&com",
+    "type": "Error"
+  },
   "last_seen_id": 727563,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
