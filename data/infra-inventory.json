@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T11:48:23-04:00",
+    "updated_at": "2026-10-28T11:48:44-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -55266,15 +55266,25 @@
       "owner": "zeus",
       "channel_id": "1565027294920319126",
       "source_message_id": "1565027664660664452",
-      "ares": "allowed/free-response/no-auto-thread",
+      "ares": "allowed/free-response/auto-thread on human starter",
       "zeus": "existing wildcard allow; explicit mention only",
       "permission_changes": false,
-      "status": "active_validated",
-      "updated_at": "2026-10-28T15:46:35.631399+00:00",
-      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/eggbev-routing-rollback.json",
+      "status": "active_pending_human_autothread_observation",
+      "updated_at": "2026-10-28T15:55:35.885309+00:00",
+      "rollback": "Previous inline policy is superseded; do not restore without new authority.",
       "ares_response_message_id": "1565028948965064876",
       "report_infra_message_id": "1565028976945012917",
-      "validation": "Snapshot frozen, compile PASS, new systemd PID 1559893 and Discord connected; Ares replied in target channel; Zeus target read/write verified; YAML patch lint OK."
+      "validation": "Safe activation only Ares; pre-existing turns observed ended; snapshot+compile PASS; fresh Discord connected 15:54:20Z. First post-activation human message and real thread members still unobserved. No config replay or campaign write.",
+      "previous_validation": {
+        "ares": "allowed/free-response/no-auto-thread",
+        "status": "active_validated",
+        "validation": "Snapshot frozen, compile PASS, new systemd PID 1559893 and Discord connected; Ares replied in target channel; Zeus target read/write verified; YAML patch lint OK.",
+        "report_infra_message_id": "1565028976945012917"
+      },
+      "activation_pid": 1600503,
+      "activation_log": "logs/mgs-gateway-restart-finalizer-20261028T155357Z-1600197.log",
+      "superseding_source_message_id": "1565029050001391727",
+      "checkpoint_id": "ARES-EGGBEV-REPORT-AUTOTHREAD-1565029050001391727"
     }
   ],
   "profile_skill_references": [
@@ -62051,8 +62061,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 2934881,
-      "md5": "f73e9019f25b49fe418942c262b07365",
-      "modified_at": "2026-10-28T11:48:22-04:00"
+      "md5": "f197fbb2ed4002936b2b2c13532c0cb4",
+      "modified_at": "2026-10-28T11:48:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -62800,9 +62810,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 25734,
-      "md5": "ca0c1e0f30b950842649779acb47c9c3",
-      "modified_at": "2026-10-28T11:48:22-04:00"
+      "size_bytes": 25854,
+      "md5": "d0f32c53d1c51a95b16884ca1a37fad7",
+      "modified_at": "2026-10-28T11:48:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",

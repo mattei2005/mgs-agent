@@ -21,7 +21,8 @@ Identificar assunto
 ### Eggbev — relatórios de contas de anúncio
 
 - Canal dedicado: `1565027294920319126` (`bot-eggbev-us-cc-en-g006-relatorios`). A thread `1565027664660664452`, no pai `1539422731727147079`, é a origem da configuração, não o canal de entrega.
-- Ares responde sem menção, diretamente no canal, sem auto-thread; Zeus responde por menção explícita para evitar respostas duplicadas.
+- Ares recebe mensagens sem menção e abre uma thread ancorada na mensagem humana original, respondendo dentro dela, igual ao padrão dos demais canais. Zeus responde somente por menção explícita, inclusive nas threads. Threads novas incluem Zeus, Rodolfo e Nicolas, sem adicionar outros gestores automaticamente.
+- Histórico: a orientação inicial de resposta inline/sem auto-thread foi substituída pela correção explícita de Rodolfo na mensagem `1565029050001391727`; a exclusividade por menção de Zeus foi reafirmada em `1565028944078442539`.
 - Definição de destino não autoriza campanhas, budgets, credenciais, billing, novos usuários ou mudanças nas rotinas existentes. Conta e período seguem cada pedido e o escopo autorizado vigente.
 - Fonte: Rodolfo Mattei, mensagem `1565027664660664452`, 2026-10-28.
 

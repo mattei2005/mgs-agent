@@ -38,6 +38,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Detectable Failure Modes → Segurador Sheet Reconciliation** → `references/route-pack-02.md`
 - **Advanced-Access App Without Seguradores as App Admins → Segurador Page Token Monitoring** → `references/route-pack-03.md`
 - **Operational Symptom Monitor** → `references/route-pack-04.md`
+- **B013 coverage audit and misleading addition alerts** → `references/b013-confirmed-link-transitions.md`
 - **Fleet recheck → real-alert delivery → complete split-table readback** → `references/route-pack-05.md`, section `Fleet recheck and real-alert delivery`
 - **Production Cron Implementation** → `references/route-pack-05.md`
 - **References → Verification Checklist** → `references/route-pack-06.md`

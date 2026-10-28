@@ -14,6 +14,10 @@ Pitfall validado no Ares: alterar só `/root/.hermes/profiles/ares/.env` não ba
 
 Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt/config for simplificado demais, a thread continua sendo criada, mas só ficam o usuário autor + bot/agente.
 
+### Canal novo de relatórios deve herdar a política de threads aprovada
+
+Não inferir resposta inline de um pedido para responder sem menção: admission e destino são decisões distintas. Quando o usuário pedir o padrão de auto-thread, conferir `auto_thread`, `no_thread_channels`, prompt exato e mapa de membros do canal; remover somente a exclusão do alvo e preservar todos os outros canais. No runtime MGS, a decisão de criação deve ser confirmada no ramo vivo do adapter, pois a documentação upstream pode descrever free-response inline enquanto o patch local mantém auto-thread. Validar a configuração por readback e comparar estruturalmente com backup; distinguir persistência de carga no processo e de teste com mensagem humana real. Nunca reiniciar o próprio gateway no turno ativo para encerrar essa validação.
+
 ### Invariante: a mensagem humana deve ser o starter da auto-thread
 
 Em canais com `discord.auto_thread=true`, toda thread criada com sucesso deve nascer de `message.create_thread(...)` aplicado à mensagem humana original. Nunca usar como fallback uma mensagem-semente do bot (`Thread created by Hermes`) e abrir a thread a partir dela: esse caminho faz a thread aparecer como iniciada pelo agente e esconde do histórico interno o texto e os anexos enviados pelo usuário.

@@ -41,6 +41,7 @@ class ConfirmedTransitionsTests(unittest.TestCase):
         self.ns = load_namespace()
         self.messages = []
         self.persisted = None
+        self.existing_alerts = {}
         self.ns.update(
             load_config=lambda: {'app_name': 'B013-7', 'app_id': 'test-app', 'config_item_title': 'test', 'alert_channel_id': '1522830283240505385', 'profile_name': 'Profile', 'backup_profile_name': 'Backup'},
             sheet_rows=lambda _: [{'user': 'bot@example.com', 'segurador': 'Profile'}],
@@ -63,9 +64,10 @@ class ConfirmedTransitionsTests(unittest.TestCase):
                 'checked_at': '2026-10-28T12:00:00-04:00', 'debug_is_valid': verdict == 'linked'}
 
     def cycle(self, previous, current):
-        state = {'initialized': True, 'accounts': {}, 'alerts': {}}
+        state = {'initialized': True, 'accounts': {}, 'alerts': copy.deepcopy(self.existing_alerts)}
+        key = current['user'].casefold() + '|' + self.ns['norm'](current['segurador'])
         if previous is not None:
-            state['accounts']['bot@example.com|profile'] = copy.deepcopy(previous)
+            state['accounts'][key] = copy.deepcopy(previous)
         self.ns['load_state'] = lambda: copy.deepcopy(state)
         async def inspect(*_):
             return [copy.deepcopy(current)]
@@ -73,7 +75,7 @@ class ConfirmedTransitionsTests(unittest.TestCase):
         before = len(self.messages)
         asyncio.run(self.ns['main']())
         assert self.persisted is not None
-        return self.persisted['accounts']['bot@example.com|profile'], len(self.messages) - before
+        return self.persisted['accounts'][key], len(self.messages) - before
 
     def test_linked_unknown_linked_does_not_emit_added(self):
         uncertain, sent = self.cycle(self.row(), self.row('unknown', 'item_check_failed'))
@@ -120,6 +122,16 @@ class ConfirmedTransitionsTests(unittest.TestCase):
         self.assertEqual(accounts, {})
         _, sent = self.cycle(None, self.row())
         self.assertEqual(sent, 1)
+
+    def test_distinct_new_targets_with_equal_counts_are_not_suppressed(self):
+        _, sent = self.cycle(None, self.row())
+        self.assertEqual(sent, 1)
+        assert self.persisted is not None
+        self.existing_alerts = copy.deepcopy(self.persisted['alerts'])
+        another = self.row()
+        another['segurador'] = 'Another Profile'
+        _, sent = self.cycle(None, another)
+        self.assertEqual(sent, 1, 'Different identities must not collide in the alert cooldown')
 
 
 if __name__ == '__main__':

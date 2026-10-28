@@ -501,14 +501,14 @@ discord:
   require_mention: true
   free_response_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1544117442589106328,1544117058982248448,1548149087206121613,1548149300826079333,1548149483039236137,1548149654926135486,1548150015275438220,1548150155184701440,1549404457157140601,1558146374636412959,1558146629805023424,1558146737108033577,1558147066826334309,1558147229460729887,1558147364450074734,1565027294920319126
   allowed_channels: 1508853425952133180,1516887105543077949,1539422731727147079,1539432300364824607,1544117442589106328,1544117058982248448,1548149087206121613,1548149300826079333,1548149483039236137,1548149654926135486,1548150015275438220,1548150155184701440,1549404457157140601,1496267442899521627,1558146374636412959,1558146629805023424,1558146737108033577,1558147066826334309,1558147229460729887,1558147364450074734,1565027294920319126
-  no_thread_channels: '""'
+  no_thread_channels: ''
   auto_thread: true
   thread_require_mention: true
   history_backfill: true
   history_backfill_limit: 300
   reactions: true
   channel_prompts:
-    '1565027294920319126': 'Canal de relatorios das contas de anuncio Eggbev. Ares responde sem mention, inline, sem auto-thread; Zeus por mention. Esta definicao nao autoriza campanhas, budgets, credenciais nem mudancas nas rotinas existentes. Preservar autorizacoes vigentes e resolver conta e periodo por pedido.'
+    '1565027294920319126': 'INSTRUCAO DE THREAD Ares Eggbev relatorios. Ao receber mensagem humana no canal, abrir thread ancorada na mensagem original e responder nela, sem exigir mention ao Ares, igual ao padrao dos outros canais. Zeus responde somente por mention explicita. Threads novas incluem Zeus, Rodolfo e Nicolas (1055570806945620030), sem adicionar outros gestores automaticamente; confirmar membros somente por readback. Titulos de 3 a 6 palavras; nao sobrescrever titulo manual. Esta rota nao autoriza campanhas, budgets, credenciais, billing nem mudancas nas rotinas existentes. Resolver conta e periodo por pedido, preservando os gates vigentes.'
     '1508853425952133180': 'INSTRUCAO DE THREAD Ares Diretoria:
 
 
@@ -1199,6 +1199,10 @@ discord:
       - '344196393512075265'
       - '1496296175014252634'
       - '321263240782807040'
+      - '1055570806945620030'
+    '1565027294920319126':
+      - '1496296175014252634'
+      - '344196393512075265'
       - '1055570806945620030'
   suppress_link_previews: true
   auto_continue_long_responses: true
