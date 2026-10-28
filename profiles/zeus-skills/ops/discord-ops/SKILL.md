@@ -16,6 +16,10 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
+## Habilitar respostas em canais compartilhados
+
+Quando Rodolfo pedir para habilitar agentes em um canal, separar o destino indicado da thread onde ele fez o pedido e distinguir acesso Discord, roteamento do gateway e regra de menção. Por padrão operacional, deixar o executor responsável responder sem menção no canal dedicado e Zeus por menção, sem habilitar resposta livre dos dois nem ampliar permissões de usuários. Validar comunicação real no destino antes de concluir; teste com @menção não prova resposta sem menção. Receita: `references/route-pack-02.md`, seção **Canal novo de relatórios: diagnóstico e habilitação**.
+
 ## Correção de respostas em outra thread
 
 Quando Rodolfo pedir para ler uma thread e corrigir a resposta de outro agente, diagnosticar o pedido e a execução exatos antes de atribuir erro ao agente. Publicar a retificação na thread indicada, sem apagar ou se passar pelo autor original, e validar o conteúdo entregue; explicar apenas na conversa atual não satisfaz o pedido. Distinguir resposta corrigida, bloqueio resolvido e entrega operacional concluída. Após confirmação, reler o alvo e a continuidade da origem antes de escrever ou acionar o executor: confirmações do mesmo pedido em duas threads correspondem a uma única recuperação, não a duas execuções. Não descrever o relatório como retomado apenas porque existe uma sessão dona ou um payload de handoff preparado; exigir envio confirmado e atividade nova do executor. Receita de leitura, correlação de sessão e investigação de recusa: `references/route-pack-03.md`, seção **Investigar e retificar resposta de outro agente**.

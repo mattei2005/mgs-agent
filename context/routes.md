@@ -18,6 +18,13 @@ Identificar assunto
 
 ## Rotas por tipo de pedido
 
+### Eggbev — relatórios de contas de anúncio
+
+- Canal dedicado: `1565027294920319126` (`bot-eggbev-us-cc-en-g006-relatorios`). A thread `1565027664660664452`, no pai `1539422731727147079`, é a origem da configuração, não o canal de entrega.
+- Ares responde sem menção, diretamente no canal, sem auto-thread; Zeus responde por menção explícita para evitar respostas duplicadas.
+- Definição de destino não autoriza campanhas, budgets, credenciais, billing, novos usuários ou mudanças nas rotinas existentes. Conta e período seguem cada pedido e o escopo autorizado vigente.
+- Fonte: Rodolfo Mattei, mensagem `1565027664660664452`, 2026-10-28.
+
 ```text
 Pedido/evento                          Dono primário                  Agente        Escalação
 -------------------------------------- ------------------------------ ------------ ----------------------

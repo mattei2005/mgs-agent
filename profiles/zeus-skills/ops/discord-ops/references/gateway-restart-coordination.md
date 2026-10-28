@@ -11,8 +11,8 @@ Do not combine routing patch, gateway restart, scheduled self-check, and live co
 1. Inspect current Zeus/Atena Discord routing config.
 2. Patch config/runtime so Zeus can read shared channels but does not answer Atena content threads unless explicitly mentioned.
 3. Validate syntax/config before restart.
-4. Restart only the affected service.
-5. Verify service state with `systemctl show` / `is-active` after the restart completes.
+4. Activate only the affected service through `/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh`, after the user-facing notice and required authorization. Check the installed helper's contract: a successful invocation without `--execute` may only prepare a finalizer, not schedule or perform a restart. The validated activation form is `--agents "<affected-agent>" --reason "<scope>" --delay 5 --execute`; it schedules detached execution. Do not run direct foreground restarts or change frozen targets after scheduling.
+5. Read the exact finalizer result and require a new service PID/start marker plus a fresh Discord connection after its captured log offset. `systemctl is-active` or a readiness probe starting at offset zero can match an old connection and cannot by itself prove recovery. Then verify a real reply in the target channel; service readiness and business communication are separate gates.
 6. Avoid scheduling a cron/self-check from the same bot being restarted unless there is no other safe way; a self-check can collide with gateway drain/retry behavior and confuse the user.
 7. Tell the user when it is safe to open new Atena content threads.
 
