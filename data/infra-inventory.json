@@ -893,6 +893,23 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-shein-native-subtitle-rollout-1564788676917989557",
+      "agent": "zeus",
+      "type": "wordpress_native_subtitle_rollout",
+      "status": "validated_five_mobile_direct_destinations",
+      "authority_message_id": "1564788676917989557",
+      "thread_id": "1564760403173707789",
+      "sites": ["yolokfx.com", "escalatepower.com", "growpowerhub.com", "mavroa.com", "boostingecon.com"],
+      "post_id_per_site": 9001,
+      "changes": {"all_five": "Move existing introduction to _jbf_secondary_title and remove only body duplicate", "four_sites": "Persist missing jbf_secondary_title_title_format", "yolokfx": "Post-scoped display/format adapter; global auto_show=off and empty format preserved; 28 existing native-subtitle posts unchanged"},
+      "yolokfx_adapter": {"path": "/home/runcloud/webapps/yolokfx/wp-content/mu-plugins/mgs-shein-native-subtitle-scope.php", "sha256": "061e3dd136d87564fdde42a3ff81838ca695317f01facc4b2dd195568df6f192", "source": "/root/mgs-agent/work/shein-native-rollout-1564788676917989557/mgs-shein-native-subtitle-scope.php", "php_lint": "passed"},
+      "validated": {"mobile_direct_order_and_nonzero_ad": "5/5 title -> native subtitle -> ad -> CTAs", "latest_browser_scenarios": 15, "single_native_subtitle_and_no_body_duplicate": "15/15", "desktop_original_rules_preserved": true, "database_readback": "5/5 exact body/native and other authored metadata preserved", "vizioid_reoperated": false, "ad_stack_changes": 0},
+      "facebook_limitations": {"top_container_confirmed_after_subtitle": ["escalatepower.com", "boostingecon.com"], "top_not_observed_in_sample": ["growpowerhub.com", "yolokfx.com", "mavroa.com"]},
+      "backup_pattern": "/home/runcloud/backups/{exact-domain}-native-subtitle-1564788676917989557",
+      "evidence": "/root/mgs-agent/work/shein-native-rollout-1564788676917989557/final-summary.json",
+      "database_evidence": "/root/mgs-agent/work/shein-native-rollout-1564788676917989557/final-database-readback.json"
+    },
+    {
       "id": "zeus-vizioid-native-subtitle-1564787221461082113",
       "agent": "zeus",
       "type": "wordpress_native_subtitle_configuration",
