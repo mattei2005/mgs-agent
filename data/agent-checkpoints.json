@@ -2673,12 +2673,12 @@
     {
       "agent": "zeus",
       "id": "SB-FB-ONHOLD-20261027",
-      "next_step": "Completar scan no mesmo writer e conjunto; validar controle positivo final; aplicar plano por ID com backup e readback",
-      "objective": "Verificar1625 paginas Facebook autenticado e aplicar criterio aprovado Broadcast/Blocked/inconclusivas com preservacao de restricoes",
+      "next_step": "Completar scan unico; reabrir inconclusivas por ID imutavel sem depender do nome historico; controle positivo; canarios e write/readback SB",
+      "objective": "Verificar1625 paginas no Facebook autenticado; aplicar somente status aprovado; preservar restricoes e configuracoes",
       "source": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/facebook-ledger.jsonl",
-      "state": "running;692of1625_inspected;686visible;6unavailable;0inconclusive;sb_writes0;pc1_profile_kwhvicu_only",
+      "state": "running;1131of1625;1092visible;38unavailable;1name_mismatch_pending_recheck;sb_writes0",
       "thread_id": "1564789767420252264",
-      "updated_at": "2026-10-28T00:51:09+00:00"
+      "updated_at": "2026-10-28T01:10:32+00:00"
     },
     {
       "agent": "zeus",
@@ -7542,5 +7542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T01:05:17+00:00"
+  "updated_at": "2026-10-28T01:10:32+00:00"
 }
