@@ -4,6 +4,8 @@ Use only for an explicitly justified scoped current-day ROI_ESTIMATED dependency
 
 Before projecting data through another identity, diagnose the Ares access layer using its own existing credential and bounded reads. `GET /user/validate` can return HTTP200 while a scoped report returns403: inspect only the exact authorized company's presence and relevant read permissions; never print/save unrelated companies or raw user records. Auth0 `publisher` permission and local catalog ALLOWED are not evidence of the live SB company grant. If that grant is absent, report the proved layer mismatch and request the required explicit confirmation for a narrow permission change, rather than claiming a login refresh or another agent's export repaired Ares access.
 
+After a human updates the SB user, revalidate with Ares' own credential through both `/user/validate` and the actual canonical report client for every approved publisher. Provider HTTP201 alone is not full recovery: `_validate_sb_response` may still reject Facebook CUSTOMER_ID values absent from the separate Meta-account registry. Diagnose that layer without logging unknown account IDs or rows, preserve the guard, and resolve the authorization boundary before changing it. Do not treat an SB site grant as a silent Meta-account grant, or claim the client is usable when its response validator still blocks it.
+
 ## Collection
 
 - Resolve exact approved publishers, currency and ISO dates. Use Zeus canonical headed/Xvfb session, session lease and governed browser budget. Suppress unsolicited SPA API requests; authenticated direct requests remain in memory. Do not fetch a global company catalog when the exact authorized identities are already resolved.

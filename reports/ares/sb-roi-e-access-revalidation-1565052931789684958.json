@@ -1,0 +1,50 @@
+{
+  "source_message_id": "1565052931789684958",
+  "checked_at": "2026-10-28T17:22:09.949703+00:00",
+  "identity": "Ares own existing credential",
+  "validate_http": 200,
+  "name": "Ares",
+  "roles": [
+    "publisher"
+  ],
+  "atual_fnc_present": true,
+  "publishers": [
+    {
+      "publisherId": "atual-fnc_fcp-team",
+      "http": 201,
+      "canonical_client_ok": true,
+      "rows": 0,
+      "exact_current_day_rows": 0,
+      "wrong_publisher_rows": 0
+    },
+    {
+      "publisherId": "atual-fnc_naboojobs",
+      "canonical_client_ok": false,
+      "error_type": "ValueError",
+      "safe_error": "Resposta SB divergente do escopo; relatório retido."
+    },
+    {
+      "publisherId": "atual-fnc_sapogamer",
+      "http": 201,
+      "canonical_client_ok": true,
+      "rows": 1,
+      "exact_current_day_rows": 1,
+      "wrong_publisher_rows": 0
+    }
+  ],
+  "credential_or_permission_changes_by_zeus": false,
+  "status": "remote_access_recovered_local_account_scope_decision_pending",
+  "second_layer_diagnosis": {
+    "checked_at": "2026-10-28T17:22:53.037509+00:00",
+    "publisherId": "atual-fnc_naboojobs",
+    "remote_http": 201,
+    "raw_row_count": 154,
+    "exact_date_publisher_domain_rows": 154,
+    "out_of_identity_rows": 0,
+    "unknown_meta_account_distinct_count": 4,
+    "unknown_meta_account_rows": 153,
+    "guard_source": "scripts/ares-smartbidding-common.py::_validate_sb_response",
+    "cause": "Provider permission is now effective. Local SB response guard additionally checks every Facebook CUSTOMER_ID against the Meta account registry; Naboojobs current rows do not match that registry. No row data or unknown account identifiers saved.",
+    "scope_change_applied": false
+  }
+}
