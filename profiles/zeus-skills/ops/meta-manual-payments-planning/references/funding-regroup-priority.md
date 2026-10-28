@@ -13,6 +13,11 @@ Autorização: Rodolfo Mattei, mensagem `1564115318887161857`, thread `156392676
 7. Reconciliar Insights diário/agregado por conta. Se diferirem, fazer no máximo duas novas leituras limitadas à mesma conta/período, registrar os totais anteriores/posteriores sem URLs tokenizadas e manter a tolerância monetária existente. Se persistir, preservar o snapshot anterior e reportar a conta, campo e diferença; não atribuir automaticamente a arredondamento ou virada de dia sem prova.
 8. Validar 47 IDs, agrupamento, G/I/J de todas as contas, H de todas as linhas atuais, fórmulas/links e preservação das outras abas. Cobertura parcial de D fica explícita. Manter cadência anterior, sem criar writer paralelo.
 
+## Reagrupamento sem ordinais históricos
+
+- Reconstruir separadores e limites pelo conjunto de IDs e pelos rótulos únicos de subtotal/total, nunca por `rows[53]` ou `rows[55:]`. Movimentação humana e linhas vazias podem deslocar o total; copiar uma posição histórica como separador duplica subtotais e pode dobrar valores. Exigir exatamente um total geral e um subtotal por grupo no plano, preservar o tail fora da região operacional e fazer readback independente calculado com Decimal. Se o write já ocorreu, reconciliar o snapshot e limpar somente células duplicadas comprovadamente introduzidas pela operação, sem refazer contas, inserts ou coleta UI.
+- Validar F por estado e grupo: cartões sem invoice podem permanecer vazios enquanto outro cartão tem zero explícito. Somar apenas valores presentes depois dos gates de obrigatoriedade, sem converter branco em zero no Sheet ou exigir preenchimento de campos legitimamente vazios. Uma falha do validador após publicação não autoriza replay do dataset.
+
 ## Parsing seguro de funding
 
 - Aceitar também a variante literal `VISA *dddd` no display live tipo1, além de `Visa *dddd`, preservando a bandeira e o final recebidos. A Meta pode mudar somente a capitalização; uma rejeição do parser não prova mudança de billing. Manter fullmatch, quatro dígitos e allowlist de bandeiras; nunca aceitar texto livre ou normalizar identificadores. Aplicar o mesmo parser em regroup e refresh, testar variantes válidas/inválidas e repetir o fluxo autorizado com readback.

@@ -1,0 +1,118 @@
+{
+  "status": "metrics_h_full_validated_historical_d_qualified",
+  "validated_metrics_at": "2026-10-28T14:27:56.753184-04:00",
+  "verified_at": "2026-10-28T14:32:58.940780-04:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T142758728501",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T140324791994",
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 11,
+    "Linha de crédito": 36
+  },
+  "source_to_live_sheet_cgij_exact": true,
+  "h_source_to_live_sheet_and_note_exact": true,
+  "d_ledger_to_live_sheet_exact": false,
+  "full_grid_narrow_write_readback": true,
+  "totals_validated_columns": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "fresh_h_account_ids": [
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1085117577390237",
+    "1107653168698121",
+    "1245683183659911",
+    "1419148446852410",
+    "1498990138663094",
+    "1526280818302320",
+    "1583000095650153",
+    "1600310064116258",
+    "1736068407518263",
+    "1744611463000838",
+    "1753257812779707",
+    "1829406761389732",
+    "1851640026221079",
+    "1877104513669062",
+    "2031917360813819",
+    "2039876850230678",
+    "2429758060563333",
+    "2633813727134360",
+    "26632890069640784",
+    "311204101516831",
+    "3188620887977617",
+    "336562339356179",
+    "3752157451670648",
+    "4511685129081248",
+    "536294549227786",
+    "781612907182683",
+    "7840111366055613",
+    "787796726891306",
+    "814915838330687",
+    "869857549542755",
+    "897046653487466",
+    "908704754163659",
+    "937846586033361"
+  ],
+  "pending_h_account_ids": [],
+  "fresh_h_count": 36,
+  "h_read_at_min": "2026-10-28T14:04:29.356924-04:00",
+  "h_read_at_max": "2026-10-28T14:24:51.029516-04:00",
+  "h_sum_usd": "498892.05",
+  "pending_ui": [],
+  "card_blank_rows": [],
+  "card_proofs_updated": 1,
+  "average_period": [
+    {
+      "since": "2026-10-25",
+      "until": "2026-10-27"
+    }
+  ],
+  "totals_usd": {
+    "average_daily": "28793.58",
+    "balance": "503165.76",
+    "month_spend": "799301.80"
+  },
+  "invoice_period": "2026-09-01",
+  "invoice_due_usd": "0.00",
+  "visible_invoice_numbers": 0,
+  "lease_free": true,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "other_sheet_properties_unchanged": true,
+  "other_sheet_authored_data_unchanged_during_recovery": true,
+  "workbook_sheet_count": 2,
+  "recovered_failures": [
+    "regroup positional separator/tail duplicated subtotal/grand on shifted human layout;removed only duplicate authored cells with exact readback;dynamic boundaries and uniqueness guards tested",
+    "validator attempted Decimal on valid blank card invoice cells in mixed zero/blank group;blank-aware sum fixed without changing financial values"
+  ],
+  "report_infra_status": "sent_verified",
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T140324791994/closure-current.json",
+  "d_current_card_group_ledger_to_live_sheet_exact": true,
+  "d_blank_line_account_count": 36,
+  "historical_d_gaps": [
+    {
+      "account_id": "1877104513669062",
+      "name": "Vizioid-US-SHEIN-EN-05-G005",
+      "reason": "verified_card",
+      "last_ui_read_at": "2026-10-27T15:02:56.650181-04:00",
+      "current_funding": "Linha de crédito",
+      "qualification": "D já vazio no snapshot anterior deste tick;prova histórica de27/10 preservada no ledger;sem atribuir autoria ou restaurar às cegas."
+    },
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00",
+      "current_funding": "Linha de crédito"
+    }
+  ],
+  "report_infra_message_id": "1565070934724059268",
+  "report_infra_readback": true,
+  "final_regroup_regression": true
+}

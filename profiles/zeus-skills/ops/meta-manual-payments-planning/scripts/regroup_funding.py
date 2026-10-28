@@ -69,6 +69,7 @@ def build(before,funding):
  out.append(grand)
  assert len(out)==len(funding)+8,'unexpected_rebuilt_layout'
  old_end=grand_indices[0]+1;write_end=max(old_end,len(out))
+ assert all(not cell.get('userEnteredValue')and not cell.get('note')for row in rows[old_end:write_end]for cell in row.get('values',[])),'nonblank_tail_would_be_overwritten'
  out.extend(copy.deepcopy(separator)for _ in range(write_end-len(out)))
  out.extend(copy.deepcopy(rows[write_end:]));s['data'][0]['rowData']=out
  assert sum(label(r).startswith('TOTAL GERAL')for r in out)==1,'rebuilt_grand_total_not_unique'

@@ -51,14 +51,14 @@ def main():
     assert len(forms[i])>c and str(forms[i][c]).startswith('=ROUND(SUM('),'total_formula_missing_round_sum'
    totals.append(row)
  assert accounts and totals and len(currencies)==1,'empty_or_mixed_currency_scope'
- grand=[r for r in totals if str(r[0]).startswith('TOTAL GERAL')];assert len(grand)==1
+ grand=[r for r in totals if str(r[0]).startswith('TOTAL GERAL')];assert len(grand)==1,'grand_total_not_unique'
  for c in financial:assert money(grand[0][c])==sum((money(x['values'][c])for x in accounts if x['values'][c]!=''),Decimal(0)),'grand_total_mismatch_'+str(c)
  for group,label in [('Cartão de crédito','TOTAL CARTÃO DE CRÉDITO'),('Linha de crédito','TOTAL LINHA DE CRÉDITO')]:
   if not groups[group]:continue
   sub=[r for r in totals if r[0]==label];assert len(sub)==1,'subtotal_not_unique'
   for c in financial:
    if c in special and group=='Cartão de crédito'and not(c==5 and september and any(x['method']==group and numeric(x['values'][5])for x in accounts)):continue
-   assert money(sub[0][c])==sum((money(x['values'][c])for x in accounts if x['method']==group),Decimal(0)),'subtotal_mismatch'
+   assert money(sub[0][c])==sum((money(x['values'][c])for x in accounts if x['method']==group and x['values'][c]!=''),Decimal(0)),'subtotal_mismatch'
  contract_path='/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json'
  from pathlib import Path
  contract=json.loads(Path(contract_path).read_text())

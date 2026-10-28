@@ -6472,6 +6472,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-b0119-1565071027908775997",
+      "next_step": "Validar app/token/roles e Sheet SA; canário, backup, baseline e repetição limpa antes de reativar",
+      "objective": "Validar e substituir somente B011-8 por B011-9 na mesma rota genérica, preservando canal, cron e demais apps",
+      "source": "data/meta-app-registry.json",
+      "state": "preflight iniciado; item b011-9 localizado por id imutável. b011-8 é a única rota pausada.",
+      "thread_id": "1565005187914141757",
+      "updated_at": "2026-10-28T18:34:00+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-digital-trust-40-1557475850310393879",
       "next_step": "À primeira janela2026-10-10T00:03:20-04:00, wrapper canônico cria no máximo1 e valida popup/ID/owner; manter30min e parar40. Primeiro tick mutante após correção pendente.",
       "objective": "Concluir exatamente40 contas001 na Digital Trust155263197283282, sem billing/permissões novas, a cada30min; retomar à meia-noite ET autorizada1558155693205364737.",
@@ -6503,12 +6513,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Coletar Accounts36targets em lotes6 com pixels;resolverD;readbackfinal.",
-      "objective": "Refresh recorrente mesmos47IDs;sem pagamentos/billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T140324791994",
-      "state": "em execução14:02et;funding47ids11cartão36linha;invoices setembro0;cgij atualizados14:03;d pendente mavroa02;h ainda histórico.",
+      "next_step": "Mesmo job/cadência;preservar lacunas históricas D e reconciliar antes de escrever;nenhum job paralelo. Correções canônicas com regressão/readback.",
+      "objective": "Atualização financeira recorrente47IDs;nenhum pagamento/billing",
+      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T140324791994/closure-current.json",
+      "state": "métricas47/47 atualizadas14:27et,h36/36 verificadas14:04–14:24;11cartão36linha;invoices setembro0;mavroa02d confirmado56usd;d linhavizioid05 já vazio preservado+grow04 sem cobrança localizada;totais/links/ids pass;corrigidos total duplicado por ordinal e validador fbranco;lease livre.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-10-28T18:03:47+00:00"
+      "updated_at": "2026-10-28T18:32:58+00:00"
     },
     {
       "agent": "zeus",
@@ -7702,5 +7712,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T18:31:26+00:00"
+  "updated_at": "2026-10-28T18:34:00+00:00"
 }

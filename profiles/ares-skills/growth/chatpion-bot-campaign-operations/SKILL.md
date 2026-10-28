@@ -115,7 +115,7 @@ Fluxo: preflight vivo → Page/UTM → criativos reconciliados → pre-stage →
 
 ### Clonar campanhas
 
-O contrato da operação declara os modos suportados. Fonte, colisão de naming, Page, mídia, copy, JSON, budget e start são lidos ao vivo. Schema/plan não prova readiness live; recovery reutiliza request e IDs.
+O contrato da operação declara os modos suportados. Fonte, colisão de naming, Page, mídia, copy, JSON, budget e start são lidos ao vivo. Reconcilie a hierarquia com paginação completa e conte conjuntos/anúncios e seus estados em código; um sufixo no nome da campanha não comprova quantidade nem autoriza reativar filhos pausados. Schema/plan não prova readiness live; recovery reutiliza request e IDs.
 
 ### Corte e ROAS
 
@@ -158,15 +158,15 @@ A sincronização edita somente a mensagem de projeção controlada pelo Ares. M
 
 ## Onboarding de nova operação
 
-1. Registrar identidade e ownership sem copiar state da fonte.
-2. Validar conta e capabilities em read-only.
-3. Criar contrato isolado começando fail-closed.
-4. Registrar threads, prompts e membros obrigatórios.
-5. Validar relatórios read-only.
-6. Preparar criação/clone por manifest.
-7. Executar canário autorizado e provar serving.
-8. Liberar controlled-write.
-9. Liberar automação por último, após inventário de cron.
+1. Registrar identidade, ownership, escopo e autoridade sem copiar state da fonte. Separar vínculo da thread, aprovação de onboarding, delegação financeira/ativação e OK final do request; uma camada não comprova as demais. Interpretar uma confirmação curta pelo pedido de aprovação ao qual ela responde, sem usá-la para resolver outra pergunta pendente de horário.
+2. Validar conta e capabilities em read-only, incluindo Business, moeda e timezone. Resolver a Page pela hierarquia da campanha exata. Acesso à conta não comprova acesso à Page nem identifica, sozinho, o perfil anunciante correto; não transformar um token que lê a conta em credencial operacional por conveniência.
+3. Criar contrato isolado começando fail-closed. Se houver cadastro parcial, manter o consumidor como candidato, sem modos executáveis ou credencial presumida, até validar as dependências. Registrar separadamente autoridade aprovada e readiness pendente, para não cobrar novamente uma autorização já concedida. Receita e aceite: `references/operation-contract-schema.md`, seção de cadastro parcial.
+4. Registrar threads, prompts e membros obrigatórios sem alterar consumidores ou rotas de outras contas.
+5. Validar relatórios read-only e as dependências necessárias à modalidade solicitada; não usar erro de Page como prova automática de scope ausente nem ampliar permissões no onboarding sem o gate próprio.
+6. Preparar criação/clone por manifest somente após readiness. Manter o request original e os parâmetros literais durante a preparação; resolver ambiguidades comerciais e apresentar o resumo para OK antes do write.
+7. Executar canário somente com autorização específica e distinguir status configurado de serving comprovado.
+8. Liberar controlled-write somente após os gates aplicáveis e verificar que contas e consumidores preexistentes permaneceram inalterados.
+9. Liberar automação por último, após inventário de cron e autorização própria. No fechamento, distinguir cadastro salvo, validação read-only, execução liberada e campanha efetivamente criada; configuração parcial nunca é onboarding concluído.
 
 Nunca herdar implicitamente IDs, budgets, thresholds, Pages, pixels, eventos, JSON, horários, denylist, holds, baselines ou autonomia financeira.
 
@@ -174,6 +174,8 @@ Nunca herdar implicitamente IDs, budgets, thresholds, Pages, pixels, eventos, JS
 
 - skill e contrato da família não contêm identidade de consumidor;
 - consumidor resolve para um único contrato e conjunto de threads;
+- onboarding parcial permanece candidato e falha antes do transporte; autoridade aprovada não é confundida com readiness ou OK de publicação;
+- conta e Page são verificadas separadamente, e a contagem da hierarquia vem da API, não do nome da campanha;
 - nome operacional + ID com nota interna entre parênteses mantém o mesmo binding e não cria alias a partir da nota;
 - definição de finalidade da thread não dispara execução, e correção de nota interna não altera a conta nem outras threads;
 - cada parâmetro obrigatório tem origem explícita na operação;
