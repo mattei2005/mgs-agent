@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T14:35:49.118248-04:00",
+    "updated_at": "2026-10-28T14:38:58.180071-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -55612,8 +55612,8 @@
       "id": "meta-b0119-cutover-1565071027908775997",
       "agent": "zeus",
       "type": "app_monitor_cutover",
-      "status": "validated_manual_cycles",
-      "updated_at": "2026-10-28T14:35:49.118248-04:00",
+      "status": "validated",
+      "updated_at": "2026-10-28T14:38:58.180071-04:00",
       "source_message_id": "1565071027908775997",
       "thread_id": "1565005187914141757",
       "replacements": {
@@ -55652,7 +55652,31 @@
       "script_changes": false,
       "gateway_restart": false,
       "knowledge_id": "decision-meta-roles-b0119-20261028",
-      "checkpoint_id": "meta-b0119-1565071027908775997"
+      "checkpoint_id": "meta-b0119-1565071027908775997",
+      "scheduled_cycle": "12 active routes processed, zero errors; B011-9 healthy",
+      "final_readback": {
+        "roles": 6,
+        "assigned": 10,
+        "present": 6,
+        "missing": [
+          "Eliana Moura Burgos",
+          "Ky Păc",
+          "Andhinda Asyani Putri",
+          "Alexandre Dias"
+        ],
+        "sheet_mismatches": [],
+        "alert_card_id": "1565072224862478357",
+        "alert_message_ids": [
+          "1565072224862478357",
+          "1565072228784152629",
+          "1565072231212781569"
+        ],
+        "automatic_users_table_rows": 6,
+        "remaining_pauses": [],
+        "report_message_id": "1565071611072225516"
+      },
+      "report_message_id": "1565071611072225516",
+      "report_readback": "PASS exact channel/message, one native embed, empty content, zero mentions/thread"
     }
   ],
   "profile_skill_references": [

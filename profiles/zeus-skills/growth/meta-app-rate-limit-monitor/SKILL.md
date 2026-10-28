@@ -1,6 +1,6 @@
 ---
 name: meta-app-rate-limit-monitor
-description: "Use when setting up, validating, monitoring, or troubleshooting MGS Meta/Facebook Developer apps B001–B013 for Messenger/ChatPion/DigitalTrChat rate-limit health, token status, app availability, and Openzed/B007 operational risk."
+description: "Use when monitoring or replacing MGS Meta apps."
 version: 1.0.1
 author: Hermes Agent
 license: MIT
@@ -11,6 +11,10 @@ metadata:
 ---
 
 # Meta App Rate Limit Monitor — MGS
+
+## When to Use
+
+Use for app replacements, rate-limit/token health, segurador membership or DTR-link audits, Sheet reconciliation and current app-channel alerts. Resolve generations from the registry: generic role-based lineages and the dedicated B013 DTR/ChatPion lineage have different evidence and runners.
 
 ## Progressive disclosure — mandatory
 
@@ -26,11 +30,13 @@ Completion criterion: only the procedure and evidence required for the current a
 
 - Resolve the active app generations and destinations from the live registry. Treat the B001–B012 lineages as role-based and the B013 lineage as the dedicated DTR/ChatPion route; never infer current generations from historical examples.
 - Treat Rodolfo's new, exact completed replacement report (`old→new`) as authorization to validate, update and reactivate that same existing monitor route. Preserve its channel, runner and unrelated pauses; require preflight, backup, fresh app-scoped state, silent baseline, clean repeat and readback. This does not authorize credential rotation or broader changes. Follow the replacement procedure in `references/route-pack-05.md`.
+- Close a replacement with a fresh target-specific scheduled-cycle receipt and fresh Service Account Sheet parity, not only a successful manual invocation. Use that latest verified cycle for the final present/assigned count: acceptances can legitimately increase during onboarding. Verify any resulting native automatic alert and its complete user table; do not force an extra alert just to demonstrate reactivation. Compare pause sets before/after and remove only the authorized predecessor/replacement containment.
 - Interpret a recheck as fresh verification, not permission to resend alerts or rewrite healthy monitors. When Rodolfo explicitly requests **check first, then send real alerts to all apps**, finish the verification before publication and verify the new delivery in every requested channel before answering. For **send updated alerts to all channels**, execute the native force-live routes with fresh source reads and complete delivery readback; do not expand this into a separate fleet audit or rewrite healthy configuration. Reconcile screenshot channel labels with live channel IDs and registry generations, not stale stored channel names.
 - Keep app health, individual membership/link status, investment availability and revenue separate. A healthy app can still have assigned profiles awaiting entry or reconnection; report those profiles without calling the app restricted or claiming that every profile is connected.
+- For B013, preserve the last confirmed connection verdict separately from fresh diagnostic observations. An unknown/read-failure→linked recovery is not a new member without a confirmed prior disconnection; a new canonical Sheet assignment is a separate monitoring-scope event. Deduplicate movements by composed identity and confirmed transition, never by event counts alone. Keep unknown observations fail-closed without carrying stale successful token/page fields into them; use `references/b013-confirmed-link-transitions.md` for the audit and regression procedure.
 - Interpret `INVEST HOJE` and `INVEST 3D` as spend, not revenue. `n/d` is unavailable data or an unmatched profile, never proof of zero revenue. Show numeric zero only when the source explicitly provides it; label today's totals as partial and use the preceding three completed dates for the three-day metric.
 - Explain corrections plainly: a repaired generator does not retroactively update Discord messages already sent. Distinguish old messages from newly requested alerts, and do not imply that a paused route will publish a replacement automatically.
-- Match the closing report to the request. For alert delivery only, confirm the programmatically verified delivered/requested channel count and freshness in one or two sentences; mention only material pending work or recovered delivery issues. For audits, separately report monitor/cron health, numeric versus source-unmatched rows and named membership/link gaps. Keep technical traces and proof files out of the response unless requested.
+- Match the closing report to the request. For alert delivery only, confirm the programmatically verified delivered/requested channel count and freshness in one or two sentences; mention only material pending work or recovered delivery issues. For a routine replacement, report the new label, preserved route, scheduled health and latest present/assigned count with remaining onboarding gaps; do not turn it into a fleet audit. For audits, use numbered findings with **Problema, Causa e Solução**, distinguish confirmed causes from unavailable historical evidence, and separate monitor health from named membership/link gaps and source-unmatched investment rows. Keep technical traces and proof files out of the response unless requested.
 
 ## Operational route packs
 
