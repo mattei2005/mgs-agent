@@ -1,0 +1,227 @@
+{
+  "id": "meta-live-alerts-1565020614463463606",
+  "agent": "zeus",
+  "type": "requested_live_alert_delivery",
+  "status": "validated",
+  "updated_at": "2026-10-28T11:34:45.150429-04:00",
+  "source_message_id": "1565020614463463606",
+  "thread_id": "1565005187914141757",
+  "evidence": "/root/mgs-agent/reports/meta-app-alerts-1565020614463463606",
+  "validation": {
+    "requested": 13,
+    "verified": 13,
+    "apps": [
+      "B001-5",
+      "B002-5",
+      "B003-3",
+      "B004-10",
+      "B005-4",
+      "B006-8",
+      "B007-4",
+      "B008-3",
+      "B009-5",
+      "B010-3",
+      "B011-8",
+      "B012-2",
+      "B013-7"
+    ],
+    "numeric_inventory_rows": 188,
+    "source_unmatched_inventory_rows": 6,
+    "pending": []
+  },
+  "alerts": [
+    {
+      "app": "B001-5",
+      "channel_id": "1521251196294135858",
+      "embed_id": "1565021464741285970",
+      "message_ids": [
+        "1565021464741285970",
+        "1565021465806508084",
+        "1565021467295612949"
+      ]
+    },
+    {
+      "app": "B002-5",
+      "channel_id": "1521251220130496723",
+      "embed_id": "1565021468994048083",
+      "message_ids": [
+        "1565021468994048083",
+        "1565021470231625779",
+        "1565021471846436885"
+      ]
+    },
+    {
+      "app": "B003-3",
+      "channel_id": "1521251246860931223",
+      "embed_id": "1565021473255587841",
+      "message_ids": [
+        "1565021473255587841",
+        "1565021474539053107",
+        "1565021475662991531"
+      ]
+    },
+    {
+      "app": "B004-10",
+      "channel_id": "1521251334496456815",
+      "embed_id": "1565021476849983628",
+      "message_ids": [
+        "1565021476849983628",
+        "1565021477969858732",
+        "1565021479102456001"
+      ]
+    },
+    {
+      "app": "B005-4",
+      "channel_id": "1521251961662341160",
+      "embed_id": "1565021480482504815",
+      "message_ids": [
+        "1565021480482504815",
+        "1565021481618903114",
+        "1565021485335052399"
+      ]
+    },
+    {
+      "app": "B006-8",
+      "channel_id": "1521252068319297666",
+      "embed_id": "1565021486455202015",
+      "message_ids": [
+        "1565021486455202015",
+        "1565021488392839349",
+        "1565021491534372875"
+      ]
+    },
+    {
+      "app": "B007-4",
+      "channel_id": "1520510823426949313",
+      "embed_id": "1565021492679540777",
+      "message_ids": [
+        "1565021492679540777",
+        "1565021494705127667",
+        "1565021496324128990"
+      ]
+    },
+    {
+      "app": "B008-3",
+      "channel_id": "1521252172929564744",
+      "embed_id": "1565021498064773140",
+      "message_ids": [
+        "1565021498064773140",
+        "1565021499369332837",
+        "1565021500648460379"
+      ]
+    },
+    {
+      "app": "B009-5",
+      "channel_id": "1521252284623884288",
+      "embed_id": "1565021501931921570",
+      "message_ids": [
+        "1565021501931921570",
+        "1565021503362306049",
+        "1565021504788365404"
+      ]
+    },
+    {
+      "app": "B010-3",
+      "channel_id": "1521252369331916902",
+      "embed_id": "1565021506189266968",
+      "message_ids": [
+        "1565021506189266968",
+        "1565021508315910297",
+        "1565021510144495658"
+      ]
+    },
+    {
+      "app": "B011-8",
+      "channel_id": "1537256907373289575",
+      "embed_id": "1565021512396836915",
+      "message_ids": [
+        "1565021512396836915",
+        "1565021513701130321",
+        "1565021514988789912"
+      ]
+    },
+    {
+      "app": "B012-2",
+      "channel_id": "1537256951879172136",
+      "embed_id": "1565021516725485658",
+      "message_ids": [
+        "1565021516725485658",
+        "1565021518717648897",
+        "1565021520064024632"
+      ]
+    },
+    {
+      "app": "B013-7",
+      "channel_id": "1522830283240505385",
+      "embed_id": "1565025656721514561",
+      "message_ids": [
+        "1565025656721514561",
+        "1565025689428820080",
+        "1565025690846240959",
+        "1565025692524093471",
+        "1565025694885613630"
+      ]
+    }
+  ],
+  "b013_summary": {
+    "targets": 54,
+    "linked": 51,
+    "unlinked_confirmed": 3,
+    "unknown": 0,
+    "not_linked_or_error": 3,
+    "total_dtr_pages_visible": 392,
+    "total_graph_pages": 378,
+    "total_connected_pages": 374,
+    "linked_debug_valid": 51,
+    "linked_accounts_status_200": 51,
+    "linked_dtr_pages_zero_graph": 0,
+    "planned_scope_removals": 0,
+    "app_capability": {
+      "status": "healthy",
+      "linked_accounts": 51,
+      "debug_valid": 51,
+      "accounts_status_200": 51,
+      "dtr_pages_visible": 392,
+      "graph_pages_visible": 378,
+      "dtr_pages_zero_graph_accounts": 0,
+      "checked_at": "2026-10-28T11:33:12-04:00"
+    },
+    "sheet_sync": {
+      "enabled": true,
+      "checked_rows": 54,
+      "marked": 3,
+      "unknown_preserved": 0,
+      "updates_needed": 1,
+      "updated": true,
+      "checked_at": "2026-10-28T11:33:12-04:00",
+      "updated_cells": 1,
+      "updated_ranges": 1
+    },
+    "alert_profiles": {
+      "profile": "Giselle Santos",
+      "backup_profile": "Emgai Datquang"
+    },
+    "possible_restriction_gate": {
+      "status": "no_candidate",
+      "persistent_debug_failures": 0,
+      "capability_status": "healthy"
+    },
+    "invest_3d": {
+      "status": "INVEST_3D_OK",
+      "current_date": "2026-10-28",
+      "current_day_partial": true,
+      "period_start": "2026-10-25",
+      "period_end": "2026-10-27",
+      "days": 3,
+      "error": null
+    },
+    "alerts_sent": 1
+  },
+  "recovery": [
+    "B013 foreground tool terminated after real 420s limit; exact channel readback found zero new messages and no surviving writer. Same request resumed once with sufficient silent tracked runtime and canonical lock; completed and read back.",
+    "Local validator initially required generic removals heading on B013; exact native B013 confirmed-removals heading accepted after readback; no alert replay."
+  ],
+  "configuration_changes": false,
+  "credential_changes": false,
+  "scripts_changed": false
+}

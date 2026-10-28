@@ -1,0 +1,84 @@
+{
+  "type": 0,
+  "content": "",
+  "mentions": [],
+  "mention_roles": [],
+  "attachments": [],
+  "embeds": [
+    {
+      "type": "rich",
+      "title": "REPORT-INFRA — modificada",
+      "color": 3447003,
+      "fields": [
+        {
+          "name": "Ação",
+          "value": "modificada",
+          "inline": true
+        },
+        {
+          "name": "Tipo",
+          "value": "estado operacional/audit",
+          "inline": true
+        },
+        {
+          "name": "Host",
+          "value": "srv1767265",
+          "inline": true
+        },
+        {
+          "name": "Path",
+          "value": "data/agent-checkpoints.json; data/infra-inventory.json; reports/meta-app-alerts-1565020614463463606/",
+          "inline": false
+        },
+        {
+          "name": "Motivo",
+          "value": "Pedido de Rodolfo 1565020614463463606: alerta live atualizado em todos os 13 canais de status exibidos.",
+          "inline": false
+        },
+        {
+          "name": "Evidência",
+          "value": "13/13 entregues e readback completo de embed+tabelas; 194 linhas de inventário. Genérico 12 apps, zero erros e 12 alertas. B013 dedicado saudável: 54 alvos, 51 vinculados, 3 desligados, zero inconclusivos; SA readback sem divergência. Timeout foreground recuperado com execução silenciosa única após provar zero entrega; sem duplicar. Configs/credenciais/scripts produtivos inalterados.",
+          "inline": false
+        },
+        {
+          "name": "Pendências Hermes",
+          "value": "total=0 | >=24.0h=0 | mais antiga=0.0h",
+          "inline": false
+        },
+        {
+          "name": "Horário",
+          "value": "2026-10-28 11:34:45 EDT",
+          "inline": true
+        }
+      ],
+      "content_scan_version": 0
+    }
+  ],
+  "timestamp": "2026-10-28T15:34:45.849000+00:00",
+  "edited_timestamp": null,
+  "flags": 0,
+  "components": [],
+  "id": "1565026044761735300",
+  "channel_id": "1498132022634483894",
+  "author": {
+    "id": "1496296175014252634",
+    "username": "Zeus",
+    "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+    "discriminator": "2591",
+    "public_flags": 0,
+    "flags": 0,
+    "bot": true,
+    "banner": null,
+    "accent_color": null,
+    "global_name": null,
+    "avatar_decoration_data": null,
+    "collectibles": null,
+    "display_name_styles": null,
+    "banner_color": null,
+    "clan": null,
+    "primary_guild": null
+  },
+  "pinned": false,
+  "mention_everyone": false,
+  "tts": false
+}
