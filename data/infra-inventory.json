@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T12:36:02-04:00",
+    "updated_at": "2026-10-28T14:08:08.691454-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -896,7 +896,10 @@
       "id": "sb-roi-e-1565040840550645892",
       "agent": "zeus",
       "type": "bounded_readonly_projection_and_ares_ownership_correction",
-      "human_authority_message_ids": ["1565040840550645892", "1565042557128413245"],
+      "human_authority_message_ids": [
+        "1565040840550645892",
+        "1565042557128413245"
+      ],
       "handoff_message_id": "1565041188543791320",
       "source_thread_id": "1564744929660637264",
       "paths": [
@@ -910,7 +913,10 @@
       ],
       "projection_sha256": "23081364a9f086890874f767d75e42ef91497511f68b011177d612826e640097",
       "validation_sha256": "a46719202f821e59b88d21c0d65da8ea12ff179bdf4003c5518340a870ab570a",
-      "projection_delivery_ids": ["1565042558093103305", "1565042560022352035"],
+      "projection_delivery_ids": [
+        "1565042558093103305",
+        "1565042560022352035"
+      ],
       "projection_delivery_readback": true,
       "validation": "3 publishers exact, 155 current-date rows, performance/delay HTTP201 and Domain HTTP200; Decimal and duplicate/conflict fixtures pass. Ares original analysis read back in1565043008200642643 and1565043009504940123.",
       "access_diagnosis": "Ares own identity /user/validate HTTP200 with publisher role but no atual-fnc company; exact scoped report403 despite valid token/refresh and Origin. Local catalog allowance does not equal remote provider grant.",
@@ -921,7 +927,11 @@
       "access_revalidation_1565052931789684958": {
         "authority_message_id": "1565052931789684958",
         "evidence": "reports/ares/sb-roi-e-access-revalidation-1565052931789684958.json",
-        "provider_http": [201, 201, 201],
+        "provider_http": [
+          201,
+          201,
+          201
+        ],
         "identity_validate_http": 200,
         "atual_fnc_present": true,
         "canonical_client_success_count": 2,
@@ -55436,6 +55446,56 @@
       "report_readback_ok": true,
       "preserved_later_authority": "1565033982603829441",
       "skill_learning": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/functional-route-consolidation.md"
+    },
+    {
+      "id": "meta-b0069-cutover-1565063938130059275",
+      "agent": "zeus",
+      "type": "app_monitor_cutover",
+      "status": "validated_manual_cycles",
+      "updated_at": "2026-10-28T14:08:08.691454-04:00",
+      "source_message_id": "1565063938130059275",
+      "thread_id": "1565005187914141757",
+      "replacements": {
+        "B006-8": "B006-9"
+      },
+      "canonical_source": "data/meta-app-registry.json",
+      "channel_id": "1521252068319297666",
+      "onepassword_item_id": "roq46dh6er4aw7exhlzm55menu",
+      "backup": "/root/mgs-agent/backups/meta-app-b0068-to-b0069-1565063938130059275",
+      "validation": {
+        "graph_checks_http_200": true,
+        "token_valid_app_bound": true,
+        "roles": 2,
+        "sheet_assigned": 11,
+        "sheet_present": 2,
+        "sheet_missing": [
+          "Rori Ginbresil Ginting",
+          "Edleide Gomes",
+          "Valentino Simanjuntak",
+          "Millena Kelly",
+          "Simone Oliveira",
+          "SobiRin Kemana Mana",
+          "Isidoro Cristina Barbosa Martins",
+          "Anre Kameza",
+          "Jayadi Thaha Patonangi"
+        ],
+        "sheet_mismatches": [],
+        "canary_silent": true,
+        "baseline_silent": true,
+        "clean_second_cycle": true,
+        "unpaused_cycle_errors": 0,
+        "unpaused_cycle_alerts": 0,
+        "fresh_app_scoped_state": true
+      },
+      "preserved_pauses": [
+        "B009-5",
+        "B011-8"
+      ],
+      "credential_changes": false,
+      "script_changes": false,
+      "gateway_restart": false,
+      "knowledge_id": "decision-meta-roles-b0069-20261028",
+      "checkpoint_id": "meta-b0069-1565063938130059275"
     }
   ],
   "profile_skill_references": [

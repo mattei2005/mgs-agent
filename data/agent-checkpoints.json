@@ -6442,6 +6442,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-b0069-1565063938130059275",
+      "next_step": "Validar app/token/roles/Sheet SA; canário e backup antes de produção",
+      "objective": "Validar e substituir somente B006-8 por B006-9 na mesma rota, preservando canal, cron e pausas de outros apps",
+      "source": "data/meta-app-registry.json",
+      "state": "preflight iniciado: b006-8 pausado, item b006-9 localizado por id imutável; b009-5 e b011-8 também pausados e serão preservados",
+      "thread_id": "1565005187914141757",
+      "updated_at": "2026-10-28T18:06:05+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-digital-trust-40-1557475850310393879",
       "next_step": "À primeira janela2026-10-10T00:03:20-04:00, wrapper canônico cria no máximo1 e valida popup/ID/owner; manter30min e parar40. Primeiro tick mutante após correção pendente.",
       "objective": "Concluir exatamente40 contas001 na Digital Trust155263197283282, sem billing/permissões novas, a cada30min; retomar à meia-noite ET autorizada1558155693205364737.",
@@ -7672,5 +7682,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T18:04:13+00:00"
+  "updated_at": "2026-10-28T18:06:05+00:00"
 }
