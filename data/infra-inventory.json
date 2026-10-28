@@ -55357,6 +55357,30 @@
       "historical_transport_cause": "Individual item_check_failed exceptions were overwritten by later snapshots; exact historical transport exception not recoverable. The wrong recovery-to-added classification is proven by day reports and executable regression.",
       "report_message_id": "1565034612617388066",
       "report_readback": "PASS exact channel/message, one native embed, empty content, no mentions/thread"
+    },
+    {
+      "id": "ZEUS-EGGBEV-01-ROUTE-1565033184574308513",
+      "agent": "zeus",
+      "type": "route-consolidation",
+      "source": "discord:1541578556037927053/1565033184574308513",
+      "thread_id": "1541578556037927053",
+      "account_id": "1034081997659047",
+      "paths": [
+        "data/ares/discord/eggbev-fixed-routes.json",
+        "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json",
+        "data/ares/meta-ads/strategy-families/chatpion-bot-messenger-consumers.json",
+        "profiles/ares-config.yaml",
+        "context/ares-operational-map.md",
+        "context/routes.md",
+        "scripts/ares-eggbev-creation-config-report.py",
+        "scripts/ares-eggbev-clone-config-report.py",
+        "tests/test_eggbev_fixed_routes.py"
+      ],
+      "evidence": "work/eggbev-01-route-1565033184574308513/verification.json",
+      "updated_at": "2026-10-28T16:12:51.631116+00:00",
+      "meta_writes": 0,
+      "approval_gates_unchanged": true
     }
   ],
   "profile_skill_references": [
@@ -60327,7 +60351,10 @@
       {
         "name": "content-site-vertical-operations",
         "category": "wordpress",
-        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/SKILL.md",
+        "authority_source": "data/atena/editorial-manager-authority.json#/thread_execution_communication",
+        "authority_message_id": "1565035286902214860",
+        "purpose": "ContentOps: executar pedidos autorizados de Raquel sem reautorização genérica e sem menções/handoff público rotineiro entre agentes; gates protegidos preservados"
       },
       {
         "name": "yoast-wordpress",

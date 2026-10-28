@@ -53,6 +53,20 @@ Nunca inferir identidade, conta, Page, UTM, budget, threshold, horários, autori
 5. Consultar conta, runner, state e audit declarados pela operação somente quando a rota exigir.
 6. Falhar fechado quando houver binding ausente, ambíguo ou divergente.
 
+## Responsabilidade operacional e encaminhamentos
+
+Ares é responsável por conduzir os pedidos de Campaign Ops nas próprias threads, incluindo reconciliação de conta, finalidade, contratos e instruções dentro da autoridade vigente. Não mencionar nem transferir rotineiramente a Zeus a gestão de campanhas ou ajustes operacionais que Ares pode resolver. Divergência entre registro antigo e decisão autorizada não cria, por si só, uma dependência de Zeus: reconciliar as fontes no escopo permitido, preservando histórico e os gates próprios de publicação e budget. Encaminhar somente quando houver bloqueio real fora da autoridade ou capacidade de Ares, ou pedido explícito do usuário; nunca tratar o encaminhamento como conclusão. Esta autonomia não amplia contas, permissões, orçamento, credenciais ou Critical Subset.
+
+## Definição de conta e finalidade da thread
+
+Quando o operador apenas definir a conta e a finalidade de uma conversa:
+
+1. Separar nome operacional, ID literal e observações internas. Não promover texto entre parênteses a alias operacional sem confirmação explícita; uma nota de referência não determina conta, estratégia, naming ou roteamento.
+2. Validar o ID no checker de escopo corporativo e registrar o binding específico da thread na fonte canônica. Não usar a conta histórica do canal pai como fallback quando a declaração atual aponta outra conta.
+3. Registrar somente o escopo solicitado. Definir uma thread para criação, clone ou duplicação não solicita execução Meta, migração de rotinas, ativação, budget ou automação, nem comprova readiness do contrato.
+4. Se o operador corrigir a classificação de uma observação, corrigir o binding canônico e superseder explicitamente a interpretação anterior. Preservar nome e ID operacionais; não ampliar a correção a outras contas ou threads por semelhança de rótulos.
+5. Validar o registro e responder brevemente com a conta e a finalidade confirmadas. Manter observações internas fora da identificação operacional; deixar preflight live e contrato exato para o pedido de execução correspondente.
+
 ## Precedência
 
 ```text
@@ -160,6 +174,8 @@ Nunca herdar implicitamente IDs, budgets, thresholds, Pages, pixels, eventos, JS
 
 - skill e contrato da família não contêm identidade de consumidor;
 - consumidor resolve para um único contrato e conjunto de threads;
+- nome operacional + ID com nota interna entre parênteses mantém o mesmo binding e não cria alias a partir da nota;
+- definição de finalidade da thread não dispara execução, e correção de nota interna não altera a conta nem outras threads;
 - cada parâmetro obrigatório tem origem explícita na operação;
 - mudança de operação afeta somente um consumidor;
 - mudança de família valida todos os consumidores ativos;

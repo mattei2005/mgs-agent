@@ -801,7 +801,38 @@ discord:
       - Relatório sob pedido usa dados vivos e mostra todas as páginas ativas reconciliadas; proximidade LEADS/5000 é indicador de risco, nunca previsão estatística.
 
       - Responder na thread atual; IDs técnicos completos e credenciais ficam no audit, nunca no texto humano.'
-    '1543333373945053184': "INSTRUCAO ESPECIFICA — Eggbev Clone Historico\n\n- SUPERSEDED por Rodolfo Mattei, mensagem 1565033184574308513. Esta thread 1543333373945053184 preserva historico e checkpoints; nao foi deletada nem arquivada.\n- Novos pedidos de criacao, clone ou duplicacao da conta Eggbev-US-CC-EN-01, ID 1034081997659047, pertencem a 1541578556037927053. Direcionar para la sem criar request paralelo, repetir writes ou retomar pedidos antigos.\n- Regras e gates ativos: data/ares/discord/thread-prompts/1541578556037927053.txt e contratos Eggbev. Esta mudanca nao altera autoridade nem aprova execucao."
+    '1543333373945053184': 'INSTRUCAO ESPECIFICA — Eggbev Conta 01 Aquecimento
+
+
+      - Fonte soberana: Rodolfo Mattei, mensagem 1565033982603829441. Esta thread 1543333373945053184 recebe
+      criacao do zero, clone e duplicacao para aquecimento de Pages, exclusivamente na conta Eggbev-US-CC-EN-01,
+      ID 1034081997659047.
+
+      - Esta decisao mais recente supersede o estado historico/redirect atribuido a esta thread pela mensagem
+      1565033184574308513. Titulos manuais, historico e checkpoints sao preservados.
+
+      - Aquecimento: iniciar campanhas de baixo valor, com budget exato definido no pedido. Nao inferir valor,
+      duracao, sucesso nem prazo de restricao. A descricao de bloqueio provisorio de mensagens e contexto
+      do operador, nao evidencia live nem motivo para provocar ou contornar restricoes.
+
+      - Depois do aquecimento, a continuidade de criacao, clone e duplicacao fica na thread 1541578556037927053.
+      Nao migrar objetos, ativar campanhas ou retomar requests antigos automaticamente.
+
+      - Antes de responder, carregar chatpion-bot-campaign-operations e resolver campaign_warmup no contrato
+      Eggbev; escolher campaign_creation_policy ou campaign_cloning_policy pela intencao do pedido. Os procedimentos
+      de ambas as modalidades estao no prompt canonico data/ares/discord/thread-prompts/1541578556037927053.txt:
+      reutilizar somente o mecanismo, responder e manter o request nesta thread durante o aquecimento.
+
+      - Carregar meta-campaign-engine-v3 somente apos fechar o intake. Exigir Page exata/pg_XXXXX, quantidade,
+      budget, assets/copy ou fonte conforme o modo; perguntar somente o que falta. Preservar gates de manifesto,
+      resumo final, OK explicito, autoridade financeira, pre-read e readback real.
+
+      - page_eligibility_policy e denylist permanecem inalteradas: Page com historico de restricao nao pode
+      receber criacao, clone ou reativacao; fazer zero write e pedir outra Page. A passagem do tempo ou a
+      palavra aquecida nao liberam a Page. Revisao dessa politica exige decisao explicita propria de Rodolfo.
+
+      - Nenhum write Meta, cron, budget ou alteracao de restricao foi autorizado por esta definicao de escopo.
+      ROAS, Diario e Limite de Leads continuam nas rotas proprias.'
     '1541578606076231750': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
 
 
@@ -879,39 +910,76 @@ discord:
     '1541578622106865815': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Regras
 
 
-      - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger, conta Eggbev-US-CC-EN-01-G006. O titulo manual atual e preservado; nunca criar uma thread substituta.
+      - Esta thread e a rota canonica de Regras da operacao Eggbev-US-CC-EN BOT/Messenger, conta Eggbev-US-CC-EN-01-G006.
+      O titulo manual atual e preservado; nunca criar uma thread substituta.
 
-      - Antes de responder, carregar `chatpion-bot-campaign-operations` e ler o contrato vivo, a conta, o registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint canonico.
+      - Antes de responder, carregar `chatpion-bot-campaign-operations` e ler o contrato vivo, a conta, o
+      registry `data/ares/discord/eggbev-fixed-routes.json` e o checkpoint canonico.
 
-      - A skill compartilhada define somente os mecanismos da família `chatpion_bot_messenger`. Identidade, conta, budget, thresholds, horários, Pages, writes, crons e exceções continuam exclusivos deste contrato Eggbev.
+      - A skill compartilhada define somente os mecanismos da família `chatpion_bot_messenger`. Identidade,
+      conta, budget, thresholds, horários, Pages, writes, crons e exceções continuam exclusivos deste contrato
+      Eggbev.
 
-      - Toda mudança durável aprovada deve ser classificada: `family` atualiza todos os consumidores ativos; `operation` atualiza somente Eggbev. A projeção obrigatória atualiza a rota afetada e esta thread Regras via `scripts/ares-chatpion-bot-strategy-sync.py`, com GET/readback e sem apagar histórico.
+      - Toda mudança durável aprovada deve ser classificada: `family` atualiza todos os consumidores ativos;
+      `operation` atualiza somente Eggbev. A projeção obrigatória atualiza a rota afetada e esta thread Regras
+      via `scripts/ares-chatpion-bot-strategy-sync.py`, com GET/readback e sem apagar histórico.
 
-      - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia, readiness e roteamento das seis rotas. Nao executar automaticamente o trabalho de Pagina e Limites, Clonar, Corte e ROAS, Diario ou Criar Campanhas dentro de Regras.
+      - Pedidos genericos nesta thread tratam do contrato geral, decisoes, precedencia, readiness e roteamento
+      das seis rotas. Nao executar automaticamente o trabalho de Pagina e Limites, Clonar, Corte e ROAS, Diario
+      ou Criar Campanhas dentro de Regras.
 
-      - Mapa funcional: as seis rotas carregam `chatpion-bot-campaign-operations` e resolvem somente o nó correspondente do contrato Eggbev; Regras orienta e roteia, sem executar a função das demais.
+      - Mapa funcional: as seis rotas carregam `chatpion-bot-campaign-operations` e resolvem somente o nó
+      correspondente do contrato Eggbev; Regras orienta e roteia, sem executar a função das demais.
 
-      - Rotas fixas: Regras `1541578622106865815`; Pagina e Limites `1543312825890381865`; Clonar Campanhas `1541578556037927053` (mesma thread de Criar Campanhas; antiga `1543333373945053184` somente historico/redirect); Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
+      - Rotas fixas: Regras `1541578622106865815`; Pagina e Limites `1543312825890381865`; criacao/clone/duplicacao
+      apos aquecimento `1541578556037927053`; aquecimento da conta 01 com criacao/clone/duplicacao e baixo
+      budget exato por pedido `1543333373945053184`; Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`.
+      Adendo Rodolfo `1565033982603829441` supersede o estado historico/redirect da thread de aquecimento,
+      sem alterar page_eligibility_policy/denylist nem autorizar writes Meta ou cron.
 
-      - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance. Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica ou mensagem antiga nunca reativa regra supersedida.
+      - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance. Contrato MGS e
+      matriz vencem para regra, owner e autoridade. Secao historica ou mensagem antiga nunca reativa regra
+      supersedida.
 
-      - Regras desta thread, mensagens e existencia da rota nao autorizam campanha, cron ou publicacao. Para budget Eggbev, Nicolas pode definir, reduzir ou aumentar sem nova aprovacao do Rodolfo; o valor exato, pre-read e readback Meta continuam obrigatorios. Publicacao de criacao/clone exige resumo final e OK explicito do request.
+      - Regras desta thread, mensagens e existencia da rota nao autorizam campanha, cron ou publicacao. Para
+      budget Eggbev, Nicolas pode definir, reduzir ou aumentar sem nova aprovacao do Rodolfo; o valor exato,
+      pre-read e readback Meta continuam obrigatorios. Publicacao de criacao/clone exige resumo final e OK
+      explicito do request.
 
-      - Padrao prospectivo do Messenger JSON: sempre que o Ares adicionar ou rematerializar JSON em criacao, clone_prestaged, substituicao revisada ou qualquer rota futura equivalente, o Template name deve ser exatamente `JSON-AGT`, com validacao pre-write e readback do JSON instalado. `pure_clone` apenas preserva o creative/JSON da fonte. Nao alterar retroativamente campanhas ja publicadas.
+      - Padrao prospectivo do Messenger JSON: sempre que o Ares adicionar ou rematerializar JSON em criacao,
+      clone_prestaged, substituicao revisada ou qualquer rota futura equivalente, o Template name deve ser
+      exatamente `JSON-AGT`, com validacao pre-write e readback do JSON instalado. `pure_clone` apenas preserva
+      o creative/JSON da fonte. Nao alterar retroativamente campanhas ja publicadas.
 
-      - Regra permanente de elegibilidade de Page: antes de criar, clonar, ativar ou reativar campanha, conjunto ou anuncio Eggbev, consultar `page_eligibility_policy` e a denylist canonica. Page com qualquer historico de restricao fica inelegivel; fazer zero write e solicitar outra Page. Fonte ausente/invalida/ambigua tambem bloqueia. Pausas e relatorios read-only continuam permitidos.
+      - Regra permanente de elegibilidade de Page: antes de criar, clonar, ativar ou reativar campanha, conjunto
+      ou anuncio Eggbev, consultar `page_eligibility_policy` e a denylist canonica. Page com qualquer historico
+      de restricao fica inelegivel; fazer zero write e solicitar outra Page. Fonte ausente/invalida/ambigua
+      tambem bloqueia. Pausas e relatorios read-only continuam permitidos.
 
-      - Corte e ROAS ativo: Fase 1 em 05:00/06:00/08:00/10:00/12:00, com corte quando Spend > USD2 e Purchase ROAS abaixo do threshold vigente. Fase 2 em 13:00/14:00/16:00/18:00/20:00/22:00/23:00, sem gate de gasto. Atraso Smart Bidding nunca interrompe corte por Meta Purchase ROAS; somente reativacoes e indicadores dependentes ficam fail-closed.
+      - Corte e ROAS ativo: Fase 1 em 05:00/06:00/08:00/10:00/12:00, com corte quando Spend > USD2 e Purchase
+      ROAS abaixo do threshold vigente. Fase 2 em 13:00/14:00/16:00/18:00/20:00/22:00/23:00, sem gate de gasto.
+      Atraso Smart Bidding nunca interrompe corte por Meta Purchase ROAS; somente reativacoes e indicadores
+      dependentes ficam fail-closed.
 
-      - Fase 3 roda no ciclo logico das 00:00: usa o dia anterior com spend; anuncio com spend >0 e Purchase ROAS >=0,38; garante somente objetos elegiveis; exclui Page restrita ou com LEADS >5.000; budget CBO persistido US$45/US$65 conforme contrato; DELETED/ARCHIVED nunca volta; cada camada exige readback.
+      - Fase 3 roda no ciclo logico das 00:00: usa o dia anterior com spend; anuncio com spend >0 e Purchase
+      ROAS >=0,38; garante somente objetos elegiveis; exclui Page restrita ou com LEADS >5.000; budget CBO
+      persistido US$45/US$65 conforme contrato; DELETED/ARCHIVED nunca volta; cada camada exige readback.
 
-      - Pagina e Limites: a politica LEADS usa >5.000 com join UTM+FB Page e freshness maxima de 2h, mas o write efetivo permanece em hold/dry-run ate liberacao explicita de Nicolas ou Rodolfo. Restricao DTR #2022 confirmada permanece ativa. A etapa pos-03:00 de spend >USD2 com zero resultado `eggbev-pv-u` foi suspensa por Nicolas em 2026-09-02 03:55 ET e so pode voltar por nova instrucao explicita. LEADS/restricao nao reativam automaticamente.
+      - Pagina e Limites: a politica LEADS usa >5.000 com join UTM+FB Page e freshness maxima de 2h, mas o
+      write efetivo permanece em hold/dry-run ate liberacao explicita de Nicolas ou Rodolfo. Restricao DTR
+      #2022 confirmada permanece ativa. A etapa pos-03:00 de spend >USD2 com zero resultado `eggbev-pv-u`
+      foi suspensa por Nicolas em 2026-09-02 03:55 ET e so pode voltar por nova instrucao explicita. LEADS/restricao
+      nao reativam automaticamente.
 
-      - Crons ativos: ROAS no minuto :10 das horas aprovadas; LEADS em 08:16/20:16 ET; somente restricao DTR em :03/:08/.../:58 com stagger de 30s e lock comum. Zero-pixel esta sem etapa/cron ativo. Diario, Criar e Clonar nao possuem cron ativo. Qualquer cron novo exige inventario global e minuto sem colisao operacional.
+      - Crons ativos: ROAS no minuto :10 das horas aprovadas; LEADS em 08:16/20:16 ET; somente restricao DTR
+      em :03/:08/.../:58 com stagger de 30s e lock comum. Zero-pixel esta sem etapa/cron ativo. Diario, Criar
+      e Clonar nao possuem cron ativo. Qualquer cron novo exige inventario global e minuto sem colisao operacional.
 
-      - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem nova pode reabrir a thread. Nunca excluir ou substituir uma rota fixa por estar arquivada.
+      - Preservar arquivo/historico. Arquivamento automatico nao e delecao; uma mensagem nova pode reabrir
+      a thread. Nunca excluir ou substituir uma rota fixa por estar arquivada.
 
-      - Responder na thread atual. Quando o pedido pertencer a uma rota funcional, indicar a rota exata e executar la; nao duplicar estado nem manter duas versoes ativas da mesma regra.'
+      - Responder na thread atual. Quando o pedido pertencer a uma rota funcional, indicar a rota exata e
+      executar la; nao duplicar estado nem manter duas versoes ativas da mesma regra.'
     '1548149087206121613': 'INSTRUCAO DE THREAD Ares SHEIN G001
 
 

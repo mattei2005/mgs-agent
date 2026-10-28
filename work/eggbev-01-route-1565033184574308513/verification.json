@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "checks": {
+    "campaign_creation_binding": true,
+    "campaign_cloning_binding": true,
+    "mirror_semantic_equal": true,
+    "other_config_unchanged": true,
+    "prompts_readback": true,
+    "warmup_preserved": true,
+    "history_no_deletion": true,
+    "all_campaign_semantics_preserved": true,
+    "engine_contract_nonrouting_unchanged": true,
+    "shared_mode_dispatch": true
+  },
+  "source_message": "1565033184574308513",
+  "handoff": "1565033423813349429",
+  "meta_writes": 0,
+  "restarts": 0,
+  "permission_changes": 0,
+  "tests": {
+    "fixed_routes": 5,
+    "creation_config_report": 9,
+    "clone_v3": 11
+  },
+  "preexisting_version_drift": {
+    "confirmed_preexisting": true,
+    "engine": "3.6.8",
+    "operation": "3.6.1",
+    "report_check": "engine_release_current",
+    "global_regression": "KR-014",
+    "disposition": "not waived; separate maintenance dependency, no production readiness claimed"
+  }
+}

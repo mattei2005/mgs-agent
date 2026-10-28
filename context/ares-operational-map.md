@@ -310,7 +310,7 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 
 - Decisão ativa de Rodolfo Mattei, mensagem `1565033184574308513`: a thread `1541578556037927053`, pai `1539422731727147079`, centraliza criação do zero, clone e duplicação exclusivamente da conta `Eggbev-US-CC-EN-01`, ID literal `1034081997659047` (alias técnico `Eggbev-US-CC-EN-01-G006`).
 - Registry executável: `data/ares/discord/eggbev-fixed-routes.json`; criação e clonagem compartilham a thread, mas selecionam contratos/runners pela intenção explícita do pedido. Não executar ambos nem aplicar defaults de criação a um clone.
-- Supersede somente a separação de destinos: `1543333373945053184` permanece histórico/redirect, sem exclusão, arquivamento, renomeação ou replay de pedidos. Nenhum título manual é alterado.
+- Histórico: a classificação inicial de `1543333373945053184` como histórico/redirect foi supersedida pelo adendo Rodolfo `1565033982603829441`. Essa thread é a rota de Aquecimento; após aquecimento, criação/clone/duplicação continuam em `1541578556037927053`. Não excluir, arquivar, renomear ou fazer replay automático. Nenhum título manual é alterado.
 - Autoridade e gates permanecem: budget exato, preflight, resumo final, OK explícito, início/status aprovados, denylist, modos bloqueados, pre-read/readback, billing, credenciais e Critical Subset. Esta definição de rota não executa campanha, não aprova plano antigo nem altera orçamento, cron ou permissões.
 - Fonte autenticada: `discord:1185714635991679006/1541578556037927053/1565033184574308513`; handoff Ares `1565033423813349429`. Histórico de supersessão no registry; prompts específicos e projeções da configuração alinhados.
 

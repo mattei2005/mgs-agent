@@ -501,7 +501,8 @@
     727362,
     727383,
     727401,
-    727431
+    727431,
+    727563
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2075,6 +2076,36 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|lyzmofinanzas|77|1768": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-28T16:11:38.000Z",
+        "domain": "lyzmofinanzas",
+        "notification_id": 727563,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 2
+        },
+        "pages": 2,
+        "segurador_id": "1768",
+        "segurador_name": "Riza Gabiola",
+        "source": "page_token",
+        "user_email": "disparoslyzmouscces@gmail.com",
+        "user_id": "77",
+        "user_name": "Disparos Lyzmo US-CC-ES"
+      },
+      "last_sent_at": "2026-10-28T12:12:15-04:00",
+      "message_ids": [
+        "1565035480259764258"
+      ],
+      "notification_ids": [
+        727563
+      ],
+      "opened_at": "2026-10-28T12:12:15-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|lyzmo|101|1329": {
       "alert": {
         "company": "digital-trust",
@@ -3612,24 +3643,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-28T11:57:13-04:00",
+  "last_check": "2026-10-28T12:12:15-04:00",
   "last_delivery": {
-    "at": "2026-10-28T08:27:16-04:00",
+    "at": "2026-10-28T12:12:15-04:00",
     "cursor_ids": [
-      727401,
-      727431
+      727563
     ],
     "message_ids": [
-      "1564978856383873025",
-      "1564978860943220736"
+      "1565035480259764258"
     ],
     "notification_ids": [
-      727401,
-      727431
+      727563
     ]
   },
   "last_error": null,
-  "last_seen_id": 727431,
+  "last_seen_id": 727563,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

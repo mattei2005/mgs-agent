@@ -2038,6 +2038,24 @@
       "updated_at": "2026-10-28T16:09:11+00:00"
     },
     {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.page-warmup-route",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T16:11:57+00:00",
+      "id": "ARES-EGGBEV-01-WARMUP-1565033982603829441",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev conta 01: aquecimento separado da continuidade, com criacao clone e duplicacao",
+      "updated_at": "2026-10-28T16:11:57+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565032671669919827.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -3314,6 +3332,24 @@
       "superseded_by": null,
       "title": "Eggbev Conta 02: aquecimento de Pages nesta thread; continuidade na thread de criação",
       "updated_at": "2026-10-28T16:09:35+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1565032888347664495.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T16:10:03+00:00",
+      "id": "ARES-EGGBEV03-WARMUP-THREAD-1565034773725057106",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Conta 03: aquecimento de Pages nesta thread; continuidade na thread de criação",
+      "updated_at": "2026-10-28T16:10:03+00:00"
     },
     {
       "canonical_key": "ares.failure-recovery",
@@ -6370,6 +6406,25 @@
       "superseded_by": "ATENA-SEO58-CACHE-PUBLIC-1564709534868705494",
       "title": "17 imagens substituídas41preservadas;58HTTP/canonical/inline conferidos;pendências técnicas explícitas",
       "updated_at": "2026-10-27T18:46:30+00:00"
+    },
+    {
+      "canonical_key": "content.operations.atena.thread-execution-communication",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations",
+        "discord-thread-communication"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-28T16:11:29.347000+00:00",
+      "id": "ATENA-THREAD-EXECUTION-COMMUNICATION-1565035286902214860",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Atena: executar pedidos autorizados de Raquel sem reautorização nem menções rotineiras nas threads",
+      "updated_at": "2026-10-28T16:13:14+00:00"
     },
     {
       "canonical_key": "atena.wordpress.dedicated_access_contract",
@@ -15168,5 +15223,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T16:09:35+00:00"
+  "updated_at": "2026-10-28T16:13:14+00:00"
 }
