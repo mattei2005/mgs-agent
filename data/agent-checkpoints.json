@@ -2673,12 +2673,12 @@
     {
       "agent": "zeus",
       "id": "SB-FB-ONHOLD-20261027",
-      "next_step": "Consumir scan completo; recuperar somente inconclusivas tecnicas; gerar plano e aplicar canarios + lotes SB com readback",
-      "objective": "Verificar exatamente1625 paginas Facebook autenticado e aplicar status aprovado com preservacao de restricoes",
-      "source": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/before.json",
-      "state": "running;fresh_snapshot1625;29sites;50restriction_dates;pc1_authenticated_scan_started;no_sb_writes",
+      "next_step": "Completar scan no mesmo writer e conjunto; validar controle positivo final; aplicar plano por ID com backup e readback",
+      "objective": "Verificar1625 paginas Facebook autenticado e aplicar criterio aprovado Broadcast/Blocked/inconclusivas com preservacao de restricoes",
+      "source": "/root/.hermes/profiles/zeus/artifacts/sb-facebook-reclassification-20261027/facebook-ledger.jsonl",
+      "state": "running;692of1625_inspected;686visible;6unavailable;0inconclusive;sb_writes0;pc1_profile_kwhvicu_only",
       "thread_id": "1564789767420252264",
-      "updated_at": "2026-10-28T00:24:46+00:00"
+      "updated_at": "2026-10-28T00:51:09+00:00"
     },
     {
       "agent": "zeus",
@@ -7542,5 +7542,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T00:24:46+00:00"
+  "updated_at": "2026-10-28T00:51:09+00:00"
 }
