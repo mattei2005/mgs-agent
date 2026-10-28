@@ -13751,10 +13751,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b0096-20261028",
+      "title": "B009-5 substitui B009-4 no monitor genérico de apps Meta",
+      "updated_at": "2026-10-28T18:23:45+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b009.current-generation",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-28T18:23:45+00:00",
+      "id": "decision-meta-roles-b0096-20261028",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "B009-5 substitui B009-4 no monitor genérico de apps Meta",
-      "updated_at": "2026-09-15T20:39:44+00:00"
+      "title": "B009-6 substitui B009-5 na mesma rota e canal; validado e reativado",
+      "updated_at": "2026-10-28T18:23:45+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b010.current-generation",
@@ -15241,5 +15259,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T18:07:10+00:00"
+  "updated_at": "2026-10-28T18:23:45+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T14:11:53.755339-04:00",
+    "updated_at": "2026-10-28T14:26:42.312791-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -55522,6 +55522,90 @@
         "report_message_id": "1565064647151714305"
       },
       "report_message_id": "1565064647151714305",
+      "report_readback": "PASS exact channel/message, one native embed, empty content, zero mentions/thread"
+    },
+    {
+      "id": "meta-b0096-cutover-1565068130772979823",
+      "agent": "zeus",
+      "type": "app_monitor_cutover",
+      "status": "validated",
+      "updated_at": "2026-10-28T14:26:42.312791-04:00",
+      "source_message_id": "1565068130772979823",
+      "thread_id": "1565005187914141757",
+      "replacements": {
+        "B009-5": "B009-6"
+      },
+      "canonical_source": "data/meta-app-registry.json",
+      "channel_id": "1521252284623884288",
+      "onepassword_item_id": "vz2o3fy7hyy4ms2esnbke2m5qi",
+      "backup": "/root/mgs-agent/backups/meta-app-b0095-to-b0096-1565068130772979823",
+      "validation": {
+        "graph_checks_http_200": true,
+        "token_valid_app_bound": true,
+        "roles": 1,
+        "sheet_assigned": 13,
+        "sheet_present": 1,
+        "sheet_missing": [
+          "Trương Gia Vinh",
+          "Elisangela Alves",
+          "Marcelo Serbai",
+          "Elisa Thompson",
+          "Thanh Hiep",
+          "Agus Husain",
+          "Mas Indro",
+          "Gabriele Aparecida",
+          "Janaina Santos",
+          "Davi Andrade",
+          "Rinny Purnama Tige",
+          "Arif Nugroho"
+        ],
+        "sheet_mismatches": [],
+        "canary_silent": true,
+        "baseline_silent": true,
+        "clean_second_cycle": true,
+        "unpaused_cycle_errors": 0,
+        "unpaused_cycle_alerts": 0,
+        "fresh_app_scoped_state": true
+      },
+      "preserved_pauses": [
+        "B011-8"
+      ],
+      "credential_changes": false,
+      "script_changes": false,
+      "gateway_restart": false,
+      "knowledge_id": "decision-meta-roles-b0096-20261028",
+      "checkpoint_id": "meta-b0096-1565068130772979823",
+      "scheduled_cycle": "11 active routes processed, zero errors; B009-6 healthy",
+      "final_readback": {
+        "roles": 3,
+        "assigned": 13,
+        "present": 3,
+        "missing": [
+          "Marcelo Serbai",
+          "Elisa Thompson",
+          "Thanh Hiep",
+          "Agus Husain",
+          "Mas Indro",
+          "Gabriele Aparecida",
+          "Janaina Santos",
+          "Davi Andrade",
+          "Rinny Purnama Tige",
+          "Arif Nugroho"
+        ],
+        "sheet_mismatches": [],
+        "alert_card_id": "1565069169924382873",
+        "alert_message_ids": [
+          "1565069169924382873",
+          "1565069171488985139",
+          "1565069172545691860"
+        ],
+        "automatic_users_table_rows": 3,
+        "preserved_pauses": [
+          "B011-8"
+        ],
+        "report_message_id": "1565068574597447761"
+      },
+      "report_message_id": "1565068574597447761",
       "report_readback": "PASS exact channel/message, one native embed, empty content, zero mentions/thread"
     }
   ],

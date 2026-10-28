@@ -1122,6 +1122,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-EGGBEV03-ONBOARDING-1565068890860560585",
+      "next_step": "Confirmar autoria live, resolver anunciante correto, validar conta/campanha/Page read-only, materializar contrato isolado fail-closed, exercitar validate/plan sem Meta write e registrar evidencias/REPORT-INFRA.",
+      "objective": "Cadastrar conta03 Eggbev e delegacao Nicolas, aprovados por Rodolfo, separadamente da duplicacao pendente",
+      "source": "data/ares/meta-ads/requests/eggbev03-duplicate-1565063126771040317.json",
+      "state": "rodolfo aprovou onboarding e autoridade budget/ativacao por pedido na mensagem 1565068890860560585. inventariando contrato/credencial existente e estado meta antes de writes de configuracao. zero write meta aprovado por este onboarding; pedido de duplicacao preservado.",
+      "thread_id": "1565032671669919827",
+      "updated_at": "2026-10-28T18:25:41+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-ESCALATEPOWER-ONBOARDING-1559929154030276730",
       "next_step": "Receber os pedidos de campanhas sem renovar aprovação por cadastro; validar parâmetros materiais pela rota central. G006 campanha 120252795396560042 tem nome b01fb06c01 e destino/adset b01fb02c01: não usar como fonte sem conciliação, não alterada neste onboarding. Regressão global KR-014 esperava release antiga, preexistente e fora do escopo.",
       "objective": "Mapear e validar as seis Pages e contas Escalatepower SHEIN autorizadas por Rodolfo",
@@ -6452,6 +6462,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-b0096-1565068130772979823",
+      "next_step": "Nenhuma execução manual pendente; monitor acompanha entrada dos dez perfis na cadência existente",
+      "objective": "Validar e substituir somente B009-5 por B009-6 na mesma rota, preservando canal, cron e pausas de outros apps",
+      "source": "data/meta-app-registry.json",
+      "state": "concluído. app/token/graph válidos; canário, baseline, repetição limpa e ciclo despausado pass. primeiro ciclo agendado: 11 rotas, zero erros; b009-6 avançou de 1 para 3 roles. sa 3/13 presentes, 10 pendentes, zero divergências. família do alerta automático validada no canal 1521252284623884288. pausa b011-8 preservada. report-infra 1565068574597447761 confirmado.",
+      "thread_id": "1565005187914141757",
+      "updated_at": "2026-10-28T18:26:42+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-digital-trust-40-1557475850310393879",
       "next_step": "À primeira janela2026-10-10T00:03:20-04:00, wrapper canônico cria no máximo1 e valida popup/ID/owner; manter30min e parar40. Primeiro tick mutante após correção pendente.",
       "objective": "Concluir exatamente40 contas001 na Digital Trust155263197283282, sem billing/permissões novas, a cada30min; retomar à meia-noite ET autorizada1558155693205364737.",
@@ -7682,5 +7702,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T18:11:53+00:00"
+  "updated_at": "2026-10-28T18:26:42+00:00"
 }

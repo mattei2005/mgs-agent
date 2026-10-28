@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-10-28T14:06:25.664030-04:00",
+  "updated_at": "2026-10-28T14:22:53.592127-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1565063938130059275",
+  "source_message_id": "1565068130772979823",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -87,12 +87,13 @@
       "expected_sheet_roles": 9
     },
     {
-      "app": "B009-5",
+      "app": "B009-6",
       "channel_id": "1521252284623884288",
       "channel_name": "b009-2-app-status",
-      "admin": "Arif Nugroho",
-      "onepassword_item_title": "BOT B009-5 Token - Arif Nugroho",
-      "expected_sheet_roles": 16
+      "admin": "Sem Taimenas",
+      "onepassword_item_title": "BOT B009-6 Token - Sem Taimenas",
+      "expected_sheet_roles": 13,
+      "onepassword_item_id": "vz2o3fy7hyy4ms2esnbke2m5qi"
     },
     {
       "app": "B010-3",
@@ -528,6 +529,13 @@
       "retired_at": "2026-10-28T14:06:25.664050-04:00",
       "source_message_id": "1565063938130059275",
       "backup": "/root/mgs-agent/backups/meta-app-b0068-to-b0069-1565063938130059275"
+    },
+    {
+      "app": "B009-5",
+      "replacement": "B009-6",
+      "retired_at": "2026-10-28T14:22:53.592152-04:00",
+      "source_message_id": "1565068130772979823",
+      "backup": "/root/mgs-agent/backups/meta-app-b0095-to-b0096-1565068130772979823"
     }
   ]
 }
