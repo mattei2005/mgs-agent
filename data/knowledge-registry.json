@@ -7449,6 +7449,24 @@
       "updated_at": "2026-09-12T14:16:28+00:00"
     },
     {
+      "canonical_key": "finance.gam.newsoun-financiamentoautoadx.br",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-28T13:34:53+00:00",
+      "id": "FINANCE-BR-CAR-1564993480487342243",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Newsoun BR Kelly e FinanciamentoAutoAdx BR MGS br-car-br",
+      "updated_at": "2026-10-28T13:34:53+00:00"
+    },
+    {
       "canonical_key": "finance.native-sites-allocation",
       "canonical_source": "docs/finance-system-product-direction.md",
       "consumers": [
@@ -8772,6 +8790,24 @@
       "superseded_by": null,
       "title": "Atualizar busca cotações sob demanda e preserva taxas fixadas e histórico",
       "updated_at": "2026-09-08T21:01:48+00:00"
+    },
+    {
+      "canonical_key": "finance.gam.classification-permanence",
+      "canonical_source": "docs/finance-gam-email-automation.md",
+      "consumers": [
+        "finance-system",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-10-28T13:34:53+00:00",
+      "id": "FINANCE-MAPPING-STANDARD-1564993480487342243",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Classificacoes GAM confirmadas sao padrao salvo excecao explicita",
+      "updated_at": "2026-10-28T13:34:53+00:00"
     },
     {
       "canonical_key": "finance.mfa_all_users",
@@ -14868,5 +14904,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-27T22:23:18+00:00"
+  "updated_at": "2026-10-28T13:34:53+00:00"
 }
