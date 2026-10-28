@@ -15,6 +15,10 @@ metadata:
 
 Skill específica da vertical SHEIN em tráfego direto Meta para os Estados Unidos. Ela isola o segmento SHEIN das regras operacionais de financiamento veicular: ambos usam tráfego direto, mas não compartilham contas, nomes, eventos, bids, budgets, schedules, learning policy, relatórios, criativos ou automações.
 
+## Fechamento e complementos
+
+Usar ROI real no dia fechado; quantidade isolada recebe só número e unidade. Complementos preservam coorte, snapshot e colunas não alteradas. Dias atípicos exigem comparação histórica, não inferência pelo último dia. Receita em `references/smartbidding-product-analysis.md`.
+
 ## Pedidos concorrentes e comunicação — regra permanente
 
 1. Resolver conta, pedido original e recursos envolvidos antes de qualquer retomada; correção técnica rotineira dentro do escopo já autorizado não exige um novo pedido de aprovação.
