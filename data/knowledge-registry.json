@@ -13187,6 +13187,24 @@
     },
     {
       "canonical_key": "meta-app.roles.b004.current-generation",
+      "canonical_source": "data/meta-app-registry.json",
+      "consumers": [
+        "meta-app-roles-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-28T14:16:12+00:00",
+      "id": "decision-meta-roles-b00410-20261028",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B004-10 substitui B004-9 na mesma rota e canal; validado e reativado",
+      "updated_at": "2026-10-28T14:16:12+00:00"
+    },
+    {
+      "canonical_key": "meta-app.roles.b004.current-generation",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-05.md",
       "consumers": [
         "meta-app-roles-watch",
@@ -13252,10 +13270,10 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "decision-meta-roles-b00410-20261028",
       "title": "B004-8 substitui B004-7 no monitor Meta, validado e reativado no mesmo canal",
-      "updated_at": "2026-10-05T15:00:47+00:00"
+      "updated_at": "2026-10-28T14:16:12+00:00"
     },
     {
       "canonical_key": "meta-app.roles.b005.current-generation",
@@ -14904,5 +14922,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T13:34:53+00:00"
+  "updated_at": "2026-10-28T14:16:12+00:00"
 }

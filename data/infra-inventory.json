@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T09:56:22-04:00",
+    "updated_at": "2026-10-28T10:16:47.329354-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -54840,6 +54840,49 @@
       },
       "report_infra_message_id": "1565000953457938463",
       "report_infra_readback": true
+    },
+    {
+      "id": "meta-b00410-cutover-1565005187914141757",
+      "agent": "zeus",
+      "type": "app_monitor_cutover",
+      "status": "validated",
+      "updated_at": "2026-10-28T10:16:47.329354-04:00",
+      "source_message_id": "1565005187914141757",
+      "thread_id": "1565005187914141757",
+      "replacements": {
+        "B004-9": "B004-10"
+      },
+      "canonical_source": "data/meta-app-registry.json",
+      "channel_id": "1521251334496456815",
+      "onepassword_item_id": "hktjckiuh6bkb3s4a67a5ucyim",
+      "backup": "/root/mgs-agent/backups/meta-app-b0049-to-b00410-1565005187914141757",
+      "validation": {
+        "graph_checks_http_200": true,
+        "token_valid_app_bound": true,
+        "roles": 3,
+        "sheet_assigned": 9,
+        "sheet_present": 3,
+        "sheet_missing": [
+          "Adrielly Freitas",
+          "Ahyaruel Monyeng",
+          "Maria Bari",
+          "Milla Fernandes",
+          "Dono Handoko",
+          "Jeriyanto Jeriyanto"
+        ],
+        "sheet_mismatches": [],
+        "silent_baseline": true,
+        "clean_second_cycle": true,
+        "unpaused_cycle_errors": 0,
+        "unpaused_cycle_alerts": 0,
+        "predecessor_state_reused": false
+      },
+      "credential_changes": false,
+      "script_changes": false,
+      "gateway_restart": false,
+      "recovered_local_issue": "Preflight python alias lacked cryptography; rerun with canonical wrapper /usr/bin/python3 passed; no package or runtime modification",
+      "knowledge_id": "decision-meta-roles-b00410-20261028",
+      "checkpoint_id": "meta-b004-10-1565005187914141757"
     }
   ],
   "profile_skill_references": [
