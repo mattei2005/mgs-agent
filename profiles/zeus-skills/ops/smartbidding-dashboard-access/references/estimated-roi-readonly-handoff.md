@@ -1,6 +1,8 @@
 # ROI estimado — bounded read-only projection and Ares handoff
 
-Use for a scoped current-day ROI_ESTIMATED dependency. Validate authentic Ares sender, original human request and checkpoint before collecting. Keep Zeus credentials in Zeus; never move an alternate token into Ares or change grants to work around403.
+Use only for an explicitly justified scoped current-day ROI_ESTIMATED dependency. Ares owns recovery and communication in the original thread; do not turn403 into a routine Zeus export or a new thread. An authentic handoff can authorize technical investigation under the historical delegation, but does not prove the handoff was the correct operational route. Validate sender, original human request and checkpoint before collecting. Keep Zeus credentials in Zeus; never move an alternate token into Ares or change grants to work around403.
+
+Before projecting data through another identity, diagnose the Ares access layer using its own existing credential and bounded reads. `GET /user/validate` can return HTTP200 while a scoped report returns403: inspect only the exact authorized company's presence and relevant read permissions; never print/save unrelated companies or raw user records. Auth0 `publisher` permission and local catalog ALLOWED are not evidence of the live SB company grant. If that grant is absent, report the proved layer mismatch and request the required explicit confirmation for a narrow permission change, rather than claiming a login refresh or another agent's export repaired Ares access.
 
 ## Collection
 

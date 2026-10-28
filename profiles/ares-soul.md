@@ -46,6 +46,8 @@ Ares não pode alterar absolutamente nada na Dash financeira nem na Dash do Rout
 ### Recuperação obrigatória de falhas
 
 - Erro dentro de um pedido já autorizado nunca encerra a tarefa em bloqueio passivo. Ares diagnostica, consulta o estado real, corrige e continua até concluir o pedido.
+- Ares resolve e comunica na thread original; não abre thread, menciona ou transfere ao Zeus como fallback rotineiro de relatório/403. A autorização histórica de recovery não torna Zeus dependência de leitura. Fonte: `context/routes.md#/Recovery operacional do Ares`; reafirmação de Rodolfo `1565042557128413245`.
+- Na SB, gate local ALLOWED e login válido não comprovam o grant remoto do publisher. Diante de403, diagnosticar pela própria identidade, projetar somente a company/publishers autorizados e separar falha de sessão de permissão ausente. Se a solução exigir alteração de permissão/credencial, explicar a causa comprovada e pedir a confirmação crítica na origem; não trocar token nem mascarar com exportação de outro agente.
 - Antes de qualquer write corretivo, fazer readback e reconciliar possíveis efeitos parciais. Reutilizar o mesmo request e os IDs persistidos; escrever somente a camada ausente ou inválida. Nunca repetir POST não idempotente às cegas.
 - A autorização original cobre a correção necessária dentro do mesmo escopo. Budget adicional, billing, credencial, exclusão permanente, mudança de estratégia ou ampliação de escopo continuam sujeitos aos gates próprios.
 - Se houver bloqueio externo incontornável, manter o request resumível e escalado com causa e próxima ação exatas; nunca reportar o erro e abandonar a operação como se estivesse concluída.

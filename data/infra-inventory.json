@@ -893,6 +893,43 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "sb-roi-e-1565040840550645892",
+      "agent": "zeus",
+      "type": "bounded_readonly_projection_and_ares_ownership_correction",
+      "human_authority_message_ids": ["1565040840550645892", "1565042557128413245"],
+      "handoff_message_id": "1565041188543791320",
+      "source_thread_id": "1564744929660637264",
+      "paths": [
+        "reports/ares/sb-roi-e-1565040840550645892.json",
+        "reports/ares/sb-roi-e-1565040840550645892-validation.json",
+        "reports/ares/sb-roi-e-access-diagnosis-1565040840550645892.json",
+        "data/agent-checkpoints.json",
+        "profiles/ares-soul.md",
+        "/root/.hermes/profiles/ares/SOUL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/estimated-roi-readonly-handoff.md"
+      ],
+      "projection_sha256": "23081364a9f086890874f767d75e42ef91497511f68b011177d612826e640097",
+      "validation_sha256": "a46719202f821e59b88d21c0d65da8ea12ff179bdf4003c5518340a870ab570a",
+      "projection_delivery_ids": ["1565042558093103305", "1565042560022352035"],
+      "projection_delivery_readback": true,
+      "validation": "3 publishers exact, 155 current-date rows, performance/delay HTTP201 and Domain HTTP200; Decimal and duplicate/conflict fixtures pass. Ares original analysis read back in1565043008200642643 and1565043009504940123.",
+      "access_diagnosis": "Ares own identity /user/validate HTTP200 with publisher role but no atual-fnc company; exact scoped report403 despite valid token/refresh and Origin. Local catalog allowance does not equal remote provider grant.",
+      "ownership_correction": "Reaffirm existing ARES-SELF-RECOVERY-NO-ROUTINE-HANDOFF-20261009 in live and mirrored Ares SOUL. No routine Zeus thread/export; diagnose and communicate in original request.",
+      "correction_message_id": "1565043535680512031",
+      "correction_readback_exact": true,
+      "status": "analysis_delivered_access_grant_decision_pending",
+      "permission_or_credential_changes": false,
+      "gateway_restarts": false,
+      "report_infra_pending": false,
+      "report_infra": {
+        "message_id": "1565043620644651059",
+        "channel_id": "1498132022634483894",
+        "readback_exact": true,
+        "content_empty": true,
+        "mentions": 0
+      }
+    },
+    {
       "id": "zeus-seo100-technical-finish-1565020677575278655",
       "agent": "zeus",
       "type": "scoped_contentops_existing_renderer_and_selective_cache_execution",

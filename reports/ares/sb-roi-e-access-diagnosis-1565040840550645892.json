@@ -1,0 +1,20 @@
+{
+  "request_id": "SB-ROI-E-1565040840550645892",
+  "correction_authority_message_id": "1565042557128413245",
+  "checked_at": "2026-10-28T16:42:15.392186+00:00",
+  "identity_item": "Ares - Smartbidding Dashboard",
+  "live_identity_name": "Ares",
+  "validate_http": 200,
+  "roles": [
+    "publisher"
+  ],
+  "atual_fnc_present": false,
+  "atual_fnc_permission_projection": [],
+  "scoped_performance_http": 403,
+  "scope_gate": "allowed locally for all three named hosts",
+  "diagnosis": "Valid Ares Auth0 identity but live SB /user/validate omits atual-fnc company. Local catalog allowance is not a remote grant. Exact scoped report returns403; refresh and Origin headers do not grant missing company.",
+  "credential_changes": false,
+  "permission_changes": false,
+  "other_company_data_saved": false,
+  "next_decision": "Explicit confirmation of narrow read-only provider permission change if Rodolfo wants this Ares identity to read the three Atual FNC publishers; no credential substitution."
+}

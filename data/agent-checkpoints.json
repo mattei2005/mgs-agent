@@ -4253,12 +4253,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-SB-ROI-E-1565040840550645892",
-      "next_step": "Validar soma por conjunto/data e cobertura Domain, registrar limitações de AD_ID/AD_NAME e revenue share, congelar arquivo sanitizado/hash, entregar na origem com mention Ares e verificar mensagem.",
-      "objective": "Projeção read-only hoje 28/10 USD de Fcp-team, Naboojobs e Sapogamer para análise ROI estimado do Ares.",
-      "source": "discord:1564744929660637264/1565040840550645892;reports/ares/sb-roi-e-1565040840550645892.json",
-      "state": "handoff ares e comando rodolfo autenticados no discord; coleta própria zeus 3/3 performance http201 e delay http201; domain3/3 http200; 155 linhas exatas de28/10; fórmula viva localizada. validação granularidade/receita e entrega na origem pendentes; sem meta ou alteração credencial/permissão.",
+      "next_step": "Rodolfo confirmar explicitamente alteração de permissão remota de leitura dos três publishers na identidade Ares; se confirmar, readback/backup do cadastro exato, menor escopo, alteração e teste pela própria identidade Ares. Não substituir token nem reexecutar análise já entregue.",
+      "objective": "Recuperar dependência de ROI estimado e corrigir handoff rotineiro/acesso Ares conforme Rodolfo.",
+      "source": "discord:1565041188543791320/1565042557128413245;reports/ares/sb-roi-e-access-diagnosis-1565040840550645892.json;context/routes.md",
+      "state": "projeção155linhas entregue e lida na origem; ares concluiu análise em1565043008200642643/1565043009504940123. correção rodolfo1565042557128413245 aplicada no soul ares vivo/espelho: recovery na origem, sem handoff403 rotineiro. diagnóstico: identidadeares validadahttp200, publisher, semcompanyatual-fnc; relatório403. sem alteração grant/credencial. decisão crítica pendente.",
       "thread_id": "1565041188543791320",
-      "updated_at": "2026-10-28T16:38:19+00:00"
+      "updated_at": "2026-10-28T16:44:16+00:00"
     },
     {
       "agent": "zeus",
@@ -7662,5 +7662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T16:41:44+00:00"
+  "updated_at": "2026-10-28T16:44:16+00:00"
 }
