@@ -504,7 +504,8 @@
     727431,
     727563,
     727682,
-    727703
+    727703,
+    727718
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2266,6 +2267,36 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|mavroa|49|255": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-28T20:12:21.000Z",
+        "domain": "mavroa",
+        "notification_id": 727718,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 6
+        },
+        "pages": 6,
+        "segurador_id": "255",
+        "segurador_name": "Arif Nugroho",
+        "source": "page_token",
+        "user_email": "disparosmavroaes@gmail.com",
+        "user_id": "49",
+        "user_name": "Disparos Mavroa US-CC-ES"
+      },
+      "last_sent_at": "2026-10-28T16:27:14-04:00",
+      "message_ids": [
+        "1565099646022459554"
+      ],
+      "notification_ids": [
+        727718
+      ],
+      "opened_at": "2026-10-28T16:27:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|newsounde|15|290": {
       "alert": {
         "company": "digital-trust",
@@ -3676,22 +3707,21 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-28T16:12:17-04:00",
+  "last_check": "2026-10-28T16:27:14-04:00",
   "last_delivery": {
-    "at": "2026-10-28T16:12:17-04:00",
+    "at": "2026-10-28T16:27:14-04:00",
     "cursor_ids": [
-      727682,
-      727703
+      727718
     ],
     "message_ids": [
-      "1565095884574818367"
+      "1565099646022459554"
     ],
     "notification_ids": [
-      727703
+      727718
     ]
   },
   "last_error": null,
-  "last_seen_id": 727703,
+  "last_seen_id": 727718,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
