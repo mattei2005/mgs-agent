@@ -17,6 +17,15 @@ When the task is “does Facebook show the unavailable-content warning?”, eith
 
 Never classify login-wall pages as available.
 
+### Bounded pilot before bulk reclassification
+
+- When Rodolfo requests a ten-page pilot before bulk status changes, pause the earlier bulk writer and freeze ten exact live `FB_PAGE_ID` identities, including the known unavailable control page. Record the sample independently from the full pending universe; do not generalize its result to all pages.
+- Open each `https://www.facebook.com/{FB_PAGE_ID}` in an existing authenticated Facebook profile through the governed PC1 route. Recover a failed MCP connection by inspecting real PC1/API state before retrying or using the private stdio bridge; never interpret a transport failure as page unavailability.
+- Accept visible page identity plus actual public page content as **content visible**. Accept the explicit Facebook unavailable-content warning as **unavailable in the authenticated session**. Login walls, checkpoints, CAPTCHA, empty/loading views and navigation errors remain **inconclusive** and cannot justify `Blocked`.
+- Facebook's unavailable-content warning does not itself prove permanent deletion or identify the underlying cause; public content visibility likewise does not prove Messenger sending permission. Apply the owner's approved SB status policy separately, preserving `RESTRICTED_UNTIL` and other settings.
+- Save sanitized per-page evidence and require the ten collected IDs to equal the frozen sample exactly. Reduce DOM text before stdout to page identity, content markers or the exact warning; omit unrelated Messenger overlays, contact details and feeds. Report the pilot before executing any mutation the owner explicitly postponed.
+
+
 ## Rodolfo-approved operational rule
 
 If a page URL does not open and shows Facebook unavailable content, set the corresponding SmartBidding Messenger Page row to:
