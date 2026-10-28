@@ -1,0 +1,84 @@
+{
+  "type": 0,
+  "content": "",
+  "mentions": [],
+  "mention_roles": [],
+  "attachments": [],
+  "embeds": [
+    {
+      "type": "rich",
+      "title": "REPORT-INFRA — modificada",
+      "color": 3447003,
+      "fields": [
+        {
+          "name": "Ação",
+          "value": "modificada",
+          "inline": true
+        },
+        {
+          "name": "Tipo",
+          "value": "script/testes/skill/data",
+          "inline": true
+        },
+        {
+          "name": "Host",
+          "value": "srv1767265",
+          "inline": true
+        },
+        {
+          "name": "Path",
+          "value": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh; tests/test_b013_confirmed_transitions.py; profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-confirmed-link-transitions.md; data/infra-inventory.json; data/knowledge-registry.json; data/agent-checkpoints.json",
+          "inline": false
+        },
+        {
+          "name": "Motivo",
+          "value": "Rodolfo pediu auditoria de todos os seguradores B013 e dos alertas de adicionados sem sentido (1565028319412490421). Confirmada recuperação técnica classificada como nova adesão e colisão de cooldown por contagens.",
+          "inline": false
+        },
+        {
+          "name": "Evidência",
+          "value": "54 alvos/38 logins verificados no DTR, 51 vinculados, 3 inválidos, zero desconhecidos/omissões/divergências SA. Histórico: 15 linhas de adição indevida/9 perfis. Last-confirmed separado e assinatura por identidade corrigidos; 42 testes PASS. Ciclo live pós-fix: 0 alertas e 0 writes. Verificação final: 4 páginas IGNORAR excluídas de probes, 8 ativas confirmadas. Backup verificado b013-confirmed-transitions-1565028319412490421. Sem credencial/cron/canal/reset de baseline; mensagens históricas preservadas.",
+          "inline": false
+        },
+        {
+          "name": "Pendências Hermes",
+          "value": "total=0 | >=24.0h=0 | mais antiga=0.0h",
+          "inline": false
+        },
+        {
+          "name": "Horário",
+          "value": "2026-10-28 12:08:48 EDT",
+          "inline": true
+        }
+      ],
+      "content_scan_version": 0
+    }
+  ],
+  "timestamp": "2026-10-28T16:08:48.585000+00:00",
+  "edited_timestamp": null,
+  "flags": 0,
+  "components": [],
+  "id": "1565034612617388066",
+  "channel_id": "1498132022634483894",
+  "author": {
+    "id": "1496296175014252634",
+    "username": "Zeus",
+    "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+    "discriminator": "2591",
+    "public_flags": 0,
+    "flags": 0,
+    "bot": true,
+    "banner": null,
+    "accent_color": null,
+    "global_name": null,
+    "avatar_decoration_data": null,
+    "collectibles": null,
+    "display_name_styles": null,
+    "banner_color": null,
+    "clan": null,
+    "primary_guild": null
+  },
+  "pinned": false,
+  "mention_everyone": false,
+  "tts": false
+}

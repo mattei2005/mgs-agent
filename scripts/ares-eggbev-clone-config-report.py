@@ -11,7 +11,7 @@ OP_PATH = ROOT / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json'
 OP_V3_PATH = ROOT / 'data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT-v3.json'
 ACCOUNT_PATH = ROOT / 'data/ares/meta-ads/accounts/1034081997659047.json'
 ENGINE_PATH = ROOT / 'data/ares/meta-ads/engine-v3/config.json'
-PROMPT_PATH = ROOT / 'data/ares/discord/thread-prompts/1543333373945053184.txt'
+PROMPT_PATH = ROOT / 'data/ares/discord/thread-prompts/1541578556037927053.txt'
 ACCOUNT_ID = '1034081997659047'
 
 
@@ -34,7 +34,7 @@ def check() -> dict:
     page_switch_naming = v3_page_policy.get('campaign_naming') or {}
     prompt_text = PROMPT_PATH.read_text() if PROMPT_PATH.exists() else ''
     checks = {
-        'thread_id': cloning.get('thread_id') == '1543333373945053184',
+        'thread_id': cloning.get('thread_id') == '1541578556037927053',
         'prompt_exists': PROMPT_PATH.exists() and bool(PROMPT_PATH.read_text().strip()),
         'account_registered': ACCOUNT_ID in (engine.get('accounts') or {}),
         'account_alias_matches': (engine.get('accounts') or {}).get(ACCOUNT_ID, {}).get('alias') == 'Eggbev-US-CC-EN-01-G006',
@@ -73,7 +73,7 @@ def render() -> str:
     lines = [
         '🧬 **Eggbev-US-CC-EN — Configuração de Clonagem**',
         '',
-        f"- Thread: `Eggbev-US-CC-EN Clonar Campanhas` (`{operation_v3['thread_id']}`).",
+        f"- Thread compartilhada de criação, clone e duplicação: `Conta 01 Criar Campanhas` (`{operation_v3['thread_id']}`).",
         f"- Conta: `{operation_v3['account_alias']}` | USD | `{operation_v3['timezone']}`.",
         f"- Engine: v{operation_v3['release_version']} | onboarding: {'OK' if result['checks']['account_registered'] else 'PENDENTE'}.",
         '- Modos com write: `duplicação exata` e `criativos novos`; a substituição revisada é um branch explícito de `clone_prestaged`.',

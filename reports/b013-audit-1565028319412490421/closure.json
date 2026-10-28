@@ -1,0 +1,70 @@
+{
+  "id": "b013-addition-noise-audit-1565028319412490421",
+  "agent": "zeus",
+  "type": "b013_coverage_audit_and_false_transition_repair",
+  "status": "validated",
+  "updated_at": "2026-10-28T12:08:11.856977-04:00",
+  "source_message_id": "1565028319412490421",
+  "thread_id": "1565005187914141757",
+  "canonical_channel_id": "1522830283240505385",
+  "source_path": "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+  "source_sha256": "55c69365b969d85b4686958dce59f43edaead75001ef80d4462de398069ed04b",
+  "evidence": "/root/mgs-agent/reports/b013-audit-1565028319412490421",
+  "backup": "/root/mgs-agent/backups/b013-confirmed-transitions-1565028319412490421",
+  "scope": 54,
+  "linked": 51,
+  "unlinked_confirmed": [
+    "Max Tin Masela",
+    "Riza Gabiola",
+    "Ricardo Oliveira"
+  ],
+  "dtr_inventory_missing": [],
+  "sheet_mismatches": [],
+  "unknown": 0,
+  "dtr_logins_checked": 38,
+  "misclassified_addition_occurrences": 15,
+  "misclassified_unique_profiles": [
+    "Akew Rider",
+    "Alex Silva Araujo",
+    "Beatriz Santos",
+    "Fabiana Da Silva Maciel",
+    "Gustavo Padilha",
+    "Heloisa Barbosa Almeida",
+    "Joao Matheus",
+    "João Afonso Da Silva",
+    "Yasmym Sillva'h"
+  ],
+  "fixes": [
+    "Persist separate last confirmed link evidence while replacing fresh diagnostic snapshots; only confirmed connection edges or new Sheet assignments produce movements.",
+    "Deduplicate exact composed event identities, direction and failure identities rather than counts only.",
+    "Skip canonical globally ignored FB page IDs before individual Graph subscription probes; four historical gaps reconciled as intentional exclusions."
+  ],
+  "tests": "42 focused B013 tests PASS; actual main() red→green reproductions; Bash and embedded Python compile PASS",
+  "real_validation": "Full production DTR/Graph cycle covered 54 accounts across 38 logins, 51 linked/3 invalid/0 unknown, zero Sheet changes and zero alerts. Final source additionally checked two real profiles, skipped four ignored pages and checked eight active page subscriptions; exact full-scope observed-result replay produced no movements.",
+  "normal_cycle_alerts_sent": 0,
+  "credential_changes": false,
+  "schedule_changes": false,
+  "baseline_reset": false,
+  "historical_discord_messages_changed": false,
+  "crons": [
+    {
+      "id": "498fb0d95e10",
+      "enabled": true,
+      "state": "scheduled",
+      "last_status": "ok",
+      "last_error": null,
+      "last_run_at": "2026-10-28T12:02:29.698719-04:00"
+    },
+    {
+      "id": "f42618f5ced7",
+      "enabled": true,
+      "state": "scheduled",
+      "last_status": "ok",
+      "last_error": null,
+      "last_run_at": "2026-10-28T08:00:33.016033-04:00"
+    }
+  ],
+  "knowledge_id": "procedure-b013-confirmed-link-transitions-20261028",
+  "skill_path": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-confirmed-link-transitions.md",
+  "historical_transport_cause": "Individual item_check_failed exceptions were overwritten by later snapshots; exact historical transport exception not recoverable. The wrong recovery-to-added classification is proven by day reports and executable regression."
+}

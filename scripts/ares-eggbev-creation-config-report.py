@@ -66,7 +66,7 @@ def build_report() -> str:
         "",
         "## Escopo e readiness",
         f"- Thread: `{route['thread_name']}` (`{route['thread_id']}`).",
-        "- Escopo: criação normal do zero. Clonagem fica exclusivamente na thread `1543333373945053184`.",
+        "- Escopo deste relatório: criação normal do zero. A mesma thread centraliza clone/duplicação da conta 01; cada intenção usa seu contrato próprio, sem ampliar os gates.",
         f"- Conta: `{account['account_alias']}` (`{account['meta_account_ref']}`), ativa, USD, `America/New_York`.",
         f"- Estratégia/destino: `{account['strategy']}` / `{account['channel']}`.",
         f"- Contrato de criação aprovado: {yes_no(bool(runtime['contract_approved']))}.",
@@ -144,7 +144,7 @@ def build_report() -> str:
         "12. Só então reportar sucesso e persistir auditoria/recovery data.",
         "",
         "## Separação de rotas",
-        "- `pure_clone`, `clone_prestaged` e `clone_page_switch` não são criação normal e não são executados nesta thread.",
+        "- `pure_clone`, `clone_prestaged` e `clone_page_switch` não são criação normal: são resolvidos nesta mesma thread pelo contrato de clonagem. Modos bloqueados continuam bloqueados.",
         "- Corte/ROAS, Diário e Limite de Leads entram apenas depois do lançamento e têm threads próprias.",
     ]
     return "\n".join(lines).rstrip() + "\n"

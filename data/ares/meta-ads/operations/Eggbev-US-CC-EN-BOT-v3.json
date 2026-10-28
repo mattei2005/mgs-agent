@@ -23,7 +23,10 @@
     "page_scale": "approximately 3000 Pages; never scan me/accounts for creation, query only the requested identity and batch cross-account naming history",
     "page_token_persistence": "forbidden; remove access_token from the Page object before state/audit writes",
     "media_timing": "on demand after exact ad account and Page resolution only",
-    "media_variants": ["vertical", "square"],
+    "media_variants": [
+      "vertical",
+      "square"
+    ],
     "media_workers": 5,
     "partial_variant_recovery": "one deterministic-title scan per request; reuse an already uploaded vertical or square and upload only the missing variant",
     "media_validation": "one logical wait-ready poll chunked by 50 IDs and one association scan for the full cohort before registry commit",
@@ -36,10 +39,10 @@
     "status": "INACTIVE_UNTIL_EXPLICIT_REACTIVATION",
     "internal_budget_limits_enforced": false
   },
-  "thread_id": "1543333373945053184",
+  "thread_id": "1541578556037927053",
   "thread_ids": {
     "campaign_creation": "1541578556037927053",
-    "campaign_cloning": "1543333373945053184"
+    "campaign_cloning": "1541578556037927053"
   },
   "bundle_size": 2,
   "maximum_ads_per_campaign": 5,
@@ -111,7 +114,11 @@
         "campaign_naming": {
           "automatic": true,
           "pattern": "[target_page_sequence] - [target Page name] - ENG - US - ([target pg_XXXXX]) [source Cnnn] [next free DUPnn]",
-          "replace": ["source page sequence", "source Page name", "source pg_XXXXX"],
+          "replace": [
+            "source page sequence",
+            "source Page name",
+            "source pg_XXXXX"
+          ],
           "preserve": "source Cnnn only",
           "collision_policy": "append the next free DUPnn after scanning non-deleted live campaigns",
           "fail_closed": "target sequence, exact Meta Page name, reconciled pg_XXXXX, source Cnnn and free DUPnn are all mandatory before manifest sealing"
@@ -125,7 +132,12 @@
     "from_zero_prestaged": {
       "label": "criação do zero com criativos novos pre-stageados",
       "source_clone_ids_forbidden": true,
-      "create_edges": ["campaign_create", "adset_create", "creative_create", "ad_create"],
+      "create_edges": [
+        "campaign_create",
+        "adset_create",
+        "creative_create",
+        "ad_create"
+      ],
       "ads": "exactly three or five per campaign",
       "media_registry_required": true,
       "default_status": "ACTIVE with future next-day 00:00 America/New_York start_time after final approval",
@@ -173,7 +185,12 @@
   },
   "messenger_template_naming_policy": {
     "exact_name": "JSON-AGT",
-    "applies_when_ares_adds_json": ["from_zero_prestaged", "clone_prestaged", "replacement_revision", "future_enabled_clone_page_switch_or_other_rematerialization"],
+    "applies_when_ares_adds_json": [
+      "from_zero_prestaged",
+      "clone_prestaged",
+      "replacement_revision",
+      "future_enabled_clone_page_switch_or_other_rematerialization"
+    ],
     "pure_clone": "preserve source creative and JSON without rewriting",
     "historical_campaigns": "do not retrofit already-published campaigns",
     "gate": "missing or different template_name fails closed before write; installed drift remains POSTPROCESS_PENDING with IDs preserved"

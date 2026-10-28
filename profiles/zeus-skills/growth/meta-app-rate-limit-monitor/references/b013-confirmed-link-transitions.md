@@ -4,6 +4,7 @@
 
 - Audit the dedicated B013 channel against every current canonical Service Account `NO APP` occurrence, not the generic `/roles` runner. Freeze composed `User × Segurador` identities, preserve repeated bot logins, collect all native card continuation messages, and distinguish six-column inventory tables from three-column movement tables.
 - Reconcile every assigned profile with the authenticated DTR account inventory, exact switched account identity, fresh `debug_token` verdict and Sheet marker. Capture per-login inventories and result batches without tokens or passwords. A valid app and healthy aggregate capability do not prove that every assigned account is linked.
+- Before probing page subscriptions or labeling a page-count gap actionable, reconcile available page IDs with `data/mgs-global-page-ignore-list.json`. Skip every globally ignored FB page ID in per-page Graph probes; do not reactivate or subscribe retired pages merely to equalize counters. Preserve separate ignored-page metadata so a deliberate exclusion is not presented as an operational outage.
 - Separate `not_monitored → linked` (new Sheet monitoring scope) from a confirmed disconnected→linked reconnection. A scope increase can be real even when the profiles were already present in DTR; do not call it a newly created Meta user.
 
 ## Confirmed-state invariant

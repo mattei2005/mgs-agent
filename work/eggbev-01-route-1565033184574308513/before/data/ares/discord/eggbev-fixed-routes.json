@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "Eggbev-US-CC-EN-BOT",
+  "parent_channel_id": "1539422731727147079",
+  "account_alias": "Eggbev-US-CC-EN-01-G006",
+  "preservation_policy": {
+    "never_create_replacement_when_id_is_recoverable": true,
+    "never_delete": true,
+    "archive_preserves_history": true,
+    "auto_archive_duration_minutes": 10080,
+    "manual_title_protection": true,
+    "pinned_route_messages": false,
+    "route_identity_source": "thread_id + prompt_file + registry; no operational banner message",
+    "required_member_ids": [
+      "1055570806945620030",
+      "1496296175014252634",
+      "344196393512075265"
+    ]
+  },
+  "routes": {
+    "rules": {
+      "thread_id": "1541578622106865815",
+      "canonical_label": "Eggbev-US-CC-EN Regras",
+      "current_manual_title_allowed": "Eggbev-US-CC-EN Regras",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578622106865815.txt"
+    },
+    "page_lead_guardrail": {
+      "thread_id": "1543312825890381865",
+      "canonical_label": "Eggbev-US-CC-EN Limite de Leads",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1543312825890381865.txt"
+    },
+    "campaign_cloning": {
+      "thread_id": "1543333373945053184",
+      "canonical_label": "Eggbev-US-CC-EN Clonar Campanhas",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1543333373945053184.txt"
+    },
+    "roas_cycle": {
+      "thread_id": "1541578606076231750",
+      "canonical_label": "Eggbev-US-CC-EN Corte e ROAS",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578606076231750.txt"
+    },
+    "daily_reporting": {
+      "thread_id": "1541578596253175858",
+      "canonical_label": "Eggbev-US-CC-EN Diario",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578596253175858.txt"
+    },
+    "campaign_creation": {
+      "thread_id": "1541578556037927053",
+      "canonical_label": "Eggbev-US-CC-EN Criar Campanhas",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578556037927053.txt"
+    }
+  },
+  "route_supersessions": [
+    {
+      "route": "rules",
+      "superseded_thread_id": "1543280854024060999",
+      "active_thread_id": "1541578622106865815",
+      "decided_by": "Rodolfo Mattei",
+      "decided_at_et": "2026-09-01T20:37:52-04:00",
+      "reason": "Consolidar regras, crons e padrões Eggbev BOT na thread Regras original e liberar as threads históricas para encerramento manual.",
+      "history_snapshot": "data/discord-thread-imports/1543280854024060999.md"
+    }
+  ],
+  "strategy_binding": {
+    "family_id": "chatpion_bot_messenger",
+    "required_skill": "chatpion-bot-campaign-operations",
+    "consumer_registry": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger-consumers.json"
+  }
+}

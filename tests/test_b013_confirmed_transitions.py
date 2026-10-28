@@ -133,6 +133,20 @@ class ConfirmedTransitionsTests(unittest.TestCase):
         _, sent = self.cycle(None, another)
         self.assertEqual(sent, 1, 'Different identities must not collide in the alert cooldown')
 
+    def test_ignored_pages_are_not_probed_for_app_subscription(self):
+        helper = self.ns.get('count_connected_pages')
+        self.assertTrue(callable(helper), 'Page subscription checks must apply the global ignore policy')
+        assert helper is not None
+        calls = []
+        self.ns['GLOBAL_PAGE_IGNORE_IDS'] = {'ignored-page'}
+        def graph(path, params, token):
+            calls.append(path)
+            return 200, {}, {'data': [{'id': 'test-app'}]}
+        self.ns['graph'] = graph
+        pages = [{'id': 'ignored-page', 'access_token': 'unit-fixture'}, {'id': 'active-page', 'access_token': 'unit-fixture'}]
+        self.assertEqual(helper(pages, 'test-app'), (1, 1))
+        self.assertEqual(calls, ['/active-page/subscribed_apps'])
+
 
 if __name__ == '__main__':
     unittest.main()

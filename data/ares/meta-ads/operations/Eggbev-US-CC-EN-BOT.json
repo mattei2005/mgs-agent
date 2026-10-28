@@ -146,10 +146,10 @@
     ],
     "scope_separation": {
       "creation_from_zero_thread": "1541578556037927053",
-      "thread": "clone requests only"
+      "thread": "clone mode in the shared creation/clone thread; select only the requested mode"
     },
     "status": "pure_clone_and_clone_prestaged_live_validated_clone_page_switch_copied_adset_blocked",
-    "thread_id": "1543333373945053184",
+    "thread_id": "1541578556037927053",
     "thread_name": "Eggbev-US-CC-EN Clonar Campanhas",
     "thread_readback": {
       "archived": false,
@@ -773,7 +773,7 @@
     "campaign_ops_channel_id": "1539422731727147079",
     "campaign_ops_channel_label": "eggbev-us-cc-en-01-g006",
     "fixed_threads": {
-      "campaign_cloning": "1543333373945053184",
+      "campaign_cloning": "1541578556037927053",
       "campaign_creation": "1541578556037927053",
       "daily": "1541578596253175858",
       "intraday": "1541578606076231750",
@@ -814,6 +814,23 @@
       "cleanup_result": "32 deletable messages removed; four undeletable Discord system/thread events preserved"
     },
     "route_contracts": {
+      "campaign_warmup": {
+        "thread_id": "1543333373945053184",
+        "thread_name": "Conta 01 Aquecimento",
+        "account_id": "1034081997659047",
+        "required_skill": "chatpion-bot-campaign-operations",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+        "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "scope": "Page warmup through from-zero creation, clone or duplication at exact low budget supplied per request; after warmup continue in 1541578556037927053",
+        "intent_contracts": ["campaign_creation_policy", "campaign_cloning_policy"],
+        "continuation_thread_id": "1541578556037927053",
+        "source_message_id": "1565033982603829441",
+        "supersedes": "historical/redirect-only classification under 1565033184574308513, for this warmup scope only",
+        "page_eligibility_override": false,
+        "budget_default": null,
+        "campaign_execution_authorized_by_scope_definition": false,
+        "automatic_transition": false
+      },
       "campaign_cloning": {
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
         "canonical_operation_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
@@ -824,7 +841,7 @@
           "start_time": "next_day_00:00_America/New_York",
           "status": "ACTIVE"
         },
-        "exact_thread_prompt": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578556037927053.txt",
         "forbidden_default_report_topics": [
           "global model/provider/OAuth/tools configuration",
           "creation from zero",
@@ -844,9 +861,9 @@
         ],
         "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
-        "scope": "on-demand campaign duplication only; creation from zero remains in thread 1541578556037927053",
-        "thread_id": "1543333373945053184",
-        "thread_name": "Eggbev-US-CC-EN Clonar Campanhas"
+        "scope": "shared thread for creation, clone and duplication exclusively Eggbev-US-CC-EN-01 1034081997659047; this contract applies only to campaign_cloning intent; approval and safety gates unchanged",
+        "thread_id": "1541578556037927053",
+        "thread_name": "Conta 01 Criar Campanhas"
       },
       "campaign_creation": {
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
@@ -884,13 +901,14 @@
           "naming and tracking",
           "budget and authority gates",
           "preflight, final summary, approval, creation and readback sequence",
-          "explicit separation from clone, ROAS, Daily and lead guardrail routes"
+          "mode separation within the shared creation/clone thread; ROAS, Daily and lead guardrails remain separate"
         ],
         "required_skill": "chatpion-bot-campaign-operations",
         "restricted_page_eligibility_gate": "page_eligibility_policy; read-only Daily surfaces the flag but never writes",
-        "scope": "creation from zero only; cloning belongs to thread 1543333373945053184",
+        "scope": "shared thread for creation, clone and duplication exclusively Eggbev-US-CC-EN-01 1034081997659047; this contract applies only to campaign_creation intent; approval and safety gates unchanged",
         "thread_id": "1541578556037927053",
-        "thread_name": "Eggbev-US-CC-EN Criar Campanhas"
+        "thread_name": "Conta 01 Criar Campanhas",
+        "exact_thread_prompt": "data/ares/discord/thread-prompts/1541578556037927053.txt"
       },
       "daily_reporting": {
         "canonical_account_source": "data/ares/meta-ads/accounts/1034081997659047.json",
@@ -1070,6 +1088,13 @@
       "prefix": "Eggbev-US-CC-EN",
       "reference": "names originally created by Rodolfo",
       "rules_route_exception": "Nicolas explicitly reassigned Rules to the current architecture thread on 2026-08-29; the previous Eggbev-US-CC-EN Regras thread is superseded"
+    },
+    "route_consolidation": {
+      "source": "discord:1185714635991679006/1541578556037927053/1565033184574308513",
+      "old_cloning_thread_id": "1543333373945053184",
+      "active_thread_id": "1541578556037927053",
+      "old_thread_policy": "history preserved, redirect new requests; no deletion, archival or replay",
+      "scope": "routing only; no Meta execution, budget, authority or capability changes"
     }
   },
   "end_to_end_audit": {

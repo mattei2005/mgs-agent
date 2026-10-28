@@ -533,7 +533,7 @@ discord:
 
       - Conta atual validada: alias Eggbev-US-CC-EN-01-G006; IDs tecnicos ficam no audit.
 
-      - Threads fixas: regras 1541578622106865815; Intraday 1541578606076231750; Diario 1541578596253175858; criar campanhas 1541578556037927053; clonar campanhas 1543333373945053184; limite de leads 1543312825890381865.
+      - Threads fixas: regras 1541578622106865815; Intraday 1541578606076231750; Diario 1541578596253175858; criar, clonar e duplicar campanhas da conta 01 (1034081997659047) na mesma thread 1541578556037927053; antiga thread 1543333373945053184 somente historico/redirect; limite de leads 1543312825890381865.
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
@@ -560,58 +560,143 @@ discord:
       - Titulos de threads: etiqueta semantica curta de 3 a 6 palavras, sem sobrescrever titulo manual.
 
       - Nao adicionar outros gestores automaticamente.'
-    '1541578556037927053': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Criar Campanhas
-
-
-      - Esta thread trata exclusivamente de criacao do zero na conta Eggbev-US-CC-EN-01-G006 (`act_1034081997659047`). Clonagem usa a thread `1543333373945053184`.
-
-      - Gestao da operacao: Rodolfo e Nicolas. Budget write e outros gates sensiveis continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao autoriza publicacao Meta.
-
-      - Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre somente o prompt, o contrato desta rota e o runner necessário. Carregar `meta-campaign-engine-v3` apenas depois de fechar o intake e entrar na etapa de manifest/execução; não abrir a umbrella Eggbev nem os contratos completos por padrão.
-
-      - Nesta thread, pedidos genericos como "sua configuracao", "como esta configurada" ou "relatorio da configuracao" significam a configuracao operacional da criacao Eggbev. Nao responder com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global do Ares, salvo pedido explicitamente global.
-
-      - A skill compartilhada define somente o mecanismo. Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.
-
-      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.
-
-      - Para relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py --check`. Para intake read-only, usar `scripts/ares-eggbev-creation-intake-simulate.py`. Para preparar o request real, usar somente `scripts/ares-eggbev-creation.py`; ele materializa o manifest e delega todo write/readback ao Campaign Engine v3.
-
-      - Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots historicos. Campos ativos das fontes canonicas vencem secoes historicas.
-
-      - Nunca publicar diretamente. Fluxo: Page/readbacks → inputs → reconciliacao scoped → reserva → pre-stage → manifest prevalidado → plan → resumo final com digest → esperar OK explicito de Nicolas → conferir autoridade financeira vigente ou envelope pre-aprovado somente no execute → Engine v3 `--confirm-execute` → GET/readback consolidado. O gate financeiro nunca bloqueia intake, pre-stage, plan ou resumo.
-
-      - Criacao normal aprovada nasce `ACTIVE` com `start_time` futuro, por padrao no dia seguinte as 00:00 em `America/New_York`. Aplique esse horario sem perguntar novamente quando o pedido nao trouxer override. Canario tecnico `PAUSED` e um modo separado, somente se pedido e aprovado. Excecao unica vigente: o primeiro request `eggbev-pg-5024-20260830-nicolas-01` atualiza o `start_time` no execute para o horario corrente ET com buffer tecnico minimo da Meta; nao propagar essa excecao para pedidos futuros.
-
-      - Frases como "3 campanhas com 3 criativos" significam 3 campanhas x 1 ad set x 3 ads, com 9 criativos unicos no lote; nao reutilizar os mesmos 3 entre campanhas. "cc en us" normaliza para `CC_US_EN`.
-
-      - Criativos de criacao normal sao sempre novos, reservados e reconciliados no Drive/Meta. Um pedido do gestor para puxar da pasta autoriza apenas a revisao/liberacao scoped do request. Nunca tornar o pool globalmente elegivel, selecionar por ordem de filename ou consumir/reservar assets antes do pedido real.
-
-      - O modelo canonico default e `pg_5024_dup01_live_validated_v1`, derivado da campanha live validada `162 - Amy Shook - ENG - US - (pg_5024) C001 DUP01`. Ele padroniza configuracao, evento, copy, placements, identidade e readbacks; nunca copia a midia, os IDs ou o sufixo `DUP01` para criacao do zero.
-
-      - O call natural `criar N campanha(s) pagina X` aplica automaticamente `1x1x3`, pasta `CC_US_EN`, tres criativos ineditos por campanha, o modelo canonico da DUP01, naming `[page_sequence] - [Page] - ENG - US - (pg_XXXXX) C0XX`, copy aprovada, JSON Messenger, tracking, placements manuais e nomes `AD NN - {canonical_stem}`. Em lote, a sequencia avanca C001, C002, C003...; `DUPnn` continua exclusivo de clone. Overrides explicitos vencem esses defaults.
-
-      - Copy significa `Primary text`, `Headline`, `Description` e `CTA`; imagens e videos sao criativos. Cada ad recebe todas as tres headlines aprovadas: `APPLY NOW ✅`, `CARD APPROVED` e `✔️ APPLY CARD`; Primary text vazio, Description `⭐️⭐️⭐️⭐️⭐️` e CTA `APPLY_NOW`. A instrucao atual de Nicolas vence o modelo quando houver override explicito.
-
-      - Todo novo ad set usa pixel `935354115143283` com `custom_event_type=OTHER` e `custom_event_str=eggbev-pv-u` (UI: Eggbev PV U). A identidade de Instagram e Page-backed/PBIA da Page selecionada, sem exigir conta Instagram externa.
-
-      - O JSON Messenger fixo vive em `data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json`, identidade semantica `ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad`. Toda campanha nova carrega esse arquivo em cada creative com Template name exatamente `JSON-AGT`. Arquivo, conteudo ou nome ausente/invalido/divergente bloqueia antes do write; depois da criacao, cada creative Meta e comparado diretamente com o arquivo e `template_name=JSON-AGT`; qualquer divergencia fica `POSTPROCESS_PENDING`. A regra vale para pedidos futuros e nao altera campanhas ja publicadas.
-
-      - Input humano obrigatorio do call minimo: budget diario exato por campanha. Nenhum budget historico e default. Nao perguntar novamente por quantidade de criativos, pasta, nomes dos ads, horario, referencia, naming, copy, placements ou tracking quando nao houver override.
-
-      - Resposta inicial padrao ao call minimo: confirmar em bullets Page, estrutura, quantidade de criativos unicos, pasta, inicio e defaults; fazer uma unica pergunta — `Qual o budget diario por campanha? Responda: Budget USD NN`. Depois do budget, executar preflight/reconcile/prestage/plan e voltar com resumo final para OK, sem publicar.
-
-      - `pg_XXXXX` deve resolver para uma unica linha Messenger da Smart Bidding e a Page precisa passar GET Meta. Mapping ambiguo ou Page inacessivel bloqueia apenas o request dependente.
-
-      - Antes de reservar sequência, assets, pre-stage ou manifest, consultar a denylist canônica por `pg_XXXXX` + FB Page ID. Se a Page já teve qualquer restrição registrada, não criar nenhuma campanha, fazer zero write e solicitar outra Page. Ausência/invalidade da denylist também bloqueia fail-closed.
-
-      - Placements sao `MANUAL_ONLY`: Facebook + Instagram + Messenger; Audience Network proibida; manter `explore_home` e nao enviar `explore`, rejeitado no write live como placement obsoleto. Nunca converter para Advantage+ Placements.
-
-      - O estado live da DUP01 e a evidencia soberana. O `validate_only` historico apresentou contradicao no placement Explore e nao deve reintroduzir `explore` nem substituir os gates/readbacks do write real.
-
-      - Depois de toda criacao, fazer GET de cada creative e confirmar que Page e `url_tags` correspondem ao manifest aprovado, enquanto o JSON parseado em `asset_feed_spec.additional_data.page_welcome_message` corresponde diretamente ao arquivo canonico fixo e contem `template_name=JSON-AGT`. Divergencia deixa o request em `POSTPROCESS_PENDING`, preserva IDs e bloqueia a movimentacao dos assets para `02_TESTING`; nunca repetir a criacao.
-
-      - Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.'
+    '1541578556037927053': "INSTRUCAO ESPECIFICA — Eggbev Conta 01 Criacao Clone Duplicacao\n\n- Fonte soberana: Rodolfo Mattei,\
+      \ mensagem 1565033184574308513; thread 1541578556037927053; conta exclusiva Eggbev-US-CC-EN-01, ID 1034081997659047.\n\
+      - Esta thread centraliza a continuidade de criacao do zero, clone e duplicacao da conta 01. Adendo posterior\
+      \ de Rodolfo 1565033982603829441: a thread 1543333373945053184 recebe essas mesmas modalidades para\
+      \ aquecimento de Pages com baixo budget exato por pedido; apos o aquecimento a continuidade ocorre aqui.\
+      \ O antigo estado historico/redirect daquela thread esta supersedido somente por esse recorte. Nao migrar\
+      \ objetos nem iniciar requests automaticamente; titulos manuais, historico, denylist e demais gates\
+      \ preservados.\n- Selecione campaign_creation ou campaign_cloning pela intencao explicita do pedido,\
+      \ nunca apenas pelo thread_id. Nao executar ambos; se a intencao faltar, esclarecer naturalmente.\n\
+      - A consolidacao altera apenas o destino: mantem autoridade, budget exato, preflight, manifest, resumo\
+      \ final, OK explicito, inicio/status, denylist, modos bloqueados, billing/credenciais/Critical Subset\
+      \ e readback. Nao autoriza campanha nem retoma requests antigos.\n\n## campaign_creation — aplicar somente\
+      \ em criacao do zero\n- Gestao da operacao: Rodolfo e Nicolas. Budget write e outros gates sensiveis\
+      \ continuam sujeitos a matriz MGS; a existencia da thread, pre-stage ou plan nao autoriza publicacao\
+      \ Meta.\n- Antes de responder, carregar `chatpion-bot-campaign-operations`. Ela abre somente o prompt,\
+      \ o contrato desta rota e o runner necessário. Carregar `meta-campaign-engine-v3` apenas depois de fechar\
+      \ o intake e entrar na etapa de manifest/execução; não abrir a umbrella Eggbev nem os contratos completos\
+      \ por padrão.\n- Nesta thread, pedidos genericos como \"sua configuracao\", \"como esta configurada\"\
+      \ ou \"relatorio da configuracao\" significam a configuracao operacional da criacao Eggbev. Nao responder\
+      \ com modelo, provider, OAuth, ferramentas, flags de seguranca, versao Hermes ou configuracao global\
+      \ do Ares, salvo pedido explicitamente global.\n- A skill compartilhada define somente o mecanismo.\
+      \ Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados\
+      \ a outro consumidor.\n- Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread\
+      \ Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.\n- Para\
+      \ relatorio de configuracao, executar `scripts/ares-eggbev-creation-config-report.py --check`. Para\
+      \ intake read-only, usar `scripts/ares-eggbev-creation-intake-simulate.py`. Para preparar o request\
+      \ real, usar somente `scripts/ares-eggbev-creation.py`; ele materializa o manifest e delega todo write/readback\
+      \ ao Campaign Engine v3.\n- Nunca herdar configuracao de trafego direto, Credito para Veiculo ou snapshots\
+      \ historicos. Campos ativos das fontes canonicas vencem secoes historicas.\n- Nunca publicar diretamente.\
+      \ Fluxo: Page/readbacks → inputs → reconciliacao scoped → reserva → pre-stage → manifest prevalidado\
+      \ → plan → resumo final com digest → esperar OK explicito de Nicolas → conferir autoridade financeira\
+      \ vigente ou envelope pre-aprovado somente no execute → Engine v3 `--confirm-execute` → GET/readback\
+      \ consolidado. O gate financeiro nunca bloqueia intake, pre-stage, plan ou resumo.\n- Criacao normal\
+      \ aprovada nasce `ACTIVE` com `start_time` futuro, por padrao no dia seguinte as 00:00 em `America/New_York`.\
+      \ Aplique esse horario sem perguntar novamente quando o pedido nao trouxer override. Canario tecnico\
+      \ `PAUSED` e um modo separado, somente se pedido e aprovado. Excecao unica vigente: o primeiro request\
+      \ `eggbev-pg-5024-20260830-nicolas-01` atualiza o `start_time` no execute para o horario corrente ET\
+      \ com buffer tecnico minimo da Meta; nao propagar essa excecao para pedidos futuros.\n- Frases como\
+      \ \"3 campanhas com 3 criativos\" significam 3 campanhas x 1 ad set x 3 ads, com 9 criativos unicos\
+      \ no lote; nao reutilizar os mesmos 3 entre campanhas. \"cc en us\" normaliza para `CC_US_EN`.\n- Criativos\
+      \ de criacao normal sao sempre novos, reservados e reconciliados no Drive/Meta. Um pedido do gestor\
+      \ para puxar da pasta autoriza apenas a revisao/liberacao scoped do request. Nunca tornar o pool globalmente\
+      \ elegivel, selecionar por ordem de filename ou consumir/reservar assets antes do pedido real.\n- O\
+      \ modelo canonico default e `pg_5024_dup01_live_validated_v1`, derivado da campanha live validada `162\
+      \ - Amy Shook - ENG - US - (pg_5024) C001 DUP01`. Ele padroniza configuracao, evento, copy, placements,\
+      \ identidade e readbacks; nunca copia a midia, os IDs ou o sufixo `DUP01` para criacao do zero.\n- O\
+      \ call natural `criar N campanha(s) pagina X` aplica automaticamente `1x1x3`, pasta `CC_US_EN`, tres\
+      \ criativos ineditos por campanha, o modelo canonico da DUP01, naming `[page_sequence] - [Page] - ENG\
+      \ - US - (pg_XXXXX) C0XX`, copy aprovada, JSON Messenger, tracking, placements manuais e nomes `AD NN\
+      \ - {canonical_stem}`. Em lote, a sequencia avanca C001, C002, C003...; `DUPnn` continua exclusivo de\
+      \ clone. Overrides explicitos vencem esses defaults.\n- Copy significa `Primary text`, `Headline`, `Description`\
+      \ e `CTA`; imagens e videos sao criativos. Cada ad recebe todas as tres headlines aprovadas: `APPLY\
+      \ NOW ✅`, `CARD APPROVED` e `✔️ APPLY CARD`; Primary text vazio, Description `⭐️⭐️⭐️⭐️⭐️` e CTA `APPLY_NOW`.\
+      \ A instrucao atual de Nicolas vence o modelo quando houver override explicito.\n- Todo novo ad set\
+      \ usa pixel `935354115143283` com `custom_event_type=OTHER` e `custom_event_str=eggbev-pv-u` (UI: Eggbev\
+      \ PV U). A identidade de Instagram e Page-backed/PBIA da Page selecionada, sem exigir conta Instagram\
+      \ externa.\n- O JSON Messenger fixo vive em `data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json`,\
+      \ identidade semantica `ecc2204e5f94203434a212737bb0110ed3d53780478a701c80809d0807f819ad`. Toda campanha\
+      \ nova carrega esse arquivo em cada creative com Template name exatamente `JSON-AGT`. Arquivo, conteudo\
+      \ ou nome ausente/invalido/divergente bloqueia antes do write; depois da criacao, cada creative Meta\
+      \ e comparado diretamente com o arquivo e `template_name=JSON-AGT`; qualquer divergencia fica `POSTPROCESS_PENDING`.\
+      \ A regra vale para pedidos futuros e nao altera campanhas ja publicadas.\n- Input humano obrigatorio\
+      \ do call minimo: budget diario exato por campanha. Nenhum budget historico e default. Nao perguntar\
+      \ novamente por quantidade de criativos, pasta, nomes dos ads, horario, referencia, naming, copy, placements\
+      \ ou tracking quando nao houver override.\n- Resposta inicial padrao ao call minimo: confirmar em bullets\
+      \ Page, estrutura, quantidade de criativos unicos, pasta, inicio e defaults; fazer uma unica pergunta\
+      \ — `Qual o budget diario por campanha? Responda: Budget USD NN`. Depois do budget, executar preflight/reconcile/prestage/plan\
+      \ e voltar com resumo final para OK, sem publicar.\n- `pg_XXXXX` deve resolver para uma unica linha\
+      \ Messenger da Smart Bidding e a Page precisa passar GET Meta. Mapping ambiguo ou Page inacessivel bloqueia\
+      \ apenas o request dependente.\n- Antes de reservar sequência, assets, pre-stage ou manifest, consultar\
+      \ a denylist canônica por `pg_XXXXX` + FB Page ID. Se a Page já teve qualquer restrição registrada,\
+      \ não criar nenhuma campanha, fazer zero write e solicitar outra Page. Ausência/invalidade da denylist\
+      \ também bloqueia fail-closed.\n- Placements sao `MANUAL_ONLY`: Facebook + Instagram + Messenger; Audience\
+      \ Network proibida; manter `explore_home` e nao enviar `explore`, rejeitado no write live como placement\
+      \ obsoleto. Nunca converter para Advantage+ Placements.\n- O estado live da DUP01 e a evidencia soberana.\
+      \ O `validate_only` historico apresentou contradicao no placement Explore e nao deve reintroduzir `explore`\
+      \ nem substituir os gates/readbacks do write real.\n- Depois de toda criacao, fazer GET de cada creative\
+      \ e confirmar que Page e `url_tags` correspondem ao manifest aprovado, enquanto o JSON parseado em `asset_feed_spec.additional_data.page_welcome_message`\
+      \ corresponde diretamente ao arquivo canonico fixo e contem `template_name=JSON-AGT`. Divergencia deixa\
+      \ o request em `POSTPROCESS_PENDING`, preserva IDs e bloqueia a movimentacao dos assets para `02_TESTING`;\
+      \ nunca repetir a criacao.\n- Responder na thread atual. ROAS, Diario e Limite de Leads podem ser citados\
+      \ apenas como pos-lancamento/rotas relacionadas, nao como configuracao de criacao.\n\n## campaign_cloning\
+      \ — aplicar somente em clone ou duplicacao\n- Antes de responder, carregue `chatpion-bot-campaign-operations`.\
+      \ Ela abre somente o prompt, o contrato desta rota e a conta. Carregue `meta-campaign-engine-v3` apenas\
+      \ depois de fechar o intake e entrar na etapa de manifest/execução; não abra a umbrella Eggbev nem os\
+      \ contratos completos por padrão.\n- A skill compartilhada define somente o mecanismo. Identidade, conta,\
+      \ valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.\n\
+      - Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador\
+      \ canônico; mudança específica Eggbev não altera outros consumidores.\n- Pedidos como “duplica a campanha\
+      \ X”, “duplica X e Y” ou “faz um dup” iniciam o intake. Pergunte somente os campos ainda ausentes, em\
+      \ texto curto e natural:\n  1. Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n\
+      \  2. Quantas duplicações de cada campanha?\n  3. Qual budget diário de cada duplicação?\n  4. Com criativos\
+      \ novos: quais assets e qual copy usar?\n  5. Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger\
+      \ completos?\n  6. Existe alguma exceção de público, placements, estratégia ou tracking?\n- Regra obrigatória\
+      \ de Page: se o pedido de `clone_page_switch` não informar a Page/`pg_XXXXX`, pausar o intake e perguntar\
+      \ qual página exata será usada. Nunca inferir ou selecionar automaticamente; só delegar a escolha após\
+      \ uma nova instrução explícita de Nicolas no próprio pedido.\n- Antes de preparar qualquer modo de clone,\
+      \ inclusive `pure_clone`, consultar `page_eligibility_policy` e a denylist canônica para a Page efetiva.\
+      \ Page com qualquer histórico de restrição não pode ser clonada nem ativada; fazer zero write e solicitar\
+      \ outra Page.\n- Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca\
+      \ presuma que os valores são iguais sem o gestor dizer.\n- Duplicação exata preserva integralmente estrutura,\
+      \ público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs. Mudam somente IDs\
+      \ técnicos inevitáveis, budget escolhido pelo gestor, nome DUPnn e início/status.\n- Naming do Messenger\
+      \ JSON: sempre que o Ares rematerializar o JSON em `clone_prestaged`, substituicao revisada ou qualquer\
+      \ futura rota equivalente, o Template name deve ser exatamente `JSON-AGT`, com gate pre-write e GET/readback\
+      \ do JSON instalado. `pure_clone` nao injeta JSON novo: preserva o creative/JSON da fonte sem reescrever.\
+      \ Nao alterar retroativamente campanhas ja publicadas.\n- Naming comum: em `pure_clone` e `clone_prestaged`,\
+      \ preserve o nome-base integral e adicione o próximo `DUPnn` livre.\n- Naming obrigatório de `clone_page_switch`:\
+      \ renomeie automaticamente a campanha para a Page selecionada no padrão `[sequencia da Page alvo] -\
+      \ [nome exato da Page alvo] - ENG - US - ([pg_XXXXX alvo]) [Cnnn da fonte] [proximo DUPnn livre]`. Substitua\
+      \ sequência/Page/pg da fonte; preserve somente o `Cnnn`. Exemplo: `165 - Tina Walter - ENG - US - (pg_5071)\
+      \ C003 DUP02` → `162 - Amy Shook - ENG - US - (pg_5024) C003 DUP03`. Sem sequência alvo, nome Meta exato,\
+      \ pg reconciliado, Cnnn ou DUP livre comprovados, não selar manifest nem fazer write.\n- Default de\
+      \ produção: campanha, ad set e todos os anúncios configurados ACTIVE, com start_time no próximo dia\
+      \ às 00:00 America/New_York. PAUSED somente para canário técnico explicitamente solicitado.\n- Nicolas\
+      \ escolhe e confirma o budget do pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes\
+      \ do write, materialize o valor exato no manifest, faça pre-read e exija readback Meta; billing, account_spend_limit,\
+      \ credenciais e escala automática continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e\
+      \ exige criativos aprovados, reconciliados e pre-stageados. clone_page_switch preserva mídia/copy e\
+      \ exige source_ad_id, Page/UTM/JSON completos e reconciliação da página; não exige mídia nova no registry.\n\
+      - Evidência live de 31/08/2026: `pure_clone` 1×1×3 é recuperável por rota shallow com semântica idêntica\
+      \ quando o deep copy exceder o limite síncrono, mas somente depois de GET provar efeito zero. `clone_prestaged`\
+      \ pode rematerializar IDs de vídeo em `ad/copies`; validar lineage por marker+checksum+orientação+duração,\
+      \ não por igualdade cega de IDs.\n- `clone_page_switch` pelo método copied-adset está bloqueado para\
+      \ write real: a Meta rejeitou trocar `promoted_object.page_id` no AdG já copiado. Schema/plan aprovado\
+      \ não prova readiness live. Recovery alternativo exige aprovação explícita para criar um novo AdG já\
+      \ com a Page alvo, pausar o AdG antigo e copiar os anúncios rematerializando Page/UTM/JSON. Nunca criar\
+      \ anúncios sobre AdG com Page divergente nem deletar a camada antiga sem autorização própria.\n- Antes\
+      \ de executar: fazer preflight Meta vivo da conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes,\
+      \ Page/UTM, budget e colisões; montar e prevalidar o manifest; apresentar resumo final; aguardar OK\
+      \ explícito do pedido; usar somente o Campaign Engine v3 com --confirm-execute.\n- Nunca publicar diretamente.\
+      \ Sucesso exige readback consolidado de campanha, ad set, todos os ads, nome DUP, budget, status ACTIVE,\
+      \ start_time 00:00 ET, Page, tracking, mídia/copy e IDs técnicos no audit.\n- Falha após possível efeito\
+      \ parcial inicia recuperação readback-first no mesmo request; nunca repetir POST não idempotente às\
+      \ cegas. Readback batch limitado após writes completos é reconciliado por IDs persistidos e GETs diretos;\
+      \ não repetir criação.\n- Perguntas sobre “sua configuração”, “como está configurado” ou “mostre tudo”\
+      \ significam somente esta rota de clonagem, não configuração global do Hermes/Ares."
     '1541578596253175858': 'INSTRUCAO ESPECIFICA — Eggbev-US-CC-EN Diario
 
 
@@ -716,7 +801,7 @@ discord:
       - Relatório sob pedido usa dados vivos e mostra todas as páginas ativas reconciliadas; proximidade LEADS/5000 é indicador de risco, nunca previsão estatística.
 
       - Responder na thread atual; IDs técnicos completos e credenciais ficam no audit, nunca no texto humano.'
-    '1543333373945053184': "INSTRUÇÃO ESPECÍFICA Ares — Eggbev-US-CC-EN Clonar Campanhas\n\n- Esta thread trata exclusivamente de duplicação/clonagem da operação Eggbev-US-CC-EN BOT, conta Eggbev-US-CC-EN-01-G006. Criação do zero, ROAS, Diário e Limite de Leads ficam nas threads próprias.\n- Antes de responder, carregue `chatpion-bot-campaign-operations`. Ela abre somente o prompt, o contrato desta rota e a conta. Carregue `meta-campaign-engine-v3` apenas depois de fechar o intake e entrar na etapa de manifest/execução; não abra a umbrella Eggbev nem os contratos completos por padrão.\n- A skill compartilhada define somente o mecanismo. Identidade, conta, valores, authority, runners e exceções vêm do contrato Eggbev e nunca são propagados a outro consumidor.\n- Mudança durável aprovada nesta rota atualiza esta thread funcional e a thread Regras pelo sincronizador canônico; mudança específica Eggbev não altera outros consumidores.\n- Pedidos como “duplica a campanha X”, “duplica X e Y” ou “faz um dup” iniciam o intake. Pergunte somente os campos ainda ausentes, em texto curto e natural:\n  1. Qual tipo: duplicação exata, com criativos novos ou com troca de página?\n  2. Quantas duplicações de cada campanha?\n  3. Qual budget diário de cada duplicação?\n  4. Com criativos novos: quais assets e qual copy usar?\n  5. Com troca de página: qual Page, pg_XXXXX, UTM e JSON Messenger completos?\n  6. Existe alguma exceção de público, placements, estratégia ou tracking?\n- Regra obrigatória de Page: se o pedido de `clone_page_switch` não informar a Page/`pg_XXXXX`, pausar o intake e perguntar qual página exata será usada. Nunca inferir ou selecionar automaticamente; só delegar a escolha após uma nova instrução explícita de Nicolas no próprio pedido.\n- Antes de preparar qualquer modo de clone, inclusive `pure_clone`, consultar `page_eligibility_policy` e a denylist canônica para a Page efetiva. Page com qualquer histórico de restrição não pode ser clonada nem ativada; fazer zero write e solicitar outra Page.\n- Se várias campanhas usarem o mesmo tipo, quantidade e budget, confirme uma vez; nunca presuma que os valores são iguais sem o gestor dizer.\n- Duplicação exata preserva integralmente estrutura, público, placements, estratégia, Page, JSON Messenger, mídia, copy, links e UTMs. Mudam somente IDs técnicos inevitáveis, budget escolhido pelo gestor, nome DUPnn e início/status.\n- Naming do Messenger JSON: sempre que o Ares rematerializar o JSON em `clone_prestaged`, substituicao revisada ou qualquer futura rota equivalente, o Template name deve ser exatamente `JSON-AGT`, com gate pre-write e GET/readback do JSON instalado. `pure_clone` nao injeta JSON novo: preserva o creative/JSON da fonte sem reescrever. Nao alterar retroativamente campanhas ja publicadas.\n- Naming comum: em `pure_clone` e `clone_prestaged`, preserve o nome-base integral e adicione o próximo `DUPnn` livre.\n- Naming obrigatório de `clone_page_switch`: renomeie automaticamente a campanha para a Page selecionada no padrão `[sequencia da Page alvo] - [nome exato da Page alvo] - ENG - US - ([pg_XXXXX alvo]) [Cnnn da fonte] [proximo DUPnn livre]`. Substitua sequência/Page/pg da fonte; preserve somente o `Cnnn`. Exemplo: `165 - Tina Walter - ENG - US - (pg_5071) C003 DUP02` → `162 - Amy Shook - ENG - US - (pg_5024) C003 DUP03`. Sem sequência alvo, nome Meta exato, pg reconciliado, Cnnn ou DUP livre comprovados, não selar manifest nem fazer write.\n- Default de produção: campanha, ad set e todos os anúncios configurados ACTIVE, com start_time no próximo dia às 00:00 America/New_York. PAUSED somente para canário técnico explicitamente solicitado.\n- Nicolas escolhe e confirma o budget do pedido e pode reduzir ou aumentar sem nova aprovação do Rodolfo. Antes do write, materialize o valor exato no manifest, faça pre-read e exija readback Meta; billing, account_spend_limit, credenciais e escala automática continuam separados.\n- clone_prestaged aceita de 1 a 5 anúncios e exige criativos aprovados, reconciliados e pre-stageados. clone_page_switch preserva mídia/copy e exige source_ad_id, Page/UTM/JSON completos e reconciliação da página; não exige mídia nova no registry.\n- Evidência live de 31/08/2026: `pure_clone` 1×1×3 é recuperável por rota shallow com semântica idêntica quando o deep copy exceder o limite síncrono, mas somente depois de GET provar efeito zero. `clone_prestaged` pode rematerializar IDs de vídeo em `ad/copies`; validar lineage por marker+checksum+orientação+duração, não por igualdade cega de IDs.\n- `clone_page_switch` pelo método copied-adset está bloqueado para write real: a Meta rejeitou trocar `promoted_object.page_id` no AdG já copiado. Schema/plan aprovado não prova readiness live. Recovery alternativo exige aprovação explícita para criar um novo AdG já com a Page alvo, pausar o AdG antigo e copiar os anúncios rematerializando Page/UTM/JSON. Nunca criar anúncios sobre AdG com Page divergente nem deletar a camada antiga sem autorização própria.\n- Antes de executar: fazer preflight Meta vivo da conta, fonte, hierarquia, quantidade de ads, nomes DUP existentes, Page/UTM, budget e colisões; montar e prevalidar o manifest; apresentar resumo final; aguardar OK explícito do pedido; usar somente o Campaign Engine v3 com --confirm-execute.\n- Nunca publicar diretamente. Sucesso exige readback consolidado de campanha, ad set, todos os ads, nome DUP, budget, status ACTIVE, start_time 00:00 ET, Page, tracking, mídia/copy e IDs técnicos no audit.\n- Falha após possível efeito parcial inicia recuperação readback-first no mesmo request; nunca repetir POST não idempotente às cegas. Readback batch limitado após writes completos é reconciliado por IDs persistidos e GETs diretos; não repetir criação.\n- Perguntas sobre “sua configuração”, “como está configurado” ou “mostre tudo” significam somente esta rota de clonagem, não configuração global do Hermes/Ares."
+    '1543333373945053184': "INSTRUCAO ESPECIFICA — Eggbev Clone Historico\n\n- SUPERSEDED por Rodolfo Mattei, mensagem 1565033184574308513. Esta thread 1543333373945053184 preserva historico e checkpoints; nao foi deletada nem arquivada.\n- Novos pedidos de criacao, clone ou duplicacao da conta Eggbev-US-CC-EN-01, ID 1034081997659047, pertencem a 1541578556037927053. Direcionar para la sem criar request paralelo, repetir writes ou retomar pedidos antigos.\n- Regras e gates ativos: data/ares/discord/thread-prompts/1541578556037927053.txt e contratos Eggbev. Esta mudanca nao altera autoridade nem aprova execucao."
     '1541578606076231750': 'INSTRUCAO ESPECIFICA Ares — Eggbev-US-CC-EN Corte e ROAS
 
 
@@ -806,7 +891,7 @@ discord:
 
       - Mapa funcional: as seis rotas carregam `chatpion-bot-campaign-operations` e resolvem somente o nó correspondente do contrato Eggbev; Regras orienta e roteia, sem executar a função das demais.
 
-      - Rotas fixas: Regras `1541578622106865815`; Pagina e Limites `1543312825890381865`; Clonar Campanhas `1543333373945053184`; Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
+      - Rotas fixas: Regras `1541578622106865815`; Pagina e Limites `1543312825890381865`; Clonar Campanhas `1541578556037927053` (mesma thread de Criar Campanhas; antiga `1543333373945053184` somente historico/redirect); Corte e ROAS `1541578606076231750`; Diario `1541578596253175858`; Criar Campanhas `1541578556037927053`.
 
       - Estado real/API/runtime vence snapshot para campanhas, crons, fontes e performance. Contrato MGS e matriz vencem para regra, owner e autoridade. Secao historica ou mensagem antiga nunca reativa regra supersedida.
 

@@ -272,6 +272,48 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - Esta declaração registra o destino e a conta dos relatórios; não solicita relatório imediato, criação/alteração de cron, migração das rotinas existentes nem write Meta. Período e tipo de relatório seguem o pedido correspondente; consultas futuras exigem validação real da conta e apresentação de período, moeda, fonte e limitações.
 - Fonte: mensagem de Rodolfo `1565032609401016331`. Cadastro de escopo consultado: `allowed=true`, BM Digital Trust `155263197283282`; isso não substitui readback Meta antes de consultas futuras.
 
+### Escopo exclusivo — Eggbev Conta 02 Aquecimento de Pages
+
+- Por definição explícita de Rodolfo Mattei na mensagem `1565034640157446188`, a thread `1565032879040499744`, pai `1539422731727147079`, fica dedicada à criação, clone e duplicação de campanhas de baixo orçamento para aquecimento de Pages, exclusivamente na conta `Eggbev-US-CC-EN-02`, ID literal `1001115192056600`.
+- `(FAX-US-03)` permanece somente observação interna, sem significado operacional, conforme correção anterior `1565034263848427611`; não usar para conta, naming, estratégia ou roteamento. O binding explícito da conta 02 prevalece sobre prompts históricos da conta 01.
+- Aquecimento, neste contexto, é a fase inicial descrita pelo operador: começar a veicular uma Page; Rodolfo relata que pode ocorrer restrição provisória do envio de mensagens por horas ou dias. Esse relato não prova restrição atual, duração determinada nem que a Page esteja pronta após um prazo fixo. Restrições reais devem ser respeitadas, sem contorno.
+- Depois de a Page estar aquecida e apta a operar, os pedidos de criação, clone e duplicação continuam na thread `1565032661557313747`, da mesma conta. Não migrar campanhas nem disparar ações automaticamente por esta definição.
+- "Baixo orçamento" expressa a finalidade, não um valor autorizado: budget exato, Page, início/status, pedido de execução, contrato exato e gates vigentes devem ser resolvidos na solicitação correspondente. Esta decisão não cria campanhas, não ativa anúncios, não altera budget, cron, permissões ou outras contas. Checker corporativo: `allowed=true`, BM Digital Trust `155263197283282`; preflight/readback Meta continuam obrigatórios para execução.
+- Preservar título manual e histórico. Fonte: `discord:1185714635991679006/1565032879040499744/1565034640157446188`.
+
+### Escopo exclusivo — Eggbev Conta 02 Criação e Clone
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032661557313747` é dedicada à criação, clone e duplicação de campanhas da conta `Eggbev-US-CC-EN-02`, ID literal `1001115192056600`.
+- Correção explícita de Rodolfo na mensagem `1565034263848427611`: `(FAX-US-03)` é somente observação interna entre parênteses, sem significado operacional. Fica supersedida a classificação anterior como alias operacional; não usar a observação para resolver conta, selecionar operação, naming, roteamento ou qualquer ação.
+- Binding restrito a esta thread; não herdar a conta Eggbev 01 dos prompts ou rotas históricas. Escopo da conta validado pelo checker corporativo com `allowed=true`, BM Digital Trust `155263197283282`; isso não substitui preflight/readback Meta.
+- Esta definição não solicita execução de campanha, ativação, budget ou automação. Cada execução futura exige pedido correspondente e contrato exato da conta, sem copiar autorização ou parâmetros de outra conta. Preservar título manual e rotinas existentes.
+- Fontes: definição `1565033258305982464` e correção `1565034263848427611`, de Rodolfo Mattei, nesta thread.
+
+### Escopo exclusivo — Eggbev Conta 03 Aquecimento de Pages
+
+- Por definição explícita de Rodolfo Mattei na mensagem `1565034773725057106`, a thread `1565032888347664495`, pai `1539422731727147079`, fica dedicada à criação, clone e duplicação de campanhas de baixo orçamento para aquecimento de Pages, exclusivamente na conta `Eggbev-US-CC-EN-03`, ID literal `1481815942722118`.
+- `(FAX-US-02)` permanece somente observação interna, sem significado operacional, conforme correção `1565034226951131249`; não usar para conta, naming, estratégia ou roteamento. O binding explícito da conta 03 prevalece sobre prompts históricos da conta 01.
+- Aquecimento é a fase inicial descrita pelo operador: começar a veicular uma Page; Rodolfo relata que pode ocorrer restrição provisória do envio de mensagens por horas ou dias. Esse relato não prova restrição atual, duração determinada nem aptidão após prazo fixo. Restrições reais devem ser respeitadas, sem contorno; aquecimento não remove denylist ou gates de elegibilidade.
+- Depois de a Page estar aquecida e apta a operar, os pedidos de criação, clone e duplicação continuam na thread `1565032671669919827`, da mesma conta. Não migrar campanhas nem disparar ações automaticamente por esta definição.
+- "Baixo orçamento" expressa a finalidade, não um valor autorizado: budget exato, Page, início/status, pedido de execução, contrato exato e gates vigentes devem ser resolvidos na solicitação correspondente. Esta decisão não cria campanhas, não ativa anúncios, não altera budget, cron, permissões ou outras contas. Checker corporativo: `allowed=true`, BM Digital Trust `155263197283282`; preflight/readback Meta continuam obrigatórios para execução.
+- Preservar título manual e histórico. Fonte: `discord:1185714635991679006/1565032888347664495/1565034773725057106`.
+
+### Escopo exclusivo — Eggbev Conta 03 Criação, clone e duplicação
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032671669919827`, no canal pai `1539422731727147079`, fica dedicada à criação, clone e duplicação de campanhas da conta `Eggbev-US-CC-EN-03`, ID literal `1481815942722118`.
+- Correção de Rodolfo na mensagem `1565034226951131249`: `(FAX-US-02)` é apenas observação interna, sem significado operacional. Não é alias operacional e não deve determinar conta, rota, estratégia, naming ou ação. Esta correção supersede explicitamente a classificação anterior como alias; o binding operacional permanece `Eggbev-US-CC-EN-03` → `1481815942722118`.
+- O binding aplica-se somente a esta thread e prevalece sobre a referência histórica à conta Eggbev 01 do canal pai. Não incluir outras contas nem alterar a thread de relatórios da conta 03 ou as rotas existentes por esta definição.
+- Esta declaração registra escopo; não solicita criação imediata, clone, duplicação, ativação, mudança de budget ou automação. Cada execução futura depende do pedido correspondente, contrato BOT vigente e preflight/readback real da conta exata. Checker corporativo retornou `allowed=true`, BM Digital Trust `155263197283282`; cadastro não comprova acesso ou estado live da Meta.
+- Fonte: mensagem de Rodolfo Mattei `1565033323808424127`. Preservar título manual da thread e gates vigentes.
+
+### Escopo exclusivo — Eggbev Conta 01 Criação, clone e duplicação
+
+- Decisão ativa de Rodolfo Mattei, mensagem `1565033184574308513`: a thread `1541578556037927053`, pai `1539422731727147079`, centraliza criação do zero, clone e duplicação exclusivamente da conta `Eggbev-US-CC-EN-01`, ID literal `1034081997659047` (alias técnico `Eggbev-US-CC-EN-01-G006`).
+- Registry executável: `data/ares/discord/eggbev-fixed-routes.json`; criação e clonagem compartilham a thread, mas selecionam contratos/runners pela intenção explícita do pedido. Não executar ambos nem aplicar defaults de criação a um clone.
+- Supersede somente a separação de destinos: `1543333373945053184` permanece histórico/redirect, sem exclusão, arquivamento, renomeação ou replay de pedidos. Nenhum título manual é alterado.
+- Autoridade e gates permanecem: budget exato, preflight, resumo final, OK explícito, início/status aprovados, denylist, modos bloqueados, pre-read/readback, billing, credenciais e Critical Subset. Esta definição de rota não executa campanha, não aprova plano antigo nem altera orçamento, cron ou permissões.
+- Fonte autenticada: `discord:1185714635991679006/1541578556037927053/1565033184574308513`; handoff Ares `1565033423813349429`. Histórico de supersessão no registry; prompts específicos e projeções da configuração alinhados.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.
@@ -505,6 +547,14 @@ Produzir relatórios                       Expor credenciais/tokens
 - Resolver pedidos de relatório desta conversa somente para essa conta; não inferir outra conta pelo canal pai ou pelo nome da operação. Conta aceita pelo checker Digital Trust no registro desta decisão.
 - A definição vincula o escopo da conversa; não solicita relatório imediato, migração de destinos automáticos, mudança de cron, campanhas, budgets ou rotinas existentes. Período e tipo de relatório seguem o pedido posterior, com leitura live e gates vigentes.
 - Preservar o título manual da thread e as rotas automáticas existentes até pedido explícito de mudança.
+
+## Eggbev Conta 01 — Aquecimento e continuidade
+
+- Decisão de Rodolfo `1565033982603829441`: a thread `1543333373945053184` recebe criação do zero, clone e duplicação para aquecimento de Pages com orçamento baixo, exclusivamente na conta `Eggbev-US-CC-EN-01`, ID `1034081997659047`.
+- Após o aquecimento, continuar essas modalidades na thread `1541578556037927053`. Supersede a descrição anterior da thread de aquecimento como somente clonagem ou histórico/redirect, inclusive o recorte da decisão `1565033184574308513`; a continuidade da conta 01 permanece consolidada.
+- Budget exato por pedido, sem valor presumido. Nenhuma campanha, ativação, cron, migração de objetos ou mudança de estratégia autorizada por esta definição. Preservar títulos manuais e histórico.
+- Restrição provisória de mensagens é contexto informado pelo operador, não evidência live nem liberação. `page_eligibility_policy` e denylist permanecem inalteradas; histórico de restrição exige decisão explícita própria para revisão, mesmo após aquecimento.
+- Fonte canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json#/discord/route_contracts/campaign_warmup`, registry e prompts das duas threads e de Regras. Conta aceita pelo checker Digital Trust; estado/acesso Meta dependem de preflight futuro.
 
 ## 13. Validação antes de responder
 

@@ -18,6 +18,17 @@
     ]
   },
   "routes": {
+    "campaign_warmup": {
+      "thread_id": "1543333373945053184",
+      "canonical_label": "Eggbev Conta 01 Aquecimento",
+      "required_skill": "chatpion-bot-campaign-operations",
+      "prompt_file": "data/ares/discord/thread-prompts/1543333373945053184.txt",
+      "continuation_thread_id": "1541578556037927053",
+      "source_message_id": "1565033982603829441",
+      "modes": ["from_zero", "clone", "duplication"],
+      "budget_default": null,
+      "page_eligibility_override": false
+    },
     "rules": {
       "thread_id": "1541578622106865815",
       "canonical_label": "Eggbev-US-CC-EN Regras",
@@ -32,10 +43,10 @@
       "prompt_file": "data/ares/discord/thread-prompts/1543312825890381865.txt"
     },
     "campaign_cloning": {
-      "thread_id": "1543333373945053184",
-      "canonical_label": "Eggbev-US-CC-EN Clonar Campanhas",
+      "thread_id": "1541578556037927053",
+      "canonical_label": "Eggbev Conta 01 Criacao Clone Duplicacao",
       "required_skill": "chatpion-bot-campaign-operations",
-      "prompt_file": "data/ares/discord/thread-prompts/1543333373945053184.txt"
+      "prompt_file": "data/ares/discord/thread-prompts/1541578556037927053.txt"
     },
     "roas_cycle": {
       "thread_id": "1541578606076231750",
@@ -51,7 +62,7 @@
     },
     "campaign_creation": {
       "thread_id": "1541578556037927053",
-      "canonical_label": "Eggbev-US-CC-EN Criar Campanhas",
+      "canonical_label": "Eggbev Conta 01 Criacao Clone Duplicacao",
       "required_skill": "chatpion-bot-campaign-operations",
       "prompt_file": "data/ares/discord/thread-prompts/1541578556037927053.txt"
     }
@@ -65,11 +76,34 @@
       "decided_at_et": "2026-09-01T20:37:52-04:00",
       "reason": "Consolidar regras, crons e padrões Eggbev BOT na thread Regras original e liberar as threads históricas para encerramento manual.",
       "history_snapshot": "data/discord-thread-imports/1543280854024060999.md"
+    },
+    {
+      "route": "campaign_cloning",
+      "superseded_thread_id": "1543333373945053184",
+      "active_thread_id": "1541578556037927053",
+      "decided_by": "Rodolfo Mattei",
+      "source": "discord:1185714635991679006/1541578556037927053/1565033184574308513",
+      "reason": "Centralizar criacao clone e duplicacao somente Eggbev-US-CC-EN-01 1034081997659047; preservar historico e gates",
+      "status": "partially_superseded",
+      "superseded_by_message": "1565033982603829441",
+      "active_exception": "1543333373945053184 is the Page warmup route; continuation remains 1541578556037927053",
+      "history_preserved": true
     }
   ],
   "strategy_binding": {
     "family_id": "chatpion_bot_messenger",
     "required_skill": "chatpion-bot-campaign-operations",
     "consumer_registry": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger-consumers.json"
+  },
+  "account_id": "1034081997659047",
+  "consolidated_route_policy": {
+    "thread_id": "1541578556037927053",
+    "routes": [
+      "campaign_creation",
+      "campaign_cloning"
+    ],
+    "selection": "Explicit request intent selects the mode, not the thread ID alone; missing intent asks a natural clarification. Never execute both routes.",
+    "approval_gates_unchanged": true,
+    "source": "discord:1185714635991679006/1541578556037927053/1565033184574308513"
   }
 }

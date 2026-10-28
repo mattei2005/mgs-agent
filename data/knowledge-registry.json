@@ -1986,6 +1986,23 @@
       "updated_at": "2026-08-25T23:25:08+00:00"
     },
     {
+      "canonical_key": "ares.eggbev-us-cc-en-bot.thread-campaign-cloning",
+      "canonical_source": "data/ares/discord/eggbev-fixed-routes.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28",
+      "id": "ARES-EGGBEV-01-CLONING-ROUTE-1565033184574308513",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Rodolfo consolida criacao clone duplicacao Eggbev 01 na mesma thread",
+      "updated_at": "2026-10-28T16:09:11+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565031975549538345.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -2001,6 +2018,58 @@
       "superseded_by": null,
       "title": "Thread dedicada a relatorios Eggbev-US-CC-EN-01",
       "updated_at": "2026-10-28T16:01:07+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1541578556037927053.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28",
+      "id": "ARES-EGGBEV-01-THREAD-SCOPE-1565033184574308513",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Thread Eggbev 01 centraliza criacao clone duplicacao com gates preservados",
+      "updated_at": "2026-10-28T16:09:11+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1565032671669919827.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T16:04:07+00:00",
+      "id": "ARES-EGGBEV-03-CREATION-THREAD-1565033323808424127",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-03-CREATION-THREAD-1565034226951131249",
+      "title": "Thread dedicada a criacao, clone e duplicacao Eggbev-US-CC-EN-03 FAX-US-02",
+      "updated_at": "2026-10-28T16:07:43+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1565032671669919827.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T16:07:43+00:00",
+      "id": "ARES-EGGBEV-03-CREATION-THREAD-1565034226951131249",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Conta 03: FAX-US-02 e somente observacao interna, nao alias operacional",
+      "updated_at": "2026-10-28T16:07:43+00:00"
     },
     {
       "canonical_key": "ares.discord.thread.1565032126137503759.scope",
@@ -2066,10 +2135,10 @@
       "kind": "procedure",
       "owner": "Nicolas",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV-01-CLONING-ROUTE-1565033184574308513",
       "title": "Thread de clonagem Eggbev usa rota dedicada e Engine v3.4.2",
-      "updated_at": "2026-09-02T16:44:34+00:00"
+      "updated_at": "2026-10-28T16:09:11+00:00"
     },
     {
       "canonical_key": "ares.eggbev-us-cc-en-bot.campaign-creation",
@@ -3176,6 +3245,42 @@
       "updated_at": "2026-09-02T15:37:25+00:00"
     },
     {
+      "canonical_key": "ares.discord.thread.1565032661557313747.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-28T16:04:08+00:00",
+      "id": "ARES-EGGBEV02-CREATION-THREAD-1565033258305982464",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ARES-EGGBEV02-INTERNAL-NOTE-1565034263848427611",
+      "title": "Eggbev Conta 02: thread exclusiva de criação, clone e duplicação",
+      "updated_at": "2026-10-28T16:07:49+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1565032661557313747.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-28T16:07:49+00:00",
+      "id": "ARES-EGGBEV02-INTERNAL-NOTE-1565034263848427611",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Conta 02: criação e clone; FAX-US-03 é somente observação interna",
+      "updated_at": "2026-10-28T16:07:49+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565032110782418977.reporting-scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -3191,6 +3296,24 @@
       "superseded_by": null,
       "title": "Eggbev Conta 02: thread exclusiva de relatórios FAX-US-03",
       "updated_at": "2026-10-28T16:01:17+00:00"
+    },
+    {
+      "canonical_key": "ares.discord.thread.1565032879040499744.scope",
+      "canonical_source": "context/ares-operational-map.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T16:09:35+00:00",
+      "id": "ARES-EGGBEV02-WARMUP-THREAD-1565034640157446188",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev Conta 02: aquecimento de Pages nesta thread; continuidade na thread de criação",
+      "updated_at": "2026-10-28T16:09:35+00:00"
     },
     {
       "canonical_key": "ares.failure-recovery",
@@ -14650,6 +14773,24 @@
       "updated_at": "2026-10-05T15:21:53+00:00"
     },
     {
+      "canonical_key": "procedure.meta.b013-confirmed-link-transitions",
+      "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/b013-confirmed-link-transitions.md",
+      "consumers": [
+        "b013-dtr-link-watch",
+        "zeus"
+      ],
+      "domain": "growth",
+      "effective_at": "2026-10-28T16:06:29+00:00",
+      "id": "procedure-b013-confirmed-link-transitions-20261028",
+      "kind": "procedure",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "B013 separa falha de leitura de mudança confirmada de vínculo e deduplica por identidade",
+      "updated_at": "2026-10-28T16:06:29+00:00"
+    },
+    {
       "canonical_key": "procedure.discord.alert-embed-bottom-emoji-layout",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/discord-webhook-alert-format.md",
       "consumers": [
@@ -15027,5 +15168,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T16:01:32+00:00"
+  "updated_at": "2026-10-28T16:09:35+00:00"
 }

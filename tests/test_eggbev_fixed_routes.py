@@ -17,17 +17,17 @@ class EggbevFixedRoutesTests(unittest.TestCase):
         self.operation = json.loads(OPERATION.read_text(encoding="utf-8"))
         self.config = yaml.safe_load(VERSIONED_CONFIG.read_text(encoding="utf-8"))
 
-    def test_exactly_six_unique_fixed_routes(self):
+    def test_six_functional_routes_share_creation_clone_destination(self):
         routes = self.registry["routes"]
         self.assertEqual(len(routes), 6)
         ids = [str(route["thread_id"]) for route in routes.values()]
-        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(len(set(ids)), 5)
+        self.assertEqual(routes["campaign_creation"]["thread_id"], routes["campaign_cloning"]["thread_id"])
         self.assertEqual(
             set(ids),
             {
                 "1541578622106865815",
                 "1543312825890381865",
-                "1543333373945053184",
                 "1541578606076231750",
                 "1541578596253175858",
                 "1541578556037927053",
