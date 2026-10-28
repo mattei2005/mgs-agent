@@ -53,6 +53,8 @@ test('calculation validation checks conversion, mapped totals, cutoff and preser
 
 test('WavesBee split authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1553019425706217652';assert.equal(validatePlan(p).mapping_authority_message_id,'1553019425706217652');});
 
+test('Newsoun and FinanciamentoAutoAdx BR authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1564993480487342243';assert.equal(validatePlan(p).mapping_authority_message_id,'1564993480487342243');});
+
 test('AutoCreditAdx US authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1561373355704320192';assert.equal(validatePlan(p).mapping_authority_message_id,'1561373355704320192');});
 
 test('Zytiva Finanzas ES authority accepted',()=>{const p=plan();p.mapping_authority_message_id='1559930340628242484';assert.equal(validatePlan(p).mapping_authority_message_id,'1559930340628242484');});

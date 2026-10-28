@@ -409,7 +409,7 @@ def blocker_body(plan: dict, *, confirmed_applied: bool) -> str:
             lines.append(f"{index}. {item['domain']} / {item['country'].upper()} — {rows} linha(s), {amount}. O identificador não está cadastrado; candidato: {candidates}. Faltam o domínio correto e a vertical. Fonte: {placements}.")
         else:
             lines.append(f"{index}. {item.get('domain', item.get('report', 'fonte'))} — {rows} linha(s), {amount}. Falta a classificação operacional exata. Fonte: {placements}.")
-    lines.append("Responda com a informação que falta em cada número e diga se a regra deve valer também para os próximos relatórios.")
+    lines.append("Responda com a informação que falta em cada número. A classificação será o padrão para esse mesmo domínio e país nos próximos relatórios, salvo se você indicar uma exceção pontual.")
     lines.extend(
         [
             "O restante já está na dashboard. O Realizado continua até o último dia completo; esta data aparece como parcial.",

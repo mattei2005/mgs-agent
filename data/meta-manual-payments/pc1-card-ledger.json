@@ -299,10 +299,16 @@
       "account_id": "1062446663435585",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-10-27T14:59:11.640154-04:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261027T145830833807/verified-1062446663435585.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261027T145830833807/1062446663435585-receipt.json",
+      "read_at": "2026-10-28T09:48:07.724157-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T094731939856/verified-1062446663435585.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T094731939856/1062446663435585-receipt.json",
       "rows": [
+        {
+          "date": "Oct 27, 2026",
+          "method": "Discover ···· 6762",
+          "amount": "61.00",
+          "status": "Paid"
+        },
         {
           "date": "Oct 27, 2026",
           "method": "Discover ···· 6762",
@@ -314,18 +320,12 @@
           "method": "Discover ···· 6762",
           "amount": "1067.00",
           "status": "Failed"
-        },
-        {
-          "date": "Oct 26, 2026",
-          "method": "MasterCard ···· 0413",
-          "amount": "1040.35",
-          "status": "Failed"
         }
       ],
       "latest_card": {
         "date": "Oct 27, 2026",
         "method": "Discover ···· 6762",
-        "amount": "1067.00",
+        "amount": "61.00",
         "status": "Paid"
       },
       "status": "verified_card",
