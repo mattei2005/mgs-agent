@@ -2122,6 +2122,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-YOLO-PAUSED-ROI10-25-TREND-1564974014907023454",
+      "next_step": "Analise concluida; qualquer reativacao exige pedido proprio; preservar coorte e fontes para drilldown",
+      "objective": "Analisar historico real de14dias das51campanhas pausadas na faixa10-25porcento em27/10",
+      "source": "/root/mgs-agent/reports/ares/yolo-paused-roi10-25-trend-1564974014907023454/analysis.json",
+      "state": "concluido e validado:51ids714celulas;27queda com base consistente15margem baixa6mistas3basecurta;queda aparece25/10;receita por sessao menor sem prova causal;zero writes meta",
+      "thread_id": "1564704836350509158",
+      "updated_at": "2026-10-28T12:12:31+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-YOLO02-G006-INTRADAY-ROI-SORT-20261016",
       "next_step": "Entregar texto canônico nesta resposta; próximos pedidos usam account_sort_overrides sem cron.",
       "objective": "Intraday atual e ranking persistente ROI estimado decrescente Yolokfx02 G006",
@@ -7542,5 +7552,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T12:06:26+00:00"
+  "updated_at": "2026-10-28T12:12:31+00:00"
 }
