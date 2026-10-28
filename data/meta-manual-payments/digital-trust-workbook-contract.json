@@ -83,17 +83,20 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_metrics_validated_native_auth_surface_conflict",
-    "validated_metrics_at": "2026-10-28T08:03:40.584323-04:00",
-    "verified_at": "2026-10-28T08:06:06.635649-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T080344183077",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T080353254290",
+    "status": "full_refresh_validated",
+    "authority_message_id": "1564993370240057388",
+    "validated_metrics_at": "2026-10-28T09:53:07.711389-04:00",
+    "verified_at": "2026-10-28T09:54:26.531789-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T095311754269",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 12,
       "Linha de crédito": 35
     },
     "source_to_live_sheet_cgij_exact": true,
+    "h_source_to_live_sheet_and_note_exact": true,
+    "d_ledger_to_live_sheet_exact": true,
     "full_grid_narrow_write_readback": true,
     "totals_validated_columns": [
       "F",
@@ -102,79 +105,58 @@
       "I",
       "J"
     ],
-    "fresh_h_account_ids": [],
-    "fresh_h_count": 0,
-    "pending_h_account_ids": [
-      "336562339356179",
-      "3752157451670648",
-      "2039876850230678",
-      "311204101516831",
-      "26632890069640784",
-      "3188620887977617",
-      "1526280818302320",
-      "869857549542755",
-      "937846586033361",
-      "1085117577390237",
-      "1498990138663094",
-      "536294549227786",
-      "4511685129081248",
-      "814915838330687",
-      "1829406761389732",
-      "2031917360813819",
+    "fresh_h_account_ids": [
       "1001115192056600",
-      "897046653487466",
+      "1018267074603840",
       "1062887799996139",
-      "1851640026221079",
+      "1085117577390237",
+      "1107653168698121",
+      "1245683183659911",
+      "1414197490675732",
+      "1498990138663094",
+      "1526280818302320",
+      "1583000095650153",
+      "1600310064116258",
       "1736068407518263",
       "1744611463000838",
-      "1018267074603840",
-      "2633813727134360",
       "1753257812779707",
-      "908704754163659",
-      "1414197490675732",
-      "1245683183659911",
-      "1107653168698121",
-      "787796726891306",
-      "781612907182683",
-      "1583000095650153",
+      "1829406761389732",
+      "1851640026221079",
+      "2031917360813819",
+      "2039876850230678",
       "2429758060563333",
-      "1600310064116258",
-      "7840111366055613"
+      "2633813727134360",
+      "26632890069640784",
+      "311204101516831",
+      "3188620887977617",
+      "336562339356179",
+      "3752157451670648",
+      "4511685129081248",
+      "536294549227786",
+      "781612907182683",
+      "7840111366055613",
+      "787796726891306",
+      "814915838330687",
+      "869857549542755",
+      "897046653487466",
+      "908704754163659",
+      "937846586033361"
     ],
-    "h_preserved_count": 35,
-    "historical_h_note_read_at_min": "2026-10-27T14:40:11.349099-04:00",
-    "historical_h_note_read_at_max": "2026-10-27T14:58:04.375632-04:00",
-    "h_values_and_notes_preserved_exact": true,
-    "d_values_and_notes_preserved_exact": true,
-    "pending_ui": [
-      {
-        "account_id": "1481815942722118",
-        "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1290644206529750",
-        "name": "OpenzedFinanzas-ES-CC-ES-02",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
-    ],
+    "pending_h_account_ids": [],
+    "fresh_h_count": 35,
+    "h_read_at_min": "2026-10-28T09:27:49.761870-04:00",
+    "h_read_at_max": "2026-10-28T09:45:24.501261-04:00",
+    "h_sum_usd": "496634.46",
+    "pending_ui": [],
     "card_blank_rows": [
       {
         "account_id": "1419148446852410",
         "name": "Growpowerhub-US-SHEIN-EN-04-G004",
-        "reason": "no_charge_located"
+        "reason": "no_charge_located",
+        "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
       }
     ],
+    "card_proofs_updated": 4,
     "average_period": [
       {
         "since": "2026-10-25",
@@ -182,40 +164,35 @@
       }
     ],
     "totals_usd": {
-      "average_daily": "28778.54",
-      "balance": "498699.54",
-      "month_spend": "792908.24"
+      "average_daily": "28784.97",
+      "balance": "500181.46",
+      "month_spend": "794420.24"
     },
     "invoice_period": "2026-09-01",
     "invoice_due_usd": "0.00",
     "visible_invoice_numbers": 0,
-    "pc1_blocker": {
-      "reason": "native_auth_surface_conflict_no_input",
-      "ax_windows_security": true,
-      "ax_passkey_domain": "google.com",
-      "pixels_show_meta_accounts": true,
-      "native_dialog_visible_in_pixels": false,
-      "diagnosis": "Native Google passkey prompt present in AX while capture shows Meta Accounts; unsafe keyboard/capture parity. No input or recovery bypass attempted."
-    },
-    "owned_tabs_created": 0,
-    "lease_acquired_this_run": true,
     "lease_free": true,
     "payments_executed": 0,
     "meta_writes": 0,
     "cron_changes": 0,
+    "other_sheet_properties_unchanged": true,
     "workbook_sheet_count": 2,
-    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T080353254290/closure-current.json"
+    "report_infra_status": "pending",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946/closure-current.json",
+    "recovered_initial_failure": "System Python lacked cryptography; switched to current Hermes interpreter before external effects; no installs."
   },
   "pending_card_history": {
-    "status": "pending_native_auth_surface_conflict",
-    "account_ids": [
+    "status": "resolved_validated",
+    "account_ids": [],
+    "resolved_account_ids": [
       "1481815942722118",
       "1062446663435585",
       "1543098427832443",
       "1290644206529750"
     ],
-    "reason": "New generic events require historical instrument proof; native Google passkey prompt in AX conflicts with Meta pixels. D preserved; no auth bypass."
+    "authority_message_id": "1564993370240057388",
+    "verified_at": "2026-10-28T09:54:26.531789-04:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -285,7 +262,7 @@
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
   "layout_version": 3,
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T143910516361",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946",
   "pay_now_updated_each_tick": true,
   "pay_now_collection_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
   "schema": {

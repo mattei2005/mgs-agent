@@ -101,7 +101,7 @@ No lote corrente05/10, a regra corrigiu apenas os dois metadados US de Escalatep
 - Preservar medium canônico e sufixo de operação; esta decisão não força todos os gestores futuros para o responsável do site. Newsoun US/GB e seus subdomínios permanecem separados; países não confirmados continuam bloqueados.
 - **Padrão de permanência — Rodolfo1564993480487342243:** classificações fornecidas para resolver exceções GAM são padrão para a mesma combinação domínio/país/placement, salvo limitação explícita. Não pedir uma segunda confirmação de permanência nem estender para outros países/domínios.
 - FinanciamentoAutoAdx: responsável MGS confirmado somente na competência aberta outubro/2026; preservar INATIVO/Não participa, SB Rede1/CAD e histórico fechado. A correção do cadastro não ativa tráfego nem rateio.
-- Fonte27/10: complemento pendente Newsoun CAD`0.0019335693271958824` e FinanciamentoAutoAdx CAD`0.0065431806582719135`. Publicação/fechamento são estados separados da decisão: consultar checkpoint `ZEUS-FINANCE-BR-CAR-1564993480487342243` e sua evidência; não presumir execução pela existência desta seção.
+- Fonte27/10 concluída:2290linhas/78grupos, zero pendências, revisão1119/audit5356, último dia completo27/10; replay idempotente. Somente2complementos: Newsoun CAD`0.0019335693271958824`/`g005-d` e FinanciamentoAutoAdx CAD`0.0065431806582719135`/`g002-s`;76grupos anteriores preservados.523testes sem skips, API e6checks desktop/mobile validados. Report: `reports/finance-br-car-1564993480487342243.md`; checkpoint `ZEUS-FINANCE-BR-CAR-1564993480487342243`.
 
 ## Fontes obrigatórias
 

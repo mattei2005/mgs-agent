@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T08:16:24-04:00",
+    "updated_at": "2026-10-28T13:53:55.807601+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -947,7 +947,8 @@
           "J"
         ]
       },
-      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "recovered_by": "meta-manual-payments-refresh-1564993370240057388"
     },
     {
       "id": "meta-manual-payments-refresh-20261027-2102",
@@ -54669,6 +54670,171 @@
         "channel_id": "1564289742567112795",
         "readback_exact": true,
         "url": "https://discord.com/channels/1185714635991679006/1564289742567112795/1564745587474305218"
+      }
+    },
+    {
+      "id": "finance-br-car-1564993480487342243",
+      "type": "finance-gam-classification",
+      "authority": [
+        "1564986937343746150",
+        "1564993480487342243"
+      ],
+      "agent": "zeus",
+      "updated_at": "2026-10-28T13:53:55.807601+00:00",
+      "status": "published_verified",
+      "files": {
+        "apps/finance-system/gam_revenue.py": "f0acd4d2e3a6f168bffd38c083592dcd54d19b4b85489565988d9a72a0cecb5b",
+        "apps/finance-system/finance_gam_revenue_sync.py": "458f13ab29bf4561d5766caf3672b663ac044e126a7a5be2102a001dcedd8309",
+        "apps/finance-system/gam-revenue-core.mjs": "530bd3b8f23dc04d22260ab69e8c7ac587e28cb8fb9160115a4652d0851b977e",
+        "apps/finance-system/tests/test_gam_revenue.py": "e8a587def529197fc6bdde821b1b3e2f8100e8ed554cf4e4cf6f0679c747a53e",
+        "apps/finance-system/tests/gam-revenue-core.test.mjs": "3d12f26bce6565009edc6da76c6efe7b5894afdcede55add393204da4fafae52",
+        "data/finance-gam-revenue-rules.json": "84cc7e1ffedabdf35fbc62927533dd683a9ec0b5080f89e38d7728b746f719ac",
+        "docs/finance-gam-email-automation.md": "ffa44d9a3176fd9940f121ac39bf4dfc722a3606067daffd79e74ca668ceee9c",
+        "reports/finance-br-car-1564993480487342243.md": "7c47df12d0fd2f0d073bbe2e9089a068cf54ecaf5ac72b225b69d69290037b93"
+      },
+      "skills": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/SKILL.md": "3a36bf33b2a03d92df011dbc4ace29a8c760b954947309a620b3038d885eeb0c",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-finance-dashboard/references/revenue-manager-attribution-and-sequential-daily-flow.md": "f4896497a0762f8ad526ae9c2868b60bfc4e7a56c7f58774643ea80cf05696b5"
+      },
+      "remote_files": {
+        "gam-revenue-core.mjs": "530bd3b8f23dc04d22260ab69e8c7ac587e28cb8fb9160115a4652d0851b977e",
+        "finance-gam-revenue-rules.json": "7ce6eab5a81f7520f3ac529ede17764c008cbe14a668ea0d5d890fefc91a1348"
+      },
+      "report_path": "reports/finance-br-car-1564993480487342243.md",
+      "evidence_path": "/root/mgs-agent/apps/finance-system/private/br-car-1564993480487342243",
+      "tests": 523,
+      "placements": {
+        "pl_digital-trust_newsoun_br": {
+          "domain": "newsoun.com",
+          "vertical": "br-car-br",
+          "responsible": "g005/Kelly"
+        },
+        "pl_digital-trust_financiamentoautoadx_br": {
+          "domain": "financiamentoautoadx.com",
+          "vertical": "br-car-br",
+          "responsible": "g002/MGS"
+        }
+      },
+      "permanence": "standard unless explicitly date-limited",
+      "cutoff": "2026-10-27",
+      "financial_revision": 1119,
+      "financial_audit": "5356",
+      "idempotent_replay": true,
+      "ui_financial_writes": 0,
+      "rollback": "apps/finance-system/private/releases/br-car-1564993480487342243",
+      "deletions": 0
+    },
+    {
+      "id": "meta-manual-payments-refresh-1564993370240057388",
+      "agent": "zeus",
+      "type": "authorized_financial_snapshot_recovery",
+      "authority_message_id": "1564993370240057388",
+      "status": "full_refresh_validated",
+      "updated_at": "2026-10-28T09:54:26.531789-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/data/meta-manual-payments/pc1-card-ledger.json",
+        "/root/mgs-agent/data/meta-manual-payments/pc1-pay-now-ledger.json",
+        "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/recurring-refresh.md"
+      ],
+      "verification": {
+        "status": "full_refresh_validated",
+        "authority_message_id": "1564993370240057388",
+        "validated_metrics_at": "2026-10-28T09:53:07.711389-04:00",
+        "verified_at": "2026-10-28T09:54:26.531789-04:00",
+        "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T095311754269",
+        "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946",
+        "accounts": 47,
+        "groups": {
+          "Cartão de crédito": 12,
+          "Linha de crédito": 35
+        },
+        "source_to_live_sheet_cgij_exact": true,
+        "h_source_to_live_sheet_and_note_exact": true,
+        "d_ledger_to_live_sheet_exact": true,
+        "full_grid_narrow_write_readback": true,
+        "totals_validated_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "fresh_h_account_ids": [
+          "1001115192056600",
+          "1018267074603840",
+          "1062887799996139",
+          "1085117577390237",
+          "1107653168698121",
+          "1245683183659911",
+          "1414197490675732",
+          "1498990138663094",
+          "1526280818302320",
+          "1583000095650153",
+          "1600310064116258",
+          "1736068407518263",
+          "1744611463000838",
+          "1753257812779707",
+          "1829406761389732",
+          "1851640026221079",
+          "2031917360813819",
+          "2039876850230678",
+          "2429758060563333",
+          "2633813727134360",
+          "26632890069640784",
+          "311204101516831",
+          "3188620887977617",
+          "336562339356179",
+          "3752157451670648",
+          "4511685129081248",
+          "536294549227786",
+          "781612907182683",
+          "7840111366055613",
+          "787796726891306",
+          "814915838330687",
+          "869857549542755",
+          "897046653487466",
+          "908704754163659",
+          "937846586033361"
+        ],
+        "pending_h_account_ids": [],
+        "fresh_h_count": 35,
+        "h_read_at_min": "2026-10-28T09:27:49.761870-04:00",
+        "h_read_at_max": "2026-10-28T09:45:24.501261-04:00",
+        "h_sum_usd": "496634.46",
+        "pending_ui": [],
+        "card_blank_rows": [
+          {
+            "account_id": "1419148446852410",
+            "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+            "reason": "no_charge_located",
+            "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+          }
+        ],
+        "card_proofs_updated": 4,
+        "average_period": [
+          {
+            "since": "2026-10-25",
+            "until": "2026-10-27"
+          }
+        ],
+        "totals_usd": {
+          "average_daily": "28784.97",
+          "balance": "500181.46",
+          "month_spend": "794420.24"
+        },
+        "invoice_period": "2026-09-01",
+        "invoice_due_usd": "0.00",
+        "visible_invoice_numbers": 0,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0,
+        "other_sheet_properties_unchanged": true,
+        "workbook_sheet_count": 2,
+        "report_infra_status": "pending",
+        "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T092657288946/closure-current.json",
+        "recovered_initial_failure": "System Python lacked cryptography; switched to current Hermes interpreter before external effects; no installs."
       }
     }
   ],
