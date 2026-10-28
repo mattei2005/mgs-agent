@@ -1,6 +1,13 @@
 {
   "request_id": "eggbev03-duplicate-1565063126771040317",
-  "status": "WAITING_ACCOUNT_ONBOARDING_AUTHORITY_AND_START_CLARIFICATION",
+  "status": "WAITING_CORRECT_ADVERTISER_PAGE_ACCESS_AND_START_CLARIFICATION",
+  "onboarding_approval": {
+    "authority_message_id": "1565068890860560585",
+    "authorized_by_discord_id": "344196393512075265",
+    "live_author_verified": true,
+    "scope": "account03 operational onboarding and Nicolas per-request campaign budget/activation authority",
+    "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json#/authority"
+  },
   "source": {
     "platform": "discord",
     "guild_id": "1185714635991679006",
@@ -9,7 +16,7 @@
     "message_id": "1565063126771040317",
     "sender_display_name": "Nicolas Holanda",
     "expected_sender_discord_id": "1055570806945620030",
-    "sender_live_identity_verified": false
+    "sender_live_identity_verified": true
   },
   "target": {
     "account_id": "1481815942722118",
@@ -24,7 +31,7 @@
     "mode": "pure_clone",
     "quantity": 1,
     "source_campaign_name_literal": "219 - Brunetz Finance - ENG - US - (pg_23150) - 00x5",
-    "source_campaign_id": null,
+    "source_campaign_id": "120250674979590507",
     "daily_budget_currency_requested": "USD",
     "daily_budget_major_requested": "20.00",
     "requested_activation": "coloque para ativar o quanto antes",
@@ -33,27 +40,31 @@
     "final_summary_approved": false
   },
   "read_only_findings": {
-    "target_account_contract_exists": false,
-    "target_account_engine_registration_exists": false,
+    "target_account_contract_exists": true,
+    "target_account_engine_registration_exists": true,
     "bot_consumer_registered_target_account": false,
+    "bot_onboarding_candidate_registered": true,
+    "account03_nicolas_budget_and_activation_authority_active": true,
     "existing_bot_operation_account_id": "1034081997659047",
     "existing_nicolas_budget_and_immediate_start_delegation_explicit_account": "1034081997659047",
     "target_advertiser_credential_reference_resolved": false,
-    "live_meta_preflight_performed": false
+    "live_meta_preflight_performed": true,
+    "source_hierarchy": {"adset_count": 1, "ad_count": 3, "active_ads": 1, "paused_ads": 2, "page_id": "1306762309190521"},
+    "source_page_access": {"verified": false, "meta_error_code": 10, "existing_eggbev_advertiser_candidates_checked": 2},
+    "evidence_root": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585"
   },
   "blockers": [
-    "Account 03 is in corporate scope and bound to this thread but has no account-specific BOT execution contract or Engine v3 registration. Do not reuse account 01 identity, credential, state or write authorization.",
-    "Current recorded financial/immediate-start exception explicitly names account 01. Rodolfo must explicitly confirm the corresponding scope for account 03 before budget/activation writes.",
+    "Account03 onboarding and Nicolas budget/activation authority are approved and registered. Readiness remains fail-closed: existing Eggbev advertiser candidates can read account03 but direct GET of the source Page returned Meta code10; the correct advertiser binding is not proven. Do not switch to System User or another advertiser as fallback.",
     "Literal date/time is ambiguous against the instruction to activate as soon as possible; retain it unchanged until Nicolas confirms the intended time and timezone."
   ],
   "next_actions": [
-    "Obtain Rodolfo's explicit approval for separate account-03 onboarding and Nicolas budget/immediate-start authority, without billing, credential changes or automation.",
-    "Complete approved account-scoped onboarding outside the campaign transaction, resolving the correct existing advertiser credential and validating account identity, USD currency, timezone, source campaign and Page eligibility in read-only.",
+    "Identify the advertiser profile that actually holds the source Brunetz Finance Page and validate that existing identity read-only; any credential or asset-permission change needs separate authority.",
+    "Complete account03 capabilities outside the campaign transaction after Page access is proven; do not repeat the already granted onboarding/budget/activation authorization.",
     "Confirm literal start intent with Nicolas, then prepare and present the final exact plan for request approval before any Meta write.",
     "Execute only through central Engine v3 after all gates pass; preserve this request ID and read back all created objects."
   ],
   "external_side_effects": {
-    "meta_api_calls": 0,
+    "meta_api_calls": {"graph_batch_http_requests": 3, "direct_get_http_requests": 1, "logical_get_operations": 9, "local_guard_rejections_before_network": 1},
     "meta_writes": 0,
     "created_campaign_ids": [],
     "created_adset_ids": [],

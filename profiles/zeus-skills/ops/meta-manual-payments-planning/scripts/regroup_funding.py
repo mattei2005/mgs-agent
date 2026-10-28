@@ -41,6 +41,10 @@ def build(before,funding):
    cs[7].pop('userEnteredValue',None);cs[7]['note']='Fora do recorte Pay now: funding padrão atual é cartão; valor anterior preservado no backup. Nenhum billing alterado.'
    if not cs[4].get('userEnteredValue'):cs[5].pop('userEnteredValue',None)
   groups[method].append(r)
+ grand_indices=[i for i,r in enumerate(rows)if label(r).startswith('TOTAL GERAL')]
+ assert len(grand_indices)==1,'grand_total_not_unique'
+ for total in ['TOTAL CARTÃO DE CRÉDITO','TOTAL LINHA DE CRÉDITO']:
+  assert sum(label(r)==total for r in rows)==1,'group_subtotal_not_unique'
  if not changes:return b,changes,groups
  # Preserve every pre-existing relative order; insert newly-card accounts by exact name.
  moved={x['id']for x in changes};cards=[r for r in groups['Cartão de crédito']if aid(r)not in moved]
@@ -57,12 +61,18 @@ def build(before,funding):
   for col in cols:
    letter=chr(65+col);cs[col]['userEnteredValue']={'formulaValue':f'=ROUND(SUM({letter}{start}:{letter}{end}),2)'}
   subpos[method]=len(out)+1;out.append(sub)
- out.append(copy.deepcopy(rows[53]));grand=copy.deepcopy(template['TOTAL GERAL']);
+ # Human row moves/blank rows make historical ordinal separators unsafe.
+ separator={'values':[{}for _ in range(10)]}
+ out.append(separator);grand=copy.deepcopy(template['TOTAL GERAL']);
  for col in [5,6,7,8,9]:
   letter=chr(65+col);grand['values'][col]['userEnteredValue']={'formulaValue':f'=ROUND(SUM({letter}{subpos["Cartão de crédito"]},{letter}{subpos["Linha de crédito"]}),2)'}
  out.append(grand)
- assert len(out)==55
- out.extend(copy.deepcopy(rows[55:]));s['data'][0]['rowData']=out
+ assert len(out)==len(funding)+8,'unexpected_rebuilt_layout'
+ old_end=grand_indices[0]+1;write_end=max(old_end,len(out))
+ out.extend(copy.deepcopy(separator)for _ in range(write_end-len(out)))
+ out.extend(copy.deepcopy(rows[write_end:]));s['data'][0]['rowData']=out
+ assert sum(label(r).startswith('TOTAL GERAL')for r in out)==1,'rebuilt_grand_total_not_unique'
+ assert sum(label(r)=='TOTAL LINHA DE CRÉDITO'for r in out)==1,'rebuilt_line_subtotal_not_unique'
  assert {aid(r)for r in out if aid(r)}==set(funding)and len([r for r in out if aid(r)])==len(funding)
  return b,changes,groups
 
@@ -92,7 +102,8 @@ def main():
   with(H/'writer.lock').open('a')as lock:
    fcntl.flock(lock,fcntl.LOCK_EX);assert api('GET',url)==before,'concurrent_sheet_change'
    if changes:
-    api('POST',root+':batchUpdate',{'requests':[{'updateCells':{'range':{'sheetId':c['sheet_id'],'startRowIndex':0,'endRowIndex':55,'startColumnIndex':0,'endColumnIndex':10},'rows':expected['sheets'][0]['data'][0]['rowData'][:55],'fields':'userEnteredValue,userEnteredFormat,note'}}]});assert normal(api('GET',url))==normal(expected),'regroup_readback_mismatch'
+    oldrows=before['sheets'][0]['data'][0]['rowData'];old_end=next(i+1 for i,r in enumerate(oldrows)if r.get('values',[{}])[0].get('userEnteredValue',{}).get('stringValue','').startswith('TOTAL GERAL'));write_end=max(old_end,len(funding)+8)
+    api('POST',root+':batchUpdate',{'requests':[{'updateCells':{'range':{'sheetId':c['sheet_id'],'startRowIndex':0,'endRowIndex':write_end,'startColumnIndex':0,'endColumnIndex':10},'rows':expected['sheets'][0]['data'][0]['rowData'][:write_end],'fields':'userEnteredValue,userEnteredFormat,note'}}]});assert normal(api('GET',url))==normal(expected),'regroup_readback_mismatch'
    fresh=json.loads((H/'digital-trust-workbook-contract.json').read_text());assert fresh==c,'contract_concurrent_change';save(run/'contract-before.json',c)
    c['pay_now_account_ids']=[i for i,x in funding.items()if x['method']=='Linha de crédito'];c['general_refresh_blocker']=None;c['pending_sheet_reclassification']=None;c['native_schedule_state']='enabled_dynamic_live_funding_regroup';c['last_regroup_report']=str(run);save(H/'digital-trust-workbook-contract.json',c)
  result={'status':'regroup_validated'if a.apply else'regroup_plan','accounts':len(funding),'groups':{k:len(v)for k,v in groups.items()},'changes':changes,'run_dir':str(run),'meta_writes':0,'payments_executed':0};save(run/'receipt.json',result);print(json.dumps(result,ensure_ascii=False))

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "accounts": [{
+    "account_id": "1481815942722118",
+    "meta_account_ref": "act_1481815942722118",
+    "operation_id": "Eggbev-US-CC-EN-03-BOT",
+    "account_alias": "Eggbev-US-CC-EN-03",
+    "channel": "Messenger",
+    "strategy": "BOT",
+    "currency_expected": "USD",
+    "timezone_source": "meta_ad_account_timezone",
+    "account_currency": "USD",
+    "timezone": "America/New_York",
+    "meta_detected": {"name": "Eggbev-US-CC-EN-03 (FAX-US-02)", "currency": "USD", "timezone_name": "America/New_York", "account_status": 1, "business_id": "155263197283282"},
+    "internal_note_is_not_operational_alias": true,
+    "management": {"owners": ["Rodolfo Mattei", "Nicolas Holanda"], "nicolas_discord_id": "1055570806945620030", "authority_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json#/authority", "authority_message_id": "1565068890860560585"},
+    "token_1password_item": null,
+    "token_field": null,
+    "credential_resolution_status": "advertiser_with_source_Page_access_not_identified",
+    "credential_model": "individual advertiser User Access Token; System User and other advertiser fallback forbidden",
+    "write_mode": "fail_closed_pending_Page_access_and_account_capability_validation",
+    "runtime_routes": {"campaign_creation": {"thread_id": "1565032671669919827", "write_enabled": false}, "campaign_cloning": {"thread_id": "1565032671669919827", "engine_account_registered": true, "supported_modes": [], "write_enabled": false}},
+    "onboarding_evidence": "data/ares/meta-ads/audit/eggbev03/onboarding-1565068890860560585",
+    "recurring_automation_enabled": false
+  }]
+}

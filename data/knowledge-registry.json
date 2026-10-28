@@ -3334,6 +3334,41 @@
       "updated_at": "2026-10-28T16:09:35+00:00"
     },
     {
+      "canonical_key": "ares.eggbev.account03.nicolas-campaign-authority",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T18:30:24+00:00",
+      "id": "ARES-EGGBEV03-NICOLAS-AUTHORITY-1565068890860560585",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Conta03: Rodolfo autoriza onboarding e Nicolas budget/ativacao por pedido",
+      "updated_at": "2026-10-28T18:30:24+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev.account03.engine-onboarding",
+      "canonical_source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT-v3.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-10-28T18:30:24+00:00",
+      "id": "ARES-EGGBEV03-ONBOARDING-1565068890860560585",
+      "kind": "capability",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "draft",
+      "superseded_by": null,
+      "title": "Conta03 cadastro fail-closed: conta/fonte lidas, acesso Page pendente",
+      "updated_at": "2026-10-28T18:30:24+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565032888347664495.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -15259,5 +15294,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T18:23:45+00:00"
+  "updated_at": "2026-10-28T18:30:24+00:00"
 }

@@ -1,0 +1,570 @@
+# Ares — Mapa Operacional HOT
+
+> Status: operacional v0.4
+> Dono executivo: Rodolfo Mattei
+> Agente: Ares
+> Área: Creative Operations + Growth / Media Buying
+> Atualização: estoque permanente nos 30 TB e intake no Shared Drive, cutover same-ID validado em 2026-10-23. Contrato ativo em `context/drive-archive-owner-connector.md`.
+
+## 1. Regra de uso
+
+Escopo operacional obrigatório e mais restritivo: `context/ares-asset-scope.md` + `data/ares/asset-scope.json` — somente contas Digital Trust e hosts corporativos do catálogo SB; app técnico não amplia contas/domínios. Cadastro na SB basta para o escopo de sites do Ares, sem exigir cadastro editorial adicional. Pedidos de identificar sites por vertical (ex.: SHEIN) começam pelo catálogo positivo, não por recusa de domínio ausente. Reafirmação de Rodolfo: `1564745626388922459`.
+
+Delegação permanente `1564748349431881972`: Zeus pode autorizar pedidos de qualquer membro humano com acesso live comprovado à origem Ares sobre qualquer site cadastrado na SB, sem novo OK de Rodolfo. Autoridade canônica: `data/ares/sb-site-member-authority.json`; registro em `data/authorized-users.json`. Novos sites exigem readback exato e reconciliação do snapshot, não nova autorização do CEO. Preservar grant individual limitado, gates específicos e Critical Subset; não conceder acesso global Zeus/Atena.
+
+Antes de busca ampla por `drive`, `creative`, `reference`, `video`, `meta`, `campaign`, `UPLOAD`, `budget`, `roi`, `canva` ou nomes soltos, abrir este mapa e escolher a fonte específica.
+
+Busca ampla só quando a fonte indicada não existir, o termo for novo, houver auditoria de drift ou Rodolfo pedir para procurar em tudo.
+
+## 2. Fontes principais
+
+```text
+Assunto                                Abrir primeiro
+-------------------------------------- ------------------------------------------------------------
+Identidade, autoridade e invariantes    /root/.hermes/profiles/ares/SOUL.md
+Rotas e limites                         /root/mgs-agent/context/routes.md
+Permissões reais                        /root/mgs-agent/data/authorized-users.json
+Matriz conceitual                       /root/mgs-agent/context/permissions-matrix.md
+Creative Ops                            creative-operations-mgs/SKILL.md
+Taxonomia/linhagem/reserva              creative-taxonomy-mgs/SKILL.md
+Meta/Facebook Ad Library                meta-library-reference-intake/SKILL.md
+Aquisição geral                         paid-acquisition-operations/SKILL.md
+Estratégia BOT/Messenger compartilhada  chatpion-bot-campaign-operations/SKILL.md
+Executor Campaign Ops v3                meta-campaign-engine-v3/SKILL.md
+Acompanhamento landing pós-resposta     landing-followup-operations/SKILL.md; contrato data/ares/meta-ads/policies/direct-traffic-landing-followup.json
+SHEIN: nome/ID por gestor/canal          data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json
+SHEIN: pipeline comum por gestor/conta   direct-traffic-shein-operations/references/general-campaign-fast-route.md
+Meta intraday + governança consolidada    meta-ads-intraday-operations/SKILL.md
+Redirect histórico de guardrails          meta-ads-governance-guardrails/SKILL.md
+Tráfego direto CBO/UTM                  direct-traffic-cbo-operations/SKILL.md
+Sanitizador metadata                    /root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md
+Dados criativos                         /root/mgs-agent/data/ares/creative-ops/
+Inventário unificado                    /root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl
+Intake Drive read-only                  /root/mgs-agent/scripts/ares-drive-upload-manual-inventory.py
+Dados Meta Ads                          /root/mgs-agent/data/ares/meta-ads/
+Relatórios gerais Meta / billing         meta-ads-account-visualization/references/scoped-generic-reporting.md; scripts/ares-scoped-report.py
+Planilhas Google de relatórios          xlsx/references/mgs-google-sheets-report-export.md; editores padrão: data/ares/reporting/google-sheets-sharing-policy.json
+Catálogo positivo SB                    /root/mgs-agent/data/ares/sb-publisher-scope.json; ares-smartbidding-common.py sem catálogo HTTP global
+Scripts Ares                            /root/mgs-agent/scripts/ares-*
+Logs Ares                               /root/.hermes/profiles/ares/logs/
+Audit operacional Ares                  /root/mgs-agent/data/ares/meta-ads/audit/
+```
+
+### Canais Discord canônicos
+
+```text
+Canal                              ID                    Participantes                         Finalidade
+---------------------------------  --------------------  ------------------------------------  ----------------------------------------------
+ares-diretoria                     1508853425952133180   Rodolfo, Zeus e Ares                  Diretoria privada e histórico completo do Ares
+ares-criativos                     1516887105543077949   Rodolfo, Zeus, Ares e gestores        Creative Ops: brief, referência, upload, Drive e inventário
+eggbev-us-cc-en-01-g006            1539422731727147079   Rodolfo, Nicolas, Zeus e Ares         Eggbev US-CC-EN BOT: regras, campanhas e relatórios
+bot-fax-us-cc-en-01-g006           1544117442589106328   Rodolfo, Nicolas, Zeus e Ares         FinanceAdX US-CC-EN BOT: regras, campanhas e relatórios
+bot-lyzmo-us-cc-en-01-g006           1544117058982248448   Rodolfo, Nicolas, Zeus e Ares         Lyzmo US-CC-EN BOT: regras, campanhas e relatórios
+ares-creditoparaveiculo-br-car-br  1539432300364824607   Rodolfo, Nicolas, Geizian, Zeus e Ares creditoparaveiculo.com BR-CAR-BR: tráfego direto
+shein-geral                        1549404457157140601   Rodolfo, gestores SHEIN, Zeus e Ares   Coordenação geral SHEIN; writes permanecem isolados por gestor/conta
+shein-g001                         1548149087206121613   Rodolfo, Icaro, Geizian, Zeus e Ares SHEIN US tráfego direto: contas/perfis do G001
+shein-g002                         1548149300826079333   Rodolfo, Geizian, Zeus e Ares        SHEIN US tráfego direto: contas/perfis do G002
+shein-g003                         1548149483039236137   Rodolfo, Isliago, Geizian, Zeus e Ares SHEIN US tráfego direto: contas/perfis do G003
+shein-g004                         1548149654926135486   Rodolfo, Joe, Geizian, Zeus e Ares   SHEIN US tráfego direto: contas/perfis do G004
+shein-g005                         1548150015275438220   Rodolfo, Kelly, Geizian, Zeus e Ares SHEIN US tráfego direto: contas/perfis do G005
+shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizian, Zeus e Ares SHEIN US tráfego direto: contas/perfis do G006
+```
+
+`ares-diretoria` é o canal principal/home do profile. `ares-criativos` é o canal compartilhado de Creative Ops e não recebe novas rotas de Campaign Ops. Os canais privados por operação usam múltiplas contas por alias e threads separadas para criação, relatórios e criativos. Rodolfo (`344196393512075265`) e Zeus (`1496296175014252634`) são membros obrigatórios de toda thread criada pelo Ares em qualquer canal pai, inclusive Diretoria e canais futuros; listas por canal são aditivas. Assim, toda thread iniciada por Nicolas dentro das rotas do Ares inclui Rodolfo automaticamente. `eggbev-us-cc-en-01-g006` cobre a estratégia BOT/Messenger Eggbev US-CC-EN, é gerida por Rodolfo e Nicolas e também auto-adiciona Nicolas (`1055570806945620030`). Threads fixas: regras `1541578622106865815`, Intraday `1541578606076231750`, Diário `1541578596253175858`, criar campanhas `1541578556037927053`, clonar campanhas `1543333373945053184` e limite de leads `1543312825890381865`. A thread de regras `1543280854024060999` foi supersedida por decisão de Rodolfo em 2026-09-01 e permanece apenas como histórico para encerramento manual. Regras de operações anteriores e de tráfego direto não são herdadas automaticamente. `bot-fax-us-cc-en-01-g006` é a rota BOT/Messenger de `financeadx.com`; `bot-lyzmo-us-cc-en-01-g006` é a rota BOT/Messenger de `lyzmo.com`; ambos usam a mesma audiência e os mesmos permission overwrites do canal Eggbev por decisão de Rodolfo em 2026-08-31. `ares-creditoparaveiculo-br-car-br` cobre creditoparaveiculo.com BR-CAR-BR na estratégia de tráfego direto e também auto-adiciona Nicolas e Geizian (`321263240782807040`) em toda thread nova. `shein-geral` é a rota de coordenação comum da operação e auto-adiciona Rodolfo, Zeus, Geizian e os seis gestores; ela não remove o isolamento de contas/perfis nem autoriza write cruzado entre gestores. `shein-g001`…`shein-g006` são a exceção aprovada de canal por gestor: cada rota isola as contas/perfis do gestor correspondente, permite operar simultaneamente `yolokfx.com`/`vizioid.com` em EN e `mavroa.com` em ES, e auto-adiciona Rodolfo, Zeus, Geizian e o gestor correspondente. O contrato vivo é `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`; conta, moeda, timezone, objetivo, bid, estrutura e schedule continuam obrigatoriamente resolvidos por readback/pedido antes do primeiro write. Nenhum outro canal Discord é rota ativa do Ares.
+
+### Autorização vigente — participantes dos canais SHEIN
+
+- Rodolfo aprovou na thread `1557274000680288307` que toda pessoa humana com permissão efetiva de comunicação nos seis canais SHEIN acima, inclusive nas threads de origem, pode solicitar Campaign Ops sobre as contas/perfis do respectivo canal. Isso supersede a interpretação antiga de que somente o gestor titular poderia solicitar.
+- Resolver por ID real e permissões live no pai real da thread; `manager_code` pertence à conta, não é filtro exclusivo do remetente. Geizian autorizado no G005 não representa uso de conta fora do canal. Conta fora da partição, ausência de permissão ou pai divergente continuam bloqueados.
+- Regra canônica e executor: `SHEIN-US-DIRECT.json#/channel_authorization_policy` + `ares_campaign_v3.shein_channel_authority`; gates de billing/credenciais/Critical Subset permanecem. Não editar registry global de usuários nem overwrites Discord neste fluxo.
+- Duplicação com troca expressa MAXVOL/COCAP/BIDCAP e cap aplica somente no alvo novo; fonte permanece intacta, nome reflete lance alvo e readback confere cap/estratégia. Fonte: `SHEIN-US-DIRECT.json#/bid_strategy_change_policy`; procedimento: `direct-traffic-shein-operations`.
+
+### Escopo exclusivo — Yolokfx Conta 05 Criar Camp
+
+- Por definição explícita de Rodolfo Mattei nesta conversa, a thread `1558123871817965589`, no canal pai `shein-g001` (`1548149087206121613`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-05-G001` (`787796726891306`), gestor Icaro/G001.
+- Este recorte vale somente para esta thread; não restringe todo o canal pai nem altera a autoridade geral SHEIN. Não usar outras contas ou transformar esta conversa em rota de relatórios/otimização.
+- A definição do escopo não é um pedido de criação nem autorização de execução. Rodolfo pediu para aguardar sua explicação; nenhuma campanha deve ser criada até receber o pedido correspondente.
+- Fonte: declaração de Rodolfo na thread acima, após a mensagem `1558124030811447378` de aguardar explicação; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 01 Criar Camp
+
+- Por definição explícita de Rodolfo Mattei nesta conversa, a thread `1558124207517470805`, no canal pai `shein-g001` (`1548149087206121613`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-01-G001` (`1018267074603840` no catálogo SHEIN), gestor Icaro/G001.
+- Este recorte vale somente para esta thread; não restringe todo o canal pai nem altera a autoridade geral SHEIN. Não usar outras contas ou transformar esta conversa em rota de relatórios/otimização. A menção anterior a Growpowerhub foi expressamente desconsiderada por Rodolfo e não constitui binding.
+- A definição do escopo não é um pedido de criação nem autorização de execução. Aguardar o pedido de campanha; nenhum write Meta foi solicitado nesta definição. O catálogo não substitui o preflight/readback Meta antes de uma execução futura.
+- Fonte: declaração de Rodolfo na própria thread; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 01 Criar Camp
+
+- Por definição explícita de Rodolfo Mattei, a thread `1558125107858382899`, no canal pai `shein-g001` (`1548149087206121613`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-01-G001`, gestor Icaro/G001.
+- Este recorte vale somente para esta thread; não restringe todo o canal pai nem altera a autoridade geral SHEIN. Não usar outras contas ou transformar esta conversa em rota de relatórios/otimização.
+- A definição do escopo não é um pedido de criação nem autorização de execução. Rodolfo pediu para aguardar sua explicação; nenhuma campanha deve ser criada até receber o pedido correspondente. Resolver o ID e validar a conta por API no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria thread; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Yolokfx Conta 01 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1557917403822956698`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-01-G002` (`7840111366055613` no catálogo SHEIN), gestor Geizian/G002. Criação inclui os fluxos autorizados de criação do zero, duplicação e clone.
+- O recorte aplica-se à conversa identificada; não ampliar a exclusividade para outras conversas do canal pai nem usar outra conta aqui. Não transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo e não solicita nova campanha, replay de pedidos antigos ou mudança de campanhas existentes. Preflight/readback Meta continua obrigatório antes de execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Boostingecon Conta 02 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558125944496066673`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-02-G002` (`2407807766227252` no catálogo SHEIN), gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 02 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558126608638812271`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-02-G002` (`1754588462350629` no catálogo SHEIN), gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 02 G002 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558126806127611966`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-02-G002` (`1414197490675732` no catálogo SHEIN), gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 03 G003 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558127160831508623`, no canal pai `shein-g003` (`1548149483039236137`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-03-G003` (`1062446663435585` no catálogo SHEIN), gestor Isliago/G003.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 03 G003 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558127210966032385`, no canal pai `shein-g003` (`1548149483039236137`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-03-G003` (`1543098427832443` no catálogo SHEIN), gestor Isliago/G003.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Vizioid Conta 03 G003 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558127274073788488`, no canal pai `shein-g003` (`1548149483039236137`), é exclusiva para criação de campanhas da conta `Vizioid-US-SHEIN-EN-03-G003`, gestor Isliago/G003.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Yolokfx Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131278589460584`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-04-G004` (`781612907182683` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Boostingecon Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131342082973767`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-04-G004` (`1083662493452363` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131395451424890`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-04-G004` (`2031917360813819` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131550028173345`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-04-G004` (`1419148446852410` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Vizioid Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131493048688711`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Vizioid-US-SHEIN-EN-04-G004` (`1736068407518263` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Mavroa Conta 04 G004 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558131644135637163`, no canal pai `shein-g004` (`1548149654926135486`), é exclusiva para criação de campanhas da conta `Mavroa-US-SHEIN-ES-04-G004` (`2852476828464907` no catálogo SHEIN), gestor Joe/G004.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Boostingecon Conta 05 G005 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558133727748689951`, no canal pai `shein-g005` (`1548150015275438220`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-05-G005` (`766488759094178` no catálogo SHEIN), gestora Kelly/G005.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 05 G005 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558133789769601135`, no canal pai `shein-g005` (`1548150015275438220`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-05-G005` (`897046653487466` no catálogo SHEIN), gestora Kelly/G005.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 05 G005 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558133865028001854`, no canal pai `shein-g005` (`1548150015275438220`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-05-G005` (`1547524853816263` no catálogo SHEIN), gestora Kelly/G005.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Yolokfx Conta 02 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134300325716050`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Yolokfx-US-SHEIN-EN-02-G006` (`1583000095650153` no catálogo SHEIN), gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Boostingecon Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134359557415045`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Boostingecon-US-SHEIN-ES-06-G006`, gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Escalatepower Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134405313200150`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Escalatepower-US-SHEIN-EN-06-G006` (`1498990138663094` no catálogo SHEIN), gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Growpowerhub Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134489748611163`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Growpowerhub-US-SHEIN-EN-06-G006`, gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Resolver o ID e validar a conta exata por API/readback no preflight de uma execução futura.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Vizioid Conta 06 G006 Criação
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558134653242703935`, no canal pai `shein-g006` (`1548150155184701440`), é exclusiva para criação de campanhas da conta `Vizioid-US-SHEIN-EN-06-G006` (`869857549542755` no catálogo SHEIN), gestor Nicolas/G006.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem altera a autoridade geral SHEIN. Não usar outras contas aqui nem transformar esta conversa em rota de relatórios/otimização.
+- A declaração define escopo, não solicita execução de campanha nem mudança na Meta. Preflight/readback da conta exata continua obrigatório antes de qualquer execução futura; o catálogo não prova acesso ou saúde atuais.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Destino retirado — Yolokfx Conta 01 G002 Relatórios
+
+- **RETIRADO / THREAD DELETADA:** Rodolfo solicitou a exclusão da thread `1558138059344576593` na conversa `1557274000680288307` para substituir a organização de relatórios por um canal normal que ele criará. DELETE Discord confirmado por GET posterior HTTP 404; título anterior `Yolokfx Conta 01 Intraday`, pai `shein-g002` (`1548149300826079333`).
+- Não publicar nem recriar essa thread como destino de relatórios. Novo canal/destino ainda não foi fornecido: não inferir ID, criar canal, migrar histórico nem ativar automação por essa declaração. Campanhas, conta, canal pai e thread de criação permanecem inalterados.
+- Evidência: `data/ares/discord/thread-deletions/1558138059344576593.json`. A definição abaixo fica preservada apenas como histórico supersedido, não como rota ativa.
+
+- Por definição explícita de Rodolfo Mattei, esta conversa/thread `1558138059344576593`, no canal pai `shein-g002` (`1548149300826079333`), é exclusiva para relatórios de campanhas da conta `Yolokfx-US-SHEIN-EN-01-G002`, gestor Geizian/G002.
+- O recorte aplica-se somente à conversa identificada; não restringe outras conversas do canal pai nem substitui a thread de criação da mesma conta. Não incluir outras contas nem executar criação, clone ou otimização nesta conversa.
+- A declaração define destino e escopo de relatórios; não solicita relatório imediato, alteração Meta ou automação recorrente. Consultas futuras devem validar a conta exata e informar período, moeda, fonte e limitações.
+- Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
+
+### Escopo exclusivo — Eggbev Conta 02 Relatórios
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032110782418977`, no canal pai `1565027294920319126`, é dedicada a relatórios da conta `Eggbev-US-CC-EN-02`, alias `FAX-US-03`, ID literal `1001115192056600`.
+- Binding restrito a esta thread; não incluir outras contas nem herdar a conta Eggbev 01 de rotas históricas. Escopo da conta validado pelo checker corporativo com `allowed=true`, BM Digital Trust `155263197283282`.
+- A definição não solicita relatório imediato, agenda recorrente, alteração de rotinas, campanha ou budget. Relatórios futuros exigem consulta real da conta exata e identificação de período, moeda, fonte e limitações; cadastro autorizado não comprova estado ou acesso live à Meta.
+- Fonte: mensagem `1565032547484967067`, de Rodolfo Mattei, nesta thread. Preservar título manual e rotinas existentes.
+
+### Escopo exclusivo — Eggbev Conta 03 Relatórios
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032126137503759`, no canal pai de relatórios Eggbev `1565027294920319126`, é dedicada exclusivamente aos relatórios da conta `Eggbev-US-CC-EN-03 (FAX-US-02)`, ID `1481815942722118`.
+- O recorte aplica-se somente a esta thread; não incluir outras contas nem executar criação, clone, otimização ou mudança de budget por esta definição.
+- Esta declaração registra o destino e a conta dos relatórios; não solicita relatório imediato, criação/alteração de cron, migração das rotinas existentes nem write Meta. Período e tipo de relatório seguem o pedido correspondente; consultas futuras exigem validação real da conta e apresentação de período, moeda, fonte e limitações.
+- Fonte: mensagem de Rodolfo `1565032609401016331`. Cadastro de escopo consultado: `allowed=true`, BM Digital Trust `155263197283282`; isso não substitui readback Meta antes de consultas futuras.
+
+### Escopo exclusivo — Eggbev Conta 02 Aquecimento de Pages
+
+- Por definição explícita de Rodolfo Mattei na mensagem `1565034640157446188`, a thread `1565032879040499744`, pai `1539422731727147079`, fica dedicada à criação, clone e duplicação de campanhas de baixo orçamento para aquecimento de Pages, exclusivamente na conta `Eggbev-US-CC-EN-02`, ID literal `1001115192056600`.
+- `(FAX-US-03)` permanece somente observação interna, sem significado operacional, conforme correção anterior `1565034263848427611`; não usar para conta, naming, estratégia ou roteamento. O binding explícito da conta 02 prevalece sobre prompts históricos da conta 01.
+- Aquecimento, neste contexto, é a fase inicial descrita pelo operador: começar a veicular uma Page; Rodolfo relata que pode ocorrer restrição provisória do envio de mensagens por horas ou dias. Esse relato não prova restrição atual, duração determinada nem que a Page esteja pronta após um prazo fixo. Restrições reais devem ser respeitadas, sem contorno.
+- Depois de a Page estar aquecida e apta a operar, os pedidos de criação, clone e duplicação continuam na thread `1565032661557313747`, da mesma conta. Não migrar campanhas nem disparar ações automaticamente por esta definição.
+- "Baixo orçamento" expressa a finalidade, não um valor autorizado: budget exato, Page, início/status, pedido de execução, contrato exato e gates vigentes devem ser resolvidos na solicitação correspondente. Esta decisão não cria campanhas, não ativa anúncios, não altera budget, cron, permissões ou outras contas. Checker corporativo: `allowed=true`, BM Digital Trust `155263197283282`; preflight/readback Meta continuam obrigatórios para execução.
+- Preservar título manual e histórico. Fonte: `discord:1185714635991679006/1565032879040499744/1565034640157446188`.
+
+### Escopo exclusivo — Eggbev Conta 02 Criação e Clone
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032661557313747` é dedicada à criação, clone e duplicação de campanhas da conta `Eggbev-US-CC-EN-02`, ID literal `1001115192056600`.
+- Correção explícita de Rodolfo na mensagem `1565034263848427611`: `(FAX-US-03)` é somente observação interna entre parênteses, sem significado operacional. Fica supersedida a classificação anterior como alias operacional; não usar a observação para resolver conta, selecionar operação, naming, roteamento ou qualquer ação.
+- Binding restrito a esta thread; não herdar a conta Eggbev 01 dos prompts ou rotas históricas. Escopo da conta validado pelo checker corporativo com `allowed=true`, BM Digital Trust `155263197283282`; isso não substitui preflight/readback Meta.
+- Esta definição não solicita execução de campanha, ativação, budget ou automação. Cada execução futura exige pedido correspondente e contrato exato da conta, sem copiar autorização ou parâmetros de outra conta. Preservar título manual e rotinas existentes.
+- Fontes: definição `1565033258305982464` e correção `1565034263848427611`, de Rodolfo Mattei, nesta thread.
+
+### Escopo exclusivo — Eggbev Conta 03 Aquecimento de Pages
+
+- Por definição explícita de Rodolfo Mattei na mensagem `1565034773725057106`, a thread `1565032888347664495`, pai `1539422731727147079`, fica dedicada à criação, clone e duplicação de campanhas de baixo orçamento para aquecimento de Pages, exclusivamente na conta `Eggbev-US-CC-EN-03`, ID literal `1481815942722118`.
+- `(FAX-US-02)` permanece somente observação interna, sem significado operacional, conforme correção `1565034226951131249`; não usar para conta, naming, estratégia ou roteamento. O binding explícito da conta 03 prevalece sobre prompts históricos da conta 01.
+- Aquecimento é a fase inicial descrita pelo operador: começar a veicular uma Page; Rodolfo relata que pode ocorrer restrição provisória do envio de mensagens por horas ou dias. Esse relato não prova restrição atual, duração determinada nem aptidão após prazo fixo. Restrições reais devem ser respeitadas, sem contorno; aquecimento não remove denylist ou gates de elegibilidade.
+- Depois de a Page estar aquecida e apta a operar, os pedidos de criação, clone e duplicação continuam na thread `1565032671669919827`, da mesma conta. Não migrar campanhas nem disparar ações automaticamente por esta definição.
+- "Baixo orçamento" expressa a finalidade, não um valor autorizado: budget exato, Page, início/status, pedido de execução, contrato exato e gates vigentes devem ser resolvidos na solicitação correspondente. Esta decisão não cria campanhas, não ativa anúncios, não altera budget, cron, permissões ou outras contas. Checker corporativo: `allowed=true`, BM Digital Trust `155263197283282`; preflight/readback Meta continuam obrigatórios para execução.
+- Preservar título manual e histórico. Fonte: `discord:1185714635991679006/1565032888347664495/1565034773725057106`.
+
+### Escopo exclusivo — Eggbev Conta 03 Criação, clone e duplicação
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032671669919827`, no canal pai `1539422731727147079`, fica dedicada à criação, clone e duplicação de campanhas da conta `Eggbev-US-CC-EN-03`, ID literal `1481815942722118`.
+- Correção de Rodolfo na mensagem `1565034226951131249`: `(FAX-US-02)` é apenas observação interna, sem significado operacional. Não é alias operacional e não deve determinar conta, rota, estratégia, naming ou ação. Esta correção supersede explicitamente a classificação anterior como alias; o binding operacional permanece `Eggbev-US-CC-EN-03` → `1481815942722118`.
+- O binding aplica-se somente a esta thread e prevalece sobre a referência histórica à conta Eggbev 01 do canal pai. Não incluir outras contas nem alterar a thread de relatórios da conta 03 ou as rotas existentes por esta definição.
+- Esta declaração registra escopo; não solicita criação imediata, clone, duplicação, ativação, mudança de budget ou automação. Cada execução futura depende do pedido correspondente, contrato BOT vigente e preflight/readback real da conta exata. Checker corporativo retornou `allowed=true`, BM Digital Trust `155263197283282`; cadastro não comprova acesso ou estado live da Meta.
+- Fonte: mensagem de Rodolfo Mattei `1565033323808424127`. Preservar título manual da thread e gates vigentes.
+
+### Escopo exclusivo — Eggbev Conta 01 Criação, clone e duplicação
+
+- Decisão ativa de Rodolfo Mattei, mensagem `1565033184574308513`: a thread `1541578556037927053`, pai `1539422731727147079`, centraliza criação do zero, clone e duplicação exclusivamente da conta `Eggbev-US-CC-EN-01`, ID literal `1034081997659047` (alias técnico `Eggbev-US-CC-EN-01-G006`).
+- Registry executável: `data/ares/discord/eggbev-fixed-routes.json`; criação e clonagem compartilham a thread, mas selecionam contratos/runners pela intenção explícita do pedido. Não executar ambos nem aplicar defaults de criação a um clone.
+- Histórico: a classificação inicial de `1543333373945053184` como histórico/redirect foi supersedida pelo adendo Rodolfo `1565033982603829441`. Essa thread é a rota de Aquecimento; após aquecimento, criação/clone/duplicação continuam em `1541578556037927053`. Não excluir, arquivar, renomear ou fazer replay automático. Nenhum título manual é alterado.
+- Autoridade e gates permanecem: budget exato, preflight, resumo final, OK explícito, início/status aprovados, denylist, modos bloqueados, pre-read/readback, billing, credenciais e Critical Subset. Esta definição de rota não executa campanha, não aprova plano antigo nem altera orçamento, cron ou permissões.
+- Fonte autenticada: `discord:1185714635991679006/1541578556037927053/1565033184574308513`; handoff Ares `1565033423813349429`. Histórico de supersessão no registry; prompts específicos e projeções da configuração alinhados.
+
+### Escopo canônico — relatórios SMS Funnel
+
+- `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.
+- Ares pode operar o dashboard em modo read-only para produzir relatórios de disparos, gastos e custos: ler Messages Report, automações/listas, sequências e `sequence_id`, aplicar período/filtros pedidos e agrupar por gestor `G001`–`G006`.
+- Quando Rodolfo apontar uma mensagem ou relatório anterior e pedir “da mesma forma”, recuperar a referência disponível, preservar metodologia, período, timezone, unidade e agrupamento, e atualizar com readback real. Não exigir que ele repita site, fórmula ou formato já presentes na referência.
+- Configurar ou alterar automação, lista, sequência, envio ou estrutura do SMS Funnel continua fora do escopo padrão do Ares; isso exige rota e autorização próprias.
+- `G001`–`G006` são códigos de gestor no SMS Funnel, não domínios. O caso específico `G005 → creditoparaveiculo.com / BR-CAR-BR` só vale quando o pedido ou contexto canônico identificar explicitamente essa operação; `G005` sozinho não autoriza filtrar o relatório global por site.
+
+## 3. Pedido → primeira rota
+
+```text
+Pedido                                           Primeira fonte
+------------------------------------------------ ------------------------------------------------------------
+"faz um criativo/brief/copy"                    creative-operations-mgs route-pack-01
+"trata/move UPLOAD MANUAL"                      creative-operations-mgs route-pack-02
+"imagem estática/naming/provider"               creative-operations-mgs route-pack-04
+"vídeo/variação/referência/GPT/Grok"            creative-operations-mgs route-pack-05
+"Meta Ad Library"                               meta-library-reference-intake
+"inventário/reserva/ares_eligible"              creative-taxonomy-mgs route-pack-02
+"esse criativo já foi usado?"                   creative-operations-mgs route-pack-06 + Meta real
+"campanha/ads/growth"                           paid-acquisition-operations
+"criar/clonar/lote/alta escala Meta"             meta-campaign-engine-v3
+"Meta/Facebook Ads"                             meta-ads-intraday-operations + guardrails
+"tráfego direto/CBO"                            direct-traffic-cbo-operations
+"tráfego direto SHEIN/EUA"                      direct-traffic-shein-operations + contrato SHEIN-US-DIRECT
+"budget/billing"                                SOUL + guardrails + autoridade vigente
+"ROI/performance"                               API/dados reais; período/moeda/fonte
+"SMS Funnel/Disparos/Gastos por gestor"         SMS Funnel read-only; Campaign Ops/Growth; sem gate de domínio
+"campanha BOT/Messenger baseada em ChatPion"     chatpion-bot-campaign-operations + contrato da operação
+"configurar ChatPion/quiz/SMS"                  routes.md; Ares não configura
+"WordPress/pixel crítico"                       routes.md; escalar Zeus/Rodolfo
+"erro do Ares"                                  logs Ares + journal filtrado se infra
+```
+
+## 4. Ciclo único do criativo
+
+```text
+pedido/upload
+→ criação/importação
+→ referência/provider gate
+→ classificação técnica/visual
+→ sanitização
+→ naming
+→ Drive + readback
+→ inventário e linhagem
+→ reserva/elegibilidade
+→ conciliação Meta × Drive
+→ seleção/campanha
+→ performance/ROI
+→ novas variações
+```
+
+Creative Ops e Campaign Ops compartilham o mesmo estado no Ares.
+
+## 5. Intake e Drive
+
+Entrada temporária atual, validada por API/readback:
+
+```text
+Shared Drive: MGS-AGENTS
+ID: 0AEwt4Ye690ocUk9PVA
+URL: https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+```
+
+O Shared Drive antigo contém exclusivamente `UPLOAD MANUAL` na raiz; seu ID preservado é `1ARBvLammWUHuAclNmcriwkkgeedKryBd`. Enviar na subpasta **operação → gestor** cadastrada; arquivos soltos e pastas legadas fora do registro não são intake automático. `_PROCESSAMENTO` é staging temporário, não estoque permanente. O Workspace continua administrado por `support@matteiservicesinc.com`.
+
+O estoque permanente fica no Drive de 30 TB, conta `mgsdigitalcorp@gmail.com`, pasta `CRIATIVOS` de ID `1GhJTEk2ZL15J5Ko3haWU5kfnVVffPq1h`, abaixo do arquivo `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`. Pastas, binários e atalhos foram movidos com os mesmos IDs; não exigir `driveId` do Shared Drive para esses objetos My Drive. Resolver estoque/staging pelo contrato ativo `scripts/ares_archive_locations.py`, mídia pelo `ares_archive_storage.py`, preservando namespace lógico, linhagens e ACKs. Agentes permanecem exclusivamente com a SA canônica; o owner é componente isolado, nunca fallback de autenticação.
+
+```text
+30 TB / arquivo / CRIATIVOS/
+├── GEIZIAN            # cópias para upload do gestor; ignorar no pool canônico
+├── LIBRARY META       # referências; nunca asset final automático
+└── <OPERAÇÃO>/
+    ├── IMG/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
+    └── VID/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
+```
+
+`MGS-AGENTS/CRIATIVOS/...` permanece namespace lógico dos registros históricos, não localização física atual do estoque. Backups geridos ficam no corporativo dos 30 TB em `_DISASTER_RECOVERY`; os 23 arquivos antigos sem tags foram preservados separadamente em `_DR_LEGADO`, privados, fora da retenção destrutiva gerida.
+
+Regras:
+
+- validar a raiz por API antes de write;
+- placement/idioma não viram subpasta intermediária sem aprovação;
+- pedido autorizado de tratar/mover: clean validado em READY, original movido para LEGACY, sem delete;
+- pedido de copiar/manter: preservar na entrada;
+- listar `original_filename → canonical_filename`;
+- Drive write exige readback por ID/nome/tamanho.
+
+## 6. Naming
+
+Modelo, com subtipo veicular opcional para a vertical `CAR`:
+
+```text
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_[MOTO_]_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+```
+
+- `VARIANT`: sempre `001–999`.
+- `P_ORIENT`: somente `PV/NV` vertical e `PH/NH` square/feed 1:1 ou horizontal; `PS/NS` não entram em nomes finais.
+- `UNKNOWN` pode existir no inventário para ângulo/classificação pendente, não como P_ORIENT final.
+- status, site, gestor e IDs não entram no nome.
+- dimensão, placement e origem ficam no inventário.
+- idioma `BR` significa português do Brasil e é o padrão quando país=BR e o pedido diz apenas “Português”; `PT` significa português de Portugal explícito.
+- Para `CAR`, revisar cada imagem/timeline real e registrar `vehicle_type=MOTO|CARRO`. Moto usa `MOTO` imediatamente após `FORMAT`; carro mantém o nome sem token adicional. A decisão é por asset, inclusive em lote misto.
+
+## 7. Metadata
+
+```text
+/root/mgs-agent/scripts/clean-creative-metadata.sh verify /path/to/asset
+/root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/asset --agent ares
+```
+
+Asset final/campanha exige `clean=true`. Nunca sanitizar o único RAW in-place.
+
+## 8. Identidade, reserva e conciliação
+
+Original e tratado são a mesma linhagem.
+
+Upload de gestor começa:
+
+```text
+reservation_status = RESERVADO_PELO_GESTOR
+ares_eligible = false
+```
+
+`01_READY` significa pronto tecnicamente, não inédito. Silêncio não libera.
+
+Antes de seleção/write, cruzar quando disponível:
+
+```text
+original → tratado
+source_drive_id / asset_drive_id
+checksums + fingerprint visual
+ad_id / creative_id
+image_hash / video_id
+effective_object_story_id
+conta / campanha / gestor / estratégia
+status / histórico / performance
+```
+
+Repetir a conferência imediatamente antes do write.
+
+## 9. Meta Ads
+
+Dados:
+
+```text
+/root/mgs-agent/data/ares/meta-ads/accounts/
+/root/mgs-agent/data/ares/meta-ads/operations/
+/root/mgs-agent/data/ares/meta-ads/rules/
+/root/mgs-agent/data/ares/meta-ads/state/
+/root/mgs-agent/data/ares/meta-ads/cache/
+/root/mgs-agent/data/ares/meta-ads/audit/
+/root/mgs-agent/data/ares/meta-ads/reports/
+/root/mgs-agent/data/ares/meta-ads/permissions/
+/root/mgs-agent/data/ares/meta-ads/engine-v3/
+/root/mgs-agent/scripts/ares-campaign-engine-v3.py
+```
+
+Criação/clonagem nova começa em `meta-campaign-engine-v3`, nunca por busca ampla em `scripts/ares-*`. O executor v3 está ativo sob guards de `development_access`; v2 é somente rollback. Mídia é pre-stageada, bundles têm duas campanhas por conta, lanes são independentes e o readback é um outer batch por bundle.
+
+Regras:
+
+- API/readback real vence snapshot;
+- dry-run quando houver runner;
+- campaign write exige usuário e escopo autorizados;
+- budget write segue aprovação vigente de Rodolfo/Geizian;
+- billing/credencial continuam críticos;
+- nunca expor token;
+- nunca inventar métrica/status.
+
+## 10. Meta Library e referências
+
+Runtime:
+
+```text
+/root/mgs-agent/tools/meta-library-collector/
+/root/mgs-agent/scripts/ares-meta-library-collector.sh
+/root/mgs-agent/scripts/ares-meta-library-login-browser.sh
+/root/mgs-agent/scripts/ares-meta-library-profile-snapshot.sh
+/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium/
+/root/.hermes/profiles/ares/artifacts/meta-library/
+```
+
+A sessão persistente é sensível: não apagar, versionar, imprimir cookies ou abrir instâncias concorrentes. Rota dedicada residencial é padrão; `direct-vps` é proibido. Material coletado é referência, não asset final automático.
+
+### Isolamento de capacidade — Meta Library somente
+
+Por decisão de Rodolfo, a criação de campanhas de tráfego direto e BOT precisa continuar rápida e simultânea entre gestores. Portanto:
+
+- **nunca** envolver `meta-campaign-engine-v3`, lanes de tráfego direto/BOT, pre-stage de mídia, bundles ou writes Meta no guard abaixo;
+- toda coleta/auditoria Meta Library pesada, task-local collector, varredura por país/página, Chromium de qualidade e empacotamento derivado deve executar por:
+  `/root/mgs-agent/scripts/ares-meta-library-heavy-run.sh --label <nome-curto> -- <comando>`;
+- o coletor canônico já entra automaticamente nesse guard;
+- o guard mantém fila exclusiva apenas para Meta Library, `CPUQuota=180%`, `MemoryHigh=5G`, prioridade CPU/IO reduzida e preserva os demais recursos para gateways e Campaign Ops;
+- etapas customizadas continuam obrigadas a usar o lock do perfil persistente quando tocam Chromium/cookies. O guard de capacidade não substitui o lock do perfil;
+- não contornar o guard por pressa. Se ele falhar, diagnosticar o runner; não deslocar a limitação para o gateway Ares nem serializar campanhas.
+
+A aceitação operacional exige canário do guard e regressão verde do Campaign Engine v3. O monitor VPS deve distinguir Meta Library de Campaign Ops sem publicar comandos, URLs, cookies ou credenciais.
+
+## 11. Usuários autorizados
+
+Fonte real: `data/authorized-users.json`.
+
+```text
+Rodolfo
+Geizian
+Icaro
+Isliago
+Joe
+Kelly
+Nicolas
+```
+
+Escopo: todos os usuários listados podem operar Creative Ops e Campaign Ops. Kelly também é gestora de campanhas; Geizian está autorizado nos dois módulos. Acesso não elimina gates específicos de budget, billing, credencial, pixel crítico ou mudança de política.
+
+## 12. Limites
+
+```text
+Ares pode                               Ares não pode por padrão
+--------------------------------------  ---------------------------------------------------------
+Criar/tratar/organizar criativos         Configurar ChatPion/DigitalTrChat
+Operar Drive/inventário/referências      Configurar quiz/SMS/SMS Funnel
+Gerenciar campanhas autorizadas          Ser dono de AdOps/precificação
+Analisar custo/ROI/performance            Fazer setup WordPress/pixel crítico sem Rodolfo
+Produzir relatórios                       Expor credenciais/tokens
+```
+
+## Thread de relatórios — Eggbev Conta 01
+
+- Por definição explícita de Rodolfo Mattei na mensagem `1565032474487169045`, a thread `1565031975549538345`, no canal pai `1565027294920319126`, fica dedicada aos relatórios da conta de anúncio `Eggbev-US-CC-EN-01`, ID `1034081997659047`.
+- Resolver pedidos de relatório desta conversa somente para essa conta; não inferir outra conta pelo canal pai ou pelo nome da operação. Conta aceita pelo checker Digital Trust no registro desta decisão.
+- A definição vincula o escopo da conversa; não solicita relatório imediato, migração de destinos automáticos, mudança de cron, campanhas, budgets ou rotinas existentes. Período e tipo de relatório seguem o pedido posterior, com leitura live e gates vigentes.
+- Preservar o título manual da thread e as rotas automáticas existentes até pedido explícito de mudança.
+
+## Eggbev Conta 01 — Aquecimento e continuidade
+
+- Decisão de Rodolfo `1565033982603829441`: a thread `1543333373945053184` recebe criação do zero, clone e duplicação para aquecimento de Pages com orçamento baixo, exclusivamente na conta `Eggbev-US-CC-EN-01`, ID `1034081997659047`.
+- Após o aquecimento, continuar essas modalidades na thread `1541578556037927053`. Supersede a descrição anterior da thread de aquecimento como somente clonagem ou histórico/redirect, inclusive o recorte da decisão `1565033184574308513`; a continuidade da conta 01 permanece consolidada.
+- Budget exato por pedido, sem valor presumido. Nenhuma campanha, ativação, cron, migração de objetos ou mudança de estratégia autorizada por esta definição. Preservar títulos manuais e histórico.
+- Restrição provisória de mensagens é contexto informado pelo operador, não evidência live nem liberação. `page_eligibility_policy` e denylist permanecem inalteradas; histórico de restrição exige decisão explícita própria para revisão, mesmo após aquecimento.
+- Fonte canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json#/discord/route_contracts/campaign_warmup`, registry e prompts das duas threads e de Regras. Conta aceita pelo checker Digital Trust; estado/acesso Meta dependem de preflight futuro.
+
+## 13. Validação antes de responder
+
+- Arquivo criado/alterado: path + inspeção real.
+- Criativo final: formato/dimensão/QA visual + metadata.
+- Drive: readback por ID/nome/tamanho.
+- Reserva: estado persistido no inventário.
+- Campanha: GET/API real pós-write.
+- Métrica: fonte/período/moeda.
+- Git/infra: diff, lint, audit e REPORT-INFRA.
+- Sem evidência: declarar lacuna.
+
+

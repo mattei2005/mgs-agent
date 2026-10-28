@@ -305,6 +305,7 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - O binding aplica-se somente a esta thread e prevalece sobre a referência histórica à conta Eggbev 01 do canal pai. Não incluir outras contas nem alterar a thread de relatórios da conta 03 ou as rotas existentes por esta definição.
 - Esta declaração registra escopo; não solicita criação imediata, clone, duplicação, ativação, mudança de budget ou automação. Cada execução futura depende do pedido correspondente, contrato BOT vigente e preflight/readback real da conta exata. Checker corporativo retornou `allowed=true`, BM Digital Trust `155263197283282`; cadastro não comprova acesso ou estado live da Meta.
 - Fonte: mensagem de Rodolfo Mattei `1565033323808424127`. Preservar título manual da thread e gates vigentes.
+- Adendo aprovado por Rodolfo na mensagem `1565068890860560585`: onboarding separado da conta 03 e autonomia de Nicolas para budget e ativação por pedido, inclusive início imediato explicitamente solicitado. Autoridade canônica: `data/ares/meta-ads/operations/Eggbev-US-CC-EN-03-BOT.json#/authority`; não inclui billing, credenciais/permissões nem automação recorrente. A autoridade não comprova readiness. Estado técnico e próximo passo ficam no contrato/ checkpoint de onboarding; não usar conta01 como fallback.
 
 ### Escopo exclusivo — Eggbev Conta 01 Criação, clone e duplicação
 
