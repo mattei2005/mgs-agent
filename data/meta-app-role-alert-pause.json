@@ -1,17 +1,13 @@
 {
   "version": 4,
   "mode": "manual",
-  "apps": [
-    "B011-8"
-  ],
-  "monitor_apps": [
-    "B011-8"
-  ],
+  "apps": [],
+  "monitor_apps": [],
   "timezone": "America/New_York",
   "requested_by": "Rodolfo Mattei",
-  "source_message_id": "1565068130772979823",
-  "updated_at": "2026-10-28T14:23:06.656991-04:00",
-  "reason": "B009-5→B009-6 validado e reativado por relatório de migração de Rodolfo; demais pausas preservadas",
+  "source_message_id": "1565071027908775997",
+  "updated_at": "2026-10-28T14:35:13.551706-04:00",
+  "reason": "B011-8→B011-9 validado e reativado por relatório de migração de Rodolfo; demais pausas preservadas",
   "policy": {
     "auto_pause_on_restriction": true,
     "trigger": "OAuthException 190 Application has been deleted em 2 ciclos consecutivos",

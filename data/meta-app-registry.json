@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-10-28T14:22:53.592127-04:00",
+  "updated_at": "2026-10-28T14:34:59.148738-04:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1565068130772979823",
+  "source_message_id": "1565071027908775997",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -104,12 +104,12 @@
       "expected_sheet_roles": 13
     },
     {
-      "app": "B011-8",
+      "app": "B011-9",
       "channel_id": "1537256907373289575",
       "channel_name": "b011-app-status",
-      "admin": "Alexandre Dias",
-      "onepassword_item_title": "BOT B011-8 Token - Alexandre Dias",
-      "expected_sheet_roles": 12,
+      "admin": "Arther Tahalele",
+      "onepassword_item_title": "BOT B011-9 Token - Arther Tahalele",
+      "expected_sheet_roles": 10,
       "onepassword_item_id": "wnmdyqzj2g46av7i4z6cipqgua"
     },
     {
@@ -536,6 +536,13 @@
       "retired_at": "2026-10-28T14:22:53.592152-04:00",
       "source_message_id": "1565068130772979823",
       "backup": "/root/mgs-agent/backups/meta-app-b0095-to-b0096-1565068130772979823"
+    },
+    {
+      "app": "B011-8",
+      "replacement": "B011-9",
+      "retired_at": "2026-10-28T14:34:59.148758-04:00",
+      "source_message_id": "1565071027908775997",
+      "backup": "/root/mgs-agent/backups/meta-app-b0118-to-b0119-1565071027908775997"
     }
   ]
 }
