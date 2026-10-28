@@ -126,6 +126,14 @@ Quando uma busca por domínio/keyword mostrar anúncios de várias páginas:
 - Validar cobertura contra os Library IDs coletados. Para IDs ausentes na busca agregada, consultar o anúncio individualmente; classificar como `found`, `unavailable` ou `no_target` e não encerrar com IDs não reconciliados.
 - Entregar as URLs finais sem UTM em TXT global deduplicado e CSV por site, fazer upload no índice mestre e confirmar bytes por readback antes de reportar sucesso.
 
+## Ranking público por produto, idioma e país
+
+- Em pesquisas de referências externas, recuperar o lote exato da thread/checkpoint e consultar somente fontes públicas; não tratar os sites pesquisados como ativos MGS nem abrir contas, infraestrutura ou campanha deles.
+- Definir “mais escalado” como repetição de **Library IDs únicos observados** quando não houver gasto/impressões verificáveis. A indicação `N ads use this creative and text` não pode ser somada sobre os IDs já coletados: os representantes dos agrupamentos podem aparecer também individualmente. Separar a base de IDs observada da contagem aproximada exibida pela Meta e explicitar cobertura parcial.
+- Extrair o maior ancestral DOM contendo exatamente um Library ID e acumular os cards durante o scroll. Parar só após rodadas estáveis; um ancestral curto pode conter apenas status/data e perder a copy. Deduplicar programaticamente antes de classificar e exigir que a soma por produto/idioma/site conserve a base.
+- Classificar idioma pela copy ou texto visível do criativo, nunca pelo TLD, nome da página ou país. Confirmar países com o filtro atual da Library e cruzar os **mesmos IDs** da base; o mesmo anúncio pode aparecer em vários países, por isso não somar países como anúncios distintos. Declarar quais países foram testados e preservar país não confirmado quando necessário; filtro público não é exportação do targeting.
+- Quando a copy for genérica ou contrariar o produto visível, fazer QA dos pixels e, para vídeo ambíguo, amostrar vários pontos da timeline antes de fechar o subtipo. Não forçar triciclo, e-bike, patinete, motoneta e scooter de mobilidade na mesma classe; se ainda houver dúvida, manter subtipo não confirmado. URLs de quiz contendo `shein` não comprovam que o produto anunciado seja SHEIN.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
