@@ -6232,6 +6232,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-alerts-1565020614463463606",
+      "next_step": "Salvar baseline, executar força live genérica e B013 dedicada e validar os 13 destinos",
+      "objective": "Enviar um alerta live atualizado nos 13 canais de apps da imagem, com renderer canônico e readback completo",
+      "source": "data/meta-app-registry.json",
+      "state": "preparação: registry 13 apps; pausas vazias; quatro jobs habilitados; dois runners e nenhuma mudança de credencial/config",
+      "thread_id": "1565005187914141757",
+      "updated_at": "2026-10-28T15:14:36+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-b0049-all-alerts-1559623511528571003",
       "next_step": "Monitoramento normal de onboarding/reconexão; última parity B004-9 8/9, B006-7 12/13, B011-7 11/12. Nenhuma execução manual pendente.",
       "objective": "Retomar replacements B004-9/B006-7/B011-7 e entregar gerador validado/alertas live para todas as 13 linhagens.",
@@ -7582,5 +7592,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T14:40:49+00:00"
+  "updated_at": "2026-10-28T15:14:36+00:00"
 }
