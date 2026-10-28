@@ -348,6 +348,10 @@ Conclusão: produto visual, idioma e claim não dependem do nome bruto.
 
 ## Relatórios e otimização
 
+### Contagens retrospectivas e complementos por gestor
+
+Para avaliar o fechamento de campanhas pausadas, use **ROI real do dia fechado**, com `NET_REVENUE` SB e gasto Meta do mesmo dia civil; o ROI estimado que motivou a pausa não define o resultado retrospectivo. Recupere a coorte pelos IDs comprovadamente alterados naquela execução, excluindo as que já estavam pausadas, sem redescobri-la pelo status atual. Preserve essa coorte e o snapshot financeiro em perguntas sequenciais de faixas ou acréscimo de coluna. Se o usuário pedir apenas a quantidade, responda apenas a quantidade; se pedir colunas por gestor, entregue somente o consolidado solicitado em bloco alinhado com total, sem expandir para o relatório Intraday completo. Identifique o ROI como real/fechado e explicite brevemente os limites das faixas. Na coluna adicional de iniciadas, conte dentro da mesma coorte pela primeira entrega comprovada, não por criação ou reativação. Receita de recuperação, reuso do Diário e validações em `references/smartbidding-product-analysis.md`, seção `Coortes pausadas — fechamento e contagens por gestor`.
+
 ### Paralelismo do Intraday pontual
 
 Depois de validar autor/origem, gates, identidade Meta e data civil, prepare o request e a sessão Ares isolados; execute a coleta HTTP e a captura DOM RPS como etapas independentes em paralelo quando o preflight visual não tiver bloqueio conhecido. Preserve os interpretadores próprios e a persistência de cada camada; espere ambas concluírem antes de refresh, materialização e validação. Isso reduz a defasagem entre financeiro e RPS sem misturar fontes ou repetir uma camada já concluída. Receita: `references/canonical-report-renderer.md`, seção `Reuso dos coletores do Diário para Intraday de uma conta`.
