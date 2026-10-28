@@ -919,6 +919,37 @@
       "skill_reference": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/dtr-sb-page-id-step1-facebook-availability-blocked-2026-07-06.md"
     },
     {
+      "id": "meta-manual-payments-refresh-20261028-0802",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_metrics_validated_native_auth_surface_conflict",
+      "updated_at": "2026-10-28T08:06:06.635649-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T080353254290/closure-current.json"
+      ],
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 35,
+        "pending_d": 4,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0,
+        "source_to_live_sheet_cgij_exact": true,
+        "totals_validated_columns": [
+          "F",
+          "G",
+          "H",
+          "I",
+          "J"
+        ]
+      },
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
+    },
+    {
       "id": "meta-manual-payments-refresh-20261027-2102",
       "agent": "zeus",
       "type": "authorized_recurring_financial_snapshot",

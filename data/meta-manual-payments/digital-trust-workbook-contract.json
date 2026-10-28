@@ -83,11 +83,11 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_metrics_validated_pc1_lease_busy",
-    "validated_metrics_at": "2026-10-27T21:03:17.119560-04:00",
-    "verified_at": "2026-10-27T21:04:40.138375-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261027T210321540812",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T210323392251",
+    "status": "partial_metrics_validated_native_auth_surface_conflict",
+    "validated_metrics_at": "2026-10-28T08:03:40.584323-04:00",
+    "verified_at": "2026-10-28T08:06:06.635649-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T080344183077",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T080353254290",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 12,
@@ -153,8 +153,18 @@
         "reason": "new_generic_payment_since_pc1_proof"
       },
       {
+        "account_id": "1062446663435585",
+        "name": "Escalatepower-US-SHEIN-EN-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
         "account_id": "1543098427832443",
         "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1290644206529750",
+        "name": "OpenzedFinanzas-ES-CC-ES-02",
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
@@ -167,46 +177,45 @@
     ],
     "average_period": [
       {
-        "since": "2026-10-24",
-        "until": "2026-10-26"
-      },
-      {
         "since": "2026-10-25",
         "until": "2026-10-27"
       }
     ],
     "totals_usd": {
-      "average_daily": "30870.13",
-      "balance": "493044.92",
-      "month_spend": "785848.00"
+      "average_daily": "28778.54",
+      "balance": "498699.54",
+      "month_spend": "792908.24"
     },
     "invoice_period": "2026-09-01",
     "invoice_due_usd": "0.00",
     "visible_invoice_numbers": 0,
     "pc1_blocker": {
-      "reason": "lease_held_by_other_session",
-      "agent": "zeus",
-      "thread_id": "1564789767420252264",
-      "expires_at": "2026-10-28T01:19:05.107729Z"
+      "reason": "native_auth_surface_conflict_no_input",
+      "ax_windows_security": true,
+      "ax_passkey_domain": "google.com",
+      "pixels_show_meta_accounts": true,
+      "native_dialog_visible_in_pixels": false,
+      "diagnosis": "Native Google passkey prompt present in AX while capture shows Meta Accounts; unsafe keyboard/capture parity. No input or recovery bypass attempted."
     },
     "owned_tabs_created": 0,
-    "lease_acquired_this_run": false,
-    "lease_free": false,
+    "lease_acquired_this_run": true,
+    "lease_free": true,
     "payments_executed": 0,
     "meta_writes": 0,
     "cron_changes": 0,
-    "other_sheet_properties_unchanged": true,
     "workbook_sheet_count": 2,
     "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261027T210323392251/closure-current.json"
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T080353254290/closure-current.json"
   },
   "pending_card_history": {
-    "status": "pending_pc1_lease_busy",
+    "status": "pending_native_auth_surface_conflict",
     "account_ids": [
       "1481815942722118",
-      "1543098427832443"
+      "1062446663435585",
+      "1543098427832443",
+      "1290644206529750"
     ],
-    "reason": "New generic payment events require historical instrument proof; PC1 occupied by another session; prior D values/notes preserved."
+    "reason": "New generic events require historical instrument proof; native Google passkey prompt in AX conflicts with Meta pixels. D preserved; no auth bypass."
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -306,7 +315,7 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261027T210247465960",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261028T080301727412",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-09-01",
