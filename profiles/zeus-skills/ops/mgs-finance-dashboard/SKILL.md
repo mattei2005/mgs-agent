@@ -176,6 +176,8 @@ For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remai
 
 ## Explaining pending daily imports
 
+**Newsoun/FinanciamentoAutoAdx BR — Rodolfo1564986937343746150, padrão1564993480487342243:** `newsoun.com|br` → `br-car-br`, Kelly/G005; `pl_digital-trust_financiamentoautoadx_br` → `financiamentoautoadx.com|br` / `br-car-br`, MGS/G002. Reuse existing catalog IDs and preserve canonical media, other countries, networks, allocation and closed history. Source: `docs/finance-gam-email-automation.md`; publication/completion: checkpoint `ZEUS-FINANCE-BR-CAR-1564993480487342243`. Confirmed classifications are standard for the same identifiers unless explicitly date-limited; do not ask permanence again.
+
 When Rodolfo asks what remains to finish, answer the decision he needs to make before explaining technical causes:
 
 1. Refresh both spend and GAM state and follow their latest result receipts; an earlier alert may already be resolved. Separate the latest attempted run from an older successful receipt retained in state.
@@ -200,7 +202,7 @@ When Rodolfo asks what remains to finish, answer the decision he needs to make b
 9. Dashboard views must label the month `PROVISÓRIO` until every still-active partner payout rate has been replaced by the actual settlement rate.
 10. Never include credentials or the `USUARIOS BOT` tab in the dashboard.
 11. The production finance services run on the RunCloud finance host reached by the canonical finance SSH helper. Validate `mgs-postgresql18`, `mgs-finance-dash` and its socket on that remote host; `systemctl` on the Zeus/Hermes VPS is the wrong target and an `inactive` result there is not a production outage.
-12. When Rodolfo must resolve GAM/report exceptions, always number them `1, 2, 3...`. Each numbered item must explain, in this order: (a) what source/item appeared, (b) what is already confirmed, (c) what diverged or could not be mapped, and (d) the exact missing answer needed from Rodolfo. Use plain compact language, not a table and not repeated formal `Fato/Diagnóstico/Lacuna/Recomendação/Pergunta` blocks. Finish with one shared question about permanence only when applicable, so Rodolfo can reply by number and Zeus can apply immediately.
+12. When Rodolfo must resolve GAM/report exceptions, always number them `1, 2, 3...`. Each numbered item must explain, in this order: (a) what source/item appeared, (b) what is already confirmed, (c) what diverged or could not be mapped, and (d) the exact missing answer needed from Rodolfo. Use plain compact language, not a table and not repeated formal `Fato/Diagnóstico/Lacuna/Recomendação/Pergunta` blocks. Ask only for the missing classification. Rodolfo1564993480487342243 confirmed that these answers are standard for the same domain/country/placement unless explicitly limited; do not add a second permanence question. Preserve unconfirmed suffixes and canonical-manager precedence.
 
 ## Historical Sheet baseline
 
