@@ -258,6 +258,20 @@ shein-g006                         1548150155184701440   Rodolfo, Nicolas, Geizi
 - A declaração define destino e escopo de relatórios; não solicita relatório imediato, alteração Meta ou automação recorrente. Consultas futuras devem validar a conta exata e informar período, moeda, fonte e limitações.
 - Fonte: declaração de Rodolfo na própria conversa; o ID da mensagem de definição não foi fornecido e não deve ser inventado.
 
+### Escopo exclusivo — Eggbev Conta 02 Relatórios
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032110782418977`, no canal pai `1565027294920319126`, é dedicada a relatórios da conta `Eggbev-US-CC-EN-02`, alias `FAX-US-03`, ID literal `1001115192056600`.
+- Binding restrito a esta thread; não incluir outras contas nem herdar a conta Eggbev 01 de rotas históricas. Escopo da conta validado pelo checker corporativo com `allowed=true`, BM Digital Trust `155263197283282`.
+- A definição não solicita relatório imediato, agenda recorrente, alteração de rotinas, campanha ou budget. Relatórios futuros exigem consulta real da conta exata e identificação de período, moeda, fonte e limitações; cadastro autorizado não comprova estado ou acesso live à Meta.
+- Fonte: mensagem `1565032547484967067`, de Rodolfo Mattei, nesta thread. Preservar título manual e rotinas existentes.
+
+### Escopo exclusivo — Eggbev Conta 03 Relatórios
+
+- Por definição explícita de Rodolfo Mattei, a thread `1565032126137503759`, no canal pai de relatórios Eggbev `1565027294920319126`, é dedicada exclusivamente aos relatórios da conta `Eggbev-US-CC-EN-03 (FAX-US-02)`, ID `1481815942722118`.
+- O recorte aplica-se somente a esta thread; não incluir outras contas nem executar criação, clone, otimização ou mudança de budget por esta definição.
+- Esta declaração registra o destino e a conta dos relatórios; não solicita relatório imediato, criação/alteração de cron, migração das rotinas existentes nem write Meta. Período e tipo de relatório seguem o pedido correspondente; consultas futuras exigem validação real da conta e apresentação de período, moeda, fonte e limitações.
+- Fonte: mensagem de Rodolfo `1565032609401016331`. Cadastro de escopo consultado: `allowed=true`, BM Digital Trust `155263197283282`; isso não substitui readback Meta antes de consultas futuras.
+
 ### Escopo canônico — relatórios SMS Funnel
 
 - `SMS Funnel` é produto/dashboard corporativo, não site nem domínio-alvo. Pedido autorizado de consulta, auditoria ou relatório do SMS Funnel sem domínio explícito é um recorte global do sistema e não passa pelo bloqueio de domínio.
@@ -484,6 +498,13 @@ Gerenciar campanhas autorizadas          Ser dono de AdOps/precificação
 Analisar custo/ROI/performance            Fazer setup WordPress/pixel crítico sem Rodolfo
 Produzir relatórios                       Expor credenciais/tokens
 ```
+
+## Thread de relatórios — Eggbev Conta 01
+
+- Por definição explícita de Rodolfo Mattei na mensagem `1565032474487169045`, a thread `1565031975549538345`, no canal pai `1565027294920319126`, fica dedicada aos relatórios da conta de anúncio `Eggbev-US-CC-EN-01`, ID `1034081997659047`.
+- Resolver pedidos de relatório desta conversa somente para essa conta; não inferir outra conta pelo canal pai ou pelo nome da operação. Conta aceita pelo checker Digital Trust no registro desta decisão.
+- A definição vincula o escopo da conversa; não solicita relatório imediato, migração de destinos automáticos, mudança de cron, campanhas, budgets ou rotinas existentes. Período e tipo de relatório seguem o pedido posterior, com leitura live e gates vigentes.
+- Preservar o título manual da thread e as rotas automáticas existentes até pedido explícito de mudança.
 
 ## 13. Validação antes de responder
 

@@ -1,0 +1,111 @@
+{
+  "started_at": "2026-10-28T11:50:56.012497-04:00",
+  "finished_at": "2026-10-28T11:59:43.923898-04:00",
+  "summary": {
+    "targets": 54,
+    "linked": 51,
+    "unlinked_confirmed": 3,
+    "unknown": 0,
+    "not_linked_or_error": 3,
+    "total_dtr_pages_visible": 392,
+    "total_graph_pages": 378,
+    "total_connected_pages": 374,
+    "linked_debug_valid": 51,
+    "linked_accounts_status_200": 51,
+    "linked_dtr_pages_zero_graph": 0,
+    "planned_scope_removals": 0,
+    "app_capability": {
+      "status": "healthy",
+      "linked_accounts": 51,
+      "debug_valid": 51,
+      "accounts_status_200": 51,
+      "dtr_pages_visible": 392,
+      "graph_pages_visible": 378,
+      "dtr_pages_zero_graph_accounts": 0,
+      "checked_at": "2026-10-28T11:59:42-04:00"
+    },
+    "sheet_sync": {
+      "enabled": true,
+      "checked_rows": 54,
+      "marked": 3,
+      "unknown_preserved": 0,
+      "updates_needed": 0,
+      "updated": false,
+      "checked_at": "2026-10-28T11:59:42-04:00"
+    },
+    "alert_profiles": {
+      "profile": "Giselle Santos",
+      "backup_profile": "Emgai Datquang"
+    },
+    "possible_restriction_gate": {
+      "status": "no_candidate",
+      "persistent_debug_failures": 0,
+      "capability_status": "healthy"
+    },
+    "invest_3d": {
+      "status": "not_requested",
+      "current_date": null,
+      "current_day_partial": null,
+      "period_start": null,
+      "period_end": null,
+      "days": null,
+      "error": null
+    },
+    "alerts_sent": 0
+  },
+  "sheet_scope": 54,
+  "fresh_sheet_scope": 54,
+  "dtr_logins_checked": 38,
+  "dtr_inventory_missing": [],
+  "active_identity_mismatches": [],
+  "sheet_mismatches": [],
+  "new_scope_during_audit": [],
+  "confirmed_changes": [],
+  "nonlinked": [
+    {
+      "user": "disparosopenzed@gmail.com",
+      "segurador": "Max Tin Masela",
+      "verdict": "unlinked_confirmed",
+      "link_status": "not_linked_or_invalid",
+      "error": {
+        "code": null,
+        "type": null,
+        "message": "debug_token did not validate against B013-7"
+      },
+      "switch_status": 200,
+      "active_label": "Max Tin Masela",
+      "debug_status": 200,
+      "debug_is_valid": false
+    },
+    {
+      "user": "disparoslyzmouscces@gmail.com",
+      "segurador": "Riza Gabiola",
+      "verdict": "unlinked_confirmed",
+      "link_status": "not_linked_or_invalid",
+      "error": {
+        "code": null,
+        "type": null,
+        "message": "debug_token did not validate against B013-7"
+      },
+      "switch_status": 200,
+      "active_label": "Riza Gabiola",
+      "debug_status": 200,
+      "debug_is_valid": false
+    },
+    {
+      "user": "disparoscliquet@gmail.com",
+      "segurador": "Ricardo Oliveira",
+      "verdict": "unlinked_confirmed",
+      "link_status": "not_linked_or_invalid",
+      "error": {
+        "code": null,
+        "type": null,
+        "message": "debug_token did not validate against B013-7"
+      },
+      "switch_status": 200,
+      "active_label": "Ricardo Oliveira",
+      "debug_status": 200,
+      "debug_is_valid": false
+    }
+  ]
+}
