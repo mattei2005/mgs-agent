@@ -1383,12 +1383,12 @@
     {
       "agent": "ares",
       "id": "ARES-LIBRARY-REFRESH-1565090608467546224",
-      "next_step": "Coletar IDs unicos e cards atuais por dominio; confirmar paises por filtro e idioma por copy; agregar e entregar na origem",
+      "next_step": "Finalizar filtros por pais; cruzar apenas os IDs da base; validar conservacao e publicar ranking e produtos por site na thread",
       "objective": "Atualizar pesquisa publica Meta Library dos 25 sites de referencia: ranking por repeticao de anuncios ativos e produtos por idioma e pais; sem operacao de ativos externos",
-      "source": "discord:1552033992474234982/1565090608467546224; /root/.hermes/profiles/ares/cache/scratch/library-refresh-1565090608467546224",
-      "state": "historico recuperado; validando coletor residencial ao vivo",
+      "source": "discord:1552033992474234982/1565090608467546224; /root/.hermes/profiles/ares/cache/scratch/library-refresh-1565090608467546224/summary.json",
+      "state": "25 sites consultados; 905 ids unicos classificados (884 en, 21 es); qa visual em 41 referencias e multiplos frames em 15 videos; varredura de 37 paises em andamento",
       "thread_id": "1552033992474234982",
-      "updated_at": "2026-10-28T19:52:15+00:00"
+      "updated_at": "2026-10-28T20:09:37+00:00"
     },
     {
       "agent": "zeus",
@@ -7722,5 +7722,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T19:52:15+00:00"
+  "updated_at": "2026-10-28T20:09:37+00:00"
 }
