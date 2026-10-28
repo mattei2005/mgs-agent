@@ -61,6 +61,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 - **Pós-migração PHP → auditoria de todas as rotas/destinos/parâmetros** → `references/post-php-migration-routing-audit.md`
 - **Smart Routing → criar/validar routing pool** → `references/smart-routing-pool-create.md`
+- **ROI estimado → scoped read-only current-day projection and Ares handoff** → `references/estimated-roi-readonly-handoff.md`
 - **Recent operational references** → `references/route-pack-01.md`
 - **Purpose → Messenger Navigation Route** → `references/route-pack-02.md`
 - **Page tab → Cadastrar página Bot/DTR ausente na Smart Bidding** → `references/route-pack-03.md`

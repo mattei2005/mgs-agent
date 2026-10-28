@@ -11,7 +11,7 @@
   },
   "created_at": "2026-10-28T16:36:09.196886+00:00",
   "scope": "Exactly three named publishers; read-only report POSTs; no Meta or credential/permission writes",
-  "status": "collected",
+  "status": "verified_ready_for_ares",
   "publishers": [
     {
       "publisherId": "atual-fnc_fcp-team",
@@ -5856,5 +5856,214 @@
     }
   ],
   "completed_at": "2026-10-28T16:36:20.341103+00:00",
-  "domain_completed_at": "2026-10-28T16:37:31.925761+00:00"
+  "domain_completed_at": "2026-10-28T16:37:31.925761+00:00",
+  "validation": {
+    "request_id": "SB-ROI-E-1565040840550645892",
+    "validated_at": "2026-10-28T16:39:53.731943+00:00",
+    "status": "verified_ready_for_ares",
+    "formula": {
+      "ROI_ESTIMATED": "INVESTIMENT != 0 ? 100 * (REVENUE_ESTIMATED - INVESTIMENT) / INVESTIMENT : null",
+      "realized_roi_discount_share_on": "100 * (NET_REVENUE - INVESTIMENT) / INVESTIMENT",
+      "frontend_share_behavior": "Discount revenue share defaults true and replaces REVENUE with NET_REVENUE only; native REVENUE_ESTIMATED is not multiplied by a new share factor. Backend derivation/net-vs-gross composition of the estimate is not independently established by the client code. Do not multiply by 0.90 again as though that were the live column.",
+      "realized_share_observation": "NET_REVENUE matches REVENUE * 0.90 within one cent for every current nonzero row; empirical observation, not a separately read contract."
+    },
+    "limitations": [
+      "No AD_ID field in native report. All AD_NAME values are empty. Exact campaign/adgroup IDs and names/UTM retained; ad-level attribution cannot be asserted.",
+      "Domain and Campaigns are separate live requests, not an atomic snapshot. Differences below are not silently reconciled and their causes are not proven.",
+      "A zero-minute delay with currentFillTime=null does not prove a fresh GAM close or zero lag.",
+      "Fcp-team has no current rows; Sapogamer has residual activity with no attributed campaign/investment. No estimate ROI can be assigned to either.",
+      "No Meta spend reconciliation and no campaign write. This delivers the technical dependency; Ares still owns functional analysis and original-request closure."
+    ],
+    "publishers": [
+      {
+        "publisherId": "atual-fnc_fcp-team",
+        "performance_rows": 0,
+        "unique_tracking_groups": 0,
+        "distinct_attributed_campaigns": 0,
+        "unattributed_rows": 0,
+        "repeated_tracking_groups": 0,
+        "ad_id_provided": false,
+        "nonempty_ad_names": 0,
+        "campaigns_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "0.00",
+          "GAM_CODE_SERVED_COUNT": "0.00"
+        },
+        "domain_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "0.00",
+          "GAM_CODE_SERVED_COUNT": "0.00"
+        },
+        "campaigns_minus_domain": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "0.00",
+          "GAM_CODE_SERVED_COUNT": "0.00"
+        },
+        "campaigns_roi_estimated_pct": null,
+        "domain_roi_estimated_pct": null,
+        "campaigns_realized_net_roi_pct": null,
+        "domain_realized_net_roi_pct": null,
+        "delay": {
+          "hours": 0,
+          "minutes": 0,
+          "totalMinutes": 0,
+          "currentFillTime": null
+        },
+        "grain": "One row per DATE/PUBLISHER/UTM_ADGROUP in this response. Revenue counted once per tracking group/day, spend summed over native delivery rows. No repeated ad expansion found today.",
+        "coverage": "Domain is site-wide; Campaigns rows may not cover all site monetization/attribution.",
+        "attributed_campaign_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "0.00",
+          "GAM_CODE_SERVED_COUNT": "0.00"
+        },
+        "unattributed_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "0.00",
+          "GAM_CODE_SERVED_COUNT": "0.00"
+        },
+        "attributed_campaign_roi_estimated_pct": null
+      },
+      {
+        "publisherId": "atual-fnc_naboojobs",
+        "performance_rows": 154,
+        "unique_tracking_groups": 154,
+        "distinct_attributed_campaigns": 153,
+        "unattributed_rows": 1,
+        "repeated_tracking_groups": 0,
+        "ad_id_provided": false,
+        "nonempty_ad_names": 0,
+        "campaigns_totals": {
+          "INVESTIMENT": "1311.46",
+          "REVENUE": "1615.80",
+          "NET_REVENUE": "1454.24",
+          "REVENUE_ESTIMATED": "1822.93",
+          "CDP_IMPRESSIONS": "4589.00",
+          "GAM_CODE_SERVED_COUNT": "4939.00"
+        },
+        "domain_totals": {
+          "INVESTIMENT": "1311.41",
+          "REVENUE": "1642.11",
+          "NET_REVENUE": "1477.90",
+          "REVENUE_ESTIMATED": "1806.28",
+          "CDP_IMPRESSIONS": "4591.00",
+          "GAM_CODE_SERVED_COUNT": "5042.00"
+        },
+        "campaigns_minus_domain": {
+          "INVESTIMENT": "0.05",
+          "REVENUE": "-26.31",
+          "NET_REVENUE": "-23.66",
+          "REVENUE_ESTIMATED": "16.65",
+          "CDP_IMPRESSIONS": "-2.00",
+          "GAM_CODE_SERVED_COUNT": "-103.00"
+        },
+        "campaigns_roi_estimated_pct": "39.00",
+        "domain_roi_estimated_pct": "37.74",
+        "campaigns_realized_net_roi_pct": "10.89",
+        "domain_realized_net_roi_pct": "12.70",
+        "delay": {
+          "hours": 1,
+          "minutes": 36,
+          "totalMinutes": 96,
+          "currentFillTime": "2026-10-28T15:00:00.000Z"
+        },
+        "grain": "One row per DATE/PUBLISHER/UTM_ADGROUP in this response. Revenue counted once per tracking group/day, spend summed over native delivery rows. No repeated ad expansion found today.",
+        "coverage": "Domain is site-wide; Campaigns rows may not cover all site monetization/attribution.",
+        "attributed_campaign_totals": {
+          "INVESTIMENT": "1311.46",
+          "REVENUE": "1614.48",
+          "NET_REVENUE": "1453.05",
+          "REVENUE_ESTIMATED": "1821.75",
+          "CDP_IMPRESSIONS": "4578.00",
+          "GAM_CODE_SERVED_COUNT": "4925.00"
+        },
+        "unattributed_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "1.32",
+          "NET_REVENUE": "1.19",
+          "REVENUE_ESTIMATED": "1.18",
+          "CDP_IMPRESSIONS": "11.00",
+          "GAM_CODE_SERVED_COUNT": "14.00"
+        },
+        "attributed_campaign_roi_estimated_pct": "38.91"
+      },
+      {
+        "publisherId": "atual-fnc_sapogamer",
+        "performance_rows": 1,
+        "unique_tracking_groups": 1,
+        "distinct_attributed_campaigns": 0,
+        "unattributed_rows": 1,
+        "repeated_tracking_groups": 0,
+        "ad_id_provided": false,
+        "nonempty_ad_names": 0,
+        "campaigns_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "1.00",
+          "GAM_CODE_SERVED_COUNT": "1.00"
+        },
+        "domain_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "11.00",
+          "GAM_CODE_SERVED_COUNT": "11.00"
+        },
+        "campaigns_minus_domain": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "-10.00",
+          "GAM_CODE_SERVED_COUNT": "-10.00"
+        },
+        "campaigns_roi_estimated_pct": null,
+        "domain_roi_estimated_pct": null,
+        "campaigns_realized_net_roi_pct": null,
+        "domain_realized_net_roi_pct": null,
+        "delay": {
+          "hours": 0,
+          "minutes": 0,
+          "totalMinutes": 0,
+          "currentFillTime": null
+        },
+        "grain": "One row per DATE/PUBLISHER/UTM_ADGROUP in this response. Revenue counted once per tracking group/day, spend summed over native delivery rows. No repeated ad expansion found today.",
+        "coverage": "Domain is site-wide; Campaigns rows may not cover all site monetization/attribution.",
+        "attributed_campaign_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "0.00",
+          "GAM_CODE_SERVED_COUNT": "0.00"
+        },
+        "unattributed_totals": {
+          "INVESTIMENT": "0.00",
+          "REVENUE": "0.00",
+          "NET_REVENUE": "0.00",
+          "REVENUE_ESTIMATED": "0.00",
+          "CDP_IMPRESSIONS": "1.00",
+          "GAM_CODE_SERVED_COUNT": "1.00"
+        },
+        "attributed_campaign_roi_estimated_pct": null
+      }
+    ]
+  }
 }

@@ -1513,12 +1513,12 @@
     {
       "agent": "ares",
       "id": "ARES-SB-ROI-E-1565040840550645892",
-      "next_step": "Ao receber projeção Zeus, validar identidades/datas/moeda/granularidade e REVENUE_ESTIMATED, fórmula viva e delay por publisher; calcular ranking e exposição com Decimal e separar ROI estimado de realizado; responder na origem. Nunca reutilizar ontem como hoje.",
-      "objective": "Analisar 28/10/2026 parcial USD com foco ROI estimado de Fcp-team, Naboojobs e Sapogamer, conforme pedido Rodolfo.",
-      "source": "discord:1564744929660637264/1565040840550645892; /root/.hermes/profiles/ares/cache/scratch/sb-roi-e-handoff-1565040840550645892.json",
-      "state": "gates 3/3 allowed; consulta ares /report/performance_per_campaigns retornou403 após refresh. sem dados atuais, sem análise financeira produzida. handoff zeus entregue e get validado com mention efetiva; aguarda projeção pela identidade própria autorizada.",
+      "next_step": "Entregar análise na origem com snapshot12:36–12:37EDT, separar estimativa/realizado e Domain/campanhas, ressalvar ausênciaMeta e divergências de fontes; nenhum corte/escala autorizado. Novas atualizações exigem snapshot novo.",
+      "objective": "Analisar 28/10/2026 parcial USD com foco ROI estimado de Fcp-team, Naboojobs e Sapogamer, pedido Rodolfo.",
+      "source": "reports/ares/sb-roi-e-1565040840550645892.json;reports/ares/sb-roi-e-1565040840550645892-validation.json;/root/.hermes/profiles/ares/cache/scratch/sb-roi-e-analysis-1565040840550645892.json;discord:1564744929660637264/1565040840550645892",
+      "state": "projeção zeus validada por hashes exatos e cálculo independente decimal:155 linhas,3 publishers,153 campanhas naboo com investimento positivo; gastos1311.46, estimativa1821.75, saldoestimado510.29, roie38.91%; realizado1453.05, roi10.80%. domain separado roie37.74%, saldo494.87.52 negativas;9 de0a<10;23 de10a40;69 acima40. top com mínimousd30:smart_tv b01fb09c129 roie112.49%;natal b01fb08c66 69.81%;anillos b01fb09c131 67.10%. fcp sem linhas;sapo residual sem gasto;ambosroind. delaynaboo96min. dependência técnica concluída e análise validada; resposta funcional preparada na origem.",
       "thread_id": "1564744929660637264",
-      "updated_at": "2026-10-28T16:34:56+00:00"
+      "updated_at": "2026-10-28T16:41:44+00:00"
     },
     {
       "agent": "ares",
@@ -4249,6 +4249,16 @@
       "state": "concluído e validado: aba histórico restrições separada do rebuild de 15 minutos; o state continua acumulando transições a cada ciclo, enquanto refresh-sb-restricted-history-sheet.py escreve somente a aba histórica. cron único 0 8,14,20 * * * em america/new_york. dois applies cron-equivalentes: 571 linhas/571 chaves únicas, updated_tabs somente histórico restrições, índice 2. ciclo real do monitor às 15:14 gravou state e outras abas, não tocou histórico restrições; readback posterior permaneceu state=sheet. 24/24 testes e py_compile passaram. report-infra 1542613795602436237 validado por readback.",
       "thread_id": "1542560548124753920",
       "updated_at": "2026-08-27T19:17:17+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-SB-ROI-E-1565040840550645892",
+      "next_step": "Validar soma por conjunto/data e cobertura Domain, registrar limitações de AD_ID/AD_NAME e revenue share, congelar arquivo sanitizado/hash, entregar na origem com mention Ares e verificar mensagem.",
+      "objective": "Projeção read-only hoje 28/10 USD de Fcp-team, Naboojobs e Sapogamer para análise ROI estimado do Ares.",
+      "source": "discord:1564744929660637264/1565040840550645892;reports/ares/sb-roi-e-1565040840550645892.json",
+      "state": "handoff ares e comando rodolfo autenticados no discord; coleta própria zeus 3/3 performance http201 e delay http201; domain3/3 http200; 155 linhas exatas de28/10; fórmula viva localizada. validação granularidade/receita e entrega na origem pendentes; sem meta ou alteração credencial/permissão.",
+      "thread_id": "1565041188543791320",
+      "updated_at": "2026-10-28T16:38:19+00:00"
     },
     {
       "agent": "zeus",
@@ -7652,5 +7662,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T16:34:56+00:00"
+  "updated_at": "2026-10-28T16:41:44+00:00"
 }
