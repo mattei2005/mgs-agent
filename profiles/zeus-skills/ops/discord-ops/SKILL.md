@@ -30,6 +30,10 @@ Quando Rodolfo corrigir uma recusa e pedir atualização da documentação, comp
 
 Atualize a fonte canônica, o trecho conflitante do SOUL vivo e seu espelho versionado; confira igualdade dos espelhos, limite de contexto e testes do gate. Registre a supersessão pelo controlador institucional quando a regra mudar. Feche distinguindo documentação persistida, gate validado e comportamento observado: editar arquivos não prova que uma sessão já aberta incorporou a correção, nem que a tarefa operacional recusada foi retomada. Não execute campanhas, resete sessões ou acorde o agente apenas para comprovar uma atualização documental. Receita e diagnóstico de recusas: `references/route-pack-03.md`, seção **Investigar e retificar resposta de outro agente**.
 
+## Consolidar rotas funcionais na mesma thread
+
+Ao consolidar criação e clone, preserve os contratos separados e selecione o modo pela intenção do pedido, não apenas pelo ID da thread. Reconcile registry, consumidor, contratos, prompts, verificadores e config vivo/versionado; testes de unicidade de destinos precisam admitir compartilhamento explicitamente autorizado. Antes do fechamento, releia decisões posteriores no destino antigo: ele pode ter recebido outro propósito autorizado em paralelo. Não sobrescreva esse adendo nem trate variação de serialização YAML como drift semântico. Receita: `references/functional-route-consolidation.md`.
+
 ## Resumos executivos de threads para Rodolfo
 
 Quando Rodolfo pedir para resumir threads ou disser que há informação demais, leia as fontes e entregue uma síntese para decisão, não outro relatório técnico:

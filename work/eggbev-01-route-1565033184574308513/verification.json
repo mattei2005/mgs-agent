@@ -29,5 +29,37 @@
     "report_check": "engine_release_current",
     "global_regression": "KR-014",
     "disposition": "not waived; separate maintenance dependency, no production readiness claimed"
-  }
+  },
+  "report_receipts": [
+    {
+      "channel_id": "1498132022634483894",
+      "message_id": "1565035886968832041",
+      "readback_ok": true,
+      "title": "REPORT-INFRA — modificada"
+    }
+  ],
+  "concurrent_reconciliation": {
+    "human_message": "1565033982603829441",
+    "ares_ack": "1565035402908278817",
+    "config_status": "sources equal; YAML semantic mirrors equal; no new writer needed",
+    "preserved_warmup": true
+  },
+  "skill_readback": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/functional-route-consolidation.md",
+  "projections_independent_GET": [
+    {
+      "route": "rules",
+      "message_id": "1544799173151301673",
+      "readback_ok": true
+    },
+    {
+      "route": "campaign_creation",
+      "message_id": "1545924428712386620",
+      "readback_ok": true
+    },
+    {
+      "route": "campaign_warmup",
+      "message_id": "1565035308565667851",
+      "readback_ok": true
+    }
+  ]
 }
