@@ -1512,6 +1512,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SB-ROI-E-1565040840550645892",
+      "next_step": "Ao receber projeção Zeus, validar identidades/datas/moeda/granularidade e REVENUE_ESTIMATED, fórmula viva e delay por publisher; calcular ranking e exposição com Decimal e separar ROI estimado de realizado; responder na origem. Nunca reutilizar ontem como hoje.",
+      "objective": "Analisar 28/10/2026 parcial USD com foco ROI estimado de Fcp-team, Naboojobs e Sapogamer, conforme pedido Rodolfo.",
+      "source": "discord:1564744929660637264/1565040840550645892; /root/.hermes/profiles/ares/cache/scratch/sb-roi-e-handoff-1565040840550645892.json",
+      "state": "gates 3/3 allowed; consulta ares /report/performance_per_campaigns retornou403 após refresh. sem dados atuais, sem análise financeira produzida. handoff zeus entregue e get validado com mention efetiva; aguarda projeção pela identidade própria autorizada.",
+      "thread_id": "1564744929660637264",
+      "updated_at": "2026-10-28T16:34:56+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SB-ROI3D-1564752746890924225",
       "next_step": "Entregar ranking top5 na origem com gasto/receita/saldo, mínimoUSD30 declarado, parcial de27/10, corte17:14EDT, ROI exclusivamenteSB não reconciliadoMeta e alerta2h30 de atraso. Destacar SmartTV3dias positivos, Ropa apenas1dia, Anillos desacelerou hoje e Sofá sem linhahoje. Nova consulta financeira exige leitura autorizada própria ou projeção Zeus, nunca credencial alternativa.",
       "objective": "Ranquear melhores campanhas dos três sites SHEIN por ROI acumulado dos últimos três dias.",
@@ -7642,5 +7652,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T16:32:27+00:00"
+  "updated_at": "2026-10-28T16:34:56+00:00"
 }
