@@ -78,4 +78,31 @@ class ManualCompletionTests(unittest.TestCase):
   with patch.object(intake.bridge,'atomic_json',side_effect=AssertionError('production write forbidden')):
    self.m.record_completion(s,b,self.proofs,'same','audit.json')
   self.assertNotIn('delete_source',s)
+class ManualCompletionIntegrationTests(unittest.TestCase):
+ def setUp(self):
+  fixture=ManualCompletionTests();fixture.setUp()
+  self.m=fixture.m;self.thread=fixture.thread;self.item=fixture.item;self.plan=fixture.plan;self.execution=fixture.execution;self.audit=fixture.audit;self.source=fixture.source;self.proofs=fixture.proofs
+  import contextlib
+  self.tmp=tempfile.TemporaryDirectory(prefix='manual-completion-offline-');self.addCleanup(self.tmp.cleanup)
+  self.root=Path(self.tmp.name);self.execroot=self.root/'data/ares/creative-ops/executions';self.execution_dir=self.execroot/('intake-'+self.thread);self.execution_dir.mkdir(parents=True)
+  self.data=self.root/'archive';self.data.mkdir();(self.data/'jobs').mkdir()
+  self.inventory=self.root/'data/ares/creative-ops/inventory/assets.jsonl';self.inventory.parent.mkdir(parents=True);self.inventory.write_text('{}\n')
+  self.statepath=self.data/'intake-state.json';self.statepath.write_text(json.dumps({'schema':'mgs.intake.state.v1','claims':{},'completed':{}}))
+  for name,value in [('plan.json',self.plan),('sources.json',[self.source]),('state.json',self.execution),('final-audit.json',self.audit)]: (self.execution_dir/name).write_text(json.dumps(value))
+  (self.data/'archive-index.json').write_text(json.dumps({'mappings':{'rawOffline001':{'jobId':'offlinejob'}},'verified_jobs':{}}));(self.data/'jobs/job-offlinejob.json').write_text('{}')
+  self.patches=[patch.object(self.m,'EXECUTIONS',self.execroot),patch.object(self.m.b,'BASE',self.root),patch.object(self.m.b,'DATA',self.data),patch.object(intake,'DATA',self.data),patch.object(intake,'STATE',self.statepath),patch.object(self.m.b,'queue_lock',side_effect=lambda:contextlib.nullcontext()),patch.object(self.m.b,'config_load',return_value={}),patch.object(self.m.b,'Drive'),patch.object(self.m,'verify_delivery',return_value=self.proofs),patch('ares_archive_retirement.candidate_ready',return_value=True)]
+  for p in self.patches:p.start();self.addCleanup(p.stop)
+ def test_dry_run_preserves_all_state_and_creates_no_receipt(self):
+  before=self.statepath.read_bytes();out=self.m.run(self.execution_dir,'1291113428982693940',False)
+  self.assertEqual(out['status'],'verified_dry_run');self.assertEqual(self.statepath.read_bytes(),before);self.assertFalse((self.execution_dir/'intake-completion.json').exists())
+ def test_apply_and_replay_preserve_receipt_bytes_and_completion(self):
+  self.m.run(self.execution_dir,'1291113428982693940',True);receipt=self.execution_dir/'intake-completion.json';before=receipt.read_bytes();state=self.statepath.read_bytes()
+  with patch.object(self.m,'verify_delivery',side_effect=AssertionError('no reprocessing on replay')):
+   out=self.m.run(self.execution_dir,'1291113428982693940',True)
+  self.assertEqual(out['status'],'already_complete');self.assertEqual(receipt.read_bytes(),before);self.assertEqual(self.statepath.read_bytes(),state)
+ def test_native_verification_failure_never_releases_sources(self):
+  before=self.statepath.read_bytes()
+  with patch.object(self.m,'verify_delivery',side_effect=self.m.CompletionError('native integrity failure')):
+   with self.assertRaises(self.m.CompletionError):self.m.run(self.execution_dir,'1291113428982693940',True)
+  self.assertEqual(self.statepath.read_bytes(),before);self.assertFalse((self.execution_dir/'intake-completion.json').exists())
 if __name__=='__main__':unittest.main()

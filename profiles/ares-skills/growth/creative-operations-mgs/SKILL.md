@@ -26,7 +26,7 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 
 - **Pedido natural, brief, copy e produção criativa** → `references/route-pack-01.md`
 - **Status, Drive, READY/LEGACY e rastreabilidade** → `references/route-pack-02.md`
-- **Fila de arquivo 30 TB, cópia cloud e integração após intake (em validação)** → `references/shared-drive-30tb-archive-queue.md`; consultar a flag viva `queue_enabled` antes de qualquer enqueue. Exclusão permanece desativada.
+- **Arquivo 30 TB, fechamento manual e retirada do staging** → `references/shared-drive-30tb-archive-queue.md`; consultar as flags e a autorização vivas. Ares não exclui mídia: a retirada pertence exclusivamente ao controlador SA autorizado.
 - **Controle de uploads externos, exclusão e drift de permissões no Shared Drive MGS** → `references/my-drive-collaborator-control-and-deletion.md`
 - **Migração para Shared Drive, preflight de entitlement, piloto e escolha do Google Workspace** → `references/shared-drive-migration-and-workspace-plans.md`; evidência Enterprise Essentials validada → `references/shared-drive-enterprise-essentials-pilot-2026-07-15.md`; implementação full-root com checkpoint, move/copy, backup e cutover → `references/shared-drive-full-root-controlled-migration-2026-07-15.md`
 - **Sanitização, origem e consumidores** → `references/route-pack-03.md`
@@ -46,6 +46,7 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Toda conclusão de intake inclui contagens verificadas, link do destino final efetivo e o mapa exato `nome original → nome final` de cada fonte, inclusive reuploads duplicados; separar IMG/VID quando o lote for grande, sem anexos não solicitados.
 - Quando o pedido autorizar entrega em pasta de gestor, validar primeiro o tratado em READY e depois mover esse mesmo Drive ID para a pasta exata solicitada, sem criar um segundo candidato. Registrar o parent final real e manter os originais no LEGACY da operação; auditar e comunicar a pasta do gestor como destino final, não afirmar que o tratado continua fisicamente em READY. Receita: `references/mixed-media-drive-intake-ready-legacy.md`.
 - Encerrar pelo estado auditado do lote, não pelo término isolado de preparação ou upload. Correlacionar cada processo à sua fase e ao manifesto; uma notificação atrasada de fase já consumida não reabre o intake nem exige repetir a resposta final.
+- No intake manual, registrar também a conclusão no `intake-state.json` canônico antes de declarar o fluxo concluído; `state.json` próprio ou `final-audit.json` sozinho não libera a retirada. Usar `ares_manual_intake_completion.py` para o manifesto suportado e conferir `intake-completion.json`; receita na referência de arquivo 30 TB. Se faltar vínculo/prova, preservar staging e reportar a pendência, sem inventar claim nem relaxar o controlador.
 - Upload de gestor inicia `RESERVADO_PELO_GESTOR` e `ares_eligible=false`.
 - `01_READY` prova prontidão técnica, não ineditismo.
 - Antes de seleção/write, conciliar Drive × Meta.

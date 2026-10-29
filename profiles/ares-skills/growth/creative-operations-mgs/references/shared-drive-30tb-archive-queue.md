@@ -36,6 +36,20 @@ Antes de qualquer writer manual tocar uma fonte, consultar `ares_autonomous_inta
 
 Após tratamento, o verificador `complete` publica pelo lock único e pode retornar `waiting_archive`: aguardar receipt/ACK/atalhos; isso não é conclusão. `archive_ready` retoma somente `complete`, sem novo tratamento. O job de intake é local/silencioso; Zeus monitora sua saúde e faz escalonamento quando necessário.
 
+### Fechamento de pedido manual explícito
+
+Um lote manual também precisa de uma conclusão real no controle canônico. Marcar somente o `state.json` da execução como `complete` deixa a limpeza parada em `RETIREMENT_INTAKE_NOT_RELEASED`, mesmo com todos os arquivos nos 30 TB.
+
+Para o layout suportado `data/ares/creative-ops/executions/intake-<thread_id>/`, preservar `plan.json` (`mgs.manual.intake.plan.v1`), `sources.json`, `state.json` e `final-audit.json`. Depois da auditoria final e antes da resposta de conclusão, executar:
+
+```
+python3 /root/mgs-agent/scripts/ares_manual_intake_completion.py --execution-dir /root/mgs-agent/data/ares/creative-ops/executions/intake-<thread_id> --requester-id <autor_humano_do_pedido> --apply
+```
+
+O helper não trata, copia, apaga mídia ou altera regras: valida novamente os pares RAW/clean, hashes completos, metadados limpos, inventário/reserva, ACK SA nativo, owner/ACL e atalhos permanentes. Usa os locks `intake → queue → inventory`, registra o claim/conclusão com a hora real e preserva o timestamp no replay. Exigir readback do batch `complete`, das fontes em `completed` e de `intake-completion.json`; `already_complete` é replay sem novo transporte. Sem `--apply`, somente lê e verifica. Manifesto não suportado, duplicata, claim concorrente ou prova incompleta é bloqueio: não inserir um claim por JSON improvisado nem ampliar a seleção para fazê-lo passar.
+
+A retirada posterior continua exclusivamente em `ares_archive_retirement.py`, com a mesma confirmação vigente e no máximo dois pares por ciclo. Não chamar DELETE pelo executor manual. Separar entrega permanente validada, conclusão canônica e retirada efetiva do staging; só declarar esta última após recibos nativos e ausência dos IDs antigos. Não refazer tratamento para corrigir apenas esse vínculo.
+
 ## Conferência e leitura
 
 ```
@@ -60,7 +74,7 @@ Por padrão, mantém o ID original. `--use-verified` permite consultar um mapeam
 - Não agendar `runArchivePilot`: ele trata apenas um arquivo fixo. O bootstrap novo chama o worker de fila, validando antes o SHA-256 do código remoto versionado. Um código alterado não executa automaticamente.
 - O owner executa `mgsArquivoTeste` para consumir o canário pela fila. Somente após ACK real da SA, `mgsArquivoAtivar` pode criar um gatilho idempotente a cada 5 minutos. A presença dessa função não prova que o gatilho foi instalado.
 - O reconciliador recorrente e o consumo automático de novos intakes só podem ser chamados ativos após execução real validada. Não presumir que apenas instalar o gatilho do worker inicia tratamento autônomo de UPLOAD MANUAL.
-- O worker proprietário e o executor de intake Ares continuam sem exclusão. Rodolfo confirmou a política delimitada de aposentadoria em `1562233890716786830`; somente o controlador SA `ares_archive_retirement.py` pode executar a limpeza quando `queue-config.json.delete_source=true`, com autorização fixada, retenção mínima 24h, dois novos pares/run, prova de arquivo/ACL/atalho/receipts e sem referências físicas em uso. Não apagar pelo Ares manualmente, não tocar histórico/pastas/canários e não alterar IDs primários. Fonte: `docs/ares-creative-30tb-source-cleanup-policy.md`. Um 404 de origem só é esperado com recibo nativo de aposentadoria verificado; sem ele é bloqueio real. Desligar a limpeza não pode fazer consumidor de ID já aposentado voltar à origem ausente.
+- O worker proprietário e o executor de intake Ares continuam sem exclusão. A confirmação `1562233890716786830` foi supersedida somente quanto à espera pela confirmação `1562848227944955935`: retirada sem espera de 24h, preservados todos os gates e o máximo de dois novos pares/run. Consultar o binding vivo em `queue-config.json`; somente o controlador SA `ares_archive_retirement.py` pode executar a limpeza com autorização fixada, prova de arquivo/ACL/atalho/receipts e sem referências físicas em uso. Não apagar pelo Ares manualmente, não tocar histórico/pastas/canários e não alterar IDs primários. Fonte: `docs/ares-creative-30tb-source-cleanup-policy.md`. Um 404 de origem só é esperado com recibo nativo de aposentadoria verificado; sem ele é bloqueio real. Desligar a limpeza não pode fazer consumidor de ID já aposentado voltar à origem ausente.
 - Em erro, preservar origem e reserva; registrar o bloqueio exato, reconciliar side effects antes de retry e não criar writer paralelo. Falhas de classificação ou escopo não autorizam adivinhação para evitar uma pergunta.
 
 Fonte canônica e checkpoint: `/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md`, `ARES-CREATIVE-30TB-1562078493498540042`. Piloto real de cópia, retrieval e replay já passou; isso não substitui o teste do worker de fila.
