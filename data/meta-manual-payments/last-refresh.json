@@ -1,7 +1,38 @@
 {
-  "status": "updated_validated",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T142758728501",
-  "collected_at": "2026-10-28T14:27:56.753184-04:00",
+  "status": "updated_metrics_pending_card_history",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T210334842177",
+  "collected_at": "2026-10-28T21:03:28.899187-04:00",
   "accounts": 47,
-  "pending_ui": []
+  "pending_ui": [
+    {
+      "account_id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1481815942722118",
+      "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1414197490675732",
+      "name": "Mavroa-US-SHEIN-ES-02-G002",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ]
 }
