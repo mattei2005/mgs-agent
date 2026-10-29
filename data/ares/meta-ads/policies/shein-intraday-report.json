@@ -78,6 +78,7 @@
   "preserve_existing_reports": true,
   "recovery": "same_date_same_slot_same_account_sources_and_message_journal;no_blind_POST_replay;no_implicit_catchup",
   "runner": "/root/.hermes/profiles/ares/scripts/shein-intraday-report.py",
+  "cron_runner": "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
   "timeout_seconds": 2400,
   "lock": "data/ares/meta-ads/state/shein-daily-report/run.lock",
   "scheduler": "root_crontab_deterministic_no_LLM",
@@ -96,7 +97,8 @@
   "schedules": [
     "32 9 * * *",
     "11 14 * * *",
-    "2 16,20 * * *",
+    "2 16 * * *",
+    "2 20 * * *",
     "31 23 * * *"
   ]
 }

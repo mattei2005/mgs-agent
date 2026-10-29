@@ -4715,6 +4715,24 @@
       "updated_at": "2026-10-08T04:40:07+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.intraday-five-slots",
+      "canonical_source": "data/ares/meta-ads/policies/shein-intraday-report.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "growth.shein.reporting",
+      "effective_at": "2026-10-29T00:29:00+00:00",
+      "id": "ARES-SHEIN-INTRADAY-5SLOTS-20261028",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN:cinco reports intraday do dia atual,mesmas24contas e D1 preservado",
+      "updated_at": "2026-10-29T00:29:00+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reference-inheritance-defaults",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md",
       "consumers": [
@@ -15312,5 +15330,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-28T18:35:49+00:00"
+  "updated_at": "2026-10-29T00:29:00+00:00"
 }
