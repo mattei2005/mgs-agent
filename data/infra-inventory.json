@@ -56055,8 +56055,8 @@
       "authority_message_id": "1565417963958435901",
       "thread_id": "1565383322849382601",
       "target_thread_id": "1565379383017873569",
-      "status": "external_observer_running_waiting_visible_user_delivery",
-      "updated_at": "2026-10-29T18:27:36Z",
+      "status": "completed_validated",
+      "updated_at": "2026-10-29T18:51:32.301865+00:00",
       "paths": [
         "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/gateway/platforms/base.py",
         "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/tests/gateway/test_progress_cleanup_drain_race_mgs.py",
@@ -56153,7 +56153,44 @@
         "failure_deliver": "local",
         "one_shot": true,
         "user_delivery_gate": true
-      }
+      },
+      "activation": {
+        "status": "PASS",
+        "at": "2026-10-29T18:50:52.642283+00:00",
+        "ares_old_pid": 1600503,
+        "ares_new_pid": 3057837,
+        "fresh_connection_proven": true,
+        "source_and_config_hashes_match": true,
+        "unrelated_profiles_preserved": true
+      },
+      "native_smoke": {
+        "status": "PASS",
+        "at": "2026-10-29T18:50:57.006437+00:00",
+        "real_discord_messages": 3,
+        "progress_removed_by_native_callback": 2,
+        "final_preserved_until_explicit_test_teardown": true,
+        "queued_generation_completed": true,
+        "all_test_messages_absent": true,
+        "business_actions": 0,
+        "transport": "Zeus REST-backed adapter, native BasePlatformAdapter lifecycle and GatewayRunner cleanup callback; no AI inference"
+      },
+      "cleanup": {
+        "status": "PASS",
+        "at": "2026-10-29T18:51:32.266874+00:00",
+        "technical_residues_absent": 7,
+        "preserved_messages_verified": 15,
+        "target_ids": [
+          "1565386410935058495",
+          "1565386097775878256",
+          "1565384986918523063",
+          "1565381943275688088",
+          "1565380431405125678",
+          "1565379524835938334",
+          "1565379458368545039"
+        ]
+      },
+      "final_report_infra_message_id": "1565437954875203715",
+      "final_report_readback": true
     },
     {
       "agent": "zeus",

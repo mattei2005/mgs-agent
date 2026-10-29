@@ -2953,12 +2953,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-PROGRESS-CLEANUP-1565417963958435901",
-      "next_step": "Job externo unico 0123d4ca4a8f aguarda handoff visivel; agenda ativacao canonica Ares-only fora da cadeia ativa, valida novo processo e conexao, smoke nativo, sete alvos e quinze preservados antes da entrega final. Nenhuma acao humana adicional.",
-      "objective": "Corrigir causa da limpeza visual Ares sem ocultar acompanhamento e remover apenas sete residuos tecnicos autorizados",
-      "source": "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/restart-plan.json",
-      "state": "external_activation_ready",
+      "next_step": "Causa reproduzida;patch ativo apos restartAres;smoke nativo Discord passou;7residuos removidos e mensagens normais preservadas;nenhuma acao humana.",
+      "objective": "Corrigir cleanup visual Ares antes do handoff de geracao e remover somente residuos tecnicos autorizados",
+      "source": "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/activation-readback.json",
+      "state": "completed_validated",
       "thread_id": "1565383322849382601",
-      "updated_at": "2026-10-29T18:27:48+00:00"
+      "updated_at": "2026-10-29T18:51:33+00:00"
     },
     {
       "agent": "zeus",
@@ -7812,5 +7812,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T18:47:55+00:00"
+  "updated_at": "2026-10-29T18:51:33+00:00"
 }
