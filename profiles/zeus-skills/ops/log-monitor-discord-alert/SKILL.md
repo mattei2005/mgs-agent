@@ -36,6 +36,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Espelhar `Messenger user token invalid` da Smart Bidding com page count, dedupe, outbox e zero mentions** → `references/sb-messenger-token-invalid-monitor.md`
 
 - **RunCloud: coleta, orçamento de API, cooldown, cadência e avaliação SSH/API híbrida** → `references/runcloud-initial-monitoring.md`
+- **SHEIN D-1 e cinco rodadas intraday: estado/nonce por slot, lock compartilhado, UI Today e validação sem publicação antecipada** → `references/shein-daily-and-intraday-reports.md`
 
 ## MGS transport and telemetry invariants
 

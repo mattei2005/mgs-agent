@@ -2833,12 +2833,12 @@
     {
       "agent": "zeus",
       "id": "SHEIN-INTRADAY-REPORTS-1565155357074923732",
-      "next_step": "Adaptar runner com estado por rodada e lock compartilhado;testar D1/intraday/coleta live;auditar agendas novamente;instalar e validar readback;inventario e REPORT-INFRA.",
-      "objective": "Adicionar cinco rodadas SHEIN do dia atual:09:32,14:11,16:02,20:02,23:31 America/New_York;mesmas24contas/threads;preservar D-1 08h.",
-      "source": "https://discord.com/channels/1185714635991679006/1565155357074923732/1565157065234710681",
-      "state": "autorizado por rodolfo1565157065234710681;implementacao e testes em andamento;nenhum cron novo instalado.",
+      "next_step": "Primeiro fire28/10 23:31ET(+25s);runner coleta fontes novas por rodada e valida cada publicacao por GET. Nao confundir teste live sem POST com entrega agendada.",
+      "objective": "Cinco rodadas SHEIN do dia atual:09:32,14:11,16:02,20:02,23:31 America/New_York;mesmas24contas/threads;D-1 preservado.",
+      "source": "data/ares/meta-ads/policies/shein-intraday-report.json",
+      "state": "configuracao concluida e ativa:5crons readback exato;audit8dias zero conflito operacional;181testesok;live24contas/340campanhas sem post;d1 96artefatos byte-identicos;inventario/audit/registry/skill persistidos;report-infra1565161234305654845 get verificado. primeiro disparo agendado futuro28/10 23:31et;nenhum report extra publicado.",
       "thread_id": "1565155357074923732",
-      "updated_at": "2026-10-29T00:16:38+00:00"
+      "updated_at": "2026-10-29T00:32:20+00:00"
     },
     {
       "agent": "zeus",
@@ -5293,12 +5293,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-plan-1564289742567112795",
-      "next_step": "Integrar patches de criterio14 com hashes e revisaoatual; GET integral Sheets e atualizacao pontual; resolver primeira operacao tecnica comprovadamente disponivel nos9 sem ampliar credencial/permissao/runtime.",
-      "objective": "Concluir QA e reparos localizados dos100 SEO autorizados por Raquel",
+      "next_step": "Obter vinculonativoexistente/recuperacao emOpenzed/Cliquet e custodiantehostwebrootownerFinc; executar so reparolocal aposcertificacao; sem pluginwide/permissao/credencialnova. Nao repetir14QAou64celulas.",
+      "objective": "Concluir100 SEO autorizados por Raquel com QA publico e relatorio real",
       "source": "/root/.hermes/profiles/atena/work/seo100-1564353146120310928/current-task-index.json",
-      "state": "retomada1565156500773539913 autenticada; oficial77ok23pendentes. qa14 pronto sendo reconciliado sa-0-703787c0; descoberta tecnica9 por sa-1-bcd64b61 somente leitura; parent unico integrador sheets e escritor de producao. sem replay.",
+      "state": "91ok9pendentes:qa14integrado,21criteriosencerrados,14getsnativos+publicosnovos;64celulasatualizadas;3abas/metadatareliadas.9bloqueiostecnicosreaisem3portais;nenhumwriteproducao/replay. tarefaaberta.",
       "thread_id": "1564289742567112795",
-      "updated_at": "2026-10-29T00:14:06+00:00"
+      "updated_at": "2026-10-29T00:30:07+00:00"
     },
     {
       "agent": "atena",
@@ -7732,5 +7732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T00:16:38+00:00"
+  "updated_at": "2026-10-29T00:32:20+00:00"
 }

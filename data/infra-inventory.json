@@ -55677,6 +55677,165 @@
       },
       "report_message_id": "1565071611072225516",
       "report_readback": "PASS exact channel/message, one native embed, empty content, zero mentions/thread"
+    },
+    {
+      "id": "ARES-SHEIN-INTRADAY-5SLOTS-20261028",
+      "agent": "zeus",
+      "type": "deterministic_shein_current_day_reports",
+      "status": "active_validated_first_scheduled_delivery_pending",
+      "updated_at": "2026-10-28T20:32:20.933961-04:00",
+      "thread_id": "1565155357074923732",
+      "source_message_id": "1565155813922701353",
+      "authorization_message_id": "1565157065234710681",
+      "canonical_source": "data/ares/meta-ads/policies/shein-intraday-report.json",
+      "slots": [
+        "09:32",
+        "14:11",
+        "16:02",
+        "20:02",
+        "23:31"
+      ],
+      "timezone": "America/New_York",
+      "expected_accounts": 24,
+      "preserve_daily_D1": true,
+      "shared_lock": "/root/mgs-agent/data/ares/meta-ads/state/shein-daily-report/run.lock",
+      "scheduler_lock": "/var/lock/ares-shein-intraday-scheduler.lock",
+      "stagger_seconds": 25,
+      "timeout_seconds": 2400,
+      "backup": "/root/mgs-agent/backups/shein-intraday-20261028-1565157065234710681",
+      "files": [
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-daily-report.py",
+          "size_bytes": 27042,
+          "sha256": "b9c4cf9d598f780b7ab5a63130173e368ef4cbb5eb14a3457f00dfc5f04f8b8c",
+          "modified_at": "2026-10-28T20:17:04.604782-04:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-daily-rps-ui.py",
+          "size_bytes": 8845,
+          "sha256": "d8a2ddced521ea386ed61564d0a72b16931db78b7764532957ce8dc5a2cd8e3f",
+          "modified_at": "2026-10-28T20:24:45.217283-04:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-report.py",
+          "size_bytes": 11496,
+          "sha256": "ba149a297f5e0e913101c711b97c8bdc5abbc44ec694a43feb070964c4a94f96",
+          "modified_at": "2026-10-28T20:17:52.525835-04:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+          "size_bytes": 574,
+          "sha256": "1e86b268bc38166b5a6a3e95b2fe45ef4e36143ea2274eac4d653c059e0a5ccf",
+          "modified_at": "2026-10-28T20:27:22.679447-04:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/tests/test_shein_report_intraday.py",
+          "size_bytes": 6327,
+          "sha256": "d73455ba2486e25fc3eb86eb4c761a91e4f5b82faf79f1ff529b8a2e9392303c",
+          "modified_at": "2026-10-28T20:19:05.073916-04:00"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/policies/shein-intraday-report.json",
+          "size_bytes": 3384,
+          "sha256": "08dd8c106c4510541b46d0a5d56727e36116c1394bac790e54d3ead1cb58eb7f",
+          "modified_at": "2026-10-28T20:27:39.329464-04:00"
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+          "size_bytes": 202182,
+          "sha256": "922e5855953604e55f51aa59017e44894de0fb812bbc79f2294c5dd0a2099a63",
+          "modified_at": "2026-10-28T20:27:39.225464-04:00"
+        },
+        {
+          "path": "/root/mgs-agent/docs/CRONS.md",
+          "size_bytes": 51765,
+          "sha256": "fe42793e4c97654bdccf135794ba2051bd750c3a91af7448b24efc5d3eb3fc7a",
+          "modified_at": "2026-10-28T20:29:36.391588-04:00"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "size_bytes": 582047,
+          "sha256": "c95751055f885d97064773c332d91ec9257012e29f97c37debd430c116648f1e",
+          "modified_at": "2026-10-28T20:29:00.869550-04:00"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "size_bytes": 687509,
+          "sha256": "58377191656c71479527e1a8fd80e5ee6b5cb167682af9d515ff2d175a0e4e0e",
+          "modified_at": "2026-10-28T20:32:20.877762-04:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+          "size_bytes": 11003,
+          "sha256": "1b6cf2dc9ca518a09542144e8d6eb30a8941d156a06fb2f987b08b02062738c1",
+          "modified_at": "2026-10-28T20:28:43.192532-04:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+          "size_bytes": 3747,
+          "sha256": "459e59d8b7f0ed786de8070eb694386ca9cfa066933181238716d17539bea0f9",
+          "modified_at": "2026-10-28T20:28:43.024531-04:00"
+        }
+      ],
+      "schedule_readback": "/root/mgs-agent/data/ares/meta-ads/state/shein-intraday-report/scheduler-readback.json",
+      "global_postflight": "/root/mgs-agent/data/ares/meta-ads/state/shein-intraday-report/schedule-post.json",
+      "inevitable_baselines": {
+        "09:32": [
+          "monitor_honcho_billing_watch.py",
+          "alerts-infra-failed-alert-resolver.py",
+          "monitor_hermes_pending_writes.py",
+          "finalize-hermes-structural-write.py",
+          "hermes-news-explainer-watchdog.py"
+        ],
+        "14:11": [
+          "monitor-auto-push.sh",
+          "monitor-service-restarts.sh",
+          "monitor_honcho_billing_watch.py",
+          "monitor_hermes_pending_writes.py",
+          "finalize-hermes-structural-write.py",
+          "hermes-news-explainer-watchdog.py",
+          "b013-dtr-link-watch"
+        ],
+        "16:02": [
+          "monitor_honcho_billing_watch.py",
+          "alerts-infra-failed-alert-resolver.py",
+          "monitor_hermes_pending_writes.py",
+          "finalize-hermes-structural-write.py",
+          "hermes-news-explainer-watchdog.py",
+          "b013-dtr-link-watch"
+        ],
+        "20:02": [
+          "monitor_honcho_billing_watch.py",
+          "alerts-infra-failed-alert-resolver.py",
+          "monitor_hermes_pending_writes.py",
+          "finalize-hermes-structural-write.py",
+          "hermes-news-explainer-watchdog.py",
+          "b013-dtr-link-watch"
+        ],
+        "23:31": [
+          "monitor-service-restarts.sh",
+          "monitor_honcho_billing_watch.py",
+          "monitor_hermes_pending_writes.py",
+          "finalize-hermes-structural-write.py",
+          "hermes-news-explainer-watchdog.py"
+        ]
+      },
+      "validation": {
+        "unit_regression_tests_passed": 181,
+        "D1_artifacts_byte_identical": 96,
+        "live_accounts": 24,
+        "live_campaigns": 340,
+        "live_no_POST": true,
+        "source_root": "/root/mgs-agent/data/ares/meta-ads/state/shein-intraday-report/validation/20261028T201951996357",
+        "operational_start_collisions": 0,
+        "civil_days": 8,
+        "meta_writes": 0,
+        "dashboard_writes": 0,
+        "deletions": 0
+      },
+      "first_next_cron_tick": "2026-10-28T23:31:00-04:00",
+      "report_message_id": "1565161234305654845",
+      "report_readback": "Exact alerts-infra channel/message;empty content;one embed;zero mentions/thread verified"
     }
   ],
   "profile_skill_references": [
@@ -57154,6 +57313,26 @@
     },
     {
       "entry": "47 7 * * * /usr/bin/flock -n /var/lock/ares-shein-daily-scheduler.lock /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-daily-cron.py >> /root/mgs-agent/logs/ares-shein-daily-report.log 2>&1"
+    },
+    {
+      "entry": "32 9 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 09:32 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+      "description": "SHEIN intraday dia atual;24contas;slot09:32 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+    },
+    {
+      "entry": "11 14 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 14:11 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+      "description": "SHEIN intraday dia atual;24contas;slot14:11 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+    },
+    {
+      "entry": "2 16 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 16:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+      "description": "SHEIN intraday dia atual;24contas;slot16:02 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+    },
+    {
+      "entry": "2 20 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 20:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+      "description": "SHEIN intraday dia atual;24contas;slot20:02 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+    },
+    {
+      "entry": "31 23 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 23:31 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
+      "description": "SHEIN intraday dia atual;24contas;slot23:31 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
     }
   ],
   "scripts": [
@@ -59021,6 +59200,30 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-report.py",
+      "size_bytes": 27042,
+      "sha256": "b9c4cf9d598f780b7ab5a63130173e368ef4cbb5eb14a3457f00dfc5f04f8b8c",
+      "modified_at": "2026-10-28T20:17:04.604782-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-rps-ui.py",
+      "size_bytes": 8845,
+      "sha256": "d8a2ddced521ea386ed61564d0a72b16931db78b7764532957ce8dc5a2cd8e3f",
+      "modified_at": "2026-10-28T20:24:45.217283-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-report.py",
+      "size_bytes": 11496,
+      "sha256": "ba149a297f5e0e913101c711b97c8bdc5abbc44ec694a43feb070964c4a94f96",
+      "modified_at": "2026-10-28T20:17:52.525835-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+      "size_bytes": 574,
+      "sha256": "1e86b268bc38166b5a6a3e95b2fe45ef4e36143ea2274eac4d653c059e0a5ccf",
+      "modified_at": "2026-10-28T20:27:22.679447-04:00"
     }
   ],
   "skills_mgs": [
@@ -61972,9 +62175,10 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 687371,
+      "size_bytes": 687509,
       "md5": "2054cfa3eeea0a975019d2e4431dbf2b",
-      "modified_at": "2026-10-28T20:16:38-04:00"
+      "modified_at": "2026-10-28T20:32:20.877762-04:00",
+      "sha256": "58377191656c71479527e1a8fd80e5ee6b5cb167682af9d515ff2d175a0e4e0e"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
@@ -62458,9 +62662,10 @@
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 581406,
+      "size_bytes": 582047,
       "md5": "29c35b74cc34f7c80a2ef93f421fb9fb",
-      "modified_at": "2026-10-28T14:35:49-04:00"
+      "modified_at": "2026-10-28T20:29:00.869550-04:00",
+      "sha256": "c95751055f885d97064773c332d91ec9257012e29f97c37debd430c116648f1e"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -63229,6 +63434,42 @@
       "size_bytes": 13564,
       "md5": "afdcfc5959759a5106b8aab48e72b14a",
       "modified_at": "2026-10-09T11:42:46-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_intraday.py",
+      "size_bytes": 6327,
+      "sha256": "d73455ba2486e25fc3eb86eb4c761a91e4f5b82faf79f1ff529b8a2e9392303c",
+      "modified_at": "2026-10-28T20:19:05.073916-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/policies/shein-intraday-report.json",
+      "size_bytes": 3384,
+      "sha256": "08dd8c106c4510541b46d0a5d56727e36116c1394bac790e54d3ead1cb58eb7f",
+      "modified_at": "2026-10-28T20:27:39.329464-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "size_bytes": 202182,
+      "sha256": "922e5855953604e55f51aa59017e44894de0fb812bbc79f2294c5dd0a2099a63",
+      "modified_at": "2026-10-28T20:27:39.225464-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/docs/CRONS.md",
+      "size_bytes": 51765,
+      "sha256": "fe42793e4c97654bdccf135794ba2051bd750c3a91af7448b24efc5d3eb3fc7a",
+      "modified_at": "2026-10-28T20:29:36.391588-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "size_bytes": 11003,
+      "sha256": "1b6cf2dc9ca518a09542144e8d6eb30a8941d156a06fb2f987b08b02062738c1",
+      "modified_at": "2026-10-28T20:28:43.192532-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+      "size_bytes": 3747,
+      "sha256": "459e59d8b7f0ed786de8070eb694386ca9cfa066933181238716d17539bea0f9",
+      "modified_at": "2026-10-28T20:28:43.024531-04:00"
     }
   ],
   "mu_plugin_canonical": {
