@@ -21,6 +21,7 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 
 ## When to Use
 
+- Inventário somente leitura dos cartões cadastrados por conta/BM, separando cartão padrão, adicionais e linha de crédito, inclusive quando a entrega é apenas no chat.
 - Planilha de contas, saldos, últimas cobranças no cartão, gasto mensal ou média diária para decidir pagamentos manuais.
 - Distribuir pagamentos entre cartões disponíveis e diminuir utilização da linha de crédito, sem alterar a forma padrão por inferência.
 - Distinguir saldo corrente, valor do Pay now, invoice fechada, crédito publicitário e pagamento efetivamente realizado.
@@ -29,8 +30,8 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 
 ## Pré-requisitos e fontes
 
-1. Resolver o pedido, BM, workbook/aba, período, moedas e autoridade exatos. Ler o estado live antes de mutação; nunca ampliar para outras BMs.
-2. Carregar `meta-ads-api-operations` para transporte Meta, leitura segura de 1Password e cobertura BM-admin. Usar a credencial administrativa existente aprovada; um token operacional restrito não prova inventário completo. Não trocar referências de produção.
+1. Resolver o pedido, BM, período, moedas, canal de entrega e autoridade exatos; resolver workbook/aba somente se houver trabalho de planilha. Se Rodolfo pedir PC1, usar a sessão real aprovada do PC1. Não substituir silenciosamente por outro navegador, identidade ou BM, nem exigir Sheets para uma consulta no chat.
+2. Quando a coleta usar API, carregar `meta-ads-api-operations` para transporte Meta, leitura segura de 1Password e cobertura BM-admin. Usar a credencial administrativa existente aprovada; um token operacional restrito não prova inventário completo. Não trocar referências de produção.
 3. Carregar `google-drive-agent-automation` antes de Sheets: somente SA `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`. Conferir os quatro seletores `service_account`, Drive `canEdit` e Sheets HTTP 200. Não usar OAuth pessoal/browser Google como fallback.
 4. APIs/dashboards/recibos live são fonte de estado; screenshots são evidência limitada ao conteúdo visível. Ler imagens com `vision_analyze`. Nunca confundir nome de conta, posição de linha, pagamento atual e transação histórica.
 5. Para prioridades G/H/I/J e reorganização automática linha→cartão, carregar `references/funding-regroup-priority.md`; esta autorização nova supersede o gate antigo e as contagens/posições fixas, sem mudar billing. Para endpoints e evidência do workbook existente, carregar `references/collection-and-workbook.md`. Para retomada e limites comprovados do caso inicial, carregar `references/digital-trust-baseline.md`; valores históricos dessa referência nunca substituem coleta atual.
@@ -45,6 +46,16 @@ Fonte da finalidade aprovada: Rodolfo, mensagem `1563943171392667679`, thread `1
 - Classificar cartão por funding tipo 1; linha de crédito por tipo 4 com monthly-invoicing; omissão é não identificado, não ausência de meio de pagamento.
 - Coletar Insights do mês solicitado e reconciliar diário x agregado por conta com Decimal, respeitando moeda e dia atual parcial. Não usar lifetime `amount_spent` como mês.
 - Persistir cada lote sanitizado e exigir igualdade do conjunto de IDs antes de publicar.
+
+### 1a. Inventário de cartões no PC1 — mapear antes de abrir
+
+1. Descobrir a janela/perfil real, validar a BM e adquirir a lease compartilhada. Ler **Accounts** primeiro e persistir o mapa completo por ID, nome literal e método exibido; preservar contas homônimas como IDs distintos. Para enumeração e marcadores da UI, usar `references/collection-and-workbook.md`.
+2. Não abrir detalhes das linhas explicitamente **No payment method**. Na consulta de cartões de Rodolfo, ignorar também nomes exatos **001** e **001 BR**, aceitando somente equivalência de caixa/espaços a `001br`; não excluir `001 US`, `001 DE` ou outros nomes por prefixo. Campo ausente na API continua desconhecido, não equivale ao rótulo explícito da UI.
+3. Congelar os IDs elegíveis antes da navegação. Abrir somente contas com método exibido e ainda não conferidas. Na retomada, reconciliar o mapa e os recibos existentes; atualizar a classificação das pendências sem reabrir contas concluídas ou repetir a varredura inteira sem necessidade de frescor.
+4. Ler a **seção de métodos da conta**, separando `Default` dos cartões adicionais; não coletar cartões da tabela de transações como se fossem cadastrados atualmente. Linha de crédito como padrão pode coexistir com cartões adicionais. `Ad credit` na lista não determina o funding padrão: conferir o detalhe da conta elegível.
+5. Persistir cada resultado e seu horário antes da próxima conta. Tratar como estados distintos: excluída por nome, sem método na lista, consultada sem cartões, consultada com cartões e bloqueada/não consultada. Reconciliar os conjuntos por ID para não somar exclusões sobrepostas nem apresentar contas ignoradas como consultas concluídas.
+6. Reduzir navegações e usar lotes sequenciais com pausas; nenhuma cadência de billing está certificada como imune a limites da Meta. Ao primeiro bloqueio real, interromper a navegação e liberar a lease. Se Rodolfo pedir espera e nova tentativa, agendar uma execução única real pelo fluxo de `log-monitor-discord-alert`, preservando os IDs pendentes; não prometer retry sem job persistido nem apresentar a espera como garantia de desbloqueio.
+7. Entregar nomes completos e bandeira/final mascarados, com legenda inequívoca para padrão e adicionais. Separar contas cujo padrão é linha de crédito. Em pergunta pontual por final de cartão, filtrar o ledger e informar **todas as correspondências verificadas**, o papel de cada cartão e a data/origem do levantamento, sem reapresentar o histórico como leitura live. Contar combinações de bandeira/final observadas; não afirmar que finais mascarados provam cartões físicos únicos.
 
 ### 2. Última cobrança somente no cartão
 
