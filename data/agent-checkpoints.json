@@ -2832,6 +2832,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SHEIN-INTRADAY-REPORTS-1565155357074923732",
+      "next_step": "Adaptar runner com estado por rodada e lock compartilhado;testar D1/intraday/coleta live;auditar agendas novamente;instalar e validar readback;inventario e REPORT-INFRA.",
+      "objective": "Adicionar cinco rodadas SHEIN do dia atual:09:32,14:11,16:02,20:02,23:31 America/New_York;mesmas24contas/threads;preservar D-1 08h.",
+      "source": "https://discord.com/channels/1185714635991679006/1565155357074923732/1565157065234710681",
+      "state": "autorizado por rodolfo1565157065234710681;implementacao e testes em andamento;nenhum cron novo instalado.",
+      "thread_id": "1565155357074923732",
+      "updated_at": "2026-10-29T00:16:38+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "SHEIN-REPORT-GATEWAY-1558252008467734678",
       "next_step": "Encerrado; Ares acompanha a configuração Intraday na thread original, sem cron/campanha alterados",
       "objective": "Recuperar respostas Ares nos 6 canais e 36 threads SHEIN sem alterar campanhas",
@@ -7722,5 +7732,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T00:14:06+00:00"
+  "updated_at": "2026-10-29T00:16:38+00:00"
 }
