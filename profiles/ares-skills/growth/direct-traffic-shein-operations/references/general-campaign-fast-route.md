@@ -84,7 +84,7 @@ python3 /root/mgs-agent/scripts/ares-shein-campaigns.py campaign --input <reques
 
 O comando faz preflight vivo, seleção da fonte na conta exata, compiler, prevalidation/plan, conciliação de numeração antes do write, delegação ao Engine central e readback. Sem confirmação ou com `--dry-run`, não entra no writer. `single-clone` é alias de compatibilidade, não rota privilegiada; `prepare-live/materialize` G005 de três modos fica apenas legado/rollback, não intake rotineiro.
 
-JSON interno de intenção para duplicação sem horário/status expressos (não formulário obrigatório ao gestor). Use `start_next_midnight=true` e omita `status` para aplicar os defaults canônicos; somente um pedido explícito substitui essas opções. Não copie datas fixas ou PAUSED de exemplos para um pedido que não os solicitou, pois isso altera o agendamento ou impede a ativação autorizada:
+JSON interno, não formulário ao gestor. Sem horário/status, use `start_next_midnight=true` e omita `status`. Com horário explícito, substitua o marcador por `start_time` ISO 8601 com offset vigente da conta; confira campanha/conjunto no readback. Use esse campo documentado, não introspecção de constantes do compiler. Não herde datas ou PAUSED de exemplos:
 
 ```json
 {
