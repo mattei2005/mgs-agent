@@ -76,6 +76,10 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 - Campanha nova deve nascer PAUSED, salvo autorização operacional explícita em contrato validado.
 - IDs técnicos ficam em audit; relatório humano mostra alias e nomes operacionais.
 
+## Histórico de alterações solicitado pelo operador
+
+Para “quais campanhas alterei hoje”, faça auditoria read-only de Activities, não um novo relatório de performance nem uma comparação isolada de snapshots. Resolva o período no fuso live da conta, agrupe alterações por campaign ID real e separe campanhas existentes editadas de campanhas novas. Apresente bullets por campanha com horário local, campo e valor anterior → novo; preserve alterações intermediárias. Atribua a ação ao perfil/app comprovado, sem tratar o nome do perfil Meta como prova da pessoa física. Não conte processamento/revisão como pausa ou reativação manual. Siga a receita de coleta, hierarquia e reconciliação em `references/current-operational-pitfalls.md`, seção **Auditoria pontual de alterações via Activities**.
+
 ## Comunicação de auditoria e correção
 
 - Responda primeiro se o pedido foi concluído. Separe em linguagem direta **executado e validado**, **não executado** e **dependente de confirmação**; auditoria concluída não significa correção executada.
