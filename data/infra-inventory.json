@@ -56048,6 +56048,67 @@
         "origin_message_id": "1565398678108241921",
         "origin_content_exact": true
       }
+    },
+    {
+      "id": "ares-progress-cleanup-1565417963958435901",
+      "agent": "zeus",
+      "authority_message_id": "1565417963958435901",
+      "thread_id": "1565383322849382601",
+      "target_thread_id": "1565379383017873569",
+      "status": "tested_pending_safe_activation",
+      "updated_at": "2026-10-29T17:57:41.485920+00:00",
+      "paths": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/gateway/platforms/base.py",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/tests/gateway/test_progress_cleanup_drain_race_mgs.py",
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+        "/root/mgs-agent/patches/hermes/current-runtime-manifest.json",
+        "/root/mgs-agent/patches/hermes/discord-progress-cleanup-before-drain-2026-10-29.patch",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/session-context-discord-output.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/session-context-discord-output.md",
+        "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py"
+      ],
+      "sha256": {
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/gateway/platforms/base.py": "b6aac322c20bb38cdb889273727695b2c3e59b69eead01cfe468066d648f808a",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/tests/gateway/test_progress_cleanup_drain_race_mgs.py": "93a9d2a8d8024753266ac96ff5b7bb0980ed13dc3addfd8ca27da82fc32fc10f",
+        "/root/.hermes/profiles/ares/config.yaml": "6959656e8a286c8de9ee10a7b31c3f66f622086cc74017309c26c3c62cb853ef",
+        "/root/mgs-agent/profiles/ares-config.yaml": "c473e237128e28063566449b669e76359fbdd9b7c13f260d181e8042be45c319",
+        "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh": "8b7577ce270de61652178fe668cf0ca1cfd2f50a5d07db5559ecef977a439d11",
+        "/root/mgs-agent/patches/hermes/current-runtime-manifest.json": "c65035e8e918271649800d4b0535df0ed0f0be0a5c26011f6062080a667185a5",
+        "/root/mgs-agent/patches/hermes/discord-progress-cleanup-before-drain-2026-10-29.patch": "f614c8073374c25631c35fc352307e97f7d55910adfdc2d208484055c41814ce",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "10e1d3f2b1a4f677975f4138bf58384ec458d45e85b15fb90f0a5e577c569eea",
+        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "10e1d3f2b1a4f677975f4138bf58384ec458d45e85b15fb90f0a5e577c569eea",
+        "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py": "80527933d87baddff9e1ccd517aa4f91bf76c61fc49a1896ac61f2b1d23d9628"
+      },
+      "scope": {
+        "activation_profiles": [
+          "ares"
+        ],
+        "preserve_agents": [
+          "zeus",
+          "atena"
+        ],
+        "technical_message_targets": 7,
+        "original_messages_preserved": 15,
+        "tool_progress": "all",
+        "cleanup_progress": true,
+        "background_notifications": "off",
+        "credentials_permissions_campaigns_changed": false
+      },
+      "root_cause": "Shared interrupt Event can advance to next generation before old post-delivery cleanup fires; queued notification steals callback slot",
+      "tests": {
+        "pre_patch_regression": {
+          "failed": 2,
+          "passed": 1
+        },
+        "focused_cleanup_and_progress_passed": 54,
+        "patch_guard_passed": 730,
+        "whole_repository_claimed": false,
+        "external_finalizer_fixture": "PASS"
+      },
+      "evidence_path": "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901",
+      "report_infra_pending": true
     }
   ],
   "profile_skill_references": [
