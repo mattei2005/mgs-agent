@@ -128,8 +128,11 @@ def run(execution_dir,requester,apply=False):
         return {'status':'complete' if apply else 'verified_dry_run','batch_id':batch['batch_id'],'sources':len(batch['sources']),'binary_ids':len(entry['archive_source_ids']),'state_changed':apply,'remote_writes':0,'media_deletes':0,'completion_evidence_sha256':evidence_sha,'completed_at':entry['completed_at']}
     if apply:
         with intake.locked_state() as state:result=perform(state)
-        saved=b.read_json(intake.STATE);require(saved['claims'][result['batch_id']]['status']=='complete','MANUAL_COMPLETION_READBACK')
-        b.atomic_json(root/'intake-completion.json',result)
+        saved=b.read_json(intake.STATE) or {};entry=saved['claims'][result['batch_id']]
+        require(entry['status']=='complete','MANUAL_COMPLETION_READBACK')
+        receipt={'status':'complete','batch_id':result['batch_id'],'sources':len(entry['batch']['sources']),'binary_ids':len(entry['archive_source_ids']),'completion_evidence_sha256':entry['completion_evidence_sha256'],'completed_at':entry['completed_at'],'remote_writes':0,'media_deletes':0}
+        receipt_path=root/'intake-completion.json'
+        if b.read_json(receipt_path)!=receipt:b.atomic_json(receipt_path,receipt)
         return result
     return perform(b.read_json(intake.STATE))
 
