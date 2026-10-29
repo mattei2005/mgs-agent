@@ -84,10 +84,10 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_metrics_validated_provider_temporarily_blocked",
-    "validated_metrics_at": "2026-10-28T21:03:28.899187-04:00",
-    "verified_at": "2026-10-28T21:06:01.253766-04:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261028T210334842177",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T210336713715",
+    "validated_metrics_at": "2026-10-29T08:03:37.252991-04:00",
+    "verified_at": "2026-10-29T08:05:56.108717-04:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261029T080341170890",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261029T080343079877",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
@@ -148,6 +148,7 @@
     "historical_h_note_read_at_max": "2026-10-28T14:24:51.029516-04:00",
     "historical_h_ledger_live_discrepancies": [],
     "d_values_and_notes_preserved_exact": true,
+    "d_ledger_amount_discrepancies": [],
     "pending_ui": [
       {
         "account_id": "1150399088163771",
@@ -187,7 +188,7 @@
         "reason": "verified_card",
         "last_ui_read_at": "2026-10-27T15:02:56.650181-04:00",
         "current_funding": "Linha de crédito",
-        "qualification": "D já vazio no snapshot anterior deste tick;prova histórica de27/10 preservada no ledger;sem atribuir autoria ou restaurar às cegas."
+        "qualification": "D já vazio antes deste tick; prova histórica existente no ledger preservada; sem restaurar às cegas nem atribuir autoria."
       },
       {
         "account_id": "1419148446852410",
@@ -199,26 +200,22 @@
     ],
     "average_period": [
       {
-        "since": "2026-10-25",
-        "until": "2026-10-27"
-      },
-      {
         "since": "2026-10-26",
         "until": "2026-10-28"
       }
     ],
     "totals_usd": {
-      "average_daily": "28767.69",
-      "balance": "507269.84",
-      "month_spend": "806672.00"
+      "average_daily": "24225.23",
+      "balance": "514597.91",
+      "month_spend": "814349.65"
     },
     "invoice_period": "2026-09-01",
-    "invoice_due_usd": "0.00",
+    "invoice_due_usd": "0",
     "visible_invoice_numbers": 0,
     "pc1_blocker": {
       "reason": "provider_temporarily_blocked",
       "visual_text": "You’re Temporarily Blocked; going too fast",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T210336713715/blocked.png",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261029T080343079877/blocked.png",
       "not_login_gate": true,
       "retry_after": null
     },
@@ -229,11 +226,12 @@
     "cron_changes": 0,
     "other_sheet_properties_unchanged": true,
     "other_sheet_prior_data_snapshot_available": false,
-    "other_sheet_data_preservation_qualification": "Existing workers write exact target sheetId only; prior other-tab cell baseline unavailable; post-run read saved, no retroactive data-parity claim.",
+    "other_sheet_data_preservation_qualification": "Workers wrote exact target sheetId only; no pre-tick other-tab cell baseline, post-read saved; no retroactive cell parity claim.",
     "workbook_sheet_count": 2,
     "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T210336713715/closure-current.json",
-    "next_authorized_action": "Existing next tick revalidates same approved PC1 surface; stop if provider gate remains, no bypass or new job."
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261029T080343079877/closure-current.json",
+    "next_authorized_action": "Existing next tick revalidates same approved PC1 surface; stop if provider gate remains; no reload/bypass/new job.",
+    "d_blank_line_rows_without_history_request_count": 34
   },
   "pending_card_history": {
     "status": "blocked_provider_temporarily_blocked",
@@ -249,8 +247,8 @@
       "1877104513669062",
       "1419148446852410"
     ],
-    "verified_at": "2026-10-28T21:06:01.253766-04:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T210336713715/closure-current.json"
+    "verified_at": "2026-10-29T08:05:56.108717-04:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261029T080343079877/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -351,7 +349,7 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": null,
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261028T210258169711",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261029T080303043569",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-09-01",

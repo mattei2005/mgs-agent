@@ -55859,6 +55859,30 @@
         "cron_changes": 0
       },
       "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261029-0802",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_metrics_validated_provider_temporarily_blocked",
+      "updated_at": "2026-10-29T08:05:56.108717-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261029T080343079877/closure-current.json"
+      ],
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 6,
+        "historical_blank_d": 2,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
     }
   ],
   "profile_skill_references": [
