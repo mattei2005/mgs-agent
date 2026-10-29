@@ -2932,6 +2932,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ARES-PROGRESS-CLEANUP-1565417963958435901",
+      "next_step": "Reproduzir cleanup/callback do turno original e notificador;testeRED;corrigir antes da limpeza;ativacao apenas segura e sem restart em cadeia ativa",
+      "objective": "Corrigir causa-raiz de mensagens temporarias Ares nao removidas e notificacoes brutas, preservando progresso all e mensagens humanas/finais",
+      "source": "/root/.hermes/profiles/ares/logs/gateway.log",
+      "state": "root_cause_investigation",
+      "thread_id": "1565383322849382601",
+      "updated_at": "2026-10-29T17:33:19+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ARES-RECOVERY-DELEGATION-1558142033774776411",
       "next_step": "Nenhum retry/ativação pendente; aplicar delegação limitada nos próximos handoffs autorizados",
       "objective": "Corrigir delegação e recovery técnico SHEIN G005 C106, sem execução concorrente",
@@ -7782,5 +7792,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T16:17:09+00:00"
+  "updated_at": "2026-10-29T17:33:19+00:00"
 }
