@@ -1223,12 +1223,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1565451863040589865",
-      "next_step": "Consumir transporte, auditar 56 membros físicos/ACK/atalhos e concluir intake canônico antes de resposta final",
+      "next_step": "Nenhuma ação da gestora; retirada posterior do staging somente pelo controlador existente. Não repetir tratamento ou transporte.",
       "objective": "Entregar 28 imagens Kelly SHEIN_US_ES com RAW preservado e reserva mantida",
-      "source": "discord:1185714635991679006/1565451863040589865/1565451863040589865",
-      "state": "plano congelado: 28 fontes, 28 linhagens, 0 duplicatas. todos os tratados passaram clean=true e readback sha; originais em legacy de staging e inventário gravado. transporte canônico permanente em andamento.",
+      "source": "data/ares/creative-ops/executions/intake-1565451863040589865/final-audit.json",
+      "state": "concluído: 28 fontes, 28 novos tratados e 28 originais nos 30 tb; hashes, acks, atalhos, metadata clean e reserva kelly verificados. intake canônico complete ab26b1c9efb7bbbf6685039b272bbbdd. workspace local removido após provas.",
       "thread_id": "1565451863040589865",
-      "updated_at": "2026-10-29T19:57:34+00:00"
+      "updated_at": "2026-10-29T21:12:42+00:00"
     },
     {
       "agent": "ares",
@@ -1779,6 +1779,16 @@
       "state": "completed",
       "thread_id": "1560303769680355525",
       "updated_at": "2026-10-15T15:26:27+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-G004-ROI-WATCH-1565473799510429788",
+      "next_step": "Fixar IDs, capturar baseline atual, testar runner somente leitura e agendar seis checagens finitas com expiracao no dia",
+      "objective": "Alertas horarios de qualquer queda do ROI real diario das 11 campanhas alteradas, somente em 29/10/2026",
+      "source": "discord:1558147211026501643/1565473799510429788",
+      "state": "preparando: escopo e autorizacao do joe conferidos; auditoria global de agenda e baseline pendentes; zero write meta",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-10-29T21:15:32+00:00"
     },
     {
       "agent": "ares",
@@ -7832,5 +7842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T20:10:58+00:00"
+  "updated_at": "2026-10-29T21:15:32+00:00"
 }
