@@ -32,6 +32,7 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 - **Sanitização, origem e consumidores** → `references/route-pack-03.md`
 - **Naming, imagem estática e providers** → `references/route-pack-04.md`
 - **Vídeo, referência e backend gates** → `references/route-pack-05.md`
+- **Google Ads Transparency, download e análise de library externa** → `references/google-ads-transparency-reference-intake.md`
 - **Transição Creative Ops → Campaign Ops, reserva e QA** → `references/route-pack-06.md`
 - **Identidade Drive × Meta, download do tratado e reserva de gestor** → `references/drive-meta-asset-identity-and-manager-reservation.md`
 - **Lote IMG, VID ou misto em UPLOAD MANUAL, incluindo execução resumível** → `references/mixed-media-drive-intake-ready-legacy.md`

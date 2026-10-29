@@ -1223,12 +1223,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1565451863040589865",
-      "next_step": "Concluir preparação e revisão visual por asset, congelar plano, executar tratamento READY/LEGACY e verificar arquivo permanente e conclusão canônica",
-      "objective": "Tratar e mover lote Kelly SHEIN_US_ES com RAW preservado, clean verificado e reserva mantida",
+      "next_step": "Consumir transporte, auditar 56 membros físicos/ACK/atalhos e concluir intake canônico antes de resposta final",
+      "objective": "Entregar 28 imagens Kelly SHEIN_US_ES com RAW preservado e reserva mantida",
       "source": "discord:1185714635991679006/1565451863040589865/1565451863040589865",
-      "state": "entrada read-only estabilizada: 28 imagens es na raiz upload manual; slot g005 vazio. preparação local em andamento; nenhum write remoto deste pedido.",
+      "state": "plano congelado: 28 fontes, 28 linhagens, 0 duplicatas. todos os tratados passaram clean=true e readback sha; originais em legacy de staging e inventário gravado. transporte canônico permanente em andamento.",
       "thread_id": "1565451863040589865",
-      "updated_at": "2026-10-29T19:49:36+00:00"
+      "updated_at": "2026-10-29T19:57:34+00:00"
     },
     {
       "agent": "ares",
@@ -4943,12 +4943,12 @@
     {
       "agent": "ares",
       "id": "ares-google-library-shein-1565450301228584960",
-      "next_step": "Concluir mídia/variações, QA visual, ranking e destino de referências validado",
-      "objective": "Baixar referências disponíveis e analisar potencial criativo da Google Ads Transparency SHEIN EUA Hoje",
+      "next_step": "Validar clean=true, empacotar referências e entregar ranking/limitações. Restante de variações requer recuperação da navegação oficial pelo operador; não contornar CAPTCHA.",
+      "objective": "Baixar referências e analisar criativos Google Ads Transparency SHEIN EUA 29/10/2026",
       "source": "discord:1565450301228584960",
-      "state": "paginação pública concluída: 977 ids únicos, 11 anunciantes; download em andamento, prévias originais preservadas, sem campanha ou publicação",
+      "state": "977 anúncios únicos e 223 prévias de variações salvos. 1005 binários únicos, incluindo 11 mp4. google exibiu 429 e unusual traffic ao coletar demais variações; 25 anúncios classificados vídeo sem mp4. sanitização e análise em execução; 970 anúncios roadget e 7 de terceiros.",
       "thread_id": "1565450301228584960",
-      "updated_at": "2026-10-29T19:44:02+00:00"
+      "updated_at": "2026-10-29T19:55:19+00:00"
     },
     {
       "agent": "ares",
@@ -7832,5 +7832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T19:49:36+00:00"
+  "updated_at": "2026-10-29T19:57:34+00:00"
 }
