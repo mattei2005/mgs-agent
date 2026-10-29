@@ -898,20 +898,45 @@
       "type": "autocommit_guardrail_recovery",
       "source_alert_id": "1565386257729851587",
       "origin_thread_id": "1565379383017873569",
-      "state": "validation_in_progress",
+      "state": "resolved_validated",
       "cause": "False positive on private in completed-intake transport receipt basename; strict schema contains only status, Drive IDs and timestamp",
       "reviewed_exact_path": "data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport.py.last.json",
       "paths": [
         "scripts/auto-commit-watcher.sh",
         "tests/test_auto_commit_sensitive_paths.py",
-        "tests/test_auto_commit_empty_index.py"
+        "tests/test_auto_commit_empty_index.py",
+        "data/auto-push-monitor.json"
       ],
       "partial_effects": "Empty index; blocked batch never started commit/push; original intake complete and reconciled with checkpoint and REPORT-INFRA 1565386461141012613 GET200",
       "correction": "One anchored exact-path exception; all sibling credentials and copies remain blocked; no Drive or campaign replay",
       "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1565386257729851587",
       "credentials_changed": false,
       "manual_commit_or_push": false,
-      "report_infra_status": "pending_validation"
+      "validation": {
+        "watcher_tests_passed": 19,
+        "monitor_tests_passed": 17,
+        "credential_signature_scanned_files": 91,
+        "credential_signature_hits": 0,
+        "receipt_strict_schema": "PASS",
+        "sibling_credentials_and_copy_negative_cases": "PASS",
+        "native_commit": "fa5fb666911ad1a6c97a65313b3254d28bffbd0e",
+        "remote_main_equals_head": true,
+        "native_push_ok_at": "2026-10-29T11:34:52-04:00",
+        "monitor_dry_run_failures": 0,
+        "monitor_consecutive_failures": 0,
+        "persistent_service": "active/running; NRestarts=0",
+        "persistent_batch_target": 10,
+        "persistent_max_wait": 600,
+        "monitor_recovery_transport": "MGS_DRY_RUN=1; response delivery delegated to resolver; no extra Discord recovery message"
+      },
+      "report_infra_status": "sent_and_get_verified",
+      "report_infra": {
+        "message_id": "1565388806071390299",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "mentions": 0,
+        "readback_verified": true
+      }
     },
     {
       "access_diagnosis": "Ares own identity /user/validate HTTP200 with publisher role but no atual-fnc company; exact scoped report403 despite valid token/refresh and Origin. Local catalog allowance does not equal remote provider grant.",
