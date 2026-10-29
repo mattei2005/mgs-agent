@@ -39,6 +39,19 @@
 - Campanha criada com um conjunto e vários anúncios: contar uma campanha nova, sem inflar o total pelos objetos filhos.
 - Perfil Meta diferente do nome Discord: conservar atribuição técnica e limitação de identidade, sem afirmar autoria física.
 
+## Alertas horários finitos de queda de ROI
+
+1. Para um pedido explícito de acompanhamento só até o fim do dia, congele os campaign IDs da coorte já auditada; separe existentes alteradas de novas e não amplie a seleção silenciosamente. Registre solicitante, mensagem, thread, data/fuso live, fórmula, referência de comparação e expiração em manifesto próprio. Um alerta read-only não autoriza alterar campanhas nem promover recorrência permanente.
+2. Quando o pedido não definir um limiar, trate “qualquer queda” como desigualdade estrita entre Decimals, antes de arredondar, sem inventar mínimo de gasto ou pontos percentuais. Declare a referência adotada: uma leitura inicial atual seguida da última leitura válida por campanha. Não apresente essa baseline posterior como snapshot imediatamente anterior às edições.
+3. Consulte gasto Meta e NET_REVENUE SB da mesma campanha/data/moeda e publisher autorizado. Preserve receita ausente como n/d, zero explícito como zero e gasto sem denominador positivo como ROI indisponível. Uma fonte indisponível não substitui a referência anterior nem gera queda artificial; avise que a checagem ficou incompleta. Informe atraso GAM/SB e que o ROI acumulado parcial não isola causalmente o efeito da edição.
+4. Persistir fontes e snapshot por slot permite retomar falhas locais sem nova coleta ou avanço indevido da referência. Só avance as referências válidas depois de concluir a entrega exigida; repetição do mesmo slot completo fica silenciosa. Na postagem, use nonce/intenção durável e GET exato; publicação ambígua sem correspondência única exige reconciliação, nunca replay cego.
+5. Audite todos os schedulers, escolha o menor nível de contenção compatível e use script determinístico com lock próprio, timeout menor que o scheduler, `no_agent=true`, stdout vazio e entrega técnica local quando o script publica diretamente. Configure quantidade finita e guarda de data/expiração antes de qualquer API; essa guarda impede execução no ano seguinte mesmo se a expressão cron incluir dia/mês. Não reative outros jobs. Leia de volta o job exato e reaudite excluindo somente ele.
+6. Teste offline queda positiva/negativa e cruzamento de zero, queda menor que a precisão de exibição, igualdade/melhoria silenciosa, receita ausente versus zero, expiração e replay sem POST duplicado. Exercite também baseline live, dry-run sem postagem e wrapper fora da janela; validação da agenda não comprova que os alertas futuros já foram entregues.
+
+### Expansão de agenda atravessando horário de verão
+
+Um `croniter` timezone-aware pode não avançar corretamente em uma transição DST e estourar o limite até para `* * * * *`. Não aumente o limite nem descarte o job para forçar uma auditoria verde. Para uma auditoria local read-only, expanda os horários civis como datetimes sem timezone; converta cada tick para o fuso explícito com ambos os folds, rejeite horários inexistentes por roundtrip UTC e deduplique pelo instante UTC. Preserve o horizonte de oito datas civis e confronte as contagens esperadas na transição. Não altere o auditor produtivo nem as agendas por um pedido de monitoramento; registre a adaptação local e suas limitações. Classifique apenas baselines densas de infraestrutura como exceções: frequência de 15 minutos não torna um job operacional de navegador, campanha ou backup automaticamente uma baseline ignorável.
+
 ## Tempo, moeda e métricas
 
 - `today` usa timezone da conta. VPS e UTC servem só para audit.

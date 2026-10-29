@@ -1783,12 +1783,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G004-ROI-WATCH-1565473799510429788",
-      "next_step": "Fixar IDs, capturar baseline atual, testar runner somente leitura e agendar seis checagens finitas com expiracao no dia",
+      "next_step": "Executar os seis slots finitos; enviar somente quedas ou falha de fonte na origem, preservando referencia valida; expiracao absoluta 30/10 00:00 EDT sem renovacao",
       "objective": "Alertas horarios de qualquer queda do ROI real diario das 11 campanhas alteradas, somente em 29/10/2026",
-      "source": "discord:1558147211026501643/1565473799510429788",
-      "state": "preparando: escopo e autorizacao do joe conferidos; auditoria global de agenda e baseline pendentes; zero write meta",
+      "source": "data/ares/meta-ads/state/roi-watch/1565473799510429788/manifest.json",
+      "state": "configurado e validado: baseline live 17:18 edt, 11 campanhas completas; seis checagens 18:28-23:28 edt; job b948dad7299b enabled/no_agent/local; 11 testes pass; auditoria global pre e pos zero colisao operacional; zero writes meta/sb",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-10-29T21:15:32+00:00"
+      "updated_at": "2026-10-29T21:23:59+00:00"
     },
     {
       "agent": "ares",
@@ -7842,5 +7842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T21:15:32+00:00"
+  "updated_at": "2026-10-29T21:23:59+00:00"
 }
