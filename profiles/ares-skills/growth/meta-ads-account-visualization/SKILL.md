@@ -92,6 +92,8 @@ Ordem de `subs`:
 
 ## Relatórios genéricos de contas, gastos, cobranças e faturas
 
+Para contagem consolidada diária de campanhas novas SHEIN por gestor/site, carregar `direct-traffic-shein-operations` → `references/daily-creation-counts.md`; não herdar exclusões dos relatórios financeiros D-1/Intraday.
+
 Seguir `references/scoped-generic-reporting.md` e o executor read-only `ares-scoped-report.py`. O plano nasce do cadastro positivo; indisponibilidade da Meta não autoriza consulta a outro portfólio, outro agente ou fonte administrativa. Não usar o audit global compartilhado como fonte de relatório.
 
 ## Relatório de BM por forma de pagamento

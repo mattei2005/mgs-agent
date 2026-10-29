@@ -4130,6 +4130,24 @@
       "updated_at": "2026-10-14T19:32:44+00:00"
     },
     {
+      "canonical_key": "ares.shein.reporting.daily_creation_counts",
+      "canonical_source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
+      "consumers": [
+        "ares",
+        "shein-campaign-creation-daily.py"
+      ],
+      "domain": "growth.reporting",
+      "effective_at": "2026-10-29T18:25:23+00:00",
+      "id": "ARES-SHEIN-DAILY-CREATION-1565429557547503729",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: contagem diaria de campanhas novas por gestor e site, 18h08 Eastern na Diretoria",
+      "updated_at": "2026-10-29T18:25:23+00:00"
+    },
+    {
       "canonical_key": "ares.shein.reporting.daily-d1-schedule",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/policies/shein-daily-report.json",
       "consumers": [
@@ -15400,5 +15418,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T16:12:49+00:00"
+  "updated_at": "2026-10-29T18:25:23+00:00"
 }

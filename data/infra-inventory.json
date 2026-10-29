@@ -56055,8 +56055,8 @@
       "authority_message_id": "1565417963958435901",
       "thread_id": "1565383322849382601",
       "target_thread_id": "1565379383017873569",
-      "status": "waiting_visible_user_handoff_then_external_activation",
-      "updated_at": "2026-10-29T17:57:41.485920+00:00",
+      "status": "external_activation_ready_waiting_visible_user_delivery",
+      "updated_at": "2026-10-29T18:27:36Z",
       "paths": [
         "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/gateway/platforms/base.py",
         "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/tests/gateway/test_progress_cleanup_drain_race_mgs.py",
@@ -56077,9 +56077,10 @@
         "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh": "8b7577ce270de61652178fe668cf0ca1cfd2f50a5d07db5559ecef977a439d11",
         "/root/mgs-agent/patches/hermes/current-runtime-manifest.json": "c65035e8e918271649800d4b0535df0ed0f0be0a5c26011f6062080a667185a5",
         "/root/mgs-agent/patches/hermes/discord-progress-cleanup-before-drain-2026-10-29.patch": "f614c8073374c25631c35fc352307e97f7d55910adfdc2d208484055c41814ce",
-        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "14ff023a359c12e545d468dfb7f87f3631eb2ab4c096484bff8e43bc18102025",
-        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "14ff023a359c12e545d468dfb7f87f3631eb2ab4c096484bff8e43bc18102025",
-        "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py": "f542802942aca5db43f61150896201a5a856d83dc96cbac3181db7326ee3c48d"
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "75b7d9bcb89313211831a5d0f37ab458c362e04af64e290a1ddd88168bd35b03",
+        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "75b7d9bcb89313211831a5d0f37ab458c362e04af64e290a1ddd88168bd35b03",
+        "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py": "f9ae379bdc0a8dde980cef2155ce293719b91e925b6161ad681c63e19bab1ed4",
+        "/root/.hermes/profiles/zeus/scripts/ares-progress-cleanup-finalize-1565417963958435901.py": "f9ae379bdc0a8dde980cef2155ce293719b91e925b6161ad681c63e19bab1ed4"
       },
       "scope": {
         "activation_profiles": [
@@ -56119,12 +56120,25 @@
         "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
         "/root/mgs-agent/patches/hermes/current-runtime-manifest.json",
         "/root/mgs-agent/patches/hermes/discord-progress-cleanup-before-drain-2026-10-29.patch",
-        "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py"
+        "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py",
+        "/root/.hermes/profiles/zeus/scripts/ares-progress-cleanup-finalize-1565417963958435901.py"
       ],
       "safe_prepare_only_artifact": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20261029T180456Z-3016378.sh",
       "safe_prepare_only_artifact_executed": false,
       "external_handoff_fixture": "PASS",
-      "activation_plan": "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/restart-plan.json"
+      "activation_plan": "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/restart-plan.json",
+      "native_observer_job_id": "0123d4ca4a8f",
+      "native_observer": {
+        "no_agent": true,
+        "script": "ares-progress-cleanup-finalize-1565417963958435901.py",
+        "paused_manual_run_only": true,
+        "deliver": "local",
+        "failure_deliver": "local",
+        "repeat": 1
+      },
+      "notification_resolver_test": "PASS:1 native test;54 focus tests passed again",
+      "observer_report_infra_message_id": "1565432150990266392",
+      "observer_report_readback": true
     },
     {
       "agent": "zeus",

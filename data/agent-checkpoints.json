@@ -1723,12 +1723,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-DAILY-CREATION-1565429557547503729",
-      "next_step": "Selecionar minuto sem conflito, testar coleta live, registrar cron e validar entrega e readback.",
-      "objective": "Relatorio diario de campanhas novas de todos os sites SHEIN por gestor, por volta de 18h Eastern, nesta thread.",
-      "source": "discord:1185714635991679006/1565084013763371009/1565429557547503729",
-      "state": "autorizado por rodolfo; inventario global de agenda e implementacao deterministica em andamento; sem writes meta.",
+      "next_step": "Primeira execucao regular hoje18:08 Eastern; coleta diaria desde00:00 ate18:08 e publica na mesma thread. Evidencias e retomada no contrato e audit de instalacao.",
+      "objective": "Relatorio diario de campanhas novas dos seis sites SHEIN por gestor, nesta thread, por volta das18h Eastern.",
+      "source": "data/ares/meta-ads/policies/shein-campaign-creation-daily.json",
+      "state": "ativo: root cron18:08 eastern +25s, sem llm. coleta live36/36 contas, nove testes e entrega de teste por get validados. agenda unica, daemon ativo, auditoria global8dias sem colisao operacional. sem writes meta.",
       "thread_id": "1565084013763371009",
-      "updated_at": "2026-10-29T18:18:51+00:00"
+      "updated_at": "2026-10-29T18:28:09+00:00"
     },
     {
       "agent": "ares",
@@ -2943,12 +2943,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARES-PROGRESS-CLEANUP-1565417963958435901",
-      "next_step": "Reproduzir cleanup/callback do turno original e notificador;testeRED;corrigir antes da limpeza;ativacao apenas segura e sem restart em cadeia ativa",
-      "objective": "Corrigir causa-raiz de mensagens temporarias Ares nao removidas e notificacoes brutas, preservando progresso all e mensagens humanas/finais",
-      "source": "/root/.hermes/profiles/ares/logs/gateway.log",
-      "state": "root_cause_investigation",
+      "next_step": "Job externo unico 0123d4ca4a8f aguarda handoff visivel; agenda ativacao canonica Ares-only fora da cadeia ativa, valida novo processo e conexao, smoke nativo, sete alvos e quinze preservados antes da entrega final. Nenhuma acao humana adicional.",
+      "objective": "Corrigir causa da limpeza visual Ares sem ocultar acompanhamento e remover apenas sete residuos tecnicos autorizados",
+      "source": "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/restart-plan.json",
+      "state": "external_activation_ready",
       "thread_id": "1565383322849382601",
-      "updated_at": "2026-10-29T17:33:19+00:00"
+      "updated_at": "2026-10-29T18:27:48+00:00"
     },
     {
       "agent": "zeus",
@@ -7802,5 +7802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T18:18:51+00:00"
+  "updated_at": "2026-10-29T18:28:09+00:00"
 }

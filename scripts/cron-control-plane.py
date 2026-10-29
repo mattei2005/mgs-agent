@@ -55,6 +55,7 @@ DESCRIPTIONS = {
     'sync-smsfunnel-cost-daily.sh': 'Às 08:10 ET, importa no WordPress o custo real dos SMS efetivamente enviados no dia anterior pelo SMS Funnel, somando D1/D2/D3 pela data de cada disparo.',
     'sync-sb-messenger-revenue-sheet.py': 'Atualiza diariamente a coluna RECEITA 7 DIAS da aba Migracao 22/06 com o Messenger Daily ao vivo, por Segurador, usando a Service Account canônica e readback exato.',
     'monitor-sb-messenger-token-invalid.py': 'Espelha alertas de token Messenger inválido da API Smart Bidding para o canal dedicado, com filtro MGS, dedupe, contagem de páginas e readback Discord sem menções.',
+    'shein-campaign-creation-cron.py': 'Publica nesta Diretoria a contagem diária de campanhas novas das 36 contas SHEIN por gestor/site, criada até 18h08 Eastern; Meta read-only, sem LLM, com dedupe e GET Discord.',
     'ares-meta-account-activity-monitor.py': 'Monitora alterações materiais na conta Meta Creditoparaveiculo 13 e alerta somente ações de outra pessoa ou ferramenta externa; automações da Meta e writes do Ares identificados por audit ou fonte allowlisted ficam silenciosos.',
     'eggbev-page-restriction-guardrail.sh': 'Executa o guardrail Eggbev de restrição DTR a cada cinco minutos. A antiga etapa de campanha com gasto acima de US$2 e zero resultado de pixel está suspensa, removida do wrapper e sem write.',
 }
@@ -92,6 +93,7 @@ RISK = {
     'sync-smsfunnel-cost-daily.sh': 'médio/alto: lê analytics autenticada do SMS Funnel e escreve custo diário real no WordPress com transação/readback',
     'sync-sb-messenger-revenue-sheet.py': 'médio: lê SB autenticada e substitui a coluna C da planilha com backup, canário, rollback e readback',
     'monitor-sb-messenger-token-invalid.py': 'baixo/médio: lê SB autenticada ao vivo; estado local só faz cursor/dedupe, sem replay; envia apenas notificações novas/reabertas',
+    'shein-campaign-creation-cron.py': 'baixo: Meta GET scoped + snapshot local; uma publicação diária no Discord com outbox, nonce e GET exato',
     'ares-meta-account-activity-monitor.py': 'baixo: leitura Meta account-wide + estado local; Discord somente quando detectar alteração material de outra pessoa ou ferramenta externa',
     'eggbev-page-restriction-guardrail.sh': 'alto controlado: pode pausar campanhas após pre-read, política e GET/readback',
 }
@@ -111,6 +113,7 @@ OWNER = {
     'sync-smsfunnel-cost-daily.sh': 'Zeus/Revenue Tech',
     'sync-sb-messenger-revenue-sheet.py': 'Zeus/Revenue Tech',
     'monitor-sb-messenger-token-invalid.py': 'Zeus/Revenue Tech',
+    'shein-campaign-creation-cron.py': 'Ares/Campaign Ops',
     'ares-meta-account-activity-monitor.py': 'Ares/Campaign Ops',
     'eggbev-page-restriction-guardrail.sh': 'Ares/Campaign Ops',
 }
