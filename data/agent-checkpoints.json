@@ -1222,6 +1222,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-INTAKE-1565451863040589865",
+      "next_step": "Concluir preparação e revisão visual por asset, congelar plano, executar tratamento READY/LEGACY e verificar arquivo permanente e conclusão canônica",
+      "objective": "Tratar e mover lote Kelly SHEIN_US_ES com RAW preservado, clean verificado e reserva mantida",
+      "source": "discord:1185714635991679006/1565451863040589865/1565451863040589865",
+      "state": "entrada read-only estabilizada: 28 imagens es na raiz upload manual; slot g005 vazio. preparação local em andamento; nenhum write remoto deste pedido.",
+      "thread_id": "1565451863040589865",
+      "updated_at": "2026-10-29T19:49:36+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
       "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
@@ -7822,5 +7832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T19:44:02+00:00"
+  "updated_at": "2026-10-29T19:49:36+00:00"
 }
