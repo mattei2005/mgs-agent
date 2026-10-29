@@ -131,6 +131,8 @@ def validate_live(live, expected, spec, request_id=None):
                     raise ValueError('activation flexible media/Instagram drift')
                 if stable_story(cr.get('object_story_spec')) != stable_story(ocr.get('object_story_spec')):
                     raise ValueError('activation creative media/copy/destination drift')
+    from .shein_reviewed_targeting import validate_activation_tree
+    validate_activation_tree(live)
     if any(n.get('configured_status',n.get('status')) not in {'PAUSED','ACTIVE'} for n in statuses(live)):
         raise ValueError('activation target has an unexpected configured status')
 

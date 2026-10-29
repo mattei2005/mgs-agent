@@ -5192,6 +5192,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-reviewed-device-004-005",
+      "next_step": "Handoff de manutencao; retomada operacional separada pelo descriptor central, com QA renderizado e ativacao/readback obrigatorios; c3 continua fora da excecao",
+      "objective": "Representar somente omissao device revisada nas 004/005, sem writes Meta",
+      "source": "data/ares/meta-ads/audit/shein/maintenance/t_6a15189a/continuation-reviewed-device-004-005.json",
+      "state": "implementado; 136 testes unicos aprovados; descriptor real e targeting live validados; mesmas 2 campanhas e 4 ads paused; zero writes meta",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-10-29T12:26:43+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-status-blocks-g001-1561918043305803869",
       "next_step": "Sem pendencias neste pedido. Proximos relatorios SHEIN aplicam automaticamente blocos de status e Gasto/BU/Saldo adaptativos; consultar contrato vivo antes de cada render. Nao republicar outras contas sem pedido.",
       "objective": "Separar ativas/pausadas nos relatorios SHEIN e enviar relatorios G001 apos validacao",
@@ -7742,5 +7752,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:19:16+00:00"
+  "updated_at": "2026-10-29T12:26:43+00:00"
 }

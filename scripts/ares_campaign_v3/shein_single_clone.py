@@ -328,6 +328,9 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     if len(sets) != 1 or len(ads) != len(desired['ads']):
         raise RouteBlocked('target hierarchy count mismatch')
     target_set = sets[0]
+    from .shein_reviewed_targeting import active_context, allows
+    if active_context() is not None:
+        allows(payload, source, live)
     if target_set.get('status') != desired['status'] or target_set.get('name') != desired['adset_name']:
         raise RouteBlocked('adset name/status mismatch')
     if not schedule_ok(target_set.get('start_time')):
@@ -357,8 +360,12 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         expected_target_flags = {'device': 1} if source_flags == known_source_flags[1] else None
         if (source_flags not in known_source_flags or target_flags != expected_target_flags
                 or source_target != target_target):
-            raise RouteBlocked('unrecognized targeting divergence')
-        warnings.append('Meta omitted source optional age/gender suggestion flags; copy is not literally identical')
+            from .shein_reviewed_targeting import allows
+            if not allows(payload, source, live):
+                raise RouteBlocked('unrecognized targeting divergence')
+            warnings.append('Human review accepted device suggestion omission for exact existing 004/005 IDs only; copy is not literally identical')
+        else:
+            warnings.append('Meta omitted source optional age/gender suggestion flags; copy is not literally identical')
     if desired['mode'] != 'pure_clone':
         return verify_media_ads(desired, source, live, warnings)
     desired_ads = {x['source_ad_id']: x for x in desired['ads']}
@@ -948,7 +955,11 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                         state['staging_children_paused'] = True
                         atomic_json(state_path,state)
                     else:
-                        live_one = _engine_tree(config, rid, cid) or _readback(common, token, cid)
+                        from .shein_reviewed_targeting import active_context
+                        # The sealed copy receipt predates the targeting repair.
+                        # A reviewed exception must always exercise fresh live QA.
+                        live_one = (_readback(common, token, cid) if active_context() is not None
+                                    else _engine_tree(config, rid, cid) or _readback(common, token, cid))
                     one_payload = {**state['manifest'], 'campaigns': [state['manifest']['campaigns'][index]]}
                     warnings.extend(verify_readback(one_payload, state['source'], live_one))
                     from .shein_qa import verify_media, proof_covers

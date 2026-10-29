@@ -183,8 +183,11 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
         review_authority = _authorize_late_reviewer(descriptor, original, reviewer)
     accepted_schedule = (reviewed_schedule_proof(descriptor, state, checkpoint, get_message=get_message)
                          if descriptor.get('reviewed_observed_copy_time') is True else None)
+    from .shein_reviewed_targeting import validate_review
+    accepted_targeting = validate_review(descriptor, state, checkpoint, get_message=get_message)
     return {'verified':True,'request_id':original['request_id'],'account_id':str(descriptor['account_id']),
             'accepted_schedule':accepted_schedule,
+            'accepted_targeting':accepted_targeting,
             'campaign_ids':cids,'adset_ids':sids,'source_message_id':mid,'source_thread_id':descriptor['source_thread_id'],
             'start_now':True,'late_activation_authorized':late,'original_execution_started_at':state.get('execution_started_at'),
             'creation_payload_digest':content_digest(state['manifest']),'target_payload_digest':content_digest(state['target_manifest']),
@@ -202,6 +205,13 @@ def activation_authorization(target, creation, proof):
         or verified['campaign_ids'] != ids or verified['creation_payload_digest'] != content_digest(creation.raw)
         or verified['target_payload_digest'] != content_digest(target.raw)):
         raise ValueError('continuation activation proof not bound to original manifests/IDs')
+    if verified.get('accepted_targeting') is not None:
+        from .shein_reviewed_targeting import active_context, validate_tree
+        checked_context = active_context()
+        if checked_context is None:
+            raise ValueError('reviewed targeting activation context missing')
+        for tree in proof.get('trees', []):
+            validate_tree(checked_context, tree)
     return verified
 
 

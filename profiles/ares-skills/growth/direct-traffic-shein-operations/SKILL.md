@@ -21,7 +21,7 @@ Usar ROI real no dia fechado; quantidade isolada recebe só número e unidade. C
 
 ## Pedidos concorrentes e comunicação — regra permanente
 
-1. Resolver conta, pedido original e recursos envolvidos antes de qualquer retomada; correção técnica rotineira dentro do escopo já autorizado não exige um novo pedido de aprovação.
+1. Resolver conta, pedido original e recursos antes da retomada. Separar autorização, capacidade técnica e estado Meta; não repetir um OK já confirmado. Validar decisões específicas pela seção `Decisão material aceita e capacidade do executor` de `references/campaign-runtime-recovery.md`.
 2. Se a mesma conta ou uma linhagem selecionada estiver ocupada por outro pedido ativo, usar a fila durável canônica de `request_queue_policy`. Não oferecer nem solicitar prioridade como solução padrão, não transferir reservas ativas e não serializar contas/assets independentes.
 3. Durante fila, cooldown e reparo rotineiro, manter o acompanhamento técnico nos registros, sem mensagens operacionais intermediárias. Não confundir retorno `QUEUED` com execução garantida: confirmar job/dependência persistidos e consumidor responsável pela retomada.
 4. Retomar automaticamente o mesmo request e os mesmos IDs após a dependência terminar; preservar parâmetros, manifests, relógio/SLA, autoridade live, QA e readback. Não encerrar um pedido autorizado apenas com diagnóstico, checkpoint ou incidente registrado: uma incompatibilidade local recuperável exige correção dentro da autoridade vigente e continuação até o readback final. Separar manutenção do executor da transação de campanha e voltar somente pela rota central validada; autorização para corrigir não permite remover o guard, ampliar ativos ou contornar gates críticos.

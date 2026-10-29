@@ -12989,6 +12989,23 @@
       "updated_at": "2026-10-13T14:28:49+00:00"
     },
     {
+      "canonical_key": "ares.shein.reviewed-device-004-005",
+      "canonical_source": "scripts/ares_campaign_v3/shein_reviewed_targeting.py",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-29T12:26:43+00:00",
+      "id": "ares-shein-reviewed-device-004-005-capability",
+      "kind": "capability",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN: omissao device revisada vinculada aos IDs existentes 004/005",
+      "updated_at": "2026-10-29T12:26:43+00:00"
+    },
+    {
       "canonical_key": "SHEIN-US-DIRECT.page_delegation_repair_authorizations.1215401431666913",
       "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
       "consumers": [
@@ -15347,5 +15364,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T02:19:31+00:00"
+  "updated_at": "2026-10-29T12:26:43+00:00"
 }
