@@ -2772,6 +2772,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1565261967260647536-RECOVERY",
+      "next_step": "Ares conclui manutencao restrita com testes/descriptor real validado e zero Meta writes;depois retoma c1 mesmos IDs via central,QA/ativacao/readback e so entao c3;agregar quatro campanhas e entregar conclusao unica na origem",
+      "objective": "Concluir pedido original Mavroa06: duas copias de cada fonte1 e3,USD35/dia cada,ativar agora; desvio device aceito apenas004/005",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565261967260647536/recovery-decision-1565338124400336978.json",
+      "state": "review1565338124400336978 confirmado por get e autoridade live;004/005 paused com4ads;validador central ainda rejeita device omitido;manutencao separada t_6a15189a ready e retomada t_0dce1c10 dependente;nenhum write meta nesta recuperacao",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-10-29T12:19:16+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-C092-LATE-REVIEW-1560656571212505109",
       "next_step": "Nenhuma pendencia deste pedido; nao repetir criacao ou ativacao. Responder confirmacao nativa na origem.",
       "objective": "Concluir C092 nos mesmos IDs com USD75/dia e COCAP1.05",
@@ -7732,5 +7742,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:05:56+00:00"
+  "updated_at": "2026-10-29T12:19:16+00:00"
 }
