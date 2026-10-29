@@ -4943,12 +4943,12 @@
     {
       "agent": "ares",
       "id": "ares-google-library-shein-1565450301228584960",
-      "next_step": "Validar clean=true, empacotar referências e entregar ranking/limitações. Restante de variações requer recuperação da navegação oficial pelo operador; não contornar CAPTCHA.",
+      "next_step": "Entregar link/ranking nesta origem; para completar os 25 MP4 e variações faltantes, operador deve recuperar navegação oficial/verificação Google ou fornecer export. Retomar pelos IDs e manifesto existentes, sem recoletar o lote confirmado.",
       "objective": "Baixar referências e analisar criativos Google Ads Transparency SHEIN EUA 29/10/2026",
-      "source": "discord:1565450301228584960",
-      "state": "977 anúncios únicos e 223 prévias de variações salvos. 1005 binários únicos, incluindo 11 mp4. google exibiu 429 e unusual traffic ao coletar demais variações; 25 anúncios classificados vídeo sem mp4. sanitização e análise em execução; 970 anúncios roadget e 7 de terceiros.",
+      "source": "/root/.hermes/profiles/ares/artifacts/google-library/1565450301228584960/final-audit.json",
+      "state": "entregável parcial real: zip de 113274472 bytes no shared drive mgs-agents, file_id 19r7ckpzjcujdvsdabbpfqsu6txur3s8k. metadata e sha-256 do download remoto conferidos. 977 anúncios, 223 prévias de variações, 1005 mídias limpas incluindo 11 mp4; 25 classificados vídeo sem mp4. ranking validado por imagens e timelines. google bloqueou demais variações com 429/unusual traffic; sem contorno.",
       "thread_id": "1565450301228584960",
-      "updated_at": "2026-10-29T19:55:19+00:00"
+      "updated_at": "2026-10-29T20:10:58+00:00"
     },
     {
       "agent": "ares",
@@ -7832,5 +7832,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T19:57:34+00:00"
+  "updated_at": "2026-10-29T20:10:58+00:00"
 }
