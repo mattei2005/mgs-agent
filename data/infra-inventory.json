@@ -56055,7 +56055,7 @@
       "authority_message_id": "1565417963958435901",
       "thread_id": "1565383322849382601",
       "target_thread_id": "1565379383017873569",
-      "status": "external_activation_ready_waiting_visible_user_delivery",
+      "status": "external_observer_running_waiting_visible_user_delivery",
       "updated_at": "2026-10-29T18:27:36Z",
       "paths": [
         "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/gateway/platforms/base.py",
@@ -56077,8 +56077,8 @@
         "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh": "8b7577ce270de61652178fe668cf0ca1cfd2f50a5d07db5559ecef977a439d11",
         "/root/mgs-agent/patches/hermes/current-runtime-manifest.json": "c65035e8e918271649800d4b0535df0ed0f0be0a5c26011f6062080a667185a5",
         "/root/mgs-agent/patches/hermes/discord-progress-cleanup-before-drain-2026-10-29.patch": "f614c8073374c25631c35fc352307e97f7d55910adfdc2d208484055c41814ce",
-        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "75b7d9bcb89313211831a5d0f37ab458c362e04af64e290a1ddd88168bd35b03",
-        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "75b7d9bcb89313211831a5d0f37ab458c362e04af64e290a1ddd88168bd35b03",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "2d084bfa855be345752647f5a5c20171a9c0673bcc9c69366bafe136ae273b2e",
+        "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/session-context-discord-output.md": "2d084bfa855be345752647f5a5c20171a9c0673bcc9c69366bafe136ae273b2e",
         "/root/.hermes/profiles/zeus/artifacts/ares-progress-cleanup-1565417963958435901/finalize_external.py": "f9ae379bdc0a8dde980cef2155ce293719b91e925b6161ad681c63e19bab1ed4",
         "/root/.hermes/profiles/zeus/scripts/ares-progress-cleanup-finalize-1565417963958435901.py": "f9ae379bdc0a8dde980cef2155ce293719b91e925b6161ad681c63e19bab1ed4"
       },
@@ -56131,14 +56131,29 @@
       "native_observer": {
         "no_agent": true,
         "script": "ares-progress-cleanup-finalize-1565417963958435901.py",
-        "paused_manual_run_only": true,
+        "paused_manual_run_only": false,
         "deliver": "local",
         "failure_deliver": "local",
-        "repeat": 1
+        "repeat": 1,
+        "execution_mode": "manual_background",
+        "delegation_id": "deleg_e2d541cf"
       },
       "notification_resolver_test": "PASS:1 native test;54 focus tests passed again",
       "observer_report_infra_message_id": "1565432150990266392",
-      "observer_report_readback": true
+      "observer_report_readback": true,
+      "external_run": {
+        "job_id": "0123d4ca4a8f",
+        "delegation_id": "deleg_e2d541cf",
+        "at": "2026-10-29T18:32:27Z",
+        "state": "manual_background_running",
+        "executed": true,
+        "execution_mode": "background",
+        "no_agent": true,
+        "deliver": "local",
+        "failure_deliver": "local",
+        "one_shot": true,
+        "user_delivery_gate": true
+      }
     },
     {
       "agent": "zeus",
