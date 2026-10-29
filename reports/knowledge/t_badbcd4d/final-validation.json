@@ -1,0 +1,203 @@
+{
+  "engine_sha256": "b88f59d57c70c5eb3552a4cf997e4ea8cc6e7c8e8aa3a0344805196a0873c7a8",
+  "regression": {
+    "failed": 0,
+    "passed": 21,
+    "results": [
+      {
+        "errors": [],
+        "id": "KR-001",
+        "question": "Quem controla e pode falar diretamente com Zeus?",
+        "source": "context/agent-map.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-003",
+        "question": "Ares pode configurar ou consultar ChatPion, quiz e SMS Funnel?",
+        "source": "context/routes.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-004",
+        "question": "Qual é a fonte real de permissões de usuários e agentes?",
+        "source": "context/sources-of-truth.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-005",
+        "question": "Quais são as exceções atuais da ActiveView?",
+        "source": "context/sources-of-truth.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-006",
+        "question": "Um candidato da inbox já é verdade canônica?",
+        "source": "context/knowledge-governance.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-007",
+        "question": "Onde o Zeus encontra o ponto de retomada de uma iniciativa?",
+        "source": "context/knowledge-governance.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-008",
+        "question": "A recuperação off-site completa já está ativa?",
+        "source": "docs/mgs-knowledge-continuity-plan.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-009",
+        "question": "Ares pode fazer setup WordPress ou pixel crítico sem Rodolfo?",
+        "source": "context/agent-map.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-010",
+        "question": "Onde a Atena verifica uma decisão editorial tomada em outra sessão?",
+        "source": "profiles/atena-soul.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-011",
+        "question": "Onde o Ares verifica uma decisão ou retomada de Creative/Campaign Ops tomada em outra sessão?",
+        "source": "profiles/ares-soul.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-012",
+        "question": "Atraso acima de 2h na dashboard Smart Bidding interrompe os cortes de ROAS da Eggbev?",
+        "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-013",
+        "question": "Qual é o estado vigente do fallback Eggbev após 03:00 para campanha sem resultado do pixel?",
+        "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-014",
+        "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+        "source": "data/ares/meta-ads/engine-v3/config.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-015",
+        "question": "O guardrail LEADS Eggbev pode escrever enquanto o action hold está ativo?",
+        "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-016",
+        "question": "A colisão ROAS :10 com jobs auxiliares foi remediada sem mudar o horário do ROAS?",
+        "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-017",
+        "question": "Qual é o threshold vigente dos ciclos futuros de Corte e ROAS da Eggbev?",
+        "source": "data/ares/meta-ads/operations/Eggbev-US-CC-EN-BOT.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-018",
+        "question": "Limites internos de budget podem reduzir ou bloquear um pedido autorizado do Ares?",
+        "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-019",
+        "question": "Como o BOT resolve Pages e credenciais quando há milhares de Pages por perfil anunciante?",
+        "source": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-020",
+        "question": "Quando mídia de tráfego direto pode ser enviada para a Meta e como SHEIN/CAR tratam Pages?",
+        "source": "data/ares/meta-ads/strategy-families/direct-traffic-web-cbo.json",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-021",
+        "question": "Ares ou Atena podem listar, confirmar ou consultar um domínio fora do escopo MGS compartilhável?",
+        "source": "context/security-policies.md",
+        "status": "ok"
+      },
+      {
+        "errors": [],
+        "id": "KR-022",
+        "question": "Qual é o escopo operacional do Ares e o ownership de app amplia esse escopo?",
+        "source": "context/ares-asset-scope.md",
+        "status": "ok"
+      }
+    ],
+    "schema_errors": [],
+    "status": "ok"
+  },
+  "supersession_readback": [
+    {
+      "canonical_key": "capability.knowledge-regression",
+      "canonical_source": "data/knowledge-regression-cases.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-15",
+      "id": "CAP-KNOWLEDGE-REGRESSION",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "CAP-KNOWLEDGE-REGRESSION-KR014-20261029",
+      "title": "Business knowledge regression suite",
+      "updated_at": "2026-10-29T12:32:36+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-regression",
+      "canonical_source": "data/knowledge-regression-cases.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-29T12:32:36+00:00",
+      "id": "CAP-KNOWLEDGE-REGRESSION-KR014-20261029",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Business knowledge regression suite: KR-014 reconciled to existing Engine3.6.8; historical expectation preserved",
+      "updated_at": "2026-10-29T12:32:36+00:00"
+    }
+  ],
+  "validate": {
+    "checkpoints": 775,
+    "errors": [],
+    "inbox_candidates": 38,
+    "registry_entries": 857,
+    "regression_cases": 21,
+    "status": "ok"
+  }
+}

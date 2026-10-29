@@ -2773,12 +2773,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1565261967260647536-RECOVERY",
-      "next_step": "Validar autoridade/descriptor live,QA renderizado e ativacao central dos IDs004/005;somente depois c3 e recibo agregado",
-      "objective": "Concluir pedido original Mavroa06: duas copias fontes1 e3,USD35 cada,ativar agora;device aceito somente004/005",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565261967260647536/recovery-decision-1565338124400336978.json",
-      "state": "manutencao parent verificada;hashes modulos e descriptor preservados;checkers allowed;retomada operacional c1 sem replay",
+      "next_step": "Aguardar decisao humana especifica006/007;recuperar GET da resposta e autoridade live.Preservar manifests/IDs e source3 COST_CAP90;reparo/review precisa capacidade central valida,QA semantico/renderizado,ativacao e readback agregado das quatro antes da conclusao unica.",
+      "objective": "Concluir quatro copias do pedido original Nicolas,fontes1/3,USD35 cada;nenhuma extensao implicita do review004/005",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565261967260647536/aggregate-progress-t_0dce1c10.json",
+      "state": "parcial:004/005 active com4ads e qa integral;006/007 paused com6ads por dois drifts materiais(device omitido e user_age_unknown false para true).quatro ids unicos preservados,total configuradousd140/ativo novousd70.fontes/bids intactos por get.review especifico solicitado na origem1565343225894666345 e entrega get conferida.sem replay,codigo,testes,cron ou writer alternativo.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-29T12:31:22+00:00"
+      "updated_at": "2026-10-29T12:35:29+00:00"
     },
     {
       "agent": "ares",
@@ -7533,12 +7533,12 @@
     {
       "agent": "zeus",
       "id": "zeus-kr014-t_badbcd4d",
-      "next_step": "Zeus conclui inventario, REPORT-INFRA com GET exato e validacao final",
+      "next_step": "Nenhum passo pendente neste escopo; futuras alteracoes de release exigem reconciliacao e testes negativos do fixture, sem autoaprovar versao nova.",
       "objective": "Reconciliar somente expectativa KR-014 sem alterar Engine nem escrever Meta",
       "source": "reports/knowledge/t_badbcd4d/change-evidence.json",
-      "state": "validation_passed_reporting_pending",
+      "state": "completed",
       "thread_id": "kanban:t_badbcd4d",
-      "updated_at": "2026-10-29T12:32:51+00:00"
+      "updated_at": "2026-10-29T12:34:43+00:00"
     },
     {
       "agent": "zeus",
@@ -7762,5 +7762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:32:51+00:00"
+  "updated_at": "2026-10-29T12:35:29+00:00"
 }
