@@ -74,6 +74,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_private_cont
 # Exact source path only; credentials, copies and sibling files remain blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_stock_transport\.py$"
 
+# Reviewed completed-intake transport receipt: status, Drive IDs and timestamp
+# only. Exact evidence path; sibling receipts, credentials and copies stay blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport\.py\.last\.json$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

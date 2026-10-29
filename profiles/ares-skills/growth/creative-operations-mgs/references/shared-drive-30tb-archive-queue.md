@@ -43,7 +43,9 @@ python3 /root/mgs-agent/scripts/ares_archive_bridge.py reconcile --job-id <job_i
 python3 /root/mgs-agent/scripts/ares_archive_bridge.py status
 ```
 
-A SA valida autor do recibo, conjunto completo de fontes, dono/parent/path do arquivo, tamanho, MD5 e SHA-256 dos streams origem/destino. Só depois registra `archive-index.json` e publica ACK. Pedidos verificados saem da seleção de pendências por metadado atualizado pela própria SA; o corpo original do pedido não é reescrito.
+A SA valida autor do recibo, conjunto completo de fontes, dono/parent/path do arquivo, tamanho, MD5 e SHA-256 dos streams origem/destino. Só depois registra `archive-index.json` e publica ACK.
+
+Na auditoria independente, validar o ACK nativo pelo schema `mgs.archive.ack.v1`, `kind=lineage`, `jobId` exato, publisher SA, status e membership/IDs/hashes. O ACK produtivo pode omitir `validationOnly`: rejeitar `ack.get('validationOnly') is True`, sem exigir a presença literal de `false`. Manter a validação do job de produção no índice e do recibo nativo de transferência; não adicionar o campo ao documento imutável nem repetir transporte por causa dessa ausência opcional. Pedidos verificados saem da seleção de pendências por metadado atualizado pela própria SA; o corpo original do pedido não é reescrito.
 
 A fila usa registros laterais de arquivo, não muda `asset_id`, `source_drive_id`, `asset_drive_id`, nomes originais/finais, `reservation_status`, `ares_eligible`, gestor, linhagem, performance ou estratégia. O canário não altera o inventário criativo nem vira candidato novo.
 

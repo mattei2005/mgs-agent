@@ -42,10 +42,10 @@ MGS production must fail closed if the Service Account is unavailable. Never cre
 ```text
 Use case                                      Required destination
 --------------------------------------------  ---------------------------------------------
-New automated file upload                     MGS-AGENTS Shared Drive
+New automated file upload                     Approved MGS-AGENTS intake/staging target; resolve final backend
 Existing operational Sheet in My Drive        Keep ID; share current file with canonical SA
 Sheet with Forms/IMPORTRANGE/ID dependencies   Keep location unless migration is proven safe
-Ares creative upload                           Shared Drive root with driveId and write caps
+Ares creative upload                           SA writes approved staging; owner lane delivers permanent archive
 Service Account cannot access existing Sheet   Add canonical SA as Editor; do not change auth
 ```
 
@@ -85,6 +85,12 @@ For an explicitly approved **private VPS owner connector**, load `references/pri
 Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment commands, owner handoff, consent recovery, provenance checks and staged acceptance.
 
 ## Operator-facing handoff
+
+### Supervising another agent's Drive delivery
+
+When Rodolfo asks whether Ares is following the storage structure, audit the exact batch through the canonical SA without becoming a second writer. Recover the current layout contract before interpreting logical inventory paths or requiring a Shared-Drive `driveId` on permanent owner-account files. Inspect an existing audit script before running it: a verifier may also rewrite inventory or completion state.
+
+Report treatment, permanent archive/stock availability, delivery to the requester and temporary-source retirement as separate results. An empty upload root, a `complete` flag or a verified archive mapping does not prove staging cleanup; read back the exact original and treated staging IDs before claiming no copies remain. Preserve reservations and eligibility, and do not reprocess or recopy a successfully delivered batch to resolve a reporting or validator defect. Use the ordered read-only audit recipe in `references/private-vps-owner-connector.md`.
 
 ### Human console setup and account clarity
 

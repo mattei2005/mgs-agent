@@ -155,6 +155,23 @@ exec {self.real_git} "$@"
         self.run_until("Commit OK:")
         self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
 
+    def test_reviewed_intake_transport_receipt_commits(self):
+        name = "data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport.py.last.json"
+        path = self.repo / name
+        path.parent.mkdir(parents=True)
+        path.write_text('{"status":"ok","transferred":[],"remaining":0}\n')
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
+
+    def test_intake_receipt_exception_does_not_allow_sibling_secrets(self):
+        base = self.repo / "data/ares/creative-ops/executions/intake-1565379383017873569"
+        base.mkdir(parents=True)
+        (base / "mgs_private_stock_transport.py.last.json").write_text('{"status":"ok"}\n')
+        (base / "private_credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_stock_transport_exception_does_not_allow_sibling_secrets(self):
         base = self.repo / "scripts"
         base.mkdir()

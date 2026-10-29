@@ -127,6 +127,13 @@ fi
             "scripts/mgs_private_stock_transport_other.py": 1,
             "scripts/private_stock_credentials.json": 1,
             "data/private_stock_token.json": 1,
+            "data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport.py.last.json": 0,
+            "work/data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport.py.last.json": 1,
+            "data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport.py.last.json.bak": 1,
+            "data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport.py.other.json": 1,
+            "data/ares/creative-ops/executions/intake-other/mgs_private_stock_transport.py.last.json": 1,
+            "data/ares/creative-ops/executions/intake-1565379383017873569/private_credentials.json": 1,
+            "data/ares/creative-ops/executions/intake-1565379383017873569/token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):
