@@ -1722,6 +1722,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-DAILY-CREATION-1565429557547503729",
+      "next_step": "Selecionar minuto sem conflito, testar coleta live, registrar cron e validar entrega e readback.",
+      "objective": "Relatorio diario de campanhas novas de todos os sites SHEIN por gestor, por volta de 18h Eastern, nesta thread.",
+      "source": "discord:1185714635991679006/1565084013763371009/1565429557547503729",
+      "state": "autorizado por rodolfo; inventario global de agenda e implementacao deterministica em andamento; sem writes meta.",
+      "thread_id": "1565084013763371009",
+      "updated_at": "2026-10-29T18:18:51+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-DISCORD-INGRESS-20260913",
       "next_step": "Nenhuma correção pendente. Qualquer um dos sete usuários pode escrever normalmente, sem @Ares, em qualquer dos seis canais SHEIN; mensagens novas devem abrir/usar thread automaticamente. Se quiser validar outro membro, basta ele enviar uma mensagem curta no próprio canal.",
       "objective": "Restaurar resposta automática do Ares nos seis canais SHEIN para todos os sete usuários autorizados sem exigir menção",
@@ -7792,5 +7802,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T18:06:00+00:00"
+  "updated_at": "2026-10-29T18:18:51+00:00"
 }
