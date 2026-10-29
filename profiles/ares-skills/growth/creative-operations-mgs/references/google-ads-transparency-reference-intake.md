@@ -24,6 +24,7 @@
 - Classificação Video não garante que a variação de prévia exponha vídeo: alguns wrappers mostram somente imagem/app card. Não invente MP4 para preencher a lacuna.
 - Confirme imagens por decode e dimensões; vídeos por ffprobe/duração/streams. Deduplicate binários por SHA-256, preservando todos os vínculos anúncio/variação.
 - Antes de entregar mídias, use o sanitizador canônico, preserve RAW e exija `clean=true`. Arquivos Google podem conter Encoder/GoogleStartTime/GoogleTrackDuration; remux limpo não deve alterar duração, resolução ou conteúdo audiovisual.
+- O backend mat2 pode recomprimir JPEGs. Quando for necessário preservar pixels, tente uma cópia separada pelo sanitizador canônico com `--no-mat2`, valide novamente `clean=true` e compare os pixels decodificados. Nunca aceite saída não limpa: marcadores Adobe/ICC podem impedir essa rota. Nesse caso conserve o resultado limpo padrão, preserve RAW e registre a recompressão/diferença, sem relaxar a allowlist produtiva. Se um canário limpo já existir, verifique e reutilize-o; não repita `clean --out` sobre arquivo existente.
 
 ## Limites e recuperação
 
