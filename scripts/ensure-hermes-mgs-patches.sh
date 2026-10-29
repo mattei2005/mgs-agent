@@ -514,6 +514,14 @@ apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 fi
 
+# Post-delivery cleanup must precede a queued turn's generation handoff.
+# Apply only on the current consolidated base, preserving rollback runtimes.
+PROGRESS_CLEANUP_TESTS=()
+if primary_patch_present; then
+  apply_patch_if_needed "discord-progress-cleanup-before-drain-2026-10-29.patch"
+  PROGRESS_CLEANUP_TESTS=("$REPO/tests/gateway/test_progress_cleanup_drain_race_mgs.py")
+fi
+
 # Codex refresh integrity: current consolidated runtime only. Keep retained
 # rollback trees untouched; absence/drift on the active base fails closed.
 CODEX_INTEGRITY_TESTS=()
@@ -900,6 +908,7 @@ fi
   "$REPO/tests/hermes_cli/test_config_validation.py" \
   "$REPO/tests/tools/test_write_trace.py" \
   "${MCP_COMPAT_TESTS[@]}" \
+  "${PROGRESS_CLEANUP_TESTS[@]}" \
   "${CODEX_INTEGRITY_TESTS[@]}" \
   "${AUTH_HEAL_TESTS[@]}")
 

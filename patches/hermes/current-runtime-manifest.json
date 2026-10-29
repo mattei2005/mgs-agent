@@ -2,7 +2,9 @@
   "schema": 1,
   "primary_patch": "mgs-runtime-customizations-2026-10-21-main-4d043038.patch",
   "upstream_sha": "4d04303818b61bf3aa09278af48356315515965b",
-  "supplemental_patches": [],
+  "supplemental_patches": [
+    "discord-progress-cleanup-before-drain-2026-10-29.patch"
+  ],
   "absorbed_supplements": [
     "mgs-browser-budget-hygiene-2026-10-02.patch",
     "mgs-mcp-sdk-readonly-2026-10-02.patch",

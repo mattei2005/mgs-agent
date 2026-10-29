@@ -1,0 +1,106 @@
+--- a/gateway/platforms/base.py
++++ b/gateway/platforms/base.py
+@@ -4540,6 +4540,7 @@
+     async def _process_message_background(self, event: MessageEvent, session_key: str) -> None:
+         """Background task that actually processes the message."""
+         delivery_attempted = delivery_succeeded = False  # feeds the processing-complete hook
++        post_delivery_fired_before_handoff = False
+ 
+         def _record_delivery(result):
+             nonlocal delivery_attempted, delivery_succeeded
+@@ -4631,8 +4632,14 @@
+                 if not delay:  # a backed-off event stays queued until the drain task wakes
+                     self._pending_messages.pop(session_key)
+                 logger.debug("[%s] Processing queued follow-up message", self.name)
++                # A drain reuses the interrupt Event and stamps its NEW run generation on it.
++                # Finish this delivered turn's callback before yielding ownership: otherwise its
++                # cleanup can be overwritten, or finally can fire the next turn's callback early.
++                # Stop typing first, and retain the existing bounded callback timeout.
++                await self._stop_typing_refresh(event.source.chat_id, typing_task, metadata=_thread_metadata)
++                await self._fire_post_delivery_callback(session_key, interrupt_event)
++                post_delivery_fired_before_handoff = True
+                 self._clear_session_guard(session_key)
+-                await self._stop_typing_refresh(event.source.chat_id, typing_task, metadata=_thread_metadata)
+                 self._spawn_drain_task(pending_event, session_key, delay=delay)
+                 return  # Drain task owns the session now.
+         except asyncio.CancelledError:
+@@ -4654,7 +4661,8 @@
+             # Stop typing BEFORE the post-delivery callback: a stuck callback must not keep it
+             # alive.
+             await self._stop_typing_refresh(event.source.chat_id, typing_task, metadata=_thread_metadata)
+-            await self._fire_post_delivery_callback(session_key, interrupt_event)
++            if not post_delivery_fired_before_handoff:
++                await self._fire_post_delivery_callback(session_key, interrupt_event)
+             # Callback work or a late refresh may have recreated typing — one final bounded stop.
+             await self._stop_typing_refresh(
+                 event.source.chat_id, None, metadata=_thread_metadata, stop_attempts=1)
+--- /dev/null
++++ b/tests/gateway/test_progress_cleanup_drain_race_mgs.py
+@@ -0,0 +1,67 @@
++"""Regression: a queued completion must not steal an older turn's cleanup callback."""
++import asyncio,importlib.util
++from pathlib import Path
++import pytest
++from gateway.config import Platform
++from gateway.platforms.base import MessageEvent,MessageType
++from gateway.session import SessionSource
++spec=importlib.util.spec_from_file_location('cleanup_fakes_mgs',Path(__file__).with_name('test_run_cleanup_progress.py'))
++fakes=importlib.util.module_from_spec(spec);spec.loader.exec_module(fakes)
++
++@pytest.mark.asyncio
++async def test_cleanup_finishes_before_next_generation_can_take_shared_event(monkeypatch):
++ adapter=fakes.CleanupCaptureAdapter(Platform.DISCORD);order=[]
++ source=SessionSource(platform=Platform.DISCORD,chat_id='offline-discord-thread',chat_type='thread',thread_id='offline-discord-thread')
++ event=MessageEvent(text='request',message_type=MessageType.TEXT,source=source,message_id='request-offline')
++ pending=MessageEvent(text='internal completion',message_type=MessageType.TEXT,source=source,message_id='notification-offline',internal=True)
++ key='agent:main:discord:thread:offline';guard=asyncio.Event();adapter._active_sessions[key]=guard
++ async def handler(_):
++  guard._hermes_run_generation=1
++  adapter.register_post_delivery_callback(key,lambda:order.append('cleanup-old'),generation=1)
++  adapter._pending_messages[key]=pending
++  return 'Final response'
++ def spawn(*args,**kwargs):
++  order.append('handoff-new')
++  guard._hermes_run_generation=2
++  adapter.register_post_delivery_callback(key,lambda:order.append('callback-new'),generation=2)
++ async def stop(*args,**kwargs):
++  order.append('typing-stopped');await asyncio.sleep(0)
++ adapter.set_message_handler(handler);monkeypatch.setattr(adapter,'_spawn_drain_task',spawn);monkeypatch.setattr(adapter,'_stop_typing_refresh',stop)
++ await adapter._process_message_background(event,key)
++ assert 'cleanup-old' in order,order
++ assert order.index('cleanup-old')<order.index('handoff-new'),order
++ assert 'callback-new' not in order,order
++ assert callable(adapter.pop_post_delivery_callback(key,generation=2))
++ assert [r['content'] for r in adapter.sent]==['Final response']
++
++@pytest.mark.asyncio
++async def test_ordinary_final_runs_cleanup_once_after_send(monkeypatch):
++ adapter=fakes.CleanupCaptureAdapter(Platform.DISCORD);order=[];key='offline'
++ source=SessionSource(platform=Platform.DISCORD,chat_id='offline',chat_type='thread',thread_id='offline')
++ event=MessageEvent(text='request',message_type=MessageType.TEXT,source=source,message_id='request-offline')
++ guard=asyncio.Event();adapter._active_sessions[key]=guard
++ async def handler(_):
++  guard._hermes_run_generation=1
++  def callback():
++   assert [r['content'] for r in adapter.sent]==['Final response'];order.append('cleanup')
++  adapter.register_post_delivery_callback(key,callback,generation=1);return 'Final response'
++ adapter.set_message_handler(handler);await adapter._process_message_background(event,key)
++ assert order==['cleanup']
++
++@pytest.mark.asyncio
++async def test_hung_cleanup_is_bounded_and_typing_stops_before_handoff(monkeypatch):
++ import gateway.platforms.base as base
++ monkeypatch.setattr(base,'_POST_DELIVERY_CALLBACK_TIMEOUT_SECONDS',0.01)
++ adapter=fakes.CleanupCaptureAdapter(Platform.DISCORD);order=[];key='offline'
++ source=SessionSource(platform=Platform.DISCORD,chat_id='offline',chat_type='thread',thread_id='offline')
++ event=MessageEvent(text='request',message_type=MessageType.TEXT,source=source,message_id='request-offline')
++ pending=MessageEvent(text='queued',message_type=MessageType.TEXT,source=source,message_id='next-offline')
++ guard=asyncio.Event();adapter._active_sessions[key]=guard
++ async def callback():order.append('callback');await asyncio.Event().wait()
++ async def handler(_):
++  guard._hermes_run_generation=1;adapter.register_post_delivery_callback(key,callback,generation=1);adapter._pending_messages[key]=pending;return 'done'
++ async def stop(*args,**kwargs):order.append('typing-stopped')
++ def spawn(*args,**kwargs):order.append('handoff')
++ adapter.set_message_handler(handler);monkeypatch.setattr(adapter,'_stop_typing_refresh',stop);monkeypatch.setattr(adapter,'_spawn_drain_task',spawn)
++ await asyncio.wait_for(adapter._process_message_background(event,key),timeout=1)
++ assert order.index('typing-stopped')<order.index('callback')<order.index('handoff'),order
