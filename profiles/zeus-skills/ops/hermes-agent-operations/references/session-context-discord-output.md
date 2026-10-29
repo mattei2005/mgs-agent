@@ -81,6 +81,14 @@ Regras operacionais:
 - `cleanup_progress: true` pode remover mensagens transitórias no fim; isso é compatível com a preferência. A ausência delas no histórico após a resposta não prova que faltaram durante o turno — validar durante uma execução real ou por telemetria apropriada.
 - Não confundir progresso resumido das ferramentas ou do assistente com despejo de logs brutos; outputs extensos continuam reduzidos na origem.
 
+## Resíduos de progresso após conclusão com notificação na fila
+
+- Separe a limpeza de breadcrumbs do notificador automático de processos: `cleanup_progress:true` não transforma um aviso direto de background em mensagem temporária. Resolva o profile autor, o processo `notify_on_complete`, a configuração própria e os IDs nativos antes de atribuir o resíduo a permissão ou desligar progresso.
+- Reproduza a transição `final entregue → notificação/follow-up pendente → nova geração`. O drain reutiliza o interrupt Event e carimba nele a geração nova; disparar o callback antigo somente no `finally` depois do handoff pode perder a limpeza ou executar o callback seguinte cedo demais. Pare typing, execute o callback limitado do turno entregue e só então transfira o guard; impeça um segundo disparo no `finally`. Teste a ordem, a preservação do callback novo e o timeout de callback travado.
+- Preserve `tool_progress:all`, `cleanup_progress:true`, mensagens humanas/intermediárias e a entrega final. Para suprimir avisos brutos do background no profile autorizado, use o modo documentado `display.background_process_notifications: off` e valide o resolver. O CLI pode tratar `false` como a string literal `'false'` nessa chave de modos; ela cai no fallback `concise`, portanto tipo/texto de readback e resolução real são gates independentes.
+- Diferencie patch salvo/testado de código carregado: sem hot reload de módulos, prepare a ativação pelo restart seguro externo, sem reiniciar em cadeia ativa e sem afirmar proteção ativa antes do novo PID/conexão. Preserve os agentes fora do escopo. Proteja o patch suplementar e teste de regressão no guard/manifesto para sobreviver ao próximo update.
+- Limpe os resíduos históricos apenas após a correção validada: congele autor/IDs/conteúdo e a lista preservada, use a identidade Zeus com permissão live existente, exclua somente os alvos autorizados e releia ausência e preservação. Um smoke REST com o ciclo nativo e geração na fila deve mostrar progresso removido e final preservado antes do teardown técnico; identifique-o como autoteste, não execução de negócio ou inferência real.
+
 ## Discord — suprimir previews automáticos de links
 
 Use quando Rodolfo pedir que mensagens dos agentes não gerem cards/previews automáticos para URLs no Discord.
