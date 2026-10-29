@@ -26,6 +26,7 @@ Detailed reference files are in `references/`:
 - `references/bounded-editorial-native-score-repair.md` — limited content-only repair, per-ID preservation, current-hash manifests and native score verification
 - `references/social-image-after-featured-rest.md` — stale OG/Twitter after REST featured-media updates; native per-ID derivation, preservation and separate cache gates
 - `references/term-canonical-native-derivation.md` — canonical de categoria com entradas corretas e derivação antiga; watcher nativo inspecionado, preservação e prova pública
+- `references/home-page-native-derivation.md` — home-page existente com derivação antiga; limites de indexing/general, capacidade real e canal nativo certificado
 - `references/site-health-monitor.md` — full cron monitor design, pitfalls, checklist
 
 ---
