@@ -55836,6 +55836,29 @@
       "first_next_cron_tick": "2026-10-28T23:31:00-04:00",
       "report_message_id": "1565161234305654845",
       "report_readback": "Exact alerts-infra channel/message;empty content;one embed;zero mentions/thread verified"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261028-2102",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_metrics_validated_provider_temporarily_blocked",
+      "updated_at": "2026-10-28T21:06:01.253766-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261028T210336713715/closure-current.json"
+      ],
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 6,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
     }
   ],
   "profile_skill_references": [
