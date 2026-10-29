@@ -2922,6 +2922,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ARES-MANUAL-CLOSE-1565389796585513142",
+      "next_step": "Validar helper reutilizavel em testes, reconciliar 10 pares com provas nativas, executar retirada canonica max2 por ciclo e validar consumidores",
+      "objective": "Corrigir fechamento do lote manual Kelly 1565379383017873569 e prevenir repeticao sem relaxar gates de retirada",
+      "source": "context/drive-archive-owner-connector.md",
+      "state": "investigating_confirmed_missing_completion",
+      "thread_id": "1565383322849382601",
+      "updated_at": "2026-10-29T15:41:53+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ARES-RECOVERY-DELEGATION-1558142033774776411",
       "next_step": "Nenhum retry/ativação pendente; aplicar delegação limitada nos próximos handoffs autorizados",
       "objective": "Corrigir delegação e recovery técnico SHEIN G005 C106, sem execução concorrente",
@@ -7772,5 +7782,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T15:26:43+00:00"
+  "updated_at": "2026-10-29T15:41:53+00:00"
 }
