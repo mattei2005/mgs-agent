@@ -713,12 +713,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-1565435044909158583",
-      "next_step": "Estabilizar slot registrado e conferir claims antes de tratamento",
-      "objective": "Tratar e mover lote Kelly SHEIN US EN preservando originais e reserva",
-      "source": "discord:thread:1565435044909158583",
-      "state": "discovery_in_progress",
+      "next_step": "Validar READY LEGACY inventario, transportar pelo conector isolado; helper manual tem gate de clean IDs unicos e requer diagnostico para duplicatas.",
+      "objective": "Tratar e mover 34 fontes Kelly SHEIN US EN preservando originais e reserva",
+      "source": "data/ares/creative-ops/executions/intake-1565435044909158583/plan.json",
+      "state": "plano congelado: 34 fontes, 30 criativos unicos, 4 duplicatas com clean e pixels identicos. tratamento em execucao.",
       "thread_id": "1565435044909158583",
-      "updated_at": "2026-10-29T18:40:47+00:00"
+      "updated_at": "2026-10-29T18:47:55+00:00"
     },
     {
       "agent": "zeus",
@@ -7812,5 +7812,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T18:40:47+00:00"
+  "updated_at": "2026-10-29T18:47:55+00:00"
 }
