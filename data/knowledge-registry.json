@@ -3445,6 +3445,24 @@
       "updated_at": "2026-10-20T17:49:34+00:00"
     },
     {
+      "canonical_key": "ares.creative.manual_intake.canonical_completion",
+      "canonical_source": "scripts/ares_manual_intake_completion.py",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-10-29T16:12:49+00:00",
+      "id": "ARES-MANUAL-INTAKE-COMPLETION-1565389796585513142",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fechamento manual canonico verificado antes da retirada: helper idempotente e procedimento Ares ativo",
+      "updated_at": "2026-10-29T16:12:49+00:00"
+    },
+    {
       "canonical_key": "ares.meta-app.minibot.full-access-baseline",
       "canonical_source": "data/ares/meta-ads/permissions/minibot-1299247318762949-full-access.json",
       "consumers": [
@@ -15382,5 +15400,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:32:36+00:00"
+  "updated_at": "2026-10-29T16:12:49+00:00"
 }
