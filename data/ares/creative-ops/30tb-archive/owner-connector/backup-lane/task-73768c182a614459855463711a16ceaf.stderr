@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 193, in <module>
+    result=activate_handoff() if args.action=='activate-handoff' else prepare_historical() if args.action=='prepare-historical' else tick();print(json.dumps(result));raise SystemExit(2 if result.get('status')=='blocked' else 0)
+                                                                                                                                     ~~~~^^
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 161, in tick
+    return tick_claimed()
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 183, in tick_claimed
+    owner.write_json(c['control_folder_id'],'heartbeat:vps-backup-v1','vps_backup_heartbeat',hb,journal);b.atomic_json(HOME/'last-tick.json',hb)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/mgs_archive_owner_transport.py", line 153, in write_json
+    if self.raw(landed)!=data:raise TransportError('JSON_PUBLICATION_UNCERTAIN') from None
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mgs_archive_owner_transport.TransportError: JSON_PUBLICATION_UNCERTAIN
