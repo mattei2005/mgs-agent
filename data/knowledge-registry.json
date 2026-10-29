@@ -6654,10 +6654,28 @@
       "kind": "capability",
       "owner": "Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "CAP-KNOWLEDGE-REGRESSION-KR014-20261029",
+      "title": "Business knowledge regression suite",
+      "updated_at": "2026-10-29T12:32:36+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-regression",
+      "canonical_source": "data/knowledge-regression-cases.json",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-10-29T12:32:36+00:00",
+      "id": "CAP-KNOWLEDGE-REGRESSION-KR014-20261029",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Business knowledge regression suite",
-      "updated_at": "2026-07-15T23:08:46+00:00"
+      "title": "Business knowledge regression suite: KR-014 reconciled to existing Engine3.6.8; historical expectation preserved",
+      "updated_at": "2026-10-29T12:32:36+00:00"
     },
     {
       "canonical_key": "capability.memory-autocompaction.residual",
@@ -15364,5 +15382,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:26:43+00:00"
+  "updated_at": "2026-10-29T12:32:36+00:00"
 }

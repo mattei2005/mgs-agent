@@ -1,0 +1,130 @@
+{
+  "passed": 6,
+  "probes": [
+    {
+      "expected": "ok",
+      "name": "current",
+      "result": {
+        "failed": 0,
+        "passed": 1,
+        "results": [
+          {
+            "errors": [],
+            "id": "KR-014",
+            "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+            "source": "data/ares/meta-ads/engine-v3/config.json",
+            "status": "ok"
+          }
+        ],
+        "schema_errors": [],
+        "status": "ok"
+      }
+    },
+    {
+      "expected": "error",
+      "name": "obsolete_3_6_1",
+      "result": {
+        "failed": 1,
+        "passed": 0,
+        "results": [
+          {
+            "errors": [
+              "missing required term: \"release_version\": \"3.6.8\""
+            ],
+            "id": "KR-014",
+            "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+            "source": "data/ares/meta-ads/engine-v3/config.json",
+            "status": "error"
+          }
+        ],
+        "schema_errors": [],
+        "status": "error"
+      }
+    },
+    {
+      "expected": "error",
+      "name": "legacy_3_3_0",
+      "result": {
+        "failed": 1,
+        "passed": 0,
+        "results": [
+          {
+            "errors": [
+              "missing required term: \"release_version\": \"3.6.8\"",
+              "forbidden term present: \"release_version\": \"3.3.0\""
+            ],
+            "id": "KR-014",
+            "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+            "source": "data/ares/meta-ads/engine-v3/config.json",
+            "status": "error"
+          }
+        ],
+        "schema_errors": [],
+        "status": "error"
+      }
+    },
+    {
+      "expected": "error",
+      "name": "disabled",
+      "result": {
+        "failed": 1,
+        "passed": 0,
+        "results": [
+          {
+            "errors": [
+              "missing required term: \"enabled\": true"
+            ],
+            "id": "KR-014",
+            "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+            "source": "data/ares/meta-ads/engine-v3/config.json",
+            "status": "error"
+          }
+        ],
+        "schema_errors": [],
+        "status": "error"
+      }
+    },
+    {
+      "expected": "error",
+      "name": "writes_disabled",
+      "result": {
+        "failed": 1,
+        "passed": 0,
+        "results": [
+          {
+            "errors": [
+              "missing required term: \"write_enabled\": true"
+            ],
+            "id": "KR-014",
+            "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+            "source": "data/ares/meta-ads/engine-v3/config.json",
+            "status": "error"
+          }
+        ],
+        "schema_errors": [],
+        "status": "error"
+      }
+    },
+    {
+      "expected": "error",
+      "name": "unreviewed_future",
+      "result": {
+        "failed": 1,
+        "passed": 0,
+        "results": [
+          {
+            "errors": [
+              "missing required term: \"release_version\": \"3.6.8\""
+            ],
+            "id": "KR-014",
+            "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+            "source": "data/ares/meta-ads/engine-v3/config.json",
+            "status": "error"
+          }
+        ],
+        "schema_errors": [],
+        "status": "error"
+      }
+    }
+  ]
+}

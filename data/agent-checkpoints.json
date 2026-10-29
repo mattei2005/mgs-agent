@@ -2773,12 +2773,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-1565261967260647536-RECOVERY",
-      "next_step": "Ares conclui manutencao restrita com testes/descriptor real validado e zero Meta writes;depois retoma c1 mesmos IDs via central,QA/ativacao/readback e so entao c3;agregar quatro campanhas e entregar conclusao unica na origem",
-      "objective": "Concluir pedido original Mavroa06: duas copias de cada fonte1 e3,USD35/dia cada,ativar agora; desvio device aceito apenas004/005",
+      "next_step": "Validar autoridade/descriptor live,QA renderizado e ativacao central dos IDs004/005;somente depois c3 e recibo agregado",
+      "objective": "Concluir pedido original Mavroa06: duas copias fontes1 e3,USD35 cada,ativar agora;device aceito somente004/005",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565261967260647536/recovery-decision-1565338124400336978.json",
-      "state": "review1565338124400336978 confirmado por get e autoridade live;004/005 paused com4ads;validador central ainda rejeita device omitido;manutencao separada t_6a15189a ready e retomada t_0dce1c10 dependente;nenhum write meta nesta recuperacao",
+      "state": "manutencao parent verificada;hashes modulos e descriptor preservados;checkers allowed;retomada operacional c1 sem replay",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-29T12:19:16+00:00"
+      "updated_at": "2026-10-29T12:31:22+00:00"
     },
     {
       "agent": "ares",
@@ -7532,6 +7532,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-kr014-t_badbcd4d",
+      "next_step": "Zeus conclui inventario, REPORT-INFRA com GET exato e validacao final",
+      "objective": "Reconciliar somente expectativa KR-014 sem alterar Engine nem escrever Meta",
+      "source": "reports/knowledge/t_badbcd4d/change-evidence.json",
+      "state": "validation_passed_reporting_pending",
+      "thread_id": "kanban:t_badbcd4d",
+      "updated_at": "2026-10-29T12:32:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-memory-autocompact-90",
       "next_step": "Operação normal automática. Zeus só escala falha fechada, source_unchanged não comprovado, entrega Discord pendente ou store que permaneça >=90% após tentativa.",
       "objective": "Manter USER/MEMORY como cache pequeno sempre ativo com Honcho como camada longitudinal principal",
@@ -7752,5 +7762,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:26:43+00:00"
+  "updated_at": "2026-10-29T12:32:51+00:00"
 }

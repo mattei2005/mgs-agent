@@ -1,0 +1,85 @@
+{
+  "enabled_guards_preserved": true,
+  "engine_config_writes": 0,
+  "engine_equals_head": true,
+  "engine_sha256_after": "b88f59d57c70c5eb3552a4cf997e4ea8cc6e7c8e8aa3a0344805196a0873c7a8",
+  "engine_sha256_before": "b88f59d57c70c5eb3552a4cf997e4ea8cc6e7c8e8aa3a0344805196a0873c7a8",
+  "forbidden_versions_preserved": true,
+  "meta_calls": 0,
+  "negative_controls_passed": 6,
+  "new_case": {
+    "expectation_revision": {
+      "effective_at": "2026-10-29T12:32:36+00:00",
+      "engine_sha256": "b88f59d57c70c5eb3552a4cf997e4ea8cc6e7c8e8aa3a0344805196a0873c7a8",
+      "historical_evidence": "reports/knowledge/t_badbcd4d/regression-before.json",
+      "id": "KR-014-20261029",
+      "previous_expectation": {
+        "forbidden_any": [
+          "\"release_version\": \"3.3.0\"",
+          "\"release_version\": \"3.4.0\"",
+          "\"release_version\": \"3.4.2\""
+        ],
+        "id": "KR-014",
+        "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+        "required_all": [
+          "\"release_version\": \"3.6.1\"",
+          "\"enabled\": true",
+          "\"write_enabled\": true"
+        ],
+        "source": "data/ares/meta-ads/engine-v3/config.json"
+      },
+      "reason": "Reconcile obsolete literal with existing active registry and unchanged runtime/HEAD; no Engine deployment or Meta mutation.",
+      "supersedes": "KR-014-release-3.6.1",
+      "task_id": "t_badbcd4d",
+      "version_registry_id": "ARES-CAMPAIGN-ENGINE-V3-6-8-20261008"
+    },
+    "forbidden_any": [
+      "\"release_version\": \"3.3.0\"",
+      "\"release_version\": \"3.4.0\"",
+      "\"release_version\": \"3.4.2\""
+    ],
+    "id": "KR-014",
+    "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+    "required_all": [
+      "\"release_version\": \"3.6.8\"",
+      "\"enabled\": true",
+      "\"write_enabled\": true"
+    ],
+    "source": "data/ares/meta-ads/engine-v3/config.json"
+  },
+  "old_case": {
+    "forbidden_any": [
+      "\"release_version\": \"3.3.0\"",
+      "\"release_version\": \"3.4.0\"",
+      "\"release_version\": \"3.4.2\""
+    ],
+    "id": "KR-014",
+    "question": "Qual é a versão ativa do Campaign Engine v3 usada pela Eggbev?",
+    "required_all": [
+      "\"release_version\": \"3.6.1\"",
+      "\"enabled\": true",
+      "\"write_enabled\": true"
+    ],
+    "source": "data/ares/meta-ads/engine-v3/config.json"
+  },
+  "other_cases_unchanged": true,
+  "task_id": "t_badbcd4d",
+  "version_registry": {
+    "canonical_key": "ares.campaign_engine.version",
+    "canonical_source": "data/ares/meta-ads/engine-v3/config.json",
+    "consumers": [
+      "ares",
+      "meta-campaign-engine-v3"
+    ],
+    "domain": "growth",
+    "effective_at": "2026-10-09T04:00:14+00:00",
+    "id": "ARES-CAMPAIGN-ENGINE-V3-6-8-20261008",
+    "kind": "decision",
+    "owner": "Rodolfo Mattei",
+    "review_due": null,
+    "status": "active",
+    "superseded_by": null,
+    "title": "Engine3.6.8 COPY source addon e event_add_to_wishlist em nomes novos",
+    "updated_at": "2026-10-09T04:00:14+00:00"
+  }
+}
