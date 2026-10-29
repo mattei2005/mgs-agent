@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-28T20:21:22-04:00",
+    "updated_at": "2026-10-28T22:21:02-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -57338,24 +57338,22 @@
       "entry": "47 7 * * * /usr/bin/flock -n /var/lock/ares-shein-daily-scheduler.lock /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-daily-cron.py >> /root/mgs-agent/logs/ares-shein-daily-report.log 2>&1"
     },
     {
-      "entry": "32 9 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 09:32 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
-      "description": "SHEIN intraday dia atual;24contas;slot09:32 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+      "entry": "CRON_TZ=America/New_York"
     },
     {
-      "entry": "11 14 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 14:11 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
-      "description": "SHEIN intraday dia atual;24contas;slot14:11 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+      "entry": "32 9 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 09:32 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1"
     },
     {
-      "entry": "2 16 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 16:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
-      "description": "SHEIN intraday dia atual;24contas;slot16:02 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+      "entry": "11 14 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 14:11 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1"
     },
     {
-      "entry": "2 20 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 20:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
-      "description": "SHEIN intraday dia atual;24contas;slot20:02 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+      "entry": "2 16 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 16:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1"
     },
     {
-      "entry": "31 23 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 23:31 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1",
-      "description": "SHEIN intraday dia atual;24contas;slot23:31 ET;25s stagger;lock compartilhado D1;autoridade1565157065234710681"
+      "entry": "2 20 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 20:02 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1"
+    },
+    {
+      "entry": "31 23 * * * /usr/bin/flock -n /var/lock/ares-shein-intraday-scheduler.lock /bin/sh -c '/bin/sleep 25; /usr/bin/timeout 2400s /usr/bin/python3 /root/.hermes/profiles/ares/scripts/shein-intraday-cron.py --slot 23:31 --scheduled' >> /root/mgs-agent/logs/ares-shein-intraday-report.log 2>&1"
     }
   ],
   "scripts": [
@@ -59223,30 +59221,6 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-report.py",
-      "size_bytes": 27042,
-      "sha256": "b9c4cf9d598f780b7ab5a63130173e368ef4cbb5eb14a3457f00dfc5f04f8b8c",
-      "modified_at": "2026-10-28T20:17:04.604782-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/shein-daily-rps-ui.py",
-      "size_bytes": 8845,
-      "sha256": "d8a2ddced521ea386ed61564d0a72b16931db78b7764532957ce8dc5a2cd8e3f",
-      "modified_at": "2026-10-28T20:24:45.217283-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-report.py",
-      "size_bytes": 11496,
-      "sha256": "ba149a297f5e0e913101c711b97c8bdc5abbc44ec694a43feb070964c4a94f96",
-      "modified_at": "2026-10-28T20:17:52.525835-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
-      "size_bytes": 574,
-      "sha256": "1e86b268bc38166b5a6a3e95b2fe45ef4e36143ea2274eac4d653c059e0a5ccf",
-      "modified_at": "2026-10-28T20:27:22.679447-04:00"
     }
   ],
   "skills_mgs": [
@@ -62198,16 +62172,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 687509,
-      "md5": "2054cfa3eeea0a975019d2e4431dbf2b",
-      "modified_at": "2026-10-28T20:32:20.877762-04:00",
-      "sha256": "58377191656c71479527e1a8fd80e5ee6b5cb167682af9d515ff2d175a0e4e0e"
+      "size_bytes": 687497,
+      "md5": "f0dd8a937825958db5dd94f4728695a8",
+      "modified_at": "2026-10-28T22:19:31-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 129745,
-      "md5": "79371bd6f69f6e61af0f613e4993292b",
-      "modified_at": "2026-10-28T20:17:02-04:00"
+      "md5": "1a0efea9d79765983780a6323185b083",
+      "modified_at": "2026-10-28T22:17:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -62236,8 +62209,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 3208,
-      "md5": "0b356a7421d70ec8e5aec3aa861e4be3",
-      "modified_at": "2026-10-28T20:11:08-04:00"
+      "md5": "6e2ae42704e23dd3ce354d76f5a66ae7",
+      "modified_at": "2026-10-28T22:11:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -62254,8 +62227,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 67771,
-      "md5": "8968b88130fae56ff2d4c904dca46267",
-      "modified_at": "2026-10-28T20:11:45-04:00"
+      "md5": "e2b8a6129bb8c08effdcbe7506005e7a",
+      "modified_at": "2026-10-28T22:19:28-04:00"
     },
     {
       "path": "/root/mgs-agent/data/browser-resource-budget.json",
@@ -62284,8 +62257,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 2890,
-      "md5": "e26c1b80a35605485349be8b3db86696",
-      "modified_at": "2026-10-28T20:15:03-04:00"
+      "md5": "5918fde9d1048355fa75819678d8fa2b",
+      "modified_at": "2026-10-28T22:15:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/devday-2026-pilot-inventory.json",
@@ -62326,8 +62299,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "35c7cba9b6a56f548a4ecd76badcf769",
-      "modified_at": "2026-10-28T20:19:03-04:00"
+      "md5": "c696c6da92f48d1fe73a9ea061c109cf",
+      "modified_at": "2026-10-28T22:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -62494,8 +62467,8 @@
     {
       "path": "/root/mgs-agent/data/finance-readonly-health-state.json",
       "size_bytes": 458,
-      "md5": "1a185ee0f7eac8651c6c42818c2a3379",
-      "modified_at": "2026-10-28T19:34:29-04:00"
+      "md5": "9ea36c3a05d49def7f2a9066242a3d9d",
+      "modified_at": "2026-10-28T21:34:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/finance-sms-usage-contract.json",
@@ -62578,32 +62551,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7018,
-      "md5": "3b573bcd198b238a3968e448e09c8ada",
-      "modified_at": "2026-10-28T20:14:02-04:00"
+      "md5": "5967e0df6a4f79b7870b53f481bc526a",
+      "modified_at": "2026-10-28T22:14:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "e3c3fe0652b70044069d2f8aeebf5536",
-      "modified_at": "2026-10-28T14:51:39-04:00"
+      "md5": "5fb136a5653047223e450132be303184",
+      "modified_at": "2026-10-28T20:53:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 74226,
-      "md5": "5255a5d6cd8ff4af60d20789966556b9",
-      "modified_at": "2026-10-28T20:20:02-04:00"
+      "md5": "1cc2e475ec81f0c8411fd291e0e5b142",
+      "modified_at": "2026-10-28T22:20:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 104934,
-      "md5": "05317c344d633b7b849a7e82152797a9",
-      "modified_at": "2026-10-28T20:21:01-04:00"
+      "md5": "cd682d1fa6668a52fb30bfe2a5fe4e47",
+      "modified_at": "2026-10-28T22:21:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "c76bc9b5e0b18953308146a0a4ef7928",
-      "modified_at": "2026-10-28T20:21:01-04:00"
+      "size_bytes": 357,
+      "md5": "7e3ab0ffaab7e7ef740f08bcdd7dfa19",
+      "modified_at": "2026-10-28T22:21:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -62650,14 +62623,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 1105,
-      "md5": "9eed542fd3f7b427dd8bdc1fc0a5a300",
-      "modified_at": "2026-10-28T14:37:04-04:00"
+      "md5": "7653430db9942918595210f17f1c4148",
+      "modified_at": "2026-10-28T20:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 826,
-      "md5": "b16223b729221e75e9bc7df7834fddd9",
-      "modified_at": "2026-10-28T20:21:18-04:00"
+      "md5": "5c8ab300e42c516c09858a1c42463d64",
+      "modified_at": "2026-10-28T22:20:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -62679,16 +62652,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 2951403,
-      "md5": "d56f93e6fd1a206c5ab334de30407450",
-      "modified_at": "2026-10-28T20:21:21-04:00"
+      "size_bytes": 2964187,
+      "md5": "e99561f77b08576208e8e114b15735ef",
+      "modified_at": "2026-10-28T21:06:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 582047,
-      "md5": "29c35b74cc34f7c80a2ef93f421fb9fb",
-      "modified_at": "2026-10-28T20:29:00.869550-04:00",
-      "sha256": "c95751055f885d97064773c332d91ec9257012e29f97c37debd430c116648f1e"
+      "size_bytes": 582749,
+      "md5": "3694dc11501d351e4f77309c664b6a82",
+      "modified_at": "2026-10-28T22:19:31-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -62735,8 +62707,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 121161,
-      "md5": "0cb967f24f96ccb903060aacd16dcfbb",
-      "modified_at": "2026-10-28T20:20:03-04:00"
+      "md5": "dd05cc3f94149173aa79ee42bcf000ae",
+      "modified_at": "2026-10-28T22:20:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -62825,8 +62797,8 @@
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
       "size_bytes": 8973,
-      "md5": "660b16d588b509ece26cea85091f31d6",
-      "modified_at": "2026-10-28T19:27:14-04:00"
+      "md5": "b67cbcc380f1eee41ba59f74ddc0a565",
+      "modified_at": "2026-10-28T21:27:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -63173,8 +63145,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1082,
-      "md5": "2e93d8a5759c0b88888ce137c5ec7d38",
-      "modified_at": "2026-10-28T19:39:01-04:00"
+      "md5": "8f3c10082e5d33e1e7e93fd9c964ef9c",
+      "modified_at": "2026-10-28T21:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -63186,7 +63158,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-10-28T20:07:05-04:00"
+      "modified_at": "2026-10-28T22:07:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -63238,9 +63210,9 @@
     },
     {
       "path": "/root/mgs-agent/data/runcloud-alert-state.json",
-      "size_bytes": 24545,
-      "md5": "ab4284ad542cd495b06c8b500839afb7",
-      "modified_at": "2026-10-28T20:04:41-04:00"
+      "size_bytes": 24544,
+      "md5": "482d51f51dd8bf1c56e8afe9655591e9",
+      "modified_at": "2026-10-28T22:04:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-keitaro-mct-state.json",
@@ -63256,9 +63228,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-broadcast-template-repair-state.json",
-      "size_bytes": 1049323,
-      "md5": "88198595618632673376920a41725b96",
-      "modified_at": "2026-10-28T11:45:21-04:00"
+      "size_bytes": 1049544,
+      "md5": "96ed99cbea36dcb9b8ef360d318ed312",
+      "modified_at": "2026-10-28T22:21:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-revenue-sheet-sync-state.json",
@@ -63268,9 +63240,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
-      "size_bytes": 98849,
-      "md5": "fdb61d663ff63d96a8e2a2751ddf162a",
-      "modified_at": "2026-10-28T20:12:14-04:00"
+      "size_bytes": 98863,
+      "md5": "c3e9253e43d434e02597942252e5bdc4",
+      "modified_at": "2026-10-28T22:12:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -63280,9 +63252,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 1100383,
-      "md5": "e0689b6e81e0ba2ba3ef913146077e83",
-      "modified_at": "2026-10-28T20:14:23-04:00"
+      "size_bytes": 1110240,
+      "md5": "061f5df325ad2f75f7b1edd875ca3820",
+      "modified_at": "2026-10-28T22:14:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-candidate-approval-config.json",
@@ -63348,7 +63320,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "76f0dd27d1cbc2a569d571d0fd2bf910",
-      "modified_at": "2026-10-28T20:21:01-04:00"
+      "modified_at": "2026-10-28T22:21:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -63358,9 +63330,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 17562,
-      "md5": "d450ebcd8d1b74e44e49bf3c4f942176",
-      "modified_at": "2026-10-28T19:24:06-04:00"
+      "size_bytes": 17685,
+      "md5": "dae6c1437917874d699b1c0045722e0d",
+      "modified_at": "2026-10-28T21:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -63394,9 +63366,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3660,
-      "md5": "93c6c4a568167162941d656d1053881a",
-      "modified_at": "2026-10-28T20:20:05-04:00"
+      "size_bytes": 3657,
+      "md5": "29182cf31de485f25a4ea1c44e81ff50",
+      "modified_at": "2026-10-28T22:20:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
@@ -63430,9 +63402,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 26469,
-      "md5": "b8e4c7fe3a225ed33db9fa9636d5eb61",
-      "modified_at": "2026-10-28T20:21:21-04:00"
+      "size_bytes": 26617,
+      "md5": "56458c053228195266433bb2d95db267",
+      "modified_at": "2026-10-28T20:21:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",
@@ -63457,42 +63429,6 @@
       "size_bytes": 13564,
       "md5": "afdcfc5959759a5106b8aab48e72b14a",
       "modified_at": "2026-10-09T11:42:46-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/tests/test_shein_report_intraday.py",
-      "size_bytes": 6327,
-      "sha256": "d73455ba2486e25fc3eb86eb4c761a91e4f5b82faf79f1ff529b8a2e9392303c",
-      "modified_at": "2026-10-28T20:19:05.073916-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/policies/shein-intraday-report.json",
-      "size_bytes": 3384,
-      "sha256": "08dd8c106c4510541b46d0a5d56727e36116c1394bac790e54d3ead1cb58eb7f",
-      "modified_at": "2026-10-28T20:27:39.329464-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
-      "size_bytes": 202182,
-      "sha256": "922e5855953604e55f51aa59017e44894de0fb812bbc79f2294c5dd0a2099a63",
-      "modified_at": "2026-10-28T20:27:39.225464-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/docs/CRONS.md",
-      "size_bytes": 51765,
-      "sha256": "fe42793e4c97654bdccf135794ba2051bd750c3a91af7448b24efc5d3eb3fc7a",
-      "modified_at": "2026-10-28T20:29:36.391588-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
-      "size_bytes": 11003,
-      "sha256": "1b6cf2dc9ca518a09542144e8d6eb30a8941d156a06fb2f987b08b02062738c1",
-      "modified_at": "2026-10-28T20:28:43.192532-04:00"
-    },
-    {
-      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
-      "size_bytes": 3747,
-      "sha256": "459e59d8b7f0ed786de8070eb694386ca9cfa066933181238716d17539bea0f9",
-      "modified_at": "2026-10-28T20:28:43.024531-04:00"
     }
   ],
   "mu_plugin_canonical": {
