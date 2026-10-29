@@ -58,8 +58,17 @@ class IntakeTests(unittest.TestCase):
   with self.assertRaises(self.a.IntakeError):self.a.validate_selftest_identity(config,raw,{**clean,'parents':['OPERATIONAL']},'a'*64)
   with self.assertRaises(self.a.IntakeError):self.a.validate_selftest_identity(config,raw,clean,'b'*64)
  def test_archive_completion_waits_for_every_verified_alias(self):
+  from unittest.mock import patch
   entry={'archive_source_ids':['rawOffline001','cleanOffline001']};index={'mappings':{'rawOffline001':{'verified':True,'stockShortcutId':'a'}}}
-  self.assertFalse(self.a.batch_archive_ready(entry,index));index['mappings']['cleanOffline001']={'verified':True,'stockShortcutId':'b'};self.assertTrue(self.a.batch_archive_ready(entry,index))
+  with patch('ares_archive_locations.active',return_value=False):
+   self.assertFalse(self.a.batch_archive_ready(entry,index));index['mappings']['cleanOffline001']={'verified':True,'stockShortcutId':'b'};self.assertTrue(self.a.batch_archive_ready(entry,index))
+ def test_active_layout_requires_every_real_stock_transfer(self):
+  from unittest.mock import patch
+  entry={'archive_source_ids':['rawOffline001','cleanOffline001']};index={'mappings':{sid:{'verified':True,'stockShortcutId':sid+'alias'} for sid in entry['archive_source_ids']}}
+  with patch('ares_archive_locations.active',return_value=True):
+   self.assertFalse(self.a.batch_archive_ready(entry,index))
+   for mapping in index['mappings'].values():mapping['stockTransferredToArchive']=True
+   self.assertTrue(self.a.batch_archive_ready(entry,index))
  def test_unsupported_file_cannot_be_described_as_creative(self):
   with self.assertRaises(self.a.IntakeError):self.a.describe({**self.row,'mimeType':'text/html'}, self.slot)
 if __name__=='__main__':unittest.main()
