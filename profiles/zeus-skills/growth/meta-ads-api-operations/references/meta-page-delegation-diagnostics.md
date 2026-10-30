@@ -83,6 +83,8 @@ When the owner supplies additional IDs, preserve the request identity and comple
 
 ## 5. Apply only missing, authorized assignments
 
+A local `ScopeError` before HTTP is not a Meta rejection. Ares's dependency guard intentionally permits only read-only Page inspection; a recorded Page-repair approval does not itself change that executor boundary. Preserve the guard and the campaign request, and use Zeus's separately authorized administrative route for the exact approved Page/actor/tasks. Do not broaden Ares's global scope, switch its production token, or retry the blocked POST through another Ares transport. Verify operational access with the unchanged corporate identity before returning Campaign Ops to Ares.
+
 1. Require a successful before-read for every approved target. Compare the latest assignments with the preflight snapshot just before the write; stop on unexplained drift.
 2. Preserve existing `MANAGE` assignments as complete Page management. Advertising-only approval uses the corresponding narrow task; an explicit full-management approval uses the validated set:
    `ADVERTISE`, `ANALYZE`, `CREATE_CONTENT`, `MANAGE`, `MANAGE_LEADS`, `MESSAGING`, `MODERATE`.

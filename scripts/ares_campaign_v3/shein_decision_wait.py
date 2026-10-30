@@ -69,7 +69,7 @@ def _unlocked(path):
     return True
 
 
-def evidence(base, value):
+def evidence(base, value, *, resume_request=None):
     """Validate only local pinned facts. No provider call or resource mutation."""
     request = value['request']; rid = request['request_id']; account = str(request['account'])
     rec = _read(record_path(base, rid))
@@ -109,9 +109,25 @@ def evidence(base, value):
             or any(x.get('account_id') != account or x.get('status') != 'PAUSED' for x in snapshots)):
         raise ValueError('decision-wait evidence mismatch; dependency retained')
     lease = _read(engine_root / 'writer-leases' / (account + '.json'))
-    # A new writer, even a different owner, prevents exemption. Never release it.
-    if (lease.get('account_id') != account or lease.get('status') != 'COMPLETE'
-            or lease.get('blocks_readers') is not False or not lease.get('released_at_utc')):
+    idle = (lease.get('status') == 'COMPLETE' and lease.get('blocks_readers') is False
+            and bool(lease.get('released_at_utc')))
+    # A persisted lease owned by this SAME resumable request is not a foreign
+    # writer. Blocking it here would deadlock its legitimate missing-only recovery.
+    # A concurrent process is still rejected by the real account lock below.
+    own_resume = False
+    if resume_request is not None:
+        resume_id = resume_request['request_id']
+        resume_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / resume_id / 'state.json'
+        if resume_path.exists():
+            resume_state = _read(resume_path)
+            own_resume = (lease.get('request_id') == resume_id and lease.get('blocks_readers') is True
+                and lease.get('status') in {'IN_PROGRESS', 'DEFERRED_QUOTA', 'READBACK_DEFERRED',
+                                            'RECOVERY_PENDING', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'}
+                and resume_state.get('request') == resume_request
+                and str(resume_request.get('account')) == account
+                and resume_state.get('phase') in {'ENGINE_PENDING', 'RECOVERY_PENDING',
+                    'POSTPROCESS_PENDING', 'GLOBAL_QA_COMPLETE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'})
+    if lease.get('account_id') != account or not (idle or own_resume):
         raise ValueError('decision-wait account writer lease is not released')
     return rec
 
@@ -119,7 +135,7 @@ def evidence(base, value):
 def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset()):
     """True only for an explicitly evidenced, disjoint-media, idle human wait."""
     try:
-        evidence(base, value)
+        evidence(base, value, resume_request=request)
         origin = value['request']; account = str(origin['account']); owner = origin['request_id']
         if (request.get('source_channel_id') != origin.get('source_channel_id')
                 or not selected_rows):

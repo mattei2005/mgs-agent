@@ -893,6 +893,35 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-top-hallazgos-shein-1565756297008381957",
+      "agent": "zeus",
+      "type": "exact_meta_page_permission_recovery",
+      "status": "page_access_verified_campaign_resumption_handed_to_ares",
+      "authorization_message_id": "1565759669216223353",
+      "handoff_source_message_id": "1565760290413613298",
+      "handoff_return_message_id": "1565761309855719606",
+      "source_thread_id": "1558133898209394780",
+      "request_id": "shein-1565756297008381957",
+      "business_id": "155263197283282",
+      "page_id": "651566168029395",
+      "system_user_id": "122095869861482193",
+      "account_id": "1829406761389732",
+      "granted_tasks": [
+        "ADVERTISE",
+        "ANALYZE"
+      ],
+      "permission_writes": 1,
+      "campaign_writes_by_zeus": 0,
+      "evidence_path": "/root/mgs-agent/data/ares/meta-ads/audit/shein/preflight-blockers/shein-1565756297008381957/zeus-admin-recovery.json",
+      "checkpoint_id": "zeus-top-hallazgos-shein-1565756297008381957",
+      "skill_reference": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/meta-page-delegation-diagnostics.md",
+      "validation": "admin assignment; assigned_pages; original corporate me/accounts and Page GET; unchanged other actors, Page ownership and source campaign",
+      "guard_credential_changes": false,
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1565761480199110657",
+      "ares_resumption_observed_message_id": "1565761342965817366"
+    },
+    {
       "id": "autopush-kanban-candidate-1565752426613702867",
       "actor": "zeus",
       "type": "autocommit_guardrail_recovery",
@@ -56721,6 +56750,94 @@
         "no_mentions": true,
         "verified_at": "2026-10-30T15:50:38.423801+00:00",
         "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565754746873188458"
+      }
+    },
+    {
+      "id": "shein-inert-review-queue-t_8e65299d",
+      "agent": "zeus",
+      "type": "central-shein-human-decision-wait-scheduling",
+      "status": "installed_dependency_ready_only_held_for_ares",
+      "updated_at": "2026-10-30T16:15:10.401460+00:00",
+      "task_id": "t_8e65299d",
+      "request_id": "shein-1565747351543480374",
+      "historical_request_id": "shein-1565261967260647536-c3",
+      "account_id": "937846586033361",
+      "operation": "SHEIN-US-DIRECT",
+      "authority": [
+        "context/routes.md#delegação-histórica-de-recovery-ares--zeus",
+        "kanban:t_8e65299d"
+      ],
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_request_queue.py",
+          "sha256": "c371bc80290a21178f5fdebc7cae4d84907fbc3ae8f459af1a2e0ccf618c328d",
+          "size_bytes": 30151
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_decision_wait.py",
+          "sha256": "c23117baea9c3a904550ebbe446813d4f3142120e91d8ec6da983ba5ba72c9bb",
+          "size_bytes": 7846
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_shein_decision_wait.py",
+          "sha256": "728ee969dc701f12d834319ecc49ee9c2df5f4c2d5cf20f7f121cd83813b4830",
+          "size_bytes": 15167
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/decision-waits/shein-1565261967260647536-c3.json",
+          "sha256": "497c521d7f70ac6a8b75dd34913192ae6111c68cb9e376bb5522422daab65daa",
+          "size_bytes": 1685
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-request-queue-decision-waits.md",
+          "sha256": "e426c957c15f749b4968cda37303b6571fa9b19ca85012ccac1d0c91fe58b1da",
+          "size_bytes": 5292
+        }
+      ],
+      "tests": {
+        "exit_code": 0,
+        "passed": 529,
+        "failed": [],
+        "subtests_passed": 322,
+        "files": 40,
+        "exclusions": [],
+        "module_origin_mismatch": {},
+        "external_network_attempts_blocked": 0,
+        "profile": "zeus"
+      },
+      "dependencies_readonly": [],
+      "media_readiness_verified": false,
+      "queue_attempts": 0,
+      "queue_maintenance_hold": true,
+      "foreground_handoff_executor": "ares",
+      "next_task": "t_8f7a90a8",
+      "original_input_sha256": "7ff01bbaa739f9422d869e6a0419ea8def04209ee9d9cc16fff9af9950844faf",
+      "historical_state_sha256": "27ac69eab06c0c3c0b50a88e96479011e104b767ba11e9e69076bcd0fbea86fb",
+      "historical_review": "UNANSWERED; 006/007 PAUSED; runner POSTPROCESS_PENDING preserved",
+      "meta_writes": 0,
+      "drive_writes": 0,
+      "uploads": 0,
+      "inventory_reservations": 0,
+      "credential_budget_strategy_guard_or_sla_changed": false,
+      "gateway_restart": false,
+      "queue_service": "ares-shein-request-queue.service; stopped idle worker, reloaded with durable hold",
+      "backup": "/root/mgs-agent/work/t_8e65299d/rollback",
+      "live_evidence": "/root/mgs-agent/work/t_8e65299d/live-readonly.json",
+      "rollback": "Keep durable hold and reconcile foreground ownership/effects before restoring original queue code. Never restore stale job or rewrite history; no deletion implied.",
+      "report_infra": {
+        "message_id": "1565761035963465729",
+        "channel_id": "1498132022634483894",
+        "author_id": "1496296175014252634",
+        "content_empty": true,
+        "one_embed": true,
+        "no_mentions": true,
+        "verified_at": "2026-10-30T16:16:55.541483+00:00",
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565761035963465729"
+      },
+      "worker_heartbeat_verified": {
+        "pid": 269269,
+        "heartbeat_at": "2026-10-30T16:16:41.130067+00:00",
+        "pending": 1
       }
     }
   ],

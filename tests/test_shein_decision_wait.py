@@ -98,6 +98,25 @@ class DecisionWaitTests(unittest.TestCase):
                                      'status': status, 'blocks_readers': True})
                 self.assertEqual(self.deps(), [self.owner])
 
+    def test_same_request_recovery_lease_does_not_deadlock_on_old_review(self):
+        resume = {'request': copy.deepcopy(self.request), 'phase': 'RECOVERY_PENDING'}
+        q.atomic(q.root(self.base) / 'single-clone' / self.rid / 'state.json', resume)
+        q.atomic(self.lease, {'account_id':'123','request_id':self.rid,'status':'DEFERRED_QUOTA','blocks_readers':True})
+        before = self.lease.read_bytes()
+        self.assertEqual(self.deps(),[])
+        self.assertEqual(before,self.lease.read_bytes())
+        with self.alock.open('rb') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX | fcntl.LOCK_NB)
+            self.assertEqual(self.deps(),[self.owner])
+
+    def test_same_lease_without_exact_resumable_request_fails_closed(self):
+        q.atomic(self.lease, {'account_id':'123','request_id':self.rid,'status':'IN_PROGRESS','blocks_readers':True})
+        self.assertEqual(self.deps(),[self.owner])
+        for change in [{'budget_usd':'999'}, {'account':'456'}]:
+            resume = {'request':{**self.request,**change},'phase':'RECOVERY_PENDING'}
+            q.atomic(q.root(self.base) / 'single-clone' / self.rid / 'state.json',resume)
+            self.assertEqual(self.deps(),[self.owner])
+
     def test_ambiguous_lease_blocks(self):
         for lease in [{}, {'account_id':'123','status':'COMPLETE','blocks_readers':False},
                       {'account_id':'other','status':'COMPLETE','blocks_readers':False,'released_at_utc':'yes'}]:
