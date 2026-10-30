@@ -893,6 +893,32 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "atena-technical-execution-guidance-1565562704972750939",
+      "agent": "zeus",
+      "type": "technical_access_documentation_and_context_refresh_assessment",
+      "authority_message_ids": ["1565561398765822093", "1565562704972750939", "1565562880479469590"],
+      "source_thread_id": "1565555821188878377",
+      "paths": [
+        "/root/.hermes/profiles/atena/SOUL.md",
+        "/root/mgs-agent/profiles/atena-soul.md",
+        "/root/mgs-agent/data/atena/editorial-manager-authority.json",
+        "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/cross-agent-session-policy-cutover.md"
+      ],
+      "registry_id": "ATENA-TECHNICAL-EXECUTION-GUIDANCE-1565562704972750939",
+      "evidence_dir": "/root/.hermes/profiles/zeus/work/atena-raquel-authority-1565555821188878377",
+      "documentation_validation": "16/16 consistency tests; SOUL live=mirror; protected sections preserved",
+      "access_granted": false,
+      "executor_implemented": false,
+      "gateway_restart": false,
+      "session_reset": false,
+      "context_refresh_assessment": "Five routed Discord sessions retain old stable policy; no validated in-place preserving reload found. No prompt/route/history mutation performed. Rodolfo will send the prepared source-reading instruction in the origin thread; conversational update is distinct from stable prompt replacement.",
+      "context_checkpoint": "ZEUS-ATENA-RAQUEL-CONTEXT-RELOAD-1565561398765822093",
+      "status": "documentation_completed_native_refresh_not_executed",
+      "report_infra_status": "delivered_readback_verified",
+      "report_infra_message_id": "1565563327051079711",
+      "report_infra_channel_id": "1498132022634483894"
+    },
+    {
       "id": "atena-raquel-always-loaded-authority-1565555821188878377",
       "agent": "zeus",
       "type": "authority_documentation_consistency_repair",

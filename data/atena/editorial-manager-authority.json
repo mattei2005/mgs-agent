@@ -137,6 +137,21 @@
     "exact_target_confirmation_authority": "Raquel Oliveira / 1496254952501280974",
     "permanent_scope_not_limited_to_manifest14": true
   },
+  "technical_execution_access_guidance": {
+    "status": "documented_recommendation_not_access_grant",
+    "authority_discord_id": "344196393512075265",
+    "documentation_authority_message_id": "1565562704972750939",
+    "source_thread_id": "1565555821188878377",
+    "question_message_id": "1565561614382407742",
+    "decision": "Distinguir autorização editorial de capacidade de manutenção. SSH com shell/PHP/WP-CLI validado na instalação correta pode remover o bloqueio de execução do reparo localizado. SFTP por si só não comprova essa capacidade. A API RunCloud só ajuda para instalação comprovadamente gerenciada ali e operação efetivamente suportada, não equivale a execução remota arbitrária.",
+    "recommended_architecture": "Executor restrito aos sites MGS e às operações editoriais necessárias, sem SSH administrativo amplo; identidade, domínio, servidor, webroot, usuário, menor operação, backup, canário, rollback admissível e readback comprovados antes do write.",
+    "discovery": "Consultar referências já permitidas no 1Password e as fontes canônicas; não expor credenciais, enumerar ativos privados ou inventar referência/acesso. Ausência de capacidade deve ser comunicada como dependência técnica concreta, sem reautorização editorial genérica.",
+    "access_granted": false,
+    "executor_implemented_by_this_instruction": false,
+    "credential_or_permission_change_authorized": false,
+    "protected_gates": "Conceder novo acesso, criar ou trocar credencial, elevar permissões ou implantar transporte executável exige decisão e confirmação específicas conforme AGENT.md; esta ordem aprova documentação, não implantação.",
+    "always_loaded_consumer": "/root/.hermes/profiles/atena/SOUL.md"
+  },
   "request_interpretation": {
     "status": "active",
     "ratified_by_discord_id": "344196393512075265",

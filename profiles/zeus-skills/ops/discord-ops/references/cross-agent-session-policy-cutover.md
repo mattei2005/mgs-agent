@@ -37,6 +37,10 @@ Do not use the agent's acknowledgement alone as proof that its system prompt con
 
 If either agent is false or missing, leave the gate open, report the exact missing evidence and stop. A gateway restart does not itself create a new conversation session, so another restart does not solve a missing session cutover.
 
+## Preserve-history refresh gate
+
+Before recommending a controlled context reload without restart or reset, prove that the installed owner exposes that exact operation and that it rebuilds the live session's stable prompt. Do not promise it from the existence of cache eviction, `/compress`, `/reload-mcp`, or a fresh-session loader. A detached gateway `/compress` may deliberately preserve the seeded old prompt, and a gateway restart alone may restore that snapshot. Asking the model to reread SOUL adds conversational evidence but does not prove replacement of the frozen stable prompt. If only a fresh-session boundary is validated and the approved scope excludes reset/rotation, preserve the session and report the exact capability gap before proposing a different cutover. Never emulate refresh by toggling model/workspace, rewriting session SQL directly, or resetting routes behind the user's back.
+
 ## Fleet-wide Discord route cutover
 
 A new canary proves only that new sessions load the policy. It does not protect existing Discord threads whose routes still point to a session created with the old prompt.
