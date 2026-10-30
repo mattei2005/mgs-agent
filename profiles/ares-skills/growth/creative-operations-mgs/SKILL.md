@@ -58,6 +58,8 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 
 ## Invariantes atuais de intake e naming
 
+- Quando o solicitante corrigir a origem ou disser que os criativos já estão na pasta do gestor, atualizar imediatamente o entendimento para **tratar os arquivos existentes**, sem anunciar nova entrega/movimentação como objetivo. Conferir a pasta exata, separar mídia pendente de assets já registrados e manter o destino solicitado; uma passagem técnica pelo intake, quando realmente necessária e comprovada pelo gate vivo, não muda o objetivo do pedido. Não prometer tratamento antes de validar o transporte necessário nem afirmar que o usuário precisa reenviar os arquivos quando basta movê-los.
+- Antes de abrir um novo lote para arquivos pendentes, consultar o checkpoint e o manifesto existentes e reconciliar o conjunto por IDs e hashes atuais. Uma nova thread ou a mesma quantidade de arquivos não prova lote novo: preservar o manifesto original quando os mesmos arquivos forem confirmados e registrar a nova origem de continuação separadamente, evitando outro executor ou linhagens duplicadas.
 - Entrada canônica: `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; `UPLOAD_CANVAS` é apenas histórico e não deve ser recriada.
 - `GEIZIAN` contém cópias de conveniência para upload do gestor e fica fora do pool/inventário canônico.
 - `LIBRARY META` contém referências; nunca é fonte automática de asset final.

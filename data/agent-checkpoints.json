@@ -1213,12 +1213,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1563285734503358485",
-      "next_step": "Nicolas mover os mesmos 25 arquivos para UPLOAD MANUAL/CC_US_EN/Nicolas (1uI9evhWywNLeBbTUmu78LCnMvU8XTRgq); retomar pelo manifesto, revalidar IDs/bytes/claims/estabilidade e seguir classificacao, limpeza, naming e entrega canonicos, sem OAuth alternativo.",
-      "objective": "Tratar 25 criativos US-CC-EN de Nicolas e entregar na pasta Nicolas preservando originais e reserva",
+      "next_step": "Nicolas mover os mesmos 25 arquivos para UPLOAD MANUAL/CC_US_EN/Nicolas (1uI9evhWywNLeBbTUmu78LCnMvU8XTRgq) e avisar na thread 1565540543457534103; retomar o manifesto original sem duplicar linhagens, revalidar IDs/hashes/claims/estabilidade e executar o intake canonico.",
+      "objective": "Tratar 25 criativos US-CC-EN de Nicolas preservando originais e reserva; continuacao solicitada na thread 1565540543457534103",
       "source": "/root/mgs-agent/data/ares/creative-ops/intake-1563285734503358485-resume.json",
-      "state": "bloqueio externo de origem: 25 arquivos novos ja no estoque nicolas, todos de propriedade do gestor; sa pode baixar 25/25 mas canmoveitemintoteamdrive=false em 25/25. estabilidade em 3 polls, download/md5 e probe reais concluidos: 2 img e 23 vid. nenhum write drive nem registro de candidato. manifesto retomavel persistido.",
+      "state": "revalidacao live do pedido 1565540543457534103: os mesmos 25 ids e sha256 do manifesto anterior permanecem na pasta de estoque nicolas; 2 img e 23 vid; canmoveitemintoteamdrive=false 25/25; slot registrado cc_us_en/nicolas vazio. zero alteracoes remotas. aguardando realocacao pelo proprietario.",
       "thread_id": "1563285734503358485",
-      "updated_at": "2026-10-23T20:24:36+00:00"
+      "updated_at": "2026-10-30T01:41:37+00:00"
     },
     {
       "agent": "ares",
@@ -7842,5 +7842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T01:38:26+00:00"
+  "updated_at": "2026-10-30T01:41:37+00:00"
 }
