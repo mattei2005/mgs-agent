@@ -32,6 +32,13 @@ def valid_observed(actual, expected):
     spec = actual.get('media_sourcing_spec')
     if spec is None:
         return expected.get('media_sourcing_spec') is None
+    # A pure clone may preserve a legacy text-only sourcing definition.
+    # Do not impose the new-media image recipe on an unchanged source;
+    # require the entire approved text package verbatim, with no extra media.
+    expected_spec = expected.get('media_sourcing_spec')
+    if (isinstance(expected_spec, dict) and expected_spec
+            and set(expected_spec) <= {'titles', 'bodies', 'descriptions'}):
+        return spec == expected_spec
     wanted = sourcing(expected)
     if not isinstance(spec, dict) or set(spec) - set(wanted):
         return False

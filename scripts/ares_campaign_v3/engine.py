@@ -749,7 +749,7 @@ class CampaignEngine:
                     if slot in known_creatives and str(known_creatives[slot]) != str(creative_id):
                         raise ExecutionFailed("existing-post recovery has conflicting persisted creative IDs")
                     known_creatives[slot] = str(creative_id)
-        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags"
+        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags"
         for ci, ai in ordered_slots:
             creative_id = str(known_creatives.get(f"{ci}.{ai}") or "")
             if creative_id:
