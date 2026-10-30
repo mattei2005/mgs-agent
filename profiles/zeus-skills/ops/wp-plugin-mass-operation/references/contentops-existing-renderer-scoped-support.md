@@ -5,6 +5,7 @@
 - Resolver `data/atena/editorial-manager-authority.json` e autenticar o pedido humano na origem antes do write. Uma dependência técnica já autorizada de Raquel não precisa de outra aprovação editorial genérica do CEO.
 - Manter Atena como coordenadora, dona do QA final e da planilha. Usar um executor por alvo, sem replay de publicação ou de caches concluídos.
 - Não interpretar a capacidade limitada da conta Editor como proibição de usar a identidade técnica Zeus já autorizada e existente. Validar as capacidades reais dessa identidade; nunca elevar Atena, trocar credenciais ou contornar `current_user_can`.
+- Antes de concluir que não há caminho de manutenção em Bitnami, confrontar a credencial editorial com o item canônico `Wordpress - <domínio exato>` no 1Password: confirmar por GET autenticado o papel e as capacidades e ler a URL de login cadastrada. Um 404 em `/wp-admin/` ou `/wp-login.php` não elimina uma entrada administrativa explicitamente cadastrada. O executor Zeus pode validar sua identidade técnica sem concedê-la à Atena; acesso administrativo confirmado ainda não certifica um transporte de reparo nem autoriza deploy/remoção de ferramenta temporária.
 
 ## Certificar origem e mecanismo
 
