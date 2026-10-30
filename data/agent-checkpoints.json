@@ -1702,6 +1702,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1565734667200630855",
+      "next_step": "Sem write pendente. Nao repetir criacao ou ativacao; consultas futuras usam IDs do recibo. Novo pedido recebe identidade nova.",
+      "objective": "Duplicar C305x5 C299x5 C301x5 C234x2 C194x2 C270x2 C164x2 Yolokfx02G006 USD40/dia 30/10/2026 10:50 America/New_York",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565734667200630855/final-verification.json",
+      "state": "complete_future_active_verified: c305->306-310;c299->311-315;c301->316-320;c234->321-322;c194->323-324;c270->325-326;c164->327-328. 23campanhas45ads active usd40cada usd920/dia lote. cost_cap0.85 fontes305/301,0.90 demais. qa renderizado23/23 e get final14:47:24z completo, ids iguais checkpoints; fontes budget/bid preservados, posts novos, warnings vazios. inicio30/10 10:50edt literal. serving nao comprovado.",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-10-30T14:47:52+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -7902,5 +7912,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T14:18:32+00:00"
+  "updated_at": "2026-10-30T14:47:52+00:00"
 }
