@@ -175,6 +175,36 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_active_sourcing_stage_and_rollback_exclusions(self):
+        ignored = [
+            "work/t_9bf5723f/stage/tests/test_private_backup_transport.py",
+            "work/t_9bf5723f/stage/tests/test_sb_token_ack_authorization.py",
+            "work/t_9bf5723f/stage/ares_campaign_v3/shein_general.py",
+            "work/t_9bf5723f/rollback/ares_campaign_v3/engine.py",
+        ]
+        included = [
+            "work/t_9bf5723f/baseline-hashes.json",
+            "work/t_9bf5723f/regression-stage.json",
+            "work/t_9bf5723f/stage-other/tests/test_private_backup_transport.py",
+            "work/t_9bf5723f/rollback-other/ares_campaign_v3/engine.py",
+            "work/other/stage/tests/test_private_backup_transport.py",
+            "work/other/rollback/ares_campaign_v3/engine.py",
+            "tests/test_private_backup_transport.py",
+            "scripts/ares_campaign_v3/engine.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

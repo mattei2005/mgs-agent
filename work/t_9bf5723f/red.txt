@@ -1,0 +1,22 @@
+......F                                                        [100%]
+=================================== FAILURES ===================================
+__ SourcingCompilerTests.test_image_compiler_explicit_exact_primary_sourcing ___
+
+self = <test_shein_image_sourcing.SourcingCompilerTests testMethod=test_image_compiler_explicit_exact_primary_sourcing>
+
+    def test_image_compiler_explicit_exact_primary_sourcing(self):
+        r,s,a,_=ImageTests().fixture()
+        before=copy.deepcopy(s)
+        payload=shein_general.build(r,s,114,a)
+        for slot in payload['campaigns'][0]['ads']:
+            cp=slot['creative_payload']; ld=cp['object_story_spec']['link_data']
+>           self.assertEqual(cp['media_sourcing_spec'], {
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+                'images':[{'hash':ld['image_hash'],'source':'multi_media','opt_in_status':'opt_in'}],
+                'titles':[{'text':ld['name']}], 'bodies':[{'text':ld['message']}]})
+E           KeyError: 'media_sourcing_spec'
+
+work/t_9bf5723f/stage/tests/test_shein_image_sourcing.py:20: KeyError
+=========================== short test summary info ============================
+FAILED work/t_9bf5723f/stage/tests/test_shein_image_sourcing.py::SourcingCompilerTests::test_image_compiler_explicit_exact_primary_sourcing
+1 failed, 6 passed, 10 subtests passed in 0.14s

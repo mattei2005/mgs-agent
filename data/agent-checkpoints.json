@@ -1713,12 +1713,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1565747351543480374",
-      "next_step": "prepare-media real, dry-run, executor central, QA renderizado integral e readback ACTIVE",
+      "next_step": "Após handoff central validado t_9bf5723f, reconciliar008/009 e recuperar sóads ausentes, concluir8/16 com QA renderizado/readbackACTIVE e resposta origem.",
       "objective": "Concluir oito clones IMG da002 Mavroa no pedido original Nicolas",
-      "source": "kanban:t_8f7a90a8;discord:1565747351543480374;confirmation:1565762561146757334",
-      "state": "retomada foreground após dependências instaladas; mesmo request/input/sla; 8xusd25 cost_cap95 16img. histórico006/007 permanece fora do escopo.",
+      "source": "kanban:t_8f7a90a8;kanban:t_9bf5723f;work/t_8f7a90a8/live-partial-img-copy.json",
+      "state": "recovery_pending; prepare-media16 e dry-run8 reais ok. meta4931013 na montagem img.008/009 ids120250943717650629/120250943717660629 paused usd25/cost_cap95 zeroads por get; seis restantes não tentadas. histórico006/007 paused. parent manutenção t_9bf5723f; mesmo request/input/manifests/sla/reservas.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T16:25:07+00:00"
+      "updated_at": "2026-10-30T16:30:12+00:00"
     },
     {
       "agent": "ares",
@@ -2939,6 +2939,16 @@
       "state": "complete_activated: 100/100 active por get final; budgets/lances/programação/filhos preservados",
       "thread_id": "1558134300325716050",
       "updated_at": "2026-10-23T04:20:06+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "SHEIN-IMG-SOURCING-t_9bf5723f",
+      "next_step": "Patch/testes offline e readback de recovery mesma request/IDs",
+      "objective": "Corrigir contrato IMG sourcing central sem writes Meta/Drive nem reescrever manifest selado",
+      "source": "kanban:t_9bf5723f;Ares:t_8f7a90a8",
+      "state": "in_progress",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-10-30T16:33:34+00:00"
     },
     {
       "agent": "zeus",
@@ -7323,12 +7333,12 @@
     {
       "agent": "ares",
       "id": "shein-1565756297008381957",
-      "next_step": "Respeitar 305s e retomar mesmo runner readback-first; falta bundle3 e QA/ativação de todos; não repetir copies",
+      "next_step": "Pedido concluído; informar Kelly na thread original. Não reexecutar nem reativar por replay; futuros pedidos equivalentes da Page sem nova aprovação de delegação conforme contrato.",
       "objective": "C04 x5 Mavroa G005; USD100/dia cada; COCAP USD0.70; NOW 30/10",
-      "source": "discord:1185714635991679006/1558133898209394780/1565761309855719606",
-      "state": "engine_running: bundle1 readback concluído; bundle2 children confirmados aguardam janela de readback. ids preservados no checkpoint core; campanhas paused até qa do lote inteiro",
+      "source": "discord:1185714635991679006/1558133898209394780/1565756297008381957",
+      "state": "complete_verified: campanhas 009–013 active, 5 conjuntos active e 10 anúncios active; usd100/dia cada, cost_cap e bid_amount70 em todos; qa semântico/renderizado cobre cada árvore; ids core=ativação; fonte c04 active usd20 maxvol inalterada. lote usd500/dia, total ativo conta usd660/dia segundo meta. posts novos; meta omitiu flags opcionais age/gender, ressalva preservada. recibo final-verification.json no audit original.",
       "thread_id": "1558133898209394780",
-      "updated_at": "2026-10-30T16:23:26+00:00"
+      "updated_at": "2026-10-30T16:32:03+00:00"
     },
     {
       "agent": "zeus",
@@ -7972,5 +7982,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T16:25:07+00:00"
+  "updated_at": "2026-10-30T16:33:34+00:00"
 }

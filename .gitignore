@@ -133,3 +133,8 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # runtime source tree. Keep evidence siblings and production paths versioned.
 /work/t_7ab9e9ba/candidate/
 
+# Active SHEIN sourcing recovery: keep offline source copies local. Evidence
+# siblings remain versioned; no sensitive-path exception is granted.
+/work/t_9bf5723f/stage/
+/work/t_9bf5723f/rollback/
+
