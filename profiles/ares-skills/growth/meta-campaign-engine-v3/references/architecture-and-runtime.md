@@ -57,6 +57,14 @@ Para `clone_prestaged`, registre somente IDs confirmados por Meta readback no ed
 
 Never put token, app secret, Page token or signed URL in the registry.
 
+## Readiness do Chromium de QA
+
+- Não trate a existência de `DevToolsActivePort` como readiness. O Chromium pode criar o arquivo vazio e completar a escrita depois. O launcher central `preview_renderer.py` deve aguardar exatamente porta ASCII válida (1–65535) + caminho completo do browser, consultar `/json/version` em loopback e conferir que o WebSocket corresponde ao mesmo host/porta/browser antes do attach.
+- Reutilize um deadline monotônico único para arquivo e endpoint: conteúdo vazio/parcial, leitura transitória e listener ainda indisponível recebem espera bounded; processo morto ou prazo vencido falham fechado, mantendo a ativação PAUSED. Não aumente o timeout nem afrouxe gates de mídia/URL para mascarar readiness.
+- Preserve o `finally` do launcher: sinalizar somente o process group criado com `start_new_session`, fazer wait/reap e só então limpar seu perfil temporário. Nunca apagar runtime instalado, perfil persistente, cookies ou processos de terceiros para resolver QA. Teste arquivo vazio→válido, escrita parcial, porta inválida, morte durante startup, timeout, endpoint divergente e cleanup/reap com Chromium real local.
+- Trate essa correção como manutenção separada, com backup, CAS/locks, nenhuma campanha-canário e regressão completa IMG/VID/QA/activation em staging e instalada. Uma falha de startup não comprova defeito da campanha nem explica sufixos de nomes da Meta. Preserve o primeiro recibo de falha mesmo quando a bateria repetir verde sem alteração.
+- Em publicação atômica de módulo único, use candidato com extensão `.tmp`, fora do glob `*.py` usado para CAS/inventário. Se uma tentativa parar antes do replace, releia o arquivo instalado e o hash do candidato antes de reaproveitar a mesma publicação; não descarte backup nem sobrescreva mudanças concorrentes.
+
 ## Security
 
 - Resolve credential type/reference from the registered account and operation; SHEIN corporate System User and advertiser User Access Tokens are not interchangeable fallbacks.

@@ -12355,6 +12355,24 @@
       "updated_at": "2026-09-17T02:40:50+00:00"
     },
     {
+      "canonical_key": "ares.campaign-engine.chromium-readiness",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/architecture-and-runtime.md",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-10-30T18:23:34+00:00",
+      "id": "PROC-ARES-CHROMIUM-READINESS",
+      "kind": "procedure",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Readiness bounded e cleanup do Chromium de QA",
+      "updated_at": "2026-10-30T18:23:34+00:00"
+    },
+    {
       "canonical_key": "procedure.meta.b011-bm-capability-watch",
       "canonical_source": "profiles/zeus-skills/growth/meta-app-rate-limit-monitor/references/route-pack-04.md",
       "consumers": [
@@ -15616,5 +15634,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T17:00:21+00:00"
+  "updated_at": "2026-10-30T18:23:34+00:00"
 }

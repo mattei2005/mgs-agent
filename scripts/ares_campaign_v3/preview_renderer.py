@@ -1,6 +1,7 @@
 """Read-only isolated Chromium renderer. Signed preview URLs stay in memory."""
 from __future__ import annotations
 import json
+import re
 import os
 import signal
 import subprocess
@@ -10,6 +11,59 @@ from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import urlopen
 import sys
+
+
+def _wait_for_browser(proc, portfile, timeout):
+    """Wait for a complete port file AND its matching live loopback endpoint.
+
+    Chromium creates DevToolsActivePort before finishing its write. File
+    existence alone is not readiness; partial/empty reads and a listener that
+    isn't accepting requests yet must share the same bounded startup budget.
+    """
+    deadline = time.monotonic() + timeout
+    browser_path = re.compile(
+        r'/devtools/browser/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-'
+        r'[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    )
+    while True:
+        if proc.poll() is not None:
+            raise ValueError('media QA renderer exited before readiness')
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise ValueError('media QA renderer startup timed out')
+        try:
+            lines = portfile.read_text(encoding='utf-8').splitlines()
+            if (len(lines) != 2 or not re.fullmatch(r'[0-9]{1,5}', lines[0])
+                    or not 1 <= int(lines[0]) <= 65535
+                    or not browser_path.fullmatch(lines[1])):
+                raise ValueError('incomplete DevTools endpoint')
+            port = int(lines[0])
+            # Recompute after the read so no probe starts with an expired budget.
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise ValueError('startup budget exhausted')
+            with urlopen(f'http://127.0.0.1:{port}/json/version',
+                         timeout=min(5, remaining)) as response:
+                browser = json.load(response)
+            endpoint = urlparse(browser.get('webSocketDebuggerUrl', '')
+                                if isinstance(browser, dict) else '')
+            if (endpoint.scheme != 'ws' or endpoint.hostname != '127.0.0.1'
+                    or endpoint.port != port or endpoint.path != lines[1]
+                    or endpoint.username is not None or endpoint.password is not None
+                    or endpoint.query or endpoint.fragment):
+                raise ValueError('DevTools endpoint mismatch')
+        except (OSError, ValueError, TypeError, AttributeError):
+            # Retry only readiness failures; never loosen URL/media/activation gates.
+            pass
+        else:
+            if proc.poll() is not None:
+                raise ValueError('media QA renderer exited before readiness')
+            if time.monotonic() < deadline:
+                return browser
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise ValueError('media QA renderer startup timed out')
+        time.sleep(min(.1, remaining))
 
 
 def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_video=None, python_path=None):
@@ -32,11 +86,7 @@ def render_previews(urls, *, chrome_path, timeout=35, allow_local=False, expect_
     with tempfile.TemporaryDirectory(prefix='ares-media-qa-',dir=root) as directory:
         proc=subprocess.Popen([chrome_path,'--headless=new','--no-sandbox','--disable-dev-shm-usage','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--user-data-dir='+directory,'about:blank'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
         try:
-            portfile=Path(directory)/'DevToolsActivePort';deadline=time.monotonic()+timeout
-            while not portfile.exists():
-                if proc.poll() is not None or time.monotonic()>deadline:raise ValueError('media QA renderer startup failed')
-                time.sleep(.1)
-            port=int(portfile.read_text().splitlines()[0]);browser=json.load(urlopen(f'http://127.0.0.1:{port}/json/version',timeout=5))
+            browser=_wait_for_browser(proc,Path(directory)/'DevToolsActivePort',timeout)
             with connect(browser['webSocketDebuggerUrl'],open_timeout=5,max_size=8*1024*1024) as ws:
                 sequence=0
                 def call(method,params=None,session=None):

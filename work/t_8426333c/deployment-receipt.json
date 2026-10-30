@@ -1,0 +1,24 @@
+{
+  "task_id": "t_8426333c",
+  "at": "2026-10-30T18:22:11.866369+00:00",
+  "atomic_file_replace": true,
+  "locks": [
+    "task-publish",
+    "original-account",
+    "original-request"
+  ],
+  "active_central_writers": 0,
+  "changed_runtime_files": {
+    "/root/mgs-agent/scripts/ares_campaign_v3/preview_renderer.py": "93971e8c06b52c5c17989c05286f79c7a020e85b53de9c6d27289f1e19dc7972"
+  },
+  "tests": {
+    "/root/mgs-agent/tests/test_preview_renderer_readiness.py": "b82943be9b006239f2e445ba72f6911b8b14d43aa97a330556278e05b3b9f579"
+  },
+  "backup": "/root/mgs-agent/work/t_8426333c/backup/preview_renderer.py",
+  "backup_sha256": "98aea6d76f03469dde3386645562fbac87aa45e6818f5f2a266e4ff45f9465b5",
+  "other_package_modules_unchanged": true,
+  "protected_files_unchanged": 31,
+  "gateway_restart": false,
+  "meta_writes": 0,
+  "drive_writes": 0
+}

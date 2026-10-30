@@ -122,6 +122,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CHROMIUM-t_8426333c",
+      "next_step": "Sem pendência operacional; rollback restrito ao launcher somente se necessário e após reconciliação. Campanhas permanecem fora deste pedido.",
+      "objective": "Endurecer readiness Chromium no launcher central sem campanha-canário",
+      "source": "work/t_8426333c/report.md",
+      "state": "completed",
+      "thread_id": "kanban:t_8426333c",
+      "updated_at": "2026-10-30T18:25:10+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-COMPLETION-HANDOFF-1560692876453748739",
       "next_step": "Handoff normal permanece automatico. C092 requer decisao especifica de ativacao tardia; nao promover resposta parcial nem ignorar origem; sem callback/transporte novo e sem visitas adicionais.",
       "objective": "Garantir passagem automatica somente apos conclusao genuina e entrega nativa, sem ampliar para ativacao Meta",
@@ -5533,12 +5543,12 @@
     {
       "agent": "atena",
       "id": "atena-seo-plan-1564289742567112795",
-      "next_step": "Integrar reviewindependente e corrigir achados; rerodar lint/testes exatos e empacotar. Apresentar UMA decisao critica para instalar/executar/remover somente novo componente5PHP nos2alvos comcanario/rollback/WP2FAfinally, sem novoOKeditorial. Nao declarar lote/reparoencerrados; nao reutilizar nucleo reprovado.",
-      "objective": "Continuar reparo original: preparar metodo novo completo/certificavel para home243e3, sem nova implantacao ainda",
+      "next_step": "Integrar revisaofinal; corrigir/rerodarlint/testes e congelarZIP/hash. Depois UMA decisao para ciclo instalar/executar/remover7PHP e journalsprivados/tmp/mgs-home-native-repair-1565779533217407047-DOMINIO/prepared.json, canario/restauracao/QA. Nao convalidar recuperacaoremotacomtesteslocais, nao repetirinspecao/SSH/publicacoes, nao executarsemconfirmacao do novo transporte.",
+      "objective": "Preparar reparo original completo, integrar revisoes e apresentar uma decisao critica exata; nao encerrar lote",
       "source": "/root/.hermes/profiles/atena/work/seo100-1564353146120310928/repair-method-1565779533217407047/METHOD.md",
-      "state": "preparacao1565779533217407047: cincophpnovos, backupsreaisreusados;4fontesadicionaiscallbacks/version obtidasreadonly (sem repetirinspecao/ssh). callbacks retornamcedo parahome, semunhook. dbnativomariadb12.0.2/11.1.3 porabilityreadonly. metodo comengine/triggers/visibilidade/fontes/versoes anteswrite, rowlock/cas, probesavepointrollback,1watcher, guardsql, restorehmac e cachefinally. lint7php e58testeslocaispass; recuperacaoremotanaocertificada. reviewindependente deleg_f044c3f7 emexecucao. nenhuma nova mutacao/implantacao; inspeccao2/2limpeza preservadas; item3pausado.",
+      "state": "review1 encontrou bloqueadores concretos e foram tratados emv2novo: fontewpdbrealfixada, boundwpdbmesmohandle semreconnect/replay e placeholdercorepreservado; sqlmodes/readsrestritos; readcommitted+inputlocks+readbackfresco; journalprivadofsyncbeforecommit e recuperacaosemresposta; triggersvisiveis+accepted_args. pacote7php;83testeslocais e lint12phppassaram. segundarevisao deleg_6dc21231 despachada, aguardando retornoautomatico. sem novaimplantacao/write; fontesreadonlyreusadas; inspect2/2fechada; wp2fasem suspensaopropriaaberta; item3pausado.",
       "thread_id": "1564289742567112795",
-      "updated_at": "2026-10-30T17:49:35+00:00"
+      "updated_at": "2026-10-30T18:25:02+00:00"
     },
     {
       "agent": "atena",
@@ -8012,5 +8022,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T18:15:00+00:00"
+  "updated_at": "2026-10-30T18:25:10+00:00"
 }
