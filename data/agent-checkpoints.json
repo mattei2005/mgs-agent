@@ -4693,12 +4693,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-YOAST-HOME-ACCESS-1565709978688294963",
-      "next_step": "Atena valida acesso permitido e prepara plano exato; confirmacao critica de ferramenta temporaria e limpeza continua pendente. Zeus nao executa reparo. Handoff 1565717126432423967 na origem 1564289742567112795. Fincgriffin pausado.",
-      "objective": "Orientar Atena para o reparo Yoast em Openzed/Cliquet; Atena e a unica executora e dona do QA, sem writer Zeus",
+      "next_step": "Atena procura referencia SSH autorizada vinculada aos alvos e valida somente leitura; se utilizavel executa reparo ja autorizado com backup recuperacao canario QA. Nao instalar plugin por inferencia. Gates criticos preservados e Fincgriffin pausado.",
+      "objective": "Orientar Atena para resolver autonomamente a dependencia Yoast nos dois sites, priorizando SSH existente e sem writer/aprovacao rotineira Zeus",
       "source": "data/zeus/yoast-home-repair-access-1565709978688294963.json",
-      "state": "technical_guidance_delivered_exact_readback_verified_atena_owns_execution_repair_not_claimed",
+      "state": "ssh_first_autonomous_instruction_delivered_exact_readback_1565729087589187587_repair_not_verified",
       "thread_id": "1565555821188878377",
-      "updated_at": "2026-10-30T13:21:48+00:00"
+      "updated_at": "2026-10-30T14:09:03+00:00"
     },
     {
       "agent": "zeus",
@@ -7892,5 +7892,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T13:29:12+00:00"
+  "updated_at": "2026-10-30T14:09:03+00:00"
 }
