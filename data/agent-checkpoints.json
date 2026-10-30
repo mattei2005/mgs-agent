@@ -1713,12 +1713,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1565747351543480374",
-      "next_step": "Aguardar decisão humana específica sobre os dois deltas de público em008-015 na origem. Revalidar pergunta/resposta/autoridade e capacidade central restrita antes de continuar QA/ativação dos mesmos IDs; não aplicar review histórico004/005, não recriar ou ativar006/007. Retomar apenas camada autorizada faltante após capacidade comprovada.",
+      "next_step": "Após handoff seco manutenção central t_fc58be96(parent), conferir recibos/descriptor real read-only para review atual separado; retomar unicamente rota central QA16/postprocess/activate_verified/readback ACTIVE mesmos IDs. Não pedir nova aprovação,não executar prepare-media/reupload/reseal,recriar ou tocar006/007. Responder resultado final na origem e validarGET.",
       "objective": "Concluir oito clones IMG da002 Mavroa no pedido original Nicolas",
-      "source": "kanban:t_8f7a90a8;work/t_8f7a90a8/live-eight-paused-targeting-gate.json;work/t_8f7a90a8/targeting-live-before-repair.json;work/t_8f7a90a8/targeting-review-question-readback.json",
-      "state": "waiting_material_targeting_review; sourcing recuperado pelo core. oito008-015 paused/16ads reais; usd25cada/usd200lote cost_cap95.008/009 ids preservados. get completo:8 conjuntos user_age_unknown false->true e individual_setting.device1 ausente vs002.16 media/copy/tracking match;qa renderizado/ativação não concluídos.006/007paused e fonte intactas. review específico enviado1565772061119348747 get-validado. mesmo request/manifests/reservas/sla; sem replay/upload.",
+      "source": "kanban:t_8f7a90a8;kanban:t_fc58be96;work/t_8f7a90a8/current-review-readback.json;work/t_8f7a90a8/review-resume-live-readback.json",
+      "state": "decisao humana resolvida: rodolfo1565779731440468199 reply1565772455606493268 aceita concluir008-015 no estado informado(idade desconhecida true/device ausente).get mensagens/autor/reply+autoridade nicolas forcepass. get atual8campaigns/8adsets/16ads paused,ids preservados,usd25cada/cost_cap95/usd200lote. gate exclusivamente técnico: shein_reviewed_targeting hardcoded004/005,rejeita binding atual. sem writes;qa renderizado/ativação pendentes;mesmo request/manifests/sla.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T16:59:35+00:00"
+      "updated_at": "2026-10-30T17:33:31+00:00"
     },
     {
       "agent": "ares",
@@ -7992,5 +7992,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T17:29:22+00:00"
+  "updated_at": "2026-10-30T17:33:31+00:00"
 }
