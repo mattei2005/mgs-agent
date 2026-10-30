@@ -1475,10 +1475,22 @@
       "size_bytes": 13564
     },
     {
-      "id": "ATENA-WP2FA-TEMP-MAINTENANCE-1565771648945102909",
       "agent": "zeus",
+      "authority_message_id": "1565771648945102909",
+      "backup": "/root/.hermes/profiles/zeus/work/wp2fa-authority-1565771648945102909/before",
       "execution_owner": "atena",
-      "type": "permanent_scoped_authorization",
+      "guidance_message_id": "1565772574577791048",
+      "hashes": {
+        "/root/.hermes/profiles/atena/SOUL.md": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e",
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/bitnami-mu-plugin-deploy.md": "116428fe5350c227c905ae4ec5c8e87b0249afbbd4b85c2f439deeb660b15134",
+        "context/contentops-technical-execution.md": "0c76f585ff05940d0e15997aa43a95b4ab5c9c27fc57fa8c33383d1801db1631",
+        "context/permissions-matrix.md": "698cfab6eb7b98cc1ea3d9fa2c4119b324d6b0f4b8f36030ac0b7257df1fa395",
+        "data/atena/editorial-manager-authority.json": "1509a87fb3324989cac7601781f864193db957844431a163544e200b9478eb3f",
+        "data/authorized-users.json": "3653c72566d545b14507921ddd5b82b31f0d1c58d6f2a919c284a9552e5181bf",
+        "profiles/atena-soul.md": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e"
+      },
+      "id": "ATENA-WP2FA-TEMP-MAINTENANCE-1565771648945102909",
+      "operational_thread_id": "1564289742567112795",
       "path": "data/atena/editorial-manager-authority.json#/wp2fa_temporary_maintenance",
       "related_paths": [
         "data/atena/editorial-manager-authority.json",
@@ -1489,34 +1501,21 @@
         "context/contentops-technical-execution.md",
         "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/bitnami-mu-plugin-deploy.md"
       ],
-      "authority_message_id": "1565771648945102909",
-      "thread_id": "1565555821188878377",
-      "operational_thread_id": "1564289742567112795",
-      "guidance_message_id": "1565772574577791048",
-      "status": "authorization_persisted_and_handoff_verified_execution_pending",
       "scope": "Only indispensable temporary WP2FA suspension for approved ContentOps, one permitted site at a time; mandatory finally reactivation/readback; no factor or identity change",
+      "status": "authorization_persisted_and_handoff_verified_execution_pending",
+      "thread_id": "1565555821188878377",
+      "type": "permanent_scoped_authorization",
+      "updated_at": "2026-10-30T17:01:53.737293+00:00",
       "validation": "Only approved authority object and scoped authorization pointer added; user lists and all other authorization data unchanged; SOUL mirror equal and native loaded without truncation; unique active registry policy; exact Discord handoff readback",
-      "backup": "/root/.hermes/profiles/zeus/work/wp2fa-authority-1565771648945102909/before",
-      "hashes": {
-        "data/atena/editorial-manager-authority.json": "1509a87fb3324989cac7601781f864193db957844431a163544e200b9478eb3f",
-        "data/authorized-users.json": "3653c72566d545b14507921ddd5b82b31f0d1c58d6f2a919c284a9552e5181bf",
-        "profiles/atena-soul.md": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e",
-        "/root/.hermes/profiles/atena/SOUL.md": "ce8c26cf765b3f49598130077c83b4e3d2f681b5fdf8577851e5a2ec1ad93a0e",
-        "context/permissions-matrix.md": "698cfab6eb7b98cc1ea3d9fa2c4119b324d6b0f4b8f36030ac0b7257df1fa395",
-        "context/contentops-technical-execution.md": "0c76f585ff05940d0e15997aa43a95b4ab5c9c27fc57fa8c33383d1801db1631",
-        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/bitnami-mu-plugin-deploy.md": "116428fe5350c227c905ae4ec5c8e87b0249afbbd4b85c2f439deeb660b15134"
-      },
-      "website_mutations_by_zeus": 0,
-      "updated_at": "2026-10-30T17:01:53.737293+00:00"
+      "website_mutations_by_zeus": 0
     },
     {
-      "id": "ATENA-YOAST-CONTINUATION-1565779333296165029",
       "agent": "zeus",
-      "type": "checkpoint_and_verified_handoff",
-      "execution_owner": "atena",
       "authority_message_id": "1565779333296165029",
-      "thread_id": "1565555821188878377",
+      "evidence": "Inspection finished; native live checks: temporary component absent both, Openzed WP2FA active, Cliquet baseline inactive, six normal URLs200 and18 legacy resource fields. Next technical preparation explicitly sent/read back; no new protected write approved.",
+      "execution_owner": "atena",
       "guidance_message_id": "1565779533217407047",
+      "id": "ATENA-YOAST-CONTINUATION-1565779333296165029",
       "operational_thread_id": "1564289742567112795",
       "path": "data/agent-checkpoints.json",
       "related_paths": [
@@ -1524,7 +1523,8 @@
         "data/zeus/yoast-home-repair-access-1565709978688294963.json"
       ],
       "status": "next_step_delivered_verified_not_repair_completion",
-      "evidence": "Inspection finished; native live checks: temporary component absent both, Openzed WP2FA active, Cliquet baseline inactive, six normal URLs200 and18 legacy resource fields. Next technical preparation explicitly sent/read back; no new protected write approved.",
+      "thread_id": "1565555821188878377",
+      "type": "checkpoint_and_verified_handoff",
       "updated_at": "2026-10-30T17:29:44.670005+00:00"
     }
   ],
@@ -59260,6 +59260,139 @@
       },
       "type": "central-shein-image-sourcing-maintenance",
       "updated_at": "2026-10-30T16:50:32.534726+00:00"
+    },
+    {
+      "account_id": "937846586033361",
+      "adset_ids": [
+        "120250943718090629",
+        "120250943718150629",
+        "120250944873460629",
+        "120250944873500629",
+        "120250944887140629",
+        "120250944887050629",
+        "120250944899210629",
+        "120250944899160629"
+      ],
+      "agent": "zeus",
+      "approved_targeting_deltas": [
+        "user_age_unknown:false->true",
+        "targeting_automation.individual_setting:{device:1}->absent"
+      ],
+      "batch_budget_usd": "200",
+      "bid_amount": 95,
+      "bid_strategy": "COST_CAP",
+      "binding_digest": "ce9bee4f8bab7d889dff36bb73f1f73f3b7330afd7d1a1f7552ee37099459df3",
+      "budget_usd_each": "25",
+      "campaign_ids": [
+        "120250943717650629",
+        "120250943717660629",
+        "120250944872190629",
+        "120250944872210629",
+        "120250944885400629",
+        "120250944885370629",
+        "120250944897280629",
+        "120250944897250629"
+      ],
+      "credentials_guards_budgets_source_schedule_sla_changed": false,
+      "descriptor": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/continuations/shein-1565747351543480374-review-1565779731440468199.json",
+      "descriptor_sha256": "cd5eb809237305eea55becdd565b4bdd711d5c6ed725177d2ad7a7bf66100411",
+      "drive_writes": 0,
+      "evidence": "/root/mgs-agent/work/t_fc58be96/report.md",
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_reviewed_targeting.py",
+          "sha256": "901d3089e3ca926b05d017ee2341532fd65ed77770316ce54dd72937bace2193",
+          "size_bytes": 10896
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_reviewed_img.py",
+          "sha256": "cac9e637ea92b01bb86545800d64c5fa845c3b87b006ee96e66bcb0abeb24427",
+          "size_bytes": 9137
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py",
+          "sha256": "ed1996ed70d0b80dfa532fa512ebae6c24a100b29cfb0590c3262d8e9b9ced9d",
+          "size_bytes": 74729
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_shein_reviewed_img.py",
+          "sha256": "f03af75501231662919a9f04f60cf74160b1d7195dc7b7037c83c3e8c5556242",
+          "size_bytes": 12009
+        },
+        {
+          "path": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/continuations/shein-1565747351543480374-review-1565779731440468199.json",
+          "sha256": "cd5eb809237305eea55becdd565b4bdd711d5c6ed725177d2ad7a7bf66100411",
+          "size_bytes": 12816
+        }
+      ],
+      "gateway_restart": false,
+      "hotspots": [
+        "scripts/ares_campaign_v3/shein_reviewed_targeting.py",
+        "scripts/ares_campaign_v3/shein_single_clone.py"
+      ],
+      "id": "shein-exact-img-review-t_fc58be96",
+      "learning": {
+        "ares_skills_edited": false,
+        "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-static-image-prestage.md",
+        "profile": "zeus",
+        "readback_and_mirror_equal": true,
+        "sha256": "7ff8f8f0d1b077ddaf6c329240c7e4553abdbe76f7c7ded329798221c5e2dc18"
+      },
+      "manifest_edits": 0,
+      "meta_writes": 0,
+      "next_owner": "ares",
+      "next_task": "t_8f7a90a8",
+      "operation": "SHEIN-US-DIRECT",
+      "qa_proof_fabricated": false,
+      "read_only_real": {
+        "ads": 16,
+        "adsets": 8,
+        "all_paused": true,
+        "campaigns": 8,
+        "http_requests": 10,
+        "negative_checks": 48,
+        "profile": "ares"
+      },
+      "real_readonly_receipt": "/root/mgs-agent/work/t_fc58be96/real-readonly-installed.json",
+      "regression": {
+        "exclusions": [],
+        "exit_code": 0,
+        "external_network_attempts_blocked": 0,
+        "failed": [],
+        "files": 43,
+        "installed": true,
+        "module_origin_mismatch": {},
+        "passed": 553,
+        "profile": "ares",
+        "subtests_passed": 419
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "duplicate_post": false,
+        "embeds": 1,
+        "mentions": 0,
+        "message_id": "1565783721876000832",
+        "readback_verified": true,
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565783721876000832"
+      },
+      "request_id": "shein-1565747351543480374",
+      "request_state_edits": 0,
+      "reservations": 0,
+      "review_message_id": "1565779731440468199",
+      "review_question_message_id": "1565772061119348747",
+      "review_reply_message_id": "1565772455606493268",
+      "rollback_contract": "Code only under coordinated original account/request locks, after reconciling current Ares stage. Never restore stale operational snapshots or delete/recreate/release objects.",
+      "rollback_package": "/root/mgs-agent/scripts/.ares_campaign_v3.review-img-t_fc58be96",
+      "semantic_and_rendered_qa_executed": false,
+      "serving_verified": false,
+      "source_campaign_id": "120250750964580629",
+      "source_message_id_preserved": "1565747351543480374",
+      "status": "installed_descriptor_real_readonly_validated",
+      "task_id": "t_fc58be96",
+      "type": "central-shein-exact-reviewed-targeting",
+      "updated_at": "2026-10-30T17:46:00.048004+00:00",
+      "uploads": 0
     }
   ],
   "scripts": [

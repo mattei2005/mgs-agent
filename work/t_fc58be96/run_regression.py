@@ -9,6 +9,7 @@ import pytest
 patterns=['test_shein*.py','test_ares_campaign_engine_v3.py','test_ares_shein_campaigns_v3.py','test_eggbev_clone_v3.py','test_eggbev_from_zero_v3.py','test_ares_campaign_v3_daily_cpv.py','test_prestage*.py','test_prestaged*.py','test_ares_asset_scope*.py']
 paths=sorted({str(p) for pattern in patterns for p in (B/'tests').glob(pattern)})
 paths.append(str(B/'tests/test_shein_reviewed_img.py') if installed else str(W/'test_shein_reviewed_img.py'))
+paths=sorted(set(paths))
 class Receipt:
     def __init__(self):self.rows=[];self.subtests=0
     def pytest_runtest_logreport(self,report):
