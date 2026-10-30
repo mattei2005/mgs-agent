@@ -53,6 +53,7 @@ def require_binding(state, checkpoint, expected):
 def validate_review(descriptor, state, checkpoint, *, get_message):
     bound = require_binding(state, checkpoint, descriptor['reviewed_targeting'])
     if (descriptor.get('reviewed_targeting_kind') != KIND
+            or descriptor.get('account_id') != bound['account_id']
             or descriptor.get('source_message_id') != ORIGINAL_ID
             or descriptor.get('source_message_content') != ORIGINAL_CONTENT
             or descriptor.get('source_thread_id') != ORIGIN
@@ -92,7 +93,7 @@ def validate_fields(context, tree, slot):
         raise ValueError('reviewed IMG unexpected source age/device flags')
     expected['user_age_unknown'] = True
     actual = tree['adsets']['data'][0]
-    if actual.get('targeting') != expected:
+    if content_digest(actual.get('targeting')) != content_digest(expected):
         raise ValueError('reviewed IMG additional targeting drift')
     specs = [c for c in state['manifest']['campaigns'] if c['idempotency_key'] == slot['key']]
     if len(specs) != 1:

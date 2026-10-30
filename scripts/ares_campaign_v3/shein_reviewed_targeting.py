@@ -52,7 +52,12 @@ def binding(state, checkpoint):
             'source_targeting': copy.deepcopy(source['adset']['targeting']), 'slots': slots}
 
 
-def require_binding(state, checkpoint, expected):
+def require_binding(state, checkpoint, expected, *, kind=None):
+    if kind is not None:
+        from . import shein_reviewed_img as img
+        if kind != img.KIND:
+            raise ValueError('unknown reviewed targeting kind')
+        return img.require_binding(state, checkpoint, expected)
     from .prevalidation import verify_prevalidation
     actual = binding(state, checkpoint)
     if (content_digest(actual) != BINDING_DIGEST or actual != expected
@@ -65,7 +70,15 @@ def require_binding(state, checkpoint, expected):
 def validate_review(descriptor, state, checkpoint, *, get_message):
     accepted = descriptor.get('reviewed_targeting')
     if accepted is None:
+        if descriptor.get('reviewed_targeting_kind') is not None:
+            raise ValueError('typed reviewed targeting binding missing')
         return None
+    kind = descriptor.get('reviewed_targeting_kind')
+    if kind is not None:
+        from . import shein_reviewed_img as img
+        if kind != img.KIND:
+            raise ValueError('unknown reviewed targeting kind')
+        return img.validate_review(descriptor, state, checkpoint, get_message=get_message)
     bound = require_binding(state, checkpoint, accepted)
     if (descriptor.get('source_message_id') != NOW_ID or descriptor.get('source_message_content') != NOW
             or descriptor.get('source_thread_id') != ORIGIN or descriptor.get('authorized_by') != HUMAN):
@@ -97,10 +110,13 @@ def active_context():
     if context is None or (context.get('verified') or {}).get('accepted_targeting') is None:
         return None
     verified = context['verified']
-    if (verified.get('verified') is not True or verified['accepted_targeting']['binding_digest'] != BINDING_DIGEST
+    kind = context['descriptor'].get('reviewed_targeting_kind')
+    from . import shein_reviewed_img as img
+    seal = img.BINDING_DIGEST if kind == img.KIND else BINDING_DIGEST
+    if (verified.get('verified') is not True or verified['accepted_targeting']['binding_digest'] != seal
             or content_digest(context['descriptor']) != verified['descriptor_digest']):
         raise ValueError('reviewed targeting continuation proof invalid')
-    require_binding(context['state'], context['checkpoint'], context['descriptor']['reviewed_targeting'])
+    require_binding(context['state'], context['checkpoint'], context['descriptor']['reviewed_targeting'], kind=kind)
     return context
 
 
@@ -123,6 +139,11 @@ def validate_tree(context, tree):
         if (node.get('account_id', bound['account_id']) != bound['account_id']
                 or node.get('campaign_id', campaign['id']) != campaign['id']):
             raise ValueError('reviewed targeting parent/account mismatch')
+    if context['descriptor'].get('reviewed_targeting_kind') is not None:
+        from . import shein_reviewed_img as img
+        if context['descriptor']['reviewed_targeting_kind'] != img.KIND:
+            raise ValueError('unknown reviewed targeting kind')
+        return img.validate_fields(context, tree, slot)
     expected = copy.deepcopy(bound['source_targeting'])
     if expected['targeting_automation'].pop('individual_setting') != {'age': 1, 'gender': 1, 'device': 1}:
         raise ValueError('reviewed targeting unexpected source flags')

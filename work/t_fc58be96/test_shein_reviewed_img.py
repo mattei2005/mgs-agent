@@ -99,7 +99,7 @@ class ReviewedIMGTests(unittest.TestCase):
         self.assertEqual(before,(self.state,self.cp,self.d,self.trees))
 
     def test_binding_negative_matrix(self):
-        for field in ['request','source','account','campaign','adset','ads','lineage','manifest','target','clock','resolved','native','budget','bid','review_kind','cp_status']:
+        for field in ['request','source','account','campaign','adset','ads','lineage','manifest','target','clock','resolved','native','budget','bid','review_kind','descriptor_account','cp_status']:
             with self.subTest(field=field):
                 saved=copy.deepcopy((self.state,self.cp,self.d))
                 if field=='request': self.state['request']['request_id']='another'
@@ -113,6 +113,7 @@ class ReviewedIMGTests(unittest.TestCase):
                 elif field=='native': self.cp['bundles'][0]['timings']['adset_copy']['finished_at']='2030-01-01T00:00:00+00:00'
                 elif field in ['budget','bid']: self.d['budget_usd' if field=='budget' else 'bid_usd']='1'
                 elif field=='review_kind': self.d['reviewed_targeting_kind']='unknown'
+                elif field=='descriptor_account': self.d['account_id']='999'
                 elif field=='cp_status': self.cp['status']='PENDING'
                 with self.assertRaises((ValueError,KeyError)): self.proof()
                 self.state,self.cp,self.d=saved

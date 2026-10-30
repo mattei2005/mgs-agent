@@ -1,0 +1,441 @@
+{
+  "at": "2026-10-30T17:39:36.426246+00:00",
+  "profile": "ares",
+  "installed": false,
+  "module_origin": "/root/mgs-agent/work/t_fc58be96/stage/ares_campaign_v3/shein_reviewed_img.py",
+  "request_id": "shein-1565747351543480374",
+  "account_id": "937846586033361",
+  "descriptor_path": "/root/mgs-agent/work/t_fc58be96/continuation.json",
+  "descriptor_digest": "ed5bb059e8c0d7895890e2281a74e2f0cfabfe8a3b902b0c2120aeeaba70e06d",
+  "binding_digest": "ce9bee4f8bab7d889dff36bb73f1f73f3b7330afd7d1a1f7552ee37099459df3",
+  "authority_live": true,
+  "proof": {
+    "verified": true,
+    "request_id": "shein-1565747351543480374",
+    "account_id": "937846586033361",
+    "accepted_schedule": null,
+    "accepted_targeting": {
+      "binding_digest": "ce9bee4f8bab7d889dff36bb73f1f73f3b7330afd7d1a1f7552ee37099459df3",
+      "kind": "shein-img-008-015-reviewed-targeting-v1",
+      "prompt_message_id": "1565772061119348747",
+      "context_message_id": "1565772455606493268",
+      "review_message_id": "1565779731440468199",
+      "source_message_id": "1565747351543480374",
+      "authority": {
+        "sender_id": "344196393512075265",
+        "source": "executive_review_message"
+      },
+      "meta_writes": 0,
+      "manifest_mutations": 0
+    },
+    "campaign_ids": [
+      "120250943717650629",
+      "120250943717660629",
+      "120250944872190629",
+      "120250944872210629",
+      "120250944885400629",
+      "120250944885370629",
+      "120250944897280629",
+      "120250944897250629"
+    ],
+    "adset_ids": [
+      "120250943718090629",
+      "120250943718150629",
+      "120250944873460629",
+      "120250944873500629",
+      "120250944887140629",
+      "120250944887050629",
+      "120250944899210629",
+      "120250944899160629"
+    ],
+    "source_message_id": "1565747351543480374",
+    "source_thread_id": "1558134703565967394",
+    "start_now": true,
+    "late_activation_authorized": true,
+    "original_execution_started_at": "2026-10-30T15:20:58.787000+00:00",
+    "creation_payload_digest": "cc58b039ce0f0d5a084dab0ee2df493759878842f581b72db4e4f8f42e923a22",
+    "target_payload_digest": "c899dffdd8e8fd247c91d1a751b301f90aeaad381c1c7bbf0996f2057911f8f8",
+    "review_message_id": "1565779731440468199",
+    "review_authority": {
+      "sender_id": "344196393512075265",
+      "source": "executive_review_message"
+    },
+    "descriptor_digest": "ed5bb059e8c0d7895890e2281a74e2f0cfabfe8a3b902b0c2120aeeaba70e06d"
+  },
+  "live": [
+    {
+      "campaign_id": "120250943717650629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250943718090629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:28:00-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944864130629",
+        "120250944864270629"
+      ]
+    },
+    {
+      "campaign_id": "120250943717660629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250943718150629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:28:00-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944864120629",
+        "120250944864250629"
+      ]
+    },
+    {
+      "campaign_id": "120250944872190629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250944873460629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:55:38-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944881440629",
+        "120250944881460629"
+      ]
+    },
+    {
+      "campaign_id": "120250944872210629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250944873500629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:55:38-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944881370629",
+        "120250944881750629"
+      ]
+    },
+    {
+      "campaign_id": "120250944885400629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250944887140629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:56:00-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944893410629",
+        "120250944893480629"
+      ]
+    },
+    {
+      "campaign_id": "120250944885370629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250944887050629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:56:00-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944893540629",
+        "120250944893620629"
+      ]
+    },
+    {
+      "campaign_id": "120250944897280629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250944899210629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:56:22-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944905940629",
+        "120250944906090629"
+      ]
+    },
+    {
+      "campaign_id": "120250944897250629",
+      "campaign_status": "PAUSED",
+      "budget_minor": "2500",
+      "bid_strategy": "COST_CAP",
+      "adset_id": "120250944899160629",
+      "bid_amount": 95,
+      "start_time": "2026-10-30T12:56:22-0400",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        },
+        "user_age_unknown": true
+      },
+      "ad_ids": [
+        "120250944905700629",
+        "120250944906250629"
+      ]
+    }
+  ],
+  "negative_checks": [
+    "descriptor:continuation_of",
+    "descriptor:account",
+    "descriptor:account_id",
+    "descriptor:authorized_by",
+    "descriptor:source_thread_id",
+    "descriptor:source_channel_id",
+    "descriptor:source_campaign_number",
+    "descriptor:budget_usd",
+    "descriptor:bid_strategy",
+    "descriptor:bid_usd",
+    "descriptor:source_message_id",
+    "descriptor:recovery_review_message_id",
+    "descriptor:recovery_review_content",
+    "descriptor:reviewed_targeting_kind",
+    "state:execution_started_at",
+    "state:resolved_request",
+    "state:manifest",
+    "state:target_manifest",
+    "state:source",
+    "state:request",
+    "message:1565747351543480374:author",
+    "message:1565747351543480374:message_reference",
+    "message:1565747351543480374:content",
+    "message:1565747351543480374:edited_timestamp",
+    "message:1565772061119348747:author",
+    "message:1565772061119348747:message_reference",
+    "message:1565772061119348747:content",
+    "message:1565772061119348747:edited_timestamp",
+    "message:1565772455606493268:author",
+    "message:1565772455606493268:message_reference",
+    "message:1565772455606493268:content",
+    "message:1565772455606493268:edited_timestamp",
+    "message:1565779731440468199:author",
+    "message:1565779731440468199:message_reference",
+    "message:1565779731440468199:content",
+    "message:1565779731440468199:edited_timestamp",
+    "live:age_min",
+    "live:unknown_age",
+    "live:device",
+    "live:extra_device",
+    "live:bid",
+    "live:budget",
+    "live:clock",
+    "live:campaign_id",
+    "live:adset_id",
+    "live:ad_id",
+    "live:lineage",
+    "live:account_id"
+  ],
+  "negative_count": 48,
+  "campaign_count": 8,
+  "ad_count": 16,
+  "http_requests": 10,
+  "logical_gets": 26,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "uploads": 0,
+  "reservations": 0,
+  "operational_state_hashes_unchanged": true,
+  "serving_verified": false,
+  "semantic_and_rendered_qa_executed": false
+}

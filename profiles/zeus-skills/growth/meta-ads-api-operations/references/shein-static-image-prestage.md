@@ -29,6 +29,14 @@ Use the existing `ares-shein-campaigns.py` grouped-manager route. Behavioral per
 
 Official contract: https://developers.facebook.com/documentation/ads-commerce/marketing-api/ad-creative/multi-media-ads . Regression owner: `tests/test_shein_image_sourcing.py` plus existing image/VID, media-QA and activation suites.
 
+## Exact reviewed targeting on an existing IMG batch
+
+- Treat a resolved material review as separate evidence, never as a replacement for the original request/source message or a generic targeting normalization. Use a typed continuation through `shein_continuation`/`shein_reviewed_targeting`; bind the exact request, account, source, all campaign/adset/ad IDs and lineage, both sealed manifests, original execution clock, resolved same-day intent and native-copy schedule receipts.
+- Verify original message, precise question, explanatory context and real human reply by fresh Discord GETs, including author, content, edit state and reply linkage. A technical seal is not permission: preserve the owning runner's live channel-authority checks and existing QA/activation gates.
+- For a reviewed age-unknown plus device omission, compare the entire expected targeting after only those exact approved transformations. Reject extra/missing flags, age/geo drift, other requests/IDs/reviews and every unbound field; keep historical reviews isolated.
+- When the original instruction explicitly changes the bid, compare target bid and constraints with the sealed approved manifest, not the source campaign's old bid. This does not authorize any new bid/budget write or manifest reseal.
+- Validate the installed descriptor read-only in Ares with the common guarded transport and negative tests before handoff. Maintenance must not fabricate QA proof, run campaign recovery/activation, repair targeting, upload or reserve; Ares resumes the same central `ares-shein-recovery.py --continuation <installed-descriptor> --confirm-execute` and owns semantic/rendered QA and final ACTIVE readback.
+
 ## Verification boundary
 
 - `tests/test_shein_image_media.py` covers real-input intake, IMG/VID/mixed groups, typed schema/registry, core dry-run, ambiguous uploads/idempotency, prepare→handoff→inventory, exact-hash negatives, actual localhost Chromium static-image rendering and the existing status-only activation barrier.

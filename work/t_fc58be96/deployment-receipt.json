@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-30T17:41:17.660709+00:00",
+  "method": "renameat2_RENAME_EXCHANGE",
+  "task_id": "t_fc58be96",
+  "rollback_package": "/root/mgs-agent/scripts/.ares_campaign_v3.review-img-t_fc58be96",
+  "changed_files": {
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_reviewed_targeting.py": "901d3089e3ca926b05d017ee2341532fd65ed77770316ce54dd72937bace2193",
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_reviewed_img.py": "cac9e637ea92b01bb86545800d64c5fa845c3b87b006ee96e66bcb0abeb24427",
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py": "ed1996ed70d0b80dfa532fa512ebae6c24a100b29cfb0590c3262d8e9b9ced9d"
+  },
+  "test": "/root/mgs-agent/tests/test_shein_reviewed_img.py",
+  "test_sha256": "f03af75501231662919a9f04f60cf74160b1d7195dc7b7037c83c3e8c5556242",
+  "descriptor": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/continuations/shein-1565747351543480374-review-1565779731440468199.json",
+  "descriptor_sha256": "cd5eb809237305eea55becdd565b4bdd711d5c6ed725177d2ad7a7bf66100411",
+  "active_writer_subprocesses": [],
+  "original_request_and_engine_locks_acquired": true,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "manifest_mutations": 0,
+  "request_state_edits": 0,
+  "gateway_restart": false
+}

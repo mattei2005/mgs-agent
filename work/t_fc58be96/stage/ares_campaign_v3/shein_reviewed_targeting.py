@@ -70,6 +70,8 @@ def require_binding(state, checkpoint, expected, *, kind=None):
 def validate_review(descriptor, state, checkpoint, *, get_message):
     accepted = descriptor.get('reviewed_targeting')
     if accepted is None:
+        if descriptor.get('reviewed_targeting_kind') is not None:
+            raise ValueError('typed reviewed targeting binding missing')
         return None
     kind = descriptor.get('reviewed_targeting_kind')
     if kind is not None:

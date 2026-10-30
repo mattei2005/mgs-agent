@@ -367,7 +367,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
             from .shein_reviewed_targeting import allows
             if not allows(payload, source, live):
                 raise RouteBlocked('unrecognized targeting divergence')
-            warnings.append('Human review accepted device suggestion omission for exact existing 004/005 IDs only; copy is not literally identical')
+            warnings.append('Human review accepted only the sealed exact targeting deltas and existing IDs; copy is not literally identical')
         else:
             warnings.append('Meta omitted source optional age/gender suggestion flags; copy is not literally identical')
     if desired['mode'] != 'pure_clone':
