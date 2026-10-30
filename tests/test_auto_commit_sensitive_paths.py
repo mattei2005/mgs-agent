@@ -149,6 +149,32 @@ fi
     def test_bash_syntax(self):
         subprocess.run(["bash", "-n", str(WATCHER)], check=True)
 
+    def test_exact_active_kanban_candidate_exclusion(self):
+        ignored = [
+            "work/t_7ab9e9ba/candidate/scripts/mgs_private_backup_upload.py",
+            "work/t_7ab9e9ba/candidate/tests/test_private_control_scope.py",
+            "work/t_7ab9e9ba/candidate/scripts/shein_grouped_media.py",
+        ]
+        included = [
+            "work/t_7ab9e9ba/image-tests.txt",
+            "work/t_7ab9e9ba/candidate-other/scripts/mgs_private_backup_upload.py",
+            "work/other/candidate/scripts/mgs_private_backup_upload.py",
+            "scripts/mgs_private_backup_upload.py",
+            "tests/test_private_control_scope.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

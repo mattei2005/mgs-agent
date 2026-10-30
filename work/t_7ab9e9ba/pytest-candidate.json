@@ -1,0 +1,88 @@
+{
+  "exit_code": 1,
+  "collected": 490,
+  "passed": 766,
+  "failed": [
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_canonical_messenger_json_drift_fails_closed",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_canonical_messenger_json_file_is_the_single_source_for_every_ad",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_copy_and_messenger_flags_match_approved_template",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_duplicate_media_lineage_is_blocked_in_prevalidation",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_from_zero_forbids_source_ids",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_immediate_start_override_is_scoped_to_the_first_request_only",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_manual_placements_exclude_audience_network",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_one_by_five_is_supported",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_page_and_tracking_are_materialized",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_reads_budget_from_campaign_create",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_advantage_placements",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_dup_naming",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_superseded_para_copy_suffix",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_prevalidate_and_plan_use_direct_create_stages",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_revised_clone_preserves_lineage_and_applies_new_standard",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_three_by_three_builds_valid_manifest_and_policy",
+      "outcome": "failed"
+    },
+    {
+      "id": "work/t_7ab9e9ba/candidate/tests/test_shein_standard_campaign_requests.py::test_shein_standard_campaign_request_templates_preserve_mode_identity",
+      "outcome": "failed"
+    }
+  ],
+  "skipped": [],
+  "exclusion": "test_same_ready_folder_queried_once_without_skipping_asset_checks",
+  "module_origin_mismatch": {},
+  "external_network": "blocked in process",
+  "test_files": 39
+}

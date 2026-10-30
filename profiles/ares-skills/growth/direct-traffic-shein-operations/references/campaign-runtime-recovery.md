@@ -4,6 +4,10 @@ Use quando uma conta permitida falhar no guard técnico, um objeto criado não t
 
 ## 1. Classificar a camada antes de corrigir
 
+### Rejeição de imagens no preparador de grupos
+
+Antes de preparar PNG/JPG, confira suporte instalado de ponta a ponta; a política de mídia genérica não comprova capacidade IMG. Se `validate_groups(input_real)` retornar `exact canonical SHEIN video filename required`, classifique como validação local exclusiva VID, não arquivo inválido nem falha Drive/Meta. Confirme a ordem do validador antes de afirmar ausência de reservas/uploads/writes. Não converter imagens em vídeo, renomear extensões, retirar o gate ou usar writer paralelo. Preserve request, grupos/copy, horário e relógio; delimite manutenção separada para pre-stage/registry/compiler/QA/pós-processamento e vincule a retomada ao pedido original. Regex ampliada isoladamente não prova suporte; exigir a rota central e QA/readback integrais antes de confirmar criação.
+
 1. Recupere o request original e os IDs de runner/checkpoint; faça o checker positivo da conta e o dry-run pela rota central. Cadastro permitido não prova acesso live, e rejeição local anterior ao HTTP não é negativa da Meta.
 2. Identifique a chamada exata pela receita `Classificar rejeição local antes de diagnosticar a Meta` da referência geral. Restrinja instrumentação ao dry-run; não suprima exceções do guard nem instrumente um execute live.
 3. Separe manutenção autorizada da transação de campanha: preserve backup e IDs existentes, corrija somente a incompatibilidade demonstrada, rode regressões negativas e volte ao mesmo request após o dry-run aprovado. Nunca transforme falha local em pedido de outra credencial ou liberação global de nós. Execute também a validação read-only do descriptor real antes de reportar prontidão; fixtures verdes não exercitam o vínculo real entre pergunta, review e objetos. Encadeie validação → relatório de sucesso → retomada com retorno verificado (`check=True` ou `&&`), pois comandos separados por nova linha podem publicar sucesso mesmo após a validação falhar.

@@ -1,0 +1,46 @@
+======================================================================
+ERROR: test_images_compile_schema_registry_and_core_plan_without_network (test_shein_image_media.ImageTests.test_images_compile_schema_registry_and_core_plan_without_network)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_image_media.py", line 41, in test_images_compile_schema_registry_and_core_plan_without_network
+    for x in assets:registry.register_image(account_id=a['shein_profile']['account_id'],asset_id=x['asset_id'],checksum=x['checksum'],image_hash=x['image_hash'],ready=True,association_verified=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MediaRegistry' object has no attribute 'register_image'
+
+======================================================================
+ERROR: test_real_request_intake_accepts_exact_16_images (test_shein_image_media.ImageTests.test_real_request_intake_accepts_exact_16_images)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_image_media.py", line 33, in test_real_request_intake_accepts_exact_16_images
+    self.assertEqual(len(shein_grouped_media.validate_groups(r)),16)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/shein_grouped_media.py", line 39, in validate_groups
+    raise ValueError('exact canonical SHEIN video filename required')
+ValueError: exact canonical SHEIN video filename required
+
+======================================================================
+ERROR: test_registry_type_isolation_and_drift (test_shein_image_media.ImageTests.test_registry_type_isolation_and_drift)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_image_media.py", line 77, in test_registry_type_isolation_and_drift
+    reg.register_image(account_id=aid,asset_id=x['asset_id'],checksum=x['checksum'],image_hash=x['image_hash'],ready=True,association_verified=True)
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'MediaRegistry' object has no attribute 'register_image'
+
+======================================================================
+ERROR: test_schema_rejects_media_disguise_and_mixed_ids (test_shein_image_media.ImageTests.test_schema_rejects_media_disguise_and_mixed_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_image_media.py", line 64, in test_schema_rejects_media_disguise_and_mixed_ids
+    r,s,a,assets=self.fixture(); payload=shein_general.build(r,s,114,a)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/shein_general.py", line 74, in build
+    validate_groups(request)
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/shein_grouped_media.py", line 39, in validate_groups
+    raise ValueError('exact canonical SHEIN video filename required')
+ValueError: exact canonical SHEIN video filename required
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.004s
+
+FAILED (errors=4)

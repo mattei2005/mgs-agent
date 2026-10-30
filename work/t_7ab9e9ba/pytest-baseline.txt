@@ -1,0 +1,23 @@
+........................................................................ [ 15%]
+..................................F..........F.......................... [ 30%]
+............................................................................................................. [ 53%]
+............................................................ [ 66%]
+..................................................... [ 77%]
+..........................................................................................................                                        [100%]
+=================================== FAILURES ===================================
+___ test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh ____
+tests/test_ares_campaign_v3_daily_cpv.py:685: in test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh
+    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
+E   AssertionError: assert ['Meta BISU -... - G001-G006'] == ['Token Meta ...- CPV - G006']
+E     
+E     At index 0 diff: 'Meta BISU - CAR+SHEIN - Digital Trust - G001-G006' != 'Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006'
+E     Use -v to get more diff
+__ test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane ___
+tests/test_ares_campaign_v3_daily_cpv.py:874: in test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane
+    assert "ares-cpv-meta-reader-gate.py" in content
+E   assert 'ares-cpv-meta-reader-gate.py' in '#!/usr/bin/env bash\nset -euo pipefail\nset -a\nsource /root/mgs-agent/.env\nset +a\n# Reporting is read-only: persis...%s\\n\' \'Relatório Diário CPV13 indisponível: conta ocupada; aviso solicitado na thread fixa.\' >&2\nfi\nexit "$rc"\n'
+=========================== short test summary info ============================
+FAILED tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh
+FAILED tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane
+2 failed, 470 passed, 1 deselected, 281 subtests passed in 13.74s
+{"exit_code": 1, "collected": 472, "passed": 751, "failed": [{"id": "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh", "outcome": "failed"}, {"id": "tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane", "outcome": "failed"}], "skipped": [], "exclusion": "test_same_ready_folder_queried_once_without_skipping_asset_checks", "module_origin_mismatch": {}, "external_network": "blocked in process", "test_files": 38}

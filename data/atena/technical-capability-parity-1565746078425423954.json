@@ -1,0 +1,140 @@
+{
+  "id": "ATENA-TECHNICAL-EQUIVALENCE-1565746078425423954",
+  "authority_message_id": "1565746078425423954",
+  "source_thread_id": "1565555821188878377",
+  "observed_at": "2026-10-30T15:24:17.030902+00:00",
+  "scope": "Existing authorized ContentOps capabilities, not unrestricted Zeus/root parity",
+  "native_profile_terminal_probe": {
+    "runtime_profile": "atena",
+    "handler": "tools.terminal_tool.terminal_tool",
+    "results": [
+      {
+        "status": "verified",
+        "domain": "finanzas.openzed.com",
+        "identity_http": 200,
+        "roles": [
+          "administrator"
+        ],
+        "capabilities": {
+          "edit_posts": true,
+          "publish_posts": true,
+          "manage_options": true,
+          "install_plugins": true,
+          "activate_plugins": true,
+          "delete_plugins": true
+        },
+        "rest_route_composition_verified": true,
+        "remote_mutations": 0,
+        "credentials_changed": false,
+        "permissions_changed": false,
+        "plugins_http": 200,
+        "maintenance_plugins": [
+          {
+            "plugin": "wordpress-seo/wp-seo",
+            "status": "active",
+            "version": "28.3"
+          }
+        ],
+        "secrets_emitted": false
+      },
+      {
+        "status": "verified",
+        "domain": "cliquet.com",
+        "identity_http": 200,
+        "roles": [
+          "administrator"
+        ],
+        "capabilities": {
+          "edit_posts": true,
+          "publish_posts": true,
+          "manage_options": true,
+          "install_plugins": true,
+          "activate_plugins": true,
+          "delete_plugins": true
+        },
+        "rest_route_composition_verified": true,
+        "remote_mutations": 0,
+        "credentials_changed": false,
+        "permissions_changed": false,
+        "plugins_http": 200,
+        "maintenance_plugins": [
+          {
+            "plugin": "wordpress-seo/wp-seo",
+            "status": "active",
+            "version": "28.3"
+          }
+        ],
+        "secrets_emitted": false
+      }
+    ],
+    "remote_mutations": 0,
+    "fincgriffin_requests": 0
+  },
+  "tools_available_both_profiles": [
+    "terminal",
+    "file",
+    "code_execution",
+    "browser",
+    "skills",
+    "discord",
+    "discord_admin"
+  ],
+  "binary_probe": {
+    "ssh": true,
+    "sftp": true,
+    "sshpass": true,
+    "php": true,
+    "python3": true
+  },
+  "source_of_gap": "Zeus wp-plugin-mass-operation recipe not installed in Atena; new shared runbook/helper avoids copying another agents skills",
+  "helper": "scripts/mgs-contentops-preflight.py",
+  "offline_safety_tests": {
+    "test_file": "tests/test_contentops_preflight.py",
+    "passed": 10,
+    "failed": 0
+  },
+  "soul_native_manifest": {
+    "label": "SOUL.md",
+    "path": "/root/.hermes/profiles/atena/SOUL.md",
+    "chars": 15238,
+    "est_tokens": 3926,
+    "loaded": true,
+    "status": "loaded"
+  },
+  "soul_mirror_equal": true,
+  "soul_sha256": "9cff564dc7149b8995064a7ad5b27f72a1f411823097c22d1ddb22fca048273e",
+  "credentials_or_acl_changed": false,
+  "runtime_config_changed": false,
+  "gateway_restarted": false,
+  "production_mutations": 0,
+  "fincgriffin_requests": 0,
+  "repair_verified": false,
+  "active_session_reread_status": "observed_in_native_discord_tool_progress",
+  "proof_scope": "Native tool handler and remote read capability; not an end-to-end repair or a guarantee of future model behavior",
+  "handoff": {
+    "message_id": "1565748311154102374",
+    "channel_id": "1564289742567112795",
+    "exact_readback": true,
+    "native_current_session_reread_requested": true,
+    "response_or_repair_verified": false
+  },
+  "closure_recovery": {
+    "initial_error": "StopIteration locating optional prior inventory row; no inventory write had occurred",
+    "cause_confirmed": "previous record id absent in current generated inventory",
+    "recovery": "re-read current inventory under lock; append current capability record once without restoring older inventory or requiring optional row",
+    "inventory_readback": true,
+    "report_message_id": "1565748531619299610",
+    "report_resent": false
+  },
+  "active_session_observation": {
+    "message_id": "1565748353642266847",
+    "channel_id": "1564289742567112795",
+    "observed_actions": [
+      "read current SOUL.md",
+      "read shared ContentOps technical runbook",
+      "invoke shared preflight for both targets",
+      "inspect native Yoast source and local PHP runtime"
+    ],
+    "proof_scope": "Tool activity observed; not repair completion or future behavior guarantee"
+  }
+}

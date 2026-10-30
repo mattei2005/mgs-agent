@@ -1,0 +1,20 @@
+{
+  "exit_code": 1,
+  "collected": 472,
+  "passed": 751,
+  "failed": [
+    {
+      "id": "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh",
+      "outcome": "failed"
+    },
+    {
+      "id": "tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane",
+      "outcome": "failed"
+    }
+  ],
+  "skipped": [],
+  "exclusion": "test_same_ready_folder_queried_once_without_skipping_asset_checks",
+  "module_origin_mismatch": {},
+  "external_network": "blocked in process",
+  "test_files": 38
+}

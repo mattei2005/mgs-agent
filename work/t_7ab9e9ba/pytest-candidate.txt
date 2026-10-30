@@ -1,0 +1,466 @@
+........................................................................ [ 14%]
+..................................F..........F.......................... [ 29%]
+.....FFFFFFF.FFFFFFFFF....................................................................................... [ 51%]
+...................................................... [ 62%]
+........................................................................................................ [ 83%]
+.................. [ 87%]
+..............................................F. [ 97%]
+.............        [100%]
+=================================== FAILURES ===================================
+___ test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh ____
+work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py:685: in test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh
+    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
+E   AssertionError: assert ['Meta BISU -... - G001-G006'] == ['Token Meta ...- CPV - G006']
+E     
+E     At index 0 diff: 'Meta BISU - CAR+SHEIN - Digital Trust - G001-G006' != 'Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006'
+E     Use -v to get more diff
+__ test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane ___
+work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py:874: in test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane
+    assert "ares-cpv-meta-reader-gate.py" in content
+E   assert 'ares-cpv-meta-reader-gate.py' in '#!/usr/bin/env bash\nset -euo pipefail\nset -a\nsource /root/mgs-agent/.env\nset +a\n# Reporting is read-only: persis...%s\\n\' \'Relatório Diário CPV13 indisponível: conta ocupada; aviso solicitado na thread fixa.\' >&2\nfi\nexit "$rc"\n'
+____ EggbevFromZeroV3Tests.test_canonical_messenger_json_drift_fails_closed ____
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:169: in test_canonical_messenger_json_drift_fails_closed
+    changed = copy.deepcopy(load_messenger_template())
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_ EggbevFromZeroV3Tests.test_canonical_messenger_json_file_is_the_single_source_for_every_ad _
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:154: in test_canonical_messenger_json_file_is_the_single_source_for_every_ad
+    self.assertEqual(load_messenger_template(), expected)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_ EggbevFromZeroV3Tests.test_copy_and_messenger_flags_match_approved_template __
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:115: in test_copy_and_messenger_flags_match_approved_template
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_ EggbevFromZeroV3Tests.test_duplicate_media_lineage_is_blocked_in_prevalidation _
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:226: in test_duplicate_media_lineage_is_blocked_in_prevalidation
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+___________ EggbevFromZeroV3Tests.test_from_zero_forbids_source_ids ____________
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:186: in test_from_zero_forbids_source_ids
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_ EggbevFromZeroV3Tests.test_immediate_start_override_is_scoped_to_the_first_request_only _
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:204: in test_immediate_start_override_is_scoped_to_the_first_request_only
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+____ EggbevFromZeroV3Tests.test_manual_placements_exclude_audience_network _____
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:104: in test_manual_placements_exclude_audience_network
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_____________ EggbevFromZeroV3Tests.test_one_by_five_is_supported ______________
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:99: in test_one_by_five_is_supported
+    payload = self._build(campaigns=1, ads_per_campaign=5)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+________ EggbevFromZeroV3Tests.test_page_and_tracking_are_materialized _________
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:177: in test_page_and_tracking_are_materialized
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_____ EggbevFromZeroV3Tests.test_policy_reads_budget_from_campaign_create ______
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:220: in test_policy_reads_budget_from_campaign_create
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+________ EggbevFromZeroV3Tests.test_policy_rejects_advantage_placements ________
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:214: in test_policy_rejects_advantage_placements
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_____________ EggbevFromZeroV3Tests.test_policy_rejects_dup_naming _____________
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:192: in test_policy_rejects_dup_naming
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+____ EggbevFromZeroV3Tests.test_policy_rejects_superseded_para_copy_suffix _____
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:198: in test_policy_rejects_superseded_para_copy_suffix
+    payload = self._build(campaigns=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+___ EggbevFromZeroV3Tests.test_prevalidate_and_plan_use_direct_create_stages ___
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:232: in test_prevalidate_and_plan_use_direct_create_stages
+    payload = self._build(campaigns=3)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+_ EggbevFromZeroV3Tests.test_revised_clone_preserves_lineage_and_applies_new_standard _
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:276: in test_revised_clone_preserves_lineage_and_applies_new_standard
+    payload = build_eggbev_revised_clone_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:401: in build_eggbev_revised_clone_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+__ EggbevFromZeroV3Tests.test_three_by_three_builds_valid_manifest_and_policy __
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:65: in load_messenger_template
+    payload = json.loads(path.read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json'
+
+The above exception was the direct cause of the following exception:
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:83: in test_three_by_three_builds_valid_manifest_and_policy
+    payload = self._build()
+              ^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py:67: in _build
+    return build_eggbev_from_zero_manifest(
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:259: in build_eggbev_from_zero_manifest
+    welcome_message = messenger_welcome_message()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:106: in messenger_welcome_message
+    message_data = load_messenger_template(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/eggbev_create.py:67: in load_messenger_template
+    raise ValueError(f"canonical Messenger JSON file is missing: {path}") from exc
+E   ValueError: canonical Messenger JSON file is missing: /root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/templates/eggbev-us-cc-en-messenger-welcome.json
+____ test_shein_standard_campaign_request_templates_preserve_mode_identity _____
+work/t_7ab9e9ba/candidate/tests/test_shein_standard_campaign_requests.py:27: in test_shein_standard_campaign_request_templates_preserve_mode_identity
+    text = REFERENCE.read_text(encoding="utf-8")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/profiles/ares-skills/growth/direct-traffic-shein-operations/references/standard-campaign-requests.md'
+=========================== short test summary info ============================
+FAILED work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh
+FAILED work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_canonical_messenger_json_drift_fails_closed
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_canonical_messenger_json_file_is_the_single_source_for_every_ad
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_copy_and_messenger_flags_match_approved_template
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_duplicate_media_lineage_is_blocked_in_prevalidation
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_from_zero_forbids_source_ids
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_immediate_start_override_is_scoped_to_the_first_request_only
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_manual_placements_exclude_audience_network
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_one_by_five_is_supported
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_page_and_tracking_are_materialized
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_reads_budget_from_campaign_create
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_advantage_placements
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_dup_naming
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_superseded_para_copy_suffix
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_prevalidate_and_plan_use_direct_create_stages
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_revised_clone_preserves_lineage_and_applies_new_standard
+FAILED work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_three_by_three_builds_valid_manifest_and_policy
+FAILED work/t_7ab9e9ba/candidate/tests/test_shein_standard_campaign_requests.py::test_shein_standard_campaign_request_templates_preserve_mode_identity
+19 failed, 471 passed, 1 deselected, 295 subtests passed in 14.50s
+{"exit_code": 1, "collected": 490, "passed": 766, "failed": [{"id": "work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_canonical_messenger_json_drift_fails_closed", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_canonical_messenger_json_file_is_the_single_source_for_every_ad", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_copy_and_messenger_flags_match_approved_template", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_duplicate_media_lineage_is_blocked_in_prevalidation", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_from_zero_forbids_source_ids", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_immediate_start_override_is_scoped_to_the_first_request_only", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_manual_placements_exclude_audience_network", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_one_by_five_is_supported", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_page_and_tracking_are_materialized", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_reads_budget_from_campaign_create", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_advantage_placements", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_dup_naming", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_policy_rejects_superseded_para_copy_suffix", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_prevalidate_and_plan_use_direct_create_stages", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_revised_clone_preserves_lineage_and_applies_new_standard", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_eggbev_from_zero_v3.py::EggbevFromZeroV3Tests::test_three_by_three_builds_valid_manifest_and_policy", "outcome": "failed"}, {"id": "work/t_7ab9e9ba/candidate/tests/test_shein_standard_campaign_requests.py::test_shein_standard_campaign_request_templates_preserve_mode_identity", "outcome": "failed"}], "skipped": [], "exclusion": "test_same_ready_folder_queried_once_without_skipping_asset_checks", "module_origin_mismatch": {}, "external_network": "blocked in process", "test_files": 39}

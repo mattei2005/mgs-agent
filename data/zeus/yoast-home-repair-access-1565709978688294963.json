@@ -4,7 +4,10 @@
   "source_thread_id": "1565555821188878377",
   "editorial_thread_id": "1564289742567112795",
   "observed_at": "2026-10-30T12:53:47.025697+00:00",
-  "targets": ["finanzas.openzed.com", "cliquet.com"],
+  "targets": [
+    "finanzas.openzed.com",
+    "cliquet.com"
+  ],
   "excluded_paused_target": "fincgriffin.com",
   "confirmed": {
     "sftp_credentials_found_and_authenticated": true,
@@ -20,7 +23,7 @@
     "wpcode_execution_without_certified_ssh_recovery": "forbidden_by_existing_operational_policy"
   },
   "method_status": "existing_admin_access_verified_but_localized_repair_transport_not_yet_installed_or_tested",
-  "next_step": "Atena independently discovers and read-only validates a permitted existing execution SSH reference bound to the exact two installations BEFORE proposing a temporary plugin, per Rodolfo 1565728804050174084. If a valid route exists, execute only the already authorized localized repair with backup/recovery/canary and public QA. A tested SFTP account restriction does not prove absence of other SSH credentials. No routine Zeus approval, no Zeus production writer; protected operations retain specific Rodolfo confirmation. Fincgriffin remains paused.",
+  "next_step": "Atena uses the tested shared preflight and runbook; SSH discovery already exhausted in permitted sources, no repeat without a new reference. Local repair preparation/tests can proceed. Protected temporary deployment/cleanup still require specific confirmation. Zeus does not repair in parallel.",
   "remote_mutations": 0,
   "repair_performed": false,
   "fincgriffin_remote_requests": 0,
@@ -49,5 +52,6 @@
     "routine_zeus_approval_required": false,
     "new_credentials_permissions_or_temporary_deployment_authorized": false,
     "repair_or_execution_start_verified": false
-  }
+  },
+  "capability_record": "ATENA-TECHNICAL-EQUIVALENCE-1565746078425423954"
 }

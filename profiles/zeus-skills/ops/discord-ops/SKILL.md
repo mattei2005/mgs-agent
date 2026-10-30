@@ -29,12 +29,22 @@ Quando Rodolfo pedir para ler uma thread e corrigir a resposta de outro agente, 
 Quando Rodolfo pedir para ensinar ou explicar ao agente como corrigir, executar nesta ordem:
 
 1. Fixar o agente como único executor e dono da investigação, reparo autorizado, QA e entrega; Zeus orienta, não assume uma escrita paralela. Atualizar o checkpoint se a escolha do executor substituir um plano anterior.
-2. Validar os pré-requisitos recuperáveis em leitura e consultar o procedimento técnico relevante antes do envio. Fornecer uma próxima ação concreta, fontes, alvos, teste de aceite e condições de parada; não substituir o procedimento por “você tem autonomia” ou “investigue melhor”.
+2. Validar os pré-requisitos recuperáveis em leitura e consultar o procedimento técnico relevante antes do envio. Quando o pedido for equiparar a capacidade técnica do executor, comparar ferramentas habilitadas, referências permitidas e receitas disponíveis e exercitar a operação segura pelo runtime/perfil dele; sucesso de Zeus não comprova acesso do destinatário. Se faltar uma receita, disponibilizar procedimento ou helper compartilhado testado, em vez de repetir “você tem autonomia”. Fornecer próxima ação concreta, fontes, alvos, teste de aceite e condições de parada, sem inferir concessão global de privilégios.
 3. Publicar na origem solicitada e conferir o conteúdo entregue. Se Rodolfo pedir resposta antes do envio, responder primeiro se o caminho está comprovado ou ainda é uma hipótese; não prometer que instrução equivale a capacidade de executar.
 4. Deixar descoberta, preparação local e etapas não críticas já autorizadas com o agente, sem aprovação rotineira de Zeus nem coordenação devolvida a Rodolfo/Raquel. Isolar somente a ação realmente protegida que precise de confirmação específica, explicando seu efeito e preservando o restante do trabalho.
 5. Ao receber nova evidência, avançar da última camada comprovada. Não reiniciar o ciclo com a mesma busca, nova cobrança de autonomia ou repetição do mesmo pedido de confirmação sem mudança material. Se o pré-requisito continuar indisponível, dar uma conclusão única com fato, lacuna e decisão necessária; não apresentar outra orientação como recuperação.
 
 Não transformar envio de instrução em implantação autorizada, nem afirmar que o método funciona ponta a ponta apenas porque o acesso administrativo passou. Distinguir instrução entregue, execução observada e resultado aceito.
+
+## Acompanhar execução de outro agente
+
+Quando Rodolfo pedir para acompanhar, observar a execução até a entrega ou um bloqueio decisório concreto, sem assumir o writer nem enviar cobranças repetidas ao agente:
+
+1. Ler mensagens posteriores ao último checkpoint e conferir os artefatos que sustentam o avanço; ACK, indicador de atividade e resumo do próprio agente não comprovam aceite.
+2. Identificar o pacote e o recibo finais. Não somar testes de candidatos substituídos nem promover fixtures, lint ou revisão local a recuperação certificada em produção.
+3. Se a revisão mudar a finalidade do pacote, explicitar a diferença antes de recomendar autorização: inspeção/exportação não é reparo, e sua aprovação não libera escrita posterior.
+4. Para acompanhamento curto, manter observação limitada em foreground. Só prometer continuidade após encerrar o turno quando existir um mecanismo durável configurado e verificado; não criar cron apenas para responder uma consulta pontual.
+5. Encerrar com o resultado ou com fato, causa comprovada/lacuna, recomendação e decisão exata pendente. Não pedir novamente uma confirmação igual sem mudança material, nem apresentar monitoramento concluído como reparo concluído.
 
 ## Corrigir documentação de escopo de outro agente
 

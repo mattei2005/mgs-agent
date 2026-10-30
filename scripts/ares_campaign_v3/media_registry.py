@@ -50,7 +50,15 @@ class MediaRegistry:
         source: str = "manual-readback",
         upload_edge: str | None = None,
         association_verified: bool = False,
+        media_type: str = "video",
+        image_hash: str | None = None,
     ) -> dict[str, Any]:
+        if media_type not in {"video", "image"}:
+            raise ValueError("unsupported media type")
+        if media_type == "image" and (not image_hash or vertical_video_id or square_video_id or upload_edge != "ad_account_adimages"):
+            raise ValueError("image registry requires image hash and exact ad-account image edge only")
+        if media_type == "video" and image_hash:
+            raise ValueError("video registry cannot contain image hash")
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd = os.open(self.lock_path, os.O_CREAT | os.O_RDWR, 0o600)
         with os.fdopen(fd, "r+") as lock:
@@ -72,10 +80,20 @@ class MediaRegistry:
                 "updated_at": datetime.now(timezone.utc).isoformat(),
             }
             records[key] = record
+            if media_type == "image":
+                record.pop("vertical_video_id")
+                record.pop("square_video_id")
+                record.update(media_type="image", image_hash=str(image_hash))
             data["schema_version"] = 3
             self._atomic(data)
             fcntl.flock(lock, fcntl.LOCK_UN)
         return record
+
+    def register_image(self, *, account_id, asset_id, checksum, image_hash, ready, association_verified, source="v3-ad-account-image-prestage"):
+        return self.register(account_id=account_id, asset_id=asset_id, checksum=checksum,
+                             vertical_video_id="", square_video_id=None, ready=ready, source=source,
+                             upload_edge="ad_account_adimages", association_verified=association_verified,
+                             media_type="image", image_hash=image_hash)
 
     def require_ready(
         self,
@@ -84,11 +102,19 @@ class MediaRegistry:
         checksum: str,
         *,
         required_variants: tuple[str, ...] = ("vertical", "square"),
+        media_type: str = "video",
     ) -> dict[str, Any]:
         data = self._load()
         record = (data.get("records") or {}).get(self._key(account_id, asset_id, checksum))
         if not isinstance(record, dict) or record.get("ready") is not True:
             raise MediaNotReady(f"media not ready for account={str(account_id).removeprefix('act_')} asset={asset_id}")
+        if media_type not in {"image", "video"} or record.get("media_type", "video") != media_type:
+            raise MediaNotReady("registry media type mismatch")
+        if media_type == "image":
+            if (not record.get("image_hash") or record.get("vertical_video_id") or record.get("square_video_id")
+                    or record.get("upload_edge") != "ad_account_adimages" or record.get("association_verified") is not True):
+                raise MediaNotReady("image not associated with exact ad account")
+            return record
         allowed = {"vertical", "square"}
         requested = set(required_variants)
         if not requested or not requested.issubset(allowed):
@@ -113,7 +139,7 @@ class MediaRegistry:
             "ready": sum(row.get("ready") is True for row in records),
             "associated": sum(
                 row.get("ready") is True
-                and row.get("upload_edge") == "ad_account_advideos"
+                and row.get("upload_edge") in {"ad_account_advideos", "ad_account_adimages"}
                 and row.get("association_verified") is True
                 for row in records
             ),

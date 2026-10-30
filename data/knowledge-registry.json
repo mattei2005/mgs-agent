@@ -6621,6 +6621,25 @@
       "updated_at": "2026-10-27T18:46:30+00:00"
     },
     {
+      "canonical_key": "content.operations.atena.technical-resource-equivalence",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "consumers": [
+        "atena",
+        "atena-soul",
+        "zeus"
+      ],
+      "domain": "content-operations",
+      "effective_at": "2026-10-30T15:24:17+00:00",
+      "id": "ATENA-TECHNICAL-EQUIVALENCE-1565746078425423954",
+      "kind": "capability",
+      "owner": "Content Operations / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Atena usa meios tecnicos existentes em ContentOps sem dependencia rotineira Zeus",
+      "updated_at": "2026-10-30T15:24:17+00:00"
+    },
+    {
       "canonical_key": "content.operations.atena.technical-execution-access-guidance",
       "canonical_source": "data/atena/editorial-manager-authority.json",
       "consumers": [
@@ -15543,5 +15562,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T03:08:55+00:00"
+  "updated_at": "2026-10-30T15:24:17+00:00"
 }

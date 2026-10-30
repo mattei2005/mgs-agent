@@ -101,9 +101,24 @@ class MediaSpec:
     ready: bool
     upload_edge: str
     association_verified: bool
+    media_type: str = "video"
+    image_hash: str | None = None
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "MediaSpec":
+        kind = value.get("media_type", "video")
+        if kind == "image":
+            if (any(not str(value.get(k) or "").strip() for k in ("asset_id", "checksum", "image_hash"))
+                    or re.fullmatch(r'[a-fA-F0-9]{32}', str(value.get('image_hash') or '')) is None
+                    or value.get("vertical_video_id") or value.get("square_video_id")
+                    or value.get("ready") is not True or value.get("association_verified") is not True
+                    or value.get("upload_edge") != "ad_account_adimages"):
+                raise ManifestError("image requires exact hash, account association and no video IDs")
+            return cls(asset_id=str(value['asset_id']), checksum=str(value['checksum']), vertical_video_id="",
+                       square_video_id=None, ready=True, upload_edge="ad_account_adimages",
+                       association_verified=True, media_type="image", image_hash=str(value['image_hash']))
+        if kind != "video" or value.get("image_hash"):
+            raise ManifestError("unsupported or mixed media type")
         required = ("asset_id", "checksum", "vertical_video_id")
         missing = [name for name in required if not str(value.get(name) or "").strip()]
         if missing:
@@ -158,6 +173,11 @@ class AdSpec:
         media_value = value.get("media")
         if require_media:
             media = MediaSpec.from_dict(media_value or {})
+            if media.media_type == "image":
+                story = payload.get("object_story_spec") or {}
+                if (story.get("video_data") or payload.get("asset_feed_spec")
+                        or (story.get("link_data") or {}).get("image_hash") != media.image_hash):
+                    raise ManifestError("image creative must bind exactly the manifest image hash")
         else:
             if media_value is not None and media_value != {}:
                 raise ManifestError("clone_page_switch must preserve source media and must not provide replacement media")
@@ -426,6 +446,8 @@ class Manifest:
             raise ManifestError("request_id, operation and graph_version are required")
         _iso(str(value.get("created_at") or ""), "created_at")
         campaigns = tuple(CampaignSpec.from_dict(item) for item in (value.get("campaigns") or []))
+        if operation != 'SHEIN-US-DIRECT' and any(ad.media and ad.media.media_type == 'image' for c in campaigns for ad in c.ads):
+            raise ManifestError('image replacement is restricted to SHEIN')
         if operation != 'SHEIN-US-DIRECT' and any(c.reference for c in campaigns):
             raise ManifestError('cross-account reference is restricted to SHEIN')
         if operation != 'SHEIN-US-DIRECT' and any(c.bid_override for c in campaigns):

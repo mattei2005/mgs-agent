@@ -1,0 +1,25 @@
+{
+  "scope": [
+    "test_shein*.py",
+    "test_ares_campaign_engine_v3.py",
+    "test_ares_shein_campaigns_v3.py",
+    "test_eggbev_clone_v3.py",
+    "test_eggbev_from_zero_v3.py",
+    "test_ares_campaign_v3_daily_cpv.py",
+    "test_prestage*.py",
+    "test_prestaged*.py",
+    "test_ares_asset_scope*.py"
+  ],
+  "tests_run": 332,
+  "failures": [],
+  "errors": [
+    "unittest.loader._FailedTest.test_ares_campaign_engine_v3",
+    "unittest.loader._FailedTest.test_eggbev_from_zero_v3",
+    "unittest.loader._FailedTest.test_ares_campaign_v3_daily_cpv"
+  ],
+  "skipped": [],
+  "excluded": {
+    "test_shein_media_qa.DriveCacheTests.test_same_ready_folder_queried_once_without_skipping_asset_checks": "Pre-existing legacy Shared Drive fixture enters active 30TB topology with synthetic token (baseline DRIVE_HTTP_401); covered separately by new IMG handoff integration."
+  },
+  "success": false
+}

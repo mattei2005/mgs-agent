@@ -79,7 +79,9 @@ def load_ready_assets(request, profile, base, common, token):
             raise ValueError('asset is not in the reconciled READY pool')
         if row.get('clean_checksum') != ref['checksum'] or (not manager and (row.get('used_by') or row.get('meta_ad_id'))):
             raise ValueError('asset checksum or previous-use conflict')
-        media = registry.require_ready(profile['account_id'], ref['asset_id'], ref['checksum'], required_variants=('vertical',))
+        from .shein_grouped_media import media_kind
+        kind=media_kind(row['canonical_filename']) if '_IMG_' in row['canonical_filename'] else 'video'
+        media = registry.require_ready(profile['account_id'], ref['asset_id'], ref['checksum'], required_variants=('vertical',),media_type=kind)
         file = ops.drive_file_readback(drive_token, row['asset_drive_id'])
         if not locations.stock_scope_for_token(drive_token,file) or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
             raise ValueError('Drive identity/parent/name mismatch')
@@ -101,6 +103,15 @@ def load_ready_assets(request, profile, base, common, token):
             testing = testing_cache[ready['parents'][0]].get('files') or []
         if len(testing) != 1 or (not locations.stock_scope_for_token(drive_token,ops.drive_file_readback(drive_token,testing[0]['id'])) if locations.active() else testing[0].get('driveId') != '0AEwt4Ye690ocUk9PVA'):
             raise ValueError('canonical TESTING destination missing or ambiguous')
+        if kind=='image':
+            if not row.get('clean_md5') or file.get('md5Checksum')!=row['clean_md5']:
+                raise ValueError('image Drive checksum changed since canonical sanitization')
+            from .image_prestage import read_account_images, require_image, image_title
+            library=read_account_images(common,token,profile['account_id'],hashes=[media['image_hash']])
+            require_image(library,media['image_hash'],name=image_title(ref['asset_id'],ref['checksum'],row['canonical_filename']))
+            rows.append({**media,'language':row['language'],'canonical_filename':row['canonical_filename'],'asset_drive_id':row['asset_drive_id'],
+                         'drive_md5':file.get('md5Checksum'),'ready_parent_id':file['parents'][0],'testing_parent_id':testing[0]['id'],'manager_folder_preserved':bool(manager)})
+            continue
         h, video, _ = common.graph_get(media['vertical_video_id'], token, {'fields': 'id,title,status,thumbnails'})
         if h != 200 or not ready_status(video) or ref['asset_id'] not in str(video.get('title')) or ref['checksum'][:10] not in str(video.get('title')):
             raise ValueError('pre-staged video readiness/lineage title mismatch')
@@ -110,8 +121,9 @@ def load_ready_assets(request, profile, base, common, token):
         rows.append({**media, 'language': row['language'], 'canonical_filename': row['canonical_filename'], 'asset_drive_id': row['asset_drive_id'],
                      'thumbnail_url': thumbs[0]['uri'], 'drive_md5': file.get('md5Checksum'), 'ready_parent_id': file['parents'][0], 'testing_parent_id': testing[0]['id'], 'manager_folder_preserved': bool(manager)})
     # Association is checked on the exact target account, never by a Page video edge.
-    needed = {r['vertical_video_id'] for r in rows}; ids = set(); params = {'fields': 'id', 'limit': 500}
+    needed = {r['vertical_video_id'] for r in rows if r.get('media_type','video')=='video'}; ids = set(); params = {'fields': 'id', 'limit': 500}
     for _ in range(100):
+        if not needed:break
         h, library, _ = common.graph_get('act_' + profile['account_id'] + '/advideos', token, params)
         if h != 200:
             raise ValueError('exact-account media association inventory unavailable')
@@ -142,6 +154,16 @@ def finalize_ready_assets(state, live, base, common, token):
     for slot in desired['ads']:
         ad = actual[slot['name']]; cr = ad['creative']; vid = cr.get('object_story_spec', {}).get('video_data', {}).get('video_id')
         asset = next(r for r in assets if r['asset_id'] == slot['media']['asset_id'])
+        if asset.get('media_type')=='image':
+            from .image_prestage import read_account_images,require_image,image_title
+            image_hash=cr.get('object_story_spec',{}).get('link_data',{}).get('image_hash')
+            if image_hash!=asset['image_hash'] or cr.get('object_story_spec',{}).get('video_data'):
+                raise ValueError('final Meta exact image hash/type mismatch')
+            require_image(read_account_images(common,token,desired['account_id'],hashes=[image_hash]),image_hash,
+                          name=image_title(asset['asset_id'],asset['checksum'],asset['canonical_filename']))
+            assignments[asset['asset_id']]={'campaign_id':live['campaign']['id'],'adset_id':live['adsets']['data'][0]['id'],'ad_id':ad['id'],
+                                           'creative_id':cr['id'],'image_hash':image_hash,'post_id':cr.get('effective_object_story_id')}
+            continue
         h, video, _ = common.graph_get(vid, token, {'fields': 'id,title,status'})
         if h != 200 or not ready_status(video) or asset['asset_id'] not in str(video.get('title')) or asset['checksum'][:10] not in str(video.get('title')):
             raise ValueError('final Meta media lineage/readiness mismatch')
@@ -168,7 +190,11 @@ def finalize_ready_assets(state, live, base, common, token):
                 raise ValueError('inventory reservation changed during postprocess')
             a = assignments[row['asset_id']]
             row.update(status='02_TESTING', ares_eligible=False, used_by=a['campaign_id'], ad_account_id=desired['account_id'],
-                       meta_ad_id=a['ad_id'], meta_creative_id=a['creative_id'], meta_video_id=a['video_id'], effective_object_story_id=a['post_id'])
+                       meta_ad_id=a['ad_id'], meta_creative_id=a['creative_id'], effective_object_story_id=a['post_id'])
+            if a.get('image_hash'):
+                row['meta_image_hash']=a['image_hash']
+            else:
+                row['meta_video_id']=a['video_id']
             asset = next(a for a in assets if a['asset_id'] == row['asset_id'])
             if not asset.get('manager_folder_preserved'):
                 row['asset_path'] = row['asset_path'].removesuffix('/01_READY') + '/02_TESTING'

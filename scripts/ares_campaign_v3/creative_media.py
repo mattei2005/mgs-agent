@@ -59,6 +59,9 @@ def creative_body(payload):
 def matches(actual, expected):
     if str(actual.get('url_tags') or '') != str(expected.get('url_tags') or ''):return False
     if 'contextual_multi_ads' in expected and actual.get('contextual_multi_ads') != expected['contextual_multi_ads']:return False
+    image_hash = ((expected.get('object_story_spec') or {}).get('link_data') or {}).get('image_hash')
+    if image_hash and (((actual.get('object_story_spec') or {}).get('link_data') or {}).get('image_hash') != image_hash):
+        return False
     if expected.get('object_story_spec') and not expected.get('asset_feed_spec'):
         def semantic_story(value):
             out=stable(value)

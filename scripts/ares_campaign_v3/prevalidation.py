@@ -230,6 +230,15 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
                 source_ad_ids.append(ad.source_ad_id)
             if ad.media is None:
                 continue
+            if ad.media.media_type == "image":
+                if manifest.operation != "SHEIN-US-DIRECT":
+                    raise ManifestError("image replacement is scoped to SHEIN-US-DIRECT")
+                record = registry.require_ready(campaign.account_id, ad.media.asset_id, ad.media.checksum, media_type="image")
+                if str(record["image_hash"]) != ad.media.image_hash:
+                    raise ManifestError(f"manifest image hash drifted for asset={ad.media.asset_id}")
+                media_keys.append(f"{campaign.account_id}|{ad.media.asset_id}|{ad.media.checksum}")
+                checks.append("ad_account_image_association")
+                continue
             required_variants = (
                 ("vertical", "square")
                 if ad.media.square_video_id

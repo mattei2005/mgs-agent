@@ -2,6 +2,20 @@
 
 Authority: Rodolfo message 1546184035921829938, Discord thread 1545426987756298340, including in-turn requests for account name/ID/site-list registration, removal of anonymous empty US/BR-like fields, and a compact month-selectable FX/invalid/tax/share screen. Current product source: `/root/mgs-agent/docs/finance-system-product-direction.md`. Checkpoint: `ZEUS-FINANCE-DASH-AUGUST-20260904`.
 
+## Scheduled month opening
+
+1. Read `/root/mgs-agent/docs/finance-month-provisioning-on-demand.md`, the relevant checkpoint and live scheduler entries before answering readiness. Inspect both the OS crontab and Hermes jobs: the recurring runner and a requested one-shot can live in different schedulers. Filter output to the rollover command or matching job rather than dumping unrelated jobs.
+2. Resolve the exact requested date/time with `datetime` and `zoneinfo.ZoneInfo('America/New_York')`, including the offset applicable at execution. Check a conflicting weekday against the calendar; preserve an unambiguous explicit date and explain the correction briefly. Ask only if the conflict leaves two plausible intended dates.
+3. Run a production read-only preflight with `python3 /root/mgs-agent/scripts/finance-month-rollover.py --from-period <source-YYYY-MM> --to-period <next-YYYY-MM> --dry-run`. Require a passing result, no blockers and zero financial writes. Save the full receipt; surface only readiness, blockers, creation state and evidence path. A ready plan does not mean the month exists.
+4. Reuse a matching scheduled job. If the owner requests a one-time opening earlier than the recurring run and no matching job exists, create one absolute, offset-qualified, single-run execution through `cronjob_manage`, addressed to the originating thread. Keep the recurring schedule unchanged only after verifying its shared locks and existing-target no-op behavior; otherwise resolve overlap before scheduling. Do not turn a one-month exception into a permanent cadence change.
+5. Make the job self-contained: approved source/target and authority, canonical policy/checkpoint paths, finance skill/model route, fresh preflight followed by the same bounded command without `--dry-run` at the requested time, and exact readback requirements. Use neither `--recalc` nor `--stage` for normal opening. Repeat preflight at execution because source configuration can change after scheduling. If the target already exists, verify it and its receipt without reseeding. Preserve configuration-only carry and all financial exclusions in the canonical policy.
+6. Read back the saved job's enabled state, exact next-run timestamp, one-shot count, scope and destination; record job identity in checkpoint/inventory rather than in this skill. Keep schedule validation separate from eventual execution acceptance. After execution, require the real target, preserved source and result receipt before declaring creation; API/selector visibility is a separate check, not implied by a successful command.
+7. Reply briefly with the verified date, timezone, action and confirmation destination. On a later “leave it scheduled” message, re-read that same job and confirm; do not recreate it or rerun provisioning. Never claim the future financial operation has already succeeded.
+
+## Historical publication baseline
+
+The pre-created future-period inventory below is historical, not the active provisioning policy. Use `/root/mgs-agent/docs/finance-month-provisioning-on-demand.md` and live state for current availability; do not restore future workspaces or replay the old registration deployment from this reference.
+
 ## Published scope and supersession
 
 Publication and readback: `apps/finance-system/private/ui-periods-1546184035921829938/`; report `reports/finance-ui-periods-1546184035921829938.md`. This supersedes the historical statements that September cannot open, accounts cannot be registered/renamed, and rates require separate large cards. It does not close the entire financial-system migration.

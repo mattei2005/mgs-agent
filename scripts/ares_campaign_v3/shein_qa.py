@@ -7,8 +7,9 @@ from .shein_media_handoff import ready_status
 from .preview_renderer import render_previews
 
 
-def validate_rendered(row, expect_video):
+def validate_rendered(row, expect_video, *, expect_image=False):
     videos=[v for v in row.get('videos',[]) if v.get('readyState',0)>=2 and (v.get('duration') or 0)>0 and v.get('width',0)>0 and v.get('height',0)>0 and not v.get('error')]
+    if expect_image and (videos or not row.get('images')):raise ValueError('preview lacks the expected static image; activation blocked')
     if expect_video and not videos:raise ValueError('preview lacks the expected playable video; activation blocked')
     if not expect_video and not videos and not row.get('images'):raise ValueError('preview lacks real ad media; activation blocked')
 
@@ -27,13 +28,19 @@ def verify_media(common, token, live, desired, source, policy):
     actual={a.get('name'):a for a in live['ads']['data']}
     if len(actual) != len(desired['ads']):raise ValueError('media QA unique ad names/count mismatch')
     sources={str(a['id']):a for a in source['ads']};pairs=[];metadata=dict(source.get('video_metadata') or {})
-    expected_video=[]
+    expected_video=[];expected_image=[]
     for slot in desired['ads']:
         ad=actual[slot['name']];cp=slot['creative_payload'];cr=ad['creative']
         if str(ad.get('source_ad_id')) != str(slot['source_ad_id']):raise ValueError('media QA source lineage mismatch')
         if 'contextual_multi_ads' in cp and cr.get('contextual_multi_ads') != cp['contextual_multi_ads']:raise ValueError('Multi-advertiser ads differs from source; activation blocked')
         if (cp.get('asset_feed_spec') or cp.get('object_story_spec')) and not matches(cr,cp):raise ValueError('full flexible media/copy/identity mismatch')
-        expected=video_slots(cp) or video_slots(sources[str(slot['source_ad_id'])]['creative'])
+        image = (slot.get('media') or {}).get('media_type') == 'image'
+        if image:
+            wanted = slot['media']['image_hash']
+            story = cr.get('object_story_spec') or {}
+            if story.get('video_data') or (story.get('link_data') or {}).get('image_hash') != wanted:
+                raise ValueError('image QA exact hash/type mismatch; activation blocked')
+        expected={} if image else (video_slots(cp) or video_slots(sources[str(slot['source_ad_id'])]['creative']))
         observed=video_slots(cr)
         if cp.get('asset_feed_spec') and set(observed)!=set(expected):raise ValueError('flexible variant labels/count mismatch')
         for label,vid in observed.items():
@@ -42,6 +49,7 @@ def verify_media(common, token, live, desired, source, policy):
             if not sourcevid:raise ValueError('unrecognized video slot')
             pairs.append((sourcevid,vid))
         expected_video.append(bool(expected))
+        expected_image.append(image)
     needed=sorted({v for pair in pairs for v in pair if v not in metadata})
     for offset in range(0,len(needed),50):
         chunk=needed[offset:offset+50]
@@ -66,6 +74,6 @@ def verify_media(common, token, live, desired, source, policy):
             if not match:raise ValueError('preview iframe missing')
             urls.append(html.unescape(match[1]))
     rendered=render_previews(urls,chrome_path=policy['chrome_path'],timeout=int(policy.get('timeout_seconds',35)),expect_video=expected_video,python_path=policy.get('python_path'))
-    for row,wanted in zip(rendered,expected_video):validate_rendered(row,wanted)
+    for row,wanted,image in zip(rendered,expected_video,expected_image):validate_rendered(row,wanted,expect_image=image)
     if len(rendered)!=len(ads):raise ValueError('preview media QA incomplete')
     return {'verified':True,'ad_ids':[a['id'] for a in ads],'creative_ids':[a['creative']['id'] for a in ads], 'variant_pairs':pairs,'rendered_media':rendered,'signed_urls_persisted':False}

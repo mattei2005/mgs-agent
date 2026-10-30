@@ -1,0 +1,66 @@
+======================================================================
+ERROR: test_same_ready_folder_queried_once_without_skipping_asset_checks (test_shein_media_qa.DriveCacheTests.test_same_ready_folder_queried_once_without_skipping_asset_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_media_qa.py", line 179, in test_same_ready_folder_queried_once_without_skipping_asset_checks
+    out=handoff.load_ready_assets({'request_id':'request','asset_refs':refs},{'account_id':'100','language':'EN'},root,common,'OFFLINE_META')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/shein_media_handoff.py", line 83, in load_ready_assets
+    kind=media_kind(row['canonical_filename'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/shein_grouped_media.py", line 50, in media_kind
+    raise ValueError('exact canonical SHEIN IMG PNG/JPG or VID MP4 filename required')
+ValueError: exact canonical SHEIN IMG PNG/JPG or VID MP4 filename required
+
+======================================================================
+ERROR: test_real_isolated_chromium_loads_local_video_and_rejects_link_only (test_shein_media_qa.RendererIntegrationTests.test_real_isolated_chromium_loads_local_video_and_rejects_link_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/preview_renderer.py", line 27, in render_previews
+    from websockets.sync.client import connect
+ModuleNotFoundError: No module named 'websockets'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_media_qa.py", line 153, in test_real_isolated_chromium_loads_local_video_and_rejects_link_only
+    rows=render_previews([base+'/empty.html'],chrome_path=CHROME,timeout=3,allow_local=True,expect_video=[True])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/preview_renderer.py", line 29, in render_previews
+    raise ValueError('media QA renderer Python runtime unavailable') from exc
+ValueError: media QA renderer Python runtime unavailable
+
+======================================================================
+ERROR: test_canonical_rule_is_prospective (test_shein_us_app_naming.UsAppNamingTests.test_canonical_rule_is_prospective)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_us_app_naming.py", line 90, in test_canonical_rule_is_prospective
+    operation = json.loads((ROOT / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json'
+
+======================================================================
+ERROR: test_current_us_shein_policies_accept_new_and_sealed_legacy_names (test_shein_us_app_naming.UsAppNamingTests.test_current_us_shein_policies_accept_new_and_sealed_legacy_names)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_us_app_naming.py", line 74, in test_current_us_shein_policies_accept_new_and_sealed_legacy_names
+    config = json.loads((ROOT / 'data/ares/meta-ads/engine-v3/config.json').read_text())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/root/mgs-agent/work/t_7ab9e9ba/candidate/data/ares/meta-ads/engine-v3/config.json'
+
+----------------------------------------------------------------------
+Ran 295 tests in 7.351s
+
+FAILED (errors=4)

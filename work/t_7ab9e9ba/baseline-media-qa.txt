@@ -1,0 +1,45 @@
+======================================================================
+ERROR: test_same_ready_folder_queried_once_without_skipping_asset_checks (test_shein_media_qa.DriveCacheTests.test_same_ready_folder_queried_once_without_skipping_asset_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_media_qa.py", line 179, in test_same_ready_folder_queried_once_without_skipping_asset_checks
+    out=handoff.load_ready_assets({'request_id':'request','asset_refs':refs},{'account_id':'100','language':'EN'},root,common,'OFFLINE_META')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py", line 84, in load_ready_assets
+    if not locations.stock_scope_for_token(drive_token,file) or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_archive_locations.py", line 57, in stock_scope_for_token
+    native=assert_stock_file(token_drive(token),meta.get('stock_file_id') or meta['id'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_archive_locations.py", line 61, in assert_stock_file
+    meta=d.meta(fid)
+         ^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_archive_bridge.py", line 249, in meta
+    return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_archive_bridge.py", line 246, in api
+    raise ArchiveError('DRIVE_HTTP_'+str(status))
+ares_archive_bridge.ArchiveError: DRIVE_HTTP_401
+
+======================================================================
+ERROR: test_real_isolated_chromium_loads_local_video_and_rejects_link_only (test_shein_media_qa.RendererIntegrationTests.test_real_isolated_chromium_loads_local_video_and_rejects_link_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/scripts/ares_campaign_v3/preview_renderer.py", line 27, in render_previews
+    from websockets.sync.client import connect
+ModuleNotFoundError: No module named 'websockets'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_media_qa.py", line 153, in test_real_isolated_chromium_loads_local_video_and_rejects_link_only
+    rows=render_previews([base+'/empty.html'],chrome_path=CHROME,timeout=3,allow_local=True,expect_video=[True])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/preview_renderer.py", line 29, in render_previews
+    raise ValueError('media QA renderer Python runtime unavailable') from exc
+ValueError: media QA renderer Python runtime unavailable
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.267s
+
+FAILED (errors=2)

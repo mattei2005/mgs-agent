@@ -285,21 +285,25 @@ def verify_media_ads(desired, source, live, warnings):
         ad = actual.get(expected['name']) or {}
         cr = ad.get('creative') or {}
         cp = expected['creative_payload']; story = cr.get('object_story_spec') or {}
-        vd = story.get('video_data') or {}; wanted = cp['object_story_spec']['video_data']
+        image = expected['media'].get('media_type') == 'image'
+        media_key = 'link_data' if image else 'video_data'
+        vd = story.get(media_key) or {}; wanted = cp['object_story_spec'][media_key]
+        if image and (story.get('video_data') or vd.get('image_hash') != expected['media']['image_hash'] or vd.get('link') != wanted.get('link')):
+            raise RouteBlocked('exact image hash/type/destination mismatch')
         if ad.get('status') != desired['status'] or ad.get('issues_info') or str(ad.get('source_ad_id')) != str(expected['source_ad_id']):
             raise RouteBlocked('new-media status/lineage/issues mismatch')
         if str(ad.get('adset_id')) != str(live['adsets']['data'][0]['id']) or story.get('page_id') != cp['object_story_spec']['page_id']:
             raise RouteBlocked('new-media Page/adset mismatch')
         if not cr.get('effective_object_story_id') or cr['effective_object_story_id'] in source_posts:
             raise RouteBlocked('new-media creative reused a source post')
-        for field in ['title', 'message', 'link_description']:
+        for field in (['name', 'message', 'description'] if image else ['title', 'message', 'link_description']):
             if vd.get(field) != wanted.get(field):
                 raise RouteBlocked('new-media copy mismatch')
         if (vd.get('call_to_action') or {}).get('type') != wanted['call_to_action']['type'] or (vd.get('call_to_action') or {}).get('value', {}).get('link') != wanted['call_to_action']['value']['link']:
             raise RouteBlocked('new-media CTA/destination mismatch')
         if dict(parse_qsl(cr.get('url_tags') or '')) != dict(parse_qsl(cp['url_tags'])):
             raise RouteBlocked('new-media tracking mismatch')
-        if desired['mode'] == 'from_zero_prestaged' and vd.get('video_id') != expected['media']['vertical_video_id']:
+        if not image and desired['mode'] == 'from_zero_prestaged' and vd.get('video_id') != expected['media']['vertical_video_id']:
             raise RouteBlocked('direct creation media ID mismatch')
         if desired.get('reference') and cp.get('degrees_of_freedom_spec'):
             from .shein_reference import verify_degrees

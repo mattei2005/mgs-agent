@@ -4,8 +4,8 @@
 
 - Resolver `data/atena/editorial-manager-authority.json` e autenticar o pedido humano na origem antes do write. Uma dependência técnica já autorizada de Raquel não precisa de outra aprovação editorial genérica do CEO.
 - Manter Atena como coordenadora, dona do QA final e da planilha. Usar um executor por alvo, sem replay de publicação ou de caches concluídos.
-- Não interpretar a capacidade limitada da conta Editor como proibição de usar a identidade técnica Zeus já autorizada e existente. Validar as capacidades reais dessa identidade; nunca elevar Atena, trocar credenciais ou contornar `current_user_can`.
-- Antes de concluir que não há caminho de manutenção em Bitnami, confrontar a credencial editorial com o item canônico `Wordpress - <domínio exato>` no 1Password: confirmar por GET autenticado o papel e as capacidades e ler a URL de login cadastrada. Um 404 em `/wp-admin/` ou `/wp-login.php` não elimina uma entrada administrativa explicitamente cadastrada. O executor Zeus pode validar sua identidade técnica sem concedê-la à Atena; acesso administrativo confirmado ainda não certifica um transporte de reparo nem autoriza deploy/remoção de ferramenta temporária.
+- Não interpretar a capacidade limitada da conta Editor como falta de acesso técnico de toda a instalação. Investigar as referências técnicas canonicamente permitidas ao executor escolhido e validar suas capacidades reais; não elevar usuários, trocar credenciais, usar identidade alheia ou contornar `current_user_can`.
+- Antes de concluir que não há caminho de manutenção em Bitnami, confrontar a credencial editorial com o item canônico `Wordpress - <domínio exato>` no 1Password: confirmar por GET autenticado o papel e as capacidades e ler a URL de login cadastrada. Um 404 em `/wp-admin/` ou `/wp-login.php` não elimina uma entrada administrativa explicitamente cadastrada. Comprovar a rota no runtime/perfil do próprio executor, sem transformar Zeus em intermediário obrigatório; acesso administrativo confirmado ainda não certifica transporte de reparo nem autoriza deploy/remoção de ferramenta temporária.
 
 ## Certificar origem e mecanismo
 
@@ -15,6 +15,17 @@
 - Para Yoast home-page, preservar o escopo do objeto derivado existente. A ausência de execução nativa não autoriza general indexing, mudanças de options para disparar watcher, SQL cego ou deployment de endpoint novo.
 - Antes de propor transporte temporário porque uma conta SFTP rejeitou shell, aplicar a sequência de diagnóstico de acesso do SKILL.md: procurar referências de servidor com usuário/senha e chaves vinculadas à instalação exata, não apenas títulos SSH ou arquivos `.pem`. A restrição observada é da conta testada, não prova de ausência de outro SSH. O executor de origem faz descoberta, testes somente leitura e preparação local sem aprovação rotineira de Zeus; reparo remoto exige binding, backup/recuperação/canário e autoridade vigente, e operações protegidas mantêm sua confirmação específica.
 - Em Bitnami, manter a proibição de WPCode executável sem chave `.pem` certificada para recuperação. Administrador REST e SFTP read-only não substituem esse transporte.
+
+## Preflight compartilhado para o executor ContentOps
+
+O executor Atena pode usar `python3 /root/mgs-agent/scripts/mgs-contentops-preflight.py --domain DOMINIO_EXATO` para gate de domínio, resolução canônica 1Password e GETs de identidade/plugins sem segredos ou writes. O procedimento compartilhado é `context/contentops-technical-execution.md`; ele não depende de instalar/copiar a skill Zeus no perfil Atena. Testar pelo handler terminal nativo carregado com o perfil de destino antes de declarar paridade: o resultado de Zeus não prova capacidade do outro agente, e capacidade administrativa não equivale a liberação irrestrita nem entrega do reparo.
+
+## Inspeção nativa e revisão do pacote candidato
+
+1. Antes de instalar ferramenta para descobrir o ambiente, consultar o registry nativo de abilities e seus metadados. Para ambiente remoto, usar `core/get-environment-info` somente quando anunciado e confirmado como leitura/não destrutivo; a versão PHP do terminal local não comprova a versão servida pelo WordPress remoto. Não presumir essas propriedades para qualquer outra ability.
+2. Vincular lint, testes, revisão e hashes ao pacote final exato. Se um candidato for retirado, tratar seus recibos como históricos; não somar suites antigas ao total final nem usar a revisão de outra versão como liberação.
+3. Se a revisão detectar lacunas de concorrência, snapshot ou recuperação, manter a escrita desabilitada e delimitar o que o artefato remanescente realmente faz. Uma ferramenta de inspeção pode obter evidência, mas testes locais com doubles não certificam backup/restauração nem execução segura em produção.
+4. Ao propor uma fase somente de inspeção, indicar o dado que falta, a alteração administrativa causada pela instalação, os componentes próprios exatos e o aceite de exportação/limpeza. Explicar que essa decisão não conclui o reparo nem autoriza automaticamente uma fase posterior de escrita; qualquer mudança de escopo permanece sujeita à autoridade vigente.
 
 ## WPCode existente: preservar efeitos laterais
 

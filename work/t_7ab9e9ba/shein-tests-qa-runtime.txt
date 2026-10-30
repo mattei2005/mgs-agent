@@ -1,0 +1,23 @@
+======================================================================
+ERROR: test_same_ready_folder_queried_once_without_skipping_asset_checks (test_shein_media_qa.DriveCacheTests.test_same_ready_folder_queried_once_without_skipping_asset_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/tests/test_shein_media_qa.py", line 179, in test_same_ready_folder_queried_once_without_skipping_asset_checks
+    out=handoff.load_ready_assets({'request_id':'request','asset_refs':refs},{'account_id':'100','language':'EN'},root,common,'OFFLINE_META')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_campaign_v3/shein_media_handoff.py", line 86, in load_ready_assets
+    if not locations.stock_scope_for_token(drive_token,file) or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_archive_locations.py", line 57, in stock_scope_for_token
+    native=assert_stock_file(token_drive(token),meta.get('stock_file_id') or meta['id'])
+                             ^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/ares_archive_locations.py", line 47, in token_drive
+    from mgs_google_workspace_auth import api_json
+  File "/root/mgs-agent/work/t_7ab9e9ba/candidate/scripts/mgs_google_workspace_auth.py", line 24, in <module>
+    from cryptography.hazmat.primitives import hashes, serialization
+ModuleNotFoundError: No module named 'cryptography'
+
+----------------------------------------------------------------------
+Ran 295 tests in 11.199s
+
+FAILED (errors=1)

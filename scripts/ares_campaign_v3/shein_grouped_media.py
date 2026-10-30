@@ -35,12 +35,19 @@ def validate_groups(request):
         if not all(isinstance(g[k],str) and g[k].strip() for k in ['product_label','primary_text']):
             raise ValueError('literal product and Primary text required for each group')
         for f in g['files']:
-            if not isinstance(f,str) or not re.fullmatch(r'SHEIN_US_(EN|ES)_VID_[A-Z0-9_]+_(PV|NV|PH|NH)_[0-9]{3}\.mp4',f):
-                raise ValueError('exact canonical SHEIN video filename required')
+            media_kind(f)
         files.extend(g['files'])
     if len(files)!=len(set(files)):
         raise ValueError('one asset lineage cannot be duplicated across campaign groups')
     return files
+
+
+def media_kind(filename):
+    if isinstance(filename, str):
+        match = re.fullmatch(r'SHEIN_US_(EN|ES)_(VID|IMG)_[A-Z0-9_]+_(PV|NV|PH|NH)_([0-9]{3})\.(mp4|png|jpg|jpeg)', filename)
+        if match and match[4] != '000' and ((match[2] == 'VID' and match[5] == 'mp4') or (match[2] == 'IMG' and match[5] in {'png','jpg','jpeg'})):
+            return 'image' if match[2] == 'IMG' else 'video'
+    raise ValueError('exact canonical SHEIN IMG PNG/JPG or VID MP4 filename required')
 
 
 def manager_folder(request, profile, base, ops, drive_token):
@@ -133,8 +140,13 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         matches=[r for r in rows if r.get('canonical_filename')==filename]
         if len(matches)!=1:raise ValueError('canonical filename missing or ambiguous')
         row=matches[0]
+        if row.get('reference_only') is True or (row.get('properties') or {}).get('reference_only') in {True,'true','1'}:
+            raise ValueError('reference-only media prohibited')
         if row.get('language')!=profile['language'] or row.get('vertical')!='SHEIN' or row.get('metadata_clean') is not True:
             raise ValueError('selected media language/sanitization mismatch')
+        kind=media_kind(filename)
+        if row.get('format') not in {None, 'IMG' if kind=='image' else 'VID'}:
+            raise ValueError('selected inventory format/filename mismatch')
         import ares_archive_storage as storage
         storage.require_lineage_available(row)
         if row.get('reservation_request_id') not in {None,request['request_id']}:
@@ -147,6 +159,8 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     def download(row):
         import ares_archive_locations as locations
         f=ops.drive_file_readback(dt,row['asset_drive_id'])
+        if f.get('reference_only') is True or (f.get('properties') or {}).get('reference_only') in {True,'true','1'}:
+            raise ValueError('reference-only Drive media prohibited')
         if not locations.stock_scope_for_token(dt,f) or f.get('trashed') or f.get('name')!=row['canonical_filename'] or f.get('parents')!=[folder['id']]:raise ValueError('selected file live identity/folder mismatch')
         path=work_dir/row['canonical_filename']
         if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest()!=row['clean_checksum']:
@@ -159,12 +173,16 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         if check.returncode!=0:raise ValueError('selected file failed metadata-clean verification')
         if not re.search(r'^clean:\s*true\s*$', check.stdout, re.MULTILINE):
             raise ValueError('selected file metadata not clean')
-        return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'drive_id':f['id'],'provider_drive_id':f.get('provider_id',f['id']),'storage_record_kind':f.get('record_kind','native_drive_metadata'),'drive_md5':f['md5Checksum'],'drive_parent_id':folder['id'],'metadata_clean':True}
+        kind=media_kind(row['canonical_filename'])
+        if kind=='image':
+            from .image_prestage import validate_local_image
+            validate_local_image(path,row['clean_checksum'])
+        return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'media_type':kind,'drive_id':f['id'],'provider_drive_id':f.get('provider_id',f['id']),'storage_record_kind':f.get('record_kind','native_drive_metadata'),'drive_md5':f['md5Checksum'],'drive_parent_id':folder['id'],'metadata_clean':True}
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:assets=list(pool.map(download,selected))
     # Reconcile scoped Meta usage by exact known media IDs and deterministic
     # lineage titles; requested reuse is explicit, never a claim of novelty.
     params={'fields':'id,title','limit':500};videos=[];seen=set()
-    while True:
+    while any(a['media_type']=='video' for a in assets):
         h,page,_=common.graph_get('act_'+account['account_id']+'/advideos',token,params)
         if h!=200:raise ValueError('account media reconciliation unavailable')
         videos.extend(page.get('data') or [])
@@ -173,6 +191,13 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         if not cursor or cursor in seen:raise ValueError('account media reconciliation pagination invalid')
         seen.add(cursor);params['after']=cursor
     observed={a['asset_id']:[v['id'] for v in videos if a['asset_id'] in str(v.get('title')) and a['checksum'][:10] in str(v.get('title'))] for a in assets}
+    from .image_prestage import AdAccountImageUploader, image_title, prestage_images
+    images=[a for a in assets if a['media_type']=='image']
+    image_uploader=AdAccountImageUploader(common=common,user_token=token,account_id=account['account_id'],graph_version=cfg.get('graph_version','v26.0'))
+    image_library=image_uploader.inventory() if images else []
+    observed_images={a['asset_id']:[r['hash'] for r in image_library if r.get('name')==image_title(a['asset_id'],a['checksum'],a['canonical_filename'])] for a in images}
+    if any(len(hashes)>1 for hashes in observed_images.values()):
+        raise ValueError('ambiguous account image lineage before reservation')
     with inv.with_suffix(inv.suffix+'.lock').open('a+') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX)
         current=[json.loads(l) for l in inv.read_text().splitlines() if l.strip()];ids={r['asset_id'] for r in selected};stamp=datetime.now(timezone.utc).isoformat()
@@ -187,11 +212,16 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
             if not any(x.get('request_id')==request['request_id'] for x in history):history.append({'request_id':request['request_id'],'previous_status':row.get('status'),'previous_used_by':row.get('used_by'),'previous_reservation_status':row.get('reservation_status'),'at':stamp,'authority':request['authorized_by']})
             row.update(reservation_request_id=request['request_id'],reservation_status='RESERVADO_PELO_REQUEST',ares_eligible=False,manager_media_folder_id=folder['id'],explicit_asset_request=True,reservation_authority=request['authorized_by'],last_reconciled_at=stamp)
             row['request_media_reconciliation']={'account_id':account['account_id'],'known_video_ids':observed[row['asset_id']],'requested_reuse':True,'no_novelty_claim':True,'drive_live':True}
+            if row['asset_id'] in observed_images:
+                row['request_media_reconciliation']['known_image_hashes']=observed_images[row['asset_id']]
         ops.atomic_inventory(current)
     driver.atomic_json(proof_dir/'media-preparation.json',{'request_id':request['request_id'],'account_id':account['account_id'],'folder_id':folder['id'],'assets':assets,'reconciliation':observed,'drive_moves':0,'novelty_claim':False})
     if cfg.get('media_upload_enabled') is not True:raise ValueError('media upload gate disabled')
     uploader=AdAccountVideoUploader(common=common,user_token=token,account_id=account['account_id'],graph_version=cfg.get('graph_version','v26.0'))
-    result=OnDemandMediaPipeline(PrestageService(MediaRegistry(base/'data/ares/meta-ads/engine-v3/media-registry.json'),uploader),max_workers=5).run(account_id=account['account_id'],assets=assets,prepare_asset=lambda a:{'vertical_path':a['vertical_file'],'square_path':None},required_variants=('vertical',))
+    registry=MediaRegistry(base/'data/ares/meta-ads/engine-v3/media-registry.json')
+    result=OnDemandMediaPipeline(PrestageService(registry,uploader),max_workers=5).run(account_id=account['account_id'],assets=[a for a in assets if a['media_type']=='video'],prepare_asset=lambda a:{'vertical_path':a['vertical_file'],'square_path':None},required_variants=('vertical',))
+    img_result=prestage_images(images,account_id=account['account_id'],registry=registry,uploader=image_uploader,proof_dir=proof_dir,atomic_json=driver.atomic_json)
+    result['assets'].extend(img_result['assets']);result['registry_hits']+=img_result['registry_hits']
     out=copy.deepcopy(request);out['asset_refs']=[{'asset_id':a['asset_id'],'checksum':a['checksum']} for a in assets]
     driver.atomic_json(proof_dir/'request-ready.json',out)
     driver.atomic_json(proof_dir/'prestage-summary.json',{'request_id':request['request_id'],'assets':len(result['assets']),'ready':all(a['registry']['ready'] for a in result['assets']),'registry_hits':result['registry_hits']})

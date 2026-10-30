@@ -1,0 +1,87 @@
+{
+  "request_id": "shein-1565747351543480374",
+  "real_input_unchanged": true,
+  "source_live_campaign_id": "120250750964580629",
+  "source_adsets": 1,
+  "source_ads": 2,
+  "account_http_200": true,
+  "intake_validation": "PASS",
+  "contract_replay": "PASS",
+  "campaigns": 8,
+  "images": 16,
+  "daily_budget_minor_each": 2500,
+  "daily_budget_minor_total": 20000,
+  "bid_strategy": "COST_CAP",
+  "bid_amount_minor": 95,
+  "original_start_time": "2026-10-30T11:45:00-04:00",
+  "status_intent": "ACTIVE",
+  "source_unchanged": true,
+  "plan": {
+    "status": "DRY_RUN_OK",
+    "request_id": "shein-1565747351543480374",
+    "manifest_digest": "8f04048c521e7e9cde9c3c9153b8a178363741abcab75da37f91f685ab9af493",
+    "campaign_count": 8,
+    "plan": {
+      "request_id": "shein-1565747351543480374",
+      "lane_count": 1,
+      "global_wave_count": 4,
+      "campaigns_per_global_wave": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "lanes": {
+        "937846586033361": [
+          {
+            "bundle": 1,
+            "campaigns": 2,
+            "modes": [
+              "clone_prestaged"
+            ],
+            "outer_write_calls": 5,
+            "outer_readback_calls": 1,
+            "intermediate_get_calls": 0
+          },
+          {
+            "bundle": 2,
+            "campaigns": 2,
+            "modes": [
+              "clone_prestaged"
+            ],
+            "outer_write_calls": 5,
+            "outer_readback_calls": 1,
+            "intermediate_get_calls": 0
+          },
+          {
+            "bundle": 3,
+            "campaigns": 2,
+            "modes": [
+              "clone_prestaged"
+            ],
+            "outer_write_calls": 5,
+            "outer_readback_calls": 1,
+            "intermediate_get_calls": 0
+          },
+          {
+            "bundle": 4,
+            "campaigns": 2,
+            "modes": [
+              "clone_prestaged"
+            ],
+            "outer_write_calls": 5,
+            "outer_readback_calls": 1,
+            "intermediate_get_calls": 0
+          }
+        ]
+      }
+    },
+    "network_calls": 0,
+    "writes": 0
+  },
+  "IMPORTANT": "Image hashes/readiness/association are SYNTHETIC in an isolated test registry. No ready request or executable manifest saved. Actual prestage, live validation/plan, all-image previews and ACTIVE readback remain Ares work.",
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "inventory_writes": 0,
+  "uploads": 0
+}

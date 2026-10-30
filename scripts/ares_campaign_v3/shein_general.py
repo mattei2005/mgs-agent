@@ -76,6 +76,9 @@ def build(request, source, number, account_config):
         filenames = [f for group in groups for f in group['files']]
         if len(by_filename) != len(assets) or set(by_filename) != set(filenames):
             raise ValueError('resolved assets do not match exact requested groups')
+        from .shein_grouped_media import media_kind
+        if any(media_kind(f) != by_filename[f].get('media_type','video') for f in filenames):
+            raise ValueError('resolved media type differs from exact requested filename')
         payload = None; campaigns = []
         for offset, group in enumerate(groups):
             child = copy.deepcopy(request)
@@ -235,11 +238,18 @@ def _build_one(request, source, number, account_config):
             ad, cr, story, media, tags = source_data[index % len(source_data)]
             if asset.get('language') != p['language'] or not asset.get('association_verified') or not asset.get('ready'):
                 raise ValueError('asset language/readiness mismatch')
-            if not asset.get('thumbnail_url') or not asset.get('vertical_video_id'):
+            image = asset.get('media_type', 'video') == 'image'
+            if asset.get('media_type', 'video') not in {'image','video'}:
+                raise ValueError('unsupported asset media type')
+            if image and (not asset.get('image_hash') or asset.get('vertical_video_id') or asset.get('upload_edge') != 'ad_account_adimages'):
+                raise ValueError('asset image hash/account association incomplete')
+            if not image and (not asset.get('thumbnail_url') or not asset.get('vertical_video_id')):
                 raise ValueError('asset thumbnail/media incomplete')
             cta = copy.deepcopy(media['call_to_action']); cta.setdefault('value', {})['link'] = request['website_url'] if reference else p['destination_base'] + '?' + tags
-            vd = {'video_id': asset['vertical_video_id'], 'title': request.get('_headline', media.get('title') or media.get('name')),
-                  'message': request.get('_primary_text', request.get('primary_text', media['message'])), 'call_to_action': cta, 'image_url': asset['thumbnail_url']}
+            vd = {'title': request.get('_headline', media.get('title') or media.get('name')),
+                  'message': request.get('_primary_text', request.get('primary_text', media['message'])), 'call_to_action': cta}
+            if not image:
+                vd.update(video_id=asset['vertical_video_id'], image_url=asset['thumbnail_url'])
             if not vd['title']:
                 raise ValueError('copy headline missing')
             if media.get('link_description') or media.get('description'):
@@ -247,6 +257,14 @@ def _build_one(request, source, number, account_config):
             creative = {'name': f'SHEIN {p["manager_code"]} C{number} {asset["canonical_filename"]}',
                         'object_story_spec': {'page_id': p['page_id'], 'video_data': vd},
                         'degrees_of_freedom_spec': _individual_dof(cr), 'url_tags': '' if reference else tags}
+            if image:
+                ld = copy.deepcopy(vd)
+                ld['name'] = ld.pop('title')
+                if 'link_description' in ld:
+                    ld['description'] = ld.pop('link_description')
+                ld.update(image_hash=asset['image_hash'], link=cta['value']['link'])
+                creative['object_story_spec'].pop('video_data')
+                creative['object_story_spec']['link_data'] = ld
             if reference:
                 from .shein_reference import creative_degrees
                 degrees = creative_degrees(cr)
@@ -259,13 +277,13 @@ def _build_one(request, source, number, account_config):
                 creative['object_story_spec']['instagram_user_id'] = ig
             if cr.get('contextual_multi_ads') is not None:
                 creative['contextual_multi_ads'] = copy.deepcopy(cr['contextual_multi_ads'])
-            if mode == 'clone_prestaged':
+            if mode == 'clone_prestaged' and not image:
                 creative['media_sourcing_spec'] = {'titles': [{'text': vd['title']}], 'bodies': [{'text': vd['message']}], 'videos': [{
                     'video_id': asset['vertical_video_id'], 'original_video_id': asset['vertical_video_id'], 'source': 'multi_media',
                     'opt_in_status': 'opt_in', 'thumbnail_source': 'generated_default', 'thumbnail_url': asset['thumbnail_url']}]}
             slot = {'name': f'AD {index+1:02d} - {asset["canonical_filename"].rsplit(".",1)[0]}',
                     'source_ad_id': str(ad['id']), 'creative_payload': creative,
-                    'media': {k: asset[k] for k in ['asset_id', 'checksum', 'vertical_video_id', 'ready', 'upload_edge', 'association_verified']}}
+                    'media': {k: asset[k] for k in ['asset_id', 'checksum', 'ready', 'upload_edge', 'association_verified', *(['media_type','image_hash'] if image else ['vertical_video_id'])]}}
             ads.append(slot)
     from decimal import Decimal
     budget = Decimal(str(request['budget_usd'])) * 100
