@@ -2952,6 +2952,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SHEIN-IMG-REVIEW-t_fc58be96",
+      "next_step": "Testar, instalar atomicamente, validar read-only em Ares, devolver t_8f7a90a8",
+      "objective": "Manutenção técnica review exato 008–015 sem campanha writes",
+      "source": "kanban:t_fc58be96",
+      "state": "staged; fresh discord get4 e binding8/8/16 selados; testes pendentes",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-10-30T17:36:18+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "SHEIN-IMG-SOURCING-t_9bf5723f",
       "next_step": "Ares t_8f7a90a8: campaign com MESMO request-ready --dry-run e --confirm-execute; QA integral/readback final; sem prepare-media/reupload/recriar008/009",
       "objective": "Corrigir sourcing IMG central/recovery preservando request/IDs/manifests e sem provider writes",
@@ -7992,5 +8002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T17:33:31+00:00"
+  "updated_at": "2026-10-30T17:36:18+00:00"
 }
