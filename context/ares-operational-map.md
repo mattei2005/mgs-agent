@@ -402,6 +402,7 @@ Regras:
 - pedido de copiar/manter: preservar na entrada;
 - listar `original_filename → canonical_filename`;
 - Drive write exige readback por ID/nome/tamanho.
+- Entrega final em pasta de gestor: política canônica `data/ares/creative-ops/manager-delivery-policy.json`, autoridade permanente de Rodolfo `1565546229914411133`; próximos pedidos explícitos equivalentes não exigem novo OK do CEO. Após READY/arquivo/ACK e transferência, usar `scripts/ares_manager_delivery.py` para mover o mesmo atalho clean à pasta existente/registrada exata, com intent CAS, recibo e inventário real; sem mudança de IDs, reserva, RAW, ACL, credencial ou controlador de retirada. Procedimento: `creative-operations-mgs/references/manager-folder-delivery.md`.
 
 ## 6. Naming
 

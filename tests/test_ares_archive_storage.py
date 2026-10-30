@@ -7,6 +7,9 @@ class StorageTests(unittest.TestCase):
  def setUpClass(cls):
   assert spec and spec.loader;cls.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.m)
  def setUp(self):
+  # This fixture models pre-cutover Shared Drive stock, not live config.
+  from unittest.mock import patch
+  legacy=patch.object(self.m.locations,'active',return_value=None);legacy.start();self.addCleanup(legacy.stop)
   self.entry={'sourceId':'logicalOffline001','archiveId':'archiveOffline001','archiveParentId':'archiveParentOffline','lineageId':'assetOffline001','role':'clean','sha256':'a'*64,'md5':'b'*32,'size':'200','owner':'mgsdigitalcorp@gmail.com','verified':True,'stockShortcutId':'shortcutOffline001'}
   self.physical={'id':'archiveOffline001','name':'SHEIN_US_ES_IMG_TEST_NH_001.png','mimeType':'image/png','size':'200','md5Checksum':'b'*32,'sha256Checksum':'a'*64,'owners':[{'emailAddress':'mgsdigitalcorp@gmail.com'}],'parents':['archiveParentOffline'],'trashed':False}
   self.stock={'id':'shortcutOffline001','name':self.physical['name'],'mimeType':'application/vnd.google-apps.shortcut','driveId':'0AEwt4Ye690ocUk9PVA','parents':['readyOffline001'],'trashed':False,'shortcutDetails':{'targetId':'archiveOffline001'},'properties':{'mgsArchiveLogicalSource':'logicalOffline001'}}

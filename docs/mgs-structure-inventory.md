@@ -266,6 +266,8 @@
 
 Atualização estrutural de 2026-07-12:
 
+Adendo — entrega Creative Ops em pasta de gestor: `scripts/ares_manager_delivery.py` é a rota dedicada SA de movimento do mesmo atalho clean após READY + ACK + stock transfer, com intent CAS e recibo em `data/ares/creative-ops/30tb-archive/manager-delivery/`. Autoridade permanente limitada: `data/ares/creative-ops/manager-delivery-policy.json`, Rodolfo `1565546229914411133`, registro `ares.creative.manager-folder-delivery`. Integrações: `ares_manual_intake_completion.py` verifica o destino final do plano; `ares_archive_retirement.py` aceita pasta de gestor somente com recibo exato, sem mudar autorização/limites de exclusão. Testes: `tests/test_ares_manager_delivery.py`; fixture histórica storage isolada do cutover vivo. Sem ACL, credencial, nova estrutura Drive, campanha ou alteração de identidade.
+
 ```text
 Componente                              Estado atual
 --------------------------------------  ---------------------------------------------------------
