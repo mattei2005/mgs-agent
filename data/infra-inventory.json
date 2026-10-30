@@ -900,17 +900,19 @@
       "owner_task_id": "t_9bf5723f",
       "owner_run_id": 12,
       "owner_comment_id": 25,
-      "state": "native_validation_pending",
+      "state": "resolved_validated",
       "cause": "Offline test copies in active Kanban stage correctly blocked the batch by sensitive filename",
       "paths": [".gitignore", "tests/test_auto_commit_sensitive_paths.py"],
       "correction": "Ignore only /work/t_9bf5723f/stage/ and /work/t_9bf5723f/rollback/; preserve local bytes, sibling evidence, production paths and sensitive guard",
       "partial_effects": "Empty index; blocked batch did not start commit/push; origin run remains sole campaign-maintenance owner",
       "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1565767521313755241",
-      "validation": {"watcher_tests_passed": 21, "monitor_tests_passed": 17, "git_diff_check": "PASS", "persistent_service": "mgs-autocommit active/running; NRestarts=0"},
+      "validation": {"watcher_tests_passed": 21, "monitor_tests_passed": 17, "git_diff_check": "PASS", "persistent_service": "mgs-autocommit active/running; NRestarts=0", "native_commit": "3f0cd8c5a461289b9187ef474f8642469c46dc8b", "native_push_ok_at": "2026-10-30T12:44:48-04:00", "remote_main_equals_head": true, "monitor_failures": 0, "stage_rollback_tracked_files": 0, "local_copies_preserved": true, "owner_comment_readback_verified": true, "recovery_transport": "MGS_DRY_RUN=1; final reply delegated to resolver, no duplicate recovery Discord post"},
       "manual_commit_or_push": false,
       "credentials_changed": false,
       "services_restarted": false,
-      "report_infra_status": "pending_native_validation"
+      "report_infra_status": "sent_and_get_verified",
+      "report_infra_message_id": "1565768602877956318",
+      "report_readback_http": 200
     },
     {
       "id": "zeus-top-hallazgos-shein-1565756297008381957",

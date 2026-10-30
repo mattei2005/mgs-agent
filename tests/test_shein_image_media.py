@@ -43,7 +43,8 @@ class ImageTests(unittest.TestCase):
             for ad in payload['campaigns'][0]['ads']:
                 cp=ad['creative_payload'];ld=cp['object_story_spec']['link_data']
                 self.assertEqual(ld['message'],r['campaign_groups'][0]['primary_text'])
-                self.assertNotIn('video_data',cp['object_story_spec']);self.assertNotIn('media_sourcing_spec',cp)
+                self.assertNotIn('video_data',cp['object_story_spec'])
+                self.assertEqual(cp['media_sourcing_spec']['images'],[{'hash':ld['image_hash'],'source':'multi_media','opt_in_status':'opt_in'}])
                 self.assertEqual(ld['link'],ld['call_to_action']['value']['link'])
             sealed=prevalidate_payload(payload,registry)
             self.assertIn('ad_account_image_association',sealed['prevalidation']['checks'])
@@ -271,6 +272,11 @@ class ImageRendererActivationTests(unittest.TestCase):
             with self.assertRaises(ValueError):engine.activate_verified(target,creation,proof)
             self.assertEqual(transport.posts,[])
             tree['ads']['data'][0]['creative']['object_story_spec']['link_data']['image_hash']=assets[0]['image_hash']
+            original_sourcing=copy.deepcopy(tree['ads']['data'][0]['creative']['media_sourcing_spec'])
+            tree['ads']['data'][0]['creative']['media_sourcing_spec']['videos']=[{'video_id':'unapproved-source'}]
+            with self.assertRaises(ValueError):engine.activate_verified(target,creation,proof)
+            self.assertEqual(transport.posts,[])
+            tree['ads']['data'][0]['creative']['media_sourcing_spec']=original_sourcing
             self.assertEqual(engine.activate_verified(target,creation,proof)['status'],'COMPLETE_FUTURE_ACTIVE')
             self.assertTrue(all(body=={'status':'ACTIVE'} for _,body in transport.posts));self.assertEqual(len(transport.posts),5)
 

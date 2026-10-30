@@ -178,6 +178,12 @@ class AdSpec:
                 if (story.get("video_data") or payload.get("asset_feed_spec")
                         or (story.get("link_data") or {}).get("image_hash") != media.image_hash):
                     raise ManifestError("image creative must bind exactly the manifest image hash")
+                if 'media_sourcing_spec' in payload:
+                    from .image_sourcing import effective
+                    try:
+                        effective(payload)
+                    except (ValueError, KeyError) as exc:
+                        raise ManifestError('image sourcing must bind exact media/copy') from exc
         else:
             if media_value is not None and media_value != {}:
                 raise ManifestError("clone_page_switch must preserve source media and must not provide replacement media")

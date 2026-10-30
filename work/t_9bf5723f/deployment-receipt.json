@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-30T16:46:14.958552+00:00",
+  "method": "renameat2_RENAME_EXCHANGE",
+  "rollback_package": "/root/mgs-agent/work/t_9bf5723f/rollback/atomic-original-package",
+  "changed_files": {
+    "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py": "2a604dae699523623c158cd05f058b5f06e271c1a180b4d36a984600af46e7d3",
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_general.py": "ea820c99924397b732f58aebead77f41c5ff1f4002171432c19f548c741afb2f",
+    "/root/mgs-agent/scripts/ares_campaign_v3/engine.py": "51c6595307b1fd683bbc32e6898de35fd974fba934e9eb5e0c20d2371add3ac3",
+    "/root/mgs-agent/scripts/ares_campaign_v3/schema.py": "04231a32a2ea75e22992f0bf723e3437c3c9d77de778b9832f928aaf7a96dea1",
+    "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py": "4f27fac6db7a11a96cea987ef0a16fb91cd2a409a7208ed31c67669889acb873",
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py": "4f425c4f8ea52862a9317df30df6d354e7f72c2785d7e4dcc2854a391975c246",
+    "/root/mgs-agent/scripts/ares_campaign_v3/activation.py": "fbffafde93a76cda52298e1622b68d97b2b016c8c6d66e23334c5ea30f0046d5"
+  },
+  "changed_tests": {
+    "/root/mgs-agent/tests/test_shein_image_sourcing.py": "8c8dd13855d93f11dddbe3787cc4dde172b1c1130ad4ae7fdc11d4767435d822",
+    "/root/mgs-agent/tests/test_shein_image_media.py": "cda0f0ab811f87d7e2a6264a2759fbfd76c55e1da0eb701e33bf4922254fd865",
+    "/root/mgs-agent/tests/test_shein_single_clone_route.py": "d6bac75d537a1a49d1d51b0bab05188be6e0e0ab9b1ca8cd2c2508f6fcc51ca5"
+  },
+  "active_writer_subprocesses": [],
+  "original_request_and_engine_locks_acquired": true,
+  "gateway_or_worker_restart": false,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "operational_state_edits": 0
+}

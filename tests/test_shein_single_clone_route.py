@@ -231,7 +231,7 @@ class PipelineTests(unittest.TestCase):
                     'page_id': PAGE, 'manifest': self.manifest}
         self.prepare = self.stack.enter_context(patch.object(route, '_prepare', return_value=(prepared, 'OFFLINE_PAGE_TOKEN')))
         self.engine = Mock()
-        self.engine.dry_run.return_value = {'plan': {'offline': True}}
+        self.engine.dry_run.return_value = {'plan': {'offline': True}, 'effective_payload_recovery': {'legacy_image_slots': 0, 'meta_acceptance_verified': False}}
         self.engine.execute.return_value = {'status': 'COMPLETE_PAUSED', 'campaign_ids': ['target-campaign']}
         self.stack.enter_context(patch.object(route, 'CampaignEngine', return_value=self.engine))
         live = live_fixture(self.manifest, self.source)

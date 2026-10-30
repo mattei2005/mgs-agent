@@ -265,6 +265,9 @@ def _build_one(request, source, number, account_config):
                 ld.update(image_hash=asset['image_hash'], link=cta['value']['link'])
                 creative['object_story_spec'].pop('video_data')
                 creative['object_story_spec']['link_data'] = ld
+                if mode == 'clone_prestaged':
+                    from .image_sourcing import sourcing
+                    creative['media_sourcing_spec'] = sourcing(creative)
             if reference:
                 from .shein_reference import creative_degrees
                 degrees = creative_degrees(cr)

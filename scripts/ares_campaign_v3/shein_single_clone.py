@@ -715,7 +715,7 @@ def _readback(common, token, campaign_id):
     live = _batch(common, token, [
         {'name': 'campaign', 'path': campaign_id, 'params': {'fields': 'id,account_id,name,status,effective_status,daily_budget,bid_strategy,start_time'}},
         {'name': 'adsets', 'path': campaign_id + '/adsets', 'params': {'fields': 'id,name,bid_amount,bid_constraints,bid_strategy,status,start_time,targeting,attribution_spec,promoted_object,billing_event,optimization_goal,is_dynamic_creative', 'limit': 50}},
-        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
+        {'name': 'ads', 'path': campaign_id + '/ads', 'params': {'fields': 'id,name,status,adset_id,source_ad_id,issues_info,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}', 'limit': 50}}])
     for key in ['adsets', 'ads']:
         _complete_edge(live[key])
     return live
@@ -903,6 +903,7 @@ def _run_bound_request(request: dict[str, Any], *, confirm_execute: bool = False
                     'name': manifest.campaigns[0].name, 'budget_usd': budget_minor(resolved_request['budget_usd']) / 100,
                     'start_time': manifest.campaigns[0].start_time, 'delivery_status': request['status'],
                     'plan': plan['plan'], 'timings': timings, 'campaign_writes': 0,
+                    'effective_payload_recovery': plan['effective_payload_recovery'],
                     'creation_status': manifest.campaigns[0].status, 'batch_qa_before_activation': bool(state.get('batch_barrier')),
                     'read_http_requests': common.http_requests, 'logical_gets': common.logical_gets}
         # Seal request-scoped authority before the first engine call; crashes resume this exact manifest.

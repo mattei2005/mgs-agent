@@ -108,6 +108,8 @@ class CampaignEngine:
         validate_account_policy(manifest, self.config)
         plan = self.planner.build(manifest)
         summary = plan.summary()
+        from .image_sourcing import RECIPE, legacy_count
+        legacy_images = sum(legacy_count(c) for c in manifest.campaigns) if manifest.operation == 'SHEIN-US-DIRECT' else 0
         return {
             "status": "DRY_RUN_OK",
             "request_id": manifest.request_id,
@@ -116,11 +118,17 @@ class CampaignEngine:
             "plan": summary,
             "network_calls": 0,
             "writes": 0,
+            "effective_payload_recovery": {"recipe": RECIPE, "legacy_image_slots": legacy_images,
+                "fresh_zero_ads_readback_required": bool(legacy_images), "meta_acceptance_verified": False},
         }
 
     def _points(self, bundle: BundlePlan) -> int:
         points_by_mode = self.config.get("points_per_mode") or {}
-        return sum(int(points_by_mode.get(campaign.mode, 45)) for campaign in bundle.campaigns)
+        points = sum(int(points_by_mode.get(campaign.mode, 45)) for campaign in bundle.campaigns)
+        from .image_sourcing import legacy_count
+        if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT':
+            points += 3 * sum(bool(legacy_count(c)) for c in bundle.campaigns)
+        return points
 
     @staticmethod
     def _readback_only_record(bundle: BundlePlan, record: dict[str, Any]) -> bool:
@@ -239,7 +247,7 @@ class CampaignEngine:
             operations.extend([
                 BatchOperation(f"readback_campaign_{index}", "GET", f"{campaign_id}?fields=id,account_id,name,status,effective_status,configured_status,daily_budget,bid_strategy,start_time", kind="readback"),
                 BatchOperation(f"readback_adsets_{index}", "GET", f"{campaign_id}/adsets?fields=id,name,status,effective_status,configured_status,start_time,bid_amount,bid_constraints,bid_strategy,promoted_object,targeting,attribution_spec,billing_event,optimization_goal,is_dynamic_creative&limit=50", kind="readback"),
-                BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,effective_object_story_id}}&limit=50", kind="readback"),
+                BatchOperation(f"readback_ads_{index}", "GET", f"{campaign_id}/ads?fields=id,name,status,effective_status,configured_status,adset_id,source_ad_id,issues_info,failed_delivery_checks,creative{{id,name,status,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec}}&limit=50", kind="readback"),
             ])
         return operations
 
@@ -492,6 +500,8 @@ class CampaignEngine:
                     ))
             timing, started = self._timed_start()
             record["timings"]["ad_copies"] = timing
+            from .image_sourcing import resolve_operations
+            ad_copy_ops = resolve_operations(self, bundle, transport, record, ad_copy_ops)
             ad_copy_results = self._batch(bundle, transport, ad_copy_ops, "ad_copy_with_creative")
             self._timed_finish(timing, started)
             copied_ad_ids = []
@@ -1159,6 +1169,9 @@ class CampaignEngine:
                     kind="ad_copy_with_creative",
                 ))
 
+        from .image_sourcing import resolve_operations
+        missing_ops = resolve_operations(self, bundle, transport, record, missing_ops)
+
         if redundant_ops:
             self._batch(bundle, transport, redundant_ops, 'recovery_archive_journal_proven_duplicates')
             checks = [BatchOperation('verify_'+op.relative_url, 'GET',
@@ -1513,7 +1526,7 @@ class CampaignEngine:
         record["stage"] = "readback_complete_recovered"
         return resolved_campaign_ids
 
-    def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str) -> dict[str, Any]:
+    def _run_lane(self, account: str, bundles: tuple[BundlePlan, ...], request_id: str, manifest_digest: str | None = None) -> dict[str, Any]:
         account_config = (self.config.get("accounts") or {}).get(account) or {}
         if bundles:
             self.quota.seed_access_tier(
@@ -1576,6 +1589,10 @@ class CampaignEngine:
                     "outer_readback_calls": 1,
                 }
                 lane_result.setdefault("bundles", []).append(record)
+            if manifest_digest is not None:
+                if record.get('sealed_manifest_digest', manifest_digest) != manifest_digest:
+                    raise ExecutionFailed('bundle sealed manifest digest mismatch')
+                record['sealed_manifest_digest'] = manifest_digest
             _atomic_json(checkpoint_path, lane_result)
             progress_token = progress.CURRENT.set((record, lambda: _atomic_json(checkpoint_path, lane_result)))
             try:
@@ -1693,7 +1710,7 @@ class CampaignEngine:
         try:
             workers = max(1, min(len(plan.lanes), int(self.config.get("max_account_workers", 8))))
             with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="ares-v3-lane") as pool:
-                futures = {pool.submit(self._run_lane, account, bundles, manifest.request_id): account for account, bundles in plan.lanes.items()}
+                futures = {pool.submit(self._run_lane, account, bundles, manifest.request_id, manifest.digest): account for account, bundles in plan.lanes.items()}
                 for future in as_completed(futures):
                     account = futures[future]
                     lane_results[account] = future.result()
