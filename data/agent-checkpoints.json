@@ -2943,12 +2943,12 @@
     {
       "agent": "zeus",
       "id": "SHEIN-IMG-SOURCING-t_9bf5723f",
-      "next_step": "Patch/testes offline e readback de recovery mesma request/IDs",
-      "objective": "Corrigir contrato IMG sourcing central sem writes Meta/Drive nem reescrever manifest selado",
-      "source": "kanban:t_9bf5723f;Ares:t_8f7a90a8",
-      "state": "in_progress",
+      "next_step": "REPORT-INFRA com readback; handoff seco Ares t_8f7a90a8 para mesma campaign/request-ready",
+      "objective": "Corrigir sourcing IMG central/recovery preservando request/IDs/manifests e sem provider writes",
+      "source": "work/t_9bf5723f/report.md;work/t_9bf5723f/real-readonly-readiness.json",
+      "state": "validated",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T16:33:34+00:00"
+      "updated_at": "2026-10-30T16:50:32+00:00"
     },
     {
       "agent": "zeus",
@@ -7982,5 +7982,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T16:33:34+00:00"
+  "updated_at": "2026-10-30T16:50:32+00:00"
 }

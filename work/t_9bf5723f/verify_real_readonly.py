@@ -76,9 +76,13 @@ for ad in s['source']['ads']:
     src.append({'ad_id':row['id'],'creative_id':cr['id'],'story_kind':'video' if (cr.get('object_story_spec') or {}).get('video_data') else 'other','sourcing_keys':sorted(spec),'sourcing_video_ids':[x['video_id'] for x in spec.get('videos',[])]})
 registry=json.loads(Path(config['media_registry']).read_text())['records'];inventory={x['asset_id']:x for x in q.selected(ready,B)}
 slots=[]
+assets={x['asset_id']:x for x in s['new_media_assets']}
 for ci,c in enumerate(m.campaigns,1):
     for ai,ad in enumerate(c.ads,1):
         md=ad.media;record=registry[A+'|'+md.asset_id+'|'+md.checksum]
+        group=original['campaign_groups'][ci-1]
+        assert assets[md.asset_id]['canonical_filename']==group['files'][ai-1]
+        assert ad.creative_payload['object_story_spec']['link_data']['message']==group['primary_text']
         assert record['image_hash']==md.image_hash and record['ready'] and record['association_verified']
         assert record['media_type']=='image' and record['upload_edge']=='ad_account_adimages'
         assert inventory[md.asset_id]['reservation_request_id']==R

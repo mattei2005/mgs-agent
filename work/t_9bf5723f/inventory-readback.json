@@ -1,0 +1,126 @@
+{
+  "id": "shein-image-sourcing-recovery-t_9bf5723f",
+  "agent": "zeus",
+  "task_id": "t_9bf5723f",
+  "type": "central-shein-image-sourcing-maintenance",
+  "status": "installed_readonly_recovery_validated_meta_acceptance_unverified",
+  "updated_at": "2026-10-30T16:50:32.534726+00:00",
+  "request_id": "shein-1565747351543480374",
+  "account_id": "937846586033361",
+  "operation": "SHEIN-US-DIRECT",
+  "authority": [
+    "context/routes.md#delegação-histórica-de-recovery-ares--zeus",
+    "kanban:t_9bf5723f"
+  ],
+  "source_message_id": "1565747351543480374",
+  "next_owner": "ares",
+  "next_task": "t_8f7a90a8",
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py",
+      "sha256": "2a604dae699523623c158cd05f058b5f06e271c1a180b4d36a984600af46e7d3",
+      "size_bytes": 8158
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_general.py",
+      "sha256": "ea820c99924397b732f58aebead77f41c5ff1f4002171432c19f548c741afb2f",
+      "size_bytes": 22046
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/engine.py",
+      "sha256": "51c6595307b1fd683bbc32e6898de35fd974fba934e9eb5e0c20d2371add3ac3",
+      "size_bytes": 93418
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/schema.py",
+      "sha256": "04231a32a2ea75e22992f0bf723e3437c3c9d77de778b9832f928aaf7a96dea1",
+      "size_bytes": 25124
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py",
+      "sha256": "4f27fac6db7a11a96cea987ef0a16fb91cd2a409a7208ed31c67669889acb873",
+      "size_bytes": 9048
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py",
+      "sha256": "4f425c4f8ea52862a9317df30df6d354e7f72c2785d7e4dcc2854a391975c246",
+      "size_bytes": 74736
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/activation.py",
+      "sha256": "fbffafde93a76cda52298e1622b68d97b2b016c8c6d66e23334c5ea30f0046d5",
+      "size_bytes": 18329
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_image_sourcing.py",
+      "sha256": "8c8dd13855d93f11dddbe3787cc4dde172b1c1130ad4ae7fdc11d4767435d822",
+      "size_bytes": 15615
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_image_media.py",
+      "sha256": "cda0f0ab811f87d7e2a6264a2759fbfd76c55e1da0eb701e33bf4922254fd865",
+      "size_bytes": 24164
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_single_clone_route.py",
+      "sha256": "d6bac75d537a1a49d1d51b0bab05188be6e0e0ab9b1ca8cd2c2508f6fcc51ca5",
+      "size_bytes": 25815
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-static-image-prestage.md",
+      "sha256": "7d35cfdd53823fbcd812747cef047c9bdfac8a4a81d31fd70793ba8445da4752",
+      "size_bytes": 7245
+    }
+  ],
+  "tests": {
+    "exit_code": 0,
+    "passed": 543,
+    "failed": [],
+    "subtests_passed": 347,
+    "files": 41,
+    "exclusions": [],
+    "module_origin_mismatch": {},
+    "external_network_attempts_blocked": 0,
+    "profile": "zeus",
+    "installed": true
+  },
+  "original_input_sha256": "7ff01bbaa739f9422d869e6a0419ea8def04209ee9d9cc16fff9af9950844faf",
+  "sealed_manifest_digest": "169e323adfb213d3712989b74d034a48f2d6cb010eae40887de61eea37d38acb",
+  "live_existing_campaign_ids": [
+    "120250943717650629",
+    "120250943717660629"
+  ],
+  "live_existing_adset_ids": [
+    "120250943718090629",
+    "120250943718150629"
+  ],
+  "live_existing_ads": 0,
+  "real_media_hashes_verified": 16,
+  "real_account_image_library_hashes_verified": 16,
+  "request_groups": 8,
+  "images_per_group": 2,
+  "literal_copy_and_file_order_verified": true,
+  "budget_usd_each": "25",
+  "batch_budget_usd": "200",
+  "bid_strategy": "COST_CAP",
+  "bid_amount": 95,
+  "recipe": "shein-static-image-sourcing-v1",
+  "sealed_manifest_edited": false,
+  "production_resolution_receipts_written": false,
+  "diagnostic_resolution_receipts_only": 4,
+  "foreground_owned": true,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "media_uploads": 0,
+  "asset_reservations": 0,
+  "credentials_guards_strategy_budget_schedule_or_sla_changed": false,
+  "historical_requests_changed": false,
+  "gateway_or_worker_restart": false,
+  "meta_acceptance_verified": false,
+  "serving_verified": false,
+  "rollback_package": "/root/mgs-agent/work/t_9bf5723f/rollback/atomic-original-package",
+  "evidence": "/root/mgs-agent/work/t_9bf5723f/report.md",
+  "readback": "/root/mgs-agent/work/t_9bf5723f/real-readonly-readiness.json",
+  "regression": "/root/mgs-agent/work/t_9bf5723f/regression-installed.json",
+  "rollback": "Code-only under coordinated idle request/account locks after reconciliation; preserve live IDs, immutable manifests, receipts and original state. Never restore stale operational snapshots, delete, release reservations or blindly retry original omission."
+}
