@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-30T12:57:02.299392+00:00",
+    "updated_at": "2026-10-30T13:21:48.836273+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -63930,13 +63930,17 @@
       "path": "data/zeus/yoast-home-repair-access-1565709978688294963.json",
       "related_paths": [
         "data/agent-checkpoints.json",
-        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/contentops-existing-renderer-scoped-support.md"
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/contentops-existing-renderer-scoped-support.md",
+        "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
       ],
       "authority_message_id": "1565709978688294963",
       "thread_id": "1565555821188878377",
-      "status": "blocked_specific_temporary_transport_and_cleanup_confirmation",
-      "evidence": "Two canonical admin REST GETs HTTP200 administrator; SFTP authenticated; SSH execution explicitly rejected. No production writes, credentials or permissions changed. Fincgriffin untouched.",
-      "updated_at": "2026-10-30T12:57:02.299392+00:00"
+      "status": "guidance_delivered_verified_atena_execution_owner",
+      "evidence": "Exact Discord GET content/author/channel/mention verified. No production repair or new access granted. Critical temporary deployment/cleanup confirmation remains pending.",
+      "updated_at": "2026-10-30T13:21:48.836273+00:00",
+      "latest_authority_message_id": "1565716789554581696",
+      "execution_owner": "atena",
+      "guidance_message_id": "1565717126432423967"
     }
   ],
   "mu_plugin_canonical": {

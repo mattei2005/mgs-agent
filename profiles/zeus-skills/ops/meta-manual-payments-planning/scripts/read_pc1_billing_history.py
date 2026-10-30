@@ -58,7 +58,12 @@ try:
  time.sleep(2);es,text=cap()
  if args.mode=='read' and args.history_scroll_ticks:
   scroll_targets=[e for e in es if e.get('label')=='View all activity' and e.get('role')=='Hyperlink'];assert len(scroll_targets)==1,'history_scroll_target_not_unique'
-  action({'action':'scroll','element':scroll_targets[0]['index'],'direction':'down','amount':args.history_scroll_ticks});time.sleep(1);es,text=cap()
+  # Long method lists can put history below the viewport after one scroll.
+  # Resolve a fresh token on each bounded scroll; never accept AX-only rows.
+  for scroll_attempt in range(3):
+   es,text=cap();scroll_targets=[e for e in es if e.get('label')=='View all activity' and e.get('role')=='Hyperlink'];assert len(scroll_targets)==1,'history_scroll_target_not_unique'
+   if scroll_attempt and 100<=scroll_targets[0].get('bounds',[0,9999])[1]<=1100:break
+   action({'action':'scroll','element':scroll_targets[0]['index'],'direction':'down','amount':args.history_scroll_ticks});time.sleep(1);es,text=cap()
  tag=args.account_id or'inspect';p=B/(tag+'.txt');p.write_text(text);os.chmod(p,0o600)
  vision=call({'action':'capture','mode':'vision','pid':args.pid,'window_id':args.window_id})
  snap={'status':'read','receipt_path':str(B/(tag+'-receipt.json')),'read_at':datetime.now().astimezone().isoformat(),'no_recent_spending_message':'You have no recent spending.'in text,'account_requested':args.account_id,'text_path':str(p),'elements_path':last.get('elements_file'),'screenshot':vision.get('screenshot_path'),'headings':[e.get('label')for e in es if e.get('role')in ['Heading','Document']],'billing_excerpt':safe_excerpt(es,text),'payment_controls':[{'index':e.get('index'),'role':e.get('role'),'label':e.get('label')}for e in es if e.get('label')in ['View all activity','View transaction history','Payment activity','Payment history','Accounts']]}
