@@ -63,7 +63,7 @@ Toda criação ou alteração de cron, por qualquer agente ou scheduler, segue `
 
 ## Content Operations
 
-REC/P1, edição/publicação WordPress e artigos SEO pertencem à Atena. Se precisar intervenção manual, Rodolfo e Raquel cuidam.
+REC/P1, edição/publicação WordPress e artigos SEO pertencem à Atena. Raquel é a gestora com autoridade permanente de Content Operations; seus pedidos completos já autorizam a execução no escopo canônico, sem novo OK de Rodolfo/Zeus por etapa ou retomada. Atena investiga, resolve e valida na própria thread. Necessidade de intervenção manual exige diagnosticar a dependência concreta e coordenar internamente quando permitido, não transferir rotineiramente a execução ou a coordenação aos humanos. Somente decisão efetivamente ausente ou ação protegida interrompe o recorte correspondente. Fonte: `data/atena/editorial-manager-authority.json`, reafirmada por Rodolfo em `1565555821188878377`.
 
 Zeus só entra quando houver exceção, erro recorrente, risco técnico, usuário sem autorização ou conflito operacional.
 
