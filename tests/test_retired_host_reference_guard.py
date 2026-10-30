@@ -189,6 +189,49 @@ class HistoricalEvidenceTests(unittest.TestCase):
                     inventory[location] = {"target": guard.RETIRED_HOST}
                 self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [f"repo:{relative}"])
 
+    def test_work_inventory_before_image_accepts_only_pinned_history(self):
+        inventory = self.inventory_fixture()
+        for relative in ("work/task/infra-inventory-before.json",
+                         "work/task/backup/infra-inventory-before.json",
+                         "work/task/rollback/inventory-before.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()), [])
+
+    def test_work_inventory_changed_or_additional_targets_still_block(self):
+        relative = "work/task/backup/infra-inventory-before.json"
+        for change in ("record", "connection", "key", "provenance"):
+            with self.subTest(change=change):
+                inventory = self.inventory_fixture()
+                if change == "record":
+                    inventory["runtime_artifacts"][0]["status"] = "active"
+                elif change == "connection":
+                    inventory["connection"] = {"host": guard.RETIRED_HOST}
+                elif change == "key":
+                    inventory[guard.RETIRED_HOST] = "target"
+                else:
+                    inventory["_meta"] = {}
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()),
+                                 [f"repo:{relative}"])
+
+    def test_work_non_inventory_and_operational_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("work/task/connection.json", "work/task/config.yaml",
+                         "scripts/infra-inventory-before.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_work_real_before_images_are_only_canonical_removed_history(self):
+        relatives = ("work/t_7ab9e9ba/infra-inventory-before.json",
+                     "work/t_8364ae25/backup/infra-inventory-before.json",
+                     "work/t_8426333c/backup/infra-inventory-before.json",
+                     "work/t_8e65299d/rollback/infra-inventory-before.json",
+                     "work/t_fc58be96/backup/infra-inventory-before.json")
+        for relative in relatives:
+            with self.subTest(relative=relative):
+                content = (guard.REPO / relative).read_bytes()
+                self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
+                self.assertEqual(self.scan(relative, content), [])
+
     def test_inventory_modified_removed_record_still_blocks(self):
         relative = "reports/future-authorized-run/inventory-before-closure.json"
         inventory = self.inventory_fixture()

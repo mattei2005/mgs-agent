@@ -3032,6 +3032,16 @@
     },
     {
       "agent": "zeus",
+      "id": "WATCHDOG-1565804290294157464",
+      "next_step": "Estender classificador estrito para nome infra-inventory-before em work; testes negativos; retry nativo sem post duplicado; inventário/audit/report",
+      "objective": "Recuperar patch watchdog sem alterar runtime ou evidências históricas",
+      "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565804290294157464",
+      "state": "owner_resolver_508132; causa confirmada:5 before-images autorizadas em work com único registro removed_validated idêntico ao canônico; nenhum writer concorrente do watchdog",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-10-30T19:13:52+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ALERT-AUDIT-1555741952656539649",
       "next_step": "Aguardar decisão Rodolfo para executar pacote de correções/proteções; manter cadências críticas,credenciais e canal canônico. Não atualizar Hermes/reiniciar/excluir mensagens por este pedido.",
       "objective": "Auditar alertas infra/VPS recentes, reconciliar estado real e propor melhorias pós-upgrades",
@@ -8022,5 +8032,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T18:43:18+00:00"
+  "updated_at": "2026-10-30T19:13:52+00:00"
 }
