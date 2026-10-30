@@ -1,0 +1,195 @@
+{
+  "status": "full_refresh_validated",
+  "authority_message_id": "1565708518328373428",
+  "verified_at": "2026-10-30T09:29:12.218014-04:00",
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 11,
+    "Linha de crédito": 36
+  },
+  "validated_metrics_at": "2026-10-30T09:25:37.868029-04:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261030T092540481893",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T084817715683",
+  "source_to_live_sheet_cgij_exact": true,
+  "full_grid_narrow_write_readback": true,
+  "h_source_to_live_sheet_and_note_exact": true,
+  "d_ledger_to_live_sheet_exact": true,
+  "fresh_h_account_ids": [
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1085117577390237",
+    "1107653168698121",
+    "1245683183659911",
+    "1419148446852410",
+    "1498990138663094",
+    "1526280818302320",
+    "1583000095650153",
+    "1600310064116258",
+    "1736068407518263",
+    "1744611463000838",
+    "1753257812779707",
+    "1829406761389732",
+    "1851640026221079",
+    "1877104513669062",
+    "2031917360813819",
+    "2039876850230678",
+    "2429758060563333",
+    "2633813727134360",
+    "26632890069640784",
+    "311204101516831",
+    "3188620887977617",
+    "336562339356179",
+    "3752157451670648",
+    "4511685129081248",
+    "536294549227786",
+    "781612907182683",
+    "7840111366055613",
+    "787796726891306",
+    "814915838330687",
+    "869857549542755",
+    "897046653487466",
+    "908704754163659",
+    "937846586033361"
+  ],
+  "fresh_h_count": 36,
+  "h_preserved_count": 0,
+  "pending_h_account_ids": [],
+  "h_read_at_min": "2026-10-30T08:49:16.413578-04:00",
+  "h_read_at_max": "2026-10-30T09:10:59.497901-04:00",
+  "h_sum_usd": "390811.74",
+  "pending_ui": [],
+  "card_proofs_updated": 6,
+  "historical_d_gaps": [
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located_historical",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+    }
+  ],
+  "average_period": [
+    {
+      "since": "2026-10-27",
+      "until": "2026-10-29"
+    }
+  ],
+  "totals_usd": {
+    "average_daily": "21464.72",
+    "balance": "396299.55",
+    "month_spend": "835632.85"
+  },
+  "totals_validated_columns": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "subtotal_checks": [
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F3:F13),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G3:G13),2)",
+      "value": "3500.75"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I3:I13),2)",
+      "value": "5714.88"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J3:J13),2)",
+      "value": "127518.92"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F17:F52),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G17:G52),2)",
+      "value": "17963.97"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "H",
+      "formula": "=ROUND(SUM(H17:H52),2)",
+      "value": "390811.74"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I17:I52),2)",
+      "value": "390584.67"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J17:J52),2)",
+      "value": "708113.93"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "F",
+      "formula": "=ROUND(SUM(F14,F53),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "G",
+      "formula": "=ROUND(SUM(G14,G53),2)",
+      "value": "21464.72"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "H",
+      "formula": "=ROUND(SUM(H14,H53),2)",
+      "value": "390811.74"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "I",
+      "formula": "=ROUND(SUM(I14,I53),2)",
+      "value": "396299.55"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "J",
+      "formula": "=ROUND(SUM(J14,J53),2)",
+      "value": "835632.85"
+    }
+  ],
+  "invoice_due_usd": "0.00",
+  "visible_invoice_numbers": 0,
+  "invoice_period": "2026-09-01",
+  "pc1_blocker": null,
+  "lease_free": true,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "workbook_sheet_count": 2,
+  "other_sheet_data_preservation_qualification": "All narrow writes limited to approved tab and full target-grid readbacks; no pre-operation values snapshot for unrelated tab in this foreground run. H publisher separately verified all tab properties unchanged.",
+  "skill_mirror_hashes": {
+    "references/recurring-refresh.md": "8f66398f76e16157813359462bc5980bbd17f0b5215ac0648502df41e06b6a09",
+    "scripts/read_pc1_billing_history.py": "3299dfc9761ad75a2e437bd1012246d34122bb0b72a10e2161ce8591fe870825"
+  },
+  "script_live_smoke_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261030T092642111348/1481815942722118-receipt.json",
+  "recovered_collection_limit": "Line-account overview exposes View transaction history; separate read-only capture recovered Vizioid05. Long card-method list hid Eggbev03 history; bounded fresh-token multiscroll now implemented and visually exercised.",
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T084817715683/closure-current.json",
+  "report_infra_status": "sent_verified",
+  "report_infra_message_id": "1565719273761014075",
+  "report_infra_readback": true
+}
