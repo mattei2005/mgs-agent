@@ -36,6 +36,7 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 - **Transição Creative Ops → Campaign Ops, reserva e QA** → `references/route-pack-06.md`
 - **Identidade Drive × Meta, download do tratado e reserva de gestor** → `references/drive-meta-asset-identity-and-manager-reservation.md`
 - **Lote IMG, VID ou misto em UPLOAD MANUAL, incluindo execução resumível** → `references/mixed-media-drive-intake-ready-legacy.md`
+- **Entrega final em pasta de gestor após arquivo/READY** → `references/manager-folder-delivery.md`; autorização permanente e limitada em `data/ares/creative-ops/manager-delivery-policy.json`, sem novo OK do CEO para pedidos explícitos equivalentes.
 - **Asset tecnicamente inválido/branco em UPLOAD MANUAL** → `references/upload-manual-technical-rejection-gate.md`
 - **Renomeação segura Drive + local + inventário, com rollback** → `references/safe-rename-and-rollback.md`
 
@@ -51,7 +52,7 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Upload de gestor inicia `RESERVADO_PELO_GESTOR` e `ares_eligible=false`.
 - `01_READY` prova prontidão técnica, não ineditismo.
 - Antes de seleção/write, conciliar Drive × Meta.
-- Nunca tratar material de Ad Library como asset final sem transformação/aprovação.
+- Nunca tratar material de Ad Library como asset final sem transformação/aprovação. Antes de reservar ou pre-stagear arquivos de uma pasta de gestor, conferir também a proveniência live (`properties`/`appProperties`) e a linhagem canônica: nome humano, mudança de pasta, owner corporativo e `clean=true` não promovem referência a criativo final. Se `reference_only=true` persistir sem prova de uma versão final aprovada, preservar os arquivos e pedir a versão final ou autorização para uma adaptação real; não apagar a marcação nem cadastrar uma nova linhagem para contornar o gate. Receita: `references/drive-meta-asset-identity-and-manager-reservation.md`.
 - Depois que o asset final estiver no Shared Drive `MGS-AGENTS`, excluir da VPS a mídia e o workdir transitórios somente após readback do ID, `driveId`, tamanho, MD5/SHA e registro da linhagem/inventário. Preservar apenas o manifesto compacto necessário à auditoria.
 - Falha ou ausência de qualquer readback preserva a cópia local e exige escalação; nunca inferir upload por nome, fila ou tentativa concluída.
 - A limpeza local nunca inclui `/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium`, o lock do coletor, cookies/sessão, `/root/mgs-agent/tools/meta-library-collector` nem o Playwright Chromium 1228 usado pelo Library.
@@ -66,7 +67,7 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Persistir o plano completo de um lote antes do primeiro write e retomar pelos mesmos IDs, hashes e nomes reservados; uma interrupção não autoriza recalcular variantes nem repetir uploads já confirmados. Receita e gates: `references/mixed-media-drive-intake-ready-legacy.md`.
 - `P_ORIENT` final aceita somente `PV`, `NV`, `PH`, `NH`; square/feed 1:1 usa `PH/NH`. Definir presença humana por asset e ampliar a imagem original quando detalhes pequenos ou revisões conflitantes impedirem uma decisão segura; a visão geral do lote não substitui essa conferência.
 - Para país BR, “Português” sem qualificador usa `LANG=BR`; `LANG=PT` exige português de Portugal explícito.
-- Antes de mudar regras, scripts ou estrutura do Drive, apresentar o plano exato e obter aprovação. Se Rodolfo declarar sua auditoria manual do Drive como final, não aplicar limpeza automática sobre ela.
+- Antes de mudar regras, scripts ou estrutura do Drive fora da autorização delimitada já vigente, apresentar o plano exato e obter aprovação. Para próximos pedidos explícitos equivalentes de entrega em pasta de gestor e recuperação da mesma rota, aplicar a autorização permanente `1565546229914411133` e seus limites canônicos, sem pedir novamente ao CEO. Se Rodolfo declarar sua auditoria manual do Drive como final, não aplicar limpeza automática sobre ela.
 
 ## Guardrails
 

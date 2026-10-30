@@ -62,6 +62,15 @@ O gestor não precisa descobrir IDs técnicos; Ares os obtém em read-only e reg
 
 Se o gestor subir o original antes do tratamento, o tratado correspondente continua reservado e inelegível. Estratégias diferentes (bot e tráfego direto) não tornam original e tratado candidatos independentes.
 
+## Preflight de arquivos nomeados pelo gestor
+
+1. Liste e pagine somente a pasta exata autorizada; resolva cada nome humano para um único Drive ID, preservando a ordem dos grupos e a grafia live. Não envie nomes informais diretamente a um preparador que exige `canonical_filename`.
+2. Antes de baixar ou reservar, faça GET dos IDs selecionados com `id,name,parents,trashed,size,md5Checksum,owners,capabilities,properties,appProperties`. Os helpers compactos podem omitir `appProperties`; solicite o campo explicitamente para não perder a marcação de proveniência.
+3. Confira `reference_only`, os vínculos de Library quando presentes e o inventário canônico por ID. `reference_only=true` é evidência de classificação como referência, não prova de direitos de uso; ausência da chave também não comprova aprovação final. Owner corporativo, nome de produto e presença na pasta do gestor não substituem a linhagem.
+4. Havendo referência sem prova de transformação/aprovação final, pare antes de upload Meta ou campaign write. Preserve request, grupos, copy e início solicitado; registre os IDs e o motivo e peça somente as versões finais ou autorização para produzir adaptações reais. Não remova propriedades, renomeie ou invente registros para liberar o preparador.
+5. Para arquivos finais com identidade ainda não resolvida, baixe e confirme tamanho/MD5 live; procure o SHA256 nos campos de checksum da linhagem existente. Hash idêntico conserva a linhagem mesmo com nome ou Drive ID diferente; ausência de match não autoriza criar um candidato final automaticamente. Verifique metadata separadamente: `clean=true` prova sanitização técnica, não aprovação de conteúdo nem ineditismo.
+6. Resolva o mapa completo `nome informado → Drive ID → asset_id → canonical_filename` antes da preparação. Se houver drift comprovado, siga a reconciliação abaixo; se o arquivo realmente não estiver registrado, conclua o intake autorizado antes de retomar o preparador central.
+
 ## Recuperar drift de nomes e reposições na pasta do gestor
 
 - Se o preparador rejeitar nome ausente/ambíguo, liste por API a pasta exata inteira antes de pedir outro arquivo: o Drive pode conter todos os nomes literais enquanto o inventário mantém nomes anteriores. Compare também os IDs dos registros cujo nome já coincide; coincidência de nome não garante o arquivo certo.

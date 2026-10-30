@@ -43,7 +43,30 @@ class ManagerDeliveryTests(unittest.TestCase):
  def test_changed_stock_id_blocks(self):
   r=self.receipt();r['stock_file_id']='otherOffline001'
   with self.assertRaises(m.DeliveryError):m.receipt_binding(self.row,self.entry,r)
- def test_same_id_move_and_verified_replay_no_second_PATCH(self):
+ def test_retirement_manager_stock_requires_exact_receipt(self):
+  import ares_archive_retirement as retirement
+  asset={**self.entry,'name':self.row['canonical_filename'],'mimeType':'video/mp4'}
+  physical={'parents':['providerReadyOffline001'],'permissions':[{'role':'writer','emailAddress':email} for email in retirement.WRITERS|{m.b.CANONICAL_SA}]}
+  record={'name':asset['name'],'mimeType':'video/mp4','provider_metadata':physical,'stock_metadata':{'parents':['managerOffline001']},'capabilities':{'canDownload':True}}
+  class Drive:
+   def relative_parent(s,*args):return ['CC_US_EN','VID','01_READY']
+   def hashes(s,*args):return {k:asset[k] for k in ['size','md5','sha256']}
+  with patch.object(m.storage,'meta',return_value={}),patch.object(m.storage,'media_record',return_value=record),patch.object(m.loc,'stock_parent',return_value=['Nicolas']),patch.object(m,'verify_delivered',return_value=record) as proof:
+   self.assertEqual(retirement.check_copy(Drive(),asset,self.entry),record);proof.assert_called_once()
+  with patch.object(m.storage,'meta',return_value={}),patch.object(m.storage,'media_record',return_value=record),patch.object(m.loc,'stock_parent',return_value=['Nicolas']),patch.object(m,'verify_delivered',side_effect=m.DeliveryError('MISSING_RECEIPT')):
+   with self.assertRaises(m.DeliveryError):retirement.check_copy(Drive(),asset,self.entry)
+ def test_retirement_RAW_cannot_use_manager_receipt(self):
+  import ares_archive_retirement as retirement
+  asset={**self.entry,'role':'original','name':self.row['canonical_filename'],'mimeType':'video/mp4'}
+  record={'name':asset['name'],'mimeType':'video/mp4','provider_metadata':{'parents':['providerOffline001']},'stock_metadata':{'parents':['managerOffline001']}}
+  class Drive:
+   def relative_parent(s,*args):return asset['relativeParent']
+  with patch.object(m.storage,'meta',return_value={}),patch.object(m.storage,'media_record',return_value=record),patch.object(m.loc,'stock_parent',return_value=['Nicolas']),patch.object(m,'verify_delivered') as proof:
+   with self.assertRaises(retirement.RetirementError):retirement.check_copy(Drive(),asset,self.entry)
+   proof.assert_not_called()
+ def test_same_id_move_and_verified_replay_no_second_PATCH(self):self.delivery_roundtrip(False)
+ def test_lost_PATCH_response_reconciles_intent_without_replay(self):self.delivery_roundtrip(True)
+ def delivery_roundtrip(self,lost_response):
   # All fixture objects are offline; this test must not instantiate real auth.
   self.registry.stop()
   with tempfile.TemporaryDirectory() as temp,contextlib.ExitStack() as stack:
@@ -62,7 +85,9 @@ class ManagerDeliveryTests(unittest.TestCase):
     def raw(s,fid):return json.dumps({'schema':'mgs.archive.ack.v1','status':'verified','kind':'lineage','jobId':'jobOffline001','assets':[self.entry,raw]}).encode()
     def hashes(s,fid):return {'size':'10','md5':'c'*32,'sha256':'a'*64}
     def api(s,method,path,params,payload):
-     assert method=='PATCH' and path=='files/shortcutOffline001';assert params['removeParents']==s.parent;s.parent=params['addParents'];s.patches+=1;return {'id':'shortcutOffline001','parents':[s.parent]}
+     assert method=='PATCH' and path=='files/shortcutOffline001';assert params['removeParents']==s.parent;s.parent=params['addParents'];s.patches+=1
+     if lost_response and s.patches==1:raise TimeoutError('offline lost PATCH response after server-side move')
+     return {'id':'shortcutOffline001','parents':[s.parent]}
    drive=FakeDrive()
    def record(entry,*args):return {'parents':['legacyOffline001'] if entry['role']=='original' else [drive.parent],'name':self.row['canonical_filename'],'stock_file_id':entry['stockShortcutId']}
    def verify(d,row,entry,receipt,**kwargs):
@@ -71,6 +96,9 @@ class ManagerDeliveryTests(unittest.TestCase):
    stack.enter_context(patch.object(m,'exact_folder'));stack.enter_context(patch.object(m.storage,'meta',return_value={}));stack.enter_context(patch.object(m.storage,'media_record',side_effect=record));stack.enter_context(patch.object(m.storage,'require_registered_mapping'));stack.enter_context(patch.object(m.loc,'stock_parent',side_effect=lambda d,p:['CC_US_EN','VID','99_LEGACY' if p=='legacyOffline001' else '01_READY']));stack.enter_context(patch.object(m,'verify_receipt',side_effect=verify));stack.enter_context(patch.object(m,'verify_delivered'))
    import ares_autonomous_intake as intake
    stack.enter_context(patch.object(intake,'assert_source_writer'));stack.enter_context(patch('urllib.request.urlopen',side_effect=AssertionError('OFFLINE_NETWORK_FORBIDDEN')))
+   if lost_response:
+    with self.assertRaises(TimeoutError):m.deliver(self.row['asset_id'],'managerOffline001',self.req,True)
+    intent=json.loads((receipts/'delivery-cleanOffline001.json').read_text());self.assertEqual(intent['status'],'intent');self.assertEqual(json.loads(inv.read_text())['asset_drive_id'],self.row['asset_drive_id'])
    first=m.deliver(self.row['asset_id'],'managerOffline001',self.req,True);second=m.deliver(self.row['asset_id'],'managerOffline001',self.req,True)
    self.assertEqual(drive.patches,1);self.assertEqual(first['stock_file_id'],second['stock_file_id']);after=json.loads(inv.read_text());self.assertEqual(after['asset_drive_id'],self.row['asset_drive_id']);self.assertFalse(after['ares_eligible']);self.assertEqual(after['reservation_status'],'RESERVADO_PELO_GESTOR')
 if __name__=='__main__':unittest.main()

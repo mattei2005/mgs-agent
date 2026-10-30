@@ -1213,12 +1213,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1563285734503358485",
-      "next_step": "Implementar rota dedicada de entrega de atalho clean verificado READY a gestor registrado com recibo, integrar validacao/conclusao/retirada sem novos deletes, testar e retomar mesmos IDs/nomes ate auditoria final.",
-      "objective": "Corrigir rota autorizada e entregar os 25 criativos na pasta Nicolas",
-      "source": "data/ares/creative-ops/manager-delivery-policy.json",
-      "state": "rodolfo aprovou intervencao delimitada e autorizacao permanente de proximos pedidos equivalentes em 1565546229914411133. politica registrada. plano e 25 clean preservados; implementacao separada da midia em andamento, sem writes remotos ate testes.",
+      "next_step": "Aguardar mesmo transporte foreground/background proc_9f587b9fbac2; depois executar deliver_audit.py, validar os 25 recibos de gestor, auditoria real e complete canonico; limpar somente midia local apos gates; reportar mapa completo na thread 1565540543457534103.",
+      "objective": "Entregar 25 criativos US-CC-EN na pasta Nicolas com rota corrigida e autorizacao permanente",
+      "source": "data/ares/creative-ops/executions/intake-1563285734503358485/plan.json",
+      "state": "rota dedicada sa implementada e 141 testes offline por modulos isolados pass; politica canônica registrada e skills/mapa/inventario estrutural atualizados. tratamento real concluido 25/25 ready tecnico + raw legacy + inventario/reserva. enqueue exato 25 linhagens/50 membros; transporte owner/stock sob locks e limites em andamento. nao declarar entrega final ainda.",
       "thread_id": "1563285734503358485",
-      "updated_at": "2026-10-30T02:04:03+00:00"
+      "updated_at": "2026-10-30T02:18:38+00:00"
     },
     {
       "agent": "ares",
@@ -1683,12 +1683,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1565547774995599453",
-      "next_step": "Solicitar versoes finais MGS dos sete videos ou autorizacao para produzir adaptacoes reais das referencias; nao remover flag/rebatizar para contornar. Preservar mesmo request/parametros/copy; com assets finais reconciliados retomar prepare-media,dry-run,Enginev3 e QA integral. Nao repetir pausas concluidas.",
+      "next_step": "Operador deve colocar mesmos sete videos no slot registrado UPLOAD MANUAL/SHEIN_US_EN/Nicolas para intake canonico. Nao pedir novas versoes nem confirmar novamente se finais. Preservar fontes/hashes/aprovacao/request original; apos entrada, intake/reserva/prestage/QA/Enginev3 central com copia literal solicitada e inicio futuro original; se data civil vencer requerer decisao propria. Nao repetir pausas.",
       "objective": "Clonar C238 tres vezes Yolokfx02 G006 com grupos Toolbox/Console/Scooter, USD45 cada, COST_CAP USD0.90, inicio30/10/2026 00:15America/New_York",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565547774995599453/media-reference-blocker.json;data/ares/meta-ads/state/manual-campaign-actions/shein-pause-1565548681586020514/journal.json",
-      "state": "aguardando criativos finais: sete arquivos exatos na pasta nicolas lidos por api/download/hash e metadata clean=true; todos appproperties reference_only=true e sem vinculo no inventario canonico. nenhum upload meta, criacao de campanha ou write drive. fonte c238 id120253529882240174 active usd25/dia cost_cap90 confirmada e preservada. pedido adicional1565548681586020514 concluido:257,170,266,276,32,286,178 paused por readback final7/7; budgets/bids/schedules preservados.",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565547774995599453/final-asset-approval.json;data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565547774995599453/final-assets-source-transport.json",
+      "state": "nicolas confirmou sete arquivos como versoes finais em1565550105489182742; mensagem e permissao live relidas e aprovacao registrada no mesmo request. sete videos validos720x1280,en,clean=true,produtos conferidos visualmente; proveniencia library preservada,sem alegar transformacao ou ineditismo. bloqueio atual e transporte: sete fontes nativas no estoque nicolas com canmoveitemintoteamdrive=false para sa; mappings historicos sem stockshortcut e sem linhagem criativa canonica. nada renomeado,nenhum drive write/upload meta/campanha criado. pausas do pedido separado1565548681586020514 permanecem concluidas7/7.",
       "thread_id": "1558134300325716050",
-      "updated_at": "2026-10-30T02:14:32+00:00"
+      "updated_at": "2026-10-30T02:21:44+00:00"
     },
     {
       "agent": "ares",
@@ -7852,5 +7852,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T02:14:32+00:00"
+  "updated_at": "2026-10-30T02:21:44+00:00"
 }
