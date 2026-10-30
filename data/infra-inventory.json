@@ -893,6 +893,23 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "vps-audit-1565728077336805552",
+      "agent": "zeus",
+      "type": "readonly_server_update_audit",
+      "status": "five_hosts_inspected_two_inventory_targets_unverified",
+      "source_thread_id": "1565713769789657239",
+      "source_message_id": "1565728077336805552",
+      "checkpoint_id": "vps-audit-1565728077336805552",
+      "report_infra_message_id": "1565730217694199889",
+      "report_infra_verified": true,
+      "evidence": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/assessment.json",
+      "live_hosts_inspected": 5,
+      "historical_inventory_targets_unverified": 2,
+      "production_install_restart_or_config_change": false,
+      "scope": "Kernel, OS packages and main runtimes; package indexes refreshed and transactions simulated only. Application source and WordPress plugins excluded.",
+      "findings": "Three hosts have installed kernel awaiting reboot plus MariaDB update; Hostinger has 11 package updates; Hestia has 55. Ubuntu CVE-2026-98432 fix remains work in progress. Optional ESM and Node18 migration classified separately."
+    },
+    {
       "id": "atena-technical-execution-guidance-1565562704972750939",
       "agent": "zeus",
       "type": "technical_access_documentation_and_context_refresh_assessment",
