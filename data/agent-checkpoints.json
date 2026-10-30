@@ -1213,12 +1213,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1563285734503358485",
-      "next_step": "Na thread atual, obter autorizacao Nicolas para destino final CC_US_EN/IMG|VID/01_READY ou aprovacao propria para adaptar integracao de pasta de gestor. Manter mesmos plano/IDs/hashes/variantes. Nao executar API paralela nem relaxar guard. Apos decisao, executar somente camadas pendentes e fechar canon intake com readback.",
-      "objective": "Tratar 25 criativos US-CC-EN Nicolas; continuacao na thread 1565540543457534103; preservar originais e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1563285734503358485/plan.json",
-      "state": "25 fontes originais realocadas pelo gestor na raiz upload manual; mesmos ids/sha. estabilidade 3 polls; 2 img e 23 vid baixados/probeados, limpeza local clean=true 25/25; imagens rgb iguais e 5 frames raw/clean iguais por video; revisao visual por timeline e ampliacoes; plano/naming congelados. zero writes remotos. preflight do conector permanente rejeitou pasta nicolas com stock_transfer_registered_path_required. preparacao nao equivale a entrega; fontes permanecem intake sem renomear.",
+      "next_step": "Pedir a Rodolfo na origem aprovacao da intervencao tecnica separada para restaurar entrega na pasta de gestor exata, com validacao registrada por request e readback consistente em transporte/movimentacao/conclusao/retirada; preservar SA, IDs/hashes, plano, reserva, originais, ACKs e limites. Sem API paralela, liberacao global, credencial, delete ou mudanca de estrutura. Apos aprovacao, corrigir/testar e retomar mesmo lote.",
+      "objective": "Entregar os mesmos 25 criativos US-CC-EN tratados na pasta Nicolas; continuacao na thread 1565540543457534103",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1563285734503358485/delivery-gate.json",
+      "state": "nicolas rejeitou expressamente alternativa ready na mensagem 1565545194852454471. destino exato nicolas mantido; nao repetir pergunta nem concluir em outra pasta. nova verificacao: pasta corporativa existente com canaddchildren=true; 25 clean locais sha/clean=true preservados; zero writes drive. bloqueio e implementacao das rotas transporte/movimentacao/retirada, nao acesso a pasta.",
       "thread_id": "1563285734503358485",
-      "updated_at": "2026-10-30T01:52:37+00:00"
+      "updated_at": "2026-10-30T01:59:56+00:00"
     },
     {
       "agent": "ares",
@@ -7842,5 +7842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T01:52:37+00:00"
+  "updated_at": "2026-10-30T01:59:56+00:00"
 }
