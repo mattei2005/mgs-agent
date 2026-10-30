@@ -2943,12 +2943,12 @@
     {
       "agent": "zeus",
       "id": "SHEIN-IMG-SOURCING-t_9bf5723f",
-      "next_step": "REPORT-INFRA com readback; handoff seco Ares t_8f7a90a8 para mesma campaign/request-ready",
+      "next_step": "Ares t_8f7a90a8: campaign com MESMO request-ready --dry-run e --confirm-execute; QA integral/readback final; sem prepare-media/reupload/recriar008/009",
       "objective": "Corrigir sourcing IMG central/recovery preservando request/IDs/manifests e sem provider writes",
-      "source": "work/t_9bf5723f/report.md;work/t_9bf5723f/real-readonly-readiness.json",
-      "state": "validated",
+      "source": "work/t_9bf5723f/report.md;kanban:t_8f7a90a8:comment26;REPORT-INFRA:1565770026340851840",
+      "state": "completed",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T16:50:32+00:00"
+      "updated_at": "2026-10-30T16:52:54+00:00"
     },
     {
       "agent": "zeus",
@@ -7982,5 +7982,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T16:50:32+00:00"
+  "updated_at": "2026-10-30T16:52:54+00:00"
 }

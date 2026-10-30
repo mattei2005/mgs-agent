@@ -1,0 +1,80 @@
+{
+  "status": "DRY_RUN_OK",
+  "request_id": "shein-1565747351543480374",
+  "account_id": "937846586033361",
+  "source_campaign_id": "120250750964580629",
+  "number": 8,
+  "name": "008 - 30/10 - v3 - BOLSAS GRATIS - COCAP - (b01fb06c008) - COPY C2 - (US_APP) - event_add_to_wishlist",
+  "budget_usd": 25.0,
+  "start_time": "2026-10-30T12:27:10-04:00",
+  "delivery_status": "ACTIVE",
+  "plan": {
+    "request_id": "shein-1565747351543480374",
+    "lane_count": 1,
+    "global_wave_count": 4,
+    "campaigns_per_global_wave": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "lanes": {
+      "937846586033361": [
+        {
+          "bundle": 1,
+          "campaigns": 2,
+          "modes": [
+            "clone_prestaged"
+          ],
+          "outer_write_calls": 5,
+          "outer_readback_calls": 1,
+          "intermediate_get_calls": 0
+        },
+        {
+          "bundle": 2,
+          "campaigns": 2,
+          "modes": [
+            "clone_prestaged"
+          ],
+          "outer_write_calls": 5,
+          "outer_readback_calls": 1,
+          "intermediate_get_calls": 0
+        },
+        {
+          "bundle": 3,
+          "campaigns": 2,
+          "modes": [
+            "clone_prestaged"
+          ],
+          "outer_write_calls": 5,
+          "outer_readback_calls": 1,
+          "intermediate_get_calls": 0
+        },
+        {
+          "bundle": 4,
+          "campaigns": 2,
+          "modes": [
+            "clone_prestaged"
+          ],
+          "outer_write_calls": 5,
+          "outer_readback_calls": 1,
+          "intermediate_get_calls": 0
+        }
+      ]
+    }
+  },
+  "timings": {
+    "preparation_ms": 70.551
+  },
+  "campaign_writes": 0,
+  "effective_payload_recovery": {
+    "recipe": "shein-static-image-sourcing-v1",
+    "legacy_image_slots": 16,
+    "fresh_zero_ads_readback_required": true,
+    "meta_acceptance_verified": false
+  },
+  "creation_status": "PAUSED",
+  "batch_qa_before_activation": true,
+  "read_http_requests": 0,
+  "logical_gets": 0
+}
