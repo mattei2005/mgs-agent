@@ -13,7 +13,8 @@ from pathlib import Path
 
 MEDIA_KEYS = {'asset_id', 'canonical_filename', 'checksum', 'clean_checksum',
               'clean_md5', 'asset_drive_id', 'drive_file_id', 'video_id',
-              'vertical_video_id', 'square_video_id', 'image_hash', 'original_video_id'}
+              'vertical_video_id', 'square_video_id', 'image_hash', 'original_video_id',
+              'meta_video_id', 'meta_image_hash', 'original_checksum', 'pixel_sha256'}
 
 
 def digest(path):
@@ -45,6 +46,11 @@ def _media(value):
         for key, item in value.items():
             if key in MEDIA_KEYS and isinstance(item, str) and item:
                 found.add((key if key in {'asset_id', 'canonical_filename'} else 'identity', item))
+                if key == 'canonical_filename':
+                    found.add(('filename_stem', Path(item).stem))
+            if key == 'name' and isinstance(item, str):
+                for filename in re.findall(r'SHEIN_US_(?:EN|ES)_(?:VID|IMG)_[A-Z0-9_]+_(?:PV|NV|PH|NH)_[0-9]{3}(?:\.(?:mp4|png|jpg|jpeg))?', item):
+                    found.add(('filename_stem', Path(filename).stem))
             found.update(_media(item))
     elif isinstance(value, list):
         for item in value:
@@ -72,6 +78,7 @@ def evidence(base, value):
     checkpoint_path = engine_root / 'checkpoints' / (rid + '-' + account + '.json')
     checkpoint = _read(checkpoint_path)
     ids = value.get('engine_result', {}).get('campaign_ids') or []
+    shells = value.get('manifest', {}).get('campaigns') or []
     review = rec.get('review') or {}
     snapshots = rec.get('campaign_readback') or []
     if (rec.get('schema_version') != 1 or rec.get('classification') != 'WAITING_HUMAN_DECISION'
@@ -83,6 +90,9 @@ def evidence(base, value):
             or value.get('engine_result', {}).get('request_id') != rid
             or value.get('summary') or value.get('qa_proof') or value.get('activation_result')
             or value.get('media_qa') or not ids or len(ids) != len(set(ids))
+            or len(shells) != len(ids)
+            or any(c.get('account_id') != account or c.get('status') != 'PAUSED'
+                   or not c.get('ads') or any(not _media(ad) for ad in c['ads']) for c in shells)
             or checkpoint.get('account_id') != account or checkpoint.get('status') != 'COMPLETE'
             or checkpoint.get('manual_reconciliation_required') is not False
             or set(checkpoint.get('campaign_ids') or []) != set(ids)

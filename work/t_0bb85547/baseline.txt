@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ HardeningTests.test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post _
+tests/test_shein_pipeline_hardening.py:79: in test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post
+    transport.execute([BatchOperation('write','POST','act_100/campaigns',body={'name':'OFFLINE'})],'offline')
+scripts/ares_campaign_v3/transport.py:84: in execute
+    guard.enforce_meta_path('act_' + self.account_id, {'fields': 'id'})
+scripts/mgs-ares-asset-scope.py:126: in enforce_meta_path
+    if not parts or not re.fullmatch(r'(?:act_)?[0-9]{5,30}',parts[0]):raise ScopeError(DENY)
+                                                                       ^^^^^^^^^^^^^^^^^^^^^^
+E   ares_engine_asset_scope.ScopeError: Conta fora do escopo operacional autorizado do Ares.
+=========================== short test summary info ============================
+FAILED tests/test_shein_pipeline_hardening.py::HardeningTests::test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post
+1 failed in 0.09s
+{"effective_profile": "ares", "effective_home": "/root/.hermes/profiles/ares", "original_targets": ["tests/test_shein_pipeline_hardening.py::HardeningTests::test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post"], "exit_code": 1, "collected": 1, "passed": 0, "failed": [{"id": "tests/test_shein_pipeline_hardening.py::HardeningTests::test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post", "when": "call", "outcome": "failed"}], "skipped": [], "subtests_passed": 0, "module_origin_mismatch": {}, "external_network_attempts_blocked": 0, "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed", "exclusions": [], "targets": ["tests/test_shein_pipeline_hardening.py::HardeningTests::test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post"]}

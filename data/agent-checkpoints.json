@@ -2952,6 +2952,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SHEIN-QUEUE-t_8e65299d",
+      "next_step": "Testar classificação fail-closed e handoff seco exclusivo Ares",
+      "objective": "Corrigir classificação de review histórico sem write Meta/Drive",
+      "source": "kanban:t_8e65299d",
+      "state": "maintenance_in_progress_worker_stopped",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-10-30T16:05:11+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "SHEIN-REPORT-GATEWAY-1558252008467734678",
       "next_step": "Encerrado; Ares acompanha a configuração Intraday na thread original, sem cron/campanha alterados",
       "objective": "Recuperar respostas Ares nos 6 canais e 36 threads SHEIN sem alterar campanhas",
@@ -7952,5 +7962,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T16:00:37+00:00"
+  "updated_at": "2026-10-30T16:05:11+00:00"
 }

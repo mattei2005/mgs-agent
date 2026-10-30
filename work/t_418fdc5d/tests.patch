@@ -1,0 +1,24 @@
+diff --git a/tests/test_shein_media_qa.py b/tests/test_shein_media_qa.py
+index 38e818b63..5454d7559 100644
+--- a/tests/test_shein_media_qa.py
++++ b/tests/test_shein_media_qa.py
+@@ -232,14 +232,14 @@ class DriveCacheTests(unittest.TestCase):
+                             handoff.load_ready_assets(request,profile,root,common,'OFFLINE_META')
+                 inv.write_text('\n'.join(json.dumps(r) for r in rows))
+                 original=copy.deepcopy(nodes['file-1'])
+-                for change in [
+-                    {'owners':[{'emailAddress':'wrong@example.invalid'}]},
+-                    {'driveId':bridge.SOURCE_DRIVE},
+-                    {'parents':['testing']},
++                for change, error_type, message in [
++                    ({'owners':[{'emailAddress':'wrong@example.invalid'}]},bridge.ArchiveError,'STOCK_FILE_SCOPE'),
++                    ({'driveId':bridge.SOURCE_DRIVE},bridge.ArchiveError,'STOCK_FILE_SCOPE'),
++                    ({'parents':['testing']},ValueError,'canonical READY folder identity mismatch'),
+                 ]:
+                     with self.subTest(change=change):
+                         nodes['file-1']={**original,**change}
+-                        with self.assertRaises((ValueError,bridge.ArchiveError)):
++                        with self.assertRaisesRegex(error_type,message):
+                             handoff.load_ready_assets(request,profile,root,common,'OFFLINE_META')
+                 nodes['file-1']=original
+ 

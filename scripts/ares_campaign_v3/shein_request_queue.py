@@ -68,12 +68,13 @@ def selected(request, base):
     return matches
 
 
-def dependencies(request, account_id, base=BASE):
+def dependencies(request, account_id, base=BASE, *, _held_accounts=frozenset()):
     rid = request['request_id']
     if terminal(state(base, rid)):
         return []
     deps = set()
-    for row in selected(request, base):
+    selected_rows = selected(request, base)
+    for row in selected_rows:
         owner = row.get('reservation_request_id')
         if not owner or owner == rid:
             continue
@@ -88,11 +89,14 @@ def dependencies(request, account_id, base=BASE):
         value = json.loads(path.read_text())
         origin = value.get('request') or {}
         owner = origin.get('request_id')
+        from .shein_decision_wait import inert_for, pending
         if (owner and owner != rid and str(origin.get('account')) == str(account_id)
-                and value.get('phase') in ACTIVE):
+                and (value.get('phase') in ACTIVE or (pending(base, owner) and not terminal(value)))):
+            if inert_for(request, value, selected_rows, base, held_accounts=_held_accounts):
+                continue
             waiting = job_path(base, owner)
             other_job = json.loads(waiting.read_text()) if waiting.exists() else {}
-            if rid not in other_job.get('dependencies', []):
+            if pending(base, owner) or rid not in other_job.get('dependencies', []):
                 deps.add(owner)
     return sorted(deps)
 
@@ -129,7 +133,7 @@ def claim_terminal(request, account_id, base=BASE):
         for account in sorted(accounts):
             lock = stack.enter_context((root(base) / 'single-clone' / ('account-' + account + '.lock')).open('a+'))
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        if dependencies(request, account_id, base):
+        if dependencies(request, account_id, base, _held_accounts=frozenset(accounts)):
             raise BlockingIOError('queue dependency still running')
         from . import shein_single_clone as driver
         from .shein_media_handoff import _ops
@@ -177,10 +181,8 @@ def claim_terminal(request, account_id, base=BASE):
                    'previous_requests': sorted(owners), 'asset_ids': sorted(before), 'historical_ads': proofs})
 
 
-def gate(request, command, base=BASE, *, launch=True):
+def authorize_queue_request(request, base=BASE):
     operation = json.loads((base / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
-    if not operation.get('request_queue_policy', {}).get('enabled'):
-        return None
     from . import shein_single_clone as driver
     from .shein_general import authorize
     account = driver.lookup_account(request['account'])
@@ -193,6 +195,18 @@ def gate(request, command, base=BASE, *, launch=True):
                            capture_output=True, timeout=20)
     if scope.returncode:
         raise ValueError('queue operational domain scope rejected')
+    return account
+
+
+def gate(request, command, base=BASE, *, launch=True):
+    operation = json.loads((base / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
+    if not operation.get('request_queue_policy', {}).get('enabled'):
+        return None
+    account = authorize_queue_request(request, base)
+    path = job_path(base, request['request_id'])
+    job = json.loads(path.read_text()) if path.exists() else {}
+    if job.get('maintenance_hold'):
+        return {'status': 'MAINTENANCE_HOLD', 'request_id': request['request_id'], 'campaign_writes': 0}
     deps = dependencies(request, account['account_id'], base)
     if not deps:
         try:
@@ -204,6 +218,31 @@ def gate(request, command, base=BASE, *, launch=True):
     if launch:
         start_worker(base)
     return result
+
+
+def take_foreground(request, base=BASE):
+    """Explicit Ares ownership of the same central route; never campaign execution."""
+    if os.environ.get('HERMES_PROFILE') != 'ares':
+        raise ValueError('queue foreground handoff requires owning Ares profile')
+    account = authorize_queue_request(request, base)
+    path = job_path(base, request['request_id'])
+    with path.with_suffix('.dispatch.lock').open('a+') as dispatch, path.with_suffix('.lock').open('a+') as lock:
+        fcntl.flock(dispatch, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        job = json.loads(path.read_text())
+        if job['request'] != request or job.get('status') == 'RUNNING':
+            raise ValueError('queue foreground handoff immutable request/running conflict')
+        deps = dependencies(request, account['account_id'], base)
+        if deps:
+            raise ValueError('queue foreground handoff dependency remains')
+        job.setdefault('handoff_history', []).append({
+            'at': datetime.now(timezone.utc).isoformat(), 'executor': 'ares',
+            'maintenance_hold': job.pop('maintenance_hold', None),
+            'reason': 'Explicit dry handoff; central foreground runner only'})
+        job.update(dispatch_owner='foreground', status='FOREGROUND_OWNED', dependencies=[])
+        atomic(path, job)
+    return {'status': 'FOREGROUND_OWNED', 'request_id': request['request_id'],
+            'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0}
 
 
 def start_worker(base=BASE):
@@ -396,6 +435,22 @@ def verify_final(s):
 
 
 def tick(job, base=BASE):
+    path = job_path(base, job['request_id'])
+    with path.with_suffix('.dispatch.lock').open('a+') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return
+        return _tick_locked(job, base)
+
+
+def _tick_locked(job, base=BASE):
+    from .shein_decision_wait import pending
+    # Durable dispatch gates override a stale worker snapshot.
+    live = json.loads(job_path(base, job['request_id']).read_text())
+    if live.get('maintenance_hold') or live.get('dispatch_owner') == 'foreground' or pending(base, job['request_id']):
+        return
+    job.clear(); job.update(live)
     from . import shein_single_clone as driver
     request = job.get('execution_request') or job['request']; account = driver.lookup_account(request['account'])
     deps = dependencies(request, account['account_id'], base)
@@ -483,5 +538,15 @@ def work(base=BASE, max_seconds=None):
 
 
 if __name__ == '__main__':
-    if sys.argv[1:] != ['--work']: raise SystemExit('Use --work')
-    work()
+    if sys.argv[1:] == ['--work']:
+        work()
+    elif len(sys.argv) == 3 and sys.argv[1] in {'--inspect', '--take-foreground'}:
+        request = json.loads(Path(sys.argv[2]).read_text())
+        if sys.argv[1] == '--take-foreground':
+            print(json.dumps(take_foreground(request)))
+        else:
+            print(json.dumps({'request_id': request['request_id'],
+                'dependencies': dependencies(request, request['account']),
+                'campaign_writes': 0, 'media_uploads': 0, 'inventory_reservations': 0}))
+    else:
+        raise SystemExit('Use --work, --inspect INPUT or --take-foreground INPUT')

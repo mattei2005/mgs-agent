@@ -1,0 +1,20 @@
+{
+  "effective_profile": "ares",
+  "effective_home": "/root/.hermes/profiles/ares",
+  "original_targets": [
+    "tests/test_shein_pipeline_hardening.py::HardeningTests::test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post"
+  ],
+  "exit_code": 0,
+  "collected": 1,
+  "passed": 1,
+  "failed": [],
+  "skipped": [],
+  "subtests_passed": 0,
+  "module_origin_mismatch": {},
+  "external_network_attempts_blocked": 0,
+  "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed",
+  "exclusions": [],
+  "targets": [
+    "tests/test_shein_pipeline_hardening.py::HardeningTests::test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post"
+  ]
+}

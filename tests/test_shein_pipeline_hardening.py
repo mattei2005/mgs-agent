@@ -4,7 +4,10 @@ import json
 import sys
 import tempfile
 import unittest
+from contextlib import contextmanager
+from email.message import Message
 from pathlib import Path
+from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from test_shein_general_runtime import case
 from ares_campaign_v3 import shein_general as compiler
@@ -13,6 +16,27 @@ from ares_campaign_v3.media_registry import MediaRegistry
 from ares_campaign_v3.schema import Manifest
 from ares_campaign_v3.engine import CampaignEngine
 from ares_campaign_v3.transport import FakeBatchTransport
+from ares_campaign_v3 import transport as transport_module
+
+
+@contextmanager
+def synthetic_transport_scope():
+    """Real fail-closed guard, but no live identity, registry or provenance."""
+    guard = transport_module._operational_scope_guard()
+    account_id = '111111'
+    with tempfile.TemporaryDirectory() as directory:
+        scope_path = Path(directory) / 'scope.json'
+        scope_path.write_text(json.dumps({
+            'schema_version': 1, 'status': 'active',
+            'operational_business_id': '155263197283282',
+            'ad_accounts': [{'account_id': account_id}],
+        }))
+        load_scope = guard.load_scope
+        with patch.object(guard, 'is_ares_context', return_value=True), \
+             patch.object(guard, 'load_scope', side_effect=lambda: load_scope(scope_path)), \
+             patch.object(guard, 'PROVENANCE', Path(directory) / 'provenance.json'), \
+             patch.object(transport_module, '_operational_scope_guard', return_value=guard):
+            yield guard, account_id
 
 
 def flexible():
@@ -69,15 +93,43 @@ class HardeningTests(unittest.TestCase):
             self.assertEqual(rec['write_journal'][-1]['stage'],'adset_copy')
 
     def test_outer_http_failure_keeps_current_usage_headers_and_never_retries_post(self):
-        import io,urllib.error
-        from unittest.mock import patch
-        from ares_campaign_v3.transport import GraphBatchTransport,BatchOperation,BatchTransportError
-        transport=GraphBatchTransport('100','v26.0','OFFLINE_ONLY')
-        transport.last_outer_headers={'x-ad-account-usage':'stale'}
-        error=urllib.error.HTTPError('https://graph.invalid/',429,'offline',{'X-Ad-Account-Usage':'fresh-pressure'},io.BytesIO(b'{"error":{"code":4}}'))
-        with patch('urllib.request.urlopen',side_effect=error) as network,self.assertRaises(BatchTransportError):
-            transport.execute([BatchOperation('write','POST','act_100/campaigns',body={'name':'OFFLINE'})],'offline')
-        self.assertEqual(network.call_count,1);self.assertEqual(transport.last_outer_headers['x-ad-account-usage'],'fresh-pressure');error.close()
+        import io, urllib.error, urllib.parse
+        from ares_campaign_v3.transport import GraphBatchTransport, BatchOperation, BatchTransportError
+        with synthetic_transport_scope() as (_, account_id):
+            transport = GraphBatchTransport(account_id, 'v26.0', 'OFFLINE_ONLY')
+            transport.last_outer_headers = {'x-ad-account-usage': 'stale'}
+            headers = Message()
+            headers['X-Ad-Account-Usage'] = 'fresh-pressure'
+            error = urllib.error.HTTPError('https://graph.invalid/', 429, 'offline',
+                headers, io.BytesIO(b'{"error":{"code":4}}'))
+            self.addCleanup(error.close)
+            with patch('urllib.request.urlopen', side_effect=error) as network, \
+                 self.assertRaises(BatchTransportError) as raised:
+                transport.execute([BatchOperation('write', 'POST', f'act_{account_id}/campaigns',
+                    body={'name': 'OFFLINE'})], 'offline')
+            network.assert_called_once()
+            request = network.call_args.args[0]
+            self.assertEqual(request.get_method(), 'POST')
+            batch = json.loads(urllib.parse.parse_qs(request.data.decode())['batch'][0])
+            self.assertEqual(len(batch), 1)
+            self.assertEqual(batch[0]['method'], 'POST')
+            self.assertEqual(batch[0]['relative_url'], f'act_{account_id}/campaigns')
+            self.assertEqual(raised.exception.stage, 'offline')
+            self.assertEqual(raised.exception.detail, {'http': 429, 'payload': {'error': {'code': 4}}})
+            self.assertEqual(transport.last_outer_headers, {'x-ad-account-usage': 'fresh-pressure'})
+
+    def test_transport_scope_rejection_never_reaches_http(self):
+        from ares_campaign_v3.transport import GraphBatchTransport, BatchOperation
+        with synthetic_transport_scope() as (guard, account_id), \
+             patch('urllib.request.urlopen') as network:
+            # Malformed account, unknown account, and cross-account child stay denied.
+            for lane, target in [('100', f'act_{account_id}/campaigns'),
+                                 ('999999', f'act_{account_id}/campaigns'),
+                                 (account_id, 'act_999999/campaigns')]:
+                with self.subTest(lane=lane, target=target), self.assertRaises(guard.ScopeError):
+                    GraphBatchTransport(lane, 'v26.0', 'OFFLINE_ONLY').execute(
+                        [BatchOperation('write', 'POST', target, body={'name': 'OFFLINE'})], 'offline')
+            network.assert_not_called()
 
     def test_registry_cache_is_bound_to_account_asset_checksum(self):
         from ares_campaign_v3.media_registry import MediaNotReady

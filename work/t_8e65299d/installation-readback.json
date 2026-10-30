@@ -1,0 +1,22 @@
+{
+  "classification": "WAITING_HUMAN_DECISION",
+  "dependencies_readonly": [],
+  "job_hold": {
+    "task_id": "t_8e65299d",
+    "reason": "Dry handoff to owning Ares required before any automatic execution",
+    "executor": "ares",
+    "created_at": "2026-10-30T16:09:45.065377+00:00",
+    "release_route": "ares_campaign_v3.shein_request_queue --take-foreground ORIGINAL_INPUT"
+  },
+  "attempts": 0,
+  "historical_state_unchanged": true,
+  "intake_unchanged": true,
+  "historical_terminal": false,
+  "state_phase": "POSTPROCESS_PENDING",
+  "media_rows": 16,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "uploads": 0,
+  "inventory_reservations": 0,
+  "record_path": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/decision-waits/shein-1565261967260647536-c3.json"
+}

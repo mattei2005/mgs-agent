@@ -1,0 +1,38 @@
+{
+  "head_at_validation": "8118475d4a36fe298b8d726eed86a8e6ebcf2ee3",
+  "file_checks": {
+    "tests/test_shein_pipeline_hardening.py": {
+      "sha256": "427ea59a87fbb1565271bb355e0987e4687dcf6209b54a1c3619c5f00837df6b",
+      "unchanged_since_start": false
+    },
+    "tests/test_shein_media_qa.py": {
+      "sha256": "f9f659029d1f68eab27c1366c956655ddb101e77e21396435306cb1bf02b25fd",
+      "unchanged_since_start": true
+    },
+    "tests/test_ares_campaign_v3_daily_cpv.py": {
+      "sha256": "59169e3a081a34cd909a2d61ef3cbc44b56e2558c76912b5632433e778d1cd1d",
+      "unchanged_since_start": true
+    },
+    "scripts/ares_campaign_v3/transport.py": {
+      "sha256": "20898afd2242c6f0f0be70604f78f0fefbe39385385399e86b7c0131358d1da6",
+      "unchanged_since_start": true
+    },
+    "scripts/mgs-ares-asset-scope.py": {
+      "sha256": "9a3fc788e1efa48df2e8de18a4197cf4a74b6f0428146a0fc2dfb3be15c90147",
+      "unchanged_since_start": true
+    }
+  },
+  "parent_targets_all_preserved": true,
+  "new_targets_in_original": [
+    "tests/test_shein_decision_wait.py"
+  ],
+  "expanded_extra_targets": [
+    "tests/test_ares_scope_campaign_dependencies.py",
+    "tests/test_mgs_ares_asset_scope.py"
+  ],
+  "original_files": 42,
+  "expanded_files": 44,
+  "diff_check": "passed",
+  "runtime": "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021/.venv/bin/python",
+  "skill_readback_verified": true
+}
