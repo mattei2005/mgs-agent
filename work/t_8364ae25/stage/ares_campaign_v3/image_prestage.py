@@ -115,9 +115,15 @@ def prestage_images(assets, *, account_id, registry, uploader, proof_dir, atomic
             raise MediaNotReady('image upload intent identity mismatch')
         try:
             ready=registry.require_ready(account_id,aid,checksum,media_type='image')
-        except MediaNotReady:ready=None
+        except MediaNotReady:
+            if registry._key(account_id,aid,checksum) in registry._load().get('records',{}):
+                raise  # A corrupt known identity is not permission to reupload.
+            ready=None
         if ready:
-            require_image(library,ready['image_hash'],name=name);hits+=1;records.append({'registry':ready});continue
+            from .image_identity import require_prepared_image
+            require_prepared_image(library,ready['image_hash'],account_id=account_id,asset=a,
+                                   registry_record=ready,proof_dir=proof_dir)
+            hits+=1;records.append({'registry':ready});continue
         matches=[r for r in library if r.get('name')==name]
         if len(matches)>1:raise MediaNotReady('deterministic image name ambiguous; no upload')
         image_hash=matches[0].get('hash') if matches else None

@@ -21,6 +21,11 @@ def require_prepared_image(rows, image_hash, *, account_id, asset, registry_reco
     try:
         account_id = str(account_id).removeprefix('act_')
         aid, checksum = asset['asset_id'], asset['checksum']
+        if str(row.get('status', '')).upper() != 'ACTIVE':
+            raise ValueError('explicit active image required')
+        for key,value in {'account_id':account_id, 'image_hash':image_hash}.items():
+            if asset.get(key) is not None and asset[key] != value:
+                raise ValueError('asset identity')
         expected = {'account_id': account_id, 'asset_id': aid, 'checksum': checksum,
                     'image_hash': image_hash, 'media_type': 'image', 'ready': True,
                     'association_verified': True, 'upload_edge': 'ad_account_adimages',
