@@ -275,6 +275,10 @@ For the complete reusable submission flow—including Allowed usage text, Reques
 
 Follow the operation-specific architecture gate in **Page-access workflow and Rodolfo's onboarding preference**. For SHEIN direct traffic, begin with `operations/SHEIN-US-DIRECT.json` and its active registry source; resolve other operations independently. Validate the actual actor with `/me`, and validate type/app with `/debug_token` authenticated by an app access token. An authorized direct-traffic BISU does not change the separately approved BOT/Messenger architecture.
 
+### SHEIN grouped static images
+
+For IMG PNG/JPG requests, central typed image pre-stage, exact-hash QA, ambiguous-upload recovery and the offline-versus-live readiness boundary, load `references/shein-static-image-prestage.md`. Do not treat generic media authority as implementation evidence or fix only the filename regex.
+
 ### Replacement campaigns: clone first, do not build from zero
 
 For MGS replacement campaigns, the correct primary route is **native Meta clone/copy**, not manual campaign/adset/ad creation from zero. Creating from zero can hit page permission, account authentication, or `POST /ads` checkpoints and does not prove the clone route is blocked.

@@ -264,7 +264,9 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
     if len(media_keys) != len(set(media_keys)):
         raise ManifestError("duplicate media lineage in manifest")
     if media_keys:
-        checks.extend(["media_registry_exact", "media_lineage_unique", "ad_account_video_association"])
+        checks.extend(["media_registry_exact", "media_lineage_unique"])
+        if any(ad.media and ad.media.media_type == 'video' for campaign in manifest.campaigns for ad in campaign.ads):
+            checks.append("ad_account_video_association")
     if source_ad_ids:
         checks.append("source_ad_lineage")
     result = copy.deepcopy(payload)
@@ -273,7 +275,7 @@ def prevalidate_payload(payload: dict[str, Any], registry: MediaRegistry) -> dic
     result["prevalidation"] = {
         "engine_version": 3,
         "validated_at": datetime.now(timezone.utc).isoformat(),
-        "checks": checks,
+        "checks": list(dict.fromkeys(checks)),
         "content_digest": content_digest(result),
     }
     if not verify_prevalidation(result):

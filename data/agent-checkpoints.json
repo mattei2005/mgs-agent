@@ -7453,12 +7453,12 @@
     {
       "agent": "zeus",
       "id": "vps-audit-1565728077336805552",
-      "next_step": "Após o horário comum, validar boot IDs novos, kernels202 nosInc e147Hestia, serviços, consultas MariaDB/PG read-only,12 canários HTTP e journals dos boots. Se um timer não executar, reconciliar unidade/recibo sem duplicar. Aviso do marco de reboot antes de continuar pendências da manutenção.",
-      "objective": "Avisar após reboot e recuperação dos quatro servidores remotos",
-      "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/simultaneous-reboot-dispatch.json",
-      "state": "quatro timers remotos armados e relidos active/waiting para2026-10-30 15:42:44utc; unidade mgs-maint-reboot-1565750844694069369 em inc01/02/03 e hestia-mail. executor e prestate com checksum imutável validado por host; backup e boot artifacts/ntp aprovados. não criar outros dispatches; consumir os recibos existentes.",
+      "next_step": "Entregar aviso do marco agora, sem aguardar fases restantes. Confirmar correção crítica exata no Inc01: chmod0711→0750 em /opt/bitninja/modules/AuditManager/bin/BnAudisp.php e reativação auditd, com backup já validado; sem novo reboot. Restarts Hostinger/Zeus, Node18, Ubuntu Pro, acessos Spazio/Dimela e CVE upstream continuam abertos. Não mascarar erros de boot como saúde integral.",
+      "objective": "Avisar Rodolfo do marco de quatro reboots e preservar pendências de saúde/manutenção",
+      "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/reboot-milestone-summary.json",
+      "state": "quatro reboots concluídos e aplicações recuperadas: inc01/02/03 kernel5.15.0-202 e hestia6.8.0-147; quatro bootids novos, zero markers reboot-required, bancos/serviços e12 canários http200 validados. disparo real às11:42:44eastern com diferença0.718477s pelos journals. hostinger não reiniciado. gate estrito de journal permanece falho nos3inc: usb/áudio/pci; inc01 também plugin bitninja auditd recusado por modo0711, esperado0750; auditd/bitninja ativos, kernel lost/backlog0. nenhuma correção de permissão aplicada.",
       "thread_id": "1565713769789657239",
-      "updated_at": "2026-10-30T15:41:13+00:00"
+      "updated_at": "2026-10-30T15:52:12+00:00"
     },
     {
       "agent": "zeus",
@@ -7942,5 +7942,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T15:41:22+00:00"
+  "updated_at": "2026-10-30T15:52:12+00:00"
 }

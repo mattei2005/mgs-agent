@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-30T15:50:21.293957+00:00",
+  "agent": "zeus",
+  "action": "shein_static_image_central_maintenance",
+  "task_id": "t_7ab9e9ba",
+  "request_id": "shein-1565747351543480374",
+  "origin_thread_id": "1558134703565967394",
+  "scope": "local central maintenance only; original campaign remains Ares-owned",
+  "authority": [
+    "SHEIN-US-DIRECT.json#/grouped_manager_media_policy",
+    "context/routes.md#delega\u00e7\u00e3o-hist\u00f3rica-de-recovery-ares--zeus"
+  ],
+  "result": "installed_local_validation_passed_live_campaign_acceptance_pending",
+  "evidence": "/root/mgs-agent/work/t_7ab9e9ba/pytest-installed.json",
+  "tests_passed": 491,
+  "baseline_exclusions": 3,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "reservations": 0,
+  "rollback": "/root/mgs-agent/work/t_7ab9e9ba/rollback/20261030T154736Z/ares_campaign_v3"
+}

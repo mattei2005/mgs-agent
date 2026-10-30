@@ -90,7 +90,7 @@
     "daily_cpv.py": "eb0792801a5410b8802087e5d964f3c19e8f5b92c1db769c63609561f7bb54d1",
     "shein_request_queue.py": "d346e416ed9a9534e508e8c95f63dee1428ebb41a3445ed694ca236cc0a09a97",
     "shein_naming.py": "2d19a62a8c36ef0015ccc905da8608b6ebe18e6881887f9c71ab86f4dfc2d73d",
-    "prevalidation.py": "81d8eb8f2b4f56ba30d6b74ffa8c3a9189f2cc1b5fe793789cb6a834816015b7",
+    "prevalidation.py": "65d92ac4c3aef2da4749ebbb176277d1944e4f822dbeb7b136af68b298eac541",
     "shell_recovery.py": "bb2ed8af2042fd2a86c55c0df52a7925a91cb3ce6114b1f885b9854cc55aded5",
     "shein.py": "dc993f27487e3619c66d6e87e6dd15a084bd0f7a8fc254fa4a4dda857b3a0057",
     "shein_general.py": "e1d36a40efae6a5d3b5f34d918fe14747d35faaf581ad74e92d6cbcf13157b88",
@@ -135,5 +135,12 @@
   "meta_writes": 0,
   "drive_writes": 0,
   "production_inventory_reservations": 0,
-  "rollback": "If no IMG transaction has started, exchange the same two directories atomically. If Ares has started, reconcile request/registry/IDs first; never erase image records or roll code back blindly mid-flight."
+  "rollback": "If no IMG transaction has started, exchange the same two directories atomically. If Ares has started, reconcile request/registry/IDs first; never erase image records or roll code back blindly mid-flight.",
+  "post_publication_adjustment": {
+    "at_utc": "2026-10-30T15:53:01.089575+00:00",
+    "module": "prevalidation.py",
+    "reason": "Report image association checks without falsely labeling them video association; deduplicate check labels",
+    "new_sha256": "65d92ac4c3aef2da4749ebbb176277d1944e4f822dbeb7b136af68b298eac541",
+    "installed_regression_passed": 491
+  }
 }

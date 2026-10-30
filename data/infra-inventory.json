@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-30T11:45:49-04:00",
+    "updated_at": "2026-10-30T15:53:01.245415+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -898,7 +898,7 @@
       "type": "autocommit_guardrail_recovery",
       "source_alert_id": "1565752426613702867",
       "owner_task_id": "t_7ab9e9ba",
-      "state": "correction_applied_native_validation_pending",
+      "state": "resolved_validated",
       "cause": "Active offline candidate copied reviewed source into unreviewed work paths; sensitive-name guard correctly blocked the complete batch",
       "paths": [
         ".gitignore",
@@ -911,7 +911,22 @@
         "watcher_tests_passed": 20,
         "monitor_tests_passed": 17,
         "git_diff_check": "PASS",
-        "persistent_service": "active/running; NRestarts=0"
+        "persistent_service": "active/running; NRestarts=0",
+        "native_commit": "57f0a4b517f8834f5feb80bf0f4b69f2eac59aa6",
+        "native_push_ok_at": "2026-10-30T11:48:12-04:00",
+        "remote_main_equals_head": true,
+        "candidate_versioned_files": 0,
+        "candidate_preserved": true,
+        "monitor_dry_run_failures": 0,
+        "monitor_consecutive_failures": 0,
+        "monitor_recovery_transport": "MGS_DRY_RUN=1; final reply delegated to resolver monitor; no extra Discord recovery post"
+      },
+      "report_infra": {
+        "message_id": "1565753328913219787",
+        "channel_id": "1498132022634483894",
+        "readback_http": 200,
+        "content_empty": true,
+        "mentions": 0
       },
       "credentials_changed": false,
       "manual_commit_or_push": false,
@@ -929,7 +944,7 @@
       "report_infra_verified": true,
       "execution_request_message_id": "1565730926233657347",
       "execution_confirmation_message_id": "1565746159215976498",
-      "execution_state": "packages_completed_validated_reboots_pending_new_hestia_confirmation",
+      "execution_state": "four_remote_reboots_and_application_recovery_validated_strict_health_residuals_open",
       "reboot_strategy": "simultaneous remote hosts, owner requested",
       "package_validation": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/package-completion-reboot-gate.json",
       "backup_root_per_host": "/root/zeus-vps-maintenance-1565730926233657347",
@@ -940,8 +955,10 @@
       "production_install_restart_or_config_change": true,
       "package_upgrades_validated": 78,
       "new_dependency_installations_validated": 3,
-      "host_reboots_executed": 0,
-      "additional_reboot_gate": "Hestia mail: apparmor update newly requested reboot; exact prior lot had no Hestia reboot. Confirm adding this fourth host to the simultaneous dispatch.",
+      "host_reboots_executed": 4,
+      "reboot_milestone_validation": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/reboot-milestone-summary.json",
+      "reboot_confirmation_message_id": "1565750844694069369",
+      "additional_reboot_gate": "Resolved: fourth Hestia target included by owner's continuation1565750844694069369; all four remote reboots and public application recovery validated. Strict health remains open: hardware boot errors on Inc hosts and BitNinja auditd plugin mode0711 vs required0750 onInc01. No permission repair applied; exact critical confirmation pending.",
       "scope": "Kernel, OS packages and main runtimes; approved package lot installed and validated. Application source and WordPress plugins excluded.",
       "findings": "Three hosts have installed kernel awaiting reboot plus MariaDB update; Hostinger has 11 package updates; Hestia has 55. Ubuntu CVE-2026-98432 fix remains work in progress. Optional ESM and Node18 migration classified separately."
     },
@@ -56596,6 +56613,115 @@
       },
       "report_infra_message_id": "1565719273761014075",
       "report_infra_readback": true
+    },
+    {
+      "id": "shein-static-images-central-t_7ab9e9ba",
+      "agent": "zeus",
+      "type": "backward-compatible-shein-static-image-media-support",
+      "status": "installed_local_validation_passed_live_campaign_acceptance_pending",
+      "updated_at": "2026-10-30T15:53:01.245415+00:00",
+      "task_id": "t_7ab9e9ba",
+      "request_id": "shein-1565747351543480374",
+      "origin_thread_id": "1558134703565967394",
+      "operation": "SHEIN-US-DIRECT",
+      "authority": [
+        "SHEIN-US-DIRECT.json#/grouped_manager_media_policy",
+        "context/routes.md#delegação-histórica-de-recovery-ares--zeus"
+      ],
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_qa.py",
+          "sha256": "a5f28f78fdee491c5804f51f0d65368f735c7143b226bedfd64f9dda4439ddc0",
+          "size_bytes": 5570
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/media_registry.py",
+          "sha256": "fd440ca5a2ff4e169d115669138bc84024fbc6280ee2441e08821b15651af790",
+          "size_bytes": 6582
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/prevalidation.py",
+          "sha256": "65d92ac4c3aef2da4749ebbb176277d1944e4f822dbeb7b136af68b298eac541",
+          "size_bytes": 14654
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_general.py",
+          "sha256": "e1d36a40efae6a5d3b5f34d918fe14747d35faaf581ad74e92d6cbcf13157b88",
+          "size_bytes": 21870
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py",
+          "sha256": "9883a139517092d9fdfd19fe73738985ec001729dab0b5d0c94f51922bbebeff",
+          "size_bytes": 8904
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py",
+          "sha256": "1a6d9da0536c4cfb68ec06430b0d3ac2d5c7617edf134410ac12a3662167c44c",
+          "size_bytes": 15217
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/image_prestage.py",
+          "sha256": "c3098aba7c3c3b598755c018547217c132e82de9f8b6831826817ef1db008f6a",
+          "size_bytes": 7828
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py",
+          "sha256": "6deddb6b95c61d9a63c7f8df2eb83eca0dd611919ec9b2d711ebdb2b56aca9f5",
+          "size_bytes": 74630
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_grouped_media.py",
+          "sha256": "5789d02b11ccc10d67d195dc77b283be1cd94f11c9b32b534a6a19114b18e137",
+          "size_bytes": 17641
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares_campaign_v3/schema.py",
+          "sha256": "ec4463627b6aaa64890285d0c8e9071c3e5153f96e8ac1e29fcb6d65e31d0409",
+          "size_bytes": 24789
+        },
+        {
+          "path": "/root/mgs-agent/tests/test_shein_image_media.py",
+          "sha256": "a08d0e67cb545523624fcc60edcdaaa263dcca44bc8eb8fc1f49ab38bb78d0f4",
+          "size_bytes": 23611
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-static-image-prestage.md",
+          "sha256": "bcb2a2a50c368818c3ddaf1b942e8afface17d93fcfa30d77d3618a5bd3c47c9",
+          "size_bytes": 4075
+        }
+      ],
+      "tests_passed": 491,
+      "baseline_exclusions": "test_same_ready_folder_queried_once_without_skipping_asset_checks or test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh or test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane",
+      "subtests_passed": 295,
+      "real_images_byte_verified": 16,
+      "source_live_campaign_id": "120250750964580629",
+      "real_input_contract_replay": "passed with isolated synthetic media registry; not live readiness",
+      "live_adimages_read": "HTTP200 in unchanged Ares scope",
+      "meta_writes": 0,
+      "drive_writes": 0,
+      "inventory_reservations": 0,
+      "credentials_guards_budget_sla_changed": false,
+      "deployment_receipt": "/root/mgs-agent/work/t_7ab9e9ba/deployment-receipt.json",
+      "rollback_package": "/root/mgs-agent/work/t_7ab9e9ba/rollback/20261030T154736Z/ares_campaign_v3",
+      "validation_receipt": "/root/mgs-agent/work/t_7ab9e9ba/pytest-installed.json",
+      "next_owner": "ares",
+      "next_task": "t_8f7a90a8",
+      "pending": [
+        "real account-scoped pre-stage and registry hash readback",
+        "real campaign dry-run/plan",
+        "all-image Meta rendered previews and semantic/inventory QA",
+        "same-request central execution and final ACTIVE readback under original timing policy"
+      ],
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "message_id": "1565754746873188458",
+        "author_id": "1496296175014252634",
+        "content_empty": true,
+        "one_embed": true,
+        "no_mentions": true,
+        "verified_at": "2026-10-30T15:50:38.423801+00:00",
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565754746873188458"
+      }
     }
   ],
   "profile_skill_references": [
@@ -58522,8 +58648,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py",
-      "size_bytes": 8659,
-      "modified_at": "2026-10-09T12:36:58-04:00"
+      "size_bytes": 8904,
+      "modified_at": "2026-10-30T15:44:30.044604+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/daily_cpv.py",
@@ -58622,8 +58748,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/media_registry.py",
-      "size_bytes": 4712,
-      "modified_at": "2026-09-13T21:25:33-04:00"
+      "size_bytes": 6582,
+      "modified_at": "2026-10-30T15:32:16.891805+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/planning.py",
@@ -58647,8 +58773,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/prevalidation.py",
-      "size_bytes": 13806,
-      "modified_at": "2026-10-14T16:50:28-04:00"
+      "size_bytes": 14654,
+      "modified_at": "2026-10-30T15:51:05.075031+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/preview_renderer.py",
@@ -58667,8 +58793,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/schema.py",
-      "size_bytes": 23055,
-      "modified_at": "2026-10-14T16:50:26-04:00"
+      "size_bytes": 24789,
+      "modified_at": "2026-10-30T15:35:37.168034+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein.py",
@@ -58692,18 +58818,18 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_general.py",
-      "size_bytes": 20650,
-      "modified_at": "2026-10-23T15:41:47-04:00"
+      "size_bytes": 21870,
+      "modified_at": "2026-10-30T15:35:37.009033+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_grouped_media.py",
-      "size_bytes": 15351,
-      "modified_at": "2026-10-23T10:27:46-04:00"
+      "size_bytes": 17641,
+      "modified_at": "2026-10-30T15:43:23.040533+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py",
-      "size_bytes": 13046,
-      "modified_at": "2026-10-23T10:27:46-04:00"
+      "size_bytes": 15217,
+      "modified_at": "2026-10-30T15:35:37.357034+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_naming.py",
@@ -58712,8 +58838,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_qa.py",
-      "size_bytes": 4911,
-      "modified_at": "2026-10-14T00:39:16-04:00"
+      "size_bytes": 5570,
+      "modified_at": "2026-10-30T15:43:22.843532+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_quiz_delta.py",
@@ -58742,8 +58868,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_single_clone.py",
-      "size_bytes": 74225,
-      "modified_at": "2026-10-29T08:22:50-04:00"
+      "size_bytes": 74630,
+      "modified_at": "2026-10-30T15:30:11.896662+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_campaign_v3/shell_recovery.py",
@@ -59984,6 +60110,11 @@
       "path": "/root/mgs-agent/scripts/zeus-fincgriffin-wordpress-session-probe.sh",
       "size_bytes": 794,
       "modified_at": "2026-08-19T22:22:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/image_prestage.py",
+      "size_bytes": 7828,
+      "modified_at": "2026-10-30T15:33:58.643921+00:00"
     }
   ],
   "skills_mgs": [

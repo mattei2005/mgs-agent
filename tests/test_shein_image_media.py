@@ -46,6 +46,8 @@ class ImageTests(unittest.TestCase):
                 self.assertNotIn('video_data',cp['object_story_spec']);self.assertNotIn('media_sourcing_spec',cp)
                 self.assertEqual(ld['link'],ld['call_to_action']['value']['link'])
             sealed=prevalidate_payload(payload,registry)
+            self.assertIn('ad_account_image_association',sealed['prevalidation']['checks'])
+            self.assertNotIn('ad_account_video_association',sealed['prevalidation']['checks'])
             cfg={'enabled':True,'write_enabled':True,'accounts':{a['shein_profile']['account_id']:a},'state_root':str(root/'state'),'audit_root':str(root/'audit')}
             eng=CampaignEngine(cfg,transport_factory=lambda _: self.fail('plan invoked transport'))
             plan=eng.dry_run(Manifest.from_dict(sealed))
