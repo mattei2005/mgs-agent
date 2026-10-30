@@ -69,6 +69,18 @@
       "type": "Content Agent",
       "discord_channel_id": "1496267571543019653",
       "discord_channel_name": "atena-content-agent",
+      "operational_delegations": {
+        "wp2fa_temporary_maintenance": {
+          "canonical_source": "data/atena/editorial-manager-authority.json#/wp2fa_temporary_maintenance",
+          "authority_message_id": "1565771648945102909",
+          "source_thread_id": "1565555821188878377",
+          "status": "active",
+          "permanent": true,
+          "executor": "atena",
+          "no_new_user_or_role_grant": true,
+          "mandatory_reactivation_readback": true
+        }
+      },
       "authorized_user_discord_ids": [
         "1496254952501280974",
         "344196393512075265"

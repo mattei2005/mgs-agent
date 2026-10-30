@@ -167,6 +167,42 @@
     "always_loaded_consumer": "/root/.hermes/profiles/atena/SOUL.md",
     "supplements": "technical_execution_access_guidance; a orientacao historica nao e grant de acesso novo"
   },
+  "wp2fa_temporary_maintenance": {
+    "id": "ATENA-WP2FA-TEMP-MAINTENANCE-1565771648945102909",
+    "canonical_key": "content.operations.atena.wp2fa-temporary-maintenance",
+    "status": "active",
+    "permanent": true,
+    "current_and_future_equivalent_requests": true,
+    "authority_discord_id": "344196393512075265",
+    "authority_message_id": "1565771648945102909",
+    "authority_message_text": "Sim",
+    "source_thread_id": "1565555821188878377",
+    "execution_owner": "atena",
+    "decision": "Rodolfo confirmou a extensao permanente a Atena da suspensao temporaria do plugin WP 2FA quando indispensavel para uma operacao ContentOps ja autorizada em site MGS aceito pelo gate. Nao exigir novo OK de Zeus/Rodolfo em casos equivalentes. Reativar e validar obrigatoriamente o plugin desativado por ela ao terminar, inclusive apos falha, rollback ou bloqueio da operacao principal.",
+    "scope": "Somente WP 2FA da instalacao-alvo, um site por vez, janela minima ligada a uma operacao ja aprovada; nao e dispensa de 2FA permanente nem grant de acesso global",
+    "preconditions": [
+      "Reconciliar pedido aprovado, dominio, instalacao, identidade tecnica autorizada, writer e pausa humana",
+      "Comprovar que o bloqueio interativo e causado pelo WP 2FA e que a suspensao e indispensavel",
+      "Ler e registrar antes o estado nativo do plugin e a versao; comprovar caminho autenticado independente para reativacao antes de desativar",
+      "Registrar checkpoint recuperavel antes da suspensao, sem segredos; nao manter o plugin suspenso enquanto aguarda decisao humana ou outra dependencia"
+    ],
+    "execution_controls": [
+      "Se inicialmente ativo, desativar somente WP 2FA no alvo e exigir readback inactive antes da manutencao",
+      "Executar somente a operacao principal aprovada, sem conceder acesso, cadastrar usuario ou ampliar seu escopo",
+      "finally obrigatorio: reativar WP 2FA desativado pela propria operacao e exigir readback active, inclusive apos erro/rollback; confirmar tambem comportamento interativo esperado e saude publica",
+      "Falha de reativacao exige recuperacao imediata pelo caminho autenticado validado; se continuar bloqueada, escalar imediatamente o incidente com o estado exato, nunca encerrar como sucesso",
+      "Se o plugin ja estiver inativo ou ausente na entrada, nao inventar suspensao nem ativar/instalar por inferencia; registrar a condicao preexistente e preservar seu gate proprio"
+    ],
+    "prohibited": [
+      "Criar, cadastrar, remover, trocar, ler ou expor fatores/segredos 2FA, codigos, senhas ou tokens",
+      "Alterar enrollment, usuarios, roles, ACL, exclusoes ou politica global do WP 2FA",
+      "Deixar desligada uma protecao que a propria operacao suspendeu",
+      "Aprovar o reparo Yoast de escrita/recuperacao ou qualquer outra operacao protegida apenas por esta excecao"
+    ],
+    "supersedes_interpretation": "Atena deve sempre parar e pedir cadastro de autenticador ou nova permissao generica diante deste bloqueio; suspensao temporaria da rotina e exclusivamente executavel por Zeus",
+    "procedure_source": "context/contentops-technical-execution.md#suspensao-temporaria-do-wp-2fa",
+    "always_loaded_consumer": "/root/.hermes/profiles/atena/SOUL.md"
+  },
   "request_interpretation": {
     "status": "active",
     "ratified_by_discord_id": "344196393512075265",

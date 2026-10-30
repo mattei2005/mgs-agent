@@ -1713,12 +1713,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1565747351543480374",
-      "next_step": "Após handoff central validado t_9bf5723f, reconciliar008/009 e recuperar sóads ausentes, concluir8/16 com QA renderizado/readbackACTIVE e resposta origem.",
+      "next_step": "Aguardar decisão humana específica sobre os dois deltas de público em008-015 na origem. Revalidar pergunta/resposta/autoridade e capacidade central restrita antes de continuar QA/ativação dos mesmos IDs; não aplicar review histórico004/005, não recriar ou ativar006/007. Retomar apenas camada autorizada faltante após capacidade comprovada.",
       "objective": "Concluir oito clones IMG da002 Mavroa no pedido original Nicolas",
-      "source": "kanban:t_8f7a90a8;kanban:t_9bf5723f;work/t_8f7a90a8/live-partial-img-copy.json",
-      "state": "recovery_pending; prepare-media16 e dry-run8 reais ok. meta4931013 na montagem img.008/009 ids120250943717650629/120250943717660629 paused usd25/cost_cap95 zeroads por get; seis restantes não tentadas. histórico006/007 paused. parent manutenção t_9bf5723f; mesmo request/input/manifests/sla/reservas.",
+      "source": "kanban:t_8f7a90a8;work/t_8f7a90a8/live-eight-paused-targeting-gate.json;work/t_8f7a90a8/targeting-live-before-repair.json;work/t_8f7a90a8/targeting-review-question-readback.json",
+      "state": "waiting_material_targeting_review; sourcing recuperado pelo core. oito008-015 paused/16ads reais; usd25cada/usd200lote cost_cap95.008/009 ids preservados. get completo:8 conjuntos user_age_unknown false->true e individual_setting.device1 ausente vs002.16 media/copy/tracking match;qa renderizado/ativação não concluídos.006/007paused e fonte intactas. review específico enviado1565772061119348747 get-validado. mesmo request/manifests/reservas/sla; sem replay/upload.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T16:30:12+00:00"
+      "updated_at": "2026-10-30T16:59:35+00:00"
     },
     {
       "agent": "ares",
@@ -2299,6 +2299,16 @@
       "state": "native_profile_2_admin_targets_10_tests_sources_loaded_and_active_atena_reread_helper_use_observed",
       "thread_id": "1565555821188878377",
       "updated_at": "2026-10-30T15:27:32+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ATENA-WP2FA-TEMP-MAINTENANCE-1565771648945102909",
+      "next_step": "Persistir fonte unica, ponteiro de autorizacao, SOUL/mirror e procedimento; validar, auditar, inventariar/reportar e instruir Atena na origem sem writer Zeus.",
+      "objective": "Aplicar confirmacao permanente de suspensao WP2FA minima por Atena com restauracao obrigatoria e retomar inspecao autorizada",
+      "source": "data/atena/editorial-manager-authority.json#/wp2fa_temporary_maintenance",
+      "state": "explicit_critical_confirmation_received_1565771648945102909_persistence_in_progress",
+      "thread_id": "1565555821188878377",
+      "updated_at": "2026-10-30T16:58:42+00:00"
     },
     {
       "agent": "ares",
@@ -7982,5 +7992,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T16:52:54+00:00"
+  "updated_at": "2026-10-30T16:59:35+00:00"
 }

@@ -39,6 +39,17 @@ O resultado `administrator` comprova capacidade da identidade cadastrada, não a
 7. Novo transporte executável, alteração de credencial/ACL e remoção de componentes temporários continuam sujeitos aos gates específicos. Não usar WPCode executável em Bitnami sem recuperação SSH certificada, nem criar endpoint público de manutenção.
 8. Somente a ação concretamente protegida deve parar. Não exigir de novo aprovação editorial, não bloquear tarefas independentes e não devolver a coordenação rotineira a Zeus/Raquel/Rodolfo.
 
+## Suspensao temporaria do WP 2FA
+
+Autorizacao permanente de Atena: Rodolfo `1565771648945102909`; escopo e limites na fonte unica `data/atena/editorial-manager-authority.json#/wp2fa_temporary_maintenance`. Nao pedir novamente para operacoes equivalentes ja autorizadas.
+
+1. Comprovar o bloqueio WP 2FA no painel e reconciliar dominio/instalacao/identidade/pedido. Fazer um site por vez, somente durante o periodo indispensavel; nao suspender outro fator/plugin de seguranca.
+2. Pelo acesso administrativo canonicamente permitido, ler o registro nativo do plugin, sua versao e seu estado. A resposta da API de plugins fornece o identificador exato; nao adivinhar slug. Validar o caminho REST autenticado de reativacao e persistir checkpoint antes da suspensao.
+3. Se `active`, POST somente `{"status":"inactive"}` no recurso exato do WP 2FA, pelo transporte corporativo, e GET exigindo `inactive`. Se ja inativo/ausente, registrar condicao preexistente; nao instalar/ativar por inferencia desta excecao.
+4. Dentro de `try/finally`, executar exclusivamente a manutencao principal ja aprovada. Nao mudar enrollment, exclusoes, fatores, autenticadores, codigos, senhas, usuarios ou roles para contornar a tela.
+5. No `finally`, mesmo com erro, rollback ou nova dependencia, POST `{"status":"active"}` para o WP 2FA suspenso pela operacao e GET exigindo `active`. Revalidar o enforcement interativo esperado, saude publica e preservacao da politica, sem ler/expor segredos. Nao encerrar o turno nem aguardar decisao humana com essa suspensao aberta.
+6. Se restauracao falhar, tentar recuperacao segura pela rota autenticada previamente validada e escalar imediatamente o estado exato se nao recuperar. Entrega sem comprovacao de `active` e falha material, nunca sucesso.
+
 ## Caso atual: Yoast em OpenZed e Cliquet
 
 Alvos: `finanzas.openzed.com` (posts 52410, 52413, 52416) e `cliquet.com` (61948, 61951, 61954). Fincgriffin permanece pausado.
@@ -47,7 +58,7 @@ O terminal nativo carregado com o perfil Atena executou este preflight com suces
 
 O reparo identificado é reconstruir o objeto derivado compartilhado da home pelo watcher nativo do Yoast, uma vez por instalação, preservando o acervo. Não fazer indexação geral, toggles de options, SQL cego, republicação ou alteração dos seis textos. A execução completa depende de transporte seguro e backup/recuperação certificados; não foi comprovada por este preflight.
 
-Não repetir a mesma busca por SSH sem uma referência nova. Se os acessos permitidos forem esgotados, apresentar uma única decisão delimitada para a alternativa, não reabrir uma cadeia de permissões genéricas. O plugin temporário proposto ainda não recebeu confirmação específica de implantação/remoção.
+Não repetir a mesma busca por SSH sem uma referência nova. O componente somente de inspeção e sua retirada foram confirmados por Rodolfo em `1565760740906901737`, na origem Atena; a suspensão indispensável do WP 2FA agora segue a autorização permanente `1565771648945102909`. Retomar apenas essa inspeção já aprovada, primeiro no OpenZed e depois no Cliquet, sem outro writer. A aprovação de inspeção não libera escrita/recuperação do Yoast ainda não certificadas; preservar os demais gates e a pausa de Fincgriffin.
 
 ## Validação e entrega
 

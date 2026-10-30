@@ -6696,6 +6696,25 @@
       "updated_at": "2026-09-20T20:00:52+00:00"
     },
     {
+      "canonical_key": "content.operations.atena.wp2fa-temporary-maintenance",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "consumers": [
+        "atena",
+        "atena-soul",
+        "zeus"
+      ],
+      "domain": "content-operations",
+      "effective_at": "2026-10-30T17:00:21+00:00",
+      "id": "ATENA-WP2FA-TEMP-MAINTENANCE-1565771648945102909",
+      "kind": "policy",
+      "owner": "Content Operations / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Atena suspende WP2FA somente durante manutencao autorizada e restaura obrigatoriamente",
+      "updated_at": "2026-10-30T17:00:21+00:00"
+    },
+    {
       "canonical_key": "content.wordpress.yoast.term-canonical-native-derivation",
       "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress/references/term-canonical-native-derivation.md",
       "consumers": [
@@ -15597,5 +15616,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T16:25:38+00:00"
+  "updated_at": "2026-10-30T17:00:21+00:00"
 }
