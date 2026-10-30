@@ -987,7 +987,23 @@
       "host_reboots_executed": 4,
       "reboot_milestone_validation": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/reboot-milestone-summary.json",
       "reboot_confirmation_message_id": "1565750844694069369",
-      "additional_reboot_gate": "Resolved: fourth Hestia target included by owner's continuation1565750844694069369; all four remote reboots and public application recovery validated. Strict health remains open: hardware boot errors on Inc hosts and BitNinja auditd plugin mode0711 vs required0750 onInc01. No permission repair applied; exact critical confirmation pending.",
+      "additional_reboot_gate": "Resolved: all four approved remote hosts rebooted and applications recovered; no additional reboot for the auditd repair.",
+      "auditd_permission_repair": {
+        "authorization_message_id": "1565760621297934449",
+        "host": "MatteiInc01",
+        "file": "/opt/bitninja/modules/AuditManager/bin/BnAudisp.php",
+        "before_mode": "0711",
+        "after_mode": "0750",
+        "content_owner_group_unchanged": true,
+        "protected_service_pids_and_boot_unchanged": true,
+        "documented_sighup_applied": true,
+        "local_audit_canary_validated": true,
+        "module_reactivated": false,
+        "active_plugins": 0,
+        "missing_registration": "/etc/audit/plugins.d/BnAudisp.conf",
+        "additional_critical_gate": "Restore exact original registration from validated pre-maintenance backup: absent to356bytes, mode0640, uid0,gid997, then reload auditd; no new rules or reboot.",
+        "result": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/auditd-permission-repair-1565760621297934449.json"
+      },
       "scope": "Kernel, OS packages and main runtimes; approved package lot installed and validated. Application source and WordPress plugins excluded.",
       "findings": "Three hosts have installed kernel awaiting reboot plus MariaDB update; Hostinger has 11 package updates; Hestia has 55. Ubuntu CVE-2026-98432 fix remains work in progress. Optional ESM and Node18 migration classified separately."
     },
@@ -56757,7 +56773,7 @@
       "agent": "zeus",
       "type": "central-shein-human-decision-wait-scheduling",
       "status": "installed_dependency_ready_only_held_for_ares",
-      "updated_at": "2026-10-30T16:15:10.401460+00:00",
+      "updated_at": "2026-10-30T16:20:14.222518+00:00",
       "task_id": "t_8e65299d",
       "request_id": "shein-1565747351543480374",
       "historical_request_id": "shein-1565261967260647536-c3",
@@ -56775,13 +56791,13 @@
         },
         {
           "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_decision_wait.py",
-          "sha256": "c23117baea9c3a904550ebbe446813d4f3142120e91d8ec6da983ba5ba72c9bb",
-          "size_bytes": 7846
+          "sha256": "449f564563f7d83b3b0f594dcce93baf4e5e7afc5b640946b5414851a09dee9e",
+          "size_bytes": 9026
         },
         {
           "path": "/root/mgs-agent/tests/test_shein_decision_wait.py",
-          "sha256": "728ee969dc701f12d834319ecc49ee9c2df5f4c2d5cf20f7f121cd83813b4830",
-          "size_bytes": 15167
+          "sha256": "d21948432fa0d059f0202eb6e62c8b051dd5aaf75266dcef2baaaae87f73aef8",
+          "size_bytes": 16383
         },
         {
           "path": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/queue/decision-waits/shein-1565261967260647536-c3.json",
@@ -56790,13 +56806,13 @@
         },
         {
           "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-request-queue-decision-waits.md",
-          "sha256": "e426c957c15f749b4968cda37303b6571fa9b19ca85012ccac1d0c91fe58b1da",
-          "size_bytes": 5292
+          "sha256": "184bbcd06024ee97edcfc1bb4d7e9bc23602bc1283706e9dff5a46d3df44bd72",
+          "size_bytes": 5800
         }
       ],
       "tests": {
         "exit_code": 0,
-        "passed": 529,
+        "passed": 531,
         "failed": [],
         "subtests_passed": 322,
         "files": 40,
@@ -56831,12 +56847,12 @@
         "content_empty": true,
         "one_embed": true,
         "no_mentions": true,
-        "verified_at": "2026-10-30T16:16:55.541483+00:00",
+        "verified_at": "2026-10-30T16:20:48.806761+00:00",
         "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565761035963465729"
       },
       "worker_heartbeat_verified": {
-        "pid": 269269,
-        "heartbeat_at": "2026-10-30T16:16:41.130067+00:00",
+        "pid": 272884,
+        "heartbeat_at": "2026-10-30T16:20:44.962556+00:00",
         "pending": 1
       }
     }

@@ -1,0 +1,89 @@
+{
+  "request_id": "shein-1565747351543480374",
+  "at": "2026-10-30T16:29:05.126599+00:00",
+  "phase": "RECOVERY_PENDING",
+  "live": [
+    {
+      "id": "120250943717650629",
+      "name": "008 - 30/10 - v3 - BOLSAS GRATIS - COCAP - (b01fb06c008) - COPY C2 - (US_APP) - event_add_to_wishlist",
+      "status": "PAUSED",
+      "budget": "2500",
+      "bid_strategy": "COST_CAP",
+      "adsets": [
+        {
+          "id": "120250943718090629",
+          "status": "PAUSED",
+          "bid_amount": 95
+        }
+      ],
+      "ad_ids": []
+    },
+    {
+      "id": "120250943717660629",
+      "name": "009 - 30/10 - v3 - BOLSAS GRATIS - COCAP - (b01fb06c009) - COPY C2 - (US_APP) - event_add_to_wishlist",
+      "status": "PAUSED",
+      "budget": "2500",
+      "bid_strategy": "COST_CAP",
+      "adsets": [
+        {
+          "id": "120250943718150629",
+          "status": "PAUSED",
+          "bid_amount": 95
+        }
+      ],
+      "ad_ids": []
+    },
+    {
+      "id": "120250921178510629",
+      "name": "006 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c006) - COPY C3 - (US_APP) - event_add_to_wishlist",
+      "status": "PAUSED",
+      "budget": "3500",
+      "bid_strategy": "COST_CAP",
+      "adsets": [
+        {
+          "id": "120250921178930629",
+          "status": "PAUSED",
+          "bid_amount": 90
+        }
+      ],
+      "ad_ids": [
+        "120250921180400629",
+        "120250921180460629",
+        "120250921180420629"
+      ]
+    },
+    {
+      "id": "120250921178500629",
+      "name": "007 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c007) - COPY C3 - (US_APP) - event_add_to_wishlist",
+      "status": "PAUSED",
+      "budget": "3500",
+      "bid_strategy": "COST_CAP",
+      "adsets": [
+        {
+          "id": "120250921178900629",
+          "status": "PAUSED",
+          "bid_amount": 90
+        }
+      ],
+      "ad_ids": [
+        "120250921180650629",
+        "120250921180970629",
+        "120250921180670629"
+      ]
+    }
+  ],
+  "error_stage": "ad_copy_with_creative",
+  "http": 400,
+  "code": 100,
+  "subcode": 4931013,
+  "title": "Object Story Spec Media Not Found in Media Sourcing Spec",
+  "original_input_sha256": "7ff01bbaa739f9422d869e6a0419ea8def04209ee9d9cc16fff9af9950844faf",
+  "confirmed_new_campaign_ids": [
+    "120250943717650629",
+    "120250943717660629"
+  ],
+  "planned_campaigns": 8,
+  "prestaged_assets": 16,
+  "new_campaigns_active": false,
+  "blind_replay_performed": false
+}

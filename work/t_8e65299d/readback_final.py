@@ -11,7 +11,7 @@ assert report['id']=='1565761035963465729' and report['channel_id']=='1498132022
 assert report['author']['id']=='1496296175014252634' and report.get('content')==''
 assert len(report.get('embeds') or [])==1 and not report.get('mentions')
 fields={f['name']:f['value'] for f in report['embeds'][0]['fields']}
-assert 't_8e65299d' in json.dumps(fields) and '529' in json.dumps(fields)
+assert 't_8e65299d' in json.dumps(fields) and '531' in json.dumps(fields)
 r=json.loads((B/'data/ares/meta-ads/audit/shein/campaigns/intake'/R/'request.json').read_text())
 first=json.loads((q.root(B)/'queue/worker.json').read_text())
 time.sleep(32)  # One bounded natural worker cycle, never execute a request as a smoke.
