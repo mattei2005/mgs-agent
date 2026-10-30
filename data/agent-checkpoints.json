@@ -3052,6 +3052,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ATENA-RAQUEL-CONTEXT-RELOAD-1565561398765822093",
+      "next_step": "Localizar mecanismo nativo de refresh de prompt e inventariar sessões roteadas/turnos ativos; preservar execução e validar autoridade no prompt real",
+      "objective": "Recarregar contexto das sessões Atena existentes para aplicar autoridade corrigida, sem restart, reset ou perda de histórico/trabalho",
+      "source": "/root/.hermes/profiles/zeus/work/atena-raquel-authority-1565555821188878377/validation.json",
+      "state": "discovering_native_preserving_refresh",
+      "thread_id": "1565555821188878377",
+      "updated_at": "2026-10-30T03:02:37+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ATENA-WORDPRESS-ACCESS-20260920",
       "next_step": "Zeus monitora regressões de autenticação; qualquer novo site exige integração explícita em data/sites.json antes de publicação automatizada.",
       "objective": "Criar usuário dedicado Atena com função Editor e senha de aplicativo única nos 45 WordPress ativos MGS, armazenar cada credencial no 1Password e atualizar a documentação operacional da Atena.",
@@ -7872,5 +7882,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T02:59:05+00:00"
+  "updated_at": "2026-10-30T03:02:37+00:00"
 }
