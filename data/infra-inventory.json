@@ -893,6 +893,42 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "atena-raquel-always-loaded-authority-1565555821188878377",
+      "agent": "zeus",
+      "type": "authority_documentation_consistency_repair",
+      "authority_message_id": "1565555821188878377",
+      "source_thread_id": "1565555821188878377",
+      "paths": [
+        "/root/.hermes/profiles/atena/SOUL.md",
+        "/root/mgs-agent/profiles/atena-soul.md",
+        "/root/mgs-agent/context/permissions-matrix.md",
+        "/root/mgs-agent/context/routes.md",
+        "/root/mgs-agent/data/atena/editorial-manager-authority.json",
+        "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
+      ],
+      "purpose": "Reconciliar autoridade permanente de Raquel já vigente com SOUL sempre carregado e rotas; evitar reautorização genérica por etapa, falha técnica ou retomada, sem ampliar acesso ou remover gates críticos.",
+      "registry_id": "ATENA-RAQUEL-ALWAYS-LOADED-AUTHORITY-1565555821188878377",
+      "checkpoint_id": "ZEUS-ATENA-RAQUEL-AUTHORITY-AUDIT-1565555821188878377",
+      "evidence_dir": "/root/.hermes/profiles/zeus/work/atena-raquel-authority-1565555821188878377",
+      "validation": {
+        "documentary_tests_passed": 14,
+        "documentary_tests_failed": 0,
+        "native_soul_loader_passed": true,
+        "soul_live_mirror_equal": true,
+        "authorization_scope_unchanged": true,
+        "protected_gates_preserved": true,
+        "live_model_behavior_tested": false
+      },
+      "gateway_restart": false,
+      "other_agent_skills_modified": false,
+      "production_content_modified": false,
+      "report_infra_status": "delivered_readback_verified",
+      "report_infra_message_id": "1565557628900212770",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_receipt": "/root/.hermes/profiles/zeus/work/atena-raquel-authority-1565555821188878377/report-infra-readback.json",
+      "status": "documentation_validated_live_session_not_interrupted"
+    },
+    {
       "id": "autopush-intake-receipt-1565386257729851587",
       "actor": "zeus",
       "type": "autocommit_guardrail_recovery",

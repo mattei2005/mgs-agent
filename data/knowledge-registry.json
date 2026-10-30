@@ -6009,6 +6009,24 @@
       "updated_at": "2026-10-15T13:38:27+00:00"
     },
     {
+      "canonical_key": "content.operations.execution-visible-final-only",
+      "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/SKILL.md",
+      "consumers": [
+        "atena",
+        "content-site-vertical-operations"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-30T02:45:35+00:00",
+      "id": "ATENA-EXECUTION-VISIBLE-1565557089957453958",
+      "kind": "procedure",
+      "owner": "Rodolfo Mattei / Atena Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Pedidos editoriais: execucao visivel nas ferramentas e entrega final, sem mensagens de andamento",
+      "updated_at": "2026-10-30T02:45:35+00:00"
+    },
+    {
       "canonical_key": "content.wordpress.public-canonical-cache-completion",
       "canonical_source": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/references/targeted-cache-readonly-diagnostics.md",
       "consumers": [
@@ -6026,6 +6044,25 @@
       "superseded_by": "ATENA-AUTONOMOUS-PUBLIC-CACHE-1564683223232159856",
       "title": "Conclusão editorial somente na URL pública normal, com renovação seletiva de cache e escalada sem loops",
       "updated_at": "2026-10-27T16:54:39+00:00"
+    },
+    {
+      "canonical_key": "content.operations.raquel.always-loaded-authority",
+      "canonical_source": "data/atena/editorial-manager-authority.json",
+      "consumers": [
+        "atena",
+        "atena-soul",
+        "zeus"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-10-30T02:46:23+00:00",
+      "id": "ATENA-RAQUEL-ALWAYS-LOADED-AUTHORITY-1565555821188878377",
+      "kind": "procedure",
+      "owner": "Content Operations / Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Raquel: autoridade permanente no SOUL sempre carregado; não reabrir aprovação por etapa ou falha técnica",
+      "updated_at": "2026-10-30T02:46:23+00:00"
     },
     {
       "canonical_key": "content.operations.raquel.editorial-batch-authority",
@@ -15488,5 +15525,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T02:04:02+00:00"
+  "updated_at": "2026-10-30T02:46:23+00:00"
 }
