@@ -86,3 +86,15 @@ python3 /root/mgs-agent/scripts/ares-shein-campaigns.py campaign --input <mesmo-
 Deixe a ativação reler e escrever somente os status faltantes; quando todos já estiverem ACTIVE, reconcilie o fechamento sem novos writes. Não envie updates diretos, não volte à cópia e não apague provas para reiniciar o pedido.
 4. Compare status por ID, provas válidas e estágio após cada tentativa. Progresso comprovado permite continuação controlada; falta de avanço exige diagnóstico antes de outro retry. Respeite `retry_after_seconds`; para `E2E_TARGET_EXCEEDED` legado, reconcilie a política `late_activation_allowed=true` e retome o mesmo request sem nova autorização por atraso isolado, sem loop cego. Só avance à próxima fonte após árvores finais e igualdade de IDs verificadas.
 5. Para diagnosticar `BatchTransportError`, projete somente `stage`, tipo, HTTP, códigos/subcodes Meta e nomes dos children. Capture também outras exceções para não expor trace bruto. O padrão confiável é readback antes da retomada, não repetir a mesma chamada até passar.
+
+## 5. Readback semântico consolidado após recuperação multifonte
+
+Reutilize os comparadores canônicos no fechamento do lote; status e budget isolados não verificam mídia, público ou tracking.
+
+1. Com `/root/mgs-agent/scripts` no `sys.path`, importe `verify_readback` de `ares_campaign_v3.shein_single_clone` e `proof_covers` de `ares_campaign_v3.shein_qa`. Recolha os IDs confirmados de todas as linhas, inclusive as concluídas primeiro, em batches somente GET de até 50 itens; exija HTTP externo e children 200 e paginação completa.
+2. Leia `state.target_manifest` como mapa e indexe `campaigns` pelo nome exato. Para cada árvore viva, selecione seu alvo e construa `payload = {**state['target_manifest'], 'campaigns': [desired]}`. Chame `verify_readback(payload, state['source'], live)`: o helper compara `campaigns[0]`, portanto passar o manifest inteiro em cada iteração compara os demais alvos contra a primeira campanha e gera falso drift.
+3. Preserve `live['ads']` e `live['adsets']` como envelopes Graph. Recolha os campos consumidos pelo comparador: configuração da campanha; público, lance, evento e atribuição do conjunto; e definição completa de mídia/copy/identidade/tracking dos creatives. O snapshot compacto `creative{id,name}` não basta.
+4. Depois do QA semântico, exija `proof_covers(state['media_qa'][campaign_id], live)` e igualdade dos conjuntos campaign/adset/ad IDs com checkpoint e árvores terminais anteriores. Preserve as ressalvas retornadas e `state.qa_warnings`; prova renderizada de outros IDs não cobre a árvore atual.
+5. Grave no recibo somente a projeção necessária: IDs, números, parâmetros aprovados, contagens, igualdade de IDs, cobertura de QA, ressalvas e instante do readback. Não imprima ou serialize árvores/manifests completos para depuração: payloads legítimos podem conter thumbnails e URLs temporárias assinadas. Atualize o agregador ao concluir cada linha, não apenas ao fechar o lote.
+
+Essa verificação é read-only. Falha identifica a camada a reconciliar, sem autorizar cópia, ativação, alteração de manifest ou nova renderização por si só.
