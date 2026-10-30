@@ -1,0 +1,187 @@
+{
+  "status": "full_refresh_validated",
+  "verified_at": "2026-10-30T14:32:41.142918-04:00",
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 11,
+    "Linha de crédito": 36
+  },
+  "validated_metrics_at": "2026-10-30T14:31:36.285182-04:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261030T143140774343",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T140338969259",
+  "source_to_live_sheet_cgij_exact": true,
+  "full_grid_narrow_write_readback": true,
+  "h_source_to_live_sheet_and_note_exact": true,
+  "d_ledger_to_live_sheet_exact": true,
+  "fresh_h_account_ids": [
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1085117577390237",
+    "1107653168698121",
+    "1245683183659911",
+    "1419148446852410",
+    "1498990138663094",
+    "1526280818302320",
+    "1583000095650153",
+    "1600310064116258",
+    "1736068407518263",
+    "1744611463000838",
+    "1753257812779707",
+    "1829406761389732",
+    "1851640026221079",
+    "1877104513669062",
+    "2031917360813819",
+    "2039876850230678",
+    "2429758060563333",
+    "2633813727134360",
+    "26632890069640784",
+    "311204101516831",
+    "3188620887977617",
+    "336562339356179",
+    "3752157451670648",
+    "4511685129081248",
+    "536294549227786",
+    "781612907182683",
+    "7840111366055613",
+    "787796726891306",
+    "814915838330687",
+    "869857549542755",
+    "897046653487466",
+    "908704754163659",
+    "937846586033361"
+  ],
+  "fresh_h_count": 36,
+  "h_preserved_count": 0,
+  "pending_h_account_ids": [],
+  "h_read_at_min": "2026-10-30T14:04:35.081254-04:00",
+  "h_read_at_max": "2026-10-30T14:26:01.050050-04:00",
+  "h_sum_usd": "394701.50",
+  "pending_ui": [],
+  "card_proofs_updated": 3,
+  "historical_d_gaps": [
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located_historical",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+    }
+  ],
+  "average_period": [
+    {
+      "since": "2026-10-27",
+      "until": "2026-10-29"
+    }
+  ],
+  "totals_usd": {
+    "average_daily": "21475.61",
+    "balance": "398195.80",
+    "month_spend": "840290.25"
+  },
+  "totals_validated_columns": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "subtotal_checks": [
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F3:F13),2)",
+      "value": "0"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G3:G13),2)",
+      "value": "3502.33"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I3:I13),2)",
+      "value": "3421.84"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J3:J13),2)",
+      "value": "128391.49"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F17:F52),2)",
+      "value": "0"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G17:G52),2)",
+      "value": "17973.28"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "H",
+      "formula": "=ROUND(SUM(H17:H52),2)",
+      "value": "394701.5"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I17:I52),2)",
+      "value": "394773.96"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J17:J52),2)",
+      "value": "711898.76"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "F",
+      "formula": "=ROUND(SUM(F14,F53),2)",
+      "value": "0"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "G",
+      "formula": "=ROUND(SUM(G14,G53),2)",
+      "value": "21475.61"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "H",
+      "formula": "=ROUND(SUM(H14,H53),2)",
+      "value": "394701.5"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "I",
+      "formula": "=ROUND(SUM(I14,I53),2)",
+      "value": "398195.8"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "J",
+      "formula": "=ROUND(SUM(J14,J53),2)",
+      "value": "840290.25"
+    }
+  ],
+  "invoice_due_usd": "0.00",
+  "visible_invoice_numbers": 0,
+  "invoice_period": "2026-09-01",
+  "pc1_blocker": null,
+  "lease_free": true,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "workbook_sheet_count": 2,
+  "other_sheet_data_preservation_qualification": "Writers limited to approved tab; full bounded grid readbacks and H tab-property parity validated. No pre-run value snapshot of unrelated tab; not claiming independent value comparison.",
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T140338969259/closure-current.json",
+  "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+  "other_sheet_properties_unchanged": true
+}

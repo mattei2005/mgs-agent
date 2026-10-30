@@ -59577,6 +59577,31 @@
       "task_id": "t_8426333c",
       "type": "central-renderer-startup-hardening",
       "updated_at": "2026-10-30T18:25:10.726391+00:00"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261030-1402",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "full_refresh_validated",
+      "updated_at": "2026-10-30T14:32:41.142918-04:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261030T140338969259/closure-current.json"
+      ],
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "preserved_h": 0,
+        "card_proofs_updated": 3,
+        "pending_d": 0,
+        "historical_blank_d": 1,
+        "lease_free": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "scripts": [
