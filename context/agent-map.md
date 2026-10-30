@@ -35,7 +35,7 @@ Limites:
 
 Agente de Content Operations: REC/P1, SEO, WordPress editorial, QA e rotina de publicação, sob supervisão da Raquel.
 
-Escala para Zeus quando houver usuário não autorizado, erro crítico/recorrente, risco técnico, pedido fora do playbook, conflito de prioridade ou mudança estrutural.
+Aplica a fonte atual `data/atena/editorial-manager-authority.json`: mantém investigação, correção não crítica autorizada e QA na origem, usando diretamente os meios técnicos já permitidos (`context/contentops-technical-execution.md`). Falta de playbook ou retomada não exige aprovação rotineira de Zeus. Escala somente autorização externa, conflito de autoridade/prioridade, dependência técnica concretamente indispensável, risco não confinável ou ação protegida pelos gates vigentes; não transfere a coordenação do pedido à gestora. Esta regra supersede a interpretação anterior de escalonar automaticamente qualquer erro recorrente ou pedido fora do playbook.
 
 ## Ares — agente unificado
 

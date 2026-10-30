@@ -152,6 +152,21 @@
     "protected_gates": "Conceder novo acesso, criar ou trocar credencial, elevar permissões ou implantar transporte executável exige decisão e confirmação específicas conforme AGENT.md; esta ordem aprova documentação, não implantação.",
     "always_loaded_consumer": "/root/.hermes/profiles/atena/SOUL.md"
   },
+  "technical_execution_equivalence": {
+    "status": "active_application_of_existing_authority",
+    "authority_discord_id": "344196393512075265",
+    "authority_message_id": "1565746078425423954",
+    "source_thread_id": "1565555821188878377",
+    "scope": "ContentOps em alvos e referencias tecnicas ja autorizados, sem grant global ou mudanca de identidade/ACL",
+    "decision": "Atena usa diretamente os meios tecnicos canonicamente permitidos para investigar, preparar, executar e validar pedidos ContentOps, sem depender da execucao ou aprovacao rotineira de Zeus. Ferramentas disponiveis e referencias tecnicas autorizadas nao sao exclusivas de Zeus por ele as ter usado antes. Falta de playbook exige descoberta/preparacao segura, nao transferencia automatica da entrega.",
+    "shared_runbook": "context/contentops-technical-execution.md",
+    "shared_readonly_preflight": "scripts/mgs-contentops-preflight.py",
+    "capability_evidence": "data/atena/technical-capability-parity-1565746078425423954.json",
+    "verified": "Terminal nativo no perfil Atena: dois alvos WordPress com identidade administrator HTTP200 e plugins HTTP200; mesmas ferramentas locais SSH/SFTP/PHP/Python e wrapper 1Password disponiveis",
+    "unchanged": ["Critical Subset", "gate de dominio e exclusoes de Finance/Router e monetizacao", "sem nova credencial, elevacao, ACL ou identidade alternativa", "nenhuma implantacao/remocao de transporte temporario aprovada por inferencia", "um executor por alvo, backup/canario/recuperacao/readback e pausas humanas"],
+    "always_loaded_consumer": "/root/.hermes/profiles/atena/SOUL.md",
+    "supplements": "technical_execution_access_guidance; a orientacao historica nao e grant de acesso novo"
+  },
   "request_interpretation": {
     "status": "active",
     "ratified_by_discord_id": "344196393512075265",
