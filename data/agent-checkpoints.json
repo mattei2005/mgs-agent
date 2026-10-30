@@ -1713,12 +1713,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1565747351543480374",
-      "next_step": "Após handoff seco manutenção central t_fc58be96(parent), conferir recibos/descriptor real read-only para review atual separado; retomar unicamente rota central QA16/postprocess/activate_verified/readback ACTIVE mesmos IDs. Não pedir nova aprovação,não executar prepare-media/reupload/reseal,recriar ou tocar006/007. Responder resultado final na origem e validarGET.",
-      "objective": "Concluir oito clones IMG da002 Mavroa no pedido original Nicolas",
-      "source": "kanban:t_8f7a90a8;kanban:t_fc58be96;work/t_8f7a90a8/current-review-readback.json;work/t_8f7a90a8/review-resume-live-readback.json",
-      "state": "decisao humana resolvida: rodolfo1565779731440468199 reply1565772455606493268 aceita concluir008-015 no estado informado(idade desconhecida true/device ausente).get mensagens/autor/reply+autoridade nicolas forcepass. get atual8campaigns/8adsets/16ads paused,ids preservados,usd25cada/cost_cap95/usd200lote. gate exclusivamente técnico: shein_reviewed_targeting hardcoded004/005,rejeita binding atual. sem writes;qa renderizado/ativação pendentes;mesmo request/manifests/sla.",
+      "next_step": "Após handoff seco t_8364ae25 e prova instalada/read-only,retomar MESMO ares-shein-recovery.py --continuation descriptororiginalreview1565779731440468199 --confirm-execute;reutilizar QAreal16 conforme IDs,concluir somente postprocess/activate_verified/ACTIVEreadback8/8/16. Semreupload/recriação/renomeação/alterarfonte/seals/horário/histórico. Resultadofinalnaorigem eGET;nenhum novoOK.",
+      "objective": "Concluir pedido original Nicolas1565747351543480374:8clones002 Mavroa937846586033361,16IMG/copiesexatas,USD25cada/COST_CAP95,ACTIVE,memosIDs/relógio.",
+      "source": "/root/mgs-agent/work/t_8f7a90a8/postprocess-image-name-live.json",
+      "state": "retomada16 central com descriptor review1565779731440468199 executada:qa semântico e renderizado16 pass,8media_qa com proof_covers live.todos8/8/16 mesmosids paused;postprocess bloqueou medianotready por título adimages exato agora com sufixo_105 em16/16,hashes/dimensões/status preservados.16reservas mesmo request,inventory01_ready/zero assignments;sem qa_proof/media_postprocess_complete/ativação.006/007paused intactas.autoridade/review resolvidos,suporte review instalado conferido.nova manutenção mínima t_8364ae25 parent,sem bypass.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T17:33:31+00:00"
+      "updated_at": "2026-10-30T17:51:53+00:00"
     },
     {
       "agent": "ares",
@@ -8002,5 +8002,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T17:49:35+00:00"
+  "updated_at": "2026-10-30T17:51:53+00:00"
 }
