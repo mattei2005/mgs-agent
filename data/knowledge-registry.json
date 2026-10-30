@@ -3480,6 +3480,24 @@
       "updated_at": "2026-10-20T17:49:34+00:00"
     },
     {
+      "canonical_key": "ares.creative.manager-folder-delivery",
+      "canonical_source": "data/ares/creative-ops/manager-delivery-policy.json",
+      "consumers": [
+        "ares",
+        "creative-operations-mgs"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-10-30T02:04:02+00:00",
+      "id": "ARES-MANAGER-DELIVERY-1565546229914411133",
+      "kind": "policy",
+      "owner": "ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Entrega em pasta de gestor com aprovacao permanente e gates preservados",
+      "updated_at": "2026-10-30T02:04:02+00:00"
+    },
+    {
       "canonical_key": "ares.creative.manual_intake.canonical_completion",
       "canonical_source": "scripts/ares_manual_intake_completion.py",
       "consumers": [
@@ -15470,5 +15488,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-29T20:54:44+00:00"
+  "updated_at": "2026-10-30T02:04:02+00:00"
 }

@@ -98,6 +98,8 @@ def verify_delivery(d,plan,batch,index,rows):
             path=Path(tmp)/('clean'+Path(item['final_name']).suffix);path.write_bytes(d.raw(source['clean_source_id']))
             result=subprocess.run([str(b.BASE/'scripts/clean-creative-metadata.sh'),'verify',str(path),'--json'],capture_output=True,text=True,timeout=60)
             require(result.returncode==0 and json.loads(result.stdout).get('clean') is True,'MANUAL_CLEAN_METADATA')
+    import ares_manager_delivery as manager_delivery
+    manager_delivery.verify_plan(d,plan,selected,index)
     return proofs
 
 def run(execution_dir,requester,apply=False):

@@ -1,0 +1,14 @@
+{
+  "schema": "mgs.creative.manager.delivery.policy.v1",
+  "status": "active",
+  "canonical_key": "ares.creative.manager-folder-delivery",
+  "authority_user_id": "344196393512075265",
+  "authority_message_id": "1565546229914411133",
+  "authority_thread_id": "1565540543457534103",
+  "supersedes": "Per-request CEO reapproval of an equivalent explicit authorized Creative Ops manager-folder delivery, including recovery of the same route",
+  "standing_approval": true,
+  "scope": "Explicit requests from authorized Ares Creative Ops users to treat creatives and deliver the same verified clean lineage to the exact existing registered manager folder under corporate permanent CRIATIVOS. READY is a technical verification stage, not a forced final destination.",
+  "requirements": ["canonical_service_account_only", "existing_registered_manager_folder_only", "explicit_request_per_batch", "verified_READY_stage", "same_logical_ids_and_stock_shortcut", "native_archive_ACK_and_stock_transfer", "preserve_original_in_operation_LEGACY", "preserve_hashes_reservation_and_eligibility", "serialized_compare_and_swap_move", "per_lineage_delivery_receipt", "final_native_readback"],
+  "excluded": ["credentials", "permissions_or_ACL", "new_Drive_structure", "owner_identity_fallback", "delete_or_trash", "historical_bulk_migration", "campaigns", "budget", "billing", "global_guard_relaxation"],
+  "retirement": "Existing separate controller and its pinned authority/limits remain unchanged. Manager-folder delivery is accepted only with a verified exact lineage delivery receipt; this policy does not execute or newly authorize deletion."
+}

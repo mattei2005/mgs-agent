@@ -118,7 +118,12 @@ def check_copy(d,asset,entry):
     import ares_archive_locations as locations
     stock_path=locations.stock_parent(d,record['stock_metadata']['parents'][0])
     allowed_status=['99_LEGACY'] if asset['role']=='original' else ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']
-    if len(stock_path)!=3 or stock_path[:2]!=asset['relativeParent'][:2] or stock_path[-1] not in allowed_status:raise RetirementError('RETIREMENT_STOCK_PATH')
+    if len(stock_path)!=3 or stock_path[:2]!=asset['relativeParent'][:2] or stock_path[-1] not in allowed_status:
+        # Separate approved manager-delivery receipt; immutable provider and RAW
+        # paths remain unchanged. No generic manager/status allowlist relaxation.
+        if asset.get('role')!='clean':raise RetirementError('RETIREMENT_STOCK_PATH')
+        import ares_manager_delivery as manager_delivery
+        manager_delivery.verify_delivered(d,asset,entry)
     permissions=record['provider_metadata'].get('permissions',[]);writers={p.get('emailAddress') for p in permissions if p.get('role')=='writer'}
     if not WRITERS.issubset(writers) or b.CANONICAL_SA not in writers or not record['capabilities'].get('canDownload'):raise RetirementError('RETIREMENT_HUMAN_OR_SA_ACCESS')
     if d.hashes(entry['archiveId'])!={k:asset[k] for k in ['size','md5','sha256']}:raise RetirementError('RETIREMENT_ARCHIVE_BYTES')

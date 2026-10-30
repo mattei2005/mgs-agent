@@ -1213,12 +1213,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1563285734503358485",
-      "next_step": "Pedir a Rodolfo na origem aprovacao da intervencao tecnica separada para restaurar entrega na pasta de gestor exata, com validacao registrada por request e readback consistente em transporte/movimentacao/conclusao/retirada; preservar SA, IDs/hashes, plano, reserva, originais, ACKs e limites. Sem API paralela, liberacao global, credencial, delete ou mudanca de estrutura. Apos aprovacao, corrigir/testar e retomar mesmo lote.",
-      "objective": "Entregar os mesmos 25 criativos US-CC-EN tratados na pasta Nicolas; continuacao na thread 1565540543457534103",
-      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1563285734503358485/delivery-gate.json",
-      "state": "nicolas rejeitou expressamente alternativa ready na mensagem 1565545194852454471. destino exato nicolas mantido; nao repetir pergunta nem concluir em outra pasta. nova verificacao: pasta corporativa existente com canaddchildren=true; 25 clean locais sha/clean=true preservados; zero writes drive. bloqueio e implementacao das rotas transporte/movimentacao/retirada, nao acesso a pasta.",
+      "next_step": "Implementar rota dedicada de entrega de atalho clean verificado READY a gestor registrado com recibo, integrar validacao/conclusao/retirada sem novos deletes, testar e retomar mesmos IDs/nomes ate auditoria final.",
+      "objective": "Corrigir rota autorizada e entregar os 25 criativos na pasta Nicolas",
+      "source": "data/ares/creative-ops/manager-delivery-policy.json",
+      "state": "rodolfo aprovou intervencao delimitada e autorizacao permanente de proximos pedidos equivalentes em 1565546229914411133. politica registrada. plano e 25 clean preservados; implementacao separada da midia em andamento, sem writes remotos ate testes.",
       "thread_id": "1563285734503358485",
-      "updated_at": "2026-10-30T01:59:56+00:00"
+      "updated_at": "2026-10-30T02:04:03+00:00"
     },
     {
       "agent": "ares",
@@ -7842,5 +7842,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T01:59:56+00:00"
+  "updated_at": "2026-10-30T02:04:03+00:00"
 }
