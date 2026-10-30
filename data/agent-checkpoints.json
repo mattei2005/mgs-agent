@@ -1713,12 +1713,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1565747351543480374",
-      "next_step": "Validar/corrigir suporte IMG end-to-end em manutencao separada, sem bypass. Depois mesmo request prepare-media/dry-run/engine central, QA 16 anuncios e readback oito campanhas; preservar horario original e politica vigente se vencido.",
-      "objective": "Oito clones fonte002 Mavroa06 G006, 16 IMG, USD25/dia cada, COCAP0.95, 30/10/2026 11:45 ET",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1565747351543480374/capability-blocker.json",
-      "state": "capability_dependency: prepare-media rejeita img pela validacao vid exclusiva antes de upload/reserva/write. conta e autoridade live ok; 16 arquivos e linhagens confirmados. zero campanhas criadas por esta tentativa. dependencia tecnica t_7ab9e9ba ready; retomada ares t_8f7a90a8 gated.",
+      "next_step": "Dependencia manutencao central t_8e65299d,link persistido; preservar historico006/007 e worker unico. Apos handoff comprovado retomar mesmo input prepare-media/request-ready/dry-run/executor/QA16/ACTIVE8;inicio literal11:45ET preservado e politica same-day auditada.",
+      "objective": "Oito clones fonte002 Mavroa06 G006,16IMG,USD25/dia cada,COST_CAP95,ACTIVE",
+      "source": "kanban:t_8f7a90a8; dependency:t_8e65299d; queue:shein-1565747351543480374",
+      "state": "suporte img hashes instalados conferidos e validate_groups input real passou16. prepare-media retornou queued antes de upload/reserva/write; job waiting depende exclusivamente do historico c3 postprocess_pending por review material sem resposta. get006/007 paused, lease complete/released,16img sem reserva e sem overlap. nenhuma campanha deste pedido criada.",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-10-30T15:25:56+00:00"
+      "updated_at": "2026-10-30T16:00:37+00:00"
     },
     {
       "agent": "ares",
@@ -7311,6 +7311,16 @@
       "updated_at": "2026-10-27T02:54:22+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1565756297008381957",
+      "next_step": "Rodolfo confirmar delegação mínima ADVERTISE/ANALYZE somente Page/conta exatas; fazer journal/pre-read/readback e retomar mesmo request pelo runner central, preservando horário original e política do mesmo dia. Não criar novo request.",
+      "objective": "Duplicar C04 cinco vezes na Mavroa G005; USD100/dia cada; COCAP USD0.70; NOW 30/10",
+      "source": "discord:1185714635991679006/1558133898209394780/1565756297008381957",
+      "state": "needs_critical_permission_confirmation: preflight antes de criação. conta live usd saudável. fonte 120253659195570652, dois ads. page top hallazgos 651566168029395: corporate get code10; admin page http200; assigned_users paginado http200 sem bisu 122095869861482193. sem autorização de permission write. zero campaign writes. referência local reconciliada e diff verificado.",
+      "thread_id": "1558133898209394780",
+      "updated_at": "2026-10-30T15:59:44+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -7942,5 +7952,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-30T15:52:12+00:00"
+  "updated_at": "2026-10-30T16:00:37+00:00"
 }

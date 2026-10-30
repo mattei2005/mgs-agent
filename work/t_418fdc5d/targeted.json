@@ -1,0 +1,17 @@
+{
+  "exit_code": 0,
+  "collected": 3,
+  "passed": 3,
+  "failed": [],
+  "skipped": [],
+  "subtests_passed": 6,
+  "module_origin_mismatch": {},
+  "external_network_attempts_blocked": 0,
+  "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed",
+  "exclusions": [],
+  "targets": [
+    "tests/test_shein_media_qa.py::DriveCacheTests::test_same_ready_folder_queried_once_without_skipping_asset_checks",
+    "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh",
+    "tests/test_ares_campaign_v3_daily_cpv.py::test_cpv_action_readers_keep_writer_gate_but_reports_use_bounded_shared_lane"
+  ]
+}

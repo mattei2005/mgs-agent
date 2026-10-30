@@ -1,0 +1,18 @@
+{
+  "exit_code": 0,
+  "collected": 85,
+  "passed": 85,
+  "failed": [],
+  "skipped": [],
+  "subtests_passed": 19,
+  "module_origin_mismatch": {},
+  "external_network_attempts_blocked": 0,
+  "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed",
+  "exclusions": [],
+  "targets": [
+    "tests/test_shein_media_qa.py",
+    "tests/test_ares_campaign_v3_daily_cpv.py",
+    "tests/test_creditoparaveiculo_report_isolation.py",
+    "tests/test_archive_stock_locations.py"
+  ]
+}

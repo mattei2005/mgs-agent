@@ -157,7 +157,24 @@ class RendererIntegrationTests(unittest.TestCase):
 class DriveCacheTests(unittest.TestCase):
     def test_same_ready_folder_queried_once_without_skipping_asset_checks(self):
         from unittest.mock import Mock
+        import ares_archive_bridge as bridge
+        import ares_archive_locations as locations
         from ares_campaign_v3 import shein_media_handoff as handoff
+        # Freeze the accepted 30TB stock topology, not a production flag or the
+        # retired Shared Drive stock fixture. Real scope/ancestry guards still run;
+        # only native metadata transport and configuration are synthetic.
+        binding = locations.validate({
+            'schema': 'mgs.archive.stock.layout.v1',
+            'approval_message_id': locations.APPROVAL,
+            'source_drive_id': bridge.SOURCE_DRIVE,
+            'staging_root_id': bridge.SOURCE_ROOT,
+            'archive_root_id': bridge.ARCHIVE_ROOT,
+            'upload_root_id': locations.UPLOAD,
+            'owner': bridge.ACCOUNT,
+            'stock_root_id': 'OFFLINE_STOCK_ROOT',
+            'active': True, 'same_ids_verified': True,
+            'consumer_canary_verified': True, 'acceptance_proof': 'OFFLINE_PROOF',
+        })
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);inv=root/'data/ares/creative-ops/inventory/assets.jsonl';inv.parent.mkdir(parents=True)
             refs=[{'asset_id':'asset-'+str(i),'checksum':str(i+1)*64} for i in range(2)]
@@ -165,20 +182,65 @@ class DriveCacheTests(unittest.TestCase):
             inv.write_text('\n'.join(json.dumps(r) for r in rows))
             registry=MediaRegistry(root/'data/ares/meta-ads/engine-v3/media-registry.json')
             for i,r in enumerate(refs):registry.register(account_id='100',asset_id=r['asset_id'],checksum=r['checksum'],vertical_video_id='v'+str(i),square_video_id=None,ready=True,upload_edge='ad_account_advideos',association_verified=True)
+            def node(identifier, name, parent, mime=bridge.FOLDER):
+                return {'id':identifier,'name':name,'parents':[parent],'mimeType':mime,
+                        'trashed':False,'owners':[{'emailAddress':bridge.ACCOUNT}],
+                        'permissions':[{'type':'user'}]}
+            nodes = {
+                'OFFLINE_STOCK_ROOT': node('OFFLINE_STOCK_ROOT','CRIATIVOS',bridge.ARCHIVE_ROOT),
+                'operation': node('operation','SHEIN','OFFLINE_STOCK_ROOT'),
+                'ready': node('ready','01_READY','operation'),
+                'testing': node('testing','02_TESTING','operation'),
+            }
+            for i, row in enumerate(rows):
+                nodes[row['asset_drive_id']] = {**node(row['asset_drive_id'],row['canonical_filename'],'ready','video/mp4'),'md5Checksum':'verified'}
+            def file_read(token, identifier):
+                self.assertEqual(token,'OFFLINE_DRIVE')
+                return copy.deepcopy(nodes[identifier])
             ops=Mock();ops.drive_runtime_token.return_value=('OFFLINE_DRIVE',None)
-            def file_read(token,identifier):
-                if identifier=='ready':return {'id':'ready','name':'01_READY','parents':['operation']}
-                i=int(identifier[-1]);return {'id':identifier,'driveId':'0AEwt4Ye690ocUk9PVA','name':rows[i]['canonical_filename'],'parents':['ready'],'trashed':False,'md5Checksum':'verified'}
             ops.drive_file_readback.side_effect=file_read
+            native = object.__new__(bridge.Drive)  # No auth constructor or API.
+            native.meta = Mock(side_effect=lambda identifier: copy.deepcopy(nodes[identifier]))
             common=Mock()
             def meta_read(path,token,params):
+                self.assertEqual(token,'OFFLINE_META')
                 if path=='act_100/advideos':return 200,{'data':[{'id':'v0'},{'id':'v1'}]},{}
                 i=int(path[-1]);return 200,{'id':path,'title':refs[i]['asset_id']+' '+refs[i]['checksum'][:10],'status':{'video_status':'ready'},'thumbnails':{'data':[{'uri':'https://example.test/thumb'}]}},{}
             common.graph_get.side_effect=meta_read
-            with patch.object(handoff,'_ops',return_value=ops),patch.object(handoff,'_get',return_value={'files':[{'id':'testing','name':'02_TESTING','driveId':'0AEwt4Ye690ocUk9PVA'}]}) as siblings:
-                out=handoff.load_ready_assets({'request_id':'request','asset_refs':refs},{'account_id':'100','language':'EN'},root,common,'OFFLINE_META')
-            self.assertEqual(len(out),2);self.assertEqual(siblings.call_count,1)
-            self.assertEqual(sum(c.args[1]=='ready' for c in ops.drive_file_readback.call_args_list),1)
-            self.assertEqual(sum(c.args[1].startswith('file-') for c in ops.drive_file_readback.call_args_list),2)
+            request={'request_id':'request','asset_refs':refs};profile={'account_id':'100','language':'EN'}
+            with patch.object(locations,'binding',return_value=binding), \
+                 patch.object(locations,'token_drive',return_value=native), \
+                 patch.object(bridge,'config_load',return_value={'queue_enabled':False}), \
+                 patch.object(handoff,'urlopen',side_effect=AssertionError('unexpected network')), \
+                 patch.object(handoff,'_ops',return_value=ops), \
+                 patch.object(handoff,'_get',return_value={'files':[{'id':'testing','name':'02_TESTING'}]}) as siblings:
+                out=handoff.load_ready_assets(request,profile,root,common,'OFFLINE_META')
+                self.assertEqual(len(out),2);self.assertEqual(siblings.call_count,1)
+                self.assertEqual(sum(c.args[1]=='ready' for c in ops.drive_file_readback.call_args_list),1)
+                self.assertEqual(sum(c.args[1].startswith('file-') for c in ops.drive_file_readback.call_args_list),2)
+                self.assertEqual([c.args[0] for c in common.graph_get.call_args_list],['v0','v1','act_100/advideos'])
+                self.assertEqual([r['testing_parent_id'] for r in out],['testing','testing'])
+                # A warmed folder must never skip per-asset checks on asset two.
+                for change, error in [
+                    ({'metadata_clean':False},'sanitized metadata'),
+                    ({'clean_checksum':'wrong'},'checksum'),
+                    ({'used_by':'another-campaign'},'previous-use'),
+                ]:
+                    with self.subTest(change=change):
+                        inv.write_text('\n'.join(json.dumps(r) for r in [rows[0],{**rows[1],**change}]))
+                        with self.assertRaisesRegex(ValueError,error):
+                            handoff.load_ready_assets(request,profile,root,common,'OFFLINE_META')
+                inv.write_text('\n'.join(json.dumps(r) for r in rows))
+                original=copy.deepcopy(nodes['file-1'])
+                for change in [
+                    {'owners':[{'emailAddress':'wrong@example.invalid'}]},
+                    {'driveId':bridge.SOURCE_DRIVE},
+                    {'parents':['testing']},
+                ]:
+                    with self.subTest(change=change):
+                        nodes['file-1']={**original,**change}
+                        with self.assertRaises((ValueError,bridge.ArchiveError)):
+                            handoff.load_ready_assets(request,profile,root,common,'OFFLINE_META')
+                nodes['file-1']=original
 
 if __name__=='__main__':unittest.main()

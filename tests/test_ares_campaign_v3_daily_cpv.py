@@ -682,7 +682,9 @@ def test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh():
     backend.drive_token = None
     backend._graph_pages = lambda path, params: []
     result = backend.meta_preflight()
-    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
+    # Approved cutover: data/ares/meta-ads/audit/auth-cutover/
+    # shared-car-shein-bisu-20260915.json (no credential value is read here).
+    assert backend.common.token_calls == ["Meta BISU - CAR+SHEIN - Digital Trust - G001-G006"]
     assert result["token_report"]["field"] == "token"
     assert result["page"]["tasks"] == ["ADVERTISE"]
 
@@ -861,22 +863,41 @@ def test_wrapper_points_only_to_v3_runner_and_does_not_reactivate_v2():
     assert "sleep " not in wrapper
 
 
-def test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane():
-    wrappers = (
-        "creditoparaveiculo-intraday.sh",
-        "creditoparaveiculo-daily.sh",
+def test_cpv_action_readers_keep_writer_gate_but_reports_use_bounded_shared_lane():
+    # Canonical supersession: Creditoparaveiculo-BR-CAR-BR.json
+    # /reporting_presentation/read_only_isolation, authorized 2026-10-08.
+    # Behavior (including gate=75 and lock timeout) is exercised offline in
+    # test_creditoparaveiculo_report_isolation.py, not by invoking live wrappers.
+    scripts = Path("/root/.hermes/profiles/ares/scripts")
+    gate = "ares-cpv-meta-reader-gate.py"
+    shared_lane = "/run/lock/ares-cpv-meta-lane-1046241194533786.lock"
+    action_wrappers = (
         "creditoparaveiculo-snapshot.sh",
         "creditoparaveiculo-first-delivery-guardrail.sh",
         "creditoparaveiculo-guardrail-reactivate.sh",
     )
-    for name in wrappers:
-        content = (Path("/root/.hermes/profiles/ares/scripts") / name).read_text()
-        assert "ares-cpv-meta-reader-gate.py" in content
-        assert "flock -s -E 75 -n /run/lock/ares-cpv-meta-lane-1046241194533786.lock" in content
+    for name in action_wrappers:
+        content = (scripts / name).read_text()
+        assert gate in content
+        assert f"flock -s -E 75 -n {shared_lane}" in content
+        assert "--report-only" not in content
         assert "sleep " not in content
 
-    intraday = (Path("/root/.hermes/profiles/ares/scripts") / wrappers[0]).read_text()
-    assert "--mode intraday --actions-only --gate" in intraday
+    intraday = (scripts / "creditoparaveiculo-intraday.sh").read_text()
+    reports, separator, actions = intraday.partition("  08|12|16)")
+    assert separator  # Do not accidentally test the action branch as reporting.
+    assert gate in actions
+    assert f"flock -s -E 75 -n {shared_lane}" in actions
+    assert "--mode intraday --actions-only --gate" in actions
+    assert "--report-only" not in actions
+    daily = (scripts / "creditoparaveiculo-daily.sh").read_text()
+    for mode, content in (("intraday", reports), ("daily", daily)):
+        assert gate not in content
+        assert f"flock -s -E 75 -w 45 {shared_lane}" in content
+        assert f"--mode {mode} --report-only --gate" in content
+        assert "--report-unavailable account_busy" in content
+        assert "--actions-only" not in content
+        assert "sleep " not in content
 
 
 def test_reader_gate_blocks_engine_lease_and_resumable_daily_state(tmp_path):

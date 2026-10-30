@@ -1,0 +1,79 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ DriveCacheTests.test_same_ready_folder_queried_once_without_skipping_asset_checks _
+tests/test_shein_media_qa.py:179: in test_same_ready_folder_queried_once_without_skipping_asset_checks
+    out=handoff.load_ready_assets({'request_id':'request','asset_refs':refs},{'account_id':'100','language':'EN'},root,common,'OFFLINE_META')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_campaign_v3/shein_media_handoff.py:86: in load_ready_assets
+    if not locations.stock_scope_for_token(drive_token,file) or file.get('trashed') or file.get('name') != row['canonical_filename'] or len(file.get('parents') or []) != 1:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_archive_locations.py:57: in stock_scope_for_token
+    native=assert_stock_file(token_drive(token),meta.get('stock_file_id') or meta['id'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_archive_locations.py:61: in assert_stock_file
+    meta=d.meta(fid)
+         ^^^^^^^^^^^
+scripts/ares_archive_bridge.py:249: in meta
+    return self.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,trashed,createdTime,owners(emailAddress),lastModifyingUser(emailAddress,permissionId),properties,capabilities(canEdit,canAddChildren,canDownload),permissions(type,emailAddress,role)'})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/ares_archive_bridge.py:238: in api
+    status,data=self.api_json(method,url,self.token,payload)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/mgs_google_workspace_auth.py:178: in api_json
+    with urllib.request.urlopen(request, timeout=45) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/urllib/request.py:187: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/urllib/request.py:487: in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/urllib/request.py:504: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/urllib/request.py:464: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/urllib/request.py:1369: in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/urllib/request.py:1321: in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1367: in request
+    self._send_request(method, url, body, headers, encode_chunked)
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1413: in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1362: in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1122: in _send_output
+    self.send(msg)
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1066: in send
+    self.connect()
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1501: in connect
+    super().connect()
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/http/client.py:1032: in connect
+    self.sock = self._create_connection(
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/socket.py:850: in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/socket.py:987: in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+work/t_418fdc5d/run_tests.py:37: in audit
+    raise AssertionError('offline regression forbids external DNS')
+E   AssertionError: offline regression forbids external DNS
+___ test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh ____
+tests/test_ares_campaign_v3_daily_cpv.py:685: in test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh
+    assert backend.common.token_calls == ["Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006"]
+E   AssertionError: assert ['Meta BISU -... - G001-G006'] == ['Token Meta ...- CPV - G006']
+E     
+E     At index 0 diff: 'Meta BISU - CAR+SHEIN - Digital Trust - G001-G006' != 'Token Meta API - 00 - ANUNCIANTE - Rafael Lucas Oliveira - CPV - G006'
+E     Use -v to get more diff
+__ test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane ___
+tests/test_ares_campaign_v3_daily_cpv.py:874: in test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane
+    assert "ares-cpv-meta-reader-gate.py" in content
+E   assert 'ares-cpv-meta-reader-gate.py' in '#!/usr/bin/env bash\nset -euo pipefail\nset -a\nsource /root/mgs-agent/.env\nset +a\n# Reporting is read-only: persis...%s\\n\' \'Relatório Diário CPV13 indisponível: conta ocupada; aviso solicitado na thread fixa.\' >&2\nfi\nexit "$rc"\n'
+=========================== short test summary info ============================
+FAILED tests/test_shein_media_qa.py::DriveCacheTests::test_same_ready_folder_queried_once_without_skipping_asset_checks
+FAILED tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh
+FAILED tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane
+3 failed in 0.39s
+{"exit_code": 1, "collected": 3, "passed": 0, "failed": [{"id": "tests/test_shein_media_qa.py::DriveCacheTests::test_same_ready_folder_queried_once_without_skipping_asset_checks", "when": "call", "outcome": "failed"}, {"id": "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh", "when": "call", "outcome": "failed"}, {"id": "tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane", "when": "call", "outcome": "failed"}], "skipped": [], "subtests_passed": 0, "module_origin_mismatch": {}, "external_network_attempts_blocked": 1, "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed", "exclusions": [], "targets": ["tests/test_shein_media_qa.py::DriveCacheTests::test_same_ready_folder_queried_once_without_skipping_asset_checks", "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh", "tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane"]}

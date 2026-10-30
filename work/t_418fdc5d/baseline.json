@@ -1,0 +1,33 @@
+{
+  "exit_code": 1,
+  "collected": 3,
+  "passed": 0,
+  "failed": [
+    {
+      "id": "tests/test_shein_media_qa.py::DriveCacheTests::test_same_ready_folder_queried_once_without_skipping_asset_checks",
+      "when": "call",
+      "outcome": "failed"
+    },
+    {
+      "id": "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh",
+      "when": "call",
+      "outcome": "failed"
+    },
+    {
+      "id": "tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane",
+      "when": "call",
+      "outcome": "failed"
+    }
+  ],
+  "skipped": [],
+  "subtests_passed": 0,
+  "module_origin_mismatch": {},
+  "external_network_attempts_blocked": 1,
+  "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed",
+  "exclusions": [],
+  "targets": [
+    "tests/test_shein_media_qa.py::DriveCacheTests::test_same_ready_folder_queried_once_without_skipping_asset_checks",
+    "tests/test_ares_campaign_v3_daily_cpv.py::test_meta_preflight_uses_cache_first_token_lookup_without_force_refresh",
+    "tests/test_ares_campaign_v3_daily_cpv.py::test_all_active_cpv_readers_use_one_persisted_writer_gate_and_shared_lane"
+  ]
+}

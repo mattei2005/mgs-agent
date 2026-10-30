@@ -1,0 +1,17 @@
+
+==================================== ERRORS ====================================
+______________ ERROR collecting tests/test_eggbev_from_zero_v3.py ______________
+ImportError while importing test module '/root/mgs-agent/tests/test_eggbev_from_zero_v3.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_eggbev_from_zero_v3.py:11: in <module>
+    from scripts.ares_campaign_v3.eggbev_create import (
+E   ModuleNotFoundError: No module named 'scripts'
+=========================== short test summary info ============================
+ERROR tests/test_eggbev_from_zero_v3.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.07s
+{"exit_code": 2, "collected": 500, "passed": 0, "failed": [], "skipped": [], "subtests_passed": 0, "module_origin_mismatch": {}, "external_network_attempts_blocked": 0, "network_policy": "audit hook rejects external DNS and non-loopback sockets; local renderer integration allowed", "exclusions": [], "targets": ["tests/test_archive_stock_locations.py", "tests/test_ares_campaign_engine_v3.py", "tests/test_ares_campaign_v3_daily_cpv.py", "tests/test_ares_shein_campaigns_v3.py", "tests/test_creditoparaveiculo_report_isolation.py", "tests/test_eggbev_clone_v3.py", "tests/test_eggbev_from_zero_v3.py", "tests/test_prestaged_slot_reconciliation.py", "tests/test_prestaged_two_phase.py", "tests/test_shein_authorized_continuation.py", "tests/test_shein_batch_barrier_activation.py", "tests/test_shein_batch_continuation.py", "tests/test_shein_bid_channel_rules.py", "tests/test_shein_campaign_groups.py", "tests/test_shein_cbo_same_id_recovery.py", "tests/test_shein_cbo_same_strategy.py", "tests/test_shein_copy_source_addon.py", "tests/test_shein_cross_account_reference.py", "tests/test_shein_default_final_status.py", "tests/test_shein_elapsed_schedule.py", "tests/test_shein_general_runtime.py", "tests/test_shein_image_media.py", "tests/test_shein_immediate_copy_schedule.py", "tests/test_shein_media_qa.py", "tests/test_shein_minimal_duplicate_defaults.py", "tests/test_shein_naming_and_multi.py", "tests/test_shein_notice_recovery.py", "tests/test_shein_now_intent.py", "tests/test_shein_number_padding.py", "tests/test_shein_pipeline_hardening.py", "tests/test_shein_quiz_delta.py", "tests/test_shein_request_queue.py", "tests/test_shein_reviewed_observed_schedule.py", "tests/test_shein_reviewed_targeting.py", "tests/test_shein_scheduled_name_replacement.py", "tests/test_shein_single_clone_route.py", "tests/test_shein_single_media_activation.py", "tests/test_shein_source_setup.py", "tests/test_shein_standard_campaign_requests.py", "tests/test_shein_targeting_flag_normalization.py", "tests/test_shein_us_app_naming.py"]}
