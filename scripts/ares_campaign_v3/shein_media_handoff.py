@@ -108,7 +108,10 @@ def load_ready_assets(request, profile, base, common, token):
                 raise ValueError('image Drive checksum changed since canonical sanitization')
             from .image_prestage import read_account_images, require_image, image_title
             library=read_account_images(common,token,profile['account_id'],hashes=[media['image_hash']])
-            require_image(library,media['image_hash'],name=image_title(ref['asset_id'],ref['checksum'],row['canonical_filename']))
+            from .image_identity import require_prepared_image
+            require_prepared_image(library,media['image_hash'],account_id=profile['account_id'],
+                                   asset={**row,**ref},registry_record=media,
+                                   proof_dir=base/'data/ares/meta-ads/audit/shein/campaigns/intake'/request['request_id'])
             rows.append({**media,'language':row['language'],'canonical_filename':row['canonical_filename'],'asset_drive_id':row['asset_drive_id'],
                          'drive_md5':file.get('md5Checksum'),'ready_parent_id':file['parents'][0],'testing_parent_id':testing[0]['id'],'manager_folder_preserved':bool(manager)})
             continue
@@ -159,8 +162,12 @@ def finalize_ready_assets(state, live, base, common, token):
             image_hash=cr.get('object_story_spec',{}).get('link_data',{}).get('image_hash')
             if image_hash!=asset['image_hash'] or cr.get('object_story_spec',{}).get('video_data'):
                 raise ValueError('final Meta exact image hash/type mismatch')
-            require_image(read_account_images(common,token,desired['account_id'],hashes=[image_hash]),image_hash,
-                          name=image_title(asset['asset_id'],asset['checksum'],asset['canonical_filename']))
+            from .image_identity import require_prepared_image
+            registry=MediaRegistry(base/'data/ares/meta-ads/engine-v3/media-registry.json')
+            record=registry.require_ready(desired['account_id'],asset['asset_id'],asset['checksum'],media_type='image')
+            require_prepared_image(read_account_images(common,token,desired['account_id'],hashes=[image_hash]),image_hash,
+                                   account_id=desired['account_id'],asset=asset,registry_record=record,
+                                   proof_dir=base/'data/ares/meta-ads/audit/shein/campaigns/intake'/state['request']['request_id'])
             assignments[asset['asset_id']]={'campaign_id':live['campaign']['id'],'adset_id':live['adsets']['data'][0]['id'],'ad_id':ad['id'],
                                            'creative_id':cr['id'],'image_hash':image_hash,'post_id':cr.get('effective_object_story_id')}
             continue

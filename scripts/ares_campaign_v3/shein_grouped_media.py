@@ -198,6 +198,18 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     observed_images={a['asset_id']:[r['hash'] for r in image_library if r.get('name')==image_title(a['asset_id'],a['checksum'],a['canonical_filename'])] for a in images}
     if any(len(hashes)>1 for hashes in observed_images.values()):
         raise ValueError('ambiguous account image lineage before reservation')
+    # Resolve already registered renamed hashes before taking any reservation.
+    # A known but invalid/missing hash must block, never become a fresh upload.
+    from .image_identity import require_prepared_image
+    registry=MediaRegistry(base/'data/ares/meta-ads/engine-v3/media-registry.json')
+    for a in images:
+        if registry._key(account['account_id'],a['asset_id'],a['checksum']) in registry._load().get('records',{}):
+            record=registry.require_ready(account['account_id'],a['asset_id'],a['checksum'],media_type='image')
+            require_prepared_image(image_library,record['image_hash'],account_id=account['account_id'],asset=a,
+                                   registry_record=record,proof_dir=proof_dir)
+            observed_images[a['asset_id']]=[record['image_hash']]
+    if any(len(hashes)>1 for hashes in observed_images.values()):
+        raise ValueError('ambiguous account image lineage before reservation')
     with inv.with_suffix(inv.suffix+'.lock').open('a+') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX)
         current=[json.loads(l) for l in inv.read_text().splitlines() if l.strip()];ids={r['asset_id'] for r in selected};stamp=datetime.now(timezone.utc).isoformat()

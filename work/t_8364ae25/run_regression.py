@@ -7,7 +7,8 @@ sys.path[:0]=[str(B/'scripts') if installed else str(W/'stage'),str(B/'scripts')
 import ares_campaign_v3
 import pytest
 patterns=['test_shein*.py','test_ares_campaign_engine_v3.py','test_ares_shein_campaigns_v3.py','test_eggbev_clone_v3.py','test_eggbev_from_zero_v3.py','test_ares_campaign_v3_daily_cpv.py','test_prestage*.py','test_prestaged*.py','test_ares_asset_scope*.py']
-paths=sorted({str(p) for pattern in patterns for p in (B/'tests').glob(pattern)})
+paths=sorted({str(p) for pattern in patterns for p in (B/'tests').glob(pattern)
+              if p.name not in {'test_shein_image_identity.py','test_shein_image_identity_flow.py'}})
 paths.extend(str((B/'tests' if installed else W)/n) for n in ['test_shein_image_identity.py','test_shein_image_identity_flow.py'])
 paths=sorted(set(paths))
 class Receipt:

@@ -196,6 +196,8 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     image_uploader=AdAccountImageUploader(common=common,user_token=token,account_id=account['account_id'],graph_version=cfg.get('graph_version','v26.0'))
     image_library=image_uploader.inventory() if images else []
     observed_images={a['asset_id']:[r['hash'] for r in image_library if r.get('name')==image_title(a['asset_id'],a['checksum'],a['canonical_filename'])] for a in images}
+    if any(len(hashes)>1 for hashes in observed_images.values()):
+        raise ValueError('ambiguous account image lineage before reservation')
     # Resolve already registered renamed hashes before taking any reservation.
     # A known but invalid/missing hash must block, never become a fresh upload.
     from .image_identity import require_prepared_image

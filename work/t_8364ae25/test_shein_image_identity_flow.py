@@ -2,6 +2,7 @@ import copy,hashlib,json,tempfile,unittest
 from pathlib import Path
 from unittest.mock import Mock,patch
 from ares_campaign_v3 import shein_single_clone,shein_general,shein_grouped_media
+from ares_campaign_v3.media_registry import MediaNotReady
 import test_shein_image_media as original
 class RenamedImageHandoffTests(unittest.TestCase):
     fixture=original.ImageTests.fixture
@@ -34,6 +35,21 @@ class RenamedImageHandoffTests(unittest.TestCase):
                 ready=shein_grouped_media.prepare(r,base=root,work_dir=media_dir)
                 for image in library:image['name'] += '_105'
                 shein_grouped_media.prepare(r,base=root,work_dir=media_dir)
+                self.assertEqual(uploader.upload.call_count,3)
+                # Fresh reservation must not be written when a known renamed hash
+                # vanishes or deterministic-name discovery becomes ambiguous.
+                before_inventory=inv.read_bytes();before_reservations=ops.atomic_inventory.call_count
+                missing=library.pop()
+                with self.assertRaises(MediaNotReady):shein_grouped_media.prepare(r,base=root,work_dir=media_dir)
+                library.append(missing)
+                self.assertEqual(inv.read_bytes(),before_inventory)
+                self.assertEqual(ops.atomic_inventory.call_count,before_reservations)
+                duplicate_name=library[0]['name'].removesuffix('_105')
+                library.extend([{**library[0],'hash':'e'*32,'name':duplicate_name},{**library[0],'hash':'f'*32,'name':duplicate_name}])
+                with self.assertRaisesRegex(ValueError,'ambiguous'):shein_grouped_media.prepare(r,base=root,work_dir=media_dir)
+                library.pop();library.pop()
+                self.assertEqual(inv.read_bytes(),before_inventory)
+                self.assertEqual(ops.atomic_inventory.call_count,before_reservations)
                 self.assertEqual(uploader.upload.call_count,3)
                 self.assertEqual(len(ready['asset_refs']),3)
                 def meta(path,token,params):

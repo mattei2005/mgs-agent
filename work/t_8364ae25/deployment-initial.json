@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-30T18:01:12.226112+00:00",
+  "method": "renameat2_RENAME_EXCHANGE",
+  "task_id": "t_8364ae25",
+  "rollback_package": "/root/mgs-agent/scripts/.ares_campaign_v3.image-identity-t_8364ae25",
+  "changed_files": {
+    "/root/mgs-agent/scripts/ares_campaign_v3/image_identity.py": "1f5827bb7b35761635a1fe98c25addda4ded542fdc45736d8cbd17f744bb6c99",
+    "/root/mgs-agent/scripts/ares_campaign_v3/image_prestage.py": "5949048999e0c67ebc94fe28b4810a3732ed0b87958ab9ea825e7ccb8cab72de",
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py": "65911288ea3ee3e43e9c771bfed41723ee96f98eeae090b0a586477e33dee401",
+    "/root/mgs-agent/scripts/ares_campaign_v3/shein_grouped_media.py": "19ee7bc63d79d2b5a2d14ae1e5e4b74e3077e87a9917bbe73f66c91714f7b8bd"
+  },
+  "tests": {
+    "/root/mgs-agent/tests/test_shein_image_identity.py": "1857f1e390a4a61feb6f1519902eddebc766a2ab9be50bbbcaafd262fe26778d",
+    "/root/mgs-agent/tests/test_shein_image_identity_flow.py": "defcac0b120c1575d01238c8af31828d2e037407afab060f21a5d4909495c5dd"
+  },
+  "active_writer_subprocesses": [],
+  "original_request_and_engine_locks_acquired": true,
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "uploads": 0,
+  "reservations": 0,
+  "manifest_mutations": 0,
+  "request_state_edits": 0,
+  "registry_intent_edits": 0,
+  "gateway_restart": false
+}
