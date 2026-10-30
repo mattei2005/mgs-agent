@@ -26,7 +26,15 @@ Quando Rodolfo pedir para ler uma thread e corrigir a resposta de outro agente, 
 
 ## Orientar outro agente sem assumir a execução
 
-Quando Rodolfo pedir para ensinar ou explicar ao agente como corrigir, o entregável é uma orientação técnica publicada e conferida na origem, não um reparo executado por Zeus. Validar em leitura os pré-requisitos e fornecer método, alvos, evidências, aceite e limites; preservar o agente como único executor e dono do QA. Uma mudança explícita de executor deve atualizar o checkpoint para impedir que o plano anterior reabra um writer Zeus. Não transformar envio de instrução em implantação autorizada, nem afirmar que o método funciona ponta a ponta apenas porque o acesso administrativo passou.
+Quando Rodolfo pedir para ensinar ou explicar ao agente como corrigir, executar nesta ordem:
+
+1. Fixar o agente como único executor e dono da investigação, reparo autorizado, QA e entrega; Zeus orienta, não assume uma escrita paralela. Atualizar o checkpoint se a escolha do executor substituir um plano anterior.
+2. Validar os pré-requisitos recuperáveis em leitura e consultar o procedimento técnico relevante antes do envio. Fornecer uma próxima ação concreta, fontes, alvos, teste de aceite e condições de parada; não substituir o procedimento por “você tem autonomia” ou “investigue melhor”.
+3. Publicar na origem solicitada e conferir o conteúdo entregue. Se Rodolfo pedir resposta antes do envio, responder primeiro se o caminho está comprovado ou ainda é uma hipótese; não prometer que instrução equivale a capacidade de executar.
+4. Deixar descoberta, preparação local e etapas não críticas já autorizadas com o agente, sem aprovação rotineira de Zeus nem coordenação devolvida a Rodolfo/Raquel. Isolar somente a ação realmente protegida que precise de confirmação específica, explicando seu efeito e preservando o restante do trabalho.
+5. Ao receber nova evidência, avançar da última camada comprovada. Não reiniciar o ciclo com a mesma busca, nova cobrança de autonomia ou repetição do mesmo pedido de confirmação sem mudança material. Se o pré-requisito continuar indisponível, dar uma conclusão única com fato, lacuna e decisão necessária; não apresentar outra orientação como recuperação.
+
+Não transformar envio de instrução em implantação autorizada, nem afirmar que o método funciona ponta a ponta apenas porque o acesso administrativo passou. Distinguir instrução entregue, execução observada e resultado aceito.
 
 ## Corrigir documentação de escopo de outro agente
 

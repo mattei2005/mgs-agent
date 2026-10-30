@@ -37,6 +37,16 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Publicar três páginas informativas de Branding OAuth em um site aprovado** → `references/oauth-branding-pages-publication.md`
 - **Migrar páginas e cards Lazy Blocks entre sites** → `references/lazyblocks-native-cross-site-migration.md`
 
+## Diagnosticar acesso antes de propor transporte novo
+
+1. Vincular o domínio à instalação e ao servidor exatos pelas fontes atuais; separar RunCloud, Bitnami e outras hospedagens. Acesso SSH a um servidor não demonstra acesso a outro, mesmo quando ambos pertencem à MGS.
+2. Resolver as referências existentes pelo wrapper canônico `/root/mgs-agent/scripts/mgs-op-with-service-account.sh`, filtrando metadados pelos alvos antes de imprimir. Inspecionar também itens de servidor/LOGIN e referências dos helpers: SSH pode autenticar por **usuário e senha**, não apenas por item `SSH_KEY`, arquivo `.pem` ou título contendo “SSH”. Não concluir ausência de acesso por uma busca somente por chaves.
+3. Distinguir referência encontrada, autenticação SFTP, autenticação SSH, shell executável e PHP/WP-CLI funcional. Testar somente leitura com a identidade já autorizada e host-key checking preservado; atribuir uma rejeição de shell à conta testada, nunca a todos os acessos do servidor. `known_hosts` identifica o servidor, não fornece uma credencial de login.
+4. Cruzar a conta editorial com o acesso administrativo WordPress canônico e a URL cadastrada antes de concluir que falta manutenção. Se outro agente já consulta as mesmas referências, não descrever a lacuna como acesso exclusivo de Zeus nem propor compartilhamento/elevação sem comprovar a diferença de permissão.
+5. Só então avaliar transporte adicional. Separar **função nativa encontrada**, **transporte disponível**, **backup/recuperação viáveis** e **reparo validado**; acesso administrativo ou existência de método no plugin não prova o fluxo completo. Não apresentar plugin temporário ou upload PHP ainda não testado como solução garantida.
+
+Ao explicar “como você acessa por SSH?”, responder primeiro qual servidor, qual identidade técnica e se usa senha ou chave, sem revelar o segredo; depois comparar esse caminho com o alvo atual. Se nenhuma referência utilizável for encontrada, delimitar as fontes consultadas e a dependência exata, sem afirmar inexistência universal nem repetir a mesma busca sem evidência nova.
+
 ## Mutation and preservation gates
 
 - Before escalating selective editorial-cache invalidation merely because the cache copy is a file, resolve the current confirmation authority in `data/atena/editorial-manager-authority.json#/cache_request_authority`. Apply Raquel's delegated approval for proven regenerable selective ContentOps cache without another CEO approval for each equivalent request; this is not general file-deletion authority. Preserve the exact approved target set, regeneration proof, private backup, no-symlink/path/hash/owner checks, canary and bare-canonical readback. Never add newly discovered homes/URLs to a previous manifest by inference or take over an active executor through a governance handoff.
