@@ -1,0 +1,120 @@
+{
+  "id": "shein-image-name-identity-t_8364ae25",
+  "agent": "zeus",
+  "task_id": "t_8364ae25",
+  "type": "central-shein-image-identity-reconciliation",
+  "status": "installed_real_readonly_validated",
+  "updated_at": "2026-10-30T18:08:03.517393+00:00",
+  "operation": "SHEIN-US-DIRECT",
+  "request_id": "shein-1565747351543480374",
+  "account_id": "937846586033361",
+  "source_campaign_id": "120250750964580629",
+  "source_message_id_preserved": "1565747351543480374",
+  "review_message_id_preserved": "1565779731440468199",
+  "binding_digest": "ce9bee4f8bab7d889dff36bb73f1f73f3b7330afd7d1a1f7552ee37099459df3",
+  "descriptor_sha256": "cd5eb809237305eea55becdd565b4bdd711d5c6ed725177d2ad7a7bf66100411",
+  "files": [
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/image_identity.py",
+      "sha256": "1f5827bb7b35761635a1fe98c25addda4ded542fdc45736d8cbd17f744bb6c99",
+      "size_bytes": 4014
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/image_prestage.py",
+      "sha256": "5949048999e0c67ebc94fe28b4810a3732ed0b87958ab9ea825e7ccb8cab72de",
+      "size_bytes": 8197
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py",
+      "sha256": "65911288ea3ee3e43e9c771bfed41723ee96f98eeae090b0a586477e33dee401",
+      "size_bytes": 15858
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares_campaign_v3/shein_grouped_media.py",
+      "sha256": "3ff56b0dcd3dff6176b7c967408a8018c43aabd242022da0c0fdd94012458522",
+      "size_bytes": 18589
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_image_identity.py",
+      "sha256": "1857f1e390a4a61feb6f1519902eddebc766a2ab9be50bbbcaafd262fe26778d",
+      "size_bytes": 7034
+    },
+    {
+      "path": "/root/mgs-agent/tests/test_shein_image_identity_flow.py",
+      "sha256": "a8d6372431ae7ce8202f6e735b6bad2ffa4ad00efe8a470555c168f5dc286771",
+      "size_bytes": 7174
+    }
+  ],
+  "learning": {
+    "profile": "zeus",
+    "path": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-static-image-prestage.md",
+    "sha256": "7283b027efffa65f6ab2450ba4052a6a3df0cdc1b28d2e0ef97ca95aa7fdca1f",
+    "readback_and_mirror_equal": true,
+    "ares_skills_changed": false
+  },
+  "regression": {
+    "exit_code": 0,
+    "passed": 565,
+    "failed": [],
+    "subtests_passed": 455,
+    "files": 45,
+    "exclusions": [],
+    "module_origin_mismatch": {},
+    "external_network_attempts_blocked": 0,
+    "profile": null,
+    "installed": true
+  },
+  "read_only_real": {
+    "profile_home": "/root/.hermes/profiles/ares",
+    "image_count": 16,
+    "prestage_registry_hits": 16,
+    "handoff_load_ready": 16,
+    "campaigns": 8,
+    "adsets": 8,
+    "ads": 16,
+    "all_paused": true,
+    "negative_checks": 80,
+    "meta_gets": 30,
+    "drive_md5_size_verified": 16
+  },
+  "confirmed_cause": "Strict name check blocked same account/hash after materialization; name changed with exact suffix _105 in16/16. Cause of suffix unproven.",
+  "contract": "Strict require_image default preserved; changed label auxiliary only with exact ready registry, canonical preparation, READY intent, local SHA256/static bytes/Drive MD5/dimensions and active exact account hash. No suffix patterns.",
+  "meta_writes": 0,
+  "drive_writes": 0,
+  "uploads": 0,
+  "reservations": 0,
+  "state_core_manifest_registry_intent_edits": 0,
+  "credentials_guards_budget_strategy_source_schedule_sla_changed": false,
+  "gateway_restart": false,
+  "qa_proof_fabricated": false,
+  "postprocess_executed": false,
+  "activation_executed": false,
+  "serving_verified": false,
+  "next_owner": "ares",
+  "next_task": "t_8f7a90a8",
+  "rollback_package": "/root/mgs-agent/scripts/.ares_campaign_v3.image-identity-t_8364ae25",
+  "rollback_contract": "Original code only under coordinated original account/request locks after reconciliation; never restore stale operational snapshots or delete/recreate/release objects.",
+  "evidence": "/root/mgs-agent/work/t_8364ae25/report.md",
+  "real_readonly_receipt": "/root/mgs-agent/work/t_8364ae25/real-readonly-installed.json",
+  "preserved_operational_hashes": 28,
+  "hotspots": [
+    "scripts/ares_campaign_v3/shein_media_handoff.py",
+    "scripts/ares_campaign_v3/image_prestage.py",
+    "scripts/ares_campaign_v3/shein_grouped_media.py"
+  ],
+  "separate_followup": {
+    "task_id": "t_8426333c",
+    "after": "t_8f7a90a8",
+    "issue": "Existing empty DevToolsActivePort startup race observed once; full suite repeated unchanged and passed."
+  },
+  "report_infra": {
+    "message_id": "1565789294570901528",
+    "channel_id": "1498132022634483894",
+    "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1565789294570901528",
+    "readback_verified": true,
+    "content_empty": true,
+    "embeds": 1,
+    "mentions": 0,
+    "duplicate_post": false
+  }
+}
