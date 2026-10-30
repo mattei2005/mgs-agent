@@ -77,10 +77,16 @@
       "account_id": "1481815942722118",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-10-28T09:51:57.848446-04:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T095114562584/verified-1481815942722118.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T095114562584/1481815942722118-receipt.json",
+      "read_at": "2026-10-29T21:30:54.171004-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261029T213017267755/verified-1481815942722118.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261029T213017267755/1481815942722118-receipt.json",
       "rows": [
+        {
+          "date": "Oct 28, 2026",
+          "method": "MasterCard ···· 2311",
+          "amount": "2000.00",
+          "status": "Paid"
+        },
         {
           "date": "Oct 27, 2026",
           "method": "MasterCard ···· 2311",
@@ -92,16 +98,10 @@
           "method": "MasterCard ···· 2311",
           "amount": "2000.00",
           "status": "Paid"
-        },
-        {
-          "date": "Oct 24, 2026",
-          "method": "Advertising credit",
-          "amount": "3.54",
-          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Oct 27, 2026",
+        "date": "Oct 28, 2026",
         "method": "MasterCard ···· 2311",
         "amount": "2000.00",
         "status": "Paid"
@@ -299,33 +299,33 @@
       "account_id": "1062446663435585",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-10-28T09:48:07.724157-04:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T094731939856/verified-1062446663435585.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T094731939856/1062446663435585-receipt.json",
+      "read_at": "2026-10-29T21:32:21.553527-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261029T213145666384/verified-1062446663435585.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261029T213145666384/1062446663435585-receipt.json",
       "rows": [
+        {
+          "date": "Oct 29, 2026",
+          "method": "Discover ···· 6762",
+          "amount": "69.00",
+          "status": "Paid"
+        },
+        {
+          "date": "Oct 28, 2026",
+          "method": "Discover ···· 6762",
+          "amount": "69.00",
+          "status": "Paid"
+        },
         {
           "date": "Oct 27, 2026",
           "method": "Discover ···· 6762",
           "amount": "61.00",
           "status": "Paid"
-        },
-        {
-          "date": "Oct 27, 2026",
-          "method": "Discover ···· 6762",
-          "amount": "1067.00",
-          "status": "Paid"
-        },
-        {
-          "date": "Oct 27, 2026",
-          "method": "Discover ···· 6762",
-          "amount": "1067.00",
-          "status": "Failed"
         }
       ],
       "latest_card": {
-        "date": "Oct 27, 2026",
+        "date": "Oct 29, 2026",
         "method": "Discover ···· 6762",
-        "amount": "61.00",
+        "amount": "69.00",
         "status": "Paid"
       },
       "status": "verified_card",
@@ -401,31 +401,31 @@
       "account_id": "1414197490675732",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-10-28T14:25:50.966842-04:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T142512669732/verified-1414197490675732.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261028T142512669732/1414197490675732-receipt.json",
+      "read_at": "2026-10-29T21:33:24.242494-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261029T213248073616/verified-1414197490675732.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261029T213248073616/1414197490675732-receipt.json",
       "rows": [
         {
-          "date": "Oct 28, 2026",
+          "date": "Oct 29, 2026",
           "method": "MasterCard ···· 0344",
           "amount": "56.00",
           "status": "Paid"
         },
         {
-          "date": "Oct 28, 2026",
+          "date": "Oct 29, 2026",
           "method": "MasterCard ···· 0344",
-          "amount": "1850.79",
+          "amount": "56.00",
           "status": "Paid"
         },
         {
-          "date": "Oct 27, 2026",
+          "date": "Oct 29, 2026",
           "method": "MasterCard ···· 0344",
-          "amount": "1576.33",
-          "status": "Failed"
+          "amount": "56.00",
+          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Oct 28, 2026",
+        "date": "Oct 29, 2026",
         "method": "MasterCard ···· 0344",
         "amount": "56.00",
         "status": "Paid"
