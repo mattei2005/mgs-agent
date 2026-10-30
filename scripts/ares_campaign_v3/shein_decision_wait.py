@@ -92,7 +92,8 @@ def evidence(base, value):
             or value.get('media_qa') or not ids or len(ids) != len(set(ids))
             or len(shells) != len(ids)
             or any(c.get('account_id') != account or c.get('status') != 'PAUSED'
-                   or not c.get('ads') or any(not _media(ad) for ad in c['ads']) for c in shells)
+                   or not c.get('ads') or any(not any(kind == 'identity' for kind, _ in _media(ad))
+                                             for ad in c['ads']) for c in shells)
             or checkpoint.get('account_id') != account or checkpoint.get('status') != 'COMPLETE'
             or checkpoint.get('manual_reconciliation_required') is not False
             or set(checkpoint.get('campaign_ids') or []) != set(ids)
@@ -134,8 +135,10 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset())
         campaign_ids = set(value['engine_result']['campaign_ids'])
         for line in inventory.read_text().splitlines():
             row = json.loads(line)
-            if row.get('reservation_request_id') == owner or row.get('meta_campaign_id') in campaign_ids:
-                historical.update(_media(row))
+            identities = _media(row)
+            if (row.get('reservation_request_id') == owner or row.get('meta_campaign_id') in campaign_ids
+                    or identities & historical):
+                historical.update(identities)
         if not historical:
             return False
         # Reservation guards in dependencies are independent; shared identity also blocks

@@ -4,6 +4,12 @@ Use quando uma conta permitida falhar no guard técnico, um objeto criado não t
 
 ## 1. Classificar a camada antes de corrigir
 
+### Número-fonte ausente ou ambíguo
+
+1. Quando o dry-run retornar `source campaign missing or ambiguous`, leia pelo transporte comum o edge `act_<conta_autorizada>/campaigns` com `fields=id,account_id,name,status,daily_budget`, complete a paginação e filtre o número inicial com `^([0-9]+)\s*-`, comparando-o numericamente com `source_number`. Não procure o número em qualquer posição: marcadores COPY e tracking também o contêm.
+2. Se houver mais de uma fonte, apresente somente as candidatas da conta autorizada, distinguindo produto, data e status, e pergunte qual usar. Não presuma que a data solicitada para início identifica a data da fonte, nem escolha automaticamente a ativa ou mais recente.
+3. Se o operador repetir o mesmo pedido ainda aberto, releia as candidatas antes de repetir a pergunta: o inventário pode ter mudado durante a espera. Se a fonte agora for única, mantenha a identidade do request original e retome `campaign --input <mesmo-request.json> --dry-run`; execute somente após o plano confirmar a fonte exata e os parâmetros originais. Repetição do pedido pendente não autoriza um segundo lote nem elimina ambiguidade que ainda exista.
+
 ### Tracking embutido no destino da referência
 
 Ao aplicar a receita `Recuperar preflight de profile ou delegação` da referência geral, não classifique `creative.url_tags` ausente/nulo como ausência de tracking. Leia a query do destino efetivo em CTA/link ou `asset_feed_spec.link_urls` de todos os anúncios paginados; extraia `utm_campaign`, `utm_adgroup` e `utm_medium` com parser de URL/query e confira concordância com o número-fonte. Derive `destination_base` removendo somente query/fragmento, preservando o caminho, e mantenha a localização original do tracking no clone. Reconcile somente os campos comprovados do profile, com backup e comparação estrutural que preserve os demais campos/perfis; repita o dry-run do mesmo request. A correção de referência não comprova acesso à Page nem autorização para atribuir permissões.

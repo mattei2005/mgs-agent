@@ -448,7 +448,15 @@ def _tick_locked(job, base=BASE):
     from .shein_decision_wait import pending
     # Durable dispatch gates override a stale worker snapshot.
     live = json.loads(job_path(base, job['request_id']).read_text())
-    if live.get('maintenance_hold') or live.get('dispatch_owner') == 'foreground' or pending(base, job['request_id']):
+    if live.get('maintenance_hold') or pending(base, job['request_id']):
+        return
+    if live.get('dispatch_owner') == 'foreground':
+        completed = state(base, live['request_id'])
+        if terminal(completed):
+            verify_final(completed)
+            live.update(status='FOREGROUND_COMPLETE', completed_at=completed.get('completed_at'),
+                        delivery_owner='ares')
+            atomic(job_path(base, live['request_id']), live)
         return
     job.clear(); job.update(live)
     from . import shein_single_clone as driver
@@ -521,7 +529,7 @@ def work(base=BASE, max_seconds=None):
             for path in sorted((directory / 'jobs').glob('*.json')):
                 if path.name.endswith('.request.json'): continue
                 job = json.loads(path.read_text())
-                if job.get('status') != 'DELIVERED': pending.append(job)
+                if job.get('status') not in {'DELIVERED', 'FOREGROUND_COMPLETE'}: pending.append(job)
             if not pending:
                 atomic(directory / 'worker.json', {'pid': os.getpid(), 'heartbeat_at': datetime.now(timezone.utc).isoformat(), 'pending': 0})
                 time.sleep(30)

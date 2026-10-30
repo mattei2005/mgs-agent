@@ -205,6 +205,23 @@ class DecisionWaitTests(unittest.TestCase):
         with patch.object(q.subprocess,'run') as run: q.tick(job,self.base)
         run.assert_not_called()
 
+    def test_foreground_completion_is_bookkeeping_only_no_notice(self):
+        job = self.queue(); job['dispatch_owner'] = 'foreground'; q.atomic(q.job_path(self.base,self.rid),job)
+        complete = {'phase':'COMPLETE_FUTURE_ACTIVE', 'summary':{'campaigns':[{'campaign_id':'C'}]}, 'completed_at':'done'}
+        with patch.object(q,'state',return_value=complete), patch.object(q,'verify_final') as verify, patch.object(q,'notify') as notify, patch.object(q.subprocess,'run') as run:
+            q.tick(job,self.base)
+        verify.assert_called_once_with(complete); notify.assert_not_called();run.assert_not_called()
+        live=json.loads(q.job_path(self.base,self.rid).read_text())
+        self.assertEqual(live['status'],'FOREGROUND_COMPLETE');self.assertEqual(live['delivery_owner'],'ares')
+
+    def test_foreground_invalid_completion_does_not_close_or_notify(self):
+        job = self.queue();job['dispatch_owner']='foreground';q.atomic(q.job_path(self.base,self.rid),job)
+        complete={'phase':'COMPLETE_FUTURE_ACTIVE','summary':{'campaigns':[{'campaign_id':'C'}]}}
+        with patch.object(q,'state',return_value=complete),patch.object(q,'notify') as notify:
+            with self.assertRaises((ValueError,KeyError)):q.tick(job,self.base)
+        notify.assert_not_called()
+        self.assertNotEqual(json.loads(q.job_path(self.base,self.rid).read_text())['status'],'FOREGROUND_COMPLETE')
+
     def test_historical_review_never_autoexecuted(self):
         q.enqueue(self.state['request'],'campaign',[],self.base)
         job = json.loads(q.job_path(self.base,self.owner).read_text())

@@ -523,7 +523,11 @@
     729393,
     729395,
     729416,
-    729437
+    729437,
+    729891,
+    729917,
+    729930,
+    729953
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2732,9 +2736,9 @@
     "digital-trust|openzed|16|1754": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T12:10:37.000Z",
+        "created_at": "2026-10-30T16:06:00.000Z",
         "domain": "openzed",
-        "notification_id": 728801,
+        "notification_id": 729917,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 15,
@@ -2761,7 +2765,8 @@
         717302,
         720175,
         727341,
-        728801
+        728801,
+        729917
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -2883,9 +2888,9 @@
     "digital-trust|portalrelevante|23|287": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T12:16:49.000Z",
+        "created_at": "2026-10-30T16:08:20.000Z",
         "domain": "portalrelevante",
-        "notification_id": 728845,
+        "notification_id": 729953,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 8
@@ -2904,7 +2909,8 @@
       ],
       "notification_ids": [
         727431,
-        728845
+        728845,
+        729953
       ],
       "opened_at": "2026-10-28T08:27:15-04:00",
       "repeat_count": 0,
@@ -3058,9 +3064,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T12:08:59.000Z",
+        "created_at": "2026-10-30T16:05:30.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 728780,
+        "notification_id": 729891,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -3104,7 +3110,8 @@
         725099,
         726254,
         727232,
-        728780
+        728780,
+        729891
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -3352,9 +3359,9 @@
     "digital-trust|wavesbee|9|241": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T12:16:43.000Z",
+        "created_at": "2026-10-30T16:08:17.000Z",
         "domain": "wavesbee",
-        "notification_id": 728824,
+        "notification_id": 729930,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 36,
@@ -3375,7 +3382,8 @@
       ],
       "notification_ids": [
         727401,
-        728824
+        728824,
+        729930
       ],
       "opened_at": "2026-10-28T08:27:15-04:00",
       "repeat_count": 0,
@@ -3805,24 +3813,20 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-30T11:57:14-04:00",
+  "last_check": "2026-10-30T12:12:41-04:00",
   "last_delivery": {
-    "at": "2026-10-30T08:12:14-04:00",
+    "at": "2026-10-30T12:12:41-04:00",
     "cursor_ids": [
-      729393,
-      729395,
-      729416,
-      729437
+      729891,
+      729917,
+      729930,
+      729953
     ],
-    "message_ids": [
-      "1565699851558195212"
-    ],
-    "notification_ids": [
-      729437
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 729437,
+  "last_seen_id": 729953,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

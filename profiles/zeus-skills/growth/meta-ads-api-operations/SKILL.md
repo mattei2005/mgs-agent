@@ -275,6 +275,10 @@ For the complete reusable submission flow—including Allowed usage text, Reques
 
 Follow the operation-specific architecture gate in **Page-access workflow and Rodolfo's onboarding preference**. For SHEIN direct traffic, begin with `operations/SHEIN-US-DIRECT.json` and its active registry source; resolve other operations independently. Validate the actual actor with `/me`, and validate type/app with `/debug_token` authenticated by an app access token. An authorized direct-traffic BISU does not change the separately approved BOT/Messenger architecture.
 
+### SHEIN queue blocked by a historical human review
+
+For distinguishing inert material-decision waits from active account writers, fail-closed dependency classification and an explicitly coordinated dry Ares takeover, load `references/shein-request-queue-decision-waits.md`. Never forge completion, release reservations or infer approval of historical targeting differences.
+
 ### SHEIN grouped static images
 
 For IMG PNG/JPG requests, central typed image pre-stage, exact-hash QA, ambiguous-upload recovery and the offline-versus-live readiness boundary, load `references/shein-static-image-prestage.md`. Do not treat generic media authority as implementation evidence or fix only the filename regex.
