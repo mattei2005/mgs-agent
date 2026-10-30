@@ -519,7 +519,11 @@
     729005,
     729026,
     729049,
-    729072
+    729072,
+    729393,
+    729395,
+    729416,
+    729437
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -797,9 +801,9 @@
     "digital-trust|cliquet|13|1737": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T00:07:33.000Z",
+        "created_at": "2026-10-30T12:06:09.000Z",
         "domain": "cliquet",
-        "notification_id": 728173,
+        "notification_id": 729393,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 9,
@@ -831,7 +835,8 @@
         724503,
         725585,
         726729,
-        728173
+        728173,
+        729393
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -1901,9 +1906,9 @@
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T00:07:51.000Z",
+        "created_at": "2026-10-30T12:06:26.000Z",
         "domain": "infinitynexx",
-        "notification_id": 728176,
+        "notification_id": 729395,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -1934,7 +1939,8 @@
         724513,
         725609,
         726731,
-        728176
+        728176,
+        729395
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -3135,6 +3141,38 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|topfeed|6|226": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-10-30T12:11:09.000Z",
+        "domain": "topfeed",
+        "notification_id": 729437,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 16,
+          "Broadcast": 78,
+          "Ready": 1
+        },
+        "pages": 95,
+        "segurador_id": "226",
+        "segurador_name": "Barbara Leticia",
+        "source": "canary",
+        "user_email": "disparosfinancetopfeed@gmail.com",
+        "user_id": "6",
+        "user_name": "Disparos FTF US-CC-EN"
+      },
+      "last_sent_at": "2026-10-30T08:12:14-04:00",
+      "message_ids": [
+        "1565699851558195212"
+      ],
+      "notification_ids": [
+        729437
+      ],
+      "opened_at": "2026-10-30T08:12:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
@@ -3228,9 +3266,9 @@
     "digital-trust|vizioid|50|217": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-29T00:13:11.000Z",
+        "created_at": "2026-10-30T12:10:47.000Z",
         "domain": "vizioid",
-        "notification_id": 728198,
+        "notification_id": 729416,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 8,
@@ -3262,7 +3300,8 @@
         724532,
         725630,
         726762,
-        728198
+        728198,
+        729416
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -3766,18 +3805,24 @@
       "status": "active"
     }
   },
-  "last_check": "2026-10-30T07:57:13-04:00",
+  "last_check": "2026-10-30T08:12:14-04:00",
   "last_delivery": {
-    "at": "2026-10-29T16:27:18-04:00",
+    "at": "2026-10-30T08:12:14-04:00",
     "cursor_ids": [
-      729049,
-      729072
+      729393,
+      729395,
+      729416,
+      729437
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1565699851558195212"
+    ],
+    "notification_ids": [
+      729437
+    ]
   },
   "last_error": null,
-  "last_seen_id": 729072,
+  "last_seen_id": 729437,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
