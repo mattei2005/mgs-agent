@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-10-30T06:32:01-04:00",
+    "updated_at": "2026-10-30T12:57:02.299392+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -63922,6 +63922,21 @@
       "size_bytes": 13564,
       "md5": "afdcfc5959759a5106b8aab48e72b14a",
       "modified_at": "2026-10-09T11:42:46-04:00"
+    },
+    {
+      "id": "ZEUS-YOAST-HOME-ACCESS-1565709978688294963",
+      "agent": "zeus",
+      "type": "diagnostic_checkpoint",
+      "path": "data/zeus/yoast-home-repair-access-1565709978688294963.json",
+      "related_paths": [
+        "data/agent-checkpoints.json",
+        "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/contentops-existing-renderer-scoped-support.md"
+      ],
+      "authority_message_id": "1565709978688294963",
+      "thread_id": "1565555821188878377",
+      "status": "blocked_specific_temporary_transport_and_cleanup_confirmation",
+      "evidence": "Two canonical admin REST GETs HTTP200 administrator; SFTP authenticated; SSH execution explicitly rejected. No production writes, credentials or permissions changed. Fincgriffin untouched.",
+      "updated_at": "2026-10-30T12:57:02.299392+00:00"
     }
   ],
   "mu_plugin_canonical": {

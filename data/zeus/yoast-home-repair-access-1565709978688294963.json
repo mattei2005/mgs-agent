@@ -1,0 +1,32 @@
+{
+  "id": "ZEUS-YOAST-HOME-ACCESS-1565709978688294963",
+  "authority_message_id": "1565709978688294963",
+  "source_thread_id": "1565555821188878377",
+  "editorial_thread_id": "1564289742567112795",
+  "observed_at": "2026-10-30T12:53:47.025697+00:00",
+  "targets": ["finanzas.openzed.com", "cliquet.com"],
+  "excluded_paused_target": "fincgriffin.com",
+  "confirmed": {
+    "sftp_credentials_found_and_authenticated": true,
+    "sftp_remote_root": "/opt/bitnami/wordpress",
+    "sftp_identity_documented_read_only": true,
+    "ssh_execution_rejected_both_targets": "This service allows sftp connections only.",
+    "canonical_wordpress_admin_rest_http_both_targets": 200,
+    "canonical_wordpress_admin_role_both_targets": "administrator",
+    "canonical_login_path_both_targets": "/rodloguda",
+    "admin_install_activate_edit_delete_plugin_capabilities": true,
+    "wp_file_manager_present_both_targets": false,
+    "yoast_version_both_targets": "28.3",
+    "wpcode_execution_without_certified_ssh_recovery": "forbidden_by_existing_operational_policy"
+  },
+  "method_status": "existing_admin_access_verified_but_localized_repair_transport_not_yet_installed_or_tested",
+  "next_step": "Obtain specific critical confirmation before temporary maintenance transport deployment and exact owned-file/plugin cleanup; then validate authenticated browser, backup/recovery, one-site canary, native home-page-only rebuild, public six-article QA, cleanup and readback. Do not grant Atena the technical admin identity or repeat editorial approval.",
+  "remote_mutations": 0,
+  "repair_performed": false,
+  "fincgriffin_remote_requests": 0,
+  "credentials_or_permissions_changed": false,
+  "secrets_emitted": false,
+  "diagnostic_failure_recovered": "Initial OpenSSH SFTP ls -ld unsupported; corrected to ls -l and repeated successfully. SSH exit 1 is the confirmed server-side execution restriction, not failed authentication.",
+  "evidence_directory": "/root/.hermes/profiles/zeus/cache/scratch/yoast-access-1565709978688294963",
+  "external_handoff_sent": false
+}
