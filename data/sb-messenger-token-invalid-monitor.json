@@ -3788,18 +3788,28 @@
   "retention": {
     "consecutive_failures": 0,
     "failure_alert_sent_for": 0,
-    "last_check": "2026-10-29T00:05:02-04:00",
+    "last_check": "2026-10-30T00:05:07-04:00",
     "last_error": null,
     "last_result": {
       "already_missing": 0,
-      "cutoff": "2026-10-28T00:00:00-04:00",
-      "deleted": 0,
-      "eligible": 0,
-      "message_ids": [],
+      "cutoff": "2026-10-29T00:00:00-04:00",
+      "deleted": 9,
+      "eligible": 9,
+      "message_ids": [
+        "1565099646022459554",
+        "1565095884574818367",
+        "1565035480259764258",
+        "1564978860943220736",
+        "1564978856383873025",
+        "1564975092214267979",
+        "1564975087902265407",
+        "1564975084006023189",
+        "1564975078029000836"
+      ],
       "remaining": 0,
-      "scanned": 9,
+      "scanned": 10,
       "would_delete": 0
     },
-    "last_success_date": "2026-10-29"
+    "last_success_date": "2026-10-30"
   }
 }
