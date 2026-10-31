@@ -2,6 +2,15 @@
 
 Use for an explicitly authorized dependency/security update, such as Rodolfo1556897466652037131 (`proxy-addr`2.0.7→2.0.8). Execution evidence/checkpoint, not the authorization itself, establishes publication.
 
+## Triage findings discovered during another finance task
+
+1. Run `npm audit --omit=dev --json` read-only and retain its JSON and exit status. Distinguish advisories returned successfully from a registry/network failure; a nonzero audit exit does not by itself mean the retrieval failed.
+2. Confirm affected versions in the actual remote finance runtime as well as the local lockfile. Inspect the affected call sites and middleware order: parsing before authentication can expose a vulnerable parser even when the financial APIs require login. Distinguish installed vulnerable version, reachable affected behavior and demonstrated exploitation; a package match proves only the first.
+3. Compare the dependency tree with the pre-change baseline. If the authorized financial change did not modify it, record the finding separately rather than attributing it to the new mapping or treating completed accounting as unfinished. Do not label the security audit clean merely because functional gates passed.
+4. Resolve remediation authority separately. Do not run `npm audit fix` against active dependencies or expand a mapping release into a dependency update. If the patch is outside the current authorization, preserve a separate checkpoint and explain the confirmed risk, recommended isolated patch and exact approval needed, while reporting the verified financial result independently.
+
+## Authorized patch procedure
+
 1. Read the exact npm advisory, installed/runtime version, package metadata and affected call sites. Record configured exposure separately from package vulnerability; trust proxy disabled does not mean the installed vulnerable version is patched.
 2. Prepare source/fixtures under the normal bounded allowlist, but omit the live `node_modules` symlink. Run a targeted lockfile-only update and a fresh `npm ci --ignore-scripts --no-audit --no-fund` only after proving the isolated candidate has no existing `node_modules`. Never install through a link into active code or run `npm ci` over live dependencies.
 3. Diff every package-lock entry and require only the authorized package to change. Verify transitive runtime dependencies are unchanged. Inspect the official runtime patch and seal the candidate dependency files by SHA-256; ordinary release gates hash code/locks but do not seal `node_modules` themselves.
