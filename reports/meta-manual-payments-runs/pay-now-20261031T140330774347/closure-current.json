@@ -1,0 +1,189 @@
+{
+  "status": "full_refresh_validated_historical_d_qualified",
+  "verified_at": "2026-10-31T14:34:52.864582-04:00",
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 11,
+    "Linha de crédito": 36
+  },
+  "validated_metrics_at": "2026-10-31T14:33:26.830592-04:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261031T143329175857",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T140330774347",
+  "source_to_live_sheet_cgij_exact": true,
+  "full_grid_narrow_write_readback": true,
+  "totals_validated_columns": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "subtotal_checks": [
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F3:F13),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G3:G13),2)",
+      "value": "3541.02"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I3:I13),2)",
+      "value": "5427.69"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J3:J13),2)",
+      "value": "131639.01"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F17:F52),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G17:G52),2)",
+      "value": "16498.99"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "H",
+      "formula": "=ROUND(SUM(H17:H52),2)",
+      "value": "410285.87"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I17:I52),2)",
+      "value": "410401.57"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J17:J52),2)",
+      "value": "727576.43"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "F",
+      "formula": "=ROUND(SUM(F14,F53),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "G",
+      "formula": "=ROUND(SUM(G14,G53),2)",
+      "value": "20040.01"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "H",
+      "formula": "=ROUND(SUM(H14,H53),2)",
+      "value": "410285.87"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "I",
+      "formula": "=ROUND(SUM(I14,I53),2)",
+      "value": "415829.26"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "J",
+      "formula": "=ROUND(SUM(J14,J53),2)",
+      "value": "859215.44"
+    }
+  ],
+  "fresh_h_account_ids": [
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "1085117577390237",
+    "1107653168698121",
+    "1245683183659911",
+    "1419148446852410",
+    "1498990138663094",
+    "1526280818302320",
+    "1583000095650153",
+    "1600310064116258",
+    "1736068407518263",
+    "1744611463000838",
+    "1753257812779707",
+    "1829406761389732",
+    "1851640026221079",
+    "1877104513669062",
+    "2031917360813819",
+    "2039876850230678",
+    "2429758060563333",
+    "2633813727134360",
+    "26632890069640784",
+    "311204101516831",
+    "3188620887977617",
+    "336562339356179",
+    "3752157451670648",
+    "4511685129081248",
+    "536294549227786",
+    "781612907182683",
+    "7840111366055613",
+    "787796726891306",
+    "814915838330687",
+    "869857549542755",
+    "897046653487466",
+    "908704754163659",
+    "937846586033361"
+  ],
+  "fresh_h_count": 36,
+  "h_preserved_count": 0,
+  "pending_h_account_ids": [],
+  "h_ledger_to_live_sheet_exact": true,
+  "h_read_at_min": "2026-10-31T14:04:32.153065-04:00",
+  "h_read_at_max": "2026-10-31T14:26:13.372072-04:00",
+  "h_sum_usd": "410285.87",
+  "pending_ui": [],
+  "card_proofs_updated": 5,
+  "historical_d_gaps": [
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located_historical",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+    }
+  ],
+  "d_ledger_to_live_sheet_exact": true,
+  "average_period": [
+    {
+      "since": "2026-10-28",
+      "until": "2026-10-30"
+    }
+  ],
+  "totals_usd": {
+    "average_daily": "20040.01",
+    "balance": "415829.26",
+    "month_spend": "859215.44"
+  },
+  "invoice_due_usd": "0.00",
+  "visible_invoice_numbers": 0,
+  "invoice_period": "2026-09-01",
+  "invoice_collected_at": "2026-10-31T14:03:01.907570-04:00",
+  "pc1_blocker": null,
+  "lease_free": true,
+  "owned_tabs_created_and_closed": 11,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "workbook_sheet_count": 2,
+  "other_sheet_properties_unchanged": true,
+  "other_sheet_data_preservation_qualification": "All writes scoped to approved sheet; full target-grid readbacks and all sheet properties verified. No pre-operation data snapshot for other tab; closure snapshot retained, not claimed as before/after proof.",
+  "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T140330774347/closure-current.json"
+}
