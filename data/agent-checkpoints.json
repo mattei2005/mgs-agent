@@ -1832,6 +1832,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-G004-CPR-1566134779483525171",
+      "next_step": "Executar22slots finitos; alertar primeira ultrapassagem e rearmar apos <=1.50; sem recorrencia apos expiracao; metricas sem resultados permanecem indefinidas",
+      "objective": "Fiscalizar nove copias C218-C226 de 31/10; alerta CPR AddToWishlist >USD1.50 ate fim do dia ET",
+      "source": "data/ares/meta-ads/state/cpr-watch/1566134779483525171/manifest.json",
+      "state": "monitor habilitado e readback confirmado; checagens 13/43 ate23:43; expiracao absoluta01/11 00h edt;14testes+mock nonce/get/replay pass; inicial13:03 sem resultados nas nove; zero meta writes",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-10-31T17:05:09+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-G004-ROI-WATCH-1565473799510429788",
       "next_step": "Executar os seis slots finitos; enviar somente quedas ou falha de fonte na origem, preservando referencia valida; expiracao absoluta 30/10 00:00 EDT sem renovacao",
       "objective": "Alertas horarios de qualquer queda do ROI real diario das 11 campanhas alteradas, somente em 29/10/2026",
@@ -8032,5 +8042,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-31T12:05:52+00:00"
+  "updated_at": "2026-10-31T17:05:09+00:00"
 }

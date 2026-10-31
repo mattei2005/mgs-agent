@@ -88,6 +88,13 @@ Para “quais campanhas alterei hoje”, faça auditoria read-only de Activities
 - Não peça novamente aprovação de uma regra ou limpeza já autorizada. Se uma correção exigir confirmação crítica própria, apresente de uma vez o alvo, a alteração concreta, o impacto e o que será preservado; execute as partes independentes já autorizadas, sem transformar o pedido em uma sequência de confirmações genéricas.
 - Ao mudar de diagnóstico para execução, declare explicitamente essa transição. No fechamento, detalhe quais proteções foram testadas e quais rotas/fontes continuam sem validação; não trate uma amostra live ou testes verdes como garantia de sigilo de toda a operação.
 
+## Alertas temporários de custo por resultado
+
+- Congele a coorte por IDs imutáveis após cruzar data de criação no fuso live da conta com os recibos de duplicação; nomes COPY e memória isolados não comprovam o universo do dia.
+- Confirme o evento otimizado nos conjuntos e calcule o custo com a action exata, sem somar aliases omni/web. Compare o valor Decimal não arredondado com o limite estrito solicitado e reconcilie o custo/action retornado pela Meta. Sem resultados, o custo é indefinido, não zero nem infinito.
+- Para um pedido finito de fiscalização sem cadência expressa, use uma cadência conservadora explícita ao operador (por exemplo, 30 minutos), com auditoria global de agenda, IDs congelados, expiração absoluta no fim do dia da conta e script no_agent. Não transformar a autorização em recorrência permanente nem em pausa/budget write.
+- Alerte na primeira leitura válida acima do limite e reabilite novo alerta após leitura válida no limite ou abaixo; preserve o estado quando a métrica estiver indisponível. Publique somente na origem com nonce, intent persistido e GET exato. Teste igualdade do limite, ultrapassagem fracionária, zero resultados, alias errado, rearmamento, replay e expiração antes de API.
+
 ## Métricas e decisão
 
 - Cada operação declara a métrica principal e sua fórmula. Não assumir `subs`, `MO`, `CPMO`, `CPS`, purchase ROAS ou ROI por país/estratégia.
