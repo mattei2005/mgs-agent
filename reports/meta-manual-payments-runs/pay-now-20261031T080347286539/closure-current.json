@@ -1,0 +1,220 @@
+{
+  "status": "partial_metrics_validated_pc1_meta_2fa_required",
+  "verified_at": "2026-10-31T08:05:51.884099-04:00",
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 11,
+    "Linha de crédito": 36
+  },
+  "validated_metrics_at": "2026-10-31T08:03:43.088353-04:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261031T080345519226",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T080347286539",
+  "source_to_live_sheet_cgij_exact": true,
+  "full_grid_narrow_write_readback": true,
+  "totals_validated_columns": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "subtotal_checks": [
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F3:F13),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G3:G13),2)",
+      "value": "3538.77"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I3:I13),2)",
+      "value": "4528.97"
+    },
+    {
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J3:J13),2)",
+      "value": "130521.65"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "F",
+      "formula": "=ROUND(SUM(F17:F52),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "G",
+      "formula": "=ROUND(SUM(G17:G52),2)",
+      "value": "16486.50"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "H",
+      "formula": "=ROUND(SUM(H17:H52),2)",
+      "value": "394701.50"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "I",
+      "formula": "=ROUND(SUM(I17:I52),2)",
+      "value": "404975.01"
+    },
+    {
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "column": "J",
+      "formula": "=ROUND(SUM(J17:J52),2)",
+      "value": "722098.63"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "F",
+      "formula": "=ROUND(SUM(F14,F53),2)",
+      "value": "0.00"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "G",
+      "formula": "=ROUND(SUM(G14,G53),2)",
+      "value": "20025.27"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "H",
+      "formula": "=ROUND(SUM(H14,H53),2)",
+      "value": "394701.50"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "I",
+      "formula": "=ROUND(SUM(I14,I53),2)",
+      "value": "409503.98"
+    },
+    {
+      "label": "TOTAL GERAL — 47 contas",
+      "column": "J",
+      "formula": "=ROUND(SUM(J14,J53),2)",
+      "value": "852620.28"
+    }
+  ],
+  "fresh_h_account_ids": [],
+  "fresh_h_count": 0,
+  "h_preserved_count": 36,
+  "pending_h_account_ids": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784"
+  ],
+  "h_values_and_notes_preserved_exact": true,
+  "h_ledger_to_live_sheet_exact": true,
+  "historical_h_read_at_min": "2026-10-30T14:04:35.081254-04:00",
+  "historical_h_read_at_max": "2026-10-30T14:26:01.050050-04:00",
+  "pending_ui": [
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1762774024309795",
+      "name": "Financeadx-CA-CC-EN-01",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1414197490675732",
+      "name": "Mavroa-US-SHEIN-ES-02-G002",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ],
+  "card_proofs_updated": 0,
+  "historical_d_gaps": [
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+    }
+  ],
+  "d_values_and_notes_preserved_exact": true,
+  "average_period": [
+    {
+      "since": "2026-10-28",
+      "until": "2026-10-30"
+    }
+  ],
+  "totals_usd": {
+    "average_daily": "20025.27",
+    "balance": "409503.98",
+    "month_spend": "852620.28"
+  },
+  "invoice_due_usd": "0.00",
+  "visible_invoice_numbers": 0,
+  "invoice_period": "2026-09-01",
+  "pc1_blocker": {
+    "reason": "meta_authentication_app_2fa_required",
+    "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T080347286539/blocked.png",
+    "visually_verified": true,
+    "message": "Confirm it’s you with your authentication app",
+    "route": "facebook.com/security/twofactor/reauth/",
+    "current_accounts_rows_visible": false
+  },
+  "lease_free": true,
+  "owned_tabs_created": 0,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "workbook_sheet_count": 2,
+  "other_sheet_data_unchanged": true,
+  "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261031T080347286539/closure-current.json"
+}

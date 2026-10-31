@@ -1,9 +1,19 @@
 {
   "status": "updated_metrics_pending_card_history",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261030T210329499928",
-  "collected_at": "2026-10-30T21:03:26.838072-04:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261031T080345519226",
+  "collected_at": "2026-10-31T08:03:43.088353-04:00",
   "accounts": 47,
   "pending_ui": [
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1762774024309795",
+      "name": "Financeadx-CA-CC-EN-01",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
     {
       "account_id": "1414197490675732",
       "name": "Mavroa-US-SHEIN-ES-02-G002",
@@ -12,6 +22,11 @@
     {
       "account_id": "1543098427832443",
       "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
       "reason": "new_generic_payment_since_pc1_proof"
     }
   ]
