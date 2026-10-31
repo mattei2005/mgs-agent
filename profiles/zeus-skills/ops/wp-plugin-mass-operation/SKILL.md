@@ -26,6 +26,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Política global — 1Password e Credenciais → Referência — MGS Chat Funnels top ad/rewarded** → `references/route-pack-05.md`
 - **Apoio ContentOps por renderer existente, WPCode, autoria/idioma e efeitos laterais** → `references/contentops-existing-renderer-scoped-support.md`
 - **Diagnosticar abilities Yoast, papel e transporte de input** → `references/yoast-abilities-role-diagnostics.md`
+- **Audit Yoast bloqueado por ON UPDATE / timestamp automático e pacote fixado** → `references/yoast-home-auto-timestamp-compatibility.md`
 - **Consolidar usuários/admins WordPress RunCloud com reatribuição e 1Password** → `references/runcloud-wordpress-user-consolidation.md`
 - **Auditar/padronizar preloader JBF ↔ LoftLoader** → `references/jbf-loftloader-preloader-equivalence.md`
 - **Menu mobile JBF abre vazio apesar de menu principal existir** → `references/jbf-empty-mobile-drawer-native-widget.md`
