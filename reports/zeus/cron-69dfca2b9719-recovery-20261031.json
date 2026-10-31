@@ -1,0 +1,43 @@
+{
+  "agent": "zeus",
+  "source_alert_id": "1566093153495289988",
+  "job_id": "69dfca2b9719",
+  "status": "recovered_validated",
+  "cause": "ReadTimeout de 30 segundos em leitura api.jbfdigital.com.br. O transporte SB não tratava Timeout/ConnectionError; o laço existente tratava somente rejeição de autenticação. A causa interna da latência do fornecedor não foi provada.",
+  "reconciliation": {
+    "resolver_owner": "current processing attempt 1, started 2026-10-31T14:17:02Z",
+    "scheduler_fire_claim_before_retry": null,
+    "account_shared_lock_available": true,
+    "delivery_lock_available": true,
+    "failed_slot_before_retry": null,
+    "slot": "intraday:2026-10-31:11",
+    "other_campaign_holds_preserved": true
+  },
+  "correction": {
+    "script": "scripts/ares-smartbidding-common.py",
+    "tests": "tests/test_ares_sb_transport_recovery.py",
+    "behavior": "Até duas retentativas de Timeout/ConnectionError, após validação das rotas read-only, com backoff 1s/2s e jitter de até 0,5s. Orçamento compartilhado entre tentativas de autenticação; não repete login, resposta HTTP 429/5xx, escopo negado ou resposta contraditória.",
+    "credentials_changed": false,
+    "schedule_changed": false,
+    "campaign_writes": false
+  },
+  "checks": {
+    "live_report_only_dry_run_exit": 0,
+    "native_retry_command": "hermes -p ares cron run 69dfca2b9719",
+    "native_retry_result": "Ran now: succeeded.",
+    "scheduler_last_run_at": "2026-10-31T10:20:32.001159-04:00",
+    "scheduler_last_status": "ok",
+    "scheduler_failure_streak": 0,
+    "scheduler_last_error": null,
+    "scheduler_next_run_at": "2026-10-31T11:06:00-04:00",
+    "tests_passed": 54,
+    "subtests_passed": 45,
+    "diff_check": "pass",
+    "live_report": "data/ares/meta-ads/reports/automated/Creditoparaveiculo-BR-CAR-BR/intraday/intraday-20261031T142021Z.json",
+    "live_report_actions": [],
+    "delivery_status": "verified",
+    "delivery_http_200_content_hash_matches": 4,
+    "delivery_thread_id": "1539832402744975450",
+    "delivery_message_ids": ["1566094506737012898", "1566094509165645956", "1566094510612676619", "1566094521664544811"]
+  }
+}

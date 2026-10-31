@@ -4015,6 +4015,21 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-cpv69-sb-timeout-recovery-20261031",
+      "job_id": "69dfca2b9719",
+      "source_alert_id": "1566093153495289988",
+      "type": "bounded_read_transport_recovery",
+      "status": "recovered_validated",
+      "paths": [
+        "/root/mgs-agent/scripts/ares-smartbidding-common.py",
+        "/root/mgs-agent/tests/test_ares_sb_transport_recovery.py",
+        "/root/mgs-agent/reports/zeus/cron-69dfca2b9719-recovery-20261031.json"
+      ],
+      "scope": "Retentar apenas Timeout/ConnectionError após validação das leituras SB, até duas vezes com backoff/jitter. Preserva respostas HTTP/cooldown, login, escopo, credenciais, campanhas, budgets e agenda.",
+      "validation": "54 testes e 45 subtestes PASS; dry-run live rc0; retry pelo mesmo cron nativo succeeded às 10:20:32 EDT; last_status ok, failure_streak0, last_error null; relatório actions=[] e 4 mensagens verificadas por GET200/hash na thread1539832402744975450; diff check PASS."
+    },
+    {
+      "agent": "zeus",
       "backup": "/root/mgs-agent/backups/b013-sheets-transport-1562223922047623178/b013-dtr-link-watch.sh.before",
       "cause": "Missing socket import masked Sheets connection reset with NameError before bounded transport retry.",
       "correction": "Import socket; add four transport regression tests; reconcile pre-existing stale generation test with authorized B013-7 cutover.",

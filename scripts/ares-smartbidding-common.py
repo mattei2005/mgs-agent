@@ -388,14 +388,27 @@ def _api_request_transport(
 ) -> tuple[int, object, dict]:
     _validate_sb_request(method, path, payload, _scoped_catalog())
     token, token_source = get_access_token(item_name)
+    transport_retries = 0
     for attempt in range(2):
-        response = requests.request(
-            method,
-            f"{API_BASE}{path}",
-            json=payload,
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": USER_AGENT},
-            timeout=HTTP_TIMEOUT_SECONDS,
-        )
+        while True:
+            try:
+                response = requests.request(
+                    method,
+                    f"{API_BASE}{path}",
+                    json=payload,
+                    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": USER_AGENT},
+                    timeout=HTTP_TIMEOUT_SECONDS,
+                )
+                break
+            except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+                # Scope validation above admits only read routes, including
+                # read-only POST queries. Never retry login or HTTP responses
+                # here (in particular 429/Retry-After); preserve their owner.
+                if transport_retries >= 2:
+                    raise
+                delay = 2 ** transport_retries + secrets.randbelow(501) / 1000
+                transport_retries += 1
+                time.sleep(delay)
         try:
             body: object = response.json()
         except ValueError:
