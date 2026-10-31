@@ -103,6 +103,13 @@ No lote corrente05/10, a regra corrigiu apenas os dois metadados US de Escalatep
 - FinanciamentoAutoAdx: responsável MGS confirmado somente na competência aberta outubro/2026; preservar INATIVO/Não participa, SB Rede1/CAD e histórico fechado. A correção do cadastro não ativa tráfego nem rateio.
 - Fonte27/10 concluída:2290linhas/78grupos, zero pendências, revisão1119/audit5356, último dia completo27/10; replay idempotente. Somente2complementos: Newsoun CAD`0.0019335693271958824`/`g005-d` e FinanciamentoAutoAdx CAD`0.0065431806582719135`/`g002-s`;76grupos anteriores preservados.523testes sem skips, API e6checks desktop/mobile validados. Report: `reports/finance-br-car-1564993480487342243.md`; checkpoint `ZEUS-FINANCE-BR-CAR-1564993480487342243`.
 
+## Cephyric US — decisão1566204324680302656
+
+- Rodolfo respondeu ao item1 do alerta1566063637028671634: `pl_digital-trust_cephyric_us` → Cephyric / US / `us-cc-en`, responsável G002/MGS. Regra padrão para a mesma combinação placement/país; preservar o identificador financeiro existente `cephyric`, sem criar domínio ou cadastro duplicado.
+- Preservar Cephyric/FR → `fr-cc-fr`, a precedência de medium canônico e outros países ainda não confirmados em fail-closed. O medium original `-` da fonte30/10 usa o fallback existente `g002-d`/`SEM_COMISSAO`; confirmar G002 não força todos os gestores futuros para MGS.
+- Catálogo existente `newsite-mgs-cephyric`, MGS, INATIVO/Não participa, SB Rede1/CAD. Nenhuma ativação de campanha, rede, rateio ou competência fechada alterada.
+- Complemento autorizado da fonte30/10: uma linha CAD`0.3389770709610955`, preservando os79grupos já confirmados e os hashes/identidade da fonte. Publicação e fechamento devem ser resolvidos pelo checkpoint `ZEUS-FINANCE-CEPHYRIC-US-1566204324680302656`, nunca inferidos somente desta decisão.
+
 ## Fontes obrigatórias
 
 O par diário é completo somente com:
