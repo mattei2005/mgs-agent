@@ -113,27 +113,33 @@
       "account_id": "1762774024309795",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "ui_verification": "Screenshot vision: exact selected account and asset_id/business_id confirmed; CA asset_id readback corrected by high-resolution crop.",
-      "read_at": "2026-10-25T13:13:06.019145-04:00",
-      "screenshot": "/root/.hermes/profiles/zeus/cache/images/computer_use_fd848b6120ef460994fb7417879533ff.png",
+      "read_at": "2026-10-31T14:29:09.131194-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261031T142812705422/verified-1762774024309795.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261031T142812705422/1762774024309795-receipt.json",
       "rows": [
+        {
+          "date": "Oct 31, 2026",
+          "method": "Visa ···· 7851",
+          "amount": "501.87",
+          "status": "Paid"
+        },
+        {
+          "date": "Oct 31, 2026",
+          "method": "American Express ···· 8013",
+          "amount": "501.87",
+          "status": "Failed"
+        },
         {
           "date": "Oct 18, 2026",
           "method": "Visa ···· 7851",
           "amount": "293.13",
           "status": "Paid"
-        },
-        {
-          "date": "Oct 12, 2026",
-          "method": "Visa ···· 7851",
-          "amount": "596.25",
-          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Oct 18, 2026",
+        "date": "Oct 31, 2026",
         "method": "Visa ···· 7851",
-        "amount": "293.13",
+        "amount": "501.87",
         "status": "Paid"
       },
       "status": "verified_card",
@@ -299,10 +305,16 @@
       "account_id": "1062446663435585",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-10-30T09:12:26.388230-04:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261030T091149917333/verified-1062446663435585.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261030T091149917333/1062446663435585-receipt.json",
+      "read_at": "2026-10-31T14:27:43.029898-04:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261031T142650696855/verified-1062446663435585.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261031T142650696855/1062446663435585-receipt.json",
       "rows": [
+        {
+          "date": "Oct 31, 2026",
+          "method": "Discover ···· 6762",
+          "amount": "67.00",
+          "status": "Paid"
+        },
         {
           "date": "Oct 30, 2026",
           "method": "Discover ···· 6762",
@@ -314,16 +326,10 @@
           "method": "Discover ···· 6762",
           "amount": "69.00",
           "status": "Paid"
-        },
-        {
-          "date": "Oct 28, 2026",
-          "method": "Discover ···· 6762",
-          "amount": "69.00",
-          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Oct 30, 2026",
+        "date": "Oct 31, 2026",
         "method": "Discover ···· 6762",
         "amount": "67.00",
         "status": "Paid"
