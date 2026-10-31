@@ -7553,12 +7553,12 @@
     {
       "agent": "zeus",
       "id": "vps-audit-1565728077336805552",
-      "next_step": "Confirmar exclusivamente restauração do /etc/audit/plugins.d/BnAudisp.conf com bytes/owner/mode originais e reload auditd. Depois provar processo/contagemplugins e encaminhamento local em duas amostras; não chamar fila0 semplugins de recuperação. Não repetir chmod já validado ou reboot. Demais fases da manutenção e erros hardware permanecem abertos.",
-      "objective": "Concluir reativação BitNinja auditd no Inc01 sem repetir reboots nem alterar módulos/rules fora do pedido",
-      "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/auditd-permission-repair-1565760621297934449.json",
-      "state": "permissão confirmada1565760621297934449 corrigida0711→0750 e sighup aplicado; conteúdo/owner/grupo, boot e8pids protegidos preservados. canary local audit.log gravado, logging não suspenso, kernel lost/backlog0 em duas amostras; nenhum erro novo auditd. módulo não reativado: active_plugins0 porque /etc/audit/plugins.d/bnaudisp.conf está ausente. original356bytes0640 uid0gid997 recuperado como candidato no backup protegido, sem gravação/etc. origem da remoção não comprovada; logbitninja falha inicial e timestampdir correlacionados, nenhuma autorização humana paralela encontrada.",
+      "next_step": "Inc01: configuração original recuperada pelo dev e validada por Zeus; plugin PID2681840 ativo, AuditManager Running, fila0 em duas amostras, sem overflow. Inc03: ativo e fila0, mas flag histórico de overflow presente; causa e perda não quantificadas, sem ajuste automático. Inc02 sem BitNinja é intencional, Rodolfo confirmou1566205186534539469; nenhuma instalação pendente. Painel cloud e remoção da chave do dev não verificados independentemente. Demais fases da manutenção permanecem fora deste fechamento.",
+      "objective": "Verificar recuperação BitNinja do Inc01 e preservar pendências independentes da manutenção",
+      "source": "data/bitninja-verification-20261031.json",
+      "state": "bitninja_local_recovery_verified_inc03_historical_overflow_disclosed",
       "thread_id": "1565713769789657239",
-      "updated_at": "2026-10-30T16:23:26+00:00"
+      "updated_at": "2026-10-31T21:44:39+00:00"
     },
     {
       "agent": "zeus",
@@ -8052,5 +8052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-31T21:40:08+00:00"
+  "updated_at": "2026-10-31T21:44:39+00:00"
 }

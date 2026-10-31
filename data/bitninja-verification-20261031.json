@@ -1,0 +1,61 @@
+{
+  "id": "bitninja-verification-20261031",
+  "source_thread_id": "1565713769789657239",
+  "request_message_id": "1566205186534539469",
+  "owner": "Rodolfo Mattei",
+  "scope": "Verify developer screenshots against live Inc01 and Inc03; no production repair authorized or performed in this verification",
+  "inc02_owner_confirmation": {
+    "host": "162.55.28.179",
+    "bitninja_installed": false,
+    "absence_is_intentional_and_accepted": true,
+    "installation_pending": false,
+    "source_message_id": "1566205186534539469",
+    "owner_statement": "E o server 02 n tem mesmo o bitninja instalado. Tá certo."
+  },
+  "inc01": {
+    "observed_at": "2026-10-31T21:41:25.325838+00:00",
+    "local_registration_recovery_verified": true,
+    "registration_matches_premaintenance_backup": true,
+    "configuration_owner_group": "root:bitninja",
+    "configuration_mode": "0640",
+    "package_version": "3.17.10-1",
+    "plugin_pid": 2681840,
+    "auditmanager_cli_status": "Running",
+    "auditd_and_bitninja_active": true,
+    "active_plugins": 1,
+    "two_samples_queue_depth": [0, 0],
+    "two_samples_kernel_lost": [0, 0],
+    "plugin_queue_overflow_detected": false,
+    "logging_or_queueing_suspended": false,
+    "journal_error_priority_lines_last_24h": 0
+  },
+  "inc03": {
+    "observed_at": "2026-10-31T21:41:25.398748+00:00",
+    "package_version": "3.17.10-1",
+    "plugin_pid": 5794,
+    "auditmanager_cli_status": "Running",
+    "auditd_and_bitninja_active": true,
+    "active_plugins": 1,
+    "two_samples_queue_depth": [0, 0],
+    "two_samples_kernel_lost": [0, 0],
+    "plugin_queue_overflow_detected": true,
+    "historical_max_queue_depth": 1200,
+    "configured_plugin_queue_size": 1200,
+    "logging_or_queueing_suspended": false,
+    "journal_error_priority_lines_last_24h": 0,
+    "interpretation": "Currently drained and active, but sticky overflow flag proves historical forwarding queue saturation since daemon start; event-loss count and burst/slow-consumer root cause not established. No configuration change, reset or restart performed."
+  },
+  "unverified_screenshot_claims": [
+    "Current BitNinja cloud-console warning clearance and end-to-end cloud delivery",
+    "Developer SSH key removal: exact public identity not supplied; shred statement alone does not establish revocation",
+    "Screenshot test rule creation/removal and historical test event were not reproduced",
+    "Zero journal error-priority entries is not proof of absence of all historical plugin-forwarding loss"
+  ],
+  "evidence": [
+    "/root/.hermes/profiles/zeus/reports/bitninja-verification-1566205186534539469.json",
+    "/root/.hermes/profiles/zeus/reports/bitninja-verification-extra-1566205186534539469.json",
+    "/root/.hermes/profiles/zeus/reports/bitninja-status-1566205186534539469.json"
+  ],
+  "collector_caveat": "Initial cmdline substring process matcher caught the inline diagnostic itself and missed vendor-renamed process command lines; superseded by /proc/<pid>/comm plus executable and fd evidence in extra report. CLI connection/JSON extraction did not establish cloud health; not used as proof.",
+  "production_configuration_changes_by_zeus_in_this_verification": false
+}

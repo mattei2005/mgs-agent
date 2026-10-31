@@ -1042,9 +1042,21 @@
     {
       "additional_reboot_gate": "Resolved: all four approved remote hosts rebooted and applications recovered; no additional reboot for the auditd repair.",
       "agent": "zeus",
+      "bitninja_followup_verification": {
+        "source": "/root/mgs-agent/data/bitninja-verification-20261031.json",
+        "source_message_id": "1566205186534539469",
+        "inc01_registration_recovery_verified": true,
+        "inc01_active_plugins": 1,
+        "inc03_current_queue_drained_with_historical_overflow_flag": true,
+        "inc02_no_bitninja_is_owner_accepted_no_installation_pending": true,
+        "cloud_console_and_developer_key_removal_not_independently_verified": true,
+        "production_mutation_by_zeus_in_followup": false
+      },
       "auditd_permission_repair": {
+        "historical_result_superseded_by": "/root/mgs-agent/data/bitninja-verification-20261031.json",
+        "historical_observation_note": "The fields below preserve Zeus repair evidence from 2026-10-30; the later developer correction and live verification restored registration and confirmed one active plugin. Do not repeat this old missing-registration gate.",
         "active_plugins": 0,
-        "additional_critical_gate": "Restore exact original registration from validated pre-maintenance backup: absent to356bytes, mode0640, uid0,gid997, then reload auditd; no new rules or reboot.",
+        "additional_critical_gate": "Historical gate resolved by developer correction, verified live 2026-10-31; original gate retained: restore exact original registration from validated pre-maintenance backup: absent to356bytes, mode0640, uid0,gid997, then reload auditd; no new rules or reboot.",
         "after_mode": "0750",
         "authorization_message_id": "1565760621297934449",
         "before_mode": "0711",
