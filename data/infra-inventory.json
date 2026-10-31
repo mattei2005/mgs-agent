@@ -893,6 +893,27 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "atena-yoast-supervision-1565877527015202867",
+      "agent": "zeus",
+      "type": "bounded_silent_execution_supervision",
+      "authorization_message_id": "1565877527015202867",
+      "canonical_source": "data/atena/yoast-end-to-end-supervision-1565877527015202867.json",
+      "executor": "atena",
+      "origin_thread_id": "1564289742567112795",
+      "handoff_message_id": "1565877666417221683",
+      "job_id": "15adf1a82660",
+      "schedule": "8,18,28,38,48,58 20-23 * * *",
+      "timezone": "America/New_York",
+      "repeat_limit": 24,
+      "delivery": "local",
+      "failure_delivery": "local",
+      "next_run_at_validated": "2026-10-30T20:08:00-04:00",
+      "continuation": "If unfinished at23:48, supervisor must preflight and arrange bounded continuation before the window expires; stop on accepted completion or concrete decision blocker.",
+      "scheduling_evidence": "/root/.hermes/profiles/zeus/cache/scratch/atena-watch-1565877527015202867/available.json",
+      "guardrails": "Atena sole writer; no credentials/billing/new CriticalSubset; no intermediate CEO notifications; own supervision lease and25s collection stagger; preserve existing production and backups.",
+      "status": "scheduled_handoff_readback_verified_executor_activity_observed"
+    },
+    {
       "actor": "zeus",
       "cause": "Offline test copies in active Kanban stage correctly blocked the batch by sensitive filename",
       "correction": "Ignore only /work/t_9bf5723f/stage/ and /work/t_9bf5723f/rollback/; preserve local bytes, sibling evidence, production paths and sensitive guard",

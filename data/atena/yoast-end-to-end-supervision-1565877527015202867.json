@@ -1,0 +1,12 @@
+{
+  "id": "ATENA-YOAST-E2E-1565877527015202867",
+  "authority": {"user_id": "344196393512075265", "message_id": "1565877527015202867", "thread_id": "1565555821188878377", "interpretation": "Resposta de Rodolfo ao ciclo delimitado previamente apresentado: Atena conclui ponta a ponta, resolve intercorrencias seguras, Zeus acompanha e orienta bloqueios tecnicos; avisar somente na conclusao ou decisao realmente protegida nova.", "proposal_messages": ["1565798518516617367", "1565798519879770324"]},
+  "executor": "atena",
+  "supervisor": "zeus",
+  "origin_thread_id": "1564289742567112795",
+  "handoff_message_id": "1565877666417221683",
+  "package_sha256": "1ffe0f8916f7744e836250588bffaac99a9ece7f4b98ab839241bbc3bc000dbf",
+  "scope": {"canary": {"host": "finanzas.openzed.com", "home_page_id": 243, "preserve_posts": [52410, 52413, 52416]}, "after_canary_and_security": {"host": "cliquet.com", "home_page_id": 3, "preserve_posts": [61948, 61951, 61954]}, "plugin_relative_directory": "wp-content/plugins/mgs-home-native-repair-1565779533217407047/", "files": ["mgs-home-native-repair.php", "transaction.php", "sql-scope.php", "wordpress-store.php", "config.php", "bound-wpdb.php", "journal.php"], "private_directories": ["/tmp/mgs-home-native-repair-1565779533217407047-finanzas.openzed.com/", "/tmp/mgs-home-native-repair-1565779533217407047-cliquet.com/"], "private_files": ["staging.json", "prepared.json"]},
+  "acceptance": ["Ensaio transacional e prova de recuperacao anteriores ao watcher nativo", "Reparo real e seis URLs normais sem IP antigo no schema", "Posts e backups originais preservados", "Remocao somente dos componentes e registros proprios exatos autorizados", "WP2FA restaurado ao estado aprovado: OpenZed ativo; Cliquet previamente inativo nao atribuido a esta operacao", "Planilha atualizada com evidencias publicas"],
+  "limits": ["Fincgriffin permanece pausado", "Um unico writer: Atena", "Zeus orienta sem executar reparo paralelo", "Nao ampliar escopo ou autorizar nova exclusao, credencial, billing, permissao ou Critical Subset", "Nao reabrir aprovacoes genericas nem reportar progresso intermediario ao CEO", "Bloqueio tecnico seguro deve ser investigado e encaminhado a Zeus com evidencia; decisao nova protegida vai a Rodolfo"]
+}

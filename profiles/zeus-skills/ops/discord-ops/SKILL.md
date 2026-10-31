@@ -46,6 +46,10 @@ Quando Rodolfo pedir para acompanhar, observar a execução até a entrega ou um
 4. Para acompanhamento curto, manter observação limitada em foreground. Só prometer continuidade após encerrar o turno quando existir um mecanismo durável configurado e verificado; não criar cron apenas para responder uma consulta pontual.
 5. Encerrar com o resultado ou com fato, causa comprovada/lacuna, recomendação e decisão exata pendente. Não pedir novamente uma confirmação igual sem mudança material, nem apresentar monitoramento concluído como reparo concluído.
 
+## Execução ponta a ponta sem vai e vem
+
+Quando Rodolfo pedir que o executor resolva tudo, Zeus acompanhe e ambos avisem somente no fim, encaminhe a decisão à origem com próxima ação e critérios de aceite; não devolva outra aprovação genérica. Se a fala responder a uma proposta crítica já delimitada, vincule-a àquele ciclo exato, sem convertê-la em autorização crítica global. Preserve o executor único, investigue travamentos e oriente recuperação segura; escale somente decisão protegida realmente nova. Antes de prometer acompanhamento após o turno, configure e valide mecanismo durável, silencioso e limitado, com checkpoint, dedupe, condição de encerramento e continuidade se a janela expirar. Mensagens intermediárias ficam fora da conversa do CEO; conclusão exige resultado real, não ACK, testes locais ou instrução enviada.
+
 ## Corrigir documentação de escopo de outro agente
 
 Quando Rodolfo corrigir uma recusa e pedir atualização da documentação, compare primeiro a regra específica do agente com o gate executável; não transforme automaticamente a correção em ampliação de permissões. Para Ares, consulte `context/ares-asset-scope.md`, o catálogo positivo SB e `mgs-domain-scope.py list --agent ares` antes de exigir cadastro institucional adicional. Uma consulta por vertical, como SHEIN, não fornece nem exige por si só um domínio explícito: comece pelo catálogo autorizado e confirme a classificação com evidência operacional.
