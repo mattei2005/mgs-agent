@@ -911,7 +911,15 @@
       "continuation": "If unfinished at23:48, supervisor must preflight and arrange bounded continuation before the window expires; stop on accepted completion or concrete decision blocker.",
       "scheduling_evidence": "/root/.hermes/profiles/zeus/cache/scratch/atena-watch-1565877527015202867/available.json",
       "guardrails": "Atena sole writer; no credentials/billing/new CriticalSubset; no intermediate CEO notifications; own supervision lease and25s collection stagger; preserve existing production and backups.",
-      "status": "scheduled_handoff_readback_verified_executor_activity_observed",
+      "status": "paused_specific_package_substitution_decision_1565883196262850671",
+      "decision": {
+        "candidate_package_sha256": "07fc6678f4a17f970cacfe3db3a83ce5606368875fb8300cb62436795b6cc9a0",
+        "origin_notice_message_id": "1565883193070977167",
+        "private_decision_message_id": "1565883196262850671",
+        "verification": "Zeus reviewed three-file diff, verified archive and seven member hashes, repeated seven PHP lints. Local 135-test manifest is not remote DB recovery certification.",
+        "production_repair_accepted": false,
+        "job_state": "paused; resume same request only after specific decision and scheduling preflight"
+      },
       "technical_blocker": {
         "handoff_message_id": "1565878719116091413",
         "code": "unreviewed_automatic_column_update",
