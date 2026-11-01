@@ -53,7 +53,7 @@ def names_match(entry,physical,stock):
 def stock_move(entry):
  value=binding()
  if not value:return None
- rec=value['stock_moves'].get(entry.get('stockShortcutId') or entry.get('sourceId'))
+ rec=value['stock_moves'].get(entry.get('stockShortcutId') or entry.get('approvedStockId') or entry.get('sourceId'))
  if rec:require(rec.get('source_id')==entry.get('sourceId') and rec.get('sha256')==entry.get('sha256'),'NAMESPACE_STOCK_MOVE_BINDING')
  return rec
 
@@ -66,8 +66,18 @@ def legacy_manager_folder(d,manager,fid):
  if not rec:return None
  require(rec['manager']==manager,'NAMESPACE_LEGACY_MANAGER_PARTITION')
  m=d.meta(fid)
- require(m.get('id')==fid and m.get('mimeType')==b.FOLDER and m.get('name')==manager and m.get('parents')==[rec['parent_id']] and m.get('trashed') is False and any(x.get('emailAddress')==b.ACCOUNT for x in m.get('owners',[])),'NAMESPACE_LEGACY_FOLDER_NATIVE')
- require(d.relative_parent(rec['parent_id'],b.ARCHIVE_ROOT)==['_ESTRUTURAS_ANTIGAS'],'NAMESPACE_LEGACY_FOLDER_ANCESTRY');return m
+ require(m.get('id')==fid and m.get('mimeType')==b.FOLDER and m.get('name')==rec.get('native_name',manager) and m.get('parents')==[rec['parent_id']] and m.get('trashed') is False and any(x.get('emailAddress')==b.ACCOUNT for x in m.get('owners',[])),'NAMESPACE_LEGACY_FOLDER_NATIVE')
+ require(d.relative_parent(rec['parent_id'],b.ARCHIVE_ROOT)==rec.get('parent_relative_path',['_ESTRUTURAS_ANTIGAS']),'NAMESPACE_LEGACY_FOLDER_ANCESTRY');return m
+
+def project_historical(entry):
+ """Use the verified provider itself as the view for a missing old stock ID.
+ The native historical ACK still binds the original source and exact bytes.
+ No new media, fabricated source object, or replacement logical ID is created.
+ """
+ rec=override(entry)
+ if not rec or rec.get('representation')!='provider_as_stock':return entry
+ require(entry.get('mapping_kind')=='historical_verified' and rec['stock_id']==entry['archiveId'] and rec.get('provider_parent_id'),'NAMESPACE_PROVIDER_VIEW_BINDING')
+ return {**entry,'frozenArchiveParentId':entry['archiveParentId'],'archiveParentId':rec['provider_parent_id'],'approvedStockId':entry['archiveId'],'namespace_authority':AUTHORITY}
 
 def verify_migrated_delivery(d,row,entry,receipt):
  """Preserve old delivery receipt while proving its exact same-ID relocation."""

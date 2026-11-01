@@ -84,7 +84,7 @@ def resolve_media(source_id,token=None):
     entry=mapping(source_id)
     if not entry:return None
     if entry.get('mapping_kind')=='historical_verified':
-        d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry.get('stockShortcutId') or source_id)
+        d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry.get('stockShortcutId') or entry.get('approvedStockId') or source_id)
         require_historical_ack(d,entry)
         if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=namespace.effective_path(entry):raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
         locations.stock_parent(d,stock['parents'][0])
@@ -214,7 +214,7 @@ def historical_mapping(source_id):
     if raw.get('verified') is not True or raw.get('owner')!=b.ACCOUNT or proof.get('status')!='verified' or proof.get('schema')!='mgs.archive.backfill.verification.v1':raise StorageError('HISTORICAL_NO_VERIFIED_JOB')
     matches=[a for a in proof.get('assets',[]) if a.get('source_id')==source_id]
     if len(matches)!=1 or any(matches[0].get(k)!=raw.get(k) for k in ['source_id','archive_id','archive_parent_id','sha256','md5','size','relative_parent']):raise StorageError('HISTORICAL_MAPPING_JOB_MISMATCH')
-    return {'mapping_kind':'historical_verified','sourceId':source_id,'archiveId':raw['archive_id'],'archiveParentId':raw['archive_parent_id'],'name':raw['name'],'mimeType':raw['mime_type'],'size':raw['size'],'md5':raw['md5'],'sha256':raw['sha256'],'owner':raw['owner'],'verified':True,'role':'historical','lineageId':None,'jobId':raw['job_id'],'relativeParent':raw['relative_parent'],'stockShortcutId':raw.get('stock_shortcut_id')}
+    return namespace.project_historical({'mapping_kind':'historical_verified','sourceId':source_id,'archiveId':raw['archive_id'],'archiveParentId':raw['archive_parent_id'],'name':raw['name'],'mimeType':raw['mime_type'],'size':raw['size'],'md5':raw['md5'],'sha256':raw['sha256'],'owner':raw['owner'],'verified':True,'role':'historical','lineageId':None,'jobId':raw['job_id'],'relativeParent':raw['relative_parent'],'stockShortcutId':raw.get('stock_shortcut_id')})
 
 def historical_media_record(entry,physical,stock):
     if entry.get('mapping_kind')!='historical_verified' or entry.get('verified') is not True or entry.get('owner')!=b.ACCOUNT:raise StorageError('HISTORICAL_MAPPING_NOT_VERIFIED')
@@ -222,7 +222,7 @@ def historical_media_record(entry,physical,stock):
     if str(physical.get('size'))!=str(entry['size']) or physical.get('md5Checksum')!=entry['md5'] or (physical.get('sha256Checksum') is not None and physical['sha256Checksum']!=entry['sha256']) or any(p.get('type') in ['anyone','domain'] for p in physical.get('permissions',[])):raise StorageError('HISTORICAL_PROVIDER_CONTENT_OR_PUBLIC')
     if entry.get('mimeType') and physical.get('mimeType')!=entry['mimeType']:raise StorageError('HISTORICAL_PROVIDER_MIME')
     alias=bool(entry.get('stockShortcutId'))
-    if stock.get('id')!=(entry['stockShortcutId'] if alias else entry['sourceId']) or stock.get('trashed') is not False or not locations.stock_metadata_allowed(stock) or len(stock.get('parents',[]))!=1:raise StorageError('HISTORICAL_STOCK_IDENTITY')
+    if stock.get('id')!=(entry['stockShortcutId'] if alias else entry.get('approvedStockId') or entry['sourceId']) or stock.get('trashed') is not False or not locations.stock_metadata_allowed(stock) or len(stock.get('parents',[]))!=1:raise StorageError('HISTORICAL_STOCK_IDENTITY')
     if alias:
         if stock.get('mimeType')!=SHORTCUT or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId']:raise StorageError('HISTORICAL_ALIAS_TARGET')
     elif str(stock.get('size'))!=str(entry['size']) or stock.get('mimeType')!=physical.get('mimeType') or stock.get('md5Checksum')!=entry['md5'] or (stock.get('sha256Checksum') is not None and stock['sha256Checksum']!=entry['sha256']):raise StorageError('HISTORICAL_RETAINED_SOURCE_CONTENT')
