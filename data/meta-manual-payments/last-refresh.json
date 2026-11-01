@@ -1,7 +1,13 @@
 {
-  "status": "updated_validated",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T133633076720",
-  "collected_at": "2026-11-01T13:36:30.916674-05:00",
+  "status": "updated_metrics_pending_card_history",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T140346204456",
+  "collected_at": "2026-11-01T14:03:43.095096-05:00",
   "accounts": 47,
-  "pending_ui": []
+  "pending_ui": [
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ]
 }
