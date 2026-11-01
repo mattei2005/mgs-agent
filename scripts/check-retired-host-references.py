@@ -62,12 +62,14 @@ REMOVED_FIREWALL_RECORD_SHA256 = "5671c8b06110f9417fd6dd7a7cf2a84e9f79d15d7a0a79
 
 def historical_inventory_only(path: Path, relative: str) -> bool:
     parts = Path(relative).parts
-    # Kanban rollback before-images use the same canonical inventory schema.
+    # Kanban rollback and payment closure before-images use the same canonical
+    # inventory schema; the latter also names the file pre-closure-inventory.
     # Permit their naming/location only; provenance, the pinned removed record
     # and the full-document target scan below remain mandatory for every file.
     if (not parts or parts[0] not in {"data", "reports", "work"}
-            or not path.name.startswith(("inventory-before", "inventory-pre-",
-                                         "infra-inventory-before"))
+            or not (path.name.startswith(("inventory-before", "inventory-pre-",
+                                          "infra-inventory-before"))
+                    or path.name == "pre-closure-inventory.json")
             or path.suffix != ".json"):
         return False
     try:

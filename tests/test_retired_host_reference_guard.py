@@ -232,6 +232,44 @@ class HistoricalEvidenceTests(unittest.TestCase):
                 self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
                 self.assertEqual(self.scan(relative, content), [])
 
+    def test_pre_closure_inventory_accepts_only_pinned_history(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("reports/future-run/pre-closure-inventory.json",
+                         "data/task/pre-closure-inventory.json",
+                         "work/task/pre-closure-inventory.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [])
+
+    def test_pre_closure_inventory_changed_or_additional_targets_still_block(self):
+        relative = "reports/future-run/pre-closure-inventory.json"
+        for change in ("record", "connection", "key", "provenance"):
+            with self.subTest(change=change):
+                inventory = self.inventory_fixture()
+                if change == "record":
+                    inventory["runtime_artifacts"][0]["status"] = "active"
+                elif change == "connection":
+                    inventory["connection"] = {"host": guard.RETIRED_HOST}
+                elif change == "key":
+                    inventory[guard.RETIRED_HOST] = "target"
+                else:
+                    inventory["_meta"] = {}
+                self.assertEqual(self.scan(relative, json.dumps(inventory).encode()),
+                                 [f"repo:{relative}"])
+
+    def test_pre_closure_inventory_siblings_and_operational_paths_still_block(self):
+        content = json.dumps(self.inventory_fixture()).encode()
+        for relative in ("reports/future-run/connection.json",
+                         "reports/future-run/pre-closure-inventory-live.json",
+                         "scripts/pre-closure-inventory.json"):
+            with self.subTest(relative=relative):
+                self.assertEqual(self.scan(relative, content), [f"repo:{relative}"])
+
+    def test_real_pre_closure_inventory_is_only_canonical_removed_history(self):
+        relative = "reports/meta-manual-payments-runs/pay-now-20261101T130528612926/pre-closure-inventory.json"
+        content = (guard.REPO / relative).read_bytes()
+        self.assertTrue(guard.historical_inventory_only(guard.REPO / relative, relative))
+        self.assertEqual(self.scan(relative, content), [])
+
     def test_inventory_modified_removed_record_still_blocks(self):
         relative = "reports/future-authorized-run/inventory-before-closure.json"
         inventory = self.inventory_fixture()
