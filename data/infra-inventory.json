@@ -57808,6 +57808,23 @@
         "payments_executed": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "drive-layout-review-1566493713373462549",
+      "agent": "zeus",
+      "type": "knowledge_candidate_readonly_drive_review",
+      "status": "proposal_pending_alignment_no_drive_mutations",
+      "source_message_id": "1566493713373462549",
+      "candidate_id": "KCI-f8ff80f2d4a988f2",
+      "paths": [
+        "/root/mgs-agent/data/knowledge-inbox.jsonl"
+      ],
+      "evidence": "/root/.hermes/profiles/zeus/cache/scratch/drive-layout-review-1566493713373462549",
+      "verified": "Exact five linked targets inspected via canonical SA. Historical 30TB UPLOAD MANUAL enumerated: 26 folders, no files. Production layout/cron/ACL unchanged.",
+      "report_infra_status": "sent_verified",
+      "updated_at": "2026-11-01T16:50:21.507978+00:00",
+      "report_infra_message_id": "1566494622711156777",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
