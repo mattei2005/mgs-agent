@@ -15,6 +15,8 @@ Isto fecha a dúvida sobre o destino desses IDs específicos: não são desapare
 
 Os 44 vínculos conta/anúncio/campanha/creative/vídeo continuam conferidos na Meta. Foram preservados status de campanha, IDs lógicos, SHA-256 e histórico. O catálogo recebeu apenas `storage_availability=source_retired_archive_unproven` e a referência ao recibo de disposição; não foi convertido para um falso arquivo disponível nem excluído como histórico.
 
+**Original e tratado são variantes diferentes:** em 41 casos, o original RAW permanece arquivado, com leitor e download integral novamente validados (244.981.324 bytes). Nos outros três, o RAW também consta da mesma purga confirmada, com recibo 204 e ausência atual conferida. Não redirecionar o ID/checksum do tratado descartado para os bytes do RAW. Esses 41 originais permitem avaliar um novo tratamento caso seja solicitado; nenhum arquivo foi recriado ou reprocessado nesta conciliação.
+
 ## 2. Os 187 objetos atuais continuam íntegros e legíveis
 
 - 172 são tratados com registro de catálogo e reserva existente.

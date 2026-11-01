@@ -2383,22 +2383,22 @@
     {
       "agent": "zeus",
       "id": "DRIVE-LEGACY-CONSOLIDATION-1566510979838255326",
-      "next_step": "Layout aplicado: 122 movimentos, 15107 IDs originais preservados, 97 downloads íntegros, 22 incidentes originais recuperados e 25 recibos antigos relidos; 211 testes. Manter 187 objetos de uso ambíguo e 44 registros sem cópia comprovada separados, sem liberar reservas. Próxima etapa: conciliação de uso/origem e comunicação dos crons. Observar primeiro pedido real do novo fluxo e recorrência, sem upload artificial ou campanha de teste.",
-      "objective": "Conciliar e reorganizar árvores antigas, pasta Nicolas, pilotos e metadata, preservando IDs, reservas, histórico e consumidores.",
+      "next_step": "A conciliação sucessora 1566533058130088158 explicou os 44 descartes e validou os 187 objetos, corrigindo 102 paths. Pendência atual: validação operacional de uso dos 172 tratados; ver context/creative-archive-legacy-reconciliation.md. Não reabrir os 44 como perda inexplicada nem reexecutar consolidação.",
+      "objective": "Reorganizar o acervo com mesmos IDs e preservar consumidores e histórico.",
       "source": "context/creative-archive-legacy-consolidation.md",
-      "state": "layout_validated_legacy_exceptions_preserved",
+      "state": "layout_and_technical_legacy_reconciliation_validated",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-01T19:08:55+00:00"
+      "updated_at": "2026-11-01T20:09:46+00:00"
     },
     {
       "agent": "zeus",
       "id": "DRIVE-LEGACY-RECONCILIATION-1566533058130088158",
-      "next_step": "44 casos já vinculados à purga crítica expressamente confirmada em 1563588372872699927, com 44 recibos HTTP204, hashes e anúncios/vídeos atuais conferidos. Nos 187: 172 clean, 12 RAW e 3 não cadastrados como finais/referência; 36 contas e 14597 ads lidos, nomes não usados como prova de linhagem. Corrigir de forma exata 102 paths históricos que mudaram só por nomes de pastas, sem alterar mídia ou manifestos; validar todos os 187 consumidores antes de fechar.",
-      "objective": "Conciliar 187 objetos históricos e rastrear 44 registros sem cópia, preservando conteúdo, IDs e reservas.",
-      "source": "context/creative-archive-legacy-consolidation.md",
-      "state": "historical_reader_repair_and_role_reconciliation",
+      "next_step": "44 tratados vinculados à purga crítica confirmada de 24/10; 41 RAW íntegros arquivados e 3 RAW também descartados naquela purga. 187 leitores/bytes conferidos; 102 paths recuperados; 172 clean, 12 RAW, 3 não finais/referência; 217 testes. Aguardar decisão de Rodolfo para encaminhar confirmação operacional de uso dos 172 aos gestores via Ares. Manter todos no hold, sem inferir uso por nomes, liberar reserva ou recriar arquivos.",
+      "objective": "Conciliar 187 objetos e rastrear 44 fontes antigas, preservando conteúdo, IDs e reservas.",
+      "source": "context/creative-archive-legacy-reconciliation.md",
+      "state": "technical_validation_complete_business_usage_decision_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-01T19:48:30+00:00"
+      "updated_at": "2026-11-01T20:09:46+00:00"
     },
     {
       "agent": "zeus",
@@ -8162,5 +8162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:48:30+00:00"
+  "updated_at": "2026-11-01T20:09:46+00:00"
 }
