@@ -1,0 +1,131 @@
+{
+  "status": "partial_metrics_validated_pc1_meta_2fa_required",
+  "verified_at": "2026-11-01T08:06:24.822037-05:00",
+  "accounts": 47,
+  "groups": {
+    "Cartão de crédito": 11,
+    "Linha de crédito": 36
+  },
+  "validated_metrics_at": "2026-11-01T08:03:40.381718-05:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T080343606775",
+  "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T080346187792",
+  "source_to_live_sheet_cgij_exact": true,
+  "full_grid_narrow_write_readback": true,
+  "totals_validated_columns": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "fresh_h_account_ids": [],
+  "fresh_h_count": 0,
+  "h_preserved_count": 36,
+  "pending_h_account_ids": [
+    "1419148446852410",
+    "1753257812779707",
+    "1107653168698121",
+    "2633813727134360",
+    "2039876850230678",
+    "1851640026221079",
+    "1001115192056600",
+    "1018267074603840",
+    "1062887799996139",
+    "2031917360813819",
+    "897046653487466",
+    "1498990138663094",
+    "814915838330687",
+    "3188620887977617",
+    "3752157451670648",
+    "4511685129081248",
+    "1829406761389732",
+    "937846586033361",
+    "336562339356179",
+    "1744611463000838",
+    "1245683183659911",
+    "311204101516831",
+    "1526280818302320",
+    "536294549227786",
+    "1085117577390237",
+    "1736068407518263",
+    "1877104513669062",
+    "869857549542755",
+    "7840111366055613",
+    "1583000095650153",
+    "2429758060563333",
+    "781612907182683",
+    "787796726891306",
+    "1600310064116258",
+    "908704754163659",
+    "26632890069640784"
+  ],
+  "h_ledger_to_live_sheet_exact": true,
+  "historical_h_note_read_at_min": "2026-10-31T14:04:32.153065-04:00",
+  "historical_h_note_read_at_max": "2026-10-31T14:26:13.372072-04:00",
+  "pending_ui": [
+    {
+      "account_id": "1150399088163771",
+      "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1414197490675732",
+      "name": "Mavroa-US-SHEIN-ES-02-G002",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1543098427832443",
+      "name": "Mavroa-US-SHEIN-ES-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "2852476828464907",
+      "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ],
+  "card_proofs_updated": 0,
+  "historical_d_gaps": [
+    {
+      "account_id": "1419148446852410",
+      "name": "Growpowerhub-US-SHEIN-EN-04-G004",
+      "reason": "no_charge_located_historical",
+      "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+    }
+  ],
+  "d_values_and_notes_preserved_exact": true,
+  "average_period": [
+    {
+      "since": "2026-10-29",
+      "until": "2026-10-31"
+    }
+  ],
+  "totals_usd": {
+    "average_daily": "19264.09",
+    "balance": "427375.86",
+    "month_spend": "868244.46"
+  },
+  "invoice_due_usd": "0",
+  "visible_invoice_numbers": 0,
+  "invoice_period": "2026-09-01",
+  "pc1_blocker": {
+    "reason": "meta_2fa_required",
+    "surface": "Approved PC1 Chrome shows Facebook authentication-app code gate; AX and pixels agree. No alternate surface or authentication attempted.",
+    "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T080346187792/blocked.png"
+  },
+  "lease_free": true,
+  "owned_tabs_created": 0,
+  "payments_executed": 0,
+  "meta_writes": 0,
+  "cron_changes": 0,
+  "workbook_sheet_count": 2,
+  "other_sheet_properties_unchanged": true,
+  "other_sheet_data_preservation_qualification": "All writes bounded to approved tab. Other sheet properties unchanged; other tab data not independently snapshotted before this run.",
+  "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T080346187792/closure-current.json"
+}
