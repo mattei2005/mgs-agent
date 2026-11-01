@@ -52,4 +52,43 @@ class StandardTests(unittest.TestCase):
   with patch.object(s,'policy',return_value=self.p):
    with self.assertRaises(s.StandardError):s.destination('SHEIN_US_EN','VID','Joe')
 
+class PipelineTests(unittest.TestCase):
+ def test_finalizer_calls_transition_only_for_meta_confirmed_selected_asset(self):
+  from ares_campaign_v3 import shein_media_handoff as handoff
+  import contextlib
+  with tempfile.TemporaryDirectory() as tmp:
+   base=Path(tmp);inv=base/'data/ares/creative-ops/inventory/assets.jsonl';inv.parent.mkdir(parents=True)
+   row={'asset_id':'assetOffline001','asset_drive_id':'logicalOffline001','canonical_filename':'SHEIN_US_EN_VID_OFFLINE_NV_001.mp4','clean_checksum':'a'*64,'reservation_request_id':'reqOffline001','manager_media_folder_id':'exclusiveOffline001'}
+   untouched={'asset_id':'assetOffline002','asset_drive_id':'logicalOffline002','manager_media_folder_id':'exclusiveOffline001','reservation_request_id':'otherOffline001'}
+   inv.write_text(json.dumps(row)+'\n'+json.dumps(untouched)+'\n')
+   asset={'asset_id':'assetOffline001','asset_drive_id':'logicalOffline001','checksum':'a'*64,'ready_parent_id':'exclusiveOffline001','drive_md5':'b'*32,'manager_folder_preserved':True}
+   state={'request':{'request_id':'reqOffline001'},'new_media_assets':[asset],'manifest':{'campaigns':[{'account_id':'accountOffline001','ads':[{'name':'ad-name','media':{'asset_id':'assetOffline001'}}]}]}}
+   live={'campaign':{'id':'123'},'adsets':{'data':[{'id':'234'}]},'ads':{'data':[{'id':'345','name':'ad-name','creative':{'id':'456','object_story_spec':{'video_data':{'video_id':'567'}},'effective_object_story_id':'postOffline001'}}]}}
+   class Ops:
+    def drive_runtime_token(self):return 'offline',{}
+   class Common:
+    def graph_get(self,*args):return 200,{'status':'ready','title':'assetOffline001 '+('a'*10)},{}
+   proof={'folder_id':'usedOffline001','manager_code':'g006','request_id':'reqOffline001'}
+   with patch.object(handoff,'_ops',return_value=Ops()),patch.object(s,'queue_guard',return_value=contextlib.nullcontext()),patch.object(s,'find_slot',return_value=({'operation':'SHEIN_US_EN'},'exclusive')),patch.object(s,'mark_used',return_value=proof) as move,patch.object(s,'inventory_path',return_value='MGS-ARQUIVO/CRIATIVOS/SHEIN_US_EN/VID/NICOLAS - Usados/file.mp4'),patch('urllib.request.urlopen',side_effect=AssertionError('OFFLINE_NETWORK_FORBIDDEN')):
+    handoff.finalize_ready_assets(state,live,base,Common(),'offline')
+    self.assertEqual(move.call_count,1)
+   rows=[json.loads(l) for l in inv.read_text().splitlines()]
+   self.assertEqual(rows[0]['manager_media_folder_id'],'usedOffline001');self.assertEqual(rows[0]['meta_ad_id'],'345');self.assertEqual(rows[1],untouched)
+ def test_failed_meta_identity_stops_before_manager_move(self):
+  from ares_campaign_v3 import shein_media_handoff as handoff
+  with tempfile.TemporaryDirectory() as tmp:
+   base=Path(tmp);inv=base/'data/ares/creative-ops/inventory/assets.jsonl';inv.parent.mkdir(parents=True)
+   inv.write_text(json.dumps({'asset_id':'assetOffline001','reservation_request_id':'reqOffline001'})+'\n')
+   state={'request':{'request_id':'reqOffline001'},'new_media_assets':[{'asset_id':'assetOffline001','checksum':'a'*64}],'manifest':{'campaigns':[{'account_id':'accountOffline001','ads':[{'name':'ad-name','media':{'asset_id':'assetOffline001'}}]}]}}
+   live={'campaign':{'id':'123'},'adsets':{'data':[{'id':'234'}]},'ads':{'data':[{'id':'345','name':'ad-name','creative':{'id':'456','object_story_spec':{'video_data':{'video_id':'567'}}}}]}}
+   class Ops:
+    def drive_runtime_token(self):return 'offline',{}
+   class Common:
+    def graph_get(self,*args):return 200,{'status':'ready','title':'WRONG LINEAGE'},{}
+   before=inv.read_bytes()
+   with patch.object(handoff,'_ops',return_value=Ops()),patch.object(s,'mark_used') as move:
+    with self.assertRaises(ValueError):handoff.finalize_ready_assets(state,live,base,Common(),'offline')
+    move.assert_not_called()
+   self.assertEqual(inv.read_bytes(),before)
+
 if __name__=='__main__':unittest.main()

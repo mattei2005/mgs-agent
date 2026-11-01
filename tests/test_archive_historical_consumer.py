@@ -6,6 +6,9 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import ares_archive_storage as s
 class HistoricalConsumerTests(unittest.TestCase):
  def setUp(self):
+  # This fixture models the retained Shared-Drive source before stock cutover;
+  # isolate its layout explicitly instead of depending on the live VPS flag.
+  self.layout=patch.object(s.locations,'active',return_value=None);self.layout.start();self.addCleanup(self.layout.stop)
   self.entry={'mapping_kind':'historical_verified','sourceId':'OFFLINE_SOURCE01','archiveId':'OFFLINE_ARCHIVE01','archiveParentId':'OFFLINE_PARENT01','owner':s.b.ACCOUNT,'verified':True,'size':'5','md5':'a'*32,'sha256':'b'*64,'role':'historical','lineageId':None,'jobId':'OFFLINE_JOB01','relativeParent':['SHEIN_US_EN','VID','01_READY']}
   self.physical={'id':self.entry['archiveId'],'name':'canonical.mp4','mimeType':'video/mp4','size':'5','md5Checksum':'a'*32,'sha256Checksum':'b'*64,'parents':['OFFLINE_PARENT01'],'owners':[{'emailAddress':s.b.ACCOUNT}],'trashed':False,'capabilities':{'canDownload':True}}
   self.stock={'id':self.entry['sourceId'],'name':'operator label','mimeType':'video/mp4','size':'5','md5Checksum':'a'*32,'sha256Checksum':'b'*64,'parents':['OFFLINE_STOCK01'],'driveId':s.b.SOURCE_DRIVE,'trashed':False,'capabilities':{'canMoveItemWithinDrive':True}}
