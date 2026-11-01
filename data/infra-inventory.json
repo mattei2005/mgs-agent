@@ -57824,7 +57824,7 @@
       "id": "drive-layout-review-1566493713373462549",
       "agent": "zeus",
       "type": "knowledge_candidate_readonly_drive_review",
-      "status": "proposal_pending_alignment_no_drive_mutations",
+      "status": "design_promoted_to_active_technical_deployment_historical_gate_preserved",
       "source_message_id": "1566493713373462549",
       "candidate_id": "KCI-f8ff80f2d4a988f2",
       "paths": [
@@ -57835,13 +57835,14 @@
       "report_infra_status": "sent_verified",
       "updated_at": "2026-11-01T16:50:21.507978+00:00",
       "report_infra_message_id": "1566494622711156777",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "followup_deployment_id": "manager-storage-standard-deployed-1566497527719661640"
     },
     {
       "id": "creative-manager-standard-design-1566496381001146440",
       "agent": "zeus",
       "type": "approved_design_pending_critical_skill_change",
-      "status": "blocked_on_specific_ares_skill_confirmation",
+      "status": "design_promoted_to_active_technical_deployment_historical_gate_preserved",
       "source_message_id": "1566496381001146440",
       "paths": [
         "/root/mgs-agent/context/creative-manager-storage-standard.md",
@@ -57852,7 +57853,65 @@
       "report_infra_status": "sent_verified",
       "updated_at": "2026-11-01T17:00:07.599177+00:00",
       "report_infra_message_id": "1566497081265365043",
-      "report_infra_readback": true
+      "report_infra_readback": true,
+      "followup_deployment_id": "manager-storage-standard-deployed-1566497527719661640"
+    },
+    {
+      "id": "manager-storage-standard-deployed-1566497527719661640",
+      "agent": "zeus",
+      "type": "registered_manager_destinations_and_consumer_cutover",
+      "authority_message_ids": [
+        "1566496381001146440",
+        "1566497527719661640"
+      ],
+      "status": "active_technical_validated_first_real_use_and_historical_reconciliation_separate",
+      "updated_at": "2026-11-01T17:32:45.128638+00:00",
+      "paths": [
+        "/root/mgs-agent/scripts/ares_manager_storage_standard.py",
+        "/root/mgs-agent/scripts/mgs_provision_manager_storage.py",
+        "/root/mgs-agent/scripts/ares_manager_delivery.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/shein_grouped_media.py",
+        "/root/mgs-agent/scripts/ares_campaign_v3/shein_media_handoff.py",
+        "/root/mgs-agent/tests/test_ares_manager_storage_standard.py",
+        "/root/mgs-agent/tests/test_ares_manager_delivery.py",
+        "/root/mgs-agent/tests/test_archive_historical_consumer.py",
+        "/root/mgs-agent/context/creative-manager-storage-standard.md",
+        "/root/mgs-agent/context/drive-archive-owner-connector.md",
+        "/root/mgs-agent/data/ares/creative-ops/manager-delivery-policy.json",
+        "/root/mgs-agent/data/ares/creative-ops/manager-storage-standard.json",
+        "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/SKILL.md",
+        "/root/mgs-agent/profiles/ares-skills/growth/creative-operations-mgs/SKILL.md",
+        "/root/.hermes/profiles/ares/skills/growth/creative-operations-mgs/references/manager-folder-delivery.md",
+        "/root/mgs-agent/profiles/ares-skills/growth/creative-operations-mgs/references/manager-folder-delivery.md",
+        "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
+        "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md",
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/manager-storage-standard.md",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/manager-standard/folder-journal.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/manager-standard/activation.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/manager-standard/active-readback.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/manager-standard/native-canary.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/manager-standard/native-preflight.json"
+      ],
+      "artifact_manifest": "/root/.hermes/profiles/zeus/artifacts/manager-storage-standard-1566497527719661640/changed-artifact-manifest.json",
+      "rollback_baseline": "/root/.hermes/profiles/zeus/artifacts/manager-storage-standard-1566497527719661640/baseline",
+      "verified": {
+        "managers": 6,
+        "operations": 19,
+        "slots": 228,
+        "folders_created_and_native_verified": 456,
+        "shein_folder_routing_probes": 24,
+        "focused_tests": 156,
+        "failed_focused_tests": 0,
+        "same_id_technical_canary_restored": true,
+        "ares_live_mirror_pairs_equal": 3,
+        "production_media_moved": 0,
+        "campaign_writes": 0,
+        "permission_writes": 0,
+        "first_real_new_flow_request_verified": false,
+        "historical_reorganization_complete": false
+      },
+      "report_infra_status": "pending"
     }
   ],
   "profile_skill_references": [

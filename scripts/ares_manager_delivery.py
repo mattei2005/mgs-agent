@@ -93,7 +93,9 @@ def verify_plan(d,plan,rows,index):
     for item in plan['items']:
         selected=[r for r in rows if r.get('source_drive_id')==item['id']]
         require(len(selected)==1,'MANAGER_PLAN_UNIQUE_LINEAGE');row=selected[0]
-        require(row.get('source_manager')==plan['manager'] and row.get('manager_media_folder_id')==target,'MANAGER_PLAN_TARGET')
+        receipt=b.read_json(RECEIPTS/('delivery-'+row.get('asset_drive_id','')+'.json'),{})
+        resolved_target=delivery_target(d,row,target,receipt)
+        require(row.get('source_manager')==plan['manager'] and row.get('manager_media_folder_id')==resolved_target,'MANAGER_PLAN_TARGET')
         entry=index['mappings'][row['asset_drive_id']]
         verify_delivered(d,{'role':'clean','sourceId':row['asset_drive_id']},entry)
     return True
