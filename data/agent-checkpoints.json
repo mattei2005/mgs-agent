@@ -2393,12 +2393,12 @@
     {
       "agent": "zeus",
       "id": "DRIVE-LEGACY-RECONCILIATION-1566533058130088158",
-      "next_step": "Congelar coortes, cruzar inventário/histórico/Meta e evidências de arquivo/retirada. Reclassificar apenas com prova exata. Sem exclusão, ACL, credenciais, campanhas ou liberação de reservas; sem repetir a consolidação física já concluída.",
-      "objective": "Conciliar os 187 objetos de uso histórico ambíguo e rastrear os 44 registros sem cópia comprovada, preservando mídia, IDs, reservas e evidências.",
+      "next_step": "44 casos já vinculados à purga crítica expressamente confirmada em 1563588372872699927, com 44 recibos HTTP204, hashes e anúncios/vídeos atuais conferidos. Nos 187: 172 clean, 12 RAW e 3 não cadastrados como finais/referência; 36 contas e 14597 ads lidos, nomes não usados como prova de linhagem. Corrigir de forma exata 102 paths históricos que mudaram só por nomes de pastas, sem alterar mídia ou manifestos; validar todos os 187 consumidores antes de fechar.",
+      "objective": "Conciliar 187 objetos históricos e rastrear 44 registros sem cópia, preservando conteúdo, IDs e reservas.",
       "source": "context/creative-archive-legacy-consolidation.md",
-      "state": "evidence_discovery",
+      "state": "historical_reader_repair_and_role_reconciliation",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-01T19:23:32+00:00"
+      "updated_at": "2026-11-01T19:48:30+00:00"
     },
     {
       "agent": "zeus",
@@ -8162,5 +8162,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:43:08+00:00"
+  "updated_at": "2026-11-01T19:48:30+00:00"
 }
