@@ -4932,6 +4932,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpr-1566480909086105652",
+      "next_step": "Executar 26 checagens de 11:13 a 23:43 EST; alertar somente ultrapassagem valida; expirar 02/11/2026 00:00 EST antes de API",
+      "objective": "Alertar Joe sobre CPR maior que USD1.50 das copias recentes Mavroa04 ate fim de 01/11/2026 ET",
+      "source": "data/ares/meta-ads/state/cpr-watch/1566480909086105652/manifest.json",
+      "state": "ativo: cinco ids 015-019 reconciliados com recibo e meta; leitura inicial 10:58 est sem resultados; monitor finito :13/:43 confirmado habilitado; testes e auditorias globais pre/pos aprovados; zero write meta",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-01T15:58:57+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
       "next_step": "Rodolfo/Zeus decidir e aprovar runtime deterministico de first-delivery especifico da conta05; ate la acompanhar spend/serving nos relatorios live sem alterar a arquitetura",
       "objective": "Publicar C51-C53 na conta 05 com CBO 1x1x3, MAXVOL, SUBSCRIBE, nove criativos reconciliados e readback completo",
@@ -8092,5 +8102,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T15:47:36+00:00"
+  "updated_at": "2026-11-01T15:58:57+00:00"
 }
