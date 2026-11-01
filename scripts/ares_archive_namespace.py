@@ -167,7 +167,14 @@ def verify_migrated_delivery(d,row,entry,receipt):
   expected={'schema':'mgs.manager.standard.use.v1','authority_message_id':standard.AUTHORITY,'status':'verified','request_id':request_id,'asset_id':row['asset_id'],'logical_id':entry['sourceId'],'stock_file_id':rec['stock_id'],'source_id':rec['to_parent'],'folder_id':target,'sha256':entry['sha256'],'manager_code':rec['manager_code']}
   require(all(use.get(k)==v for k,v in expected.items()),'NAMESPACE_DELIVERY_USE_CHAIN_PROOF');assignment=use.get('assignment',{});standard.validate_assignment(assignment)
   require(assignment['campaign_id']==row.get('used_by') and assignment['ad_id']==row.get('meta_ad_id') and assignment['creative_id']==row.get('meta_creative_id'),'NAMESPACE_DELIVERY_USE_CHAIN_ASSIGNMENT');state='used'
- require(receipt.get('schema')=='mgs.manager.delivery.receipt.v1' and receipt.get('status')=='verified' and receipt.get('authority_message_id')=='1565546229914411133' and receipt.get('logical_id')==entry['sourceId'] and receipt.get('stock_file_id')==rec['stock_id'] and receipt.get('provider_id')==entry['archiveId'] and receipt.get('sha256')==entry['sha256'] and receipt.get('destination_parent_id')==rec['from_parent'],'NAMESPACE_ORIGINAL_DELIVERY_RECEIPT')
+ if not receipt and rec.get('classification_basis')=='native_historical_use_verified':
+  # These READY assets were assigned before manager delivery existed. Their
+  # digest-bound consolidation proves usage/relocation, not a nonexistent
+  # original delivery. Never synthesize a receipt or admit unproven legacy.
+  require(rec.get('state')=='used' and target==rec['to_parent'] and row.get('legacy_consolidation_authority')==AUTHORITY and row.get('legacy_usage_classification')==rec['classification_basis'] and row.get('manager_storage_state')=='used' and row.get('manager_storage_code')==rec['manager_code'],'NAMESPACE_NATIVE_USED_CONSOLIDATION')
+  require(row.get('asset_id')==entry.get('lineageId') and row.get('asset_drive_id')==entry['sourceId'] and row.get('clean_checksum')==entry['sha256'] and all(isinstance(row.get(k),str) and row[k].isdigit() for k in ['used_by','meta_ad_id','meta_creative_id']),'NAMESPACE_NATIVE_USED_IDENTITY')
+ else:
+  require(receipt.get('schema')=='mgs.manager.delivery.receipt.v1' and receipt.get('status')=='verified' and receipt.get('authority_message_id')=='1565546229914411133' and receipt.get('logical_id')==entry['sourceId'] and receipt.get('stock_file_id')==rec['stock_id'] and receipt.get('provider_id')==entry['archiveId'] and receipt.get('sha256')==entry['sha256'] and receipt.get('destination_parent_id')==rec['from_parent'],'NAMESPACE_ORIGINAL_DELIVERY_RECEIPT')
  standard.validate_folder(d,target,manager=rec['manager_code'],state=state)
  record=storage.resolve_media(entry['sourceId'],getattr(d,'token',None));require(record is not None,'NAMESPACE_MIGRATED_MEDIA');assert record is not None
  require(record['parents']==[target] and record['sha256Checksum']==entry['sha256'] and record['name']==row['canonical_filename'],'NAMESPACE_MIGRATED_DELIVERY_READBACK')
