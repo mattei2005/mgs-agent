@@ -9,6 +9,15 @@ Use this note when the final pre-reboot gate mixes exact package versions, tool-
 - Pass `-f=${Version}` as a literal argv element. In shell, quote it as `-f='${Version}'`; unquoted `${Version}` is expanded by the shell before `dpkg-query` runs and can falsely classify every package as divergent.
 - Prefer a saved preflight script plus direct execution when quoting, redaction, or nested tool wrappers would otherwise influence the evidence. The script must exit nonzero on any failed gate and print one compact JSON summary.
 
+## Multi-host status collection and safe recovery
+
+1. Recover each target's established transport from the prior successful collector: host, user, port and trusted host-key store. Keep credential values in the approved secret transport and out of stdout, argv and saved reports.
+2. Freeze one timestamped JSON observation per host with separate predicates for metadata refresh, `apt-get -s upgrade`, `apt-get -s dist-upgrade`, running kernel, reboot marker, failed units and restart diagnostics. Preserve each command's exit status; an empty transaction is meaningful only after a successful refresh and simulation.
+3. Run independent hosts concurrently, but persist completed host results before aggregation. Catch errors at the individual predicate boundary and still emit the completed host fields; a late optional diagnostic must not erase an earlier successful package audit.
+4. Discover optional diagnostic availability before invocation. Record unavailable checks explicitly without installing tools as part of an informational status request; do not equate unavailable restart diagnostics with zero pending restarts. Use the existing completion contract to decide whether that gap blocks the requested claim.
+5. If SSH rejects a host key, first reconcile the exact host/port and the established `UserKnownHostsFile` from the prior approved route. Retry with that existing trusted store and `StrictHostKeyChecking=yes` when it resolves the mismatch. Never use `StrictHostKeyChecking=no`, accept a replacement key, or create new trust merely to finish the audit; unexplained fingerprint drift remains a blocker.
+6. Retry only the missing or invalid host/predicate, merge its replacement into the saved results by stable target identity, and derive verified-host totals from the aggregate. Keep failed-attempt evidence separate from the final observation so recovered transport errors do not become fictitious infrastructure pendencies.
+
 ## Dual-manifest pattern
 
 A maintenance set contains both immutable execution inputs and mutable evidence. Do not use one checksum file for both purposes.
