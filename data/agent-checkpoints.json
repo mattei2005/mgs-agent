@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "ARES-ARCHIVE-CATALOGUE-RECOVERY-20261101",
-      "next_step": "Verificar os 28 jobs liberados, receipts/ACK e streams; corrigir somente webViewLink; repetir monitor original e validar retiradas ja autorizadas. Foreground anterior concluiu 20:11Z; nenhum writer paralelo.",
+      "next_step": "28 links e28jobs verificados integralmente; somente webViewLink alterado. Namespace aceita uso historico nativo ja aprovado sem inventar recibo de entrega antigo;89 testes PASS. Job236d8c5a0251b513943ec053aad945e8:2retiradas nativas e2downloads pos-retirada validados. Monitor originalok semblocked;demais pares seguem limites originais. REPORT-INFRA pendente porque cron proibe envio direto.",
       "objective": "Recuperar referencia direta de staging no lote 1565451863040589865 sem duplicar arquivos ou alterar reservas",
-      "source": "/root/.hermes/profiles/zeus/artifacts/archive-catalogue-recovery-20261101",
-      "state": "investigating_native_batch",
+      "source": "/root/.hermes/profiles/zeus/artifacts/archive-catalogue-recovery-20261101/final-verification.json",
+      "state": "operational_recovery_validated_reporting_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-01T20:16:43+00:00"
+      "updated_at": "2026-11-01T20:39:12+00:00"
     },
     {
       "agent": "zeus",
@@ -8172,5 +8172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:16:43+00:00"
+  "updated_at": "2026-11-01T20:39:12+00:00"
 }
