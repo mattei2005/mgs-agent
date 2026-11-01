@@ -12,6 +12,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ARES-ARCHIVE-CATALOGUE-RECOVERY-20261101",
+      "next_step": "Verificar os 28 jobs liberados, receipts/ACK e streams; corrigir somente webViewLink; repetir monitor original e validar retiradas ja autorizadas. Foreground anterior concluiu 20:11Z; nenhum writer paralelo.",
+      "objective": "Recuperar referencia direta de staging no lote 1565451863040589865 sem duplicar arquivos ou alterar reservas",
+      "source": "/root/.hermes/profiles/zeus/artifacts/archive-catalogue-recovery-20261101",
+      "state": "investigating_native_batch",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-01T20:16:43+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ARES-ARCHIVE-LINK-RECOVERY-20261026",
       "next_step": "Sem acao do Rodolfo. Monitor original status ok sem blocked; 60 webViewLinks corrigidos com bytes/ACK nativos; broker JSON source_retirement_intent corrigido; 36 testes PASS; 2 pares/4 retiradas autorizadas com recibos e download pos-retirada verificados. Demais pares seguem somente rotina/limites originais. REPORT-INFRA 1564327560018534432 relido.",
       "objective": "Recuperar bloqueio UNMEDIATED_SOURCE_REFERENCE sem alterar writer, IDs ou gates",
@@ -8162,5 +8172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:09:46+00:00"
+  "updated_at": "2026-11-01T20:16:43+00:00"
 }
