@@ -16,7 +16,11 @@ ART=Path('/root/.hermes/profiles/zeus/artifacts/drive-legacy-consolidation-15665
 PLAN=HOME/'plan.json';STATE=HOME/'execution.json'
 
 def acl(m):return sorted((p.get('type'),p.get('emailAddress'),p.get('role')) for p in m.get('permissions',[]))
-def compact(m):return {k:m.get(k) for k in ['id','name','mimeType','size','md5Checksum','sha256Checksum','shortcutDetails','owners','permissions']}
+def compact(m):
+ value={k:m.get(k) for k in ['id','name','mimeType','size','md5Checksum','sha256Checksum','properties']}
+ value['owners']=sorted([[o.get('emailAddress'),o.get('permissionId')] for o in m.get('owners',[])],key=str)
+ value['permissions']=[list(x) for x in acl(m)]
+ value['shortcut_target']=m.get('shortcutDetails',{}).get('targetId');return value
 def full_meta(d,fid):return d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,trashed,owners(emailAddress,permissionId),permissions(type,emailAddress,role),shortcutDetails(targetId),properties'})
 def require(value,reason):
  if not value:raise b.ArchiveError(reason)
@@ -43,7 +47,9 @@ def prepare():
   sa=b.Drive(False);owner=transport.OwnerDrive();journal=transport.Journal(HOME/'folder-journal.json');stock=loc.stock_root();root=ensure_folder(owner,sa,journal,stock,'_ARQUIVO_FISICO');structures=ensure_folder(owner,sa,journal,root,'_ESTRUTURAS_ANTIGAS');stock_legacy=ensure_folder(owner,sa,journal,structures,'ESTOQUE');providers_legacy=ensure_folder(owner,sa,journal,structures,'PROVEDORES');tests=ensure_folder(owner,sa,journal,root,'_TESTES')
   require(acl(full_meta(sa,b.ARCHIVE_ROOT))==acl(full_meta(sa,root)),'LEGACY_NAMESPACE_ACCESS_CHANGE')
   value={'schema':namespace.SCHEMA,'authority_message_id':namespace.AUTHORITY,'phase':'prepared','archive_root_id':b.ARCHIVE_ROOT,'stock_root_id':stock,'provider_root_id':root,'files':{},'stock_moves':{},'legacy_manager_folders':{}}
-  actions=[];file_actions={};updates={}
+  actions=[];file_actions={};updates={};unproven=[]
+  all_proofs={x['asset_id']:x for x in json.loads((ART/'scope-meta-readback.json').read_text())['items']}
+  legacy_join={x['stock_id']:x for x in json.loads((ART/'legacy-used-catalogue-join.json').read_text())}
   def action(fid,target,kind,extra=None):
    m=nodes[fid];require(len(m.get('parents',[]))==1,'LEGACY_SOURCE_PARENT');item={'id':fid,'from_parent':m['parents'][0],'to_parent':target,'kind':kind,'expected':compact(m)}
    if extra:item.update(extra)
@@ -78,20 +84,29 @@ def prepare():
   meta_proofs={x['asset_id']:x for x in json.loads((ART/'nicolas-meta-readback.json').read_text())['items']}
   for item in json.loads((ART/('nicolas-'+oldstock+'.json')).read_text()):
    row=byasset[item['asset_id']];proof=meta_proofs[row['asset_id']];require(proof['status'] in ['exclusive_prior_explicit_delivery','native_historical_use_verified'],'LEGACY_NICOLAS_USAGE_UNPROVEN');state='used' if proof['status']=='native_historical_use_verified' else 'exclusive';op=row.get('operation') or next(o for o in {s['operation'] for s in standard.policy()['slots']} if row['canonical_filename'].startswith(o+'_'));fmt=row['format'];target=standard.destination(op,fmt,'Nicolas',state);plan_stock(item['id'],target,'g006',state,proof['status'],row)
-  # Existing legacy USED folders keep their original operator-marked status;
-  # no Meta usage or reservation is invented by this metadata-only merge.
+  # An old USED label is NOT proof of usage. Only exact native Meta readback
+  # qualifies for the new Used folder. Preserve all uncertain objects, IDs and
+  # reservations together in the retired structure until separately reconciled.
   legacy_folders=json.loads((ART/'legacy-used-folders.json').read_text())
   for f in legacy_folders:
-   for m in list(nodes.values()):
-    if m.get('parents')==[f['id']]:plan_stock(m['id'],f['target'],f['manager_code'],'used','preserved_existing_operator_used_folder')
    leaf=ensure_folder(owner,sa,journal,stock_legacy,f['operation']);leaf=ensure_folder(owner,sa,journal,leaf,f['format'])
+   for m in list(nodes.values()):
+    if m.get('parents')!=[f['id']]:continue
+    joined=legacy_join[m['id']];proof=all_proofs.get(joined.get('asset_id'),{})
+    if proof.get('status')=='native_historical_use_verified':plan_stock(m['id'],f['target'],f['manager_code'],'used','native_historical_use_verified',byasset.get(joined['asset_id']))
+    else:
+     unproven.append({'stock_id':m['id'],'asset_id':joined.get('asset_id'),'retained_parent':f['id'],'reason':'folder_label_is_not_usage_proof'})
+     row=byasset.get(joined.get('asset_id'))
+     if row:
+      require(row.get('ares_eligible') is not True,'LEGACY_UNPROVEN_ELIGIBILITY_CONFLICT')
+      updates[row['asset_id']]={'before_sha256':hashlib.sha256(b.canonical(row)).hexdigest(),'kind':'legacy_location_only','path':'MGS-ARQUIVO/CRIATIVOS/_ARQUIVO_FISICO/_ESTRUTURAS_ANTIGAS/ESTOQUE/'+f['operation']+'/'+f['format']+'/'+f['name']+'/'+m['name'],'classification_basis':'usage_unproven_preserve_reservation'}
    manager=standard.layout.MANAGERS[f['manager_code']];value['legacy_manager_folders'][f['id']]={'manager':manager,'native_name':f['name'],'parent_id':leaf,'parent_relative_path':['_ESTRUTURAS_ANTIGAS','ESTOQUE',f['operation'],f['format']],'operation':f['operation'],'format':f['format'],'state':'used','redirect_id':f['target']}
    action(f['id'],leaf,'legacy_folder')
   # Restore logical access for 26 historical copies whose former stock IDs are
   # absent: expose the same already-verified provider, never recopy or replace it.
   for item in json.loads((ART/'legacy-missing-stock-recovery-candidates.json').read_text()):
    if item['exact_name_candidates']!=1:continue
-   row=byasset[item['asset_id']];e=storage.mapping(row['asset_drive_id']);require(e and e.get('mapping_kind')=='historical_verified','LEGACY_PROVIDER_VIEW_PROOF');op=row.get('operation') or next(o for o in {s['operation'] for s in standard.policy()['slots']} if row['canonical_filename'].startswith(o+'_'));target=standard.destination(op,row['format'],'Nicolas','used');plan_stock(e['archiveId'],target,'g006','used','verified_historical_archive_and_prior_campaign_record',row,True)
+   row=byasset[item['asset_id']];proof=all_proofs.get(row['asset_id'],{});require(proof.get('status')=='native_historical_use_verified','LEGACY_PROVIDER_USE_UNPROVEN');e=storage.mapping(row['asset_drive_id']);require(e and e.get('mapping_kind')=='historical_verified','LEGACY_PROVIDER_VIEW_PROOF');op=row.get('operation') or next(o for o in {s['operation'] for s in standard.policy()['slots']} if row['canonical_filename'].startswith(o+'_'));target=standard.destination(op,row['format'],'Nicolas','used');plan_stock(e['archiveId'],target,'g006','used','native_historical_use_verified',row,True)
   # Provider branches move as the same folders. Protected controls stay put.
   root_actions=[]
   for m in nodes.values():
@@ -102,7 +117,7 @@ def prepare():
   for fid,manager in [(oldstock,'Nicolas'),('1hYlcYTGxAmRaTG-ageniKaVwJUZyt9TC','Geizian')]:
    m=nodes[fid];value['legacy_manager_folders'][fid]={'manager':manager,'native_name':m['name'],'parent_id':stock_legacy,'parent_relative_path':['_ESTRUTURAS_ANTIGAS','ESTOQUE']};action(fid,stock_legacy,'legacy_folder')
   actions=root_actions+[x for x in actions if x['kind']=='stock']+[x for x in actions if x['kind']=='legacy_folder']
-  plan={'schema':'mgs.archive.legacy.consolidation.plan.v1','authority_message_id':namespace.AUTHORITY,'created_at':b.now_iso(),'actions':actions,'namespace':value,'inventory_updates':updates,'unmapped_history_preserved':[x['asset_id'] for x in json.loads((ART/'legacy-missing-stock-recovery-candidates.json').read_text()) if x['hash_candidates']==0]}
+  plan={'schema':'mgs.archive.legacy.consolidation.plan.v1','authority_message_id':namespace.AUTHORITY,'created_at':b.now_iso(),'actions':actions,'namespace':value,'inventory_updates':updates,'usage_unproven_preserved':unproven,'unmapped_history_preserved':[x['asset_id'] for x in json.loads((ART/'legacy-missing-stock-recovery-candidates.json').read_text()) if x['hash_candidates']==0]}
   b.atomic_json(PLAN,plan);value['plan_sha256']=hashlib.sha256(b.canonical(plan)).hexdigest();b.atomic_json(namespace.PATH,value);return {'status':'prepared','actions':len(actions),'action_kinds':{kind:sum(x['kind']==kind for x in actions) for kind in ['provider_branch','stock','legacy_folder']},'metadata_records':len(value['files']),'inventory_rows':len(updates),'unmapped_history_preserved':len(plan['unmapped_history_preserved'])}
 
 def apply(max_actions=60):
@@ -139,7 +154,10 @@ def finish():
      if row.get('legacy_consolidation_authority')==namespace.AUTHORITY:continue
      require(hashlib.sha256(b.canonical(row)).hexdigest()==change['before_sha256'],'LEGACY_INVENTORY_CONCURRENT_CHANGE:'+aid)
      row.setdefault('storage_location_history',[]).append({'authority_message_id':namespace.AUTHORITY,'old_parent':row.get('manager_media_folder_id'),'old_path':row.get('asset_path'),'moved_at':b.now_iso(),'basis':change['classification_basis']})
-     row.update(manager_media_folder_id=change['destination'],manager_storage_code=change['manager_code'],manager_storage_state=change['state'],legacy_consolidation_authority=namespace.AUTHORITY,legacy_usage_classification=change['classification_basis']);row['asset_path']=standard.inventory_path(row,change['destination'])
+     row.update(legacy_consolidation_authority=namespace.AUTHORITY,legacy_usage_classification=change['classification_basis'])
+     if change.get('kind')=='legacy_location_only':row['asset_path']=change['path']
+     else:
+      row.update(manager_media_folder_id=change['destination'],manager_storage_code=change['manager_code'],manager_storage_state=change['state']);row['asset_path']=standard.inventory_path(row,change['destination'])
     payload=''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows);before=HOME/'inventory-before-finalization.jsonl'
     if not before.exists():before.write_bytes(inventory.read_bytes())
     tmp=inventory.with_suffix('.legacy-layout.new');tmp.write_text(payload);tmp.replace(inventory);require(inventory.read_text()==payload,'LEGACY_INVENTORY_READBACK')
