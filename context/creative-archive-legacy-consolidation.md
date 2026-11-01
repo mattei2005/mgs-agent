@@ -34,13 +34,17 @@ Uma projeção histórica mantinha o parent congelado apesar da localização au
 
 Duas fontes clean dos jobs antigos permanecem no intake `SHEIN_US_ES/Ícaro`, com os mesmos IDs e bytes. O reconciliador de leitura aceita somente suas localizações e snapshots exatos; fontes não foram movidas/reprocessadas. O guard destrutivo de retirada continua exigindo a origem original e não foi relaxado para apagar arquivos dessa entrada.
 
-## Exceções preservadas e próximo trabalho
+## Exceções no fechamento inicial — histórico supersedido
 
 - 187 objetos das antigas pastas rotuladas Usados não possuem prova suficiente de uso no catálogo. Foram preservados com os mesmos IDs nas estruturas legadas, sem promovê-los a Usados/Exclusivos nem liberá-los ao pool. Desses, 172 têm reserva de gestor no catálogo, mantida inalterada; quinze não têm esse join de catálogo.
 - 44 registros históricos distintos apontam a IDs retornando 404 para a SA e não têm provider correspondente comprovado no acervo enumerado. São registros preexistentes, não objetos desaparecidos nesta migração. Não afirmar exclusão, perda ou existência global apenas pelo 404; rastrear evidência/backup/origem antes de qualquer recuperação.
 - A autoria dos movimentos anteriores continua sem prova nativa; Drive Activity API desativada não foi substituída por inferência de owner/last modifier.
 - Próximo trabalho: conciliar uso/disposição dos legados ambíguos e os 44 registros; depois fechar comunicação/deduplicação do cron mantendo incidentes reais. Não alterar cron funcional, apagar fontes/legados ou inventar recibos para silenciar alertas.
 - Primeiro uso real do fluxo novo continua sob acompanhamento interno do Zeus, pelo recibo `manager-standard/first-production-use.json`. Mover peças já utilizadas nesta consolidação não equivale a criar uma campanha nova nem concluir esse gate.
+
+## Estado vigente após a conciliação
+
+O pedido `1566533058130088158` supersede a classificação de exceções acima, conforme `context/creative-archive-legacy-reconciliation.md`: os 44 IDs foram vinculados por ID/hash/recibo à purga explicitamente confirmada em `1563588372872699927`, sem nova exclusão. Nos 187 objetos, há 172 tratados com uso ainda não comprovado, 12 originais RAW e três materiais de referência/não finais. Todos os 187 tiveram bytes/ACK e leitura lógica validados; 102 incompatibilidades de path histórico foram corrigidas por uma extensão exata e testada do namespace. Reservas e elegibilidade não mudaram. A pendência atual é a confirmação operacional do uso/destinação dos 172, não um desaparecimento inexplicado dos 44 ou indisponibilidade técnica dos 187.
 
 ## Evidências e rollback
 
