@@ -12,6 +12,8 @@ AUTHORITY='1566510979838255326'
 PATH=b.DATA/'legacy-consolidation'/'binding.json'
 PARENTS=PATH.parent/'provider-parent-bindings.json'
 SOURCES=PATH.parent/'source-metadata-bindings.json'
+HISTORICAL=b.DATA/'legacy-reconciliation-1566533058130088158'/'provider-metadata.json'
+HISTORICAL_AUTHORITY='1566533058130088158'
 _CACHE={}
 class NamespaceError(b.ArchiveError):pass
 
@@ -21,10 +23,25 @@ def validate_binding(value):
  require(value.get('schema')==SCHEMA and value.get('authority_message_id')==AUTHORITY and value.get('phase') in ['prepared','active'],'NAMESPACE_AUTHORITY')
  require(value.get('archive_root_id')==b.ARCHIVE_ROOT and value.get('provider_root_id') not in [None,b.ARCHIVE_ROOT,value.get('stock_root_id')],'NAMESPACE_ROOT_BINDING')
  require(isinstance(value.get('files'),dict) and isinstance(value.get('stock_moves'),dict) and isinstance(value.get('legacy_manager_folders'),dict),'NAMESPACE_SCHEMA');return value
+def historical_reconciliation(value,plan):
+ if not value.get('historical_reconciliation_sha256'):return {}
+ extra=b.read_json(HISTORICAL,{})
+ require(hashlib.sha256(b.canonical(extra)).hexdigest()==value['historical_reconciliation_sha256'] and extra.get('schema')=='mgs.archive.historical.metadata.reconciliation.v1' and extra.get('authority_message_id')==HISTORICAL_AUTHORITY and extra.get('original_plan_sha256')==value['plan_sha256'] and extra.get('phase')=='active','NAMESPACE_HISTORICAL_RECONCILIATION_AUTHORITY')
+ files=extra.get('files',{});expected={r['stock_id'] for r in plan.get('usage_unproven_preserved',[])}
+ require(expected and len(files)==len(expected) and {r.get('stock_id') for r in files.values()}==expected and not (set(files)&set(value['files'])),'NAMESPACE_HISTORICAL_RECONCILIATION_MEMBERSHIP')
+ proof=b.read_json(HISTORICAL.parent/'native-verification.json',{})
+ require(proof.get('schema')=='mgs.legacy.historical.native.verification.v1' and proof.get('authority_message_id')==HISTORICAL_AUTHORITY and proof.get('all_passed') is True and hashlib.sha256(b.canonical(proof)).hexdigest()==extra.get('verification_sha256'),'NAMESPACE_HISTORICAL_NATIVE_PROOF')
+ records={r['archive_id']:r for r in proof.get('records',[])}
+ require(set(records)==set(files),'NAMESPACE_HISTORICAL_NATIVE_PROOF_MEMBERSHIP')
+ for fid,rec in files.items():
+  native=records[fid]
+  require(native.get('full_bytes_and_native_ack_verified') is True and all(native.get(k)==rec.get(k) for k in ['source_id','archive_id','stock_id','sha256','md5','size','provider_parent_id']) and rec.get('reconciliation_authority')==HISTORICAL_AUTHORITY,'NAMESPACE_HISTORICAL_NATIVE_PROOF_IDENTITY')
+ return files
+
 def binding():
  if not PATH.exists():return None
  plan_path=PATH.parent/'plan.json'
- signature=(PATH.stat().st_ino,PATH.stat().st_mtime_ns,PATH.stat().st_size,plan_path.stat().st_mtime_ns if plan_path.exists() else None,PARENTS.stat().st_mtime_ns if PARENTS.exists() else None,SOURCES.stat().st_mtime_ns if SOURCES.exists() else None)
+ signature=(PATH.stat().st_ino,PATH.stat().st_mtime_ns,PATH.stat().st_size,plan_path.stat().st_mtime_ns if plan_path.exists() else None,PARENTS.stat().st_mtime_ns if PARENTS.exists() else None,SOURCES.stat().st_mtime_ns if SOURCES.exists() else None,HISTORICAL.stat().st_mtime_ns if HISTORICAL.exists() else None,(HISTORICAL.parent/'native-verification.json').stat().st_mtime_ns if (HISTORICAL.parent/'native-verification.json').exists() else None)
  if _CACHE.get('signature')==signature:return _CACHE['value']
  value=b.read_json(PATH,{})
  if value.get('phase')!='active':return None
@@ -40,8 +57,10 @@ def binding():
   source=b.read_json(SOURCES,{})
   require(hashlib.sha256(b.canonical(source)).hexdigest()==value['source_metadata_bindings_sha256'] and source.get('schema')=='mgs.archive.source.metadata.v1' and source.get('authority_message_id')==AUTHORITY and source.get('plan_sha256')==value['plan_sha256'],'NAMESPACE_SOURCE_BINDING_DIGEST')
   sources=source.get('bindings',{});require(set(sources)<={r['source_id'] for r in value['files'].values()},'NAMESPACE_SOURCE_BINDING_MEMBERSHIP');expected['source_metadata_bindings_sha256']=value['source_metadata_bindings_sha256']
+ historical=historical_reconciliation(value,plan)
+ if historical:expected['historical_reconciliation_sha256']=value['historical_reconciliation_sha256']
  require(value==expected,'NAMESPACE_PLAN_MEMBERSHIP')
- result={**value,'accepted_provider_parents':parents,'accepted_source_metadata':sources};_CACHE.update(signature=signature,value=result);return result
+ result={**value,'files':{**value['files'],**historical},'accepted_provider_parents':parents,'accepted_source_metadata':sources};_CACHE.update(signature=signature,value=result);return result
 
 def provider_root(d):
  value=binding()
@@ -129,7 +148,7 @@ def project_historical(entry):
  rec=override(entry)
  if not rec or not rec.get('provider_parent_id'):return entry
  require(entry.get('mapping_kind')=='historical_verified','NAMESPACE_PROVIDER_VIEW_BINDING')
- projected={**entry,'frozenArchiveParentId':entry['archiveParentId'],'archiveParentId':rec['provider_parent_id'],'namespace_authority':AUTHORITY}
+ projected={**entry,'frozenArchiveParentId':entry['archiveParentId'],'archiveParentId':rec['provider_parent_id'],'namespace_authority':rec.get('reconciliation_authority',AUTHORITY)}
  if rec.get('representation')=='provider_as_stock':
   require(rec['stock_id']==entry['archiveId'],'NAMESPACE_PROVIDER_VIEW_STOCK_ID');projected['approvedStockId']=entry['archiveId']
  return projected
