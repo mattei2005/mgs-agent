@@ -185,9 +185,12 @@ def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
                          if descriptor.get('reviewed_observed_copy_time') is True else None)
     from .shein_reviewed_targeting import validate_review
     accepted_targeting = validate_review(descriptor, state, checkpoint, get_message=get_message)
+    from .shein_reviewed_background import validate_review as validate_feature_review
+    accepted_creative_features = validate_feature_review(descriptor, state, checkpoint, get_message=get_message)
     return {'verified':True,'request_id':original['request_id'],'account_id':str(descriptor['account_id']),
             'accepted_schedule':accepted_schedule,
             'accepted_targeting':accepted_targeting,
+            'accepted_creative_features':accepted_creative_features,
             'campaign_ids':cids,'adset_ids':sids,'source_message_id':mid,'source_thread_id':descriptor['source_thread_id'],
             'start_now':True,'late_activation_authorized':late,'original_execution_started_at':state.get('execution_started_at'),
             'creation_payload_digest':content_digest(state['manifest']),'target_payload_digest':content_digest(state['target_manifest']),

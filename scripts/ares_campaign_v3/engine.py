@@ -1564,6 +1564,8 @@ class CampaignEngine:
                 quota_stage = "recovery"
             bundle_request_id = f"{request_id}:{account}:{bundle.index}:{quota_stage}"
             points = self._recovery_points(bundle, previous_failed) if previous_failed is not None else self._points(bundle)
+            from .shein_reviewed_background import extra_points
+            points += extra_points(previous_failed)
             try:
                 quota = self.quota.reserve((bundle.app_key, account), points, request_id=bundle_request_id)
             except QuotaBlocked as exc:
@@ -1596,6 +1598,8 @@ class CampaignEngine:
             _atomic_json(checkpoint_path, lane_result)
             progress_token = progress.CURRENT.set((record, lambda: _atomic_json(checkpoint_path, lane_result)))
             try:
+                from .shein_reviewed_background import resolve_bundle
+                bundle = resolve_bundle(self, bundle, transport, record)
                 mode = bundle.campaigns[0].mode
                 if previous_failed is not None:
                     if mode in {"clone_prestaged", "clone_page_switch"}:
@@ -1710,7 +1714,8 @@ class CampaignEngine:
         try:
             workers = max(1, min(len(plan.lanes), int(self.config.get("max_account_workers", 8))))
             with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="ares-v3-lane") as pool:
-                futures = {pool.submit(self._run_lane, account, bundles, manifest.request_id, manifest.digest): account for account, bundles in plan.lanes.items()}
+                from .shein_reviewed_background import submit_lane
+                futures = {submit_lane(pool, self._run_lane, account, bundles, manifest.request_id, manifest.digest): account for account, bundles in plan.lanes.items()}
                 for future in as_completed(futures):
                     account = futures[future]
                     lane_results[account] = future.result()

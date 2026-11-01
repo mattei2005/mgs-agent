@@ -10,6 +10,8 @@ import ares_archive_bridge as b
 SCHEMA='mgs.archive.physical.namespace.v1'
 AUTHORITY='1566510979838255326'
 PATH=b.DATA/'legacy-consolidation'/'binding.json'
+PARENTS=PATH.parent/'provider-parent-bindings.json'
+_CACHE={}
 class NamespaceError(b.ArchiveError):pass
 
 def require(value,reason):
@@ -19,8 +21,21 @@ def validate_binding(value):
  require(value.get('archive_root_id')==b.ARCHIVE_ROOT and value.get('provider_root_id') not in [None,b.ARCHIVE_ROOT,value.get('stock_root_id')],'NAMESPACE_ROOT_BINDING')
  require(isinstance(value.get('files'),dict) and isinstance(value.get('stock_moves'),dict) and isinstance(value.get('legacy_manager_folders'),dict),'NAMESPACE_SCHEMA');return value
 def binding():
+ if not PATH.exists():return None
+ plan_path=PATH.parent/'plan.json'
+ signature=(PATH.stat().st_ino,PATH.stat().st_mtime_ns,PATH.stat().st_size,plan_path.stat().st_mtime_ns if plan_path.exists() else None,PARENTS.stat().st_mtime_ns if PARENTS.exists() else None)
+ if _CACHE.get('signature')==signature:return _CACHE['value']
  value=b.read_json(PATH,{})
- return validate_binding(value) if value.get('phase')=='active' else None
+ if value.get('phase')!='active':return None
+ validate_binding(value);plan=b.read_json(plan_path,{})
+ require(plan.get('authority_message_id')==AUTHORITY and value.get('plan_sha256')==hashlib.sha256(b.canonical(plan)).hexdigest(),'NAMESPACE_PLAN_DIGEST')
+ expected={**plan.get('namespace',{}),'phase':'active','plan_sha256':value['plan_sha256']};parents={}
+ if value.get('provider_parent_bindings_sha256'):
+  native=b.read_json(PARENTS,{})
+  require(hashlib.sha256(b.canonical(native)).hexdigest()==value['provider_parent_bindings_sha256'] and native.get('schema')=='mgs.archive.provider.parents.v1' and native.get('authority_message_id')==AUTHORITY and native.get('plan_sha256')==value['plan_sha256'],'NAMESPACE_NATIVE_PARENT_BINDING')
+  parents=native.get('bindings',{});require(set(parents)==set(value['files']),'NAMESPACE_NATIVE_PARENT_MEMBERSHIP');expected['provider_parent_bindings_sha256']=value['provider_parent_bindings_sha256']
+ require(value==expected,'NAMESPACE_PLAN_MEMBERSHIP')
+ result={**value,'accepted_provider_parents':parents};_CACHE.update(signature=signature,value=result);return result
 
 def provider_root(d):
  value=binding()
@@ -38,7 +53,11 @@ def override(entry):
  if not value:return None
  rec=value['files'].get(entry.get('archiveId'))
  if not rec:return None
- require(all(rec.get(a)==entry.get(c) for a,c in [('archive_id','archiveId'),('source_id','sourceId'),('sha256','sha256'),('md5','md5'),('size','size')]),'NAMESPACE_FROZEN_IDENTITY_MISMATCH');return rec
+ require(all(rec.get(a)==entry.get(c) for a,c in [('archive_id','archiveId'),('source_id','sourceId'),('sha256','sha256'),('md5','md5'),('size','size')]),'NAMESPACE_FROZEN_IDENTITY_MISMATCH')
+ parent=value.get('accepted_provider_parents',{}).get(entry['archiveId'])
+ if parent:
+  require(parent.get('source_id')==entry['sourceId'] and parent.get('sha256')==entry['sha256'] and isinstance(parent.get('parent_id'),str),'NAMESPACE_PROVIDER_PARENT_IDENTITY');return {**rec,'provider_parent_id':parent['parent_id']}
+ return rec
 
 def effective_path(entry):
  rec=override(entry);return rec['provider_relative_parent'] if rec else entry['relativeParent']
@@ -88,9 +107,12 @@ def project_historical(entry):
  No new media, fabricated source object, or replacement logical ID is created.
  """
  rec=override(entry)
- if not rec or rec.get('representation')!='provider_as_stock':return entry
- require(entry.get('mapping_kind')=='historical_verified' and rec['stock_id']==entry['archiveId'] and rec.get('provider_parent_id'),'NAMESPACE_PROVIDER_VIEW_BINDING')
- return {**entry,'frozenArchiveParentId':entry['archiveParentId'],'archiveParentId':rec['provider_parent_id'],'approvedStockId':entry['archiveId'],'namespace_authority':AUTHORITY}
+ if not rec or not rec.get('provider_parent_id'):return entry
+ require(entry.get('mapping_kind')=='historical_verified','NAMESPACE_PROVIDER_VIEW_BINDING')
+ projected={**entry,'frozenArchiveParentId':entry['archiveParentId'],'archiveParentId':rec['provider_parent_id'],'namespace_authority':AUTHORITY}
+ if rec.get('representation')=='provider_as_stock':
+  require(rec['stock_id']==entry['archiveId'],'NAMESPACE_PROVIDER_VIEW_STOCK_ID');projected['approvedStockId']=entry['archiveId']
+ return projected
 
 def verify_migrated_delivery(d,row,entry,receipt):
  """Preserve old delivery receipt while proving its exact same-ID relocation."""

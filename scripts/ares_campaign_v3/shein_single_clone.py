@@ -385,7 +385,9 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
             raise RouteBlocked('ad name/status/issues mismatch')
         if str(ad.get('adset_id')) != str(target_set['id']):
             raise RouteBlocked('target adset association mismatch')
-        cp = expected['creative_payload']
+        from .shein_reviewed_background import effective, verify_creative
+        verify_creative(creative, expected['creative_payload'])
+        cp = effective(expected['creative_payload'])
         if cp.get('asset_feed_spec') or cp.get('object_story_spec'):
             if not media_creative_matches(creative, cp):
                 raise RouteBlocked('flexible media/copy/tracking readback mismatch')
