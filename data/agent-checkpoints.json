@@ -2372,6 +2372,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DRIVE-LEGACY-CONSOLIDATION-1566510979838255326",
+      "next_step": "Autorizacao nova1566510979838255326 responde a proposta de consolidacao historica apos novo padrao. Inventariar escopo nativo e cruzar providers/stock/catalogo/ACKs; preparar plano por IDs e backup antes de qualquer mudanca. Sem exclusao, ACL, credencial, campanhas ou ampliacao implicita de escopo; manter writer unico e locks.",
+      "objective": "Conciliar e reorganizar arvores antigas/pasta Nicolas/pilotos e criativos movidos ou renomeados, preservando IDs, reservas, historia e consumidores.",
+      "source": "context/creative-manager-storage-standard.md",
+      "state": "read_only_preflight",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-01T17:55:34+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
       "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
       "objective": "Ordem visual e valores de origem das despesas no Dash ago2026-dez2027; nomes SB e FX próprios",
@@ -8122,5 +8132,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T17:31:53+00:00"
+  "updated_at": "2026-11-01T17:55:34+00:00"
 }
