@@ -6,8 +6,8 @@
 - Thread: `1562078493498540042`.
 - Aprovação nova: `1566496381001146440`, em resposta ao padrão explicado em `1566496283479252993` e `1566495685820424293`.
 - Requisitos de origem: `1566493713373462549`.
-- Estado: **desenho aprovado; não implantado**. Este documento não comprova criação de pastas, mudança física de mídia, atualização dos consumidores nem alteração das skills Ares.
-- A implantação ponta a ponta depende de confirmação adicional para modificar as skills de outro agente, conforme `AGENT.md` Critical Subset item 10. A autorização geral de aplicação não substitui essa confirmação específica.
+- Confirmação adicional do conjunto, incluindo as duas skills Ares e seus espelhos: `1566497527719661640`, após delimitação em `1566497081265365043` (REPORT-INFRA) e explicação na thread. Isto supersede a pendência de autorização do desenho inicial, sem autorizar exclusões, ACL, credenciais ou campanhas.
+- Estado de execução: pastas preparadas e verificadas integralmente por SA; código e procedimentos em validação para ativação. O estado produtivo verificável é `data/ares/creative-ops/manager-storage-standard.json#/phase`, não o texto deste documento. Não confundir canário técnico com o primeiro pedido real de campanha.
 
 ## Escopo funcional aprovado
 
@@ -40,7 +40,7 @@ As fontes atuais ainda exigem outra topologia e outra semântica:
 - `creative-operations-mgs/references/manager-folder-delivery.md` instrui explicitamente o destino antigo.
 - `direct-traffic-shein-operations/references/general-campaign-fast-route.md` instrui pasta direta sob CRIATIVOS e preservação física após uso.
 
-Por isso, criar ou mover pastas sem atualizar consumidores e procedimentos não satisfaz a aprovação. Não iniciar mudança produtiva cosmética que deixe o Ares recusando os novos destinos. Confirmar especificamente as alterações nessas duas skills Ares e seus espelhos antes de editá-las; scripts/dados compartilhados continuam sujeitos a backup, testes e canário.
+As condições acima descrevem o preflight anterior à implementação; preservadas como diagnóstico, não como regras ativas concorrentes. A confirmação específica chegou em `1566497527719661640`. A nova rota reconhece exclusivamente os IDs do binding, preserva compatibilidade de pedidos legados em andamento, integra o finalizador SHEIN e fornece `confirm-use` com leitura Meta real para as demais rotas. Código, canário, fase ativa e primeiro uso produtivo são provas distintas.
 
 ## Critérios de aceite da implantação futura
 

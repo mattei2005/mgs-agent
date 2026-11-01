@@ -5,7 +5,7 @@ Policy bindings are provisioned by the existing isolated owner lane, then read
 by SA consumers. New paths never grant campaign or manager authorization.
 """
 from __future__ import annotations
-import argparse, contextlib, json, re, unicodedata, hashlib
+import argparse, contextlib, json, re, unicodedata, hashlib, fcntl, importlib.util
 from pathlib import Path
 import ares_archive_bridge as b
 import ares_archive_storage as storage
@@ -56,7 +56,7 @@ def validate_folder(d,fid,*,operation=None,fmt=None,manager=None,state=None):
  found=find_slot(fid);require(found is not None,'STANDARD_FOLDER_NOT_REGISTERED');assert found is not None;slot,actual=found
  require((operation is None or slot['operation']==operation) and (fmt is None or slot['format']==fmt) and (manager is None or slot['manager_code']==manager_code(manager)) and (state is None or actual==state),'STANDARD_FOLDER_PARTITION')
  m=storage.meta(d,fid);parent=storage.meta(d,slot['parent_id']);pool=storage.meta(d,slot['operation_id'])
- require(m.get('id')==fid and m.get('mimeType')==b.FOLDER and m.get('name')==slot_path(slot,actual)[-1] and m.get('parents')==[slot['parent_id']] and loc.stock_metadata_allowed(m),'STANDARD_FOLDER_NATIVE')
+ require(m.get('id')==fid and m.get('mimeType')==b.FOLDER and m.get('name')==slot_path(slot,actual)[-1] and m.get('parents')==[slot['parent_id']] and loc.stock_metadata_allowed(m) and m.get('capabilities',{}).get('canEdit') is True,'STANDARD_FOLDER_NATIVE')
  require(parent.get('name')==slot['format'] and parent.get('parents')==[slot['operation_id']] and loc.stock_metadata_allowed(parent),'STANDARD_FORMAT_NATIVE')
  require(pool.get('name')==slot['operation'] and pool.get('parents')==[loc.stock_root()] and loc.stock_metadata_allowed(pool),'STANDARD_OPERATION_NATIVE')
  p=policy();require(p is not None,'STANDARD_NOT_ACTIVE');assert p is not None
@@ -94,7 +94,10 @@ def mark_used(d,row,asset,assignment,request_id):
  require(after is not None,'STANDARD_USE_ARCHIVE_REQUIRED');assert after is not None
  require(after['stock_file_id']==record['stock_file_id'] and after['parents']==[target] and after['sha256Checksum']==record['sha256Checksum'],'STANDARD_USE_READBACK')
  result={**expected,'status':'verified'}
- b.atomic_json(path,result);return result
+ b.atomic_json(path,result)
+ first=HOME/'first-production-use.json'
+ if not first.exists():b.atomic_json(first,{**result,'observed_at':b.now_iso(),'acceptance_layer':'real_campaign_assignment_and_same_id_stock_readback'})
+ return result
 
 def apply_use_result(row,result):
  if not result:return
@@ -110,15 +113,57 @@ def verify_used_delivery(d,row,entry,delivery):
  require(all(proof.get(k)==v for k,v in expected.items()),'STANDARD_RETIREMENT_USE_PROOF')
  validate_assignment(proof.get('assignment',{}))
  require(proof['assignment']['campaign_id']==row.get('used_by') and proof['assignment']['ad_id']==row.get('meta_ad_id') and proof['assignment']['creative_id']==row.get('meta_creative_id'),'STANDARD_RETIREMENT_META_BINDING')
- require(delivery.get('schema')=='mgs.manager.delivery.receipt.v1' and delivery.get('authority_message_id')=='1565546229914411133' and delivery.get('status')=='verified' and delivery.get('logical_id')==entry['sourceId'] and delivery.get('provider_id')==entry['archiveId'] and delivery.get('stock_file_id')==entry['stockShortcutId'] and delivery.get('sha256')==entry['sha256'] and delivery.get('destination_parent_id')==proof['source_id'],'STANDARD_ORIGINAL_DELIVERY_PROOF')
+ found=find_slot(proof['folder_id']);require(found is not None,'STANDARD_RETIREMENT_PARTITION');assert found is not None
+ slot,_=found
+ require(delivery.get('schema')=='mgs.manager.delivery.receipt.v1' and delivery.get('authority_message_id')=='1565546229914411133' and delivery.get('status')=='verified' and delivery.get('logical_id')==entry['sourceId'] and delivery.get('provider_id')==entry['archiveId'] and delivery.get('stock_file_id')==entry['stockShortcutId'] and delivery.get('sha256')==entry['sha256'] and delivery.get('destination_parent_id')==slot['exclusive_id'] and proof['source_id'] in [slot['exclusive_id'],slot['used_id']],'STANDARD_ORIGINAL_DELIVERY_PROOF')
  validate_folder(d,proof['folder_id'],manager=proof['manager_code'],state='used')
  record=storage.resolve_media(entry['sourceId'],getattr(d,'token',None));require(record is not None,'STANDARD_USE_ARCHIVE_REQUIRED');assert record is not None
  require(record['parents']==[proof['folder_id']] and record['sha256Checksum']==entry['sha256'] and row.get('asset_path')==inventory_path(row,proof['folder_id']),'STANDARD_RETIREMENT_USED_READBACK')
  require(d.hashes(entry['archiveId'])=={k:entry[k] for k in ['size','md5','sha256']},'STANDARD_RETIREMENT_USED_BYTES');return record
 
+def verify_meta_assignment(row,request_id,common,token):
+ """Generic campaign reader: validates existing ad, never creates Meta objects."""
+ require(row.get('reservation_request_id')==request_id and row.get('meta_ad_id') and row.get('ad_account_id'),'STANDARD_USE_EXACT_REQUEST')
+ code,ad,_=common.graph_get(row['meta_ad_id'],token,{'fields':'id,account_id,campaign_id,adset_id,creative{id,object_story_spec}'})
+ require(code==200 and ad.get('id')==row['meta_ad_id'] and ad.get('account_id')==row['ad_account_id'] and ad.get('campaign_id')==row.get('used_by') and ad.get('creative',{}).get('id')==row.get('meta_creative_id'),'STANDARD_LIVE_META_IDENTITY')
+ spec=ad['creative'].get('object_story_spec',{});video=spec.get('video_data',{}).get('video_id');image=spec.get('link_data',{}).get('image_hash')
+ require((row.get('meta_video_id') and video==row['meta_video_id']) or (row.get('meta_image_hash') and image==row['meta_image_hash']),'STANDARD_LIVE_META_MEDIA')
+ result={'campaign_id':ad['campaign_id'],'adset_id':ad['adset_id'],'ad_id':ad['id'],'creative_id':ad['creative']['id']}
+ validate_assignment(result);return result
+
+def confirm_usage(asset_id,request_id,apply=False):
+ """Other campaign lanes invoke this after writing their real inventory use."""
+ inventory=b.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
+ def select():
+  rows=[json.loads(x) for x in inventory.read_text().splitlines() if x.strip()];hits=[r for r in rows if r.get('asset_id')==asset_id]
+  require(len(hits)==1,'STANDARD_UNIQUE_USAGE_LINEAGE');return rows,hits[0]
+ _,row=select();require(find_slot(row.get('manager_media_folder_id')) is not None,'STANDARD_USAGE_MANAGER_DESTINATION')
+ cfg=b.read_json(b.BASE/'data/ares/meta-ads/engine-v3/config.json',{});account=cfg.get('accounts',{}).get(str(row.get('ad_account_id')),{});require(account.get('token_item'),'STANDARD_USAGE_REGISTERED_ACCOUNT')
+ spec=importlib.util.spec_from_file_location('manager_standard_meta_reader',b.BASE/'scripts/ares-meta-common.py');require(spec is not None and spec.loader is not None,'STANDARD_META_READER');assert spec is not None and spec.loader is not None
+ common=importlib.util.module_from_spec(spec);spec.loader.exec_module(common);token,_=common.get_token_from_1password(account['token_item'])
+ assignment=verify_meta_assignment(row,request_id,common,token);snapshot=b.canonical(row)
+ with b.queue_lock():
+  with inventory.with_suffix(inventory.suffix+'.lock').open('a+') as lock:
+   fcntl.flock(lock,fcntl.LOCK_EX);rows,current=select();require(b.canonical(current)==snapshot,'STANDARD_USAGE_INVENTORY_CAS');d=b.Drive(apply)
+   record=storage.resolve_media(current['asset_drive_id'],d.token);require(record is not None,'STANDARD_USAGE_ARCHIVE_REQUIRED');assert record is not None
+   source=current['manager_media_folder_id'];found=find_slot(source);require(found is not None,'STANDARD_USAGE_MANAGER_DESTINATION');assert found is not None;slot,state=found
+   validate_folder(d,source,manager=slot['manager_code']);validate_folder(d,slot['used_id'],manager=slot['manager_code'],state='used')
+   require(record['sha256Checksum']==current['clean_checksum'] and record['parents']==[source],'STANDARD_USAGE_MEDIA_PARENT')
+   if state=='used' and current.get('manager_use_request_id')==request_id:
+    key=hashlib.sha256(b.canonical([request_id,current['asset_drive_id']])).hexdigest();old=b.read_json(HOME/('use-'+key+'.json'),{})
+    require(old.get('status')=='verified' and old.get('assignment')==assignment and old.get('stock_file_id')==record['stock_file_id'] and old.get('sha256')==current['clean_checksum'],'STANDARD_USAGE_REPLAY_PROOF')
+    return {'status':'verified' if apply else 'verified_plan','asset_id':asset_id,'destination':source,'same_ids':True,'remote_writes':0}
+   if not apply:return {'status':'verified_plan','asset_id':asset_id,'destination':slot['used_id'],'remote_writes':0}
+   HOME.mkdir(parents=True,exist_ok=True);backup=HOME/('inventory-before-use-'+hashlib.sha256(b.canonical([request_id,asset_id])).hexdigest()+'.jsonl')
+   if not backup.exists():backup.write_bytes(inventory.read_bytes())
+   result=mark_used(d,current,{'asset_drive_id':current['asset_drive_id'],'ready_parent_id':source,'drive_md5':record['md5Checksum']},assignment,request_id);apply_use_result(current,result)
+   payload=''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows);tmp=inventory.with_suffix('.manager-used.new');tmp.write_text(payload);tmp.replace(inventory);require(inventory.read_text()==payload,'STANDARD_USAGE_INVENTORY_READBACK')
+   return {'status':'verified','asset_id':asset_id,'destination':current['manager_media_folder_id'],'same_ids':True,'campaign_writes':0}
+
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['resolve','status']);p.add_argument('--operation');p.add_argument('--format',choices=['IMG','VID']);p.add_argument('--manager');p.add_argument('--state',choices=['exclusive','used'],default='exclusive');args=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['resolve','status','confirm-use']);p.add_argument('--operation');p.add_argument('--format',choices=['IMG','VID']);p.add_argument('--manager');p.add_argument('--state',choices=['exclusive','used'],default='exclusive');p.add_argument('--asset-id');p.add_argument('--request-id');p.add_argument('--apply',action='store_true');args=p.parse_args()
  if args.command=='resolve':print(json.dumps({'folder_id':destination(args.operation,args.format,args.manager,args.state),'state':args.state}))
+ elif args.command=='confirm-use':print(json.dumps(confirm_usage(args.asset_id,args.request_id,args.apply)))
  else:
-  value=policy();print(json.dumps({'active':bool(value),'slots':len(value['slots']) if value else 0}))
+  value=policy();first=b.read_json(HOME/'first-production-use.json',{});print(json.dumps({'active':bool(value),'slots':len(value['slots']) if value else 0,'first_production_use_verified':first.get('status')=='verified'}))
 if __name__=='__main__':main()

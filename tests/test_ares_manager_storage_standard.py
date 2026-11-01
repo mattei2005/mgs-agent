@@ -52,6 +52,19 @@ class StandardTests(unittest.TestCase):
   with patch.object(s,'policy',return_value=self.p):
    with self.assertRaises(s.StandardError):s.destination('SHEIN_US_EN','VID','Joe')
 
+ def test_generic_meta_identity_verified_without_campaign_write(self):
+  row={'reservation_request_id':'req','meta_ad_id':'345','ad_account_id':'999','used_by':'123','meta_creative_id':'456','meta_video_id':'567'}
+  class Reader:
+   def graph_get(self,*a):return 200,{'id':'345','account_id':'999','campaign_id':'123','adset_id':'234','creative':{'id':'456','object_story_spec':{'video_data':{'video_id':'567'}}}},{}
+  self.assertEqual(s.verify_meta_assignment(row,'req',Reader(),'offline')['ad_id'],'345')
+  row['ad_account_id']='other'
+  with self.assertRaises(s.StandardError):s.verify_meta_assignment(row,'req',Reader(),'offline')
+ def test_generic_wrong_media_is_blocked(self):
+  row={'reservation_request_id':'req','meta_ad_id':'345','ad_account_id':'999','used_by':'123','meta_creative_id':'456','meta_video_id':'567'}
+  class Reader:
+   def graph_get(self,*a):return 200,{'id':'345','account_id':'999','campaign_id':'123','adset_id':'234','creative':{'id':'456','object_story_spec':{'video_data':{'video_id':'WRONG'}}}},{}
+  with self.assertRaises(s.StandardError):s.verify_meta_assignment(row,'req',Reader(),'offline')
+
 class PipelineTests(unittest.TestCase):
  def test_finalizer_calls_transition_only_for_meta_confirmed_selected_asset(self):
   from ares_campaign_v3 import shein_media_handoff as handoff
