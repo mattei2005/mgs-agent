@@ -63,3 +63,7 @@ As condições acima descrevem o preflight anterior à implementação; preserva
 - `manager-standard/first-production-use.json`: será gravado pelo helper somente após atribuição de campanha real e readback do mesmo stock ID no novo fluxo. Não existe no fechamento técnico inicial, porque nenhuma linhagem produtiva está ainda nos destinos novos. A validação do primeiro pedido real continua distinta e não exige upload artificial do Rodolfo.
 
 Recuperações de validação preservadas nos artefatos: módulo novo ausente no RED inicial; interpretador sem dependência do renderer; fixture histórica acoplada à flag de layout viva; isolamento de módulos e imports de fixtures irmãos no PYTHONPATH. Foram corrigidos implementação/harness/fixture, sem relaxar guards produtivos ou instalar pacotes. Releitura mostrou espelho em revisão intermediária da própria alteração autorizada; sincronizado somente o parágrafo faltante e igualdade final conferida.
+
+## Consolidação histórica posterior
+
+O estado inicial acima não é mais a afirmação de que nenhum conteúdo antigo foi organizado. A execução autorizada em `1566510979838255326` está documentada em `context/creative-archive-legacy-consolidation.md`, com binding próprio, mesmas identidades e exceções explícitas. A árvore física antiga ficou em `CRIATIVOS/_ARQUIVO_FISICO`; foram classificados 25 Exclusivos e 60 Usados comprovados, sem reclassificar automaticamente 187 objetos ambíguos. Preservar as duas camadas de evidência. O primeiro uso de campanha nova continua separado do remanejamento de peças históricas.

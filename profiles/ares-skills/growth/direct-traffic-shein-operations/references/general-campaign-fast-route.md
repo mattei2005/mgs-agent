@@ -76,6 +76,10 @@ Verificar o reparo por duas provas independentes — tarefas administrativas e a
 
 O catálogo não prova que uma Page está delegada nem que uma conta vazia já possui parâmetros de criação aprovados. Não confundir `LIVE_SOURCE_READY` (modelo Meta/Page/pixel acessível) com mídia nova disponível ou serving validado. `PAGE_ACCESS_PENDING` e `NEEDS_ACCOUNT_REFERENCE` são pré-requisitos materiais aplicáveis igualmente a Rodolfo e ao gestor, não versões diferentes de procedimento.
 
+## Namespace do acervo e mídia histórica
+
+O layout físico antigo foi conciliado conforme `context/creative-archive-legacy-consolidation.md`. Usar o resolvedor e os destinos registrados; `_ARQUIVO_FISICO`, estruturas antigas e a pasta histórica UPLOAD MANUAL não são nova entrada nem pool livre. Pastas antigas rotuladas Usados sem prova de campanha permanecem em legado: não inferir uso, promover a Exclusivos ou remover reservas para satisfazer um pedido. Preservar IDs/requests/ACKs e a separação entre metadata nativa e registro lógico; o backend resolve as localizações aceitas por bindings exatos. Campanha nova continua exigindo o comando humano e os guards normais, sem duplicar mídia ou campanha durante recovery.
+
 ## Comando normal único
 
 ```text

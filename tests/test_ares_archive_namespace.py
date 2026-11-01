@@ -69,6 +69,18 @@ class NamespaceTests(unittest.TestCase):
   with patch.object(n,'binding',return_value=self.binding):
    projected=n.project_historical(entry)
    self.assertEqual(projected['archiveParentId'],'acceptedParentOffline001');self.assertEqual(projected['frozenArchiveParentId'],'frozenParentOffline001');self.assertNotIn('approvedStockId',projected)
+ def test_scoped_source_read_exception_never_relaxes_retirement_validation(self):
+  import hashlib
+  asset={**self.entry,'name':'canonical.jpg','mimeType':'image/jpeg','sourceParentId':'frozenParentOffline001','version':'1'}
+  rec={'job_id':'jobOffline001','snapshot_sha256':hashlib.sha256(n.b.canonical(asset)).hexdigest(),'parent_id':'intakeManagerOffline001','relative_parent':['SHEIN_US_ES','Ícaro']}
+  self.binding['accepted_source_metadata']={asset['sourceId']:rec};meta={'id':asset['sourceId'],'name':asset['name'],'mimeType':asset['mimeType'],'size':asset['size'],'md5Checksum':asset['md5'],'sha256Checksum':asset['sha256'],'parents':[rec['parent_id']],'driveId':n.b.SOURCE_DRIVE,'trashed':False,'version':'2'};cfg={'source_drive_id':n.b.SOURCE_DRIVE};job={'jobId':rec['job_id']}
+  class D:
+   def meta(d,fid):return {'mimeType':n.b.FOLDER,'driveId':n.b.SOURCE_DRIVE,'trashed':False}
+   def relative_parent(d,parent,root):return rec['relative_parent']
+  with patch.object(n,'binding',return_value=self.binding):
+   self.assertTrue(n.verify_reconciled_source(D(),meta,asset,cfg,job))
+   with self.assertRaises(n.b.ArchiveError):n.b.validate_source_metadata(meta,asset,cfg)
+   with self.assertRaises(n.NamespaceError):n.verify_reconciled_source(D(),{**meta,'parents':['otherOffline001']},asset,cfg,job)
  def test_migrated_exclusive_then_real_used_keeps_original_delivery_receipt(self):
   import ares_archive_storage as storage
   import ares_manager_storage_standard as standard

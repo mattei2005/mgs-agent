@@ -27,7 +27,7 @@ python3 /root/mgs-agent/scripts/ares_manager_delivery.py --asset-id <asset_id> -
 
 Sem `--apply`, só verifica/plano. Para novos pedidos, o destino deve ser a pasta Exclusivos registrada da operação, formato e gestor do inventário. A exigência antiga de filha direta de CRIATIVOS fica supersedida somente por esses bindings; pastas legadas são aceitas apenas no caminho de compatibilidade do executor. Não aceitar pastas arbitrárias, origem RAW, asset usado ou elegível. Não executar PATCH paralelo por fora deste runner nem mudar o handler genérico de status.
 
-5. A rota usa os locks fila→inventário, verifica ACK/par/checksums/capabilities, persiste intent CAS e move **o mesmo stock shortcut** clean. O provider binário permanece no arquivo READY imutável; o ID lógico e o RAW não mudam. Em resultado ambíguo, o mesmo intent é reconciliado pelo parent/hash antes de outro PATCH; não criar cópia nova.
+5. A rota usa os locks fila→inventário, verifica ACK/par/checksums/capabilities, persiste intent CAS e move **o mesmo stock shortcut** clean. O provider preserva ID/bytes/ACK e o ID lógico/RAW não muda; resolver localização pelo binding, não presumir que sua árvore física continue diretamente na raiz ou em READY. Em resultado ambíguo, o mesmo intent é reconciliado pelo parent/hash antes de outro PATCH; não criar cópia nova.
 6. Exigir recibo `mgs.manager.delivery.receipt.v1` em `30tb-archive/manager-delivery/delivery-<logical_id>.json`, parent final nativo, bytes e inventário. O inventário registra `manager_media_folder_id`, `manager_delivery_receipt`, `asset_stock_file_id`, `asset_provider_id` e `asset_path` real.
 7. Auditar o lote completo já entregue e congelar essa evidência antes da conclusão canônica. Com `requested_manager_final_parent` no plano, executar:
 
@@ -38,6 +38,10 @@ python3 /root/mgs-agent/scripts/ares_manual_intake_completion.py --execution-dir
 Exigir recibo de conclusão, batch `complete` e cobertura de todas as fontes no índice canônico. O verificador reconcilia staging READY, recibos de gestor e arquivo real, sem substituir o destino final por READY. Em continuação de lote já concluído, preservar plano e auditoria e confirmar `already_complete`; não regravar a evidência com novos timestamps, pois seu hash integra a prova de conclusão.
 8. A retirada é etapa separada do controlador existente. A validação aceita o parent de gestor **somente** para clean com recibo exato, policy ativa e inventário compatível. RAW, provider e arquivo mantêm seus paths/ACKs. Não executar DELETE nem alterar limites/autorização da retirada.
 9. Reconciliar também o manifesto de retomada original, o estado por fase e o checkpoint: marcar o pedido encerrado, preservar o bloqueio anterior como histórico supersedido e remover instruções de próxima ação já cumpridas. Separar `dry_run_remote_writes=0` da indicação de execução real; não deixar um marcador de simulação parecer ausência de writes após a entrega. Comunicar contagens, link da pasta efetiva e mapa completo original→final. Só após auditoria e conclusão canônica remover mídia transitória local; preservar manifestos e recibos.
+
+## Acervo legado e namespace físico
+
+Consultar `context/creative-archive-legacy-consolidation.md` e o binding `30tb-archive/legacy-consolidation/`. As árvores antigas, pilotos e estruturas técnicas foram preservados sob `CRIATIVOS/_ARQUIVO_FISICO`, sem nova entrada de upload. Novos pedidos continuam usando os destinos registrados; nomes de pastas legadas não provam uso nem liberam reservas. Exceções ambíguas ficam preservadas e fora do pool até conciliação. Ler mídia pelo resolvedor canônico, que mantém IDs/ACKs e separa metadata nativa do registro lógico. Não criar árvores paralelas, reescrever provas antigas, retornar material a READY nem mover/apagar fontes no intake para silenciar alertas.
 
 ## Testes e segurança
 
