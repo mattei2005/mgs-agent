@@ -1,0 +1,54 @@
+# Padrão aprovado de armazenamento criativo por gestor
+
+## Autoridade e estado
+
+- Dono: Rodolfo Mattei (`344196393512075265`).
+- Thread: `1562078493498540042`.
+- Aprovação nova: `1566496381001146440`, em resposta ao padrão explicado em `1566496283479252993` e `1566495685820424293`.
+- Requisitos de origem: `1566493713373462549`.
+- Estado: **desenho aprovado; não implantado**. Este documento não comprova criação de pastas, mudança física de mídia, atualização dos consumidores nem alteração das skills Ares.
+- A implantação ponta a ponta depende de confirmação adicional para modificar as skills de outro agente, conforme `AGENT.md` Critical Subset item 10. A autorização geral de aplicação não substitui essa confirmação específica.
+
+## Escopo funcional aprovado
+
+Aplicar o mesmo padrão a todos os gestores registrados da operação correspondente, não apenas Nicolas. Resolver a lista vigente em `scripts/ares_upload_context_layout.py` e `data/ares/creative-ops/30tb-archive/upload-context-layout.json`; não inferir novos gestores, operações ou permissões. No preflight foram identificados Ícaro, Geizian, Isliago, Joe, Kelly e Nicolas.
+
+Entrada permanece o mesmo `UPLOAD MANUAL` no Drive MGS (`1ARBvLammWUHuAclNmcriwkkgeedKryBd`); agentes continuam exclusivamente com a Service Account canônica. O executor owner de 30 TB permanece isolado e aprovado, sem fallback de autenticação dos agentes.
+
+Destino de trabalho: `MGS-ARQUIVO/CRIATIVOS/<OPERACAO>/<IMG|VID>/`:
+
+- `01_READY`: estoque comum, tecnicamente tratado e disponível para distribuição, respeitando o inventário de elegibilidade.
+- `<NOME> - Exclusivos`: reservado ao gestor, ainda sem utilização confirmada. Não disponibilizar automaticamente no pool comum.
+- `<NOME> - Usados`: peças com utilização confirmada nas campanhas do gestor. O nome da pasta, isoladamente, não é prova suficiente para inventar uso Meta ou preencher IDs de campanha.
+
+Manter originais e histórico fora do pool disponível, com linhagem e hashes preservados. Não presumir que todo conteúdo de `99_LEGACY` seja exclusivamente original.
+
+## Dois fluxos
+
+1. Kelly envia arquivos na entrada MGS e avisa o Ares: tratar, arquivar original e tratado nos 30 TB, separar operação e formato e disponibilizar o tratado em `01_READY`, salvo destinação específica expressa. O nome do remetente não deve, sozinho, substituir a intenção do pedido.
+2. Gestor envia na mesma entrada e solicita entrega própria, podendo também pedir campanhas no mesmo pedido: Ares trata, arquiva e entrega em `<NOME> - Exclusivos`, sem exposição ao estoque comum; executa campanhas somente pela autoridade e pedido válidos da origem. Após readback do uso real, somente os membros utilizados passam para `<NOME> - Usados`. Falha, bloqueio e saldo não utilizado permanecem exclusivos, com o mesmo request e reserva.
+
+Essa organização não autoriza criar campanhas agora, alterar budgets/estratégias/início, reutilizar material usado entre gestores, trocar credenciais, ACL, excluir arquivos ou reprocessar criativos já entregues.
+
+## Preflight confirmado e bloqueio de implantação
+
+As fontes atuais ainda exigem outra topologia e outra semântica:
+
+- `scripts/ares_manager_delivery.py::exact_folder` exige pasta homônima do gestor como filha direta do estoque `CRIATIVOS`; `verify_delivered` também fixa o caminho anterior.
+- `scripts/ares_campaign_v3/shein_grouped_media.py::manager_folder` valida o modelo anterior e não reconhece a nova combinação operação/formato/Exclusivos.
+- `scripts/ares_campaign_v3/shein_media_handoff.py::finalize_ready_assets` preserva fisicamente a pasta do gestor, sem a transição Exclusivos para Usados.
+- `creative-operations-mgs/references/manager-folder-delivery.md` instrui explicitamente o destino antigo.
+- `direct-traffic-shein-operations/references/general-campaign-fast-route.md` instrui pasta direta sob CRIATIVOS e preservação física após uso.
+
+Por isso, criar ou mover pastas sem atualizar consumidores e procedimentos não satisfaz a aprovação. Não iniciar mudança produtiva cosmética que deixe o Ares recusando os novos destinos. Confirmar especificamente as alterações nessas duas skills Ares e seus espelhos antes de editá-las; scripts/dados compartilhados continuam sujeitos a backup, testes e canário.
+
+## Critérios de aceite da implantação futura
+
+- Inventário e snapshot atuais, sem writer paralelo e com locks canônicos.
+- Preparar/validar tabela de pastas exatas por operação, formato e gestor; criação idempotente pelo componente owner existente, sem ownership SA indevido.
+- Preservar IDs, atalhos, providers, hashes, reservas, pedidos e ACKs; não mesclar binários e atalhos apenas pelo nome.
+- Não reclassificar o histórico como Usados/Exclusivos sem evidência; registrar exceções não resolvidas.
+- Testes de entrega e consumo de Exclusivos, uso parcial, falha de campanha, replay e isolamento entre gestores/operações.
+- Canário real de leitura/entrega e readback pelos consumidores autorizados, sem criar campanha de teste ou mídia artificial produtiva.
+- Atualização do catálogo e verificadores em conjunto; nenhum green slice encerra incidentes fora de sua cobertura.
+- Fechamento com resultado real e pendências separadas. Limpeza de pilotos/pastas vazias, atribuição de movimentos e deduplicação de cron permanecem trabalhos distintos e não podem ser declarados resolvidos por este documento.

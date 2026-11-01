@@ -57825,6 +57825,23 @@
       "updated_at": "2026-11-01T16:50:21.507978+00:00",
       "report_infra_message_id": "1566494622711156777",
       "report_infra_readback": true
+    },
+    {
+      "id": "creative-manager-standard-design-1566496381001146440",
+      "agent": "zeus",
+      "type": "approved_design_pending_critical_skill_change",
+      "status": "blocked_on_specific_ares_skill_confirmation",
+      "source_message_id": "1566496381001146440",
+      "paths": [
+        "/root/mgs-agent/context/creative-manager-storage-standard.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "verification": "Read-only code/skills preflight proves old root manager destination and preserve-manager-folder finalizer conflict with approved new design. No Drive, campaign, permission, credential, script or Ares skill mutations.",
+      "report_infra_status": "sent_verified",
+      "updated_at": "2026-11-01T17:00:07.599177+00:00",
+      "report_infra_message_id": "1566497081265365043",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
