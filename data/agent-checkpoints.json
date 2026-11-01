@@ -3093,12 +3093,12 @@
     {
       "agent": "zeus",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
-      "next_step": "Jobd476a2649595 unico em01/11/2026 16:28:25Eastern, apos estimativa Snap16:20; verificar core22,Livepatch,3gateways e transacao. Se adiado, manter mesmo checkpoint/sucessor unico ate02/11 12hET sem forcar. Nao instalar/reiniciar/alterar timer.",
+      "next_step": "core22 permanece2955/candidato2987; tentativa nativa16:23 sem oferta; proxima estimativa01/11 21:57ET. Sem sucessor: Hermes proibe criacao recursiva de cron. Zeus precisa prover checker em superficie autorizada nao-cron apos proxima tentativa, limite02/11 12hET; nao forcar/instalar/reiniciar/alterar timer. Jobd476a2649595 consumido1/1.",
       "objective": "Aguardar refresh automatico core22 no Hostinger e avisar resultado validado; nao forcar update",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/snap-core22-followup-1566497067512369283/job-readback.json",
-      "state": "scheduled_readonly_followup",
+      "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/snap-core22-automatic-20261101-observation.json",
+      "state": "pending_native_refresh_followup_executor_blocked",
       "thread_id": "1565713769789657239",
-      "updated_at": "2026-11-01T17:03:54+00:00"
+      "updated_at": "2026-11-01T21:30:37+00:00"
     },
     {
       "agent": "zeus",
@@ -8172,5 +8172,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:39:12+00:00"
+  "updated_at": "2026-11-01T21:30:37+00:00"
 }
