@@ -57999,6 +57999,34 @@
       "status": "layout_validated_with_preserved_historical_exceptions",
       "type": "same_id_archive_namespace_and_catalogue_reconciliation",
       "updated_at": "2026-11-01T19:09:42.572846+00:00"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261101-1402",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "full_financial_refresh_validated_historical_d_qualified",
+      "updated_at": "2026-11-01T14:30:04.713790-05:00",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261101T140312342125/closure-current.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261101T140312342125/verify-closure.py"
+      ],
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "preserved_h": 0,
+        "card_proofs_updated": 1,
+        "pending_d": 0,
+        "historical_blank_d": 35,
+        "historical_blank_d_no_instrument_proof": 34,
+        "lease_free": true,
+        "other_sheet_data_unchanged": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
