@@ -126,10 +126,14 @@ def apply(max_actions=60):
   fcntl.flock(intake,fcntl.LOCK_EX)
   with b.queue_lock():
    state=b.read_json(STATE,{'status':'applying','done':{}});d=b.Drive(True);cfg=b.read_json(b.CONFIG);binding_path=b.DATA/'owner-connector/stock-layout-binding.json';stock_binding=b.read_json(binding_path)
+   if state.get('status') in ['applied_pending_independent_validation','validated']:return {'status':'already_applied','remote_writes':0}
    if 'barrier_before' not in state:
     require(not cfg.get('control_cutover_in_progress') and stock_binding['phase']=='active','LEGACY_OTHER_CUTOVER_ACTIVE');state['barrier_before']={'control_cutover_in_progress':cfg.get('control_cutover_in_progress',False),'stock_phase':stock_binding['phase']};b.atomic_json(STATE,state)
    cfg['control_cutover_in_progress']=True;stock_binding['phase']='transition';b.atomic_json(b.CONFIG,cfg);b.atomic_json(binding_path,stock_binding)
-   namespace_binding={**plan['namespace'],'phase':'active','plan_sha256':hashlib.sha256(b.canonical(plan)).hexdigest()};b.atomic_json(namespace.PATH,namespace_binding);namespace.provider_root(d)
+   namespace_binding={**plan['namespace'],'phase':'active','plan_sha256':hashlib.sha256(b.canonical(plan)).hexdigest()};old_namespace=b.read_json(namespace.PATH,{})
+   if old_namespace.get('provider_parent_bindings_sha256'):
+    require(old_namespace.get('plan_sha256')==namespace_binding['plan_sha256'],'LEGACY_NAMESPACE_PIN_CONFLICT');namespace_binding['provider_parent_bindings_sha256']=old_namespace['provider_parent_bindings_sha256']
+   b.atomic_json(namespace.PATH,namespace_binding);namespace.provider_root(d)
    completed=0
    for a in plan['actions']:
     if a['id'] in state['done'] and state['done'][a['id']]['status']=='verified':continue
@@ -143,6 +147,8 @@ def apply(max_actions=60):
 
 def finish():
  plan=b.read_json(PLAN);state=b.read_json(STATE);require(plan and state and all(state['done'].get(a['id'],{}).get('status')=='verified' for a in plan['actions']),'LEGACY_MOVES_INCOMPLETE')
+ full=b.read_json(ART/'migrated-consumer-full-byte-validation.json',{});canary=b.read_json(ART/'namespace-nonempty-canary.json',{})
+ require(full.get('all_passed') is True and full.get('files')==len(plan['namespace']['files']) and canary.get('rollback_verified') is True,'LEGACY_CONSUMER_ACCEPTANCE_REQUIRED')
  inventory=b.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
  with (b.DATA/'.intake-state.lock').open('a+') as intake:
   fcntl.flock(intake,fcntl.LOCK_EX)

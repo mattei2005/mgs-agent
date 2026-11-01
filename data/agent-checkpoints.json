@@ -1733,12 +1733,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1566520095373525165",
-      "next_step": "Validar review tipado, selos, IDs e guard; retomar mesmo request exclusivamente pelo Engine; QA integral e readback ACTIVE",
+      "next_step": "Nenhuma pendencia do pedido; nao repetir criacao/ativacao. Serving nao comprovado por status.",
       "objective": "Concluir duplicacao 011 para 012 Mavroa G002 com delta de feature aprovado",
-      "source": "data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1566520095373525165/state.json",
-      "state": "recovery_pending; shells 120252367253530326/120252367254870326 paused; meta100/3858293; review1566522041530843238 autoriza somente image_background_gen opt_out; manutencao tecnica separada sem writes meta",
+      "source": "data/ares/meta-ads/audit/shein/feature-review-1566522041530843238/final-verification.json",
+      "state": "complete_verified_active; c012 120252367253530326; 1 conjunto e 2 anuncios active; usd100/dia cost_cap80; qa renderizado exato; image_background_gen opt_out aprovado; fonte preservada; mesmos shells/manifests/relogio; ressalvas posts novos e flags age/gender",
       "thread_id": "1558126806127611966",
-      "updated_at": "2026-11-01T18:40:31+00:00"
+      "updated_at": "2026-11-01T18:46:43+00:00"
     },
     {
       "agent": "ares",
@@ -8142,5 +8142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T18:40:31+00:00"
+  "updated_at": "2026-11-01T18:46:43+00:00"
 }

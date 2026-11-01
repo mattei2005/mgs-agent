@@ -119,9 +119,17 @@ def verify_migrated_delivery(d,row,entry,receipt):
  import ares_archive_storage as storage
  import ares_manager_storage_standard as standard
  rec=stock_move(entry);require(rec is not None,'NAMESPACE_DELIVERY_MIGRATION_REQUIRED');assert rec is not None
- require(rec.get('inventory_asset_id')==row.get('asset_id') and rec.get('to_parent')==row.get('manager_media_folder_id'),'NAMESPACE_DELIVERY_INVENTORY')
+ require(rec.get('inventory_asset_id')==row.get('asset_id'),'NAMESPACE_DELIVERY_INVENTORY')
+ target=row.get('manager_media_folder_id');state=rec['state']
+ if target!=rec['to_parent']:
+  found=standard.find_slot(rec['to_parent']);require(found is not None and found[1]=='exclusive','NAMESPACE_DELIVERY_USE_CHAIN_SOURCE');assert found is not None;slot,_=found
+  request_id=row.get('manager_use_request_id');require(isinstance(request_id,str) and target==slot['used_id'],'NAMESPACE_DELIVERY_USE_CHAIN_TARGET')
+  key=hashlib.sha256(b.canonical([request_id,row['asset_drive_id']])).hexdigest();use=b.read_json(standard.HOME/('use-'+key+'.json'),{})
+  expected={'schema':'mgs.manager.standard.use.v1','authority_message_id':standard.AUTHORITY,'status':'verified','request_id':request_id,'asset_id':row['asset_id'],'logical_id':entry['sourceId'],'stock_file_id':rec['stock_id'],'source_id':rec['to_parent'],'folder_id':target,'sha256':entry['sha256'],'manager_code':rec['manager_code']}
+  require(all(use.get(k)==v for k,v in expected.items()),'NAMESPACE_DELIVERY_USE_CHAIN_PROOF');assignment=use.get('assignment',{});standard.validate_assignment(assignment)
+  require(assignment['campaign_id']==row.get('used_by') and assignment['ad_id']==row.get('meta_ad_id') and assignment['creative_id']==row.get('meta_creative_id'),'NAMESPACE_DELIVERY_USE_CHAIN_ASSIGNMENT');state='used'
  require(receipt.get('schema')=='mgs.manager.delivery.receipt.v1' and receipt.get('status')=='verified' and receipt.get('authority_message_id')=='1565546229914411133' and receipt.get('logical_id')==entry['sourceId'] and receipt.get('stock_file_id')==rec['stock_id'] and receipt.get('provider_id')==entry['archiveId'] and receipt.get('sha256')==entry['sha256'] and receipt.get('destination_parent_id')==rec['from_parent'],'NAMESPACE_ORIGINAL_DELIVERY_RECEIPT')
- standard.validate_folder(d,rec['to_parent'],manager=rec['manager_code'],state=rec['state'])
+ standard.validate_folder(d,target,manager=rec['manager_code'],state=state)
  record=storage.resolve_media(entry['sourceId'],getattr(d,'token',None));require(record is not None,'NAMESPACE_MIGRATED_MEDIA');assert record is not None
- require(record['parents']==[rec['to_parent']] and record['sha256Checksum']==entry['sha256'] and record['name']==row['canonical_filename'],'NAMESPACE_MIGRATED_DELIVERY_READBACK')
+ require(record['parents']==[target] and record['sha256Checksum']==entry['sha256'] and record['name']==row['canonical_filename'],'NAMESPACE_MIGRATED_DELIVERY_READBACK')
  require(d.hashes(entry['archiveId'])=={k:entry[k] for k in ['size','md5','sha256']},'NAMESPACE_MIGRATED_DELIVERY_BYTES');return record
