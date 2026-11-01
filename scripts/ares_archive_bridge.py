@@ -323,6 +323,11 @@ class Drive:
         out=[];seen=set();cur=parent
         for _ in range(30):
             if cur==root:return list(reversed(out))
+            if root==ARCHIVE_ROOT:
+                import ares_archive_namespace as namespace
+                if namespace.is_provider_boundary(cur,root):
+                    if namespace.provider_root(self)!=cur:raise ArchiveError('NAMESPACE_ROOT_CHANGED')
+                    return list(reversed(out))
             if cur in seen:raise ArchiveError('ANCESTRY_CYCLE')
             seen.add(cur);m=self.meta(cur)
             if m.get('trashed') or len(m.get('parents',[]))!=1:raise ArchiveError('ANCESTRY')
@@ -420,8 +425,10 @@ def reconcile(d,c,job_id,apply=False):
         item=next(x for x in r['assets'] if x['sourceId']==a['sourceId'] and x['role']==a['role'])
         m=d.meta(item['archiveId'])
         if m.get('trashed') or m.get('driveId') or not any(x.get('emailAddress')==ACCOUNT for x in m.get('owners',[])):raise ArchiveError('COPIED_OWNER_OR_STATE')
-        if m.get('size')!=a['size'] or m.get('md5Checksum')!=a['md5'] or m.get('name')!=a['name']:raise ArchiveError('COPIED_METADATA')
-        if len(m.get('parents',[]))!=1 or d.relative_parent(m['parents'][0],ARCHIVE_ROOT)!=a['relativeParent']:raise ArchiveError('COPIED_PATH')
+        import ares_archive_namespace as namespace
+        namespace_entry={**a,'archiveId':m['id']}
+        if m.get('size')!=a['size'] or m.get('md5Checksum')!=a['md5'] or m.get('name')!=namespace.expected_provider_name(namespace_entry,a['name']):raise ArchiveError('COPIED_METADATA')
+        if len(m.get('parents',[]))!=1 or d.relative_parent(m['parents'][0],ARCHIVE_ROOT)!=namespace.effective_path(namespace_entry):raise ArchiveError('COPIED_PATH')
         if any(p.get('type') in ('anyone','domain') for p in m.get('permissions',[])):raise ArchiveError('COPIED_PUBLIC')
         import ares_archive_retirement as retirement
         source=retirement.source_state(d,c,job,a)

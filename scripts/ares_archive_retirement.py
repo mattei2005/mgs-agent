@@ -114,7 +114,8 @@ def delete_conditionally(d,sid,etag):
 def check_copy(d,asset,entry):
     import ares_archive_storage as storage
     record=storage.media_record(entry,storage.meta(d,entry['archiveId']),storage.meta(d,entry['stockShortcutId']))
-    if record['name']!=asset['name'] or record['mimeType']!=asset['mimeType'] or d.relative_parent(record['provider_metadata']['parents'][0],b.ARCHIVE_ROOT)!=asset['relativeParent']:raise RetirementError('RETIREMENT_ARCHIVE_PATH')
+    import ares_archive_namespace as namespace
+    if record['name']!=asset['name'] or record['mimeType']!=asset['mimeType'] or d.relative_parent(record['provider_metadata']['parents'][0],b.ARCHIVE_ROOT)!=namespace.effective_path(entry):raise RetirementError('RETIREMENT_ARCHIVE_PATH')
     import ares_archive_locations as locations
     stock_path=locations.stock_parent(d,record['stock_metadata']['parents'][0])
     allowed_status=['99_LEGACY'] if asset['role']=='original' else ['01_READY','02_TESTING','03_TESTED','04_WINNERS','05_REJECTED']

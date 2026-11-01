@@ -174,7 +174,8 @@ class Engine:
   with self.folder_lock:
    self.check_running();return self._ensure_path(names)
  def _ensure_path(self,names):
-  validate_path(names);parent=b.ARCHIVE_ROOT
+  import ares_archive_namespace as namespace
+  validate_path(names);parent=namespace.provider_root(self.owner);self.owner.parents.add(parent)
   for name in names:
    cache=(parent,name)
    if cache in self.folder_cache:

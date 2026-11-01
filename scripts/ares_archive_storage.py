@@ -12,6 +12,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import ares_archive_bridge as b
 import ares_archive_locations as locations
+import ares_archive_namespace as namespace
 SHORTCUT='application/vnd.google-apps.shortcut'
 class StorageError(b.ArchiveError):pass
 
@@ -21,9 +22,9 @@ def media_record(entry,physical,stock):
     if str(physical.get('size'))!=str(entry.get('size')) or physical.get('md5Checksum')!=entry.get('md5') or (physical.get('sha256Checksum') is not None and physical['sha256Checksum']!=entry['sha256']):raise StorageError('ARCHIVE_CONTENT_CHANGED')
     if len(physical.get('parents',[]))!=1 or (entry.get('archiveParentId') and physical['parents']!=[entry['archiveParentId']]):raise StorageError('ARCHIVE_PARENT_CHANGED')
     if any(p.get('type') in ['domain','anyone'] for p in physical.get('permissions',[])):raise StorageError('ARCHIVE_PUBLIC')
-    if stock.get('id')!=entry.get('stockShortcutId') or stock.get('mimeType')!=SHORTCUT or not locations.stock_metadata_allowed(stock) or stock.get('trashed') is not False or len(stock.get('parents',[]))!=1 or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or stock.get('name')!=physical['name']:raise StorageError('STOCK_SHORTCUT_CHANGED')
+    if stock.get('id')!=entry.get('stockShortcutId') or stock.get('mimeType')!=SHORTCUT or not locations.stock_metadata_allowed(stock) or stock.get('trashed') is not False or len(stock.get('parents',[]))!=1 or stock.get('shortcutDetails',{}).get('targetId')!=physical['id'] or stock.get('properties',{}).get('mgsArchiveLogicalSource')!=entry['sourceId'] or not namespace.names_match(entry,physical,stock):raise StorageError('STOCK_SHORTCUT_CHANGED')
     capabilities={**stock.get('capabilities',{}),'canDownload':physical.get('capabilities',{}).get('canDownload',False)}
-    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':physical['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock.get('driveId'),'parents':list(stock['parents']),'trashed':False,'capabilities':capabilities,'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry.get('jobId'),'lineage_id':entry['lineageId']}
+    return {'record_kind':'mgs.logical.media.v1','storage_backend':'gmail_archive','id':entry['sourceId'],'logical_source_id':entry['sourceId'],'provider_id':physical['id'],'stock_file_id':stock['id'],'name':stock['name'],'mimeType':physical['mimeType'],'size':physical['size'],'md5Checksum':physical['md5Checksum'],'sha256Checksum':entry['sha256'],'driveId':stock.get('driveId'),'parents':list(stock['parents']),'trashed':False,'capabilities':capabilities,'provider_metadata':physical,'stock_metadata':stock,'archive_job_id':entry.get('jobId'),'lineage_id':entry['lineageId']}
 
 def require_registered_mapping(entry,index):
     job=index.get('verified_jobs',{}).get(entry.get('jobId'))
@@ -85,12 +86,12 @@ def resolve_media(source_id,token=None):
     if entry.get('mapping_kind')=='historical_verified':
         d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry.get('stockShortcutId') or source_id)
         require_historical_ack(d,entry)
-        if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=entry['relativeParent']:raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
+        if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=namespace.effective_path(entry):raise StorageError('HISTORICAL_ARCHIVE_PATH_CHANGED')
         locations.stock_parent(d,stock['parents'][0])
         return historical_media_record(entry,physical,stock)
     if not entry.get('stockShortcutId'):raise StorageError('ARCHIVE_STOCK_ALIAS_NOT_READY')
     d=drive(token);physical=meta(d,entry['archiveId']);stock=meta(d,entry['stockShortcutId'])
-    if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=entry['relativeParent']:raise StorageError('ARCHIVE_PATH_CHANGED')
+    if d.relative_parent(physical['parents'][0],b.ARCHIVE_ROOT)!=namespace.effective_path(entry):raise StorageError('ARCHIVE_PATH_CHANGED')
     locations.stock_parent(d,stock['parents'][0])
     return media_record(entry,physical,stock)
 

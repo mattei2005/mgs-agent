@@ -14,6 +14,7 @@ import ares_archive_locations as loc
 import ares_archive_storage as storage
 import ares_upload_context_layout as layout
 import ares_manager_storage_standard as standard
+import ares_archive_namespace as namespace
 POLICY=b.BASE/'data/ares/creative-ops/manager-delivery-policy.json'
 RECEIPTS=b.DATA/'manager-delivery'
 INVENTORY=b.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
@@ -44,6 +45,8 @@ def exact_folder(d,manager,target,row=None):
     require(manager in layout.MANAGERS.values(),'MANAGER_UNREGISTERED')
     if standard.find_slot(target):
         return standard.validate_folder(d,target,operation=row.get('operation') if row else None,fmt=row.get('format') if row else None,manager=manager,state='exclusive')
+    relocated=namespace.legacy_manager_folder(d,manager,target)
+    if relocated:return relocated
     expected=loc.stock_folder_for_path(d,[manager])
     require(expected==target,'MANAGER_DESTINATION_MISMATCH')
     m=storage.meta(d,target)
@@ -81,6 +84,7 @@ def verify_delivered(d,asset,entry):
     found=[r for r in rows if r.get('asset_id')==entry.get('lineageId') and r.get('asset_drive_id')==asset['sourceId']]
     require(len(found)==1,'MANAGER_UNIQUE_INVENTORY')
     row=found[0];receipt=b.read_json(RECEIPTS/('delivery-'+asset['sourceId']+'.json'),{})
+    if namespace.stock_move(entry):return namespace.verify_migrated_delivery(d,row,entry,receipt)
     if row.get('manager_storage_state')=='used':
         return standard.verify_used_delivery(d,row,entry,receipt)
     record=verify_receipt(d,row,entry,receipt)
@@ -95,6 +99,8 @@ def verify_plan(d,plan,rows,index):
         require(len(selected)==1,'MANAGER_PLAN_UNIQUE_LINEAGE');row=selected[0]
         receipt=b.read_json(RECEIPTS/('delivery-'+row.get('asset_drive_id','')+'.json'),{})
         resolved_target=delivery_target(d,row,target,receipt)
+        migration_entry=index.get('mappings',{}).get(row.get('asset_drive_id'),{})
+        resolved_target=namespace.effective_stock_parent(migration_entry,resolved_target)
         require(row.get('source_manager')==plan['manager'] and row.get('manager_media_folder_id')==resolved_target,'MANAGER_PLAN_TARGET')
         entry=index['mappings'][row['asset_drive_id']]
         verify_delivered(d,{'role':'clean','sourceId':row['asset_drive_id']},entry)
