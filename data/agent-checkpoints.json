@@ -7433,12 +7433,12 @@
     {
       "agent": "ares",
       "id": "shein-1566472708382920776",
-      "next_step": "Executor administrativo deve reler Page/business/tarefas, aplicar apenas uniao ADVERTISE/ANALYZE sob autorizacao canonica e devolver recibo nesta thread. Ares relera acesso corporativo original e retomara dry-run/execute mesmo request sem novos parametros ou nova aprovacao de reparo.",
+      "next_step": "Respeitar cooldown central de 305s; retomar mesmo request pela rota campaign --confirm-execute. Readback-only do bundle1 sem replay; continuar bundles restantes e QA integral antes de activate_verified.",
       "objective": "Duplicar C011 cinco vezes na Mavroa-US-SHEIN-ES-04-G004, USD150 diarios por campanha, COCAP USD0.60, agora",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/preflight-blockers/shein-1566472708382920776/admin-handoff.json",
-      "state": "repair_authorized_admin_dependency: rodolfo autorizou reparo da page fonte para pedido atual e futuros equivalentes na mensagem 1566474001713336471. contrato e registry validados. get corporativo ainda code10; post da dependência bloqueado localmente. handoff administrativo zeus 1566474404303474742 entregue e confirmado por get/mention, aceite e execucao ainda nao confirmados. zero campaign writes.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1566472708382920776/state.json",
+      "state": "recovery_pending: provisioning zeus independentemente verificado por get corporativo e tarefas advertise/analyze. dry-run ok e execute central iniciou. bundle1 tem campaign ids 120249917784220372 e 120249917784200372, 2 conjuntos/4 anuncios persistidos; somente readback diferido por quota. nenhuma ativacao antecipada.",
       "thread_id": "1558131644135637163",
-      "updated_at": "2026-11-01T15:30:16+00:00"
+      "updated_at": "2026-11-01T15:35:13+00:00"
     },
     {
       "agent": "zeus",
@@ -8092,5 +8092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T15:34:18+00:00"
+  "updated_at": "2026-11-01T15:35:13+00:00"
 }

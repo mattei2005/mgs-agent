@@ -1,53 +1,37 @@
-# REPORT-INFRA — verificar entrega real antes de afirmar
+# REPORT-INFRA — publicação e readback exato
 
-## Contexto
+## Procedimento
 
-Em 2026-07-02, agente legado corrigiu a pasta `CAR_BR_PT` no Google Drive e informou na thread que também havia enviado o `REPORT-INFRA` para `#alerts-infra`. Rodolfo não viu a mensagem e pediu verificação.
+1. Publique uma única vez pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, preenchendo ação, tipo, alvo, motivo e evidência. Capture o `message_id` retornado; sucesso do POST ainda não comprova o conteúdo armazenado.
+2. Leia `GET /channels/{channel_id}/messages/{message_id}` com a identidade Zeus usada pelo transporte. Para REPORT-INFRA normal, o destino é `#alerts-infra`, sem criar thread.
+3. Se a ferramenta de mensagens não expuser embeds, faça o GET direto em vez de interpretar `content == ""` como mensagem vazia. Confira o ID e canal exatos, `content == ""`, exatamente um embed, título/campos correspondentes à ação e `mentions == []`.
+4. Registre o ID e o resultado do readback no recibo/inventário. Marque `sent_verified` somente após essa leitura; publicação confirmada com readback bloqueado deve permanecer uma pendência explícita.
+5. Entregue apenas o resumo operacional na origem. Não publique outra cópia textual do report após o helper ter enviado o embed.
 
-A auditoria do Zeus mostrou que o envio existia e retornou HTTP 204, mas o fluxo da agente legado ainda permitia afirmar “enviei” sem confirmar no Discord que a mensagem realmente apareceu no canal correto.
+## GET direto com transporte equivalente
 
-## Evidência confirmada
+Carregue a credencial internamente pelo loader de `/root/mgs-agent/scripts/discord-bot-post.py`; nunca a imprima. Construa o request com os mesmos headers usados pelo poster:
 
-- Canal correto: `#alerts-infra` / `1498132022634483894`.
-- Mensagem original encontrada via Discord API: `1522260849736286390`.
-- Timestamp: `2026-07-02T15:21:08Z` / `11:21:08 EDT`.
-- Autor: `Webhook - Alerts Infra Channel`.
-- Conteúdo: `[REPORT-INFRA]` sobre correção `CAR_BR_PT`.
-- Mentions presentes: Rodolfo (`344196393512075265`) e Zeus (`1496296175014252634`).
-
-## Regra operacional
-
-Quando um agente reporta infra fora da thread original, o sucesso só pode ser declarado após duas validações:
-
-1. O helper de envio retorna sucesso real (`HTTP 204` ou status equivalente documentado).
-2. A mensagem é localizada via Discord API no canal/thread esperado.
-
-Não basta o script imprimir `sent=ok`; confirmar a presença no destino evita falsa confiança quando:
-
-- o webhook aponta para outro canal;
-- o envio saiu como embed vazio e passou despercebido;
-- o canal correto foi confundido com outro canal de alertas;
-- a mensagem truncou ou perdeu campos críticos.
-
-## Helper preferencial
-
-Use o helper canônico MGS quando disponível:
-
-```bash
-/root/mgs-agent/scripts/send-report-infra-embed.sh \
-  --action modificada \
-  --type skill \
-  --path /path/to/artifact \
-  --reason "motivo" \
-  --evidence "commit/hash/output"
+```python
+request = urllib.request.Request(
+    f"https://discord.com/api/v10/channels/{channel_id}/messages/{message_id}",
+    headers={
+        "Authorization": "Bot " + token,
+        "User-Agent": "MGS-Zeus/1.0",
+    },
+)
+with urllib.request.urlopen(request, timeout=20) as response:
+    message = json.load(response)
+assert str(message["id"]) == str(message_id)
+assert str(message["channel_id"]) == str(channel_id)
+assert message["content"] == ""
+assert len(message.get("embeds", [])) == 1
+assert not message.get("mentions")
+# Compare também título e fields com o payload esperado.
 ```
 
-Evite usar helper nomeado por outro agente como padrão operacional (`ares-report-infra.sh`) quando existe helper genérico/canônico. Fallback textual é aceitável apenas quando o helper canônico não cobre o caso e a entrega for validada via API.
+Antes de atribuir um 403 do probe à permissão do bot, compare identidade e headers com o poster que conseguiu enviar. Corrija uma diferença de transporte e repita somente o GET: o User-Agent padrão do urllib pode receber uma resposta diferente do cliente canônico. Se a leitura equivalente continuar negada, registre HTTP/código sanitizados e investigue o acesso; não gire a credencial, amplie permissões nem repita o POST para testar.
 
-## Checklist antes de responder na thread original
+## Saída segura
 
-- [ ] Canal alvo é `1498132022634483894` para `#alerts-infra`.
-- [ ] Envio retornou `HTTP 204`/sucesso.
-- [ ] Busca via Discord API encontrou a mensagem no canal/thread correto.
-- [ ] Para report que requer processamento Zeus, ack canônico foi postado após inventário/audit: `✅ Registrado.` ou `✅ Registrado. Inventário atualizado (commit XXXX).`
-- [ ] Só então dizer ao usuário que o `REPORT-INFRA` foi enviado.
+Imprima somente IDs, flags de validação e diagnóstico sanitizado. Não despeje headers de autorização, variáveis de ambiente ou respostas brutas. Uma listagem resumida comprova a presença da mensagem, mas não substitui a validação dos campos do embed.

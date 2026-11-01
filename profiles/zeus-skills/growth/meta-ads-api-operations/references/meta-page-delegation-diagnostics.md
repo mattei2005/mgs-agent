@@ -108,4 +108,10 @@ Use individual GETs or Graph batches containing GET subrequests for object readb
 
 Lead the final answer with completed versus blocked scope. List `name — ID`, explicitly distinguish equal display names, summarize validation and state whether any token, campaign, ownership or scheduler changed. If asked about retrying an ad edit, confirm only the resolved access blocker until the downstream write/readback has actually run.
 
-Close the checkpoint only after full verification, and retain recovery history in the evidence journal. Keep task-specific IDs, timestamps and secret-free diagnostics in operational evidence, not in this procedure.
+For a provisioning-only handoff, return one credential-free receipt to the originating executor after verification:
+
+1. Persist `request_id`, authorization source, exact Page/Business/actor/account IDs, administrative and operational identity readbacks, before/after assignments, final tasks, write count, operational-access checks and explicit ownership/other-actor preservation. Set `status=VERIFIED` only when the entire Page acceptance set passes.
+2. Mention the campaign executor in the original thread with the receipt path, final tasks and the unchanged campaign request contract. State explicitly that Page recovery is proven but downstream campaign creation is not; do not run a campaign canary or resume its writer as part of a Page-only mandate.
+3. Read back the delivered message and record its ID. If fresh executor activity is visible, record that as handoff activity, not as campaign completion. Keep the administrative checkpoint separate from the executor's campaign checkpoint so completing provisioning cannot close the original campaign request.
+
+Close the administrative checkpoint only after full verification, and retain recovery history in the evidence journal. Keep task-specific IDs, timestamps and secret-free diagnostics in operational evidence, not in this procedure.

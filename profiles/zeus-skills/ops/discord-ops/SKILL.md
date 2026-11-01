@@ -107,6 +107,10 @@ For Raquel editorial/selective-cache requests, resolve the current `data/atena/e
 - **Quando usar → Solução implantada em produção — cópia periódica via cron** → `references/route-pack-14.md`
 - **Diagnóstico rápido: symlink vs arquivo real no git → Política de extensão de skills** → `references/route-pack-15.md`
 
+## Verificação de mensagens e embeds
+
+Prefira o transporte canônico para publicar e faça readback do ID exato antes de declarar entrega. Para REPORT-INFRA, uma listagem com `content` vazio não comprova nem falha nem sucesso do embed: valide `embeds`, campos esperados e ausência de mentions. Em GET direto, use a mesma identidade e os headers do transporte canônico; não conclua perda de permissão a partir de um probe com transporte diferente. Receita: `references/report-infra-delivery-verification-2026-07-02.md`.
+
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.
