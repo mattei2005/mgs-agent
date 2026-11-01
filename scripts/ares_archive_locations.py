@@ -55,7 +55,11 @@ def stock_scope_for_token(token,meta):
     """Require native owner/ancestry, not a name-only My Drive acceptance."""
     if not active():return meta.get('driveId')==b.SOURCE_DRIVE and not meta.get('trashed')
     native=assert_stock_file(token_drive(token),meta.get('stock_file_id') or meta['id'])
-    return native.get('name')==meta.get('name') and native.get('parents')==meta.get('parents')
+    expected_name=meta.get('name')
+    if meta.get('record_kind')=='mgs.logical.media.v1':
+        import ares_archive_namespace as namespace
+        expected_name=namespace.native_stock_label(meta['id'],native['id'],expected_name)
+    return native.get('name')==expected_name and native.get('parents')==meta.get('parents')
 
 def assert_stock_file(d,fid,expected_parent=None):
     meta=d.meta(fid)

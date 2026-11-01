@@ -44,4 +44,24 @@ class NamespaceTests(unittest.TestCase):
   with patch.object(n,'binding',return_value=self.binding):
    self.assertEqual(n.effective_stock_parent(self.entry,'oldManagerOffline001'),'newManagerOffline001')
    self.assertEqual(n.effective_stock_parent(self.entry,'unrelatedOffline001'),'unrelatedOffline001')
+ def test_provider_view_keeps_original_logical_id_and_frozen_proof(self):
+  self.rec.update(representation='provider_as_stock',stock_id='providerOffline001',provider_parent_id='usedOffline001')
+  entry={**self.entry,'mapping_kind':'historical_verified','archiveParentId':'oldOffline001'}
+  with patch.object(n,'binding',return_value=self.binding):
+   projected=n.project_historical(entry)
+   self.assertEqual(projected['sourceId'],entry['sourceId']);self.assertEqual(projected['approvedStockId'],entry['archiveId']);self.assertEqual(projected['archiveParentId'],'usedOffline001');self.assertEqual(entry['archiveParentId'],'oldOffline001')
+ def test_logical_parent_strips_only_verified_physical_boundary(self):
+  class D:
+   def meta(d,fid):
+    names={'physicalOffline001':'_ARQUIVO_FISICO','stockOffline001':'CRIATIVOS','leafOffline001':'01_READY'};parents={'physicalOffline001':'stockOffline001','stockOffline001':n.b.ARCHIVE_ROOT,'leafOffline001':'physicalOffline001'}
+    return {'id':fid,'name':names[fid],'mimeType':n.b.FOLDER,'parents':[parents[fid]],'owners':[{'emailAddress':n.b.ACCOUNT}],'trashed':False,'permissions':[]}
+  with patch.object(n,'binding',return_value=self.binding):
+   self.assertEqual(n.b.Drive.relative_parent(D(),'leafOffline001',n.b.ARCHIVE_ROOT),['01_READY'])
+ def test_owner_future_producer_uses_new_verified_root(self):
+  import mgs_archive_owner_transport as transport
+  class Owner:
+   parents=set()
+   def meta(d,fid):return {'id':fid,'name':'_ARQUIVO_FISICO' if fid=='physicalOffline001' else 'CRIATIVOS','mimeType':n.b.FOLDER,'parents':['stockOffline001'] if fid=='physicalOffline001' else [n.b.ARCHIVE_ROOT],'owners':[{'emailAddress':n.b.ACCOUNT}],'trashed':False,'permissions':[]}
+  owner=Owner()
+  with patch.object(n,'binding',return_value=self.binding):self.assertEqual(transport.Engine(owner,{},None,None)._ensure_path([]),'physicalOffline001')
 if __name__=='__main__':unittest.main()

@@ -50,6 +50,19 @@ def names_match(entry,physical,stock):
  if not rec:return stock.get('name')==physical.get('name')
  return physical.get('id')==rec['archive_id'] and physical.get('name')==rec['provider_name'] and stock.get('id')==rec['stock_id'] and stock.get('name')==rec['stock_name']
 
+def catalogue_name(entry,stock):
+ rec=override(entry)
+ if not rec:return stock['name']
+ require(stock.get('id')==rec['stock_id'] and stock.get('name')==rec['stock_name'],'NAMESPACE_STOCK_LABEL_CHANGED')
+ return rec.get('catalogue_name') or stock['name']
+
+def native_stock_label(logical_id,stock_id,catalogue_label):
+ value=binding()
+ if not value:return catalogue_label
+ records=[r for r in value['files'].values() if r['source_id']==logical_id and r['stock_id']==stock_id and r.get('catalogue_name')==catalogue_label]
+ require(len(records)<=1,'NAMESPACE_DUPLICATE_LABEL_BINDING')
+ return records[0]['stock_name'] if records else catalogue_label
+
 def stock_move(entry):
  value=binding()
  if not value:return None
