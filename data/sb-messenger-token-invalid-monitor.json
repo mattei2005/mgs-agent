@@ -543,7 +543,11 @@
     731163,
     731186,
     731319,
-    731335
+    731335,
+    731469,
+    731486,
+    731515,
+    731536
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1709,9 +1713,9 @@
     "digital-trust|growpowerhub|31|57": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-31T00:07:17.000Z",
+        "created_at": "2026-11-01T12:06:14.000Z",
         "domain": "growpowerhub",
-        "notification_id": 730399,
+        "notification_id": 731515,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -1731,7 +1735,8 @@
       "notification_ids": [
         727703,
         729049,
-        730399
+        730399,
+        731515
       ],
       "opened_at": "2026-10-28T16:12:16-04:00",
       "repeat_count": 0,
@@ -2194,9 +2199,9 @@
     "digital-trust|lyzmofinanzas|77|1768": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-31T00:05:42.000Z",
+        "created_at": "2026-11-01T12:04:53.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 730375,
+        "notification_id": 731486,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -2216,7 +2221,8 @@
       "notification_ids": [
         727563,
         729026,
-        730375
+        730375,
+        731486
       ],
       "opened_at": "2026-10-28T12:12:15-04:00",
       "repeat_count": 0,
@@ -2354,9 +2360,9 @@
     "digital-trust|mavroa|49|255": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-31T00:07:40.000Z",
+        "created_at": "2026-11-01T12:06:34.000Z",
         "domain": "mavroa",
-        "notification_id": 730419,
+        "notification_id": 731536,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 6
@@ -2376,7 +2382,8 @@
       "notification_ids": [
         727718,
         729072,
-        730419
+        730419,
+        731536
       ],
       "opened_at": "2026-10-28T16:27:13-04:00",
       "repeat_count": 0,
@@ -2981,9 +2988,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-31T00:05:35.000Z",
+        "created_at": "2026-11-01T12:04:48.000Z",
         "domain": "spe",
-        "notification_id": 730366,
+        "notification_id": 731469,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 8,
@@ -3051,7 +3058,8 @@
         726292,
         727682,
         729005,
-        730366
+        730366,
+        731469
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -3843,18 +3851,20 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-01T06:57:13-05:00",
+  "last_check": "2026-11-01T07:12:14-05:00",
   "last_delivery": {
-    "at": "2026-10-31T20:12:12-04:00",
+    "at": "2026-11-01T07:12:14-05:00",
     "cursor_ids": [
-      731319,
-      731335
+      731469,
+      731486,
+      731515,
+      731536
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 731335,
+  "last_seen_id": 731536,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
