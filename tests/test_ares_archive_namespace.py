@@ -64,4 +64,24 @@ class NamespaceTests(unittest.TestCase):
    def meta(d,fid):return {'id':fid,'name':'_ARQUIVO_FISICO' if fid=='physicalOffline001' else 'CRIATIVOS','mimeType':n.b.FOLDER,'parents':['stockOffline001'] if fid=='physicalOffline001' else [n.b.ARCHIVE_ROOT],'owners':[{'emailAddress':n.b.ACCOUNT}],'trashed':False,'permissions':[]}
   owner=Owner()
   with patch.object(n,'binding',return_value=self.binding):self.assertEqual(transport.Engine(owner,{},None,None)._ensure_path([]),'physicalOffline001')
+ def test_historical_parent_projection_does_not_invent_stock_replacement(self):
+  self.rec['provider_parent_id']='acceptedParentOffline001';entry={**self.entry,'mapping_kind':'historical_verified','archiveParentId':'frozenParentOffline001'}
+  with patch.object(n,'binding',return_value=self.binding):
+   projected=n.project_historical(entry)
+   self.assertEqual(projected['archiveParentId'],'acceptedParentOffline001');self.assertEqual(projected['frozenArchiveParentId'],'frozenParentOffline001');self.assertNotIn('approvedStockId',projected)
+ def test_migrated_exclusive_then_real_used_keeps_original_delivery_receipt(self):
+  import ares_archive_storage as storage
+  import ares_manager_storage_standard as standard
+  move={'source_id':self.entry['sourceId'],'stock_id':'aliasOffline001','from_parent':'oldManagerOffline001','to_parent':'exclusiveOffline001','sha256':self.entry['sha256'],'state':'exclusive','manager_code':'g006','inventory_asset_id':'assetOffline001'};self.binding['stock_moves']['aliasOffline001']=move
+  row={'asset_id':'assetOffline001','asset_drive_id':self.entry['sourceId'],'manager_media_folder_id':'usedOffline001','manager_use_request_id':'requestOffline001','canonical_filename':'canonical.jpg','used_by':'100','meta_ad_id':'300','meta_creative_id':'400'}
+  assignment={'campaign_id':'100','adset_id':'200','ad_id':'300','creative_id':'400'}
+  use={'schema':'mgs.manager.standard.use.v1','authority_message_id':standard.AUTHORITY,'status':'verified','request_id':row['manager_use_request_id'],'asset_id':row['asset_id'],'logical_id':self.entry['sourceId'],'stock_file_id':move['stock_id'],'source_id':move['to_parent'],'folder_id':row['manager_media_folder_id'],'sha256':self.entry['sha256'],'manager_code':'g006','assignment':assignment}
+  receipt={'schema':'mgs.manager.delivery.receipt.v1','status':'verified','authority_message_id':'1565546229914411133','logical_id':self.entry['sourceId'],'stock_file_id':move['stock_id'],'provider_id':self.entry['archiveId'],'sha256':self.entry['sha256'],'destination_parent_id':move['from_parent']}
+  record={'parents':['usedOffline001'],'sha256Checksum':self.entry['sha256'],'name':'canonical.jpg'}
+  class D:
+   def hashes(d,fid):return {k:self.entry[k] for k in ['size','md5','sha256']}
+  with patch.object(n,'binding',return_value=self.binding),patch.object(n.b,'read_json',return_value=use),patch.object(standard,'find_slot',return_value=({'used_id':'usedOffline001'},'exclusive')),patch.object(standard,'validate_folder'),patch.object(storage,'resolve_media',return_value=record):
+   self.assertEqual(n.verify_migrated_delivery(D(),row,self.entry,receipt),record)
+   assignment['creative_id']='401'
+   with self.assertRaises(n.NamespaceError):n.verify_migrated_delivery(D(),row,self.entry,receipt)
 if __name__=='__main__':unittest.main()
