@@ -270,6 +270,8 @@ This local-media rule never authorizes deletion of persistent browser authentica
 
 Active MGS consumers must either import `mgs_google_workspace_auth.py` or implement the same Service Account JWT contract against the same 1Password item. They must reject every auth mode other than `service_account`.
 
+For an approved layout or delivery-workflow change, trace the live producer → resolver → stock move/finalizer → catalogue → reconciliation/retirement chain before editing. Update affected executable guards, bindings and agent procedures together; documentation alone cannot change compiled parent/path assumptions. Preserve immutable evidence and exercise both existing deliveries and future writes before reporting the new workflow ready.
+
 Current critical consumers include:
 
 - `monitor-drive-auth-unified.py`

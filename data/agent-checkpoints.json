@@ -2373,22 +2373,22 @@
     {
       "agent": "zeus",
       "id": "DRIVE-LAYOUT-STANDARD-1566496381001146440",
-      "next_step": "Novo fluxo ativo:6gestores/19operacoes/IMG+VID,456pastas relidas,24validadoresSHEIN reais e canario tecnico sameID com retorno;156testesfocados passaram. Duas skills Ares e espelhos atualizados sob confirmacao1566497527719661640. Nenhuma midia produtiva movida nem campanha criada. Primeiro pedido real sera evidenciado pelo helper em manager-standard/first-production-use.json, sem upload artificial do CEO. Proximo trabalho distinto: conciliar conteudo legado, duplicacao de arvores/pilotos e incidentes COPIED_PATH/METADATA preservando evidencia e sem exclusao implicita. Nao declarar organizacao historica100% nem primeiro uso produtivo validado.",
-      "objective": "Novo padrao para todos gestores com READY comum, Exclusivos e Usados, sem perder IDs/reservas.",
+      "next_step": "Padrão ativo; consolidação legada aplicada sob 1566510979838255326, detalhes em context/creative-archive-legacy-consolidation.md. Acompanhar primeiro uso real sem confundir remanejamento de peças históricas com campanha nova. Conciliar as exceções históricas preservadas antes de reclassificar ou excluir.",
+      "objective": "Implantar o padrão READY/Exclusivos/Usados para os gestores registrados, com consumidores e ferramentas coerentes.",
       "source": "context/creative-manager-storage-standard.md",
-      "state": "active_technical_validation_historical_reconciliation_pending",
+      "state": "active_technical_and_legacy_layout_validated_first_real_use_pending",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-01T17:31:53+00:00"
+      "updated_at": "2026-11-01T19:10:53+00:00"
     },
     {
       "agent": "zeus",
       "id": "DRIVE-LEGACY-CONSOLIDATION-1566510979838255326",
-      "next_step": "Autorizacao nova1566510979838255326 responde a proposta de consolidacao historica apos novo padrao. Inventariar escopo nativo e cruzar providers/stock/catalogo/ACKs; preparar plano por IDs e backup antes de qualquer mudanca. Sem exclusao, ACL, credencial, campanhas ou ampliacao implicita de escopo; manter writer unico e locks.",
-      "objective": "Conciliar e reorganizar arvores antigas/pasta Nicolas/pilotos e criativos movidos ou renomeados, preservando IDs, reservas, historia e consumidores.",
-      "source": "context/creative-manager-storage-standard.md",
-      "state": "read_only_preflight",
+      "next_step": "Layout aplicado: 122 movimentos, 15107 IDs originais preservados, 97 downloads íntegros, 22 incidentes originais recuperados e 25 recibos antigos relidos; 211 testes. Manter 187 objetos de uso ambíguo e 44 registros sem cópia comprovada separados, sem liberar reservas. Próxima etapa: conciliação de uso/origem e comunicação dos crons. Observar primeiro pedido real do novo fluxo e recorrência, sem upload artificial ou campanha de teste.",
+      "objective": "Conciliar e reorganizar árvores antigas, pasta Nicolas, pilotos e metadata, preservando IDs, reservas, histórico e consumidores.",
+      "source": "context/creative-archive-legacy-consolidation.md",
+      "state": "layout_validated_legacy_exceptions_preserved",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-01T17:55:34+00:00"
+      "updated_at": "2026-11-01T19:08:55+00:00"
     },
     {
       "agent": "zeus",
@@ -8142,5 +8142,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T18:46:43+00:00"
+  "updated_at": "2026-11-01T19:10:53+00:00"
 }
