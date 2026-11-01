@@ -11,6 +11,7 @@ SCHEMA='mgs.archive.physical.namespace.v1'
 AUTHORITY='1566510979838255326'
 PATH=b.DATA/'legacy-consolidation'/'binding.json'
 PARENTS=PATH.parent/'provider-parent-bindings.json'
+SOURCES=PATH.parent/'source-metadata-bindings.json'
 _CACHE={}
 class NamespaceError(b.ArchiveError):pass
 
@@ -23,7 +24,7 @@ def validate_binding(value):
 def binding():
  if not PATH.exists():return None
  plan_path=PATH.parent/'plan.json'
- signature=(PATH.stat().st_ino,PATH.stat().st_mtime_ns,PATH.stat().st_size,plan_path.stat().st_mtime_ns if plan_path.exists() else None,PARENTS.stat().st_mtime_ns if PARENTS.exists() else None)
+ signature=(PATH.stat().st_ino,PATH.stat().st_mtime_ns,PATH.stat().st_size,plan_path.stat().st_mtime_ns if plan_path.exists() else None,PARENTS.stat().st_mtime_ns if PARENTS.exists() else None,SOURCES.stat().st_mtime_ns if SOURCES.exists() else None)
  if _CACHE.get('signature')==signature:return _CACHE['value']
  value=b.read_json(PATH,{})
  if value.get('phase')!='active':return None
@@ -34,8 +35,13 @@ def binding():
   native=b.read_json(PARENTS,{})
   require(hashlib.sha256(b.canonical(native)).hexdigest()==value['provider_parent_bindings_sha256'] and native.get('schema')=='mgs.archive.provider.parents.v1' and native.get('authority_message_id')==AUTHORITY and native.get('plan_sha256')==value['plan_sha256'],'NAMESPACE_NATIVE_PARENT_BINDING')
   parents=native.get('bindings',{});require(set(parents)==set(value['files']),'NAMESPACE_NATIVE_PARENT_MEMBERSHIP');expected['provider_parent_bindings_sha256']=value['provider_parent_bindings_sha256']
+ sources={}
+ if value.get('source_metadata_bindings_sha256'):
+  source=b.read_json(SOURCES,{})
+  require(hashlib.sha256(b.canonical(source)).hexdigest()==value['source_metadata_bindings_sha256'] and source.get('schema')=='mgs.archive.source.metadata.v1' and source.get('authority_message_id')==AUTHORITY and source.get('plan_sha256')==value['plan_sha256'],'NAMESPACE_SOURCE_BINDING_DIGEST')
+  sources=source.get('bindings',{});require(set(sources)<={r['source_id'] for r in value['files'].values()},'NAMESPACE_SOURCE_BINDING_MEMBERSHIP');expected['source_metadata_bindings_sha256']=value['source_metadata_bindings_sha256']
  require(value==expected,'NAMESPACE_PLAN_MEMBERSHIP')
- result={**value,'accepted_provider_parents':parents};_CACHE.update(signature=signature,value=result);return result
+ result={**value,'accepted_provider_parents':parents,'accepted_source_metadata':sources};_CACHE.update(signature=signature,value=result);return result
 
 def provider_root(d):
  value=binding()
@@ -92,6 +98,20 @@ def stock_move(entry):
 def effective_stock_parent(entry,old):
  rec=stock_move(entry)
  return rec['to_parent'] if rec and rec['from_parent']==old else old
+
+def verify_reconciled_source(d,meta,asset,c,job):
+ """Read-only location acceptance; destructive retirement stays unchanged."""
+ value=binding();rec=value.get('accepted_source_metadata',{}).get(asset['sourceId']) if value else None
+ if not rec:return False
+ require(rec['job_id']==job['jobId'] and rec['snapshot_sha256']==hashlib.sha256(b.canonical(asset)).hexdigest(),'NAMESPACE_SOURCE_FROZEN_JOB')
+ expected={'id':asset['sourceId'],'name':asset['name'],'mimeType':asset['mimeType'],'size':asset['size'],'md5Checksum':asset['md5'],'sha256Checksum':asset['sha256'],'driveId':c['source_drive_id'],'parents':[rec['parent_id']],'trashed':False}
+ if asset.get('sourceCreatedTime'):expected['createdTime']=asset['sourceCreatedTime']
+ require(all(meta.get(k)==v for k,v in expected.items()),'NAMESPACE_SOURCE_NATIVE_IDENTITY')
+ from ares_archive_locations import UPLOAD
+ root=d.meta(UPLOAD);require(root.get('driveId')==c['source_drive_id'] and root.get('mimeType')==b.FOLDER and root.get('trashed') is False,'NAMESPACE_SOURCE_INTAKE_ROOT')
+ require(d.relative_parent(rec['parent_id'],UPLOAD)==rec['relative_parent'] and len(rec['relative_parent'])==2 and rec['relative_parent'][0]==asset['relativeParent'][0],'NAMESPACE_SOURCE_INTAKE_PARTITION')
+ current=meta.get('version');frozen=asset.get('version');require(isinstance(current,str) and isinstance(frozen,str) and current.isdigit() and frozen.isdigit() and int(current)>=int(frozen),'NAMESPACE_SOURCE_VERSION')
+ return True
 
 def legacy_manager_folder(d,manager,fid):
  value=binding();rec=value['legacy_manager_folders'].get(fid) if value else None
