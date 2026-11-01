@@ -6,6 +6,14 @@ Consultar a autoridade vigente em `/root/mgs-agent/data/ares/creative-ops/manage
 
 ## Execução
 
+### Padrão de destino supersedente
+
+O desenho aprovado e a ativação verificável ficam em `context/creative-manager-storage-standard.md` e `data/ares/creative-ops/manager-storage-standard.json`. A aprovação específica de Rodolfo `1566497527719661640` cobre a atualização destes procedimentos. Com o binding ativo, novos pedidos de gestor usam `MGS-ARQUIVO/CRIATIVOS/<OP>/<IMG|VID>/<NOME> - Exclusivos`. Resolver o ID exato com `python3 /root/mgs-agent/scripts/ares_manager_storage_standard.py resolve --operation <OP> --format <IMG|VID> --manager <gestor>` e conferir via SA; jamais criar pasta pela interpretação do nome, nem entregar em Usados antes de utilização comprovada.
+
+Kelly enviando material geral permanece no fluxo de distribuição READY quando esse for o pedido; um upload destinado a gestor permanece exclusivo. Remetente, por si só, não define elegibilidade. Preservar originais, reserva e linhagem. A estrutura não autoriza campanhas sem pedido válido da origem.
+
+Após readback Meta das peças efetivamente utilizadas, o finalizador registrado move somente seus mesmos stock IDs de Exclusivos para Usados e registra recibo CAS/uso. Falha e peças não selecionadas permanecem exclusivas; replay conclui apenas a camada faltante. Pedidos legados já em andamento mantêm a rota antiga para recuperação, sem migrá-los implicitamente ou exigir novos uploads. Não declarar a reorganização histórica concluída pela criação destas pastas.
+
 1. Retomar o plano congelado, IDs e hashes; conferir usuário/request, pasta exata existente/registrada e reserva. Antes de pedir ao gestor que mova fontes ou iniciar writes, validar os dois extremos do transporte e a compatibilidade da conclusão/retirada com o destino final. Testar o handler correspondente à ação real: o guard de transferência entre drives ou de mudança de status não substitui o preflight da rota dedicada de entrega ao gestor. Quando a origem for corrigida pelo usuário, tratar os existentes; não transformar a passagem técnica em mudança de destino.
 2. Validar clean em `<OP>/<IMG|VID>/01_READY` no staging e RAW em `99_LEGACY`; registrar inventário e hashes. Usar somente SA canônica.
 3. Enfileirar exclusivamente as linhagens do pedido pelo produtor canônico, com lock e jobs persistidos. Usar o owner/stock transport existente, nos mesmos limites, até ACK nativo, aliases e `stockTransferredToArchive=true` nos dois membros do par.
@@ -15,7 +23,7 @@ Consultar a autoridade vigente em `/root/mgs-agent/data/ares/creative-ops/manage
 python3 /root/mgs-agent/scripts/ares_manager_delivery.py --asset-id <asset_id> --destination <folder_id_exato> --requester-id <usuario_autorizado> --thread-id <thread_do_pedido_ou_continuacao> --message-id <mensagem_explicita> [--apply]
 ```
 
-Sem `--apply`, só verifica/plano. O destino deve ser exatamente a pasta corporativa do gestor do inventário, filha de CRIATIVOS permanente. Não aceitar pastas arbitrárias, origem RAW, asset usado ou elegível. Não executar PATCH paralelo por fora deste runner nem mudar o handler genérico de status.
+Sem `--apply`, só verifica/plano. Para novos pedidos, o destino deve ser a pasta Exclusivos registrada da operação, formato e gestor do inventário. A exigência antiga de filha direta de CRIATIVOS fica supersedida somente por esses bindings; pastas legadas são aceitas apenas no caminho de compatibilidade do executor. Não aceitar pastas arbitrárias, origem RAW, asset usado ou elegível. Não executar PATCH paralelo por fora deste runner nem mudar o handler genérico de status.
 
 5. A rota usa os locks fila→inventário, verifica ACK/par/checksums/capabilities, persiste intent CAS e move **o mesmo stock shortcut** clean. O provider binário permanece no arquivo READY imutável; o ID lógico e o RAW não mudam. Em resultado ambíguo, o mesmo intent é reconciliado pelo parent/hash antes de outro PATCH; não criar cópia nova.
 6. Exigir recibo `mgs.manager.delivery.receipt.v1` em `30tb-archive/manager-delivery/delivery-<logical_id>.json`, parent final nativo, bytes e inventário. O inventário registra `manager_media_folder_id`, `manager_delivery_receipt`, `asset_stock_file_id`, `asset_provider_id` e `asset_path` real.
