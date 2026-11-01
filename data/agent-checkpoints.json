@@ -7433,12 +7433,12 @@
     {
       "agent": "ares",
       "id": "shein-1566472708382920776",
-      "next_step": "Respeitar cooldown central de 305s; retomar mesmo request pela rota campaign --confirm-execute. Readback-only do bundle1 sem replay; continuar bundles restantes e QA integral antes de activate_verified.",
+      "next_step": "Responder conclusao nativa nesta thread; nenhuma nova campanha ou reativacao automatica. Servir/entrega nao comprovado apenas por status ACTIVE.",
       "objective": "Duplicar C011 cinco vezes na Mavroa-US-SHEIN-ES-04-G004, USD150 diarios por campanha, COCAP USD0.60, agora",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1566472708382920776/state.json",
-      "state": "recovery_pending: provisioning zeus independentemente verificado por get corporativo e tarefas advertise/analyze. dry-run ok e execute central iniciou. bundle1 tem campaign ids 120249917784220372 e 120249917784200372, 2 conjuntos/4 anuncios persistidos; somente readback diferido por quota. nenhuma ativacao antecipada.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/preflight-blockers/shein-1566472708382920776/completion-verification.json",
+      "state": "complete: 015,016,017,018,019 active; cinco campanhas, cinco conjuntos e dez anuncios verificados nas arvores finais da ativacao central. usd150 diarios por campanha, total usd750/dia, cost_cap e bid_amount60 em todos os conjuntos. qa renderizado integral e ids iguais ao checkpoint. posts novos; meta omitiu flags opcionais age/gender nas cinco copias. budget ativo da conta usd1074/dia conforme readback meta do runner; delta usd750. acesso corporativo page verificado independentemente.",
       "thread_id": "1558131644135637163",
-      "updated_at": "2026-11-01T15:35:13+00:00"
+      "updated_at": "2026-11-01T15:47:36+00:00"
     },
     {
       "agent": "zeus",
@@ -8092,5 +8092,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T15:35:13+00:00"
+  "updated_at": "2026-11-01T15:47:36+00:00"
 }
