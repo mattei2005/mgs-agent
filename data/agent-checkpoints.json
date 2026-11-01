@@ -2392,6 +2392,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DRIVE-LEGACY-RECONCILIATION-1566533058130088158",
+      "next_step": "Congelar coortes, cruzar inventário/histórico/Meta e evidências de arquivo/retirada. Reclassificar apenas com prova exata. Sem exclusão, ACL, credenciais, campanhas ou liberação de reservas; sem repetir a consolidação física já concluída.",
+      "objective": "Conciliar os 187 objetos de uso histórico ambíguo e rastrear os 44 registros sem cópia comprovada, preservando mídia, IDs, reservas e evidências.",
+      "source": "context/creative-archive-legacy-consolidation.md",
+      "state": "evidence_discovery",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-01T19:23:32+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
       "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
       "objective": "Ordem visual e valores de origem das despesas no Dash ago2026-dez2027; nomes SB e FX próprios",
@@ -8142,5 +8152,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:10:53+00:00"
+  "updated_at": "2026-11-01T19:23:32+00:00"
 }
