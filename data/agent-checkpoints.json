@@ -3052,6 +3052,16 @@
     },
     {
       "agent": "zeus",
+      "id": "SNAP-CORE22-AUTO-1566497067512369283",
+      "next_step": "Jobd476a2649595 unico em01/11/2026 16:28:25Eastern, apos estimativa Snap16:20; verificar core22,Livepatch,3gateways e transacao. Se adiado, manter mesmo checkpoint/sucessor unico ate02/11 12hET sem forcar. Nao instalar/reiniciar/alterar timer.",
+      "objective": "Aguardar refresh automatico core22 no Hostinger e avisar resultado validado; nao forcar update",
+      "source": "/root/.hermes/profiles/zeus/cache/scratch/snap-core22-followup-1566497067512369283/job-readback.json",
+      "state": "scheduled_readonly_followup",
+      "thread_id": "1565713769789657239",
+      "updated_at": "2026-11-01T17:03:54+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "next_step": "Nenhuma ação pendente neste escopo. Hermes v0.21.7, corte main7cc3fb8c/port e6ad5053 já ativo e validado; Monarx 4.3.82-master com24/24 checks, APT zero e gateway PIDs preservados. Snapshots/runtime rollback e deb4.3.81 retidos; nenhuma exclusão. Commits upstream após o corte continuam outro ciclo. Protect5.2.70 preexistia desde cron15/09; inventário corrigido, não atualizado nesta transação.",
       "objective": "VPS e Hermes concluídos no corte aprovado; Monarx adicional 4.3.82 confirmado e validado, sem reiniciar gateways ou VPS.",
@@ -8112,5 +8122,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T17:02:04+00:00"
+  "updated_at": "2026-11-01T17:03:54+00:00"
 }

@@ -63,10 +63,21 @@ def load_ready_assets(request, profile, base, common, token):
         manager = manager_folder(request, profile, base, ops, drive_token)
         if {inventory[r['asset_id']]['canonical_filename'] for r in refs} != set(validate_groups(request)):
             raise ValueError('reserved assets differ from explicit campaign groups')
+    reference_manager = manager
     rows = []
     ready_cache = {}; testing_cache = {}
     for ref in refs:
         row = inventory.get(ref['asset_id']) or {}
+        manager=reference_manager
+        if manager:
+            import ares_manager_storage_standard as manager_standard
+            binding=manager_standard.find_slot(manager['id'])
+            if binding:
+                slot,manager_state=binding
+                from .shein_grouped_media import media_kind as classify_media
+                fmt='IMG' if classify_media(row['canonical_filename'])=='image' else 'VID'
+                fid=manager_standard.destination(slot['operation'],fmt,slot['manager_code'],manager_state)
+                manager=manager_standard.validate_folder(manager_standard.storage.drive(drive_token),fid,operation=slot['operation'],fmt=fmt,manager=profile['manager_code'],state=manager_state)
         if row.get('reservation_request_id') != request['request_id']:
             raise ValueError('asset must be reserved by canonical Creative Ops for this exact request')
         if row.get('language') != profile['language'] or row.get('vertical') != 'SHEIN' or row.get('metadata_clean') is not True:
@@ -176,7 +187,9 @@ def finalize_ready_assets(state, live, base, common, token):
             raise ValueError('final Meta media lineage/readiness mismatch')
         assignments[asset['asset_id']] = {'campaign_id': live['campaign']['id'], 'adset_id': live['adsets']['data'][0]['id'], 'ad_id': ad['id'],
                                         'creative_id': cr['id'], 'video_id': vid, 'post_id': cr.get('effective_object_story_id')}
-    with inventory_path.with_suffix(inventory_path.suffix + '.lock').open('a+') as lock:
+    import ares_manager_storage_standard as manager_standard
+    use_results = {}
+    with manager_standard.queue_guard(), inventory_path.with_suffix(inventory_path.suffix + '.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         rows = [json.loads(line) for line in inventory_path.read_text().splitlines() if line.strip()]
         selected = {r['asset_id']: r for r in rows if r.get('asset_id') in assignments}
@@ -185,6 +198,11 @@ def finalize_ready_assets(state, live, base, common, token):
         # Only missing parent moves, with the same reservation held under the inventory lock.
         for asset in assets:
             if asset.get('manager_folder_preserved'):
+                registered=manager_standard.find_slot(asset['ready_parent_id'])
+                if registered:
+                    row=selected[asset['asset_id']]
+                    use_results[asset['asset_id']]=manager_standard.mark_used(manager_standard.storage.drive(drive_token,True),row,asset,assignments[asset['asset_id']],state['request']['request_id'])
+                    continue
                 file = ops.drive_file_readback(drive_token, asset['asset_drive_id'])
                 if file.get('trashed') or file.get('parents') != [asset['ready_parent_id']] or file.get('md5Checksum') != asset['drive_md5']:
                     raise ValueError('manager file identity changed before postprocess')
@@ -205,6 +223,7 @@ def finalize_ready_assets(state, live, base, common, token):
             asset = next(a for a in assets if a['asset_id'] == row['asset_id'])
             if not asset.get('manager_folder_preserved'):
                 row['asset_path'] = row['asset_path'].removesuffix('/01_READY') + '/02_TESTING'
+            manager_standard.apply_use_result(row,use_results.get(row['asset_id']))
             history = row.setdefault('test_history', [])
             if not any(x.get('campaign_id') == a['campaign_id'] for x in history):
                 history.append({**a, 'request_id': state['request']['request_id'], 'source': 'general_shein_engine_v3'})

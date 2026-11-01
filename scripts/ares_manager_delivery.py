@@ -13,6 +13,7 @@ import ares_archive_bridge as b
 import ares_archive_locations as loc
 import ares_archive_storage as storage
 import ares_upload_context_layout as layout
+import ares_manager_storage_standard as standard
 POLICY=b.BASE/'data/ares/creative-ops/manager-delivery-policy.json'
 RECEIPTS=b.DATA/'manager-delivery'
 INVENTORY=b.BASE/'data/ares/creative-ops/inventory/assets.jsonl'
@@ -39,8 +40,10 @@ def validate_identity(row,entry,request):
     require(row.get('requested_by_discord_id')==request['requester_id'],'MANAGER_REQUESTER_LINEAGE_MISMATCH')
     return True
 
-def exact_folder(d,manager,target):
+def exact_folder(d,manager,target,row=None):
     require(manager in layout.MANAGERS.values(),'MANAGER_UNREGISTERED')
+    if standard.find_slot(target):
+        return standard.validate_folder(d,target,operation=row.get('operation') if row else None,fmt=row.get('format') if row else None,manager=manager,state='exclusive')
     expected=loc.stock_folder_for_path(d,[manager])
     require(expected==target,'MANAGER_DESTINATION_MISMATCH')
     m=storage.meta(d,target)
@@ -58,7 +61,7 @@ def receipt_binding(row,entry,receipt):
 def verify_receipt(d,row,entry,receipt,*,allow_intent=False):
     receipt_binding(row,entry,receipt)
     require(receipt.get('status') in (['intent','verified'] if allow_intent else ['verified']),'MANAGER_RECEIPT_NOT_VERIFIED')
-    exact_folder(d,row['source_manager'],receipt['destination_parent_id'])
+    exact_folder(d,row['source_manager'],receipt['destination_parent_id'],row=row)
     record=storage.media_record(entry,storage.meta(d,entry['archiveId']),storage.meta(d,entry['stockShortcutId']))
     require(record['parents']==[receipt['destination_parent_id']] and record['name']==row['canonical_filename'] and record['sha256Checksum']==row['clean_checksum'],'MANAGER_FINAL_READBACK')
     require(d.relative_parent(record['provider_metadata']['parents'][0],b.ARCHIVE_ROOT)==entry['relativeParent'],'MANAGER_PROVIDER_PATH_CHANGED')
@@ -72,8 +75,10 @@ def verify_delivered(d,asset,entry):
     found=[r for r in rows if r.get('asset_id')==entry.get('lineageId') and r.get('asset_drive_id')==asset['sourceId']]
     require(len(found)==1,'MANAGER_UNIQUE_INVENTORY')
     row=found[0];receipt=b.read_json(RECEIPTS/('delivery-'+asset['sourceId']+'.json'),{})
+    if row.get('manager_storage_state')=='used':
+        return standard.verify_used_delivery(d,row,entry,receipt)
     record=verify_receipt(d,row,entry,receipt)
-    require(row.get('manager_media_folder_id')==receipt['destination_parent_id'] and row.get('manager_delivery_receipt')==str((RECEIPTS/('delivery-'+asset['sourceId']+'.json')).relative_to(b.BASE)) and row.get('asset_path')=='MGS-AGENTS/CRIATIVOS/'+row['source_manager']+'/'+row['canonical_filename'],'MANAGER_INVENTORY_FINAL_PARENT')
+    require(row.get('manager_media_folder_id')==receipt['destination_parent_id'] and row.get('manager_delivery_receipt')==str((RECEIPTS/('delivery-'+asset['sourceId']+'.json')).relative_to(b.BASE)) and row.get('asset_path')==standard.inventory_path(row,receipt['destination_parent_id']),'MANAGER_INVENTORY_FINAL_PARENT')
     return record
 
 def verify_plan(d,plan,rows,index):
@@ -98,7 +103,7 @@ def deliver(asset_id,target,request,apply=False):
             storage.require_registered_mapping(entry,index);validate_identity(row,entry,request)
             raw=index.get('mappings',{}).get(row['source_drive_id'],{})
             require(raw.get('jobId')==entry['jobId'] and raw.get('role')=='original' and raw.get('relativeParent')==[row['operation'],row['format'],'99_LEGACY'] and raw.get('sha256')==row['original_checksum'] and raw.get('stockTransferredToArchive') is True,'MANAGER_RAW_LEGACY_PAIR')
-            d=b.Drive(apply);exact_folder(d,row['source_manager'],target)
+            d=b.Drive(apply);exact_folder(d,row['source_manager'],target,row=row)
             ack=d.one(b.config_load()['requests_folder_id'],'ack:'+entry['jobId'])
             if ack is None:raise DeliveryError('MANAGER_NATIVE_ACK_REQUIRED')
             b.require_publisher(d.meta(ack['id']),b.CANONICAL_SA)
@@ -123,7 +128,8 @@ def deliver(asset_id,target,request,apply=False):
                 d.api('PATCH','files/'+entry['stockShortcutId'],{'supportsAllDrives':'true','addParents':target,'removeParents':receipt['source_parent_id'],'fields':'id,parents'}, {})
             verified=verify_receipt(d,row,entry,receipt,allow_intent=True)
             if receipt.get('status')!='verified':receipt.update(status='verified',verified_at=b.now_iso());b.atomic_json(path,receipt)
-            row.update(manager_media_folder_id=target,manager_delivery_receipt=str(path.relative_to(b.BASE)),asset_path='MGS-AGENTS/CRIATIVOS/'+row['source_manager']+'/'+row['canonical_filename'],asset_stock_file_id=entry['stockShortcutId'],asset_provider_id=entry['archiveId'],webViewLink='https://drive.google.com/file/d/'+entry['stockShortcutId']+'/view',last_reconciled_at=b.now_iso())
+            row.update(manager_media_folder_id=target,manager_delivery_receipt=str(path.relative_to(b.BASE)),asset_path=standard.inventory_path(row,target),asset_stock_file_id=entry['stockShortcutId'],asset_provider_id=entry['archiveId'],webViewLink='https://drive.google.com/file/d/'+entry['stockShortcutId']+'/view',last_reconciled_at=b.now_iso())
+            if standard.find_slot(target):row.update(manager_storage_state='exclusive',manager_storage_code=standard.manager_code(row['source_manager']))
             payload=''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows);tmp=INVENTORY.with_suffix('.manager-delivery.new');tmp.write_text(payload);tmp.replace(INVENTORY)
             require(INVENTORY.read_text()==payload,'MANAGER_INVENTORY_WRITE_READBACK')
             verify_delivered(d,{'role':'clean','sourceId':row['asset_drive_id']},entry)

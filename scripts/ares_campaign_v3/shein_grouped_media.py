@@ -57,6 +57,18 @@ def manager_folder(request, profile, base, ops, drive_token):
         raise ValueError('approved grouped manager media policy unavailable')
     fid=request.get('manager_media_folder_id')
     folder=ops.drive_file_readback(drive_token,fid)
+    import ares_manager_storage_standard as manager_standard
+    registered=manager_standard.find_slot(fid)
+    if registered:
+        slot,state=registered
+        if state=='used' and not request.get('source_account'):
+            raise ValueError('used manager media requires explicit authorized reuse')
+        expected_formats={('IMG' if media_kind(f)=='image' else 'VID') for f in validate_groups(request)}
+        manager_standard.validate_folder(manager_standard.storage.drive(drive_token),fid,operation='SHEIN_US_'+profile['language'],manager=profile['manager_code'])
+        for fmt in expected_formats:
+            sibling=manager_standard.destination(slot['operation'],fmt,slot['manager_code'],state)
+            manager_standard.validate_folder(manager_standard.storage.drive(drive_token),sibling,operation=slot['operation'],fmt=fmt,manager=profile['manager_code'],state=state)
+        return folder
     names={str(x.get('manager_name')).casefold() for x in json.loads((base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT-accounts.json').read_text())['accounts'] if x.get('manager_code')==profile['manager_code']}
     if request.get('source_account'):
         names |= {name + ' - usados' for name in names}
@@ -158,10 +170,16 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
     proof_dir=base/'data/ares/meta-ads/audit/shein/campaigns/intake'/request['request_id'];proof_dir.mkdir(parents=True,exist_ok=True)
     def download(row):
         import ares_archive_locations as locations
+        import ares_manager_storage_standard as manager_standard
+        expected_folder=folder['id']
+        registered=manager_standard.find_slot(folder['id'])
+        if registered:
+            slot,manager_state=registered
+            expected_folder=manager_standard.destination(slot['operation'],'IMG' if media_kind(row['canonical_filename'])=='image' else 'VID',slot['manager_code'],manager_state)
         f=ops.drive_file_readback(dt,row['asset_drive_id'])
         if f.get('reference_only') is True or (f.get('properties') or {}).get('reference_only') in {True,'true','1'}:
             raise ValueError('reference-only Drive media prohibited')
-        if not locations.stock_scope_for_token(dt,f) or f.get('trashed') or f.get('name')!=row['canonical_filename'] or f.get('parents')!=[folder['id']]:raise ValueError('selected file live identity/folder mismatch')
+        if not locations.stock_scope_for_token(dt,f) or f.get('trashed') or f.get('name')!=row['canonical_filename'] or f.get('parents')!=[expected_folder]:raise ValueError('selected file live identity/folder mismatch')
         path=work_dir/row['canonical_filename']
         if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest()!=row['clean_checksum']:
             with urlopen(Request('https://www.googleapis.com/drive/v3/files/'+f.get('provider_id',row['asset_drive_id'])+'?alt=media&supportsAllDrives=true',headers={'Authorization':'Bearer '+dt}),timeout=180) as response:
@@ -177,7 +195,7 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
         if kind=='image':
             from .image_prestage import validate_local_image
             validate_local_image(path,row['clean_checksum'])
-        return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'media_type':kind,'drive_id':f['id'],'provider_drive_id':f.get('provider_id',f['id']),'storage_record_kind':f.get('record_kind','native_drive_metadata'),'drive_md5':f['md5Checksum'],'drive_parent_id':folder['id'],'metadata_clean':True}
+        return {'asset_id':row['asset_id'],'checksum':row['clean_checksum'],'vertical_file':str(path),'canonical_filename':row['canonical_filename'],'media_type':kind,'drive_id':f['id'],'provider_drive_id':f.get('provider_id',f['id']),'storage_record_kind':f.get('record_kind','native_drive_metadata'),'drive_md5':f['md5Checksum'],'drive_parent_id':expected_folder,'metadata_clean':True}
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:assets=list(pool.map(download,selected))
     # Reconcile scoped Meta usage by exact known media IDs and deterministic
     # lineage titles; requested reuse is explicit, never a claim of novelty.
@@ -222,7 +240,8 @@ def _prepare_locked(request, *, base=Path('/root/mgs-agent'), work_dir=None):
             if row['asset_id'] not in ids:continue
             history=row.setdefault('reservation_history',[])
             if not any(x.get('request_id')==request['request_id'] for x in history):history.append({'request_id':request['request_id'],'previous_status':row.get('status'),'previous_used_by':row.get('used_by'),'previous_reservation_status':row.get('reservation_status'),'at':stamp,'authority':request['authorized_by']})
-            row.update(reservation_request_id=request['request_id'],reservation_status='RESERVADO_PELO_REQUEST',ares_eligible=False,manager_media_folder_id=folder['id'],explicit_asset_request=True,reservation_authority=request['authorized_by'],last_reconciled_at=stamp)
+            media_folder=next(a['drive_parent_id'] for a in assets if a['asset_id']==row['asset_id'])
+            row.update(reservation_request_id=request['request_id'],reservation_status='RESERVADO_PELO_REQUEST',ares_eligible=False,manager_media_folder_id=media_folder,explicit_asset_request=True,reservation_authority=request['authorized_by'],last_reconciled_at=stamp)
             row['request_media_reconciliation']={'account_id':account['account_id'],'known_video_ids':observed[row['asset_id']],'requested_reuse':True,'no_novelty_claim':True,'drive_live':True}
             if row['asset_id'] in observed_images:
                 row['request_media_reconciliation']['known_image_hashes']=observed_images[row['asset_id']]
