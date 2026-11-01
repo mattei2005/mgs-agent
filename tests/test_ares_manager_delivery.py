@@ -6,6 +6,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import ares_manager_delivery as m
 class ManagerDeliveryTests(unittest.TestCase):
  def setUp(self):
+  self.standard=patch.object(m.standard,'policy',return_value=None);self.standard.start();self.addCleanup(self.standard.stop)
   self.row={'asset_id':'assetOffline001','asset_drive_id':'cleanOffline001','source_drive_id':'rawOffline001','clean_checksum':'a'*64,'original_checksum':'b'*64,'source_manager':'Nicolas','requested_by_discord_id':'1055570806945620030','metadata_clean':True,'reservation_status':'RESERVADO_PELO_GESTOR','ares_eligible':False,'used_by':None,'operation':'CC_US_EN','format':'VID','canonical_filename':'CC_US_EN_VID_AVAILABLE_LIMIT_PV_001.mp4'}
   self.entry={'role':'clean','sourceId':'cleanOffline001','lineageId':'assetOffline001','sha256':'a'*64,'md5':'c'*32,'size':'10','relativeParent':['CC_US_EN','VID','01_READY'],'verified':True,'stockTransferredToArchive':True,'archiveId':'providerOffline001','stockShortcutId':'shortcutOffline001','jobId':'jobOffline001'}
   self.req={'requester_id':'1055570806945620030','thread_id':'1565540543457534103','message_id':'1565545194852454471'}

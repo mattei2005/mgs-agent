@@ -1,5 +1,9 @@
 # Conector proprietário de arquivo 30 TB — autorização isolada
 
+## Padrão novo de destinos por gestor
+
+O fluxo READY comum / `<NOME> - Exclusivos` / `<NOME> - Usados`, aprovado e confirmado em `1566496381001146440` e `1566497527719661640`, tem fonte canônica em `context/creative-manager-storage-standard.md` e binding ativo em `data/ares/creative-ops/manager-storage-standard.json`. Usar essa fonte para novos pedidos, sem tomar pastas homônimas na raiz como destino padrão. A implantação é aditiva e tecnicamente validada; não declarou migrado/conciliado o conteúdo histórico, não substituiu providers/ACKs nem resolveu por inferência os incidentes anteriores de movimentos. Primeiro uso produtivo e fechamento histórico são provas separadas.
+
 ## Autoridade
 
 Rodolfo Mattei autorizou explicitamente em `1562888530265374731`, thread `1562078493498540042`, a substituição do executor de criativos Apps Script por um conector privado na VPS, com nova autorização de leitura/gravação no Drive da mesma conta de 30 TB. Proposta vinculada: `data/ares/creative-ops/30tb-archive/owner-connector-architecture-proposal-1562884023607492619.json`.

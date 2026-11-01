@@ -65,6 +65,15 @@ class StandardTests(unittest.TestCase):
    def graph_get(self,*a):return 200,{'id':'345','account_id':'999','campaign_id':'123','adset_id':'234','creative':{'id':'456','object_story_spec':{'video_data':{'video_id':'WRONG'}}}},{}
   with self.assertRaises(s.StandardError):s.verify_meta_assignment(row,'req',Reader(),'offline')
 
+ def test_new_legacy_alias_routes_to_exclusive_but_old_receipt_is_preserved(self):
+  import ares_manager_delivery as delivery
+  row={'source_manager':'Nicolas','operation':'SHEIN_US_EN','format':'VID'}
+  with patch.object(s,'policy',return_value=self.p),patch.object(s,'find_slot',return_value=None),patch.object(delivery,'exact_folder') as verify:
+   self.assertEqual(delivery.delivery_target(object(),row,'legacyOffline001',{}),'exclusiveOffline001')
+   verify.assert_called_once()
+   self.assertEqual(delivery.delivery_target(object(),row,'legacyOffline001',{'destination_parent_id':'legacyOffline001'}),'legacyOffline001')
+   self.assertEqual(verify.call_count,1)
+
 class PipelineTests(unittest.TestCase):
  def test_finalizer_calls_transition_only_for_meta_confirmed_selected_asset(self):
   from ares_campaign_v3 import shein_media_handoff as handoff

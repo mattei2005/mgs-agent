@@ -92,6 +92,10 @@ When Rodolfo asks whether Ares is following the storage structure, audit the exa
 
 Report treatment, permanent archive/stock availability, delivery to the requester and temporary-source retirement as separate results. An empty upload root, a `complete` flag or a verified archive mapping does not prove staging cleanup; read back the exact original and treated staging IDs before claiming no copies remain. Preserve reservations and eligibility, and do not reprocess or recopy a successfully delivered batch to resolve a reporting or validator defect. Use the ordered read-only audit recipe in `references/private-vps-owner-connector.md`.
 
+### Registered manager destinations and post-campaign usage
+
+For the registered READY/Exclusivos/Usados layout, exact manager-folder delivery, same-ID post-use moves, provisioning and acceptance, load `references/manager-storage-standard.md`. Keep technical readiness, first real new-flow use and historical reorganization separate; never infer usage from folder names or treat a validation-only canary as production.
+
 ### Folder provenance and file-movement attribution
 
 Before asking Rodolfo whether a folder or placement is legitimate, resolve the exact folder ID against the approved layout and native metadata. Separate **who created the folder**, **whether its purpose was approved**, and **who later moved a file into it**; an authorized intake folder can contain an independently unexplained movement. Correlate native properties with the layout manifest, audit and original approval; `lastModifyingUser` identifies the last modifier, not necessarily the creator or movement actor. When evidence establishes Zeus created the folder, state that responsibility directly rather than presenting the folder itself as suspicious. Answer the narrow authorship question first, then identify only the remaining attribution gap. Use the folder-provenance recipe in `references/private-vps-owner-connector.md`.

@@ -58,6 +58,12 @@ def receipt_binding(row,entry,receipt):
     validate_identity(row,entry,receipt['request'])
     return True
 
+def delivery_target(d,row,target,prior_delivery):
+    if standard.policy() and not standard.find_slot(target) and (not prior_delivery or prior_delivery.get('requested_destination_id')==target):
+        exact_folder(d,row['source_manager'],target,row=row)
+        return standard.destination(row['operation'],row['format'],row['source_manager'])
+    return target
+
 def verify_receipt(d,row,entry,receipt,*,allow_intent=False):
     receipt_binding(row,entry,receipt)
     require(receipt.get('status') in (['intent','verified'] if allow_intent else ['verified']),'MANAGER_RECEIPT_NOT_VERIFIED')
@@ -103,7 +109,12 @@ def deliver(asset_id,target,request,apply=False):
             storage.require_registered_mapping(entry,index);validate_identity(row,entry,request)
             raw=index.get('mappings',{}).get(row['source_drive_id'],{})
             require(raw.get('jobId')==entry['jobId'] and raw.get('role')=='original' and raw.get('relativeParent')==[row['operation'],row['format'],'99_LEGACY'] and raw.get('sha256')==row['original_checksum'] and raw.get('stockTransferredToArchive') is True,'MANAGER_RAW_LEGACY_PAIR')
-            d=b.Drive(apply);exact_folder(d,row['source_manager'],target,row=row)
+            d=b.Drive(apply);requested_target=target
+            prior_delivery=b.read_json(RECEIPTS/('delivery-'+row['asset_drive_id']+'.json'),{})
+            # New legacy-name requests resolve to registered Exclusivos; old
+            # receipts remain at their exact destinations for safe recovery.
+            target=delivery_target(d,row,target,prior_delivery)
+            exact_folder(d,row['source_manager'],target,row=row)
             ack=d.one(b.config_load()['requests_folder_id'],'ack:'+entry['jobId'])
             if ack is None:raise DeliveryError('MANAGER_NATIVE_ACK_REQUIRED')
             b.require_publisher(d.meta(ack['id']),b.CANONICAL_SA)
@@ -118,7 +129,7 @@ def deliver(asset_id,target,request,apply=False):
                 receipt_binding(row,entry,receipt);require(receipt['destination_parent_id']==target and receipt['request']==request,'MANAGER_REPLAY_SCOPE_CHANGED')
             else:
                 old_parent=current['parents'][0];require(loc.stock_parent(d,old_parent)==[row['operation'],row['format'],'01_READY'],'MANAGER_VERIFIED_READY_STAGE_REQUIRED')
-                receipt={'schema':'mgs.manager.delivery.receipt.v1','authority_message_id':AUTHORITY,'status':'intent','asset_id':asset_id,'logical_id':row['asset_drive_id'],'raw_source_id':row['source_drive_id'],'provider_id':entry['archiveId'],'stock_file_id':entry['stockShortcutId'],'sha256':entry['sha256'],'job_id':entry['jobId'],'manager':row['source_manager'],'source_parent_id':old_parent,'destination_parent_id':target,'request':request,'created_at':b.now_iso(),'copied':False,'deleted':False}
+                receipt={'schema':'mgs.manager.delivery.receipt.v1','authority_message_id':AUTHORITY,'status':'intent','asset_id':asset_id,'logical_id':row['asset_drive_id'],'raw_source_id':row['source_drive_id'],'provider_id':entry['archiveId'],'stock_file_id':entry['stockShortcutId'],'sha256':entry['sha256'],'job_id':entry['jobId'],'manager':row['source_manager'],'source_parent_id':old_parent,'destination_parent_id':target,'requested_destination_id':requested_target,'request':request,'created_at':b.now_iso(),'copied':False,'deleted':False}
             if not apply:return {'status':'verified_plan','asset_id':asset_id,'destination':target,'same_stock_id':entry['stockShortcutId'],'remote_writes':0}
             if not path.exists():b.atomic_json(path,receipt)
             if current['parents']!=[target]:

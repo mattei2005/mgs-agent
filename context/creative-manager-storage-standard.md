@@ -7,7 +7,7 @@
 - Aprovação nova: `1566496381001146440`, em resposta ao padrão explicado em `1566496283479252993` e `1566495685820424293`.
 - Requisitos de origem: `1566493713373462549`.
 - Confirmação adicional do conjunto, incluindo as duas skills Ares e seus espelhos: `1566497527719661640`, após delimitação em `1566497081265365043` (REPORT-INFRA) e explicação na thread. Isto supersede a pendência de autorização do desenho inicial, sem autorizar exclusões, ACL, credenciais ou campanhas.
-- Estado de execução: pastas preparadas e verificadas integralmente por SA; código e procedimentos em validação para ativação. O estado produtivo verificável é `data/ares/creative-ops/manager-storage-standard.json#/phase`, não o texto deste documento. Não confundir canário técnico com o primeiro pedido real de campanha.
+- Estado de execução: **binding ativo e aceitação técnica verificada**; 228 combinações operação/formato/gestor e 456 destinos Exclusivos/Usados relidos por SA, cobrindo 19 operações, IMG/VID e seis gestores. Código e duas skills Ares foram atualizados, com três arquivos live/mirror iguais. O estado produtivo verificável é `data/ares/creative-ops/manager-storage-standard.json#/phase`, não apenas este texto. Não confundir canário técnico com o primeiro pedido real de campanha.
 
 ## Escopo funcional aprovado
 
@@ -42,7 +42,7 @@ As fontes atuais ainda exigem outra topologia e outra semântica:
 
 As condições acima descrevem o preflight anterior à implementação; preservadas como diagnóstico, não como regras ativas concorrentes. A confirmação específica chegou em `1566497527719661640`. A nova rota reconhece exclusivamente os IDs do binding, preserva compatibilidade de pedidos legados em andamento, integra o finalizador SHEIN e fornece `confirm-use` com leitura Meta real para as demais rotas. Código, canário, fase ativa e primeiro uso produtivo são provas distintas.
 
-## Critérios de aceite da implantação futura
+## Critérios de aceite e fronteiras de conclusão
 
 - Inventário e snapshot atuais, sem writer paralelo e com locks canônicos.
 - Preparar/validar tabela de pastas exatas por operação, formato e gestor; criação idempotente pelo componente owner existente, sem ownership SA indevido.
@@ -52,3 +52,14 @@ As condições acima descrevem o preflight anterior à implementação; preserva
 - Canário real de leitura/entrega e readback pelos consumidores autorizados, sem criar campanha de teste ou mídia artificial produtiva.
 - Atualização do catálogo e verificadores em conjunto; nenhum green slice encerra incidentes fora de sua cobertura.
 - Fechamento com resultado real e pendências separadas. Limpeza de pilotos/pastas vazias, atribuição de movimentos e deduplicação de cron permanecem trabalhos distintos e não podem ser declarados resolvidos por este documento.
+
+## Provas de implantação
+
+- `data/ares/creative-ops/30tb-archive/manager-standard/native-preflight.json`: membership integral e owner/ancestria nativos.
+- `manager-standard/native-canary.json`: atalho técnico preexistente passou por Exclusivos e Usados, manteve IDs/provider/hashes e voltou ao parent original; zero campanha ou mídia produtiva criada/movida.
+- `manager-standard/active-readback.json`: releitura dos 456 destinos ativos e 24 probes reais de validação de pastas SHEIN (seis gestores × EN/ES × IMG/VID). Não representa seleção de mídia ou campanha produtiva.
+- `manager-standard/activation.json`: ativação e limites. A migração dos conteúdos históricos NÃO foi executada por esta implantação aditiva; os dois layouts legados e incidentes anteriores não estão automaticamente conciliados.
+- `/root/.hermes/profiles/zeus/artifacts/manager-storage-standard-1566497527719661640/closure-tests.json`: 155 testes focados em dez módulos passaram, com hashes do código; não é a suíte inteira do repositório.
+- `manager-standard/first-production-use.json`: será gravado pelo helper somente após atribuição de campanha real e readback do mesmo stock ID no novo fluxo. Não existe no fechamento técnico inicial, porque nenhuma linhagem produtiva está ainda nos destinos novos. A validação do primeiro pedido real continua distinta e não exige upload artificial do Rodolfo.
+
+Recuperações de validação preservadas nos artefatos: módulo novo ausente no RED inicial; interpretador sem dependência do renderer; fixture histórica acoplada à flag de layout viva; isolamento de módulos e imports de fixtures irmãos no PYTHONPATH. Foram corrigidos implementação/harness/fixture, sem relaxar guards produtivos ou instalar pacotes. Releitura mostrou espelho em revisão intermediária da própria alteração autorizada; sincronizado somente o parágrafo faltante e igualdade final conferida.
