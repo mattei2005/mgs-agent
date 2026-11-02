@@ -580,7 +580,9 @@
     732973,
     732994,
     733017,
-    733036
+    733036,
+    733455,
+    733476
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2999,9 +3001,9 @@
     "digital-trust|openzed|16|1754": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T20:04:29.000Z",
+        "created_at": "2026-11-02T20:07:32.000Z",
         "domain": "openzed",
-        "notification_id": 732187,
+        "notification_id": 733476,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 15,
@@ -3031,7 +3033,8 @@
         728801,
         729917,
         731186,
-        732187
+        732187,
+        733476
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -3367,9 +3370,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T20:04:05.000Z",
+        "created_at": "2026-11-02T20:06:55.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 732167,
+        "notification_id": 733455,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -3416,7 +3419,8 @@
         728780,
         729891,
         731163,
-        732167
+        732167,
+        733455
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -4223,22 +4227,18 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-02T14:57:13-05:00",
+  "last_check": "2026-11-02T15:12:17-05:00",
   "last_delivery": {
-    "at": "2026-11-02T11:12:15-05:00",
+    "at": "2026-11-02T15:12:17-05:00",
     "cursor_ids": [
-      732946,
-      732956,
-      732973,
-      732994,
-      733017,
-      733036
+      733455,
+      733476
     ],
     "message_ids": [],
     "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 733036,
+  "last_seen_id": 733476,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
