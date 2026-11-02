@@ -83,16 +83,16 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "full_financial_refresh_validated_historical_d_qualified",
-    "verified_at": "2026-11-01T14:30:04.713790-05:00",
+    "status": "financial_metrics_validated_pending_d_history",
+    "verified_at": "2026-11-01T21:35:01.251060-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-01T14:29:11.265022-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T142913168019",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T140357287770",
+    "validated_metrics_at": "2026-11-01T21:34:20.512666-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T213423238430",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T210410721266",
     "source_to_live_sheet_cgij_exact": true,
     "d_ledger_to_live_sheet_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
@@ -138,10 +138,26 @@
     "fresh_h_count": 36,
     "h_preserved_count": 0,
     "pending_h_account_ids": [],
-    "h_read_at_min": "2026-11-01T14:04:50.713405-05:00",
-    "h_read_at_max": "2026-11-01T14:26:33.994272-05:00",
-    "h_sum_usd": "426872.46",
-    "pending_ui": [],
+    "h_read_at_min": "2026-11-01T21:06:25.125104-05:00",
+    "h_read_at_max": "2026-11-01T21:28:45.918363-05:00",
+    "h_sum_usd": "433565.78",
+    "pending_ui": [
+      {
+        "account_id": "648687381127947",
+        "name": "Financeadx-MX-CC-ES-01",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1414197490675732",
+        "name": "Mavroa-US-SHEIN-ES-02-G002",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
     "card_proofs_updated": 1,
     "historical_d_gaps": [
       {
@@ -394,14 +410,18 @@
     "historical_d_verified_values": 12,
     "average_period": [
       {
+        "since": "2026-10-30",
+        "until": "2026-11-01"
+      },
+      {
         "since": "2026-10-29",
         "until": "2026-10-31"
       }
     ],
     "totals_usd": {
-      "average_daily": "19269.06",
-      "balance": "431276.94",
-      "month_spend": "868259.36"
+      "average_daily": "19275.21",
+      "balance": "438616.83",
+      "month_spend": "868261.75"
     },
     "invoice_due_usd": "0",
     "visible_invoice_numbers": 0,
@@ -424,19 +444,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "3411.03"
+        "value": "3416.67"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "4458.87"
+        "value": "5371.79"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "133462.23"
+        "value": "133463.11"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -448,25 +468,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "15858.03"
+        "value": "15858.54"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "426872.46"
+        "value": "433565.78"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "426818.07"
+        "value": "433245.04"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "734797.13"
+        "value": "734798.64"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -478,29 +498,34 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "19269.06"
+        "value": "19275.21"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "426872.46"
+        "value": "433565.78"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "431276.94"
+        "value": "438616.83"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "868259.36"
+        "value": "868261.75"
       }
     ],
     "lease_free": true,
-    "pc1_blocker": null,
+    "pc1_blocker": {
+      "stage": "D_history",
+      "account_id": "648687381127947",
+      "reason": "billing_page_not_verified; screenshot New Tab with typed target URL; no provider/auth gate proven; UI stopped, no reload/alternate profile",
+      "evidence": "/root/.hermes/profiles/zeus/cache/images/computer_use_36aa04f3fb924b05b87d5a4d7cfd2efe.png"
+    },
     "payments_executed": 0,
     "meta_writes": 0,
     "cron_changes": 0,
@@ -508,12 +533,33 @@
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
     "other_sheet_data_preservation_qualification": "Full native grid baseline captured before first apply; unrelated tab identical at closure.",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261101T140312342125/closure-current.json",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261101T210325861645/closure-current.json",
     "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
   },
   "pending_card_history": {
-    "status": "validated_no_new_pending_events_historical_d_qualified",
-    "account_ids": [],
+    "status": "pending_new_events_ui_navigation_unverified",
+    "account_ids": [
+      "648687381127947",
+      "1414197490675732",
+      "2852476828464907"
+    ],
+    "pending_ui": [
+      {
+        "account_id": "648687381127947",
+        "name": "Financeadx-MX-CC-ES-01",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "1414197490675732",
+        "name": "Mavroa-US-SHEIN-ES-02-G002",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
     "historical_blank_account_ids": [
       "336562339356179",
       "3752157451670648",
@@ -552,8 +598,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-01T14:30:04.713790-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261101T140312342125/closure-current.json"
+    "verified_at": "2026-11-01T21:35:01.251060-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261101T210325861645/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -624,7 +670,7 @@
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
   "layout_version": 3,
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T140357287770",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T210410721266",
   "pay_now_updated_each_tick": true,
   "pay_now_collection_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
   "schema": {

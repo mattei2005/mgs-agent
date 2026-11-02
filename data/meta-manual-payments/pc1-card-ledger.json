@@ -305,33 +305,33 @@
       "account_id": "1062446663435585",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-01T13:31:41.327651-05:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261101T133050214431/verified-1062446663435585.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261101T133050214431/1062446663435585-receipt.json",
+      "read_at": "2026-11-01T21:30:06.684091-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261101T212922412327/verified-1062446663435585.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261101T212922412327/1062446663435585-receipt.json",
       "rows": [
+        {
+          "date": "Nov 1, 2026",
+          "method": "American Express ···· 3322",
+          "amount": "0.41",
+          "status": "Paid"
+        },
+        {
+          "date": "Nov 1, 2026",
+          "method": "American Express ···· 3322",
+          "amount": "67.13",
+          "status": "Paid"
+        },
         {
           "date": "Nov 1, 2026",
           "method": "Discover ···· 6762",
           "amount": "67.00",
-          "status": "Paid"
-        },
-        {
-          "date": "Oct 31, 2026",
-          "method": "Discover ···· 6762",
-          "amount": "67.00",
-          "status": "Paid"
-        },
-        {
-          "date": "Oct 30, 2026",
-          "method": "Discover ···· 6762",
-          "amount": "67.00",
-          "status": "Paid"
+          "status": "Failed"
         }
       ],
       "latest_card": {
         "date": "Nov 1, 2026",
-        "method": "Discover ···· 6762",
-        "amount": "67.00",
+        "method": "American Express ···· 3322",
+        "amount": "0.41",
         "status": "Paid"
       },
       "status": "verified_card",

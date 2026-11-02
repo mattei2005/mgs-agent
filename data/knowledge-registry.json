@@ -6944,10 +6944,28 @@
       "kind": "capability",
       "owner": "Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "CREATIVE-LEGACY-USAGE-1566639091007758458",
+      "title": "Disposição de fontes antigas e conciliação de leitura/uso do acervo legado",
+      "updated_at": "2026-11-02T02:35:15+00:00"
+    },
+    {
+      "canonical_key": "creative-archive.legacy-reconciliation",
+      "canonical_source": "context/creative-archive-legacy-reconciliation.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative-operations",
+      "effective_at": "2026-11-02T02:35:15+00:00",
+      "id": "CREATIVE-LEGACY-USAGE-1566639091007758458",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Disposição de fontes antigas e conciliação de leitura/uso do acervo legado",
-      "updated_at": "2026-11-01T20:09:46+00:00"
+      "title": "172 tratados históricos classificados e organizados em Usados por declaração operacional explícita de Rodolfo",
+      "updated_at": "2026-11-02T02:35:15+00:00"
     },
     {
       "canonical_key": "ares.creative.manager-storage-standard.desired-design",
@@ -15776,5 +15794,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:09:46+00:00"
+  "updated_at": "2026-11-02T02:35:15+00:00"
 }

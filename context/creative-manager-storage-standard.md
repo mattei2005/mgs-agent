@@ -19,7 +19,7 @@ Destino de trabalho: `MGS-ARQUIVO/CRIATIVOS/<OPERACAO>/<IMG|VID>/`:
 
 - `01_READY`: estoque comum, tecnicamente tratado e disponível para distribuição, respeitando o inventário de elegibilidade.
 - `<NOME> - Exclusivos`: reservado ao gestor, ainda sem utilização confirmada. Não disponibilizar automaticamente no pool comum.
-- `<NOME> - Usados`: peças com utilização confirmada nas campanhas do gestor. O nome da pasta, isoladamente, não é prova suficiente para inventar uso Meta ou preencher IDs de campanha.
+- `<NOME> - Usados`: peças com utilização confirmada nas campanhas do gestor. O nome da pasta, isoladamente, não é prova suficiente para inventar uso Meta ou preencher IDs de campanha. Para a coorte histórica exata de 172 tratados, Rodolfo forneceu a confirmação operacional em `1566639091007758458`; a destinação Usados foi executada e validada conforme a seção final de `context/creative-archive-legacy-reconciliation.md`, sem inventar vínculos Meta ou alterar o fluxo futuro.
 
 Manter originais e histórico fora do pool disponível, com linhagem e hashes preservados. Não presumir que todo conteúdo de `99_LEGACY` seja exclusivamente original.
 

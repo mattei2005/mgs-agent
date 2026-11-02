@@ -4,7 +4,7 @@
 
 - Pedido de continuidade: Rodolfo Mattei, mensagem `1566533058130088158`, thread `1562078493498540042`.
 - Esta etapa sucede a reorganização física de `1566510979838255326`, sem repeti-la ou ampliar para exclusões, permissões, credenciais, campanhas ou liberação de reservas.
-- Estado técnico: concluído e validado. A disposição de uso dos 172 tratados ainda exige evidência/declaração operacional; não foi inventada.
+- Estado vigente: **concluído e validado**, incluindo a classificação dos 172 tratados por declaração operacional explícita de Rodolfo em `1566639091007758458`. A pendência de confirmação abaixo é histórica e foi supersedida pela seção final; não pedir novamente comprovação Meta ou confirmação aos gestores para essa coorte.
 - Fontes operacionais: `data/ares/creative-ops/30tb-archive/legacy-reconciliation-1566533058130088158/` (`provider-metadata.json`, `native-verification.json`, `object-role-ledger.json`, `retired-source-ledger.json`, `acceptance.json`).
 
 ## 1. Os 44 registros inacessíveis foram explicados
@@ -47,6 +47,23 @@ Os 172 permanecem no legado, reservados e fora do pool automático. O catálogo 
 **Próximo passo decisório:** validar com os gestores/Ares a destinação dos 172 tratados antes de reclassificar em Usados/Exclusivos ou liberar qualquer reserva. Recomendação: manter o hold e obter confirmação operacional por lote/gestor, usando os candidatos Meta apenas como auxílio. Esta investigação não autoriza contato/handoff novo, liberação ao estoque comum, novo uso em campanha ou mudança da política de confiança por iniciativa própria.
 
 A primeira campanha nova pelo padrão Exclusivos → Usados continua um aceite separado, acompanhado pelo recibo real, não pela remarcação de históricos.
+
+## Confirmação operacional e execução — 1566639091007758458
+
+Rodolfo confirmou na mensagem `1566639091007758458` da mesma thread: “como te falei se estao nas pastas deles, eh pq ja usaram pra campanha.” Essa é a declaração operacional que faltava; supersede para esta coorte a proposta de consultar novamente gestores/Ares. Não é necessário exigir prova Meta adicional para reconhecer esse uso histórico.
+
+- Coorte congelada: exatamente os 172 `processed_clean` do ledger anterior. Os 12 RAW e três arquivos de referência/não finais ficaram intocados.
+- Os 172 mesmos stock IDs foram movidos das pastas históricas aos nove destinos cadastrados `<GESTOR> - Usados`, usando o gestor da pasta antiga, não o remetente original nem uma nova atribuição de ownership funcional.
+- Distribuição por pasta histórica: Nicolas 22; Joe 64; Ícaro 47; Geizian quatro; Isliago 35. São cinco gestores, nove combinações operação/formato/gestor.
+- Evidência de uso: `authorized_human_operational_declaration`, autor `344196393512075265`, mensagem e coorte explícitas. Não foram inventados campaign/ad/creative/media IDs, nem criada prova de atribuição Meta.
+- A execução usou os locks intake → queue → inventory, intents CAS persistidos, snapshot anterior, canário real e readback por ID. Replay final produziu zero movimentos.
+- Os 172 leitores lógicos e downloads integrais passaram: 1.125.469.693 bytes. Stock IDs, providers, hashes, nomes, owner e ACL foram preservados; somente o parent dos stocks foi alterado conforme o plano. Providers e seus parents não mudaram.
+- Catálogo: classificação/localização e declaração atualizadas; todos os campos de reserva, elegibilidade, ownership funcional, IDs, status de campanha e referências Meta permaneceram iguais. As demais linhas do catálogo e os 15 objetos excluídos da coorte foram relidos sem alteração.
+- Sem exclusão, recópia, reprocessamento, mudança de permissão/credencial ou criação de campanha. O uso histórico declarado não cria o recibo de primeira campanha nova nem amplia autorização de retirada destrutiva.
+
+Fonte operacional sucessora: `data/ares/creative-ops/30tb-archive/legacy-usage-1566639091007758458/` (`plan.json`, `execution.json`, `inventory-before.jsonl`, `canary.json`, `acceptance.json`). O plano e os journals preservam os parents originais para reversão CAS sob os mesmos locks; nunca restaurar cegamente o catálogo inteiro sobre mudanças posteriores.
+
+**Pendência de confirmação dos 172: encerrada.** O fluxo de novos pedidos continua Exclusivos → Usados após utilização confirmada; esta resolução histórica não transforma nomes de pastas futuras em prova Meta.
 
 ## Evidências
 
