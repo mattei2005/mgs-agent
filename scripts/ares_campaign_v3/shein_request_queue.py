@@ -74,6 +74,27 @@ def dependencies(request, account_id, base=BASE, *, _held_accounts=frozenset()):
         return []
     deps = set()
     selected_rows = selected(request, base)
+    states = [json.loads(path.read_text()) for path in (root(base) / 'single-clone').glob('*/state.json')]
+    source_proof = None
+    from .shein_decision_wait import pending
+    pinned_owners = set()
+    for path in (root(base) / 'queue/decision-waits').glob('*.json'):
+        record = json.loads(path.read_text())
+        owner = path.stem
+        if str(record.get('account_id')) == str(account_id) and owner != rid:
+            pinned_owners.add(owner)
+            origin = state(base, owner).get('request') or {}
+            if origin.get('request_id') != owner or str(origin.get('account')) != str(account_id):
+                deps.add(owner)  # Missing or changed state cannot erase a pinned human wait.
+    if (request.get('mode', 'pure_clone') == 'pure_clone' and not selected_rows
+            and pinned_owners):
+        try:
+            from .shein_source_media import resolve
+            source_proof = resolve(request, account_id, base, held_accounts=_held_accounts)
+            selected_rows = source_proof.reservations
+        except (OSError, ValueError, KeyError, TypeError, AttributeError):
+            # Missing/stale/uncertain source proof retains the historical dependency.
+            source_proof = None
     for row in selected_rows:
         owner = row.get('reservation_request_id')
         if not owner or owner == rid:
@@ -84,15 +105,14 @@ def dependencies(request, account_id, base=BASE, *, _held_accounts=frozenset()):
             raise ValueError('queue reservation request partition mismatch')
         if not terminal(previous):
             deps.add(owner)
-    directory = root(base) / 'single-clone'
-    for path in directory.glob('*/state.json'):
-        value = json.loads(path.read_text())
+    for value in states:
         origin = value.get('request') or {}
         owner = origin.get('request_id')
         from .shein_decision_wait import inert_for, pending
         if (owner and owner != rid and str(origin.get('account')) == str(account_id)
                 and (value.get('phase') in ACTIVE or (pending(base, owner) and not terminal(value)))):
-            if inert_for(request, value, selected_rows, base, held_accounts=_held_accounts):
+            if inert_for(request, value, selected_rows, base, held_accounts=_held_accounts,
+                         source_proof=source_proof):
                 continue
             waiting = job_path(base, owner)
             other_job = json.loads(waiting.read_text()) if waiting.exists() else {}

@@ -14,7 +14,8 @@ from pathlib import Path
 MEDIA_KEYS = {'asset_id', 'canonical_filename', 'checksum', 'clean_checksum',
               'clean_md5', 'asset_drive_id', 'drive_file_id', 'video_id',
               'vertical_video_id', 'square_video_id', 'image_hash', 'original_video_id',
-              'meta_video_id', 'meta_image_hash', 'original_checksum', 'pixel_sha256'}
+              'meta_video_id', 'meta_image_hash', 'original_checksum', 'pixel_sha256',
+              'hash', 'object_story_id', 'effective_object_story_id'}
 
 
 def digest(path):
@@ -120,10 +121,11 @@ def evidence(base, value, *, resume_request=None):
         resume_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / resume_id / 'state.json'
         if resume_path.exists():
             resume_state = _read(resume_path)
+            from .shein_source_media import same_resume_request
             own_resume = (lease.get('request_id') == resume_id and lease.get('blocks_readers') is True
                 and lease.get('status') in {'IN_PROGRESS', 'DEFERRED_QUOTA', 'READBACK_DEFERRED',
                                             'RECOVERY_PENDING', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'}
-                and resume_state.get('request') == resume_request
+                and same_resume_request(base, resume_state.get('request'), resume_request)
                 and str(resume_request.get('account')) == account
                 and resume_state.get('phase') in {'ENGINE_PENDING', 'RECOVERY_PENDING',
                     'POSTPROCESS_PENDING', 'GLOBAL_QA_COMPLETE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'})
@@ -132,14 +134,20 @@ def evidence(base, value, *, resume_request=None):
     return rec
 
 
-def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset()):
+def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(), source_proof=None):
     """True only for an explicitly evidenced, disjoint-media, idle human wait."""
     try:
         evidence(base, value, resume_request=request)
         origin = value['request']; account = str(origin['account']); owner = origin['request_id']
         if (request.get('source_channel_id') != origin.get('source_channel_id')
-                or not selected_rows):
+                or str(request.get('account')) != account
+                or (not selected_rows and source_proof is None)):
             return False
+        if source_proof is not None:
+            from .shein_source_media import SourceMediaProof
+            if not isinstance(source_proof, SourceMediaProof):
+                return False
+            source_proof.validate(request, account, base)
         lock = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / ('account-' + account + '.lock')
         if account not in held_accounts and not _unlocked(lock):
             return False
@@ -149,17 +157,23 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset())
         historical = _media(value)
         inventory = base / 'data/ares/creative-ops/inventory/assets.jsonl'
         campaign_ids = set(value['engine_result']['campaign_ids'])
-        for line in inventory.read_text().splitlines():
-            row = json.loads(line)
-            identities = _media(row)
-            if (row.get('reservation_request_id') == owner or row.get('meta_campaign_id') in campaign_ids
-                    or identities & historical):
-                historical.update(identities)
+        rows = [json.loads(line) for line in inventory.read_text().splitlines() if line.strip()]
+        for row in rows:
+            if row.get('reservation_request_id') == owner or row.get('meta_campaign_id') in campaign_ids:
+                historical.update(_media(row))
+        from .shein_source_media import expand
+        historical, _ = expand(historical, rows)
+        if source_proof is not None:
+            live_history = json.loads(source_proof.historical_json).get(owner)
+            if not live_history:
+                return False
+            historical.update(tuple(x) for x in live_history['identities'])
         if not historical:
             return False
         # Reservation guards in dependencies are independent; shared identity also blocks
         # when lineage differs or a historical reservation is no longer present.
-        return not bool(historical & _media(selected_rows))
+        selected_media = source_proof.identities if source_proof is not None else _media(selected_rows)
+        return bool(selected_media) and not bool(historical & selected_media)
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
         return False
 
