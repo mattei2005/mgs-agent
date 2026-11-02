@@ -813,12 +813,12 @@
     {
       "agent": "zeus",
       "id": "ARES-DRIVE-DOC-VERIFY-1566859676455534593",
-      "next_step": "6arquivos originais+espelhos e promptnativo confirmados. Varredura1024Markdown mostrou rotas anteriores de CreativeOps, PaidAcquisition,Taxonomia e mapaAres ainda com localizacao antiga e gateSharedDrive aplicado a estoqueMyDrive. Corrigir somente instrucoes de storage/intake/identidade conforme decisoes vigentes; preservar historico/logicalnamespace. Validar referencias/mirrors,registrar inventario/audit/REPORT antesfechar.",
-      "objective": "Conferir e reconciliar documentacao Ares afetada pelo intake flat e arquivo30TB, sem alterar campanhas, acessos ou runtime.",
-      "source": "context/drive-flat-intake-cutover.md",
-      "state": "audit_found_stale_secondary_routes",
+      "next_step": "Conferencia concluida:6arquivos originais e promptnativo corretos;corrigidos12docs adicionais(6CreativeOps,3PaidAcquisition,2Taxonomia,1mapaAres),11mirrors iguais,62refs existentes,varredura1024MD paths,0apontamentoativo antigo nos criteriosauditados. Historico/logicalnamespace preservados. AprendizadoZeus salvo+mirror. Inventarioares-drive-doc-consistency-1566859676455534593 eREPORT no report-readback.json validados. Alteracao de helper paralelo atribuida ao cronautorizado83b148017b4d;naosobrescrita,nemfechadapelofollowup. Nenhuma pendencia documental detectada no escopoauditado;nao alegar revisao semantica de todadoc nao relacionada.",
+      "objective": "Conferir e reconciliar documentacao Ares afetada pelo intake flat e arquivo30TB, sem alterar campanhas/acessos/runtime nesta tarefa documental.",
+      "source": "data/ares/creative-ops/30tb-archive/flat-intake-1566814476626563115/documentation-followup-1566859676455534593/validation.json",
+      "state": "completed_documentation_routes_mirrors_verified",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-02T17:05:28+00:00"
+      "updated_at": "2026-11-02T17:22:18+00:00"
     },
     {
       "agent": "ares",
@@ -2489,6 +2489,16 @@
       "state": "concluido:17meses/748linhas e34views browser pass;agosto financeiro intacto;16meses preenchidos;0duplicações/pendências;fx e88invariantes preservados;regra+skill+registry+inventário validados;report-infra1547249440144887819 com readback exato",
       "thread_id": "1545426987756298340",
       "updated_at": "2026-09-09T14:18:05+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "FLAT-PENDING-SOURCE-RECOVERY-20261102",
+      "next_step": "2/2jobs nativos streams+request/receipt/ACK inalterados;95testesPASS;monitorcanonicoOK. ProofSA1S9zQCNy8uCZw-jl06VbizD906UOno9ZH exato. Inventario/audit e REPORT1566865145852854404 embed vazio semmentions relidos;skillcanonical/mirrorSHAigual. Nenhuma acao humana/Run;sem midia/ACL/delete/campanha/agenda. Retomar somente automacoes existentes;primeiro uploadreal segue gateinterno separado.",
+      "objective": "Recuperar verificacao das duas fontes preservadas na entrada flat sem novo tratamento ou exclusao",
+      "source": "/root/.hermes/profiles/zeus/artifacts/flat-pending-source-recovery-20261102/final-verification.json",
+      "state": "completed_validated",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-02T17:22:55+00:00"
     },
     {
       "agent": "zeus",
@@ -8302,5 +8312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T17:05:28+00:00"
+  "updated_at": "2026-11-02T17:22:55+00:00"
 }
