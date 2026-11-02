@@ -5143,12 +5143,12 @@
     {
       "agent": "ares",
       "id": "ares-cpr-1566887240817446974",
-      "next_step": "Validar primeira leitura e habilitar checagens finitas de 30 minutos com expiracao absoluta",
+      "next_step": "Executar checagens de 30 minutos, admitir campanhas futuras criadas hoje, alertar ultrapassagem valida nesta thread e expirar em 03/11/2026 00:00 EST antes de API",
       "objective": "Alertar Joe sobre CPR estritamente maior que USD1.30 de campanhas novas e duplicadas hoje na Mavroa04 ate fim de 02/11/2026 EST",
       "source": "data/ares/meta-ads/state/cpr-watch/1566887240817446974/manifest.json",
-      "state": "preparando descoberta dinamica read-only, testes e auditoria de agenda; sem write meta",
+      "state": "ativo: 10 campanhas 020-029 admitidas por conta/data/evento live; leitura inicial 13:53 est sem resultados; agenda :16/:46 confirmada de 14:16 a 23:46; testes offline, dry-run live, wrapper silencioso e auditorias globais pre/pos aprovados; zero write meta",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-02T18:52:18+00:00"
+      "updated_at": "2026-11-02T18:54:42+00:00"
     },
     {
       "agent": "ares",
@@ -8322,5 +8322,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T18:52:18+00:00"
+  "updated_at": "2026-11-02T18:54:42+00:00"
 }
