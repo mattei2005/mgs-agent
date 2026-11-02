@@ -1,7 +1,13 @@
 {
-  "status": "updated_validated",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T142913168019",
-  "collected_at": "2026-11-01T14:29:11.265022-05:00",
+  "status": "updated_metrics_pending_card_history",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261101T210408845392",
+  "collected_at": "2026-11-01T21:04:05.407942-05:00",
   "accounts": 47,
-  "pending_ui": []
+  "pending_ui": [
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    }
+  ]
 }
