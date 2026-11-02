@@ -2443,12 +2443,12 @@
     {
       "agent": "zeus",
       "id": "DRIVE-TWO-LOCATIONS-AUDIT-1566810303168254075",
-      "next_step": "Enumerar todos objetos/pastas dos roots MGS/arquivo/corporativo viaSA, todaspaginas; reconciliar plano/runtime/proveniencia; comparar intencao nova de entrada simples com slots antigos. Sem move/exclusao/ACL/credencial nesta auditoria; entregar arvore simplificada,diagnostico e correcao recomendada.",
+      "next_step": "Auditoria remota somente leitura concluida:158pastasMGS+1653arquivo+13corporativo;1827parents63lotes0divergencias. RaizMGS4arquivos extras;intake19operacoes114gestores+processamento+excecoes. Raizes30TB corretas. Entradaflat recomendada, NAO implantada;adaptar binding/claims/tratamento/retirada antes moves;preservarSA/IDs/reservas/ACL/backup. Nenhum move/delete remoto. Entregar diagnostico legivel e separar aprovacao de novo desenho de execucao critica.",
       "objective": "Auditar todas as pastas dos dois Drives e explicar divergencias: MGS somente entrada UPLOAD MANUAL; nichos/gestores e restante nos30TB.",
-      "source": "discord:1566810303168254075",
-      "state": "readonly_inventory_in_progress",
+      "source": "context/drive-two-location-layout-review.md",
+      "state": "completed",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-02T13:45:51+00:00"
+      "updated_at": "2026-11-02T13:56:47+00:00"
     },
     {
       "agent": "zeus",
@@ -2969,6 +2969,16 @@
       "state": "completed",
       "thread_id": "1564789767420252264",
       "updated_at": "2026-10-28T01:36:30+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "SB-NODE-1566812251250229279",
+      "next_step": "Validar override nativo, congelar rollback/ativos, canário isolado e read-only autenticado; aplicar somente no sb-venv sem reboot/gateway restart; validar novos consumidores e drenar legados",
+      "objective": "Corrigir runtime Node do Playwright sb-venv na VPS Hostinger usando Node22.23.4 existente; preservar navegadores, sessões, crons e regras de negócio",
+      "source": "discord:1566812251250229279",
+      "state": "preflight",
+      "thread_id": "1565713769789657239",
+      "updated_at": "2026-11-02T13:54:43+00:00"
     },
     {
       "agent": "zeus",
@@ -6853,12 +6863,12 @@
     {
       "agent": "zeus",
       "id": "meta-app-fleet-audit-20261102-1566805898364584050",
-      "next_step": "Coletar mensagens de ontem/hoje, exercitar fonte SB, corrigir causa e validar antes do force-live",
+      "next_step": "Validar famílias live completas e valores; consumir processo proc_abf65b8422bd sem replay; validar ciclo agendado, inventário/audit/REPORT e escalar verificação humana dos perfis",
       "objective": "Auditar alertas de 01 e 02/11, corrigir INVEST HOJE e INVEST 3D e enviar alertas reais nos 13 canais vigentes",
       "source": "discord:1566805898364584050",
-      "state": "in_progress: registry 13 rotas; quatro crons ativos; auditoria de fontes e alertas em curso",
+      "state": "12 apps e b013 verificados; 33 alertas históricos e 36 saídas; investimentos 194 linhas/187 numéricas/7 sem fonte; retry limitado e recibo persistente implantados, 18 testes ok; 12 alertas live emitidos; b013 em execução silenciosa; b011-9 admin exige verificação facebook 190/459",
       "thread_id": "1566805898364584050",
-      "updated_at": "2026-11-02T13:28:51+00:00"
+      "updated_at": "2026-11-02T13:53:52+00:00"
     },
     {
       "agent": "zeus",
@@ -6983,12 +6993,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Próximo tick14:02Eastern usa novembroJ;E/F seguem última competência gerada. Sem pagamento/billing e sem expansão de contas;H/D conforme procedimento já validado.",
+      "next_step": "Próximo tick14:02Eastern usa novembroJ;E/F última competência gerada. Fluxo H/D preservado;nenhuma ação do dono necessária. Sem pagamento,billing ou expansão de47IDs.",
       "objective": "Planilha47IDs;Jnovembro por1566811141747777680;sem billing/pagamentos",
       "source": "/root/mgs-agent/reports/meta-manual-payments-runs/month-1566811141747777680/receipt.json",
-      "state": "02/11 colunaj corrigida paranovembro2026:47/47 coletadas08:50est,usd27042.82,01–02nov com hoje parcial. header/notas e3totaisjexatos;a:i eoutra aba authored preservados. e/f invoicesoutubro mantidasusd417702.93. contrato/job existentes agoranovembro;cadência/47ids iguais. worker header dinâmico3testes;skill live/mirror iguais. registro mensal canônico criado,supersessão outubro em histórico do contrato. report-infra a selar.",
+      "state": "02/11 jnovembro2026 concluída:47/47 fontesmeta08:50est,usd27042.82,01–02nov com hojeparcial. título/notas e3totaisjpass;a:i/outra aba authored preservados;e/f outubro invoices mantidas. contrato/job existentes agoranovembro,cadência/47ids inalterados. header dinâmico3testes;skill live/mirrors iguais;registry mensal ativo e históricooutubro preservado. inventário runtime_artifacts(recebimentos não emdata_files regenerado),audit ereport-infra1566812346909851789embed relido/validado.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-02T13:52:52+00:00"
+      "updated_at": "2026-11-02T13:53:50+00:00"
     },
     {
       "agent": "zeus",
@@ -8242,5 +8252,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T13:52:52+00:00"
+  "updated_at": "2026-11-02T13:56:47+00:00"
 }

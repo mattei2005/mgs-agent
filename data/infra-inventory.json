@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-02T08:47:02-05:00",
+    "updated_at": "2026-11-02T08:58:31-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -893,41 +893,87 @@
   ],
   "runtime_artifacts": [
     {
-      "id": "SECURITY-FINAL-1566802028745859113",
       "agent": "zeus",
-      "type": "server_security_revalidation",
-      "source_message_id": "1566802028745859113",
-      "source_thread_id": "1565713769789657239",
-      "status": "audit_completed_findings_and_access_gaps_remain",
-      "os_hosts_verified": [
-        "Hostinger-agents",
-        "MatteiInc01",
-        "MatteiInc02",
-        "MatteiInc03JBF",
-        "Hestia-mail"
+      "backup": "/root/mgs-agent/backups/meta-app-invest-resilience-1566805898364584050",
+      "blocked_external": {
+        "B011-9": "Arther Tahalele Facebook login/security checkpoint; /me OAuth 190, debug invalid subcode 459. No credential changes authorized.",
+        "B013-7": [
+          "Max Tin Masela",
+          "Crislaine Oliveira",
+          "Riza Gabiola",
+          "Ricardo Oliveira",
+          "Maria Isabelly Bel"
+        ]
+      },
+      "budget_or_campaign_changes": false,
+      "changes": [
+        "Retry one transient spend-source failure; preserve unavailable as n/d and fail closed on auth/rate-limit/scope/date contracts.",
+        "Retain last requested enrichment receipt across not_requested cycles, with allowlisted diagnostic classifications.",
+        "Requested live card distinguishes failed admin-profile token from healthy app metadata and role-list access."
       ],
-      "sftp_only_hosts": [
-        "openzed.com",
-        "finanzas.openzed.com",
-        "cliquet.com",
-        "finanzas.cliquet.com"
+      "credential_changes": false,
+      "evidence": "/root/mgs-agent/reports/meta-app-fleet-1566805898364584050",
+      "historical_evidence": {
+        "attribution": "External membership loss confirmed by fresh Graph/DTR; original actor not attributed. Historical investment helper exception was overwritten; exact trigger not recoverable.",
+        "cards": 33,
+        "messages": 103,
+        "unique_removed_profiles": 36
+      },
+      "id": "meta-app-fleet-invest-resilience-1566805898364584050",
+      "paths": [
+        "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+        "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+        "/root/mgs-agent/tests/test_meta_app_invest_3d.py",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md"
       ],
-      "unverified_historical_hosts": [
-        "SpazioVPS",
-        "vpsdimelabella"
-      ],
+      "pause_sets_changed": false,
+      "report_infra_status": "pending_final_b013_readback",
+      "source_message_id": "1566805898364584050",
+      "status": "validation_in_progress_b013_native_delivery_running",
+      "thread_id": "1566805898364584050",
+      "type": "monitor_recovery_and_live_alert_audit",
+      "validation": {
+        "both_live_loaders": "INVEST_3D_OK",
+        "generic_delivery_readback": "12/12 exact native cards and complete 140 rows verified",
+        "generic_requested_channels": 12,
+        "shell_and_embedded_python_syntax": "PASS",
+        "unit_tests": 18
+      }
+    },
+    {
+      "agent": "zeus",
+      "evidence": "reports/meta-manual-payments-runs/month-1566811141747777680/receipt.json",
+      "id": "meta-manual-payments-november-1566811141747777680",
+      "path": "data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "report_infra_message_id": "1566812346909851789",
+      "report_infra_readback": true,
+      "report_infra_status": "sent_verified",
+      "source_message_id": "1566811141747777680",
+      "source_thread_id": "1563926766286803004",
+      "status": "november_j_updated_validated",
+      "type": "data/financial-month-period",
+      "verification": "J47/47November01–02USD27042.82,collected08:50EST;header/notesNovember2026;canary and exact readback47+3totalsJ;A:I/other-tab authored cells unchanged;E/F invoicesOctober retained. Contract and existing cron promptNovember,cadence/47IDs unchanged. Dynamic header3month tests pass;live/mirrors equal;0MetaWrites/0payments."
+    },
+    {
+      "agent": "zeus",
+      "evidence": "reports/meta-manual-payments-runs/manual-1566800470117187695/closure-current.json",
+      "id": "meta-manual-payments-refresh-1566800470117187695",
+      "report_infra_message_id": "1566810398349332576",
+      "report_infra_readback": true,
+      "report_infra_status": "sent_verified",
+      "source_message_id": "1566800470117187695",
+      "source_thread_id": "1563926766286803004",
+      "status": "completed_prior_full_refresh_month_J_superseded",
+      "type": "data/financial-refresh-and-pc1-surface-recovery",
+      "verification": "Prior full47refresh08:42EST:H36fresh,D8proofs,pending_ui empty;October29invoicesUSD417702.93;Chrome binding and stale-handle recovery persisted. JOctober subsequently superseded only by1566811141747777680. Prior other-tab concurrent edits preserved,unattributed."
+    },
+    {
+      "agent": "zeus",
+      "evidence_root": "/root/.hermes/profiles/zeus/reports/security-final-1566802028745859113",
       "external_host_os_unverified": [
         "fincgriffin.com"
       ],
-      "package_updates_eligible": 0,
-      "reboot_markers": 0,
       "failed_units": 0,
-      "wordpress_file_inventory": {
-        "total": 115,
-        "latest": 107,
-        "official_insecure": 6,
-        "official_outdated": 2
-      },
       "findings": [
         "provider_nginx_backports_unverified",
         "kernel_CVE-2026-98432_vendor_fix_pending_mptcp_listeners_on_Inc01_Inc03",
@@ -936,14 +982,43 @@
         "php_upload_progress_preventive_mitigation_pending",
         "optional_esm_apps12_each_RunCloud8_Hestia"
       ],
+      "id": "SECURITY-FINAL-1566802028745859113",
+      "os_hosts_verified": [
+        "Hostinger-agents",
+        "MatteiInc01",
+        "MatteiInc02",
+        "MatteiInc03JBF",
+        "Hestia-mail"
+      ],
+      "package_updates_eligible": 0,
       "production_updates_or_restarts": false,
       "readonly_smoke": "PLAYWRIGHT_NODEJS_PATH=/usr/bin/node passed driver transport only; not production activation",
+      "reboot_markers": 0,
       "report_path": "/root/mgs-agent/reports/security-final-20261102-1566802028745859113.md",
-      "evidence_root": "/root/.hermes/profiles/zeus/reports/security-final-1566802028745859113",
+      "sftp_only_hosts": [
+        "openzed.com",
+        "finanzas.openzed.com",
+        "cliquet.com",
+        "finanzas.cliquet.com"
+      ],
       "skill_learning": {
+        "mirror_verified": true,
         "path": "profiles/zeus-skills/ops/vps-maintenance-and-backup-governance/references/maintenance-preflight-integrity-boundaries.md",
-        "sha256": "41f6719dad44bb0d0eb82aa4b033d7ec3fdc30f90b4a15ba02d2724e112b3923",
-        "mirror_verified": true
+        "sha256": "41f6719dad44bb0d0eb82aa4b033d7ec3fdc30f90b4a15ba02d2724e112b3923"
+      },
+      "source_message_id": "1566802028745859113",
+      "source_thread_id": "1565713769789657239",
+      "status": "audit_completed_findings_and_access_gaps_remain",
+      "type": "server_security_revalidation",
+      "unverified_historical_hosts": [
+        "SpazioVPS",
+        "vpsdimelabella"
+      ],
+      "wordpress_file_inventory": {
+        "latest": 107,
+        "official_insecure": 6,
+        "official_outdated": 2,
+        "total": 115
       }
     },
     {
@@ -58547,6 +58622,326 @@
       "trashed_pilot_files": 1,
       "type": "confirmed_exact_manifest_trash_with_native_acceptance",
       "updated_at": "2026-11-02T13:18:05.275634+00:00"
+    },
+    {
+      "agent": "zeus",
+      "backup": "waived_explicitly",
+      "id": "discord-channel-retirement-1566813238560039093",
+      "preserved_channel_id": "1522487422510694450",
+      "retired_channel_id": "1521891416492609576",
+      "retired_channel_name": "mudanca-templates",
+      "source_message_id": "1566813238560039093",
+      "source_thread_id": "1566812047344402557",
+      "status": "deleted_verified",
+      "type": "discord_channel_retirement",
+      "updated_at": "2026-11-02T13:57:11.725092+00:00",
+      "validation": {
+        "delete_http": 200,
+        "get_deleted_http": 404,
+        "get_preserved_http": 200,
+        "pins": 0,
+        "runtime_config_references": 0,
+        "threads": 0
+      }
+    },
+    {
+      "agent": "zeus",
+      "all_parent_child_sets_equal": true,
+      "drive_mutations": 0,
+      "folders": {
+        "archive": 1653,
+        "corporate": 13,
+        "mgs": 158
+      },
+      "id": "drive-two-location-audit-1566810303168254075",
+      "parents_verified": 1827,
+      "paths": [
+        "/root/mgs-agent/context/drive-two-location-layout-review.md",
+        "/root/mgs-agent/data/agent-checkpoints.json",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/knowledge-inbox.jsonl",
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/manager-storage-standard.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/manager-storage-standard.md",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/aggregation-output.txt",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-native-objects.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-1.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-2.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-3.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-4.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/complete-folder-membership.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/complete-folder-paths.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/complete-folder-union.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/corpus-membership.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/final-audit-verification.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-coverage-verification.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-1.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-10.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-11.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-12.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-13.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-14.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-15.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-16.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-17.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-18.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-19.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-2.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-20.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-21.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-22.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-23.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-24.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-25.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-26.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-27.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-28.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-29.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-3.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-30.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-31.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-32.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-33.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-34.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-35.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-36.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-37.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-38.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-39.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-4.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-40.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-41.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-42.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-43.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-44.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-45.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-46.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-47.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-48.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-49.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-5.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-50.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-51.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-52.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-53.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-54.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-55.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-56.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-57.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-58.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-59.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-6.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-60.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-61.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-62.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-63.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-7.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-8.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-9.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-verification.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-paths.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/inventory-readonly-tool.py",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/mgs-current-recheck.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/mgs-enumeration-state.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/mgs-page-1.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/operator-findings-counts.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/outside-owner-parent-readback.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-enumeration-state.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-1.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-10.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-11.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-12.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-13.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-14.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-15.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-16.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-17.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-18.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-19.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-2.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-20.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-21.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-22.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-23.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-24.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-25.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-26.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-27.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-28.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-29.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-3.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-30.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-31.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-32.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-33.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-34.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-35.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-36.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-37.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-38.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-39.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-4.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-40.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-41.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-42.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-43.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-5.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-6.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-7.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-8.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-9.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/tree-summary.json",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/report-infra-readback.json"
+      ],
+      "procedure_live_mirror_equal": true,
+      "recommendation_only": "simple_upload_root_without_permanent_operation_manager_tree",
+      "report_infra_channel_id": "1498132022634483894",
+      "report_infra_message_id": "1566813662273085582",
+      "report_infra_readback": true,
+      "report_infra_status": "sent_verified",
+      "sha256": {
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/manager-storage-standard.md": "a2a3018079f49f194369ba03d453fc7ff65102ef143ab2afbfe1258ad55d275a",
+        "/root/mgs-agent/context/drive-two-location-layout-review.md": "858b110b5f388e1a898c2d45a4fc40f008a196c217423ce882c297107713f526",
+        "/root/mgs-agent/data/agent-checkpoints.json": "8e4f1f3ba4447ff4bfc3c60318d92846315ee41cf51fac949753e17a1d6311b3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/aggregation-output.txt": "0a7204b6ef49c98996666de12514d1813e1d8ab40057a7c62816f04267e78b2b",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-native-objects.json": "d5775c094dd482151fba6bf4f6c2807be59ee631f0026569468143f2118f10aa",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-1.json": "1a8c7251bf4e965108e09f3817f0cab11e6282abe747d13f55fcc5774a7fa8ce",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-2.json": "46281bd114fc8c3298fecb15072a9db9fb985afffddb18c3bd1dc70c0ad2799d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-3.json": "4d2e4628f4b2ddcafc07da94f6a712cd64a5a38de67940b32054ec1ed9ef6c77",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders-page-4.json": "3a1923b6146741b622c81746a5ed941cb78241aa56ef5757235a4312c0986006",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/all-visible-folders.json": "e82e0bd7d1b293e31dcd48c2979b18b166706849b5be8d6c54a074c0697a7801",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/complete-folder-membership.json": "7a4cdd9b75d34997e03a2865d5cf2b2b9f94870eff87a17b0ca117ba40335f1b",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/complete-folder-paths.json": "edb2919085469e05e2735c02d6aa21699d802dbe2b8b4a68c649d3234cced57b",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/complete-folder-union.json": "3b130f5f1a58147ed8cecc1675517d7a3dbe7c2011430d81666156b91f9b08f8",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/corpus-membership.json": "e1fbe3b2eaaf4a95591028383a74a293e33b425880b6aaf137950fb1f664da2f",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/final-audit-verification.json": "b92b992aa2a579193c1daaf3a60fbd631663ef6baf934a8279f4b0b18cd417d3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-coverage-verification.json": "49f0ce05a81e1a94a7d513ef90057a33192a8b6406a9616209691e3181d9d295",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-1.json": "f717513f31197fa9d50b9f2dc7de5914588d89a953505c440687eaf6ee7a28c9",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-10.json": "7184c85b315fafd363af6bb93b6b1caf3035b10dc0335a42aca86255e6cb9eee",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-11.json": "0f9f952691dca5e074e2b0b1bc7481b65486065dd31357f749ecbd1b06a51c01",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-12.json": "035f380f9a56d5df13bdad9260967b914d1b493315f316234147f72c6cb0f168",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-13.json": "6e8e4dce9874ef31757c2ba78b39407ed5c7c0f85d31b0a0ceee161f8024351c",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-14.json": "477397e59efc135344084d4049367809a7c9676ce70ae4dc2dc1eb11b73de0c0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-15.json": "7118eeeeb61190caeb902ebe7566b2ea0c987b29b16c890e27e51f6f1b782f2b",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-16.json": "b407fecad9f07756f56c1e9621c439fc02bd28e46172c1a13b30564539b6e9b4",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-17.json": "c4f0fd153d97b8aa755c22ebf2472bab2f66e64f425d874ea4804eea1fafef52",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-18.json": "9b17d3186baf83d6b496bec45806b02ce32a57cf979432f11d06d934e9bdb3b3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-19.json": "48e7bf284e718b7af8f9c48dac3a3768b5615f070ce10c352e6071ae0230bfef",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-2.json": "aa40b99ed381f56eb5358ac9e917feee73c3cdcca34f95e97330a23f26384484",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-20.json": "f6dfa66902fd44ea43293a12aca81f0b56e0f3a01f66c4ec8921921c24e094f0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-21.json": "9cd04a5f4a9bb5e8c7776263152235d70a532ca0b88805dc40d312f5996514f2",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-22.json": "59e8aa0b4d6a0136945fed4599ff97b02edbb1cea70265233311067596ad0b43",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-23.json": "81a76b1a4c2aaa9b9a83f5daae600ebb2d862eb842fab270ac232c90577856a3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-24.json": "de96bb14166675cadd85959dc3b08d9a598bda4a9593359662b95762ef1310df",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-25.json": "5d066d287b5bfe2041b01c6bd4007801965dd79473e077e22d93ab735af8f75f",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-26.json": "0b56a8d715594f663694e8c856d5bb01c68975cebfb6700caebe4c02275fbc53",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-27.json": "92c62aef1d07f1107e8b55c1c77653df3046db0bd48c2bdedcb7a43646dfee85",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-28.json": "ed0b72de1fff4969ac77ab865d16f8018dff7ae6ffa236e7dcb3ab1a5cee9072",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-29.json": "c744dd61c6f53fa649ce7482a4f0d1d48a5a03ca826233d2f2e192cd52f34289",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-3.json": "a9d20c1fd72e2b2ed653872ccb6dee5988569130231ef1b681f0193f07299788",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-30.json": "6a03da6531ae8bc50a63a1967aab506391513f22ae9e4a7b19158d5c703102f8",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-31.json": "693dc1d1f89d1960e8de94572f5b0bf30174b67b570036c257b307db96010997",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-32.json": "8ff8f201fbe9fe35ab6652426d5d3fcab2314c0931da88aaf4ba30d2104abcdb",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-33.json": "bd3e8ff93db4460ffe10c39dcfb16247d1ea21638f777237ef7f6cc2e664029a",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-34.json": "a8b79f9e6acdf898c5185e8f73c8a5cc921041edde6279ef4ed158470dcab608",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-35.json": "252dc86929d4572296c64743cb6d75e6ee0eba541d8bf84429d7d6f9f33f0a46",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-36.json": "d6f9c3bfdae4638242c9541684f0fbd9dae240d03c74bfd8751790b10392cf9a",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-37.json": "cf9438873cb78fe4924dd915d9ea257c8741e42d772569e3cbf3df17425c1e46",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-38.json": "49be945fddcf3cab3af51ad5fefe6fcb7062d7d04c6a3b9456fc0bdd62e67ebe",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-39.json": "01a9648bcf9b6d6850976b3b5ec5bb3b6753bc3d949958a5bdb3a236e254d965",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-4.json": "7ca8d85526220ab2d5dd7306bf9a6478234aa4f17a86160d5a0dcff557ea39f6",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-40.json": "a8e085c77220acff07be7208a85450e421ecaadfba5fd20b5be731ffdc3952e5",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-41.json": "22d593560904c698fd4a93efadde4ec5402011a7503e21fd4ae088e8f8867d70",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-42.json": "dc48d478a789bf6b87e55a945d8b7fb326cbfea800983fa99aec1f3f8b7bdda0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-43.json": "0fd97e36d6511d90b017628b9b7a533d982550c157719947564ac94d88f784c2",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-44.json": "60f629e405d28c39a627dcbda5a23b91d9e3596786e166c858530c4ba6c48c83",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-45.json": "01be5f12479752692c64344c912d19da59f0cbfd0bdbdbbfa9a7a1e367674988",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-46.json": "9a56f0a126fd4eb972fafef385973280e835e0fc225057f6c0967408d2169514",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-47.json": "070fdb2ca7a73b62331d0cf28320bdc0237fa2f2999773237ac04bedaab7ab8d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-48.json": "fc183b5c2a50a4cd2d9d273e79d9b6bbc65f8e0a3c6026c89759ab7e1530dd02",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-49.json": "bb08ae7e30df111319f480fd219f98fe0991d98deeb67576a68a5f728a2476c3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-5.json": "cfb3d1076a22169437d2cc6ddd549ca82737c090dd403c016ad65eafc41757ca",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-50.json": "0d8c501d507676eb357a46e597edf35a6c8f4763b53183b9d38633641160f1a0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-51.json": "2c1a951214585e0c89bce87bfc1771ca6b6d45df0b821562a80ac9eaddc55f71",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-52.json": "f4cec7c5714cf35ffe8fd2382e4b31dbf88259ca58bd5f503f7d41a243bb6f72",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-53.json": "57c56323223a5f0e3e10c749ac9eed5ee179db65354f90b260b7dc505128939e",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-54.json": "b08afd405073527f3002b1e165c5c3d30c98367740c4a83d6502497ab4880ac0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-55.json": "0301a267e6e6d2834eb7c0be47df8f45632e29af6bc46747cd40bf150bbb0144",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-56.json": "7ca87f250496a6561cd6cbeb52d84f95f5cf049dc521dbb954f02b7fb255fcc3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-57.json": "9a3be912b99186d81e5ba81f23bb57655c3f9e229c7c6ca5e8a81afd5d4d6067",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-58.json": "fc9ffe828ab0f279879faeaa03a9635c099b99f556df2851a3202a588a805122",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-59.json": "3d296eace4c8660b36919ce3f0835a41eb53f85dff1068635d3d63eecfdafd06",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-6.json": "ed6d979e0ba391598d2621addfef4472555f20feb35e1378bd3b7ffd902f8755",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-60.json": "928822a74f609fa328664c3e27bb415da328321f97379b704db9cbaa478b9f5d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-61.json": "23f31fe94a7e58cc7fbe047c29a07ec9b8bf509910dfb083c43f989cdeed5777",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-62.json": "1d81effae51e9d460f869af37fba0883f92cc650ecdedcc7313167a7633a59c9",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-63.json": "dc125f118fe24d74748a84d6b0d49827517de28a40e9c90f5db856c46735a4bd",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-7.json": "263c5e74fe08489443735ff19e56b5f705ecc3097ca019e34c3ce67ffe3467af",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-8.json": "dd597233f2b62651b461737f55e46c07cb9aae3edcc9c15b94bb5ce08f064a4d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-batch-9.json": "428665fb744b95f52806c733eeb9ce4bd094f7f102755619df56f2a1f4e5fc34",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-parent-closure-verification.json": "7c2dab4bd0cd4f99f42b3f93cd15aba670eafc8c522f5fb04d98cc3649e263c1",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/folder-paths.json": "4cdb0450b480d121c896487d32963648769659584eef47506eefeacd56e6f9d4",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/inventory-readonly-tool.py": "31981c2de2f28631fbaa289ecde75b294cab616b5fd1ef56ac7c08b7e428d0a6",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/mgs-current-recheck.json": "21b030556aa6664b52a4d7dab4ed33af1c8d4c75a47f67302516ffec136c6efc",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/mgs-enumeration-state.json": "ba7cd1c3bebd6fa43f83f57a7833a6bc60aeb5f173819bacc418c76fad2da328",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/mgs-page-1.json": "9deef9ca0df24026b029c31a1dca24187b15c7f4ef34de0081b727baeed8788e",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/operator-findings-counts.json": "37644f29c150de0c5ff203ca541eb0db0825c7988a7882f7d2011be6cb28dd49",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/outside-owner-parent-readback.json": "568731970e8641a54d63a9aaca5f99306b9a9f766fb8e834fa01ef70e1f1f47d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-enumeration-state.json": "40f7502236f4285c78b16f8050b1429e7ec51c9248be57654f55b11d5a0f6983",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-1.json": "f2479e5545d486c90f046cfd05bf3ed70f7f16376457522f875fa26dad48b774",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-10.json": "32abc2c6f9d66a146a2a1ffd3686e8a00cfee4b7510a522af6e3f2d47d311799",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-11.json": "9a958aa3b51549497710ff2f61cabcaaa377d59cea95b486121a9f53285c4724",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-12.json": "cd440bdd6c5c89956a56bdf383a6c8a74aecfa7c470ec85905ed1ac02b46283c",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-13.json": "308a25b5f2c834f3572da847464208d999b29a881c999c415efe247991872480",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-14.json": "3821c2ad5341d4f462ea140585e921ab2729c535c5865e86fca7ab744a8ba296",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-15.json": "a55b311acf959f8cce61f484153f4ccc6325685c4ba5a08d11e0327fb0e35c0c",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-16.json": "9c2b331c6390b669687ea19620e539cbc45577c2c10909f57323a6f8290bc0cf",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-17.json": "e345e888b94bc090b93655518dbd139b5314963136d3089098c34276858e15d0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-18.json": "3ff56427df4eacbdaf63d5619e37b4b069d5f5cd1b71fe7bcbd95097e579250b",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-19.json": "c4b936469a7fff292fa6bc74724483652ffdfe00a1deb1b4cca411f4853fc86e",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-2.json": "280953181cf540aa35a472596ed7c513863cdc4488838683d260a2c81cb9c9c9",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-20.json": "66a77b366c1d62f91b4d99e78de6ec4a0f67e21fbeeaf0e5af8eede0c0e4d93f",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-21.json": "9fd18906be7d3f85256c65cd45e8bf77456f392089715957a769cb0174dfb826",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-22.json": "810d8abb8ac9ff848c5eec92bbc413bd7fd1173faf4a6b5515ad2998348e82cc",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-23.json": "5ad50886333631f959b86fa8379bf7363773b3f953d1ce315dc552dcfe8e40c9",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-24.json": "62220dd84edf0cbf6f476d846b5ff7c7c0c001039e9d1f208b1f696780d4f0b6",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-25.json": "ed4888250500474e34f53166174e2d68c4fe690f05a38e21a9e17d2cc10fbd76",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-26.json": "8e578121a59a84f8634a10d92b5bfd23178c7edcd8567cd7d5651f61a75c5663",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-27.json": "63d8f14acb709f6c5a38c363c9c6ec571a51d45f5f66a067d906f5c983971969",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-28.json": "0601221ba70e5cfb1c7ffa4640b7f1c2bbde45eca3c8911ab871c488de45ac2f",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-29.json": "af6c6284d5588af51e25dbc6ebb2fbb73f71cf481164521650577b4965dfb5af",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-3.json": "2b55efdb9a67c0c192e4e36779f7afc238abb6b97f70a1258e2209e6d23f6b5d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-30.json": "e5497b28a5bb621a2f5c6b960b8a35e6161c7cfaec4821ae9fb130bd67733db0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-31.json": "1997853ede4fa3381eae84062c6e20550d1d8903f38861277aeade917790ab9f",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-32.json": "2be5ebd378e526599b37ca0fefa0dddd77d8a20d142a03b1c08ed86a0d896e6a",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-33.json": "2e10c37bd5ec62609bdfc70867f4db7d21c361db788227edbc7afb90dd3c8bf3",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-34.json": "98f58c61e30153f5ffa7935ba208003d8a623e535e994bdb1fc3dfd1d0dde5d0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-35.json": "6f633c8331bf62befacb6303a7421b72cc24691dabfb646db8d7d0ca2b8152ef",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-36.json": "27d20f62f14c084301f19bffad22d3792fdb4af3b2d4a5e289dbfeeb02f84418",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-37.json": "8863fa9319333bdf6b5fa2d8e8f3486b91bed0cefd4d73af00ef5dbfc1dfd685",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-38.json": "64f2e725f276a283849c0c2fd870e1a2a767ea8e2f473ad28350c5122885da0f",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-39.json": "cbcf7a38b50ad095e1f1858b2e938a96c013429064d5c7a180a53048987489c1",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-4.json": "c8f614815ec139d3d88569e8cb72d11ea5a46515de4fecda3d787128b0486b09",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-40.json": "b01f79dc639e1beb35e318ee5430f16433b9ef4f3d03a5ea65b4b3512ecfeb79",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-41.json": "33562bedd495432a17d87e669f47096a05ab88eb48b28f717ffbab9075d407f0",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-42.json": "cca8f3bb92d9fe65cc6bd38dad92cf4658d7e16221e55bcf069b713e01feb65d",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-43.json": "6fe9478eb2b00105983b7fe366f84e9557ab2759a7b3282e8bb4d689a8c1d339",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-5.json": "fdb409a3bd7567814c94b17cd41ccff24502e0746ed7ba988d9ceafb4fd24891",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-6.json": "567dd95f76b5cc015e5b2eae55e11e85284fdc9121d3cecdf678d12b152668ef",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-7.json": "e43ec4bdca393e429e9995be5f60a250f68daa185b6dde69d365e0be73f60341",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-8.json": "6f749c07141ee59a9a34e6af6359511e8d0697ed696322575f39e2670df890bb",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/owner-page-9.json": "607f4968ab8c3fe440ca29521f84c55a259692f7c0e2f1b3f08c2cc2da41f748",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/report-infra-readback.json": "bd696e2fa3d3417b9ca62155e970ac291a1dc166ec4624c8708c08158501b5fa",
+        "/root/mgs-agent/data/ares/creative-ops/30tb-archive/two-drive-audit-1566810303168254075/tree-summary.json": "f170e3860417f5513ab1a5cae60cdcb6a1eaf29088bf2a5eccade2938a3fcc18",
+        "/root/mgs-agent/data/knowledge-inbox.jsonl": "aa16da73e72fe8efc6f1ac8bcf5daf70c1ed1fe223a97c7d8326d46f7fd7046d",
+        "/root/mgs-agent/data/knowledge-registry.json": "45bd10f75efff962ede79505f194eeba8aa8b55447f813088b908d59188fa12c",
+        "/root/mgs-agent/profiles/zeus-skills/ops/google-drive-agent-automation/references/manager-storage-standard.md": "a2a3018079f49f194369ba03d453fc7ff65102ef143ab2afbfe1258ad55d275a"
+      },
+      "source_message_id": "1566810303168254075",
+      "source_thread_id": "1562078493498540042",
+      "status": "completed_validated_no_remote_layout_changes",
+      "type": "readonly_drive_folder_audit_and_layout_review",
+      "updated_at": "2026-11-02T13:57:34.241415+00:00"
     }
   ],
   "profile_skill_references": [
@@ -62702,6 +63097,11 @@
       "modified_at": "2026-08-24T23:31:15-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/sb-playwright-node-sitecustomize.py",
+      "size_bytes": 789,
+      "modified_at": "2026-11-02T08:55:18-05:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/sb-remove-first-name-placeholder.py",
       "size_bytes": 16098,
       "modified_at": "2026-08-08T09:10:26-04:00"
@@ -65826,15 +66226,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 729328,
-      "md5": "0b2a42b1bc52ecfa19d8f8980a1d931e",
-      "modified_at": "2026-11-02T08:45:51-05:00"
+      "size_bytes": 730227,
+      "md5": "76acf1fddc5f730c3ce8bbdc888040a5",
+      "modified_at": "2026-11-02T08:56:47-05:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 140608,
-      "md5": "595d47349b0a276a9e27fb5533f79ad6",
-      "modified_at": "2026-11-02T08:47:01-05:00"
+      "md5": "054726fdd46e967871b6a08f460159f4",
+      "modified_at": "2026-11-02T08:57:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -65863,8 +66263,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 3208,
-      "md5": "2d170f8ef5fcac8a97bd161c822feee4",
-      "modified_at": "2026-11-02T08:41:07-05:00"
+      "md5": "11ac7c17dc33d59b996918ae6c8e610b",
+      "modified_at": "2026-11-02T08:56:06-05:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -65881,8 +66281,8 @@
     {
       "path": "/root/mgs-agent/data/b013-dtr-link-monitor-state.json",
       "size_bytes": 68368,
-      "md5": "1959f6e99a3fc7086f43e296d635f1f6",
-      "modified_at": "2026-11-02T08:38:01-05:00"
+      "md5": "ffd150a1544cb1d4547de91918b9ca3e",
+      "modified_at": "2026-11-02T08:56:26-05:00"
     },
     {
       "path": "/root/mgs-agent/data/bitninja-verification-20261031.json",
@@ -65959,8 +66359,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 452,
-      "md5": "3342eb4db3f5c6fd9a6a93f89766007c",
-      "modified_at": "2026-11-02T08:19:05-05:00"
+      "md5": "5777a8c02794bfb736e71fad8d529ac7",
+      "modified_at": "2026-11-02T08:49:03-05:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-cliquet-complete-1555626697917993032-state.json",
@@ -66211,32 +66611,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-memory-capacity-state.json",
       "size_bytes": 7018,
-      "md5": "7fd7130d8b7941d90d41104b84e661cd",
-      "modified_at": "2026-11-02T08:44:02-05:00"
+      "md5": "e47759992f01d0dad5cbf380ab391e7a",
+      "modified_at": "2026-11-02T08:54:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "c9f12ef5ae03000941daac61cb1d4873",
-      "modified_at": "2026-11-02T02:45:37-05:00"
+      "md5": "a3c2780393c9378c436e1b357e7322d0",
+      "modified_at": "2026-11-02T08:48:23-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 74226,
-      "md5": "2cf0dd2d46858585140148ebe88233e4",
-      "modified_at": "2026-11-02T08:45:03-05:00"
+      "md5": "1751a299877b56d7141029e272e1f304",
+      "modified_at": "2026-11-02T08:55:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 104934,
-      "md5": "d12c7e02c0733ec250955d769ba6378f",
-      "modified_at": "2026-11-02T08:47:02-05:00"
+      "md5": "6dae26e655256ce851d7931bfbd29101",
+      "modified_at": "2026-11-02T08:58:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "a6da6071f3e4245837d74491989b6ef2",
-      "modified_at": "2026-11-02T08:47:01-05:00"
+      "size_bytes": 357,
+      "md5": "7b15f3d498a195095c34e035a6ec57d6",
+      "modified_at": "2026-11-02T08:58:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -66288,15 +66688,15 @@
     },
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
-      "size_bytes": 826,
-      "md5": "620af8eed08ce0c02121f4e8d9489ec9",
-      "modified_at": "2026-11-02T08:47:18-05:00"
+      "size_bytes": 825,
+      "md5": "38714d3de16927ec8ff62687d4272cca",
+      "modified_at": "2026-11-02T08:58:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 440,
-      "md5": "dac3128993230246d2f0022686b210a5",
-      "modified_at": "2026-11-01T08:54:15-05:00"
+      "md5": "7d3cf4c406e561b22f52a966cd432941",
+      "modified_at": "2026-11-02T08:54:17-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-native-rollout.json",
@@ -66312,15 +66712,15 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3142762,
-      "md5": "adb388738fc67df6df8540bbee7077b2",
-      "modified_at": "2026-11-02T08:45:45-05:00"
+      "size_bytes": 3190777,
+      "md5": "50d617218d53ff8e9624c4e0c054a2d2",
+      "modified_at": "2026-11-02T08:58:29-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 600543,
-      "md5": "e084230463328fd2a664d37c3c2245c1",
-      "modified_at": "2026-11-02T08:17:35-05:00"
+      "size_bytes": 601828,
+      "md5": "18695e42dcd0c1b54cdaf11694d872e2",
+      "modified_at": "2026-11-02T08:56:47-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -66366,9 +66766,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 116938,
-      "md5": "172cce8d69f330615e6dc36ce20bc1e0",
-      "modified_at": "2026-11-02T08:47:14-05:00"
+      "size_bytes": 117346,
+      "md5": "6d1e7c1e1b268f34c7bb874e755d476b",
+      "modified_at": "2026-11-02T08:56:15-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -66818,7 +67218,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3378,
       "md5": "53529ce15b55d2395574004e457e71d8",
-      "modified_at": "2026-11-02T08:37:05-05:00"
+      "modified_at": "2026-11-02T08:52:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -66901,8 +67301,8 @@
     {
       "path": "/root/mgs-agent/data/sb-messenger-token-invalid-monitor.json",
       "size_bytes": 112167,
-      "md5": "7ab28bcbe6903d0d6ae62526dcfda9aa",
-      "modified_at": "2026-11-02T08:42:14-05:00"
+      "md5": "6e775dfc9d23021fb10f86d03f623c9c",
+      "modified_at": "2026-11-02T08:57:14-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-pages-monitor.json",
@@ -66980,7 +67380,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "4eeb1e86ec30a4b8aa4103ba7f7c62bd",
-      "modified_at": "2026-11-02T08:46:02-05:00"
+      "modified_at": "2026-11-02T08:56:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -67026,9 +67426,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 3673,
-      "md5": "24855d04f5e92bd1105853dc445577ea",
-      "modified_at": "2026-11-02T08:45:04-05:00"
+      "size_bytes": 3681,
+      "md5": "6286469ffde79bae999fd63ea2c3748f",
+      "modified_at": "2026-11-02T08:55:05-05:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-hermes-update-20260919-cleanup-targets.json",
@@ -67062,9 +67462,9 @@
     },
     {
       "path": "/root/mgs-agent/data/zeus-learning-origin-state.json",
-      "size_bytes": 32268,
-      "md5": "617188921c3f273a51b7a2702145e869",
-      "modified_at": "2026-11-02T08:26:32-05:00"
+      "size_bytes": 32923,
+      "md5": "90cac617e07a372dac56e8432d000f48",
+      "modified_at": "2026-11-02T08:58:30-05:00"
     },
     {
       "path": "/root/mgs-agent/data/zeus-startup-promotion-fix-state.json",

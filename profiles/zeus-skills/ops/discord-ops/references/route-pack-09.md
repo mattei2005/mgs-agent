@@ -79,16 +79,18 @@ Padrão recomendado, com privacidade por default:
 7. Reiniciar o gateway pelo finalizer seguro porque mudanças de `.env`/roteamento são carregadas no startup. No processo novo, validar `/proc/<pid>/environ` sem imprimir tokens: novo channel ID presente e auto-add vazio.
 8. Readback Discord obrigatório: canal novo `GET=200`, nome/categoria corretos e IDs dos overwrites exatamente no escopo planejado. Registrar audit, inventário e REPORT-INFRA.
 
-Quando a reorganização também excluir um canal redundante, aplicar este fechamento antes do delete:
+#### Exclusão de canal redundante
 
-1. Tratar a exclusão do canal como operação crítica e obter a confirmação adicional mesmo quando o pedido inicial já disser “pode deletar”.
-2. Inventariar mensagens, pins e threads ativas do canal. Deletar o canal pai também elimina as threads filhas e seus históricos.
-3. Exportar via API o objeto do canal, permission overwrites, mensagens do pai e mensagens de cada thread; salvar em backup seguro e validar hashes antes do delete.
-4. Atualizar primeiro config vivo, mirror versionado e overrides de `.env` (`DISCORD_ALLOWED_CHANNELS`, `DISCORD_FREE_RESPONSE_CHANNELS`, `DISCORD_HOME_CHANNEL`). Não imprimir nem diffar o `.env` inteiro: editar somente as linhas não secretas por mecanismo que não exponha linhas vizinhas.
-5. Recriar a audiência exata dos canais preservados: negar `VIEW_CHANNEL` ao `@everyone`, adicionar usuários/bots aprovados e remover explicitamente bots/roles antigos. Validar o conjunto completo de overwrite IDs, não apenas a contagem.
-6. Excluir o canal somente depois do backup e da configuração; validar `GET /channels/{parent}=404` e também `GET /channels/{thread}=404`.
-7. Remover a entrada do inventário customizado: discovery genérico pode não podar artefatos Discord registrados manualmente. Confirmar por readback que o ID excluído desapareceu do inventário e que os canais preservados estão presentes com nomes e audiências atuais.
-8. Reiniciar o gateway afetado pelo fluxo seguro, confirmar env efetivo do processo sem segredos, conexão Discord e rotas carregadas; então registrar audit e REPORT-INFRA.
+Aplicar tanto à reorganização quanto à exclusão isolada de um canal obsoleto:
+
+1. Resolver o alvo com `GET /channels/{channel_id}` e conferir ID, nome e guild. Ler o histórico recente e os consumidores para distinguir canal silencioso de canal desativado; buscar primeiro pelo ID em fontes delimitadas, não no repositório inteiro. Solicitar a confirmação crítica deixando explícita a perda do histórico e qual canal sucessor será preservado.
+2. Inventariar mensagens e pins, consultar `GET /guilds/{guild_id}/threads/active` filtrando pelo `parent_id`, e paginar `GET /channels/{channel_id}/threads/archived/public` e `/threads/archived/private` até `has_more=false`. Deletar o pai também elimina as threads filhas; ausência de threads ativas não comprova ausência de histórico arquivado.
+3. Por padrão, exportar objeto do canal, overwrites e mensagens do pai e das threads, salvando backup seguro com hashes validados. Se Rodolfo dispensar explicitamente o backup ao confirmar o alvo, não criar exportação nem pedir outra confirmação: registrar a dispensa no audit. Essa exceção vale somente para a exclusão confirmada.
+4. Procurar referências ao ID em crons, config vivo, mirror, inventário e overrides de `.env`. Corrigir dependências existentes antes do DELETE dentro do escopo autorizado; não editar config nem reiniciar gateway quando não houver referência afetada. No `.env`, inspecionar somente as chaves relevantes sem imprimir valores secretos ou linhas vizinhas.
+5. Preservar permissões e audiência dos demais canais numa exclusão isolada. Recriar overwrites apenas se a reorganização tiver autorizado essa mudança; nesse caso validar o conjunto completo de IDs, não somente a contagem.
+6. Se a ferramenta disponível não expuser exclusão de canal, usar REST com credencial carregada internamente pelo loader de `/root/mgs-agent/scripts/discord-bot-post.py`, os mesmos headers de identidade e `User-Agent: MGS-Zeus/1.0`; nunca imprimir o token. Executar `DELETE /channels/{channel_id}`, conferir o ID retornado e fazer GET independente: exigir `404` com código Discord `10003` (Unknown Channel), não interpretar `403` como exclusão. Validar também o desaparecimento das threads inventariadas e `GET=200` do canal sucessor. Após timeout ambíguo, fazer readback antes de repetir DELETE; respeitar `Retry-After`.
+7. Remover a entrada ativa do inventário customizado, quando existir, e registrar a retirada como histórico separado; não exigir que o ID desapareça dos registros de auditoria. Discovery genérico pode não podar artefatos Discord manuais. Validar por readback o inventário final e registrar autorização, dispensa de backup quando houver e resultados HTTP em `logs/events-audit.jsonl`.
+8. Somente se houve alteração de configuração que exija recarga, usar o restart seguro e validar ambiente efetivo, conexão e rotas. Publicar REPORT-INFRA pelo helper canônico e verificar o ID exato do embed, conteúdo vazio e ausência de mentions. Encerrar na origem com confirmação curta da exclusão, da política de backup aplicada e da preservação do sucessor.
 
 Criar subagente separado somente quando também houver separação real de área, dados, ferramentas, autoridade ou fonte de verdade. Para mera privacidade de conversa, dois canais do mesmo agente reduzem drift e manutenção.
 

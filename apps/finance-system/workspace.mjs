@@ -193,7 +193,9 @@ export async function provisionNextPeriod(db,{from,to,apply=false}={}){
   if(!sameConfiguration(check.additions,cfg.additions)||!sameConfiguration(check.overrides,cfg.overrides)||!sameConfiguration(check.result,result))throw Error('Provision readback mismatch');
   return {pass:true,mode:'apply',from,to,status:'created',created:true,changes:cfg.changes,preserved:[sourceId],blocked:[],audit_id:audit,source_revision:source.revision,readback:true,backup};
  });
- const verify=(await db.query('SELECT id,revision FROM scenarios WHERE id=$1',[targetId])).rows[0];if(apply&&!verify)throw Error('Provision commit absent');return {...out,revision:verify?.revision};
+ const verify=(await db.query("SELECT id,revision,result->'summary' AS summary FROM scenarios WHERE id=$1",[targetId])).rows[0];
+ if(apply&&(!verify||verify.id!==targetId||verify.summary?.period!==to||!verify.summary?.counts||(verify.summary.counts.error||0)!==0))throw Error('Provision commit readback invalid');
+ return {...out,revision:verify?.revision,readback:apply&&!!verify};
 }
 export async function registerPeriods(db,{actor='Zeus / 1546184035921829938',periods=[],onProgress=()=>{}}={}){
  if(!Array.isArray(periods)||periods.some(p=>p>='2026-11'))throw Error('Future seed retired; use atomic next-month provisioning');

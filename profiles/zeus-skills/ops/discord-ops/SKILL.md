@@ -16,6 +16,10 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
+## Exclusão de canais obsoletos
+
+Resolva o ID e confirme a finalidade pelo histórico e pelos consumidores atuais antes de recomendar exclusão. Obtenha a confirmação crítica do alvo e da perda de histórico; se Rodolfo dispensar explicitamente o backup nessa confirmação, respeite a dispensa somente para esse alvo, registre-a e execute sem exportação nem nova rodada de aprovação. Não transforme a dispensa pontual em política geral sem backup. Preserve o canal sucessor e não altere permissões, rotas ou reinicie gateways sem dependência comprovada. Receita de inventário, DELETE e readback: `references/route-pack-09.md`, seção **Exclusão de canal redundante**.
+
 ## Habilitar respostas em canais compartilhados
 
 Quando Rodolfo pedir para habilitar agentes em um canal, separar o destino indicado da thread onde ele fez o pedido e distinguir acesso Discord, roteamento do gateway e regra de menção. Por padrão operacional, deixar o executor responsável responder sem menção no canal dedicado e Zeus por menção, sem habilitar resposta livre dos dois nem ampliar permissões de usuários. Validar comunicação real no destino antes de concluir; teste com @menção não prova resposta sem menção. Receita: `references/route-pack-02.md`, seção **Canal novo de relatórios: diagnóstico e habilitação**.
