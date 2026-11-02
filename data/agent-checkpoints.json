@@ -3121,47 +3121,47 @@
       "updated_at": "2026-11-01T04:15:44+00:00"
     },
     {
+      "active_revision": "2955",
       "agent": "zeus",
+      "available_revision": "2987",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
       "next_step": "Core222955 remains pending; candidate2987; native next estimate02/11 03:42ET, not a Zeus verification. One successor f17da87f7d57 slot consumed/current execution running, no further observer. Preserve timer; foreground decision needed for one read-only final verification by original02/11 12hET deadline; no recursive cron, force, install, restart or reboot.",
       "objective": "Aguardar refresh automatico core22 no Hostinger e avisar resultado validado; nao forcar update",
+      "observer": {
+        "current_execution": "This observation is running; final completion/delivery are scheduler-owned and not yet receipted.",
+        "enabled": true,
+        "execution_id": "25d44100c8a2412d948168fc60993ed7",
+        "execution_status": "running",
+        "finished_at": null,
+        "future_followup_blocker": "Only authorized successor consumed by current execution; recursive creation forbidden; no further verification provisioned.",
+        "job_id": "f17da87f7d57",
+        "persisted_next_run_at": "2026-11-01T22:03:25-05:00",
+        "persisted_state": "scheduled",
+        "repeat": {
+          "completed": 1,
+          "times": 1
+        },
+        "slot_consumed": true,
+        "started_at": "2026-11-01T22:03:35.381575-05:00",
+        "successor_created": false,
+        "successor_job_id": null
+      },
+      "report_infra": {
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "embed_count": 1,
+        "http": 200,
+        "mentions": 0,
+        "message_id": "1566649450238320761",
+        "message_url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1566649450238320761",
+        "readback_evidence": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/snap-core22-automatic-successor-20261101-report-readback.json",
+        "title": "REPORT-INFRA — modificada",
+        "verified_at": "2026-11-01T22:06:22.620620-05:00"
+      },
       "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/snap-core22-automatic-successor-20261101T220413-0500.json",
       "state": "pending_native_refresh_followup_executor_blocked",
       "thread_id": "1565713769789657239",
-      "updated_at": "2026-11-01T22:05:34.973610-05:00",
-      "active_revision": "2955",
-      "available_revision": "2987",
-      "observer": {
-        "job_id": "f17da87f7d57",
-        "repeat": {
-          "times": 1,
-          "completed": 1
-        },
-        "persisted_state": "scheduled",
-        "enabled": true,
-        "persisted_next_run_at": "2026-11-01T22:03:25-05:00",
-        "execution_id": "25d44100c8a2412d948168fc60993ed7",
-        "execution_status": "running",
-        "started_at": "2026-11-01T22:03:35.381575-05:00",
-        "finished_at": null,
-        "slot_consumed": true,
-        "current_execution": "This observation is running; final completion/delivery are scheduler-owned and not yet receipted.",
-        "successor_job_id": null,
-        "successor_created": false,
-        "future_followup_blocker": "Only authorized successor consumed by current execution; recursive creation forbidden; no further verification provisioned."
-      },
-      "report_infra": {
-        "verified_at": "2026-11-01T22:06:22.620620-05:00",
-        "http": 200,
-        "message_id": "1566649450238320761",
-        "channel_id": "1498132022634483894",
-        "content_empty": true,
-        "mentions": 0,
-        "embed_count": 1,
-        "title": "REPORT-INFRA — modificada",
-        "message_url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1566649450238320761",
-        "readback_evidence": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/snap-core22-automatic-successor-20261101-report-readback.json"
-      }
+      "updated_at": "2026-11-01T22:05:34.973610-05:00"
     },
     {
       "agent": "zeus",
@@ -7456,12 +7456,12 @@
     {
       "agent": "zeus",
       "id": "sb-template-self-healing-rollout-20260807",
-      "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit máximo 21 + reserva 3 cobertos (24 disponíveis); US-CC-ES: déficit máximo 16 + reserva 3 cobertos (19 disponíveis); US-JOB-ES: déficit máximo 1 + reserva 3 cobertos (4 disponíveis)",
+      "next_step": "Dispatcher das 08:00 SP pode consumir US-CC-EN: déficit máximo 21 + reserva 3 cobertos (24 disponíveis); US-CC-ES: déficit máximo 16 + reserva 3 cobertos (19 disponíveis); US-JOB-ES: déficit máximo 2 + reserva 3 cobertos (5 disponíveis)",
       "objective": "Adaptar o executor fixed-30 para corrigir duplicadas e gerar/aprovar novas copies fail-closed",
-      "source": "discord:1535306062457081926; runtime:sb-utility-candidate-approval-plan:2026-10-30T07:30:55-03:00; data:sb-utility-generated-candidates.json; candidate:us-job-es-20261030-01",
+      "source": "discord:1535306062457081926;runtime:sb-utility-candidate-approval-plan:2026-11-02T08:31:05-03:00;data:sb-utility-generated-candidates.json;candidate:us-job-es-20261102-01",
       "state": "model_written_catalog_replenished_for_live_deficits",
       "thread_id": "1535306062457081926",
-      "updated_at": "2026-10-30T10:31:59+00:00"
+      "updated_at": "2026-11-02T11:32:07+00:00"
     },
     {
       "agent": "zeus",
@@ -8235,5 +8235,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T02:51:44+00:00"
+  "updated_at": "2026-11-02T11:32:07+00:00"
 }
