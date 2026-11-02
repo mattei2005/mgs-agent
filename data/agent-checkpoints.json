@@ -1773,12 +1773,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1566932068317921331",
-      "next_step": "Executar cada fonte sequencialmente pelo runner central e validar QA, árvores ACTIVE e entrega única na origem",
+      "next_step": "Entregar conclusão única com nonce/journal e GET exato; reconciliar cinco jobs sem nova execução Meta e concluir card",
       "objective": "Concluir 25 duplicações autorizadas das fontes 011,010,012,009,008 na Mavroa G006",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/aggregate-progress.json",
-      "state": "execução foreground única; handoff/digests e cinco inputs conferidos; zero campanhas novas nesta retomada; inspeção live das dependências em curso",
+      "state": "25 campanhas016–040;25 conjuntos;50 anúncios active programados03/11/2026 00:12est; qa e readback material fresco completos;usd1125/dia lote e1590/dia conta; conclusão pronta ainda não entregue",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-02T22:13:06+00:00"
+      "updated_at": "2026-11-02T22:33:41+00:00"
     },
     {
       "agent": "ares",
@@ -8342,5 +8342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T22:13:06+00:00"
+  "updated_at": "2026-11-02T22:33:41+00:00"
 }
