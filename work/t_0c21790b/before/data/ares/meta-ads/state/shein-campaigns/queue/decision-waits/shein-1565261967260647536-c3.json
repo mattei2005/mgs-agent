@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "classification": "WAITING_HUMAN_DECISION",
+  "request_id": "shein-1565261967260647536-c3",
+  "account_id": "937846586033361",
+  "state_sha256": "27ac69eab06c0c3c0b50a88e96479011e104b767ba11e9e69076bcd0fbea86fb",
+  "checkpoint_sha256": "9e4b3f4c87166ac71dc900010bbcbb0420a7abbe551a7a8323accce56eb264ff",
+  "verified_at": "2026-10-30T16:08:15.027769+00:00",
+  "review": {
+    "message_id": "1565343225894666345",
+    "author_id": "1508864261504630925",
+    "channel_id": "1548150155184701440",
+    "thread_id": "1558134703565967394",
+    "decision": "UNANSWERED",
+    "material_difference": true,
+    "differences": [
+      "device suggestion omitted",
+      "user_age_unknown false -> true"
+    ]
+  },
+  "campaign_readback": [
+    {
+      "id": "120250921178510629",
+      "account_id": "937846586033361",
+      "name": "006 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c006) - COPY C3 - (US_APP) - event_add_to_wishlist",
+      "status": "PAUSED",
+      "effective_status": "PAUSED",
+      "daily_budget": "3500",
+      "bid_strategy": "COST_CAP"
+    },
+    {
+      "id": "120250921178500629",
+      "account_id": "937846586033361",
+      "name": "007 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c007) - COPY C3 - (US_APP) - event_add_to_wishlist",
+      "status": "PAUSED",
+      "effective_status": "PAUSED",
+      "daily_budget": "3500",
+      "bid_strategy": "COST_CAP"
+    }
+  ],
+  "maintenance_task_id": "t_8e65299d",
+  "evidence_source": "work/t_8e65299d/live-readonly.json",
+  "semantics": "Scheduling classification only. Review unanswered; not terminal, approved, canceled, QA-complete or authorized for activation. No reservation/lease release."
+}

@@ -1,0 +1,743 @@
+{
+  "account_id": "937846586033361",
+  "bundles": [
+    {
+      "ad_ids": [
+        "120250921180460629",
+        "120250921180400629",
+        "120250921180420629",
+        "120250921180650629",
+        "120250921180670629",
+        "120250921180970629"
+      ],
+      "adset_ids": [
+        "120250921178930629",
+        "120250921178900629"
+      ],
+      "campaign_ids": [
+        "120250921178510629",
+        "120250921178500629"
+      ],
+      "confirmed_objects": {
+        "adset_copy_1": {
+          "copied_adset_id": "120250921178930629"
+        },
+        "adset_copy_2": {
+          "copied_adset_id": "120250921178900629"
+        },
+        "campaign_copy_1": {
+          "copied_campaign_id": "120250921178510629"
+        },
+        "campaign_copy_2": {
+          "copied_campaign_id": "120250921178500629"
+        },
+        "existing_post_ad_copy_1_1": {
+          "copied_ad_id": "120250921180460629"
+        },
+        "existing_post_ad_copy_1_2": {
+          "copied_ad_id": "120250921180400629"
+        },
+        "existing_post_ad_copy_1_3": {
+          "copied_ad_id": "120250921180420629"
+        },
+        "existing_post_ad_copy_2_1": {
+          "copied_ad_id": "120250921180650629"
+        },
+        "existing_post_ad_copy_2_2": {
+          "copied_ad_id": "120250921180670629"
+        },
+        "existing_post_ad_copy_2_3": {
+          "copied_ad_id": "120250921180970629"
+        },
+        "existing_post_creative_1_1": {
+          "id": "2194752301423983"
+        },
+        "existing_post_creative_1_2": {
+          "id": "1520448893441983"
+        },
+        "existing_post_creative_1_3": {
+          "id": "1583764789741365"
+        },
+        "existing_post_creative_2_1": {
+          "id": "1148729728105284"
+        },
+        "existing_post_creative_2_2": {
+          "id": "1753656912387956"
+        },
+        "existing_post_creative_2_3": {
+          "id": "1158101197151569"
+        },
+        "readback_campaign_1": {
+          "id": "120250921178510629"
+        },
+        "readback_campaign_2": {
+          "id": "120250921178500629"
+        }
+      },
+      "created_children": 6,
+      "creative_ids": [
+        "2194752301423983",
+        "1520448893441983",
+        "1583764789741365",
+        "1148729728105284",
+        "1753656912387956",
+        "1158101197151569"
+      ],
+      "existing_post_creative_ids": {
+        "1.1": "2194752301423983",
+        "1.2": "1520448893441983",
+        "1.3": "1583764789741365",
+        "2.1": "1148729728105284",
+        "2.2": "1753656912387956",
+        "2.3": "1158101197151569"
+      },
+      "idempotency_keys": [
+        "shein-1565261967260647536-c3-c6",
+        "shein-1565261967260647536-c3-c7"
+      ],
+      "index": 1,
+      "intermediate_get_calls": 0,
+      "outer_readback_calls": 1,
+      "projected_points": 60,
+      "quota": {
+        "ads_api_access_tier": "standard_access",
+        "hard_score": 9000,
+        "idempotent": false,
+        "path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/lane-1e8c496e29939ab12a4a5b98.json",
+        "points": 60,
+        "reserved_points": 60,
+        "soft_score": 9000
+      },
+      "quota_completion": {
+        "acc_id_util_pct": null,
+        "released": true,
+        "tier": "standard_access"
+      },
+      "readback_children": 6,
+      "readback_results": [
+        {
+          "body": {
+            "account_id": "937846586033361",
+            "bid_strategy": "COST_CAP",
+            "configured_status": "PAUSED",
+            "daily_budget": "3500",
+            "effective_status": "IN_PROCESS",
+            "id": "120250921178510629",
+            "name": "006 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c006) - COPY C3 - (US_APP) - event_add_to_wishlist",
+            "start_time": "2026-10-29T08:33:15-0400",
+            "status": "PAUSED"
+          },
+          "code": 200,
+          "name": "readback_campaign_1"
+        },
+        {
+          "body": {
+            "data": [
+              {
+                "attribution_spec": [
+                  {
+                    "event_type": "CLICK_THROUGH",
+                    "window_days": 7
+                  },
+                  {
+                    "event_type": "VIEW_THROUGH",
+                    "window_days": 1
+                  },
+                  {
+                    "event_type": "ENGAGED_VIDEO_VIEW",
+                    "window_days": 1
+                  }
+                ],
+                "bid_amount": 90,
+                "billing_event": "IMPRESSIONS",
+                "configured_status": "PAUSED",
+                "effective_status": "IN_PROCESS",
+                "id": "120250921178930629",
+                "is_dynamic_creative": false,
+                "name": "01 - ADGROUP (b01fb06c006g01)",
+                "optimization_goal": "OFFSITE_CONVERSIONS",
+                "promoted_object": {
+                  "custom_event_type": "ADD_TO_WISHLIST",
+                  "pixel_id": "1001283201270967",
+                  "smart_pse_enabled": false
+                },
+                "start_time": "2026-10-29T08:33:15-0400",
+                "status": "PAUSED",
+                "targeting": {
+                  "age_max": 65,
+                  "age_min": 18,
+                  "age_range": [
+                    18,
+                    65
+                  ],
+                  "brand_safety_content_filter_levels": [
+                    "FACEBOOK_RELAXED",
+                    "AN_RELAXED"
+                  ],
+                  "geo_locations": {
+                    "countries": [
+                      "US"
+                    ],
+                    "location_types": [
+                      "frequently_in",
+                      "home",
+                      "recent"
+                    ]
+                  },
+                  "targeting_automation": {
+                    "advantage_audience": 1
+                  },
+                  "user_age_unknown": true
+                }
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVFBDZAjJKVDl0QzkyVnlyendmNVYxTlhlcXdBTzU2SHY5SWNWTEpOWExZATkEtSlBpTmg2WXVKZAG51MlZAybVoxd2FSc1NFZA0VGODBRb0NLWnoxZAk1Eck9R",
+                "before": "QVFIVFBDZAjJKVDl0QzkyVnlyendmNVYxTlhlcXdBTzU2SHY5SWNWTEpOWExZATkEtSlBpTmg2WXVKZAG51MlZAybVoxd2FSc1NFZA0VGODBRb0NLWnoxZAk1Eck9R"
+              }
+            }
+          },
+          "code": 200,
+          "name": "readback_adsets_1"
+        },
+        {
+          "body": {
+            "data": [
+              {
+                "adset_id": "120250921178930629",
+                "configured_status": "PAUSED",
+                "creative": {
+                  "id": "2194752301423983",
+                  "name": "SHEIN G006 C6 AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001 COPY C3 2026-10-29-127ddbf95bc5d126104dc185a002abe5",
+                  "status": "IN_PROCESS"
+                },
+                "effective_status": "IN_PROCESS",
+                "id": "120250921180460629",
+                "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+                "source_ad_id": "120250750999190629",
+                "status": "PAUSED"
+              },
+              {
+                "adset_id": "120250921178930629",
+                "configured_status": "PAUSED",
+                "creative": {
+                  "id": "1583764789741365",
+                  "name": "SHEIN G006 C6 AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001 COPY C3 2026-10-29-a144e556c9dc84f9f0789425d26ee510",
+                  "status": "IN_PROCESS"
+                },
+                "effective_status": "IN_PROCESS",
+                "id": "120250921180420629",
+                "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+                "source_ad_id": "120250750999230629",
+                "status": "PAUSED"
+              },
+              {
+                "adset_id": "120250921178930629",
+                "configured_status": "PAUSED",
+                "creative": {
+                  "id": "1520448893441983",
+                  "name": "SHEIN G006 C6 AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002 COPY C3 2026-10-29-f0b4ddf48b1873160e5b27172bc4c89e",
+                  "status": "IN_PROCESS"
+                },
+                "effective_status": "IN_PROCESS",
+                "id": "120250921180400629",
+                "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+                "source_ad_id": "120250750999100629",
+                "status": "PAUSED"
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVDgyWVZAUVDRyTy04R3E5VDV2MjFvR2pFMEQ4UjVuaFJnd1c4YlQ4R0hUWWRXZA3pYUGVlanJQcXJDNmlsNmF1eWhmRHJwMms0U3Vmb2NRVTIybUkzZA0dR",
+                "before": "QVFIVGJhTEZAUcV9LeGplTnJOZAW1ERkFGeGgybGxpVUtJUGxzTUU5VG1DSXd0NGQ3VFJRTnRoS0hOLVVSbVdFZA1BLci1lcHliWXRHMnl3dDJhekh1RTZAxYm53"
+              }
+            }
+          },
+          "code": 200,
+          "name": "readback_ads_1"
+        },
+        {
+          "body": {
+            "account_id": "937846586033361",
+            "bid_strategy": "COST_CAP",
+            "configured_status": "PAUSED",
+            "daily_budget": "3500",
+            "effective_status": "IN_PROCESS",
+            "id": "120250921178500629",
+            "name": "007 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c007) - COPY C3 - (US_APP) - event_add_to_wishlist",
+            "start_time": "2026-10-29T08:33:15-0400",
+            "status": "PAUSED"
+          },
+          "code": 200,
+          "name": "readback_campaign_2"
+        },
+        {
+          "body": {
+            "data": [
+              {
+                "attribution_spec": [
+                  {
+                    "event_type": "CLICK_THROUGH",
+                    "window_days": 7
+                  },
+                  {
+                    "event_type": "VIEW_THROUGH",
+                    "window_days": 1
+                  },
+                  {
+                    "event_type": "ENGAGED_VIDEO_VIEW",
+                    "window_days": 1
+                  }
+                ],
+                "bid_amount": 90,
+                "billing_event": "IMPRESSIONS",
+                "configured_status": "PAUSED",
+                "effective_status": "IN_PROCESS",
+                "id": "120250921178900629",
+                "is_dynamic_creative": false,
+                "name": "01 - ADGROUP (b01fb06c007g01)",
+                "optimization_goal": "OFFSITE_CONVERSIONS",
+                "promoted_object": {
+                  "custom_event_type": "ADD_TO_WISHLIST",
+                  "pixel_id": "1001283201270967",
+                  "smart_pse_enabled": false
+                },
+                "start_time": "2026-10-29T08:33:15-0400",
+                "status": "PAUSED",
+                "targeting": {
+                  "age_max": 65,
+                  "age_min": 18,
+                  "age_range": [
+                    18,
+                    65
+                  ],
+                  "brand_safety_content_filter_levels": [
+                    "FACEBOOK_RELAXED",
+                    "AN_RELAXED"
+                  ],
+                  "geo_locations": {
+                    "countries": [
+                      "US"
+                    ],
+                    "location_types": [
+                      "frequently_in",
+                      "home",
+                      "recent"
+                    ]
+                  },
+                  "targeting_automation": {
+                    "advantage_audience": 1
+                  },
+                  "user_age_unknown": true
+                }
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVHRKdkRFOHNnY0ZAxMHJpcUFDUEo5Vlp6RFkzeFBSTzhsZA0ZApaFFWUi1jWE5BSG5vY3ZAhSGNaUmdYSTI3eWdBUXV5cmpwU1FDYXhJMHlCVFRzZAWNVbmNR",
+                "before": "QVFIVHRKdkRFOHNnY0ZAxMHJpcUFDUEo5Vlp6RFkzeFBSTzhsZA0ZApaFFWUi1jWE5BSG5vY3ZAhSGNaUmdYSTI3eWdBUXV5cmpwU1FDYXhJMHlCVFRzZAWNVbmNR"
+              }
+            }
+          },
+          "code": 200,
+          "name": "readback_adsets_2"
+        },
+        {
+          "body": {
+            "data": [
+              {
+                "adset_id": "120250921178900629",
+                "configured_status": "PAUSED",
+                "creative": {
+                  "id": "1158101197151569",
+                  "name": "SHEIN G006 C7 AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001 COPY C3 2026-10-29-fce040625a259fbc8b7d7a4c98fbf3ee",
+                  "status": "IN_PROCESS"
+                },
+                "effective_status": "IN_PROCESS",
+                "id": "120250921180970629",
+                "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+                "source_ad_id": "120250750999230629",
+                "status": "PAUSED"
+              },
+              {
+                "adset_id": "120250921178900629",
+                "configured_status": "PAUSED",
+                "creative": {
+                  "id": "1753656912387956",
+                  "name": "SHEIN G006 C7 AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002 COPY C3 2026-10-29-8ab87ed35528597501bc0bfb849c396c",
+                  "status": "IN_PROCESS"
+                },
+                "effective_status": "IN_PROCESS",
+                "id": "120250921180670629",
+                "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+                "source_ad_id": "120250750999100629",
+                "status": "PAUSED"
+              },
+              {
+                "adset_id": "120250921178900629",
+                "configured_status": "PAUSED",
+                "creative": {
+                  "id": "1148729728105284",
+                  "name": "SHEIN G006 C7 AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001 COPY C3 2026-10-29-35cf025fbcf5c68f9b47f128d0694f2e",
+                  "status": "IN_PROCESS"
+                },
+                "effective_status": "IN_PROCESS",
+                "id": "120250921180650629",
+                "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+                "source_ad_id": "120250750999190629",
+                "status": "PAUSED"
+              }
+            ],
+            "paging": {
+              "cursors": {
+                "after": "QVFIVERGYXFfTVRpNUs4UFFUVmNOVzY5ZAFRhSE5ZAZAlRSU2taa1RXQXlxQW5PeU1lOTJ5U1ZAycGhzSkhueEc5djUwcG41RFprbEowVWI3M3N4Nm5Qckk3TjFR",
+                "before": "QVFIVFVTQWNPY2FhZAUF1S2dyM093ZAGVTeXRwUG9ZAN205bElPeDNmX3BiNmQ2ZA2hTZA09XZA0dZAeHRmNm9iOEl3OXJPUGJCejFiSVgwbWtJamxmcWZAJWU9wWC1B"
+              }
+            }
+          },
+          "code": 200,
+          "name": "readback_ads_2"
+        }
+      ],
+      "stage": "readback_complete",
+      "status": "COMPLETE",
+      "timings": {
+        "adset_copy": {
+          "duration_ms": 2298.311,
+          "finished_at": "2026-10-29T12:32:57.404172+00:00",
+          "started_at": "2026-10-29T12:32:55.105874+00:00"
+        },
+        "copy_submit": {
+          "duration_ms": 1263.976,
+          "finished_at": "2026-10-29T12:32:55.105819+00:00",
+          "started_at": "2026-10-29T12:32:53.841842+00:00"
+        },
+        "existing_post_attach": {
+          "duration_ms": 4565.834,
+          "finished_at": "2026-10-29T12:33:14.193865+00:00",
+          "started_at": "2026-10-29T12:33:09.628049+00:00"
+        },
+        "existing_post_copy_and_creative": {
+          "duration_ms": 10266.484,
+          "finished_at": "2026-10-29T12:33:09.627956+00:00",
+          "started_at": "2026-10-29T12:32:59.361474+00:00"
+        },
+        "readback": {
+          "duration_ms": 1282.191,
+          "finished_at": "2026-10-29T12:33:15.476327+00:00",
+          "started_at": "2026-10-29T12:33:14.194149+00:00"
+        },
+        "shell_normalize": {
+          "duration_ms": 1955.725,
+          "finished_at": "2026-10-29T12:32:59.360256+00:00",
+          "started_at": "2026-10-29T12:32:57.404543+00:00"
+        }
+      },
+      "write_journal": [
+        {
+          "at": "2026-10-29T12:32:53.841872+00:00",
+          "confirmed": [
+            {
+              "ids": {
+                "copied_campaign_id": "120250921178510629"
+              },
+              "name": "campaign_copy_1"
+            },
+            {
+              "ids": {
+                "copied_campaign_id": "120250921178500629"
+              },
+              "name": "campaign_copy_2"
+            }
+          ],
+          "operations": [
+            {
+              "body_digest": "f9015eeb8631ef36f1a30696ac2234ce8989a20055dba7f5bc4421f40bd7ef20",
+              "method": "POST",
+              "name": "campaign_copy_1",
+              "path": "120250750964600629/copies"
+            },
+            {
+              "body_digest": "f9015eeb8631ef36f1a30696ac2234ce8989a20055dba7f5bc4421f40bd7ef20",
+              "method": "POST",
+              "name": "campaign_copy_2",
+              "path": "120250750964600629/copies"
+            }
+          ],
+          "stage": "campaign_copy",
+          "state": "CONFIRMED"
+        },
+        {
+          "at": "2026-10-29T12:32:55.105884+00:00",
+          "confirmed": [
+            {
+              "ids": {
+                "copied_adset_id": "120250921178930629"
+              },
+              "name": "adset_copy_1"
+            },
+            {
+              "ids": {
+                "copied_adset_id": "120250921178900629"
+              },
+              "name": "adset_copy_2"
+            }
+          ],
+          "operations": [
+            {
+              "body_digest": "c473233a662f5ce783d9836a4de4887a52c7485f554a9e4673f3991154b67251",
+              "method": "POST",
+              "name": "adset_copy_1",
+              "path": "120250750970190629/copies"
+            },
+            {
+              "body_digest": "570d74ee261879005d83af2f4327255511b868a5024727e9f2aa9813a0bb41af",
+              "method": "POST",
+              "name": "adset_copy_2",
+              "path": "120250750970190629/copies"
+            }
+          ],
+          "stage": "adset_copy",
+          "state": "CONFIRMED"
+        },
+        {
+          "at": "2026-10-29T12:32:57.404551+00:00",
+          "confirmed": [],
+          "operations": [
+            {
+              "body_digest": "c72786f9e4cd0f230bb4617fb02bbd2bad1ea00ec699650c1e3984d69090c8b5",
+              "method": "POST",
+              "name": "campaign_update_1",
+              "path": "120250921178510629"
+            },
+            {
+              "body_digest": "0dd2ed38d67a37547e6e5b41b89d7a850eaa1f68a1abd81e17c9ab2e9b1b84e0",
+              "method": "POST",
+              "name": "adset_update_1",
+              "path": "120250921178930629"
+            },
+            {
+              "body_digest": "328fc12b542fe0e68f297e253f2ada3afc8f9b17b728f985dafdc87d234ad79c",
+              "method": "POST",
+              "name": "campaign_update_2",
+              "path": "120250921178500629"
+            },
+            {
+              "body_digest": "b746bba7254a45e5db231c592fae690d3ea2e2b698916bb589124a940997898d",
+              "method": "POST",
+              "name": "adset_update_2",
+              "path": "120250921178900629"
+            }
+          ],
+          "stage": "campaign_adset_update",
+          "state": "CONFIRMED"
+        },
+        {
+          "at": "2026-10-29T12:32:59.361495+00:00",
+          "confirmed": [
+            {
+              "ids": {
+                "copied_ad_id": "120250921180460629"
+              },
+              "name": "existing_post_ad_copy_1_1"
+            },
+            {
+              "ids": {
+                "id": "2194752301423983"
+              },
+              "name": "existing_post_creative_1_1"
+            },
+            {
+              "ids": {
+                "copied_ad_id": "120250921180400629"
+              },
+              "name": "existing_post_ad_copy_1_2"
+            },
+            {
+              "ids": {
+                "id": "1520448893441983"
+              },
+              "name": "existing_post_creative_1_2"
+            },
+            {
+              "ids": {
+                "copied_ad_id": "120250921180420629"
+              },
+              "name": "existing_post_ad_copy_1_3"
+            },
+            {
+              "ids": {
+                "id": "1583764789741365"
+              },
+              "name": "existing_post_creative_1_3"
+            },
+            {
+              "ids": {
+                "copied_ad_id": "120250921180650629"
+              },
+              "name": "existing_post_ad_copy_2_1"
+            },
+            {
+              "ids": {
+                "id": "1148729728105284"
+              },
+              "name": "existing_post_creative_2_1"
+            },
+            {
+              "ids": {
+                "copied_ad_id": "120250921180670629"
+              },
+              "name": "existing_post_ad_copy_2_2"
+            },
+            {
+              "ids": {
+                "id": "1753656912387956"
+              },
+              "name": "existing_post_creative_2_2"
+            },
+            {
+              "ids": {
+                "copied_ad_id": "120250921180970629"
+              },
+              "name": "existing_post_ad_copy_2_3"
+            },
+            {
+              "ids": {
+                "id": "1158101197151569"
+              },
+              "name": "existing_post_creative_2_3"
+            }
+          ],
+          "operations": [
+            {
+              "body_digest": "98e4dfa02299c1161b6aa43e1e4cc4f65e2cecec3a9dd875e3d4a23f4197aaa5",
+              "method": "POST",
+              "name": "existing_post_ad_copy_1_1",
+              "path": "120250750999190629/copies"
+            },
+            {
+              "body_digest": "b7f0402bb02737d1daa38271807c22f1956d799e339dbfe2bf3e7db49bef2249",
+              "method": "POST",
+              "name": "existing_post_creative_1_1",
+              "path": "act_937846586033361/adcreatives"
+            },
+            {
+              "body_digest": "98e4dfa02299c1161b6aa43e1e4cc4f65e2cecec3a9dd875e3d4a23f4197aaa5",
+              "method": "POST",
+              "name": "existing_post_ad_copy_1_2",
+              "path": "120250750999100629/copies"
+            },
+            {
+              "body_digest": "81554a6f0b73ac336d46a0ae1562fca31927ee42f9905c9a0258a21ceef97aad",
+              "method": "POST",
+              "name": "existing_post_creative_1_2",
+              "path": "act_937846586033361/adcreatives"
+            },
+            {
+              "body_digest": "98e4dfa02299c1161b6aa43e1e4cc4f65e2cecec3a9dd875e3d4a23f4197aaa5",
+              "method": "POST",
+              "name": "existing_post_ad_copy_1_3",
+              "path": "120250750999230629/copies"
+            },
+            {
+              "body_digest": "1f9001848615db94a7a46b3762f468802ac7d947814604e55d406cf388774cc2",
+              "method": "POST",
+              "name": "existing_post_creative_1_3",
+              "path": "act_937846586033361/adcreatives"
+            },
+            {
+              "body_digest": "5e0c2aa4b8847682ff6e1e5f0255b14658e37f1835cb0bc162e928a8b0825312",
+              "method": "POST",
+              "name": "existing_post_ad_copy_2_1",
+              "path": "120250750999190629/copies"
+            },
+            {
+              "body_digest": "f1c01257188203ca0c5f5a52a82267d5468e99bc8774494ead2423469645ba73",
+              "method": "POST",
+              "name": "existing_post_creative_2_1",
+              "path": "act_937846586033361/adcreatives"
+            },
+            {
+              "body_digest": "5e0c2aa4b8847682ff6e1e5f0255b14658e37f1835cb0bc162e928a8b0825312",
+              "method": "POST",
+              "name": "existing_post_ad_copy_2_2",
+              "path": "120250750999100629/copies"
+            },
+            {
+              "body_digest": "3c9526c14446f6e24edd1f86d64b5c9683f3a0483d877a1d1404cca4084b6f0d",
+              "method": "POST",
+              "name": "existing_post_creative_2_2",
+              "path": "act_937846586033361/adcreatives"
+            },
+            {
+              "body_digest": "5e0c2aa4b8847682ff6e1e5f0255b14658e37f1835cb0bc162e928a8b0825312",
+              "method": "POST",
+              "name": "existing_post_ad_copy_2_3",
+              "path": "120250750999230629/copies"
+            },
+            {
+              "body_digest": "e0b6b7e8d7383dc0a4008ca33160a1dafa032fc9c5810f8116b8eee2051966ae",
+              "method": "POST",
+              "name": "existing_post_creative_2_3",
+              "path": "act_937846586033361/adcreatives"
+            }
+          ],
+          "stage": "existing_post_copy_and_creative",
+          "state": "CONFIRMED"
+        },
+        {
+          "at": "2026-10-29T12:33:09.628056+00:00",
+          "confirmed": [],
+          "operations": [
+            {
+              "body_digest": "c14c935ab35752fdee85fdc19f5dfffe3ad45dc3caf39360073c0b4fb1fbcab1",
+              "method": "POST",
+              "name": "existing_post_attach_1",
+              "path": "120250921180460629"
+            },
+            {
+              "body_digest": "f5b78661d0dfb9d9f70a58377a5cdaee36e5d362d786b133391e6b41f41da334",
+              "method": "POST",
+              "name": "existing_post_attach_2",
+              "path": "120250921180400629"
+            },
+            {
+              "body_digest": "2d09fe088cc1ae6e5c0731840c3d0c031b0bdb2fa93d791e6869be730ba1657d",
+              "method": "POST",
+              "name": "existing_post_attach_3",
+              "path": "120250921180420629"
+            },
+            {
+              "body_digest": "27fa3cbee4d882037e3c1ddaef39a15ae178a25bbec3f3d24f1c862d01c25984",
+              "method": "POST",
+              "name": "existing_post_attach_4",
+              "path": "120250921180650629"
+            },
+            {
+              "body_digest": "5a70589e0a12f00c1ccaf0c3b906002faa5bc46027c9d8aec7e530a12362bfc7",
+              "method": "POST",
+              "name": "existing_post_attach_5",
+              "path": "120250921180670629"
+            },
+            {
+              "body_digest": "2af9aabcc9d4723b7c9b3f4b11e61dba8ff8ea3530f46e1124c90afe35f98dc1",
+              "method": "POST",
+              "name": "existing_post_attach_6",
+              "path": "120250921180970629"
+            }
+          ],
+          "stage": "existing_post_ad_attach",
+          "state": "CONFIRMED"
+        }
+      ]
+    }
+  ],
+  "campaign_ids": [
+    "120250921178510629",
+    "120250921178500629"
+  ],
+  "checkpoint_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/state/checkpoints/shein-1565261967260647536-c3-937846586033361.json",
+  "manual_reconciliation_required": false,
+  "status": "COMPLETE"
+}

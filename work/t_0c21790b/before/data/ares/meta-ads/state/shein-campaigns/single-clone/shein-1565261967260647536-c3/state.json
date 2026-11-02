@@ -1,0 +1,4985 @@
+{
+  "account": {
+    "account_status": 1,
+    "currency": "USD",
+    "disable_reason": 0,
+    "id": "act_937846586033361",
+    "name": "Mavroa-US-SHEIN-ES-06-G006",
+    "timezone_name": "America/New_York",
+    "user_tasks": [
+      "DRAFT",
+      "ANALYZE",
+      "ADVERTISE"
+    ]
+  },
+  "batch_barrier": true,
+  "engine_result": {
+    "audit_path": "/root/mgs-agent/data/ares/meta-ads/engine-v3/audit/shein-1565261967260647536-c3.json",
+    "campaign_ids": [
+      "120250921178510629",
+      "120250921178500629"
+    ],
+    "deferred_accounts": [],
+    "idempotent_replay": false,
+    "metrics": {
+      "campaign_count": 2,
+      "global_wave_count": 1,
+      "intermediate_get_calls": 0,
+      "lane_count": 1,
+      "outer_readback_calls": 1
+    },
+    "request_id": "shein-1565261967260647536-c3",
+    "retry_after_seconds": 0,
+    "status": "COMPLETE_PAUSED"
+  },
+  "execution_started_at": "2026-10-29T07:12:14.156000+00:00",
+  "last_error_type": "RouteBlocked",
+  "manifest": {
+    "campaigns": [
+      {
+        "account_id": "937846586033361",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "4043092125996882",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/857844717_1106761105092116_3397568437219398055_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3495b&_nc_ohc=GVyEDpf0oLkQ7kNvwFlrbKy&_nc_oc=AdpsifXrmFKiebfF5wy6HpQIHTA6cm3so6dM17YL7gJXgV7xviiwgdExMUGWhk4UjVYLTvaRWR9Gb5wZKQ-5j2q8&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=APRAPSkEAAAA&_nc_gid=uxHBESrGoKXKNEj2QlDyiA&_nc_tpa=Q5bMBQI5YT9QCEuB8-gOKq9zTW3O-Q05ZNMGdX1wFsXXyEUgtlzfJ464m0_loRSgic9BMIjf36Bvm2pqmw&oh=00_AQPYYtIxO8xtW3DiM_gIbbyyICPj3LLOJi5fWl3UUZjeRg&oe=6ADD6289",
+                    "video_id": "4043092125996882"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C6 AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+                    }
+                  },
+                  "image_hash": "d92c0a6bb98963c33284ce48566d196a",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "4043092125996882"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+            },
+            "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+            "source_ad_id": "120250750999190629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1112002464809579",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/856275393_1092704220061109_8309825736061179415_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uO9VPj4B2P8Q7kNvwFmEqi1&_nc_oc=AdouAwuK-_45jWg8GXKnWC-89VkiT1zVmWOla2GrK45JVPTR8l_hMVY_Onbbza_Yd_6lXoWZSkSwBczym9gPpZAT&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=XVLcoV_N3K31Fy0TgsPVqQ&_nc_tpa=Q5bMBQJZDjPEGDejsn8ARy5_XI_OonsEXiMSkUrr0h8iq8zytSkDN5ttUO4A6srcayhyXGgJGpdqTvFf5A&oh=00_AQMpmmNxSlRoXjh23mRVh4YgAGVaed1WxazBBLHrq28ylQ&oe=6ADD759D",
+                    "video_id": "1112002464809579"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C6 AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+                    }
+                  },
+                  "image_hash": "21568d63aa3e94852bfd998f465b1427",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1112002464809579"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+            },
+            "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+            "source_ad_id": "120250750999100629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1937593290958277",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/857746828_1781527606439022_4609686451700477055_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3495b&_nc_ohc=J_JhesY1rRoQ7kNvwGAq3Qj&_nc_oc=Adr6hMJquSNswtUu5F7iLl3XNgfTxTF5stnruc-kPleKRkEckJ6k8G2OEfemCGA9BNge1Ng-5DZP09WTQZv5dYYd&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=G-gATbZZNpSRuHeYwIHXsg&_nc_tpa=Q5bMBQKR6Mgq_VNKy-q8KN1fgV_tgP0BQVNvUDL47HTuikMAqIYpHG0S0cMyvitNbJhqlkT0eQkuEDJ4sQ&oh=00_AQM5ms2PooMMnDfKbPnbi0gY2InZHbtXWaeh1s7Rom2bSw&oe=6ADD6872",
+                    "video_id": "1937593290958277"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C6 AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+                    }
+                  },
+                  "image_hash": "006a3819932080495826fb289dc6c11d",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1937593290958277"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+            },
+            "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+            "source_ad_id": "120250750999230629"
+          }
+        ],
+        "adset_name": "01 - ADGROUP (b01fb06c006g01)",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "3500"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1565261967260647536-c3-c6",
+        "mode": "pure_clone",
+        "name": "006 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c006) - COPY C3 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250750970190629",
+        "source_campaign_id": "120250750964600629",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-10-29T08:33:15-04:00",
+        "status": "PAUSED"
+      },
+      {
+        "account_id": "937846586033361",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "4043092125996882",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/857844717_1106761105092116_3397568437219398055_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3495b&_nc_ohc=GVyEDpf0oLkQ7kNvwFlrbKy&_nc_oc=AdpsifXrmFKiebfF5wy6HpQIHTA6cm3so6dM17YL7gJXgV7xviiwgdExMUGWhk4UjVYLTvaRWR9Gb5wZKQ-5j2q8&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=APRAPSkEAAAA&_nc_gid=uxHBESrGoKXKNEj2QlDyiA&_nc_tpa=Q5bMBQI5YT9QCEuB8-gOKq9zTW3O-Q05ZNMGdX1wFsXXyEUgtlzfJ464m0_loRSgic9BMIjf36Bvm2pqmw&oh=00_AQPYYtIxO8xtW3DiM_gIbbyyICPj3LLOJi5fWl3UUZjeRg&oe=6ADD6289",
+                    "video_id": "4043092125996882"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C7 AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+                    }
+                  },
+                  "image_hash": "d92c0a6bb98963c33284ce48566d196a",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "4043092125996882"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+            },
+            "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+            "source_ad_id": "120250750999190629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1112002464809579",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/856275393_1092704220061109_8309825736061179415_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uO9VPj4B2P8Q7kNvwFmEqi1&_nc_oc=AdouAwuK-_45jWg8GXKnWC-89VkiT1zVmWOla2GrK45JVPTR8l_hMVY_Onbbza_Yd_6lXoWZSkSwBczym9gPpZAT&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=XVLcoV_N3K31Fy0TgsPVqQ&_nc_tpa=Q5bMBQJZDjPEGDejsn8ARy5_XI_OonsEXiMSkUrr0h8iq8zytSkDN5ttUO4A6srcayhyXGgJGpdqTvFf5A&oh=00_AQMpmmNxSlRoXjh23mRVh4YgAGVaed1WxazBBLHrq28ylQ&oe=6ADD759D",
+                    "video_id": "1112002464809579"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C7 AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+                    }
+                  },
+                  "image_hash": "21568d63aa3e94852bfd998f465b1427",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1112002464809579"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+            },
+            "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+            "source_ad_id": "120250750999100629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1937593290958277",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/857746828_1781527606439022_4609686451700477055_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3495b&_nc_ohc=J_JhesY1rRoQ7kNvwGAq3Qj&_nc_oc=Adr6hMJquSNswtUu5F7iLl3XNgfTxTF5stnruc-kPleKRkEckJ6k8G2OEfemCGA9BNge1Ng-5DZP09WTQZv5dYYd&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=G-gATbZZNpSRuHeYwIHXsg&_nc_tpa=Q5bMBQKR6Mgq_VNKy-q8KN1fgV_tgP0BQVNvUDL47HTuikMAqIYpHG0S0cMyvitNbJhqlkT0eQkuEDJ4sQ&oh=00_AQM5ms2PooMMnDfKbPnbi0gY2InZHbtXWaeh1s7Rom2bSw&oe=6ADD6872",
+                    "video_id": "1937593290958277"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C7 AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+                    }
+                  },
+                  "image_hash": "006a3819932080495826fb289dc6c11d",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1937593290958277"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+            },
+            "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+            "source_ad_id": "120250750999230629"
+          }
+        ],
+        "adset_name": "01 - ADGROUP (b01fb06c007g01)",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "3500"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1565261967260647536-c3-c7",
+        "mode": "pure_clone",
+        "name": "007 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c007) - COPY C3 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250750970190629",
+        "source_campaign_id": "120250750964600629",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-10-29T08:33:15-04:00",
+        "status": "PAUSED"
+      }
+    ],
+    "created_at": "2026-10-29T12:32:45.910855+00:00",
+    "execution_mode": "pure_clone",
+    "graph_version": "v26.0",
+    "operation": "SHEIN-US-DIRECT",
+    "prevalidated": true,
+    "prevalidation": {
+      "checks": [
+        "schema_v3",
+        "unique_idempotency",
+        "timezone_start",
+        "safe_creative_payload",
+        "source_ad_lineage"
+      ],
+      "content_digest": "4ba7b9b0e4356323b9a42b04428d220c6c4570cd5e159e1b2122f35bb20b0105",
+      "engine_version": 3,
+      "validated_at": "2026-10-29T12:32:45.920962+00:00"
+    },
+    "request_id": "shein-1565261967260647536-c3",
+    "schema_version": 3
+  },
+  "new_media_assets": [],
+  "number": 6,
+  "page_id": "818782797989721",
+  "phase": "POSTPROCESS_PENDING",
+  "prepared_at": "2026-10-29T12:32:41.974760+00:00",
+  "prerequisites": {
+    "assignment": {
+      "data": [
+        {
+          "id": "122094881283509741",
+          "name": "Lina Marlina",
+          "tasks": [
+            "MANAGE_LEADS",
+            "VIEW_MONETIZATION_INSIGHTS",
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122141618025069441",
+          "name": "Roosevelt Mattei",
+          "tasks": [
+            "MANAGE_LEADS",
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122105989341495517",
+          "name": "Ven Ny",
+          "tasks": [
+            "MANAGE_LEADS",
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        },
+        {
+          "id": "122095869861482193",
+          "name": "minibot System User",
+          "tasks": [
+            "MANAGE_LEADS",
+            "MODERATE",
+            "MESSAGING",
+            "ANALYZE",
+            "ADVERTISE",
+            "CREATE_CONTENT",
+            "MANAGE"
+          ]
+        }
+      ],
+      "paging": {
+        "cursors": {
+          "after": "QVFIVHdTRF9UQURWS0lCUFpqTjdkS2NVRzZATc1JMMWpxUDBoM1Y3ZAFhwTWlIanU2eU9VR0lmUElCLThiOHVkS3lqTV9iRWc4R2xtcHdMemtCSUNranZAlLWp4SjdzcW9XMHFPUkZAjY25mTktMbk5R",
+          "before": "QVFIVDgxMFcxQjk0NGJOV0hMNHhxdE1YUTZAaVjB1ai1SVzVuaW5QME9LMVM2S3AtbkxHWi03WmJONWloWW9BSC0xYVVMbTRRQXR3V3lyLXFEUGhlR1prUGh3"
+        }
+      }
+    },
+    "page": {
+      "id": "818782797989721",
+      "name": "Ofertas Express"
+    },
+    "pixels": {
+      "data": [
+        {
+          "id": "1001283201270967",
+          "name": "US-SHEIN-ES"
+        }
+      ],
+      "paging": {
+        "cursors": {
+          "after": "MTAwMTI4MzIwMTI3MDk2NwZDZD",
+          "before": "MTAwMTI4MzIwMTI3MDk2NwZDZD"
+        }
+      }
+    }
+  },
+  "request": {
+    "account": "937846586033361",
+    "authorized_by": "1055570806945620030",
+    "budget_usd": "35",
+    "mode": "pure_clone",
+    "quantity": 2,
+    "request_id": "shein-1565261967260647536-c3",
+    "source_channel_id": "1548150155184701440",
+    "source_message_id": "1565261967260647536",
+    "source_number": 3,
+    "source_thread_id": "1558134703565967394",
+    "start_time": "2026-10-29T04:00:00-04:00",
+    "status": "ACTIVE"
+  },
+  "resolved_request": {
+    "account": "937846586033361",
+    "authorized_by": "1055570806945620030",
+    "budget_usd": "35",
+    "mode": "pure_clone",
+    "quantity": 2,
+    "request_id": "shein-1565261967260647536-c3",
+    "schedule_adjustment": {
+      "intent": "IMMEDIATE_AFTER_QA",
+      "reason": "EXPLICIT_SAME_ACCOUNT_DAY_ELAPSED",
+      "requested_start_time": "2026-10-29T04:00:00-04:00",
+      "resolved_at": "2026-10-29T12:32:45.908625+00:00"
+    },
+    "source_channel_id": "1548150155184701440",
+    "source_message_id": "1565261967260647536",
+    "source_number": 3,
+    "source_thread_id": "1558134703565967394",
+    "start_now": true,
+    "start_time": "2026-10-29T12:33:15+00:00",
+    "status": "ACTIVE"
+  },
+  "schema_version": 1,
+  "source": {
+    "ads": [
+      {
+        "adset_id": "120250750970190629",
+        "creative": {
+          "contextual_multi_ads": {
+            "enroll_status": "OPT_OUT"
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {
+              "adapt_to_placement": {
+                "enroll_status": "OPT_OUT"
+              },
+              "add_text_overlay": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ads_with_benefits": {
+                "enroll_status": "OPT_OUT"
+              },
+              "advantage_plus_creative": {
+                "enroll_status": "OPT_OUT"
+              },
+              "app_highlights": {
+                "enroll_status": "OPT_OUT"
+              },
+              "audio": {
+                "enroll_status": "OPT_OUT"
+              },
+              "auto_promotion_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "biz_ai": {
+                "enroll_status": "OPT_OUT"
+              },
+              "carousel_to_video": {
+                "enroll_status": "OPT_OUT"
+              },
+              "catalog_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "creative_stickers": {
+                "enroll_status": "OPT_OUT"
+              },
+              "customize_product_recommendation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "cv_transformation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "description_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dha_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dynamic_cta_text": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dynamic_partner_content": {
+                "enroll_status": "OPT_OUT"
+              },
+              "enable_ncs_testimonials": {
+                "enroll_status": "OPT_OUT"
+              },
+              "enhance_cta": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_reels_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_story_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "feed_caption_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "generate_cta": {
+                "enroll_status": "OPT_OUT"
+              },
+              "hide_price": {
+                "enroll_status": "OPT_OUT"
+              },
+              "hyperlink_formatting": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_glados_feed": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_reels_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_stream_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_video_native_subtitle": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_animation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_auto_crop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_background_gen": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_banner": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_brightness_and_contrast": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_end_card": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_enhancement": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_templates": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_text_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_touchups": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_uncrop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "inline_comment": {
+                "enroll_status": "OPT_OUT"
+              },
+              "local_store_extension": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_liquidity_animated_image": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_order": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_type_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "multi_creative_post_carousel": {
+                "enroll_status": "OPT_OUT"
+              },
+              "multi_photo_to_video": {
+                "enroll_status": "OPT_OUT"
+              },
+              "music_generation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_genai_recomposition": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_recomposition": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_relaxation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_browsing": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_metadata_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_tags": {
+                "enroll_status": "OPT_OUT"
+              },
+              "profile_card": {
+                "enroll_status": "OPT_OUT"
+              },
+              "profile_extension": {
+                "enroll_status": "OPT_OUT"
+              },
+              "replace_media_text": {
+                "enroll_status": "OPT_OUT"
+              },
+              "reveal_details_over_time": {
+                "enroll_status": "OPT_OUT"
+              },
+              "show_destination_blurbs": {
+                "enroll_status": "OPT_OUT"
+              },
+              "show_summary": {
+                "enroll_status": "OPT_OUT"
+              },
+              "site_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "standard_enhancements_catalog": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_extraction_for_headline": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_extraction_for_tap_target": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_formatting_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_generation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_optimizations": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_overlay_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "translate_voiceover": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_auto_crop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_filtering": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_highlight": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_highlights": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_to_image": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_uncrop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_uncrop_9x16_to_9x18": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_voiceover": {
+                "enroll_status": "OPT_OUT"
+              },
+              "wa_mm_image_filtering": {
+                "enroll_status": "OPT_OUT"
+              },
+              "wa_mm_text_truncation_length": {
+                "enroll_status": "OPT_OUT"
+              }
+            }
+          },
+          "effective_object_story_id": "818782797989721_122149448919079443",
+          "id": "2530837753992709",
+          "instagram_user_id": "17841464983485579",
+          "media_sourcing_spec": {
+            "bodies": [
+              {
+                "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+              }
+            ],
+            "titles": [
+              {
+                "text": "LO QUIERO GRATIS 👉"
+              }
+            ],
+            "videos": [
+              {
+                "opt_in_status": "opt_in",
+                "original_video_id": "1937593290958277",
+                "source": "multi_media",
+                "thumbnail_source": "generated_default",
+                "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/857746828_1781527606439022_4609686451700477055_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3495b&_nc_ohc=J_JhesY1rRoQ7kNvwGAq3Qj&_nc_oc=Adr6hMJquSNswtUu5F7iLl3XNgfTxTF5stnruc-kPleKRkEckJ6k8G2OEfemCGA9BNge1Ng-5DZP09WTQZv5dYYd&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=G-gATbZZNpSRuHeYwIHXsg&_nc_tpa=Q5bMBQKR6Mgq_VNKy-q8KN1fgV_tgP0BQVNvUDL47HTuikMAqIYpHG0S0cMyvitNbJhqlkT0eQkuEDJ4sQ&oh=00_AQM5ms2PooMMnDfKbPnbi0gY2InZHbtXWaeh1s7Rom2bSw&oe=6ADD6872",
+                "video_id": "1937593290958277"
+              }
+            ]
+          },
+          "name": "SHEIN G006 C3 SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001.mp4 2026-10-20-465f3ec33d115b122e076a37788edd5d",
+          "object_story_spec": {
+            "instagram_user_id": "17841464983485579",
+            "page_id": "818782797989721",
+            "video_data": {
+              "call_to_action": {
+                "type": "GET_OFFER_VIEW",
+                "value": {
+                  "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01"
+                }
+              },
+              "image_hash": "006a3819932080495826fb289dc6c11d",
+              "image_url": "https://www.facebook.com/ads/image/?d=AQJAwz8TLtkBlDu42trYcMzG1g5kkC3RX3fhXQ2Hf2m2Z-pJDpX1dNbDU0TDqPAelNKSuj5WcmlF9u87Nz5cF6OeO-jm0hRGZ5SHd3UP2TVbUC4ctxLQOYYvL26s8pUt8fbnLBO2EcREorbY4A0Z0ij-",
+              "link_description": "✨🌟✨🌟✨🌟✨",
+              "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+              "title": "LO QUIERO GRATIS 👉",
+              "video_id": "1937593290958277"
+            }
+          },
+          "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01"
+        },
+        "id": "120250750999230629",
+        "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+        "source_ad_id": "120250562155870629",
+        "status": "ACTIVE"
+      },
+      {
+        "adset_id": "120250750970190629",
+        "creative": {
+          "contextual_multi_ads": {
+            "enroll_status": "OPT_OUT"
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {
+              "adapt_to_placement": {
+                "enroll_status": "OPT_OUT"
+              },
+              "add_text_overlay": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ads_with_benefits": {
+                "enroll_status": "OPT_OUT"
+              },
+              "advantage_plus_creative": {
+                "enroll_status": "OPT_OUT"
+              },
+              "app_highlights": {
+                "enroll_status": "OPT_OUT"
+              },
+              "audio": {
+                "enroll_status": "OPT_OUT"
+              },
+              "auto_promotion_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "biz_ai": {
+                "enroll_status": "OPT_OUT"
+              },
+              "carousel_to_video": {
+                "enroll_status": "OPT_OUT"
+              },
+              "catalog_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "creative_stickers": {
+                "enroll_status": "OPT_OUT"
+              },
+              "customize_product_recommendation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "cv_transformation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "description_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dha_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dynamic_cta_text": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dynamic_partner_content": {
+                "enroll_status": "OPT_OUT"
+              },
+              "enable_ncs_testimonials": {
+                "enroll_status": "OPT_OUT"
+              },
+              "enhance_cta": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_reels_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_story_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "feed_caption_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "generate_cta": {
+                "enroll_status": "OPT_OUT"
+              },
+              "hide_price": {
+                "enroll_status": "OPT_OUT"
+              },
+              "hyperlink_formatting": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_glados_feed": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_reels_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_stream_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_video_native_subtitle": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_animation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_auto_crop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_background_gen": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_banner": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_brightness_and_contrast": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_end_card": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_enhancement": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_templates": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_text_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_touchups": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_uncrop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "inline_comment": {
+                "enroll_status": "OPT_OUT"
+              },
+              "local_store_extension": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_liquidity_animated_image": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_order": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_type_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "multi_creative_post_carousel": {
+                "enroll_status": "OPT_OUT"
+              },
+              "multi_photo_to_video": {
+                "enroll_status": "OPT_OUT"
+              },
+              "music_generation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_genai_recomposition": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_recomposition": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_relaxation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_browsing": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_metadata_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_tags": {
+                "enroll_status": "OPT_OUT"
+              },
+              "profile_card": {
+                "enroll_status": "OPT_OUT"
+              },
+              "profile_extension": {
+                "enroll_status": "OPT_OUT"
+              },
+              "replace_media_text": {
+                "enroll_status": "OPT_OUT"
+              },
+              "reveal_details_over_time": {
+                "enroll_status": "OPT_OUT"
+              },
+              "show_destination_blurbs": {
+                "enroll_status": "OPT_OUT"
+              },
+              "show_summary": {
+                "enroll_status": "OPT_OUT"
+              },
+              "site_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "standard_enhancements_catalog": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_extraction_for_headline": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_extraction_for_tap_target": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_formatting_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_generation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_optimizations": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_overlay_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "translate_voiceover": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_auto_crop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_filtering": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_highlight": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_highlights": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_to_image": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_uncrop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_uncrop_9x16_to_9x18": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_voiceover": {
+                "enroll_status": "OPT_OUT"
+              },
+              "wa_mm_image_filtering": {
+                "enroll_status": "OPT_OUT"
+              },
+              "wa_mm_text_truncation_length": {
+                "enroll_status": "OPT_OUT"
+              }
+            }
+          },
+          "effective_object_story_id": "818782797989721_122149448973079443",
+          "id": "1849526679375833",
+          "instagram_user_id": "17841464983485579",
+          "media_sourcing_spec": {
+            "bodies": [
+              {
+                "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+              }
+            ],
+            "titles": [
+              {
+                "text": "LO QUIERO GRATIS 👉"
+              }
+            ],
+            "videos": [
+              {
+                "opt_in_status": "opt_in",
+                "original_video_id": "4043092125996882",
+                "source": "multi_media",
+                "thumbnail_source": "generated_default",
+                "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/857844717_1106761105092116_3397568437219398055_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3495b&_nc_ohc=GVyEDpf0oLkQ7kNvwFlrbKy&_nc_oc=AdpsifXrmFKiebfF5wy6HpQIHTA6cm3so6dM17YL7gJXgV7xviiwgdExMUGWhk4UjVYLTvaRWR9Gb5wZKQ-5j2q8&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=APRAPSkEAAAA&_nc_gid=uxHBESrGoKXKNEj2QlDyiA&_nc_tpa=Q5bMBQI5YT9QCEuB8-gOKq9zTW3O-Q05ZNMGdX1wFsXXyEUgtlzfJ464m0_loRSgic9BMIjf36Bvm2pqmw&oh=00_AQPYYtIxO8xtW3DiM_gIbbyyICPj3LLOJi5fWl3UUZjeRg&oe=6ADD6289",
+                "video_id": "4043092125996882"
+              }
+            ]
+          },
+          "name": "SHEIN G006 C3 SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001.mp4 2026-10-20-18dc98900af091e8bd05b59c9de11937",
+          "object_story_spec": {
+            "instagram_user_id": "17841464983485579",
+            "page_id": "818782797989721",
+            "video_data": {
+              "call_to_action": {
+                "type": "GET_OFFER_VIEW",
+                "value": {
+                  "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01"
+                }
+              },
+              "image_hash": "d92c0a6bb98963c33284ce48566d196a",
+              "image_url": "https://www.facebook.com/ads/image/?d=AQJ0YvGAxW6L8YtCPviO3YO4PMywrtg_FxwrN4jWOhCaJ6rYM53fdvWUH6h7bneCiLbxqbAZFLsGPw-PsA0Aaxnamb0iDwyKoZFeKf61cDpA0B6YtQfOYqEnT0JN56m0dBG5zw3Dv28xHOzdtdPQVX6W",
+              "link_description": "✨🌟✨🌟✨🌟✨",
+              "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+              "title": "LO QUIERO GRATIS 👉",
+              "video_id": "4043092125996882"
+            }
+          },
+          "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01"
+        },
+        "id": "120250750999190629",
+        "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+        "source_ad_id": "120250562155870629",
+        "status": "ACTIVE"
+      },
+      {
+        "adset_id": "120250750970190629",
+        "creative": {
+          "contextual_multi_ads": {
+            "enroll_status": "OPT_OUT"
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {
+              "adapt_to_placement": {
+                "enroll_status": "OPT_OUT"
+              },
+              "add_text_overlay": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ads_with_benefits": {
+                "enroll_status": "OPT_OUT"
+              },
+              "advantage_plus_creative": {
+                "enroll_status": "OPT_OUT"
+              },
+              "app_highlights": {
+                "enroll_status": "OPT_OUT"
+              },
+              "audio": {
+                "enroll_status": "OPT_OUT"
+              },
+              "auto_promotion_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "biz_ai": {
+                "enroll_status": "OPT_OUT"
+              },
+              "carousel_to_video": {
+                "enroll_status": "OPT_OUT"
+              },
+              "catalog_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "creative_stickers": {
+                "enroll_status": "OPT_OUT"
+              },
+              "customize_product_recommendation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "cv_transformation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "description_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dha_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dynamic_cta_text": {
+                "enroll_status": "OPT_OUT"
+              },
+              "dynamic_partner_content": {
+                "enroll_status": "OPT_OUT"
+              },
+              "enable_ncs_testimonials": {
+                "enroll_status": "OPT_OUT"
+              },
+              "enhance_cta": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_reels_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "fb_story_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "feed_caption_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "generate_cta": {
+                "enroll_status": "OPT_OUT"
+              },
+              "hide_price": {
+                "enroll_status": "OPT_OUT"
+              },
+              "hyperlink_formatting": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_feed_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_glados_feed": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_reels_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_stream_tag": {
+                "enroll_status": "OPT_OUT"
+              },
+              "ig_video_native_subtitle": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_animation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_auto_crop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_background_gen": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_banner": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_brightness_and_contrast": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_end_card": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_enhancement": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_templates": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_text_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_touchups": {
+                "enroll_status": "OPT_OUT"
+              },
+              "image_uncrop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "inline_comment": {
+                "enroll_status": "OPT_OUT"
+              },
+              "local_store_extension": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_liquidity_animated_image": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_order": {
+                "enroll_status": "OPT_OUT"
+              },
+              "media_type_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "multi_creative_post_carousel": {
+                "enroll_status": "OPT_OUT"
+              },
+              "multi_photo_to_video": {
+                "enroll_status": "OPT_OUT"
+              },
+              "music_generation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_genai_recomposition": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_recomposition": {
+                "enroll_status": "OPT_OUT"
+              },
+              "pac_relaxation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_browsing": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_metadata_automation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "product_tags": {
+                "enroll_status": "OPT_OUT"
+              },
+              "profile_card": {
+                "enroll_status": "OPT_OUT"
+              },
+              "profile_extension": {
+                "enroll_status": "OPT_OUT"
+              },
+              "replace_media_text": {
+                "enroll_status": "OPT_OUT"
+              },
+              "reveal_details_over_time": {
+                "enroll_status": "OPT_OUT"
+              },
+              "show_destination_blurbs": {
+                "enroll_status": "OPT_OUT"
+              },
+              "show_summary": {
+                "enroll_status": "OPT_OUT"
+              },
+              "site_extensions": {
+                "enroll_status": "OPT_OUT"
+              },
+              "standard_enhancements_catalog": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_extraction_for_headline": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_extraction_for_tap_target": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_formatting_optimization": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_generation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_optimizations": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_overlay_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "text_translation": {
+                "enroll_status": "OPT_OUT"
+              },
+              "translate_voiceover": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_auto_crop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_filtering": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_highlight": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_highlights": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_to_image": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_uncrop": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_uncrop_9x16_to_9x18": {
+                "enroll_status": "OPT_OUT"
+              },
+              "video_voiceover": {
+                "enroll_status": "OPT_OUT"
+              },
+              "wa_mm_image_filtering": {
+                "enroll_status": "OPT_OUT"
+              },
+              "wa_mm_text_truncation_length": {
+                "enroll_status": "OPT_OUT"
+              }
+            }
+          },
+          "effective_object_story_id": "818782797989721_122149448925079443",
+          "id": "1094213773411657",
+          "instagram_user_id": "17841464983485579",
+          "media_sourcing_spec": {
+            "bodies": [
+              {
+                "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+              }
+            ],
+            "titles": [
+              {
+                "text": "LO QUIERO GRATIS 👉"
+              }
+            ],
+            "videos": [
+              {
+                "opt_in_status": "opt_in",
+                "original_video_id": "1112002464809579",
+                "source": "multi_media",
+                "thumbnail_source": "generated_default",
+                "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/856275393_1092704220061109_8309825736061179415_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uO9VPj4B2P8Q7kNvwFmEqi1&_nc_oc=AdouAwuK-_45jWg8GXKnWC-89VkiT1zVmWOla2GrK45JVPTR8l_hMVY_Onbbza_Yd_6lXoWZSkSwBczym9gPpZAT&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=XVLcoV_N3K31Fy0TgsPVqQ&_nc_tpa=Q5bMBQJZDjPEGDejsn8ARy5_XI_OonsEXiMSkUrr0h8iq8zytSkDN5ttUO4A6srcayhyXGgJGpdqTvFf5A&oh=00_AQMpmmNxSlRoXjh23mRVh4YgAGVaed1WxazBBLHrq28ylQ&oe=6ADD759D",
+                "video_id": "1112002464809579"
+              }
+            ]
+          },
+          "name": "SHEIN G006 C3 SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002.mp4 2026-10-20-b7473686fb0970c7b25c4a5d44c6b65e",
+          "object_story_spec": {
+            "instagram_user_id": "17841464983485579",
+            "page_id": "818782797989721",
+            "video_data": {
+              "call_to_action": {
+                "type": "GET_OFFER_VIEW",
+                "value": {
+                  "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01"
+                }
+              },
+              "image_hash": "21568d63aa3e94852bfd998f465b1427",
+              "image_url": "https://www.facebook.com/ads/image/?d=AQI_jFL6yMhZymR5CzFw-bm_3e0vwHZx7pokX7gyqBozDy6pgT6pYT948B47QysQ4Xd3mvs_mlZyiOD3DR58SE-hG7cMCK3Po4oRqzk9NPA4XGXMi7dv5yKKXT1FQjE3-S7oE1NAJPp9VVyygMxT_5vb",
+              "link_description": "✨🌟✨🌟✨🌟✨",
+              "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+              "title": "LO QUIERO GRATIS 👉",
+              "video_id": "1112002464809579"
+            }
+          },
+          "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c003&utm_adgroup=b01fb06c003g01"
+        },
+        "id": "120250750999100629",
+        "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+        "source_ad_id": "120250562340700629",
+        "status": "ACTIVE"
+      }
+    ],
+    "adset": {
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        },
+        {
+          "event_type": "ENGAGED_VIDEO_VIEW",
+          "window_days": 1
+        }
+      ],
+      "bid_amount": 90,
+      "billing_event": "IMPRESSIONS",
+      "id": "120250750970190629",
+      "is_dynamic_creative": false,
+      "name": "01 - ADGROUP (b01fb06c003g01)",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "promoted_object": {
+        "custom_event_type": "ADD_TO_WISHLIST",
+        "pixel_id": "1001283201270967",
+        "smart_pse_enabled": false
+      },
+      "start_time": "2026-10-20T13:00:00-0400",
+      "status": "ACTIVE",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "geo_locations": {
+          "countries": [
+            "US"
+          ],
+          "location_types": [
+            "frequently_in",
+            "home",
+            "recent"
+          ]
+        },
+        "targeting_automation": {
+          "advantage_audience": 1,
+          "individual_setting": {
+            "device": 1
+          }
+        },
+        "user_age_unknown": false
+      }
+    },
+    "campaign": {
+      "account_id": "937846586033361",
+      "bid_strategy": "COST_CAP",
+      "buying_type": "AUCTION",
+      "daily_budget": "3000",
+      "id": "120250750964600629",
+      "name": "003 - 20/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c003) - COPY C1 - (US_APP) - event_add_to_wishlist",
+      "objective": "OUTCOME_SALES",
+      "special_ad_categories": [],
+      "status": "ACTIVE"
+    },
+    "video_metadata": {
+      "1112002464809579": {
+        "id": "1112002464809579",
+        "length": 12.332,
+        "status": {
+          "processing_phase": {
+            "status": "complete"
+          },
+          "publishing_phase": {
+            "publish_status": "published",
+            "publish_time": "2026-10-20T16:55:51+0000",
+            "status": "complete"
+          },
+          "uploading_phase": {
+            "status": "complete"
+          },
+          "video_status": "ready"
+        },
+        "title": "V3 VERTICAL asset_a6e8b5c247d428dbe2b2 11e123e5b495"
+      },
+      "1937593290958277": {
+        "id": "1937593290958277",
+        "length": 12.332,
+        "status": {
+          "processing_phase": {
+            "status": "complete"
+          },
+          "publishing_phase": {
+            "publish_status": "published",
+            "publish_time": "2026-10-20T16:55:47+0000",
+            "status": "complete"
+          },
+          "uploading_phase": {
+            "status": "complete"
+          },
+          "video_status": "ready"
+        },
+        "title": "V3 VERTICAL asset_35d2d649d57e04db84a5 47e0ce24df9f"
+      },
+      "4043092125996882": {
+        "id": "4043092125996882",
+        "length": 12.332,
+        "status": {
+          "processing_phase": {
+            "status": "complete"
+          },
+          "publishing_phase": {
+            "publish_status": "published",
+            "publish_time": "2026-10-20T16:55:49+0000",
+            "status": "complete"
+          },
+          "uploading_phase": {
+            "status": "complete"
+          },
+          "video_status": "ready"
+        },
+        "title": "V3 VERTICAL asset_6feaf5a40569f76756e8 89aa27a5fd61"
+      }
+    }
+  },
+  "target_manifest": {
+    "campaigns": [
+      {
+        "account_id": "937846586033361",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "4043092125996882",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/857844717_1106761105092116_3397568437219398055_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3495b&_nc_ohc=GVyEDpf0oLkQ7kNvwFlrbKy&_nc_oc=AdpsifXrmFKiebfF5wy6HpQIHTA6cm3so6dM17YL7gJXgV7xviiwgdExMUGWhk4UjVYLTvaRWR9Gb5wZKQ-5j2q8&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=APRAPSkEAAAA&_nc_gid=uxHBESrGoKXKNEj2QlDyiA&_nc_tpa=Q5bMBQI5YT9QCEuB8-gOKq9zTW3O-Q05ZNMGdX1wFsXXyEUgtlzfJ464m0_loRSgic9BMIjf36Bvm2pqmw&oh=00_AQPYYtIxO8xtW3DiM_gIbbyyICPj3LLOJi5fWl3UUZjeRg&oe=6ADD6289",
+                    "video_id": "4043092125996882"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C6 AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+                    }
+                  },
+                  "image_hash": "d92c0a6bb98963c33284ce48566d196a",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "4043092125996882"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+            },
+            "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+            "source_ad_id": "120250750999190629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1112002464809579",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/856275393_1092704220061109_8309825736061179415_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uO9VPj4B2P8Q7kNvwFmEqi1&_nc_oc=AdouAwuK-_45jWg8GXKnWC-89VkiT1zVmWOla2GrK45JVPTR8l_hMVY_Onbbza_Yd_6lXoWZSkSwBczym9gPpZAT&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=XVLcoV_N3K31Fy0TgsPVqQ&_nc_tpa=Q5bMBQJZDjPEGDejsn8ARy5_XI_OonsEXiMSkUrr0h8iq8zytSkDN5ttUO4A6srcayhyXGgJGpdqTvFf5A&oh=00_AQMpmmNxSlRoXjh23mRVh4YgAGVaed1WxazBBLHrq28ylQ&oe=6ADD759D",
+                    "video_id": "1112002464809579"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C6 AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+                    }
+                  },
+                  "image_hash": "21568d63aa3e94852bfd998f465b1427",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1112002464809579"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+            },
+            "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+            "source_ad_id": "120250750999100629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1937593290958277",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/857746828_1781527606439022_4609686451700477055_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3495b&_nc_ohc=J_JhesY1rRoQ7kNvwGAq3Qj&_nc_oc=Adr6hMJquSNswtUu5F7iLl3XNgfTxTF5stnruc-kPleKRkEckJ6k8G2OEfemCGA9BNge1Ng-5DZP09WTQZv5dYYd&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=G-gATbZZNpSRuHeYwIHXsg&_nc_tpa=Q5bMBQKR6Mgq_VNKy-q8KN1fgV_tgP0BQVNvUDL47HTuikMAqIYpHG0S0cMyvitNbJhqlkT0eQkuEDJ4sQ&oh=00_AQM5ms2PooMMnDfKbPnbi0gY2InZHbtXWaeh1s7Rom2bSw&oe=6ADD6872",
+                    "video_id": "1937593290958277"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C6 AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+                    }
+                  },
+                  "image_hash": "006a3819932080495826fb289dc6c11d",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1937593290958277"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c006&utm_adgroup=b01fb06c006g01"
+            },
+            "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+            "source_ad_id": "120250750999230629"
+          }
+        ],
+        "adset_name": "01 - ADGROUP (b01fb06c006g01)",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "3500"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1565261967260647536-c3-c6",
+        "mode": "pure_clone",
+        "name": "006 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c006) - COPY C3 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250750970190629",
+        "source_campaign_id": "120250750964600629",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-10-29T08:33:15-04:00",
+        "status": "ACTIVE"
+      },
+      {
+        "account_id": "937846586033361",
+        "ads": [
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "4043092125996882",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/857844717_1106761105092116_3397568437219398055_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3495b&_nc_ohc=GVyEDpf0oLkQ7kNvwFlrbKy&_nc_oc=AdpsifXrmFKiebfF5wy6HpQIHTA6cm3so6dM17YL7gJXgV7xviiwgdExMUGWhk4UjVYLTvaRWR9Gb5wZKQ-5j2q8&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=APRAPSkEAAAA&_nc_gid=uxHBESrGoKXKNEj2QlDyiA&_nc_tpa=Q5bMBQI5YT9QCEuB8-gOKq9zTW3O-Q05ZNMGdX1wFsXXyEUgtlzfJ464m0_loRSgic9BMIjf36Bvm2pqmw&oh=00_AQPYYtIxO8xtW3DiM_gIbbyyICPj3LLOJi5fWl3UUZjeRg&oe=6ADD6289",
+                    "video_id": "4043092125996882"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C7 AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+                    }
+                  },
+                  "image_hash": "d92c0a6bb98963c33284ce48566d196a",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "4043092125996882"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+            },
+            "name": "AD 01 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_001",
+            "source_ad_id": "120250750999190629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1112002464809579",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/856275393_1092704220061109_8309825736061179415_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=e3495b&_nc_ohc=uO9VPj4B2P8Q7kNvwFmEqi1&_nc_oc=AdouAwuK-_45jWg8GXKnWC-89VkiT1zVmWOla2GrK45JVPTR8l_hMVY_Onbbza_Yd_6lXoWZSkSwBczym9gPpZAT&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=XVLcoV_N3K31Fy0TgsPVqQ&_nc_tpa=Q5bMBQJZDjPEGDejsn8ARy5_XI_OonsEXiMSkUrr0h8iq8zytSkDN5ttUO4A6srcayhyXGgJGpdqTvFf5A&oh=00_AQMpmmNxSlRoXjh23mRVh4YgAGVaed1WxazBBLHrq28ylQ&oe=6ADD759D",
+                    "video_id": "1112002464809579"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C7 AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+                    }
+                  },
+                  "image_hash": "21568d63aa3e94852bfd998f465b1427",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1112002464809579"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+            },
+            "name": "AD 02 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_NV_002",
+            "source_ad_id": "120250750999100629"
+          },
+          {
+            "creative_payload": {
+              "contextual_multi_ads": {
+                "enroll_status": "OPT_OUT"
+              },
+              "degrees_of_freedom_spec": {
+                "creative_features_spec": {
+                  "adapt_to_placement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "add_text_overlay": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ads_with_benefits": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "advantage_plus_creative": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "app_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "audio": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "auto_promotion_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "biz_ai": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "carousel_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "catalog_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "creative_stickers": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "customize_product_recommendation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "cv_transformation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "description_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dha_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_cta_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "dynamic_partner_content": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enable_ncs_testimonials": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "enhance_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "fb_story_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "feed_caption_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "generate_cta": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hide_price": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "hyperlink_formatting": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_feed_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_glados_feed": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_reels_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_stream_tag": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "ig_video_native_subtitle": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_animation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_background_gen": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_banner": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_brightness_and_contrast": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_end_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_enhancement": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_templates": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_touchups": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "image_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "inline_comment": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "local_store_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_liquidity_animated_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_order": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "media_type_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_creative_post_carousel": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "multi_photo_to_video": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "music_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_genai_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_recomposition": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "pac_relaxation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_browsing": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_metadata_automation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "product_tags": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_card": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "profile_extension": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "replace_media_text": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "reveal_details_over_time": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_destination_blurbs": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "show_summary": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "site_extensions": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "standard_enhancements_catalog": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_headline": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_extraction_for_tap_target": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_formatting_optimization": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_generation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_optimizations": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_overlay_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "text_translation": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "translate_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_auto_crop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlight": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_highlights": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_to_image": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_uncrop_9x16_to_9x18": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "video_voiceover": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_image_filtering": {
+                    "enroll_status": "OPT_OUT"
+                  },
+                  "wa_mm_text_truncation_length": {
+                    "enroll_status": "OPT_OUT"
+                  }
+                }
+              },
+              "media_sourcing_spec": {
+                "bodies": [
+                  {
+                    "text": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!"
+                  }
+                ],
+                "titles": [
+                  {
+                    "text": "LO QUIERO GRATIS 👉"
+                  }
+                ],
+                "videos": [
+                  {
+                    "opt_in_status": "opt_in",
+                    "original_video_id": "1937593290958277",
+                    "source": "multi_media",
+                    "thumbnail_source": "generated_default",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/857746828_1781527606439022_4609686451700477055_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3495b&_nc_ohc=J_JhesY1rRoQ7kNvwGAq3Qj&_nc_oc=Adr6hMJquSNswtUu5F7iLl3XNgfTxTF5stnruc-kPleKRkEckJ6k8G2OEfemCGA9BNge1Ng-5DZP09WTQZv5dYYd&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&edm=APRAPSkEAAAA&_nc_gid=G-gATbZZNpSRuHeYwIHXsg&_nc_tpa=Q5bMBQKR6Mgq_VNKy-q8KN1fgV_tgP0BQVNvUDL47HTuikMAqIYpHG0S0cMyvitNbJhqlkT0eQkuEDJ4sQ&oh=00_AQM5ms2PooMMnDfKbPnbi0gY2InZHbtXWaeh1s7Rom2bSw&oe=6ADD6872",
+                    "video_id": "1937593290958277"
+                  }
+                ]
+              },
+              "name": "SHEIN G006 C7 AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001 COPY C3",
+              "object_story_spec": {
+                "instagram_user_id": "17841464983485579",
+                "page_id": "818782797989721",
+                "video_data": {
+                  "call_to_action": {
+                    "type": "GET_OFFER_VIEW",
+                    "value": {
+                      "link": "https://mavroa.com/quiz/us/sh3-g006/?utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+                    }
+                  },
+                  "image_hash": "006a3819932080495826fb289dc6c11d",
+                  "link_description": "✨🌟✨🌟✨🌟✨",
+                  "message": "🎁 CUATRIMONO GRATIS PARA TI\n✅ ¡ENVÍO GRATIS INCLUIDO!",
+                  "title": "LO QUIERO GRATIS 👉",
+                  "video_id": "1937593290958277"
+                }
+              },
+              "url_tags": "utm_source=facebook&utm_medium=g006-s&utm_campaign=b01fb06c007&utm_adgroup=b01fb06c007g01"
+            },
+            "name": "AD 03 - SHEIN_US_ES_VID_CUATRIMOTO_GRATIS_PV_001",
+            "source_ad_id": "120250750999230629"
+          }
+        ],
+        "adset_name": "01 - ADGROUP (b01fb06c007g01)",
+        "app_key": "mgs-meta-app-1299247318762949",
+        "campaign_updates": {
+          "bid_strategy": "COST_CAP",
+          "daily_budget": "3500"
+        },
+        "creative_materialization_route": "source_definition_two_phase",
+        "idempotency_key": "shein-1565261967260647536-c3-c7",
+        "mode": "pure_clone",
+        "name": "007 - 29/10 - v3 - CUATRIMOTO - COCAP - (b01fb06c007) - COPY C3 - (US_APP) - event_add_to_wishlist",
+        "source_adset_id": "120250750970190629",
+        "source_campaign_id": "120250750964600629",
+        "start_intent": "IMMEDIATE",
+        "start_time": "2026-10-29T08:33:15-04:00",
+        "status": "ACTIVE"
+      }
+    ],
+    "created_at": "2026-10-29T12:32:45.910855+00:00",
+    "execution_mode": "pure_clone",
+    "graph_version": "v26.0",
+    "operation": "SHEIN-US-DIRECT",
+    "prevalidated": true,
+    "prevalidation": {
+      "checks": [
+        "schema_v3",
+        "unique_idempotency",
+        "timezone_start",
+        "safe_creative_payload",
+        "source_ad_lineage"
+      ],
+      "content_digest": "fba112f1f21deb7ffea3fd1f4ff0fa2d23eb787fd8178240349ee38f18e9328f",
+      "engine_version": 3,
+      "validated_at": "2026-10-29T12:32:45.914853+00:00"
+    },
+    "request_id": "shein-1565261967260647536-c3",
+    "schema_version": 3
+  }
+}
