@@ -84,16 +84,16 @@
   ],
   "latest_refresh_qualification": {
     "status": "updated_validated",
-    "authority_message_id": "1566800470117187695",
-    "verified_at": "2026-11-02T08:44:35.475196-05:00",
+    "authority_message_id": "1563960345826037821",
+    "verified_at": "2026-11-02T14:30:13.186669-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-02T08:42:10.443995-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261102T084213215683",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261102T080859576086",
+    "validated_metrics_at": "2026-11-02T14:29:46.695609-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261102T142949401788",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261102T140437935359",
     "source_to_live_sheet_cgij_exact": true,
     "d_ledger_to_live_sheet_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
@@ -139,20 +139,18 @@
     "fresh_h_count": 36,
     "h_preserved_count": 0,
     "pending_h_account_ids": [],
-    "h_read_at_min": "2026-11-02T08:09:54.813335-05:00",
-    "h_read_at_max": "2026-11-02T08:29:11.791931-05:00",
-    "h_sum_usd": "438819.61",
+    "h_read_at_min": "2026-11-02T14:05:20.965694-05:00",
+    "h_read_at_max": "2026-11-02T14:20:54.140791-05:00",
+    "h_sum_usd": "443605.64",
     "pending_ui": [],
-    "card_proofs_updated": 8,
+    "card_proofs_updated": 6,
     "card_proof_updated_account_ids": [
+      "1046241194533786",
+      "1150399088163771",
       "1062446663435585",
-      "1762774024309795",
-      "648687381127947",
-      "1052719314075904",
       "1414197490675732",
       "1543098427832443",
-      "2852476828464907",
-      "1290644206529750"
+      "2852476828464907"
     ],
     "historical_d_gaps": [
       {
@@ -410,9 +408,9 @@
       }
     ],
     "totals_usd": {
-      "average_daily": "19824.70",
-      "balance": "442961.30",
-      "month_spend": "27042.82"
+      "average_daily": "19835.39",
+      "balance": "445866.70",
+      "month_spend": "33018.46"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -441,19 +439,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "3766.40"
+        "value": "3767.93"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3958.69"
+        "value": "2214.37"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "133463.17"
+        "value": "6931.03"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -465,25 +463,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "16058.30"
+        "value": "16067.46"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "438819.61"
+        "value": "443605.64"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "439002.61"
+        "value": "443652.33"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "734798.64"
+        "value": "26087.43"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -495,25 +493,25 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "19824.70"
+        "value": "19835.39"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "438819.61"
+        "value": "443605.64"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "442961.30"
+        "value": "445866.70"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "868261.81"
+        "value": "33018.46"
       }
     ],
     "lease_free": true,
@@ -523,19 +521,19 @@
     "cron_changes": 0,
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
-    "other_sheet_data_unchanged": false,
-    "other_sheet_data_preservation_qualification": "Unrelated card-control tab changed concurrently during this run; its values were not rewritten or restored. Workers restrict all writes to authorized Digital Trust tab. Origin unassigned after audit/inventory/REPORT/Git/session lookup; no target-tab conflict. Baseline and live native grids preserved.",
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1566800470117187695/closure-current.json",
-    "report_infra_status": "sent_verified",
-    "report_infra_message_id": "1566810398349332576",
-    "report_infra_readback": true,
+    "other_sheet_data_unchanged": true,
+    "other_sheet_data_preservation_qualification": "Complete baseline captured before all workers; final full native grid of the other tab and all tab properties exactly unchanged.",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261102T1402/closure-current.json",
+    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
     "month_spend_period": "2026-11",
-    "month_spend_updated_at": "2026-11-02T08:50:01.006754-05:00",
-    "month_spend_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/month-1566811141747777680/receipt.json",
-    "month_spend_source_plan": "/root/mgs-agent/reports/meta-manual-payments-runs/20261102T085003783414/plan.json",
     "month_period_authority_message": "1566811141747777680",
-    "month_only_update_preserved_other_columns": true,
-    "source_to_live_sheet_cgij_qualification": "C/G/I source prior full run08:42; J independently recollected November08:50 with exact47readback in month_spend_receipt. D/H unchanged by month-only correction."
+    "month_periods": [
+      {
+        "since": "2026-11-01",
+        "until": "2026-11-02"
+      }
+    ],
+    "current_day_partial": true
   },
   "pending_card_history": {
     "status": "no_new_event_pending_historical_gaps_qualified",
@@ -579,8 +577,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-02T08:44:35.475196-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1566800470117187695/closure-current.json"
+    "verified_at": "2026-11-02T14:30:13.186669-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261102T1402/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -651,7 +649,7 @@
   ],
   "pay_now_column": "Disponível para pagar no cartão (Pay now)",
   "layout_version": 3,
-  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261101T210410721266",
+  "pay_now_last_publication_report": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261102T140437935359",
   "pay_now_updated_each_tick": true,
   "pay_now_collection_policy": "Recovery1564382301155098717 uses Current balance from exact Accounts-list row for same38credit-line IDs;source accounts_list_current_balance and original per-account times. Never call it modal value or proof of disabled button;no payments/billing. ExactID+name+AX+pixels required;prefix search can return multiple accounts.",
   "schema": {
