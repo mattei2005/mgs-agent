@@ -3,7 +3,7 @@ import copy
 import io
 import unittest
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 import mgs_archive_technical_cleanup as c
 
 class CleanupTests(unittest.TestCase):
@@ -101,7 +101,7 @@ class CleanupTests(unittest.TestCase):
         import ares_archive_automation as a
         proof={'record_kind':'mgs.retired.validation.v1'}
         with patch.object(a,'verification_snapshot',return_value={'pending':False,'acked':True,'retired_validation':proof}):
-            verify=unittest.mock.Mock();state={}
+            verify=Mock();state={}
             result=a.reconcile_jobs(None,{},[{'jobId':c.CANARY_JOB}],state,True,verify=verify)
             self.assertEqual(result['blocked'],[]);self.assertEqual(result['verified'],[]);self.assertEqual(result['cached'],[])
             self.assertEqual(result['retired_validation'],[proof]);self.assertEqual(state,{})

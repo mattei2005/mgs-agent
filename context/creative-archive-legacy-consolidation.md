@@ -48,7 +48,7 @@ O pedido `1566533058130088158` supersede a classificação de exceções acima, 
 
 ## Limpeza técnica posterior — 1566643959458168864
 
-O pedido para terminar a limpeza está em `context/creative-archive-technical-cleanup.md`. Inventário nativo e manifesto exato preparados: proposta de lixeira para 29 pastas técnicas e uma cópia-piloto comprovadamente duplicada, sem purga permanente. A confirmação crítica específica ainda não foi fornecida. Nove pastas vazias de compatibilidade e todos os arquivos não alvos ficam protegidos; não confundir o acervo ativo de providers em `_ARQUIVO_FISICO` com resíduo descartável. A observação do primeiro pedido novo é uma aceitação produtiva separada, não obrigação de Rodolfo fabricar uma campanha de teste.
+O pedido para terminar a limpeza está em `context/creative-archive-technical-cleanup.md`. Inventário nativo e manifesto exato preparados: proposta de lixeira para 29 pastas técnicas e uma cópia-piloto comprovadamente duplicada, sem purga permanente. A confirmação crítica específica foi fornecida por Rodolfo em `1566800073071788244`; os mesmos 29 diretórios e a cópia-piloto foram movidos para a lixeira e todos os IDs/protegidos foram verificados, sem exclusão permanente. O aceite final e a classificação do piloto aposentado estão na fonte canônica acima. Nove pastas vazias de compatibilidade e todos os arquivos não alvos ficam protegidos; não confundir o acervo ativo de providers em `_ARQUIVO_FISICO` com resíduo descartável. A observação do primeiro pedido novo é uma aceitação produtiva separada, não obrigação de Rodolfo fabricar uma campanha de teste.
 
 ## Evidências e rollback
 
