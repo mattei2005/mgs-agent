@@ -4083,12 +4083,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FINANCE-RECOVERY-1566802212548517990",
-      "next_step": "Candidato isolado; regressões contrato e advisories; gates; publicação e recovery canônicos",
-      "objective": "Corrigir contrato mensal readback, atualizar body-parser/qs e concluir preenchimento diário provisório01/11; preservar fechamento mensal e valores históricos",
+      "next_step": "Consumir gate Python proc_0620b86b6e9f;validar/publish bootstrap e2testes via gate;recuperar spend/GAM01/11 e validar runtime",
+      "objective": "Corrigir contrato mensal readback, atualizar body-parser/qs e concluir preenchimento diário provisório01/11",
       "source": "discord:1566802212548517990;apps/finance-system/private/recovery-1566802212548517990/",
-      "state": "investigacao_confirmada: provisionnextperiod existente omite readback requerido pelo spend; patches dependencias autorizados1566802212548517990; nenhuma publicacao ainda",
+      "state": "candidato isolado fixo:body-parser2.4.0/qs6.16.1;red/green segurança e readback;24checks stage7roles desktop/mobile;284nodepass;python completo em execucao silenciosa;backuppg hash/catalogo verificado;bootstrap40targets rollback/commit ensaiados;sem publicacao",
       "thread_id": "1545426987756298340",
-      "updated_at": "2026-11-02T13:13:41+00:00"
+      "updated_at": "2026-11-02T13:39:25+00:00"
     },
     {
       "agent": "zeus",
@@ -8232,5 +8232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T13:31:56+00:00"
+  "updated_at": "2026-11-02T13:39:25+00:00"
 }
