@@ -17,6 +17,8 @@ Skill específica da vertical SHEIN em tráfego direto Meta para os Estados Unid
 
 ## Fechamento e complementos
 
+Recibo e readback multifonte: `references/campaign-batch-final-readback.md`.
+
 Usar ROI real no dia fechado; quantidade isolada recebe só número e unidade. Complementos preservam coorte, snapshot e colunas não alteradas. Dias atípicos exigem comparação histórica, não inferência pelo último dia. Receita em `references/smartbidding-product-analysis.md`.
 
 ## Pedidos concorrentes e comunicação — regra permanente
