@@ -1,5 +1,7 @@
 # Migração para Shared Drive e escolha do Google Workspace
 
+> **Escopo e supersessão:** este guia preserva o diagnóstico/projeto anterior de ownership e migração para Shared Drive; não define a topologia vigente. Para novos uploads/stock MGS, usar `context/drive-flat-intake-cutover.md` e `flat-upload-intake.md`: UPLOAD MANUAL diretamente na raiz MGS, contexto humano explícito e arquivo permanente nos 30 TB. Não recriar CRIATIVOS/nichos/gestores no Shared Drive nem exigir driveId/canDelete de stock My Drive por este histórico. Mudança nova de arquitetura/exclusão continua exigindo a autoridade própria; não executar planos antigos como continuação automática.
+
 ## Quando carregar
 
 Use quando Rodolfo exigir que tudo sob `MGS-AGENTS` — a raiz inteira ou uma subárvore como `MGS-AGENTS/CRIATIVOS` — seja movível, enviável à lixeira e excluível pelo Ares independentemente do uploader, ou quando a correção de ownership do My Drive precisar virar uma solução estrutural.

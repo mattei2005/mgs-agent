@@ -38,19 +38,20 @@ Detalhes técnicos, endpoints, scopes e estrutura piloto: `references/canva-conn
 A pasta operacional vigente é:
 
 ```text
-MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL
+MGS-AGENTS/UPLOAD MANUAL
+ID preservado: 1ARBvLammWUHuAclNmcriwkkgeedKryBd
 ```
 
 `UPLOAD_CANVAS` foi removida após auditoria e aparece somente em referências históricas. Para qualquer pedido novo de tratar/classificar arquivos do Drive:
 
-1. Resolver a raiz `MGS-AGENTS` por API e depois localizar `CRIATIVOS/UPLOAD MANUAL`.
+1. Resolver o binding vivo `flat-intake-binding.json` e a pasta UPLOAD MANUAL de ID exato diretamente na raiz MGS. Com o flat ativo, arquivos vão diretamente nela; registrar operação, gestor, destino e IDs exatos a partir do pedido humano, conforme `creative-operations-mgs/references/flat-upload-intake.md`. Não recriar CRIATIVOS/operação/gestor na entrada.
 2. Inventariar em modo read-only por Drive ID, nome, MIME, tamanho/checksum e dimensões.
 3. Usar a operação/vertical/idioma informados na thread; não inferir o destino apenas pelo nome.
 4. Para Brasil + “Português” sem qualificador, usar `LANG=BR`; `PT` é português de Portugal explícito.
 5. Classificar `P_ORIENT` somente como `PV`, `NV`, `PH` ou `NH`; square/feed 1:1 usa `PH/NH`.
 6. Sanitizar uma cópia com o gate canônico e exigir `clean=true`.
-7. Subir a cópia limpa diretamente em `{OPERAÇÃO}/{IMG|VID}/01_READY`, sem subpastas de placement/idioma.
-8. Validar o destino por readback; só então mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, preservando ID/nome e sem deletar.
+7. Usar o mesmo job/claim, gates de staging e transporte/ACK aprovados, sem segundo writer. A cópia limpa é entregue permanentemente nos 30 TB em 01_READY ou `<NOME> - Exclusivos`, conforme o pedido; não fazer upload binário SA no Meu Drive.
+8. Validar RAW/clean, stock/provider e acesso por readback, preservando o original por mesmo ID e sem delete. READY/LEGACY do staging são temporários; uso real comprovado segue a `<NOME> - Usados`. Não reprocessar duplicatas nem desfazer uso/reserva/destino anteriores.
 9. Registrar `original_filename → canonical_filename`, IDs, checksums, reserva e elegibilidade.
 
 Pasta de apoio:
@@ -60,7 +61,7 @@ GEIZIAN       cópias para upload do gestor; ignorar no pool/inventário canôni
 LIBRARY META  referências da Meta Library; nunca asset final automático
 ```
 
-Procedimento detalhado: `creative-operations-mgs/references/route-pack-02.md` e `creative-operations-mgs/references/mixed-media-drive-intake-ready-legacy.md`.
+Procedimento vigente: `creative-operations-mgs/references/flat-upload-intake.md`; classificação/QA em `creative-operations-mgs/references/mixed-media-drive-intake-ready-legacy.md`. Arquivo permanente em `context/drive-flat-intake-cutover.md`; links MGS-AGENTS/CRIATIVOS podem ser namespace lógico histórico, não endereço físico do stock.
 
 Os documentos com `upload-canvas-*` permanecem como precedentes históricos do backlog antigo. Não são rota ativa e não autorizam procurar/recriar `UPLOAD_CANVAS`.
 

@@ -18,26 +18,31 @@ fora_de_escopo         Pedido pertence o Ares, Atena, Zeus ou humano.
 Não marque como `aprovado` ou `pronto_para_ares` se não houver aprovação explícita ou se o asset final não estiver definido.
 ## Drive/Canva — reestruturação multivertical
 
-Shared Drive raiz operacional atual validado por readback:
+Topologia vigente: `context/drive-flat-intake-cutover.md` e binding vivo `flat-intake-binding.json`. A aprovação geral `1566814476626563115` e a confirmação de preservação de acessos `1566825959645253764` supersedem o desenho anterior. Receita executável: `flat-upload-intake.md`.
 
 ```text
 MGS-AGENTS
 https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
-└── CRIATIVOS
-    └── {OPERAÇÃO}/{IMG|VID}/{STATUS}
+└── UPLOAD MANUAL  [1ARBvLammWUHuAclNmcriwkkgeedKryBd]
+    ├── arquivos enviados diretamente
+    └── _PROCESSAMENTO  [somente staging técnico e temporário]
+
+30 TB
+├── MGS-ARQUIVO/CRIATIVOS/{OPERAÇÃO}/{IMG|VID}/...
+└── MGS-CORPORATIVO  [relatórios, referências e backups]
 ```
 
-O root canônico de entrada, uploads da SA e tratamento temporário permanece o Shared Drive `0AEwt4Ye690ocUk9PVA`, administrado no Google Workspace por `support@matteiservicesinc.com`. Nomes, paths e estrutura permanecem iguais nessa etapa. Exceção de arquivo aprovada por Rodolfo em `1562104715271999589`: cópias no `MGS-ARQUIVO` da conta dos 30 TB somente pela integração e gates em `shared-drive-30tb-archive-queue.md`. A exceção está em validação; não substitui o destino do intake enquanto `queue_enabled=false`, não permite upload binário da SA no Meu Drive nem ativa exclusão da origem. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
+O Shared Drive é entrada/staging, não estoque definitivo. Agentes permanecem na SA canônica; não fazer upload binário SA no Meu Drive nem usar OAuth pessoal como fallback. O transporte owner isolado aprovado entrega aos 30 TB, com receipt/ACK/stock e resolvedores vigentes. Não recriar CRIATIVOS, nichos ou gestores na entrada para imitar paths antigos. `MGS-AGENTS/CRIATIVOS/...` pode continuar namespace lógico de inventário: preservar esses registros e IDs, sem tratar o texto como localização física. No flat, operação/gestor/destino vêm do pedido humano registrado, nunca do nome ou pasta do upload.
 
-Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar o transporte correspondente: `HTTP 200/201` com `message_id` no bot poster atual, ou `HTTP 204` no webhook legado. Em seguida, confirmar via Discord API que a mensagem existe em `#alerts-infra` (`1498132022634483894`), com `content` vazio e embed esperado, antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
+Regra de REPORT-INFRA: enviar pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, com content vazio, embed único, sem mentions e sem thread. Ler de volta o message_id exato em #alerts-infra (`1498132022634483894`) antes de declarar envio. Sem helper/transporte, registrar pendência; não usar fallback textual nem publicar uma segunda cópia. Não usar script de outro agente como caminho padrão.
 
 ### Gate de capacidades no UPLOAD MANUAL
 
 Arquivos enviados por Kelly, Evo ou outro colaborador diretamente em `UPLOAD MANUAL` pertencem ao Shared Drive/organização, não ao uploader individual. Não exigir transferência de propriedade nem licença Workspace adicional do colaborador.
 
-1. Validar que o item possui `driveId=0AEwt4Ye690ocUk9PVA` e está sob `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`.
-2. Consultar as capabilities reais e exigir que o Ares consiga baixar, editar, mover, enviar à lixeira e excluir quando a ação estiver autorizada.
-3. No fluxo de tratar/mover, validar a cópia limpa em `01_READY` e mover o bruto para `99_LEGACY`; em pedido explícito de copiar/manter, preservar a entrada conforme solicitado.
+1. No intake/staging, validar driveId MGS e o parent real: entrada diretamente em UPLOAD MANUAL. No stock/arquivo permanente, usar o binding/metadata My Drive dos 30 TB; não exigir driveId Shared Drive nesses objetos.
+2. Exigir apenas capabilities usadas no pedido: download, criação da cópia limpa em staging e movimento do bruto por mesmo ID. canTrash/canDelete não são pré-requisitos de tratamento; o flat confirmado não usa DELETE/trash.
+3. Validar RAW/clean e o estágio técnico READY/LEGACY, depois receipt/ACK/stock e entrega permanente. common organiza em 01_READY sem liberar reservas; exclusive entrega em `<NOME> - Exclusivos`; uso confirmado segue a `<NOME> - Usados`. Duplicatas preservam linhagem/destino/uso. Pedido de copiar/manter não autoriza retirar a origem nem iniciar campanha.
 4. Falha de capability dentro do Shared Drive é drift de infraestrutura/acesso. Não pedir transferência de owner ao gestor.
 5. Usar HTTP + readback da operação como prova final e preservar inventário, checksum e linhagem.
 6. Não trocar silenciosamente a identidade canônica do Ares pela conta do colaborador.
@@ -48,10 +53,10 @@ Detalhe operacional: `references/my-drive-collaborator-control-and-deletion.md`.
 
 O mesmo pedido Discord pode chegar a mais de uma sessão, e dois fluxos podem observar o mesmo snapshot de `UPLOAD MANUAL`. Evitar qualquer segundo write concorrente sobre a mesma linhagem.
 
-1. Imediatamente antes do primeiro write, obter um lock exclusivo por operação + conjunto ordenado de `source_drive_id` (arquivo sob `/root/mgs-agent/tmp/ares-intake-locks/`, usando `flock`) e repetir o inventário/API read-only dentro do lock.
+1. No flat ativo, registrar o contexto e usar o mesmo job/claim canônico conforme `flat-upload-intake.md`; consultar assert_source_writer e preservar o manifesto original. O lock local de um adapter não substitui o claim nem autoriza segundo writer. Conservar locks intake → queue → inventory e o lock operacional durante mutações.
 2. Se o conjunto live diminuir ou um source sair da entrada, não presumir perda de permissão e não iniciar um lote parcial. Consultar primeiro `assets.jsonl`, o report `ready-execution` mais recente e processos/runners ativos para os mesmos IDs.
 3. Se outra execução estiver ativa, aguardar sua conclusão sem interferir. Se já concluiu, reutilizar o resultado canônico em vez de criar novas cópias ou variantes.
-4. Após execução concorrente concluída, verificar de forma independente: source em `99_LEGACY`, destination em `01_READY`, nome/pasta/tamanho/checksum, download + `clean=true`, inventário com uma única linhagem e entrada sem pendências.
+4. Após conclusão, verificar o lote por IDs, nomes, tamanho/checksum, download/clean, linhagem única e destino permanente atual autorizado. READY/LEGACY podem ser staging ou namespace histórico; Exclusivos/Usados e relocação same-ID não são falha. Separar saldo do pedido e arquivos não relacionados da entrada; não exigir zero global.
 5. Só montar um novo plano para o subconjunto restante quando houver evidência de que não existe execução ativa nem conclusão registrada. Sempre gerar snapshot fresco; nunca reutilizar CSV stale para write.
 6. O lock cobre a seção crítica desde o re-scan até inventário/report final. Liberar em `finally`/trap mesmo em erro.
 
@@ -64,11 +69,10 @@ O mesmo pedido Discord pode chegar a mais de uma sessão, e dois fluxos podem ob
 - Para validar o nome do Shared Drive, usar `GET /drive/v3/drives/{driveId}?fields=id,name`. O recurso raiz em `files/{driveId}` pode retornar `name=Drive`; validar nesse recurso o ID, `driveId`, `trashed` e capabilities, sem exigir que seu nome seja `MGS-AGENTS`. Conferir o nome canônico no recurso `drives` evita bloquear um Drive correto por diferença de representação.
 - Após correção, validar token, GET de arquivo real, PATCH controlado + GET/readback e Shared Drive `MGS-AGENTS`.
 
-Estrutura de referência por vertical/operação. `CC_US_ES` é exemplo/piloto; outras verticais devem ser organizadas na pasta correta do Drive:
+Estrutura de status do estoque permanente nos 30 TB. CC_US_ES é exemplo/piloto; não recriar a árvore abaixo no Shared Drive. As pastas GEIZIAN e LIBRARY META pertencem ao acervo, não são nova entrada ou pool livre:
 
 ```text
-MGS-AGENTS/CRIATIVOS/
-├── UPLOAD MANUAL     # fila temporária para arquivos, inclusive >10 MB
+MGS-ARQUIVO/CRIATIVOS/
 ├── GEIZIAN           # cópias de conveniência para upload; ignorar no pool/inventário canônico
 ├── LIBRARY META      # referências; nunca asset final automático
 └── CC_US_ES/
@@ -106,20 +110,20 @@ Pessoa/orientação         Nome do arquivo.
 Exemplo correto:
 
 ```text
-MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+MGS-ARQUIVO/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 ```
 
 Exemplo incorreto que deve ser corrigido/não repetido:
 
 ```text
-MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+MGS-ARQUIVO/CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 ```
 
 Não inserir `READY`, `TESTING`, `TESTED`, `WINNER` ou `REJECTED` no nome do arquivo. O status fica na pasta/inventário para evitar renomear o mesmo asset a cada mudança de status.
 
 Regra de idioma para operações brasileiras: se o país for `BR` e o pedido disser apenas “Português”, usar `LANG=BR` (`CAR_BR_BR`, `GAME_BR_BR`). Usar `LANG=PT` somente quando português de Portugal (`PORTUGUÊS-PT`/`PT-PT`) for explícito.
 
-`UPLOAD MANUAL` é a única fila de entrada operacional atual. Ela recebe IMG/VID enviados fora do Discord, especialmente arquivos acima de 10 MB. O inventário read-only canônico é `/root/mgs-agent/scripts/ares-drive-upload-manual-inventory.py`; o nome antigo `ares-drive-upload-canvas-inventory.py` é apenas wrapper de compatibilidade. Quando a ação for **tratar/mover**, o arquivo-fonte deve sair da fila somente depois de a versão limpa estar verificada e presente no `01_READY` correto. Para preservar o bruto sem deixar falso backlog, mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, mantendo ID/nome original e sem deletar. Manter na entrada somente quando Rodolfo/Kelly pedir explicitamente **copiar** ou **manter o original no upload**. `UPLOAD_CANVAS` não existe mais e é somente referência histórica.
+UPLOAD MANUAL é a única entrada operacional; arquivos vão diretamente à pasta, inclusive IMG/VID acima de 10 MB. O inventário read-only canônico é `ares-drive-upload-manual-inventory.py`; o wrapper upload-canvas é compatibilidade. Inventário não atribui contexto nem autoriza tratar todas as fontes: registrar o pedido humano e seus IDs exatos conforme flat-upload-intake.md. A saída canônica preserva RAW/clean, valida staging e entrega permanente, e arquiva gerações concluídas por mesmo ID/bytes/ACL, sem DELETE. Arquivos sem contexto, saldo ou pedido explícito de copiar/manter são preservados e contabilizados separadamente. UPLOAD_CANVAS é histórico, não recriar.
 
 Tamanhos oficiais de referência para `CC_US_ES`; outras verticais podem ser ajustadas conforme necessidade real:
 
@@ -141,7 +145,7 @@ Etapa  Ação
 4      Gerar inventário e plano de renomeação/destino.
 5      Se o pedido já autorizou `tratar/mover` dentro da estrutura canônica, esse pedido é a aprovação; não pedir confirmação redundante.
 6      Mostrar plano e pedir decisão apenas quando houver ambiguidade, nova estrutura, destino não canônico ou mudança de escopo.
-7      Após copiar/mover/renomear, validar `01_READY`, mover o bruto para `99_LEGACY` e confirmar que a entrada contém só pendências.
+7      Validar staging RAW/clean, receipt/ACK/stock e destino permanente autorizado; reconciliar saída same-ID e o saldo exato do pedido, sem inferir zero global da entrada.
 ```
 
 ### Rastreabilidade obrigatória de renomeação

@@ -1,5 +1,7 @@
 # Migração controlada da raiz MGS-AGENTS — evidência 2026-07-15/16
 
+> **Precedente histórico, não layout vigente.** A migração aqui relatada foi anterior ao arquivo permanente nos 30 TB e à entrada flat. Fonte atual: `context/drive-flat-intake-cutover.md` e `flat-upload-intake.md`. Preservar a evidência abaixo sem repetir cópias/movimentos ou recriar a antiga árvore CRIATIVOS no Shared Drive; o modo vigente mantém a raiz MGS somente com UPLOAD MANUAL e não autoriza DELETE/trash.
+
 ## Valor reutilizável
 
 Use este caso como implementação de referência quando uma árvore completa do My Drive precisar virar Shared Drive sem perder estrutura, linhagem, IDs preserváveis, hashes ou rollback.

@@ -1,4 +1,4 @@
-> **Histórico:** as seções sobre `UPLOAD_CANVAS`, `videos2`, `imagens2` e backlog antigo documentam operações encerradas. A entrada ativa é `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; não procurar nem recriar `UPLOAD_CANVAS`. Para intake atual, usar `creative-operations-mgs` route-pack-02.
+> **Histórico:** as seções sobre UPLOAD_CANVAS, videos2/imagens2 e backlog antigo são operações encerradas, não autorização atual de limpeza ou fallback OAuth. Entrada vigente: UPLOAD MANUAL (`1ARBvLammWUHuAclNmcriwkkgeedKryBd`) diretamente na raiz MGS, com contexto humano registrado e binding flat ativo; receita `creative-operations-mgs/references/flat-upload-intake.md`. Arquivo permanente nos 30 TB. Não recriar o caminho antigo CRIATIVOS/UPLOAD MANUAL nem executar recuperação OAuth pessoal citada no histórico; a SA canônica é exclusiva para agentes.
 
 ### Continuação de classificação após limpeza de duplicatas — precedente histórico
 
@@ -31,14 +31,14 @@ Quando Rodolfo aprovar deletar duplicados exatos no Drive, operar por MD5 soment
 Quando Rodolfo pedir para testar nomenclatura antes do backlog completo, fazer uma amostra read-only balanceada — por exemplo 3 `IMG` + 3 `VID` — com contact sheet e CSV de nomes sugeridos. Aplicar a regra atual `P_ORIENT` somente `PV`, `PH`, `NV`, `NH`; tratar `FEED` 1:1 como `HORIZONTAL` para fins de nome e deixar `ANGLE=UNKNOWN` quando a evidência visual/textual for insuficiente. Detalhes: `creative-taxonomy-mgs/references/upload-canvas-pilot-naming-review.md`.
 ## Credenciais Google Drive
 
-A raiz canônica é o Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), administrado por `support@matteiservicesinc.com`. A Service Account do Ares e o OAuth canônico podem operar somente quando o preflight real confirma acesso a esse `driveId`.
+A identidade do agente é exclusivamente a SA canônica pelo helper corporativo, sem OAuth pessoal. Validar driveId MGS (`0AEwt4Ye690ocUk9PVA`) para entrada/staging. Para arquivo e stock permanentes My Drive dos 30 TB, validar owner, ACL, ancestrais e resolvedores aprovados; ausência de driveId não é falha. O owner isolado não é identidade alternativa do agente.
 
 Fluxo atual:
 
 1. Resolver a credencial pelo 1Password/cache canônico sem expor valores.
-2. Validar `driveId=0AEwt4Ye690ocUk9PVA`, capabilities e leitura dos filhos.
-3. Para write, executar smoke de um arquivo e validar upload, move, lixeira/restauração quando aplicável e readback.
-4. Reportar apenas `auth_mode`, `storage=shared_drive`, capabilities e status.
+2. Validar backend, IDs/parents e capabilities reais do alvo: driveId para staging; owner/ACL/ancestrais aprovados para stock My Drive. Resolver pelo contrato vivo, sem impor o predicado do Shared Drive ao acervo.
+3. Validar apenas operações autorizadas com readback; o flat de preservação não usa DELETE/trash. Não criar uma mutação de teste em arquivo produtivo, nem usar autorização antiga para limpeza nova.
+4. Reportar auth_mode, backend real, capabilities usadas e status comprovado, separando staging e arquivo permanente.
 5. Falha de acesso ao Shared Drive é drift de infraestrutura/credencial; não trocar silenciosamente para conta pessoal ou pedir transferência de owner.
 
 Referência de pipeline: `references/drive-creative-clean-copy-quota.md`.

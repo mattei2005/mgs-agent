@@ -116,7 +116,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Responder sobre capacidade da Meta Media Library e fazer staging por conta** → `references/meta-media-library-and-account-staging.md`
 - **Configurar OAuth/Facebook Login for Business para tokens de anunciantes** → `references/meta-business-login-user-token-setup.md`
 - **Princípios → Caminho oficial: Canva Connect API** → `references/route-pack-01.md`
-- **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`
+- **Fallback Canva local + entrada simples UPLOAD MANUAL na raiz MGS** → `references/route-pack-02.md`; contexto explícito e mesmo claim em `creative-operations-mgs/references/flat-upload-intake.md`, sem subpastas obrigatórias de nicho/gestor.
 - **Precedentes históricos de `UPLOAD_CANVAS` + Meta Ads intraday** → `references/route-pack-03.md`
 - **Regras de decisão de campanha → Referências** → `references/route-pack-04.md`
 - **OAuth Meta, comparar apps/permissões/tier, escolher token ou decidir cutover** → `references/meta-facebook-login-for-business-token-selection.md`
