@@ -82,6 +82,8 @@ O layout físico antigo foi conciliado conforme `context/creative-archive-legacy
 
 ## Comando normal único
 
+Mídia nova enviada diretamente à entrada MGS segue o binding vivo e `creative-operations-mgs/references/flat-upload-intake.md`: registrar o pedido humano com IDs exatos e aguardar tratamento/arquivo/entrega canônicos, sem criar um segundo writer nem recriar pastas de nicho/gestor na entrada. O modo de armazenamento common/exclusive não substitui a autorização de campanha. Se o pedido original já autorizava a campanha, continuar o mesmo request depois dos gates de mídia, preservando IDs, conta, orçamento, estratégia e início; uso real confirmado continua indo a `<NOME> - Usados`.
+
 ```text
 python3 /root/mgs-agent/scripts/ares-shein-campaigns.py campaign --input <request.json> --confirm-execute
 ```
