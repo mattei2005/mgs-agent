@@ -59363,13 +59363,36 @@
         "watcher_tests_passed": 24,
         "pending_files_scanned": 71,
         "credential_signature_hits": 0,
-        "partial_effects": "Empty index; blocked batch did not start commit/push; finance owner checkpoint completed and REPORT-INFRA GET200"
+        "partial_effects": "Empty index; blocked batch did not start commit/push; finance owner checkpoint completed and REPORT-INFRA GET200",
+        "monitor_tests_passed": 17,
+        "native_commit": "0d00b526cb1558c0dc75e09c22d3dcf98b15658f",
+        "native_push_ok_at": "2026-11-02T09:48:50-05:00",
+        "remote_main_equals_head": true,
+        "committed_current_bytes_match": 4,
+        "monitor_consecutive_failures": 0,
+        "monitor_dry_run_failures": 0,
+        "persistent_service": "active/running",
+        "persistent_batch_target": 10,
+        "persistent_max_wait": 600,
+        "monitor_recovery_transport": "MGS_DRY_RUN=1; no extra Discord recovery message; final reply via resolver"
       },
       "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1566824482700664907",
-      "state": "awaiting_native_commit_push",
+      "state": "resolved_validated",
       "credentials_changed": false,
       "manual_commit_or_push": false,
-      "updated_at": "2026-11-02T14:45:12.652706+00:00"
+      "updated_at": "2026-11-02T14:50:29.934018+00:00",
+      "report_infra": {
+        "message_id": "1566826771075043350",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "mentions": 0,
+        "readback_verified": true
+      },
+      "hashes": {
+        "scripts/auto-commit-watcher.sh": "4e89e8b8b761e95cbbc8af728f36275f5db9944dfa6aa7ebc5cd2ab7d6890a09",
+        "tests/test_auto_commit_sensitive_paths.py": "bdd6c7a6af8de17350bcda866a1cf23ddd34d6f72572106d37ce5b1862023f21",
+        "tests/test_auto_commit_empty_index.py": "c1565ee04e55d4060ea3ca1beb628b0da296d6c7025895db5aab05e2b10658ca"
+      }
     }
   ],
   "profile_skill_references": [
@@ -62491,8 +62514,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 16154,
-      "modified_at": "2026-10-29T11:28:41-04:00"
+      "size_bytes": 16410,
+      "modified_at": "2026-11-02T09:43:41.021229-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",
