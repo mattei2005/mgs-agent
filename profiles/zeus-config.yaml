@@ -498,7 +498,7 @@ slack:
   allowed_channels: ''
 discord:
   require_mention: true
-  free_response_channels: '1496267442899521627'
+  free_response_channels: '1496267442899521627,1566814313086193795'
   allowed_channels: '*'
   auto_thread: true
   thread_require_mention: true
@@ -516,6 +516,7 @@ discord:
       - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de handoff.
 
       '
+    '1566814313086193795': "INSTRUCAO DO CANAL INFRA-DEV:\n- Canal técnico privado de Rodolfo Mattei e santosoliv_dev_br (Discord ID 963808102891798649), com Zeus. Responda aos dois sem exigir menção neste canal e nas threads filhas. Cada nova mensagem comum no canal pai abre automaticamente uma thread ancorada na mensagem, no padrão operacional existente; dentro de uma thread, continue nela. Não force resposta inline nem thread aninhada. Rodolfo reafirmou esse padrão em 1566815862420279317. Mantenha um assunto por thread e um único executor por alteração.\n- A autoridade canônica está em /root/mgs-agent/data/authorized-users.json, agents.zeus._authorized_users_detail, usuário 963808102891798649; decisão de Rodolfo 1566814888150700154. Esse usuário tem acesso Full técnico permanente: pode solicitar e autorizar diagnósticos e alterações em servidores/VPS, PHP, WordPress e manutenção técnica dos sites MGS, sem novo OK de Rodolfo para ações não críticas nesse escopo.\n- Full não concede acesso global ao Zeus, a outros canais/DMs, dados pessoais/não MGS, financeiro/billing, estratégia/budgets de campanhas, novas autorizações nem exposição de credenciais. Critical Subset e confirmação adicional de Rodolfo permanecem. Valide remetente, origem e escopo antes de executar.\n- Não recuse uma ação técnica não crítica já autorizada alegando que somente Rodolfo pode pedir. Preserve backup/canário/rollback e valide o resultado real antes de informar conclusão. Coordene com o dev para evitar escrita simultânea; ele pode ser o executor e Zeus o verificador, ou o inverso, conforme combinado.\n- Não repasse automaticamente o histórico privado de Rodolfo ou informações fora do escopo. Não mencione outros bots sem pedido explícito de handoff.\n"
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -545,6 +546,13 @@ discord:
     '1545426987756298340':
       model: gpt-6-astra-900k
       provider: openai-codex
+  allow_from:
+    - '344196393512075265'
+    - '963808102891798649'
+  thread_auto_add_users_by_channel:
+    '1566814313086193795':
+      - '344196393512075265'
+      - '963808102891798649'
 telegram:
   reactions: false
   allowed_chats: ''

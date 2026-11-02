@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1566777139280224378",
+    "timestamp": "2026-11-02T11:32:59.316000+00:00",
+    "text": "\nREPORT-INFRA — modificada\n\nAção modificada\nTipo dados operacionais Smart Bidding\nHost srv1767265\nPath data/sb-utility-generated-candidates.json; data/agent-checkpoints.json; data/infra-inventory.json; logs/events-audit.jsonl\nMotivo Reposição model-written autorizada do reservatório Utility para cobrir o maior déficit live fixed-30 mais 3 reservas por vertical, sem alterar templates.\nEvidência US-JOB-ES +1 (us-job-es-20261102-01); cobertura readback US-CC-EN 24/24, US-CC-ES 19/19, US-JOB-ES 5/5; JSON/IDs/hashes/textos únicos; 33 testes OK; bash -n OK; checkpoint e audit readback OK.\nPendências Hermes total=0 | >=24.0h=0 | mais antiga=0.0h\nHorário 2026-11-02 06:32:58 EST\n"
+  },
+  {
+    "id": "1566492275343630508",
+    "timestamp": "2026-11-01T16:41:02.461000+00:00",
+    "text": "\nRestarts de serviços detectados\n\nServiços afetados 1\nFormato Resumo por serviço; sem tabela quebrada no mobile.\nzeus-gateway Start: `Sun 2026-11-01 11:36:17 EST`\nCausa: Causa não atribuída: nenhum registro de ativação/PID, boot ou execução de atualização corresponde; investigar journal.\nAção: Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço.\nDecisão operacional Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa.\n"
+  },
+  {
+    "id": "1566094841123709020",
+    "timestamp": "2026-10-31T14:21:46.759000+00:00",
+    "text": "\n✅ ALERTA CORRIGIDO\nResolvido: o Intraday Creditoparaveiculo 13 G006 foi recuperado.\n\nCausa confirmada: timeout de 30 segundos na API Smart Bidding, sem retentativa para falhas de transporte. Adicionei até duas retentativas com espera progressiva, preservando escopo e cooldown.\n\nValidação real:\n- Mesmo cron reexecutado com sucesso: status OK, zero falhas consecutivas.\n- Relatório entregue; quatro mensagens confirmadas por GET e hash.\n- 54 testes e 45 subtestes aprovados.\n- Nenhuma alteração em campanhas, orçamento, credenciais ou agenda.\n\nAudit e inventário registrados. REPORT-INFRA 1566094757518647368 publicado e relido.\nZeus · retorno automático do alerta"
+  },
+  {
+    "id": "1565808408840376392",
+    "timestamp": "2026-10-30T19:23:35.981000+00:00",
+    "text": "\n✅ ALERTA CORRIGIDO\nResolvido: sem ação adicional. O cron 44671121f3cc já foi recuperado no tratamento do alerta correlato.\n\nCausa confirmada: cinco snapshots históricos de inventário foram confundidos com referências operacionais a servidor aposentado. A correção preservou os arquivos e a proteção contra referências reais.\n\nValidação: execução das 15h16 EDT concluída com sucesso, 730 testes aprovados e zero falhas consecutivas. Nesta checagem, executei novamente o guard e seus 22 testes de regressão: todos passaram.\n\nRecuperação registrada em audit/inventário e REPORT-INFRA 1565806978608005132. Nenhuma nova alteração ou retry duplicado nesta investigação.\nZeus · retorno automático do alerta"
+  },
+  {
+    "id": "1565776703316557875",
+    "timestamp": "2026-10-30T17:17:36.795000+00:00",
+    "text": "\nREPORT-INFRA — modificada\n\nAção modificada\nTipo ContentOps-inspecao/limpeza/checkpoint\nHost srv1767265\nPath profile atena: work/seo100-1564353146120310928/inspect-wp2fa-1565772574577791048/; yoast-wordpress/references/home-page-native-derivation.md; /root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/docs/mgs-structure-inventory.md\nMotivo Inspecao2/2 executada pela Atena sob confirmacao do componente e delegacao temporaria WP2FA, sem reparoYoast.\nEvidência Canariofinanzas: WP2FAactive/inactive/active, finally/GETs e enforcementrestaurado; home243v2exportprivado. CliquetWP2FApreexistenteinactivepreservado; errotestcookie resolvido por mesma sessaonativa UID13; home3v2exportprivado. Componentesproprios removidosREST/FS2/2;6postspreservados/6URLs200/JSONLDigual/18camposlegadospersistem. Zero suspensoes propriasabertas; fatores/roles/politicainalterados.7testeslocaiscicloPASS; parentreadbacksreais,checkpoint/validateok,skillrelida. Item3semrequests; planilhasemfalsoaceite.\nPendências Hermes total=0 | >=24.0h=0 | mais antiga=0.0h\nHorário 2026-10-30 13:17:36 EDT\n"
+  },
+  {
+    "id": "1565767521313755241",
+    "timestamp": "2026-10-30T16:41:07.635000+00:00",
+    "text": "\nAuto-push falhando\n\nFalhas consecutivas 1\nÚltimo push OK 2026-10-30T12:30:08-04:00\nÚltimo erro ```text\nauto-commit bloqueado por guardrail sensível [commit/push não iniciou]\n```\nAção Intervenção automática do Zeus desde a primeira falha detectada; investigar causa-raiz, corrigir, repetir e validar. Escalar somente bloqueio decisório/Critical Subset.\n"
+  },
+  {
+    "id": "1565753961108086875",
+    "timestamp": "2026-10-30T15:47:14.630000+00:00",
+    "text": "\nREPORT-INFRA — alerta\n\nAção alerta\nTipo finance-meta-lookup\nHost srv1767265\nPath /root/mgs-agent/apps/finance-system/private/meta-lookup-worker-state.json\nMotivo Consulta BM da dash requer investigação; falhas consecutivas 5\nEvidência Sem escrita na Meta/credenciais. Consulte estado seguro e journal. Serviço bloqueado após 5 falhas.\nPendências Hermes total=0 | >=24.0h=0 | mais antiga=0.0h\nHorário 2026-10-30 11:47:13 EDT\n"
+  },
+  {
+    "id": "1565753387381690370",
+    "timestamp": "2026-10-30T15:44:57.843000+00:00",
+    "text": "\nREPORT-INFRA — alerta\n\nAção alerta\nTipo finance-approval-notification\nHost srv1767265\nPath /root/mgs-agent/apps/finance-system/private/meta-lookup-worker-state.json\nMotivo Notificações Discord do financeiro requerem investigação\nEvidência Falhas 3; TimeoutExpired; notificações internas e consulta BM preservadas.\nPendências Hermes total=0 | >=24.0h=0 | mais antiga=0.0h\nHorário 2026-10-30 11:44:56 EDT\n"
+  },
+  {
+    "id": "1565753212089139251",
+    "timestamp": "2026-10-30T15:44:16.050000+00:00",
+    "text": "\nREPORT-INFRA — alerta\n\nAção alerta\nTipo finance-meta-lookup\nHost srv1767265\nPath /root/mgs-agent/apps/finance-system/private/meta-lookup-worker-state.json\nMotivo Consulta BM da dash requer investigação; falhas consecutivas 3\nEvidência Sem escrita na Meta/credenciais. Consulte estado seguro e journal. Retry seguro em andamento.\nPendências Hermes total=0 | >=24.0h=0 | mais antiga=0.0h\nHorário 2026-10-30 11:44:14 EDT\n"
+  },
+  {
+    "id": "1565752426613702867",
+    "timestamp": "2026-10-30T15:41:08.778000+00:00",
+    "text": "\nAuto-push falhando\n\nFalhas consecutivas 1\nÚltimo push OK 2026-10-30T11:23:20-04:00\nÚltimo erro ```text\nauto-commit bloqueado por guardrail sensível [commit/push não iniciou]\n```\nAção Intervenção automática do Zeus desde a primeira falha detectada; investigar causa-raiz, corrigir, repetir e validar. Escalar somente bloqueio decisório/Critical Subset.\n"
+  }
+]

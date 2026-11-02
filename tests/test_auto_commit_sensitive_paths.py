@@ -205,6 +205,29 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_local_meta_fleet_preflight_exclusion(self):
+        base = "reports/meta-app-fleet-1566805898364584050/"
+        ignored = [base + "b013-credential-preflight.json"]
+        included = [
+            base + "final-verification.json",
+            base + "b013-credential-preflight.json.other",
+            base + "b012-credential-preflight.json",
+            "reports/meta-app-fleet-other/b013-credential-preflight.json",
+            "work/" + base + "b013-credential-preflight.json",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

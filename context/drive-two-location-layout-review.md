@@ -54,4 +54,4 @@ MGS-ARQUIVO contém CRIATIVOS e _MGS_CONTROLE. Em CRIATIVOS, o estoque por opera
 
 ## Estado ao fechar a auditoria
 
-Inventário de pastas completo e diagnóstico persistidos. Nenhuma pasta/arquivo remoto foi movido, excluído ou renomeado. O desenho simplificado é recomendação/expectativa em revisão, não implantação certificada. Mudanças de mecanismo, outros agentes, compartilhamento e descarte continuam com seus gates específicos.
+Inventário de pastas completo e diagnóstico persistidos. Nenhuma pasta/arquivo remoto foi movido, excluído ou renomeado durante a auditoria. **A proposta foi depois confirmada por Rodolfo em `1566814476626563115`, respondendo à pergunta `1566814036144685211`**; isso supersede a espera de aprovação geral do desenho. Implantação e novo gate de preservação de acessos estão em `context/drive-flat-intake-cutover.md`. A autorização mantém a exclusão de apagamentos e alterações de acesso; não equivale a cutover certificado.

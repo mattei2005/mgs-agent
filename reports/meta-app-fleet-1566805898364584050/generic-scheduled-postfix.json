@@ -1,0 +1,100 @@
+{
+  "checked_at": "2026-11-02T08:56:15-05:00",
+  "summary": {
+    "items": [
+      "BOT B001-5 Token - Debora Monteiro Lima",
+      "BOT B002-5 Token - Afonso Araujo",
+      "BOT B003-3 Token - Dhidin Distro",
+      "BOT B004-10 Token - Pready AS",
+      "BOT B005-4 Token - Taina Rocha Silveira",
+      "BOT B006-9 Token - Gentil Alves Ribeiro",
+      "BOT B007-4 Token - Siti Uwiyah",
+      "BOT B008-3 Token - Refi Aldiyansyah",
+      "BOT B009-6 Token - Sem Taimenas",
+      "BOT B010-3 Token - Huy Phạm",
+      "BOT B011-9 Token - Arther Tahalele",
+      "BOT B012-2 Token - Bình Hòa Trần"
+    ],
+    "processed_items": [
+      "BOT B001-5 Token - Debora Monteiro Lima",
+      "BOT B002-5 Token - Afonso Araujo",
+      "BOT B003-3 Token - Dhidin Distro",
+      "BOT B004-10 Token - Pready AS",
+      "BOT B005-4 Token - Taina Rocha Silveira",
+      "BOT B006-9 Token - Gentil Alves Ribeiro",
+      "BOT B007-4 Token - Siti Uwiyah",
+      "BOT B008-3 Token - Refi Aldiyansyah",
+      "BOT B009-6 Token - Sem Taimenas",
+      "BOT B010-3 Token - Huy Phạm",
+      "BOT B011-9 Token - Arther Tahalele",
+      "BOT B012-2 Token - Bình Hòa Trần"
+    ],
+    "alerts_sent": 0,
+    "errors_count": 0,
+    "dry_run": false,
+    "force_snapshot_requested": false,
+    "force_snapshot_effective": false,
+    "snapshot_blocked": false,
+    "force_live_alert": false,
+    "force_recovery_notice": false,
+    "active_alert_pause": {
+      "apps": [],
+      "monitor_apps": [],
+      "mode": "manual",
+      "manual": true,
+      "until": null,
+      "expired": false,
+      "invalid": false,
+      "reason": "B011-8→B011-9 validado e reativado por relatório de migração de Rodolfo; demais pausas preservadas"
+    },
+    "restriction_auto_pause": {
+      "candidates": [],
+      "changed": false,
+      "apps": [],
+      "monitor_apps": []
+    },
+    "suppressed_alert_deliveries": 0,
+    "sheet_removed_sync": {
+      "enabled": true,
+      "rows": 219,
+      "checked_intent_rows": 140,
+      "present": 94,
+      "marked": 51,
+      "marked_missing_current_meta": 5,
+      "marked_cumulative_removed": 41,
+      "unknown_app_rows": 0,
+      "identity_blocked_rows": 0,
+      "blank_intent_rows": 19,
+      "ignored_verification_rows": 6,
+      "unmatched_removed": 1,
+      "checked_at": "2026-11-02T08:56:15-05:00",
+      "updated": false
+    },
+    "invest_3d": {
+      "status": "not_requested",
+      "current_date": null,
+      "current_day_partial": null,
+      "period_start": null,
+      "period_end": null,
+      "days": null,
+      "error": null
+    }
+  },
+  "last_invest": {
+    "status": "INVEST_3D_OK",
+    "current_date": "2026-11-02",
+    "current_day_partial": true,
+    "period_start": "2026-10-30",
+    "period_end": "2026-11-01",
+    "days": 3,
+    "error": null,
+    "checked_at": "2026-11-02T08:52:42-05:00",
+    "attempts": [
+      {
+        "attempt": 1,
+        "checked_at": "2026-11-02T08:52:29-05:00",
+        "status": "ok"
+      }
+    ]
+  }
+}

@@ -1,5 +1,12 @@
 import {validateExpenseCharges,validatePrepaidCredit} from '../workspace.mjs';
 import {test} from 'node:test';import assert from 'node:assert/strict';import {openDatabase,initialize,root} from '../storage.mjs';import {createApp} from '../server.mjs';import {WORKSPACE,effectiveOverrides,refreshQuotes,expenseReviewUnchanged} from '../workspace.mjs';import path from 'node:path';import fs from 'node:fs/promises';import {randomUUID} from 'node:crypto';
+test('provisioned month readback satisfies spend contract without writes and fails closed',async()=>{
+ const {provisionNextPeriod}=await import('../workspace.mjs');
+ const existing={id:'workspace-2026-11',revision:46,summary:{period:'2026-11',counts:{pass:32084}}};
+ function fixture({receipt=true,verify=existing}={}){const calls=[];const db={transaction:async fn=>fn(db),query:async(sql)=>{calls.push(sql);if(sql.includes('pg_advisory'))return {rows:[]};if(sql.includes('FOR UPDATE'))return {rows:[existing,...(receipt?[{id:'month-rollover-2026-11',result:{summary:{authority:'1556898264878419969'}}}]:[])]};if(sql.startsWith('SELECT'))return {rows:verify?[verify]:[]};throw Error('unexpected mutation');}};return {db,calls};}
+ for(const receipt of [true,false])for(const apply of [true,false]){const {db,calls}=fixture({receipt});const out=await provisionNextPeriod(db,{from:'2026-10',to:'2026-11',apply});assert.equal(out.pass,true);assert.equal(out.readback,apply);assert.equal(out.status,receipt?'already_provisioned':'destination_exists_preserved');assert.equal(out.created,false);assert.equal(out.financial_writes,0);assert.equal(out.revision,46);assert.deepEqual(out.changes,[]);assert.ok(calls.every(s=>s.startsWith('SELECT')));}
+ for(const verify of [null,{...existing,id:'workspace-2026-10'},{...existing,summary:null},{...existing,summary:{period:'2026-10',counts:{error:0}}},{...existing,summary:{period:'2026-11',counts:{error:1}}}]){const {db}=fixture({verify});await assert.rejects(provisionNextPeriod(db,{from:'2026-10',to:'2026-11',apply:true}),/Provision/);}
+});
 test('dated charges exact totals, month gate, legacy undated and input rejection',()=>{
  const rows=[{id:'a',date:'2026-09-05',amount:'0.1'},{id:'b',date:'2026-09-10',amount:'0.2'}];
  const v=validateExpenseCharges(rows,'2026-09');assert.equal(v.amount,'0.3');assert.deepEqual(v.charges,rows);

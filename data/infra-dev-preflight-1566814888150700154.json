@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-11-02T14:11:04.292040+00:00",
+  "checks": {
+    "authority_full": true,
+    "authority_identity_unique": true,
+    "authority_channel_scoped": true,
+    "authority_critical_preserved": true,
+    "authority_human_source": true,
+    "config_live_mirror_equal": true,
+    "soul_live_mirror_equal": true,
+    "new_and_original_free_response": true,
+    "new_transport_user_only": true,
+    "env_free_response_equal": true,
+    "auto_thread_enabled": true,
+    "new_channel_not_exempt": true,
+    "explicit_auto_add_scoped": true,
+    "global_auto_add_preserved": true,
+    "prompt_scope_and_threads": true,
+    "installed_runtime_auto_threads_free_response": true,
+    "gateway_running_unmodified": true,
+    "activation_not_falsely_claimed": true
+  },
+  "count": 18,
+  "validation_layer": "canonical data + config + installed source + active process readback; NOT live communication",
+  "gateway_pid": "2750408",
+  "activation": "pending_explicit_own_gateway_restart_confirmation",
+  "auto_thread_request_message_id": "1566815862420279317"
+}

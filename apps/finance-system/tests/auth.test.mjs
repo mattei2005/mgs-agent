@@ -5,6 +5,21 @@ import {openDatabase} from '../storage.mjs';
 import {createApp} from '../server.mjs';
 import {request} from 'node:http';
 import proxyaddr from 'proxy-addr';
+import qs from 'qs';import {createRequire} from 'node:module';import {spawnSync} from 'node:child_process';
+test('qs comma format handles hostile objects and preserves valid values',()=>{
+ for(const input of [JSON.parse('{"a":[{"toString":"x"}]}'),qs.parse('a[0][toString]=x',{allowPrototypes:true}),qs.parse('a[][b]=c',{plainObjects:true})])for(const encodeValuesOnly of [false,true])assert.doesNotThrow(()=>qs.stringify(input,{arrayFormat:'comma',encodeValuesOnly}));
+ assert.equal(qs.stringify({a:['x','y']},{arrayFormat:'comma'}),'a=x%2Cy');assert.equal(qs.stringify({a:['x','y']},{arrayFormat:'comma',encodeValuesOnly:true}),'a=x,y');assert.deepEqual(qs.parse('a=1&b=2'),{a:'1',b:'2'});
+});
+test('body-parser survives compressed trailing bytes and retains normal JSON/error parsing',()=>{
+ const bp=createRequire(import.meta.url).resolve('body-parser');
+ const code=`const assert=require('node:assert/strict'),http=require('node:http'),zlib=require('node:zlib');
+ const bp=require(process.argv[1]),mode=process.argv[2],encoded=zlib.gzipSync(Buffer.from('{"a":1}'));
+ const body=mode==='trailing'?Buffer.concat([encoded,Buffer.from([0]),Buffer.alloc(100*1024,0x58)]):mode==='valid'?encoded:Buffer.from('{bad');
+ const parser=bp.json(),server=http.createServer((req,res)=>parser(req,res,err=>{res.statusCode=err?err.status:200;res.end(JSON.stringify(err?{error:true}:req.body));}));
+ server.listen(0,'127.0.0.1',()=>{const req=http.request({host:'127.0.0.1',port:server.address().port,method:'POST',agent:false,headers:{'Content-Type':'application/json','Content-Length':body.length,...(mode==='malformed'?{}:{'Content-Encoding':'gzip'})}},res=>{let text='';res.on('data',x=>text+=x);res.on('end',()=>setTimeout(()=>{assert.equal(res.statusCode,mode==='malformed'?400:200);if(mode!=='malformed')assert.deepEqual(JSON.parse(text),{a:1});server.close();},250));});req.on('error',()=>process.exit(2));req.end(body);});
+ setTimeout(()=>process.exit(3),4000).unref();`;
+ for(const mode of ['trailing','valid','malformed']){const p=spawnSync(process.execPath,['-e',code,bp,mode],{encoding:'utf8',timeout:7000});assert.equal(p.status,0,mode+': '+p.stderr);}
+});
 test('proxy-addr blocks cross-family spoofing in single and multiple trusted subnets',()=>{
  for(const subnet of ['::/1','::ffff:0:0/80'])for(const list of [[subnet],[subnet,'2001:db8::/32']])for(const ip of ['203.0.113.8','::ffff:203.0.113.8'])assert.equal(proxyaddr.compile(list)(ip),false,JSON.stringify({list,ip}));
  assert.equal(proxyaddr.compile('::ffff:0:0/80')('::1'),false);

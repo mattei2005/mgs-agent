@@ -289,3 +289,12 @@ Security / Access             acesso, token, dashboard, API          autorizaç�
 ## Eggbev Conta 01 — criação, clone e duplicação consolidados
 
 Decisão Rodolfo `1565033184574308513`, handoff Ares `1565033423813349429`: a conta `Eggbev-US-CC-EN-01` (`1034081997659047`) usa a thread `1541578556037927053` para criação do zero, clone e duplicação. Resolver a intenção pelo pedido e os contratos em `data/ares/discord/eggbev-fixed-routes.json`; O estado inicial de `1543333373945053184` como histórico/redirect foi supersedido pelo adendo Rodolfo `1565033982603829441`: essa thread fica dedicada a Aquecimento; a continuidade após aquecimento é em `1541578556037927053`, sem exclusão, migração ou replay automático. Supersede somente a separação de destinos, preservando autoridade, budget exato, resumo/OK, preflight/readback e todos os gates críticos. Não autoriza campanhas ou planos pendentes. Detalhes: `context/ares-operational-map.md`, seção Eggbev Conta 01.
+
+## Canal técnico compartilhado infra-dev
+
+- Canal privado: `1566814313086193795` (`infra-dev`), participantes Rodolfo, `santosoliv_dev_br` (`963808102891798649`) e Zeus.
+- Autoridade: Rodolfo, mensagem `1566814888150700154`, thread `1566811879718785197`. Fonte canônica de permissão: `data/authorized-users.json`, `agents.zeus._authorized_users_detail`.
+- O dev tem acesso Full técnico permanente no canal e suas threads para diagnósticos e alterações em servidores/VPS, PHP, WordPress e manutenção técnica dos sites MGS. Pedidos não críticos dentro desse escopo não exigem novo OK de Rodolfo. Esta delegação supersede apenas nesse recorte a leitura histórica de que toda alteração técnica WordPress exige pedido direto do CEO.
+- Full é de domínio, não administração global Zeus: não inclui outros canais/DMs, ativos pessoais/não MGS sem autorização específica, Finance/billing, estratégia/budgets de campanhas, novas autorizações ou divulgação de credenciais. Critical Subset e confirmação adicional de Rodolfo preservados.
+- Zeus responde sem menção no canal e threads; uma thread por assunto; Rodolfo e dev entram nas threads novas por política específica do pai, sem adicionar o dev globalmente. Combinar executor único antes de cada alteração e exigir QA/readback e rollback proporcionais ao risco.
+- O canal não recebe automaticamente o histórico privado de Rodolfo; não muda destinos de relatórios/crons existentes. Configuração em disco não prova ativação: validar os gates efetivos do processo e comunicação real após a recarga autorizada.

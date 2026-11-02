@@ -1,0 +1,32 @@
+{
+  "ts": "2026-11-02T14:09:03.115678+00:00",
+  "event": "infra_dev_scoped_full_technical_authority_persisted",
+  "actor": "zeus",
+  "authorized_by": "344196393512075265",
+  "source_message_id": "1566814888150700154",
+  "source_thread_id": "1566811879718785197",
+  "channel_id": "1566814313086193795",
+  "user_id": "963808102891798649",
+  "access_level": "full",
+  "scope": "MGS technical infrastructure, PHP, WordPress, sites; channel and child threads only",
+  "critical_subset_unchanged": true,
+  "backup": "/root/.hermes/secure-backups/infra-dev-1566814888150700154",
+  "config_changed_keys": [
+    "allow_from",
+    "channel_prompts",
+    "free_response_channels",
+    "thread_auto_add_users_by_channel"
+  ],
+  "state": "authority_persisted_config_prepared_activation_pending",
+  "gateway_restart_executed": false,
+  "paths": [
+    "/root/mgs-agent/data/authorized-users.json",
+    "/root/.hermes/profiles/zeus/config.yaml",
+    "/root/mgs-agent/profiles/zeus-config.yaml",
+    "/root/.hermes/profiles/zeus/.env",
+    "/root/.hermes/profiles/zeus/SOUL.md",
+    "/root/mgs-agent/profiles/zeus-soul.md",
+    "/root/mgs-agent/context/routes.md"
+  ],
+  "activation_pending_reason": "DISCORD_ALLOWED_USERS is parsed at Discord connect; active process has not been reloaded. Own gateway restart requires separate explicit confirmation."
+}

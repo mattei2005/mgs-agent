@@ -138,3 +138,7 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 /work/t_9bf5723f/stage/
 /work/t_9bf5723f/rollback/
 
+# Local Meta fleet credential preflight: preserve evidence without publishing it
+# or relaxing the watcher's sensitive-path guard. Exact incident path only.
+/reports/meta-app-fleet-1566805898364584050/b013-credential-preflight.json
+

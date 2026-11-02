@@ -1,0 +1,61 @@
+{
+  "agent": "zeus",
+  "artifact_hashes": {
+    "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh": "8eec44bb6b694f22e77a47bb604710351aa9ba9269a40f220b2d8713c2cf7103",
+    "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh": "313248da9eabc215dd1f609378182f6ad69aa0bdeda1af799b3223d27dfd50ed",
+    "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md": "fa5ba886378ba44369a428cadba83490b339906af8f3d615e4d8a5d103b948fd",
+    "/root/mgs-agent/tests/test_meta_app_invest_3d.py": "d5a0c31a13434463b1d6ce59c8477b4602d13b87159058ac075af65973d90c0b"
+  },
+  "backup": "/root/mgs-agent/backups/meta-app-invest-resilience-1566805898364584050",
+  "blocked_external": {
+    "B011-9": "Arther Tahalele Facebook login/security checkpoint; /me OAuth 190, debug invalid subcode 459. No credential changes authorized.",
+    "B013-7": [
+      "Max Tin Masela",
+      "Crislaine Oliveira",
+      "Riza Gabiola",
+      "Ricardo Oliveira",
+      "Maria Isabelly Bel"
+    ]
+  },
+  "budget_or_campaign_changes": false,
+  "changes": [
+    "Retry one transient spend-source failure; preserve unavailable as n/d and fail closed on auth/rate-limit/scope/date contracts.",
+    "Retain last requested enrichment receipt across not_requested cycles, with allowlisted diagnostic classifications.",
+    "Requested live card distinguishes failed admin-profile token from healthy app metadata and role-list access."
+  ],
+  "credential_changes": false,
+  "evidence": "/root/mgs-agent/reports/meta-app-fleet-1566805898364584050",
+  "historical_evidence": {
+    "attribution": "External membership loss confirmed by fresh Graph/DTR; original actor not attributed. Historical investment helper exception was overwritten; exact trigger not recoverable.",
+    "cards": 33,
+    "messages": 103,
+    "unique_removed_profiles": 36
+  },
+  "id": "meta-app-fleet-invest-resilience-1566805898364584050",
+  "paths": [
+    "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+    "/root/.hermes/profiles/zeus/scripts/b013-dtr-link-watch.sh",
+    "/root/mgs-agent/tests/test_meta_app_invest_3d.py",
+    "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md"
+  ],
+  "pause_sets_changed": false,
+  "report_infra_status": "sent_verified",
+  "source_message_id": "1566805898364584050",
+  "status": "validated_with_external_profile_blockers",
+  "thread_id": "1566805898364584050",
+  "type": "monitor_recovery_and_live_alert_audit",
+  "updated_at": "2026-11-02T09:11:02.893402-05:00",
+  "validation": {
+    "all_channels_readback": "13/13 native live alert families; all 194 rows exact; 187 numeric and 7 source-unmatched",
+    "b013_native_delivery": "PASS exact full DTR/Graph cycle at 09:05:32 EST, 49 linked/54 targets, zero unknown, INVEST_3D_OK",
+    "both_live_loaders": "INVEST_3D_OK",
+    "fresh_sa_sheet_parity": "194 rows; zero mismatches/duplicates; allocation scope unchanged",
+    "generic_delivery_readback": "12/12 exact native cards and complete 140 rows verified",
+    "generic_requested_channels": 12,
+    "generic_scheduled_postfix": "08:56:15 EST; zero errors/alerts; last requested enrichment retained across not_requested",
+    "shell_and_embedded_python_syntax": "PASS",
+    "unit_tests": 60
+  },
+  "report_message_id": "1566816400662597657",
+  "report_readback": "Exact GET: correct channel/message, empty content, one embed, expected fields, no mentions/thread."
+}

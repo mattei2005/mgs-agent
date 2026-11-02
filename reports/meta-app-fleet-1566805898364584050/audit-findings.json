@@ -1,0 +1,73 @@
+{
+  "source_message_id": "1566805898364584050",
+  "window_start_et": "2026-11-01T00:00:00-04:00",
+  "window_end_et": "2026-11-02T09:00:36.442067-05:00",
+  "scope": 13,
+  "historical_cards": 33,
+  "historical_messages": 103,
+  "generic_membership_removals": 34,
+  "b013_connection_losses": 2,
+  "historical_duplicate_composed_removals": 0,
+  "generic_current_present": 94,
+  "generic_current_assigned": 140,
+  "generic_current_absent": 46,
+  "b013_last_completed": {
+    "linked": 49,
+    "targets": 54,
+    "unlinked": 5,
+    "unknown": 0
+  },
+  "investment_preflight": {
+    "source": "Smart Bidding /report/messenger",
+    "metric": "INVESTIMENT",
+    "currency": "BRL",
+    "today_partial": "2026-11-02",
+    "closed_dates": [
+      "2026-10-30",
+      "2026-10-31",
+      "2026-11-01"
+    ],
+    "rows": 194,
+    "numeric": 187,
+    "unmatched": 7
+  },
+  "historical_helper_failure_cause": "Specific old exception not retained in available evidence; not attributed to timeout as a proven root cause. Current actual consumers both succeed.",
+  "confirmed_software_gap": "One failed source read cached unavailable for the whole alert batch, no bounded retry; next no-alert cycle overwrote last run enrichment diagnostics with not_requested.",
+  "recovery": "One bounded transient retry; fail-closed unavailable retained; persistent last requested receipt and live admin-token warning.",
+  "tests": 60,
+  "credential_changes": false,
+  "gateway_restarts": false,
+  "budget_changes": false,
+  "pause_changes": false,
+  "delivery": "13/13 native live logical alert families, exact GET readbacks, 194 complete table rows verified.",
+  "final_verification": {
+    "sa_identity": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+    "sheet_rows_checked": 194,
+    "marker_mismatches": [],
+    "duplicate_composed_identities": 0,
+    "allocation_scope_unchanged": true,
+    "by_app": {
+      "B001-5": 15,
+      "B002-5": 10,
+      "B003-3": 12,
+      "B004-10": 8,
+      "B005-4": 13,
+      "B006-9": 11,
+      "B007-4": 17,
+      "B008-3": 8,
+      "B009-6": 13,
+      "B010-3": 13,
+      "B011-9": 10,
+      "B012-2": 10,
+      "B013-7": 54
+    },
+    "delivery_channels": 13,
+    "delivered_rows": 194,
+    "numeric_rows": 187,
+    "unmatched_rows": 7,
+    "tests": 60
+  },
+  "b013_live_checked_at": "2026-11-02T09:05:32-05:00",
+  "external_blockers_unchanged": true,
+  "memory_cache_correction": "Removed stale cache entry calling B011/B012 retired; current generations are resolved from canonical registry."
+}

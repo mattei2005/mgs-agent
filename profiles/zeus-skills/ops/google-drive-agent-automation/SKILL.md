@@ -86,6 +86,14 @@ Use `references/apps-script-owner-queue-bridge.md` for the ordered deployment co
 
 ## Operator-facing handoff
 
+### Layout clarity and acceptance
+
+1. Resolve the live tree and the latest requested design separately before explaining or declaring the organization complete. For Rodolfo, present the MGS Drive as a simple upload entrance and the 30 TB archive as the permanent organization by operation, format and manager; do not silently redefine that objective as a permanent operation/manager tree inside the entrance. A confirmed redesign is not an activated intake binding.
+2. Inspect both the Shared-Drive root and the complete approved archive/corporate folder trees when he reports confusion. Identify whether his link opens the Drive root or an already-nested upload folder. Separate temporary staging, permanent stock, technical controls and exceptions; repeated folder names alone do not prove duplicated media.
+3. Explain the result with one short tree per location and a few numbered findings using **Problema, Causa e Solução**. State responsibility directly for structures Zeus created, label unproven causes, and keep internal paths, exhaustive folder lists and test inventories out of the operator explanation. Say which tree exists now, which is desired, and what remains unimplemented.
+4. Re-read the live roots before repeating an earlier “only UPLOAD MANUAL remains” conclusion, because later report producers can populate the source again. Include future producer destinations in remediation rather than moving the current exceptions once and calling the layout permanently fixed.
+5. Preflight inherited access and cross-Drive role semantics before requesting the implementation confirmation, not after a long code preparation. If a genuinely new protected action is discovered later, retain the existing redesign approval and ask only for that precise additional action. Use the native access-preflight procedure in `references/private-vps-owner-connector.md`, section **Whole-Drive same-ID stock/layout closure**.
+
 ### Supervising another agent's Drive delivery
 
 When Rodolfo asks whether Ares is following the storage structure, audit the exact batch through the canonical SA without becoming a second writer. Recover the current layout contract before interpreting logical inventory paths or requiring a Shared-Drive `driveId` on permanent owner-account files. Inspect an existing audit script before running it: a verifier may also rewrite inventory or completion state.
@@ -123,7 +131,7 @@ Before asking Rodolfo whether a folder or placement is legitimate, resolve the e
 - Keep historical copy authorization distinct from destructive historical retirement. Reuse neither a future-only cleanup approval nor a date-cutoff exception to remove old assets. Freeze the full target manifest, preserve business IDs/reservations and shortcut consumers, and explain any remaining owner-code or destructive gate without reducing the task to a documentation edit.
 
 - When Rodolfo asks what is missing or whether work remains manual, answer that practical question first. Separate owner setup already completed, automatic scheduling, productive archiving enabled, the first real archive verified, historical migration and destructive retention; a manual probe or working timer alone does not make every layer automatic. State the exact owner action, or explicitly say none is required, and identify who executes the remaining step. Keep the explanation short and avoid making him repeatedly ask for validation that is already authorized.
-- Before confirming that operators can keep uploading normally, check the live intake registry and explain the required subfolder in the same answer: unchanged upload root → operation → manager. Explicitly identify root-level or legacy folders that are outside automatic intake, and say whether original media can be uploaded without preprocessing; a bare “same folder” can send files to an unmonitored location.
+- Before confirming that operators can keep uploading normally, resolve the active intake mode and explain its actual accepted destination in the same answer. For a contextual-slot binding, state upload root → operation → manager; for a validated flat binding, state the single upload root and the explicit request/batch context required by its consumer. Never hard-code the older hierarchy as a permanent operator requirement or describe a desired flat entrance as already deployed. Identify unmatched root-level or legacy content without guessing its manager, and say whether original media can be uploaded without preprocessing; a bare “same folder” can send files to an unmonitored location.
 
 ## Native manual backup migration pilot
 

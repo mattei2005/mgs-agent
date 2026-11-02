@@ -1,6 +1,6 @@
 {
   "_comment": "Authorization registry for MGS Agents (Zeus, Atena, Ares). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
-  "_updated": "2026-08-30",
+  "_updated": "2026-11-02",
   "discord_server": {
     "name": "MGS Digital Corp",
     "guild_id": "1185714635991679006"
@@ -34,7 +34,8 @@
       },
       "authorized_user_discord_ids": [
         "344196393512075265",
-        "321263240782807040"
+        "321263240782807040",
+        "963808102891798649"
       ],
       "_authorized_users_detail": [
         {
@@ -61,8 +62,62 @@
           "added_by": "rodolfo",
           "authorized_by_discord_id": "344196393512075265",
           "authorized_at": "2026-07-05T13:15:31-04:00"
+        },
+        {
+          "discord_id": "963808102891798649",
+          "discord_username": "santosoliv_dev_br",
+          "name": "santosoliv_dev_br",
+          "discord_role": "Technical developer",
+          "access_level": "full",
+          "permanent": true,
+          "scope": {
+            "type": "technical_infrastructure_channel_and_child_threads",
+            "guild_id": "1185714635991679006",
+            "channel_id": "1566814313086193795",
+            "include_child_threads": true,
+            "domains": [
+              "MGS servers and VPS",
+              "PHP",
+              "WordPress",
+              "MGS website technical maintenance"
+            ],
+            "description": "Acesso Full no escopo técnico do canal infra-dev e suas threads: conversar, diagnosticar, solicitar e autorizar alterações em servidores/VPS, PHP, WordPress e manutenção técnica dos sites MGS, sem novo OK de Rodolfo para ações não críticas dentro desse escopo.",
+            "excluded": [
+              "global Zeus administration",
+              "other channels or DMs",
+              "Finance and billing",
+              "campaign budgets or media strategy",
+              "new user authorization",
+              "credential disclosure",
+              "personal or non-MGS assets without explicit Rodolfo authorization"
+            ]
+          },
+          "allowed_context": "Somente canal infra-dev 1566814313086193795 e threads filhas. Validar identidade, canal e escopo antes de agir. Não interpretar Full como autorização global.",
+          "critical_subset_unchanged": true,
+          "critical_confirmation_authority_discord_id": "344196393512075265",
+          "credential_and_permission_governance_unchanged": true,
+          "authorized_by_discord_id": "344196393512075265",
+          "authority_message_id": "1566814888150700154",
+          "source_thread_id": "1566811879718785197",
+          "authorized_at": "2026-11-02T14:09:03.115678+00:00",
+          "added": "2026-11-02",
+          "added_by": "rodolfo"
         }
-      ]
+      ],
+      "discord_channels": {
+        "infra_dev": {
+          "id": "1566814313086193795",
+          "name": "infra-dev",
+          "purpose": "Comunicação e operação técnica conjunta: servidores/VPS, PHP, WordPress e sites MGS.",
+          "participant_discord_ids": [
+            "344196393512075265",
+            "963808102891798649",
+            "1496296175014252634"
+          ],
+          "authority_message_id": "1566814888150700154",
+          "response_policy": "Zeus responde sem menção neste canal e threads; uma thread por assunto; um executor por alteração."
+        }
+      }
     },
     "atena": {
       "name": "Atena",
