@@ -94,7 +94,11 @@ Report treatment, permanent archive/stock availability, delivery to the requeste
 
 ### Registered manager destinations and post-campaign usage
 
-For the registered READY/Exclusivos/Usados layout, exact manager-folder delivery, same-ID post-use moves, provisioning and acceptance, load `references/manager-storage-standard.md`. Keep technical readiness, first real new-flow use and historical reorganization separate; never infer usage from folder names or treat a validation-only canary as production.
+For the registered READY/Exclusivos/Usados layout, exact manager-folder delivery, same-ID post-use moves, provisioning and acceptance, load `references/manager-storage-standard.md`.
+
+1. Resolve historical disposition from the current canonical decision before requesting more evidence. Folder labels alone do not prove use, but Rodolfo's explicit operational declaration can resolve the exact historical cohort; record it as human evidence rather than native Meta assignment, and do not ask him or the gestores to confirm the same disposition again. Preserve future-flow and destructive-retirement gates.
+2. Describe actual folder names in executive replies, such as `NICOLAS - Usados`; use `<NOME> - Usados` only when explicitly identifying a naming template. State whether folders were created now, created in an earlier approved phase, or merely reused for same-ID file moves, because a generic “GESTOR” label can be mistaken for a literal new folder.
+3. When asked whether organization has pending work, read the latest checkpoint and acceptance receipt, then distinguish usable working layout, historical exceptions resolved, intentionally retained originals/references, uncompleted legacy/test cleanup, and first real new-flow acceptance. Do not call preservation a forgotten-file backlog, deletion authorized by organization approval, or a technical canary a real campaign. Answer the practical readiness question first and name any remaining cleanup separately; first-use observation remains Zeus's internal duty, not a request for Rodolfo to manufacture work.
 
 ### Folder provenance and file-movement attribution
 
