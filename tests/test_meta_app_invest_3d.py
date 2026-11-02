@@ -324,5 +324,59 @@ class MetaAppInvest3DTests(unittest.TestCase):
             self.assertNotIn('7 DIAS', rendered)
 
 
+    def test_live_loader_recovers_transient_timeout_once(self):
+        import json
+        import subprocess
+        from unittest.mock import patch
+        payload = {'status': 'INVEST_3D_OK', 'days': 3,
+                   'by_profile': {'alpha': '12.34'}, 'by_profile_today': {'alpha': '0.00'}}
+        for module in (self.generic, self.b013):
+            ns = module.load_invest_3d.__globals__
+            saved = {k: ns[k] for k in ('INVEST_3D_DATA', 'INVEST_3D_ERROR', 'INVEST_3D_ATTEMPTS')}
+            try:
+                ns.update(INVEST_3D_DATA=None, INVEST_3D_ERROR=None, INVEST_3D_ATTEMPTS=[])
+                with patch.object(ns['subprocess'], 'run', side_effect=[
+                    subprocess.TimeoutExpired(['safe-helper'], 60),
+                    SimpleNamespace(returncode=0, stdout=json.dumps(payload)),
+                ]) as run, patch.object(ns['time'], 'sleep'):
+                    self.assertEqual(module.load_invest_3d(), payload)
+                    self.assertEqual(run.call_count, 2)
+                    self.assertEqual([a['status'] for a in ns['INVEST_3D_ATTEMPTS']], ['failed', 'ok'])
+                    self.assertIsNone(ns['INVEST_3D_ERROR'])
+            finally:
+                ns.update(saved)
+
+    def test_live_loader_limits_retries_and_preserves_unavailable(self):
+        import json
+        from unittest.mock import patch
+        for module in (self.generic, self.b013):
+            ns = module.load_invest_3d.__globals__
+            saved = {k: ns[k] for k in ('INVEST_3D_DATA', 'INVEST_3D_ERROR', 'INVEST_3D_ATTEMPTS')}
+            try:
+                for error, expected_calls in [('TimeoutError:', 2), ('RuntimeError: HTTP 503', 2),
+                                              ('RuntimeError: HTTP 429', 1), ('RuntimeError: HTTP 401', 1),
+                                              ('RuntimeError: dates missing', 1)]:
+                    ns.update(INVEST_3D_DATA=None, INVEST_3D_ERROR=None, INVEST_3D_ATTEMPTS=[])
+                    stdout = json.dumps({'status': 'SYNC_FAILED', 'error': error + ' https://hidden?access_token=SECRET'})
+                    with patch.object(ns['subprocess'], 'run', return_value=SimpleNamespace(returncode=1, stdout=stdout)) as run, patch.object(ns['time'], 'sleep'):
+                        self.assertEqual(module.load_invest_3d()['status'], 'INVEST_3D_UNAVAILABLE')
+                        self.assertEqual(run.call_count, expected_calls)
+                        self.assertNotIn('SECRET', str(ns['INVEST_3D_ATTEMPTS']))
+                        self.assertEqual(module.format_invest_today('missing'), 'n/d')
+                        self.assertEqual(module.format_invest_3d('missing'), 'n/d')
+            finally:
+                ns.update(saved)
+
+    def test_last_enrichment_receipt_survives_lazy_cycles(self):
+        for module in (self.generic, self.b013):
+            state = {}
+            module.retain_invest_3d_receipt(state, {'status': 'INVEST_3D_UNAVAILABLE', 'error': 'timeout'})
+            previous = dict(state['_last_invest_3d'])
+            module.retain_invest_3d_receipt(state, {'status': 'not_requested', 'error': None})
+            self.assertEqual(state['_last_invest_3d'], previous)
+            module.retain_invest_3d_receipt(state, {'status': 'INVEST_3D_OK', 'error': None})
+            self.assertEqual(state['_last_invest_3d']['status'], 'INVEST_3D_OK')
+
+
 if __name__ == '__main__':
     unittest.main()

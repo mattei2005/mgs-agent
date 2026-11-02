@@ -65793,6 +65793,29 @@
   ],
   "data_files": [
     {
+      "id": "meta-manual-payments-refresh-1566800470117187695",
+      "path": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "type": "data/financial-refresh-and-pc1-surface-recovery",
+      "source_message_id": "1566800470117187695",
+      "thread_id": "1563926766286803004",
+      "paths": [
+        "data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "data/meta-manual-payments/pc1-browser-surface.json",
+        "data/meta-manual-payments/pc1-card-ledger.json",
+        "data/meta-manual-payments/pc1-pay-now-ledger.json",
+        "data/meta-manual-payments/september-invoice-ledger.json",
+        "data/meta-manual-payments/last-refresh.json",
+        "profiles/zeus-skills/ops/meta-manual-payments-planning/references/recurring-refresh.md"
+      ],
+      "status": "updated_validated",
+      "evidence": "reports/meta-manual-payments-runs/manual-1566800470117187695/closure-current.json",
+      "verification": "47/47 accounts,11card36line;36 fresh H Accounts readings08:09-08:29EST;8D proofs renewed,pending_ui empty;October invoices29dueUSD417702.93;API08:42EST;IDs,links,notes,F-J totals and source-to-target pass.35 historical D blanks qualified. Other card-control tab changed concurrently,origin unattributed; not rewritten or reverted. No Meta writes,payments or schedule changes.",
+      "skill_readback": "live reference equals versioned mirror; stale saved Chrome handle recovery persisted; fresh exact Chrome and Meta pixels verified before input",
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1566810398349332576",
+      "report_infra_readback": true
+    },
+    {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 727360,
       "md5": "cf7bf1d046a36805f6e18477e411546b",
