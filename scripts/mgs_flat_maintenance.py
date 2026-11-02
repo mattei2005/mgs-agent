@@ -17,7 +17,9 @@ def eligible_file(m,index,completed,canary=False):
   fixture=b.read_json(HOME/'maintenance-canary-state.json',{})
   if m['id']==fixture.get('media_id'):
    return m.get('sha256Checksum')==fixture.get('media_sha256') and m.get('properties',{}).get('mgsArchiveType')=='flat_maintenance_canary'
+ if m['id'] not in completed or m.get('sha256Checksum')!=completed[m['id']]:return False
  entry=index.get(m['id'],{})
+ if not entry:return True # Completed exact reupload: preserve same raw ID, no new lineage.
  return bool(entry.get('verified') is True and entry.get('stockTransferredToArchive') is True and str(entry.get('size'))==m.get('size') and entry.get('md5')==m.get('md5Checksum') and entry.get('sha256')==m.get('sha256Checksum'))
 
 def transfer_tree(sa,owner,root,nodes,journal):
@@ -93,6 +95,11 @@ def run(apply=False,canary=False):
   if any(x.get('batch',{}).get('scope_type')=='flat_request' and x.get('status')=='complete' and x['batch']['batch_id'] not in registry.get(x['batch']['flat_request_id'],{}).get('completed_batches',{}) for x in state['claims'].values()):return {'status':'deferred_to_manager_delivery','remote_writes':0}
   with b.queue_lock(blocking=False) as lease:
    if lease is None:return {'status':'deferred_to_existing_writer','remote_writes':0}
+   released={}
+   for entry in state['claims'].values():
+    if entry.get('status')!='complete':continue
+    for proof in entry.get('proofs',[]):
+     released[proof['source_id']]=proof['raw_sha256'];released[proof['clean_source_id']]=proof['clean_sha256']
    sa=b.Drive(True);nodes=cut.inventory(sa);index=b.read_json(b.DATA/'archive-index.json',{}).get('mappings',{});roots=[]
    for m in nodes.values():
     if m['mimeType']!=b.FOLDER or m.get('parents')!=[b.SOURCE_ROOT] or m['name'] not in flat.registered_operations():continue
@@ -102,7 +109,7 @@ def run(apply=False,canary=False):
      for n in nodes.values():
       if current in n.get('parents',[]) and n['id'] not in subtree:subtree.add(n['id']);front.append(n['id'])
     files=[nodes[i] for i in subtree if nodes[i]['mimeType']!=b.FOLDER]
-    if files and all(eligible_file(x,index,state.get('completed',{}),canary) for x in files):roots.append(m['id'])
+    if files and all(eligible_file(x,index,released,canary) for x in files):roots.append(m['id'])
    reports=[x for x in nodes.values() if x.get('parents')==[b.SOURCE_DRIVE] and x['mimeType'] in REPORT_MIMES]
    out={'status':'ok','completed_generations':[],'reports_archived':[],'pending_input_files':sum(x.get('parents')==[f.UPLOAD] and str(x.get('mimeType','')).startswith(('image/','video/')) for x in nodes.values()),'eligible_generations':len(roots),'eligible_reports':len(reports),'delete_writes':0,'apply':apply}
    if apply and (roots or reports):

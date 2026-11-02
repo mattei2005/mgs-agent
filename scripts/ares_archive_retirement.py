@@ -191,6 +191,9 @@ def publish_receipt(d,c,job,asset,intent,path):
     return fid
 
 def retire_asset(d,c,job,asset,row_fingerprint):
+    import ares_flat_intake as flat_intake
+    flat_policy=flat_intake.policy()
+    if flat_policy and flat_policy.get('same_id_source_preservation') is True:raise RetirementError('FLAT_MODE_REQUIRES_SAME_ID_PRESERVATION')
     import mgs_flat_source_compat as flat_source
     if flat_source.retained(asset['sourceId']):raise RetirementError('FLAT_RETAINED_SOURCE_DELETE_FORBIDDEN')
     validate_active_policy(c)
@@ -242,6 +245,10 @@ def recover_accepted(d,c):
 
 def run_cycle(d,c,state,apply=False):
     result={'status':'disabled','enabled':False,'pairs_considered':0,'pairs_retired':0,'files_retired':0,'waiting':[],'blocked':[],'retention_seconds':86400,'max_pairs_per_run':2,'workspace_quota_delta_measured':False}
+    import ares_flat_intake as flat_intake
+    flat_policy=flat_intake.policy()
+    if flat_policy and flat_policy.get('same_id_source_preservation') is True:
+        return {**result,'status':'preserved_by_flat_same_id_move','same_id_source_preservation':True,'delete_writes':0}
     if c.get('delete_source') is not True:return result
     policy=validate_active_policy(c);control_scope(d,c);result.update(status='ok',enabled=True,retention_seconds=policy['retention_seconds'],confirmation_message_id=policy['confirmation_message_id'])
     index=_object(b.DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}})

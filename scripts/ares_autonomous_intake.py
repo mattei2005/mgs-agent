@@ -190,12 +190,25 @@ def monitor(polls=3,interval=20):
     test=bridge.read_json(DATA/'intake-selftest-1562188030205362227.json',{})
     if test.get('status')=='pending':return {'status':'selftest','manifest':str(DATA/'intake-selftest-1562188030205362227.json'),'run_id':'1562188030205362227'}
     if cfg.get('live_treatment_enabled') is not True:return {'status':'live_treatment_disabled','pending':0}
+    import ares_flat_intake as flat
+    if flat.policy() is not None:
+        # Existing scheduler, private bounded subprocess; never owner auth in the
+        # agent process, no campaign or deletion action, no extra recurring job.
+        import subprocess
+        housekeeping=subprocess.run([sys.executable,str(bridge.BASE/'scripts/mgs_flat_maintenance.py'),'--apply'],capture_output=True,text=True,timeout=180)
+        if housekeeping.returncode:raise IntakeError('FLAT_MAINTENANCE_FAILED:'+housekeeping.stderr[-180:])
     manifest=bridge.read_json(DATA/'upload-context-layout.json');assert isinstance(manifest,dict)
     import ares_archive_locations as locations
     d=bridge.Drive();scope=bridge.config_load();layout.check_folder(d,manifest,manifest['upload_root_id'],locations.upload_parent(),'UPLOAD MANUAL')
     with locked_state() as state:
         # Resume the same durable batch; never allocate a replacement on timeout.
         active=[x for x in state['claims'].values() if x['status']!='complete']
+        if flat.policy() is not None:
+            registry=bridge.read_json(flat.REQUESTS,{}).get('requests',{})
+            delivery_pending=[x for x in state['claims'].values() if x.get('status')=='complete' and x.get('batch',{}).get('scope_type')=='flat_request' and x['batch']['batch_id'] not in registry.get(x['batch']['flat_request_id'],{}).get('completed_batches',{})]
+            if delivery_pending:
+                item=sorted(delivery_pending,key=lambda x:x['claimed_at'])[0]
+                return {'status':'archive_ready','batch_id':item['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+item['batch']['batch_id']+'.json')),'flat_delivery_pending':True}
         if active:
             entry=sorted(active,key=lambda x:x['claimed_at'])[0];status='resume'
             if entry.get('status')=='treated_waiting_archive':

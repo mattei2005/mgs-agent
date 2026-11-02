@@ -3,22 +3,33 @@
 No campaign calls, media treatment, account changes, owner fallback or deletion.
 """
 from __future__ import annotations
-import argparse,json,hashlib,re,urllib.request,importlib.util,os
+import argparse,json,hashlib,re,urllib.request,importlib.util,os,contextlib
+from contextvars import ContextVar
 from pathlib import Path
 import ares_archive_bridge as b
 import ares_upload_context_layout as layout
 UPLOAD='1ARBvLammWUHuAclNmcriwkkgeedKryBd'
 BINDING=b.DATA/'flat-intake-binding.json'
 REQUESTS=b.DATA/'flat-intake-requests.json'
+_CANARY=ContextVar('flat_intake_native_canary',default=None)
 class FlatIntakeError(b.ArchiveError):pass
 
 def require(ok,reason):
  if not ok:raise FlatIntakeError(reason)
 def digest(v):return hashlib.sha256(b.canonical(v)).hexdigest()
 
+@contextlib.contextmanager
+def internal_canary(source_id):
+ require(b.read_json(b.CONFIG,{}).get('control_cutover_in_progress') is True,'FLAT_CANARY_REQUIRES_BARRIER')
+ state=b.read_json(b.DATA/'flat-intake-1566814476626563115/flat-consumer-canary-state.json',{})
+ require(state.get('source_id')==source_id,'FLAT_CANARY_EXACT_SOURCE')
+ token=_CANARY.set(source_id)
+ try:yield
+ finally:_CANARY.reset(token)
+
 def policy():
  p=b.read_json(BINDING,{})
- if p.get('phase')!='active':return None
+ if p.get('phase')!='active' and not (p.get('phase')=='prepared' and _CANARY.get() is not None):return None
  require(p.get('schema')=='mgs.flat.intake.binding.v1' and p.get('confirmation_message_id')=='1566814476626563115' and p.get('access_confirmation_message_id')=='1566825959645253764' and p.get('upload_root_id')==UPLOAD,'FLAT_BINDING_AUTHORITY')
  require(p.get('native_canary_verified') is True and p.get('acceptance_proof'),'FLAT_BINDING_ACCEPTANCE')
  return p
@@ -38,6 +49,10 @@ def validate_context(c):
 
 def descriptor(native,ctx):
  validate_context(ctx)
+ properties={**native.get('properties',{}),**native.get('appProperties',{})}
+ technical='canary' in str(properties.get('mgsArchiveType','')) or str(properties.get('validation_only','')).lower()=='true'
+ reference=str(properties.get('reference_only','')).lower()=='true'
+ require(not reference and (not technical or _CANARY.get()==native.get('id')),'FLAT_REFERENCE_OR_TECHNICAL_MEDIA_NOT_PRODUCTION')
  require(native.get('parents')==[UPLOAD] and native.get('trashed') is False and native.get('driveId')==b.SOURCE_DRIVE,'FLAT_SOURCE_PARENT')
  require(str(native.get('mimeType','')).startswith(('image/','video/')),'FLAT_SOURCE_MIME')
  require(re.fullmatch('[a-f0-9]{32}',native.get('md5Checksum','')) is not None and str(native.get('size','')).isdigit() and int(native['size'])>0,'FLAT_SOURCE_COMPLETE')
@@ -126,7 +141,7 @@ def register(operation,manager,destination,source_ids,requester,channel,message,
   d=b.Drive(False);sources=[]
   for fid in sorted(source_ids):
    intake.assert_source_writer(fid)
-   m=d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,createdTime,trashed'});descriptor(m,c);sources.append(m)
+   m=d.api('GET','files/'+fid,{'supportsAllDrives':'true','fields':'id,name,mimeType,parents,driveId,size,md5Checksum,sha256Checksum,version,createdTime,trashed,properties,appProperties'});descriptor(m,c);sources.append(m)
   c.update(sources=sources,status='registered',native_human_source=proof,registered_at=b.now_iso())
   if apply:registry['requests'][c['request_id']]=c;b.atomic_json(REQUESTS,registry)
   return {'status':'registered' if apply else 'verified_plan','request_id':c['request_id'],'sources':len(sources),'destination_mode':destination,'campaign_writes':0,'remote_writes':0}
