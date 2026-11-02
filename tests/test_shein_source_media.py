@@ -68,6 +68,7 @@ class SourceMediaTests(unittest.TestCase):
 
     def test_shared_primary_hash_blocks(self):
         self.children['ads']['data'][0]['creative']['object_story_spec']['link_data']['image_hash']='old-video'
+        self.fixture.rows[0]['image_hash']='old-video';self.fixture.write_rows()
         self.assertEqual(self.deps(),[self.fixture.owner])
 
     def test_shared_inventory_checksum_blocks(self):

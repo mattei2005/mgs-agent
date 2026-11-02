@@ -9,8 +9,8 @@
   "budget_usd_each": "45",
   "expected_campaigns": 21,
   "expected_budget_usd": "945",
-  "phase": "IN_PROGRESS",
-  "next_step": "Concluir próxima linha pendente pela mesma rota central",
+  "phase": "COMPLETE",
+  "next_step": "Nenhuma ação pendente; responder na origem sem repetir criação/ativação",
   "rows": [
     {
       "source_number": 309,
@@ -227,30 +227,286 @@
       "quantity": 3,
       "request_id": "shein-1566933884711608461-c300",
       "input": "/root/mgs-agent/data/ares/meta-ads/requests/shein-1566933884711608461/shein-1566933884711608461-c300.json",
-      "phase": "PENDING"
+      "phase": "VERIFIED",
+      "campaigns": [
+        {
+          "id": "120253758780710174",
+          "number": 338,
+          "name": "338 - 03/11 - v2 - FREE SCOOTER - COCAP - (b01fb02c338) - COPY C300 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758784390174",
+            "120253758784380174",
+            "120253758784350174"
+          ],
+          "creative_ids": [
+            "1863397945032237",
+            "1664058761755418",
+            "1791570962121371"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758780720174",
+          "number": 339,
+          "name": "339 - 03/11 - v2 - FREE SCOOTER - COCAP - (b01fb02c339) - COPY C300 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758785110174",
+            "120253758784580174",
+            "120253758784560174"
+          ],
+          "creative_ids": [
+            "2688049854985906",
+            "2051789722137842",
+            "1789546502094616"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758786760174",
+          "number": 340,
+          "name": "340 - 03/11 - v2 - FREE SCOOTER - COCAP - (b01fb02c340) - COPY C300 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758788210174",
+            "120253758788170174",
+            "120253758788010174"
+          ],
+          "creative_ids": [
+            "1632564921694729",
+            "1831515451870606",
+            "973845618644453"
+          ],
+          "qa_verified": true
+        }
+      ],
+      "ad_count": 9,
+      "qa_warnings": [],
+      "verified_at": "2026-11-02T22:05:56.390396+00:00",
+      "checkpoint_ids_match": true
     },
     {
       "source_number": 234,
       "quantity": 3,
       "request_id": "shein-1566933884711608461-c234",
       "input": "/root/mgs-agent/data/ares/meta-ads/requests/shein-1566933884711608461/shein-1566933884711608461-c234.json",
-      "phase": "PENDING"
+      "phase": "VERIFIED",
+      "campaigns": [
+        {
+          "id": "120253758800170174",
+          "number": 341,
+          "name": "341 - 03/11 - v2 - FREE TV BED - COCAP - (b01fb02c341) - COPY C234 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758803180174",
+            "120253758802950174"
+          ],
+          "creative_ids": [
+            "1688132849769345",
+            "1516646837192557"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758800160174",
+          "number": 342,
+          "name": "342 - 03/11 - v2 - FREE TV BED - COCAP - (b01fb02c342) - COPY C234 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758803600174",
+            "120253758802930174"
+          ],
+          "creative_ids": [
+            "1430037892508755",
+            "1166753852978942"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758805360174",
+          "number": 343,
+          "name": "343 - 03/11 - v2 - FREE TV BED - COCAP - (b01fb02c343) - COPY C234 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758807100174",
+            "120253758807030174"
+          ],
+          "creative_ids": [
+            "39726383357008739",
+            "1385179203445388"
+          ],
+          "qa_verified": true
+        }
+      ],
+      "ad_count": 6,
+      "qa_warnings": [],
+      "verified_at": "2026-11-02T22:07:56.493085+00:00",
+      "checkpoint_ids_match": true
     },
     {
       "source_number": 238,
       "quantity": 3,
       "request_id": "shein-1566933884711608461-c238",
       "input": "/root/mgs-agent/data/ares/meta-ads/requests/shein-1566933884711608461/shein-1566933884711608461-c238.json",
-      "phase": "PENDING"
+      "phase": "VERIFIED",
+      "campaigns": [
+        {
+          "id": "120253758816680174",
+          "number": 344,
+          "name": "344 - 03/11 - v2 - FOUR WHEELERS FOR FREE - COCAP - (b01fb02c344) - COPY C238 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758819990174",
+            "120253758819980174"
+          ],
+          "creative_ids": [
+            "1631713092021964",
+            "1440268071643963"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758816650174",
+          "number": 345,
+          "name": "345 - 03/11 - v2 - FOUR WHEELERS FOR FREE - COCAP - (b01fb02c345) - COPY C238 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758820470174",
+            "120253758820310174"
+          ],
+          "creative_ids": [
+            "1686446556326633",
+            "1101680282682266"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758822380174",
+          "number": 346,
+          "name": "346 - 03/11 - v2 - FOUR WHEELERS FOR FREE - COCAP - (b01fb02c346) - COPY C238 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758824930174",
+            "120253758824850174"
+          ],
+          "creative_ids": [
+            "1705445747579811",
+            "1611118991060451"
+          ],
+          "qa_verified": true
+        }
+      ],
+      "ad_count": 6,
+      "qa_warnings": [],
+      "verified_at": "2026-11-02T22:09:57.390528+00:00",
+      "checkpoint_ids_match": true
     },
     {
       "source_number": 315,
       "quantity": 3,
       "request_id": "shein-1566933884711608461-c315",
       "input": "/root/mgs-agent/data/ares/meta-ads/requests/shein-1566933884711608461/shein-1566933884711608461-c315.json",
-      "phase": "PENDING"
+      "phase": "VERIFIED",
+      "campaigns": [
+        {
+          "id": "120253758835760174",
+          "number": 347,
+          "name": "347 - 03/11 - v2 - Free Console - COCAP - (b01fb02c347) - COPY C315 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758838290174"
+          ],
+          "creative_ids": [
+            "2206754696921620"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758835750174",
+          "number": 348,
+          "name": "348 - 03/11 - v2 - Free Console - COCAP - (b01fb02c348) - COPY C315 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758838260174"
+          ],
+          "creative_ids": [
+            "2021653998520962"
+          ],
+          "qa_verified": true
+        },
+        {
+          "id": "120253758839100174",
+          "number": 349,
+          "name": "349 - 03/11 - v2 - Free Console - COCAP - (b01fb02c349) - COPY C315 - (US_APP) - event_add_to_wishlist",
+          "daily_budget_minor": 4500,
+          "bid_strategy": "COST_CAP",
+          "bid_amount_minor": 90,
+          "start_time": "2026-11-03T00:12:00-0500",
+          "status": "ACTIVE",
+          "ad_ids": [
+            "120253758840380174"
+          ],
+          "creative_ids": [
+            "1482090300468387"
+          ],
+          "qa_verified": true
+        }
+      ],
+      "ad_count": 3,
+      "qa_warnings": [],
+      "verified_at": "2026-11-02T22:11:41.191563+00:00",
+      "checkpoint_ids_match": true
     }
   ],
-  "completed_rows": 3,
-  "verified_campaigns": 9
+  "completed_rows": 7,
+  "verified_campaigns": 21,
+  "verified_ads": 42,
+  "verified_budget_usd": "945",
+  "final_verification": "/root/mgs-agent/data/ares/meta-ads/requests/shein-1566933884711608461/final-verification.json",
+  "completed_at": "2026-11-02T22:12:57.750624+00:00"
 }

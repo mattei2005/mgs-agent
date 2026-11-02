@@ -1,0 +1,63 @@
+{
+  "unchanged": {
+    "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/c011.json": true,
+    "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/c010.json": true,
+    "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/c012.json": true,
+    "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/c009.json": true,
+    "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/c008.json": true,
+    "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/aggregate-progress.json": true,
+    "data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1565261967260647536-c3/state.json": true,
+    "data/ares/meta-ads/state/shein-campaigns/queue/decision-waits/shein-1565261967260647536-c3.json": true,
+    "data/ares/meta-ads/engine-v3/state/checkpoints/shein-1565261967260647536-c3-937846586033361.json": true
+  },
+  "jobs": [
+    {
+      "request_id": "shein-1566932068317921331-c011",
+      "status": "FOREGROUND_OWNED",
+      "dispatch_owner": "foreground",
+      "attempts": 0,
+      "dependencies": [],
+      "notification": null
+    },
+    {
+      "request_id": "shein-1566932068317921331-c010",
+      "status": "FOREGROUND_OWNED",
+      "dispatch_owner": "foreground",
+      "attempts": 0,
+      "dependencies": [],
+      "notification": null
+    },
+    {
+      "request_id": "shein-1566932068317921331-c012",
+      "status": "FOREGROUND_OWNED",
+      "dispatch_owner": "foreground",
+      "attempts": 0,
+      "dependencies": [],
+      "notification": null
+    },
+    {
+      "request_id": "shein-1566932068317921331-c009",
+      "status": "FOREGROUND_OWNED",
+      "dispatch_owner": "foreground",
+      "attempts": 0,
+      "dependencies": [],
+      "notification": null
+    },
+    {
+      "request_id": "shein-1566932068317921331-c008",
+      "status": "FOREGROUND_OWNED",
+      "dispatch_owner": "foreground",
+      "attempts": 0,
+      "dependencies": [],
+      "notification": null
+    }
+  ],
+  "worker": {
+    "heartbeat_at": "2026-11-02T22:11:03.334013+00:00",
+    "pending": 5
+  },
+  "code_digests_match": true,
+  "inventory_entry_verified": true,
+  "knowledge_registration_verified": true,
+  "checkpoint_verified": true
+}

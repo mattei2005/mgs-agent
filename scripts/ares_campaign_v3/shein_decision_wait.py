@@ -168,6 +168,7 @@ def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(),
             if not live_history:
                 return False
             historical.update(tuple(x) for x in live_history['identities'])
+            historical, _ = expand(historical, rows)
         if not historical:
             return False
         # Reservation guards in dependencies are independent; shared identity also blocks

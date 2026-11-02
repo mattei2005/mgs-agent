@@ -1,0 +1,611 @@
+--- before/scripts/ares_campaign_v3/shein_request_queue.py
++++ scripts/ares_campaign_v3/shein_request_queue.py
+@@ -74,6 +74,27 @@
+         return []
+     deps = set()
+     selected_rows = selected(request, base)
++    states = [json.loads(path.read_text()) for path in (root(base) / 'single-clone').glob('*/state.json')]
++    source_proof = None
++    from .shein_decision_wait import pending
++    pinned_owners = set()
++    for path in (root(base) / 'queue/decision-waits').glob('*.json'):
++        record = json.loads(path.read_text())
++        owner = path.stem
++        if str(record.get('account_id')) == str(account_id) and owner != rid:
++            pinned_owners.add(owner)
++            origin = state(base, owner).get('request') or {}
++            if origin.get('request_id') != owner or str(origin.get('account')) != str(account_id):
++                deps.add(owner)  # Missing or changed state cannot erase a pinned human wait.
++    if (request.get('mode', 'pure_clone') == 'pure_clone' and not selected_rows
++            and pinned_owners):
++        try:
++            from .shein_source_media import resolve
++            source_proof = resolve(request, account_id, base, held_accounts=_held_accounts)
++            selected_rows = source_proof.reservations
++        except (OSError, ValueError, KeyError, TypeError, AttributeError):
++            # Missing/stale/uncertain source proof retains the historical dependency.
++            source_proof = None
+     for row in selected_rows:
+         owner = row.get('reservation_request_id')
+         if not owner or owner == rid:
+@@ -84,15 +105,14 @@
+             raise ValueError('queue reservation request partition mismatch')
+         if not terminal(previous):
+             deps.add(owner)
+-    directory = root(base) / 'single-clone'
+-    for path in directory.glob('*/state.json'):
+-        value = json.loads(path.read_text())
++    for value in states:
+         origin = value.get('request') or {}
+         owner = origin.get('request_id')
+         from .shein_decision_wait import inert_for, pending
+         if (owner and owner != rid and str(origin.get('account')) == str(account_id)
+                 and (value.get('phase') in ACTIVE or (pending(base, owner) and not terminal(value)))):
+-            if inert_for(request, value, selected_rows, base, held_accounts=_held_accounts):
++            if inert_for(request, value, selected_rows, base, held_accounts=_held_accounts,
++                         source_proof=source_proof):
+                 continue
+             waiting = job_path(base, owner)
+             other_job = json.loads(waiting.read_text()) if waiting.exists() else {}
+--- before/scripts/ares_campaign_v3/shein_decision_wait.py
++++ scripts/ares_campaign_v3/shein_decision_wait.py
+@@ -14,7 +14,8 @@
+ MEDIA_KEYS = {'asset_id', 'canonical_filename', 'checksum', 'clean_checksum',
+               'clean_md5', 'asset_drive_id', 'drive_file_id', 'video_id',
+               'vertical_video_id', 'square_video_id', 'image_hash', 'original_video_id',
+-              'meta_video_id', 'meta_image_hash', 'original_checksum', 'pixel_sha256'}
++              'meta_video_id', 'meta_image_hash', 'original_checksum', 'pixel_sha256',
++              'hash', 'object_story_id', 'effective_object_story_id'}
+ 
+ 
+ def digest(path):
+@@ -120,10 +121,11 @@
+         resume_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / resume_id / 'state.json'
+         if resume_path.exists():
+             resume_state = _read(resume_path)
++            from .shein_source_media import same_resume_request
+             own_resume = (lease.get('request_id') == resume_id and lease.get('blocks_readers') is True
+                 and lease.get('status') in {'IN_PROGRESS', 'DEFERRED_QUOTA', 'READBACK_DEFERRED',
+                                             'RECOVERY_PENDING', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'}
+-                and resume_state.get('request') == resume_request
++                and same_resume_request(base, resume_state.get('request'), resume_request)
+                 and str(resume_request.get('account')) == account
+                 and resume_state.get('phase') in {'ENGINE_PENDING', 'RECOVERY_PENDING',
+                     'POSTPROCESS_PENDING', 'GLOBAL_QA_COMPLETE', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'})
+@@ -132,14 +134,20 @@
+     return rec
+ 
+ 
+-def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset()):
++def inert_for(request, value, selected_rows, base, *, held_accounts=frozenset(), source_proof=None):
+     """True only for an explicitly evidenced, disjoint-media, idle human wait."""
+     try:
+         evidence(base, value, resume_request=request)
+         origin = value['request']; account = str(origin['account']); owner = origin['request_id']
+         if (request.get('source_channel_id') != origin.get('source_channel_id')
+-                or not selected_rows):
++                or str(request.get('account')) != account
++                or (not selected_rows and source_proof is None)):
+             return False
++        if source_proof is not None:
++            from .shein_source_media import SourceMediaProof
++            if not isinstance(source_proof, SourceMediaProof):
++                return False
++            source_proof.validate(request, account, base)
+         lock = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / ('account-' + account + '.lock')
+         if account not in held_accounts and not _unlocked(lock):
+             return False
+@@ -149,17 +157,24 @@
+         historical = _media(value)
+         inventory = base / 'data/ares/creative-ops/inventory/assets.jsonl'
+         campaign_ids = set(value['engine_result']['campaign_ids'])
+-        for line in inventory.read_text().splitlines():
+-            row = json.loads(line)
+-            identities = _media(row)
+-            if (row.get('reservation_request_id') == owner or row.get('meta_campaign_id') in campaign_ids
+-                    or identities & historical):
+-                historical.update(identities)
++        rows = [json.loads(line) for line in inventory.read_text().splitlines() if line.strip()]
++        for row in rows:
++            if row.get('reservation_request_id') == owner or row.get('meta_campaign_id') in campaign_ids:
++                historical.update(_media(row))
++        from .shein_source_media import expand
++        historical, _ = expand(historical, rows)
++        if source_proof is not None:
++            live_history = json.loads(source_proof.historical_json).get(owner)
++            if not live_history:
++                return False
++            historical.update(tuple(x) for x in live_history['identities'])
++            historical, _ = expand(historical, rows)
+         if not historical:
+             return False
+         # Reservation guards in dependencies are independent; shared identity also blocks
+         # when lineage differs or a historical reservation is no longer present.
+-        return not bool(historical & _media(selected_rows))
++        selected_media = source_proof.identities if source_proof is not None else _media(selected_rows)
++        return bool(selected_media) and not bool(historical & selected_media)
+     except (OSError, ValueError, KeyError, TypeError, AttributeError):
+         return False
+ 
+--- /dev/null
++++ scripts/ares_campaign_v3/shein_source_media.py
+@@ -0,0 +1,250 @@
++"""Typed, fresh READ_ONLY source-media evidence for pure-clone queue scheduling.
++
++Not a staging receipt or campaign manifest. Never reserve, transfer or upload media.
++Only live account-scoped observations may exempt an inert historical review.
++"""
++from __future__ import annotations
++import fcntl
++import hashlib
++import json
++import re
++import time
++from contextlib import ExitStack
++from dataclasses import dataclass
++from pathlib import Path
++
++MAX_AGE_SECONDS = 120
++
++
++def request_digest(request):
++    return hashlib.sha256(json.dumps(request, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
++
++
++def inventory_path(base):
++    return base / 'data/ares/creative-ops/inventory/assets.jsonl'
++
++
++def same_resume_request(base, persisted, original):
++    if persisted == original:
++        return True
++    if original.get('mode', 'pure_clone') != 'pure_clone':
++        return False
++    # Compare only the runner's canonical defaults, not arbitrary field subsets.
++    # Never materialize these into the immutable intake/job.
++    from .shein_single_clone import apply_request_defaults
++    operation = json.loads((base / 'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json').read_text())
++    return persisted == apply_request_defaults(original, operation)
++
++
++def expand(identities, rows):
++    from .shein_decision_wait import _media
++    result = set(identities)
++    linked = []
++    remaining = list(rows)
++    while True:
++        matched = [row for row in remaining if _media(row) & result]
++        if not matched:
++            return result, linked
++        for row in matched:
++            result.update(_media(row))
++            linked.append(row)
++            remaining.remove(row)
++
++
++def primary_media(creative):
++    """Only actual image/video slots, never thumbnails, posts or ad lineage."""
++    found = set()
++    story = creative.get('object_story_spec') or {}
++    for key, field in [('link_data', 'image_hash'), ('video_data', 'video_id')]:
++        if key in story:
++            value = story[key].get(field)
++            if not isinstance(value, str) or not value:
++                raise ValueError('source primary media slot is incomplete')
++            found.add(('identity', value))
++    feed = creative.get('asset_feed_spec') or {}
++    for key, field in [('images', 'hash'), ('videos', 'video_id')]:
++        for slot in feed.get(key) or []:
++            value = slot.get(field)
++            if not isinstance(value, str) or not value:
++                raise ValueError('source media variant is incomplete')
++            found.add(('identity', value))
++    if not found:
++        raise ValueError('source actual media unavailable')
++    return found
++
++
++@dataclass(frozen=True)
++class SourceMediaProof:
++    kind: str
++    request_sha256: str
++    account_id: str
++    channel_id: str
++    observed_at: float
++    inventory_sha256: str
++    source_campaign_id: str
++    source_number: int
++    ad_bindings: tuple
++    identities: frozenset
++    reservations_json: str
++    historical_json: str
++
++    def validate(self, request, account_id, base):
++        from .shein_decision_wait import digest, record_path, _engine_root
++        if (self.kind != 'PURE_CLONE_SOURCE_MEDIA_READ_ONLY_V1'
++                or request.get('mode', 'pure_clone') != 'pure_clone'
++                or request.get('asset_refs') or request.get('campaign_groups')
++                or self.request_sha256 != request_digest(request)
++                or self.account_id != str(account_id) or str(request.get('account')) != self.account_id
++                or self.channel_id != request.get('source_channel_id')
++                or self.source_number != request.get('source_number')
++                or not 0 <= time.time() - self.observed_at <= MAX_AGE_SECONDS
++                or not self.source_campaign_id or not self.ad_bindings or not self.identities
++                or self.inventory_sha256 != digest(inventory_path(base))):
++            raise ValueError('pure-clone source media evidence missing, stale or mismatched')
++        historical = json.loads(self.historical_json)
++        if not historical:
++            raise ValueError('pure-clone historical live evidence missing')
++        for rid, record in historical.items():
++            state_path = base / 'data/ares/meta-ads/state/shein-campaigns/single-clone' / rid / 'state.json'
++            cp = _engine_root(base) / 'checkpoints' / (rid + '-' + self.account_id + '.json')
++            if (record['state_sha256'] != digest(state_path)
++                    or record['record_sha256'] != digest(record_path(base, rid))
++                    or record['checkpoint_sha256'] != digest(cp)):
++                raise ValueError('pure-clone historical evidence changed')
++        return self
++
++    @property
++    def reservations(self):
++        return json.loads(self.reservations_json)
++
++    def receipt(self):
++        return {**self.__dict__, 'identities': sorted(self.identities),
++                'reservations_json': self.reservations,
++                'historical_json': json.loads(self.historical_json)}
++
++
++def resolve(request, account_id, base, *, held_accounts=frozenset()):
++    """No cached proof is trusted. Missing locks, source or media fail closed."""
++    from . import shein_request_queue as q, shein_single_clone as driver
++    from .shein_decision_wait import _media, _engine_root, digest, evidence
++    account_id = str(account_id)
++    if (request.get('mode', 'pure_clone') != 'pure_clone' or request.get('asset_refs')
++            or request.get('campaign_groups') or str(request.get('account')) != account_id
++            or not isinstance(request.get('source_number'), int) or request['source_number'] <= 0):
++        raise ValueError('source media requires exact pure-clone source account and number')
++    # Reuse the canonical live authority, profile, domain and positive account gates.
++    account = q.authorize_queue_request(request, base)
++    if account['account_id'] != account_id:
++        raise ValueError('source media account partition mismatch')
++    inv = inventory_path(base)
++    engine = _engine_root(base)
++    with ExitStack() as stack:
++        locks = []
++        if account_id not in held_accounts:
++            locks.append((q.root(base) / 'single-clone' / ('account-' + account_id + '.lock'), fcntl.LOCK_EX))
++        locks += [(engine / 'writer-leases' / (account_id + '.lock'), fcntl.LOCK_SH),
++                  (inv.with_suffix(inv.suffix + '.lock'), fcntl.LOCK_SH)]
++        for path, mode in locks:
++            handle = stack.enter_context(path.open('rb'))
++            fcntl.flock(handle, mode | fcntl.LOCK_NB)
++        lease = json.loads((engine / 'writer-leases' / (account_id + '.json')).read_text())
++        idle = lease.get('status') == 'COMPLETE' and lease.get('blocks_readers') is False and bool(lease.get('released_at_utc'))
++        resume = q.state(base, request['request_id'])
++        own = (lease.get('request_id') == request['request_id'] and lease.get('blocks_readers') is True
++               and lease.get('status') in {'IN_PROGRESS', 'DEFERRED_QUOTA', 'READBACK_DEFERRED', 'RECOVERY_PENDING', 'ACTIVATION_PENDING', 'ACTIVATION_DEFERRED'}
++               and same_resume_request(base, resume.get('request'), request) and resume.get('phase') in q.ACTIVE)
++        if lease.get('account_id') != account_id or not (idle or own):
++            raise ValueError('source media account writer lease is not idle or exact resume')
++        config = json.loads((base / 'data/ares/meta-ads/engine-v3/config.json').read_text())
++        common = driver._load_common()
++        token, _ = common.get_token_from_1password(config['accounts'][account_id]['token_item'])
++        started = time.time()
++        pre = driver._batch(common, token, [{'name': 'campaigns', 'path': 'act_' + account_id + '/campaigns',
++              'params': {'fields': 'id,account_id,name,status', 'limit': 500}}])
++        campaigns = driver._complete_edge(pre['campaigns'])
++        sources = [c for c in campaigns if re.match(r'^([0-9]+)\s*-', c.get('name', ''))
++                   and int(re.match(r'^([0-9]+)\s*-', c['name'])[1]) == request['source_number']]
++        if (len(sources) != 1 or sources[0].get('account_id') != account_id
++                or sources[0].get('status') not in {'ACTIVE', 'PAUSED'}):
++            raise ValueError('source media campaign missing, ambiguous or wrong account')
++        cid = sources[0]['id']
++        raw = driver._batch(common, token, [
++            {'name': 'adsets', 'path': cid + '/adsets', 'params': {
++                'fields': 'id,account_id,campaign_id,status', 'limit': 50}},
++            {'name': 'ads', 'path': cid + '/ads', 'params': {
++                'fields': 'id,account_id,campaign_id,adset_id,status,source_ad_id,creative{id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,media_sourcing_spec}', 'limit': 50}}])
++        sets = [x for x in driver._complete_edge(raw['adsets']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
++        ads = [x for x in driver._complete_edge(raw['ads']) if x.get('status') not in {'DELETED', 'ARCHIVED'}]
++        if (len(sets) != 1 or not 1 <= len(ads) <= 5
++                or any(x.get('account_id') != account_id or x.get('campaign_id') != cid
++                       or x.get('status') not in {'ACTIVE', 'PAUSED'} for x in sets + ads)
++                or any(x.get('adset_id') != sets[0]['id'] for x in ads)
++                or len({x['id'] for x in ads}) != len(ads)):
++            raise ValueError('source media child coverage or partition mismatch')
++        identities = set()
++        primary_ids = set()
++        bindings = []
++        for ad in ads:
++            creative = ad.get('creative') or {}
++            # Post/creative/lineage alone is not proof of the actual media. Inherited
++            # source_ad_id is intentionally not a media key: new-media clones reuse it.
++            primary = primary_media(creative)
++            if not creative.get('id'):
++                raise ValueError('source media definition unavailable; no empty-set exemption')
++            primary_ids.update(primary)
++            identities.update(_media(creative))
++            bindings.append((ad['id'], sets[0]['id'], creative['id'], ad.get('source_ad_id')))
++        rows = [json.loads(line) for line in inv.read_text().splitlines() if line.strip()]
++        for identity in primary_ids:
++            aliases = [row for row in rows if identity in _media(row)]
++            if (not aliases or len({row.get('asset_id') for row in aliases}) != 1
++                    or any(not row.get('asset_id') or not (row.get('clean_checksum') or row.get('checksum')) for row in aliases)):
++                raise ValueError('source media inventory lineage missing or ambiguous')
++        identities, linked = expand(identities, rows)
++        historical = {}
++        for path in (q.root(base) / 'queue/decision-waits').glob('*.json'):
++            pinned = json.loads(path.read_text())
++            if pinned.get('account_id') != account_id or path.stem == request['request_id']:
++                continue
++            previous = q.state(base, path.stem)
++            evidence(base, previous, resume_request=request)
++            if previous['request'].get('source_channel_id') != request['source_channel_id']:
++                raise ValueError('source media historical partition mismatch')
++            cp_path = engine / 'checkpoints' / (path.stem + '-' + account_id + '.json')
++            cp = json.loads(cp_path.read_text())
++            expected_ads = {x for b in cp.get('bundles', []) for x in b.get('ad_ids', [])}
++            expected_sets = {x for b in cp.get('bundles', []) for x in b.get('adset_ids', [])}
++            observed_ads, observed_sets, observed_media = set(), set(), set()
++            pinned_media, _ = expand(_media(previous), rows)
++            for historical_id in previous['engine_result']['campaign_ids']:
++                live = driver._readback(common, token, historical_id)
++                if (live['campaign'].get('id') != historical_id
++                        or live['campaign'].get('account_id') != account_id
++                        or live['campaign'].get('status') != 'PAUSED'):
++                    raise ValueError('historical campaign is not the pinned paused object')
++                old_ads = driver._complete_edge(live['ads'])
++                old_sets = driver._complete_edge(live['adsets'])
++                if not old_ads or not old_sets or any(x.get('status') != 'PAUSED' for x in old_ads + old_sets):
++                    raise ValueError('historical paused child coverage changed')
++                for ad in old_ads:
++                    if not primary_media(ad.get('creative') or {}).issubset(pinned_media):
++                        raise ValueError('historical primary media changed since pinned decision')
++                    observed_media.update(_media(ad.get('creative') or {}))
++                observed_ads.update(x['id'] for x in old_ads)
++                observed_sets.update(x['id'] for x in old_sets)
++            if not expected_ads or observed_ads != expected_ads or not expected_sets or observed_sets != expected_sets:
++                raise ValueError('historical live child IDs do not match checkpoint')
++            historical[path.stem] = {'state_sha256': digest(q.root(base) / 'single-clone' / path.stem / 'state.json'),
++                'record_sha256': digest(path), 'checkpoint_sha256': digest(cp_path),
++                'campaign_ids': previous['engine_result']['campaign_ids'], 'ad_ids': sorted(observed_ads),
++                'adset_ids': sorted(observed_sets), 'identities': sorted(observed_media)}
++        reservations = [{'asset_id': x.get('asset_id'), 'reservation_request_id': x.get('reservation_request_id')}
++                        for x in linked]
++        proof = SourceMediaProof('PURE_CLONE_SOURCE_MEDIA_READ_ONLY_V1', request_digest(request),
++            account_id, request['source_channel_id'], started, digest(inv), cid,
++            request['source_number'], tuple(sorted(bindings)), frozenset(identities),
++            json.dumps(reservations, sort_keys=True), json.dumps(historical, sort_keys=True))
++        proof.validate(request, account_id, base)
++        # Audit only; no cache consumer, inventory reservation or manifest mutation.
++        driver.atomic_json(q.root(base) / 'queue/source-media' / (request['request_id'] + '.json'), proof.receipt())
++        return proof
+--- /dev/null
++++ tests/test_shein_source_media.py
+@@ -0,0 +1,226 @@
++"""Offline fixtures only. No provider writes or credentials."""
++import copy
++import fcntl
++import json
++import sys
++import time
++import unittest
++from dataclasses import replace
++from pathlib import Path
++from unittest.mock import Mock, patch
++sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++import test_shein_decision_wait as fixtures
++from ares_campaign_v3 import shein_source_media as sm, shein_request_queue as q, shein_decision_wait as dw
++
++
++class SourceMediaTests(unittest.TestCase):
++    def setUp(self):
++        self.fixture = fixtures.DecisionWaitTests()
++        self.fixture.setUp()
++        f = self.fixture
++        self.base = f.base
++        self.request = {k:v for k,v in f.request.items() if k != 'campaign_groups'}
++        self.request.update(mode='pure_clone', source_number=11)
++        f.inv.with_suffix(f.inv.suffix + '.lock').touch()
++        cfg = self.base / 'data/ares/meta-ads/engine-v3/config.json'
++        q.atomic(cfg, {'state_root':str(f.eroot), 'accounts':{'123':{'token_item':'FIXTURE'}}})
++        checkpoint=json.loads(f.cp.read_text())
++        checkpoint['bundles']=[{'ad_ids':['OLD-AD-C1','OLD-AD-C2'],'adset_ids':['OLD-SET-C1','OLD-SET-C2']}]
++        q.atomic(f.cp,checkpoint);f.seal()
++        self.old_live = {cid:{'campaign':{'id':cid,'account_id':'123','status':'PAUSED'},
++            'adsets':{'data':[{'id':'OLD-SET-'+cid,'status':'PAUSED'}]},
++            'ads':{'data':[{'id':'OLD-AD-'+cid,'status':'PAUSED','creative':{'id':'OLD-CR-'+cid,
++                'object_story_spec':{'video_data':{'video_id':'old-video'}}}}]}} for cid in ['C1','C2']}
++        self.campaign = {'id':'SOURCE','account_id':'123','name':'011 - fixture','status':'ACTIVE'}
++        self.children = {'adsets':{'data':[{'id':'SET','account_id':'123','campaign_id':'SOURCE','status':'ACTIVE'}]},
++            'ads':{'data':[{'id':'AD','account_id':'123','campaign_id':'SOURCE','adset_id':'SET','status':'ACTIVE',
++                'source_ad_id':'SHARED-TEMPLATE-NOT-MEDIA','creative':{'id':'CR','object_story_spec':{'link_data':{'image_hash':'new-hash'}}}}]}}
++        common = Mock(); common.get_token_from_1password.return_value = ('FIXTURE','field')
++        self.auth = patch.object(q,'authorize_queue_request',return_value={'account_id':'123'})
++        self.loader = patch('ares_campaign_v3.shein_single_clone._load_common',return_value=common)
++        self.batch = patch('ares_campaign_v3.shein_single_clone._batch',side_effect=self.read)
++        self.historical = patch('ares_campaign_v3.shein_single_clone._readback',side_effect=lambda c,t,cid:copy.deepcopy(self.old_live[cid]))
++        self.auth.start(); self.loader.start(); self.batch.start();self.historical.start()
++        self.addCleanup(self.auth.stop);self.addCleanup(self.loader.stop);self.addCleanup(self.batch.stop)
++        self.addCleanup(self.historical.stop)
++        self.addCleanup(f.tearDown)
++
++    def read(self, common, token, requests):
++        if requests[0]['name']=='campaigns': return {'campaigns':{'data':[copy.deepcopy(self.campaign)]}}
++        return copy.deepcopy(self.children)
++
++    def resolve(self): return sm.resolve(self.request,'123',self.base)
++    def deps(self): return q.dependencies(self.request,'123',self.base)
++
++    def test_live_typed_disjoint_proof_releases_only_dependency(self):
++        before=[p.read_bytes() for p in [self.fixture.inv,self.fixture.spath,self.fixture.cp,self.fixture.lease]]
++        proof=self.resolve()
++        self.assertIsInstance(proof,sm.SourceMediaProof)
++        self.assertEqual(proof.source_campaign_id,'SOURCE');self.assertEqual(proof.reservations[0]['asset_id'],'NEW')
++        self.assertEqual(self.deps(),[])
++        self.assertEqual(before,[p.read_bytes() for p in [self.fixture.inv,self.fixture.spath,self.fixture.cp,self.fixture.lease]])
++        self.assertFalse(q.terminal(self.fixture.state));self.assertTrue(dw.pending(self.base,self.fixture.owner))
++
++    def test_missing_source_proof_never_treats_empty_as_disjoint(self):
++        self.children['ads']['data'][0]['creative']={'id':'CR'}
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_shared_primary_hash_blocks(self):
++        self.children['ads']['data'][0]['creative']['object_story_spec']['link_data']['image_hash']='old-video'
++        self.fixture.rows[0]['image_hash']='old-video';self.fixture.write_rows()
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_shared_inventory_checksum_blocks(self):
++        self.fixture.rows[0]['clean_checksum']='old-bytes';self.fixture.write_rows()
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_active_reservation_blocks_and_is_never_transferred(self):
++        self.fixture.rows[0]['reservation_request_id']='active-owner';self.fixture.write_rows()
++        self.assertEqual(self.deps(),['active-owner'])
++        before=self.fixture.inv.read_bytes()
++        q.claim_terminal(self.request,'123',self.base)
++        self.assertEqual(before,self.fixture.inv.read_bytes())
++
++    def test_terminal_reservation_stays_with_original_lineage(self):
++        self.fixture.rows[0]['reservation_request_id']='complete-owner';self.fixture.write_rows()
++        q.atomic(q.root(self.base)/'single-clone/complete-owner/state.json',{'phase':'COMPLETE','summary':{'campaigns':[{'campaign_id':'C'}]}})
++        self.assertEqual(self.deps(),[])
++        before=self.fixture.inv.read_bytes();q.claim_terminal(self.request,'123',self.base)
++        self.assertEqual(before,self.fixture.inv.read_bytes())
++
++    def test_partition_mismatch_in_reservation_fails_closed(self):
++        self.fixture.rows[0]['reservation_request_id']='other-owner';self.fixture.write_rows()
++        q.atomic(q.root(self.base)/'single-clone/other-owner/state.json',{'request':{'source_channel_id':'OTHER'}})
++        with self.assertRaisesRegex(ValueError,'partition'):self.deps()
++
++    def test_foreign_lease_blocks(self):
++        q.atomic(self.fixture.lease,{'account_id':'123','request_id':'other','status':'IN_PROGRESS','blocks_readers':True})
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_account_lock_blocks(self):
++        with self.fixture.alock.open('rb') as h:
++            fcntl.flock(h,fcntl.LOCK_EX|fcntl.LOCK_NB)
++            self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_writer_update_lock_blocks(self):
++        with self.fixture.lease.with_suffix('.lock').open('rb') as h:
++            fcntl.flock(h,fcntl.LOCK_EX|fcntl.LOCK_NB)
++            self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_inventory_update_lock_blocks(self):
++        with self.fixture.inv.with_suffix('.jsonl.lock').open('rb') as h:
++            fcntl.flock(h,fcntl.LOCK_EX|fcntl.LOCK_NB)
++            self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_missing_lock_blocks(self):
++        self.fixture.alock.unlink();self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_wrong_source_account_blocks(self):
++        self.campaign['account_id']='456';self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_wrong_child_account_or_parent_blocks(self):
++        for field in ['account_id','campaign_id','adset_id']:
++            with self.subTest(field=field):
++                original=copy.deepcopy(self.children);self.children['ads']['data'][0][field]='OTHER'
++                self.assertEqual(self.deps(),[self.fixture.owner]);self.children=original
++
++    def test_missing_or_ambiguous_source_blocks(self):
++        self.campaign['name']='012 - wrong';self.assertEqual(self.deps(),[self.fixture.owner])
++        with patch('ares_campaign_v3.shein_single_clone._batch',return_value={'campaigns':{'data':[self.campaign,self.campaign]}}):
++            self.request['source_number']=12;self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_pagination_incomplete_blocks(self):
++        self.children['ads']['paging']={'next':'FIXTURE'};self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_stale_or_future_proof_rejected(self):
++        proof=self.resolve()
++        for at in [time.time()-121,time.time()+60]:
++            with self.assertRaises(ValueError):replace(proof,observed_at=at).validate(self.request,'123',self.base)
++
++    def test_changed_inventory_rejects_receipt(self):
++        proof=self.resolve();self.fixture.inv.write_text(self.fixture.inv.read_text()+'\n')
++        with self.assertRaises(ValueError):proof.validate(self.request,'123',self.base)
++
++    def test_wrong_request_account_channel_number_rejects_receipt(self):
++        proof=self.resolve()
++        for key,value in [('account','456'),('source_channel_id','OTHER'),('source_number',12),('budget_usd','999')]:
++            with self.subTest(key=key),self.assertRaises(ValueError):proof.validate({**self.request,key:value},'123',self.base)
++
++    def test_untyped_receipt_never_accepted(self):
++        self.assertFalse(dw.inert_for(self.request,self.fixture.state,[],self.base,source_proof=self.resolve().receipt()))
++
++    def test_image_afs_and_video_variants_captured(self):
++        self.children['ads']['data'][0]['creative']={'id':'CR','asset_feed_spec':{
++            'images':[{'hash':'img'}],'videos':[{'video_id':'vid'}]}}
++        self.fixture.rows += [{'asset_id':'IMG','image_hash':'img','checksum':'img-bytes'},
++                              {'asset_id':'VID','video_id':'vid','checksum':'vid-bytes'}]
++        self.fixture.write_rows()
++        proof=self.resolve();self.assertIn(('identity','vid'),proof.identities);self.assertIn(('identity','img'),proof.identities)
++
++    def test_unresolved_inventory_lineage_fails_closed(self):
++        self.fixture.rows=[];self.fixture.write_rows()
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_ambiguous_media_alias_lineage_fails_closed(self):
++        self.fixture.rows.append({'asset_id':'OTHER','image_hash':'new-hash','checksum':'other'})
++        self.fixture.write_rows();self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_thumbnail_without_primary_video_is_not_media_proof(self):
++        self.children['ads']['data'][0]['creative']={'id':'CR','object_story_spec':{'video_data':{'image_hash':'new-hash'}}}
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_transitive_alias_closure_independent_of_inventory_order(self):
++        rows=[{'image_hash':'bridge','checksum':'old'}, {'image_hash':'new','checksum':'bridge'}]
++        identities,linked=sm.expand({('identity','new')},rows)
++        self.assertIn(('identity','old'),identities);self.assertEqual(len(linked),2)
++
++    def test_source_lineage_is_not_equivalent_to_media_reuse(self):
++        self.fixture.state['source']={'ads':[{'source_ad_id':'SHARED-TEMPLATE-NOT-MEDIA'}]};self.fixture.seal()
++        self.assertEqual(self.deps(),[])
++
++    def test_stale_historical_evidence_still_blocks(self):
++        self.fixture.spath.write_text('{}');self.assertEqual(self.deps(),[self.fixture.owner])
++
++    def test_live_historical_active_changed_media_or_ids_blocks(self):
++        for change in ['status','media','ids']:
++            with self.subTest(change=change):
++                before=copy.deepcopy(self.old_live)
++                if change=='status':self.old_live['C1']['campaign']['status']='ACTIVE'
++                elif change=='media':self.old_live['C1']['ads']['data'][0]['creative']['object_story_spec']['video_data']['video_id']='CHANGED'
++                else:self.old_live['C1']['ads']['data'][0]['id']='CHANGED'
++                self.assertEqual(self.deps(),[self.fixture.owner]);self.old_live=before
++
++    def test_changed_historical_digest_invalidates_proof(self):
++        proof=self.resolve();self.fixture.spath.write_text(self.fixture.spath.read_text()+'\n')
++        with self.assertRaises(ValueError):proof.validate(self.request,'123',self.base)
++
++    def test_maintenance_hold_and_foreground_still_prevent_dispatch(self):
++        q.enqueue(self.request,'campaign',[self.fixture.owner],self.base)
++        path=q.job_path(self.base,self.request['request_id']);job=json.loads(path.read_text())
++        for gates in [{'maintenance_hold':{'task':'FIXTURE'}},{'dispatch_owner':'foreground'}]:
++            q.atomic(path,{**job,**gates})
++            with patch.object(q.subprocess,'run') as run,patch.object(q,'notify') as notify:
++                q.tick(job,self.base)
++            run.assert_not_called();notify.assert_not_called()
++
++    def test_same_resume_lease_allowed_but_foreign_active_writer_still_blocks(self):
++        q.atomic(q.root(self.base)/'single-clone'/self.request['request_id']/'state.json',{'request':self.request,'phase':'RECOVERY_PENDING'})
++        q.atomic(self.fixture.lease,{'account_id':'123','request_id':self.request['request_id'],'status':'DEFERRED_QUOTA','blocks_readers':True})
++        self.assertEqual(self.deps(),[])
++        q.atomic(q.root(self.base)/'single-clone/foreign/state.json',{'request':{'account':'123','request_id':'foreign'},'phase':'ENGINE_PENDING'})
++        self.assertEqual(self.deps(),['foreign'])
++
++    def test_canonical_defaulted_resume_is_same_immutable_intake(self):
++        op=self.base/'data/ares/meta-ads/operations/SHEIN-US-DIRECT.json'
++        q.atomic(op,{'operation_id':'SHEIN-US-DIRECT','request_defaults':{
++            'final_status':'ACTIVE','authority':'344196393512075265','scope':'new_creation_requests_only'}})
++        normalized={**self.request,'status':'ACTIVE'}
++        q.atomic(q.root(self.base)/'single-clone'/self.request['request_id']/'state.json',{'request':normalized,'phase':'RECOVERY_PENDING'})
++        q.atomic(self.fixture.lease,{'account_id':'123','request_id':self.request['request_id'],'status':'DEFERRED_QUOTA','blocks_readers':True})
++        self.assertEqual(self.deps(),[])
++        normalized['budget_usd']='999'
++        q.atomic(q.root(self.base)/'single-clone'/self.request['request_id']/'state.json',{'request':normalized,'phase':'RECOVERY_PENDING'})
++        self.assertEqual(self.deps(),[self.fixture.owner])
++
++if __name__=='__main__':unittest.main()

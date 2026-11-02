@@ -1773,12 +1773,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1566932068317921331",
-      "next_step": "t_0c21790bprovarfontes/midiadesjunta,manutencaocentralminima,testesnegativos/reportinfra/hold5jobs;depoist_a4927be0writerunico,takeovercentral5inputs,QAintegral25/readbackACTIVE/agregador/entregaGETnaorigem.Preservarhistorico006007PAUSED,requests/IDs/SLA;semreplay,semZeusfallback.",
-      "objective": "Concluir25duplicacoes Mavroa937846586033361:5cada011,010,012,009,008;USD45cada;03nov202600:12America/New_York;ACTIVEaposQA.",
+      "next_step": "Executar cada fonte sequencialmente pelo runner central e validar QA, árvores ACTIVE e entrega única na origem",
+      "objective": "Concluir 25 duplicações autorizadas das fontes 011,010,012,009,008 na Mavroa G006",
       "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1566932068317921331/aggregate-progress.json",
-      "state": "5inputsimutaveis e5jobswaitingpersistidos,zerowritesretornados;primeirodryrunok.filahistoricac3mantidafailclosed:seletorpureclonevazio impedeprovardesjuncaomidia,t_0c21790brunningmanutencaoseparada,t_a4927be0dependenteentrega.aresapenasconfirmoudataregistrada,naoagendamentofinal.",
+      "state": "execução foreground única; handoff/digests e cinco inputs conferidos; zero campanhas novas nesta retomada; inspeção live das dependências em curso",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-02T21:52:54+00:00"
+      "updated_at": "2026-11-02T22:13:06+00:00"
     },
     {
       "agent": "ares",
@@ -7783,12 +7783,12 @@
     {
       "agent": "ares",
       "id": "t_0c21790b",
-      "next_step": "Resolver fontes e mídia live read-only; provar disjunção antes de liberação foreground",
+      "next_step": "Entrega t_a4927be0: cinco jobs FOREGROUND_OWNED, dependências vazias por prova real; seguir HANDOFF.md sem replay/alteração dos inputs e exigir QA/readback ACTIVE dos 25 IDs",
       "objective": "Manutenção delimitada fila pure_clone; preservar cinco requests e histórico material",
-      "source": "work/t_0c21790b/before-inventory.json",
-      "state": "cinco jobs waiting preservados em backup e maintenance_hold confirmado sob dispatch locks; zero writes de campanha",
+      "source": "/root/mgs-agent/work/t_0c21790b/HANDOFF.md",
+      "state": "completed",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-02T21:53:22+00:00"
+      "updated_at": "2026-11-02T22:10:41+00:00"
     },
     {
       "agent": "zeus",
@@ -8342,5 +8342,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T21:53:22+00:00"
+  "updated_at": "2026-11-02T22:13:06+00:00"
 }
