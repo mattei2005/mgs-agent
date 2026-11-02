@@ -120,6 +120,8 @@ def validate_reconciliation_source(d,meta,a,c,job):
     controls require their exact control cutover. Other production keeps the
     original source contract. Never synthesize a Shared Drive API response.
     """
+    import mgs_flat_source_compat as flat_source
+    if flat_source.verify(d,meta,a,job):return True
     import ares_archive_namespace as namespace
     if namespace.verify_reconciled_source(d,meta,a,c,job):return True
     if meta.get('driveId')!=c['source_drive_id']:

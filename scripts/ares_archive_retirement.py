@@ -191,6 +191,8 @@ def publish_receipt(d,c,job,asset,intent,path):
     return fid
 
 def retire_asset(d,c,job,asset,row_fingerprint):
+    import mgs_flat_source_compat as flat_source
+    if flat_source.retained(asset['sourceId']):raise RetirementError('FLAT_RETAINED_SOURCE_DELETE_FORBIDDEN')
     validate_active_policy(c)
     import ares_archive_storage as storage
     folder=b.DATA/'retirements';folder.mkdir(exist_ok=True);path=folder/('source-'+asset['sourceId']+'.json');intent=_object(path,{})
@@ -247,6 +249,12 @@ def run_cycle(d,c,state,apply=False):
         if verified.get('kind')!='lineage' or verified.get('validationOnly') is True:continue
         job=_object(b.DATA/'jobs'/('job-'+jid+'.json'));entries=[index['mappings'].get(a['sourceId'],{}) for a in job['assets']]
         if entries and all(e.get('sourceRetirementReceipt') for e in entries):continue
+        import mgs_flat_source_compat as flat_source
+        if any(flat_source.retained(a['sourceId']) for a in job['assets']):
+            for asset in job['assets']:
+                if flat_source.retained(asset['sourceId']):flat_source.verify(d,d.meta(asset['sourceId']),asset,job)
+            result.setdefault('flat_cutover_retained_pairs',[]).append(jid)
+            continue
         import ares_archive_locations as locations
         if locations.active():
             import mgs_archive_layout_cutover as layout
