@@ -15,13 +15,15 @@ def ssh(command,input_data=None,timeout=180):
  finally:os.close(r)
  if p.returncode:raise RuntimeError('SSH queue transport exit='+str(p.returncode))
  return p.stdout.decode()
-os.environ['ARES_META_TOKEN_CACHE_PATH']='/root/.cache/mgs/finance-bm-inventory-meta-token.json'
+# Rodolfo1566815743050260602: tested existing Roosevelt item; immutable ID, no token rotation.
+META_TOKEN_ITEM='4c2p3bon37smfbklfhuej5ywkm'
+os.environ['ARES_META_TOKEN_CACHE_PATH']='/root/.cache/mgs/finance-bm-inventory-meta-4c2p3bon37smfbklfhuej5ywkm.json'
 spec=importlib.util.spec_from_file_location('meta','/root/mgs-agent/scripts/ares-meta-common.py');meta=importlib.util.module_from_spec(spec);spec.loader.exec_module(meta)
 nspec=importlib.util.spec_from_file_location('finance_notifications',ROOT/'finance-notifications.py');notices=importlib.util.module_from_spec(nspec);nspec.loader.exec_module(notices)
 BM='155263197283282';TARGET='/home/mgsfinance/releases/pg-auth-1545934831664242748';STAGE='/var/tmp/mgs-finance-origin-1546618148571058266';BUILD=hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()[:16]
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def inventory():
- cfg=json.loads(pathlib.Path('/root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json').read_text())['accounts'][0];token,_=meta.get_token_from_1password(os.environ.get('FINANCE_META_ITEM') or 'APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei')
+ cfg=json.loads(pathlib.Path('/root/mgs-agent/data/ares/meta-ads/accounts/1034081997659047.json').read_text())['accounts'][0];token,_=meta.get_token_from_1password(META_TOKEN_ITEM)
  status,business,_=meta.graph_get(BM,token,{'fields':'id,name'})
  if status!=200 or business.get('id')!=BM or business.get('name')!='Digital Trust':raise RuntimeError('BM identity/access unavailable')
  out={};pages=0

@@ -22,7 +22,15 @@ Resolva o ID e confirme a finalidade pelo histórico e pelos consumidores atuais
 
 ## Habilitar respostas em canais compartilhados
 
-Quando Rodolfo pedir para habilitar agentes em um canal, separar o destino indicado da thread onde ele fez o pedido e distinguir acesso Discord, roteamento do gateway e regra de menção. Por padrão operacional, deixar o executor responsável responder sem menção no canal dedicado e Zeus por menção, sem habilitar resposta livre dos dois nem ampliar permissões de usuários. Validar comunicação real no destino antes de concluir; teste com @menção não prova resposta sem menção. Receita: `references/route-pack-02.md`, seção **Canal novo de relatórios: diagnóstico e habilitação**.
+Ao criar ou habilitar um canal compartilhado:
+
+1. Resolver o destino e a identidade exata dos participantes; separar visibilidade Discord, autorização para comandar o agente e admissão de mensagens pelo gateway. Criar o canal não conclui as outras duas camadas.
+2. Identificar o agente responsável. Ele responde sem menção no canal dedicado, inclusive quando o responsável é Zeus; Zeus exige menção quando é visitante de outro executor. Não habilitar resposta livre simultânea de dois agentes por padrão.
+3. Preservar o padrão de Rodolfo: mensagem humana comum nova no canal pai abre uma thread ancorada na mensagem; continuação permanece na thread existente. Resposta sem menção não significa entrega inline. Configurar participantes automáticos por canal pai, sem adicionar o colaborador globalmente às conversas privadas.
+4. Quando Rodolfo delegar Full de uma área, registrar usuário, domínio e canal/threads na fonte canônica e reconciliar allowlist de transporte, prompt/SOUL e rota. Executar pedidos não críticos dentro da delegação sem novo OK por tarefa; não converter Full de domínio em administração global nem dispensar gates críticos.
+5. Validar separadamente canal criado, autoridade persistida, configuração preparada, processo ativado e comunicação observada. Não declarar atendimento ativo por sucesso de criação ou edição em disco; teste com menção não prova resposta sem menção.
+
+Receita de habilitação e cobertura de teste: `references/route-pack-02.md`, seção **Canal novo de relatórios: diagnóstico e habilitação**. Visibilidade e membership por canal: `references/route-pack-09.md`.
 
 ## Correção de respostas em outra thread
 

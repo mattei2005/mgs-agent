@@ -1,6 +1,8 @@
 # API-first spend → site daily report — Rodolfo correction2026-09-08
 
 ## Active authority and explicit supersession
+
+**Finance Meta credential — Rodolfo1566815743050260602:** resolve `/root/mgs-agent/docs/finance-meta-read-credential.md` before repairing Meta lookup. The confirmed existing Roosevelt USER item is pinned by immutable ID `4c2p3bon37smfbklfhuej5ywkm`; its observed25/10 title supersedes the absent02/09 title for this financial reader only. The worker and both collector routes must resolve the same approved item and isolated protected cache; no silent cross-identity fallback. Verify `/me`, token validity/scopes, exact BM/account and real read-only spend coverage before activating a replacement; preserve financial readback and inspect the current checkpoint for publication. Source-title repair is not permission to create/revoke tokens, edit the vault or operate campaigns.
 Thread1545426987756298340. Rodolfo1547012165150711858 rejected the imported-spend panel in Contas de Anúncio. During the same execution he explicitly required API-first discovery, automatic Dash registration and correct site linkage for new spending accounts, then daily spend insertion. He confirmed notifications in this SAME Discord channel/thread and explicitly requested persistence before context fills. This supersedes the previous `registered_accounts_only`, `no automatic registration`, and user-facing imported ledger in Accounts assumptions from1546991137171181578. Do not resurrect those as active policy.
 
 ## Required product behavior

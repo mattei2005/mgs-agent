@@ -128,7 +128,7 @@ def missing_spend_account(a,start,end,meta,token,headers):
 
 def collect(registry,start,end,directory):
  dates(start,end);load_env();directory.mkdir(parents=True,exist_ok=True,mode=0o700);accounts=registry['accounts'];assert len({(a.get('platform','meta'),a['id']) for a in accounts})==len(accounts)
- spec=importlib.util.spec_from_file_location('finance_worker',ROOT/'meta-lookup-worker.py');worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker);token,_=worker.meta.get_token_from_1password('APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei');headers=google_headers();discovery_errors=[];discovered=[]
+ spec=importlib.util.spec_from_file_location('finance_worker',ROOT/'meta-lookup-worker.py');worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker);token,_=worker.meta.get_token_from_1password(worker.META_TOKEN_ITEM);headers=google_headers();discovery_errors=[];discovered=[]
  for platform in ['meta','google']:
   try:
    if platform=='meta':inv,pages=worker.inventory()
@@ -156,7 +156,7 @@ def collect(registry,start,end,directory):
 def collect_api_first(start,end,directory):
  """Discover and inspect all API-visible accounts before reading the Dash registry."""
  dates(start,end);load_env();directory.mkdir(parents=True,exist_ok=True,mode=0o700)
- spec=importlib.util.spec_from_file_location('finance_api_worker',ROOT/'meta-lookup-worker.py');worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker);token,_=worker.meta.get_token_from_1password('APP NOVO 02/09 Token Meta API - Contas de Anuncio Meta - Roosevelt Mattei');headers=google_headers();discovered=[];errors=[]
+ spec=importlib.util.spec_from_file_location('finance_api_worker',ROOT/'meta-lookup-worker.py');worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker);token,_=worker.meta.get_token_from_1password(worker.META_TOKEN_ITEM);headers=google_headers();discovered=[];errors=[]
  for platform in ['meta','google']:
   try:
    if platform=='meta':inventory,_=worker.inventory()

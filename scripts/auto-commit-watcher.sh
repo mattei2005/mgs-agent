@@ -78,6 +78,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^scripts/mgs_private_sto
 # only. Exact evidence path; sibling receipts, credentials and copies stay blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/ares/creative-ops/executions/intake-1565379383017873569/mgs_private_stock_transport\.py\.last\.json$"
 
+# Reviewed finance read-only binding documentation: immutable reference IDs,
+# authority and validation only; no credential values. Exact path, not siblings.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^docs/finance-meta-read-credential\.md$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

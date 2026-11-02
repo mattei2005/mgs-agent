@@ -9559,6 +9559,25 @@
       "updated_at": "2026-10-28T13:34:53+00:00"
     },
     {
+      "canonical_key": "finance.meta_read_credential",
+      "canonical_source": "docs/finance-meta-read-credential.md",
+      "consumers": [
+        "finance-media-spend",
+        "finance-meta-lookup",
+        "zeus"
+      ],
+      "domain": "finance",
+      "effective_at": "2026-11-02T14:24:39+00:00",
+      "id": "FINANCE-META-READ-CREDENTIAL-1566815743050260602",
+      "kind": "decision",
+      "owner": "Rodolfo / Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Vínculo de leitura Meta financeiro por ID estável Roosevelt",
+      "updated_at": "2026-11-02T14:24:39+00:00"
+    },
+    {
       "canonical_key": "finance.mfa_all_users",
       "canonical_source": "reports/finance-full-audit-remediation-1548835136693600328.md",
       "consumers": [
@@ -15883,5 +15902,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T14:10:10+00:00"
+  "updated_at": "2026-11-02T14:24:39+00:00"
 }

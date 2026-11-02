@@ -134,6 +134,13 @@ fi
             "data/ares/creative-ops/executions/intake-other/mgs_private_stock_transport.py.last.json": 1,
             "data/ares/creative-ops/executions/intake-1565379383017873569/private_credentials.json": 1,
             "data/ares/creative-ops/executions/intake-1565379383017873569/token.json": 1,
+            "docs/finance-meta-read-credential.md": 0,
+            "work/docs/finance-meta-read-credential.md": 1,
+            "docs/finance-meta-read-credential.md.bak": 1,
+            "docs/finance-meta-read-credential-other.md": 1,
+            "docs/finance-meta-read-credential.json": 1,
+            "docs/finance-meta-token.json": 1,
+            "docs/credentials.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

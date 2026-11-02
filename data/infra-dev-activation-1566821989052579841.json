@@ -1,0 +1,75 @@
+{
+  "state": "active_validated",
+  "prepared_at": "2026-11-02T14:35:09.491530+00:00",
+  "source_message_id": "1566821989052579841",
+  "authority_message_id": "1566814888150700154",
+  "old_pid": "2750408",
+  "log_offset": 1448876,
+  "permission_overwrites": [
+    {
+      "id": "963808102891798649",
+      "type": 1,
+      "allow": "309237763136",
+      "deny": "0"
+    },
+    {
+      "id": "1185714635991679006",
+      "type": 0,
+      "allow": "0",
+      "deny": "1024"
+    },
+    {
+      "id": "344196393512075265",
+      "type": 1,
+      "allow": "309237763136",
+      "deny": "0"
+    },
+    {
+      "id": "1496296175014252634",
+      "type": 1,
+      "allow": "326417632320",
+      "deny": "0"
+    }
+  ],
+  "validator": "/root/mgs-agent/scripts/infra-dev-activation-1566821989052579841-validate.py",
+  "service_scope": [
+    "zeus-gateway.service"
+  ],
+  "channel_id": "1566814313086193795",
+  "origin_thread_id": "1566811879718785197",
+  "scheduled_at": "2026-11-02T14:37:25.965403+00:00",
+  "restart_timer_unit": "mgs-gateway-restart-20261102T143725Z-4073774.timer",
+  "validator_timer_unit": "mgs-infra-dev-validation-1566821989052579841.timer",
+  "preparation_report_id": "1566823425471942737",
+  "scheduled_delay_seconds": 60,
+  "result": {
+    "state": "active_validated",
+    "started_at": "2026-11-02T14:37:32.357793+00:00",
+    "authority_message_id": "1566814888150700154",
+    "restart_authority_message_id": "1566821989052579841",
+    "human_communication_observed": false,
+    "validated_at": "2026-11-02T14:39:39.817187+00:00",
+    "new_pid": "4085045",
+    "readiness": {
+      "ActiveState": "active",
+      "ExecMainStartTimestamp": "Mon 2026-11-02 09:39:26 EST",
+      "MainPID": 4085045,
+      "NRestarts": 0,
+      "SubState": "running",
+      "discord_connected": true,
+      "elapsed_seconds": 12.063,
+      "ready": true,
+      "service": "zeus-gateway.service"
+    },
+    "permission_overwrites_preserved": true,
+    "auto_thread_enabled": true,
+    "auto_add_users": [
+      "344196393512075265",
+      "963808102891798649"
+    ],
+    "free_response_channel": "1566814313086193795",
+    "report_infra_message_id": "1566824122846150667"
+  },
+  "completion_message_id": "1566824126184956079",
+  "finished_at": "2026-11-02T14:39:42.501022+00:00"
+}

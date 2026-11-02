@@ -172,6 +172,23 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def test_reviewed_finance_binding_documentation_commits(self):
+        name = "docs/finance-meta-read-credential.md"
+        path = self.repo / name
+        path.parent.mkdir(parents=True)
+        path.write_text("Synthetic binding documentation; reference IDs only.\n")
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
+
+    def test_finance_documentation_exception_blocks_sibling_credentials(self):
+        base = self.repo / "docs"
+        base.mkdir()
+        (base / "finance-meta-read-credential.md").write_text("Synthetic documentation.\n")
+        (base / "finance-meta-read-credential.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_stock_transport_exception_does_not_allow_sibling_secrets(self):
         base = self.repo / "scripts"
         base.mkdir()

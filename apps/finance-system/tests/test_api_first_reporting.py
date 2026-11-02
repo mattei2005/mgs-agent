@@ -5,6 +5,16 @@ sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]))
 from spend_report import render_report
 from finance_spend_sources import missing_spend_account,collect_account_with_retry,SourceError
 class ApiFirstReportingTests(unittest.TestCase):
+ def test_finance_meta_item_is_pinned_and_shared_by_all_readers(self):
+  import ast
+  root=pathlib.Path(__file__).resolve().parents[1];worker=ast.parse((root/'meta-lookup-worker.py').read_text());source=ast.parse((root/'finance_spend_sources.py').read_text());expected='4c2p3bon37smfbklfhuej5ywkm'
+  item=[n.value.value for n in ast.walk(worker) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='META_TOKEN_ITEM' for t in n.targets) and isinstance(n.value,ast.Constant)]
+  self.assertEqual(item,[expected])
+  calls=[n for n in ast.walk(source) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='get_token_from_1password'];self.assertEqual(len(calls),2)
+  for call in calls:self.assertEqual(ast.unparse(call.args[0]),'worker.META_TOKEN_ITEM')
+  reads=[n for n in ast.walk(worker) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='get_token_from_1password'];self.assertEqual(len(reads),1);self.assertEqual(ast.unparse(reads[0].args[0]),'META_TOKEN_ITEM')
+  text=(root/'meta-lookup-worker.py').read_text();self.assertIn('/root/.cache/mgs/finance-bm-inventory-meta-4c2p3bon37smfbklfhuej5ywkm.json',text)
+  self.assertNotIn('APP NOVO 02/09 Token Meta API',text+(root/'finance_spend_sources.py').read_text())
  def report(self):return {'pass':True,'period':'2026-09','since':'2026-09-01','until':'2026-09-07','totals':{'USD':'111206.16'},'api_totals':{'meta':{'accounts':34,'by_currency':{'USD':'114831.22'}}},'auto_registration':{'created':[{'id':'123','name':'Demo-US-01','site':'demo'}],'bound':[]},'exceptions':[],'missing_accounts':[]}
  def test_failure_is_actionable_not_green_success(self):
   r=render_report({'pass':False,'step':'source_collection','since':'2026-09-01','until':'2026-09-07'});self.assertTrue(r['attention']);self.assertTrue(r['actionable']);self.assertIn('não foi concluída',r['body'])
@@ -80,7 +90,7 @@ class FiveMinuteRetryTests(unittest.TestCase):
   import tempfile,collections
   import finance_spend_sources as s
   identities={v:{'account_id':v,'name':v,'currency':'USD','timezone':'America/New_York','business_id':'bm'} for v in ['11111','22222']}
-  worker=SimpleNamespace(meta=SimpleNamespace(get_token_from_1password=lambda _:('secret',None)),inventory=lambda:(identities,1))
+  worker=SimpleNamespace(META_TOKEN_ITEM='synthetic-test-item',meta=SimpleNamespace(get_token_from_1password=lambda _:('secret',None)),inventory=lambda:(identities,1))
   google=SimpleNamespace(inventory=lambda:({},0));counts=collections.Counter()
   def scan(a,*args):
    counts['scan'+a['account_id']]+=1
