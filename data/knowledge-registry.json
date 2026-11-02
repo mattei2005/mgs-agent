@@ -7640,15 +7640,33 @@
         "zeus"
       ],
       "domain": "storage",
-      "effective_at": "2026-11-02T14:09:05+00:00",
-      "id": "DRIVE-FLAT-INTAKE-TARGET-1566814476626563115",
+      "effective_at": "2026-11-02T16:16:24+00:00",
+      "id": "DRIVE-FLAT-INTAKE-ACTIVE-1566825959645253764",
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
       "status": "active",
       "superseded_by": null,
+      "title": "Entrada simples MGS ativa; arquivo30TB, IDs e acessos equivalentes preservados, sem exclusoes",
+      "updated_at": "2026-11-02T16:16:24+00:00"
+    },
+    {
+      "canonical_key": "storage.drive_layout.flat_intake.target",
+      "canonical_source": "context/drive-flat-intake-cutover.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "storage",
+      "effective_at": "2026-11-02T14:09:05+00:00",
+      "id": "DRIVE-FLAT-INTAKE-TARGET-1566814476626563115",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "superseded",
+      "superseded_by": "DRIVE-FLAT-INTAKE-ACTIVE-1566825959645253764",
       "title": "Redesenho confirmado: entrada MGS simples e organizacao definitiva30TB, com gate de preservacao de acessos",
-      "updated_at": "2026-11-02T14:09:05+00:00"
+      "updated_at": "2026-11-02T16:16:24+00:00"
     },
     {
       "canonical_key": "creative.archive.technical_cleanup.1566643959458168864",
@@ -15902,5 +15920,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T14:24:39+00:00"
+  "updated_at": "2026-11-02T16:16:24+00:00"
 }
