@@ -93,7 +93,7 @@ Não use `direct-traffic-cbo-operations` como fonte única da operação SHEIN. 
 
 1. Contrato vivo da operação: `data/ares/meta-ads/operations/SHEIN-US-DIRECT.json`.
 2. Conta Meta: runtime/API real e registro account-scoped criado após o primeiro readback.
-3. Criativos: `data/ares/creative-ops/inventory/assets.jsonl` + Shared Drive `MGS-AGENTS`.
+3. Criativos: `data/ares/creative-ops/inventory/assets.jsonl` + resolvedor `ares_archive_storage` e stock permanente nos 30 TB. O Shared Drive MGS é entrada/staging, não acervo definitivo. Para mídia nova em UPLOAD MANUAL, usar o binding flat vivo e `creative-operations-mgs/references/flat-upload-intake.md`; upload não autoriza campanha e a pasta histórica por nicho/gestor não é entrada.
 4. Autoridade: `data/authorized-users.json` e `context/permissions-matrix.md`.
 5. Criação/clone/lote: skill `meta-campaign-engine-v3` e seu executor central.
 6. Contrato v3 da operação: `data/ares/meta-ads/operations/SHEIN-US-DIRECT-v3.json`.

@@ -9,10 +9,10 @@ Esta skill define o contrato, não um snapshot do rollout. Consultar estado/chec
 ## Identidades e destinos
 
 - Agentes: somente `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, pelo helper corporativo; não trocar `.env`, tokens, root de upload ou identidade.
-- Entrada e tratamento temporário: Shared Drive `MGS-AGENTS`, raiz `0AEwt4Ye690ocUk9PVA`, criativos `1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa`.
+- Entrada simples: `UPLOAD MANUAL` (`1ARBvLammWUHuAclNmcriwkkgeedKryBd`) no Shared Drive MGS. Tratamento temporário interno: `_PROCESSAMENTO` (`1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa`), sem árvore permanente oferecida ao usuário. Resolver o modo vivo por `ares_flat_intake.policy()`; receita `flat-upload-intake.md`.
 - Arquivo proprietário: `mgsdigitalcorp@gmail.com`, pasta privada `MGS-ARQUIVO`, ID `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`.
-- Controle no Shared Drive: `00_ARQUIVO_CONTROLE` (`1d3w4Xc1EjrmueciM_vCMgva6qJiqpFJR`), `REQUESTS` (`1yjIOwDLmhAaLNmDdt701WpoFNzNeDXGk`) e `RECEIPTS` (`1gmXrQ-nszxNCwqSytsbX5AEnhm1rvXUL`). São controle técnico, não candidatos criativos.
-- O worker Google cria as cópias como a conta dos 30 TB. A SA cria manifestos no Shared Drive, não novos arquivos binários no Meu Drive.
+- Controle vigente nos 30 TB: `_MGS_CONTROLE`; resolver os IDs de REQUESTS/RECEIPTS/RETIREMENTS pelo `queue-config.json` e pelo binding do control store. Os IDs antigos de controle são histórico, não novos destinos no Shared Drive.
+- O componente owner isolado cria as cópias como a conta dos 30 TB; agentes e verificadores continuam SA. A SA publica controles pelos slots aprovados e não cria binários diretamente no Meu Drive.
 
 ## Após um intake futuro totalmente verificado
 
@@ -31,7 +31,7 @@ python3 /root/mgs-agent/scripts/ares_archive_bridge.py enqueue-lineage --asset-i
 
 ## Intake autônomo e exclusividade
 
-O job nativo Ares `528c5710269d` usa os 114 IDs registrados em `upload-context-layout.json`, não o filename, para operação/gestor. O contrato completo está em `integrations/creative-archive-30tb/AresIntakeJobPrompt.txt`; o estado vivo está em `intake-config.json` e `intake-state.json` no mesmo diretório da fila.
+O job nativo Ares `528c5710269d` resolve o modo por `flat-intake-binding.json`. No modo flat ativo, usa o registro explícito de pedidos em `flat-intake-requests.json`, com mensagem/autor/canal nativos e IDs exatos; não usa filename nem os antigos slots para adivinhar operação/gestor. O contrato está em `integrations/creative-archive-30tb/AresIntakeJobPrompt.txt`; estado vivo em `intake-config.json` e `intake-state.json`. O fluxo contextual antigo é compatibilidade enquanto o binding flat não estiver ativo.
 
 Antes de qualquer writer manual tocar uma fonte, consultar `ares_autonomous_intake.assert_source_writer(source_id)`; uma fonte reclamada por batch ativo não pode ganhar outro executor. O executor dono informa o batch exato em `ARES_INTAKE_BATCH_ID` nas primitivas mutantes e retoma seu plano persistido. Nunca roubar claim nem substituir source IDs depois de timeout.
 
@@ -49,7 +49,7 @@ python3 /root/mgs-agent/scripts/ares_manual_intake_completion.py --execution-dir
 
 O helper não trata, copia, apaga mídia ou altera regras: valida novamente os pares RAW/clean, hashes completos, metadados limpos, inventário/reserva, ACK SA nativo, owner/ACL e atalhos permanentes. Usa os locks `intake → queue → inventory`, registra o claim/conclusão com a hora real e preserva o timestamp no replay. Exigir readback do batch `complete`, das fontes em `completed` e de `intake-completion.json`; `already_complete` é replay sem novo transporte. Sem `--apply`, somente lê e verifica. Manifesto não suportado, duplicata, claim concorrente ou prova incompleta é bloqueio: não inserir um claim por JSON improvisado nem ampliar a seleção para fazê-lo passar.
 
-A retirada posterior continua exclusivamente em `ares_archive_retirement.py`, com a mesma confirmação vigente e no máximo dois pares por ciclo. Não chamar DELETE pelo executor manual. Separar entrega permanente validada, conclusão canônica e retirada efetiva do staging; só declarar esta última após recibos nativos e ausência dos IDs antigos. Não refazer tratamento para corrigir apenas esse vínculo.
+A disposição posterior depende do modo vivo. No flat confirmado, `same_id_source_preservation=true` bloqueia DELETE de criativos e a manutenção privada move as gerações concluídas para os 30 TB com os mesmos IDs e provas nativas; não declarar ausência global do ID, que continua preservado no arquivo. Fora desse modo, o controlador legado conserva seus gates e limite originais. Nunca chamar DELETE pelo executor manual, refazer tratamento para corrigir só o vínculo ou confundir entrega, conclusão e saída efetiva do staging.
 
 ## Conferência e leitura
 

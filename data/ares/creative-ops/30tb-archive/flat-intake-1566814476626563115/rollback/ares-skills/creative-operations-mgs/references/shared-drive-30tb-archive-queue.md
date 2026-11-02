@@ -1,0 +1,81 @@
+# Arquivo 30 TB — fila de cópia e integração segura
+
+## Autoridade e estado
+
+Rodolfo confirmou explicitamente a alteração das skills Creative Operations e Taxonomia e a integração da fila na mensagem `1562104715271999589`, thread `1562078493498540042`. A integração geral foi aprovada em `1562087305051902063`. Esta confirmação não ativa exclusão da origem, não altera campanhas/budgets e não autoriza migrar ou limpar o acervo anterior.
+
+Esta skill define o contrato, não um snapshot do rollout. Consultar estado/checkpoint e evidências na fonte canônica ao final, e a configuração viva `/root/mgs-agent/data/ares/creative-ops/30tb-archive/queue-config.json`. Com `queue_enabled=false`, preservar integralmente o fluxo atual. Distinguir teste local, cópia real, ACK, relógio Google, reconciliação SA, intake e consumidores; nenhuma dessas camadas isolada prova automação completa. Versão staged do worker não é versão ativa até execução/heartbeat do owner confirmado.
+
+## Identidades e destinos
+
+- Agentes: somente `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, pelo helper corporativo; não trocar `.env`, tokens, root de upload ou identidade.
+- Entrada e tratamento temporário: Shared Drive `MGS-AGENTS`, raiz `0AEwt4Ye690ocUk9PVA`, criativos `1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa`.
+- Arquivo proprietário: `mgsdigitalcorp@gmail.com`, pasta privada `MGS-ARQUIVO`, ID `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`.
+- Controle no Shared Drive: `00_ARQUIVO_CONTROLE` (`1d3w4Xc1EjrmueciM_vCMgva6qJiqpFJR`), `REQUESTS` (`1yjIOwDLmhAaLNmDdt701WpoFNzNeDXGk`) e `RECEIPTS` (`1gmXrQ-nszxNCwqSytsbX5AEnhm1rvXUL`). São controle técnico, não candidatos criativos.
+- O worker Google cria as cópias como a conta dos 30 TB. A SA cria manifestos no Shared Drive, não novos arquivos binários no Meu Drive.
+
+## Após um intake futuro totalmente verificado
+
+1. Terminar o contrato vigente de tratamento: estabilidade, classificação visual, naming congelado, limpeza, readback/SHA, READY (ou gestor explicitamente autorizado), original em LEGACY e inventário. Não usar o CLI CSV histórico como substituto desse contrato.
+2. Consultar `queue-config.json`. Enquanto a fila estiver desabilitada, não forçar enqueue, mudar auth ou redefinir o destino físico do intake. O recurso ainda está em validação de implantação, não é um erro do criativo.
+3. Quando a fila estiver habilitada e o lote for novo dentro de `effective_after`, o produtor/reconciliador recorrente `ares_archive_automation.py` observa o inventário após todos os gates de tratamento e enfileira internamente, sem aprovação por arquivo e sem alterar reserva/elegibilidade. Não iniciar um produtor paralelo por thread. O CLI abaixo é uma rota de recuperação manual somente após conferir liveness/checkpoint e serializar pelo mesmo lock:
+
+```
+python3 /root/mgs-agent/scripts/ares_archive_bridge.py enqueue-lineage --asset-id <asset_id_exato> --apply
+```
+
+4. O produtor exige uma única linhagem, `metadata_clean=true`, primeiro recebimento e criação dos dois arquivos posteriores ao corte, RAW em LEGACY, clean no READY ou pasta de gestor exata, e SHA correspondente aos dois checksums canônicos. Não enfileirar registros históricos por varredura, inventar timestamps ou criar uma nova linhagem para um reupload exato. Linhagens históricas/duplicatas ligadas a elas ficam preservadas no fluxo existente, sem alteração ou limpeza retroativa.
+5. O comando sem `--apply` é dry-run: apenas leituras/download em streaming e plano. Não cria pastas remotas ou arquivos de mídia.
+   - Para recuperar um lote manual explícito que ainda não tenha seus próprios jobs, conferir liveness e checkpoint, serializar pelo lock canônico e enfileirar somente os `asset_id` congelados via o CLI acima ou suas mesmas primitivas `job_for_lineage`/`enqueue`. Reutilizar requests, receipts e mappings já existentes. Não abrir um `run_cycle` global por thread para acelerar esse lote: o produtor global pode priorizar vizinhos de outro pedido e não comprova progresso do conjunto solicitado. Transportes owner/stock continuam exclusivos, com os mesmos leases e limites; a auditoria final permanece por IDs do lote. Se todos os membros já tiverem mappings produtivos, ACKs e `stockShortcutId`, retomar somente os `stockTransferredToArchive` pendentes, sem repetir produtor, cópias ou a criação/validação completa dos aliases em todo ciclo. Uma chamada stock com `--defer-if-busy` que retorne `deferred_to_existing_writer=true` não fez transferência; na recuperação foreground exclusiva, a mesma lane pode aguardar o lock canônico sem essa flag, mantendo `--max-files 4` e o readback final. O job é estável por IDs/hashes/path; reexecução reaproveita o manifesto e não cria um novo pedido independente.
+6. O worker copia apenas jobs publicados pela SA canônica, verificados pelo `permissionId` nativo fixado de `lastModifyingUser` + hash do corpo, com origem/pasta de arquivo fixas. E-mail omitido entre contas é possível; e-mail/nome/propriedade editável sozinho nunca comprova autor. Não transforma texto de um manifesto em autorização irrestrita. Usa lock, marcadores por fonte/checksum, bloqueio de replay ambíguo, limites por execução e orçamento de runtime. Não possui função de exclusão da origem. `File.version` é contador de alterações do servidor, não hash de conteúdo: preservar a versão congelada para auditoria e seguir o gate forte de SHA nativo + streams da implementação vigente; jamais ignorar divergência de bytes/path ou reescrever o pedido para passar.
+
+## Intake autônomo e exclusividade
+
+O job nativo Ares `528c5710269d` usa os 114 IDs registrados em `upload-context-layout.json`, não o filename, para operação/gestor. O contrato completo está em `integrations/creative-archive-30tb/AresIntakeJobPrompt.txt`; o estado vivo está em `intake-config.json` e `intake-state.json` no mesmo diretório da fila.
+
+Antes de qualquer writer manual tocar uma fonte, consultar `ares_autonomous_intake.assert_source_writer(source_id)`; uma fonte reclamada por batch ativo não pode ganhar outro executor. O executor dono informa o batch exato em `ARES_INTAKE_BATCH_ID` nas primitivas mutantes e retoma seu plano persistido. Nunca roubar claim nem substituir source IDs depois de timeout.
+
+Após tratamento, o verificador `complete` publica pelo lock único e pode retornar `waiting_archive`: aguardar receipt/ACK/atalhos; isso não é conclusão. `archive_ready` retoma somente `complete`, sem novo tratamento. O job de intake é local/silencioso; Zeus monitora sua saúde e faz escalonamento quando necessário.
+
+### Fechamento de pedido manual explícito
+
+Um lote manual também precisa de uma conclusão real no controle canônico. Marcar somente o `state.json` da execução como `complete` deixa a limpeza parada em `RETIREMENT_INTAKE_NOT_RELEASED`, mesmo com todos os arquivos nos 30 TB.
+
+Para o layout suportado `data/ares/creative-ops/executions/intake-<thread_id>/`, preservar `plan.json` (`mgs.manual.intake.plan.v1`), `sources.json`, `state.json` e `final-audit.json`. Depois da auditoria final e antes da resposta de conclusão, executar:
+
+```
+python3 /root/mgs-agent/scripts/ares_manual_intake_completion.py --execution-dir /root/mgs-agent/data/ares/creative-ops/executions/intake-<thread_id> --requester-id <autor_humano_do_pedido> --apply
+```
+
+O helper não trata, copia, apaga mídia ou altera regras: valida novamente os pares RAW/clean, hashes completos, metadados limpos, inventário/reserva, ACK SA nativo, owner/ACL e atalhos permanentes. Usa os locks `intake → queue → inventory`, registra o claim/conclusão com a hora real e preserva o timestamp no replay. Exigir readback do batch `complete`, das fontes em `completed` e de `intake-completion.json`; `already_complete` é replay sem novo transporte. Sem `--apply`, somente lê e verifica. Manifesto não suportado, duplicata, claim concorrente ou prova incompleta é bloqueio: não inserir um claim por JSON improvisado nem ampliar a seleção para fazê-lo passar.
+
+A retirada posterior continua exclusivamente em `ares_archive_retirement.py`, com a mesma confirmação vigente e no máximo dois pares por ciclo. Não chamar DELETE pelo executor manual. Separar entrega permanente validada, conclusão canônica e retirada efetiva do staging; só declarar esta última após recibos nativos e ausência dos IDs antigos. Não refazer tratamento para corrigir apenas esse vínculo.
+
+## Conferência e leitura
+
+```
+python3 /root/mgs-agent/scripts/ares_archive_bridge.py reconcile --job-id <job_id> --apply
+python3 /root/mgs-agent/scripts/ares_archive_bridge.py status
+```
+
+A SA valida autor do recibo, conjunto completo de fontes, dono/parent/path do arquivo, tamanho, MD5 e SHA-256 dos streams origem/destino. Só depois registra `archive-index.json` e publica ACK.
+
+Na auditoria independente, validar o ACK nativo pelo schema `mgs.archive.ack.v1`, `kind=lineage`, `jobId` exato, publisher SA, status e membership/IDs/hashes. O ACK produtivo pode omitir `validationOnly`: rejeitar `ack.get('validationOnly') is True`, sem exigir a presença literal de `false`. Manter a validação do job de produção no índice e do recibo nativo de transferência; não adicionar o campo ao documento imutável nem repetir transporte por causa dessa ausência opcional. Pedidos verificados saem da seleção de pendências por metadado atualizado pela própria SA; o corpo original do pedido não é reescrito.
+
+A fila usa registros laterais de arquivo, não muda `asset_id`, `source_drive_id`, `asset_drive_id`, nomes originais/finais, `reservation_status`, `ares_eligible`, gestor, linhagem, performance ou estratégia. O canário não altera o inventário criativo nem vira candidato novo.
+
+```
+python3 /root/mgs-agent/scripts/ares_archive_bridge.py resolve --source-id <id>
+```
+
+Por padrão, mantém o ID original. `--use-verified` permite consultar um mapeamento lateral já verificado, sem promover elegibilidade. Consultar `prefer_archive_reads` vivo: somente quando true usar `ares_archive_storage` nos consumidores integrados. O catálogo `mgs.logical.media.v1` preserva o ID lógico e expõe `provider_id` e `stock_file_id` reais separadamente; não é resposta bruta da API Google. Baixar pelo provider verificado; movimentar somente o atalho de estoque dentro dos status da mesma operação, jamais a cópia proprietária. Arquivo retido + atalho representam uma candidata, não duas. Canários validationOnly nunca geram mappings de produção. Linhagem nova fica indisponível para campanha até ACK/atalhos e liberação do batch; isso não muda elegibilidade ou reserva. Antes de excluir qualquer ID antigo, integrar e testar todos os consumidores/links e validar permissões humanas equivalentes nos novos destinos; a aprovação desta skill não dispensa esse gate.
+
+## Limites de ativação
+
+- Não agendar `runArchivePilot`: ele trata apenas um arquivo fixo. O bootstrap novo chama o worker de fila, validando antes o SHA-256 do código remoto versionado. Um código alterado não executa automaticamente.
+- O owner executa `mgsArquivoTeste` para consumir o canário pela fila. Somente após ACK real da SA, `mgsArquivoAtivar` pode criar um gatilho idempotente a cada 5 minutos. A presença dessa função não prova que o gatilho foi instalado.
+- O reconciliador recorrente e o consumo automático de novos intakes só podem ser chamados ativos após execução real validada. Não presumir que apenas instalar o gatilho do worker inicia tratamento autônomo de UPLOAD MANUAL.
+- O worker proprietário e o executor de intake Ares continuam sem exclusão. A confirmação `1562233890716786830` foi supersedida somente quanto à espera pela confirmação `1562848227944955935`: retirada sem espera de 24h, preservados todos os gates e o máximo de dois novos pares/run. Consultar o binding vivo em `queue-config.json`; somente o controlador SA `ares_archive_retirement.py` pode executar a limpeza com autorização fixada, prova de arquivo/ACL/atalho/receipts e sem referências físicas em uso. Não apagar pelo Ares manualmente, não tocar histórico/pastas/canários e não alterar IDs primários. Fonte: `docs/ares-creative-30tb-source-cleanup-policy.md`. Um 404 de origem só é esperado com recibo nativo de aposentadoria verificado; sem ele é bloqueio real. Desligar a limpeza não pode fazer consumidor de ID já aposentado voltar à origem ausente.
+- Em erro, preservar origem e reserva; registrar o bloqueio exato, reconciliar side effects antes de retry e não criar writer paralelo. Falhas de classificação ou escopo não autorizam adivinhação para evitar uma pergunta.
+
+Fonte canônica e checkpoint: `/root/mgs-agent/docs/ares-creative-30tb-autonomous-requirements.md`, `ARES-CREATIVE-30TB-1562078493498540042`. Piloto real de cópia, retrieval e replay já passou; isso não substitui o teste do worker de fila.
