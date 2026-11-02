@@ -1,0 +1,144 @@
+---
+name: paid-acquisition-operations
+description: "Operações de aquisição paga/ads para MGS: estruturar operações piloto, taxonomia de criativos, Drive de assets, inventário, credenciais read-only/controlled-write, e guardrails antes de Meta/Google Ads em produção."
+version: 1.3.7
+author: Ares
+license: internal
+metadata:
+  hermes:
+    tags: [ads, growth, meta-ads, google-drive, creatives, taxonomy, mgs]
+---
+
+# Paid Acquisition Operations — MGS/Ares
+
+Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar campanhas pagas, criativos, Drive, inventário, tracking ou integrações Meta/Google Ads. O padrão é **processo primeiro, credencial depois, execução por último**.
+
+## Pedidos naturais e modelos reutilizáveis
+
+- Em execução rotineira de campanhas solicitada por Rodolfo, não enviar narração intermediária de preflight, numeração, fonte, registro no executor ou plano validado. Executar as verificações internamente e entregar o resultado final curto com readback e tempo quando solicitado. Interromper com mensagem somente se houver decisão/autoridade necessária, bloqueio real ou falha relevante que exija comunicação; preservar `tool_progress: all` e nunca ocultar ressalvas no fechamento. Esta regra reduz mensagens próprias, não elimina guards, evidência ou confirmação do Critical Subset.
+- Trate horário e status escritos no pedido como parâmetros daquele pedido, não como padrões permanentes. Um valor usado em exemplo só vira default quando o contrato ativo da operação disser isso explicitamente.
+- Quando a conta estiver inequivocamente resolvida, aceite `timezone da conta de anúncio`; não obrigue o gestor a repetir `America/...` no modelo. Preserve exatamente data, hora e status solicitados.
+- Mantenha o pedido humano no nível da intenção: modo, fonte quando aplicável, mídia/copy a preservar ou substituir, tracking, budget, início e status. Não transforme `source_ad_id`, `creative_id` ou `effective_object_story_id` em campos que o gestor precise escolher; Ares resolve esses IDs pela rota da conta.
+- No resultado técnico, reporte separadamente lineage (`source_ad_id`), identidade do pacote (`creative_id`) e post/prova social (`effective_object_story_id`). Se a conta exigir lineage para serving, explique isso uma vez sem mudar silenciosamente a intenção comercial nem autorizar reutilização de mídia no modo de criativos novos.
+- Trate modelos em revisão como rascunhos: não persista, versione nem chame de final antes da confirmação explícita do operador, porque uma versão intermediária pode ser substituída na mensagem seguinte.
+- Quando o operador pedir alteração somente de uma parte, preserve o restante do texto, sua ordem e compactação; devolva o modelo em cerca `text` sem expandi-lo em um formulário novo.
+- Se vários modelos precisarem ser copiados separadamente no Discord, entregue exatamente um por resposta e avance apenas quando o operador disser `próximo`; durante a coleta, confirme `1/N`, `2/N` etc. e faça a revisão cruzada somente depois do último bloco.
+
+## Relatórios de campanhas ativas e Estimate Health
+
+- Resolver todas as contas do recorte pelo catálogo positivo, aplicar os gates e enumerar suas campanhas na Meta com paginação completa. Reconciliar contas previstas versus consultadas antes de filtrar por Health; consultar somente contas que apareceram na SB não demonstra cobertura de todas as contas.
+- Preferir coleta em lote: Graph Batch para as leituras independentes de contas/campanhas e API de relatórios SB com a lista dos publishers autorizados do recorte. Não abrir campanha por campanha nem percorrer o inventário global de sites para um relatório restrito a operações conhecidas. Recuperar individualmente somente páginas ou fontes ausentes/inválidas.
+- Meta define identidade e status atual; SB fornece os dados da janela. Quando o percentual é calculado no frontend, reproduzir a regra vigente da coluna sobre as somas de cada campanha, após conferir a implementação atual. Informar `API SB com fórmula da coluna` em vez de alegar leitura visual. Usar a dash quando houver pedido inequívoco de conferência visual, dúvida de paridade ou lacuna que a API não resolva; uma pergunta sobre a coluna não exige navegação manual por si só.
+- Preservar a distinção entre campanha sem linha SB, linha com denominador zero e percentual válido. Não excluir silenciosamente ativos sem base nem apresentá-los como Health comprovadamente baixo. Ao confirmar se a lista contém todas as campanhas, reconciliar também as ausências com entrega Meta na mesma janela; sem linha SB não prova ausência de gasto. Não chamar o relatório de completo enquanto houver conta não consultada ou correspondência pendente sem ressalva explícita.
+- Quando o operador questionar a demora ou sugerir a API, responder primeiro se há consulta em lote e qual etapa realmente exige leitura individual; não continuar uma conferência visual desnecessária. Receita, datas, IDs, cobertura e percentuais permanecem sujeitos aos mesmos testes, independentemente do canal de coleta.
+- Para uma faixa seguinte do mesmo relatório, conservar período, operações, seleção de status e snapshot validado; refiltrar os valores completos sem nova coleta, salvo pedido de atualização ou mudança material de contexto. Aplicar limites explícitos antes do arredondamento e declarar o horário da base reutilizada. Health acumulado do período não equivale a ter ficado abaixo do corte em algum dia isolado.
+- Em listas filtradas por Health, entregar primeiro quantidade e período, depois as campanhas agrupadas por site, conta e gestor, com número literal, descrição identificável, origem COPY quando explícita e percentual. Preservar todas as linhas e informar operações sem correspondências na faixa; não impor o relatório financeiro completo nem anexos a um pedido somente de listagem.
+
+Receita e aceite: `references/smartbidding-roi-band-reconciliation.md`, seção `Listas pela coluna Estimate Health`.
+
+## Relatórios de ROI — contrato de análise e apresentação
+
+- Antes de decompor lucro por faixas, identificar a fonte do total e a unidade econômica: o consolidado `Domain` da Smart Bidding inclui receitas que podem não aparecer na aquisição por campanha. Em escopo misto, separar tráfego direto de BOT antes de interpretar rentabilidade; carregar `references/smartbidding-roi-band-reconciliation.md`.
+- No tráfego direto, agregar conjuntos por campanha e calcular ROI com a receita direta; apresentar retenção SMS separadamente. No BOT, reunir investimento e receita total por Page/UTM comprovado, incluindo drip e broadcast uma única vez. Receita de base histórica não é retorno comprovado dos leads comprados naquele dia, e receita sem gasto não pertence automaticamente à faixa de maior ROI.
+- No relatório misto comparável, manter três blocos numerados com títulos completos: **1. Tráfego direto — sem SMS; 2. BOT — incluindo drip e broadcast; 3. Consolidado — tudo junto**. Informar data civil, fonte, moeda, receita líquida/bruta e a unidade de classificação. Usar tabelas alinhadas em bloco `text`, com `Faixa de ROI → Investimento → Lucro → % lucro`; não depender apenas de posição, cor ou screenshot para identificar a estratégia. Em pedido restrito a campanhas de tráfego direto e faixas personalizadas, entregar primeiro as faixas solicitadas, com quantidade, investimento e lucro/prejuízo por operação e total; não impor os três blocos nem consultar retenção sem necessidade. Somar as faixas pedidas separadamente e rotular qualquer total de todas as campanhas como contexto, não como consolidado Domain.
+- Explicar junto a cada tabela que `% lucro` é participação assinada no lucro da própria estratégia; no consolidado, usar o lucro total de Domain. Não confundir esse percentual com o ROI da faixa. Manter linhas sem ROI definido e diferenças não atribuídas visíveis, sem rateio artificial; explicar eventuais diferenças de arredondamento sem alterar percentuais para forçar a soma.
+- Distinguir reenvio, reanálise e troca de período pelo último relatório pertinente: reenvio reproduz o formato e os valores validados sem nova coleta; reanálise de um dia fechado sem data nova consulta novamente esse mesmo dia e compara os snapshots; pedido de outro dia preserva escopo, moeda e faixas, mas exige coleta e validação novas. Não transportar contagens, resultados ou limites de validação incidentais do período anterior. Resolver datas relativas pelo relógio real e explicitar a data civil no resultado.
+- Distinguir **lucro SB, na base de custos de Domain**, de lucro líquido após todos os custos operacionais. Custo de SMS zero ou ausente na SB não prova gratuidade do envio; qualquer ajuste externo deve ser separado e fundamentado. Relatório read-only não autoriza pausar campanhas, alterar estratégia nem inferir que um corte preservaria toda a retenção.
+
+## Diagnóstico de aumento de gasto — Smart Bidding
+
+- Quando o pedido for identificar qual site/gestor puxou um salto, comparar a média diária de uma janela-base explícita com a média dos dias completos após o salto. Excluir o dia em andamento ou separá-lo como parcial; ordenar pela contribuição absoluta em USD/dia, não pelo maior gasto atual nem pelo maior percentual de crescimento.
+- Entregar primeiro o principal site e gestor/conta, depois consolidado antes × depois, ranking de sites e detalhamento dos gestores no site dominante. Mostrar a evolução diária dos maiores contribuintes quando ajudar a localizar a aceleração. Usar blocos `text` alinhados e valores arredondados, mantendo precisão integral no cálculo.
+- Separar atribuição de gasto de autoria da alteração: conta vinculada a um gestor não prova quem mudou seu budget. Preservar gestores não identificados e diferenças entre print e consulta atual como limitações explícitas, sem inventar responsáveis ou causas.
+- Em pedido de refazer a análise sem datas novas, recuperar a comparação anterior, manter a janela-base e atualizar o período posterior até o último dia civil completo; declarar a ampliação. Comparar novamente as datas sobrepostas, porque dados de dias fechados podem ter sido revisados e não devem ser misturados com parcelas do snapshot anterior.
+- Quando o operador informar um objetivo de gasto enquanto avalia alternativas, registrar o valor, moeda, periodicidade e escopo como objetivo analítico, não como autorização para cortar campanhas ou reativar caps internos. Responder primeiro com a redução necessária em USD/dia e percentual sobre o gasto observado, distinguindo média recente de último dia completo; manter o valor concreto no checkpoint, não nesta skill.
+- Não converter o ranking de aumento de gasto em ranking de cortes: crescimento rentável pode merecer preservação. Para propor redução, avaliar rentabilidade recorrente, maturidade e atraso de receita, distinguindo tráfego direto de BOT/retenção; apresentar impacto estimado sem prometer receita ou lucro preservados. Evitar corte linear por gestor como recomendação padrão.
+- Seguir o ramo de decomposição de gasto e, quando aplicável, a seção de objetivo de redução em `references/smartbidding-roi-band-reconciliation.md`; os três blocos e as quatro fontes obrigatórias da análise de ROI não se aplicam automaticamente a um pedido somente de gasto.
+
+## Arquitetura e tempo de execução
+
+Use um único Campaign Engine para a mecânica universal de criar do zero, duplicar, clonar, quota, recovery e readback. Separe naming, UTM, Page/pixel, evento, copy, mídia, schedule e pós-processamento em adapters/runners/contratos por família ou operação; relatórios, ROI e otimização ficam fora do executor. Não crie um novo major ou fork por nicho quando um adapter retrocompatível resolve.
+
+Antes de iniciar um pedido cronometrado ou produtivo, conclua onboarding da conta, registro do runner, estrutura Drive, reconciliação do inventário, calibração do payload e smoke offline. Setup nunca entra no hot path. Quando existir runner da operação, use-o em vez de construir manifests e recoveries manualmente.
+
+Meça e reporte separadamente:
+
+```text
+Engine/API         primeiro write até readback terminal de cada campanha
+End-to-end         autorização EXECUTAR até fechamento do gate após pós-processamento
+Preparação         preflight, seleção/reserva, download, variantes e upload
+Pós-processamento  readback final, Drive, inventário e gate
+```
+
+Em toda auditoria de velocidade/quota, conte separadamente **requisições HTTP externas** e **operações lógicas dentro de Graph Batch**. Batch reduz round-trips e latência, mas cada child continua contando para rate limit. `intermediate_get_calls=0` prova somente o hot path do Engine: também inventarie GETs do runner em preflight, mídia, recovery e pós-processamento, identifique leituras semanticamente sobrepostas e nunca conclua que o fluxo E2E não desperdiça GETs apenas pela métrica do Engine. Antes de declarar escala multi-conta validada, exercite a mesma modalidade e quantidade por conta, registre headers vivos por lane e compare p50/p95 sem misturar onboarding ou upload de mídia.
+
+Para benchmark comparável, mantenha modos, fontes, quantidade de ads, budgets e estado de mídia equivalentes. Determine mídia fresca pela ausência de `account_id + asset_id + checksum` no registry, não por `01_READY`; um registry hit torna o benchmark misto e deve ser declarado. Se a copy fonte for específica e faltar mídia fresca semanticamente compatível, preserve copy×criativo e rotule o mix em vez de trocar produto para melhorar o tempo.
+
+Nunca chame a operação de rápida usando apenas o tempo interno do Engine quando o gestor esperou por preflight, mídia ou pós-processamento. Responda perguntas de velocidade com a conclusão primeiro: meta atingida ou não, tempo anterior, tempo atual/faixa, economia absoluta e percentual; detalhe arquitetura somente se o operador pedir.
+
+## Política global de limites internos de budget
+
+Enquanto `data/ares/meta-ads/policies/global-budget-limit-policy.json` estiver `INACTIVE_UNTIL_EXPLICIT_REACTIVATION`, nenhum cap, piso, envelope, pool ou teto interno de budget pode bloquear ou reduzir um pedido autorizado em qualquer conta de anúncio. O budget exato continua obrigatório e sujeito à autoridade vigente; pre-read e readback permanecem obrigatórios. Billing, `account_spend_limit`, credenciais e automatic scaling continuam separados. Valores históricos locais ficam apenas para auditoria. Só Rodolfo pode reativar a política explicitamente.
+
+## Guided Meta setup — standing interaction rule
+
+When Rodolfo asks for step-by-step Meta dashboard setup:
+
+1. Use plain operational language and give **one atomic action per turn**: exact button/value, nearest wrong option, then stop.
+2. State what is already complete before the next click. Never reopen **Edit**, repeat a wizard, or request another screenshot merely to reconfirm a choice just created and visually read back.
+3. Accept an unambiguous operator confirmation such as “approved” for a binary state. Ask for a screenshot only when the exact page, status, owner, permission set, or visible error materially changes the next action.
+4. If the operator lands on the wrong page, correct only the navigation. Do not advance the workflow.
+5. Translate protocol details into the action Rodolfo must take; after he authorizes backend work, execute it and ask only for an ownership/domain decision that cannot be safely discovered. Do not make him choose OAuth implementation details.
+6. Never ask the operator to reveal an App Secret, token, cookie, authorization code, or other credential.
+7. Distinguish the **Facebook Login for Business configuration** from an **authorization grant**. If the configuration already exposes the required asset types and permissions, do not send Rodolfo back into `Edit`: individual Pages, ad accounts and Pixels are selected in the OAuth authorization. Adding an asset to the client Business Portfolio alone does not expand the grant. After explicit authorization to correct asset permissions, use a validated Admin User or provisioning-only Admin System User to assign the minimum tasks to the existing app-scoped System User; do not return an executable backend task to the human or use the administrator token as a Campaign Ops fallback. Confirm both assignment and access with the unchanged corporate identity before resuming the same campaign request. Follow `references/meta-facebook-login-for-business-token-selection.md`, section `Reparar delegação de uma Página adicionada ao portfólio`. Repeat OAuth only when administrative assignment cannot expand the grant, scopes changed or the connection was revoked.
+8. In a Business Integration System User Authorization Code flow, Ares owns state generation, callback/watcher readiness, immediate code exchange, vault storage and readback. The human performs only the Meta consent screens—open the one-time link, select the approved Business Portfolio/assets and finish—and must never relay the code or token in chat.
+9. In operator-facing Portuguese, introduce **Business Integration System User** as `token corporativo do System User` and avoid the unexplained acronym `BISU`. Explicitly distinguish a manual System User visible in `Business Settings → System users` from the app-scoped integration identity, which may exist only in the backend and be managed through `Integrations → Connected apps`; technical acronyms belong only after the plain-language explanation.
+
+For the configuration wizard load `references/meta-business-login-user-token-setup.md`; for token architecture load `references/meta-facebook-login-for-business-token-selection.md`; for Authorization Code callback implementation load `references/meta-facebook-login-for-business-callback.md`.
+
+## Progressive disclosure — mandatory
+
+1. Identify the exact operational branch below.
+2. Load one route pack first; load another only when the first requires it or live evidence changes the branch.
+3. Search the selected reference or exact source symbol before opening broader ranges.
+4. Never load every reference or historical case study “for context.”
+5. Reduce tool output above roughly 5 KB before another broad lookup.
+
+Completion criterion: only the procedure and evidence required for the current action are loaded.
+
+## Operational route packs
+
+- **Smart Bidding: listar por Estimate Health, decompor aumento de gasto por site/gestor ou reconciliar lucro por faixas de ROI** → `references/smartbidding-roi-band-reconciliation.md`; para Health, selecionar ativas na Meta e consultar SB em lote, com paridade da fórmula vigente da coluna; leitura visual somente quando necessária ou expressamente solicitada.
+
+- **Replicar uma estratégia em vários sites/contas** → `references/strategy-family-operation-contract-and-thread-projection.md`
+- **Interpretar pedidos naturais de criação por canal/operação** → `references/natural-campaign-request-contracts.md`
+- **Criar/clonar campanhas Meta, lotes e alta escala** → `meta-campaign-engine-v3/SKILL.md`
+- **Responder sobre capacidade da Meta Media Library e fazer staging por conta** → `references/meta-media-library-and-account-staging.md`
+- **Configurar OAuth/Facebook Login for Business para tokens de anunciantes** → `references/meta-business-login-user-token-setup.md`
+- **Princípios → Caminho oficial: Canva Connect API** → `references/route-pack-01.md`
+- **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`
+- **Precedentes históricos de `UPLOAD_CANVAS` + Meta Ads intraday** → `references/route-pack-03.md`
+- **Regras de decisão de campanha → Referências** → `references/route-pack-04.md`
+- **OAuth Meta, comparar apps/permissões/tier, escolher token ou decidir cutover** → `references/meta-facebook-login-for-business-token-selection.md`
+- **Migrar/aposentar credenciais Meta e reconciliar crons/caches** → `references/meta-credential-cutover-and-retirement.md`
+- **Callback segura, Authorization Code, troca e validação do token** → `references/meta-facebook-login-for-business-callback.md`
+
+Campaign Engine v3 é o único executor novo. `paid-acquisition-operations` continua dona do processo/guardrails gerais e não deve criar um runner alternativo por thread ou operação.
+
+## Limpeza de campanhas de teste
+
+Quando houver autorização explícita para excluir campanhas de teste e devolver assets:
+
+1. Faça GET dos IDs exatos, filhos e Insights antes da exclusão; em caso de resposta ambígua, reconcilie antes de repetir qualquer write.
+2. Confirme `configured_status=DELETED` e `effective_status=DELETED` por campanha.
+3. Derive assets devolvíveis das atribuições/test history das campanhas com mídia nova; não devolva mídia apenas herdada por `pure_clone`, pois ela continua ligada à fonte.
+4. Confirme ausência de uso em campanhas não deletadas. Asset com entrega real segue classificação/reteste; zero entrega pode voltar ao pool técnico.
+5. Mova no Shared Drive com readback de `driveId`, parent e `trashed=false`; preserve histórico, limpe somente a atribuição corrente e restaure reserva do gestor com `ares_eligible=false`.
+6. Não inferir autorização para excluir a mídia da library Meta. Essa exclusão é separada e exige reconciliação de dependências.
+7. Reporte contagens no escopo da operação/vertical, não o inventário global.
+
+## Context-efficiency guardrails
+
+- Stop and re-plan after more than three overlapping reads of the same file.
+- Keep this main file as a routing layer; preserve detailed procedures in route packs.
+- Validate the real runtime result before reporting success.

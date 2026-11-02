@@ -4,7 +4,7 @@
 > Dono executivo: Rodolfo Mattei
 > Agente: Ares
 > Área: Creative Operations + Growth / Media Buying
-> Atualização: estoque permanente nos 30 TB e intake no Shared Drive, cutover same-ID validado em 2026-10-23. Contrato ativo em `context/drive-archive-owner-connector.md`.
+> Atualização: entrada simples flat e arquivo definitivo nos 30 TB ativos; fonte vigente `context/drive-flat-intake-cutover.md`. Operação/gestor/destino vêm do pedido humano registrado, não de subpastas na entrada. O cutover same-ID anterior de 2026-10-23 permanece histórico em `context/drive-archive-owner-connector.md`.
 
 ## 1. Regra de uso
 
@@ -379,7 +379,7 @@ ID: 0AEwt4Ye690ocUk9PVA
 URL: https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
 ```
 
-O Shared Drive antigo contém exclusivamente `UPLOAD MANUAL` na raiz; seu ID preservado é `1ARBvLammWUHuAclNmcriwkkgeedKryBd`. Enviar na subpasta **operação → gestor** cadastrada; arquivos soltos e pastas legadas fora do registro não são intake automático. `_PROCESSAMENTO` é staging temporário, não estoque permanente. O Workspace continua administrado por `support@matteiservicesinc.com`.
+O Drive MGS contém exclusivamente UPLOAD MANUAL na raiz; seu ID preservado é `1ARBvLammWUHuAclNmcriwkkgeedKryBd`. Com o binding flat ativo, enviar os arquivos diretamente nessa pasta, sem subpastas de operação/gestor. Ares registra operação, gestor, destino e IDs exatos pelo pedido humano autorizado em `ares_flat_intake.py`; o mesmo job528c5710269d consome o batch, sem segundo writer. Arquivos sem contexto ficam preservados, não são atribuídos por suposição. `_PROCESSAMENTO`, abaixo da entrada, é staging técnico temporário. Fonte/autoridade: `context/drive-flat-intake-cutover.md`, confirmações1566814476626563115 e1566825959645253764; receita `creative-operations-mgs/references/flat-upload-intake.md`. O Workspace continua administrado por support@matteiservicesinc.com.
 
 O estoque permanente fica no Drive de 30 TB, conta `mgsdigitalcorp@gmail.com`, pasta `CRIATIVOS` de ID `1GhJTEk2ZL15J5Ko3haWU5kfnVVffPq1h`, abaixo do arquivo `1jDcp9BOn-rusiRQ1t0MjJCby-qj0BL2J`. Pastas, binários e atalhos foram movidos com os mesmos IDs; não exigir `driveId` do Shared Drive para esses objetos My Drive. Resolver estoque/staging pelo contrato ativo `scripts/ares_archive_locations.py`, mídia pelo `ares_archive_storage.py`, preservando namespace lógico, linhagens e ACKs. Agentes permanecem exclusivamente com a SA canônica; o owner é componente isolado, nunca fallback de autenticação.
 
@@ -399,6 +399,8 @@ Regras:
 - validar a raiz por API antes de write;
 - placement/idioma não viram subpasta intermediária sem aprovação;
 - pedido autorizado de tratar/mover: clean validado em READY, original movido para LEGACY, sem delete;
+- flat common/exclusive: concluir receipt/ACK/stock e entrega permanente em 01_READY ou `<NOME> - Exclusivos`; somente uso real confirmado vai a `<NOME> - Usados`; duplicatas preservam linhagem/reserva/destino anteriores;
+- no flat de preservação, gerações concluídas saem do staging por movimento same-ID comprovado; não reutilizar autorização antiga de DELETE/trash;
 - pedido de copiar/manter: preservar na entrada;
 - listar `original_filename → canonical_filename`;
 - Drive write exige readback por ID/nome/tamanho.
