@@ -48,7 +48,7 @@ def verify_pending(d,meta,asset,job):
  require(state.get('schema')=='mgs.flat.pending.sources.binding.v1','FLAT_PENDING_BINDING')
  fid=state['proof_file_id'];native=d.meta(fid);raw=d.raw(fid)
  b.require_publisher(native,b.CANONICAL_SA,'FLAT_PENDING_PROOF_PUBLISHER')
- require(b.control_object_scope(native,state['control_folder_id']) and hashlib.sha256(raw).hexdigest()==state['proof_sha256'],'FLAT_PENDING_PROOF_SCOPE')
+ require(b.control_object_scope(native,state['control_folder_id']) and native.get('properties',{}).get('mgsArchiveType')=='stock_layout_snapshot' and hashlib.sha256(raw).hexdigest()==state['proof_sha256'],'FLAT_PENDING_PROOF_SCOPE')
  proof=json.loads(raw)
  require(proof.get('schema')=='mgs.flat.pending.sources.proof.v1' and proof.get('redesign_confirmation')=='1566814476626563115' and proof.get('access_confirmation')=='1566825959645253764' and proof.get('delete_writes')==0,'FLAT_PENDING_AUTHORITY')
  require(set(proof.get('sources',{}))==set(state['source_ids']),'FLAT_PENDING_MEMBERSHIP')

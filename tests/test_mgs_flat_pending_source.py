@@ -16,7 +16,7 @@ class PendingSourceTests(unittest.TestCase):
    def raw(self,fid):return b.canonical(outer.proof)
    def meta(self,fid):
     if fid==f.PENDING_UPLOAD:return {'id':fid,'mimeType':b.FOLDER,'driveId':b.SOURCE_DRIVE,'trashed':False}
-    return {'id':fid}
+    return {'id':fid,'properties':{'mgsArchiveType':'stock_layout_snapshot'}}
   self.d=Drive()
   self.read=patch.object(b,'read_json',return_value=self.state);self.read.start();self.addCleanup(self.read.stop)
   self.pub=patch.object(b,'require_publisher');self.pub.start();self.addCleanup(self.pub.stop)
@@ -36,9 +36,10 @@ class PendingSourceTests(unittest.TestCase):
  def test_wrong_drive(self):self.meta['driveId']='wrong';self.assertRaises(f.FlatSourceError,self.verify)
  def test_proof_streams_required(self):self.proof['sources']['source0001']['full_source_archive_streams_verified']=False;self.refresh();self.assertRaises(f.FlatSourceError,self.verify)
  def test_version_regression(self):self.meta['version']='1';self.assertRaises(f.FlatSourceError,self.verify)
- def test_scope(self):self.scope.stop();self.scope=patch.object(b,'control_object_scope',return_value=False);self.scope.start();self.assertRaises(f.FlatSourceError,self.verify)
+ def test_scope(self):
+  with patch.object(b,'control_object_scope',return_value=False):self.assertRaises(f.FlatSourceError,self.verify)
  def test_native_publisher(self):
-  self.pub.stop();self.pub=patch.object(b,'require_publisher',side_effect=b.ArchiveError('publisher'));self.pub.start();self.assertRaises(b.ArchiveError,self.verify)
+  with patch.object(b,'require_publisher',side_effect=b.ArchiveError('publisher')):self.assertRaises(b.ArchiveError,self.verify)
  def test_missing_state(self):self.state.clear();self.assertFalse(self.verify())
  def test_retirement_unchanged(self):
   import ares_archive_retirement as retirement

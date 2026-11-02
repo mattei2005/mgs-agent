@@ -1,10 +1,1 @@
-{
-  "changed": [
-    {
-      "path": "/root/mgs-agent/scripts/mgs_flat_source_compat.py",
-      "cutover_sha256": "5294fde4894cc0739daf5bb099e14ffd3860627873d2b92414c01658565b70dd",
-      "current_sha256": "55d57ec753b502041bc5a08ec742cd944b7539cf693b4255a02a588f17e88f4a"
-    }
-  ],
-  "classification": "concurrent_change_under_review_not_anomaly"
-}
+{"changed":[{"current_sha256":"55d57ec753b502041bc5a08ec742cd944b7539cf693b4255a02a588f17e88f4a","cutover_sha256":"5294fde4894cc0739daf5bb099e14ffd3860627873d2b92414c01658565b70dd","path":"/root/mgs-agent/scripts/mgs_flat_source_compat.py"}],"classification":"authorized_concurrent_recovery_reconciled","evidence_order":["events-audit:no new record yet","infra-inventory:original cutover only","REPORT-INFRA:no separate new report yet","Git:a1dbffbc8 exact additive verify_pending patch","session_search:authenticated cron source with exact patch and original authority calls"],"observed_sha256":"55d57ec753b502041bc5a08ec742cd944b7539cf693b4255a02a588f17e88f4a","origin_native_job_id":"83b148017b4d","origin_session_id":"local-2e3d5523f7d4b18a629ffee61cb3fc245ae381daec2f936a873b039b78060a35","scope":"Standing first-failure recovery, same flat-layout approvals, frozen two pending source IDs, read-only source/media reconciliation; not this documentation writer.","verified_at":"2026-11-02T17:19:06.134059+00:00"}
