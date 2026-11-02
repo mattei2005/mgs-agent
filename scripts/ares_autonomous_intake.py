@@ -31,6 +31,10 @@ def describe(row,slot):
 
 def validate_new_batch(d,batch,manifest):
     """Fresh ID ancestry/content checks before the first durable writer claim."""
+    if batch.get('scope_type')=='flat_request':
+        import ares_flat_intake as flat
+        if flat.policy() is None:raise IntakeError('FLAT_INTAKE_NOT_ACTIVE')
+        return flat.validate_new_batch(d,batch)
     for source in batch['sources']:
         slots=[s for s in manifest['slots'] if s['folder_id']==source['slot_id']]
         if len(slots)!=1:raise IntakeError('UNREGISTERED_SLOT_ID')
@@ -58,6 +62,10 @@ def observe(state,descriptors,now):
     return {'stable':bool(descriptors) and old['polls']>=3 and now-old['since']>=40,'fingerprint':fingerprint}
 
 def make_batch(descriptors,excluded,limit=4):
+    if any(x.get('flat_request_id') for x in descriptors):
+        import ares_flat_intake as flat
+        if not all(x.get('flat_request_id') for x in descriptors):raise IntakeError('MIXED_FLAT_AND_LEGACY_CONTEXT')
+        return flat.make_batch(descriptors,excluded,limit)
     pending=sorted([d for d in descriptors if d['source_id'] not in excluded],key=lambda d:(d['created_at'],d['source_id']))
     if not pending:return None
     first=pending[0];selected=[d for d in pending if (d['operation'],d['manager_code'])==(first['operation'],first['manager_code'])][:limit]
@@ -144,6 +152,8 @@ def children_many(d,parents):
     return rows
 
 def discover(d,manifest,cutoff):
+    import ares_flat_intake as flat
+    if flat.policy() is not None:return flat.discover(d)
     contexts={s['folder_id']:s for s in manifest['slots']};frontier=list(contexts);out=[];validated=set()
     for depth in range(12):
         if not frontier:return out
