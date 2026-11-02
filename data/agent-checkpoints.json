@@ -2973,12 +2973,12 @@
     {
       "agent": "zeus",
       "id": "SECURITY-FINAL-1566802028745859113",
-      "next_step": "Reconciliar inventário e transportes; atualizar índices e simular APT/Snap; validar kernel/runtimes/serviços e advisories atuais; registrar lacunas por host",
-      "objective": "Reauditar todos os servidores MGS e pesquisar advisories oficiais antes do encerramento; sem instalar/reiniciar ou alterar produção",
-      "source": "discord:1566802028745859113",
-      "state": "in_progress",
+      "next_step": "Não encerrar como100%seguro: resolver Nginx fornecedor/kernel MPTCP/6WP insecure/Node incorporado/PHPpreventivo; decisão opcional ESM.5SOauditados;4AWSsftp-only;Spazio/dimela semadmin;fincgriffinSOexterno. Preparação e mudanças de produção exigem escopo/gates próprios.",
+      "objective": "Reauditar todos os servidores e advisories oficiais antes do encerramento; escopo somente auditoria",
+      "source": "/root/mgs-agent/reports/security-final-20261102-1566802028745859113.md",
+      "state": "audit_completed_findings_and_access_gaps_remain",
       "thread_id": "1565713769789657239",
-      "updated_at": "2026-11-02T13:13:39+00:00"
+      "updated_at": "2026-11-02T13:31:56+00:00"
     },
     {
       "agent": "zeus",
@@ -6842,6 +6842,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-app-fleet-audit-20261102-1566805898364584050",
+      "next_step": "Coletar mensagens de ontem/hoje, exercitar fonte SB, corrigir causa e validar antes do force-live",
+      "objective": "Auditar alertas de 01 e 02/11, corrigir INVEST HOJE e INVEST 3D e enviar alertas reais nos 13 canais vigentes",
+      "source": "discord:1566805898364584050",
+      "state": "in_progress: registry 13 rotas; quatro crons ativos; auditoria de fontes e alertas em curso",
+      "thread_id": "1566805898364584050",
+      "updated_at": "2026-11-02T13:28:51+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-app-general-alert-manual-pause-20260806",
       "next_step": "Reativar B001/B002/B003/B004/B008/B009/B010 somente quando Rodolfo informar a troca dos apps.",
       "objective": "Enviar alerta geral aos apps operacionais e persistir a pausa manual dos sete apps off conforme correção de Rodolfo.",
@@ -8222,5 +8232,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T13:19:07+00:00"
+  "updated_at": "2026-11-02T13:31:56+00:00"
 }
