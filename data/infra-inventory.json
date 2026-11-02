@@ -1232,7 +1232,26 @@
       "report_infra_message_id": "1565730217694199889",
       "report_infra_verified": true,
       "scope": "Kernel, OS packages and main runtimes; approved package lot installed and validated. Application source and WordPress plugins excluded.",
+      "snap_core22_manual_refresh": {
+        "state": "completed_validated",
+        "authorization_message_id": "1566800584466628762",
+        "host": "srv1767265",
+        "previous_revision": "2955",
+        "active_revision": "2987",
+        "snap_change_id": "14",
+        "rollback_revision_retained": "2955",
+        "evidence_directory": "/root/.hermes/profiles/zeus/reports/core22-manual-1566800584466628762",
+        "gateway_pids_unchanged": true,
+        "livepatch": "active;supported;nothing-to-apply",
+        "failed_units": 0,
+        "reboot_required": false,
+        "snap_candidates_remaining": 0,
+        "followup_closed": true,
+        "observer_jobs": "d476a2649595 and f17da87f7d57 completed; disabled; next_run_at null",
+        "scope": "core22 only; no reboot; no gateway restart; native snap retention retired2437 and retained2955"
+      },
       "snap_core22_automatic_followup": {
+        "historical_state_superseded_by": "snap_core22_manual_refresh; approval1566800584466628762; completed_validated",
         "active_revision": "2955",
         "authorization_message_id": "1566497067512369283",
         "available_revision": "2987",
@@ -58351,6 +58370,35 @@
       "target_count": 30,
       "type": "exact_manifest_technical_cleanup_proposal_no_destructive_execution",
       "updated_at": "2026-11-02T02:51:58.438463+00:00"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261102-0802",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "updated_at": "2026-11-02T08:06:46.589058-05:00",
+      "status": "partial_metrics_validated_pc1_approved_chrome_unavailable",
+      "paths": [
+        "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261102T080312356920/closure-current.json",
+        "/root/mgs-agent/reports/meta-manual-payments-runs/tick-20261102T080312356920/verify-closure.py"
+      ],
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 8,
+        "historical_blank_d": 35,
+        "invoice_period": "2026-10-01",
+        "invoice_due_usd": "417702.93",
+        "visible_invoice_numbers": 29,
+        "lease_free": true,
+        "other_sheet_data_unchanged": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [

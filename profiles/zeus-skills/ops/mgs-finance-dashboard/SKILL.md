@@ -180,6 +180,8 @@ For the live August engine, the approved monthly tab and `CAIXA SINTETICO` remai
 
 ## Explaining pending daily imports
 
+Distinguish daily intake from final monthly settlement in every status explanation. Say “preenchimento diário até DD/MM, ainda provisório” rather than “gastos e receitas confirmados” or an unqualified monthly “fechamento”: successful API/GAM intake does not mean Rodolfo supplied or accepted the later closing report, payout, FX or invalid-traffic settlement. When he asks what is missing for a day, name the technical remaining work and explicitly say whether he must send anything; explain unrelated software-security approval separately in plain language, never as a prerequisite for daily accounting.
+
 **Newsoun/FinanciamentoAutoAdx BR — Rodolfo1564986937343746150, padrão1564993480487342243:** `newsoun.com|br` → `br-car-br`, Kelly/G005; `pl_digital-trust_financiamentoautoadx_br` → `financiamentoautoadx.com|br` / `br-car-br`, MGS/G002. Reuse existing catalog IDs and preserve canonical media, other countries, networks, allocation and closed history. Source: `docs/finance-gam-email-automation.md`; publication/completion: checkpoint `ZEUS-FINANCE-BR-CAR-1564993480487342243`. Confirmed classifications are standard for the same identifiers unless explicitly date-limited; do not ask permanence again.
 
 When Rodolfo asks what remains to finish, answer the decision he needs to make before explaining technical causes:

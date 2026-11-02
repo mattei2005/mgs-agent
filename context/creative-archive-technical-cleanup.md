@@ -4,7 +4,7 @@
 
 - Pedido: Rodolfo Mattei (`344196393512075265`), mensagem `1566643959458168864`, thread `1562078493498540042`.
 - Zeus é responsável pela preparação e execução segura, sem writer paralelo.
-- Estado: **inventário e plano exato concluídos; aguardando confirmação adicional da operação crítica de mover para a lixeira**. O pedido genérico “então termina” não substitui a confirmação após apresentação dos alvos.
+- Estado: **limpeza concluída e validada após confirmação crítica de Rodolfo em `1566800073071788244`, respondendo à pergunta de alvos `1566646147366264864`**. O estado anterior de espera abaixo é histórico supersedido somente para esse manifesto; não há autorização destrutiva genérica.
 - Plano: `data/ares/creative-ops/30tb-archive/legacy-cleanup-1566643959458168864/cleanup-plan.json`. Digest canônico SHA-256: `3835baf8f8af312267ad2a4c3e9856544278b92479f55857152dca60c73a7a0b`.
 
 ## Inventário e classificação

@@ -78,6 +78,12 @@ def verification_snapshot(d,c,job):
     if ackfile:
         ackmeta=d.meta(ackfile['id']);bridge.require_publisher(ackmeta,bridge.CANONICAL_SA,'ACK_AUTHOR');ack=json.loads(d.raw(ackfile['id']))
         if not bridge.control_object_scope(ackmeta,c['requests_folder_id']) or ack.get('schema')!='mgs.archive.ack.v1' or ack.get('jobId')!=jid or ack.get('kind')!=job['kind'] or ack.get('status')!='verified' or ack.get('deleteSource') is not False:raise bridge.ArchiveError('ACK_SCOPE')
+    # Preserve the immutable pilot request/ACK after its separately confirmed
+    # technical cleanup. This is a disposed validation, never verified stock.
+    if job.get('kind')=='canary' and jid=='526d7a2a007c1fed4b2a9147f92d62b4':
+        import mgs_archive_technical_cleanup as cleanup
+        disposition=cleanup.retired_canary_proof(d,job,receipt,ack)
+        if disposition:return {'pending':False,'acked':bool(ack),'retired_validation':disposition}
     media=[]
     for asset in job['assets']:
         copied=next(x for x in receipt['assets'] if x['sourceId']==asset['sourceId'] and x['role']==asset['role'])
@@ -95,6 +101,8 @@ def reconcile_jobs(d,c,jobs,state,apply,verify=bridge.reconcile,limit=2):
         try:
             snapshot=verification_snapshot(d,c,job)
             if snapshot.get('pending'):out['pending'].append(jid);continue
+            if snapshot.get('retired_validation'):
+                out.setdefault('retired_validation',[]).append(snapshot['retired_validation']);continue
             old=state.get('verified',{}).get(jid)
             if old and old.get('verified') is True and old.get('fingerprint')==snapshot['fingerprint'] and snapshot['acked']:
                 out['cached'].append(jid);continue
