@@ -31,4 +31,20 @@ class FlatIntakeTests(unittest.TestCase):
  def test_scope_digest_tamper(self):
   x=f.descriptor(self.native,self.ctx);r=f.make_batch([x],set(),4);r['manager_name']='Joe'
   with self.assertRaises(f.FlatIntakeError):f.validate_batch_identity(r)
+ def test_technical_media_not_production(self):
+  with self.assertRaises(f.FlatIntakeError):f.descriptor({**self.native,'properties':{'mgsArchiveType':'flat_discovery_canary'}},self.ctx)
+ def test_reference_only_not_promoted(self):
+  with self.assertRaises(f.FlatIntakeError):f.descriptor({**self.native,'properties':{'reference_only':'true'}},self.ctx)
+ def test_unauthorized_human_never_fetches(self):
+  with patch.object(f,'discord_get') as get:
+   with self.assertRaises(f.FlatIntakeError):f.human_source('1562078493498540042','123456789012345678','111111111111111111')
+   get.assert_not_called()
+ def test_bot_request_rejected(self):
+  msg={'id':'123456789012345678','channel_id':'1562078493498540042','author':{'id':'344196393512075265','bot':True}};channel={'guild_id':'1185714635991679006','parent_id':'1496267442899521627'}
+  with patch.object(f,'discord_get',side_effect=[msg,channel]):
+   with self.assertRaises(f.FlatIntakeError):f.human_source('1562078493498540042','123456789012345678','344196393512075265')
+ def test_wrong_author_rejected(self):
+  msg={'id':'123456789012345678','channel_id':'1562078493498540042','author':{'id':'111111111111111111'}};channel={'guild_id':'1185714635991679006','parent_id':'1496267442899521627'}
+  with patch.object(f,'discord_get',side_effect=[msg,channel]):
+   with self.assertRaises(f.FlatIntakeError):f.human_source('1562078493498540042','123456789012345678','344196393512075265')
 if __name__=='__main__':unittest.main()
