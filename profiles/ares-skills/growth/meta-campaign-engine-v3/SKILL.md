@@ -113,6 +113,13 @@ O runner diário CPV tem gate de início às 17:00 São Paulo e permite retomar 
 
 A execução real está ativa sob `development_access`. Cada pedido autorizado de campanha fornece o `--confirm-execute` operacional, mas não altera os gates estruturais. O guard inicial é **por lane**: em uma conta, o primeiro bundle daquela conta é guardado/fail-closed; em várias contas, o primeiro bundle de cada `app_key + ad_account_id` pode iniciar em paralelo pelo `ThreadPoolExecutor`. Não existe canário global único antes das outras lanes; os bundles seguintes de cada lane obedecem à própria quota.
 
+## Inspeção e retomada de pós-processamento SHEIN
+
+1. Resolva diretamente os registros do mesmo pedido: runner em `data/ares/meta-ads/state/shein-campaigns/single-clone/<request_id>/state.json`, checkpoint em `data/ares/meta-ads/engine-v3/state/checkpoints/<request_id>-<account_id>.json` e audit em `data/ares/meta-ads/engine-v3/audit/<request_id>.json`. Não procure o state do runner na árvore de audit nem faça busca recursiva quando request e conta já estiverem resolvidos: cada registro representa uma camada diferente.
+2. Na primeira inspeção, projete apenas fase do runner, status do engine, estágio e conjuntos de IDs por bundle, `finished_at` do audit e cobertura de `media_qa`. Não despeje bundles, `engine_result` ou journals completos: esse volume esconde o progresso que determina a recuperação. Aplique os critérios de frescor/cobertura da referência SHEIN antes de retomar QA.
+3. Com `POSTPROCESS_PENDING`, engine `COMPLETE_PAUSED` e provas renderizadas cobrindo os anúncios/creatives existentes, preserve essas provas e retome pelo mesmo `ares-shein-campaigns.py campaign --input <mesmo-request.json> --confirm-execute`. Uma falha genérica posterior não implica criação ausente nem QA perdido; não repita criação ou renderização já comprovada. Se não houver avanço de fase, IDs ou provas, diagnostique antes de nova tentativa.
+4. Exija readback terminal da ativação e igualdade dos conjuntos de campaign/adset/ad IDs com o checkpoint anterior; confira por campanha conta, budget, estratégia/cap, início, filhos ACTIVE e cobertura exata de mídia. Interprete `COMPLETE_FUTURE_ACTIVE` junto de `start_now` e horários reais: esse enum também pode encerrar um pedido imediato e não comprova, sozinho, agendamento futuro ou entrega.
+
 ## Verification
 
 - manifest válido e digestado;
