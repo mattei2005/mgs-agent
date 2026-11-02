@@ -130,7 +130,11 @@ def main():
     if p['id']=='2633813727134360'and col==balancecol and 'Conciliação de outubro'in oldnote:note+=' Histórico da conciliação anterior: '+oldnote[oldnote.find('Conciliação de outubro'):]
     cells[col]['note']=note
     req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':ri,'columnIndex':col},'rows':[{'values':[cells[col]]}],'fields':'userEnteredValue,note'}})
-  for col,_ in financial:erows[0]['values'][col]['note']='Atualização automática 3x/dia America/New_York. Última coleta: '+nowstamp+'. Média: três dias completos anteriores, nos fusos das contas. Gasto mensal fixado em outubro/2026 conforme contrato. Fonte Meta; nenhuma cobrança executada.';req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':col},'rows':[{'values':[erows[0]['values'][col]]}],'fields':'note'}})
+  month_names=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];month_start=date.fromisoformat(contract['month_since']);month_label=month_names[month_start.month-1]+'/'+str(month_start.year)
+  for col,_ in financial:
+   header=erows[0]['values'][col];header['note']='Atualização automática 3x/dia America/New_York. Última coleta: '+nowstamp+'. Média: três dias completos anteriores, nos fusos das contas. Gasto mensal: '+month_label+', conforme contrato vigente; dia aberto parcial. Fonte Meta; nenhuma cobrança executada.'
+   if col==monthcol:header['userEnteredValue']={'stringValue':'Total já gasto — '+month_label}
+   req.append({'updateCells':{'start':{'sheetId':sid,'rowIndex':0,'columnIndex':col},'rows':[{'values':[header]}],'fields':'userEnteredValue,note'if col==monthcol else'note'}})
   google('POST',apiroot+':batchUpdate',{'requests':req});after=google('GET',gridurl);assert after==expected,'sheet_full_readback_mismatch'
   status='updated_metrics_pending_card_history'if pending else'updated_validated'
   save(run/'receipt.json',{'status':status,'accounts':len(planned),'collected_at':nowstamp,'completed_at':datetime.now().astimezone().isoformat(),'pending_ui':pending,'meta_writes':0,'payment_actions':0,'full_grid_exact_readback':True})

@@ -1,0 +1,42 @@
+{
+  "status": "november_j_updated_validated",
+  "authority_message_id": "1566811141747777680",
+  "source_plan": "/root/mgs-agent/reports/meta-manual-payments-runs/20261102T085003783414/plan.json",
+  "accounts": 47,
+  "header": "Total já gasto — Novembro/2026",
+  "collected_at": "2026-11-02T08:50:01.006754-05:00",
+  "periods": [
+    {
+      "since": "2026-11-01",
+      "until": "2026-11-02"
+    }
+  ],
+  "total_usd": "27042.82",
+  "subtotal_checks": [
+    {
+      "row": 14,
+      "label": "TOTAL CARTÃO DE CRÉDITO",
+      "amount": "5597.76",
+      "formula": "=ROUND(SUM(J3:J13),2)"
+    },
+    {
+      "row": 53,
+      "label": "TOTAL LINHA DE CRÉDITO",
+      "amount": "21445.06",
+      "formula": "=ROUND(SUM(J17:J52),2)"
+    },
+    {
+      "row": 55,
+      "label": "TOTAL GERAL — 47 contas",
+      "amount": "27042.82",
+      "formula": "=ROUND(SUM(J14,J53),2)"
+    }
+  ],
+  "all47_exact_readback": true,
+  "outside_J_authored_cells_unchanged": true,
+  "other_tabs_authored_unchanged": true,
+  "e_f_october_invoices_preserved": true,
+  "payments": 0,
+  "meta_writes": 0,
+  "completed_at": "2026-11-02T08:51:44.281822-05:00"
+}

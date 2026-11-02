@@ -65,8 +65,8 @@
   ],
   "meta_token_item_id": "4c2p3bon37smfbklfhuej5ywkm",
   "meta_actor_id": "10233237854144701",
-  "month_since": "2026-10-01",
-  "month_until": "2026-10-31",
+  "month_since": "2026-11-01",
+  "month_until": "2026-11-30",
   "schedule_timezone": "America/New_York",
   "requested_times": [
     "08:00",
@@ -412,7 +412,7 @@
     "totals_usd": {
       "average_daily": "19824.70",
       "balance": "442961.30",
-      "month_spend": "868261.81"
+      "month_spend": "27042.82"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -528,7 +528,14 @@
     "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1566800470117187695/closure-current.json",
     "report_infra_status": "sent_verified",
     "report_infra_message_id": "1566810398349332576",
-    "report_infra_readback": true
+    "report_infra_readback": true,
+    "month_spend_period": "2026-11",
+    "month_spend_updated_at": "2026-11-02T08:50:01.006754-05:00",
+    "month_spend_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/month-1566811141747777680/receipt.json",
+    "month_spend_source_plan": "/root/mgs-agent/reports/meta-manual-payments-runs/20261102T085003783414/plan.json",
+    "month_period_authority_message": "1566811141747777680",
+    "month_only_update_preserved_other_columns": true,
+    "source_to_live_sheet_cgij_qualification": "C/G/I source prior full run08:42; J independently recollected November08:50 with exact47readback in month_spend_receipt. D/H unchanged by month-only correction."
   },
   "pending_card_history": {
     "status": "no_new_event_pending_historical_gaps_qualified",
@@ -590,7 +597,7 @@
     "report": "Rodolfo informou invoices de setembro pagas na quinta-feira; espera baixa no dia seguinte à mensagem.",
     "verification": "Owner-reported paid, provider settlement pending; preserve live amount_due until Meta confirms."
   },
-  "period_policy": "Preserve requested October/2026 spend; rolling 3-closed-day average and current balances. Do not switch reporting month, add/drop accounts, or change billing implicitly.",
+  "period_policy": "J November/2026 by Rodolfo1566811141747777680, supersedes original October J; rolling 3-closed-day average and current balances; E/F remain latest_closed_generated October invoices. Same47IDs, no billing. Do not switch future periods implicitly.",
   "created_at": "2026-10-25T13:25:35.362656-04:00",
   "cron_job_id": "2ee720363d7d",
   "cron_expression": "2 8,14,21 * * *",
@@ -657,7 +664,7 @@
     "G": "Média diária",
     "H": "Pay now",
     "I": "Saldo a pagar",
-    "J": "Outubro2026"
+    "J": "Novembro2026"
   },
   "september_period": "2026-09-01",
   "september_authority_message": "1564022485366734969",
@@ -679,5 +686,60 @@
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",
   "invoice_current_header": "Outubro — saldo em aberto",
-  "invoice_display_authority_message": "1564382678168502295"
+  "invoice_display_authority_message": "1564382678168502295",
+  "month_period_history": [
+    {
+      "month_since": "2026-10-01",
+      "month_until": "2026-10-31",
+      "superseded_by_message": "1566811141747777680",
+      "source_snapshot": "/root/mgs-agent/reports/meta-manual-payments-runs/month-1566811141747777680/contract-before.json"
+    }
+  ],
+  "month_period_authority_message": "1566811141747777680",
+  "latest_month_rollover": {
+    "status": "november_j_updated_validated",
+    "authority_message_id": "1566811141747777680",
+    "source_plan": "/root/mgs-agent/reports/meta-manual-payments-runs/20261102T085003783414/plan.json",
+    "accounts": 47,
+    "header": "Total já gasto — Novembro/2026",
+    "collected_at": "2026-11-02T08:50:01.006754-05:00",
+    "periods": [
+      {
+        "since": "2026-11-01",
+        "until": "2026-11-02"
+      }
+    ],
+    "total_usd": "27042.82",
+    "subtotal_checks": [
+      {
+        "row": 14,
+        "label": "TOTAL CARTÃO DE CRÉDITO",
+        "amount": "5597.76",
+        "formula": "=ROUND(SUM(J3:J13),2)"
+      },
+      {
+        "row": 53,
+        "label": "TOTAL LINHA DE CRÉDITO",
+        "amount": "21445.06",
+        "formula": "=ROUND(SUM(J17:J52),2)"
+      },
+      {
+        "row": 55,
+        "label": "TOTAL GERAL — 47 contas",
+        "amount": "27042.82",
+        "formula": "=ROUND(SUM(J14,J53),2)"
+      }
+    ],
+    "all47_exact_readback": true,
+    "outside_J_authored_cells_unchanged": true,
+    "other_tabs_authored_unchanged": true,
+    "e_f_october_invoices_preserved": true,
+    "payments": 0,
+    "meta_writes": 0,
+    "completed_at": "2026-11-02T08:51:44.281822-05:00",
+    "receipt_path": "/root/mgs-agent/reports/meta-manual-payments-runs/month-1566811141747777680/receipt.json",
+    "report_infra_status": "sent_verified",
+    "report_infra_message_id": "1566812346909851789",
+    "report_infra_readback": true
+  }
 }

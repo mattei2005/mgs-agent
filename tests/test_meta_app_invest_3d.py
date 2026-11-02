@@ -367,6 +367,32 @@ class MetaAppInvest3DTests(unittest.TestCase):
             finally:
                 ns.update(saved)
 
+    def test_live_card_distinguishes_admin_checkpoint_from_app_health(self):
+        from unittest.mock import patch
+        ns = self.generic.alert_roles_live_manual.__globals__
+        cards = []
+        with patch.dict(ns, {
+            'post_webhook': lambda content, embed, app_name=None: cards.append(embed),
+            'post_code_blocks': lambda *args, **kwargs: None,
+            'admin_alert_fields': lambda *args, **kwargs: [],
+            'fmt_roles': lambda *args, **kwargs: 'Nenhum.',
+            'fmt_delta_roles': lambda *args, **kwargs: 'Nenhum.',
+        }):
+            snap = {'roles': [], 'usage': {'severity': 'ok'}, 'checks': {
+                'app_metadata': {'ok': True}, 'roles': {'ok': True},
+                'user_token_me': {'ok': False, 'error': {'code': 190,
+                    'message': 'You cannot access the app till you log in to www.facebook.com and follow the instructions given.'}},
+                'debug_token': {'ok': False},
+            }}
+            self.generic.alert_roles_live_manual('B011-9', snap, [], [], [])
+            warning = [f for f in cards[-1]['fields'] if f['name'] == 'TOKEN DO PERFIL ADMIN']
+            self.assertEqual(len(warning), 1)
+            self.assertIn('BLOQUEADO', warning[0]['value'])
+            snap['checks']['user_token_me']['ok'] = True
+            snap['checks']['debug_token']['ok'] = True
+            self.generic.alert_roles_live_manual('B011-9', snap, [], [], [])
+            self.assertFalse(any(f['name'] == 'TOKEN DO PERFIL ADMIN' for f in cards[-1]['fields']))
+
     def test_last_enrichment_receipt_survives_lazy_cycles(self):
         for module in (self.generic, self.b013):
             state = {}
