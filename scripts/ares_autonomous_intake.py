@@ -267,6 +267,9 @@ def main():
                     entry=state['claims'].get(args.batch_id)
                     if not entry or entry['owner']!=args.owner or not isinstance(entry.get('inventory_before'),dict):raise IntakeError('FROZEN_INVENTORY_BASELINE_REQUIRED')
                     result=finish_with_archive(state,batch,args.owner)
+        if args.action=='complete' and batch.get('scope_type')=='flat_request' and result.get('status')=='complete':
+            import ares_flat_intake as flat
+            result={**result,'flat_delivery':flat.finalize_batch(batch)}
         if isinstance(result,dict) and 'inventory_before' in result:result={k:v for k,v in result.items() if k!='inventory_before'}
         if args.action in ['complete','selftest-complete']:
             previous=bridge.read_json(DATA/'intake-last-error.json',{})

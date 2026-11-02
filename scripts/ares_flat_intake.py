@@ -131,6 +131,30 @@ def register(operation,manager,destination,source_ids,requester,channel,message,
   if apply:registry['requests'][c['request_id']]=c;b.atomic_json(REQUESTS,registry)
   return {'status':'registered' if apply else 'verified_plan','request_id':c['request_id'],'sources':len(sources),'destination_mode':destination,'campaign_writes':0,'remote_writes':0}
 
+def finalize_batch(batch):
+ validate_batch_identity(batch)
+ import ares_autonomous_intake as intake
+ import ares_manager_delivery as delivery
+ import ares_manager_storage_standard as standard
+ registry=b.read_json(REQUESTS,{});c=registry.get('requests',{}).get(batch['flat_request_id']);require(c is not None,'FLAT_FINAL_REQUEST_MISSING')
+ state=b.read_json(intake.STATE,{});entry=state.get('claims',{}).get(batch['batch_id'],{});require(entry.get('status')=='complete','FLAT_FINAL_INTAKE_NOT_COMPLETE')
+ rows=[json.loads(x) for x in (b.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if x.strip()];out=[]
+ baseline=entry.get('inventory_before',{})
+ for source in batch['sources']:
+  found=[r for r in rows if r.get('source_drive_id')==source['source_id'] or source['source_id'] in (r.get('duplicate_source_drive_ids') or [])];require(len(found)==1,'FLAT_FINAL_UNIQUE_LINEAGE');row=found[0]
+  if row['asset_id'] in baseline:out.append({'asset_id':row['asset_id'],'status':'existing_lineage_preserved'});continue
+  if c['destination_mode']=='exclusive':
+   target=standard.destination(c['operation'],row['format'],c['manager_name'],'exclusive')
+   request={'requester_id':c['requested_by_discord_id'],'thread_id':c['request_channel_id'],'message_id':c['request_message_id']}
+   out.append(delivery.deliver(row['asset_id'],target,request,apply=True))
+  else:out.append({'asset_id':row['asset_id'],'status':'common_ready_preserving_inventory_eligibility'})
+ with intake.locked_state() as current:
+  registry=b.read_json(REQUESTS,{});c=registry['requests'][batch['flat_request_id']]
+  c.setdefault('completed_batches',{})[batch['batch_id']]={'verified_at':b.now_iso(),'deliveries':out}
+  if all(s['id'] in current.get('completed',{}) for s in c['sources']):c.update(status='complete',completed_at=b.now_iso())
+  b.atomic_json(REQUESTS,registry)
+ return {'status':'complete','deliveries':out,'campaign_writes':0}
+
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['register','status']);p.add_argument('--operation');p.add_argument('--manager');p.add_argument('--destination',choices=['common','exclusive']);p.add_argument('--source-id',action='append');p.add_argument('--requester-id');p.add_argument('--channel-id');p.add_argument('--message-id');p.add_argument('--apply',action='store_true');a=p.parse_args()
  if a.action=='status':result={'active':policy() is not None,'upload_root_id':UPLOAD,'requests':len(b.read_json(REQUESTS,{}).get('requests',{}))}
