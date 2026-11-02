@@ -13,6 +13,7 @@ AUTH=HOME/'access-authority.json'
 UPLOAD='1ARBvLammWUHuAclNmcriwkkgeedKryBd'
 CORPORATE='16fP9b4bp3inB1Gze95znQLYq3rdtTEhp'
 CONTROL='1vrC6oOrTwNrxQRdGA12U_iKT9GqyXLgO'
+REPORT_IDS=['1elQxntj6aLUI7AsbQOAg6UZq3MAyC7skloTEAGTqxxc','19r7ckPZJCujdVSdaBBpFqsu6TXur3s8K','1U6t0uBCRnGyu7sS0D0pH2T-LjIqaNGuj4vR03AsfHfs','1QbGJXNZJlJM0Ljn5NCaHBFSZeJo23eyc2M1tSx3XyUg']
 class FlatError(b.ArchiveError):pass
 
 def require(ok,reason):
@@ -64,6 +65,15 @@ def validate_move(plan,fid):
  item=rows[fid];require(item['id']==fid and item['destination_parent'] in plan['allowed_destination_ids'] and item['source_parent']!=item['destination_parent'],'MOVE_DESTINATION_SCOPE')
  return item
 
+def destination_scope(sa,parent):
+ current=parent;seen=set()
+ for _ in range(30):
+  require(current not in seen,'DESTINATION_CYCLE');seen.add(current)
+  m=meta(sa,current);require(m.get('trashed') is False and m.get('mimeType')==b.FOLDER and not m.get('driveId') and any(o.get('emailAddress')==b.ACCOUNT for o in m.get('owners',[])),'DESTINATION_NATIVE_OWNER')
+  if current in [b.ARCHIVE_ROOT,CORPORATE]:return True
+  require(len(m.get('parents',[]))==1,'DESTINATION_ANCESTRY');current=m['parents'][0]
+ raise FlatError('DESTINATION_DEPTH')
+
 def restore_access(owner,sa,plan,fid,journal):
  item=validate_move(plan,fid);before=item['permissions_before'];current=permissions(sa,fid)
  expected=identities(before);actual=identities(current)
@@ -86,10 +96,12 @@ def restore_access(owner,sa,plan,fid,journal):
 
 def move(owner,sa,plan,fid,journal):
  item=validate_move(plan,fid);now=meta(sa,fid);key='move:'+fid;prior=journal.data['intents'].get(key)
+ destination_scope(sa,item['destination_parent'])
  if now.get('parents')==[item['destination_parent']]:
   require(prior is not None,'UNJOURNALLED_MOVE');restore_access(owner,sa,plan,fid,journal);return now
  require(not prior,'AMBIGUOUS_MOVE_NO_REPLAY')
  before=item['metadata_before'];require(now.get('parents')==[item['source_parent']] and now.get('trashed') is False and now.get('version')==before['version'],'MOVE_SOURCE_CAS')
+ require(now.get('driveId')==b.SOURCE_DRIVE,'MOVE_SOURCE_SHARED_DRIVE_ONLY')
  require(same_access(item['permissions_before'],permissions(sa,fid)),'MOVE_ACL_CAS')
  journal.intent(key,{'source_parent':item['source_parent'],'destination_parent':item['destination_parent'],'metadata_before':before,'plan_sha256':plan['plan_sha256']})
  error=None
@@ -107,6 +119,7 @@ def freeze_plan(sa,moves):
  authority();objects={}
  for fid,parent in moves.items():
   m=meta(sa,fid);require(m.get('trashed') is False and len(m.get('parents',[]))==1,'PLAN_SOURCE')
+  require(m.get('driveId')==b.SOURCE_DRIVE,'PLAN_SOURCE_SHARED_DRIVE_ONLY');destination_scope(sa,parent)
   objects[fid]={'id':fid,'source_parent':m['parents'][0],'destination_parent':parent,'metadata_before':m,'permissions_before':permissions(sa,fid)}
  p={'schema':'mgs.flat.layout.move.plan.v1','redesign_confirmation':'1566814476626563115','access_confirmation':'1566825959645253764','objects':objects,'allowed_destination_ids':sorted(set(moves.values())),'created_at':b.now_iso()};p['plan_sha256']=sha(p);return p
 
@@ -154,5 +167,56 @@ def canary():
   state.update(status='verified',verified_at=b.now_iso(),root_after=meta(sa,root),root_permissions_after=permissions(sa,root),binary_after=m,binary_permissions_after=permissions(sa,binary),same_ids=True,full_bytes_verified=True,all_access_preserved=True,delete_writes=0);b.atomic_json(HOME/'canary-state.json',state)
   return {k:state[k] for k in ['status','folder_id','binary_id','same_ids','full_bytes_verified','all_access_preserved','delete_writes','verified_at']}
 
+def sheets_canary(sa,sid):
+ import uuid
+ from mgs_google_workspace_auth import api_json
+ native=old.whole.sheets_get(sa,sid);sheet=native['sheets'][0];props=sheet['properties'];grid=props['gridProperties']
+ require(not sheet.get('protectedRanges'),'SHEET_CANARY_PROTECTED_TAB')
+ column=grid['columnCount'];letters=''
+ while column:column,r=divmod(column-1,26);letters=chr(65+r)+letters
+ a1="'"+props['title'].replace("'","''")+"'!"+letters+str(grid['rowCount'])
+ for merge in sheet.get('merges',[]):
+  require(not (merge.get('startRowIndex',0)<=grid['rowCount']-1<merge.get('endRowIndex',0) and merge.get('startColumnIndex',0)<=grid['columnCount']-1<merge.get('endColumnIndex',0)),'SHEET_CANARY_MERGED')
+ path='/values/'+urllib.parse.quote(a1,safe='!:');url='https://sheets.googleapis.com/v4/spreadsheets/'+sid+path
+ original=old.whole.sheets_get(sa,sid,path,{'valueRenderOption':'FORMULA'});require(not original.get('values'),'SHEET_CANARY_NONBLANK')
+ sentinel='MGS_FLAT_VERIFY_'+uuid.uuid4().hex
+ try:
+  status,_=api_json('PUT',url+'?valueInputOption=RAW',sa.token,{'range':a1,'majorDimension':'ROWS','values':[[sentinel]]});require(status==200,'SHEET_CANARY_WRITE')
+  require(old.whole.sheets_get(sa,sid,path).get('values')==[[sentinel]],'SHEET_CANARY_READBACK')
+ finally:
+  status,_=api_json('POST',url+':clear',sa.token,{});require(status==200,'SHEET_CANARY_RESTORE')
+ require(not old.whole.sheets_get(sa,sid,path).get('values'),'SHEET_CANARY_RESTORE_READBACK')
+ return {'range':a1,'write_read_restore_verified':True}
+
+def reports():
+ authority();require(b.read_json(HOME/'canary-state.json',{}).get('status')=='verified','CANARY_REQUIRED')
+ from mgs_google_workspace_auth import service_account_access_token
+ with b.queue_lock():
+  sa=b.Drive(True);sa.token=service_account_access_token(['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']);owner=t.OwnerDrive();journal=t.Journal(HOME/'reports-journal.json');state=b.read_json(HOME/'reports-state.json',{'objects':{}})
+  if state.get('status')=='verified':return {'status':'already_verified','objects':len(state['objects'])}
+  plan=b.read_json(HOME/'reports-move-plan.json')
+  if plan is None:
+   plan=freeze_plan(sa,{fid:CORPORATE for fid in REPORT_IDS});b.atomic_json(HOME/'reports-move-plan.json',plan)
+  for fid in REPORT_IDS:
+   item=plan['objects'][fid];record=state['objects'].get(fid)
+   if record is None:
+    m=meta(sa,fid);require(m.get('parents')==[b.SOURCE_DRIVE],'REPORT_SOURCE_PARENT')
+    if m['mimeType']=='application/vnd.google-apps.spreadsheet':
+     full,summary=old.whole.snapshot(sa,fid);grid=old.whole.sheets_get(sa,fid,params={'includeGridData':'true'});record={'kind':'sheet','snapshot_before':full,'summary_before':summary,'grid_before':grid}
+    else:record={'kind':'binary','hashes_before':sa.hashes(fid)}
+    record['metadata_before']=m;state['objects'][fid]=record;b.atomic_json(HOME/'reports-state.json',state)
+   if record.get('verified'):continue
+   move(owner,sa,plan,fid,journal)
+   if record['kind']=='sheet':
+    full,summary=old.whole.snapshot(sa,fid);require(full==record['snapshot_before'],'REPORT_SHEET_CONTENT_CHANGED')
+    grid=old.whole.sheets_get(sa,fid,params={'includeGridData':'true'});require(grid==record['grid_before'],'REPORT_SHEET_GRID_CHANGED')
+    record['canary']=sheets_canary(sa,fid)
+    full,_=old.whole.snapshot(sa,fid);require(full==record['snapshot_before'],'REPORT_SHEET_RESTORE_CONTENT_CHANGED')
+    record['tabs_verified']=summary['tabs']
+   else:require(sa.hashes(fid)==record['hashes_before'],'REPORT_FULL_BYTES_CHANGED')
+   record.update(verified=True,metadata_after=meta(sa,fid),permissions_after=permissions(sa,fid),verified_at=b.now_iso());b.atomic_json(HOME/'reports-state.json',state)
+  state.update(status='verified',same_ids=True,delete_writes=0,verified_at=b.now_iso());b.atomic_json(HOME/'reports-state.json',state)
+  return {'status':'verified','same_ids':True,'reports':len(state['objects']),'sheets':sum(x['kind']=='sheet' for x in state['objects'].values()),'tabs_verified':sum(x.get('tabs_verified',0) for x in state['objects'].values()),'all_access_preserved':True,'delete_writes':0}
+
 if __name__=='__main__':
- ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['canary']);args=ap.parse_args();print(json.dumps(canary(),ensure_ascii=False))
+ ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('action',choices=['canary','reports']);args=ap.parse_args();print(json.dumps(canary() if args.action=='canary' else reports(),ensure_ascii=False))
