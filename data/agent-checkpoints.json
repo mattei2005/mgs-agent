@@ -1873,12 +1873,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-G004-CPR-1566817626154344450",
-      "next_step": "Conferir coorte e evento live; leitura inicial; instalar agenda finita e readback",
-      "objective": "Alertar CPR >USD1.30 para duplicacoes de hoje da conta Yolokfx04 ate fim de 02/11 ET",
-      "source": "discord:1558147211026501643/1566817626154344450",
-      "state": "intake autorizado; pedido de duplicacao e cinco ids recuperados; validacao live e agenda em preparo",
+      "next_step": "Executar29slots somente hoje; alertar primeira ultrapassagem estrita e rearmar apos <=1.30; expirar03/11 00hEST; sem resultados permanece indefinido",
+      "objective": "Alertar CPR Meta AddToWishlist >USD1.30 das copias229-233 em02/11 ate fim do dia ET",
+      "source": "data/ares/meta-ads/state/cpr-watch/1566817626154344450/manifest.json",
+      "state": "5ids reconciliados api+recibo; leitura inicial09:17est sem resultados; testes decimal14 e transporte8pass; monitor finito habilitado; slots13/43 ate23:43; zero meta writes",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-02T14:15:13+00:00"
+      "updated_at": "2026-11-02T14:19:28+00:00"
     },
     {
       "agent": "ares",
@@ -8282,5 +8282,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T14:15:13+00:00"
+  "updated_at": "2026-11-02T14:19:28+00:00"
 }
