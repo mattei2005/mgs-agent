@@ -237,18 +237,28 @@ def verify_completed(d,batch,baseline):
         row=matches[0];op=batch['operation'];kind=row.get('format')
         if row.get('operation')!=op or kind not in ['IMG','VID'] or row.get('metadata_clean') is not True:raise IntakeError('LINEAGE_CONTEXT_OR_ELIGIBILITY')
         verify_reservation(row,baseline,batch)
-        raw=d.meta(source['source_id']);clean=d.meta(row['asset_drive_id'])
+        raw=d.meta(source['source_id']);logical_clean=row['asset_drive_id'];archived_duplicate=None
+        if row['asset_id'] in baseline:
+            import ares_flat_intake as flat
+            if flat.policy() is not None:
+                import ares_archive_storage as storage
+                archived_duplicate=storage.resolve_media(logical_clean,token=d.token)
+        clean=archived_duplicate['provider_metadata'] if archived_duplicate else d.meta(logical_clean)
+        if archived_duplicate and (archived_duplicate['logical_source_id']!=logical_clean or archived_duplicate['provider_id']!=clean['id']):raise IntakeError('DUPLICATE_PROVIDER_IDENTITY')
         expected_clean=[op,kind,'01_READY']
         if row['asset_id'] in baseline:
             parts=row.get('asset_path','').split('/')
             if parts[:2]!=['MGS-AGENTS','CRIATIVOS'] or parts[-1]!=row['canonical_filename']:raise IntakeError('EXISTING_DESTINATION_PATH')
             expected_clean=parts[2:-1]
-        if raw.get('name')!=source['name'] or d.relative_parent(raw['parents'][0],bridge.SOURCE_ROOT)!=[op,kind,'99_LEGACY'] or d.relative_parent(clean['parents'][0],bridge.SOURCE_ROOT)!=expected_clean:raise IntakeError('FINAL_PARENT_SCOPE')
-        if raw.get('driveId')!=bridge.SOURCE_DRIVE or clean.get('driveId')!=bridge.SOURCE_DRIVE or raw.get('trashed') or clean.get('trashed') or clean.get('name')!=row.get('canonical_filename'):raise IntakeError('FINAL_IDENTITY')
+        if raw.get('name')!=source['name'] or d.relative_parent(raw['parents'][0],bridge.SOURCE_ROOT)!=[op,kind,'99_LEGACY']:raise IntakeError('FINAL_PARENT_SCOPE')
+        if not archived_duplicate and d.relative_parent(clean['parents'][0],bridge.SOURCE_ROOT)!=expected_clean:raise IntakeError('FINAL_PARENT_SCOPE')
+        if raw.get('driveId')!=bridge.SOURCE_DRIVE or (not archived_duplicate and clean.get('driveId')!=bridge.SOURCE_DRIVE) or raw.get('trashed') or clean.get('trashed') or clean.get('name')!=row.get('canonical_filename'):raise IntakeError('FINAL_IDENTITY')
         hashes=d.hashes(source['source_id']);ch=d.hashes(clean['id'])
         allowed_raw={row['original_checksum'],row['clean_checksum']} if row['asset_id'] in baseline else {row['original_checksum']}
         if hashes['md5']!=source['md5'] or hashes['size']!=source['size'] or hashes['sha256'] not in allowed_raw or ch['sha256']!=row['clean_checksum'] or ch['md5']!=clean['md5Checksum'] or ch['size']!=clean['size']:raise IntakeError('FINAL_BINARY_PROOF')
-        proofs.append({'source_id':source['source_id'],'clean_source_id':clean['id'],'raw_sha256':hashes['sha256'],'clean_sha256':ch['sha256'],'source_parent_verified':True,'clean_verified':True,'inventory_verified':True,'reservation_preserved':True})
+        proof={'source_id':source['source_id'],'clean_source_id':logical_clean,'raw_sha256':hashes['sha256'],'clean_sha256':ch['sha256'],'source_parent_verified':True,'clean_verified':True,'inventory_verified':True,'reservation_preserved':True}
+        if archived_duplicate:proof.update(clean_provider_id=clean['id'],existing_archive_duplicate=True)
+        proofs.append(proof)
     return proofs
 
 def main():
