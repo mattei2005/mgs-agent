@@ -288,6 +288,8 @@ Active MGS consumers must either import `mgs_google_workspace_auth.py` or implem
 
 For an approved layout or delivery-workflow change, trace the live producer → resolver → stock move/finalizer → catalogue → reconciliation/retirement chain before editing. Update affected executable guards, bindings and agent procedures together; documentation alone cannot change compiled parent/path assumptions. Preserve immutable evidence and exercise both existing deliveries and future writes before reporting the new workflow ready.
 
+Before claiming agent documentation is consistent, traverse the canonical operational map, primary skills and their secondary intake/capability/verification routes, including adjacent Paid Acquisition and Taxonomy readers. Matching main SKILL files and mirrors alone does not cover a reachable old guide. Search for stale physical paths, folder-derived context, Shared-Drive predicates imposed on My Drive stock, and preparation-only flags; read/classify each hit before changing it. Preserve logical inventory namespaces and immutable migration history, explicitly supersede historical instructions, validate the actual cross-skill links, and distinguish a scoped documentation audit from a semantic review of every unrelated document.
+
 Current critical consumers include:
 
 - `monitor-drive-auth-unified.py`

@@ -46,7 +46,7 @@ O original e a cópia tratada compartilham a mesma linhagem. Se o gestor usar o 
 
 ## Arquivo permanente e binding vivo
 
-Fonte vigente: `context/drive-flat-intake-cutover.md`, confirmações1566814476626563115 e1566825959645253764, e `flat-intake-binding.json`. O estado anterior de integração em validação foi supersedido pelo cutover aceito; não usá-lo como bloqueio atual. Agentes usam SA canônica, Shared Drive somente para entrada/staging e componente owner isolado para transporte autorizado aos 30 TB. Preservar IDs, linhagens, status, reservas e ares_eligible=false. Pedido de upload/registro não autoriza campanha nem DELETE/trash. Receita `creative-operations-mgs/references/flat-upload-intake.md` e contrato `shared-drive-30tb-archive-queue.md`.
+Fonte vigente: `context/drive-flat-intake-cutover.md`, confirmações1566814476626563115 e1566825959645253764, e `flat-intake-binding.json`. O estado anterior de integração em validação foi supersedido pelo cutover aceito; não usá-lo como bloqueio atual. Agentes usam SA canônica, Shared Drive somente para entrada/staging e componente owner isolado para transporte autorizado aos 30 TB. Preservar IDs, linhagens, status, reservas e ares_eligible=false. Pedido de upload/registro não autoriza campanha nem DELETE/trash. Receita `creative-operations-mgs/references/flat-upload-intake.md` e contrato `creative-operations-mgs/references/shared-drive-30tb-archive-queue.md`.
 
 ## Estrutura Drive canônica
 
