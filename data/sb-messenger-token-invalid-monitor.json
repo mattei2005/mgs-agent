@@ -574,7 +574,13 @@
     732710,
     732726,
     732760,
-    732772
+    732772,
+    732946,
+    732956,
+    732973,
+    732994,
+    733017,
+    733036
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -886,9 +892,9 @@
     "digital-trust|cliquet|13|1737": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T16:05:12.000Z",
+        "created_at": "2026-11-02T16:06:43.000Z",
         "domain": "cliquet",
-        "notification_id": 731670,
+        "notification_id": 732946,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 9,
@@ -923,7 +929,8 @@
         728173,
         729393,
         730618,
-        731670
+        731670,
+        732946
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -2061,9 +2068,9 @@
     "digital-trust|infinitynexx|110|1690": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T16:05:28.000Z",
+        "created_at": "2026-11-02T16:06:59.000Z",
         "domain": "infinitynexx",
-        "notification_id": 731704,
+        "notification_id": 732973,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -2097,7 +2104,8 @@
         728176,
         729395,
         730655,
-        731704
+        731704,
+        732973
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -3145,9 +3153,9 @@
     "digital-trust|portalrelevante|23|287": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T16:08:28.000Z",
+        "created_at": "2026-11-02T16:11:04.000Z",
         "domain": "portalrelevante",
-        "notification_id": 731764,
+        "notification_id": 733036,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 8
@@ -3169,7 +3177,8 @@
         728845,
         729953,
         730722,
-        731764
+        731764,
+        733036
       ],
       "opened_at": "2026-10-28T08:27:15-04:00",
       "repeat_count": 0,
@@ -3479,9 +3488,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T16:05:22.000Z",
+        "created_at": "2026-11-02T16:06:53.000Z",
         "domain": "topfeed",
-        "notification_id": 731683,
+        "notification_id": 732956,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 16,
@@ -3518,7 +3527,8 @@
         727217,
         728761,
         730643,
-        731683
+        731683,
+        732956
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -3603,9 +3613,9 @@
     "digital-trust|vizioid|50|217": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T16:08:06.000Z",
+        "created_at": "2026-11-02T16:10:32.000Z",
         "domain": "vizioid",
-        "notification_id": 731722,
+        "notification_id": 732994,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 9,
@@ -3639,7 +3649,8 @@
         728198,
         729416,
         730677,
-        731722
+        731722,
+        732994
       ],
       "opened_at": "2026-10-15T12:12:15-04:00",
       "repeat_count": 0,
@@ -3690,9 +3701,9 @@
     "digital-trust|wavesbee|9|241": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-01T16:08:24.000Z",
+        "created_at": "2026-11-02T16:10:58.000Z",
         "domain": "wavesbee",
-        "notification_id": 731742,
+        "notification_id": 733017,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 36,
@@ -3716,7 +3727,8 @@
         728824,
         729930,
         730698,
-        731742
+        731742,
+        733017
       ],
       "opened_at": "2026-10-28T08:27:15-04:00",
       "repeat_count": 0,
@@ -4211,55 +4223,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-02T10:57:14-05:00",
+  "last_check": "2026-11-02T11:12:15-05:00",
   "last_delivery": {
-    "at": "2026-11-02T07:12:31-05:00",
+    "at": "2026-11-02T11:12:15-05:00",
     "cursor_ids": [
-      732438,
-      732467,
-      732477,
-      732500,
-      732514,
-      732535,
-      732559,
-      732586,
-      732607,
-      732628,
-      732648,
-      732663,
-      732696,
-      732710,
-      732726,
-      732760,
-      732772
+      732946,
+      732956,
+      732973,
+      732994,
+      733017,
+      733036
     ],
-    "message_ids": [
-      "1566787024512618527",
-      "1566787031143555195",
-      "1566787035803549698",
-      "1566787049137373185",
-      "1566787054052974654",
-      "1566787068443492505",
-      "1566787072008786063",
-      "1566787075884187679",
-      "1566787079919378463",
-      "1566787084843352156"
-    ],
-    "notification_ids": [
-      732438,
-      732477,
-      732500,
-      732559,
-      732586,
-      732607,
-      732628,
-      732696,
-      732710,
-      732726
-    ]
+    "message_ids": [],
+    "notification_ids": []
   },
   "last_error": null,
-  "last_seen_id": 732772,
+  "last_seen_id": 733036,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",

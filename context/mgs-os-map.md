@@ -123,7 +123,7 @@ Regra prática:
   - Ares não é dono de AdOps/precificação.
   - Ares não faz setup WordPress/pixel crítico sem Rodolfo.
   - Budget write segue gates de Rodolfo/Geizian.
-  - Operações usam exclusivamente o Shared Drive canônico `MGS-AGENTS`, administrado no Google Workspace por `support@matteiservicesinc.com`.
+  - Agentes usam a SA canônica: o Shared Drive `MGS-AGENTS`, administrado por `support@matteiservicesinc.com`, é entrada/staging; o arquivo definitivo e o corporativo ficam nos 30 TB pelo conector owner isolado aprovado. Topologia e intake vigente: `context/drive-flat-intake-cutover.md`; não recriar operação/gestor dentro de UPLOAD MANUAL.
 
 ### Revenue / AdOps
 

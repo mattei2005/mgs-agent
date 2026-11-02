@@ -8,6 +8,9 @@ class RetirementTests(unittest.TestCase):
  def setUpClass(cls):
   spec=importlib.util.spec_from_file_location('retirement_offline',ROOT/'scripts/ares_archive_retirement.py');assert spec and spec.loader;cls.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.m)
  def setUp(self):
+  # Legacy-delete fixtures must not inherit the live flat-preservation mode.
+  # Active flat guards are covered independently by test_mgs_flat_maintenance.
+  isolated_policy=patch('ares_flat_intake.policy',return_value=None);isolated_policy.start();self.addCleanup(isolated_policy.stop)
   b=self.m.b;self.c={'account':b.ACCOUNT,'source_drive_id':b.SOURCE_DRIVE,'source_root_id':b.SOURCE_ROOT,'archive_root_id':b.ARCHIVE_ROOT,'delete_source':False,'include_historical':False,'queue_enabled':True,'prefer_archive_reads':True,'effective_after':'2026-10-20T14:00:00Z'}
   def asset(role,sid,status):return {'role':role,'sourceId':sid,'sourceParentId':'parentOffline001','name':role+'.png','mimeType':'image/png','size':'20','md5':'b'*32,'sha256':'a'*64,'version':'1','relativeParent':['SHEIN_US_ES','IMG',status],'sourceCreatedTime':'2026-10-20T15:00:00Z'}
   self.job={'jobId':'a'*32,'kind':'lineage','lineageId':'assetOffline001','deleteSource':False,'assets':[asset('original','rawOffline001','99_LEGACY'),asset('clean','cleanOffline001','01_READY')]}
