@@ -95,6 +95,8 @@ def discover(d):
 def validate_new_batch(d,batch):
  validate_batch_identity(batch);c=b.read_json(REQUESTS,{}).get('requests',{}).get(batch.get('flat_request_id'))
  require(c is not None,'FLAT_REQUEST_MISSING');validate_context(c)
+ current_human=human_source(c['request_channel_id'],c['request_message_id'],c['requested_by_discord_id'])
+ require(current_human['body_sha256']==c.get('native_human_source',{}).get('body_sha256'),'FLAT_HUMAN_REQUEST_CHANGED')
  for k in ['operation','manager_code','manager_name','destination_mode','requested_by_discord_id','request_message_id','request_channel_id']:
   require(batch.get(k)==c[k],'FLAT_REQUEST_SCOPE_CHANGED:'+k)
  registered={x['id']:x for x in c['sources']}
