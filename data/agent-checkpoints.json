@@ -2422,6 +2422,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DRIVE-LEGACY-USAGE-1566639091007758458",
+      "next_step": "Congelar coorte de 172, validar destinos e mover mesmos stock IDs para Usados do gestor da pasta histórica com CAS/readback; catálogo e fonte canônica registrarão declaração operacional do CEO, não prova Meta. 12 RAW e 3 referências fora do escopo.",
+      "objective": "Aplicar a declaração de Rodolfo: 172 tratados históricos nas pastas dos gestores já foram usados em campanhas, preservando reservas e sem inventar IDs Meta.",
+      "source": "context/creative-archive-legacy-reconciliation.md",
+      "state": "authorized_preflight",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-02T02:26:44+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
       "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
       "objective": "Ordem visual e valores de origem das despesas no Dash ago2026-dez2027; nomes SB e FX próprios",
@@ -3103,12 +3113,12 @@
     {
       "agent": "zeus",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
-      "next_step": "core22 permanece2955/candidato2987; tentativa nativa16:23 sem oferta; proxima estimativa01/11 21:57ET. Sem sucessor: Hermes proibe criacao recursiva de cron. Zeus precisa prover checker em superficie autorizada nao-cron apos proxima tentativa, limite02/11 12hET; nao forcar/instalar/reiniciar/alterar timer. Jobd476a2649595 consumido1/1.",
+      "next_step": "Aguardar ciclo nativo21:57ET; sucessor unico f17da87f7d57 verificado22:03:25ET01/11, entrega nesta thread; core22 ainda2955 candidato2987. Nao forcar/instalar/reiniciar/alterar timer. Update nao concluido.",
       "objective": "Aguardar refresh automatico core22 no Hostinger e avisar resultado validado; nao forcar update",
-      "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/snap-core22-automatic-20261101-observation.json",
-      "state": "pending_native_refresh_followup_executor_blocked",
+      "source": "/root/.hermes/profiles/zeus/reports/vps-audit-1565728077336805552/snap-core22-followup-1566638950741712907.json",
+      "state": "pending_native_refresh_successor_scheduled",
       "thread_id": "1565713769789657239",
-      "updated_at": "2026-11-01T21:30:37+00:00"
+      "updated_at": "2026-11-01T21:26:56.705335-05:00"
     },
     {
       "agent": "zeus",
@@ -8182,5 +8192,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-02T02:03:28+00:00"
+  "updated_at": "2026-11-02T02:26:44+00:00"
 }
