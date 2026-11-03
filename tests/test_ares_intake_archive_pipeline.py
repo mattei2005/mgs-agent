@@ -51,5 +51,25 @@ class PipelineTests(unittest.TestCase):
    with self.assertRaises(b.ArchiveError):pipeline.child('synthetic.py',[])
  def test_no_owner_grant_loaded_into_agent_process(self):
   text=Path(pipeline.__file__).read_text();self.assertNotIn('OwnerDrive()',text);self.assertNotIn('auth.json',text)
+ def test_completed_flat_delivery_replay_preserves_first_receipt(self):
+  import ares_flat_intake as flat
+  batch={'flat_request_id':'syntheticRequest','batch_id':'syntheticbatch'}
+  prior={'verified_at':'first-delivery','deliveries':[{'asset_id':'syntheticAsset','status':'common_ready_preserving_inventory_eligibility'}]}
+  registry={'requests':{'syntheticRequest':{'completed_batches':{'syntheticbatch':prior}}}}
+  state={'claims':{'syntheticbatch':{'status':'complete'}}}
+  with patch.object(flat,'validate_batch_identity'),patch.object(b,'read_json',side_effect=[registry,state]),patch.object(b,'atomic_json',side_effect=AssertionError('no replay write')):
+   result=flat.finalize_batch(batch)
+  self.assertTrue(result['replay']);self.assertEqual(result['deliveries'],prior['deliveries']);self.assertEqual(prior['verified_at'],'first-delivery')
+ def test_wrong_owner_mode_never_publishes(self):
+  self.patches[3].stop()
+  import contextlib
+  @contextlib.contextmanager
+  def lease():yield True
+  with patch.object(b,'queue_lock',lease),patch.object(b,'config_load',return_value={'owner_executor_mode':'unsupported'}),patch.object(b,'Drive',side_effect=AssertionError('no identity fallback')):
+   with self.assertRaises(b.ArchiveError):pipeline.publish([])
+ def test_enabled_requires_exact_authority_and_boolean(self):
+  self.patches[1].stop()
+  for cfg in [{'archive_pipeline_enabled':True,'archive_pipeline_authority_message_id':'wrong'},{'archive_pipeline_enabled':'true','archive_pipeline_authority_message_id':pipeline.AUTHORITY}]:
+   with patch.object(b,'read_json',return_value=cfg):self.assertFalse(pipeline.enabled())
 
 if __name__=='__main__':unittest.main()
