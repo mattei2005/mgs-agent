@@ -40,9 +40,9 @@ def selected_context():
     return context if context and selected(context['descriptor']) else None
 
 
-def make_descriptor(state,bound):
+def make_descriptor(state,bound,*,reviewed_omissions=None):
     req=state['request']
-    return {'continuation_of':req['request_id'],'account':req['account'],'account_id':ACCOUNT,
+    result={'continuation_of':req['request_id'],'account':req['account'],'account_id':ACCOUNT,
         'authorized_by':req['authorized_by'],'source_channel_id':req['source_channel_id'],
         'source_thread_id':req['source_thread_id'],'source_message_id':ORIGINAL_ID,
         'source_message_content':ORIGINAL,'source_campaign_number':req['source_number'],
@@ -50,6 +50,8 @@ def make_descriptor(state,bound):
         'bid_usd':req['bid_usd'],'status':req['status'],'start_time':state['manifest']['campaigns'][0]['start_time'],
         'start_now':False,'review_prompt_message_id':PROMPT_ID,'review_message_id':REVIEW_ID,
         'reviewed_creative_features_kind':KIND,'reviewed_creative_features':copy.deepcopy(bound)}
+    if reviewed_omissions is not None:result['reviewed_feature_omissions']=copy.deepcopy(reviewed_omissions)
+    return result
 
 
 def _groups(state):
@@ -115,7 +117,8 @@ def _message_digest(message):
 
 def validate_descriptor(descriptor,state,checkpoint,*,get_message):
     bound=require_binding(state,checkpoint,descriptor.get('reviewed_creative_features'))
-    if descriptor!=make_descriptor(state,bound):raise ValueError('reviewed batch undeclared intent/review/schedule delta')
+    if descriptor!=make_descriptor(state,bound,reviewed_omissions=descriptor.get('reviewed_feature_omissions')):
+        raise ValueError('reviewed batch undeclared intent/review/schedule delta')
     if state.get('phase') not in {'RECOVERY_PENDING','ENGINE_PENDING','POSTPROCESS_PENDING','ACTIVATION_PENDING',
             'ACTIVATION_DEFERRED','GLOBAL_QA_COMPLETE','COMPLETE_FUTURE_ACTIVE'}:
         raise ValueError('reviewed batch requires recoverable state')
@@ -130,8 +133,13 @@ def validate_descriptor(descriptor,state,checkpoint,*,get_message):
         raise ValueError('reviewed batch affirmative context ambiguous')
     from .shein_continuation import _authorize_late_reviewer
     authority=_authorize_late_reviewer({**descriptor,'recovery_review_thread_id':ORIGIN},state['request'],HUMAN)
+    accepted_omissions=None
+    if 'reviewed_feature_omissions' in descriptor:
+        from .shein_reviewed_feature_omissions import validate
+        accepted_omissions=validate(descriptor['reviewed_feature_omissions'],state,checkpoint,get_message=get_message)
     return {'verified':True,'request_id':REQUEST,'account_id':ACCOUNT,
         'accepted_schedule':None,'accepted_targeting':None,
+        'accepted_feature_omissions':accepted_omissions,
         'accepted_creative_features':{'binding_digest':BINDING_DIGEST,'prompt_message_id':PROMPT_ID,
             'review_message_id':REVIEW_ID,'feature':FEATURE,'from':'OPT_IN','to':'OPT_OUT','authority':authority},
         'campaign_ids':[v for b in checkpoint['bundles'] for v in b.get('campaign_ids',[])],
@@ -240,7 +248,10 @@ def resolve_bundle(engine,bundle,transport,record):
 
 def verify_creative(actual,expected):
     from .shein_reference import verify_degrees
-    verify_degrees(actual.get('degrees_of_freedom_spec'),effective(expected)['degrees_of_freedom_spec'])
+    from .shein_reviewed_feature_omissions import expected_degrees
+    reviewed=expected_degrees(actual,expected)
+    verify_degrees(actual.get('degrees_of_freedom_spec'),
+                   reviewed if reviewed is not None else effective(expected)['degrees_of_freedom_spec'])
 
 
 def preserved_sourcing(actual,expected):

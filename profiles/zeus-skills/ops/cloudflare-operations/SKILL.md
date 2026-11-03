@@ -192,6 +192,13 @@ finance.topfeed.fun  topfeed.fun          200   OK
 
 Mention whether audit logging happened. Do not include raw JSON unless Rodolfo asks.
 
+## Histórico de timeout e Analytics
+
+- Para investigar um incidente, resolva a zona exata e consulte Analytics para o intervalo UTC com margem antes/depois, distinguindo status de edge/origem e eventos de segurança da sonda quando o dataset/plano permitir. Sucesso atual e logs de origem isolados não comprovam ausência de falha entre sonda e edge.
+- Valide `errors` e `data` no JSON GraphQL: HTTP 200 com `data:null` e `extensions.code=authz` é consulta bloqueada, nunca zero erros/requests. A permissão faltante observável `com.cloudflare.api.account.zone.analytics.read` corresponde à leitura de Zone Analytics; token ativo e DNS/cache editáveis não a comprovam.
+- Confirme limites/datasets pela descoberta de settings da zona e pela documentação oficial atual, não por suposição sobre Free/Pro. Ausência de acesso é lacuna de observabilidade, não ausência de incidente. Preserve amostragem e resolução no relato.
+- Não altere permissões de token para recuperar uma consulta sem a confirmação crítica específica. Preserve as políticas existentes e a autoridade independente de rollback; bloquearam API e painel, entregue o diagnóstico exato e a única decisão necessária, sem loops ou envio de credenciais a proxies/arquivos públicos.
+
 ## Common Pitfalls
 
 - For an origin restricted to Cloudflare source IPs, retrieve and validate the official list from `GET https://api.cloudflare.com/client/v4/ips` (`ipv4_cidrs` + `ipv6_cidrs`). The website `/ips-v4` or `/ips-v6` may return 403 on VPS requests; fail over to the official API rather than inventing CIDRs or weakening origin restrictions. Trust `CF-Connecting-IP` only after validating the actual peer against those networks.
