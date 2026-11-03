@@ -3222,6 +3222,16 @@
     },
     {
       "agent": "zeus",
+      "id": "STOCK-LABEL-1567008281648693330",
+      "next_step": "Autorizacao nativa confirmada; preparar reconciliacao separada imutavel e validar consumidor/monitor sob lock. Novo pedido Kelly investigado em paralelo somente leitura.",
+      "objective": "Conciliar somente nome do atalho Baby Tees aprovado por Rodolfo, sem mudar midia/reserva/campanha.",
+      "source": "/root/.hermes/profiles/zeus/cache/scratch/archive-shortcut-diagnosis-20261102.json",
+      "state": "authorized_preflight",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-03T02:53:13+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "VPS-HERMES-20261012-1559192694096404537",
       "next_step": "Nenhuma ação pendente neste escopo. Hermes v0.21.7, corte main7cc3fb8c/port e6ad5053 já ativo e validado; Monarx 4.3.82-master com24/24 checks, APT zero e gateway PIDs preservados. Snapshots/runtime rollback e deb4.3.81 retidos; nenhuma exclusão. Commits upstream após o corte continuam outro ciclo. Protect5.2.70 preexistia desde cron15/09; inventário corrigido, não atualizado nesta transação.",
       "objective": "VPS e Hermes concluídos no corte aprovado; Monarx adicional 4.3.82 confirmado e validado, sem reiniciar gateways ou VPS.",
@@ -8352,5 +8362,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T02:28:45+00:00"
+  "updated_at": "2026-11-03T02:53:13+00:00"
 }

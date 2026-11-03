@@ -90,17 +90,26 @@ def expected_provider_name(entry,original):
  rec=override(entry);return rec['provider_name'] if rec else original
 
 def names_match(entry,physical,stock):
+ import ares_archive_stock_labels as labels
+ approved=labels.names_match(entry,physical,stock)
+ if approved is not None:return approved
  rec=override(entry)
  if not rec:return stock.get('name')==physical.get('name')
  return physical.get('id')==rec['archive_id'] and physical.get('name')==rec['provider_name'] and stock.get('id')==rec['stock_id'] and stock.get('name')==rec['stock_name']
 
 def catalogue_name(entry,stock):
+ import ares_archive_stock_labels as labels
+ approved=labels.catalogue_name(entry,stock)
+ if approved is not None:return approved
  rec=override(entry)
  if not rec:return stock['name']
  require(stock.get('id')==rec['stock_id'] and stock.get('name')==rec['stock_name'],'NAMESPACE_STOCK_LABEL_CHANGED')
  return rec.get('catalogue_name') or stock['name']
 
 def native_stock_label(logical_id,stock_id,catalogue_label):
+ import ares_archive_stock_labels as labels
+ approved=labels.native_stock_label(logical_id,stock_id,catalogue_label)
+ if approved is not None:return approved
  value=binding()
  if not value:return catalogue_label
  records=[r for r in value['files'].values() if r['source_id']==logical_id and r['stock_id']==stock_id and r.get('catalogue_name')==catalogue_label]
