@@ -594,7 +594,9 @@
     733987,
     734009,
     734035,
-    734051
+    734051,
+    734159,
+    734170
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -3512,6 +3514,38 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|topfeed|6|240": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-03T16:09:07.000Z",
+        "domain": "topfeed",
+        "notification_id": 734159,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 16,
+          "Broadcast": 78,
+          "Ready": 1
+        },
+        "pages": 95,
+        "segurador_id": "240",
+        "segurador_name": "Ichfla",
+        "source": "page_token",
+        "user_email": "disparosfinancetopfeed@gmail.com",
+        "user_id": "6",
+        "user_name": "Disparos FTF US-CC-EN"
+      },
+      "last_sent_at": "2026-11-03T11:12:15-05:00",
+      "message_ids": [
+        "1567209801577009334"
+      ],
+      "notification_ids": [
+        734159
+      ],
+      "opened_at": "2026-11-03T11:12:13-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
@@ -3790,6 +3824,37 @@
         692351
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|xyvlov|43|197": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-03T16:10:13.000Z",
+        "domain": "xyvlov",
+        "notification_id": 734170,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 29,
+          "Ready": 2
+        },
+        "pages": 31,
+        "segurador_id": "197",
+        "segurador_name": "Pendang Novi",
+        "source": "page_token",
+        "user_email": "disparosxyvlovusccen@gmail.com",
+        "user_id": "43",
+        "user_name": "Disparos Xyvlov US-CC-EN"
+      },
+      "last_sent_at": "2026-11-03T11:12:15-05:00",
+      "message_ids": [
+        "1567209805670653956"
+      ],
+      "notification_ids": [
+        734170
+      ],
+      "opened_at": "2026-11-03T11:12:13-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -4282,30 +4347,24 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-03T10:57:14-05:00",
+  "last_check": "2026-11-03T11:12:15-05:00",
   "last_delivery": {
-    "at": "2026-11-03T07:12:18-05:00",
+    "at": "2026-11-03T11:12:15-05:00",
     "cursor_ids": [
-      733878,
-      733883,
-      733912,
-      733924,
-      733948,
-      733968,
-      733987,
-      734009,
-      734035,
-      734051
+      734159,
+      734170
     ],
     "message_ids": [
-      "1567149421827985552"
+      "1567209801577009334",
+      "1567209805670653956"
     ],
     "notification_ids": [
-      733968
+      734159,
+      734170
     ]
   },
   "last_error": null,
-  "last_seen_id": 734051,
+  "last_seen_id": 734170,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
