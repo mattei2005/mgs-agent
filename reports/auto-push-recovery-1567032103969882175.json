@@ -1,0 +1,27 @@
+{
+  "source_alert_id": "1567032103969882175",
+  "actor": "zeus",
+  "state": "awaiting_native_commit_push",
+  "cause": "Sensitive filename false positive on six reviewed Cloudflare policy-metadata receipts; no token values in those files",
+  "origin_thread_id": "1567024655431245884",
+  "origin_report_message_id": "1567030508544593981",
+  "origin_session_id": "20261102_225633_113c77dd",
+  "reconciliation": "Permission receipts finalized; ongoing origin diagnosis is separate. Previous resolver attempt failed HTTP 400 without writes. Index empty and one native watcher verified before correction.",
+  "correction": "Six exact anchored receipt exceptions only; sibling credentials, copies and other incidents stay blocked",
+  "validation": {
+    "watcher_tests_passed": 26,
+    "monitor_tests_passed": 17,
+    "bash_syntax": "PASS",
+    "diff_check": "PASS",
+    "pending_files_scanned": 139,
+    "signature_scan": "One preexisting ops_ inventory type-identifier false positive; no credential signatures in reviewed receipts",
+    "persistent_service": "active/running",
+    "persistent_batch_target": 10,
+    "persistent_max_wait_seconds": 600
+  },
+  "next_step": "Wait for native automatic commit and push; read back remote main and exact committed receipts; rerun monitor without Discord delivery",
+  "credentials_or_permissions_changed": false,
+  "manual_commit_or_push": false,
+  "gateway_restarted": false,
+  "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1567032103969882175"
+}

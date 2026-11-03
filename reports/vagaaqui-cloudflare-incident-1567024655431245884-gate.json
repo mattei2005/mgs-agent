@@ -4,7 +4,7 @@
   "actor_discord_id": "344196393512075265",
   "agent": "zeus",
   "objective": "Add only Zone Analytics Read for vagaaqui.com while preserving existing token policies, then investigate 2026-11-03T03:31:38Z through 2026-11-03T03:47:53Z with margins",
-  "state": "blocked_additional_critical_self_update_rollback_confirmation",
+  "state": "superseded_by_completed_permission_and_incident_diagnosis",
   "zone_id": "0a38ce4f11fedd8f03e02fcc07601d74",
   "credential_item": "Cloudflare MGS Admin Token - mattei2005",
   "credential_field": "token",
@@ -13,5 +13,8 @@
   "external_writes": [],
   "blocker": "Target token is the only available management credential for this Cloudflare user. Skill requires independent management credential or explicit Critical confirmation for atomic self-update with manual dashboard rollback if access is lost. Prior approval covered Analytics addition but did not disclose this newly validated rollback limitation.",
   "next_action": "After explicit owner confirmation of the atomic self-update/manual dashboard rollback boundary, freeze current policies and restrictions privately, append one allow policy scoped only to this zone and Analytics Read, PUT the exact existing token once without rotation, independently GET and compare policies plus verify token, then rerun Analytics queries and perform audit/inventory/report closure.",
-  "source_skill": "cloudflare-operations: Creating Additional API Tokens"
+  "source_skill": "cloudflare-operations: Creating Additional API Tokens",
+  "superseding_approval_message_id": "1567028922372325427",
+  "superseding_final_receipt": "/root/mgs-agent/reports/vagaaqui-cloudflare-1567024655431245884/summary.json",
+  "historical_fields_notice": "blocker and next_action above describe the historical gate, not active pending work; final receipt is authoritative for current completion and residuals"
 }

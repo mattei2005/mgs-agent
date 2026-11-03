@@ -1273,12 +1273,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1566998348169220228",
-      "next_step": "Continuar o mesmo job e finalizadores por IDs persistidos até 38/38; executar audit_request.py read-only e publicar mapa completo/link permanente na origem. Acompanhadores task-local follow_request.py e follow_archive.py no scratch desta thread; não criar outro writer de mídia.",
+      "next_step": "Encerrado tecnicamente. Publicar conclusão e mapa original→final na thread 1566998348169220228, com READY https://drive.google.com/drive/folders/1i2AfmbrggwnEoaH5y1eGebBTVMX967kE e LEGACY https://drive.google.com/drive/folders/1n8xDITU1BnXQ_iiIWDQxOo8kDw0Ru6dh. Não reabrir o lote por notificação tardia do executor.",
       "objective": "Tratar e organizar 38 imagens US SHEIN espanhol enviadas por Kelly; common READY; preservar RAW e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "16 fontes com conclusão canônica; quinto batch tratado aguardando camadas de arquivo. mesmos request 460f5b805715f8acc9727823559da3bb e owner 528c5710269d. transporte privado isolado, reconciliação sa e stock por locks canônicos; nenhum script/config produtivo ou nome histórico alterado.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/intake-batches/request-460f5b805715f8acc9727823559da3bb.audited-final.json",
+      "state": "concluído e auditado independentemente: 38 fontes, 38 linhagens novas, zero duplicatas, zero pendências do lote. native request complete; ids/provider/stock, hashes raw e clean, clean=true, dimensões e reservas de kelly verificados em 38/38. nenhuma campanha ou exclusão remota. mídia local transitória limpa após auditoria; mapa completo e prova compacta persistidos.",
       "thread_id": "1566998348169220228",
-      "updated_at": "2026-11-03T03:57:59+00:00"
+      "updated_at": "2026-11-03T04:46:58+00:00"
     },
     {
       "agent": "ares",
@@ -2399,6 +2399,16 @@
       "state": "delegation_applied_inspection_completed_openzed_active_cliquet_preexisting_inactive_live_checks_verified",
       "thread_id": "1565555821188878377",
       "updated_at": "2026-10-30T17:29:22+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "B001-INVEST-CALENDAR-1567032162757382155",
+      "next_step": "No forced app alerts or credential changes. Existing published card unchanged; future native alerts use corrected loader. Separate Debora admin token 190/463 requires owner renewal, not automatic credential rotation.",
+      "objective": "Diagnosticar e recuperar colunas de investimento n/d do B001 sem alterar credenciais ou reenviar alertas",
+      "source": "/root/.hermes/profiles/zeus/cache/scratch/b001-invest-recovery.json",
+      "state": "recovered_validated; real generic+B013 loaders OK; 21 tests PASS; B001 9/10 available and Debora n/d; skill mirror/inventory/audit verified; silent REPORT-INFRA 1567033331743457382 read back.",
+      "thread_id": "1567032162757382155",
+      "updated_at": "2026-11-02T23:31:29-05:00"
     },
     {
       "agent": "ares",
@@ -7842,6 +7852,16 @@
     },
     {
       "agent": "zeus",
+      "id": "vagaaqui-cloudflare-incident-1567024655431245884",
+      "next_step": "Acionar responsável pela conta Hetzner com draft pronto e evidências TCP/TLS; não há acesso de suporte validado nem chamado enviado. Sem mudança crítica, sem executor futuro. Roteador/provedor culpado ainda não comprovado.",
+      "objective": "Investigar causa-raiz dos timeouts de vagaaqui.com; comando Rodolfo 1567031695268515912",
+      "source": "/root/mgs-agent/reports/vagaaqui-cloudflare-1567024655431245884/rootcause-summary.json",
+      "state": "transport_degradation_confirmed_blocked_provider_attribution_and_support_access",
+      "thread_id": "1567024655431245884",
+      "updated_at": "2026-11-03T04:41:24+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "vizioid-finance-draft-1562986239601156216",
       "next_step": "Nenhum no escopo:204 drafts,32 publicados preservados,204 URLs terminam404,sitemap atualizado,menu abre/fecha em320/390/430/1280px;Google processa alterações externamente",
       "objective": "Colocar financeiros do Vizioid em rascunho e corrigir drawer mobile nativamente no WordPress",
@@ -8372,5 +8392,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T04:00:13+00:00"
+  "updated_at": "2026-11-03T04:46:58+00:00"
 }

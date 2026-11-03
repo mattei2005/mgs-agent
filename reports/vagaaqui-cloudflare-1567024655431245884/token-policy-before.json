@@ -1,0 +1,59 @@
+{
+  "config": {
+    "name": "Create Additional Tokens",
+    "status": "active"
+  },
+  "policies": [
+    {
+      "id": "50b92a123d804b07ae28c196cc7d0a5a",
+      "effect": "allow",
+      "resources": {
+        "com.cloudflare.api.account.zone.*": "*"
+      },
+      "permission_groups": [
+        {
+          "id": "c4df38be41c247b3b4b7702e76eadae0",
+          "name": "Zone DNS Settings Write"
+        },
+        {
+          "id": "e6d2666161e84845a636613608cee8d5",
+          "name": "Zone Write"
+        },
+        {
+          "id": "e17beae8b8cb423a99b1730f21238bed",
+          "name": "Cache Purge"
+        },
+        {
+          "id": "4755a26eedb94da69e1066d98aa820be",
+          "name": "DNS Write"
+        }
+      ]
+    },
+    {
+      "id": "c90c18c2f0d24845a152ff0699689726",
+      "effect": "allow",
+      "resources": {
+        "com.cloudflare.api.user.a6c46b21b834cefe221efd02040065ba": "*"
+      },
+      "permission_groups": [
+        {
+          "id": "686d18d5ac6c441c867cbf6771e58a0a",
+          "name": "API Tokens Write"
+        }
+      ]
+    },
+    {
+      "id": "6240aac768e44a3a86f0cfb1b953213f",
+      "effect": "allow",
+      "resources": {
+        "com.cloudflare.api.account.*": "*"
+      },
+      "permission_groups": [
+        {
+          "id": "5bc3f8b21c554832afc660159ab75fa4",
+          "name": "Account API Tokens Write"
+        }
+      ]
+    }
+  ]
+}

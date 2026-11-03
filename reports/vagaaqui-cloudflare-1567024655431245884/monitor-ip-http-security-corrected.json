@@ -1,0 +1,53 @@
+{
+  "http_status": 200,
+  "response": {
+    "data": {
+      "viewer": {
+        "zones": [
+          {
+            "firewallEventsAdaptive": [],
+            "httpRequestsAdaptiveGroups": [
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:36:43Z",
+                  "edgeResponseStatus": 522,
+                  "originResponseStatus": 0,
+                  "securityAction": "unknown",
+                  "securitySource": "unknown",
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 1054,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:47:52Z",
+                  "edgeResponseStatus": 200,
+                  "originResponseStatus": 200,
+                  "securityAction": "unknown",
+                  "securitySource": "unknown",
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "errors": null
+  }
+}

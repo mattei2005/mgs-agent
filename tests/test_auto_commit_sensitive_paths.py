@@ -141,6 +141,18 @@ fi
             "docs/finance-meta-read-credential.json": 1,
             "docs/finance-meta-token.json": 1,
             "docs/credentials.json": 1,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-before.json": 0,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-after.json": 0,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-request.json": 0,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-validation.json": 0,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-validation-corrected.json": 0,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-write-response.json": 0,
+            "work/reports/vagaaqui-cloudflare-1567024655431245884/token-policy-before.json": 1,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-before.json.bak": 1,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token-policy-other.json": 1,
+            "reports/vagaaqui-cloudflare-other/token-policy-before.json": 1,
+            "reports/vagaaqui-cloudflare-1567024655431245884/token.json": 1,
+            "reports/vagaaqui-cloudflare-1567024655431245884/credentials.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

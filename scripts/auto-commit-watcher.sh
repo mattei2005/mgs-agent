@@ -82,6 +82,11 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^data/ares/creative-ops/
 # authority and validation only; no credential values. Exact path, not siblings.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^docs/finance-meta-read-credential\.md$"
 
+# Reviewed Cloudflare policy metadata from the explicitly approved incident.
+# These six exact receipts contain permission IDs/status only, not token values.
+# Keep other incidents, sibling credentials and backup copies blocked.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^reports/vagaaqui-cloudflare-1567024655431245884/token-policy-(before|after|request|validation|validation-corrected|write-response)\.json$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

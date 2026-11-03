@@ -1,0 +1,77 @@
+{
+  "observed_at": "2026-11-03T04:38:15.240464+00:00",
+  "host": "MatteiInc01",
+  "origin_ip": "162.55.28.178",
+  "read_only": true,
+  "memory": {
+    "MemTotal_kib": 130980916,
+    "MemAvailable_kib": 110948712,
+    "SwapTotal_kib": 4189180,
+    "SwapFree_kib": 4169468
+  },
+  "disk": {
+    "size_bytes": 1883405279232,
+    "available_bytes": 1534276521984
+  },
+  "vmstat_last_row": " 2  0  19712 7161184 2854336 110273424    0    0   624  8082 4759 4443  7  1 92  0  0",
+  "loadavg": "1.92 2.62 2.96 3/2111 2431953",
+  "cpu_count": 32,
+  "conntrack": {
+    "net.netfilter.nf_conntrack_count": "1773",
+    "net.netfilter.nf_conntrack_max": "262144"
+  },
+  "interface_counters": {
+    "rx_crc_errors": 0,
+    "rx_missed_errors": 0,
+    "tx_timeout_count": 0,
+    "rx_errors": 0,
+    "tx_errors": 0,
+    "tx_dropped": 0
+  },
+  "waf_tcp_sockets": {
+    "established_count": 614,
+    "mss_under_100_count": 22,
+    "target_capture_peers": []
+  },
+  "cloudflare_official_ipv4_cidr_count": 15,
+  "cloudflare_ipset_coverage": {
+    "heimdall-whitelist-net": {
+      "official_full_cidrs_covered": 15,
+      "overlapping_cloudflare_entries": 15
+    },
+    "heimdall-proxy-list-net": {
+      "official_full_cidrs_covered": 15,
+      "overlapping_cloudflare_entries": 15
+    },
+    "heimdall-blacklist-net": {
+      "official_full_cidrs_covered": 0,
+      "overlapping_cloudflare_entries": 0
+    },
+    "heimdall-user-blacklist-net": {
+      "official_full_cidrs_covered": 0,
+      "overlapping_cloudflare_entries": 0
+    }
+  },
+  "monitor_security_sets": {
+    "heimdall-greylist": false,
+    "heimdall-user-blacklist": false,
+    "heimdall-nt-blacklist": false
+  },
+  "vagaaqui_fpm_warnings": [
+    "[03-Nov-2026 03:30:38] WARNING: [pool vagaaqui] seems busy (you may need to increase pm.start_servers, or pm.min/max_spare_servers), spawning 8 children, there are 0 idle, and 4 total children",
+    "[03-Nov-2026 03:31:44] WARNING: [pool vagaaqui] seems busy (you may need to increase pm.start_servers, or pm.min/max_spare_servers), spawning 8 children, there are 0 idle, and 4 total children",
+    "[03-Nov-2026 03:31:45] WARNING: [pool vagaaqui] seems busy (you may need to increase pm.start_servers, or pm.min/max_spare_servers), spawning 16 children, there are 0 idle, and 5 total children"
+  ],
+  "services": {
+    "nginx-rc": "active",
+    "php83rc-fpm": "active",
+    "mariadb": "active",
+    "bitninja-waf3": "active"
+  },
+  "kernel_warning_window": "-- No entries --",
+  "historical_resource_collectors_present": {
+    "/var/log/sysstat": false,
+    "/var/log/atop": false,
+    "/var/lib/netdata": false
+  }
+}

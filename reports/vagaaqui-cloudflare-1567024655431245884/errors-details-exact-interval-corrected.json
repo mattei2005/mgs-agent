@@ -1,0 +1,578 @@
+{
+  "http_status": 200,
+  "response": {
+    "data": {
+      "viewer": {
+        "zones": [
+          {
+            "errors": [
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "3.212.128.62",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:29:18Z",
+                  "edgeResponseStatus": 525,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "216.144.248.28",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "DFW",
+                  "datetime": "2026-11-03T03:30:13Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "5.161.215.244",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:30:46Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "3.12.251.153",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "CMH",
+                  "datetime": "2026-11-03T03:31:07Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "52.22.236.30",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:36:43Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 24,
+                  "originTcpHandshakeDurationMs": 6,
+                  "originTlsHandshakeDurationMs": 13,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/wp-content/plugins/fix/up.php",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 25,
+                  "originTcpHandshakeDurationMs": 6,
+                  "originTlsHandshakeDurationMs": 14,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "POST",
+                  "clientRequestPath": "/wp-plain.php",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Bulid/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Moblie Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 24,
+                  "originTcpHandshakeDurationMs": 6,
+                  "originTlsHandshakeDurationMs": 13,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "POST",
+                  "clientRequestPath": "/ALFA_DATA/alfacgiapi/perl.alfa",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozlila/5.0 (Linux; Android 7.0; SM-G892A Bulid/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Moblie Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 6,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/kmxcrgbj.php",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Bulid/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Moblie Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 5.5,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/wp-content/themes/seotheme/db.php",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozlila/5.0 (Linux; Android 7.0; SM-G892A Bulid/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Moblie Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 25,
+                  "originTcpHandshakeDurationMs": 4,
+                  "originTlsHandshakeDurationMs": 15,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozlila/5.0 (Linux; Android 7.0; SM-G892A Bulid/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Moblie Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 6,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "23.132.164.250",
+                  "clientRequestHTTPMethodName": "POST",
+                  "clientRequestPath": "/alfacgiapi/perl.alfa",
+                  "coloCode": "FRA",
+                  "datetime": "2026-11-03T03:38:00Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozlila/5.0 (Linux; Android 7.0; SM-G892A Bulid/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Moblie Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 68,
+                  "originTcpHandshakeDurationMs": 16,
+                  "originTlsHandshakeDurationMs": 34,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "194.165.17.13",
+                  "clientRequestHTTPMethodName": "POST",
+                  "clientRequestPath": "/xmlrpc.php",
+                  "coloCode": "WAW",
+                  "datetime": "2026-11-03T03:40:54Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "5.161.194.92",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:42:17Z",
+                  "edgeResponseStatus": 525,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "5.161.75.7",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:45:04Z",
+                  "edgeResponseStatus": 525,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": 1229,
+                  "originTcpHandshakeDurationMs": 305,
+                  "originTlsHandshakeDurationMs": 616,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "20.211.122.120",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/",
+                  "coloCode": "SYD",
+                  "datetime": "2026-11-03T03:47:41Z",
+                  "edgeResponseStatus": 500,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 500,
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "178.156.187.238",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:50:38Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "54.87.112.51",
+                  "clientRequestHTTPMethodName": "HEAD",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:52:57Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": 379,
+                  "originTlsHandshakeDurationMs": 47224,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "66.249.92.206",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/en/48666/rec-ackermans-retail-jobs-africa/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T03:55:42Z",
+                  "edgeResponseStatus": 520,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mediapartners-Google"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseDurationMs": -1,
+                  "originTcpHandshakeDurationMs": 1378,
+                  "originTlsHandshakeDurationMs": 43672,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "3.20.63.178",
+                  "clientRequestHTTPMethodName": "GET",
+                  "clientRequestPath": "/",
+                  "coloCode": "CMH",
+                  "datetime": "2026-11-03T03:56:13Z",
+                  "edgeResponseStatus": 520,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              }
+            ],
+            "exact": [
+              {
+                "avg": {
+                  "sampleInterval": 1.0206185567010309
+                },
+                "count": 198,
+                "dimensions": {
+                  "edgeResponseStatus": 302,
+                  "originResponseStatus": 302
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 36,
+                "dimensions": {
+                  "edgeResponseStatus": 304,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 200,
+                "dimensions": {
+                  "edgeResponseStatus": 204,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 3,
+                "dimensions": {
+                  "edgeResponseStatus": 200,
+                  "originResponseStatus": 304
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "edgeResponseStatus": 525,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 3,
+                "dimensions": {
+                  "edgeResponseStatus": 403,
+                  "originResponseStatus": 403
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 206,
+                "dimensions": {
+                  "edgeResponseStatus": 200,
+                  "originResponseStatus": 200
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "edgeResponseStatus": 522,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.027027027027027
+                },
+                "count": 38,
+                "dimensions": {
+                  "edgeResponseStatus": 301,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 10,
+                "dimensions": {
+                  "edgeResponseStatus": 500,
+                  "originResponseStatus": 500
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 102,
+                "dimensions": {
+                  "edgeResponseStatus": 403,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 4,
+                "dimensions": {
+                  "edgeResponseStatus": 301,
+                  "originResponseStatus": 301
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 3,
+                "dimensions": {
+                  "edgeResponseStatus": 304,
+                  "originResponseStatus": 304
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.0348071495766697
+                },
+                "count": 1100,
+                "dimensions": {
+                  "edgeResponseStatus": 200,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 12,
+                "dimensions": {
+                  "edgeResponseStatus": 499,
+                  "originResponseStatus": 0
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 3,
+                "dimensions": {
+                  "edgeResponseStatus": 404,
+                  "originResponseStatus": 404
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "errors": null
+  }
+}

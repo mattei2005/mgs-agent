@@ -1,0 +1,475 @@
+{
+  "http_status": 200,
+  "response": {
+    "data": {
+      "viewer": {
+        "zones": [
+          {
+            "errors": [
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:25:00Z",
+                  "edgeResponseStatus": 525
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "CMH",
+                  "datetimeFiveMinutes": "2026-11-03T03:30:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "DFW",
+                  "datetimeFiveMinutes": "2026-11-03T03:30:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:30:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:35:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:40:00Z",
+                  "edgeResponseStatus": 525
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:45:00Z",
+                  "edgeResponseStatus": 525
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:50:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T03:55:00Z",
+                  "edgeResponseStatus": 520
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "CMH",
+                  "datetimeFiveMinutes": "2026-11-03T03:55:00Z",
+                  "edgeResponseStatus": 520
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T04:00:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "CMH",
+                  "datetimeFiveMinutes": "2026-11-03T04:00:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "DFW",
+                  "datetimeFiveMinutes": "2026-11-03T04:00:00Z",
+                  "edgeResponseStatus": 520
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T04:05:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T04:10:00Z",
+                  "edgeResponseStatus": 522
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T04:10:00Z",
+                  "edgeResponseStatus": 524
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "IAD",
+                  "datetimeFiveMinutes": "2026-11-03T04:15:00Z",
+                  "edgeResponseStatus": 522
+                }
+              }
+            ],
+            "totals": [
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 5,
+                "dimensions": {
+                  "coloCode": "EWR"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "MXP"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 70,
+                "dimensions": {
+                  "coloCode": "CDG"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.0113250283125708
+                },
+                "count": 893,
+                "dimensions": {
+                  "coloCode": "DUR"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 40,
+                "dimensions": {
+                  "coloCode": "IAD"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.018018018018018
+                },
+                "count": 113,
+                "dimensions": {
+                  "coloCode": "GIG"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 97,
+                "dimensions": {
+                  "coloCode": "FRA"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "DUS"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "ORD"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.3361702127659574
+                },
+                "count": 942,
+                "dimensions": {
+                  "coloCode": "WAW"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "PDX"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "EZE"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "LHR"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "LAX"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 101,
+                "dimensions": {
+                  "coloCode": "AMS"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 40,
+                "dimensions": {
+                  "coloCode": "SJC"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "SYD"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 3,
+                "dimensions": {
+                  "coloCode": "MIA"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 92,
+                "dimensions": {
+                  "coloCode": "ATL"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "DEN"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 2,
+                "dimensions": {
+                  "coloCode": "ARN"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 16,
+                "dimensions": {
+                  "coloCode": "GRU"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 6,
+                "dimensions": {
+                  "coloCode": "TLL"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 77,
+                "dimensions": {
+                  "coloCode": "DFW"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "SEA"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "coloCode": "HKG"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 8,
+                "dimensions": {
+                  "coloCode": "CMH"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.0172525339659262
+                },
+                "count": 4717,
+                "dimensions": {
+                  "coloCode": "JNB"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1
+                },
+                "count": 10,
+                "dimensions": {
+                  "coloCode": "SIN"
+                }
+              },
+              {
+                "avg": {
+                  "sampleInterval": 1.0152193375111906
+                },
+                "count": 1134,
+                "dimensions": {
+                  "coloCode": "CPT"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "errors": null
+  }
+}

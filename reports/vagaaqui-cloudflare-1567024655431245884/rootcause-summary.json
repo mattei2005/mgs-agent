@@ -1,0 +1,30 @@
+{
+  "thread_id": "1567024655431245884",
+  "investigation_authorization_message_id": "1567031695268515912",
+  "scope": "Root-cause investigation of intermittent Cloudflare-to-origin failures for vagaaqui.com",
+  "state": "transport_degradation_confirmed_provider_attribution_and_remediation_blocked",
+  "confirmed": [
+    "Cloudflare failures continued through 2026-11-03T04:35:25Z in the last queried window, including normal CSS asset requests, not only monitor traffic",
+    "Passive external-NIC capture identified five new TLS flows by SNI vagaaqui.com; some were healthy and others exhibited repeated handshake packets and outbound data retransmissions",
+    "Affected host answered initial SYNs within approximately 0.033 to 0.044 milliseconds for cited target flows, yet peers repeated SYNs",
+    "Independent ss TCP state showed substantial retransmissions, backoff, slow delivery and MSS reduced to 48 bytes on affected Cloudflare-facing sockets",
+    "Current resources, conntrack occupancy and NIC hardware error counters did not show saturation or physical-interface errors during continuing failures",
+    "Official Cloudflare IPv4 ranges were fully covered by the live BitNinja whitelist and proxy-list sets; inspected blacklist sets did not overlap these ranges",
+    "The cited UptimeRobot IP was absent from inspected greylist and blacklist sets"
+  ],
+  "interpretation": {
+    "confirmed_fault_layer": "Intermittent TCP/TLS transport degradation between this origin and specific Cloudflare peers, before WordPress for the connection/handshake failures",
+    "not_proven": ["A specific faulty carrier/router/provider", "BitNinja as root cause", "PHP worker shortage as the cause of 522/525", "Historical CPU/memory saturation", "Provider core-router maintenance as the cause", "End-to-end packet-loss percentage from incomplete MTR hops"],
+    "historical_resources_limitation": "No sar/atop/netdata historical collector was found. Current resource checks apply only to contemporaneous continued failures.",
+    "mtr_limitation": "Destination not reached in TCP traces; intermediate missing replies cannot localize a loss-causing hop. No intermediate loss percentage is promoted to root cause."
+  },
+  "evidence": ["passive-tls-sni-1.json", "host-rootcause-readonly.json", "rootcause-latest-observation.json", "mtr-corrected-mode.json", "provider-network-status.json"],
+  "earlier_collector_limitations": ["First text tcpdump collector could omit truncated packet summaries; handshake attribution uses the later structured pcap parser instead", "Initial MTR JSON calls exited without a usable report; text-mode traces with detached stdin returned usable but incomplete route evidence", "sar is not installed; /proc and live vmstat were used, without installing software"],
+  "production_mutations_this_investigation": [],
+  "external_ticket_status": "draft_prepared_not_sent",
+  "support_draft": "provider-support-draft.txt",
+  "blocker": "No validated provider-control-plane credential for MatteiInc01 was found among scoped existing references. The available Hetzner server reference is a guest console for a different host, not this provider account. Provider-side routing/peering investigation and possible Cloudflare coordination are required for attribution/remediation.",
+  "recommendation": "Ask the responsible Hetzner account owner to submit the prepared network support draft and correlate UTC timestamps and peers. Do not restart PHP/server, disable BitNinja or change MTU/firewall speculatively.",
+  "next_action": "Obtain the existing provider support route or have the account owner submit the evidence; reconcile provider findings before proposing an exact production change.",
+  "future_executor_scheduled": false
+}

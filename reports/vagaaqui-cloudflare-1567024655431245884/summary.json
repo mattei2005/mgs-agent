@@ -1,0 +1,42 @@
+{
+  "thread_id": "1567024655431245884",
+  "authorization_message_ids": ["1567026609389703219", "1567028922372325427"],
+  "domain": "vagaaqui.com",
+  "requested_interval_utc": ["2026-11-03T03:31:38Z", "2026-11-03T03:47:53Z"],
+  "permission_change": {
+    "status": "completed_validated",
+    "credential_item": "Cloudflare MGS Admin Token - mattei2005",
+    "only_added_permission": "Zone Analytics Read",
+    "only_added_zone": "vagaaqui.com",
+    "original_policies_preserved": true,
+    "original_name_status_restrictions_preserved": true,
+    "token_rotated": false,
+    "readback": "token-policy-validation-corrected.json"
+  },
+  "findings": {
+    "incident_confirmed": true,
+    "monitor_ip": "52.22.236.30",
+    "monitor_failure": {"time_utc": "2026-11-03T03:36:43Z", "edge_status": 522, "origin_status": 0, "colo": "IAD", "method": "HEAD", "path": "/", "origin_ip": "162.55.28.178"},
+    "monitor_recovery_request": {"time_utc": "2026-11-03T03:47:52Z", "edge_status": 200, "origin_status": 200, "origin_response_ms": 1054},
+    "latest_observed_same_monitor_failure": {"time_utc": "2026-11-03T04:12:55Z", "edge_status": 524, "origin_status": 0, "colo": "IAD"},
+    "multiple_probes_affected": true,
+    "other_connection_failures": "522 and 525 before/during the reported incident; 520, 522 and 524 after its reported recovery",
+    "cloudflare_security_events_for_monitor": "none returned by firewallEventsAdaptive for 03:20-04:00 UTC; not proof of absence outside dataset coverage",
+    "confirmed_failure_layer": "intermittent Cloudflare-to-origin connection/TLS/response failures; not full continuous site outage",
+    "underlying_root_cause": "not proven; cannot attribute to PHP saturation, BitNinja, firewall or provider route from available evidence alone",
+    "current_single_point_probes": "public 200 in 0.336086 seconds; origin 200 in 0.219708 seconds; these do not establish recovery from intermittent failures",
+    "correction_to_prior_response": "absence of 5xx in the webapp access log did not exclude errors at earlier layers; Cloudflare positively confirms real intermittent failures"
+  },
+  "coverage": {
+    "dataset": "httpRequestsAdaptiveGroups",
+    "sampling": "adaptive, preserve avg.sampleInterval; do not claim complete per-request audit",
+    "hour_aggregation_group_count": 423,
+    "hour_group_sum_matches_api_aggregate": true,
+    "httpRequests1mGroups": "disabled for this zone; adaptive dataset is enabled"
+  },
+  "recovered_collection_errors": ["Ordered token-policy comparison failed because Cloudflare reordered policies; fresh semantic multiset validation passed, no repeated write", "One GraphQL query had an extra closing brace; corrected query returned data", "rayName was rejected by queried schema despite settings listing; removed optional field and query returned data"],
+  "production_changes_other_than_permission": [],
+  "status": "superseded_by_rootcause_summary; access_completed_validated; site_not_repaired",
+  "superseding_receipt": "rootcause-summary.json",
+  "next_step": "Transport degradation confirmed by root-cause investigation authorized in message 1567031695268515912. Provider attribution/remediation requires the existing provider-support route or the Hetzner account owner. Historical findings above remain preserved; rootcause-summary.json is authoritative for current state."
+}

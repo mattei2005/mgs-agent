@@ -75,6 +75,12 @@ Em `pure_clone`, sourcing legado com uncrop desativado e smart crop ativo pode e
 
 Releia as features depois do processamento, pois o primeiro GET pode preservar flags que leituras posteriores já omitem. Se a fonte continua OPT_IN e as cópias deixam de expor features individuais adicionais, a aprovação de somente background não resolve esse novo delta. Compare GETs de mesma forma na fonte e nos alvos, preserve evidências anteriores e atuais e mantenha o gate de ativação. Não equipare ausência a OPT_OUT nem afrouxe o comparador para concluir: solicite review somente do delta material novo, sem repetir a aprovação já concedida para background.
 
+Depois de uma ordem inequívoca para resolver/concluir, vinculada por GET ao diálogo que expôs esses deltas, registre a decisão como resolvida e não repita a pergunta. O adapter `shein_reviewed_feature_omissions` é estritamente vinculado ao seu binding de request, manifests, relógio, IDs existentes de campanha/conjunto/anúncio/creative e lineage; outro lote exige binding e review próprios. A comparação pode aceitar somente o conjunto exato de campos ausentes revisados. Valor explícito divergente, quinta omissão, novo recurso habilitado, mídia/copy alterada ou ID diferente continuam bloqueando. Preserve todos os payloads originais e o comparador global; finalize exclusivamente por QA semântico/renderizado integral e `activate_verified`, sem recriação ou POST corretivo de feature.
+
+Consolide a prova de diálogo com um GET paginado do histórico e um GET da decisão, exigindo cobertura de todos os IDs e hashes de conteúdo/autor. Não dispare um GET individual por mensagem: isso pode esgotar a quota Discord na própria validação. Histórico incompleto, mensagem alterada ou intervenção humana não vinculada falham fechados; não substitua o GET por memória/snapshot como autorização. Testes negativos e de contagem: `test_shein_reviewed_feature_omissions.py`.
+
+Separe ACTIVE de início/entrega: confirme o relógio real e o fuso da conta, sem interpretar meia-noite de outro fuso como horário vencido. Ativação de status não muda silenciosamente o início persistido. No fechamento, informe o horário exato da conta e sua conversão quando houver confusão de fusos; não declare veiculação imediata nem gasto sem Insights.
+
 
 ### Decisão material aceita e capacidade do executor
 

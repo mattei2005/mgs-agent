@@ -117,6 +117,38 @@ class MetaAppInvest3DTests(unittest.TestCase):
         self.assertEqual(result['source_rows'], 600)
         self.assertEqual(result['source_rows_today'], 200)
 
+    def test_helper_converts_utc_instant_to_operational_calendar(self):
+        rows, payload = self.fixture()
+        for final in ('2026-09-05T02:20:00.000Z',
+                      '2026-09-05T02:20:00+00:00',
+                      '2026-09-04T22:20:00-04:00'):
+            with self.subTest(final=final):
+                result = self.helper.aggregate_invest_3d(rows, {**payload, 'finalDate': final})
+                self.assertEqual(result['current_date'], '2026-09-04')
+                self.assertEqual(result['period_start'], '2026-09-01')
+                self.assertEqual(result['period_end'], '2026-09-03')
+                self.assertEqual(result['by_profile_today']['profile 000'], '1.00')
+                self.assertEqual(result['by_profile']['profile 000'], '3.00')
+
+    def test_helper_respects_winter_offset_and_actual_midnight(self):
+        rows, payload = self.fixture()
+        shift = date(2026, 11, 2) - date(2026, 9, 4)
+        for row in rows:
+            row['DATE'] = (date.fromisoformat(row['DATE']) + shift).isoformat()
+        result = self.helper.aggregate_invest_3d(rows, {**payload, 'finalDate': '2026-11-03T04:28:20Z'})
+        self.assertEqual(result['current_date'], '2026-11-02')
+        self.assertEqual(result['period_start'], '2026-10-30')
+        self.assertEqual(result['period_end'], '2026-11-01')
+        with self.assertRaisesRegex(RuntimeError, 'dates missing'):
+            self.helper.aggregate_invest_3d(rows, {**payload, 'finalDate': '2026-11-03T05:00:00Z'})
+
+    def test_helper_preserves_date_only_and_rejects_malformed_dates(self):
+        rows, payload = self.fixture()
+        result = self.helper.aggregate_invest_3d(rows, {**payload, 'finalDate': '2026-09-04'})
+        self.assertEqual(result['current_date'], '2026-09-04')
+        with self.assertRaisesRegex(RuntimeError, 'final date is invalid'):
+            self.helper.aggregate_invest_3d(rows, {**payload, 'finalDate': '2026-09-04Tnot-a-time'})
+
     def test_helper_fails_closed_when_one_of_three_dates_is_missing(self):
         rows, payload = self.fixture()
         rows = [row for row in rows if row['DATE'] != '2026-09-03']

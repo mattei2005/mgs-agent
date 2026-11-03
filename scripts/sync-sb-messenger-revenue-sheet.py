@@ -368,13 +368,23 @@ def aggregate_report(rows: list[dict], request_payload: dict) -> tuple[dict[str,
 def aggregate_invest_3d(rows: list[dict], request_payload: dict) -> dict:
     """Separate today's partial spend from the prior three closed dates."""
     publishers = request_payload.get("publishers") or []
-    end_text = str(request_payload.get("finalDate") or "")[:10]
+    end_text = str(request_payload.get("finalDate") or "")
     if len(rows) < 1000 or len(publishers) < 30:
         raise RuntimeError(
             f"Smart Bidding scope unexpectedly small: rows={len(rows)} publishers={len(publishers)}"
         )
     try:
-        end_date = datetime.fromisoformat(end_text).date()
+        end_instant = datetime.fromisoformat(end_text.replace("Z", "+00:00"))
+        # finalDate is an instant serialized as UTC, not a civil-day label.
+        # Use the monitor's operational Eastern calendar before selecting
+        # today's partial spend and the preceding three completed dates.
+        # Never fall back to the latest returned row: a real missing date
+        # must still fail closed instead of silently shifting the window.
+        end_date = (
+            end_instant.astimezone(NY).date()
+            if end_instant.tzinfo is not None
+            else end_instant.date()
+        )
     except ValueError as exc:
         raise RuntimeError("Smart Bidding Invest 3D final date is invalid") from exc
     current_date = end_date.isoformat()

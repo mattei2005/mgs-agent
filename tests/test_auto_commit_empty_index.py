@@ -189,6 +189,27 @@ exec {self.real_git} "$@"
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
         self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
 
+    def test_reviewed_cloudflare_policy_metadata_commits(self):
+        base = "reports/vagaaqui-cloudflare-1567024655431245884/"
+        names = {base + "token-policy-" + suffix + ".json" for suffix in (
+            "before", "after", "request", "validation", "validation-corrected", "write-response"
+        )}
+        for name in names:
+            path = self.repo / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text('{"synthetic_metadata":true}\n')
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()), names)
+
+    def test_cloudflare_metadata_exception_blocks_sibling_credentials(self):
+        base = self.repo / "reports/vagaaqui-cloudflare-1567024655431245884"
+        base.mkdir(parents=True)
+        (base / "token-policy-before.json").write_text('{"synthetic_metadata":true}\n')
+        (base / "token.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_stock_transport_exception_does_not_allow_sibling_secrets(self):
         base = self.repo / "scripts"
         base.mkdir()

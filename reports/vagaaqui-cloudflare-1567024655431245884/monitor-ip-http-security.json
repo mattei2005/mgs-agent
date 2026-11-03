@@ -1,0 +1,16 @@
+{
+  "http_status": 200,
+  "response": {
+    "data": null,
+    "errors": [
+      {
+        "message": "Syntax Error GraphQL (1:780) Unexpected }\n\n1: {viewer{zones(filter:{zoneTag:\"0a38ce4f11fedd8f03e02fcc07601d74\"}){httpRequestsAdaptiveGroups(limit:500,filter:{datetime_geq:\"2026-11-03T03:20:00Z\",datetime_lt:\"2026-11-03T04:00:00Z\",clientIP:\"52.22.236.30\",clientRequestHTTPHost:\"vagaaqui.com\"},orderBy:[datetime_ASC]){count dimensions{datetime clientRequestHTTPMethodName clientRequestPath edgeResponseStatus originResponseStatus coloCode userAgent securityAction securitySource}avg{sampleInterval originResponseDurationMs}}firewallEventsAdaptive(limit:100,filter:{datetime_geq:\"2026-11-03T03:20:00Z\",datetime_lt:\"2026-11-03T04:00:00Z\",clientIP:\"52.22.236.30\"},orderBy:[datetime_ASC]){datetime action source clientIP clientRequestHTTPHost clientRequestPath edgeResponseStatus originResponseStatus edgeColoName sampleInterval}}}}}\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^\n2: \n",
+        "path": null,
+        "extensions": {
+          "timestamp": "2026-11-03T04:15:08.822114036Z",
+          "ray_id": "a5488e5e7d1a60cb-SEA"
+        }
+      }
+    ]
+  }
+}

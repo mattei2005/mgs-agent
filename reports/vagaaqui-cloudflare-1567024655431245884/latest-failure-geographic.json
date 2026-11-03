@@ -1,0 +1,54 @@
+{
+  "http_status": 200,
+  "response": {
+    "data": {
+      "viewer": {
+        "zones": [
+          {
+            "httpRequestsAdaptiveGroups": [
+              {
+                "avg": {
+                  "originResponseHeaderReceiveDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "5.161.113.195",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T04:18:29Z",
+                  "edgeResponseStatus": 522,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              },
+              {
+                "avg": {
+                  "originResponseHeaderReceiveDurationMs": -1,
+                  "originTcpHandshakeDurationMs": -1,
+                  "originTlsHandshakeDurationMs": -1,
+                  "sampleInterval": 1
+                },
+                "count": 1,
+                "dimensions": {
+                  "clientIP": "5.161.177.47",
+                  "clientRequestPath": "/",
+                  "coloCode": "IAD",
+                  "datetime": "2026-11-03T04:24:04Z",
+                  "edgeResponseStatus": 525,
+                  "originIP": "162.55.28.178",
+                  "originResponseStatus": 0,
+                  "userAgent": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "errors": null
+  }
+}

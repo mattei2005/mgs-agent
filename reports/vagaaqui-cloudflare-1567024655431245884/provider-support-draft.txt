@@ -1,0 +1,35 @@
+Subject: Intermittent Cloudflare-to-origin TCP/TLS failures — 162.55.28.178 / vagaaqui.com
+
+Please investigate packet loss, return-path routing/peering and PMTUD between dedicated server 162.55.28.178 (MatteiInc01) and Cloudflare origin-fetch peers.
+
+Observed window: 2026-11-03, starting around 03:29 UTC, recurring through at least 04:35 UTC. This is intermittent, not a continuous whole-site outage.
+
+Cloudflare evidence:
+- 03:36:43 UTC: UptimeRobot 52.22.236.30, HEAD /, Cloudflare IAD, status 522, no origin HTTP response.
+- 03:47:52 UTC: same monitor, status 200, followed by a response in the origin log at 03:47:53 UTC.
+- 04:12:55 UTC: same monitor, Cloudflare IAD, status 524.
+- 04:29:40 UTC: another monitor, Cloudflare IAD, status 522.
+- 04:35:15 UTC: another monitor, Cloudflare CMH, status 522.
+- 04:35:25 UTC: failures for requests to normal WordPress CSS assets via Cloudflare SEA, including status 522.
+
+Passive server-side evidence:
+- Capture on external NIC enp6s0 from 04:30:25 to 04:31:41 UTC; 35,721 packets captured, zero packets dropped by the capture kernel.
+- ClientHello SNI identifies new vagaaqui.com TLS connections, not just unrelated traffic on the shared host.
+- For a vagaaqui.com flow from Cloudflare 162.159.114.126:12875, repeated incoming SYNs and repeated outgoing SYN+ACKs were observed. The server's initial SYN-to-SYN+ACK time was approximately 0.044 ms.
+- For a vagaaqui.com flow from Cloudflare 104.22.93.106:12236, the server responded to the SYN in approximately 0.033 ms, while repeated SYNs and repeated outbound TCP data segments were observed.
+- Kernel TCP state independently showed substantial retransmissions, TCP backoff and MSS reduced to 48 bytes for affected Cloudflare connections. Other contemporaneous vagaaqui.com connections completed with no observed repeated data segments.
+- No packet bodies, HTTP credentials or TLS secrets were persisted; only reduced metadata was retained.
+
+Host checks during continuing failures:
+- CPU, available memory, disk capacity and conntrack table were not saturated.
+- NIC hardware counters showed no RX/TX errors, CRC errors or TX timeouts.
+- Nginx, PHP-FPM, MariaDB and BitNinja WAF3 remained active, without a restart corresponding to the incident.
+- All 15 official Cloudflare IPv4 CIDRs were present in both BitNinja's whitelist and proxy-list network sets. No overlapping Cloudflare ranges were found in the inspected blacklist network sets. The cited UptimeRobot IP was not present in the inspected greylist/blacklist sets.
+- BitNinja WAF3 transparently fronts the origin on port 60414. Its presence alone is not evidence that it caused the failure.
+
+Traceroute caveat:
+MTR TCP traces towards the affected Cloudflare peer IPs are incomplete near the destination. Intermediate-hop non-responses are NOT being claimed as end-to-end loss or proof of a failing carrier/router. Actual TCP retransmissions and repeated handshake packets were established independently by packet metadata and kernel TCP state.
+
+Please validate the server's uplink and the forward/return paths to the cited Cloudflare peers, correlate the UTC times with upstream routing/filtering changes, and advise whether coordinated Cloudflare origin-network investigation is required. Current evidence does not identify a specific culpable provider, carrier or router.
+
+Do not reboot the server, disable protection, modify firewall/MTU/sysctl or change application configuration without a separate exact-change owner authorization.

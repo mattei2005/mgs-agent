@@ -71,5 +71,23 @@ class PipelineTests(unittest.TestCase):
   self.patches[1].stop()
   for cfg in [{'archive_pipeline_enabled':True,'archive_pipeline_authority_message_id':'wrong'},{'archive_pipeline_enabled':'true','archive_pipeline_authority_message_id':pipeline.AUTHORITY}]:
    with patch.object(b,'read_json',return_value=cfg):self.assertFalse(pipeline.enabled())
+ def test_scoped_rows_rejects_extra_or_missing_pair_member_before_native_io(self):
+  self.patches[2].stop()
+  import ares_flat_intake as flat
+  row={'asset_id':'syntheticAsset','source_drive_id':'rawOffline001','asset_drive_id':'cleanOffline001','operation':'SHEIN_US_ES','source_manager':'Kelly','ares_eligible':False,'used_by':None,'reservation_status':'RESERVADO_PELO_GESTOR'}
+  folder=self.home/'data/ares/creative-ops/inventory';folder.mkdir(parents=True);(folder/'assets.jsonl').write_text(json.dumps(row)+'\n')
+  entry={**self.entry,'inventory_before':{},'batch':{**self.entry['batch'],'operation':'SHEIN_US_ES','manager_name':'Kelly'}}
+  with patch.object(b,'BASE',self.home),patch.object(flat,'validate_batch_identity'),patch.object(b,'Drive',side_effect=AssertionError('no native IO')):
+   self.assertEqual(pipeline.scoped_rows(entry),[row])
+   for ids in [['rawOffline001'],['rawOffline001','cleanOffline001','outsideOffline001']]:
+    with self.assertRaises(b.ArchiveError):pipeline.scoped_rows({**entry,'archive_source_ids':ids})
+ def test_scoped_rows_preserves_existing_reservation_gate(self):
+  self.patches[2].stop()
+  import ares_flat_intake as flat
+  row={'asset_id':'syntheticAsset','source_drive_id':'rawOffline001','asset_drive_id':'cleanOffline001','operation':'SHEIN_US_ES','source_manager':'Kelly','ares_eligible':True,'used_by':None,'reservation_status':'RESERVADO_PELO_GESTOR'}
+  folder=self.home/'data/ares/creative-ops/inventory';folder.mkdir(parents=True);(folder/'assets.jsonl').write_text(json.dumps(row)+'\n')
+  entry={**self.entry,'inventory_before':{},'batch':{**self.entry['batch'],'operation':'SHEIN_US_ES','manager_name':'Kelly'}}
+  with patch.object(b,'BASE',self.home),patch.object(flat,'validate_batch_identity'):
+   with self.assertRaises(intake.IntakeError):pipeline.scoped_rows(entry)
 
 if __name__=='__main__':unittest.main()
