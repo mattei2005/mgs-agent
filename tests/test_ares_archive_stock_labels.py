@@ -58,4 +58,36 @@ class LabelsTests(unittest.TestCase):
             self.assertEqual(namespace.catalogue_name(self.entry,self.stock),self.rec['catalogue_name'])
             self.assertEqual(namespace.native_stock_label(labels.SOURCE,labels.STOCK,self.rec['catalogue_name']),self.rec['stock_name'])
 
+class DiamondLabelsTests(unittest.TestCase):
+    def test_independent_authority_and_exact_scope(self):
+        with tempfile.TemporaryDirectory() as root:
+            home = Path(root)
+            with patch.object(labels, 'DIAMOND_HOME', home):
+                _, authority, stock_id, provider_id, job_id, stock_name, provider_name = labels.scope(labels.DIAMOND_SOURCE)
+                entry = dict(zip(labels.FIELDS, [labels.DIAMOND_SOURCE, provider_id, stock_id, job_id, 'synthetic-diamond', 'c'*32, 'd'*64, '20']))
+                rec = {'identity': labels.identity(entry), 'stock_name': stock_name, 'provider_name': provider_name, 'catalogue_name': provider_name, 'provider_parents': ['synthetic-parent']}
+                proof = {'schema': 'mgs.archive.stock.label.proof.v1', 'authority_message_id': authority, 'native_verified': True, 'record': rec, 'provider_hashes': {k: entry[k] for k in ('size','md5','sha256')}, 'ack_verified': True}
+                def save(auth=authority):
+                    labels.b.atomic_json(home/'native-proof.json', proof)
+                    labels.b.atomic_json(home/'binding.json', {'schema': 'mgs.archive.stock.label.binding.v1', 'authority_message_id': auth, 'phase': 'active', 'proof_sha256': hashlib.sha256(labels.b.canonical(proof)).hexdigest()})
+                physical = {'id': provider_id, 'name': provider_name, 'parents': rec['provider_parents']}
+                stock = {'id': stock_id, 'name': stock_name, 'shortcutDetails': {'targetId': provider_id}, 'properties': {'mgsArchiveLogicalSource': labels.DIAMOND_SOURCE}}
+                save()
+                self.assertTrue(labels.names_match(entry, physical, stock))
+                self.assertEqual(labels.catalogue_name(entry, stock), provider_name)
+                self.assertEqual(labels.native_stock_label(labels.DIAMOND_SOURCE, stock_id, provider_name), stock_name)
+                for change in ({'name':'other'}, {'id':labels.STOCK}, {'shortcutDetails':{'targetId':labels.PROVIDER}}):
+                    self.assertFalse(labels.names_match(entry,physical,{**stock,**change}))
+                for key in labels.FIELDS[1:]:
+                    with self.assertRaises(labels.b.ArchiveError):
+                        labels.record({**entry,key:'drift'})
+                self.assertIsNone(labels.record({**entry,'sourceId':'unapproved'}))
+                self.assertIsNone(labels.native_stock_label(labels.DIAMOND_SOURCE, labels.STOCK, provider_name))
+                save(labels.AUTHORITY)
+                with self.assertRaises(labels.b.ArchiveError): labels.record(entry)
+                save()
+                proof['record']['stock_name']='other'
+                labels.b.atomic_json(home/'native-proof.json',proof)
+                with self.assertRaises(labels.b.ArchiveError): labels.record(entry)
+
 if __name__=='__main__':unittest.main()

@@ -1222,6 +1222,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G006-INTRADAY-1567197589005406290",
+      "next_step": "Sem pendencia do pedido. Novos intradays exigem novas fontes; preservar ressalvas de delay Escalatepower e receita Mavroa 005 n/d",
+      "objective": "Intraday atual das seis contas SHEIN G006 na Intraday Geral",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/shein-1567197589005406290/completion.json",
+      "state": "concluido: seis contas, fontes atuais meta/sb e rps dom; relatorios canonicos integralmente entregues na origem com get de cada parte; nenhum write meta",
+      "thread_id": "1567162580273729629",
+      "updated_at": "2026-11-03T15:28:48+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-GLOBAL-BUDGET-LIMIT-HOLD-20260905",
       "next_step": "Nenhum; manter inativo sem expiração até nova instrução explícita de Rodolfo com os novos limites",
       "objective": "Desativar temporariamente limites internos de budget em toda conta de anúncio, inclusive Eggbev e Creditoparaveiculo, preservando autorização, budget explícito, billing, pre-read e readback",
@@ -7123,12 +7133,12 @@
     {
       "agent": "zeus",
       "id": "meta-manual-payments-digital-trust",
-      "next_step": "Concluir reautenticacao Meta2FA no Chrome aprovadoPC1;proximo tick existente14:02Easternrevalidaraasuperficie e retomara47IDs,H36,D4.Semjob/writerparalelo;preservarhorasH/D.",
-      "objective": "Atualizar47IDs DigitalTrust;Jnovembro,invoicesoutubro;sem pagamento/billing",
-      "source": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261103T0802/closure-current.json",
-      "state": "03nov08:02est parcial:47metricasapi08:04validadas;11cartao/36linha;h0novas/36preservadas02nov21:05–21:21.metapc1exige2faappconfirmadoax+pixels;sem bypass.d4eventospendentes(eggbev03,mavroa02/03/04);35vazioshistoricos(34semprova+growpowerhub04semcobrancalocalizada).29invoicesoutubrousd417702.93;foraescopousd161.18naoincluido.gusd20799.46(31out–02nov);iusd456905.56;jnov1–3parcialusd47447.23.outraabaintacta,47ids,links,moedas,notas,totaisf/g/h/i/jvalidados.leaselivre;0pagamentos/0metawrites/0cronchanges.reportpendenterestricaodelivery.",
+      "next_step": "Baseline integral,preflightSA,funding,invoices,métricas,H36,Dpendentes,reconciliação e readback;writer único.",
+      "objective": "Atualizar integralmente os mesmos47IDs DigitalTrust após autenticação;Jnovembro,E/Foutubro,sem billing",
+      "source": "/root/mgs-agent/data/meta-manual-payments/digital-trust-workbook-contract.json",
+      "state": "pedido1567197024422469653 validado por sender344196393512075265; job2ee720363d7d concluído08:08,fire_claim nulo,semworkers financeiros;chrome19372/328816 vivo,axrodolfo+digitaltrust,pixelsaccounts semgate.",
       "thread_id": "1563926766286803004",
-      "updated_at": "2026-11-03T13:08:23+00:00"
+      "updated_at": "2026-11-03T15:23:14+00:00"
     },
     {
       "agent": "zeus",
@@ -8402,5 +8412,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T13:08:23+00:00"
+  "updated_at": "2026-11-03T15:28:48+00:00"
 }
