@@ -29,6 +29,9 @@ def sourcing(payload):
 
 def valid_observed(actual, expected):
     """Reject inherited video/related/extra images and copy substitutions."""
+    from .shein_reviewed_background_batch import preserved_sourcing
+    preserved=preserved_sourcing(actual,expected)
+    if preserved is not None:return preserved
     spec = actual.get('media_sourcing_spec')
     if spec is None:
         return expected.get('media_sourcing_spec') is None

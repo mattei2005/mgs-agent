@@ -141,6 +141,51 @@ class BatchBackgroundTests(unittest.TestCase):
             with self.assertRaises(ValueError):dispatch.verify_creative(changed,cp)
         finally:APPROVED_RESUME.reset(marker)
 
+    def test_complex_sourcing_preserved_verbatim_only_in_exact_review_context(self):
+        from ares_campaign_v3 import creative_media
+        trees=json.loads((ROOT/'trees-paused.json').read_text())
+        expected={a['source_ad_id']:a['creative_payload'] for c in self.state['manifest']['campaigns'] for a in c['ads']}
+        # Use each campaign's own canonical slot (names and tracking differ).
+        source=next(a for a in trees[0]['ads']['data'] if a['source_ad_id']=='120252350213560326')
+        cp=next(a['creative_payload'] for a in self.state['manifest']['campaigns'][0]['ads'] if a['source_ad_id']==source['source_ad_id'])
+        self.assertFalse(creative_media.matches(source['creative'],mod._opt_out(cp)))
+        marker=APPROVED_RESUME.set(self.context())
+        try:
+            self.assertTrue(creative_media.matches(source['creative'],dispatch.effective(cp)))
+            for change in ['crop','uncrop','extra','hash','url','copy']:
+                actual=copy.deepcopy(source['creative']);spec=actual['media_sourcing_spec']
+                if change=='crop':spec['images'][1]['image_crops'][0]['crop_spec']['100x100'][0][0]=1
+                if change=='uncrop':spec['images'][0]['opt_in_status']='opt_in'
+                if change=='extra':spec['images'].append(copy.deepcopy(spec['images'][1]))
+                if change=='hash':actual['object_story_spec']['link_data']['image_hash']='9'
+                if change=='url':spec['images'][0]['url']='https://example.invalid/'
+                if change=='copy':spec['bodies'][0]['text']='different'
+                with self.subTest(change=change):self.assertFalse(creative_media.matches(actual,dispatch.effective(cp)))
+        finally:APPROVED_RESUME.reset(marker)
+
+    def test_all_six_real_creative_definitions_pass_without_rewriting_source_or_manifests(self):
+        from ares_campaign_v3.shein_single_clone import verify_readback
+        trees=json.loads((ROOT/'trees-paused.json').read_text());before=copy.deepcopy(self.state)
+        marker=APPROVED_RESUME.set(self.context())
+        try:
+            for tree in trees:
+                desired=next(c for c in self.state['manifest']['campaigns'] if c['name']==tree['campaign']['name'])
+                warnings=verify_readback({**self.state['manifest'],'campaigns':[desired]},self.state['source'],tree)
+                self.assertTrue(any('age/gender' in w for w in warnings))
+        finally:APPROVED_RESUME.reset(marker)
+        self.assertEqual(before,self.state)
+
+    def test_later_missing_source_features_remain_a_material_gate(self):
+        trees=json.loads((ROOT/'trees-paused-latest.json').read_text())
+        marker=APPROVED_RESUME.set(self.context())
+        try:
+            for tree in trees:
+                desired=next(c for c in self.state['manifest']['campaigns'] if c['name']==tree['campaign']['name'])
+                expected={a['source_ad_id']:a['creative_payload'] for a in desired['ads']}
+                for ad in tree['ads']['data']:
+                    with self.subTest(ad=ad['id']),self.assertRaises(ValueError):dispatch.verify_creative(ad['creative'],expected[ad['source_ad_id']])
+        finally:APPROVED_RESUME.reset(marker)
+
     def final_checkpoint(self):
         from ares_campaign_v3.schema import Manifest
         cp=copy.deepcopy(self.cp);cp['status']='COMPLETE'

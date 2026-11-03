@@ -243,6 +243,21 @@ def verify_creative(actual,expected):
     verify_degrees(actual.get('degrees_of_freedom_spec'),effective(expected)['degrees_of_freedom_spec'])
 
 
+def preserved_sourcing(actual,expected):
+    """Exact source package, not a new-media recipe or a normalization waiver.
+    The reviewed batch keeps the source's disabled uncrop + active smart crop.
+    Every sourcing key/value (including crops/variant flags) must be identical.
+    """
+    if active_context() is None:return None
+    try:approved=effective(expected)
+    except ValueError:return None
+    spec=approved.get('media_sourcing_spec')
+    primary=((approved.get('object_story_spec') or {}).get('link_data') or {}).get('image_hash')
+    if not primary or not isinstance(spec,dict) or not spec.get('images'):return None
+    observed=((actual.get('object_story_spec') or {}).get('link_data') or {}).get('image_hash')
+    return observed==primary and actual.get('media_sourcing_spec')==spec
+
+
 def _final_slots(context):
     checkpoint=json.loads(CHECKPOINT.read_text())
     bound=context['descriptor']['reviewed_creative_features']
