@@ -130,6 +130,8 @@ def _authorize_late_reviewer(descriptor, original, reviewer):
 def validate_descriptor(descriptor, state, checkpoint, *, get_message=None):
     from .shein_channel_authority import _get
     get_message = get_message or _get
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected(descriptor):return batch.validate_descriptor(descriptor,state,checkpoint,get_message=get_message)
     original = state['request']
     pairs = [('continuation_of','request_id'),('account','account'),('authorized_by','authorized_by'),
              ('source_thread_id','source_thread_id'),('source_channel_id','source_channel_id'),
@@ -202,6 +204,10 @@ def activation_authorization(target, creation, proof):
     context = APPROVED_RESUME.get()
     if context is None:
         return None
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected(context['descriptor']):
+        from .shein_channel_authority import _get
+        return batch.activation_authorization(target,creation,proof,get_message=_get)
     verified = validate_descriptor(context['descriptor'],context['state'],context['checkpoint'])
     ids = [tree['campaign']['id'] for tree in proof.get('trees',[])]
     if (verified['request_id'] != target.request_id or verified['account_id'] != target.campaigns[0].account_id

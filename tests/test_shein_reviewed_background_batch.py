@@ -64,7 +64,7 @@ class BatchBackgroundTests(unittest.TestCase):
             d=copy.deepcopy(self.desc);d[field]=value
             with self.subTest(field=field),self.assertRaises(ValueError):mod.validate_descriptor(d,self.state,self.cp,get_message=self.get)
     def test_dispatch_and_payload_only_one_feature_changes(self):
-        before=copy.deepcopy(self.state);marker=APPROVED_RESUME.set(self.context())
+        before=copy.deepcopy(self.state);marker=APPROVED_RESUME.set(self.context());cp=self.state['manifest']['campaigns'][0]['ads'][0]['creative_payload']
         try:
             for campaign in self.state['manifest']['campaigns']:
                 for ad in campaign['ads']:
@@ -139,6 +139,64 @@ class BatchBackgroundTests(unittest.TestCase):
             with self.assertRaises(ValueError):dispatch.verify_creative(cp,cp)
             changed=copy.deepcopy(out);changed['degrees_of_freedom_spec']['creative_features_spec']['arbitrary']={'enroll_status':'OPT_IN'}
             with self.assertRaises(ValueError):dispatch.verify_creative(changed,cp)
+        finally:APPROVED_RESUME.reset(marker)
+
+    def final_checkpoint(self):
+        from ares_campaign_v3.schema import Manifest
+        cp=copy.deepcopy(self.cp);cp['status']='COMPLETE'
+        for r in cp['bundles']:
+            r['status']='COMPLETE';r['reviewed_creative_feature_resolution']=mod._receipt(self.bound,r['idempotency_keys'])
+        b=self.bundle(1);keys=[c.idempotency_key for c in b.campaigns]
+        cp['bundles'].append({'index':b.index,'status':'COMPLETE','idempotency_keys':keys,
+            'campaign_ids':['900000000000001'],'adset_ids':['900000000000002'],
+            'sealed_manifest_digest':Manifest.from_dict(self.state['manifest']).digest,
+            'reviewed_creative_feature_resolution':mod._receipt(self.bound,keys)})
+        return cp
+    def final_tree(self,index,cp):
+        campaign=self.state['manifest']['campaigns'][index];r=cp['bundles'][0 if index<2 else 1];slot=index if index<2 else 0
+        cid=r['campaign_ids'][slot];sid=r['adset_ids'][slot]
+        return {'campaign':{'id':cid,'account_id':mod.ACCOUNT},'adsets':{'data':[{'id':sid}]},
+            'ads':{'data':[{'id':'test-ad-'+str(index)+'-'+str(j),'adset_id':sid,
+                'source_ad_id':a['source_ad_id'],'creative':mod._opt_out(a['creative_payload'])}
+                for j,a in enumerate(campaign['ads'])]}}
+    def test_complete_checkpoint_preserves_original_two_and_admits_only_planned_third(self):
+        cp=self.final_checkpoint();mod.require_binding(self.state,cp,self.bound)
+        cp['bundles'][1]['reviewed_creative_feature_resolution']['review_message_id']='9'
+        with self.assertRaises(ValueError):mod.require_binding(self.state,cp,self.bound)
+    def test_activation_trees_check_exact_ids_lineage_and_all_feature_states(self):
+        cp=self.final_checkpoint();marker=APPROVED_RESUME.set(self.context())
+        try:
+            with patch.object(mod,'CHECKPOINT',SimpleNamespace(read_text=lambda:json.dumps(cp))):
+                for index in range(3):dispatch.validate_activation_tree(self.final_tree(index,cp))
+                tree=self.final_tree(0,cp);tree['ads']['data'][0]['adset_id']='9'
+                with self.assertRaises(ValueError):dispatch.validate_activation_tree(tree)
+                tree=self.final_tree(2,cp);tree['ads']['data'][0]['creative']['degrees_of_freedom_spec']['creative_features_spec'][mod.FEATURE]={'enroll_status':'OPT_IN'}
+                with self.assertRaises(ValueError):dispatch.validate_activation_tree(tree)
+                tree=self.final_tree(1,cp);tree['ads']['data']=[]
+                with self.assertRaises(ValueError):dispatch.validate_activation_tree(tree)
+                cp['bundles'][1]['campaign_ids']=cp['bundles'][0]['campaign_ids'][:1]
+                with self.assertRaises(ValueError):mod._final_slots(self.context())
+        finally:APPROVED_RESUME.reset(marker)
+    def test_future_activation_proof_never_grants_now_or_changed_ids(self):
+        from ares_campaign_v3.schema import Manifest
+        from datetime import datetime,timezone
+        class Clock(datetime):
+            fake_hour=3
+            @classmethod
+            def now(cls,tz=None):return datetime(2026,11,3,cls.fake_hour,tzinfo=timezone.utc)
+        target=Manifest.from_dict(self.state['target_manifest']);creation=Manifest.from_dict(self.state['manifest'])
+        cp=self.final_checkpoint();proof={'trees':[self.final_tree(i,cp) for i in range(3)],'execution_started_at':self.state['execution_started_at']}
+        marker=APPROVED_RESUME.set(self.context())
+        try:
+            with patch.object(mod,'CHECKPOINT',SimpleNamespace(read_text=lambda:json.dumps(cp))),patch.object(mod,'datetime',Clock),patch('ares_campaign_v3.shein_continuation._authorize_late_reviewer',return_value={'live':True}):
+                out=mod.activation_authorization(target,creation,proof,get_message=self.get)
+                self.assertEqual(len(out['campaign_ids']),3);self.assertFalse(out['start_now'])
+                Clock.fake_hour=6
+                with self.assertRaises(ValueError):mod.activation_authorization(target,creation,proof,get_message=self.get)
+                Clock.fake_hour=3;changed=copy.deepcopy(proof);changed['trees'][2]['campaign']['id']='9'
+                with self.assertRaises(ValueError):mod.activation_authorization(target,creation,changed,get_message=self.get)
+                changed=copy.deepcopy(proof);changed['execution_started_at']='later'
+                with self.assertRaises(ValueError):mod.activation_authorization(target,creation,changed,get_message=self.get)
         finally:APPROVED_RESUME.reset(marker)
 
 if __name__=='__main__':unittest.main()

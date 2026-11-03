@@ -103,6 +103,8 @@ def _opt_out(payload):
 
 
 def effective(payload):
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected_context() is not None:return batch.effective(payload)
     context=active_context()
     if context is None:return payload
     originals=[ad['creative_payload'] for c in context['state']['manifest']['campaigns'] for ad in c['ads']]
@@ -113,6 +115,8 @@ def effective(payload):
 
 
 def submit_lane(pool,fn,account,bundles,request_id,manifest_digest):
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected_context() is not None:return batch.submit_lane(pool,fn,account,bundles,request_id,manifest_digest)
     # ContextVars do not cross ThreadPoolExecutor by default. Propagate only
     # this verified account-scoped continuation, never introduce global state.
     context=active_context()
@@ -125,10 +129,14 @@ def submit_lane(pool,fn,account,bundles,request_id,manifest_digest):
 
 
 def extra_points(record):
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected_context() is not None:return batch.extra_points(record)
     return 3 if active_context() is not None and not (record or {}).get('reviewed_creative_feature_resolution') else 0
 
 
 def resolve_bundle(engine,bundle,transport,record):
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected_context() is not None:return batch.resolve_bundle(engine,bundle,transport,record)
     context=active_context()
     if context is None:return bundle
     from . import progress
@@ -172,6 +180,8 @@ def resolve_bundle(engine,bundle,transport,record):
 
 
 def verify_creative(actual,expected):
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected_context() is not None:return batch.verify_creative(actual,expected)
     if active_context() is None:return
     from .shein_reference import verify_degrees
     resolved=effective(expected)
@@ -179,6 +189,8 @@ def verify_creative(actual,expected):
 
 
 def validate_activation_tree(tree):
+    from . import shein_reviewed_background_batch as batch
+    if batch.selected_context() is not None:return batch.validate_activation_tree(tree)
     context=active_context()
     if context is None:return
     bound=context['descriptor']['reviewed_creative_features'];shell=bound['shells'][0]
