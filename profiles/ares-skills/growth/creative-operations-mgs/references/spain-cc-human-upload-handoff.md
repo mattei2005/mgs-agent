@@ -2,6 +2,8 @@
 
 Use this reference when Kelly/Geizian/gestor uploads Spanish credit-card creatives and asks whether Ares or Ares should apply the agreed rules.
 
+Current storage precedence: use `flat-upload-intake.md`, the active flat binding and canonical archive resolver. MGS is intake/staging only; permanent common stock is `MGS-ARQUIVO/CRIATIVOS/CC_ES_ES/{IMG|VID}/01_READY/`, while explicitly requested manager delivery uses registered Exclusivos. Sender identity alone does not select an exclusive folder. Preserve RAW/source IDs with the existing same-ID maintenance and no DELETE. Ares owns both creative treatment and later authorized Campaign Ops; old wording about notifying/handoff to Ares does not authorize another bot, writer or a campaign.
+
 ## Responsibility split
 
 ```text
@@ -39,7 +41,7 @@ Map to:
 country=ES
 operation=CC_ES_ES
 language=ES
-destination=MGS-AGENTS/CRIATIVOS/CC_ES_ES/{IMG|VID}/01_READY/
+destination=MGS-ARQUIVO/CRIATIVOS/CC_ES_ES/{IMG|VID}/01_READY/
 ```
 
 For vertical 1080x1920 static creatives with no person:
@@ -80,13 +82,6 @@ Keep status out of the filename; status lives in the folder/inventory.
 - Spanish creative with English disclaimer is not an upload blocker, but mark it as an attention item: disclaimer language may need Spanish localization depending on campaign/compliance rules.
 - Claims like “hasta 15.000 €”, “empieza desde 6.000 €”, “100% seguro”, “aprobación rápida” or “respuesta rápida” are usable only with subject-to-approval framing and should be passed to Ares as claim/risk notes, not silently ignored.
 
-## Drive/OAuth blocker handling
+## Authentication failure — superseding the historical personal-OAuth recovery
 
-If the Drive upload path returns an OAuth `invalid_grant` / expired or revoked refresh token:
-
-1. Keep the cleaned files local and report their paths.
-2. Do not claim Drive upload or notify Ares.
-3. Ask for/reinitiate the established Google Drive OAuth refresh flow for the Creative Ops/Campaign Ops Drive client.
-4. After OAuth is revalidated, upload the clean files, verify Drive metadata (`id`, `name`, `parents`, `size`, `webViewLink`, `trashed=false`), then send the single Ares handoff.
-
-This captures the fix path, not a durable claim that Drive tools are unavailable.
+The earlier instruction to restart a personal Google Drive OAuth/refresh-token flow is retired. Agents must use only the canonical Service Account via `mgs_google_workspace_auth.py`; the approved isolated owner connector is not an agent-auth fallback. On an auth failure, retain local media, request IDs and evidence; diagnose the exact canonical SA or isolated-connector boundary and recover only within existing authority. Never claim upload/delivery before exact native readback, switch identities, request a personal login, alter credentials/ACL, or replay a landed upload to repair a verifier. Credential/permission changes retain their explicit gates.

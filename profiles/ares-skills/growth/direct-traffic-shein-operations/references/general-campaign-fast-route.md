@@ -80,6 +80,10 @@ O catálogo não prova que uma Page está delegada nem que uma conta vazia já p
 
 O layout físico antigo foi conciliado conforme `context/creative-archive-legacy-consolidation.md`. Usar o resolvedor e os destinos registrados; `_ARQUIVO_FISICO`, estruturas antigas e a pasta histórica UPLOAD MANUAL não são nova entrada nem pool livre. Pastas antigas rotuladas Usados sem prova de campanha permanecem em legado: não inferir uso, promover a Exclusivos ou remover reservas para satisfazer um pedido. Preservar IDs/requests/ACKs e a separação entre metadata nativa e registro lógico; o backend resolve as localizações aceitas por bindings exatos. Campanha nova continua exigindo o comando humano e os guards normais, sem duplicar mídia ou campanha durante recovery.
 
+## Destino do intake geral e destinatário exclusivo
+
+No pedido geral de Kelly com país/vertical/língua e lote identificado, sem destinatário gestor nem exclusividade, aplicar `common`: tratados em `MGS-ARQUIVO/CRIATIVOS/SHEIN_US_<EN|ES>/IMG/01_READY` ou `.../VID/01_READY`. Não exigir uma campanha/conta ou um destinatário para apenas tratar/organizar, nem inferir `KELLY - Exclusivos` do nome da remetente. O campo interno de manager de origem não altera esse destino, reservas ou elegibilidade. Um pedido expresso de entrega própria/gestor usa Exclusivos; duplicatas preservam uso e destino anteriores. Campaign Ops começa somente com sua autoridade e especificação próprias; não tratar `common` como liberação automática do estoque.
+
 ## Comando normal único
 
 Mídia nova enviada diretamente à entrada MGS segue o binding vivo e `creative-operations-mgs/references/flat-upload-intake.md`: registrar o pedido humano com IDs exatos e aguardar tratamento/arquivo/entrega canônicos, sem criar um segundo writer nem recriar pastas de nicho/gestor na entrada. O modo de armazenamento common/exclusive não substitui a autorização de campanha. Se o pedido original já autorizava a campanha, continuar o mesmo request depois dos gates de mídia, preservando IDs, conta, orçamento, estratégia e início; uso real confirmado continua indo a `<NOME> - Usados`.

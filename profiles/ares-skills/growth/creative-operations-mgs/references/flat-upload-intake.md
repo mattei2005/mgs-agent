@@ -7,9 +7,10 @@ Redesenho aprovado por Rodolfo em `1566814476626563115`; preservação/reaplica�
 ## Regra de entrada
 
 - A pessoa envia IMG/VID diretamente na mesma `UPLOAD MANUAL`, ID `1ARBvLammWUHuAclNmcriwkkgeedKryBd`. Não exigir subpasta de nicho ou gestor.
-- Operação, gestor e finalidade vêm do pedido humano autorizado; o nome do arquivo, uploader, pasta antiga ou referência não substituem esse contexto.
+- Operação, finalidade e eventual gestor destinatário vêm do pedido humano autorizado; distinguir remetente/origem de destinatário exclusivo. O nome do arquivo, uploader, pasta antiga ou referência não substituem o contexto.
 - Congelar os IDs exatos do lote informado. Não absorver imagens vizinhas, inferir o gestor dos pendentes ou reaproveitar um comando antigo para fontes novas. Se o lote/contexto for ambíguo, perguntar somente a informação que falta.
 - `common` destina à organização `01_READY`, preservando os demais gates de elegibilidade/reserva; `exclusive` destina a `<NOME> - Exclusivos`. Não liberar reservas ou promover referência a criativo final pelo simples modo de armazenamento.
+- No pedido geral de Kelly com país/vertical/língua e lote identificado, “aplique as regras e mova para a pasta correta”, sem gestor destinatário nem exclusividade, usar `common`; não perguntar qual gestor apenas para preencher esse fluxo e não entregar em `KELLY - Exclusivos` pelo nome da remetente. Exemplo US/SHEIN/espanhol: tratados IMG em `MGS-ARQUIVO/CRIATIVOS/SHEIN_US_ES/IMG/01_READY`; tratados VID em `MGS-ARQUIVO/CRIATIVOS/SHEIN_US_ES/VID/01_READY`. Originais permanecem preservados, fora do pool de tratados. Pedido de entrega própria de gestor ou destinatário exclusivo explícito continua no fluxo `exclusive`; não generalizar este exemplo para ambiguidades reais, fontes sem pedido ou reservas preexistentes.
 - As antigas pastas de envio por operação/gestor foram preservadas nos 30 TB como histórico técnico. Não pedir que usuários continuem enviando nelas nem recriá-las no MGS.
 
 ## Registrar e executar sem writer paralelo
@@ -21,6 +22,8 @@ python3 /root/mgs-agent/scripts/ares_flat_intake.py register --operation SHEIN_U
 ```
 
 Acrescentar `--source-id` para os demais membros congelados. Primeiro conferir o plano; aplicar o mesmo comando com `--apply`. O helper valida a mensagem Discord nativa, whitelist/canal, origem exata e IDs/hashes/versionamento; não cria campanhas, não trata mídia e não move arquivos. Não inventar mensagem/autor nem cadastrar o lote em nome de Rodolfo se outra pessoa pediu.
+
+Para o exemplo geral da Kelly, usar o mesmo helper com `--operation SHEIN_US_ES --manager Kelly --destination common`, além dos source IDs e autor/canal/mensagem nativos reais. Nesse caso, `--manager Kelly` é atribuição interna da origem do lote, não solicitação de exclusividade nem alteração de reserva/elegibilidade. A entrega exclusiva só ocorre com `--destination exclusive` e destinatário efetivamente pedido. O request real `460f5b805715f8acc9727823559da3bb` comprova essa combinação common/Kelly; não reexecutá-lo como teste.
 
 Quando o pedido for o starter de uma auto-thread, o snowflake da thread pode ser igual ao da mensagem humana, mas o recurso da mensagem pertence ao canal pai. Se o GET da mensagem na thread retornar 404, consultar o mesmo message ID no pai real e validar `author.id`, `channel_id` e conteúdo antes do registro. Passar em `--channel-id` o canal nativo da mensagem que o helper realmente valida; preservar separadamente a thread de execução/resposta no checkpoint. Um 404 nessa combinação não prova falta de acesso nem ausência do pedido. Validar a correção com plano sem writes, registro e readback dos mesmos IDs; não usar outra identidade ou inventar uma mensagem substituta.
 

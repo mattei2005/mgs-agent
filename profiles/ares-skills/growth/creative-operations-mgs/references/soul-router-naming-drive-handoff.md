@@ -44,19 +44,19 @@ Não coloque tamanho/dimensão no nome. Dimensão, aspect ratio e placement fica
 
 ## Drive/Canva — multivertical
 
-Shared Drive raiz oficial atual:
+Entrada vigente no Shared Drive MGS; esta topologia supersede a antiga árvore permanente no Shared Drive:
 
 ```text
 MGS-AGENTS
 https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
-└── CRIATIVOS
+└── UPLOAD MANUAL
 ```
 
-Estrutura de referência por vertical/operação. `CC_US_ES` é o exemplo/piloto; outras verticais devem usar a pasta correta existente no Drive e seguir o mesmo princípio:
+Organização permanente nos 30 TB. `CC_US_ES` é exemplo; resolver os IDs/paths vivos pelo contrato de armazenamento e `flat-upload-intake.md`. O Shared Drive mantém apenas a entrada e `_PROCESSAMENTO` temporário; não recriar nichos/gestores ali. A árvore abaixo ilustra estoque comum, não entrega exclusiva:
 
 ```text
-MGS-AGENTS/CRIATIVOS/
-├── UPLOAD MANUAL
+MGS-ARQUIVO/CRIATIVOS/
+├── _ARQUIVO_FISICO  [acervo e compatibilidade preservados; não é entrada]
 └── CC_US_ES/
     ├── IMG/
     │   ├── 01_READY
@@ -74,7 +74,7 @@ MGS-AGENTS/CRIATIVOS/
         └── 99_LEGACY
 ```
 
-`UPLOAD CANVAS` é material bruto/original. Não apagar, não sobrescrever e não tratar como organizado.
+`UPLOAD CANVAS` e antigas pastas homônimas de entrada são histórico, não entradas vigentes. Preservar o acervo; não apagar/sobrescrever nem tratar referências como final. Material geral da Kelly sem destinatário segue common/01_READY por IMG/VID; entrega de gestor explícita segue `<NOME> - Exclusivos`, com Usados somente após uso real. Esses destinos não liberam reservas ou autorizam campanha.
 
 P_ORIENT oficial para `CC_US_ES` como referência inicial:
 

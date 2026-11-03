@@ -77,10 +77,16 @@
       "account_id": "1481815942722118",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-01T13:30:19.675960-05:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261101T132926881411/verified-1481815942722118.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261101T132926881411/1481815942722118-receipt.json",
+      "read_at": "2026-11-03T10:43:16.565054-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261103T104229766149/verified-1481815942722118.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261103T104229766149/1481815942722118-receipt.json",
       "rows": [
+        {
+          "date": "Nov 2, 2026",
+          "method": "MasterCard ···· 2311",
+          "amount": "2000.00",
+          "status": "Paid"
+        },
         {
           "date": "Nov 1, 2026",
           "method": "MasterCard ···· 2311",
@@ -92,16 +98,10 @@
           "method": "MasterCard ···· 2311",
           "amount": "2000.00",
           "status": "Paid"
-        },
-        {
-          "date": "Oct 28, 2026",
-          "method": "MasterCard ···· 2311",
-          "amount": "2000.00",
-          "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Nov 1, 2026",
+        "date": "Nov 2, 2026",
         "method": "MasterCard ···· 2311",
         "amount": "2000.00",
         "status": "Paid"
@@ -305,12 +305,12 @@
       "account_id": "1062446663435585",
       "business_id": "155263197283282",
       "ui_url_account_id_verified": true,
-      "read_at": "2026-11-02T21:22:59.164699-05:00",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261102T212214209657/verified-1062446663435585.png",
-      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261102T212214209657/1062446663435585-receipt.json",
+      "read_at": "2026-11-03T10:44:49.332563-05:00",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261103T104402911109/verified-1062446663435585.png",
+      "receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/pc1-20261103T104402911109/1062446663435585-receipt.json",
       "rows": [
         {
-          "date": "Nov 2, 2026",
+          "date": "Nov 3, 2026",
           "method": "American Express ···· 3322",
           "amount": "28.00",
           "status": "Paid"
@@ -323,13 +323,13 @@
         },
         {
           "date": "Nov 2, 2026",
-          "method": "Visa ···· 3382",
-          "amount": "11.84",
+          "method": "American Express ···· 3322",
+          "amount": "28.00",
           "status": "Paid"
         }
       ],
       "latest_card": {
-        "date": "Nov 2, 2026",
+        "date": "Nov 3, 2026",
         "method": "American Express ···· 3322",
         "amount": "28.00",
         "status": "Paid"

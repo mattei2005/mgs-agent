@@ -2,6 +2,8 @@
 
 Use when an authorized request identifies country, vertical and language and asks Ares to apply rules to an image-only, video-only or mixed batch in `UPLOAD MANUAL`.
 
+For Kelly's general treatment/organization request with an identified batch and no recipient manager or exclusivity, use the `common` route: permanent treated IMG in `MGS-ARQUIVO/CRIATIVOS/<OP>/IMG/01_READY` and VID in `.../VID/01_READY`. Do not infer `KELLY - Exclusivos` from the sender or require an unnecessary recipient. An explicit manager/self-delivery request uses the registered exclusive route. Preserve RAW, prior reservations, eligibility and duplicate lineage; see `flat-upload-intake.md` for the source-manager CLI attribution, distinct from destination.
+
 ## Arquivo 30 TB após o intake — exceção aprovada e controlada
 
 Rodolfo aprovou a integração em `1562104715271999589`. Aplicar `shared-drive-30tb-archive-queue.md` depois de completar todos os gates deste pack, não no lugar deles. Enquanto `queue_enabled=false`, manter o comportamento atual. Quando habilitada, a fila recebe somente a linhagem nova totalmente verificada e posterior ao corte, sem pedir aprovação por arquivo; originais, nomes, reservas e IDs primários permanecem intactos. O ACK de arquivo é uma camada separada de prova; nenhum gatilho ou exclusão é inferido desta regra.
