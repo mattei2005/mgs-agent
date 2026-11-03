@@ -60,6 +60,12 @@ Ao explicar “como você acessa por SSH?”, responder primeiro qual servidor, 
 - Compare authored WordPress fields separately from computed `content.rendered`, because forms and widgets can change rendered HTML without an author edit. Apply the same distinction to excerpts: an empty `excerpt.raw` produces an automatic `excerpt.rendered` that legitimately changes after a content edit. Preserve the authored excerpt, not its derived preview; if a post-write guard fails on that preview, reconcile the persisted target and revalidate without replaying the POST. Preserve the original baseline and qualify any historical-revision fallback.
 - After a draft/status transition, read the published permalink and canonical again; a draft REST link can be a preview URL even when production uses pretty permalinks. Resolve cross-links only within the authorized objects, not by changing site-wide permalink settings.
 
+## Validar incidentes históricos de disponibilidade
+
+- Cruze o intervalo exato do alerta com os access/error logs do webapp, journal de serviços e logs do pool PHP-FPM; HTTP saudável agora não refuta nem confirma uma falha passada. Agregue status e sucesso por minuto em código, distinguindo indisponibilidade total de falha regional/intermitente.
+- Se o print não informar fuso, não o deduza pela localização do monitor. Correlacione IP, método, URL e segundo da recuperação com o timestamp e offset do access log antes de converter o horário; preserve a incerteza quando não houver correspondência única.
+- Respostas 200 de outras sondas durante o alerta refutam queda geral contínua, mas não refutam timeout da sonda afetada. Ausência de requests dessa sonda não localiza a falha entre rede, edge e origem; warnings de pool ocupado são correlação, não causa comprovada. Não ajuste workers, firewall ou proteção com essa evidência isolada.
+
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.

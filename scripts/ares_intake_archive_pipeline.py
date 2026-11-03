@@ -29,7 +29,8 @@ def child(script, args):
         result = json.loads(proc.stdout)
     except (ValueError, TypeError):
         raise b.ArchiveError('INTAKE_PIPELINE_CHILD_OUTPUT:' + script) from None
-    require(proc.returncode == 0 and isinstance(result, dict) and result.get('status') == 'ok' and not result.get('blocked'), 'INTAKE_PIPELINE_CHILD_BLOCKED:' + script + ':' + str(result.get('blocked', []))[:180])
+    require(isinstance(result, dict), 'INTAKE_PIPELINE_CHILD_SCHEMA:' + script)
+    require(proc.returncode == 0 and result.get('status') == 'ok' and not result.get('blocked'), 'INTAKE_PIPELINE_CHILD_BLOCKED:' + script + ':' + str(result.get('blocked', []))[:180])
     return result
 
 
@@ -64,6 +65,7 @@ def publish(rows):
         b.preflight(d, cfg)
         beat = d.one(cfg['control_folder_id'], 'heartbeat:vps-owner-v1')
         require(beat is not None, 'INTAKE_PIPELINE_HEARTBEAT_MISSING')
+        assert beat is not None
         b.require_publisher(d.meta(beat['id']), b.ACCOUNT)
         require(automation.heartbeat_ready(json.loads(d.raw(beat['id'])), cfg), 'INTAKE_PIPELINE_HEARTBEAT_NOT_READY')
         state = b.read_json(b.DATA / 'automation-state.json', {})
@@ -116,9 +118,11 @@ def verify_ready(entry):
         for sid in entry['archive_source_ids']:
             mapping = index.get('mappings', {}).get(sid)
             require(mapping is not None, 'INTAKE_PIPELINE_MAPPING_MISSING')
+            assert mapping is not None
             stock.check_ack(d, cfg, mapping, index)
             record = storage.resolve_media(sid, d.token)
             require(record is not None and record['logical_source_id'] == sid, 'INTAKE_PIPELINE_CONSUMER_IDENTITY')
+            assert record is not None
             hashes = d.hashes(record['provider_id'])
             require(hashes == {k: mapping[k] for k in ('size', 'md5', 'sha256')}, 'INTAKE_PIPELINE_PROVIDER_BYTES')
             records.append({'logical_id': sid, 'provider_id': record['provider_id'], 'stock_id': record['stock_file_id'], 'name': record['name'], 'parents': record['parents'], 'hashes': hashes, 'native_ack_verified': True})

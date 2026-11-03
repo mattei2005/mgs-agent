@@ -1273,12 +1273,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1566998348169220228",
-      "next_step": "Acompanhar o mesmo executor; retomar batches e ACKs sem writer paralelo; verificar todas as 38 fontes e entregar links e mapa completo na origem.",
+      "next_step": "Continuar o mesmo job e finalizadores por IDs persistidos até 38/38; executar audit_request.py read-only e publicar mapa completo/link permanente na origem. Acompanhadores task-local follow_request.py e follow_archive.py no scratch desta thread; não criar outro writer de mídia.",
       "objective": "Tratar e organizar 38 imagens US SHEIN espanhol enviadas por Kelly; common READY; preservar RAW e reserva",
       "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "registrado request 460f5b805715f8acc9727823559da3bb com 38 ids estabilizados; executor canônico 528c5710269d acionado localmente, batch inicial a95235b4c7ab61143c5064cdb5cb4ab2 com claim real. sem campanha.",
+      "state": "16 fontes com conclusão canônica; quinto batch tratado aguardando camadas de arquivo. mesmos request 460f5b805715f8acc9727823559da3bb e owner 528c5710269d. transporte privado isolado, reconciliação sa e stock por locks canônicos; nenhum script/config produtivo ou nome histórico alterado.",
       "thread_id": "1566998348169220228",
-      "updated_at": "2026-11-03T02:19:40+00:00"
+      "updated_at": "2026-11-03T03:57:59+00:00"
     },
     {
       "agent": "ares",
@@ -4573,12 +4573,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-KELLY-SUPERVISION-1567008464587456586",
-      "next_step": "12/38concluidos;quarto4tratadosaguardaarquivo.Aresmantemexecucaohumana/visual;prepararcontrollerdeterministicoarquivo/ACK/stock/complete,replayestavel,prompt/procedimento;validarsuites+pedidoreal38/38semwriterparalelo.",
+      "next_step": "Pipelineativado;175testesPASS;primeirobatchreal98c053...0->8mappings/atalhos/transferencias em2ticks2jobs100s/4stock,8providersstreams+ACKPASS ecomplete.20/38concluidos;proximo4claimedporAres.175testes,3paresAres+1Zeusmirrorigual;promptnativoexatoreadback e8diasagendas/19jobs+57systemcronsemalteracao. Observar ate38/38,validarnativos76providers/mapa/entregaorigem/replay/monitor,depois fecharinfra.",
       "objective": "Corrigir rota mecanica e procedimento Ares autorizados1567021305822314609;concluir e verificar as38Kelly preservando executor/batch4/agendas/gates.",
-      "source": "/root/.hermes/profiles/zeus/artifacts/kelly-intake-supervision-1567008464587456586/supervision-diagnosis.json",
-      "state": "authorized_implementation_preflight",
+      "source": "/root/.hermes/profiles/zeus/artifacts/ares-intake-pipeline-1567021305822314609/activation.json",
+      "state": "active_pipeline_live_batch_verified",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-03T03:44:30+00:00"
+      "updated_at": "2026-11-03T04:00:13+00:00"
     },
     {
       "agent": "zeus",
@@ -8372,5 +8372,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T03:44:30+00:00"
+  "updated_at": "2026-11-03T04:00:13+00:00"
 }

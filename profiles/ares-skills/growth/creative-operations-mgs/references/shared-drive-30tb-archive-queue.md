@@ -37,6 +37,8 @@ Antes de qualquer writer manual tocar uma fonte, consultar `ares_autonomous_inta
 
 Após tratamento, o verificador `complete` publica pelo lock único e pode retornar `waiting_archive`: aguardar receipt/ACK/atalhos; isso não é conclusão. `archive_ready` retoma somente `complete`, sem novo tratamento. O job de intake é local/silencioso; Zeus monitora sua saúde e faz escalonamento quando necessário.
 
+Na recuperação foreground de `waiting_archive`, comparar o conjunto congelado `archive_source_ids` com os jobs já persistidos antes de apenas esperar o transporte. O produtor pode publicar menos pares por ciclo do que o tamanho do batch técnico. Se houver linhagens tratadas do próprio batch ainda sem request publicado, verificar liveness e retomar o **mesmo** `complete --batch-id ... --owner ...` pelo lock canônico; não abrir outro produtor global, fabricar request/ACK/mapping, alterar limites ou repetir o tratamento. Depois, reconciliar somente os jobs exatos já persistidos, criar/validar seus atalhos pelo helper vigente e usar a mesma lane privada de stock com o limite existente. Quando todos os membros estiverem verificados e transferidos, retomar somente o finalizador canônico. Um retorno `blocked` por uma linhagem histórica externa não autoriza desfazer um nome humano ou reparar outro acervo: preservar o diagnóstico, separar o estado do lote e reconciliar o próximo resultado real sem alegar conclusão antecipada.
+
 ### Fechamento de pedido manual explícito
 
 Um lote manual também precisa de uma conclusão real no controle canônico. Marcar somente o `state.json` da execução como `complete` deixa a limpeza parada em `RETIREMENT_INTAKE_NOT_RELEASED`, mesmo com todos os arquivos nos 30 TB.

@@ -40,6 +40,16 @@ Tratamento conserva gates de IMG/VID, classificação factual, naming, sanitiza�
 - Primeiro novo pedido **real** após o cutover permanece observação operacional interna de Zeus/Ares, distinta de canário técnico. Não pedir a Rodolfo upload artificial nem declarar campanha validada por teste técnico.
 - Readback da raiz fonte: `final-native-root-readback.json`. Na ativação havia 15 imagens sem contexto registrado, preservadas diretamente em UPLOAD MANUAL; não foram tratadas nem atribuídas implicitamente por esta autorização de organização. `_PROCESSAMENTO` estava vazio.
 
+## Continuação mecânica por batch — `1567021305822314609`
+
+Rodolfo confirmou a correção da rotina e dos procedimentos do Ares na thread `1562078493498540042`, preservando Ares como executor único, blocos de quatro, agendas, campanhas, acessos e gates. A implementação ativa é `scripts/ares_intake_archive_pipeline.py`, consumida pelo mesmo `ares_autonomous_intake.py complete`; binding em `intake-config.json.archive_pipeline_enabled` / `archive_pipeline_authority_message_id`.
+
+Depois do tratamento e QA feitos pelo Ares, a continuação usa o produtor SA existente em até dois pares por passagem, executor owner isolado existente em até dois jobs/100s, helpers de ACK/atalhos e transporte de até quatro atalhos por tick. Os locks intake → queue, IDs e provas nativas são preservados; todas as mídias do batch precisam de provider/stock/ACK e streams completos antes de `complete`. A rotina não produz conteúdo, exclui, altera ACL ou executa campanha.
+
+A espera flat por arquivo passa a `resume` com `mechanical_only=true`, evitando supressão silenciosa de uma etapa mecânica pendente. Replays preservam a primeira conclusão, provas, horários e recibos. O mesmo job pode continuar imediatamente os próximos blocos do mesmo request; não há novo cron, writer ou mudança de agenda. Não absorver outro request nem arquivos vizinhos. Procedimento Ares: `creative-operations-mgs/references/flat-upload-intake.md`.
+
+Aceitação por pedido real e registros de implantação: checkpoint `ZEUS-KELLY-SUPERVISION-1567008464587456586` e artifacts Zeus `ares-intake-pipeline-1567021305822314609/`. Testes locais, ativação técnica e conclusão integral do pedido são gates separados; o estado corrente deve ser relido, não deduzido desta autorização.
+
 ## Histórico supersedido do preflight
 
 Antes da confirmação específica, foram auditados 268 objetos e identificados 263 descendentes cujo acesso de `geizianp@gmail.com` era herdado de UPLOAD MANUAL e inexistente no destino. Roles organizer/fileOrganizer do Shared Drive não têm os mesmos nomes no My Drive; a equivalência autorizada é de pessoas e capacidades de leitura/edição, não administração/propriedade idênticas. Os quatro relatórios também exigiam ACL por objeto. Nenhum move/write de permissão ocorreu naquele preflight; o bloqueio foi resolvido exclusivamente pela confirmação `1566825959645253764`, seguida dos canários e manifestos confinados acima. Fontes imutáveis: `whole-source-native-acl-snapshot.json`, `access-preservation-proposal.json` e diagnósticos em `flat-intake-1566814476626563115/`.
