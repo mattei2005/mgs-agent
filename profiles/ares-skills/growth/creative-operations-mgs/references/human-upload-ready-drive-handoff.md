@@ -2,6 +2,10 @@
 
 Use this reference when Kelly/Geizian/gestor uploads a creative directly in Discord and asks Ares to organize it in `READY` for Ares.
 
+## Current storage precedence
+
+Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é temporário. Estoque permanente nos 30 TB, resolvido por ares_archive_storage/ares_archive_locations; não exigir driveId de Shared Drive em My Drive. Pedido geral da Kelly sem destinatário segue common/IMG ou VID/01_READY; entrega própria/gestor expresso segue Exclusivos e uso real confirmado segue Usados. Preservar RAW, mesmos IDs, bytes, reservas, elegibilidade e duplicatas. Agentes usam somente SA canônica; transporte owner isolado não é fallback de identidade. Upload não autoriza campanha ou exclusão. Anexo Discord continua fonte externa; não fabricar um flat request para um arquivo fora da entrada. O manifesto original/canônico continua dono desse intake; validar a rota de arquivo antes de prometer entrega. Não exigir reupload, segundo bot ou novo tratamento para corrigir só armazenamento.
+
 ## Durable pattern
 
 1. Treat the Discord message as a valid human upload only when it includes: país, vertical, língua and an attachment.
@@ -21,9 +25,9 @@ Use this reference when Kelly/Geizian/gestor uploads a creative directly in Disc
    /root/mgs-agent/scripts/clean-creative-metadata.sh clean "$SRC" --out "$DEST" --agent ares
    /root/mgs-agent/scripts/clean-creative-metadata.sh verify "$DEST"
    ```
-7. Upload only the clean file to Drive destination:
+7. Upload the verified clean file only through authorized SA staging and the existing isolated archive/stock lane; independently validate the permanent destination below. Do not send SA binary uploads directly to My Drive:
    ```text
-   MGS-AGENTS/CRIATIVOS/{OPERATION}/{IMG|VID}/01_READY/{OPERATION}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+   MGS-ARQUIVO/CRIATIVOS/{OPERATION}/{IMG|VID}/01_READY/{OPERATION}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
    ```
    Do not create `STORY/FEED/REELS` subfolders; placement belongs in inventory/handoff.
 8. Verify the Drive file by fetching metadata after upload (`id`, `name`, `parents`, `trashed=false`, `size`, `webViewLink`). Do not claim uploaded until this check succeeds.
@@ -36,11 +40,11 @@ Use this reference when Kelly/Geizian/gestor uploads a creative directly in Disc
    clean=true
    drive_file_id/webViewLink
    ```
-10. Respond with a short operational status block and one handoff mention to Ares only when all required fields and the uploaded/verified clean asset exist.
+10. Respond in the original human thread only after full verified delivery, with final links, counts and complete original-to-final map. Ares is the same executor of both stages; no self-mention, second-bot handoff or campaign authorization is implied.
 
 ## Notes
 
-- For Drive writes, use only the canonical Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`) administered by `support@matteiservicesinc.com`. Validate `driveId`, root metadata and upload readback with the established Drive client/module.
-- If Drive OAuth refresh returns HTTP 400 while the Ares watchdog reports `token_ok`, inspect credential precedence without exposing values. The established client currently reads the complete client cache and then lets a separate token-only file override its `refresh_token`; that older override can cause `invalid_grant` even when the client cache is healthy. Do not delete or overwrite canonical credential files during a live task. Bypass only the stale token-only override through an isolated nonexistent root-only path, retain the watchdog-validated client cache, mint the access token, and validate Drive root metadata. Remediate canonical precedence separately with REPORT-INFRA.
+- For agent writes/auth use only the canonical SA. Require Shared-Drive driveId for exact staging targets; require approved owner/root/parent, provider/stock IDs, receipt/ACK and full hashes for the permanent archive. Resolve live paths rather than recreating the old Shared-Drive tree.
+- The old personal-OAuth cache/refresh-token precedence workaround is retired. Never restore token-only/client-cache files, choose another identity or bypass an auth guard. Diagnose the canonical SA or approved isolated-owner boundary; credential/ACL changes retain their gates. Preserve request/media evidence and recover only the missing authorized step.
 - Keep raw/original upload untouched. The cleaned renamed copy is the organized asset.
 - If the sanitizer reports `clean: true` and `harmful_tags: 0`, report only the summary; never dump raw metadata in Discord.

@@ -662,6 +662,23 @@
       "updated_at": "2026-09-02T20:02:54+00:00"
     },
     {
+      "canonical_key": "ares.meta-alerts.cohort-start-vs-created",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "growth.meta-reporting",
+      "effective_at": "2026-11-03T16:00:27+00:00",
+      "id": "ARES-CPR-COHORT-START-VS-CREATION",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "CPR: distinguir coorte por inicio configurado da coorte por criacao",
+      "updated_at": "2026-11-03T16:00:27+00:00"
+    },
+    {
       "canonical_key": "ares.creative_ops.cpv13.campaign.120251081604280632.manual-rejection",
       "canonical_source": "data/ares/creative-ops/inventory/assets.jsonl",
       "consumers": [
@@ -15972,5 +15989,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T13:07:08+00:00"
+  "updated_at": "2026-11-03T16:00:27+00:00"
 }

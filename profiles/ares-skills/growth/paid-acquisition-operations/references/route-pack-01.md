@@ -56,12 +56,16 @@ NH     | NO_PERSON | HORIZONTAL
 ```
 
 Regra atual de Rodolfo: usar somente `PV`, `PH`, `NV`, `NH`. Códigos `PS`, `NS`, `PU`, `NU`, `UU` foram desconsiderados e não devem entrar em nomes finais. Para detalhes, carregar `creative-taxonomy-mgs`.
-## Estrutura Drive recomendada
+## Estrutura Drive vigente
+
+Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é temporário. Estoque permanente nos 30 TB, resolvido por ares_archive_storage/ares_archive_locations; não exigir driveId de Shared Drive em My Drive. Pedido geral da Kelly sem destinatário segue common/IMG ou VID/01_READY; entrega própria/gestor expresso segue Exclusivos e uso real confirmado segue Usados. Preservar RAW, mesmos IDs, bytes, reservas, elegibilidade e duplicatas. Agentes usam somente SA canônica; transporte owner isolado não é fallback de identidade. Upload não autoriza campanha ou exclusão. Receita canônica: `creative-operations-mgs/references/flat-upload-intake.md`.
+
+Após tratamento/QA do batch de até quatro fontes, executar o mesmo complete; archive_ready e mechanical_only exigem essa continuação, não SILENT antecipado. Ler o monitor atual e continuar imediatamente os próximos blocos do mesmo request quando elegíveis, sem esperar outra janela de 15 minutos. Retomar apenas a camada faltante, preservar primeiras provas/horários e writer único; não criar outro cron, follow_archive ou tratamento duplicado. Cooldown/limite real mantém checkpoint e retomada canônica; não prometer duração fixa nem declarar concluído um saldo pendente.
 
 Use pasta por operação, não por site, pois o mesmo criativo pode rodar em sites diferentes.
 
 ```text
-MGS-AGENTS/CRIATIVOS/
+MGS-ARQUIVO/CRIATIVOS/
 └── <OPERATION>/
     ├── IMG/
     │   ├── 01_READY
@@ -154,7 +158,7 @@ Dimensão  | Sem pessoa | Com pessoa | Orientation
 ## Canva Connect / Canva Teams → Drive de criativos
 ## Canva → Drive de criativos
 
-Quando Rodolfo pedir para organizar criativos que estão em pastas do Canva e jogar no Google Drive, operar como pipeline **read-only primeiro** e escolher o caminho conforme o plano/acesso Canva. Para lotes já extraídos do Canva e enviados ao Drive em `UPLOAD_CANVAS`, usar o fluxo de inventário visual/proposta antes de qualquer write: `references/upload-canvas-drive-inventory-workflow.md`.
+Quando Rodolfo pedir extração/organização de materiais no Canva, validar separadamente o acesso e o pedido; não reativar uma integração por este guia. Se os arquivos já estão em UPLOAD MANUAL, aplicar diretamente `creative-operations-mgs/references/flat-upload-intake.md`, sem reabrir onboarding, esperar um segundo agente ou pedir subpastas de nicho/gestor. Os documentos upload-canvas-* registram o backlog encerrado, não uma entrada ou receita atual de writes.
 
 ### Caminho oficial: Canva Connect API
 

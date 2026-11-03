@@ -33,7 +33,7 @@ Pitfalls operacionais:
 
 - Anexos do Discord podem retornar `403 Forbidden` no download direto se a requisição não tiver `User-Agent`; ao importar thread/anexo, tente novamente com header simples antes de declarar bloqueio.
 - Em vídeos `.mov/.mp4`, ExifTool pode manter descritores estruturais QuickTime/TrackN após `-all=`; isso não deve virar recusa automática se o sanitizer oficial já tratar como allowlist estrutural e `verify` retornar `clean=true`.
-- OAuth Drive: se o helper de escrita retornar HTTP 400 enquanto o watchdog do Ares indicar `token_ok`, pode haver um `refresh_token` antigo no arquivo de token sobrescrevendo o refresh válido do arquivo OAuth client. Validar cada fonte separadamente reportando apenas HTTP/erro redigido; usar a fonte válida para concluir a operação, sem cair para service account em writes de My Drive. Alterar/sincronizar credencial permanente exige escopo/autorização de infra.
+- Google Drive: agentes usam exclusivamente a SA canônica via mgs_google_workspace_auth.py; os antigos fluxos de cache OAuth pessoal/refresh_token estão aposentados, sem fallback. O conector owner isolado executa somente o transporte aprovado e nunca fornece credencial ao agente. Em erro, preservar IDs/provas e recuperar a fase faltante; não trocar identidade, editar credenciais ou repetir um upload já realizado.
 - Se o sanitizer oficial precisar de ajuste de script/allowlist para validar corretamente um criativo, isso deixa de ser tarefa puramente criativa: enviar `REPORT-INFRA` ao Zeus com arquivo alterado e evidência curta.
 
 Referências da skill:

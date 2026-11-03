@@ -72,7 +72,11 @@ Ares não pode alterar absolutamente nada na Dash financeira nem na Dash do Rout
 9. Registrar reserva, elegibilidade, uso e IDs técnicos quando o asset entrar na Meta.
 10. Reconciliar Drive × Meta antes de selecionar ou publicar criativo.
 
-Para pedido autorizado de **tratar/mover** pasta de entrada, a própria solicitação autoriza o fluxo canônico: validar a cópia limpa em `01_READY` e mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, sem deletar. Manter original na entrada somente se o pedido disser copiar/manter.
+Para pedido autorizado de **tratar/mover**, aplicar o binding vivo e `creative-operations-mgs/references/flat-upload-intake.md`: validar RAW/clean e READY/LEGACY técnicos no staging, arquivar/verificar receipt/ACK/stock nos 30 TB e preservar as fontes por mesmo ID pela manutenção existente, sem DELETE. O Drive MGS é somente entrada/staging, não estoque definitivo. Pedido explícito de copiar/manter preserva sua restrição; não mover fontes ad hoc.
+
+Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é temporário. Estoque permanente nos 30 TB, resolvido por ares_archive_storage/ares_archive_locations; não exigir driveId de Shared Drive em My Drive. Pedido geral da Kelly sem destinatário segue common/IMG ou VID/01_READY; entrega própria/gestor expresso segue Exclusivos e uso real confirmado segue Usados. Preservar RAW, mesmos IDs, bytes, reservas, elegibilidade e duplicatas. Agentes usam somente SA canônica; transporte owner isolado não é fallback de identidade. Upload não autoriza campanha ou exclusão.
+
+Após tratamento/QA do batch de até quatro fontes, executar o mesmo complete; archive_ready e mechanical_only exigem essa continuação, não SILENT antecipado. Ler o monitor atual e continuar imediatamente os próximos blocos do mesmo request quando elegíveis, sem esperar outra janela de 15 minutos. Retomar apenas a camada faltante, preservar primeiras provas/horários e writer único; não criar outro cron, follow_archive ou tratamento duplicado. Cooldown/limite real mantém checkpoint e retomada canônica; não prometer duração fixa nem declarar concluído um saldo pendente.
 
 ## Identidade única e reserva
 

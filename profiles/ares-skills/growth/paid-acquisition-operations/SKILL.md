@@ -13,6 +13,10 @@ metadata:
 
 Use esta skill quando Rodolfo pedir para estruturar, auditar ou operacionalizar campanhas pagas, criativos, Drive, inventário, tracking ou integrações Meta/Google Ads. O padrão é **processo primeiro, credencial depois, execução por último**.
 
+## Precedência do intake e arquivo criativo
+
+Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é temporário. Estoque permanente nos 30 TB, resolvido por ares_archive_storage/ares_archive_locations; não exigir driveId de Shared Drive em My Drive. Pedido geral da Kelly sem destinatário segue common/IMG ou VID/01_READY; entrega própria/gestor expresso segue Exclusivos e uso real confirmado segue Usados. Preservar RAW, mesmos IDs, bytes, reservas, elegibilidade e duplicatas. Agentes usam somente SA canônica; transporte owner isolado não é fallback de identidade. Upload não autoriza campanha ou exclusão. Receita: `creative-operations-mgs/references/flat-upload-intake.md`. Após tratamento/QA do batch de até quatro fontes, executar o mesmo complete; archive_ready e mechanical_only exigem essa continuação, não SILENT antecipado. Ler o monitor atual e continuar imediatamente os próximos blocos do mesmo request quando elegíveis, sem esperar outra janela de 15 minutos. Retomar apenas a camada faltante, preservar primeiras provas/horários e writer único; não criar outro cron, follow_archive ou tratamento duplicado. Cooldown/limite real mantém checkpoint e retomada canônica; não prometer duração fixa nem declarar concluído um saldo pendente. As referências históricas de UPLOAD_CANVAS não podem reabrir onboarding/OAuth, recriar a árvore antiga ou inserir uma espera mecânica no pedido atual.
+
 ## Pedidos naturais e modelos reutilizáveis
 
 - Em execução rotineira de campanhas solicitada por Rodolfo, não enviar narração intermediária de preflight, numeração, fonte, registro no executor ou plano validado. Executar as verificações internamente e entregar o resultado final curto com readback e tempo quando solicitado. Interromper com mensagem somente se houver decisão/autoridade necessária, bloqueio real ou falha relevante que exija comunicação; preservar `tool_progress: all` e nunca ocultar ressalvas no fechamento. Esta regra reduz mensagens próprias, não elimina guards, evidência ou confirmação do Critical Subset.
@@ -133,7 +137,7 @@ Quando houver autorização explícita para excluir campanhas de teste e devolve
 2. Confirme `configured_status=DELETED` e `effective_status=DELETED` por campanha.
 3. Derive assets devolvíveis das atribuições/test history das campanhas com mídia nova; não devolva mídia apenas herdada por `pure_clone`, pois ela continua ligada à fonte.
 4. Confirme ausência de uso em campanhas não deletadas. Asset com entrega real segue classificação/reteste; zero entrega pode voltar ao pool técnico.
-5. Mova no Shared Drive com readback de `driveId`, parent e `trashed=false`; preserve histórico, limpe somente a atribuição corrente e restaure reserva do gestor com `ares_eligible=false`.
+5. Resolva o backend e o mesmo ID pelo contrato vigente: SA verifica metadados/bytes e o runner registrado executa a movimentação autorizada no stock permanente, com readback de owner/parent/trashed e recibo. driveId é exigido somente no staging Shared Drive. Neste contexto de devolução explicitamente autorizada, preserve histórico, limpe somente a atribuição corrente e restaure a reserva do gestor com `ares_eligible=false`, como na regra anterior. Não faça PATCH paralelo nem amplie a alteração para outras reservas, atribuições ou mídias.
 6. Não inferir autorização para excluir a mídia da library Meta. Essa exclusão é separada e exige reconciliação de dependências.
 7. Reporte contagens no escopo da operação/vertical, não o inventário global.
 

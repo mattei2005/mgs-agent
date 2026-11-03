@@ -96,7 +96,7 @@ Para comprovar mudanças task-local sem tocar no collector canônico, use o A/B 
 
 Quando Rodolfo pedir para lembrar “qual era o criativo” e consultar novamente a URL usada:
 
-1. Não assumir a library pela memória ou pelo nome do pedido. Enumerar por read-only os pacotes em `MGS-AGENTS/CRIATIVOS/LIBRARY META` com a Service Account canônica e ler `inventory.json`/`README.txt` por readback.
+1. Não assumir a library pela memória/nome: resolver e listar por SA a LIBRARY META atual dentro de MGS-ARQUIVO/CRIATIVOS nos 30 TB, validando IDs, owner/parent e inventory.json/README.txt. MGS-AGENTS/CRIATIVOS/LIBRARY META é namespace histórico, não instrução para recriar acervo na entrada; manter tudo reference_only e fora de READY.
 2. Revalidar o conteúdo real do asset. Para vídeo, gerar amostras de vários momentos da timeline; uma miniatura ou o primeiro frame não bastam. Para imagem, inspecionar os pixels reais.
 3. Identificar `canonical_filename`, `library_ids[]`, Drive ID/checksum e distinguir duplicatas da mesma linhagem.
 4. Se houver relatório histórico de CTA, mapear o Library ID ao `targetUrl` arquivado. Depois consultar novamente a Library atual pela rota residencial e extrair os CTAs atuais por Library ID/card, sem misturar URL histórica com estado atual.

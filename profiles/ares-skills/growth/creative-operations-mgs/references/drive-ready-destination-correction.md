@@ -6,16 +6,18 @@ Sessão de origem: alinhamento Creative Ops/Campaign Ops/Kelly no teste do asset
 
 Quando Kelly/humano manda criativo com país, vertical e língua, o Ares deve detectar tipo/formato/ângulo/pessoa, limpar metadata, renomear e colocar no READY canônico da operação.
 
-O destino aprovado para asset pronto é:
+No fluxo comum, o destino permanente é o abaixo; uma entrega exclusiva explícita usa a pasta registrada do gestor. O Shared Drive é somente staging e paths MGS-AGENTS antigos permanecem namespace lógico/histórico. Consultar `flat-upload-intake.md`; não subir binários SA diretamente no My Drive. A correção preserva a regra sem subpastas de placement e não altera reservas.
+
+O destino permanente para asset pronto é:
 
 ```text
-MGS-AGENTS/CRIATIVOS/{VERTICAL}_{COUNTRY}_{LANG}/{IMG|VID}/{STATUS}/{FILENAME}
+MGS-ARQUIVO/CRIATIVOS/{VERTICAL}_{COUNTRY}_{LANG}/{IMG|VID}/{STATUS}/{FILENAME}
 ```
 
 Exemplo validado:
 
 ```text
-MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+MGS-ARQUIVO/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 ```
 
 ## O que não repetir
@@ -23,7 +25,7 @@ MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001
 Não criar subpastas finais por placement/idioma:
 
 ```text
-MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/...
+MGS-ARQUIVO/CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/...
 ```
 
 `STORY`, `FEED`, `REELS`, idioma visível e dimensões ficam no inventário/handoff, não como caminho final por enquanto.

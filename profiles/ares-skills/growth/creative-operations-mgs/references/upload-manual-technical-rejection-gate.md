@@ -15,6 +15,10 @@ Use dentro do intake canônico quando um arquivo real da fila não contém mater
 5. Se algum frame, revisão ou renderização alternativa mostrar conteúdo útil, interrompa a rejeição automática e faça classificação visual normal.
 6. Se a classificação de ângulo/pessoa continuar incerta, tente novamente com frames adicionais/contact sheet antes de usar `UNKNOWN` ou rejeitar. Falha da primeira tentativa nunca encerra a análise.
 
+## Precedência do backend e continuidade
+
+Entrada vigente: arquivos diretamente em UPLOAD MANUAL no MGS; _PROCESSAMENTO é temporário. Estoque permanente nos 30 TB, resolvido por ares_archive_storage/ares_archive_locations; não exigir driveId de Shared Drive em My Drive. Pedido geral da Kelly sem destinatário segue common/IMG ou VID/01_READY; entrega própria/gestor expresso segue Exclusivos e uso real confirmado segue Usados. Preservar RAW, mesmos IDs, bytes, reservas, elegibilidade e duplicatas. Agentes usam somente SA canônica; transporte owner isolado não é fallback de identidade. Upload não autoriza campanha ou exclusão. Neste guia, READY/LEGACY/REJECTED no staging são estados técnicos; o destino final e a preservação por mesmo ID seguem os helpers vigentes. Se a rota canônica não suportar a disposição de um rejeitado, conservar a fonte e registrar o bloqueio exato, sem inventar clean/ACK, fazer PATCH ad hoc ou travar os membros independentes válidos.
+
 ## Tratamento do inválido
 
 - Nunca criar um candidato em `01_READY` para satisfazer contagem.
@@ -52,7 +56,7 @@ O lote pode concluir com:
 
 - válidos: cópia limpa em `01_READY`, original em `99_LEGACY`;
 - inválidos comprovados: original em `05_REJECTED`, sem candidato em READY;
-- `UPLOAD MANUAL=0`;
+- pendentes do conjunto congelado = 0; arquivos sem contexto ou de outros pedidos permanecem preservados e contados separadamente;
 - um registro de inventário por source ID;
 - contagens separadas `ready`, `rejected_technical`, `sources_archived`, `sources_rejected`;
 - mapa `original → final` somente para os enviados a READY e bloco separado para rejeitados.
@@ -63,7 +67,7 @@ O lote pode concluir com:
 - Não usar frame inicial sozinho: intro/fade pode ser branco ou preto.
 - Não mover o source antes de concluir o gate correspondente. Para válido, a cópia limpa deve passar readback, checksum e `clean=true`; para rejeitado, a evidência técnica deve estar registrada.
 - `05_REJECTED` é status técnico/operacional, não autorização para deletar o original.
-- Quando houver autorização explícita para enviar um rejeitado à lixeira, consultar `ownedByMe` e `capabilities.canTrash/canDelete`, testar a identidade canônica de Rodolfo e a identidade `ares-drive` quando registrada, e usar o HTTP/readback da mutação como prova final.
-- Se `canTrash=false` ou a API negar a ação, não simular exclusão removendo parent, deixando órfão ou apenas movendo. Dentro de `MGS-AGENTS/CRIATIVOS`, classificar a negação como drift/defeito de infraestrutura; concluir o restante do lote, preservar auditoria e escalar a correção estrutural sem pedir autorização por arquivo ao gestor.
-- No Shared Drive canônico, os itens pertencem à organização. Qualquer negação de lixeira/exclusão dentro de `MGS-AGENTS/CRIATIVOS` é drift de infraestrutura/acesso e deve ser investigada.
+- Descarte de rejeitado exige confirmação crítica exata e capacidade real do backend. Agente verifica pela SA canônica e só usa controlador isolado se aquela ação/classe tiver autorização própria; nunca testar identidades alternativas ou reutilizar aprovação antiga. Sem suporte/capacidade, preservar o arquivo e reportar o bloqueio.
+- Se canTrash=false ou a API negar a ação, não simular exclusão removendo parent/deixando órfão/movendo, não trocar identidade nem ampliar ACL. Verificar o backend e as capacidades: a negação em My Drive pode ser legítima, não prova automática de drift. Concluir o saldo independente já autorizado e escalar somente o bloqueio exato.
+- No Shared Drive, validar a capacidade do item e a identidade canônica; no arquivo My Drive, validar owner/root e o contrato isolado. Nenhuma localização ou nome de pasta dispensa autorização de exclusão, e o modo flat permanece sem DELETE/trash automático.
 - Não substituir nem rotacionar silenciosamente a identidade canônica pela conta de um colaborador. Mudança de acesso exige inventário, piloto, rollback e aprovação explícita do Rodolfo. Ver `references/my-drive-collaborator-control-and-deletion.md`.

@@ -1,3 +1,5 @@
+> **HISTÓRICO — armazenamento/entrada supersedidos.** Este precedente preserva diagnóstico, taxonomia e evidência antigos; não é uma rota ativa de intake, upload, autenticação ou limpeza. Novos pedidos seguem `creative-operations-mgs/references/flat-upload-intake.md` e `context/drive-flat-intake-cutover.md`: MGS somente entrada/staging e arquivo permanente nos 30 TB. Não recriar UPLOAD_CANVAS, exigir a árvore física antiga, usar OAuth pessoal, herdar aprovações de exclusão ou reprocessar um lote concluído. Reutilizar somente técnicas visuais/naming/sanitização ainda compatíveis, pelo executor atual e dentro do pedido vigente. A cópia histórica abaixo não é autorização para executar seus writes.
+
 # Drive final organization, 00_REVIEW backlog, and promotion workflow
 
 Use this reference when a large `UPLOAD_CANVAS` creative organization has reached the final Drive copy stage and there are leftover review items.
