@@ -155,6 +155,8 @@ def finalize_batch(batch):
  import ares_manager_storage_standard as standard
  registry=b.read_json(REQUESTS,{});c=registry.get('requests',{}).get(batch['flat_request_id']);require(c is not None,'FLAT_FINAL_REQUEST_MISSING')
  state=b.read_json(intake.STATE,{});entry=state.get('claims',{}).get(batch['batch_id'],{});require(entry.get('status')=='complete','FLAT_FINAL_INTAKE_NOT_COMPLETE')
+ prior=c.get('completed_batches',{}).get(batch['batch_id'])
+ if prior:return {'status':'complete','deliveries':prior['deliveries'],'campaign_writes':0,'replay':True}
  rows=[json.loads(x) for x in (b.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if x.strip()];out=[]
  baseline=entry.get('inventory_before',{})
  for source in batch['sources']:
@@ -167,8 +169,9 @@ def finalize_batch(batch):
   else:out.append({'asset_id':row['asset_id'],'status':'common_ready_preserving_inventory_eligibility'})
  with intake.locked_state() as current:
   registry=b.read_json(REQUESTS,{});c=registry['requests'][batch['flat_request_id']]
-  c.setdefault('completed_batches',{})[batch['batch_id']]={'verified_at':b.now_iso(),'deliveries':out}
-  if all(s['id'] in current.get('completed',{}) for s in c['sources']):c.update(status='complete',completed_at=b.now_iso())
+  c.setdefault('completed_batches',{}).setdefault(batch['batch_id'],{'verified_at':b.now_iso(),'deliveries':out})
+  if all(s['id'] in current.get('completed',{}) for s in c['sources']):
+   c['status']='complete';c.setdefault('completed_at',b.now_iso())
   b.atomic_json(REQUESTS,registry)
  return {'status':'complete','deliveries':out,'campaign_writes':0}
 

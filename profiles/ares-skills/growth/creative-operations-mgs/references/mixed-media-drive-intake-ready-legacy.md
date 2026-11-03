@@ -18,6 +18,8 @@ Concluir a entrega somente após ACK nativo, mapping verificado e `stockTransfer
 
 ## Durable execution pattern
 
+For the active flat request, mechanical archive/ACK/shortcut/transfer/completion runs through the existing `complete` command and the deterministic pipeline described in `flat-upload-intake.md` (approval `1567021305822314609`). Do not launch a parallel archive pump, repeat completed treatment, or wait for another model turn between those mechanical phases. Continue the same registered request in bounded four-source batches; whole-request completion and immutable replay evidence remain mandatory.
+
 No modo flat ativo, a entrada e a coordenação de lote são definidas por `flat-upload-intake.md`: arquivo direto em UPLOAD MANUAL, contexto de pedido registrado e o mesmo executor/claim canônico. As referências abaixo a caminhos antigos ou slots são histórico/compatibilidade; não pedir que o usuário recrie a hierarquia nem deslocar um lote para gestor/nicho só para obter contexto. Não iniciar writer manual paralelo ao request já registrado. Os gates de classificação, naming, sanitização, hashes, reserva e entrega permanente deste pack continuam obrigatórios.
 
 1. Resolve the active intake binding and confirm the exact `UPLOAD MANUAL` ID directly below the MGS Shared Drive. The old `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL` path is historical; never recreate it or require a flat-input user to navigate operation/manager folders.

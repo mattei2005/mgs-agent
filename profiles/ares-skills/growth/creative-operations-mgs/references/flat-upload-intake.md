@@ -30,6 +30,16 @@ Se uma execução manual já era dona das fontes, continuar pelo manifesto origi
 
 ## Tratamento e entrega
 
+### Continuação mecânica determinística — autorização `1567021305822314609`
+
+Após tratamento/QA e inventário do batch de até quatro fontes, executar o `ares_autonomous_intake.py complete` existente, com os mesmos `batch-id` e `owner_job_id`. Com `archive_pipeline_enabled=true` e a autoridade exata no config, ele chama `ares_intake_archive_pipeline.py`: publica no máximo dois pares por passagem pelo produtor SA existente, aciona somente o executor owner isolado existente (máximo dois jobs/100s por tick), verifica receipt/ACK, cria os atalhos pelos helpers atuais, transfere no máximo quatro atalhos por tick e valida cada provider por bytes completos antes do fechamento. Locks intake → queue, IDs, hashes, limites e credenciais permanecem os mesmos; não há tratamento, DELETE, campanha ou permissão nesta continuação.
+
+Não criar um `follow_archive.py` ou outro bombeador paralelo. `complete` agora termina essas camadas no mesmo comando, sem solicitar outra decisão do modelo para cada passagem. Se houver limite sem progresso, ele preserva `treated_waiting_archive`, diário por batch e os mesmos IDs; o monitor o devolve como `resume` com `mechanical_only=true`, nunca como um caso silencioso indefinidamente suprimido. Nesse retorno, rodar apenas o mesmo `complete`, sem novo download, tratamento, naming ou enqueue manual. Bloqueio real permanece bloqueio; investigar a razão exata, sem aumentar lotes nem pular guards.
+
+Um replay de `complete` preserva o primeiro `treated_at`, `completed_at`, provas e recibo de entrega. Não regravar horários para parecer uma execução nova. O critério do pedido inteiro é o conjunto exato de IDs do request, não o sucesso isolado de um cron ou de um batch.
+
+Depois de cada batch completo, chamar `ares_autonomous_intake.py monitor` e ler o manifest retornado. Continuar imediatamente pelo mesmo executor somente quando o `flat_request_id` for o mesmo do pedido corrente, mantendo claim e blocos de quatro. Não esperar deliberadamente a próxima janela de 15 minutos nem disparar repetidamente o cron enquanto o próprio executor consegue continuar. Não absorver outro request, uploads vizinhos ou novos IDs. Ao concluir todos os IDs, validar o request `status=complete` e entregar na origem o mapa completo e links permanentes. Se o turno atingir seu limite, preservar checkpoint e retomada canônica silenciosa; não declarar o saldo concluído.
+
 Preservar classificação visual, naming, sanitização, dedupe, hashes, QA e inventário do contrato principal. No batch flat, usar **o autor e o contexto reais do batch**, não os campos históricos fixos de “automação pelo CEO”. O staging `_PROCESSAMENTO` continua técnico e temporário; caminhos OP/IMG|VID/READY|LEGACY ali não são a organização permanente oferecida ao usuário.
 
 `complete` valida RAW/clean, archive request/receipt/ACK, provider e stock. No destino exclusivo, o finalizador flat chama a entrega dedicada por mesmo ID e registra o destino permanente exato; falha dessa etapa volta como `archive_ready`, nunca novo tratamento. Duplicatas mantêm a linhagem, reservas, uso e destino anteriores: não mover uma peça usada de volta para Exclusivos.

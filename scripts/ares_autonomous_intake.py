@@ -118,15 +118,22 @@ def health(now=None):
 def finish_with_archive(state,batch,owner):
     entry=state['claims'][batch['batch_id']]
     if entry['owner']!=owner:raise IntakeError('CLAIM_OWNER')
+    # Completion is monotonic: a second caller must not regenerate treatment
+    # proofs or replace the first real completion timestamps.
+    if entry.get('status')=='complete':return entry
     if entry.get('status')!='treated_waiting_archive':
         proofs=verify_completed(bridge.Drive(),batch,entry['inventory_before'])
         rows=[json.loads(l) for l in (bridge.BASE/'data/ares/creative-ops/inventory/assets.jsonl').read_text().splitlines() if l.strip()]
         sources={p['source_id'] for p in proofs};new=[r for r in rows if r.get('source_drive_id') in sources and r['asset_id'] not in entry['inventory_before']]
         entry.update(status='treated_waiting_archive',proofs=proofs,archive_source_ids=[r[k] for r in new for k in ['source_drive_id','asset_drive_id']],treated_at=bridge.now_iso())
         bridge.atomic_json(STATE,state) # Persist complete treatment before publishing transport.
-    import ares_archive_automation as transport
-    cycle=transport.run_cycle(apply=True,intake_state=state)
-    if cycle['reconciliation']['blocked'] or cycle['production']['blocked']:raise IntakeError('ARCHIVE_TRANSPORT_BLOCKED')
+    import ares_intake_archive_pipeline as pipeline
+    if batch.get('scope_type')=='flat_request' and pipeline.enabled():
+        if not pipeline.advance(entry):return {'status':'waiting_archive','batch_id':batch['batch_id'],'treated_verified':True,'source_count':len(batch['sources']),'mechanical_continuation':True}
+    else:
+        import ares_archive_automation as transport
+        cycle=transport.run_cycle(apply=True,intake_state=state)
+        if cycle['reconciliation']['blocked'] or cycle['production']['blocked']:raise IntakeError('ARCHIVE_TRANSPORT_BLOCKED')
     index=bridge.read_json(DATA/'archive-index.json',{'mappings':{}})
     if not batch_archive_ready(entry,index):return {'status':'waiting_archive','batch_id':batch['batch_id'],'treated_verified':True,'source_count':len(batch['sources'])}
     return complete(state,batch['batch_id'],owner,entry['proofs'])
@@ -212,6 +219,9 @@ def monitor(polls=3,interval=20):
         if active:
             entry=sorted(active,key=lambda x:x['claimed_at'])[0];status='resume'
             if entry.get('status')=='treated_waiting_archive':
+                import ares_intake_archive_pipeline as pipeline
+                if entry['batch'].get('scope_type')=='flat_request' and pipeline.enabled():
+                    return {'status':'resume','mechanical_only':True,'batch_id':entry['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+entry['batch']['batch_id']+'.json'))}
                 ready=batch_archive_ready(entry,bridge.read_json(DATA/'archive-index.json',{'mappings':{}}));status='archive_ready' if ready else 'waiting_archive'
                 if not ready and (bridge.timestamp(bridge.now_iso())-bridge.timestamp(entry['treated_at'])).total_seconds()>2700:status='blocked'
             return {'status':status,'batch_id':entry['batch']['batch_id'],'manifest':str(DATA/'intake-batches'/('batch-'+entry['batch']['batch_id']+'.json'))}
