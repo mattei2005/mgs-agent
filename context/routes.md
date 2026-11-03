@@ -18,6 +18,14 @@ Identificar assunto
 
 ## Rotas por tipo de pedido
 
+### SHEIN G006 — Intraday Geral multicontas
+
+- A thread `1567162580273729629` (nome humano `Intraday Geral`), no canal de relatórios `1558147364450074734`, é a rota para pedidos de relatórios consolidados de mais de uma conta/site SHEIN exclusivamente do gestor Nicolas (`G006`); origem Campaign Ops `1548150155184701440`.
+- Um pedido de Nicolas como “intraday de todos os sites da SHEIN que eu rodo” deve ser resolvido pelo catálogo e pelos vínculos vigentes do G006, sem exigir uma thread por conta e sem incluir outros gestores. Apresentar o consolidado com identificação dos recortes por conta/site, respeitando os gates de escopo de contas e domínios antes das consultas.
+- Esta definição específica prevalece nesta thread sobre a instrução genérica de usar uma única conta vinculada por thread; não altera os bindings das demais threads nem o isolamento entre gestores.
+- Responder na própria thread e preservar seu título manual. A definição não solicita um relatório agora, não ativa cron, não redireciona envios automáticos e não autoriza writes em campanhas.
+- Autoridade e fonte: Rodolfo Mattei, mensagem `1567162998949417113`, na própria thread. Esta é a fonte canônica do recorte multicontas desta rota.
+
 ### Eggbev — relatórios de contas de anúncio
 
 - Canal dedicado: `1565027294920319126` (`bot-eggbev-us-cc-en-g006-relatorios`). A thread `1565027664660664452`, no pai `1539422731727147079`, é a origem da configuração, não o canal de entrega.

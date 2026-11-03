@@ -892,6 +892,7 @@
     }
   ],
   "runtime_artifacts": [
+{"id": "meta-manual-payments-refresh-20261103-0802", "agent": "zeus", "type": "authorized_recurring_financial_snapshot", "status": "partial_metrics_validated_pc1_meta_2fa_required", "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261103T0802/closure-current.json", "updated_at": "2026-11-03T08:06:37.284546-05:00", "report_infra_status": "pending_cron_delivery_restriction_no_manual_message", "verification": {"accounts": 47, "fresh_metrics": 47, "fresh_h": 0, "preserved_h": 36, "pending_d": 4, "historical_blank_d": 35, "other_sheet_data_unchanged": true, "lease_free": true, "payments_executed": 0, "meta_writes": 0, "cron_changes": 0}},
     {
       "account_id": "937846586033361",
       "agent": "ares",
