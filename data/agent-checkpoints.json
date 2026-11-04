@@ -3363,6 +3363,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ARCHIVE-PERF-1567354162776379404",
+      "next_step": "Medir caminho real read-only, corrigir gargalo comprovado e validar",
+      "objective": "Otimizar arquivamento e verificacoes mantendo todas as conferencias, batch4, executor unico, campanhas/acessos/agendas intactos",
+      "source": "discord:1562078493498540042:1567354162776379404",
+      "state": "diagnostico_autorizado",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-04T01:46:55+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ARES-40-CAMPAIGNS-STANDARD-BENCHMARK-20260905",
       "next_step": "None. Any future benchmark must use a new request, fresh Meta readback and new thread.",
       "objective": "Concluir rollback do benchmark Ares cancelado",
@@ -8466,5 +8476,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T19:31:03+00:00"
+  "updated_at": "2026-11-04T01:46:55+00:00"
 }

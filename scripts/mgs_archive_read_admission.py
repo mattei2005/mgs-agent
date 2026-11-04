@@ -16,6 +16,32 @@ def binary_read_slot():
  finally:
   if held:fcntl.flock(held,fcntl.LOCK_UN);held.close()
 
+def readonly_map(read, values, *, parallel=True):
+ """Ordered GET-only work, at most four in flight; caller owns write lease.
+
+ Never pass mutations here. Drain running reads on failure and do not submit
+ another wave after any failed result. No shared cache or skipped verification.
+ """
+ from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+ values=list(values)
+ if not parallel or len(values)<2:return [read(value) for value in values]
+ results=[None]*len(values);cursor=0
+ with ThreadPoolExecutor(max_workers=min(4,len(values)),thread_name_prefix='mgs-sa-read') as pool:
+  pending={}
+  while cursor<len(values) and len(pending)<4:
+   pending[pool.submit(read,values[cursor])]=cursor;cursor+=1
+  try:
+   while pending:
+    done,_=wait(pending,return_when=FIRST_COMPLETED)
+    # Inspect the entire completed wave before submitting anything new.
+    for future in done:results[pending.pop(future)]=future.result()
+    while cursor<len(values) and len(pending)<4:
+     pending[pool.submit(read,values[cursor])]=cursor;cursor+=1
+  except BaseException:
+   for future in pending:future.cancel()
+   raise
+ return results
+
 def bounded_hashes(original):
  def run(fid):
   with binary_read_slot():return original(fid)
