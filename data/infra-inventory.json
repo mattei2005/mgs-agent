@@ -3112,10 +3112,10 @@
     {
       "agent": "zeus",
       "id": "zeus-hermes-update-core-reference",
-      "modified_at": "2026-11-04T05:12:29.686295+00:00",
+      "modified_at": "2026-11-04T05:28:53.096416+00:00",
       "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/hermes-update-core.md",
       "purpose": "Plugin-native memory migration, PM isolation, real provider smokes and stock skill security/merge gates.",
-      "sha256": "adf9f11f053e0f92e98884779913abec7ed168deaf4a8d31b5c8be65de93e04d",
+      "sha256": "d55663a7f223705260ef2f2cc811a5fd05f42bb27dc40cdefd2c0b96ddf6d8f6",
       "size_bytes": 20600,
       "skill": "hermes-agent-operations",
       "type": "skill_reference",
@@ -3147,8 +3147,8 @@
     {
       "path": "/root/mgs-agent/profiles/zeus-skills/ops/hermes-agent-operations/references/hermes-update-core.md",
       "agent": "zeus",
-      "modified_at": "2026-11-04T05:12:29.686295+00:00",
-      "sha256": "adf9f11f053e0f92e98884779913abec7ed168deaf4a8d31b5c8be65de93e04d",
+      "modified_at": "2026-11-04T05:28:53.096489+00:00",
+      "sha256": "d55663a7f223705260ef2f2cc811a5fd05f42bb27dc40cdefd2c0b96ddf6d8f6",
       "description": "Native PM resolver, profile-isolated finalizer, exact manifest, handoff and idempotent callback"
     }
   ],
@@ -62585,7 +62585,7 @@
       "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
       "agent": "zeus",
       "type": "hermes_authorized_runtime_activation",
-      "status": "rolled_back_validated",
+      "status": "retry_1_scheduled_waiting_delivered_handoff",
       "thread_id": "1567354570823172209",
       "authority_message_id": "1567390752403755019",
       "report_channel_id": "1498132022634483894",
@@ -62593,8 +62593,8 @@
       "report_infra_status": "sent",
       "runtime_switched": false,
       "activation_scheduled": true,
-      "updated_at": "2026-11-04T05:22:13.906684+00:00",
-      "evidence": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-state.json",
+      "updated_at": "2026-11-04T05:29:26.385492+00:00",
+      "evidence": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/retry-1/execution-state.json",
       "skills_manifest_sha256": "c7b679f6ce17e65afdbd036d0a1812b6f3412507755ca8e17a44d5be046969f4",
       "artifact_paths": [
         "/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py",
@@ -62609,8 +62609,8 @@
         "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-11-03-main-29a61cb7.patch"
       ],
       "learning_reference": "profiles/zeus-skills/ops/hermes-agent-operations/references/hermes-update-core.md",
-      "coordinator_unit": "mgs-hermes-activation-1567354570823172209.service",
-      "coordinator_pid": "2206990",
+      "coordinator_unit": "mgs-hermes-activation-1567354570823172209-retry-1.service",
+      "coordinator_pid": "2229297",
       "source": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
       "target": "29a61cb7ab509cda0c376bf3860edb87210b0755",
       "port": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
@@ -62633,7 +62633,9 @@
           "code_sha": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
           "canary_pass": true
         }
-      }
+      },
+      "prior_execution_evidence": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-state.json",
+      "attempt": "retry-1"
     }
   ],
   "scripts": [
@@ -65548,9 +65550,9 @@
     },
     {
       "path": "scripts/hermes-cutover-1567354570823172209.py",
-      "modified_at": "2026-11-04T05:12:29.686295+00:00",
-      "size_bytes": 29488,
-      "sha256": "ea8c947e663faf37971a412bd9d31d4d811951f5c6edafb9f3dbf4878b82e76b",
+      "modified_at": "2026-11-04T05:28:53.095472+00:00",
+      "size_bytes": 31162,
+      "sha256": "1a63dd61db5cd81a9289373368ff25724b262d414cf9656e1edca537cff32808",
       "report_message_id": "1567406158103183461"
     }
   ],

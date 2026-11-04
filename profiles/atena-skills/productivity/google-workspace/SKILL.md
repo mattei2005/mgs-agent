@@ -1,11 +1,6 @@
 ---
 name: google-workspace
-description: "MGS Drive and Sheets via canonical Service Account."
-version: 1.0.0
-author: MGS Digital Corp
-license: MIT
-platforms: [linux]
-tags: [google-drive, google-sheets, mgs, service-account]
+description: "MGS Google Drive and Sheets operations through the canonical mgs-core-prod Service Account."
 ---
 
 # Google Workspace — MGS Canonical Route

@@ -265,6 +265,12 @@ def notify_origin(state,plan):
    state['origin_message_id']=message['id'];save(STATE,state);actual=api('GET','/channels/'+THREAD+'/messages/'+message['id']);assert actual.get('content')==body;state['origin_delivery_verified']=True;save(STATE,state);return
  result=api('POST','/channels/'+THREAD+'/messages',{'content':body,'embeds':[],'components':[],'allowed_mentions':{'parse':[],'users':[],'roles':[]}});state['origin_message_id']=result['id'];save(STATE,state);actual=api('GET','/channels/'+THREAD+'/messages/'+result['id']);assert actual.get('content')==body;state['origin_delivery_verified']=True;save(STATE,state)
 
+def verify_metadata_only_config_migration(agent,plan,state,path):
+ before=pathlib.Path(plan['profile_config_snapshots'][agent]);assert sha(before)==plan['profile_config_hashes'][agent]['config.yaml']
+ code='from ruamel.yaml import YAML;from pathlib import Path;import sys,json;y=YAML(typ="safe");a=y.load(Path(sys.argv[1]).read_text());b=y.load(Path(sys.argv[2]).read_text());av=a.pop("_config_version",None);bv=b.pop("_config_version",None);shape=lambda x:(type(x).__name__,{repr(k):shape(v) for k,v in x.items()} if isinstance(x,dict) else [shape(v) for v in x] if isinstance(x,list) else x);assert shape(a)==shape(b),"functional configuration drift";assert type(av) is int and type(bv) is int and av<=bv and bv==52,"unexpected schema migration";print(json.dumps({"only_changed_key":"_config_version","before":av,"after":bv,"functional_config_equal":True}))'
+ q=run([plan['python'],'-c',code,str(before),str(path)],timeout=30,env=safe_env(agent),cwd=plan['source']);assert q.returncode==0,'post-cutover functional config drift '+agent
+ state.setdefault('config_metadata_migrations',{})[agent]=json.loads(q.stdout);save(STATE,state)
+
 def readonly_auth_observation(plan):
  code='import json;from hermes_cli.auth import get_codex_auth_status;s=get_codex_auth_status();print(json.dumps({k:s.get(k) for k in ["logged_in","auth_mode","needs_refresh","rate_limited","error_code"]}))'
  result={}
@@ -286,7 +292,11 @@ def execute(plan,state):
  for agent in ORDER:
   service=svc(agent);assert service['ActiveState']=='active' and service['SubState']=='running';assert service['MainPID']==state['agents'][agent]['pid'];assert state['agents'][agent].get('canary')
  for agent in ORDER:
-  for name,digest in plan['profile_config_hashes'][agent].items():assert sha(pathlib.Path('/root/.hermes/profiles',agent,name))==digest,('post-cutover profile drift',agent,name)
+  for name,digest in plan['profile_config_hashes'][agent].items():
+   path=pathlib.Path('/root/.hermes/profiles',agent,name)
+   if sha(path)!=digest:
+    assert name=='config.yaml','post-cutover non-config control drift'
+    verify_metadata_only_config_migration(agent,plan,state,path)
  for row in plan['skill_entries']:assert sha(row['path'])==row['after_sha256'],('post-cutover skill drift',row['path'])
  assert len(state['applied_paths'])==len(plan['skill_entries'])
  state['post_auth_observation']=readonly_auth_observation(plan)
@@ -314,8 +324,12 @@ def close_all(state,plan):
    time.sleep(6)
 
 def main():
- os.umask(0o077);a=argparse.ArgumentParser();a.add_argument('--preflight',action='store_true');a.add_argument('--self-test',action='store_true');a.add_argument('--wait-for-handoff',action='store_true');args=a.parse_args();SCRATCH.mkdir(parents=True,exist_ok=True);(SCRATCH/'tmp').mkdir(exist_ok=True)
+ global R,PLAN,STATE,BACKUP
+ os.umask(0o077);a=argparse.ArgumentParser();a.add_argument('--preflight',action='store_true');a.add_argument('--self-test',action='store_true');a.add_argument('--wait-for-handoff',action='store_true');a.add_argument('--attempt',choices=['initial','retry-1'],default='initial');args=a.parse_args();SCRATCH.mkdir(parents=True,exist_ok=True);(SCRATCH/'tmp').mkdir(exist_ok=True)
  if args.self_test:self_test();return 0
+ if args.attempt!='initial':
+  original=json.loads(STATE.read_text());assert original.get('status')=='rolled_back_validated' and original.get('closure_complete'),'Prior rollout must be reconciled and closed before retry'
+  R=R/args.attempt;PLAN=R/'execution-plan.json';STATE=R/'execution-state.json';BACKUP=BACKUP/args.attempt
  plan=load_plan()
  if not args.wait_for_handoff:print(json.dumps(preflight(plan)));return 0
  lock=(M/'data/hermes-activation-1567354570823172209.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);state=current_state()
