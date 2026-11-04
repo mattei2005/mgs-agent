@@ -1927,6 +1927,28 @@
       "type": "one_shot_facebook_availability_sb_status_reclassification"
     },
     {
+      "id": "zeus-sb-return-onhold-1567387033637228659",
+      "agent": "zeus",
+      "authority_message_id": "1567387033637228659",
+      "thread_id": "1567386706699755531",
+      "checkpoint_id": "SB-RETURN-ONHOLD-1567387033637228659",
+      "type": "one_shot_exact_historical_cohort_status_return",
+      "path": "/root/.hermes/profiles/zeus/artifacts/sb-return-onhold-1567387033637228659",
+      "backup": "/root/.hermes/profiles/zeus/artifacts/sb-return-onhold-1567387033637228659/backup.json",
+      "evidence": "/root/.hermes/profiles/zeus/artifacts/sb-return-onhold-1567387033637228659/result.json",
+      "scope": "Somente os1536IDs que passaram a Broadcast no lote20261027;27publishers;89Blocked excluidos",
+      "execution": "STATUS-only On-hold;canary1+bounded batches100;full readback and second fresh-session readback",
+      "status": "validated",
+      "results": {
+        "on_hold": 1536,
+        "sb_exact_id_readbacks": 1536,
+        "excluded_blocked_preserved": 89,
+        "restriction_dates_preserved": 540,
+        "non_status_configuration_changes": 0,
+        "outside_target_configuration_changes": 0
+      }
+    },
+    {
       "agent": "zeus",
       "id": "meta-manual-payments-refresh-20261028-0802",
       "paths": [
@@ -60223,6 +60245,24 @@
       "production_changed": false,
       "report_infra_status": "delivered_readback_verified",
       "report_message_id": "1567376931337277533",
+      "report_channel_id": "1498132022634483894"
+    },
+    {
+      "id": "zeus-hermes-phase4-1567354570823172209",
+      "type": "hermes_backup_and_activation_plan",
+      "agent": "zeus",
+      "status": "backup_validated_activation_plan_frozen_not_authorized",
+      "authority_message_id": "1567384076569026631",
+      "thread_id": "1567354570823172209",
+      "path": "/root/mgs-agent/reports/hermes-updates/20261103-phase4-1567354570823172209",
+      "evidence": "/root/mgs-agent/reports/hermes-updates/20261103-phase4-1567354570823172209/activation-plan.json",
+      "backup_recovery_set": "/root/.hermes/secure-backups/hermes-update/20261103-phase4-1567354570823172209/recovery-set.json",
+      "skills_manifest_sha256": "c7b679f6ce17e65afdbd036d0a1812b6f3412507755ca8e17a44d5be046969f4",
+      "runtime_switched": false,
+      "activation_scheduled": false,
+      "report_infra_status": "delivered_embed_readback_verified",
+      "updated_at": "2026-11-04T04:02:02.404248+00:00",
+      "report_message_id": "1567388604458729489",
       "report_channel_id": "1498132022634483894"
     }
   ],
