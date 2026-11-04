@@ -84,11 +84,12 @@ def verification_snapshot(d,c,job):
         import mgs_archive_technical_cleanup as cleanup
         disposition=cleanup.retired_canary_proof(d,job,receipt,ack)
         if disposition:return {'pending':False,'acked':bool(ack),'retired_validation':disposition}
-    media=[]
-    for asset in job['assets']:
+    def read_media(asset):
         copied=next(x for x in receipt['assets'] if x['sourceId']==asset['sourceId'] and x['role']==asset['role'])
         import ares_archive_retirement as retirement
-        media.append({'source':retirement.source_state(d,c,job,asset),'archive':d.meta(copied['archiveId'])})
+        return {'source':retirement.source_state(d,c,job,asset),'archive':d.meta(copied['archiveId'])}
+    from mgs_archive_read_admission import readonly_map
+    media=readonly_map(read_media,job['assets'],parallel=c.get('owner_executor_mode')=='vps' and job.get('kind')=='lineage')
     frozen={'request':meta,'receipt_meta':rm,'receipt':receipt,'ack_meta':ackmeta,'ack':ack,'media':media}
     return {'pending':False,'acked':bool(ack) and props.get('mgsArchiveState')=='verified','fingerprint':hashlib.sha256(bridge.canonical(frozen)).hexdigest()}
 

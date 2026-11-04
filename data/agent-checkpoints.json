@@ -4633,6 +4633,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-HERMES-PREP-1567354570823172209",
+      "next_step": "Executar snapshot completo e baseline isolada; depois port e gates; avisar próximos passos ao final",
+      "objective": "Preparar Hermes atualizado isoladamente: congelar main, baseline, port e testes; sem ativação/restart/exclusão",
+      "source": "discord:1567354570823172209/message:1567355643902558321;followup:1567355693827231846",
+      "state": "in_progress_authorized_stages_1_3",
+      "thread_id": "1567354570823172209",
+      "updated_at": "2026-11-04T01:53:34+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-INFRA-CONSOLIDATION-1555945074855121093",
       "next_step": "Continuar somente nesta thread; retenção financeira pendente; aguardar avaliação natural03/10 19:04ET; segurança6/14ativa,8pendentes e canárioEggbev nãoautorizado; não reexecutar entregas históricas",
       "objective": "Consolidar histórico e continuidade de disco, performance e segurança em uma thread",
@@ -8476,5 +8486,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T01:46:55+00:00"
+  "updated_at": "2026-11-04T01:53:34+00:00"
 }

@@ -410,7 +410,8 @@ def job_for_lineage(d,c,asset_id):
     matches=[x for x in rows if x.get('asset_id')==asset_id]
     if len(matches)!=1:raise ArchiveError('LINEAGE_ID_NOT_UNIQUE')
     row=matches[0];validate_lineage(row,c)
-    assets=[asset_snapshot(d,c,row['source_drive_id'],'original'),asset_snapshot(d,c,row['asset_drive_id'],'clean')]
+    from mgs_archive_read_admission import readonly_map
+    assets=readonly_map(lambda pair: asset_snapshot(d,c,*pair), [(row['source_drive_id'],'original'),(row['asset_drive_id'],'clean')], parallel=c.get('owner_executor_mode')=='vps')
     if assets[0]['sha256']!=row.get('original_checksum') or assets[1]['sha256']!=row.get('clean_checksum'):raise ArchiveError('INVENTORY_CHECKSUM_MISMATCH')
     if not assets[0]['relativeParent'] or assets[0]['relativeParent'][-1]!='99_LEGACY':raise ArchiveError('RAW_NOT_IN_LEGACY')
     clean_parent=assets[1]['relativeParent']
@@ -425,7 +426,7 @@ def reconcile(d,c,job_id,apply=False):
     rm=d.meta(rf['id'])
     require_publisher(rm,ACCOUNT,'RECEIPT_AUTHOR')
     r=json.loads(d.raw(rf['id']));validate_receipt(job,r);verified=[]
-    for a in job['assets']:
+    def verify_asset(a):
         item=next(x for x in r['assets'] if x['sourceId']==a['sourceId'] and x['role']==a['role'])
         m=d.meta(item['archiveId'])
         if m.get('trashed') or m.get('driveId') or not any(x.get('emailAddress')==ACCOUNT for x in m.get('owners',[])):raise ArchiveError('COPIED_OWNER_OR_STATE')
@@ -441,7 +442,9 @@ def reconcile(d,c,job_id,apply=False):
         expected={k:a[k] for k in ('size','md5','sha256')}
         if d.hashes(m['id'])!=expected or (not retired and d.hashes(a['sourceId'])!=expected):raise ArchiveError('BINARY_INTEGRITY')
         if not retired:validate_reconciliation_source(d,d.meta(a['sourceId']),a,c,job)
-        verified.append({'sourceId':a['sourceId'],'archiveId':m['id'],'owner':ACCOUNT,'verified':True,'role':a['role'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'jobId':job_id,'lineageId':job['lineageId'],'relativeParent':a['relativeParent']})
+        return {'sourceId':a['sourceId'],'archiveId':m['id'],'owner':ACCOUNT,'verified':True,'role':a['role'],'size':a['size'],'md5':a['md5'],'sha256':a['sha256'],'jobId':job_id,'lineageId':job['lineageId'],'relativeParent':a['relativeParent']}
+    from mgs_archive_read_admission import readonly_map
+    verified=readonly_map(verify_asset, job['assets'], parallel=c.get('owner_executor_mode')=='vps' and job.get('kind')=='lineage')
     result={'status':'verified','kind':job['kind'],'jobId':job_id,'assets':verified,'verifiedAt':now_iso(),'deleteSource':False,'inventoryIdentifiersChanged':False}
     if apply:
         index=read_json(DATA/'archive-index.json',{'mappings':{},'verified_jobs':{}})

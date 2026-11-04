@@ -6,7 +6,7 @@ bounded subprocesses; all publishers use the original queue lease and identity.
 No treatment, campaign, deletion, ACL, schedule or reservation changes.
 """
 from __future__ import annotations
-import json, subprocess, sys
+import json, subprocess, sys, time
 import ares_archive_bridge as b
 
 AUTHORITY = '1567021305822314609'
@@ -88,11 +88,15 @@ def repair_aliases(job_ids):
     with b.queue_lock():
         d = b.Drive(True)
         cfg = b.config_load()
-        for jid in job_ids:
-            if not jid:
-                continue
+        from mgs_archive_read_admission import readonly_map
+        ids = list(dict.fromkeys(jid for jid in job_ids if jid))
+        require(len(ids) <= 4, 'INTAKE_PIPELINE_JOB_BOUND')
+        def snapshot_for(jid):
             job = b.read_json(b.DATA / 'jobs' / ('job-' + jid + '.json'), {})
-            snapshot = automation.verification_snapshot(d, cfg, job)
+            return automation.verification_snapshot(d, cfg, job)
+        # Inner snapshots stay serial here: never nest four-worker pools.
+        snapshots = readonly_map(snapshot_for, ids)
+        for jid, snapshot in zip(ids, snapshots):
             if snapshot.get('pending'):
                 continue
             index = b.read_json(b.DATA / 'archive-index.json', {})
@@ -114,8 +118,11 @@ def verify_ready(entry):
         d = b.Drive(False)
         cfg = b.config_load()
         index = b.read_json(b.DATA / 'archive-index.json', {})
-        records = []
-        for sid in entry['archive_source_ids']:
+        from mgs_archive_read_admission import readonly_map, bounded_hashes
+        d.hashes = bounded_hashes(d.hashes)
+        ids = entry['archive_source_ids']
+        require(len(ids) <= 8 and len(ids) == len(set(ids)), 'INTAKE_PIPELINE_MEDIA_BOUND')
+        def verify_one(sid):
             mapping = index.get('mappings', {}).get(sid)
             require(mapping is not None, 'INTAKE_PIPELINE_MAPPING_MISSING')
             assert mapping is not None
@@ -125,8 +132,8 @@ def verify_ready(entry):
             assert record is not None
             hashes = d.hashes(record['provider_id'])
             require(hashes == {k: mapping[k] for k in ('size', 'md5', 'sha256')}, 'INTAKE_PIPELINE_PROVIDER_BYTES')
-            records.append({'logical_id': sid, 'provider_id': record['provider_id'], 'stock_id': record['stock_file_id'], 'name': record['name'], 'parents': record['parents'], 'hashes': hashes, 'native_ack_verified': True})
-        return records
+            return {'logical_id': sid, 'provider_id': record['provider_id'], 'stock_id': record['stock_file_id'], 'name': record['name'], 'parents': record['parents'], 'hashes': hashes, 'native_ack_verified': True}
+        return readonly_map(verify_one, ids)
 
 
 def advance(entry, max_rounds=4):
@@ -143,15 +150,23 @@ def advance(entry, max_rounds=4):
     try:
         for _ in range(max_rounds):
             before = progress(entry)
-            step = {'at': b.now_iso(), 'before': before, 'publication': publish(rows)}
+            started = time.monotonic()
+            step = {'at': b.now_iso(), 'before': before, 'publication': publish(rows), 'seconds': {}}
+            step['seconds']['publication'] = round(time.monotonic() - started, 3)
+            started = time.monotonic()
             ids = jobs_for(rows)
             index = b.read_json(b.DATA / 'archive-index.json', {})
             if any(jid and jid not in index.get('verified_jobs', {}) for jid in ids):
                 step['owner'] = child('mgs_archive_owner_transport.py', ['tick', '--apply', '--max-jobs', '2', '--max-seconds', '100', '--origin', 'foreground'])
+            step['seconds']['owner'] = round(time.monotonic() - started, 3)
+            started = time.monotonic()
             repair_aliases(ids)
+            step['seconds']['aliases'] = round(time.monotonic() - started, 3)
+            started = time.monotonic()
             index = b.read_json(b.DATA / 'archive-index.json', {})
             if any(index.get('mappings', {}).get(sid, {}).get('stockShortcutId') and index['mappings'][sid].get('stockTransferredToArchive') is not True for sid in entry['archive_source_ids']):
                 step['stock'] = child('mgs_private_stock_transport.py', ['--apply', '--max-files', '4'])
+            step['seconds']['stock'] = round(time.monotonic() - started, 3)
             step['after'] = progress(entry)
             journal['steps'].append(step)
             b.atomic_json(path, journal)
