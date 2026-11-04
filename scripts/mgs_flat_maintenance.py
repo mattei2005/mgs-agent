@@ -64,6 +64,8 @@ def transfer_tree(sa,owner,root,nodes,journal):
  rid,rsha=cut.publish(sa,'flat-generation-receipt-'+root+'.json','flat-generation-receipt:'+root,receipt)
  state={'status':'verified','schema':'mgs.flat.source.relocation.state.v1','redesign_confirmation':'1566814476626563115','access_confirmation':'1566825959645253764','control_folder_id':f.CONTROL,**pub,'receipt_file_id':rid,'receipt_sha256':rsha,'media_ids':sorted(snapshot['full_hashes']),'object_count':len(subset),'root_moves':1,'jobs':sorted(snapshot['jobs']),'verified_at':b.now_iso(),'delete_writes':0};b.atomic_json(folder/'receipt-state.json',state)
  registry=b.read_json(HOME/'maintenance-relocations.json',{'records':[]});f.require(not any(set(x['media_ids'])&set(state['media_ids']) for x in registry['records']),'GENERATION_SOURCE_ALREADY_REGISTERED');registry['records'].append(state);b.atomic_json(HOME/'maintenance-relocations.json',registry)
+ import mgs_flat_consolidation as consolidation
+ if consolidation.enabled():consolidation.consolidate(sa,owner,root)
  return state
 
 def transfer_report(sa,owner,m,journal):
@@ -100,7 +102,15 @@ def run(apply=False,canary=False):
     if entry.get('status')!='complete':continue
     for proof in entry.get('proofs',[]):
      released[proof['source_id']]=proof['raw_sha256'];released[proof['clean_source_id']]=proof['clean_sha256']
-   sa=b.Drive(True);nodes=cut.inventory(sa);index=b.read_json(b.DATA/'archive-index.json',{}).get('mappings',{});roots=[]
+   sa=b.Drive(True)
+   import mgs_flat_consolidation as consolidation
+   if consolidation.enabled():
+    pending=[p.parent.name for p in sorted((HOME/'maintenance').glob('*/receipt-state.json')) if b.read_json(p,{}).get('status')=='verified' and b.read_json(consolidation.HOME/p.parent.name/'result.json',{}).get('status')!='verified']
+    if pending and apply:
+     result=consolidation.consolidate(sa,t.OwnerDrive(),pending[0])
+     out={'status':'ok','apply':apply,'consolidated_generation':result['generation'],'files_consolidated':result['files'],'delete_writes':0}
+     b.atomic_json(HOME/'maintenance-last-tick.json',{'at':b.now_iso(),**out});return out
+   nodes=cut.inventory(sa);index=b.read_json(b.DATA/'archive-index.json',{}).get('mappings',{});roots=[]
    for m in nodes.values():
     if m['mimeType']!=b.FOLDER or m.get('parents')!=[b.SOURCE_ROOT] or m['name'] not in flat.registered_operations():continue
     subtree={m['id']};front=[m['id']]

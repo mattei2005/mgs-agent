@@ -74,6 +74,8 @@ def verify(d,meta,asset,job=None):
  if verify_pending(d,meta,asset,job):return True
  if not retained(asset.get('sourceId')):return False
  snapshot,receipt=evidence(d,asset['sourceId']);fid=asset['sourceId'];before=snapshot['objects'][fid]['metadata'];after=receipt['objects'][fid]['metadata_after']
+ import mgs_flat_consolidation as consolidation
+ if consolidation.verify(d,meta,asset,job,snapshot):return True
  require(job is None or snapshot['jobs'].get(job['jobId'])==sha(job),'FLAT_SOURCE_JOB_BINDING')
  for native,key in [('id','sourceId'),('name','name'),('mimeType','mimeType'),('size','size'),('md5Checksum','md5'),('sha256Checksum','sha256'),('createdTime','sourceCreatedTime')]:
   require(str(before.get(native))==str(asset.get(key)) and meta.get(native)==before.get(native),'FLAT_SOURCE_FROZEN_BYTES:'+native)
