@@ -4623,6 +4623,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-HERMES-PHASE4-1567354570823172209",
+      "next_step": "Medir allowlist/control-plane e bancos; snapshots consistentes e integridade; manifesto de ativação e skills sem aplicar",
+      "objective": "Criar backup pré-atualização validado e fechar plano exato de ativação, sem trocar runtime nem reiniciar",
+      "source": "discord:1567354570823172209/message:1567384076569026631;preparation:/root/mgs-agent/reports/hermes-updates/20261103-preparation-1567354570823172209/final-report.json",
+      "state": "authorized_in_progress_backup_and_plan_only",
+      "thread_id": "1567354570823172209",
+      "updated_at": "2026-11-04T03:45:28+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-HERMES-POSTCUTOFF-144-20260919",
       "next_step": "Monitorar normalmente; qualquer commit após 005c746d pertence a um novo ciclo",
       "objective": "Portar e ativar exatamente os 144 commits b23f31c2..005c746d no Hermes MGS, preservar customizações e reiniciar Ares/Atena/Zeus",
@@ -8486,5 +8496,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T03:17:26+00:00"
+  "updated_at": "2026-11-04T03:45:28+00:00"
 }
