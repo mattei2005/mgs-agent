@@ -4624,12 +4624,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-ACTIVATE-1567354570823172209",
-      "next_step": "Owner mgs-hermes-activation-1567354570823172209.service aguarda entrega exata do handoff; executa sequência, canários, rollback e callback sem nova ação humana. Ler execution-state.json antes de qualquer retomada.",
-      "objective": "Ativar corte29a61cb7/afbd6248 e196skills;Ares→Atena→Zeus",
-      "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-plan.json;execution-state.json;REPORT:1567406158103183461;authority:1567390752403755019",
-      "state": "external_executor_scheduled_waiting_for_delivered_handoff",
+      "next_step": "Recuperação registrada;ler execution-state.json e não repetir efeitos já concluídos.",
+      "objective": "Ativação autorizada Hermes29a61cb7/afbd6248 e196arquivos de skills;sem exclusões/credenciais/sistema",
+      "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-state.json;authority:1567390752403755019;report:1567406158103183461",
+      "state": "rolled_back_validated",
       "thread_id": "1567354570823172209",
-      "updated_at": "2026-11-04T05:14:13+00:00"
+      "updated_at": "2026-11-04T05:22:14+00:00"
     },
     {
       "agent": "zeus",
@@ -8526,5 +8526,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T05:14:13+00:00"
+  "updated_at": "2026-11-04T05:22:14+00:00"
 }

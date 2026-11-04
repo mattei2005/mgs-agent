@@ -62585,7 +62585,7 @@
       "path": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
       "agent": "zeus",
       "type": "hermes_authorized_runtime_activation",
-      "status": "scheduled_waiting_delivered_handoff",
+      "status": "rolled_back_validated",
       "thread_id": "1567354570823172209",
       "authority_message_id": "1567390752403755019",
       "report_channel_id": "1498132022634483894",
@@ -62593,7 +62593,7 @@
       "report_infra_status": "sent",
       "runtime_switched": false,
       "activation_scheduled": true,
-      "updated_at": "2026-11-04T05:14:12.941908+00:00",
+      "updated_at": "2026-11-04T05:22:13.906684+00:00",
       "evidence": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-state.json",
       "skills_manifest_sha256": "c7b679f6ce17e65afdbd036d0a1812b6f3412507755ca8e17a44d5be046969f4",
       "artifact_paths": [
@@ -62610,7 +62610,30 @@
       ],
       "learning_reference": "profiles/zeus-skills/ops/hermes-agent-operations/references/hermes-update-core.md",
       "coordinator_unit": "mgs-hermes-activation-1567354570823172209.service",
-      "coordinator_pid": "2206990"
+      "coordinator_pid": "2206990",
+      "source": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103",
+      "target": "29a61cb7ab509cda0c376bf3860edb87210b0755",
+      "port": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
+      "gateway_results": {
+        "ares": {
+          "pid": "2212066",
+          "ready": true,
+          "code_sha": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
+          "canary_pass": true
+        },
+        "atena": {
+          "pid": "2215560",
+          "ready": true,
+          "code_sha": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
+          "canary_pass": true
+        },
+        "zeus": {
+          "pid": "2218676",
+          "ready": true,
+          "code_sha": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
+          "canary_pass": true
+        }
+      }
     }
   ],
   "scripts": [
