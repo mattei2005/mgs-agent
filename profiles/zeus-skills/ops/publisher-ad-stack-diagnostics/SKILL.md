@@ -33,6 +33,12 @@ Validate four layers independently:
 
 Runtime/request evidence wins over page labels and assumptions.
 
+## Screenshot-led performance and pricing triage
+
+- Separate screenshot observations, the sender's interpretation and independently verified facts. Do not turn geographic correlation into a proven connection problem, or a plausible aggregate calculation into proof that pricing coverage is correct.
+- Separate public page availability, browser ad delivery and internal reporting. HTTP 200 proves none of the latter two; local server logs do not measure creative display time on the user's device.
+- For slow-ad comparisons, PMR or `No pricing rule applied`, follow `references/ad-performance-and-pricing-evidence.md` to request the minimum evidence and reconcile denominators before drawing conclusions.
+
 ## Standard workflow
 
 ### 1. Establish intended and disputed states
