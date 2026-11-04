@@ -3384,12 +3384,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARCHIVE-ANCESTRY-RECOVERY-20261104",
-      "next_step": "Native job 5e30624e565d13336f3b2ecf9e49b0cb e bytes integres. Varredura anterior autorizada1567427715030716417 omitiu quatro jobs/oito fontes do mesmo conjunto congelado; preparar prova separada exata, preservar os oito registros ja ativos, validar antes de ativar sob locks existentes.",
-      "objective": "Recuperar todos os jobs do conjunto congelado omitidos na conciliacao das duas pastas SHEIN_US_ES 2, sem alterar midia ou escopo",
-      "source": "/root/.hermes/profiles/zeus/cache/scratch/archive-ancestry-20261104T1341/native-diagnosis.json",
-      "state": "in_progress",
+      "next_step": "Nenhuma acao humana.4jobs/8fontes omitidos recuperados no mesmo escopo autorizado.8jobs/16fontes integralmente verificados,32streams+16downloads+24protocolos;24testes. Monitor original retry14:00:18Z ok blocked[]; sem mudanca em midia,reservas,mapeamentos,ACL,credenciais,campanhas ou agenda. Skill/mirror readback iguais. REPORT-INFRA1567539225115754507 sent_verified; operacao permanece no cron original83b148017b4d.",
+      "objective": "Recuperar membros omitidos da varredura congelada nas duas pastas SHEIN_US_ES 2",
+      "source": "/root/.hermes/profiles/zeus/artifacts/archive-ancestry-remainder-20261104/closure.json",
+      "state": "completed_validated",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-04T13:45:49+00:00"
+      "updated_at": "2026-11-04T14:01:42+00:00"
     },
     {
       "agent": "zeus",
@@ -8556,5 +8556,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T13:45:49+00:00"
+  "updated_at": "2026-11-04T14:01:42+00:00"
 }
