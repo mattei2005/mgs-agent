@@ -1312,6 +1312,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-INTAKE-1567557936228732930",
+      "next_step": "Revisar visual, sanitizar, verificar e executar complete por mesmos batches ate request complete",
+      "objective": "Tratar e arquivar 20 imagens SHEIN US EN de Kelly",
+      "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
+      "state": "request 10e6e4e951160be92101c930c6e53e70 registrado; 20 ids estabilizados, common, batch inicial claimed",
+      "thread_id": "1567557936228732930",
+      "updated_at": "2026-11-04T15:20:10+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
       "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
@@ -4580,6 +4590,16 @@
       "state": "lookup_complete_blocked_native_access_provision",
       "thread_id": "1564558610263187547",
       "updated_at": "2026-10-27T20:24:45+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-FOLDER-CONSOLIDATION-1567557554018590782",
+      "next_step": "Inventario nativo congelado; preparar consolidacao com membership, ACL e consumidores antes de aplicar",
+      "objective": "Consolidar pastas repetidas de operacao do processamento preservado, sem novas copias, exclusao ou perda de provas/IDs/acessos",
+      "source": "/root/.hermes/profiles/zeus/artifacts/folder-consolidation-1567557554018590782/live-tree-before.json",
+      "state": "investigating",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-04T15:17:29+00:00"
     },
     {
       "agent": "zeus",
@@ -8556,5 +8576,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T14:01:42+00:00"
+  "updated_at": "2026-11-04T15:20:10+00:00"
 }
