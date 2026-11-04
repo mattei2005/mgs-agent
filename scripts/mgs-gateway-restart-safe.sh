@@ -192,6 +192,9 @@ RUNTIME="$HERMES_REPO/gateway/run.py"
 exec >>"\$LOG" 2>&1
 # Native PM dependency generations need the checkout on the import path for -c smokes.
 cd "\$HERMES_REPO"
+export HOME=/root
+unset HERMES_PROFILE
+export HERMES_HOME="/root/.hermes/profiles/${ORDERED_AGENTS[0]}"
 log(){ printf '[%s] %s\n' "\$(date -u +%Y-%m-%dT%H:%M:%SZ)" "\$*"; }
 audit(){ printf '{"ts":"%s","event":"%s","actor":"mgs-gateway-restart-finalizer","reason":"%s","detail":"%s"}\n' "\$(date -u +%Y-%m-%dT%H:%M:%SZ)" "\$1" "\$REASON" "\$2" >> "\$AUDIT"; }
 log "START detached gateway restart finalizer agents=$AGENT_LIST reason=\$REASON"

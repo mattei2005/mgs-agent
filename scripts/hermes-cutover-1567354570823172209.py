@@ -305,6 +305,8 @@ def self_test():
 def close_all(state,plan):
  for attempt in range(4):
   try:
+   if state['status']=='activated_validated':
+    path=M/'patches/hermes/current-runtime-manifest.json';record=json.loads(path.read_text());record.update(status='active_validated',active_runtime_port=plan['port'],activation_evidence=str(STATE),activated_at=state['completed_at']);save(path,record)
    update_inventory(state,plan);checkpoint(state,plan);close_report(state,plan);notify_origin(state,plan);audit('hermes_cutover_closed',status=state['status'],origin_message_id=state.get('origin_message_id'));state['closure_complete']=True;save(STATE,state);return
   except Exception:
    state['closure_error']=traceback.format_exc();state['closure_attempts']=attempt+1;save(STATE,state)
