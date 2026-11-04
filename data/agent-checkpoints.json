@@ -172,6 +172,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-UPDATES-1567630190232739864",
+      "next_step": "Descobrir coorte por menor start_time dos conjuntos; preparar agenda finita com auditoria global e leitura inicial",
+      "objective": "Atualizar CPR a cada30min das campanhas Mavroa04 iniciadas hoje, read-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1567630190232739864/manifest.json",
+      "state": "intake: validar inicio configurado live; sem threshold; expiracao fim de04/11 est",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-04T20:03:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-40-CLONES-ACCOUNTS-05-13-20260905",
       "next_step": "Nenhum; este request não pode ser retomado nem reutilizado",
       "objective": "Pedido anterior de teste de performance de 40 campanhas, agora cancelado sem writes externos",
@@ -8606,5 +8616,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T19:28:00+00:00"
+  "updated_at": "2026-11-04T20:03:53+00:00"
 }
