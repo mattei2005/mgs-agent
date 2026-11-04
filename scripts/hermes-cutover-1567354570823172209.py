@@ -246,16 +246,27 @@ def notify_origin(state,plan):
         '- Os três voltaram ao Discord com processos novos e passaram nos canários reais de **Sol/Codex e Honcho**.\n'
         '- Sincronização autorizada: **196 arquivos de skills**, com hashes conferidos e regras MGS preservadas.\n'
         '- Backups e runtime anterior mantidos. Nenhuma exclusão, reboot da VPS ou alteração de credenciais/budget.\n\n'
-        'Inventário, checkpoint e REPORT-INFRA atualizados e conferidos. Commits posteriores ao corte ficam para outro lote.')
+        '**Efeito prático:** melhorias de estabilidade em entrega/continuidade, agendamentos e compactação, preservando as customizações MGS.\n\n'
+        'Inventário, checkpoint e REPORT-INFRA atualizados e conferidos. Commits posteriores ao corte ficam para outro lote.\n\n'
+        '**Observação:** root/default já estava sem Codex antes do corte; não foi alterado. Os três agentes estão autenticados e validados. Disco: '+str(round(state['disk']['used']/state['disk']['total']*100,1))+'% ocupado; '+str(round(state['disk']['free']/2**30,1))+' GiB livres. Backups preservados; limpeza fora do escopo.')
  else:
   body=('**A atualização não foi concluída.**\n\n'+('O runtime anterior foi restabelecido e os gateways afetados voltaram ao Discord. Nenhum histórico ou credencial foi restaurado por cima de dados novos.' if state['status']=='rolled_back_validated' else 'A execução parou no gate de segurança; o estado exato está preservado no checkpoint, sem repetir etapas.')+'\n\nEtapa: **'+state.get('failed_stage','preflight')+'**. Diagnóstico operacional: '+state.get('diagnostic_category','validação não atendida; causa-raiz requer a evidência privada')+'.\n\nNão ampliei o corte, não alterei credenciais e não apaguei backups. Evidência: `execution-state.json` desta atualização.')
  if state.get('origin_message_id'):
-  actual=api('GET','/channels/'+THREAD+'/messages/'+state['origin_message_id']);assert actual.get('content')==body;return
+  actual=api('GET','/channels/'+THREAD+'/messages/'+state['origin_message_id']);assert actual.get('content')==body;state['origin_delivery_verified']=True;save(STATE,state);return
  # Recover a landed prior delivery rather than blindly duplicating an ambiguous POST.
  for message in api('GET','/channels/'+THREAD+'/messages?limit=50'):
   if str(message.get('author',{}).get('id'))==BOT and message.get('content')==body and int(message['id'])>int(state.get('handoff_message_id',AUTHORITY)):
-   state['origin_message_id']=message['id'];save(STATE,state);return
+   state['origin_message_id']=message['id'];save(STATE,state);actual=api('GET','/channels/'+THREAD+'/messages/'+message['id']);assert actual.get('content')==body;state['origin_delivery_verified']=True;save(STATE,state);return
  result=api('POST','/channels/'+THREAD+'/messages',{'content':body,'embeds':[],'components':[],'allowed_mentions':{'parse':[],'users':[],'roles':[]}});state['origin_message_id']=result['id'];save(STATE,state);actual=api('GET','/channels/'+THREAD+'/messages/'+result['id']);assert actual.get('content')==body;state['origin_delivery_verified']=True;save(STATE,state)
+
+def readonly_auth_observation(plan):
+ code='import json;from hermes_cli.auth import get_codex_auth_status;s=get_codex_auth_status();print(json.dumps({k:s.get(k) for k in ["logged_in","auth_mode","needs_refresh","rate_limited","error_code"]}))'
+ result={}
+ for agent in ['root',*ORDER]:
+  env=safe_env(None if agent=='root' else agent)
+  q=run([plan['python'],'-c',code],timeout=30,env=env,cwd=plan['source']);assert q.returncode==0,'read-only auth observer failed '+agent
+  result[agent]=json.loads(q.stdout)
+ return result
 
 def execute(plan,state):
  preflight(plan);audit('hermes_cutover_started',target=plan['target'],port=plan['port'],handoff_message_id=state['handoff_message_id'])
@@ -268,8 +279,14 @@ def execute(plan,state):
   safe_restart(agent,plan,state);real_canary(agent,plan,state);audit('hermes_cutover_agent_validated',agent=agent,pid=state['agents'][agent]['pid'],source=plan['port'],honcho=True)
  for agent in ORDER:
   service=svc(agent);assert service['ActiveState']=='active' and service['SubState']=='running';assert service['MainPID']==state['agents'][agent]['pid'];assert state['agents'][agent].get('canary')
+ for agent in ORDER:
+  for name,digest in plan['profile_config_hashes'][agent].items():assert sha(pathlib.Path('/root/.hermes/profiles',agent,name))==digest,('post-cutover profile drift',agent,name)
  for row in plan['skill_entries']:assert sha(row['path'])==row['after_sha256'],('post-cutover skill drift',row['path'])
  assert len(state['applied_paths'])==len(plan['skill_entries'])
+ state['post_auth_observation']=readonly_auth_observation(plan)
+ assert all(state['post_auth_observation'][agent].get('logged_in') for agent in ORDER),'named profile auth observation failed'
+ usage=shutil.disk_usage('/');state['disk']={'total':usage.total,'used':usage.used,'free':usage.free}
+ save(STATE,state)
  set_state(state,'activated_validated',completed_at=now(),runtime=plan['port'],skills_applied=len(state['applied_paths']),current_agent=None);audit('hermes_cutover_validated',port=plan['port'],profiles=ORDER,skills=196)
 
 def self_test():
@@ -279,13 +296,24 @@ def self_test():
  else:raise AssertionError('negative fixture did not fail')
  print('Synthetic canary parser positive/negative tests PASS; no remote model call')
 
+def close_all(state,plan):
+ for attempt in range(4):
+  try:
+   update_inventory(state,plan);checkpoint(state,plan);close_report(state,plan);notify_origin(state,plan);audit('hermes_cutover_closed',status=state['status'],origin_message_id=state.get('origin_message_id'));state['closure_complete']=True;save(STATE,state);return
+  except Exception:
+   state['closure_error']=traceback.format_exc();state['closure_attempts']=attempt+1;save(STATE,state)
+   if attempt==3:raise
+   time.sleep(6)
+
 def main():
  os.umask(0o077);a=argparse.ArgumentParser();a.add_argument('--preflight',action='store_true');a.add_argument('--self-test',action='store_true');a.add_argument('--wait-for-handoff',action='store_true');args=a.parse_args();SCRATCH.mkdir(parents=True,exist_ok=True);(SCRATCH/'tmp').mkdir(exist_ok=True)
  if args.self_test:self_test();return 0
  plan=load_plan()
  if not args.wait_for_handoff:print(json.dumps(preflight(plan)));return 0
  lock=(M/'data/hermes-activation-1567354570823172209.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);state=current_state()
- if state.get('status') in {'activated_validated','rolled_back_validated'}:return 0
+ if state.get('status') in {'activated_validated','rolled_back_validated'}:
+  if not state.get('closure_complete'):close_all(state,plan)
+  return 0 if state['status']=='activated_validated' else 1
  try:
   preflight(plan);wait_handoff(plan,state);execute(plan,state)
  except Exception as error:
@@ -294,8 +322,6 @@ def main():
    try:rollback(plan,state)
    except Exception:state['rollback_error']=traceback.format_exc();set_state(state,'blocked_rollback_incomplete')
   else:set_state(state,'blocked_before_any_gateway_change')
- try:
-  update_inventory(state,plan);checkpoint(state,plan);close_report(state,plan);notify_origin(state,plan);audit('hermes_cutover_closed',status=state['status'],origin_message_id=state.get('origin_message_id'))
- except Exception:state['closure_error']=traceback.format_exc();save(STATE,state);raise
+ close_all(state,plan)
  return 0 if state['status']=='activated_validated' else 1
 if __name__=='__main__':sys.exit(main())
