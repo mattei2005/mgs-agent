@@ -3303,6 +3303,16 @@
     },
     {
       "agent": "zeus",
+      "id": "STOCK-LABEL-02-BOLSAS-20261104",
+      "next_step": "Nome02-BOLSASdivergedocatalogoNV006;atalhoID1dpKef3Zjr5fz2Xgm8lQaDdsiF8vudtWM,target,roots,properties,2providersfullsizeMD5SHA256e3controlesnativosverificados.Pedirapenasconciliacaoexatadestenovonome;autorianaocomprovada.Confirmacao1567388545205801030limitadaaos3anteriores,naoestendida.Quatroincidentesancestryanterioresseparados.SemwriteDrive,codigo,config,agenda.",
+      "objective": "Recuperar leitura do atalho 02 - BOLSAS sem alterar midia, IDs ou reservas",
+      "source": "/root/.hermes/profiles/zeus/artifacts/stock-shortcut-02-bolsas-20261104/native-verification.json",
+      "state": "awaiting_specific_label_reconciliation_decision",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-04T06:00:39+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "STOCK-LABEL-1567008281648693330",
       "next_step": "Nome03-BABYTEESpreservado;catalogo/IDs/bytes/reserva/campanhaintactos;provaSA1QxEPE9gdeJGcDL0Kx2uqm7rwrYsju3sN;jobexato2assetsfullstreams+consumerPASS;monitorcanonicoOKblocked[];35testes;skill/mirroriguais;inventario/audit/REPORT1567011350352363601verificados.Nenhumpedidohumano.",
       "objective": "Conciliar somente nome do atalho Baby Tees aprovado por Rodolfo, sem mudar midia/reserva/campanha.",
@@ -8526,5 +8536,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T05:50:35+00:00"
+  "updated_at": "2026-11-04T06:00:39+00:00"
 }
