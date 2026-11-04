@@ -185,6 +185,15 @@ If the agent proposes the cutover, obtain authorization before writing productio
    - rollback.
 8. Touch the second site only after the first passes every gate that the environment can exercise; carry any IVT/fill limitation forward explicitly rather than turning network-selection proof into impression proof.
 
+## GAM PMR and pricing-report interpretation
+
+- Read the exact metric label before interpreting an abbreviation. `Programmatic match rate` means programmatic responses served divided by programmatic-eligible requests; it is not a rule-application success rate, a row-count ratio, impression fill rate, or viewability. Official reference: https://developers.google.com/ad-manager/api/reference/v202608/ReportService.Column (`PROGRAMMATIC_MATCH_RATE`).
+- Reconstruct aggregate PMR only from `Programmatic responses served` and `Programmatic eligible ad requests`. Do not average row percentages or weight them by `Ad Exchange total requests` without proof that the denominators coincide; impressions are not responses served.
+- Preserve report filters, currency, period, timezone and exact dimension labels. A `price_rule (price_rule)` column is not interchangeable with GAM `Pricing rule`; establish their mapping before interpreting numeric targeting values as applied floor prices. Order-filtered exports are not whole-site totals.
+- Test `No pricing rule applied` empirically: these rows can have zero, partial or 100% PMR. Their label alone proves neither failure nor a successful fallback sale. A fallback/rebid explanation requires configuration or runtime sequence evidence, not aggregate rows.
+- Creative-speed exports containing only percentages cannot yield volume-weighted country/site totals or significance. Request measured creative counts by the same buckets; pricing-export request counts are a different population and cannot silently supply those weights.
+- When raw exports change a screenshot-based interpretation, explicitly correct the earlier interpretation and distinguish the historical export from current production behavior.
+
 ## Reporting contract
 
 Lead with:
