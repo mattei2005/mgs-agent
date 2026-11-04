@@ -60207,6 +60207,23 @@
         "payments_executed": 0,
         "cron_changes": 0
       }
+    },
+    {
+      "id": "zeus-hermes-preparation-1567354570823172209",
+      "type": "hermes_isolated_preparation",
+      "agent": "zeus",
+      "status": "isolated_preparation_completed_not_activated",
+      "updated_at": "2026-11-04T03:15:58.592365+00:00",
+      "authority_message_id": "1567355643902558321",
+      "thread_id": "1567354570823172209",
+      "path": "/root/mgs-agent/reports/hermes-updates/20261103-preparation-1567354570823172209",
+      "evidence": "/root/mgs-agent/reports/hermes-updates/20261103-preparation-1567354570823172209/final-report.json",
+      "target": "29a61cb7ab509cda0c376bf3860edb87210b0755",
+      "candidate_head": "afbd6248003ab1364b27bedd9275e13eeca3aac5",
+      "production_changed": false,
+      "report_infra_status": "delivered_readback_verified",
+      "report_message_id": "1567376931337277533",
+      "report_channel_id": "1498132022634483894"
     }
   ],
   "profile_skill_references": [
