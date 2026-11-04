@@ -893,6 +893,23 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "ares-mavroa-cpr-updates-1567630190232739864",
+      "agent": "ares",
+      "type": "finite_read_only_campaign_CPR_updates",
+      "authorization_message_id": "1567630190232739864",
+      "account_id": "2852476828464907",
+      "thread_id": "1558147152528674957",
+      "scheduler_job_id": "04cf37ca76ba",
+      "schedule": "16,46 15-23 4 11 *",
+      "timezone": "America/New_York",
+      "expires_at": "2026-11-05T00:00:00-05:00",
+      "campaign_numbers": ["033", "034", "035"],
+      "runner": "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261104.py",
+      "wrapper": "/root/.hermes/profiles/ares/scripts/shein-g004-mavroa-cpr-updates-20261104.sh",
+      "manifest": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1567630190232739864/manifest.json",
+      "validation": "22 offline tests PASS; live dry-run and initial exact GET delivery; finite18slots; scheduler readback and global pre/post collision audits PASS; no campaign writes"
+    },
+    {
       "agent": "zeus",
       "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261103T0802/closure-current.json",
       "id": "meta-manual-payments-refresh-20261103-0802",
