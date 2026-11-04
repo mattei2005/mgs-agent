@@ -4624,12 +4624,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-ACTIVATE-1567354570823172209",
-      "next_step": "Iniciar executor systemd externo que aguarda readback do handoff;validar owner/estado;entregar handoff. Sem ação de Rodolfo.",
-      "objective": "Ativar corte29a61cb7/afbd6248 e196skills;Ares→Atena→Zeus com gates por agente e callback externo",
+      "next_step": "Owner mgs-hermes-activation-1567354570823172209.service aguarda entrega exata do handoff; executa sequência, canários, rollback e callback sem nova ação humana. Ler execution-state.json antes de qualquer retomada.",
+      "objective": "Ativar corte29a61cb7/afbd6248 e196skills;Ares→Atena→Zeus",
       "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-plan.json;execution-state.json;REPORT:1567406158103183461;authority:1567390752403755019",
-      "state": "all_gates_pass_ready_for_handoff_gated_external_dispatch",
+      "state": "external_executor_scheduled_waiting_for_delivered_handoff",
       "thread_id": "1567354570823172209",
-      "updated_at": "2026-11-04T05:13:23+00:00"
+      "updated_at": "2026-11-04T05:14:13+00:00"
     },
     {
       "agent": "zeus",
@@ -8526,5 +8526,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T05:13:23+00:00"
+  "updated_at": "2026-11-04T05:14:13+00:00"
 }
