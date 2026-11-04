@@ -79,6 +79,8 @@ def verify(d,meta,asset,job=None):
   require(str(before.get(native))==str(asset.get(key)) and meta.get(native)==before.get(native),'FLAT_SOURCE_FROZEN_BYTES:'+native)
  require(before.get('parents')==[asset['sourceParentId']] and meta.get('parents')==after.get('parents') and meta.get('trashed') is False and not meta.get('driveId') and any(x.get('emailAddress')==b.ACCOUNT for x in meta.get('owners',[])),'FLAT_SOURCE_NATIVE_IDENTITY')
  require(not any(x.get('type') in ['anyone','domain'] for x in meta.get('permissions',[])),'FLAT_SOURCE_PUBLIC')
- require(d.relative_parent(meta['parents'][0],snapshot['processing_destination_id'])==asset['relativeParent'],'FLAT_SOURCE_NATIVE_ANCESTRY')
+ if d.relative_parent(meta['parents'][0],snapshot['processing_destination_id'])!=asset['relativeParent']:
+  import mgs_archive_source_names as source_names
+  require(source_names.verify(d,meta,asset,job,snapshot),'FLAT_SOURCE_NATIVE_ANCESTRY')
  require(str(meta.get('version','')).isdigit() and int(meta['version'])>=int(before['version']),'FLAT_SOURCE_VERSION')
  return True
