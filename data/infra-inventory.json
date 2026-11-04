@@ -60184,6 +60184,29 @@
         "reduction_percent": 74.95,
         "same_batch_sources": 4
       }
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261103-2102",
+      "type": "authorized_recurring_financial_snapshot",
+      "agent": "zeus",
+      "status": "partial_metrics_validated_pc1_meta_2fa_required",
+      "updated_at": "2026-11-03T21:08:57.894490-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261103T2102/closure-current.json",
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 4,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "invoice_period": "2026-10-01",
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
