@@ -7,15 +7,18 @@ import ares_archive_bridge as b
 AUTHORITY='1567427715030716417'
 HOME=b.DATA/('source-ancestry-name-'+AUTHORITY)
 PROOF_SHA256='f8ad6a2ef6d8914579d5c6969b8454126b8f25f921d487211fd54ffafc82ab96'
+REMAINING_PROOF_SHA256='4612911a903d2888689bc09e0c0e82030ca38972bcf9608913704c4e6ffdeda4'
 def sha(value):return hashlib.sha256(b.canonical(value)).hexdigest()
 def require(ok,reason):
  if not ok:raise b.ArchiveError(reason)
-def load():
- binding=b.read_json(HOME/'binding.json',{})
+def load(home=None,expected_sha256=None):
+ home=HOME if home is None else home
+ expected_sha256=PROOF_SHA256 if expected_sha256 is None else expected_sha256
+ binding=b.read_json(home/'binding.json',{})
  if not binding:return None,None
- require(binding.get('schema')=='mgs.archive.source.ancestry.name.binding.v1' and binding.get('authority_message_id')==AUTHORITY and binding.get('phase')=='active' and binding.get('proof_sha256')==PROOF_SHA256,'SOURCE_NAMES_BINDING')
- proof=b.read_json(HOME/'native-proof.json',{})
- require(sha(proof)==PROOF_SHA256 and proof.get('schema')=='mgs.archive.source.ancestry.name.proof.v1' and proof.get('authority_message_id')==AUTHORITY and proof.get('native_verified') is True and proof.get('author_discord_id')=='344196393512075265','SOURCE_NAMES_LOCAL_PROOF')
+ require(binding.get('schema')=='mgs.archive.source.ancestry.name.binding.v1' and binding.get('authority_message_id')==AUTHORITY and binding.get('phase')=='active' and binding.get('proof_sha256')==expected_sha256,'SOURCE_NAMES_BINDING')
+ proof=b.read_json(home/'native-proof.json',{})
+ require(sha(proof)==expected_sha256 and proof.get('schema')=='mgs.archive.source.ancestry.name.proof.v1' and proof.get('authority_message_id')==AUTHORITY and proof.get('native_verified') is True and proof.get('author_discord_id')=='344196393512075265','SOURCE_NAMES_LOCAL_PROOF')
  return proof,binding
 
 def verify(d,meta,asset,job,snapshot):
@@ -23,6 +26,12 @@ def verify(d,meta,asset,job,snapshot):
  if proof is None:return False
  if binding is None:raise b.ArchiveError('SOURCE_NAMES_BINDING_MISSING')
  rec=proof.get('records',{}).get(asset.get('sourceId'))
+ if rec is None:
+  # Separate immutable proof for remaining members of the SAME frozen sweep.
+  # Preserve the original pin/records; unknown sources still fail closed.
+  proof,binding=load(HOME/'remaining-frozen-sources',REMAINING_PROOF_SHA256)
+  if proof is None:return False
+  rec=proof.get('records',{}).get(asset.get('sourceId'))
  if rec is None:return False
  require(job is not None and meta.get('id')==asset.get('sourceId')==rec.get('source_id') and meta.get('parents')==[rec.get('source_parent')],'SOURCE_NAMES_SOURCE_IDENTITY')
  require(job.get('jobId')==rec.get('job_id') and sha(job)==rec.get('job_sha256') and sha(asset)==rec.get('asset_sha256'),'SOURCE_NAMES_FROZEN_JOB')
