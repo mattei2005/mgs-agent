@@ -109,6 +109,14 @@ Se o guardrail bloquear por reiniciar gateways/matar sessões, não tentar burla
 - A sincronização bundled pode acontecer durante a importação antes da chamada explícita de `sync_skills`. Meça arquivos adicionados/alterados contra o backup inicial, não apenas os contadores da segunda chamada. Ignore `__pycache__` nas comparações de fonte; preserve recursos locais extras. Valide o Google legado por rc=64 nos bridges aposentados, mas o `setup.py` canônico deve retornar rc=0 com `primary=service_account`.
 - Audite instruções de skills stock antes do rollout: uma sugestão para dividir/reformular comando a fim de evadir bloqueio de segurança deve ser corrigida para parar e seguir a rota autorizada. Autenticação em endpoint oficial, parsing de JSON e exemplos de instalação são achados de scanner que exigem contexto, não prova automática de exfiltração.
 
+### Launcher PM nativo e corte externo de múltiplos profiles
+
+- Resolva checkout, launcher, Python operacional e Python de testes separadamente pelo resolver canônico; um launcher PM não implica `.venv` dentro do checkout, nem pytest no ambiente operacional. Valide o guard contra o runtime novo e contra o legado antes de promover helpers compartilhados.
+- No finalizador, entre explicitamente no checkout validado antes de executar `python -c` com imports do core. O ambiente PM pode conter as dependências sem instalar o checkout como pacote editável; funcionar com o cwd da preparação não prova funcionamento em um serviço systemd iniciado de `/`.
+- Vincule um manifesto de sincronização à lista integral aprovada de paths, ações e hashes antes/depois, não apenas ao hash de um arquivo de referência ou ao total. Registre a intenção de cada escrita antes da troca atômica e mantenha rollback idempotente; arquivos novos podem ser movidos para armazenamento protegido sem exclusão, enquanto arquivos substituídos recuperam os bytes preservados.
+- Para reiniciar o próprio agente, arme o executor externo somente após validar código, configuração, recovery set e callback. Exija readback da mensagem final de handoff no canal e autor exatos antes da primeira parada. Execute um agente por vez, com readiness e canário real antes do seguinte; preservar processos antigos até a vez de cada um não significa que já carregam o código novo.
+- O callback deve ter ID e estado duráveis, readback do destino exato e retry idempotente de publicação. Uma entrega incerta exige reconciliar a mensagem já publicada, não repetir efeitos operacionais. Em rollback, preserve conversas novas e refreshes OAuth; não restaure bancos ou autenticação cegamente quando o esquema já for comprovadamente compatível.
+
 ### Validação pós-update obrigatória
 
 When Rodolfo says the backup/update is already done, stop recommending an update window and switch directly to post-update verification. See `references/hermes-v15-post-update-validation-2026-05-28.md` for the v15 validation evidence shape and path-migration pitfall.
