@@ -8,26 +8,15 @@ set -euo pipefail
 BASE="${BASE:-/root/mgs-agent}"
 HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
 resolve_active_hermes_repo() {
-  local launcher shebang python_path candidate
-  launcher="$(readlink -f "$HERMES_BIN")"
-  [[ -f "$launcher" ]] || return 1
-  shebang="$(head -n 1 "$launcher")"
-  python_path="${shebang#\#!}"
-  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" ]] || return 1
-  [[ -x "$candidate/.venv/bin/python" || -x "$candidate/venv/bin/python" ]] || return 1
-  printf '%s\n' "$candidate"
+  python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field repo
 }
 REPO="${REPO:-$(resolve_active_hermes_repo)}"
 resolve_repo_python() {
-  local candidate
-  for candidate in "$REPO/.venv/bin/python" "$REPO/venv/bin/python"; do
-    if [[ -x "$candidate" ]]; then
-      printf '%s\n' "$candidate"
-      return 0
-    fi
-  done
-  command -v python3
+  if [[ -x "${PYBIN:-}" ]]; then
+    printf '%s\n' "$PYBIN"
+  else
+    python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field python
+  fi
 }
 PATCH_DIR="$BASE/patches/hermes"
 ENSURE_SCRIPT="$BASE/scripts/ensure-hermes-mgs-patches.sh"

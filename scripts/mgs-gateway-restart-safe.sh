@@ -18,28 +18,14 @@ DELAY_SECONDS=5
 EXTRA_SNAPSHOT_MANIFEST="${MGS_GATEWAY_RESTART_EXTRA_SNAPSHOT_MANIFEST:-}"
 
 resolve_active_hermes_repo() {
-  local launcher shebang python_path candidate
-  launcher="$(readlink -f "$HERMES_BIN")"
-  [[ -f "$launcher" ]] || return 1
-  shebang="$(head -n 1 "$launcher")"
-  python_path="${shebang#\#!}"
-  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" ]] || return 1
-  [[ -x "$candidate/venv/bin/python" || -x "$candidate/.venv/bin/python" ]] || return 1
-  printf '%s\n' "$candidate"
+  python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field repo
 }
 
 ACTIVE_LAUNCHER="${MGS_GATEWAY_RESTART_EXPECTED_LAUNCHER:-$(readlink -f "$HERMES_BIN")}" 
 [[ -f "$ACTIVE_LAUNCHER" ]] || { echo "Expected launcher missing" >&2; exit 2; }
 HERMES_REPO="${HERMES_REPO:-$(resolve_active_hermes_repo)}"
-if [[ -x "$HERMES_REPO/venv/bin/python" ]]; then
-  HERMES_PY="$HERMES_REPO/venv/bin/python"
-elif [[ -x "$HERMES_REPO/.venv/bin/python" ]]; then
-  HERMES_PY="$HERMES_REPO/.venv/bin/python"
-else
-  echo "Hermes Python runtime not found under $HERMES_REPO" >&2
-  exit 1
-fi
+HERMES_PY="$(python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$ACTIVE_LAUNCHER" --field python)"
+[[ -x "$HERMES_PY" ]] || { echo "Selected Hermes Python is missing" >&2; exit 2; }
 
 usage() {
   cat <<'USAGE'

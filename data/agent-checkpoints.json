@@ -4624,12 +4624,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-ACTIVATE-1567354570823172209",
-      "next_step": "Revalidar o manifesto congelado e preparar instalação permanente inativa e compatibilidade PM; sem seleção do launcher antes dos gates",
+      "next_step": "Validar configuração/schema em cópias;revalidar backup/drift;preparar executor ecallback,gate de handoffDiscord;somente depois agendar corte externo",
       "objective": "Ativar corte29a61cb7/portafbd6248 e196escritas de skills confirmados por Rodolfo;Ares→Atena→Zeus;sem exclusão/credencial/sistema",
-      "source": "discord:1567354570823172209/message:1567390752403755019;plan:/root/mgs-agent/reports/hermes-updates/20261103-phase4-1567354570823172209/activation-plan.json",
-      "state": "authorized_critical_confirmation1567390752403755019_preflight",
+      "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/permanent-installation.json;helper-promotion.json;authority:1567390752403755019",
+      "state": "permanent_inactive_install_ready_helpers_promoted_both_runtime_guards_pass",
       "thread_id": "1567354570823172209",
-      "updated_at": "2026-11-04T04:11:48+00:00"
+      "updated_at": "2026-11-04T04:40:37+00:00"
     },
     {
       "agent": "zeus",
@@ -8526,5 +8526,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T04:11:48+00:00"
+  "updated_at": "2026-11-04T04:40:37+00:00"
 }

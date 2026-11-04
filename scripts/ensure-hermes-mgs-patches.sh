@@ -4,15 +4,7 @@ set -euo pipefail
 BASE="${BASE:-/root/mgs-agent}"
 HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
 resolve_active_hermes_repo() {
-  local launcher shebang python_path candidate
-  launcher="$(readlink -f "$HERMES_BIN")"
-  [[ -f "$launcher" ]] || return 1
-  shebang="$(head -n 1 "$launcher")"
-  python_path="${shebang#\#!}"
-  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" ]] || return 1
-  [[ -x "$candidate/venv/bin/python" || -x "$candidate/.venv/bin/python" ]] || return 1
-  printf '%s\n' "$candidate"
+  python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field repo
 }
 REPO="${REPO:-$(resolve_active_hermes_repo)}"
 PATCH_DIR="$BASE/patches/hermes"
@@ -399,7 +391,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # Owner-confirmed main cutoff 7cc3fb8c: complete 101-path MGS port with
 # byte-identical clean-target reproduction, reverse-check and broad baseline.
 # Retained older runtimes remain read-only guardable through prior artifacts.
-PRIMARY_PATCH="mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
+PRIMARY_PATCH="mgs-runtime-customizations-2026-11-03-main-29a61cb7.patch"
 PRIMARY_PATCH_READY=0
 primary_patch_present() {
   local candidate_patch="${1:-$PRIMARY_PATCH}"
@@ -410,6 +402,9 @@ primary_patch_present() {
   # one precisely attributed test-file overlap. No general drift bypass.
   git -C "$REPO" apply --reverse --check "$PATCH_DIR/mgs-browser-budget-hygiene-2026-10-02.patch" >/dev/null 2>&1 \
     && git -C "$REPO" apply --reverse --check --exclude=tests/tools/test_checkpoint_manager.py "$PATCH_DIR/$candidate_patch" >/dev/null 2>&1
+}
+feature_base_present() {
+  primary_patch_present || primary_patch_present "mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
 }
 if primary_patch_present; then
   log "primary patch already applied: $PRIMARY_PATCH"
@@ -426,6 +421,7 @@ fi
 # Every retained rollback runtime must remain guardable without trying to apply
 # an unrelated historical patch. Newest retained surface wins.
 PRIOR_PRIMARY_PATCHES=(
+  "mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
   "mgs-runtime-customizations-2026-10-12-main-7cc3fb8c.patch"
   "mgs-runtime-customizations-2026-10-02-main-a510d6c6.patch"
   "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"
@@ -517,15 +513,20 @@ fi
 # Post-delivery cleanup must precede a queued turn's generation handoff.
 # Apply only on the current consolidated base, preserving rollback runtimes.
 PROGRESS_CLEANUP_TESTS=()
-if primary_patch_present; then
-  apply_patch_if_needed "discord-progress-cleanup-before-drain-2026-10-29.patch"
+if feature_base_present; then
+  python3 - "$PATCH_DIR/current-runtime-manifest.json" <<'PY'
+import json, sys
+m = json.load(open(sys.argv[1], encoding="utf-8"))
+name = "discord-progress-cleanup-before-drain-2026-10-29.patch"
+assert name in m["absorbed_supplements"] and name not in m["supplemental_patches"]
+PY
   PROGRESS_CLEANUP_TESTS=("$REPO/tests/gateway/test_progress_cleanup_drain_race_mgs.py")
 fi
 
 # Codex refresh integrity: current consolidated runtime only. Keep retained
 # rollback trees untouched; absence/drift on the active base fails closed.
 CODEX_INTEGRITY_TESTS=()
-if primary_patch_present; then
+if feature_base_present; then
   # The validated new composite owns these changes. Replaying the old
   # supplement is unsafe after upstream/test-harness relocation; require
   # exact guard/manifest ownership, then the behavioral integrity tests.
@@ -542,9 +543,9 @@ fi
 # Performance supplement belongs to the current consolidated base; retained
 # rollback runtimes remain guardable without forcing a new feature onto them.
 MCP_COMPAT_TESTS=()
-if primary_patch_present || primary_patch_present "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"; then
+if feature_base_present || primary_patch_present "mgs-runtime-customizations-2026-09-28-main-ad2d4822.patch"; then
   # The current manifest consolidates both features; supplements only repair the retained base.
-  if ! primary_patch_present; then
+  if ! feature_base_present; then
     apply_patch_if_needed "mgs-browser-budget-hygiene-2026-10-02.patch"
     apply_patch_if_needed "mgs-mcp-sdk-readonly-2026-10-02.patch"
   fi
@@ -835,8 +836,10 @@ elif [[ -x "$REPO/venv/bin/python" ]]; then
   PYBIN="$REPO/venv/bin/python"
 elif [[ -x "$REPO/.venv/bin/python" ]]; then
   PYBIN="$REPO/.venv/bin/python"
+elif [[ -x "$REPO/.hermes/bin/hermes" ]]; then
+  PYBIN="$(python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$REPO/.hermes/bin/hermes" --field python)"
 else
-  PYBIN="python3"
+  fail "No validated dependency interpreter for $REPO"
 fi
 "$PYBIN" -m py_compile \
   "$REPO/plugins/platforms/discord/adapter.py" \
@@ -874,11 +877,22 @@ fi
 # Force the validated checkout venv instead of provisioning a PM testenv during
 # a production watchdog run, and disable flake retries so any first failure is
 # still observable.
+MGS_GUARD_TEST_PYTHON="${HERMES_PATCH_TEST_PYTHON:-$PYBIN}"
+if ! "$MGS_GUARD_TEST_PYTHON" -c "import pytest" >/dev/null 2>&1; then
+  MGS_GUARD_TEST_PYTHON="$(python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field test_python)"
+fi
+[[ -x "$MGS_GUARD_TEST_PYTHON" ]] || fail "No prebuilt test environment; refusing watchdog-side dependency installation"
+MGS_TEST_RUNNER_WRAPPER="${MGS_TEST_RUNNER_WRAPPER:-$BASE/scripts/mgs-native-test-runner.py}"
+[[ -f "$MGS_TEST_RUNNER_WRAPPER" ]] || fail "Native isolated test wrapper missing"
+MGS_GUARD_TEST_COMMAND=("$REPO/scripts/run_tests.sh")
+if [[ -n "${MGS_TEST_RUNNER_WRAPPER:-}" ]]; then
+  MGS_GUARD_TEST_COMMAND=("$MGS_GUARD_TEST_PYTHON" "$MGS_TEST_RUNNER_WRAPPER" "$REPO" -j 2 --file-retries 0)
+fi
 (cd "$REPO" && env -u __HERMES_ACTIVATED -u __HERMES_TEST_PYTHON \
-  HERMES_PYTHON="$PYBIN" \
+  HERMES_PYTHON="$MGS_GUARD_TEST_PYTHON" \
   HERMES_TEST_WORKERS="${HERMES_PATCH_TEST_WORKERS:-4}" \
   HERMES_TEST_FILE_RETRIES=0 \
-  "$REPO/scripts/run_tests.sh" -q \
+  "${MGS_GUARD_TEST_COMMAND[@]}" -q \
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \

@@ -12,13 +12,7 @@ elif [[ -n "${1:-}" ]]; then
 fi
 
 resolve_repo() {
-  local launcher python_path candidate
-  launcher="$(readlink -f "$HERMES_BIN")"
-  [[ -f "$launcher" ]] || return 1
-  python_path="$(sed -n '1s/^#!//p' "$launcher")"
-  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" ]] || return 1
-  printf '%s\n' "$candidate"
+  python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field repo
 }
 
 if [[ -z "$REPO" ]]; then
@@ -33,7 +27,19 @@ fi
 }
 
 PATCH_DIR="${PATCH_DIR:-/root/mgs-agent/patches/hermes}"
+CANONICAL_PATCHES=()
+if [[ -f "$PATCH_DIR/current-runtime-manifest.json" ]]; then
+  mapfile -t CANONICAL_PATCHES < <(python3 - "$PATCH_DIR/current-runtime-manifest.json" <<'PY'
+import json, sys
+m = json.load(open(sys.argv[1]))
+for name in [m["primary_patch"], *m.get("supplemental_patches", [])]:
+    print(name)
+PY
+  )
+fi
 PATCHES=(
+  "${CANONICAL_PATCHES[@]/#/$PATCH_DIR/}"
+  "$PATCH_DIR/mgs-runtime-customizations-2026-10-21-main-4d043038.patch"
   "$PATCH_DIR/mgs-runtime-customizations-2026-08-11-main-c0106e50.patch"
   "$PATCH_DIR/mgs-runtime-customizations-2026-08-11-v0200.patch"
   "$PATCH_DIR/mgs-runtime-customizations-2026-08-02-v0191.patch"

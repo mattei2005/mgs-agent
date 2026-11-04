@@ -3,20 +3,15 @@ set -euo pipefail
 # Candidate-only successor: fresh interpreter per module; retained scratch.
 HERMES_BIN="${HERMES_BIN:-/root/.local/bin/hermes}"
 resolve_active_hermes_repo() {
-  local launcher shebang python_path candidate
-  launcher="$(readlink -f "$HERMES_BIN")"
-  [[ -f "$launcher" ]] || return 1
-  IFS= read -r shebang < "$launcher"
-  python_path="${shebang#\#!}"
-  candidate="$(dirname "$(dirname "$(dirname "$python_path")")")"
-  [[ -f "$candidate/gateway/run.py" ]] || return 1
-  [[ -x "$candidate/.venv/bin/python" || -x "$candidate/venv/bin/python" ]] || return 1
-  printf '%s\n' "$candidate"
+  python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field repo
 }
 REPO="${REPO:-$(resolve_active_hermes_repo)}"
-PYBIN="${PYBIN:-$REPO/.venv/bin/python}"
-[[ -x "$PYBIN" ]] || PYBIN="$REPO/venv/bin/python"
+PYBIN="${PYBIN:-$(python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field python)}"
 [[ -x "$PYBIN" ]] || { printf 'missing repo interpreter\n' >&2; exit 2; }
+if ! "$PYBIN" -c "import pytest" >/dev/null 2>&1; then
+  PYBIN="$(python3 "${MGS_RUNTIME_RESOLVER:-/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py}" --launcher "$HERMES_BIN" --field test_python)"
+fi
+[[ -x "$PYBIN" ]] || { printf 'prebuilt test environment missing\n' >&2; exit 2; }
 TMPDIR="${TMPDIR:-/root/.hermes/profiles/zeus/cache/scratch}"
 TEST_ROOT="$(mktemp -d "$TMPDIR/hermes-post-upstream-regression-XXXXXX")"
 mkdir -p "$TEST_ROOT/os-home" "$TEST_ROOT/temp"
@@ -29,7 +24,7 @@ mkdir -p "$(dirname "$LOG")"
 cd "$REPO"
 printf 'START post-upstream regression; scratch retained: %s\n' "$TEST_ROOT" | tee "$LOG"
 HERMES_PYTHON="$PYBIN" HERMES_TEST_WORKERS="${HERMES_PATCH_TEST_WORKERS:-2}" HERMES_TEST_FILE_TIMEOUT=180 HERMES_TEST_FILE_RETRIES=0 \
-  bash "$REPO/scripts/run_tests.sh" -q \
+  "$PYBIN" "${MGS_TEST_RUNNER_WRAPPER:-/root/mgs-agent/scripts/mgs-native-test-runner.py}" "$REPO" -q \
   tests/gateway/test_delivery_ledger.py \
   tests/gateway/test_delivery_ledger_producer.py \
   tests/gateway/test_turn_lease.py \
