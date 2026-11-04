@@ -100,6 +100,12 @@ When Rodolfo asks whether Ares is following the storage structure, audit the exa
 
 Report treatment, permanent archive/stock availability, delivery to the requester and temporary-source retirement as separate results. When Rodolfo asks to accompany all steps, follow the entire frozen request through verified delivery or a concrete decision gate; one technical batch, a successful cron or stale follower output is not completion. An empty upload root, a `complete` flag or a verified archive mapping does not prove staging cleanup; read back the exact original and treated staging IDs before claiming no copies remain. Preserve reservations and eligibility, and do not reprocess or recopy a successfully delivered batch to resolve a reporting or validator defect. Use the ordered read-only audit recipe in `references/private-vps-owner-connector.md`.
 
+### Archive performance and runtime-change coordination
+
+- Diagnose slow archive delivery with phase timings and read-call counts before attributing it to Google or Hermes. Keep the approved batch size, single writer and every integrity/provenance check; optimize independent reads rather than remove verification. Follow **Archive verification performance** in `references/private-vps-owner-connector.md`.
+- Separate a measured verifier speedup from end-to-end request throughput. Compare the same native IDs, full streams and validation outputs before/after; do not extrapolate a phase benchmark into a delivery-time promise.
+- When Rodolfo explicitly asks to wait for an update running in another thread, stop further optimization work immediately. Disclose already-applied changes, preserve their exact hashes/rollback and a paused checkpoint linked to the dependency thread, and limit remaining activity to pause bookkeeping. Resume only after verifying that dependency's completion and revalidating the changed consumers; do not restart, update or roll back the other workstream by implication.
+
 ### Registered manager destinations and post-campaign usage
 
 For the registered READY/Exclusivos/Usados layout, exact manager-folder delivery, same-ID post-use moves, provisioning and acceptance, load `references/manager-storage-standard.md`.
