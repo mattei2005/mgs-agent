@@ -605,7 +605,9 @@
     734381,
     734411,
     734435,
-    734442
+    734442,
+    734943,
+    734965
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1190,6 +1192,38 @@
         690460
       ],
       "opened_at": "2026-09-04T16:27:13-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|escalatepower|29|1539": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-04T00:09:30.000Z",
+        "domain": "escalatepower",
+        "notification_id": 734965,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 12,
+          "Broadcast": 32,
+          "Ready": 8
+        },
+        "pages": 52,
+        "segurador_id": "1539",
+        "segurador_name": "André De Souza",
+        "source": "canary",
+        "user_email": "disparosescalatepower@gmail.com",
+        "user_id": "29",
+        "user_name": "Disparos Escalatepower US-CC-EN"
+      },
+      "last_sent_at": "2026-11-03T19:12:19-05:00",
+      "message_ids": [
+        "1567330620047228939"
+      ],
+      "notification_ids": [
+        734965
+      ],
+      "opened_at": "2026-11-03T19:12:19-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -3442,9 +3476,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-02T20:06:55.000Z",
+        "created_at": "2026-11-04T00:06:40.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 733455,
+        "notification_id": 734943,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -3492,7 +3526,8 @@
         729891,
         731163,
         732167,
-        733455
+        733455,
+        734943
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -4396,29 +4431,22 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-03T18:57:13-05:00",
+  "last_check": "2026-11-03T19:12:19-05:00",
   "last_delivery": {
-    "at": "2026-11-03T15:12:20-05:00",
+    "at": "2026-11-03T19:12:19-05:00",
     "cursor_ids": [
-      734274,
-      734295,
-      734316,
-      734334,
-      734357,
-      734381,
-      734411,
-      734435,
-      734442
+      734943,
+      734965
     ],
     "message_ids": [
-      "1567270221230637097"
+      "1567330620047228939"
     ],
     "notification_ids": [
-      734334
+      734965
     ]
   },
   "last_error": null,
-  "last_seen_id": 734442,
+  "last_seen_id": 734965,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
