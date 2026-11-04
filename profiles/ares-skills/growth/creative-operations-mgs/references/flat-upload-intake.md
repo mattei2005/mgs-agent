@@ -31,6 +31,14 @@ O registro alimenta o **mesmo** job `528c5710269d`. Não lançar outro executor 
 
 Se uma execução manual já era dona das fontes, continuar pelo manifesto original e sua conclusão canônica, sem cadastrar outro request para os mesmos IDs. Não roubar claim, resetar o batch ou usar outro processo apenas para acelerar.
 
+### Pedidos sobrepostos, locks e consulta de progresso
+
+1. Antes de registrar outro envio, ler `flat-intake-requests.json`, os claims de `intake-state.json` e o checkpoint/manifesto anterior. Comparar IDs e hashes, não títulos de threads ou contagens. Excluir da descoberta tanto fontes já vinculadas a requests quanto pendências de manifestos anteriores: um arquivo ausente do registry flat não é necessariamente novo. Usar horário e nome apenas como evidência auxiliar para delimitar um conjunto inequívoco, seguido do gate de estabilidade.
+2. Reduzir a leitura ao necessário: projetar `id`, `name`, MIME, tamanho, checksums, versão, horário e somente as capabilities usadas. Persistir o conjunto e exibir resumo/contagem; não despejar todas as capabilities ou todo o registry a cada poll, pois isso encobre os IDs relevantes sem melhorar a validação.
+3. Registrar um conjunto realmente novo pelo mesmo helper, sem alterar o request anterior. Para consultar progresso enquanto outra execução trabalha, ler os requests, claims e evidências existentes. Não tratar `monitor` como GET inofensivo: ele também chama manutenção e pode produzir o próximo manifesto. Reservá-lo à transição canônica de descoberta/continuação e não iniciá-lo em paralelo apenas para obter status. Se devolver outro `flat_request_id`, não consumir esse batch nesta conversa nem construir manualmente um batch substituto para furar a ordem.
+4. Diante de timeout em `register` ou `complete`, verificar primeiro o processo exato, o request calculado, o claim e os efeitos persistidos. O lock de intake pode permanecer ocupado durante a continuação de arquivo; timeout da observação não comprova falha do pedido. Só repetir o mesmo comando idempotente após reconciliar seu resultado e confirmar que não há a mesma chamada ainda ativa; nunca trocar IDs, owner ou identidade para contornar a espera.
+5. Se houver espera real por outro request, a preparação local não autoriza um writer remoto paralelo. Preservar evidência compacta durável por source ID com caminhos locais, SHA RAW/clean, dimensões, classificação e QA; registrar separadamente que naming, upload, movimento e ACK ainda faltam. Ao obter o batch próprio pelo monitor, revalidar os hashes e reutilizar a preparação válida antes de executar as camadas faltantes. Manter checkpoint resumível; não chamar registro ou scheduler habilitado de conclusão nem prometer continuação automática somente porque o job existe.
+
 ## Tratamento e entrega
 
 ### Continuação mecânica determinística — autorização `1567021305822314609`

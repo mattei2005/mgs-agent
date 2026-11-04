@@ -1323,12 +1323,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1567560486977929350",
-      "next_step": "Classificar e QA local; continuar pelo monitor somente quando retornar request22e5de9edeb67083090fd911be780d03; preservar IDs e reservas",
+      "next_step": "Retomar pelo mesmo monitor/job existente apos lote anterior; aceitar somente batch do request22e5de9edeb67083090fd911be780d03, reusar preparation.json e midia local validada, dedupe/naming,execucao,complete/ACK/stock e auditoria; responder mapa10 e links somente apos request complete. Nao criar writer ou cron paralelo.",
       "objective": "Tratar e arquivar 10 imagens novas SHEIN US EN de Kelly; common READY, RAW e reservas preservados",
-      "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "request 22e5de9edeb67083090fd911be780d03 registrado e relido;10 png 1080x1920 baixados com sha verificado. lane canonica ocupada pelo pedido anterior; nenhum writer paralelo iniciado.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1567560486977929350/preparation.json",
+      "state": "request22e5de9edeb67083090fd911be780d03 registrado e relido;10 png1080x1920 com download/sha,metadata clean=true,pixelsraw=clean e qa visual aprovado. nenhum upload/move/naming/inventario final executado: lane canonica prioriza pedido1567557936228732930 ainda incompleto.10 originais preservados na entrada. preparacao duravel consolidada.",
       "thread_id": "1567560486977929350",
-      "updated_at": "2026-11-04T15:34:44+00:00"
+      "updated_at": "2026-11-04T15:45:41+00:00"
     },
     {
       "agent": "ares",
@@ -8586,5 +8586,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T15:34:44+00:00"
+  "updated_at": "2026-11-04T15:45:41+00:00"
 }
