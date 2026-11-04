@@ -172,9 +172,10 @@ Do not blindly compress every live profile subtree when the runtime update chang
 
 1. Place the archive under the protected backup root with directory mode `0700` and archive/manifest mode `0600`; never print `.env`, auth or credential content.
 2. Build an explicit control-plane allowlist for each active profile: `.env`, `auth.json`, `config.yaml`, `SOUL.md`, profile/Honcho/channel metadata, `cron`, `skills`, `memories`, `state`, `gateway`, `platforms`, `scripts`, `hooks` and profile plugins when present. Preserve bulky browser/model/work/session assets in place or through their own recovery class unless the planned mutation touches them.
-3. Use `tar --warning=no-file-changed --ignore-failed-read` over the explicit existing paths so live socket entries are skipped without widening the archive; a warning is not success by itself.
-4. Require all four gates before cutover: `gzip -t`, a full `tar -tzf`, shell-generated `sha256sum`, and `sha256sum -c` readback. Archive presence or a plausible byte size proves nothing.
-5. If any integrity gate reports truncated gzip or tar EOF, classify the object as an invalid partial, preserve it until a separately confirmed exact deletion manifest, and create a new validated successor. Never use the partial as rollback evidence and never delete it incidentally while retrying the backup.
+3. Enumerate SQLite files recursively inside the control-plane allowlist before archiving, not only top-level `state.db`: cron execution/delivery/notepad ledgers can be nested. Snapshot each live database through SQLite's backup API, require snapshot `PRAGMA integrity_check=ok`, exclude live WAL/SHM companions from tar, and record preserved zero-byte noncanonical files separately. If a valid first archive omitted a nested ledger, preserve it and create a separately validated supplemental archive; freeze both as one recovery set rather than silently claiming complete coverage or rewriting historical checksum evidence.
+4. Use `tar --warning=no-file-changed --ignore-failed-read` over the explicit existing paths so live socket entries are skipped without widening the archive; a warning is not success by itself.
+5. Require all four gates before cutover: `gzip -t`, a full `tar -tzf`, shell-generated `sha256sum`, and `sha256sum -c` readback. Archive presence or a plausible byte size proves nothing.
+6. If any integrity gate reports truncated gzip or tar EOF, classify the object as an invalid partial, preserve it until a separately confirmed exact deletion manifest, and create a new validated successor. Never use the partial as rollback evidence and never delete it incidentally while retrying the backup.
 
 Before deleting an old tar archive, validate every archive that will remain:
 
