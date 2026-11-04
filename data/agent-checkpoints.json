@@ -3393,6 +3393,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-ARCHIVE-SWEEP-1567427715030716417",
+      "next_step": "Congelar escopo registrado, varrer com ledger completo, publicar provas nativas exatas para labels/ancestry, ativar somente escopo verificado, repetir varredura completa sem slice parcial.",
+      "objective": "Varrer atalhos e caminhos registrados e corrigir em conjunto divergencias comprovadas somente de nome; preservar midia,IDs,localizacao,reservas,campanhas",
+      "source": "discord:1562078493498540042:1567427715030716417",
+      "state": "authorized_inventory_freeze",
+      "thread_id": "1562078493498540042",
+      "updated_at": "2026-11-04T06:39:01+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-ARES-40-CAMPAIGNS-STANDARD-BENCHMARK-20260905",
       "next_step": "None. Any future benchmark must use a new request, fresh Meta readback and new thread.",
       "objective": "Concluir rollback do benchmark Ares cancelado",
@@ -8536,5 +8546,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T06:00:39+00:00"
+  "updated_at": "2026-11-04T06:39:01+00:00"
 }
