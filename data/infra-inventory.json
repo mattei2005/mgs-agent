@@ -60757,6 +60757,98 @@
         "source_files": 158,
         "tests": 65
       }
+    },
+    {
+      "id": "wavesbee-waf-and-tech-delegation-1567593717487902802",
+      "type": "cloudflare_waf_and_scoped_authorization",
+      "agent": "zeus",
+      "authority_message_id": "1567593717487902802",
+      "source_thread_id": "1567491996845740093",
+      "zone": "wavesbee.com",
+      "zone_id": "52ac75c01667e42ff754c61696d08090",
+      "ruleset_id": "c0f72a4010be44a2a1403a6753959cbd",
+      "rule_id": "b39e6abb9461472fbafe417839ec49f0",
+      "scope": "Managed Challenge /wp-login.php apex+www; excluded custom login, public pages, XML-RPC, finanzas; delegated similar WAF requests in infra-dev",
+      "rollback_snapshot": "/root/mgs-agent/backups/wavesbee-login-pilot-1567593717487902802/before.json",
+      "status": "applied_validated",
+      "paths": [
+        "/root/mgs-agent/data/authorized-users.json",
+        "/root/.hermes/profiles/zeus/SOUL.md",
+        "/root/mgs-agent/profiles/zeus-soul.md",
+        "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md",
+        "/root/mgs-agent/profiles/zeus-skills/ops/cloudflare-operations/SKILL.md",
+        "/root/mgs-agent/data/knowledge-registry.json",
+        "/root/mgs-agent/data/agent-checkpoints.json"
+      ],
+      "validation": {
+        "api_exact_readback": true,
+        "unrelated_rules_and_bot_management_unchanged": true,
+        "endpoint_checks": 8,
+        "automated_requests_challenged": 2,
+        "excluded_endpoint_statuses_unchanged": 6,
+        "public_browser_home_title": "🐴 pagina inicial - Wavesbee",
+        "public_browser_challenge": false,
+        "custom_login_form": {
+          "http": 200,
+          "tls_verify_result": 0,
+          "remote_ip": "172.67.140.105",
+          "seconds": 1.89708,
+          "has_username_field": true,
+          "has_password_field": true,
+          "has_submit": true,
+          "challenge": false,
+          "transport": "curl IPv4"
+        },
+        "human_challenge_completion": "not tested; no guarantee for every client",
+        "canonical_authorization_readback": "passed",
+        "registry": "superseded prior entry; validate errors=[]",
+        "soul_and_skill_mirrors": "equal",
+        "validation_transport_failure": "one urllib TLS reset before HTTP; safe read-only curl IPv4 retry HTTP 200/form intact; cause of reset unproven",
+        "knowledge_regression": {
+          "passed": 21,
+          "failed": 0
+        }
+      },
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/authorized-users.json",
+          "sha256": "abc34e74dfa15f496efd1361ce5486769fc843e0e39bb09dc6e09a9f35aaa1c9",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/SOUL.md",
+          "sha256": "d2bb3dd68410e89c293517c5fabe1d50c45e3254afea8db5afc733a047d392b8",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-soul.md",
+          "sha256": "d2bb3dd68410e89c293517c5fabe1d50c45e3254afea8db5afc733a047d392b8",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md",
+          "sha256": "3ac6f918e04255d72a5d96c0c631abbd6d4648a8432aa27540e6f14f54d37b10",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/profiles/zeus-skills/ops/cloudflare-operations/SKILL.md",
+          "sha256": "3ac6f918e04255d72a5d96c0c631abbd6d4648a8432aa27540e6f14f54d37b10",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/data/knowledge-registry.json",
+          "sha256": "f4feaa4d5bff20226465bbeb3e1db9b099285dbc059f73fbb4f138d16ef228c4",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        },
+        {
+          "path": "/root/mgs-agent/data/agent-checkpoints.json",
+          "sha256": "6813565ad8e97ff0f347937b651aba18181998140c53ca87e2313c3c5e4bcd37",
+          "captured_at": "2026-11-04T17:44:36.454041+00:00"
+        }
+      ],
+      "updated_at": "2026-11-04T17:44:36.454041+00:00",
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1567595263122477107"
     }
   ],
   "profile_skill_references": [

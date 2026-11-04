@@ -3374,12 +3374,12 @@
     {
       "agent": "zeus",
       "id": "WAVESBEE-LOGIN-PILOT-1567494774678626325",
-      "next_step": "Aplicar PATCH somente regra desativada; validar edge, páginas públicas, login personalizado e finanzas; persistir delegação restrita",
+      "next_step": "Nenhuma escrita pendente; acompanhar piloto somente em novo pedido/monitoramento vigente. Login padrão segue 404 na aplicação; desafio não substitui login personalizado.",
       "objective": "Piloto Managed Challenge somente wp-login.php Wavesbee; delegação WAF confirmada por Rodolfo 1567593717487902802",
-      "source": "data/authorized-users.json",
-      "state": "approval_confirmed_preflight",
+      "source": "backups/wavesbee-login-pilot-1567593717487902802/closure.json",
+      "state": "completed_validated",
       "thread_id": "1567491996845740093",
-      "updated_at": "2026-11-04T17:39:52+00:00"
+      "updated_at": "2026-11-04T17:44:20+00:00"
     },
     {
       "agent": "zeus",
@@ -8596,5 +8596,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T17:39:52+00:00"
+  "updated_at": "2026-11-04T17:44:20+00:00"
 }

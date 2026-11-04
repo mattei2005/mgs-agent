@@ -13224,10 +13224,28 @@
       "kind": "decision",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "ZEUS-INFRA-DEV-FULL-TECH-WAF-1567593717487902802",
+      "title": "Full técnico de santosoliv_dev_br no infra-dev",
+      "updated_at": "2026-11-04T17:42:01+00:00"
+    },
+    {
+      "canonical_key": "zeus.authorization.infra-dev.963808102891798649",
+      "canonical_source": "data/authorized-users.json",
+      "consumers": [
+        "infra-dev",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-11-04T17:42:01+00:00",
+      "id": "ZEUS-INFRA-DEV-FULL-TECH-WAF-1567593717487902802",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Full técnico de santosoliv_dev_br no infra-dev",
-      "updated_at": "2026-11-02T14:10:10+00:00"
+      "title": "Full técnico infra-dev com delegação WAF por site e endpoint",
+      "updated_at": "2026-11-04T17:42:01+00:00"
     },
     {
       "canonical_key": "zeus.web.perplexity_canary",
@@ -16007,5 +16025,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T16:04:59+00:00"
+  "updated_at": "2026-11-04T17:42:01+00:00"
 }

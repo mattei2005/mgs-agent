@@ -63,6 +63,10 @@ Then resolve the item through `op`. Do not print the token. If multiple token-li
 
 ## Authorization and Confirmation Rules
 
+Resolve the current `data/authorized-users.json` before interpreting the CEO-only defaults below. In infra-dev (`1566814313086193795`) and its child threads, Rodolfo's decision `1567593717487902802` delegates to `santosoliv_dev_br` (`963808102891798649`) equivalent site/endpoint-scoped Cloudflare WAF protections, such as the Wavesbee Managed Challenge pilot. His explicit request and scoped confirmation suffice without a new CEO confirmation. Preserve legitimate/public access, a single executor, exact diff, backup/rollback and API/public verification. This exception does not authorize server firewall/Fail2Ban/SSH, credentials/permissions, billing, account-global or indiscriminate portfolio changes, or other Critical Subset operations. The canonical delegation wins over historical blanket escalations in this skill.
+
+For a login challenge pilot, compare an automated request before/after (`cf-mitigated: challenge` proves edge interception) and recheck public pages, the existing custom login, XML-RPC and excluded hosts. A browser challenge is not an allow guarantee for all humans, and passing it does not restore an application route that already returned 404. Say so rather than promising a working default login. Reuse only the explicitly approved disabled rule when the Free-plan rule quota is full; PATCH that single rule and compare every unrelated rule and Bot Management setting by semantic readback. Preserve the rollback snapshot outside ephemeral scratch.
+
 1. **Read-only checks** — token verify, zone list, DNS list, settings read — may run immediately when Rodolfo asks to test/inspect.
 2. **Cache purge** — destructive but low-risk. If Rodolfo says “confirma antes”, do a read-only precheck and wait for explicit confirmation. If Rodolfo directly asks to purge and does not ask for confirmation, purge may proceed, but for multi-site purge prefer one concise precheck confirmation.
 3. **DNS/SSL/WAF/rules/settings changes** — always show the exact intended diff/action and ask for explicit confirmation before applying.
