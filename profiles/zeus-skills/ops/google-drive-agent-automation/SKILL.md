@@ -120,6 +120,8 @@ Before describing any stage as automatic, trace its live configuration consumer 
 
 ### Folder provenance and file-movement attribution
 
+When Rodolfo rejects repeated operation folders, distinguish the routine that creates/preserves entire staging trees per batch from any later numeric rename. Inspect the exact native folders, their parents, maintenance manifests and producer code before defending the repetition as historical preservation. Accept responsibility for the implemented topology where proven; an unknown rename actor does not explain away automation-created repeated trees. A green path/alias reconciliation proves consumer recovery, not compliance with the requested single operational organization. Do not claim duplicated media from repeated folder names or merge/delete trees without exact membership, dependency and authorization checks.
+
 Before asking Rodolfo whether a folder or placement is legitimate, resolve the exact folder ID against the approved layout and native metadata. Separate **who created the folder**, **whether its purpose was approved**, and **who later moved a file into it**; an authorized intake folder can contain an independently unexplained movement. Correlate native properties with the layout manifest, audit and original approval; `lastModifyingUser` identifies the last modifier, not necessarily the creator or movement actor. When evidence establishes Zeus created the folder, state that responsibility directly rather than presenting the folder itself as suspicious. Answer the narrow authorship question first, then identify only the remaining attribution gap. Use the folder-provenance recipe in `references/private-vps-owner-connector.md`.
 
 ### Human console setup and account clarity
