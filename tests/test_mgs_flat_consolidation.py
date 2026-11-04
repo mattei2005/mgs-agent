@@ -140,5 +140,54 @@ class ConsolidationTests(unittest.TestCase):
             with self.assertRaises(c.b.ArchiveError): c.read_proof(self.d, pin)
 
 
+class MaintenanceIntegrationTests(unittest.TestCase):
+    def run_tick(self, apply):
+        import contextlib
+        import tempfile
+        from pathlib import Path
+        import mgs_flat_maintenance as m
+        @contextlib.contextmanager
+        def lease():
+            yield {'claims': {}}
+        @contextlib.contextmanager
+        def queue(**kwargs):
+            yield object()
+        with tempfile.TemporaryDirectory() as td:
+            home = Path(td)
+            receipt = home / 'maintenance' / 'generation' / 'receipt-state.json'
+            receipt.parent.mkdir(parents=True)
+            receipt.write_text('{"status":"verified"}')
+            def read(path, default=None):
+                if path == receipt:
+                    return {'status': 'verified'}
+                if str(path).endswith('result.json'):
+                    return {}
+                return default if default is not None else {}
+            with patch.object(m, 'HOME', home), patch.object(m.f, 'authority'), \
+                 patch.object(m.flat, 'policy', return_value={'active': True}), \
+                 patch.object(m.intake, 'locked_state', lease), \
+                 patch.object(m.b, 'queue_lock', queue), \
+                 patch.object(m.b, 'read_json', side_effect=read), \
+                 patch.object(m.b, 'atomic_json'), patch.object(m.b, 'Drive'), \
+                 patch.object(m.cut, 'inventory', return_value={}), \
+                 patch.object(m.t, 'OwnerDrive') as owner, \
+                 patch.object(c, 'enabled', return_value=True), \
+                 patch.object(c, 'consolidate', return_value={
+                     'generation': 'generation', 'files': 2}) as consolidate:
+                result = m.run(apply)
+                return result, owner.call_count, consolidate.call_count
+
+    def test_dry_run_never_enters_private_consolidation(self):
+        result, owners, writes = self.run_tick(False)
+        self.assertEqual((owners, writes), (0, 0))
+        self.assertFalse(result['apply'])
+
+    def test_existing_lane_retries_one_accepted_generation(self):
+        result, owners, writes = self.run_tick(True)
+        self.assertEqual((owners, writes), (1, 1))
+        self.assertEqual(result['consolidated_generation'], 'generation')
+        self.assertEqual(result['delete_writes'], 0)
+
+
 if __name__ == '__main__':
     unittest.main()
