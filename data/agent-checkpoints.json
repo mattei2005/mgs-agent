@@ -4604,12 +4604,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-FOLDER-CONSOLIDATION-1567557554018590782",
-      "next_step": "Inventario nativo congelado; preparar consolidacao com membership, ACL e consumidores antes de aplicar",
+      "next_step": "17 geracoes consolidadas; uma pasta SHEIN_US_ES no processamento preservado; 158 fontes mesmos IDs e ACL, 78 jobs integrais e 156 downloads verificados. Inventario/reservas preservados; 65 testes. Rotina original com consolidacao e retry, sem novo cron/writer. Estruturas vazias separadas para rollback, sem DELETE. REPORT-INFRA 1567571127763599382 sent_verified. Nenhuma acao humana; nao confundir com novas entregas EN em andamento.",
       "objective": "Consolidar pastas repetidas de operacao do processamento preservado, sem novas copias, exclusao ou perda de provas/IDs/acessos",
-      "source": "/root/.hermes/profiles/zeus/artifacts/folder-consolidation-1567557554018590782/live-tree-before.json",
-      "state": "investigating",
+      "source": "/root/.hermes/profiles/zeus/artifacts/folder-consolidation-1567557554018590782/closure.json",
+      "state": "completed_validated",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-04T15:17:29+00:00"
+      "updated_at": "2026-11-04T16:08:25+00:00"
     },
     {
       "agent": "zeus",
@@ -8586,5 +8586,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T15:45:41+00:00"
+  "updated_at": "2026-11-04T16:08:25+00:00"
 }

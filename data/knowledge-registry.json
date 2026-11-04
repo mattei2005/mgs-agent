@@ -12025,6 +12025,24 @@
       "updated_at": "2026-10-03T14:01:04+00:00"
     },
     {
+      "canonical_key": "creative_ops.retained_sources.organization",
+      "canonical_source": "context/drive-flat-intake-cutover.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "creative_ops",
+      "effective_at": "2026-11-04T16:04:59+00:00",
+      "id": "MGS-RETAINED-SOURCE-CONSOLIDATION-1567557554018590782",
+      "kind": "decision",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Fontes preservadas consolidadas por operacao sem arvores por lote",
+      "updated_at": "2026-11-04T16:04:59+00:00"
+    },
+    {
       "canonical_key": "mgs-router.weighted-sidebar-domain-verification",
       "canonical_source": "docs/mgs-router-bulk-actions-pagination.md",
       "consumers": [
@@ -15989,5 +16007,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-03T16:00:27+00:00"
+  "updated_at": "2026-11-04T16:04:59+00:00"
 }
