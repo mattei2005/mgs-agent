@@ -3394,12 +3394,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-ARCHIVE-SWEEP-1567427715030716417",
-      "next_step": "Congelar escopo registrado, varrer com ledger completo, publicar provas nativas exatas para labels/ancestry, ativar somente escopo verificado, repetir varredura completa sem slice parcial.",
-      "objective": "Varrer atalhos e caminhos registrados e corrigir em conjunto divergencias comprovadas somente de nome; preservar midia,IDs,localizacao,reservas,campanhas",
-      "source": "discord:1562078493498540042:1567427715030716417",
-      "state": "authorized_inventory_freeze",
+      "next_step": "773registros varridos:9atalhos novos corrigidos com9provasSA e pins;4jobs/8fontes recuperados por prova exata de ancestry somente label. Consumidores/downloads afetados passaram. Concluir rescan773 e protocolos274 integrais, regressao, inventario/audit/REPORT sem ampliar para media/ACL.",
+      "objective": "Varrer e corrigir divergencias de nomes em todo estoque registrado mantendo midia,IDs,locais,reservas,campanhas",
+      "source": "/root/.hermes/profiles/zeus/artifacts/archive-sweep-1567427715030716417",
+      "state": "repairs_active_full_rescan_in_progress",
       "thread_id": "1562078493498540042",
-      "updated_at": "2026-11-04T06:39:01+00:00"
+      "updated_at": "2026-11-04T06:58:45+00:00"
     },
     {
       "agent": "zeus",
@@ -8546,5 +8546,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T06:39:01+00:00"
+  "updated_at": "2026-11-04T06:58:45+00:00"
 }
