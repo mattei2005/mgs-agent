@@ -452,13 +452,15 @@
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
     "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1567612285810122763/closure-current.json",
-    "report_infra_status": "pending",
+    "report_infra_status": "sent_verified",
     "cron_coordination": {
       "paused_during_manual_writer": true,
       "resumed": true,
       "schedule_unchanged": true,
       "next_run_at": "2026-11-04T21:02:00-05:00"
-    }
+    },
+    "report_infra_message_id": "1567621549438148613",
+    "report_infra_readback": true
   },
   "pending_card_history": {
     "status": "no_new_events_pending_historical_gaps_preserved",
