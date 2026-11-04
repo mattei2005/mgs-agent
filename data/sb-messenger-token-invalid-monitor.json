@@ -607,7 +607,18 @@
     734435,
     734442,
     734943,
-    734965
+    734965,
+    735148,
+    735164,
+    735181,
+    735208,
+    735225,
+    735247,
+    735267,
+    735288,
+    735309,
+    735329,
+    735351
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -844,9 +855,9 @@
     "digital-trust|boostingecon|30|1761": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-03T00:07:02.000Z",
+        "created_at": "2026-11-04T12:08:13.000Z",
         "domain": "boostingecon",
-        "notification_id": 733684,
+        "notification_id": 735208,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 6,
@@ -872,7 +883,8 @@
         730118,
         731319,
         732272,
-        733684
+        733684,
+        735208
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -1041,9 +1053,9 @@
     "digital-trust|eggbev|12|1662": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-03T12:06:58.000Z",
+        "created_at": "2026-11-04T12:07:58.000Z",
         "domain": "eggbev",
-        "notification_id": 733883,
+        "notification_id": 735164,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 13,
@@ -1087,7 +1099,8 @@
         724370,
         725389,
         726479,
-        733883
+        733883,
+        735164
       ],
       "opened_at": "2026-09-12T16:12:16-04:00",
       "repeat_count": 0,
@@ -1272,9 +1285,9 @@
     "digital-trust|financeadx|24|1577": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-05T12:09:45.000Z",
+        "created_at": "2026-11-04T12:08:15.000Z",
         "domain": "financeadx",
-        "notification_id": 706562,
+        "notification_id": 735225,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 3,
@@ -1296,7 +1309,8 @@
         "1556640181359083663"
       ],
       "notification_ids": [
-        706562
+        706562,
+        735225
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -1638,9 +1652,9 @@
     "digital-trust|financeadx|59|323": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-05T12:09:04.000Z",
+        "created_at": "2026-11-04T12:08:45.000Z",
         "domain": "financeadx",
-        "notification_id": 706488,
+        "notification_id": 735288,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 9
@@ -1659,7 +1673,8 @@
       ],
       "notification_ids": [
         691974,
-        706488
+        706488,
+        735288
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2418,9 +2433,9 @@
     "digital-trust|lyzmofinanzas|77|1768": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-03T12:07:57.000Z",
+        "created_at": "2026-11-04T12:08:40.000Z",
         "domain": "lyzmofinanzas",
-        "notification_id": 733948,
+        "notification_id": 735267,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 2
@@ -2443,7 +2458,8 @@
         730375,
         731486,
         732535,
-        733948
+        733948,
+        735267
       ],
       "opened_at": "2026-10-28T12:12:15-04:00",
       "repeat_count": 0,
@@ -2519,9 +2535,9 @@
     "digital-trust|lyzmo|4|317": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-03T12:06:37.000Z",
+        "created_at": "2026-11-04T12:07:38.000Z",
         "domain": "lyzmo",
-        "notification_id": 733878,
+        "notification_id": 735148,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 11,
@@ -2546,9 +2562,42 @@
         682973,
         692068,
         732467,
-        733878
+        733878,
+        735148
       ],
       "opened_at": "2026-09-07T08:12:14-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|marevelx|36|176": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-04T12:08:58.000Z",
+        "domain": "marevelx",
+        "notification_id": 735329,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 6,
+          "On-hold": 6,
+          "Ready": 1
+        },
+        "pages": 13,
+        "segurador_id": "176",
+        "segurador_name": "Zmii",
+        "source": "page_token",
+        "user_email": "disparosmarevelx@gmail.com",
+        "user_id": "36",
+        "user_name": "Disparos Marevelx ALE-CC-DE"
+      },
+      "last_sent_at": "2026-11-04T07:12:21-05:00",
+      "message_ids": [
+        "1567511812868677656"
+      ],
+      "notification_ids": [
+        735329
+      ],
+      "opened_at": "2026-11-04T07:12:19-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -2828,9 +2877,9 @@
     "digital-trust|newsoun|14|264": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-28T12:08:17.000Z",
+        "created_at": "2026-11-04T12:09:12.000Z",
         "domain": "newsoun",
-        "notification_id": 727329,
+        "notification_id": 735351,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 64,
@@ -2854,7 +2903,8 @@
         699984,
         700733,
         706770,
-        727329
+        727329,
+        735351
       ],
       "opened_at": "2026-09-24T16:12:13-04:00",
       "repeat_count": 0,
@@ -3388,9 +3438,9 @@
     "digital-trust|spe|7|72": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-03T12:07:52.000Z",
+        "created_at": "2026-11-04T12:08:38.000Z",
         "domain": "spe",
-        "notification_id": 733924,
+        "notification_id": 735247,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 8,
@@ -3462,7 +3512,8 @@
         730366,
         731469,
         732514,
-        733924
+        733924,
+        735247
       ],
       "opened_at": "2026-09-03T20:12:12-04:00",
       "repeat_count": 0,
@@ -4038,6 +4089,39 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|zuout|11|1799": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-04T12:08:09.000Z",
+        "domain": "zuout",
+        "notification_id": 735181,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 27,
+          "Broadcast": 45,
+          "On-hold": 72,
+          "Ready": 1
+        },
+        "pages": 145,
+        "segurador_id": "1799",
+        "segurador_name": "Maribel Tamboon",
+        "source": "page_token",
+        "user_email": "disparoszuout@gmail.com",
+        "user_id": "11",
+        "user_name": "Disparos Zuout US-CC-EN"
+      },
+      "last_sent_at": "2026-11-04T07:12:21-05:00",
+      "message_ids": [
+        "1567511817108983940"
+      ],
+      "notification_ids": [
+        735181
+      ],
+      "opened_at": "2026-11-04T07:12:19-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zuout|11|262": {
       "alert": {
         "company": "digital-trust",
@@ -4132,6 +4216,38 @@
         700785
       ],
       "opened_at": "2026-09-25T16:12:12-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|zyclor|35|1777": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-04T12:08:46.000Z",
+        "domain": "zyclor",
+        "notification_id": 735309,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Broadcast": 1,
+          "On-hold": 6,
+          "Ready": 1
+        },
+        "pages": 8,
+        "segurador_id": "1777",
+        "segurador_name": "Gabriele Aparecida",
+        "source": "page_token",
+        "user_email": "disparoszyclor@gmail.com",
+        "user_id": "35",
+        "user_name": "Disparos Zyclor ALE-CC-DE"
+      },
+      "last_sent_at": "2026-11-04T07:12:21-05:00",
+      "message_ids": [
+        "1567511823047991368"
+      ],
+      "notification_ids": [
+        735309
+      ],
+      "opened_at": "2026-11-04T07:12:19-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -4469,22 +4585,35 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-04T06:57:14-05:00",
+  "last_check": "2026-11-04T07:12:21-05:00",
   "last_delivery": {
-    "at": "2026-11-03T19:12:19-05:00",
+    "at": "2026-11-04T07:12:21-05:00",
     "cursor_ids": [
-      734943,
-      734965
+      735148,
+      735164,
+      735181,
+      735208,
+      735225,
+      735247,
+      735267,
+      735288,
+      735309,
+      735329,
+      735351
     ],
     "message_ids": [
-      "1567330620047228939"
+      "1567511812868677656",
+      "1567511817108983940",
+      "1567511823047991368"
     ],
     "notification_ids": [
-      734965
+      735181,
+      735309,
+      735329
     ]
   },
   "last_error": null,
-  "last_seen_id": 734965,
+  "last_seen_id": 735351,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
