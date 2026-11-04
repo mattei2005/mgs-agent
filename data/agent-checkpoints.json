@@ -1313,12 +1313,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1567557936228732930",
-      "next_step": "Consumir processo atual; revisar ultimo batch do mesmo request; complete+monitor; auditoria integral20 e mapa exato na origem",
+      "next_step": "Nenhuma pendência neste lote. Entregar links permanentes e mapa exato na thread; não reexecutar tratamento.",
       "objective": "Tratar e arquivar 20 imagens SHEIN US EN de Kelly",
-      "source": "/root/mgs-agent/data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "12 fontes completas em tres batches; quarto batch fa8ef399946db8c8cb8fad579716d0a2 revisado/sanitizado em execução foreground rastreada proc_1fcfd3364240. heartbeat antigo recuperado pelo transporte existente; nenhuma campanha/acl/delete. auditoria cumulativa parcial preservada.",
+      "source": "/root/mgs-agent/data/ares/creative-ops/executions/intake-1567557936228732930/independent-audit.json",
+      "state": "complete: request10e6e4e951160be92101c930c6e53e70 e5batches complete;20/20 originais mesmosids/sha verificados;20novos clean com metadata clean e provider/stock/bytes auditados;0duplicatas;0pendentes;reserva preservada e ares_eligible=false. mapa exato20 persistido. sem campanha/acl/delete; demais pedidos preservados.",
       "thread_id": "1567557936228732930",
-      "updated_at": "2026-11-04T16:21:08+00:00"
+      "updated_at": "2026-11-04T16:38:58+00:00"
     },
     {
       "agent": "ares",
@@ -8586,5 +8586,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T16:21:08+00:00"
+  "updated_at": "2026-11-04T16:38:58+00:00"
 }
