@@ -17,6 +17,15 @@ FIELDS = ('sourceId', 'archiveId', 'stockShortcutId', 'jobId', 'lineageId', 'md5
 DIAMOND_SOURCE = '1xmZdhygm_UZFDXZ02NPScGPeKZa4DSlB'
 DIAMOND_AUTHORITY = '1567196899469959312'
 DIAMOND_HOME = b.DATA / ('stock-label-reconciliation-' + DIAMOND_AUTHORITY)
+JOE_AUTHORITY = '1567388545205801030'
+JOE_HOME = b.DATA / ('stock-label-reconciliation-' + JOE_AUTHORITY)
+# Exact approved identities only; no wildcard name reconciliation.
+JOE_SCOPES = {
+    '1lCL6jtet-epeEegi7SKoy80lNve84RyB': ('1FauuorDIboRwqZtBhJlCDOLTetbqUpve', '1f-IR6TPM6SsB_dU3upags4fRFf_p4Q0G', '095541f530c1c7568339c5c5cc1e1f61', '01 - BOLSAS', 'SHEIN_US_ES_IMG_BOLSAS_GRATIS_NV_005.png'),
+    '1Ey-kRHYngij81oFAkP_UGJYSVw56KL2U': ('1NnV1IF08EJa0HKQehBJC6qVdmz3OceQ6', '17-tRPAVs5QswHxGHb5casj2ruR6nDjQz', '0e33ea6fa82dfc4126ab447105a9e3c8', '04 - Diamond Painting Kits', 'SHEIN_US_EN_IMG_FREE_DIAMOND_PAINTING_KITS_PV_003.jpg'),
+    '1fHBobxGz9bMe0VOypAI-NMrydJl0EkKR': ('1PcL-VJy7mYfg1XpuAtHzzhc_wD5tr8UI', '1R19VZtI-jSkG6i1FYuol0xcxR7iUKoCo', '10aaf203bc84f726ce9a4ea3972c5071', '01 - RELOJES PARA MUJER', 'SHEIN_US_ES_IMG_RELOJES_PARA_MUJER_GRATIS_NV_008.jpg'),
+}
+
 
 
 def scope(source_id):
@@ -27,6 +36,8 @@ def scope(source_id):
         return (DIAMOND_HOME, DIAMOND_AUTHORITY, '112r77f9_sBSdxEEyQfMUbpJTyXg8ITiS',
                 '1KUOeFKLkX8TH6PSdvDgjaO0r_DQN2713', 'd0a18a02876fb7570baf022353453246',
                 '03 - Diamond Painting Kits', 'SHEIN_US_EN_IMG_FREE_DIAMOND_PAINTING_KITS_NV_003.jpg')
+    if source_id in JOE_SCOPES:
+        return (JOE_HOME / source_id, JOE_AUTHORITY, *JOE_SCOPES[source_id])
     return None
 
 
