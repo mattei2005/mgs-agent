@@ -84,16 +84,16 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_metrics_validated_pc1_meta_2fa_required",
-    "verified_at": "2026-11-03T21:08:57.894490-05:00",
+    "verified_at": "2026-11-04T08:08:21.961972-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-03T21:07:41.155353-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261103T210744416812",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261103T210525471559",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261103T210450359869",
+    "validated_metrics_at": "2026-11-04T08:05:31.271738-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261104T080537054778",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261104T080539199863",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261104T080458248629",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "d_ledger_to_live_sheet_exact_historical_only": true,
@@ -145,6 +145,11 @@
     "h_read_at_max": "2026-11-03T14:26:53.682995-05:00",
     "h_sum_usd": "460061.41",
     "pending_ui": [
+      {
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
       {
         "account_id": "1062446663435585",
         "name": "Escalatepower-US-SHEIN-EN-03-G003",
@@ -420,17 +425,9 @@
       {
         "since": "2026-11-01",
         "until": "2026-11-03"
-      },
-      {
-        "since": "2026-10-31",
-        "until": "2026-11-02"
       }
     ],
     "month_periods": [
-      {
-        "since": "2026-11-01",
-        "until": "2026-11-03"
-      },
       {
         "since": "2026-11-01",
         "until": "2026-11-04"
@@ -438,9 +435,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "20845.74",
-      "balance": "470098.68",
-      "month_spend": "62458.64"
+      "average_daily": "21925.80",
+      "balance": "475800.31",
+      "month_spend": "69476.54"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -469,19 +466,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4216.82"
+        "value": "4602.26"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3088.20"
+        "value": "3450.67"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "13065.23"
+        "value": "14761.51"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -493,7 +490,7 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "16628.92"
+        "value": "17323.54"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -505,13 +502,13 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "467010.48"
+        "value": "472349.64"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "49393.41"
+        "value": "54715.03"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -523,7 +520,7 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "20845.74"
+        "value": "21925.80"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -535,20 +532,20 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "470098.68"
+        "value": "475800.31"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "62458.64"
+        "value": "69476.54"
       }
     ],
     "lease_free": true,
     "pc1_blocker": {
       "reason": "meta_authenticator_2fa_required_on_billing_route",
       "message": "Confirm it’s you with your authentication app; Enter the 6-digit code",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261103T210525471559/blocked.png",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261104T080539199863/blocked.png",
       "native_auth_bypassed": false,
       "input_after_gate": false
     },
@@ -558,18 +555,24 @@
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261103T2102/closure-current.json",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261104T0802/closure-current.json",
     "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
   },
   "pending_card_history": {
     "status": "blocked_meta_authenticator_2fa_required",
     "account_ids": [
+      "1150399088163771",
       "1062446663435585",
       "1414197490675732",
       "1543098427832443",
       "2852476828464907"
     ],
     "pending_ui": [
+      {
+        "account_id": "1150399088163771",
+        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
       {
         "account_id": "1062446663435585",
         "name": "Escalatepower-US-SHEIN-EN-03-G003",
@@ -629,8 +632,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-03T21:08:57.894490-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261103T2102/closure-current.json"
+    "verified_at": "2026-11-04T08:08:21.961972-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261104T0802/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -731,7 +734,7 @@
   "invoice_refresh_each_tick": true,
   "general_refresh_blocker": "Meta PC1 Billing 2FA authenticator gate: fresh H0/36; H/D preserved; API metrics47 verified independently.",
   "source_report": "/root/mgs-agent/reports/meta-september-invoices-1564022485366734969/closure.json",
-  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261103T210446618006",
+  "last_regroup_report": "/root/mgs-agent/reports/meta-manual-payments-runs/regroup-20261104T080453023138",
   "pay_now_rule_authority_message": "1564382301155098717",
   "invoice_period_mode": "latest_closed_generated",
   "invoice_current_period": "2026-10-01",

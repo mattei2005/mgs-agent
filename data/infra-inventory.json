@@ -60574,6 +60574,28 @@
         "test_failures": 0
       },
       "recurrence_control": "Existing half-hour schedule, mutual exclusion, last-good preservation and fixed-rate precedence remain active. This incident required a bounded retry, not a source/config change. Tests validate source and fixed-rate safeguards; no claim that future external HTTP503 failures are prevented."
+    },
+    {
+      "agent": "zeus",
+      "id": "meta-manual-payments-refresh-20261104-0802",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261104T0802/closure-current.json",
+      "status": "partial_metrics_validated_pc1_meta_2fa_required",
+      "type": "authorized_recurring_financial_snapshot",
+      "updated_at": "2026-11-04T13:09:14.379389+00:00",
+      "report_infra_status": "pending_cron_delivery_restriction_no_manual_message",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "pending_d": 5,
+        "historical_blank_d": 35,
+        "lease_free": true,
+        "other_sheet_data_unchanged": true,
+        "payments_executed": 0,
+        "meta_writes": 0,
+        "cron_changes": 0
+      }
     }
   ],
   "profile_skill_references": [
