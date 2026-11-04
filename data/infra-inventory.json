@@ -60849,6 +60849,18 @@
       "updated_at": "2026-11-04T17:44:36.454041+00:00",
       "report_infra_status": "sent_verified",
       "report_infra_message_id": "1567595263122477107"
+    },
+    {
+      "id": "meta-manual-payments-refresh-1567612285810122763",
+      "agent": "zeus",
+      "type": "authorized_manual_financial_snapshot",
+      "status": "updated_validated",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1567612285810122763/closure-current.json",
+      "updated_at": "2026-11-04T14:26:54.231543-05:00",
+      "accounts": 47,
+      "fresh_h": 36,
+      "report_infra_status": "pending",
+      "cron_coordination": "same schedule paused during manual writer, rearmed21:02Eastern"
     }
   ],
   "profile_skill_references": [

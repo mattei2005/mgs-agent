@@ -83,27 +83,22 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_metrics_validated_pc1_meta_2fa_required",
-    "verified_at": "2026-11-04T08:08:21.961972-05:00",
+    "status": "updated_validated",
+    "verified_at": "2026-11-04T14:26:54.231543-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-04T08:05:31.271738-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261104T080537054778",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261104T080539199863",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261104T080458248629",
+    "validated_metrics_at": "2026-11-04T14:25:47.124917-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261104T142550606138",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261104T135354205901",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261104T135306979688",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
-    "d_ledger_to_live_sheet_exact_historical_only": true,
-    "h_source_to_live_sheet_and_note_exact_historical_only": true,
-    "d_values_and_notes_preserved_exact": true,
-    "h_values_and_notes_preserved_exact": true,
-    "fresh_h_account_ids": [],
-    "fresh_h_count": 0,
-    "h_preserved_count": 36,
-    "pending_h_account_ids": [
+    "d_ledger_to_live_sheet_exact": true,
+    "h_source_to_live_sheet_and_note_exact": true,
+    "fresh_h_account_ids": [
       "1001115192056600",
       "1018267074603840",
       "1062887799996139",
@@ -141,282 +136,197 @@
       "908704754163659",
       "937846586033361"
     ],
-    "h_read_at_min": "2026-11-03T14:06:28.464296-05:00",
-    "h_read_at_max": "2026-11-03T14:26:53.682995-05:00",
-    "h_sum_usd": "460061.41",
-    "pending_ui": [
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
+    "fresh_h_count": 36,
+    "h_preserved_count": 0,
+    "pending_h_account_ids": [],
+    "h_read_at_min": "2026-11-04T13:54:45.105571-05:00",
+    "h_read_at_max": "2026-11-04T14:14:42.740971-05:00",
+    "h_sum_usd": "476963.71",
+    "pending_ui": [],
+    "card_proofs_updated": 6,
+    "renewed_card_proof_ids": [
+      "1150399088163771",
+      "1062446663435585",
+      "1414197490675732",
+      "1543098427832443",
+      "2852476828464907",
+      "1290644206529750"
     ],
-    "card_proofs_updated": 0,
     "historical_d_gaps": [
       {
         "account_id": "336562339356179",
         "name": "Openzed-US-CC-EN-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "3752157451670648",
         "name": "Lyzmo-US-CC-EN-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "2039876850230678",
         "name": "Creditoparaveiculo-BR-CAR-BR-05-G006",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "311204101516831",
         "name": "Topfeed-US-CC-EN-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "26632890069640784",
         "name": "Zytiva-GB-CC-EN-02",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "3188620887977617",
         "name": "Infinitynexx-MX-CC-ES-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1526280818302320",
         "name": "Vizioid-US-SHEIN-EN-01-G001",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1419148446852410",
         "name": "Growpowerhub-US-SHEIN-EN-04-G004",
-        "method": "Linha de crédito",
-        "reason": "no_charge_located_historical",
-        "last_ui_read_at": "2026-10-25T13:18:10.691480-04:00"
+        "reason": "no_charge_located_historical"
       },
       {
         "account_id": "536294549227786",
         "name": "Vizioid-US-SHEIN-EN-02-G002",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1498990138663094",
         "name": "Escalatepower-US-SHEIN-EN-06-G006",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "2031917360813819",
         "name": "Escalatepower-US-SHEIN-EN-04-G004",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "897046653487466",
         "name": "Escalatepower-US-SHEIN-EN-05-G005",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "937846586033361",
         "name": "Mavroa-US-SHEIN-ES-06-G006",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "4511685129081248",
         "name": "Mavroa-US-SHEIN-ES-01-G001",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "869857549542755",
         "name": "Vizioid-US-SHEIN-EN-06-G006",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1085117577390237",
         "name": "Vizioid-US-SHEIN-EN-03-G003",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "814915838330687",
         "name": "Helixenit-MX-CC-ES-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1062887799996139",
         "name": "Escalatepower-US-SHEIN-EN-02-G002",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1736068407518263",
         "name": "Vizioid-US-SHEIN-EN-04-G004",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1829406761389732",
         "name": "Mavroa-US-SHEIN-ES-05-G005",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1018267074603840",
         "name": "Escalatepower-US-SHEIN-EN-01-G001",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "781612907182683",
         "name": "Yolokfx-US-SHEIN-EN-04-G004",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1001115192056600",
         "name": "Eggbev-US-CC-EN-02 (FAX-US-03)",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1851640026221079",
         "name": "Creditoparaveiculo-BR-CAR-BR-06-G004",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1753257812779707",
         "name": "Creditoparaveiculo-BR-CAR-BR-02-G002",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1744611463000838",
         "name": "Openzed-US-CC-EN-03",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "908704754163659",
         "name": "Zuout-US-CC-EN-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "2633813727134360",
         "name": "Creditoparaveiculo-BR-CAR-BR-04-G003",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1245683183659911",
         "name": "OpenzedFinanzas-US-CC-ES-01",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "7840111366055613",
         "name": "Yolokfx-US-SHEIN-EN-01-G002",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1107653168698121",
         "name": "Creditoparaveiculo-BR-CAR-BR-03-G005",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "787796726891306",
         "name": "Yolokfx-US-SHEIN-EN-05-G001",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1583000095650153",
         "name": "Yolokfx-US-SHEIN-EN-02-G006",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "2429758060563333",
         "name": "Yolokfx-US-SHEIN-EN-03-G005",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       },
       {
         "account_id": "1600310064116258",
         "name": "Yolokfx-US-SHEIN-EN-06-G003",
-        "method": "Linha de crédito",
-        "reason": "no_historical_card_instrument_proof_collected",
-        "last_ui_read_at": null
+        "reason": "no_historical_card_instrument_proof_collected"
       }
     ],
     "historical_d_blank_count": 35,
@@ -435,9 +345,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "21925.80",
-      "balance": "475800.31",
-      "month_spend": "69476.54"
+      "average_daily": "21947.99",
+      "balance": "480196.44",
+      "month_spend": "75699.41"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -454,31 +364,24 @@
         "billing_period": "2026-10-01"
       }
     ],
-    "totals_validated_columns": [
-      "F",
-      "G",
-      "H",
-      "I",
-      "J"
-    ],
     "subtotal_checks": [
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4602.26"
+        "value": "4606.15"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3450.67"
+        "value": "3055.91"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "14761.51"
+        "value": "16228.53"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -490,25 +393,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "17323.54"
+        "value": "17341.84"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "460061.41"
+        "value": "476963.71"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "472349.64"
+        "value": "477140.53"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "54715.03"
+        "value": "59470.88"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -520,80 +423,47 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "21925.80"
+        "value": "21947.99"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "460061.41"
+        "value": "476963.71"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "475800.31"
+        "value": "480196.44"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "69476.54"
+        "value": "75699.41"
       }
     ],
     "lease_free": true,
-    "pc1_blocker": {
-      "reason": "meta_authenticator_2fa_required_on_billing_route",
-      "message": "Confirm it’s you with your authentication app; Enter the 6-digit code",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261104T080539199863/blocked.png",
-      "native_auth_bypassed": false,
-      "input_after_gate": false
-    },
+    "pc1_blocker": null,
     "payments_executed": 0,
     "meta_writes": 0,
-    "cron_changes": 0,
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261104T0802/closure-current.json",
-    "report_infra_status": "pending_cron_delivery_restriction_no_manual_message"
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1567612285810122763/closure-current.json",
+    "report_infra_status": "pending",
+    "cron_coordination": {
+      "paused_during_manual_writer": true,
+      "resumed": true,
+      "schedule_unchanged": true,
+      "next_run_at": "2026-11-04T21:02:00-05:00"
+    }
   },
   "pending_card_history": {
-    "status": "blocked_meta_authenticator_2fa_required",
-    "account_ids": [
-      "1150399088163771",
-      "1062446663435585",
-      "1414197490675732",
-      "1543098427832443",
-      "2852476828464907"
-    ],
-    "pending_ui": [
-      {
-        "account_id": "1150399088163771",
-        "name": "Creditoparaveiculo-BR-CAR-BR-14-G001",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1062446663435585",
-        "name": "Escalatepower-US-SHEIN-EN-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1414197490675732",
-        "name": "Mavroa-US-SHEIN-ES-02-G002",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "1543098427832443",
-        "name": "Mavroa-US-SHEIN-ES-03-G003",
-        "reason": "new_generic_payment_since_pc1_proof"
-      },
-      {
-        "account_id": "2852476828464907",
-        "name": "Mavroa-US-SHEIN-ES-04-G004",
-        "reason": "new_generic_payment_since_pc1_proof"
-      }
-    ],
+    "status": "no_new_events_pending_historical_gaps_preserved",
+    "account_ids": [],
+    "pending_ui": [],
     "historical_blank_account_ids": [
       "336562339356179",
       "3752157451670648",
@@ -632,8 +502,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-04T08:08:21.961972-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261104T0802/closure-current.json"
+    "verified_at": "2026-11-04T14:26:54.231543-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1567612285810122763/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -661,7 +531,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-10-25T21:02:00-04:00",
+  "next_run_at": "2026-11-04T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
