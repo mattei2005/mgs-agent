@@ -1,5 +1,6 @@
 """Read-only compatibility for exact source IDs retained by confirmed flat cutover."""
-import hashlib,json
+import hashlib,json,threading
+_PROOF_LOCK = threading.RLock()
 import ares_archive_bridge as b
 HOME=b.DATA/'flat-intake-1566814476626563115'
 class FlatSourceError(b.ArchiveError):pass
@@ -22,6 +23,11 @@ def local_state(fid=None):
 def retained(fid):return local_state(fid) is not None
 
 def evidence(d,source_id):
+ # Coalesce native reads of the existing per-client immutable proof cache.
+ # No persistent cache or relaxed digest/publisher/authority checks.
+ with _PROOF_LOCK:return _evidence_locked(d,source_id)
+
+def _evidence_locked(d,source_id):
  state=local_state(source_id);require(state is not None,'FLAT_SOURCE_NOT_ACCEPTED')
  require(state.get('redesign_confirmation')=='1566814476626563115' and state.get('access_confirmation')=='1566825959645253764','FLAT_SOURCE_AUTHORITY')
  cache=getattr(d,'_flat_source_proof_cache',{})
