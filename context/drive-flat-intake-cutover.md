@@ -50,6 +50,18 @@ A espera flat por arquivo passa a `resume` com `mechanical_only=true`, evitando 
 
 Aceitação por pedido real e registros de implantação: checkpoint `ZEUS-KELLY-SUPERVISION-1567008464587456586` e artifacts Zeus `ares-intake-pipeline-1567021305822314609/`. Testes locais, ativação técnica e conclusão integral do pedido são gates separados; o estado corrente deve ser relido, não deduzido desta autorização.
 
+## Consolidação das fontes preservadas — `1567557554018590782`
+
+Rodolfo rejeitou a repetição de pastas de operação por lote e autorizou a correção na mesma thread. Esta decisão supersede somente a topologia permanente por geração de processamento; os snapshots/receipts anteriores continuam imutáveis e válidos como prova histórica. Preservar não significa manter múltiplas árvores de operação.
+
+- Consumidor vigente: `scripts/mgs_flat_consolidation.py`, binding `data/ares/creative-ops/30tb-archive/folder-consolidation-1567557554018590782/binding.json`. Chamado pelo mesmo `mgs_flat_maintenance.py`, com leases intake → queue, sem novo cron ou writer paralelo.
+- Os arquivos-fonte retidos são consolidados nos buckets **já existentes** de operação/formato/status dentro de `_MGS_CONTROLE/ENTRADA_ANTERIOR/PROCESSAMENTO_ANTERIOR`. Esse histórico técnico não é estoque nem entrada para gestores; a árvore de trabalho continua em `CRIATIVOS`.
+- Cada geração recebe prova adicional imutável publicada pela SA, vinculada aos snapshots, jobs, assets e bytes originais. `mgs_flat_source_compat.py` aceita somente essas relocações exatas; não ignora nomes, pais ou integridade globalmente.
+- Fontes, mídias permanentes e atalhos mantêm seus IDs. Não alterar estoque, reservas, elegibilidade, campanhas ou ACL. Canários técnicos e reuploads exatos sem novo job permanecem classes próprias, não novos criativos fictícios.
+- As estruturas esvaziadas ficam separadas em `_ESTRUTURAS_VAZIAS`, com IDs preservados e rótulos técnicos, para reversão. Nenhum DELETE/trash foi autorizado; não confundir esses registros vazios com uma segunda pasta operacional.
+- A manutenção consolida a geração depois da preservação; também recupera uma geração já preservada que ainda esteja sem aceite da consolidação, no máximo uma por tick. Dry-run não entra no caminho de mutação owner.
+- Aceite inicial e estado corrente: checkpoint `ZEUS-FOLDER-CONSOLIDATION-1567557554018590782`; recibo `artifacts/folder-consolidation-1567557554018590782/closure.json` no profile Zeus. Não declarar conclusão apenas pelo monitor rotativo: conferir todos os membros congelados, consumidores, streams e paridade de inventário/mapeamentos.
+
 ## Histórico supersedido do preflight
 
 Antes da confirmação específica, foram auditados 268 objetos e identificados 263 descendentes cujo acesso de `geizianp@gmail.com` era herdado de UPLOAD MANUAL e inexistente no destino. Roles organizer/fileOrganizer do Shared Drive não têm os mesmos nomes no My Drive; a equivalência autorizada é de pessoas e capacidades de leitura/edição, não administração/propriedade idênticas. Os quatro relatórios também exigiam ACL por objeto. Nenhum move/write de permissão ocorreu naquele preflight; o bloqueio foi resolvido exclusivamente pela confirmação `1566825959645253764`, seguida dos canários e manifestos confinados acima. Fontes imutáveis: `whole-source-native-acl-snapshot.json`, `access-preservation-proposal.json` e diagnósticos em `flat-intake-1566814476626563115/`.
