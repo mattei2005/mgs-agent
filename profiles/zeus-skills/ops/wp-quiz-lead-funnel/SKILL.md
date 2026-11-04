@@ -159,6 +159,12 @@ Minimum dashboard:
 
 For Smart Bidding SMS revenue backfill/sync, dashboard metric semantics, BRL centavo storage, API boundary deduplication, and report-scope limits, load `references/smartbidding-sms-revenue-backfill.md`.
 
+## Historical HTTP 502 versus site outage
+
+- Correlate `/wp-json/mgs-quiz/v1/lead` access-log failures with aggregate `sms_funnel_status` and the live REST handler before attributing 502 to Nginx or a site-wide outage. The handler can save a local lead, time out forwarding to SMS Funnel, then intentionally return 502 when `require_sms_success` is enabled.
+- Classify stored transport errors in memory without exposing lead PII, integration URLs or raw vendor responses. `cURL error 28` proves a request timeout, not its network/vendor root cause or rejection by the recipient. Successful later submissions establish subsequent delivery, not recovery of the timed-out records.
+- Do not automatically resend a timed-out lead: the downstream operation may already have succeeded. Require recipient-side reconciliation or a verified idempotency mechanism before any authorized replay; preserve local records and distinguish historical failures from current availability.
+
 ## Diagnostic Playbook: SMS Funnel Not Showing Leads
 
 If Rodolfo says a lead is not appearing in SMS Funnel:
