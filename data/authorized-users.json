@@ -93,8 +93,21 @@
             ]
           },
           "allowed_context": "Somente canal infra-dev 1566814313086193795 e threads filhas. Validar identidade, canal e escopo antes de agir. Não interpretar Full como autorização global.",
-          "critical_subset_unchanged": true,
+          "critical_subset_other_operations_unchanged": true,
           "critical_confirmation_authority_discord_id": "344196393512075265",
+          "website_waf_delegation": {
+            "status": "active",
+            "permanent": true,
+            "authorized_by_discord_id": "344196393512075265",
+            "authority_message_id": "1567593717487902802",
+            "source_thread_id": "1567491996845740093",
+            "scope": "Proteção web Cloudflare/WAF restrita a sites MGS no infra-dev e threads: pedidos equivalentes ao piloto Wavesbee, incluindo Managed Challenge e filtros/limitação de bots em endpoints explicitamente delimitados, preservando acesso legítimo e páginas públicas.",
+            "operator_request_and_confirmation_sufficient": true,
+            "new_rodolfo_confirmation_required": false,
+            "requirements": ["alvo e diff explícitos", "executor único", "backup e rollback", "validação API e acesso público"],
+            "excluded": ["firewall dos servidores, Fail2Ban e SSH", "credenciais e permissões", "billing", "regras globais de conta ou proteção indiscriminada do portfólio", "outros itens do Critical Subset"],
+            "supersedes": "Obrigação de confirmação exclusiva de Rodolfo para este recorte WAF; demais gates da decisão 1566814888150700154 preservados."
+          },
           "credential_and_permission_governance_unchanged": true,
           "authorized_by_discord_id": "344196393512075265",
           "authority_message_id": "1566814888150700154",
