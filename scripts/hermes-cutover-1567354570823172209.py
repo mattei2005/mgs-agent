@@ -52,7 +52,10 @@ def current_state():return json.loads(STATE.read_text()) if STATE.exists() else 
 def set_state(state,status,**extra):state.update(status=status,updated_at=now(),**extra);save(STATE,state)
 def load_plan():
  p=json.loads(PLAN.read_text());assert p['authority']==AUTHORITY and p['thread_id']==THREAD and p['order']==ORDER
- assert sha(p['skills_manifest'])==p['skills_manifest_sha256'];return p
+ assert sha(p['skills_manifest'])==p['skills_manifest_sha256']
+ approved=json.loads(pathlib.Path(p['skills_manifest']).read_text())['entries'];assert p['skill_entries']==approved and len(approved)==196
+ assert {a:sum(row['profile']==a for row in approved) for a in ORDER}=={'ares':66,'atena':65,'zeus':65}
+ return p
 
 def verify_static(plan):
  assert run(['git','-C',plan['source'],'rev-parse','HEAD']).stdout.strip()==plan['port']
@@ -114,8 +117,9 @@ def write_skill(row,state):
  dest=pathlib.Path(row['path']);agent=row['profile'];before=row['before_sha256'];assert (sha(dest) if dest.is_file() else None)==before
  backup=BACKUP/'skills-before-cutover'/agent/row['relative']
  if before is not None:backup.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(dest,backup);assert sha(backup)==before
+ state['pending_skill_path']=str(dest);save(STATE,state)
  source=pathlib.Path(row['prepared_source']);temp=SCRATCH/('skill-'+uuid.uuid4().hex);temp.write_bytes(source.read_bytes());os.chmod(temp,stat.S_IMODE(dest.stat().st_mode) if dest.is_file() else stat.S_IMODE(source.stat().st_mode));dest.parent.mkdir(parents=True,exist_ok=True);os.replace(temp,dest);assert sha(dest)==row['after_sha256']
- state['applied_paths'].append(str(dest));save(STATE,state)
+ state['applied_paths'].append(str(dest));state['pending_skill_path']=None;save(STATE,state)
 
 def apply_skills(agent,plan,state):
  rows=[x for x in plan['skill_entries'] if x['profile']==agent]
@@ -192,8 +196,10 @@ def real_canary(agent,plan,state):
 def restore_skills(plan,state):
  applied=set(state.get('applied_paths',[]));moved=BACKUP/'rollback-created-files'
  for row in reversed(plan['skill_entries']):
-  if row['path'] not in applied:continue
-  dest=pathlib.Path(row['path']);assert sha(dest)==row['after_sha256'],('rollback refuses concurrent skill change',row['path'])
+  if row['path'] not in applied and row['path']!=state.get('pending_skill_path'):continue
+  dest=pathlib.Path(row['path']);actual=sha(dest) if dest.is_file() else None
+  if actual==row['before_sha256']:continue
+  assert actual==row['after_sha256'],('rollback refuses concurrent skill change',row['path'])
   if row['before_sha256'] is None:
    target=moved/row['profile']/row['relative'];target.parent.mkdir(parents=True,exist_ok=True);assert not target.exists();os.replace(dest,target)
   else:
