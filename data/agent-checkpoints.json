@@ -4624,12 +4624,12 @@
     {
       "agent": "zeus",
       "id": "ZEUS-HERMES-ACTIVATE-1567354570823172209",
-      "next_step": "Validar configuração/schema em cópias;revalidar backup/drift;preparar executor ecallback,gate de handoffDiscord;somente depois agendar corte externo",
-      "objective": "Ativar corte29a61cb7/portafbd6248 e196escritas de skills confirmados por Rodolfo;Ares→Atena→Zeus;sem exclusão/credencial/sistema",
-      "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/permanent-installation.json;helper-promotion.json;authority:1567390752403755019",
-      "state": "permanent_inactive_install_ready_helpers_promoted_both_runtime_guards_pass",
+      "next_step": "Iniciar executor systemd externo que aguarda readback do handoff;validar owner/estado;entregar handoff. Sem ação de Rodolfo.",
+      "objective": "Ativar corte29a61cb7/afbd6248 e196skills;Ares→Atena→Zeus com gates por agente e callback externo",
+      "source": "/root/mgs-agent/reports/hermes-updates/20261103-activation-1567354570823172209/execution-plan.json;execution-state.json;REPORT:1567406158103183461;authority:1567390752403755019",
+      "state": "all_gates_pass_ready_for_handoff_gated_external_dispatch",
       "thread_id": "1567354570823172209",
-      "updated_at": "2026-11-04T04:40:37+00:00"
+      "updated_at": "2026-11-04T05:13:23+00:00"
     },
     {
       "agent": "zeus",
@@ -8526,5 +8526,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T04:40:37+00:00"
+  "updated_at": "2026-11-04T05:13:23+00:00"
 }
