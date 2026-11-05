@@ -3474,12 +3474,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1568030755169509428",
-      "next_step": "Pausa nominal agora, preparar snapshot e agendar ativação única",
+      "next_step": "Reconciliar GET dos mesmos IDs e retomar somente camada pendente",
       "objective": "Pausar20campanhas nominais YOLO01G002 e reativar06/11/2026 00h America/New_York, status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568030755169509428/request.json",
-      "state": "intake; ids congelados; autorização live validada",
+      "state": "recovery_required: material_drift_135",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-11-05T22:36:28+00:00"
+      "updated_at": "2026-11-05T22:39:59+00:00"
     },
     {
       "agent": "zeus",
@@ -8796,5 +8796,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:37:21+00:00"
+  "updated_at": "2026-11-05T22:39:59+00:00"
 }
