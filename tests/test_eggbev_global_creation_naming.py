@@ -54,6 +54,15 @@ class NamingTests(unittest.TestCase):
  def manifest(self):
   row=self.reserve('manifest');payload={'object_story_spec':{'page_id':self.identity['page_id']},'url_tags':'utm_campaign=pg_23156'};c=SimpleNamespace(mode='from_zero_prestaged',account_id=self.ids[0],name=row['names'][0],adset_name='ADGROUP 01',adset_create={'promoted_object':{'page_id':self.identity['page_id']}},ads=[SimpleNamespace(creative_payload=payload)]);return SimpleNamespace(request_id='manifest',created_at=datetime.now(timezone.utc).isoformat(),campaigns=[c])
  def test_validator_exact_identity(self):n.validate_manifest(self.manifest(),self.policy)
+ def test_central_prevalidator_hook_accepts_reserved_new_request(self):
+  from ares_campaign_v3.prevalidation import validate_account_policy
+  m=self.manifest()
+  with patch.object(n,'load_policy',return_value=self.policy):validate_account_policy(m,{'eggbev_creation_naming_policy':'active'})
+ def test_central_prevalidator_hook_rejects_unreserved_new_request(self):
+  from ares_campaign_v3.prevalidation import validate_account_policy
+  from ares_campaign_v3.schema import ManifestError
+  m=self.manifest();m.request_id='not-reserved'
+  with patch.object(n,'load_policy',return_value=self.policy),self.assertRaises(ManifestError):validate_account_policy(m,{'eggbev_creation_naming_policy':'active'})
  def test_validator_wrong_utm(self):
   m=self.manifest();m.campaigns[0].ads[0].creative_payload['url_tags']='utm_campaign=pg_99999'
   with self.assertRaises(n.NamingError):n.validate_manifest(m,self.policy)

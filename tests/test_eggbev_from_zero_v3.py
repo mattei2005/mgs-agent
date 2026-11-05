@@ -64,7 +64,7 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
         start = (datetime.now(ZoneInfo("America/New_York")) + timedelta(days=2)).replace(
             hour=0, minute=0, second=0, microsecond=0
         )
-        return build_eggbev_from_zero_manifest(
+        payload = build_eggbev_from_zero_manifest(
             registry=self.registry,
             request_id="eggbev-test-request",
             page_id="123456789012345",
@@ -78,6 +78,9 @@ class EggbevFromZeroV3Tests(unittest.TestCase):
             asset_refs=self._assets(total),
             ad_names=[f"AMY AD {index + 1:02d}" for index in range(total)],
         )
+        # Historical contract fixture; new global naming has its own scoped suite.
+        payload["created_at"] = "2026-08-30T00:00:00+00:00"
+        return payload
 
     def test_three_by_three_builds_valid_manifest_and_policy(self) -> None:
         payload = self._build()
