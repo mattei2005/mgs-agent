@@ -17,6 +17,14 @@ Em instalações inspecionadas do Yoast 28.3/28.6, o `WP_REST_Posts_Controller::
 7. Faça um canário real por combinação instalação/transporte, registre intenção antes do save e releia em outro processo nativo mais GET autenticado. Exija preservação completa de post, metas, mídia, taxonomia, datas, scores, locais e opções; somente a derivação social prevista e timestamps técnicos permitidos podem mudar. Expanda apenas após esse readback.
 8. Uma mudança genuína de score pode disparar o watcher e recalcular imagem, mas notas já iguais podem não emitir `updated_post_meta`. Nunca grave nota intermediária/falsa para provocar hook e nunca confunda save PHP com análise linguística JavaScript.
 
+## Alternativa editorial nativa quando o executor de derivação não existe
+
+Antes de concluir que falta capacidade, inspecione também os campos reais do editor Yoast ou um schema REST já exposto. Selecionar genuinamente a imagem social aprovada — antes vazia, agora a mesma mídia destacada validada — é uma edição de input editorial, não um resave artificial do corpo nem uma nota falsa para disparar hooks. Use a identidade dedicada com capacidade comprovada, nonce/cookie e formulário/nomes de campos capturados; não registre um endpoint novo, não implante PHP e não use outra identidade para contornar uma recusa da conta editorial.
+
+Preserve qualquer override social anterior que seja uma escolha editorial diferente; não o substitua por conveniência. Registre explicitamente que os novos inputs sociais passaram a ser escolhas fixas, para que uma futura troca de destacada não os deixe obsoletos. Faça backup, intenção antes do POST, CAS, um envio e releituras do editor, REST e URL pública normal. Preserve corpo byte-exato, autor, termos, publicação e demais inputs Yoast; uma edição social real pode avançar `modified`, que não deve ser retroagido. Resultados de score sem comprovação continuam `Não verificado`.
+
+Se o impedimento for exclusivamente o WP 2FA, aplique a autorização permanente e a receita canônica de suspensão indispensável, um site por vez, com reativação/readback no `finally`; não peça nova autorização editorial nem configure fatores. A seleção nativa não libera reindexação geral, reparo compartilhado da home ou transporte temporário protegido.
+
 ## Cache e revalidação
 
 - Confirme separadamente o HTML canônico sem query. REST/indexable novo não prova que o cache HTML foi atualizado.
