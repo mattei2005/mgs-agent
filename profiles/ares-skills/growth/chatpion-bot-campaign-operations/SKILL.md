@@ -125,6 +125,13 @@ Para localizar uma fonte informada por nome:
 4. Se as consultas bem-sucedidas continuarem vazias ou houver ambiguidade, preservar o mesmo request com os parâmetros literais, evidências de leitura e próximo passo; pedir somente o link ou ID da campanha. Informar “não localizada pela API nesta conta”, não “não existe”: rascunhos não publicados e limitações de visibilidade não foram descartados por esse resultado.
 5. Distinguir evidência de inventário de validação remota: nomes encontrados no inventário não comprovam presença live na pasta, metadata, elegibilidade ou pre-stage. No retorno, comunicar apenas a etapa efetivamente verificada e se houve write. Ao retomar, preservar budget/copy/arquivos e resolver novamente o início caso o horário solicitado tenha passado, sem deslocá-lo silenciosamente para outro dia.
 
+#### Retomada após correção do operador
+
+1. Quando o operador corrigir o nome ou mostrar uma captura, registrar a correção no mesmo request, usar a lista da conta já obtida apenas para localizar o candidato e confirmar seu ID/hierarquia por GET vivo. Não repetir a busca completa nem pedir o ID se o nome corrigido já resolver uma única fonte na conta autorizada.
+2. Se a fonte estiver sem anúncios, confirmar o vazio também em `GET /<source_adset_id>/ads?fields=id,name,status,effective_status,creative{id}` antes de explicar a dependência de lineage do modo contratado. Distinguir limitação do executor instalado de capacidade geral do Ads Manager; não converter clone em criação direta por inferência.
+3. Quando o operador informar que publicou/criou o anúncio, reler imediatamente esse mesmo edge e persistir o `source_ad_id` encontrado. Um anúncio retornado com `status=PAUSED` ou `effective_status=IN_PROCESS` já resolve a ausência do objeto-fonte; não exigir sua ativação nem alterar a original apenas para obter lineage. Os demais gates de readiness continuam independentes.
+4. Atualizar separadamente os bloqueios resolvidos e os restantes, preservando a primeira evidência no histórico. Não repetir uma instrução já atendida nem interpretar “tente novamente” como OK final de publicação. No retorno, informar o avanço real, o impedimento ainda comprovado e se houve write.
+
 ### Corte e ROAS
 
 A família define isolamento, idempotência, proveniência, lane de corte e lane de reativação. Thresholds, comparadores, fases, horários, níveis de write, métricas e budgets são parâmetros obrigatórios da operação.
@@ -184,6 +191,7 @@ Nunca herdar implicitamente IDs, budgets, thresholds, Pages, pixels, eventos, JS
 - consumidor resolve para um único contrato e conjunto de threads;
 - onboarding parcial permanece candidato e falha antes do transporte; autoridade aprovada não é confundida com readiness ou OK de publicação;
 - conta e Page são verificadas separadamente, e a contagem da hierarquia vem da API, não do nome da campanha;
+- nome corrigido reaproveita o mesmo request e exige GET vivo; anúncio-fonte recém-disponível PAUSED/IN_PROCESS elimina somente o bloqueio de ausência, sem ativar a original nem remover outros gates;
 - nome operacional + ID com nota interna entre parênteses mantém o mesmo binding e não cria alias a partir da nota;
 - definição de finalidade da thread não dispara execução, e correção de nota interna não altera a conta nem outras threads;
 - cada parâmetro obrigatório tem origem explícita na operação;
