@@ -2662,6 +2662,16 @@
       "updated_at": "2026-11-02T13:56:47+00:00"
     },
     {
+      "agent": "ares",
+      "id": "EGGBEV-PG8348-SUSPENDED-1567950736732721254",
+      "next_step": "Nao retomar automaticamente. Exige nova instrucao explicita do gestor; preservar source state e backups.",
+      "objective": "Preservar recuperacao historica Aria C004/C005 suspensa por Nicolas para liberar conta01",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/suspension-1567950736732721254/readback.json",
+      "state": "suspended_by_operator pela mensagem1567950736732721254; automatic_recovery_required=false. state e historico/ids preservados,nenhum meta write nas duas campanhas. ambas paused,sem conjuntos/anuncios no readback. lease antiga liberada pela coordenacao canonica; nao representa campanha antiga concluida.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-05T17:32:16+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
       "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
@@ -6857,12 +6867,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Obter decisao somente sobre estacionar recuperacao historica mantendo Aria C004/C005 PAUSED/intactas e estado/IDs preservados para liberar a conta. Nao limpar lease resumivel sem essa decisao. OK comercial atual continua valido;apos liberar,refresh inicio+buffer no mesmo request e Engine v3/readback/QA/postprocess sem replay ou novos uploads.",
-      "objective": "Executar MODEL USD30 1x1x3 com OK final Nicolas 1567931694806212659 preservado",
-      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/blocking-request-hierarchy-readback.json",
-      "state": "pre-read conta/page/denylist/6midias/reservas ok. mesmo request revisado somente inicio imediato meta-safe,novo selo84a709876c93 preservando selo aprovado. engine interrompido antes de claim/write por lease pg_8348 historico: engine failed,runner recovery_pending. aria c004/c005 live paused,zero conjuntos/ads e insights vazios. sem writer process ativo observado. lease e pedido antigo preservados; zero campanha atual criada.",
+      "next_step": "Nenhuma recuperacao/criacao pendente. Monitoramento normal pelas rotas existentes; nao reexecutar campanha nem retomar Aria sem nova instrucao. Registrar conclusao na origem,sem novo cron/anexos.",
+      "objective": "Publicar MODEL clone1x1x3 USD30 com midias Nicolas e inicio imediato autorizado",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/completion-acceptance.json",
+      "state": "complete: campanha120251058312020629 model(pg_23156)dup01,conjunto120251058312870629 e3anuncios active,usd30/dia,inicio12:23:25 et. engine complete_future_active,get/page/utm/copy/json-agt/lineage/6variantes verificados;2ad ids parciais preservados+1faltante recuperado sem replay.3assets mesmosids/hashes em nicolas-usados e inventario02_testing. ariac004/c005 paused/intactas,recuperacao suspensa; lease atual liberada. insights sem linhas12:30et,entrega nao comprovada.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T16:06:20+00:00"
+      "updated_at": "2026-11-05T17:32:16+00:00"
     },
     {
       "agent": "ares",
@@ -8736,5 +8746,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T16:08:56+00:00"
+  "updated_at": "2026-11-05T17:32:16+00:00"
 }
