@@ -42,6 +42,14 @@ Quando o contrato separar a sequência global de campanhas do identificador da P
 
 Aceite: mesmo campaign ID antes/depois, payload exclusivamente `name`, nome literal confirmado, budget/status/hierarquia/tracking preservados, número comprometido no ledger e continuidade/projeções coerentes. Na resposta ao operador, mostrar apenas o novo nome e a confirmação operacional útil.
 
+## Cobertura de todas as threads solicitadas
+
+- Auditar cada rota funcional pelo binding canônico exato, não apenas o consumidor ativo ou a política central. Uma regra pode estar correta globalmente e faltar no prompt local das demais contas. Registrar por thread: fonte, versão, contexto ativo e mensagem de referência relida; agregar e deduplicar os resultados em código contra a quantidade pedida.
+- Se a regra já autorizada abrange essas rotas, completar somente a projeção faltante. Thread de conta candidata pode receber contexto de escopo/naming sem ser promovida a consumidor ativo: preservar contratos, credenciais, readiness e flags. Não herdar a conta do canal pai como fallback quando a thread tem conta própria registrada.
+- Para chave de prompt inexistente, usar adição tipada no sincronizador, comparar o YAML versionado inteiro com o estado esperado e reler o mapping ativo preservando outros valores. Não sobrescrever o conjunto com uma entrada isolada nem editar YAML ativo à mão.
+- Antes de publicar em thread arquivada, ler título, parent, archived e locked. Reabrir somente se necessário para a projeção autorizada, publicar e conferir a mensagem; restaurar o estado archived original no finally, preservando título, parent e locked. Não criar outra thread, desbloquear permissões ou apagar histórico.
+- Uma confirmação de padrão salvo não comprova que a conta está pronta para publicar campanhas. Distinguir cobertura de contexto da operação/credencial/readiness, sem cobrar novamente aprovação já concedida para a regra.
+
 ## Drift
 
 Qualquer diferença entre família, contrato da operação, registry, prompt, config ativo ou projeção Discord deixa a sincronização incompleta. Não declarar atualização antes de todos os readbacks aplicáveis fecharem.

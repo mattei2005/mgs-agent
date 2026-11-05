@@ -2684,12 +2684,12 @@
     {
       "agent": "ares",
       "id": "EGGBEV-THREE-CREATION-THREADS-1567979089896407112",
-      "next_step": "Adicionar somente bindings/prompts/projecoes de naming nas threads02/03 pelo sincronizador canonico;preservar titulos e estadoarquivado apos publicacao;GET3threads+runtime/versionado e contagem final3/3. Nao alterar readiness/credenciais/campanhas.",
-      "objective": "Auditar e completar projecao do padrao naming nas threads Criacao Eggbev01/02/03",
-      "source": "data/ares/meta-ads/audit/eggbev/thread-naming-audit-1567979089896407112/before-audit.jsonl",
-      "state": "auditoria real:01 source/runtime/policy/projecao presentes;02e03 threads corretas arquivadas,sem source nem runtimeprompt local,nem mensagem do padrao. bindings soberanos resolvidos no mapa,sem promover candidatos a operacao ativa.",
+      "next_step": "Nenhum ajuste de projecao pendente. Politica naming central continua unica;nao confundir contexto salvo com prontidao para publicar campanhas. Proximas auditorias enumeram explicitamente01/02/03 por binding e conferem as4camadas.",
+      "objective": "Confirmar padrao salvo nas3threads de Criacao Eggbev01/02/03",
+      "source": "data/ares/meta-ads/audit/eggbev/thread-naming-audit-1567979089896407112/coverage.json",
+      "state": "complete3/3. lacuna anterior02/03 corrigida: fontes locais adicionadas,versionado/runtime iguais,mensagens publicadas e getconfirmado. thread01 existente eregras confirmados. 21testes pass,incluindo adicaodechave e candidatos naoativados. titulos/parent/locked earchived originais preservados;02/03 voltaramarchivedtrue. ativos/candidatos/readiness/credenciais/budgets intactos;zerometa writes.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T19:14:57+00:00"
+      "updated_at": "2026-11-05T19:25:17+00:00"
     },
     {
       "agent": "zeus",
@@ -8766,5 +8766,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T19:14:57+00:00"
+  "updated_at": "2026-11-05T19:25:17+00:00"
 }
