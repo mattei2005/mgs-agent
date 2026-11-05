@@ -3315,6 +3315,23 @@
       "updated_at": "2026-11-05T14:32:02+00:00"
     },
     {
+      "canonical_key": "ares.eggbev01.technical-own-credential-read",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-05T14:50:39+00:00",
+      "id": "ARES-EGGBEV01-OWN-CREDENTIAL-READ-1567911802774360195",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev01 leitura tecnica propria de identidade User token e introspeccao self-only autorizada e validada",
+      "updated_at": "2026-11-05T14:50:39+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565032661557313747.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -6385,6 +6402,23 @@
       "superseded_by": null,
       "title": "Raquel autoriza produzir/publicar100 SEO:84pautasaprovadas+16emportaisjamencionados",
       "updated_at": "2026-10-26T19:03:06+00:00"
+    },
+    {
+      "canonical_key": "content.seo100.feedback.fashion-link-policy",
+      "canonical_source": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/fashion-link-policy-1567912301942546574.json",
+      "consumers": [
+        "atena"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-11-05T14:45:55+00:00",
+      "id": "ATENA-SEO100-FASHION-SHEIN-1567912301942546574",
+      "kind": "decision",
+      "owner": "Raquel Oliveira / Content Operations",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SEO100 moda: link externo padrao SHEIN pode ser mantido",
+      "updated_at": "2026-11-05T14:45:55+00:00"
     },
     {
       "canonical_key": "content.seo100.feedback.1567897844302741565",
@@ -16078,5 +16112,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T14:32:02+00:00"
+  "updated_at": "2026-11-05T14:50:39+00:00"
 }

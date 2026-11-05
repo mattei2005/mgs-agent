@@ -6837,12 +6837,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Implementar guard account-scoped para propria identidade/introspeccao com testes negativos; validar live; cutover reversivel e readback; sem publicar campanha.",
-      "objective": "Concluir ajuste tecnico de leitura propria e cutover Eggbev01 Mhd Aldy autorizado",
-      "source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
-      "state": "rodolfo 1567911802774360195 aprovou ajuste tecnico restrito read-only de identidade/app. backups preparados; sem write meta. autoridade anterior do binding permanece.",
+      "next_step": "Manutencao de binding encerrada. Clone original permanece em preparacao: mesmo request USD30 tres videos/copy/JSON; revalidar horario explicito vencido e executar reconciliacao/prestage/plan, resumo e OK final de Nicolas antes de campanha. Nao pedir novamente as duas autorizacoes tecnicas ja concedidas.",
+      "objective": "Clone MODEL USD30 1x1x3; manutencao de identidade/app e binding Eggbev01 concluida",
+      "source": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/post-cutover-readback.json",
+      "state": "ajuste tecnico 1567911802774360195 concluido,31 testes pass; identidade mhd aldy e emissor minibot user validos; conta/page/pixel/model/source_ad http200. binding conta/operacao/engine/cache concordam, rollback carla preservado; demais contas/config intactas. duas projecoes discord verificadas. campanha nao criada/ativada.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T14:42:57+00:00"
+      "updated_at": "2026-11-05T14:50:39+00:00"
     },
     {
       "agent": "ares",
@@ -8716,5 +8716,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T14:42:57+00:00"
+  "updated_at": "2026-11-05T14:50:39+00:00"
 }

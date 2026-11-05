@@ -893,6 +893,26 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "autopush-ares-metadata-test-1567915434139844750",
+      "actor": "zeus",
+      "type": "autocommit_guardrail_recovery",
+      "source_alert_id": "1567915434139844750",
+      "authority_message_ids": ["1562987037370617896", "1562987234351644764"],
+      "origin_thread_id": "1541578556037927053",
+      "origin_authority_message_id": "1567911802774360195",
+      "origin_report_message_id": "1567914234271240234",
+      "cause": "Filename-only sensitive guard false positive on reviewed offline synthetic authorization tests",
+      "reviewed_exact_path": "tests/test_ares_credential_metadata.py",
+      "correction": "One anchored exact test-path exception; all sibling credentials and copies remain blocked",
+      "paths": ["scripts/auto-commit-watcher.sh", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py"],
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1567915434139844750",
+      "state": "awaiting_native_commit_push",
+      "next_step": "Reload sole native watcher, wait for normal batch, verify exact committed bytes and remote main, then monitor and REPORT-INFRA readback",
+      "validation": {"watcher_tests_passed": 28, "monitor_tests_passed": 17, "pending_signature_scanned_files": 30, "signature_hits": 0, "partial_effects": "Empty index; guard blocked before commit/push; Ares technical task completed and origin REPORT-INFRA read back"},
+      "credentials_changed": false,
+      "manual_commit_or_push": false
+    },
+    {
       "id": "hermes-news-main-delta-1567760164319272970",
       "agent": "zeus",
       "status": "active",

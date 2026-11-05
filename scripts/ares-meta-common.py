@@ -614,8 +614,17 @@ def _enforce_operational_account_scope(path, params=None, method='GET'):
     return guard
 
 
-def _graph_get_once(path, token, params=None):
-    guard = _enforce_operational_account_scope(path, params, 'GET')
+def _graph_get_once(path, token, params=None, *, credential_metadata_account_id=None):
+    if credential_metadata_account_id is None:
+        guard = _enforce_operational_account_scope(path, params, 'GET')
+    else:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('mgs_ares_credential_metadata_guard', '/root/mgs-agent/scripts/mgs-ares-asset-scope.py')
+        if spec is None or spec.loader is None:
+            raise RuntimeError('Ares credential metadata guard unavailable')
+        guard = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(guard)
+        guard.enforce_credential_metadata(path, params, 'GET', credential_metadata_account_id, token)
     scope_params = dict(params or {})
     params = dict(params or {})
     params['access_token'] = token
@@ -629,7 +638,10 @@ def _graph_get_once(path, token, params=None):
             headers = dict(resp.headers)
             record_response_usage(headers, resp.status, payload, logical_points=1)
             if 200 <= resp.status < 300:
-                guard.observe_meta_response(path, scope_params, payload, 'GET')
+                if credential_metadata_account_id is None:
+                    guard.observe_meta_response(path, scope_params, payload, 'GET')
+                else:
+                    guard.observe_credential_metadata(path, scope_params, payload, credential_metadata_account_id, token)
             return resp.status, payload, headers
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8','replace')
@@ -726,6 +738,13 @@ def _request_with_retry(once, path, token, params=None):
             return status, _deferred_payload(status, payload, attempt, total_sleep, wait_seconds), headers
         time.sleep(wait_seconds)
         total_sleep += wait_seconds
+
+
+def graph_get_credential_metadata(account_id, token, *, inspect_token=False):
+    """Read only this authenticated credential's identity/app under CEO grant."""
+    path = 'debug_token' if inspect_token else 'me'
+    params = {'input_token': token} if inspect_token else {'fields': 'id,name'}
+    return _graph_get_once(path, token, params, credential_metadata_account_id=account_id)
 
 
 def graph_get(path, token, params=None):

@@ -153,6 +153,13 @@ fi
             "reports/vagaaqui-cloudflare-other/token-policy-before.json": 1,
             "reports/vagaaqui-cloudflare-1567024655431245884/token.json": 1,
             "reports/vagaaqui-cloudflare-1567024655431245884/credentials.json": 1,
+            "tests/test_ares_credential_metadata.py": 0,
+            "work/tests/test_ares_credential_metadata.py": 1,
+            "tests/test_ares_credential_metadata.py.bak": 1,
+            "tests/test_ares_credential_metadata_other.py": 1,
+            "tests/test_ares_credential_metadata.json": 1,
+            "tests/ares_credentials.json": 1,
+            "tests/ares_token.json": 1,
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

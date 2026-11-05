@@ -87,6 +87,10 @@ SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^docs/finance-meta-read-
 # Keep other incidents, sibling credentials and backup copies blocked.
 SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^reports/vagaaqui-cloudflare-1567024655431245884/token-policy-(before|after|request|validation|validation-corrected|write-response)\.json$"
 
+# Reviewed offline authorization tests from the reconciled Eggbev01 cutover.
+# Synthetic tokens only; this exact test path does not exempt runtime secrets.
+SENSITIVE_ALLOWLIST_REGEX="${SENSITIVE_ALLOWLIST_REGEX}|^tests/test_ares_credential_metadata\.py$"
+
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
 GIT_PATHSPECS=(

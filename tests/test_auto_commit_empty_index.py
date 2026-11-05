@@ -201,6 +201,23 @@ exec {self.real_git} "$@"
         self.run_until("Commit OK:")
         self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()), names)
 
+    def test_reviewed_ares_identity_metadata_test_commits(self):
+        name = "tests/test_ares_credential_metadata.py"
+        path = self.repo / name
+        path.parent.mkdir()
+        path.write_text("# Synthetic offline authorization test; no credentials.\n")
+        self.run_until("Commit OK:")
+        self.assertEqual(self.git("show", "--format=", "--name-only", "HEAD"), name)
+
+    def test_ares_metadata_exception_blocks_sibling_credentials(self):
+        base = self.repo / "tests"
+        base.mkdir()
+        (base / "test_ares_credential_metadata.py").write_text("# Synthetic fixture.\n")
+        (base / "ares_credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_cloudflare_metadata_exception_blocks_sibling_credentials(self):
         base = self.repo / "reports/vagaaqui-cloudflare-1567024655431245884"
         base.mkdir(parents=True)

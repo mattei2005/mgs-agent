@@ -13,6 +13,19 @@
     "repeat_approval_required_within_same_scope": false,
     "credential_cutover_requires_identity_and_app_validation": true
   },
+  "advertiser_binding_current": {
+    "token_item": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
+    "token_identity": "Mhd Aldy",
+    "token_user_id": "1700526774973769",
+    "meta_app_id": "1299247318762949",
+    "authority_message_id": "1567907415394099351",
+    "technical_validation_authority_message_id": "1567911802774360195",
+    "validation_audit": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/live-validation.json",
+    "rollback": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567911802774360195/previous-binding.json",
+    "supersedes": "meta_app_profile_token_cutover_20260902 advertiser binding only; historical evidence preserved",
+    "remote_permission_changes": false,
+    "campaign_write_authorized_by_cutover": false
+  },
   "account_timezone": "America/New_York",
   "global_budget_limit_policy": {
     "source": "data/ares/meta-ads/policies/global-budget-limit-policy.json",
@@ -3046,6 +3059,8 @@
   "status": "operational_gated_creation_ready_for_request",
   "strategy_family": "chatpion_bot_messenger",
   "meta_app_profile_token_cutover_20260902": {
+    "binding_status": "superseded",
+    "binding_superseded_by": "advertiser_binding_current; Rodolfo 1567907415394099351",
     "authorized_by": "Rodolfo Mattei",
     "authorization_source": "discord:thread:1544757670412820541#1544774258578821220",
     "scope": "Eggbev account 1034081997659047 keeps Carla Nunes as advertiser identity while its token is renewed in-place for app 1299247318762949",
