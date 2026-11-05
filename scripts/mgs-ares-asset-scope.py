@@ -79,6 +79,32 @@ def _enforce_dependency(clean,params,method,row,data):
   if not set(params)<={'fields','limit','after','before'} or (fields!={''} and not fields<={'id','uri','is_preferred','width','height','scale'}):raise ScopeError(DENY)
  elif edge or not fields or not fields<=allowed or not set(params)<={'fields'}:raise ScopeError(DENY)
 
+CREDENTIAL_IDENTITY_POLICY=Path('/root/mgs-agent/data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json')
+
+def enforce_credential_metadata(path,params,method,account_id,authentication_token):
+ """Approved own-credential metadata only; never an asset/discovery grant."""
+ import hmac
+ data=load_scope()
+ if not allowed_account(account_id,data):raise ScopeError(DENY)
+ try:policy=json.loads(CREDENTIAL_IDENTITY_POLICY.read_text())
+ except (OSError,ValueError):raise ScopeError(DENY) from None
+ grant=policy.get('technical_identity_validation',{})
+ if policy.get('status')!='active' or policy.get('account_id')!=str(account_id) or grant.get('status')!='active' or grant.get('account_id')!=str(account_id) or grant.get('authorized_by_discord_id')!='344196393512075265' or not re.fullmatch(r'[0-9]{17,20}',str(grant.get('authority_message_id',''))):raise ScopeError(DENY)
+ clean,params=_request_parts(path,params)
+ if method.upper()!='GET' or not authentication_token:raise ScopeError(DENY)
+ if clean=='me' and params=={'fields':'id,name'} and 'me:id,name' in grant.get('allowed_reads',[]):return
+ if clean=='debug_token' and set(params)=={'input_token'} and 'debug_token:self_only' in grant.get('allowed_reads',[]) and isinstance(params['input_token'],str) and hmac.compare_digest(params['input_token'],authentication_token):return
+ raise ScopeError(DENY)
+
+def observe_credential_metadata(path,params,payload,account_id,authentication_token):
+ """Validate metadata response without enrolling identity/scopes as assets."""
+ enforce_credential_metadata(path,params,'GET',account_id,authentication_token)
+ clean,_=_request_parts(path,params)
+ if not isinstance(payload,dict):raise ScopeError(DENY)
+ identity=payload if clean=='me' else payload.get('data',{})
+ if clean=='me' and (not re.fullmatch(r'[0-9]{5,30}',str(identity.get('id',''))) or not isinstance(identity.get('name'),str)):raise ScopeError(DENY)
+ if clean=='debug_token' and (not isinstance(identity,dict) or identity.get('is_valid') is not True or str(identity.get('app_id',''))!=APP_ID or not re.fullmatch(r'[0-9]{5,30}',str(identity.get('user_id','')))):raise ScopeError(DENY)
+
 def enforce_meta_path(path,params=None,method='GET'):
  if not is_ares_context():return
  clean,params=_request_parts(path,params)

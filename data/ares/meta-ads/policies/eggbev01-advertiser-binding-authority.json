@@ -33,6 +33,14 @@
     "troca de arquitetura User token para System User"
   ],
   "supersedes": "Exigencia de nova confirmacao de Rodolfo a cada reconciliacao de binding equivalente dentro deste recorte; demais gates criticos permanecem.",
+  "technical_identity_validation": {
+    "status": "active",
+    "authority_message_id": "1567911802774360195",
+    "authorized_by_discord_id": "344196393512075265",
+    "account_id": "1034081997659047",
+    "allowed_reads": ["me:id,name", "debug_token:self_only"],
+    "scope": "Only authenticated credential own identity and issuer-app introspection for this account binding validation. No remote permission changes, new assets, foreign-token introspection or general discovery."
+  },
   "implementation_status": "PENDING_IDENTITY_APP_VALIDATION",
   "pending_reason": "O guard local permite /me somente com client_business_id; a Meta rejeita esse campo para User Access Token com code190. Leitura simples /me e introspeccao do token nao estao liberadas pelo guard vigente. Nao alterar o binding nem contornar a protecao.",
   "evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567907415394099351/verification.json"

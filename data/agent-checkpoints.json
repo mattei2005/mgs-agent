@@ -6837,12 +6837,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Confirmacao critica apenas para ajuste tecnico restrito da leitura da propria identidade e introspeccao User token; nao repetir aprovacao do binding. Apos validacao, aplicar binding/caches reversivel e retomar mesmo request ate plan/OK; horario anterior vencido deve ser revalidado.",
-      "objective": "Reconciliar binding Eggbev01 para Mhd Aldy aprovado por Rodolfo e preservar pedido MODEL USD30 1x1x3",
-      "source": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567907415394099351/acceptance.json",
-      "state": "autorizacao permanente scoped registrada, contrato/matriz e 2 projecoes discord verificados. cutover nao aplicado: user token conta/page200, mas campo client_business_id exigido pelo guard e exclusivo bisu; identidade/app emissor ainda nao comprovados. zero alteracao guard/permissoes/meta.",
+      "next_step": "Implementar guard account-scoped para propria identidade/introspeccao com testes negativos; validar live; cutover reversivel e readback; sem publicar campanha.",
+      "objective": "Concluir ajuste tecnico de leitura propria e cutover Eggbev01 Mhd Aldy autorizado",
+      "source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
+      "state": "rodolfo 1567911802774360195 aprovou ajuste tecnico restrito read-only de identidade/app. backups preparados; sem write meta. autoridade anterior do binding permanece.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T14:32:33+00:00"
+      "updated_at": "2026-11-05T14:42:57+00:00"
     },
     {
       "agent": "ares",
@@ -8716,5 +8716,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T14:34:52+00:00"
+  "updated_at": "2026-11-05T14:42:57+00:00"
 }
