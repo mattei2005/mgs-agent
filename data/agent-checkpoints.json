@@ -3474,12 +3474,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1568030755169509428",
-      "next_step": "Reconciliar GET dos mesmos IDs e retomar somente camada pendente",
+      "next_step": "Executor único ativa19IDs no horário com autoridade/readiness/drift e readback;Geizian precisa regularizar anúncios da68 na Meta antes de nova validação/ativação;nenhum criativo alterado",
       "objective": "Pausar20campanhas nominais YOLO01G002 e reativar06/11/2026 00h America/New_York, status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568030755169509428/request.json",
-      "state": "recovery_required: material_drift_135",
+      "state": "20/20 paused por get integral (19writes,1já pausada);19/19aptas congeladas e agendadas06/11/2026 00:00 america/new_york;campanha68 pendente:2anúncios disapproved;201testes e dry-run19/19;budgets/lances/programação preservados",
       "thread_id": "1557917403822956698",
-      "updated_at": "2026-11-05T22:39:59+00:00"
+      "updated_at": "2026-11-05T22:48:42+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1568032738949210134",
+      "next_step": "One-shot aguarda00h06/11/2026 Nova York sem lock; valida autoridade/drift e ativa somente28IDs, GET final, checkpoint e confirmação na origem",
+      "objective": "Pausar28campanhas YOLO03G005 e reativar06/11/2026 00h Nova York status-only",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568032738949210134/request.json",
+      "state": "scheduled:28/28paused meta; snapshot estável28conjuntos/56anúncios;258testes,dry-run live,job enabled script-only,destino origem e auditoria pós-write confirmados",
+      "thread_id": "1558126286826774711",
+      "updated_at": "2026-11-05T22:50:17+00:00"
     },
     {
       "agent": "zeus",
@@ -8796,5 +8806,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:39:59+00:00"
+  "updated_at": "2026-11-05T22:50:17+00:00"
 }
