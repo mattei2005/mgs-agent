@@ -6,6 +6,12 @@
     "live_readback_name": "Eggbev-US-CC-EN-01"
   },
   "account_currency": "USD",
+  "creation_naming_policy": {
+    "source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+    "authority_message_id": "1567964887353663610",
+    "scope": "future from-zero creation in exact Eggbev-US-CC-EN accounts01/02/03; no onboarding, credential or financial changes",
+    "supersedes": "older per-Page prefix/C001/AdG1 creation naming only; preserve historical manifests and clone naming contracts"
+  },
   "advertiser_binding_reconciliation_authority": {
     "policy_source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
     "authority_message_id": "1567907415394099351",
@@ -358,7 +364,7 @@
     },
     "minimal_request_semantics": {
       "automatic_ad_name_template": "AD NN - {canonical_stem}; numbering resets inside each campaign",
-      "campaign_name_template": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX; allocate C001, C002, C003... in request order and never append para [first name] - Copy",
+      "campaign_name_template": "[global_campaign_number] - [exact Page name] - ENG - US - (pg_XXXXX) - CXX; global number starts300 and advances across exact accounts01/02/03; C01,C02,... per pg; ADGROUP 01; resolve Page name and FB ID from exact SB pg plus Meta GET; shared policy is authoritative",
       "campaigns_with_n_creatives": "N campaigns, each with one ad set and N requested ads; creatives are unique across the whole batch unless Nicolas explicitly says reuse",
       "creative_count_default": 3,
       "example_3_campaigns_3_creatives": "3 campaigns x 1 ad set x 3 ads = 9 unique creatives from CC_US_EN",
@@ -410,11 +416,13 @@
     "collision_gate": "read all non-deleted live campaign names and choose the first free DUP number before manifest sealing",
     "creation_from_zero": {
       "ad_name": "provided_per_creative; if missing ask once before manifest/publication",
-      "campaign_sequence": "use the next free C001, C002, C003... for the exact pg token after a cross-account non-deleted collision scan",
+      "campaign_sequence": "C01,C02,... for the exact pg token across the three Eggbev US EN accounts; shared naming policy supersedes old C001 formatting",
       "forbidden": "do not append DUPnn because there is no source campaign in from-zero creation",
-      "page_sequence": "for a Page not found in the cross-account Eggbev EN naming scan, allocate the next global free numeric prefix immediately before manifest sealing; an existing Page with conflicting prefixes fails closed",
-      "pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX",
-      "reference_example": "162 - Amy Shook - ENG - US - (pg_5024) C001",
+      "page_sequence": "superseded as a stable per-Page prefix: use a new global campaign number >=300 for every creation across accounts01/02/03, under shared atomic reservation",
+      "pattern": "[global_campaign_number] - [exact Page name] - ENG - US - (pg_XXXXX) - CXX",
+      "reference_example": "300 - Georgina Whitford - ENG - US - (pg_23156) - C01",
+      "adset_name": "ADGROUP 01",
+      "superseded_creation_naming_history": {"pattern": "[page_sequence] - [Page name] - ENG - US - (pg_XXXXX) C0XX", "adset_name": "AdG1", "superseded_by": "1567964887353663610"},
       "status": "approved_by_nicolas_and_materialized"
     },
     "duplicate_sequence": "first duplicate DUP01; then DUP02, DUP03 and so on; duplicating a campaign already ending in DUPnn reuses the same base and advances to the next free number",
@@ -458,7 +466,7 @@
       "end": "ongoing",
       "gender": "ALL",
       "minimum_age": 18,
-      "name": "AdG1",
+      "name": "ADGROUP 01",
       "performance_goal": "MAXIMIZE_NUMBER_OF_CONVERSIONS",
       "placements_mode": "MANUAL_ONLY",
       "start": "next_day_00:00_America/New_York",

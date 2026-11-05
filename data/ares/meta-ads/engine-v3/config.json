@@ -1,5 +1,6 @@
 {
   "engine_version": 3,
+  "eggbev_creation_naming_policy": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
   "shein_cross_account_reference": {
     "enabled": true,
     "approved_by": "344196393512075265",
@@ -356,7 +357,7 @@
         ],
         "by_mode": {
           "from_zero_prestaged": {
-            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\) C[0-9]{3}",
+            "name_regex": "[0-9]+ - .+ - ENG - US - \\(pg_[0-9]+\\)(?: C[0-9]{3}| - C[0-9]{2,})",
             "budget_source": "campaign_create",
             "allowed_ad_counts": [
               3,

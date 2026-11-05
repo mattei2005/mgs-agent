@@ -260,8 +260,14 @@ def build_eggbev_from_zero_manifest(
         raise ValueError("at least one nonempty headline is required")
     welcome_message = messenger_welcome_message()
     campaigns: list[dict[str, Any]] = []
+    if campaign_numbers is not None and (len(campaign_numbers) != len(campaign_sequences) or len(set(campaign_numbers)) != len(campaign_numbers)):
+        raise ValueError("one unique global campaign number is required per campaign")
     for campaign_index, sequence in enumerate(campaign_sequences):
-        campaign_name = f"{page_sequence} - {page_name} - ENG - US - ({page_token}) C{sequence:03d}"
+        if campaign_numbers is None:
+            campaign_name = f"{page_sequence} - {page_name} - ENG - US - ({page_token}) C{sequence:03d}"
+        else:
+            from .eggbev_creation_naming import format_name
+            campaign_name = format_name(campaign_numbers[campaign_index], page_name, page_token, sequence)
         ads: list[dict[str, Any]] = []
         for ad_index in range(ads_per_campaign):
             global_index = campaign_index * ads_per_campaign + ad_index
@@ -293,7 +299,7 @@ def build_eggbev_from_zero_manifest(
                 "account_id": ACCOUNT_ID,
                 "mode": "from_zero_prestaged",
                 "name": campaign_name,
-                "adset_name": "AdG1",
+                "adset_name": adset_name,
                 "start_time": start_time,
                 "status": status,
                 "campaign_updates": {},

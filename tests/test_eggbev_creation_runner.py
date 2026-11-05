@@ -152,7 +152,7 @@ class EggbevCreationRunnerTests(unittest.TestCase):
     def test_installed_messenger_json_uses_graph_batch_not_individual_get(self):
         welcome = RUNNER.messenger_welcome_message(RUNNER.MESSENGER_TEMPLATE_PATH)
         creative_payload = {
-            "object_story_spec": {"page_id": "page-1"},
+            "object_story_spec": {"page_id": "12345678901"},
             "url_tags": "utm_campaign=pg_5000",
             "asset_feed_spec": {
                 "additional_data": {"page_welcome_message": welcome}
@@ -176,7 +176,7 @@ class EggbevCreationRunnerTests(unittest.TestCase):
                         "code": 200,
                         "body": {
                             "id": "creative-1",
-                            "object_story_spec": {"page_id": "page-1"},
+                            "object_story_spec": {"page_id": "12345678901"},
                             "url_tags": "utm_campaign=pg_5000",
                             "asset_feed_spec": {
                                 "additional_data": {
@@ -217,14 +217,14 @@ class EggbevCreationRunnerTests(unittest.TestCase):
 
             def graph_get(self, path, token, params):
                 self.paths.append(path)
-                if path == "page-1":
+                if path == "12345678901":
                     return 200, {
-                        "id": "page-1",
+                        "id": "12345678901",
                         "name": "Requested Page",
-                        "link": "https://facebook.test/page-1",
+                        "link": "https://facebook.test/12345678901",
                         "access_token": "sanitized-page-token",
                     }, {}
-                if path == "page-1/page_backed_instagram_accounts":
+                if path == "12345678901/page_backed_instagram_accounts":
                     self.assert_page_token = token
                     return 200, {"data": [{"id": "instagram-1"}]}, {}
                 raise AssertionError(path)
@@ -241,7 +241,8 @@ class EggbevCreationRunnerTests(unittest.TestCase):
                 return {
                     "page_rows": [{
                         "UTM_CAMPAIGN": "pg_5000",
-                        "FB_PAGE_ID": "page-1",
+                        "FB_PAGE_ID": "12345678901",
+                        "PAGE_NAME": "Requested Page",
                         "LEADS": 10,
                     }],
                     "ready": True,
@@ -260,8 +261,8 @@ class EggbevCreationRunnerTests(unittest.TestCase):
             setattr(RUNNER, "load_module", original_load_module)
             setattr(RUNNER, "require_page_eligible", original_page_gate)
         self.assertEqual(fake_meta.paths, [
-            "page-1",
-            "page-1/page_backed_instagram_accounts",
+            "12345678901",
+            "12345678901/page_backed_instagram_accounts",
         ])
         self.assertNotIn("me/accounts", fake_meta.paths)
         self.assertNotIn("access_token", page)

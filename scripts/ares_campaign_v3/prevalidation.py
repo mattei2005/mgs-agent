@@ -44,6 +44,12 @@ def verify_prevalidation(payload: dict[str, Any]) -> bool:
 
 
 def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
+    if config.get("eggbev_creation_naming_policy"):
+        from .eggbev_creation_naming import validate_manifest, NamingError
+        try:
+            validate_manifest(manifest)
+        except NamingError as exc:
+            raise ManifestError(str(exc)) from exc
     accounts = config.get("accounts") or {}
     require_registration = config.get("require_account_registration") is True
     for campaign in manifest.campaigns:

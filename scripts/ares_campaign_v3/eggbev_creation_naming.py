@@ -86,6 +86,17 @@ def reserve(request_id,account_id,identity,count,snapshots,*,policy=None,ledger_
   os.replace(tmp,path);return row
 def allocation(request_id,policy=None):
  p=policy or load_policy();path=ROOT/p['ledger_path'];ledger=json.loads(path.read_text()) if path.exists() else {};return ledger.get('allocations',{}).get(request_id)
+def verify_live_reservation(request_id,snapshots,policy=None):
+ p=policy or load_policy();_validate_snapshots(snapshots,p,datetime.now(timezone.utc));row=allocation(request_id,p)
+ if not row:raise NamingError('request reservation missing')
+ expected=dict(zip(row['global_numbers'],row['names']))
+ for aid,s in snapshots.items():
+  for campaign in s['campaigns']:
+   if campaign.get('status') in ['DELETED','ARCHIVED']:continue
+   match=re.match(r'^\s*([0-9]+)\s*-',str(campaign.get('name','')))
+   if match and int(match.group(1)) in expected and (aid!=row['account_id'] or campaign['name']!=expected[int(match.group(1))]):raise NamingError('global campaign number collision before write')
+ return True
+
 def validate_manifest(manifest,policy=None):
  p=policy or load_policy()
  relevant=[c for c in manifest.campaigns if c.mode==p['mode'] and applies(manifest.created_at,c.account_id,p)]

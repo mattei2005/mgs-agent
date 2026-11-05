@@ -1,6 +1,8 @@
 {
   "schema_version": "1.0",
   "operation_id": "Eggbev-US-CC-EN-03-BOT",
+  "creation_naming_policy": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+  "naming_policy_scope_note": "prospective naming only; onboarding, credential and write-readiness remain unchanged",
   "engine_operation": "Eggbev-US-CC-EN-BOT",
   "status": "onboarding_read_only_validated_page_access_pending",
   "strategy_binding": {"family_id": "chatpion_bot_messenger", "contract": "data/ares/meta-ads/strategy-families/chatpion-bot-messenger.json"},

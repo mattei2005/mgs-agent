@@ -1,5 +1,6 @@
 import json
 import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -21,7 +22,7 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         completed = subprocess.run(
-            ["python3", str(SCRIPT), "--check"],
+            [sys.executable, str(SCRIPT), "--check"],
             cwd=BASE,
             check=True,
             capture_output=True,
@@ -38,7 +39,7 @@ class EggbevCreationConfigReportTests(unittest.TestCase):
             "SALES",
             "CBO",
             "HIGHEST_VOLUME",
-            "AdG1",
+            "ADGROUP 01",
             "1×1×3",
             "1×1×5",
             "America/New_York",

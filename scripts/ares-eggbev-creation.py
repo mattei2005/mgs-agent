@@ -42,6 +42,7 @@ from ares_campaign_v3.eggbev_create import (
 from ares_campaign_v3.engine import CampaignEngine
 from ares_campaign_v3.eggbev_page_eligibility import PageEligibilityError, require_page_eligible
 from ares_campaign_v3.media_registry import MediaNotReady, MediaRegistry
+from ares_campaign_v3 import eggbev_creation_naming as shared_naming
 from ares_campaign_v3.prestage import (
     AdAccountVideoUploader,
     OnDemandMediaPipeline,
@@ -242,6 +243,7 @@ def live_page_and_token(page_token: str) -> tuple[dict[str, Any], Any, str]:
     page["page_token"] = page_token
     page["leads_snapshot"] = rows[0].get("LEADS")
     page["messenger_source_ready"] = bundle.get("ready")
+    page["naming_identity"] = shared_naming.reconcile_page(rows, page, page_token)
     return page, meta, token
 
 
@@ -335,7 +337,7 @@ def reserve_page_sequence(page_token: str, observed: set[int], request_id: str) 
         return sequence
 
 
-def naming_for_request(meta, token: str, page_token: str, count: int, request_id: str) -> tuple[int, list[int], list[dict[str, Any]]]:
+def _legacy_naming_for_request(meta, token: str, page_token: str, count: int, request_id: str) -> tuple[int, list[int], list[dict[str, Any]]]:
     rows = cross_account_page_history(meta, token, page_token)
     pattern = re.compile(rf"^\s*(\d+)\s*-.*\({re.escape(page_token)}\).*?\bC(\d+)\b", re.I)
     page_numbers: set[int] = set()
@@ -353,6 +355,19 @@ def naming_for_request(meta, token: str, page_token: str, count: int, request_id
             sequences.append(candidate)
         candidate += 1
     return page_sequence, sequences, rows
+
+
+def naming_for_request(meta, token: str, page_token: str, count: int, request_id: str, *, page: dict[str, Any] | None = None) -> tuple[int, list[int], list[dict[str, Any]]]:
+    existing = load_json(state_path(request_id)) if state_path(request_id).exists() else {}
+    created = existing.get("created_at_utc") or datetime.now(timezone.utc).isoformat()
+    if not shared_naming.applies(created, ACCOUNT_ID):
+        return _legacy_naming_for_request(meta, token, page_token, count, request_id)
+    if not page or not page.get("naming_identity"):
+        raise CreationBlocked("page_reconciliation", "exact Smart Bidding and Meta Page identity is required")
+    snapshots = shared_naming.collect_history(meta, token)
+    allocation = shared_naming.reserve(request_id, ACCOUNT_ID, page["naming_identity"], count, snapshots)
+    history = [{**row, "account_id": aid} for aid, snapshot in snapshots.items() for row in snapshot["campaigns"]]
+    return allocation["global_numbers"][0], allocation["page_sequences"], history
 
 
 def load_reconciliation(required: int) -> dict[str, Any]:
@@ -548,6 +563,8 @@ def seal_manifest_from_state(state: dict[str, Any], start_time: str) -> tuple[di
         start_time=start_time,
         asset_refs=refs,
         ad_names=[str(value) for value in state["ad_names"]],
+        campaign_numbers=state.get("global_campaign_numbers"),
+        adset_name=state.get("adset_name", "AdG1"),
     )
     config = load_json(CONFIG_PATH)
     validate_account_policy(Manifest.from_dict(payload), config)
@@ -881,6 +898,8 @@ def offline_smoke(output: Path | None) -> dict[str, Any]:
         refs.append({"asset_id": asset_id, "checksum": checksum})
     start = (datetime.now(ET) + timedelta(days=2)).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
     payload = build_eggbev_from_zero_manifest(registry=registry, request_id="eggbev-offline-smoke", page_id="123456789012345", instagram_user_id="17841400000000000", page_name="Amy Shook", page_token="pg_5024", page_sequence=162, campaign_sequences=[1, 2, 3], daily_budgets_minor=[5000, 5000, 5000], start_time=start, asset_refs=refs, ad_names=[f"AMY AD {index + 1:02d}" for index in range(9)])
+    # Frozen offline fixture exercises the historical contract, not a live reservation.
+    payload["created_at"] = "2026-08-30T00:00:00+00:00"
     config = load_json(CONFIG_PATH)
     validate_account_policy(Manifest.from_dict(payload), config)
     sealed = prevalidate_payload(payload, registry)
@@ -909,7 +928,8 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         return {"status": existing["phase"], "request_id": args.request_id, "summary_digest": existing.get("summary_digest"), "summary": existing.get("summary")}
 
     page, meta, token = live_page_and_token(args.page_token)
-    page_sequence, campaign_sequences, history = naming_for_request(meta, token, args.page_token, args.campaign_count, args.request_id)
+    page_sequence, campaign_sequences, history = naming_for_request(meta, token, args.page_token, args.campaign_count, args.request_id, page=page)
+    naming_allocation = shared_naming.allocation(args.request_id)
     reconciliation = load_reconciliation(required)
     selected = select_assets(reconciliation, args.request_id, required)
     workdir = WORK_ROOT / request_state_path.stem
@@ -930,6 +950,8 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         "page": page,
         "page_sequence": page_sequence,
         "campaign_sequences": campaign_sequences,
+        "global_campaign_numbers": naming_allocation["global_numbers"] if naming_allocation else None,
+        "adset_name": "ADGROUP 01" if naming_allocation else "AdG1",
         "naming_history_matches": len(history),
         "budgets_minor": budgets,
         "ad_names": ad_names,
@@ -1038,7 +1060,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         atomic_json(audit_path, state)
         return {"status": "PRESTAGE_DEFERRED", "request_id": args.request_id, "ready": len(ready_refs), "required": required, "writes": {"campaign": 0, "media_uploads_possible": processed_now * 2}, "next_action": "rerun prepare with the same request_id after quota capacity is available"}
 
-    manifest_payload = build_eggbev_from_zero_manifest(registry=registry, request_id=args.request_id, page_id=str(page["id"]), instagram_user_id=str(page["instagram_user_id"]), page_name=str(page["name"]), page_token=args.page_token, page_sequence=page_sequence, campaign_sequences=campaign_sequences, daily_budgets_minor=budgets, start_time=next_midnight(), asset_refs=ready_refs, ad_names=ad_names)
+    manifest_payload = build_eggbev_from_zero_manifest(registry=registry, request_id=args.request_id, page_id=str(page["id"]), instagram_user_id=str(page["instagram_user_id"]), page_name=str(page["name"]), page_token=args.page_token, page_sequence=page_sequence, campaign_sequences=campaign_sequences, daily_budgets_minor=budgets, start_time=next_midnight(), asset_refs=ready_refs, ad_names=ad_names, campaign_numbers=state.get("global_campaign_numbers"), adset_name=state.get("adset_name", "AdG1"))
     config = load_json(CONFIG_PATH)
     validate_account_policy(Manifest.from_dict(manifest_payload), config)
     sealed = prevalidate_payload(manifest_payload, registry)
@@ -1085,6 +1107,11 @@ def execute_request(args: argparse.Namespace) -> dict[str, Any]:
     manifest = load_json(manifest_path)
     if Manifest.from_dict(manifest).digest != state.get("manifest_digest"):
         raise CreationBlocked("manifest", "sealed manifest digest drift")
+    if state.get("global_campaign_numbers"):
+        naming_common = load_module(COMMON_PATH, "eggbev_naming_execute_common")
+        naming_meta, _, naming_token, _ = naming_common.load_runtime_modules(account_entry())
+        naming_snapshots = shared_naming.collect_history(naming_meta, naming_token)
+        shared_naming.verify_live_reservation(args.request_id, naming_snapshots)
     state["messenger_json_preexecute"] = verify_manifest_messenger_json_against_canonical(manifest)
     atomic_json(path, state)
     atomic_json(AUDIT_ROOT / f"{path.stem}.json", state)
