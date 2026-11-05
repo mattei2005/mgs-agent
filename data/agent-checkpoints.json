@@ -2664,12 +2664,12 @@
     {
       "agent": "ares",
       "id": "EGGBEV-GLOBAL-NAMING-1567964887353663610",
-      "next_step": "Pre-read e rename currentadset ADGROUP01 com GET;validar3historicos directos scoped+PageSB/Meta;persistir policy,implementar allocator atomico e integrar novas criacoes com testes;projecoes/readback.",
-      "objective": "Aplicar padrao de novas criacoes Eggbev01/02/03 com sequencia global>=300,Page-pg-UTM alinhados e ADGROUP01;renomear conjunto atual",
-      "source": "discord:1541578556037927053/1567964887353663610",
-      "state": "decisao explicita nicolas;escopo apenas nomenclatura/lookup read-only nas3eggbev us en. nao onboardar contas nem alterar credenciais,budget,status,campanhas existentes. fonte01 reader corporativo nominal para historico cross-account read-only;bindings write de cada conta independentes.",
+      "next_step": "Novos pedidos de criacao usam fonte unica da politica e lookup SB/Meta pelo pg;ler3historicos antes da reserva e antes do execute. C01/C02 porPage e prefixoglobalcontinuo;nao consumir300 neste exemplo. Gates/autoridade/readiness porconta e regras de clones preservados. SemacaoMetaadicional pendente.",
+      "objective": "Aplicar naming prospectivo de criacao nas3Eggbev US EN com sequencia global>=300 e Page-pg-UTM alinhados;ADGROUP01 atual/futuro",
+      "source": "data/ares/meta-ads/audit/eggbev/naming-1567964887353663610/acceptance.json",
+      "state": "complete naming-only:89testes pass;historicos completos das3contas consultados com leitor read-only nominal01;proxima previa300-georgina-pg23156-c01 sem reservar/consumirnumero. allocator global atomico,idempotente e guardcentral implantados,admissao e colisao prewrite. currentadset120251058312870629 renomeado adgroup01 e getcamposoutrosiguais;campanhamodel/budget/status mantidos. fonte/versionado/runtime prompts iguais e2projecoes discord getok. readiness/credenciais de02/03naoalteradas,nenhuma nova campanha criada.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T18:16:53+00:00"
+      "updated_at": "2026-11-05T18:46:11+00:00"
     },
     {
       "agent": "ares",
@@ -8756,5 +8756,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T18:24:04+00:00"
+  "updated_at": "2026-11-05T18:46:11+00:00"
 }
