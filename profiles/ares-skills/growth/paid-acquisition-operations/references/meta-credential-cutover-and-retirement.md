@@ -20,6 +20,10 @@ For the old and replacement items, resolve secrets only in process and persist o
 
 Never print or persist the credential value, authorization code or App Secret.
 
+### Diferenciar incompatibilidade de tipo e token inválido
+
+- Em User Access Token de anunciante, não solicitar `client_business_id`: a Meta pode retornar `code=190` com a mensagem explícita de que esse campo exige Business Integration System User. Esse resultado não prova expiração ou invalidez quando as leituras account/Page-scoped retornam HTTP200. Validar identidade por `/me?fields=id,name` e app emissor pela introspecção permitida; GET do app em si prova apenas sua metadata, não o emissor do token. Se o guard local aceitar somente a variante com `client_business_id` e impedir a leitura própria adequada, registrar a incompatibilidade separadamente e preservar os bindings; não remover o guard, não trocar para System User e não chamar a API por transporte paralelo. Ajuste de guard/permissão exige seu escopo crítico próprio. Teste de diagnóstico: code190 citando exclusivamente esse campo + conta/Page200 classifica incompatibilidade de tipo; code190 por token expirado ou inválido continua sendo falha de autenticação.
+
 ## 3. Inventory the complete consumer chain
 
 Do not stop at the central Engine config. Traverse every live path:
