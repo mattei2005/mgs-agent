@@ -6797,12 +6797,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Ler fonte live, Page/denylist e arquivos exatos; preparar plan sem publicar",
-      "objective": "Duplicar MODELO 1x1x3 com tres videos Nicolas, USD30/dia, 05/11 03:00 ET e copy/JSON informados",
-      "source": "discord:1541578556037927053:1567803920217022545",
-      "state": "intake completo; preflight read-only em andamento; publicacao depende de resumo e ok final",
+      "next_step": "Nicolas fornecer link ou ID exato da fonte; validar fonte/Page/denylist e arquivos; preparar manifest/plan e pedir OK final. Reconfirmar inicio se horario ultrapassado.",
+      "objective": "Duplicar MODELO 1x1x3, tres videos Nicolas e copy/JSON informados, USD30/dia, 05/11 03:00 ET",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545-intake.json",
+      "state": "awaiting_source_identification: conta live correta/ativa usd et. fonte modelo ausente em paginacao completa e segunda consulta filtrada http200. tres nomes encontrados no inventario; sem reservas, uploads ou campanha criada.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T07:34:06+00:00"
+      "updated_at": "2026-11-05T07:36:09+00:00"
     },
     {
       "agent": "ares",
@@ -8666,5 +8666,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T07:34:06+00:00"
+  "updated_at": "2026-11-05T07:36:09+00:00"
 }

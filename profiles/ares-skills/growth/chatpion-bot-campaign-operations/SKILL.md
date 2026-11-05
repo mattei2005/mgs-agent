@@ -50,7 +50,7 @@ Nunca inferir identidade, conta, Page, UTM, budget, threshold, horários, autori
 2. Confirmar que o consumidor está `active`; candidato de onboarding não é operação ativa.
 3. Abrir o contrato da família e o contrato exato da operação.
 4. Carregar somente a rota pedida: `rules`, `campaign_creation`, `campaign_cloning`, `roas_cycle`, `daily_reporting` ou `page_guardrails`.
-5. Consultar conta, runner, state e audit declarados pela operação somente quando a rota exigir.
+5. Consultar conta, runner, state e audit declarados pela operação somente quando a rota exigir. Em JSONs grandes, projetar primeiro os campos da rota e a conta exata; para checkpoints/registry, filtrar cada registro por request, thread ou chave canônica antes de imprimir. Não selecionar um contêiner inteiro porque sua representação contém o termo buscado: isso despeja registros não relacionados e pode truncar justamente a evidência necessária.
 6. Falhar fechado quando houver binding ausente, ambíguo ou divergente.
 
 ## Responsabilidade operacional e encaminhamentos
@@ -116,6 +116,14 @@ Fluxo: preflight vivo → Page/UTM → criativos reconciliados → pre-stage →
 ### Clonar campanhas
 
 O contrato da operação declara os modos suportados. Fonte, colisão de naming, Page, mídia, copy, JSON, budget e start são lidos ao vivo. Reconcilie a hierarquia com paginação completa e conte conjuntos/anúncios e seus estados em código; um sufixo no nome da campanha não comprova quantidade nem autoriza reativar filhos pausados. Schema/plan não prova readiness live; recovery reutiliza request e IDs.
+
+Para localizar uma fonte informada por nome:
+
+1. Validar escopo da conta e fazer GET de `act_<account_id>` com `name,currency,timezone_name,account_status` usando a identidade anunciante declarada no contrato; um alias humano não comprova a conta live.
+2. Paginar `act_<account_id>/campaigns` e comparar o nome literal em código. Se não houver match, procurar variantes de caixa/espaços apenas como candidatos, sem substituir silenciosamente a fonte. Confirmar o resultado vazio com uma consulta independente ao mesmo edge, usando `filtering=[{"field":"name","operator":"CONTAIN","value":"<nome informado>"}]` e `fields=id,name,status,effective_status`.
+3. Com uma única fonte comprovada, ler seus conjuntos/anúncios e resolver Page/denylist antes de reservar assets, fazer uploads ou materializar o manifest. Não usar uma campanha parecida ou uma Page histórica para preencher a lacuna.
+4. Se as consultas bem-sucedidas continuarem vazias ou houver ambiguidade, preservar o mesmo request com os parâmetros literais, evidências de leitura e próximo passo; pedir somente o link ou ID da campanha. Informar “não localizada pela API nesta conta”, não “não existe”: rascunhos não publicados e limitações de visibilidade não foram descartados por esse resultado.
+5. Distinguir evidência de inventário de validação remota: nomes encontrados no inventário não comprovam presença live na pasta, metadata, elegibilidade ou pre-stage. No retorno, comunicar apenas a etapa efetivamente verificada e se houve write. Ao retomar, preservar budget/copy/arquivos e resolver novamente o início caso o horário solicitado tenha passado, sem deslocá-lo silenciosamente para outro dia.
 
 ### Corte e ROAS
 
