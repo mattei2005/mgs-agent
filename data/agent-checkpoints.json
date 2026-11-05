@@ -773,12 +773,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-NICOLAS-1567715846263013520",
-      "next_step": "Continuar somente mesmo executor/request/claims ate34; consultar execution.log e estado canonico, nao lancar writer paralelo. Apos requestcomplete, auditar todos via audit.py, manter14como pendencia de reexportacao. Resolver manutencao same-ID pelo monitor existente. Reportar mapa completo e destino final real.",
-      "objective": "Tratar35fontes numeradas US CC EN; entregar validos em NICOLAS - Exclusivos preservando RAW e reserva",
-      "source": "/root/mgs-agent/data/ares/creative-ops/intakes/nicolas-1567715846263013520/plan.json",
-      "state": "request0a233f8b9da98664e83b15d02bc98b62 com34fontes validas;16completas em4batches com entrega permanente registrada,18a concluir.14branco comprovado permanece upload manual sem candidato. http500 transitorio reconciliado no mesmo batch/ids, erro canonico recovered; nenhum upload/tratamento duplicado. novo processo supervisionado registrado em process.json; plano e nomes imutaveis.",
+      "next_step": "Nao reprocessar os34concluidos. Entrega humana na origem com mapa34fontes e link definitivo; unica pendencia humana e nova exportacao14.mp4. Ao receber nova fonte, validar ID/versionamento e novo material, preservando historico. Sem limpeza/DELETE autorizados. Nao reenviar REPORT-INFRA nem reabrir erro transitorio encerrado.",
+      "objective": "Tratar35fontes numeradas US CC EN e entregar em NICOLAS - Exclusivos",
+      "source": "/root/mgs-agent/data/ares/creative-ops/intakes/nicolas-1567715846263013520/final-audit.json",
+      "state": "subconjunto_valido_concluido_aguarda_reexportacao14:34/34validos entregues e auditados,request0a233f8b9da98664e83b15d02bc98b62complete,9batches e recibos de gestor.34raw preservados mesmosids nos30tb;providers/atalhos/bytes/acks/clean=true/reservas verificados.14.mp4 branco150frames+thumbnaildrive permanece preservadoupload manual sem candidato. monitor finalidle0. recuperacoes reconciliadas sem duplicar binarios; nenhuma campanha/config/cron/acl/credencial alterada. report-infra1567738832881717290 validado por get,embed silencioso semmentions. historico de erros supersedido pela auditoria final.",
       "thread_id": "1567715846263013520",
-      "updated_at": "2026-11-05T02:31:15+00:00"
+      "updated_at": "2026-11-05T03:14:54+00:00"
     },
     {
       "agent": "ares",
@@ -8646,5 +8646,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T02:35:30+00:00"
+  "updated_at": "2026-11-05T03:14:54+00:00"
 }
