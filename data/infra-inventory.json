@@ -906,9 +906,9 @@
       "correction": "One anchored exact test-path exception; all sibling credentials and copies remain blocked",
       "paths": ["scripts/auto-commit-watcher.sh", "tests/test_auto_commit_sensitive_paths.py", "tests/test_auto_commit_empty_index.py"],
       "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1567915434139844750",
-      "state": "awaiting_native_commit_push",
-      "next_step": "Reload sole native watcher, wait for normal batch, verify exact committed bytes and remote main, then monitor and REPORT-INFRA readback",
-      "validation": {"watcher_tests_passed": 28, "monitor_tests_passed": 17, "pending_signature_scanned_files": 30, "signature_hits": 0, "partial_effects": "Empty index; guard blocked before commit/push; Ares technical task completed and origin REPORT-INFRA read back"},
+      "state": "resolved_validated",
+      "next_step": "Normal monitoring; REPORT-INFRA delivery/readback receipt in logs/events-audit.jsonl under this recovery ID",
+      "validation": {"watcher_tests_passed": 28, "monitor_tests_passed": 17, "pending_signature_scanned_files": 30, "signature_hits": 0, "partial_effects": "Empty index; guard blocked before commit/push; Ares technical task completed and origin REPORT-INFRA read back", "native_commit": "513d4ca2180f8d6d9990e608f44376c384bb970f", "native_push_ok_at": "2026-11-05T10:04:25-05:00", "head_origin_and_lsremote_equal": true, "committed_current_bytes_match": 4, "monitor_dry_run_failures": 0, "monitor_consecutive_failures": 0, "persistent_service": "active/running; PID 4029469; NRestarts=0", "persistent_batch_target": 10, "persistent_max_wait": 600, "monitor_recovery_transport": "MGS_DRY_RUN=1; no extra recovery Discord post; source reply delivered by central resolver"},
       "credentials_changed": false,
       "manual_commit_or_push": false
     },
@@ -64136,8 +64136,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 16836,
-      "modified_at": "2026-11-02T23:38:56-05:00"
+      "size_bytes": 17092,
+      "modified_at": "2026-11-05T09:59:36-05:00"
     },
     {
       "path": "/root/mgs-agent/scripts/benchmark-hermes-web-search-backends.py",
