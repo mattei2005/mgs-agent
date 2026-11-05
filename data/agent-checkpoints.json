@@ -1882,6 +1882,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1567893756290797794",
+      "next_step": "Concluido; nao repetir criacao. Entrega e gasto nao foram comprovados por Insights.",
+      "objective": "Duplicar C035 cinco vezes na Mavroa-US-SHEIN-ES-04-G004 para agora com USD150 diarios por campanha e Cost per result goal USD0.70",
+      "source": "/root/mgs-agent/data/ares/meta-ads/intake/shein-1567893756290797794/verified-receipt.json",
+      "state": "complete; c036-c040 active; 5 campanhas, 5 conjuntos e10 anuncios; usd750/dia; cost_cap 70 centavos; qa renderizado integral; ids iguais ao checkpoint; retomada somente pos-processamento sem recriacao; posts novos; sem ressalvas",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-05T13:34:56+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -8686,5 +8696,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T13:10:09+00:00"
+  "updated_at": "2026-11-05T13:34:56+00:00"
 }
