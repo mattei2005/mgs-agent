@@ -73,21 +73,24 @@ def test_main_silent_and_dry_state_neutral(repo):
     advance(repo);before=repo['state'].read_bytes()
     cp=run(repo)
     assert cp.returncode == 0, cp.stderr
-    assert 'official_release_unchanged' in cp.stdout
+    assert 'kind=main-delta' in cp.stdout
     assert 'main_pending=1' in cp.stdout
-    assert not Path(repo['env']['HERMES_MONITOR_DRY_RUN_OUTPUT']).exists()
+    payload = json.loads(Path(repo['env']['HERMES_MONITOR_DRY_RUN_OUTPUT']).read_text())
+    assert payload['embeds'][0]['title'] == monitor.MAIN_TITLE
     assert repo['state'].read_bytes() == before
 
 
-def test_production_main_updates_observation_without_credentials_or_post(repo):
+def test_production_main_delivers_and_advances_only_confirmed_cursor(repo, discord_server):
     advance(repo)
-    cp=run(repo,HERMES_MONITOR_DRY_RUN='0',DISCORD_BOT_TOKEN='',HERMES_MONITOR_ZEUS_ENV=str(repo['tmp']/'absent'))
+    url, record = discord_server
+    cp=run(repo,HERMES_MONITOR_DRY_RUN='0',HERMES_MONITOR_API_BASE=url)
     assert cp.returncode == 0,cp.stderr
     state=json.loads(repo['state'].read_text())
     assert state['main_commits_pending']==1 and state['stable_commits_pending']==0
     assert state['last_notified_release_commit']==repo['first']
-    assert state['last_notified_upstream']==repo['first']
-    assert state['notification_policy']=='official-release-only'
+    assert state['last_notified_upstream']==git(repo['seed'], 'rev-parse', 'HEAD')
+    assert state['notification_policy']=='official-releases-and-main-delta'
+    assert len(record['posts']) == 1
 
 
 @pytest.mark.parametrize('kind',['clone','worktree'])
@@ -112,6 +115,7 @@ def test_frozen_origin_does_not_hide_upstream(repo):
 def test_runtime_change_and_rc_tag_do_not_trigger(repo):
     advance(repo);git(repo['live'],'fetch','origin')
     git(repo['live'],'checkout','--detach','origin/main');git(repo['live'],'tag','rc.35-v0.21.5')
+    state=json.loads(repo['state'].read_text());state['last_notified_upstream']=git(repo['live'],'rev-parse','HEAD');repo['state'].write_text(json.dumps(state))
     cp=run(repo)
     assert cp.returncode==0 and 'official_release_unchanged' in cp.stdout
     assert not Path(repo['env']['HERMES_MONITOR_DRY_RUN_OUTPUT']).exists()
@@ -126,7 +130,8 @@ def test_new_official_release_payload_uses_release_delta_not_main_or_runtime(rep
     assert e['title']==monitor.TITLE
     assert 'Fixes 1' in fields['Desde a versão oficial anterior']
     assert second[:10] in fields['Última release oficial']
-    assert 'Main de desenvolvimento' not in fields
+    assert 'main pendente no runtime: 2' in fields['Main de desenvolvimento']
+    assert fields['Novos no main desde o último alerta'].startswith('2 commits')
     assert 'Improve voice-channel' in e['description']
     assert payload['allowed_mentions']=={'parse':[]}
     assert fields['Atualização estável'].startswith('Disponível: 1')
@@ -183,7 +188,7 @@ def discord_server():
     server.shutdown();thread.join();server.server_close()
 
 
-def test_mock_delivery_readback_dedupe_same_release_and_later_main(repo,discord_server):
+def test_mock_delivery_readback_dedupe_release_then_incremental_main(repo,discord_server):
     url,record=discord_server;second=advance(repo,release=True)
     env={'HERMES_MONITOR_DRY_RUN':'0','HERMES_MONITOR_API_BASE':url}
     cp=run(repo,**env);assert cp.returncode==0,cp.stderr
@@ -191,9 +196,16 @@ def test_mock_delivery_readback_dedupe_same_release_and_later_main(repo,discord_
     assert state['last_notified_release_commit']==second
     assert state['last_announcement_message_id']=='1556909999999999999'
     assert len(record['posts'])==1 and record['posts'][0]['enforce_nonce'] is True
-    advance(repo)
     cp=run(repo,**env);assert cp.returncode==0,cp.stderr
     assert len(record['posts'])==1
+    advance(repo)
+    cp=run(repo,**env);assert cp.returncode==0,cp.stderr
+    assert len(record['posts'])==2
+    assert record['posts'][1]['embeds'][0]['title']==monitor.MAIN_TITLE
+    fields={f['name']:f['value'] for f in record['posts'][1]['embeds'][0]['fields']}
+    assert fields['Novos no main desde o último alerta'].startswith('1 commits')
+    cp=run(repo,**env);assert cp.returncode==0,cp.stderr
+    assert len(record['posts'])==2
 
 
 def test_failed_http_keeps_outbox_and_retries(repo,discord_server):
@@ -315,3 +327,60 @@ def test_primary_reply_requires_exact_readback(monkeypatch,valid):
     assert [c[0] for c in calls]==['POST','GET']
     assert calls[0][1]['allowed_mentions']=={'parse':[]}
     assert calls[0][1]['enforce_nonce'] is True
+
+
+def test_main_retry_readback_does_not_advance_or_repost(repo, discord_server):
+    url, record = discord_server
+    advance(repo)
+    record['fail_read'] = True
+    env = {'HERMES_MONITOR_DRY_RUN': '0', 'HERMES_MONITOR_API_BASE': url}
+    cp = run(repo, **env)
+    assert cp.returncode != 0
+    state = json.loads(repo['state'].read_text())
+    assert state['last_notified_upstream'] == repo['first']
+    assert state['pending_announcement']['kind'] == 'main-delta'
+    record['fail_read'] = False
+    cp = run(repo, **env)
+    assert cp.returncode == 0, cp.stderr
+    assert len(record['posts']) == 1
+    assert json.loads(repo['state'].read_text())['last_notified_upstream'] != repo['first']
+
+
+def test_main_delta_does_not_repeat_previous_feature(repo, discord_server):
+    url, record = discord_server
+    advance(repo)
+    env = {'HERMES_MONITOR_DRY_RUN': '0', 'HERMES_MONITOR_API_BASE': url}
+    assert run(repo, **env).returncode == 0
+    p = repo['seed'] / 'unique'; p.write_text('new')
+    git(repo['seed'], 'add', '.'); git(repo['seed'], 'commit', '-m', 'feat: unique new batch feature')
+    git(repo['seed'], 'push', 'origin', 'main')
+    assert run(repo, **env).returncode == 0
+    text = json.dumps(record['posts'][1])
+    assert 'unique new batch feature' in text
+    assert 'new reliability improvement' not in text
+    assert 'initial release' not in text
+
+
+def test_unresolvable_main_cursor_fails_closed(repo):
+    advance(repo)
+    state = json.loads(repo['state'].read_text())
+    state['last_notified_upstream'] = 'f' * 40
+    repo['state'].write_text(json.dumps(state)); before = repo['state'].read_bytes()
+    cp = run(repo)
+    assert cp.returncode != 0 and 'baseline cannot be reconciled' in cp.stderr
+    assert repo['state'].read_bytes() == before
+    assert not Path(repo['env']['HERMES_MONITOR_DRY_RUN_OUTPUT']).exists()
+
+
+def test_main_contextual_explanation_in_both_consumers(monkeypatch):
+    from unittest.mock import Mock
+    source = {'embeds': [{'title': monitor.MAIN_TITLE, 'fields': [
+        {'name': 'Amostra dos commits novos (mais recentes)', 'value': 'fix: new reliability improvement'}]}]}
+    response = 'O que mudou: correção de confiabilidade no main.\n\nImpacto: os títulos não comprovam uso na MGS.\n\nExige ação: nenhuma instalação automática; depende de autorização e validação.'
+    primary = load('hermes-news-explainer'); watchdog = load('hermes-news-explainer-watchdog')
+    gen = Mock(return_value=subprocess.CompletedProcess(['hermes'], 0, stdout=response, stderr=''))
+    monkeypatch.setattr(primary.subprocess, 'run', gen)
+    assert primary.explain_announcement(source) == response
+    assert watchdog.generate_llm_explanation(source) == response
+    assert gen.call_count == 2
+    assert primary.is_hermes_monitor_alert(source) and watchdog.is_hermes_monitor_alert(source)

@@ -2634,12 +2634,12 @@
     {
       "agent": "zeus",
       "id": "HERMES-NEWS-COMMITS-1567760164319272970",
-      "next_step": "Backup, implementação, fixtures de entrega/dedupe, execução real e readback",
+      "next_step": "Validar explicação contextual, ciclo silencioso, inventário e REPORT-INFRA",
       "objective": "Restaurar resumos incrementais de commits Hermes, preservar releases e agenda, sem update/restart",
       "source": "context/hermes-news-policy.md",
-      "state": "em execução: política e consumidores inspecionados; autorização rodolfo 1567760164319272970",
+      "state": "implementado; 56 testes e 8 subtests aprovados. primeiro lote real 113 commits entregue e lido, source 1567761353685606581. registry superseded validado.",
       "thread_id": "1567646083465879653",
-      "updated_at": "2026-11-05T04:39:59+00:00"
+      "updated_at": "2026-11-05T04:44:22+00:00"
     },
     {
       "agent": "zeus",
@@ -8656,5 +8656,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T04:39:59+00:00"
+  "updated_at": "2026-11-05T04:44:22+00:00"
 }

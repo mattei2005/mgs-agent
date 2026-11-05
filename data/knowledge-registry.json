@@ -11030,10 +11030,29 @@
       "kind": "policy",
       "owner": "Rodolfo Mattei",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "HERMES-NEWS-RELEASES-MAIN-DELTA-1567760164319272970",
+      "title": "Hermes News anuncia somente novas releases oficiais, com explicação PT-BR",
+      "updated_at": "2026-11-05T04:43:41+00:00"
+    },
+    {
+      "canonical_key": "hermes.news.notification-policy",
+      "canonical_source": "context/hermes-news-policy.md",
+      "consumers": [
+        "hermes-agent-operations",
+        "log-monitor-discord-alert",
+        "zeus"
+      ],
+      "domain": "hermes",
+      "effective_at": "2026-11-05T04:43:41+00:00",
+      "id": "HERMES-NEWS-RELEASES-MAIN-DELTA-1567760164319272970",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Hermes News anuncia somente novas releases oficiais, com explicação PT-BR",
-      "updated_at": "2026-10-06T06:09:07+00:00"
+      "title": "Hermes News: releases oficiais e resumos incrementais de commits em PT-BR",
+      "updated_at": "2026-11-05T04:43:41+00:00"
     },
     {
       "canonical_key": "finance.product.annual-site-expense-comparison",
@@ -16025,5 +16044,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T17:42:01+00:00"
+  "updated_at": "2026-11-05T04:43:41+00:00"
 }

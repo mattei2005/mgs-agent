@@ -1,22 +1,23 @@
 # Hermes News — política de anúncios MGS
 
-- Status: ativo; autoridade Rodolfo Mattei, mensagem `1556908630278803478`, thread `1556907799626260531`.
+- Status: ativo; autoridade Rodolfo Mattei, mensagem `1567760164319272970`, thread `1567646083465879653`.
+- Supersessão: a política release-only aprovada em `1556908630278803478` (thread `1556907799626260531`) foi substituída explicitamente pela restauração dos resumos incrementais de commits.
 - Fonte técnica: `scripts/monitor-hermes-updates.sh` → `scripts/mgs_hermes_release_monitor.py`.
 - Canal: `#alerts-hermes-news`, ID `1505609056771899644`.
 
 ## Regra ativa
 
-Anunciar uma única vez cada nova release oficial publicada do Hermes. Validar metadata oficial GitHub (`draft=false`, `prerelease=false`) e rejeitar RC/canary/alpha/beta. Deduplicar pela versão e SHA da release, não pelo avanço do main nem por alterações do runtime MGS.
+Anunciar uma única vez cada nova release oficial publicada do Hermes e publicar um resumo consolidado quando houver novos commits no `main` desde o último aviso confirmado. Validar metadata oficial GitHub (`draft=false`, `prerelease=false`) e rejeitar RC/canary/alpha/beta como release oficial. Deduplicar releases por versão+SHA e lotes do main por cursor anterior+SHA atual. Uma mudança de runtime, sozinha, não gera aviso.
 
-O avanço comum do `main` continua medido no state para consulta; não gera alerta recorrente. A frequência de verificação existente é preservada. Na adoção/migração, a última release já conhecida vira baseline silenciosa, sem reanunciar histórico.
+Preservar a frequência existente (3 verificações por dia) e o canal. Sem novos commits nem nova release, permanecer silencioso. Na restauração, conservar o último cursor de aviso confirmado e publicar um único lote consolidado do delta desde esse cursor, sem replay de avisos históricos. Na ausência de state, inicializar baseline silenciosa; cursor ilegível ou sem ancestralidade bloqueia o envio, sem avançar o cursor.
 
-A fonte do resumo é a nova release: notas oficiais e delta desde a release anteriormente anunciada. Não repetir o acumulado desde o runtime como se fossem novidades do aviso. O explicador entrega PT-BR com mudanças relevantes, impacto prático e necessidade de ação. Não inferir que um recurso disponível já está configurado ou utilizado na MGS. Se o conteúdo for insuficiente ou a geração contextual falhar, explicitar a lacuna.
+A fonte do resumo de release são as notas oficiais e o delta desde a release anteriormente anunciada. O resumo do main usa somente títulos do delta desde o cursor confirmado, com amostra identificada e link para o comparativo completo; nunca apresentar o acumulado desde o runtime como novidade. Se ambos avançarem no mesmo ciclo, publicar um único aviso com os dois deltas explicitamente separados. O explicador entrega análise contextual PT-BR de até três mudanças, impacto prático e necessidade de ação. Títulos de commits são evidência limitada: não inventar detalhes nem inferir recurso já configurado/utilizado na MGS. Se o conteúdo for insuficiente ou a geração contextual falhar, explicitar a lacuna.
 
-Entrega usa estado/outbox persistido, nonce estável, ID aceito preservado e readback exato. Falha de GET após POST não autoriza repost. Resultado ambíguo exige reconciliação, nunca retry cego. Produtor e watchdog reconhecem o mesmo contrato `Hermes Agent — nova versão oficial`.
+Entrega usa estado/outbox persistido, nonce estável, ID aceito preservado e readback exato. Só avançar o cursor após readback. Falha de GET após POST não autoriza repost. Resultado ambíguo exige reconciliação, nunca retry cego. Produtor, explicador e watchdog reconhecem `Hermes Agent — nova versão oficial` e `Hermes Agent — novidades em desenvolvimento`, com os mesmos campos e fallback explícito.
 
 ## Limites e supersessão
 
-Esta decisão substitui a política anterior de avisar cada avanço do `main`. Ela altera somente notificações: **“atualizar tudo” continua significando alcançar o main oficial**, no fluxo autorizado com backup, patches, rollback e validação. Release oficial, runtime RC/canary, pendência de main e progresso desde último aviso continuam sendo fatos separados.
+Esta decisão substitui a política release-only de 6 de outubro, preservada no histórico Git/audit e registro institucional superseded. Ela altera somente notificações: **“atualizar tudo” continua significando alcançar o main oficial**, no fluxo autorizado com backup, patches, rollback e validação. Release oficial, runtime RC/canary, pendência de main, total main pós-release e progresso desde último aviso continuam sendo fatos separados.
 
 O monitor não instala, configura ou reinicia Hermes. Não exclui mensagens históricas do canal. Anúncios externos legítimos continuam recebendo explicação; esta política trata a geração recorrente do monitor Git MGS.
 

@@ -1,5 +1,5 @@
-"""MGS Hermes News: one announcement per official stable release, silent main.
-Approved by Rodolfo, message 1556908630278803478. No runtime installation.
+"""MGS Hermes News: official releases and incremental main summaries.
+Approved by Rodolfo, message 1567760164319272970. No runtime installation.
 """
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ from mgs_official_release import release_metadata
 
 BASE = Path('/root/mgs-agent')
 TITLE = 'Hermes Agent — nova versão oficial'
+MAIN_TITLE = 'Hermes Agent — novidades em desenvolvimento'
 BOT_ID = '1496296175014252634'
 
 
@@ -105,7 +106,8 @@ def verify_message(message, pending):
     return (str(message.get('id') or '').isdigit()
             and str((message.get('author') or {}).get('id')) == BOT_ID
             and message.get('content', '') == ''
-            and embed.get('title') == TITLE
+            and embed.get('title') in (TITLE, MAIN_TITLE)
+            and embed.get('title') == expected['embeds'][0]['title']
             # Discord trims edge ASCII whitespace from embed descriptions.
             # Legacy outboxes can end in a space after the length cap; accept
             # only that transport normalization, never changed body content.
@@ -156,7 +158,7 @@ def deliver(state, state_path, api=discord_api, token=None):
                  last_notified_release_tag=pending['release_tag'],
                  last_notified_upstream=pending['upstream'],
                  last_announcement_message_id=pending['message_id'],
-                 last_announcement_at=now(), status='official-release-announced')
+                 last_announcement_at=now(), status=pending.get('kind', 'official-release') + '-announced')
     state.pop('pending_announcement')
     atomic_save(state_path, state)
     return state['last_announcement_message_id']
@@ -194,6 +196,37 @@ def build_payload(runtime, meta, release, previous, stable_pending, local_tag, l
     return payload
 
 
+def build_main_payload(runtime, meta, release, previous_main, upstream,
+                       stable_pending, main_pending, post_release, local_tag, local):
+    if not ancestor(runtime, previous_main, upstream):
+        raise RuntimeError('Main notification baseline is not an ancestor; reconcile before posting')
+    range_ = previous_main + '..' + upstream
+    count = int(git(runtime, 'rev-list', '--count', range_))
+    subjects = git(runtime, 'log', '--format=%s', range_).splitlines()
+    features = [s for s in subjects if re.match(r'^feat(?:\(|:|!)', s)]
+    fixes = [s for s in subjects if re.match(r'^fix(?:\(|:|!)', s)]
+    stable = ('Disponível: ' + str(stable_pending) + ' commits da release ainda não contidos no runtime'
+              if stable_pending else 'Nenhuma — o runtime já contém esta release oficial')
+    items = [
+        {'name': 'Última release oficial', 'value': meta['tag_name'] + ' (' + release[:10] + ')'},
+        {'name': 'Runtime MGS', 'value': local_tag + ' (' + local[:10] + ')'},
+        {'name': 'Atualização estável', 'value': stable},
+        {'name': 'Main de desenvolvimento', 'value': f'{upstream[:10]} | main pendente no runtime: {main_pending} | main pós-release: {post_release}'},
+        {'name': 'Novos no main desde o último alerta', 'value': f'{count} commits | {previous_main[:10]} → {upstream[:10]}'},
+        {'name': 'Top features', 'value': ('\n'.join(features[:4]) or 'nenhuma listada')[:900]},
+        {'name': 'Top fixes', 'value': ('\n'.join(fixes[:4]) or 'nenhum listado')[:900]},
+        {'name': 'Amostra dos commits novos (mais recentes)', 'value': ('\n'.join(subjects[:10]) or 'nenhum')[:1000]},
+        {'name': 'Ação MGS', 'value': 'Informativo; main não é release estável. Nenhuma instalação ou restart automático.'},
+    ]
+    for item in items:
+        item['inline'] = False
+    return {'content': '', 'allowed_mentions': {'parse': []}, 'embeds': [{
+        'title': MAIN_TITLE, 'color': 3447003,
+        'url': 'https://github.com/NousResearch/hermes-agent/compare/' + previous_main + '...' + upstream,
+        'description': 'Resumo incremental desde o último aviso confirmado. Os destaques abaixo são uma seleção dos commits deste lote, não o acumulado pendente no runtime. Mudanças em desenvolvimento não equivalem a uma nova versão estável.',
+        'fields': items}]}
+
+
 def main():
     dry = os.environ.get('HERMES_MONITOR_DRY_RUN') == '1'
     log_path = Path(os.environ.get('HERMES_MONITOR_LOG', str(BASE / 'logs/monitor-hermes-updates.log')))
@@ -210,7 +243,7 @@ def main():
     if not re.fullmatch(r'[A-Za-z0-9._/-]+', branch) or branch.startswith('-') or '..' in branch:
         raise RuntimeError('Invalid upstream branch')
     ref = 'refs/remotes/mgs-monitor-upstream/' + branch
-    log(f'START monitor-hermes-updates runtime_dir={runtime} dry_run={int(dry)} policy=official-release-only')
+    log(f'START monitor-hermes-updates runtime_dir={runtime} dry_run={int(dry)} policy=official-releases-and-main-delta')
     git(runtime, 'fetch', '--force', '--quiet', upstream_url,
         '+refs/heads/' + branch + ':' + ref, '+refs/tags/*:refs/tags/*')
     local, upstream = git(runtime, 'rev-parse', 'HEAD'), git(runtime, 'rev-parse', ref)
@@ -238,7 +271,7 @@ def main():
                 new = int(git(runtime, 'rev-list', '--count', old_upstream + '..' + upstream))
         except RuntimeError:
             pass
-    state.update(schema_version=3, classification_schema=3, notification_policy='official-release-only',
+    state.update(schema_version=4, classification_schema=3, notification_policy='official-releases-and-main-delta',
                  last_seen_upstream=upstream, last_local=local, runtime_dir=str(runtime),
                  last_check=now(), latest_tag=meta['tag_name'], latest_release_commit=release,
                  stable_update_available=bool(stable_pending), stable_commits_pending=stable_pending,
@@ -253,28 +286,47 @@ def main():
         mid = deliver(state, state_path)
         log('OK pending_delivery_reconciled message_id=' + mid)
         return 0
-    if not changed:
+    main_changed = bool(old_upstream and new > 0 and not baseline)
+    if old_upstream and new < 0 and not state.get('pending_announcement'):
+        raise RuntimeError('Main notification baseline cannot be reconciled; no cursor advancement')
+    if not changed and not main_changed:
         state['status'] = 'release-baseline-initialized' if baseline else 'silent-main-observation'
+        if not old_upstream:
+            state['last_notified_upstream'] = upstream
         if not dry:
             atomic_save(state_path, state)
         log(f'OK official_release_unchanged release={meta["tag_name"]} stable_pending={stable_pending} main_pending={main_pending} main_post_release={post_release} discord_post=false state_unchanged={str(dry).lower()}')
         return 0
-    payload = build_payload(runtime, meta, release, previous, stable_pending, local_tag, local)
+    kind = 'official-release' if changed else 'main-delta'
+    if changed:
+        payload = build_payload(runtime, meta, release, previous, stable_pending, local_tag, local)
+        if main_changed:
+            main_payload = build_main_payload(runtime, meta, release, old_upstream, upstream,
+                                              stable_pending, main_pending, post_release, local_tag, local)
+            # One combined notification, with release delta and main delta explicitly distinct.
+            payload['embeds'][0]['fields'].extend(
+                f for f in main_payload['embeds'][0]['fields']
+                if f['name'] in ('Main de desenvolvimento', 'Novos no main desde o último alerta',
+                                 'Amostra dos commits novos (mais recentes)'))
+    else:
+        payload = build_main_payload(runtime, meta, release, old_upstream, upstream,
+                                     stable_pending, main_pending, post_release, local_tag, local)
     if dry:
         output = os.environ.get('HERMES_MONITOR_DRY_RUN_OUTPUT')
         if output:
             Path(output).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
-        log(f'DRY_RUN new_official_release={meta["tag_name"]} stable_update={str(bool(stable_pending)).lower()} stable_pending={stable_pending} main_post_release={post_release} discord_post=false state_unchanged=true')
+        log(f'DRY_RUN kind={kind} new_official_release={meta["tag_name"] if changed else "none"} new_main={new} stable_update={str(bool(stable_pending)).lower()} stable_pending={stable_pending} main_pending={main_pending} main_post_release={post_release} discord_post=false state_unchanged=true')
         return 0
-    nonce = hashlib.sha256((meta['tag_name'] + ':' + release).encode()).hexdigest()[:24]
+    identity = meta['tag_name'] + ':' + release if changed else 'main:' + str(old_upstream) + ':' + upstream
+    nonce = hashlib.sha256(identity.encode()).hexdigest()[:24]
     payload.update(nonce=nonce, enforce_nonce=True)
-    state['pending_announcement'] = dict(release_commit=release, release_tag=meta['tag_name'],
+    state['pending_announcement'] = dict(kind=kind, release_commit=release, release_tag=meta['tag_name'],
                                          upstream=upstream, payload=payload,
                                          channel_id=os.environ.get('HERMES_MONITOR_CHANNEL_ID', '1505609056771899644'),
                                          created_at=now())
     atomic_save(state_path, state)
     mid = deliver(state, state_path)
-    log(f'OK official_release_announced release={meta["tag_name"]} message_id={mid} readback=true')
+    log(f'OK {kind.replace("-", "_")}_announced release={meta["tag_name"]} new_main={new} message_id={mid} readback=true')
     return 0
 
 

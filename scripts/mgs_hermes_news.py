@@ -13,6 +13,13 @@ def is_official_release_announcement(message):
     return any(e.get('title') == 'Hermes Agent — nova versão oficial' for e in message.get('embeds') or [])
 
 
+def needs_contextual_explanation(message):
+    return is_official_release_announcement(message) or any(
+        e.get('title') == 'Hermes Agent — novidades em desenvolvimento'
+        and any(f.get('name') == 'Amostra dos commits novos (mais recentes)' for f in e.get('fields') or [])
+        for e in message.get('embeds') or [])
+
+
 def explain_monitor(message):
     f = fields(message)
     if is_official_release_announcement(message):
