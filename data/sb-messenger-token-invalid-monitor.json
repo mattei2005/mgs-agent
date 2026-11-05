@@ -628,7 +628,11 @@
     735815,
     735828,
     735846,
-    735869
+    735869,
+    736340,
+    736360,
+    736384,
+    736402
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -1156,6 +1160,40 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|eggbev|12|275": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-05T12:08:27.000Z",
+        "domain": "eggbev",
+        "notification_id": 736360,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 13,
+          "Broadcast": 69,
+          "Campaign": 10,
+          "On-hold": 27,
+          "Ready": 2
+        },
+        "pages": 121,
+        "segurador_id": "275",
+        "segurador_name": "Vije Juemadhic III",
+        "source": "page_token",
+        "user_email": "disparoseggbev@gmail.com",
+        "user_id": "12",
+        "user_name": "Disparos Eggbev US-CC-EN"
+      },
+      "last_sent_at": "2026-11-05T07:12:16-05:00",
+      "message_ids": [
+        "1567874181939331214"
+      ],
+      "notification_ids": [
+        736360
+      ],
+      "opened_at": "2026-11-05T07:12:14-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|eggbev|12|305": {
       "alert": {
         "company": "digital-trust",
@@ -1229,9 +1267,9 @@
     "digital-trust|escalatepower|29|1539": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-04T00:09:30.000Z",
+        "created_at": "2026-11-05T12:08:53.000Z",
         "domain": "escalatepower",
-        "notification_id": 734965,
+        "notification_id": 736402,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 12,
@@ -1241,7 +1279,7 @@
         "pages": 52,
         "segurador_id": "1539",
         "segurador_name": "André De Souza",
-        "source": "canary",
+        "source": "page_token",
         "user_email": "disparosescalatepower@gmail.com",
         "user_id": "29",
         "user_name": "Disparos Escalatepower US-CC-EN"
@@ -1251,7 +1289,8 @@
         "1567330620047228939"
       ],
       "notification_ids": [
-        734965
+        734965,
+        736402
       ],
       "opened_at": "2026-11-03T19:12:19-05:00",
       "repeat_count": 0,
@@ -1478,6 +1517,40 @@
         692100
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
+    "digital-trust|financeadx|24|265": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-05T12:08:42.000Z",
+        "domain": "financeadx",
+        "notification_id": 736384,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 3,
+          "Broadcast": 45,
+          "Campaign": 1,
+          "On-hold": 149,
+          "Ready": 2
+        },
+        "pages": 200,
+        "segurador_id": "265",
+        "segurador_name": "Oncho Anha",
+        "source": "page_token",
+        "user_email": "disparosfinanceadx@gmail.com",
+        "user_id": "24",
+        "user_name": "Disparos Financeadx US-CC-EN"
+      },
+      "last_sent_at": "2026-11-05T07:12:16-05:00",
+      "message_ids": [
+        "1567874186167328834"
+      ],
+      "notification_ids": [
+        736384
+      ],
+      "opened_at": "2026-11-05T07:12:14-05:00",
       "repeat_count": 0,
       "resolved_at": null,
       "status": "active"
@@ -3602,9 +3675,9 @@
     "digital-trust|topfeedfinanzas|90|922": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-04T00:06:40.000Z",
+        "created_at": "2026-11-05T12:07:11.000Z",
         "domain": "topfeedfinanzas",
-        "notification_id": 734943,
+        "notification_id": 736340,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 10
@@ -3653,7 +3726,8 @@
         731163,
         732167,
         733455,
-        734943
+        734943,
+        736340
       ],
       "opened_at": "2026-09-12T20:12:12-04:00",
       "repeat_count": 0,
@@ -4637,25 +4711,26 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-05T06:57:13-05:00",
+  "last_check": "2026-11-05T07:12:16-05:00",
   "last_delivery": {
-    "at": "2026-11-04T19:12:15-05:00",
+    "at": "2026-11-05T07:12:16-05:00",
     "cursor_ids": [
-      735793,
-      735815,
-      735828,
-      735846,
-      735869
+      736340,
+      736360,
+      736384,
+      736402
     ],
     "message_ids": [
-      "1567692988283494411"
+      "1567874181939331214",
+      "1567874186167328834"
     ],
     "notification_ids": [
-      735793
+      736360,
+      736384
     ]
   },
   "last_error": null,
-  "last_seen_id": 735869,
+  "last_seen_id": 736402,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
