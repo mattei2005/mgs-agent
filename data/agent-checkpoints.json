@@ -773,12 +773,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-NICOLAS-1567715846263013520",
-      "next_step": "Acompanhar processo registrado em intakes/nicolas-1567715846263013520/process.json; continuar somente request registrado e mesmos claims. Executar complete apos cada bloco; auditar34 finais por IDs/provider/atalho/parent/bytes/ACK/reservas.14 requer nova exportacao humana; nao tratar branco comoREADY nem fazer PATCH rejeicao fora do contrato.",
-      "objective": "Tratar 35 fontes numeradas US CC EN; entregar validos em NICOLAS - Exclusivos preservando RAW e reserva",
+      "next_step": "Continuar somente mesmo executor/request/claims ate34; consultar execution.log e estado canonico, nao lancar writer paralelo. Apos requestcomplete, auditar todos via audit.py, manter14como pendencia de reexportacao. Resolver manutencao same-ID pelo monitor existente. Reportar mapa completo e destino final real.",
+      "objective": "Tratar35fontes numeradas US CC EN; entregar validos em NICOLAS - Exclusivos preservando RAW e reserva",
       "source": "/root/mgs-agent/data/ares/creative-ops/intakes/nicolas-1567715846263013520/plan.json",
-      "state": "35 fontes inspecionadas raw/clean;34 validas com plano congelado e sanitizacao/frame equality;14.mp4 branco comprovado em150frames e thumbnail drive, preservado na entrada sem candidato.27/28 mesmo video com audio diferente: manter2exports. executor canonico supervisionado ativo para subconjunto34, sem outra fila/writer. destino permanente validado.",
+      "state": "request0a233f8b9da98664e83b15d02bc98b62 com34fontes validas;16completas em4batches com entrega permanente registrada,18a concluir.14branco comprovado permanece upload manual sem candidato. http500 transitorio reconciliado no mesmo batch/ids, erro canonico recovered; nenhum upload/tratamento duplicado. novo processo supervisionado registrado em process.json; plano e nomes imutaveis.",
       "thread_id": "1567715846263013520",
-      "updated_at": "2026-11-05T01:55:32+00:00"
+      "updated_at": "2026-11-05T02:31:15+00:00"
     },
     {
       "agent": "ares",
@@ -8646,5 +8646,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T01:55:32+00:00"
+  "updated_at": "2026-11-05T02:31:15+00:00"
 }
