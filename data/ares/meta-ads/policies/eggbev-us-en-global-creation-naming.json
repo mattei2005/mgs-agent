@@ -20,7 +20,16 @@
   "utm_campaign": "exact pg token of selected Page; independent of global numeric prefix",
   "adset_name": "ADGROUP 01",
   "adset_name_scope": "new campaign requests in this group; current tested campaign adset explicitly renamed under this message",
-  "existing_campaign_names": "preserved; no retroactive campaign renaming requested",
+  "existing_campaign_names": "preserved by default; exact tested campaign 120251058312020629 renamed to number300 only by explicit Nicolas request1567976031216869619; no blanket retroactive renaming",
+  "current_campaign_rename": {
+    "authority_message_id": "1567976031216869619",
+    "campaign_id": "120251058312020629",
+    "approved_name_exact": "300 - Georgina Whitford - ENG - US - (pg_23156) - C01",
+    "global_number": 300,
+    "ledger_request_id": "eggbev-rename-1567976031216869619",
+    "readback": "data/ares/meta-ads/audit/eggbev/rename-1567976031216869619/readback.json",
+    "scope": "name only; budget/status/adsets/ads/media/tracking preserved"
+  },
   "clone_campaign_naming": "existing clone contracts remain unchanged; this policy supplies the requested new-creation naming",
   "reservation": "atomic shared ledger, request+account idempotency; live complete histories of all three and existing reservations prevent duplicates; no allocation without a real request",
   "ledger_path": "data/ares/meta-ads/state/eggbev-us-en-global-creation-numbers.json",
