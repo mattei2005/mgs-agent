@@ -231,6 +231,10 @@ Use esta receita quando os helpers de coleta já estiverem no runner diário, ma
 5. Aplique literalmente o threshold pedido antes do arredondamento, sem introduzir mínimo de gasto não solicitado. Se o ranking usar o melhor dia histórico, declare isso e exponha data, gasto e receita daquele dia; picos com centavos não demonstram consistência. Inclua os demais dias, inclusive negativos, e diferencie ROI diário, média aritmética e ROI acumulado ponderado.
 6. Valide igualdade entre elegibilidade calculada e IDs únicos publicados, ordenação bruta, unicidade campanha/data, cobertura de pausa, conservação das fontes, limites UTF-16 e hash das partes. Use o renderer/gate normal para o Intraday e um suplemento explícito separado, sem editar o texto canônico já validado. Publique ambos por journal/nonce/GET, retomando somente partes ausentes; não confunda o recibo local com entrega remota. Teste a fronteira exata do threshold, receita ausente, zero explícito, gasto zero, dia da pausa e ranking antes do arredondamento. Não salve o threshold do pedido como preferência ou autorização de reativação.
 
+## Resumo complementar persistido por conta
+
+Antes de fechar um Intraday, consulte `SHEIN-US-DIRECT.json#/reporting/account_intraday_summary_overrides` somente para a conta/thread do pedido. Quando houver override ativo, envie o resumo complementar no template canônico dessa entrada, junto do relatório completo, sem substituir nem reescrever as partes validadas. Calcule saldo e ROIs consolidados pelo mesmo modelo financeiro, não pela média dos ROIs das campanhas; conserve seleção, moeda, corte e n/d. Essa preferência de apresentação não altera agendamentos, outras contas, o renderer ou permissões Meta. Não transforme a gravação da preferência em alegação de alteração/teste de um runner recorrente.
+
 ## Modelo normalizado
 
 O script `/root/.hermes/profiles/ares/scripts/shein-report-layout.py` recebe JSON sanitizado com:
