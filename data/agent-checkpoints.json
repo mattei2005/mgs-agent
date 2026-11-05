@@ -2682,6 +2682,16 @@
       "updated_at": "2026-11-05T17:32:16+00:00"
     },
     {
+      "agent": "ares",
+      "id": "EGGBEV-THREE-CREATION-THREADS-1567979089896407112",
+      "next_step": "Adicionar somente bindings/prompts/projecoes de naming nas threads02/03 pelo sincronizador canonico;preservar titulos e estadoarquivado apos publicacao;GET3threads+runtime/versionado e contagem final3/3. Nao alterar readiness/credenciais/campanhas.",
+      "objective": "Auditar e completar projecao do padrao naming nas threads Criacao Eggbev01/02/03",
+      "source": "data/ares/meta-ads/audit/eggbev/thread-naming-audit-1567979089896407112/before-audit.jsonl",
+      "state": "auditoria real:01 source/runtime/policy/projecao presentes;02e03 threads corretas arquivadas,sem source nem runtimeprompt local,nem mensagem do padrao. bindings soberanos resolvidos no mapa,sem promover candidatos a operacao ativa.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-05T19:14:57+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "FINANCE-COMPANY-EXPENSES-1547240897752604704",
       "next_step": "Nenhuma pendência deste pedido. Preservar dados de origem e regras; alterações futuras exigem novo escopo. Backups/restore isolado retidos para evidência.",
@@ -8756,5 +8766,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T19:07:59+00:00"
+  "updated_at": "2026-11-05T19:14:57+00:00"
 }

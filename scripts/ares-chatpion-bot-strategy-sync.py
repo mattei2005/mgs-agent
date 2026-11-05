@@ -153,11 +153,24 @@ def set_versioned_prompt(thread_id: str, prompt: str) -> None:
     document = yaml.compose(raw)
     if document is None:
         raise RuntimeError("versioned config is empty")
-    key, value = find_yaml_value(document, ["discord", "channel_prompts", thread_id])
-    replacement = serialize_scalar(prompt, key.start_mark.column)
-    updated = raw[: value.start_mark.index] + replacement + raw[value.end_mark.index :]
+    try:
+        key, value = find_yaml_value(document, ["discord", "channel_prompts", thread_id])
+    except KeyError:
+        parent_key, parent = find_yaml_value(document, ["discord", "channel_prompts"])
+        if not isinstance(parent, yaml.MappingNode) or parent.flow_style or not parent.value:
+            raise RuntimeError("existing block-style channel prompt mapping required")
+        column = parent.value[0][0].start_mark.column
+        insert_at = parent.end_mark.index - parent.end_mark.column
+        entry = (" " * column) + json.dumps(thread_id) + ": " + serialize_scalar(prompt, column) + "\n"
+        prefix = "" if insert_at == 0 or raw[:insert_at].endswith("\n") else "\n"
+        updated = raw[:insert_at] + prefix + entry + raw[insert_at:]
+    else:
+        replacement = serialize_scalar(prompt, key.start_mark.column)
+        updated = raw[: value.start_mark.index] + replacement + raw[value.end_mark.index :]
     parsed = yaml.safe_load(updated)
-    if str(parsed["discord"]["channel_prompts"][thread_id]).strip() != prompt.strip():
+    expected = yaml.safe_load(raw)
+    expected["discord"]["channel_prompts"][thread_id] = prompt
+    if parsed != expected or str(parsed["discord"]["channel_prompts"][thread_id]).strip() != prompt.strip():
         raise RuntimeError(f"versioned prompt readback mismatch for {thread_id}")
     VERSIONED_CONFIG.write_text(updated, encoding="utf-8")
 

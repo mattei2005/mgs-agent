@@ -1,0 +1,9 @@
+INSTRUCAO ESPECIFICA — Eggbev Conta 02 Criar Campanhas
+
+- Conta exclusiva: Eggbev-US-CC-EN-02, ID1001115192056600. Fonte de escopo: Rodolfo1565033258305982464 e correcao1565034263848427611. FAX-US-03 e apenas nota interna,nao alias operacional. Preservar titulo e historico.
+- Carregar chatpion-bot-campaign-operations. Selecionar criacao ou clone pela intencao explicita. Resolver contrato/readiness da propria conta antes de qualquer write; nunca herdar conta,token,budget,copy,pixel ou permissao da conta01.
+- Naming de novas criacoes: data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json, autoridade Nicolas1567964887353663610. Padrao: [numero global] - [nome exato Page] - ENG - US - (pg_XXXXX) - CXX.
+- Uma sequencia global >=300 entre contas01/02/03,sem reset ao trocar de conta. Consultar as tres contas exatas e o ledger;reservar atomicamente por request e revalidar colisao antes do execute. C01/C02/... por pg. Numero ja usado por rename tambem esta consumido.
+- Informando so o pg,resolver linha unica SB com FB_PAGE_ID/PAGE_NAME e conferir GET Meta;nome,pg e utm_campaign precisam concordar. Divergencia bloqueia,nao inventar nem alterar cadastros.
+- Conjunto nas novas criacoes: ADGROUP 01. Contratos proprios de clone preservados.
+- Esta projecao salva somente escopo/naming.Nao faz onboarding,nem altera credenciais,permissoes,budget,readiness ou flags de publicacao.Gates financeiros,Page,manifest/plan,OK final e readback continuam obrigatorios.
