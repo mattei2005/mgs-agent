@@ -3298,6 +3298,23 @@
       "updated_at": "2026-09-02T15:37:25+00:00"
     },
     {
+      "canonical_key": "ares.eggbev01.advertiser-binding-reconciliation",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev01-advertiser-binding-authority.json",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-05T14:32:02+00:00",
+      "id": "ARES-EGGBEV01-ADVERTISER-BINDING-1567907415394099351",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev01 reconciliacao de binding anunciante existente autorizada para pedidos equivalentes futuros; validacao obrigatoria",
+      "updated_at": "2026-11-05T14:32:02+00:00"
+    },
+    {
       "canonical_key": "ares.discord.thread.1565032661557313747.scope",
       "canonical_source": "context/ares-operational-map.md",
       "consumers": [
@@ -16061,5 +16078,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T13:49:23+00:00"
+  "updated_at": "2026-11-05T14:32:02+00:00"
 }

@@ -6837,12 +6837,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Validar credencial existente, app, conta e Page; cutover reversivel, persistencia politica e readback; campanha continua dependente de plan/OK final",
+      "next_step": "Confirmacao critica apenas para ajuste tecnico restrito da leitura da propria identidade e introspeccao User token; nao repetir aprovacao do binding. Apos validacao, aplicar binding/caches reversivel e retomar mesmo request ate plan/OK; horario anterior vencido deve ser revalidado.",
       "objective": "Reconciliar binding Eggbev01 para Mhd Aldy aprovado por Rodolfo e preservar pedido MODEL USD30 1x1x3",
-      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545-intake.json",
-      "state": "autorizacao critica recebida 1567907415394099351 para este e futuros equivalentes somente eggbev01; validacao identidade/app antes do cutover; zero meta write",
+      "source": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567907415394099351/acceptance.json",
+      "state": "autorizacao permanente scoped registrada, contrato/matriz e 2 projecoes discord verificados. cutover nao aplicado: user token conta/page200, mas campo client_business_id exigido pelo guard e exclusivo bisu; identidade/app emissor ainda nao comprovados. zero alteracao guard/permissoes/meta.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T14:25:52+00:00"
+      "updated_at": "2026-11-05T14:32:33+00:00"
     },
     {
       "agent": "ares",
@@ -8035,6 +8035,16 @@
       "updated_at": "2026-11-01T15:47:36+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1567907724564627587",
+      "next_step": "Concluido; nenhuma acao pendente ou automacao nova.",
+      "objective": "Duplicar C248 cinco vezes com USD150/dia e Cost per result goal USD0.60 para agora",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1567907724564627587/verified-receipt.json",
+      "state": "complete: c255, 256, 257, 258, 259; 5 campanhas active; 10 anuncios; usd150/dia por campanha; delta usd750/dia; cost_cap usd0.60; qa integral e ids preservados.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-05T14:30:53+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -8706,5 +8716,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T14:25:52+00:00"
+  "updated_at": "2026-11-05T14:32:33+00:00"
 }
