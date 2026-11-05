@@ -60883,6 +60883,31 @@
       "report_infra_status": "sent_verified",
       "cron_coordination": "same schedule paused during manual writer, rearmed21:02Eastern",
       "report_infra_message_id": "1567621549438148613"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261104-2102",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "updated_validated",
+      "updated_at": "2026-11-04T21:33:35.763249-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261104T2102/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "preserved_h": 0,
+        "card_proofs_updated": 3,
+        "pending_d": 0,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "report_infra_message_id": "1567729044873551914",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
