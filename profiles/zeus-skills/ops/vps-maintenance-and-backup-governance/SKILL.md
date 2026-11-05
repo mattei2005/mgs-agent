@@ -66,6 +66,7 @@ Load this skill when Rodolfo asks:
 14. For rsyslog or another daemon failing because a destination log is absent or unwritable, load `references/system-log-file-creation-and-rotation.md`; it defines read-only attribution across ACL/tmpfiles/logrotate, exact-file repair, durability after rotation, probe validation, and rollback without deleting logs.
 15. For an urgent PHP vulnerability notice or provider PHP maintenance email, load `references/php-security-advisory-runtime-audit.md`; it separates upstream fixes, vendor backports, actual HTTP workers, temporary mitigations, repository freshness and production confirmation.
 16. For auditd/plugin queue overflow or BitNinja audit forwarding warnings, load `references/auditd-plugin-queue-readonly-diagnostics.md`; distinguish kernel loss, local logging and plugin-forwarding drops before claiming recovery or proposing configuration changes.
+17. For BitNinja blocking by country or suspected false positives in paid traffic, load `references/bitninja-country-traffic-diagnostics.md`; validate MMDB build metadata, hostname attribution, per-IP versus country-wide controls and the limits of server-log/public-probe evidence.
 
 ## Hostinger provider route
 
