@@ -1,0 +1,261 @@
+EEEEEEEEEEEEEEEE..
+======================================================================
+ERROR: test_exact_preserved_static_text_feed_matches_without_mutation (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_exact_preserved_static_text_feed_matches_without_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 29, in test_exact_preserved_static_text_feed_matches_without_mutation
+    self.assertTrue(matches(actual, expected))
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='extra_image')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='sourcing_hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='source')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='opt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='sourcing_body')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='feed_body')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='page')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='instagram')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='link')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='cta')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='feed_extra')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='spec_extra')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='video')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+======================================================================
+ERROR: test_missing_changed_extra_media_and_identity_fail_closed (tests.test_shein_static_text_feed_sourcing.StaticTextFeedTests.test_missing_changed_extra_media_and_identity_fail_closed) (field='post')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/mgs-agent/tests/test_shein_static_text_feed_sourcing.py", line 56, in test_missing_changed_extra_media_and_identity_fail_closed
+    self.assertFalse(matches(actual, expected))
+                     ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/creative_media.py", line 65, in matches
+    if not valid_observed(actual, expected):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 45, in valid_observed
+    wanted = sourcing(expected)
+  File "/root/mgs-agent/scripts/ares_campaign_v3/image_sourcing.py", line 23, in sourcing
+    raise ValueError('static sourcing requires an unambiguous image definition')
+ValueError: static sourcing requires an unambiguous image definition
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.011s
+
+FAILED (errors=16)

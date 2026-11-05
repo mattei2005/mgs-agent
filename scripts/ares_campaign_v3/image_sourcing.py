@@ -42,6 +42,32 @@ def valid_observed(actual, expected):
     if (isinstance(expected_spec, dict) and expected_spec
             and set(expected_spec) <= {'titles', 'bodies', 'descriptions'}):
         return spec == expected_spec
+    # A static Create-ad definition may carry its text variants in AFS,
+    # not link_data. This is preserved-source QA, never a new-media recipe:
+    # require the exact text feed, primary image and complete story/sourcing.
+    feed = expected.get('asset_feed_spec')
+    if feed:
+        from .creative_media import stable
+        story = expected.get('object_story_spec') or {}
+        ld = story.get('link_data') or {}
+        allowed_feed = {'titles', 'bodies', 'descriptions', 'optimization_type'}
+        if (not isinstance(feed, dict) or set(feed) - allowed_feed
+                or not ld.get('image_hash') or story.get('video_data')
+                or expected.get('object_story_id') or actual.get('object_story_id')
+                or feed.get('optimization_type') != 'DEGREES_OF_FREEDOM'):
+            return False
+        texts = {key: feed[key] for key in ('titles', 'bodies', 'descriptions') if key in feed}
+        if (not texts.get('titles') or not texts.get('bodies')
+                or any(not isinstance(rows, list) or not rows for rows in texts.values())):
+            return False
+        wanted = {'images': [{'hash': ld['image_hash'], 'source': 'multi_media',
+                              'opt_in_status': 'opt_in'}], **texts}
+        observed_story = copy.deepcopy(actual.get('object_story_spec') or {})
+        if story.get('instagram_user_id') and not observed_story.get('instagram_user_id'):
+            observed_story['instagram_user_id'] = actual.get('instagram_user_id')
+        return (expected_spec == wanted and spec == wanted
+                and stable(actual.get('asset_feed_spec')) == stable(feed)
+                and stable(observed_story) == stable(story))
     wanted = sourcing(expected)
     if not isinstance(spec, dict) or set(spec) - set(wanted):
         return False

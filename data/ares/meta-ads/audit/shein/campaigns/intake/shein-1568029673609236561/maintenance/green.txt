@@ -1,0 +1,17 @@
+....................E
+======================================================================
+ERROR: test_ares_campaign_engine_v3 (unittest.loader._FailedTest.test_ares_campaign_engine_v3)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_ares_campaign_engine_v3
+Traceback (most recent call last):
+  File "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/runtime/python-3.14.9+20261021-linux-x64/lib/python3.14/unittest/loader.py", line 141, in loadTestsFromName
+    module = __import__(module_name)
+  File "/root/mgs-agent/tests/test_ares_campaign_engine_v3.py", line 10, in <module>
+    import pytest
+ModuleNotFoundError: No module named 'pytest'
+
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.130s
+
+FAILED (errors=1)
