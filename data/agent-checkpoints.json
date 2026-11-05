@@ -3452,6 +3452,16 @@
       "updated_at": "2026-11-01T04:15:44+00:00"
     },
     {
+      "agent": "ares",
+      "id": "SHEIN-STATUS-1568027781877596302",
+      "next_step": "Congelar hierarquias e validar runner/agenda determinística de ativação",
+      "objective": "Pausar as 13 campanhas nominais da Yolokfx06G003 e reativar em06/11/2026 00h America/New_York sem outros ajustes",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568027781877596302/pause.json",
+      "state": "pause_complete:13/13 paused por get integral; budgets/lances preservados; preparando one-shot status-only no mesmo request",
+      "thread_id": "1558127055282110526",
+      "updated_at": "2026-11-05T22:26:00+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "SNAP-CORE22-AUTO-1566497067512369283",
       "next_step": "Nenhum:2987 ativa;2955 retida para rollback; Livepatch saudável; PIDs dos agentes iguais; sem reboot; Snap sem candidatos. Observadores d476a2649595 e f17da87f7d57 concluídos/desabilitados sem próximo disparo; histórico automático supersedido pela execução manual.",
@@ -8766,5 +8776,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T19:25:17+00:00"
+  "updated_at": "2026-11-05T22:26:00+00:00"
 }
