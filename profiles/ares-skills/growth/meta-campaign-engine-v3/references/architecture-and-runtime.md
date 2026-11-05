@@ -59,6 +59,14 @@ Every writer claims a persisted per-account lease before preflight and keeps it 
 
 Uma rejeição na admissão anterior ao writer deve ser registrada como bloqueio local, não como rejeição da Meta ou campanha criada. Não generalizar essa conclusão para falhas em estágios posteriores, que exigem reconciliação dos efeitos parciais.
 
+#### Suspensão autorizada e retomada do pedido atual
+
+- Interpretar o aceite somente pelo escopo da pergunta: autorização para suspender uma recuperação não converte clone aprovado em criação do zero nem autoriza excluir/ativar os objetos antigos. Sob os locks canônicos do request antigo no runner e no Engine, reler objetos e edges, preservar backups e registrar origem/IDs/estado anterior. Quando o runner suporta estacionamento por fase, usar `SUSPENDED_BY_OPERATOR` com `automatic_recovery_required=false` e necessidade de nova instrução para retomar. Liberar a lease pelo `AccountWriterLeaseStore.release(account_id, old_request_id)`, nunca apagando o arquivo ou atribuindo o request atual à força; conferir state, lease e objetos. `COMPLETE` da lease significa liberação da coordenação, não conclusão da campanha antiga.
+- Se a tentativa atual falhou exclusivamente antes da admissão, com `WriterLeaseConflict`, `lanes={}`, ausência de checkpoint e ausência comprovada de objetos atuais, preservar o audit FAILED original e registrar reconciliação de admissão sem efeitos. Uma revisão Meta-safe de início imediato já autorizada deve conservar o mesmo request e o selo aprovado, provar que só `start_time` mudou no conteúdo de campanha, selar novamente e reconciliar explicitamente o digest/status do audit de admissão. Não criar checkpoint fictício para passar por `failed request has no checkpoint for recovery`; não aplicar essa manutenção a falhas com qualquer efeito, IDs, journal ou checkpoint. Após o primeiro write, preservar o manifest executivo e usar recovery missing-only normal.
+- Em sucesso parcial de ad copies, reler os anúncios existentes e usar o journal por slot: conservar os IDs dos children bem-sucedidos e criar apenas o slot ausente pelo mesmo Engine. Conferir no fechamento que todos os IDs anteriores continuam no conjunto final e que a cardinalidade aprovada é exata. Fonte repetida não é chave única de slot.
+
+Aceite operacional dessa sequência: backups/readbacks da suspensão, campo de campanha alterado limitado ao horário, primeiro erro preservado, execução central com IDs persistidos, recovery sem duplicar children e GET final de estrutura/budget/status/Page/JSON/mídia. Um ensaio offline não comprova autorização ou sucesso remoto.
+
 ## Media
 
 O registry é obrigatório para os modos com mídia prestageada, `clone_prestaged` e `from_zero_prestaged`. `pure_clone` reutiliza os creatives/mídias existentes da fonte e não depende de novos registros de mídia.

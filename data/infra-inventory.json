@@ -61065,6 +61065,30 @@
       "report_infra_status": "delivered",
       "report_infra_message_id": "1567944908084351137",
       "report_infra_readback": true
+    },
+    {
+      "id": "atena-seo100-labels-zuout-com-1567923759137034251",
+      "agent": "atena",
+      "type": "wordpress_localized_label_source_patch",
+      "domain": "zuout.com",
+      "status": "production_verified_canary_audit_gap_reconciled",
+      "updated_at": "2026-11-05T17:32:58.646131+00:00",
+      "authority_message_id": "1567923759137034251",
+      "origin_thread_id": "1567897844302741565",
+      "path": "/home/runcloud/webapps/zuout/wp-content/themes/jbf-wp-theme-main/functions.php",
+      "runtime_owner": "runcloud",
+      "before_sha256": "decbdfc3f15c50ebf3e81911a44f3111b3a8cb8450a3715e047a4368cc0825a9",
+      "after_sha256": "bb8d1c249d14c37d0f33d8a776f7d4db4a63dd0971ba65cf06429641030947dc",
+      "backup": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/zuout-apply/before.php",
+      "evidence": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/zuout-apply/inventory-receipt.json",
+      "evidence_sha256": "b6d78f2003b74f46bd2ceca92ebba24ba4f3a2816c241648dad2bed6b79b997a",
+      "parent_public_readback": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/zuout-apply/parent-final-browser6.json",
+      "wordpress_identity": "atena Editor ID19 unchanged",
+      "cache_effects": "exact CRP HTML key expiration and native regeneration; exact WPFC/Cloudflare URLs only; derived meta deltas recorded",
+      "audit_exception": "canary local prewrite-intent file absent; prior plan/source and independent exact readback reconciled; no retrospective intent or write replay; expansion/cache stages had prewrite intents",
+      "audit_exception_evidence": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/zuout-apply/canary-reconciliation.json",
+      "context_compatibility_refinement": "published source retained as current baseline; auth/neutral-query compatibility being checked under same6IDs without content/locale change",
+      "report_infra_status": "zuout_parent_delivery_next"
     }
   ],
   "profile_skill_references": [
