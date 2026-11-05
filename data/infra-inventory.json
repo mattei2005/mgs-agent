@@ -61042,6 +61042,29 @@
       "report_infra_status": "delivered",
       "report_infra_message_id": "1567936795352502293",
       "report_infra_readback": true
+    },
+    {
+      "id": "atena-seo100-labels-openzed-com-1567923759137034251",
+      "agent": "atena",
+      "type": "wordpress_localized_label_source_patch",
+      "domain": "openzed.com",
+      "status": "production_verified",
+      "updated_at": "2026-11-05T16:52:38.950460+00:00",
+      "authority_message_id": "1567923759137034251",
+      "origin_thread_id": "1567897844302741565",
+      "path": "wp-content/plugins/openzed-author-box/openzed-author-box.php",
+      "native_editor_file": "openzed-author-box/openzed-author-box.php",
+      "transport": "existing native WordPress file editor; readback by SFTP read only",
+      "before_sha256": "b2118b60710e4a5ffc054ab7bf6e53163b6814ff9d0b48166cc398f9bf4fdd67",
+      "after_sha256": "d1217b6a1080dc5d38341e11af6a90cad9e672ce49e37ca8b7ea8d518a737b98",
+      "backup": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/openzed/recovery-v2/plugin-before.php",
+      "evidence": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/openzed/recovery-v2/completion-report.json",
+      "evidence_sha256": "92948a5021675d825767b90e3a0342097e9fb2e95b65082859e6f99e138aa58b",
+      "parent_public_readback": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/labels-execution/openzed/recovery-v2/parent-final-browser6.json",
+      "security_final": "WP2FA 4.1.0 active and enforcement verified; no factors/users/policy changed",
+      "report_infra_status": "delivered",
+      "report_infra_message_id": "1567944908084351137",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
