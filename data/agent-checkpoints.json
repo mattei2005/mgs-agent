@@ -773,12 +773,12 @@
     {
       "agent": "ares",
       "id": "ARES-CREATIVE-NICOLAS-1567715846263013520",
-      "next_step": "Concluir probe/sanitizacao e revisar timelines de todas as fontes; congelar mapa por ID; registrar mesmo request 48d5ae0a29e761de8259dd116d6dac51 e executar blocos canonicos ate4 via claim/complete e monitor.",
-      "objective": "Tratar 35 fontes numeradas 1-35 US CC EN e entregar em NICOLAS - Exclusivos; preservar RAW e reserva",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/nicolas-1567715846263013520/sources.json",
-      "state": "35 mp4 estaveis por 3 leituras em 40s; fontes congeladas; destino permanente validado. preparacao local em execucao foreground supervisionada; request ainda nao registrado para evitar concorrencia. autor humano validado na mensagem nativa do canal pai.",
+      "next_step": "Acompanhar processo registrado em intakes/nicolas-1567715846263013520/process.json; continuar somente request registrado e mesmos claims. Executar complete apos cada bloco; auditar34 finais por IDs/provider/atalho/parent/bytes/ACK/reservas.14 requer nova exportacao humana; nao tratar branco comoREADY nem fazer PATCH rejeicao fora do contrato.",
+      "objective": "Tratar 35 fontes numeradas US CC EN; entregar validos em NICOLAS - Exclusivos preservando RAW e reserva",
+      "source": "/root/mgs-agent/data/ares/creative-ops/intakes/nicolas-1567715846263013520/plan.json",
+      "state": "35 fontes inspecionadas raw/clean;34 validas com plano congelado e sanitizacao/frame equality;14.mp4 branco comprovado em150frames e thumbnail drive, preservado na entrada sem candidato.27/28 mesmo video com audio diferente: manter2exports. executor canonico supervisionado ativo para subconjunto34, sem outra fila/writer. destino permanente validado.",
       "thread_id": "1567715846263013520",
-      "updated_at": "2026-11-05T01:46:20+00:00"
+      "updated_at": "2026-11-05T01:55:32+00:00"
     },
     {
       "agent": "ares",
@@ -8646,5 +8646,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T01:46:20+00:00"
+  "updated_at": "2026-11-05T01:55:32+00:00"
 }
