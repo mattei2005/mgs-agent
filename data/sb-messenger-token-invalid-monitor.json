@@ -641,7 +641,13 @@
     736652,
     736674,
     736694,
-    736716
+    736716,
+    736820,
+    736831,
+    736848,
+    736869,
+    736899,
+    736918
   ],
   "failure_alert_sent_for": 0,
   "incidents": {
@@ -2066,9 +2072,9 @@
     "digital-trust|helixenit|33|308": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-05T12:10:59.000Z",
+        "created_at": "2026-11-05T20:06:30.000Z",
         "domain": "helixenit",
-        "notification_id": 706716,
+        "notification_id": 736899,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -2087,7 +2093,8 @@
         "1556640185125576797"
       ],
       "notification_ids": [
-        706716
+        706716,
+        736899
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -2225,9 +2232,9 @@
     "digital-trust|helixenit|89|1716": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-26T16:06:28.000Z",
+        "created_at": "2026-11-05T20:05:33.000Z",
         "domain": "helixenit",
-        "notification_id": 725478,
+        "notification_id": 736831,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 15
@@ -2246,7 +2253,8 @@
       ],
       "notification_ids": [
         706471,
-        725478
+        725478,
+        736831
       ],
       "opened_at": "2026-10-05T08:12:18-04:00",
       "repeat_count": 0,
@@ -2456,9 +2464,9 @@
     "digital-trust|infinitynexx|88|1535": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-10-27T16:06:01.000Z",
+        "created_at": "2026-11-05T20:05:33.000Z",
         "domain": "infinitynexx",
-        "notification_id": 726466,
+        "notification_id": 736820,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 1,
@@ -2481,7 +2489,8 @@
         700946,
         706455,
         725380,
-        726466
+        726466,
+        736820
       ],
       "opened_at": "2026-09-15T16:12:16-04:00",
       "repeat_count": 0,
@@ -2765,9 +2774,9 @@
     "digital-trust|mavroa|27|1718": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-04T16:10:10.000Z",
+        "created_at": "2026-11-05T20:06:47.000Z",
         "domain": "mavroa",
-        "notification_id": 735463,
+        "notification_id": 736918,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Broadcast": 1,
@@ -2789,7 +2798,8 @@
       "notification_ids": [
         732726,
         734035,
-        735463
+        735463,
+        736918
       ],
       "opened_at": "2026-11-02T07:12:16-05:00",
       "repeat_count": 0,
@@ -3850,9 +3860,9 @@
     "digital-trust|topfeed|6|294": {
       "alert": {
         "company": "digital-trust",
-        "created_at": "2026-11-02T16:06:53.000Z",
+        "created_at": "2026-11-05T20:05:48.000Z",
         "domain": "topfeed",
-        "notification_id": 732956,
+        "notification_id": 736848,
         "page_count_scope": "mapped-sb-user-id",
         "page_statuses": {
           "Blocked": 16,
@@ -3891,7 +3901,8 @@
         728761,
         730643,
         731683,
-        732956
+        732956,
+        736848
       ],
       "opened_at": "2026-10-12T16:12:14-04:00",
       "repeat_count": 0,
@@ -4528,6 +4539,39 @@
       "resolved_at": null,
       "status": "active"
     },
+    "digital-trust|zytiva|17|1753": {
+      "alert": {
+        "company": "digital-trust",
+        "created_at": "2026-11-05T20:06:14.000Z",
+        "domain": "zytiva",
+        "notification_id": 736869,
+        "page_count_scope": "mapped-sb-user-id",
+        "page_statuses": {
+          "Blocked": 7,
+          "Broadcast": 94,
+          "On-hold": 75,
+          "Ready": 10
+        },
+        "pages": 186,
+        "segurador_id": "1753",
+        "segurador_name": "SobiRin Kemana Mana",
+        "source": "page_token",
+        "user_email": "disparoszytiva@gmail.com",
+        "user_id": "17",
+        "user_name": "Disparos Zytiva US-CC-EN"
+      },
+      "last_sent_at": "2026-11-05T15:12:17-05:00",
+      "message_ids": [
+        "1567994985704595517"
+      ],
+      "notification_ids": [
+        736869
+      ],
+      "opened_at": "2026-11-05T15:12:15-05:00",
+      "repeat_count": 0,
+      "resolved_at": null,
+      "status": "active"
+    },
     "digital-trust|zytiva|17|270": {
       "alert": {
         "company": "digital-trust",
@@ -4729,25 +4773,26 @@
       "status": "active"
     }
   },
-  "last_check": "2026-11-05T14:57:14-05:00",
+  "last_check": "2026-11-05T15:12:17-05:00",
   "last_delivery": {
-    "at": "2026-11-05T11:12:19-05:00",
+    "at": "2026-11-05T15:12:17-05:00",
     "cursor_ids": [
-      736553,
-      736567,
-      736590,
-      736611,
-      736630,
-      736652,
-      736674,
-      736694,
-      736716
+      736820,
+      736831,
+      736848,
+      736869,
+      736899,
+      736918
     ],
-    "message_ids": [],
-    "notification_ids": []
+    "message_ids": [
+      "1567994985704595517"
+    ],
+    "notification_ids": [
+      736869
+    ]
   },
   "last_error": null,
-  "last_seen_id": 736716,
+  "last_seen_id": 736918,
   "manual_reconciliation": {
     "at": "2026-09-03T17:30:07-04:00",
     "basis": "fresh live DTR+SB 21-profile audit; 19 exact/removed plus 2 acknowledged normal pre-campaign Pages; live SB notification delta after resolution=0; Discord alert messages deleted",
