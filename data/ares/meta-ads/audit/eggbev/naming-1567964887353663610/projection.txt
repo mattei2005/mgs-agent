@@ -1,0 +1,11 @@
+Novo padrão de criação aprovado por Nicolas:
+
+`300 - Georgina Whitford - ENG - US - (pg_23156) - C01`
+
+• Uma sequência global, a partir de300, compartilhada somente pelas contas Eggbev-US-CC-EN-01/02/03. Mudou de conta, continua a sequência:332→333, sem reset. Reserva atômica por pedido evita números duplicados.
+• C01/C02/... continua a sequência da mesma Page/pg entre essas contas.
+• Informar o pg basta: resolver a linha única na Smart Bidding, validar FB_PAGE_ID e nome exato pela Meta e manter utm_campaign no pg correspondente. Divergência ou ambiguidade bloqueia antes de publicar; não inventar nome nem alterar cadastro/credencial.
+• Nome do conjunto nas novas criações:`ADGROUP 01`. O conjunto do teste atual já foi renomeado e relido,sem alteração dos demais campos.
+• Campanhas existentes preservadas; nenhum número foi consumido por este exemplo. As regras próprias de clones e os gates de onboarding,budget,resumo/OK e publicação permanecem.
+
+Fonte canônica:política de naming Eggbev US EN compartilhada; histórico das três contas conferido em leitura,sem liberar writes em contas não prontas.

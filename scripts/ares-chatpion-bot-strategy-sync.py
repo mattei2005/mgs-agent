@@ -166,7 +166,7 @@ def sync_prompt(thread_id: str, prompt_path: Path) -> dict[str, Any]:
     prompt = prompt_path.read_text(encoding="utf-8").strip()
     set_versioned_prompt(thread_id, prompt)
     subprocess.run(
-        ["hermes", "-p", "ares", "config", "set", f"discord.channel_prompts.{thread_id}", prompt],
+        ["hermes", "-p", "ares", "config", "set", f"discord.channel_prompts.{thread_id}", json.dumps(prompt, ensure_ascii=False)],
         check=True,
         capture_output=True,
         text=True,
