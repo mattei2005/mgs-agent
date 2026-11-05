@@ -8,6 +8,7 @@ Use somente quando a fonte canônica autorizar corrigir a apresentação localiz
 
 - Vincule IDs, URLs/permalinks e caminhos literais, tipo/status e tag linguística. Faça o callback falhar fechado fora desse conjunto, consulta principal, host e métodos admitidos. Declare explicitamente o tratamento de query, tracking, feeds, embed, preview, arquivos, REST/admin/CLI e paginação; não amplie variantes por inferência.
 - Use os hooks nativos de atributos HTML, locale OG, grafo schema e data exibida; não faça substituição ampla no HTML nem altere locale/idioma padrão. Localize apenas os nós do documento por @id/tipo, preservando WebSite/logo institucionais e datas ISO.
+- Reconcile guards de contexto com a chave real de cache do renderer. Quando HTML é reutilizado entre frontend autenticado e anônimo ou entre URL normal e tracking, não deixe o mesmo documento/idioma produzir traduções diferentes sob a mesma chave. Valide o caminho canônico e o documento nativo, sem usar valores de query como seletor de idioma. Exercite um MISS pela variante neutra e depois o endereço normal; preserve as exclusões administrativas e de objetos fora do escopo. Diferencie fixtures de autenticação de uma sessão/browser realmente autenticada.
 - Derive a data principal do post real e traduza somente o componente linguístico solicitado. Não regrave timestamps nem localize datas de relateds de outro ID como efeito lateral.
 
 ## Inspeção e preparação
