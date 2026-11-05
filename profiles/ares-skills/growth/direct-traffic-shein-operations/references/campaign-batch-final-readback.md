@@ -48,7 +48,21 @@ Grave um recibo agregado sanitizado com os resultados verificáveis e os campos 
 
 Se informar orçamento ativo total da conta, persista o valor realmente devolvido pelo readback, sua fonte e horário no recibo, separado do budget dos IDs novos. Não introduza esse total como literal manual no verificador ou apresente uma leitura anterior como parte do batch final.
 
-Após `mgs-knowledge-control.py checkpoint-upsert`, releia somente o checkpoint pelo ID exato e confira origem, objetivo, estado e próximo passo semanticamente. O controlador pode normalizar `state` para minúsculas: use comparação normalizada quando a caixa não for parte do identificador, preservando IDs e caminhos literais. Uma asserção local de apresentação não autoriza repetir o upsert, reexecutar o writer ou tratar uma conclusão Meta já verificada como falha operacional.
+Após `mgs-knowledge-control.py checkpoint-upsert`, selecione o checkpoint pelo ID exato, exija correspondência única e confira origem, objetivo, estado e próximo passo semanticamente. Compare `id`, `thread_id` e `source` literalmente; para conteúdo descritivo de `state`, normalize tanto o valor lido quanto os termos esperados com `.casefold()`. O controlador pode converter todo o estado para minúsculas, inclusive os rótulos de campanhas ali embutidos: normalizar apenas a palavra `complete`, mas procurar um rótulo `Cnnn` em maiúsculas, ainda produz falso negativo. Use esta ordem de comparação, com os esperados derivados do recibo verificado, não digitados como um segundo resumo:
+
+```python
+matches = [row for row in registry['checkpoints']
+           if row['id'] == expected_checkpoint_id]
+assert len(matches) == 1
+checkpoint = matches[0]
+assert checkpoint['thread_id'] == expected_thread_id
+assert checkpoint['source'] == expected_receipt_path
+normalized_state = checkpoint['state'].casefold()
+assert all(term.casefold() in normalized_state
+           for term in expected_state_terms)
+```
+
+Se uma asserção falhar depois de o upsert retornar sucesso, releia o registro exato e classifique divergência de conteúdo versus simples normalização antes de escrever novamente. Uma asserção local de apresentação não autoriza repetir o upsert, reexecutar o writer ou tratar uma conclusão Meta já verificada como falha operacional.
 
 Conclua somente quando todas as linhas estiverem verificadas. Se houver pendência, informe precisamente a cobertura concluída sem anunciar sucesso global. Responda na thread de origem, com um bullet por fonte e seus números novos, seguido de budget por campanha e total do lote, início/fuso, lances efetivos, status e total real de anúncios. Não confunda orçamento do lote com orçamento ativo total da conta.
 
