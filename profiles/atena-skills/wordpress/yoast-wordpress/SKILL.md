@@ -77,6 +77,8 @@ Após alterar `featured_media`, confira nesta ordem o attachment/primeira imagem
 4. Após autorização de produção, use um artigo real do lote como canário por combinação de contexto/transporte. Inspecione o watcher instalado e prefira as duas atualizações nativas de postmeta quando ele comprovar reconstrução no shutdown; não adote SQL UPDATE de indexable como padrão nem invente hooks para forçar cor.
 5. Releia as duas metas e o indexable único no mesmo ID e exija valores calculados exatos, preservação editorial e contexto inalterado antes da expansão. Separe cálculo, persistência, paridade do editor e observação visual autenticada. Se uma dessas provas não existir, reporte o limite; não transforme ausência de sessão em espera indefinida ou em pedido para o revisor salvar todos os posts.
 
+Ao analisar uma revisão já publicada, não use automaticamente o ID de categoria do anteprojeto como estado atual. Uma integração nativa aprovada pode ter criado o termo definitivo depois do manifesto de planejamento. Reconcilie os recibos e a projeção canônica da publicação com a leitura nativa, incluindo ID, nome, slug, idioma/locale e relações de tradução. Gere um binding novo e restrito aos IDs analisados para a expectativa do request, preservando os manifests/pins históricos e todas as categorias/tags efetivas. Não reatribua o post ao termo antigo para satisfazer o scorer nem remova o guard: sem linhagem e equivalência comprovadas, interrompa somente o alvo divergente.
+
 Se houver resultado baixo, reporte os assessments reais; um reparo editorial autorizado pode ajustar apenas os trechos responsáveis e deve gerar nova revisão/hash/análise, nunca um número fixo ou conectivos de enchimento.
 
 ## § Divergência entre editor, dados salvos e barra publicada

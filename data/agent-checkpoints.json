@@ -6857,12 +6857,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Validar fonte/Page/denylist/colisao/6 midias/reservas; preservar selo antigo,prevalidar revisao temporal mesmo request e executar Engine v3 --confirm-execute; GET/readback,QA e postprocess sem replay.",
-      "objective": "Executar clone MODEL USD30 1x1x3 aprovado por Nicolas 1567931694806212659",
-      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/final-summary.json",
-      "state": "ok final recebido para resumo b9b1927f4c52. horario 10:50 et ultrapassado; pedido original agora e allowlist do mesmo request autorizam refresh meta-safe corrente+5min no execute; ajuste comunicado na origem. pre-read fresco antes do writer; preservar manifest original e revisar somente inicio.",
+      "next_step": "Obter decisao somente sobre estacionar recuperacao historica mantendo Aria C004/C005 PAUSED/intactas e estado/IDs preservados para liberar a conta. Nao limpar lease resumivel sem essa decisao. OK comercial atual continua valido;apos liberar,refresh inicio+buffer no mesmo request e Engine v3/readback/QA/postprocess sem replay ou novos uploads.",
+      "objective": "Executar MODEL USD30 1x1x3 com OK final Nicolas 1567931694806212659 preservado",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/blocking-request-hierarchy-readback.json",
+      "state": "pre-read conta/page/denylist/6midias/reservas ok. mesmo request revisado somente inicio imediato meta-safe,novo selo84a709876c93 preservando selo aprovado. engine interrompido antes de claim/write por lease pg_8348 historico: engine failed,runner recovery_pending. aria c004/c005 live paused,zero conjuntos/ads e insights vazios. sem writer process ativo observado. lease e pedido antigo preservados; zero campanha atual criada.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T16:01:41+00:00"
+      "updated_at": "2026-11-05T16:06:20+00:00"
     },
     {
       "agent": "ares",
@@ -8736,5 +8736,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T16:01:41+00:00"
+  "updated_at": "2026-11-05T16:06:20+00:00"
 }
