@@ -1,6 +1,6 @@
-"""Entrypoint invariants; commit-alert fixtures superseded by release-only suite.
+"""Entrypoint invariants; official releases and incremental main summaries.
 Behavior/transport/ancestry coverage: test_hermes_release_only_monitor.py.
-Authority: Rodolfo message 1556908630278803478.
+Authority: Rodolfo message 1567760164319272970 (supersedes release-only).
 """
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +25,6 @@ def test_official_notification_policy_does_not_change_full_update_scope():
     source = (ROOT / 'scripts/hermes-news-explainer.py').read_text()
     assert 'Atualizar tudo na MGS significa main' in source
     monitor = (ROOT / 'scripts/mgs_hermes_release_monitor.py').read_text()
-    assert 'official-release-only' in monitor
+    assert 'official-releases-and-main-delta' in monitor
     assert 'main_commits_pending=main_pending' in monitor
     assert 'last_notified_release_commit' in monitor

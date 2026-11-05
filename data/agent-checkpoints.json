@@ -2634,12 +2634,12 @@
     {
       "agent": "zeus",
       "id": "HERMES-NEWS-COMMITS-1567760164319272970",
-      "next_step": "Validar explicação contextual, ciclo silencioso, inventário e REPORT-INFRA",
+      "next_step": "Operação recorrente normal: publicar somente novas releases ou delta de main nos horários existentes; sem atualização/restart automático",
       "objective": "Restaurar resumos incrementais de commits Hermes, preservar releases e agenda, sem update/restart",
-      "source": "context/hermes-news-policy.md",
-      "state": "implementado; 56 testes e 8 subtests aprovados. primeiro lote real 113 commits entregue e lido, source 1567761353685606581. registry superseded validado.",
+      "source": "reports/hermes-news-main-delta-1567760164319272970.json",
+      "state": "concluído e validado: 59 testes + 8 subtests pass; lote 113 commits source 1567761353685606581, explicação 1567761463735615500; repetição silenciosa; watchdog 0 órfãos; inventário e registry válidos; report-infra 1567762135562453013 com get exato",
       "thread_id": "1567646083465879653",
-      "updated_at": "2026-11-05T04:44:22+00:00"
+      "updated_at": "2026-11-05T04:47:27+00:00"
     },
     {
       "agent": "zeus",
@@ -8656,5 +8656,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T04:44:22+00:00"
+  "updated_at": "2026-11-05T04:47:27+00:00"
 }

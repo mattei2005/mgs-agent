@@ -69,7 +69,7 @@ def run(r, **env):
                           text=True, capture_output=True, timeout=60)
 
 
-def test_main_silent_and_dry_state_neutral(repo):
+def test_main_delta_and_dry_state_neutral(repo):
     advance(repo);before=repo['state'].read_bytes()
     cp=run(repo)
     assert cp.returncode == 0, cp.stderr

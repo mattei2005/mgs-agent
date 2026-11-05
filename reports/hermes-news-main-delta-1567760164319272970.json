@@ -1,0 +1,54 @@
+{
+  "id": "hermes-news-main-delta-1567760164319272970",
+  "agent": "zeus",
+  "authority_message_id": "1567760164319272970",
+  "thread_id": "1567646083465879653",
+  "policy": "official-releases-and-main-delta",
+  "supersedes": "hermes-news-official-release-only-1556908630278803478",
+  "canonical_source": "context/hermes-news-policy.md",
+  "registry_id": "HERMES-NEWS-RELEASES-MAIN-DELTA-1567760164319272970",
+  "backup": "/root/.hermes/profiles/zeus/cache/scratch/hermes-news-1567760164319272970",
+  "changed_files": [
+    "scripts/monitor-hermes-updates.sh",
+    "scripts/mgs_hermes_release_monitor.py",
+    "scripts/mgs_hermes_news.py",
+    "scripts/hermes-news-explainer.py",
+    "scripts/hermes-news-explainer-watchdog.py",
+    "tests/test_hermes_release_only_monitor.py",
+    "tests/test_monitor_hermes_updates.py",
+    "context/hermes-news-policy.md",
+    "profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md"
+  ],
+  "validation": {
+    "tests_passed": 59,
+    "subtests_passed": 8,
+    "isolated_test_environment": "uv run --no-project --with pytest",
+    "dry_run_real_delta": 113,
+    "dry_run_state_unchanged": true,
+    "first_main_summary_id": "1567761353685606581",
+    "contextual_explanation_id": "1567761463735615500",
+    "channel_id": "1505609056771899644",
+    "exact_source_readback": true,
+    "reply_reference_readback": true,
+    "mentions": 0,
+    "next_cycle_no_post": true,
+    "watchdog_orphans": 0,
+    "pending_outbox": false,
+    "registry_validate": "ok",
+    "skill_live_mirror_equal": true,
+    "infra_discovery": "completed"
+  },
+  "scope_preserved": {
+    "cron_schedule_changed": false,
+    "checks_per_day": 3,
+    "runtime_update": false,
+    "gateway_restart": false,
+    "credential_change": false,
+    "historical_message_deletion": false
+  },
+  "implementation_recovery": [
+    "Ambiguous test patch rejected atomically; retried with unique context.",
+    "System Python has no pytest; all tests executed successfully in isolated uv environment."
+  ],
+  "report_infra": {"message_id": "1567762135562453013", "channel_id": "1498132022634483894", "readback": true, "content_empty": true, "mentions": 0}
+}
