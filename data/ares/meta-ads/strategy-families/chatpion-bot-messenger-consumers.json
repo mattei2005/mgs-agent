@@ -55,5 +55,52 @@
       "channel_id": "1544117058982248448"
     }
   },
-  "updated_at": "2026-09-02T16:00:00-04:00"
+  "updated_at": "2026-09-02T16:00:00-04:00",
+  "naming_thread_projections": {
+    "1034081997659047": {
+      "account_id": "1034081997659047",
+      "account_alias": "Eggbev-US-CC-EN-01",
+      "scope": "naming route projection only; not consumer activation",
+      "binding_authority_message_id": "1565033184574308513",
+      "naming_authority_message_id": "1567964887353663610",
+      "policy_source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+      "prompt_file": "data/ares/discord/thread-prompts/1541578556037927053.txt",
+      "routes": {
+        "campaign_creation": "1541578556037927053"
+      },
+      "projection_messages": {
+        "campaign_creation": "1545924428712386620"
+      }
+    },
+    "1001115192056600": {
+      "account_id": "1001115192056600",
+      "account_alias": "Eggbev-US-CC-EN-02",
+      "scope": "naming route projection only; not consumer activation",
+      "binding_authority_message_id": "1565033258305982464",
+      "naming_authority_message_id": "1567964887353663610",
+      "policy_source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+      "prompt_file": "data/ares/discord/thread-prompts/1565032661557313747.txt",
+      "routes": {
+        "campaign_creation": "1565032661557313747"
+      },
+      "projection_messages": {
+        "campaign_creation": "1567981630574821510"
+      }
+    },
+    "1481815942722118": {
+      "account_id": "1481815942722118",
+      "account_alias": "Eggbev-US-CC-EN-03",
+      "scope": "naming route projection only; not consumer activation",
+      "binding_authority_message_id": "1565033323808424127",
+      "naming_authority_message_id": "1567964887353663610",
+      "policy_source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+      "prompt_file": "data/ares/discord/thread-prompts/1565032671669919827.txt",
+      "routes": {
+        "campaign_creation": "1565032671669919827"
+      },
+      "projection_messages": {
+        "campaign_creation": "1567981658970529936"
+      }
+    }
+  }
 }
