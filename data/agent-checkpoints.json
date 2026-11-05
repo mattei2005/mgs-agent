@@ -6837,12 +6837,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Rodolfo confirmar reconciliacao restrita do binding anunciante da conta01 para item Mhd existente; validar identidade/app e consumidores antes de atualizar. Nao pedir novos convites. Retomar mesmo request com plano e OK final; revalidar horario se ultrapassado.",
-      "objective": "Duplicar MODEL 1x1x3 com tres videos Nicolas USD30/dia e copy/JSON informados",
+      "next_step": "Validar credencial existente, app, conta e Page; cutover reversivel, persistencia politica e readback; campanha continua dependente de plan/OK final",
+      "objective": "Reconciliar binding Eggbev01 para Mhd Aldy aprovado por Rodolfo e preservar pedido MODEL USD30 1x1x3",
       "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545-intake.json",
-      "state": "awaiting_advertiser_binding_authorization: nicolas informou mhd aldy. binding canonico aponta carla nunes. comparacao read-only: ambos leem conta; page georgina retorna graph10 com configurado e http200 com item mhd existente, page token disponivel apenas em memoria. me identity retorna190 para ambos: identidade/app ainda nao calibrados para cutover. zero alteracao de credencial/permissoes/campanhas.",
+      "state": "autorizacao critica recebida 1567907415394099351 para este e futuros equivalentes somente eggbev01; validacao identidade/app antes do cutover; zero meta write",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T07:51:11+00:00"
+      "updated_at": "2026-11-05T14:25:52+00:00"
     },
     {
       "agent": "ares",
@@ -8706,5 +8706,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T13:49:23+00:00"
+  "updated_at": "2026-11-05T14:25:52+00:00"
 }

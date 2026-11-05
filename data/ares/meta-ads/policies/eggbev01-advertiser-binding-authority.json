@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "canonical_key": "ares.eggbev01.advertiser-binding-reconciliation",
+  "status": "active",
+  "operation_id": "Eggbev-US-CC-EN-BOT",
+  "account_id": "1034081997659047",
+  "authorized_by": "Rodolfo Mattei",
+  "authorized_by_discord_id": "344196393512075265",
+  "authority_message_id": "1567907415394099351",
+  "authority_thread_id": "1541578556037927053",
+  "authority_literal": "Sim para pedidos como esse e futuros.",
+  "approved_action": "Reconciliar somente o vinculo produtivo Eggbev01 para a credencial existente do perfil anunciante correto identificado no pedido autorizado; aplicacao atual Carla Nunes para Mhd Aldy.",
+  "current_approved_source_reference": "Token Meta API - 00 - ANUNCIANTE - Carla Nunes - eggbev-us-cc-en-01 - G006",
+  "current_approved_target_reference": "Token Meta API - 00 - ANUNCIANTE - Mhd Aldy - eggbev-us-cc-en-01 - G006",
+  "repeat_approval_required_within_same_scope": false,
+  "future_scope": "Pedidos equivalentes da mesma conta, com perfil anunciante correto explicitamente identificado, credencial ja cadastrada e validacao de identidade/app/ativos antes do cutover. Nao e fallback oportunista entre anunciantes.",
+  "required_gates": [
+    "Validar identidade real do anunciante e app contratado antes do cutover; titulo do cofre e acesso a conta nao bastam.",
+    "Validar conta exata, Page dependente e demais ativos necessarios pelo runtime permitido.",
+    "Inventariar consumidores/caches exatos e preservar referencia anterior e rollback.",
+    "Persistir somente referencias e evidencia sanitizada; nunca credencial.",
+    "Fazer readback dos bindings e runtime apos a alteracao.",
+    "Manter plan, resumo e OK final de campanha separados."
+  ],
+  "excluded": [
+    "alteracao ou emissao de tokens/segredos",
+    "permissoes remotas e locais de acesso ou bypass do guard",
+    "billing e account_spend_limit",
+    "budget",
+    "outras contas",
+    "revogacao ou exclusao da credencial anterior",
+    "criacao ou ativacao de campanha por efeito desta autorizacao",
+    "troca de arquitetura User token para System User"
+  ],
+  "supersedes": "Exigencia de nova confirmacao de Rodolfo a cada reconciliacao de binding equivalente dentro deste recorte; demais gates criticos permanecem.",
+  "implementation_status": "PENDING_IDENTITY_APP_VALIDATION",
+  "pending_reason": "O guard local permite /me somente com client_business_id; a Meta rejeita esse campo para User Access Token com code190. Leitura simples /me e introspeccao do token nao estao liberadas pelo guard vigente. Nao alterar o binding nem contornar a protecao.",
+  "evidence": "data/ares/meta-ads/audit/auth-cutover/eggbev01-1567907415394099351/verification.json"
+}
