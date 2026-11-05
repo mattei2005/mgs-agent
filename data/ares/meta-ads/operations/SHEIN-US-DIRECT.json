@@ -3963,6 +3963,31 @@
     "cron_enabled": true,
     "daily_report_policy": "data/ares/meta-ads/policies/shein-daily-report.json",
     "intraday_report_policy": "data/ares/meta-ads/policies/shein-intraday-report.json",
+    "account_intraday_summary_overrides": {
+      "937846586033361": {
+        "status": "active",
+        "account_name": "Mavroa-US-SHEIN-ES-06-G006",
+        "thread_id": "1558147440350076928",
+        "requested_by_discord_id": "1055570806945620030",
+        "source_message_id": "1567978798769774735",
+        "reference_message_id": "1567978475887923283",
+        "request_text": "mantenha este padrao para enviar junto com os futuros intradays",
+        "effective_at": "2026-11-05T14:08:26-05:00",
+        "scope": "companion_summary_for_this_account_and_thread_only; canonical_full_report_preserved",
+        "template": "Intraday completo enviado acima — **{account_short}**, corte de hoje às **{cutoff_local}**, em {currency}.\n\n• **{campaign_count} campanhas com entrega hoje.**\n• Gasto: **US$ {spend}**\n• Receita líquida: **US$ {net_revenue}**\n• Saldo: **{signed_balance}**\n• ROI real: **{roi_real}%** - estimado: **{roi_estimated}%**",
+        "data_source": "same validated report model; preserve financial cutoff and selection; no new collection for summary",
+        "formulas": {
+          "balance": "net_revenue - Meta_spend",
+          "roi_real_percent": "100 * (net_revenue - Meta_spend) / Meta_spend",
+          "roi_estimated_percent": "100 * (estimated_revenue - Meta_spend) / Meta_spend"
+        },
+        "number_format": "pt-BR; two decimals; percentage signs explicit; currency USD; balance sign before US$",
+        "missing_metric_policy": "n/d when revenue is missing or ROI denominator is not positive; never impute zero",
+        "no_replacement_of_full_report": true,
+        "no_schedule_or_Meta_changes": true,
+        "supersedes": "unpersisted local companion-summary formatting only"
+      }
+    },
     "currency": "per-account live readback",
     "fixed_threads": {},
     "mode": "ON_DEMAND_READ_ONLY_WITH_AUTHORIZED_DAILY_D1_SUBSET",

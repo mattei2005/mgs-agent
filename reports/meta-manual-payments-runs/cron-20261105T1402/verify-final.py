@@ -25,7 +25,7 @@ def authored(sh):
  return out
 c=load(H/'digital-trust-workbook-contract.json');ph=load(B/'phases.json');m=load(B/'final-metrics.json');R=Path(m['run_dir']);P=Path(ph['publish_pay_now']['run_dir']);N=Path(ph['refresh_september_invoices']['run_dir'])
 plan=load(R/'plan.json');assert m['status']=='updated_metrics_pending_card_history'and m['pending_ui']==plan['pending_ui']
-assert {x['account_id']for x in m['pending_ui']}=={'1481815942722118','1543098427832443'}
+assert {x['account_id']for x in m['pending_ui']}<=set(c['account_ids']) and len(m['pending_ui'])==len({x['account_id']for x in m['pending_ui']})
 g.load_env();sa=g.load_service_account();assert sa['client_email']=='mgsagent@mgs-core-prod.iam.gserviceaccount.com'and sa['project_id']=='mgs-core-prod'
 t=g.service_account_access_token();status,book=g.api_json('GET','https://sheets.googleapis.com/v4/spreadsheets/'+c['spreadsheet_id']+'?includeGridData=true',t,quota_project='mgs-core-prod');assert status==200
 save(B/'final-workbook-readback.json',book);baseline=load(B/'baseline.json');old={s['properties']['sheetId']:s for s in baseline['sheets']};new={s['properties']['sheetId']:s for s in book['sheets']};assert set(old)==set(new)

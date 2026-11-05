@@ -84,16 +84,16 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_updated_validated_pc1_auth_blocked",
-    "verified_at": "2026-11-05T08:09:04.157003-05:00",
+    "verified_at": "2026-11-05T14:07:16.553769-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-05T08:07:31.642699-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261105T080741245802",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T080501284818",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261105T080435034050",
+    "validated_metrics_at": "2026-11-05T14:06:54.661697-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261105T140656819680",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T140510509937",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261105T140436818243",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "d_ledger_to_live_sheet_exact": true,
@@ -151,6 +151,11 @@
       {
         "account_id": "1543098427832443",
         "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
@@ -349,9 +354,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "21067.48",
-      "balance": "490039.96",
-      "month_spend": "89118.89"
+      "average_daily": "21080.08",
+      "balance": "495869.16",
+      "month_spend": "95040.02"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -373,19 +378,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4596.83"
+        "value": "4599.26"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "2441.65"
+        "value": "3653.03"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "19114.53"
+        "value": "20476.44"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -397,7 +402,7 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "16470.65"
+        "value": "16480.82"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -409,13 +414,13 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "487598.31"
+        "value": "492216.13"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "70004.36"
+        "value": "74563.58"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -427,7 +432,7 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "21067.48"
+        "value": "21080.08"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -439,13 +444,13 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "490039.96"
+        "value": "495869.16"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "89118.89"
+        "value": "95040.02"
       }
     ],
     "lease_free": true,
@@ -453,7 +458,7 @@
       "type": "meta_2fa_reauthentication",
       "business_id": "155263197283282",
       "surface": "facebook.com/security/twofactor/reauth/",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T080501284818/blocked.png",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T140510509937/blocked.png",
       "completed_h_reads": 0,
       "requires_human_authentication": true,
       "owned_tab_closed": true
@@ -463,7 +468,7 @@
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T0802/closure-current.json",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T1402/closure-current.json",
     "report_infra_status": "sent_verified",
     "cron_changes": 0,
     "billing_changes": 0,
@@ -471,16 +476,17 @@
       "job_id": "2ee720363d7d",
       "same_scheduled_execution": true,
       "schedule_unchanged": true,
-      "next_run_at": "2026-11-05T14:02:00-05:00"
+      "next_run_at": "2026-11-05T21:02:00-05:00"
     },
-    "report_infra_message_id": "1567888756625903647",
+    "report_infra_message_id": "1567978809129570431",
     "report_infra_readback": true
   },
   "pending_card_history": {
     "status": "blocked_pc1_meta_2fa_reauthentication",
     "account_ids": [
       "1481815942722118",
-      "1543098427832443"
+      "1543098427832443",
+      "2852476828464907"
     ],
     "pending_ui": [
       {
@@ -491,6 +497,11 @@
       {
         "account_id": "1543098427832443",
         "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
@@ -532,8 +543,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-05T08:09:04.157003-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T0802/closure-current.json"
+    "verified_at": "2026-11-05T14:07:16.553769-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T1402/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -561,7 +572,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-05T14:02:00-05:00",
+  "next_run_at": "2026-11-05T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [

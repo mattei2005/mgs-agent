@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-05T14:05:03-05:00",
+    "updated_at": "2026-11-05T14:05:38-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -61212,6 +61212,31 @@
       "report_infra_status": "delivered",
       "report_infra_message_id": "1567963909728501872",
       "report_infra_readback": true
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261105-1402",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_updated_validated_pc1_auth_blocked",
+      "updated_at": "2026-11-05T14:07:16.553769-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T1402/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "card_proofs_updated": 0,
+        "pending_d": 3,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "report_infra_message_id": "1567978809129570431",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -69057,14 +69082,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 106744,
-      "md5": "336e9a52d28cff1cdc74a2a179cc46ee",
-      "modified_at": "2026-11-05T14:05:02-05:00"
+      "md5": "2dbd497e6c57ae704f23c260d539ee4e",
+      "modified_at": "2026-11-05T14:06:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "5163d18cbb7c1fca6d49985981971b52",
-      "modified_at": "2026-11-05T14:05:02-05:00"
+      "md5": "5da2349a3fea61f41ccc4eed03c93d92",
+      "modified_at": "2026-11-05T14:06:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -69158,9 +69183,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3325606,
-      "md5": "b3ea9cdda64f3484acef068e5723f49a",
-      "modified_at": "2026-11-05T13:08:48-05:00"
+      "size_bytes": 3325778,
+      "md5": "c572b815126ba908417f11cea92c31d7",
+      "modified_at": "2026-11-05T14:05:36-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -69826,7 +69851,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "1e5b5fc5062669ec5f00e543810d2666",
-      "modified_at": "2026-11-05T14:01:01-05:00"
+      "modified_at": "2026-11-05T14:06:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
