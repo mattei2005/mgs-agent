@@ -1,0 +1,10 @@
+**Padrão de criação sincronizado — Eggbev 01, 02 e 03**
+
+`[número global] - [nome da Page] - ENG - US - (pg_XXXXX) - CXX`
+
+• Sequência global única nas três contas, iniciada em300, sem reiniciar ao trocar de conta. O300 já foi aplicado ao teste; o próximo número é sempre reconciliado com o histórico das três contas e o registro de reservas.
+• C01/C02/... por Page/pg e conjunto **ADGROUP 01**.
+• O pg resolve o cadastro na Smart Bidding; nome e FB_PAGE_ID são conferidos com a Meta. Nome,pg e utm_campaign precisam concordar antes da publicação.
+• O padrão está salvo no contexto e na mensagem de referência das três threads de Criação.
+
+A sincronização não altera budgets,credenciais,prontidão ou permissões de publicação de nenhuma conta. Clones e demais gates mantêm seus contratos próprios. Nenhuma campanha foi criada ou alterada nesta conferência.
