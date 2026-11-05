@@ -103,6 +103,16 @@ Um parâmetro específico nunca sobe automaticamente para a família. Uma regra 
 
 Quando uma mudança específica revelar um procedimento reutilizável, promover somente o procedimento para a família. O valor continua no contrato da operação.
 
+## Alterações de nome e continuidade do pedido
+
+- Separar uma regra prospectiva de naming de um pedido explícito para renomear o objeto atual. Não renomear campanhas existentes apenas porque o padrão futuro mudou; quando o operador autorizar o rename atual, executar essa alteração delimitada sem cobrar novamente budget, mídia ou OK comercial já concedidos.
+- Resolver o alvo pelo ID persistido do pedido e confirmar sua hierarquia por GET. Não escolher apenas pelo nome ou pelo status ACTIVE: a campanha-modelo e a cópia publicada podem ter nomes semelhantes e ambas estar ativas.
+- Tratar rename como alteração de metadata, não como nova criação ou recuperação do Engine. Enviar somente o campo `name`, preservar IDs e comparar antes/depois budget, status, conjunto, anúncios e tracking. Não reeditar manifests aprovados para fazê-los parecer criados com o nome novo; guardar separadamente o nome original e o nome atual confirmado.
+- Se o nome consumir uma sequência compartilhada, verificar colisões e reservar o número para o pedido real de rename antes do write; depois do GET, vinculá-lo à campanha existente no ledger. Um número aplicado por rename já está utilizado e deve avançar o próximo pedido, inclusive em outra conta do grupo.
+- Concluir com o nome literal confirmado e uma frase sobre os campos preservados. Detalhes de coordenação, digests e arquivos ficam no audit; não transformar uma correção simples de nome em nova rodada de intake ou explicação técnica longa.
+
+Receita de rename, sequência e projeções: `references/thread-projection-and-synchronization.md`.
+
 ## Rotas funcionais
 
 ### Regras
@@ -163,7 +173,7 @@ Uma alteração durável aprovada inclui, no mesmo request, a atualização das 
 
 1. Classificar `family` ou `operation`.
 2. Persistir e validar primeiro a fonte canônica.
-3. Executar `scripts/ares-chatpion-bot-strategy-sync.py --check` para detectar drift.
+3. Executar `scripts/ares-chatpion-bot-strategy-sync.py --scope operation --operation <operation_id> --route <rota>` para validar o binding e as rotas, sem flags de escrita. Não usar `--check`, que não pertence a esse CLI. Para escopo de família, selecionar `--scope family`; conferir separadamente a igualdade fonte/versionado/runtime e as projeções no resultado da sincronização.
 4. Atualizar prompt/config local da operação.
 5. Projetar a mudança na rota funcional afetada e em `rules`.
 6. Fazer GET/readback de cada mensagem criada/editada.

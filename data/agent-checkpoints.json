@@ -2664,12 +2664,12 @@
     {
       "agent": "ares",
       "id": "EGGBEV-GLOBAL-NAMING-1567964887353663610",
-      "next_step": "Novos pedidos de criacao usam fonte unica da politica e lookup SB/Meta pelo pg;ler3historicos antes da reserva e antes do execute. C01/C02 porPage e prefixoglobalcontinuo;nao consumir300 neste exemplo. Gates/autoridade/readiness porconta e regras de clones preservados. SemacaoMetaadicional pendente.",
-      "objective": "Aplicar naming prospectivo de criacao nas3Eggbev US EN com sequencia global>=300 e Page-pg-UTM alinhados;ADGROUP01 atual/futuro",
-      "source": "data/ares/meta-ads/audit/eggbev/naming-1567964887353663610/acceptance.json",
-      "state": "complete naming-only:89testes pass;historicos completos das3contas consultados com leitor read-only nominal01;proxima previa300-georgina-pg23156-c01 sem reservar/consumirnumero. allocator global atomico,idempotente e guardcentral implantados,admissao e colisao prewrite. currentadset120251058312870629 renomeado adgroup01 e getcamposoutrosiguais;campanhamodel/budget/status mantidos. fonte/versionado/runtime prompts iguais e2projecoes discord getok. readiness/credenciais de02/03naoalteradas,nenhuma nova campanha criada.",
+      "next_step": "Novas criacoes consultam3historicos e ledger,proxima base301,reconfirmar antes de reservar. Nao reutilizar300 nem renomear outras campanhas por inferencia. Gates/readiness e clonecontracts mantidos.",
+      "objective": "Padrao global Eggbev US EN01/02/03 e rename explicito da campanha atual para300",
+      "source": "data/ares/meta-ads/audit/eggbev/rename-1567976031216869619/readback.json",
+      "state": "regra prospectiva aplicada e validada na etapa anterior. atualizacao explicita1567976031216869619: campanha120251058312020629 agora300-georgina whitford-eng-us-(pg_23156)-c01 por get. numero300 committed_existing_campaign_rename no ledgercompartilhado;proximo301. somente nome alterado:active/usd30,adgroup01,3ads,page/utms/horario/ids mantidos.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T18:46:11+00:00"
+      "updated_at": "2026-11-05T19:01:51+00:00"
     },
     {
       "agent": "ares",
@@ -6877,12 +6877,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Nenhuma recuperacao/criacao pendente. Monitoramento normal pelas rotas existentes; nao reexecutar campanha nem retomar Aria sem nova instrucao. Registrar conclusao na origem,sem novo cron/anexos.",
-      "objective": "Publicar MODEL clone1x1x3 USD30 com midias Nicolas e inicio imediato autorizado",
-      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/completion-acceptance.json",
-      "state": "complete: campanha120251058312020629 model(pg_23156)dup01,conjunto120251058312870629 e3anuncios active,usd30/dia,inicio12:23:25 et. engine complete_future_active,get/page/utm/copy/json-agt/lineage/6variantes verificados;2ad ids parciais preservados+1faltante recuperado sem replay.3assets mesmosids/hashes em nicolas-usados e inventario02_testing. ariac004/c005 paused/intactas,recuperacao suspensa; lease atual liberada. insights sem linhas12:30et,entrega nao comprovada.",
+      "next_step": "Nenhuma acao pendente. Nao reexecutar manifests antigos para obter o novo nome;usarreadback corrente e recibo de rename. Monitoramento normal existente.",
+      "objective": "Campanha teste publicada e posteriormente renomeada a pedido de Nicolas",
+      "source": "data/ares/meta-ads/audit/eggbev/rename-1567976031216869619/readback.json",
+      "state": "complete;mesmo campaign_id120251058312020629 agora300-georgina whitford-eng-us-(pg_23156)-c01,rename autorizado1567976031216869619. nome originalmodel(pg_23156)dup01 preservado em historico/manifests. active,usd30/dia,adgroup01,tresads epage/utm/horario preservados por comparacao completa get antes/depois.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T17:32:16+00:00"
+      "updated_at": "2026-11-05T19:01:52+00:00"
     },
     {
       "agent": "ares",
@@ -8756,5 +8756,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T18:46:11+00:00"
+  "updated_at": "2026-11-05T19:01:52+00:00"
 }

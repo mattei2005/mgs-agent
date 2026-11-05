@@ -1,0 +1,12 @@
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys,runpy;from pathlib import Path;sys.path.insert(0,'/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103');from pm.environments import activate_dependencies;activate_dependencies(Path('/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103'));sys.argv=['/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_list.py', '--run-dir', '/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T140510509937', '--account-ids', '336562339356179,3752157451670648,2039876850230678,311204101516831,26632890069640784,3188620887977617'];runpy.run_path('/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_list.py',run_name="__main__")
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 294, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/read_pc1_accounts_list.py", line 16, in <module>
+    assert len(a.account_ids)==len(set(a.account_ids))and set(a.account_ids)<=set(c['pay_now_account_ids'])and set(a.account_ids)<=set(lookup),'unapproved_target_ids'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unapproved_target_ids
