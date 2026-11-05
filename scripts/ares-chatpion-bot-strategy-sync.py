@@ -165,18 +165,36 @@ def set_versioned_prompt(thread_id: str, prompt: str) -> None:
 def sync_prompt(thread_id: str, prompt_path: Path) -> dict[str, Any]:
     prompt = prompt_path.read_text(encoding="utf-8").strip()
     set_versioned_prompt(thread_id, prompt)
-    subprocess.run(
-        ["hermes", "-p", "ares", "config", "set", f"discord.channel_prompts.{thread_id}", json.dumps(prompt, ensure_ascii=False)],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    resolved = subprocess.run(
-        ["hermes", "-p", "ares", "config", "get", f"discord.channel_prompts.{thread_id}"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
+    # Dynamic prompt leaves have no string schema in current Hermes CLI. Setting
+    # the typed mapping parses nested JSON strings without retaining quote marks.
+    lock_path = ROOT / "data/ares/discord/channel-prompts-sync.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    import fcntl
+    with lock_path.open("a+") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        current_output = subprocess.run(
+            ["hermes", "-p", "ares", "config", "get", "--json", "discord.channel_prompts"],
+            check=True, capture_output=True, text=True,
+        ).stdout
+        current = json.loads(current_output)
+        if not isinstance(current, dict):
+            raise RuntimeError("channel prompts must be a mapping")
+        updated = {**current, thread_id: prompt}
+        encoded = json.dumps(updated, ensure_ascii=False)
+        if len(encoded.encode()) > 120000:
+            raise RuntimeError("scoped prompt mapping exceeds safe CLI argument size")
+        subprocess.run(
+            ["hermes", "-p", "ares", "config", "set", "discord.channel_prompts", encoded],
+            check=True, capture_output=True, text=True,
+        )
+        after_output = subprocess.run(
+            ["hermes", "-p", "ares", "config", "get", "--json", "discord.channel_prompts"],
+            check=True, capture_output=True, text=True,
+        ).stdout
+        after = json.loads(after_output)
+        if after != updated:
+            raise RuntimeError("prompt mapping readback mismatch; unrelated prompts must be preserved")
+        resolved = after[thread_id].strip()
     versioned = yaml.safe_load(VERSIONED_CONFIG.read_text(encoding="utf-8"))["discord"]["channel_prompts"][thread_id].strip()
     return {
         "thread_id": thread_id,
