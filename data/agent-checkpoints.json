@@ -182,6 +182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-UPDATES-1567927369098862778",
+      "next_step": "Executar slots agendados com descoberta somente da mesma conta e dia; expirar06/11 00:00 EST. Nao repetir inicial nem reativar jobs vencidos.",
+      "objective": "Relatorio CPR a cada30min ate fim05/11; Mavroa04; incluir campanhas criadas hoje e futuras criacoes do dia",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1567927369098862778/inventory.json",
+      "state": "configured_verified; leitura inicial5campanhas036-040 sem resultados atribuidos; entrega inicial get; job finito26slots11:16-23:46 est, minutos16/46; descoberta dinamica created_time; zero meta writes;21checks offlinepass; agenda global8datas pre/postpass; report-infra get confirmado",
+      "thread_id": "1558131644135637163",
+      "updated_at": "2026-11-05T15:50:39+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPV-40-CLONES-ACCOUNTS-05-13-20260905",
       "next_step": "Nenhum; este request não pode ser retomado nem reutilizado",
       "objective": "Pedido anterior de teste de performance de 40 campanhas, agora cancelado sem writes externos",
@@ -1233,12 +1243,12 @@
     {
       "agent": "ares",
       "id": "ARES-G004-CPR-UPDATES-1567927340229730477",
-      "next_step": "Validar Meta/coorte, testes, auditoria global, leitura inicial e agenda com expiracao absoluta",
-      "objective": "Relatorios CPR a cada30min das campanhas subidas em05/11, incluindo futuras da Yolokfx04 ate fim do dia",
-      "source": "/root/.hermes/profiles/ares/cache/scratch/cpr-1567927340229730477",
-      "state": "intake autenticado; preparando monitor read-only finito e descoberta dinamica por created_time",
+      "next_step": "Descobrir novas campanhas por created_time da mesma conta/dia em cada slot; validar evento; enviar todos os custos; expirar06/11 00hEST antes API",
+      "objective": "Relatorios CPR a cada30min de todas campanhas subidas em05/11, incluindo futuras, Yolokfx04",
+      "source": "data/ares/meta-ads/state/cpr-updates/1567927340229730477/manifest.json",
+      "state": "ativo e get validado: cinco255-259; inicial10:48est publicada;255 usd1.50333 por3resultados e gasto4.51;outras sem resultados;23testes pass;26slots11:13-23:43;zero meta writes",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-05T15:44:39+00:00"
+      "updated_at": "2026-11-05T15:50:33+00:00"
     },
     {
       "agent": "ares",
@@ -6847,12 +6857,12 @@
     {
       "agent": "ares",
       "id": "eggbev-modelo-1567803920217022545",
-      "next_step": "Preflight vivo fonte/Page/denylist, reconciliar tres assets e preparar prestage/manifest/plan; resumo final selado antes do campaign write conforme contrato.",
-      "objective": "Clone MODEL 1x1x3 USD30 com videos Nicolas e inicio 2026-11-05 10:50 America/New_York",
-      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545-intake.json",
-      "state": "nicolas 1567923862404993106 instruiu executar pedido preservado e mudou inicio para 10:50 am; retomada no mesmo request, gates finais preservados.",
+      "next_step": "Mostrar resumo b9b1927f4c52 e aguardar OK final Nicolas; 1567923862404993106 solicita executar mas antecede resumo selado. Nao deslocar 10:50 ET sem instrucao. Depois pre-read fresco e Engine v3 mesmo request, readback completo e postprocess; nao repetir uploads ou criar do zero.",
+      "objective": "Publicar clone MODEL 1x1x3 USD30 tres videos Nicolas com inicio 2026-11-05 10:50 ET apos resumo final/OK",
+      "source": "data/ares/meta-ads/audit/eggbev/cloning/eggbev-modelo-1567803920217022545/final-summary.json",
+      "state": "preparacao concluida: page pg_23156 elegivel e sb/meta unicos, tres assets scoped reconciliados/reservados;6 variantes finais prontas/associadas, square full-frame corrigido apos qa sem deletar anteriores. manifest 368e011d1fc0 valid, plan dry_run_ok. nome model (pg_23156) dup01. zero campanha/adset/ad criados. awaiting_final_summary_approval.",
       "thread_id": "1541578556037927053",
-      "updated_at": "2026-11-05T15:31:21+00:00"
+      "updated_at": "2026-11-05T15:47:01+00:00"
     },
     {
       "agent": "ares",
@@ -8726,5 +8736,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T15:44:39+00:00"
+  "updated_at": "2026-11-05T15:50:39+00:00"
 }

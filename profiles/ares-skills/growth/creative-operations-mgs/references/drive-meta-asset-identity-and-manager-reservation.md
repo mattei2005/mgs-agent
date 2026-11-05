@@ -87,6 +87,11 @@ Se o gestor subir o original antes do tratamento, o tratado correspondente conti
 - Uma reserva de request anterior concluído não prova execução ainda em andamento nem libera uso global. Para reuso explicitamente solicitado pelo mesmo gestor, valide o estado terminal anterior e os anúncios na conta exata; mantenha bindings/test_history e anexe a transferência de reserva ao histórico. Request anterior ainda resumível permanece conflitante; não roube a reserva.
 - Retome o mesmo pedido pelo preparador central, dry-run e Engine v3. Antes de concluir, exija igualdade de campaign/adset/ad IDs do checkpoint com as árvores finais, cobertura exata de ad/creative IDs pelas provas renderizadas e conferência literal dos grupos/copy. Essa conferência real testa o reparo; metadados reconciliados sozinhos não comprovam campanha concluída.
 
+## QA de variantes quadradas de vídeos verticais
+
+- Antes de selar um manifest, comparar quadros reais do vertical e do quadrado: crop central automático pode remover legendas, valores e rostos mesmo com checksum, dimensões e processamento Meta corretos. Quando houver texto essencial fora da região central, preservar o quadro completo com escala proporcional e padding; sanitizar e rever a variante corrigida. Não alterar o original nem classificar a variante como outro candidato.
+- Se o crop já foi enviado, preservar IDs/prova anteriores como supersedidos na mesma linhagem, enviar somente a variante corrigida com título determinístico de revisão, reconciliar sua presença no edge da conta e confirmar ready/associação antes de registrar os IDs finais e selar novamente o manifest. Após resposta incerta ou atraso de visibilidade, reler a biblioteca antes de qualquer novo POST; não repetir upload nem apagar a versão anterior por inferência. QA local não prova renderização do anúncio Meta nem autoriza publicação.
+
 ## Pitfalls
 
 - Não considerar `01_READY` sinônimo de “nunca usado”.
