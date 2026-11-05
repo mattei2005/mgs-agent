@@ -3312,6 +3312,16 @@
       "updated_at": "2026-11-04T23:32:06+00:00"
     },
     {
+      "agent": "ares",
+      "id": "SHEIN-PAUSE-1567698133222424687",
+      "next_step": "Concluido. Nao repetir writes; consultas futuras pelos IDs do recibo. Sem recorrencia.",
+      "objective": "Pausar 347,322,311,300 na Yolokfx02 G006; status-only",
+      "source": "data/ares/meta-ads/state/manual-campaign-actions/shein-pause-1567698133222424687/request.json",
+      "state": "complete_verified: 4/4 active para paused confirmadas por get final; orcamentos/lances/programacao/filhos preservados; lease liberada",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-11-05T00:33:39+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "SHEIN-QUEUE-t_8e65299d",
       "next_step": "Ares t_8f7a90a8 assume hold via central --take-foreground ORIGINAL_INPUT; prepare-media/request-ready/dry-run/confirm-execute no mesmo request e relógio; histórico006/007 intacto",
@@ -8626,5 +8636,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-04T23:32:06+00:00"
+  "updated_at": "2026-11-05T00:33:39+00:00"
 }
