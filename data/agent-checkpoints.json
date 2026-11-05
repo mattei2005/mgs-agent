@@ -3303,6 +3303,16 @@
     },
     {
       "agent": "ares",
+      "id": "SHEIN-1568029673609236561",
+      "next_step": "Corrigir incompatibilidade pontual do comparador com regressões negativas; retomar mesmo request e mesmos IDs por QA e ativação central",
+      "objective": "Duplicar campanha 024 duas vezes na Mavroa03 G003 por USD100 cada em 06/11 00:00 ET",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/shein-campaigns/single-clone/shein-1568029673609236561/state.json",
+      "state": "postprocess_pending: c025 c026 e quatro ads paused criados; comparador de sourcing rejeita imagem com afs textual; readback confirma hash e sourcing integrais; manutenção separada somente de leitura/qa",
+      "thread_id": "1558127210966032385",
+      "updated_at": "2026-11-05T22:33:22+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "SHEIN-C092-LATE-REVIEW-1560656571212505109",
       "next_step": "Nenhuma pendencia deste pedido; nao repetir criacao ou ativacao. Responder confirmacao nativa na origem.",
       "objective": "Concluir C092 nos mesmos IDs com USD75/dia e COCAP1.05",
@@ -3454,12 +3464,12 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1568027781877596302",
-      "next_step": "Congelar hierarquias e validar runner/agenda determinística de ativação",
+      "next_step": "Ativador determinístico aguarda06/11/2026 00h EST; pré-leitura e status-only ACTIVE nos mesmos13IDs; GET final e resultado na origem; nunca recriar ou alterar budget/D1",
       "objective": "Pausar as 13 campanhas nominais da Yolokfx06G003 e reativar em06/11/2026 00h America/New_York sem outros ajustes",
-      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568027781877596302/pause.json",
-      "state": "pause_complete:13/13 paused por get integral; budgets/lances preservados; preparando one-shot status-only no mesmo request",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568027781877596302/request.json",
+      "state": "13/13 paused confirmadas nameta; hierarquia estável congelada;122testes offline e testes do executor antecipado/replay semapi pass; dry-run live13/13; one-shot enabled/no_agent com readback; auditoria global pré/pós pass",
       "thread_id": "1558127055282110526",
-      "updated_at": "2026-11-05T22:26:00+00:00"
+      "updated_at": "2026-11-05T22:29:17+00:00"
     },
     {
       "agent": "zeus",
@@ -8776,5 +8786,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:26:00+00:00"
+  "updated_at": "2026-11-05T22:33:22+00:00"
 }
