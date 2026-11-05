@@ -1,5 +1,12 @@
 # Reparo editorial limitado com nova análise nativa
 
+## Adaptador local de revisão publicada
+
+- Quando o CLI histórico exige receipt de criação/draft, não enfraqueça nem regrave esses gates. Construa um orquestrador task-local com revisão independente final por ID/hash, importando transporte, reconciliação, preservação, helper DOM e scorer originais com pins. Restrinja o PHP derivado à rota de scores e remova writers de taxonomia; não implante componente novo.
+- Separe `--plan` de `--apply`: snapshot recente, recálculo idêntico, CAS integral no pre-read e imediatamente antes das duas metas, intenção exclusiva durável e post-read em processo separado. Mantenha ledger por ID entre revisões/workdirs, pois trocar o diretório não resolve uma tentativa anterior incerta. Timeout exige readback, nunca replay automático.
+- Conte as linhas de cada output meta, além de exigir indexable único. `get_post_meta(..., true)` sozinho pode ocultar duplicidade. No-op com ambas as camadas exatas não deve bootstrapar WordPress em modo write nem ser apresentado como nova prova de persistência pelo shutdown.
+- Ao importar primitivas com diretórios temporários fixados na geração histórica, redirecione apenas esses temporários no processo local para a workdir nova. Não edite fontes, manifests ou receipts compartilhados. Recuse Python `-O` quando os gates importados usam assertions; exercite orquestração com fronteira remota mockada e rotule replays históricos como não atuais.
+
 - Faça GET exato `context=edit` e snapshot por ID de post, mídia, source, payload, receipt, postmeta, indexable e língua nativa antes de editar; isso separa alterações editoriais de alterações produzidas pelo salvamento.
 - Leia os artigos completos e assessments individuais antes de selecionar frases. Converta passivas somente quando o agente estiver claro; conecte relações lógicas reais, sem preencher conectivos para atingir percentuais.
 - Preserve valores, qualificadores legais, links, tags HTML e atributos. Teste `source.body_html` com marcador de imagem recomposto contra `payload.content` e o raw do readback, em vez de comparar hashes de representações diferentes.
