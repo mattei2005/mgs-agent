@@ -2663,6 +2663,16 @@
     },
     {
       "agent": "ares",
+      "id": "EGGBEV-GLOBAL-NAMING-1567964887353663610",
+      "next_step": "Pre-read e rename currentadset ADGROUP01 com GET;validar3historicos directos scoped+PageSB/Meta;persistir policy,implementar allocator atomico e integrar novas criacoes com testes;projecoes/readback.",
+      "objective": "Aplicar padrao de novas criacoes Eggbev01/02/03 com sequencia global>=300,Page-pg-UTM alinhados e ADGROUP01;renomear conjunto atual",
+      "source": "discord:1541578556037927053/1567964887353663610",
+      "state": "decisao explicita nicolas;escopo apenas nomenclatura/lookup read-only nas3eggbev us en. nao onboardar contas nem alterar credenciais,budget,status,campanhas existentes. fonte01 reader corporativo nominal para historico cross-account read-only;bindings write de cada conta independentes.",
+      "thread_id": "1541578556037927053",
+      "updated_at": "2026-11-05T18:16:53+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "EGGBEV-PG8348-SUSPENDED-1567950736732721254",
       "next_step": "Nao retomar automaticamente. Exige nova instrucao explicita do gestor; preservar source state e backups.",
       "objective": "Preservar recuperacao historica Aria C004/C005 suspensa por Nicolas para liberar conta01",
@@ -8746,5 +8756,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T17:50:33+00:00"
+  "updated_at": "2026-11-05T18:16:53+00:00"
 }
