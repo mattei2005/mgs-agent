@@ -2633,6 +2633,16 @@
     },
     {
       "agent": "zeus",
+      "id": "HERMES-NEWS-COMMITS-1567760164319272970",
+      "next_step": "Backup, implementação, fixtures de entrega/dedupe, execução real e readback",
+      "objective": "Restaurar resumos incrementais de commits Hermes, preservar releases e agenda, sem update/restart",
+      "source": "context/hermes-news-policy.md",
+      "state": "em execução: política e consumidores inspecionados; autorização rodolfo 1567760164319272970",
+      "thread_id": "1567646083465879653",
+      "updated_at": "2026-11-05T04:39:59+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "INIT-AV-LEGACY-FOUR-SITES-20260821",
       "next_step": "Enviar à Isa/Smart Bidding/JBF a evidência exata e solicitar correção/whitelist do detector IVT para tráfego residencial legítimo. Após ajuste, repetir teste desktop/mobile e exigir slots e gampad sob /21922122164/ antes de marcar impressão/fill como provados.",
       "objective": "Concluir a migração real de Cliquet e finanzas.cliquet do GAM ActiveView para o GAM Smart Bidding/JBF, preservando slots, targeting, receita e rollback independente por site.",
@@ -8646,5 +8656,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T03:14:54+00:00"
+  "updated_at": "2026-11-05T04:39:59+00:00"
 }
