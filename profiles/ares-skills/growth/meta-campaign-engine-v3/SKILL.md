@@ -52,7 +52,7 @@ Carregue somente a referência do branch atual.
 
 ## Invariantes
 
-1. Hot path: pedido → manifest → um executor determinístico → readback final.
+1. Hot path: pedido → admissão da conta → manifest → um executor determinístico → readback final. Antes de reservar assets, renderizar variantes, subir mídia ou apresentar o resumo final, conferir a writer lease e o estado operacional da conta; um plan read-only aprovado não comprova que o writer está disponível. Revalidar a admissão imediatamente antes do execute. Para conflito entre pedidos, seguir `references/architecture-and-runtime.md`, seção de diagnóstico de lease, sem limpar uma recuperação resumível por antiguidade.
 2. Zero busca ampla, skill discovery, patch, teste ou criação de cron durante execução.
 3. Bundle padrão: duas campanhas da mesma conta.
 4. Lanes independentes por `app_key + ad_account_id`; nunca misturar contas no mesmo bundle.

@@ -91,6 +91,13 @@ python3 /root/mgs-agent/scripts/ares-campaign-engine-v3.py prevalidate \
 
 Any post-prevalidation change invalidates execute. Source, templates, media, budget, UTMs, names and future start must be final before sealing.
 
+### Retomada com início vencido
+
+1. Preservar o manifest selado, o resumo e a mensagem de aprovação originais antes de revisar o horário. Para conferir a integridade de um manifest histórico ACTIVE, calcular o digest sobre o JSON bruto com a mesma serialização do schema: `hashlib.sha256(json.dumps(raw, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()`. Não chamar `Manifest.from_dict(raw)` apenas para obter esse digest: o parse também valida o relógio atual e rejeita um início já passado.
+2. Separar verificação histórica de autorização de execução. O hash não torna um manifest vencido executável. Consultar a política de horário da operação e a intenção explícita do pedido: somente uma regra aplicável de início imediato permite atualizar para o horário corrente com o buffer técnico previsto. Sem essa cobertura, resolver o horário com o operador; não transportar exceções entre operações nem deslocar silenciosamente um agendamento exato.
+3. Quando a revisão estiver autorizada, comunicar o ajuste e criar um artefato de execução separado no mesmo request. Comparar os payloads comerciais antes do novo selo e registrar que somente o início mudou, preservando budget, fonte, mídia, copy, tracking, nomes, status e IDs existentes. Remover o selo anterior apenas da cópia de trabalho e passar novamente pelo prevalidator determinístico; guardar os digests antigo e novo e a autoridade da revisão.
+4. Resolver conflitos de admissão antes de gerar o horário final com buffer, para não consumir a janela enquanto a conta continua bloqueada. Depois de admitido, usar o manifest revisado no executor central e validar o horário real no readback. Prevalidação temporal aprovada não comprova publicação ou ativação.
+
 ## Execute gate
 
 Real execute requires all four:

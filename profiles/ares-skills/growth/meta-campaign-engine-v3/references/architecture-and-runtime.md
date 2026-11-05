@@ -49,11 +49,21 @@ Each bundle uses separate quota reservation identities for initial write, missin
 
 Every writer claims a persisted per-account lease before preflight and keeps it across quota/readback deferrals. Diário, Intraday, Snapshot, first-delivery and guardrail reactivation all pass one centralized reader gate and a shared OS lock. They resume only after the writer lease and operation state are complete.
 
+### Diagnóstico de lease antes da preparação
+
+1. Ler somente `state/writer-leases/<account_id>.json` e projetar `request_id`, `status`, `blocks_readers` e timestamps antes de trabalho caro; consultar também o estado operacional indicado pelo contrato. Ausência de lock de processo não prova disponibilidade, pois a lease persiste entre tentativas.
+2. Se outro request bloquear a conta, resolver seus registros exatos: `state/checkpoints/<request_id>-<account_id>.json`, `audit/<request_id>.json` e o state do runner apontado pela operação. Comparar fase do runner, estado do Engine, IDs persistidos e última tentativa. `FAILED` no Engine com `RECOVERY_PENDING` no runner não é conclusão nem autorização de liberar a lease.
+3. Confirmar os objetos persistidos por GET direto e seus edges `/adsets` e `/ads`, usando Graph Batch para leituras independentes. Verificar paginação e consultar Insights apenas quando necessário para classificar efeitos; um campo de filhos omitido no GET do pai não prova edge vazio. Campanhas PAUSED sem filhos e Insights sem linhas descrevem o estado observado, não cancelam o pedido antigo.
+4. Preservar separadamente o OK comercial do pedido atual e a decisão sobre o pedido bloqueante. Sem prova de encerramento canônico ou autorização aplicável para suspender a recuperação anterior, pedir somente essa decisão delimitada; não cobrar novamente budget, mídia ou OK já recebido. Registrar pedido atual, causa e próximo passo, sem reexecutar o antigo nem apagar histórico.
+5. Não apresentar suspensão/liberação como procedimento validado apenas porque o diagnóstico terminou: executar eventual transição somente pela coordenação canônica, dentro da autoridade recebida, e verificar seu readback antes de retomar o writer atual. Após a liberação efetiva, revalidar admissão e horário no mesmo request, reutilizando mídia/IDs já comprovados.
+
+Uma rejeição na admissão anterior ao writer deve ser registrada como bloqueio local, não como rejeição da Meta ou campanha criada. Não generalizar essa conclusão para falhas em estágios posteriores, que exigem reconciliação dos efeitos parciais.
+
 ## Media
 
-O registry é obrigatório somente para `clone_prestaged`. `pure_clone` reutiliza os creatives/mídias existentes da fonte e não consulta o registry.
+O registry é obrigatório para os modos com mídia prestageada, `clone_prestaged` e `from_zero_prestaged`. `pure_clone` reutiliza os creatives/mídias existentes da fonte e não depende de novos registros de mídia.
 
-Para `clone_prestaged`, registre somente IDs confirmados por Meta readback no edge `act_{AD_ACCOUNT_ID}/advideos`. O próprio pedido autorizado pode executar pre-stage/upload/readback antes da materialização; não existe obrigação de prepopular o registry sem pedido. A chave é account + asset ID + checksum, os IDs vertical e square precisam existir com `ready=true`, `upload_edge=ad_account_advideos` e `association_verified=true`, e uploads em `/{PAGE_ID}/videos` ficam bloqueados como mídia de campanha.
+Para os modos prestageados, registre somente IDs confirmados por Meta readback no edge `act_{AD_ACCOUNT_ID}/advideos`. O próprio pedido autorizado pode executar pre-stage/upload/readback antes da materialização; não existe obrigação de prepopular o registry sem pedido. A chave é account + asset ID + checksum, os IDs vertical e square precisam existir com `ready=true`, `upload_edge=ad_account_advideos` e `association_verified=true`, e uploads em `/{PAGE_ID}/videos` ficam bloqueados como mídia de campanha.
 
 Never put token, app secret, Page token or signed URL in the registry.
 
@@ -68,7 +78,7 @@ Never put token, app secret, Page token or signed URL in the registry.
 ## Security
 
 - Resolve credential type/reference from the registered account and operation; SHEIN corporate System User and advertiser User Access Tokens are not interchangeable fallbacks.
-- Token is loaded only for guarded execute through the existing protected credential provider.
+- Resolve tokens through the protected credential provider for authorized live preflight, media preparation and guarded execute; keep secrets in process and distinguish read-only asset checks, media uploads and campaign writes.
 - `appsecret_proof` is supported; enable `Require App Secret` only after app secret provisioning and full route validation.
 - Canário técnico explicitamente solicitado nasce `PAUSED`.
 - Pedido normal de produção preserva `ACTIVE` com `start_time` futuro já selado.
