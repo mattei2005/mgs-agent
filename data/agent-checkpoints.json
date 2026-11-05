@@ -1232,6 +1232,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G004-CPR-UPDATES-1567927340229730477",
+      "next_step": "Validar Meta/coorte, testes, auditoria global, leitura inicial e agenda com expiracao absoluta",
+      "objective": "Relatorios CPR a cada30min das campanhas subidas em05/11, incluindo futuras da Yolokfx04 ate fim do dia",
+      "source": "/root/.hermes/profiles/ares/cache/scratch/cpr-1567927340229730477",
+      "state": "intake autenticado; preparando monitor read-only finito e descoberta dinamica por created_time",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-05T15:44:39+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-G004-REPORT-1562828736750026865",
       "next_step": "Fontes novas22/10 10:04EDT;42campanhas com entrega hoje, todas ACTIVE no readback10:06EDT;histórico7d e RPS DOM13páginas;9partes exatas validadas. Entregar report integral pela resposta nativa, sem duplicar por API e sem writes Meta.",
       "objective": "Relatório on-demand atual Meta × Smart Bidding Conta04 G004",
@@ -8716,5 +8726,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T15:36:34+00:00"
+  "updated_at": "2026-11-05T15:44:39+00:00"
 }
