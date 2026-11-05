@@ -38,9 +38,17 @@ Preserve `tree['ads']` como envelope `{data: [...]}`: `proof_covers` acessa `liv
 
 Compare cada árvore com seu target manifest: conta, nome, budget, estratégia/cap, início timezone-aware, status e cardinalidade. Confira o tracking na localização definida pelo payload aprovado, Page/Instagram, CTA e enrollment de Multi-advertiser ads. Cobertura dos mesmos IDs na prova renderizada não substitui essas comparações materiais. Se for afirmar que budget e lance das fontes ficaram preservados, releia esses campos nas fontes; divergência atual exige reconciliação, não atribuição automática de causa.
 
+Faça essa releitura num batch account-scoped com uma entrada por campanha nova e uma por fonte distinta; identifique cada entrada por `name` único. Exija correspondência exata entre nomes pedidos e retornados, além dos códigos HTTP, antes de associar respostas às linhas. Nas fontes, leia `daily_budget`, `bid_strategy` e `adsets{bid_amount}`; nos alvos, leia também identidade, status, início, filhos e campos materiais dos creatives. Compare o cap com a fonte da própria linha, nunca com o primeiro grupo. Compare instantes com `datetime.fromisoformat`, não strings de offset: `-0500` e `-05:00` podem representar o mesmo horário.
+
+Para confirmar ausência de drift depois da ativação, compare cada creative vivo com a definição aprovada e a árvore terminal persistida usando uma projeção material: Page/Instagram, texto, título, descrição, CTA/link, `url_tags`, mídia/variantes, `contextual_multi_ads` e post quando aplicável. Não compare o payload bruto nem inclua thumbnail/source URL temporária na projeção: a renovação de assinatura não é mudança criativa. Exija ainda unicidade separada dos conjuntos de campaign, adset e ad IDs entre linhas; igualdade de quantidade de campanhas não detecta filho repetido ou omitido.
+
 ## 4. Persistir e comunicar a conclusão
 
 Grave um recibo agregado sanitizado com os resultados verificáveis e os campos necessários, sem copiar respostas Graph completas, `object_story_spec`, `media_sourcing_spec` ou thumbnails. Exija cobertura integral da soma das quantidades pedidas, ausência de IDs sobrepostos, budget somado por campanha única e quantidade real de anúncios. Derive dele o checkpoint final e a resposta, evitando totais ou resumos paralelos.
+
+Se informar orçamento ativo total da conta, persista o valor realmente devolvido pelo readback, sua fonte e horário no recibo, separado do budget dos IDs novos. Não introduza esse total como literal manual no verificador ou apresente uma leitura anterior como parte do batch final.
+
+Após `mgs-knowledge-control.py checkpoint-upsert`, releia somente o checkpoint pelo ID exato e confira origem, objetivo, estado e próximo passo semanticamente. O controlador pode normalizar `state` para minúsculas: use comparação normalizada quando a caixa não for parte do identificador, preservando IDs e caminhos literais. Uma asserção local de apresentação não autoriza repetir o upsert, reexecutar o writer ou tratar uma conclusão Meta já verificada como falha operacional.
 
 Conclua somente quando todas as linhas estiverem verificadas. Se houver pendência, informe precisamente a cobertura concluída sem anunciar sucesso global. Responda na thread de origem, com um bullet por fonte e seus números novos, seguido de budget por campanha e total do lote, início/fuso, lances efetivos, status e total real de anúncios. Não confunda orçamento do lote com orçamento ativo total da conta.
 
