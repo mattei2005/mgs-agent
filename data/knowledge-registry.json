@@ -7087,6 +7087,23 @@
       "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
+      "canonical_key": "ares.chatpion.projection.multiline-scalar",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/chatpion-bot-campaign-operations/references/thread-projection-and-synchronization.md",
+      "consumers": [
+        "ares"
+      ],
+      "domain": "ares.campaign-ops.thread-projection",
+      "effective_at": "2026-11-05T18:43:49+00:00",
+      "id": "CHATPION-SCOPED-PROMPT-MAPPING-SCALAR-1567964887353663610",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Sincronizacao scoped de strings multiline em mapping tipado com readback integral",
+      "updated_at": "2026-11-05T18:43:49+00:00"
+    },
+    {
       "canonical_key": "creative-archive.legacy-physical-namespace",
       "canonical_source": "context/creative-archive-legacy-consolidation.md",
       "consumers": [
@@ -7912,6 +7929,24 @@
       "superseded_by": "EGGBEV-ACCOUNT-REPORTS-AUTOTHREAD-1565029050001391727",
       "title": "Eggbev canal dedicado a relatorios de contas",
       "updated_at": "2026-10-28T15:49:34+00:00"
+    },
+    {
+      "canonical_key": "ares.eggbev-us-en.creation-naming",
+      "canonical_source": "data/ares/meta-ads/policies/eggbev-us-en-global-creation-naming.json",
+      "consumers": [
+        "ares",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "ares.campaign-ops.eggbev",
+      "effective_at": "2026-11-05T18:43:49+00:00",
+      "id": "EGGBEV-US-EN-GLOBAL-CREATION-NAMING-1567964887353663610",
+      "kind": "policy",
+      "owner": "Nicolas Holanda",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Eggbev US EN: sequencia de criacao compartilhada pelas contas01/02/03,identidade Page-pg-UTM reconciliada e ADGROUP01",
+      "updated_at": "2026-11-05T18:43:49+00:00"
     },
     {
       "canonical_key": "f011.matteiinc02.account_scope",
@@ -16165,5 +16200,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T18:24:04+00:00"
+  "updated_at": "2026-11-05T18:43:49+00:00"
 }

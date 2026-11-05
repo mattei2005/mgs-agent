@@ -927,6 +927,10 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     if existing and existing.get("phase") in {"AWAITING_FINAL_APPROVAL", "EXECUTION_DEFERRED", "COMPLETE", "POSTPROCESS_PENDING"}:
         return {"status": existing["phase"], "request_id": args.request_id, "summary_digest": existing.get("summary_digest"), "summary": existing.get("summary")}
 
+    from ares_campaign_v3.coordination import reader_block_reason
+    admission = reader_block_reason(ACCOUNT_ID, load_json(CONFIG_PATH)["state_root"])
+    if admission and admission.get("request_id") != args.request_id:
+        raise CreationBlocked("account_admission", "another resumable request owns the account; no naming or asset reservation performed")
     page, meta, token = live_page_and_token(args.page_token)
     page_sequence, campaign_sequences, history = naming_for_request(meta, token, args.page_token, args.campaign_count, args.request_id, page=page)
     naming_allocation = shared_naming.allocation(args.request_id)

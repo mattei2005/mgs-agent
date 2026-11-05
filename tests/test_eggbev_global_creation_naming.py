@@ -77,6 +77,14 @@ class NamingTests(unittest.TestCase):
     if path.endswith('/campaigns'):return 200,{'data':[]},{}
     return 200,{'id':path},{}
   got=n.collect_history(Reader(),'synthetic-token',self.policy);self.assertEqual(set(got),set(self.ids));self.assertEqual(len(paths),6);self.assertTrue(all(x.split('/')[0] in ['act_'+a for a in self.ids] for x in paths))
+ def test_prepare_admission_blocks_before_page_and_number_reservation(self):
+  import argparse
+  from ares_campaign_v3 import coordination
+  spec=importlib.util.spec_from_file_location('naming_admission_runner',Path('/root/mgs-agent/scripts/ares-eggbev-creation.py'));assert spec and spec.loader;runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner)
+  args=argparse.Namespace(confirm_scoped_release=True,authorized_by='Nicolas Holanda',campaign_count=1,creatives_per_campaign=3,daily_budgets_usd='30',ad_names_json=None,request_id='offline-blocked-admission',page_token='pg_23156')
+  with patch.object(runner,'STATE_ROOT',Path(self.temp.name)/'state'),patch.object(coordination,'reader_block_reason',return_value={'request_id':'other-resumable-request'}),patch.object(runner,'live_page_and_token') as page,patch.object(runner.shared_naming,'reserve') as reserve:
+   with self.assertRaises(runner.CreationBlocked) as caught:runner.prepare(args)
+   self.assertEqual(caught.exception.stage,'account_admission');page.assert_not_called();reserve.assert_not_called()
  def test_materializer_new_names_and_adgroup(self):
   registry=MediaRegistry(Path(self.temp.name)/'media.json');refs=[]
   for i in range(6):
