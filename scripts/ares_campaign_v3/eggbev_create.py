@@ -220,6 +220,8 @@ def build_eggbev_from_zero_manifest(
     description: str = "⭐️⭐️⭐️⭐️⭐️",
     cta: str = "APPLY_NOW",
     status: str = "ACTIVE",
+    campaign_numbers: list[int] | None = None,
+    adset_name: str = "AdG1",
 ) -> dict[str, Any]:
     request_id = _clean_display(request_id, "request_id")
     page_id = _clean_display(page_id, "page_id")
