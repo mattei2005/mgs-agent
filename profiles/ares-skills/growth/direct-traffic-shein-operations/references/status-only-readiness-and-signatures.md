@@ -5,6 +5,12 @@
 - Para lista com uma campanha sem rota apta por anúncios reprovados, preserve todos os IDs solicitados no request e separe o subconjunto apto de `activation_blocked`; pause todos os alvos autorizados, agende somente os aptos e mantenha causa/próxima ação da exceção no checkpoint e na resposta. Não altere nem contorne anúncios reprovados e não declare conclusão integral.
 - Em texto com `00:00` e lista após dois-pontos, não use o primeiro `:` para localizar a lista. Delimite o trecho correto da mensagem autenticada e valide a lista literal completa e a ordem antes de resolver IDs; não extraia horas como números de campanha.
 
+## Pedido de reativação status-only, sem mudança criativa
+
+- Não reutilize QA de criação nem torne URLs temporárias de miniaturas um pré-requisito para ligar campanhas existentes. Leia o estado atual de conta, campanhas, conjuntos e anúncios; preserve seus IDs, vínculos, estados dos filhos, orçamento, lance, programação, tracking e `creative.id`. Para um pedido exclusivamente de status, use projeção de leitura com `creative{id}`, sem prévias CDN ou re-renderização, e compare os campos não alvo entre pré-write e readback. Isso evita confundir rotação de hospedagem/assinatura de miniatura com alteração do anúncio. Não aplicar essa projeção reduzida a criação, troca de mídia ou seleção de assets.
+- Preserve a checagem de rota apta e os estados terminais: campanha ARCHIVED/DELETED não é PAUSED. Não restaure nem altere filhos/creatives por inferência; execute as campanhas elegíveis da lista e informe separadamente a exceção. Nova autorização de início imediato complementa o mesmo request/IDs; preserve o horário original como histórico e registre a nova mensagem, sem fingir que a ativação ocorreu na janela perdida.
+- Exercite a projeção contra snapshots reais anteriores/posteriores: aceite apenas a mudança de status da campanha; rejeite mudança de `creative.id`, tracking, budget, bid, horário, vínculo ou estado configurado de filho. GET final deve cobrir todos os IDs solicitados, inclusive exceções, e ACTIVE não comprova entrega.
+
 ## Preparação de reativação pontual
 
 1. Resolva data civil e hora no `timezone_name` obtido da conta Meta. Confira o escopo da política antes de normalizar um horário vencido: defaults declarados para criação não autorizam antecipar a reativação de campanhas existentes. Quando a intenção entre meia-noite passada e próxima for materialmente ambígua e não houver política aplicável, pergunte somente a data/hora; incorpore a confirmação ao mesmo request.

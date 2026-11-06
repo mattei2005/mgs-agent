@@ -331,6 +331,22 @@
     "status": "FIXED_OPERATION_DEFAULT"
   },
   "creative_policy": {
+    "standard_copy_inherited_background_policy": {
+      "status": "ACTIVE",
+      "approved_by": "344196393512075265",
+      "authority_message_id": "1568291250883272825",
+      "source_thread_id": "1558133898209394780",
+      "effective_at": "2026-11-06T15:49:31.653000+00:00",
+      "scope": "SHEIN campaign duplication requests within the existing authorized account/channel scope",
+      "behavior": "Follow the standard copy and preserve the source ad settings, including image_background_gen when enabled; its presence is not a reason to ask whether to disable it.",
+      "ask_to_disable_inherited_background": false,
+      "automatic_opt_out_authorized": false,
+      "source_mutation_authorized": false,
+      "technical_rejection": "Diagnose and recover the faithful standard-copy path with original request, IDs and approved deltas. Do not silently disable background or other enhancements, add a catalog, bypass QA, recreate blindly, or treat technical API limitations as a new approval question to disable this inherited setting. Report any unavoidable real incompatibility precisely without inventing completion.",
+      "schedule": "Honor explicit NOW after required QA/readback; do not request activation again merely because preparation took time.",
+      "supersedes": "Routine per-request questions asking to disable image background generation solely because an inherited enabled setting causes a catalog rejection; historical exact opt-out approvals remain limited to their original requests.",
+      "runtime_validation": "Policy recorded; no new standard-copy Meta write or compatibility canary executed by this correction."
+    },
     "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
     "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
     "language_match_required": true,
@@ -666,6 +682,21 @@
     "reference_destination_default": "KEEP_ACTUAL_SOURCE_URL",
     "account_resolution": "explicit account or unambiguous canonical context; never guess",
     "default_quantity": 1,
+    "explicit_today_start_policy": {
+      "enabled": true,
+      "approved_by": "344196393512075265",
+      "source_message_id": "1568290937371631617",
+      "source_thread_id": "1558126286826774711",
+      "scope": "SHEIN request explicitly says today/current date and provides no later clock time",
+      "interpretation": "IMMEDIATE_AFTER_QA",
+      "intake_field": "start_now=true",
+      "no_second_schedule_approval": true,
+      "preserve_explicit_future_clock_time": true,
+      "preserve_explicit_paused": true,
+      "preserve_semantic_media_QA_and_material_change_gates": true,
+      "no_meta_write_by_policy_registration": true,
+      "communication": "State immediate intent explicitly; technical QA hold is not a future schedule. After reported manual activation, read exact current IDs/status/creatives without reactivation or replay."
+    },
     "expired_explicit_start_policy": {
       "enabled": true,
       "approved_by": "344196393512075265",

@@ -4435,6 +4435,25 @@
       "updated_at": "2026-10-19T19:02:03+00:00"
     },
     {
+      "canonical_key": "ares.shein.explicit-today-start",
+      "canonical_source": "/root/mgs-agent/data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-06T15:50:34+00:00",
+      "id": "ARES-SHEIN-EXPLICIT-TODAY-NOW-1568290937371631617",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN para hoje sem hora futura significa inicio imediato; QA tecnico nao e agendamento futuro",
+      "updated_at": "2026-11-06T15:50:34+00:00"
+    },
+    {
       "canonical_key": "ares.shein.flexible-media-qa-recovery",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/general-campaign-fast-route.md",
       "consumers": [
@@ -16253,5 +16272,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T15:10:43+00:00"
+  "updated_at": "2026-11-06T15:50:34+00:00"
 }
