@@ -16,6 +16,8 @@ Pedido explícito “para hoje”/“para a data de hoje”, sem hora futura ind
 
 ### Tracking embutido no destino da referência
 
+Renumeração de UTMs é regra já definida, não uma decisão pendente do operador: ao duplicar para um novo número, o executor deve aplicar os tokens desse alvo em `utm_campaign`, `utm_adgroup` e demais destinos dependentes. Não pedir que o usuário repita a regra, aprove novamente a troca normal ou faça o ajuste manual como reparo da automação. Se o readback conservar os tokens da fonte, classificar como falha técnica de implementação da rota, assumir a correção dentro do escopo autorizado e distinguir essa falha de uma dúvida de negócio. Preservar os recursos solicitados e o local do tracking; concluir somente com ambos confirmados pela plataforma, sem declarar homologação com base apenas no valor correto calculado no manifest.
+
 Ao aplicar a receita `Recuperar preflight de profile ou delegação` da referência geral, não classifique `creative.url_tags` ausente/nulo como ausência de tracking. Leia a query do destino efetivo em CTA/link ou `asset_feed_spec.link_urls` de todos os anúncios paginados; extraia `utm_campaign`, `utm_adgroup` e `utm_medium` com parser de URL/query e confira concordância com o número-fonte. Derive `destination_base` removendo somente query/fragmento, preservando o caminho, e mantenha a localização original do tracking no clone. Reconcile somente os campos comprovados do profile, com backup e comparação estrutural que preserve os demais campos/perfis; repita o dry-run do mesmo request. A correção de referência não comprova acesso à Page nem autorização para atribuir permissões.
 
 ### Rejeição de imagens no preparador de grupos
