@@ -370,5 +370,39 @@
   "workbook_sheet_count": 2,
   "other_sheet_properties_unchanged": true,
   "other_sheet_data_unchanged": true,
-  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/closure-current.json"
+  "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/closure-current.json",
+  "report_infra_status": "sent_verified",
+  "cron_changes": 0,
+  "cron_coordination": {
+    "job_id": "2ee720363d7d",
+    "same_existing_job": true,
+    "schedule_unchanged": true,
+    "next_run_at": "2026-11-06T14:02:00-05:00"
+  },
+  "ui_cleanup": {
+    "final_browser_tabs_visually_counted": 6,
+    "during_owned_collection_browser_tabs_visually_counted": 7,
+    "active_final_surface": "original unfiltered Meta Digital Trust Accounts",
+    "owned_tab_closed": true,
+    "exact_initial_browser_tab_identity_parity_established": false,
+    "reason": "initial screenshot and full AX cache expired; inline AX retained but truncated. TabItem count was site-internal navigation, not Chrome tabs. Recovered validation using final durable pixels, own-tab capture pixels, unchanged initial inline labels and finally-close worker receipts. No additional UI input or uncertain tab closure.",
+    "lease_free": true,
+    "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/surface-final.png"
+  },
+  "repair": {
+    "scope": "Accounts Edit/Search only; native fresh-bounds background pixel click",
+    "root_cause_proven": "Element-index route failed to establish effective query; same authenticated UI recovered with pixel focus. Internal driver/UI focus cause remains unproven.",
+    "validated_targets": 36,
+    "canonical_collector_live_canary": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/canonical-collector-canary/336562339356179-receipt.json",
+    "unit_tests": "valid native/scaled bounds and invalid bounds rejected",
+    "live_mirror_sha256": {
+      "scripts/read_pc1_accounts_list.py": "8b8ccdfda878063ca36698111fe6ab063d56f1910d5d6a0436fe860085ea8308",
+      "references/accounts-list-search.md": "6c525bd6450250599d699ac74c6d7b84d555b3b64a4979644c8afe4262ebcd26",
+      "references/recurring-refresh.md": "e14d17972e060798f50e7059d0a54bd624888913515a637dc2b19a0613023353"
+    },
+    "runtime_config_changes": 0,
+    "foreground_escalations": 0
+  },
+  "report_infra_message_id": "1568264963225550889",
+  "report_infra_readback": true
 }

@@ -61293,6 +61293,36 @@
       },
       "report_infra_message_id": "1568251289979330615",
       "report_infra_readback": true
+    },
+    {
+      "id": "meta-manual-payments-refresh-1568253396287225898",
+      "agent": "zeus",
+      "type": "authorized_manual_financial_refresh_and_safe_input_recovery",
+      "status": "updated_validated_with_historical_d_gaps",
+      "updated_at": "2026-11-06T08:59:15.947420-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "preserved_h": 0,
+        "pending_d": 0,
+        "renewed_d": 8,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "skill_sha256": {
+        "scripts/read_pc1_accounts_list.py": "8b8ccdfda878063ca36698111fe6ab063d56f1910d5d6a0436fe860085ea8308",
+        "references/accounts-list-search.md": "6c525bd6450250599d699ac74c6d7b84d555b3b64a4979644c8afe4262ebcd26",
+        "references/recurring-refresh.md": "e14d17972e060798f50e7059d0a54bd624888913515a637dc2b19a0613023353"
+      },
+      "report_infra_message_id": "1568264963225550889",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
@@ -68052,7 +68082,14 @@
       {
         "name": "meta-manual-payments-planning",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/SKILL.md",
+        "last_verified_at": "2026-11-06T08:59:15.947420-05:00",
+        "last_verified_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/closure-current.json",
+        "accounts_search_repair_sha256": {
+          "scripts/read_pc1_accounts_list.py": "8b8ccdfda878063ca36698111fe6ab063d56f1910d5d6a0436fe860085ea8308",
+          "references/accounts-list-search.md": "6c525bd6450250599d699ac74c6d7b84d555b3b64a4979644c8afe4262ebcd26",
+          "references/recurring-refresh.md": "e14d17972e060798f50e7059d0a54bd624888913515a637dc2b19a0613023353"
+        }
       },
       {
         "name": "mgs-company-os-architecture",
