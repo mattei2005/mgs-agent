@@ -1,7 +1,7 @@
 {
   "status": "updated_metrics_pending_card_history",
-  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T080611759059",
-  "collected_at": "2026-11-06T08:06:07.418573-05:00",
+  "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T082155602438",
+  "collected_at": "2026-11-06T08:21:49.786511-05:00",
   "accounts": 47,
   "pending_ui": [
     {
@@ -12,6 +12,16 @@
     {
       "account_id": "1481815942722118",
       "name": "Eggbev-US-CC-EN-03 (FAX-US-02)",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1062446663435585",
+      "name": "Escalatepower-US-SHEIN-EN-03-G003",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1762774024309795",
+      "name": "Financeadx-CA-CC-EN-01",
       "reason": "new_generic_payment_since_pc1_proof"
     },
     {
@@ -27,6 +37,11 @@
     {
       "account_id": "2852476828464907",
       "name": "Mavroa-US-SHEIN-ES-04-G004",
+      "reason": "new_generic_payment_since_pc1_proof"
+    },
+    {
+      "account_id": "1290644206529750",
+      "name": "OpenzedFinanzas-ES-CC-ES-02",
       "reason": "new_generic_payment_since_pc1_proof"
     }
   ]

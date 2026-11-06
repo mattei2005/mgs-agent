@@ -15,6 +15,8 @@ metadata:
 
 Skill específica da vertical SHEIN em tráfego direto Meta para os Estados Unidos. Ela isola o segmento SHEIN das regras operacionais de financiamento veicular: ambos usam tráfego direto, mas não compartilham contas, nomes, eventos, bids, budgets, schedules, learning policy, relatórios, criativos ou automações.
 
+Atraso SB: exiba n/d para `totalMinutes=0` junto de `currentFillTime=null` e `confident=false`; preserve a fonte e revalide só o modelo.
+
 ## Fechamento e complementos
 
 Recibo e readback multifonte: `references/campaign-batch-final-readback.md`.

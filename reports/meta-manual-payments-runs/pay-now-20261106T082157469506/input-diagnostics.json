@@ -1,0 +1,478 @@
+[
+  {
+    "request": {
+      "action": "key",
+      "keys": "ctrl+t"
+    },
+    "result": {
+      "ok": false,
+      "action": "hotkey",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (key_combo). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "key_combo",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "key",
+      "keys": "ctrl+l"
+    },
+    "result": {
+      "ok": false,
+      "action": "hotkey",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (key_combo). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "key_combo",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "type",
+      "text": "https://adsmanager.facebook.com/adsmanager/billing_hub/accounts?asset_id=2852476828464907&business_id=155263197283282&payment_account_id=2852476828464907&placement=BILLING_HUB&session_id=upl_1793047342_61c89fd3-1293-4191-aab6-314f3793aac2"
+    },
+    "result": {
+      "ok": false,
+      "action": "type_text",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (text_input). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "text_input",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "key",
+      "keys": "return"
+    },
+    "result": {
+      "ok": false,
+      "action": "press_key",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (keystroke). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "keystroke",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "click",
+      "coordinate": [
+        632,
+        340
+      ]
+    },
+    "result": {
+      "ok": true,
+      "action": "click",
+      "message": "✅ Posted click to Chromium pid 19372 at (633,341) (background, no foreground swap).",
+      "effect": "unverifiable",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "synthetic_events"
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "key",
+      "keys": "ctrl+a"
+    },
+    "result": {
+      "ok": false,
+      "action": "hotkey",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (key_combo). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "key_combo",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "type",
+      "text": "Growpowerhub-US-SHEIN-EN-04-G004"
+    },
+    "result": {
+      "ok": false,
+      "action": "type_text",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (text_input). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "text_input",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "click",
+      "coordinate": [
+        632,
+        340
+      ]
+    },
+    "result": {
+      "ok": true,
+      "action": "click",
+      "message": "✅ Posted click to Chromium pid 19372 at (633,341) (background, no foreground swap).",
+      "effect": "unverifiable",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "synthetic_events"
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "key",
+      "keys": "ctrl+a"
+    },
+    "result": {
+      "ok": false,
+      "action": "hotkey",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (key_combo). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "key_combo",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "type",
+      "text": "Vizioid-US-SHEIN-EN-05-G005"
+    },
+    "result": {
+      "ok": false,
+      "action": "type_text",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (text_input). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "text_input",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "click",
+      "coordinate": [
+        632,
+        340
+      ]
+    },
+    "result": {
+      "ok": true,
+      "action": "click",
+      "message": "✅ Posted click to Chromium pid 19372 at (633,341) (background, no foreground swap).",
+      "effect": "unverifiable",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "synthetic_events"
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "key",
+      "keys": "ctrl+a"
+    },
+    "result": {
+      "ok": false,
+      "action": "hotkey",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (key_combo). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "key_combo",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "type",
+      "text": "Vizioid-US-SHEIN-EN-02-G002"
+    },
+    "result": {
+      "ok": false,
+      "action": "type_text",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (text_input). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "text_input",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "click",
+      "coordinate": [
+        632,
+        340
+      ]
+    },
+    "result": {
+      "ok": true,
+      "action": "click",
+      "message": "✅ Posted click to Chromium pid 19372 at (633,341) (background, no foreground swap).",
+      "effect": "unverifiable",
+      "meta": {
+        "delivery": {
+          "mode": "background"
+        },
+        "effect": "unverifiable",
+        "route": "synthetic_events"
+      },
+      "verdict": {
+        "decision": "verify_fresh_state",
+        "hint": "Input was delivered but not confirmed. Re-capture and check the result BEFORE any retry — do not repeat the input on an escalation recommendation alone."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "key",
+      "keys": "ctrl+a"
+    },
+    "result": {
+      "ok": false,
+      "action": "hotkey",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (key_combo). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "key_combo",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  },
+  {
+    "request": {
+      "action": "type",
+      "text": "Escalatepower-US-SHEIN-EN-06-G006"
+    },
+    "result": {
+      "ok": false,
+      "action": "type_text",
+      "message": "Background delivery is not available for target window class 'Chrome_WidgetWin_1' on this event kind (text_input). Retry this action with delivery_mode:\"foreground\"; Cua Driver will activate the target for the action and restore the previous foreground afterward.",
+      "escalation": {
+        "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+        "recommended": "foreground"
+      },
+      "code": "background_unavailable",
+      "meta": {
+        "code": "background_unavailable",
+        "escalation": {
+          "reason": "background input is dropped by this surface; retry this action with delivery_mode:\"foreground\".",
+          "recommended": "foreground"
+        },
+        "event_kind": "text_input",
+        "suggestion": "Retry this action with delivery_mode:\"foreground\".",
+        "target_class": "Chrome_WidgetWin_1"
+      },
+      "verdict": {
+        "decision": "escalate",
+        "recommended": "foreground",
+        "hint": "The input likely did not land. Climb one rung following `recommended`: 'px' → re-issue by coordinate; 'foreground' (or a failed pixel click) → re-issue with delivery_mode='foreground' (separate approval). Do not predict the rung from the app being Electron/Chromium — react to this signal."
+      }
+    }
+  }
+]
