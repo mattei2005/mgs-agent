@@ -1372,6 +1372,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-INTAKE-1568052728016543826",
+      "next_step": "Obter batch canônico pelo monitor, claim do mesmo owner, tratar/QA e complete; continuar somente este request",
+      "objective": "Tratar e arquivar lote Kelly US SHEIN EN: 53 fontes, common, preservar RAW e reservas",
+      "source": "discord:1185714635991679006/1516887105543077949/1568052728016543826",
+      "state": "fontes estáveis congeladas; registro humano validado no canal pai; 20 img e 33 vid. descoberta em scratch/kelly-1568052728016543826/sources.json",
+      "thread_id": "1568052728016543826",
+      "updated_at": "2026-11-06T00:05:06+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-INTAKE-KELLY-1562496628559188109",
       "next_step": "Nenhum novo tratamento/upload/move neste lote. Transporte de arquivo pelo produtor canonico apos heartbeat saudavel, validar receipts ACK atalhos sem alterar reserva ou duplicar linhagens",
       "objective": "Tratar e mover 30 imagens US SHEIN EN de Kelly",
@@ -8806,5 +8816,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:50:17+00:00"
+  "updated_at": "2026-11-06T00:05:06+00:00"
 }
