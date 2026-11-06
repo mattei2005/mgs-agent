@@ -7476,6 +7476,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-b0015-alert-1568285638791532647",
+      "next_step": "Rodolfo renovar o token do perfil admin do mesmo app no item 1Password e confirmar para nova validação; não rotacionar credenciais automaticamente",
+      "objective": "Conferir B001-5 ao vivo e reenviar um alerta real no canal atual",
+      "source": "discord:message:1568285638791532647;receipt:/root/mgs-agent/reports/meta-b0015-alert-1568285638791532647/delivery-readback.json",
+      "state": "alerta live único enviado e readback dos três objetos confirmado. app metadata e roles http 200, nove membros; dois nomes sem resolução. token admin expirado desde 02/11/2026 (oauth 190/463); falha exposta no card nativo. onze atribuições atuais na sheet e três marcadores pendentes; pausas intactas. entrega solicitada concluída; normalização do token depende do titular.",
+      "thread_id": "1568264305768534178",
+      "updated_at": "2026-11-06T15:30:26+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-b004-10-1565005187914141757",
       "next_step": "Monitor recorrente acompanha aceites e uso; sem nova execução manual pendente",
       "objective": "Validar e substituir somente rota B004-9 por B004-10, preservando canal e cron",
@@ -8896,5 +8906,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T15:10:43+00:00"
+  "updated_at": "2026-11-06T15:30:26+00:00"
 }

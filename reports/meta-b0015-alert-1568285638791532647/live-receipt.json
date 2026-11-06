@@ -1,0 +1,510 @@
+{
+  "checked_at": "2026-11-06T10:29:30-05:00",
+  "app": {
+    "item": "BOT B001-5 Token - Debora Monteiro Lima",
+    "app_id": "28152750157707455",
+    "app_name": "B001-5",
+    "roles": [
+      {
+        "id": "122212297502785394",
+        "name": "122212297502785394",
+        "role": "administrators"
+      },
+      {
+        "id": "2858060724562222",
+        "name": "2858060724562222",
+        "role": "administrators"
+      },
+      {
+        "id": "122194477562714491",
+        "name": "Debora Monteiro Lima",
+        "role": "administrators"
+      },
+      {
+        "id": "1410529451218922",
+        "name": "Ethan IBet",
+        "role": "administrators"
+      },
+      {
+        "id": "1635507218245385",
+        "name": "Fabio Aleksander",
+        "role": "administrators"
+      },
+      {
+        "id": "122184201704612564",
+        "name": "Iris Rubio",
+        "role": "administrators"
+      },
+      {
+        "id": "2281783029330172",
+        "name": "Karla Michelli",
+        "role": "administrators"
+      },
+      {
+        "id": "2133376794282216",
+        "name": "Luis Hoàng",
+        "role": "administrators"
+      },
+      {
+        "id": "122196219140682172",
+        "name": "Ricardo Gabriel Monteiro",
+        "role": "administrators"
+      }
+    ],
+    "roles_count": 9,
+    "x_app_usage": "{\"call_count\":4,\"total_cputime\":0,\"total_time\":0}",
+    "usage": {
+      "raw": "{\"call_count\":4,\"total_cputime\":0,\"total_time\":0}",
+      "parsed": {
+        "call_count": 4,
+        "total_cputime": 0,
+        "total_time": 0
+      },
+      "max_pct": 4,
+      "max_metric": "call_count",
+      "severity": "ok"
+    },
+    "checks": {
+      "app_metadata": {
+        "status": 200,
+        "ok": true
+      },
+      "roles": {
+        "status": 200,
+        "ok": true,
+        "count": 9,
+        "pages": 1
+      },
+      "user_token_me": {
+        "status": 400,
+        "ok": false,
+        "error": {
+          "code": 190,
+          "type": "OAuthException",
+          "message": "Error validating access token: Session has expired on Monday, 02-Nov-26 07:09:05 PST. The current time is Friday, 06-Nov-26 07:29:29 PST."
+        }
+      },
+      "debug_token": {
+        "status": 200,
+        "ok": false,
+        "error": {
+          "code": null,
+          "type": null,
+          "message": "{'data': {'app_id': '28152750157707455', 'type': 'USER', 'application': 'B001-5', 'data_access_expires_at': 1796224145, 'error': {'code': 190, 'message': 'Error validating access token: Session has expired on Monday, 02-Nov-26 07:09:05 PST. The current time is Friday, 06-Nov-26 07:29:30 PST.', 'subcode': 463}, 'expires_at': 1793632145, 'is_valid': False, 'issued_at': 1788448164, 'scopes': ['email', 'read_insights', 'pages_show_list', 'business_management', 'pages_messaging', 'instagram_basic', '"
+        }
+      }
+    },
+    "role_identity_resolution": {
+      "status": 500,
+      "requested_count": 9,
+      "resolved_count": 7,
+      "unresolved_count": 2,
+      "mode": "graph_multi_id_chunked",
+      "source_pages": 1,
+      "chunk_size": 50,
+      "chunks": 1,
+      "chunk_statuses": [
+        500
+      ],
+      "cache_resolved_count": 7,
+      "individual_limit": 20,
+      "individual_requested_count": 2,
+      "individual_resolved_count": 0,
+      "individual_statuses": [
+        400,
+        400
+      ],
+      "baseline_applied": false,
+      "role_ids_sha256": "e697136149668e0c35648991ecd8ec76a53970114780a65332118be39eb33238"
+    },
+    "token_info": {
+      "present": true,
+      "valid": false,
+      "scopes": [
+        "business_management",
+        "email",
+        "instagram_basic",
+        "instagram_content_publish",
+        "instagram_manage_comments",
+        "instagram_manage_insights",
+        "instagram_manage_messages",
+        "pages_manage_engagement",
+        "pages_manage_metadata",
+        "pages_manage_posts",
+        "pages_messaging",
+        "pages_read_engagement",
+        "pages_read_user_content",
+        "pages_show_list",
+        "pages_utility_messaging",
+        "public_profile",
+        "read_insights"
+      ],
+      "expires_at": 1793632145,
+      "app_id": "28152750157707455",
+      "type": "USER"
+    },
+    "checked_at": "2026-11-06T10:29:30-05:00",
+    "operational_roles": [
+      {
+        "id": "122212297502785394",
+        "name": "122212297502785394",
+        "role": "administrators"
+      },
+      {
+        "id": "2858060724562222",
+        "name": "2858060724562222",
+        "role": "administrators"
+      },
+      {
+        "id": "122194477562714491",
+        "name": "Debora Monteiro Lima",
+        "role": "administrators"
+      },
+      {
+        "id": "1410529451218922",
+        "name": "Ethan IBet",
+        "role": "administrators"
+      },
+      {
+        "id": "1635507218245385",
+        "name": "Fabio Aleksander",
+        "role": "administrators"
+      },
+      {
+        "id": "122184201704612564",
+        "name": "Iris Rubio",
+        "role": "administrators"
+      },
+      {
+        "id": "2281783029330172",
+        "name": "Karla Michelli",
+        "role": "administrators"
+      },
+      {
+        "id": "2133376794282216",
+        "name": "Luis Hoàng",
+        "role": "administrators"
+      },
+      {
+        "id": "122196219140682172",
+        "name": "Ricardo Gabriel Monteiro",
+        "role": "administrators"
+      }
+    ],
+    "role_identity_reconciliation": {
+      "mode": "graph_names",
+      "status": "pending_expected_role_acceptance",
+      "safe_for_sheet": false,
+      "raw_role_count": 9,
+      "unresolved_meta_names_count": 2,
+      "expected_sheet_roles": 14,
+      "accepted_roles": 9,
+      "pending_roles": 5
+    },
+    "initialized": true,
+    "previous_count": 9,
+    "current_count": 9,
+    "last_ok_at": "2026-11-06T10:29:30-05:00",
+    "consecutive_errors": 0,
+    "last_error": null,
+    "alerts": {
+      "usage": {
+        "risk": "2026-09-03T12:00:53-04:00"
+      }
+    },
+    "last_removed": [],
+    "last_added": [],
+    "cumulative_removed": [
+      {
+        "id": "3430142517163160",
+        "name": "Beatriz Silva",
+        "role": "administrators"
+      },
+      {
+        "id": "1071081885570874",
+        "name": "Vije Juemadhic III",
+        "role": "administrators"
+      }
+    ]
+  },
+  "summary": {
+    "items": [
+      "BOT B001-5 Token - Debora Monteiro Lima"
+    ],
+    "processed_items": [
+      "BOT B001-5 Token - Debora Monteiro Lima"
+    ],
+    "alerts_sent": 1,
+    "errors_count": 0,
+    "dry_run": false,
+    "force_snapshot_requested": false,
+    "force_snapshot_effective": false,
+    "snapshot_blocked": false,
+    "force_live_alert": true,
+    "force_recovery_notice": false,
+    "active_alert_pause": {
+      "apps": [
+        "B004-10"
+      ],
+      "monitor_apps": [
+        "B004-10"
+      ],
+      "mode": "manual",
+      "manual": true,
+      "until": null,
+      "expired": false,
+      "invalid": false,
+      "reason": "B006-9→B006-10 validado e reativado por relatório de migração de Rodolfo; demais pausas preservadas"
+    },
+    "restriction_auto_pause": {
+      "candidates": [],
+      "changed": false,
+      "apps": [
+        "B004-10"
+      ],
+      "monitor_apps": [
+        "B004-10"
+      ]
+    },
+    "suppressed_alert_deliveries": 0,
+    "sheet_removed_sync": {
+      "enabled": true,
+      "rows": 220,
+      "checked_intent_rows": 7,
+      "present": 7,
+      "marked": 39,
+      "marked_missing_current_meta": 0,
+      "marked_cumulative_removed": 0,
+      "unknown_app_rows": 90,
+      "identity_blocked_rows": 4,
+      "blank_intent_rows": 19,
+      "ignored_verification_rows": 6,
+      "unmatched_removed": 0,
+      "checked_at": "2026-11-06T10:29:30-05:00",
+      "updated": false
+    },
+    "invest_3d": {
+      "status": "INVEST_3D_OK",
+      "current_date": "2026-11-06",
+      "current_day_partial": true,
+      "period_start": "2026-11-03",
+      "period_end": "2026-11-05",
+      "days": 3,
+      "error": null
+    }
+  },
+  "sheet_assigned": 11,
+  "sheet_rows": [
+    {
+      "Rem Acum": "",
+      "User": "disparoseggbev@gmail.com",
+      "RECEITA 7 DIAS": "R$ 5,205.05",
+      "Segurador": "Luis Hoàng",
+      "PG": "24",
+      "Tipo": "conta simples 074",
+      "Cartao": "4729530015675927 / 06-31 / 218",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "OK V2",
+      "USUARIO": "ritchard.nguyen",
+      "Telefone Atual": "7865333041",
+      "Telefone Novo": "",
+      "Conta dev": "OK",
+      "OBS": "b013-4 improviso",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "X",
+      "User": "disparoseggbev@gmail.com",
+      "RECEITA 7 DIAS": "R$ 0.00",
+      "Segurador": "Wah Lan",
+      "PG": "33",
+      "Tipo": "",
+      "Cartao": "",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "",
+      "USUARIO": "wah.lan.33",
+      "Telefone Atual": "7867725670",
+      "Telefone Novo": "",
+      "Conta dev": "",
+      "OBS": "",
+      "Removidos acumulado": "X"
+    },
+    {
+      "Rem Acum": "X",
+      "User": "disparosvizioides@gmail.com",
+      "RECEITA 7 DIAS": "R$ 0.00",
+      "Segurador": "Beatriz Silva",
+      "PG": "11",
+      "Tipo": "conta simples 143",
+      "Cartao": "4729530018073633 / 06-31 / 798",
+      "Migrado": "FALSE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "PEDIU ID",
+      "USUARIO": "100005023356496",
+      "Telefone Atual": "9177645399",
+      "Telefone Novo": "",
+      "Conta dev": "OK",
+      "OBS": "",
+      "Removidos acumulado": "X"
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparosfincgriffinuscaren@gmail.com",
+      "RECEITA 7 DIAS": "R$ 5.94",
+      "Segurador": "Ricardo Gabriel Monteiro",
+      "PG": "1",
+      "Tipo": "conta simples 052",
+      "Cartao": "4729530017437425 / 06-31 / 902",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "OK V1",
+      "USUARIO": "RicardoGabrielMonteiro222222222",
+      "Telefone Atual": "7869172357",
+      "Telefone Novo": "7869172294",
+      "Conta dev": "ok",
+      "OBS": "",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparosvizioid@gmail.com",
+      "RECEITA 7 DIAS": "R$ 0.00",
+      "Segurador": "Fabio Aleksander",
+      "PG": "2",
+      "Tipo": "",
+      "Cartao": "4729530015432683 / 06-31 / 482",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "OK v1",
+      "USUARIO": "alexjoyce.narciso.1",
+      "Telefone Atual": "7867447253",
+      "Telefone Novo": "",
+      "Conta dev": "OK",
+      "OBS": "",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparosvizioides@gmail.com",
+      "RECEITA 7 DIAS": "R$ 0.00",
+      "Segurador": "Iris Rubio",
+      "PG": "5",
+      "Tipo": "conta simples 145",
+      "Cartao": "4729530016992552 / 06-31 / 015",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "OK v3",
+      "USUARIO": "61568376938679",
+      "Telefone Atual": "9177645399",
+      "Telefone Novo": "7869172421",
+      "Conta dev": "OK",
+      "OBS": "",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "X",
+      "User": "disparoseggbev@gmail.com",
+      "RECEITA 7 DIAS": "R$ 0.00",
+      "Segurador": "Vije Juemadhic III",
+      "PG": "13",
+      "Tipo": "conta simples 077",
+      "Cartao": "4729530012963276 / 06-31 / 720",
+      "Migrado": "FALSE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "CODIGO NAO CHEGA",
+      "USUARIO": "100080072168446",
+      "Telefone Atual": "7869172057",
+      "Telefone Novo": "",
+      "Conta dev": "OK",
+      "OBS": "b013-4 improviso",
+      "Removidos acumulado": "X"
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparosvizioidmxcces@gmail.com",
+      "RECEITA 7 DIAS": "",
+      "Segurador": "Debora Monteiro Lima",
+      "PG": "0",
+      "Tipo": "conta simples 146",
+      "Cartao": "4729530017149129 / 06-31 / 515",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "OK v2",
+      "USUARIO": "DeboraMonteiroLima444",
+      "Telefone Atual": "9177645399",
+      "Telefone Novo": "7869172412",
+      "Conta dev": "ok",
+      "OBS": "",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparoseggbev@gmail.com",
+      "RECEITA 7 DIAS": "R$ 65,602.84",
+      "Segurador": "Ethan IBet",
+      "PG": "2",
+      "Tipo": "",
+      "Cartao": "",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "",
+      "USUARIO": "ethan.ibet",
+      "Telefone Atual": "7866280464",
+      "Telefone Novo": "",
+      "Conta dev": "ok",
+      "OBS": "",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparoseggbev@gmail.com",
+      "RECEITA 7 DIAS": "R$ 75.46",
+      "Segurador": "John Tambot",
+      "PG": "",
+      "Tipo": "",
+      "Cartao": "",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "",
+      "USUARIO": "John.tambot",
+      "Telefone Atual": "3122487493",
+      "Telefone Novo": "",
+      "Conta dev": "",
+      "OBS": "",
+      "Removidos acumulado": ""
+    },
+    {
+      "Rem Acum": "",
+      "User": "disparoseggbev@gmail.com",
+      "RECEITA 7 DIAS": "R$ 5.07",
+      "Segurador": "Karla Michelli",
+      "PG": "11",
+      "Tipo": "conta simples 073",
+      "Cartao": "4729530010150785 / 06-31 / 720",
+      "Migrado": "TRUE",
+      "NO APP": "B001-5",
+      "APP PROVISORIO": "",
+      "Migracao": "OK V2",
+      "USUARIO": "yngrid.nascimento.3785",
+      "Telefone Atual": "7865333041",
+      "Telefone Novo": "",
+      "Conta dev": "ok",
+      "OBS": "b013-4 improviso",
+      "Removidos acumulado": ""
+    }
+  ],
+  "pause_unchanged": true,
+  "fresh_app_metadata_and_roles": true
+}

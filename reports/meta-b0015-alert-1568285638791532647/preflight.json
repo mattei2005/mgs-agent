@@ -1,0 +1,145 @@
+{
+  "item": "BOT B001-5 Token - Debora Monteiro Lima",
+  "app_id": "28152750157707455",
+  "app_name": "B001-5",
+  "roles": [
+    {
+      "id": "122212297502785394",
+      "name": "122212297502785394",
+      "role": "administrators"
+    },
+    {
+      "id": "2858060724562222",
+      "name": "2858060724562222",
+      "role": "administrators"
+    },
+    {
+      "id": "122194477562714491",
+      "name": "Debora Monteiro Lima",
+      "role": "administrators"
+    },
+    {
+      "id": "1410529451218922",
+      "name": "Ethan IBet",
+      "role": "administrators"
+    },
+    {
+      "id": "1635507218245385",
+      "name": "Fabio Aleksander",
+      "role": "administrators"
+    },
+    {
+      "id": "122184201704612564",
+      "name": "Iris Rubio",
+      "role": "administrators"
+    },
+    {
+      "id": "2281783029330172",
+      "name": "Karla Michelli",
+      "role": "administrators"
+    },
+    {
+      "id": "2133376794282216",
+      "name": "Luis Hoàng",
+      "role": "administrators"
+    },
+    {
+      "id": "122196219140682172",
+      "name": "Ricardo Gabriel Monteiro",
+      "role": "administrators"
+    }
+  ],
+  "roles_count": 9,
+  "x_app_usage": "{\"call_count\":4,\"total_cputime\":0,\"total_time\":0}",
+  "usage": {
+    "raw": "{\"call_count\":4,\"total_cputime\":0,\"total_time\":0}",
+    "parsed": {
+      "call_count": 4,
+      "total_cputime": 0,
+      "total_time": 0
+    },
+    "max_pct": 4,
+    "max_metric": "call_count",
+    "severity": "ok"
+  },
+  "checks": {
+    "app_metadata": {
+      "status": 200,
+      "ok": true
+    },
+    "roles": {
+      "status": 200,
+      "ok": true,
+      "count": 9,
+      "pages": 1
+    },
+    "user_token_me": {
+      "status": 400,
+      "ok": false,
+      "error": {
+        "code": 190,
+        "type": "OAuthException",
+        "message": "Error validating access token: Session has expired on Monday, 02-Nov-26 07:09:05 PST. The current time is Friday, 06-Nov-26 07:29:24 PST."
+      }
+    },
+    "debug_token": {
+      "status": 200,
+      "ok": false,
+      "error": {
+        "code": null,
+        "type": null,
+        "message": "{'data': {'app_id': '28152750157707455', 'type': 'USER', 'application': 'B001-5', 'data_access_expires_at': 1796224145, 'error': {'code': 190, 'message': 'Error validating access token: Session has expired on Monday, 02-Nov-26 07:09:05 PST. The current time is Friday, 06-Nov-26 07:29:24 PST.', 'subcode': 463}, 'expires_at': 1793632145, 'is_valid': False, 'issued_at': 1788448164, 'scopes': ['email', 'read_insights', 'pages_show_list', 'business_management', 'pages_messaging', 'instagram_basic', '"
+      }
+    }
+  },
+  "role_identity_resolution": {
+    "status": 500,
+    "requested_count": 9,
+    "resolved_count": 7,
+    "unresolved_count": 2,
+    "mode": "graph_multi_id_chunked",
+    "source_pages": 1,
+    "chunk_size": 50,
+    "chunks": 1,
+    "chunk_statuses": [
+      500
+    ],
+    "cache_resolved_count": 7,
+    "individual_limit": 20,
+    "individual_requested_count": 2,
+    "individual_resolved_count": 0,
+    "individual_statuses": [
+      400,
+      400
+    ],
+    "baseline_applied": false,
+    "role_ids_sha256": "e697136149668e0c35648991ecd8ec76a53970114780a65332118be39eb33238"
+  },
+  "token_info": {
+    "present": true,
+    "valid": false,
+    "scopes": [
+      "business_management",
+      "email",
+      "instagram_basic",
+      "instagram_content_publish",
+      "instagram_manage_comments",
+      "instagram_manage_insights",
+      "instagram_manage_messages",
+      "pages_manage_engagement",
+      "pages_manage_metadata",
+      "pages_manage_posts",
+      "pages_messaging",
+      "pages_read_engagement",
+      "pages_read_user_content",
+      "pages_show_list",
+      "pages_utility_messaging",
+      "public_profile",
+      "read_insights"
+    ],
+    "expires_at": 1793632145,
+    "app_id": "28152750157707455",
+    "type": "USER"
+  },
+  "checked_at": "2026-11-06T10:29:24-05:00"
+}
