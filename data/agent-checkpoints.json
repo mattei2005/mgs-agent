@@ -1923,12 +1923,12 @@
     {
       "agent": "ares",
       "id": "ARES-SHEIN-1568320294698098710",
-      "next_step": "Executar cada fonte sequencialmente pelo campaign central;QA integral e readback;consolidar15 sem replay",
+      "next_step": "Pedido concluido;resposta nativa consolidada na origem;nao repetir criacao/ativacao;preservar posts novos e SLA original",
       "objective": "15 duplicacoes Mavroa G006:019,025,050,014,028 x3;USD45/dia cada;06novembro2026 13h00EST",
-      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568320294698098710/aggregate-progress.json",
-      "state": "preparando inputs e dry-run por fonte;engine enabled;lease livre;gates conta/dominio allowed",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568320294698098710/verified-final-receipt.json",
+      "state": "complete_verified: 15 campanhas/15 conjuntos/30 anuncios active; 019->059,060,061; 025->062,063,064; 050->065,066,067; 014->068,069,070; 028->071,072,073; usd45/dia cada;usd675/dia lote;conta ativa usd2633.67/dia;06novembro2026 13h00est;cost_cap95 todos;qasemantico/renderizado e readback fresco integral;mesmosids;posts novos;serving nao afirmado;slaoriginal preservado",
       "thread_id": "1558134703565967394",
-      "updated_at": "2026-11-06T17:45:35+00:00"
+      "updated_at": "2026-11-06T17:59:36+00:00"
     },
     {
       "agent": "ares",
@@ -8946,5 +8946,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T17:45:35+00:00"
+  "updated_at": "2026-11-06T17:59:36+00:00"
 }
