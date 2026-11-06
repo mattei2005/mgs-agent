@@ -381,7 +381,7 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         seen.add(sid)
         expected = desired_ads[sid]
         creative = ad.get('creative') or {}
-        if desired.get('creative_materialization_route') == 'source_definition_native_inherit':
+        if desired.get('creative_materialization_route') in {'source_definition_native_inherit','source_reference_destination_canary'}:
             from .shein_native_inheritance import verify_features
             verify_features(creative, expected['creative_payload'])
         if ad.get('status') != desired['status'] or ad.get('name') != expected['name'] or ad.get('issues_info'):

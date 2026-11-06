@@ -173,6 +173,12 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
                 native_inheritance = validate_manifest(manifest, account)
             except ValueError as exc:
                 raise ManifestError(str(exc)) from exc
+        elif campaign.creative_materialization_route == 'source_reference_destination_canary':
+            from .shein_reference_destination import validate as validate_reference
+            try:
+                native_inheritance = validate_reference(manifest, account)
+            except ValueError as exc:
+                raise ManifestError(str(exc)) from exc
         if (
             required_route
             and not native_inheritance

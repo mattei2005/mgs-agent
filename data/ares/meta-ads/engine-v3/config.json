@@ -457,6 +457,18 @@
     "2429758060563333": {
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Yolokfx-US-SHEIN-EN-03-G005",
+      "source_reference_destination_canary": {
+        "enabled": true,
+        "approved_by": "344196393512075265",
+        "source_message_id": "1568337081321791502",
+        "request_ids": ["shein-1568337081321791502"],
+        "source_campaign_id": "120250603362110331",
+        "source_adset_id": "120250603362140331",
+        "source_ad_ids": ["120250603362120331", "120250603362130331"],
+        "source_creative_ids": ["1747533710311733", "1857795435355348"],
+        "budget_minor": 6000,
+        "stage": "PAUSED_CANARY_ONLY_NOT_PRODUCTION"
+      },
       "source_definition_native_inheritance": {
         "enabled": false,
         "stage": "REJECTED_CANARY_NOT_PRODUCTION",

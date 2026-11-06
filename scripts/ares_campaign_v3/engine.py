@@ -518,9 +518,10 @@ class CampaignEngine:
             offset = 0
             for campaign in bundle.campaigns:
                 for ad in campaign.ads:
+                    from .shein_reference_destination import update_body
                     ad_name_ops.append(BatchOperation(
                         f"ad_name_update_{offset + 1}", "POST", copied_ad_ids[offset],
-                        body={"name": ad.name, "status": campaign.status},
+                        body=update_body(campaign, ad),
                         kind="ad_name_update",
                     ))
                     offset += 1
@@ -1131,7 +1132,7 @@ class CampaignEngine:
         redundant_ops: list[BatchOperation] = []
         from .prestaged_reconciliation import resolve_slot, copy_parameters
         from .prestaged_two_phase import rejected_slots, materialize as two_phase_materialize
-        fallback_slots = rejected_slots(record) if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT' and 'source_definition_native_inherit' not in routes else set()
+        fallback_slots = rejected_slots(record) if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT' and not routes.intersection({'source_definition_native_inherit','source_reference_destination_canary'}) else set()
         fallback_entries = []
         for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
             live_rows = live_by_campaign[ci]
@@ -1218,14 +1219,15 @@ class CampaignEngine:
             for ai, ad in enumerate(campaign.ads, 1):
                 live = resolved_rows.get((ci, ai))
                 configured_status = str((live or {}).get("configured_status") or (live or {}).get("status") or "")
-                if live is not None and str(live.get("name") or "") == ad.name and configured_status == campaign.status:
+                if campaign.creative_materialization_route != 'source_reference_destination_canary' and live is not None and str(live.get("name") or "") == ad.name and configured_status == campaign.status:
                     offset += 1
                     continue
+                from .shein_reference_destination import update_body
                 ad_name_ops.append(BatchOperation(
                     f"recovery_ad_name_update_{offset + 1}",
                     "POST",
                     copied_ad_ids[offset],
-                    body={"name": ad.name, "status": campaign.status},
+                    body=update_body(campaign, ad),
                     kind="ad_name_update",
                 ))
                 offset += 1

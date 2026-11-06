@@ -77,6 +77,9 @@ def validate_manifest(manifest, account):
 
 
 def parameters(campaign, ad):
+    from .shein_reference_destination import ROUTE as reference_route, parameters as reference_parameters
+    if campaign.creative_materialization_route == reference_route:
+        return reference_parameters(campaign, ad)
     if campaign.creative_materialization_route!=ROUTE:
         return copy.deepcopy(ad.creative_payload)
     require_shape(campaign)

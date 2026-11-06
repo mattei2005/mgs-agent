@@ -189,7 +189,8 @@ class Planner:
                         body={"adset_id": f"{{adset_id_{ci}}}", "creative_parameters": parameters(campaign, ad), "status_option": campaign.status, "rename_options": {"rename_strategy": "NO_RENAME"}},
                         kind="ad_copy_with_creative",
                     ))
-                    ad_name_updates.append(BatchOperation(name=f"ad_name_update_{ci}_{ai}", method="POST", relative_url=f"{{copied_ad_id_{ci}_{ai}}}", body={"name": ad.name, "status": campaign.status}, kind="ad_name_update"))
+                    from .shein_reference_destination import update_body
+                    ad_name_updates.append(BatchOperation(name=f"ad_name_update_{ci}_{ai}", method="POST", relative_url=f"{{copied_ad_id_{ci}_{ai}}}", body=update_body(campaign, ad), kind="ad_name_update"))
         common = (
             StagePlan("campaign_copy", tuple(copies)),
             StagePlan("adset_copy", tuple(adset_copies)),

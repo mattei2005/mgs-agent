@@ -245,7 +245,7 @@ class CampaignSpec:
         creative_materialization_route = str(
             value.get("creative_materialization_route") or "inline_copy"
         )
-        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase", "source_definition_native_inherit"}:
+        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase", "source_definition_native_inherit", "source_reference_destination_canary"}:
             raise ManifestError("unsupported creative_materialization_route")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
@@ -432,6 +432,8 @@ class CampaignSpec:
         from .shein_native_inheritance import require_shape
         try:
             require_shape(result)
+            from .shein_reference_destination import require_shape as require_reference_shape
+            require_reference_shape(result)
         except ValueError as exc:
             raise ManifestError(str(exc)) from exc
         return result
