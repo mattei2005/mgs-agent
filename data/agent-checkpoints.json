@@ -7507,12 +7507,12 @@
     {
       "agent": "zeus",
       "id": "meta-b0097-1568267310823645219",
-      "next_step": "Validar app/token/Graph e Sheet SA; canário, backup, baseline, repetição limpa; ciclo agendado e readback",
+      "next_step": "Operação normal: monitor acompanha entrada dos nove perfis pendentes e limpa X automaticamente; nenhuma execução manual pendente",
       "objective": "Validar e substituir somente B009-6 por B009-7 na rota existente, preservando canal, cron e pausas alheias",
-      "source": "discord:message:1568267310823645219;data/meta-app-registry.json",
-      "state": "preflight iniciado; autor rodolfo confirmado na mensagem 1568267310823645219; novo título b009-7 localizado por id imutável",
+      "source": "discord:message:1568267310823645219;backup:/root/mgs-agent/backups/meta-app-b0096-to-b0097-1568267310823645219;report-infra:1568268170815340577",
+      "state": "concluído e validado: b009-7 ativo na mesma rota/canal; item/app_name/graph/token app-bound aprovados; canário, baseline silencioso e repetição limpa. primeiro ciclo agendado validado 09:16:47 est: 10 rotas, zero erros; sheet sa 1/10 presentes e 9 pendentes, zero divergências. sem novo alerta durante o ciclo validado, sem alerta forçado. pausas b004-10/b006-9 preservadas. report-infra 1568268170815340577 confirmado por readback.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T14:15:01+00:00"
+      "updated_at": "2026-11-06T14:18:20+00:00"
     },
     {
       "agent": "zeus",
@@ -8856,5 +8856,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T14:15:01+00:00"
+  "updated_at": "2026-11-06T14:18:20+00:00"
 }
