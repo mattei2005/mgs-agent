@@ -1,0 +1,14 @@
+{
+  "reason": "Missing standard VID bucket in retained-source consolidation for current authorized US/SHEIN/EN intake",
+  "scope": "Provision only existing canonical hierarchy IMG|VID/01_READY|99_LEGACY; same private maintenance lane, no ACL/credentials/delete/campaign writes",
+  "files": [
+    {
+      "file": "scripts/mgs_flat_consolidation.py",
+      "sha256_before": "42d0a1b266ec0bcf40533fdc0e2003494e6b553c5b847cb34eb087a99c9c9ff5"
+    },
+    {
+      "file": "tests/test_mgs_flat_consolidation.py",
+      "sha256_before": "7df704b878a04f019b2d26db95b9a51e95a14586e61efd53b5fd399f00c43f67"
+    }
+  ]
+}
