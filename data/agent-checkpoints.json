@@ -7486,6 +7486,16 @@
     },
     {
       "agent": "zeus",
+      "id": "meta-b00610-1568272831517823099",
+      "next_step": "Validar app/token/Graph e Sheet SA; canário, backup, baseline, repetição limpa; ciclo agendado e readback",
+      "objective": "Validar e substituir somente B006-9 por B006-10 na rota existente, preservando canal, cron e pausas alheias",
+      "source": "discord:message:1568272831517823099;data/meta-app-registry.json",
+      "state": "preflight iniciado; autor rodolfo confirmado na mensagem 1568272831517823099; novo título b006-10 localizado por id imutável",
+      "thread_id": "1568264305768534178",
+      "updated_at": "2026-11-06T14:36:44+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "meta-b0069-1565063938130059275",
       "next_step": "Nenhuma execução manual pendente; monitor acompanha entrada dos quatro perfis na cadência existente",
       "objective": "Validar e substituir somente B006-8 por B006-9 na mesma rota, preservando canal, cron e pausas de outros apps",
@@ -8856,5 +8866,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T14:28:39+00:00"
+  "updated_at": "2026-11-06T14:36:44+00:00"
 }

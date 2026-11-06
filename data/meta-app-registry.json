@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-11-06T09:15:24.643629-05:00",
+  "updated_at": "2026-11-06T09:38:16.602864-05:00",
   "updated_by": "zeus",
   "authorized_by": "Rodolfo Mattei",
-  "source_message_id": "1568267310823645219",
+  "source_message_id": "1568272831517823099",
   "guild_id": "1185714635991679006",
   "verification_ignored_profiles": {
     "policy": "direct_traffic_no_meta_role_verification",
@@ -62,12 +62,12 @@
       "expected_sheet_roles": 14
     },
     {
-      "app": "B006-9",
+      "app": "B006-10",
       "channel_id": "1521252068319297666",
       "channel_name": "b006-2-app-status",
-      "admin": "Gentil Alves Ribeiro",
-      "onepassword_item_title": "BOT B006-9 Token - Gentil Alves Ribeiro",
-      "expected_sheet_roles": 11,
+      "admin": "Anre Kameza",
+      "onepassword_item_title": "BOT B006-10 Token - Anre Kameza",
+      "expected_sheet_roles": 10,
       "onepassword_item_id": "roq46dh6er4aw7exhlzm55menu"
     },
     {
@@ -557,6 +557,13 @@
       "retired_at": "2026-11-06T09:15:24.643653-05:00",
       "source_message_id": "1568267310823645219",
       "backup": "/root/mgs-agent/backups/meta-app-b0096-to-b0097-1568267310823645219"
+    },
+    {
+      "app": "B006-9",
+      "replacement": "B006-10",
+      "retired_at": "2026-11-06T09:38:16.602883-05:00",
+      "source_message_id": "1568272831517823099",
+      "backup": "/root/mgs-agent/backups/meta-app-b0069-to-b00610-1568272831517823099"
     }
   ]
 }
