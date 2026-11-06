@@ -6,6 +6,10 @@
 2. Separate an idle process lock from the persisted Engine writer lease. Confirm `COMPLETE_PAUSED` Engine result, exact campaign IDs, completed checkpoint with `manual_reconciliation_required=false`, released `COMPLETE` lease with `blocks_readers=false`, and live historical campaigns PAUSED. Missing/ambiguous facts remain dependencies.
 3. Verify exact asset coverage and reservations, including lineage, canonical filename, checksums/pixel identity and account media IDs. Distinct filenames alone do not prove distinct media. Never release a reservation, change a manifest, forge a terminal phase or accept a targeting difference to unblock scheduling.
 
+## Creative intake reservations are not automatically campaign writers
+
+When a dependency labels a `reservation_request_id` as a campaign whose state is missing, first compare that exact ID with the asset's recorded `flat_request_id` and the complete Creative Ops intake receipts. A completed common intake can retain its own reservation identity without ever having a `single-clone` campaign state. Treat this as a diagnostic classification, not automatic authority to release or transfer stock: verify exact lineage, native folder, bytes/checksums, campaign-use evidence and original delivery/history under the approved scope. Never create a fictitious runner state, erase history or replay an already-reconciled transfer. Keep any demonstrated reconciliation receipts and existing holds; changes to queue predicates or reservation ownership require their own scoped maintenance, locks/CAS and regressions. If an Ares hot-path reference exceeds the skill writer's size limit, preserve the failed rollback and record the procedure in the relevant short Zeus reference; do not compact or edit another agent's skill without its Critical Subset confirmation.
+
 ## Central representation
 
 - `ares_campaign_v3.shein_decision_wait` represents `WAITING_HUMAN_DECISION` separately under `state/shein-campaigns/queue/decision-waits/<request>.json`. It is scheduling evidence, not human authorization, QA, cancellation or campaign completion.

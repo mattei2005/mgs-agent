@@ -61745,6 +61745,50 @@
       },
       "report_infra_message_id": "1568347763941314814",
       "report_infra_readback": true
+    },
+    {
+      "id": "manager-code-interop-t_80979129",
+      "type": "scoped_maintenance",
+      "task_id": "t_80979129",
+      "request_id": "shein-1568405784147267735",
+      "actor": "zeus",
+      "source_agent": "ares",
+      "authority_message_id": "1558142033774776411",
+      "source_messages": [
+        "1568405784147267735",
+        "1568405804032327733",
+        "1568406018361262152"
+      ],
+      "paths": [
+        "scripts/ares_manager_storage_standard.py",
+        "tests/test_manager_code_interop.py",
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/manager-storage-standard.md",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-request-queue-decision-waits.md"
+      ],
+      "sha256": {
+        "scripts/ares_manager_storage_standard.py": "08f5472fccdf27fa182ba4863ba37d3f865b41e36a85ae696bbc173bf6438fe1",
+        "tests/test_manager_code_interop.py": "6c1f12d630a7fd4439520f2de4569fbc93a13ab5e0af183ae81a739b837fb859",
+        "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/references/manager-storage-standard.md": "fe429b5671dc717c363aedc037dfed7e5d51cf04177667f73d6c1f095bcb3370",
+        "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/references/shein-request-queue-decision-waits.md": "7698bb5b3d0d1ae4d23c8c24705e902b84a3fd54f9138cb2947e0b2610309d1b"
+      },
+      "backup": "data/ares/meta-ads/audit/shein/maintenance/t_80979129/backup/scripts/ares_manager_storage_standard.py",
+      "evidence_dir": "data/ares/meta-ads/audit/shein/maintenance/t_80979129",
+      "tests": 173,
+      "test_modules": 12,
+      "integration": "real unchanged G006 profile -> g006 IMG/ES exclusive; canonical SA GET-only",
+      "no_prepare_no_campaign": true,
+      "protected_files_unchanged": true,
+      "delivery_owner": "ares",
+      "delivery_task_id": "t_515ea186",
+      "checked_at": "2026-11-06T23:37:56.556152+00:00",
+      "report_infra": {
+        "message_id": "1568409179268452383",
+        "channel_id": "1498132022634483894",
+        "url": "https://discord.com/channels/1185714635991679006/1498132022634483894/1568409179268452383",
+        "readback_verified": true,
+        "empty_content": true,
+        "mentions": 0
+      }
     }
   ],
   "profile_skill_references": [
@@ -64909,8 +64953,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares_manager_storage_standard.py",
-      "size_bytes": 15483,
-      "modified_at": "2026-11-01T12:25:22-05:00"
+      "size_bytes": 15616,
+      "modified_at": "2026-11-01T12:25:22-05:00",
+      "sha256": "08f5472fccdf27fa182ba4863ba37d3f865b41e36a85ae696bbc173bf6438fe1",
+      "maintenance_task_id": "t_80979129"
     },
     {
       "path": "/root/mgs-agent/scripts/ares_manual_intake_completion.py",
