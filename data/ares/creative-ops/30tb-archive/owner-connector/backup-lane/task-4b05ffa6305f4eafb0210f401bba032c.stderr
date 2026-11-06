@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 193, in <module>
+    result=activate_handoff() if args.action=='activate-handoff' else prepare_historical() if args.action=='prepare-historical' else tick();print(json.dumps(result));raise SystemExit(2 if result.get('status')=='blocked' else 0)
+                                                                                                                                     ~~~~^^
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 161, in tick
+    return tick_claimed()
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 167, in tick_claimed
+    owner=Owner();sa=b.Drive(True);state=b.read_json(a.STATE);journal=t.Journal(HOME/'journal.json');done=[];blocked=[]
+  File "/root/mgs-agent/scripts/mgs_private_backup_transport.py", line 35, in __init__
+    def __init__(self):super().__init__();self.move_binding=None
+                       ~~~~~~~~~~~~~~~~^^
+  File "/root/mgs-agent/scripts/mgs_archive_owner_transport.py", line 87, in __init__
+    self._auth_lock=threading.RLock();self.google=auth.Google();self.credentials=f;self.base='https://www.googleapis.com/drive/v3/';self.sources=set();self.parents={b.ARCHIVE_ROOT};self.refresh()
+                                                                                                                                                                                     ~~~~~~~~~~~~^^
+  File "/root/mgs-agent/scripts/mgs_archive_owner_transport.py", line 91, in refresh
+    t=self.google.refresh(self.credentials,self.credentials['refresh_token'])
+  File "/root/mgs-agent/scripts/mgs_archive_owner_auth.py", line 59, in refresh
+    def refresh(self,client,refresh):return self.request('https://oauth2.googleapis.com/token',data={'client_id':client['client_id'],'client_secret':client['client_secret'],'refresh_token':refresh,'grant_type':'refresh_token'})
+                                            ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/scripts/mgs_archive_owner_auth.py", line 56, in request
+    except HTTPError as e:raise AuthError('GOOGLE_HTTP_'+str(e.code)) from None
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mgs_archive_owner_auth.AuthError: GOOGLE_HTTP_502
