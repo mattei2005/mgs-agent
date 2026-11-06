@@ -21,7 +21,7 @@ Esta skill é de **Content Operations** e pertence à Atena. Zeus pode auditar/o
 ## Definir cobertura antes da coleta
 
 1. Classifique o pedido como inventário completo do site, lote fechado de artigos ou revisão de IDs existentes.
-2. Para lote fechado, use o manifesto autorizado como denominador: preserve os IDs esperados, inclusive bloqueados e ainda não criados. Confira unicidade e cobertura em código; não enumere o site inteiro para reconstruir um lote conhecido.
+2. Para lote fechado, use o manifesto autorizado como denominador: preserve os IDs esperados, inclusive bloqueados e ainda não criados. Resolva cada número citado pela gestora para a tupla `número de revisão → ID local → domínio → post ID → URL` antes de consultar ou delegar; numeração do relatório, sufixo do ID local, ID WordPress e linha da planilha podem ser diferentes. Confira unicidade, cobertura e faixas de ownership em código; não derive o alvo do número isolado nem enumere o site inteiro para reconstruir um lote conhecido.
 3. Para inventário completo de um site autorizado, use a lista autenticada de `yydev-show-pages` e reconcilie os IDs com os registros consultados. Uma contagem isolada ou um sitemap não prova cobertura integral.
 4. Filtre registros institucionais por ID, chave ou fonte editorial pertinente **antes** de emitir saída; um lookup de continuidade não deve virar dump de registro global ou inventário de outros escopos.
 
