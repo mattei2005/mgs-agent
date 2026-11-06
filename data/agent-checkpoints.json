@@ -6227,12 +6227,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-standard-copy-1568337081321791502",
-      "next_step": "Nao editar/reativar/recriarC240/C241 e nao pedircontroleUI nosobjetosagoradeletados. Preservarreceipts/IDs/primeirosmanifests. Para proximaoperacao,novo request autorizado econta/sitecorretos;nao prometer rotageral automatica nem reutilizarUTMfonte. Concluir rematerializacao/tracking e integracao/validacao centrais antesdeafirmar pronto;novo canario somente comescopoautorizado.",
-      "objective": "Fechar testesC240/C241 conforme exclusao autorizada e preservar diagnostico verdadeiro da duplicacao combackgroundhabilitado.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/delete-tests-1568353744800845948/journal.json",
-      "state": "rodolfo1568353744800845948 autorizou deletar amboscanarios. getfinal confirmac240120250617574780331deleted ec241120250620883100331deleted. fontec232 ecreatives/posts/midias compartilhados preservados. testes vivos encerradosporoperador;paridade de recurso porreferencia comprovada,mastracking alvo enovafluidezgeral nao foram validados;capacidadesexperimentais permanecemdesabilitadas. exclusao/aceitehumano nao transforma pendenciaemhomologacao.",
+      "next_step": "Resolver internamente a aplicacao da renumeracao na rota que preserva recursos; nao pedir nova aprovacao da regra de UTMs nem ajuste manual ao gestor como reparo. Preservar source/setup/trackinglocation e exigir readback simultaneo de recursos+tokens alvo. Sem reabrir canariosdeletados ou nova ativacao/canario porinferência.",
+      "objective": "Preservar recursos herdados e aplicar automaticamente UTMs do novo numero,conforme regra normal de duplicacao.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/standard-copy-1568337081321791502/post-create-readback.json",
+      "state": "correcao de rodolfo1568368430162378783: utms devem mudar automaticamente para novo numero,regra ja conhecida e sem nova decisao humana. replay offline dos2ads confirma expected c241 correto no manifest e actual c232 na api;falha de implementacao da rota de referencia,nao de regra/orientacao. c240/c241 seguemdeleted conforme receiptcleanup; nenhuma nova campanha/ativacao/write inferidos. features porreferencia foram preservadas,fluxocompleto nao homologado.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-06T20:00:39+00:00"
+      "updated_at": "2026-11-06T20:57:30+00:00"
     },
     {
       "agent": "ares",
@@ -8986,5 +8986,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T20:00:39+00:00"
+  "updated_at": "2026-11-06T20:57:30+00:00"
 }
