@@ -61626,7 +61626,7 @@
         "1562987037370617896",
         "1562987234351644764"
       ],
-      "state": "awaiting_native_commit_push",
+      "state": "resolved_validated",
       "cause": "Two local read-only fleet audit receipts matched sensitive parent token name; empty index, no blocked-batch commit or push began",
       "correction": "Two exact anchored .gitignore exclusions; local bytes preserved; global guard and sole native watcher unchanged",
       "paths": [
@@ -61643,9 +61643,29 @@
         "native_watcher_pid": 4029469,
         "watcher_restarted": false,
         "manual_commit_or_push": false,
-        "origin_reconciled": "audit read_only_primary_app_token_fleet_audit 11:15 ET; session final B004 blocker, no auto-push recovery writer"
+        "origin_reconciled": "audit read_only_primary_app_token_fleet_audit 11:15 ET; session final B004 blocker, no auto-push recovery writer",
+        "native_commit": "f6dd0a01927e728803400647f9fb27c539b34336",
+        "native_push_ok_at": "2026-11-06T11:31:09-05:00",
+        "head_origin_github_equal": true,
+        "monitor_dry_run_failures": 0,
+        "monitor_consecutive_failures": 0,
+        "public_recovery_post_suppressed": true,
+        "transport_validation": "MGS_DRY_RUN=1 suppresses poster only; real checks and state transition executed; final reply delivered by originating resolver"
       },
-      "updated_at": "2026-11-06T16:30:10.045671+00:00"
+      "updated_at": "2026-11-06T16:31:55.214698+00:00",
+      "hashes": {
+        ".gitignore": "2327dee56efbc2a6387448407091bb64c367a1028a7312bfe4c78f485acc3b0f",
+        "tests/test_auto_commit_sensitive_paths.py": "fe3c14413304bb700676982fae85c1287a1330c4182523459a341ee7986d4056",
+        "tests/test_auto_commit_empty_index.py": "962c21dacfd57994fa8e8509123386cc282de1a2b4e0275f36672a30688741ed"
+      },
+      "report_infra": {
+        "message_id": "1568301921314541721",
+        "channel_id": "1498132022634483894",
+        "content_empty": true,
+        "mentions": 0,
+        "readback_verified": true,
+        "http": 200
+      }
     }
   ],
   "profile_skill_references": [

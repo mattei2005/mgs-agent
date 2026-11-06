@@ -6097,12 +6097,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-background-api-1568292020517081140",
-      "next_step": "Instalar branch de heranca nativa restrito ao requestcanario, testar offline e validar plan; executar mesmo runner central e comprovar features/tracking/midia/status e zero spend. Sem liberalizacao global antes de prova.",
-      "objective": "Validar e corrigir por canario autorizado a heranca de image_background_gen na duplicacao API da C232 sem desligar feature.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/native-inheritance-1568295434081014004/maintenance-inventory.json",
-      "state": "rodolfo1568295434081014004 autorizou teste e solucao. escopo1campanha tecnica,2ads,usd100 diarios configurados,inteiramentepaused,semativacao;originais ec235-c239 ativos preservados. lease da contacomplete e nao bloqueia leitores. manutencao separada do writer iniciada com backup/inventario para rota nativa restrita ao canario.",
+      "next_step": "Identificar numero/ID de duplicacao manual comprovada da propriaC232 para comparar campos e elegibilidade com a API;C233 tem lineage mas produto/midia diferente e nao foi comprovada como controleliteral. Sem baseline manual exato ou respostaMeta sobre legado, preservar request/manifests/IDs/primeiros erros e nao repetircriacao nem relaxarQA. Escopo eventualcanario adicional requer delimitacao propria; nao pedir para desligarBG.",
+      "objective": "Resolver duplicacao fiel da C232 por API preservando enrollment herdado, sem desligar recursos nem alterar campanhas ativas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/native-inheritance-1568295434081014004/final-diagnostic-receipt.json",
+      "state": "testes reais executados sob1568295434081014004: canarioc240 id120250617574780331,1adg/2ads paused,usd100 configurados;insights sem linhas. heranca com overrides e controleadcopies semcreative_parameters rejeitados100/3858504(standard_enhancements legado). dofvazio criou2ads mas mudou23opt_in por ad paraopt_out,solucao rejeitada. validate-only documentado no edgeads v26e27 retornou100/3858293 combgopt_in e nenhumid. c232 ec235-c239 integralmente inalteradas nos campos conferidos. rota experimental desabilitada;131testes+70subtests verdes. solucao fiel ainda nao validada; nao concluir como sucesso nem ativarcanario.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-06T16:08:45+00:00"
+      "updated_at": "2026-11-06T16:31:40+00:00"
     },
     {
       "agent": "ares",
@@ -8926,5 +8926,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T16:19:12+00:00"
+  "updated_at": "2026-11-06T16:31:40+00:00"
 }
