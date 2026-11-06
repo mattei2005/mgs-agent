@@ -369,6 +369,8 @@ Depois de `featured_media` ou troca de imagem interna, atualizar/refresh Yoast q
 
 ## Arquivos de referência
 
+- `references/customizer-footer-copy-repair.md` — distinguir aviso de rodapé do corpo, corrigir somente a cópia armazenada por idioma e comprovar preservação/renovação da URL específica sem alterar templates ou locale.
+
 - `references/local-batch-source-evidence-qa.md` — evidências por artigo, recuperação de shell/PDF escaneado e validação final de lotes locais.
 - `references/localized-document-language-existing-renderer.md` — localização por documento usando renderer instalado, efeitos do save WPCode, slashing/ativação em processos separados, canário e QA público preservando locale global.
 - `references/public-readonly-technical-audit.md` — auditoria pública sem credenciais/escritas: HTML/head, robots, imagens sociais/schema, datas principais, sitemaps e reconciliação determinística.

@@ -1,0 +1,22 @@
+# Análise local com o bundle exato instalado
+
+Use quando o portal permite leitura WordPress/SFTP/JS, mas não oferece transporte certificado de score-only. O cálculo local não concede autorização para implantar código ou persistir resultados.
+
+1. Gateie cada domínio literal e reconcilie IDs, writer e pausas antes de credencial/rede. Alvo pausado pode ficar sem cálculo atual; não reutilize snapshot histórico como atual.
+2. Capture GET autenticado `posts/ID?context=edit`, OPTIONS, termos, site_key, versão do plugin, idioma do site e locale da identidade. Registre corpo raw/rendered e hashes. Sem locale nativo por post, triangule tags institucionais `lang_*` + país e o contexto autorizado; não mude locale global.
+3. Para Yoast28.3, os assets reais são `wp-content/plugins/wordpress-seo/js/dist/externals/analysis.js` e `js/dist/languages/en.js`/`es.js`, não `js/dist/analysis.js`. Descubra o caminho na instalação/arquivo oficial em vez de repetir um404. Compare hashes dos bytes de produção com o arquivo oficial da versão exata; versão npm sozinha não prova identidade.
+4. É possível executar esses bundles originais, sem alteração, em um `vm` Node local: `window.yoast.featureFlag`, `window.wp.i18n` e `window.lodash` são dependências externas. Use os módulos genuínos já disponíveis; não fabrique resultados nem substitua assessments. O bundle de idioma exporta `window.yoast.Researcher.default`; o de análise exporta `window.yoast.analysis.Paper` e `assessors.SEOAssessor`/`ContentAssessor`. Preserve a instância do Researcher como primeiro argumento.
+5. Meça o título em Chromium offline pelo helper original do próprio build. Na28.3, o módulo49258 de `externals/analysis.js` contém `measureTextWidth` e a constante lexical `yoast-measurement-element`. Extraia o módulo byte-exato com guard de hash/binding e execute-o em DOM real; não use uma largura inventada nem tamanho em caracteres. Outros builds podem alterar o ID: redescubra, não extrapole.
+6. Analise rendered final, título nativo expandido, descrição, keyword, slug e permalink. Quando o título customizado é literal e igual ao `yoast_head_json.title`, registre essa igualdade e ausência de variáveis. Salve input/hash, todos assessments e erros; uma penalidade válida não é sentinel de erro.
+7. Registre o limite de contexto: bundle exato e Researcher correto não provam paridade com collector de blocos, modificadores, feature flags ou configuração do editor autenticado. Flags vazias/defaults e mensagens de assessment em inglês devem ficar explícitos, mesmo quando o Researcher seja ES. Não confunda tradução das mensagens com algoritmo linguístico.
+8. Releia os mesmos IDs após o cálculo; exija input renderizado ainda atual e campos protegidos intactos. Separe `computed_not_persisted`, leitura nativa disponível e validação numérica das duas camadas.
+
+## Abilities nativas: prova parcial, não persistência
+
+Inspecione o contrato e use GET com `input[number_of_posts]=10` para `yoast-seo/get-seo-scores/run` e `get-readability-scores/run`. Na28.3, `src/abilities/application/score-retriever.php` lê os indexables já armazenados; não recalcula. A resposta tem título e categoria, SEO também keyphrase, mas não ID nem valor numérico. Faça binding único por título/keyphrase, mantendo a limitação: `na` não distingue NULL de zero, não lê postmeta e não comprova unicidade do indexable.
+
+Ausência de outputs no OPTIONS não prova banco vazio. SFTP GET do watcher comprova implementação, não transporte de execução. Não trate REST bulk-search/social como writer de score: são inputs. Metabox normal salva o post; AJAX core rejeita metas protegidas. Não ative Elementor ou outro plugin para obter uma rota; além de gate próprio, o handler pode escrever checkboxes/multiselects não enviados. Sem backup/CAS/write-only-two-output-metas/readback exato, mantenha a persistência não validada e descreva a capacidade faltante, sem reabrir autorização editorial genérica.
+
+## Estado de segurança preexistente
+
+Leia WP2FA antes/depois sem alterá-lo quando não for necessário. Se já estiver inactive, registre e comunique a observação sem atribuir causa; não o ative por inferência da autorização de suspensão temporária. Nunca declare restauração de uma suspensão que não realizou.

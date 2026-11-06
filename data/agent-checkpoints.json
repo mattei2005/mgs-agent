@@ -7487,12 +7487,12 @@
     {
       "agent": "zeus",
       "id": "meta-b00610-1568272831517823099",
-      "next_step": "Validar app/token/Graph e Sheet SA; canário, backup, baseline, repetição limpa; ciclo agendado e readback",
+      "next_step": "Operação normal: monitor acompanha entrada dos cinco perfis pendentes e limpa X automaticamente; nenhuma execução manual pendente",
       "objective": "Validar e substituir somente B006-9 por B006-10 na rota existente, preservando canal, cron e pausas alheias",
-      "source": "discord:message:1568272831517823099;data/meta-app-registry.json",
-      "state": "preflight iniciado; autor rodolfo confirmado na mensagem 1568272831517823099; novo título b006-10 localizado por id imutável",
+      "source": "discord:message:1568272831517823099;backup:/root/mgs-agent/backups/meta-app-b0069-to-b00610-1568272831517823099;report-infra:1568274329932927017",
+      "state": "concluído e validado: b006-10 ativo na mesma rota/canal; item/app_name/graph/token app-bound aprovados; canário, baseline silencioso e repetição limpa. primeiro ciclo agendado validado 09:40:29 est: 11 rotas, zero erros; sheet sa 5/10 presentes e 5 pendentes, zero divergências. alerta automático das entradas edleide gomes/rori ginbresil ginting/sobirin kemana mana e tabela completa confirmados. pausa b004-10 preservada. report-infra 1568274329932927017 confirmado por readback.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T14:36:44+00:00"
+      "updated_at": "2026-11-06T14:42:50+00:00"
     },
     {
       "agent": "zeus",
@@ -8195,6 +8195,16 @@
       "updated_at": "2026-11-05T14:30:53+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1568273779581386903",
+      "next_step": "Perguntar na origem se Kelly autoriza desligar somente Geração de plano de fundo da imagem nas cinco cópias, mantendo fonte intacta. Após resposta, validar diálogo/autoridade live e suporte tipado ao binding atual; retomar somente filhos ausentes pelo executor central; QA integral e readback ACTIVE antes de concluir.",
+      "objective": "Duplicar C023 cinco vezes na Mavroa G005; USD100/dia cada; COCAP USD0.50; agora 06/11",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568273779581386903/background-blocker-readback.json",
+      "state": "aguardando decisão material: meta100/3858293 exige catálogo para image_background_gen opt_in nos dois anúncios fonte. readback comprova c026/c027 paused usd100 cost_cap cap50, um conjunto paused por campanha e zero anúncios com paginação completa. outras três cópias não executadas. nenhuma ativação. mesmo request/manifests/ids e relógio preservados.",
+      "thread_id": "1558133898209394780",
+      "updated_at": "2026-11-06T14:42:54+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -8866,5 +8876,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T14:36:44+00:00"
+  "updated_at": "2026-11-06T14:42:54+00:00"
 }

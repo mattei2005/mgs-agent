@@ -71,6 +71,8 @@ Após alterar `featured_media`, confira nesta ordem o attachment/primeira imagem
 
 ## Preflight de análise e persistência
 
+Quando só houver leitura nativa, consulte `references/exact-production-bundle-readonly-analysis.md` para executar localmente o bundle real instalado e seus Researchers, medir título pelo helper original e separar cálculo de abilities/categorias nativas e persistência numérica. O arquivo também cobre a limitação de IDs nas abilities e o estado WP2FA preexistente; nenhum desses caminhos autoriza criar transporte.
+
 1. Resolva os IDs autorizados, instalação, owner, prefixo, versão Yoast, schema REST e transporte real antes de executar o scorer. Não derive webroot do `site_key` nem reutilize um wrapper que fixa outro host/idioma. Diferencie parametrização de adaptador local já autorizada de alteração do scorer compartilhado, acesso, plugin ou runtime; estas últimas seguem o escalonamento próprio.
 2. Confirme o idioma de **cada post**: com Polylang, leia `pll_get_post_language($id,'slug')` e `'locale'`; sem locale nativo por post, confronte site_key autorizado, marcadores institucionais de idioma/mercado e hash da revisão independente. Preserve e registre global/user locale mesmo quando diferirem do conteúdo; uma convenção linguística como `es_ES` não muda o mercado financeiro do artigo.
 3. Selecione o Researcher genuíno correspondente, expanda o SEO title pelo WordPress e meça `titleWidth` com o helper original no DOM isolado. Use rendered final e permalink real, registrando input/hash e estado esperado. Igualdade de versão npm não prova paridade com o editor.

@@ -35,6 +35,13 @@ Use somente quando a fonte canônica autorizar corrigir a apresentação localiz
 4. Valide cada URL normal e controles negativos, além de todos os campos nativos protegidos. Se já mostrar a alteração, não limpe cache novamente; se estiver antiga, diagnostique e renove somente cópias seletivas cobertas pela autoridade vigente.
 5. Faça rollback pela desativação nativa do mesmo snippet, sem apagar arquivo/post/termo nem sobrescrever opções globais antigas. Comprove o efeito público; draft ou código correto isolado não encerra rollback.
 
+## Rótulos literais em arquivos do tema existente
+
+- Resolva o tema ativo por `GET /themes?context=edit` e a fonte instalada, não pela classe `wp-theme-*` do body: a classe sanitiza pontos do stylesheet e pode sugerir um diretório inexistente. Um `get_search_form()` no header também pode delegar o placeholder a um callback em `functions.php`, sem existir `searchform.php`.
+- Quando o rótulo de autoria estiver literal em `single.php`, altere somente sua expressão e o renderer de busca já instalado; mantenha o fallback original fora dos IDs/paths/host/tags e idioma de documento autorizados. Use um guard comum, permita tracking neutro explicitamente e rejeite consultas funcionais; não use locale global, output-buffer amplo, novo plugin ou snippet como atalho.
+- Na rota nativa `edit-theme-plugin-file`, preserve nonce, stylesheet e arquivo exatos do form e mantenha a validação/rollback de loopback do core. Registre intenção antes de cada arquivo, compare a fonte imediatamente e faça readback independente por SFTP somente leitura; se precisar reverter um helper compartilhado, restaure primeiro o consumidor e depois o helper. Essa rota muda arquivo, OPcache/cache de tema e transient temporário do core, não comprova identidade integral do banco; compare separadamente campos REST protegidos e HTML público.
+- Na prova desktop, aceite a diferença nativa entre `innerWidth` e `clientWidth` causada pela barra vertical, exigindo `scrollWidth<=clientWidth`; no mobile de 390 px continue exigindo screen/client/inner reais de 390 px. Persista cada amostra antes dos asserts para não perder evidência num diagnóstico do coletor.
+
 ## Tipos e proveniência de coletores
 
 - Reflection pode retornar `file=false` para função interna/closure sem arquivo; valide que é string antes de operações de caminho. Compare somente callbacks com fonte conhecida, sem relaxar guard porque um tipo local falhou.
