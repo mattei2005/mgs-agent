@@ -64,6 +64,8 @@ def bid_delta(request, source):
 
 
 def build(request, source, number, account_config):
+    from .shein_native_inheritance import selected_request
+    selected_request(request, source, account_config)
     if not re.fullmatch(r'[1-9][0-9]*', str(request.get('quantity', 1))) or not 1 <= int(request.get('quantity', 1)) <= 100:
         raise ValueError('quantity must be an exact integer from 1 to 100')
     quantity = int(request.get('quantity', 1))
@@ -330,5 +332,8 @@ def _build_one(request, source, number, account_config):
                 shell['creative_materialization_route'] = 'source_definition_two_phase'
             else:
                 shell['creative_materialization_route'] = 'full_media_two_phase' if any(ad['creative_payload'].get('asset_feed_spec') for ad in ads) else 'existing_post_two_phase'
+            from .shein_native_inheritance import selected_request, ROUTE
+            if selected_request(request, source, account_config):
+                shell['creative_materialization_route'] = ROUTE
     return {'schema_version': 3, 'request_id': request['request_id'], 'operation': 'SHEIN-US-DIRECT', 'graph_version': 'v26.0',
             'created_at': datetime.now(timezone.utc).isoformat(), 'prevalidated': False, 'execution_mode': mode, 'campaigns': [shell]}

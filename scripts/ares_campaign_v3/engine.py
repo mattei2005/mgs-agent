@@ -486,13 +486,14 @@ class CampaignEngine:
             record["stage"] = "children_created_readback_pending"
         else:
             ad_copy_ops: list[BatchOperation] = []
+            from .shein_native_inheritance import parameters
             for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
                 for ai, ad in enumerate(campaign.ads, 1):
                     ad_copy_ops.append(BatchOperation(
                         f"ad_copy_{ci}_{ai}", "POST", f"{ad.source_ad_id}/copies",
                         body={
                             "adset_id": adset_id,
-                            "creative_parameters": copy_parameters(ad.creative_payload, (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation')),
+                            "creative_parameters": copy_parameters(parameters(campaign, ad), (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation')),
                             "status_option": campaign.status,
                             "rename_options": {"rename_strategy": "NO_RENAME"},
                         },
@@ -1130,7 +1131,7 @@ class CampaignEngine:
         redundant_ops: list[BatchOperation] = []
         from .prestaged_reconciliation import resolve_slot, copy_parameters
         from .prestaged_two_phase import rejected_slots, materialize as two_phase_materialize
-        fallback_slots = rejected_slots(record) if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT' else set()
+        fallback_slots = rejected_slots(record) if (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation') == 'SHEIN-US-DIRECT' and 'source_definition_native_inherit' not in routes else set()
         fallback_entries = []
         for ci, (campaign, adset_id) in enumerate(zip(bundle.campaigns, adset_ids), 1):
             live_rows = live_by_campaign[ci]
@@ -1157,13 +1158,14 @@ class CampaignEngine:
                         raise ExecutionFailed("recovery readback returned an ad without id")
                     resolved_rows[(ci, ai)] = chosen
                     continue
+                from .shein_native_inheritance import parameters
                 missing_ops.append(BatchOperation(
                     f"recovery_ad_copy_{ci}_{ai}",
                     "POST",
                     f"{ad.source_ad_id}/copies",
                     body={
                         "adset_id": adset_id,
-                        "creative_parameters": copy_parameters(ad.creative_payload, (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation')),
+                        "creative_parameters": copy_parameters(parameters(campaign, ad), (self.config.get('accounts', {}).get(bundle.account_id) or {}).get('operation')),
                         "status_option": campaign.status,
                         "rename_options": {"rename_strategy": "NO_RENAME"},
                     },

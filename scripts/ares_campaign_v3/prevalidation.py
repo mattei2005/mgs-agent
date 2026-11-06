@@ -166,8 +166,16 @@ def validate_account_policy(manifest: Manifest, config: dict[str, Any]) -> None:
             )
 
         required_route = str(policy.get("creative_materialization_route") or "")
+        native_inheritance = False
+        if campaign.creative_materialization_route == 'source_definition_native_inherit':
+            from .shein_native_inheritance import validate_manifest
+            try:
+                native_inheritance = validate_manifest(manifest, account)
+            except ValueError as exc:
+                raise ManifestError(str(exc)) from exc
         if (
             required_route
+            and not native_inheritance
             and campaign.creative_materialization_route != required_route
             and campaign.creative_materialization_route not in (policy.get("allowed_creative_materialization_routes") or [])
         ):

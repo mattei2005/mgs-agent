@@ -245,7 +245,7 @@ class CampaignSpec:
         creative_materialization_route = str(
             value.get("creative_materialization_route") or "inline_copy"
         )
-        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase"}:
+        if creative_materialization_route not in {"inline_copy", "existing_post_two_phase", "full_media_two_phase", "source_definition_two_phase", "source_definition_native_inherit"}:
             raise ManifestError("unsupported creative_materialization_route")
         status = str(value["status"]).upper()
         if status not in {"PAUSED", "ACTIVE"}:
@@ -408,7 +408,7 @@ class CampaignSpec:
             raise ManifestError(f"{mode} forbids adset_updates")
         if mode == 'pure_clone' and adset_updates and not bid_override:
             raise ManifestError(f"{mode} forbids adset_updates")
-        return cls(
+        result = cls(
             idempotency_key=str(value["idempotency_key"]),
             app_key=str(value["app_key"]),
             account_id=str(value["account_id"]).removeprefix("act_"),
@@ -429,6 +429,12 @@ class CampaignSpec:
             bid_override=bid_override,
             reference=reference,
         )
+        from .shein_native_inheritance import require_shape
+        try:
+            require_shape(result)
+        except ValueError as exc:
+            raise ManifestError(str(exc)) from exc
+        return result
 
 
 @dataclass(frozen=True)

@@ -457,6 +457,19 @@
     "2429758060563333": {
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Yolokfx-US-SHEIN-EN-03-G005",
+      "source_definition_native_inheritance": {
+        "enabled": true,
+        "stage": "CANARY_PAUSED_ONLY",
+        "approved_by": "344196393512075265",
+        "source_message_id": "1568295434081014004",
+        "request_ids": ["shein-native-1568295434081014004"],
+        "source_campaign_ids": ["120250603362110331"],
+        "source_adset_ids": ["120250603362140331"],
+        "source_ad_ids": ["120250603362120331", "120250603362130331"],
+        "budget_minor": 10000,
+        "max_campaigns": 1,
+        "max_ads": 2
+      },
       "operation": "SHEIN-US-DIRECT",
       "token_item": "Meta BISU - CAR+SHEIN - Digital Trust - G001-G006",
       "token_type": "business_integration_system_user_access_token",

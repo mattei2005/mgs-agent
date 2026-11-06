@@ -183,9 +183,10 @@ class Planner:
                         )
                     )
                 else:
+                    from .shein_native_inheritance import parameters
                     ad_copies.append(BatchOperation(
                         name=f"ad_copy_{ci}_{ai}", method="POST", relative_url=f"{ad.source_ad_id}/copies",
-                        body={"adset_id": f"{{adset_id_{ci}}}", "creative_parameters": ad.creative_payload, "status_option": campaign.status, "rename_options": {"rename_strategy": "NO_RENAME"}},
+                        body={"adset_id": f"{{adset_id_{ci}}}", "creative_parameters": parameters(campaign, ad), "status_option": campaign.status, "rename_options": {"rename_strategy": "NO_RENAME"}},
                         kind="ad_copy_with_creative",
                     ))
                     ad_name_updates.append(BatchOperation(name=f"ad_name_update_{ci}_{ai}", method="POST", relative_url=f"{{copied_ad_id_{ci}_{ai}}}", body={"name": ad.name, "status": campaign.status}, kind="ad_name_update"))
