@@ -318,3 +318,25 @@ def activation_authorization(target,creation,proof,*,get_message):
         raise ValueError('reviewed batch original schedule elapsed; no schedule delta approved')
     for tree in proof['trees']:validate_activation_tree(tree)
     return {**verified,'campaign_ids':ids,'adset_ids':[s[2] for s in slots]}
+
+
+# Exact independent review adapter. Preserve the historical binding above and
+# dispatch only a separately sealed descriptor/context, never by account alone.
+def _kelly_dispatch(name, original):
+    def routed(*args, **kwargs):
+        from . import shein_reviewed_background_kelly as kelly
+        if name in {'selected', 'validate_descriptor'}:
+            descriptor = args[0] if args else kwargs.get('descriptor', {})
+            if kelly.selected(descriptor):
+                return getattr(kelly, name)(*args, **kwargs)
+        elif kelly.selected_context() is not None:
+            return getattr(kelly, name)(*args, **kwargs)
+        return original(*args, **kwargs)
+    return routed
+
+
+for _route_name in ('selected', 'validate_descriptor', 'selected_context',
+                    'active_context', 'effective', 'submit_lane', 'extra_points',
+                    'resolve_bundle', 'verify_creative', 'preserved_sourcing',
+                    'validate_activation_tree', 'activation_authorization'):
+    globals()[_route_name] = _kelly_dispatch(_route_name, globals()[_route_name])
