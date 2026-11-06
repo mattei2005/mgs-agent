@@ -84,16 +84,16 @@
   ],
   "latest_refresh_qualification": {
     "status": "partial_updated_validated_pc1_search_input_unconfirmed",
-    "verified_at": "2026-11-05T21:10:14.173409-05:00",
+    "verified_at": "2026-11-06T08:09:04.001934-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-05T21:07:59.957957-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261105T210805717944",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T210508598762",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261105T210436440234",
+    "validated_metrics_at": "2026-11-06T08:06:07.418573-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T080611759059",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T080613876111",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261106T080537252998",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "d_ledger_to_live_sheet_exact": true,
@@ -354,17 +354,9 @@
       {
         "since": "2026-11-03",
         "until": "2026-11-05"
-      },
-      {
-        "since": "2026-11-02",
-        "until": "2026-11-04"
       }
     ],
     "month_periods": [
-      {
-        "since": "2026-11-01",
-        "until": "2026-11-05"
-      },
       {
         "since": "2026-11-01",
         "until": "2026-11-06"
@@ -372,9 +364,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "21070.02",
-      "balance": "500060.33",
-      "month_spend": "101294.97"
+      "average_daily": "19896.26",
+      "balance": "504256.57",
+      "month_spend": "106518.25"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -396,19 +388,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4586.04"
+        "value": "4511.53"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3209.06"
+        "value": "3588.39"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "22040.25"
+        "value": "23521.88"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -420,7 +412,7 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "16483.98"
+        "value": "15384.73"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -432,13 +424,13 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "496851.27"
+        "value": "500668.18"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "79254.72"
+        "value": "82996.37"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -450,7 +442,7 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "21070.02"
+        "value": "19896.26"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -462,13 +454,13 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "500060.33"
+        "value": "504256.57"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "101294.97"
+        "value": "106518.25"
       }
     ],
     "lease_free": true,
@@ -478,20 +470,22 @@
       "surface": "adsmanager.facebook.com/adsmanager/billing_hub/accounts",
       "worker_error": "searched_row_not_ready_336562339356179",
       "diagnosis": "Accounts/BM authenticated in AX and pixels; screenshot after attempted search shows blank search field and unfiltered001 rows. Input/focus not confirmed; underlying cause unproven. No login/2FA gate observed. No bypass/reload/alternate profile/repeated navigation.",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261105T210508598762/blocked.png",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T080613876111/blocked.png",
       "completed_h_reads": 0,
       "requires_human_authentication": false,
       "owned_tab_close_command_succeeded": true,
-      "owned_tab_closed_independently_verified": false,
-      "preexisting_surface_restored_exact_inline_ax": true,
-      "technical_dependency": "Resolve input/focus verification in approved Chrome before further reads. No current authentication action proven necessary."
+      "owned_tab_closed_independently_verified": true,
+      "preexisting_tab_labels_restored": true,
+      "preexisting_surface_restored_exact_inline_ax": false,
+      "technical_dependency": "Resolve search input/focus confirmation in approved Chrome. No login/2FA gate observed; no human authentication requirement established. Current run stopped after first failed search, no bypass/reload/alternative profile or further navigation.",
+      "visual_check": "vision_analyze read blocked.png: Digital Trust Accounts loaded; search empty, unfiltered001 rows; no provider/auth/native gate."
     },
     "payments_executed": 0,
     "meta_writes": 0,
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T2102/closure-current.json",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T0802/closure-current.json",
     "report_infra_status": "sent_verified",
     "cron_changes": 0,
     "billing_changes": 0,
@@ -499,24 +493,25 @@
       "job_id": "2ee720363d7d",
       "same_scheduled_execution": true,
       "schedule_unchanged": true,
-      "next_run_at": "2026-11-06T08:02:00-05:00"
+      "next_run_at": "2026-11-06T14:02:00-05:00"
     },
     "ui_cleanup": {
       "preexisting_tabs": 2,
       "final_tabs": 2,
       "tab_labels_exact_parity": true,
-      "inline_ax_exact_parity": true,
+      "inline_ax_exact_parity": false,
       "total_elements_parity": true,
-      "baseline_full_elements_file_missing_after_session_release": true
+      "current_meta_accounts": true,
+      "native_security_gate": false,
+      "remaining_ax_difference": {
+        "count": 1,
+        "element_role": "Button",
+        "changed_field": "label",
+        "index": 11,
+        "cause": "not established; no input or additional navigation used to change it"
+      }
     },
-    "procedural_learning": {
-      "subsystem": "skill",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/references/recurring-refresh.md",
-      "summary": "Validate periods at collection timestamp in each account timezone; next-day European partial periods valid in Eastern night ticks. Correct only stale validator after landed writes.",
-      "canonical_mirror_equal": true,
-      "sha256": "f7655f951c481c88ea40284ed888a2ac75533cdfaa866a41179b078272a342a9"
-    },
-    "report_infra_message_id": "1568085435144732703",
+    "report_infra_message_id": "1568251289979330615",
     "report_infra_readback": true
   },
   "pending_card_history": {
@@ -593,8 +588,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-05T21:10:14.173409-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261105T2102/closure-current.json"
+    "verified_at": "2026-11-06T08:09:04.001934-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T0802/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -622,7 +617,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-06T08:02:00-05:00",
+  "next_run_at": "2026-11-06T14:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
