@@ -1,0 +1,87 @@
+{
+  "verified": true,
+  "message": {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "REPORT-INFRA — modificada",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Ação",
+            "value": "modificada",
+            "inline": true
+          },
+          {
+            "name": "Tipo",
+            "value": "data/delivery-receipt",
+            "inline": true
+          },
+          {
+            "name": "Host",
+            "value": "srv1767265",
+            "inline": true
+          },
+          {
+            "name": "Path",
+            "value": "/root/mgs-agent/data/agent-checkpoints.json; /root/mgs-agent/data/infra-inventory.json; /root/mgs-agent/reports/all-app-alerts-1568333588078788669",
+            "inline": false
+          },
+          {
+            "name": "Motivo",
+            "value": "Rodolfo solicitou alertas reais nos apps 001 a 013, mensagem 1568333588078788669. Entrega concluída e recibos/checkpoint/inventário atualizados.",
+            "inline": false
+          },
+          {
+            "name": "Evidência",
+            "value": "13/13 canais verificados por objetos Discord exatos; uma família solicitada por app, 43 mensagens físicas com tabelas completas. Genérico: 12 rotas, 12 famílias, zero erros, INVEST_3D_OK. B013 dedicado: 97 alvos, 92 vinculados, 5 não vinculados confirmados, zero inconclusivos, capacidade saudável, INVEST_3D_OK. B013 aguardou ciclo nativo anterior após lock ocupado; rodada manual única concluída, processo consumido exit 0. Pausas e configs preservadas. Nenhum replay dos genéricos.",
+            "inline": false
+          },
+          {
+            "name": "Pendências Hermes",
+            "value": "indisponível",
+            "inline": false
+          },
+          {
+            "name": "Horário",
+            "value": "2026-11-06 14:07:11 EST",
+            "inline": true
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-11-06T19:07:12.312000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1568340998092881931",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1496296175014252634",
+      "username": "Zeus",
+      "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+      "discriminator": "2591",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "banner": null,
+      "accent_color": null,
+      "global_name": null,
+      "avatar_decoration_data": null,
+      "collectibles": null,
+      "display_name_styles": null,
+      "banner_color": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false
+  }
+}

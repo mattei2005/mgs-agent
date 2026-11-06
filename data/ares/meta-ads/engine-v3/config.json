@@ -458,7 +458,17 @@
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Yolokfx-US-SHEIN-EN-03-G005",
       "source_reference_destination_canary": {
-        "enabled": true,
+        "enabled": false,
+        "result": {
+          "campaign_id": "120250620883100331",
+          "number": 241,
+          "status": "PAUSED",
+          "features_preserved": true,
+          "source_reference_preserved": true,
+          "new_target_tracking_verified": false,
+          "destination_override_ignored_when_creative_id_provided": true,
+          "production_promoted": false
+        },
         "approved_by": "344196393512075265",
         "source_message_id": "1568337081321791502",
         "request_ids": ["shein-1568337081321791502"],

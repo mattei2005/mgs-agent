@@ -5587,12 +5587,12 @@
     {
       "agent": "zeus",
       "id": "all-app-alerts-1568333588078788669",
-      "next_step": "Consumir término do processo manual B013, validar família completa com a contagem linked da própria rodada, consolidar 13/13, audit e REPORT-INFRA do checkpoint/inventário",
+      "next_step": "Nenhuma entrega pendente; monitoramento normal segue com os perfis pendentes exibidos nos alertas",
       "objective": "Enviar alerta real novo em cada app atual das linhagens 001 a 013, com readback completo",
-      "source": "discord:message:1568333588078788669;receipt:/root/mgs-agent/reports/all-app-alerts-1568333588078788669/generic-delivery-summary.json",
-      "state": "doze canais genéricos com entrega e todas as linhas verificadas: 12 famílias/36 mensagens, zero erros e invest_3d_ok. ciclo nativo anterior do b013 terminou; única rodada manual force-live já adquiriu lock e está em coleta dtr/graph, processo silencioso proc_92e20d7b05f0. nenhum writer paralelo, nenhuma repetição dos genéricos.",
+      "source": "discord:message:1568333588078788669;receipt:/root/mgs-agent/reports/all-app-alerts-1568333588078788669/delivery-summary.json;report:/root/mgs-agent/reports/all-app-alerts-1568333588078788669/report-readback.json",
+      "state": "concluído: 13/13 canais com uma família live solicitada por app e 43 mensagens físicas verificadas. genéricos 12/12, zero erros; b013 dedicado completou 97 alvos, 92 linked, cinco unlinked_confirmed, zero unknown, capacidade saudável. invest_3d_ok em ambos runners. b013 aguardou lock nativo sem sobrepor writers; única rodada manual concluída exit 0 e consumida. pausas preservadas. audit/inventário/report-infra com readback registrados.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T18:58:40+00:00"
+      "updated_at": "2026-11-06T19:07:12+00:00"
     },
     {
       "agent": "zeus",
@@ -6137,12 +6137,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-background-api-1568292020517081140",
-      "next_step": "Separar camada de referencia criativa resolvida da geracao de UTMs alvo pendente; nao homologar producao nem reutilizar silenciosamente c232 em novos numeros. Investigar rematerializacao/tracking com contexto preservado sem editar creative compartilhado,sem reabrir opt-out e sem ativar manual/canario. Preservar request/IDs/manifests e evidencias; nao pedir outra copia manual ja fornecida.",
-      "objective": "Resolver rota API fiel da C232 preservando aprimoramentos e tracking correto, com cópia manual como controle e sem ativação dos testes.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/native-inheritance-1568295434081014004/manual-equivalence-receipt.json",
-      "state": "baseline manual1568310179659780116 localizada por nome literal/id120250618300670331 paused,usd40,maxvol. seis imagens analisadas. manual reutiliza os2creativeids e posts dac232 e conserva utms c232. provaapi real por2updates de referencia somente nos adids tecnicos existentes dac240,source/manual intocados. timeout reconciliado porget e retomada central zero updates;status reference_equivalence_verified_paused,backgroundopt_in e estados atuais de features iguais fonte/manual/canario. c240 seguepaused/usd100.136testes+77subtests verdes. rota geral e probe desabilitados; paridade de referencia comprovada,novo trackingc240 ainda nao validado.",
+      "next_step": "Continuar somente pela identidade nova ares-shein-standard-copy-1568337081321791502 e seu recibo. Aguardarcontrole deUTMs novas noGerenciador daC241PAUSED,sem outra campanha/credencial;comparar depoisDefinition/features/IDs. Não repetir cópia ouopt-out, não usarUTMfontecomo sucesso.",
+      "objective": "Resolver duplicacao API fiel combackgroundhabilitado eUTMsalvo,sem alterar fonte ou campanhasativas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/standard-copy-1568337081321791502/post-create-readback.json",
+      "state": "continuacao executiva1568337081321791502:copiamanualdeleted porpedido,novac241 id120250620883100331paused/2ads/60usd/maxvol criadaengine. recursospreservadosporreferencia,masurltargetignoradaaoenviarespecjuntoacreid;trackingpermanecec232. paridadeparcialnaoautorizarotageral.c240anteriorpreservada.sourcec232active,sourcebudget60conferidosemwrite.143tests+83subtests. rotaexperimentalaindadisabled;fullacceptancefalse.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-06T17:21:40+00:00"
+      "updated_at": "2026-11-06T19:08:55+00:00"
     },
     {
       "agent": "ares",
@@ -6227,12 +6227,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-standard-copy-1568337081321791502",
-      "next_step": "Resolver rota central de rematerializacao/tracking com referencias sem alterar creativecompartilhado;validar eplanejar antesdecriar1clone. Nao ativarcanario nem recriarmanualdeletada. Atualizardocumentacao eescopo de requests equivalentes somenteaposprova.",
-      "objective": "Excluir somente copia manual daC232 e depois executar1nova duplicacao tecnica PAUSED,fiel,para validar correcao reutilizavel comtracking alvo.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/standard-copy-1568337081321791502/manual-deletion.json",
-      "state": "delete manual id120250618300670331 concluido egetstatusdeleted confirmado. c232original ec240preservadas. novo request shein-1568337081321791502 materializado,1clone,paused,now,orcamento/lance herdadosapi(sem reutilizar usd100/cap0.40 de pedidos anteriores). falta executar nova copia e validar features+utms alvo;rota experimental anterior disabled.",
+      "next_step": "Necessario controleUI naC241jaexistente ePAUSED: trocar somenteutm_campaign b01fb03c232->b01fb03c241 eutm_adgroup b01fb03c232g01->b01fb03c241g01 nos2ads,manteropcoes/desativada,e comparar novoscreativeIDs/recursos comAPI. Nao cria outra campanha,nem altera fonte,nem repeteupdateignorado. Preservarrequest/IDs/manifests/primeiros erros. Documentacao tecnica registra negativo;nao anunciarrotageralpronta.",
+      "objective": "Excluir somente copia manual e duplicar C232 por API,validando recursos e UTMsnovas antes de documentar rota reutilizavel.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/standard-copy-1568337081321791502/post-create-readback.json",
+      "state": "delete120250618300670331deleted confirmado. novac241 id120250620883100331 criada porenginecentral,1conjunto/2adspaused,usd60diarios/maxvol herdadosgetfonteatual(antes40;nenhumwriteorcamentoorigem). fontec232activepreservada ec240semalteracao. c241 referencia osmesmoscreatives/posts ebgopt_in igualfonte,mas apiignorouobject_story_spec/url_tags combinadoscomcreative_id:urlmantemc232emvezc241. corecomplete,runnerpostprocess_pending,full_acceptance=false.143tests+83subtests verdes;capacidadeexperimental desabilitada,naohomologada para gestores.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-06T18:53:47+00:00"
+      "updated_at": "2026-11-06T19:08:55+00:00"
     },
     {
       "agent": "ares",
@@ -8986,5 +8986,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T18:58:40+00:00"
+  "updated_at": "2026-11-06T19:08:55+00:00"
 }
