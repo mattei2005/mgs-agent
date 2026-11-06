@@ -7517,12 +7517,12 @@
     {
       "agent": "zeus",
       "id": "meta-b00411-1568277865219358791",
-      "next_step": "Rodolfo precisa corrigir no mesmo item 1Password os dados do app novo (ao menos app_id antigo confirmado; validar também correspondência app_secret/access_token). Após confirmação, retomar preflight sem escrever credenciais.",
+      "next_step": "Rodolfo corrigir no mesmo item 1Password app_id para 2272384666657484 e app_secret correspondente ao B004-11. Access token já validado; retomar preflight após confirmação sem escrever credenciais.",
       "objective": "Validar e substituir somente B004-10 por B004-11 na rota existente, preservando canal, cron e outras rotas",
-      "source": "discord:message:1568277865219358791;receipt:/root/mgs-agent/reports/meta-b00411-1568277865219358791/preflight-blocker.json",
-      "state": "bloqueado no preflight: título/app_name b004-11, porém app_id 2106159553602347 ainda é o mesmo b004-10 salvo. meta metadata/debug http 400 oauthexception 190 application has been deleted. sheet já contém 6 b004-11 e zero b004-10. cutover não realizado; rota b004-10 permanece pausada; outros apps preservados.",
+      "source": "discord:message:1568277865219358791;recheck:1568298313126518835;receipt:/root/mgs-agent/reports/meta-b00411-1568277865219358791/recheck-1568298313126518835.json;candidate:/root/mgs-agent/reports/meta-b00411-1568277865219358791/candidate-id-1568298313126518835.json",
+      "state": "recheck 1568298313126518835: access_token novo válido de milla fernandes, debug com credencial do titular identifica b004-11 app_id 2272384666657484. o campo app_id no item continua 2106159553602347 do app antigo; metadados/debug com esse par retornam application has been deleted. teste somente em memória do app_id novo com app_secret atual retorna invalid oauth access token signature, logo app_secret também não valida no novo app. sem cutover, credenciais não alteradas, rota antiga permanece pausada.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T14:57:46+00:00"
+      "updated_at": "2026-11-06T16:19:12+00:00"
     },
     {
       "agent": "zeus",
@@ -8926,5 +8926,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T16:08:45+00:00"
+  "updated_at": "2026-11-06T16:19:12+00:00"
 }

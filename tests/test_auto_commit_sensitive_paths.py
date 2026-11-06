@@ -283,6 +283,30 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_local_fleet_audit_receipt_exclusions(self):
+        base = "reports/fleet-token-1568297168245362822/"
+        ignored = [base + "results.jsonl", base + "summary.json"]
+        included = [
+            base + "credentials.json",
+            base + "other-token.json",
+            base + "summary.json.other",
+            "reports/fleet-token-other/summary.json",
+            "work/" + base + "summary.json",
+            "scripts/monitor-meta-app-roles.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

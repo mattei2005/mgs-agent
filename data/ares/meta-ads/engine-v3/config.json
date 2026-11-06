@@ -458,8 +458,18 @@
       "app_key": "mgs-meta-app-1299247318762949",
       "alias": "Yolokfx-US-SHEIN-EN-03-G005",
       "source_definition_native_inheritance": {
-        "enabled": true,
-        "stage": "CANARY_PAUSED_ONLY",
+        "enabled": false,
+        "stage": "REJECTED_CANARY_NOT_PRODUCTION",
+        "experimental_result": {
+          "canary_campaign_id": "120250617574780331",
+          "canary_number": 240,
+          "preserved_status": "PAUSED",
+          "feature_parity_verified": false,
+          "native_without_override_error_subcode": 3858504,
+          "explicit_background_error_subcode": 3858293,
+          "empty_dof_result": "Created PAUSED but changed 23 source OPT_IN features per ad; rejected",
+          "production_promoted": false
+        },
         "approved_by": "344196393512075265",
         "source_message_id": "1568295434081014004",
         "request_ids": ["shein-native-1568295434081014004"],

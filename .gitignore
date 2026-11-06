@@ -149,3 +149,8 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 /reports/meta-b0015-token-1568291734985646181/scheduled-recovery.json
 /reports/meta-b0015-token-1568291734985646181/validation.json
 
+# Local read-only fleet audit receipts: preserve evidence without publishing it
+# or changing the sensitive-path guard. Exact files from the reconciled request.
+/reports/fleet-token-1568297168245362822/results.jsonl
+/reports/fleet-token-1568297168245362822/summary.json
+

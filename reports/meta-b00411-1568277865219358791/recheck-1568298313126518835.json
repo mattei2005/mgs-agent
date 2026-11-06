@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-11-06T11:18:24-05:00",
+  "item_title": "BOT B004-11 Token - Milla Fernandes",
+  "item_app_name": "B004-11",
+  "configured_app_id": "2106159553602347",
+  "saved_predecessor_app_id": "2106159553602347",
+  "metadata_http": 400,
+  "metadata_error": {
+    "code": 190,
+    "type": "OAuthException",
+    "message": "Error validating application. Application has been deleted."
+  },
+  "me_http": 200,
+  "holder": "Milla Fernandes",
+  "configured_app_debug_http": 400,
+  "configured_app_debug_error": {
+    "code": 190,
+    "type": "OAuthException",
+    "message": "Error validating application. Application has been deleted."
+  },
+  "user_token_debug_http": 200,
+  "token_debug": {
+    "valid": true,
+    "app_id": "2272384666657484",
+    "application": "B004-11",
+    "expires_at": 0
+  },
+  "self_debug_error": null,
+  "production_cutover": false
+}

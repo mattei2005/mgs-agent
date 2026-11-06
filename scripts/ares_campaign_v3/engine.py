@@ -1672,6 +1672,12 @@ class CampaignEngine:
         return lane_result
 
     @serialized_engine
+    def probe_native_inheritance(self, manifest: Manifest, *, confirm_execute=False) -> dict[str, Any]:
+        """Explicit no-override control only inside the authorized PAUSED canary."""
+        from .shein_native_inheritance import probe_unmodified
+        return probe_unmodified(self, manifest, confirm_execute=confirm_execute)
+
+    @serialized_engine
     def activate_verified(self, manifest: Manifest, creation_manifest: Manifest, qa_proof: dict[str, Any]) -> dict[str, Any]:
         """Status-only terminal phase, after complete PAUSED SHEIN batch QA."""
         from .activation import activate
