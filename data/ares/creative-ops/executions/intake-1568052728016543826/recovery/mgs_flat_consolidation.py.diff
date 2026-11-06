@@ -1,0 +1,81 @@
+--- scripts/mgs_flat_consolidation.py.before
++++ scripts/mgs_flat_consolidation.py
+@@ -206,7 +206,23 @@
+                             'consolidation:' + parent + ':' + name, journal)
+ 
+ 
+-def preflight(sa, generation):
++def destination_for_path(listing, operation_id, path, allow_missing=False):
++    """Read-only lookup; only the two standard media/status buckets may be absent."""
++    require(len(path) == 2 and path[0] in ('IMG', 'VID') and
++            path[1] in ('01_READY', '99_LEGACY'), 'PREFLIGHT_PATH')
++    parent = operation_id
++    for name, reason in zip(path, ('CANONICAL_FORMAT', 'CANONICAL_STATUS')):
++        candidates = [x for x in listing(parent) if x['name'] == name]
++        require(len(candidates) <= 1, reason)
++        if not candidates:
++            require(allow_missing, reason)
++            return None
++        require(candidates[0]['mimeType'] == b.FOLDER, reason)
++        parent = candidates[0]['id']
++    return parent
++
++
++def preflight(sa, generation, allow_missing=False):
+     authority()
+     state = b.read_json(f.HOME / 'maintenance' / generation / 'receipt-state.json', {})
+     require(state.get('status') == 'verified', 'RELOCATION_NOT_ACCEPTED')
+@@ -251,15 +267,11 @@
+         path = sa.relative_parent(m['parents'][0], generation)
+         require(len(path) == 2 and path[0] in ('IMG', 'VID') and
+                 path[1] in ('01_READY', '99_LEGACY'), 'PREFLIGHT_PATH')
+-        # Existing canonical buckets only; no permission mutations are needed.
+-        format_rows = [x for x in listing(operation_id) if x['name'] == path[0]]
+-        require(len(format_rows) == 1, 'CANONICAL_FORMAT')
+-        status_rows = [x for x in listing(format_rows[0]['id'])
+-                       if x['name'] == path[1]]
+-        require(len(status_rows) == 1, 'CANONICAL_STATUS')
+-        target = status_rows[0]['id']
++        # Missing standard buckets are planned read-only and provisioned only
++        # by the existing private maintenance caller after full stream checks.
++        target = destination_for_path(listing, operation_id, path, allow_missing)
+         acl = f.permissions(sa, fid)
+-        require(f.same_access(acl, target_acl(target)), 'PREFLIGHT_ACCESS')
++        require(f.same_access(acl, target_acl(target or operation_id)), 'PREFLIGHT_ACCESS')
+         pairs = {}
+         for jid, job in jobs.items():
+             require(sha(job) == snapshot['jobs'][jid], 'PREFLIGHT_JOB')
+@@ -282,7 +294,7 @@
+                         [('size', 'size'), ('md5', 'md5Checksum'),
+                          ('sha256', 'sha256Checksum')]), 'ARCHIVE_MAPPING_BYTES')
+         records[fid] = {'metadata_before': m, 'permissions_before': acl,
+-                        'destination_parent': target, 'jobs': pairs,
++                        'destination_parent': target, 'destination_path': path, 'jobs': pairs,
+                         'snapshot_sha256': sha(snapshot),
+                         'provider_id': mapping.get('archiveId') if mapping else None}
+     return {'generation': generation, 'operation_id': operation_id,
+@@ -309,10 +321,23 @@
+     if b.read_json(target_home / 'result.json', {}).get('status') == 'verified':
+         return b.read_json(target_home / 'result.json')
+     plan = b.read_json(target_home / 'plan.json')
++    journal = transport.Journal(target_home / 'journal.json')
+     if plan is None:
++        candidate = preflight(sa, generation, allow_missing=True)
++        missing = sorted({tuple(r['destination_path']) for r in candidate['records'].values()
++                          if r['destination_parent'] is None})
++        if missing:
++            # Complete provenance, ACL and full-byte validation before creating
++            # only standard empty buckets. No media/ACL/credential mutation.
++            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
++                list(pool.map(lambda pair: streams(sa, *pair), candidate['records'].items()))
++            b.atomic_json(target_home / 'bucket-preflight.json', candidate)
++            for format_name, status_name in missing:
++                parent = canonical_folder(owner, sa, candidate['operation_id'], format_name, journal)
++                canonical_folder(owner, sa, parent, status_name, journal)
++        # Re-read strict destinations/access before freezing any source move.
+         plan = preflight(sa, generation)
+         b.atomic_json(target_home / 'plan.json', plan)
+-    journal = transport.Journal(target_home / 'journal.json')
+     records = plan['records']
+     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+         list(pool.map(lambda pair: streams(sa, *pair), records.items()))

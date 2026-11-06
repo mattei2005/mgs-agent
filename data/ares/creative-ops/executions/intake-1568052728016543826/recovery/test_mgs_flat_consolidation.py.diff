@@ -1,0 +1,86 @@
+--- tests/test_mgs_flat_consolidation.py.before
++++ tests/test_mgs_flat_consolidation.py
+@@ -138,6 +138,83 @@
+         self.d._consolidation_proofs = {}
+         with patch.object(c.b, 'require_publisher'), patch.object(c.b, 'control_object_scope', return_value=True):
+             with self.assertRaises(c.b.ArchiveError): c.read_proof(self.d, pin)
++
++
++class CanonicalBucketTests(unittest.TestCase):
++    def setUp(self):
++        self.d = Mock()
++        self.tree = {'op': [{'id': 'img', 'name': 'IMG', 'mimeType': c.b.FOLDER}],
++                     'img': [{'id': 'ready', 'name': '01_READY', 'mimeType': c.b.FOLDER}]}
++        self.d.listing.side_effect = lambda parent: copy.deepcopy(self.tree.get(parent, []))
++
++    def test_existing_bucket(self):
++        self.assertEqual(c.destination_for_path(self.d.listing, 'op', ['IMG', '01_READY']), 'ready')
++
++    def test_missing_format_read_only_plan(self):
++        self.assertIsNone(c.destination_for_path(self.d.listing, 'op', ['VID', '99_LEGACY'], allow_missing=True))
++        self.d.api.assert_not_called()
++
++    def test_missing_format_strict_rejected(self):
++        with self.assertRaises(c.b.ArchiveError):
++            c.destination_for_path(self.d.listing, 'op', ['VID', '01_READY'])
++
++    def test_missing_status_read_only_plan(self):
++        self.assertIsNone(c.destination_for_path(self.d.listing, 'op', ['IMG', '99_LEGACY'], allow_missing=True))
++
++    def test_duplicate_format_not_missing(self):
++        self.tree['op'] *= 2
++        with self.assertRaises(c.b.ArchiveError):
++            c.destination_for_path(self.d.listing, 'op', ['IMG', '01_READY'], allow_missing=True)
++
++    def test_wrong_mime_rejected(self):
++        self.tree['op'][0]['mimeType'] = 'text/plain'
++        with self.assertRaises(c.b.ArchiveError):
++            c.destination_for_path(self.d.listing, 'op', ['IMG', '01_READY'], allow_missing=True)
++
++    def test_provision_occurs_only_after_streams_and_strict_readback(self):
++        import tempfile
++        from pathlib import Path
++        candidate = {'operation_id': 'op', 'records': {'source': {
++            'destination_path': ['VID', '01_READY'], 'destination_parent': None}}}
++        events = []
++        def preflight(*args, **kwargs):
++            if kwargs.get('allow_missing'):
++                return candidate
++            events.append('strict')
++            raise c.b.ArchiveError('STOP_AFTER_STRICT_TEST')
++        def folder(owner, sa, parent, name, journal):
++            events.append(name)
++            return 'folder-' + name
++        with tempfile.TemporaryDirectory() as td, patch.object(c, 'HOME', Path(td)), \
++             patch.object(c, 'authority'), patch.object(c, 'enabled', return_value=True), \
++             patch.object(c.b, 'read_json', side_effect=lambda path, default=None: default), patch.object(c.b, 'atomic_json'), \
++             patch.object(c.transport, 'Journal'), patch.object(c, 'preflight', side_effect=preflight), \
++             patch.object(c, 'streams', side_effect=lambda *args: events.append('streams')), \
++             patch.object(c, 'canonical_folder', side_effect=folder), patch.object(c, 'move_once') as move:
++            with self.assertRaisesRegex(c.b.ArchiveError, 'STOP_AFTER_STRICT_TEST'):
++                c.consolidate(Mock(), Mock(), 'generation')
++            self.assertEqual(events, ['streams', 'VID', '01_READY', 'strict'])
++            move.assert_not_called()
++
++    def test_failed_streams_never_provision(self):
++        import tempfile
++        from pathlib import Path
++        candidate = {'operation_id': 'op', 'records': {'source': {
++            'destination_path': ['VID', '01_READY'], 'destination_parent': None}}}
++        with tempfile.TemporaryDirectory() as td, patch.object(c, 'HOME', Path(td)), \
++             patch.object(c, 'authority'), patch.object(c, 'enabled', return_value=True), \
++             patch.object(c.b, 'read_json', side_effect=lambda path, default=None: default), patch.object(c.b, 'atomic_json'), \
++             patch.object(c.transport, 'Journal'), patch.object(c, 'preflight', return_value=candidate), \
++             patch.object(c, 'streams', side_effect=c.b.ArchiveError('BAD_BYTES')), \
++             patch.object(c, 'canonical_folder') as create:
++            with self.assertRaisesRegex(c.b.ArchiveError, 'BAD_BYTES'):
++                c.consolidate(Mock(), Mock(), 'generation')
++            create.assert_not_called()
++
++    def test_noncanonical_path_rejected(self):
++        for path in [['VID', 'CUSTOM'], ['OTHER', '01_READY'], ['VID']]:
++            with self.assertRaises(c.b.ArchiveError):
++                c.destination_for_path(self.d.listing, 'op', path, allow_missing=True)
+ 
+ 
+ class MaintenanceIntegrationTests(unittest.TestCase):
