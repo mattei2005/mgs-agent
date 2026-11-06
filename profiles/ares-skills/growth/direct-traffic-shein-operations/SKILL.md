@@ -13,11 +13,13 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-Skill específica da vertical SHEIN em tráfego direto Meta para os Estados Unidos. Ela isola o segmento SHEIN das regras operacionais de financiamento veicular: ambos usam tráfego direto, mas não compartilham contas, nomes, eventos, bids, budgets, schedules, learning policy, relatórios, criativos ou automações.
+SHEIN-US-DIRECT é isolada de CAR/CPV: não herdar contas, nomes, eventos, bids, budgets, schedules, learning policy, relatórios, criativos ou automações.
 
 Atraso SB: exiba n/d para `totalMinutes=0` junto de `currentFillTime=null` e `confident=false`; preserve a fonte e revalide só o modelo.
 
 ## Fechamento e complementos
+
+Responda por número e finalidade. Separe recurso preservado, tracking validado e rotina pronta; delimite “igual” e informe diferenças de orçamento/horário.
 
 Recibo e readback multifonte: `references/campaign-batch-final-readback.md`.
 
