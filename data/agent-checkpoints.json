@@ -1373,12 +1373,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1568052728016543826",
-      "next_step": "Somente acompanhar writer ativo e auditar recibos; não iniciar complete paralelo. Após saída, conferir request completo; se saldo elegível retomar monitor original. Validar consolidação por result.json e publicar mapa de todos os IDs.",
+      "next_step": "Acompanhar sem novo writer; auditar próximos batches completos e só concluir com request e932760f3118d7ef2c03c3d6a886782c status complete, 53 IDs e mapa completo. Não reenviar fases ou nomes já congelados.",
       "objective": "Tratar e arquivar 53 fontes Kelly US SHEIN EN common, preservar RAW e reservas",
       "source": "data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "primeiro batch 4/53 permanentemente auditado; scheduler canônico assumiu batch a24214fe49b15ff9d37c975e13a1f591 e está tratando/arquivando sem segundo writer. recovery canonical_format implantado no consumidor existente; 94 testes pass; report-infra 1568058020896968897 verificado. lote request e932760f3118d7ef2c03c3d6a886782c.",
+      "state": "16/53 fontes completas e auditadas permanentemente em quatro batches. writer canônico ativo no batch 34e3cad3a626688832a780f7c73e601e. recovery buckets vid validado live: consolidation/result verified para geração 1yeqggplsiqs1ceunvgjjszzgelmby1at, mantendo ids/bytes/acl. 94 testes pass. erro transitório 500 da manutenção foi retomado pelo mesmo executor; nenhum segundo writer.",
       "thread_id": "1568052728016543826",
-      "updated_at": "2026-11-06T00:22:58+00:00"
+      "updated_at": "2026-11-06T00:57:13+00:00"
     },
     {
       "agent": "ares",
@@ -8816,5 +8816,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T00:22:58+00:00"
+  "updated_at": "2026-11-06T00:57:13+00:00"
 }
