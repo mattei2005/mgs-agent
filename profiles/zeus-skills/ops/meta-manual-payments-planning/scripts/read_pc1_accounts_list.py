@@ -35,6 +35,14 @@ def gate():
  if re.search(r'temporarily blocked|going too fast|Enter the 6-digit code|Confirm it.s you|Log into Facebook|Log in to Facebook',text,re.I):raise RuntimeError('provider_or_auth_gate')
 def search():
  return [e for e in es if e.get('role')in ['Edit','TextField','SearchBox']and re.search(r'Search by name|^Search$',e.get('label',''),re.I)]
+def search_pixel_point(element,capture):
+ # Edit/Search element clicks lost focus on approved PC1 Chrome; the same
+ # fresh-bounds pixel rung was independently exercised on all 36 targets.
+ # Keep this exception local to Accounts search; never reuse cached bounds.
+ scale=capture.get('bounds_scale')or 1
+ bounds=element.get('bounds');assert bounds and len(bounds)==4,'search_bounds_missing'
+ bx,by,bw,bh=bounds;assert scale>0 and bw>0 and bh>0,'search_bounds_invalid'
+ return [round((bx+min(180,bw/2))/scale),round((by+bh/2)/scale)]
 try:
  w=subprocess.run(['/root/mgs-agent/scripts/mgs-pc1-cua-driver-ssh.sh','call','list_windows'],capture_output=True,text=True,timeout=45);windows=json.loads(w.stdout)['windows'];surface=B/'pc1-surface.json';surface=surface if surface.exists()else H/'pc1-browser-surface.json';known=json.loads(surface.read_text());ws=[x for x in windows if x.get('pid')==known['pid']and x.get('window_id')==known['window_id']and not x.get('minimized')and'chrome'in str(x.get('app_name','')).lower()];assert len(ws)==1,'approved_chrome_not_live';pid=ws[0]['pid'];wid=ws[0]['window_id'];cap();gate();act({'action':'key','keys':'ctrl+t'});created=True
  url='https://adsmanager.facebook.com/adsmanager/billing_hub/accounts?asset_id=2852476828464907&business_id=155263197283282&payment_account_id=2852476828464907&placement=BILLING_HUB&session_id=upl_1793047342_61c89fd3-1293-4191-aab6-314f3793aac2'
@@ -45,7 +53,7 @@ try:
   if time.monotonic()>deadline:raise RuntimeError('accounts_search_not_ready')
   time.sleep(2)
  for aid in a.account_ids:
-  t=lookup[aid];cap();gate();ss=search();assert len(ss)==1,'search_not_unique';act({'action':'click','element':ss[0]['index']});act({'action':'key','keys':'ctrl+a'});act({'action':'type','text':t['name']});deadline=time.monotonic()+35;prefix=t['name']+' ID: '+aid+' '
+  t=lookup[aid];cap();gate();ss=search();assert len(ss)==1,'search_not_unique';act({'action':'click','coordinate':search_pixel_point(ss[0],last)});gate();act({'action':'key','keys':'ctrl+a'});act({'action':'type','text':t['name']});deadline=time.monotonic()+35;prefix=t['name']+' ID: '+aid+' '
   while True:
    cap();gate()
    matches=[l for l in text.splitlines()if l.startswith(prefix)and re.search(r'\$[0-9,]+\.\d{2}',l)]

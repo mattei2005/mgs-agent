@@ -763,8 +763,9 @@ class CampaignEngine:
         # Reconcile the complete account edge using compact identity pages.
         # Full definitions for old unrelated creatives make pagination slow and
         # hit the 100-page guard before recent request objects are reached.
+        from .shein_reviewed_background_batch import creative_inventory_limit
         creative_inventory_path = (
-            f"act_{bundle.account_id}/adcreatives?fields=id,name&limit=5000"
+            f"act_{bundle.account_id}/adcreatives?fields=id,name&limit={creative_inventory_limit()}"
         )
         if needs_inventory:
             inventory_ops.append(BatchOperation(

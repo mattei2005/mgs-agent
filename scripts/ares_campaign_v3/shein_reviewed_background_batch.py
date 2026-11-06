@@ -322,6 +322,14 @@ def activation_authorization(target,creation,proof,*,get_message):
 
 # Exact independent review adapter. Preserve the historical binding above and
 # dispatch only a separately sealed descriptor/context, never by account alone.
+def creative_inventory_limit():
+    from . import shein_reviewed_background_kelly as kelly
+    if kelly.selected_context() is not None:
+        kelly.active_context()  # Require exact request, seals, IDs and live review proof.
+        return 500  # Account-scoped live diagnostic accepted this compact page size.
+    return 5000
+
+
 def _kelly_dispatch(name, original):
     def routed(*args, **kwargs):
         from . import shein_reviewed_background_kelly as kelly

@@ -32,6 +32,11 @@ class KellyBackgroundTests(unittest.TestCase):
             'accepted_creative_features':{'binding_digest':mod.BINDING_DIGEST}}}
     def test_exact_router_selects_current_review(self):
         self.assertTrue(router.selected({'reviewed_creative_features_kind':KIND}))
+    def test_request_only_smaller_inventory_pages(self):
+        self.assertEqual(router.creative_inventory_limit(),5000)
+        marker=APPROVED_RESUME.set(self.context())
+        try:self.assertEqual(router.creative_inventory_limit(),500)
+        finally:APPROVED_RESUME.reset(marker)
     def test_valid_review_retains_now_five_slots_and_original_clock(self):
         from ares_campaign_v3.shein_continuation import validate_descriptor
         mod=self.module();d=mod.make_descriptor(self.s,self.bound)

@@ -6057,12 +6057,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-1568260038986960958",
-      "next_step": "Perguntar na origem autorizacao para desativar somente Geracao de plano de fundo da imagem nas cinco copias; manter fonte intacta e preservar request manifests IDs relogio. Apos decisao validar binding tipado e retomar somente camadas ausentes via executor central.",
+      "next_step": "Solicitar na origem somente review da omissao adicional de image_animation,image_brightness_and_contrast,image_templates,image_text_translation,image_touchups,image_uncrop,product_browsing,video_uncrop. Aguardar essa decisao material sem repetir aceite background; preservar IDs/manifests/relogio e retomar QA/ativacao central somente com vinculo exato.",
       "objective": "Duplicar C232 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005, USD100 diarios por campanha, Cost per result goal USD0.40, hoje 06/11/2026.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568260038986960958/catalog-background-blocker-readback.json",
-      "state": "aguardando decisao material: meta 100/3858293 exige catalogo para image_background_gen opt_in confirmado nos dois anuncios fonte. c235 e c236 existem paused, usd100 diarios cada, cost_cap e bid_amount40, zero anuncios comprovados por edges paginados; tres copias ainda nao criadas. fonte preservada.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/feature-review-1568261072639758487/material-feature-drift-readback.json",
+      "state": "background opt_out autorizado por kelly 1568261072639758487 validado por get e autoridade live. engine concluiu mesmos ids c235/c236 mais c237/c238/c239, total5 campanhas/10 anuncios paused, usd100 diarios cada, lote usd500 diarios, cap40centavos. qa renderizado inicial2/5; get posterior identificou oito features adicionais ausentes em todos10creatives enquanto fonte continua opt_in. postprocess_pending; nao ativado; nenhum novo delta autorizado.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-06T13:48:23+00:00"
+      "updated_at": "2026-11-06T14:02:14+00:00"
     },
     {
       "agent": "ares",
@@ -8836,5 +8836,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T13:48:23+00:00"
+  "updated_at": "2026-11-06T14:02:14+00:00"
 }
