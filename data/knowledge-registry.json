@@ -6543,6 +6543,24 @@
       "updated_at": "2026-10-27T15:27:43+00:00"
     },
     {
+      "canonical_key": "content.operations.seo100.1564353146120310928.report",
+      "canonical_source": "/root/.hermes/profiles/atena/work/seo100-feedback-1567897844302741565/residual-1568270217556004928/final-result.json",
+      "consumers": [
+        "atena",
+        "zeus"
+      ],
+      "domain": "content.operations",
+      "effective_at": "2026-11-06T15:10:43+00:00",
+      "id": "ATENA-SEO100-RESIDUAL-REPORT-1568270217556004928",
+      "kind": "source",
+      "owner": "Content Operations / Raquel / Atena",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SEO100 residual: rotulos49-51 e rodape1 corrigidos,12Yoastpersistidos,3empausa",
+      "updated_at": "2026-11-06T15:10:43+00:00"
+    },
+    {
       "canonical_key": "content.seo100.1564353146120310928.localized-execution-approval",
       "canonical_source": "/root/.hermes/profiles/atena/work/seo100-1564353146120310928/publication-v2/resume-1564667773043343401/authority-and-scope.json",
       "consumers": [
@@ -6573,10 +6591,10 @@
       "kind": "source",
       "owner": "Content Operations / Raquel / Atena",
       "review_due": null,
-      "status": "active",
-      "superseded_by": null,
+      "status": "superseded",
+      "superseded_by": "ATENA-SEO100-RESIDUAL-REPORT-1568270217556004928",
       "title": "SEO100 revisao seletiva atual:91OK,6pendenciasanteriores,3pausados;provas85Yoast e100linhas",
-      "updated_at": "2026-11-05T18:24:04+00:00"
+      "updated_at": "2026-11-06T15:10:43+00:00"
     },
     {
       "canonical_key": "content.seo100.scoped-resume.1565446465168343224",
@@ -16235,5 +16253,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-05T19:25:17+00:00"
+  "updated_at": "2026-11-06T15:10:43+00:00"
 }
