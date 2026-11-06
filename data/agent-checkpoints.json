@@ -1252,6 +1252,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-G004-CPR-UPDATES-1568324158536945765",
+      "next_step": "Congelar coorte live, validar testes e primeira entrega; auditar e habilitar agenda finita",
+      "objective": "Relatorios CPR a cada30min das campanhas criadas em06/11 ate13hEST, ate fim06/11",
+      "source": "data/ares/meta-ads/state/cpr-updates/1568324158536945765/manifest.json",
+      "state": "autenticado pedido e emenda; leitura inicial e agenda finita em preparacao; zero writes meta",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-06T18:03:33+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-G004-REPORT-1562828736750026865",
       "next_step": "Fontes novas22/10 10:04EDT;42campanhas com entrega hoje, todas ACTIVE no readback10:06EDT;histórico7d e RPS DOM13páginas;9partes exatas validadas. Entregar report integral pela resposta nativa, sem duplicar por API e sem writes Meta.",
       "objective": "Relatório on-demand atual Meta × Smart Bidding Conta04 G004",
@@ -8946,5 +8956,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T17:59:36+00:00"
+  "updated_at": "2026-11-06T18:03:33+00:00"
 }
