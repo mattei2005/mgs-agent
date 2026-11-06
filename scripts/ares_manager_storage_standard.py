@@ -21,7 +21,9 @@ def require(ok,reason):
  if not ok:raise StandardError(reason)
 def normalized(text):return ''.join(c for c in unicodedata.normalize('NFKD',str(text)) if not unicodedata.combining(c)).strip().casefold()
 def manager_code(value):
- if value in layout.MANAGERS:return value
+ # Registry codes are ASCII identifiers; accept case only, not new aliases.
+ code=value.casefold() if isinstance(value,str) else value
+ if code in layout.MANAGERS:return code
  matches=[k for k,v in layout.MANAGERS.items() if normalized(v)==normalized(value)]
  require(len(matches)==1,'STANDARD_UNREGISTERED_MANAGER');return matches[0]
 def display(value):return normalized(value).upper()
