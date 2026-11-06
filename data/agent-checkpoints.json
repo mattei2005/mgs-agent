@@ -1373,12 +1373,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1568052728016543826",
-      "next_step": "Acompanhar sem novo writer; auditar próximos batches completos e só concluir com request e932760f3118d7ef2c03c3d6a886782c status complete, 53 IDs e mapa completo. Não reenviar fases ou nomes já congelados.",
+      "next_step": "Acompanhar writer; após request complete exigir manutenção same-ID dos RAW duplicados, reauditar todos batches e 53 IDs, gerar mapa original-final e links reais. Parent continua na thread, sem mensagem externa do cron.",
       "objective": "Tratar e arquivar 53 fontes Kelly US SHEIN EN common, preservar RAW e reservas",
       "source": "data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
-      "state": "16/53 fontes completas e auditadas permanentemente em quatro batches. writer canônico ativo no batch 34e3cad3a626688832a780f7c73e601e. recovery buckets vid validado live: consolidation/result verified para geração 1yeqggplsiqs1ceunvgjjszzgelmby1at, mantendo ids/bytes/acl. 94 testes pass. erro transitório 500 da manutenção foi retomado pelo mesmo executor; nenhum segundo writer.",
+      "state": "32/53 fontes reconciliadas pelo request e932760f3118d7ef2c03c3d6a886782c: 22 vid novos e 10 img reuploads exatos até aqui. assets existentes foram reutilizados com reservas preservadas. auditorias por batch; atenção audit.status raw_preserved_staging_pending_maintenance não prova preservação permanente do novo raw. rotina canônica ativa no batch eaf6c2b088688c989d3dfa7e93d696e7; não iniciar segundo writer. recovery vid validado live e 94 testes pass.",
       "thread_id": "1568052728016543826",
-      "updated_at": "2026-11-06T00:57:13+00:00"
+      "updated_at": "2026-11-06T01:31:40+00:00"
     },
     {
       "agent": "ares",
@@ -8816,5 +8816,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T00:57:13+00:00"
+  "updated_at": "2026-11-06T01:31:40+00:00"
 }
