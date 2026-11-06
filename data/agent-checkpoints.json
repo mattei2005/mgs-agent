@@ -6097,12 +6097,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-background-api-1568292020517081140",
-      "next_step": "Identificar numero/ID de duplicacao manual comprovada da propriaC232 para comparar campos e elegibilidade com a API;C233 tem lineage mas produto/midia diferente e nao foi comprovada como controleliteral. Sem baseline manual exato ou respostaMeta sobre legado, preservar request/manifests/IDs/primeiros erros e nao repetircriacao nem relaxarQA. Escopo eventualcanario adicional requer delimitacao propria; nao pedir para desligarBG.",
-      "objective": "Resolver duplicacao fiel da C232 por API preservando enrollment herdado, sem desligar recursos nem alterar campanhas ativas.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/native-inheritance-1568295434081014004/final-diagnostic-receipt.json",
-      "state": "testes reais executados sob1568295434081014004: canarioc240 id120250617574780331,1adg/2ads paused,usd100 configurados;insights sem linhas. heranca com overrides e controleadcopies semcreative_parameters rejeitados100/3858504(standard_enhancements legado). dofvazio criou2ads mas mudou23opt_in por ad paraopt_out,solucao rejeitada. validate-only documentado no edgeads v26e27 retornou100/3858293 combgopt_in e nenhumid. c232 ec235-c239 integralmente inalteradas nos campos conferidos. rota experimental desabilitada;131testes+70subtests verdes. solucao fiel ainda nao validada; nao concluir como sucesso nem ativarcanario.",
+      "next_step": "Separar camada de referencia criativa resolvida da geracao de UTMs alvo pendente; nao homologar producao nem reutilizar silenciosamente c232 em novos numeros. Investigar rematerializacao/tracking com contexto preservado sem editar creative compartilhado,sem reabrir opt-out e sem ativar manual/canario. Preservar request/IDs/manifests e evidencias; nao pedir outra copia manual ja fornecida.",
+      "objective": "Resolver rota API fiel da C232 preservando aprimoramentos e tracking correto, com cópia manual como controle e sem ativação dos testes.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/native-inheritance-1568295434081014004/manual-equivalence-receipt.json",
+      "state": "baseline manual1568310179659780116 localizada por nome literal/id120250618300670331 paused,usd40,maxvol. seis imagens analisadas. manual reutiliza os2creativeids e posts dac232 e conserva utms c232. provaapi real por2updates de referencia somente nos adids tecnicos existentes dac240,source/manual intocados. timeout reconciliado porget e retomada central zero updates;status reference_equivalence_verified_paused,backgroundopt_in e estados atuais de features iguais fonte/manual/canario. c240 seguepaused/usd100.136testes+77subtests verdes. rota geral e probe desabilitados; paridade de referencia comprovada,novo trackingc240 ainda nao validado.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-06T16:31:40+00:00"
+      "updated_at": "2026-11-06T17:21:40+00:00"
     },
     {
       "agent": "ares",
@@ -8936,5 +8936,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T17:13:11+00:00"
+  "updated_at": "2026-11-06T17:21:40+00:00"
 }
