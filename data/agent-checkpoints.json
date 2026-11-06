@@ -1373,12 +1373,12 @@
     {
       "agent": "ares",
       "id": "ARES-INTAKE-1568052728016543826",
-      "next_step": "Obter batch canônico pelo monitor, claim do mesmo owner, tratar/QA e complete; continuar somente este request",
-      "objective": "Tratar e arquivar lote Kelly US SHEIN EN: 53 fontes, common, preservar RAW e reservas",
-      "source": "discord:1185714635991679006/1516887105543077949/1568052728016543826",
-      "state": "fontes estáveis congeladas; registro humano validado no canal pai; 20 img e 33 vid. descoberta em scratch/kelly-1568052728016543826/sources.json",
+      "next_step": "Somente acompanhar writer ativo e auditar recibos; não iniciar complete paralelo. Após saída, conferir request completo; se saldo elegível retomar monitor original. Validar consolidação por result.json e publicar mapa de todos os IDs.",
+      "objective": "Tratar e arquivar 53 fontes Kelly US SHEIN EN common, preservar RAW e reservas",
+      "source": "data/ares/creative-ops/30tb-archive/flat-intake-requests.json",
+      "state": "primeiro batch 4/53 permanentemente auditado; scheduler canônico assumiu batch a24214fe49b15ff9d37c975e13a1f591 e está tratando/arquivando sem segundo writer. recovery canonical_format implantado no consumidor existente; 94 testes pass; report-infra 1568058020896968897 verificado. lote request e932760f3118d7ef2c03c3d6a886782c.",
       "thread_id": "1568052728016543826",
-      "updated_at": "2026-11-06T00:05:06+00:00"
+      "updated_at": "2026-11-06T00:22:58+00:00"
     },
     {
       "agent": "ares",
@@ -8816,5 +8816,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T00:05:06+00:00"
+  "updated_at": "2026-11-06T00:22:58+00:00"
 }
