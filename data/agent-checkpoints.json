@@ -1253,12 +1253,12 @@
     {
       "agent": "ares",
       "id": "ARES-G004-CPR-UPDATES-1568324158536945765",
-      "next_step": "Congelar coorte live, validar testes e primeira entrega; auditar e habilitar agenda finita",
+      "next_step": "Revalidar mesmos8IDs e evento por slot; enviar todos custos, gastos e resultados sem limiar; expirar07/11 00hEST antes API; nao incluir futuras nem renovar",
       "objective": "Relatorios CPR a cada30min das campanhas criadas em06/11 ate13hEST, ate fim06/11",
       "source": "data/ares/meta-ads/state/cpr-updates/1568324158536945765/manifest.json",
-      "state": "autenticado pedido e emenda; leitura inicial e agenda finita em preparacao; zero writes meta",
+      "state": "ativo e get validado:8 campanhas268-275; inicial13:04est entregue;268 cpr0.85056 usd com18resultados e gasto15.31;7sem resultados.33testespass,22slots13:16-23:46est,no_agent/local,zero writesmeta;auditoria pre/pos zero colisao operacional;report-infra get validado",
       "thread_id": "1558147211026501643",
-      "updated_at": "2026-11-06T18:03:33+00:00"
+      "updated_at": "2026-11-06T18:06:32+00:00"
     },
     {
       "agent": "ares",
@@ -8956,5 +8956,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T18:03:33+00:00"
+  "updated_at": "2026-11-06T18:06:32+00:00"
 }
