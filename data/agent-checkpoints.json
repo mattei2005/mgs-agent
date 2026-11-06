@@ -7527,12 +7527,12 @@
     {
       "agent": "zeus",
       "id": "meta-b00411-1568277865219358791",
-      "next_step": "Rodolfo corrigir no mesmo item 1Password app_id para 2272384666657484 e app_secret correspondente ao B004-11. Access token já validado; retomar preflight após confirmação sem escrever credenciais.",
+      "next_step": "Operação normal: monitor acompanha entrada dos quatro perfis pendentes e limpa X automaticamente; nenhuma correção de credencial ou execução manual pendente",
       "objective": "Validar e substituir somente B004-10 por B004-11 na rota existente, preservando canal, cron e outras rotas",
-      "source": "discord:message:1568277865219358791;recheck:1568298313126518835;receipt:/root/mgs-agent/reports/meta-b00411-1568277865219358791/recheck-1568298313126518835.json;candidate:/root/mgs-agent/reports/meta-b00411-1568277865219358791/candidate-id-1568298313126518835.json",
-      "state": "recheck 1568298313126518835: access_token novo válido de milla fernandes, debug com credencial do titular identifica b004-11 app_id 2272384666657484. o campo app_id no item continua 2106159553602347 do app antigo; metadados/debug com esse par retornam application has been deleted. teste somente em memória do app_id novo com app_secret atual retorna invalid oauth access token signature, logo app_secret também não valida no novo app. sem cutover, credenciais não alteradas, rota antiga permanece pausada.",
+      "source": "discord:message:1568277865219358791;recovery:1568310489589481615;backup:/root/mgs-agent/backups/meta-app-b00410-to-b00411-1568277865219358791;report-infra:1568312171140489267",
+      "state": "concluído e validado após correção 1password confirmada por rodolfo em 1568310489589481615. b004-11 ativo no mesmo canal; app_id/secret/token app-bound e quatro checks http 200. canário, backup, baseline silencioso e repetição limpa aprovados. primeiro ciclo agendado 12:10:21 est: 12 rotas genéricas, zero erros; sheet sa 2/6 presentes e quatro pendentes, zero divergências. ambas pausas vazias. nenhum alerta forçado. bloqueio anterior explicitamente superado. report-infra 1568312171140489267 verificado.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T16:19:12+00:00"
+      "updated_at": "2026-11-06T17:13:11+00:00"
     },
     {
       "agent": "zeus",
@@ -8936,5 +8936,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T17:03:03+00:00"
+  "updated_at": "2026-11-06T17:13:11+00:00"
 }

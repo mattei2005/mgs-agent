@@ -1672,6 +1672,12 @@ class CampaignEngine:
         return lane_result
 
     @serialized_engine
+    def probe_native_creative_reference(self, manifest: Manifest, *, confirm_execute=False) -> dict[str, Any]:
+        """Attach source references only inside the existing authorized PAUSED canary."""
+        from .shein_native_reference import run
+        return run(self, manifest, confirm_execute=confirm_execute)
+
+    @serialized_engine
     def probe_native_inheritance(self, manifest: Manifest, *, confirm_execute=False) -> dict[str, Any]:
         """Explicit no-override control only inside the authorized PAUSED canary."""
         from .shein_native_inheritance import probe_unmodified
