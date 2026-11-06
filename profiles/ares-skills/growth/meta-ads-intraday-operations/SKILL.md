@@ -17,10 +17,11 @@ Use esta skill para estruturar, revisar ou manter leitura intraday, relatório d
 
 1. Identifique a operação, a conta e o pedido exato.
 2. Resolva primeiro thread → conta pelo binding canônico da operação e confira a conta no catálogo vigente; depois abra somente o contrato e as políticas desse recorte. Consulte `accounts/` quando o contrato apontar esse registro. Em operações com catálogo corporativo, a ausência de um arquivo individual não comprova falta de acesso: confirme o binding de credencial vigente e a identidade por GET, sem usar outra conta como fallback.
-3. Carregue a skill específica da estratégia/operação, quando existir. Para SHEIN, siga a receita e o renderer específicos; não redescubra o layout em exemplos históricos desta skill genérica.
+3. Carregue a skill específica da estratégia/operação, quando existir. Para SHEIN, use `skill_view` na skill `direct-traffic-shein-operations` para abrir sua referência `canonical-report-renderer.md`, seções de coleta pontual e resumo complementar; não redescubra o layout em exemplos históricos desta skill genérica. Consulte também `SHEIN-US-DIRECT.json#/reporting/account_intraday_summary_overrides` projetando somente a conta vinculada: um complemento ativo faz parte da entrega, não substitui o relatório integral e deve usar o mesmo modelo financeiro validado. Inclua-o no checklist antes da publicação e só conclua após o GET do relatório e do complemento.
 4. Para layout de relatório, abra `references/current-reporting-contract.md`.
 5. Para falhas conhecidas, abra `references/current-operational-pitfalls.md`.
 6. Evidência histórica nunca vira regra ativa por semelhança.
+7. Ao conferir helpers extensos de coleta, selecione por AST as funções e os métodos efetivamente usados pelo adaptador; leia integralmente esses trechos, em vez de imprimir o módulo ou o contrato inteiro. Isso preserva a revisão do código executado sem soterrar o binding e a sequência operacional em históricos ou inventários alheios ao pedido. Encontrado um adaptador semanticamente compatível, pare a descoberta e siga a receita específica.
 
 ## Contrato obrigatório por operação
 
