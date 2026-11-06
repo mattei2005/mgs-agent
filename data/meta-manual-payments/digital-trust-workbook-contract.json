@@ -84,16 +84,16 @@
   ],
   "latest_refresh_qualification": {
     "status": "updated_validated_with_historical_d_gaps",
-    "verified_at": "2026-11-06T08:59:15.947420-05:00",
+    "verified_at": "2026-11-06T14:32:59.640352-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-06T08:57:49.759693-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T085752831270",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T082157469506",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261106T082125379165",
+    "validated_metrics_at": "2026-11-06T14:31:34.059348-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T143138299999",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T140641440327",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261106T140608174447",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "d_ledger_to_live_sheet_exact": true,
@@ -139,20 +139,13 @@
     "fresh_h_count": 36,
     "h_preserved_count": 0,
     "pending_h_account_ids": [],
-    "h_read_at_min": "2026-11-06T08:23:34.278702-05:00",
-    "h_read_at_max": "2026-11-06T08:44:52.989224-05:00",
-    "h_sum_usd": "500991.56",
+    "h_read_at_min": "2026-11-06T14:07:31.789662-05:00",
+    "h_read_at_max": "2026-11-06T14:28:09.153954-05:00",
+    "h_sum_usd": "504501.29",
     "pending_ui": [],
-    "card_proofs_updated": 8,
+    "card_proofs_updated": 1,
     "renewed_card_proof_ids": [
-      "1062446663435585",
-      "1150399088163771",
-      "1290644206529750",
-      "1414197490675732",
-      "1481815942722118",
-      "1543098427832443",
-      "1762774024309795",
-      "2852476828464907"
+      "1543098427832443"
     ],
     "historical_d_gaps": [
       {
@@ -347,9 +340,9 @@
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "19897.88",
-      "balance": "504011.64",
-      "month_spend": "107186.36"
+      "average_daily": "19905.40",
+      "balance": "508137.89",
+      "month_spend": "111966.19"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -371,19 +364,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4511.92"
+        "value": "4513.89"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "2867.13"
+        "value": "3652.43"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "23706.27"
+        "value": "25041.44"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -395,25 +388,25 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "15385.96"
+        "value": "15391.51"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "H",
         "formula": "=ROUND(SUM(H17:H52),2)",
-        "value": "500991.56"
+        "value": "504501.29"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "501144.51"
+        "value": "504485.46"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "83480.09"
+        "value": "86924.75"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -425,25 +418,25 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "19897.88"
+        "value": "19905.40"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "H",
         "formula": "=ROUND(SUM(H14,H53),2)",
-        "value": "500991.56"
+        "value": "504501.29"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "504011.64"
+        "value": "508137.89"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "107186.36"
+        "value": "111966.19"
       }
     ],
     "lease_free": true,
@@ -454,40 +447,38 @@
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/closure-current.json",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/closure-current.json",
     "report_infra_status": "sent_verified",
     "cron_changes": 0,
     "cron_coordination": {
       "job_id": "2ee720363d7d",
       "same_existing_job": true,
       "schedule_unchanged": true,
-      "next_run_at": "2026-11-06T14:02:00-05:00"
+      "next_run_at": "2026-11-06T21:02:00-05:00",
+      "current_fire_claim_reconciled": true
     },
     "ui_cleanup": {
+      "initial_browser_tabs_visually_counted": 6,
       "final_browser_tabs_visually_counted": 6,
-      "during_owned_collection_browser_tabs_visually_counted": 7,
       "active_final_surface": "original unfiltered Meta Digital Trust Accounts",
-      "owned_tab_closed": true,
-      "exact_initial_browser_tab_identity_parity_established": false,
-      "reason": "initial screenshot and full AX cache expired; inline AX retained but truncated. TabItem count was site-internal navigation, not Chrome tabs. Recovered validation using final durable pixels, own-tab capture pixels, unchanged initial inline labels and finally-close worker receipts. No additional UI input or uncertain tab closure.",
+      "owned_tabs_closed": true,
+      "initial_and_final_pixels_and_full_initial_ax_retained": true,
       "lease_free": true,
-      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/surface-final.png"
+      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/surface-final.png"
     },
-    "repair": {
-      "scope": "Accounts Edit/Search only; native fresh-bounds background pixel click",
-      "root_cause_proven": "Element-index route failed to establish effective query; same authenticated UI recovered with pixel focus. Internal driver/UI focus cause remains unproven.",
-      "validated_targets": 36,
-      "canonical_collector_live_canary": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/canonical-collector-canary/336562339356179-receipt.json",
-      "unit_tests": "valid native/scaled bounds and invalid bounds rejected",
-      "live_mirror_sha256": {
-        "scripts/read_pc1_accounts_list.py": "8b8ccdfda878063ca36698111fe6ab063d56f1910d5d6a0436fe860085ea8308",
-        "references/accounts-list-search.md": "6c525bd6450250599d699ac74c6d7b84d555b3b64a4979644c8afe4262ebcd26",
-        "references/recurring-refresh.md": "e14d17972e060798f50e7059d0a54bd624888913515a637dc2b19a0613023353"
-      },
-      "runtime_config_changes": 0,
-      "foreground_escalations": 0
+    "recovery": {
+      "batch6_initial_failure": "searched_row_not_ready_7840111366055613",
+      "confirmed_diagnosis": "Query was not entered; original unfiltered Accounts list and page text selection visible; no provider/authentication gate. Underlying focus failure cause unproven.",
+      "scope": "same6 missing targets, same collector/browser/approved identity; no reload, alternate profile or runtime edits",
+      "retry_success": true,
+      "all6_then_visually_verified": true,
+      "recurrence_eliminated": false
     },
-    "report_infra_message_id": "1568264963225550889",
+    "operational_diagnostics": [
+      "Interpreter discovery initially failed parsing an intentionally multiline launcher with shlex; no worker or external write ran. Resolved exact exec interpreter then dependency bootstrap.",
+      "AX-only capture supplied no screenshot; separate vision capture saved and inspected before financial writes."
+    ],
+    "report_infra_message_id": "1568347763941314814",
     "report_infra_readback": true
   },
   "pending_card_history": {
@@ -532,8 +523,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-06T08:59:15.947420-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/manual-1568253396287225898/closure-current.json"
+    "verified_at": "2026-11-06T14:32:59.640352-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -561,7 +552,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-06T14:02:00-05:00",
+  "next_run_at": "2026-11-06T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [

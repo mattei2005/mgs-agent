@@ -61720,6 +61720,31 @@
         "readback_verified": true,
         "http": 200
       }
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261106-1402",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "updated_validated_with_historical_d_gaps",
+      "updated_at": "2026-11-06T14:32:59.640352-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 47,
+        "fresh_h": 36,
+        "preserved_h": 0,
+        "pending_d": 0,
+        "renewed_d": 1,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "report_infra_message_id": "1568347763941314814",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [

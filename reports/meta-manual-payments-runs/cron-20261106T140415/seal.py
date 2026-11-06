@@ -1,0 +1,44 @@
+import json,os,subprocess,fcntl,re,runpy,urllib.request
+from pathlib import Path
+from datetime import datetime
+B=Path(__file__).parent;ROOT=Path('/root/mgs-agent');H=ROOT/'data/meta-manual-payments';C=H/'digital-trust-workbook-contract.json';I=ROOT/'data/infra-inventory.json';ID='meta-manual-payments-refresh-20261106-1402'
+def read(p):return json.loads(p.read_text())
+def save(p,d):
+ tmp=p.with_suffix(p.suffix+'.next');tmp.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n');tmp.chmod(0o600);os.replace(tmp,p);assert read(p)==d
+cl=read(B/'closure-current.json');assert cl['accounts']==47 and cl['fresh_h_count']==36 and cl['pending_ui']==[] and cl['other_sheet_data_unchanged']
+job=[j for j in read(Path('/root/.hermes/profiles/zeus/cron/jobs.json'))['jobs']if j['id']=='2ee720363d7d'][0]
+assert job['enabled'] and job['schedule']['expr']=='2 8,14,21 * * *' and job['timezone']=='America/New_York'
+assert job['fire_claim'] and job['last_dispatch']['scheduled_at']=='2026-11-06T14:02:00-05:00'
+assert datetime.fromisoformat(job['next_run_at'])>datetime.now().astimezone()
+cl.update(report_infra_status='pending',cron_changes=0,cron_coordination={'job_id':job['id'],'same_existing_job':True,'schedule_unchanged':True,'next_run_at':job['next_run_at'],'current_fire_claim_reconciled':True},ui_cleanup={'initial_browser_tabs_visually_counted':6,'final_browser_tabs_visually_counted':6,'active_final_surface':'original unfiltered Meta Digital Trust Accounts','owned_tabs_closed':True,'initial_and_final_pixels_and_full_initial_ax_retained':True,'lease_free':True,'final_screenshot':str(B/'surface-final.png')},recovery={'batch6_initial_failure':'searched_row_not_ready_7840111366055613','confirmed_diagnosis':'Query was not entered; original unfiltered Accounts list and page text selection visible; no provider/authentication gate. Underlying focus failure cause unproven.','scope':'same6 missing targets, same collector/browser/approved identity; no reload, alternate profile or runtime edits','retry_success':True,'all6_then_visually_verified':True,'recurrence_eliminated':False},operational_diagnostics=['Interpreter discovery initially failed parsing an intentionally multiline launcher with shlex; no worker or external write ran. Resolved exact exec interpreter then dependency bootstrap.','AX-only capture supplied no screenshot; separate vision capture saved and inspected before financial writes.'])
+entry={'id':ID,'agent':'zeus','type':'authorized_recurring_financial_snapshot','status':cl['status'],'updated_at':cl['verified_at'],'evidence':cl['closure_receipt'],'report_infra_status':'pending','verification':{'accounts':47,'fresh_metrics':47,'fresh_h':36,'preserved_h':0,'pending_d':0,'renewed_d':1,'historical_blank_d':35,'other_sheet_data_unchanged':True,'lease_free':True,'meta_writes':0,'payments_executed':0,'cron_changes':0}}
+def persist():
+ with(H/'writer.lock').open('a')as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX);c=read(C);assert c['account_ids']==read(B/'contract-before.json')['account_ids'];c['latest_refresh_qualification']=cl;c['next_run_at']=job['next_run_at'];c['pending_card_history']={'status':'current_events_resolved_historical_gaps_preserved','account_ids':[],'pending_ui':[],'historical_blank_account_ids':[x['account_id']for x in cl['historical_d_gaps']],'historical_blank_without_proof_count':sum(x['reason']=='no_historical_card_instrument_proof_collected'for x in cl['historical_d_gaps']),'verified_at':cl['verified_at'],'evidence':cl['closure_receipt']};save(C,c)
+ with(ROOT/'data/.meta-financial-inventory.lock').open('a')as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX);d=read(I);arr=d.setdefault('runtime_artifacts',[]);matches=[k for k,x in enumerate(arr)if x.get('id')==ID];assert len(matches)<=1
+  if matches:arr[matches[0]]=entry
+  else:arr.append(entry)
+  save(I,d);assert len([x for x in read(I)['runtime_artifacts']if x.get('id')==ID])==1
+ save(B/'closure-current.json',cl)
+persist()
+state=f"Tick06nov14:02Eastern validado:47API11cartao36linha;metricas{cl['validated_metrics_at']};H36/36 fonteAccounts{cl['h_read_at_min']}a{cl['h_read_at_max']}USD{cl['h_sum_usd']};D1provaMavroa03Mastercard2311USD55406nov,pendenciaUI0;35lacunasDhistoricas34semprova+Growpowerhub04semcobrancalocalizada.29invoicesoutubroUSD{cl['invoice_due_usd']};saldoUSD{cl['totals_usd']['balance']};media03-05novUSD{cl['totals_usd']['average_daily']};J01-06novparcialUSD{cl['totals_usd']['month_spend']}.ReadbackfontesnotaslinksmoedasformulasFGHIJPASS;outraaba intacta. Falhabusca1lote recuperadacom1retrymesmos6faltantes;causainternafoconaoprovada.6abasantes/depois;somentepropriasfechadas;leasefree.0pagamento/billing/cronchange."
+r=subprocess.run(['python3',str(ROOT/'scripts/mgs-knowledge-control.py'),'checkpoint-upsert','--id','meta-manual-payments-digital-trust','--agent','zeus','--thread-id','1563926766286803004','--objective','Atualizar mesmos47IDs Digital Trust; J novembro e invoices outubro; sem pagamentos ou billing','--state',state,'--next-step','Manter mesmo job08:02/14:02/21:02Eastern,47IDs. Proximo tick21:02. Hrenovado36/36;Dsem eventos pendentes,35lacunas historicas qualificadas. Reconciliar target faltante antes de retry;inputs de busca podem nao focar mesmo com coletor pixel;nao confundir com authgate.','--source',cl['closure_receipt']],capture_output=True,text=True,check=True);assert json.loads(r.stdout)['status']=='ok'
+cp=[x for x in read(ROOT/'data/agent-checkpoints.json')['checkpoints']if x['id']=='meta-manual-payments-digital-trust'];assert len(cp)==1 and cp[0]['source']==cl['closure_receipt']
+event={'at':datetime.now().astimezone().isoformat(),'agent':'zeus','event':'meta_manual_payments_recurring_refresh_validated','source_thread':'1563926766286803004','job_id':job['id'],'runtime_artifact_id':ID,'receipt':cl['closure_receipt'],'accounts':47,'fresh_h':36,'preserved_h':0,'renewed_d':1,'historical_d_gaps':35,'pending_ui':[],'other_sheet_data_unchanged':True,'payments':0,'meta_writes':0,'cron_changes':0,'report_infra_status':'pending'}
+with(ROOT/'logs/events-audit.jsonl').open('a')as f:f.write(json.dumps(event,ensure_ascii=False)+'\n')
+args=[str(ROOT/'scripts/send-report-infra-embed.sh'),'--action','modificada','--type','data operacional','--path',str(C)+'; '+str(B/'closure-current.json'),'--reason','Tick financeiro recorrente autorizado06nov14:02Eastern;mesmos47IDs/job2ee720363d7d;sem alteracao de billing.','--evidence',f"47API/36H/1D validadas;pending_ui0;35lacunasDhistoricas;29invoicesoutubroUSD{cl['invoice_due_usd']};HUSD{cl['h_sum_usd']};saldoUSD{cl['totals_usd']['balance']};JnovUSD{cl['totals_usd']['month_spend']};media03-05novUSD{cl['totals_usd']['average_daily']}.ReadbackCGIJ/EF/H/Dnotasfontes+linksUSD+totaisDecimalPASS;outraaba intacta;6abasbrowserantes/depois;leasefree;0pagamento/MetaWrite/billing/cronchanges. Busca nao efetiva no lote6 recuperada1retry dos mesmos6faltantes,sem authgate/bypass;causa interna nao provada." ]
+r=subprocess.run(args,capture_output=True,text=True,timeout=180);(B/'infra-report-output.txt').write_text(r.stdout+'\n'+r.stderr)
+if r.returncode==0:
+ m=re.search(r'message_id=(\d+)',r.stdout);assert m;mid=m[1]
+ x=runpy.run_path(str(ROOT/'scripts/discord-bot-post.py'));x['load_env'](x['DEFAULT_ENV']);token=os.environ.get('MGS_DISCORD_BOT_TOKEN_OVERRIDE')or os.environ['DISCORD_BOT_TOKEN'];req=urllib.request.Request('https://discord.com/api/v10/channels/1498132022634483894/messages/'+mid,headers={'Authorization':'Bot '+token,'User-Agent':'MGS-Zeus/1.0'})
+ with urllib.request.urlopen(req,timeout=25)as response:assert response.status==200;msg=json.load(response)
+ assert msg['id']==mid and msg['channel_id']=='1498132022634483894'and not msg['content']and not msg['mentions']and msg['embeds']and msg['embeds'][0]['title'].startswith('REPORT-INFRA')
+ assert {'Ação','Tipo','Path','Motivo','Evidência'}<={f['name']for f in msg['embeds'][0]['fields']}
+ cl.update(report_infra_status='sent_verified',report_infra_message_id=mid,report_infra_readback=True);entry.update(report_infra_status='sent_verified',report_infra_message_id=mid,report_infra_readback=True);persist()
+ event.update(at=datetime.now().astimezone().isoformat(),event='meta_manual_payments_recurring_refresh_sealed',report_infra_status='sent_verified',report_infra_message_id=mid,report_infra_readback=True)
+else:
+ cl['report_infra_status']='failed_pending';persist();event['report_infra_status']='failed_pending'
+with(ROOT/'logs/events-audit.jsonl').open('a')as f:f.write(json.dumps(event,ensure_ascii=False)+'\n')
+assert json.loads((ROOT/'logs/events-audit.jsonl').read_text().splitlines()[-1])==event
+print(json.dumps({'status':'sealed','contract_readback':True,'checkpoint_readback':True,'inventory_readback':True,'audit_readback':True,'report_infra_status':cl['report_infra_status'],'next_run_at':job['next_run_at']},ensure_ascii=False))
