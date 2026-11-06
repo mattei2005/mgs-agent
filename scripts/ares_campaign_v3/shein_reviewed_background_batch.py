@@ -348,3 +348,23 @@ for _route_name in ('selected', 'validate_descriptor', 'selected_context',
                     'resolve_bundle', 'verify_creative', 'preserved_sourcing',
                     'validate_activation_tree', 'activation_authorization'):
     globals()[_route_name] = _kelly_dispatch(_route_name, globals()[_route_name])
+
+
+# Independent exact Mavroa G005 review; no authority inherited from prior bindings.
+def _mavroa_g005_dispatch(name, original):
+    def routed(*args, **kwargs):
+        from . import shein_reviewed_background_mavroa_g005 as current
+        if name in {'selected', 'validate_descriptor'}:
+            descriptor = args[0] if args else kwargs.get('descriptor', {})
+            if current.selected(descriptor):
+                return getattr(current, name)(*args, **kwargs)
+        elif current.selected_context() is not None:
+            return getattr(current, name)(*args, **kwargs)
+        return original(*args, **kwargs)
+    return routed
+
+for _route_name in ('selected', 'validate_descriptor', 'selected_context',
+                    'active_context', 'effective', 'submit_lane', 'extra_points',
+                    'resolve_bundle', 'verify_creative', 'preserved_sourcing',
+                    'validate_activation_tree', 'activation_authorization'):
+    globals()[_route_name] = _mavroa_g005_dispatch(_route_name, globals()[_route_name])

@@ -40,6 +40,31 @@ Compare cada árvore com seu target manifest: conta, nome, budget, estratégia/c
 
 Faça essa releitura num batch account-scoped com uma entrada por campanha nova e uma por fonte distinta; identifique cada entrada por `name` único. Exija correspondência exata entre nomes pedidos e retornados, além dos códigos HTTP, antes de associar respostas às linhas. Nas fontes, leia `daily_budget`, `bid_strategy` e `adsets{bid_amount}`; nos alvos, leia também identidade, status, início, filhos e campos materiais dos creatives. Compare o cap com a fonte da própria linha, nunca com o primeiro grupo. Compare instantes com `datetime.fromisoformat`, não strings de offset: `-0500` e `-05:00` podem representar o mesmo horário.
 
+Em lotes NOW, valide o horário de cada campanha antes de gravar o recibo: bundles posteriores podem receber da Meta um início diferente do timestamp técnico selado. Não imponha igualdade literal para esse caso nem aceite uma tolerância genérica em segundos. Se os instantes divergirem, use o validador puro `ares_campaign_v3.shein_copy_schedule.normalized_schedule_proof` com state, checkpoint e identidade exatos; ele exige o início observado no readback original e dentro da janela auditada de `adset_copy` daquele bundle. Exija ainda que todos os conjuntos tenham o mesmo instante da campanha. Essa validação reaproveita a prova existente, sem rede, write de schedule ou nova execução do writer:
+
+```python
+from datetime import datetime
+from ares_campaign_v3.shein_copy_schedule import normalized_schedule_proof
+
+expected = definition['start_time']
+observed = tree['campaign']['start_time']
+if datetime.fromisoformat(expected) != datetime.fromisoformat(observed):
+    proof = normalized_schedule_proof(
+        state, checkpoint,
+        request_id=state['request']['request_id'],
+        account_id=tree['campaign']['account_id'],
+        campaign_id=tree['campaign']['id'],
+        idempotency_key=definition['idempotency_key'],
+        expected=expected, observed=observed,
+    )
+    assert proof and proof['verified']
+    # Registrar a normalização comprovada no recibo; preservar o manifest.
+assert all(datetime.fromisoformat(adset['start_time']) ==
+           datetime.fromisoformat(observed) for adset in adsets)
+```
+
+Use `adsets` já normalizados e não vazios. Se a prova falhar, diagnostique o diff material; uma asserção local do verificador não invalida automaticamente a conclusão central nem autoriza replay, alteração de horário ou recriação. Inícios futuros explícitos continuam exigindo igualdade exata de instantes.
+
 Para confirmar ausência de drift depois da ativação, compare cada creative vivo com a definição aprovada e a árvore terminal persistida usando uma projeção material: Page/Instagram, texto, título, descrição, CTA/link, `url_tags`, mídia/variantes, `contextual_multi_ads` e post quando aplicável. Não compare o payload bruto nem inclua thumbnail/source URL temporária na projeção: a renovação de assinatura não é mudança criativa. Exija ainda unicidade separada dos conjuntos de campaign, adset e ad IDs entre linhas; igualdade de quantidade de campanhas não detecta filho repetido ou omitido.
 
 ## 4. Persistir e comunicar a conclusão

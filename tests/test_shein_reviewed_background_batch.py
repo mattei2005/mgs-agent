@@ -229,7 +229,10 @@ class BatchBackgroundTests(unittest.TestCase):
             fake_hour=3
             @classmethod
             def now(cls,tz=None):return datetime(2026,11,3,cls.fake_hour,tzinfo=timezone.utc)
-        target=Manifest.from_dict(self.state['target_manifest']);creation=Manifest.from_dict(self.state['manifest'])
+        # Freeze schema admission to this historical fixture's original test time.
+        # Production future-schedule validation remains unchanged.
+        with patch('ares_campaign_v3.schema.datetime', Clock):
+            target=Manifest.from_dict(self.state['target_manifest']);creation=Manifest.from_dict(self.state['manifest'])
         cp=self.final_checkpoint();proof={'trees':[self.final_tree(i,cp) for i in range(3)],'execution_started_at':self.state['execution_started_at']}
         marker=APPROVED_RESUME.set(self.context())
         try:

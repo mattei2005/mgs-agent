@@ -7487,12 +7487,12 @@
     {
       "agent": "zeus",
       "id": "meta-b00411-1568277865219358791",
-      "next_step": "Validar app/token/Graph e Sheet SA; canário, backup, baseline, repetição limpa; ciclo agendado e readback",
+      "next_step": "Rodolfo precisa corrigir no mesmo item 1Password os dados do app novo (ao menos app_id antigo confirmado; validar também correspondência app_secret/access_token). Após confirmação, retomar preflight sem escrever credenciais.",
       "objective": "Validar e substituir somente B004-10 por B004-11 na rota existente, preservando canal, cron e outras rotas",
-      "source": "discord:message:1568277865219358791;data/meta-app-registry.json",
-      "state": "preflight iniciado; autor rodolfo confirmado na mensagem 1568277865219358791; título b004-11 localizado por id imutável",
+      "source": "discord:message:1568277865219358791;receipt:/root/mgs-agent/reports/meta-b00411-1568277865219358791/preflight-blocker.json",
+      "state": "bloqueado no preflight: título/app_name b004-11, porém app_id 2106159553602347 ainda é o mesmo b004-10 salvo. meta metadata/debug http 400 oauthexception 190 application has been deleted. sheet já contém 6 b004-11 e zero b004-10. cutover não realizado; rota b004-10 permanece pausada; outros apps preservados.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T14:56:45+00:00"
+      "updated_at": "2026-11-06T14:57:46+00:00"
     },
     {
       "agent": "zeus",
@@ -8207,12 +8207,22 @@
     {
       "agent": "ares",
       "id": "shein-1568273779581386903",
-      "next_step": "Perguntar na origem se Kelly autoriza desligar somente Geração de plano de fundo da imagem nas cinco cópias, mantendo fonte intacta. Após resposta, validar diálogo/autoridade live e suporte tipado ao binding atual; retomar somente filhos ausentes pelo executor central; QA integral e readback ACTIVE antes de concluir.",
-      "objective": "Duplicar C023 cinco vezes na Mavroa G005; USD100/dia cada; COCAP USD0.50; agora 06/11",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568273779581386903/background-blocker-readback.json",
-      "state": "aguardando decisão material: meta100/3858293 exige catálogo para image_background_gen opt_in nos dois anúncios fonte. readback comprova c026/c027 paused usd100 cost_cap cap50, um conjunto paused por campanha e zero anúncios com paginação completa. outras três cópias não executadas. nenhuma ativação. mesmo request/manifests/ids e relógio preservados.",
+      "next_step": "Perguntar somente aceite das7omissões atuais nas5cópias; não repetir aprovação background. Validar diálogo live e criar binding próprio para review novo se aprovado; preservar IDs/manifests/relógio e retomar QA+activate_verified pelo core sem recriação.",
+      "objective": "C023x5 Mavroa G005 USD100/dia COCAP USD0.50 NOW06/11; review background Kelly1568278100259770379 aceito",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/feature-review-1568278100259770379/material-review-pending.json",
+      "state": "decisao_background_resolvida; manutenção vinculada validada 185 testes e145 subtests, report-infra1568278868421509122 get confirmado. core complete_paused: c026–030,5conjuntos e10ads, usd500/dia total,cap50; primeiros ids preservados;5 provas mídia válidas. image_background_gen opt_out confirmado. após processamento meta omitiu7features opt_in ainda presentes na fonte: image_animation,image_brightness_and_contrast,image_templates,image_touchups,image_uncrop,product_browsing,video_uncrop. qa semântico rejeita novo delta; nenhuma ativação. fonte intacta.",
       "thread_id": "1558133898209394780",
-      "updated_at": "2026-11-06T14:42:54+00:00"
+      "updated_at": "2026-11-06T15:05:12+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-1568277303106998378",
+      "next_step": "Concluido; sem replay ou nova ativacao. Entrega nao inferida do status ACTIVE.",
+      "objective": "Duplicar C245 5 vezes na Yolokfx04 com USD150 e COCAP USD0.80 para agora",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568277303106998378/final-verification.json",
+      "state": "complete; c269 c270 c271 c272 c273; 5 campanhas active; 10 anuncios; usd150/dia cada; delta usd750/dia; cost_cap usd0.80; now; qa5/5; ids preservados; posts novos",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-06T15:01:32+00:00"
     },
     {
       "agent": "zeus",
@@ -8886,5 +8896,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T14:56:45+00:00"
+  "updated_at": "2026-11-06T15:05:12+00:00"
 }
