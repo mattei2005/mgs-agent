@@ -21,7 +21,7 @@ Use esta skill para estruturar, revisar ou manter leitura intraday, relatório d
 4. Para layout de relatório, abra `references/current-reporting-contract.md`.
 5. Para falhas conhecidas, abra `references/current-operational-pitfalls.md`.
 6. Evidência histórica nunca vira regra ativa por semelhança.
-7. Ao conferir helpers extensos de coleta, selecione por AST as funções e os métodos efetivamente usados pelo adaptador; leia integralmente esses trechos, em vez de imprimir o módulo ou o contrato inteiro. Isso preserva a revisão do código executado sem soterrar o binding e a sequência operacional em históricos ou inventários alheios ao pedido. Encontrado um adaptador semanticamente compatível, pare a descoberta e siga a receita específica.
+7. Ao conferir helpers extensos de coleta, selecione por AST as funções e os métodos efetivamente usados pelo adaptador; leia integralmente esses trechos, em vez de imprimir o módulo ou o contrato inteiro. Para contratos JSON com mapas por conta, projete somente as chaves necessárias, o override do account ID vinculado e o perfil referenciado; nunca imprima o objeto de layout inteiro para descobrir um único override. Isso preserva a revisão do código executado sem soterrar o binding e a sequência operacional em históricos ou inventários alheios ao pedido. Encontrado um adaptador semanticamente compatível, pare a descoberta e siga a receita específica.
 
 ## Contrato obrigatório por operação
 
@@ -111,6 +111,13 @@ Pedido de relatório/atualização a cada intervalo exige enviar toda a coorte e
 4. **Isole pendências por campanha em cada ciclo.** Revalide também os membros já admitidos. Estrutura incompleta, conjunto ausente ou evento não confirmado fica pendente, com aviso deduplicado e nova tentativa; consulte Insights somente dos IDs válidos, preserve o estado de ultrapassagem dos indisponíveis e continue os demais. Não use um assert global de evento/cobertura que derrube toda a coorte por causa de um único membro; preserve o ID pendente para recuperá-lo sem duplicar a admissão.
 5. **Teste antes de habilitar.** Cubra campanha futura sintética, dia anterior/seguinte e outra conta, admissão idempotente, coorte vazia sem consulta financeira global, pendência que se recupera, membro antigo que perde a estrutura sem interromper os válidos, preservação de alertas anteriores, precisão visível da ultrapassagem, divisão de mensagens, replay concluído sem API e expiração antes de API. Confira destino efetivo e rótulos após importar o helper de entrega, não apenas as constantes do runner.
 6. **Valide o estado real e feche.** Faça descoberta e leitura live imediatas, readback do job e auditoria pós-write. Confirme conta, cobertura atual e futura, cadência, fim com data/fuso e situação da leitura inicial; informe limite estrito somente em alerta por ultrapassagem, nunca em relatório periódico sem limiar. Mostre próxima e última atualização no fuso confirmado, sem alegar que uma publicação futura já foi verificada. Uma amostra live comprova somente os alvos existentes naquele corte.
+
+## Complemento financeiro solicitado durante o relatório
+
+1. Incorpore o pedido de acrescentar um resumo ao mesmo request, mesmo que a coleta já tenha começado; preserve conta, período e seleção. A ausência de um override persistido não bloqueia um complemento explicitamente solicitado para esta entrega, nem transforma esse pedido em preferência permanente.
+2. Quando solicitado o consolidado financeiro ao fim, apresente bullets separados na ordem **Gasto → Receita líquida → Saldo → ROI real → ROI estimado**, com moeda, corte e fuso. Mantenha o relatório integral e seu histórico; o resumo é um complemento, não um substituto.
+3. Calcule os valores pelo mesmo modelo validado: some gasto e receitas da seleção, derive saldo e aplique a fórmula financeira vigente aos totais. Não use média dos ROIs por campanha nem copie percentuais de exemplo fornecidos junto aos rótulos como se fossem resultados live. Preserve n/d quando faltar base válida.
+4. Revise o complemento antes de publicar. Se o transporte já entregou e verificou o relatório integral, use a resposta final apenas para o resumo solicitado e a limitação relevante; não repita as tabelas nem refaça a coleta por uma mudança exclusivamente de apresentação. Se o complemento for publicado pelo transporte, faça também seu GET exato antes de afirmar entrega verificada.
 
 ## Métricas e decisão
 
