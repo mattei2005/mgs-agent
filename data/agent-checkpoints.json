@@ -3763,6 +3763,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-AUTOPUSH-1568292926881140757",
+      "next_step": "Excluir somente os quatro recibos do versionamento, preservar bytes, testar fixtures, aguardar push nativo e validar monitor/GitHub; sem retry Meta",
+      "objective": "Recuperar auto-push bloqueado por quatro recibos locais de validação Meta, sem relaxar o guardrail sensível",
+      "source": "discord:1568292926881140757;origin:1568291734985646181;report:1568292292744187929",
+      "state": "in_progress: origin checkpoint/audit reconciled; index empty; sole native watcher active; four local receipts scanned without credential signatures",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-11-06T15:58:38+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-B013-ALERT-PROFILES-20260905",
       "next_step": "Operação normal; próximos ciclos devem manter generic marked=32 updated=false e B013 updates_needed=0 updated=false.",
       "objective": "Adicionar Perfil e Perfil backup aos cards B013 e manter a coluna operacional de removidos compatível com o cabeçalho atual Rem Acum.",
@@ -6086,6 +6096,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-background-api-1568292020517081140",
+      "next_step": "Obter escopo explicito de um canario de duplicacao integralmente PAUSED antes de testar heranca nativa pelo Engine central; validar tracking,setup,features,midia e lineage por readback. Nao criar copia real como se validate_only; nao promover sucesso documental a capacidade validada.",
+      "objective": "Explicar erro Meta100/3858293 e validar rota fiel de duplicacao API sem desabilitar recurso herdado e sem tocar campanhas ativas.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/feature-review-1568261072639758487/background-api-diagnosis.json",
+      "state": "diagnostico concluido por docs oficiais+snapshot original+api live:2adsc232 sao video; enrollment backgroundopt_in original/live nao comprova aplicacao; preview proprio recurso retornaineligible nos2ads. reconstrucao historica reenviou explicitamente feature de catalogo e recebeu3858293. heranca de fields nao sobrescritos em adcopies esta documentada, mas rota fiel sem reenviar degrees_of_freedom_spec ainda nao testada live. zero criacoes/alteracoes meta nesta investigacao; fonte ec235-c239 preservadas.",
+      "thread_id": "1558126286826774711",
+      "updated_at": "2026-11-06T15:56:46+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-daily-0800-20261020",
       "next_step": "Cron ja iniciado aguarda08h para revalidar budget/status e publicar24reports comGET de cada parte. Resultado externo em state/shein-daily-report/2026-10-19/completion.json;retomar somente fontes/partes pendentes pelo mesmojournal se falhar. Nao reenviar por inferencia.",
       "objective": "Relatorio diario D-1 as08h America/New_York nas threads SHEIN existentes exceto Boostingecon/Growpowerhub; inicio20/10 autorizado por Rodolfo",
@@ -7477,12 +7497,12 @@
     {
       "agent": "zeus",
       "id": "meta-b0015-alert-1568285638791532647",
-      "next_step": "Rodolfo renovar o token do perfil admin do mesmo app no item 1Password e confirmar para nova validação; não rotacionar credenciais automaticamente",
-      "objective": "Conferir B001-5 ao vivo e reenviar um alerta real no canal atual",
-      "source": "discord:message:1568285638791532647;receipt:/root/mgs-agent/reports/meta-b0015-alert-1568285638791532647/delivery-readback.json",
-      "state": "alerta live único enviado e readback dos três objetos confirmado. app metadata e roles http 200, nove membros; dois nomes sem resolução. token admin expirado desde 02/11/2026 (oauth 190/463); falha exposta no card nativo. onze atribuições atuais na sheet e três marcadores pendentes; pausas intactas. entrega solicitada concluída; normalização do token depende do titular.",
+      "next_step": "Credencial recuperada; preservar a divergência Beatriz Silva UI presente/API ausente como inconclusiva, sem afirmar remoção nem alterar papéis/credenciais",
+      "objective": "Conferir B001-5 e validar token renovado pelo titular, preservando a discrepância UI/API",
+      "source": "discord:message:1568291734985646181;receipt:/root/mgs-agent/reports/meta-b0015-token-1568291734985646181/validation.json",
+      "state": "token novo válido e app-bound b001-5, titular wah lan; /me/debug metadata/roles http 200. todos os nove membros api resolvidos; ids antes desconhecidos são john tambot e wah lan. divergência remanescente: print mostra beatriz silva, mas app-token /roles não a retorna; causa ainda não comprovada. alerta anterior é histórico e não foi reenviado neste recheck.",
       "thread_id": "1568264305768534178",
-      "updated_at": "2026-11-06T15:30:26+00:00"
+      "updated_at": "2026-11-06T15:53:17+00:00"
     },
     {
       "agent": "zeus",
@@ -8217,12 +8237,12 @@
     {
       "agent": "ares",
       "id": "shein-1568273779581386903",
-      "next_step": "Informar status ACTIVE verificado ao Rodolfo sem atribuir ativação a esta chamada; não reativar nem recriar por replay. Eventual auditoria complementar dos novos creatives deve usar leitura/QA fresco, sem reutilizar provas de outros IDs.",
-      "objective": "C023x5 Mavroa G005 USD100/dia COCAP USD0.50 NOW06/11; Rodolfo1568290413364645940 autoriza seguir padrão da cópia e ativar agora",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/feature-review-1568278100259770379/activation-noop-1568290413364645940.json",
-      "state": "ativacao_verificada_noop: decisão atual rodolfo validada por get/autoridade live; c026–030,5 conjuntos e10ads já active no pre-read,usd100/dia cada eusd500/dia lote,cost_cap/bid50. zero writes novos,zero recriação e sem replay do runner. cta atual get_offer_view nas026/028/029/030 e see_details na027 conforme diálogo exposto. creatives mudaram externamente em4campanhas; provas históricas mídia não declaradas válidas para ids novos. runner histórico postprocess_pending preservado, não se declara qa histórico concluído.",
+      "next_step": "Reconhecer falha e autoria manual na origem; aplicar regra canônica em próximos pedidos. Preservar histórico/IDs, não repetir ativação ou duplicação. Não declarar QA histórico concluído para creatives alterados manualmente.",
+      "objective": "C023x5 Mavroa G005 USD100/dia COCAP USD0.50 NOW06/11; esclarecer autoria da ativação e padrão futuro",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/copy-standard-1568291250883272825/authority.json",
+      "state": "ativacao_manual_informada_por_rodolfo1568291250883272825: kelly ativou manualmente, ares não ativou. leitura anterior comprovou c026–030 e5conjuntos/10ads active,usd500/dia lote,cap50; não atribuir execução ao ares. nova regra canônica ares.shein.standard-copy.inherited-background: preservar configuração-fonte e não perguntar desativação; opt-out automático não autorizado. fonte/skill/registry validados; zero novo write meta.",
       "thread_id": "1558133898209394780",
-      "updated_at": "2026-11-06T15:47:34+00:00"
+      "updated_at": "2026-11-06T15:51:50+00:00"
     },
     {
       "agent": "ares",
@@ -8906,5 +8926,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T15:50:34+00:00"
+  "updated_at": "2026-11-06T15:58:38+00:00"
 }

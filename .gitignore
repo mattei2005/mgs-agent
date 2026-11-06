@@ -142,3 +142,10 @@ work/finance-reaudit-*/batch*-full-postwrite.json
 # or relaxing the watcher's sensitive-path guard. Exact incident path only.
 /reports/meta-app-fleet-1566805898364584050/b013-credential-preflight.json
 
+# Local Meta holder-validation receipts: retain the four reconciled artifacts
+# without publishing them or weakening the sensitive-path guard. Exact paths only.
+/reports/meta-b0015-token-1568291734985646181/cross-token-check.json
+/reports/meta-b0015-token-1568291734985646181/report-readback.json
+/reports/meta-b0015-token-1568291734985646181/scheduled-recovery.json
+/reports/meta-b0015-token-1568291734985646181/validation.json
+

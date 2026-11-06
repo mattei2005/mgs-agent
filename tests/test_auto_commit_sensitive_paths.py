@@ -254,6 +254,35 @@ fi
                     )
                     self.assertEqual(result.returncode, 0 if path in ignored else 1)
 
+    def test_exact_local_meta_holder_receipt_exclusions(self):
+        base = "reports/meta-b0015-token-1568291734985646181/"
+        ignored = [
+            base + "cross-token-check.json",
+            base + "report-readback.json",
+            base + "scheduled-recovery.json",
+            base + "validation.json",
+        ]
+        included = [
+            base + "other-token.json",
+            base + "credentials.json",
+            base + "validation.json.other",
+            "reports/meta-b0015-token-other/validation.json",
+            "work/" + base + "validation.json",
+            "scripts/monitor-meta-app-roles.py",
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            (Path(directory) / ".gitignore").write_text(
+                (ROOT / ".gitignore").read_text()
+            )
+            for path in ignored + included:
+                with self.subTest(path=path):
+                    result = subprocess.run(
+                        ["git", "-C", directory, "check-ignore", "-q", "--", path],
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0 if path in ignored else 1)
+
     def test_exact_local_sb_preflight_exclusions(self):
         # Ignore only these local evidence artifacts, not sibling code or
         # similarly named files. No production file or secret is read.

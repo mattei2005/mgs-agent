@@ -893,6 +893,29 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "meta-b0015-token-1568291734985646181",
+      "agent": "zeus",
+      "type": "meta_app_holder_token_renewal_validation",
+      "source_message_id": "1568291734985646181",
+      "thread_id": "1568264305768534178",
+      "app": "B001-5",
+      "status": "token_recovered_ui_api_membership_gap_remains",
+      "checked_at": "2026-11-06T10:52:02-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-b0015-token-1568291734985646181/validation.json",
+      "token_holder": "Wah Lan",
+      "token_valid_app_bound": true,
+      "all_canonical_checks_http_200": true,
+      "graph_roles": 9,
+      "resolved_names": 9,
+      "previous_unknown_ids_resolved_as": [
+        "John Tambot",
+        "Wah Lan"
+      ],
+      "remaining_gap": "Beatriz Silva present in Rodolfo screenshot, absent from fully paginated app-token roles; cause unproven",
+      "credentials_written_by_zeus": false,
+      "forced_alert": false
+    },
+    {
       "id": "meta-b0015-alert-1568285638791532647",
       "agent": "zeus",
       "type": "meta_app_requested_live_alert",
@@ -61530,6 +61553,38 @@
       },
       "report_infra_message_id": "1568264963225550889",
       "report_infra_readback": true
+    },
+    {
+      "id": "autopush-local-meta-receipts-1568292926881140757",
+      "type": "autocommit_guardrail_recovery",
+      "agent": "zeus",
+      "source_alert_id": "1568292926881140757",
+      "authority_message_ids": [
+        "1562987037370617896",
+        "1562987234351644764"
+      ],
+      "origin_message_id": "1568291734985646181",
+      "origin_report_message_id": "1568292292744187929",
+      "state": "awaiting_native_commit_push",
+      "cause": "Four local Meta validation receipts matched sensitive parent token name; no commit/push started",
+      "correction": "Four exact anchored .gitignore exclusions; artifacts retained unchanged; sensitive guard and sole watcher unchanged",
+      "paths": [
+        ".gitignore",
+        "tests/test_auto_commit_sensitive_paths.py",
+        "profiles/zeus-skills/ops/log-monitor-discord-alert/references/route-pack-06.md"
+      ],
+      "rollback": "/root/.hermes/profiles/zeus/cache/scratch/auto-push-1568292926881140757",
+      "validation": {
+        "watcher_tests_passed": 29,
+        "monitor_tests_passed": 17,
+        "preserved_receipts": 4,
+        "signature_hits_on_four_receipts": 0,
+        "origin_report_live_get": 200,
+        "persistent_watcher_pid": 4029469,
+        "gateway_restart": false,
+        "manual_commit_or_push": false
+      },
+      "updated_at": "2026-11-06T16:00:08.475284+00:00"
     }
   ],
   "profile_skill_references": [

@@ -118,6 +118,33 @@ exec {self.real_git} "$@"
         self.assertNotIn("Sem alterações staged", text)
         self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
 
+    def meta_holder_receipts(self):
+        (self.repo / ".gitignore").write_text((ROOT / ".gitignore").read_text())
+        base = self.repo / "reports/meta-b0015-token-1568291734985646181"
+        base.mkdir(parents=True)
+        for name in ("cross-token-check.json", "report-readback.json",
+                     "scheduled-recovery.json", "validation.json"):
+            (base / name).write_text('{"synthetic_fixture":true}\n')
+        return base
+
+    def test_local_meta_receipts_stay_unchanged_while_normal_file_commits(self):
+        base = self.meta_holder_receipts()
+        self.env["MGS_AUTOCOMMIT_MAX_FILE_BYTES"] = "99000000"
+        before = {p.name: p.read_bytes() for p in base.iterdir()}
+        (self.repo / "normal.txt").write_text("valid")
+        self.run_until("Commit OK:")
+        self.assertEqual(set(self.git("show", "--format=", "--name-only", "HEAD").splitlines()),
+                         {".gitignore", "normal.txt"})
+        self.assertEqual({p.name: p.read_bytes() for p in base.iterdir()}, before)
+        self.assertEqual(self.git("ls-files", "--", str(base)), "")
+
+    def test_local_meta_receipt_exclusions_do_not_allow_sibling_secrets(self):
+        base = self.meta_holder_receipts()
+        (base / "credentials.json").write_text("Synthetic fixture only.\n")
+        self.run_until("BLOQUEADO: arquivo sensível detectado")
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.initial)
+        self.assertEqual(self.git("diff", "--cached", "--name-only"), "")
+
     def test_reviewed_private_runbook_commits(self):
         name = "profiles/zeus-skills/ops/google-drive-agent-automation/references/private-vps-owner-connector.md"
         path = self.repo / name

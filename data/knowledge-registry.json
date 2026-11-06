@@ -3979,6 +3979,24 @@
       "updated_at": "2026-10-19T21:01:17+00:00"
     },
     {
+      "canonical_key": "ares.shein.background-api-eligibility-diagnosis",
+      "canonical_source": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-shein-operations/references/campaign-runtime-recovery.md",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-06T15:56:46+00:00",
+      "id": "ARES-SHEIN-BACKGROUND-ELIGIBILITY-1568292020517081140",
+      "kind": "procedure",
+      "owner": "Ares",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Diagnostico background: enrollment nao e elegibilidade; heranca AdCopies nao equivale a reenvio de create spec",
+      "updated_at": "2026-11-06T15:56:46+00:00"
+    },
+    {
       "canonical_key": "ares.shein.batch-global-qa-activation",
       "canonical_source": "/root/.hermes/profiles/ares/skills/growth/meta-campaign-engine-v3/references/batch-paused-qa-activation.md",
       "consumers": [
@@ -5542,6 +5560,25 @@
       "superseded_by": "ARES-SHEIN-STANDARD-REQUESTS-V3-BID-DELTA-20261009",
       "title": "SHEIN usa três pedidos-padrão oficiais com identidade e lineage explícitas",
       "updated_at": "2026-10-09T15:20:24+00:00"
+    },
+    {
+      "canonical_key": "ares.shein.standard-copy.inherited-background",
+      "canonical_source": "data/ares/meta-ads/operations/SHEIN-US-DIRECT.json",
+      "consumers": [
+        "ares",
+        "direct-traffic-shein-operations",
+        "meta-campaign-engine-v3"
+      ],
+      "domain": "campaign-ops",
+      "effective_at": "2026-11-06T15:49:31.653000+00:00",
+      "id": "ARES-SHEIN-STANDARD-COPY-BACKGROUND-1568291250883272825",
+      "kind": "policy",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "SHEIN duplicação padrão preserva background herdado sem perguntar desativação",
+      "updated_at": "2026-11-06T15:51:38+00:00"
     },
     {
       "canonical_key": "ares.shein-us-direct.standard-campaign-requests",
@@ -16272,5 +16309,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T15:50:34+00:00"
+  "updated_at": "2026-11-06T15:56:46+00:00"
 }
