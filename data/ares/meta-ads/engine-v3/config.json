@@ -460,7 +460,17 @@
       "source_definition_native_inheritance": {
         "enabled": false,
         "stage": "REJECTED_CANARY_NOT_PRODUCTION",
-        "reference_probe_enabled": true,
+        "reference_probe_enabled": false,
+        "reference_probe_result": {
+          "status": "REFERENCE_EQUIVALENCE_VERIFIED_PAUSED",
+          "same_source_creative_ids": true,
+          "same_source_post_ids": true,
+          "background_opt_in_preserved": true,
+          "feature_states_equal_in_fresh_comparison": true,
+          "source_tracking_preserved": true,
+          "new_campaign_tracking_verified": false,
+          "general_production_route_enabled": false
+        },
         "manual_reference_campaign_id": "120250618300670331",
         "manual_source_message_id": "1568310179659780116",
         "reference_target_campaign_id": "120250617574780331",
