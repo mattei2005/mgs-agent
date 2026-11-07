@@ -61,6 +61,14 @@ Verify preserved enrollments with a fresh postprocessing read, not only the imme
 
 Prefer verified persisted creative IDs and full semantic GETs for those IDs. When a missing slot still requires discovery, paginate the account edge with compact `fields=id,name` pages; the current engine uses a page size of 500. Follow every cursor, retain loop/missing-cursor guards and deduplicate by immutable ID before declaring the inventory complete. A matching name selects only a candidate: fetch its full definition and prove account, media, copy and tracking before reuse. If a large edge read fails, reduce page size without truncating inventory coverage or replaying creation; do not mistake one successful page for complete recovery.
 
+## Portfolio audit of an inherited feature
+
+For a read-only audit of all active SHEIN campaigns, reconcile immutable account-ID sets from `operations/SHEIN-US-DIRECT-accounts.json` and the live engine account profiles; never restrict the audit to configured creation-ready accounts or the current manager. Read each account live, paginate campaign and ad edges completely, validate filtered declared totals when provided, and persist reduced per-account batches before aggregating. Recheck active campaign-ID sets at the end and refresh accounts whose set changed.
+
+The feature belongs to ad creatives, not a campaign-level toggle. For ACTIVE/effective-ACTIVE campaigns, inspect all nondeleted/nonarchived ads and state that scope. Classify explicit OPT_IN as enabled, all explicit OPT_OUT as disabled, mixed states separately, and any remaining missing/unknown states as unconfirmed. Do not call a missing field disabled; cross-check missing states on the direct creative nodes before reporting the limitation. Enrollment is not eligibility or delivery.
+
+Aggregate and reconcile campaign IDs/counts in code. Group campaign numbers by exact account and manager, detect duplicate/nonstandard numbers, and validate that any compressed numeric ranges expand back to the original complete lists. Include accounts with no active campaigns in coverage, keep the output inline unless an attachment was requested, and do not mutate campaigns or reinterpret an audit request as opt-out authorization.
+
 ## Sources and confidence
 
 Primary contract:
