@@ -1952,6 +1952,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1568439693702336605",
+      "next_step": "Pedido concluido; nao repetir criacao/ativacao. C017 somente retoma com nova instrucao.",
+      "objective": "Duplicar duas vezes C002 Mavroa Conta02 para 07/11 00:00 preservando budget da fonte",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568439693702336605/final-verification.json",
+      "state": "complete: c018 c019 active; usd30/dia cada, delta usd60/dia; inicio 07/11/2026 00:00 utc-5; 4 ads qa e ids checkpoint verificados; c017 recuperacao suspensa autorizada, preservada paused; posts novos e ressalva flags opcionais age/gender.",
+      "thread_id": "1558126806127611966",
+      "updated_at": "2026-11-07T05:00:37+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -3544,22 +3554,22 @@
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1568408201651822627",
-      "next_step": "Executar one-shot dos mesmos IDs no horario, pre-read e GETfinal; nenhuma recorrencia nem alteracao de budget/lance/filhos.",
+      "next_step": "Concluido; nenhuma recorrencia.",
       "objective": "Pausar042e043 Mavroa04G004 e reativar07/11/2026 00h Nova York; status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568408201651822627/request.json",
-      "state": "scheduled:042e043 paused por getfinal; reativacao07/11/2026 00h nova york;2hierarquias estaveis;25testespass;dryrunlivepass;jobexatoenabled/no_agent/once/destino validado;auditoria8dataspre/postpass;usd70/dia cada preservados",
+      "state": "complete_activated:042e043 active por getfinal; budgets/lances/filhos/programacao preservados",
       "thread_id": "1558131644135637163",
-      "updated_at": "2026-11-06T23:40:56+00:00"
+      "updated_at": "2026-11-07T05:00:14+00:00"
     },
     {
       "agent": "ares",
       "id": "SHEIN-STATUS-1568410965559476336",
-      "next_step": "OneShotexecuta noalvologico,fazpreflightlive/readbackporIDs,POSTsomenteACTIVE nascampanhas eGETfinal;preserva todoscamposnaoalvo. Sucessoavisa apenasorigem;erroresumivel registrado ecausa escalada semreplaycego. Nenhuma recorrencia adicional.",
-      "objective": "Pausar33campanhas nominais Yolokfx-US-SHEIN-EN-03-G005 e reativar uma vez07/11/2026 00h America/New_York,sem alterarbudgets/filhos/creativos.",
+      "next_step": "Concluido; nenhuma recorrencia.",
+      "objective": "Pausar 33 campanhas nominais Yolokfx03G005 e reativar07/11/2026 00h Nova York,status-only",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/status-1568410965559476336/request.json",
-      "state": "scheduled:33/33paused porgetfinal,33rotasaptas,ids eorcamentos/lances/programacao/estadosdosfilhos congelados. ativacao logica07/11/2026 00:00est;oneshotdeterministico ativo evalidado,script no_agent,entrega cronlocal silenciosa eavisopeloares comnonce/get. auditoria8dataspre/postsemconflitooperacional;342checagensoffline+dryrunliveverdes;aguarda alvosemsegurarlane. ativacao futura ainda naoexecutada.",
+      "state": "complete_activated:33/33 active por get final; budgets/lances/filhos/programacao preservados",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-07T00:06:03+00:00"
+      "updated_at": "2026-11-07T05:02:20+00:00"
     },
     {
       "agent": "zeus",
@@ -9026,5 +9036,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T02:10:15+00:00"
+  "updated_at": "2026-11-07T05:02:20+00:00"
 }
