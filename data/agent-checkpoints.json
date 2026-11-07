@@ -172,6 +172,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1568633169933246639",
+      "next_step": "Materializar runner isolado; testar, coletar/publicar leitura inicial e habilitar agenda finita auditada até 08/11 00h EST.",
+      "objective": "Relatórios CPR a cada 30 minutos das campanhas subidas em 07/11 e novas do mesmo dia na Escalatepower04 G004.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1568633169933246639/manifest.json",
+      "state": "preparing: identidade, origem e fuso america/new_york confirmados por get; coorte dinâmica expressa; somente leitura.",
+      "thread_id": "1558147101924270111",
+      "updated_at": "2026-11-07T14:29:37+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -9056,5 +9066,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T14:11:46+00:00"
+  "updated_at": "2026-11-07T14:29:37+00:00"
 }
