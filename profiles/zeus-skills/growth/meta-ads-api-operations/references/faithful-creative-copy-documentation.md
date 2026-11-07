@@ -69,6 +69,14 @@ The feature belongs to ad creatives, not a campaign-level toggle. For ACTIVE/eff
 
 Aggregate and reconcile campaign IDs/counts in code. Group campaign numbers by exact account and manager, detect duplicate/nonstandard numbers, and validate that any compressed numeric ranges expand back to the original complete lists. Include accounts with no active campaigns in coverage, keep the output inline unless an attachment was requested, and do not mutate campaigns or reinterpret an audit request as opt-out authorization.
 
+### Preserve scope and evidence when API unknowns require UI verification
+
+1. Persist a durable manifest before opening the browser: exact account/campaign/ad/creative IDs, original API classification, authorization source and required control. Count campaigns, accounts, ads and unique creatives independently in code; creative deduplication can reduce API probes, but its count is not the number of ads in the UI scope. Do not leave the sole resumable manifest in an expiring scratch directory.
+2. Bind one representative pending ad to the correct account/profile and validate a read-only inspection path to the exact named setting before expanding to the batch. Opening its editor, seeing an enhancement summary or authenticating a profile is not a confirmed toggle state. Do not present an uncompleted inspection attempt as a proven bulk-automation method.
+3. Save per-ad evidence and roll it up through the original campaign classification rules. Preserve unresolved ads and campaigns as unconfirmed; a first-ad result or one account's session does not establish the remaining scope. An asset-permission warning proves that specific gate, not that the website is logged out or that API access is missing.
+4. If a protected authentication challenge blocks inspection, route the handoff through `secure-remote-windows-automation` and its interactive-browser reference. Preserve the exact profile, durable manifest, completed/pending counts and next action. Release the desktop lease and distinguish transport recovery from audit progress; never count browser setup as a visually confirmed campaign.
+5. Report only verified campaign results, including zero when no exact setting was observed, and keep the API-unknown classification unchanged until evidence resolves it. Do not grant permissions, change credentials, edit or publish ads to unlock a read-only audit.
+
 ## Sources and confidence
 
 Primary contract:
