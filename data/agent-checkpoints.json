@@ -5696,6 +5696,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-cpr-1568627893100355655",
+      "next_step": "Executar slots09:28-23:58EST a cada30min, descobrindo criadas07/11 na mesma conta; expirar08/11 00hEST sem API. Nao alterar Meta.",
+      "objective": "Relatorios CPR30min de07/11, criadas hoje e futuras Growpowerhub04",
+      "source": "data/ares/meta-ads/state/cpr-updates/1568627893100355655/manifest.json",
+      "state": "agenda finita habilitada e readback validado; inicial09:10est entregue e get confirmado:004 ativa,gastousd0,cpr n/d. 41testes pass; auditoria global pre/pos zero colisao operacional; report-infra get verificado. fuso live america/new_york prevalece sobre catalogo historico.",
+      "thread_id": "1558147134040178828",
+      "updated_at": "2026-11-07T14:11:46+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-cpv-account05-creative-cut24h",
       "next_step": "Rodolfo/Zeus decidir e aprovar runtime deterministico de first-delivery especifico da conta05; ate la acompanhar spend/serving nos relatorios live sem alterar a arquitetura",
       "objective": "Publicar C51-C53 na conta 05 com CBO 1x1x3, MAXVOL, SUBSCRIBE, nove criativos reconciliados e readback completo",
@@ -9046,5 +9056,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T13:52:29+00:00"
+  "updated_at": "2026-11-07T14:11:46+00:00"
 }
