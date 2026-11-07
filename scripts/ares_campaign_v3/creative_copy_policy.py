@@ -51,7 +51,8 @@ def verify_creative(actual,expected):
     # The permanent delta applies only when this resource is explicitly present.
     # Existing operation QA remains authoritative for payloads without it.
     if FEATURE in wanted.get('degrees_of_freedom_spec',{}).get('creative_features_spec',{}):
-        verify_degrees(actual.get('degrees_of_freedom_spec'),wanted['degrees_of_freedom_spec'])
+        from .reviewed_copy_omissions import expected_degrees
+        verify_degrees(actual.get('degrees_of_freedom_spec'),expected_degrees(actual,wanted))
 
 
 def verify_record(bundle,record):

@@ -366,6 +366,8 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
     source_target = copy.deepcopy(source_set.get('targeting') or {})
     target_target = copy.deepcopy(target_set.get('targeting') or {})
     warnings = []
+    from .reviewed_copy_omissions import warning as omission_review_warning
+    if omission_review_warning():warnings.append(omission_review_warning())
     if source_target != target_target:
         source_flags = source_target.get('targeting_automation', {}).pop('individual_setting', None)
         target_flags = target_target.get('targeting_automation', {}).pop('individual_setting', None)
@@ -764,7 +766,9 @@ def run_request(request: dict[str, Any], *, confirm_execute: bool = False, refer
     from .shein_channel_authority import CACHE
     marker = CACHE.set({})
     try:
-        return _run_request_scoped(request, confirm_execute=confirm_execute, reference_only=reference_only)
+        from .reviewed_copy_omissions import review_context
+        with review_context(request):
+            return _run_request_scoped(request, confirm_execute=confirm_execute, reference_only=reference_only)
     finally:
         CACHE.reset(marker)
 
