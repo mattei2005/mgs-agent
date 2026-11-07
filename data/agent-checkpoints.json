@@ -8897,12 +8897,12 @@
     {
       "agent": "zeus",
       "id": "zeus-shein-background-1568656839132971009",
-      "next_step": "Buscar somente caminho que permita Website URL nova com features preservadas; nao repetir proposta url_tags nem testes ja refutados, nao desativar recurso ou alterar fonte. Promover somente apos prova integral no core; Ares mantem Campaign Ops nos pedidos originais.",
-      "objective": "Corrigir executor preservando midia, copy e recursos; novas UTMs obrigatoriamente na Website URL; recuperar os dois pedidos originais Kelly.",
-      "source": "discord:1568675172209139845",
-      "state": "bloqueado_tecnico_sem_patch. rodolfo1568675172209139845 rejeitou explicitamente migrar utms para url parameters/url_tags. proposta retirada; nao aguarda aceite. mesmo criativo significa midia/copy/configuracao preservadas, nao igualdade obrigatoria do creative_id imutavel. ultimo teste nativo v25 rejeitado100/3858504 com zero ads confirmado. pedidos originais continuam em hold, sem retomada/ativacao.",
+      "next_step": "Falta prova de duplicacao com Website URL efetivamente nova e recursos preservados. Controle manual de ontem manteve URL antiga. Nao repetir testes refutados nem liberar producao; obter controle UI autorizado com Page access ou investigacao especifica da Meta, sem ampliar permissoes implicitamente.",
+      "objective": "Corrigir executor preservando midia/copy/recursos e novas UTMs na Website URL; recuperar mesmos pedidos Kelly.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/zeus-background-1568656839132971009/ui-readonly-1568676042510565447.json",
+      "state": "bloqueado_tecnico_sem_patch. inspecao read-only do gerenciador da c242yolo confirmou ator rodolfo e conta correta, mas ui informa falta de acesso a criacao de anuncios da page. nao houve edicao de url/recursos,save/publish,grant,criacao ou ativacao. modal cancelado,aba propria fechada,janela original restaurada e leasepc1liberada. esse bloqueio e so do controle ui;nao invalida tokenapi nem tornapc1dependencia. proposta urlparams continua rejeitada.",
       "thread_id": "1568669160798683260",
-      "updated_at": "2026-11-07T17:15:54+00:00"
+      "updated_at": "2026-11-07T17:28:48+00:00"
     },
     {
       "agent": "zeus",
@@ -9106,5 +9106,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T17:15:54+00:00"
+  "updated_at": "2026-11-07T17:28:48+00:00"
 }
