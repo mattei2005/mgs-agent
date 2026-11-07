@@ -893,6 +893,29 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-shein-ui116-1568755642695426089",
+      "agent": "zeus",
+      "type": "read_only_pc1_campaign_feature_audit",
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/shein/ui116-1568755642695426089/blocked-authentication.json",
+      "scope_file": "/root/mgs-agent/data/ares/meta-ads/audit/shein/ui116-1568755642695426089/scope.json",
+      "authority_message_id": "1568755642695426089",
+      "authentication_followup_message_id": "1568756803129446482",
+      "origin_thread_id": "1568669160798683260",
+      "status": "blocked_facebook_profile_login_after_pc_unlock",
+      "requested_campaigns": 116,
+      "accounts": 23,
+      "ads": 239,
+      "visually_confirmed_campaigns": 0,
+      "pending_campaigns": 116,
+      "desktop_lease_released": true,
+      "meta_writes": 0,
+      "credential_or_permission_changes": false,
+      "opened_profiles_preserved": [
+        "k1347b8r",
+        "kswegu9"
+      ]
+    }, 
+    {
       "id": "dr-ack-investigation-1568739342510325877",
       "type": "disaster_recovery_ack_incident",
       "agent": "zeus",
