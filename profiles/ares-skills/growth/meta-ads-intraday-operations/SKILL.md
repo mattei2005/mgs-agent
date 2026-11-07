@@ -17,7 +17,7 @@ Use esta skill para estruturar, revisar ou manter leitura intraday, relatório d
 
 1. Identifique a operação, a conta e o pedido exato.
 2. Resolva primeiro thread → conta pelo binding canônico da operação e confira a conta no catálogo vigente; depois abra somente o contrato e as políticas desse recorte. Consulte `accounts/` quando o contrato apontar esse registro. Em operações com catálogo corporativo, a ausência de um arquivo individual não comprova falta de acesso: confirme o binding de credencial vigente e a identidade por GET, sem usar outra conta como fallback.
-3. Carregue a skill específica da estratégia/operação, quando existir. Para SHEIN, use `skill_view` na skill `direct-traffic-shein-operations` para abrir sua referência `canonical-report-renderer.md`, seções de coleta pontual e resumo complementar; não redescubra o layout em exemplos históricos desta skill genérica. Consulte também `SHEIN-US-DIRECT.json#/reporting/account_intraday_summary_overrides` projetando somente a conta vinculada: um complemento ativo faz parte da entrega, não substitui o relatório integral e deve usar o mesmo modelo financeiro validado. Inclua-o no checklist antes da publicação e só conclua após o GET do relatório e do complemento.
+3. Carregue a skill específica da estratégia/operação, quando existir. Classifique a entrega antes de abrir o pipeline: pedido exclusivamente de custo por resultado segue a receita **Atualizações periódicas de custo por resultado**, com evento e Insights Meta, sem coletar receita SB ou histórico financeiro não solicitados. Para relatório financeiro/integral SHEIN, use `skill_view` na skill `direct-traffic-shein-operations` para abrir sua referência `canonical-report-renderer.md`, seções de coleta pontual e resumo complementar; não redescubra o layout em exemplos históricos desta skill genérica. Consulte também `SHEIN-US-DIRECT.json#/reporting/account_intraday_summary_overrides` projetando somente a conta vinculada: um complemento ativo faz parte da entrega, não substitui o relatório integral e deve usar o mesmo modelo financeiro validado. Inclua-o no checklist antes da publicação e só conclua após o GET do relatório e do complemento.
 4. Para layout de relatório, abra `references/current-reporting-contract.md`.
 5. Para falhas conhecidas, abra `references/current-operational-pitfalls.md`.
 6. Evidência histórica nunca vira regra ativa por semelhança.
@@ -60,7 +60,7 @@ autonomous_guarded  Exige política própria, allowlist, limites e aprovação f
 
 ## Governança consolidada
 
-- Runtime/API/dados reais vencem snapshots para estado atual.
+- Runtime/API/dados reais vencem snapshots para estado atual. Antes de materializar uma agenda por dia civil, confirme `id,name,currency,timezone_name` por GET da conta exata e derive desse fuso a data da mensagem autenticada, a seleção, os slots e a expiração. Se catálogo ou contexto histórico divergir, registre a evidência live no manifesto/checkpoint e comunique o fuso confirmado; não copie o timezone hardcoded de um runner anterior nem altere o catálogo como efeito lateral do relatório.
 - MGS OS, `authorized-users.json` e `permissions-matrix.md` vencem para dono e autoridade.
 - Token vem do item 1Password registrado na conta; nunca existe token global implícito e nunca é impresso.
 - Em auditoria de confidencialidade, isolamento e pedidos globais, seguir `references/confidentiality-scope-audit.md`: testar formatos alternativos e fontes antes de concluir que o gate cobre toda a operação.
