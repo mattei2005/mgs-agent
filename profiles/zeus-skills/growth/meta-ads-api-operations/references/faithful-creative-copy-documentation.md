@@ -32,6 +32,12 @@ Before proposing or requesting authorization to edit a historical canary, reconc
 
 Require the same saved object to demonstrate new Website URL tracking and the required source feature configuration together. A manual copy that preserves the old creative/post and old tracking proves reuse, not the changed-destination case. A screenshot with source campaign tracking or mismatched campaign/adgroup codes is not proof that new tracking was fully validated. Report that evidence gap without claiming the UI cannot do it or asking the manager to repeat already-provided context.
 
+## UI gate and readback interpretation
+
+- Treat an Existing campaign selector warning about a different catalog as evidence of that UI gate, not proof of actual source/target catalog IDs. Compare campaign/adset promoted objects and creative configuration before diagnosing a dropped catalog; never add a catalog or disable enrollment merely to make the selector accept the target.
+- A fresh-ad editor can preselect an unrelated default Page. Verify the exact required source Page before entering media/copy or publishing; search by both immutable ID and exact name when the picker is empty. A missing human-session Page does not imply missing System User/API access. Discard only the task-owned unpublished draft, never global drafts or existing objects, and verify the target and source afterward.
+- Meta thumbnail image locators can rotate between GETs while the bytes remain identical. Compare immutable creative/video/post IDs, all substantive settings and, when image_url is the only delta, fetch both locators privately and compare image bytes by SHA-256. Record the raw delta and byte evidence; do not silently ignore media changes or declare an anomaly from a rotating locator.
+
 ## Sources and confidence
 
 Primary contract:
