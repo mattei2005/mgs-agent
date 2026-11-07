@@ -182,6 +182,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1568713522743869483",
+      "next_step": "Testar coletor dinamico, enviar leitura inicial com GET, auditar e habilitar agenda ate meia-noite ET",
+      "objective": "Relatorios CPR acumulado dia Mavroa04 cada 30 minutos, campanhas criadas 07/11/2026 atuais e futuras",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1568713522743869483",
+      "state": "fonte original e correcao autenticadas; conta usd america/new_york confirmada por get; preparando primeira entrega e agenda finita read-only",
+      "thread_id": "1558147152528674957",
+      "updated_at": "2026-11-07T19:48:29+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -9126,5 +9136,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T19:39:08+00:00"
+  "updated_at": "2026-11-07T19:48:29+00:00"
 }
