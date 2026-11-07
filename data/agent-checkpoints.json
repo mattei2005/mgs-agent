@@ -8397,12 +8397,12 @@
     {
       "agent": "ares",
       "id": "shein-1568649228383686737",
-      "next_step": "Validar autoridade live, conta, fonte e admissão; executar Engine v3 e verificar cinco cópias.",
-      "objective": "Duplicar C031 cinco vezes na MAVROA-US-SHEIN-ES-05-G005, USD100 por campanha, COCAP USD0.78, início imediato 07/11/2026.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568649228383686737/request.json",
-      "state": "pedido novo registrado; escopo positivo validado; preflight vivo pendente.",
+      "next_step": "Recuperação técnica deve representar cópia padrão preservando enrollment, mídia/copy e tracking novo. Retomar mesmo request/IDs pelo core somente após caminho compatível comprovado; não repetir payload rejeitado, não desligar feature nem adicionar catálogo sem autorização específica.",
+      "objective": "Duplicar C031 cinco vezes na MAVROA-US-SHEIN-ES-05-G005, USD100/dia cada, COCAP USD0.78, imediato07/11/2026.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568649228383686737/catalog-blocker-readback.json",
+      "state": "incompleto: meta100/3858293 rejeitou ads e creatives por image_background_gen opt_in sem catálogo. fonte são dois vídeos, recurso ineligible nas duas previews; não prova necessidade comercial de catálogo. c033/034 paused com usd100/dia e cap78,1conjunto cada,zero ads; outras3não criadas. fonte preservada; não desativar recurso nem criar catálogo. predecessor manual reconciliado sem qa fictício.",
       "thread_id": "1558133898209394780",
-      "updated_at": "2026-11-07T15:32:57+00:00"
+      "updated_at": "2026-11-07T15:39:05+00:00"
     },
     {
       "agent": "ares",
@@ -9086,5 +9086,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T15:37:51+00:00"
+  "updated_at": "2026-11-07T15:39:05+00:00"
 }
