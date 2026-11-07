@@ -1,0 +1,46 @@
+# Faithful creative reuse and destination changes
+
+Use this reference when a faithful clone must keep source media, copy and feature configuration while writing new tracking directly into Website URL. It is a documentation and diagnostic checklist, not authorization to disable a feature, add a catalog, change identity, create extra test objects or weaken QA.
+
+## Establish the contract at the correct object level
+
+- Separate campaign/adset creation, ad creation, reusable media (`video_id` / `image_hash`), AdCreative identity, post identity, individual feature enrollment and effective eligibility. Fresh campaign creation does not by itself bypass creative validation.
+- The official Video and Carousel Ads guide documents creation from an existing video ID. Reusing the same media does not require retaining the same technical creative ID.
+- The AdCreative update operation lists account_id, adlabels, name and status; a Field enum containing link_url does not make destination mutable on an existing creative node. Consult endpoint-specific writable parameters, not a generic SDK field list.
+- For a video creative, inspect `object_story_spec.video_data.call_to_action.value.link`; for link ads inspect `object_story_spec.link_data.link`; inspect `asset_feed_spec.link_urls` where the subtype uses asset feeds. A top-level link_url example is not proof that it replaces every nested destination subtype.
+
+## Native Ad Copies semantics
+
+- Supply overrides under `creative_parameters`. Passing degrees_of_freedom_spec beside that parameter is not the documented nesting.
+- Overrides replace complete top-level values, not individual nested leaves. If replacing object_story_spec or degrees_of_freedom_spec, construct the complete required value and validate all required source settings afterward.
+- Omitting a block in native copy means inheritance; omitting it in fresh standalone creation can mean defaults. These are not equivalent experiments.
+- Inspect the installed transport and the attempt journal before treating a community workaround as new. If correct nesting and normalization were already used, the same snippet is not evidence for another live retry.
+
+## Enrollment is not eligibility, but neither may be silently waived
+
+- The official Advantage+ Creative guide says ineligible OPT_IN features can be removed and deprecated standard_enhancements fields can still appear in GET responses. A GET payload is not automatically a valid create payload.
+- The Generative AI API guide limits image_background_gen to catalog product images; Meta Business Help explicitly says background generation is unavailable for video ads. A legacy OPT_IN on a video therefore does not prove that background generation is actually rendering.
+- Check feature-specific preview transformation_spec and applicable placements. Preserve the difference between source configuration, eligible transformation and actual rendered output.
+- Read screenshots literally. Video effects, video touch-ups and image background generation must not be equated without a documented/API mapping. A summary listing enhancements does not establish every individual toggle's state.
+- Do not use ineligibility as implicit approval to change enrollment. If the acceptance contract requires retaining that configured state, preserve the requirement or surface the exact conflict; do not silently substitute OPT_OUT, defaults, a new catalog or relocated UTMs.
+
+## Evidence for a complete manual control
+
+Require the same saved object to demonstrate new Website URL tracking and the required source feature configuration together. A manual copy that preserves the old creative/post and old tracking proves reuse, not the changed-destination case. A screenshot with source campaign tracking or mismatched campaign/adgroup codes is not proof that new tracking was fully validated. Report that evidence gap without claiming the UI cannot do it or asking the manager to repeat already-provided context.
+
+## Sources and confidence
+
+Primary contract:
+- https://developers.facebook.com/documentation/ads-commerce/graph-api/reference/adgroup/copies
+- https://developers.facebook.com/blog/post/2025/05/28/you-can-now-change-creative-fields-when-duplicating-ads-with-ad-copies-api/
+- https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-creative
+- https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/ad-account/adcreatives
+- https://developers.facebook.com/documentation/ads-commerce/marketing-api/guides/videoads
+- https://developers.facebook.com/documentation/ads-commerce/marketing-api/creative/advantage-creative/get-started
+- https://developers.facebook.com/documentation/ads-commerce/marketing-api/creative/generative-ai-features
+- https://www.facebook.com/business/help/981940746195135
+
+Community nesting example (not a vendor guarantee or proof for a specific account/feature combination):
+- https://developers.facebook.com/community/threads/2017633248799556/
+
+Distinguish researched, API-accepted, saved/read-back and common-executor-homologated outcomes. Public SDK fields, third-party validation-only reports, other accounts' success and source-reference copies do not establish the full acceptance contract. Never turn failure of selected routes into universal API impossibility.
