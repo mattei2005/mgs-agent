@@ -15855,6 +15855,24 @@
       "updated_at": "2026-08-17T13:01:32+00:00"
     },
     {
+      "canonical_key": "acquisition.meta.copy.image_background_gen",
+      "canonical_source": "context/meta-creative-copy-policy.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "acquisition",
+      "effective_at": "2026-11-07T20:25:03.793000+00:00",
+      "id": "meta-copy-image-background-opt-out-1568722979569930414",
+      "kind": "policy",
+      "owner": "Rodolfo",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Duplicacao Meta sem geracao de fundo de imagem herdada",
+      "updated_at": "2026-11-07T20:28:58+00:00"
+    },
+    {
       "canonical_key": "finance.sms_funnel.daily_consumption.accounting",
       "canonical_source": "data/finance-sms-usage-contract.json",
       "consumers": [
@@ -16345,5 +16363,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-06T21:16:58+00:00"
+  "updated_at": "2026-11-07T20:28:58+00:00"
 }

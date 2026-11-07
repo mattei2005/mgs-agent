@@ -893,6 +893,28 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "meta-copy-image-background-opt-out-1568722979569930414",
+      "agent": "zeus",
+      "type": "permanent_campaign_copy_policy",
+      "path": "/root/mgs-agent/context/meta-creative-copy-policy.md",
+      "authority_message_id": "1568722979569930414",
+      "origin_thread_id": "1568669160798683260",
+      "status": "policy_registered_ares_execution_in_progress",
+      "canonical_key": "acquisition.meta.copy.image_background_gen",
+      "scope": "All authorized Meta campaign duplications: inherited enabled image_background_gen becomes OPT_OUT only on copies; no repeated review. Source and every other feature preserved.",
+      "supersession": "Supersedes preservation/individual approval for this feature alone; original request scope and other critical gates remain.",
+      "implementation_owner": "ares",
+      "shared_code_integrator_thread_id": "1558133898209394780",
+      "request_writers": {
+        "shein-1568649228383686737": "1558133898209394780",
+        "shein-1568649923107225623": "1558126286826774711"
+      },
+      "handoff_message_ids": ["1568724098790723585", "1568724101965549591"],
+      "handoff_receipt": "/root/mgs-agent/data/ares/meta-ads/audit/shein/background-optout-policy-1568722979569930414/handoff-receipts.json",
+      "production_completion_verified": false,
+      "zeus_parallel_meta_writer": false
+    },
+    {
       "id": "zeus-shein-background-1568656839132971009",
       "agent": "zeus",
       "type": "bounded_recovery_diagnostic",

@@ -751,7 +751,7 @@ class CampaignEngine:
                     if slot in known_creatives and str(known_creatives[slot]) != str(creative_id):
                         raise ExecutionFailed("existing-post recovery has conflicting persisted creative IDs")
                     known_creatives[slot] = str(creative_id)
-        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags"
+        creative_fields = "id,name,account_id,object_story_id,effective_object_story_id,object_story_spec,asset_feed_spec,instagram_user_id,contextual_multi_ads,media_sourcing_spec,url_tags,degrees_of_freedom_spec"
         for ci, ai in ordered_slots:
             creative_id = str(known_creatives.get(f"{ci}.{ai}") or "")
             if creative_id:
@@ -1603,6 +1603,9 @@ class CampaignEngine:
             _atomic_json(checkpoint_path, lane_result)
             progress_token = progress.CURRENT.set((record, lambda: _atomic_json(checkpoint_path, lane_result)))
             try:
+                from .creative_copy_policy import record_resolution
+                record_resolution(bundle, record)
+                _atomic_json(checkpoint_path, lane_result)
                 from .shein_reviewed_background import resolve_bundle
                 bundle = resolve_bundle(self, bundle, transport, record)
                 mode = bundle.campaigns[0].mode
@@ -1624,6 +1627,8 @@ class CampaignEngine:
                 else:
                     ids = self._run_from_zero_bundle(bundle, transport, record)
                 record["campaign_ids"] = ids
+                from .creative_copy_policy import verify_record
+                verify_record(bundle, record)
                 record["quota_completion"] = self.quota.complete((bundle.app_key, account), bundle_request_id)
                 record["status"] = "COMPLETE"
                 record.pop("error", None)

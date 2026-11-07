@@ -8437,12 +8437,12 @@
     {
       "agent": "ares",
       "id": "shein-1568649923107225623",
-      "next_step": "Resolver incompatibilidade de materializacao fiel na rota central sem desativar features nem alterar tracking; preservar request, manifests, IDs, fonte e relogio; retomar somente camadas ausentes e concluir QA integral e readback ACTIVE das cinco campanhas. Nao repetir payload rejeitado ou copiar shells existentes.",
-      "objective": "Duplicar C242 cinco vezes na Yolokfx-US-SHEIN-EN-03-G005, USD150 diarios por copia, COCAP USD0.68 e inicio imediato 07/11/2026.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568649923107225623/rejection-readback.json",
-      "state": "recovery_pending: meta 100/3858293 impede a materializacao fiel do enhancement herdado image_background_gen opt_in. get da fonte confirma dois videos, sem product_set_id; preview do recurso retorna ineligible nos dois. c243 e c244 existem paused, usd150/dia e cap68, um conjunto e zero anuncios cada; demais tres slots ainda nao executados. nenhuma copia ativa; fonte preservada. opt-out automatico e pergunta rotineira de desativacao proibidos pela politica vigente.",
+      "next_step": "Apos integracao central da politica/paginacao, retomar mesmo request sem recriar shells;QA todos10ads e readback5ACTIVE;fonte/UTMs preservadas",
+      "objective": "Cinco copias C242 YOLO03G005 USD150/dia COCAP0.68 NOW original, somente background desativado",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/feature-review-1568723276719591606/continuation.json",
+      "state": "autorizacao rodolfo e adapter exato validados;72unittest+106pytest38subtests pass;report1568724511824678986get. retomadas sem novos writes falharam get inventario5000http500;limite500http200 paginado comprovado;c243/c244originais paused zero ads reconfirmados. integrador unico mavroa avisado1568725142123712604get;nenhuma outra edicao compartilhada nesta sessao.",
       "thread_id": "1558126286826774711",
-      "updated_at": "2026-11-07T15:37:51+00:00"
+      "updated_at": "2026-11-07T20:34:07+00:00"
     },
     {
       "agent": "ares",
@@ -8906,6 +8906,16 @@
     },
     {
       "agent": "zeus",
+      "id": "zeus-meta-copy-background-policy-1568722979569930414",
+      "next_step": "Zeus verifica codigo central/testes e recibos de 5 campanhas em cada conta; Ares Mavroa e unico integrador de codigo compartilhado e writer da conta1829406761389732; sessao Yolo continua unica dona da conta2429758060563333. Nenhum writer Meta paralelo pelo Zeus. Nao pedir sessao humana nem nova aprovacao para este recurso.",
+      "objective": "Regra permanente image_background_gen OPT_OUT somente em copias; acompanhar conclusao integral pedidos Kelly Mavroa e Yolo",
+      "source": "context/meta-creative-copy-policy.md",
+      "state": "policy_registered_handoffs_verified_ares_execution_in_progress",
+      "thread_id": "1568669160798683260",
+      "updated_at": "2026-11-07T20:30:28+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "zeus-mgs-domain-scope-20260927",
       "next_step": "Nenhum. Inclusão futura continua restrita a decisão de Rodolfo e deve usar somente fonte que afirme propriedade MGS; lista operacional/parceira não serve como prova de ownership.",
       "objective": "Impedir Ares e Atena de listar, confirmar ou operar domínios fora do portfólio MGS em canais compartilhados, sem registrar projetos particulares.",
@@ -9146,5 +9156,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T20:27:52+00:00"
+  "updated_at": "2026-11-07T20:34:07+00:00"
 }

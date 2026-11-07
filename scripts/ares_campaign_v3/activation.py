@@ -121,6 +121,10 @@ def validate_live(live, expected, spec, request_id=None):
             if kind=='ads':
                 cr=row.get('creative') or {};ocr=original.get('creative') or {}
                 slot = next((a for a in spec.ads if a.name == row['name']), None)
+                if spec.mode in {'pure_clone', 'clone_prestaged', 'clone_page_switch'}:
+                    from .creative_copy_policy import verify_creative as verify_copy_creative
+                    if slot is None:raise ValueError('activation copy policy unknown ad slot')
+                    verify_copy_creative(cr, slot.creative_payload)
                 if slot is not None and slot.media is not None and slot.media.media_type == 'image':
                     from .creative_media import matches
                     if (not matches(cr, slot.creative_payload)

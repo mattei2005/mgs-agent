@@ -19,6 +19,8 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 
 ## Safety model
 
+Active Meta-copy exception approved permanently by Rodolfo `1568722979569930414`: apply `context/meta-creative-copy-policy.md` to all authorized duplications, not only SHEIN. Turn inherited enabled `image_background_gen` off only on the copy, without another question; keep source and all other features intact. This supersedes older per-occurrence approval/preservation gates for this feature alone. Verify central build/resume/materialization/QA implementation, not just policy text.
+
 1. **Read-only and dry-run first.** Always verify token/account/campaign visibility before write.
 2. **Project Graph output before printing or saving it.** Keep 1Password tokens/proxies and raw Graph responses in process memory; emit only allowlisted identity/result fields. Consume `paging.next` internally and report `has_more` or cursor progress instead of the URL, because Graph embeds access tokens in pagination links even on ordinary campaign GETs. Apply the same projection to nested batch bodies and exception messages; removing a top-level `access_token` key alone is insufficient.
 3. **Write tests must be controlled.** Campaigns/adsets/ads should be created `PAUSED`, with budget guardrails and a known loser/source campaign.

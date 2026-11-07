@@ -113,6 +113,11 @@ def build(request, source, number, account_config):
         payload = payload or one; campaigns.extend(one['campaigns'])
     assert payload is not None
     payload['request_id'] = request['request_id']; payload['campaigns'] = campaigns
+    if mode in {'pure_clone', 'clone_prestaged', 'clone_page_switch'}:
+        from .creative_copy_policy import effective
+        for campaign in payload['campaigns']:
+            for ad in campaign['ads']:
+                ad['creative_payload'] = effective(ad['creative_payload'])
     return payload
 
 

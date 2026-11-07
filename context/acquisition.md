@@ -10,6 +10,8 @@ Aquisição é a frente que compra ou direciona tráfego para sites MGS, mede pe
 
 Ares pertence a esta área, mas com limite claro: Ares é agente de campanhas. Ele não configura ChatPion/DigitalTrChat, quiz, SMS Funnel ou estrutura de SMS.
 
+Política permanente de duplicação Meta, decisão de Rodolfo `1568722979569930414`: quando herdado habilitado, desativar **somente** `image_background_gen` nas cópias, sem nova pergunta; preservar origem e demais recursos. Fonte canônica, limites e QA: `context/meta-creative-copy-policy.md`. Essa decisão supersede a antiga preservação obrigatória desse único recurso, não as demais exigências.
+
 ---
 
 ## Canais de aquisição

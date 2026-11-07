@@ -312,6 +312,17 @@ def verify_media_ads(desired, source, live, warnings):
 
 
 def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[str, Any]) -> list[str]:
+    if payload['campaigns'][0]['mode'] in {'pure_clone', 'clone_prestaged', 'clone_page_switch'}:
+        from .creative_copy_policy import effective as copy_effective, verify_creative as verify_copy_creative
+        payload = copy.deepcopy(payload)
+        for spec in payload['campaigns']:
+            for slot in spec['ads']:
+                slot['creative_payload'] = copy_effective(slot['creative_payload'])
+        expected_by_name = {a['name']: a for a in payload['campaigns'][0]['ads']}
+        for ad in live['ads'].get('data') or []:
+            if ad.get('name') not in expected_by_name:
+                raise RouteBlocked('copy policy unknown ad slot')
+            verify_copy_creative(ad.get('creative') or {}, expected_by_name[ad['name']]['creative_payload'])
     desired, campaign = payload['campaigns'][0], live['campaign']
     expected_updates = desired.get('campaign_updates') or {k: desired['campaign_create'][k] for k in ['daily_budget', 'bid_strategy']}
     if any(str(campaign.get(k)) != str(v) for k, v in {'account_id': desired['account_id'], 'name': desired['name'],
@@ -389,8 +400,11 @@ def verify_readback(payload: dict[str, Any], source: dict[str, Any], live: dict[
         if str(ad.get('adset_id')) != str(target_set['id']):
             raise RouteBlocked('target adset association mismatch')
         from .shein_reviewed_background import effective, verify_creative
-        verify_creative(creative, expected['creative_payload'])
-        cp = effective(expected['creative_payload'])
+        from .creative_copy_policy import effective as copy_effective, verify_creative as verify_copy_creative
+        resolved = copy_effective(expected['creative_payload'])
+        verify_copy_creative(creative, expected['creative_payload'])
+        verify_creative(creative, resolved)
+        cp = effective(resolved)
         if cp.get('asset_feed_spec') or cp.get('object_story_spec'):
             if not media_creative_matches(creative, cp):
                 raise RouteBlocked('flexible media/copy/tracking readback mismatch')

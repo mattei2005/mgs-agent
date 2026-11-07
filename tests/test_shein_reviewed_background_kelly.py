@@ -33,7 +33,7 @@ class KellyBackgroundTests(unittest.TestCase):
     def test_exact_router_selects_current_review(self):
         self.assertTrue(router.selected({'reviewed_creative_features_kind':KIND}))
     def test_request_only_smaller_inventory_pages(self):
-        self.assertEqual(router.creative_inventory_limit(),5000)
+        self.assertEqual(router.creative_inventory_limit(),500)
         marker=APPROVED_RESUME.set(self.context())
         try:self.assertEqual(router.creative_inventory_limit(),500)
         finally:APPROVED_RESUME.reset(marker)

@@ -274,7 +274,9 @@ class Planner:
 
     def build(self, manifest: Manifest) -> ExecutionPlan:
         grouped: dict[str, list[CampaignSpec]] = {}
+        from .creative_copy_policy import resolve_campaign
         for campaign in manifest.campaigns:
+            campaign = resolve_campaign(campaign)
             grouped.setdefault(campaign.account_id, []).append(campaign)
         lanes: dict[str, tuple[BundlePlan, ...]] = {}
         for account, campaigns in grouped.items():

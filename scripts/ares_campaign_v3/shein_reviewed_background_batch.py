@@ -323,11 +323,9 @@ def activation_authorization(target,creation,proof,*,get_message):
 # Exact independent review adapter. Preserve the historical binding above and
 # dispatch only a separately sealed descriptor/context, never by account alone.
 def creative_inventory_limit():
-    from . import shein_reviewed_background_kelly as kelly
-    if kelly.selected_context() is not None:
-        kelly.active_context()  # Require exact request, seals, IDs and live review proof.
-        return 500  # Account-scoped live diagnostic accepted this compact page size.
-    return 5000
+    # All recovery adapters share full cursor pagination and persisted-ID
+    # priority. A compact identity page avoids Meta GET500 on limit=5000.
+    return 500
 
 
 def _kelly_dispatch(name, original):
@@ -368,3 +366,23 @@ for _route_name in ('selected', 'validate_descriptor', 'selected_context',
                     'resolve_bundle', 'verify_creative', 'preserved_sourcing',
                     'validate_activation_tree', 'activation_authorization'):
     globals()[_route_name] = _mavroa_g005_dispatch(_route_name, globals()[_route_name])
+
+# Exact Rodolfo review of Kelly's C242 request; independent immutable binding.
+def _yolo03_20261107_dispatch(name, original):
+    def routed(*args, **kwargs):
+        from . import shein_reviewed_background_yolo03_20261107 as current
+        if name in {'selected', 'validate_descriptor'}:
+            descriptor = args[0] if args else kwargs.get('descriptor', {})
+            if current.selected(descriptor):
+                return getattr(current, name)(*args, **kwargs)
+        elif current.selected_context() is not None:
+            return getattr(current, name)(*args, **kwargs)
+        return original(*args, **kwargs)
+    return routed
+
+for _route_name in ('selected', 'validate_descriptor', 'selected_context',
+                    'active_context', 'effective', 'submit_lane', 'extra_points',
+                    'resolve_bundle', 'verify_creative', 'preserved_sourcing',
+                    'validate_activation_tree', 'activation_authorization'):
+    globals()[_route_name] = _yolo03_20261107_dispatch(_route_name, globals()[_route_name])
+
