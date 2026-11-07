@@ -1,72 +1,45 @@
-# Meta native clone vs rebuild — standard_enhancements pitfall (2026-06-18)
+# Native clone fidelity and legacy creative compatibility
 
-## Context
+## Establish the acceptance contract before testing
 
-Rodolfo corrected the operating assumption for Ares replacement campaigns: for the MGS Meta workflow, the target route is **clone existing ads/campaigns**, not create campaigns/ads from zero. Creating from zero can hit Meta account/app/page/authentication checkpoints and is outside the intended flow. System User is also explicitly out of scope for Rodolfo unless he reopens that path.
+1. Resolve the exact source, target account, approved request, existing partial IDs and canonical executor. Preserve the source and recover only missing target layers.
+2. Interpret “same creative” as the requested media, copy and configuration, not mandatory equality of an immutable `creative_id`. Verify post identity separately when social proof must be preserved; lineage alone does not prove it.
+3. Freeze the new campaign number and every dependent tracking value. When UTMs belong in Website URL, require the new values there; a correct effective click URL obtained through a separate `url_tags` override does not satisfy that storage requirement.
+4. Define one joint acceptance test: inherited settings, media/copy, the updated Website URL and the original budget/bid/status/schedule contract must all pass on the same target. Preserve complete expectations independently of a reduced transport payload so omission cannot silently weaken QA.
 
-## Evidence from the thread
+## Diagnose the failing layer
 
-Thread: `1517244349891608607` (`Status Operacional do Ares - Rodolfo`).
+1. Reconcile all materialized IDs before retrying. Prefer the canonical engine's explicit-ad representation for a populated clone: shallow campaign/adset copies followed by source-linked ad copies. This isolates the failing layer without duplicating existing shells or depending on synchronous bulk-copy limits.
+2. Compare the exact outgoing payload with the live source. Treat a legacy `standard_enhancements` rejection as a creative compatibility boundary, not proof of a global token/IP failure or universal inability to clone.
+3. Keep a compact hypothesis ledger: changed input, endpoint, sanitized error, returned IDs, reconciled live IDs and unmet acceptance criteria. Select a new test only when a documented field, source difference or other material evidence distinguishes it from rejected attempts; a version change alone is not a repair rationale.
+4. Do not substitute a different source campaign, disable enhancements, clear the whole feature block, relocate tracking or edit the shared source merely to pass creation. Those change the approved result rather than repair the failing representation.
+5. Label results precisely: request accepted, object created, inherited settings preserved, target tracking verified, common-path integration installed, or original request completed. Never promote success at one layer to another.
 
-Observed sequence:
+No general workaround for legacy enhancements is established by this diagnostic procedure. Keep unsuccessful hypotheses in request evidence, not in a reusable recommended-fix recipe.
 
-- New token was valid for read/dry-run.
-- Manual/rebuild route could create some objects (`campaign`, sometimes `adset`, sometimes `adcreative`) but failed at page permission or `POST /ads` checkpoint.
-- Native clone/copy route was then tested and revealed a different blocker:
-  - `code=100`
-  - `error_subcode=3858504`
-  - Spanish title: `El anuncio no debe incluir mejoras estándar`
-  - Meaning: source ad includes legacy/obsolete `standard_enhancements`; Meta wants individual creative feature controls instead.
+## Use a UI control only for the unresolved question
 
-## Durable lesson
+1. Read the earlier control's final receipt first. A manual duplicate retaining the original Website URL proves preservation only; it does not prove compatibility with a changed Website URL.
+2. If a UI comparison is genuinely needed, use an existing approved session, verify the actual actor and target account/Page, and check Page ad-creation access before preparing a write. A Chrome profile label or accessible ad account is not enough.
+3. Separate a browser Page-access warning from the original API error. It blocks that UI control only; it does not invalidate the API token or establish the desktop as a prerequisite for API recovery. Do not ask for another login when authentication is already valid and the missing capability is Page authorization.
+4. Use the shared desktop lease and an owned tab. Inspect without changing source inputs. Test only an already authorized paused target through its recorded execution scope; do not silently introduce a parallel Campaign Ops writer or new shells.
+5. An enhancement absent from the inspected UI, or an API preview marked ineligible, does not authorize changing an explicit source enrollment. Report the distinction between configured state and actual applicability without treating it as a proven normalization workaround.
+6. Cancel inspection-only modals without Save/Publish, close only owned tabs, restore the prior window and release the lease in `finally`. Verify cleanup independently of the application result.
 
-Do not collapse these into one diagnosis:
+## Proven Messenger subtype restoration
 
-```text
-Route                         Meaning
------------------------------ --------------------------------------------
-Create from zero / rebuild    Wrong primary path for MGS replacement clones
-Native Meta copy/clone         Correct primary path to pursue
-Manual rebuild                Fallback/diagnostic only, not success criterion
-System User                   Out of Rodolfo's scope
-```
+Use this branch only when a source Messenger ad's returned AFS omits a required CTA subtype and its canonical or historical payload proves the intended value.
 
-If native clone fails with `standard_enhancements`, the blocker is likely the **source ad's legacy creative features**, not proof that cloning is impossible.
+1. Keep the existing target campaign/adset IDs PAUSED and enumerate their ads before writing missing source-linked slots.
+2. Preserve live `object_story_spec`, the complete AFS video/title/body/description/label/rule package, tracking, supported feature controls and Messenger JSON. Remove output-only `reasons_to_shop` and `shops_bundle` from the outgoing AFS.
+3. If Graph exposes `call_to_action_types=["APPLY_NOW"]` but omits `call_to_actions`, restore `call_to_actions=[{"type":"APPLY_NOW","value":{"app_destination":"MESSENGER"}}]` from the approved operation builder, never from a guessed default. The Eggbev builder is `ares_campaign_v3/eggbev_create.py`.
+4. Submit the normalized payload as `creative_parameters` on the source ad's `/copies` edge with the existing destination adset and `status_option=PAUSED`, through the canonical engine. Journal each receipt before advancing and normalize only the copied display name when needed.
+5. Read back hierarchy, exact counts, lineage, status/issues, budget/bid, targeting/attribution, Page/pixel/event, copy/CTA/tracking/JSON and unchanged source. New technical media/creative/post IDs require equivalence checks, not an automatic mismatch verdict or a social-proof claim.
+6. Compare rematerialized variants by labels, dimensions and binary hashes or decoded frames. Use an ephemeral Page token derived from the approved advertiser when the User token omits video `source`; never persist that token or signed media URLs.
+7. Accept extra returned feature flags as disabled defaults only when every required source flag is preserved and every extra flag is `OPT_OUT`. Keep configured status, review state and actual delivery as separate findings.
 
-## Recommended next tests
+## Reporting and stop conditions
 
-1. Prefer native Meta copy endpoints (`/{campaign_id}/copies`, `/{adset_id}/copies`, `/{ad_id}/copies`) over hand-building campaign/adset/ad payloads.
-2. Keep all copied objects `PAUSED`.
-3. Select another source ad/campaign that does not carry the legacy `standard_enhancements` field, preferably a newer clean ad.
-4. If all promising source ads carry the field, research/test copy parameters that suppress or normalize standard enhancements into the newer individual creative feature controls.
-5. Do not keep creating/deleting partial campaigns from scratch unless the test is explicitly diagnostic and approved.
+Explain a stalled repair once in plain language: what must remain equal, which change triggers rejection, what the last real test proved and what remains unproven. Avoid repeating the full error history or asking the user to restate the same request. If no method satisfies the contract, say so directly and identify the smallest real access, authority or vendor dependency; do not present an untested UI comparison as an established cure.
 
-## Populated Messenger native copies: isolate and restore the CTA subtype
-
-When native bulk deep-copy returns generic code 2, do not infer that the token/profile is restricted or that duplication is impossible. Within the already authorized one-copy scope, reconcile account ID sets and use the canonical Engine's explicit-ad `pure_clone` representation: source campaign/adset IDs, adset name, source ad IDs and preserved creative payloads. This compiles shallow campaign/adset copies followed by native ad copies, exposes the failing layer and avoids the synchronous total-object limit. Never create additional campaigns as diagnostic probes, replay existing shells or silently change the source strategy/budget.
-
-A native copy of a Messenger ad can fail with `100/1815675` (`Non-Messenger Ad in Messenger Ad Set`) even though the source ad worked and the token can copy the campaign/adset. Graph can return `asset_feed_spec.call_to_action_types=["APPLY_NOW"]` while omitting `call_to_actions`; native implicit copying or resubmitting that incomplete projection can lose the required Messenger subtype.
-
-For the exact source after verifying its Page, pixel/event, subtype and historical/canonical payload:
-
-1. Preserve the partial target campaign/adset IDs, verify them PAUSED and enumerate the ads edge before writing only missing source-linked slots.
-2. Preserve live `object_story_spec`, complete AFS video/title/body/description/label/rule payload, `url_tags`, supported feature flags and Messenger JSON. Remove Graph output-only `reasons_to_shop` and `shops_bundle` from the outgoing AFS.
-3. Restore `asset_feed_spec.call_to_actions=[{"type":"APPLY_NOW","value":{"app_destination":"MESSENGER"}}]` from the operation's approved builder/source evidence. Do not rewrite copy, JSON, Page, UTM or media to hide the error. In Eggbev the canonical builder is `ares_campaign_v3/eggbev_create.py`.
-4. Submit native `/{source_ad_id}/copies` with the same destination adset, `status_option=PAUSED` and the preserved normalized payload in `creative_parameters`. Journal each receipt before continuing and normalize only the copied ad's display name when needed.
-5. Read back all three levels and validate exact count, source lineage, configured PAUSED, issues, budget/strategy, targeting/attribution, Page/pixel/event, text/CTA/UTM/JSON and unchanged source. New creative, video and post IDs are possible; they do not prove a different visual or preserved social proof. Compare rematerialized variants by labels, dimensions and protected downloaded binary hashes (or decoded frames). Use an ephemeral Page token derived from the same approved advertiser when the User token omits video `source`; never persist that token or signed media URLs.
-6. Treat extra returned creative-feature flags as equivalent disabled defaults only after verifying every source flag is preserved and every extra flag is `OPT_OUT`. Report `PENDING_REVIEW` separately from configured PAUSED, and never equate successful creation with review approval or auction entry.
-
-Confirmed source-specific evidence: `data/ares/meta-ads/audit/eggbev/diagnostics/zeus-eggbev-canary-1564670170285473863/recovery-final-proof.json`. The same source's earlier successful recovery is `data/ares/meta-ads/audit/eggbev/clone/eggbev-clone-aria-c003-2x-immediate-20260831-nicolas-01-recovery-summary.json`. These establish the actionable Messenger compatibility boundary; they do not expose the internal cause hidden by the bulk code-2 response.
-
-## Reporting language
-
-Use precise wording:
-
-- Good: `Clone nativo bloqueou por standard_enhancements legado no source ad.`
-- Bad: `Meta não deixa clonar.`
-- Bad: `Precisa de System User.`
-- Bad: `Vamos criar do zero com payload limpo.`
-
-## Safety
-
-Require authorization for the exact technical write scope and the operation's applicable execution gates. Keep partial test objects `PAUSED`, record their IDs and reconcile them by GET before retrying. A failed test does not authorize cleanup: delete/archive only under separate explicit authorization and any required critical confirmation, then verify the exact terminal status. Report a blocked test or a completed test with preserved residue honestly rather than making deletion a prerequisite for reporting its result.
+A failed write does not authorize cleanup. Preserve partial IDs and keep targets non-delivering; delete/archive only under separate applicable authorization and confirm the terminal state by GET.

@@ -8897,12 +8897,12 @@
     {
       "agent": "zeus",
       "id": "zeus-shein-background-1568656839132971009",
-      "next_step": "Falta prova de duplicacao com Website URL efetivamente nova e recursos preservados. Controle manual de ontem manteve URL antiga. Nao repetir testes refutados nem liberar producao; obter controle UI autorizado com Page access ou investigacao especifica da Meta, sem ampliar permissoes implicitamente.",
-      "objective": "Corrigir executor preservando midia/copy/recursos e novas UTMs na Website URL; recuperar mesmos pedidos Kelly.",
-      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/zeus-background-1568656839132971009/ui-readonly-1568676042510565447.json",
-      "state": "bloqueado_tecnico_sem_patch. inspecao read-only do gerenciador da c242yolo confirmou ator rodolfo e conta correta, mas ui informa falta de acesso a criacao de anuncios da page. nao houve edicao de url/recursos,save/publish,grant,criacao ou ativacao. modal cancelado,aba propria fechada,janela original restaurada e leasepc1liberada. esse bloqueio e so do controle ui;nao invalida tokenapi nem tornapc1dependencia. proposta urlparams continua rejeitada.",
+      "next_step": "Investigar somente compatibilidade creative/API com Website URL nova e recursos preservados. Nao pedir nova permissao/token nem transformar aviso do browser em bloqueio da API. Controle humano e auxiliar e nao dependenca comprovada do executor.",
+      "objective": "Corrigir executor preservando midia/copy/recursos e UTMs na Website URL; recuperar mesmos pedidos Kelly.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/zeus-background-1568656839132971009/operational-access-1568679735804821699.json",
+      "state": "bloqueado_tecnico_sem_patch,nao_bloqueado_por_permissao_api. preflight live1568679735804821699 confirmou mesmo token nas duas contas,ator122095869861482193 minibot system user,advertise nas duas contas e nas pages tophallazgos651566168029395 e choiceoffers410983488769165. falta de permissao vista antes e somente da sessao humana rodolfo,no browser. nao ha grant a reparar no bisu;zero mutacoes. nenhuma sessao roosevelt foi verificada. urlparams permanece rejeitado;dois pedidos originais em hold.",
       "thread_id": "1568669160798683260",
-      "updated_at": "2026-11-07T17:28:48+00:00"
+      "updated_at": "2026-11-07T17:34:34+00:00"
     },
     {
       "agent": "zeus",
@@ -9106,5 +9106,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T17:28:48+00:00"
+  "updated_at": "2026-11-07T17:34:34+00:00"
 }
