@@ -893,6 +893,16 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "zeus-shein-background-1568656839132971009",
+      "agent": "zeus",
+      "type": "bounded_recovery_diagnostic",
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/shein/zeus-background-1568656839132971009/verification.json",
+      "authority_message_id": "1568656839132971009",
+      "origin_thread_id": "1558133898209394780",
+      "status": "BLOCKED_API_COMBINATION_UNRESOLVED",
+      "evidence": "Real-adset inline validate_only v26/v27 both reject 100/3858293; fresh source2OPT_IN and existing C033/034 PAUSED,zero ads. No functional production patch or campaign mutation. Ares single writer held; alternate logged-in PC1 UI not account-validated and awaits explicit identity/interaction approval."
+    },
+    {
       "id": "all-app-alerts-1568333588078788669",
       "agent": "zeus",
       "type": "requested_native_live_alert_delivery_receipts",
