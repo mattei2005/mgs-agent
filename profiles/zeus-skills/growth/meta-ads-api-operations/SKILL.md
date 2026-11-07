@@ -19,6 +19,8 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 
 ## Safety model
 
+Follow Rodolfo's numbered questions in order. Verify completed copies with live reads; distinguish deliberate changes from accepted missing fields and ACTIVE from actual delivery. Prove permanent rules in code/tests, not only documentation.
+
 Active Meta-copy exception approved permanently by Rodolfo `1568722979569930414`: apply `context/meta-creative-copy-policy.md` to all authorized duplications, not only SHEIN. Turn inherited enabled `image_background_gen` off only on the copy, without another question; keep source and all other features intact. This supersedes older per-occurrence approval/preservation gates for this feature alone. Verify central build/resume/materialization/QA implementation, not just policy text.
 
 1. **Read-only and dry-run first.** Always verify token/account/campaign visibility before write.
