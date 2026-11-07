@@ -2663,6 +2663,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DR-ACK-RECOVERY-1568739342510325877",
+      "next_step": "Aguardar autorização explícita para recuperação única somente do ACK; reler mesmo ID/key/intent antes de executar; preservar agenda/credenciais e não refazer backup. Evidência reports/dr-ack-investigation-1568739342510325877.json",
+      "objective": "Reconciliar backup horário e recuperar somente ACK do arquivo 1F8xXQYo22kP5ptjt451V3uJTqvSj-voc sem upload duplicado",
+      "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1568739342510325877",
+      "state": "blocked_decision: binário remoto integralmente verificado por sa; ack ausente nas leituras sa e owner isolado; journal mantém intent sem id e reproduz ambiguous_create_no_replay; nenhuma mutação remota/retry realizado; detalhe original do child não retido",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-11-07T21:36:07+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "DR-LOCK-RECOVERY-1564560553446215712",
       "next_step": "Nenhuma ação pendente; manter agenda existente. Resposta final exclusivamente pelo resolvedor.",
       "objective": "Recuperar cron horário 3ff8bd8ca40d após contenção com backup full",
@@ -9156,5 +9166,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T21:27:50+00:00"
+  "updated_at": "2026-11-07T21:36:07+00:00"
 }

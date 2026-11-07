@@ -893,6 +893,24 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "dr-ack-investigation-1568739342510325877",
+      "type": "disaster_recovery_ack_incident",
+      "agent": "zeus",
+      "source_alert_id": "1568739342510325877",
+      "cron_id": "3ff8bd8ca40d",
+      "status": "blocked_ambiguous_ack_create",
+      "checkpoint_id": "DR-ACK-RECOVERY-1568739342510325877",
+      "evidence_path": "reports/dr-ack-investigation-1568739342510325877.json",
+      "backup_file_id": "1F8xXQYo22kP5ptjt451V3uJTqvSj-voc",
+      "full_remote_stream_size_md5_sha256_verified": true,
+      "ack_absent_canonical_sa_and_isolated_owner": true,
+      "journal_guard_reproduced": "AMBIGUOUS_CREATE_NO_REPLAY",
+      "original_child_provider_error_unproven": true,
+      "no_remote_mutation_or_backup_retry": true,
+      "credentials_permissions_billing_schedule_unchanged": true,
+      "next_step": "Explicit bounded ACK-only recovery decision; preserve original intent and backup ID; fresh reconciliation before any mutation."
+    },
+    {
       "id": "meta-copy-image-background-opt-out-1568722979569930414",
       "agent": "zeus",
       "type": "permanent_campaign_copy_policy",
