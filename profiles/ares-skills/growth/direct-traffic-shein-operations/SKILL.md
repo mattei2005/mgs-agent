@@ -15,6 +15,8 @@ metadata:
 
 SHEIN-US-DIRECT não herda ativos, contas, parâmetros, políticas, relatórios ou automações de CAR/CPV.
 
+Pausa + reativação: pause e confira primeiro; depois prepare a retomada. Responda com quantidade e horário/fuso verificados.
+
 ## Duplicação e recuperação — precedência obrigatória
 
 Antes de escolher um adapter, releia `context/meta-creative-copy-policy.md` e confira a capacidade central instalada. Nas duplicações autorizadas, transforme somente `image_background_gen=OPT_IN` em `OPT_OUT` na cópia, sem nova pergunta; mantenha ausência/OPT_OUT, fonte, mídia, copy, CTA, demais recursos e novas UTMs no destino aprovado. A política permanente prevalece sobre bindings históricos: não crie outro adapter por pedido para um delta já representado pelo core. Autorização, implementação e conclusão são provas distintas; só encerre após QA integral e readback do estado final.
