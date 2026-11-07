@@ -39,6 +39,7 @@ Use this skill when working on Meta Ads / Facebook Marketing API operations for 
 - Keep the exact approved ID set as the batch identity. Page names are labels, not keys: equal names may represent distinct Pages. Resolve an ambiguous campaign Page from an explicit ID or verified account/creative evidence; BM ownership and an empty account history cannot choose between duplicate names. Ask only for the unresolved ID rather than granting or selecting both. New IDs supplied during execution require a tracked scope revision and fresh preflight, not a new unrelated request or an unrecorded broader selection.
 - For a Page-only administrative handoff, keep Zeus's provisioning and Ares's Campaign Ops as separate execution scopes. Reuse an existing exact Page/account/actor/task authorization only after validating its source and continued applicability; durable approval does not authorize other assets, a recurring grant job, or weakening Ares's dependency guard. Return the verified provisioning receipt to Ares in the origin thread without taking over the campaign writer.
 - Report confirmed permission recovery separately from campaign-edit success. When asked whether a retry will work, say which blocker is resolved with the same operational token; do not guarantee the remaining write before exercising it.
+- Before proposing an API-to-browser fallback, verify the actual Facebook actor and the exact source Page's ad-creation access in that browser; a Chrome profile label and an accessible Ads Manager account do not prove either. Keep a browser-only Page warning separate from the original API failure: it neither invalidates the operational token nor proves that UI duplication will solve the defect. Check existing approved sessions and recoverable identity mappings before asking Rodolfo to prepare another session; do not silently grant permissions or substitute a production credential.
 
 For the ordered diagnostic, administrative prerequisites, grant payload and resumable verification recipe, load `references/meta-page-delegation-diagnostics.md`.
 
@@ -279,6 +280,16 @@ Follow the operation-specific architecture gate in **Page-access workflow and Ro
 ### SHEIN queue blocked by a historical human review
 
 For distinguishing inert material-decision waits from active account writers, fail-closed dependency classification and an explicitly coordinated dry Ares takeover, load `references/shein-request-queue-decision-waits.md`. Never forge completion, release reservations or infer approval of historical targeting differences.
+
+### Recurring SHEIN clone defects — repair acceptance
+
+When Rodolfo asks to fix the shared executor and resume interrupted duplications:
+
+1. Define two deliverables: a correction integrated into the common execution path, and recovery of each named original request in its own thread. Resolve requests separately by account, source, approved parameters and existing IDs; a shared defect does not make them one campaign transaction.
+2. Preserve inherited source settings and the established renumbering/tracking rules together. An enabled background-generation setting is not, by itself, a reason to ask whether to disable it. Do not substitute opt-out, relocated UTMs or stale source tracking for a faithful standard copy.
+3. Retrieve the final receipt of any earlier test cited as successful and compare it with the route actually selected by the installed executor. Verify feature preservation, effective destination/UTMs and common-path integration separately; reference identity or offline regressions alone cannot establish all three.
+4. Promote a repair only after the authorized central path passes semantic/rendered QA and live readback with both inherited settings and target tracking correct. Then recover only missing layers of the original requests. Keep rejected hypotheses in request evidence, not in a recommended workaround or a claim of universal API impossibility.
+5. Answer status questions with the functional verdict first: patch installed or not, original requests completed or still pending, and the exact remaining dependency. Documentation, diagnostics and permission recovery are not executor repair. Treat restart permission as conditional: demonstrate a runtime-loading dependency before restarting, rather than using a restart as a speculative response to remote parameter validation.
 
 ### SHEIN grouped static images
 
