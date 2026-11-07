@@ -8425,6 +8425,16 @@
       "updated_at": "2026-11-07T15:37:51+00:00"
     },
     {
+      "agent": "ares",
+      "id": "shein-1568707219971776525",
+      "next_step": "Nenhuma pendência deste pedido; entrega não comprovada por Insights.",
+      "objective": "Duplicar 2 vezes C245 Yolokfx G004 para agora USD150 por campanha COST_CAP USD0.80",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568707219971776525/verified-receipt.json",
+      "state": "complete: c276 e c277 active, usd150/dia cada, total usd300/dia, cost_cap usd0.80, 4 anúncios com qa verificado; ids preservados após retomada, posts novos.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-07T19:26:56+00:00"
+    },
+    {
       "agent": "zeus",
       "id": "shein-es-parity-mavroa-boostingecon-20260923",
       "next_step": "Operação normal; nenhum passo pendente. Usar os backups por site somente se Rodolfo solicitar rollback.",
@@ -8493,6 +8503,16 @@
       "state": "completed",
       "thread_id": "1544418911250813028",
       "updated_at": "2026-09-01T20:30:15+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "shein-status-1568707702991884362",
+      "next_step": "Nenhuma pendência.",
+      "objective": "Pausar campanhas 229 e 237 Yolokfx G004",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/status-only/shein-status-1568707702991884362/journal.json",
+      "state": "complete: 229 e 237 paused por readback meta; orçamento lance e programação preservados.",
+      "thread_id": "1558131278589460584",
+      "updated_at": "2026-11-07T19:26:56+00:00"
     },
     {
       "agent": "zeus",
@@ -9106,5 +9126,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T17:52:18+00:00"
+  "updated_at": "2026-11-07T19:26:56+00:00"
 }
