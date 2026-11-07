@@ -162,6 +162,16 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-CPR-1568623073979269171",
+      "next_step": "Executar30slots congelados, enviar todos CPR/gasto/resultados na origem; recuperar por mesmo request/IDs/outbox se necessario;encerrar na expiracao sem ampliar coorte.",
+      "objective": "Relatorios CPR das novas campanhas007 e008 Vizioid04 a cada30min somente07/11/2026",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1568623073979269171/manifest.json",
+      "state": "agenda finita ativa e readback validado:30slots09:13-23:43est;expira08/11 00h. primeira entrega08:51est get verificado:007 e008 active,gastousd0,sem resultados,cprn/d.33testes pass;dry-run live;auditoria global pre/pos zero colisao operacional;report-infra get verificado. sem write meta/sb.",
+      "thread_id": "1558147173663776768",
+      "updated_at": "2026-11-07T13:52:29+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-CPR-MAVROA04-1567239808018030693",
       "next_step": "Executar slots silenciosos; alertar primeira ultrapassagem >1.20 nesta origem, rearmar após <=1.20; expirar no fim do dia sem ampliar coorte",
       "objective": "Alertar Joe para CPR estritamente maior que USD1.20 nas novas campanhas Mavroa04 até fim de 03/11/2026 EST",
@@ -9036,5 +9046,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T13:10:51+00:00"
+  "updated_at": "2026-11-07T13:52:29+00:00"
 }
