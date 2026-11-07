@@ -83,22 +83,25 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "updated_validated_with_historical_d_gaps",
-    "verified_at": "2026-11-06T14:32:59.640352-05:00",
+    "status": "partial_updated_validated_pc1_reauthentication_required",
+    "verified_at": "2026-11-06T21:09:20.355821-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
-    "validated_metrics_at": "2026-11-06T14:31:34.059348-05:00",
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T143138299999",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T140641440327",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261106T140608174447",
+    "validated_metrics_at": "2026-11-06T21:05:55.022604-05:00",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261106T210557864324",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T210559798462",
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261106T210518717963",
     "source_to_live_sheet_cgij_exact": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "d_ledger_to_live_sheet_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
-    "fresh_h_account_ids": [
+    "fresh_h_account_ids": [],
+    "fresh_h_count": 0,
+    "h_preserved_count": 36,
+    "pending_h_account_ids": [
       "1001115192056600",
       "1018267074603840",
       "1062887799996139",
@@ -136,17 +139,18 @@
       "908704754163659",
       "937846586033361"
     ],
-    "fresh_h_count": 36,
-    "h_preserved_count": 0,
-    "pending_h_account_ids": [],
     "h_read_at_min": "2026-11-06T14:07:31.789662-05:00",
     "h_read_at_max": "2026-11-06T14:28:09.153954-05:00",
     "h_sum_usd": "504501.29",
-    "pending_ui": [],
-    "card_proofs_updated": 1,
-    "renewed_card_proof_ids": [
-      "1543098427832443"
+    "pending_ui": [
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
     ],
+    "card_proofs_updated": 0,
+    "renewed_card_proof_ids": [],
     "historical_d_gaps": [
       {
         "account_id": "336562339356179",
@@ -328,6 +332,10 @@
     "historical_d_verified_values": 12,
     "average_period": [
       {
+        "since": "2026-11-04",
+        "until": "2026-11-06"
+      },
+      {
         "since": "2026-11-03",
         "until": "2026-11-05"
       }
@@ -335,14 +343,18 @@
     "month_periods": [
       {
         "since": "2026-11-01",
+        "until": "2026-11-07"
+      },
+      {
+        "since": "2026-11-01",
         "until": "2026-11-06"
       }
     ],
     "current_day_partial": true,
     "totals_usd": {
-      "average_daily": "19905.40",
-      "balance": "508137.89",
-      "month_spend": "111966.19"
+      "average_daily": "19898.28",
+      "balance": "514033.64",
+      "month_spend": "118218.59"
     },
     "invoice_due_usd": "417702.93",
     "visible_invoice_numbers": 29,
@@ -364,19 +376,19 @@
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G3:G13),2)",
-        "value": "4513.89"
+        "value": "4505.30"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I3:I13),2)",
-        "value": "3652.43"
+        "value": "4948.65"
       },
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J3:J13),2)",
-        "value": "25041.44"
+        "value": "26679.11"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -388,7 +400,7 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "G",
         "formula": "=ROUND(SUM(G17:G52),2)",
-        "value": "15391.51"
+        "value": "15392.98"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
@@ -400,13 +412,13 @@
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "I",
         "formula": "=ROUND(SUM(I17:I52),2)",
-        "value": "504485.46"
+        "value": "509084.99"
       },
       {
         "label": "TOTAL LINHA DE CRÉDITO",
         "column": "J",
         "formula": "=ROUND(SUM(J17:J52),2)",
-        "value": "86924.75"
+        "value": "91539.48"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -418,7 +430,7 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "G",
         "formula": "=ROUND(SUM(G14,G53),2)",
-        "value": "19905.40"
+        "value": "19898.28"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
@@ -430,61 +442,61 @@
         "label": "TOTAL GERAL — 47 contas",
         "column": "I",
         "formula": "=ROUND(SUM(I14,I53),2)",
-        "value": "508137.89"
+        "value": "514033.64"
       },
       {
         "label": "TOTAL GERAL — 47 contas",
         "column": "J",
         "formula": "=ROUND(SUM(J14,J53),2)",
-        "value": "111966.19"
+        "value": "118218.59"
       }
     ],
     "lease_free": true,
-    "pc1_blocker": null,
+    "pc1_blocker": {
+      "type": "facebook_twofactor_reauth",
+      "account": "Rodolfo Mattei",
+      "message": "Confirm it’s you with your authentication app",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261106T210559798462/blocked.png",
+      "no_bypass_or_retry": true
+    },
     "payments_executed": 0,
     "meta_writes": 0,
     "billing_changes": 0,
+    "cron_changes": 0,
     "workbook_sheet_count": 2,
     "other_sheet_properties_unchanged": true,
     "other_sheet_data_unchanged": true,
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/closure-current.json",
+    "ui_cleanup": {
+      "initial_browser_tabs_visually_counted": 6,
+      "final_browser_tabs_visually_counted": 6,
+      "owned_tabs_closed": true,
+      "lease_free": true,
+      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T2102/surface-final.png"
+    },
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T2102/closure-current.json",
     "report_infra_status": "sent_verified",
-    "cron_changes": 0,
     "cron_coordination": {
       "job_id": "2ee720363d7d",
       "same_existing_job": true,
       "schedule_unchanged": true,
-      "next_run_at": "2026-11-06T21:02:00-05:00",
+      "next_run_at": "2026-11-07T08:02:00-05:00",
       "current_fire_claim_reconciled": true
     },
-    "ui_cleanup": {
-      "initial_browser_tabs_visually_counted": 6,
-      "final_browser_tabs_visually_counted": 6,
-      "active_final_surface": "original unfiltered Meta Digital Trust Accounts",
-      "owned_tabs_closed": true,
-      "initial_and_final_pixels_and_full_initial_ax_retained": true,
-      "lease_free": true,
-      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/surface-final.png"
-    },
-    "recovery": {
-      "batch6_initial_failure": "searched_row_not_ready_7840111366055613",
-      "confirmed_diagnosis": "Query was not entered; original unfiltered Accounts list and page text selection visible; no provider/authentication gate. Underlying focus failure cause unproven.",
-      "scope": "same6 missing targets, same collector/browser/approved identity; no reload, alternate profile or runtime edits",
-      "retry_success": true,
-      "all6_then_visually_verified": true,
-      "recurrence_eliminated": false
-    },
-    "operational_diagnostics": [
-      "Interpreter discovery initially failed parsing an intentionally multiline launcher with shlex; no worker or external write ran. Resolved exact exec interpreter then dependency bootstrap.",
-      "AX-only capture supplied no screenshot; separate vision capture saved and inspected before financial writes."
-    ],
-    "report_infra_message_id": "1568347763941314814",
+    "report_infra_message_id": "1568447463457558599",
     "report_infra_readback": true
   },
   "pending_card_history": {
-    "status": "current_events_resolved_historical_gaps_preserved",
-    "account_ids": [],
-    "pending_ui": [],
+    "status": "pending_current_event_pc1_reauthentication_required",
+    "account_ids": [
+      "2852476828464907"
+    ],
+    "pending_ui": [
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ],
     "historical_blank_account_ids": [
       "336562339356179",
       "3752157451670648",
@@ -523,8 +535,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-06T14:32:59.640352-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T140415/closure-current.json"
+    "verified_at": "2026-11-06T21:09:20.355821-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261106T2102/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -552,7 +564,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-06T21:02:00-05:00",
+  "next_run_at": "2026-11-07T08:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [
