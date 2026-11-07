@@ -62,6 +62,12 @@ O watcher persistente carrega regex/variáveis no startup. Editar o `.sh` no dis
 
 Para testar anti-spam sem gerar mensagem de produção, uma verificação real útil é executar o monitor enquanto `last_alert_sent` ainda está dentro da janela e confirmar simultaneamente: log com `Anti-spam ... suprimindo`, timestamp de `last_alert_sent` inalterado e ausência de novo embed vermelho.
 
+## Regressão de severidade no flush de alertas VPS
+
+- Teste o ciclo completo de persistência, não só `should_send_alert`: crítico entregue → expiração do cooldown → lembrete warning → retorno ao crítico dentro do novo cooldown. Se o flush gravar `last_alerted_severity=warning`, o mesmo incidente ganha uma falsa escalada. Preserve separadamente o pico já comunicado e a severidade atual; só reinicie o pico após recuperação confirmada. Faça a fixture controlar `now`, incluir o write/flush e verificar quantidade de POSTs, PATCHes e mentions.
+- Diferencie recuperação parcial de saúde global: a resolução de um serviço enquanto `disk_root` continua aberto não pode receber título irrestrito de VPS recuperada. Mostre o item resolvido e as pendências reais.
+- Classifique transições de restart com autorização recente comprovada como manutenção esperada, separadas de falha inesperada. Qualquer proposta de supressão deve manter janela limitada e alerta para estado inesperado, falha ou prazo excedido; não amplie a confiança nem esconda falhas reais.
+
 ## VPS CPU/load: separar amostra, incidente e causa
 
 Ao auditar `monitor-vps-health.py`, não tratar o campo contextual `CPU` como motivo do alerta sem ler `Anomalias`. A implementação MGS pode medir CPU por uma janela curta no mesmo minuto de vários crons, enquanto o gatilho operacional é `load15` ou estado de serviço. Uma amostra de 0,5 s em 100% com `load15` baixo não prova saturação sustentada.
