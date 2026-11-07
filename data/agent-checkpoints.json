@@ -183,12 +183,22 @@
     {
       "agent": "ares",
       "id": "ARES-CPR-1568713522743869483",
-      "next_step": "Testar coletor dinamico, enviar leitura inicial com GET, auditar e habilitar agenda ate meia-noite ET",
-      "objective": "Relatorios CPR acumulado dia Mavroa04 cada 30 minutos, campanhas criadas 07/11/2026 atuais e futuras",
+      "next_step": "Executor deterministico envia na mesma thread cada30min, descobre campanhas desta conta criadas07/11 e encerra08/11 00:00 America/New_York;recuperacao pelo mesmo request",
+      "objective": "Relatorios CPR acumulado dia Mavroa04 cada30min, campanhas criadas07/11/2026 atuais e futuras",
       "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1568713522743869483",
-      "state": "fonte original e correcao autenticadas; conta usd america/new_york confirmada por get; preparando primeira entrega e agenda finita read-only",
+      "state": "agenda finita habilitada e readback;18slots15:18-23:48 est;inicial14:49 entregue com get;044/045 sem resultados e gasto0;41testespass;auditoria globalpre/pos sem colisao operacional;report-infra get verificado;zero writemetasb",
       "thread_id": "1558147152528674957",
-      "updated_at": "2026-11-07T19:48:29+00:00"
+      "updated_at": "2026-11-07T19:50:53+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-CPR-1568713615740244029",
+      "next_step": "Inicial14:50EST enviado e GET exato; 276/277 sem resultados.18slots15:03–23:33EST; expira08/11 00:00EST. Descobrir novas somente nesta conta/data; manter todos custos sem threshold.41testes PASS; cron no_agent/local; auditoria pos sem conflitos; REPORT-INFRA GET confirmado. Nenhum write Meta.",
+      "objective": "Relatórios CPR a cada30min só07/11 Yolokfx04 G004 com inclusão futura por created_time",
+      "source": "/root/mgs-agent/data/ares/meta-ads/state/cpr-updates/1568713615740244029/manifest.json",
+      "state": "active_finite_schedule_validated",
+      "thread_id": "1558147211026501643",
+      "updated_at": "2026-11-07T19:52:21+00:00"
     },
     {
       "agent": "ares",
@@ -9136,5 +9146,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T19:48:29+00:00"
+  "updated_at": "2026-11-07T19:52:21+00:00"
 }
