@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-11-07T15:45:34-05:00",
+    "updated_at": "2026-11-07T15:47:31-05:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -899,7 +899,13 @@
       "path": "/root/mgs-agent/context/meta-creative-copy-policy.md",
       "authority_message_id": "1568722979569930414",
       "origin_thread_id": "1568669160798683260",
-      "status": "policy_registered_ares_execution_in_progress",
+      "status": "policy_implemented_batches_created_activation_blocked",
+      "independent_readback": "/root/mgs-agent/data/ares/meta-ads/audit/shein/background-optout-policy-1568722979569930414/independent-live-readback.json",
+      "verified_campaign_count": 10,
+      "verified_ad_count": 20,
+      "all_background_opt_out": true,
+      "remaining_blocker": "Post-processing GET omits six other source enrollments on Mavroa and five on Yolo. Preservation is not verified; all copies remain PAUSED. No waiver of these features is inferred from the background-only standing policy.",
+      "independent_policy_tests": "9 unittest tests passed; central reusable build/resume/QA implementation inspected",
       "canonical_key": "acquisition.meta.copy.image_background_gen",
       "scope": "All authorized Meta campaign duplications: inherited enabled image_background_gen becomes OPT_OUT only on copies; no repeated review. Source and every other feature preserved.",
       "supersession": "Supersedes preservation/individual approval for this feature alone; original request scope and other critical gates remain.",
@@ -69399,15 +69405,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 809729,
-      "md5": "cf7f385810f3fbb618b6687f396f3271",
-      "modified_at": "2026-11-07T15:43:02-05:00"
+      "size_bytes": 809838,
+      "md5": "ceb22c366fd2ed017fd20e00af6a4c76",
+      "modified_at": "2026-11-07T15:46:14-05:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 152551,
-      "md5": "6f82ce6254b9e573f37ffa1ee70ce2b4",
-      "modified_at": "2026-11-07T15:42:01-05:00"
+      "md5": "cfd250e919293b592a679088f60c5353",
+      "modified_at": "2026-11-07T15:47:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/ares-discord-long-response-20261015.json",
@@ -69790,8 +69796,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "1809a1e48386db1159f107b9e32bcdca",
-      "modified_at": "2026-11-07T09:44:18-05:00"
+      "md5": "ca0debe68ae7ff218bd27c1c7bce0418",
+      "modified_at": "2026-11-07T15:47:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
@@ -69802,14 +69808,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-watchdog-state.json",
       "size_bytes": 109278,
-      "md5": "5295e4321e6ebec44777c50eae448e72",
-      "modified_at": "2026-11-07T15:45:03-05:00"
+      "md5": "d9e3bfb4580e2c4f9ad89434b2177854",
+      "modified_at": "2026-11-07T15:47:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "e1387b4cfe0bf349c4c247fb7185aea4",
-      "modified_at": "2026-11-07T15:45:03-05:00"
+      "md5": "a514424b49cc90da38a7d4337f0c72ec",
+      "modified_at": "2026-11-07T15:47:01-05:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-residual-cleanup-manifest-20260928-v2.json",
@@ -69862,8 +69868,8 @@
     {
       "path": "/root/mgs-agent/data/honcho-billing-watch-state.json",
       "size_bytes": 830,
-      "md5": "f3e8e5570ccdc1bb0fc02b8731956643",
-      "modified_at": "2026-11-07T15:45:18-05:00"
+      "md5": "c31b24c537af883759292adcacc7e529",
+      "modified_at": "2026-11-07T15:47:18-05:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
@@ -69903,9 +69909,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 3359992,
-      "md5": "cb727d08d3a4edd1b7e5e248cea1da8a",
-      "modified_at": "2026-11-07T15:45:32-05:00"
+      "size_bytes": 3360634,
+      "md5": "8fb6797b2a799b861990cc942f0e03d6",
+      "modified_at": "2026-11-07T15:47:29-05:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -69958,8 +69964,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 108987,
-      "md5": "e96e959bb4585d3445abe6189553e1c0",
-      "modified_at": "2026-11-07T15:44:21-05:00"
+      "md5": "43b42a9555d7279e7967de2b4d4288d9",
+      "modified_at": "2026-11-07T15:47:22-05:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -70571,7 +70577,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1758,
       "md5": "3c4733903f2755435c5e1e010d0ea433",
-      "modified_at": "2026-11-07T15:41:01-05:00"
+      "modified_at": "2026-11-07T15:46:02-05:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",

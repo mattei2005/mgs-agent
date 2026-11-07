@@ -42,6 +42,10 @@ Require the same saved object to demonstrate new Website URL tracking and the re
 - A fresh-ad editor can preselect an unrelated default Page. Verify the exact required source Page before entering media/copy or publishing; search by both immutable ID and exact name when the picker is empty. A missing human-session Page does not imply missing System User/API access. Discard only the task-owned unpublished draft, never global drafts or existing objects, and verify the target and source afterward.
 - Meta thumbnail image locators can rotate between GETs while the bytes remain identical. Compare immutable creative/video/post IDs, all substantive settings and, when image_url is the only delta, fetch both locators privately and compare image bytes by SHA-256. Record the raw delta and byte evidence; do not silently ignore media changes or declare an anomaly from a rotating locator.
 
+## Post-creation feature normalization
+
+Verify preserved enrollments with a fresh postprocessing read, not only the immediate creation/readback snapshot. Meta can initially echo inherited legacy OPT_IN fields and later omit them while the source still returns them. Keep both observations; absence proves loss of verification, not necessarily that the rendering feature is disabled. The permanent image_background_gen exception does not authorize accepting missing image/video/product features. Hold activation for an unresolved material delta unless it is safely restored/proven or the proper authority explicitly accepts that new delta; never weaken QA to make the batch pass.
+
 ## Sources and confidence
 
 Primary contract:
