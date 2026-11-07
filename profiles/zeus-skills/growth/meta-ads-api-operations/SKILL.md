@@ -299,7 +299,7 @@ For documentation-led investigation of reuse, fresh creation, Website URL edits,
 
 ### Fresh creative readback after asynchronous processing
 
-Treat a core `COMPLETE` checkpoint or immediate creative GET as materialization evidence, not final activation acceptance. Re-read all target creatives after post-processing and compare their effective feature enrollments with the approved expectation. If fresh direct GETs omit inherited legacy fields, distinguish omission from explicit `OPT_OUT`; neither infer preservation from an earlier cached response nor claim the omitted features were disabled. Check API-version/projection differences in read-only mode, preserve the same IDs and sealed manifests, and keep activation paused while preservation remains unproved. Escalate only the exact unresolved acceptance delta; do not request approval again for a feature exception already authorized. Record any acceptance of omissions explicitly rather than rewriting historical QA as faithful.
+Treat core `COMPLETE` as materialization, not activation acceptance. Save projected GET responses before assertions and re-read after processing; absence is not explicit `OPT_OUT`. Bind any approved uncertainty to the exact request/account/objects/payloads, keep defaults strict elsewhere, and resume only missing QA/activation without another approval or creation replay. Keep one shared-code integrator and one campaign writer per account. Report verified counts/status/budget/tracking first, with accepted uncertainty—not another recap. Follow **Post-creation feature normalization** in `references/faithful-creative-copy-documentation.md` for typed receipts, recovery pagination and normal-runner resumption.
 
 ### SHEIN grouped static images
 
