@@ -13,13 +13,13 @@ metadata:
 
 # Direct Traffic SHEIN Operations — MGS/Ares
 
-SHEIN-US-DIRECT é isolada de CAR/CPV: não herdar contas, nomes, eventos, bids, budgets, schedules, learning policy, relatórios, criativos ou automações.
+SHEIN-US-DIRECT não herda ativos, contas, parâmetros, políticas, relatórios ou automações de CAR/CPV.
 
 Atraso SB: exiba n/d para `totalMinutes=0` junto de `currentFillTime=null` e `confident=false`; preserve a fonte e revalide só o modelo.
 
 ## Fechamento e complementos
 
-Responda por número e finalidade. Separe recurso preservado, tracking validado e rotina pronta; delimite “igual” e informe diferenças de orçamento/horário.
+Responda por número/finalidade e diferenças reais. Em pedido só documental, atualize sem rediscutir UTMs. Separe recurso preservado, tracking validado e rotina pronta.
 
 Recibo e readback multifonte: `references/campaign-batch-final-readback.md`.
 

@@ -74,8 +74,6 @@ Para `static sourcing requires an unambiguous image definition` após `COMPLETE_
 
 ### Catálogo exigido por enhancement herdado
 
-Para o próximo pedido equivalente, carregar `references/inherited-feature-duplication-route.md`: ela registra o caminho de referência criativa identificado com a comparação manual e mantém a atualização automática das UTMs como regra normal da mesma entrega. Não reabrir com o gestor o diagnóstico já documentado nem pedir desativação do recurso; separar o aprendizado de rota da comprovação de execução completa em cada pedido.
-
 **Regra vigente, supersedendo perguntas rotineiras de opt-out:** consultar `SHEIN-US-DIRECT.json#/creative_policy/standard_copy_inherited_background_policy`. Em duplicação padrão, preservar o background habilitado da fonte e não pedir para desligá-lo. Não desligar automaticamente, selecionar catálogo ou afrouxar QA. Diagnosticar a incompatibilidade real e recuperar a cópia fiel no mesmo request; uma restrição técnica incontornável é reportada como tal, sem fingir conclusão. Os adapters e reviews de opt-out descritos abaixo documentam somente exceções históricas explicitamente aprovadas por pedido, não uma exigência de nova pergunta em duplicações futuras.
 
 Para `100/3858293`, leia `error_user_msg` do child antes de atribuir a causa a product browsing ou ao catálogo inteiro: a Meta pode identificar especificamente **Geração de plano de fundo da imagem**, correspondente a `creative_features_spec.image_background_gen`. Confirme esse estado na fonte e reconcilie shells/ads já criados. Não desligue outros enhancements, selecione um catálogo, altere a fonte ou repita a cópia como sondagem.
