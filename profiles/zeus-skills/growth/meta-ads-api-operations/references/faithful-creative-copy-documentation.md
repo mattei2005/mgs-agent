@@ -26,6 +26,10 @@ Use this reference when a faithful clone must keep source media, copy and featur
 
 ## Evidence for a complete manual control
 
+When Rodolfo explicitly directs the control to an existing pending original request, use its verified first eligible slot rather than proposing another diagnostic campaign. Bind the control to the original account, source, request, campaign/adset IDs, approved budget/bid/tracking and shared writer hold. A paused campaign/adset with no ads is an incomplete request, not an existing ad whose URL can simply be edited: materialize only its missing authorized ad layer, keep it paused during QA, and do not replay campaign/adset creation or silently alter enrollment. This explicit redirection supersedes only the abandoned diagnostic target; it does not authorize unrelated production changes.
+
+Before proposing or requesting authorization to edit a historical canary, reconcile its exact immutable ID against the deletion/request journal and perform a fresh live status read. A past PAUSED receipt is not current availability. If the target is DELETED, withdraw the stale proposal, report the mistake and zero writes, and obtain explicit authorization for any replacement copy or different target; do not silently restore, recreate, reuse a retired number, or substitute a pending production shell. A later approval to edit the named existing canary does not authorize its recreation.
+
 Require the same saved object to demonstrate new Website URL tracking and the required source feature configuration together. A manual copy that preserves the old creative/post and old tracking proves reuse, not the changed-destination case. A screenshot with source campaign tracking or mismatched campaign/adgroup codes is not proof that new tracking was fully validated. Report that evidence gap without claiming the UI cannot do it or asking the manager to repeat already-provided context.
 
 ## Sources and confidence
