@@ -6207,12 +6207,12 @@
     {
       "agent": "ares",
       "id": "ares-shein-background-executor-1568654008774565919",
-      "next_step": "Diagnosticar criação versus herança AdCopies e testes de referência; implementar correção isolada com regressões negativas, inventário, backup, REPORT-INFRA e validação real no request pendente sem duplicar shells.",
-      "objective": "Corrigir executor SHEIN para duplicação fiel com image_background_gen herdado habilitado, mantendo todos os padrões de tracking, budget, bid e lifecycle.",
-      "source": "discord:1185714635991679006/1558133898209394780/1568654008774565919",
-      "state": "manutenção explicitamente autorizada por rodolfo1568654008774565919; recuperar provas yolo g005/g002 e reproduzir falha antes do patch; zero novos writes meta nesta manutenção inicial.",
+      "next_step": "Resolver limitação de materialização por caminho aceito pela Meta que preserve enrollment e URL/UTMs alvo simultaneamente. Só publicar patch com regressões e readback integral; não desativar recursos, mover UTMs, editar criativo compartilhado, repetir payload rejeitado ou recriar shells. Preservar request pendente C031x5 e IDs033/034.",
+      "objective": "Corrigir executor compartilhado SHEIN para copiar background habilitado mantendo padrões existentes; autorização Rodolfo1568654008774565919, reforço1568655042372833440.",
+      "source": "/root/mgs-agent/data/ares/meta-ads/audit/shein/executor-background-1568654008774565919/maintenance-verification.json",
+      "state": "incompleto; revisão dos testes reais confirmou preservação do recurso por referência, mas destino novo ignorado.24testes de segurança passaram.2validações diretas validate_only nesta manutenção, mantendo background e tracking novo, falharam100/3858293; zeroids criados e nenhum código produtivo alterado. não há payload aceito comprovado para promover; não declarar correção funcional/generalização.",
       "thread_id": "1558133898209394780",
-      "updated_at": "2026-11-07T15:51:24+00:00"
+      "updated_at": "2026-11-07T15:58:11+00:00"
     },
     {
       "agent": "ares",
@@ -9096,5 +9096,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T15:51:24+00:00"
+  "updated_at": "2026-11-07T15:58:11+00:00"
 }
