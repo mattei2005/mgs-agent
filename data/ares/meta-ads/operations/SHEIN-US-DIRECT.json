@@ -332,20 +332,15 @@
   },
   "creative_policy": {
     "standard_copy_inherited_background_policy": {
-      "status": "ACTIVE",
+      "status": "SUPERSEDED_BY_CORPORATE_COPY_POLICY",
+      "canonical_source": "context/meta-creative-copy-policy.md",
+      "registry_id": "meta-copy-image-background-opt-out-1568722979569930414",
       "approved_by": "344196393512075265",
-      "authority_message_id": "1568291250883272825",
-      "source_thread_id": "1558133898209394780",
-      "effective_at": "2026-11-06T15:49:31.653000+00:00",
-      "scope": "SHEIN campaign duplication requests within the existing authorized account/channel scope",
-      "behavior": "Follow the standard copy and preserve the source ad settings, including image_background_gen when enabled; its presence is not a reason to ask whether to disable it.",
-      "ask_to_disable_inherited_background": false,
-      "automatic_opt_out_authorized": false,
-      "source_mutation_authorized": false,
-      "technical_rejection": "Diagnose and recover the faithful standard-copy path with original request, IDs and approved deltas. Do not silently disable background or other enhancements, add a catalog, bypass QA, recreate blindly, or treat technical API limitations as a new approval question to disable this inherited setting. Report any unavoidable real incompatibility precisely without inventing completion.",
-      "schedule": "Honor explicit NOW after required QA/readback; do not request activation again merely because preparation took time.",
-      "supersedes": "Routine per-request questions asking to disable image background generation solely because an inherited enabled setting causes a catalog rejection; historical exact opt-out approvals remain limited to their original requests.",
-      "runtime_validation": "Policy recorded; no new standard-copy Meta write or compatibility canary executed by this correction."
+      "authority_message_id": "1568722979569930414",
+      "superseded_authority_message_id": "1568291250883272825",
+      "historical_policy_receipt": "data/ares/meta-ads/audit/shein/copy-policy-1568722979569930414/superseded-background-policy.json",
+      "runtime_helper": "ares_campaign_v3.creative_copy_policy",
+      "source_mutation_authorized": false
     },
     "english_pool": "MGS-AGENTS/CRIATIVOS/SHEIN_US_EN",
     "english_pool_drive_id": "1yV7Uge_KFN_Sih-iuVd7FY68cpfCUrxi",
