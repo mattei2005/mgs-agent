@@ -5,6 +5,19 @@
 - Para lista com uma campanha sem rota apta por anúncios reprovados, preserve todos os IDs solicitados no request e separe o subconjunto apto de `activation_blocked`; pause todos os alvos autorizados, agende somente os aptos e mantenha causa/próxima ação da exceção no checkpoint e na resposta. Não altere nem contorne anúncios reprovados e não declare conclusão integral.
 - Em texto com `00:00` e lista após dois-pontos, não use o primeiro `:` para localizar a lista. Delimite o trecho correto da mensagem autenticada e valide a lista literal completa e a ordem antes de resolver IDs; não extraia horas como números de campanha.
 
+## Bootstrap e fechamento de pausa imediata
+
+Use esta sequência para status-only, sem passar pelo intake de criação:
+
+1. Leia o config vivo do Engine e o binding da conta; obtenha dali `graph_version`, `state_root`, `token_item` e `shein_profile`. Defina `os.environ['ARES_META_GRAPH_VERSION'] = config['graph_version']` **antes** de carregar `ares-meta-common.py` com `importlib.util.spec_from_file_location` e `exec_module`: o módulo fixa sua versão Graph durante o import, portanto depender do default pode enviar a operação para uma versão diferente da aprovada.
+2. Importe `AccountWriterLeaseStore` de `ares_campaign_v3.coordination`; não derive um nome de arquivo a partir do nome da classe. Desempacote `token, field = common.get_token_from_1password(token_item)` e `http, payload, headers` nos helpers Graph. Mantenha token/headers fora do journal e da saída.
+3. Autentique a mensagem exata e a permissão live, resolva os números pela listagem paginada da conta e congele IDs únicos no journal. Registre o pre-read material de cada ID antes do primeiro POST. Para pausa sem delta de filhos, leia somente os campos necessários de campanha; não acrescente prévias ou QA de mídia como dependência da interrupção.
+4. Adquira a lease, releia os IDs e force novamente a prova de autoridade. Grave a intenção `{'status': 'PAUSED'}` antes de `graph_post_once`. Persista separadamente resposta do POST e readback. Em retomada, um POST já confirmado só autoriza GETs de convergência; não o repita se a leitura ainda estiver transitória. Preserve a lease e o journal resumível quando não houver convergência.
+5. Feche com `graph_batch_get` para todos os IDs congelados, exigindo HTTP externo e de cada child, nomes retornados exatos e cobertura integral. Compare por ID `status/configured_status=PAUSED` e os campos não alvo `account_id`, `name`, `daily_budget`, `lifetime_budget`, `bid_strategy`, `start_time` e `stop_time` contra o pre-read individual. Derive alterados/no-ops do estado inicial; libere a lease somente após gravar a prova terminal.
+6. Se uma nova ordem de pausa chegar enquanto a duplicação anterior já estiver ativada, termine a verificação da criação sem reexecutá-la e trate a pausa como request independente. Use a mensagem nova somente para sua própria lista; não transporte quantidade, orçamento ou lance entre pedidos. No fechamento, separe pausa e duplicação em bullets, usando os respectivos recibos.
+
+Validação desta receita: pausa live de múltiplos IDs com payload exclusivo `status`, GET por objeto após POST, batch final integral e igualdade dos campos não alvo. Essa evidência não substitui o readback do próximo pedido nem comprova entrega de campanhas ativas.
+
 ## Mensagens editadas e complemento de alvos
 
 1. Resolva primeiro a conta pelo binding da thread. Para uma ordem sem alvos inequívocos, peça somente os números ou a confirmação de todas as ativas; não reutilize listas de operações concluídas.
