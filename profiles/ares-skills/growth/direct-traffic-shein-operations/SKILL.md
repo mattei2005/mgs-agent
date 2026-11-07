@@ -19,7 +19,7 @@ Atraso SB: exiba n/d para `totalMinutes=0` junto de `currentFillTime=null` e `co
 
 ## Fechamento e complementos
 
-Responda por número/finalidade e diferenças reais. Em pedido só documental, atualize sem rediscutir UTMs. Separe recurso preservado, tracking validado e rotina pronta.
+Corrija reincidências no executor compartilhado, preservando padrões e decisões. Documentar não é corrigir: exija regressão e readback conjunto de recursos e novas UTMs pela rota normal; informe pendências.
 
 Recibo e readback multifonte: `references/campaign-batch-final-readback.md`.
 
