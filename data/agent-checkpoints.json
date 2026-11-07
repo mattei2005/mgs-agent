@@ -6206,6 +6206,16 @@
     },
     {
       "agent": "ares",
+      "id": "ares-shein-background-executor-1568654008774565919",
+      "next_step": "Diagnosticar criação versus herança AdCopies e testes de referência; implementar correção isolada com regressões negativas, inventário, backup, REPORT-INFRA e validação real no request pendente sem duplicar shells.",
+      "objective": "Corrigir executor SHEIN para duplicação fiel com image_background_gen herdado habilitado, mantendo todos os padrões de tracking, budget, bid e lifecycle.",
+      "source": "discord:1185714635991679006/1558133898209394780/1568654008774565919",
+      "state": "manutenção explicitamente autorizada por rodolfo1568654008774565919; recuperar provas yolo g005/g002 e reproduzir falha antes do patch; zero novos writes meta nesta manutenção inicial.",
+      "thread_id": "1558133898209394780",
+      "updated_at": "2026-11-07T15:51:24+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ares-shein-daily-0800-20261020",
       "next_step": "Cron ja iniciado aguarda08h para revalidar budget/status e publicar24reports comGET de cada parte. Resultado externo em state/shein-daily-report/2026-10-19/completion.json;retomar somente fontes/partes pendentes pelo mesmojournal se falhar. Nao reenviar por inferencia.",
       "objective": "Relatorio diario D-1 as08h America/New_York nas threads SHEIN existentes exceto Boostingecon/Growpowerhub; inicio20/10 autorizado por Rodolfo",
@@ -9086,5 +9096,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-07T15:39:05+00:00"
+  "updated_at": "2026-11-07T15:51:24+00:00"
 }
