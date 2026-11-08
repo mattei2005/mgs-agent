@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/root/.hermes/profiles/zeus/skills/ops/meta-manual-payments-planning/scripts/publish_pay_now.py", line 9, in <module>
+    import mgs_google_workspace_auth as g
+  File "/root/mgs-agent/scripts/mgs_google_workspace_auth.py", line 24, in <module>
+    from cryptography.hazmat.primitives import hashes, serialization
+ModuleNotFoundError: No module named 'cryptography'

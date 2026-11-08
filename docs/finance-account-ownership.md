@@ -79,6 +79,18 @@ Produção validada1507→1508atribuição→1509fonte;gastoFacebookUSD869020.28
 
 Escopo não inclui setembro/agosto nem pagamentos/estornos. Estado e readback:`reports/finance-oct-fb-fix-1569031159805911112.md`,checkpoint`ZEUS-FINANCE-OCT-FIX-1569031159805911112`. A decisão de novembro permanece ativa no seu próprio mês.
 
+## Zuout e Zuout Finanzas — G006/Nicolas confirmado1569051595935850601
+
+Rodolfo confirmou que **Zuout e Zuout Finanzas são de G006/Nicolas** e autorizou corrigir os vínculos de custo em outubro e novembro/2026, preservando receitas, rateio e pagamentos. Reutilizar os cadastros `site-zuout-principal` e `site-zuout-finanzas-principal`; contas cadastradas `908704754163659` (Zuout-US-CC-EN-01) e `2917074998467652` (ZuoutFinanzas-US-CC-ES-01) recebem manager_bindings G006 nos dois meses, mantendo IDs e nomes originais. Continuidade futura segue os vínculos/cadastros confirmados no rollover, sem propagar realizado.
+
+A identificação anterior `NÃO MAPEADO`/lista vazia de gestores está supersedida neste recorte. Esses gastos legados já estavam debitados do site: a ponte explícita de custos leva ao resultado de Nicolas somente a parcela legada antes não atribuída, sem duplicar custo nativo já contabilizado. OutubroUSD1534.43 e01–07/11USD203.28 passaram a ser descontados do gestor. Zuout Finanzas não teve gasto positivo nos intervalos auditados; seu vínculo foi corrigido sem inventar despesa.
+
+Preservar a política de receitas e a decisão separada de setembro sobre tagsG002/G006; esta correção não transfere receitas ou reescreve setembro/agosto. Padrão operacional: contas existentes desses sites com código/vínculo confirmado G006 seguem Nicolas; novo conflito real continua bloqueado, não viraG002 por ausência de metadata.
+
+Atualização adicional de novembro: MetaUSD140835.64 autorizada1569051595935850601; Google Mattei1 dias06/07, valores exatos daAPI e reduçãoBRL5.985111, autorizada1569058518609301756 apósCSV43linhas. Preservar micros doGoogle; oCSV não cria regra geral de arredondamento.
+
+Execução/readback: `reports/finance-zuout-g006-1569051595935850601.md`, checkpoint `ZEUS-FINANCE-ZUOUT-1569051595935850601`. Cadastro26;outubro1511;novembro292 na entrega. Regras de câmbio automático permanecem vigentes.
+
 ## Limites de cálculo e UI
 - Contas de anúncio: identidade, site e gestor, sem painel de gastos.
 - Relatório Diário: gastos por conta/gestor/dia em moeda original, incluídos uma única vez na Mídia do site.
