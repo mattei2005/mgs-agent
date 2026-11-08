@@ -1,0 +1,28 @@
+{
+  "approval_message_id": "1569014414605295618",
+  "target": "/root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-6iwvhe0n",
+  "ledger_sha256": "fe7567842ba2dc8c137bd3bc9dbf5b9c2d926a9648ff25641914bcda98cea50b",
+  "target_metadata_sha256": "6a3d3c3e060eb9f762c9ecb6349949b60ccaf484547b8dd549621261a8108323",
+  "verified_entries": 151229,
+  "verified_process_references": 0,
+  "status": "deleted_validated",
+  "before_free_bytes": 14660898816,
+  "services_before": {
+    "zeus": "MainPID=2241212\nActiveState=active",
+    "atena": "MainPID=2237072\nActiveState=active",
+    "ares": "MainPID=2233587\nActiveState=active"
+  },
+  "launcher": "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes",
+  "estimated_reclaim_file_bytes": 18731167744,
+  "after_free_bytes": 33445748736,
+  "services_after": {
+    "zeus": "MainPID=2241212\nActiveState=active",
+    "atena": "MainPID=2237072\nActiveState=active",
+    "ares": "MainPID=2233587\nActiveState=active"
+  },
+  "target_absent": true,
+  "closed_at": "2026-11-08T15:46:52.991540+00:00",
+  "observed_free_delta_bytes": 18784849920,
+  "next_dr_required_bytes": 29419976507,
+  "next_dr_headroom_pass": true
+}

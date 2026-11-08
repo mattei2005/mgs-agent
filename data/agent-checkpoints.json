@@ -2723,13 +2723,14 @@
     },
     {
       "agent": "zeus",
+      "cleanup_approval_message_id": "1569014414605295618",
       "id": "DR-RESTORE-RECOVERY-1568943185458110531",
-      "next_step": "Obter confirmação explícita de Rodolfo para o alvo/manifesto em reports/zeus/dr-restore-recovery-1568943185458110531.json; revalidar fingerprint/processos; descartar lote exato; validar headroom e fechar prevenção de recorrência.",
+      "next_step": "Validate absence/headroom; finish alert communication; read-only VPS cleanup inventory",
       "objective": "Recuperar teste isolado de DR do cron 940e9827b1ac e prevenir recorrência",
       "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1568943185458110531",
-      "state": "restore integral dos validadores aprovado às 11:29:47z; 6 componentes, 3 perfis e 38 sqlite; monitor saudável; cron nativo ok, streak zero, agenda intacta. bloqueio critical: confirmação para excluir somente workspace de 18.73gb criado pelo retry interrompido aos 420s. nenhum restore writer ativo.",
+      "state": "cleanup approved; exact original ledger revalidated; deletion executing",
       "thread_id": "1498132022634483894",
-      "updated_at": "2026-11-08T11:34:56+00:00"
+      "updated_at": "2026-11-08T15:46:45.321713+00:00"
     },
     {
       "agent": "zeus",
@@ -4383,6 +4384,16 @@
     },
     {
       "agent": "zeus",
+      "id": "ZEUS-FINANCE-FB-FIX-1569014246493130852",
+      "next_step": "Validar preflight preserva flags;importar fonte auditada delta5.54 via runner;replay;API/DOM autenticados e documentacao/report",
+      "objective": "Corrigir atribuicao FB tres sites em novembro e refresh01-07;cinco gestores/todos sites",
+      "source": "apps/finance-system/private/fb-fix-1569014246493130852/apply.json;discord:1569014246493130852",
+      "state": "metadados aplicados287->288;backup validado;455controles passam com fonte salva;sem alteracao nominal,rateio,pagamentos ou outros meses",
+      "thread_id": "1545426987756298340",
+      "updated_at": "2026-11-08T15:49:30+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "ZEUS-FINANCE-FULL-AUDIT-1548008533608636527",
       "next_step": "Monitorar o primeiro ciclo natural intake08:03-08:28 -> spend09:03 -> revenue finalizer09:22/09:31/09:41. Manter PEND-092 para ActiveView agosto em18/09; novas divergências devem bloquear e perguntar nesta thread.",
       "objective": "Auditar integralmente dashboard, cálculos, automações, acessos, skills e referências; corrigir riscos sem alterar valores financeiros",
@@ -5473,6 +5484,16 @@
       "state": "completed",
       "thread_id": "1555626535980114000",
       "updated_at": "2026-10-03T04:48:32+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "ZEUS-SHEIN-REPORT-RECOVERY-1569013882259902467",
+      "next_step": "Testar resolucao/mocks;executar diario atual pelo scheduler exato;validar intraday sem POST e readbacks;inventario e report",
+      "objective": "Recuperar envio D-1 e intraday nas mesmas24threads SHEIN sem alterar agendas/campanhas",
+      "source": "work/shein-report-recovery-1569013882259902467/backups.json",
+      "state": "causa confirmada:wrappers interpretavam launcher shell como python;2wrappers corrigidos via resolver canonico,backup preservado;validacao e retry pendentes",
+      "thread_id": "1569013882259902467",
+      "updated_at": "2026-11-08T15:43:03+00:00"
     },
     {
       "agent": "zeus",
@@ -9226,5 +9247,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T13:09:54+00:00"
+  "updated_at": "2026-11-08T15:49:30+00:00"
 }
