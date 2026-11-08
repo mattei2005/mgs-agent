@@ -6,6 +6,8 @@ import importlib.util
 import io
 import json
 import os
+import shutil
+import subprocess
 import tarfile
 import tempfile
 import threading
@@ -23,6 +25,68 @@ spec.loader.exec_module(mod)
 
 
 class OffsiteBackupTests(unittest.TestCase):
+    def test_restore_staging_is_released_before_sequential_profile_imports(self) -> None:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
+            root = Path(raw)
+            components = []
+            for name in ('hermes-zeus', 'hermes-atena', 'mgs-agent'):
+                path = root / f'{name}.zip'
+                with zipfile.ZipFile(path, 'w') as archive:
+                    if name == 'mgs-agent':
+                        archive.writestr('mgs-agent/context/mgs-os-map.md', 'fixture map')
+                    else:
+                        archive.writestr('config.yaml', 'model: {}')
+                components.append({'component': name, 'filename': path.name,
+                                   'size_bytes': path.stat().st_size, 'sha256': mod.sha256_file(path)})
+            source = root / 'source.zip'
+            with zipfile.ZipFile(source, 'w') as archive:
+                archive.writestr('manifest.json', json.dumps({'mode': 'full', 'components': components}))
+                for row in components:
+                    archive.write(root / row['filename'], row['filename'])
+            metadata = {'name': 'fixture.zip.gpg', 'size': str(source.stat().st_size),
+                        'md5Checksum': mod.md5_file(source),
+                        'appProperties': {'mgs_dr': 'true', 'sha256': mod.sha256_file(source)}}
+            config = {'state_path': str(root / 'state.json'), 'lock_path': str(root / 'dr.lock'),
+                      'profiles': ['zeus', 'atena']}
+            class Drive:
+                def metadata(self, remote_id):
+                    return metadata
+                def download(self, remote_id, destination):
+                    shutil.copyfile(source, destination)
+            def gpg(command, **kwargs):
+                if '--decrypt' in command:
+                    shutil.copyfile(command[-1], command[command.index('--output') + 1])
+                return subprocess.CompletedProcess(command, 0)
+            previous = []
+            def profile_import(profile, component, sandbox):
+                work = component.parent.parent
+                self.assertEqual(list(work.glob('transport-*')), [])
+                self.assertTrue(all(not path.exists() for path in previous))
+                previous.append(sandbox)
+                (sandbox / f'hermes-{profile}').mkdir()
+                return {'profile': profile, 'imported': True}
+            with patch.object(mod, 'load_config', return_value=config), \
+                 patch.object(mod, 'drive_client', return_value=Drive()), \
+                 patch.object(mod, 'validate_drive_root'), \
+                 patch.object(mod, 'private_backup_key', return_value='fixture key'), \
+                 patch.object(mod.subprocess, 'run', side_effect=gpg), \
+                 patch.object(mod, 'validate_restored_profile', side_effect=profile_import), \
+                 patch.object(mod, 'append_event'), \
+                 patch.dict(os.environ, {'TMPDIR': str(root)}):
+                result = mod.restore_test('fixture-id')
+            self.assertEqual(result['status'], 'PASS')
+            self.assertEqual([p['profile'] for p in result['profiles']], ['zeus', 'atena'])
+            self.assertTrue(all(not path.exists() for path in previous))
+            self.assertEqual(list(root.glob('mgs-dr-restore-*')), [])
+            self.assertEqual(json.loads((root / 'state.json').read_text())['last_restore_attempt']['status'], 'PASS')
+
+    def test_import_failure_reports_disk_reason_without_raw_output(self) -> None:
+        failed = subprocess.CompletedProcess([], 1, 'No space left on device; fixture-sensitive-value', '')
+        with patch.object(mod.subprocess, 'run', return_value=failed):
+            with self.assertRaisesRegex(RuntimeError, 'insufficient staging disk space') as caught:
+                mod.validate_restored_profile('zeus', Path('fixture.zip'), Path('fixture-root'))
+        self.assertNotIn('fixture-sensitive-value', str(caught.exception))
+
     def test_default_lock_budget_survives_full_backup_overlap(self) -> None:
         with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR')) as raw:
             # Simulate release after 1050s: the former 600s budget failed here.

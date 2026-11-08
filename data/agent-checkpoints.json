@@ -2723,6 +2723,16 @@
     },
     {
       "agent": "zeus",
+      "id": "DR-RESTORE-RECOVERY-1568943185458110531",
+      "next_step": "Testar staging limitado; executar cron original; validar perfis, hashes, knowledge e monitor; inventário/audit/report.",
+      "objective": "Recuperar teste isolado de DR do cron 940e9827b1ac",
+      "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1568943185458110531",
+      "state": "writer original encerrado; lock livre; último full íntegro registrado. pico legado estimado acima de 45 gb versus 33.7 gb livres; probe de import cli e sqlite isolados passou. reduzindo ciclo de vida do staging antes de retry.",
+      "thread_id": "1498132022634483894",
+      "updated_at": "2026-11-08T11:06:18+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "DRIVE-FLAT-INTAKE-1566814476626563115",
       "next_step": "Implantacao originalpreservada+primeiropedidorealKelly38/38aceito:76providers/38originais IDs/fullbytes,38clean+reservas,38protocolos,mapa38pares e2linksentreguesporAres nathread1566998348169220228.Semcampanha.Continuacaomecanicaautorizada1567021305822314609ativanosmesmoslimites/agendas;ver checkpointZEUS-KELLY-SUPERVISION-1567008464587456586. Nenhumuploadartificialouacaodousuario paraaceitacao.",
       "objective": "Entrada MGS simples; organizacao definitiva30TB com mesmos IDs/bytes/acessos equivalentes, sem exclusoes.",
@@ -9216,5 +9226,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T07:50:12+00:00"
+  "updated_at": "2026-11-08T11:06:18+00:00"
 }

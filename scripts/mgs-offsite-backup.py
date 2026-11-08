@@ -1028,7 +1028,15 @@ def validate_restored_profile(profile: str, component_zip: Path, root: Path) -> 
         check=False,
     )
     if proc.returncode != 0:
-        raise RuntimeError(f"isolated Hermes import failed for {profile}: rc={proc.returncode}")
+        # Do not leak raw importer output (archives may contain credentials).
+        output = (proc.stdout or "") + (proc.stderr or "")
+        reason = next((label for needle, label in (
+            ("No space left on device", "insufficient staging disk space"),
+            ("Import refused", "runtime ownership conflict"),
+            ("backup archive is damaged", "archive CRC/decompression failure"),
+            ("integrity check failed", "SQLite integrity failure"),
+        ) if needle in output), "importer rejected archive; inspect isolated drill")
+        raise RuntimeError(f"isolated Hermes import failed for {profile}: rc={proc.returncode}; {reason}")
     markers = [target / "config.yaml", target / "state.db"]
     if not any(path.exists() for path in markers):
         raise RuntimeError(f"isolated Hermes import for {profile} has no expected marker")
@@ -1057,42 +1065,55 @@ def restore_test(remote_id: str | None = None, *, finance_database: str | None =
             remote_id = full.get("remote_file_id") or quick.get("remote_file_id")
         if not remote_id:
             raise RuntimeError("no successful remote backup is available for restore test")
-        with tempfile.TemporaryDirectory(prefix="mgs-dr-restore-", dir=str(REPO / "tmp")) as tmpdir:
+        scratch = Path(os.environ.get("TMPDIR") or "/root/.hermes/profiles/zeus/cache/scratch")
+        scratch.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix="mgs-dr-restore-", dir=str(scratch)) as tmpdir:
             work = Path(tmpdir)
             drive = drive_client(config)
             validate_drive_root(drive, config)
             remote = drive.metadata(remote_id)
             if (remote.get("appProperties") or {}).get("mgs_dr") != "true" or remote.get("trashed") is True:
                 raise RuntimeError("restore target is not a live managed MGS DR backup")
-            encrypted = work / remote["name"]
-            drive.download(remote_id, encrypted)
-            if encrypted.stat().st_size != int(remote.get("size") or 0):
-                raise RuntimeError("downloaded backup size mismatch")
-            if md5_file(encrypted) != remote.get("md5Checksum"):
-                raise RuntimeError("downloaded backup MD5 mismatch")
-            expected_sha = (remote.get("appProperties") or {}).get("sha256")
-            if not expected_sha or sha256_file(encrypted) != expected_sha:
-                raise RuntimeError("downloaded backup SHA-256 mismatch")
-            private_key = private_backup_key(config)
-            gnupg = work / "gnupg-private"
-            gnupg.mkdir(mode=0o700)
-            key_file = work / "private.asc"
-            key_file.write_text(private_key, encoding="utf-8")
-            os.chmod(key_file, 0o600)
-            subprocess.run(["gpg", "--homedir", str(gnupg), "--batch", "--import", str(key_file)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-            key_file.unlink(missing_ok=True)
-            bundle = work / "bundle.zip"
-            subprocess.run(
-                ["gpg", "--homedir", str(gnupg), "--batch", "--yes", "--output", str(bundle), "--decrypt", str(encrypted)],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.PIPE,
-                check=True,
-            )
-            safe_zip(bundle)
             extracted = work / "bundle"
             extracted.mkdir()
-            with zipfile.ZipFile(bundle) as archive:
-                safe_extract(archive, extracted)
+            # Ciphertext and decrypted container are staging, not recovery data.
+            # End their existing temporary lifecycle before importing profiles;
+            # retaining all three layers plus expanded profiles can exhaust disk.
+            with tempfile.TemporaryDirectory(prefix="transport-", dir=str(work)) as transport_dir:
+                transport = Path(transport_dir)
+                remote_size = int(remote.get("size") or 0)
+                if shutil.disk_usage(work).free < remote_size * 3 + 2 * 1024**3:
+                    raise RuntimeError("insufficient staging disk space before restore download")
+                encrypted = transport / remote["name"]
+                drive.download(remote_id, encrypted)
+                if encrypted.stat().st_size != remote_size:
+                    raise RuntimeError("downloaded backup size mismatch")
+                if md5_file(encrypted) != remote.get("md5Checksum"):
+                    raise RuntimeError("downloaded backup MD5 mismatch")
+                expected_sha = (remote.get("appProperties") or {}).get("sha256")
+                if not expected_sha or sha256_file(encrypted) != expected_sha:
+                    raise RuntimeError("downloaded backup SHA-256 mismatch")
+                private_key = private_backup_key(config)
+                gnupg = transport / "gnupg-private"
+                gnupg.mkdir(mode=0o700)
+                key_file = transport / "private.asc"
+                key_file.write_text(private_key, encoding="utf-8")
+                os.chmod(key_file, 0o600)
+                subprocess.run(["gpg", "--homedir", str(gnupg), "--batch", "--import", str(key_file)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+                key_file.unlink(missing_ok=True)
+                bundle = transport / "bundle.zip"
+                subprocess.run(
+                    ["gpg", "--homedir", str(gnupg), "--batch", "--yes", "--output", str(bundle), "--decrypt", str(encrypted)],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.PIPE,
+                    check=True,
+                )
+                safe_zip(bundle)
+                with zipfile.ZipFile(bundle) as archive:
+                    required = sum(member.file_size for member in archive.infolist())
+                    if shutil.disk_usage(work).free < required + 2 * 1024**3:
+                        raise RuntimeError("insufficient staging disk space before component extraction")
+                    safe_extract(archive, extracted)
             manifest = json.loads((extracted / "manifest.json").read_text(encoding="utf-8"))
             component_results: list[dict[str, Any]] = []
             finance_dump_path: Path | None = None
@@ -1118,7 +1139,16 @@ def restore_test(remote_id: str | None = None, *, finance_database: str | None =
             isolated.mkdir()
             for profile in config["profiles"]:
                 component = next(row for row in manifest["components"] if row["component"] == f"hermes-{profile}")
-                component_results.append(validate_restored_profile(profile, extracted / component["filename"], isolated))
+                component_path = extracted / component["filename"]
+                with zipfile.ZipFile(component_path) as archive:
+                    required = sum(member.file_size for member in archive.infolist())
+                    largest_db = max((member.file_size for member in archive.infolist() if member.filename.endswith(".db")), default=0)
+                if shutil.disk_usage(work).free < required + largest_db + 2 * 1024**3:
+                    raise RuntimeError(f"insufficient staging disk space before isolated import for {profile}")
+                # Each profile is independently validated; its sandbox need not
+                # coexist with the next one. No production profile is touched.
+                with tempfile.TemporaryDirectory(prefix=f"profile-{profile}-", dir=str(isolated)) as profile_dir:
+                    component_results.append(validate_restored_profile(profile, component_path, Path(profile_dir)))
             mgs_component = next(row for row in manifest["components"] if row["component"] == "mgs-agent")
             mgs_root = isolated / "mgs"
             mgs_root.mkdir()
