@@ -83,18 +83,34 @@
     "J"
   ],
   "latest_refresh_qualification": {
-    "status": "partial_updated_validated_pc1_reauthentication_required",
-    "verified_at": "2026-11-08T08:08:52.627487-05:00",
+    "status": "partial_invoices_validated_metrics_blocked_insights_and_pc1_2fa",
+    "verified_at": "2026-11-08T14:09:21.139075-05:00",
     "accounts": 47,
     "groups": {
       "Cartão de crédito": 11,
       "Linha de crédito": 36
     },
+    "fresh_metrics_count": 0,
+    "metrics_preserved_count": 47,
     "validated_metrics_at": "2026-11-08T08:07:31.239461-05:00",
     "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261108T080736043770",
-    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261108T080528469255",
-    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261108T080457025886",
+    "failed_api_collection": {
+      "status": "blocked",
+      "error": "insights_daily_aggregate_mismatch:account=7840111366055613;month_daily=14041.56;month_total=14046.34;avg_daily=4443.64;avg_total=4443.64",
+      "payments_executed": 0
+    },
+    "insights_blocker": {
+      "account_id": "7840111366055613",
+      "name": "Yolokfx-US-SHEIN-EN-01-G002",
+      "month_daily": "14041.56",
+      "month_aggregate": "14046.34",
+      "difference_usd": "4.78",
+      "bounded_rereads": 2,
+      "cause": "Provider returned inconsistent daily and aggregate Insights; internal provider cause unproven",
+      "writes_from_failed_collection": 0
+    },
     "source_to_live_sheet_cgij_exact": true,
+    "metrics_source_is_previous_snapshot": true,
     "invoice_source_to_live_sheet_ef_exact": true,
     "d_ledger_to_live_sheet_exact": true,
     "h_source_to_live_sheet_and_note_exact": true,
@@ -139,48 +155,45 @@
       "908704754163659",
       "937846586033361"
     ],
-    "h_read_at_min": null,
-    "h_read_at_max": null,
-    "h_sum_usd": "519213.10",
-    "fresh_h_sum_usd": "0",
     "preserved_h_times": {
-      "1001115192056600": "2026-11-07T14:18:02.516961-05:00",
-      "1018267074603840": "2026-11-07T14:17:18.640276-05:00",
-      "1062887799996139": "2026-11-07T14:16:15.562606-05:00",
-      "1085117577390237": "2026-11-07T21:16:54.927800-05:00",
-      "1107653168698121": "2026-11-07T14:23:28.078698-05:00",
-      "1245683183659911": "2026-11-07T14:21:34.003639-05:00",
-      "1419148446852410": "2026-11-07T21:10:57.756319-05:00",
       "1498990138663094": "2026-11-07T21:12:33.582062-05:00",
-      "1526280818302320": "2026-11-07T21:10:25.249309-05:00",
-      "1583000095650153": "2026-11-07T14:24:13.973938-05:00",
-      "1600310064116258": "2026-11-07T14:25:01.548359-05:00",
-      "1736068407518263": "2026-11-07T14:16:36.568395-05:00",
-      "1744611463000838": "2026-11-07T14:20:25.036971-05:00",
       "1753257812779707": "2026-11-07T14:20:05.342512-05:00",
+      "897046653487466": "2026-11-07T21:14:41.859462-05:00",
+      "781612907182683": "2026-11-07T14:17:39.361314-05:00",
+      "937846586033361": "2026-11-07T21:15:14.259010-05:00",
+      "1583000095650153": "2026-11-07T14:24:13.973938-05:00",
+      "2031917360813819": "2026-11-07T21:13:02.929733-05:00",
+      "1245683183659911": "2026-11-07T14:21:34.003639-05:00",
+      "1877104513669062": "2026-11-07T21:11:29.802607-05:00",
+      "869857549542755": "2026-11-07T21:16:23.307389-05:00",
+      "2633813727134360": "2026-11-07T14:21:13.270103-05:00",
+      "2429758060563333": "2026-11-07T14:24:38.905379-05:00",
+      "1001115192056600": "2026-11-07T14:18:02.516961-05:00",
+      "1107653168698121": "2026-11-07T14:23:28.078698-05:00",
+      "4511685129081248": "2026-11-07T21:15:48.980678-05:00",
+      "1526280818302320": "2026-11-07T21:10:25.249309-05:00",
+      "311204101516831": "2026-11-07T21:07:48.065630-05:00",
+      "787796726891306": "2026-11-07T14:23:51.011575-05:00",
+      "336562339356179": "2026-11-07T21:06:17.672501-05:00",
+      "908704754163659": "2026-11-07T14:20:49.432390-05:00",
+      "2039876850230678": "2026-11-07T21:07:16.015259-05:00",
+      "1018267074603840": "2026-11-07T14:17:18.640276-05:00",
+      "26632890069640784": "2026-11-07T21:08:20.102676-05:00",
+      "814915838330687": "2026-11-07T21:17:27.547763-05:00",
       "1829406761389732": "2026-11-07T14:16:58.909666-05:00",
       "1851640026221079": "2026-11-07T14:19:42.362014-05:00",
-      "1877104513669062": "2026-11-07T21:11:29.802607-05:00",
-      "2031917360813819": "2026-11-07T21:13:02.929733-05:00",
-      "2039876850230678": "2026-11-07T21:07:16.015259-05:00",
-      "2429758060563333": "2026-11-07T14:24:38.905379-05:00",
-      "2633813727134360": "2026-11-07T14:21:13.270103-05:00",
-      "26632890069640784": "2026-11-07T21:08:20.102676-05:00",
-      "311204101516831": "2026-11-07T21:07:48.065630-05:00",
-      "3188620887977617": "2026-11-07T21:08:53.670407-05:00",
-      "336562339356179": "2026-11-07T21:06:17.672501-05:00",
-      "3752157451670648": "2026-11-07T21:06:46.330418-05:00",
-      "4511685129081248": "2026-11-07T21:15:48.980678-05:00",
-      "536294549227786": "2026-11-07T21:12:00.396695-05:00",
-      "781612907182683": "2026-11-07T14:17:39.361314-05:00",
+      "1736068407518263": "2026-11-07T14:16:36.568395-05:00",
       "7840111366055613": "2026-11-07T14:23:04.151744-05:00",
-      "787796726891306": "2026-11-07T14:23:51.011575-05:00",
-      "814915838330687": "2026-11-07T21:17:27.547763-05:00",
-      "869857549542755": "2026-11-07T21:16:23.307389-05:00",
-      "897046653487466": "2026-11-07T21:14:41.859462-05:00",
-      "908704754163659": "2026-11-07T14:20:49.432390-05:00",
-      "937846586033361": "2026-11-07T21:15:14.259010-05:00"
+      "1600310064116258": "2026-11-07T14:25:01.548359-05:00",
+      "536294549227786": "2026-11-07T21:12:00.396695-05:00",
+      "1419148446852410": "2026-11-07T21:10:57.756319-05:00",
+      "3752157451670648": "2026-11-07T21:06:46.330418-05:00",
+      "1744611463000838": "2026-11-07T14:20:25.036971-05:00",
+      "3188620887977617": "2026-11-07T21:08:53.670407-05:00",
+      "1085117577390237": "2026-11-07T21:16:54.927800-05:00",
+      "1062887799996139": "2026-11-07T14:16:15.562606-05:00"
     },
+    "h_sum_usd": "519213.10",
     "pending_ui": [
       {
         "account_id": "1046241194533786",
@@ -208,8 +221,8 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
+    "pending_ui_freshness": "previous_verified_collection_only; current API refresh blocked before complete pending enumeration",
     "card_proofs_updated": 0,
-    "renewed_card_proof_ids": [],
     "historical_d_gaps": [
       {
         "account_id": "336562339356179",
@@ -422,6 +435,8 @@
         "billing_period": "2026-10-01"
       }
     ],
+    "invoice_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/september-20261108T140434026571",
+    "pay_now_run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261108T140609891472",
     "subtotal_checks": [
       {
         "label": "TOTAL CARTÃO DE CRÉDITO",
@@ -507,7 +522,7 @@
       "type": "facebook_twofactor_reauth",
       "account": "Rodolfo Mattei",
       "message": "Confirm it’s you with your authentication app",
-      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261108T080528469255/blocked.png",
+      "screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261108T140609891472/blocked.png",
       "no_bypass_or_retry": true
     },
     "payments_executed": 0,
@@ -522,22 +537,23 @@
       "final_browser_tabs_visually_counted": 8,
       "owned_tabs_closed": true,
       "lease_free": true,
-      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T0802/surface-final.png"
+      "final_screenshot": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T1402/surface-final.png"
     },
-    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T0802/closure-current.json",
+    "closure_receipt": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T1402/closure-current.json",
     "report_infra_status": "sent_verified",
     "cron_coordination": {
       "job_id": "2ee720363d7d",
       "same_existing_job": true,
       "schedule_unchanged": true,
-      "next_run_at": "2026-11-08T14:02:00-05:00",
-      "current_fire_claim_reconciled": true
+      "next_run_at": "2026-11-08T21:02:00-05:00",
+      "current_fire_claim_reconciled": true,
+      "single_active_execution": "c67293738ed4482b9ca52610bd34a863"
     },
-    "report_infra_message_id": "1568975857995747428",
+    "report_infra_message_id": "1569066566127976530",
     "report_infra_readback": true
   },
   "pending_card_history": {
-    "status": "new_generic_events_pending_pc1_reauthentication",
+    "status": "previous_pending_preserved_current_api_collection_incomplete_pc1_2fa",
     "account_ids": [
       "1046241194533786",
       "1414197490675732",
@@ -572,6 +588,7 @@
         "reason": "new_generic_payment_since_pc1_proof"
       }
     ],
+    "pending_ui_freshness": "previous_verified_collection_only; current API refresh blocked before complete pending enumeration",
     "historical_blank_account_ids": [
       "336562339356179",
       "3752157451670648",
@@ -610,8 +627,8 @@
       "1600310064116258"
     ],
     "historical_blank_without_proof_count": 34,
-    "verified_at": "2026-11-08T08:08:52.627487-05:00",
-    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T0802/closure-current.json"
+    "verified_at": "2026-11-08T14:09:21.139075-05:00",
+    "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T1402/closure-current.json"
   },
   "card_history_recovery": {
     "source_message": "1564273144729051199",
@@ -639,7 +656,7 @@
   ],
   "native_schedule_state": "enabled_dynamic_live_funding_regroup",
   "cadence_authority_message": "1563960345826037821",
-  "next_run_at": "2026-11-08T14:02:00-05:00",
+  "next_run_at": "2026-11-08T21:02:00-05:00",
   "manual_live_validation_at": "2026-10-25T13:44:38.255406-04:00",
   "pay_now_column_authority_message": "1564382301155098717",
   "pay_now_account_ids": [

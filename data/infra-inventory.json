@@ -897,11 +897,21 @@
       "agent": "zeus",
       "type": "authorized_financial_code_and_attribution_correction",
       "status": "production_verified",
-      "authority_message_ids": ["1569051595935850601", "1569058518609301756"],
+      "authority_message_ids": [
+        "1569051595935850601",
+        "1569058518609301756"
+      ],
       "origin_thread_id": "1545426987756298340",
-      "periods": ["2026-10", "2026-11"],
+      "periods": [
+        "2026-10",
+        "2026-11"
+      ],
       "release_id": "zuout-legacy-g006-1569051595935850601",
-      "runtime_paths": ["apps/finance-system/account_manager_costs.py", "apps/finance-system/worker.py", "apps/finance-system/tests/test_account_manager_costs.py"],
+      "runtime_paths": [
+        "apps/finance-system/account_manager_costs.py",
+        "apps/finance-system/worker.py",
+        "apps/finance-system/tests/test_account_manager_costs.py"
+      ],
       "evidence": "reports/finance-zuout-g006-1569051595935850601.md",
       "private_artifacts": "apps/finance-system/private/zuout-g006-1569051595935850601/",
       "canonical_source": "docs/finance-account-ownership.md",
@@ -921,7 +931,9 @@
         "preview_memory_incident_recovered": true,
         "hermes_gateway_restarts": 0
       },
-      "report_infra_status": "pending_delivery"
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1569065681444675776",
+      "report_infra_readback": true
     },
     {
       "id": "finance-non-shein-review-1569045389707841771",
@@ -62352,6 +62364,33 @@
       "potential_duplicate_bytes": 9271173120,
       "complete_isolated_pg_clusters": 77,
       "updated_at": "2026-11-08T17:09:34.413044+00:00"
+    },
+    {
+      "id": "meta-manual-payments-refresh-20261108-1402",
+      "agent": "zeus",
+      "type": "authorized_recurring_financial_snapshot",
+      "status": "partial_invoices_validated_metrics_blocked_insights_and_pc1_2fa",
+      "updated_at": "2026-11-08T14:09:21.139075-05:00",
+      "evidence": "/root/mgs-agent/reports/meta-manual-payments-runs/cron-20261108T1402/closure-current.json",
+      "report_infra_status": "sent_verified",
+      "verification": {
+        "accounts": 47,
+        "fresh_metrics": 0,
+        "preserved_metrics": 47,
+        "fresh_invoices": 47,
+        "fresh_h": 0,
+        "preserved_h": 36,
+        "previous_pending_d": 5,
+        "pending_d_collection_current": false,
+        "historical_blank_d": 35,
+        "other_sheet_data_unchanged": true,
+        "lease_free": true,
+        "meta_writes": 0,
+        "payments_executed": 0,
+        "cron_changes": 0
+      },
+      "report_infra_message_id": "1569066566127976530",
+      "report_infra_readback": true
     }
   ],
   "profile_skill_references": [
