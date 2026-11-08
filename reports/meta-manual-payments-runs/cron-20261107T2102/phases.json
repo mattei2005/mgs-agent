@@ -41,11 +41,16 @@
   "refresh_workbook": {
     "status": "updated_metrics_pending_card_history",
     "accounts": 47,
-    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261107T210441287977",
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261107T212139601874",
     "meta_writes": 0,
     "payments_executed": 0,
-    "snapshot_at": "2026-11-07T21:04:38.292982-05:00",
+    "snapshot_at": "2026-11-07T21:21:34.922330-05:00",
     "pending_ui": [
+      {
+        "account_id": "1046241194533786",
+        "name": "Creditoparaveiculo-BR-CAR-BR-13-G006",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
       {
         "account_id": "1543098427832443",
         "name": "Mavroa-US-SHEIN-ES-03-G003",
@@ -63,5 +68,66 @@
     "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261107T210443132474",
     "credit_line_accounts": 36,
     "sheet_writes": 0
+  },
+  "initial_refresh_workbook": {
+    "status": "updated_metrics_pending_card_history",
+    "accounts": 47,
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/20261107T210441287977",
+    "meta_writes": 0,
+    "payments_executed": 0,
+    "snapshot_at": "2026-11-07T21:04:38.292982-05:00",
+    "pending_ui": [
+      {
+        "account_id": "1543098427832443",
+        "name": "Mavroa-US-SHEIN-ES-03-G003",
+        "reason": "new_generic_payment_since_pc1_proof"
+      },
+      {
+        "account_id": "2852476828464907",
+        "name": "Mavroa-US-SHEIN-ES-04-G004",
+        "reason": "new_generic_payment_since_pc1_proof"
+      }
+    ]
+  },
+  "h_publication": {
+    "status": "pay_now_partial_updated_validated",
+    "accounts": 18,
+    "target_accounts": 36,
+    "preserved_accounts": 18,
+    "sum_usd": "16723.79",
+    "inserted_column": false,
+    "full_grid_readback": true,
+    "other_sheet_properties_unchanged": true,
+    "payments_executed": 0,
+    "run_dir": "/root/mgs-agent/reports/meta-manual-payments-runs/pay-now-20261107T210443132474",
+    "completed_at": "2026-11-07T21:21:15.753478-05:00"
+  },
+  "validation": {
+    "status": "snapshot_readback_pass",
+    "spreadsheet_id": "1PrKBawAGgRxx1LPcjcf8U6QH4ZcJfJTn-niJ2SzCdyU",
+    "sheet_id": 271321738,
+    "business_id": "155263197283282",
+    "currency": "USD",
+    "accounts": 47,
+    "groups": {
+      "Cartão de crédito": 11,
+      "Linha de crédito": 36
+    },
+    "card_charge_values_present": 11,
+    "card_charge_blank_rows": [],
+    "totals_validated_columns": [
+      "F",
+      "G",
+      "H",
+      "I",
+      "J"
+    ],
+    "pay_now_values_present": 36,
+    "september_due_usd": "417702.93",
+    "all_account_billing_links_checked": true,
+    "historical_instrument_not_revalidated_by_this_script": true,
+    "google_write_calls": 0,
+    "meta_calls": 0,
+    "payments_executed": 0
   }
 }
