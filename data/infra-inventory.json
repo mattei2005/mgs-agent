@@ -14386,6 +14386,24 @@
         "restore": "940e9827b1ac"
       },
       "id": "mgs-disaster-recovery-offsite-20260716",
+      "restore_recovery_1568943185458110531": {
+        "status": "restore_validated_cleanup_confirmation_required",
+        "source_alert_id": "1568943185458110531",
+        "cron_job_id": "940e9827b1ac",
+        "diagnosis": "Legacy Zeus import peak lower bound 36.29 GB exceeded 33.73 GB observed free; original rc=1 discarded importer detail. Same immutable six components passed all canonical validators after staging reduction.",
+        "correction": "Release temporary ciphertext/container before imports; sequential profile sandboxes; stage-specific free-space guards and sanitized importer failure categories. No credentials, schedule, remote backup, production profile or retention change.",
+        "validation": "18 regression tests PASS; six components, three profile imports, 38 SQLite databases, knowledge validation and PostgreSQL archive listing PASS; DR monitor healthy; native cron ok/failure_streak=0, next run unchanged.",
+        "report": "reports/zeus/dr-restore-recovery-1568943185458110531.json",
+        "interrupted_execution_id": "b294f36a5d334124bd94d0f8d28c278b",
+        "cleanup_target": "/root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-6iwvhe0n",
+        "cleanup_allocated_file_bytes": 18731167744,
+        "cleanup_file_count": 139265,
+        "cleanup_manifest": "reports/zeus/dr-restore-1568943185458110531-cleanup-ledger.json.gz",
+        "cleanup_target_metadata_sha256": "6a3d3c3e060eb9f762c9ecb6349949b60ccaf484547b8dd549621261a8108323",
+        "cleanup_requires_critical_confirmation": true,
+        "recurrence_headroom": "Blocked by preserved workspace created when foreground transport interrupted the native retry at 420 seconds; no remaining restore writer. Exact-target disposal needs Rodolfo confirmation.",
+        "rollback": "/root/.hermes/profiles/zeus/cache/scratch/dr-recovery-1568943185458110531"
+      },
       "jobs_resumed_at": "2026-07-16T06:37:06.277701+00:00",
       "lock_contention_recovery": {
         "cause": "Daily full backup held the shared exclusive lock from 04:16 to 04:27 EDT; hourly backup at 04:24 failed immediately.",

@@ -1,0 +1,103 @@
+{
+  "id": "dr-restore-recovery-1568943185458110531",
+  "timestamp": "2026-11-08T11:33:27.229308+00:00",
+  "status": "restore_validated_cleanup_confirmation_required",
+  "source_alert_id": "1568943185458110531",
+  "authority_message_ids": [
+    "1562987037370617896",
+    "1562987234351644764"
+  ],
+  "diagnosis": {
+    "original_error": "isolated Hermes import failed for zeus: rc=1",
+    "disk_cause_confidence": "strongly supported by impossible legacy peak and successful unchanged component replay; original importer stderr was discarded",
+    "original_free_bytes": 33727307776,
+    "legacy_zeus_peak_lower_bound_bytes": 36287993689,
+    "transport_interruption": "foreground native retry killed by actual 420s tool transport; original execution history retained unknown",
+    "correction": "staging released before profile imports; sequential profile sandboxes; per-stage space gates and sanitized import error categories"
+  },
+  "validation": {
+    "regression_tests_passed": 18,
+    "git_diff_check": "PASS",
+    "canonical_restore_result": {
+      "bundle_mode": "full",
+      "components_validated": 6,
+      "download_sha256": "9d910f58ac4672997273aea24b015758a2662fbc0da98e061764efe4ff4ac047",
+      "duration_seconds": 637.504,
+      "finance_infrastructure_members": 17,
+      "finance_infrastructure_present": true,
+      "finance_postgresql_archive_list": "PASS",
+      "finance_postgresql_materialized": null,
+      "finance_postgresql_present": true,
+      "isolated_only": true,
+      "knowledge_validation": "PASS",
+      "mgs_sqlite_checked": 5,
+      "profiles": [
+        {
+          "derived_fts_rebuilt": [],
+          "imported": true,
+          "profile": "zeus",
+          "sqlite_checked": 22,
+          "target_markers": 2
+        },
+        {
+          "derived_fts_rebuilt": [],
+          "imported": true,
+          "profile": "atena",
+          "sqlite_checked": 5,
+          "target_markers": 2
+        },
+        {
+          "derived_fts_rebuilt": [],
+          "imported": true,
+          "profile": "ares",
+          "sqlite_checked": 6,
+          "target_markers": 2
+        }
+      ],
+      "remote_file_id": "1ED0SebsLD3Gpq83rhGNXXpAmuNRLjKIL",
+      "remote_name": "mgs-dr-weekly-20261108T091547Z.zip.gpg",
+      "remote_size_bytes": 9090830953,
+      "resume_mode": "verified_components_after_transport_interruption",
+      "resume_workspace": "/root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-6iwvhe0n",
+      "status": "PASS",
+      "tested_at_utc": "2026-11-08T11:29:47.338738+00:00"
+    },
+    "dr_monitor": {
+      "healthy": true,
+      "issues": []
+    },
+    "native_cron": {
+      "id": "940e9827b1ac",
+      "last_status": "ok",
+      "last_error": null,
+      "failure_streak": 0,
+      "next_run_at": "2026-11-15T05:45:00-05:00",
+      "fire_claim": null
+    }
+  },
+  "cleanup": {
+    "target": "/root/.hermes/profiles/zeus/cache/scratch/mgs-dr-restore-6iwvhe0n",
+    "created_by": "this recovery; interrupted foreground native drill plus preserved MGS validation output",
+    "types": {
+      "directory": 11964,
+      "file": 139265
+    },
+    "file_bytes": 18358019393,
+    "allocated_file_bytes": 18731167744,
+    "ledger": "reports/zeus/dr-restore-1568943185458110531-cleanup-ledger.json.gz",
+    "ledger_sha256": "fe7567842ba2dc8c137bd3bc9dbf5b9c2d926a9648ff25641914bcda98cea50b",
+    "target_metadata_sha256": "6a3d3c3e060eb9f762c9ecb6349949b60ccaf484547b8dd549621261a8108323",
+    "process_references": [],
+    "requires_critical_confirmation": true,
+    "current_free_bytes": 10036670464,
+    "next_dr_preflight_required_bytes": 29419976507
+  },
+  "changed_files": [
+    "scripts/mgs-offsite-backup.py",
+    "tests/test_mgs_offsite_backup.py",
+    "data/mgs-offsite-backup-state.json",
+    "data/agent-checkpoints.json",
+    "/root/.hermes/profiles/zeus/cron/jobs.json",
+    "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md"
+  ]
+}

@@ -2724,12 +2724,12 @@
     {
       "agent": "zeus",
       "id": "DR-RESTORE-RECOVERY-1568943185458110531",
-      "next_step": "Revalidar geração e hashes dos componentes preservados; retomar validadores canônicos em processo silencioso; classificar descarte da evidência interrompida separadamente.",
-      "objective": "Recuperar teste isolado de DR do cron 940e9827b1ac",
+      "next_step": "Obter confirmação explícita de Rodolfo para o alvo/manifesto em reports/zeus/dr-restore-recovery-1568943185458110531.json; revalidar fingerprint/processos; descartar lote exato; validar headroom e fechar prevenção de recorrência.",
+      "objective": "Recuperar teste isolado de DR do cron 940e9827b1ac e prevenir recorrência",
       "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1568943185458110531",
-      "state": "18 testes passaram. retry nativo interrompido pelo limite real de transporte de 420s durante import zeus; processos encerrados e lock livre. componentes preservados em scratch mgs-dr-restore-6iwvhe0n; sem novo download ou writer paralelo.",
+      "state": "restore integral dos validadores aprovado às 11:29:47z; 6 componentes, 3 perfis e 38 sqlite; monitor saudável; cron nativo ok, streak zero, agenda intacta. bloqueio critical: confirmação para excluir somente workspace de 18.73gb criado pelo retry interrompido aos 420s. nenhum restore writer ativo.",
       "thread_id": "1498132022634483894",
-      "updated_at": "2026-11-08T11:18:04+00:00"
+      "updated_at": "2026-11-08T11:34:56+00:00"
     },
     {
       "agent": "zeus",
@@ -9226,5 +9226,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T11:18:04+00:00"
+  "updated_at": "2026-11-08T11:34:56+00:00"
 }
