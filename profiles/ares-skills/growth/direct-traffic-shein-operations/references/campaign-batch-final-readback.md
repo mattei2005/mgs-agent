@@ -38,6 +38,23 @@ Preserve `tree['ads']` como envelope `{data: [...]}`: `proof_covers` acessa `liv
 
 Compare cada árvore com seu target manifest: conta, nome, budget, estratégia/cap, início timezone-aware, status e cardinalidade. Confira o tracking na localização definida pelo payload aprovado, Page/Instagram, CTA e enrollment de Multi-advertiser ads. Cobertura dos mesmos IDs na prova renderizada não substitui essas comparações materiais. Se for afirmar que budget e lance das fontes ficaram preservados, releia esses campos nas fontes; divergência atual exige reconciliação, não atribuição automática de causa.
 
+Reutilize o comparador central `ares_campaign_v3.shein_single_clone.verify_readback` em vez de manter um segundo validador parcial de mídia/copy/recursos. Ele compara somente `payload['campaigns'][0]`: para cada árvore, selecione sua definição pelo nome canônico exato e passe uma cópia do target manifest contendo apenas essa campanha. Não passe o manifest multifonte inteiro repetidamente, pois as campanhas posteriores seriam comparadas com a primeira. Preserve o manifest selado e os contextos de review exigidos pela rota; se o helper apontar divergência, diagnostique-a sem remover o gate nem substituir a comparação por contagem de IDs.
+
+```python
+from copy import deepcopy
+from ares_campaign_v3.shein_single_clone import verify_readback
+from ares_campaign_v3.shein_qa import proof_covers
+
+by_name = {definition['name']: definition
+           for definition in state['target_manifest']['campaigns']}
+payload = deepcopy(state['target_manifest'])
+payload['campaigns'] = [by_name[tree['campaign']['name']]]
+fresh_warnings = verify_readback(payload, state['source'], tree)
+assert proof_covers(state['media_qa'][tree['campaign']['id']], tree)
+```
+
+Acumule `fresh_warnings` por fonte junto de `state.qa_warnings`; uma verificação nova sem ressalvas não apaga avisos anteriores. Execute separadamente os checks de quantidade total, unicidade e igualdade com checkpoint, pois o comparador semântico de uma árvore não prova a integridade do lote.
+
 Faça essa releitura num batch account-scoped com uma entrada por campanha nova e uma por fonte distinta; identifique cada entrada por `name` único. Exija correspondência exata entre nomes pedidos e retornados, além dos códigos HTTP, antes de associar respostas às linhas. Nas fontes, leia `daily_budget`, `bid_strategy` e `adsets{bid_amount}`; nos alvos, leia também identidade, status, início, filhos e campos materiais dos creatives. Compare o cap com a fonte da própria linha, nunca com o primeiro grupo. Compare instantes com `datetime.fromisoformat`, não strings de offset: `-0500` e `-05:00` podem representar o mesmo horário.
 
 Em lotes NOW, valide o horário de cada campanha antes de gravar o recibo: bundles posteriores podem receber da Meta um início diferente do timestamp técnico selado. Não imponha igualdade literal para esse caso nem aceite uma tolerância genérica em segundos. Se os instantes divergirem, use o validador puro `ares_campaign_v3.shein_copy_schedule.normalized_schedule_proof` com state, checkpoint e identidade exatos; ele exige o início observado no readback original e dentro da janela auditada de `adset_copy` daquele bundle. Exija ainda que todos os conjuntos tenham o mesmo instante da campanha. Essa validação reaproveita a prova existente, sem rede, write de schedule ou nova execução do writer:
@@ -71,7 +88,7 @@ Para confirmar ausência de drift depois da ativação, compare cada creative vi
 
 Grave um recibo agregado sanitizado com os resultados verificáveis e os campos necessários, sem copiar respostas Graph completas, `object_story_spec`, `media_sourcing_spec` ou thumbnails. Exija cobertura integral da soma das quantidades pedidas, ausência de IDs sobrepostos, budget somado por campanha única e quantidade real de anúncios. Derive dele o checkpoint final e a resposta, evitando totais ou resumos paralelos.
 
-Se informar orçamento ativo total da conta, persista o valor realmente devolvido pelo readback, sua fonte e horário no recibo, separado do budget dos IDs novos. Não introduza esse total como literal manual no verificador ou apresente uma leitura anterior como parte do batch final.
+Se informar orçamento ativo total da conta, persista o valor realmente devolvido pelo readback, sua fonte e horário no recibo, separado do budget dos IDs novos. Não introduza esse total como literal manual no verificador ou apresente uma leitura anterior como parte do batch final. Para campanhas com budget diário no nível da campanha, inclua no batch final um GET account-scoped de `act_<account_id>/campaigns`, com `fields=id,status,daily_budget` e `filtering=[{"field":"status","operator":"IN","value":["ACTIVE"]}]`. Percorra todas as páginas, confirme IDs únicos e status configurado ACTIVE e some `int(daily_budget)` em unidades menores antes de formatar a moeda. Um `limit` elevado não dispensa a verificação de `paging.next`. Esse valor é orçamento diário configurado das campanhas ativas, não gasto nem garantia de entrega; estruturas ABO/lifetime exigem a metodologia própria, não tratar `daily_budget` ausente como orçamento zero. Mantenha o delta do pedido calculado exclusivamente pelos IDs novos.
 
 Após `mgs-knowledge-control.py checkpoint-upsert`, selecione o checkpoint pelo ID exato, exija correspondência única e confira origem, objetivo, estado e próximo passo semanticamente. Compare `id`, `thread_id` e `source` literalmente; para conteúdo descritivo de `state`, normalize tanto o valor lido quanto os termos esperados com `.casefold()`. O controlador pode converter todo o estado para minúsculas, inclusive os rótulos de campanhas ali embutidos: normalizar apenas a palavra `complete`, mas procurar um rótulo `Cnnn` em maiúsculas, ainda produz falso negativo. Use esta ordem de comparação, com os esperados derivados do recibo verificado, não digitados como um segundo resumo:
 
