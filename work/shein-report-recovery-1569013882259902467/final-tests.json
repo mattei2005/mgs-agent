@@ -1,0 +1,22 @@
+[
+  {
+    "args": [
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/root/.hermes/profiles/ares/tests",
+      "-p",
+      "test_shein_report_*.py"
+    ],
+    "returncode": 0,
+    "summary": "............................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 188 tests in 36.279s\n\nOK\n"
+  },
+  {
+    "args": [
+      "/root/mgs-agent/work/shein-report-recovery-1569013882259902467/test_recovery.py"
+    ],
+    "returncode": 0,
+    "summary": "261103/.hermes/bin/hermes' mode='r' encoding='UTF-8'>\n  first=p.open().readline().strip()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n..../root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py:7: ResourceWarning: unclosed file <_io.TextIOWrapper name='/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103/.hermes/bin/hermes' mode='r' encoding='UTF-8'>\n  first=p.open().readline().strip()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n...\n----------------------------------------------------------------------\nRan 8 tests in 0.408s\n\nOK\n"
+  }
+]

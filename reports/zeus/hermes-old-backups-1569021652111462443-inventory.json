@@ -1,0 +1,224 @@
+[
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20260928T213017Z-main-ad2d4822-controlled",
+    "files": 54,
+    "directories": 3,
+    "logical_bytes": 167797646,
+    "allocated_file_bytes": 167931904,
+    "classes_bytes": {
+      "other": 31367168,
+      "archive": 136564736
+    },
+    "sqlite": [],
+    "large_archives": [
+      {
+        "path": "archives/mgs-agent-untracked.tar.zst",
+        "bytes": 136560510
+      }
+    ]
+  },
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-preparation",
+    "files": 12,
+    "directories": 0,
+    "logical_bytes": 752650,
+    "allocated_file_bytes": 774144,
+    "classes_bytes": {
+      "other": 770048,
+      "archive": 4096
+    },
+    "sqlite": [],
+    "large_archives": []
+  },
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20261002-1555704911805808712-runtime",
+    "files": 50,
+    "directories": 0,
+    "logical_bytes": 767473,
+    "allocated_file_bytes": 897024,
+    "classes_bytes": {
+      "other": 897024
+    },
+    "sqlite": [],
+    "large_archives": []
+  },
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20261012-1559192694096404537-preport",
+    "files": 18417,
+    "directories": 1238,
+    "logical_bytes": 471199567,
+    "allocated_file_bytes": 514138112,
+    "classes_bytes": {
+      "other": 491196416,
+      "archive": 22941696
+    },
+    "sqlite": [],
+    "large_archives": [
+      {
+        "path": "profile-control-plane-and-skills-pre-cutover.tar.gz",
+        "bytes": 22936372
+      }
+    ]
+  },
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562474468146942115-preparation",
+    "files": 110316,
+    "directories": 42624,
+    "logical_bytes": 5951573891,
+    "allocated_file_bytes": 6207082496,
+    "classes_bytes": {
+      "other": 1608708096,
+      "archive": 1273856,
+      "sqlite": 1936764928,
+      "git": 2660335616
+    },
+    "sqlite": [
+      {
+        "path": "profile-snapshots/root/state.db",
+        "bytes": 1212416
+      },
+      {
+        "path": "profile-snapshots/zeus/state.db",
+        "bytes": 1097822208
+      },
+      {
+        "path": "profile-snapshots/atena/state.db",
+        "bytes": 174571520
+      },
+      {
+        "path": "profile-snapshots/ares/state.db",
+        "bytes": 633925632
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_row_survives_boots_where_0/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_slow_state_update_does_no1/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_old_delivered_rows_pruned0/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_native_and_off_modes_skip1/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_permanent_failure_is_not_0/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_busy_injection_preserves_17/hermes_test/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_boot_claim_whose_adapter_0/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_slow_state_update_does_no0/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_origin_is_lossless_data_n0/hermes_test/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_boot_claim_whose_adapter_1/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_busy_injection_preserves_0/hermes_test/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_post_drain_inbound_proces0/hermes_test/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_other_live_owner_is_not_c0/.hermes/state.db",
+        "bytes": 12288
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_reconnect_retries_resume_0/hermes_test/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_start_continues_after_pla0/hermes_test/state.db",
+        "bytes": 274432
+      },
+      {
+        "path": "baseline-results/gateway-1/scratch/pytest-of-root/pytest-0/test_start_continues_after_pla0/hermes_test/shared-state.db",
+        "bytes": 155648
+      }
+    ],
+    "large_archives": [
+      {
+        "path": "source-local-files.tar.gz",
+        "bytes": 1271229
+      }
+    ]
+  },
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562558871053144137-activation",
+    "files": 5046,
+    "directories": 1663,
+    "logical_bytes": 2016987568,
+    "allocated_file_bytes": 2027782144,
+    "classes_bytes": {
+      "other": 115286016,
+      "sqlite": 1912496128
+    },
+    "sqlite": [
+      {
+        "path": "profiles/root/state.db",
+        "bytes": 1212416
+      },
+      {
+        "path": "profiles/zeus/state.db",
+        "bytes": 1097822208
+      },
+      {
+        "path": "profiles/atena/state.db",
+        "bytes": 174571520
+      },
+      {
+        "path": "profiles/ares/state.db",
+        "bytes": 638881792
+      }
+    ],
+    "large_archives": []
+  },
+  {
+    "path": "/root/.hermes/secure-backups/hermes-update/20261021-1562583718722539622-recovery",
+    "files": 5055,
+    "directories": 1662,
+    "logical_bytes": 2020420709,
+    "allocated_file_bytes": 2031230976,
+    "classes_bytes": {
+      "other": 115249152,
+      "sqlite": 1915981824
+    },
+    "sqlite": [
+      {
+        "path": "profiles/root/state.db",
+        "bytes": 1212416
+      },
+      {
+        "path": "profiles/zeus/state.db",
+        "bytes": 1097822208
+      },
+      {
+        "path": "profiles/atena/state.db",
+        "bytes": 174571520
+      },
+      {
+        "path": "profiles/ares/state.db",
+        "bytes": 642367488
+      }
+    ],
+    "large_archives": []
+  }
+]

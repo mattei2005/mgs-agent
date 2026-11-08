@@ -1,0 +1,3573 @@
+[
+  {
+    "name": "baseline-code",
+    "modified": 0,
+    "untracked": 0,
+    "refs_checked": 206,
+    "refs_preserved_elsewhere": true,
+    "ref_proof": {
+      "00f69310e29c24dfd7c6bb258b0a2337d3455d79": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "01d31a8b6166fd9264d977bff9c7dafaa220b92f": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "026d2538142e2350dbda48bbd920044694daa984": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "03f8918dbf99e7749e174c9e46885778d96ed935": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "04ea999937d4447db905393cb9b152f1a0205a77": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0617ee9b719f67c3d613a236dcd8d9e8956436dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "069973bbb8e68c880a188c2f2244cbd7deb578e0": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021"
+      ],
+      "08560230f5081ae7f3f8bce1b21a33b2709816e9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08749d9dc11cf9f69c93b38d3096203c23c30520": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0aa7eaacd604c8746359286c6725343cb94a664b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0b28237dab3460d30396f544f0e7e4cfa4ee20e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c3014a34334ab372b18be3e0ccb193e6eac1614": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c35092accdc4e306e982c7b1913bf97b9bb3d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0fce82164ad9b92a104776bf9b0363f73be0dd33": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1117c549ca544a1fce121b5784bbe0fcbff3691e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1183d4b24557ea35dbcba5471300df5fcd0a410a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1229212ed08abd8b5b624956c6d56dc37114ded4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "152d985c08c2017a18dbbe6473eff2d9760f02e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "161cec225b92276bc25bcc1e82e09cd4f7d102dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "16c59d0e7876383de7377f12bf0708f08246d063": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1bc0434dda1581a2d9bead843d5498571aefad62": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1cf27ebf2676088ad9128e6dbd8905effeec7de9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1e3152c4e43c4af4412e8236fc2bfbec118708bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1ee244cb7dad21c1eb52002d9732b0b22590f453": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f2e8d5a633ceb5c718bb80f72157081e7f25262": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f6efd6eb0ba6b573c73c96d14dff1be4454823d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "200e432371a2324032e681b7fed9cc7d07fae140": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2040422dc311ad5b0505633fccfdce989fb07f68": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2160b2d59c87316e82f749d77c1f25969bea1533": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "21ee87a6d94bbcf400b43074e021e70f27d87885": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "23b8c013092e69fe23a19cb4c3da35f59de9999f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "26c01a9902a200ff425463f7a4d5566fdb1ebf6a": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "27c727cdda4c2f1b327bb5eadfd8e75622dad8a6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "28106ea1a3230177edb30a0a4e8a099d839bbc2f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "284bc14c113cce13a0c3948761a5325c2e93077f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2c5dec0d1cb197a507fa708a847940de3fe751d8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d6459fad6565cc5f1603f83269c2e99d15cd262": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d7e24ce1f6bce8f641b886bafc9e5b037365428": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2e8c28ff60cb3e3589e5a046ed5b1697c20b561e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "330e8bb0fbb1e48bc10056c667a0aaa8b5472abe": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "36600a68c189b80b47db1f7eee7d70302e6cff6c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "371c3a5fde0230e20a7ff7e64220eb3d30e2bf93": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3825a85534a5133616f68135ac304a559f638939": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3867058fe15852803bcd314c940221f57dad7fc1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38c94c4c9c89e0ed4208a69626cb058629b314d7": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38cc0806e4639341f47447873d1d0023236ec5d2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3918b6a16c5a77cd4503c665f23c8b2b6e10e01c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3a8b3fed401918cdab62d8c78a05a3bb5dff6700": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3b72e8498d293692b29e20fb6a00f024dd0a1c8d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3bbd50c95d0ce07315bec4ab42585a28e594d588": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3c3e84d090e5204cfb8732f70341fbf2bbb50fa2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3fc64a81bb06c06c82bb7798557be642fcab3bdc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "400047dc311a00f668d320386e275284ee19dbb1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "412daddc13b53e7f193189267cb92e5f5d1ab07e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "44923f649c8ab1ab3eaf3557f4ec0ae4493a3e80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "462c8b0215c2db3a33252f7456f80a5c4f8acd2b": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "464fa5826549ac26005c9d4e50848523e6410622": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "46b16a81613826b9a55abb29d659aaf9100c305a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "48a7e137b1f9ef4362039f124798faadc6755bcb": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49b00481a426069af941e551b7fa4741d0497d77": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49e3bed1d7d51da0f0fd19acfedf5c9282ec3867": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4a0358d2e741eb049a6ffb9b8e610db946a4fec5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4e693dc685b5716e7da22656eccc6ece37c5db72": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51a650934d036e36277a904b3af47ec387e34dc6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51f432685e4bc73379abe70367f196400dd44054": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5653395d93fe2575386a4b33f27f95e38a9794ae": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "590bab464ccd67196662345d4bb007d9c37e670f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5a6677a27085c1860e6c99fc55c1b9ccda15b032": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5c17c785c7346d0a829574674aa2565bddebdd9a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5cf11b3eba27ea7fc573a8b36cf69c6b290040f5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5eb1381f3965fd96454d1c32f6bbefcd99cda347": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5f7059a40a642486d3096e31774d0fad53f9ca1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "64f2be353fd8bcf6badbe22f6da8b83398b25665": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "669fcfe7b26168e3238b1d04266a8b137a835932": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "681cd638d3cf0426664b018606df6e3581dd9547": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6aeb990a57db6c0380b0bf68c9a301be3ce75bd6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6af56a9ba4e9f9644e21a3b2884755d6e59783e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c0c8c78f4ca860eff5b099e0be739dd4f99a403": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c33f1f278f1c0a5413b10d7700eabe6bf7eab1c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6e8f8418e6378eb2617e4de074e13dedd091b8af": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7040ab5d6b69d1c80b283e1504b61ac562039c80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "70c1a31af42ef4dbc3ff653fc3aceff1402ee7da": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7130ff57e50946f442abf4fa35d700adf9e4cbe9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "72e06d5f1327de2c4ee8933478696b66c0d27f04": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "733487216152856adc8cdf6c3ee1dd94ff60490e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "764d088290454205c9ec4d571522cd4c332a542c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "776027fee5a075a329002748d3cd0190b07ff942": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "787ac9f019c7984cca3d7cfa73df7916b12a5224": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "790f2b3d750ada1615b0179799ce8a1d8e7ea278": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7a963716b81be13ba513d4f127633b7da493aff2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b1432bcd5256902d1fa56a423b074788e32f572": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b77e29eedd85a8497ce2821448dac7964dc46f6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7de39e700d2c329e15d32eb0b96e2f7cdd9fbdb2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8155c3f73e2c182fece1842ca80165d40f1a9eff": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8237b8e6fc6ab4a69cd79017e7e5107ff3760167": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "839bf4e88c34acd790e58fba6c165f17644d1260": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84094bd903791c35867605e28e25075baa293adc": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8487dfb57d2f2f7b310a2b3eb692b32674af22cd": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84a600b8fa0dd1728126ee9f471369d6e92bf89e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "851e013d0bc78002bf57d5654a81fe8810ea7c56": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8537bc133c4f37a668d3814f7ad8348954c6f175": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "86367cd7ebe8219f93defe8e2b05a64d9b3ac286": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8930ad8f395a677571101bfe83dc0b95448db50c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8a729c9baefe2b080371541a7e9de0c0b9fcdfcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8acb6b85f61c37ca4a322d9bd3cb6e7c381dabcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b774f02f06868bf0b85d62cfa9c214a62152cae": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b8cf0f47f8aaacb0d01b213d7b46dd607af7b3b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8c4ca749ee70de2b750a25e368c47db69a280d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8da2f8b7e39ae8188a0b126ffe403a0ee9168f11": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8e1b0379db40307d313be27b3965be012b231c91": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8f3b5a31ca1ee9fe78f2c41651dc6e8dc695c5f5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9371593f12eba6ddf52ee24c4aad342bec3ff5ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9683a5cb1bf4cac43fd41ae504476a9f12641c41": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9726f4a61f24545eb9d0c2aac3eaacf8d3c3bb66": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "98009120474878fd47b703b672ea1bf1975f04e2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "992d11ea0a7b444a524cdfcfc10f52612da8c92f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9949d0d324a3a06ac238e01dd1c2103dbca09900": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "99f94588c7dd458fbcc1cbc6db5beb2c2b871bf6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a24936d4c7c856032ea33835063953c6d23bed2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a4110c5fadfb8894dba3d715f594299c5cf554b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a84e43721c450d66e4f39cbaf0efb8527230051": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9c4be273a60186b8c1baadc3a405d66e5f92a324": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9d05f3721d69df570fde4c9378d5ed252f53ca88": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f13bbbf8423427e159c78066356ca0e27ca6b74": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f1828eb3e567fcc013d4e904ac912df3700cf21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a08725e52a17964b3c91b12fa434f4cba45c4521": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a0dfd80c0730934be1bb6d34580475d67ce61751": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a1e18129e5fe9ce10336908ed135e5d927a68c1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a348fc1cccc29841a83d451995a81868e991fa4c": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a3568d4ddf193a985f7e06527067b4f5e2b43d18": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a45da1d285e34651549fa24c3ed9ebff847a920e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a4890fbe7a86f5f3680b2c1316f990a3525b9714": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a62984b959d11cd0dc70b5e0131189a565095cf4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a7428af6304225f194ede1ac5743d3f7b3f24c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a9a0ba7506c725137a204780458e022187035bbf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceee7394cf0a0a7361e9dfdc7bc3e2429f89d49": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceffb0dbff8fd9eed697af814e35819d1971250": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ae02502d1a6a2c9cd296b32de5da71bd44fe08ba": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b05e680e63d39d5a8e3ec0f5842a41d1c4209c03": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b13c89da9028a86280b36bc54f51c83e1ca10fa1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b2990de0acf927853f5275ac33f446084d009417": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b66f8d85e79e16e72c4fce6a41e5144d8e7f72b4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b7751df34688835a108e0d630f3495fc11f3df79": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b993bd02211c1f5226950a1a6b8cbed8f9f46ecf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b9a9551baf95691d64a4ce92d68d6366475a3fd5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bbc20510676c48c6bfa0ef5c2eeefbf676449456": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff052d61fa30b433b93331c57535af5b0123c37": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff5fb60342b5cbf2b71bd63bace623cec5652dd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c053e2c601abcbccd89fcf1ba7ee333555ee0ec5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c19023cd9f4b8016f409ad18758434a45eb3b8fb": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c392751d8b0dd0c2719432fc462ad7f63caa2062": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c4d323964dbf73361cd534cf3ca64c931f6b14a8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c7d08de287556b3d339df336b180a39d4980ebd7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c85dd182378e5613c6c80908e09f8a51322644bf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c9d4fb7a19a60d9dedafbfb1983bebb07d738c21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cc0cfeb5eab0416ebfdd641ad256c514ff402f61": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cd438c76b9392340d2c1c019964b56f73fa6a56f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cee89f9f3c6800ccba773508813f5a4b6a45df0a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d03f69e50478c2aa06217f9af10a55f580097f9e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d1b9d102b9944fd95dd07541fb094ae30efa1825": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25b48f54ccab15dfbd40b138e43f5e78a40089c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25e2dbdbc40b49808c0a0e9cfed21cc90cffab3": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d3fbe675963962926db90b09aef55c85c1274b01": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d618d30f670f600a013b7a38c420d194e24d7d04": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d6b9cfa3e1f460f5729553ef42b174da28b765c7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d96b1a2d30995a20289db71d85493b7cb73582e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d9f1e28490121b29dfa5cbd6ed03a32101510fd1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "da2eea88ad25b9994abe139614154b86bb9a0c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dabfb2fed3d3172579a15a005fd784208db555d0": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "db0a994145ede3133bb9e75354450e21d6da96af": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dbd5ccbfe1797c9f5535c055f60645cfdbd65888": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dc787453d6fd20f8e1dcd7e2add2117587880daf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dd2c35f4f6d14c518a46d8ceb5311f57851a1ee2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dd47c665c115b1b925be838fbe03c6e2936dbcac": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021"
+      ],
+      "df24acfcb6ed8a236b8557d6ca31ad114799d659": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e0ac05af074c28253f1ef82e5818c014ccbdc71f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e18f1e5a8f259c7a7a0ee1cc92052a8e8fd35388": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e19fc91cb82cb4e0dc74f6d63a89d9b6c2135241": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e2c2a187fe8295d84a84401735777888422caff5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e3dd27ee2d8b011737a4eea8e3eb3d711ab78690": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4bb0fb83eff423f1b62a23f1cef283fa69b9a5b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4f7cca88f3716c89f7b30baa03e9ed4067202ee": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e605070445e99a803446065a9505e7c64810268d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e77d44c31ec82597d96c5fe44db71a8ed059e3db": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e9a200b0249d8da62048be3c327406e5f93964bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "eb6d37006aadc9075c61e0fb3ab9ba6d0773b130": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ec0f68f50d19dd439ff0ed54b4acc764dadb4e50": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ecca49ac948b5213dd01ce077aa7e7396d508d3e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ed0c45c0c0597f008a88eabf4fcb9debe0910648": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ef2dc77f47725e870a0a90a99baf6b9bf5de3e1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f0fbfdbd9ce213472381953dd73884e36d0df0e3": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f13140a13911d01536e0eef34dc7d8e5a8cca761": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f1a1363500db4c9d348bdd67a3f722b8b60a15fd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f27cdbce5ab63eafe8633b293a75151409da5769": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f28c28ea90d877f2058a9350ebf7a609dc371099": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f4864997cfdffbc82a2e40638a254b4770367934": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f5cf1af15701dd687f565b46e1b496649acdbca8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f62c2dca76222196d0676f00c55414ad5133fe7a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7b3cddde88af7d0bc23a46057e1bee7ac3a3987": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7c12975a10b878c44a14d020ccf54943282bef6": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f86e52e5baf1e7977e32e268e8e9b1817ca47a83": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f8d0ce1e4ff8cb8514b0662cbdabfd654418142a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f99ff377bf85e351a7db39755cee57251a3442c9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcaa65c905ceacdd52db914b44b2a2b541a8a9ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcebd62163497e77e5de00d26d2ed86cb4ef8761": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ff7d2f5cf7b67c75d6b38ba983ab9a3c4e8e4ac2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ]
+    }
+  },
+  {
+    "name": "clean-target",
+    "modified": 75,
+    "untracked": 36,
+    "refs_checked": 205,
+    "refs_preserved_elsewhere": true,
+    "ref_proof": {
+      "00f69310e29c24dfd7c6bb258b0a2337d3455d79": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "01d31a8b6166fd9264d977bff9c7dafaa220b92f": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "026d2538142e2350dbda48bbd920044694daa984": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "03f8918dbf99e7749e174c9e46885778d96ed935": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "04ea999937d4447db905393cb9b152f1a0205a77": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0617ee9b719f67c3d613a236dcd8d9e8956436dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08560230f5081ae7f3f8bce1b21a33b2709816e9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08749d9dc11cf9f69c93b38d3096203c23c30520": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0aa7eaacd604c8746359286c6725343cb94a664b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0b28237dab3460d30396f544f0e7e4cfa4ee20e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c3014a34334ab372b18be3e0ccb193e6eac1614": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c35092accdc4e306e982c7b1913bf97b9bb3d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0fce82164ad9b92a104776bf9b0363f73be0dd33": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1117c549ca544a1fce121b5784bbe0fcbff3691e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1183d4b24557ea35dbcba5471300df5fcd0a410a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1229212ed08abd8b5b624956c6d56dc37114ded4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "152d985c08c2017a18dbbe6473eff2d9760f02e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "161cec225b92276bc25bcc1e82e09cd4f7d102dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "16c59d0e7876383de7377f12bf0708f08246d063": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1bc0434dda1581a2d9bead843d5498571aefad62": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1cf27ebf2676088ad9128e6dbd8905effeec7de9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1e3152c4e43c4af4412e8236fc2bfbec118708bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1ee244cb7dad21c1eb52002d9732b0b22590f453": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f2e8d5a633ceb5c718bb80f72157081e7f25262": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f6efd6eb0ba6b573c73c96d14dff1be4454823d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "200e432371a2324032e681b7fed9cc7d07fae140": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2040422dc311ad5b0505633fccfdce989fb07f68": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2160b2d59c87316e82f749d77c1f25969bea1533": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "21ee87a6d94bbcf400b43074e021e70f27d87885": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "23b8c013092e69fe23a19cb4c3da35f59de9999f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "26c01a9902a200ff425463f7a4d5566fdb1ebf6a": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "27c727cdda4c2f1b327bb5eadfd8e75622dad8a6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "28106ea1a3230177edb30a0a4e8a099d839bbc2f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "284bc14c113cce13a0c3948761a5325c2e93077f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2c5dec0d1cb197a507fa708a847940de3fe751d8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d6459fad6565cc5f1603f83269c2e99d15cd262": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d7e24ce1f6bce8f641b886bafc9e5b037365428": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2e8c28ff60cb3e3589e5a046ed5b1697c20b561e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "330e8bb0fbb1e48bc10056c667a0aaa8b5472abe": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "36600a68c189b80b47db1f7eee7d70302e6cff6c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "371c3a5fde0230e20a7ff7e64220eb3d30e2bf93": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3825a85534a5133616f68135ac304a559f638939": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3867058fe15852803bcd314c940221f57dad7fc1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38c94c4c9c89e0ed4208a69626cb058629b314d7": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38cc0806e4639341f47447873d1d0023236ec5d2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3918b6a16c5a77cd4503c665f23c8b2b6e10e01c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3a8b3fed401918cdab62d8c78a05a3bb5dff6700": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3b72e8498d293692b29e20fb6a00f024dd0a1c8d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3bbd50c95d0ce07315bec4ab42585a28e594d588": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3c3e84d090e5204cfb8732f70341fbf2bbb50fa2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3f2afed3eb813cb00bd381d29b084d0e01de048f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3fc64a81bb06c06c82bb7798557be642fcab3bdc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "400047dc311a00f668d320386e275284ee19dbb1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "412daddc13b53e7f193189267cb92e5f5d1ab07e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "44923f649c8ab1ab3eaf3557f4ec0ae4493a3e80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "462c8b0215c2db3a33252f7456f80a5c4f8acd2b": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "464fa5826549ac26005c9d4e50848523e6410622": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "46b16a81613826b9a55abb29d659aaf9100c305a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "48a7e137b1f9ef4362039f124798faadc6755bcb": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49b00481a426069af941e551b7fa4741d0497d77": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49e3bed1d7d51da0f0fd19acfedf5c9282ec3867": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4a0358d2e741eb049a6ffb9b8e610db946a4fec5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4e693dc685b5716e7da22656eccc6ece37c5db72": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51a650934d036e36277a904b3af47ec387e34dc6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51f432685e4bc73379abe70367f196400dd44054": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5653395d93fe2575386a4b33f27f95e38a9794ae": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "590bab464ccd67196662345d4bb007d9c37e670f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5a6677a27085c1860e6c99fc55c1b9ccda15b032": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5c17c785c7346d0a829574674aa2565bddebdd9a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5cf11b3eba27ea7fc573a8b36cf69c6b290040f5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5eb1381f3965fd96454d1c32f6bbefcd99cda347": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5f7059a40a642486d3096e31774d0fad53f9ca1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "64f2be353fd8bcf6badbe22f6da8b83398b25665": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "669fcfe7b26168e3238b1d04266a8b137a835932": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "681cd638d3cf0426664b018606df6e3581dd9547": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6aeb990a57db6c0380b0bf68c9a301be3ce75bd6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6af56a9ba4e9f9644e21a3b2884755d6e59783e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c0c8c78f4ca860eff5b099e0be739dd4f99a403": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c33f1f278f1c0a5413b10d7700eabe6bf7eab1c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6e8f8418e6378eb2617e4de074e13dedd091b8af": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7040ab5d6b69d1c80b283e1504b61ac562039c80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "70c1a31af42ef4dbc3ff653fc3aceff1402ee7da": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7130ff57e50946f442abf4fa35d700adf9e4cbe9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "72e06d5f1327de2c4ee8933478696b66c0d27f04": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "733487216152856adc8cdf6c3ee1dd94ff60490e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "764d088290454205c9ec4d571522cd4c332a542c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "776027fee5a075a329002748d3cd0190b07ff942": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "787ac9f019c7984cca3d7cfa73df7916b12a5224": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "790f2b3d750ada1615b0179799ce8a1d8e7ea278": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7a963716b81be13ba513d4f127633b7da493aff2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b1432bcd5256902d1fa56a423b074788e32f572": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b77e29eedd85a8497ce2821448dac7964dc46f6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7de39e700d2c329e15d32eb0b96e2f7cdd9fbdb2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8155c3f73e2c182fece1842ca80165d40f1a9eff": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8237b8e6fc6ab4a69cd79017e7e5107ff3760167": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "839bf4e88c34acd790e58fba6c165f17644d1260": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84094bd903791c35867605e28e25075baa293adc": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8487dfb57d2f2f7b310a2b3eb692b32674af22cd": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84a600b8fa0dd1728126ee9f471369d6e92bf89e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "851e013d0bc78002bf57d5654a81fe8810ea7c56": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8537bc133c4f37a668d3814f7ad8348954c6f175": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "86367cd7ebe8219f93defe8e2b05a64d9b3ac286": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8930ad8f395a677571101bfe83dc0b95448db50c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8a729c9baefe2b080371541a7e9de0c0b9fcdfcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8acb6b85f61c37ca4a322d9bd3cb6e7c381dabcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b774f02f06868bf0b85d62cfa9c214a62152cae": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b8cf0f47f8aaacb0d01b213d7b46dd607af7b3b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8c4ca749ee70de2b750a25e368c47db69a280d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8da2f8b7e39ae8188a0b126ffe403a0ee9168f11": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8e1b0379db40307d313be27b3965be012b231c91": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8f3b5a31ca1ee9fe78f2c41651dc6e8dc695c5f5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9371593f12eba6ddf52ee24c4aad342bec3ff5ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9683a5cb1bf4cac43fd41ae504476a9f12641c41": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9726f4a61f24545eb9d0c2aac3eaacf8d3c3bb66": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "98009120474878fd47b703b672ea1bf1975f04e2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "992d11ea0a7b444a524cdfcfc10f52612da8c92f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9949d0d324a3a06ac238e01dd1c2103dbca09900": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "99f94588c7dd458fbcc1cbc6db5beb2c2b871bf6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a24936d4c7c856032ea33835063953c6d23bed2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a4110c5fadfb8894dba3d715f594299c5cf554b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a84e43721c450d66e4f39cbaf0efb8527230051": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9c4be273a60186b8c1baadc3a405d66e5f92a324": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9d05f3721d69df570fde4c9378d5ed252f53ca88": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f13bbbf8423427e159c78066356ca0e27ca6b74": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f1828eb3e567fcc013d4e904ac912df3700cf21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a08725e52a17964b3c91b12fa434f4cba45c4521": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a0dfd80c0730934be1bb6d34580475d67ce61751": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a1e18129e5fe9ce10336908ed135e5d927a68c1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a348fc1cccc29841a83d451995a81868e991fa4c": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a3568d4ddf193a985f7e06527067b4f5e2b43d18": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a45da1d285e34651549fa24c3ed9ebff847a920e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a4890fbe7a86f5f3680b2c1316f990a3525b9714": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a62984b959d11cd0dc70b5e0131189a565095cf4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a7428af6304225f194ede1ac5743d3f7b3f24c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a9a0ba7506c725137a204780458e022187035bbf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceee7394cf0a0a7361e9dfdc7bc3e2429f89d49": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceffb0dbff8fd9eed697af814e35819d1971250": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ae02502d1a6a2c9cd296b32de5da71bd44fe08ba": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b05e680e63d39d5a8e3ec0f5842a41d1c4209c03": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b13c89da9028a86280b36bc54f51c83e1ca10fa1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b2990de0acf927853f5275ac33f446084d009417": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b66f8d85e79e16e72c4fce6a41e5144d8e7f72b4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b7751df34688835a108e0d630f3495fc11f3df79": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b993bd02211c1f5226950a1a6b8cbed8f9f46ecf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b9a9551baf95691d64a4ce92d68d6366475a3fd5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bbc20510676c48c6bfa0ef5c2eeefbf676449456": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff052d61fa30b433b93331c57535af5b0123c37": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff5fb60342b5cbf2b71bd63bace623cec5652dd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c053e2c601abcbccd89fcf1ba7ee333555ee0ec5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c19023cd9f4b8016f409ad18758434a45eb3b8fb": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c392751d8b0dd0c2719432fc462ad7f63caa2062": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c4d323964dbf73361cd534cf3ca64c931f6b14a8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c7d08de287556b3d339df336b180a39d4980ebd7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c85dd182378e5613c6c80908e09f8a51322644bf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c9d4fb7a19a60d9dedafbfb1983bebb07d738c21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cc0cfeb5eab0416ebfdd641ad256c514ff402f61": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cd438c76b9392340d2c1c019964b56f73fa6a56f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cee89f9f3c6800ccba773508813f5a4b6a45df0a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d03f69e50478c2aa06217f9af10a55f580097f9e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d1b9d102b9944fd95dd07541fb094ae30efa1825": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25b48f54ccab15dfbd40b138e43f5e78a40089c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25e2dbdbc40b49808c0a0e9cfed21cc90cffab3": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d3fbe675963962926db90b09aef55c85c1274b01": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d618d30f670f600a013b7a38c420d194e24d7d04": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d6b9cfa3e1f460f5729553ef42b174da28b765c7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d96b1a2d30995a20289db71d85493b7cb73582e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d9f1e28490121b29dfa5cbd6ed03a32101510fd1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "da2eea88ad25b9994abe139614154b86bb9a0c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dabfb2fed3d3172579a15a005fd784208db555d0": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "db0a994145ede3133bb9e75354450e21d6da96af": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dbd5ccbfe1797c9f5535c055f60645cfdbd65888": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dc787453d6fd20f8e1dcd7e2add2117587880daf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dd2c35f4f6d14c518a46d8ceb5311f57851a1ee2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "df24acfcb6ed8a236b8557d6ca31ad114799d659": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e0ac05af074c28253f1ef82e5818c014ccbdc71f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e18f1e5a8f259c7a7a0ee1cc92052a8e8fd35388": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e19fc91cb82cb4e0dc74f6d63a89d9b6c2135241": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e2c2a187fe8295d84a84401735777888422caff5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e3dd27ee2d8b011737a4eea8e3eb3d711ab78690": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4bb0fb83eff423f1b62a23f1cef283fa69b9a5b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4f7cca88f3716c89f7b30baa03e9ed4067202ee": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e605070445e99a803446065a9505e7c64810268d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e77d44c31ec82597d96c5fe44db71a8ed059e3db": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e9a200b0249d8da62048be3c327406e5f93964bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "eb6d37006aadc9075c61e0fb3ab9ba6d0773b130": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ec0f68f50d19dd439ff0ed54b4acc764dadb4e50": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ecca49ac948b5213dd01ce077aa7e7396d508d3e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ed0c45c0c0597f008a88eabf4fcb9debe0910648": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ef2dc77f47725e870a0a90a99baf6b9bf5de3e1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f0fbfdbd9ce213472381953dd73884e36d0df0e3": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f13140a13911d01536e0eef34dc7d8e5a8cca761": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f1a1363500db4c9d348bdd67a3f722b8b60a15fd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f27cdbce5ab63eafe8633b293a75151409da5769": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f28c28ea90d877f2058a9350ebf7a609dc371099": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f4864997cfdffbc82a2e40638a254b4770367934": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f5cf1af15701dd687f565b46e1b496649acdbca8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f62c2dca76222196d0676f00c55414ad5133fe7a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7b3cddde88af7d0bc23a46057e1bee7ac3a3987": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7c12975a10b878c44a14d020ccf54943282bef6": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f86e52e5baf1e7977e32e268e8e9b1817ca47a83": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f8d0ce1e4ff8cb8514b0662cbdabfd654418142a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f99ff377bf85e351a7db39755cee57251a3442c9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcaa65c905ceacdd52db914b44b2a2b541a8a9ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcebd62163497e77e5de00d26d2ed86cb4ef8761": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ff7d2f5cf7b67c75d6b38ba983ab9a3c4e8e4ac2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ]
+    }
+  },
+  {
+    "name": "fresh-reproduction-47b23fa0",
+    "modified": 75,
+    "untracked": 36,
+    "refs_checked": 206,
+    "refs_preserved_elsewhere": true,
+    "ref_proof": {
+      "00f69310e29c24dfd7c6bb258b0a2337d3455d79": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "01d31a8b6166fd9264d977bff9c7dafaa220b92f": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "026d2538142e2350dbda48bbd920044694daa984": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "03f8918dbf99e7749e174c9e46885778d96ed935": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "04ea999937d4447db905393cb9b152f1a0205a77": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0617ee9b719f67c3d613a236dcd8d9e8956436dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08560230f5081ae7f3f8bce1b21a33b2709816e9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08749d9dc11cf9f69c93b38d3096203c23c30520": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0aa7eaacd604c8746359286c6725343cb94a664b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0b28237dab3460d30396f544f0e7e4cfa4ee20e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c3014a34334ab372b18be3e0ccb193e6eac1614": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c35092accdc4e306e982c7b1913bf97b9bb3d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0fce82164ad9b92a104776bf9b0363f73be0dd33": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1117c549ca544a1fce121b5784bbe0fcbff3691e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1183d4b24557ea35dbcba5471300df5fcd0a410a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1229212ed08abd8b5b624956c6d56dc37114ded4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "152d985c08c2017a18dbbe6473eff2d9760f02e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "161cec225b92276bc25bcc1e82e09cd4f7d102dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "16c59d0e7876383de7377f12bf0708f08246d063": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1bc0434dda1581a2d9bead843d5498571aefad62": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1cf27ebf2676088ad9128e6dbd8905effeec7de9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1e3152c4e43c4af4412e8236fc2bfbec118708bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1ee244cb7dad21c1eb52002d9732b0b22590f453": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f2e8d5a633ceb5c718bb80f72157081e7f25262": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f6efd6eb0ba6b573c73c96d14dff1be4454823d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "200e432371a2324032e681b7fed9cc7d07fae140": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2040422dc311ad5b0505633fccfdce989fb07f68": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2160b2d59c87316e82f749d77c1f25969bea1533": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "21ee87a6d94bbcf400b43074e021e70f27d87885": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "23b8c013092e69fe23a19cb4c3da35f59de9999f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "26c01a9902a200ff425463f7a4d5566fdb1ebf6a": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "27c727cdda4c2f1b327bb5eadfd8e75622dad8a6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "28106ea1a3230177edb30a0a4e8a099d839bbc2f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "284bc14c113cce13a0c3948761a5325c2e93077f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2c5dec0d1cb197a507fa708a847940de3fe751d8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d6459fad6565cc5f1603f83269c2e99d15cd262": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d7e24ce1f6bce8f641b886bafc9e5b037365428": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2e8c28ff60cb3e3589e5a046ed5b1697c20b561e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "330e8bb0fbb1e48bc10056c667a0aaa8b5472abe": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "36600a68c189b80b47db1f7eee7d70302e6cff6c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "371c3a5fde0230e20a7ff7e64220eb3d30e2bf93": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3825a85534a5133616f68135ac304a559f638939": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3867058fe15852803bcd314c940221f57dad7fc1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38c94c4c9c89e0ed4208a69626cb058629b314d7": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38cc0806e4639341f47447873d1d0023236ec5d2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3918b6a16c5a77cd4503c665f23c8b2b6e10e01c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3a8b3fed401918cdab62d8c78a05a3bb5dff6700": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3b72e8498d293692b29e20fb6a00f024dd0a1c8d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3bbd50c95d0ce07315bec4ab42585a28e594d588": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3c3e84d090e5204cfb8732f70341fbf2bbb50fa2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3fc64a81bb06c06c82bb7798557be642fcab3bdc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "400047dc311a00f668d320386e275284ee19dbb1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "412daddc13b53e7f193189267cb92e5f5d1ab07e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "44923f649c8ab1ab3eaf3557f4ec0ae4493a3e80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "462c8b0215c2db3a33252f7456f80a5c4f8acd2b": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "464fa5826549ac26005c9d4e50848523e6410622": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "46b16a81613826b9a55abb29d659aaf9100c305a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "47b23fa048536c413a53ae5ad391f9a911f5d4e5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "48a7e137b1f9ef4362039f124798faadc6755bcb": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49b00481a426069af941e551b7fa4741d0497d77": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49e3bed1d7d51da0f0fd19acfedf5c9282ec3867": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4a0358d2e741eb049a6ffb9b8e610db946a4fec5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4e693dc685b5716e7da22656eccc6ece37c5db72": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51a650934d036e36277a904b3af47ec387e34dc6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51f432685e4bc73379abe70367f196400dd44054": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5653395d93fe2575386a4b33f27f95e38a9794ae": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "590bab464ccd67196662345d4bb007d9c37e670f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5a6677a27085c1860e6c99fc55c1b9ccda15b032": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5c17c785c7346d0a829574674aa2565bddebdd9a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5cf11b3eba27ea7fc573a8b36cf69c6b290040f5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5eb1381f3965fd96454d1c32f6bbefcd99cda347": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5f7059a40a642486d3096e31774d0fad53f9ca1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "64f2be353fd8bcf6badbe22f6da8b83398b25665": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "669fcfe7b26168e3238b1d04266a8b137a835932": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "681cd638d3cf0426664b018606df6e3581dd9547": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6aeb990a57db6c0380b0bf68c9a301be3ce75bd6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6af56a9ba4e9f9644e21a3b2884755d6e59783e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c0c8c78f4ca860eff5b099e0be739dd4f99a403": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c33f1f278f1c0a5413b10d7700eabe6bf7eab1c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6e8f8418e6378eb2617e4de074e13dedd091b8af": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7040ab5d6b69d1c80b283e1504b61ac562039c80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "70c1a31af42ef4dbc3ff653fc3aceff1402ee7da": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7130ff57e50946f442abf4fa35d700adf9e4cbe9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "72e06d5f1327de2c4ee8933478696b66c0d27f04": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "733487216152856adc8cdf6c3ee1dd94ff60490e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "764d088290454205c9ec4d571522cd4c332a542c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "776027fee5a075a329002748d3cd0190b07ff942": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "787ac9f019c7984cca3d7cfa73df7916b12a5224": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "790f2b3d750ada1615b0179799ce8a1d8e7ea278": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7a963716b81be13ba513d4f127633b7da493aff2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b1432bcd5256902d1fa56a423b074788e32f572": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b77e29eedd85a8497ce2821448dac7964dc46f6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7de39e700d2c329e15d32eb0b96e2f7cdd9fbdb2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8155c3f73e2c182fece1842ca80165d40f1a9eff": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8237b8e6fc6ab4a69cd79017e7e5107ff3760167": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "839bf4e88c34acd790e58fba6c165f17644d1260": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84094bd903791c35867605e28e25075baa293adc": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8487dfb57d2f2f7b310a2b3eb692b32674af22cd": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84a600b8fa0dd1728126ee9f471369d6e92bf89e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "851e013d0bc78002bf57d5654a81fe8810ea7c56": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8537bc133c4f37a668d3814f7ad8348954c6f175": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "86367cd7ebe8219f93defe8e2b05a64d9b3ac286": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8930ad8f395a677571101bfe83dc0b95448db50c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8a729c9baefe2b080371541a7e9de0c0b9fcdfcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8acb6b85f61c37ca4a322d9bd3cb6e7c381dabcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b774f02f06868bf0b85d62cfa9c214a62152cae": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b8cf0f47f8aaacb0d01b213d7b46dd607af7b3b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8c4ca749ee70de2b750a25e368c47db69a280d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8da2f8b7e39ae8188a0b126ffe403a0ee9168f11": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8e1b0379db40307d313be27b3965be012b231c91": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8f3b5a31ca1ee9fe78f2c41651dc6e8dc695c5f5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9371593f12eba6ddf52ee24c4aad342bec3ff5ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9683a5cb1bf4cac43fd41ae504476a9f12641c41": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9726f4a61f24545eb9d0c2aac3eaacf8d3c3bb66": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "98009120474878fd47b703b672ea1bf1975f04e2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "992d11ea0a7b444a524cdfcfc10f52612da8c92f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9949d0d324a3a06ac238e01dd1c2103dbca09900": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "99f94588c7dd458fbcc1cbc6db5beb2c2b871bf6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a24936d4c7c856032ea33835063953c6d23bed2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a4110c5fadfb8894dba3d715f594299c5cf554b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a84e43721c450d66e4f39cbaf0efb8527230051": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9c4be273a60186b8c1baadc3a405d66e5f92a324": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9d05f3721d69df570fde4c9378d5ed252f53ca88": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f13bbbf8423427e159c78066356ca0e27ca6b74": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f1828eb3e567fcc013d4e904ac912df3700cf21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a08725e52a17964b3c91b12fa434f4cba45c4521": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a0dfd80c0730934be1bb6d34580475d67ce61751": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a1e18129e5fe9ce10336908ed135e5d927a68c1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a348fc1cccc29841a83d451995a81868e991fa4c": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a3568d4ddf193a985f7e06527067b4f5e2b43d18": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a45da1d285e34651549fa24c3ed9ebff847a920e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a4890fbe7a86f5f3680b2c1316f990a3525b9714": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a62984b959d11cd0dc70b5e0131189a565095cf4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a7428af6304225f194ede1ac5743d3f7b3f24c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a92dcb0a57d1bbc194c6e6049d352e56e3074b34": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021"
+      ],
+      "a9a0ba7506c725137a204780458e022187035bbf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceee7394cf0a0a7361e9dfdc7bc3e2429f89d49": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceffb0dbff8fd9eed697af814e35819d1971250": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ae02502d1a6a2c9cd296b32de5da71bd44fe08ba": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b05e680e63d39d5a8e3ec0f5842a41d1c4209c03": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b13c89da9028a86280b36bc54f51c83e1ca10fa1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b2990de0acf927853f5275ac33f446084d009417": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b66f8d85e79e16e72c4fce6a41e5144d8e7f72b4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b7751df34688835a108e0d630f3495fc11f3df79": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b993bd02211c1f5226950a1a6b8cbed8f9f46ecf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b9a9551baf95691d64a4ce92d68d6366475a3fd5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bbc20510676c48c6bfa0ef5c2eeefbf676449456": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff052d61fa30b433b93331c57535af5b0123c37": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff5fb60342b5cbf2b71bd63bace623cec5652dd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c053e2c601abcbccd89fcf1ba7ee333555ee0ec5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c19023cd9f4b8016f409ad18758434a45eb3b8fb": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c392751d8b0dd0c2719432fc462ad7f63caa2062": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c4d323964dbf73361cd534cf3ca64c931f6b14a8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c7d08de287556b3d339df336b180a39d4980ebd7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c85dd182378e5613c6c80908e09f8a51322644bf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c9d4fb7a19a60d9dedafbfb1983bebb07d738c21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cc0cfeb5eab0416ebfdd641ad256c514ff402f61": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cd438c76b9392340d2c1c019964b56f73fa6a56f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cee89f9f3c6800ccba773508813f5a4b6a45df0a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d03f69e50478c2aa06217f9af10a55f580097f9e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d1b9d102b9944fd95dd07541fb094ae30efa1825": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25b48f54ccab15dfbd40b138e43f5e78a40089c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25e2dbdbc40b49808c0a0e9cfed21cc90cffab3": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d3fbe675963962926db90b09aef55c85c1274b01": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d618d30f670f600a013b7a38c420d194e24d7d04": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d6b9cfa3e1f460f5729553ef42b174da28b765c7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d96b1a2d30995a20289db71d85493b7cb73582e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d9f1e28490121b29dfa5cbd6ed03a32101510fd1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "da2eea88ad25b9994abe139614154b86bb9a0c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dabfb2fed3d3172579a15a005fd784208db555d0": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "db0a994145ede3133bb9e75354450e21d6da96af": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dbd5ccbfe1797c9f5535c055f60645cfdbd65888": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dc787453d6fd20f8e1dcd7e2add2117587880daf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dd2c35f4f6d14c518a46d8ceb5311f57851a1ee2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "df24acfcb6ed8a236b8557d6ca31ad114799d659": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e0ac05af074c28253f1ef82e5818c014ccbdc71f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e18f1e5a8f259c7a7a0ee1cc92052a8e8fd35388": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e19fc91cb82cb4e0dc74f6d63a89d9b6c2135241": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e2c2a187fe8295d84a84401735777888422caff5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e3dd27ee2d8b011737a4eea8e3eb3d711ab78690": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4bb0fb83eff423f1b62a23f1cef283fa69b9a5b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4f7cca88f3716c89f7b30baa03e9ed4067202ee": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e605070445e99a803446065a9505e7c64810268d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e77d44c31ec82597d96c5fe44db71a8ed059e3db": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e9a200b0249d8da62048be3c327406e5f93964bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "eb6d37006aadc9075c61e0fb3ab9ba6d0773b130": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ec0f68f50d19dd439ff0ed54b4acc764dadb4e50": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ecca49ac948b5213dd01ce077aa7e7396d508d3e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ed0c45c0c0597f008a88eabf4fcb9debe0910648": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ef2dc77f47725e870a0a90a99baf6b9bf5de3e1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f0fbfdbd9ce213472381953dd73884e36d0df0e3": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f13140a13911d01536e0eef34dc7d8e5a8cca761": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f1a1363500db4c9d348bdd67a3f722b8b60a15fd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f27cdbce5ab63eafe8633b293a75151409da5769": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f28c28ea90d877f2058a9350ebf7a609dc371099": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f4864997cfdffbc82a2e40638a254b4770367934": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f5cf1af15701dd687f565b46e1b496649acdbca8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f62c2dca76222196d0676f00c55414ad5133fe7a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7b3cddde88af7d0bc23a46057e1bee7ac3a3987": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7c12975a10b878c44a14d020ccf54943282bef6": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f86e52e5baf1e7977e32e268e8e9b1817ca47a83": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f8d0ce1e4ff8cb8514b0662cbdabfd654418142a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f99ff377bf85e351a7db39755cee57251a3442c9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcaa65c905ceacdd52db914b44b2a2b541a8a9ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcebd62163497e77e5de00d26d2ed86cb4ef8761": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ff7d2f5cf7b67c75d6b38ba983ab9a3c4e8e4ac2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ]
+    }
+  },
+  {
+    "name": "fresh-reproduction-4d043038",
+    "modified": 75,
+    "untracked": 36,
+    "refs_checked": 207,
+    "refs_preserved_elsewhere": true,
+    "ref_proof": {
+      "00f69310e29c24dfd7c6bb258b0a2337d3455d79": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "01d31a8b6166fd9264d977bff9c7dafaa220b92f": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "026d2538142e2350dbda48bbd920044694daa984": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "03f8918dbf99e7749e174c9e46885778d96ed935": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "04ea999937d4447db905393cb9b152f1a0205a77": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0617ee9b719f67c3d613a236dcd8d9e8956436dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08560230f5081ae7f3f8bce1b21a33b2709816e9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "08749d9dc11cf9f69c93b38d3096203c23c30520": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0aa7eaacd604c8746359286c6725343cb94a664b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0b28237dab3460d30396f544f0e7e4cfa4ee20e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c3014a34334ab372b18be3e0ccb193e6eac1614": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0c35092accdc4e306e982c7b1913bf97b9bb3d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "0fce82164ad9b92a104776bf9b0363f73be0dd33": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1117c549ca544a1fce121b5784bbe0fcbff3691e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1183d4b24557ea35dbcba5471300df5fcd0a410a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1229212ed08abd8b5b624956c6d56dc37114ded4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "152d985c08c2017a18dbbe6473eff2d9760f02e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "161cec225b92276bc25bcc1e82e09cd4f7d102dc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "16c59d0e7876383de7377f12bf0708f08246d063": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1bc0434dda1581a2d9bead843d5498571aefad62": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1cf27ebf2676088ad9128e6dbd8905effeec7de9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1e3152c4e43c4af4412e8236fc2bfbec118708bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1ee244cb7dad21c1eb52002d9732b0b22590f453": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f2e8d5a633ceb5c718bb80f72157081e7f25262": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "1f6efd6eb0ba6b573c73c96d14dff1be4454823d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "200e432371a2324032e681b7fed9cc7d07fae140": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2040422dc311ad5b0505633fccfdce989fb07f68": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2160b2d59c87316e82f749d77c1f25969bea1533": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "21ee87a6d94bbcf400b43074e021e70f27d87885": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "23b8c013092e69fe23a19cb4c3da35f59de9999f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "26c01a9902a200ff425463f7a4d5566fdb1ebf6a": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "27c727cdda4c2f1b327bb5eadfd8e75622dad8a6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "28106ea1a3230177edb30a0a4e8a099d839bbc2f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "284bc14c113cce13a0c3948761a5325c2e93077f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2c5dec0d1cb197a507fa708a847940de3fe751d8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d6459fad6565cc5f1603f83269c2e99d15cd262": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2d7e24ce1f6bce8f641b886bafc9e5b037365428": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "2e8c28ff60cb3e3589e5a046ed5b1697c20b561e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "330e8bb0fbb1e48bc10056c667a0aaa8b5472abe": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "36600a68c189b80b47db1f7eee7d70302e6cff6c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "371c3a5fde0230e20a7ff7e64220eb3d30e2bf93": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3825a85534a5133616f68135ac304a559f638939": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3867058fe15852803bcd314c940221f57dad7fc1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38c94c4c9c89e0ed4208a69626cb058629b314d7": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "38cc0806e4639341f47447873d1d0023236ec5d2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3918b6a16c5a77cd4503c665f23c8b2b6e10e01c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3a8b3fed401918cdab62d8c78a05a3bb5dff6700": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3b72e8498d293692b29e20fb6a00f024dd0a1c8d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3bbd50c95d0ce07315bec4ab42585a28e594d588": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3c3e84d090e5204cfb8732f70341fbf2bbb50fa2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "3fc64a81bb06c06c82bb7798557be642fcab3bdc": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "400047dc311a00f668d320386e275284ee19dbb1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "412daddc13b53e7f193189267cb92e5f5d1ab07e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "44923f649c8ab1ab3eaf3557f4ec0ae4493a3e80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "462c8b0215c2db3a33252f7456f80a5c4f8acd2b": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "464fa5826549ac26005c9d4e50848523e6410622": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "46b16a81613826b9a55abb29d659aaf9100c305a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "48a7e137b1f9ef4362039f124798faadc6755bcb": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49b00481a426069af941e551b7fa4741d0497d77": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "49e3bed1d7d51da0f0fd19acfedf5c9282ec3867": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4a0358d2e741eb049a6ffb9b8e610db946a4fec5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4d04303818b61bf3aa09278af48356315515965b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "4e693dc685b5716e7da22656eccc6ece37c5db72": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51a650934d036e36277a904b3af47ec387e34dc6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "51f432685e4bc73379abe70367f196400dd44054": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5653395d93fe2575386a4b33f27f95e38a9794ae": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "590bab464ccd67196662345d4bb007d9c37e670f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5a6677a27085c1860e6c99fc55c1b9ccda15b032": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5c17c785c7346d0a829574674aa2565bddebdd9a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5cf11b3eba27ea7fc573a8b36cf69c6b290040f5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5eb1381f3965fd96454d1c32f6bbefcd99cda347": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "5f7059a40a642486d3096e31774d0fad53f9ca1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "64f2be353fd8bcf6badbe22f6da8b83398b25665": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "669fcfe7b26168e3238b1d04266a8b137a835932": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "681cd638d3cf0426664b018606df6e3581dd9547": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "68a3c35f08bd04474c410cfa10933e67c3cce407": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021"
+      ],
+      "6aeb990a57db6c0380b0bf68c9a301be3ce75bd6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6af56a9ba4e9f9644e21a3b2884755d6e59783e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c0c8c78f4ca860eff5b099e0be739dd4f99a403": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6c33f1f278f1c0a5413b10d7700eabe6bf7eab1c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "6e8f8418e6378eb2617e4de074e13dedd091b8af": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7040ab5d6b69d1c80b283e1504b61ac562039c80": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "70c1a31af42ef4dbc3ff653fc3aceff1402ee7da": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7130ff57e50946f442abf4fa35d700adf9e4cbe9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "72e06d5f1327de2c4ee8933478696b66c0d27f04": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "733487216152856adc8cdf6c3ee1dd94ff60490e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "764d088290454205c9ec4d571522cd4c332a542c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "776027fee5a075a329002748d3cd0190b07ff942": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "787ac9f019c7984cca3d7cfa73df7916b12a5224": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "790f2b3d750ada1615b0179799ce8a1d8e7ea278": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7a963716b81be13ba513d4f127633b7da493aff2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b1432bcd5256902d1fa56a423b074788e32f572": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7b77e29eedd85a8497ce2821448dac7964dc46f6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "7de39e700d2c329e15d32eb0b96e2f7cdd9fbdb2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8155c3f73e2c182fece1842ca80165d40f1a9eff": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8237b8e6fc6ab4a69cd79017e7e5107ff3760167": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "839bf4e88c34acd790e58fba6c165f17644d1260": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84094bd903791c35867605e28e25075baa293adc": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8487dfb57d2f2f7b310a2b3eb692b32674af22cd": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "84a600b8fa0dd1728126ee9f471369d6e92bf89e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "851e013d0bc78002bf57d5654a81fe8810ea7c56": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8537bc133c4f37a668d3814f7ad8348954c6f175": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "86367cd7ebe8219f93defe8e2b05a64d9b3ac286": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8930ad8f395a677571101bfe83dc0b95448db50c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8a729c9baefe2b080371541a7e9de0c0b9fcdfcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8acb6b85f61c37ca4a322d9bd3cb6e7c381dabcd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b774f02f06868bf0b85d62cfa9c214a62152cae": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8b8cf0f47f8aaacb0d01b213d7b46dd607af7b3b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8c4ca749ee70de2b750a25e368c47db69a280d3d": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8da2f8b7e39ae8188a0b126ffe403a0ee9168f11": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8e1b0379db40307d313be27b3965be012b231c91": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "8f3b5a31ca1ee9fe78f2c41651dc6e8dc695c5f5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9371593f12eba6ddf52ee24c4aad342bec3ff5ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9683a5cb1bf4cac43fd41ae504476a9f12641c41": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9726f4a61f24545eb9d0c2aac3eaacf8d3c3bb66": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "98009120474878fd47b703b672ea1bf1975f04e2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "992d11ea0a7b444a524cdfcfc10f52612da8c92f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9949d0d324a3a06ac238e01dd1c2103dbca09900": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "99f94588c7dd458fbcc1cbc6db5beb2c2b871bf6": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a24936d4c7c856032ea33835063953c6d23bed2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a4110c5fadfb8894dba3d715f594299c5cf554b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9a84e43721c450d66e4f39cbaf0efb8527230051": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9c4be273a60186b8c1baadc3a405d66e5f92a324": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9d05f3721d69df570fde4c9378d5ed252f53ca88": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f13bbbf8423427e159c78066356ca0e27ca6b74": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "9f1828eb3e567fcc013d4e904ac912df3700cf21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a08725e52a17964b3c91b12fa434f4cba45c4521": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a0dfd80c0730934be1bb6d34580475d67ce61751": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a1e18129e5fe9ce10336908ed135e5d927a68c1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a348fc1cccc29841a83d451995a81868e991fa4c": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a3568d4ddf193a985f7e06527067b4f5e2b43d18": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a45da1d285e34651549fa24c3ed9ebff847a920e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a4890fbe7a86f5f3680b2c1316f990a3525b9714": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a62984b959d11cd0dc70b5e0131189a565095cf4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a7428af6304225f194ede1ac5743d3f7b3f24c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "a92dcb0a57d1bbc194c6e6049d352e56e3074b34": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021"
+      ],
+      "a9a0ba7506c725137a204780458e022187035bbf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceee7394cf0a0a7361e9dfdc7bc3e2429f89d49": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "aceffb0dbff8fd9eed697af814e35819d1971250": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ae02502d1a6a2c9cd296b32de5da71bd44fe08ba": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b05e680e63d39d5a8e3ec0f5842a41d1c4209c03": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b13c89da9028a86280b36bc54f51c83e1ca10fa1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b2990de0acf927853f5275ac33f446084d009417": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b66f8d85e79e16e72c4fce6a41e5144d8e7f72b4": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b7751df34688835a108e0d630f3495fc11f3df79": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b993bd02211c1f5226950a1a6b8cbed8f9f46ecf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "b9a9551baf95691d64a4ce92d68d6366475a3fd5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bbc20510676c48c6bfa0ef5c2eeefbf676449456": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff052d61fa30b433b93331c57535af5b0123c37": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "bff5fb60342b5cbf2b71bd63bace623cec5652dd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c053e2c601abcbccd89fcf1ba7ee333555ee0ec5": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c19023cd9f4b8016f409ad18758434a45eb3b8fb": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c392751d8b0dd0c2719432fc462ad7f63caa2062": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c4d323964dbf73361cd534cf3ca64c931f6b14a8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c7d08de287556b3d339df336b180a39d4980ebd7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c85dd182378e5613c6c80908e09f8a51322644bf": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "c9d4fb7a19a60d9dedafbfb1983bebb07d738c21": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cc0cfeb5eab0416ebfdd641ad256c514ff402f61": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cd438c76b9392340d2c1c019964b56f73fa6a56f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "cee89f9f3c6800ccba773508813f5a4b6a45df0a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d03f69e50478c2aa06217f9af10a55f580097f9e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d1b9d102b9944fd95dd07541fb094ae30efa1825": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25b48f54ccab15dfbd40b138e43f5e78a40089c": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d25e2dbdbc40b49808c0a0e9cfed21cc90cffab3": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d3fbe675963962926db90b09aef55c85c1274b01": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d618d30f670f600a013b7a38c420d194e24d7d04": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d6b9cfa3e1f460f5729553ef42b174da28b765c7": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d96b1a2d30995a20289db71d85493b7cb73582e4": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "d9f1e28490121b29dfa5cbd6ed03a32101510fd1": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "da2eea88ad25b9994abe139614154b86bb9a0c92": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dabfb2fed3d3172579a15a005fd784208db555d0": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "db0a994145ede3133bb9e75354450e21d6da96af": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dbd5ccbfe1797c9f5535c055f60645cfdbd65888": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dc787453d6fd20f8e1dcd7e2add2117587880daf": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "dd2c35f4f6d14c518a46d8ceb5311f57851a1ee2": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "df24acfcb6ed8a236b8557d6ca31ad114799d659": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e0ac05af074c28253f1ef82e5818c014ccbdc71f": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e18f1e5a8f259c7a7a0ee1cc92052a8e8fd35388": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e19fc91cb82cb4e0dc74f6d63a89d9b6c2135241": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e2c2a187fe8295d84a84401735777888422caff5": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e3dd27ee2d8b011737a4eea8e3eb3d711ab78690": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4bb0fb83eff423f1b62a23f1cef283fa69b9a5b": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e4f7cca88f3716c89f7b30baa03e9ed4067202ee": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e605070445e99a803446065a9505e7c64810268d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e77d44c31ec82597d96c5fe44db71a8ed059e3db": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "e9a200b0249d8da62048be3c327406e5f93964bd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "eb6d37006aadc9075c61e0fb3ab9ba6d0773b130": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ec0f68f50d19dd439ff0ed54b4acc764dadb4e50": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ecca49ac948b5213dd01ce077aa7e7396d508d3e": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ed0c45c0c0597f008a88eabf4fcb9debe0910648": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ef2dc77f47725e870a0a90a99baf6b9bf5de3e1d": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f0fbfdbd9ce213472381953dd73884e36d0df0e3": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f13140a13911d01536e0eef34dc7d8e5a8cca761": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f1a1363500db4c9d348bdd67a3f722b8b60a15fd": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f27cdbce5ab63eafe8633b293a75151409da5769": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f28c28ea90d877f2058a9350ebf7a609dc371099": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f4864997cfdffbc82a2e40638a254b4770367934": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f5cf1af15701dd687f565b46e1b496649acdbca8": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f62c2dca76222196d0676f00c55414ad5133fe7a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7b3cddde88af7d0bc23a46057e1bee7ac3a3987": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f7c12975a10b878c44a14d020ccf54943282bef6": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f86e52e5baf1e7977e32e268e8e9b1817ca47a83": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f8d0ce1e4ff8cb8514b0662cbdabfd654418142a": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "f99ff377bf85e351a7db39755cee57251a3442c9": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcaa65c905ceacdd52db914b44b2a2b541a8a9ad": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "fcebd62163497e77e5de00d26d2ed86cb4ef8761": [
+        "/root/.hermes/hermes-agent",
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ],
+      "ff7d2f5cf7b67c75d6b38ba983ab9a3c4e8e4ac2": [
+        "/root/.hermes/hermes-agent-port-main-3f2afed3-mgs-20261021",
+        "/root/.hermes/hermes-agent-port-main-29a61cb7-mgs-20261103"
+      ]
+    }
+  }
+]

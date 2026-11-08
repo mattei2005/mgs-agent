@@ -900,8 +900,15 @@
       "authority_message_id": "1569014246493130852",
       "origin_thread_id": "1545426987756298340",
       "period": "2026-11",
-      "window": ["2026-11-01", "2026-11-07"],
-      "sites": ["Mavroa", "Vizioid", "Escalatepower"],
+      "window": [
+        "2026-11-01",
+        "2026-11-07"
+      ],
+      "sites": [
+        "Mavroa",
+        "Vizioid",
+        "Escalatepower"
+      ],
       "workspace_revision": 289,
       "spend_revision": 7,
       "evidence": "reports/finance-fb-fix-1569014246493130852.md",
@@ -62111,6 +62118,44 @@
       },
       "report_infra_message_id": "1568975857995747428",
       "report_infra_readback": true
+    },
+    {
+      "id": "shein-report-recovery-1569013882259902467",
+      "agent": "zeus",
+      "type": "cron_report_recovery",
+      "status": "patched_regression_validated_live_retry_running",
+      "updated_at": "2026-11-08T16:12:52.314532+00:00",
+      "source_thread_id": "1569013882259902467",
+      "authority": "Rodolfo investigation request + standing safe recovery",
+      "scope": "same24threads_D1_and_intraday;cron_schedules_unchanged;no_Meta_writes",
+      "causes": [
+        "shell_launcher_misread_as_python",
+        "archived_campaign_children_omitted_by_default_account_edges"
+      ],
+      "artifacts": [
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-daily-cron.py",
+          "sha256": "2238607e00e3957213fe5151284dd409874a55d09f68a20220826c2912ccf5c0",
+          "size_bytes": 2864
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-intraday-cron.py",
+          "sha256": "28265b3d3696f5661cfc7f575cefd1f7007597466e592d8077a75ce4de391c58",
+          "size_bytes": 652
+        },
+        {
+          "path": "/root/.hermes/profiles/ares/scripts/shein-daily-report.py",
+          "sha256": "217cd29aaae96791520a083514cf409d09bf4f77c9026ce5c8016176fafc52be",
+          "size_bytes": 28800
+        },
+        {
+          "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/shein-daily-and-intraday-reports.md",
+          "sha256": "f2b59cb77fc4088b96be23e75a4af85f925a1bed9b3a29a5542cbd5a48bffecc",
+          "size_bytes": 5289
+        }
+      ],
+      "evidence": "/root/mgs-agent/work/shein-report-recovery-1569013882259902467",
+      "report_infra_status": "pending_live_recovery"
     }
   ],
   "profile_skill_references": [

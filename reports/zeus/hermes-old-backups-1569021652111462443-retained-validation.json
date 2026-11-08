@@ -1,0 +1,93 @@
+{
+  "archives": [
+    {
+      "name": "hermes-control-plane-and-sqlite.tar.gz",
+      "sha256_readback": true,
+      "gzip_integrity": true,
+      "tar_full_listing": true,
+      "members": 5297
+    },
+    {
+      "name": "hermes-nested-cron-sqlite.tar.gz",
+      "sha256_readback": true,
+      "gzip_integrity": true,
+      "tar_full_listing": true,
+      "members": 17
+    }
+  ],
+  "sqlite": [
+    {
+      "path": "control-plane/profiles/zeus/verification_evidence.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/zeus/kanban.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/zeus/state.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/zeus/projects.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/atena/verification_evidence.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/atena/kanban.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/atena/state.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/atena/projects.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/ares/verification_evidence.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/ares/state.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "control-plane/profiles/ares/projects.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/ares/cron/notepad.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/ares/cron/executions.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/ares/cron/deliveries.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/atena/cron/executions.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/zeus/cron/notepad.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/zeus/cron/executions.db",
+      "integrity": "ok"
+    },
+    {
+      "path": "supplemental-sqlite/zeus/cron/deliveries.db",
+      "integrity": "ok"
+    }
+  ],
+  "seconds": 193.7
+}

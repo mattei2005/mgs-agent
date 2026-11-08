@@ -18,6 +18,10 @@
 - Resolver o interpretador em cada fire pelo helper stdlib canônico `/root/mgs-agent/scripts/mgs-hermes-runtime-resolve.py` (`resolve(...)["python"]`), sem LLM nem diretório de versão fixo. Nunca tratar o shebang do launcher como Python: launchers PM nativos usam `/bin/sh`; isso executa o relatório como shell e falha antes da coleta. O helper distingue launcher legado de PM e consulta a fronteira nativa `--print-runtime-command` e o ambiente selecionado. Testar os dois wrappers, forwarding de argumentos e journal, depois exercitar o scheduler real e conferir os recibos Discord. Preservar horários, locks e escopo; intraday fora da janela só `--validate-only`, nunca catch-up implícito.
 - Se um retry exceder a janela real do transporte de terminal, reconciliar processo, fontes e intents antes de retomar; um timeout pode encerrar o processo sem gravar o journal final. Usar execução acompanhada silenciosa quando a duração observada superar a janela, consumir o resultado antes de encerrar e não reenviar partes sem readback.
 
+## Recuperação de fontes arquivadas
+
+- Se Insights selecionar uma campanha que gastou no período, mas o edge da conta omitir seus conjuntos/anúncios por estarem arquivados, consultar somente os IDs selecionados na campanha exata com `effective_status=["ARCHIVED"]`. Validar campaign_id e account_id, ausência de IDs duplicados e preservar a observação e a origem da recuperação. Não excluir a linha financeira, inferir lance/quiz, mudar status ou usar um vazio como configuração válida. O coletor compartilhado `recover_archived_configuration` deve valer tanto para D-1 quanto intraday e continuar fail-closed se o conjunto permanecer indisponível.
+
 ## Validação e colisões
 
 - Aplicar `context/cron-scheduling-policy.md`: oito datas civis, todos os profiles, root/system cron, timers e contratos de aplicação; considerar DST e o timezone real observado do daemon.
