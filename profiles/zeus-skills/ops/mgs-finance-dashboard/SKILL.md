@@ -56,6 +56,16 @@ Audit and validate MGS financial rules and govern the finance-system initiative 
 
 Do not substitute the general finance workbook for the live Dash as the comparison target. A supplied closing Sheet is a read-only reference unless Rodolfo separately authorizes editing it.
 
+## Spend-audit coverage and period boundaries
+
+- Treat a reported site or screenshot as the starting example, not the audit boundary when Rodolfo asks to check everything. Verify every spending account, site and manager in the requested period, including individual daily results—not only the company total or import status.
+- Separate three findings: source amounts missing or revised, saved costs assigned to the wrong result, and display defects. A cost already included in the site's total must not be added again to fix manager attribution. A passing import or internal summary reconciliation alone is not financial acceptance.
+- Keep month boundaries explicit. A current-month repair does not prove earlier months correct. When a shared configuration defect may recur historically, disclose that exposure and propose the bounded retrospective check; do not silently widen the task. A request to check the previous month authorizes that audit, not retroactive financial correction or reuse of another month's approval.
+- Present audit findings as numbered problem/cause/solution items, with original-currency totals and a compact manager-by-site breakdown when attribution differs. Distinguish later provider observations from the original imported snapshot. Before seeking correction authority, simulate the real period's result and remuneration rules; identify changes of floor or commission bracket and keep calculated remuneration separate from payments already recorded.
+- After approval, finish the whole bounded correction and validate all affected managers/sites. Report actual source parity, rendered coverage and preserved periods/payments; do not substitute a successful configuration write for the financial outcome.
+
+Use `references/current-manager-tabs-reconciliation.md#account-spend-audit-across-all-managers-and-sites` for the source → saved input → site → manager audit and correction recipe.
+
 ## Rodolfo's monthly-closing workflow
 
 1. **Compare the requested source with the actual destination.** Read the supplied closing report and the same month in the live Dash. “Analyze first” prohibits financial writes; it does not mean stopping after inspecting the report or asking for missing exports before consulting available application/API evidence.
