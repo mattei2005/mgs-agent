@@ -893,6 +893,33 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "finance-oct-fb-audit-1569026622227615826",
+      "agent": "zeus",
+      "type": "read_only_financial_reconciliation",
+      "status": "audit_complete_financial_correction_awaiting_authority",
+      "authority_message_id": "1569026622227615826",
+      "origin_thread_id": "1545426987756298340",
+      "period": "2026-10",
+      "evidence": "reports/finance-oct-fb-audit-1569026622227615826.md",
+      "private_artifacts": "apps/finance-system/private/fb-oct-audit-1569026622227615826/",
+      "verification": {
+        "positive_meta_accounts": 52,
+        "sites": 16,
+        "source_account_day_controls": 1612,
+        "manager_site_day_controls": 2108,
+        "manager_attribution_mismatches": 311,
+        "missing_manager_media_usd": "19579.52",
+        "source_delta_usd": "17.49",
+        "authenticated_views": 10,
+        "financial_writes": 0,
+        "financial_fingerprint_unchanged": true,
+        "payment_ledger_unchanged": true
+      },
+      "report_infra_status": "sent_verified",
+      "report_infra_message_id": "1569029802302902434",
+      "report_infra_readback": true
+    },
+    {
       "id": "finance-fb-manager-fix-1569014246493130852",
       "agent": "zeus",
       "type": "authorized_financial_attribution_correction",
