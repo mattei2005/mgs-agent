@@ -127,6 +127,10 @@ When gross/spend totals already match, do not infer net/payroll parity. Reconcil
 
 Evidence and unresolved review points from the read-only audit: `reports/finance-expense-audit-1551627541519794186.md`. No financial correction is authorized by that audit request.
 
+## Account-spend audit across all managers and sites
+
+For a current-month Facebook audit, compare three layers independently: fresh API-first account/day observations, saved media ledger plus actual site/day inputs/facts, and every manager's deployed daily block. An `ok` import and passing `summary_control` prove internal consistency, not completeness of manager cost attribution. A site's `account_spend` rows can already carry correct `manager_key`/G codes while `native_account_managers` is absent: the company/site is debited, but the manager receives revenue without that cost. Enumerate this gap across all five managers and sites, rather than stopping at the reported example or calling it cosmetic. Compare exact saved-source values first; separate later provider revisions from missing attribution. Normalize verified manager display names such as `Nicolas` to the calculation key when auditing legacy accounts; case alone is not an additional financial discrepancy. Preserve the opt-in boundary and obtain financial correction authority before changing it where no existing decision authorizes that site's bridge. Do not infer general-expense allocation or SMS consumption from media activity. A read-only audit can use deployed manager derivation and PostgreSQL to reproduce the defect, but must distinguish that evidence from an authenticated browser/API readback when login is unavailable.
+
 ## Full-month read-only audit controls
 
 - Enumerate every IMPORTRANGE spill and compare the complete imported rectangle with its actual source, including the shared Caixa rate dependency; checking only the visible summary is insufficient. Preserve blank versus missing versus numeric zero.
