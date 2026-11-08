@@ -2724,12 +2724,12 @@
     {
       "agent": "zeus",
       "id": "DR-RESTORE-RECOVERY-1568943185458110531",
-      "next_step": "Testar staging limitado; executar cron original; validar perfis, hashes, knowledge e monitor; inventário/audit/report.",
+      "next_step": "Revalidar geração e hashes dos componentes preservados; retomar validadores canônicos em processo silencioso; classificar descarte da evidência interrompida separadamente.",
       "objective": "Recuperar teste isolado de DR do cron 940e9827b1ac",
       "source": "https://discord.com/channels/1185714635991679006/1498132022634483894/1568943185458110531",
-      "state": "writer original encerrado; lock livre; último full íntegro registrado. pico legado estimado acima de 45 gb versus 33.7 gb livres; probe de import cli e sqlite isolados passou. reduzindo ciclo de vida do staging antes de retry.",
+      "state": "18 testes passaram. retry nativo interrompido pelo limite real de transporte de 420s durante import zeus; processos encerrados e lock livre. componentes preservados em scratch mgs-dr-restore-6iwvhe0n; sem novo download ou writer paralelo.",
       "thread_id": "1498132022634483894",
-      "updated_at": "2026-11-08T11:06:18+00:00"
+      "updated_at": "2026-11-08T11:18:04+00:00"
     },
     {
       "agent": "zeus",
@@ -9226,5 +9226,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T11:06:18+00:00"
+  "updated_at": "2026-11-08T11:18:04+00:00"
 }
