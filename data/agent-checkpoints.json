@@ -2012,6 +2012,26 @@
     },
     {
       "agent": "ares",
+      "id": "ARES-SHEIN-1568889763723874396",
+      "next_step": "Dry-run e execute por fonte; consolidar QA e readback integral antes do fechamento",
+      "objective": "18 duplicacoes Mavroa G006:025/041/065/048/068/079 x3, USD45/dia cada,08novembro2026 15h00EST",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568889763723874396/aggregate-progress.json",
+      "state": "intake registrado; conta e dominio allowed; lease anterior complete; aguardando dry-run live e execucao sequencial central",
+      "thread_id": "1558134703565967394",
+      "updated_at": "2026-11-08T07:29:10+00:00"
+    },
+    {
+      "agent": "ares",
+      "id": "ARES-SHEIN-1568890169288040539",
+      "next_step": "Executar sequencialmente cada linha no runner central; QA e readback integral; preservar IDs e horario",
+      "objective": "Duplicar C340 C238 C360 C355 C350 C338 quatro vezes cada USD45 08nov2026 03:00 America/New_York Yolokfx02G006",
+      "source": "data/ares/meta-ads/audit/shein/campaigns/intake/shein-1568890169288040539/aggregate-receipt.json",
+      "state": "em preflight; nenhum objeto criado; seis linhas preservadas no agregador original",
+      "thread_id": "1558134300325716050",
+      "updated_at": "2026-11-08T07:31:59+00:00"
+    },
+    {
+      "agent": "ares",
       "id": "ARES-SHEIN-ALL36-BU-CONFIRMATION-1561845294080204821",
       "next_step": "Proximos relatorios com novos snapshots usam B.U.%; manter demais colunas e preferencias existentes. Nenhum envio em lote solicitado",
       "objective": "Aplicar B.U.% como padrao nas36contas SHEIN apos OK de Rodolfo",
@@ -9196,5 +9216,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-11-08T07:24:07+00:00"
+  "updated_at": "2026-11-08T07:31:59+00:00"
 }
