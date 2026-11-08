@@ -88,7 +88,7 @@ def run(payload):
  valid_facts={f['id']:f for f in domain['facts']}
  for a in payload.get('additions',[]):
   if a.get('kind')=='account_spend' and (a['fact_id'] not in valid_facts or a['date']!=valid_facts[a['fact_id']]['date'] or a.get('site')!=valid_facts[a['fact_id']]['site']):raise ValueError('Conta sem vínculo de dia válido neste período')
- native_costs=native_manager_costs(payload.get('additions',[]),sites,w);domain['native_manager_spend']=native_costs;newcost.extend(native_costs)
+ native_costs=native_manager_costs(payload.get('additions',[]),sites,w,domain['facts']);domain['native_manager_spend']=native_costs;newcost.extend(native_costs)
  if new or newcost:
   fx=w.get('principal','Agosto 2026','F1');personnel=domain['cash']['personnel']
   for manager in data['manager_mapping']:
